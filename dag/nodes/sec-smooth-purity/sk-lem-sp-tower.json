@@ -31,217 +31,75 @@
  ],
  "proof": [
   {
-   "text": "Put $O=\\mathcal O_E$, $R=\\mathcal O_{E,T}$ and $B_n=(O/\\ell^n)_T$. The current coefficient-tower definition identifies $R$ canonically with $\\varprojlim_n B_n$, compatibly with the finite projections; we use this identification, so that $B_n$ retains the definition's constant finite-ring meaning. Choose a uniformizer $\\pi$ of $O$. The DVR statement gives $\\ell=u\\pi^e$ with $u$ a unit and $e\\geq1$: the valuation is positive since the absolute value extends the $\\ell$-adic one. Thus $O$ is Noetherian (every ideal is principal), and $(\\ell^n)$ and $(\\pi^j)$ are cofinal. We keep the given $\\ell$-tower; we do not identify $\\ell$ with $\\pi$. Apply constant-completion flatness and its quotient assertion with $A=O,I=(\\ell)$. This identifies $R/\\ell^nR=B_n$ and makes multiplication by $\\ell^m$ injective on $R$: tensor the injective map $\\underline O\\xrightarrow{\\ell^m}\\underline O$ with the flat $R$. Hence $K_m=[R\\xrightarrow{\\ell^m}R]$ in degrees $[-1,0]$ resolves $B_m$. The analogous assertion holds for $[R\\xrightarrow{\\pi^j}R]$ using $I=(\\pi)$ and the cofinal identification of completions from the coefficient definition. These two-term complexes are K-flat: tensoring one with an acyclic complex gives a shifted mapping cone of a scalar map between acyclic complexes, which is acyclic by the long exact cohomology sequence. Each quotient $O/\\pi^s$ is finite: its filtration by powers of $\\pi$ has $s$ successive factors $\\pi^iO/\\pi^{i+1}O\\cong O/\\pi$, by multiplication by $\\pi^i$ and cancellation in the domain $O$, and the DVR statement gives a finite residue field. In particular $O/\\ell^n=O/\\pi^{en}$ is finite.",
+   "text": "Put $O=\\mathcal O_E$, $R=\\mathcal O_{E,T}$, $B_n=(O/\\ell^n)_T$ and choose $\\pi$. The coefficient-fiber lemma gives $\\ell=u\\pi^e$, the finite quotient identifications, and the two-term K-flat resolutions for both power systems. The representative lemma replaces the given coherent tower by $Q_n$ while retaining its actual finite-coefficient reduction maps and limit projections. Normalization therefore gives the quasi-isomorphisms $Q_n\\otimes_{B_n}B_m\\to Q_m$.",
    "uses": [
-    "sk-def-sp-coefficient-towers",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-pc-kflat-complex",
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact"
+    "lem-sp-ell-coefficient-fiber",
+    "lem-sp-semilinear-kflat-tower-model",
+    "sk-def-sp-normalized-towers"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Coefficient setup and the sentence that reduction is the cone of multiplication; Bhatt–Scholze §3.5; Stacks Tags 093M, 099M"
+    "place": "Proof paragraph, returned proof steps 1–2; assembly of the extracted nodes"
    }
   },
   {
-   "text": "Read normalization in its current derived coefficient-tower sense: $C_\\bullet$ is an object of $D(\\operatorname{Tow}(T,O))$ and each $C_n$ is an object of $D(B_n)$. Choose integers $a\\leq b$ containing the cohomological and Tor amplitudes of every $C_n$, as supplied by that definition, enlarging the two common intervals to one if necessary. For every $1\\leq m\\leq n$ it asserts that the canonical transition-induced map $C_n\\otimes^L_{B_n}B_m\\to C_m$ is an isomorphism in $D(B_m)$; no normalization over $R$ is assumed. Restricting scalars level by level gives a strict $R$-tower in the derived category of strict inverse sequences. Evaluation is exact, so its evaluations are precisely the given $C_n$. To compute with finite-coefficient complexes, choose a K-flat $B_1$-complex $Q_1$ representing $C_1$. Inductively, in $D(B_{n+1})$ represent the transition $C_{n+1}\\to\\operatorname{Res}Q_n$ by a roof with a quasi-isomorphism on its left leg; resolve the roof's middle complex by a K-flat complex $Q_{n+1}$ with flat terms. Composing its map to the right leg gives a strict semilinear chain map $Q_{n+1}\\to Q_n$. Longer transitions are their composites. At each induction stage the left roof leg and the resolution give an isomorphism $Q_n\\simeq C_n$ in $D(B_n)$, and the constructed transition represents the given transition in $D(B_{n+1})$ after restricting the target along $B_{n+1}\\to B_n$. Consequently the isomorphisms are compatible also after restriction to $D(R)$. We retain these particular finite-coefficient isomorphisms when checking normalization in step 5. The sequential evaluation-fullness statement lifts this compatible family to an isomorphism of strict $R$-towers in their derived category. It asserts existence, not uniqueness: fix one lift. It preserves each evaluation and transition and hence the projections from its derived limit. We may compute $C=R\\lim_n C_n$ on this $Q$-tower.",
+   "text": "Fix $m\\geq1$. By the coefficient-fiber lemma, $t=\\ell$ is injective on $R$ with $R/\\ell^mR=B_m$, so the Koszul--Roos comparison applies to $X=Q$ with $N=Q_m$ and $f_n$ the reduction maps. Apply the error-tower lemma to $Q$. It identifies $R\\!\\lim_{n\\geq m}(Q_n\\otimes_RK_m)\\to Q_m$ as an isomorphism induced by the coefficient augmentations and original transitions. The Koszul--Roos comparison identifies its source with the restriction of $C\\otimes_R^LB_m$, for $C=R\\!\\lim Q_n$, and identifies the composite with the restricted adjoint of the $m$th limit projection. Restriction detects isomorphisms, so this adjoint is an isomorphism in $D(B_m)$; the representative lemma's lift, which preserves the limit projections and the $e_m:Q_m\\simeq C_m$, transports it to the required natural map for $C_\\bullet$. The same comparison preserves quotient transitions.",
    "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-sp-semilinear-kflat-tower-model",
+    "lem-sp-normalized-error-tower-vanishing",
+    "lem-sp-koszul-roos-projection-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, returned proof steps 3–8; assembly of the extracted nodes"
+   }
+  },
+  {
+   "text": "Each $Q_n$ is termwise annihilated by $\\ell^n=u^n\\pi^{en}$. The power-torsion sheaf-limit lemma applies with $r_n=en$ and proves derived completeness of $R\\!\\lim Q_n$ through its canonical uniformizer reductions, hence of $C$ through the representative lemma's lift. Choose one interval $[a,b]$ containing the common cohomological and Tor bounds of the normalized tower. The Roos bound gives $H^i(C)=0$ outside $[a,b+1]$.",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-sp-semilinear-kflat-tower-model",
+    "lem-sp-power-torsion-sheaf-limit-complete",
+    "lem-sp-koszul-roos-projection-comparison",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, returned proof steps 9–11; assembly of the extracted nodes"
+   }
+  },
+  {
+   "text": "By the finite reduction isomorphisms already proved, $C\\otimes_R^LB_N\\simeq C_N$ is constructible with Tor amplitude in $[a,b]$ for every $N$. The cofinal-reduction lemma now gives constructibility and the same Tor interval for every $C\\otimes_R^L(O/\\pi^j)_T$, hence common cohomological support $[a,b]$. Together with derived completeness, these are exactly the integral-category conditions. Thus $C\\in D^b_c(T,O)$, and the natural ell-power maps have already been proved isomorphisms.",
+   "uses": [
+    "lem-sp-cofinal-finite-reduction-constructibility",
     "sk-def-sp-normalized-towers",
-    "det-sp-coefficient-towers-abelian",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Realize the given coherent tower before the coefficient-fiber calculation; Stacks Tags 05RT, 06YS, 0940–0941"
-   }
-  },
-  {
-   "text": "The repleteness statement for every scheme is [det-pe-replete-epimorphism]. Here is its exact-products consequence used by the unit. Given a countable family of epimorphisms $M_i\\to N_i$ of module sheaves, put $E_r=(\\prod_{i\\leq r}M_i)\\times(\\prod_{i>r}N_i)$ for $r\\geq0$, with transition replacing the $(r+1)$st $M$ coordinate by its image in $N$. Each transition is epimorphic: lifting its one new coordinate is a local lifting problem for the given epimorphism. The inverse limit is $\\prod_i M_i$, since each coordinate eventually is its $M_i$ coordinate; its projection to $E_0=\\prod_i N_i$ is precisely $\\prod_i(M_i\\to N_i)$. Repleteness makes this projection epimorphic. Products preserve kernels by their coordinate universal property, so countable module products are exact. The existing countable-products statement also identifies them sectionwise for the coefficient sheaf $R$. Consequently derived products here are termwise products and commute with cohomology. The strict-tower limit has the natural Roos model $\\operatorname{Cone}(1-s:\\prod Q_n\\to\\prod Q_n)[-1]$. For fixed $m$, deleting the finite prefix $n<m$ does not change this model up to quasi-isomorphism, compatibly with all remaining projections. Indeed, write each product as its finite prefix plus tail. On the prefix the operator $1-s$ is an upper triangular finite matrix with identity diagonal; its inverse is the finite geometric sum in its strictly upper triangular part. Row elimination removes the prefix-to-tail block, leaving its contractible identity-cone and the tail Roos cone. This proves the needed tail comparison without an unstated cofinality theorem.",
-   "uses": [
-    "det-pe-replete-epimorphism",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Reduction to n≥m and the use of repleteness; Stacks Tags 0940–0941, 0947"
-   }
-  },
-  {
-   "text": "For $n\\geq m$ form the $B_n$-complex $P_{n,m}=B_n\\otimes_R K_m=[B_n\\xrightarrow{\\ell^m}B_n]$, augmented to $B_m$ by reduction in degree zero. Its fiber is $F_{n,m}=\\operatorname{Cone}(P_{n,m}\\to B_m)[-1]$. Directly, $H^0(P_{n,m})=B_m$ and $H^{-1}(P_{n,m})=\\ell^{n-m}B_n\\cong B_m$, with no other cohomology. The map $B_m[1]\\to F_{n,m}$ induced by $x\\mapsto\\ell^{n-m}x$ into degree $-1$ is a quasi-isomorphism: the augmentation is surjective in degree zero, so its fiber has exactly that degree $-1$ kernel as its only cohomology. This map is $B_n$-linear. For $n'\\geq n$ the transition on these copies of $B_m[1]$ is multiplication by $\\ell^{n'-n}$, since reduction sends $\\ell^{n'-m}x$ to $\\ell^{n-m}(\\ell^{n'-n}x)$. The calculation also covers $n=m$, when this map into $B_n$ is the identity.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "The displayed coefficient tensor product, its fiber, and the powers-of-ell transitions; Bhatt–Scholze Lemma 3.5.4"
-   }
-  },
-  {
-   "text": "Tensor these fiber triangles over $B_n$ with $Q_n$. K-flatness preserves the displayed fiber quasi-isomorphisms: a cone of a quasi-isomorphism is acyclic, and its tensor remains acyclic by the K-flat definition. We obtain a triangle of strict $R$-towers on $n\\geq m$, whose middle tower is $T_n=Q_n\\otimes_R K_m$ and whose right tower is $S_n=Q_n\\otimes_{B_n}B_m$. The identification of the middle term is the chain-level reassociation $q\\otimes(b\\otimes k)\\mapsto bq\\otimes k$, with the tensor differential's usual signs. The left tower is quasi-isomorphic to $S_n[1]$ with transition from $n'$ to $n$ equal to $\\ell^{n'-n}$ times the ordinary transition. All these assertions hold for strict towers, since the coefficient maps just computed commute with every semilinear transition of $Q$. The current normalized-tower definition applies to the canonical maps over $B_n\\to B_m$, with $1\\leq m\\leq n$. The map $S_n\\to Q_m$ is the adjoint of the actual semilinear transition $Q_n\\to Q_m$, given on tensors by $q\\otimes b\\mapsto b\\,t_{n,m}(q)$. The compatible evaluation isomorphisms from step 2 identify this map with the defining reduction map $C_n\\otimes^L_{B_n}B_m\\to C_m$, so normalization makes it a quasi-isomorphism in $D(B_m)$. K-flat change of rings computes these very maps, not just an abstract isomorphism of their source and target. They form a strict map from $S$ to the constant tower $Q_m$, by the original transition cocycle.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-derived-change-of-rings",
-    "sk-def-sp-normalized-towers",
-    "det-sp-coefficient-towers-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Tensor the coefficient-fiber triangle and apply normalization; Bhatt–Scholze Lemmas 3.5.4–3.5.5"
-   }
-  },
-  {
-   "text": "On the left tower the composite of any $m$ consecutive transitions is zero, because $\\ell^m$ kills every $S_n$ termwise. Thus its derived limit is zero by the strict-tower limit statement. Equivalently its shift operator has $s^m=0$ and $1-s$ has inverse $1+s+\\cdots+s^{m-1}$. Apply the exact strict-tower derived-limit functor to the triangle: $R\\lim T_n\\to R\\lim S_n$ is an isomorphism. The strict levelwise quasi-isomorphism $S\\to\\operatorname{const}(Q_m)$ identifies the latter limit with $Q_m$. For clarity, a constant tower has this derived limit because the kernel of $1-\\mathrm{shift}$ on $\\prod_{n\\geq m}Q_m$ is the diagonal $Q_m$, and this map is split surjective as a map of complexes: for $y=(y_n)$ set $x_m=0$ and $x_{m+r}=-\\sum_{j=m}^{m+r-1}y_j$. Each coordinate uses a finite sum and satisfies $x_n-x_{n+1}=y_n$. The associated Roos cone is therefore quasi-isomorphic to the diagonal $Q_m$.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "The nilpotent left tower has zero derived limit, giving the reduction formula; Stacks Tags 0940–0941"
-   }
-  },
-  {
-   "text": "The finite free complex $K_m$ commutes with the products and cones in the Roos model: in degree $r$ the tensor-product terms are the same two factors $\\prod_n Q_n^r$ and $\\prod_n Q_n^{r+1}$ on both sides; reorder the finite direct sums and use the tensor differential signs to identify the differentials. Consequently $C\\otimes_R^L B_m\\simeq R\\lim_{n\\geq m}T_n$. Here tensor with $K_m$ computes the underlying $R$-complex of the derived tensor with $B_m$: resolve $C$ by a K-flat complex; tensoring its quasi-isomorphism with $K_m$ preserves a quasi-isomorphism, and tensoring the resolution $K_m\\to B_m$ with that K-flat complex also preserves a quasi-isomorphism. Composing with the preceding step gives an isomorphism of underlying $R$-complexes to $C_m$. This composition is induced by the $m$th projection from the limit and the coefficient augmentation, since the product/cone identifications, the tail elimination, and $S\\to Q_m$ preserve those projections.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Reduction as a two-term cone commutes with Rlim; the natural reduction morphism"
-   }
-  },
-  {
-   "text": "Check the coefficient category and canonicity of this last morphism. On sheaves the ordinary tensor-restriction adjunction for $R\\to B_m$ sends $f:M\\to\\operatorname{Res}N$ to $m\\otimes b\\mapsto b f(m)$, with inverse evaluation at $m\\otimes1$. Restriction is exact, since it changes only the scalar action, so its derived functor is itself and is everywhere defined. Derived change of rings is everywhere defined by K-flat resolutions. The derived-adjoint-functors statement therefore supplies the derived tensor-restriction adjunction. Under it the $m$th limit projection corresponds to the canonical map $C\\otimes_R^L B_m\\to C_m$ in $D(B_m)$. Its restriction to $D(R)$ is the isomorphism just calculated. Restriction detects quasi-isomorphisms because the underlying cohomology sheaves of a cone do not change, so the map is an isomorphism in $D(B_m)$ itself. For $k\\leq m$ the resolution map $K_m\\to K_k$ is $(\\ell^{m-k},1)$ in degrees $(-1,0)$. Together with the tower cocycle it verifies that these are the natural, quotient-compatible maps, rather than unrelated isomorphisms at each level.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-adjoint-functors",
-    "det-sp-coefficient-towers-abelian",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "The word natural in the conclusion; Bhatt–Scholze Lemmas 3.5.5–3.5.7"
-   }
-  },
-  {
-   "text": "We prove completeness with the uniformizer convention of the integral category. Write $L_j=[R\\xrightarrow{\\pi^j}R]$ with transition $(\\pi,1)$ from $j+1$ to $j$. For each fixed $n$, the complex $Q_n$ is termwise killed by $\\pi^{en}$, since $\\ell^n=u^n\\pi^{en}$. On the tail $j\\geq en$ the complex $Q_n\\otimes_R L_j$ is $Q_n\\oplus Q_n[1]$, with transition identity on the first summand and multiplication by $\\pi$ on the shifted summand (up to the fixed tensor sign convention). The shifted tower has $en$-fold zero transitions and hence zero derived limit; the first tower is constant. The canonical map $Q_n\\to R\\lim_j(Q_n\\otimes_R L_j)$ is the inclusion into the unshifted summand and is an isomorphism. This is natural in the strict $n$-tower; the cutoff $en$ is used only to check an individual row, not as a common cutoff for all $n$.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-derived-limit-products-core"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "The claim that a limit of power-torsion complexes is derived complete; Bhatt–Scholze §3.5; Stacks Tag 099M"
-   }
-  },
-  {
-   "text": "The two sequential derived limits of the strict double tower $Q_n\\otimes_R L_j$ commute here by an explicit Roos calculation. Expand each limit as a product-cone. Both iterated models have four Roos components, indexed by two degrees in $\\{0,1\\}$, with common products $\\prod_n\\prod_j(Q_n\\otimes_R L_j)^r\\cong\\prod_j\\prod_n(Q_n\\otimes_R L_j)^r$. These product identifications follow from their universal property (both specify all $(n,j)$ coordinates). The two shift operators commute because $Q$'s transitions are $R$-linear. Swap the two Roos degrees with sign $(-1)^{pq}$ in bidegree $(p,q)$; the total differentials then agree, giving an isomorphism of the iterated cones. There are only four summands in each total degree, so no interchange of an infinite sum with a product is involved. Termwise products compute the derived products by exactness, as above. For each fixed $j$, the finite-free tensor/cone calculation of step 7 identifies $C\\otimes_R L_j$ with $R\\lim_n(Q_n\\otimes_R L_j)$. Taking the other limit and using step 9 gives a canonical isomorphism $C\\to R\\lim_j(C\\otimes_R L_j)$. This is the completion unit: each inclusion into the degree-zero Koszul term has been preserved in the double-cone identification. Constant-completion equivalence with $A=O,I=(\\pi)$ identifies Koszul completion with quotient completion, respecting this unit. Thus $C$ and its canonical reduction maps fit the Roos triangle required by the definition of derived completeness.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Expand the completeness assertion using the Koszul completion unit; Stacks Tags 0940–0941, 099M; Bhatt–Scholze Definition 3.5.2"
-   }
-  },
-  {
-   "text": "The same Roos triangle proves boundedness without any hypothesis on quasi-compactness of $T$. The common interval $[a,b]$ contains every $H^i(C_n)$ support. Since derived products commute with cohomology, both products in the triangle have cohomology only in $[a,b]$. The long exact sequence then gives $H^i(C)=0$ outside $[a,b+1]$. This is all the boundedness needed here; we do not assert an unjustified sharper endpoint. The needed consequence of repleteness is precisely the exactness of pro-etale countable module products already cited.",
-   "uses": [
-    "sk-def-sp-normalized-towers",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "The sentence bounded since the pro-etale topos is replete; Stacks Tag 0947"
-   }
-  },
-  {
-   "text": "Finally fix any $j\\geq1$ and choose $N$ with $eN\\geq j$. The finite ring $D_j=O/\\pi^j$ is a quotient of $O/\\ell^N$. K-flat scalar associativity gives $C\\otimes_R^L(D_j)_T\\simeq(C\\otimes_R^L B_N)\\otimes_{B_N}^L(D_j)_T\\simeq C_N\\otimes_{B_N}^L(D_j)_T$. To see the first reassociation also for the completed coefficient ring, take a K-flat $R$-resolution $P$ of $C$: $P\\otimes_R B_N$ is K-flat over $B_N$, because its tensor with an acyclic $B_N$-complex is $P$ tensored with that same acyclic complex restricted to $R$. Thus both sides are computed by the identical complex $P\\otimes_R(D_j)_T$. Apply clause 2 of the current finite-coefficient scalar-extension statement to the unital quotient map $O/\\ell^N\\to D_j$ and the identity $D_j\\to D_j$. Both rings are finite by step 1 and killed by $\\ell^N$, since $eN\\geq j$, and $C_N$ has constructible cohomology and Tor amplitude in the common $[a,b]$ by the current normalized-tower definition. That clause gives constructible cohomology and Tor amplitude in the same $[a,b]$ after extension. It requires neither flatness nor finite projective dimension of $D_j$ over $O/\\ell^N$. No Tate-twist clause or invertibility of $\\ell$ on $T$ is used. Taking the module $(D_j)_T$ itself as the Tor-amplitude test shows that its cohomology is supported in $[a,b]$, independently of $j$. We have proved derived completeness and bounded constructibility for every uniformizer reduction, with one common support interval. These are exactly the conditions of the integral-category definition, so $C\\in D^b_c(T,O)$. Together with step 8 this proves both conclusions of the item, retaining the original $\\ell$-power natural maps.",
-   "uses": [
-    "sk-def-sp-normalized-towers",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-pur-derived-change-of-rings",
-    "det-sp-scalar-extension-functor",
-    "def-weil-proetale-tor-amplitude",
     "def-weil-derived-complete-integral-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Integral constructibility at the end of the blueprint proof, expanded for every uniformizer quotient"
+    "place": "Proof paragraph, returned proof step 12; assembly of the extracted nodes"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sp-coefficient-towers",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-pc-kflat-complex",
-  "def-weil-abstract-derived-category",
-  "lem-sf-derived-homology-long-exact",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-sp-semilinear-kflat-tower-model",
   "sk-def-sp-normalized-towers",
-  "det-sp-coefficient-towers-abelian",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-sequential-tower-evaluation-full",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "det-pe-replete-epimorphism",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-products-core",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-pc-derived-adjoint-functors",
-  "def-weil-derived-complete",
-  "det-sp-scalar-extension-functor",
-  "def-weil-proetale-tor-amplitude",
+  "lem-sp-normalized-error-tower-vanishing",
+  "lem-sp-koszul-roos-projection-comparison",
+  "lem-sp-power-torsion-sheaf-limit-complete",
+  "lem-sp-cofinal-finite-reduction-constructibility",
   "def-weil-derived-complete-integral-detailed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-  "place": "Entire coefficient-fiber proof, expanded with strict models, canonical adjunction, and the Koszul completion calculation; compared with Bhatt–Scholze §3.5, Lemmas 3.5.4–3.5.7."
+  "place": "Short assembly of six statement-only extractions of all twelve returned proof steps; Bhatt–Scholze §3.5."
  },
  "mathlib_searches": [
   {
@@ -410,61 +268,12 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-tower",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "sk-lem-sp-tower",
   "worker": "stage1",
-  "summary": "Preserved the statement and expanded the blueprint coefficient-fiber proof into twelve steps, using existing generic tools only. Made strict representatives, nilpotent transitions, perfect-tensor/product commutation, and canonical finite-coefficient maps explicit. Proved completeness via double Roos cones and the Koszul unit and constructibility at every uniformizer quotient, keeping ell distinct from a uniformizer. No new nodes, no Lean attachment, no statement dispute. Server route-check repair: step 3 now explicitly derives countable-product exactness from the actual node det-pe-replete-epimorphism realizing the cited repleteness unit. Return repair 2026-10-17: re-read all 23 cited statements against both current server DAGs; revalidated normalization at steps 2, 5, 11 and 12; replaced stale coefficient-tower and scalar-extension citations; made the completed-sheaf identification, finiteness of quotients, and current scalar-extension clause hypotheses explicit. Fresh second reading: step 2 now retains its levelwise isomorphisms in D(B_n) and checks transition compatibility before restricting to D(R), making the normalization application in step 5 explicit.",
-  "blueprint": "The single unit proof paragraph: coefficient setup/cone (1), strict tower setup (2), tail (3), coefficient fiber (4), normalized triangles (5), vanishing left tower (6), commuting reduction and limit (7), canonical map (8), completeness (9–10), replete boundedness (11), integral constructibility (12).",
-  "tool_uses": [
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Identifies ell=u*pi^e and supplies regular elements and the Noetherian valuation ring, without replacing the coefficient-fiber route."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Supplies completed coefficient flatness, finite quotients, and the Koszul-to-quotient completion unit; it is not normalized-tower effectivity."
-   },
-   {
-    "node": "lem-sf-derived-homology-long-exact",
-    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category infrastructure for the explicit coefficient-fiber proof; the unit has no separate node providing it."
-   },
-   {
-    "node": "det-sp-coefficient-towers-abelian",
-    "why": "Makes evaluation exact and the induced reduction maps composable for the varying coefficient tower."
-   },
-   {
-    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "why": "Generic Quasi-isomorphisms form a multiplicative system in the homotopy category infrastructure for the explicit coefficient-fiber proof; the unit has no separate node providing it."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic Existence of K-flat resolutions on a ringed site infrastructure for the explicit coefficient-fiber proof; the unit has no separate node providing it."
-   },
-   {
-    "node": "lem-weil-pbc-sequential-tower-evaluation-full",
-    "why": "Compares strict finite-coefficient representatives with the given coherent R-tower without claiming uniqueness."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic strict-tower derived inverse limit, exactness, and Roos triangle, needed for the blueprint coefficient-fiber calculation."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "The exact-products consequence of pro-etale repleteness used by the unit, on every scheme."
-   },
-   {
-    "node": "lem-weil-derived-limit-products-core",
-    "why": "Computes derived products termwise and commutes cohomology with countable products for the explicit Roos calculation."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions infrastructure for the explicit coefficient-fiber proof; the unit has no separate node providing it."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Derives the completed-to-finite tensor-restriction adjunction so that the calculated map is the canonical map in the correct coefficient category."
-   }
-  ]
+  "summary": "Repair of the human re-split return: preserved the item statement verbatim, created six substantial statement-only unsplit nodes, and replaced the twelve-step argument by four assembly steps. report.md retains the complete returned argument verbatim, with a coverage map to every new obligation. No Lean written or compiled.",
+  "blueprint": "The same unit proof paragraph: coefficient setup and fiber (A); strict models (B); normalized triangles and vanishing (C); repleteness, tail, natural reduction comparison and bound (D); completeness (E); uniformizer constructibility (F).",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
@@ -481,12 +290,12 @@
   "lem-pc-derived-adjoint-functors"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NM-d000a31be",
-  "group": "NM",
+  "reviewer": "NT-cc-Q107-e96ca6e6b",
+  "group": "Q107",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d000a31be (reviewer sub-agent of L); spot-checked: I read the 12-step split of sk-lem-sp-tower in full, together with all 23 cited statements and the coefficient-category definitions. The statement is the blueprint's, verbatim. Coefficient categories: R=O_{E,T} is identified explicitly with lim (O/ell^n)_T and with the uniformizer completion of def-weil-completed-integral-coefficients, through sk-def-sp-coefficient-towers and det-prop-sfb-qlbar-colimit-x clause 3. The natural map is placed in D(B_m) as the adjoint of the limit projection (step 8, via lem-pc-derived-adjoint-functors with both derived functors everywhere defined). Steps checked: step 1's flat-completion K_m resolution and finite quotients; step 2's strict K-flat tower, lifted by evaluation-fullness using existence only; step 3's exact products from det-pe-replete-epimorphism (reaching sk-prop-pe-replete) and the unipotent prefix deletion; step 4's fiber H^{-1}=ell^{n-m}B_n with transitions ell^{n'-n}, tested on Z_ell with n=2, m=1; step 5's normalization through the K-flat reduction map q⊗b↦b·t(q), which is essential (a non-normalized constant tower fails the conclusion); step 6's ell^m-nilpotent left tower; steps 7–8 commuting K_m with Roos products and canonicity; steps 9–10 rowwise pi^{en} cutoff, the four-component double Roos interchange, and the Koszul unit, whose L_j is exactly Q_j of constant-completion with I=(pi), matching the equivalent form of def-weil-derived-complete; step 11's interval [a,b+1]; step 12's O/ell^N→O/pi^j for eN≥j with scalar-extension clause 2 hypotheses met (finite rings killed by ell^N) and uniform support [a,b]. Sources checked: Bhatt–Scholze §3.5, Def 3.5.2–3.5.3 and Lemmas 3.5.4–3.5.7; Stacks 0940, 0941, 0947, 099M, 099P, 06YS, 05RT. No SGA source is used. There are no new nodes, no duplicates (lem-coef-normalized-dvr-effectivity is a uniformizer-tower effectivity statement only; det-sp-normalized-equivalence would be circular) and no cycle (the dependency closure has 2236 nodes and excludes the item). The unit's realized fields are correct. I accept all 12 declared tool_uses as generic infrastructure. Edge cases tested: zero tower, empty scheme, m=n=1, a geometric point, ramified e=2. Pre-existing DAG issues, not this delivery's faults: sk-def-pe-site vs def-weil-pbc-proetale-site size convention, and the inherited ell≠p in the integral definitions. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-e96ca6e6b (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 done correctly. The item statement is verbatim. The 14897-char proof becomes a 4-step assembly (1850 chars delivered, 2229 after the fix) of 6 statement-only unsplit nodes of 1587–2274 chars. I checked all 12 old steps one by one: each argument is carried by a new statement, and none was shortened or dropped. Not superseded: live and side-live still hold the old split. No SGA anywhere. Every new statement was checked and tested on small cases, and all are true: coefficient fiber (cone degrees, H^{-1}=ℓ^{n-m}B_n, transitions ℓ^{n'-n}, n=m, Z_ℓ with n=2, m=1); semilinear K-flat model (existence-only lift via lem-weil-pbc-sequential-tower-evaluation-full); error tower (m-step nilpotence, constant tower as diagonal, m=1); Koszul–Roos (finite-free K_m commutes with products, adjoint of p_m, (t^{m-k},1), Milnor bound [a,b+1]); power-torsion (rowwise π^{r_n} cutoff, no common bound, Roos unit = def-weil-derived-complete); cofinal (eN≥j, K-flat reassociation, clause 2 of det-sp-scalar-extension-functor; e=2, j<eN, N=1). Sources: blueprint proof.md, Bhatt–Scholze §3.5 Def 3.5.2 and Lemmas 3.5.4–3.5.7. Duplicate search: lem-weil-pbc-torsion-limit-sheaf-completeness and lem-weil-pbc-nilpotent-torsion-derived-limit-complete use other coefficients or another completeness notion, so neither is a duplicate. Two repaired faults: (C) item steps 2–3 used lem-sp-ell-coefficient-fiber (ℓ regular, R/ℓ^m=B_m, needed to apply Koszul–Roos with t=ℓ) and lem-sp-semilinear-kflat-tower-model (transport from Rlim Q to C, C_m) without citing them; both are added to the uses with one sentence each, and proof_deps is unchanged. (B3) the Koszul–Roos statement used Res and the derived tensor–restriction adjoint without definitions; it now cites def-pc-sheaf-restrict-scalars and lem-pc-derived-adjoint-functors and has them in stmt_deps. Notes: the legacy merge-owned tool_uses on the item is now stale; sk-prop-pe-replete will be reached once the Koszul–Roos node is split; ℓ≠p is inherited from base.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "lean": {

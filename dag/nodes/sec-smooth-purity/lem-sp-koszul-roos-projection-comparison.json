@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-koszul-roos-projection-comparison",
+ "kind": "statement",
+ "title": "Koszul tensor and tail comparisons preserve Roos projection adjoints",
+ "statement": "Let $T$ be a scheme, $R$ a sheaf of commutative rings on $T_{\\mathrm{proét}}$ [sk-def-pe-site, def-weil-sheaf-of-modules-category], and $t$ a global section such that multiplication by $t$ on $R$ is injective. Put $B_m=R/t^mR$ and $K_m=[R\\xrightarrow{t^m}R]$ in degrees $[-1,0]$, augmented to $B_m$, for $m\\geq1$. Let $X_\\bullet$ be a strict inverse sequence of unbounded $R$-complexes and let $H=R\\!\\lim_nX_n$ with its projections $p_n$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Use total tensor complexes [def-pc-tensor-complex-sheaves] and K-flat derived scalar extension [lem-pur-derived-change-of-rings]. Countable products of $R$-modules are exact and derived products are represented termwise; write $\\mathsf R(X)=\\operatorname{Cone}(1-s:\\prod X_n\\to\\prod X_n)[-1]$ for the Roos model [def-weil-abstract-derived-category].\n\nFor every $h\\geq1$, deleting the levels $n<h$ gives a quasi-isomorphism $\\mathsf R(X)\\to\\mathsf R(X|_{n\\geq h})$ compatible with the remaining projections. The canonical tensor/product and cone identifications give a natural isomorphism\n$$\\operatorname{Res}_{R\\to B_m}(H\\otimes_R^LB_m)\\xrightarrow{\\sim}R\\!\\lim_{n\\geq h}(X_n\\otimes_RK_m)$$\nin $D(R)$, where $K_m$ computes the restricted derived tensor. Under it, the projection to $X_n\\otimes_RK_m$ is the derived tensor of $p_n$, with the canonical two-term comparison.\n\nMore precisely, fix $h=m$, a complex $N$ of $B_m$-modules and a strict compatible family of $B_m$-linear chain maps $f_n:X_n\\otimes_RB_m\\to N$ for $n\\geq m$. Compose the last isomorphism with the derived limit of the augmentations $X_n\\otimes_RK_m\\to X_n\\otimes_RB_m$, then with $R\\!\\lim f_n$ and the diagonal identification $R\\!\\lim\\operatorname{const}(N)\\cong N$. The resulting morphism is the restriction of the adjoint, under the derived tensor--restriction adjunction [def-pc-sheaf-restrict-scalars, lem-pc-derived-adjoint-functors], of $H\\xrightarrow{p_m}X_m\\to\\operatorname{Res}N$, the second map being $x\\mapsto f_m(x\\otimes1)$. Restriction to $D(R)$ detects isomorphisms in $D(B_m)$. These identifications commute with the coefficient quotient transitions: for $k\\leq m$ the Koszul transition $K_m\\to K_k$ is $(t^{m-k},1)$ in degrees $(-1,0)$. Finally, if all $X_n$ have cohomology in one interval $[a,b]$, then $H$ has cohomology in $[a,b+1]$, without a quasi-compactness hypothesis on $T$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
+ },
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free two term Koszul tensor commutes with sequential derived inverse limit of ring sheaf complexes preserving projection adjoints",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+     "AdicCompletion.ofTensorProductEquivOfPiFintype",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "tensorKaehlerQuotKerSqEquiv",
+     "Algebra.Generators.CotangentSpace.fst_compEquiv",
+     "KaehlerDifferential.End_equiv_aux",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roos cone finite tail removal and tensor reduction comparison equal to derived tensor restriction adjoint of inverse limit projection",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "LightProfinite.isoMapCone",
+     "Profinite.NobelingProof.GoodProducts.square_commutes",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg",
+     "LightProfinite.lightToProfinite_map_proj_eq",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+     "TensorProduct.directLimitLeft_symm_of_tmul",
+     "TensorProduct.directLimitRight_symm_of_tmul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasProduct\", \"mappingCone\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|[Hh]omotopy[Ll]imit|tensor.*[Ll]imit",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two term Koszul complex commutes with the Roos inverse limit cone naturally for finite quotient adjunction maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.ShortComplex.limitCone",
+     "CategoryTheory.ShortComplex.isLimitLimitCone",
+     "HomologicalComplex.isLimitOfEval",
+     "HomologicalComplex.coneOfHasLimitEval",
+     "CategoryTheory.ShortComplex.isoCyclesOfIsLimit",
+     "CategoryTheory.ShortComplex.pOpcycles_π_isoOpcyclesOfIsColimit_inv",
+     "HomologicalComplex.isLimitConeOfHasLimitEval",
+     "CategoryTheory.ShortComplex.hasFiniteLimits"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-sp-tower",
+  "date": "2026-10-21",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof paragraph: repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; extracted returned DAG proof steps 3, 7, 8, 11.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
