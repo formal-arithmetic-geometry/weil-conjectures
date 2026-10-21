@@ -22905,3 +22905,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:12 L: merged deliver/Z7/Sheaf.Paper.ConstantDerivedLimitResolutionUnit (stage 3; reviewer PASS; first push; landing 20261021T151217-L-1185116 (interface); batch 20261021T151059; modules 1; new nodes 0; change records: coord/changes/Z7-constant-derived-limit-resolution-imports.md)
 - 15:13 L: returned deliver/O3/lem-sfb-field-separable-cech-coordinates (reviewer RETURN: L: independent stage-2 immutable head fa762ddbd371: Item module correct clause by clause: e fixed by vertex equations on)
 - 15:14 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 15:17 L: merged deliver/NM/lem-pur-affine-coordinate-support-stalk-continuity (stage 2; reviewer PASS; parallel immutable checks)
