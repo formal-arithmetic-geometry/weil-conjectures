@@ -19908,3 +19908,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: merged deliver/Q118/lem-sfb-hom-scalar-chain-identification (reviewer FIX; first push; new nodes: 0)
 - 03:41 L: merged deliver/Q112/lem-sfb-internal-hom-localization-comparison (reviewer FIX; first push; new nodes: 0)
 - 03:41 L: merged deliver/Q130/lem-sfb-finite-proper-classical-truncation (reviewer PASS; first push; new nodes: 1)
+- 2026-10-21T03:41:20Z L: superseded stage-1 delivery Q19/lem-pe-principal-reduction-cone-calculus at 0a09582283b450326398615c647ec1e5a2f009b9; current completion retained; packet archived at refs/superseded/Q19/lem-pe-principal-reduction-cone-calculus/0a09582283b450326398615c647ec1e5a2f009b9; stale return retired.
