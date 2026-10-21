@@ -3,25 +3,80 @@
  "blueprint": {
   "is": "def-mg-determinant-line",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Determinant line",
- "statement": "If $\\mathcal V$ is a rank-$r$ lisse\nWeil sheaf with\nfundamental representation\n$V$, its *determinant line* is the rank-one Weil representation\n\n$$\n\\det(V):=\\bigwedge\\nolimits^r V,\n\\qquad\n\\det(\\rho)(g)=\\det(\\rho(g)).\n$$\n\nThe corresponding rank-one Weil sheaf is denoted $\\det(\\mathcal V)$.",
+ "statement": "Use the lisse Weil sheaves and geometric-Frobenius convention of [def-wf-fundamental-representation], with coefficients $\\Qlb=\\overline{\\mathbf Q}_\\ell$ and underlying lisse adic sheaves as in [def-pod-lisse-l-adic-sheaves]. Let $\\mathcal V=(\\mathcal F,\\varphi)$ have rank $r\\geq0$, with Weil fundamental representation $\\rho:W(X_0)\\to\\operatorname{GL}(V)$ on its geometric stalk $V$.\n\nIts *determinant line* is the rank-one Weil representation\n$$\n\\det(V):=\\bigwedge\\nolimits^r_{\\Qlb}V,\n\\qquad\n\\det(\\rho)(g)(v_1\\wedge\\cdots\\wedge v_r)\n=\\rho(g)v_1\\wedge\\cdots\\wedge\\rho(g)v_r.\n$$\nHere exterior powers are those of [def-weil-pbc-exterior-algebra], with the induced representation action of [sk-d-linear]. The top exterior power is one-dimensional by [lem-weil-pbc-exterior-power-free-basis]. Equivalently, $g$ acts on this line by the scalar\n$$\n\\det(\\rho)(g)=\\det(\\rho(g)),\n$$\nwhere the scalar determinant is [def-weil-endomorphism-determinant].\n\nThe corresponding rank-one lisse Weil sheaf is denoted $\\det(\\mathcal V)$. Explicitly it is $(\\bigwedge^r\\mathcal F,\\bigwedge^r\\varphi)$: exterior powers are formed on local coefficient modules of an adic model and its transition maps, then rationalized and extended to $\\Qlb$ in the convention of [def-pod-lisse-l-adic-sheaves]. Its Weil structure is the map $\\Phi_X^*(\\bigwedge^r\\mathcal F)\\cong\\bigwedge^r(\\Phi_X^*\\mathcal F)\\xrightarrow{\\bigwedge^r\\varphi}\\bigwedge^r\\mathcal F$, using the reindexing pullback of [def-wf-lisse-adic-automorphism-pullback]. For $r=0$ these definitions give the constant line with trivial Weil action.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/def-mg-determinant-line.md",
   "place": "node def-mg-determinant-line, order 2519"
  },
  "stmt_deps": [
   "def-wf-fundamental-representation",
-  "def-wf-weil-category"
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-exterior-algebra",
+  "sk-d-linear",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-endomorphism-determinant",
+  "def-wf-lisse-adic-automorphism-pullback"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def exteriorPower|def det|finrank_eq|map.*det|det.*map",
+   "results": "12 hits in RepresentationTheory, concerning character dimensions and irreducibility; none defines the lisse Weil determinant line.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "determinant line of a finite dimensional group representation top exterior power",
+   "results": "8 hits including LinearEquiv.det_symm, Matrix.GeneralLinearGroup.det, LinearMap.det, exteriorPower.map_apply_ιMulti and ExteriorAlgebra.exteriorPower. These cover algebraic notions, not the corresponding lisse Weil sheaf.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.exteriorPower, LinearMap.det",
+   "results": "0 hits; Loogle reported unknown identifier 'Representation.exteriorPower'. This is not an outage; project declarations need not be in the Mathlib index.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant line of a finite dimensional group representation is its top exterior power with group action given by the determinant",
+   "results": "8 hits including Module.Basis.smul_det, LinearMap.detAux, LinearMap.det, Module.Basis.det and LinearEquiv.det. Algebraic partial matches only.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "def exteriorPower|theorem.*det|def.*det|map.*det|finrank_eq",
+   "results": "3 hits in LinearAlgebra/ExteriorPower: Pairing.lean:61 determinant formula and Basis.lean:159,164 finrank_eq. Read Basis.lean:155-164; the dimension formula applies but gives only the rank clause.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map",
+   "results": "12 hits including exteriorPower.map, map_id, map_comp, map_apply_ιMulti_family and map_injective in Mathlib.LinearAlgebra.ExteriorPower.Basic. Read map at line 260, map_apply_ιMulti at 273 and map_id/map_comp at 293/298; these give induced exterior maps, not the complete lisse Weil definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior powers of linear maps on a vector space, top exterior power is one dimensional and map is multiplication by determinant",
+   "results": "8 hits including LinearMap.detAux, LinearMap.det, exteriorPower.alternatingMapToDual_apply_ιMulti, Module.Basis.det, exteriorPower.pairingDual_ιMulti_ιMulti and exteriorPower.map. Read the scalar determinant and exterior-power definitions; none also defines the corresponding lisse Weil sheaf.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item; algebraic partial matches reused through existing DAG nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -36,5 +91,20 @@
  ],
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-restriction"
+ "unit": "sk-i-restriction",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-mg-determinant-line",
+  "worker": "stage1",
+  "summary": "Split this definition by naming its exterior algebra, induced representation action, finite-free exterior basis, scalar determinant and actual lisse adic coefficient and pullback notions. Kept the top exterior power, determinant character and corresponding rank-one Weil sheaf; spelled out the induced action and the sheaf construction, including rank zero. Replaced the imported pro-etale Weil-complex dependency with the lisse adic definitions used by the repaired fundamental representation. No new nodes or proof steps. Project declarations cover only parts of the item; Mathlib likewise supplies its algebraic ingredients.",
+  "blueprint": "Realizes the definition def-mg-determinant-line, all three clauses: top exterior-power representation, scalar determinant action, and corresponding rank-one Weil sheaf. Serves the determinant sentence in sk-i-restriction rationality-of-operations paragraph. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-76b128a4f",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-76b128a4f (reviewer sub-agent of L); spot-checked: Definition split with no new nodes. It keeps all three clauses of the main-20261015 text (order 2863, identical to master): the top exterior power with the induced wedge action, the scalar det(rho(g)), and the rank-one Weil sheaf (wedge^r F, wedge^r phi). I read every stmt_dep statement. The fundamental representation supplies the setting and the geometric-Frobenius convention. The def-pod lisse systems give a lisse wedge^r F_n, because exterior powers commute with reduction mod varpi^n, rationalization and scalar extension. The exterior-algebra, free-basis C(r,r)=1 and determinant leaves give the line and its scalar. Reindexing pullback makes Phi^*(wedge^r F) = wedge^r(Phi^*F) on sections, so the Weil structure points the correct way. Edge cases checked: r=0 gives the trivial line, r=1 gives V itself, diagonal, swap and unipotent matrices behave correctly, Frobenius is not inverted, and continuity holds because det is polynomial. Dropping def-wf-weil-category (pro-etale D^b_c) is correct, since the input category is the lisse adic one; no coefficient swap. No cycle, no duplicate, citers unchanged in meaning, item not dropped, no repair note, not superseded on live. Batch-5 flags: def-pod-lisse-l-adic-sheaves and def-wf-lisse-adic-automorphism-pullback are general coefficient and pullback definitions, not Poincare duality or the trace formula or their proofs. Both were already direct stmt_deps of the base dep def-wf-fundamental-representation, so the batch-5 closure gains nothing; accepted. No changes."
+ }
 }

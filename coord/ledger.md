@@ -20644,3 +20644,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/Q62/def-per-perverse-subcategories (reviewer PASS; first push; new nodes: 0); claim not held by Q62: not your claim
 - 07:23 L: merged deliver/NL/def-pod-perfect-derived-pairing (reviewer PASS; first push; new nodes: 0)
 - 07:23 L: merged deliver/Q140/lemma-nagata-separate-closed-data-exists (reviewer FIX; first push; new nodes: 0)
+- 07:23 L: merged deliver/Q04/def-mg-determinant-line (reviewer PASS; first push; new nodes: 0)
