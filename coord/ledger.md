@@ -21422,3 +21422,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: merged deliver/Q10/lem-sf-projective-cohomology-split-model (reviewer PASS; first push; new nodes: 0)
 - 08:53 L: merged deliver/Q94/lem-a1-texact-coefficient-stage-descent (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T08:53:13Z L: superseded stage-1 delivery Q135/lem-pod-constructible-mate-coherence at 164f9e785f60f999703967f14f633e1bcdf2d04b; current completion retained; packet archived at refs/superseded/Q135/lem-pod-constructible-mate-coherence/164f9e785f60f999703967f14f633e1bcdf2d04b; stale return retired.
+- 2026-10-21T08:53:15Z L: superseded stage-1 delivery Q134/lem-weil-boundary-comparison-composition-transport at b73ca32cd0697ef7679230b3ed22ac08899fe7f5; current completion retained; packet archived at refs/superseded/Q134/lem-weil-boundary-comparison-composition-transport/b73ca32cd0697ef7679230b3ed22ac08899fe7f5; stale return retired.
