@@ -20292,3 +20292,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:06 L: merged deliver/NY/lem-fix-operation-reduction (reviewer FIX; after a return; new nodes: 4)
 - 06:06 L: merged deliver/Q09/det-sf-comp-coherence-cocycle (reviewer FIX; after a return; new nodes: 4)
 - 06:06 L: merged deliver/N8/lem-pur-finite-coefficient-adjoint-comparisons (reviewer FIX; after a return; new nodes: 7)
+- 06:06 L: returned deliver/NA/prop-weil-pbc-qbar-condensed-two-colimit (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED prop-weil-pbc-qbar-condensed-two-colimit: check_dag.py)
