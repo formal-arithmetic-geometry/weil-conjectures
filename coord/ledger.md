@@ -22539,3 +22539,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T13:30:31Z L: superseded stage-1 delivery NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison at 9b4367fdc06b87c8bbe8964276cb43355bd482bd; current completion retained; packet archived at refs/superseded/NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison/9b4367fdc06b87c8bbe8964276cb43355bd482bd; stale return retired.
 - 13:31 L: merged deliver/NF/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer FIX; first push; new nodes: 3); claim not held by NF: not your claim
 - 13:31 L: merged deliver/NC/lem-sfb-qcqs-integral-finite-model-completeness (reviewer FIX; first push; new nodes: 0); claim not held by NC: not your claim
+- 13:31 L: returned deliver/ND/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer RETURN: E2/E1/D (false inputs, major gap): steps 1-6 never use any property of B and prove pi_M invertible for EVERY degree-zero)
