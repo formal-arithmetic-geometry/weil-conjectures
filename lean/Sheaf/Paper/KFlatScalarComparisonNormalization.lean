@@ -12,11 +12,8 @@ public import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
-import Sheaf.CategoryTheory.GeometricModuleConstruction
-import Sheaf.Paper.RingedTopoiInverseImageTensorComparison
-import Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.CategoryTheory.FlatRestrictionOrdinaryComparisons
 
 /-! # Normalization of scalar pullback on K-flat representatives
 
@@ -145,6 +142,62 @@ def AdjunctionNormalized {C : Type u} [Category.{u} C] {J : GrothendieckTopology
           ((m.E.mapHomologicalComplex (.up ℤ)).obj P) =
       DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P)
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def unliftInverseImage
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (I : InverseImage L A B) : AlgebraicInverseImage L A B := by
+  let eR := SheafOfModules.sheafUliftIso J CommRingCat.{u} (CategoryTheory.forget CommRingCat.{u})
+  let eS := SheafOfModules.sheafUliftIso K CommRingCat.{u} (CategoryTheory.forget CommRingCat.{u})
+  let eM := Functor.isoWhiskerLeft (toSheaf ((sheafCompose J
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) <|
+    SheafOfModules.sheafUliftIso J AddCommGrpCat.{u} (CategoryTheory.forget AddCommGrpCat.{u})
+  let eN := Functor.isoWhiskerLeft (toSheaf ((sheafCompose K
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj B)) <|
+    SheafOfModules.sheafUliftIso K AddCommGrpCat.{u} (CategoryTheory.forget AddCommGrpCat.{u})
+  let er := L.mapIso (eR.app A).symm ≪≫ I.ringUnderlying ≪≫ eS.app B
+  let em := Functor.isoWhiskerLeft I.modules eN.symm ≪≫ I.moduleUnderlying ≪≫
+    Functor.isoWhiskerRight eM L
+  refine
+    { ringUnderlying := er
+      modules := I.modules
+      moduleUnderlying := em
+      ringAdd := ?_
+      ringMul := ?_
+      ringZero := ?_
+      ringOne := ?_
+      moduleAdd := ?_
+      moduleZero := ?_
+      moduleSMul := ?_ }
+  · intro T a b t h V x
+    have hr := I.ringAdd T (a ≫ (eR.app A).inv) (b ≫ (eR.app A).inv)
+      (t ≫ (eR.app A).inv) h V x
+    simpa [er, eR, eS, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro T a b t h V x
+    have hr := I.ringMul T (a ≫ (eR.app A).inv) (b ≫ (eR.app A).inv)
+      (t ≫ (eR.app A).inv) h V x
+    simpa [er, eR, eS, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro T a h V x
+    have hr := I.ringZero T (a ≫ (eR.app A).inv) h V x
+    simpa [er, eR, eS, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro T a h V x
+    have hr := I.ringOne T (a ≫ (eR.app A).inv) h V x
+    simpa [er, eR, eS, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro M T a b t h V x
+    have hr := I.moduleAdd M T (a ≫ (eM.app M).inv) (b ≫ (eM.app M).inv)
+      (t ≫ (eM.app M).inv) h V x
+    simpa [em, eM, eN, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro M T a h V x
+    have hr := I.moduleZero M T (a ≫ (eM.app M).inv) h V x
+    simpa [em, eM, eN, SheafOfModules.sheafUliftIso, uliftTrivial, Functor.map_comp] using hr
+  · intro M T a b t h V x
+    have hr := I.moduleSMul M T (a ≫ (eR.app A).inv) (b ≫ (eM.app M).inv)
+      (t ≫ (eM.app M).inv) h V x
+    simpa [er, em, eR, eS, eM, eN, SheafOfModules.sheafUliftIso, uliftTrivial,
+      Functor.map_comp] using hr
+
 section Action
 
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
@@ -159,6 +212,11 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
       (inverseRing IB).hom = (inverseRing IA).hom ≫
         (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map φX)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+set_option maxHeartbeats 800000 in
+-- Compare the two scalar-restriction presentations and their underlying graph operations.
 include ring_compat in
 /-- The unique restriction/action identification fixed by the underlying inverse images.
 Source: Stacks 03D2, blueprint det-prop-scalar-six-pullback (1)
@@ -175,7 +233,91 @@ theorem action_existsUnique (leftExact : PreservesFiniteLimits L) :
           (((inverseUnderlying IB).inv.app H).hom.app U
             (((inverseUnderlying IA).hom.app ((restriction φY).obj H)).hom.app U
               (ULift.up x))).down := by
-  sorry
+  classical
+  let := leftExact
+  let A := unliftInverseImage IA
+  let B := unliftInverseImage IB
+  let UY : Modules BY ⥤ Sheaf J (Type u) :=
+    toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj BY) ⋙
+      sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})
+  let UX : Modules AX ⥤ Sheaf K (Type u) :=
+    toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj AX) ⋙
+      sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})
+  let eJ := SheafOfModules.sheafUliftIso J CommRingCat.{u} (CategoryTheory.forget CommRingCat.{u})
+  let eK := SheafOfModules.sheafUliftIso K CommRingCat.{u} (CategoryTheory.forget CommRingCat.{u})
+  have hc : A.ringUnderlying.hom ≫
+      (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map φX =
+      L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map φY) ≫
+        eqToHom (congrArg (fun F ↦ F.obj
+          ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj BY))
+            (rfl : L = L)) ≫ B.ringUnderlying.hom := by
+    have h := congrArg (fun q ↦ L.map (eJ.inv.app AY) ≫ q ≫ eK.hom.app BX)
+      ring_compat
+    change (L.map (eJ.inv.app AY) ≫ IA.ringUnderlying.hom ≫ eK.hom.app AX) ≫
+      (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map φX =
+        L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map φY) ≫
+          𝟙 _ ≫ (L.map (eJ.inv.app BY) ≫ IB.ringUnderlying.hom ≫ eK.hom.app BX)
+    simp only [Category.id_comp, Category.assoc]
+    rw [← eK.hom.naturality φX]
+    rw [← L.map_comp_assoc, eJ.inv.naturality φY, L.map_comp_assoc]
+    exact h.symm
+  have hex (M : Modules BY) :=
+    CategoryTheory.FlatRingedDiagramInput.inverse_change_hom A B φY φX rfl hc M
+  let f (M : Modules BY) := (hex M).choose
+  have hf (M : Modules BY) : UX.map (f M) =
+      A.moduleUnderlying.hom.app ((restriction φY).obj M) ≫ B.moduleUnderlying.inv.app M := by
+    exact (hex M).choose_spec
+  have hi (M : Modules BY) : IsIso (f M) := by
+    have : IsIso (UX.map (f M)) := by rw [hf]; infer_instance
+    exact isIso_of_reflects_iso (f M) UX
+  let β : restriction φY ⋙ inverseModules IA ⟶ inverseModules IB ⋙ restriction φX :=
+    { app := f
+      naturality := by
+        intro M N g
+        apply UX.map_injective
+        change UX.map (A.modules.map ((restriction φY).map g) ≫ f N) =
+          UX.map (f M ≫ (restriction φX).map (B.modules.map g))
+        rw [Functor.map_comp, Functor.map_comp, hf, hf]
+        have hA := A.moduleUnderlying.hom.naturality ((restriction φY).map g)
+        have hB := B.moduleUnderlying.inv.naturality g
+        change UX.map (A.modules.map ((restriction φY).map g)) ≫
+          A.moduleUnderlying.hom.app ((restriction φY).obj N) =
+            A.moduleUnderlying.hom.app ((restriction φY).obj M) ≫ L.map (UY.map g) at hA
+        change L.map (UY.map g) ≫ B.moduleUnderlying.inv.app N =
+          B.moduleUnderlying.inv.app M ≫
+            UX.map ((restriction φX).map (B.modules.map g)) at hB
+        rw [← Category.assoc, hA, Category.assoc, hB, Category.assoc] }
+  let a : restriction φY ⋙ inverseModules IA ≅ inverseModules IB ⋙ restriction φX :=
+    NatIso.ofComponents (fun M ↦ asIso (f M)) (fun g ↦ β.naturality g)
+  have ha (M : Modules BY) (V : Dᵒᵖ)
+      (x : ((inverseModules IA).obj ((restriction φY).obj M)).val.obj V) :
+      (a.hom.app M).val.app V x =
+        (((inverseUnderlying IB).inv.app M).hom.app V
+          (((inverseUnderlying IA).hom.app ((restriction φY).obj M)).hom.app V
+            (ULift.up x))).down := by
+    have hraw := hf M
+    dsimp only [A, B, unliftInverseImage, Iso.trans_hom, Iso.trans_inv,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app] at hraw
+    let e := SheafOfModules.sheafUliftIso J AddCommGrpCat.{u}
+      (CategoryTheory.forget AddCommGrpCat.{u})
+    let N := (toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj BY)).obj M
+    simp only [Category.assoc] at hraw
+    change UX.map (f M) = _ ≫ IA.moduleUnderlying.hom.app ((restriction φY).obj M) ≫
+      L.map (e.hom.app N) ≫ L.map (e.inv.app N) ≫ IB.moduleUnderlying.inv.app M ≫ _ at hraw
+    rw [← L.map_comp_assoc, Iso.hom_inv_id_app] at hraw
+    erw [L.map_id, Category.id_comp] at hraw
+    have h := congrArg (fun q ↦ q.hom.app V x) hraw
+    dsimp [a, UX, B, unliftInverseImage, toSheaf, PresheafOfModules.toPresheaf,
+      inverseModules, inverseUnderlying, sheafCompose,
+      SheafOfModules.sheafUliftIso, uliftTrivial] at h ⊢
+    exact h
+  refine ⟨a, ha, ?_⟩
+  intro a' ha'
+  apply Iso.ext
+  ext M V x
+  exact (ha' M V x).trans (ha M V x).symm
 
 /-- The canonical ordinary action identification, chosen from its unique underlying map.
 Source: Stacks 03D2, blueprint det-prop-scalar-six-pullback (1)

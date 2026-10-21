@@ -23,11 +23,12 @@
  ],
  "proof": [
   {
-   "text": "Apply exactness of geometric inverse image to the two ring sheaves $A_Y,B_Y$. Thus $h_A^*,h_B^*$ are exact additive functors with the transported actions, and their termwise functors induce functors on the unbounded derived categories. The exact-functor localization comparison identifies $h_R^*Q(K)$ with $Q(h_R^*K)$ for every complex $K$, without resolving $K$. Restricting the transported $B_X$-action along $A_X\\to B_X$ gives the same action as first restricting along $A_Y\\to B_Y$ and then applying $h^{-1}$: both action maps are the inverse image of the original action with its scalar argument restricted. This gives the natural action identification $a_h:h_A^*r_Y\\cong r_Xh_B^*$, on complexes and after localization.",
+   "text": "Apply exactness of geometric inverse image to the two ring sheaves $A_Y,B_Y$. Thus $h_A^*,h_B^*$ are exact additive functors with the transported actions, and their termwise functors induce functors on the unbounded derived categories. The exact-functor localization comparison identifies $h_R^*Q(K)$ with $Q(h_R^*K)$ for every complex $K$, without resolving $K$. Restricting the transported $B_X$-action along $A_X\\to B_X$ gives the same action as first restricting along $A_Y\\to B_Y$ and then applying $h^{-1}$: both action maps are the inverse image of the original action with its scalar argument restricted. This gives the natural action identification $a_h:h_A^*r_Y\\cong r_Xh_B^*$, on complexes and after localization. For the ordinary action identification, remove the trivial ULift presentations using the sheaf ULift isomorphism and apply the proved inverse_change_hom helper of lem-weil-pbc-flat-restriction-ordinary-comparisons. Its generalized graph argument requires only finite-limit preservation and the ring square, not the flat-diagram hypotheses of that module's main theorem. The forgetful functor reflects isomorphisms and is faithful; naturality of the two underlying identifications gives naturality, and the specified underlying formula gives uniqueness. Reinsert the trivial ULift presentations to obtain action_existsUnique.",
    "uses": [
     "lem-trf-geometric-inverse-image-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pc-sheaf-restrict-scalars"
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-flat-restriction-ordinary-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -118,6 +119,7 @@
   "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-flat-restriction-ordinary-comparisons",
   "lem-weil-pbc-geometric-module-construction",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-ringed-pullback-preserves-kflat"
@@ -125,7 +127,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting"
+  "place": "(1), expanded using Stacks 03EL, 04JC, 06YS, 06YY, 0G7E and 07A6 and the normalized derived coefficient adjunction; explicit unit calculation and mate pasting; V1 ordinary action proof reuses the proved generalized-graph helper inverse_change_hom after removing trivial ULift presentations"
  },
  "mathlib_searches": [
   {
@@ -315,5 +317,15 @@
   "group": "NZ",
   "result": "pass",
   "note": "Re-delivery repairs both RETURN findings of c8ca664. F1: θ_h is now a def (mateEquiv.symm of aD_h). a_h is chosen from an ∃! pinned via moduleUnderlying; aD_h comes from mapDerivedCategoryNatIso/CompIso. θ_composition uses actual geometric Lg⊣Rg, Lf⊣Rf, Lh⊣Rf⋙Rg with the leftAdjointUniq composite, pinned ring equations and underlying-pinned cA/cB; its equation is exactly θ_gf=(f_B^*θ_g)(θ_f g_A^*) with associators. It holds for arbitrary adjunctions (mateEquiv_vcomp). θ_identity uses the 𝟭 topos with pinned iA/iB and unitors. F2: stmt_deps now carry the landed def-sfb-derived-change-of-rings-cochain-model and def-weil-pbc-algebraic-inverse-image (both reviewed_lean pass); the theorem dep is dropped and kept in proof_deps. Node differs from live only in lean/stmt_deps; statement verbatim. Clauses checked: χ pairing formula, unit equation, AdjunctionNormalized, K-flat representative equation (types checked), global IsIso, mate direction, no flatness/boundedness, universes u/w. 4 sorrys, all theorems; no hollow defs; docstrings present. nt_compile --json: 40.2 s, exit 0, clean. Advisory: AdjunctionNormalized restates the coefficient-adjunction normalization."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261021T130222-L-2631201",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
