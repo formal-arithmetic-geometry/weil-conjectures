@@ -21357,3 +21357,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q74/lem-pur-derived-tensor-additive-constraints (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q64/lem-trf-point-sheaf-insertion-calculus (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q94/lemma-nagata-scheme-image-of-closed-immersion (reviewer PASS; after a return; new nodes: 0)
+- 08:51 L: merged deliver/NS/lem-pc-tate-adelic-reciprocity (reviewer PASS; first push; new nodes: 2)

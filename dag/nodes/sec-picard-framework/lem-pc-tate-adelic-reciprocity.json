@@ -11,9 +11,109 @@
   "lem-pc-tate-dvr-residue-calculus",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, the assertion is the empty sum identity, so assume $I\\ne\\varnothing$. Define the restricted product\n$$V=\\{(a_i)\\in\\prod_i K:\\{i:a_i\\notin O_i\\}\\text{ is finite}\\},\\quad A=\\prod_iO_i\\subset V,\\quad B=\\Delta K\\subset V.$$\nThese are $k$-vector spaces. Coordinatewise multiplication makes $V$ a $K$-module: the exceptional set of $f(a_i)$ is contained in the union of the exceptional sets of $f$ and $(a_i)$, since each $O_i$ is a subring. The diagonal lies in $V$ by the assumed finite-poles condition, and it is injective since $I\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, proof of Theorem 3, pp. 155–156; use uncompleted copies of K in the restricted product."
+   }
+  },
+  {
+   "text": "The admissibility condition of [lem-pc-tate-abstract-residue-calculus] holds for $A$. Indeed, fix $f\\in K$ and set $S_f=\\{i:f\\notin O_i\\}$. Taking coordinate classes injects $(fA+A)/A$ into\n$$\\bigoplus_{i\\in S_f}(fO_i+O_i)/O_i.$$\nThe kernel is zero because zero coordinate classes mean membership in $A$; the target is finite-dimensional, since $S_f$ is finite and every summand is finite-dimensional by [lem-pc-tate-dvr-residue-calculus]. Thus the quotient is finite-dimensional. The same argument applies to any subfamily of the coordinates. Also $B$ is $K$-stable, since $f\\Delta(g)=\\Delta(fg)$, so it is admissible with all these quotients zero.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, admissibility hypothesis of Theorem 1; §3, restricted-product lattice in the proof of Theorem 3, pp. 155–156."
+   }
+  },
+  {
+   "text": "The diagonal identifies $A\\cap B$ with $\\bigcap_iO_i$, so $A\\cap B$ is finite-dimensional. Write $D=\\bigoplus_iK/O_i$ and $q:V\\to D$, $q((a_i))=(a_i\\bmod O_i)_i$. This is onto: choose representatives at the finitely many nonzero coordinates of an element of $D$, and choose zero elsewhere. Its kernel is $A$, and $q(\\Delta f)=P(f)$. Explicitly the induced map $V/(A+B)\\to D/P(K)$ has inverse sending a finitely supported family of classes to any such family of representatives modulo $A+B$: changing representatives adds an element of $A$, and changing the family by $P(f)$ adds $\\Delta f$ modulo $A$. Therefore $V/(A+B)\\cong\\operatorname{coker}P$ is finite-dimensional.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, proof of Theorem 3, pp. 156–157; explicit principal-parts quotient identification with the finiteness hypothesis already assumed."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-tate-residue-lattice-identity] to $A,B\\subset V$. It gives\n$$\\operatorname{res}_{V,A}+\\operatorname{res}_{V,B}=\\operatorname{res}_{V,A+B}+\\operatorname{res}_{V,A\\cap B}.$$\nBy [lem-pc-tate-abstract-residue-calculus], the term for $B$ is zero because $B$ is $K$-stable; the term for $A+B$ is zero because $V/(A+B)$ is finite-dimensional; and the term for $A\\cap B$ is zero because $A\\cap B$ is finite-dimensional. Consequently $\\operatorname{res}_{V,A}=0$ as a $k$-linear map on $\\Omega^1_{K/k}$.",
+   "uses": [
+    "lem-pc-tate-residue-lattice-identity",
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, lattice identity in the proof of Theorem 3 and its corollary, pp. 155–156."
+   }
+  },
+  {
+   "text": "Fix $f,g\\in K$ and put $S=\\{i:f\\notin O_i\\}\\cup\\{i:g\\notin O_i\\}$ and $T=I\\setminus S$. For $i\\in T$, both $f$ and $g$ belong to $O_i$, so $f\\,dg$ is the image of an element of $\\Omega^1_{O_i/k}$. The annihilation clause of [lem-pc-tate-dvr-residue-calculus] gives $\\operatorname{res}_{O_i}(f\\,dg)=0$. Hence the local residues of this elementary differential are supported in the finite set $S$.",
+   "uses": [
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, last paragraph of p. 156, using §2, R2."
+   }
+  },
+  {
+   "text": "For the finite set $S$ above write $V_T$ for the restricted product over $T$, embedded by zero on $S$, and $W_i=K$ in the $i$th coordinate for $i\\in S$. Then $V=V_T\\oplus\\bigoplus_{i\\in S}W_i$ as $K$-modules. Inside $V$ put $C_T=\\prod_{i\\in T}O_i$, zero on $S$, and put $C_i=O_i\\subset W_i$, zero elsewhere. They are admissible by the finite-coordinate quotient calculation of step 2 and [lem-pc-tate-dvr-residue-calculus]. Their sum is $A$, and each summand intersects the sum of the others in zero. Apply [lem-pc-tate-residue-lattice-identity] successively to these disjoint summands, starting with $C_T$: since [lem-pc-tate-abstract-residue-calculus] gives $\\operatorname{res}_{V,0}=0$, induction on the finite set $S$ yields\n$$\\operatorname{res}_{V,A}=\\operatorname{res}_{V,C_T}+\\sum_{i\\in S}\\operatorname{res}_{V,C_i}.$$\nEach containing coordinate module is $K$-stable; ambient restriction and invariance under isomorphisms in [lem-pc-tate-abstract-residue-calculus] identify the right side with\n$$\\operatorname{res}_{V_T,\\prod_{i\\in T}O_i}+\\sum_{i\\in S}\\operatorname{res}_{K,O_i}.$$\nThis argument also covers $T=\\varnothing$ and $S=\\varnothing$.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "lem-pc-tate-residue-lattice-identity",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, R1 and R5; §3, finite set S-prime decomposition in the proof of Theorem 3, p. 156."
+   }
+  },
+  {
+   "text": "Multiplication by $f$ and by $g$ preserves $\\prod_{i\\in T}O_i$, so its abstract residue on $f\\,dg$ is zero by [lem-pc-tate-abstract-residue-calculus]. For each $i\\in S$, compute $\\operatorname{res}_{K,O_i}$ and the local residue with the same $k$-linear projection $K\\to O_i$: their commutator formulas in [lem-pc-tate-abstract-residue-calculus] and [lem-pc-tate-dvr-residue-calculus] are both $\\operatorname{Tr}_{\\mathrm{fp}}([\\pi m_f,m_g])$. Thus they agree on $f\\,dg$. Evaluating step 6 at this differential, and using step 4, gives\n$$\\sum_{i\\in S}\\operatorname{res}_{O_i}(f\\,dg)=\\operatorname{res}_{V,A}(f\\,dg)=0.$$\nTogether with step 5, this proves both assertions for $f\\,dg$.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, proof of Theorem 3, last paragraph of p. 156; §2, formula (*) p. 152 and R2."
+   }
+  },
+  {
+   "text": "The symbol presentation in [def-weil-pbc-kahler-differentials] writes every $\\xi\\in\\Omega^1_{K/k}$ as a finite sum $\\sum_{j=1}^r f_j\\,dg_j$. For each summand choose the finite support bound $S_j$ of step 5, and put $S=\\bigcup_{j=1}^rS_j$. The $k$-linearity of each local residue in [lem-pc-tate-dvr-residue-calculus] shows that all residues of $\\xi$ outside $S$ vanish. Interchanging the two finite sums gives\n$$\\sum_i\\operatorname{res}_{O_i}(\\xi)=\\sum_{i\\in S}\\sum_{j=1}^r\\operatorname{res}_{O_i}(f_j\\,dg_j)=\\sum_{j=1}^r\\sum_{i\\in S_j}\\operatorname{res}_{O_i}(f_j\\,dg_j)=0,$$\nwhere the last equality uses step 7. This also treats $\\xi=0$ by the empty sum.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, symbol presentation of differentials, pp. 151–152; §3, Theorem 3 and its corollary, pp. 155–156."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tate-abstract-residue-calculus",
+  "lem-pc-tate-dvr-residue-calculus",
+  "lem-pc-tate-residue-lattice-identity",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§2, Theorem 1, R1, R2 and R5; §3, proof of Theorem 3 and corollary, pp. 155–157. Adaptation using uncompleted K factors; the quotient identifications are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +142,38 @@
    "results": "8 hits: MeromorphicOn.divisor, AlgebraicGeometry.Scheme.residue, PowerSeries.IsWeierstrassFactorization.map_ne_zero, MeromorphicOn.divisor_smul, AlgebraicGeometry.Scheme.residueField, IsLocalRing.residue, locallyFinsuppWithin.logCounting_divisor, MeromorphicOn.divisor_sub_const_self",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sum of local Tate residues vanishes when the diagonal principal parts map has finite dimensional kernel and cokernel",
+   "results": "8 hits: ClassGroup.fintypeOfAdmissibleOfFinite, NumberField.mixedEmbedding.fundamentalCone.sum_eq_zero_of_mem_span_completeFamily, NumberField.dedekindZeta_residue, IsDedekindDomain.selmerGroup.valuation_ker_eq, Algebra.Generators.H1Cotangent.exact_δ_map, IsLocalRing.finrank_cotangentSpace_eq_zero, NumberField.dedekindZeta_residue_def, IsLocalRing.finrank_CotangentSpace_eq_one. Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"residue_theorem\"",
+   "results": "0 hits: . Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue_theorem|localRes|principalParts.*res|sum.*residue",
+   "results": "12 hits: Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/ZMod.lean, Mathlib/Analysis/SumOverResidueClass.lean, Mathlib/Analysis/SumOverResidueClass.lean. Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic residue theorem for a family of discrete valuation rings and finite dimensional adelic cohomology",
+   "results": "8 hits: IsDiscreteValuationRing.TFAE, IsDiscreteValuationRing.toIsLocalRing, Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, NumberField.AdeleRing, IsDedekindDomain.FiniteAdeleRing, Valued.integer.totallyBounded_iff_finite_residueField, instIsAlgebraicQuotientIdealResidueField, IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring. Read the returned statements; none constructs the abstract differential residue or proves its asserted identities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-picard-duality",
@@ -62,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-adelic-reciprocity",
+  "worker": "stage1",
+  "summary": "NS checked Tate §§1–3 and gave the restricted-product proof without completions. Two strictly smaller abstract residue-calculus nodes replace the previously missing non-elementary inputs; all principal-parts identifications, finite-coordinate additivity, support bounds and finite-sum passage are explicit. No statement change. Mathlib searches were run and their returned statements read. The earlier attachment was rejected and is not used as the delivery.",
+  "blueprint": "Realizes the residue-theorem clause of sk-thm-picard-duality: the sum of local Tate residues kills global differentials, making its cokernel trace well defined. New abstract nodes serve the R1/R2/R5 calculation of Tate §3."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-26e2ce539",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-26e2ce539 (reviewer sub-agent of L); spot-checked: I read Tate 1968 pp.149-157 (§1 T1-T5; §2 Thm 1, (*) p.152, R1, R2, R5 p.153; §3 Thm 3 proof pp.155-156). The item's statement is unchanged against side-live. The live item is still unsplit, there is no repair note and no prior run. The 8 steps are Tate's Thm 3 proof with uncompleted K coordinates, which is valid because R1, R2 and R5 are abstract. Step-by-step: (1) V is a K-module and Δ is injective for I nonempty; (2) (fA+A)/A injects into the finite sum over i in S_f of (fO_i+O_i)/O_i, using the dvr node's quotient clause, and B=ΔK is a submodule; (3) A∩B=Δ(∩O_i) and V/(A+B)≅coker P, since q is onto with kernel A and qΔ=P; (4) R5 plus the vanishing clauses give res_{V,A}=0; (5) the dvr node's annihilation clause gives support in S; (6) the decomposition V=V_T⊕⊕W_i, R5 applied S times with res_0=0, and the ambient-restriction and isomorphism clauses; (7) R2 on C_T, and the local residue equals res_{K,O_i} because both are Tr_fp([π m_f,m_g]) for the same projection; (8) finite symbol sums and k-linearity. All hypotheses checked; the edge cases I=∅, S=∅ and T=∅ are covered. New nodes: abstract-residue-calculus (Thm 1 with (*), R1, R2) is true and was tested on A=0, A=V and finite-dimensional A. The lattice identity is exactly R5, which is non-elementary because Tr_fp is not known to be additive, and was tested on A=B, A=0, B=V and A⊂B. Both are statement-only, have 3 kinds of searches and correct blueprint.from, with no duplicates found by rg -L over dag/nodes or the blueprint. Neither restates a clause of the item or the parent, and there is no cycle. All citations are in the same unit; the Kähler definition is a Mathlib leaf; no tool_uses. Maintainer notes: the main project's Lean has TateResidue.residue_theorem (ResidueTheorem.lean:348, with an extra admissibility hypothesis) and res_sup_add_res_inf, which may close these nodes later. Slopmaster2 has no such module, so B10 does not apply, and the earlier attachment was rejected upstream. The existing dvr node restates the abstract construction for (K,O), so a later split of it can cite the new abstract node. No fixes."
  }
 }
