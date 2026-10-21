@@ -23057,3 +23057,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 2026-10-21T16:36:20Z L: superseded stage-1 delivery Q09/lem-tw-lisse-rational-realization at 588637141ade1ca92cfef3ff47c755bcb3a0e3fc; current completion retained; packet archived at refs/superseded/Q09/lem-tw-lisse-rational-realization/588637141ade1ca92cfef3ff47c755bcb3a0e3fc; stale return retired.
 - 16:36 L: returned deliver/NK/lem-sfb-derived-cech-image-totalization (reviewer RETURN: L: independent stage-2 immutable head d2bb6cae7d2b: H2/H12: new def node def-sfb-coherent-cech-image-model cites lemma l)
+- 16:37 L: merged deliver/NM/lem-sfb-integral-quotient-exchange-comparison (stage 2; reviewer PASS; parallel immutable checks)
