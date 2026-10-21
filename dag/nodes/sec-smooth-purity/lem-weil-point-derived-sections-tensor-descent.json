@@ -21,105 +21,72 @@
  ],
  "proof": [
   {
-   "text": "Write $T(F)=F\\otimes_{R_E}R_L$, $V(N)=N\\otimes_{\\mathcal O_E}\\mathcal O_L$, and $\\Gamma_F=\\Gamma(s,-)$ on $R_F$-modules. The global datum has $k$ algebraically closed [def-weil-finite-field-fiber], so [lem-weil-point-proetale-sections-exact] applies to both $R_E$ and $R_L$. The coefficient-section identifications and exactness of $T,V$ are supplied by [lem-weil-point-finite-free-sections-tensor]. Thus all four functors $T,V,\\Gamma_E,\\Gamma_L$ are additive exact. By [lem-weil-pbc-exact-functor-derived-factorization] their termwise functors preserve every quasi-isomorphism and induce functors $T_D,V_D,\\Gamma_{E,D},\\Gamma_{L,D}$ on the unbounded derived categories. Hereafter suppress the canonical factorization isomorphisms when writing a complex for its localized object. In particular $A=V\\Gamma_E$ and $B=\\Gamma_LT$ preserve quasi-isomorphisms and have localized lifts $A_D=V_D\\Gamma_{E,D}$ and $B_D=\\Gamma_{L,D}T_D$.",
+   "text": "For the algebraically closed field k in [def-weil-finite-field-fiber], every maximal localization is k and is strictly henselian; its spectrum is a singleton and hence w-local with extremally disconnected component space. Apply the ring retraction criterion [lem-weil-pbc-wcontractible-geometric-criterion] and the independent-universe affine evaluation theorem [lem-weil-pbc-wcontractible-affine-weakly-contractible]. Evaluation sends epimorphisms of module sheaves to surjective maps: forget to abelian sheaves and then to set sheaves, apply that theorem, and use the module epimorphism criterion. Kernels are sectionwise, so evaluation is exact. Restriction along d.coefficientE and d.coefficientL preserves exactness, since forgetting to abelian groups preserves and reflects finite limits and colimits. This proves the sections exactness with the independently quantified site and coefficient universes. The two tensor exactness assertions are the fields of the input d from [lem-weil-point-finite-free-sections-tensor]. All four termwise functors therefore preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization].",
    "uses": [
     "def-weil-finite-field-fiber",
-    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-wcontractible-geometric-criterion",
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
     "lem-weil-point-finite-free-sections-tensor",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0982 and 098H; sites-cohomology.tex Tag 0946; same point evaluation argument as lem-weil-point-proetale-sections-exact, with independent universes"
+   }
+  },
+  {
+   "text": "Let T be the published ordinary scalar extension and LT its published derived extension, with universal homotopy counit epsilon. Exactness gives the standard isomorphism Qh followed by T_D is isomorphic to the homotopy extension followed by Qh. An invertible counit along a localization is a right Kan extension, so T_D is itself a left derived functor. Uniqueness of left derived functors identifies it with LT, using Mathlib Functor.isLeftDerivedFunctor_of_inverts and Functor.leftDerivedUnique. On each representative, leftDerivedNatTrans_app identifies the inverse comparison followed by the exact factorization with the published epsilon. The homotopy quotient factorization maps here are identities. This proves the comparison normalization directly, without constructing a K-flat resolution. The published derived pair is the one provided by [lem-pur-derived-change-of-rings].",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; exact-functor factorization, specialized using the two stated point lemmas"
+    "place": "Tags 015F and 06XN; Mathlib CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, isLeftDerivedFunctor_of_inverts, and LeftDerived.lean, leftDerivedUnique"
    }
   },
   {
-   "text": "Let $Q_E,Q_L$ be the localizations for $R_E,R_L$ and let $\\mathbb LT=-\\otimes^L_{R_E}R_L$ be [lem-pur-derived-change-of-rings]. Its left-derived counit is a natural transformation $\\epsilon_C:\\mathbb LT(Q_EC)\\to Q_L(TC)$. More precisely, use the left-derived construction of [lem-pur-left-derived-from-kflat-class] for the class of K-flat complexes with flat terms: [lem-pc-kflat-resolution] gives a quasi-isomorphism from an object of this class to every complex, and clause (1) of [lem-pur-derived-change-of-rings] says that $Q_LT$ inverts quasi-isomorphisms between these objects. The termwise functor on the homotopy category is exact (it is the composite of the triangulated $T_D$ with its localization, by step 1). Consequently this construction applies and its counit is an isomorphism on every member $P$ of that class. This is the left-derived functor already denoted $\\mathbb LT$, with its canonical counit. Pull the counit back along complexes to their homotopy category when considering cochain maps.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change, proof; derived.tex Tag 06XN, lemma-find-existence-computes, dual clause"
-   }
-  },
-  {
-   "text": "For any complex $C$, choose $q:P\\to C$ as in [lem-pc-kflat-resolution]. Naturality of the counit gives\n$$\\epsilon_C\\circ\\mathbb LT(Q_Eq)=Q_L(Tq)\\circ\\epsilon_P.$$\nThe left-derived functor sends the isomorphism $Q_Eq$ to an isomorphism, $Q_L(Tq)$ is invertible by step 1, and $\\epsilon_P$ is invertible by step 2. Hence\n$$\\epsilon_C=Q_L(Tq)\\circ\\epsilon_P\\circ\\mathbb LT(Q_Eq)^{-1}$$\nis invertible for every $C$. This deduction uses no K-flatness of $C$.",
-   "uses": [
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; explicit naturality equation for its derived counit"
-   }
-  },
-  {
-   "text": "Use the factorization $T_DQ_E\\cong Q_LT$ of step 1 to view $\\epsilon$ as a natural transformation between $\\mathbb LTQ_E$ and $T_DQ_E$. These are functors on complexes inverting quasi-isomorphisms. By parts (2) and (3) of [lem-weil-pbc-localization-universal-property], it descends uniquely to a natural transformation $c:\\mathbb LT\\to T_D$, with $c_{Q_EC}=\\epsilon_C$ under the factorization. Step 3 makes $\\epsilon$ a natural isomorphism; the same localization result lifts its inverse, so $c$ is a natural isomorphism. The required comparison $T_D\\xrightarrow{\\sim}\\mathbb LT$ is $c^{-1}$. Its normalization is fixed on every representative by the counit, and uniqueness follows from the same fully faithful precomposition property.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement as stated in the cited node, Mathlib Localization.liftNatIso"
-   }
-  },
-  {
-   "text": "The termwise balanced maps of [lem-weil-point-finite-free-sections-tensor] form a natural chain isomorphism $\\theta:A\\xrightarrow{\\sim}B$. After applying the target localization, [lem-weil-pbc-localization-universal-property] lifts it to a natural isomorphism $\\tau:A_D\\xrightarrow{\\sim}B_D$ with component $[\\theta_C]$ on each complex. Define\n$$\\theta^D_K=\\Gamma_{L,D}(c_K^{-1})\\circ\\tau_K.$$\nThis has source $\\Gamma_{E,D}(K)\\otimes_{\\mathcal O_E}\\mathcal O_L$ and target $\\Gamma_{L,D}(\\mathbb LT K)$, exactly as required. Each factor is a natural isomorphism on all of $D(R_E)$; hence so is their composite.",
+   "text": "Apply Localization.liftNatIso to d.complexes after target localization. The lift component formula, followed by cancellation of the target factorization inverse, gives localized_representative. Localization.natTrans_ext and cancellation of the factorization isomorphisms give localized_unique and comparison_unique. Define theta by the displayed composite of the exact-functor composition comparisons, this lift, and the derived scalar comparison. It is a natural isomorphism on the entire unbounded derived category.",
    "uses": [
     "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; lift the existing balanced chain isomorphism, then compose with the counit-normalized comparison"
+    "place": "Tag 04VG; Mathlib Localization.liftNatIso, liftNatTrans_app, natTrans_ext"
    }
   },
   {
-   "text": "For any K-flat resolution $q:P\\to C$ with flat terms put\n$$\\rho_q=\\epsilon_P\\circ\\mathbb LT(Q_Eq)^{-1}:\\mathbb LT(Q_EC)\\xrightarrow{\\sim}Q_L(TP).$$\nThis is the canonical resolution comparison of [lem-pur-derived-change-of-rings]. The equation of step 3 gives $c_{Q_EC}=Q_L(Tq)\\rho_q$. Naturality of the balanced chain map gives $[B(q)]\\,[\\theta_P]=[\\theta_C]\\,[A(q)]$. Substitution into step 5 therefore gives\n$$\\theta^D_{Q_EC}=\\Gamma_{L,D}(\\rho_q^{-1})\\circ[\\theta_P]\\circ[A(q)]^{-1}.$$\nHere $A(q)=V(\\Gamma_E(q))$ and $B(q)=\\Gamma_L(Tq)$ are quasi-isomorphisms by step 1, so the inverses exist. Thus this is precisely the stated termwise balanced map through the sections and tensor quasi-isomorphisms. For any second resolution the identical calculation yields the same $\\theta^D_{Q_EC}$; this proves independence without choosing a comparison cochain map between the resolutions.",
+   "text": "For any quasi-isomorphism q:P to C, naturality of the composite A_D to T_D followed by Gamma_L,D to LT followed by Gamma_L,D, at the inverse of Qq, moves its component at C past LT(Qq) inverse. Substitute the normalization c_P followed by epsilon_P equals the ordinary exact factorization. The composition-factorization equation for T and Gamma_L and the representative equation for localized reduce the remaining component at P to the prescribed termwise balanced map. This proves resolution for every q, even without its K-flat and flat-term hypotheses, so in particular for every resolution in the statement and independently of its choice. For a roof, apply naturality of localized to inverse(Qq) followed by Qf and use that functors preserve inverses. This gives precisely roof. No bound or constructibility assumption occurs.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-point-finite-free-sections-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; canonical K-flat computation and explicit substitution of the counit equation"
-   }
-  },
-  {
-   "text": "For a roof $C\\xleftarrow{q}H\\xrightarrow{f}J$ with $q$ a quasi-isomorphism, chain naturality from [lem-weil-point-finite-free-sections-tensor] reads\n$$[B(f)][\\theta_H]=[\\theta_J][A(f)],\\qquad [B(q)][\\theta_H]=[\\theta_C][A(q)].$$\nSince $[A(q)]$ and $[B(q)]$ are invertible, the second equation gives $[B(q)]^{-1}[\\theta_C]=[\\theta_H][A(q)]^{-1}$. Multiplying by $[B(f)]$ and using the first equation yields\n$$[B(f)][B(q)]^{-1}[\\theta_C]=[\\theta_J][A(f)][A(q)]^{-1}.$$\nThis is the requested formula (writing $K=C$ and suppressing brackets). It characterizes the localized transformation with the prescribed components by [lem-weil-pbc-localization-universal-property]. That result already supplies naturality for every derived morphism, and $c$ is natural as well, so the composite $\\theta^D$ has that full naturality. All arguments used unbounded complexes and exact functors, with no constructibility or completeness assumption.",
-   "uses": [
-    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; explicit inverse-arrow naturality calculation"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY; the explicit naturality and normalization calculation of the original node"
    }
   }
  ],
  "proof_deps": [
   "def-weil-finite-field-fiber",
-  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-wcontractible-geometric-criterion",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
   "lem-weil-point-finite-free-sections-tensor",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pc-kflat-resolution",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YY (lemma-derived-base-change), using derived.tex Tag 06XN (lemma-find-existence-computes) and the exact point functors; explicit counit, localization and roof calculations by Q137"
+  "place": "Tag 06YY; Q3 uses uniqueness of an exact left derived functor (015F/06XN), independent-universe point evaluation, and explicit localization/naturality calculations"
  },
  "mathlib_searches": [
   {
@@ -240,10 +207,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -279,5 +243,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Read the item node, all 10 stmt_deps, report, module, the PointFiniteFreeSectionsTensorData Lean and FiniteFreeCompletedScalarComparison. Node diff is lean-only; statement verbatim; not dropped; no prior delivery. Clause by clause: qiso preservation for all four functors; comparison with comparison_counit (= completedScalarCounit on every complex) and uniqueness; localized pinned by Q(theta_C) and unique; theta = compIso^-1 ≫ localized ≫ compIso ≫ whisker(comparison), the node's Gamma(c^-1)∘tau; resolution clause typed and re-derived for every flat-term K-flat q; roof equation matches B(f)B(q)^-1θ = θA(f)A(q)^-1. Quantified d is fully pinned (constantE/L, comparison_unique, complexes_hom), so no free arrow. No extra hypotheses; universes t/u/wE/wL independent; E=L and identity cases covered. Docstrings and the 6-step proof are present; sorry only. Advisories: derived extension and counit come via the def-weil-completed-integral-scalar-data re-export (.choose of lem-pur-derived-change-of-rings), cited transitively; unused private proof imports. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T225206-L-3792800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
