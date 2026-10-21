@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Put $A=K(\\mathcal C)$, let $W$ be its quasi-isomorphisms, and let $i:\\mathcal P\\hookrightarrow A$ be the full subcategory of K-flat complexes. The hypotheses of [lem-sfb-sequential-kflat-derivability] are precisely the hypotheses on $\\mathcal C$: flatness is two-sided, the colimits are indexed by the ordered integers, and no Grothendieck, symmetry or closedness assumption is needed. It supplies a left derivability structure for $i$ with $W_{\\mathcal P}=i^{-1}W$. The localization $Q_{\\mathcal C}:A\\to D(\\mathcal C)$ is the homotopy-category localization specified by [def-weil-abstract-derived-category]. If the preservation phrase in the statement is read as referring only to ordered-integer colimits, countable-coproduct preservation still follows: a countable coproduct is the colimit of its increasing finite partial biproducts, extended by zero to negative integer stages. Maps out of this colimit are exactly families of maps from its summands. An additive tensor functor preserves each finite biproduct and, by hypothesis, this integer colimit, hence preserves their countable coproduct.",
+   "text": "Put $A=K(\\mathcal C)$, let $W$ be its quasi-isomorphisms, and let $i:\\mathcal P\\hookrightarrow A$ be the full subcategory of K-flat complexes. The hypotheses of [lem-sfb-sequential-kflat-derivability] are precisely the hypotheses on $\\mathcal C$: flatness is two-sided, the colimits are indexed by the ordered integers, and no Grothendieck, symmetry or closedness assumption is needed. It supplies a left derivability structure for $i$ with $W_{\\mathcal P}=i^{-1}W$. The localization $Q_{\\mathcal C}:A\\to D(\\mathcal C)$ is the homotopy-category localization specified by [def-weil-abstract-derived-category]. If the preservation phrase in the statement is read as referring only to ordered-integer colimits, countable-coproduct preservation still follows: a countable coproduct is the colimit of its increasing finite partial biproducts, extended by zero to negative integer stages. Maps out of this colimit are exactly families of maps from its summands. An additive tensor functor preserves each finite biproduct and, by hypothesis, this integer colimit, hence preserves their countable coproduct. In Lean, preservation of countable coproducts is proved by the final functor Int.toNat from the ordered integers to the naturals, followed by the final sequential functor to the countable directed preorder of finite subsets of the index set. Express the coproduct as the colimit of its finite subcoproducts. Additivity makes the finite coproduct comparison maps invertible, and preservation of the directed colimit makes the full coproduct comparison invertible. These preservation instances supply the graded tensor coherence hypotheses in the existing source K-flat derivability theorem. The two-sided binary-total-tensor predicate agrees definitionally with the source monoidal K-flat predicate.",
    "uses": [
     "lem-sfb-sequential-kflat-derivability",
     "def-weil-abstract-derived-category"
@@ -57,12 +57,11 @@
    }
   },
   {
-   "text": "For any complex $K$, [lem-sfb-unbounded-kflat-resolution-existence] supplies a quasi-isomorphism $q:P\\to K$ with $P$ K-flat, under exactly the flat-resolution and colimit hypotheses here. For any such $q$, not only a chosen one, $Q_{\\mathcal C}(q)$ is invertible by [def-weil-abstract-derived-category], and $\\varepsilon_P$ is invertible by step 3. Consequently the composite\n$$LF(Q_{\\mathcal C}K)\\xrightarrow{LF((Q_{\\mathcal C}q)^{-1})}LF(Q_{\\mathcal C}P)\\xrightarrow{\\varepsilon_P}Q_{\\mathcal D}(FP)$$\nis an isomorphism. This is the stated resolution formula. In particular two resolutions produce canonically isomorphic values by composing their displayed isomorphisms through $LF(Q_{\\mathcal C}K)$; the counit naturality equation $G(a)\\varepsilon_P=\\varepsilon_{P'}LF(Q_{\\mathcal C}a)$ for $a:P\\to P'$ proves compatibility whenever $q=q'a$. The value is determined by the already constructed universal functor, so no unproved assertion about a common chain-map refinement of two resolutions is used.",
+   "text": "For any given quasi-isomorphism q:P→K with P K-flat, Q_C(q) is invertible by [def-weil-abstract-derived-category], and the counit at P is invertible by step 3. Apply LF to the inverse of Q_C(q), compose with the inverse of the canonical quotientCompQhIso at P, then with the counit at the homotopy image of P, and finally with quotientCompQhIso at F(P). This gives the asserted isomorphism LF(Q_C K) ≅ Q_D(F(P)). No separate resolution-existence theorem is needed for this conditional formula: existence already enters through the derivability structure in step 1.",
    "uses": [
-    "lem-sfb-unbounded-kflat-resolution-existence",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
     "place": "Resolution-existence sentences and the formula LF(K)=F(P); explicit isomorphism and comparison"
@@ -73,13 +72,12 @@
   "lem-sfb-sequential-kflat-derivability",
   "def-weil-abstract-derived-category",
   "def-sfb-preserves-kflat-quasi-iso",
-  "lem-sfb-unary-left-derived-calculus",
-  "lem-sfb-unbounded-kflat-resolution-existence"
+  "lem-sfb-unary-left-derived-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
-  "place": "Entire proof; the hidden general-hypothesis K-flat derivability assertion is isolated, existing resolution and unary-calculus statements are reused, and the resolution formula is written as an explicit isomorphism"
+  "place": "Existing K-flat derivability and unary calculus, with Mathlib finite-subcoproduct and final-sequential-functor glue to discharge the source graded tensor hypotheses; explicit isomorphism for a given resolution (A7, 2026-10-21)."
  },
  "mathlib_searches": [
   {
@@ -198,5 +196,15 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-37aa48a15 (reviewer sub-agent of L); spot-checked: Read the main-20261015 statement and proof of def-sfb-left-derived-functor, all four steps, the new node lem-sfb-sequential-kflat-derivability and every cited statement (unary-left-derived-calculus, unbounded-kflat-resolution-existence, preserves-kflat-quasi-iso, abstract-derived-category, left-derivability-structure). The statement keeps the source paragraph verbatim; the added paragraph only spells out notions, consistent with the unit's left-derived bullet; no weakening. Step 1: new-node hypotheses match the item exactly; Q_C is the K(C) localization by def-weil-abstract-derived-category; the derivation of countable-coproduct preservation from finite partial biproducts plus Z-colimit preservation is correct. Step 2 is elementary (termwise F; the definition says F(s) is a quasi-isomorphism). Step 3: all hypotheses of the unary calculus checked; existence, the Nat bijection and the iff-criterion are in its statement. Step 4: the composite iso and the naturality compatibility q=q'a were verified algebraically. New node is true: (a) is the resolution-existence node; (b) holds because K-flat is a triangulated, homotopy-closed subcategory, E is an equivalence via lem-trf-right-fraction-dense-subcategory, and connectedness follows from a homotopy pullback plus a K-flat resolution. It matches FromJoel Flat/KFlat.lean lines 416-438. Not a duplicate: lem-sfb-kflat-derivability needs Grothendieck and all colimits, so the new node generalizes its derivability clause (maintainer note). The other candidates cover only resolution existence or functorial or pointwise criteria. No cycle. The tool use of unary-left-derived-calculus (other unit, generic) is accepted. No re-split note applies. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261021T110920-L-3801136",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
