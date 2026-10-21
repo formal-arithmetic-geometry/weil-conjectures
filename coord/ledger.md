@@ -21467,3 +21467,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q100/lem-sp-normalized-error-tower-vanishing (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q23/lem-pur-support-comparison-common-injectives (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q69/lem-sfb-lattice-supported-hom-reduction-tower (reviewer PASS; first push; new nodes: 0); claim not held by Q69: not your claim
+- 08:58 L: merged deliver/Q04/lem-sf-complete-top-residue-cell-cone (reviewer FIX; first push; new nodes: 0)

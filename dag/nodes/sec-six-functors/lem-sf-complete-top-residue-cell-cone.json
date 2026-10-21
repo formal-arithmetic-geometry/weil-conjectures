@@ -21,9 +21,121 @@
   "def-weil-proetale-tor-amplitude",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sf-complete-residue-cohomology-bounds] to $M$: quasi-compactness, quotient-tower completeness and the stated residue Tor bound give $H^{b+1}(M)=0$. Apply the $n=1$ reduction triangle of [lem-sf-completed-coefficient-free-resolution] and its long exact cohomology sequence [lem-sf-derived-homology-long-exact]. The segment $H^b(M)\\to H^b(\\operatorname{Res}M_1)\\to H^{b+1}(M)$ shows that the canonical reduction map $H^b(M)\\to H^b(M_1)$, regarded in $B_T$-modules, is an epimorphism.",
+   "uses": [
+    "lem-sf-complete-residue-cohomology-bounds",
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09C2 (lemma-describe-constructible-complexes), proof of (1)-(2), and 09C3 (lemma-local-structure-constructible-complex), final induction paragraph; long exact sequence: derived.tex Tag 05RS, lemma-cohomology-homological"
+   }
+  },
+  {
+   "text": "Evaluation at $T$ preserves homology by [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact], under exactly the assumed epimorphism-surjectivity hypothesis; applying it to the epimorphism in step 1 makes the map on sections surjective. Lift each section $\\theta_b(e_i)$ to $x_i\\in H^b(M)(T)$. The shifted-free Hom bijection of [lem-sf-projective-cohomology-split-model], with $C=B_T$, gives $f:B_T^{\\oplus r_b}[-b]\\to M$ with generator images $x_i$. After derived scalar extension each generator maps to the reduction of $x_i$, hence $H^b(f_1)(e_i)=\\theta_b(e_i)$ and $H^b(f_1)=\\theta_b$. If $r_b=0$, the tuple is empty and this is the unique map from zero.",
+   "uses": [
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "lem-sf-projective-cohomology-split-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, lifting rho to tilde rho; sites-cohomology.tex Tag 0946, lemma-w-contractible; derived.tex Tag 064B, lemma-morphisms-from-projective-complex"
+   }
+  },
+  {
+   "text": "Complete $f$ to a distinguished triangle $P[-b]\\to M\\to L\\to P[-b+1]$, using TR1 of [def-weil-triangulated-category] in the derived category [def-weil-abstract-derived-category]. The source $P[-b]$ is quotient-tower complete by [lem-sf-completed-coefficient-free-resolution]. The canonical ring-sheaf identification $B_T\\cong\\mathcal O_{E,T}$ of [det-prop-sfb-qlbar-colimit-x-integral-limit] identifies the actual quotient maps, their transitions and the completeness comparison with those of [sk-def-pe-derived-completion]: the maps to the constant finite quotients are the inverse-limit projections. Thus both source and target are complete in the convention of [det-pe-derived-nakayama-first-reduction]. Its closure-under-cones clause makes $L$ complete, and the same identification gives quotient-tower completeness of $L$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category",
+    "lem-sf-completed-coefficient-free-resolution",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "sk-def-pe-derived-completion",
+    "det-pe-derived-nakayama-first-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, triangle in the final induction paragraph; completeness: lemma-derived-complete-zero and derived completion section; the cited integral-limit identification fixes the coefficient convention"
+   }
+  },
+  {
+   "text": "Derived extension along $B_T\\to k_T$ is exact by [lem-pur-derived-change-of-rings], so the triangle in step 3 reduces to a distinguished triangle with third term $L_1=L\\otimes^L_{B_T}k_T$. The single-term complex $P[-b]$ is K-flat [def-pc-kflat-complex]: its tensor with an acyclic complex is a finite sum of shifts of that complex. Thus its reduction is $k_T^{\\oplus r_b}[-b]$, with its actual free generators. The Tor bound implies $H^q(M_1)=0$ outside $[a,b]$ by taking the test module $k_T$. Apply [lem-sf-projective-cohomology-split-model] with $C=k_T$, $N=M_1$, and the given $\\theta_q$. It supplies the zero-differential model $V=\\bigoplus_{q=a}^b k_T^{\\oplus r_q}[-q]$. Let $\\varphi:V\\xrightarrow{\\sim}M_1$ be any isomorphism in the derived category inducing the $\\theta_q$, and let $i$ be the top summand inclusion. Then $\\varphi\\circ i$ and $f_1$ both send the standard generators to $\\theta_b(e_j)\\in H^b(M_1)(T)$, so by the injectivity of the shifted-free Hom bijection of [lem-sf-projective-cohomology-split-model] (for $C=k_T$, $q=b$, $r=r_b$) $f_1=\\varphi\\circ i$: under every such model $f_1$ is exactly $i$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex",
+    "lem-sf-projective-cohomology-split-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, assertion about the reduced cone in the last paragraph; scalar extension: sites-cohomology.tex Tag 06YY, lemma-derived-base-change; projective representatives: derived.tex Tag 064B"
+   }
+  },
+  {
+   "text": "Put $A=k_T^{\\oplus r_b}[-b]$ and $W=\\bigoplus_{q=a}^{b-1}k_T^{\\oplus r_q}[-q]$. By the cone formula in [def-weil-abstract-derived-category], $C(i)^j=V^j\\oplus A^{j+1}$ and $d(v,x)=(i(x),0)$. Splitting $V=W\\oplus A$ gives $C(i)=W\\oplus D$, where $D$ has $k_T^{\\oplus r_b}$ in degrees $b-1,b$ and differential the identity. On $D$ set $h^b=\\mathrm{id}:D^b\\to D^{b-1}$ and $h^j=0$ otherwise. In degrees $b-1$ and $b$, respectively, $hd=\\mathrm{id}$ and $dh=\\mathrm{id}$; hence $dh+hd=\\mathrm{id}_D$. Projection to $W$ and its inclusion are inverse up to this homotopy and induce cohomology isomorphisms. Therefore $C(i)\\cong W$ in the derived category. TR3 [def-weil-triangulated-category] extends the identity on $A$ and the chosen isomorphism $M_1\\cong V$ to a morphism from the reduced triangle to the cone triangle of $i$. Its third map $L_1\\to C(i)$ is an isomorphism by [lem-sf-triangle-morphism-iso]. This proves the asserted cone model and $L_1\\cong W$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, and Tag 014A, lemma-third-isomorphism-triangle; explicit identity-complex contraction expanding the details omitted in proetale.tex Tag 09C3"
+   }
+  },
+  {
+   "text": "For any site object $V'\\to T$, the model $W|_{V'}$ is the finite sum $\\bigoplus_{q=a}^{b-1}k_{V'}^{\\oplus r_q}[-q]$ with zero differential. For an acyclic complex $F$, its total tensor with this model is a finite direct sum of reindexed copies of $F$, with differentials $d_F$ or $-d_F$ according to the totalization order, hence is acyclic, so the model is K-flat by [def-pc-kflat-complex]. By [def-weil-derived-tensor] its derived tensor with any degree-zero $k_{V'}$-module sheaf $N$ is therefore the zero-differential complex $\\bigoplus_{q=a}^{b-1}N^{\\oplus r_q}[-q]$. This has no terms outside $[a,b-1]$. When $a<b$ this proves the required Tor amplitude on every site object, while taking $N=k_{V'}$ gives exactly the constant finite-dimensional cohomology and its stated ranks. Finite sums and shifts here are literal operations on complexes, so the computation uses no preservation-of-completeness under restriction.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat, and Section 06YL (section-flat), tensor total-complex construction; elementary finite split-complex calculation expanding proetale.tex Tag 09C3"
+   }
+  },
+  {
+   "text": "If $a=b$, the direct sum $W$ is empty, so step 5 gives $L_1=0$. The complete object $L$ of step 3 is zero by [det-pe-derived-nakayama-first-reduction]. The triangle then makes $f$ an isomorphism by [lem-kun-distinguished-cone-zero]. If $r_b=0$ and $a<b$, $P=0$, $D=0$, and the cone model in step 5 is simply $W$; thus the construction and amplitude argument also cover that case. If $T$ is empty, all module sheaves and all these maps are zero and the same argument applies.",
+   "uses": [
+    "det-pe-derived-nakayama-first-reduction",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, base case; derived.tex Tag 05QR, lemma-third-object-zero; derived complete zero detection as in the cited Nakayama node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-complete-residue-cohomology-bounds",
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-sf-projective-cohomology-split-model",
+  "def-weil-triangulated-category",
+  "def-weil-abstract-derived-category",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-pe-derived-completion",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-derived-tensor",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final top-generator triangle; field-residue specialization with explicit contraction of the identity pair omitted by the source, using Tag 09C2 for the upper cohomology bound."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +164,45 @@
    "results": "0 hits:  (Mathlib/Algebra/Homology)",
    "date": "2026-10-21",
    "verdict": "no match: truncation support and injective/projective resolutions do not construct the lifted integral top cell with its specified residue cone and amplitude decrease."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(cone|amplitude)|lift.*residue|TorAmplitude",
+   "results": "0 hits:  (Mathlib/Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: these are generic cone/projective/injective constructions or ordinary adic completion results, not the lifted top cell for a derived complete sheaf complex with prescribed residue basis and complete cone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complex over a discrete valuation ring with projective residue cohomology admits a lifted top generator whose cone has shorter Tor amplitude",
+   "results": "8 hits: IsLocalRing.finrank_CotangentSpace_eq_one, CategoryTheory.ShortComplex.Exact.liftFromProjective, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CochainComplex.mappingCone.lift, CochainComplex.mappingCone.δ_liftCochain, CochainComplex.mappingCone.liftCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: these are generic cone/projective/injective constructions or ordinary adic completion results, not the lifted top cell for a derived complete sheaf complex with prescribed residue basis and complete cone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"mappingCone\"",
+   "results": "12 hits: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: these are generic cone/projective/injective constructions or ordinary adic completion results, not the lifted top cell for a derived complete sheaf complex with prescribed residue basis and complete cone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a top residue cohomology basis of a derived complete complex of module sheaves to a finite free cell and compute its cone",
+   "results": "8 hits: CochainComplex.cm5b.I, CochainComplex.cm5b, CochainComplex.cm5b.i, CochainComplex.cm5b.I_X, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CategoryTheory.InjectiveResolution.ofCocomplex, CochainComplex.IsKProjective",
+   "date": "2026-10-21",
+   "verdict": "no match: these are generic cone/projective/injective constructions or ordinary adic completion results, not the lifted top cell for a derived complete sheaf complex with prescribed residue basis and complete cone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect residue complex splits as its free cohomology groups; remove the highest degree summand of an adically complete sheaf complex by lifting its basis",
+   "results": "8 hits: BDeRhamPlus, Profinite.NobelingProof.succ_exact, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, AdicCompletion.map_exact, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+   "date": "2026-10-21",
+   "verdict": "no match: these are generic cone/projective/injective constructions or ordinary adic completion results, not the lifted top cell for a derived complete sheaf complex with prescribed residue basis and complete cone."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-residue-lisse-projective-models",
@@ -75,5 +222,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-complete-top-residue-cell-cone",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all imported metadata. Lifted the prescribed top residue basis using the complete cohomology bound, the actual uniformizer reduction triangle, exact evaluation and the shifted-free Hom bijection. Identified completeness through the canonical completed coefficient sheaf. Computed the reduced cone and its contraction explicitly, including the singleton interval, zero rank and empty scheme. All dependencies already exist; no new nodes.",
+  "blueprint": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: A lifted top residue cell with a complete cone of shorter amplitude; old parent steps 5-6. Realizes the extracted top-generator lift, complete cone, residue contraction and endpoint case (old parent steps 5-6), entirely below the fixed unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "Generic exact-evaluation theorem under the precise weak contractibility hypothesis; needed to lift the finitely many basis sections, with no affine assumption."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Canonical identification of the inverse-limit ring sheaf with the pulled-back integral sheaf, needed to apply the existing Nakayama completeness convention without changing quotient maps."
+   },
+   {
+    "node": "det-pe-derived-nakayama-first-reduction",
+    "why": "Closure under cones and residue conservativity for derived complete objects; these are generic completeness tools, not the top-cell construction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exact derived change of rings sends the constructed triangle to the residue triangle; this generic ringed-site theorem applies to the nonconstant completed ring sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-0cf47139d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-0cf47139d (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, all 15 cited statements, and Stacks 09C3 (proetale.tex, the 'If b > a' paragraph whose residue-cone Tor-amplitude details are omitted). The item is still unsplit on live, is not on the dropped list, has no repair note and is not superseded. There are 0 new nodes, the statement and metadata are unchanged, and there is no cycle (BFS over 750 reachable nodes). Step checks: step 1, bounds node gives H^{b+1}(M)=0, then the n=1 reduction triangle and the long exact sequence give an epimorphism on H^b. Step 2, exact evaluation gives surjectivity on T-sections, and the Hom bijection of the split-model node (with C=B_T, valid for any A) lifts the basis; f_1 induces theta_b by naturality of the reduction unit. Step 3, the ring identification O_{E,T} = lim (O_E/pi^n)_T (det-prop-sfb-qlbar-colimit-x-integral-limit (3)) matches completeness with sk-def-pe-derived-completion, and the Nakayama node's cone-closure clause makes L complete. Step 5, I checked C(i)^j = V^j + A^{j+1}: the extra copy sits in degree b-1 with identity differential, h^b = id gives dh+hd = id, and TR3 plus the triangle-iso leaf finish. Step 6, the elementary K-flat tensor computation gives Tor amplitude [a,b-1]. Step 7 covers a=b, r_b=0 and empty T. Small-case test: T a geometric point, M = B + k in degree 0, f: B^2 -> B + k gives L = B[1] and L_1 = k[1], as the statement predicts. The worker's tool_uses (evaluation-exact, qlbar integral limit, Nakayama, pur change of rings) are generic tools and accepted. FIX (C4): step 4 said the split-model node gives 'under every such model f_1 is the top inclusion', but the node states this only for its displayed chain-map model V -> Z. I rewrote the step to derive it for any isomorphism phi: V -> M_1 in D inducing theta_q: phi composed with i and f_1 send the generators to the same theta_b(e_j), so they are equal by injectivity of the shifted-free Hom bijection (C=k_T, q=b). The whole node file is in fixes/dag/nodes/sec-six-functors/; only that sentence changed.; 1 file(s) fixed by the reviewer"
  }
 }
