@@ -1,0 +1,151 @@
+{
+ "id": "lem-amb-etale-left-comparison-base-change",
+ "kind": "statement",
+ "title": "Etale compact-support composition comparison commutes with base change",
+ "statement": "Let A be a finite commutative ring and N an EtaleCompactSupportNormalization A. Let U, X, B, Uprime, Xprime and Bprime be Noetherian schemes, u:U→X and uprime:Uprime→Xprime separated etale finite-type maps, and f:X→B a separated finite-type map. Suppose f, fprime:Xprime→Bprime, u f and uprime fprime are compactifiable, with the primed maps quasi-compact. Take Cartesian squares (r,fprime,f,v), (r1,uprime,u,r), and (r1,uprime fprime,u f,v). Write E and Eprime for derived sum extension, F and Fprime for compact support of f and fprime, T and Tprime for compact support of u f and uprime fprime. Let alpha:E⋙F≅T and alphaprime:Eprime⋙Fprime≅Tprime be etaleAmbientLeftComparison for the chosen compactifications. Let xi_f and xi_uf be inverse compact-support exchange, and J:u*⋙r1*≅r*⋙uprime* the canonical inverse-image square. For the exact sum/restriction adjunctions transported to left-derived inverse image, let xi_u be the inverse mate of J.hom. Then for every M in D(U_et,A), xi_uf(M) ≫ v*(alpha.inv(M)) = alphaprime.inv(r1*M) ≫ Fprime(xi_u(M)) ≫ xi_f(E(M)). This uses the scheme and derived-category notation and actual comparisons of [def-pc-scheme], [def-weil-pbc-derived-categories], [lem-amb-etale-adjoint-locality], [lem-asd-etale-compact-support-normalization], [def-asd-smooth-dualizing-base-change-arrows] and [lem-weil-pbc-mate-pasting].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J and 0F7L: compact-support composition and compatibility with base change; etale-cohomology.tex, Tag 03S6: sum-extension exchange as the comparison of left adjoints."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-etale-compact-support-normalization",
+  "def-asd-smooth-dualizing-base-change-arrows",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Expand the graph-normalized etale left comparison into inverse sum/compact-support comparison, compatible-tower compact-support composition, and independence of compactification. Use compact-support composition/base-change compatibility. Graph normalization and refinement coherence identify the etale exchange on the factor with inverse sum-extension exchange. This gives the equation with inverse sum exchange in the middle. More explicitly, the normalization refinement law and the actual proper-refinement comparison formula give I(d,c).hom followed by N.comparison(u,c).hom equal to N.comparison(u,d).hom. Passing through a common refinement and cancelling by the cocycle extends this to arbitrary compactifications. Thus alpha equals the canonical chosen-compactification compositor preceded by the inverse chosen graph comparison. The composition/exchange equation, with N.base_change on the etale factor, gives the stated equation with inverse sum exchange in place of xi_u. The unique isomorphism to the chosen fibre product transports this calculation to any Cartesian square, with exactly the displayed inverse-image compositor.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J and 0F7L: compact-support composition and compatibility with base change; etale-cohomology.tex, Tag 03S6: sum-extension exchange as the comparison of left adjoints."
+   }
+  },
+  {
+   "text": "The sum-extension comparison of Tag 03S6 is the conjugate of ordinary inverse-image/direct-image exchange. Transpose its evaluation composite under the two sum/restriction adjunctions. Naturality and the triangle identities identify its mate with the canonical commuting inverse-image square. This is a sheaf equality; exactness descends it degreewise to the whole unbounded derived categories. Transport to left-derived inverse image using its canonical exact-functor comparison. Write ev for evaluation and beta for inverse sum exchange. The required mate equation is Eprime(J_M) followed by evprime equal to beta(u*M) followed by r*(ev_M). Transpose both sides under the composite sum-extension/inverse-image adjunction. For the right side, the defining conjugate formula, exchange naturality and the sum-extension triangle reduce its transpose to ordinary exchange followed by the inverse-image unit. Expanding ordinary exchange as the transpose of the commuting pullback square, and applying its naturality and the inverse-image triangle, gives r1_*(J_M) followed by unit_r1. The transpose of the left side is this same map by the sum-extension triangle identity. Injectivity of the Hom bijection proves the counit equation, so injectivity of the mates correspondence identifies beta with the displayed inverse mate.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, proof: the comparison obtained from the right adjoints; transpose and evaluation calculation."
+   }
+  },
+  {
+   "text": "Insert this inverse-mate description of the sum exchange into the equation from the first step, evaluate at M, and cancel the invertible comparisons. The resulting equality is exactly the stated component equation, including its pullback compositors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J and 0F7L: compact-support composition and compatibility with base change; etale-cohomology.tex, Tag 03S6: sum-extension exchange as the comparison of left adjoints."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-underived-exchange",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J and 0F7L: compact-support composition and compatibility with base change; etale-cohomology.tex, Tag 03S6: sum-extension exchange as the comparison of left adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale sum extension compact support composition commutes with base change under canonical adjunction mates",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, IsBaseChange.directSumPow, SheafOfModules.pushforwardPushforwardAdj, CompHausLike.LocallyConstant.adjunction, SheafOfModules.pullbackComp, Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.comp. None states the specified compact-support comparison; only generic sheaf adjunction and étale/base-change infrastructure is relevant.",
+   "date": "2026-10-21",
+   "verdict": "No matching geometric comparison declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support composition comparison compatible with etale sum extension base change and adjunction mates",
+   "results": "8 hits, including CompHausLike.LocallyConstant.adjunction_left_triangle and SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; no compact-support composition identity.",
+   "date": "2026-10-21",
+   "verdict": "No match; generic adjunction and sheaf infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp, mateEquiv_vcomp, mateEquiv_hcomp, iterated mate/conjugate identities, and mateEquiv_apply.",
+   "date": "2026-10-21",
+   "verdict": "Generic infrastructure; no compatibility of the specified geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleAmbientLeftComparison|[Ee]tale.*[Ss]um.*[Ee]xchange",
+   "results": "0 Mathlib hits. Repository search found the normalization fields and the unbounded compact-support composition equation, but no equation relating the etale left comparison to the inverse mate of the canonical pullback square.",
+   "date": "2026-10-21",
+   "verdict": "No existing matching declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionExceptionalFibreCoherence",
+  "date": "2026-10-21",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-exceptional-fibre-coherence",
+   "place": "Proof Steps 4–6: compatibility of the left composition comparison, before taking mates.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAmbientLeftComparisonBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAmbientLeftComparisonBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleAmbientLeftComparison_baseChange",
+  "statement": "theorem etaleAmbientLeftComparison_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : EtaleCompactSupportNormalization A)\n    {U X B U' X' B' : Scheme.{u}}\n    [IsNoetherian U] [IsNoetherian X] [IsNoetherian B]\n    [IsNoetherian U'] [IsNoetherian X'] [IsNoetherian B']\n    (u : U ⟶ X) (f : X ⟶ B) (u' : U' ⟶ X') (f' : X' ⟶ B')\n    [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]\n    [Etale u'] [IsSeparated u'] [LocallyOfFiniteType u'] [QuasiCompact u']\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f] [HasCompactification f']\n    [HasCompactification (u ≫ f)] [HasCompactification (u' ≫ f')]\n    [QuasiCompact f'] [QuasiCompact (u' ≫ f')]\n    (v : B' ⟶ B) (r : X' ⟶ X) (r₁ : U' ⟶ U)\n    (sq : IsPullback r f' f v) (sqU : IsPullback r₁ u' u r)\n    (sq₁ : IsPullback r₁ (u' ≫ f') (u ≫ f) v)\n    (M : DerivedCategoryModule A U) :\n    letI := isIso_rightDerivedLowerShriekBaseChangeMap A sq\n    letI := isIso_rightDerivedLowerShriekBaseChangeMap A sq₁\n    (inv (rightDerivedLowerShriekBaseChangeMap A sq₁)).app M ≫\n        (upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.map\n          ((etaleAmbientLeftComparison A N u f\n            (HasCompactification.compactification f)\n            (HasCompactification.compactification (u ≫ f))).inv.app M) =\n      (etaleAmbientLeftComparison A N u' f'\n        (HasCompactification.compactification f')\n        (HasCompactification.compactification (u' ≫ f'))).inv.app\n          ((upperStar (ModuleCat.{u + 1} A) r₁).leftDerivedFunctor.obj M) ≫\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').map\n        (((mateEquiv\n          ((derivedEtaleLowerShriekUpperStarAdjunction\n            (ModuleCat.{u + 1} A) u inferInstance).ofNatIsoRight\n              (leftDerivedUpperStarIsoMapDerivedCategory\n                (ModuleCat.{u + 1} A) u).symm)\n          ((derivedEtaleLowerShriekUpperStarAdjunction\n            (ModuleCat.{u + 1} A) u' inferInstance).ofNatIsoRight\n              (leftDerivedUpperStarIsoMapDerivedCategory\n                (ModuleCat.{u + 1} A) u').symm)).symm\n          (TwoSquare.mk _ _ _ _\n            (((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) r₁ u).symm ≪≫\n              leftDerivedUpperStarComp (ModuleCat.{u + 1} A) u' r (r₁ ≫ u)\n                sqU.w).hom))).natTrans.app M) ≫\n      (inv (rightDerivedLowerShriekBaseChangeMap A sq)).app\n        ((etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261021T130121-L-2540474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261021T130121-L-2540474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
