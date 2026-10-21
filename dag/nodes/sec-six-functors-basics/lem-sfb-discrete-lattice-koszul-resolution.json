@@ -2,7 +2,7 @@
  "id": "lem-sfb-discrete-lattice-koszul-resolution",
  "kind": "statement",
  "title": "Discrete lattice derived invariants via a sheaf-module Koszul resolution",
- "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $r\\geq0$, and let $P$ be an internal $R$-module [sk-def-sfb-module-objects] equipped with pairwise commuting $R$-linear automorphisms $T_1,\\ldots,T_r$. Equivalently $P$ has an action of the discrete group $D=\\mathbf Z^r$, whose $i$th basis vector acts as $T_i$. Write $R\\Gamma_D$ for the ordinary total right derived functor of invariants on $D$-equivariant internal $R$-modules. Define the cochain complex $K_R(P;T)$ in degrees $0,\\ldots,r$ by\n$$K_R(P;T)^a=\\bigoplus_{I\\subseteq\\{1,\\ldots,r\\},\\ |I|=a}P,\\qquad (dx)_J=\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(T_i-1)x_{J\\setminus\\{i\\}}.$$\nThere is a natural isomorphism\n$$\\lambda_R:K_R(P;T)\\xrightarrow{\\sim}R\\Gamma_D(P)$$\nin the ordinary derived category of internal $R$-modules [def-weil-abstract-derived-category]. Its map from $P^D[0]$ is the degree-zero inclusion of invariant elements into $K_R(P;T)^0=P$. For a morphism $\\varphi:R\\to R'$ of commutative condensed rings, an internal $R'$-module $P'$ with commuting automorphisms $T'_i$, and an $R$-linear equivariant morphism $f:P\\to\\operatorname{Res}_\\varphi P'$, the square with rows $\\lambda_R,\\operatorname{Res}_\\varphi\\lambda_{R'}$ and columns the termwise map induced by $f$ and the canonical derived coefficient map $R\\Gamma_D(P)\\to\\operatorname{Res}_\\varphi R\\Gamma_D(P')$ commutes. For $r=0$, $\\lambda_R$ is the identity $P[0]$.",
+ "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $r\\geq0$, and let $P$ be an internal $R$-module [sk-def-sfb-module-objects] equipped with pairwise commuting $R$-linear automorphisms $T_1,\\ldots,T_r$. Equivalently $P$ has an action of the discrete group $D=\\mathbf Z^r$, whose $i$th basis vector acts as $T_i$. Write $R\\Gamma_D$ for the ordinary total right derived functor [def-sfb-right-derived-functor] of invariants on $D$-equivariant internal $R$-modules. Define the cochain complex $K_R(P;T)$ in degrees $0,\\ldots,r$ by\n$$K_R(P;T)^a=\\bigoplus_{I\\subseteq\\{1,\\ldots,r\\},\\ |I|=a}P,\\qquad (dx)_J=\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(T_i-1)x_{J\\setminus\\{i\\}}.$$\nThere is a natural isomorphism\n$$\\lambda_R:K_R(P;T)\\xrightarrow{\\sim}R\\Gamma_D(P)$$\nin the ordinary derived category of internal $R$-modules [def-weil-abstract-derived-category]. Its map from $P^D[0]$ is the degree-zero inclusion of invariant elements into $K_R(P;T)^0=P$. For a morphism $\\varphi:R\\to R'$ of commutative condensed rings, an internal $R'$-module $P'$ with commuting automorphisms $T'_i$, and an $R$-linear equivariant morphism $f:P\\to\\operatorname{Res}_\\varphi P'$ to the scalar restriction [def-pc-sheaf-restrict-scalars] (same underlying internal module, $R$ acting through $\\varphi$), the square with rows $\\lambda_R,\\operatorname{Res}_\\varphi\\lambda_{R'}$ and columns the termwise map induced by $f$ and the canonical derived coefficient map $R\\Gamma_D(P)\\to\\operatorname{Res}_\\varphi R\\Gamma_D(P')$ commutes. For $r=0$, $\\lambda_R$ is the identity $P[0]$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; algebraic lattice calculation. Agent internalization of the Laurent-polynomial Koszul resolution; compare Stacks Tags 0623 (more-algebra.tex, definition-koszul-complex) and 062F (lemma-regular-koszul-regular), which supply algebraic ingredients only."
@@ -10,11 +10,168 @@
  "stmt_deps": [
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-objects",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal M_R$ be the internal module category and $\\mathcal E_R$ its category of $D$-actions. Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and [sk-def-sfb-sheaf-tensor] to identify internal modules with section-ring module sheaves on the condensed site; the equivalence leaves sections, restrictions and underlying abelian sheaves unchanged. These actions are functors from the one-object category $BD$ to $\\mathcal M_R$: a functor assigns to each $v\\in D$ its module automorphism. Choose the small coefficient site and universes of [def-weil-size-convention]. By [lem-weil-pbc-small-module-diagrams-grothendieck], with $J=BD$, $\\mathcal E_R$ is Grothendieck abelian, hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Invariants are right adjoint to the exact trivial-action functor: a map from a trivial-action module is equivariant exactly when its image is fixed by every $u_i$. Thus invariants are additive and left exact. Choose $P\\to I^\\bullet$, zero in negative degrees, an equivariant injective resolution in the sense of [def-sp-injective-resolutions].",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-module-objects",
+    "def-weil-size-convention",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-lattice-cubical-contraction]. Replace each integral basis symbol $[v,I]$ by a copy of $R$ and every integral matrix entry by the corresponding multiple of the identity, obtaining $L_a=\\bigoplus_{|I|=a}\\bigoplus_{v\\in D}R$ in $\\mathcal E_R$, with translation action, the same boundary and augmentation $L_0\\to R$. Each column of every matrix is finite because its image is an element of a free abelian group; the maps therefore exist by the coproduct universal property. The contraction identities remain identities of morphisms. Thus the underlying augmented complex is split exact. This construction also works with any internal module $Q$ in place of $R$, giving the augmented exact complex $\\bigoplus_{I,v}Q\\to Q$. Exactness is also equivariant: kernels and cokernels of a diagram of module sheaves are computed on its underlying sheaves, by [lem-sfb-internal-action-site-presentation], applied to the constant condensed group $D$. The contraction itself is only nonequivariant, as allowed by the cited algebraic lemma.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice."
+   }
+  },
+  {
+   "text": "For equivariantly injective $J$, consider the augmented complex of internal equivariant Hom objects from $L_\\bullet$ into $J$, augmented by $J^D$. To check exactness, evaluate on an arbitrary profinite site object $S$. Write $R[S]=j_{S!}R_S$ for the sheafification of $V\\mapsto\\bigoplus_{V\\to S}R(V)$, as in [lem-pc-sites-modules-j-shriek-flat]. The exact tensor comparison [lem-pe-internal-section-tensor-comparison] identifies the internal and sectionwise relative tensors. Its free property and [lem-pc-sheaf-modules-tensor-closed] identify these sections with $\\operatorname{Hom}_{\\mathcal E_R}(R[S]\\otimes_R L_\\bullet,J)$, augmented by $\\operatorname{Hom}_{\\mathcal E_R}(R[S],J)$, where $R[S]$ has trivial action. Tensor commutes with these coproducts since it is a left adjoint. Step 2 with $Q=R[S]$ makes the augmented source complex exact. Applying $\\operatorname{Hom}(-,J)$ is exact: extend a map from any image subobject by injectivity; the kernel condition is factorization through the quotient. Thus the augmented section complex is exact for every $S$, hence the augmented sheaf complex is exact. No projectivity of $R[S]$ is required.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sp-injective-resolutions",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EV (lemma-j-shriek-flat), 03DA (lemma-abelian); elementary injectivity argument after the integral contraction."
+   }
+  },
+  {
+   "text": "An equivariant map out of the summand indexed by $I$ in $L_a$ is uniquely determined by the image $x_I$ of $[0,I]$; the image of $[v,I]$ must be $T^v x_I$, where $T^v=\\prod_iT_i^{v_i}$. This holds after every profinite base change, and therefore identifies internal equivariant Hom with $\\bigoplus_{|I|=a}J$ (the index set is finite). Precomposing with $\\partial[v,I]$ sends the $i$th term to $(T_i-1)x_{I\\setminus\\{i\\}}$ with exactly the sign in the statement. The augmentation is the inclusion $J^D\\to J$. Consequently step 3 says $J^D[0]\\to K_R(J;T)$ is a quasi-isomorphism for every equivariantly injective $J$. For arbitrary $P$, the same formula defines $K_R(P;T)$ and $d^2=0$: each pair $i\\ne j$ appears twice with opposite signs and commuting factors $(T_i-1)(T_j-1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice."
+   }
+  },
+  {
+   "text": "Form $B^{a,b}=K_R(I^b;T)^a$ for $0\\leq a\\leq r$ and $b\\geq0$, with horizontal Koszul differential and vertical resolution differential. They commute because the resolution maps are equivariant. Use $d_{\\mathrm{Tot}}=d_h+(-1)^a d_v$ and finite diagonal sums [def-sp-double-complex-total]. Each functor $K^a$ is a finite biproduct of the underlying-module functor, hence exact: kernels and cokernels are computed componentwise on those finite summands. Therefore $P\\to I^\\bullet$ induces a columnwise quasi-isomorphism from the double complex concentrated in $b=0$ with row $K_R(P;T)$ to $B$. By [lem-sc-first-quadrant-total-column-comparison] it induces a quasi-isomorphism $c_P:K_R(P;T)\\to\\operatorname{Tot}B$.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), column comparison."
+   }
+  },
+  {
+   "text": "Step 4 applied to each $I^b$ gives a rowwise quasi-isomorphism from the double complex concentrated in $a=0$, with column $(I^\\bullet)^D$, to $B$. The row variant of [lem-sc-first-quadrant-total-column-comparison] therefore gives a quasi-isomorphism $b_P:(I^\\bullet)^D\\to\\operatorname{Tot}B$. To use its column formulation interchange the indices; multiplication by $(-1)^{ab}$ identifies the two total conventions, since the horizontal and vertical cross signs then agree. This sign is $1$ on the two axes. By [lem-sp-derived-injective-resolution-naturality], $(I^\\bullet)^D$ is the normalized model of $R\\Gamma_D(P)$. In the ordinary derived category define $\\lambda_R=b_P^{-1}c_P$, with this model identification. The square of augmentations from $P^D[0]$ commutes already on complexes: both composites have its invariant element in $I^0$ and zero in all other components. Hence $\\lambda_R$ has the required invariant inclusion normalization.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), row variant; derived.tex Tag 05TH (lemma-injective-acyclic)."
+   }
+  },
+  {
+   "text": "For an equivariant map $P\\to Q$, lift it to nonnegative injective resolutions by [lem-weil-pbc-injective-resolution-lift-exists]. It induces a map of the double complexes, and both $b$ and $c$ commute with it termwise. The normalized comparison of [lem-sp-derived-injective-resolution-naturality] identifies the other side with $R\\Gamma_D(P\\to Q)$. Two lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Applying the finite-sum functors gives a vertical homotopy compatible with the horizontal maps; multiplying its component on $B^{a,b}$ by $(-1)^a$ makes it a total homotopy, because the horizontal terms cancel. The same argument applied to identity maps between two chosen resolutions proves independence of that choice. Thus the isomorphism is natural in equivariant modules.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift); Tag 05TH (lemma-injective-acyclic), normalized comparison."
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Res}_\\varphi$ and take an equivariant $R'$-injective resolution $P'\\to J^\\bullet$. Restriction is exact: underlying abelian sheaves, kernels and sheafified cokernels are unchanged [def-pc-sheaf-restrict-scalars, def-weil-sheaf-of-modules-category]. Choose an equivariant $R$-injective resolution $UP'\\to I^\\bullet$. By [lem-weil-pbc-lift-along-injective-quasi-iso] the monic quasi-isomorphism $UP'[0]\\to UJ^\\bullet$ admits an extension $\\beta:UJ^\\bullet\\to I^\\bullet$ of the latter augmentation. Both resolve $UP'$, so $\\beta$ is a quasi-isomorphism. The double complexes $K_R(UJ^b)^a$ and $U K_{R'}(J^b)^a$ are identical: their summands, automorphisms and integer signs are identical. Their augmented rows are quasi-isomorphisms by step 4 over $R'$ and exactness of $U$. The double-complex map induced by $\\beta$ is a columnwise quasi-isomorphism, because the finite-sum $K^a$ are exact. Total comparison and the commuting row-augmentation square imply that $\\Gamma_D(\\beta):U\\Gamma_D(J^\\bullet)\\to\\Gamma_D(I^\\bullet)$ is a quasi-isomorphism.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift), part (2); homology.tex Tag 0133 (lemma-double-complex-gives-resolution)."
+   }
+  },
+  {
+   "text": "The canonical coefficient comparison for $UP'$ is represented by the inverse of $\\Gamma_D(\\beta)$ in step 8: first map $U\\Gamma_D(J^\\bullet)$ to $R\\Gamma_D(UP')$ by the derived-functor unit on the resolution $UJ^\\bullet$, and then invert this comparison, which step 8 proved is an isomorphism. The unit and its naturality here are those of [def-sfb-right-derived-functor]; the computation equation is $c_s\\eta_K=Q\\Gamma_D(s)$ for a resolution $s:K\\to I$. This is the normalized acyclic-resolution definition of the coefficient comparison; on the chosen injective $R$-resolution it uses precisely the extension $\\beta$. Changing $\\beta$ does not change it: the two extensions agree on $UP'[0]$, so [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] makes them homotopic, and applying the additive invariants functor preserves that homotopy. The squares for $b,c$ and $K(\\beta)$ commute on complexes. Inverting their quasi-isomorphisms gives $U\\lambda_{R'}=\\text{(coefficient comparison)}\\circ\\lambda_R$ under the termwise identity $K_R(UP')=UK_{R'}(P')$; the left vertical map here is that identity. Compose with the naturality square of step 7 for $f:P\\to UP'$ to obtain exactly the square in the statement. No injectivity of $UJ^b$ over $R$ was assumed.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-sp-derived-injective-resolution-naturality",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift); Tag 0156 (section-right-derived-functor), normalized derived comparison."
+   }
+  },
+  {
+   "text": "For $r=0$, the complex $K_R(P;T)$ is $P[0]$ and invariants is the identity functor. The double complex has only the $a=0$ column; the two comparison arrows are respectively $P\\to I^\\bullet$ and the identity of $I^\\bullet$. With the normalized derived identity comparison this gives $\\lambda_R=1_{P[0]}$. The zero module and the zero ring cause no exception: all displayed complexes and maps are zero. For $r=1$ the formula is $P\\xrightarrow{T_1-1}P$, with invariant inclusion in degree zero, so the augmentation convention has the asserted sign.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice. Agent internalization of the split integral cubical resolution; Stacks Tags 0623, 062F give algebraic context and Tags 0133, 013P, 05TH give the homological tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +207,45 @@
    "results": "8 hits: Algebra.Generators.H1Cotangent.δ, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δAux, Algebra.Presentation.differentials, Rep.barComplex.d, Algebra.H1Cotangent, Rep.barComplex; ",
    "date": "2026-10-22",
    "verdict": "no match: returned constructions concern other coefficient categories or only individual cohomology groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of a free abelian group acting on sheaves of modules are represented by the finite Koszul complex of commuting automorphisms minus one",
+   "results": "{\"t\": \"2026-10-21T16:31:35Z\", \"tool\": \"leanfinder\", \"query\": \"Derived invariants of a free abelian group acting on sheaves of modules are represented by the finite Koszul complex of commuting automorphisms minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.forget₂ToModuleCat\", \"Rep.FiniteCyclicGroup.moduleCatChainComplex\", \"Rep.standardComplex\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"Rep.barComplex.d\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.barComplex\", \"Rep.Tor_obj\"], \"digest\": \"7a3c289b8cd68629\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary Rep bar resolutions, finite cyclic complexes and topological continuous cochains do not state the derived internal condensed-module lattice comparison with coefficient compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"Koszul\"",
+   "results": "{\"t\": \"2026-10-21T16:32:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"Koszul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary Rep bar resolutions, finite cyclic complexes and topological continuous cochains do not state the derived internal condensed-module lattice comparison with coefficient compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul).*(invariants|groupCohomology|Laurent)|(invariants|groupCohomology).*(Koszul|koszul)",
+   "results": "{\"t\": \"2026-10-21T16:32:20Z\", \"tool\": \"grep\", \"query\": \"(Koszul|koszul).*(invariants|groupCohomology|Laurent)|(invariants|groupCohomology).*(Koszul|koszul)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary Rep bar resolutions, finite cyclic complexes and topological continuous cochains do not state the derived internal condensed-module lattice comparison with coefficient compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total derived invariants of commuting automorphisms on an internal condensed module are naturally the Koszul cochain complex",
+   "results": "{\"t\": \"2026-10-21T16:32:20Z\", \"tool\": \"leansearch\", \"query\": \"The total derived invariants of commuting automorphisms on an internal condensed module are naturally the Koszul cochain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.homogeneousCochains\", \"CochainComplex.cm5b.I\", \"CochainComplex.HomComplex\", \"groupCohomology.cocyclesIso₀\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"instAbelianCondensedMod\", \"groupCohomology.shortComplexH0\"], \"digest\": \"be6fe1ec4a517946\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary Rep bar resolutions, finite cyclic complexes and topological continuous cochains do not state the derived internal condensed-module lattice comparison with coefficient compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex of commuting endomorphisms computes right derived fixed points in a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-21T16:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul complex of commuting endomorphisms computes right derived fixed points in a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.Tor_obj\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.toRightDerivedZero\", \"Rep.Tor_map\", \"Ext\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Tor\"], \"digest\": \"9f33010a900002bb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary Rep bar resolutions, finite cyclic complexes and topological continuous cochains do not state the derived internal condensed-module lattice comparison with coefficient compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-inertia-continuous-koszul",
@@ -76,5 +268,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-discrete-lattice-koszul-resolution",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Split through the integral cubical contraction (one new statement-only algebraic node), evaluation against equivariant injectives, and two finite-diagonal total comparisons. Expanded signs, normalization, naturality, scalar restriction without preservation of injectives, and rank zero. No SGA source and no Lean writing or compilation.",
+  "blueprint": "Paragraph (3), open direct image: algebraic lattice input below the tame-boundary calculation; finite cubical resolution of the discrete lattice. Steps 1-10 supply only the algebraic discrete-lattice input; the unit geometric route is unchanged. The ancestor utility returns None for the inherited chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Generic Grothendieck property for small diagrams of module sheaves, applied to the one-object category of the lattice."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence of injective resolutions in a Grothendieck category."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Its explicit free representable sheaf construction supplies the test module R[S]; no use of projectivity or flatness is needed."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic internal tensor-Hom adjunction and preservation of coproducts by tensor."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic total quasi-isomorphism criterion applied to columns and rows."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Normalized total derived-functor computation on specified injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic lift of a coefficient morphism to two injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic uniqueness of lifts into a bounded-below injective complex."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Generic strict extension along a monic quasi-isomorphism, used for scalar restriction."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic internal-module/section-ring equivalence needed to apply the ringed-site tools on the condensed site."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact relative-tensor comparison between internal modules and section-ring module sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-86d810d00",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-86d810d00 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. All ten steps are correct, and I re-derived the signs, the transpose sign and the homotopies. Step 1: Fun(BD,Mod) is Grothendieck abelian with J=BD, so there are enough injectives, and invariants are right adjoint to the trivial action. Step 2: the matrices of the integral contraction are column-finite, so it carries over to any module Q, and exactness is equivariant by the creates-kernels/cokernels clause of the action-site presentation. Step 3: Hom from the R[S]-tensored complex into an equivariant injective is exact, using the free property of R[S] and tensor-Hom; no projectivity is needed. Step 4: precomposing with the boundary gives exactly the statement's (T_i-1) differential and the invariant augmentation, and the d^2 signs cancel. Steps 5-6: total-complex comparisons on the first-quadrant double complex with at most r+1 terms per diagonal, conforming to Stacks 0133. The (-1)^{ab} transpose intertwines the two total differentials, and the normalization square holds. Step 7: the homotopy (-1)^a K(k) is a total homotopy. Step 8: lift-along-injective-quasi-iso is applied to UP'[0]->UJ, which is monic and a quasi-isomorphism, so injectivity of UJ over R is not needed, and Gamma(beta) is a quasi-isomorphism. This is consistent with c_J of lem-sfb-condensed-derived-restriction-calculus and with the citer tame-inertia step 6. Step 9: the derived-functor unit is inverted. Step 10: r=0 reduces to eta_P, and the r=1 and r=2 cases check out. New node lem-sfb-integral-lattice-cubical-contraction: the cellular chains of the cube decomposition of R^r. True, checked for r=0, for r=1 with explicit h_0, for general r via the tensor homotopy, and in top degree (the boundary is injective). Statement-only, no proof sketch, searches recorded, not a duplicate: the simplex-shuffle and ring Koszul nodes state other things. It is a real algebraic lemma below the item, not a restatement of any clause. The item is not dropped and has no re-split note; it is still unsplit on live and side-live; no SGA source. Stacks tags 03EV, 03DA, 0133, 013P, 05TH and 0156 were checked in the .tex. I accept the 11 declared tool uses as generic. One fault, B3, repaired: the statement used 'total right derived functor' and 'Res_phi' without definition nodes. The corrected item adds [def-sfb-right-derived-functor] and [def-pc-sheaf-restrict-scalars] inline and in stmt_deps; nothing else changes. Maintainer note: lem-sfb-discrete-lattice-cup-exterior (NP, unsplit) is the trivial-action special case with cup normalization; its split could cite this item.; 1 file(s) fixed by the reviewer"
  }
 }
