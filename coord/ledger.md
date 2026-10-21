@@ -21236,3 +21236,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q06/lemma-nagata-flat-pullback-ideal-pow (reviewer PASS; after a return; new nodes: 0)
 - 08:43 L: merged deliver/Q131/lem-pur-signed-line-scalar-pullback-square (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/NW/lem-weil-pbc-completed-realization-derived-cohomology (reviewer FIX; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q124/lem-trf-section-coordinate-counit-normalization (reviewer PASS; first push; new nodes: 0)

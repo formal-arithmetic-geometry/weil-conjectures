@@ -28,9 +28,99 @@
   "lem-amb-etale-adjoint-locality",
   "prop-asd-smooth-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_p=A_{\\mathbf A^d_S}(d)[2d]$. Use the explicit ordered tower adjunction in [lem-amb-affine-space-top-trace], whose right functor is $p^*(-)(d)[2d]$. The unbounded composition comparisons of [lem-amb-unbounded-compact-support-comparisons] identify its left functor with the actual $Rp_!$; on $L_p$ this identification agrees with the bounded-below one used to define $t_p$. Thus this is an adjunction on the same ordinary categories as $Rp_!\\dashv p^\\times$, not merely a calculation of one compact-support group. By [det-sp-unique-right-adjoint], the counit-compatible comparison between their right adjoints is an isomorphism. At $A_S$ it is exactly $\\alpha_p$, because its transpose is the specified $t_p$. In particular $\\varepsilon_p\\circ Rp_!(\\alpha_p)=t_p$. This argument also applies over every Noetherian base under consideration, including $X=\\mathbf A^1_S$.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, affine-space adjunction and the two identifications; counit-compatible choice of those identifications"
+   }
+  },
+  {
+   "text": "For $v:T\\to S$ write $v':\\mathbf A^d_T\\to\\mathbf A^d_S$, $p'=p_{d,T}$, and $C_K:v^*Rp_!K\\xrightarrow{\\sim}Rp'_!v'^*K$. Its normalization on $L_p$ is the exchange in [lem-amb-affine-space-top-trace], by [lem-amb-unbounded-compact-support-comparisons]. Let $\\varepsilon_p,\\varepsilon_{p'}$ denote the exceptional counits at the constant object. The counit-defined $\\beta$ of [prop-asd-smooth-base-change] satisfies\n$$\\varepsilon_{p'}\\circ Rp'_!(\\beta)=v^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}.$$\nNaturality of $C$ and Step 1 therefore give\n$$\\begin{aligned}\n\\varepsilon_{p'}\\circ Rp'_!(\\beta\\circ v'^*\\alpha_p)\n&=v^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}\\circ Rp'_!(v'^*\\alpha_p)\\\\\n&=v^*(\\varepsilon_p\\circ Rp_!\\alpha_p)\\circ C_{L_p}^{-1}\\\\\n&=v^*t_p\\circ C_{L_p}^{-1}=t_{p'}.\n\\end{aligned}$$\nThe last equality is precisely the arbitrary-Noetherian-base-change equality in the affine-space trace node. The adjunct of $\\alpha_{p'}$ is also $t_{p'}$. Injectivity of the adjunction bijection proves $\\beta\\circ v'^*\\alpha_p=\\alpha_{p'}$, with the canonical Tate identification of [lem-asd-etale-finite-twist-pullback]. Only the input $L_p$ in the trace calculation is bounded below; the exceptional adjunction and exchange remain the unbounded ones.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model: explicit transposition of the normalized affine-space trace"
+   }
+  },
+  {
+   "text": "In the standard deformation identification of the statement, $q=p_{d,X}$ and the section is $0_X$; at $t=1$, $x_j=u_j$, so its fibre chart is the original ordered coordinate chart. Write $B_S=A_S(d)[2d]$, $B_X=a^*B_S$, $o_C=0^*\\alpha_{p_d}:B_S\\xrightarrow{\\sim}C$ and $o_F=0_X^*\\alpha_q:B_X\\xrightarrow{\\sim}F$. Apply Step 2 over the Noetherian base $X$ to $i_1:S\\to X$ and restrict to the zero section. The actual section exceptional comparison is exactly this restriction, giving $\\theta\\circ i_1^*o_F=o_C$. Consequently, for $\\lambda_0=a^*o_C\\circ o_F^{-1}$,\n$$i_1^*\\lambda_0=o_C\\circ(i_1^*o_F)^{-1}=\\theta.$$\nThus $\\theta$ is the identity when its source and target are written in these Tate coordinates. The Tate identifications commute with the two section pullbacks by [lem-asd-etale-finite-twist-pullback]. The same calculation at $d=0$ uses the literal identity tower adjunction.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard model and its fibre at t=1"
+   }
+  },
+  {
+   "text": "Now work over the indicated affine open $T$ and put $X_T=\\mathbf A^1_T$. Let $j:U\\hookrightarrow V_T$ be the coordinate neighbourhood and let $D_U$ be the deformation of its section. The Cartesian-centre condition and [lem-trf-section-rees-base-change-etale] give two section-preserving etale family maps: $D_U\\to D_{s_T}V_T$ induced by $j$, and $D_U\\to\\mathbf A^d_{X_T}$ induced by $e$. Their maps at one are $j$ and $e$, respectively. On the coordinate algebra the latter is $x_j\\mapsto t u_j$ and at one is $x_j\\mapsto u_j$; hence it uses precisely the ordered fibre chart used for the source orientation. No invertibility of $t$ is used. The open inclusion is etale by [lem-weil-pbc-open-immersion-etale]. All structural maps and chart composites here have the Noetherian, smoothness and compactifiability hypotheses imposed in the item. By [lem-weil-pbc-finite-type-over-noetherian], $V_T$ is Noetherian because its structural map is compactifiable and hence finite type; its open $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The separated etale chart maps are finite type: they are locally of finite type, and each inverse image of an affine target open is an open of a Noetherian source, hence quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus the finite-type hypothesis in the two locality/coherence applications below is satisfied.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, Cartesian centres, induced etale Rees map, and x_j=t u_j"
+   }
+  },
+  {
+   "text": "Write $F_0,C_0,\\theta_0$ for the standard affine-space family over $T$; write $F_U,C_U,\\theta_U$ for the chart family, and $F_T,C_T,\\theta_T$ for the given family restricted to $T$. The counit-normalized locality isomorphisms of [lem-amb-etale-adjoint-locality], restricted to the sections, are\n$$b_F^e:F_0\\xrightarrow{\\sim}F_U,\\quad b_C^e:C_0\\xrightarrow{\\sim}C_U,\\quad b_F^j:F_T\\xrightarrow{\\sim}F_U,\\quad b_C^j:C_T\\xrightarrow{\\sim}C_U.$$\nApply the etale-family clause of [lem-trf-section-exceptional-fibre-coherence] to each of the two maps in Step 4. It states exactly\n$$\\theta_U\\circ i_1^*b_F^e=b_C^e\\circ\\theta_0,\\qquad\n\\theta_U\\circ i_1^*b_F^j=b_C^j\\circ\\theta_T.$$\nHere $\\theta_T$ is the actual exceptional fibre map: the same node's base-change clause identifies its formation over $T$ with the restriction of $\\theta$ over $S$. This uses the coherence of the specified counits, not a choice of abstract fibre isomorphisms. No assertion about the unique normalized global deformation isomorphism is needed from that node.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-trf-section-exceptional-fibre-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 3, ingredients pulled back: compatibility of the counit-normalized locality maps with the fibre map"
+   }
+  },
+  {
+   "text": "The two chart orientations in the item give the following explicit uncorrected comparison, where $\\lambda_0$ is Step 3 over $T$:\n$$\\lambda_U=a_T^*b_C^e\\circ\\lambda_0\\circ(b_F^e)^{-1},\\qquad\n\\lambda=(a_T^*b_C^j)^{-1}\\circ\\lambda_U\\circ b_F^j.$$\nUsing Step 3 and the first equality in Step 5 yields\n$$i_1^*\\lambda_U=b_C^e\\circ\\theta_0\\circ(i_1^*b_F^e)^{-1}=\\theta_U.$$\nThe second equality in Step 5 then gives\n$$i_1^*\\lambda=(b_C^j)^{-1}\\circ\\theta_U\\circ i_1^*b_F^j=\\theta_T=\\theta|_T.$$\nAll inverses exist by the cited locality isomorphisms. Therefore $h=(i_1^*\\lambda)\\circ(\\theta|_T)^{-1}=1_{C_T}$. The calculation proves the claimed normalization for the orientations themselves; it neither presupposes that correction nor uses an independently chosen identification at one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, comparison of the two orientations and normalization at t=1; explicit cancellation in an etale chart"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "det-sp-unique-right-adjoint",
+  "prop-asd-smooth-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-section-rees-base-change-etale",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-etale-adjoint-locality",
+  "lem-trf-section-exceptional-fibre-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard model and normalization at t=1; detailed counit-transpose calculation and chart cancellation, following orientation-charts Step 3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +163,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine|coordinate.*counit|counit.*coordinate",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no etale compact-support affine orientation/deformation assertion; hits are affine coordinate algebra, ring traces, or generic mate identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint of the etale affine space trace is compatible with exceptional base change and etale locality",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, Algebra.trace_localization, Algebra.intTrace_eq_of_isLocalization, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, LinearMap.trace_baseChange, map_equiv_traceDual, RingHom.Etale.isStableUnderBaseChange; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no etale compact-support affine orientation/deformation assertion; hits are affine coordinate algebra, ring traces, or generic mate identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the compact support counit for affine space preserves the adjoint Tate orientation and normalizes section deformation charts",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.homOverEquiv; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no etale compact-support affine orientation/deformation assertion; hits are affine coordinate algebra, ring traces, or generic mate identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism adjoint to a base change compatible counit is preserved by the mate of the inverse exchange transformation",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_apply, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv; ",
+   "date": "2026-10-21",
+   "verdict": "no match: no etale compact-support affine orientation/deformation assertion; hits are affine coordinate algebra, ring traces, or generic mate identities"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|mateEquiv_apply",
+   "date": "2026-10-21",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; ",
+   "verdict": "no match: generic mate identities only, not an etale affine-space/deformation theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -98,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-section-coordinate-counit-normalization",
+  "worker": "Q124 stage1 direct delivery",
+  "summary": "Six-step proof using the existing affine-space trace equality, uniqueness of right adjoints and existing Rees/locality/fibre-coherence nodes. The base-change equality is proved by an explicit adjunct calculation, and the chart normalization by two explicit commuting fibre squares. No statement change, new nodes, Lean writing or compiles.",
+  "blueprint": "lem-trf-local-term-locality proof (2), normal-cone specialization via the recorded ancestor chain; the extracted old Step 15 is realized by Steps 1–3 (standard coordinate counit normalization) and Steps 4–6 (etale charts). Sources: main-20261015 sk-thm-dnc Local construction and orientation-charts Step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-6f51ea121",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-6f51ea121 (reviewer sub-agent of L); spot-checked: I read the whole item. This delivery changes only the split-owned fields; statement, stmt_deps and blueprint are identical to live, where the item is still unsplit. It adds no new nodes. It expands the five-sentence Step 15 in Q58's report on the parent lem-trf-finite-ring-section-deformation into six explicit steps. No re-split repair note exists for this item and it is not in the dropped list. Sources: main-20261015 sk-thm-dnc 'Local construction' (lines 13-37: x_i=t u_i, the two affine identifications, correction at t=1) and orientation-charts Step 3 ('pulled-back comparison is the identity at t=1'). This is the blueprint's DNC route; no SGA is cited. Step 1: the composite tower adjunction F_d -| p^*(d)[2d] is built from unbounded pieces; I checked that lem-asd-ordinary-finite-p1-adjunction holds on the entire categories. The unbounded comparisons identify F_d with Rp_!, and they restrict to the bounded-below comparisons used to define t_p. Uniqueness of right adjoints then makes alpha_p invertible, without inferring that from the transpose alone. Step 2: the counit-defined beta of prop-asd-smooth-base-change, naturality of C, Step 1 and the trace base-change equality t_{p'} C = v^* t_p give the adjunct identity; I re-derived it. Step 3: in the Rees model R[x][t,x/t]=R[t,u] the fibre at 1 is u=x. Step 2 over X=A^1_S with v=i_1, restricted to the zero section, gives theta i_1^* o_F = o_C, hence i_1^* lambda_0 = theta. Step 4: the Rees etale clause applies to e (Cartesian centres by hypothesis) and to j (U contains s(T), so the square is Cartesian). The finite-type and Noetherian checks use the cited Mathlib leaves. Step 5: the etale clause of the sibling lem-trf-section-exceptional-fibre-coherence gives the two squares; I checked their map directions and that only the statement is used. Its base-change clause identifies theta_T with theta restricted to T. Step 6: I checked the cancellation, which gives h=1. Coefficient categories are ordinary unbounded etale D(T_et,A) with A finite and N invertible throughout; no pro-etale or ctf substitution. Edge cases checked: d=0, empty base, N=1 (so A=0), nonflat v. Duplicate search found no duplicate: det-sp-orientation-* (Z/l^n pro-etale), cor-pur-vector-bundle-purity, det-sp-tower-exceptional-bc, lem-amb-affine-trace-tower-counit-base-change (F_d counit only), lem-per-ordinary-smooth-orientation (F_l) and the sibling lem-trf-section-local-dualizing-comparisons (builds h_i; this item proves h_i=1) all differ. No cycle: the cited siblings are unsplit with empty proof_deps. Route: sk-prop-an and sk-prop-sf-cbc are reachable from sk-i-curve-zero, so no tool_uses are needed. Advisory only: the unchanged statement uses 'Rees family/deformation' without a defining stmt_dep, which is a pre-existing gap from Q58's extraction."
  }
 }

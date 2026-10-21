@@ -1,0 +1,64 @@
+## Worker report
+
+Item: lem-trf-section-coordinate-counit-normalization. Group Q124, stage 1, direct delivery, 2026-10-21.
+
+Files written:
+- dag/nodes/sec-trace-formula/lem-trf-section-coordinate-counit-normalization.json: existing statement, now split into six proof steps; no statement correction.
+- citations.json: fourteen verbatim statement quotations for all step/node citation pairs.
+- report.md: this report.
+
+## New nodes
+
+None. No new Mathlib leaves. The supporting assertions already have nodes, including the Rees-family geometry and exceptional-fibre coherence extracted alongside this item. The proof retains the actual argument in the item: its transposition calculation and cancellation of the chart squares are not deferred to replacement nodes.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint tag, coordinate/counit terminology, and Kummer/affine trace terminology in SixFunctors. No upstream declaration supplies this complete assertion. Also read the relevant existing source at lean/Sheaf/Paper/FiniteRingSectionDeformation.lean: affineAdjoint, affineSectionAdjoint, chartAdjoint, coordinateDeformationMap, coordinateDeformationMap_spec, familyChartAdjoint, coordinateTower_over, sourceChartAdjoint and coordinate_normalization (line 857). The last has a literal sorry, so it is not an attachment. The established geometry declarations do not prove the normalization clause.
+
+## Literature and blueprint
+
+WANTED: none.
+
+Read GOAL.md, the stage-1 brief and contract, SETUP.md's three blueprint levels, dag/chapters/sec-trace-formula.json, and dag/units/sk-i-curve-zero.json. The ancestor search returns lem-trf-local-term-locality. Its fixed route is normal-cone specialization in the contracting-correspondence proof, via the ancestor chain already recorded in the item.
+
+Read literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md in full, especially Local construction: Cartesian centres, the etale deformation chart, x_j=t u_j, the two affine-space identifications, and normalization at one. Also read literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md in full, particularly Step 3, which requires the deformation comparison to agree with coordinate-adjunction orientations. The old parent Step 15 is also preserved in the docstring of coordinate_normalization in the source module. The present proof supplies the actual counit-transpose calculation referred to there. It is marked proof_origin.by=agent, since the blueprint is agent-written and the calculation is expanded here. No SGA source is used.
+
+## Existing-node and Mathlib searches
+
+Searched the whole DAG for coordinate/counit, mate, locality and right-adjoint comparisons and opened the actual statements of every dependency. Ran blueprint_refs.py ancestor and searches for counit, coordinate-tower and normalized section. The relevant blueprint hits were lem-amb-linear-trace-invariance and det-sp-orientation-charts. The former is invariance under linear changes on one affine space, rather than change of base and section-family normalization. The latter uses the restricted Z/l^n geometric/constructible setting and asserts agreement of diagonal orientations, rather than this ordinary unbounded finite-ring assertion over arbitrary Noetherian bases. Neither duplicates this item. The item's existing precise blueprint.from.place is retained, and same_as remains empty.
+
+Ran the prescribed msearch.py wrapper for this item, recording its actual log in searches.jsonl and appending the queries to mathlib_searches. LeanFinder's geometric phrasing returned affine-coordinate morphisms; LeanSearch returned ring-theoretic traces and etale base-change instances; the mixed Adjunction/AffineSpace Loogle query and the trace/counit grep returned no match. A second, categorical phrasing returned generic mate identities. Read Mathlib/CategoryTheory/Adjunction/Mates.lean around lines 115–143 and the wrapper grep locating mateEquiv_counit at line 123 and mateEquiv_counit_symm at line 128. These give the abstract counit identity but do not supply the etale compact-support trace, normalization, or Rees chart. Consequently the item is not a Mathlib leaf. No new node is required for generic mate infrastructure: the elementary adjunct calculation is written explicitly, while uniqueness of right adjoints already has det-sp-unique-right-adjoint.
+
+## Not duplicates
+
+No new nodes, hence no new/existing same-tag pairs. Reused lem-trf-section-rees-base-change-etale and lem-trf-section-exceptional-fibre-coherence rather than reproducing their statements. Did not create nodes for the transpose calculation, the restriction at one, the chart cancellation, or the identity h=1: these are proof steps of the item.
+
+## Problems found and repairs
+
+The imported item was statement-only; no proof argument was present in its file. Its statement is retained verbatim. The upstream-looking source normalization theorem is sorried and cannot be used as finished evidence. The main potential gap is that an isomorphism Rp_!L ≅ A alone does not prove its transpose L→p^times A is invertible; Step 1 instead uses the actual tower adjunction and uniqueness of right adjoints. Another potential gap is that bounded-below trace exchange and unbounded exceptional exchange might use different normalizations; Steps 1–2 explicitly cite the node asserting their agreement. Finally, existence of etale locality isomorphisms alone does not assert their compatibility with the actual fibre map; Step 5 cites the sibling fibre-coherence statement, which contains the precise commuting squares.
+
+During self-review I made the Noetherian-source and finite-type checks in Step 4 explicit and added lem-weil-pbc-finite-type-over-noetherian rather than assuming them. No hypothesis was added to the item. No work remains in the split; the existing unsplit supporting nodes remain independent stage-1 tasks.
+
+## Review by Q124
+
+I read the source files and the node statements together. The local-construction paragraph of sk-thm-dnc gives exactly the standard Rees model over A1 and the two orientation maps in this item. Orientation-charts Step 3 specifies the same etale locality route. Unlike the general blueprint instruction to correct an arbitrary local isomorphism by its value at one, this item fixes both local orientations to be the adjoints of the specified Kummer-normalized counits; the trace equality then proves that this correction is already the identity. No smooth purity result with a different coefficient category was substituted.
+
+Step 1 uses the statement of lem-amb-affine-space-top-trace: it explicitly names the tower adjunction, its right functor, identity in dimension zero and normalized counit. I checked that lem-amb-unbounded-compact-support-comparisons supplies composition isomorphisms on the whole ordinary derived categories and explicitly agrees with the bounded-below comparisons. Thus the two right adjoints are right adjoints of the same functor. det-sp-unique-right-adjoint states exactly that the counit-compatible comparison between them is invertible; this proves invertibility of alpha without incorrectly inferring it merely from invertibility of its transpose.
+
+Step 2 takes the actual counit-defined beta, rather than merely an isomorphism, from prop-asd-smooth-base-change. It takes the equality t_p' C=v^*t_p from lem-amb-affine-space-top-trace, and the normalization of C from the unbounded-comparisons statement. The explicit displayed calculation moves alpha across C by naturality, cancels C on L, and compares the two adjuncts. All domains are Rp'_!v'^*L or A_T, as appropriate. The input L is a shifted sheaf and hence bounded below; no boundedness is imposed on the exceptional-adjoint category. The schemes are Noetherian and the affine projections are smooth separated compactifiable of dimension d. N remains invertible under the permitted base change. lem-asd-etale-finite-twist-pullback explicitly provides the Tate identification for arbitrary morphisms and its composition compatibility. These statements are quoted verbatim in citations.json.
+
+Step 3 is elementary from Step 2: apply it with base X=A1_S and v=i_1, then restrict to the zero section. Because x_j=u_j at one, this is the specified fibre chart. The equation theta i_1^*o_F=o_C directly gives i_1^*lambda_0=theta by cancellation of o_F. I checked the direction of theta: it maps the family restriction to the original section invariant. The Tate-pullback node supplies coherent identifications along the two sections, not just an abstract rank-one sheaf. There is no unproved claim about global sections or connected fibres here.
+
+Step 4 uses the statement (not the proof) of lem-trf-section-rees-base-change-etale. It explicitly asserts the etale map on deformations, the induced map at one, preservation of sections and fibres, and agreement on restrictions for Cartesian-centre etale pairs. Its affine formula gives the coordinate identification used here. Apply it to e and to the open inclusion j, each with the centres pulled back exactly; merely containing the set of points would not suffice. The square for e is a hypothesis; for j the open contains the whole section. The open-immersion-etale node supplies etaleness of j. The finite-type-over-Noetherian node supplies V_T Noetherian, and the Noetherian-open node supplies U and inverse images of affine opens quasi-compact. Since the chart maps are locally of finite type, this verifies finite type. The item already assumes the deformation and structural chart composites are Noetherian, smooth where required and compactifiable. Open immersions are separated because their diagonals are isomorphisms; the other chart is separated by hypothesis. Thus all locality hypotheses really hold.
+
+Step 5 first uses lem-amb-etale-adjoint-locality exactly for its ordinary-etale unbounded natural isomorphism u^*f^times K ≅ (fu)^times K, with finite A for the compact-support part and separated etale finite-type chart maps. For compatibility it separately uses lem-trf-section-exceptional-fibre-coherence: its statement explicitly contains theta_1 i_1^*b_F=b_C theta for the specified composite-counit-normalized locality maps. This yields both displayed squares, one for e and one for j. Its arbitrary-base-change clause also identifies the actual map after restricting the base to T. I did not take naturality from the proof of the locality node and did not use the optional kappa conclusion of the fibre-coherence node. Both sibling nodes currently have empty proof_deps, so neither depends on this normalization item; the server's DAG check also verifies no new cycle.
+
+Step 6 is elementary algebra with the two squares from Step 5. The two formulae for lambda_U and lambda are exactly the orientations requested in the statement, with locality in the right directions. Restricting to one and substituting Step 3 cancels b_F^e, then the second square cancels b_C^j. The result is theta_T, and multiplication by its inverse proves h=1. This does not infer compatibility simply by saying it transports. All six steps are shorter than 2000 characters and none hides a separate standard comparison lemma.
+
+I checked d=0 (empty coordinate list, identity tower and trace), the empty base, A=0 and N=1 (then A=0), and arbitrary nonflat Noetherian base change. The proof never divides by t, a coefficient, or a factorial. Only the specialization at one uses t=1, so no invalid assertion that scaling by t is invertible at zero is made. The Rees-etale comparison is the Cartesian-centre comparison, not an isomorphism of the whole original chart with affine space. No assumption of algebraically closed base, connected base, constructibility, or completed/pro-etale coefficients is introduced.
+
+The supporting affine trace, compact-support comparison, smooth base-change, Tate-pullback, and locality results lie in the smooth-purity units. They serve here as generic ordinary-etale operation and normalization tools already used in the parent's fixed route; the two new-target sibling facts are in the item's own unit. This is not an alternative proof route for the trace-formula unit. The maintainer may record these existing generic tool uses on merge. I have not written a maintainer-owned tool_uses field.
+
+Pre-report server checks: review_split PASS (0 new nodes); check_dag OK (no finding introduced by sandbox). Full deliver.py dry run and final push follow this report.
+
+Dry-run repair: the citation gate rejected the 37-character locality formula as too short to show context. Replaced it with the full locality statement and expanded the Tate, Rees, and fibre-coherence quotations to include the hypotheses and all parts used. The proof and statement did not change.
