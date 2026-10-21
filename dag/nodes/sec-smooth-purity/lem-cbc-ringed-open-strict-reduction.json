@@ -15,9 +15,121 @@
   "def-weil-presheaf-modules-sheafification",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_T$, $S_n=(P_n)_T$, and write $J=e_!$. The slice equivalence $W_{\\mathrm{proet}}\\simeq T_{\\mathrm{proet}}/W$ is [lem-weil-proetale-weakly-etale-localization] (1), and restriction is $F|_W(V)=F(V\\to T)$ by its part (3). By [def-weil-pbc-adic-coefficient-datum], $(P_n)_T$ is the ring sheafification of the presheaf $C_{n,T}:U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),P_n)$; since $C_{n,T}(V\\to T)$ depends only on the scheme $V$, the restricted presheaf $C_{n,T}|_W$ is $C_{n,W}$ under this equivalence. The natural isomorphism $(C_{n,T}|_W)^\\#\\cong(C_{n,T}^\\#)|_W$ of [lem-pur-ring-presheaf-sheafification-localization] gives $S_n|_W=(P_n)_W$; its naturality in the presheaf, applied to the postcomposition maps $C_{b,T}\\to C_{a,T}$, shows that it carries $q_{b,a}|_W$ to $q_{b,a}$. Restriction is sectionwise and $A_T$ is the sectionwise limit of compatible families, so $R|_W=\\varprojlim_n S_n|_W=A_W$ with the same projections. Thus these are the same localized ringed sites with all their ring maps, not discrete constant $A$-coefficient categories. By [lem-pur-site-restriction-module-adjunction-exact], $J$ is exact. Choose a termwise surjective flat-term K-flat resolution $P\\to C$ by [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $JP\\to JC$ is again such a resolution. Applying exact $J$ levelwise is exact on towers, since kernels and cokernels are levelwise [lem-weil-tower-category-levelwise-abelian]; its termwise derived functor is therefore available by [lem-sf-exact-functor-derived-triangulated]. Consequently both sides of the desired comparison can be computed from this single $P$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-ring-presheaf-sheafification-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-kflat-resolution",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  },
+  {
+   "text": "For a flat $R|_W$-module $G$ and an $R$-module $B$, use the ringed slice tensor formula [lem-weil-pbc-ringed-slice-extension-tensor]. Fix its canonical direction $JG\\otimes_R B\\to J(G\\otimes_{R|_W}B|_W)$ as follows. The inverse is the $J\\dashv e^*$-adjunct of the open unit tensored with identity, exactly the normalization of $\\gamma^{-1}$ in [lem-sf-open-tensor-normalization]. Because $G$ and $JG$ are flat by Step 1, tensor with either is exact, so each, concentrated in degree zero, is K-flat and these derived tensors are the ordinary tensors. On the extension summand over $V\\to W$, this inverse sends $[g\\otimes b]$ to $[g]\\otimes b$: the unit sends $g$ to that same section on the open. The forward map is therefore $[g]\\otimes b\\mapsto[g\\otimes b|_W]$. These formulas respect $(rg)\\otimes b=g\\otimes rb$, addition and restrictions. The two composites are identities on the displayed tensors and hence on the sheaf morphisms by the tensor and module-sheafification universal properties [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification], with extension summands as in [def-weil-extension-by-zero-presheaf]. Apply this with $G=P^q$ and $B=S_n$. Naturality in $G$ makes it commute with $d_P^q$, so these maps give actual chain isomorphisms $\\delta_{P,n}:JP\\otimes_R S_n\\to J(P\\otimes_{R|_W}S_n|_W)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-sf-open-tensor-normalization",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  },
+  {
+   "text": "For any $b\\ge a$, the two composites in the transition square for $\\delta_P$ send $[p]\\otimes r$ to $[p\\otimes q_{b,a}(r)|_W]$. Thus the $\\delta_{P,n}$ and their inverses form inverse maps of actual strict tower complexes, with the specified quotient transitions of [def-weil-pbc-adic-coefficient-datum]. For $s\\in S_n$ the equality $\\delta_{P,n}([p]\\otimes rs)=[p\\otimes r|_Ws|_W]=s\\delta_{P,n}([p]\\otimes r)$ proves $S_n$-linearity. Applying extension using $S_n$ as coefficient ring or extending the same sheaf after restriction to $R$ gives the same underlying abelian sheafification; its action is uniquely extended from the same presheaf action [def-weil-presheaf-modules-sheafification]. Hence this is already a comparison of $S_n$-module complexes, and only afterwards of $R$-module complexes by [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  },
+  {
+   "text": "Termwise extension of the constant tower on $P$ is the constant tower on $JP$, with identity transitions. At every index, $\\delta_{P,n}$ sends the quotient augmentation $[p]\\mapsto[p]\\otimes1$ to $[p\\otimes1]$, which is exactly $J$ applied to the augmentation of $P$. The augmentations are strict maps because $q_{b,a}(1)=1$. The equality on extension summands extends uniquely through module sheafification [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification], so this is an equality of augmented strict complex diagrams before localization, not just equality of evaluated derived arrows.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  },
+  {
+   "text": "For $b\\ge a$, the coefficient complex $Q_b=P\\otimes_{A_W}(P_b)_W$ is K-flat with flat terms over $(P_b)_W$ by [lem-pur-kflat-change-of-rings]. Apply [lem-cbc-ringed-open-flat-resolution] again with coefficient ring $(P_b)_T$: $JQ_b$ is K-flat over that ring. Thus both successive reductions in the normalization square are computed by ordinary tensor complexes. The normalization of [def-weil-pbc-adic-coefficient-datum] sends $(p\\otimes r)\\otimes s$ to $p\\otimes q_{b,a}(r)s$. Starting with $([p]\\otimes r)\\otimes s$, the path using $\\delta_{P,b}$, then the comparison of Step 2 over the ring $(P_b)_T$ with $G=Q_b^q$ (flat over $(P_b)_W$) and $B=(P_a)_T$, and then $J$ of normalization gives $[p\\otimes q_{b,a}(r)|_Ws|_W]$. Normalizing first on $T$ and then using $\\delta_{P,a}$ gives the identical expression. Tensor and sheafification uniqueness give equality of the chain maps. When $b=a$ this is the tensor unit $(p\\otimes r)\\otimes s\\mapsto p\\otimes rs$. For $c\\ge b\\ge a$, both composites give $[p\\otimes q_{c,a}(r)|_Wq_{b,a}(s)|_Wt|_W]$ on $(([p]\\otimes r)\\otimes s)\\otimes t$. This proves compatibility with the equal-index unit and three-index cocycle, with the quotient coefficient actions retained.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-cbc-ringed-open-flat-resolution",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  },
+  {
+   "text": "For every chain map $f:P\\to P'$ between flat-term K-flat complexes, both naturality-square paths send $[p]\\otimes r$ to $[f(p)\\otimes r|_W]$. Thus $\\delta_P$ is a natural chain isomorphism on this class and induces one on its homotopy category. If $f$ is a quasi-isomorphism, $Jf$ is one by exactness, and $JP,JP'$ are K-flat by Step 1. By [lem-pur-derived-change-of-rings], tensoring either $f$ or $Jf$ with each quotient gives a quasi-isomorphism; the tower maps are quasi-isomorphisms by levelwise cohomology [lem-weil-tower-category-levelwise-abelian]. The first assertion of [lem-weil-pbc-site-derived-tensor-descent] identifies the localization of the flat-term K-flat homotopy category with $D(\\operatorname{Mod}(A_W))$. The localization universal property [lem-weil-pbc-localization-universal-property] therefore descends $\\delta$ and its inverse to a natural isomorphism $\\rho_{e,K}$. On a representative $P$ its endpoints are precisely the two reduction constructions of [def-weil-pbc-adic-coefficient-datum], since $JP$ is K-flat. This also proves independence of all representatives: comparison along any inverted quasi-isomorphism is forced by the naturality square, and these comparisons compose. The strict augmentation equality of Step 4 and the coefficient/normalization equalities of Steps 3 and 5 remain equalities under localization. No step used completeness of $K$ or quasi-compactness of $e$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sf-open-tensor-normalization",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), using sites-modules.tex Tag 0E8I; strict quotient/augmentation refinement written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +165,52 @@
    "results": "[leansearch] OK 8 hit(s) CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Limits.spanExt_inv_app_zero, TrivSqZeroExt.inv_inl, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id, TrivSqZeroExt.inv_zero, TrivSqZeroExt.instInv, WithZero.withZeroUnitsEquiv_symm_strictMono, TrivSqZeroExt.isScalarTower",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary ring localization, simplicial/Dold-Kan comparisons, generic exact functors or geometric/module pullback, not this ringed strict completion statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|jShriek|strict.*reduction|quotient.*tower",
+   "results": "{\"t\": \"2026-10-21T04:13:23Z\", \"tool\": \"grep\", \"query\": \"extension.?by.?zero|jShriek|strict.*reduction|quotient.*tower\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor/quotient facts, ordinary sheaf presentations, presheaf tensor definitions or generic zero objects; none states this strict ringed open reduction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero commutes with derived reduction tower and quotient normalization",
+   "results": "{\"t\": \"2026-10-21T04:13:24Z\", \"tool\": \"leansearch\", \"query\": \"extension by zero commutes with derived reduction tower and quotient normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.extended_zero\", \"DerivedCategory.instHasZeroObject\", \"CategoryTheory.Abelian.Ext.comp_zero\", \"normalize_zero\", \"CategoryTheory.Abelian.Ext.zero_hom\", \"CategoryTheory.Abelian.Ext.zero_comp\", \"HomologicalComplex.extend.d_none_eq_zero'\", \"Submodule.Quotient.smulZeroClass'\"], \"digest\": \"79700cfa27e02da5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor/quotient facts, ordinary sheaf presentations, presheaf tensor definitions or generic zero objects; none states this strict ringed open reduction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "extensionByZero, TensorProduct, IsIso",
+   "results": "{\"t\": \"2026-10-21T04:13:24Z\", \"tool\": \"loogle\", \"query\": \"extensionByZero, TensorProduct, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'extensionByZero'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query: unknown identifier in Loogle query; no absence inference"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict reduction tower of extension by zero commutes with tensoring quotient coefficients",
+   "results": "{\"t\": \"2026-10-21T04:13:27Z\", \"tool\": \"leanfinder\", \"query\": \"strict reduction tower of extension by zero commutes with tensoring quotient coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul\", \"Ideal.pi_mkQ_rTensor\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop\", \"TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mk\"], \"digest\": \"6629e3e6714a9d2d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor/quotient facts, ordinary sheaf presentations, presheaf tensor definitions or generic zero objects; none states this strict ringed open reduction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for extension by zero of module sheaves along an open subtopos with quotient algebra coefficients",
+   "results": "{\"t\": \"2026-10-21T04:13:38Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula for extension by zero of module sheaves along an open subtopos with quotient algebra coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen\", \"ModuleCat.Tilde.res_apply\", \"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.Presentation.map_π_eq\", \"ModuleCat.Tilde.openToLocalization\", \"ModuleCat.Tilde.res_const\", \"ModuleCat.Tilde.exists_const\", \"SheafOfModules.Presentation.mapGenerators\"], \"digest\": \"9c85cae3160590b7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor/quotient facts, ordinary sheaf presentations, presheaf tensor definitions or generic zero objects; none states this strict ringed open reduction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T04:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"81c0a719217fb4bb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor/quotient facts, ordinary sheaf presentations, presheaf tensor definitions or generic zero objects; none states this strict ringed open reduction theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -74,5 +228,64 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-ringed-open-strict-reduction",
+  "worker": "stage1",
+  "summary": "Proved the strict augmented reduction comparison on one flat-term K-flat representative using the existing ringed tensor and open normalization statements; checked quotient actions, transitions, units, three-index normalization and localization. No statement changes or new nodes.",
+  "blueprint": "Realizes the opening inference of lem-cbc-completed-extension-zero-comparison.proof.md, “the reduction tower of j_!K is j_!K_bullet (reductions commute with j_! ...)”, with the actual strict quotient augmentation and coefficient normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site tool on the specified open slice, required for the blueprint tensor/reduction argument."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site tool on the specified open slice, required for the blueprint tensor/reduction argument."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions on a ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "The general arbitrary-ringed-site tensor formula supplies the module comparison underlying strict reduction; no new route replaces the blueprint reduction argument."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Pins the inverse tensor comparison by its actual open-unit adjunct and its section normalization, rather than selecting an unrelated isomorphism."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of flat-term K-flatness after quotient scalar extension, needed to compute successive derived reductions."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic change-of-rings invariance under quasi-isomorphisms between K-flat representatives, at all quotient coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its first assertion gives the equivalence between localization of flat-term K-flat representatives and the unbounded derived category, needed for simultaneous representative independence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-9f87f8847",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-9f87f8847 (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes, statement unchanged. The live and side clones still have it unsplit, so this delivery is not superseded, and the item is in no dropped list. Sources checked: the blueprint proof's opening sentence ('reductions commute with j_!'), Stacks 0E8I (sites-modules l.4051) and Stacks 0GL1 (sites-cohomology l.4578, 'details omitted'); the item writes out those details on flat-term K-flat representatives. Hypotheses are correct: no completeness and no quasi-compactness are needed. Small cases checked: W=T, W=∅, I=A, K=A_W, a=b, and Z_l with K=Z/l. Not a duplicate: lem-sf-cbc-extension-zero-completion works over constant \\underline A, and lem-sf-integral-open-reduction-comparison covers only O_E, quasi-compact j and complete K; the item generalizes the latter's r_j (advisory). C4 in Step 1, fixed: Step 1 cited lem-weil-pbc-profinite-coefficient-inverse-image to identify A_T|_W=A_W and (P_n)_T|_W=(P_n)_W, but that node is about the inverse image e^{-1}, not slice restriction. The new Step 1 uses lem-weil-proetale-weakly-etale-localization (1),(3), the datum's Cont(π0,P_n) presheaf (which restricts to W's presheaf), the Mathlib leaf lem-pur-ring-presheaf-sheafification-localization (natural in the presheaf, so compatible with q_{b,a}), and the sectionwise limit. This matches the parent's own wording. The profinite node is removed from uses, proof_deps and tool_uses. Step 5 now names the intermediate Step-2 comparison over (P_b)_T. Steps 2–6 checked against the cited statements: the γ^{-1} normalization pins the map [g]⊗b↦[g⊗b|_W]; transitions, S_n-linearity, augmentation, and the unit/cocycle formulas match the datum; descent goes through the derived-tensor-descent equivalence and the localization universal property. No cycles, including through the 2958-node closure of lem-sf-open-tensor-normalization. Accepted tool_uses: the 8 remaining generic ringed and tensor tools.; 1 file(s) fixed by the reviewer"
+ }
 }
