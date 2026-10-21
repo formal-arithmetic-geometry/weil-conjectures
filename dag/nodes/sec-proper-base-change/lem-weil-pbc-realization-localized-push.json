@@ -20,139 +20,52 @@
  ],
  "proof": [
   {
-   "text": "First fix the coefficient identifications and their maps. By [lem-weil-pbc-continuous-coefficients-immersion-restriction], $A_V$ is the continuous integral ring and $E_V=A_V[1/\\varpi]$ for $V=T,U$. The canonical charts of [lem-weil-pbc-continuous-coefficient-realizations] identify these rings with the pulled-back condensed coefficient rings and intertwine the inclusion $A\\to E$. The scheme-naturality equation of [lem-weil-pbc-continuous-chart-scheme-naturality], together with the composition isomorphism of [lem-weil-pbc-profinite-point-pullback], identifies the coefficient structural maps with precomposition by the base-change projection. Thus the two coefficient inclusions and the two maps along $h$ commute. In particular the coefficient inverse-image isomorphisms required by [lem-weil-pbc-ring-sheaf-change-adjunction] are obtained by transporting the pulled-back condensed coefficient isomorphisms through these charts. Use its specified comparison $d:r_U Rh_{c,*}\\cong Rh_{*,A}r_T$; $r_V$ denotes exact coefficient restriction and reflects isomorphisms. The module encoding of [def-weil-pbc-continuous-coefficient-module-encoding] identifies the internal and sectionwise module actions. By [def-weil-pbc-continuous-coefficient-module-encoding] the integral and field encodings commute with restriction of scalars along the coefficient inclusion, so the isomorphism of [lem-weil-pbc-continuous-module-encoding-scalar-extension] may be taken to be the canonical comparison of two left adjoints of one right adjoint; that comparison carries the internal extension unit to the sectionwise unit $m\\mapsto1\\otimes m$. The encodings are exact equivalences, hence extend termwise to derived categories compatibly with derived scalar extension, restriction and these units. They also intertwine module direct image along $h$: both sides have underlying abelian sheaf $h_*$, with action through $\\eta_h$, resp. through precomposition, and these agree by the scheme-naturality equation above.",
+   "text": "Construct the completed coefficient isomorphism using the proved profinite tower comparison, and the rational one using the arbitrary-morphism continuous pullback theorem. Their scalar square is realizationCoefficientSquare. Internal direct image is conjugate to the specified rational sectionwise image by realizationContinuousDirectImage.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-pbc-continuous-chart-scheme-naturality",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-pbc-continuous-module-encoding-scalar-extension"
+    "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+    "lem-weil-pbc-realization-coefficient-square",
+    "lem-weil-pbc-realization-continuous-direct-image",
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, Lemma 6.8.2 and Remark 6.8.15; canonical chart and coefficient-change identifications"
-   }
+   "elementary": false
   },
   {
-   "text": "The schemes $T,U$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their finite-type structure maps to $\\operatorname{Spec}k$. Consequently $h$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field and $\\ell=u\\varpi^e$ for a unit $u$ and an integer $e>0$: the exponent is positive because $|\\ell|<1$ and $|\\varpi|<1$. A DVR is Noetherian since every ideal is principal. Each quotient $P_n=A/\\varpi^n$ is finite by [lem-weil-valued-dvr-finite-quotients] and is perfect, with free resolution $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$. This verifies the adic hypotheses used below. In particular localizing at $\\ell$ and at $\\varpi$ gives the same coefficient algebra and the same scalar-extension unit. By [lem-weil-pbc-integral-stratified-perfect-characterization], the given $M$ belongs to the integral category of [def-weil-derived-complete-integral-detailed], and it has bounded cohomology. The assumed Noetherian, finite-dimensional and $\\ell$-invertible hypotheses are exactly those of that characterization.",
+   "text": "The detailed encoding functor is integralDetailedTransport. Its counit transports each bounded constructible complete M to sfIntegralConstructible by integralStratifiedPerfectDetailed. Apply sfIntegralDirectImage_constructible, and realizationCompletedImage to its chosen Roos limit. Transport back through the counit; isomorphism closure and the characterization give the integral predicate on the ordinary image.",
    "uses": [
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§6.5 coefficient hypotheses and proof of Lemma 6.7.2"
-   }
-  },
-  {
-   "text": "The ambient $Rh_{*,A}$ uses the coefficient identification $c_h:h^{-1}A_U\\cong A_T$ of [lem-weil-pbc-profinite-coefficient-inverse-image], as [prop-weil-pbc-direct-image-limits] requires; it equals the chart-transported identification of step 1: both are adjoint to maps $A_U\\to h_*A_T$ whose $n$-th projections send a section to its precomposition with the base-change projection (reduction modulo $\\varpi^n$ of continuous $A$-valued functions commutes with precomposition), and a map into the limit $A_T$ is determined by its projections. Put $N=Rh_{*,A}M$, using ordinary ambient direct image. By [prop-weil-pbc-direct-image-limits], completeness of $M$ gives a canonical identification $N\\cong R\\varprojlim_n Rh_{*,A}(\\operatorname{Res}_nM_n)$, including the specified quotient-tower transition maps. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the two equal composites of ringed-topos morphisms from $(T,(P_n)_T)$ to $(U,A_U)$. Since coefficient restriction is exact, its derived functor is restriction itself, and this comparison identifies each term with $\\operatorname{Res}_n Rh_{*,n}M_n$, naturally in $n$. This is exactly the completed integral direct image of [def-weil-derived-direct-image], with its prescribed tower, rather than an unspecified isomorphism on each level. By [lem-sf-integral-direct-image-constructible] the latter object is in the derived-complete integral category on $U$: the hypotheses are finite-type schemes over the field $k$ and $\\ell$ invertible in $k$, with no properness or algebraic-closedness assumption. Finally [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this category with $\\mathcal I_U$, including compatible etale-origin witnesses. Thus $N\\in\\mathcal I_U$ and in particular $N$ is bounded below.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "def-weil-derived-direct-image",
+    "lem-weil-pbc-uniform-complete-triangulated",
     "lem-sf-integral-direct-image-constructible",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
+    "lem-weil-pbc-realization-completed-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9 and proof of Lemma 6.7.2; derived ringed-topos composition also Stacks Tag 0D6E"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\eta_{V,K}:K\\to r_VF_VK$ for the scalar-extension unit. The adjunction in [lem-weil-pbc-realization-scalar-functor] defines $\\beta_{h,M}$ as the unique adjunct of\n$$N\\xrightarrow{Rh_{*,A}(\\eta_{T,M})}Rh_{*,A}r_TF_TM\\xrightarrow{d_{F_TM}^{-1}}r_URh_{c,*}F_TM.$$\nConsequently, setting $g=d_{F_TM}\\circ r_U(\\beta_{h,M})$, the unit-adjunct identity reads\n$$g\\circ\\eta_{U,N}=Rh_{*,A}(\\eta_{T,M}).$$\nThis is precisely the requested normalization; it uses the specified $d$ from [lem-weil-pbc-ring-sheaf-change-adjunction]. Naturality of the unit, $d$, and the adjunction bijection makes $\\beta$ natural in $M$.",
+   "text": "Define beta on all ambient objects as Adjunction.pushHomOfComapIso of the specified restriction/direct-image isomorphism. The unit mate equation gives its normalization, and whiskering restricts it to the integral category. The integral characterization gives a lower bound, and finite-type separated geometry gives qcqs. realizationScalarPushMate_isIso proves componentwise invertibility.",
    "uses": [
-    "lem-weil-pbc-realization-scalar-functor",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-weil-pbc-realization-scalar-push-mate",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15; adjunction definition of the scalar-extension/direct-image comparison"
-   }
-  },
-  {
-   "text": "Use the $\\ell$-telescope of [def-weil-pbc-integral-localization-telescope]. Under step 1's encodings its vertex at a complex $K$ is $r_VF_VK$ and its $n$-th leg is $\\ell^{-n}\\eta_{V,K}$. This is the same scalar extension as $\\varpi$-localization by step 2, and the unit is the same actual inclusion. Apply [lem-weil-pbc-integral-localization-homology-colimit] on $U$ to $N$ (bounded below by step 3): for each $q$, the maps $H^q(\\ell^{-n}\\eta_{U,N})$ exhibit $H^q(r_UF_UN)$ as the colimit of $H^q(N)\\xrightarrow{\\ell}H^q(N)\\to\\cdots$. Apply [lem-weil-pbc-integral-localization-push-continuity] to $h$ and $M$: its hypotheses are qcqs from step 2 and the lower bound on $M$, also from step 2. It exhibits $H^q(Rh_{*,A}r_TF_TM)$ as the colimit of the image of the same telescope under $H^qRh_{*,A}$. Both diagrams are canonically $H^q(N)\\xrightarrow{\\ell}H^q(N)\\to\\cdots$, because the direct-image functor is additive and carries multiplication by the integer $\\ell$ to multiplication by $\\ell$.",
-   "uses": [
-    "def-weil-pbc-integral-localization-telescope",
-    "lem-weil-pbc-integral-localization-homology-colimit",
-    "lem-weil-pbc-integral-localization-push-continuity",
-    "lem-pc-right-derived-functor-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(1), its common-lower-bound requirement; Bhatt–Scholze Lemma 6.8.2 for the localization telescope"
-   }
-  },
-  {
-   "text": "The map $g$ of step 4 commutes with all telescope legs, not only the zeroth. Indeed multiplication by $\\ell$ is invertible on $F_UN$ and $F_TM$, hence on the two restricted vertices and on $Rh_{*,A}r_TF_TM$. Any additive map commutes with multiplication by the integer $\\ell$, and therefore with its inverse when it is invertible. The unit equation of step 4 thus gives, for every $n\\geq0$,\n$$g\\circ(\\ell^{-n}\\eta_{U,N})=Rh_{*,A}(\\ell^{-n}\\eta_{T,M}).$$\nApply $H^q$. The two colimit cocones from step 5 now have $H^q(g)$ as a morphism with identity map on their common diagram. The universal property supplies an inverse morphism; each composite agrees with the identity on every leg and so is the identity. Therefore $H^q(g)$ is invertible for every $q$.",
-   "uses": [
-    "def-weil-pbc-integral-localization-telescope",
-    "lem-pc-right-derived-functor-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2; equality of all scalar-localization legs"
-   }
-  },
-  {
-   "text": "To pass from these cohomology isomorphisms to an isomorphism in the derived category, choose a K-injective representative $I$ of the target using [prop-pur-kinjective-resolutions-exist]. By [lem-weil-pbc-kinjective-hom-derived], $g$ is represented by a chain map into $I$ from a representative of its source. Its cohomology maps are those of $g$, so this chain map is a quasi-isomorphism and becomes invertible by [def-weil-abstract-derived-category]. Thus $g$ is invertible. Since $d$ is an isomorphism, $r_U(\\beta)$ is invertible; reflection of isomorphisms in [lem-weil-pbc-ring-sheaf-change-adjunction] proves that $\\beta$ is invertible. The construction and the leg identities hold for every $M$ and its morphisms, giving the asserted natural comparison. All uses of direct-image continuity required qcqs only; no properness hypothesis entered.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15; K-injective computation and localization at quasi-isomorphisms"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-direct-image",
-  "def-weil-pbc-continuous-coefficient-module-encoding",
-  "def-weil-pbc-integral-localization-telescope",
-  "lem-pc-right-derived-functor-triangulated",
   "lem-sf-integral-direct-image-constructible",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-continuous-chart-scheme-naturality",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
-  "lem-weil-pbc-integral-localization-homology-colimit",
-  "lem-weil-pbc-integral-localization-push-continuity",
+  "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-realization-scalar-functor",
+  "lem-weil-pbc-realization-coefficient-square",
+  "lem-weil-pbc-realization-completed-image",
+  "lem-weil-pbc-realization-continuous-direct-image",
+  "lem-weil-pbc-realization-scalar-push-mate",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-valued-dvr-finite-quotients",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-uniform-complete-triangulated",
   "prop-weil-pbc-direct-image-limits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 6.5.9 and 6.7.2, Lemma 6.8.2 and Remark 6.8.15, with Hemo–Richarz–Scholbach Lemma 5.3(1); explicit adjunction-unit normalization and all telescope legs written out"
+  "place": "Lemmas 6.5.9, 6.7.2, 6.8.2 and Remark 6.8.15",
+  "note": "R1: explicit adjunction mate and completed-image assembly; isolate coefficient naturality, internal/section image transport, complete-image Roos agreement and bounded-below scalar mate as separate results."
  },
  "mathlib_searches": [
   {
@@ -238,9 +151,7 @@
  },
  "tool_uses": [
   "lem-sf-integral-direct-image-constructible",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -275,5 +186,15 @@
   "group": "NG",
   "result": "pass",
   "note": "First S2 delivery; node identical to live except lean. All clauses match the node and BS 6.7.2/6.8.15: no properness, hypotheses not stronger. scalarMap, integralPullback (=completedCoefficientMap), rationalPullback (sectionwise normalized) and beta (unique adjunct = Rh(eta_T) then d.inv from ring-sheaf-change) are all pinned; beta is natural and iso at every M; completed uses the actual Roos SfIntegralDirectImage. Statement verbatim, 1 sorry, docstrings with source, blueprint tag and 7 steps; no name collisions. Edge cases ok (empty T, M=0, h=id or open immersion, ramified E, torsion). Not recompiled per the 2026-10-21 rule; worker reports scompile clean. Advisories: def-weil-derived-direct-image and integral-characterization declarations used without being stmt_deps; completed and continuous_direct_image isos unnormalized but only 'agrees' or extra true clauses; scalarMap repeats NC realizationPullScalarMap; many proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T203755-L-3868697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

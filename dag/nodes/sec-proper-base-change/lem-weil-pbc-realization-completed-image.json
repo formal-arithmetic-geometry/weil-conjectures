@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-realization-completed-image",
+ "kind": "statement",
+ "title": "Ordinary complete direct image agrees with its specified finite-image Roos limit",
+ "statement": "Let ell be prime, E/Q_ell a finite normed extension, h:T→U any scheme morphism, and c_A:h^{-1}A_U≅A_T the canonical completed coefficient comparison of [def-weil-pbc-completed-pullback]. Let K be an arbitrary derived-complete complex in the detailed completed integral module category of [def-weil-derived-complete]. Suppose the product of its restricted finite direct-image terms exists. For every chosen Roos-limit object L of that tower, with the transitions prescribed by [def-weil-derived-direct-image], ordinary derived direct image of K after the normalized coefficient transport is isomorphic to the coefficient transport of L. No boundedness, constructibility, geometric base or properness assumption is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 6.5.9, 6.5.11, 6.8.2 and Remark 6.8.15; the corresponding step of lem-weil-pbc-realization-localized-push"
+ },
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof": [
+  {
+   "text": "First compare the canonical completed structural map with the detailed structural map after the normalized coefficient isomorphisms. On each finite projection this is naturality of the constant-sheaf comparison and the prescribed quotient lift. Equality follows by joint monicity of the inverse-limit projections. The resulting identity on sections is linear, so it gives the ordinary direct-image/restriction square. Exact coefficient restriction is an equivalence; deriving the square gives the corresponding comparison on ambient derived direct images.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-direct-image",
+    "def-sf-completed-module-direct-image",
+    "lem-sbc-adic-finite-exchange-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Countable products of pro-etale module sheaves are exact. The derived localization Q therefore preserves them. Represent a family by K-injective complexes; their termwise product is K-injective by right orthogonality. The derived-functor units on the factors and product identify the image product with the product of derived images. Ordinary completed module direct image preserves products because its underlying additive presheaf is precomposition. Thus its total right derived functor preserves countable products.",
+   "uses": [
+    "det-pe-products-exact",
+    "det-pe-products-derived",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the completeness Roos triangle through this triangulated product-preserving functor. Its one-minus-shift arrow becomes the one-minus-shift of the image tower. The specified sfDerivedRestrictionComparison isomorphisms transport its terms and transitions to sfDirectImageTerm and sfDirectImageTransition by their definitions. The derived-limit morphism theorem and levelwise-isomorphism criterion compare this Roos object with every given SfIntegralDirectImage. Compose with the derived coefficient square from the first step.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "lem-weil-derived-limit-morphism",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-completed-module-direct-image",
+  "def-weil-derived-direct-image",
+  "det-pe-products-derived",
+  "det-pe-products-exact",
+  "lem-sbc-adic-finite-exchange-encoding",
+  "lem-weil-derived-limit-morphism",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-proetale-countable-products-exact",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The coefficient, completed-image and localization steps of the parent node",
+  "note": "Separate result isolated from the parent argument; no target statement or definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous integral coefficient sheaves commute with inverse image; coefficient presentation equivalences commute with derived direct image and scalar localization",
+   "date": "2026-10-21",
+   "results": "Eight presentation-transport hits; no coefficient pullback, completed-image or localization comparison matching this statement.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Limits.IsColimit",
+   "date": "2026-10-21",
+   "results": "Two presheaf-module colimit adjunction hits, not the required geometric comparison.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCoefficientPullback|rightDerivedFunctorComp|homEquiv_naturality",
+   "date": "2026-10-21",
+   "results": "Adjunction naturality and sheaf module adjunction APIs; no direct theorem for these normalized coefficient comparisons.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized coefficient module equivalence commutes with derived direct image and localization of bounded below complexes",
+   "date": "2026-10-21",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors and algebraic module localization equivalences.",
+   "verdict": "No theorem matching the normalized geometric assertion. The exact-functor factorization API is used in the categorical proof, while algebraic localization equivalences do not supply the sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RealizationLocalizedPush",
+  "date": "2026-10-21",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-realization-localized-push",
+   "place": "Proof steps 1, 3, 5-7 as applicable",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RealizationCompletedImage",
+  "file": "lean/Sheaf/Paper/RealizationCompletedImage.lean",
+  "declaration": "WeilConjectures.realizationCompletedImage",
+  "statement": "theorem realizationCompletedImage\n    (cA : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj\n      (pbcAdicCompletion U (pbcIntegralDatum l E)) ≅\n        pbcAdicCompletion T (pbcIntegralDatum l E))\n    (hcA : cA.hom = completedCoefficientMap h (pbcIntegralDatum l E))\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E T))\n    (hK : IsSfDerivedComplete l E T K)\n    [HasProduct (sfDirectImageTerm l E h K)] (L : SfIntegralDirectImage l E h K) :\n    Nonempty ((proEtaleRingDerivedDirectImage h _ _ cA).obj\n        ((integralDetailedTransport T l E).obj K) ≅\n      (integralDetailedTransport U l E).obj L.obj)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T203755-L-3868697",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T203755-L-3868697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

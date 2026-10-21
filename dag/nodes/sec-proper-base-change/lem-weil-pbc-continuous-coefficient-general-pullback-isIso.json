@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+ "kind": "statement",
+ "title": "Continuous integral and rational coefficient pullback for arbitrary morphisms",
+ "statement": "Let ell be prime and E/Q_ell a finite field extension. Equip E with its canonical spectral norm and A=O_E with the induced topology. For every morphism h:Z→X of schemes, continuous precomposition gives isomorphisms h^{-1}A_X→A_Z and h^{-1}E_X→E_Z, where B_X(V)=C(|V|,B). These are the canonical adjoints of precomposition on base-changed pro-etale tests. Integral precomposition commutes with reduction modulo each positive uniformizer power and with A→E. Maps into A_X are determined by all these reduction projections. These constructions use the coefficient conventions of [lem-weil-pbc-continuous-coefficients-immersion-restriction].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 6.5.9, 6.5.11, 6.8.2 and Remark 6.8.15; the corresponding step of lem-weil-pbc-realization-localized-push"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The finite constant quotient tower is preserved by inverse image, and\nits limit is the continuous integral coefficient sheaf. Projectionwise reduction\nidentifies its comparison with the canonical pullback. To obtain a rational\ninverse, pull back integral inclusion through the integral inverse. Constants\nshow that this map inverts the uniformizer. The localization universal property\nextends it uniquely to rational coefficients. Naturality of inclusion and\nuniqueness on integral numerators prove the two inverse equations. ",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The coefficient, completed-image and localization steps of the parent node",
+  "note": "Separate result isolated from the parent argument; no target statement or definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous integral coefficient sheaves commute with inverse image; coefficient presentation equivalences commute with derived direct image and scalar localization",
+   "date": "2026-10-21",
+   "results": "Eight presentation-transport hits; no coefficient pullback, completed-image or localization comparison matching this statement.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Limits.IsColimit",
+   "date": "2026-10-21",
+   "results": "Two presheaf-module colimit adjunction hits, not the required geometric comparison.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCoefficientPullback|rightDerivedFunctorComp|homEquiv_naturality",
+   "date": "2026-10-21",
+   "results": "Adjunction naturality and sheaf module adjunction APIs; no direct theorem for these normalized coefficient comparisons.",
+   "verdict": "No matching theorem; the listed categorical APIs supply only individual proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized coefficient module equivalence commutes with derived direct image and localization of bounded below complexes",
+   "date": "2026-10-21",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors and algebraic module localization equivalences.",
+   "verdict": "No theorem matching the normalized geometric assertion. The exact-functor factorization API is used in the categorical proof, while algebraic localization equivalences do not supply the sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RealizationLocalizedPush",
+  "date": "2026-10-21",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-realization-localized-push",
+   "place": "Proof steps 1, 3, 5-7 as applicable",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientGeneralPullbackIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientGeneralPullbackIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientPullback_isIso_of_finiteExtension",
+  "statement": "theorem continuousCoefficientPullback_isIso_of_finiteExtension\n    (l : ℕ) [Fact l.Prime] (E : Type u)\n    [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {Z X : Scheme.{u}} (h : Z ⟶ X) :\n    letI := coefficientExtensionNormedField l E\n    IsIso (continuousCoefficientPullback\n      (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) h) ∧\n    IsIso (continuousCoefficientPullback (ULift.{u + 1, u} E) h)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralContinuousPullback",
+   "AlgebraicGeometry.Scheme.integralContinuous_hom_ext",
+   "AlgebraicGeometry.Scheme.rationalCoefficientValue_ext",
+   "AlgebraicGeometry.Scheme.rationalCoefficientDirectImage_value",
+   "AlgebraicGeometry.Scheme.integralContinuousPullback_reduction",
+   "AlgebraicGeometry.Scheme.rationalContinuousPullback",
+   "AlgebraicGeometry.Scheme.rationalContinuousPullback_normalized",
+   "AlgebraicGeometry.Scheme.integralContinuousPullback_inclusion",
+   "AlgebraicGeometry.Scheme.continuousCoefficientPullback_isIso_of_finiteExtension",
+   "AlgebraicGeometry.Scheme.rationalContinuousPullback_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T203755-L-3868697",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261021T203755-L-3868697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
