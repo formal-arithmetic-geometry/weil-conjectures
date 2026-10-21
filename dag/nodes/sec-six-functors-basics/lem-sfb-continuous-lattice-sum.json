@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sfb-finite-sum-lattice], $\\Lambda$ has an $A$-basis $b_1,\\ldots,b_r$ also forming an $E$-basis, and its coordinate map $A^r\\to\\Lambda$ is a homeomorphism; the same holds for every $\\Lambda_j$.",
+   "text": "Apply [lem-sfb-finite-sum-lattice] to obtain an A-basis b of the sum N and an E-basis c of E^r with the same vectors. Their coordinate functions agree after inclusion A → E: expand an element in b and use the equality of basis vectors. The E-linear coordinate map of c is continuous because its source is a finite power of E. Restrict it to N and factor each coordinate through the subtype A. This proves continuity of b.equivFun in the actual ambient norm topology, without comparing it with the explicitly recorded spectral topology.",
    "uses": [
     "lem-sfb-finite-sum-lattice"
    ],
@@ -30,19 +30,19 @@
    }
   },
   {
-   "text": "Set $M=\\prod_j\\Lambda_j$ with its product topology and $N=\\Lambda$. Addition and scalar multiplication on these modules are restrictions of the continuous operations on finite powers of $E$ [def-weil-l-adic-coefficient-extension]. The sum map $q:M\\to N$ is continuous by finite coordinatewise addition. It is surjective: each element of the algebraic sum is a finite sum, which can be grouped by $j$, inserting zeros. Apply [lem-sfb-topological-basis-lift-section] to $q$ and the basis from step 1. This gives the required continuous $A$-linear section $s$.",
+   "text": "For each basis vector b_i use membership in the finite submodule supremum to choose y_i in the product of the input lattices whose sum is b_i. Use Basis.constr to extend y A-linearly to s₀ : N → ∏j Λ_j. Let q be the sum of the inclusion maps; basis extensionality proves q ∘ s₀ equals the inclusion of N. The map s₀ ∘ b.equivFun.symm is linear on A^r and hence continuous by LinearMap.continuous_on_pi. Compose with the continuous coordinate map from step 1 to obtain continuity of s₀. These are the explicit basis lifts of the source Pushing down by the trace paragraph. The sum q is continuous by finite addition.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-sfb-topological-basis-lift-section"
+    "lem-sfb-finite-sum-lattice",
+    "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
     "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
    }
   },
   {
-   "text": "For $f\\in C(Z,\\Lambda)$, the functions $f_j=\\operatorname{pr}_j\\circ s\\circ f$ are continuous and satisfy $\\sum_j f_j=q\\circ s\\circ f=f$. Finiteness of $J$ identifies this tuple with an element of the direct sum. This proves the continuous-function assertion for every $Z$.",
+   "text": "For any topological space $Z$ and continuous $f:Z\\to\\Lambda$, put $f_j=s_j\\circ f$. Each $f_j$ is continuous into $\\Lambda_j$, and $\\sum_j f_j=(q\\circ s)\\circ f=f$. As $J$ is finite the tuple $(f_j)_j$ is an element of the displayed direct sum. Conversely any finite sum of such functions is continuous and takes values in $\\Lambda$. Thus the continuous-function sum map is surjective for every $Z$, with no compactness or connectedness assumption.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -51,23 +51,31 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-continuous-frame-sheaf-comparison] with $K=E$, $A=\\mathcal O_E$ and the frames of step 1, to $\\Lambda$ and each $\\Lambda_j$. It gives sheaves $F_\\Lambda(U)=C(|U|,\\Lambda)$ and $F_j(U)=C(|U|,\\Lambda_j)$, and $F_\\Lambda\\cong A_S^r$. Their inclusions into $E_S^r$ are injective sectionwise. Step 3 with $Z=|U|$ says that the sectionwise image of $\\bigoplus_jF_j$ is exactly $F_\\Lambda(U)$. The map onto $F_\\Lambda$ therefore has zero sectionwise cokernel, hence zero sheaf cokernel by [def-weil-sheaf-of-modules-category]. Its following inclusion is a monomorphism, so $F_\\Lambda$ is the sheaf image, namely the sum of the submodule sheaves.",
+   "text": "For every topological abelian group M, apply [lem-cbc-continuous-functions-fpqc-sheaf], restrict along proetaleTopology ≤ fpqcTopology, and precompose by the continuous functor ProEt.forget S ⋙ Over.forget S. This gives the required sheaf conditions for all the input lattices and N with their actual subspace topologies. For any finite basis with continuous coordinates, explicitly construct the linear equivalence (i → C(Z,A)) ≃ C(Z,N) by pointwise basis reconstruction, with inverse pointwise coordinates. The reconstruction map is continuous by LinearMap.continuous_on_pi. This equivalence commutes definitionally with precomposition, hence with every restriction map.",
    "uses": [
-    "lem-sfb-continuous-frame-sheaf-comparison",
-    "def-weil-sheaf-of-modules-category"
+    "lem-cbc-continuous-functions-fpqc-sheaf"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
     "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
    }
   },
   {
-   "text": "For the same frame of $\\Lambda$, [lem-sfb-continuous-frame-sheaf-comparison] identifies scalar extension of its actual inclusion with the invertible constant basis matrix $B$, with inverse $B^{-1}$. Hence the inclusion becomes an isomorphism over $E_S$. The two cited frame results and the basis-lift result include rank zero, so this assembly applies also when $r=0$.",
+   "text": "Each input lattice maps continuously into N by the actual subtype inclusion, so the range of its continuous-function inclusion lies in the range for N. Conversely, for every scheme object U and f : C(U,N), postcompose f with the continuous section s constructed in step 2. The components give g_j : C(U,Λ_j), whose inclusions sum pointwise to f by q s = 1. Membership in the supremum of the submodule ranges follows by finite sum membership. Thus both submodule inclusions hold sectionwise. With the sheaf property from step 4, this is the stated sheaf sum identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
+   }
+  },
+  {
+   "text": "Let d be the continuous-function coordinate equivalence for b and dc the one for c. On each U, tensor d.symm with C(U,E), apply Mathlib TensorProduct.piScalarRight, and apply dc. This is an additive equivalence from the stated tensor product to C(U,E^r). On a pure tensor, its coordinates are b.equivFun(f(x))_i times a(x). The coordinate identity from step 1 and commutativity of E identify this with a(x) • f(x), proving that this is the actual inclusion comparison. This realizes the source inverse-matrix argument using basis equivalences. All constructions use finite sums and are valid for r = 0. The sectionwise comparison and sheaf clauses are exactly the existing Lean statement; no new sheafification result is needed.",
    "uses": [
-    "lem-sfb-continuous-frame-sheaf-comparison"
+    "lem-sfb-finite-sum-lattice"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
     "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice"
@@ -77,14 +85,12 @@
  "proof_deps": [
   "lem-sfb-finite-sum-lattice",
   "def-weil-l-adic-coefficient-extension",
-  "lem-sfb-topological-basis-lift-section",
-  "lem-sfb-continuous-frame-sheaf-comparison",
-  "def-weil-sheaf-of-modules-category"
+  "lem-cbc-continuous-functions-fpqc-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-  "place": "Pushing down by the trace: identification of the sheaf sum with the continuous module of the finite sum lattice; explicit basis lifts, continuous postcomposition and tensor coordinates supplied by the worker"
+  "place": "Pushing down by the trace: explicit basis lifts, direct continuity of field-basis coordinates, fpqc sheaf restriction, and Mathlib finite tensor-product coordinates; implemented by U4"
  },
  "mathlib_searches": [
   {
@@ -213,5 +219,15 @@
   "result": "pass",
   "note": "Node, all 6 stmt_deps (identical to side-live), proof deps lem-sfb-finite-sum-lattice / lem-cbc (Mathlib isSheaf_fpqcTopology_continuousMapPresheafAb:116) and source sk-lem-stratified-lattice.proof.md 'Pushing down by the trace' read. H3 clause-by-clause: ℓ prime; NormedField/NormedAlgebra/FiniteDimensional E (the norm is the unique ℓ-adic extension, no case lost); A = recorded Padic.coefficientExtensionIntegers; r:ℕ incl. 0; J Fintype+Nonempty; hL = A-basis equal to an E-basis; Λ = ⨆ L j; continuous A-linear section s with q∘s = 1; surjectivity for every Z; sheaf conditions for the C(|U|,Λ_j) and C(|U|,Λ) presheaves on ProEt.topology; sectionwise sum = C(|U|,Λ) (a sheaf, hence the sum of sheaves); restriction-compatible rank-r trivialization; scalar-extension iso pinned on pure tensors. Edge cases: r=0, |J|=1, empty/non-compact Z, empty U/S, independent universes u v w z. Helper continuousLatticeInclusion has real data (no Mathlib C(X,R)-linear postcomposition). H5/H6/H8/H9/H2 ok; lean.statement verbatim; report sections present. nt_compile --json 12.6 s rc=0, clean. Advisories: sectionwise sheaf formulation (tensor clause at presheaf level, true, = node step 6); NormedField convention vs parent's spectralNorm letI (stage-3 bridge); stmt_dep modules imported by convention but unused by the statement."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-66781",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261021T120739-L-3942576",
+  "kind": "interface",
+  "note": "independent cc review: delivered ContinuousLatticeSum.lean vs live (statement and continuousLatticeInclusion byte-identical; 560 s compile rc 0, axioms only sorryAx via Padic.finite_sum_lattice); node lem-sfb-continuous-lattice-sum changes only proof/proof_deps/proof_origin; CoefficientExtensionFinite still a public import of FiniteSumLattice, unit route kept; no importers"
+ }
 }
