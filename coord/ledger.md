@@ -23904,3 +23904,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:37 L: merged deliver/NJ/lem-sfb-countable-endomorphism-module-reconstruction (reviewer PASS; first push; new nodes: 4)
 - 22:38 L: merged deliver/NK/lem-sfb-ultrametric-orthogonal-extension (reviewer PASS; first push; new nodes: 0)
 - 22:39 L: returned deliver/NL/det-prop-diagonal-tower-coefficients (reviewer RETURN: L: independent stage-2 immutable head 15ec878f9789: A6/A7/H13: N8's delivery of this item was PASSed (cf03d617d), landed)
+- 22:40 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
