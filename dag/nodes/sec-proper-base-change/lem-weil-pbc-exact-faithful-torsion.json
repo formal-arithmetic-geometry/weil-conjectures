@@ -14,9 +14,99 @@
   "def-weil-pbc-additive-functor",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I$ have positive integers as objects and one arrow $n\\to m$ exactly when $n\\mid m$. This category is small and filtered: $1$ is an object, $nm$ receives arrows from $n$ and $m$, and parallel arrows are equal. For a module sheaf $E$, write $i_n^E:E[n]\\to E$ for its kernel inclusion. If $m=rn$, then $(m\\operatorname{id}_E)i_n^E=r(n\\operatorname{id}_E)i_n^E=0$, so there is a unique $t_{nm}^E:E[n]\\to E[m]$ with $i_m^Et_{nm}^E=i_n^E$. Uniqueness gives $t_{nn}^E=\\operatorname{id}$ and $t_{mk}^Et_{nm}^E=t_{nk}^E$. Thus these kernels form a diagram $T_E:I\\to\\Mod(\\mathcal O)$ and the $i_n^E$ form a cocone to $E$. The module-sheaf colimit theorem supplies its colimit $L_E$; write $u_n^E:E[n]\\to L_E$ for the legs. The colimit universal property constructs $c_E:L_E\\to E$ by $c_Eu_n^E=i_n^E$. Apply this for $(\\mathcal O,E)=(\\mathcal R,F)$ and $(\\mathcal S,AF)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); positive-integer diagram and its cocone constructed here"
+   }
+  },
+  {
+   "text": "For either coefficient ring, let $U$ forget the module structure. The cited theorem says that $U$ preserves kernels and all small colimits. Since $U(n\\operatorname{id}_E)=n\\operatorname{id}_{UE}$, uniqueness of kernel factorizations identifies $U(T_E)$, including its transitions and inclusions, with $T_{UE}$. Preservation of the colimit and its defining legs then identifies $U(c_E)$ with $c_{UE}$. Moreover $U$ reflects invertibility: if the underlying abelian-sheaf map of a module morphism $h:E\\to G$ has inverse $v$, then on each object $V$, $h_V(v_V(a y))=a y=h_V(a v_V(y))$, whence $v_V(a y)=a v_V(y)$ by injectivity of $h_V$. Thus the already natural additive inverse $v$ is a module morphism. Consequently $UE$ is torsion exactly when $c_E$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); reflection by the sectionwise linearity calculation written here"
+   }
+  },
+  {
+   "text": "Additivity and preservation of identities give $A(n\\operatorname{id}_F)=n\\operatorname{id}_{AF}$, by induction on the sum of $n$ identities. Kernel preservation, assumed for $A$, therefore says that $A(i_n^F):A(F[n])\\to AF$ is a kernel of $n\\operatorname{id}_{AF}$. The chosen inclusion $i_n^{AF}:(AF)[n]\\to AF$ is another kernel of that same map. Their universal properties give maps $\\alpha_n:A(F[n])\\to(AF)[n]$ and $\\delta_n:(AF)[n]\\to A(F[n])$ with $i_n^{AF}\\alpha_n=A(i_n^F)$ and $A(i_n^F)\\delta_n=i_n^{AF}$. Kernel uniqueness gives $\\delta_n\\alpha_n=\\operatorname{id}$ and $\\alpha_n\\delta_n=\\operatorname{id}$, so $\\alpha_n$ is the canonical kernel isomorphism.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); additivity, the assumed preservation of kernels, and the kernel universal property"
+   }
+  },
+  {
+   "text": "For $n\\mid m$, the two maps $\\alpha_m A(t_{nm}^F)$ and $t_{nm}^{AF}\\alpha_n$ from $A(F[n])$ to $(AF)[m]$ have the same composite with $i_m^{AF}$: the first gives $A(i_m^F)A(t_{nm}^F)=A(i_n^F)$ and the second gives $i_n^{AF}\\alpha_n=A(i_n^F)$. A kernel inclusion is monic, since the uniqueness part of its universal property cancels it. Hence these two maps agree. Thus the $\\alpha_n$ identify the entire diagrams $A\\circ T_F$ and $T_{AF}$, with their cocones to $AF$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); compatibility proved by cancelling the kernel inclusion"
+   }
+  },
+  {
+   "text": "Apply preservation of colimits by a left adjoint to the small category $I$, the diagram $T_F$, and the given adjunction $A\\dashv B$. The cocone with vertex $A(L_F)$ and legs $A(u_n^F)$ is a colimit of $A\\circ T_F$. Set $\\beta_n=u_n^{AF}\\alpha_n:A(F[n])\\to L_{AF}$; step 4 makes these compatible. They also form a colimit cocone: any cocone $z_n:A(F[n])\\to Q$ gives a cocone $z_n\\alpha_n^{-1}:(AF)[n]\\to Q$, whose unique factorization through $L_{AF}$ is exactly the required factorization of the $z_n$. Uniqueness of colimits now gives an isomorphism $\\theta:A(L_F)\\xrightarrow{\\sim}L_{AF}$ characterized by $\\theta A(u_n^F)=u_n^{AF}\\alpha_n$. Its inverse is obtained from the colimit cocone $A(u_n^F)\\alpha_n^{-1}$ on $T_{AF}$; both inverse identities follow by composing with every colimit leg.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1); explicit transport along the diagram isomorphism and uniqueness of colimits"
+   }
+  },
+  {
+   "text": "The comparison preserves the canonical arrow, not just its source object. For each $n$, compute $c_{AF}\\theta A(u_n^F)=c_{AF}u_n^{AF}\\alpha_n=i_n^{AF}\\alpha_n=A(i_n^F)=A(c_F)A(u_n^F)$. Since the $A(u_n^F)$ are the legs of the colimit established in step 5, the uniqueness of a map out of that colimit gives $c_{AF}\\theta=A(c_F)$. In particular $c_{AF}$ is invertible if and only if $A(c_F)$ is invertible.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1); equality of the two canonical maps tested on every colimit leg"
+   }
+  },
+  {
+   "text": "If $c_F$ has inverse $v$, then $A(v)$ is inverse to $A(c_F)$ by functoriality. Conversely suppose $A(c_F)$ has inverse $w$. Fullness gives $v:F\\to L_F$ with $A(v)=w$. Then $A(c_Fv)=\\operatorname{id}_{AF}$ and $A(vc_F)=\\operatorname{id}_{A(L_F)}$; faithfulness gives $c_Fv=\\operatorname{id}_F$ and $vc_F=\\operatorname{id}_{L_F}$. Thus $c_F$ is invertible exactly when $A(c_F)$ is. Combine this with step 6 and step 2 for $E=F,AF$ to obtain the equivalence of torsion for the underlying abelian sheaves. The argument uses the whole diagram of positive integers, and nowhere assumes one integer kills $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact) supplies the preceding colimit comparison; reflection is the explicit full-and-faithful inverse-lifting argument here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-additive-functor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03DB, combined with Categories Tag 0038; kernel-diagram naturality, canonical-map equation, and full-faithful reflection proved explicitly in the steps"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -66,10 +156,45 @@
    "results": "{\"t\": \"2026-10-21T03:04:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.reflectsIsomorphisms_of_full_and_faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.reflectsIsomorphisms_of_full_and_faithful'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: Loogle did not recognize the proposed identifier; semantic and local-source searches were also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive fully faithful left adjoint preserving kernels preserves and reflects torsion objects defined by colimits of integer multiplication kernels",
+   "results": "{\"t\": \"2026-10-21T03:21:27Z\", \"tool\": \"leanfinder\", \"query\": \"An additive fully faithful left adjoint preserving kernels preserves and reflects torsion objects defined by colimits of integer multiplication kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\", \"CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint\", \"CategoryTheory.abelianOfAdjunction\", \"CategoryTheory.AbelianOfAdjunction.hasKernels\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"CategoryTheory.ObjectProperty.le_kernel_of_isoModSerre_isInvertedBy\"], \"digest\": \"eb3248b915f38c26\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern general exactness, Serre classes, or preservation/reflection of colimits; none states the integer-kernel torsion comparison and reflection"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(reflect|faithful|colimit)|(reflect|faithful|colimit).*torsion",
+   "results": "{\"t\": \"2026-10-21T03:21:55Z\", \"tool\": \"grep\", \"query\": \"torsion.*(reflect|faithful|colimit)|(reflect|faithful|colimit).*torsion\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern general exactness, Serre classes, or preservation/reflection of colimits; none states the integer-kernel torsion comparison and reflection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact fully faithful functor preserving colimits preserves and reflects integer torsion sheaves",
+   "results": "{\"t\": \"2026-10-21T03:21:55Z\", \"tool\": \"leansearch\", \"query\": \"An exact fully faithful functor preserving colimits preserves and reflects integer torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.Limits.IsColimit.ofFaithful\", \"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.exactFunctor\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.Limits.instIsClosedUnderColimitsOfShapeEssImageOfHasColimitsOfShapeOfPreservesColimitsOfShapeOfFullOfFaithful\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"CategoryTheory.exactFunctor_iff\"], \"digest\": \"6bf5eb543922cecb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern general exactness, Serre classes, or preservation/reflection of colimits; none states the integer-kernel torsion comparison and reflection"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Limits.PreservesColimits",
+   "results": "{\"t\": \"2026-10-21T03:21:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Additive, CategoryTheory.Limits.PreservesColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern general exactness, Serre classes, or preservation/reflection of colimits; none states the integer-kernel torsion comparison and reflection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The filtered union of n torsion kernels is preserved by an additive functor that preserves kernels and filtered colimits",
+   "results": "{\"t\": \"2026-10-21T03:21:57Z\", \"tool\": \"leanfinder\", \"query\": \"The filtered union of n torsion kernels is preserved by an additive functor that preserves kernels and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instPreservesHomologyFunctorAddCommGrpCatColim\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_inverseImage_isomorphisms\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.hf\", \"CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels\", \"CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"instPreservesFiniteLimitsFunctorAddCommGrpCatColim\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"CategoryTheory.ObjectProperty.le_kernel_of_isoModSerre_isInvertedBy\"], \"digest\": \"bf4bd596d4ac3ffa\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern general exactness, Serre classes, or preservation/reflection of colimits; none states the integer-kernel torsion comparison and reflection"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-properbasechange",
@@ -81,10 +206,34 @@
  "blueprint": {
   "from": {
    "node": "sk-thm-properbasechange",
-   "place": "Opening paragraph: descending torsion cohomology along the exact fully faithful classical comparison; extracted from former split step 2",
+   "place": "Opening classical-comparison descent of sk-thm-properbasechange: exact fully faithful comparison inverse image reflects torsion of the cohomology sheaves; current ancestor split step 1",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-exact-faithful-torsion",
+  "worker": "stage1",
+  "summary": "Seven steps construct the positive-integer kernel diagram, identify its underlying abelian-sheaf torsion map, compare kernels and transitions, use left-adjoint preservation of colimits, verify the canonical-map equation, and lift the inverse by full faithfulness. No statement change and no new nodes; existing 03DA/03DB and 0038 nodes supply every non-elementary tool. Mathlib and project-source searches find supporting tools but no full attachment.",
+  "blueprint": "Realizes the torsion-reflection part of the opening classical-comparison descent in sk-thm-properbasechange (current ancestor split step 1); keeps the proper-base-change route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic existence and forgetful preservation of module-sheaf kernels and small colimits on both sites, needed to identify the underlying abelian torsion map; this classical-comparison argument needs no other unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-ea28ac012",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-ea28ac012 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full. The delivery adds no new nodes and does not change the statement. The base item had no proof, and there is no re-split repair note for it. Steps 1-7 are correct. Step 1 builds the kernel diagram on the divisibility poset, which is small and filtered, with transition maps from m=rn. Step 2 uses Stacks 03DA/03DB (sites-modules.tex l.1336-1400, read; tags checked): forgetting the module structure preserves kernels and colimits, and it reflects isomorphisms by a sectionwise linearity argument, so U(c_E)=c_{UE}. Step 3 gets A(n id)=n id from additivity and compares the kernels; kernel preservation is assumed, which is needed because a left adjoint only preserves cokernels. Step 4 proves naturality of the kernel isomorphisms using monic kernel inclusions. Step 5 uses Stacks 0038(1) (categories.tex l.3471) to show beta_n is a colimit cocone and gives theta. Step 6 checks c_AF theta = A(c_F) on the colimit legs, in the right direction. Step 7 lifts the inverse by fullness and reflects it by faithfulness. This supplies the reflect direction that sk-thm-properbasechange step 0 needs for A_X=nu_X^*. Edge cases checked: n=1, a torsion-free group on the point site, Q/Z (no uniform exponent needed), and A=0 (shows full faithfulness is needed). A whole-DAG scan for torsion with preserve/reflect plus fully faithful/kernel found no duplicate. I accept the declared off-unit tool_use of lem-weil-pbc-module-sheaves-colimits-forgetful (unit sk-thm-reduction) as a generic black-box tool. No SGA source is used, and no fixes were needed."
  }
 }
