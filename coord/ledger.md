@@ -22257,3 +22257,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:13 L: merged deliver/M7/Sheaf.ZetaWeil.FiniteProjectiveModuleDualPairing (stage 3; reviewer PASS; first push; landing 20261021T111349-L-82450 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:13 L: merged deliver/M9/Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible (stage 3; reviewer PASS; first push; landing 20261021T111352-L-86083 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:13 L: merged deliver/N1/Sheaf.Paper.EtaleProEtaleScalarPullbackCube (stage 3; reviewer PASS; first push; landing 20261021T111355-L-89424 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:14 L: merged deliver/N2/Sheaf.CategoryTheory.DerivedCategory.ScalarPerfectCohomologyAndPidModels (stage 3; reviewer PASS; first push; landing 20261021T111358-L-92810 (proof); batch 20261021T110859; modules 1; new nodes 0)
