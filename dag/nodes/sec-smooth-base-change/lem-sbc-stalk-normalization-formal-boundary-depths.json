@@ -117,14 +117,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFormalBoundaryDepths.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StalkNormalizationFormalBoundaryDepths.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_formal_boundary_depths",
-  "statement": "theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (G : Type (u + 1)) [Finite G]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ (d : ℕ)\n      (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a),\n      Flat t →\n      t ≫ pullback.snd c a =\n        Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin d))) →\n      let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))\n      let F : Scheme.{u} := pullback n t\n      let E : Scheme.{u} := ∐ (fun _ : G ↦ T)\n      let V := (t ≫ pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U)\n      let r : F ⟶ T := pullback.snd n t\n      let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T)\n      (∀ x : F, r x ∉ V →\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk x) (F.presheaf.stalk x)) ∧\n      (∀ x : E, p x ∉ V →\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk x) (E.presheaf.stalk x))",
+  "statement": "theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] (G : Type (u + 1)) [Finite G] (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (s : S) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := S.presheaf.stalk s) (S.presheaf.stalk s)) : letI : IsFinite PA.obj.hom := PA.property letI : QuasiCompact (c ⁻¹ᵁ U).ι := MorphismProperty.of_isPullback (isPullback_morphismRestrict c U) (inferInstance : QuasiCompact U.ι) let a := S.fromSpecStalk s let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) IsFinite n → ∀ (d : ℕ) (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a), Flat t → t ≫ pullback.snd c a = Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin d))) → let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) let F : Scheme.{u} := pullback n t let E : Scheme.{u} := ∐ (fun _ : G ↦ T) let V := (t ≫ pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) let r : F ⟶ T := pullback.snd n t let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T) (∀ x : F, r x ∉ V → (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk x) (F.presheaf.stalk x)) ∧ (∀ x : E, p x ∉ V → (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk x) (E.presheaf.stalk x))",
   "branch": "sheaf-dag",
-  "by": "S4",
-  "date": "2026-10-13"
+  "by": "C5",
+  "date": "2026-10-21",
+  "note": "C5 retirement: the upstream theorem is the same boundary-depth result and omits only the unused hs hypothesis; the Sheaf duplicate is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -137,14 +138,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "C-a1f7f",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261013T140826-L-316342",
+  "landing": "20261021T002928-L-1579294",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the empty Sheaf stub module, the node lean record and the change record against retire-items.tsv row 2284 and the proved WeilConjectures twin (same conclusion, unused hs dropped; axioms clean; no importers of the Sheaf module)"
  },
  "lean_audit": {
   "master": {
