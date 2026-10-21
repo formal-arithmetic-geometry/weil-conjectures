@@ -12,15 +12,142 @@
  "stmt_deps": [
   "def-weil-pbc-bounded-constructible-complete",
   "def-weil-pbc-rational-category",
-  "def-weil-pbc-condensed-e-module-category",
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-ambient-ringed-exchange",
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-completed-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient datum of [def-weil-l-adic-coefficient-extension] gives finite quotient rings $P_n=A/\\varpi^n$ with their unital quotient transitions. By [lem-weil-pbc-profinite-coefficient-inverse-image], for every edge $h$ the actual map $c_h:h^{-1}A_T\\to A_{T'}$ is an isomorphism, and these isomorphisms carry the finite quotient maps and transitions to the specified ones on $T'$. The tensor formula of [lem-weil-pbc-ringed-topoi-module-adjunction] therefore reduces module pullback to inverse image and gives its module direct-image adjunction. Exactness follows from [lem-weil-pbc-site-pullback-abelian-exact]: kernels and cokernels of module maps have their underlying abelian kernels and cokernels. Thus the generic strict augmentation lemmas below apply. Moreover $\\ell$ annihilates $A/(\\varpi)$: its extended absolute value is $|\\ell|_\\ell=\\ell^{-1}<1$, so $\\ell$ lies in the maximal ideal $(\\varpi)$. It is invertible on all four schemes by hypothesis.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15, with existing general proper-preservation and coefficient-comparison statements"
+   }
+  },
+  {
+   "text": "The base change $f'$ is proper by [lem-weil-pbc-proper-fp-permanence]. Since $Y$ is Noetherian, it is quasi-compact. Apply [lem-sfb-finite-proper-geometric-cd-bound] to $f$: it gives a common bound $e\\geq0$ on geometric fibre dimensions. The hypotheses of [lem-weil-pbc-actual-coefficient-constructible-preservation] now hold, with positive annihilator $\\ell$ from step 1; hence the ordinary ambient $Rf_{*,A}K$ belongs to $\\mathcal I_Y$. By [lem-weil-pbc-integral-stratified-perfect-characterization], its integral category, and that of $K$, are exactly the categories used in [lem-tw-ordinary-completed-integral-pullback]. Apply the latter to $(g,Rf_{*,A}K)$ and $(g',K)$. Both inputs are integral constructible; the schemes are Noetherian, finite dimensional, with $\\ell$ invertible. It follows that both $\\gamma_g$ and $\\gamma_{g'}$ are isomorphisms. They are precisely the units of [def-weil-pbc-completed-pullback]: both constructions apply the same quotient maps to a flat-term K-flat representative and then take the strict derived limit, with the normalized tensor/pullback identifications. This argument requires no $k$-linearity of the arrows and uses no exchange isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-proper-geometric-cd-bound",
+    "lem-weil-pbc-actual-coefficient-constructible-preservation",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15, with existing general proper-preservation and coefficient-comparison statements"
+   }
+  },
+  {
+   "text": "Put $E_0=Lg_A'^*K$, so $N=Rf'_{*,A}E_0$. For a corner $T$ write $\\mathcal R_T(C)$ for its strict quotient-reduction tower and $i_C:\\Delta C\\to\\mathcal R_T(C)$ for its augmentation. Set $F_T=R\\lim_T$ and $u_C=F_T(i_C)\\lambda_C$, where $\\lambda_C:C\\to F_T\\Delta C$ is the canonical constant-tower map. By [lem-weil-pbc-reduction-pullback-derived-tower], the normalized comparisons give $\\tau_g:Lg^*_{\\mathrm{Tow}}\\mathcal R_Y(Rf_*K)\\simeq\\mathcal R_{Y'}(M)$ and $t:Lg'^*_{\\mathrm{Tow}}\\mathcal R_X(K)\\simeq\\mathcal R_{X'}(E_0)$. Write $S=Lg^*_{\\mathrm{comp}}Rf_*K$, $Z=Lg'^*_{\\mathrm{comp}}K$, and $j=F_{Y'}(\\tau_g):S\\simeq F_{Y'}\\mathcal R_{Y'}(M)$. The augmentation equation in that lemma and the strict definition of the units in [def-weil-pbc-completed-pullback] give\n$$j\\gamma_g=u_M,\\qquad F_{X'}(t)\\gamma_{g'}=u_{E_0}.$$\nThese equalities concern the strict augmentations before taking limits, so they do not require derived evaluations to be faithful.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-strict-tower-exchange-mate-normalization] with the retained witnesses. It supplies the specified isomorphisms $H:\\mathcal R_{Y'}(M)\\simeq B_\\bullet$ and $H':\\mathcal R_{Y'}(N)\\simeq D_\\bullet$ and, in the derived category of strict towers, the actual equality\n$$v'_\\bullet=H'\\mathcal R_{Y'}(e)H^{-1}.$$\nHere $B_\\bullet,D_\\bullet,v'_\\bullet$ are the towers and arrow in the definition of the ordered completed exchange, not newly chosen lifts of their evaluations. If $h_{E_0}:\\mathcal R_{Y'}(N)\\to Rf'_*^{\\mathrm{Tow}}\\mathcal R_{X'}(E_0)$ denotes the diagram-site projection mate, the specified target comparison in the same statement reads\n$$H'=Rf'_*^{\\mathrm{Tow}}(t^{-1})h_{E_0},\\qquad D_\\bullet=Rf'_*^{\\mathrm{Tow}}(Lg'^*_{\\mathrm{Tow}}\\mathcal R_X(K)).$$\nThe source comparison is $H$ after $\\tau_g$, since its evaluations are the same specified projection maps with their strict diagram-site realization.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-weil-pbc-completed-base-change-map",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-augmented-diagram-projection-mate] to $f'$ and the unital quotient-algebra tower $((A/\\varpi^n)_{Y'})_n$. Its pullback is the quotient tower on $X'$ by the coefficient comparisons in steps 1–2. It states the strict equation\n$$h_{E_0}i_N=Rf'_*^{\\mathrm{Tow}}(i_{E_0})\\chi_{E_0}.$$\nApply the functor $F_{Y'}$ and precompose with $\\lambda_N$. Naturality of the direct-image/limit comparison $c$ of [prop-weil-pbc-direct-image-limits], applied to $i_{E_0}$, gives\n$$F_{Y'}(h_{E_0})u_N=c_{\\mathcal R(E_0)}\\,Rf'_*u_{E_0}.$$\nIndeed the constant-tower normalization of [lem-weil-pbc-constant-tower-pushforward-normalization] says precisely $F_{Y'}(\\chi_{E_0})\\lambda_N=c_{\\Delta E_0}Rf'_*(\\lambda_{E_0})$ under $F_T\\Delta\\simeq\\mathrm{id}$. Substitution into the strict augmentation equation proves the displayed equality with the specified $c$. No completeness or invertibility of $e$ is needed in this calculation.",
+   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  },
+  {
+   "text": "Let $Q_\\bullet=Lg'^*_{\\mathrm{Tow}}\\mathcal R_X(K)$ and let $c_Q:Rf'_*Z\\simeq F_{Y'}D_\\bullet$ be exactly the comparison used in [def-weil-pbc-completed-base-change-map]. Naturality of $c$ in [prop-weil-pbc-direct-image-limits] for $t^{-1}:\\mathcal R_{X'}(E_0)\\to Q_\\bullet$ says\n$$F_{Y'}(Rf'_*^{\\mathrm{Tow}}t^{-1})c_{\\mathcal R(E_0)}=c_QRf'_*(F_{X'}t^{-1}).$$\nSubstitute the formula for $H'$ from step 4 and the equality from step 5. The second unit identity of step 3 yields\n$$F_{Y'}(H')u_N=c_QRf'_*\\bigl(F_{X'}(t^{-1})u_{E_0}\\bigr)=c_QRf'_*(\\gamma_{g'}).$$\nThus the target comparison is tied to the actual completion unit, including its normalization.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-completed-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  },
+  {
+   "text": "The quotient augmentation is natural: for the actual morphism $e:M\\to N$ one has $\\mathcal R_{Y'}(e)i_M=i_N\\Delta(e)$. This is tensoring the equation $e\\circ1_M=1_N\\circ e$ with each unital quotient map, with its actual transitions; it remains true after passing from K-flat representatives to the derived reduction functor of [lem-weil-pbc-reduction-pullback-derived-tower]. Applying [prop-weil-pbc-rlim-functoriality] and the natural constant-tower map gives\n$$F_{Y'}(\\mathcal R_{Y'}(e))u_M=u_Ne.$$\nNo passage from levelwise equalities to a strict-tower equality is being inferred.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-completed-base-change-map], with the source identification of step 4, the ordered map is $c_Q^{-1}F_{Y'}(v'_\\bullet)F_{Y'}(H)j$. Functoriality [prop-weil-pbc-rlim-functoriality] and the strict equality in step 4 cancel the adjacent $F_{Y'}(H^{-1})F_{Y'}(H)$. Consequently steps 3, 7 and 6 give, in this order,\n$$\\begin{aligned}\n\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}\\gamma_g\n &=c_Q^{-1}F_{Y'}(H')F_{Y'}(\\mathcal R_{Y'}(e))u_M\\\\\n &=c_Q^{-1}F_{Y'}(H')u_Ne\\\\\n &=Rf'_*(\\gamma_{g'})e.\n\\end{aligned}$$\nPostcompose on the input with $\\gamma_g^{-1}$, which exists by step 2. This is the required equality for the specified exchange and endpoint maps. The calculation never inverts $e$ or $v'_\\bullet$.",
+   "uses": [
+    "def-weil-pbc-completed-base-change-map",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0A07 (lemma-Rf-commutes-with-Rlim), 0943 (section-projection-formula), Equation 0B56 (equation-projection-formula-map); strict augmentation calculation written by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-proper-geometric-cd-bound",
+  "lem-weil-pbc-actual-coefficient-constructible-preservation",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "def-weil-pbc-completed-base-change-map",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7 and 0A07, with explicit strict-tower augmentation/cancellation refinement; Stacks Tag 09C9 omits the map construction"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -56,10 +183,45 @@
    "results": "CategoryTheory.mateEquiv_counit_symm; CategoryTheory.Limits.lim_ε_π; AlgebraicTopology.DoldKan.Compatibility.υ_inv_app; AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.mateEquiv_counit; AlgebraicTopology.DoldKan.Compatibility.υ_hom_app; CategoryTheory.Equivalence.counitInv_app_comp_functor_map_η_inverse",
    "date": "2026-10-21",
    "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered completed pro etale exchange on strict reduction towers equals the ordinary derived adjunction mate conjugated by the completion units",
+   "results": "BDeRhamPlus; IsAdicComplete.StrictMono.of_comp_lift; StandardEtalePair.homEquiv_symm_apply; IsAdicComplete.StrictMono.of_lift; Condensed.profiniteSolidCounit; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; StandardEtalePair.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction mates, underived module-sheaf pullback or ordinary adic completion; none identifies the specified strict pro-etale quotient-tower exchange and endpoint units"
+  },
+  {
+   "tool": "grep",
+   "query": "completedBaseChange|completedExchange|strictTower|completion.*[Mm]ate",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction mates, underived module-sheaf pullback or ordinary adic completion; none identifies the specified strict pro-etale quotient-tower exchange and endpoint units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed derived base change morphism equals the ordinary exchange composed with completion units for constructible pro etale sheaves",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; IsBaseChange.endHom_comp; CategoryTheory.TwoSquare.isIso_lanBaseChange_app; CategoryTheory.TwoSquare.lanBaseChange; LinearEquiv.baseChange_trans; SheafOfModules.pullbackComp; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction mates, underived module-sheaf pullback or ordinary adic completion; none identifies the specified strict pro-etale quotient-tower exchange and endpoint units"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction mates, underived module-sheaf pullback or ordinary adic completion; none identifies the specified strict pro-etale quotient-tower exchange and endpoint units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived completion and preservation of derived inverse limits identify a quotient tower base change map with the completion of the ordinary exchange",
+   "results": "IsAdicComplete.of_comp_lift; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.of_lift; IsAdicComplete.mkQ_comp_lift; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.map_of; AdicCompletion.transitionMap_comp_eval_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction mates, underived module-sheaf pullback or ordinary adic completion; none identifies the specified strict pro-etale quotient-tower exchange and endpoint units"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-condensed-e-realization",
@@ -77,5 +239,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-realization-completed-mate",
+  "worker": "stage1",
+  "summary": "Eight steps reuse general proper-preservation, ordinary integral pullback, and existing strict augmentation/normalization statements. No k-linearity of the square arrows is assumed. Establish both specified unit isomorphisms, use the actual strict identity v′=H′R(e)H^-1, identify the target unit via augmented projection and constant-tower normalization, and cancel only the named comparisons. No new nodes; statement unchanged; redundant condensed-category dependency removed.",
+  "blueprint": "Realizes the integral-lattice/rationalization paragraph of thm-weil-pbc-finite-extension, specifically the retained completed integral exchange and its coherence, by the strict construction underlying lemma-weil-pbc-completed-exchange-coherence. Does not replace the proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-proper-geometric-cd-bound",
+    "why": "Generic existence of a uniform geometric fibre-dimension bound for a proper morphism over a quasi-compact base; only its first clause supplies the numerical hypothesis of the existing proper-preservation statement."
+   },
+   {
+    "node": "lem-tw-ordinary-completed-integral-pullback",
+    "why": "Generic comparison of ordinary integral pullback with its specified completion unit on Noetherian finite-dimensional schemes; applies to g and g-prime without k-linearity or any twist argument."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic stability of properness under base change, supplying properness of f-prime; no compactification argument is used."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "The fixed finite coefficient rings and valuation datum, independent of any compactification argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-proper-geometric-cd-bound",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-400efe6f5",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-400efe6f5 (reviewer sub-agent of L); spot-checked: 8-step split with no new nodes. The statement is byte-identical to base; dropping the unused stmt_dep def-weil-pbc-condensed-e-module-category is allowed by brief l.27. I re-derived the algebra. Step 3: j γ_g = u_M and F(t)γ_g' = u_E0, from τF^Tow(i) = i in reduction-pullback-derived-tower. Step 4: v' = H'R(e)H^-1 with F(H)j = s, from strict-tower-exchange-mate-normalization. Step 5: augmented-projection-mate h i_N = Rf'^Tow(i)χ, plus constant-tower normalization, plus naturality of c (its a and c are the same f_*lim = lim f_*^Tow comparison). Step 6: F(H')u_N = c_Q Rf'_*γ_g'. Step 7: naturality. Step 8: Ex γ_g = Rf'_*(γ_g') e, inverting only γ_g. Step 2 hypotheses all check: f' proper (fp-permanence (b)); Y Noetherian, so the sfb fibre bound applies; N = ℓ ∈ (ϖ); actual-coefficient preservation puts Rf_*K in I_Y; the tw ordinary-completed pullback needs no k-linearity and its η has the same chain-level description as the def γ. Edge cases K = 0, identity square and ϖ-torsion are fine. No duplicate: grep for Ex^comp with units finds only the item. Stacks 07A7/0A07/0943/0B56/09C9 tags verified; no SGA. Batch-5 flag on actual-coefficient-constructible-preservation is accepted: it reaches only the Mathlib leaf lem-trf-additive-homotopy-category-triangulated (014S) and generic trf/pod algebra; it is finiteness input, not a step of the trace formula or Poincaré duality. Advisory: notation clashes (R_T used for both the rational category and the reduction tower; fibre bound named e). Maintainer: parallel deliveries of this item by NO (d5c78705) and Q30 (f5ae2e02) are running at the same time."
  }
 }
