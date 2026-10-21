@@ -1,0 +1,213 @@
+{
+ "id": "lem-pur-supported-coefficient-open-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3: coefficient normalization and open-restriction naturality of the supported exterior product.",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Supported coefficient tensor comparison under first-variable open restriction",
+ "statement": "Let A be a commutative ring, f:X→S and g:Y→S scheme morphisms, b:B→X and d:D→Y closed immersions, and U an open of X. For arbitrary unbounded derived A-module complexes M,N, let h:U×_S Y→X×_S Y be the canonical open map and let τ be the normalized supported coefficient derived tensor comparison [def-pur-supported-exterior-product]. The product support coefficient mate [lem-pur-supported-coefficient-derived-open-mate], followed by h*(τ) and the exact pullback tensor isomorphism [def-pur-supported-localization-comparisons], equals τ on U×_S Y followed by the tensor of the cut first-coefficient mate and the uncut second projection coefficient comparison. All projection and pullback-composition factors are the canonical ones displayed in the attached Lean statement. No supported section inputs or evaluation counits occur.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP and 0F1E; coefficient normalization in step 11 of lem-pur-supported-product-localization, with exact derived mate calculation."
+ },
+ "stmt_deps": [
+  "def-pur-supported-exterior-product",
+  "def-pur-supported-localization-comparisons",
+  "lem-pur-supported-coefficient-derived-open-mate"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary coefficient tensor square is proved in [lem-pur-supported-coefficient-ordinary-open-tensor]. It normalizes the three coefficient maps by their constant quotients and uses compatibility of the canonical projection comparisons.",
+   "uses": [
+    "lem-pur-supported-coefficient-ordinary-open-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual first-open square on signed coefficient complexes is proved in [lem-pur-supported-coefficient-complex-open-tensor]. By [lem-pur-supported-tensor-complex-square] the ordinary equality passes to signed total complexes. The signed total comparison satisfies the same equality on every tensor bidegree. Localize K-flat coefficient complexes and use the normalization and uniqueness of the supported derived tensor comparison to obtain the derived square on models; naturality and K-flat resolutions extend it to arbitrary unbounded complexes. By [lem-pur-supported-coefficient-derived-open-mate], the localized ordinary support mate is precisely the specified derived support mate. The canonical projection composition isomorphisms identify the two factor coefficient maps with the displayed definitions.",
+   "uses": [
+    "lem-pur-supported-coefficient-derived-open-mate",
+    "def-pur-supported-exterior-product",
+    "def-pur-supported-localization-comparisons",
+    "lem-pur-supported-tensor-complex-square",
+    "lem-pur-supported-coefficient-complex-open-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-supported-coefficient-ordinary-open-tensor",
+  "lem-pur-supported-coefficient-derived-open-mate",
+  "def-pur-supported-exterior-product",
+  "def-pur-supported-localization-comparisons",
+  "lem-pur-supported-tensor-complex-square",
+  "lem-pur-supported-coefficient-complex-open-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP and 0F1E; coefficient refinement of the supported open-restriction calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported exterior product is compatible with restriction to an open subscheme",
+   "results": "{\"t\": \"2026-10-21T00:00:52Z\", \"tool\": \"leanfinder\", \"query\": \"The supported exterior product is compatible with restriction to an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.morphismRestrict_ι\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.Scheme.Modules.restrict_map\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.Γ_map_morphismRestrict\"], \"digest\": \"f9db5543d3cc8643\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-21T00:00:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mates commute with deriving adjunctions with exact left adjoints on unbounded derived categories",
+   "results": "{\"t\": \"2026-10-21T00:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"Mates commute with deriving adjunctions with exact left adjoints on unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"60cf4ff5a3f33992\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|liftNatTrans|δ_natural",
+   "results": "{\"t\": \"2026-10-21T00:34:49Z\", \"tool\": \"grep\", \"query\": \"mateEquiv|liftNatTrans|δ_natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean\", \"Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"fa527a5d5f307c38\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "{\"t\": \"2026-10-21T00:34:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"4e172f2df61df5e5\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δ_natural",
+   "results": "{\"t\": \"2026-10-21T00:36:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.OplaxMonoidal.δ_natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.OplaxMonoidal.δ_natural\"], \"digest\": \"c6b6db782604cd26\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint mate of restriction of sections with closed support commutes with the quotient from a constant sheaf",
+   "results": "{\"t\": \"2026-10-21T00:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"The left adjoint mate of restriction of sections with closed support commutes with the quotient from a constant sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_w\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CompHausLike.LocallyConstant.adjunction\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.constantSheafΓAdj\", \"LightCondSet.LocallyConstant.adjunction\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\"], \"digest\": \"b2998b7ff5d9cab4\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor comparison for closed supported constant coefficient sheaves commutes with inverse image along open immersions in either variable",
+   "results": "{\"t\": \"2026-10-21T00:36:42Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor comparison for closed supported constant coefficient sheaves commutes with inverse image along open immersions in either variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"LightCondensed.ihomPoints_symm_comp\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"SheafOfModules.pullbackComp\"], \"digest\": \"0ac499b9691a28a5\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative coefficient tensor square remains commutative after applying signed tensor totalization to cochain complexes",
+   "results": "{\"t\": \"2026-10-21T00:55:15Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative coefficient tensor square remains commutative after applying signed tensor totalization to cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"ComplexShape.σ_ε₂\", \"ComplexShape.instTotalComplexShape\", \"ComplexShape.ε₂_def\", \"ComplexShape.σ_ε₁\", \"TensorProduct.gradedCommAux\"], \"digest\": \"31a0a45a62b083ca\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparison",
+   "results": "{\"t\": \"2026-10-21T00:55:16Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.mapBifunctorComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomologicalComplex.mapBifunctorComparison'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*comp|mapBifunctorComparison.*natural",
+   "results": "{\"t\": \"2026-10-21T00:55:16Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorComparison.*comp|mapBifunctorComparison.*natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint mate of a restriction transformation is compatible with exact derived adjunctions and the constant sheaf quotient",
+   "results": "{\"t\": \"2026-10-21T01:20:09Z\", \"tool\": \"leansearch\", \"query\": \"The left adjoint mate of a restriction transformation is compatible with exact derived adjunctions and the constant sheaf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedη\", \"Condensed.discreteUnderlyingAdj\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"202890b83ada9fbe\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative coefficient tensor square of natural transformations induces a commutative square on signed tensor total complexes",
+   "results": "{\"t\": \"2026-10-21T01:20:10Z\", \"tool\": \"leansearch\", \"query\": \"A commutative coefficient tensor square of natural transformations induces a commutative square on signed tensor total complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\", \"TensorProduct.gradedComm\", \"HomologicalComplex₂.D₁_D₂\", \"TensorProduct.gradedCommAux\", \"TotalComplexShape.mk\", \"ComplexShape.TensorSigns\", \"CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso\", \"CategoryTheory.TwoSquare.natTrans\"], \"digest\": \"178461dd17f3cbfd\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient tensor comparison for closed supported constant sheaves commutes with open pullback by normalization on the epic constant quotient",
+   "results": "{\"t\": \"2026-10-21T01:20:10Z\", \"tool\": \"leansearch\", \"query\": \"The coefficient tensor comparison for closed supported constant sheaves commutes with open pullback by normalization on the epic constant quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantCommuteCompose\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.StructureSheaf.comap_const\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"c014b77c6b32eac7\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedProductLocalization",
+  "date": "2026-10-21",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedCoefficientOpenTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedCoefficientOpenTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedCoefficientTensor_openFirst",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportFirstCoefficientProjectionIso",
+   "AlgebraicGeometry.Etale.supportSecondCoefficientProjectionIso",
+   "AlgebraicGeometry.Etale.supportFirstOpenCoefficientMap",
+   "AlgebraicGeometry.Etale.supportFirstOpenSecondCoefficientMap",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensor_openFirst"
+  ],
+  "statement": "theorem supportedCoefficientTensor_openFirst (A : Type (u + 1)) [CommRing A]\n    {S X Y B D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)\n    [IsClosedImmersion b] [IsClosedImmersion d] (U : X.Opens)\n    (M N : DerivedCategory (ModuleCat.{u + 1} A)) :\n    (supportCoefficientOpenMate A (supportedFirstOpenMap f g U)\n      (supportedProductImmersion f g b d)\n      (supportedProductImmersion (U.ι ≫ f) g (supportOnOpen b U) d)\n      (supportedFirstOpenSupport_complement f g b d U)).app (M ⊗ N) ≫\n      (upperStar (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)).mapDerivedCategory.map\n        (supportedCoefficientTensorDerived A f g b d M N) ≫\n      (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)\n        ((supportedFirstCoefficients A f g b).mapDerivedCategory.obj M)\n        ((supportedSecondCoefficients A f g d).mapDerivedCategory.obj N)).hom =\n    supportedCoefficientTensorDerived A (U.ι ≫ f) g (supportOnOpen b U) d M N ≫\n      supportedDerivedTensorMap A (pullback (U.ι ≫ f) g)\n        (supportFirstOpenCoefficientMap A f g b U M)\n        (supportFirstOpenSecondCoefficientMap A f g d U N)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T013338-L-2287984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T013338-L-2287984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,206 @@
+{
+ "id": "lem-pur-exact-derived-mate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3: coefficient normalization and open-restriction naturality of the supported exterior product.",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Mates of exact unbounded derived squares on complex models",
+ "statement": "Let C₁,C₂,C₃,C₄ be abelian categories with unbounded derived categories [def-weil-abstract-derived-category], and assume K-injective resolutions in C₁ and C₃. Let L:C₂→C₁ ⊣ R and L′:C₄→C₃ ⊣ R′ be additive adjunctions with exact L,L′, and let G:C₂→C₄ and H:C₁→C₃ be additive exact functors. Given an ordinary square σ:G L′→L H and a derived square θ:D(G) D(L′)→D(L) D(H) normalized by σ on every homotopy complex model, its right mate for D(L)⊣RR and D(L′)⊣RR′, precomposed with D(G) of the unit R→RR, equals the localized ordinary right mate followed by the unit R′→RR′ and the inverse exact-functor localization factor for H. The precise factors are in the attached Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP and 0F1E; coefficient normalization in step 11 of lem-pur-supported-product-localization, with exact derived mate calculation."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Pass additive adjunctions to complexes and homotopy categories, where the mate formula is computed degreewise by unit, square, and counit. Expand the derived mate into the same three factors. Move the right-derived-functor unit through the square and use the unit and counit factorization equations for the derived adjunction. Apply the normalization of θ and naturality of the exact-functor localization factors. The resulting expression is the localization of the degreewise ordinary mate followed by the right derived unit.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP and 0F1E; coefficient refinement of the supported open-restriction calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported exterior product is compatible with restriction to an open subscheme",
+   "results": "{\"t\": \"2026-10-21T00:00:52Z\", \"tool\": \"leanfinder\", \"query\": \"The supported exterior product is compatible with restriction to an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.morphismRestrict_ι\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.Scheme.Modules.restrict_map\", \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"AlgebraicGeometry.Γ_map_morphismRestrict\"], \"digest\": \"f9db5543d3cc8643\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-21T00:00:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mates commute with deriving adjunctions with exact left adjoints on unbounded derived categories",
+   "results": "{\"t\": \"2026-10-21T00:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"Mates commute with deriving adjunctions with exact left adjoints on unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"60cf4ff5a3f33992\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|liftNatTrans|δ_natural",
+   "results": "{\"t\": \"2026-10-21T00:34:49Z\", \"tool\": \"grep\", \"query\": \"mateEquiv|liftNatTrans|δ_natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean\", \"Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"fa527a5d5f307c38\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "{\"t\": \"2026-10-21T00:34:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"4e172f2df61df5e5\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δ_natural",
+   "results": "{\"t\": \"2026-10-21T00:36:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.OplaxMonoidal.δ_natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.OplaxMonoidal.δ_natural\"], \"digest\": \"c6b6db782604cd26\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint mate of restriction of sections with closed support commutes with the quotient from a constant sheaf",
+   "results": "{\"t\": \"2026-10-21T00:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"The left adjoint mate of restriction of sections with closed support commutes with the quotient from a constant sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_w\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CompHausLike.LocallyConstant.adjunction\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.constantSheafΓAdj\", \"LightCondSet.LocallyConstant.adjunction\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\"], \"digest\": \"b2998b7ff5d9cab4\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor comparison for closed supported constant coefficient sheaves commutes with inverse image along open immersions in either variable",
+   "results": "{\"t\": \"2026-10-21T00:36:42Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor comparison for closed supported constant coefficient sheaves commutes with inverse image along open immersions in either variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"LightCondensed.ihomPoints_symm_comp\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"SheafOfModules.pullbackComp\"], \"digest\": \"0ac499b9691a28a5\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative coefficient tensor square remains commutative after applying signed tensor totalization to cochain complexes",
+   "results": "{\"t\": \"2026-10-21T00:55:15Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative coefficient tensor square remains commutative after applying signed tensor totalization to cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"ComplexShape.σ_ε₂\", \"ComplexShape.instTotalComplexShape\", \"ComplexShape.ε₂_def\", \"ComplexShape.σ_ε₁\", \"TensorProduct.gradedCommAux\"], \"digest\": \"31a0a45a62b083ca\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparison",
+   "results": "{\"t\": \"2026-10-21T00:55:16Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.mapBifunctorComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomologicalComplex.mapBifunctorComparison'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*comp|mapBifunctorComparison.*natural",
+   "results": "{\"t\": \"2026-10-21T00:55:16Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorComparison.*comp|mapBifunctorComparison.*natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match; generic category and totalization APIs used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint mate of a restriction transformation is compatible with exact derived adjunctions and the constant sheaf quotient",
+   "results": "{\"t\": \"2026-10-21T01:20:09Z\", \"tool\": \"leansearch\", \"query\": \"The left adjoint mate of a restriction transformation is compatible with exact derived adjunctions and the constant sheaf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedη\", \"Condensed.discreteUnderlyingAdj\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"202890b83ada9fbe\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative coefficient tensor square of natural transformations induces a commutative square on signed tensor total complexes",
+   "results": "{\"t\": \"2026-10-21T01:20:10Z\", \"tool\": \"leansearch\", \"query\": \"A commutative coefficient tensor square of natural transformations induces a commutative square on signed tensor total complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\", \"TensorProduct.gradedComm\", \"HomologicalComplex₂.D₁_D₂\", \"TensorProduct.gradedCommAux\", \"TotalComplexShape.mk\", \"ComplexShape.TensorSigns\", \"CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso\", \"CategoryTheory.TwoSquare.natTrans\"], \"digest\": \"178461dd17f3cbfd\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient tensor comparison for closed supported constant sheaves commutes with open pullback by normalization on the epic constant quotient",
+   "results": "{\"t\": \"2026-10-21T01:20:10Z\", \"tool\": \"leansearch\", \"query\": \"The coefficient tensor comparison for closed supported constant sheaves commutes with open pullback by normalization on the epic constant quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantCommuteCompose\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.StructureSheaf.comap_const\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"c014b77c6b32eac7\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Adjunction and signed tensor-complex APIs support the direct proofs; no existing supported-coefficient comparison square was found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedProductLocalization",
+  "date": "2026-10-21",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactMate",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactMate.lean",
+  "declaration": "CategoryTheory.Adjunction.derivedExact_mateEquiv_app_fac",
+  "declarations": [
+   "CategoryTheory.Functor.exactDerivedMap",
+   "CategoryTheory.Adjunction.derivedExact_mateEquiv_app_fac"
+  ],
+  "statement": "theorem derivedExact_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')\n    (σ : TwoSquare G L L' G')\n    (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory\n      G'.mapDerivedCategory)\n    (hθ : ∀ N : HomotopyCategory C₂ (.up ℤ),\n      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫\n          G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫\n          G'.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =\n        L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫\n          L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫\n          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N))\n    (K : HomotopyCategory C₁ (.up ℤ)) :\n    G.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫\n        (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction\n          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app\n          (DerivedCategory.Qh.obj K) =\n      G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫\n        DerivedCategory.Qh.map\n          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K) ≫\n        R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj K) ≫\n        R'.rightDerivedFunctor.map (G'.mapDerivedCategoryFactorsh.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic exact-functor localization or passage of additive adjunctions to homotopy categories; this preserves the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization or passage of additive adjunctions to homotopy categories; this preserves the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T013338-L-2287984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T013338-L-2287984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

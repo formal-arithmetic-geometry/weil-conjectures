@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+import Sheaf.AlgebraicGeometry.SupportedCoefficientSecondOpenTensor
 import Sheaf.CategoryTheory.UnboundedInjectiveModel
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
@@ -32,6 +33,7 @@ schemes, transported through the canonical ambient and coefficient comparisons.
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry.Etale
@@ -489,6 +491,275 @@ theorem supportedProductLocalization_naturality (A : Type (u + 1)) [CommRing A]
     (firstEvaluation_natural A f g b a) (secondEvaluation_natural A f g d e)
   exact h
 
+private theorem coefficientMate_counit
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ D) (r : R ⟶ H ⋙ R') (K : C) :
+    F'.map (r.app K) ≫ adj'.counit.app (H.obj K) =
+      (supportCoefficientMate adj adj' H r).app (R.obj K) ≫ H.map (adj.counit.app K) := by
+  simpa [supportCoefficientMate] using mateEquiv_counit_symm adj adj'
+    (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r)) K
+
+private theorem coefficientMate_transpose
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ D) (r : R ⟶ H ⋙ R')
+    {M : B} {K : C} (t : F.obj M ⟶ K) :
+    adj'.homEquiv _ _ ((supportCoefficientMate adj adj' H r).app M ≫ H.map t) =
+      adj.homEquiv _ _ t ≫ r.app K := by
+  apply (adj'.homEquiv _ _).symm.injective
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_symm_apply, Functor.map_comp,
+    Category.assoc, coefficientMate_counit adj adj' H r K,
+    (supportCoefficientMate adj adj' H r).naturality_assoc]
+  change _ = (supportCoefficientMate adj adj' H r).app M ≫
+    H.map (F.map (adj.homEquiv _ _ t)) ≫ H.map (adj.counit.app K)
+  rw [← H.map_comp]
+  have ht := (adj.homEquiv M K).symm_apply_apply t
+  change F.map (adj.homEquiv M K t) ≫ adj.counit.app K = t at ht
+  rw [ht]
+
+private theorem coefficientEvaluation_eq
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    (F : B ⥤ C) (R : C ⥤ B) (P Q : C ⥤ D) (G : B ⥤ D)
+    (σ : G ≅ F ⋙ P) (τ : Q ≅ P) (ε : R ⋙ F ⟶ 𝟭 C) (K : C) :
+    σ.hom.app (R.obj K) ≫ P.map (ε.app K) ≫ τ.inv.app K =
+      (σ ≪≫ Functor.isoWhiskerLeft F τ.symm).hom.app (R.obj K) ≫ Q.map (ε.app K) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Iso.symm_hom, Category.assoc]
+  congr 1
+  exact τ.inv.naturality (ε.app K)
+
+private theorem evaluation_transport
+    {B C C' D D' : Type*}
+    [Category B] [Category C] [Category C'] [Category D] [Category D']
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ C'} {R' : C' ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (J : C ⥤ C') (r : R ⟶ J ⋙ R')
+    (P : C ⥤ D) (P' : C' ⥤ D') (H : D ⥤ D')
+    (G : B ⥤ D) (G' : B ⥤ D')
+    (σ : G ≅ F ⋙ P) (σ' : G' ≅ F' ⋙ P')
+    (K : C) (e : H.obj (P.obj K) ≅ P'.obj (J.obj K))
+    (eF : H.obj (P.obj (F.obj (R.obj K))) ≅ P'.obj (J.obj (F.obj (R.obj K))))
+    (he : H.map (P.map (adj.counit.app K)) ≫ e.hom =
+      eF.hom ≫ P'.map (J.map (adj.counit.app K))) :
+    (σ'.hom.app (R.obj K) ≫
+      P'.map ((supportCoefficientMate adj adj' J r).app (R.obj K)) ≫
+      eF.inv ≫ H.map (σ.inv.app (R.obj K))) ≫
+      H.map (σ.hom.app (R.obj K) ≫ P.map (adj.counit.app K)) ≫ e.hom =
+    G'.map (r.app K) ≫
+      (σ'.hom.app (R'.obj (J.obj K)) ≫ P'.map (adj'.counit.app (J.obj K))) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, σ.inv_hom_id_app]
+  erw [H.map_id, Category.id_comp]
+  rw [he, Iso.inv_hom_id_assoc, ← P'.map_comp, ← coefficientMate_counit adj adj' J r K]
+  rw [P'.map_comp]
+  simpa only [Category.assoc, Functor.comp_map, Functor.comp_obj, Functor.id_obj] using congrArg
+    (fun t ↦ t ≫ P'.map (adj'.counit.app (J.obj K)))
+    (σ'.hom.naturality (r.app K)).symm
+
+private theorem evaluation_pullback
+    {B C D D' : Type*} [Category B] [Category C] [Category D] [Category D']
+    (F : B ⥤ C) (R : C ⥤ B) (ε : R ⋙ F ⟶ 𝟭 C)
+    (P : C ⥤ D) (P' : C ⥤ D') (H : D ⥤ D') (G : B ⥤ D) (G' : B ⥤ D')
+    (σ : G ≅ F ⋙ P) (σ' : G' ≅ F ⋙ P') (K : C)
+    (e : H.obj (P.obj K) ≅ P'.obj K)
+    (eF : H.obj (P.obj (F.obj (R.obj K))) ≅ P'.obj (F.obj (R.obj K)))
+    (he : H.map (P.map (ε.app K)) ≫ e.hom = eF.hom ≫ P'.map (ε.app K)) :
+    (σ'.hom.app (R.obj K) ≫ eF.inv ≫ H.map (σ.inv.app (R.obj K))) ≫
+      H.map (σ.hom.app (R.obj K) ≫ P.map (ε.app K)) ≫ e.hom =
+    σ'.hom.app (R.obj K) ≫ P'.map (ε.app K) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, σ.inv_hom_id_app]
+  erw [H.map_id, Category.id_comp]
+  rw [he, Iso.inv_hom_id_assoc]
+
+private theorem bifunctorComparison_natural
+    {C D : Type*} [Category C] [Category D] (T : C ⥤ C ⥤ C) (T' : D ⥤ D ⥤ D)
+    (F : C ⥤ D)
+    (δ : (Functor.postcompose₂.obj F).obj T ⟶
+      (((Functor.whiskeringLeft₂ D).obj F).obj F).obj T')
+    {M M' N N' : C} (v : M ⟶ M') (w : N ⟶ N') :
+    F.map (bifunctorMap T v w) ≫ (δ.app M').app N' =
+      (δ.app M).app N ≫ bifunctorMap T' (F.map v) (F.map w) := by
+  dsimp only [bifunctorMap]
+  have h₁ : F.map ((T.obj M').map w) ≫ (δ.app M').app N' =
+      (δ.app M').app N ≫ (T'.obj (F.obj M')).map (F.map w) :=
+    (δ.app M').naturality w
+  have h₂ : F.map ((T.map v).app N) ≫ (δ.app M').app N =
+      (δ.app M).app N ≫ (T'.map (F.map v)).app (F.obj N) :=
+    NatTrans.congr_app (δ.naturality v) N
+  rw [F.map_comp, Category.assoc, h₁, ← Category.assoc, h₂, Category.assoc]
+
+private theorem exactPullbackTensor_natural (A : Type (u + 1)) [CommRing A]
+    {P Q : Scheme.{u}} (h : Q ⟶ P)
+    {M M' N N' : DerivedCategoryModule A P} (v : M ⟶ M') (w : N ⟶ N') :
+    (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map
+        (supportedDerivedTensorMap A P v w) ≫
+      (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) h M' N').hom =
+    (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) h M N).hom ≫
+      supportedDerivedTensorMap A Q
+        ((upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map v)
+        ((upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map w) := by
+  let H := (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory
+  let J := (upperStar (ModuleCat.{u + 1} A) h).leftDerivedFunctor
+  let τ := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) h
+  let T := derivedTensor (ModuleCat.{u + 1} A) P
+  let T' := derivedTensor (ModuleCat.{u + 1} A) Q
+  let δ := (Functor.postcompose₂.mapIso τ.symm).app T ≪≫
+    leftDerivedUpperStarTensorNatIso (ModuleCat.{u + 1} A) h ≪≫
+    (((Functor.whiskeringLeft₂ (DerivedCategoryModule A Q)).mapIso τ).app J).app T' ≪≫
+    (((Functor.whiskeringLeft₂ (DerivedCategoryModule A Q)).obj H).mapIso τ).app T'
+  exact bifunctorComparison_natural T T' H δ.hom v w
+
+private theorem adjunct_pairing_transport
+    {B C C' : Type*} [Category B] [MonoidalCategory B] [Category C] [Category C']
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ C'} {R' : C' ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ C') (r : R ⟶ H ⋙ R')
+    (T : C ⥤ C ⥤ C) (T' : C' ⥤ C' ⥤ C')
+    {M M' N N' : B} {V W P Q : C} {V₀ W₀ V' W' P' Q' : C'}
+    (a : M ⟶ M') (b : N ⟶ N')
+    (t : F.obj (M ⊗ N) ⟶ (T.obj V).obj W)
+    (t₀ : F'.obj (M ⊗ N) ⟶ (T'.obj V₀).obj W₀)
+    (t' : F'.obj (M' ⊗ N') ⟶ (T'.obj V').obj W')
+    (x : V₀ ⟶ H.obj V) (y : W₀ ⟶ H.obj W)
+    (v : V ⟶ P) (w : W ⟶ Q) (v' : V' ⟶ P') (w' : W' ⟶ Q')
+    (a' : V₀ ⟶ V') (b' : W₀ ⟶ W')
+    (e : H.obj P ⟶ P') (d : H.obj Q ⟶ Q')
+    (δ₀ : H.obj ((T.obj V).obj W) ⟶ (T'.obj (H.obj V)).obj (H.obj W))
+    (δ₁ : H.obj ((T.obj P).obj Q) ⟶ (T'.obj (H.obj P)).obj (H.obj Q))
+    (hc : (supportCoefficientMate adj adj' H r).app (M ⊗ N) ≫ H.map t ≫ δ₀ =
+      t₀ ≫ bifunctorMap T' x y)
+    (hδ : H.map (bifunctorMap T v w) ≫ δ₁ =
+      δ₀ ≫ bifunctorMap T' (H.map v) (H.map w))
+    (hv : x ≫ H.map v ≫ e = a' ≫ v') (hw : y ≫ H.map w ≫ d = b' ≫ w')
+    (ht : F'.map (a ⊗ₘ b) ≫ t' = t₀ ≫ bifunctorMap T' a' b') :
+    adj.homEquiv _ _ (t ≫ bifunctorMap T v w) ≫ r.app ((T.obj P).obj Q) ≫
+      R'.map (δ₁ ≫ bifunctorMap T' e d) =
+    (a ⊗ₘ b) ≫ adj'.homEquiv _ _ (t' ≫ bifunctorMap T' v' w') := by
+  rw [← Category.assoc, ← coefficientMate_transpose adj adj' H r,
+    ← adj'.homEquiv_naturality_right, ← adj'.homEquiv_naturality_left]
+  congr 1
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hδ, reassoc_of% hc]
+  rw [← Category.assoc (bifunctorMap T' x y), bifunctorMap_comp, bifunctorMap_comp,
+    Category.assoc x, Category.assoc y, hv, hw, ← bifunctorMap_comp,
+    ← Category.assoc, ← ht, Category.assoc]
+
+private theorem openRestriction_eq_transport (A : Type (u + 1)) [CommRing A]
+    {X B : Scheme.{u}} (b : B ⟶ X) [IsClosedImmersion b] (U : X.Opens) :
+    derivedSupportOpenRestriction A b U =
+      derivedSupportTransport A U.ι b (supportOnOpen b U)
+        (supportOnOpen_complement b U) := by
+  rfl
+
+private theorem pullbackSquare_natural (A : Type (u + 1)) [CommRing A]
+    {P Q X X' : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : Q ⟶ X')
+    (a : X' ⟶ X) (hp : h ≫ p = q ≫ a)
+    {K L : DerivedCategoryModule A X} (t : K ⟶ L) :
+    (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map
+        ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.map t) ≫
+      (supportPullbackSquareIso (ModuleCat.{u + 1} A) h p q a hp L).hom =
+    (supportPullbackSquareIso (ModuleCat.{u + 1} A) h p q a hp K).hom ≫
+      (upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor.map
+        ((upperStar (ModuleCat.{u + 1} A) a).mapDerivedCategory.map t) := by
+  let e := Functor.isoWhiskerLeft
+      (upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) h).symm ≪≫
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) h p).symm ≪≫
+    leftDerivedUpperStarComp (ModuleCat.{u + 1} A) q a (h ≫ p) hp ≪≫
+    Functor.isoWhiskerRight
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) a)
+      (upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor
+  exact e.hom.naturality t
+
+private theorem pullbackProjection_natural (A : Type (u + 1)) [CommRing A]
+    {P Q X : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : Q ⟶ X)
+    (hp : h ≫ p = q) {K L : DerivedCategoryModule A X} (t : K ⟶ L) :
+    (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map
+        ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.map t) ≫
+      (supportPullbackProjectionIso (ModuleCat.{u + 1} A) h p q hp L).hom =
+    (supportPullbackProjectionIso (ModuleCat.{u + 1} A) h p q hp K).hom ≫
+      (upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor.map t := by
+  let e := Functor.isoWhiskerLeft
+      (upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) h).symm ≪≫
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) h p q hp.symm).symm
+  exact e.hom.naturality t
+
+private theorem firstEvaluation_eq (A : Type (u + 1)) [CommRing A]
+    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
+    [IsClosedImmersion b] (K : DerivedCategoryModule A X) :
+    supportedFirstEvaluation A f g b K =
+      (supportFirstCoefficientProjectionIso A f g b).hom.app
+        ((supportedSectionsDerived A b).obj K) ≫
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map
+        ((supportedCoefficientDerivedAdjunction A b).counit.app K) := by
+  exact coefficientEvaluation_eq _ _ _ _ _ _ _ _ _
+
+private theorem secondEvaluation_eq (A : Type (u + 1)) [CommRing A]
+    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
+    [IsClosedImmersion d] (L : DerivedCategoryModule A Y) :
+    supportedSecondEvaluation A f g d L =
+      (supportSecondCoefficientProjectionIso A f g d).hom.app
+        ((supportedSectionsDerived A d).obj L) ≫
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map
+        ((supportedCoefficientDerivedAdjunction A d).counit.app L) := by
+  exact coefficientEvaluation_eq _ _ _ _ _ _ _ _ _
+
+private theorem firstEvaluation_openFirst (A : Type (u + 1)) [CommRing A]
+    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
+    [IsClosedImmersion b] (U : X.Opens) (K : DerivedCategoryModule A X) :
+    supportFirstOpenCoefficientMap A f g b U ((supportedSectionsDerived A b).obj K) ≫
+      (upperStar (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)).mapDerivedCategory.map
+        (supportedFirstEvaluation A f g b K) ≫
+      (supportPullbackSquareIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+        (pullback.fst f g) (pullback.fst (U.ι ≫ f) g) U.ι
+        (supportedFirstOpenMap_fst f g U) K).hom =
+    (supportedFirstCoefficients A (U.ι ≫ f) g (supportOnOpen b U)).mapDerivedCategory.map
+        ((derivedSupportTransport A U.ι b (supportOnOpen b U)
+          (supportOnOpen_complement b U)).app K) ≫
+      supportedFirstEvaluation A (U.ι ≫ f) g (supportOnOpen b U)
+        ((upperStar (ModuleCat.{u + 1} A) U.ι).mapDerivedCategory.obj K) := by
+  rw [firstEvaluation_eq, firstEvaluation_eq]
+  exact evaluation_transport
+    (supportedCoefficientDerivedAdjunction A b)
+    (supportedCoefficientDerivedAdjunction A (supportOnOpen b U))
+    (upperStar (ModuleCat.{u + 1} A) U.ι).mapDerivedCategory _ _ _ _ _ _ _ _ _ _ _
+    (pullbackSquare_natural A _ _ _ _ _ _)
+
+private theorem secondEvaluation_openFirst (A : Type (u + 1)) [CommRing A]
+    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
+    [IsClosedImmersion d] (U : X.Opens) (L : DerivedCategoryModule A Y) :
+    supportFirstOpenSecondCoefficientMap A f g d U ((supportedSectionsDerived A d).obj L) ≫
+      (upperStar (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)).mapDerivedCategory.map
+        (supportedSecondEvaluation A f g d L) ≫
+      (supportPullbackProjectionIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+        (pullback.snd f g) (pullback.snd (U.ι ≫ f) g)
+        (supportedFirstOpenMap_snd f g U) L).hom =
+    supportedSecondEvaluation A (U.ι ≫ f) g d L := by
+  rw [secondEvaluation_eq, secondEvaluation_eq]
+  exact evaluation_pullback _ _ _ _ _ _ _ _ _ _ _ _ _
+    (pullbackProjection_natural A _ _ _ _ _)
+
+private theorem firstExternalOpenIso_hom_eq (A : Type (u + 1)) [CommRing A]
+    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (U : X.Opens)
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :
+    (supportedFirstExternalOpenIso (ModuleCat.{u + 1} A) f g U K L).hom =
+    (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj K)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj L)).hom ≫
+    supportedDerivedTensorMap A (pullback (U.ι ≫ f) g)
+      (supportPullbackSquareIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+        (pullback.fst f g) (pullback.fst (U.ι ≫ f) g) U.ι
+        (supportedFirstOpenMap_fst f g U) K).hom
+      (supportPullbackProjectionIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+        (pullback.snd f g) (pullback.snd (U.ι ≫ f) g)
+        (supportedFirstOpenMap_snd f g U) L).hom := by
+  change (upperStar (ModuleCat.{u + 1} A)
+      (supportedFirstOpenMap f g U)).mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
+  dsimp only [externalProduct]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  rfl
+
 /-- Naturality under open restriction of the first ambient scheme, for every
 support, hence for all three components of each localization diagram.
 Source: Tags 09XP and 0F1E (blueprint: lem-pur-supported-product-localization).
@@ -505,7 +776,110 @@ theorem supportedProductLocalization_openFirst (A : Type (u + 1)) [CommRing A]
       ((derivedSupportOpenRestriction A b U).app K ⊗ₘ 𝟙 _) ≫
         supportedExteriorProduct A (U.ι ≫ f) g (supportOnOpen b U) d ((upperStar (ModuleCat.{u +
           1} A) U.ι).mapDerivedCategory.obj K) L := by
-  sorry
+  unfold supportedExteriorProduct supportedFirstExternalRestriction
+    supportedRestrictionWithComparison
+  rw [openRestriction_eq_transport, firstExternalOpenIso_hom_eq]
+  dsimp only [externalProduct]
+  refine adjunct_pairing_transport
+    (supportedCoefficientDerivedAdjunction A (supportedProductImmersion f g b d))
+    (supportedCoefficientDerivedAdjunction A
+      (supportedProductImmersion (U.ι ≫ f) g (supportOnOpen b U) d))
+    (upperStar (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)).mapDerivedCategory
+    (derivedSupportTransport A (supportedFirstOpenMap f g U)
+      (supportedProductImmersion f g b d)
+      (supportedProductImmersion (U.ι ≫ f) g (supportOnOpen b U) d)
+      (supportedFirstOpenSupport_complement f g b d U))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback (U.ι ≫ f) g))
+    ((derivedSupportTransport A U.ι b (supportOnOpen b U)
+      (supportOnOpen_complement b U)).app K) (𝟙 _)
+    _ (supportedCoefficientTensorDerived A (U.ι ≫ f) g (supportOnOpen b U) d _ _) _
+    (supportFirstOpenCoefficientMap A f g b U _)
+    (supportFirstOpenSecondCoefficientMap A f g d U _)
+    _ _ _ _
+    ((supportedFirstCoefficients A (U.ι ≫ f) g
+      (supportOnOpen b U)).mapDerivedCategory.map
+        ((derivedSupportTransport A U.ι b (supportOnOpen b U)
+          (supportOnOpen_complement b U)).app K))
+    ((supportedSecondCoefficients A (U.ι ≫ f) g d).mapDerivedCategory.map (𝟙 _))
+    _ _
+    (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) (supportedFirstOpenMap f g U)
+      ((supportedFirstCoefficients A f g b).mapDerivedCategory.obj
+        ((supportedSectionsDerived A b).obj K))
+      ((supportedSecondCoefficients A f g d).mapDerivedCategory.obj
+        ((supportedSectionsDerived A d).obj L))).hom
+    _ ?_ ?_ ?_ ?_ ?_
+  · exact supportedCoefficientTensor_openFirst A f g b d U _ _
+  · exact exactPullbackTensor_natural A _ _ _
+  · exact firstEvaluation_openFirst A f g b U K
+  · rw [CategoryTheory.Functor.map_id, Category.id_comp]
+    exact secondEvaluation_openFirst A f g d U L
+  · exact schemeComparison_natural (ModuleCat.{u + 1} A) (pullback (U.ι ≫ f) g)
+      (supportedCoefficients A
+        (supportedProductImmersion (U.ι ≫ f) g (supportOnOpen b U) d))
+      (supportedFirstCoefficients A (U.ι ≫ f) g (supportOnOpen b U))
+      (supportedSecondCoefficients A (U.ι ≫ f) g d)
+      (supportedCoefficientTensorNatTrans A (U.ι ≫ f) g (supportOnOpen b U) d)
+      (exists_unique_supportedCoefficientTensorDerived A
+        (U.ι ≫ f) g (supportOnOpen b U) d).choose
+      (exists_unique_supportedCoefficientTensorDerived A
+        (U.ι ≫ f) g (supportOnOpen b U) d).choose_spec.1 _ _
+
+
+private theorem firstEvaluation_openSecond (A : Type (u + 1)) [CommRing A]
+    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
+    [IsClosedImmersion b] (V : Y.Opens) (K : DerivedCategoryModule A X) :
+    supportSecondOpenFirstCoefficientMap A f g b V ((supportedSectionsDerived A b).obj K) ≫
+      (upperStar (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)).mapDerivedCategory.map
+        (supportedFirstEvaluation A f g b K) ≫
+      (supportPullbackProjectionIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+        (pullback.fst f g) (pullback.fst f (V.ι ≫ g))
+        (supportedSecondOpenMap_fst f g V) K).hom =
+    supportedFirstEvaluation A f (V.ι ≫ g) b K := by
+  rw [firstEvaluation_eq, firstEvaluation_eq]
+  exact evaluation_pullback _ _ _ _ _ _ _ _ _ _ _ _ _
+    (pullbackProjection_natural A _ _ _ _ _)
+
+private theorem secondEvaluation_openSecond (A : Type (u + 1)) [CommRing A]
+    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
+    [IsClosedImmersion d] (V : Y.Opens) (L : DerivedCategoryModule A Y) :
+    supportSecondOpenCoefficientMap A f g d V ((supportedSectionsDerived A d).obj L) ≫
+      (upperStar (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)).mapDerivedCategory.map
+        (supportedSecondEvaluation A f g d L) ≫
+      (supportPullbackSquareIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+        (pullback.snd f g) (pullback.snd f (V.ι ≫ g)) V.ι
+        (supportedSecondOpenMap_snd f g V) L).hom =
+    (supportedSecondCoefficients A f (V.ι ≫ g) (supportOnOpen d V)).mapDerivedCategory.map
+        ((derivedSupportTransport A V.ι d (supportOnOpen d V)
+          (supportOnOpen_complement d V)).app L) ≫
+      supportedSecondEvaluation A f (V.ι ≫ g) (supportOnOpen d V)
+        ((upperStar (ModuleCat.{u + 1} A) V.ι).mapDerivedCategory.obj L) := by
+  rw [secondEvaluation_eq, secondEvaluation_eq]
+  exact evaluation_transport
+    (supportedCoefficientDerivedAdjunction A d)
+    (supportedCoefficientDerivedAdjunction A (supportOnOpen d V))
+    (upperStar (ModuleCat.{u + 1} A) V.ι).mapDerivedCategory _ _ _ _ _ _ _ _ _ _ _
+    (pullbackSquare_natural A _ _ _ _ _ _)
+
+private theorem secondExternalOpenIso_hom_eq (A : Type (u + 1)) [CommRing A]
+    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (V : Y.Opens)
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :
+    (supportedSecondExternalOpenIso (ModuleCat.{u + 1} A) f g V K L).hom =
+    (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj K)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj L)).hom ≫
+    supportedDerivedTensorMap A (pullback f (V.ι ≫ g))
+      (supportPullbackProjectionIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+        (pullback.fst f g) (pullback.fst f (V.ι ≫ g))
+        (supportedSecondOpenMap_fst f g V) K).hom
+      (supportPullbackSquareIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+        (pullback.snd f g) (pullback.snd f (V.ι ≫ g)) V.ι
+        (supportedSecondOpenMap_snd f g V) L).hom := by
+  change (upperStar (ModuleCat.{u + 1} A)
+      (supportedSecondOpenMap f g V)).mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ = _
+  dsimp only [externalProduct]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  rfl
 
 /-- Naturality under open restriction of the second ambient scheme, for every
 support, hence for all three components of each localization diagram.
@@ -523,7 +897,55 @@ theorem supportedProductLocalization_openSecond (A : Type (u + 1)) [CommRing A]
       (𝟙 _ ⊗ₘ (derivedSupportOpenRestriction A d V).app L) ≫
         supportedExteriorProduct A f (V.ι ≫ g) b (supportOnOpen d V) K ((upperStar (ModuleCat.{u
           + 1} A) V.ι).mapDerivedCategory.obj L) := by
-  sorry
+  unfold supportedExteriorProduct supportedSecondExternalRestriction
+    supportedRestrictionWithComparison
+  rw [openRestriction_eq_transport, secondExternalOpenIso_hom_eq]
+  dsimp only [externalProduct]
+  refine adjunct_pairing_transport
+    (supportedCoefficientDerivedAdjunction A (supportedProductImmersion f g b d))
+    (supportedCoefficientDerivedAdjunction A
+      (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d V)))
+    (upperStar (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)).mapDerivedCategory
+    (derivedSupportTransport A (supportedSecondOpenMap f g V)
+      (supportedProductImmersion f g b d)
+      (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d V))
+      (supportedSecondOpenSupport_complement f g b d V))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
+    (derivedTensor (ModuleCat.{u + 1} A) (pullback f (V.ι ≫ g)))
+    (𝟙 _) ((derivedSupportTransport A V.ι d (supportOnOpen d V)
+      (supportOnOpen_complement d V)).app L)
+    _ (supportedCoefficientTensorDerived A f (V.ι ≫ g) b (supportOnOpen d V) _ _) _
+    (supportSecondOpenFirstCoefficientMap A f g b V _)
+    (supportSecondOpenCoefficientMap A f g d V _)
+    _ _ _ _
+    ((supportedFirstCoefficients A f (V.ι ≫ g) b).mapDerivedCategory.map (𝟙 _))
+    ((supportedSecondCoefficients A f (V.ι ≫ g)
+      (supportOnOpen d V)).mapDerivedCategory.map
+        ((derivedSupportTransport A V.ι d (supportOnOpen d V)
+          (supportOnOpen_complement d V)).app L))
+    _ _
+    (supportExactPullbackTensorIso (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)
+      ((supportedFirstCoefficients A f g b).mapDerivedCategory.obj
+        ((supportedSectionsDerived A b).obj K))
+      ((supportedSecondCoefficients A f g d).mapDerivedCategory.obj
+        ((supportedSectionsDerived A d).obj L))).hom
+    _ ?_ ?_ ?_ ?_ ?_
+  · exact supportedCoefficientTensor_openSecond A f g b d V _ _
+  · exact exactPullbackTensor_natural A _ _ _
+  · rw [CategoryTheory.Functor.map_id, Category.id_comp]
+    exact firstEvaluation_openSecond A f g b V K
+  · exact secondEvaluation_openSecond A f g d V L
+  · exact schemeComparison_natural (ModuleCat.{u + 1} A) (pullback f (V.ι ≫ g))
+      (supportedCoefficients A
+        (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d V)))
+      (supportedFirstCoefficients A f (V.ι ≫ g) b)
+      (supportedSecondCoefficients A f (V.ι ≫ g) (supportOnOpen d V))
+      (supportedCoefficientTensorNatTrans A f (V.ι ≫ g) b (supportOnOpen d V))
+      (exists_unique_supportedCoefficientTensorDerived A
+        f (V.ι ≫ g) b (supportOnOpen d V)).choose
+      (exists_unique_supportedCoefficientTensorDerived A
+        f (V.ι ≫ g) b (supportOnOpen d V)).choose_spec.1 _ _
+
 
 private instance support_kernel_mono (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (W : T.Opens)
