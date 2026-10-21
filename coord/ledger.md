@@ -22701,3 +22701,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:50 L: merged deliver/Q23/lem-weil-isomorphism-scalar-augmentation-cone (stage 2; reviewer PASS; parallel immutable checks)
 - 13:50 L: merged deliver/Q130/lem-sp-semilinear-kflat-tower-model (stage 2; reviewer PASS; parallel immutable checks)
 - 13:50 L: returned deliver/F2/Sheaf.CategoryTheory.ScalarLocalizationDerivedHom (reviewer RETURN: (reviewer C-38284, head 38284f105) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Scala)
+- 13:52 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
