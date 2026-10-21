@@ -33,203 +33,70 @@
  ],
  "proof": [
   {
-   "text": "Put $D=s^\\times B$ on the etale site. The section is proper by [lem-weil-pbc-closed-immersion-proper]. Its compactification $Y\\xrightarrow{\\mathrm{id}}Y\\xrightarrow{s}X$ therefore gives, by the compactification formula [def-amb-etale-compact-support], $Rs_!^{\\mathrm{et}}=Rs_{\\mathrm{et},*}$, the K-injective total derived direct image. This is the termwise $s_*$ of [lem-exc-closed-support-triangle]: a closed immersion is affine and given on affine opens by surjective, hence integral, ring maps [def-weil-closed-immersion, def-weil-finite-integral-morphism], so $s_*$ is exact on etale abelian sheaves [sbc-lem-integral-etale-direct-image-exact], hence on $A$-module sheaves, whose kernels and cokernels have the underlying abelian kernels and cokernels. By [lem-sf-exact-functor-derived-triangulated] termwise $s_*$ preserves quasi-isomorphisms, so for a K-injective resolution $L\\to I$ of any complex $L$ on $Y$ the map $s_*L\\to s_*I$ is a quasi-isomorphism, giving $s_*L\\cong Rs_{\\mathrm{et},*}L$ naturally on the whole unbounded $D(Y_{\\mathrm{et}},A)$. Uniqueness of right adjoints [det-sp-unique-right-adjoint] identifies the right adjoint of $Rs_!^{\\mathrm{et}}$ with the closed adjoint of that triangle, compatibly with counits. By the finite definition [def-weil-exceptional-inverse-image] and the comparison unit [sk-prop-sf-comparison],\n$$C=\\nu_Y^*s^\\times R\\nu_{X,*}\\nu_X^*B\\cong\\nu_Y^*D.$$\nIn particular $D$ and $C$ are bounded below, with no constructibility assumption. All these identifications are natural in $B$.",
+   "text": "Put $D=s^\\times B$ and $L=\\nu_Y^*D$. Apply the closed-adjoint/counit identification to $s$, giving $C\\cong L$. The transported pre-pushforward localization triangle has first term $s_*L$, middle term $K$ and second arrow the open unit. Its counit transpose identifies it canonically with the support triangle, including the third arrow.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "def-amb-etale-compact-support",
-    "lem-exc-closed-support-triangle",
-    "def-weil-closed-immersion",
-    "def-weil-finite-integral-morphism",
-    "sbc-lem-integral-etale-direct-image-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "det-sp-unique-right-adjoint",
-    "def-weil-exceptional-inverse-image",
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-classical-localization-triangle-transport",
+    "lem-pur-classical-support-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "Assembly of extracted old proof arguments; original Steps 1, 3--5"
+   }
+  },
+  {
+   "text": "Apply $Rp_*$ to this triangle. Right derived direct image is triangulated. Composition and $ps=\\operatorname{id}$ identify its terms with $C,Rp_*K,R\\pi_*j^*K$, respectively. The same operation on the etale triangle gives $D,Rp_{\\mathrm{et},*}B,R\\pi_{\\mathrm{et},*}j_{\\mathrm{et}}^*B$. The canonical finite direct-image comparisons respect composition, units and counits, hence identify all three transported arrows, including the shift and the sign of $d$.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-derived-direct-image-composition",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "Assembly of extracted old proof arguments; original Steps 2--3"
+   }
+  },
+  {
+   "text": "The injective support model gives $R\\Gamma(Y,C)\\cong R\\Gamma_{s(Y)}(X,K)$. The global boundary normalization identifies the boundary of the support triangle with $[c]\\mapsto[db]=\\partial[c]$. Apply the normalized derived-global/direct-image comparison to $p,\\pi,s$. Its composition and open-unit clauses identify all global arrows of the pushed triangle with those of the support triangle; $ps=\\mathrm{id}$ gives the same first-term identification. Thus $H^q(Y,d)=\\partial$ under the stated global identifications.",
+   "uses": [
+    "lem-pur-proetale-injective-support-global-model",
+    "lem-pur-proetale-support-global-boundary",
+    "lem-pur-proetale-direct-image-global-evaluation",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "Assembly of extracted old proof arguments; original Steps 6--9"
+   }
+  },
+  {
+   "text": "Apply local-class edge naturality to $d:R\\pi_*j^*K\\to C[1]$. Shift compatibility identifies its cohomology-sheaf map with $\\delta^q$ and its target edge with $e_C^{q+1}$; step 3 identifies its global map with $\\partial$. This is exactly the asserted formula for every $q\\in\\mathbf Z$. Finally the derived comparison unit gives natural, shift-compatible global comparisons; the transported triangle of step 2 compares its three arrows. The site-comparison square for local-class edges then identifies the edge formula and these global maps with their ordinary etale counterparts.",
+   "uses": [
+    "lem-pur-derived-local-class-edge-comparison",
     "sk-prop-sf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "First displayed localization triangle; identify the closed adjoint through the identity/proper compactification"
-   }
-  },
-  {
-   "text": "Apply the etale localization triangle [lem-exc-closed-support-triangle] to $B$, and apply $Rp_{\\mathrm{et},*}$. This preserves the distinguished triangle and its shift by [lem-pc-right-derived-functor-triangulated]. The etale clause and identity law of [lem-weil-derived-direct-image-composition], applied to $(s,p)$ and $(j,p)$, identify its three objects with\n$$D,\\quad Rp_{\\mathrm{et},*}B,\\quad R\\pi_{\\mathrm{et},*}j_{\\mathrm{et}}^*B.$$\nIndeed $Rp_{\\mathrm{et},*}s_*D=R(ps)_{\\mathrm{et},*}D=D$. Its first arrow is $Rp_{\\mathrm{et},*}$ of the closed counit; its second is $Rp_{\\mathrm{et},*}$ of the open unit. Keep its third arrow with the shift comparison supplied by the triangulated functor.",
-   "uses": [
-    "lem-exc-closed-support-triangle",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "First paragraph: apply Rp_* to localization and use ps=id"
-   }
-  },
-  {
-   "text": "Apply exact $\\nu_Y^*$ to the triangle in step 2. It is triangulated by [lem-sf-exact-functor-derived-triangulated]; exactness on these module coefficients and pullback commutation are supplied by [sk-thm-pe-direct-image-comparison]. Apply that node's bounded-below direct-image comparisons to $p,\\pi$, and $j$. Their hypotheses hold: $p$ is separated finite type, $j$ is a quasi-compact open immersion, and $\\pi=pj$ is quasi-compact and quasi-separated; the same holds for the closed immersion $s$. The pullback comparison gives $j^*K=\\nu_U^*j_{\\mathrm{et}}^*B$. Together with step 1 these isomorphisms give exactly\n$$C\\longrightarrow Rp_*K\\longrightarrow R\\pi_*j^*K\\xrightarrow{d}C[1].$$\nThe comparison's compatibility with units and composition identifies the second arrow with restriction. Its counit compatibility identifies the first arrow with the transported closed counit. This defines $d$, including its sign, by transport of the entire triangle.",
-   "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "First displayed triangle and its second arrow; finite etale/pro-etale transport"
-   }
-  },
-  {
-   "text": "To compare with supported cohomology on the pro-etale site, denote by $S$ the closed support right adjoint on $D^+$ in [lem-pur-support-localization-triangle]. This is temporary notation distinct from the transported $Rs^!$ of the statement. Before applying $Rp_*$, step 3's comparison for $s$ gives a triangle with first object $s_*\\nu_Y^*D$ and middle object $K$, whose arrow to $Rj_*j^*K$ is the open unit. Compare it with\n$$s_*SK\\longrightarrow K\\longrightarrow Rj_*j^*K\\longrightarrow(s_*SK)[1]$$\nfrom that support-localization node. Rotate both triangles. Their middle-to-open square consists of identity maps, so (TR3) of [def-weil-triangulated-category] supplies a morphism of the rotated triangles. Rotating back gives a map $\\lambda:s_*\\nu_Y^*D\\to s_*SK$ commuting with both the counit arrow to $K$ and the boundary. The other two components are identities, hence $\\lambda$ is an isomorphism by [lem-sf-triangle-morphism-iso].",
-   "uses": [
-    "lem-pur-support-localization-triangle",
-    "sk-thm-pe-direct-image-comparison",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Localization triangle, comparison of its first term with the support object"
-   }
-  },
-  {
-   "text": "The map just obtained is canonical. The functors $s^*,s_*$ are exact on module sheaves and $s^*s_*\\cong\\mathrm{id}$ by [lem-weil-pbc-proetale-ringed-open-closed]; their derived adjunction is [def-weil-pbc-proetale-operations]. Thus termwise counit $s^*s_*\\to\\mathrm{id}$ stays invertible in the derived categories, and $s_*$ is fully faithful there. Write $\\lambda=s_*\\theta$. Commutation with the arrow to $K$ says\n$$\\varepsilon_{S,K}\\circ s_*\\theta=\\varepsilon'_B,$$\nwhere $\\varepsilon'_B:s_*\\nu_Y^*D\\to K$ is the transported etale counit. The adjunction $s_*\\dashv S$ in [lem-pur-support-localization-triangle] makes $\\theta$ the unique transpose of $\\varepsilon'_B$. Consequently $\\theta$ is natural in $B$, independent of the TR3 extension, and invertible since $\\lambda$ is invertible and $s^*s_*=\\mathrm{id}$. Its triangle compatibility, already furnished in step 4, includes the third arrow. Hence $C\\cong SK$ identifies the whole transported triangle with the pro-etale support triangle after $Rp_*$, with exactly the same boundary.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations",
-    "lem-pur-support-localization-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Localization triangle: canonical identification of the supported first term and boundary"
-   }
-  },
-  {
-   "text": "Here is the resolution computation of its global supported term. Write $s^!_0M=s^*\\mathcal G_ZM$, $Z=s(Y)$, as in [def-pur-flasque-support]. For any sheaf $N$ on $Y$, a map $s_*N\\to M$ has zero composite to $j_*j^*M$: by the open adjunction this composite corresponds to a map from $j^*s_*N=0$ [lem-weil-pbc-proetale-ringed-open-closed]. It therefore factors uniquely through $\\mathcal G_ZM=s_*s^!_0M$. Full faithfulness of $s_*$ gives $\\operatorname{Hom}(s_*N,M)=\\operatorname{Hom}(N,s^!_0M)$. Thus $s^!_0$ is right adjoint to the exact sheaf functor $s_*$. By [lem-sp-right-adjoint-preserves-injectives], it preserves injectives. Choose a bounded-below injective representative $K\\simeq I$ [lem-weil-pbc-dplus-injective-representative]. Both $I$ and $s^!_0I$ are bounded-below injective complexes; [lem-weil-pbc-right-derived-plus-injective] computes $SK$ by $s^!_0I$ and its global cohomology by $\\Gamma(Y,s^!_0I)$.",
-   "uses": [
-    "def-pur-flasque-support",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ, lemma-sections-with-support-acyclic: its Hom calculation; same calculation for the specified pro-etale support kernel"
-   }
-  },
-  {
-   "text": "In each degree $r$ the sectionwise kernel formula of [def-pur-flasque-support] gives\n$$\\Gamma(Y,s^!_0I^r)=\\Gamma(X,s_*s^!_0I^r)=\\ker(I^r(X)\\to I^r(U)).$$\nThe differentials are the restrictions of those of $I$, so this is an equality of complexes with $\\Gamma_Z(X,I)$. By the definition [def-pur-support-cohomology] and the derived computation in step 6 it yields a natural isomorphism\n$$R\\Gamma(Y,SK)\\cong R\\Gamma_Z(X,K).$$\nNo comparison of a sheaf with a module of global sections is being made: taking degree $q+1$ gives the asserted identification of cohomology modules for every integer $q$.",
-   "uses": [
-    "def-pur-flasque-support",
-    "def-pur-support-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, section-cohomology-support: derived supported sections and the support-sheaf construction"
-   }
-  },
-  {
-   "text": "The global connecting map has the prescribed normalization. The sequence $0\\to s_*s^!_0I\\to I\\to j_*j^*I\\to0$ is [lem-pur-support-exact]. Its sequence of global sections is also degreewise short exact. For surjectivity, [lem-weil-pbc-proetale-ringed-open-closed] applied to $A_X$ supplies the monomorphism $j_!A_U\\to A_X$. Applying $\\operatorname{Hom}(-,I^r)$ is surjective by injectivity; the module map determined by $1$ identifies this map with $I^r(X)\\to I^r(U)$. The kernels are those of step 7. Moreover $j^*I$ computes $j^*K$ on $U$ by [lem-weil-pbc-proetale-restriction-injectives]. Therefore the global short exact sequence is precisely the injective-resolution sequence defining the support boundary of [thm-pur-with-support-exactness]. By the cone-triangle convention of [def-weil-abstract-derived-category], the triangle obtained from this sequence through the quasi-isomorphism $q:\\operatorname{Cone}(u)\\to j_*j^*I$, $q(b,a)=\\eta_j(b)$, of [lem-pc-cone-short-exact-quasi-iso] has boundary $-p\\circ q^{-1}$, $p$ the projection to $(s_*s^!_0I)[1]$. The termwise additive functor of sections over $X$ carries the cone, $q$ and $p$ to the cone, cone-to-quotient map and projection of the global sequence, and $\\operatorname{Cone}(u)$ is again a bounded below complex of injectives, so this is also the derived global triangle. On cohomology: for a degree-$q$ cocycle $c$ of $\\Gamma(U,j^*I)$ choose $b\\in I^q(X)$ restricting to $c$; then $db$ lies in the support kernel, $(b,-db)$ is a cocycle of the cone with $q(b,-db)=c$, and $-p(b,-db)=db$. Thus the connecting morphism of the sheaf triangle induces exactly the snake boundary $[c]\\mapsto[db]$ of the global short exact sequence, which is the support boundary of [thm-pur-with-support-exactness], with no extra sign.",
-   "uses": [
-    "lem-pur-support-exact",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "thm-pur-with-support-exactness",
-    "lem-pc-cone-short-exact-quasi-iso",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, first derived triangle and following long exact sequence; cone-to-quotient normalization"
-   }
-  },
-  {
-   "text": "Derived sections after direct image introduce no different arrow. A pro-etale direct image is right adjoint to exact inverse image [def-weil-pbc-proetale-operations], so it preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. On a K-injective representative $J$ of any bounded-below input $L$ one therefore computes\n$$R\\Gamma(Y,Rf_*L)=\\Gamma(Y,f_*J)=\\Gamma(T,J)=R\\Gamma(T,L)$$\nfor $f:T\\to Y$; the middle equality is evaluation at the final object. It is natural for maps of representatives and hence for derived maps by [lem-weil-pbc-kinjective-hom-derived]. Apply this to $p,\\pi,s$. The identity $ps=\\mathrm{id}$ and the composition comparison of [lem-weil-derived-direct-image-composition] give the same first-term identification as step 7. The second arrow evaluates to restriction $\\Gamma(X,I)\\to\\Gamma(U,j^*I)$, by step 3. Steps 5 and 8 thus prove $H^q(Y,d)=\\partial$ under all the displayed global identifications.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6H, lemma-Leray-unbounded; Tag 0D6E, lemma-derived-pushforward-composition"
-   }
-  },
-  {
-   "text": "For the edge maps, apply [lem-pe-bounded-complex-direct-image-presheaf] to $f=\\mathrm{id}_Y$. For a bounded-below complex $V$ it identifies $\\mathcal H^r(V)$ with the sheafification of $W\\mapsto H^r(W,V)$. The sheafification map at the final object is exactly $e_V^r$: it sends a class to its local classes. This construction is natural also for derived morphisms. Indeed choose bounded-below K-injective representatives; [lem-weil-pbc-kinjective-hom-derived] represents a derived morphism by a homotopy class of chain maps, the presheaf comparison is natural for each such chain map, and homotopic maps act equally on every section-complex cohomology. For $f:V\\to V'$ this proves\n$$e_{V'}^r H^r(Y,f)=\\Gamma(Y,\\mathcal H^r(f))e_V^r.$$\nThe construction commutes with shifts: cocycles and boundaries in degree $r$ of $J[1]$ are those in degree $r+1$ of $J$, since changing both differentials by $-1$ changes neither their kernels nor their images.",
-   "uses": [
-    "lem-pe-bounded-complex-direct-image-presheaf",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6I (lemma-unbounded-describe-higher-direct-images), 0BKV (lemma-sheafification-cohomology); apply the natural presheaf description to the identity morphism"
-   }
-  },
-  {
-   "text": "Use step 10 with $V=R\\pi_*j^*K$, $V'=C[1]$, $f=d$ and $r=q$. The shift identification turns $\\mathcal H^q(d)$ into $\\delta^q$ and $e_{C[1]}^q$ into $e_C^{q+1}$. Step 9 turns $H^q(Y,d)$ into $\\partial$. Hence, for every $\\alpha$,\n$$e_C^{q+1}(\\partial\\alpha)=\\Gamma(Y,\\delta^q)\\bigl(e_{R\\pi_*j^*K}^q(\\alpha)\\bigr).$$\nThere is no restriction on the sign of $q$: the section complexes and sheaf cohomology are integer-indexed throughout.",
-   "uses": [
-    "def-weil-derived-cohomology-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Connecting map carrying kappa(t) to its support boundary: edge compatibility for an arbitrary class"
-   }
-  },
-  {
-   "text": "Finally the etale comparison. By step 3 the triangle and its boundary $d$ are, by definition, the $\\nu_Y^*$-transport of the etale triangle $D\\to Rp_{\\mathrm{et},*}B\\to R\\pi_{\\mathrm{et},*}j_{\\mathrm{et}}^*B\\xrightarrow{d_{\\mathrm{et}}}D[1]$ of step 2, under the isomorphisms of [sk-thm-pe-direct-image-comparison]. The isomorphism $R\\Gamma(Y_{\\mathrm{et}},V)\\simeq R\\Gamma(Y_{\\mathrm{proet}},\\nu_Y^*V)$ of [sk-prop-sf-comparison] for bounded-below etale $V$ is induced by the unit $V\\to R\\nu_{Y,*}\\nu_Y^*V$, hence is natural in $V$ and compatible with shifts. Applied to the three etale terms it carries $H^q(Y_{\\mathrm{et}},d_{\\mathrm{et}})$ to $H^q(Y,d)$, which is $\\partial$ by step 9, and likewise the first two arrows. Under the identification of step 7 this is the precise sense in which the support boundary and the global identifications agree with their etale counterparts. The cohomology sheaves are compared by exact inverse image (step 3), $\\mathcal H^r(\\nu_Y^*V)=\\nu_Y^*\\mathcal H^r(V)$, and the edge map sends a class to its local classes (step 10). Restriction and the comparison unit are natural: on an etale object $W\\to Y$ the comparison takes the restricted etale class to the corresponding restricted pro-etale class, so the presheaf-to-sheaf maps commute with it. These local equalities give equality of the resulting sheaf sections. Thus the boundary, the edge formula and all displayed identifications agree with their ordinary etale counterparts.",
-   "uses": [
-    "sk-prop-sf-comparison",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "Same triangle on global sections and identification of the normalized support boundary"
+    "place": "Assembly of extracted old proof arguments; original Steps 10--12"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-proper",
-  "def-amb-etale-compact-support",
-  "lem-exc-closed-support-triangle",
-  "def-weil-closed-immersion",
-  "def-weil-finite-integral-morphism",
-  "sbc-lem-integral-etale-direct-image-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "det-sp-unique-right-adjoint",
-  "def-weil-exceptional-inverse-image",
-  "sk-prop-sf-comparison",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-pur-classical-localization-triangle-transport",
+  "lem-pur-classical-support-counit-identification",
   "lem-pc-right-derived-functor-triangulated",
   "lem-weil-derived-direct-image-composition",
   "sk-thm-pe-direct-image-comparison",
-  "lem-pur-support-localization-triangle",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "def-weil-pbc-proetale-operations",
-  "def-pur-flasque-support",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "def-pur-support-cohomology",
-  "lem-pur-support-exact",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "thm-pur-with-support-exactness",
-  "lem-pc-cone-short-exact-quasi-iso",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pe-bounded-complex-direct-image-presheaf",
-  "def-weil-derived-cohomology-sheaves"
+  "lem-pur-proetale-injective-support-global-model",
+  "lem-pur-proetale-support-global-boundary",
+  "lem-pur-proetale-direct-image-global-evaluation",
+  "lem-pur-derived-local-class-edge-comparison",
+  "sk-prop-sf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -314,16 +181,12 @@
  "merged_into": null,
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-retracted-support-localization-comparison",
   "worker": "stage1",
-  "summary": "Expanded the retracted closed-support comparison into twelve steps using existing nodes only. Distinguished the transported finite exceptional inverse image from the ambient pro-etale support adjoint; proved their comparison on etale-origin objects via the counit transpose and a morphism of localization triangles. Computed supported sections on injectives, fixed the global boundary sign by the same cone-to-quotient map, and obtained the integer-degree edge formula from local-class naturality. No statement change or new node. Maintainer reader (Q157): step 1 now cites exactness of the closed direct image on the etale site for Rs_* = s_*; step 8 writes out the -p q^{-1} boundary computation against the snake boundary; step 12 states precisely the etale comparison it proves.",
-  "blueprint": "prop-pur-affine-line-orientation-uniqueness proof Step 1 and Step 3; sk-prop-a1 proof first paragraph (localization, apply Rp_*, ps=id) and paragraph identifying global support boundary. Steps 1--5 realize the localized triangle and comparison, 6--9 its global support interpretation, 10--12 its edge and site compatibility.",
+  "summary": "Human-requested re-split: seven statement-only independent work items extract all old arguments; unchanged statement. The report preserves and assigns all twelve old steps, including the explicit sign calculation and edge/site compatibility. Assembly has 1884 characters.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness Steps 1 and 3, and sk-prop-a1 first localization triangle and global-sections paragraph: assembly Steps 1--2 construct the triangle, Step 3 identifies global support and its boundary, Step 4 gives the edge formula and etale comparison.",
   "tool_uses": [
-   {
-    "node": "lem-exc-closed-support-triangle",
-    "why": "Ordinary etale localization supplies the actual triangle and its unit/counit maps before site transport."
-   },
    {
     "node": "sk-prop-sf-comparison",
     "why": "The fully faithful finite site comparison supplies the comparison unit and equality of derived global sections."
@@ -335,30 +198,6 @@
    {
     "node": "sk-thm-pe-direct-image-comparison",
     "why": "Bounded-below canonical finite direct-image comparison, including units, counits and composition, identifies the transported arrows."
-   },
-   {
-    "node": "lem-pur-support-localization-triangle",
-    "why": "The ambient bounded-below pro-etale support triangle identifies the transported first term only on the specified etale-origin input."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Exactness, full faithfulness and the open-zero relation are formal support tools; no purity theorem is substituted."
-   },
-   {
-    "node": "lem-pur-support-exact",
-    "why": "Generic homological/sheaf tool used exactly as stated in the proof step; the rank-one orientation unit does not supply this categorical prerequisite."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-restriction-injectives",
-    "why": "Localization of a pro-etale injective resolution computes open cohomology."
-   },
-   {
-    "node": "thm-pur-with-support-exactness",
-    "why": "Generic homological/sheaf tool used exactly as stated in the proof step; the rank-one orientation unit does not supply this categorical prerequisite."
-   },
-   {
-    "node": "lem-pe-bounded-complex-direct-image-presheaf",
-    "why": "Its specialization to the identity gives the integer-degree local-class description of the cohomology sheaf and hence the edge."
    }
   ]
  },
@@ -375,12 +214,12 @@
   "lem-pe-bounded-complex-direct-image-presheaf"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q157-a9a14890a",
-  "group": "Q157",
+  "reviewer": "NT-cc-Q40-3792a8f36",
+  "group": "Q40",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-a9a14890a (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and all 12 steps), every cited node statement (13 stmt_deps, 28 proof_deps), the unit sk-prop-a1, the main-20261015 blueprint sk-prop-a1 proof (localization, Rp_* with ps=id, global-sections triangle), Stacks 09XP/09XQ, and the parent's use of the item. The statement is byte-identical to the version the parent review installed; nothing is weakened. No new nodes. No duplicate: lem-pur-support-localization-triangle is the pre-Rp_* pro-etale supported triangle and lem-pur-support-comparison-boundary covers sheaves only. Small cases checked: s=p=id gives K->K->0; B=0; shifts; a disjoint component gives zero boundary; disconnected Y. Hypotheses checked: p separated finite type hence qcqs, s closed, j quasi-compact, pi qcqs, A finite commutative, B in D^+. Coefficient category is ordinary constant-A on both sites. Rs^! is the finite formula nu^* s^x Rnu_* with the (id,s) compactification. Step checks: TR3 rotation in step 4 and the counit-transpose uniqueness in step 5 are correct; the sectionwise surjectivity via j_!A_U->A_X is correct; step 10 uses lem-pe-bounded-complex-direct-image-presheaf at f=id for integer degrees. Three repairable faults, fixed in fixes/: (C1/C4) step 1 took Rs_*=termwise s_* from lem-exc-closed-support-triangle, whose statement does not give it; it now cites in-route sbc-lem-integral-etale-direct-image-exact (closed immersion is integral) and lem-sf-exact-functor-derived-triangulated. (E5) step 8 claimed 'no extra sign' without computing; I checked that boundary -p q^{-1} (cone convention of def-weil-abstract-derived-category) induces the snake boundary [c]->[db] of thm-pur-with-support-exactness, and wrote the computation in. (E5) step 12 'therefore identifies the support boundary' now states exactly that d is the transport of d_et and that the natural, shift-compatible RGamma comparison carries H^q(Y_et,d_et) to H^q(Y,d)=boundary. proof_deps recomputed. I accept the declared tool_uses as generic black boxes. No SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-3792a8f36 (reviewer sub-agent of L); spot-checked: Read the item, all 7 new statement-only nodes, the cited statements (lem-exc-closed-support-triangle, lem-pur-support-localization-triangle, def-pur-support-triangle (BPU), def-weil-abstract-derived-category (cone triangle −p), def-pur-flasque-support, def-weil-exceptional-inverse-image, sk-thm-pe-direct-image-comparison, sk-prop-sf-comparison, lem-weil-derived-direct-image-composition, def-weil-pbc-proetale-operations, lem-weil-pbc-proetale-ringed-open-closed, thm-pur-with-support-exactness, def-pur-support-cohomology), the main-20261015 sk-prop-a1 proof and Stacks 09XQ/0BKV. This answers the human re-split note of 2026-10-21. The statement, stmt_deps and source are byte-identical to the live text. There are 7 new nodes of 1565–1900 chars each, all unsplit with no proof, and each logs searches in 4 tool kinds. The assembly is 4 steps, 1884 chars. The item and the new ids are not in the dropped list, no other group has re-split the item, and there is no SGA. Step-by-step comparison: old Step 1 is now closed-finite-adjoint-counit-transport, Step 3 is classical-localization-triangle-transport (before Rp_*), Steps 4–5 are classical-support-counit-identification (TR3, then full faithfulness and the unique transpose, so λ=i_*θ and the result does not depend on the completion), Steps 6–7 are proetale-injective-support-global-model, Step 8 is proetale-support-global-boundary (cone d(b,a)=(db+u a,−da), third arrow −p: (b,−db)↦db, the snake boundary with no sign), Step 9 is proetale-direct-image-global-evaluation (I type-checked its composition equation), and Steps 10 and 12 are derived-local-class-edge-comparison. Steps 2 and 11 stay in the assembly, which applies existing tools only (p and π qcqs, inputs in D^+). Every new statement is true as stated with hypotheses matching the cited nodes: quasi-compact j, finite Λ, Noetherian k-schemes for the compactification, ℓ invertible for the direct images. Edge cases checked: Z=∅, Z=X, K=0, disjoint clopen, shifts. None of the new nodes duplicates an existing node: the étale Leray nodes, the O_X-module mixed-sections nodes, lem-pur-site-comparison-edge-section (single sheaf, q≥0) and lem-pur-closed-support-exceptional-comparison (constructible B_0) all differ. No node cites the item and none restates it. Advisory only: assembly Step 2 does not cite lem-exc-closed-support-triangle directly (node 2 supplies the étale triangle), and the item's maintainer tool_uses list still names 7 tools the assembly no longer cites."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

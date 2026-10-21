@@ -20892,3 +20892,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q45/lem-pur-integral-twist-line-inverse-image (reviewer FIX; after a return; new nodes: 2)
 - 08:08 L: merged deliver/Q36/sk-lem-as-properties (reviewer FIX; after a return; new nodes: 0)
 - 08:08 L: merged deliver/NI/lem-weil-pbc-exact-adjoint-tower-models (reviewer PASS; first push; new nodes: 0)
+- 08:08 L: merged deliver/Q40/lem-pur-retracted-support-localization-comparison (reviewer PASS; after a return; new nodes: 7)

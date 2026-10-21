@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-proetale-injective-support-global-model",
+ "kind": "statement",
+ "title": "Injective model for global sections of the closed support object",
+ "statement": "Fix a finite commutative ring $A$. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules] and their derived categories [def-weil-pbc-derived-categories], with exact $i_*$ and $i^*,j^*$ as in [def-weil-pbc-proetale-operations]. Put $i^!_0M=i^*\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and write $S=Ri^!_0$ on $D^+$, with its support counit $\\epsilon:i_*SK\\to K$ as in [lem-pur-support-localization-triangle]. The sheaf functor $i^!_0$ is right adjoint to the exact sheaf functor $i_*$ and preserves injective objects. For every bounded-below complex of injective $A_X$-module sheaves $I$ representing $K\\in D^+(X_{\\mathrm{proet}},A)$, the complex $i^!_0I$ is bounded below and termwise injective, represents $SK$, and computes its derived global sections. There is an equality of complexes, natural in chain maps of such representatives,\n$$\\Gamma(Z,i^!_0I)=\\Gamma(X,i_*i^!_0I)=\\ker\\bigl(I(X)\\to I(U)\\bigr)=\\Gamma_Z(X,I),$$\nwith all differentials induced by those of $I$. Consequently it induces a canonical natural isomorphism\n$$R\\Gamma(Z,SK)\\xrightarrow{\\sim}R\\Gamma_Z(X,K)$$\nin the derived category of $A$-modules. Here $\\Gamma_Z$ is the kernel-of-restriction functor and $R\\Gamma_Z$ its bounded-below right derived functor [def-pur-support-cohomology]; the isomorphism in degree $r\\in\\mathbf Z$ is an isomorphism of cohomology modules, not an identification with a sheaf.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XQ, lemma-sections-with-support-acyclic (Hom argument); Tag 09XP, section-cohomology-support; ordinary pro-etale module version (old item Steps 6--7)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-flasque-support",
+  "lem-pur-support-localization-triangle",
+  "def-pur-support-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed support sheaf right adjoint preserves injectives and global sections of its derived functor equal derived sections with support on proetale site",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification; CategoryTheory.Presheaf.isLocallyInjective_toSheafify'; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesInjectiveObjects\"",
+   "results": "CategoryTheory.Functor.PreservesInjectiveObjects; CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence; CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj; CategoryTheory.Functor.PreservesInjectiveObjects.mk; CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects; CategoryTheory.Functor.preservesInjectiveObjects_comp; ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall; CategoryTheory.Functor.mapExt_bijective_of_preservesInjectiveObjects; CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects; ModuleCat.instPreservesInjectiveObjectsLocalizationLocalizedModuleFunctorOfIsNoetherianRing",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*injective|injective.*support|sectionsWithSupport",
+   "results": "Mathlib/Algebra/SkewPolynomial/Basic.lean:113:   Finset.map ⟨toAdd, toAdd.injective⟩ (SkewMonoidAlgebra.support p); Mathlib/Algebra/FiniteSupport/Basic.lean:170: lemma HasFiniteMulSupport.comp_of_injective (hg : Injective g) (hf : f.HasFiniteMulSupport) :; Mathlib/Algebra/FiniteSupport/Basic.lean:176: lemma HasFiniteMulSupport.fun_comp_of_injective (hg : Injective g) (hf : f.HasFiniteMulSupport) :; Mathlib/Algebra/Notation/Support.lean:91: lemma mulSupport_extend_one {f : ι → κ} {g : ι → N} (hf : f.Injective) :; Mathlib/Topology/Algebra/InfiniteSum/Basic.lean:203:     (hi : Injective i) (hf : mulSupport f ⊆ Set.range i); Mathlib/Topology/Algebra/InfiniteSum/Basic.lean:634: theorem tprod_eq_tprod_of_ne_one_bij {g : γ → α} (i : mulSupport g → β) (hi : Injective i); Mathlib/Topology/Algebra/InfiniteSum/Defs.lean:210: theorem Function.Injective.hasProd_comap_iff_of_hasSupport [L.HasSupport] {g : γ → β}; Mathlib/Topology/Algebra/InfiniteSum/Defs.lean:211:     (hg : Injective g) (hf : ∀ x ∈ L.support, x ∉ Set.range g → f x = 1) :; Mathlib/Topology/Algebra/InfiniteSum/Defs.lean:239:   Subtype.coe_injective.hasProd_comap_iff <| by simpa using mulSupport_subset_iff'.1 hf; Mathlib/Topology/Algebra/Support.lean:334: theorem mulTSupport_extend_one (inj : g.Injective) :; Mathlib/Algebra/Polynomial/Eval/Coeff.lean:211: theorem support_map_of_injective [Semiring R] [Semiring S] (p : R[X]) {f : R →+* S}; Mathlib/Algebra/Polynomial/Eval/Coeff.lean:212:     (hf : Function.Injective f) : (map f p).support = p.support := by; Mathlib/Algebra/Polynomial/EraseLead.lean:389: theorem card_support_eq' {n : ℕ} (k : Fin n → ℕ) (x : Fin n → R) (hk : Function.Injective k); Mathlib/Algebra/Polynomial/EraseLead.lean:407:   refine ⟨?_, fun ⟨k, x, hk, hx, hf⟩ => hf.symm ▸ card_support_eq' k x hk.injective hx⟩; Mathlib/Algebra/Homology/Embedding/IsSupported.lean:168:   exact F.map_injective ((isZero_X_of_isStrictlySupported; Mathlib/Algebra/MonoidAlgebra/Degree.lean:438: lemma supDegree_mem_support (hD : D.Injective) (hp : p ≠ 0) :; Mathlib/Algebra/MonoidAlgebra/Division.lean:70:     (x /ᵒᶠ g).coeff.support = x.coeff.support.preimage (g + ·) (add_right_injective g).injOn :=; Mathlib/LinearAlgebra/RootSystem/Base.lean:175:   have : Injective (linearCombination R fun k : b.support ↦ P.coroot k) := b.linearIndepOn_coroot; Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean:271:     Injective (fun i (k : b.support) ↦ P.pairingIn ℤ i k) := by; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:620:   rw [coe_support_inter, ← Set.image_subset_image_iff U.2.fromSpec.isOpenEmbedding.injective,; Mathlib/LinearAlgebra/FreeModule/ModN.lean:87:     refine ⟨b.repr.symm ⟨(f x).support, c, by simp [hc, NeZero.ne]⟩, b.repr.injective ?_⟩; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:420:     ← SetLike.coe_injective.eq_iff, Scheme.Hom.support_ker]; Mathlib/Algebra/MvPolynomial/Rename.lean:201:       p.support.preimage (Finsupp.mapDomain f) (Finsupp.mapDomain_injective hf).injOn := by; Mathlib/Algebra/MvPolynomial/Rename.lean:382: theorem support_rename_of_injective {p : MvPolynomial σ R} {f : σ → τ} [DecidableEq τ]; Mathlib/Algebra/MvPolynomial/Rename.lean:385:   Finsupp.mapDomain_support_of_injective (Finsupp.mapDomain_injective h) _",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of closed supported sheaf computed by kernel of restriction on bounded below injective complexes",
+   "results": "CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.Sheaf.Γ; CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.coneΓ_π_app; CategoryTheory.HasGlobalSectionsFunctor; AlgebraicGeometry.SheafedSpace.Γ_obj; TopCat.Presheaf.map_germ_eq_Γgerm; AlgebraicGeometry.SheafedSpace.Γ",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective closed sections support sheaf functor and equality of derived global sections on the closed subscheme with supported cohomology",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; AlgebraicGeometry.Scheme.IdealSheafData.mk.inj; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; ModuleCat.Tilde.res_const",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-retracted-support-localization-comparison",
+  "date": "2026-10-21",
+  "group": "Q40"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Tag 09XQ, lemma-sections-with-support-acyclic (Hom argument); Tag 09XP, section-cohomology-support; ordinary pro-etale module version (old item Steps 6--7)",
+   "via": [
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
