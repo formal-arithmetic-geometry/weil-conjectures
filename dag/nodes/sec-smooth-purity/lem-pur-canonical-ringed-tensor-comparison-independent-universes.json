@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-canonical-ringed-tensor-comparison-independent-universes",
+ "kind": "statement",
+ "title": "Existing normalized ordinary tensor comparison with independent site universes",
+ "statement": "Let C and D be sites with object universe s and morphism universe h. Work with rings, modules and underlying sets in max(s,h). Let uInv be left adjoint to uPush and preserve finite limits, R and RI be commutative ring sheaves, I an algebraic inverse-image presentation of uInv [def-weil-pbc-algebraic-inverse-image], S a commutative ring sheaf on D, and c:RI→S. Let T be a specified module functor, equipped with object equations T(M)=changeOfRings(c,I.modules(M)) and the corresponding equations on morphisms. Then there exists a unique CanonicalRingedTensorComparison: maps q_M inserting 1 tensor m in sheafified scalar extension and natural isomorphisms T(M tensor_R N)≅T(M) tensor_S T(N), with the generalized pure-tensor formula of [def-weil-pbc-canonical-ringed-tensor-comparison], retaining the independent site universes.",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-canonical-ringed-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; Section 03EK, balanced tensor universal property. Existing independent-universe public interface in RingedTopoiCanonicalTensorComparisonOfUniverses."
+ },
+ "proof": [
+  {
+   "text": "Replace each site by an equivalent small model in universe max(s,h). Reindex ring sheaves, module sheaves and the algebraic inverse-image presentation along these equivalences. The equivalences preserve the adjunction, finite limits and the specified object and morphism equations for scalar extension. Equivalence of sheaf categories transports all sectionwise operation graphs and pure-pairing equations.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+   }
+  },
+  {
+   "text": "On the models, use the normalized algebraic inverse-image tensor comparison and the scalar-extension tensor comparison. Compose their isomorphisms with the object identifications defining T. Define q by scalar-extension insertion followed by the inverse object identification; the map equations give naturality. On pure sections both comparisons send the inserted pure tensor to the corresponding tensor of inserted sections, which is exactly the required generalized normalization. Transport this construction back to the original sites.",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-scalar-extension-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+   }
+  },
+  {
+   "text": "The equation on inserted 1 tensor m fixes each q. To compare two tensor isomorphisms, test their maps on generalized pure tensors: finite-product preservation transports the two factors, and sheafification of the balanced tensor presentation makes these tests jointly epimorphic. Thus the hom maps agree. Their inverses are then equal, and proof irrelevance identifies the remaining fields. This proves the stated Subsingleton together with existence.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-scalar-extension-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL and Section 03EK; transport along equivalent small sites preserves the normalized tensor construction and its uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image of ringed sheaves preserves tensor products with independent universes for site objects and morphisms",
+   "results": "Eight hits: module pullback, pullbackIso, pullback composition, scheme module pullback and a light-condensed monoidal sheafification instance. No normalized arbitrary-ringed-topos tensor comparison.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing project theorem, preserving its independent site universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, changeOfRings",
+   "results": "0 hits; unknown identifier changeOfRings.",
+   "date": "2026-10-21",
+   "verdict": "No replacement found."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalRingedTensorComparison_existsUnique|AlgebraicInverseImage.*tensor",
+   "results": "0 Mathlib hits. Project rg finds the already published independent-universe comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "Attach the existing theorem; do not duplicate the Lean statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unique canonical normalized tensor comparison for inverse image of sheaves of modules on two sites",
+   "results": "Eight hits: pullbackObjFreeIso, pushforwardNatIso_inv, equivalence.sheafCongr maps, pushforwardCongr, unit pullback, sheafificationCompPullback and freeFunctorCompPullbackIso. No arbitrary ringed-topos normalized tensor comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Reuse the already published project theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison",
+  "date": "2026-10-21",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Final sentence: compatibility with the derived tensor product and with base change is naturality of the displayed projection and of the tensor product; ordinary normalized tensor comparison is the invertibility step in the descendant pro-etale tensor-comparison lemma.",
+   "via": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pur-tate-inverse-limit-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.RingedTopoiCanonicalTensorComparisonOfUniverses",
+  "declaration": "SheafOfModules.CanonicalTensorPullbackOfUniverses.canonicalRingedTensorComparison_existsUnique",
+  "statement": "theorem canonicalRingedTensorComparison_existsUnique\n    (uPush : Sheaf JD (Type (max s h)) ⥤ Sheaf JC (Type (max s h)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (hmap : ∀ {M N : SheafOfModules.{max s h} ((sheafCompose JC (forget₂ CommRingCat.{max s h}\n      RingCat.{max s h})).obj\n      R)} (f : M ⟶ N), L.map f =\n      eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫\n        eqToHom (hobj N).symm) :\n    Nonempty (CanonicalRingedTensorComparison R S RI uInv I c L hobj) ∧\n      Subsingleton (CanonicalRingedTensorComparison R S RI uInv I c L hobj)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-21",
+  "note": "Metadata attachment of an already published theorem, not a new Lean module or a new admitted statement. Its existing docstring attaches it broadly to the derived tensor-pullback node; this node records precisely the ordinary independent-universe result used here."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261021T193149-L-938028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261021T193149-L-938028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

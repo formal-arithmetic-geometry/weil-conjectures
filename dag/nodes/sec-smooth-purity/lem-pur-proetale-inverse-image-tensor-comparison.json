@@ -17,83 +17,103 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pur-inverse-image-scalar-unit-normalization] to obtain the algebraic presentation of the specified $I=h^{-1}$, the specified scalar-extension functor $T$, and its natural isomorphism $a:T\\cong I$. Apply [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] at $c=1_{h^{-1}R}$; its object and morphism hypotheses hold for this $T$. Define $\\sigma^h=(a_F\\otimes a_G)\\mu a_{F\\otimes_R G}^{-1}$. It is a natural isomorphism, and the normalization node gives exactly the required formula on $h^{-1}(s\\otimes t)$.",
+   "text": "Construct the coefficient quotient by the sectionwise balanced tensor pairing and the module sheafification adjunction. Uniqueness follows by adjunction injectivity and tensor induction. Construct comparison_exists by pairing the two canonical module units into the tensor of their targets, using the general private tensorPushforwardPairing_exists for independent site universes, then transpose through the canonical module adjunction. Its unit formula is the prescribed inverseSection, and the same tensor universal property gives uniqueness.",
    "uses": [
-    "lem-pur-inverse-image-scalar-unit-normalization",
-    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+    "def-pur-sheaf-tensor-product",
+    "new-lem-weil-pbc-proetale-module-canonical-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2 and 03EL: algebraic realization and scalar-unit normalization"
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
    }
   },
   {
-   "text": "Apply [lem-pur-inverse-image-tensor-adjoint-test] with $K=h^{-1}F\\otimes_{h^{-1}R}h^{-1}G$. Any map with the formula of clause 1 agrees with $\\sigma^h$ on every indicated unit-image pure tensor, hence equals it. This proves uniqueness.",
+   "text": "Obtain ringSetsIdentification by the forgetful pullback comparison. For moduleSetsIdentification, use the isomorphism of the abelian unit mate for the canonical module adjunction, followed by the forgetful pullback comparison. Both identifications have the required set-unit normalization, and adjunction injectivity gives their uniqueness.",
    "uses": [
-    "lem-pur-inverse-image-tensor-adjoint-test"
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison",
+    "new-lem-weil-pbc-proetale-module-canonical-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D7 and 03EK: original pure-tensor equality test"
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
    }
   },
   {
-   "text": "By [lem-pc-sites-sheaf-tensor-bilinear-universal], the larger-ring pure pairing, restricted to the smaller ring, induces $\\pi$ and $\\pi'$. Both composites of clause 2 are $h^{-1}\\mathcal O$-linear maps into the tensor over $h^{-1}\\mathcal O'$. Naturality of the inverse-image unit for $\\pi$ and step 1 send each $h^{-1}(s\\otimes t)$ to $h^{-1}s\\otimes h^{-1}t$ along either route. The equality test [lem-pur-inverse-image-tensor-adjoint-test] proves the square.",
+   "text": "For scalarIdentification, regard the S-module unit as R-linear using naturality of the ring unit with the scalar map, and transpose it. For moduleId, restrict along pullbackId; the conjugation unit equation proves compatibility with the identity ring comparison. For moduleComp, compose the two module units and apply sectionwise restriction along the fibre-product associator. The ring compositor unit equation proves this section map linear, and naturality of the units and associator proves it natural; then transpose. In all three cases the normalized underlying-set maps identify the underlying map with an isomorphism, so reflection of isomorphisms proves invertibility. The module adjunction proves uniqueness.",
    "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-pur-inverse-image-tensor-adjoint-test"
+    "new-lem-weil-pbc-proetale-module-canonical-unit",
+    "det-pe-topos-functoriality-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK: coefficient restriction; adjunction equality test"
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
    }
   },
   {
-   "text": "Apply [lem-pur-site-algebraic-composition-unit] to the base-change functors $u_h,u_g$. Their smallness, sheaf-preserving precomposition and left-exact inverse images are supplied by [def-weil-proetale-inverse-image]; identify the composite by the fibre-product associator. It gives the unique unit-normalized $\\gamma$, including its ring and semilinear module identifications, and thus the adjunction-compatible comparison of [det-pe-topos-functoriality-inverse-image](5). On $(h\\circ g)^{-1}(s\\otimes t)$ the left tensor composite becomes $g^{-1}h^{-1}s\\otimes g^{-1}h^{-1}t$ by the formula for $\\gamma$ and two applications of step 1. The right composite gives the same tensor by step 1 and the formulas for $\\gamma_F,\\gamma_G$. Both are linear over $(h\\circ g)^{-1}\\mathcal O$ after the specified scalar identification, so [lem-pur-inverse-image-tensor-adjoint-test] for $h\\circ g$ proves the composition equation.",
+   "text": "The conjugation unit equation for the existing set compositor, naturality of the two maps of underlying sets, and naturality of the second set unit give setComp_map_units. This proves the underlying-set normalization used for moduleComp. Injectivity of the composite set adjunction gives setComp_unique and the ring and module compositor equations. The identity set pullback is equivalent to the identity functor by conjugating lowerStarId, so its adjunction unit is invertible.",
    "uses": [
-    "lem-pur-site-algebraic-composition-unit",
-    "def-weil-proetale-inverse-image",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-pur-inverse-image-tensor-adjoint-test",
-    "lem-pur-proetale-unit-underlying-identifications"
+    "det-pe-topos-functoriality-inverse-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CB, 00VE, 00WX: composition, with operation transport and pure-tensor equality test"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
    }
   },
   {
-   "text": "Identify the identity base-change functor with the identity by $T\\times_TV\\cong V$. Then [lem-pur-site-algebraic-composition-unit] identifies $\\eta_{\\mathrm{id}}$ as an isomorphism, including its ring/module identifications. Under it step 1 fixes every pure tensor $s\\otimes t$. The injectivity part of [lem-pc-sites-sheaf-tensor-bilinear-universal] makes $\\sigma^{\\mathrm{id}}$ the identity.",
+   "text": "Build a private algebraic inverse-image lift whose module functor is definitionally the recorded inverse image. Its natural underlying-set identification is the normalized moduleSetsIdentification. Transpose naturality and each operation-graph equation through the set adjunction. Ring-unit preservation of operations and module-unit preservation of addition and scalar multiplication prove the equations, giving an explicit lift with no data chosen from mere existence.",
    "uses": [
-    "lem-pur-site-algebraic-composition-unit",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-pur-proetale-unit-underlying-identifications"
+    "def-weil-pbc-algebraic-inverse-image",
+    "new-lem-weil-pbc-proetale-module-canonical-unit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VE and 00WH: identity unit; tensor universal property"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+   }
+  },
+  {
+   "text": "Apply the independent-universe normalized tensor construction with scalar map identity and the explicitly defined functor F followed by sheafified extension of scalars along identity. Sectionwise extendScalarsId and the sheafification counit give the identity scalar-extension isomorphism, normalized on 1 tensor m. Identify the localized monoidal tensor with the explicit site tensor by the identity isomorphism of their presheaf tensors and sheafification. Conjugate the general tensor isomorphism by these isomorphisms. Evaluate its generalized pure-tensor formula on the set-unit image of (m,n) in the cartesian product of underlying module sheaves. Naturality of the unit with each projection and the pure pairing gives exactly comparison_exists normalization; uniqueness identifies its map with comparison and proves invertibility.",
+   "uses": [
+    "lem-pur-canonical-ringed-tensor-comparison-independent-universes",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+   }
+  },
+  {
+   "text": "Maps out of F(M tensor N) are equal if they agree on all inverse images of original pure tensors: transpose through the canonical module adjunction, then use tensor sheafification and tensor induction. Apply this criterion to joint naturality, coefficient change, tensor composition and identity. Naturality of module units, the quotient normalization, moduleComp normalization and moduleId normalization turn both sides of each square into the same pure tensor. This proves every coherence clause without a local-generation assertion about original pulled-back sections.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-module-canonical-unit",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D7, 03EK and 03EL"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-inverse-image-scalar-unit-normalization",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "lem-pur-inverse-image-tensor-adjoint-test",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pur-site-algebraic-composition-unit",
-  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
   "det-pe-topos-functoriality-inverse-image",
-  "lem-pur-proetale-unit-underlying-identifications"
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "lem-pur-canonical-ringed-tensor-comparison-independent-universes",
+  "new-lem-weil-pbc-proetale-module-canonical-unit",
+  "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Stacks Tags 03D2, 03D7, 03EK and 03EL, with sites.tex Tags 00VE, 00WH, 00WX, 03CB and proetale.tex Tag 09A5; explicit unit, uniqueness and coherence arguments"
+  "place": "F1: explicit canonical adjunction and sheafification constructions for all nine original holes; independent-universe normalized tensor construction for invertibility; coherence by adjunction injectivity and pure tensors. Stacks Tags 03D2, 03D7, 03EK, 03EL, and sites.tex Tags 00VE, 00WH, 00WX, 03CB."
  },
  "mathlib_searches": [
   {
@@ -202,14 +222,8 @@
  },
  "tool_uses": [
   "def-weil-pbc-algebraic-inverse-image",
-  "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "def-weil-pbc-sheafification",
   "def-weil-proetale-inverse-image",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-trf-site-inverse-image-composition-generators",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "det-pe-topos-functoriality-inverse-image"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -242,6 +256,10 @@
    "AlgebraicGeometry.ProEtaleTensorComparison.tensorMap",
    "AlgebraicGeometry.ProEtaleTensorComparison.ringSets",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleSets",
+   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists",
+   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification",
+   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification_exists",
+   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleComp_exists",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleComp",
    "AlgebraicGeometry.ProEtaleTensorComparison.ringId",
@@ -272,9 +290,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M8",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261021T173338-L-3588944",
+  "landing": "20261021T193149-L-938028",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
