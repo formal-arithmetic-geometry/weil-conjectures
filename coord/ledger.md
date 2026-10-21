@@ -22327,3 +22327,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:54 L: merged deliver/NL/lem-pur-strict-quotient-diagonal-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 11:55 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 11:56 L: merged deliver/N6/lem-cbc-completed-open-strict-mate-identification (stage 2; reviewer PASS; parallel immutable checks)
+- 11:56 L: returned deliver/Q129/lem-sp-power-torsion-sheaf-limit-complete (reviewer RETURN: L: independent stage-2 immutable head 5c013ff4bc98: H2/H12 (mechanical theorem-stmt_dep finding upheld): the Lean statem)
