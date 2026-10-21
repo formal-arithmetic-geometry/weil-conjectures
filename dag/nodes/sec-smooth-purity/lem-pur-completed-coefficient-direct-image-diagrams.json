@@ -1,0 +1,164 @@
+{
+ "id": "lem-pur-completed-coefficient-direct-image-diagrams",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Normalized completed-coefficient direct image on strict diagrams",
+ "statement": "Let l be prime and E a finite extension of Q_l. For any scheme morphism f:X to Y and a supplied completed structural map c satisfying all finite projection equations and the constant-to-completed compatibility square, and supplied SiteData source,target [def-pur-completed-pushforward-models], there exists DiagramComparisonData D l E f with D.source=source, D.target=target and D.structureMap=c. Its completed structural map is fixed by the finite projections; its constant, finite and quotient squares have identity underlying section maps and the universal-unit normalizations. The quotient unit and composition equations, the strict-system square, the tower evaluation squares and the direct-image/inverse-limit comparison hold with all the stated representative and projection normalizations. No completeness or reconstruction conclusion is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied structural map c, its finite projection equations and its constant integral square; the completed structural-map theorem constructs these data uniquely. The remaining construction extends this fixed ring map to coefficient and strict diagram comparisons.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-pur-completed-coefficient-structure-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
+   }
+  },
+  {
+   "text": "Each ordinary coefficient square is the identity on underlying sections. Transport to an equivalent small site large enough for the coefficient universe and apply normalized ringed derived composition. Compare its exact derived restrictions to the supplied factors. The universal unit equation gives Square.normalization, and uniqueness gives identity, successive-quotient and projection coherence.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-ringed-derived-composition-cocycle",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
+   }
+  },
+  {
+   "text": "Use the sequence ringed sites to apply the diagram restriction comparison before evaluation. Its ordinary isomorphism is the identity on underlying sections. The system and fixed-ring tower evaluation comparisons are identified by their normalized universal units, retaining every semilinear transition.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
+   }
+  },
+  {
+   "text": "Ordinary direct image commutes with inverse limit by limit.post. Derive both factorizations on tower ringed sites to obtain limitComparison and its unit normalization. Both projection composites induce the same ordinary projection after precomposition with the universal derived unit; uniqueness gives limitProjection. Normalize comparisons with the supplied site models by their own factorization and universal unit equations.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-completed-coefficient-structure-map",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars on module sheaves and total derived inverse limits commute with direct image",
+   "results": "Eight hits including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and ModuleCat.preservesLimit_restrictScalars; no normalized completed-coefficient result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with derived pushforward and derived inverse limits of module sheaves",
+   "results": "Generic Mathlib pushforward composition and change-of-rings declarations; no normalized completed-coefficient package.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "Unknown identifier in the search service; no match. The local library supplies totalDerivedData and rightDerivedDesc.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|strictRoosDerivation|rightDerivedUnique",
+   "results": "Mathlib CategoryTheory/Functor/Derived/RightDerived.lean rightDerivedUnique and its pointwise use. Local rg located StrictRoosDerivation, RoosIntrinsicCompletenessEquivalence and CompletedDirectImageLimits; their interfaces are not the present independently sized normalized strict augmentation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientPushforwardComparison",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": [
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientDirectImageDiagrams",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientDirectImageDiagrams.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.directImageDiagrams_exists",
+  "statement": "theorem directImageDiagrams_exists {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (source : SiteData l E X) (target : SiteData l E Y)\n    (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))\n    (hc : ∀ n, c ≫ (ringPush.{t, u} f).map (projection l E X n) =\n      projection l E Y n ≫ finiteStructure l E f n)\n    (hconstant : integralConstantToCompletionOfUniverses l E Y ≫ c =\n      constantStructure l E f ≫\n        (ringPush.{t, u} f).map (integralConstantToCompletionOfUniverses l E X)) :\n    ∃ D : DiagramComparisonData l E f,\n      D.source = source ∧ D.target = target ∧ D.structureMap = c",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
+}

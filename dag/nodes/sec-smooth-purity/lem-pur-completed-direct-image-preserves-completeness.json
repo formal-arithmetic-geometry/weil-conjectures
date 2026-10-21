@@ -1,0 +1,155 @@
+{
+ "id": "lem-pur-completed-direct-image-preserves-completeness",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Completed-coefficient direct image preserves derived completeness",
+ "statement": "Fix distinct primes p,l and a finite extension E/Q_l. Let f:X to Y be any scheme morphism and let c:R_Y to f_*R_X satisfy c followed by f_*pi_X,n = pi_Y,n followed by the canonical finite constant-section map, for every positive quotient [def-weil-completed-integral-coefficients]. For any RightImage F of the actual module pushforward along c [def-pur-completed-pushforward-models], if K in D(R_X) is derived complete [def-weil-derived-complete], then F(K) in D(R_Y) is derived complete. All scheme, hom and coefficient universes remain independent.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient integers are a complete DVR with finite positive-power quotients, a nonzero uniformizer and perfect quotient coefficients. Their inverse limit is the integers. Thus the principal-ideal adic direct-image proposition applies.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sfb-integers-profinite-tower",
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
+   }
+  },
+  {
+   "text": "The finite constant coefficient inverse-image isomorphisms and the projection equations for c identify its module direct image with that in the adic proposition, across the small-site and coefficient equivalences. Uniqueness with the K-injective unit compares its derived model with F.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
+   }
+  },
+  {
+   "text": "Apply the adic direct-image completeness theorem, and the Roos/intrinsic completeness equivalence on both sites. Transport across the normalized derived comparison.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-valued-dvr-finite-quotients",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars on module sheaves and total derived inverse limits commute with direct image",
+   "results": "Eight hits including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and ModuleCat.preservesLimit_restrictScalars; no normalized completed-coefficient result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with derived pushforward and derived inverse limits of module sheaves",
+   "results": "Generic Mathlib pushforward composition and change-of-rings declarations; no normalized completed-coefficient package.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "Unknown identifier in the search service; no match. The local library supplies totalDerivedData and rightDerivedDesc.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|strictRoosDerivation|rightDerivedUnique",
+   "results": "Mathlib CategoryTheory/Functor/Derived/RightDerived.lean rightDerivedUnique and its pointwise use. Local rg located StrictRoosDerivation, RoosIntrinsicCompletenessEquivalence and CompletedDirectImageLimits; their interfaces are not the present independently sized normalized strict augmentation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientPushforwardComparison",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": [
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedDirectImagePreservesCompleteness",
+  "file": "lean/Sheaf/Paper/CompletedDirectImagePreservesCompleteness.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.directImage_preservesComplete",
+  "statement": "theorem directImage_preservesComplete (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)\n    {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))\n    (hc : ∀ n, c ≫ (ringPush.{t, u} f).map (projection l E X n) =\n      projection l E Y n ≫ finiteStructure l E f n)\n    [hpush : (push f c).Additive] (F : RightImage (push f c))\n    (K : DerivedCategory (Mod X (R l E X)))\n    (hK : IsDerivedCompleteUnrestricted l E X K) :\n    IsDerivedCompleteUnrestricted l E Y (F.functor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
+}

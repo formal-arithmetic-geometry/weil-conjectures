@@ -5,119 +5,54 @@
  "unit": "sk-lem-sf-mate",
  "proof": [
   {
-   "text": "The coefficient and pullback definitions give $\\underline A_W\\to R_W\\to(A_n)_W$. Restriction is exact on the unchanged underlying abelian sheaves, so exact-functor factorization makes it termwise on $D$. Comparing the two ringed-topos factorizations gives $U_YF_R\\cong F_AU_X$ and $F_RV_{X,n}\\cong V_{Y,n}F_n$, with the prescribed K-injective normalization.",
+   "text": "Construct exact scalar restrictions, the strict coefficient-system restriction, and normalized total inverse limit on both sites.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-completed-integral-coefficients",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-completed-pullback",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-pur-completed-coefficient-site-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; associativity and identity normalization extracted by the total-derived universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the ringed derived-composition cocycle to successive identity-topos coefficient changes. It gives the quotient and unit coherence. For $A_m\\to A_n$ the resolution formula is the finite-restriction comparison, so its normalization agrees.",
+   "text": "Construct the unique completed coefficient structural map from the finite constant-section maps, by the preserved inverse limit, and prove its constant integral square by testing each finite projection. Extend this supplied map and the site models to the coherent coefficient and strict-diagram direct-image comparisons.",
    "uses": [
-    "lem-pur-ringed-derived-composition-cocycle",
-    "lem-weil-proetale-direct-image-restriction-of-scalars"
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-structure-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; associativity and identity normalization extracted by the total-derived universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain, hence Noetherian, and the uniformizer $t$ is a nonzero nonunit, hence a non-zero-divisor of the domain $A$. By [lem-weil-valued-dvr-finite-quotients] every $A_n$ is finite and each $A_{n+1}\\to A_n$ is surjective, so every $A_m\\to A_n$ ($m\\geq n$) is surjective; the finite group $A/(t)$ is additive torsion. Since $t^n$ is a non-zero-divisor, $0\\to A\\xrightarrow{t^n}A\\to A_n\\to0$ is a length-one resolution by finite free $A$-modules, so $A_n$ is perfect [def-pc-perfect-ring-complex]. Clause 1 of [lem-sfb-integers-profinite-tower] says the canonical map $A\\to\\varprojlim_nA_n$ is a ring isomorphism. These are the coefficient-ring hypotheses of [def-weil-pbc-adic-coefficient-datum] for $I=(t)$ and the hypotheses on $(O,\\lambda)=(A,t)$ of the coefficient-system evaluation theorem, so both the adic direct-image theorem and that theorem apply.",
+   "text": "Realize a strict diagram of complexes as a complex of diagrams degreewise. Construct its augmentation by the cone of compatible tensor-unit maps and the ordinary limit. The tensor formulas give compatibility with the quotient transitions; equality after every projection gives uniqueness.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-pc-perfect-ring-complex",
-    "lem-sfb-integers-profinite-tower",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "Coefficient convention for finite extensions of the l-adic field; the coefficient hypotheses of Stacks proetale.tex lemma-pushforward-Noetherian-case (Tag 099N) checked from the cited local-field statements"
-   }
-  },
-  {
-   "text": "Use the diagram restriction lemma with $J=\\mathbf N_{\\geq1}^{op}$, $S_W=R_W$ and $B_W=((A_n)_W)_n$. This gives the strict comparison before evaluation. The system and fixed-ring tower evaluation theorems identify its levels with Step 1; their normalized derived-composition formulas and Step 2 identify quotient transitions too.",
-   "uses": [
-    "lem-pur-diagram-ring-restriction-pushforward",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition, on the small diagram sites of lem-weil-pbc-diagram-site-realization"
-   }
-  },
-  {
-   "text": "For a derived-complete $K$, the Roos/intrinsic equivalence makes its specified intrinsic unit invertible. Use the strict reduction tower on the chosen flat-term K-flat representative.",
-   "uses": [
-    "lem-pur-roos-intrinsic-completeness-equivalence",
     "def-weil-integral-reduction-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
-   }
+   "elementary": true
   },
   {
-   "text": "The profinite coefficient inverse-image theorem identifies the coefficient sheaves and structural maps required by the adic direct-image proposition. Apply that proposition with $I=(t)$: it preserves intrinsic completeness and gives the canonical completion composite. The equivalence in Step 5, now on $Y$, gives the Roos-triangle completeness convention. Composing that reconstruction with Step 4 yields $F_RK\\cong R\\lim_nV_{Y,n}F_nK_n$. The tower-limit theorem identifies its $n$th projection with $F_R$ of the quotient unit followed by Step 1. Finally the constant/completed equivalence identifies reductions, limits and units; applying it to Step 1 on complete objects gives the asserted transported constant-$A$ direct image.",
+   "text": "The canonical strict reduction augmentation is invertible on a complete object. Apply the completed derived image and compose with the existing invertible limitComparison to obtain the reconstruction composite.",
    "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-pur-roos-intrinsic-completeness-equivalence",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-pur-completed-reduction-augmentation-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4), with normalized strict-tower comparison"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use completed-coefficient direct-image preservation of completeness for the structural map supplied by the diagram comparison. Assemble the records.",
+   "uses": [
+    "lem-pur-completed-direct-image-preserves-completeness"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-completed-integral-coefficients",
   "def-weil-integral-reduction-tower",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-pur-diagram-ring-restriction-pushforward",
-  "lem-pur-ringed-derived-composition-cocycle",
-  "lem-pur-roos-intrinsic-completeness-equivalence",
-  "lem-sfb-integers-profinite-tower",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-valued-dvr-finite-quotients",
-  "prop-weil-pbc-direct-image-limits"
+  "lem-pur-completed-coefficient-direct-image-diagrams",
+  "lem-pur-completed-coefficient-site-data",
+  "lem-pur-completed-coefficient-structure-map",
+  "lem-pur-completed-direct-image-preserves-completeness",
+  "lem-pur-completed-reduction-augmentation-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
-  "place": "Step 1, integral derived adjunction and its strict finite-reduction tower; details completed from Stacks Tags 0D6E, 0A07 and 099N"
+  "place": "Step 1; F6 constructs the site data, the unique completed structural map, strict realization and unique augmentation, and assembles the three independent direct-image/completeness statements. Existing interface and final statement unchanged."
  },
  "mathlib_match": null,
  "status": "split",
@@ -264,44 +199,19 @@
   "date": "2026-10-17",
   "existing": false,
   "declarations": [
-   "WeilConjectures.CompletedCoefficientPushforward.RightImage",
-   "WeilConjectures.CompletedCoefficientPushforward.ExactImage",
-   "WeilConjectures.CompletedCoefficientPushforward.ExactIdentity",
-   "WeilConjectures.CompletedCoefficientPushforward.Square",
-   "WeilConjectures.CompletedCoefficientPushforward.ExactComposition",
-   "WeilConjectures.CompletedCoefficientPushforward.Mod",
-   "WeilConjectures.CompletedCoefficientPushforward.IsSectionwiseIdentity",
-   "WeilConjectures.CompletedCoefficientPushforward.modAbelian",
-   "WeilConjectures.CompletedCoefficientPushforward.hasDerived",
-   "WeilConjectures.CompletedCoefficientPushforward.ringPush",
-   "WeilConjectures.CompletedCoefficientPushforward.constantPush",
-   "WeilConjectures.CompletedCoefficientPushforward.push",
-   "WeilConjectures.CompletedCoefficientPushforward.systemRing",
-   "WeilConjectures.CompletedCoefficientPushforward.systemUniformizer",
-   "WeilConjectures.CompletedCoefficientPushforward.Systems",
-   "WeilConjectures.CompletedCoefficientPushforward.R",
-   "WeilConjectures.CompletedCoefficientPushforward.A",
-   "WeilConjectures.CompletedCoefficientPushforward.N",
-   "WeilConjectures.CompletedCoefficientPushforward.quotientMap",
-   "WeilConjectures.CompletedCoefficientPushforward.projection",
-   "WeilConjectures.CompletedCoefficientPushforward.modelRing",
-   "WeilConjectures.CompletedCoefficientPushforward.model",
-   "WeilConjectures.CompletedCoefficientPushforward.ordinaryTowerLimit",
-   "WeilConjectures.CompletedCoefficientPushforward.SiteCoefficientData",
-   "WeilConjectures.CompletedCoefficientPushforward.SystemRestrictionData",
-   "WeilConjectures.CompletedCoefficientPushforward.SiteLimitData",
-   "WeilConjectures.CompletedCoefficientPushforward.SiteData",
-   "WeilConjectures.CompletedCoefficientPushforward.finiteStructure",
-   "WeilConjectures.CompletedCoefficientPushforward.constantStructure",
-   "WeilConjectures.CompletedCoefficientPushforward.IsReductionAugmentation",
-   "WeilConjectures.CompletedCoefficientPushforward.CoefficientImageData",
-   "WeilConjectures.CompletedCoefficientPushforward.CoefficientComparisonData",
-   "WeilConjectures.CompletedCoefficientPushforward.DiagramComparisonData",
-   "WeilConjectures.CompletedCoefficientPushforward.ComparisonData",
-   "WeilConjectures.CompletedCoefficientPushforward.ComparisonData.completeComparison",
    "WeilConjectures.CompletedCoefficientPushforward.comparison"
   ],
   "fixed_by": "NT-stage2-Codex-9fff243af"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
 }

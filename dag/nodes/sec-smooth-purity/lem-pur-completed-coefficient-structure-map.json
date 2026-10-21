@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-completed-coefficient-structure-map",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Unique completed coefficient structural map from finite projections",
+ "statement": "Let l be prime, E a finite extension of Q_l, and f:X to Y any morphism of schemes. With the completed rings R and canonical constant-section maps finiteStructure of [def-pur-completed-pushforward-models], there is a unique ring-sheaf map c:R_Y to f_*R_X satisfying c followed by f_*projection_X,n = projection_Y,n followed by finiteStructure_f,n for every n. The positive-exponent quotient tower is the actual completed coefficient tower [def-weil-completed-integral-coefficients]. This unique c also satisfies constantToCompletion_Y followed by c = constantStructure_f followed by f_*(constantToCompletion_X).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0A07; naturality of constant coefficients and direct image of inverse limits"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Transpose naturality of the sheafification unit through the constant-sheaf adjunction. Forget commutativity and apply to the actual finite coefficient quotient transition maps. The resulting finite structural maps commute with all successor transitions.",
+   "uses": [
+    "def-pur-completed-pushforward-models",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E and 0A07; naturality of constant coefficients and direct image of inverse limits"
+   }
+  },
+  {
+   "text": "The finite projections on Y followed by these compatible structural maps give a cone over the direct image of the finite tower on X. Ring-sheaf direct image preserves inverse limits: after sheaf-to-presheaf it is precomposition, and the inclusion reflects limits. Lift the cone to obtain c. The preserved limit factorization equations give the finite projection identities, and hom_ext gives uniqueness.",
+   "uses": [
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E and 0A07; naturality of constant coefficients and direct image of inverse limits"
+   }
+  },
+  {
+   "text": "Test the constant integral square at every finite projection of the preserved inverse limit. The constant-to-completed maps are lifts of the actual constant quotient cones. The two composites therefore reduce to naturality of the constant-section structural map for that quotient homomorphism.",
+   "uses": [
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E and 0A07; naturality of constant coefficients and direct image of inverse limits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous direct image of sheaves preserves inverse limits and a compatible family of maps determines a unique map into the inverse limit",
+   "results": "Eight generic hits including Functor.sheafPushforwardContinuous and sheaf limits; no completed coefficient structural map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of inverse systems of constant ring sheaves induces a unique morphism on their inverse limits, and direct image preserves those limits",
+   "results": "Eight hits including module presheaf limits and isSheaf_of_isLimit; no normalized completed coefficient structural map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "isLimitOfPreserves",
+   "results": "Unknown identifier in the search service; use the local Mathlib declaration.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitsOfShape_of_reflects_of_preserves|limit.lift_π",
+   "results": "25 generic uses of limit.lift_π and reflection of preserved limits; used these universal properties directly.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientPushforwardComparison",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": [
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientStructureMap",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientStructureMap.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.completedStructure_existsUnique",
+  "statement": "theorem completedStructure_existsUnique :\n    ∃! c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X),\n      (∀ n, c ≫ (ringPush.{t, u} f).map (projection l E X n) =\n        projection l E Y n ≫ finiteStructure l E f n) ∧\n      integralConstantToCompletionOfUniverses l E Y ≫ c =\n        constantStructure l E f ≫\n          (ringPush.{t, u} f).map (integralConstantToCompletionOfUniverses l E X)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
+}

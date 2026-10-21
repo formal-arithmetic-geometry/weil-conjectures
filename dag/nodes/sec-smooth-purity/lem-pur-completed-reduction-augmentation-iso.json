@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-completed-reduction-augmentation-iso",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "The specified strict quotient augmentation of a complete object is invertible",
+ "statement": "Fix distinct primes p,l and a finite extension E/Q_l. Let W be a scheme and L:SiteLimitData l E W a normalized total derived inverse-limit model [def-pur-completed-pushforward-models]. Let K be derived complete [def-weil-derived-complete] and r:Q(P) isomorphic to K for a flat-term K-flat completed-module complex P. Let C be a complex of strict towers and e:C.asFunctor isomorphic to the actual unrestrictedIntegralComplexTower(P) [def-weil-integral-reduction-tower]. If a:P to lim(C) is a chain map satisfying IsReductionAugmentation, then r inverse followed by Q(a) and L.limit.unit at C is invertible. This asserts invertibility of this normalized map itself, not existence of an unspecified isomorphism between its endpoints.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite free uniformizer-power resolutions to compare the strict quotient tower on P with its Koszul reduction tower. The comparisons preserve transitions and the tensor-unit maps.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+   }
+  },
+  {
+   "text": "Exact pro-etale countable products identify the signed Koszul fiber with the strict quotient Roos model, carrying the explicit zero-homotopy unit to the quotient unit. The Roos/intrinsic completeness equivalence makes this particular unit invertible.",
+   "uses": [
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+   }
+  },
+  {
+   "text": "Strict Roos derivation and uniqueness of total right derived functors identify this normalized computation with L.limit. The section formula for a identifies its composite with L.limit.unit with the explicit unit. Precompose with r inverse.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; completion-reflector consequence and comparison with the explicit completed-coefficient unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-reduction-tower",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-derivation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars on module sheaves and total derived inverse limits commute with direct image",
+   "results": "Eight hits including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and ModuleCat.preservesLimit_restrictScalars; no normalized completed-coefficient result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with derived pushforward and derived inverse limits of module sheaves",
+   "results": "Generic Mathlib pushforward composition and change-of-rings declarations; no normalized completed-coefficient package.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "Unknown identifier in the search service; no match. The local library supplies totalDerivedData and rightDerivedDesc.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|strictRoosDerivation|rightDerivedUnique",
+   "results": "Mathlib CategoryTheory/Functor/Derived/RightDerived.lean rightDerivedUnique and its pointwise use. Local rg located StrictRoosDerivation, RoosIntrinsicCompletenessEquivalence and CompletedDirectImageLimits; their interfaces are not the present independently sized normalized strict augmentation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientPushforwardComparison",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": [
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedReductionAugmentationIso",
+  "file": "lean/Sheaf/Paper/CompletedReductionAugmentationIso.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.reductionAugmentation_isIso",
+  "statement": "theorem reductionAugmentation_isIso (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)\n    (W : Scheme.{t}) (source : SiteLimitData l E W)\n    (K : DerivedCategory (Mod W (R l E W)))\n    (P : CochainComplex (Mod W (R l E W)) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := completedIntegralCommRingSheafUnrestricted l E W) P)\n    (hflat : ∀ i : ℤ, @SheafOfModules.IsFlatOnSite W.ProEt inferInstance (ProEt.topology W)\n      inferInstance (integralCoefficientAbLocallyBijective.{t, u} W)\n      (integralCoefficientAbSheafify.{t, u} W).isRightAdjoint\n      (completedIntegralCommRingSheafUnrestricted l E W) (P.X i))\n    (r : DerivedCategory.Q.obj P ≅ K)\n    (C : CochainComplex (ℕᵒᵖ ⥤ Mod W (R l E W)) ℤ)\n    (e : C.asFunctor ≅ unrestrictedIntegralComplexTower l E W P)\n    (a : P ⟶ ((ordinaryTowerLimit l E W).mapHomologicalComplex (.up ℤ)).obj C)\n    (ha : IsReductionAugmentation l E W P C e a)\n    (hK : IsDerivedCompleteUnrestricted l E W K) :\n    IsIso (r.inv ≫ DerivedCategory.Q.map a ≫ source.limit.unit.app C)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "id": "def-pur-completed-pushforward-models",
+ "kind": "definition",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Normalized models for completed-coefficient direct image",
+ "statement": "For a finite extension E/Q_l and arbitrary schemes X,Y with independently sized coefficient rings, define the ordinary module categories over the completed, constant and finite quotient sheaves [def-weil-completed-integral-coefficients]. RightImage records a total right derived functor with its universal unit and K-injective normalization. ExactImage records termwise exact localization. ExactIdentity, ExactComposition and Square retain their ordinary and derived comparisons and their representative normalization equations. SiteCoefficientData, SystemRestrictionData, SiteLimitData and SiteData record exact scalar restriction, restriction of strict semilinear systems and total tower limit. CoefficientImageData, CoefficientComparisonData and DiagramComparisonData retain the structural maps, coefficient coherence, strict diagram comparison and limit projection equations. IsReductionAugmentation is the sectionwise x to 1 tensor x formula for an actual chain map into the ordinary limit [def-weil-integral-reduction-tower]. ComparisonData further records preservation of derived completeness, strict realization, the unique reduction augmentation and invertibility of its normalized direct-image reconstruction composite [def-weil-derived-complete]. These are precisely the existing interface records, extracted without changing any declaration signature or definition.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on tower ringed topoi; combined with proetale.tex Tag 099N, lemma-pushforward-Noetherian-case (1),(4). The coherent completed/constant coefficient comparison is the extracted argument of fix-prop-adjunctions proof Step 1, not a verbatim single Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars on module sheaves and total derived inverse limits commute with direct image",
+   "results": "Eight hits including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and ModuleCat.preservesLimit_restrictScalars; no normalized completed-coefficient result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with derived pushforward and derived inverse limits of module sheaves",
+   "results": "Generic Mathlib pushforward composition and change-of-rings declarations; no normalized completed-coefficient package.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "Unknown identifier in the search service; no match. The local library supplies totalDerivedData and rightDerivedDesc.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|strictRoosDerivation|rightDerivedUnique",
+   "results": "Mathlib CategoryTheory/Functor/Derived/RightDerived.lean rightDerivedUnique and its pointwise use. Local rg located StrictRoosDerivation, RoosIntrinsicCompletenessEquivalence and CompletedDirectImageLimits; their interfaces are not the present independently sized normalized strict augmentation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientPushforwardComparison",
+  "date": "2026-10-21",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": [
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientPushforwardModels",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientPushforwardModels.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.ComparisonData",
+  "statement": "structure ComparisonData extends DiagramComparisonData l E f",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-21",
+  "declarations": [
+   "WeilConjectures.CompletedCoefficientPushforward.RightImage",
+   "WeilConjectures.CompletedCoefficientPushforward.ExactImage",
+   "WeilConjectures.CompletedCoefficientPushforward.ExactIdentity",
+   "WeilConjectures.CompletedCoefficientPushforward.Square",
+   "WeilConjectures.CompletedCoefficientPushforward.ExactComposition",
+   "WeilConjectures.CompletedCoefficientPushforward.Mod",
+   "WeilConjectures.CompletedCoefficientPushforward.IsSectionwiseIdentity",
+   "WeilConjectures.CompletedCoefficientPushforward.modAbelian",
+   "WeilConjectures.CompletedCoefficientPushforward.hasDerived",
+   "WeilConjectures.CompletedCoefficientPushforward.ringPush",
+   "WeilConjectures.CompletedCoefficientPushforward.constantPush",
+   "WeilConjectures.CompletedCoefficientPushforward.push",
+   "WeilConjectures.CompletedCoefficientPushforward.systemRing",
+   "WeilConjectures.CompletedCoefficientPushforward.systemUniformizer",
+   "WeilConjectures.CompletedCoefficientPushforward.Systems",
+   "WeilConjectures.CompletedCoefficientPushforward.R",
+   "WeilConjectures.CompletedCoefficientPushforward.A",
+   "WeilConjectures.CompletedCoefficientPushforward.N",
+   "WeilConjectures.CompletedCoefficientPushforward.quotientMap",
+   "WeilConjectures.CompletedCoefficientPushforward.projection",
+   "WeilConjectures.CompletedCoefficientPushforward.modelRing",
+   "WeilConjectures.CompletedCoefficientPushforward.model",
+   "WeilConjectures.CompletedCoefficientPushforward.ordinaryTowerLimit",
+   "WeilConjectures.CompletedCoefficientPushforward.SiteCoefficientData",
+   "WeilConjectures.CompletedCoefficientPushforward.SystemRestrictionData",
+   "WeilConjectures.CompletedCoefficientPushforward.SiteLimitData",
+   "WeilConjectures.CompletedCoefficientPushforward.SiteData",
+   "WeilConjectures.CompletedCoefficientPushforward.finiteStructure",
+   "WeilConjectures.CompletedCoefficientPushforward.constantStructure",
+   "WeilConjectures.CompletedCoefficientPushforward.IsReductionAugmentation",
+   "WeilConjectures.CompletedCoefficientPushforward.CoefficientImageData",
+   "WeilConjectures.CompletedCoefficientPushforward.CoefficientComparisonData",
+   "WeilConjectures.CompletedCoefficientPushforward.DiagramComparisonData",
+   "WeilConjectures.CompletedCoefficientPushforward.ComparisonData",
+   "WeilConjectures.CompletedCoefficientPushforward.ComparisonData.completeComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-74e11",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T233657-L-848362",
+  "kind": "interface",
+  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+ }
+}
