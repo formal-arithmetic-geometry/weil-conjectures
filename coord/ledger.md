@@ -19858,3 +19858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:37 L: returned deliver/NR/lem-weil-integral-scalar-extension-well-defined (reviewer RETURN: G1/D (re-split note of the human, 2026-10-21, strengthened wording 'every argument the old proof carries must reappear a)
 - 03:37 L: merged deliver/Q49/lem-sf-semilinear-proper-open-mate-pasting (reviewer FIX; after a return; new nodes: 6)
 - 03:37 L: merged deliver/Q80/lem-sfb-adic-localizing-exceptional-cohomology (reviewer PASS; after a return; new nodes: 1)
+- 03:37 L: merged deliver/Q44/lem-sp-finite-ring-action-local-constancy (reviewer PASS; first push; new nodes: 0)
