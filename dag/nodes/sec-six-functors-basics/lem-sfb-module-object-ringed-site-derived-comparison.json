@@ -32,92 +32,101 @@
  ],
  "proof": [
   {
-   "text": "The internal-to-sectionwise equivalence is the one fixed in the statement: it preserves the underlying abelian sheaves, sections, restriction maps and morphisms. The relative tensor comparison node gives a natural isomorphism between internal relative tensor and the ordinary sheaf-module tensor, identifies the units, and says that the equivalence is exact and preserves and reflects flat modules and K-flat complexes. Thus applying the termwise functor D(F) to K-flat representatives gives a natural comparison D(F)(K tensor_B^L L) with D(F)K tensor_{B_sec}^L D(F)L, including the unit comparison.",
+   "text": "Put $E=D(F)$ and $U=D(F^{-1})$. Exactness and K-flatness preservation follow from the internal-section tensor comparison. Localizing the exact equivalence and its inverse gives $E\\dashv U$ with invertible unit and counit, by the exact derived adjunction. Write $T,T_0$ for the native internal and ringed derived tensors.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-pe-internal-section-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 00YV and 03EK; the extracted internal-to-sectionwise tensor comparison"
-   }
-  },
-  {
-   "text": "For fixed K, the module-object derived internal Hom is the right adjoint of K tensor_B^L minus by the layer-B clause of the derived tensor-Hom definition. Transport this adjunction across the exact equivalence D(F) and the tensor comparison from Step 1. The transported functor D(F)(RHom_B^A(K,-)) is therefore right adjoint to D(F)K tensor_{B_sec}^L minus, with counit equal to the image of the module-object evaluation under D(F) and the tensor comparison.",
-   "uses": [
-    "sk-def-sfb-derived-tensor-hom",
-    "lem-pe-internal-section-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/_section.md",
-    "place": "node sk-def-sfb-derived-tensor-hom, Layer B internal-hom clause"
-   }
-  },
-  {
-   "text": "Write $\\mathcal O=B_{\\mathrm{sec}}$, a sheaf of commutative rings on the small site $X_{\\mathrm{pro\\acute et}}$, and $H(L,M)=R\\mathcal Hom_{\\mathcal O}(L,M)$ for the functorial K-injective model of [def-pur-derived-internal-hom]. This step shows that $H(K,-)$ is right adjoint to $K\\otimes^{\\mathbf L}_{\\mathcal O}-$, naturally in $K$; this is the statement of Stacks 08J9 that the currying isomorphism 'recovers (equation-internal-hom) on taking $H^0(\\mathcal C,-)$'. For $A,K,N\\in D(\\mathcal O)$ compose the natural isomorphisms\n$$\\operatorname{Hom}_{D(\\mathcal O)}(A,H(K,N))\\cong H^0(\\mathcal C,H(A,H(K,N)))\\cong H^0(\\mathcal C,H(A\\otimes^{\\mathbf L}_{\\mathcal O}K,N))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(A\\otimes^{\\mathbf L}_{\\mathcal O}K,N).$$\nThe first and third are [lem-pur-rhom-global-sections] (canonical and natural in both variables, by its proof's pre/postcomposition equation), applied to the pairs $(A,H(K,N))$ and $(A\\otimes^{\\mathbf L}K,N)$; the middle one is $H^0(\\mathcal C,-)$ of the currying isomorphism $H(A,H(K,N))\\cong H(A\\otimes^{\\mathbf L}K,N)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction], natural in $A,K,N$. Finally exchange the tensor factors: choose K-flat representatives $P$ of $A$ and $P'$ of $K$ [def-pc-kflat-complex]; both $\\operatorname{Tot}(P\\otimes P')$ and $\\operatorname{Tot}(P'\\otimes P)$ represent the derived tensor in either order, and the Koszul exchange $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $P^p\\otimes P'^q$ commutes with the differential of [def-pc-tensor-complex-sheaves] (because $(p+1)q\\equiv pq+q$ and $p(q+1)\\equiv pq+p$ mod 2) and is natural in chain maps, giving $A\\otimes^{\\mathbf L}K\\cong K\\otimes^{\\mathbf L}A$ naturally. The result is a bijection $\\psi_{A,K,N}:\\operatorname{Hom}(A,H(K,N))\\cong\\operatorname{Hom}(K\\otimes^{\\mathbf L}A,N)$ natural in all three variables, i.e. a parametrized adjunction $K\\otimes^{\\mathbf L}-\\dashv H(K,-)$. The ringed-site evaluation $\\mathrm{ev}_{K,N}:K\\otimes^{\\mathbf L}H(K,N)\\to N$ of the statement is its counit $\\psi_{H(K,N),K,N}(\\mathrm{id})$, as in the defining adjunction (equation-internal-hom) of Stacks Section 08J7. No existence of a right adjoint is presupposed here, so nothing is circular.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-global-sections",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 08J7 (section-internal-hom, equation-internal-hom), Lemma 08JA (lemma-section-RHom-over-U, global clause) and Lemma 08J9 (lemma-internal-hom, 'which recovers (equation-internal-hom) on taking H^0')"
-   }
-  },
-  {
-   "text": "Write $G(K',N')=D(F)\\operatorname{RHom}^{\\mathcal A}_B(D(F)^{-1}K',D(F)^{-1}N')$ for a quasi-inverse of the equivalence $D(F)$. By Step 2 there are bijections $\\varphi_{A,K',N'}:\\operatorname{Hom}(A,G(K',N'))\\cong\\operatorname{Hom}(K'\\otimes^{\\mathbf L}_{\\mathcal O}A,N')$, natural in all three variables, whose counit is the image of the module-object evaluation under $D(F)$ and the tensor comparison of Step 1. By Step 3, $\\psi$ is a second such family for $H$. For fixed $K',N'$ the composite $\\psi^{-1}\\varphi:\\operatorname{Hom}(-,G(K',N'))\\cong\\operatorname{Hom}(-,H(K',N'))$ is natural in $A$, so by the Yoneda lemma it is postcomposition with a unique isomorphism $\\theta_{K',N'}=\\psi^{-1}\\varphi(\\mathrm{id}_{G(K',N')}):G(K',N')\\to H(K',N')$, with inverse $\\varphi^{-1}\\psi(\\mathrm{id})$. Naturality of $\\varphi$ and $\\psi$ in $K'$ (contravariant) and $N'$ makes $\\theta$ natural in both. Since $\\varphi(\\mathrm{id})$ and $\\psi(\\mathrm{id})$ are the two counits and $\\psi(\\theta)=\\varphi(\\mathrm{id})$, naturality of $\\psi$ in $A$ gives $\\mathrm{ev}\\circ(K'\\otimes^{\\mathbf L}\\theta)=$ the transported module-object evaluation; $\\theta$ is the unique morphism with this property. Taking $K'=D(F)K$, $N'=D(F)N$ gives the displayed isomorphism with the stated evaluation normalization and naturality.",
-   "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "lem-pe-internal-section-tensor-comparison",
-    "sk-def-sfb-derived-tensor-hom",
-    "lem-pur-rhom-global-sections",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "def-weil-exact-derived-adjunction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 08J7, equation-internal-hom and the Yoneda uniqueness remark following it"
+    "place": "Tags 03CV, 06YS; exact section-action equivalence"
    }
   },
   {
-   "text": "Let $U$ be an object of $X_{\\mathrm{pro\\acute et}}$. The slice site $X_{\\mathrm{pro\\acute et}}/U$ is small, and by [def-pur-localized-ringed-site] restriction keeps sections: $M|_U(V/U)=M(V)$, also for the ring object, so $B|_U$ is a commutative ring object of abelian sheaves on the slice whose section-ring sheaf is $B_{\\mathrm{sec}}|_U=\\mathcal O_U$, and $F(M)|_U=F_U(M|_U)$ with both sides the same sheaf, where $F_U$ is the equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] for $B|_U$. Restriction of modules is exact [lem-pur-site-restriction-module-adjunction-exact], so it acts termwise on derived categories and $D(F)(-)|_U=D(F_U)((-)|_U)$. Steps 1--4 use only the general-site nodes [def-weil-pbc-internal-abelian-sheaf-module-equivalence], [lem-pe-internal-section-tensor-comparison], [lem-pur-rhom-global-sections] and [lem-weil-pbc-ringed-internal-hom-exact-restriction]; on the slice they give the ringed-site parametrized adjunction for $H_U=R\\mathcal Hom_{\\mathcal O_U}$, the module-object internal Hom $\\operatorname{RHom}^{\\mathcal A_U}_{B|_U}$ as a right adjoint of the derived relative tensor over $B|_U$ (by transporting $H_U$ through $D(F_U)$ and the tensor comparison when it is not already given), and the unique evaluation-normalized isomorphism $\\theta^U:D(F_U)\\operatorname{RHom}^{\\mathcal A_U}_{B|_U}(K',N')\\cong H_U(D(F_U)K',D(F_U)N')$. Let $\\rho$ be the restriction isomorphism $H(L,M)|_U\\cong H_U(L|_U,M|_U)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction], compatible with successive restrictions. Define the module-object restriction comparison $r_U$ by $D(F_U)(r_U)=(\\theta^U)^{-1}\\circ\\rho\\circ\\theta|_U$; then by construction $\\theta|_U$ corresponds to $\\theta^U$ under $r_U$ and $\\rho$, which is the slice clause. For $V\\to U$ the cocycle condition for $r$ follows by substituting the definitions: $(\\theta^V)^{-1}\\rho_{U\\to V}\\theta^U|_V\\circ((\\theta^U)^{-1}\\rho_{X\\to U}\\theta|_U)|_V=(\\theta^V)^{-1}\\rho_{U\\to V}(\\rho_{X\\to U})|_V\\theta|_V=(\\theta^V)^{-1}\\rho_{X\\to V}\\theta|_V$, using the relocalization identification $(\\mathcal C/U)/(V/U)=\\mathcal C/V$ of [def-pur-localized-ringed-site].",
+   "text": "Apply the exact-functor derived tensor comparison to $F$ and its inverse. Uniqueness applied to their composite gives inverse comparisons, hence $t:E(T(K,L))\\cong T_0(EK,EL)$. Its normalization is the prescribed total pure-tensor map. The same summand equations preserve Koszul exchange and units. Ringed functorial flat covers and K-flat resolutions transport through $F^{-1}$.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pur-derived-tensor-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-pc-sites-modules-functorial-flat-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY, 07A4; derive the sectionwise tensor comparison"
+   }
+  },
+  {
+   "text": "The native ringed tensor and K-injective Hom admit the normalized closed structure $S$ and representative models $T_0$ by the ringed derived tensor-Hom adjunction. Its native Koszul symmetry is the one in the native tensor lemma. On internal modules use the given native derived tensor-Hom adjunction; symmetry writes both evaluations with Hom first.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 06YS; equation-internal-hom"
+   }
+  },
+  {
+   "text": "Apply the closed scalar Hom comparison to $E\\dashv U$ and $t$, at $N=EL$. Compose its isomorphism $UH(EK,EL)\\cong H_{\\mathcal A}(K,UEL)$ with $H_{\\mathcal A}(1,\\eta_L^{-1})$, calling the result $b$. Then $\\theta=\\varepsilon_{H(EK,EL)}\\circ E(b^{-1})$. Its naturality and evaluation equation follow from that comparison: the triangle identities cancel the inserted unit and counit. Step 2 symmetry gives the displayed tensor order.",
+   "uses": [
+    "lem-sfb-closed-scalar-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J8 (equation-internal-hom), 08J9 (lemma-internal-hom); counit-normalized comparison"
+   }
+  },
+  {
+   "text": "For every $U\\in X_{\\mathrm{pro\\acute et}}$, its slice is small and $(B|_U)_{\\rm sec}=B_{\\rm sec}|_U$ sectionwise. Apply Steps 1–4 on this site, obtaining $t_U,\\theta^U$ for the native local module-object structures specified in the slice comparison definition. Exact restriction gives $E_U r_{\\mathcal A}\\cong rE$. Thus this construction covers all local derived objects.",
    "uses": [
     "def-pur-localized-ringed-site",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-pur-rhom-global-sections"
+    "def-sfb-internal-slice-derived-hom-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 08JB (lemma-restriction-RHom-to-U); sites-modules Section 03DH (section-localize)"
+    "place": "Tag 03DH (section-localize), 08JB (lemma-restriction-RHom-to-U)"
+   }
+  },
+  {
+   "text": "Choose normalized ringed slice data $d$; its evaluation equation holds by slice evaluation coherence. Let $\\rho:rH\\cong H_U(r,r)$ be its Hom comparison. Full faithfulness of $E_U$ uniquely lifts $(\\theta^U)^{-1}\\rho\\,r\\theta$ to $r_U$. This is the required restriction square. Only this single-slice square is asserted; no compatibility along successive slices $V\\to U$ is claimed or needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "lem-weil-pbc-ringed-slice-evaluation-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); normalized slice comparisons and their evaluation square"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
   "def-pur-localized-ringed-site",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-internal-slice-derived-hom-comparison",
+  "def-weil-exact-derived-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sites-modules-functorial-flat-cover",
   "lem-pe-internal-section-tensor-comparison",
-  "lem-pur-rhom-global-sections",
+  "lem-pur-derived-tensor-comparison",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sfb-closed-scalar-hom-comparison",
+  "lem-weil-pbc-ringed-slice-evaluation-coherence",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons",
   "sk-def-sfb-derived-tensor-hom"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9, 08JA, 08JB and Section 08J7; the module-object transport is the formal comparison required by the blueprint"
+  "place": "Assembly of existing normalized tensor, closed-scalar-Hom and slice-comparison lemmas; Tags 06YS, 07A4, 08J9, 08JB. Internal-module comparison is the agent-written blueprint infrastructure, not a verbatim Stacks theorem."
  },
  "mathlib_searches": [
   {
@@ -185,33 +194,74 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-module-object-ringed-site-derived-comparison",
   "worker": "stage1",
-  "summary": "No new nodes. I checked the exact module-object statement against the existing internal-module/section-module equivalence and tensor comparison, then expanded the proof into five steps: transport of K-flat derived tensor, transport of the module-object adjunction and evaluation, the ringed-site K-injective Hom adjunction, uniqueness of right adjoints, and slice restriction. All cited facts are existing nodes; no Mathlib leaf or duplicate was created. Maintainer reader (2026-10-17): step 3 cited lem-sfb-derived-internal-hom-sections-model for the claim that the K-injective model is a right adjoint, which that statement presupposes rather than states (C3); steps 3-4 rewritten to derive the parametrized ringed-site adjunction from lem-pur-rhom-global-sections and the currying of lem-weil-pbc-ringed-internal-hom-exact-restriction, with the evaluation defined as its counit and the Yoneda uniqueness written out; step 5 rewritten without the 'all maps are natural' hand-wave and its source path corrected; two off-unit tool uses declared.",
+  "summary": "Q63 repair of the human re-split request: statement unchanged. Replaced the 6739-character inline proof by a short assembly of existing smaller nodes: exact derived adjunction, normalized exact-functor tensor comparison, native ringed derived tensor-Hom adjunction, the five-bijection closed scalar Hom comparison, and normalized slice comparisons/evaluation coherence. No duplicate new node was needed. The retained metadata, prior searches and blueprint route are unchanged. Maintainer reader (Q63 review): Step 6 no longer claims a successive-slice cocycle for the normalized Hom comparison d.eta, which lem-weil-pbc-ringed-internal-hom-exact-restriction states only for its own restriction isomorphism and which the statement does not require; that citation and its tool use are removed, and the stale step numbers of the tool-use reasons are corrected.",
   "blueprint": "Realizes the coefficient/model identification sentence in lem-sfb-dc-hom-preserves.proof.md before its sheaf-valued Hom calculation, and supplies the ringed-site comparison and slice compatibility used there.",
   "tool_uses": [
    {
     "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Steps 1, 4, 5 take the exact symmetric monoidal comparison of internal and sectionwise module tensors (units, K-flatness) for an arbitrary ring object on a site; generic coefficient infrastructure that no node of the restricted-functors unit or its cited units states."
+    "why": "Steps 1-2 take the exact symmetric monoidal comparison of internal and sectionwise module tensors (units, K-flatness) for an arbitrary ring object on a site; generic coefficient infrastructure that no node of the restricted-functors unit or its cited units states."
    },
    {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Steps 3-5 take the currying isomorphism and slice restriction of the K-injective internal Hom on an arbitrary ringed site (Stacks 08J9, 08JB); generic ringed-site tool, not a step of the unit's route."
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Localizes the exact section-action equivalence and its inverse with their actual units and counits. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-pur-derived-tensor-comparison",
+    "why": "Generic exact-functor tensor localization with normalization on all cochain representatives; used for F and its inverse, not a change of coefficient route. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat flat-term representatives on the small ringed site, transferred to internal modules by the exact equivalence. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Identifies the fixed K-injective Hom as right adjoint for the native ringed tensor with representative evaluation normalization. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Identifies the native derived Koszul exchange and localization tensor; required only for tensor-order normalization. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of general ringed-site slice restriction. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "why": "Supplies the independently normalized tensor and Hom restriction data on a small ringed site. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-coherence",
+    "why": "Gives evaluation compatibility for those independently normalized restriction data. No node of the restricted-functors unit states this generic infrastructure."
+   },
+   {
+    "node": "lem-pc-sites-modules-functorial-flat-cover",
+    "why": "The exact-functor tensor comparison assumes functorial flat covers. The small ringed site has them, and the inverse section-action equivalence transfers them to internal modules. This is generic site infrastructure."
    }
   ]
  },
  "tool_uses": [
   "lem-pe-internal-section-tensor-comparison",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-exact-derived-adjunction",
+  "lem-pur-derived-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons",
+  "lem-weil-pbc-ringed-slice-evaluation-coherence",
+  "lem-pc-sites-modules-functorial-flat-cover"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NI-321d7b5cd",
-  "group": "NI",
+  "reviewer": "NT-cc-Q63-274377f4b",
+  "group": "Q63",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-321d7b5cd (reviewer sub-agent of L); spot-checked: Read in full: the item, all cited node statements, and Stacks sites-cohomology 08J7, 08JA, 08J9 and 08JB at the cited labels; tags 03CV, 00YV, 03EK, 03EL and 0GMW resolve to the labels given. The statement is true, unchanged and not a duplicate: no other node states this comparison, and a grep of the DAG for 08J9/08JA finds only the scheme versions and general tools. Edge cases checked: empty X, U equal to X, and Λ = Z. Coefficients are the layer-B module objects, identified with Mod(B_sec) only through the existing equivalence. Steps 1-2 are correct: K-flat transport through the tensor comparison, and the layer-B adjunction transported across the equivalence D(F). Three faults, all repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-object-ringed-site-derived-comparison.json, which changes only proof, proof_deps and split_report. (1) C3, step 3: lem-sfb-derived-internal-hom-sections-model presupposes a right adjoint and does not state that the K-injective model is one; the adjunction is only in its proof. The 'ringed-site evaluation' was not tied to any statement, and the left/right tensor order was not handled. Step 3 now derives the adjunction Hom(A,H(K,N)) ≅ H^0 H(A,H(K,N)) ≅ H^0 H(A⊗K,N) ≅ Hom(A⊗K,N), using lem-pur-rhom-global-sections (in route, natural in both variables) and the currying of lem-weil-pbc-ringed-internal-hom-exact-restriction, plus the Koszul exchange; this is Stacks 08J9 'recovers equation-internal-hom'. The evaluation is now the counit, and step 4 writes out the Yoneda uniqueness of parametrized right adjoints. (2) Step 5: 'all maps are natural' was a shortcut and its source path did not exist. The step now applies Steps 1-4 on the slice, defines the module-side restriction comparison from θ^U, the restriction ρ of 08JB and θ|_U, and checks the cocycle from ρ's compatibility with successive restrictions; the source path is corrected. (3) Off-unit statements were cited without declaring tool uses. Two remain and are declared and accepted: lem-pe-internal-section-tensor-comparison and lem-weil-pbc-ringed-internal-hom-exact-restriction. sections-model and lem-sfb-localized-site-tensor-restriction are no longer cited. A DFS on the snapshot shows no new cycle. No new nodes. Details in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-274377f4b (reviewer sub-agent of L); spot-checked: Read in full. The delivery re-splits an item that was already split live (NI 2026-10-17; S2 PASS by Q30), as the human's 2026-10-21 re-split note requests. Statement, stmt_deps and non-split fields are byte-identical to live. The proof is now 6 steps, 2306 chars, longest step 457. There are no new nodes: every former inline argument is the statement of an existing reviewed node. Closure: no cycle (DFS over 557 nodes), no dropped ids. Checks by step. S1: lem-pe gives exactness and K-flat preservation/reflection; def-weil-exact-derived-adjunction localizes the units/counits, so E is left adjoint to U with both invertible. S2: lem-pur-derived-tensor-comparison applies with G=F1=F2=F. F is exact, preserves flats and is a left adjoint. Functorial flat covers (lem-pc) transfer through F^-1. Its normalization is exactly def-sfb-internal-section-derived-tensor-comparison. t is invertible by uniqueness or on K-flat representatives; the odd-odd Koszul sign is preserved. S3: the ringed adjunction lemma gives the right-tensor closed structure; symmetry is cited from the native-tensor lemma. S4: the Lean ClosedScalarHom is generic over CoefficientClosedStructure. I checked the types of b=H_A(1,eta^-1)∘(comparison at N=EL) and theta=eps∘E(b^-1), and the evaluation equation via the triangle identities. S5: (B|_U)_sec=B_sec|_U by 03DH, and steps 1-4 are applied to the native slice structures. S6: normalized d exists, evaluation coherence holds, and r_U is the fully faithful lift. Fault (C3/C4), fixed in the item JSON: step 6 claimed a successive-slice cocycle for the normalized d.eta, citing lem-weil-pbc-ringed-internal-hom-exact-restriction. That lemma asserts compatibility only for its own existential restriction iso, and neither the statement nor SliceHomComparison needs the cocycle. The sentence was removed, the citation dropped from uses, proof_deps and split_report.tool_uses, and stale tool-use step numbers corrected. Advisory: the internal derived braiding used in S3 is not stated by a node; it is avoidable via reversed monoidal structures. Maintainer note: the stage-3 module still imports RingedInternalHomExactRestriction, and node-level tool_uses still lists it. Sources: Stacks sites-cohomology 08J8 l.8844, 08J9 l.8896, 08JB l.8934. Edge cases: zero ring, empty X, U=X, unbounded complexes.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
