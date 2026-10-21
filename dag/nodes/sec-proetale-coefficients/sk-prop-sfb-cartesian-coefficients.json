@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "For every admissible $\\Lambda$, $\\alpha_f$ is the ring-object isomorphism of [sk-def-sfb-coefficient-morphisms], and its invertibility is [lem-sfb-alpha-iso]. This proves the untwisted part of (1).",
+   "text": "Apply isIso_condensedPullbackHom to each admissible condensed coefficient ring. This is the canonical alpha_f, already a morphism of ring objects.",
    "uses": [
     "sk-def-sfb-coefficient-morphisms",
     "lem-sfb-alpha-iso"
@@ -31,97 +31,53 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 1"
+    "place": "paragraphs 1–3 and final exactness sentence; Lean assembly step 1"
    }
   },
   {
-   "text": "When $\\ell$ is invertible on $X,Y$, [det-prop-sfb-cartesian-coefficients-twists] gives $f^{-1}\\Lambda_Y(d)\\cong\\Lambda_X(d)$ along $\\alpha_f$, for all $d$, including finite $\\ell$-power-torsion $A$.",
+   "text": "Under invertibility of ell on X and Y, use spRoots_cartesian, spFiniteTwists_cartesian on ULift A, and spTwists_cartesian. The finite signed comparisons retain the pure root-tensor formula and Kummer identifications. The non-finite comparisons retain the projection-normalized spIntegralComparison, balanced rational map and finite-subextension colimit formula. SpSignedComparison and SpInternalCartesian give isomorphisms of every signed line over the recorded coefficient map, with zero, positive tensor and negative evaluation normalizations. Use these existing comparison objects directly rather than reconstructing an unused second family of adjoint abelian maps.",
    "uses": [
     "det-prop-sfb-cartesian-coefficients-twists"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 2"
+    "place": "paragraphs 1–3 and final exactness sentence; Lean assembly step 2"
    }
   },
   {
-   "text": "Choose an integral basis for $E\\subset F$ by [lem-sfb-local-field-integral-basis]. Then [det-prop-sfb-cartesian-coefficients-finite-free] identifies $\\mathcal O_{F,X}$ and $F_X$ with $d=[F:E]$ copies of their respective base rings, proving (2).",
+   "text": "For E <= F, cartesianCoefficients_finiteFree provides a nonempty integral basis and both basis-isomorphism families for each such basis. Choose this basis inside the proof, specialize the two families to X and take finiteCoefficientDegree ell h as the two finite ranks. The basis existence is already part of this dependency.",
    "uses": [
-    "lem-sfb-local-field-integral-basis",
     "det-prop-sfb-cartesian-coefficients-finite-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 3"
+    "place": "paragraphs 1–3 and final exactness sentence; Lean assembly step 3"
    }
   },
   {
-   "text": "Use the small sites of [def-weil-pbc-proetale-site]. Their abelian sheaf categories are abelian by [lem-weil-pbc-site-sheaves-enough-injectives], hence have equalizers and coequalizers. The tensor is closed symmetric monoidal by [sk-def-sfb-sheaf-tensor], additive and colimit-preserving by [det-def-sfb-sheaf-tensor-closed]. Thus [lem-sfb-modobj-abelian] applies to the rings $\\Lambda_X,\\Lambda_Y$ of [sk-def-sfb-pulled-back-coefficients].",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "sk-def-sfb-sheaf-tensor",
-    "det-def-sfb-sheaf-tensor-closed",
-    "lem-sfb-modobj-abelian",
-    "sk-def-sfb-pulled-back-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final exactness sentence: category hypotheses"
-   }
-  },
-  {
-   "text": "By [def-sfb-module-upper-star], $f^*=\\operatorname{Ext}_{\\alpha_f}\\operatorname{mapMod}(f^{-1})$. The source ring is commutative by $\\alpha_f$. Steps 1 and 4 allow [def-sfb-modobj-extension-along-iso], giving $f^*\\cong G:=\\operatorname{Res}_{\\alpha_f^{-1}}\\operatorname{mapMod}(f^{-1})$. The action is $\\widetilde\\gamma\\circ(\\alpha_f^{-1}\\otimes1)$. Both factors commute with forgetful functors by [sk-def-sfb-transport] and [def-sfb-modobj-restriction]; hence $U_XG=f^{-1}U_Y$.",
+   "text": "The existing instances CondensedRing.preservesFiniteLimits_upperStar and CondensedRing.preservesFiniteColimits_upperStar prove exactness for every condensed coefficient ring. Their source proof uses the canonical comparison between extension along alpha_f and restriction along alpha_f inverse. The displayed cartesianCoefficientPullbackIso is precisely this comparison. No ell-invertibility is used in this step.",
    "uses": [
     "def-sfb-module-upper-star",
-    "def-sfb-modobj-extension-along-iso",
-    "sk-def-sfb-transport",
-    "def-sfb-modobj-restriction"
+    "def-sfb-modobj-extension-along-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final exactness sentence: the canonical inverse-image lift"
+    "place": "paragraphs 1–3 and final exactness sentence; Lean assembly step 4"
    }
   },
   {
-   "text": "View abelian sheaves as internal group objects by [lem-weil-pbc-sheaf-algebraic-structures-objects]. Clauses 3–4 of [det-pe-topos-functoriality-inverse-image] compute abelian inverse image on the finite-limit-preserving set inverse image. By [lem-sfb-internal-abelian-finite-limit-creation], its transported group functor preserves finite limits. In particular it preserves binary products and the terminal abelian sheaf, which is zero. Zero arrows factor through zero. Thus [lem-sfb-products-zero-additive] makes abelian inverse image additive.",
+   "text": "Restriction of scalars and mapMod keep the entire underlying object and arrow maps. Hence cartesianCoefficientLift composed with forget is definitionally equal to forget followed by abelian upperStar. Pair this equality with the isomorphism and exactness instances for each coefficient in CartesianUntwistedAssertions, and combine with the twist and finite-free clauses.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-sfb-internal-abelian-finite-limit-creation",
-    "lem-sfb-products-zero-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part; final exactness sentence of the blueprint item, refined via the new finite-limit creation statement."
-   }
-  },
-  {
-   "text": "Abelian $f^{-1}$ is exact by [det-pe-topos-functoriality-inverse-image]. Steps 4–6 verify all hypotheses of [det-prop-sfb-module-pullback-exact-lifted] for $F=f^{-1}$ and the lift $G$: abelian ambient categories, additive right-exact tensors, additive exact $F$, and $U_XG=FU_Y$. Therefore $G$ preserves finite limits and finite colimits.",
-   "uses": [
-    "det-pe-topos-functoriality-inverse-image",
-    "det-prop-sfb-module-pullback-exact-lifted"
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final exactness sentence: apply exact lifting"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-finite-exactness-nat-iso] to the inverse of the comparison $f^*\\cong G$ from step 5. Thus $f^*$ preserves finite limits and finite colimits, as asserted; its specified comparison with $G$ supplies the canonical identification. All untwisted steps apply without inverting $\\ell$ on $X,Y$.",
-   "uses": [
-    "lem-sfb-finite-exactness-nat-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final exactness sentence: transfer exactness"
+    "place": "paragraphs 1–3 and final exactness sentence; Lean assembly step 5"
    }
   }
  ],
@@ -129,29 +85,16 @@
   "sk-def-sfb-coefficient-morphisms",
   "lem-sfb-alpha-iso",
   "det-prop-sfb-cartesian-coefficients-twists",
-  "lem-sfb-local-field-integral-basis",
   "det-prop-sfb-cartesian-coefficients-finite-free",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "sk-def-sfb-sheaf-tensor",
-  "det-def-sfb-sheaf-tensor-closed",
-  "lem-sfb-modobj-abelian",
-  "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-module-upper-star",
   "def-sfb-modobj-extension-along-iso",
-  "sk-def-sfb-transport",
   "def-sfb-modobj-restriction",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-sfb-internal-abelian-finite-limit-creation",
-  "lem-sfb-products-zero-additive",
-  "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-sfb-finite-exactness-nat-iso"
+  "sk-def-sfb-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-  "place": "paragraphs 1–3; final exactness sentence expanded using existing sheaf tensor and module-object lemmas"
+  "place": "paragraphs 1–3 and final exactness sentence; N3 uses the existing normalized signed-comparison and source exactness APIs"
  },
  "mathlib_searches": [
   {
@@ -347,12 +290,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "lem-sfb-modobj-abelian",
-  "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+  "det-prop-sfb-cartesian-coefficients-twists"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -372,21 +310,9 @@
    "AlgebraicGeometry.ProEtale.CartesianCoefficientProperty",
    "AlgebraicGeometry.ProEtale.cartesianFinitePointRing",
    "AlgebraicGeometry.ProEtale.CartesianUntwistedAssertions",
-   "AlgebraicGeometry.ProEtale.cartesianSignedAb",
-   "AlgebraicGeometry.ProEtale.CartesianSignedMaps",
-   "AlgebraicGeometry.ProEtale.CartesianSignedNormalization",
-   "AlgebraicGeometry.ProEtale.cartesianSectionLine",
-   "AlgebraicGeometry.ProEtale.cartesianSectionRing",
-   "AlgebraicGeometry.ProEtale.CartesianInternalSignedMaps",
-   "AlgebraicGeometry.ProEtale.CartesianInternalSignedNormalization",
-   "AlgebraicGeometry.ProEtale.CartesianTwistMaps",
-   "AlgebraicGeometry.ProEtale.cartesianTwistMate",
-   "AlgebraicGeometry.ProEtale.cartesianUnitsBaseChange",
-   "AlgebraicGeometry.ProEtale.cartesianTwistLevelMap",
-   "AlgebraicGeometry.ProEtale.cartesianFiniteQuotientHom",
-   "AlgebraicGeometry.ProEtale.CartesianTwistNormalization",
-   "AlgebraicGeometry.ProEtale.cartesianTwistMaps_existsUnique",
-   "AlgebraicGeometry.ProEtale.cartesianTwistMaps",
+   "AlgebraicGeometry.ProEtale.CartesianFiniteTwistAssertions",
+   "AlgebraicGeometry.ProEtale.CartesianAdicComparison",
+   "AlgebraicGeometry.ProEtale.CartesianAdicTwistAssertions",
    "AlgebraicGeometry.ProEtale.CartesianTwistAssertions",
    "AlgebraicGeometry.ProEtale.CartesianFiniteFreeAssertions",
    "AlgebraicGeometry.ProEtale.cartesianCoefficients"
@@ -397,7 +323,7 @@
   "by": "Q02",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The complete coefficient list, normalized Tate comparisons, both finite-free clauses, exactness, and the canonical inverse-image lift. Helper data are real constructions or determined by an explicitly unique normalized family; all postponed proofs are named theorems with source and proof-plan docstrings."
+  "note": "The complete coefficient list, existing normalized signed coefficient-module comparisons, both finite-free clauses, exactness, and the canonical inverse-image lift. N3 replaces the unused duplicate adjoint-map normalization API by the existing SpSignedComparison and SpInternalCartesian records, retaining their finite, tower, localization and colimit normalizations. The final assembly has no sorry."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -406,5 +332,15 @@
   "group": "Q02",
   "result": "pass",
   "note": "Read node, blueprint source (order 747), all 7 stmt_deps' declarations and the module. Every clause matches: full admissible coefficient list (finite A with discrete topology, Z_l, Q_l, O_E, E, finite-subextension Qbar); IsIso of condensedPullbackHom (alpha_f, ring map via isMonHom); exactness of CondensedRing.upperStar; canonical lift mapMod then comap(inv alpha) with the actual extendScalarsIsoComapInv whiskering and literal underlying-functor equality; twists for every d in Z, restricted to l invertible on X and Y and l^(r+1)A=0, as IsIso of the inverse-image mates of a uniquely normalized family (roots, finite pure tensors, limit projections, extension coequalizer, Qbar coprojections, eta in degree 0, tensor/evaluation in other degrees, semilinear). The exists-unique normalization is consistent and determining, so data are not hollow (AGENTS §5; same pattern as the landed spIntegralLevelTransition_existsUnique). Finite-free for both O_F/O_E and F/E through the actual inclusions. Edge cases ok; ULift of finite A loses no case; single universe u. lean.statement verbatim; docstrings with Source/blueprint; only sorry proofs plus a typing divisibility witness. nt_compile rc=0, no errors or warnings; test module confirmed universes and axioms. Second-reading section is the standard post-10-17 notice. No faults."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7e847",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261021T163817-L-1103184",
+  "kind": "interface",
+  "note": "independent cc review: new CartesianTwistAssertions (roots IsIso, finite SpSignedComparison ∃β with root-tensor/Kummer pins, adic record with canonical spIntegralComparison and equation-pinned rational/Qbar maps) vs old ∃!-normalized CartesianTwistMaps mates and node clause (1) / plan step 2 = det-prop-sfb-cartesian-coefficients-twists; axioms only sorryAx from cited dep holes; all 38 direct importers compiled against the delivered module"
  }
 }
