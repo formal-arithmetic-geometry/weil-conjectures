@@ -147,15 +147,14 @@ lemma constantTwist_constantTwist (F : ProEtaleIntegralWeilSheaf k₀ Λ X) (b c
   rw [Category.assoc, FieldSheaf.smul_smul, hbc]
 section Integral
 
-variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-  (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀) in
 /-- The value `χ_ℓ(σ) ∈ 𝒪_Eˣ` of the `ℓ`-adic cyclotomic character at the geometric Frobenius
 `σ` of the algebraic closure `k̄` of `k₀`, mapped along `ℤ_ℓ ⟶ 𝒪_E`: the scalar by which the
 geometric Frobenius acts on `𝒪_E(1)(k̄) = ℤ_ℓ(1)(k̄) ⊗_{ℤ_ℓ} 𝒪_E`. For `ℓ ≠ p` it is `q⁻¹`
 (`AlgebraicGeometry.ProEtaleIntegralWeilSheaf.cyclotomicUnit_eq`). -/
-noncomputable def cyclotomicUnit : (PadicAlgCl.integers l E)ˣ :=
+noncomputable def cyclotomicUnit [Fact (ringChar k₀ ≠ l)] : (PadicAlgCl.integers l E)ˣ :=
   letI := Fintype.ofFinite k₀
   Units.map (padicIntToIntegers l E).toMonoidHom
     (cyclotomicCharacter (AlgebraicClosure k₀) l
@@ -163,11 +162,13 @@ noncomputable def cyclotomicUnit : (PadicAlgCl.integers l E)ˣ :=
 
 /-- The `𝒪_E`-stage cyclotomic unit is the `ℚ̄_ℓ`-stage one (`WeilSheaf.cyclotomicUnit`) under
 `𝒪_E ⊆ E ⊆ ℚ̄_ℓ`. -/
-lemma algebraMap_cyclotomicUnit :
+lemma algebraMap_cyclotomicUnit [Fact (ringChar k₀ ≠ l)] :
     algebraMap E (PadicAlgCl l) ((cyclotomicUnit k₀ E : PadicAlgCl.integers l E) : E) =
       (WeilSheaf.cyclotomicUnit k₀ l : PadicAlgCl l) := by
   simp only [cyclotomicUnit, WeilSheaf.cyclotomicUnit, Units.coe_map]
   rfl
+
+variable [Fact (ringChar k₀ ≠ l)]
 
 /-- For `ℓ ≠ p`, the geometric Frobenius acts on `𝒪_E(1)(k̄)` by `q⁻¹`, `q = #k₀`. -/
 theorem cyclotomicUnit_eq :
@@ -268,7 +269,8 @@ noncomputable def complexCompactlySupportedCohomology
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure i).obj
       ((derivedForget k₀ Λ X).obj K)
 
-variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀ X) in
 /-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
@@ -322,7 +324,7 @@ end ProEtaleIntegralWeilSheaf
 namespace FieldWeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+  {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 /-- Compatibility of the twists of the stages `𝒪_E` and `E`: the `E`-stage Tate twisted constant
 sheaf `E_X(m)` is the constant twist of `E_X` by the image under `𝒪_E ⊆ E` of the twisting unit

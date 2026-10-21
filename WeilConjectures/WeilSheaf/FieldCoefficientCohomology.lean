@@ -221,8 +221,7 @@ noncomputable def constantTwist (F : FieldWeilSheaf k₀ Λ X) (b : Λˣ) : Fiel
   obj := .mk F.obj.carrier (F.obj.str ≪≫ FieldSheaf.smulIso b F.obj.carrier)
   property := F.property
 
-variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-  (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀ X) in
 /-- Blueprint `def-weil-ordinary-compact-cohomology`, stage `Λ = E`: the Tate twisted constant
@@ -233,7 +232,7 @@ character at the geometric Frobenius `σ` of `k̄` (`AlgebraicGeometry.WeilSheaf
 is its image in `ℚ̄_ℓ`). The Tate sheaf `E(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} E` is constant on the geometric
 fiber, the geometric Frobenius acting on `ℤ_ℓ(1)(k̄)` by `χ_ℓ(σ)`, which is `q⁻¹` for `ℓ ≠ p`
 (`AlgebraicGeometry.WeilSheaf.cyclotomicUnit_eq`). -/
-noncomputable def tateTwistConstant (m : ℤ) : FieldWeilSheaf k₀ E X :=
+noncomputable def tateTwistConstant [Fact (ringChar k₀ ≠ l)] (m : ℤ) : FieldWeilSheaf k₀ E X :=
   letI := Fintype.ofFinite k₀
   (constant k₀ E X).constantTwist
     (Units.map ((algebraMap ℚ_[l] E).comp PadicInt.Coe.ringHom).toMonoidHom

@@ -96,6 +96,7 @@ abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
 
 open CondensedRing in
+open scoped CategoryTheory.Obj in
 -- The prime `ℓ` occurs only in the hypothesis `IsFinitenessCoefficient ℓ Λ`; it is found from
 -- that instance, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in

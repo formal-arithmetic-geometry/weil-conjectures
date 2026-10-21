@@ -104,7 +104,7 @@ theorem isIdempotentComplete_and_isEquivalence_toKaroubi
   StageSystem.PairCategory.isIdempotentComplete_and_isEquivalence_toKaroubi
     (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
-variable [Fact (ringChar k₀ ≠ l)] {k₀ l X}
+variable {k₀ l X}
 
 /-- Blueprint `def-weil-weil-sheaf-complex`: the forgetful functor
 `For : D^b_{c,W}(X, ℚ̄_ℓ) ⥤ D(X̄_proét, ℚ̄_ℓ)` of the `2`-colimit model, `(E, K) ↦ For(ℚ̄_ℓ ⊗_E K)`:
