@@ -15,9 +15,121 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $z$ be a closed point of $X_{0,m}$ over $x\\in X_0$, and put $d=[\\kappa(x):k_0]$ and $f=[\\kappa(z):\\kappa(x)]=m/\\gcd(d,m)$. Part (a) of [lem-zl-constant-extension-weil-heart-equivalence] identifies its local operator with $F_x^f$, up to conjugacy. Apply [p-linear-triangular] over the algebraically closed coefficient field $\\Qlb$ to the finite-dimensional stalk of $\\mathcal F$ at $x$. In an adapted basis $F_x$ is upper triangular with diagonal $\\alpha_1,\\ldots,\\alpha_r$, so multiplication of triangular matrices gives diagonal $\\alpha_1^f,\\ldots,\\alpha_r^f$ for $F_x^f$. The determinant of a triangular matrix is the product of its diagonal entries, so these are exactly its eigenvalues with algebraic multiplicity. By [def-wf-iota-real], reality of $\\mathcal F$ says that the multiset $(\\iota(\\alpha_j))_j$ is conjugation stable. Its image under $t\\mapsto t^f$ remains conjugation stable, since $\\overline{t^f}=\\bar t^f$, including multiplicities when different values have equal powers. Thus $\\mathcal F^{(m)}$ is real. This calculation does not diagonalize $F_x$ and applies to Jordan blocks and zero stalks.",
+   "uses": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "p-linear-triangular",
+    "def-wf-iota-real"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 1, final two sentences: reality under positive Frobenius powers; expanded using triangularization."
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal F^{(m)}$ has a finite filtration with punctually pure quotients of weights $u_i\\le w$. Apply the inverse exact equivalence of part (b) of [lem-zl-constant-extension-weil-heart-equivalence] to this filtration. It identifies the final object with $N=g^*\\mathcal F$ viewed over $k_0$ on $Y=X_{0,m}\\times_{k_0}k$, carries every inclusion and quotient to the corresponding inclusion and quotient, and preserves the local operators and the absolute residue cardinalities. Consequently those quotients are pure of the same weights $u_i$, so $N$ is mixed of weights at most $w$ by [def-weil-punctual-weights]. In particular one must transport the filtration through the cyclic-sheet equivalence before taking direct image; one does not treat the one-sheet $k_m$-Weil object as a $k_0$-Weil object on the same geometric scheme.",
+   "uses": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5, opening: the constant-extension filtration interpreted in the correct heart before finite pushforward."
+   }
+  },
+  {
+   "text": "The projection $g$ is finite: over $\\operatorname{Spec}A\\subset X_0$ its inverse image is $\\operatorname{Spec}(A\\otimes_{k_0}k_m)$, whose algebra is generated as an $A$-module by the tensors $1\\otimes b$ for a finite $k_0$-basis $b$ of $k_m$. This is the affine finite-module criterion of [def-weil-finite-integral-morphism]. Its geometric map $\\bar g:Y\\to X$ is finite by [lem-weil-pbc-finite-morphism-permanence](a); both geometric schemes are separated and finite type. By [lem-zl-finite-adic-direct-image] the direct image $\\bar g_*$ restricts to an exact functor of the $\\Qlb$ constructible hearts, and the canonical lift of [lem-fix-weil-operations] makes $g_*$ a functor of constructible Weil sheaves; its value on $N=g^*\\mathcal F$ is $P=g_*g^*\\mathcal F$. Let $0=N_0\\subset N_1\\subset\\cdots\\subset N_s=N$ be the filtration of Step 2, with $N_r/N_{r-1}$ punctually pure of weight $u_r\\le w$. By exactness and functoriality, $0=g_*N_0\\subset g_*N_1\\subset\\cdots\\subset g_*N_s=P$ is a finite filtration by Weil subsheaves with $g_*N_r/g_*N_{r-1}\\simeq g_*(N_r/N_{r-1})$ as Weil sheaves. The finite morphism $g$ of separated finite-type $k_0$-schemes satisfies the hypotheses of [lem-zl-finite-pushforward-punctual], so each $g_*(N_r/N_{r-1})$ is punctually $\\iota$-pure of weight $u_r$. By [def-weil-punctual-weights], $P$ is $\\iota$-mixed of weights at most $w$. This is the finite case of the unit's quasi-finite lemma, applied to the actual direct image of the statement.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-zl-finite-adic-direct-image",
+    "lem-fix-weil-operations",
+    "lem-zl-finite-pushforward-punctual",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5, first two sentences: finite pushforward is exact and preserves pure weights; realized with the unit's quasi-finite route (finite-pushforward purity node of sk-l-dl-general-quasifinite)."
+   }
+  },
+  {
+   "text": "We now construct the trace on the underlying heart. Part (b) of [lem-zl-constant-extension-weil-heart-equivalence] decomposes $Y$ into $m$ open-and-closed sheets. Use their identifications with $X$ given by the projection $\\bar g$: on the sheet indexed by an embedding $\\sigma:k_m\\hookrightarrow k$, the coordinate map is $a\\otimes b\\mapsto a\\sigma(b)$, so the restriction of $\\bar g$ is the identity of $X$. The finite-clopen equivalences of [lem-pur-finite-clopen-derived-decomposition], for all the coefficient stages including $\\Qlb$, therefore identify $L\\bar g^*M$ with the tuple $(M)_\\sigma$. Direct image is the finite product of the components: this is the section formula $(\\bar g_*H)(V)=H(V\\times_XY)$ of [def-weil-proetale-module-direct-image] at finite and integral coefficients, transported by the same clopen equivalences at field coefficients. Thus the underlying object of $P$ is canonically $\\bigoplus_\\sigma M$, the finite product being the biproduct in the abelian constructible heart. The prescribed inverse/direct image adjunction of [fix-prop-adjunctions](1) becomes the diagonal/product adjunction: a tuple $(u_\\sigma:M\\to H_\\sigma)_\\sigma$ corresponds to the map with components $u_\\sigma$. Applying this to the identity on $(M)_\\sigma$ identifies its unit $\\eta_M$ with $v\\mapsto(v)_\\sigma$. Define $T:\\bigoplus_\\sigma M\\to M$ by giving its restriction to every summand as $\\operatorname{id}_M$, that is, by summation. This constructs a global heart morphism and its geometric-stalk map is summation. No descent from unspecified local morphisms is required.",
+   "uses": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "lem-pur-finite-clopen-derived-decomposition",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-constructible-heart",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5, sentences beginning “Etale-locally”: global geometric-sheet realization of the summation map and the diagonal unit."
+   }
+  },
+  {
+   "text": "Let $G_X$ be geometric $q$-Frobenius on $X$. Under step 4 the induced Weil map of $P$ is the componentwise Weil map $\\theta:G_X^*M\\to M$ followed by the permutation $\\pi$ of the embeddings $\\sigma:k_m\\hookrightarrow k$ induced by geometric Frobenius. Indeed [lem-fix-weil-operations] constructs this map by Frobenius exchange followed by direct image of the pullback Weil map, and the naturality clause of [lem-zl-finite-adic-direct-image] says that a semilinear isomorphism of this finite diagram reindexes the sheets and applies their stalk transports. Here the sheet maps to the base are identities, so the latter are precisely the same maps induced by $\\theta$ in every component. On the clopen product of step 4 this is an identity of component maps, not merely an inference from equality of stalk values. Summation satisfies\n$$T\\big((\\theta(v_{\\pi^{-1}\\sigma}))_\\sigma\\big)=\\sum_\\sigma\\theta(v_{\\pi^{-1}\\sigma})=\\theta\\big(\\sum_\\sigma v_\\sigma\\big).$$\nThe middle equality uses additivity of $\\theta$ and bijectivity of $\\pi$. Hence $T\\circ\\theta_P=\\theta\\circ G_X^*T$, the morphism condition of [def-weil-weil-sheaf-complex]. Thus $T$ defines $\\operatorname{Tr}:P\\to\\mathcal F$ in the constructible Weil heart. The unit is also Weil equivariant by [lem-fix-weil-operations].",
+   "uses": [
+    "lem-fix-weil-operations",
+    "lem-zl-finite-adic-direct-image",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: “Summation is unchanged by permuting the copies; hence these local maps glue and commute with Frobenius”, with the component identity written out."
+   }
+  },
+  {
+   "text": "There are exactly $m$ sheets, so the diagonal and sum of step 4 satisfy $T\\eta_M=\\sum_{\\sigma=1}^m\\operatorname{id}_M=m\\operatorname{id}_M$. By the definition of morphisms of Weil sheaves in [def-weil-weil-sheaf-complex], equality of their underlying morphisms is equality of Weil morphisms. The coefficient field $\\Qlb$ has characteristic zero and $m\\ge1$, so $m$ is nonzero and invertible. Multiplication by $m^{-1}$ commutes with the $\\Qlb$-linear Weil map. Thus $r=m^{-1}\\operatorname{Tr}$ is a Weil morphism with $r\\eta=\\operatorname{id}_{\\mathcal F}$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: the trace-unit composite and division by the degree."
+   }
+  },
+  {
+   "text": "The maps $\\eta$ and $r$ exhibit $\\mathcal F$ as a direct summand of $P$ in the constructible Weil heart. Step 3 gives a finite mixed filtration on $P$ of weights at most $w$. Clause (3) of [lem-a1-mixed-direct-summand] therefore gives such a filtration on $\\mathcal F$, with the same upper bound $w$. This concludes descent independently of the reality assumption, as required. All constructions took place in the constructible heart; none required a lisse sheaf, a connected geometric base or a semisimple local operator.",
+   "uses": [
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5, last sentence, and paragraph 9, final descent of the common constant extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-wf-iota-real",
+  "fix-prop-adjunctions",
+  "lem-a1-mixed-direct-summand",
+  "lem-fix-weil-operations",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-zl-constant-extension-weil-heart-equivalence",
+  "lem-zl-finite-adic-direct-image",
+  "lem-zl-finite-pushforward-punctual",
+  "p-linear-triangular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1 and 5 and the last sentence of paragraph 9; expanded with exact cyclic-sheet transport, the finite-adic heart theorem and a global sheetwise trace calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-real-mixed-by-curves",
@@ -73,5 +185,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-constant-extension-mixed-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and all existing searches. Wrote seven steps using existing DAG results only. Distinguished the one-sheet km heart from the m-sheet k0 heart, used finite pushforward only for its stated complex weight bound with an explicit t-exact heart comparison, and constructed the trace globally on geometric clopen sheets. Checked conjugation multiplicities without semisimplicity and computed both Frobenius equivariance and the normalized retraction. No new nodes, Lean changes or compilation.",
+  "blueprint": "Ancestor thm-zl-real-mixed-by-curves: Step 1 realizes paragraph 1 reality; Steps 2–3 realize paragraph 5 finite pushforward after the exact heart equivalence; Steps 4–6 realize paragraph 5 diagonal unit, sheetwise summation, Frobenius equivariance and trace divided by degree; Step 7 realizes its final direct-summand argument and the last sentence of paragraph 9. The unit sk-i-dl-general-real, Step 4 descent route, is retained.",
+  "tool_uses": [
+   {
+    "node": "p-linear-triangular",
+    "why": "Triangularization over the algebraically closed coefficient field supplies algebraic multiplicities for powers, without assuming semisimplicity; the unit has no replacement for this linear-algebra tool."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "The coefficient-compatible clopen product equivalence realizes the actual underlying inverse and direct images on geometric sheets; it is a coefficient-category tool, not a replacement of the descent route."
+   },
+   {
+    "node": "lem-zl-finite-adic-direct-image",
+    "why": "Its t-exactness identifies the finite derived direct image with an exact functor of the prescribed rational/common-stage hearts; its semilinear naturality identifies the sheet action."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Canonical Weil lifts of the prescribed operations and equivariance of their adjunction unit are generic functorial tools needed before the trace calculation."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only the ordinary inverse/direct image adjunction for the finite geometric projection is used to identify the prescribed unit with the diagonal."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Only stability of finiteness under geometric base change is used to apply the finite-adic heart theorem to the geometric projection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-linear-triangular",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-zl-finite-adic-direct-image",
+  "lem-fix-weil-operations",
+  "fix-prop-adjunctions",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-f54e1ac24",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-f54e1ac24 (reviewer sub-agent of L); spot-checked: I read the whole item. It is a split with no new nodes, and the statement is unchanged against clones/live and side-live. I read the main-20261015 thm-zl-real-mixed-by-curves proof (¶1, the descent paragraph and the last sentence), unit sk-i-dl-general-real and every cited statement. Statement tested: m=1, zero sheaf, empty X_0, d=2/m=2 (f=1) against d=1/m=2 (f=2), a Jordan block, and ℓ|m. It holds. Step 1: heart-equivalence (a) gives F_z~F_x^f with f=m/gcd(d,m); triangular form over Q̄_ℓ and conjugation of t^f give reality. The imported p-linear-triangular drops 'algebraically closed' (maintainer note); here it is applied only over Q̄_ℓ. Step 2: (b) gives F^(m) ↦ g^*F in the k_0 m-sheet heart, with filtrations and weights matching. Step 4: sheets a⊗b↦aσ(b), so ḡ is id on each sheet; the clopen product equivalence at all stages plus the section formula give the biproduct, and the diagonal unit comes from fix-prop-adjunctions(1). Advisory: the pullback-composition identification on the sheets is not cited. Step 5: θ_P is componentwise θ followed by the sheet permutation (fix-weil-operations plus the finite-adic naturality clause); T∘θ_P=θ∘G^*T is checked against the morphism orientation in def-weil-weil-sheaf-complex. Step 6: Tη=m·id, and m^{-1} exists in Q̄_ℓ. Step 7: a1-mixed-direct-summand(3). FIX, one point, C7/C8: step 3 cited lem-zl-finite-pushforward (unit sk-thm-dl-a1-upper). That unit is not in the transitive uses of sk-i-dl-general-real, the citation was not declared, and it replaced the unit's 'quasi-finite lemma'. Step 3 is rewritten: g finite; exact ḡ_* on the Q̄_ℓ hearts (finite-adic-direct-image) with the Weil lift; push the Step-2 filtration forward; each quotient is pure of weight u_r≤w by the on-route lem-zl-finite-pushforward-punctual (sk-l-dl-general-quasifinite); conclude by def-weil-punctual-weights. def-weil-complex-weights and lem-zl-finite-pushforward are dropped from proof_deps; no cycle. Batch-5: I recomputed the closure with the trf/PD chapters, trace-transport and assume-leaves not expanded and without the item's new deps. Every flagged citation is already in it. complex-weights and finite-pushforward are no longer cited. a1-mixed-direct-summand, finite-adic-direct-image and fix-weil-operations are accepted: their flagged paths end in a general definition (def-weil-local-frobenius-trace) or an abstract derived-category lemma, not a trace-formula or Poincaré-duality step. p-linear-triangular is accepted as generic linear algebra, already reached via thm-a1-affine-curve-upper. The other declared tool uses are accepted. Fix file: fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-mixed-descent.json.; 1 file(s) fixed by the reviewer"
  }
 }

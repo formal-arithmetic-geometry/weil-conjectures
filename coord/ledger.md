@@ -21511,3 +21511,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q68/lem-sfb-lattice-supported-hom-finite-comparison (reviewer PASS; first push; new nodes: 0); claim not held by Q68: not your claim
 - 08:58 L: merged deliver/Q59/lem-a1-finite-pullback-strict-tower-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:59 L: merged deliver/Q63/lem-trf-point-exact-derived-model (reviewer PASS; first push; new nodes: 0)
+- 08:59 L: merged deliver/Q110/lem-zl-constant-extension-mixed-descent (reviewer FIX; first push; new nodes: 0); claim not held by Q110: not your claim
