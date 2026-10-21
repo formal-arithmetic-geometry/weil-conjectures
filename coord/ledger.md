@@ -20043,3 +20043,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:54 L: merged deliver/Q13/lem-sfb-closed-support-bounded-continuity (reviewer PASS; first push; new nodes: 0)
 - 03:54 L: merged deliver/Q73/lem-sfb-scalar-inverse-image-tower-diagram (reviewer PASS; first push; new nodes: 0)
 - 03:54 L: merged deliver/NR/lem-weil-integral-scalar-extension-well-defined (reviewer PASS; after a return; new nodes: 4)
+- 03:54 L: merged deliver/Q21/lem-sfb-finite-etale-trace-image (reviewer FIX; first push; new nodes: 0)
