@@ -20263,3 +20263,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:09 L: merged deliver/Q05/lem-weil-compact-support-reduction-tower-functor (reviewer FIX; after a return; new nodes: 5)
 - 2026-10-21T04:09:49Z L: superseded stage-1 delivery Q35/det-sp-reduction-direct-image at d5fef0e8af89f291ef1649f907c2d77cd854a3ed; current completion retained; packet archived at refs/superseded/Q35/det-sp-reduction-direct-image/d5fef0e8af89f291ef1649f907c2d77cd854a3ed; stale return retired.
 - 04:10 L: merged deliver/Q14/lem-pe-finite-scalar-restriction-constructible (reviewer PASS; first push; new nodes: 0)
+- 04:10 L: merged deliver/Q24/lem-sfb-constructible-local-tor-etale-origin (reviewer FIX; first push; new nodes: 0); claim not held by Q24: not your claim
