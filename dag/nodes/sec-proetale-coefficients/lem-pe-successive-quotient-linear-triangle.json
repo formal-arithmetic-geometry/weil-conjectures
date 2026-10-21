@@ -15,9 +15,88 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n>1$. There are $R_n$-linear maps $a:R_{n-1}\\to R_n$, $\\bar b\\mapsto\\overline{tb}$, and $b:R_n\\to R_1$, $\\bar b\\mapsto\\bar b$, where the endpoint actions are restriction along the quotient ring maps. The first map is well-defined since $t(t^{n-1}c)=t^nc$; changing a lift of an $R_n$-scalar changes its action on $R_{n-1}$ by a multiple of $t^{n-1}$. Quotient sheaves have local representatives, so exactness can be checked after making such lifts on coverings, without using points. If $a(\\bar c)=0$, locally $tc=t^nd$, hence $t(c-t^{n-1}d)=0$; injectivity of multiplication by $t$ gives $c=t^{n-1}d$, so $a$ is monic. If $b(\\bar c)=0$, locally $c=td$, giving $\\bar c=a(\\bar d)$. Conversely $ba=0$, and $b$ is locally surjective by lifting a class in $R_1$ locally to $B$ and then taking its class in $R_n$. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels, as specified in [def-weil-sheaf-of-modules-category]. Thus $0\\to R_{n-1}\\xrightarrow{a}R_n\\xrightarrow{b}R_1\\to0$ is short exact both as $B$-modules and as $R_n$-modules [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph, the coefficient exact sequence; local quotient verification of its general ring-sheaf form."
+   }
+  },
+  {
+   "text": "Represent $K$ by a cochain complex $G$. By [lem-pc-kflat-resolution] choose a quasi-isomorphism $P\\to G$ with $P$ K-flat and every $P^i$ flat. No bound on $G$ is needed. For $j\\in\\{n-1,n,1\\}$ put $C_j^i=R_j\\otimes_B P^i$, with differential $1\\otimes d_P^i$ and $R_j$-action on the first factor. This is a sheaf tensor product [def-pur-sheaf-tensor-product], and a complex since $(1\\otimes d_P^{i+1})(1\\otimes d_P^i)=0$ [def-weil-abstract-derived-category]. Regard all three complexes as $R_n$-complexes by the quotient actions [def-pc-sheaf-restrict-scalars]. Tensor the two maps of step 1 with the identity of $P^i$ to obtain cochain maps $\\alpha:C_{n-1}\\to C_n$ and $\\beta:C_n\\to C_1$: on local pure tensors they send $\\bar c\\otimes p$ to $\\overline{tc}\\otimes p$ and $\\bar c\\otimes p$ to $\\bar c\\otimes p$. These formulas commute with $1\\otimes d_P$ and are $R_n$-linear.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; termwise scalar tensor as in Tag 06YY, sites-cohomology-lemma-derived-base-change."
+   }
+  },
+  {
+   "text": "For each integer $i$, flatness in [def-pc-flat-sheaf-modules] means exactly that the sheaf functor $-\\otimes_B P^i$ is exact. Apply this defining property to the $B$-module sequence of step 1. It gives $0\\to C_{n-1}^i\\xrightarrow{\\alpha^i}C_n^i\\xrightarrow{\\beta^i}C_1^i\\to0$ exact as $B$-module sheaves. It is exact as $R_n$-module sheaves too: by [def-weil-sheaf-of-modules-category], its kernels are the same sectionwise kernels and its cokernels the same sheafified sectionwise quotients, equipped with the inherited $R_n$-actions. The kernel-image equality and zero cokernel therefore concern the very same underlying abelian sheaves. Consequently $0\\to C_{n-1}\\xrightarrow{\\alpha}C_n\\xrightarrow{\\beta}C_1\\to0$ is a degreewise short exact sequence of $R_n$-complexes. This is a direct application of the exact-functor definition of flatness, not an inference from sectionwise flatness of $P^i(U)$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, sites-modules-definition-flat, item (3); Tag 03DA, sites-modules-lemma-abelian, kernels and cokernels."
+   }
+  },
+  {
+   "text": "The site-size assumption makes $\\operatorname{Mod}(R_n)$ abelian [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-complex-ses-triangle] to the degreewise short exact sequence from step 3 in this category. With $Q_n$ denoting its derived localization this gives a distinguished triangle $Q_nC_{n-1}\\xrightarrow{Q_n\\alpha}Q_nC_n\\xrightarrow{Q_n\\beta}Q_nC_1\\xrightarrow{\\delta}(Q_nC_{n-1})[1]$ in $D(R_n)$. In particular the connecting morphism is obtained in the category of $R_n$-modules itself; no lifting of a triangle from $D(B)$ is being asserted.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, derived-lemma-derived-canonical-delta-functor, applied to Mod(R_n)."
+   }
+  },
+  {
+   "text": "For each $j$, symmetry of the sheafified balanced tensor gives an $R_j$-linear cochain isomorphism $C_j\\cong P\\otimes_B R_j$, sending $\\bar c\\otimes p$ to $p\\otimes\\bar c$; the inverse exchanges the factors back. The formulas respect balancing, restrictions and $1\\otimes d_P$, so they extend from the presheaf tensors to their sheafifications [def-pur-sheaf-tensor-product]. By [lem-pur-derived-change-of-rings], $P\\otimes_B R_j$ represents $K_j$ in $D(R_j)$ for the quotient $B\\to R_j$. Termwise restriction to $R_n$ preserves quasi-isomorphisms: it retains the underlying abelian sheaf and maps [def-pc-sheaf-restrict-scalars], whose sectionwise kernels and sheafified cokernels compute cohomology [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. It also commutes with the shift because it retains the differential and its negative. Thus the three objects of step 4 identify in order with $\\operatorname{Res}K_{n-1},K_n,\\operatorname{Res}K_1$. Under the displayed tensor exchanges, $\\alpha$ becomes $p\\otimes\\bar c\\mapsto p\\otimes\\overline{tc}$ and $\\beta$ becomes $p\\otimes\\bar c\\mapsto p\\otimes\\bar c$, exactly the required second-factor maps. Conjugate $\\delta$ by these object isomorphisms and their shifts. The resulting triangle is isomorphic to step 4, hence distinguished by the definition in [def-weil-abstract-derived-category]. The same construction works for any flat-term K-flat resolution, since only those two properties of $P$ were used. Neither completeness nor boundedness enters.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, sites-cohomology-lemma-derived-base-change; Tag 06YT, sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side. Tensor exchange is the balanced-tensor definition of Section 03EK in sites-modules.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph, coefficient exact sequence and derived tensor triangle, expanded on a general small ringed site using Stacks 06YS, 03ER and 0152 while keeping the quotient-ring action."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +139,52 @@
    "results": "{\"t\": \"2026-10-21T03:03:45Z\", \"tool\": \"grep\", \"query\": \"triangleOfSES_distinguished|KFlat|kflat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\"], \"digest\": \"18d0b28c075e5940\"}",
    "date": "2026-10-21",
    "verdict": "No match for the quotient-linear derived-reduction triangle. DerivedCategory.triangleOfSES_distinguished supplies the triangle only after constructing a degreewise exact sequence of quotient-module complexes; ordinary flat-module tensor lemmas do not construct it."
+  },
+  {
+   "tool": "grep",
+   "query": "successive.*quotient|quotient.*triangle",
+   "results": "{\"t\": \"2026-10-21T03:21:17Z\", \"tool\": \"grep\", \"query\": \"successive.*quotient|quotient.*triangle\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\"], \"digest\": \"9d38cf3da42195b5\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a regular section t of a ring sheaf B the derived reductions K tensor B/t^(n-1), K tensor B/t^n and K tensor B/t form a distinguished triangle of B/t^n modules",
+   "results": "{\"t\": \"2026-10-21T03:21:17Z\", \"tool\": \"leansearch\", \"query\": \"For a regular section t of a ring sheaf B the derived reductions K tensor B/t^(n-1), K tensor B/t^n and K tensor B/t form a distinguished triangle of B/t^n modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES\", \"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"DerivedCategory.instIsTriangulated\", \"DerivedCategory.mem_distTriang_iff\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_obj₁\"], \"digest\": \"b3b8611c78d82d2f\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSES_distinguished\"",
+   "results": "{\"t\": \"2026-10-21T03:21:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"triangleOfSES_distinguished\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSES_distinguished\"], \"digest\": \"e5a526a847ec5936\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a short exact sequence of coefficient ring sheaves with a K-flat flat-term complex and take the distinguished triangle in the quotient coefficient derived category",
+   "results": "{\"t\": \"2026-10-21T03:21:20Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor a short exact sequence of coefficient ring sheaves with a K-flat flat-term complex and take the distinguished triangle in the quotient coefficient derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"DerivedCategory.triangleOfSES\", \"DerivedCategory.triangleOfSES_obj₁\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSESIso\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES_mor₁\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\"], \"digest\": \"b6aed87debeca4af\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive derived reduction of an unbounded sheaf module complex modulo powers of a regular global section forms a distinguished triangle linear over the largest quotient ring",
+   "results": "{\"t\": \"2026-10-21T03:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"Successive derived reduction of an unbounded sheaf module complex modulo powers of a regular global section forms a distinguished triangle linear over the largest quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"localCohomology.ofSelfLERadical\", \"localCohomology\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"b41d582ae2731dde\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|def triangleOfSES",
+   "results": "{\"t\": \"2026-10-21T03:21:28Z\", \"tool\": \"grep\", \"query\": \"triangleOfSES_distinguished|def triangleOfSES\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\"], \"digest\": \"a03d570e443a189b\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the item: the SES triangle and its connecting map are general tools, already recorded by lem-weil-pbc-complex-ses-triangle; none supplies the coefficient sequence and quotient-linear tensor construction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-integral-criterion-reductions",
@@ -80,5 +201,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-successive-quotient-linear-triangle",
+  "worker": "stage1",
+  "summary": "Q22: retained the statement and gave five explicit steps: local regular-element coefficient exactness, flat-term K-flat model, degreewise tensor exactness, the existing Mathlib SES triangle in Mod(R_n), and coefficient-linear identifications with derived reductions. Reused all needed nodes; created none. Checked the arbitrary-site argument without points, arbitrary unbounded complexes and all prescribed arrows.",
+  "blueprint": "det-prop-integral-criterion-reductions, second paragraph: the coefficient exact sequence and the triangle obtained after derived tensor, with the R_n-action made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General small-ringed-site existence of a flat-term K-flat resolution for the unbounded complex; this unit has no resolution-existence theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General ring-sheaf scalar extension computes each K_j from the same K-flat resolution in its actual quotient-ring derived category; this unit has no change-of-rings construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-2c081b581",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-2c081b581 (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit, item only, no new nodes, statement verbatim from base. This is an ordinary split of Q34's statement-only node; there is no repair note for this item, and side-live still has it unsplit. All five steps are correct. Step 1: regularity of t gives injectivity of a:R_{n-1}->R_n (locally tc=t^n d gives t(c-t^{n-1}d)=0); the sequence is exact and R_n-linear using the kernel/cokernel formulas in def-weil-sheaf-of-modules-category; elementary. Step 2: lem-pc-kflat-resolution gives a flat-term K-flat resolution (Stacks 06YS, sites-cohomology.tex:3207). Step 3: def-pc-flat-sheaf-modules (03ER) defines flatness as exactness of G |-> G⊗F; the item tensors R_j⊗P^i in that order, and exactness carries over to Mod(R_n) on the same abelian sheaves. Step 4: the Mathlib leaf lem-weil-pbc-complex-ses-triangle applies in the abelian category Mod(R_n). Step 5: the tensor swap plus lem-pur-derived-change-of-rings(2) identify the terms with K_j; termwise restriction preserves quasi-isomorphisms and shifts; the triangle is distinguished as isomorphic to a cone triangle. Edge cases checked: Z with t=p and n=2, t a unit, t=0 (the regularity hypothesis is needed), unbounded K. Tool uses lem-pc-kflat-resolution and lem-pur-derived-change-of-rings are accepted as generic ringed-site tools. No cycle. I searched the DAG for duplicates (successive/reduction triangles, t^{n-1} triangles) and found none. Advisory: the quotient ring sheaf B/t^jB has no definition node; this is inherited from Q34's statement."
  }
 }
