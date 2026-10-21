@@ -22328,3 +22328,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:56 L: returned deliver/Q129/lem-sp-power-torsion-sheaf-limit-complete (reviewer RETURN: L: independent stage-2 immutable head 5c013ff4bc98: H2/H12 (mechanical theorem-stmt_dep finding upheld): the Lean statem)
 
 - 19:56 L: batch 20261021T110859 dependency take-out
+- 11:58 L: merged deliver/NA/lem-sfb-reduction-single-cohomology-normalization (stage 2; reviewer PASS; parallel immutable checks)

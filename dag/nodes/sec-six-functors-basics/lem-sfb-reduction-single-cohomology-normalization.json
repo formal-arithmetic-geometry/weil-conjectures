@@ -18,7 +18,8 @@
   "lem-sfb-scalar-reduction-unit-triangle",
   "def-sbc-standard-tstructure-derived-category",
   "lem-sf-derived-ses-triangle",
-  "lem-pur-torsion-sheaf-constant-module"
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-weil-pbc-truncation-step-ses"
  ],
  "proof": [
   {
@@ -264,5 +265,35 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-40ffe19c9 (reviewer sub-agent of L); spot-checked: I read all 7 steps and the statement of every cited node. The statement is unchanged from live side. There are no new nodes, no SGA citations and no cycle. The live item is still unsplit and not dropped. The route is right: per sk-lem-geo-cartier.proof.md paragraph 4, the source i_*Z_D (n monic) reduces to its quotient and G_m (n epic) to mu[1]. I accept both tool_uses: lem-pur-sheaf-ring-coefficient-ordinary-adjunction is used only for exactness of Res along Z->Z/n, and lem-pur-torsion-sheaf-constant-module clause 2 for linearity of maps between n-killed sheaves. One fault, C3/C4 in Step 1: lem-sf-derived-homology-long-exact gives exactness with unspecified connecting maps delta^n, yet the step names the map H^{-1}(K_A)->A as H^{-1}(delta_A). Fix: apply the long exact sequence to the triangle and its two TR2 rotations, use only middle-term exactness, and add def-weil-triangulated-category to the step's uses. Steps 2-7 are correct. Step 3: the tau_{<=a} zigzag gives quasi-isomorphisms, with the single term in degree a under the cohomological convention. Step 4: same-degree full faithfulness through the single-complex leaf. Step 5: the unique cokernel iso t, made R-linear, gives alpha_F; checked in degree 0. Step 6: TR3 from (B,B,K_B) into the rotated SES triangle gives u with u eta_B=kappa_B and (-i[1])u=delta_B, and v is the unique kernel comparison. Step 7: Res alpha_B=u, checked in degree -1 in D(Z). Small cases on the point site with n=3 and n=1: F=Z; B=Q/Z, where Tor_1=Z/3 in degree -1 and the sign -i[1] is detectable; B=Q. Advisory: Steps 3-4 repeat the content of the existing unsplit lem-pur-good-truncation-exact-normalization; the item's own statement already contains this clause, so this is not a fault. The whole corrected node is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reduction-single-cohomology-normalization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ReductionSingleCohomologyNormalization",
+  "declaration": "SheafOfModules.ScalarAdjunctionNormalization.reduction_single_cohomology_exact",
+  "declarations": [
+   "SheafOfModules.ScalarAdjunctionNormalization.reductionTruncationProjection",
+   "SheafOfModules.ScalarAdjunctionNormalization.reduction_single_cohomology_truncation",
+   "SheafOfModules.ScalarAdjunctionNormalization.reductionCohomologyUnit",
+   "SheafOfModules.ScalarAdjunctionNormalization.reductionCohomologyBoundary",
+   "SheafOfModules.ScalarAdjunctionNormalization.reductionRestrictionSingleShiftIso",
+   "SheafOfModules.ScalarAdjunctionNormalization.reductionShiftedSingleHomologyIso",
+   "SheafOfModules.ScalarAdjunctionNormalization.reduction_single_cohomology_exact",
+   "SheafOfModules.ScalarAdjunctionNormalization.reduction_single_cohomology_monic",
+   "SheafOfModules.ScalarAdjunctionNormalization.reduction_single_cohomology_epic"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ReductionSingleCohomologyNormalization.lean",
+  "statement": "theorem reduction_single_cohomology_exact [HasTerminal C] (hn : 1 ≤ n) (A : IntegerModules J) (δ : (restriction J n).mapDerivedCategory.obj (M.T.obj ((DerivedCategory.singleFunctor (IntegerModules J) 0).obj A)) ⟶ ((DerivedCategory.singleFunctor (IntegerModules J) 0).obj A)⟦(1 : ℤ)⟧) (hδ : Triangle.mk (n • 𝟙 ((DerivedCategory.singleFunctor (IntegerModules J) 0).obj A)) (N.derived.unit.app ((DerivedCategory.singleFunctor (IntegerModules J) 0).obj A)) δ ∈ distTriang (DerivedCategory (IntegerModules J))) : (∀ j : ℤ, j ≠ -1 → j ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (IntegerModules J) j).obj ((restriction J n).mapDerivedCategory.obj (M.T.obj ((DerivedCategory.singleFunctor (IntegerModules J) 0).obj A))))) ∧ Mono (reductionCohomologyBoundary J n M A δ) ∧ Epi (reductionCohomologyUnit J n M N A) ∧ ∃ (w₁ : reductionCohomologyBoundary J n M A δ ≫ (n • 𝟙 A) = 0) (w₂ : (n • 𝟙 A) ≫ reductionCohomologyUnit J n M N A = 0), (ShortComplex.mk (reductionCohomologyBoundary J n M A δ) (n • 𝟙 A) w₁).Exact ∧ (ShortComplex.mk (n • 𝟙 A) (reductionCohomologyUnit J n M N A) w₂).Exact",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly state the complete node: R-linear canonical truncation zigzag and naturality, cohomology vanishing and the five-term sequence with its actual maps, quotient unit normalization, and epic Kummer normalization including the signed boundary and unique degree-minus-one isomorphism. The canonical truncation projection reuses the existing upper-truncation-step construction; stmt_deps gains that landed node. Universal kernel/cokernel representatives are supplied with their maps, never replaced by arbitrary isomorphisms. The scalar model M and its normalized adjunction N are the recorded dependency interfaces, whose existence is already stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21edb677b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Delivery = item lean record + stmt_dep lem-weil-pbc-truncation-step-ses + new module ReductionSingleCohomologyNormalization; live item has no lean, ledger shows only S1 merge. Every node clause matched: vanishing outside {-1,0}, Mono/Epi + two exact ShortComplexes with actual H^-1(delta) and H^0(eta); R-linear truncation zigzag QuasiIso + naturality; monic alpha_F with (Res alpha)eta = p via cokernel universal property; epic alpha_B with Res alpha eta = hS.singleδ, Res alpha then -(i[1]) = delta (Mathlib rotation sign), v = H^-1(Res alpha) with v≫(-i) = boundary and uniqueness. delta quantified over all distinguished completions: true generalization; dependency's delta satisfies hδ (singleFunctorIsoCompQ = Iso.refl). Mechanical theorem-stmt_dep finding: reductionTruncationProjection is the j witness of exists_upperTruncationStepSES, pinned by its component equations (canonical cycles→homology projection); module has no public def to move → PASS on that point. Record statement verbatim, 9 decls present, no name clashes, lines ≤93, sorry only in theorems, docstrings with source/blueprint/steps, imports = stmt_dep public + proof_dep plain. Edge cases n=1, zero objects, all a checked. No compile (no change). Advisory: overlap with lem-pur-good-truncation-exact-normalization."
  }
 }
