@@ -19675,3 +19675,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:07 L: merged deliver/NC/prop-weil-pbc-qbar-condensed-two-colimit (reviewer FIX; after a return; new nodes: 0)
 - 03:08 L: returned deliver/Q05/lem-weil-compact-support-reduction-tower-functor (reviewer RETURN: I read the item, all 9 steps, the cited statements and the source. The item is not dropped. Its statement is unchanged f)
 - 03:09 L: merged deliver/Q66/sk-thm-existence (reviewer FIX; after a return; new nodes: 0)
+- 03:09 L: returned deliver/N7/def-pd-proetale-section-module-functors (reviewer RETURN: G1/A6/D: the delivery does not carry out the human's re-split order. coord/repair-notes/def-pd-proetale-section-module-f)
