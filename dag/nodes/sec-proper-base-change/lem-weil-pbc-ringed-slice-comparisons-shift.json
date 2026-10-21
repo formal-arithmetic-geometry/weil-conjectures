@@ -20,104 +20,74 @@
  ],
  "proof": [
   {
-   "text": "Write $r=j_V^*$ and $t=j_U^*$. On complexes restriction commutes with every integer shift by the identity: on $T\\to V$ both $r(K[n])^a$ and $(rK)[n]^a$ are $K^{a+n}(T)$, and both differentials are $(-1)^n d_K$. The same holds for $t$. Use these comparisons for the exact derived restrictions. For tensor shifts use the chain isomorphisms of [lem-weil-pbc-total-tensor-integer-shifts], with the precise unsigned first-input and $(-1)^{np}$ second-input formulas in the statement. Shifts preserve flat-term K-flat representatives: flatness of the terms is unchanged by reindexing, and for every acyclic $Z$ the signed tensor isomorphism identifies $Z\\otimes P[n]$ with $(Z\\otimes P)[n]$, which is acyclic since its cohomology in degree $a$ is that of $Z\\otimes P$ in degree $a+n$.",
+   "text": "Put $r=j_V^*$ and $t=j_U^*$. Restriction is exact and termwise: at $T\\to V$, $r(K[n])^a=(rK)[n]^a=K^{a+n}(T)$, with differential $(-1)^nd_K$; similarly for $t$. Hence their exact-derived shift maps are identity on representatives. Apply [lem-weil-pbc-exact-functor-derived-factorization] to identify these with the canonical localization factorization shifts.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-pbc-ringed-derived-restriction",
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "def-pc-kflat-complex"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); integer-shift refinement by the agent."
    }
   },
   {
-   "text": "Choose a K-injective resolution $E\\to I$ using [prop-pur-kinjective-resolutions-exist]. Restriction $tI$ is K-injective by [lem-pur-kinjective-restrict-localized]. Thus the two sides of $\\beta_E$ are represented by $r f_*I$ and $(f_V)_*tI$. The canonical comparison is the image of the termwise comparison: this is exactly the right-derived-unit normalization in [lem-weil-pbc-ringed-slice-derived-comparisons]. By [lem-weil-pbc-localize-ringed-site-morphism], at $T\\to V$ it is the identity on $I^a(uT)$ with its $R(T)$-action. For $E[n]$ choose $I[n]$; this is a valid resolution by [lem-weil-pbc-kinjective-shift], and its restriction is $tI[n]$. In degree $a$, both routes in the shift square for $\\beta$ are the identity on $I^{a+n}(uT)$; all differentials are $(-1)^n d_I$. Applying localization proves $s_G\\beta_{E[n]}=\\beta_E[n]s_F$. These are the specified resolution shifts by [lem-weil-pbc-derived-adjunction-shift]. Naturality carries the identity along $E\\simeq QI$, so it holds for every unbounded $E$.",
+   "text": "Apply [lem-weil-pbc-derived-square-shift-on-kinjectives] with $F=f_*$, $G=(f_V)_*$ and the termwise comparison of [lem-weil-pbc-localize-ringed-site-morphism]. All four categories are module-sheaf categories on small sites, so [prop-pur-kinjective-resolutions-exist] supplies resolutions; $t$ preserves K-injectives by [lem-pur-kinjective-restrict-localized]. The right-derived-unit square in [lem-weil-pbc-ringed-slice-derived-comparisons] is exactly the required normalization. The resolution shifts are those of [lem-weil-pbc-derived-adjunction-shift]. Thus $\\beta$ commutes with every integer shift; its model component at $T\\to V$ is the identity on $I^{a+n}(uT)$ with its $R(T)$-action.",
    "uses": [
+    "lem-weil-pbc-derived-square-shift-on-kinjectives",
+    "lem-weil-pbc-localize-ringed-site-morphism",
     "prop-pur-kinjective-resolutions-exist",
     "lem-pur-kinjective-restrict-localized",
     "lem-weil-pbc-ringed-slice-derived-comparisons",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-pbc-kinjective-shift",
     "lem-weil-pbc-derived-adjunction-shift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); integer-shift refinement by the agent."
    }
   },
   {
-   "text": "Put $L=Lf^*$, $R=Rf_*$, $L'=Lf_V^*$ and $R'=R(f_V)_*$. Let $\\eta$ and $\\eta'$ denote the two units. Adjunction compatibility in [lem-weil-pbc-ringed-derived-slice-localization] says that $\\theta_P:L'rP\\to tLP$ has adjunct $h_P=\\beta_{LP}\\circ r(\\eta_P):rP\\to R'tLP$, equivalently $\\theta_P=\\varepsilon'_{tLP}\\circ L'(h_P)$. Write $a_P:L(P[n])\\to LP[n]$, $b_E:R(E[n])\\to RE[n]$ and $a',b'$ for the local resolution shifts. The unit equations of [lem-weil-pbc-derived-adjunction-shift], globally and locally, have exactly the normalization specified in [lem-weil-pbc-adjunction-shift-compatibility-unique]. For $B=tLP$ they give, using Step 2 and naturality of $\\beta$ at $a_P$, $$b'_B\\circ R'(t a_P)\\circ h_{P[n]}=h_P[n].$$ Indeed the left side is $b'_B R'(t a_P)\\beta_{L(P[n])}r\\eta_{P[n]}=b'_B\\beta_{LP[n]}rR(a_P)r\\eta_{P[n]}=\\beta_{LP}[n]r(b_{LP}R(a_P)\\eta_{P[n]})=\\beta_{LP}[n]r(\\eta_P[n])$. Restriction-shift identities from Step 1 are suppressed in this formula.",
+   "text": "The adjunction compatibility in [lem-weil-pbc-ringed-derived-slice-localization] identifies $\\theta_P$ with the adjunct of $h_P=\\beta_{Lf^*P}r(\\eta_P)$. Both adjunctions have shift-compatible units by [lem-weil-pbc-derived-adjunction-shift]. Step 2 and [lem-weil-pbc-adjunction-square-shift-mate], with the restriction shifts of Step 1, therefore give exactly the required square for the specified $\\theta$ (and its inverse orientation).",
    "uses": [
+    "lem-weil-pbc-adjunction-square-shift-mate",
     "lem-weil-pbc-ringed-derived-slice-localization",
-    "lem-weil-pbc-derived-adjunction-shift",
-    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+    "lem-weil-pbc-derived-adjunction-shift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); integer-shift refinement by the agent."
    }
   },
   {
-   "text": "Take adjuncts under $L'\\dashv R'$ of the two arrows $L'(rP[n])\\to B[n]$ given by $t(a_P)\\circ\\theta_{P[n]}$ and $\\theta_P[n]\\circ a'_{rP}$. The first adjunct is $R'(t a_P)\\circ h_{P[n]}$. The second is $(b'_B)^{-1}\\circ h_P[n]$: expand its adjunct as $R'(\\theta_P[n])R'(a'_{rP})\\eta'_{rP[n]}$, replace $R'(a'_{rP})\\eta'_{rP[n]}$ by $(b'_{L'rP})^{-1}\\eta'_{rP}[n]$ using the local unit equation, and use naturality of $b'$ at $\\theta_P$. Step 3 says these adjuncts agree. The adjunction bijection therefore gives $t(a_P)\\theta_{P[n]}=\\theta_P[n]a'_{rP}$, which is precisely the requested shift equation for $\\theta$ after inserting the restriction comparisons of Step 1. This argument fixes the comparison by its unit equation, so it applies to the specified canonical $\\theta$, including the inverse orientation used when stating the slice-localization isomorphism.",
+   "text": "Apply [lem-weil-pbc-slice-tensor-integer-shift-compatibility] with $(\\mathcal C,\\mathcal O,W)=(\\mathcal D,R,V)$ and $(\\mathcal C,S,U)$. The tensor normalizations are exactly those of [lem-weil-pbc-ringed-slice-evaluation-transpose]; the two applications give the four required tensor shift squares.",
    "uses": [
-    "lem-weil-pbc-ringed-derived-slice-localization",
-    "lem-weil-pbc-derived-adjunction-shift",
-    "lem-weil-pbc-adjunction-shift-compatibility-unique"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
-   }
-  },
-  {
-   "text": "Let $j_W^*$ be either restriction ($W=V$ on $\\mathcal D$, or $W=U$ on $\\mathcal C$). Choose flat-term K-flat representatives $A,B$ for its two derived inputs by [lem-pc-kflat-resolution]. The tensor normalization in the statement of [lem-weil-pbc-ringed-slice-evaluation-transpose] applies to this arbitrary small ringed site: $j_W^*A,j_W^*B$ are valid flat-term K-flat representatives, and the canonical derived tensor comparison is represented by the chain isomorphism $j_W^*\\operatorname{Tot}(A\\otimes B)\\to\\operatorname{Tot}(j_W^*A\\otimes j_W^*B)$ whose $(p,q)$ summand is $\\mu_{A^p,B^q}$, the restriction tensor isomorphism sending local $x\\otimes y$ to $x\\otimes y$. Step 1 allows $A[n],B[n]$ as the representatives of the shifted inputs. Thus all four tensor shift squares can be computed on precisely these representatives, with no new choices of tensor or comparison.",
-   "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-slice-tensor-integer-shift-compatibility",
     "lem-weil-pbc-ringed-slice-evaluation-transpose"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
-   }
-  },
-  {
-   "text": "On a summand of first degree $p$ in $A[n]\\otimes B$, the two routes around the first-input square both give $\\mu_{A^{p+n},B^q}$ with coefficient $1$, merely reindexing the total degree by $n$. On a summand $A^p\\otimes B^{q+n}$ in $A\\otimes B[n]$, both routes around the second-input square give $(-1)^{np}\\mu_{A^p,B^{q+n}}$: applying restriction or the module isomorphism $\\mu$ commutes with multiplication by $(-1)^{np}$. These are equal chain maps, since the signed maps of [lem-weil-pbc-total-tensor-integer-shifts] are chain maps for the differential of [def-pc-tensor-complex-sheaves]. Their images in the derived category agree. The representative-model isomorphisms and the uniqueness clause of [lem-weil-pbc-site-derived-tensor-descent] extend this equality from flat-term K-flat pairs to all derived pairs. Applying the calculation once with $W=V$ and once with $W=U$ proves the tensor assertions for every integer $n$, with the other input fixed. Together with Steps 2 and 4 this proves all the stated shift equations.",
-   "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor: application of the agent-written normalized slice refinement to the two ringed sites."
    }
   }
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
   "def-weil-pbc-ringed-derived-restriction",
-  "lem-weil-pbc-total-tensor-integer-shifts",
-  "def-pc-kflat-complex",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-derived-square-shift-on-kinjectives",
+  "lem-weil-pbc-localize-ringed-site-morphism",
   "prop-pur-kinjective-resolutions-exist",
   "lem-pur-kinjective-restrict-localized",
   "lem-weil-pbc-ringed-slice-derived-comparisons",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "lem-weil-pbc-kinjective-shift",
   "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-adjunction-square-shift-mate",
   "lem-weil-pbc-ringed-derived-slice-localization",
-  "lem-weil-pbc-adjunction-shift-compatibility-unique",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-slice-evaluation-transpose",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-slice-tensor-integer-shift-compatibility",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
  ],
  "proof_origin": {
   "by": "agent",
@@ -235,7 +205,7 @@
   "date": "2026-10-21",
   "item": "lem-weil-pbc-ringed-slice-comparisons-shift",
   "worker": "stage1",
-  "summary": "Proved the beta shift square on K-injective models, transferred it to the specified theta by the explicit unit/adjunction calculation, and checked both tensor shift squares summandwise on the existing normalized K-flat restriction models. No new nodes; statement and conventions retained.",
+  "summary": "Repair of the returned 2026-10-21 re-split. Keep the derived-square-on-K-injectives and adjunction-square-mate statement-only tasks; extract the entire missing tensor argument into a third generic small-ringed-site/slice task, including its signed chain-map squares and normalized derived descent. K-flat shift stability uses the existing homotopy-triangulated tool. The four-step parent is now only short assembly; statement and Lean metadata unchanged. The report retains the exact original six steps and assigns every argument.",
   "blueprint": "lemma-weil-pbc-perfect-projection-formula, first proof paragraph: 'closed under shifts' and 'Hence it contains every perfect complex'; supplies the signed slice-locality comparisons used by the ringed projection-restriction argument.",
   "tool_uses": [
    {
@@ -247,12 +217,12 @@
     "why": "Generic K-injective existence for small ringed sites, used to compute beta on unbounded objects."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic flat-term K-flat existence, used to choose representatives for both tensor inputs."
-   },
-   {
     "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
     "why": "Only its explicitly stated pure-tensor normalization of the canonical slice tensor comparison is used, as a generic ringed-site tool; none of its evaluation/transposition conclusions is needed."
+   },
+   {
+    "node": "lem-sfb-kflat-homotopy-triangulated",
+    "why": "Generic integer-shift stability of the K-flat class in the module-sheaf tensor category, used by the extracted tensor task; no theorem of this unit supplies that closure. Flat terms are preserved by reindexing."
    }
   ]
  },
@@ -260,15 +230,16 @@
   "lem-pur-kinjective-restrict-localized",
   "prop-pur-kinjective-resolutions-exist",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sfb-kflat-homotopy-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NM-ff0c74c6e",
-  "group": "NM",
+  "reviewer": "NT-cc-NK-3e3b7d322",
+  "group": "NK",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ff0c74c6e (reviewer sub-agent of L); spot-checked: Read the item, all 16 cited statements, the four declared tool uses and the Stacks source (08FI and 0D6G at sites-cohomology.tex:4374-4399, plus 07A6 and 07A4). The delivery has no new nodes, the statement is kept from the base and the item is not on a re-split note. I found no cycle: the 484-node closure does not contain the item, and its only citer, ringed-projection-restriction step 3, uses exactly the shift normalization the statement gives. Step 2: beta is pinned by the right-derived-unit square from the statement of ringed-slice-derived-comparisons. The Lean statement of ringed-derived-slice-localization has the same square, and since units are isomorphisms on K-injectives this fixes beta uniquely. The termwise identity comes from localize-ringed-site-morphism, and I[n] is a valid resolution by kinjective-shift. Steps 3-4: theta is the adjunct of h = beta_{LP} composed with r(eta_P), which matches RingedSliceAdjunctionSquare.unit. I rechecked each equality using naturality of beta and b' and the global and local unit equations of adjunction-shift-compatibility-unique, and the adjunction bijection then gives the theta square. Steps 5-6: the K-flat models and the summandwise mu come from the normalization clause in the statement of slice-evaluation-transpose, not its proof. The signs are 1 on the first input and (-1)^{np} on the second, which I checked against the total differential; descent uniqueness then extends the result to all pairs. Edge cases n=0, n=+-1, characteristic 2 and zero complexes all hold, nothing is weakened and the DAG search found no duplicate. The four tool uses are accepted. Advisory: the DAG text of ringed-derived-slice-localization should state its unit-square and beta normalization, which today only its Lean statement shows."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-3e3b7d322 (reviewer sub-agent of L); spot-checked: This re-delivery repairs the f58527d7 RETURN as that review asked. Both earlier new nodes (derived-square-shift-on-kinjectives and adjunction-square-shift-mate) are byte-identical to the versions that review accepted, and so are item Steps 1-3, the statement, stmt_deps and the lean record. The tensor argument (old Steps 5-6 plus the tensor half of old Step 1) is now its own statement-only node, slice-tensor-integer-shift-compatibility (2884 chars). It is generic over any small ringed site and slice, uses the normalization stated in evaluation-transpose, and restores the def-pc-tensor-complex-sheaves citation. K-flat shift stability is taken from lem-sfb-kflat-homotopy-triangulated, declared as a tool use. Step 4 is now two applications, at (D,R,V) and (C,S,U). The assembly is 4 steps and 1786 chars; the three new nodes are of comparable size (1951/2155/2884), none restates the item, and none of the 3 closures contains the item. I checked the Koszul signs on the chain maps by hand: the first input is unsigned and the second carries (-1)^{np}, matching Stacks 0FNH (more-algebra.tex:18385). Descent to all inputs follows from the uniqueness clause of site-derived-tensor-descent. Edge cases n=0, negative n and p, characteristic 2, zero complexes and the one-object site all hold. I re-derived the mate and K-injective nodes. Sources: Stacks 08FI (sites-cohomology.tex:4314), 0D6G (4374), 07A4 (3684), 0A8D (derived.tex:2290). No SGA is used, nothing is on the dropped list, and the live item is still the unsuperseded base. The 4 split_report tool uses are accepted. Advisory: the existing lem-weil-pbc-pullback-tensor-canonical-shift-unit (no cycle) gives the derived clause of the new tensor node at the localization morphism after transport along the unit iso, so its prover may use it. It is not a duplicate, because the new node also states the restriction-model chain squares. Advisory inherited from the base: the DAG statement of ringed-derived-slice-localization still omits β's unit-square normalization; Step 2 correctly takes it from ringed-slice-derived-comparisons."
  },
  "lean": {
   "module": "Sheaf.Paper.RingedSliceComparisonsShift",
