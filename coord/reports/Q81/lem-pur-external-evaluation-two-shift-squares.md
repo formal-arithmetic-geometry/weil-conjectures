@@ -1,0 +1,55 @@
+# Stage-1 delivery: lem-pur-external-evaluation-two-shift-squares
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/lem-pur-external-evaluation-two-shift-squares.json: statement item, now split into seven elementary component calculations; not a Mathlib leaf.
+- citations.json: 22 entries, one for each step/node citation, with verbatim evidence from the cited statement.
+- report.md: this report. searches.jsonl is the unmodified output log of the required search command.
+
+There are 0 new nodes and 0 new Mathlib leaves. No Lean files, unit files, repository files, launcher files, or compilation outputs were written.
+
+## Attachments
+
+None. Searches of lean/WeilConjectures for the exact blueprint tag and external/evaluation/shift-square terminology did not find a declaration giving the item. RestrictedDerivedSectionsShiftTransport.lean contains a private evaluation_shift_transport theorem, whose statement concerns derived sections/base-change transport, not this bilinear chain evaluation or either of its explicit signs. The trace-formula external duality comment does not state the item either.
+
+## WANTED
+
+None. The Hom-complex source and current blueprint were available locally.
+
+## Corrections and searches
+
+The original item had no proof. I retained its arbitrary commutative ring, arbitrary small site, all five module-sheaf complexes, arbitrary U,V, arbitrary chain maps, both isomorphism normalizations, both equalities, and both homogeneous signs. No mathematical clause was weakened or dropped.
+
+I repaired a definition reference: def-kun-constant-sheaf introduces a scheme and its small etale site, while this item's site is arbitrary. The statement now cites the already existing general-site def-weil-pbc-constant-sheaf and def-sf-site-constant-module-functor, with termwise application explicit. I also spelled out the global Hom degree-n product of global module-sheaf morphisms, to distinguish it from the internal Hom complex defined by def-pur-hom-complex. These are reference/notation repairs; the claimed maps, hypotheses, and conclusions are unchanged. There is no false sign clause or mathematical statement dispute.
+
+The inherited Mathlib searches and provenance are preserved. I ran five additional searches through msearch.py, recorded exactly in searches.jsonl and mathlib_searches: LeanFinder with two distinct descriptions of the bilinear evaluation/shift question, Loogle for "leftShift", the grep for external evaluation or leftShift/composition in Algebra/Homology, and LeanSearch for Koszul signed tensor evaluation with either input shifted. All five services answered successfully. The log records the actual queries, hits and digests. I read HomComplexShift.lean, especially the definitions and component formulas of leftShift/leftUnshift and the composition formula at lines 395 onward, and TotalComplexShift.lean at lines 360–412. Those results supply individual Hom shifts, morphisms of tensor complexes, or commutation of total-complex shift comparisons. None states this item's two evaluation squares for arbitrary u,v,i, with the specified eta and kappa signs, and none specializes to both squares in one line. In particular the (a*m) sign in leftShift_comp is about composition of cochains, not the external product/interchange evaluated on e and h. No Mathlib match is asserted.
+
+The whole-DAG and blueprint searches included the item's exact id, external evaluation, Hom complex shift, and tensor/Hom-shift terminology. The current blueprint ancestor is lem-pur-kunneth-supported, whose proof is in main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md. I read it: paragraphs 1 and 3 compare support triangles and identify Hom evaluation with the specified exterior product. The present calculation supplies the two shift squares below that route, as the item's existing blueprint.from already records. The parent's lifted-external-evaluation-chain-model node has stronger K-flat/K-injective/derived-model hypotheses, so cannot replace the arbitrary-chain-complex assertion here. The general total-tensor-signed-coherence node gives tensor comparisons but not these evaluation squares; no duplicate item was found.
+
+## Not duplicates
+
+No new node was created, so there are no new/existing same-tag pairs to justify. All elementary differential and parity calculations remain steps of the item itself; neither square was moved to a new node.
+
+## Review by Q81
+
+I read the item against Stacks sites-cohomology.tex, section-hom-complexes (Tag 0A8X), its actual Hom differential and global-sections discussion at lines 8570 onward, lemma-compose (Tag 0A90) at lines 8616 onward, and lemma-RHom-triangulated (Tag 08JC) at lines 8948 onward. The tag-to-label map confirms those labels. The item source field is preserved; the proof sources specify 0A8X and 0A90 as the construction context. Stacks omits the compose proof and does not state these two normalized external sign squares. Accordingly proof_origin is agent, and the proof contains the entire calculation rather than claiming Stacks proved the squares. The derived triangulatedness theorem is not used to infer any chain-map equality. No SGA source is used. There are no new-node sources to review.
+
+For Step 1 I opened def-sf-site-constant-module-functor, def-pur-sheaf-tensor-product, def-weil-pbc-sheafification, def-pc-tensor-complex-sheaves and def-pur-hom-complex. The first really describes constant module sheafification on an arbitrary small site. The next two really give the presheaf tensor and unique factorization through sheafification. The tensor-complex statement really uses a direct sum in total degree. The Hom-complex statement really describes families of graded maps, with a product over component degrees. These definitions suffice for the balanced, restriction-compatible formula and the equality test; no constant-functor monoidal equivalence or unproved derived adjunction is being invoked. Constant sections of w,z and the given sheaf-linear u,v ensure the needed maps on every localized object. For the ordinary module tensor U tensor V the same bilinearity argument is the ordinary module tensor universal property.
+
+For Step 2 I read the chain-map equation in def-pc-cochain-complex-modules and both differential formulas in def-pc-tensor-complex-sheaves and def-pur-hom-complex. I expanded all four differential terms and separately calculated both subtracted terms; the e and h terms cancel, leaving exactly p(dw,z)+(-1)^r p(w,dz). This uses only that the three given maps are chain maps. In particular J is not assumed K-injective, and U,V are not assumed flat. The formula proves chain-map status instead of taking it from a derived-model statement whose hypotheses are absent.
+
+For Step 3 the cited Hom definition supplies d_J f-(-1)^n f d_B, and def-weil-abstract-derived-category explicitly supplies (B[1])^j=B^{j+1} with negative differential. I checked both component types: theta in degree n takes values in unshifted Hom degree n-1. Both chain-map composites have component (-1)^{n+1}d_J f^{j-1}-f^j d_B^j; the inverse has the same degree-n scalar. This proves the claimed theta for arbitrary B,J without a derived Hom-shift identification.
+
+For Step 4 the same shift definition says w has original degree r-1 and e original degree q+1. The tensor definition then gives the two source coefficients -1 and (-1)^{r+1}. Applying eta yields (-1)^r on dw tensor e and -1 on w tensor de, exactly the target differential. The inverse squares the scalar to 1. The cochain-complex definition justifies composition with u, and the fully specified substitution (V,H,s,t) proves the other evaluation map is a chain map. Step 2 can therefore be applied to both shifted pairings.
+
+For Step 5 I used only the cited tensor/shift definitions to compute the left and right shift comparisons. The first-factor comparison is unsigned for both a=-1 and a=1; the second-factor comparison has (-1)^{ak}. I checked both differential coefficients explicitly and both inverse maps. The final appeal to def-pur-hom-complex is specifically to its last sentence: componentwise precomposition by a complex morphism is its contravariant functoriality. This is quoted in citations.json for this step; I did not substitute a definition of derived Hom for that chain-level fact.
+
+Steps 6 and 7 each use the same three definition statements, together with the maps just proved in Steps 2–5 and the definitions in the item. I checked the types and original degrees separately: (r-1,q+1) in the first square, and (s-1,t+1) in the second. In the first square the four left scalars sum to sq+r+r+s, while the right scalar is s(q+1); both reduce to sq+s. In the second the left sum is sq+s+q+r+s, while the right is r+(s-1)q; both reduce to sq+q+r. Precomposition uses kappa inverse, which has the same scalar as kappa, not an assumed unsigned identification. The theta degree is the shifted input's total r+s, not r+s-1. Equality on all pure inputs extends by the Step 1 equality test. Thus these steps prove the actual connecting-square sign ingredients, rather than saying compatibility follows by transport.
+
+I checked delivery-errors B through E against the files. All mathematical objects are introduced, the only reference with incompatible site hypotheses was replaced, and all TeX is represented by ordinary single backslashes in the decoded JSON strings. Every dependency I used was read in its own statement and appears in proof_deps exactly as the union of uses; citations.json quotes the relevant statements verbatim. Every proof step is elementary because it is an explicitly written universal-property application, differential expansion or parity computation from those definitions. No non-elementary comparison is hidden behind a claim of naturality or standardness. There is no new node, no restatement masquerading as a split, no off-unit theorem/tool route, and no dependence on the derived-evaluation parent that would create a cycle. Every step has fewer than 2000 characters (the largest is 1140).
+
+For small cases, zero complexes or zero u,v,i make both sides zero. Over a ring of characteristic 2 all the signs become 1 and the identities still hold; the calculation never divides by 2 or requires a nonzero ring. Over Z, degrees with s=1,q=0 make the first common sign -1, so omitting the extra s would fail, and s=0,q=1,r=0 makes the second common sign -1, so omitting the kappa sign would fail. I also enumerated r,s,q,t from -3 to 3 (2401 tuples) and checked the two square exponents and the two differential cancellations modulo 2; all agree. Tensor-shift exponents were checked for a,k from -3 to 3 as well. Negative indices and arbitrary unbounded complexes cause no infinite sum: each tensor input uses finitely many summands and the Hom output is a family, not a summation. Smallness is precisely the item's convention and suffices for the sheaf categories and products in these definitions.
+
+## Unfinished work
+
+None for this one-level stage-1 split. No Lean proof or compilation is claimed or required in this stage.
