@@ -20984,3 +20984,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/Q26/lem-weil-isomorphism-derived-pullback-comparison-normalization (reviewer FIX; after a return; new nodes: 2)
 - 08:10 L: merged deliver/Q128/lem-fd-local-weil-model-trace-independence (reviewer PASS; after a return; new nodes: 2)
 - 08:10 L: merged deliver/NK/lem-sfb-ringed-site-finite-retract-dual-exact (reviewer PASS; first push; new nodes: 0)
+- 08:10 L: merged deliver/Q40/lem-sfb-scalar-hom-chain-evaluation (reviewer PASS; first push; new nodes: 0)

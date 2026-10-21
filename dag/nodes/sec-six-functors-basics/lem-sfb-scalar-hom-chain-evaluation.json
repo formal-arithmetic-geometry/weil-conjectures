@@ -16,9 +16,160 @@
   "def-pur-sheaf-hom",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n,W$, $s\\in S(W)$ and $f\\in H_R^n(P,J)(W)$. For each $i$ define a map on $\\mathcal C/W$ by sending a section $p\\in P^i(V)$, for $a:V\\to W$, to the tensor-unit image $s|_V\\otimes f^i_V(p)\\in (TJ^{i+n})(V)$. This is $R(V)$-linear in $p$: for $r\\in R(V)$, $s|_V\\otimes f^i_V(rp)=s|_V\\otimes r f^i_V(p)=r(s|_V\\otimes f^i_V(p))$. It commutes with restriction since both $f^i$ and the tensor units do. These maps form a section $a_W(s,f)$ of $H_R^n(P,TJ)$. Addition in $s,f$ is preserved; for $r\\in R(W)$ both $a_W(\\varphi(r)s,f)$ and $a_W(s,rf)$ have coordinate $s|_V\\otimes r|_V f^i_V(p)$. Thus $(s,f)\\mapsto a_W(s,f)$ is $R(W)$-bilinear. Its restriction along $W'\\to W$ is $a_{W'}(s|_{W'},f|_{W'})$, as checked on every further object of the slice.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "The module tensor universal property extends $a_W$ uniquely to an $R(W)$-linear map $S(W)\\otimes_{R(W)}H_R^n(P,J)(W)\\to H_R^n(P,TJ)(W)$. The restriction identity in step 1, together with uniqueness on pure tensors, makes these maps a morphism of presheaves of $R$-modules. The target is a sheaf by the product Hom construction. The module sheafification universal property therefore gives $\\alpha^n:T H_R^n(P,J)\\to H_R^n(P,TJ)$. Its formula is the one in the statement. Throughout the proof, equality of maps out of a sheafified tensor will be tested by precomposing the sheafification unit on every object, and then on pure tensors, using these same two universal properties. Equality into a product Hom sheaf means equality of every coordinate as a map on every slice object.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "Check the chain equation for $\\alpha$ by the equality test of step 2. For a degree-$n$ family $f$ and $p\\in P^i(V)$, the degree-$(n+1)$ coordinate of $d\\alpha(s\\otimes f)$ is\n$$s|_V\\otimes d_J^{i+n}f^i(p)-(-1)^n s|_V\\otimes f^{i+1}(d_P^i p)=s|_V\\otimes (d_H f)^i(p).$$\nHere $d_{TJ}=1\\otimes d_J$ and the signed Hom differential is precisely that of the cited definition. The last expression is $\\alpha(s\\otimes d_H f)^i(p)$. Tensor bilinearity and uniqueness through sheafification extend the equality to the source sheaf. Thus the degree maps $\\alpha^n$ form the required $R$-linear chain map.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "Let $\\eta_J:J\\to UEJ$ have degree components $x\\mapsto 1\\otimes x$, using the scalar-extension sheafification units. These are $R$-linear because $1\\otimes rx=\\varphi(r)\\otimes x$, compatible with restriction, and satisfy $d_{EJ}(1\\otimes x)=1\\otimes d_Jx$. Hence $\\eta_J$ is a chain map. Put $h=(Uq)\\eta_J:J\\to UN$. Functoriality of the product Hom complex gives the $R$-linear chain map $b=H_R(1_P,h):H_R(P,J)\\to H_R(P,UN)$ with $b(f)^i(p)=q^{i+n}(1\\otimes f^i(p))$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-slice-scalar-hom-chain-adjunction] with the actual $R$-complex $P$ and $S$-complex $N$. Its chain isomorphism $\\theta_{P,N}:U H_S(EP,N)\\to H_R(P,UN)$ has inverse sending a local family $k^i$ to the $S$-linear maps $t\\otimes p\\mapsto t k^i(p)$. Compose the chain map $b$ from step 4 with this inverse to obtain $\\beta:H_R(P,J)\\to U H_S(EP,N)$. It is $R$-linear, a chain map, and compatible with slice restriction. Its coordinates are\n$$\\beta(f)^i(t\\otimes p)=t\\,q^{i+n}(1\\otimes f^i(p)).$$\nThe cited statement explicitly supplies the inverse on all slices, its compatibility with restriction, and its chain property for unbounded product Hom complexes, without flatness. This step uses no scalar-evaluation comparison as an input.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "Write $G=H_S(EP,N)$. On each object $W$ the rule $(s,f)\\mapsto s\\beta_W(f)\\in G^n(W)$ is $R(W)$-bilinear: $\\beta$ is $R$-linear and the $R$-action on $UG$ is through $\\varphi$. Extend it by the module tensor universal property to $S(W)\\otimes_{R(W)}H_R^n(P,J)(W)\\to G^n(W)$. This extension is $S(W)$-linear since for $a\\in S(W)$ both images of $a(s\\otimes f)$ and $a\\,s\\beta_W(f)$ are $as\\beta_W(f)$, and tensors generate the module. Restriction compatibility follows from that of $\\beta$ and of scalar multiplication. We have a morphism of presheaves of $S$-modules, so the $S$-module sheafification universal property gives $\\sigma^n:E H_R^n(P,J)\\to G^n$. Step 5 yields exactly $\\sigma^n(s\\otimes f)^i(t\\otimes p)=st\\,q^{i+n}(1\\otimes f^i(p))$ on every slice.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "The signed differential of $G$ is $S$-linear. Since $\\beta$ is a chain map, on every outer pure tensor\n$$d_G\\sigma^n(s\\otimes f)=s\\,d_G\\beta(f)=s\\beta(d_Hf)=\\sigma^{n+1}(s\\otimes d_Hf).$$\nExplicitly, its coordinate at $t\\otimes p$ is\n$$st\\bigl(d_N^{i+n}q^{i+n}(1\\otimes f^i(p))-(-1)^n q^{i+n+1}(1\\otimes f^{i+1}(d_P^ip))\\bigr)\n=st\\,q^{i+n+1}(1\\otimes(d_Hf)^i(p)),$$\nusing $d_Nq=q d_{EJ}$ and $d_{EJ}(1\\otimes x)=1\\otimes d_Jx$. The inverse formula in the cited slice adjunction determines each inner map from its values at $1\\otimes p$, so this coordinate check is an equality of sheaf maps on the slice. The tensor and sheafification equality test of step 2 now proves the outer chain equation. Thus $\\sigma$ is an $S$-linear chain map.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "Suppose $\\widetilde\\sigma$ is another $S$-linear chain map with the asserted formula. On each object and outer generator $s\\otimes f$, the families $\\widetilde\\sigma(s\\otimes f)$ and $\\sigma(s\\otimes f)$ agree after evaluation at $1\\otimes p$, in every coordinate and over every further slice object. The injectivity of the slice adjunction $g\\mapsto(p\\mapsto g(1\\otimes p))$ makes their coordinate maps equal; the product Hom definition then makes the families equal. The module tensor and sheafification universal properties give $\\widetilde\\sigma^n=\\sigma^n$ for every $n$, hence equality of chain maps. This proves the stated uniqueness without supposing tensor sheaf sections globally have pure-tensor representatives.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "def-pur-hom-complex",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "For the first naturality equation, work in degree $n$ on $s\\otimes f$, coordinate $i$, over an arbitrary further slice object $V$, at $p'\\in P'^i(V)$. Its left side evaluates to $s|_V\\otimes v^{i+n}(f^i(u^i(p')))$. Its right side evaluates to the identical expression, since $H_R(u,v)(f)^i=v^{i+n}f^iu^i$. Coordinate equality on all $V$, followed by the outer tensor and sheafification equality test, proves $H_R(u,Tv)\\alpha_{P,J}=\\alpha_{P',J'}T H_R(u,v)$. The maps being compared are chain maps since $u,v$ are chain maps and $H_R$ is the bifunctor of the cited definition.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  },
+  {
+   "text": "For the second equation use the same outer tensor and evaluate the inner coordinate on $t\\otimes p'$. The left side is\n$$st\\,w^{i+n}q^{i+n}(1\\otimes f^i(u^i(p'))),$$\nbecause $Eu(t\\otimes p')=t\\otimes u(p')$ and $w$ is $S$-linear. The right side is\n$$st\\,q'^{i+n}(1\\otimes v^{i+n}(f^i(u^i(p')))).$$\nThese agree by the assumed equality $q'Ev=wq$ in degree $i+n$, applied to $1\\otimes f^i(u^i(p'))$. The slice adjunction detects equality of the inner $S$-linear maps, product coordinates detect equality of Hom sections, and tensor generation followed by sheafification uniqueness detects equality of the outer maps. This proves $H_S(Eu,w)\\sigma_{P,J,q}=\\sigma_{P',J',q'}E H_R(u,v)$. All constructions used arbitrary local families and termwise scalar extension, so no bound or finiteness condition entered.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-slice-scalar-hom-chain-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CZ (lemma-adjointness-tensor-restrict), 03EK (section-tensor-product); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent coordinate construction from these universal properties."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +205,52 @@
    "results": "Returned SheafOfModules.Presentation.map_π_eq, HomologicalComplex.ιTensorObj, SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.map_smul_eq, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.map_ιFree_mapFree_hom_assoc, PresheafOfModules.Monoidal.tensorHom",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|extendScalars|restrictScalars|eval",
+   "results": "Returned Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean, Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules scalar extension internal Hom evaluation chain map commutes with signed differential",
+   "results": "Returned CochainComplex.HomComplex.δ_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, HomologicalComplex.instModuleHom, SheafOfModules.evaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.CoextendScalars.hasSMul, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, ModuleCat.CoextendScalars.obj'",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of sheaf internal product Hom complexes has an evaluation chain map natural in both input complexes",
+   "results": "Returned CategoryTheory.sheafHomHasNSMul, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.sheafHomHasZSMul, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, PresheafOfModules.Monoidal.tensorHom, LightCondensed.ihom_map_val_app, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|tensorHom|HomComplex|extendScalars",
+   "results": "No hits; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced local bilinear evaluation constructs the scalar tensor comparison for internal Hom of unbounded sheaf complexes without commuting tensor with infinite products",
+   "results": "Returned LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_apply, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary module scalar adjunction, cochains in a linear category, presheaf tensor maps or light condensed internal Homs; none states the scalar evaluation comparison for product Hom complexes of modules over arbitrary ring sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-hom-scalar-chain-identification",
@@ -77,5 +270,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-hom-chain-evaluation",
+  "worker": "stage1",
+  "summary": "Constructed alpha by local bilinear evaluation and module sheafification. Constructed sigma from the independent normalized slice scalar-Hom chain adjunction and scalar extension of its R-linear evaluation map. Wrote the signed differential calculations, uniqueness on sheafification units, and both input naturality computations. Statement unchanged; no new nodes. All existing searches retained and six logged Q40 searches added.",
+  "blueprint": "Serves the coefficient-passage clause recorded in blueprint.from.place (old final paragraph of lem-sfb-dc-hom-preserves); realizes alpha/sigma portions of the parent lem-sfb-hom-scalar-chain-identification, not a new constructibility argument."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-ab7886045",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-ab7886045 (reviewer sub-agent of L); spot-checked: Read the whole item, its ten steps, all eight cited statements (seven definitions plus the slice adjunction), Stacks 03CY/03CZ/03EK/0A8X and the main-20261015 lem-sfb-dc-hom-preserves proof (the inherited from.place matches). No new nodes. The statement, stmt_deps and blueprint field are identical to the live node, which is still unsplit. The item is not on the dropped list, has no repair note and cites no SGA. The only non-definition dependency is lem-sfb-slice-scalar-hom-chain-adjunction, in the same unit. Q41's parallel split of that node does not cite this item, the parent or the coherence node, so there is no cycle. I recomputed every step. Step 1: alpha's local map is R-linear and bilinear in (s,f). Step 3: alpha's chain equation holds with no extra sign, because T is applied termwise. Step 4: eta_J and b=H_R(1,Uq eta) are correct. Step 5: beta=theta^{-1}b is an R-linear chain map by the cited statement. Step 6: sigma is well defined by bilinearity through phi and S-sheafification. Step 7: its chain equation holds, with the indices and the (-1)^n checked. Step 8: uniqueness follows from injectivity of g->g(1 tensor -), then product coordinates, then the tensor and sheafification universal properties. Steps 9-10: both naturality equations hold, the second exactly by q' Ev = w q. Small cases: Z->Z/2 with P=J=Z gives identities; P=Z/2, J=Z gives a non-invertible sigma, as the statement allows; also degree shifts, zero complexes and unbounded complexes. Duplicate search over the DAG: flat-evaluation-roof and strict-numerator-transpose are derived/K-injective model statements, not this chain map. proof_deps equals the union of the step uses; the searches cover all three kinds. No tool_uses and no changes."
  }
 }
