@@ -119,6 +119,70 @@ theorem finiteColimit_matrix_cokernels
           ∀ u' : H.obj cp.pt ≅ cq.pt,
             H.map cp.π ≫ u'.hom = (finiteColimitBiproductIso H X Y e n).hom ≫ cq.π →
               u' = u)) := by
-  sorry
+  classical
+  have : H.Additive := rightExactFunctor_le_additiveFunctor B D H
+    (by simpa only [rightExactFunctor_iff] using (inferInstance : PreservesFiniteColimits H))
+  have hi (r : ℕ) (j : Fin r) :
+      H.map (biproduct.ι (fun _ : Fin r ↦ X) j) ≫
+          (finiteColimitBiproductIso H X Y e r).hom =
+        e.hom ≫ biproduct.ι (fun _ : Fin r ↦ Y) j := by
+    simp only [finiteColimitBiproductIso, Iso.trans_hom, mapIso_hom, Iso.symm_hom,
+      biproduct.mapIso_hom]
+    rw [← Category.assoc, ← Category.assoc, ← Category.assoc, ← H.map_comp]
+    rw [biproduct.isoCoproduct_hom, biproduct.ι_desc]
+    have hc : H.map (Sigma.ι (fun _ : Fin r ↦ X) j) ≫
+        (PreservesCoproduct.iso H (fun _ : Fin r ↦ X)).hom =
+        Sigma.ι (fun _ : Fin r ↦ H.obj X) j :=
+      IsColimit.comp_coconePointUniqueUpToIso_hom
+        (isColimitOfHasCoproductOfPreservesColimit H (fun _ : Fin r ↦ X))
+        (colimit.isColimit _) (Discrete.mk j)
+    rw [hc, biproduct.isoCoproduct_inv]
+    simp
+  have hp (r : ℕ) (j : Fin r) :
+      (finiteColimitBiproductIso H X Y e r).hom ≫
+          biproduct.π (fun _ : Fin r ↦ Y) j =
+        H.map (biproduct.π (fun _ : Fin r ↦ X) j) ≫ e.hom := by
+    rw [← cancel_epi (H.mapBiproduct (fun _ : Fin r ↦ X)).inv]
+    apply biproduct.hom_ext'
+    intro k
+    simp only [mapBiproduct_inv, biproduct.ι_desc_assoc]
+    rw [← Category.assoc, hi, Category.assoc, ← H.map_comp_assoc]
+    by_cases h : k = j
+    · subst k
+      simp
+    · simp [biproduct.ι_π_ne _ h]
+  refine ⟨inferInstance, hi, hp, ?_⟩
+  intro m n p q h
+  have hs : H.map (biproduct.matrix (fun j i ↦ p i j)) ≫
+        (finiteColimitBiproductIso H X Y e n).hom =
+      (finiteColimitBiproductIso H X Y e m).hom ≫
+        biproduct.matrix (fun j i ↦ q i j) := by
+    rw [← cancel_epi (H.mapBiproduct (fun _ : Fin m ↦ X)).inv]
+    apply biproduct.hom_ext'
+    intro j
+    apply biproduct.hom_ext
+    intro i
+    simp only [mapBiproduct_inv, biproduct.ι_desc_assoc, Category.assoc, hp]
+    simp only [← Category.assoc, hi]
+    simp only [Category.assoc, biproduct.matrix_π, biproduct.ι_desc]
+    rw [← H.map_comp_assoc, ← H.map_comp_assoc]
+    simpa only [Category.assoc, biproduct.matrix_π, biproduct.ι_desc] using h i j
+  refine ⟨hs, ?_⟩
+  intro cp cq hcp hcq
+  let φ : Arrow.mk (H.map (biproduct.matrix (fun j i ↦ p i j))) ≅
+      Arrow.mk (biproduct.matrix (fun j i ↦ q i j)) :=
+    Arrow.isoMk (finiteColimitBiproductIso H X Y e m)
+      (finiteColimitBiproductIso H X Y e n) hs.symm
+  let u := CokernelCofork.mapIsoOfIsColimit (cp.mapIsColimit hcp H) hcq φ
+  refine ⟨u, ?_, ?_, ?_⟩
+  · simpa [u, φ] using CokernelCofork.π_mapOfIsColimit (cp.mapIsColimit hcp H) cq φ.hom
+  · simp [u, φ]
+  · intro u' hu'
+    apply Iso.ext
+    apply Cofork.IsColimit.hom_ext (cp.mapIsColimit hcp H)
+    change H.map cp.π ≫ u'.hom = H.map cp.π ≫ u.hom
+    rw [hu']
+    simpa [u, φ] using
+      (CokernelCofork.π_mapOfIsColimit (cp.mapIsColimit hcp H) cq φ.hom).symm
 
 end CategoryTheory.Functor
