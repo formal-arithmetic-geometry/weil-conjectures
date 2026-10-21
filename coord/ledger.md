@@ -20902,3 +20902,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/NG/lem-fix-cofinal-roos-restriction (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q39/lem-sfb-scalar-hom-chain-coefficient-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q89/lem-trf-integral-point-transport-tower-powers (reviewer PASS; after a return; new nodes: 3)
+- 08:08 L: merged deliver/Q09/lem-sfb-local-finite-presentation-inverse-image (reviewer PASS; first push; new nodes: 0)

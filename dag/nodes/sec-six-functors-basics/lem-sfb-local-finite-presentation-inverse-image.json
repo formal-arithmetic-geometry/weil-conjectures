@@ -20,9 +20,153 @@
   "sk-def-sfb-change-of-scalars",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small site presentations fixed in [def-weil-pbc-proetale-site], in one larger universe. On each scheme involved the category of abelian sheaves is abelian by [lem-sfb-grothendieck-sheafification]. By [sk-def-sfb-sheaf-tensor] its tensor product is closed and preserves colimits in either variable. In particular it is additive in either variable, so [lem-sfb-modobj-abelian] applies to every ring object occurring here; finite biproducts and cokernels therefore exist in the module categories. Each $g^*$ is a left adjoint by [def-sfb-finite-upper-lower-star-adjunction], hence preserves finite colimits by [lem-weil-pbc-left-adjoint-preserves-colimits], and is additive by [lem-sfb-preserving-colimits-additive]. The strong monoidal structures are symmetric by [lem-sfb-finite-upper-star-braided], so the image rings remain commutative. These facts apply to arbitrary scheme morphisms, without assumptions on $f$ or on the ring.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-grothendieck-sheafification",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-abelian",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "lem-sfb-finite-upper-star-braided"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Final two sentences: ambient hypotheses for right exactness and finite free modules; Stacks 0038 (categories.tex, lemma-adjoint-exact), 010N (homology.tex, lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Since $u_i$ is weakly étale, its base change $v_i$ is weakly étale by [sk-lem-pe-weakly-etale-stability]. The given family is fpqc by [def-weil-pbc-proetale-covering]; [lem-weil-pbc-fpqc-covering-axioms](3), applied to the arbitrary map $f:X\\to Y$, says that the family $\\{X\\times_YU_i\\to X\\}$ is fpqc. Thus it is precisely a pro-étale covering by the same definition. No refinement or change of the index set is made.",
+   "uses": [
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Sentence 'Its base change'; Stacks 022D (topologies.tex, lemma-fpqc), part (3)"
+   }
+  },
+  {
+   "text": "Write $c_{a,b}:(a\\circ b)^*\\xrightarrow{\\sim}b^*a^*$ for [def-sfb-finite-upper-star-comp]. These are monoidal for the actual mate structures of [def-sfb-finite-upper-star-monoidal], as follows. For each $g$, its adjunction unit and counit are monoidal by [lem-sfb-finite-monoidal-adjunction]. The unit of a composite adjunction is the composite of the first unit and the image of the second, by [def-weil-pbc-composite-adjunction]; substituting the unit and tensor equations shows it is monoidal too. Fix $a,b$, put $L=(a b)^*$, $R=(a b)_*$, $K=b^*a^*$, $J=a_*b_*$, and let $s:J\\cong R$ be the monoidal pushforward compositor of [lem-sfb-pushforward-comp-monoidal]. With unit $\\eta^K$ of $K\\dashv J$ and counit $\\epsilon^L$ of $L\\dashv R$, the inverse mate formula of [def-weil-pbc-adjunction-mate] gives\n$$c_A=\\epsilon^L_{KA}\\,L(s_{KA})\\,L(\\eta^K_A).$$\nEach factor is a whiskering of a monoidal transformation by strong monoidal functors. Inserting each factor's unit/tensor equation in this three-factor composite gives the unit/tensor equations for $c$; thus the specified compositor is monoidal. For fixed $i$, put $P=v_i^*f^*$ and $Q=h_i^*u_i^*$. The equality $f v_i=u_i h_i$ from [def-pc-fibre-product] defines $e=c_{u_i,h_i}c_{f,v_i}^{-1}:P\\xrightarrow{\\sim}Q$, which is monoidal by inverting and composing these equations. Set $\\beta_i=e_R$. Naturality at multiplication and monoidality give\n$$e_R P(m_R)\\mu^P_{R,R}=Q(m_R)\\mu^Q_{R,R}(e_R\\otimes e_R).$$\nThe unit equation gives preservation of the transported unit. By [def-sfb-modobj-transport], these are exactly the ring-homomorphism equations, so $\\beta_i:P(R)\\cong Q(R)$ is the required ring-object isomorphism.",
+   "uses": [
+    "def-sfb-finite-upper-star-comp",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-finite-monoidal-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-sfb-pushforward-comp-monoidal",
+    "def-pc-fibre-product",
+    "def-sfb-modobj-transport",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Pullbacks compose and the cover restriction comparison; explicit unit/counit expression of the mate, using the monoidal pushforward compositor and the specified monoidal adjunctions"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-restricted-transport-comparison-linear] with $F=f^*$, $G=v_i^*$, $H=Q$, $A=R$, $B=f^*R$, $B'=v_i^*f^*R$, both $\\psi$ and $\\psi'$ identities, and $\\varphi=\\beta_i=e_R$. Its required equality $\\varphi=e_A G(\\psi)\\psi'$ is then the defining equality of $\\beta_i$. It gives the $P(R)$-linear map $e_M$ to $\\operatorname{Res}_{\\beta_i}\\operatorname{mapMod}(Q)(M)$. Its underlying map is invertible; multiplying its linearity equation by its inverse proves that inverse linear too. Finally, the composite tensorator is $G(\\mu^F)\\mu^G$. Substitution into the action formula of [def-sfb-modobj-transport] gives $\\operatorname{mapMod}(GF)(M)=T_{v_i}T_fM$ and $\\operatorname{mapMod}(Q)(M)=T_{h_i}T_{u_i}M$ with their actual actions, not just their underlying sheaves. This is the required module isomorphism.",
+   "uses": [
+    "lem-sfb-restricted-transport-comparison-linear",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "The restriction of pullback is pullback of the restriction: linearity of the specified composition comparison"
+   }
+  },
+  {
+   "text": "Put $A_i=u_i^*R$, $S_i=h_i^*A_i$ and $A'_i=v_i^*f^*R$, so $\\beta_i:A'_i\\cong S_i$. The adjunction for $h_i^*$ is monoidal by [lem-sfb-finite-monoidal-adjunction]. Consequently [def-sfb-modobj-transport-adjunction] supplies a right adjoint to $T_{h_i}$ for the ring $A_i$. By [lem-weil-pbc-left-adjoint-preserves-colimits], $T_{h_i}$ preserves finite colimits, in particular cokernel coforks, and by [lem-sfb-preserving-colimits-additive] it preserves zero maps. Let $C_i=\\operatorname{coker}(d_i)$ with its specified cokernel arrow $q_i:A_i^{n_i}\\to C_i$. Then $T_{h_i}(q_i)$ is a cokernel of $T_{h_i}(d_i)$. Applying $T_{h_i}$ to the given isomorphism $T_{u_i}M\\cong C_i$ identifies $T_{h_i}T_{u_i}M$ with its codomain. All colimit shapes used here are finite and hence small.",
+   "uses": [
+    "lem-sfb-finite-monoidal-adjunction",
+    "def-sfb-modobj-transport-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Sentence \"The pullback is right exact\"; Stacks 0038 (categories.tex, lemma-adjoint-exact), part (1)"
+   }
+  },
+  {
+   "text": "For every $k\\geq0$, apply [lem-sfb-monoidal-finite-free-transport] to $P=h_i^*$, the ring $A_i$, and the identity basis isomorphism of $A_i^k$. Its hypotheses hold by step 1 and the given strong monoidal structure. It gives $S_i^k\\cong T_{h_i}(A_i^k)$, with the specified basis and coordinate maps. Restrict its inverse along $\\beta_i$. The map $\\beta_i^{-1}:\\operatorname{Res}_{\\beta_i}S_i\\to A'_i$ is $A'_i$-linear because\n$$\\beta_i^{-1}m_{S_i}(\\beta_i\\otimes1)=m_{A'_i}(1\\otimes\\beta_i^{-1}).$$\nApplying it in each of the $k$ coordinates gives $\\operatorname{Res}_{\\beta_i}(S_i^k)\\cong(A'_i)^k$. Explicitly its coordinate maps are $\\beta_i^{-1}\\pi_j$, and its inverse has components $\\iota_j\\beta_i$. Their two composites are identities by the Kronecker and sum identities in [def-sfb-finitely-presented-module]; they are linear because the actions are componentwise and restriction changes an action by precomposition as in [sk-def-sfb-change-of-scalars](1). Composing gives the claimed canonical identification $a_k:\\operatorname{Res}_{\\beta_i}T_{h_i}(A_i^k)\\cong(A'_i)^k$. For $k=0$ the same calculation is the empty sum identity on the zero module.",
+   "uses": [
+    "lem-sfb-monoidal-finite-free-transport",
+    "def-sfb-finitely-presented-module",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Sentence \"it carries free modules of finite rank to free modules of the same rank\"; explicit restriction across the ring isomorphism"
+   }
+  },
+  {
+   "text": "Let $H_i=\\operatorname{Res}_{\\beta_i}T_{h_i}$. By [sk-def-sfb-change-of-scalars](3), restriction preserves colimits: its hypotheses of closedness, equalizers and colimit-preserving tensor hold by step 1. Thus $H_i(q_i)$ is a cokernel of $H_i(d_i)$ by step 5. Define\n$$d'_i=a_{n_i}H_i(d_i)a_{m_i}^{-1},\\qquad q'_i=H_i(q_i)a_{n_i}^{-1}.$$\nThen $q'_i d'_i=0$. If a module map $t:(A'_i)^{n_i}\\to N$ kills $d'_i$, the map $t a_{n_i}$ kills $H_i(d_i)$, since $(t a_{n_i})H_i(d_i)=t d'_i a_{m_i}=0$. The cokernel property gives a unique $b:H_i(C_i)\\to N$ with $bH_i(q_i)=t a_{n_i}$, equivalently $bq'_i=t$. This proves directly that $H_i(C_i)$ with $q'_i$ is a cokernel of the stated $d'_i$. The two universal factorizations between this cokernel and the chosen $\\operatorname{coker}(d'_i)$ are inverse by uniqueness, using [def-sfb-finitely-presented-module]. Compose that isomorphism with $H_i$ of the specified presentation and the isomorphism of step 4. The result is exactly $T_{v_i}T_fM\\cong\\operatorname{coker}(d'_i)$, with ranks $m_i,n_i$ unchanged.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Final sentence: the actual transported differential, cokernel arrow and induced presentation"
+   }
+  },
+  {
+   "text": "Step 2 gives the specified covering $\\{v_i\\}$. For each index, step 7 is a finite presentation of $T_{v_i}(T_fM)$ over $v_i^*f^*R$ in the precise sense of [def-sfb-finitely-presented-module]. Therefore this same covering and these presentations witness [def-sfb-locally-finitely-presented] for $T_fM$. No step used flatness of a module or a Noetherian ring. If the cover is empty (possible on the empty scheme), this last universal condition is vacuous; the zero-rank cases were already included in step 6.",
+   "uses": [
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Final sentence: local finite presentation on the specified base-changed cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-grothendieck-sheafification",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-abelian",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-sfb-finite-upper-star-braided",
+  "sk-lem-pe-weakly-etale-stability",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-monoidal-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sfb-pushforward-comp-monoidal",
+  "def-pc-fibre-product",
+  "def-sfb-modobj-transport",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-restricted-transport-comparison-linear",
+  "def-sfb-modobj-transport-adjunction",
+  "def-sfb-finitely-presented-module",
+  "lem-sfb-monoidal-finite-free-transport",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-locally-finitely-presented"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+  "place": "Chosen cover, its base change, and the final right-exactness/finite-free/cokernel argument, expanded using existing DAG statements and the explicit adjunction mate formula; Stacks Tags 022D, 0038 and 010N as indicated in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +237,87 @@
    "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.mapFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.Presentation.map, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree. Presentation.map and presentationOfIsCokernelFree concern SheafOfModules; no hit gives the internal-module comparison for a specified base-changed covering and presentation.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isMonoidal.*[Cc]onjugate|[Cc]onjugate.*[Ii]sMonoidal|[Mm]onoidal.*[Mm]ate|[Mm]ate.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T07:27:37Z\", \"tool\": \"grep\", \"query\": \"isMonoidal.*[Cc]onjugate|[Cc]onjugate.*[Ii]sMonoidal|[Mm]onoidal.*[Mm]ate|[Mm]ate.*[Mm]onoidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"fcadc661d69c22a8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-21T07:27:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateIsoEquiv, \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate natural isomorphism between strong monoidal left adjoints of a monoidal natural isomorphism between right adjoints is monoidal",
+   "results": "{\"t\": \"2026-10-21T07:27:38Z\", \"tool\": \"leanfinder\", \"query\": \"The conjugate natural isomorphism between strong monoidal left adjoints of a monoidal natural isomorphism between right adjoints is monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.conjugateEquiv_symm_iso\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\"], \"digest\": \"18933000627e13b8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|IsLocallyFinitelyPresented|pullbackObjFreeIso|presentationOfIsCokernelFree",
+   "results": "{\"t\": \"2026-10-21T07:28:09Z\", \"tool\": \"grep\", \"query\": \"mapMod|IsLocallyFinitelyPresented|pullbackObjFreeIso|presentationOfIsCokernelFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"12785e44883b4356\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the hits concern sectionwise SheafOfModules or scheme finite-presentation predicates, not this specified-cover internal-module statement; read Quasicoherent.lean:114,180, PullbackFree.lean:118 and Mon.lean:856"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of internal ring object modules preserves a chosen local finite free cokernel presentation on the base changed pro etale covering",
+   "results": "{\"t\": \"2026-10-21T07:28:09Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of internal ring object modules preserves a chosen local finite free cokernel presentation on the base changed pro etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Presentation.cokernel\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.mapFree\"], \"digest\": \"c0f5f04d7ac74463\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the hits concern sectionwise SheafOfModules or scheme finite-presentation predicates, not this specified-cover internal-module statement; read Quasicoherent.lean:114,180, PullbackFree.lean:118 and Mon.lean:856"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-21T07:28:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"95e7e1e616904645\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the hits concern sectionwise SheafOfModules or scheme finite-presentation predicates, not this specified-cover internal-module statement; read Quasicoherent.lean:114,180, PullbackFree.lean:118 and Mon.lean:856"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary internal modules over an abelian pro etale sheaf ring object, inverse image transports a chosen finite free cokernel presentation to the specified base changed cover with identical ranks",
+   "results": "{\"t\": \"2026-10-21T07:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary internal modules over an abelian pro etale sheaf ring object, inverse image transports a chosen finite free cokernel presentation to the specified base changed cover with identical ranks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation.map_relations_I\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.Presentation.mapGenerators\"], \"digest\": \"21e07ca10753b5a3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the hits concern sectionwise SheafOfModules or scheme finite-presentation predicates, not this specified-cover internal-module statement; read Quasicoherent.lean:114,180, PullbackFree.lean:118 and Mon.lean:856"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate|[Ii]sMonoidal|ofNatIso|[Mm]onoidal.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-21T07:28:31Z\", \"tool\": \"grep\", \"query\": \"conjugate|[Ii]sMonoidal|ofNatIso|[Mm]onoidal.*[Cc]omp\", \"sub\": \"CategoryTheory/Monoidal/Functor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"240\", \"378\", \"438\", \"442\", \"446\"], \"digest\": \"3a543550dd978da0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A conjugate natural transformation of monoidal adjunctions is monoidal",
+   "results": "{\"t\": \"2026-10-21T07:28:32Z\", \"tool\": \"leansearch\", \"query\": \"A conjugate natural transformation of monoidal adjunctions is monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"CategoryTheory.conjugateEquiv_comp\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.NatTrans.IsMonoidal.mk\", \"CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory\", \"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.conjugateEquiv\"], \"digest\": \"016fd40473adde68\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate between monoidal adjunctions of a monoidal natural transformation of right adjoints is a monoidal transformation of left adjoints",
+   "results": "{\"t\": \"2026-10-21T07:28:32Z\", \"tool\": \"leanfinder\", \"query\": \"The mate between monoidal adjunctions of a monoidal natural transformation of right adjoints is a monoidal transformation of left adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.unit_mateEquiv\"], \"digest\": \"81098c6fb9a2e86c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the monoidal-conjugate auxiliary question: hits give mates, unit/counit monoidality and composition separately; no new node needed, since the explicit three-factor mate formula and existing monoidal adjunction/compositor nodes prove the needed comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback preserves locally finitely presented internal modules over an arbitrary ring object on the small pro etale site of a scheme",
+   "results": "{\"t\": \"2026-10-21T07:28:55Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback preserves locally finitely presented internal modules over an arbitrary ring object on the small pro etale site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\"], \"digest\": \"88743e6662b8e5d3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: the hits concern sectionwise SheafOfModules or scheme finite-presentation predicates, not this specified-cover internal-module statement; read Quasicoherent.lean:114,180, PullbackFree.lean:118 and Mon.lean:856"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-upper-star-preserves",
@@ -113,5 +334,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-local-finite-presentation-inverse-image",
+  "worker": "stage1",
+  "summary": "Expanded the specified-cover assertion into eight steps. Reused existing cover stability, monoidality of the specified composition mates, restricted comparison linearity, module transport adjunction, finite-free transport, and change-of-scalars statements. Wrote the differential and the universal cokernel factorization explicitly; no statement change and no new nodes. Checked rank zero, zero rings, empty covers, arbitrary morphisms and the direction of the ring comparison.",
+  "blueprint": "Realizes lem-sfb-dc-upper-star-preserves.proof.md from 'Choose a pro-étale cover' through its final sentence: steps 1 and 5 justify right exactness, step 2 base-changes the chosen cover, steps 3–4 give its ring/module comparison, step 6 preserves finite free ranks, and steps 7–8 construct the displayed cokernel presentation and its local witness.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-monoidal-finite-free-transport",
+    "why": "Generic additive strong monoidal finite-basis transport supplies the actual basis/coordinate isomorphism in step 6; this unit does not separately state that foundational fact."
+   },
+   {
+    "node": "lem-sfb-pushforward-comp-monoidal",
+    "why": "Generic monoidality of the sheaf pushforward compositor supplies the middle factor of the explicit mate in step 3, proving monoidality for the specified inverse-image composition rather than choosing another comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-monoidal-finite-free-transport",
+  "lem-sfb-pushforward-comp-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-415a7aa4c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-415a7aa4c (reviewer sub-agent of L); spot-checked: I read the full delivery: the item proof (8 steps), every cited statement, the main-20261015 blueprint proof of lem-sfb-dc-upper-star-preserves (the sentences from 'Choose a pro-étale cover' to the end) and the unit route. The delivery is one commit with the item and its report; there are 0 new nodes, the statement is unchanged and there is no SGA. Every step's uses match its text and proof_deps, and there is no cycle (the item is not in its 305-node closure). Step 2: fpqc-covering-axioms(3) holds for any T'→T and weakly étale is stable under base change, so the base change of the cover covers X. V_i is U-small, so it is an X_proét object. Step 3: I checked the inverse mate formula c_A=ε^L_{KA}L(s_{KA})L(η^K_A) against def-weil-pbc-adjunction-mate and the conjugate direction in def-sfb-finite-upper-star-comp. Each factor is monoidal: the composite unit, the pushforward compositor from lem-sfb-pushforward-comp-monoidal (its canonical lax structure is the def-sfb-finite-lower-star-lax-monoidal one for Ab), and the counit. Since f v = u h, e is well typed and β=e_R is a ring isomorphism A'→S. Step 4: the parameters of restricted-transport-comparison-linear check out (ψ=ψ'=id, φ=β), and mapMod of the composite is T_hT_u. Step 5: the mate condition of modobj-transport-adjunction holds because mates are a bijection, so T_h is a left adjoint and preserves cokernels. Step 6: finite-free transport gives the basis maps; I verified the linearity of β^{-1} from β m=m(β⊗β), and the k=0 case. Step 7: Res_β preserves colimits by change-of-scalars(3), and I checked the cokernel of d'=a_nH(d)a_m^{-1} by hand. Edge cases checked: f=id, ranks 0, R=0, empty cover, non-flat f. Route: only lem-sfb-monoidal-finite-free-transport is off-route; it is a declared tool use and I accept it as generic. Duplicates: lfp-scalar-isomorphism, proetale-fp-local-models-pullback and internal-scalar-extension are different statements. Maintainer note: lem-weil-pbc-proetale-module-lfp-immersion-transport (with i=id) gives only the existential lfp clause, not the specified cover, β or d'. No fixes."
  }
 }
