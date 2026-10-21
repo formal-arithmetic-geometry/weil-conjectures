@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeComparison
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeComparison
 import all WeilConjectures.AlgebraicGeometry.AbelianRawPullbackComposition
 import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality

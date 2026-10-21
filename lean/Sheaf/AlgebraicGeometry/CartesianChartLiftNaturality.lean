@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all Sheaf.AlgebraicGeometry.CartesianChartExchangeComparison
+import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeComparison
 import all WeilConjectures.AlgebraicGeometry.AbelianRawPullbackComposition
 import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
@@ -78,39 +78,84 @@ theorem cartesianChartCohomologyLift_naturality
         (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
           (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
           (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
-  have hBl_hom : ((cartesianChartDiagram f D j).obj l).hom = pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) := by
+  have hBl_hom : ((cartesianChartDiagram f D j).obj l).hom = pullback.snd (D.map l.hom).left
+    (pullback.snd f (D.obj j).hom) := by
     exact chartDiagram_obj_hom f D j l
-  have hBm_hom : ((cartesianChartDiagram f D j).obj m).hom = pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) := by
+  have hBm_hom : ((cartesianChartDiagram f D j).obj m).hom = pullback.snd (D.map m.hom).left
+    (pullback.snd f (D.obj j).hom) := by
     exact chartDiagram_obj_hom f D j m
-  letI := isIso_rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W
-  letI := isIso_rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W
-  have hl1 : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ pullback.fst (D.map l.hom).left (pullback.snd f (D.obj j).hom) =
+  let := isIso_rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f
+    (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left
+    (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj
+    j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W
+  let := isIso_rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left (pullback.snd f
+    (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map m.hom).left
+    (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj
+    j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W
+  have hl1 : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map
+    l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫
+    pullback.fst (D.map l.hom).left (pullback.snd f (D.obj j).hom) =
       pullback.fst (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (D.map a.left).left := by
     rw [chartDiagram_map_left f D j l m a]
     exact pullback.lift_fst _ _ _
-  have hl2 : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) =
+  have hl2 : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map
+    l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫
+    pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) =
       pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) := by
     rw [chartDiagram_map_left f D j l m a]
     exact pullback.lift_snd _ _ _
-  have hwh : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) = (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) := by
+  have hwh : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map
+    l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫
+    (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+    j).hom)) = (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f
+    (D.obj j).hom)) := by
     dsimp only 
-    change (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) =
-      pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)
+    change (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map
+      l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left)
+      ≫ (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+      j).hom)) =
+      pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+        j).hom)
     rw [← Category.assoc, hl2]
-  have hcomp_eq : ((cartesianChartDiagram f D j).obj m).hom = (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ ((cartesianChartDiagram f D j).obj l).hom := by
+  have hcomp_eq : ((cartesianChartDiagram f D j).obj m).hom = (show pullback (D.map m.hom).left
+    (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom)
+    from ((cartesianChartDiagram f D j).map a).left) ≫ ((cartesianChartDiagram f D j).obj l).hom
+    := by
     rw [hBm_hom, hBl_hom]
     exact hl2.symm
-  have hw : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫ (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) =
-      pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom) := by
+  have hw : (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map
+    l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) ≫
+    (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+    j).hom)) =
+      pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+        j).hom) := by
     rw [← Category.assoc, hl2]
-  have hz'' : ((asIso (rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom) (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D j).map a) W x)) = abelianHigherDirectImageRawPullback (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left)
-      (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom))
-      (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) hw q
-      (((pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F))
-      (((pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F))
-      ((upperStarComp AddCommGrpCat.{u + 1} (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left)
+  have hz'' : ((asIso (rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left
+    (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map
+    m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f
+    (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv (restrictedOverCohomologyMap
+    (pullback.snd f (D.obj j).hom) (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj
+    F) (q : ℤ) ((cartesianChartDiagram f D j).map a) W x)) = abelianHigherDirectImageRawPullback
+    (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left
+    (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left)
+      (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+        j).hom))
+      (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj
+        j).hom)) hw q
+      (((pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u +
+        1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F))
+      (((pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u +
+        1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F))
+      ((upperStarComp AddCommGrpCat.{u + 1} (show pullback (D.map m.hom).left (pullback.snd f
+        (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from
+        ((cartesianChartDiagram f D j).map a).left)
         (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))
-        (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom)) hl2.symm).inv.app (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W ((asIso (rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv x) :=
+        (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom)) hl2.symm).inv.app
+          (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W ((asIso
+          (rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f
+          (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left
+          (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj
+          j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv x) :=
     chart_inverse_comparison_map f D c F q j W V r hr l m a x hl2 hw
   have hcomp := chartPull_adj_naturality
     f (D.obj j).hom (D.map l.hom).left (D.obj l.left).hom
@@ -122,11 +167,23 @@ theorem cartesianChartCohomologyLift_naturality
           _ = (D.map a.left ≫ D.map l.hom).left := by
             rw [D.map_comp])
       (D.obj m.left).hom (Over.w (D.map m.hom)).symm (by
-        exact (Over.w (D.map a.left)).symm) (show pullback (D.map m.hom).left (pullback.snd f (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from ((cartesianChartDiagram f D j).map a).left) hl1 hl2 hw
+        exact (Over.w (D.map a.left)).symm) (show pullback (D.map m.hom).left (pullback.snd f
+          (D.obj j).hom) ⟶ pullback (D.map l.hom).left (pullback.snd f (D.obj j).hom) from
+          ((cartesianChartDiagram f D j).map a).left) hl1 hl2 hw
       (c.π.app l.left).left (c.π.app m.left).left
         (congrArg (fun t ↦ t.left) (c.w a.left)).symm
       (c.π.app j).left
-        (congrArg (fun t ↦ t.left) (c.w l.hom)).symm F q W V r hr ((asIso (rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv x) ((asIso (rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map m.hom).left (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom) (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D j).map a) W x))
+        (congrArg (fun t ↦ t.left) (c.w l.hom)).symm F q W V r hr ((asIso
+          (rawRestrictedCohomologyComparison (pullback.snd (D.map l.hom).left (pullback.snd f
+          (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map l.hom).left
+          (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj
+          j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv x) ((asIso
+          (rawRestrictedCohomologyComparison (pullback.snd (D.map m.hom).left (pullback.snd f
+          (D.obj j).hom) ≫ (pullback.snd f (D.obj j).hom)) q (((pullback.snd (D.map m.hom).left
+          (pullback.snd f (D.obj j).hom))^*[AddCommGrpCat.{u + 1}]).obj (((pullback.fst f (D.obj
+          j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) W)).inv (restrictedOverCohomologyMap
+          (pullback.snd f (D.obj j).hom) (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u +
+          1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D j).map a) W x))
       hz''
   unfold cartesianChartCohomologyLift
   dsimp only 
