@@ -44,7 +44,8 @@ category.
 for the derived tensor product, `CategoryTheory.IsDualizable` of
 `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic`. That this is equivalent to
 being locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules is a
-theorem, and is not formalised.
+theorem (Stacks, Tag 0FPV),
+`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`.
 
 -/
 

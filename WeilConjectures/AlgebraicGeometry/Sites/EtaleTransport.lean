@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
 
 /-!
 # Restriction of étale cohomology and torsors along an étale monomorphism
@@ -50,32 +51,6 @@ namespace CategoryTheory.Sheaf
 
 variable {C : Type*} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
   {T : C} (hT : IsTerminal T)
-
-/-- Morphisms out of the constant sheaf `ℤ` are global sections: the value at `1` over the
-terminal object. -/
-noncomputable def constantHomEquiv (F : Sheaf J AddCommGrpCat.{u}) :
-    ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) ≃
-      F.obj.obj (op T) :=
-  ((constantSheafAdj J AddCommGrpCat.{u} hT).homEquiv _ F).trans
-    (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv
-
-lemma constantHomEquiv_comp {F G : Sheaf J AddCommGrpCat.{u}}
-    (f : (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F)
-    (g : F ⟶ G) :
-    constantHomEquiv hT G (f ≫ g) = g.hom.app (op T) (constantHomEquiv hT F f) := by
-  simp only [constantHomEquiv, Equiv.trans_apply, AddEquiv.toEquiv_eq_coe,
-    Adjunction.homEquiv_naturality_right]
-  rfl
-
-lemma constantHomEquiv_naturality {F : Sheaf J AddCommGrpCat.{u}}
-    (f : (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ F) {W : C}
-    (ρ : W ⟶ T) :
-    f.hom.app (op W) (((constantSheaf J AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift ℤ))).obj.map ρ.op
-          (constantHomEquiv hT _ (𝟙 _))) =
-      F.obj.map ρ.op (constantHomEquiv hT F f) := by
-  rw [← ConcreteCategory.comp_apply, f.hom.naturality, ConcreteCategory.comp_apply,
-    ← constantHomEquiv_comp, Category.id_comp]
 
 lemma H.equiv₀_eq_constantHomEquiv (F : Sheaf J AddCommGrpCat.{u}) [HasExt.{u} (Sheaf J
     AddCommGrpCat.{u})] (x : H F 0) :

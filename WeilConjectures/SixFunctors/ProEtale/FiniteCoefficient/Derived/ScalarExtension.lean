@@ -359,6 +359,7 @@ theorem isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app
 
 variable [IsNoetherianRing R] [IsNoetherianRing S]
 
+omit [Module.Finite R S] [Module.Free R S] [Nontrivial R] in
 /-- The tensor comparisons of `Lg^*` over `R` and over `S` and those of `L(S ⊗_R -)` are
 compatible with `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`. -/
 lemma comparisonCompatible_leftDerivedSheafExtendScalarsCompUpperStarIso :

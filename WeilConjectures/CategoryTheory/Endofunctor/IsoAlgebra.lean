@@ -24,6 +24,8 @@ exact and reflects isomorphisms. This file shows:
 
 ## Main results
 
+- `CategoryTheory.Endofunctor.IsoAlgebra.strNatIso`: the structure isomorphisms as a natural
+  isomorphism `forget F ⋙ F ≅ forget F`.
 - `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso`.
 - `CategoryTheory.Endofunctor.IsoAlgebra.preservesFiniteLimits_mapOfNatIso` and
   `CategoryTheory.Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso`.
@@ -39,6 +41,21 @@ open CategoryTheory Limits
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+
+section StrNatIso
+
+variable (F : C ⥤ C)
+
+/-- The structure isomorphisms of algebras with invertible structure morphism, as a natural
+isomorphism `F ∘ forget ≅ forget`. -/
+noncomputable def strNatIso : forget F ⋙ F ≅ forget F :=
+  NatIso.ofComponents (fun K ↦ K.str) fun φ ↦ φ.hom.h
+
+@[simp]
+lemma strNatIso_hom_app (K : IsoAlgebra F) : (strNatIso F).hom.app K = K.str.hom :=
+  rfl
+
+end StrNatIso
 
 section Map
 

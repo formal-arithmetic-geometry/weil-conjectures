@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
 public import WeilConjectures.CategoryTheory.Sites.FlatExtendScalars
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
@@ -14,10 +15,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Extension of scalars of pro-étale sheaves preserves flatness
 
-For a finite free algebra `S` over a Noetherian ring `R`, extension of scalars
+For any morphism of commutative rings `R ⟶ S`, extension of scalars
 `S ⊗_R - : Sh(X_proét, R) ⥤ Sh(X_proét, S)` sends flat sheaves to flat sheaves
-(`AlgebraicGeometry.ProEtale.preservesFlat_sheafExtendScalars`), by the relation criterion
-`CategoryTheory.Sheaf.flat_presheafToSheaf_obj_comp_extendScalars`.
+(`AlgebraicGeometry.ProEtale.preservesFlat_sheafExtendScalars`), since with scalars restricted to
+`R`, tensoring with `S ⊗_R F` is tensoring with `F` (`CategoryTheory.Sheaf.flat_extendScalars_obj`).
 -/
 
 @[expose] public section
@@ -46,13 +47,12 @@ noncomputable def _root_.ModuleCat.restrictScalarsAlgebraMapSelfLinearEquiv :
 set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
-/-- Extension of scalars along a finite free algebra over a Noetherian ring preserves flat
-pro-étale sheaves. -/
-instance preservesFlat_sheafExtendScalars [Nontrivial R] [IsNoetherianRing R] [IsNoetherianRing S]
-    [Module.Finite R S] [Module.Free R S] :
-    (sheafExtendScalars (algebraMap R S) X).PreservesFlat where
-  flat_obj hF := Sheaf.flat_presheafToSheaf_obj_comp_extendScalars (algebraMap R S)
-    ((Module.finBasis R S).map ModuleCat.restrictScalarsAlgebraMapSelfLinearEquiv) hF
+omit [Algebra R S] in
+/-- Extension of scalars along any ring morphism preserves flat pro-étale sheaves
+(`CategoryTheory.Sheaf.flat_extendScalars_obj`). -/
+instance preservesFlat_sheafExtendScalars (φ : R →+* S) :
+    (sheafExtendScalars φ X).PreservesFlat where
+  flat_obj hF := Sheaf.flat_extendScalars_obj _ φ hF
 
 variable {X}
 

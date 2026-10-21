@@ -340,6 +340,44 @@ theorem traceIsomorphism_adicConstant :
   exact ⟨exists_linearEquiv_cohomology_zero_adicConstant k₀ l X, htw, htop,
     fun h ↦ (hprop h).2⟩
 
+/-- Blueprint `thm-pod-qbar-coefficient-pairing`: Poincaré duality over `ℚ̄_ℓ`, for the constant
+sheaf. Let `X₀` be smooth, separated, of finite type and geometrically connected of pure
+dimension `d` over `k₀ = 𝔽_q`, and `F` the geometric Frobenius. Over `ℚ̄_ℓ`:
+
+1. the degreewise Poincaré pairings `H_c^i(X₀ ⊗ k̄, ℚ̄_ℓ) × H^j(X₀ ⊗ k̄, ℚ̄_ℓ) ⟶ ℚ̄_ℓ(-d)`,
+   `i + j = 2d`, are perfect, with the Frobenius similitude `⟨F x, F y⟩ = q^d ⟨x, y⟩` of
+   `cor-pod-untwisted-similitude`;
+2. the trace `tr_X : H_c^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ(d)) ≅ ℚ̄_ℓ` is an isomorphism, Frobenius-invariant;
+3. the untwisted trace `H_c^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` is an isomorphism, `F` acting by
+   `q^d`; for `X₀` proper the same holds for `H^{2d}`.
+
+In the existential form of this file, these are clauses of
+`AlgebraicGeometry.WeilSheaf.poincareDuality_compactlySupportedCohomology_adicConstant`.
+The statement asserts that *some* perfect pairing with the Frobenius similitude exists, not that
+the Poincaré pairing (cup product followed by the trace) is perfect: it only repackages the
+existential statement `poincareDuality_compactlySupportedCohomology_adicConstant`. -/
+theorem exists_isPerfPair_similitude_adicConstant :
+    (∀ (i j : ℤ) (_ : i + j = 2 * d),
+      ∃ P : ((adicConstant k₀ l X).compactlySupportedCohomology i).carrier →ₗ[PadicAlgCl l]
+          ((adicConstant k₀ l X).cohomology j).carrier →ₗ[PadicAlgCl l] PadicAlgCl l,
+        P.IsPerfPair ∧
+          ∀ x y, P (((adicConstant k₀ l X).compactlySupportedCohomology i).frobenius x)
+            (((adicConstant k₀ l X).cohomology j).frobenius y) = 𝐪 * P x y) ∧
+    (∃ tr : ((tateTwistSheaf k₀ l X d).compactlySupportedCohomology (2 * d)).carrier ≃ₗ[
+        PadicAlgCl l] PadicAlgCl l,
+      ∀ z, tr (((tateTwistSheaf k₀ l X d).compactlySupportedCohomology (2 * d)).frobenius z) =
+        tr z) ∧
+    (∃ tr : ((adicConstant k₀ l X).compactlySupportedCohomology (2 * d)).carrier ≃ₗ[
+        PadicAlgCl l] PadicAlgCl l,
+      ∀ z, tr (((adicConstant k₀ l X).compactlySupportedCohomology (2 * d)).frobenius z) =
+        𝐪 * tr z) ∧
+    (IsProper (X ↘ Spec (CommRingCat.of k₀)) →
+      ∃ tr : ((adicConstant k₀ l X).cohomology (2 * d)).carrier ≃ₗ[PadicAlgCl l] PadicAlgCl l,
+        ∀ z, tr (((adicConstant k₀ l X).cohomology (2 * d)).frobenius z) = 𝐪 * tr z) := by
+  obtain ⟨-, hP, htw, htop, hprop⟩ :=
+    poincareDuality_compactlySupportedCohomology_adicConstant k₀ l X d
+  exact ⟨hP, htw, htop, fun h ↦ (hprop h).2⟩
+
 end WeilSheaf
 
 end AlgebraicGeometry
