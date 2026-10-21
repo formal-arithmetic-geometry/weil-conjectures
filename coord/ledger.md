@@ -21482,3 +21482,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q111/lem-zl-point-weil-heart-flag (reviewer PASS; first push; new nodes: 0); claim not held by Q111: not your claim
 - 08:58 L: merged deliver/Q12/lem-sf-cbc-direct-image-reduction-unit (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q67/lem-a1-roos-intrinsic-unit-comparison (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q25/lem-pur-support-comparison-section-model (reviewer PASS; first push; new nodes: 0)
