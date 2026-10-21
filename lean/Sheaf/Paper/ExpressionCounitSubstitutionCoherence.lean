@@ -275,6 +275,114 @@ structure StructuralLaws : Prop where
           (completedSubstitution l E H Q
             (fun k ↦ (coefficientSequenceLimit l E _).obj (N k))).inv)
 
+private theorem pair_comp {C : Type*} [Category C] {A B C' X Y Z : C}
+    (f : A ⟶ B) (f' : B ⟶ C') (g : X ⟶ Y) (g' : Y ⟶ Z) :
+    Prod.mkHom (f ≫ f') (g ≫ g') = Prod.mkHom f g ≫ Prod.mkHom f' g' := rfl
+
+private theorem system_normalized (h : Normalization l E D) {a : S}
+    (P : Expression W location a)
+    (N : ∀ k : I, coefficientSequenceDerived l E (W (location k)))
+    (hN : ∀ k, IsNormalizedCoefficientSequence l E _ (N k)) :
+    IsNormalizedCoefficientSequence l E (W a) ((system l E D P).obj N) := by
+  induction P with
+  | input k => exact hN k
+  | unit a => exact h.unit a
+  | tensor P Q hp hq => exact h.tensor _ _ _ hp hq
+  | pullback f P hp => exact h.pullback f _ hp
+
+private theorem beta_isIso (h : Normalization l E D) {a : S}
+    (P : Expression W location a)
+    (N : ∀ k : I, coefficientSequenceDerived l E (W (location k)))
+    (hN : ∀ k, IsNormalizedCoefficientSequence l E _ (N k)) :
+    IsIso (beta l E D P N) := by
+  induction P with
+  | input k => change IsIso (𝟙 _); infer_instance
+  | unit a => change IsIso (𝟙 _); infer_instance
+  | @tensor a P Q hp hq =>
+    have := hp
+    have := hq
+    have := (D.primitive a a (𝟙 _)).tensor_iso _ _
+      (system_normalized l E D h P N hN) (system_normalized l E D h Q N hN)
+    have : IsIso (Prod.mkHom (beta l E D P N) (beta l E D Q N)) :=
+      (Iso.prod (asIso (beta l E D P N)) (asIso (beta l E D Q N))).isIso_hom
+    dsimp only [beta]
+    infer_instance
+  | @pullback a b f P hp =>
+    have := hp
+    have := (D.primitive a b f).geometric_iso _ (system_normalized l E D h P N hN)
+    dsimp only [beta]
+    infer_instance
+
+private theorem beta_natural {a : S} (P : Expression W location a)
+    (N N' : ∀ k : I, coefficientSequenceDerived l E (W (location k)))
+    (v : ∀ k, N k ⟶ N' k) :
+    (completed l E P).map (fun k ↦ (coefficientSequenceLimit l E _).map (v k)) ≫
+        beta l E D P N' = beta l E D P N ≫
+          (coefficientSequenceLimit l E _).map ((system l E D P).map v) := by
+  induction P with
+  | input k => simp [completed, system, beta, Pi.eval]
+  | unit a => simp [completed, system, beta]
+  | @tensor a P Q hp hq =>
+    dsimp only [completed, system, beta, Functor.comp_map, Functor.prod'_map]
+    rw [← Category.assoc, ← Functor.map_comp, prod_comp, hp, hq,
+      pair_comp, Functor.map_comp, Category.assoc,
+      (D.primitive a a (𝟙 _)).tensor_naturality, Category.assoc]
+  | @pullback a b f P hp =>
+    dsimp only [completed, system, beta, Functor.comp_map]
+    rw [← Category.assoc, ← Functor.map_comp, hp, Functor.map_comp,
+      Category.assoc, (D.primitive a b f).geometric_naturality, Category.assoc]
+
+private theorem reduction_square {a : S}
+    {A B : coefficientSequenceDerived l E (W a)}
+    {K K' : DerivedCategory (scalarReductionSource l E (W a))}
+    (b : K ⟶ (coefficientSequenceLimit l E _).obj A)
+    (b' : K' ⟶ (coefficientSequenceLimit l E _).obj B)
+    (v : A ⟶ B) (w : K ⟶ K')
+    (h : w ≫ b' = b ≫ (coefficientSequenceLimit l E _).map v) :
+    (D.reduction a).reduction.map w ≫
+        ((D.reduction a).reduction.map b' ≫ (D.reduction a).adjunction.counit.app B) =
+      ((D.reduction a).reduction.map b ≫ (D.reduction a).adjunction.counit.app A) ≫ v := by
+  rw [← Category.assoc, ← Functor.map_comp, h, Functor.map_comp, Category.assoc,
+    (D.primitive a a (𝟙 _)).counit_naturality, Category.assoc]
+
+private theorem compatible_of_beta {a : S} {P Q : Expression W location a}
+    (N : ∀ k : I, coefficientSequenceDerived l E (W (location k)))
+    (v : (system l E D P).obj N ⟶ (system l E D Q).obj N)
+    (w : (completed l E P).obj (fun k ↦ (coefficientSequenceLimit l E _).obj (N k)) ⟶
+      (completed l E Q).obj (fun k ↦ (coefficientSequenceLimit l E _).obj (N k)))
+    (h : w ≫ beta l E D Q N = beta l E D P N ≫ (coefficientSequenceLimit l E _).map v) :
+    Compatible l E D N v w :=
+  ⟨h, reduction_square l E D _ _ v w h⟩
+
+private theorem beta_substitution {J : Type j} {location' : J → S}
+    (H : ∀ k : I, Expression W location' (location k)) {a : S}
+    (P : Expression W location a)
+    (N : ∀ k : J, coefficientSequenceDerived l E (W (location' k))) :
+    beta l E D (P.substitute H) N ≫
+        (coefficientSequenceLimit l E _).map (systemSubstitution l E D H P N).hom =
+      (completedSubstitution l E H P
+        (fun k ↦ (coefficientSequenceLimit l E _).obj (N k))).hom ≫
+        (completed l E P).map (fun k ↦ beta l E D (H k) N) ≫
+        beta l E D P (fun k ↦ (system l E D (H k)).obj N) := by
+  induction P with
+  | input k => simp [Expression.substitute, systemSubstitution, completedSubstitution,
+      beta, completed, Pi.eval]
+  | unit a => simp [Expression.substitute, systemSubstitution, completedSubstitution,
+      beta, completed]
+  | @tensor a P Q hp hq =>
+    dsimp only [Expression.substitute, beta, systemSubstitution, completedSubstitution,
+      completed, system, Functor.comp_map, Functor.prod'_map, Functor.mapIso_hom,
+      Iso.prod]
+    rw [Category.assoc, ← (D.primitive a a (𝟙 _)).tensor_naturality,
+      ← Category.assoc, ← Functor.map_comp, prod_comp, hp, hq]
+    simp only [pair_comp, Functor.map_comp, Category.assoc]
+  | @pullback a b f P hp =>
+    dsimp only [Expression.substitute, beta, systemSubstitution, completedSubstitution,
+      completed, system, Functor.comp_map, Functor.mapIso_hom]
+    rw [Category.assoc, ← (D.primitive a b f).geometric_naturality,
+      ← Category.assoc, ← Functor.map_comp, hp]
+    simp only [Functor.map_comp, Category.assoc]
+
 /-- Recursive comparisons are natural, commute with simultaneous substitution,
 and preserve both structural compatibility equations in every finite context.
 The primitive data retains the actual quotient-complex/Roos realization; the only
@@ -322,6 +430,67 @@ theorem expressionCounitSubstitutionCoherence
     (_h : Normalization l E D) :
     EvaluationLaws.{t, u, s, i, j} l E D (location := location) ∧
       StructuralLaws.{t, u, s, i, j} l E D (location := location) := by
-  sorry
+  constructor
+  · constructor
+    · intro a P N hN
+      have hb := beta_isIso l E D _h P N hN
+      have := (D.primitive a a (𝟙 _)).counit_effective _
+        (system_normalized l E D _h P N hN)
+      exact ⟨hb, by dsimp only [gamma]; infer_instance⟩
+    · intro a P N N' hN hN' v
+      have hb := beta_natural l E D P N N' v
+      exact ⟨hb, reduction_square l E D _ _ _ _ hb⟩
+    · intro J location' H a P N hN
+      have hb := beta_substitution l E D H P N
+      refine ⟨hb, ?_⟩
+      apply Eq.symm
+      apply reduction_square
+      simpa only [Category.assoc] using hb.symm
+  · constructor
+    · intro a P N hN
+      apply compatible_of_beta
+      simp
+    · intro a P Q R N hN v v' w w' hv hv'
+      apply compatible_of_beta
+      dsimp only [Compatible] at hv hv'
+      rw [Category.assoc, hv'.1, ← Category.assoc, hv.1,
+        Category.assoc, Functor.map_comp]
+    · intro a P Q N hN v w hv
+      apply compatible_of_beta
+      dsimp only [Compatible] at hv
+      apply (cancel_mono ((coefficientSequenceLimit l E _).map v.hom)).mp
+      simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id]
+      rw [← hv.1, ← Category.assoc, w.inv_hom_id, Category.id_comp]
+      rw [(coefficientSequenceLimit l E (W a)).map_id]
+      exact (Category.comp_id _).symm
+    · intro a P Q R V N hN v v' w w' hv hv'
+      apply compatible_of_beta
+      dsimp only [Compatible] at hv hv'
+      dsimp only [beta, system, completed]
+      rw [← Category.assoc, ← Functor.map_comp, prod_comp, hv.1, hv'.1,
+        pair_comp, Functor.map_comp, Category.assoc,
+        (D.primitive a a (𝟙 _)).tensor_naturality, Category.assoc]
+    · intro a b f P Q N hN v w hv
+      apply compatible_of_beta
+      dsimp only [Compatible] at hv
+      dsimp only [beta, system, completed]
+      rw [← Category.assoc, ← Functor.map_comp, hv.1, Functor.map_comp,
+        Category.assoc, (D.primitive a b f).geometric_naturality, Category.assoc]
+    · intro J location' H a P Q v w hv N hN
+      apply compatible_of_beta
+      have h := (hv (fun k ↦ (system l E D (H k)).obj N)
+        (fun k ↦ system_normalized l E D _h (H k) N hN)).1
+      have hp := beta_substitution l E D H P N
+      have hq := beta_substitution l E D H Q N
+      have hn := w.naturality (fun k ↦ beta l E D (H k) N)
+      apply (cancel_mono ((coefficientSequenceLimit l E _).map
+        (systemSubstitution l E D H Q N).hom)).mp
+      simp only [Functor.map_comp, Category.assoc]
+      rw [hq, Iso.inv_hom_id_assoc]
+      rw [← Category.assoc (w.app _), ← hn, Category.assoc, h]
+      have hp' := congrArg (fun z ↦ z ≫ (coefficientSequenceLimit l E _).map
+        (v.app (fun k ↦ (system l E D (H k)).obj N))) hp
+      simpa only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
+        Functor.map_id, Category.comp_id] using hp'.symm
 
 end WeilConjectures.CounitExpressions
