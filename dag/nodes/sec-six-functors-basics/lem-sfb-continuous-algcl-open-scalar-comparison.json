@@ -20,9 +20,91 @@
   "sk-def-sfb-module-derived-pushpull",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T$ for the scalar functors in the statement. For any $f$ define $\\beta_f$ by exactly the displayed counit mate, not by choosing an isomorphism. The locus where $\\beta_{j,C}$ is invertible is closed under shifts and triangles: restrict scalars from $B$ to $A_E$, which reflects isomorphisms and commutes with derived pushforward by lem-weil-pbc-ring-sheaf-change-adjunction. On K-flat representatives the restricted scalar extension is $C\\otimes^L_{A_E}B$, by lem-pur-sheaf-ring-derived-coefficient-adjunction. Its stated formula $x\\otimes a\\mapsto a g(x)$ identifies the restricted counit mate, after tensor symmetry, with the projection morphism for $j$ and the fixed $A_{E,X}$-module $B_X$. Therefore lem-sfb-ringed-projection-first-shift supplies exactness and compatibility with connecting arrows; lem-sf-triangle-two-out-of-three gives triangle closure. This argument uses no invertibility assertion for a projection formula.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-projection-first-shift",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent alteration/tame-boundary reduction; all-continuous coefficient version, step 1"
+   }
+  },
+  {
+   "text": "The same locus contains zero and is closed under finite sums, isomorphisms and retracts. For the last assertion write $F=T_XRj_{*,A_E}$, $H=Rj_{*,B}T_U$. If $C\\xrightarrow{i}G\\xrightarrow{r}C$ has $ri=1$ and $\\beta_G$ is invertible, the inverse of $\\beta_C$ is $F(r)\\beta_G^{-1}H(i)$, by naturality and $ri=1$. Apply lem-sfb-tame-pair-proper-generators: it suffices to prove the assertion for $G=Rq_{*,A_E}K$, where $K=(b_!L)[0]$, $p:Y\\to X$ and $q:V\\to U$ are proper, $j':V\\hookrightarrow Y$ is the inverse image of $j$, and $(Y,D,W,L)$ is the specified regular tame pair. Thus the extra geometric assumptions are imposed on generators, not on the given $C$.",
+   "uses": [
+    "lem-sfb-tame-pair-proper-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent alteration/tame-boundary reduction; all-continuous coefficient version, step 2"
+   }
+  },
+  {
+   "text": "For such a generator, finite-rank lisse $L$ is pro-etale locally isomorphic to $A_{E,W}^{r}$, so it has the finite constant scalar model $E^{r}$ on the trivial stratification. The schemes of the generator are Noetherian. The exact extension-by-zero assertion of lem-sfb-scalar-model-immersion-extension gives $K\\in\\Dbc(V,A_E)$. The finite-$E$ case, and only that case, of lem-sfb-rational-open-direct-image-constructible gives $Rj'_{*,A_E}K\\in\\Dbc(Y,A_E)$. These are precisely the two bounded-constructible hypotheses needed below for the proper comparison input. No corresponding constructibility assertion for the all-continuous coefficient ring is used.",
+   "uses": [
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-scalar-model-immersion-extension",
+    "lem-sfb-rational-open-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent alteration/tame-boundary reduction; all-continuous coefficient version, step 3"
+   }
+  },
+  {
+   "text": "First, for any $f$ and a K-flat complex $P$ with flat terms, the pullback/tensor comparison $f_B^*T_T\\cong T_Zf_{A_E}^*$ used in the statement is represented by the ordinary sheaf map $f_B^*(B_T\\otimes_{A_{E,T}}P)\\to B_Z\\otimes_{A_{E,Z}}f_{A_E}^*P$, which is the comparison $\\chi_f$ of lem-sfb-kflat-scalar-comparison-normalization; by that node it equals $\\theta_f^{-1}$, so $\\beta_f$ is exactly the mate of the square $\\theta_f^{-1}$ along $f_{A_E}^*\\dashv Rf_{*,A_E}$ and $f_B^*\\dashv Rf_{*,B}$. For composable $Z\\xrightarrow{g}T\\xrightarrow{f}S$, scalar/pullback coherence in lem-sfb-kflat-scalar-comparison-normalization and adjunction-compatible composition in lem-sfb-ringed-derived-monoidal-comparisons allow mate-pasting, clause (2) of lem-weil-pbc-mate-pasting. Applying its formula to the scalar/pullback squares gives\n$$\\beta_{fg,K}=Rf_{*,B}(\\beta_{g,K})\\circ\\beta_{f,Rg_{*,A_E}K},$$\nunder the normalized derived-direct-image compositors. Indeed both sides are mates of the same composite inverse-image square; the counit of the composite is the composite counit specified in those nodes. Since $jq=pj'$, applying this identity twice yields\n$$Rj_{*,B}(\\beta_{q,K})\\circ\\beta_{j,Rq_{*,A_E}K}=Rp_{*,B}(\\beta_{j',K})\\circ\\beta_{p,Rj'_{*,A_E}K}.$$\nThe two domains and codomains are identified using those adjunction-compatible compositors. This proves the equality for the canonical counit mate required by the item.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent alteration/tame-boundary reduction; all-continuous coefficient version, step 4"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-continuous-algcl-proper-scalar-comparison first to $p$ with input $Rj'_{*,A_E}K$, then to $q$ with input $K$; properness is part of the chosen generator and step 3 verified bounded constructibility. Both proper comparisons are isomorphisms. The map $\\beta_{j',K}$ is an isomorphism by lem-sfb-continuous-algcl-tame-boundary-comparison: its regularity, strict normal crossings, selected outer components, and tame $L$ are exactly the generator data. Derived direct image preserves isomorphisms, so the right side of the equality in step 4 is invertible, and its left postcomposition $Rj_{*,B}(\\beta_{q,K})$ is invertible. Consequently $\\beta_{j,G}$ is invertible. Steps 1 and 2 and finite generation give invertibility for the original $C$, with the prescribed counit normalization.",
+   "uses": [
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-tame-pair-proper-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent alteration/tame-boundary reduction; all-continuous coefficient version, step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sfb-tame-pair-proper-generators",
+  "lem-sfb-scalar-model-immersion-extension",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-continuous-algcl-proper-scalar-comparison",
+  "lem-sfb-continuous-algcl-tame-boundary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3): proper tame-pair generator reduction of the separately stated all-continuous comparison obligation; does not invoke filtered-union continuity."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +140,31 @@
    "results": "8 hits: galRestrict'_galLift; galRestrict'_comp; algebraMap_galRestrict'_apply; Field.Emb.Cardinal.succEquiv_coherence; NumberField.InfiniteAdeleRing.mixedEmbedding_eq_algebraMap_comp; WeierstrassCurve.VariableChange.map_baseChange; WeierstrassCurve.baseChange_preΨ'; WeierstrassCurve.baseChange_preΨ",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state the specified coefficient-field descent or derived coefficient-change comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image along an open immersion commutes with extension of topological field coefficients for bounded constructible sheaves",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.Scheme.Hom.coe_image; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: underived open/sheaf maps, affine-limit descent and condensed constructors do not give the specified canonical derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change for quasi compact open direct image of constructible pro etale sheaves from a finite l adic field to all continuous algebraic closure coefficients",
+   "results": "8 hits: AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_preimage_eq; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-21",
+   "verdict": "no match: underived open/sheaf maps, affine-limit descent and condensed constructors do not give the specified canonical derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for proper or open derived direct images of sheaves with arbitrary condensed scalar coefficients and constructible l adic input",
+   "results": "8 hits: Condensed.profiniteSolid; Condensed.lanSheafProfinite; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.lanLightCondSet; Condensed.profiniteFree; CondensedMod.ofSheafCompHaus; LightCondensed.ihomPoints_symm_comp; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: underived open/sheaf maps, affine-limit descent and condensed constructors do not give the specified canonical derived comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-algcl-open-finiteness",
@@ -81,5 +184,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-algcl-open-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the all-continuous norm-topology statement. No finished project declaration found. Gave a finite thick-generator reduction using regular tame pairs, a separate proper scalar-comparison input, and a restricted tame-boundary calculation. All three new inputs are statement-only, searched in Mathlib; exact missing coefficient-specific references are explicit in report.md. Verified canonical mate composition rather than using an arbitrary isomorphism.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, paragraph (3); coefficient-specific input below the open-finiteness obligation. The blueprint filtered-union Qbar comparison is not applied to B.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Conservative derived scalar restriction and compatibility with the counit; generic coefficient bookkeeping, not a geometric route replacement."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "K-flat representative and normalized tensor adjunction to identify the restricted mate with the projection arrow."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "Exactness and shift/connecting-arrow compatibility of the projection arrow, without asserting its invertibility."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic closure of the isomorphism locus under distinguished triangles."
+   },
+   {
+    "node": "lem-sfb-scalar-model-immersion-extension",
+    "why": "Finite-E extension by zero preserves finite constant local models; no change of geometric route."
+   },
+   {
+    "node": "lem-sfb-rational-open-direct-image-constructible",
+    "why": "Only finite-E rational open finiteness, to check the input of proper comparison; no all-continuous output is imported."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Canonical scalar/pullback mate and its composition coherence for arbitrary ring maps."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Normalized derived compositors respect the composite adjunction, enabling the same-morphism square."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal composition formula for the specified counit mates."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sfb-scalar-model-immersion-extension",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-ND-adcf6833e",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-adcf6833e (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes, every cited statement and the blueprint unit (sk-thm-sf-ctf-stability direct-images, paragraph 3). The item statement is byte-identical to the base, there is no SGA citation, the item is not in route-pivot-dropped, and the item is still unsplit in side-live. Steps are correct as follows. Step 1: restriction of scalars reflects isos, ring-sheaf-change gives d, and the adjunct formula identifies r(β) with π_{C,B_X}. The projection first-shift node and 2-of-3 then show the iso locus is triangulated. Step 2: the retract inverse is F(r)β_G^{-1}H(i). Step 3: A_E is admissible E, V and Y are Noetherian, and the finite-E branch of rational-open constructibility applies. Step 4: the kflat θ-composition, the monoidal-comparisons composite adjunction and the mate-pasting(2) formula give β_{fg}=Rf(β_g)∘β_f(Rg). Step 5: the square jq=pj' then gives the assembly. FIX (item only): step 4 now states that the statement's pullback/tensor comparison is χ_f on K-flat representatives, which equals θ_f^{-1} by the kflat node, so β is exactly that mate. Step 3's justification of the constant model for lisse L is reworded (it was 'since E is a field'). New nodes are statement-only and self-contained, with 5 searches each; all three are judged true and none is a duplicate. tame-pair-proper-generators: true by de Jong alteration (any field) after a Cartier blow-up of the boundary; mod-ℓ trivialization gives pro-ℓ monodromy, which is tame by Abhyankar, then trace splitting and induction; it differs from the qbar-constructible-generators and trf/det generation nodes. continuous-algcl-proper-scalar-comparison is the proper projection formula with P=B_T; no E arbitrary-P node exists (det-thm-sf-pf-adic-projection covers O_E/Loc only). The tame-boundary node is a local Kummer calculation, strictly smaller than the item. All batch-5 flags are accepted as generic, not trace formula or Poincaré duality: pd-section-derived-pushpull-normalization is internal/section derived bookkeeping, trf-geometric-inverse-image-exact is exactness of inverse image, and def-trf-strict-normal-crossings-boundary is a definition. All declared tool_uses are accepted. Maintainer: a parallel NA delivery f3d54e52 of the same item exists; merge only one.; 1 file(s) fixed by the reviewer"
  }
 }

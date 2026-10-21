@@ -22306,3 +22306,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:28 L: returned deliver/Q95/lem-pur-quotient-expression-kflat-normalization (reviewer RETURN: L: independent stage-2 immutable head 08225af3e60d: H3 (weaker conclusion, missing clauses). F1: the derived-tensor clau)
 - 11:29 L: merged deliver/Q87/lem-pur-finite-open-product-swap (stage 2; reviewer FIX; parallel immutable checks)
 - 2026-10-21T11:30:06Z L: superseded stage-1 delivery NK/lem-pod-stratified-dualizable-hom-continuity at 9711944ff7f0192bbc5d32af00a019b08cba8e00; current completion retained; packet archived at refs/superseded/NK/lem-pod-stratified-dualizable-hom-continuity/9711944ff7f0192bbc5d32af00a019b08cba8e00; stale return retired.
+- 11:32 L: merged deliver/ND/lem-sfb-continuous-algcl-open-scalar-comparison (reviewer FIX; first push; new nodes: 3); claim not held by ND: not your claim
