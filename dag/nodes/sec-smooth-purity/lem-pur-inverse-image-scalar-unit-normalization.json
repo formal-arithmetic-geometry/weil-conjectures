@@ -18,79 +18,42 @@
  ],
  "proof": [
   {
-   "text": "Write $L$ for the specified set-sheaf inverse image. By [lem-weil-pbc-left-exact-site-inverse-image-tensor], applied to the base-change functor and compatible small sites specified in [def-weil-proetale-inverse-image], $L$ preserves finite limits. Denote its binary-product comparison by $\\lambda_{X,Y}:L(X\\times Y)\\xrightarrow{\\sim}LX\\times LY$. The specified ring and module inverse images in [def-weil-proetale-inverse-image] use exactly the transported operations: for example the action on $I(M)$, through the canonical underlying-sheaf identifications, is $L(\\operatorname{act}_M)\\circ\\lambda_{|R|,|M|}^{-1}$; addition uses the same formula, and zero and one use the final-object comparison. Take these canonical identifications as $e_R,e_M$ of [def-weil-pbc-algebraic-inverse-image], and take its module functor to be $I$ itself. To verify the graph conditions, an equation $z=\\operatorname{act}_M\\circ\\langle x,y\\rangle$ gives $Lz=L(\\operatorname{act}_M)\\circ\\lambda^{-1}\\circ\\langle Lx,Ly\\rangle$, since the two sides of $\\lambda\\circ L\\langle x,y\\rangle=\\langle Lx,Ly\\rangle$ have identical projections. The same argument treats addition and multiplication; the final-object comparison treats zero and one. These are precisely the required graph equations. On morphisms the specified inverse image uses the underlying $Lf$, so $e_M$ is natural and the resulting presentation has exactly $I$ on both objects and arrows.",
+   "text": "Use the uniquely unit-normalized underlying set identifications for the specified ring and module inverse images of [lem-pur-proetale-unit-underlying-identifications]. The module identification is natural: transpose its square through the set adjunction and apply naturality of the module unit. For each operation graph, transpose the proposed equality of sheaf maps through the same adjunction. Naturality of the set unit reduces the equality to preservation of addition, multiplication, zero and one by the ring unit and preservation of addition, zero and scalar multiplication by the module unit. This constructs an AlgebraicInverseImage with modules exactly proEtaleModuleInverseImage, retaining the ring_unit and module_unit equations. The private transport_binary and moduleSetsIdentification_naturality proofs from the existing algebraic-presentation module implement these transposition calculations.",
    "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-pur-proetale-unit-underlying-identifications",
     "def-weil-proetale-inverse-image",
     "def-weil-pbc-algebraic-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D2, lemma-pullback-module; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi; expanded matching of the specified transported operations"
-   }
+   "elementary": false
   },
   {
-   "text": "For an $RI$-module sheaf $H$, sectionwise scalar multiplication $(b,m)\\mapsto bm$ is $RI$-bilinear: distributivity gives additivity in each argument and commutativity of $RI$ gives $(cb)m=c(bm)=b(cm)$. It commutes with every restriction. Thus [lem-pc-sites-sheaf-tensor-bilinear-universal] gives a unique module-sheaf map $a_H:RI\\otimes_{RI}H\\to H$ with $a_H(b\\otimes m)=bm$. The insertion $q_H:H\\to RI\\otimes_{RI}H$, $m\\mapsto1\\otimes m$, is a sheaf map by restriction compatibility and the presheaf-to-sheaf tensor map of [def-pur-sheaf-tensor-product]. It is additive, and is $RI$-linear because $1\\otimes cm=c\\otimes m=c(1\\otimes m)$, the balanced tensor relation. These computations take place in the sectionwise presheaf tensor and therefore hold after its map to the sheaf tensor.",
+   "text": "Apply Mathlib ModuleCat.extendScalarsId on every section ring. Its inverse inserts 1 and its forward map sends b tensor m to b times m. The maps commute with restriction, since the scalar-extension restrictions preserve pure tensors, hence give an isomorphism of presheaves. Apply module sheafification and compose with its invertible counit. Naturality of the sheafification unit and its triangle identity prove the multiplication and insertion formulas on sheafified pure tensors. The sectionwise scalar-extension functor, followed by sheafification, gives exactly the specified changeOfRingsHom maps. Naturality of ModuleCat.extendScalarsId and of the sheafification counit gives natural multiplication. Whisker with the specified module inverse image to obtain scalar and multiplication.",
    "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, section-tensor-product, tensor definition and displayed Hom--Bilin universal property; explicit identity-scalar formulas"
-   }
+   "elementary": true
   },
   {
-   "text": "For every local section $m$ of $H$, $a_Hq_H(m)=1m=m$. The maps $q_Ha_H$ and $1$ from $RI\\otimes_{RI}H$ to itself agree after the pure-tensor pairing, since $q_Ha_H(b\\otimes m)=1\\otimes bm=b\\otimes m$. The injectivity in [lem-pc-sites-sheaf-tensor-bilinear-universal] makes them equal as sheaf morphisms. Consequently $a_H$ and $q_H$ are inverse $RI$-module-sheaf isomorphisms. This proves equality on the entire sheafified tensor, without assuming that every section is a global sum of pure tensors.",
+   "text": "For any comparison k, k.q_one and the inverse multiplication formula identify its insertion with multiplication.inv on every section. Form the cartesian product Z of the underlying sheaves of M and N, with its projections x,y and its pure-tensor pairing z. Evaluate k.pure on the set-adjunction unit image of (s,t) in inverse image of Z. Unit naturality for x,y,z gives the three unit sections used in the conclusion. Apply tensorHom of the two multiplication maps. Reuse the proved independent-universe pure_restrict and pure_map section-calculus helpers of CochainInverseComparison. They follow from naturality of tensorObjIsoSheafification and the sheafification unit and show that tensorHom acts factorwise on pure tensors; the inverse identities then cancel both factors. The two multiplication-insertion cancellations give precisely the normalized section formula.",
    "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, displayed Hom--Bilin universal property; cancellation of multiplication and insertion"
-   }
-  },
-  {
-   "text": "For a module-sheaf map $v:H\\to H'$, $v(bm)=bv(m)$, so $v\\circ a_H$ and $a_{H'}\\circ(1\\otimes v)$ agree on the pure-tensor pairing and hence everywhere by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Also $(1\\otimes v)q_H(m)=1\\otimes v(m)=q_{H'}v(m)$. Apply this to $H=I(M)$ and $v=I(f)$. The assignments $T(M)=RI\\otimes_{RI}I(M)$, $T(f)=1\\otimes I(f)$ obey identity and composition laws: the two maps in each law agree on $b\\otimes m$ and thus everywhere by the same injectivity. They are exactly extension of scalars for $1_{RI}$, on objects and morphisms, by the sheaf tensor definition [def-pur-sheaf-tensor-product]. The maps $a_M:=a_{I(M)}$ and $q_M:=q_{I(M)}$ are the asserted natural inverse families.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, section-tensor-product and Hom--Bilin universal property; naturality on scalar tensors"
-   }
-  },
-  {
-   "text": "Let $(\\widetilde q,\\mu)$ be any comparison in [def-weil-pbc-canonical-ringed-tensor-comparison] for this $T$ and the presentation of step 1. Its q_one condition says $\\widetilde q_H=q_H$ on every section. Put $Z=|M|\\times|N|$, let $x,y$ be its projections, and let $z:Z\\to|M\\otimes_RN|$ be the canonical pure-tensor pairing [def-pur-sheaf-tensor-product]. For $s\\in M(V)$ and $t\\in N(V)$, apply the comparison's generalized pure-tensor equation to the section $\\eta_{h,Z,V}(s,t)$ of $(LZ)(T'\\times_TV)$. Naturality of the specified unit [def-weil-proetale-inverse-image] for $x,y,z$ identifies its images with $h^{-1}s$, $h^{-1}t$, and $h^{-1}(s\\otimes t)$, respectively, under the canonical identifications of step 1. Hence $\\mu_{M,N}q_{M\\otimes_RN}(h^{-1}(s\\otimes t))=q_M(h^{-1}s)\\otimes q_N(h^{-1}t)$. Step 3 identifies $q_{M\\otimes_RN}$ with $a_{M\\otimes_RN}^{-1}$. Applying $a_M\\otimes a_N$ to this equality and using $a_Mq_M=a_Nq_N=1$ yields exactly $b_{M,N}(h^{-1}(s\\otimes t))=h^{-1}s\\otimes h^{-1}t$. All pure tensors here are followed by the presheaf-to-sheaf map. The argument uses a product test sheaf, so needs no representability assumption or unstated rule about inverse images of represented sections.",
-   "uses": [
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-canonical-ringed-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-proetale-inverse-image"
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; agent-written evaluation of the normalized comparison and cancellation of identity scalar extension"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-pur-proetale-unit-underlying-identifications",
   "def-weil-proetale-inverse-image",
   "def-weil-pbc-algebraic-inverse-image",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D2 and 03EL, Section 03EK, with sites.tex Tag 00YV. Explicit realization of the specified functor and scalar-unit cancellation of an arbitrary normalized comparison; the generalized-element argument is written out."
+  "place": "Tags 03D2 and 03EL, Section 03EK; Mathlib ModuleCat.extendScalarsId and the module-sheafification adjunction. Lean realization by M8, retaining the product-test-sheaf cancellation argument."
  },
  "mathlib_searches": [
   {
@@ -225,8 +188,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -260,5 +222,15 @@
   "group": "Q73",
   "result": "pass",
   "note": "Re-delivery after the H13/H4 RETURN of 334650707987; both faults repaired. All snapshot files are byte-identical to live except the item node (new lean field only) and the new item module. Q64's record of def-weil-pbc-canonical-ringed-tensor-comparison is unchanged and the duplicate SiteUniverses module is removed. normalized now quantifies over the landed CanonicalRingedTensorComparisonOnSmallSites R RI RI uInv AI (𝟙 RI) T ho. normalizedHom = a⁻¹≫μ≫a⊗a (the node's b) is a listed def in the item module. ringedComparisonPure is term-for-term the previous inline pure-tensor formula. The extra instance block was dropped, leaving only EssentiallySmall.{w}. Item clauses re-checked against the node: modules_eq, the ring_unit/module_unit pins, scalar_obj/scalar_map, multiplication with multiply_pure/insert_one (consistent with q_one), and the universal normalization on unit images. Unrestricted h and R, ProEt universes u+1/u. One sorry; source/blueprint docstrings with the 5 proof steps; statement verbatim; imports = stmt_dep modules; no name collisions in live. No compile run (worker: item 34.9 s clean, dry run OK). Advisory: normalizedHom lives in Q64's structure namespace."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261021T173338-L-3588944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

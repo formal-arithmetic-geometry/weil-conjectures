@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-proetale-unit-underlying-identifications",
+ "kind": "statement",
+ "title": "Unit-normalized underlying set identifications of pro-etale ring and module inverse image",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $R$ a sheaf of commutative rings on the small pro-etale site of $Y$ [def-weil-proetale-inverse-image]. Write $L$ for its specified set inverse image, $RI=f^{-1}R$ for its specified ring inverse image, and $I$ for proEtaleModuleInverseImage. There is a unique underlying-set sheaf isomorphism $e_R:L(|R|)\\cong |RI|$ which carries the set-adjunction unit of every section $r\\in R(V)$ to the ring-adjunction unit of $r$ over $X\\times_Y V$. For each $R$-module sheaf $M$ [def-weil-sheaf-of-modules-category], there is likewise a unique isomorphism $e_M:L(|M|)\\cong |I(M)|$ which carries the set-adjunction unit of each section $m\\in M(V)$ to the specified module-adjunction unit of $m$ on the transported small model. Both statements use exactly the already specified functors and adjunctions, for every scheme morphism and arbitrary ring sheaf.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Existing precursor declarations ringSetsIdentification_exists and moduleSetsIdentification_exists, previously attached only to the larger tensor-comparison node."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Lift the finite-limit-preserving set inverse image to ring and module operations, as in the canonical inverse-image construction. The lifted adjunction identifies the underlying ring and module units with the set unit. The specified module functor is the same construction on its equivalent small model, so it has the normalized underlying isomorphism. Two such isomorphisms have equal hom maps: their adjuncts under the set adjunction agree on every original section by the unit formula. Injectivity of the adjunction Hom bijection gives equality, including the inverses. These are the complete existing proofs in words of ringSetsIdentification_exists and moduleSetsIdentification_exists.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2 and Sites Tag 00YV; existing docstrings of the two attached precursor declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical underlying set sheaf isomorphisms for inverse image of rings and modules are characterized by the adjunction unit",
+   "results": "8 hits, including SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction and SheafOfModules.toSheafCompSheafToPresheafIso. No exact pro-etale unit identification.",
+   "date": "2026-10-21",
+   "verdict": "existing project declarations are the exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "results": "0 hits; loogle: unknown identifier 'Functor.sheafPullbackConstruction.sheafAdjunctionContinuous'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringSetsIdentification|moduleSetsIdentification",
+   "results": "0 Mathlib hits; rg in lean/Sheaf finds the exact existing precursor declarations in ProEtaleInverseImageTensorComparison.lean.",
+   "date": "2026-10-21",
+   "verdict": "attach the existing declarations; no new theorem or sorry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying sheaves of sets of the inverse images of a ring and a module are uniquely identified with the set inverse image by their adjunction units",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pushforwardPushforwardAdj, pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, PresheafOfModules.sheafificationAdjunction.",
+   "date": "2026-10-22",
+   "verdict": "No exact match for the specified pro-etale inverse images and unit-normalized underlying identifications; existing project precursors are exact."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageScalarUnitNormalization",
+  "date": "2026-10-21",
+  "group": "M8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Final sentence of the proof: 'The compatibility with the derived tensor product and with base change is the naturality of the displayed projection and of the tensor product' (naturality of the tensor product under base change); original comparison proof steps 1-3",
+   "via": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pur-tate-inverse-limit-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison",
+  "declaration": "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists",
+   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification",
+   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification_exists",
+   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification"
+  ],
+  "statement": "theorem ringSetsIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y) :\n    ∃! e : (AlgebraicGeometry.ProEtale.setPullback f).obj (ringSets R) ≅\n        ringSets (inverseRing f R),\n      ∀ (V : Y.ProEt) (r : R.obj.obj (op V)),\n        e.hom.hom.app (op ((proEtaleBaseChange f).obj V))\n          (((AlgebraicGeometry.ProEtale.setPullbackAdjunction f).unit.app\n            (ringSets R)).hom.app (op V) r) =\n        ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app R).hom.app (op V) r",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-21",
+  "note": "Attachment of existing precursor declarations, not new Lean statements. Separates their dependency from the parent inverseImage_tensor_comparison theorem, which uses scalar-unit normalization. No Lean source in the F1-held module is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261021T173338-L-3588944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261021T173338-L-3588944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

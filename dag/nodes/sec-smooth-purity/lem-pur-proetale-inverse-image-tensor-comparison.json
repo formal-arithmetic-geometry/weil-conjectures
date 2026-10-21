@@ -57,7 +57,8 @@
     "lem-pur-site-algebraic-composition-unit",
     "def-weil-proetale-inverse-image",
     "det-pe-topos-functoriality-inverse-image",
-    "lem-pur-inverse-image-tensor-adjoint-test"
+    "lem-pur-inverse-image-tensor-adjoint-test",
+    "lem-pur-proetale-unit-underlying-identifications"
    ],
    "elementary": false,
    "source": {
@@ -69,7 +70,8 @@
    "text": "Identify the identity base-change functor with the identity by $T\\times_TV\\cong V$. Then [lem-pur-site-algebraic-composition-unit] identifies $\\eta_{\\mathrm{id}}$ as an isomorphism, including its ring/module identifications. Under it step 1 fixes every pure tensor $s\\otimes t$. The injectivity part of [lem-pc-sites-sheaf-tensor-bilinear-universal] makes $\\sigma^{\\mathrm{id}}$ the identity.",
    "uses": [
     "lem-pur-site-algebraic-composition-unit",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pur-proetale-unit-underlying-identifications"
    ],
    "elementary": false,
    "source": {
@@ -79,13 +81,14 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-inverse-image-scalar-unit-normalization",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "lem-pur-inverse-image-tensor-adjoint-test",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-site-algebraic-composition-unit",
   "def-weil-proetale-inverse-image",
   "det-pe-topos-functoriality-inverse-image",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pur-inverse-image-scalar-unit-normalization",
-  "lem-pur-inverse-image-tensor-adjoint-test",
-  "lem-pur-site-algebraic-composition-unit",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+  "lem-pur-proetale-unit-underlying-identifications"
  ],
  "proof_origin": {
   "by": "agent",
@@ -239,10 +242,6 @@
    "AlgebraicGeometry.ProEtaleTensorComparison.tensorMap",
    "AlgebraicGeometry.ProEtaleTensorComparison.ringSets",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleSets",
-   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists",
-   "AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification",
-   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification_exists",
-   "AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleComp_exists",
    "AlgebraicGeometry.ProEtaleTensorComparison.moduleComp",
    "AlgebraicGeometry.ProEtaleTensorComparison.ringId",
@@ -268,5 +267,15 @@
   "group": "Q91",
   "result": "pass",
   "note": "Every clause of the node matches the Lean. Cl.1: comparison_exists (exists exactly one, over all module maps) plus IsIso, the pure-tensor formula at proEtaleBaseChange h V, and joint naturality. Cl.2: square for all S, a, F, G using the unique pure-tensor-normalized coefficientQuotient and the unit-normalized scalarIdentification; both routes type-checked by hand. Cl.3: setComp_unique (unit equation iff e = recorded setPullbackComp); ringComp (conjugate of lowerStarComp); moduleComp is unique and semilinear with a pullbackComp formula whose direction matches lowerStarComp; conjuncts 5-6 identify the underlying set maps with setPullbackComp; conjunct 7 is the whole-morphism composition equation with the target identified along the ring isomorphism. Identity: unit iso on all set sheaves, and sigma at the identity equals moduleId through ringId/lowerStarId. Only recorded dependency declarations are used (ProEt, proEtaleSheafInverseImage, proEtaleModuleInverseImage, ringedSiteModules, siteSheafTensorRight/Tmul, setPullback/Comp); no pro-etale substitute; no added hypotheses; universes u+1/u kept. Seven Classical.choose definitions each use a named sorry theorem stating exactly one exists (allowed by H5); each such theorem was checked true. 9 theorems, all sorry. Docstrings carry source and blueprint id; lines at most 100 characters; imports are what the statement uses plus exactly the proof-dependency modules; lean.statement is verbatim and all 32 declarations exist; the node is unchanged except for the lean record. Own searches found no duplicate: SiteInverseImageTensor covers abelian sheaves only, ProEtaleTensorCompositionUnit is a coefficient pullback. nt_compile --json on the snapshot: exit 0, no messages, 27.1 s / 25.1 s. The Second reading section holds the accepted 2026-10-17 direct-delivery text. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261021T173338-L-3588944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
