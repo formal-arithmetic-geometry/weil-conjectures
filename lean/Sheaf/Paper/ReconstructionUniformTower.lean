@@ -15,9 +15,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.RightFractionDenseSubcategory
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 import Mathlib.CategoryTheory.Adjunction.Evaluation
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 
@@ -231,8 +234,8 @@ theorem localReductionStep_exists (n : ℕ) :
     have ua : ((pbcScalarAdjunction a).unit.app M).val.app V x =
         pbcTensorSection a M V 1 x :=
       (pbcScalarAdjunction_exists a).exists.choose_spec M V x
-    erw [uc, ua, hei] at h
-    exact h
+    exact (congrArg ((t.app M).val.app V) uc).symm.trans
+      (h.trans ((hei ((pbcExtend a).obj M) V _).trans ua))
   have hτ (M : pbcModules Y B) (V : Y.ProEtᵒᵖ)
       (b : (R.obj (op (n + 1))).obj.obj V) (x : M.val.obj V) :
       (τ.app M).val.app V (pbcTensorSection c M V b x) =
@@ -295,6 +298,46 @@ structure LocalReductionDerivedData where
     CochainComplex.IsKFlatIndependentCoefficients (R := B) P →
       IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
+private theorem derivedDataFromResolutions
+    {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
+    (F : A ⥤ (ℕᵒᵖ ⥤ A)) [F.Additive] (P : CochainComplex A ℤ → Prop)
+    (res : ∀ K : CochainComplex A ℤ,
+      ∃ (K' : CochainComplex A ℤ) (s : K' ⟶ K), P K' ∧ QuasiIso s)
+    (hinv : ∀ (K K' : CochainComplex A ℤ) (s : K ⟶ K'),
+      P K → P K' → QuasiIso s →
+        QuasiIso ((F.mapHomologicalComplex (.up ℤ)).map s)) :
+    ∃ (LF : DerivedCategory A ⥤ DerivedCategory (ℕᵒᵖ ⥤ A))
+      (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)) ∧
+        ∀ K : CochainComplex A ℤ, P K →
+          IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) := by
+  let H := F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let S : Set (HomotopyCategory A (.up ℤ)) :=
+    {K | ∃ K' : CochainComplex A ℤ, P K' ∧ (HomotopyCategory.quotient _ _).obj K' = K}
+  have hr : ∀ K : HomotopyCategory A (.up ℤ),
+      ∃ (K' : HomotopyCategory A (.up ℤ)) (s : K' ⟶ K),
+        K' ∈ S ∧ HomotopyCategory.quasiIso _ _ s := by
+    intro K
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    obtain ⟨K', s, hK', hs⟩ := res K
+    exact ⟨_, (HomotopyCategory.quotient _ _).map s, ⟨K', hK', rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hi : ∀ K K' : HomotopyCategory A (.up ℤ), ∀ s : K ⟶ K',
+      K ∈ S → K' ∈ S → HomotopyCategory.quasiIso _ _ s → IsIso (H.map s) := by
+    intro K K' s hK hK' hs
+    obtain ⟨K, hK, rfl⟩ := hK
+    obtain ⟨K', hK', rfl⟩ := hK'
+    obtain ⟨s, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective s
+    have hs' := hinv K K' s hK hK'
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff s).1 hs)
+    dsimp only [H, Functor.comp_map, Functor.mapHomotopyCategory_map]
+    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hs'
+  obtain ⟨_, LF, ε, hLF, _, hε⟩ :=
+    Functor.leftDerived_from_resolvingClass _ _ H S hr hi
+  exact ⟨LF, ε, hLF, fun K hK ↦ hε _ ⟨K, hK, rfl⟩⟩
+
 /-- The local strict reduction tower has the universal left derived pair.
 Source: blueprint orders 1239 and 1250 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
 Proof: the additive tensor tower preserves mapping cones and shifts on homotopy categories.
@@ -308,46 +351,23 @@ theorem localReductionDerived_exists : Nonempty (LocalReductionDerivedData Y B R
   let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
   let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-  let F := (localReductionModuleTower Y B R π).mapHomotopyCategory (.up ℤ) ⋙
-    DerivedCategory.Qh
-  let S : Set (HomotopyCategory (pbcModules Y B) (.up ℤ)) :=
-    {K | ∃ P : CochainComplex (pbcModules Y B) ℤ,
-      CochainComplex.IsKFlatIndependentCoefficients (R := B) P ∧
-        (HomotopyCategory.quotient _ (.up ℤ)).obj P = K}
-  have hres : ∀ K : HomotopyCategory (pbcModules Y B) (.up ℤ),
-      ∃ (K' : HomotopyCategory (pbcModules Y B) (.up ℤ)) (s : K' ⟶ K),
-        K' ∈ S ∧ HomotopyCategory.quasiIso _ _ s := by
-    intro K
-    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-    obtain ⟨P', s, hP', hs⟩ := ScalarReductionDerivedProof.kFlatResolutions P
-    exact ⟨_, (HomotopyCategory.quotient _ _).map s, ⟨P', hP', rfl⟩,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
-  have hinv : ∀ K K' : HomotopyCategory (pbcModules Y B) (.up ℤ),
-      ∀ s : K ⟶ K', K ∈ S → K' ∈ S → HomotopyCategory.quasiIso _ _ s →
-        IsIso (F.map s) := by
-    intro K K' s hK hK' hs
-    obtain ⟨P, hP, rfl⟩ := hK
-    obtain ⟨P', hP', rfl⟩ := hK'
-    obtain ⟨a, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective s
-    have ha : QuasiIso a := (HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 hs
-    have hEa : QuasiIso
-        (((localReductionModuleTower Y B R π).mapHomologicalComplex (.up ℤ)).map a) := by
+  obtain ⟨LF, ε, hLF, hε⟩ := derivedDataFromResolutions
+    (localReductionModuleTower Y B R π)
+    (CochainComplex.IsKFlatIndependentCoefficients (R := B))
+    (ScalarReductionDerivedProof.kFlatResolutions
+      (J := ProEt.topology Y) (O := B)) (by
+      intro K K' s hK hK' hs
       apply (HomologicalComplex.quasiIso_iff_evaluation _).2
       intro n
       have he : QuasiIso
-          (((pbcExtend (π.app n)).mapHomologicalComplex (.up ℤ)).map a) :=
+          (((pbcExtend (π.app n)).mapHomologicalComplex (.up ℤ)).map s) :=
         (pbcExtensionExistence (π.app n)).choose_spec.choose_spec.choose_spec.choose_spec.1
-          a hP hP' ha
+          s hK hK' hs
       change QuasiIso
         (((pbcRestrict (π.app n)).mapHomologicalComplex (.up ℤ)).map
-          (((pbcExtend (π.app n)).mapHomologicalComplex (.up ℤ)).map a))
-      infer_instance
-    dsimp only [F, Functor.comp_map, Functor.mapHomotopyCategory_map]
-    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
-    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hEa
-  obtain ⟨_, LF, ε, hLF, _, hε⟩ :=
-    Functor.leftDerived_from_resolvingClass _ _ F S hres hinv
-  exact ⟨⟨LF, ε, hLF, fun P hP ↦ hε _ ⟨P, hP, rfl⟩⟩⟩
+          (((pbcExtend (π.app n)).mapHomologicalComplex (.up ℤ)).map s))
+      exact HomologicalComplex.quasiIso_map_of_preservesHomology _ (pbcRestrict (π.app n)))
+  exact ⟨⟨LF, ε, hLF, hε⟩⟩
 
 /-- The universal derived pair, chosen only up to its unique compatible isomorphism.
 Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
@@ -375,12 +395,282 @@ def localReductionComplexCounit (P : CochainComplex (pbcModules Y B) ℤ) :
     (localReductionDerived Y B R π).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
         (((localReductionModuleTower Y B R π).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (localReductionDerived Y B R π).map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
-    (localReductionCounit Y B R π).app ((HomotopyCategory.quotient _ _).obj P) ≫
-    DerivedCategory.Qh.map
-      (((localReductionModuleTower Y B R π).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
-    (DerivedCategory.quotientCompQhIso (pbcTowers Y B)).hom.app
-      (((localReductionModuleTower Y B R π).mapHomologicalComplex (.up ℤ)).obj P)
+  (CategoryTheory.derivedCochainCounit (localReductionModuleTower Y B R π)
+    (localReductionDerived Y B R π) (localReductionCounit Y B R π)).app P
+
+private theorem restrictionLocalization
+    {C D : Type*} [Category C] [Category D]
+    (W : MorphismProperty C) [W.HasRightCalculusOfFractions]
+    (L : C ⥤ D) [L.IsLocalization W] (P : ObjectProperty C)
+    (res : ∀ X : C, ∃ (Y : P.FullSubcategory) (s : Y.obj ⟶ X), W s) :
+    (P.ι ⋙ L).IsLocalization (W.inverseImage P.ι) := by
+  let V := W.inverseImage P.ι
+  obtain ⟨_, F, hF, ⟨e⟩⟩ :=
+    rightFractionDenseSubcategory W inferInstance P res L V.Q
+  have : F.IsEquivalence := hF
+  have : (V.Q ⋙ F).IsLocalization V := inferInstance
+  exact Functor.IsLocalization.of_iso V e
+
+private theorem comparisonOnResolvingClass
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)
+    [(P.ι ⋙ L).IsLocalization (W.inverseImage P.ι)]
+    (F G : D ⥤ E) (R : C ⥤ E) (α : L ⋙ F ⟶ R) (γ : L ⋙ G ⟶ R)
+    (hα : ∀ X : P.FullSubcategory, IsIso (α.app X.obj))
+    (hγ : ∀ X : P.FullSubcategory, IsIso (γ.app X.obj)) :
+    ∃! e : F ≅ G, ∀ X : P.FullSubcategory,
+      e.hom.app (L.obj X.obj) ≫ γ.app X.obj = α.app X.obj := by
+  let S := P.ι ⋙ L
+  let V := W.inverseImage P.ι
+  let τ : S ⋙ F ≅ S ⋙ G := NatIso.ofComponents
+    (fun X ↦ asIso (α.app X.obj) ≪≫ (asIso (γ.app X.obj)).symm) (by
+      intro X Y f
+      change (L ⋙ F).map f.hom ≫ α.app Y.obj ≫ inv (γ.app Y.obj) =
+        (α.app X.obj ≫ inv (γ.app X.obj)) ≫ (L ⋙ G).map f.hom
+      rw [← Category.assoc, α.naturality, Category.assoc, Category.assoc]
+      apply congrArg (α.app X.obj ≫ ·)
+      apply (cancel_mono (γ.app Y.obj)).1
+      simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+      rw [γ.naturality f.hom]
+      simp only [← Category.assoc, IsIso.inv_hom_id, Category.id_comp])
+  let E' := (Functor.whiskeringLeft P.FullSubcategory D E).obj S
+  have : E'.Full := Localization.full_whiskeringLeft S V E
+  have : E'.Faithful := Localization.faithful_whiskeringLeft S V E
+  let e : F ≅ G := E'.preimageIso τ
+  have he (X : P.FullSubcategory) :
+      e.hom.app (L.obj X.obj) = α.app X.obj ≫ inv (γ.app X.obj) := by
+    exact congrArg (fun k ↦ k.app X) (E'.map_preimage τ.hom)
+  refine ⟨e, ?_, ?_⟩
+  · intro X
+    rw [he, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  · intro e' he'
+    apply Iso.ext
+    apply Localization.natTrans_ext S V
+    intro X
+    apply (cancel_mono (γ.app X.obj)).1
+    change e'.hom.app (L.obj X.obj) ≫ γ.app X.obj =
+      e.hom.app (L.obj X.obj) ≫ γ.app X.obj
+    rw [he' X, he, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+
+private theorem counitRepresentative
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    [Abelian A] [Abelian B] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    (F : A ⥤ B) [F.Additive] (G : B ⥤ C) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (LF : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) :
+    G.mapDerivedCategory.map
+        (LF.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+          ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
+          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+          (DerivedCategory.quotientCompQhIso _).hom.app
+            ((F.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
+      G.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient _ _).obj K)) ≫
+        G.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj
+          ((F.mapHomologicalComplex (.up ℤ)).obj K)) := by
+  simp only [Functor.mapDerivedCategoryFactorsh_hom_app]
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    Functor.mapHomotopyCategoryFactors]
+  erw [LF.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp,
+    G.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id,
+    Category.comp_id, Category.id_comp]
+  erw [Category.comp_id]
+
+private theorem whiskerCounit_isIso
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    [Abelian A] [Abelian B] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    (F : A ⥤ B) [F.Additive] (G : B ⥤ C) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (H : A ⥤ C) [H.Additive] (e : F ⋙ G ≅ H)
+    (LF : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : HomotopyCategory A (.up ℤ)) (h : IsIso (ε.app K)) :
+    IsIso (G.mapDerivedCategory.map (ε.app K) ≫
+      G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
+      DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom.app K)) := by
+  infer_instance
+
+
+private def complexCounit
+    {A C : Type*} [Category* A] [Category* C] [Abelian A] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory C]
+    (F : A ⥤ C) [F.Additive] (LF : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) : LF.obj (DerivedCategory.Q.obj K) ⟶
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj K) :=
+  (CategoryTheory.derivedCochainCounit F LF ε).app K
+
+private theorem complexCounit_formula
+    {A C : Type*} [Category* A] [Category* C] [Abelian A] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory C]
+    (F : A ⥤ C) [F.Additive] (LF : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) :
+    complexCounit F LF ε K =
+      LF.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+        ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+        (DerivedCategory.quotientCompQhIso _).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  simp only [complexCounit, CategoryTheory.derivedCochainCounit,
+    CategoryTheory.derivedCochainComparisonFactors, NatTrans.comp_app,
+    Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.assoc]
+
+private def complexComparison
+    {A C D : Type*} [Category* A] [Category* C] [Category* D]
+    [Abelian A] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : A ⥤ C) [F.Additive] (G : C ⥤ D) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (H : A ⥤ D) [H.Additive] (e : F ⋙ G ≅ H)
+    (LF : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) :
+    G.mapDerivedCategory.obj (LF.obj (DerivedCategory.Q.obj K)) ⟶
+      DerivedCategory.Qh.obj ((H.mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ _).obj K)) :=
+  G.mapDerivedCategory.map (complexCounit F LF ε K) ≫
+    G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
+    DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom.app
+      ((HomotopyCategory.quotient _ _).obj K))
+
+private theorem complexComparison_homotopy
+    {A C D : Type*} [Category* A] [Category* C] [Category* D]
+    [Abelian A] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : A ⥤ C) [F.Additive] (G : C ⥤ D) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (H : A ⥤ D) [H.Additive] (e : F ⋙ G ≅ H)
+    (LF : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) :
+    complexComparison F G H e LF ε K =
+      G.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient _ _).obj K)) ≫
+        G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ _).obj K)) ≫
+        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom.app
+          ((HomotopyCategory.quotient _ _).obj K)) := by
+  dsimp only [complexComparison]
+  rw [complexCounit_formula, ← Category.assoc, counitRepresentative, Category.assoc]
+  rfl
+
+private theorem complexComparison_refl
+    {A C D : Type*} [Category* A] [Category* C] [Category* D]
+    [Abelian A] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : A ⥤ C) [F.Additive] (G : C ⥤ D) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (LF : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (K : CochainComplex A ℤ) :
+    complexComparison F G (F ⋙ G) (Iso.refl _) LF ε K =
+      G.mapDerivedCategory.map (complexCounit F LF ε K) ≫
+        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  dsimp only [complexComparison]
+  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+  erw [DerivedCategory.Qh.map_id, Category.comp_id]
+
+private theorem normalizedDerivedComparison
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
+    (T : A ⥤ (ℕᵒᵖ ⥤ A)) [T.Additive]
+    (E : A ⥤ B) [E.Additive] (V : B ⥤ A) [V.Additive]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (n : ℕ) (H : A ⥤ A) [H.Additive]
+    (p : T ⋙ (CategoryTheory.evaluation ℕᵒᵖ A).obj (op n) ≅ H)
+    (q : E ⋙ V ≅ H)
+    (LT : DerivedCategory A ⥤ DerivedCategory (ℕᵒᵖ ⥤ A))
+    (LE : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LT ⟶
+      T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (δ : DerivedCategory.Qh ⋙ LE ⟶
+      E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex A ℤ → Prop)
+    (res : ∀ K : CochainComplex A ℤ,
+      ∃ (K' : CochainComplex A ℤ) (s : K' ⟶ K), P K' ∧ QuasiIso s)
+    (hε : ∀ K : CochainComplex A ℤ, P K →
+      IsIso (ε.app ((HomotopyCategory.quotient _ _).obj K)))
+    (hδ : ∀ K : CochainComplex A ℤ, P K →
+      IsIso (δ.app ((HomotopyCategory.quotient _ _).obj K))) :
+    ∃! e : LT ⋙ ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ≅
+        LE ⋙ V.mapDerivedCategory,
+      ∀ K : CochainComplex A ℤ, P K →
+        e.hom.app (DerivedCategory.Q.obj K) ≫ complexComparison E V H q LE δ K =
+          complexComparison T ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)) H p LT ε K := by
+  let P' : ObjectProperty (HomotopyCategory A (.up ℤ)) :=
+    fun K ↦ ∃ K' : CochainComplex A ℤ,
+      P K' ∧ (HomotopyCategory.quotient _ _).obj K' = K
+  have hres : ∀ K, ∃ (K' : P'.FullSubcategory) (s : K'.obj ⟶ K),
+      HomotopyCategory.quasiIso A (.up ℤ) s := by
+    intro K
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    obtain ⟨K', s, hK', hs⟩ := res K
+    exact ⟨⟨_, ⟨K', hK', rfl⟩⟩, (HomotopyCategory.quotient _ _).map s,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have : (P'.ι ⋙ DerivedCategory.Qh).IsLocalization
+      ((HomotopyCategory.quasiIso A (.up ℤ)).inverseImage P'.ι) :=
+    restrictionLocalization _ DerivedCategory.Qh P' hres
+  let F := LT ⋙ ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory
+  let G := LE ⋙ V.mapDerivedCategory
+  let R := H.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let α : DerivedCategory.Qh ⋙ F ⟶ R :=
+    Functor.whiskerRight ε ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ≫
+      Functor.whiskerLeft (T.mapHomotopyCategory (.up ℤ))
+        ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactorsh.hom ≫
+      Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso p (.up ℤ)).hom
+        DerivedCategory.Qh
+  let γ : DerivedCategory.Qh ⋙ G ⟶ R :=
+    Functor.whiskerRight δ V.mapDerivedCategory ≫
+      Functor.whiskerLeft (E.mapHomotopyCategory (.up ℤ)) V.mapDerivedCategoryFactorsh.hom ≫
+      Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso q (.up ℤ)).hom
+        DerivedCategory.Qh
+  have hα (K : P'.FullSubcategory) : IsIso (α.app K.obj) := by
+    rcases K with ⟨K, hK⟩
+    obtain ⟨K', hK', rfl⟩ := hK
+    exact whiskerCounit_isIso T ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)) H p LT ε _
+      (hε K' hK')
+  have hγ (K : P'.FullSubcategory) : IsIso (γ.app K.obj) := by
+    rcases K with ⟨K, hK⟩
+    obtain ⟨K', hK', rfl⟩ := hK
+    exact whiskerCounit_isIso E V H q LE δ _ (hδ K' hK')
+  obtain ⟨e, he, hu⟩ := comparisonOnResolvingClass P' DerivedCategory.Qh
+    (HomotopyCategory.quasiIso _ _) F G R α γ hα hγ
+  have hL (K : CochainComplex A ℤ) :
+      complexComparison T ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)) H p LT ε K =
+        α.app ((HomotopyCategory.quotient _ _).obj K) :=
+    complexComparison_homotopy T ((CategoryTheory.evaluation ℕᵒᵖ A).obj (op n)) H p LT ε K
+  have hR (K : CochainComplex A ℤ) : complexComparison E V H q LE δ K =
+      γ.app ((HomotopyCategory.quotient _ _).obj K) :=
+    complexComparison_homotopy E V H q LE δ K
+  refine ⟨e, ?_, ?_⟩
+  · intro K hK
+    exact (congrArg (e.hom.app (DerivedCategory.Q.obj K) ≫ ·) (hR K)).trans
+      ((he ⟨_, ⟨K, hK, rfl⟩⟩).trans (hL K).symm)
+  · intro e' he'
+    apply hu e'
+    intro K
+    rcases K with ⟨K, hK⟩
+    obtain ⟨K', hK', rfl⟩ := hK
+    exact (congrArg (e'.hom.app (DerivedCategory.Q.obj K') ≫ ·) (hR K')).symm.trans
+      ((he' K' hK').trans (hL K'))
 
 /-- Evaluation of the local strict derived tower is exactly scalar reduction followed
 by scalar restriction. Its isomorphism is fixed on every K-flat computation.
@@ -402,7 +692,46 @@ theorem localReductionEvaluation_exists (n : ℕ) :
             (Functor.mapDerivedCategoryFactors
               ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y B)).obj (op n))).hom.app
                 (((localReductionModuleTower Y B R π).mapHomologicalComplex (.up ℤ)).obj P) := by
-  sorry
+  let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
+  let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let E := pbcExtend (π.app (op n))
+  let V := pbcRestrict (π.app (op n))
+  let T := localReductionModuleTower Y B R π
+  let Ev := (CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y B)).obj (op n)
+  let p : T ⋙ Ev ≅ E ⋙ V := Iso.refl _
+  obtain ⟨e, he, hu⟩ := normalizedDerivedComparison T E V n (E ⋙ V) p (Iso.refl _)
+    (localReductionDerived Y B R π) (pbcDerivedExtend (π.app (op n)))
+    (localReductionCounit Y B R π) (pbcExtensionCounit (π.app (op n)))
+    (fun K ↦ CochainComplex.IsKFlatIndependentCoefficients (R := B) K)
+    (fun K ↦ ScalarReductionDerivedProof.kFlatResolutions K)
+    (localReductionDerivedData Y B R π).kFlat
+    (pbcExtensionCounit_isIso (π.app (op n)))
+  have hcR (K : CochainComplex (pbcModules Y B) ℤ) :
+      complexComparison E V (E ⋙ V) (Iso.refl _)
+          (pbcDerivedExtend (π.app (op n))) (pbcExtensionCounit (π.app (op n))) K =
+        (pbcDerivedRestrict (π.app (op n))).map (pbcComplexCounit (π.app (op n)) K) ≫
+          V.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj K) := by
+    rw [complexComparison_refl, complexCounit_formula]
+    rfl
+  have hcL (K : CochainComplex (pbcModules Y B) ℤ) :
+      complexComparison T Ev (E ⋙ V) p
+          (localReductionDerived Y B R π) (localReductionCounit Y B R π) K =
+        (pbcTowerEvaluation Y B n).map (localReductionComplexCounit Y B R π K) ≫
+          Ev.mapDerivedCategoryFactors.hom.app ((T.mapHomologicalComplex (.up ℤ)).obj K) := by
+    exact complexComparison_refl T Ev (localReductionDerived Y B R π)
+      (localReductionCounit Y B R π) K
+  refine ⟨e, ?_, ?_⟩
+  · intro K hK
+    exact (congrArg (e.hom.app (DerivedCategory.Q.obj K) ≫ ·) (hcR K)).symm.trans
+      ((he K hK).trans (hcL K))
+  · intro e' he'
+    apply hu e'
+    intro K hK
+    exact (congrArg (e'.hom.app (DerivedCategory.Q.obj K) ≫ ·) (hcR K)).trans
+      ((he' K hK).trans (hcL K).symm)
 
 /-- The uniquely normalized evaluation comparison.
 Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/

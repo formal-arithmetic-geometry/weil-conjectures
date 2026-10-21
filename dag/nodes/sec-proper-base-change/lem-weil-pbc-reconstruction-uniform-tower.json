@@ -41,7 +41,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the auxiliary strict reduction and inverse-limit functors before reconstruction. Module sheaves are Grothendieck in the coefficient universe; evaluation left adjoints carry a separator to a separating family of towers, whose coproduct is a separator. Colimits and filtered-colimit exactness are pointwise. Tensor extension and scalar restriction are additive, so evaluation proves the strict tensor tower additive; limit projections prove the inverse limit additive. Resolve source complexes by K-flat complexes. Extension at each quotient preserves quasi-isomorphisms between K-flat complexes, and exact restriction preserves their quasi-isomorphisms. Evaluation detects tower quasi-isomorphisms. The K-flat resolving-class theorem therefore constructs the universal derived strict tower and its invertible counit on K-flat complexes. The coefficient-cone naturality is the image of the limit projection relation. Finite limits and colimits of pulled-back module towers are detected pointwise, where the module inverse image is exact. For the ordinary adjacent reduction, transpose the later quotient unit through the normalized tensor/restriction adjunction, using cone naturality and the identity-on-sections restriction-composition comparison. Scalar linearity gives b tensor x maps to q(b) tensor x; sheafification and tensor induction give uniqueness.",
+   "text": "Construct the auxiliary strict reduction and inverse-limit functors before reconstruction. Module sheaves are Grothendieck in the coefficient universe; evaluation left adjoints carry a separator to a separating family of towers, whose coproduct is a separator. Colimits and filtered-colimit exactness are pointwise. Tensor extension and scalar restriction are additive, so evaluation proves the strict tensor tower additive; limit projections prove the inverse limit additive. Resolve source complexes by K-flat complexes. Extension at each quotient preserves quasi-isomorphisms between K-flat complexes, and exact restriction preserves their quasi-isomorphisms. Evaluation detects tower quasi-isomorphisms. The K-flat resolving-class theorem therefore constructs the universal derived strict tower and its invertible counit on K-flat complexes. The coefficient-cone naturality is the image of the limit projection relation. Finite limits and colimits of pulled-back module towers are detected pointwise, where the module inverse image is exact. For the ordinary adjacent reduction, transpose the later quotient unit through the normalized tensor/restriction adjunction, using cone naturality and the identity-on-sections restriction-composition comparison. Scalar linearity gives b tensor x maps to q(b) tensor x; sheafification and tensor induction give uniqueness. For derived evaluation, restrict homotopy localization to the full subcategory of K-flat representatives. Every homotopy object receives a quasi-isomorphism from this subcategory, so the right-fraction dense-subcategory theorem identifies its localization with the derived category. The evaluated tower counit and the scalar-extension counit followed by exact restriction are invertible on that subcategory. Their quotient therefore gives a natural isomorphism there. Full and faithful precomposition with the localization descends it uniquely. Express the cochain comparison through the existing derivedCochainCounit constructor; its component is exactly the original four-factor transported counit. The exact evaluation and restriction factorizations give the prescribed cochain equation. Cancellation of the invertible counits and faithful localization prove uniqueness. Keep this argument abstract in the functors to avoid repeated expansion of coefficient-module structures.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-pur-left-derived-from-kflat-class",
@@ -49,7 +49,9 @@
     "lem-pc-kflat-resolution",
     "def-weil-pbc-bounded-constructible-tower",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-derived-scalar-extension-restriction-adjunction"
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-trf-right-fraction-dense-subcategory",
+    "def-derived-cochain-counit"
    ],
    "elementary": false
   },
@@ -157,6 +159,7 @@
   }
  ],
  "proof_deps": [
+  "def-derived-cochain-counit",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-adic-lisse-module",
   "def-weil-pbc-bounded-constructible-tower",
@@ -166,6 +169,7 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-left-derived-from-kflat-class",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-right-fraction-dense-subcategory",
   "lem-weil-derived-countable-products-core",
   "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-weil-pbc-constant-completion-equivalence",
@@ -187,7 +191,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-reconstruction-uniform-tower.md",
-  "place": "Retain the seven reconstruction steps; auxiliary categorical infrastructure present in the initial working source is restored. M4, 2026-10-21: prove localReductionStep_exists using normalized scalar adjunction, restriction-composition normalization, scalar linearity and sheafified pure-tensor extensionality. The original localReductionEvaluation_exists and reconstructionUniformTower proof obligations remain."
+  "place": "Retain the seven reconstruction steps; auxiliary categorical infrastructure present in the initial working source is restored. M4, 2026-10-21: prove localReductionStep_exists using normalized scalar adjunction, restriction-composition normalization, scalar linearity and sheafified pure-tensor extensionality. The original localReductionEvaluation_exists and reconstructionUniformTower proof obligations remain. W4, 2026-10-21: prove localReductionEvaluation_exists by K-flat dense-subcategory localization, comparison of the invertible universal counits, and the exact evaluation/restriction factorizations. Refactor the already-proved derived-tower existence argument through an abstract resolving-class helper. Replace localReductionComplexCounit by the existing derivedCochainCounit component; the proved generic complexCounit_formula identity recovers its old formula exactly. reconstructionUniformTower remains the sole sorry; its seven proof steps are retained."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -351,11 +355,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-1a646",
-  "group": "M4",
+  "reviewer": "COMPILER",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261021T001131-L-1375347",
-  "kind": "proof",
-  "note": "independent cc review: delivered ReconstructionUniformTower.lean vs quarantine/Sheaf/Paper/ReconstructionUniformTower.lean (LocallyClosedStratification→Stratification only, 9 sorrys closed, 4 private helpers), node lem-weil-pbc-reconstruction-uniform-tower vs live (new step 0, 3 proof_deps matching new imports), change record; lcompile --all exit 0 in 36.8 s; axioms clean; 0 importers"
+  "landing": "20261021T011053-L-2034806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
