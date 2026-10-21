@@ -1,0 +1,101 @@
+{
+ "id": "lem-sfb-internal-abelian-finite-limit-creation",
+ "kind": "statement",
+ "title": "Finite limits of internal abelian groups are created on underlying objects",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits]. Write $\\operatorname{AbObj}(\\mathcal C)$ for the category whose objects are quadruples $(M,m,e,i)$, with $m:M\\times M\\to M$, $e:*\\to M$ and $i:M\\to M$ satisfying associativity, commutativity, the two unit laws and the inverse laws as equations of morphisms; here $*$ is terminal and products have the meaning of [def-weil-category-product]. Morphisms preserve these operations. Let $U_{\\mathcal C}:\\operatorname{AbObj}(\\mathcal C)\\to\\mathcal C$ forget the operations.\n\nFor every finite category $I$, every diagram $D:I\\to\\operatorname{AbObj}(\\mathcal C)$ and every limiting cone $(L,(p_j)_j)$ of $U_{\\mathcal C}D$, there is exactly one abelian-group-object structure on the same object $L$ making all $p_j$ group-object morphisms. With this structure the cone is limiting in $\\operatorname{AbObj}(\\mathcal C)$: the unique underlying factorization of any group-object cone is a group-object morphism. Moreover, a cone of group objects is limiting if and only if its underlying cone is limiting. Thus $U_{\\mathcal C}$ creates, preserves and reflects finite limits, including the empty limit.\n\nLet $\\mathcal D$ also have finite limits, and let $F:\\mathcal C\\to\\mathcal D$ preserve finite limits. Equip $FM$ with $F(m)\\circ\\lambda_{M,M}^{-1}$, $F(e)\\circ\\lambda_*^{-1}$ and $F(i)$, where $\\lambda_{M,N}:F(M\\times N)\\to FM\\times FN$ and $\\lambda_*:F(*)\\to *$ are the canonical comparisons. This operation transport, with $h\\mapsto F(h)$ on morphisms, defines a functor $F^{\\mathrm{ab}}:\\operatorname{AbObj}(\\mathcal C)\\to\\operatorname{AbObj}(\\mathcal D)$, and $F^{\\mathrm{ab}}$ preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part and preceding quadruple discussion: categorical finite-limit creation argument extracted from the passage from set inverse image to abelian inverse image. The arbitrary finite-limit-category formulation is agent-extracted, not a verbatim assertion of the proposition."
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-category-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat\", \"AddCommGrpCat\"",
+   "results": "ModuleCat.instReflectsIsomorphismsAddCommGrpCatForget₂LinearMapIdCarrierAddMonoidHomCarrier; ModuleCat.instPreservesColimitsOfSizeAddCommGrpCatForget₂LinearMapIdCarrierAddMonoidHomCarrierOfHasColimitsOfSizeAddCommGrpMax; ModuleCat.HasColimit.instPreservesColimitAddCommGrpCatForget₂LinearMapIdCarrierAddMonoidHomCarrier",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "grep",
+   "query": "mapCommGrp|mapAbelian|mapAddCommGrp|additive.*(CommGrp|Abelian)|preservesFiniteLimits.*CommGrp|CommGrp.*preservesFiniteLimits",
+   "results": "Mathlib/CategoryTheory/Adjunction/Additive.lean; Mathlib/CategoryTheory/Preadditive/Basic.lean; Mathlib/CategoryTheory/Preadditive/Basic.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left exact functor between categories with finite products induces an additive functor on internal commutative group objects and preserves finite limits",
+   "results": "CategoryTheory.leftExactFunctor_le_additiveFunctor; CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor; CategoryTheory.leftExactFunctor; CategoryTheory.Functor.preservesFiniteProductsOfAdditive; CategoryTheory.Functor.mapExtAddHom; CategoryTheory.exactFunctor_le_additiveFunctor; CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive; CategoryTheory.LeftExactFunctor",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGrp\", \"map\"",
+   "results": "AddCommGrpCat.uliftFunctor_map; CommGrpCat.uliftFunctor_map; AddCommGrpCat.forget₂_commMonCat_map_ofHom; CommGrpCat.forget₂_commMonCat_map_ofHom; AddCommGrpCat.forget₂_addGrp_map_ofHom; CommGrpCat.forget₂_grp_map_ofHom; AddCommGrpCat.forget₂_map; CommGrpCat.forget₂_map",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving functor induces an additive functor between categories of internal abelian group objects; if the original functor preserves finite limits then its induced internal abelian group functor preserves finite limits",
+   "results": "CategoryTheory.Functor.preservesFiniteProductsOfAdditive; AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux; CategoryTheory.Functor.additive_of_preserves_binary_products; AddCommGrpCat.leftExactFunctorForgetEquivalence.unitIsoAux; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux; AddCommGrpCat.uliftFunctor_preservesLimitsOfShape; AddCommGrpCat.uliftFunctor_preservesLimit; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverse",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "grep",
+   "query": "limit|[Aa]dditive|[Pp]readditive|[Cc]reates|mapCommGrp",
+   "results": "19; 199; 208; 216; 219; searched Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGrp\", \"Preserves\"",
+   "results": "AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits; CommGrpCat.FilteredColimits.forget_preservesFilteredColimits; AddCommGrpCat.FilteredColimits.forget₂AddGroup_preservesFilteredColimits; CommGrpCat.FilteredColimits.forget₂Group_preservesFilteredColimits; RingCat.FilteredColimits.instPreservesFilteredColimitsAddCommGrpCatForget₂RingHomCarrierAddMonoidHomCarrier; AddCommGrpCat.forget_preservesLimits; AddCommGrpCat.forget_preservesLimitsOfSize; CommGrpCat.forget_preservesLimits",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from internal commutative group objects in a category with finite products creates finite limits, so a left exact functor transports internal abelian groups by a left exact additive functor",
+   "results": "AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverse; AddCommGrpCat.leftExactFunctorForgetEquivalence; AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux; CommGrpCat.forget_preservesLimits; AddCommGrpCat.leftExactFunctorForgetEquivalence.unitIsoAux; AddCommGrpCat.forget_preservesLimits; AddCommGrpCat.forget₂AddGroup_preservesLimits",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*(Creates|Preserves).*Limits|(Creates|Preserves).*Limits.*CommGrp|CommGrp.*[Pp]readditive",
+   "results": "Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean; Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "No exact match: internal operation transport or concrete-group limit/additivity ingredients only; no finite-limit creation theorem for internal abelian groups in arbitrary finite-limit categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-prop-sfb-cartesian-coefficients",
+  "date": "2026-10-21",
+  "group": "Q03"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sfb-cartesian-coefficients",
+   "place": "Final exactness sentence: the finite-limit universal properties of the abelian inverse image, used before the binary-product/zero criterion for additivity in the former final proof step.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

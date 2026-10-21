@@ -88,15 +88,17 @@
    }
   },
   {
-   "text": "By clauses 3–4 of [det-pe-topos-functoriality-inverse-image], $f^{-1}$ preserves terminal objects and binary products on underlying sets, hence also the zero abelian sheaf and binary products with their induced group laws. Zero arrows factor through zero, so are preserved. Apply [lem-sfb-products-zero-additive]: abelian inverse image is additive.",
+   "text": "View abelian sheaves as internal group objects by [lem-weil-pbc-sheaf-algebraic-structures-objects]. Clauses 3–4 of [det-pe-topos-functoriality-inverse-image] compute abelian inverse image on the finite-limit-preserving set inverse image. By [lem-sfb-internal-abelian-finite-limit-creation], its transported group functor preserves finite limits. In particular it preserves binary products and the terminal abelian sheaf, which is zero. Zero arrows factor through zero. Thus [lem-sfb-products-zero-additive] makes abelian inverse image additive.",
    "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
     "det-pe-topos-functoriality-inverse-image",
+    "lem-sfb-internal-abelian-finite-limit-creation",
     "lem-sfb-products-zero-additive"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final exactness sentence: additivity"
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, abelian-group part; final exactness sentence of the blueprint item, refined via the new finite-limit creation statement."
    }
   },
   {
@@ -139,7 +141,9 @@
   "def-sfb-modobj-extension-along-iso",
   "sk-def-sfb-transport",
   "def-sfb-modobj-restriction",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "det-pe-topos-functoriality-inverse-image",
+  "lem-sfb-internal-abelian-finite-limit-creation",
   "lem-sfb-products-zero-additive",
   "det-prop-sfb-module-pullback-exact-lifted",
   "lem-sfb-finite-exactness-nat-iso"
@@ -317,8 +321,8 @@
   "date": "2026-10-21",
   "item": "sk-prop-sfb-cartesian-coefficients",
   "worker": "stage1",
-  "summary": "Repair of the 2026-10-21 coarse-proof return. Statement unchanged. Replaced the implicit biproduct/additivity argument and exactness-transport argument by two searched Mathlib leaves. Reused the existing generic abelianness theorem directly instead of rebuilding abelian sheaves as integer modules. Expanded the explicit mapMod forgetful citation. The eight assembly steps total 2545 characters; every substantive input is a cited statement. No parent clause is restated as a new node.",
-  "blueprint": "Steps 1, 2, 3 realize blueprint proof paragraphs 1, 2, 3. Steps 4–8 refine the final exactness sentence; the two new Mathlib leaves discharge the generic additivity and natural-isomorphism invariance arguments formerly embedded in step 6.",
+  "summary": "Rebased on the already-landed Q30 eight-step repair, retaining the statement, all existing sources, searches and Mathlib leaves. Added one statement-only unsplit generic lemma exposing the finite-limit creation/universal-property argument for internal abelian groups; step 6 applies it before the existing additivity criterion. No proof is supplied for the new node. The full future-worker construction is preserved in report.md. Parent proof length: 2742 characters.",
+  "blueprint": "Steps 1–3 retain paragraphs 1–3 of the unit proof. Steps 4–8 assemble the final exactness sentence. The new helper refines the universal-property/operation-lifting part of step 6; the already-landed Q30 additivity and natural-isomorphism leaves remain in use.",
   "tool_uses": [
    {
     "node": "det-prop-sfb-cartesian-coefficients-twists",
@@ -330,11 +334,15 @@
    },
    {
     "node": "det-prop-sfb-module-pullback-exact-lifted",
-    "why": "Step 6 uses only the generic statement that a functor of module categories lifting an additive exact functor is exact; it expands the unit's final sentence 'is the exact functor f^{-1}', for which this unit has no node."
+    "why": "Step 7 uses only the generic statement that a functor of module categories lifting an additive exact functor is exact; it expands the unit's final sentence 'is the exact functor f^{-1}', for which this unit has no node."
    },
    {
     "node": "lem-weil-pbc-site-sheaves-enough-injectives",
     "why": "Only its abelianness clause for a small site is used to verify the ambient category hypotheses; no step of the coefficient route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Only the sectionwise equivalence between abelian sheaves and internal abelian group objects is used to apply finite-limit creation; this is a generic algebraic-structure identification, not an alternate coefficient route."
    }
   ]
  },
@@ -343,15 +351,16 @@
   "det-prop-sfb-cartesian-coefficients-twists",
   "lem-sfb-modobj-abelian",
   "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-weil-pbc-site-sheaves-enough-injectives"
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q30-e65595e9f",
-  "group": "Q30",
+  "reviewer": "NT-cc-Q03-2894ddebc",
+  "group": "Q03",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-e65595e9f (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, both new nodes, the statement of every cited node, the blueprint main-20261015 section and the unit record. This delivery answers the human's 2026-10-21 re-split note (proof 5449 chars; steps 4, 5 and 6 too long). The new proof is 2545 chars, the longest step 478. It adds two new nodes, both exact Mathlib leaves. The ℤ-module detour is replaced by the existing small-site abelian Mathlib leaf lem-weil-pbc-site-sheaves-enough-injectives. Compared field by field with the live ND node, only proof, proof_deps and split_report differ; the statement and stmt_deps are byte-identical, so no target is weakened. Step checks: (1) the coefficient-morphisms node gives the ring-object iso and lem-sfb-alpha-iso gives invertibility, with no condition on ℓ. (2) The twist detail node is used only on its domain (ℓ invertible). (3) An integral basis plus the basis-conditional finite-free node; tested E=F and ramified F/E. (4) Every hypothesis of lem-sfb-modobj-abelian is checked: abelian, tensor additive in each variable, R⊗− preserves finite colimits. (5) Every hypothesis of def-sfb-modobj-extension-along-iso is checked: braided, closed, equalizers and coequalizers, α iso, source ring commutative. Res_{α^{-1}} goes Mod_{f*Λ_Y}→Mod_{Λ_X} with action γ̃∘(α^{-1}⊗1). U_X G=f^{-1}U_Y follows from transport clause 1 and the restriction node. (6) Clauses 3–4 of topos functoriality give preservation of binary products and zero arrows, so the new leaf gives additivity. (7) Every hypothesis of the exact-lifted lemma is in force. (8) The nat-iso leaf transfers exactness to f* along the inverse of the step-5 comparison. New leaves: Functor.additive_of_preserves_binary_products (AdditiveFunctor.lean:234–239) and preservesFinite(Co)Limits_of_natIso (Preserves/Finite.lean:92–94, 248–250); all lines read, exact matches. Searches are recorded with all three kinds. Neither leaf is a duplicate: lem-sfb-preserving-colimits-additive uses a different criterion. Neither restates a clause of the parent. No cycle, all ids exist, no SGA. review_split's FAIL comes only from the earlier ND node lem-sfb-local-field-integral-basis, which is now split; that is not this delivery's fault. Accepted tool_uses: det-prop-sfb-cartesian-coefficients-twists, lem-sfb-modobj-abelian, det-prop-sfb-module-pullback-exact-lifted, lem-weil-pbc-site-sheaves-enough-injectives. Maintainer note: the node-level tool_uses still lists lem-pur-ringed-site-grothendieck-abelian, which the proof no longer cites; drop it at the merge. The split_report tool_uses entry for the exact-lifted lemma says step 6; it is now step 7 (cosmetic)."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-2894ddebc (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, the new node, the statement of every cited node, the repair note (2026-10-21 re-split: 5449 characters, at least 1 new node, at most 3000 characters, no shortening), the old ND 6-step proof, and Stacks sites.tex Tag 00YV (lines 10433-10470, proof of (2)). Context: Q30's split landed at 11:17 (PASS) and Q79's top-up was RETURNed at 12:08. This delivery is based on 7d7d746, which already contains Q30. Compared field by field with the live sheaf node, only step 6 and proof_deps differ; the statement, stmt_deps, tool_uses and lean fields are byte-identical. Nothing landed is overwritten and Q30's two leaves are kept. Old step 6 asserted without proof that abelian f^{-1} preserves the zero sheaf and binary products with their group laws, and Q30 kept that as an uncited sentence. The new node lem-sfb-internal-abelian-finite-limit-creation states this argument generically, so the delivery moves an old argument into its own node instead of shortening it. Total 2742 characters; longest step 545. Step 6 check: lem-weil-pbc-sheaf-algebraic-structures-objects is an isomorphism of categories over Sh(C). Clause 4 of det-pe-topos-functoriality-inverse-image computes abelian f^{-1} on underlying sets, so it equals F^ab for the set inverse image F. By the new node, F^ab preserves binary products and the terminal (zero) object; zero arrows factor through F0, which is zero. That meets every hypothesis of lem-sfb-products-zero-additive. The new node is true: operations come from unique cone factorizations; joint monicity gives the axioms, uniqueness and the group-morphism property; a limiting group cone is isomorphic to the constructed lift; F^ab with F(m)∘λ^{-1} preserves finite limits. Edge cases checked: empty I (terminal object), singleton I, terminal C. The node is self-contained and statement-only; stmt_deps are def-galois-finite-limits-colimits and def-weil-category-product; the source is Stacks 00YV, honestly marked as agent-extracted; no SGA. It restates no clause of the parent. A DAG search (adjunction-lifts-group-ring-objects, geometric-ring-transport, site-pullback-abelian-underlying and -exact) found no duplicate. Mathlib has only a partial match the worker did not cite: GrpLimits.lean:46-52, CreatesLimitsOfShape J (Grp.forget C), for non-commutative groups and the creation half only. So mathlib_match = null is correct; this is an advisory for the prover. Steps 1-5, 7 and 8 are verbatim Q30 and I re-checked them against the cited statements. Accepted tool_uses: twists detail, lem-sfb-modobj-abelian, det-prop-sfb-module-pullback-exact-lifted, lem-weil-pbc-site-sheaves-enough-injectives, lem-weil-pbc-sheaf-algebraic-structures-objects (generic uses only). Maintainer notes: (1) lem-weil-pbc-site-pullback-abelian-exact could later give steps 6-7 directly; (2) node-level tool_uses still lists the uncited lem-pur-ringed-site-grothendieck-abelian; (3) after this landing, set the repair note to resolved so the item stops being re-issued."
  },
  "lean_audit": {},
  "lean": {
