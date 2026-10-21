@@ -70,6 +70,47 @@ theorem exists_unique_coherent_right_adjoint_comparisons
       (∀ (i j : I) (M : C) (N : D) (h : (F i).obj M ⟶ N),
         (a j).homEquiv M N ((phi j i).inv.app M ≫ h) =
           (a i).homEquiv M N h ≫ (gamma j i).hom.app N) := by
-  sorry
+  let gamma (j i : I) : G i ≅ G j := conjugateIsoEquiv (a i) (a j) (phi j i).symm
+  have hnorm (i j : I) (N : D) :
+      (F j).map ((gamma j i).hom.app N) ≫ (a j).counit.app N =
+        (phi j i).inv.app ((G i).obj N) ≫ (a i).counit.app N :=
+    conjugateEquiv_counit (a i) (a j) (phi j i).inv N
+  have huniq (i j : I) (N : D) (b : (G i).obj N ⟶ (G j).obj N)
+      (hb : (F j).map b ≫ (a j).counit.app N =
+        (phi j i).inv.app ((G i).obj N) ≫ (a i).counit.app N) :
+      b = (gamma j i).hom.app N := by
+    apply ((a j).homEquiv ((G i).obj N) N).symm.injective
+    exact hb.trans (hnorm i j N).symm
+  have hid (i : I) : gamma i i = Iso.refl (G i) := by
+    apply Iso.ext
+    simp [gamma, hphi_id]
+  have hcomp (i j k : I) : gamma j i ≪≫ gamma k j = gamma k i := by
+    apply Iso.ext
+    change conjugateEquiv (a i) (a j) (phi j i).inv ≫
+        conjugateEquiv (a j) (a k) (phi k j).inv =
+      conjugateEquiv (a i) (a k) (phi k i).inv
+    rw [conjugateEquiv_comp]
+    exact congrArg (conjugateEquiv (a i) (a k))
+      (congrArg Iso.inv (hphi_comp i j k))
+  refine ⟨gamma, hnorm, ?_, huniq, ?_, hid, hcomp, ?_, ?_⟩
+  · intro gamma' hnorm'
+    funext j i
+    apply Iso.ext
+    ext N
+    exact huniq i j N _ (hnorm' i j N)
+  · intro i j
+    rfl
+  · intro i j
+    apply Iso.ext
+    apply (cancel_epi (gamma j i).hom).mp
+    rw [Iso.symm_hom, Iso.hom_inv_id]
+    simpa only [Iso.trans_hom, hid, Iso.refl_hom] using
+      congrArg Iso.hom (hcomp i j i)
+  · intro i j M N h
+    apply ((a j).homEquiv M N).symm.injective
+    rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit,
+      (F j).map_comp, Category.assoc, hnorm, ← Category.assoc,
+      (phi j i).inv.naturality, Category.assoc,
+      ← Adjunction.homEquiv_counit, Equiv.symm_apply_apply]
 
 end CategoryTheory
