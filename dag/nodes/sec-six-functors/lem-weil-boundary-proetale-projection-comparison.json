@@ -48,90 +48,32 @@
    }
   },
   {
-   "text": "The finite formula for the exceptional inverse image is $G_p=C_ZG_eR\\nu_{T,*}$, with its bounded-below typing already supplied by the cited definition. For bounded-below $H,L$ the transported Hom bijection is the one written in the statement: first precompose with $b_H$, then apply $C_T\\dashv R\\nu_{T,*}$, then $F_e\\dashv G_e$, then the fully faithful functor $C_Z$. Each arrow is a bijection, and they are natural. The unit $j_N:N\\to R\\nu_{T,*}C_TN$ is invertible; thus $C_ZG_e(j_N)$ identifies $C_ZG_eN$ with $G_pC_TN$. For $L=C_TN$, this specializes, under that identification, to\n$$\\operatorname{Hom}(F_pC_ZH,C_TN)\\xrightarrow{(-)\\circ b_H}\\operatorname{Hom}(C_TF_eH,C_TN)\\xrightarrow{C_T^{-1}}\\operatorname{Hom}(F_eH,N)\\xrightarrow{F_e\\dashv G_e}\\operatorname{Hom}(H,G_eN)\\xrightarrow{C_Z}\\operatorname{Hom}(C_ZH,C_ZG_eN).$$\nHere $C_T^{-1}$ means the inverse map on Hom sets furnished by full faithfulness, not an inverse functor on the ambient pro-etale category.",
+   "text": "Apply the fully-faithful Hom-transport lemma with $C_Z,C_T$, $R=R\\nu_{T,*}$, $F_e,G_e,F_p,b$ as above. The comparison theorem supplies both full faithfulness and its unit, and the exceptional-inverse-image definition supplies the bounded-below functor $G_p=C_ZG_eR$. This gives exactly the specified Hom bijections. Its origin-map evaluation at $H=G_eN$ gives the required exceptional counit formula under $C_ZG_e(j_N)$; the assumed bounded constructibility makes this $H$ bounded below.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
+    "lem-sf-fully-faithful-exceptional-hom-transport",
     "thm-weil-pbc-site-comparison",
-    "thm-amb-etale-exceptional-adjoint"
+    "def-weil-exceptional-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0DV0 (lemma-compose-counits), explicitly composing the displayed Hom bijections; specialization to fully faithful comparison pullbacks."
+    "place": "Tag 0DV0, lemma-compose-counits, and Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit fully faithful Hom transport specialization."
    }
   },
   {
-   "text": "Put $H=G_eN$, which is bounded below by the hypothesis that $G_eN$ is bounded constructible. Apply the specialized Hom chain of Step 2 to $C_T(\\mu^e_N)\\circ b_H^{-1}$. Precomposing with $b_H$ gives $C_T(\\mu^e_N)$; the inverse of $C_T$ on Hom sets gives $\\mu^e_N$; ordinary exceptional adjunction sends its counit to $1_{G_eN}$; applying $C_Z$ gives $1_{C_ZG_eN}$. The transported counit is precisely the preimage of that identity. Bijectivity proves\n$$\\mu^p_{C_TN}=C_T(\\mu^e_N)\\circ\\eta_{G_eN}$$\nunder $C_ZG_e(j_N)$. This computes the counit of the specified transported adjunction, rather than asserting the existence of an ambient pro-etale exceptional adjoint.",
+   "text": "Choose cohomological bounds $[r,s]$ for $B$ and Tor bounds $[u,v]$ for $M$. The bounded-tensor lemma gives $Q=B\\otimes_A^LlM\\in D^b(Z_e,A)\\subset D^+(Z_e,A)$, with cohomology in $[r+u,s+v]$, and invertible $b_Q$. Also $B\\in D^b_c(Z_e,A)\\subset D^+(Z_e,A)$, $i$ is quasi-compact and quasi-separated by Step 1, and $A$ is finite discrete commutative. Hence the existing etale/pro-etale projection-comparison lemma applies to $p=i$, $K=B$, $N=M$, with $F_T=C_T$, $F_X=C_Z$, $u=l$, $v=P$, $R_e=F_e$, $R_p=F_p$. Its $a$, $t$ and $b$ are the specified comparisons, its projection morphisms are the counit-defined $\\pi_e,\\pi_p$ of the statement (adjoint transposes of $(\\varepsilon\\otimes1)\\circ t$ on both sites), and its $h=(1\\otimes a_M)\\circ t_{C_Z;B,lM}:C_ZQ\\to Y=C_ZB\\otimes_A^LPC_TM$. It gives $F_p(h)\\circ b_Q\\circ C_T(\\pi_e)=\\pi_p\\circ(b_B\\otimes1)\\circ t_{C_T;F_eB,M}$. Precomposed with $t_{C_T}^{-1}$ this is $L=R$, where $L=F_p(h)b_QC_T(\\pi_e)t_{C_T}^{-1}$ and $R=\\pi_p(b_B\\otimes1)$.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison",
-    "thm-amb-etale-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); evaluation at the identity in the Hom transport of Step 2."
-   }
-  },
-  {
-   "text": "Use $l,P,a$ from Step 1. For each derived pullback $J$, write $t_J:J(U\\otimes^LV)\\to JU\\otimes^LJV$ for its tensor comparison. The etale/pro-etale pullback comparison $a:C_Zl\\to PC_T$ comes from the commuting comparison square of topoi. The comparison morphisms are flat ringed-topos morphisms with the identified constant ring sheaves. All four inverse images carry each scalar endomorphism for a fixed element of $A$ to that same scalar endomorphism; the structure maps preserve constant sections. Hence the structural ring maps commute with the comparison square, as can be checked on the constant-section generators before sheafification. The ringed-derived-monoidal-comparisons theorem, applied to the two composites around this square and its specified 2-isomorphism, shows that $a$ is monoidal for these actual tensor comparisons. In components the equation needed below is\n$$t_P\\circ P(t_{C_T})\\circ a_{U\\otimes^LV}=(a_U\\otimes a_V)\\circ t_{C_Z}\\circ C_Z(t_l).$$\nThis equation has source $C_Zl(U\\otimes^LV)$ and target $PC_TU\\otimes^LPC_TV$.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-sf-boundary-bounded-tensor-comparison",
+    "lem-sfb-projection-comparison-etale-proetale"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), and the comparisons in Tag 0E48 (remark-compatible-with-diagram)."
+    "place": "Tag 0E48, remark-compatible-with-diagram, for the etale/pro-etale comparison square of the closed immersion, through the existing site projection-comparison lemma."
    }
   },
   {
-   "text": "Put $Q=B\\otimes_A^LlM$, and let\n$$h=(1\\otimes a_M)\\circ t_{C_Z;B,lM}:C_ZQ\\xrightarrow{\\sim}C_ZB\\otimes_A^LPC_TM.$$\nThe finite-Tor condition on $M$ gives a bounded flat etale model by the etale clause of the flat-model theorem. A bounded flat complex is K-flat: filter it by its finitely many terms, tensor with any acyclic complex, and use exactness of tensor by a flat sheaf and the cohomology sequence at each finite filtration step. The ringed-topos pullback theorem says that pullback carries K-flat complexes with flat terms to such complexes. As $l$ is exact at constant coefficients, pulling this model back gives a bounded flat model of $lM$. If $B$ has cohomology in $[r,s]$ and that model is supported in $[u,v]$, tensoring it with a good bounded representative of $B$ has terms only in $[r+u,s+v]$. Hence $Q$ is bounded, in particular in $D^+$, so $b_Q$ is defined and invertible. Use on both sites the ringed-topos projection transformation: its transpose is exactly $(\\varepsilon^\\tau_E\\otimes1)t_{l_\\tau}$. For the etale site this agrees term for term with the explicit definition in def-kun-projection-formula-map; the pro-etale definition is supplied by the general ringed-topos theorem and the derived adjunction of the pro-etale operations.",
-   "uses": [
-    "lem-sf-flat-model",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), using Tags 07A4 and 07A6; bounded flat models are taken from the cited flat-model statement."
-   }
-  },
-  {
-   "text": "Let $X=C_TF_eB\\otimes_A^LC_TM$ and $Y=C_ZB\\otimes_A^LPC_TM$. Both maps to compare are now written with the same source and target $X\\to F_pY$:\n$$L=F_p(h)\\circ b_Q\\circ C_T(\\pi_e)\\circ t_{C_T;F_eB,M}^{-1},\\qquad R=\\pi_p\\circ(b_B\\otimes1).$$\nUnder $P\\dashv F_p$, transposition sends $f:X\\to F_pY$ to $\\varepsilon^p_Y\\circ P(f)$. Naturality of the counit and the normalization of $b_Q$ give\n$$L^\\flat=h\\circ C_Z(\\varepsilon^e_Q)\\circ a_{F_eQ}^{-1}\\circ PC_T(\\pi_e)\\circ P(t_{C_T}^{-1}).$$\nNaturality of $a$ moves $PC_T(\\pi_e)$ through $a^{-1}$. The defining transpose identity $\\varepsilon^e_Q\\circ l(\\pi_e)=(\\varepsilon^e_B\\otimes1)t_l$ then yields\n$$L^\\flat=h\\circ C_Z((\\varepsilon^e_B\\otimes1)t_l)\\circ a_{F_eB\\otimes^LM}^{-1}\\circ P(t_{C_T}^{-1}).$$",
-   "uses": [
-    "lem-weil-pbc-adjunct-counit-identity",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48 (remark-compatible-with-diagram): verification of the left route by the counit formula for an adjunct, rather than its omitted verification."
-   }
-  },
-  {
-   "text": "For the other route, the pro-etale projection definition and naturality of $t_P$ give\n$$R^\\flat=(\\varepsilon^p_{C_ZB}\\otimes1)\\circ t_P\\circ P(b_B\\otimes1)=((\\varepsilon^p_{C_ZB}\\circ P(b_B))\\otimes1)\\circ t_{P;C_TF_eB,C_TM}.$$\nInsert the normalization of $b_B$ from Step 1. Apply the monoidality equation of Step 4 with $U=F_eB,V=M$, solving for $t_P$ by the inverses of $P(t_{C_T})$ and $a$. This gives\n$$R^\\flat=(C_Z(\\varepsilon^e_B)\\otimes a_M)\\circ t_{C_Z;lF_eB,lM}\\circ C_Z(t_{l;F_eB,M})\\circ a_{F_eB\\otimes^LM}^{-1}\\circ P(t_{C_T}^{-1}).$$\nNaturality of $t_{C_Z}$ moves $C_Z(\\varepsilon^e_B\\otimes1)$ across it; the first factors become $h\\circ C_Z((\\varepsilon^e_B\\otimes1)t_l)$. Thus $R^\\flat=L^\\flat$, with exactly the common composite displayed in Step 6.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48 (remark-compatible-with-diagram): verification of the right route, using the canonical tensor and counit comparisons."
-   }
-  },
-  {
-   "text": "Transposition under $P\\dashv F_p$ is injective, so Steps 6 and 7 give $L=R$. Substitute their expressions and compose with the inverses of $F_p(h)$ and $b_Q$. After the specified tensor identifications, $b_Q^{-1}=\\eta_Q$ and $b_B^{-1}=\\eta_B$, and the result is precisely\n$$\\eta_{B\\otimes_A^LlM}\\circ\\pi_p=C_T(\\pi_e)\\circ(\\eta_B\\otimes1).$$\nIf the finite-stage projection formula makes $\\pi_e$ invertible, this equality and the isomorphisms $b,t_{C_T},h$ make $\\pi_p$ invertible as well. Inverting the displayed equality gives\n$$\\pi_p^{-1}\\circ\\eta_Q^{-1}=(\\eta_B^{-1}\\otimes1)\\circ C_T(\\pi_e^{-1}),$$\nunder the same identifications. This proves the claimed compatibility of inverses whenever they exist, without invoking a separate pro-etale projection theorem.",
+   "text": "The equality $L=R$ is supplied by Step 3 (equivalently, the adjunction bijection for $P\\dashv F_p$ is injective). Compose with $F_p(h)^{-1}$ and $b_Q^{-1}$ and use $\\eta=b^{-1}$. Under the specified tensor identifications this is $\\eta_Q\\pi_p=C_T(\\pi_e)(\\eta_B\\otimes1)$. If $\\pi_e$ is invertible then this equality makes $\\pi_p$ invertible, and inversion gives $\\pi_p^{-1}\\eta_Q^{-1}=(\\eta_B^{-1}\\otimes1)C_T(\\pi_e^{-1})$.",
    "uses": [
     "lem-weil-pbc-adjunct-counit-identity"
    ],
@@ -143,23 +85,16 @@
   }
  ],
  "proof_deps": [
-  "def-kun-projection-formula-map",
   "def-weil-closed-immersion",
   "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-proetale-operations",
   "def-weil-pbc-projection-compactification",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sf-flat-model",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-boundary-bounded-tensor-comparison",
+  "lem-sf-fully-faithful-exceptional-hom-transport",
+  "lem-sfb-projection-comparison-etale-proetale",
   "lem-weil-pbc-adjunct-counit-identity",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "prop-weil-pbc-proetale-constant-ring-map",
   "thm-amb-etale-exceptional-adjoint",
   "thm-weil-pbc-site-comparison"
  ],
@@ -375,11 +310,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-boundary-proetale-projection-comparison",
   "worker": "stage1",
-  "summary": "Repair of returned head 24dfbd23e6: replaced the unsupported boundary-duality source attribution with Stacks 0B56/0E48 and explicit Hom transport for the exceptional counit; defined both site projection maps by the existing general ringed-topos construction; computed both adjoint transposes using the existing monoidal-coherence theorem. Hypotheses and comparison conclusions are unchanged; the previously underspecified transported adjunction and pro-etale projection are made explicit. No new node.",
-  "blueprint": "Historical ancestry is retained. The second paragraph of cor-weil-boundary-duality-discharge proves evaluation-defined boundary duality only; this item is auxiliary comparison input to the ancestor split, established from Stacks rather than attributed to that paragraph.",
+  "summary": "Repair C5 and D1/D2: keep Hom transport and normalization/inversion; replace both duplicate route-transpose nodes by statement-only nodes for the actual constant-ring commutation with theta=a^{-1}, Ex=b, and bounded tensor preparation with invertible b_Q. Parent Step 3 applies the existing ringed exchange/tensor coherence statement rather than reassigning its proof. Statement and maintainer metadata unchanged; original arguments and their ownership remain recorded in report.md. Review FIX (2026-10-21): the ringed-square node duplicated Steps 1-2 of the existing lem-sfb-projection-comparison-etale-proetale, whose statement is exactly the Step-3 equality for qcqs p once Q lies in D^+; it was dropped and Step 3 cites that lemma with the bounded-tensor node.",
+  "blueprint": "Historical auxiliary comparison for the second evaluation paragraph of cor-weil-boundary-duality-discharge. Returned Steps 2-3 go to Hom transport; Step 4 ringed-square verification goes to the square node; Step 5 goes to the bounded-tensor node; Steps 6-7 are already the proof of the existing ringed exchange/tensor coherence theorem. Parent keeps Steps 1 and 8 and assembles that theorem.",
   "tool_uses": [
    {
     "node": "lem-sf-flat-model",
@@ -420,6 +355,10 @@
    {
     "node": "lem-sf-comparison-pullback-exact",
     "why": "Supplies the ringed-topos interpretation of each comparison morphism at the fixed finite constant ring; needed to apply the generic monoidal-comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Its equality of canonical projection/exchange routes applies to this constant-ring etale/proetale square; the return expressly requires reusing this existing proof instead of creating duplicate transpose work."
    }
   ]
  },
@@ -433,15 +372,16 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "thm-amb-etale-exceptional-adjoint",
   "thm-weil-pbc-site-comparison",
-  "lem-sf-comparison-pullback-exact"
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q57-d58c8a367",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q103-cef359192",
+  "group": "Q103",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-d58c8a367 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, all 8 steps and every cited statement (20 stmt_deps, 19 proof_deps). Sources checked in literature/stacks-project/sites-cohomology.tex: 0B56 equation-projection-formula-map at line 13666 and 0E48 remark-compatible-with-diagram at line 13715, whose omitted verification steps 4-8 write out. Also checked categories.tex 0B65/0DV0 and the master and main-20261015 cor-weil-boundary-duality-discharge proofs; that paragraph does not prove the comparison, so the E7 repair is accurate. The coefficients are the ordinary constant A_{E,n}-module categories on both sites. b is exactly the named mate of lem-weil-pbc-comparison-direct-image-canonical-mate; a closed immersion is affine, hence qcqs, so it applies, and its normalization matches Step 1. The specified transported Hom bijection is the same as the class adjunction of thm-sf-ambient-adjoint-class Step 5 for the identity-open compactification, because lem-sf-class-compact-support-comparison defines c = b^{-1}, so mu^p is the official counit. Step 3 counit computation: traced through the bijection, correct. I recomputed L-flat and R-flat in steps 6-7, including the a_{F_eB} cancellation from the monoidality equation of lem-sfb-ringed-derived-monoidal-comparisons and naturality of t_{C_Z}; they agree. In step 5, finite Tor makes Q bounded, so b_Q is defined. Edge cases checked: Z empty, i=id, B=M=N=0, n=1, and a non-finite-Tor B at n>1. No new nodes, no cycle, no SGA, and no duplicate among the nearest DAG candidates (lem-sfb-etale-proetale-scalar-mate, lem-pur-open-projection-site-transport, lem-sf-proper-open-tensor-compatibility and others). Accepted tool_uses: lem-sf-flat-model, lem-sfb-ringed-derived-monoidal-comparisons and thm-amb-etale-exceptional-adjoint. The other 7 declared tool_uses are on-route and need no declaration. For the maintainer: source.place still says 'returned step 9', but the ancestor now uses the item in step 12; this is a maintainer-owned field and was not edited."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-cef359192 (reviewer sub-agent of L); spot-checked: FIX, one fault (C5/D duplicate), repaired; drop one new node. I read the item, all 4 steps, all three new nodes and every cited statement. Sources checked: Stacks 0E48 (sites-cohomology l.13715), 0B56 (l.13666), 0G7E lemma-pullback-K-flat (l.3508), 07A4, proetale 0GLZ (l.3760) and categories 0DV0 (l.3576). The item statement is byte-identical to live. The delivery follows the repair prescribed by the Q103 daa0f41b RETURN. Fault: the new lem-sf-boundary-ringed-comparison-square duplicates existing work. lem-sfb-projection-comparison-etale-proetale (Q38, PASSed by Q14 2026-10-21, live, Lean module ProjectionComparisonEtaleProEtale, no cycle) states R_p(h) b_L F_Y(pi_e) = pi_p (b_K tensor 1) t_Y for any qcqs p, with K and K tensor uN in D+. With p=i, K=B, N=M this is exactly the parent's Step-3 equality. That node's proof Steps 1-2 are the constant-ring ringed square and Ex=b, and its Step 3 applies the coherence theorem. The report dismissed this node wrongly. Fix: Step 3 now cites lem-sf-boundary-bounded-tensor-comparison (Q in D^b, b_Q invertible) and lem-sfb-projection-comparison-etale-proetale, and checks B in D+, i qcqs, A finite commutative and the functor dictionary. proof_deps drop the square node and the coherence theorem and add the new lemma; uses = proof_deps; the proof is 2745 characters; only proof, proof_deps and split_report changed. The maintainer should record lem-sfb-projection-comparison-etale-proetale (unit sk-thm-sfb-proper-base-change) in tool_uses. Kept nodes are true. Hom transport: I traced the four bijections, and C_T(mu_N) b^{-1} maps to j_N mu_N, then G_e(j_N) by the triangle identity, then o_N, which is invertible by the invertible unit. Bounded tensor: the flat model in [u,v] from lem-sf-flat-model, K-flatness of a bounded flat complex and of its pullback (0G7E), truncated B in [r,s], Tot in [r+u,s+v], b_Q from the qcqs mate lemma. Edge cases: Z empty, zero inputs, equal endpoints, non-finite-Tor B at n>=2. No duplicate found; thm-sf-ctf-stability and finite-flat-total-tensor need both inputs ctf or flat. Parent Steps 1, 2 and 4 recomputed and correct. Re-split mapping: old 1 to Step 1; old 2-3 to the Hom node; old 4, 6 and 7 to existing proved nodes; old 5 to the bounded node; old 8 to Step 4. Two new nodes of comparable size remain. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

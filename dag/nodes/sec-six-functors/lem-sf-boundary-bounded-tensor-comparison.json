@@ -1,0 +1,168 @@
+{
+ "id": "lem-sf-boundary-bounded-tensor-comparison",
+ "kind": "statement",
+ "title": "Bounded tensor preparation for the boundary direct-image comparison",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi_E$, an integer $n\\ge1$, and $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $i:Z\\hookrightarrow T$ be a closed immersion of separated finite-type $k$-schemes [def-weil-finite-type-morphism, def-weil-proper-morphism, def-weil-closed-immersion]. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], $l=i_e^*$ [def-weil-pbc-proetale-operations] and $C_W=\\nu_W^*$ [def-sf-comparison-derived-pullback]. Let $r\\le s$ and $u\\le v$ be integers. Let $B\\in D^b_c(Z_e,A)$ satisfy $\\mathcal H^j(B)=0$ for $j\\notin[r,s]$, and let $M\\in D^b_c(T_e,A)$ have Tor amplitude $[u,v]$: for every degree-zero $A$-module sheaf $V$, $\\mathcal H^j(M\\otimes_A^LV)=0$ for $j\\notin[u,v]$ [def-weil-pbc-constructible-complexes, def-weil-finite-tor-amplitude].\nThere exist a complex $B^\\bullet$ representing $B$, zero outside $[r,s]$, and a complex $V^\\bullet$ representing $M$, with flat terms and zero outside $[u,v]$, such that $V^\\bullet$ and its termwise pullback $lV^\\bullet$ are K-flat and $lV^\\bullet$ represents $lM$. Flat means that tensoring with a term is exact; K-flat means that total tensor with any acyclic complex is acyclic [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. The signed total complex\n$$\\operatorname{Tot}(B^\\bullet\\otimes_A lV^\\bullet)^d=\\bigoplus_{j+h=d}B^j\\otimes_A lV^h,$$\nwith differential $d_B\\otimes1+(-1)^j1\\otimes d_{lV}$ on bidegree $(j,h)$ [def-pc-tensor-complex-sheaves], represents $Q=B\\otimes_A^LlM$ and is zero outside $[r+u,s+v]$. Thus $Q\\in D^b(Z_e,A)\\subset D^+(Z_e,A)$ with precisely that cohomological bound. Its canonical direct-image mate\n$$b_Q:C_TRi_{e,*}Q\\longrightarrow Ri_{p,*}C_ZQ$$\nof [lem-weil-pbc-comparison-direct-image-canonical-mate] is defined and invertible. No finite Tor amplitude is required of $B$, and the flat terms of $V^\\bullet$ are not asserted to be locally free. These assertions include $Z=\\varnothing$, zero inputs and intervals with equal endpoints.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; the etale finite-Tor flat-model clause of lem-sf-flat-model supplies the bounded input, followed by its tensor with a bounded representative."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex tensored with the pullback of a finite Tor amplitude complex has cohomology in the sum interval and invertible etale proetale direct image comparison",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CategoryTheory.isZero_Tor_succ_of_projective"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|HasTorDimension|tensor.*[Ii]nterval|[Ii]nterval.*tensor",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a complex with cohomology in degrees r through s with a bounded flat complex in degrees u through v gives cohomology in r plus u through s plus v",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.instHasTensorTensorUnit",
+     "HomologicalComplex.tensorHom",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "CochainComplex.shiftFunctorAdd_hom_app_f"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, HasTorDimension",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'HasTorDimension'"
+   },
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": {
+    "hits": 1,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back a bounded flat sheaf model in degrees u through v and tensor with a bounded complex in degrees r through s to obtain the sum cohomological range",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "CategoryTheory.Sheaf.H",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+     "CochainComplex.cm5b",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|tensorObj",
+   "results": {
+    "hits": 7,
+    "top": [
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: bounded representative and tensor constructions do not supply the flat-model pullback, two-sided sum interval and named direct-image comparison together",
+   "subdirectory": "Algebra/Homology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-proetale-projection-comparison",
+  "date": "2026-10-21",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Auxiliary comparison accompanying the second evaluation paragraph of cor-weil-boundary-duality-discharge; returned comparison proof Step 5, bounded flat model and the sum interval needed to define b_Q.",
+   "via": [
+    "lem-weil-boundary-proetale-projection-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
