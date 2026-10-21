@@ -16,9 +16,132 @@
   "def-weil-derived-cohomology-sheaves",
   "sk-prop-sf-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a universe in which the two site categories are small. On either site the constant $A$-ring sheaf is commutative. The module-sheaf category is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. For $V\\in D^+$ choose a bounded-below complex $I$ of injective module sheaves with $QI\\cong V$, using [lem-weil-pbc-dplus-injective-representative]. This complex is K-injective. By [lem-pe-injective-complex-slice-section-model], $H^r(W,V)=H^r(I(W))$ for every site object $W$, with the literal restrictions of $I$ as transition maps, naturally in maps of the representatives. In particular the same formula at the final object computes $H^r(T_\\tau,V)$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pe-injective-complex-slice-section-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, resolution model; derived.tex Tags 013K and 070J"
+   }
+  },
+  {
+   "text": "Let $iI$ be the complex of underlying presheaves of $A$-modules and put $P_I^r(W)=H^r(I(W))$. By [lem-weil-pbc-site-module-presheaf-sheafification-exact], presheaf cohomology is computed objectwise and sheafification gives a natural isomorphism $(P_I^r)^\\#\\cong\\mathcal H^r(I)$: termwise sheafification of $iI$ is $I$. The corresponding presheaf map sends a cycle $z\\in I^r(W)$ to its image under $Z^rI\\to\\mathcal H^r(I)$ evaluated at $W$. A boundary maps to zero. Thus, using step 1, its component at the final object is exactly the asserted local-class map $e_V^r$, and its sheafification is the asserted canonical cohomology sheaf.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, displayed kernel/image formula and proof; sites-modules.tex lemma-sheafification-exact"
+   }
+  },
+  {
+   "text": "For $f:V\\to V'$ choose injective representatives $I,I'$ as in step 1. The bijection in [lem-weil-pbc-kinjective-hom-derived] represents the conjugate of $f$ by a chain map $b:I\\to I'$, unique up to homotopy. The naturality assertion of [lem-pe-injective-complex-slice-section-model] computes $H^r(W,f)$ by $[z]\\mapsto[b^r_W(z)]$. On cohomology sheaves the same formula follows from [def-weil-derived-cohomology-sheaves]. Hence both sides of the desired naturality equation, evaluated on $[z]$, are the image of $b^r_T(z)$ under $Z^rI'\\to\\mathcal H^r(I')$. If $b-b'=dh+hd$, their values on a cycle differ by $d(hz)$, a boundary, both for section cohomology and for cohomology sheaves. This proves the equation for every derived morphism and proves independence of representative choices by applying it to their derived isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pe-injective-complex-slice-section-model",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, cycle formula; derived.tex Tag 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "Use $I[1]$ to represent $V[1]$. It is still a bounded-below complex of injectives. In the cochain convention of [def-weil-abstract-derived-category], $(I[1])^r=I^{r+1}$ and $d_{I[1]}=-d_I$. The kernels and image submodules of $-d_I$ equal those of $d_I$. Consequently the same cycle $z$ represents both sides under $H^r(I[1](W))=H^{r+1}(I(W))$ and $\\mathcal H^r(I[1])=\\mathcal H^{r+1}(I)$. The cycle-to-quotient map of step 2 is unchanged, proving $e_{V[1]}^r=e_V^{r+1}$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, cycle formula; cochain shift convention"
+   }
+  },
+  {
+   "text": "Now take $I$ on the etale site and write $L=\\nu_T^*$, $R=\\nu_{T,*}$. The geometric-morphism and fixed-$A$ module adjunction of [def-weil-pbc-site-comparison-morphism] makes $L$ exact: it preserves finite limits and, being a left adjoint, finite colimits. The coefficient ring is the same constant $A$ on both sites. By [lem-weil-pbc-exact-functor-complex-cohomology], the canonical identification $\\mathcal H^r(LI)=L\\mathcal H^r(I)$ respects cycles and quotient maps. Choose a bounded-below injective complex $J$ representing $Q(LI)$ by [lem-weil-pbc-dplus-injective-representative]. By [lem-weil-pbc-kinjective-hom-derived], the resulting derived isomorphism $Q(LI)\\to QJ$ is represented by a chain map $a:LI\\to J$. It is a quasi-isomorphism, since its maps on all cohomology sheaves are invertible. Thus $J$ computes the pro-etale derived sections by step 1.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, exact inverse image case; derived.tex Tags 013K and 070I"
+   }
+  },
+  {
+   "text": "Identify the specified comparison, rather than choose an arbitrary isomorphism of cohomology groups. By [lem-trf-bounded-below-derived-adjunction] and naturality of the right-derived comparison of [lem-weil-pbc-right-derived-plus-injective], the derived unit at $QI$ is represented, with target $Q(RJ)$, by the ordinary chain transpose $I\\xrightarrow{\\eta_I}RLI\\xrightarrow{Ra}RJ$. Indeed its unit formula is $\\alpha_{LI}Q(\\eta_I)$, and naturality gives $RR(Qa)\\alpha_{LI}=\\alpha_JQ(Ra)$; $\\alpha_J$ is invertible because $J$ is termwise injective. Since $L$ is exact, [lem-sp-right-adjoint-preserves-injectives] makes $RJ$ termwise injective. At the final object $(RJ)(T)=J(T)$ by [def-weil-pbc-site-comparison-morphism]. The final-object comparison of [lem-weil-pbc-derived-sections-pushforward] therefore identifies $c_V^r$ with the map on cohomology of the chain map $I(T)\\to J(T)$ sending $z$ to $a_T(Lz)$. Here $Lz$ denotes pullback of the section $z$, using $L(A_T)=A_T$. This is an isomorphism by the unit and global-sections assertion of [sk-prop-sf-comparison].",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-derived-sections-pushforward",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition; canonical comparison unit of sk-prop-sf-comparison"
+   }
+  },
+  {
+   "text": "Represent $x\\in H^r(T_{\\mathrm{et}},V)$ by a cycle $z\\in I^r(T)$. Step 6 and the definition of the edge show that $e_{\\nu_T^*V}^r(c_V^r(x))$ is the quotient class of $a_T^r(Lz)$ in $\\Gamma(T,\\mathcal H^r(J))$. On the other hand, exactness comparison [lem-weil-pbc-exact-functor-complex-cohomology] says that pulling back the quotient class of $z$ gives the quotient class of $Lz$ in $\\Gamma(T,L\\mathcal H^r(I))=\\Gamma(T,\\mathcal H^r(LI))$. The cohomology-sheaf isomorphism induced by $a$ sends that class to the quotient class of $a_T^r(Lz)$. This proves the displayed site-comparison square, with precisely the cohomology-sheaf identification in the statement. It does not use surjectivity or injectivity of an edge map.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, cycle quotient; exact inverse image case of Tag 07A6"
+   }
+  },
+  {
+   "text": "For a derived morphism $f:V\\to V'$, choose a chain representative $b:I\\to I'$ as in step 3 and a chain representative $t:J\\to J'$ of $Lf$. By [lem-weil-pbc-kinjective-hom-derived], $ta$ and $a'Lb$ are homotopic: both represent the same map $Q(LI)\\to QJ'$. Pulling back a section commutes with $b$ by naturality of the ordinary unit in [def-weil-pbc-site-comparison-morphism]. Thus the two composite maps defining naturality of $c$ agree on cohomology; the homotopy difference on any cycle is a boundary. The same computation after the quotient maps in step 7 proves naturality of that square. For shifts choose $I[1],J[1],a[1]$. Termwise pullback commutes with this shift because it is additive, and the section map in step 6 becomes the shifted section map. The kernel/image calculation of step 4 identifies its degree-$r$ map with the original degree-$(r+1)$ map, including both quotient maps in step 7. All alternative choices give the same maps by step 3 and the homotopy argument just given. This proves shift compatibility of $c$ and of the square for arbitrary bounded-below $V$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology; Tag 07A6, lemma-adjoint; derived.tex Tag 070I, lemma-K-injective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pe-injective-complex-slice-section-model",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-derived-sections-pushforward",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKV, lemma-sheafification-cohomology, with Tag 07A6, lemma-adjoint; explicit naturality, shift and comparison-unit calculations expanded by Q85."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +177,45 @@
    "results": "CochainComplex.liftCycles_shift_homologyπ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj; CochainComplex.ConnectData.homologyMap_map_of_eq_succ; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc; CochainComplex.liftCycles_shift_homologyπ_assoc; CochainComplex.cm5b.fac_assoc; CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded below complex of module sheaves the hypercohomology to cohomology sheaf edge map commutes with derived morphisms shifts and exact inverse image of sites",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.HomComplex.leftHomologyData'_π; CochainComplex.liftCycles_shift_homologyπ; CochainComplex.liftCycles_shift_homologyπ_assoc; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj; CochainComplex.HomComplex.leftHomologyData'_i; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc; CochainComplex.HomComplex.leftHomologyData'",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern complex shifts, ordinary sheaf cohomology or sheafification separately; none states the derived local-class edge and its site-comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology.*edge|edge.*hypercohomology|sheafify.*[Hh]omology|[Hh]omology.*sheafify",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern complex shifts, ordinary sheaf cohomology or sheafification separately; none states the derived local-class edge and its site-comparison square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules the local cohomology class map from hypercohomology to sections of a cohomology sheaf is natural and compatible with shifting complexes",
+   "results": "CochainComplex.shiftEval; CochainComplex.HomComplex.Cochain.shiftLinearMap; CochainComplex.HomComplex.Cochain.shiftLinearMap_apply; CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv; CochainComplex.HomComplex.Cochain.shift; CategoryTheory.Functor.mapCochainComplexShiftIso; HomotopyCategory.homologyShiftIso_hom_app; CochainComplex.HomComplex.Cocycle.shift_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern complex shifts, ordinary sheaf cohomology or sheafification separately; none states the derived local-class edge and its site-comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"homology\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern complex shifts, ordinary sheaf cohomology or sheafification separately; none states the derived local-class edge and its site-comparison square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of the presheaf assigning to an object the derived sections cohomology of a complex is naturally its cohomology sheaf",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.H; CategoryTheory.plusPlusSheaf_obj_val; CategoryTheory.plusPlusSheaf; CategoryTheory.GrothendieckTopology.sheafify_isSheaf; CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus; CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern complex shifts, ordinary sheaf cohomology or sheafification separately; none states the derived local-class edge and its site-comparison square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-retracted-support-localization-comparison",
@@ -76,5 +234,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-derived-local-class-edge-comparison",
+  "worker": "stage1",
+  "summary": "Q85 preserves the statement and gives an eight-step resolution/cocycle proof. Existing generic nodes supply all non-elementary inputs. Naturality is proved for arbitrary derived morphisms using K-injective representatives; shifts use the signed differential, and site comparison is identified with the derived unit before evaluating cycles. No new nodes.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness Steps 1 and 3 via lem-pur-retracted-support-localization-comparison; main-20261015 sk-prop-a1 proof, localization connecting class and separate global supported-class paragraph. This item supplies the formal local-class naturality needed to compare those classes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Sheaves of modules on a small ringed site are Grothendieck abelian used as stated for ordinary module sheaves/resolutions; sk-prop-a1 has no replacement for this formal sheaf/derived-category input and its localization route is retained."
+   },
+   {
+    "node": "lem-pe-injective-complex-slice-section-model",
+    "why": "Generic A single injective complex gives compatible derived section models on slice sites used as stated for ordinary module sheaves/resolutions; sk-prop-a1 has no replacement for this formal sheaf/derived-category input and its localization route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-derived-sections-pushforward",
+    "why": "Generic Derived global sections via comparison pushforward used as stated for ordinary module sheaves/resolutions; sk-prop-a1 has no replacement for this formal sheaf/derived-category input and its localization route is retained."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic Bounded-below cohomology comparison used as stated for ordinary module sheaves/resolutions; sk-prop-a1 has no replacement for this formal sheaf/derived-category input and its localization route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pe-injective-complex-slice-section-model",
+  "lem-weil-pbc-derived-sections-pushforward",
+  "sk-prop-sf-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-a0ac99f30",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a0ac99f30 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, 0 new nodes, statement and stmt_deps unchanged (Q40-created item, no repair note, not dropped, no cycle). Source: Stacks sites-cohomology Tag 0BKV kernel/image argument; 0D6I not needed; no SGA. Each step checked against the statements it cites. S1 uses the Grothendieck-abelian, enough-injectives and D+ injective K-injective representative nodes plus the slice section model (small site, unital Λ, natural in the complex). S2 uses presheaf-sheafification-exact (1)+(2) with (iI)^#=I; cycle↦class is the unit leg. S3: the Hom bijection needs a K-injective target, given by S1; homotopy changes a cycle by a boundary. S4 (elementary): shift with −d keeps kernels and images. S5: ν^* is exact (finite-limit-preserving left adjoint on module sheaves); the exact-functor cohomology node states the cycle/quotient compatibility; a is a quasi-isomorphism. S6: trf unit formula R⁺(φ)η^D=α_{LI}Q(η_I), with α natural and α_J invertible, gives I→RLI→RJ. Right adjoints preserve injectives, so RJ is termwise injective; (RJ)(T)=J(T); derived-sections-pushforward applies (A_{E,n} finite); sk-prop-sf-comparison gives invertibility of the specified unit, not an arbitrary iso. S7: unit naturality plus H^r(a). S8: ta≃a'Lb, then the S6 formula on I[1],a[1]. Edge cases: F[0] (e^0=id, e^{r>0}=0), F[1], r=0 site square, zero object and empty scheme. Duplicate search (0BKV, 'local class'): only the ringed-space analogue, Ab(S_et) germ nodes and scheme top-edge, none states this. Batch-5 flag lem-trf-bounded-below-derived-adjunction: unsplit generic D+ adjunction for an exact left adjoint (Adjunction.derivedPlus), only generic definition deps, not part of the proof of the trace formula or Poincaré duality, so accepted (as before on NW 45bd4f27). The generic other-unit tool_uses are accepted for the maintainer to record. No changes."
  }
 }
