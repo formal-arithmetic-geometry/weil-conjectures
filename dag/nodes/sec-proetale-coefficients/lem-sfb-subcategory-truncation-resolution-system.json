@@ -24,115 +24,88 @@
  ],
  "proof": [
   {
-   "text": "The homotopy category $K(\\mathcal A)$ is triangulated with the cone triangles and shifts, and its localization $L:K(\\mathcal A)\\to D(\\mathcal A)$ is exact, by [lem-pur-homotopy-category-triangulated]. We use TR2 and TR3 with the meanings in [def-weil-triangulated-category].",
-   "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, first paragraph"
-   }
-  },
-  {
-   "text": "For $n=1$, the complex $T_1$ vanishes above degree $1$. Apply [lem-sfb-subcategory-left-resolution] with $a=1$ to obtain $E_1\\to T_1$, termwise epimorphic and a quasi-isomorphism, with all terms in $\\mathcal P$ and $E_1^i=0$ for $i>1$.",
+   "text": "For each n, the good truncation T_n is strictly zero above n. Apply the bounded-above subcategory left resolution theorem to obtain a termwise epic quasi-isomorphism with terms in P. In particular this supplies the initial stage at n=1.",
    "uses": [
     "lem-sfb-subcategory-left-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, initial resolution using Tag 05T7(1)"
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
    }
   },
   {
-   "text": "Assume the finite system through $E_n\\xrightarrow{e_n}T_n$ has been constructed with all asserted properties. Put $a=j_ne_n:E_n\\to T_{n+1}$ and take the actual cone triangle $E_n\\xrightarrow{a}T_{n+1}\\to C\\xrightarrow{\\delta}E_n[1]$ of [lem-pur-homotopy-category-triangulated]. By the cone formula [def-weil-abstract-derived-category], $C^i=T_{n+1}^i\\oplus E_n^{i+1}$, so $C$ vanishes above some integer $b$. Apply [lem-sfb-subcategory-left-resolution] with that $b$ to obtain $q:Q\\to C$, a quasi-isomorphism, with $Q$ bounded above and all its terms in $\\mathcal P$.",
+   "text": "Given a bounded-above P-complex E and its augmentation e to T_n, form f=e followed by the canonical map to T_(n+1). The cone has terms E^(i+1) plus T_(n+1)^i, so max(b,n+1) bounds it. Resolve the cone using the same subcategory left resolution theorem, obtaining r:Q→Cone(f).",
    "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-abstract-derived-category",
-    "lem-sfb-subcategory-left-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, induction: the cone and its bounded-above resolution"
-   }
-  },
-  {
-   "text": "Write $c=\\delta q:Q\\to E_n[1]$ as a chain map and set $B=C(c)[-1]$, using the explicit cone of [def-weil-abstract-derived-category]. Then $B^i=E_n^i\\oplus Q^i$, and $d_B^i$ sends the two summands by $(d_{E_n}^i,0)$ and $(-c^i,d_Q^i)$. Rotate its distinguished cone triangle backwards twice (TR2 of [def-weil-triangulated-category], applied in [lem-pur-homotopy-category-triangulated]); the resulting triangle is $E_n\\xrightarrow{u}B\\xrightarrow{v}Q\\xrightarrow{c}E_n[1]$, where $u$ is minus the first inclusion and $v$ is the second projection. Thus $u^i$ has retraction minus the first projection and cokernel $Q^i$. In particular $B$ is bounded above with terms in $\\mathcal P$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, inductive triangle; explicit cone construction from Tag 0G6C, derived-lemma-improve-distinguished-triangle-homotopy, proof"
-   }
-  },
-  {
-   "text": "Rotate the triangles $E_n\\to B\\to Q\\xrightarrow{c}E_n[1]$ and $E_n\\xrightarrow{a}T_{n+1}\\to C\\xrightarrow{\\delta}E_n[1]$ twice. Since $c=\\delta q$, TR3 [def-weil-triangulated-category] applied to $q:Q\\to C$ and $1:E_n[1]\\to E_n[1]$ gives the third component; shifting it back gives $[f]:B\\to T_{n+1}$ and a morphism of the original triangles $(1,[f],[q])$. Choose a chain representative $f$. Apply the exact localization of [lem-pur-homotopy-category-triangulated]. The first and third components become isomorphisms, so the middle component $L([f])$ is an isomorphism by [lem-sf-triangle-morphism-iso]. Each cohomology functor factors through localization [def-weil-abstract-derived-category], hence every $H^i(f)$ is an isomorphism: $f$ is a quasi-isomorphism.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "lem-pur-homotopy-category-triangulated",
-    "lem-sf-triangle-morphism-iso",
+    "lem-sfb-subcategory-left-resolution",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, morphism-of-triangles diagram and quasi-isomorphism conclusion; Tag 014A, derived-lemma-third-isomorphism-triangle"
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
    }
   },
   {
-   "text": "The equality $[f][u]=[a]$ means there are maps $h^i:E_n^i\\to T_{n+1}^{i-1}$ with $(fu-a)^i=d_T^{i-1}h^i+h^{i+1}d_{E_n}^i$. For the degreewise retraction $r^i:B^i\\to E_n^i$ set $H^i=h^ir^i$ and $\\widetilde f^i=f^i-d_T^{i-1}H^i-H^{i+1}d_B^i$. The equation $d^2=0$ [def-weil-abstract-derived-category] shows that $\\widetilde f$ is a chain map. Since $r^iu^i=1$ and $d_Bu=ud_{E_n}$, substitution gives $\\widetilde f u=a$ strictly. The correction vanishes on cohomology (on cycles it is a boundary), so $\\widetilde f$ remains a quasi-isomorphism. Replace $f$ by $\\widetilde f$. For $i<n$ the equality $f^iu^i=e_n^i$ makes $f^i$ epic; for $i>n+1$ its target is zero.",
+   "text": "Use the explicit coordinate construction of RelativeBiprodConeExtension, retaining that the term isomorphism carries the inclusion to the first biproduct injection. Write r=(a,b). Its component equations give the twisted differential (d_E,-a;0,d_Q) on E^i plus Q^i and the chain map g=(f,b) to T_(n+1). The inclusion t satisfies t≫g=f strictly. Permuting the three summands gives Cone(g)≅Cone(r). Since r is a quasi-isomorphism its cone is acyclic, hence g is a quasi-isomorphism by the acyclic-cone criterion. The maximum of the bounds bounds the twisted complex.",
    "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
+   }
+  },
+  {
+   "text": "For a bound N on T_(n+1), choose covers P_i→T_(n+1)^i for i≤N and put P_i=0 above N. Define the identity-disk complex D^i=P_i plus P_(i-1), with differential from the first summand to the second in the following degree. The covers and their composites with the target differential give a chain map a:D→T_(n+1) which is epic in every degree. The reverse second-to-first maps contract D. Thus adding D to the twisted complex gives a homotopy-equivalent bounded-above P-complex, a termwise epic augmentation, and the same strict square. This applies disks in every degree, so no separate argument about surjectivity in the last two degrees is needed.",
+   "uses": [
+    "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, lifting the homotopy through the termwise split injection"
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
    }
   },
   {
-   "text": "Choose an epimorphism $p:P\\to K^n$ with $P\\in\\mathcal P$. Let $D$ be $P\\xrightarrow{1}P$ in degrees $n,n+1$, zero elsewhere, and define $g:D\\to T_{n+1}$ by $p$ and $d_K^np$ (the latter factors through $\\ker d_K^{n+1}$ because $d_K^{n+1}d_K^n=0$). Then $g^n$ is epic and the image of $g^{n+1}$ is $\\operatorname{im}d_K^n$. The quotient of $T_{n+1}^{n+1}=\\ker d_K^{n+1}$ by this image is $H^{n+1}(T_{n+1})$ [def-weil-abstract-derived-category]. The composite $\\ker d_B^{n+1}\\to H^{n+1}(B)\\xrightarrow{H^{n+1}(f)}H^{n+1}(T_{n+1})$ is epic. Thus the images of $f^{n+1}$ and $g^{n+1}$ together generate $T_{n+1}^{n+1}$, so $[f,g]:B\\oplus D\\to T_{n+1}$ is epic in degree $n+1$, as well as in degree $n$ and all the other degrees already covered in step 6.",
+   "text": "Associate the term biproducts so that the final transition is the first injection E^i→E^i plus (Q^i plus D^i). It is split by the first projection. Transporting cokernels through this isomorphism identifies its cokernel with Q^i plus D^i. Finite-biproduct and isomorphism closure give all required class membership assertions.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, final paragraph: the two-term identity complex makes the last two components epic"
-   }
-  },
-  {
-   "text": "The differential $1_P$ makes $D$ acyclic: in degree $n$ the kernel is zero, and in degree $n+1$ the image is all of $P$. In the finite direct sum $B\\oplus D$, kernels and images are the direct sums of the respective kernels and images, so $H^i(B\\oplus D)=H^i(B)\\oplus0$ and $H^i([f,g])=H^i(f)$ [def-weil-abstract-derived-category]. Set $E_{n+1}=B\\oplus D$, $e_{n+1}=[f,g]$, and $u_n=(u,0)$. This is a termwise epimorphic quasi-isomorphism with strict equality $e_{n+1}u_n=j_ne_n$. Its terms are finite biproducts of objects of $\\mathcal P$; it is bounded above because $B$ is and $D$ vanishes above $n+1$. The transition has degreewise retraction $r\\operatorname{pr}_B$ and cokernel $Q^i\\oplus D^i\\in\\mathcal P$. All earlier maps are retained, so induction constructs the required system for every $n\\ge1$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
     "def-sp-abelian"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, derived-lemma-special-direct-system, final replacement and completion of the induction"
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
+   }
+  },
+  {
+   "text": "Use Int.leInduction starting at 1, storing each complex, its augmentation and the four stage properties. Choose the next stage by the preceding construction and the transition from its witness. The induction successor equation yields the strictly compatible transitions, splitness and cokernel membership. For indices below 1 use an arbitrary individual bounded-above resolution and zero transitions; the theorem imposes no conditions on these transitions.",
+   "uses": [
+    "lem-sfb-subcategory-left-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
+  "lem-sfb-subcategory-left-resolution",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sfb-subcategory-left-resolution"
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-sp-abelian"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "K7",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 06XX (derived-lemma-special-direct-system), statement and proof"
+  "place": "Tag 06XX, lemma-special-direct-system, induction and final contractible-disk addition",
+  "note": "Explicit cone coordinates adapted from the proved RelativeBiprodConeExtension; bounded contractible disks adapted from the proved FlatAugmentationEpicification, for an arbitrary resolving class. No change to the unit route or theorem statement."
  },
  "mathlib_searches": [
   {
@@ -390,5 +363,15 @@
    "CategoryTheory.subcategory_truncation_resolution_system"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261021T140835-L-2760591",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
