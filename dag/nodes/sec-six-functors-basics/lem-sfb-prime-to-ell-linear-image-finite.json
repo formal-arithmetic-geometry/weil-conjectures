@@ -198,5 +198,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-2cfbbe784 (reviewer sub-agent of L); spot-checked: Read in full: item and new leaf lem-sfb-finite-matrix-group-coprime-power, statement unchanged. Base had no proof and no repair note. Source: L19.pdf Prop 1.1.9 second bullet p.3 gives the stable lattice; the prime-to-ell corollary is correctly labelled agent-written. Step 1: lem-pod-profinite-stable-lattice hypotheses match (profinite so compact, joint continuity), giving a free full stable lattice and A(h) in GL_r(O_E); M=0 handled. Step 2: A_n finite; rho_n continuous via finitely many evaluations, so Q_n is a finite continuous quotient of order prime to ell. Step 3: (I+pi^nB)^ell = I mod pi^{n+1}, since cross terms are in pi^{2n} and ell is in m_E; holds for ell=2 and ramified E. Step 4: induction K_1=K_n written out; Mathlib leaf on Q_{n+1}, checked at OrderOfElement.lean:1245-1247 Nat.Coprime.pow_left_bijective. Step 5: the intersection of pi^nO is 0, so ker rho=K_1 and rho(H) is isomorphic to Q_1. rg -L found no duplicate of either node; the leaf is strictly smaller than the item. Batch-5 flag: the closure of lem-pod-profinite-stable-lattice is only l-adic field/DVR/lattice nodes and reaches no trace-formula, Poincare-duality or batch-4 node; it is generic representation theory and outside both assumptions, so accepted. Tool uses (stable lattice, valued-DVR quotients leaf) accepted. No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.PrimeToEllLinearImageFinite",
+  "declaration": "Padic.primeToEll_linear_image_finite",
+  "file": "lean/Sheaf/RepresentationTheory/PrimeToEllLinearImageFinite.lean",
+  "statement": "theorem primeToEll_linear_image_finite (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [tE : TopologicalSpace E] (_hE : tE = (spectralNorm.nontriviallyNormedField ℚ_[l] E).toUniformSpace.toTopologicalSpace) (H : ProfiniteGrp.{v}) (_hH : ∀ N : OpenNormalSubgroup H, Nat.Coprime (Nat.card (H ⧸ N.toSubgroup)) l) (M : Type w) [AddCommGroup M] [Module E M] [FiniteDimensional E M] [TopologicalSpace M] [IsModuleTopology E M] (ρ : H →* (M ≃ₗ[E] M)) (_hρ : Continuous (fun p : H × M ↦ ρ p.1 p.2)) : Finite ρ.range ∧ Nat.Coprime (Nat.card ρ.range) l",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32f05d171",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node unchanged except added lean record; lean.statement verbatim in file. Checked clause by clause: ℓ prime; E finite over ℚ_ℓ with spectral-norm topology, same binders as def-weil-l-adic-coefficient-extension and landed modules; H : ProfiniteGrp with coprimality over all OpenNormalSubgroup quotients (equivalent to finite continuous quotients); M finite-dim with IsModuleTopology; ρ : H →* (M ≃ₗ[E] M), jointly continuous; conclusion Finite ρ.range ∧ Coprime (Nat.card ρ.range) l. Edge cases M=0, ℓ=2, ramified E covered; universes independent. Proof plan (lattice, congruence induction, separatedness) correct and in docstring; source and blueprint docstrings present; no defs, only sorry; no duplicate found. Not recompiled per instructions. No findings."
  }
 }
