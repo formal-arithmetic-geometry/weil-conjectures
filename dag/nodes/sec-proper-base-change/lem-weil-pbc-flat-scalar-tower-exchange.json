@@ -16,9 +16,102 @@
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-flat-ringed-diagram-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-flat-ringed-diagram-restriction] to each edge, with $J=\\mathbf N_{\\geq1}^{op}$. Its smallness, compatible coefficient isomorphisms and cornerwise flatness are precisely the present hypotheses. It supplies the specified natural isomorphisms $p_u,d_u$ on the unbounded derived diagram categories and, for every $t:L_u^SM\\to N$, the formula\n$$\\bigl(r_U(t)p_{u,M}^{-1}\\bigr)^\\sharp=d_{u,N}r_V(t^\\sharp).\\tag{A}$$\nIn particular the composites called $b_Z,d_Z$ in the statement are natural isomorphisms with exactly the displayed sources and targets. All compositions below are written right to left.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "First check composition before localization. For composable edges $u:U\\to V$, $v:V\\to W$, ordinary module pullback is the underlying inverse image with action transported by $c^R_u:u^{-1}R_V\\cong R_U$ or $c^S_u$. Its restriction comparison $p^0_u$ identifies that same underlying sheaf. On $u^{-1}v^{-1}R_W$, the two actions on the twice pulled back module agree because\n$$a_Uc^R_u\\,u^{-1}c^R_v=c^S_u\\,u^{-1}c^S_v\\,(vu)^{-1}a_W,$$\na direct substitution of the two edge compatibility equations. Thus the composite restriction comparison and $p^0_{vu}$ have the same underlying inverse-image composition map and the same action. Apply this along both paths in the specified geometric square; its coherent coefficient identifications give the same comparison at the common composite. This proves the ordinary square equation. It is an equality of natural maps of diagram functors: the calculation holds on each abelian diagram component and respects every diagram arrow. Apply it in every cochain degree and localize. The $p_u$ are exactly these normalized termwise comparisons; [lem-weil-pbc-localization-universal-property](2),(3) says that descent preserves their composites and detects equality of natural transformations. Hence, for every derived $S_Y$-diagram $M$,\n$$(L_{g'}^Rp_{f,M})p_{g',L_f^SM}\\,r_{X'}(\\theta^S_M)=\\theta^R_{r_YM}(L_{f'}^Rp_{g,M})p_{f',L_g^SM}.\\tag{C}$$\nThis proves the first assertion, including its coefficient actions.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "Fix $Z$ and put $A=F_f^SZ$. Apply (A) for $u=f$ to $t=\\varepsilon^S_{f,Z}:L_f^SA\\to Z$, whose adjunct is $1_A$. The adjunct of $r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}$ is therefore $d_{f,Z}$. By the counit formula for the inverse adjunction bijection this says\n$$r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}=\\varepsilon^R_{f,r_XZ}\\,L_f^R(d_{f,Z}).$$\nPrecomposing with $L_f^R(d_{f,Z}^{-1})$ gives the normalized counit equation\n$$r_X(\\varepsilon^S_{f,Z})p_{f,A}^{-1}L_f^R(d_{f,Z}^{-1})=\\varepsilon^R_{f,r_XZ}.\\tag{K}$$",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-adjunction-mate], $E^S_Z$ is the adjunct of\n$$e^S_Z=L_{g'}^S(\\varepsilon^S_{f,Z})\\theta^S_A:L_{f'}^SL_g^SA\\longrightarrow L_{g'}^SZ.$$\nSet $h_Z=d_Zr_{Y'}(E^S_Z)b_Z^{-1}$. Formula (A) for $f'$ says that $d_{f',L_{g'}^SZ}r_{Y'}(E^S_Z)$ is the adjunct of $r_{X'}(e^S_Z)p_{f',L_g^SA}^{-1}$. Postcomposition with $F_{f'}^R(p_{g',Z})$ and precomposition with $b_Z^{-1}$ therefore show that the transpose of $h_Z$ is\n$$t_Z=p_{g',Z}\\,r_{X'}(e^S_Z)\\,p_{f',L_g^SA}^{-1}L_{f'}^R(b_Z^{-1}).\\tag{T}$$\nThe pre/postcomposition rule here follows directly by expanding transpose as counit followed by $L_{f'}^R$ of the morphism and using counit naturality.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "Expand $e^S_Z$ in (T). Naturality of $p_{g'}$ at $\\varepsilon^S_{f,Z}$ rewrites its first two factors as\n$$p_{g',Z}\\,r_{X'}(L_{g'}^S\\varepsilon^S_{f,Z})=L_{g'}^R(r_X\\varepsilon^S_{f,Z})p_{g',L_f^SA}.$$\nEquation (C) at $A$, cancelling $L_{g'}^Rp_{f,A}$, now gives\n$$t_Z=L_{g'}^R(r_X\\varepsilon^S_{f,Z})\\,(L_{g'}^Rp_{f,A})^{-1}\\theta^R_{r_YA}\\,L_{f'}^R(p_{g,A}b_Z^{-1}).$$\nThe definition $b_Z=(L_g^Rd_{f,Z})p_{g,A}$ yields $p_{g,A}b_Z^{-1}=L_g^R(d_{f,Z}^{-1})$. Thus\n$$t_Z=L_{g'}^R(r_X\\varepsilon^S_{f,Z}\\,p_{f,A}^{-1})\\theta^R_{r_YA}\\,L_{f'}^RL_g^R(d_{f,Z}^{-1}).\\tag{T'}$$\nEvery replacement is naturality or cancellation of a specified isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "Use naturality of $\\theta^R$ at $d_{f,Z}^{-1}:F_f^Rr_XZ\\to r_YA$ in (T'). It moves the last factor across $\\theta^R$, giving\n$$t_Z=L_{g'}^R\\bigl(r_X\\varepsilon^S_{f,Z}\\,p_{f,A}^{-1}L_f^R(d_{f,Z}^{-1})\\bigr)\\theta^R_{F_f^Rr_XZ}.$$\nSubstitute (K). The result is\n$$t_Z=L_{g'}^R(\\varepsilon^R_{f,r_XZ})\\theta^R_{F_f^Rr_XZ},$$\nwhich is precisely the transpose of $E^R_{r_XZ}$ by [def-weil-pbc-adjunction-mate]. Injectivity of the adjunction bijection gives $h_Z=E^R_{r_XZ}$; compose on the right with $b_Z$ to obtain $d_Zr_{Y'}(E^S_Z)=E^R_{r_XZ}b_Z$. This also proves the asserted explicit transpose formula.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  },
+  {
+   "text": "The comparisons $p_u,d_u$ are natural transformations of the derived diagram functors by [lem-weil-pbc-flat-ringed-diagram-restriction], and the square maps, counits and their mates are natural transformations. Whiskering, composition and inversion of the specified natural isomorphisms therefore make the equality just proved natural in $Z$. The proof took place in the unbounded derived category of the strict diagrams; it imposed no conditions on their transitions or cohomological bounds.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, transpose definition; agent coefficient-comparison calculation, using the normalizations in the cited flat-restriction node. For localization in step 2: categories.tex Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement is the cited localization node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, naturality of coefficient reduction; expanded on arbitrary strict diagrams using Stacks 07A7 (remark-base-change), not the projection-formula claim of 0E48."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +154,45 @@
    "results": "{\"t\": \"2026-10-21T06:16:59Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*baseChange|exchange|mate\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Equivalence/Symmetry.lean\", \"Mathlib/CategoryTheory/Equivalence/Symmetry.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"444a76db402a7bb8\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(mate|baseChange)|mate.*restrictScalars|conjugateEquiv.*comp",
+   "results": "{\"t\": \"2026-10-21T08:20:38Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(mate|baseChange)|mate.*restrictScalars|conjugateEquiv.*comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"1d462a25c22e0a6b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, site pullback composition, or abstract mates alone do not state this normalized unbounded strict-diagram exchange; no one-line specialization gives the coefficient-composition compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars intertwines derived pullback composition and base change adjunction mates for a square of ringed topoi",
+   "results": "{\"t\": \"2026-10-21T08:20:38Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars intertwines derived pullback composition and base change adjunction mates for a square of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"ModuleCat.restrictScalarsComp'App_hom_naturality_assoc\", \"SheafOfModules.restrictScalars\", \"ModuleCat.restrictScalarsComp'App_hom_naturality\"], \"digest\": \"bb38a57addd8d5a6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, site pullback composition, or abstract mates alone do not state this normalized unbounded strict-diagram exchange; no one-line specialization gives the coefficient-composition compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-21T08:20:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, site pullback composition, or abstract mates alone do not state this normalized unbounded strict-diagram exchange; no one-line specialization gives the coefficient-composition compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat restriction of sheaf ring scalars preserves derived inverse image composition and the adjunction base change mate for strict diagrams",
+   "results": "{\"t\": \"2026-10-21T08:20:42Z\", \"tool\": \"leanfinder\", \"query\": \"Flat restriction of sheaf ring scalars preserves derived inverse image composition and the adjunction base change mate for strict diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"4de1f04b5fe76604\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, site pullback composition, or abstract mates alone do not state this normalized unbounded strict-diagram exchange; no one-line specialization gives the coefficient-composition compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of restriction of coefficients with the counit transpose of a base change map on unbounded derived categories of module diagrams",
+   "results": "{\"t\": \"2026-10-21T08:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of restriction of coefficients with the counit transpose of a base change map on unbounded derived categories of module diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.restrictScalarsComp'App_inv_naturality_assoc\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\"], \"digest\": \"e1c1660ecd7d2ce5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scalar restriction, site pullback composition, or abstract mates alone do not state this normalized unbounded strict-diagram exchange; no one-line specialization gives the coefficient-composition compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
@@ -83,5 +211,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-scalar-tower-exchange",
+  "worker": "stage1",
+  "summary": "Kept the full statement and specified normalized comparisons. Wrote the ordinary inverse-image/action coherence and its localization, extracted the counit identity from adjunct compatibility, and computed the transpose of the conjugated strict-diagram exchange. Reused existing flat-restriction and localization results; no new nodes. Checked the actual unbounded diagram category, coefficient actions, all sources and targets, identity and zero cases, and naturality.",
+  "blueprint": "lemma-weil-pbc-completed-exchange-coherence.proof.md, second paragraph: naturality of coefficient reduction on the actual tower morphisms; the scalar-transport component of the ancestor supplement is proved by equations (A),(C),(K),(T), with no finite-level faithfulness inference."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-7680dc52c",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-7680dc52c (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit, the item with seven steps, no new nodes, statement unchanged. proof_deps equals the union of the step uses, all cited nodes are in unit sk-thm-properbasechange (sheaf-restrict-scalars is used only as a definition), and there is no cycle since only the parent cites the item. Step 1: equation (A) is verbatim the adjunct clause of lem-weil-pbc-flat-ringed-diagram-restriction, whose b,d are the item's p,d; its hypotheses (any small J, small sites, flat at both corners, coefficient isomorphisms compatible with the a_T maps) are supplied for every edge. Step 2: I verified the ring identity a_U c_u^R u^{-1}c_v^R = c_u^S u^{-1}c_v^S (vu)^{-1}a_W by substitution, and checked both sides of (C) as maps r L'L -> L L r. The descent uses localization-universal-property clauses (2),(3), which are exactly composition preservation and equality detection. Step 3: equation (K) follows from t=counit having adjunct 1 plus the inverse-adjunction formula. Steps 4-6: I checked (T) and (T') factor by factor: the adjunct rule, naturality of p_{g'}, (C) at A, the identity p_{g,A}b^{-1}=L_g(d^{-1}), naturality of theta and (K). The result equals the transpose L_{g'}(eps)theta of def-weil-pbc-adjunction-mate, which also matches Stacks 07A7 (remark-base-change), and injectivity of the adjunction bijection closes the argument. Step 7: naturality holds because both sides are composites of natural transformations. Edge cases: identity square with S=R, S=0, non-invertible exchange (only p,d,b are inverted), unbounded towers. Source: the ancestor completed-exchange-coherence proof, second paragraph ('naturality of coefficient reduction'); 0E48 is correctly cited as context only; no SGA. This is a first split, not a re-split, and no duplicate exists (compared with strict-tower-exchange-mate-normalization, sfb-integral-quotient-exchange-comparison, flat-scalar-tower-limit-square and ordinary-flat-exchange-prescribed-adjunction). The item is not a restatement of its parent, and parent step 2 meets its hypotheses (constant-to-completed flatness, profinite inverse-image coherence). No fixes were made and no tool_uses were needed."
  }
 }
