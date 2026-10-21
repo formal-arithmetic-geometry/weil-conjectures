@@ -1392,7 +1392,86 @@ _NODE_CACHE = {}
 def nodes_at(git: Git, ref: str) -> dict[str, dict]:
     from delivery_cache import node_index
     cached = node_index(git.root, ref, lambda commit: _uncached_nodes_at(git, commit))
-    return cached if cached is not None else _uncached_nodes_at(git, ref)
+    if cached is not None:
+        return cached
+    tree_nodes = _tree_cached_nodes_at(git, ref)
+    return tree_nodes if tree_nodes is not None else _uncached_nodes_at(git, ref)
+
+
+_TREE_CACHE_DIR = "local/nodes-cache"
+
+
+def _tree_cached_nodes_at(git: Git, ref: str):
+    """The nodes of `ref` from a pickle keyed by the dag/nodes tree id (2026-10-21, the human: every server-side
+    preflight and landing re-read all 23k node files, ~5-10 s of CPU each, 7 at a time). A cache of an older tree is
+    brought up to date from `git diff-tree` between the two trees (only the changed blobs are read). None when the
+    repository has no local/ directory to keep the cache in (a bare clone) or anything fails."""
+    import pickle, tempfile
+    try:
+        tree = git.run("rev-parse", f"{ref}:dag/nodes").strip()
+        if not tree:
+            return None
+        root = git.root.resolve()
+        cdir = root / _TREE_CACHE_DIR if (root / "local").is_dir() else pathlib.Path.home() / "weil-conjectures-sheaf" / _TREE_CACHE_DIR
+        if not cdir.parent.is_dir():
+            return None
+        cdir.mkdir(exist_ok=True)
+        key = (str(root), tree)
+        if key in _NODE_CACHE:
+            return _NODE_CACHE[key]
+        mine = cdir / f"{tree}.pickle"
+        if mine.is_file():
+            nodes = pickle.loads(mine.read_bytes())
+            _NODE_CACHE[key] = nodes
+            return nodes
+        older = sorted(cdir.glob("*.pickle"), key=lambda q: q.stat().st_mtime)
+        nodes = None
+        if older:
+            base = older[-1]
+            try:
+                nodes = pickle.loads(base.read_bytes())
+                diff = git.run("diff-tree", "-r", "--name-status", base.stem, tree).splitlines()
+                changed, gone = [], []
+                for line in diff:
+                    parts = line.split("\t")
+                    if len(parts) < 2:
+                        continue
+                    st, path = parts[0], parts[-1]
+                    if not path.endswith(".json"):
+                        continue
+                    nid = path.rsplit("/", 1)[-1][:-5]
+                    if st.startswith("D"):
+                        gone.append(nid)
+                    else:
+                        changed.append((nid, path))
+                for nid in gone:
+                    nodes.pop(nid, None)
+                for nid, path in changed:
+                    try:
+                        d = json.loads(git.run("show", f"{tree}:{path}"))
+                    except (ValueError, subprocess.CalledProcessError):
+                        d = None
+                    if isinstance(d, dict) and d.get("id"):
+                        nodes[str(d["id"])] = d
+                    else:
+                        nodes.pop(nid, None)
+            except Exception:  # noqa: BLE001
+                nodes = None
+        if nodes is None:
+            nodes = _uncached_nodes_at(git, ref)
+        _NODE_CACHE[key] = nodes
+        fd, tmp = tempfile.mkstemp(prefix=".nodes-", dir=cdir)
+        with os.fdopen(fd, "wb") as f:
+            f.write(pickle.dumps(nodes, protocol=5))
+        os.replace(tmp, mine)
+        for old in older[:-4]:
+            try:
+                old.unlink()
+            except OSError:
+                pass
+        return nodes
+    except Exception:  # noqa: BLE001
+        return None
 
 
 def _uncached_nodes_at(git: Git, ref: str) -> dict[str, dict]:

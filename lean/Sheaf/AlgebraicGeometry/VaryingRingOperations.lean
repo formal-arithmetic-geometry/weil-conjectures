@@ -6,9 +6,11 @@ Authors: SHEAF group Q47
 module
 
 public import Sheaf.Paper.SemilinearDerivedSections
-public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
+public import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
