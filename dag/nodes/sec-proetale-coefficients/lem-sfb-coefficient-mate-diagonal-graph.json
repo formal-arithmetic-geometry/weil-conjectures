@@ -18,9 +18,67 @@
   "lem-sfb-eta-comp",
   "def-sfb-finite-lower-star-comp"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q=P\\times_VW$ (using the second projection $P\\to V$) and $R=V\\times_BW$. The base-change description of pushforward [def-sfb-finite-lower-star] and its composition comparison [def-sfb-finite-lower-star-comp] use the isomorphism $e:Q\\xrightarrow{\\sim}R$ with formulas $e(v_1,v_2,z)=(v_1,z)$ and $e^{-1}(v,z)=(v,h(z),z)$. These formulas mean maps induced by the displayed projections, not merely maps of underlying point sets: their existence follows from $w=u\\circ h$, and their composites have the identity projections, hence are identities by the fibre-product universal property. Let $D=V\\times_VW$ and identify $D\\cong W$ by the second projection, with inverse $(h,\\mathrm{id}_W)$. Base-changing $\\delta$ gives $\\delta_W:D\\to Q$; under this identification write $j:W\\to Q$, so $j(z)=(h(z),h(z),z)$. The projections give $e\\circ j=(h,\\mathrm{id}_W)=\\gamma$, equivalently $e^{-1}\\circ\\gamma=j$. This proves the geometric clause. All restrictions here are morphisms in the relevant small sites: base change is the functor in [def-sfb-finite-lower-star], and morphisms of the sites are the base-scheme morphisms [def-weil-pbc-proetale-site].",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-lower-star-comp",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "final paragraph: canonical iterated-fibre-product comparison, specialized to f=h, g=u; explicit base-changed diagonal"
+   }
+  },
+  {
+   "text": "Put $a=\\eta_{u,V}(s)\\in\\Lambda_V(P)$ and $t=\\eta_{h,P}(a)\\in\\Lambda_W(Q)$. Apply [lem-sfb-eta-comp] with $f=h:W\\to V$ and $g=u:V\\to B$, so that $g\\circ f=w$. Evaluate its equality at the site object $V\\to B$ and then at $s$. By [def-sfb-finite-lower-star], the component of $u_*(\\eta_h)$ at $V$ is the component $\\eta_{h,P}$. By [def-sfb-finite-lower-star-comp], the remaining comparison sends sections on $Q$ to sections on $R$; since restriction is contravariant its component is $\\Lambda_W(e^{-1})$. Consequently\n$$\\eta_{w,V}(s)=\\Lambda_W(e^{-1})(t).$$\nThe hypotheses of [lem-sfb-eta-comp] are met: $h,u$ are scheme morphisms, $\\Lambda$ is a commutative condensed ring, and the coefficient maps and composition comparisons use the normalization specified there.",
+   "uses": [
+    "lem-sfb-eta-comp",
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-lower-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraph 3: coefficient-mate composition, evaluated on V and s"
+   }
+  },
+  {
+   "text": "By [def-sfb-eta], $\\eta_h:\\Lambda_V\\to h_*\\Lambda_W$ is a morphism of abelian sheaves, hence its underlying presheaf morphism commutes with restrictions. Apply its defining naturality square to the $V$-site morphism $\\delta:V\\to P$ and to $a\\in\\Lambda_V(P)$. Pushforward is restriction along base change [def-sfb-finite-lower-star], so the restriction of $h_*\\Lambda_W$ along $\\delta$ is $\\Lambda_W(\\delta_W)$, with target $\\Lambda_W(D)$. Thus\n$$\\Lambda_W(\\delta_W)(t)=\\eta_{h,V}\\bigl(\\Lambda_V(\\delta)(a)\\bigr).$$\nAfter the same identification $D\\cong W$ as in step 1 this is\n$$\\Lambda_W(j)(t)=\\eta_{h,V}\\bigl(\\Lambda_V(\\delta)(a)\\bigr).$$\nThis is just naturality of the sheaf morphism already specified by the cited definition; it uses no localization equivalence or theorem identifying inverse image with restriction.",
+   "uses": [
+    "def-sfb-eta",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "paragraphs 1 and 3: eta is a sheaf morphism; its defining naturality square at the diagonal"
+   }
+  },
+  {
+   "text": "Restrict the equality in step 2 along $\\gamma$. Contravariant functoriality and $e^{-1}\\circ\\gamma=j$ from step 1 give\n$$\\Lambda_W(\\gamma)\\eta_{w,V}(s)\n=\\Lambda_W(\\gamma)\\Lambda_W(e^{-1})(t)\n=\\Lambda_W(e^{-1}\\circ\\gamma)(t)\n=\\Lambda_W(j)(t).$$\nInsert step 3 and $a=\\eta_{u,V}(s)$ to obtain precisely\n$$\\Lambda_W(\\gamma)\\eta_{w,V}(s)=\\eta_{h,V}\\bigl(\\Lambda_V(\\delta)\\eta_{u,V}(s)\\bigr).$$\nEvery equality is in $\\Lambda_W(W)$ under the stated final-object identification. The argument never requires either site morphism to be a monomorphism and never restricts $s$ to constant sections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+    "place": "final paragraph: functoriality of restriction along the canonical comparison, followed by the naturality square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-star-comp",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-eta-comp",
+  "def-sfb-eta"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.proof.md",
+  "place": "paragraphs 1, 3 and 4; explicit diagonal/graph specialization using the existing composition theorem and the defining naturality of a sheaf morphism"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +114,45 @@
    "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_fst, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_snd, AlgebraicGeometry.AffineSpace.comp_homOfVector",
    "date": "2026-10-21",
    "verdict": "no match: generic slice isomorphisms and fibre-product identities do not identify the canonical condensed coefficient mate composition evaluated along these graphs."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardOverMapIso|diagonal_comp|condensedPushforwardHom",
+   "results": "5 hits: Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean; Mathlib subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: generic naturality, slice-pushforward comparisons and diagonal identities do not state the canonical condensed coefficient-mate composition specialized to the diagonal and graph."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a sheaf morphism into a pushforward evaluated on the diagonal after composition of coefficient mates",
+   "results": "8 hits: SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforward_map_val, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardNatTrans, CategoryTheory.Functor.sheafPushforwardContinuousNatTrans_app_val",
+   "date": "2026-10-21",
+   "verdict": "no match: generic naturality, slice-pushforward comparisons and diagonal identities do not state the canonical condensed coefficient-mate composition specialized to the diagonal and graph."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-21",
+   "verdict": "no match: generic naturality, slice-pushforward comparisons and diagonal identities do not state the canonical condensed coefficient-mate composition specialized to the diagonal and graph."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of coefficient mates evaluated on a test object and restricted along a diagonal equals the mate applied to diagonal restriction via the base changed graph",
+   "results": "8 hits: RootPairing.Equiv.comp_coweightMap_apply, IsBaseChange.comp, IsBaseChange.comp_iff, RootPairing.Hom.comp_indexEquiv_apply, IsBaseChange.linearMapLeftRightHom_comp_apply, Algebra.Generators.H1Cotangent.δAux_ofComp, RootPairing.Hom.comp, RootPairing.Equiv.toHom_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: generic naturality, slice-pushforward comparisons and diagonal identities do not state the canonical condensed coefficient-mate composition specialized to the diagonal and graph."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of coefficient sheaves into a direct image commutes with restriction along the diagonal, and composition identifies this restriction with evaluation on the graph of a morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes_map_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Γ_map_morphismRestrict, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic naturality, slice-pushforward comparisons and diagonal identities do not state the canonical condensed coefficient-mate composition specialized to the diagonal and graph."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-coefficient-sections-localization",
@@ -76,5 +169,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coefficient-mate-diagonal-graph",
+  "worker": "stage1",
+  "summary": "N7: statement unchanged. Expanded the iterated-fibre-product isomorphism and the base-changed diagonal at the level of scheme morphisms; evaluated the existing eta composition theorem; wrote the defining naturality square of eta_h and the contravariant restriction calculation. No new nodes or Mathlib leaves. Read every cited statement and the current source; checked identity maps, empty W, and a nonmonomorphic finite etale example with nonconstant sections. Preserved all imported metadata and prior searches.",
+  "blueprint": "det-def-sfb-constructible-local-model, final sentence about nonconstant local-presentation entries: supplies the diagonal/graph evaluation used by coefficient-sections-localization. Steps 1 and 4 expand the final paragraph of lem-sfb-eta-comp.proof.md; step 2 specializes its composition identity; step 3 writes the sheaf naturality square explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Step 2 uses the already reviewed composition law for the canonical coefficient mates as a generic coherence tool. It does not replace the constructible-local-model route; it supplies the composition comparison required for its nonconstant-section localization argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-eta-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-c254a8dc7",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-c254a8dc7 (reviewer sub-agent of L); spot-checked: The item statement is unchanged against live side-live, where the item is still unsplit with no proof. There are no new nodes and no repair or re-split note. The item, its citer lem-sfb-coefficient-sections-localization and its proof_deps are not in route-pivot-dropped.txt, and no SGA source is used. Step 1: the triple description of Q=(V×_BV)×_VW (P over V by pr2) is correct, and e=(pr1,pr3) and e^{-1}=(pr1,h∘pr2,pr2) are inverse by the universal property. The base change of δ is (v,v,z), so j=(h,h,id) and e∘j=γ, which proves the geometric clause. Step 2: lem-sfb-eta-comp with f=h, g=u, evaluated at V, gives η_{u,V} into Λ_V(P), (u_*η_h)_V=η_{h,P} by def-sfb-finite-lower-star, and c_{h,u} forced by typing to be Λ_W(e^{-1}) (def-sfb-finite-lower-star-comp), so the orientation is correct. Its hypotheses (arbitrary scheme maps, a condensed ring) hold. Step 3: naturality of the sheaf map η_h (def-sfb-eta) along the V-morphism δ; the restriction of h_*Λ_W along δ is Λ_W(δ×_VW) by the functoriality of base change. Step 4: contravariance gives Λ(γ)Λ(e^{-1})=Λ(e^{-1}γ)=Λ(j), and substitution yields the identity. Checked edge cases: h=id, u=id, W empty, and the non-monic fold map with nonconstant sections. proof_deps equals the union of the step uses, and there is no cycle. lem-sfb-localized-ring-mate-graph-evaluation is a different single-mate statement. The declared tool use of lem-sfb-eta-comp (another unit) is accepted: the item's own statement already fixes its comparisons by that node and lists it in stmt_deps."
  }
 }
