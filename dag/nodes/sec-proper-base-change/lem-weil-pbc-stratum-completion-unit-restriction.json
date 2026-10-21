@@ -18,9 +18,128 @@
   "def-weil-pbc-intrinsic-completion",
   "def-constructible-stratification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each restriction $u:Y\\to X$, the canonical constant-ring maps identify $u^{-1}R_n$ with $(A/I^n)_Y$, since every $A/I^n$ is finite. Inverse image preserves limits for a locally closed immersion and for restriction to a pro-etale object, by the two limit-preservation lemmas. Limits of ring sheaves have their operations componentwise on the underlying limits, so these identifications induce a ring isomorphism $c_u:u^{-1}B_X\\cong B_Y$. Its $n$-th projection is exactly the pullback of $B_X\\to R_n$ followed by the constant-ring identification. Thus this is the coefficient map specified in the statement. For a composite restriction the same assertion follows by composing these isomorphisms: their composites with every quotient projection agree.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-restriction-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1); Stacks proetale.tex Tag 09AA (lemma-closed-immersion), and its restriction argument."
+   }
+  },
+  {
+   "text": "Write $F$ for module inverse image with scalars transported through $c_u$. For a locally closed immersion, the immersion lemma states that $F$ is additive, exact and preserves all small limits. For a pro-etale object $U\\to X$, weakly etale localization identifies its site with $X_{\\mathrm{proet}}/U$. Module restriction there is exact by the ringed-site restriction lemma, and is additive termwise. Limits of module sheaves are sectionwise, so evaluating the restricted limit at $V\\to U$ gives the limit evaluated at that same object over $X$; hence restriction preserves all small limits. Transport along a ring isomorphism changes none of these properties. A composite of these functors remains additive, exact and countable-product preserving. In particular their termwise derived functors are the ordinary inverse images used here.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8 proof; sites-cohomology.tex Tag 0E8K (lemma-restriction-K-flat), and sites-modules.tex Tag 03DB (lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "Apply normalized strict reduction-tower pullback with $R_Y$ there equal to $B_X$, $R_X$ there equal to $B_Y$, and quotient algebra tower $Q_{Y,n}=R_n$. Its hypotheses hold by the coefficient isomorphism and exactness just proved. The pulled-back algebra tower is precisely $((A/I^n)_Y)_n$, because the isomorphism in step 1 respects every projection and quotient transition. The theorem gives an isomorphism of entire derived strict towers $F^{\\operatorname{Tow}}(K_\\bullet)\\cong(FK)_\\bullet$. Its evaluations give the displayed finite-reduction isomorphisms, and it identifies the strict augmentations from the constant towers. In particular this proves transition compatibility for the actual reduction maps, independently of choices of K-flat representatives.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product); normalized augmented strict-tower assertion of the cited node."
+   }
+  },
+  {
+   "text": "The normalization isomorphisms for two quotients $b\\ge a$ are, by the adic datum, represented by $(x\\otimes q)\\otimes t\\mapsto x\\otimes q_{b,a}(q)t$. The representative comparison in step 3 sends $F(x\\otimes q)$ to $F(x)\\otimes F(q)$. Applying these two maps in either order gives $F(x)\\otimes q'_{b,a}(F(q))F(t)$, since the constant coefficient comparison respects multiplication and $q_{b,a}$. These are equal balanced maps of sheaf tensor complexes, so they agree after localization. This proves compatibility with normalization maps as well as with the quotient augmentations $x\\mapsto x\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); explicit quotient-normalization formula in def-weil-pbc-adic-coefficient-datum."
+   }
+  },
+  {
+   "text": "Countable products are exact in both $\\operatorname{Mod}(B_X)$ and $\\operatorname{Mod}(B_Y)$, even when $Y$ is not Noetherian. Apply the exact-product-functor strict-limit theorem to $F$ from step 2. For the strict quotient tower it gives the canonical isomorphism $F(R\\lim K_\\bullet)\\cong R\\lim F^{\\operatorname{Tow}}K_\\bullet$. Compose with the derived limit of the tower isomorphism from step 3 to obtain $F(R\\lim K_\\bullet)\\cong R\\lim(FK)_\\bullet$. This uses total derived inverse limit of strict towers, with its normalized Roos comparison, rather than selecting a completion of a triangle.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), especially Tag 0941 (lemma-derived-limit-is-ok); canonical exact-product comparison and augmentation clause of lem-cbc-exact-product-functor-strict-limit."
+   }
+  },
+  {
+   "text": "The strict-limit comparison also preserves maps induced by strict augmentations. Apply its augmentation clause to $\\Delta K\\to K_\\bullet$, and then use the augmentation equation of step 3. It follows that the isomorphism of step 5 carries $F(\\eta_K)$ to $\\eta_{FK}$, with source exactly $FK$. Concretely, the signed Roos fiber has differential $(x,y)\\mapsto(dx,(1-s)x-dy)$, and the unit has coordinates $((x\\otimes1)_n,0)$. The comparison is the canonical product comparison on both coordinates; it therefore sends this unit to $((F(x)\\otimes1)_n,0)$. These are the quotient completion units fixed in the constant-completion equivalence, so no unspecified isomorphism of endpoint objects is being used.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), normalized kernel inclusion in the proof; proetale.tex Tag 099M (lemma-naive-completion), with unit compatibility supplied by the cited statements."
+   }
+  },
+  {
+   "text": "The constant-completion equivalence identifies the completed-coefficient Koszul completion with the strict quotient completion and respects their units. Hence the intrinsic condition of def-weil-pbc-intrinsic-completion is equivalent to invertibility of the quotient unit $\\eta_K$, and the same equivalence applies on $Y$. Step 6 identifies its inverse image with $\\eta_{FK}$. A functor carries an invertible map to an invertible map, which proves preservation of intrinsic completeness for each restriction and for their composites.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul)."
+   }
+  },
+  {
+   "text": "Fix the finite stratification and the chosen pro-etale covering families in the statement. If all covering-member restrictions of $K$ are intrinsically complete, step 7 identifies their quotient units as isomorphisms. Step 6 identifies these maps with the restrictions of the single morphism $\\eta_K$ in $D(\\operatorname{Mod}(B_X))$. Noetherian stratum detection, applied with ring sheaf $R=B_X$, says that these exact inverse images jointly detect isomorphisms; thus $\\eta_K$ is invertible. The constant-completion equivalence then gives intrinsic completeness of $K$. Conversely, apply the preservation already proved to every stratum and covering-member composite. This proves the equivalence for the specified arbitrary covering families.",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, reverse implication, completeness devissage; stratum detection via Stacks proetale.tex Tags 09AH (lemma-ses-associated-to-open) and 09AB (lemma-thickening)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-restriction-preserves-limits",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1),(2), and completeness devissage in Proposition 6.6.11, reverse implication. Strict-tower and unit details follow Stacks Tags 03EL, 0941, 099M, 0A0E and the existing normalized strict-tower comparison statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +175,45 @@
    "results": "8 hits: AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype_apply, IsAdicComplete.of_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.piEquivFin, AdicCompletion.pi_apply_coe, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.of_comp_lift",
    "date": "2026-10-21",
    "verdict": "no match: inspected results concern ordinary adic modules, algebraic etale morphisms, topology or generic complexes; none states this pro-etale completed-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*complet|complet.*strat",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module adic-completion or etale scheme definitions, not derived completion units and finite-stratum detection on completed-coefficient pro-etale module categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completeness is preserved and detected by restrictions to a finite stratification",
+   "results": "8 hits: IsAdicComplete.bot, IsAdicComplete, AdicCompletion, AdicCompletion.module, IsAdic.isPrecomplete_iff, WittVector.isAdicCompleteIdealSpanP, AdicCompletion.instCommRing, AdicCompletion.piEquivFin",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module adic-completion or etale scheme definitions, not derived completion units and finite-stratum detection on completed-coefficient pro-etale module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"completion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module adic-completion or etale scheme definitions, not derived completion units and finite-stratum detection on completed-coefficient pro-etale module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to locally closed strata on the pro-etale site commutes with adic derived completion and detects completeness",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, AlgebraicGeometry.Scheme.Etale.forget, AdicCompletion.transitionMap_comp_eval_apply, instCommRingBDeRhamPlus, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module adic-completion or etale scheme definitions, not derived completion units and finite-stratum detection on completed-coefficient pro-etale module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image preserving countable products commutes with the quotient tower completion unit",
+   "results": "8 hits: AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype_apply, IsAdicComplete.of_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.piEquivFin, AdicCompletion.pi_apply_coe, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module adic-completion or etale scheme definitions, not derived completion units and finite-stratum detection on completed-coefficient pro-etale module categories"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -80,5 +234,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-stratum-completion-unit-restriction",
+  "worker": "stage1",
+  "summary": "Q32: statement unchanged. Eight-step proof reuses existing limit-preservation, slice exactness, normalized reduction-tower pullback, exact-product strict-limit comparison, constant/Koszul completion comparison, and Noetherian stratum detection. Checks coefficient projections, quotient transitions, normalization maps, and the actual completion unit. No new nodes, Lean, or builds. Five item searches were run and read; no exact project attachment was found.",
+  "blueprint": "thm-weil-pbc-finite-extension proof first sentence, \"Choose an integral lattice for K\", via the recorded integral-stratified-perfect characterization: supplies restriction of the completion unit and completeness devissage from Bhatt–Scholze Lemma 6.5.8 and Proposition 6.6.11. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of a pro-etale object with the slice site, needed for the covering-member restriction; no proper-base-change unit statement supplies this site equivalence."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic exactness of module restriction to a ringed slice, applied over the completed coefficient ring; the unit has no alternative slice-exactness statement."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exactness of products on every pro-etale module category, including on non-Noetherian covering objects; needed for the strict derived-limit comparison."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic normalized derived-limit comparison for any exact additive product-preserving module functor, including its strict-augmentation equation; it replaces no proper-base-change proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-6f7228b0d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6f7228b0d (reviewer sub-agent of L); spot-checked: Q32 6f7228b0: the item (statement unchanged; compared with the live node, only status/proof/proof_deps/proof_origin/split_report/mathlib_searches differ) gets an 8-step proof with no new nodes. Source checked: Bhatt–Scholze Lemma 6.5.8(1),(2) and its proof (k^* commutes with limits and with ⊗R/m), Prop. 6.6.11 reverse direction ('complete by 6.5.8 and standard sequences'), and Remark 6.5.10. Each step checked against the cited statements. S1: constant-ring-map applies because each A/I^n is finite and u is arbitrary; the immersion and weakly-étale limit lemmas give c_u; its projections and transitions are the specified ones. S2: the immersion lemma's transported-scalar clause; slice identification plus restriction exactness plus sectionwise limits for U. S3: every hypothesis of reduction-pullback-derived-tower holds, and Q_X=((A/I^n)_Y) with π_n. S4 (elementary): the balancing formulas of the adic datum and of τ agree; a genuine representative calculation. S5: products are exact on every scheme; exact-product strict-limit hypotheses hold. S6: its augmentation clause with γ=i_{X,K} and τF(i)=i_{FK} gives F(η_K)=η_{FK}; no arbitrary cone isomorphism. S7: Koszul Q_m of the intrinsic-completion definition equals Q_m(Â) of constant-completion-equivalence, whose units agree. S8: Noetherian stratum detection with R=B_X on the single morphism η_K. Implicit and accepted as elementary: inverse image along a pro-étale object equals slice restriction (initial object of I_W in def-weil-proetale-inverse-image). Edge cases checked: empty strata/members, I=A, I=0, unbounded K, non-Noetherian U. check_dag: no cycle or route error through the item. No duplicates; no SGA. Accepted tool_uses: lem-weil-proetale-weakly-etale-localization, lem-sfb-ringed-site-restriction-kflat, lem-weil-proetale-countable-products-exact, lem-cbc-exact-product-functor-strict-limit (generic, needed, no unit node gives them)."
  }
 }
