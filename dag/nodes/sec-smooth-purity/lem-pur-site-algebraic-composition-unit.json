@@ -14,9 +14,107 @@
   "def-weil-pbc-algebraic-inverse-image",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On objects, arrows and sections, $P_{uv}=P_vP_u$: both send a sheaf $K$ on $\\mathcal E$ to $W\\mapsto K(u(v(W)))$ with the same restrictions. The hypothesis that $P_v$ and $P_u$ preserve sheaves therefore also gives this property for $P_{uv}$. Use the specified adjunctions of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. By [def-weil-pbc-composite-adjunction], $L_1=L_uL_v$ is left adjoint to $P_vP_u$, with unit\n$$\\alpha_H=P_v(\\eta^u_{L_vH})\\circ\\eta^v_H.$$\nIts Hom bijection is precisely the two successive adjunction bijections, so this is the unit for the specified adjunctions, without changing either choice.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites, proof; Tag 00WX, lemma-adjoint-sheaves; composite unit expanded using categories.tex Tag 0DV0, lemma-compose-counits, and its dual"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $L_0=L_{uv}\\dashv P_{uv}$ and the adjunction $L_1\\dashv P_vP_u$ of step 1, taking the right-adjoint identification to be the identity from that step. It gives a unique natural transformation $\\gamma:L_0\\to L_1$, which is invertible, with\n$$P_vP_u(\\gamma_H)\\circ\\eta^{uv}_H=\\alpha_H.$$\nThis is the required normalization, including uniqueness among natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites, proof: both inverse images are left adjoints of the same functor; unit-normalized form expanded by the cited categorical lemma"
+   }
+  },
+  {
+   "text": "Evaluate the equation of step 2 at $W\\in\\mathcal C$ and $s\\in H(W)$. Its left side is $\\gamma_{H,uv(W)}(\\eta^{uv}_{H,W}(s))$ and its right side is $\\eta^u_{L_vH,v(W)}(\\eta^v_{H,W}(s))$. By the definition of inverse-image sections, these are exactly $\\gamma_H((uv)^{-1}s)$ and $u^{-1}(v^{-1}s)$. Conversely the section equation for every $W,s$ says that the two component functions of the unit equation agree everywhere. They are thus equal sheaf morphisms, for every $H$, and step 2 gives uniqueness. No generation assertion about sections of $L_0H$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u, proof: the forward adjunction map is precomposition with the unit; evaluation of the normalized unit equation"
+   }
+  },
+  {
+   "text": "Let $\\pi_A:A\\times B\\to A$ and $\\pi_B:A\\times B\\to B$ be the projections. By definition $p^i_{A,B}$ has components $L_i(\\pi_A),L_i(\\pi_B)$. The two composites in the claimed product equation, followed by projection to $L_1A$, are respectively $L_1(\\pi_A)\\gamma_{A\\times B}$ and $\\gamma_A L_0(\\pi_A)$, equal by naturality; the projection to $L_1B$ gives the same check. The product universal property proves the equation. Both $p^1_*\\gamma_*$ and $p^0_*$ have terminal target, so they agree. The comparisons are invertible by the finite-limit hypotheses, with $L_1$ preserving products and the terminal object by successive application of $L_v$ and $L_u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, preceding operation-map discussion; elementary projection and terminal-object calculation"
+   }
+  },
+  {
+   "text": "Under the identifications of [def-weil-pbc-algebraic-inverse-image], a binary operation $o:X\\times Y\\to Z$ transported by $L_i$ is $o_i=L_i(o)(p^i_{X,Y})^{-1}$, and a constant $e:*\\to Z$ becomes $e_i=L_i(e)(p^i_*)^{-1}$. For $i=1$ these are also the iterated transported operations: the composite\n$$L_uL_v(X\\times Y)\\xrightarrow{L_u(p^v_{X,Y})}L_u(L_vX\\times L_vY)\\xrightarrow{p^u_{L_vX,L_vY}}L_uL_vX\\times L_uL_vY$$\nhas projections $L_uL_v(\\pi_X),L_uL_v(\\pi_Y)$, hence equals $p^1_{X,Y}$; the terminal comparison is checked by its unique target map. Substitution in the definitions of the iterated operation gives $L_1(o)(p^1)^{-1}$, and similarly for constants. Naturality and step 4 now give\n$$\\gamma_Zo_0=L_1(o)\\gamma_{X\\times Y}(p^0)^{-1}=o_1(\\gamma_X\\times\\gamma_Y),\\qquad \\gamma_Ze_0=e_1.$$\nApply these formulas to addition and multiplication on $R$, and to zero and one. Thus $\\gamma_R$ is a unital ring map. Its component is already bijective, so its inverse respects the same operations: substitute the preimages of each pair of sections in these equalities. It is a ring-sheaf isomorphism.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, operation-map proof; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi; explicit naturality calculation for ring operations"
+   }
+  },
+  {
+   "text": "Use the binary-operation equality in step 5 with $X=Y=Z=M$ and $o=+$, and its constant equality with the zero of $M$. This makes $\\gamma_M$ additive. With $X=R,Y=Z=M$ and $o$ the scalar action, the same equality is\n$$\\gamma_M\\,\\mathrm{act}_0=\\mathrm{act}_1(\\gamma_R\\times\\gamma_M).$$\nEvaluating it on an arbitrary pair $(a,m)$ over an arbitrary object of $\\mathcal E$ gives $\\gamma_M(am)=\\gamma_R(a)\\gamma_M(m)$ on all local sections. The operation transports and the identification of module morphisms are those of [def-weil-pbc-algebraic-inverse-image]; module addition and scalar action have the meaning of [def-weil-sheaf-of-modules-category]. Invertibility of the underlying components gives the additive inverse isomorphism, semilinear through $\\gamma_R^{-1}$. For an $R$-linear sheaf map $f:M\\to N$, naturality of $\\gamma$ gives $\\gamma_N L_0(f)=L_1(f)\\gamma_M$. This proves the asserted module naturality.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module: action is the transported operation map; elementary substitution in step 5 and evaluation on local sections"
+   }
+  },
+  {
+   "text": "For the identity site functor, $P_{\\mathrm{id}}=\\mathrm{Id}$ on sheaves. Compare the given $L_{\\mathrm{id}}\\dashv\\mathrm{Id}$ with the identity adjunction of [def-weil-pbc-composite-adjunction]. By [lem-weil-pbc-conjugate-iso-unit-equation] there is an isomorphism $c:L_{\\mathrm{id}}\\xrightarrow{\\sim}\\mathrm{Id}$ satisfying $c_H\\eta^{\\mathrm{id}}_H=\\mathrm{id}_H$. Since $c_H$ is invertible, $\\eta^{\\mathrm{id}}_H=c_H^{-1}$, proving the identity-unit assertion without an additional finite-limit hypothesis on $L_{\\mathrm{id}}$. For completeness its canonical product comparison is invertible: naturality of $c$ and the two projections gives\n$$(c_A\\times c_B)p^{\\mathrm{id}}_{A,B}=c_{A\\times B},$$\nand the terminal equation is $p^{\\mathrm{id}}_*=c_*$. The maps $c_A,c_B,c_{A\\times B},c_*$ are isomorphisms, so these comparisons are isomorphisms too. Thus the operation transports assumed for the identity functor have the required invertible comparisons.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WX, lemma-adjoint-sheaves for the identity functor; categories.tex Tag 0037, definition-adjoint; uniqueness argument as in Tag 03CB, lemma-composition-morphisms-sites"
+   }
+  },
+  {
+   "text": "Write $\\eta=\\eta^{\\mathrm{id}}$. Naturality with the two projections gives $p^{\\mathrm{id}}_{X,Y}\\eta_{X\\times Y}=\\eta_X\\times\\eta_Y$; the terminal equation is $p^{\\mathrm{id}}_*\\eta_*=\\mathrm{id}_*$. Hence for every binary operation $o:X\\times Y\\to Z$ and constant $e:*\\to Z$,\n$$\\eta_Zo=L_{\\mathrm{id}}(o)\\eta_{X\\times Y}=o_{\\mathrm{id}}(\\eta_X\\times\\eta_Y),\\qquad \\eta_Ze=L_{\\mathrm{id}}(e)\\eta_*=e_{\\mathrm{id}},$$\nusing exactly the operation definitions of [def-weil-pbc-algebraic-inverse-image]. Apply the first formula to ring addition, multiplication, module addition and the action $R\\times M\\to M$, and the second to ring zero, one and module zero. They prove that $\\eta_R$ is a ring map and $\\eta_M$ is additive and semilinear through $\\eta_R$ on every section. By step 7 these maps are bijective; substituting preimages in the displayed formulas gives preservation by their inverses as well. Thus $\\eta_R$ is a ring isomorphism and the identity module comparison is the claimed natural additive semilinear isomorphism.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, and sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi: operation-map definitions applied to the identity unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CB, lemma-composition-morphisms-sites, adjunction comparison; normalized product/operation and identity calculations expanded from sites-modules.tex Tag 03D2, lemma-pullback-module and sites.tex Tag 00YV"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +164,52 @@
    "results": "[loogle] OK 5 hit(s); SheafOfModules.pullbackComp in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_comp_id in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_id_comp in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_assoc in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.conjugateEquiv_pullbackComp_inv in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous",
    "date": "2026-10-21",
    "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*(Comp|Id)|sheafPullbackComp|sheafPullbackId|conjugateEquiv_pullbackComp",
+   "results": "[grep] OK 0 hit(s); none; scope Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between finite product preserving functors preserves ring and module operations through the canonical product comparison",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.CartesianMonoidalCategory.prodComparisonNatIso; CategoryTheory.CartesianMonoidalCategory.prodComparisonIso; CategoryTheory.Functor.Monoidal.tensorObjComp; CategoryTheory.monoidalOfHasFiniteProducts.instIsIsoδ; CategoryTheory.Limits.prodComparisonNatIso; CategoryTheory.Limits.PreservesProduct.of_iso_comparison; CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso; CategoryTheory.CartesianMonoidalCategory.instIsIsoFunctorProdComparisonNatTransOfProdComparison",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "[loogle] OK 5 hit(s); SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit normalized composition isomorphism of sheaf inverse image functors preserves products and induces ring isomorphisms and semilinear module isomorphisms; the identity adjunction unit is invertible",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackComp; CategoryTheory.sheafComposeNatIso; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackId|conjugateEquiv_pullbackComp_inv",
+   "results": "[grep] OK 5 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; scope Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between two left exact functors between sheaf categories automatically respects ring objects and module scalar action, including the composition and identity comparison of inverse image",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardCongr; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-21",
+   "verdict": "no exact match for the full item: generic product comparisons and module pullbackComp/pullbackId do not identify the specified underlying set-sheaf comparison with all ring/module operation transports and section normalization; the adjunction ingredients already have Mathlib leaf nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-proetale-inverse-image-tensor-comparison",
@@ -89,5 +229,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-site-algebraic-composition-unit",
+  "worker": "stage1",
+  "summary": "N8 checked the specified-unit comparison against Stacks 03CB/00WX/00VE and reused the existing composite-adjunction and conjugate-unit Mathlib leaves. Eight steps prove section uniqueness, canonical product and terminal compatibility, ring/module operation transport and identity-unit invertibility. No statement change, new node or Lean attachment.",
+  "blueprint": "Realizes the final sentence of lem-pur-finite-kummer-level.proof.md in main-20261015 (naturality of the tensor product under base change), through the original parent comparison steps 5, 6 and the identity-unit part of step 8. This item supplies precisely their unit-normalized set/ring/module composition and identity comparisons; no tensor comparison is asserted."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-fd1a22fa4",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-fd1a22fa4 (reviewer sub-agent of L); spot-checked: I read the item's 8 steps against Stacks 03CB (sites.tex l.2764: both are left adjoints of (uv)^s=v^s u^s) and 03D2 (sites-modules.tex l.1020: action is f^{-1}mu through product preservation). The statement, stmt_deps, blueprint and source are unchanged against side-live, there are no new nodes, and proof_deps equals the union of the step uses. Steps 1-2: P_{uv}=P_vP_u holds literally, so delta=id. Def-weil-pbc-composite-adjunction gives the unit P_v(eta^u_{L_vH}) eta^v_H. Lem-weil-pbc-conjugate-iso-unit-equation (Mathlib leaf) gives a unique invertible gamma with P_vP_u(gamma) eta^{uv}=alpha. Step 3: the section form is the componentwise equation, and the converse uses uniqueness. Step 4: projections and naturality; p^1 is invertible because L_1 is a composite of left-exact functors. Step 5: I checked that p^u L_u(p^v)=p^1, that iterated operations equal L_1(o)(p^1)^{-1}, and that gamma o_0=o_1(gamma x gamma) and gamma e_0=e_1. Step 6: with o=act, gamma_M is semilinear through gamma_R; module maps are handled by naturality. Step 7: the conjugate lemma against the identity adjunction gives c eta^id=id, so eta^id=c^{-1}; the product and terminal comparisons of L_id are isomorphisms, and no extra finite-limit hypothesis is used. Step 8: the operation identities for eta give the ring and semilinear module isomorphisms. All cited nodes are definitions or Mathlib leaves, so no route or tool_uses issue. Lem-weil-pbc-site-morphism-composition needs continuity and exactness, which is stronger than the item's hypotheses, and has no algebraic clauses. The lem-pur-independent-* composite-lift nodes are different statements, so neither is a duplicate. Edge cases checked: trivial site, empty site, zero ring and module. Advisory only: the left-exactness hypothesis on L_uv is redundant. The parent's steps 4 and 5 use exactly the unchanged statement."
  }
 }
