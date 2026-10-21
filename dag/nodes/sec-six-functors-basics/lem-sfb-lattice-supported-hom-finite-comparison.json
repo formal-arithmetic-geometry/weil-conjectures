@@ -22,9 +22,110 @@
   "sk-def-sfb-derived-tensor-hom",
   "def-pur-ringed-site-zeroth-hypercohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient datum gives a discrete valuation ring $\\mathcal O_E$ with finite residue field and uniformizer $\\pi_E$. Apply [lem-weil-valued-dvr-finite-quotients] to obtain finiteness of $A_n$. For the torsion assertion, $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$ by [def-weil-l-adic-coefficient-extension] and [def-weil-l-adic-numbers], so $\\ell\\in\\mathfrak m_E=(\\pi_E)$. Write $\\ell=\\pi_E c$ with $c\\in\\mathcal O_E$. Then $\\ell^n=\\pi_E^n c^n$ annihilates $A_n$. Thus $A_n$ is an admissible finite coefficient ring; no unramifiedness assertion is needed.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Torsion targets: admissibility of the finite quotient; elementary ideal calculation from the stated coefficient datum."
+   }
+  },
+  {
+   "text": "By [det-pe-derived-nakayama-resolution], $0\\to R_Y\\xrightarrow{\\pi_E^n}R_Y\\to A_{n,Y}\\to0$ is exact for every $Y$. Thus the coefficient sheaf in the question is the actual quotient $R_Y/\\pi_E^nR_Y$. On a slice trivializing $L_0$ with rank $r$, its quotient is $A_{n,S}^{\\oplus r}$, with the quotient action. These local descriptions prove that $L_{0,n}$ is finite locally free. Apply [lem-sfb-locally-free-derived-scalars] with $R=R_S$, $B=A_{n,S}$ and $M=L_0$: $L_0$ is flat and K-flat in degree zero and the canonical scalar-extension comparison gives $A_{n,S}\\otimes^{\\mathrm L}_{R_S}L_0\\simeq L_{0,n}$ in $D(A_{n,S})$. This application imposes no flatness on the quotient ring.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-sfb-locally-free-derived-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: exact quotient resolution; local finite-free specialization of the derived scalar comparison, as used in Lattices of the item source."
+   }
+  },
+  {
+   "text": "Define $L_0^\\vee/\\pi_E^n\\to\\mathcal Hom_{A_{n,S}}(L_{0,n},A_{n,S})$ by $\\overline\\lambda(\\overline x)=\\overline{\\lambda(x)}$. Changing $x$ or $\\lambda$ by a multiple of $\\pi_E^n$ changes the value by such a multiple, so the map is well-defined. On a slice with a basis $e_1,\\ldots,e_r$ it sends the reductions of the coordinate functionals to the coordinate functionals of $A_{n,S}^r$ and is an isomorphism. The formula is independent of this basis, hence gives a global isomorphism, with inverse the identification in the question. Its displayed formula proves compatibility with evaluation. In particular both $L_0^\\vee$ and its reduction are locally finite free, also for rank zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Torsion targets: the reduced dual L_0^vee/pi_E^n; local coordinate evaluation calculation."
+   }
+  },
+  {
+   "text": "Put $T_n=\\operatorname{Res}_n(Q\\otimes^{\\mathrm L}_{R_X}A_{n,X})$. In the integral derived category, [det-lem-int-tensor-projection] with $M=L_0$ and $L=A_{n,X}$ gives $T_n\\simeq a_!(L_0\\otimes^{\\mathrm L}_{R_S}a^*A_{n,X})$. Here $a^*A_{n,X}=A_{n,S}$ by [sk-prop-sfb-cartesian-coefficients]. The comparison of step 2 identifies the right side with $a_!\\operatorname{Res}_n L_{0,n}$ in $D(R_X)$. In passing between extension and underlying tensor we use the chain isomorphism $\\nu$ of [lem-sfb-slice-scalar-hom-chain-adjunction] on a K-flat resolution: termwise scalar extension, followed by restriction, is the underlying $R$-linear tensor. The projection-formula node also states that $u_!$ and $i_*$ are exact termwise functors in this setting. Their coefficient actions are the given pulled-back actions, so restricting the finite coefficient action on $i_*u_!L_{0,n}$ gives this same integral object.",
+   "uses": [
+    "det-lem-int-tensor-projection",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-slice-scalar-hom-chain-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Locally closed immersions: specialize the projection formula to the quotient coefficient module; underlying scalar extension is the normalized termwise tensor."
+   }
+  },
+  {
+   "text": "To obtain an isomorphism in $D(A_{n,X})$, use the quotient map $Q\\to\\operatorname{Res}_n(a_!L_{0,n})$ and take its adjunct $c_n:Q\\otimes^{\\mathrm L}_{R_X}A_{n,X}\\to a_!L_{0,n}$ under [lem-pur-sheaf-ring-derived-coefficient-adjunction]. This is an actual finite-coefficient morphism. Its underlying map is the quotient augmentation of the cone $[Q\\xrightarrow{\\pi_E^n}Q]$: [det-pe-derived-nakayama-resolution] computes underlying derived reduction by that cone, and the adjunction's normalized formula $x\\otimes a\\mapsto a\\,\\overline x$ gives this augmentation. More explicitly, on a K-flat resolution $P\\to Q$ the adjunct is represented by $P\\otimes A_{n,X}\\to a_!L_{0,n}$ sending $p\\otimes a$ to $a\\,\\overline p$; the comparison with the free two-term quotient resolution has the same quotient augmentation. Multiplication by $\\pi_E^n$ is injective on $L_0$, as checked on the local finite free slices in step 2; exactness of $i_*u_!$ in [det-lem-int-tensor-projection] therefore gives $0\\to Q\\xrightarrow{\\pi_E^n}Q\\to a_!L_{0,n}\\to0$ on underlying integral modules. Consequently that augmentation is a quasi-isomorphism. Restriction of scalars leaves kernels and cokernels unchanged and so detects cohomology isomorphisms; hence $c_n$ is an isomorphism in $D(A_{n,X})$. This proves the source reduction with its finite coefficient action, rather than only an integral isomorphism.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "det-pe-derived-nakayama-resolution",
+    "det-lem-int-tensor-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the two-term quotient resolution and its augmentation; sites-cohomology.tex Tag 07A6 (lemma-adjoint), normalized scalar adjunct. Coefficient action made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the small site $X_{\\mathrm{proet}}$, the quotient map $R_X\\to A_{n,X}$, $K=Q$ and $H=\\overline K[q]$. This gives the first displayed Hom isomorphism for every $q\\in\\mathbf Z$: restriction is termwise and commutes with shifts. Precomposition with the inverse of $c_n$ from step 5 gives the second displayed isomorphism. These are isomorphisms of abelian groups: the adjunction on complexes sends $g$ to $(x\\otimes a\\mapsto a g(x))$ and is additive, and precomposition is additive. Naturality in $\\overline K$ follows from the naturality in the target of the cited adjunction.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, specialized to the identity topos with quotient ring map; the item source Integral targets and sk-def-sfb-coefficient-change use this scalar adjunction."
+   }
+  },
+  {
+   "text": "Apply [det-lem-formal-closed-support-stratum] with the admissible coefficient $\\Lambda=A_n$, the same factorization $a=i\\circ u$, $L=L_{0,n}$ and $K=\\overline K$. The finite locally free module of step 2 is finite locally projective, so the cited statement gives $\\operatorname{Hom}_{D(A_{n,X})}(a_!L_{0,n},\\overline K[q])\\cong H^qR\\Gamma(S,L_{0,n}^\\vee\\otimes u^*R\\underline\\Gamma_{Z,A_n}\\overline K)$ naturally in $\\overline K$. The support functor here has precisely the kernel and right-derived definition in [sk-lem-formal-closed-support]. Substitute the evaluation-compatible identification of step 3. Apply [lem-sfb-locally-free-derived-scalars] to the reduced dual over $A_{n,S}$: it is flat and K-flat in degree zero. Its ordinary termwise tensor with any complex therefore computes its derived tensor. This gives the third displayed comparison and the last tensor assertion. All these statements apply to the ordinary unbounded categories and to arbitrary $\\overline K$; no constructibility, boundedness, completeness or flatness of $R_X\\to A_{n,X}$ has been introduced.",
+   "uses": [
+    "det-lem-formal-closed-support-stratum",
+    "sk-lem-formal-closed-support",
+    "lem-sfb-locally-free-derived-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-stratum.proof.md",
+    "place": "First, second and third isomorphisms and the final Hom/cohomology assertion, now with finite coefficient ring A_n; Torsion targets in the item source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-l-adic-numbers",
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-locally-free-derived-scalars",
+  "det-lem-int-tensor-projection",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-slice-scalar-hom-chain-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "det-lem-formal-closed-support-stratum",
+  "sk-lem-formal-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Lattices, Torsion targets and Integral targets; detailed assembly of existing quotient-resolution, projection, scalar-adjunction and supported-Hom results, with the local evaluation computation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +161,52 @@
    "results": "Profinite.NobelingProof.Nobeling_aux; SheafOfModules.Presentation.map_π_eq; Profinite.NobelingProof.Linear_CC'₁; Profinite.NobelingProof.CC_exact; Profinite.NobelingProof.Linear_CC'₀; ModuleCat.Tilde.toOpen_res; groupCohomology.linearYonedaObjResProjectiveResolutionIso; Profinite.NobelingProof.Linear_CC' The hits concern ordinary module dual bases, local cohomology or unrelated adjunction/extension lemmas; none states this sheaf-level derived scalar and support comparison or specializes to all its clauses in one line.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of a lisse lattice extended by zero and quotient duals identify Hom into a restricted finite coefficient complex with supported cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.homLinearEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, groupCohomologyIsoExt, Rep.standardResolution.extIso, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply. Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"adjunction\"",
+   "results": "0 hits: . Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|hom|tensor).*(restrictScalars|extendScalars)|(restrictScalars|extendScalars).*(derived|hom|tensor)",
+   "results": "0 hits: . Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from extension by zero of a locally free sheaf into a derived complex equals cohomology of closed support tensor the dual sheaf",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Abelian.Ext.zero_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, CochainComplex.HomComplex.Cochain.ofHom_zero, ComplexShape.Embedding.AreComplementary.hom_ext', HomologicalComplex.extend.d_none_eq_zero'. Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site extension of scalars followed by restriction is a derived adjunction and finite locally free duals commute with quotient coefficient change",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.homEquiv_extendScalarsComp, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map. Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(support|extension.by.zero|lowerShriek).*(tensor|[Hh]om)|(tensor|[Hh]om).*(support|lowerShriek)",
+   "results": "2 hits: Mathlib/CategoryTheory/Abelian/Injective/Extend.lean, Mathlib/CategoryTheory/Abelian/Projective/Extend.lean. Read the returned results; ordinary module adjunctions, Ext identifications or unrelated complex extension lemmas do not give this pro-etale sheaf coefficient/support comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-uniform-constructible-ext-integral",
@@ -80,5 +223,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-lattice-supported-hom-finite-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step proof using existing nodes only: finite ell-primary quotients, local lattice scalar reduction, explicit evaluation-compatible reduced dual, underlying projection formula, finite-coefficient refinement via the canonical scalar adjunct and quotient augmentation, Hom adjunction, then supported cohomology. No new nodes: all non-elementary tools already exist. The source-reduction comparison is checked in D(A_n), not just after forgetting coefficients; no quotient flatness or target boundedness is assumed.",
+  "blueprint": "Nearest imported ancestor det-uniform-constructible-ext-integral: its Integral targets support-Hom comparison and Torsion targets displayed reduced-dual supported complex, together with the Lattices source-reduction formula. No imported blueprint node states this whole finite coefficient comparison.",
+  "tool_uses": [
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Standing coefficient datum: its DVR and finite-residue assertions check the finite-quotient lemma hypotheses."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic arithmetic finiteness of uniformizer quotients; the unit takes finite coefficient rings as available."
+   },
+   {
+    "node": "def-weil-l-adic-numbers",
+    "why": "Definition of the normalized absolute value gives |ell|=ell^{-1}, used only for the elementary annihilation calculation."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Generic exact quotient resolution of the actual continuous condensed coefficient sheaf, used for lattice reduction without assuming the quotient flat."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic local finite-free flatness/K-flatness and derived scalar comparison, used on the source lattice and reduced dual."
+   },
+   {
+    "node": "det-lem-int-tensor-projection",
+    "why": "Generic locally closed extension projection formula, including exact termwise immersion functors; realizes the unit Lattices reduction formula."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies the pulled-back quotient coefficient on the stratum with its specified coefficient sheaf."
+   },
+   {
+    "node": "lem-sfb-slice-scalar-hom-chain-adjunction",
+    "why": "Only its nu chain identification of underlying scalar extension with ordinary relative tensor is used, to keep coefficient categories distinct."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic unbounded scalar extension/restriction adjunction, including its representative normalization; the unit uses this adjunction without reproving it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-l-adic-numbers",
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-locally-free-derived-scalars",
+  "det-lem-int-tensor-projection",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-slice-scalar-hom-chain-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-e3df840bd",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-e3df840bd (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against every cited statement and the main-20261015 uniform-Ext proof (Lattices/Torsion/Integral targets). Statement and stmt_deps match side-live. The item is still unsplit live and side-live, is not in the dropped list and has no repair note; there are no new nodes. Step checks: 1, A_n is finite (DVR quotients; coefficient-extension (4)), |ℓ|=ℓ^{-1} puts ℓ in (π), so A_n is admissible (discrete quotient topology). 2, Nakayama exact sequence plus locally-free-derived-scalars, which has no flatness hypothesis on φ. 3, elementary reduced-dual evaluation map, checked including rank 0. 4, int-tensor projection with Λ=O_E, cartesian coefficients and ν; correct but redundant. 5, I verified c_n myself: P flat ⇒ P/π^n≃cone(π^n|P)≃cone(π^n|Q)≃Q/π^n, using that Q is torsion-free because a_! is exact; so c_n is an isomorphism in D(A_{n,X}), not only an integral one. 6, the sheaf-ring derived coefficient adjunction for unbounded complexes and an arbitrary ring map. 7, the formal-closed-support stratum lemma with Λ=A_n; its support functor is the same as the item's; the dual is K-flat. Edge cases: n=1, ramified E, L_0=0, Z=X, the point case. rg duplicate search found nothing. Batch-5 flag on det-lem-formal-closed-support-stratum→lem-trf-geometric-inverse-image-exact: the closure difference is 0 (the unchanged stmt_dep sk-lem-formal-closed-support already reaches it), and the target is the generic exactness of geometric inverse image, not a trace-formula or Poincaré step; accepted. Tool_uses accepted. No fixes."
  }
 }
