@@ -21,9 +21,135 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-sc-ring-strict-henselization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\mathcal O_E$, $A_n=A/\\varpi^n$ and $F_n=M_0/\\varpi^nM_0$. First identify the pulled condensed coefficient rings with the continuous-function coefficient sheaves, naturally for $A\\to A_n$ and $A\\to E$, by lem-weil-pbc-continuous-coefficient-realizations. Pass between internal modules and sheaf modules using def-weil-pbc-internal-abelian-sheaf-module-equivalence; its underlying sheaf is unchanged, so finite free local trivializations are unchanged. By lem-sfb-integral-lisse-reduction-equivalence, $(F_n)$ is a tower of finite locally free $A_n$-sheaves with $F_{n+1}/\\varpi^nF_{n+1}\\cong F_n$. By det-pe-finite-local-systems-twist every $F_n$ comes from an etale finite locally constant module sheaf. Thus the finite-coefficient correspondence may be applied to these actual reductions, rather than to a different coefficient model.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "det-pe-finite-local-systems-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.1, 6.8.3, Lemma 6.8.2(1), Proposition 6.8.4(1); Stacks 099Y (proetale.tex, lemma-compare-locally-constant)"
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-finite-set-monodromy-torsor to the underlying finite locally constant set sheaf of $F_1$ on the nonempty connected scheme $S$. It gives a connected finite etale surjection $c:H\\to S$ on which that set sheaf is constant. In cor-galois-lisse-representations(1), a trivial action on the underlying set is exactly a trivial action on the module; hence $c^*F_1$ is a constant $A_1$-module sheaf. Its fibre is finite free of some rank $d\\geq0$, because $F_1$ is locally free. This is the sole choice of $H$; it depends only on $M_0$, and no later boundary pair enters its construction.",
+   "uses": [
+    "lem-weil-pbc-finite-set-monodromy-torsor",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Section Tag 03SF (section-finite-etale-under-galois); finite module structures by the fibre equivalence, with Stacks 0DV5 and 0DV6 for the finite-set torsor"
+   }
+  },
+  {
+   "text": "Fix any pair $(Y,D)$, any factorization $W\\to H\\to S$ of $g$, any geometric point of $Y$, and any of the parameter choices in the statement. Write $R$ for the strict henselization, $f=\\prod_i t_i$, and $U=\\operatorname{Spec}R[1/f]$. The original local ring is Noetherian regular; lem-sc-strict-henselization-noetherian and lem-sc-strict-henselization-regular show the same for $R$. Its characteristic is $p$. The parameters $t_i$ in the statement are part of a regular system of parameters in $R$. By lem-trf-regular-local-ufd-boundary-factorization they are nonzero prime elements in a domain; thus $U$ is a nonempty integral, hence connected, affine scheme (also when $r=0$, $f=1$). Let $N$ be the pullback of $M_0$ to $U$. Exact Cartesian coefficient pullback, sk-prop-sfb-cartesian-coefficients(1), preserves its finite free local models and identifies $N/\\varpi^nN$ with $F_n|_U$. In particular $N/\\varpi N\\cong(A_1)_U^d$, since the map factors through $H$.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ (lemma-henselization-noetherian), 06LN (lemma-henselization-regular); ILO IX 2.1 strict-local setup, p.133"
+   }
+  },
+  {
+   "text": "For each $n\\geq1$ consider $K_n=\\ker(\\operatorname{GL}_d(A_n)\\to\\operatorname{GL}_d(A_1))$. The finite local rings and surjective transition maps are those of lem-weil-valued-dvr-finite-quotients, and the residue field $\\kappa=A_1$ is finite by lem-weil-l-adic-extension-integers-dvr. It has characteristic $\\ell$: $|\\ell|_E<1$ puts $\\ell$ in the maximal ideal, so the field characteristic divides the prime $\\ell$. Filter $K_n$ by $K_{n,i}=1+\\varpi^i\\operatorname{Mat}_d(A_n)$ for $1\\leq i\\leq n$, with $K_{n,n}=1$. The map $1+\\varpi^i B\\mapsto B\\bmod\\varpi$ identifies $K_{n,i}/K_{n,i+1}$ with the additive group $\\operatorname{Mat}_d(\\kappa)$: multiplication is addition modulo $\\varpi^{i+1}$, and cancellation of $\\varpi^i$ is valid in the DVR before taking the quotient. These groups have order $|\\kappa|^{d^2}$, a power of $\\ell$. Multiplying the successive orders shows $K_n$ is an $\\ell$-group. This includes $n=1$ and $d=0$, when it is trivial.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-filtration calculation for the finite reductions of Proposition 6.8.4(1); uses the DVR and finite residue-field facts explicitly cited"
+   }
+  },
+  {
+   "text": "Choose a geometric point of $U$. For each $n$, $N/\\varpi^nN$ is a pro-etale local system of finite $A_n$-modules on $U$, so det-pe-finite-local-systems-twist on $U$ writes it as $\\nu_U^*$ of an etale local system of finite $A_n$-modules, with $\\nu_U^*,\\nu_{U,*}$ quasi-inverse; constancy may therefore be tested on this etale model and transported back, also after pullback to the covers below. cor-galois-lisse-representations(1) associates to this etale model its finite free $A_n$-fibre $B_n$ and its continuous monodromy action. The rank of $B_n$ is $d$, since reduction to $A_1$ is the free rank-$d$ fibre in step 3; scalar compatibility in that correspondence identifies its residual action with the trivial action. After a choice of basis, the image $Q_n$ is therefore a subgroup of $K_n$, so its order is a power of $\\ell$ and is prime to $p$. Apply thm-galois-fundamental to the finite continuous $\\pi_1(U)$-set $Q_n$ with left translation via the image quotient. Right translations $g\\cdot q=qg^{-1}$ commute with this action and make the corresponding finite etale cover $P_n\\to U$ a $Q_n$-torsor. Base change to it restricts monodromy to the kernel of the image map, so $N/\\varpi^nN$ becomes the constant free $A_n$-module on $P_n$. Only this actual monodromy group is used; the order of an arbitrary trivializing cover would not suffice.",
+   "uses": [
+    "det-pe-finite-local-systems-twist",
+    "cor-galois-lisse-representations",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF (section-finite-etale-under-galois), image quotient and its regular finite action; theorem-fundamental-group and its base-change clause"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-strict-local-prime-to-p-kummer-splitting to $R$, the chosen $t_i$, and the torsor $P_n$ with group $Q_n$. Its hypotheses hold by steps 3 and 5. Obtain a positive integer $m_n$ prime to $p$ such that $P_n$ is trivial over the punctured $m_n$-root scheme. The full prime-to-$p$ parameter-root tower $T$ in the item has a projection to this scheme. A section of the trivialized torsor therefore pulls back to a section over $T$; pullback of the trivialization on $P_n$ along this section gives $(N/\\varpi^nN)|_T\\cong(A_n)_T^d$. Exact Cartesian coefficient pullback identifies this sheaf with $N_T/\\varpi^nN_T$, where $N_T=N|_T$. No common finite root order for all $n$ is required.",
+   "uses": [
+    "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 and its finite simultaneous parameter-root normal form, printed pp.133-134; application at each finite monodromy quotient"
+   }
+  },
+  {
+   "text": "Choose these finite-level trivializations compatibly, as follows. Fix one at level $1$. Suppose one is fixed at level $n$ and choose any at level $n+1$. Its reduction differs from the fixed one by an automorphism of $(A_n)_T^d$, hence by an invertible matrix of sections. By lem-sfb-totally-disconnected-coefficient-realization for finite discrete sets, it is a continuous locally constant function $|T|\\to\\operatorname{GL}_d(A_n)$. Every invertible matrix over $A_n$ lifts to one over $A_{n+1}$: lift its entries, and the determinant remains a unit because its reduction modulo the maximal ideal is nonzero. Choose a lift for each element of the finite set $\\operatorname{GL}_d(A_n)$; this set map is continuous between discrete sets. Composing with the matrix function gives a lifted automorphism on $T$. Adjusting the level-$n+1$ trivialization by this lift makes its reduction the chosen level-$n$ one. Induction gives an isomorphism of the whole reduction tower with $((A_n)_T^d)_n$. This argument does not assume that taking a constant sheaf commutes with inverse limits, or that $T$ is connected.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent compatible-basis construction for Proposition 6.8.4(1); finite constant coefficient sections as in Lemma 4.2.12"
+   }
+  },
+  {
+   "text": "The pullback $N_T$ is lisse and its reductions are the actual tower in step 7, by exact Cartesian pullback. Apply lem-sfb-integral-lisse-reduction-equivalence on the scheme $T$ itself. Full faithfulness of reduction takes the compatible tower isomorphism of step 7 to $N_T\\cong(A_T)^d$, since the latter has reduction tower $((A_n)_T^d)_n$. Rationalizing this isomorphism, using the inverse-image tensor comparison $t$ of def-sfb-condensed-pullback-tensor-comparison for $g^*M=g^*(A_{E,S}\\otimes_{A_{\\mathcal O_E,S}}M_0)$ and the Cartesian coefficient isomorphisms of sk-prop-sfb-cartesian-coefficients(1) for $A_E$ and $A_{\\mathcal O_E}$, gives\n$$ (g^*M)|_T\\cong E_T\\otimes_{A_T}N_T\\cong(E_T)^d. $$\nReturning through the coefficient realization and the internal-module equivalence of step 1 yields exactly the constant $A_E$-module associated to $E^d$ in the statement. The argument applied to an arbitrary point and parameter tuple, so proves the assertion for every such choice. If $r=0$, the geometric splitting lemma uses $m_n=1$ and the same proof runs on $\\operatorname{Spec}R$; if $d=0$, all bases and matrices are empty and the result is the zero module.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.4(1); equivalence used on the tower scheme, followed by scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "det-pe-finite-local-systems-twist",
+  "lem-weil-pbc-finite-set-monodromy-torsor",
+  "cor-galois-lisse-representations",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-galois-fundamental",
+  "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "def-sfb-condensed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent synthesis of Proposition 6.8.4(1) and ILO IX Proposition 2.1, pp.133-134; explicit finite congruence filtration and compatible bases, in the current blueprint paragraph (3) tame-boundary route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +185,45 @@
    "results": "8 hits: BDeRhamPlus, BDeRham, arithFrobAt, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, PreTilt.exists_smodEq_untiltAux, PreTilt.untiltAux_smodEq_untiltFun, IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant",
    "date": "2026-10-21",
    "verdict": "no match: the results do not state the specified geometric or lisse-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(tame|Kummer|monodromy).*(lisse|localSystem|adic)|(lisse|localSystem|adic).*(tame|Kummer)",
+   "results": "{\"t\": \"2026-10-21T20:11:05Z\", \"tool\": \"grep\", \"query\": \"(tame|Kummer|monodromy).*(lisse|localSystem|adic)|(lisse|localSystem|adic).*(tame|Kummer)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"103de9e1f13e5f68\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern field Kummer extensions, etale presentations, ordinary ramification indices, or abstract Galois categories; none states this strict-local parameter-root assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse integral ell adic sheaf with constant reduction modulo a uniformizer is trivial on every prime to p parameter root tower of a strict normal crossings pair",
+   "results": "{\"t\": \"2026-10-21T20:11:05Z\", \"tool\": \"leanfinder\", \"query\": \"A lisse integral ell adic sheaf with constant reduction modulo a uniformizer is trivial on every prime to p parameter root tower of a strict normal crossings pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsUnramifiedAt\", \"BDeRham\", \"BDeRhamPlus\", \"instCommRingBDeRhamPlus\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\"], \"digest\": \"2bebf7bb7c7897d8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern field Kummer extensions, etale presentations, ordinary ramification indices, or abstract Galois categories; none states this strict-local parameter-root assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"PadicInt\"",
+   "results": "{\"t\": \"2026-10-21T20:11:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyConstant\\\", \\\"PadicInt\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern field Kummer extensions, etale presentations, ordinary ramification indices, or abstract Galois categories; none states this strict-local parameter-root assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral local system with trivial residual representation has pro ell monodromy killed by the tame parameter root cover",
+   "results": "{\"t\": \"2026-10-21T20:11:06Z\", \"tool\": \"leanfinder\", \"query\": \"An integral local system with trivial residual representation has pro ell monodromy killed by the tame parameter root cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_continuous\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\"], \"digest\": \"7970d0b492cd6e6b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern field Kummer extensions, etale presentations, ordinary ramification indices, or abstract Galois categories; none states this strict-local parameter-root assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite residual monodromy cover makes an integral l adic local system Kummer tame",
+   "results": "{\"t\": \"2026-10-21T20:11:06Z\", \"tool\": \"leansearch\", \"query\": \"A finite residual monodromy cover makes an integral l adic local system Kummer tame\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"adjoinRootXPowSubCEquiv\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"krullTopology_discreteTopology_of_finiteDimensional\", \"mem_galBasis_iff\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"Valued.integer.totallyBounded_iff_finite_residueField\"], \"digest\": \"821349377476da15\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern field Kummer extensions, etale presentations, ordinary ramification indices, or abstract Galois categories; none states this strict-local parameter-root assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-pair-proper-generators",
@@ -84,5 +245,90 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lisse-lattice-potential-kummer-tameness",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Statement unchanged. Choose one residual finite monodromy cover, prove all subsequent finite monodromy groups are ell-groups by an explicit congruence filtration, split their torsors at finite parameter-root levels, choose compatible reduction bases and reconstruct using the integral lisse equivalence on the tower. One new strictly local finite-cover input; no Lean writes, compiles or forbidden source route.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), through the inherited tame-pair proper-generators chain: this supplies its potential Kummer-tameness input without changing the direct-image route. blueprint_refs.py ancestor returns None, so the inherited null ancestor and its precise place/via are retained. Whole-blueprint searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Identifies the finite-extension condensed coefficient rings and their actual maps with continuous-function sheaves before applying integral reductions. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Generic integral local-system equivalence reconstructs the lisse lattice from compatible finite reductions on any scheme, including the root tower. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "det-pe-finite-local-systems-twist",
+    "why": "Generic finite-presentation site comparison makes the finite pro-etale reductions into etale local systems. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-set-monodromy-torsor",
+    "why": "Generic connected finite monodromy cover trivializes the residual finite sheaf; this does not replace the boundary calculation. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Only its finite-coefficient clause is used to identify the actual reduction monodromy and retain module operations. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic local algebra ensures the strict-local boundary ring is Noetherian. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic local algebra ensures regularity of the strict-local boundary ring. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Only the generic regular-local parameter/domain assertion is used to see the puncture is nonempty integral; no trace-formula result is used. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic coefficient pullback is exact and preserves the actual scalar quotient and finite free local models. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic DVR facts supply finite local reduction rings and surjective transition maps for the elementary congruence calculation. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient arithmetic supplies the DVR and finite residue field. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale Galois correspondence realizes the exact image quotient as a torsor, retaining its prime-to-p group order. It supports the unit's tame-boundary step."
+   },
+   {
+    "node": "lem-sfb-totally-disconnected-coefficient-realization",
+    "why": "Generic set-valued realization identifies finite constant sheaf sections with continuous finite-valued functions, allowing basis corrections to lift globally. It supports the unit's tame-boundary step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "det-pe-finite-local-systems-twist",
+  "lem-weil-pbc-finite-set-monodromy-torsor",
+  "cor-galois-lisse-representations",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-galois-fundamental",
+  "lem-sfb-totally-disconnected-coefficient-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-43ac363e2",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-43ac363e2 (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item, the new node lem-sfb-strict-local-prime-to-p-kummer-splitting, every cited statement, Bhatt–Scholze 6.8.1–6.8.4 (pp. 58–60) and ILO IX Prop. 2.1 with its proof (pp. 133–134). The item statement is unchanged. In live and side-live the item is still unsplit, it is not dropped and it has no re-split note; this is a first split. The proof is sound: one residual cover H from the finite-set monodromy torsor; the congruence kernel K_n is an ℓ-group (filtration quotients Mat_d(κ), char κ = ℓ); the image Q_n ⊂ K_n gives a Q_n-torsor P_n; the new node splits P_n at a finite root level m_n prime to p; compatible bases are built by lifting GL_d and the lattice is rebuilt on the tower T by the integral lisse equivalence. No uniform root level is needed, which is correct because infinite tame image is allowed. The new node is true: a prime-to-p group forces tameness (no wild inertia, no inseparability, no defect), and Abhyankar gives π1^t = ∏Ẑ'(1)^r, abelian, so the cover splits at n = exponent of G. I tested r=0, a strictly henselian DVR with G = Z/ℓ, G = S_3 with p ≥ 5, and disconnected P; G = Z/p is correctly excluded. It is not a duplicate: the snc-tame-root-etale and finite-fibre nodes assume the splitting it proves, and lem-per-snc-parameter-root-quotient gives only a normal form; its future splitter should cite that node or Stacks pione Abhyankar, not SGA 1 XIII 5.3. Batch-5 flags: cor-galois-lisse-representations (only clause (1), a generic Galois correspondence; its closure contains no Poincaré duality or trace-formula theorem) and lem-trf-regular-local-ufd-boundary-factorization (pure commutative algebra) are both accepted. All 13 tool_uses are generic and accepted. Two C1 repairs, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-lisse-lattice-potential-kummer-tameness.json: step 5 applied cor-galois(1), which is about étale sheaves, to a pro-étale sheaf, so I added det-pe-finite-local-systems-twist on U for the étale model and the transport back; step 8 used an uncited comparison for g^*(A_E⊗M_0), so I added def-sfb-condensed-pullback-tensor-comparison together with Cartesian coefficients (1). No cycle is created. proof_deps is updated to the union of the uses.; 1 file(s) fixed by the reviewer"
  }
 }
