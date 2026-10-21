@@ -20467,3 +20467,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:37 L: returned deliver/NB/lem-weil-pbc-integral-stratified-perfect-characterization (reviewer RETURN: I read the 2026-10-21 human re-split note: ≤3000 chars, ≥4 nodes, every old argument must become a node. It was reopened)
 - 07:01 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 07:04 L: merged deliver/NU/lem-coef-closed-adjunction-enriched-isomorphism (reviewer PASS; first push; new nodes: 0)
+- 07:04 L: merged deliver/Q11/lem-coef-sequence-global-sections-evaluation (reviewer FIX; first push; new nodes: 0)
