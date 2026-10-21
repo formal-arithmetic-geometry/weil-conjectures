@@ -49,14 +49,15 @@
    }
   },
   {
-   "text": "Apply [lem-pc-brown-representability-right-adjoint] to $F_c$: step 1 gives exactness and preservation of the required sums, and $\\mathcal C$ is compactly generated. Obtain $F_c\\dashv G_c$, with counit $\\varepsilon^c$. Set $f_c^!=G_c$; the natural adjunction bijections give clause (1).",
+   "text": "By [lem-pc-brown-hom-representability-locally-small], step 1 gives representability of $M\\mapsto\\operatorname{Hom}(F_cM,N)$ for each $N$ in the fixed universe. Apply [lem-sfb-right-adjoint-from-objectwise-representability] to assemble a functor $G_c$ and the natural adjunction bijections $F_c\\dashv G_c$. Set $f_c^!=G_c$, proving clause (1).",
    "uses": [
-    "lem-pc-brown-representability-right-adjoint"
+    "lem-pc-brown-hom-representability-locally-small",
+    "lem-sfb-right-adjoint-from-objectwise-representability"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8G, proposition-brown"
+    "place": "Tag 0A8G, proposition-brown proof, using Categories Tag 0A8B, lemma-adjoint-exists."
    }
   },
   {
@@ -93,27 +94,15 @@
    }
   },
   {
-   "text": "[det-sf-comp-coherence-cocycle] supplies canonical $\\phi_{21}:F_1\\cong F_2$ with identity and cocycle laws. Apply [lem-trf-adjoint-mate] (all four functors are exact by steps 1 and 4) to obtain adjunction-compatible $\\gamma_{21}:G_1\\cong G_2$. Its formula is exactly the conjugate $(\\phi_{21}^{-1})^c$ of [def-weil-pbc-adjunction-conjugate]. The counit identity reads $\\varepsilon^2_N F_2(\\gamma_{21,N})=\\varepsilon^1_N\\phi_{21,G_1N}^{-1}$; it fixes each component uniquely by the $F_2\\dashv G_2$ bijection.",
+   "text": "For all compactifications, [det-sf-comp-coherence-cocycle] gives the canonical $\\phi_{ji}:F_i\\cong F_j$ with identity and cocycle laws. Apply [lem-sfb-coherent-right-adjoint-comparisons] to the adjunctions from step 2. It supplies the unique $\\gamma_{ji}:G_i\\cong G_j$ normalized by $\\varepsilon^j_N F_j(\\gamma_{ji,N})=\\varepsilon^i_N\\phi_{ji,G_iN}^{-1}$, identifies all adjunction bijections, and gives identity and cocycle laws. This proves compactification independence in clause (3).",
    "uses": [
     "det-sf-comp-coherence-cocycle",
-    "lem-trf-adjoint-mate",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-sfb-coherent-right-adjoint-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
-    "place": "Part (3): transfer along compactification comparisons"
-   }
-  },
-  {
-   "text": "Conjugation preserves identities and reverses composition by [def-weil-pbc-adjunction-conjugate]. Hence $\\gamma_{32}\\gamma_{21}=(\\phi_{21}^{-1}\\phi_{32}^{-1})^c=(\\phi_{31}^{-1})^c=\\gamma_{31}$, and $\\gamma_{cc}=1$. These are the required compactification-independence identifications and laws.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
-    "place": "Part (3): identity and cocycle for the adjoints"
+    "place": "Part (3), last sentence: transfer along the compactification isomorphism and compatibility with the cocycle condition; general categorical form of the comparison argument."
    }
   }
  ],
@@ -121,18 +110,18 @@
   "lem-weil-pbc-qcqs-over-affine",
   "det-sf-comp-coherence-single",
   "sk-lem-brown-hypotheses",
-  "lem-pc-brown-representability-right-adjoint",
+  "lem-pc-brown-hom-representability-locally-small",
+  "lem-sfb-right-adjoint-from-objectwise-representability",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-sf-triangulated-right-adjoint",
   "det-sp-unique-right-adjoint",
   "det-sf-comp-coherence-cocycle",
-  "lem-trf-adjoint-mate",
-  "def-weil-pbc-adjunction-conjugate"
+  "lem-sfb-coherent-right-adjoint-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
-  "place": "Parts (1)–(3), assembled from existing Brown, coherent-shift, exact-adjoint, uniqueness and conjugation nodes; finer split requested 2026-10-21."
+  "place": "Parts (1)-(3); Brown existence, coherent shifts, exactness and fixed-functor uniqueness use existing nodes. The family comparison argument is extracted to a new statement-only node for separate work."
  },
  "mathlib_searches": [
   {
@@ -200,31 +189,28 @@
   "date": "2026-10-21",
   "item": "det-sf-existence-brown",
   "worker": "stage1",
-  "group": "Q10",
-  "summary": "Repaired the 5693-character proof into a short assembly. The previously inline coherent-shift construction now cites the existing Mathlib leaf lem-weil-pbc-adjunction-shift-compatibility-unique. The comparison-transfer argument cites the existing lem-trf-adjoint-mate, while identity and cocycle use the composition laws already stated in def-weil-pbc-adjunction-conjugate. No duplicate new nodes were created; the statement and all existing Lean/blueprint/review records are preserved.",
-  "blueprint": "Current main-20261015 det-sf-existence-brown.proof.md part (1): steps 1–2; part (2): steps 3–4; part (3): steps 5–7. The older unit-id collision with the smooth-purity sk-prop-sf-existence record does not change this route.",
+  "group": "Q04",
+  "summary": "Repair of the human-requested re-split: retain the live statement and metadata, preserve existing Brown/shift/exactness/uniqueness sublemmas, and extract the entire counit-normalized comparison-family argument into lem-sfb-coherent-right-adjoint-comparisons, delivered unsplit. This is a genuine new work item with all the pairwise construction, component uniqueness, Hom normalization and family coherence specified, rather than merely shortening the prose. No new node duplicates the existing generic Brown or exact-adjoint results. The retained objectwise-representability-to-adjoint Mathlib leaf is also delivered and used in step 2, separating Brown representing objects from their functorial assembly.",
+  "blueprint": "main-20261015 proof (1) is steps 1-2, proof (2) is steps 3-4, and proof (3) is steps 5-6. Its final family-transfer/coherence argument is the new node. The existing unit-id collision with the smooth-purity unit record is preserved; the current six-functors-basics source unit is followed.",
   "tool_uses": [
    {
-    "node": "lem-pc-brown-representability-right-adjoint",
-    "why": "Generic Brown criterion for the exact coproduct-preserving restricted functor, exactly as the unit route requires."
-   },
-   {
-    "node": "lem-trf-adjoint-mate",
-    "why": "Generic transport along an isomorphism of exact left adjoints; its explicit mate and compatibility clauses are used for compactification comparisons, with no trace-formula or geometric hypothesis."
+    "node": "lem-pc-brown-hom-representability-locally-small",
+    "why": "The general locally-small objectwise Brown representability theorem supplies representing objects in the fixed indexing universe; a Mathlib leaf separately assembles the adjoint."
    }
   ]
  },
  "tool_uses": [
   "lem-pc-brown-representability-right-adjoint",
-  "lem-trf-adjoint-mate"
+  "lem-trf-adjoint-mate",
+  "lem-pc-brown-hom-representability-locally-small"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q10-8fbf9c70c",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q04-64a2850c9",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-8fbf9c70c (reviewer sub-agent of L); spot-checked: Re-split of an already-reviewed item. The statement is byte-identical to all earlier stage-2 snapshots. stmt_deps match four of the five; the fifth (51086d3) is an older stage-2 iteration. There are no new nodes; def-sf-comp-refinement-data is an existing stage-2 node. The proof went from 6 steps and 5693 characters to 7 steps and 2349. The heavy inline shift and transfer arguments now cite existing nodes: lem-weil-pbc-adjunction-shift-compatibility-unique (iii)+(ii) (Mathlib rightAdjointCommShift / commShift_of_leftAdjoint, Shift/Adjunction.lean:388,403), lem-sf-triangulated-right-adjoint, det-sp-unique-right-adjoint, lem-trf-adjoint-mate and def-weil-pbc-adjunction-conjugate (conjugateEquiv_comp/id, Mates.lean:350,319). Step 1: qcqs Y gives the coherence-single hypothesis, and sk-lem-brown-hypotheses at Y gives the target. Step 2: the Brown hypotheses match Stacks 0A8G (derived.tex:11428), applied only on Loc(Dctf). Step 4: 0A8D (derived.tex:2290). Step 6: the mate formula is the conjugate of phi21^{-1}; the counit identity eps2 F2(gamma) = eps1 phi^{-1}_{G1N} follows from the mate counit clause by naturality of alpha, and the F2-G2 bijection gives uniqueness. Step 7: (tau tau')^c = tau'^c tau^c with tau = phi21^{-1} and tau' = phi32^{-1} gives gamma32 gamma21 = gamma31, and gamma_cc = 1. Edge cases checked: empty X, identical compactifications, inverse pairs. Batch-5 flag on lem-trf-adjoint-mate accepted: it is pure adjunction calculus, its closure is {def-weil-pbc-adjunction-conjugate, def-weil-pbc-adjunction-mate}, both already in the item's closure, so the citation adds only the node itself; it is not a step of the trace-formula or Poincare proofs, and there is no cycle. Tool uses accepted: lem-pc-brown-representability-right-adjoint and lem-trf-adjoint-mate. No SGA citation. The item is not in any dropped list. review_split.py route notes are the human-recorded unit collision, not faults."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-64a2850c9 (reviewer sub-agent of L); spot-checked: Re-split note answered. The repair note was reopened because the Q10 landing (7 steps, 2349 chars) added no new node. This delivery has 6 steps and 2093 chars, the statement and stmt_deps are byte-identical to the base, and live still equals the base, so it is not superseded. The item is not on the dropped list and nothing cites SGA. Each argument of the old 5693-char proof has a home. Old step 1 is now step 1, with the same cited statements. Old step 2 (Brown) now cites lem-pc-brown-hom-representability-locally-small, and the Yoneda assembly goes to the NEW Mathlib leaf lem-sfb-right-adjoint-from-objectwise-representability. That leaf is isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top (PartialAdjoint.lean:285; definition 201 is IsRepresentable(F.op ⋙ yoneda.obj Y), which equals H_Y), matching Stacks 0A8B at categories.tex:3386. Old step 3 (shift coherence) is exactly the statement of the existing leaf lem-weil-pbc-adjunction-shift-compatibility-unique, clauses (iii) and (ii). Old step 4 cites lem-sf-triangulated-right-adjoint (0A8D). Old step 5 cites det-sp-unique-right-adjoint, and its transpose calculation is elementary. Old step 6 becomes the NEW unsplit node lem-sfb-coherent-right-adjoint-comparisons: general categories with an indexed family F_i ⊣ G_i and φ_ji satisfying the cocycle law. I checked it by hand. The types agree. The component is unique among all morphisms because the adjunction bijection is injective. γ_ji = (φ_ji^{-1})^c in the convention of def-weil-pbc-adjunction-conjugate, and conjugateEquiv_counit (Mates.lean:285) is the displayed equation. The inverse and cocycle laws follow from naturality and φ_ij φ_ji = 1. The Hom identity Φ^j(h φ^{-1}) = γ Φ^i(h) holds by transposition. The node has no geometry, so it does not restate the item, and it is statement-only with 5 real searches. No duplicate: I scanned all statements. lem-trf-adjoint-mate is pairwise only and needs triangulated categories; det-sp-unique-right-adjoint fixes one F; the infinity-categorical pointwise criterion is a different kind of statement. Hypotheses: step 1 supplies every hypothesis of the Brown node, including qcqs of Y and the Brown structures at Y from sk-lem-brown-hypotheses. Step 6 takes φ from the statement of det-sf-comp-coherence-cocycle, which lives on the localizing categories. Small cases: a singleton family, inverse pairs and the scalar ℚ-vector-space example. Accepted tool use: lem-pc-brown-hom-representability-locally-small, generic Brown 0A8F as cited by blueprint (1). Maintainer note: the item's existing tool_uses (lem-pc-brown-representability-right-adjoint, lem-trf-adjoint-mate) are no longer cited and should be pruned. Both still have other citers, so neither is orphaned. No fixes."
  },
  "lean_audit": {
   "master": {

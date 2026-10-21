@@ -20180,3 +20180,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:04 L: merged deliver/NS/lem-sp-chart-counit-scalar-transport (reviewer PASS; first push; new nodes: 0); claim not held by NS: not your claim
 - 04:04 L: merged deliver/NU/lem-sf-integral-direct-image-constructible (reviewer FIX; after a return; new nodes: 3)
 - 04:04 L: merged deliver/NV/lem-sfb-shriek-coefficient-isomorphism (reviewer PASS; first push; new nodes: 0)
+- 04:04 L: merged deliver/Q04/det-sf-existence-brown (reviewer PASS; after a return; new nodes: 2)

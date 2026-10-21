@@ -1,0 +1,78 @@
+{
+ "id": "lem-sfb-coherent-right-adjoint-comparisons",
+ "kind": "statement",
+ "title": "Counit-normalized comparisons for a coherent family of chosen adjunctions",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category] in fixed universes and let $I$ be an indexing type in a universe containing the families below. For each $i\\in I$, specify functors $F_i:\\mathcal C\\to\\mathcal D$, $G_i:\\mathcal D\\to\\mathcal C$ and an adjunction $F_i\\dashv G_i$, meaning bijections $\\Phi^i_{M,N}:\\operatorname{Hom}(F_iM,N)\\simeq\\operatorname{Hom}(M,G_iN)$ natural in both variables. Write $\\varepsilon^i_N:F_iG_iN\\to N$ for the inverse image of $1_{G_iN}$ under this bijection. Suppose specified natural isomorphisms $\\phi_{ji}:F_i\\xrightarrow{\\sim}F_j$ satisfy $\\phi_{ii}=1$ and $\\phi_{kj}\\circ\\phi_{ji}=\\phi_{ki}$ for every $i,j,k$.\n\nThere exists a unique family of natural isomorphisms $\\gamma_{ji}:G_i\\xrightarrow{\\sim}G_j$ satisfying, for every $i,j$ and $N\\in\\mathcal D$,\n$$\\varepsilon^j_N\\circ F_j(\\gamma_{ji,N})=\\varepsilon^i_N\\circ\\phi_{ji,G_iN}^{-1}.$$\nIn fact the equation determines each component uniquely among all morphisms $G_iN\\to G_jN$. These comparisons are the conjugates [def-weil-pbc-adjunction-conjugate] $\\gamma_{ji}=(\\phi_{ji}^{-1})^c$ and obey $\\gamma_{ii}=1$, $\\gamma_{kj}\\circ\\gamma_{ji}=\\gamma_{ki}$ and $\\gamma_{ij}=\\gamma_{ji}^{-1}$. They identify the specified adjunction bijections: for every $h:F_iM\\to N$,\n$$\\Phi^j_{M,N}(h\\circ\\phi_{ji,M}^{-1})=\\gamma_{ji,N}\\circ\\Phi^i_{M,N}(h).$$\nNo triangulated structure, coproducts, compact generation or existence of new right adjoints is asserted or assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
+  "place": "Part (3), last sentence: transfer along the compactification isomorphism and compatibility with the cocycle condition; general categorical form of the comparison argument."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a family of adjunctions L_i left adjoint R_i and natural isomorphisms phi_ji between L_i and L_j satisfying identity and cocycle laws, there is a unique family of natural isomorphisms gamma_ji between R_i and R_j satisfying epsilon_j composed with L_j gamma_ji equals epsilon_i composed with phi_ji inverse, and gamma satisfies identity and cocycle laws",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a diagram of left adjoint functors with chosen right adjoints, conjugate natural transformations form a contravariant diagram of right adjoints, uniquely characterized by the counit equations",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointCompNatTrans; CategoryTheory.conjugateEquiv_counit; CategoryTheory.Adjunction.leftAdjointCompNatTrans_app; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.LiftRightAdjoint.otherMap",
+   "date": "2026-10-21",
+   "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A family of adjunctions with coherent pairwise left adjoint comparisons has unique counit normalized right adjoint comparisons satisfying the same cocycle",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.counit",
+   "subdirectory": "",
+   "results": "5 hits; CategoryTheory.conjugateEquiv_adjunction_id; CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.conjugateEquiv_symm_apply_app",
+   "date": "2026-10-21",
+   "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_comp|conjugateEquiv_counit|rightAdjointUniq_trans|coherent.*[Aa]djoint",
+   "subdirectory": "CategoryTheory/Adjunction",
+   "results": "10 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sf-existence-brown",
+  "date": "2026-10-21",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-existence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-existence-brown",
+   "place": "Part (3), last sentence: transfer along the compactification isomorphism and compatibility with the cocycle condition; general categorical form of the comparison argument.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
