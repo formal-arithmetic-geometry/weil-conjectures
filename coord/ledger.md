@@ -22686,3 +22686,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:47 L: merged deliver/Q66/lem-sf-point-ringed-evaluation-model (stage 2; reviewer FIX; parallel immutable checks)
 - 13:47 L: merged deliver/NW/lem-cbc-ringed-open-scalar-limit-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 13:47 L: merged deliver/O3/lem-sfb-normalized-open-refinement-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 13:47 L: returned deliver/N5/lem-sfb-qcqs-proper-constructible-closed-base-change (reviewer RETURN: L: independent stage-2 immutable head 1ea465a1fe70: H13/H4: the delivery replaces the landed lean record of the dependen)
