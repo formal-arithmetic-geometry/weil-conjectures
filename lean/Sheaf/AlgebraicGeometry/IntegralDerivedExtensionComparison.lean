@@ -13,9 +13,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.Paper.ContinuousIntegralScalarExact
-import Sheaf.Paper.IntegralConstructibleSerre
-import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedTotalTensorExact
 
 /-! # Integral scalar extension and its termwise triangulated comparison
 
@@ -91,7 +88,14 @@ lem-sfb-preserving-colimits-additive gives additivity. Together these are exactn
 @[instance] theorem integralExtension_exact
     [TopologicalSpace.NoetherianSpace X] :
     PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)) := by
-  sorry
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let : NormedAlgebra ℚ_[ℓ] E.1 :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  exact CondensedRing.integralScalarExtension_exact ℓ E.1 X
 
 /-- Cache the actual derived extension from the recorded derived adjunction's left functor.
 Source: Bhatt--Scholze, Section 6.8
@@ -122,7 +126,8 @@ No exactness or additional structure is assumed beyond the existing module frame
     (integralExtensionDerived X ℓ E).IsLeftDerivedFunctor
       (integralExtensionDerivedCounit X ℓ E)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
-  sorry
+  dsimp only [integralExtensionDerived, integralExtensionDerivedCounit]
+  infer_instance
 
 /-- The canonical comparison with termwise extension, for this actual coefficient map.
 Source: Bhatt--Scholze, Section 6.8; Stacks Tag 015F
@@ -155,7 +160,9 @@ The image under L is isomorphic to the distinguished termwise image, so is disti
 @[instance] theorem integralExtension_triangulated
     [TopologicalSpace.NoetherianSpace X] :
     (integralExtensionDerived X ℓ E).IsTriangulated := by
-  sorry
+  let := Functor.CommShift.ofIso_compatibility
+    (integralExtensionTermwiseComparison X ℓ E).symm ℤ
+  exact Functor.isTriangulated_of_iso (integralExtensionTermwiseComparison X ℓ E).symm
 
 /-- Additivity of the specified restriction F to bounded constructible objects.
 Source: blueprint def-sfb-bounded-constructible-extend-scalars; Bhatt--Scholze, Section 6.8
@@ -165,7 +172,13 @@ The inclusion j is faithful, so additivity of L gives additivity of F. -/
 @[instance] theorem boundedConstructibleIntegralExtension_additive
     [TopologicalSpace.NoetherianSpace X] :
     (boundedConstructibleExtendScalars X ℓ E).Additive := by
-  sorry
+  have : (integralExtensionDerived X ℓ E).Additive :=
+    Functor.additive_of_iso (integralExtensionTermwiseComparison X ℓ E).symm
+  have : (boundedConstructibleExtendScalars X ℓ E ⋙
+      (boundedConstructible _).ι).Additive :=
+    Functor.additive_of_iso (boundedConstructibleExtendScalarsCompatibility X ℓ E).symm
+  exact Functor.additive_of_comp_faithful
+    (boundedConstructibleExtendScalars X ℓ E) (boundedConstructible _).ι
 
 /-- The shift on Fj is transported from iL along the specified compatibility beta.
 Source: blueprint def-sfb-bounded-constructible-extend-scalars; Bhatt--Scholze, Section 6.8
@@ -185,7 +198,10 @@ identity is exactly NatTrans.CommShift for beta, in every integer degree. -/
 @[instance] theorem boundedConstructibleIntegralExtensionCompatibility_commShift
     [TopologicalSpace.NoetherianSpace X] :
     NatTrans.CommShift (boundedConstructibleExtendScalarsCompatibility X ℓ E).hom ℤ := by
-  sorry
+  let := Functor.CommShift.ofIso_compatibility
+    (boundedConstructibleExtendScalarsCompatibility X ℓ E).symm ℤ
+  exact NatTrans.CommShift.of_iso_inv
+    (boundedConstructibleExtendScalarsCompatibility X ℓ E).symm ℤ
 
 /-- The specified beta identifies entire image triangles, with its own components at
 all three vertices, rather than merely identifying the three objects.
@@ -209,6 +225,7 @@ theorem integralDerivedExtension_comparison
     [TopologicalSpace.NoetherianSpace X] :
     (boundedConstructibleExtendScalars X ℓ E ⋙
       (boundedConstructible _).ι).IsTriangulated := by
-  sorry
+  exact Functor.isTriangulated_of_iso
+    (boundedConstructibleExtendScalarsCompatibility X ℓ E).symm
 
 end AlgebraicGeometry.ProEtale
