@@ -23631,3 +23631,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:14 L: merged deliver/NC/lem-sfb-free-representable-derived-functions-model (stage 2; reviewer PASS; parallel immutable checks)
 - 20:14 L: merged deliver/NF/lem-sfb-padic-rational-algebraic-generator (stage 2; reviewer PASS; parallel immutable checks)
 - 20:15 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 20:17 L: merged deliver/NL/lem-sfb-procyclic-scalar-cochain-evaluation (reviewer PASS; first push; new nodes: 3)
