@@ -14,7 +14,8 @@
   "sk-def-sfb-module-objects",
   "lem-sfb-condensed-derived-restriction-calculus",
   "def-weil-size-convention",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-bundled-continuous-scalar-ring"
  ],
  "proof": [
   {
@@ -238,5 +239,30 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-c7b0bb0dd (reviewer sub-agent of L); spot-checked: I read in full the item, the new node lem-sfb-ind-unipotent-procyclic-difference, every cited statement, the ancestor chain (polynomial-derived-bar-comparison, trivial-ladic-derived-exterior, dense-lattice) and main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). That paragraph only delegates the analytic input, so the agent proof origin and the WANTED reference are correct, and no SGA is cited. The item statement is unchanged; this is a first split (the item was created by Q06 today), not a re-split. Step 1 (r=0): invariants for the trivial group are the identity functor, so there is nothing in positive degrees. Step 2: degree-<=n polynomials are finite-dimensional with injective inclusions; D=-d/dy1 has D^{n+1}=0; finite Taylor expansion gives exp(tD)f=f(y1-t); the G-action is continuous and commutes with D. Step 3: the sheaf colimit of the finite sums C(S,F(x)V_n)=A^k is the internal direct sum T_{r,m} with the same action, and the node's isomorphism in D(A_G) is applied with exp(D)-1=Delta; no derived functor is commuted with a colimit. Step 4: I recomputed Delta b_n=b_{n-1}, Delta J=1, J Delta=1-ip and pi=1 for the binomial basis; the maps are G-equivariant and finite on monomials, so B[0] is homotopy equivalent to [T->T] in A_G. Step 5: product-action-inflation gives Grothendieck categories, exact inflations and M^{GxH}=(M^H)^G. The declared tool use derived-composition-adjunction-normalization (unit sk-thm-sf-comp-composition) gives RGamma_{GxH}=RGamma_G RGamma_H^G, and the induction on T_{r-1,m} with the same m is well-founded. I accept that tool use. New node: B1-B9 hold, including searches with all three tool kinds. I tested G=1, M=0, D=0 (H^1=A, not acyclicity) and finite-dimensional unipotent V. If the item holds, the node's D=0 case follows from the exact sequence 0->A->A[y]->Delta->A[y]->0, so its noncomplete-Omega risk is the item's own. The rest of the node is plausible (filtration by D on each stage, plus colimit commutation on the coherent site). It is a genuine rank-one generic lemma, not a relabelling (D1/D2), and the polynomial content stays in the item. No duplicate: lem-exc-procyclic-two-term has finite discrete coefficients, and dense-lattice and trivial-exterior are ancestors, so citing them would be circular, as the report says. Note for the maintainer: the node's rank-one content overlaps those ancestors, so their analytic core now sits in this one unsplit obligation; there is no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PolynomialTranslationAcyclic",
+  "declaration": "Profinite.CondensedAction.PolynomialTranslation.polynomial_translation_acyclic",
+  "declarations": [
+   "Profinite.CondensedAction.PolynomialTranslation.translatedMonomial",
+   "Profinite.CondensedAction.PolynomialTranslation.Model",
+   "Profinite.CondensedAction.PolynomialTranslation.Assertion",
+   "Profinite.CondensedAction.PolynomialTranslation.polynomial_translation_acyclic"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PolynomialTranslationAcyclic.lean",
+  "statement": "theorem polynomial_translation_acyclic (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r m : ℕ) : Assertion ell E r m ∧ Assertion ell Ω r m",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the already-landed continuousScalarRing bundle (added to stmt_deps). Model presents the actual monomial coproduct and determines its action on every profinite generalized section. Assertion includes existence and vanishing for every such presentation, without choosing an object from a mere existence theorem. No change to the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97f61da13",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read the node (stmt_deps differ from live only by the added landed def-sfb-bundled-continuous-scalar-ring), the module, report.md, and the dependency Lean in side-live (ActionModule act is section-ring-linear and natural; CondensedBar abbrevs; derived = rightDerivedFunctor of pinned invariants; continuousScalarRing). Every clause matches: E and Omega conjuncts; IsAlgClosure Omega with NormedAlgebra, so the norm is the unique extension and there is no CompleteSpace; all-continuous A; L = Multiplicative(ULift(Fin r -> Z_ell)); monomial coproduct (Fin r ⊕ Fin m) ->0 N with IsColimit in Mod; translation y_i ↦ y_i − g_i for every S, g, c; IsZero of homologyFunctor q of derived(single 0 T) for q > 0. The Model quantifier is rigid (coproduct + naturality + separatedness fix the action) and nonempty. Edge cases r=0, m=0, empty S, q=0 handled. lean.statement verbatim; docstrings have source, blueprint tag and the 5-step proof; only the theorem is sorry; no hollow defs. No compile (no file changed). Advisories: derived is owned by def-sfb-condensed-derived-invariants, not in stmt_deps, reached via the cited theorem; two proof-only imports unused (H9); the second reading is the worker's own."
  }
 }

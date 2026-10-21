@@ -12,7 +12,15 @@
   "def-weil-weil-sheaf-complex",
   "def-pod-lisse-l-adic-sheaves",
   "lem-tw-lisse-rational-realization",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-zl-adic-lisse-calculus-models",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-wf-lisse-adic-automorphism-pullback",
+  "def-per-lisse-completed-system-data",
+  "def-real-lisse-realization-data",
+  "def-real-lisse-pullback-normalization",
+  "def-zl-normalized-classical-weil-realization"
  ],
  "proof": [
   {
@@ -438,5 +446,40 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-97680f768 (reviewer sub-agent of L); spot-checked: Read the item in full (statement unchanged vs live; 11 steps; no new nodes; no repair note, so the re-split rules do not apply), every cited statement, and blueprint thm-zl-real-mixed-by-curves paragraph 1. Steps 1-4 and 6-11 are correct. Step 1: finitely many irreducible components give clopen connected pieces. Step 3: cor-galois(2) plus a stable lattice gives locally free normalized systems, with arrows kept rational. Step 4: lem-per-lisse-completed full faithfulness (Hom⊗E = def-pod(2)) composed with the lem-tw equivalence; inverses and Weil equations follow by faithfulness. Step 6: lem-dl-a1-constructible-fibres-exact on the sf heart. Step 7: exactness descends from Q̄ℓ to E. Step 9: each factor of the local-Frobenius composite is matched using lem-tw, which allows non-k-linear maps. Steps 10-11 are elementary. Edge cases checked: empty Y, G=0, zero and repeated quotients. One fault, fixed (C4/E6): Step 5 used the PBC finite-stage fibre functor ω of lem-per-adic-normalized-fibre-exactness to justify the sf point fibre Fib_s Lȳ^* that Step 6 uses; no node identifies the two. It also used lem-per-continuous-rational-derived-realization without citing it. The rewritten Step 5 has two parts. (a) The Fib_s side, from the lem-tw point clause, the lem-per-lisse-completed pullback along ȳ, sectionwise limits and Γ(s,E_s)=E. (b) The ω side, through J of lem-fd (same integral cohomology-sheaf t-structures, iso-closure hearts) for Step 7. lem-per-continuous is added to the Step 5 uses and to proof_deps. Step 8 is redundant but harmless (advisory). Batch-5 flags are all generic and accepted: lem-per-lisse-completed reaches only def-pod-lisse, def-pod-ring-scalar-extension and stalk algebra; cor-galois-lisse-representations is the π1 correspondence, not trace-formula or Poincaré-duality content; lem-pod-profinite-stable-lattice is topological algebra; lem-dl-a1-constructible-fibres-exact reaches def-pod-lisse only through the conventions remark and is already in the batch-5 closure. No SGA citation. No duplicate: lem-zl-raw-heart-adic-lisse-stratification is the converse direction. The declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClassicalWeilFiltrationHeartTransport",
+  "declaration": "WeilConjectures.zl_classical_weil_filtration_heart_transport",
+  "declarations": [
+   "WeilConjectures.zlClassicalStep",
+   "WeilConjectures.zlClassicalOrbitPoint",
+   "WeilConjectures.zlClassicalSteps",
+   "WeilConjectures.zlClassicalLocal",
+   "WeilConjectures.zlFiniteFibre",
+   "WeilConjectures.zlExtendedFiniteFibre",
+   "WeilConjectures.zlFiniteFibreMap",
+   "WeilConjectures.ZlClassicalFibreComparison",
+   "WeilConjectures.ZlClassicalFiltration",
+   "WeilConjectures.ZlFiniteFiltration",
+   "WeilConjectures.ZlClassicalPure",
+   "WeilConjectures.ZlFiltrationTransport",
+   "WeilConjectures.ZlClassicalFiltrationHeartTransport",
+   "WeilConjectures.zl_classical_weil_filtration_heart_transport"
+  ],
+  "file": "lean/Sheaf/Paper/ClassicalWeilFiltrationHeartTransport.lean",
+  "statement": "theorem zl_classical_weil_filtration_heart_transport (iota : Ω ≃+* ℂ) : ZlClassicalFiltrationHeartTransport D l hl Ω Y₀ iota",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The prescribed filtration is transported for EVERY normalized realization R and EVERY given Weil identification e. R.pullback_pinning requires a finite-stage unit-normalized square using LisseRealization.PullNormalized at geometric Frobenius and CompletedLisse.Operation.rational_normalization. Coefficient transport is pinned on continuous section values, and pinning fixes the common-stage NatIso itself. Model data come from def-zl-adic-lisse-calculus-models, not the calculus theorem conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca5d86a96",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Re-delivery after 7824c88 RETURN. F1 repaired: ∀ R with per-E ZlClassicalPullbackStage pinning (Along/PullNormalized at geometric Frobenius, completed Operation with classical_units fixing etale unit+rawIntegral to the canonical reindexing unit, coefficient_values via Shrink.algEquiv, sections square, eqToHom endpoints); remaining free sheaf/stage isos only twist δ by a coboundary (isomorphic Weil realization, same eigenvalues); HEq/eqToHom endpoints satisfiable (sourceIndex id = m, literal reindexing object formula). F2 repaired: def-zl-adic-lisse-calculus-models existing:true on unchanged AdicLisseCohomologyCalculus, 8 decls verified. Item statement unchanged; clause table, edge cases (r=0, zero quotients, empty Y, permuted components) OK; gates OK. FIX (records only, no Lean change, no compile): def-zl-normalized-classical-weil-realization cited def-weil-pbc-qbar-category for the functor target but Lean targets generalAlgebraicallyClosedConstructibleCategory; statement corrected, stmt_deps += def-weil-algebraically-closed-coefficients, def-weil-constructible-heart, def-weil-weil-sheaf-complex; def-zl-adic-lisse-calculus-models now names the target of its comparison equivalence (+def-weil-algebraically-closed-coefficients). No cycles."
  }
 }

@@ -253,5 +253,29 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-080045c93 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-profinite-action-coherent-presentation and every cited statement in full. This is a first split: in live and side-live the item is unsplit, with no repair note and not dropped. The statement and stmt_deps are unchanged against side-live. Steps 1-5 are correct. Step 1 builds the colimit sectionwise with its induced action. Step 2 moves it through the equivalence Φ. Step 3 applies lem-weil-pbc-cohomology-colimit-of-sites to the constant system of sites P_J over I^op, with the cofinality argument for (i0↓I) written out. Step 4 computes derived invariants as the sheafified presheaf cohomology at tS (Stacks 072W), using injective-module abelian acyclicity, the Leray item 2 criterion and the naturality node. Step 5 assembles the result with exact sheafification (Stacks 0H7B), and its legs are the original coprojections. Edge cases checked: q=0, trivial J, finite J, singleton I, zero modules and S=∅. The new node is true: every profinite J-space T is covered by the free cover J×T→T, Φ(N)(tS)=Γ(N)(S) and Φ(N)(J×S)=N(S); compare Bhatt-Scholze arXiv:1309.1198 Def 4.3.1, Lem 4.3.2 and proof of 4.3.6, which I suggest recording for the WANTED reference. It is not a duplicate: internal-action-site-presentation has only free objects and no tS, and field-profinite-galois-site needs a field. It is strictly smaller than the item. Size: the equivalence needs J×S in the skeleton; under def-weil-size-convention J lies in U, as in the sibling nodes, so I accept it. Batch-5: def-trf-coherent-topos is a general definition of coherent objects whose closure is definitions only. It is not part of the trace-formula or Poincaré-duality statement or proof, so I accept it. I accept all 7 declared tool uses, all generic site and homological lemmas. There is no SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteInvariantsFilteredContinuity",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.higherInvariants_filteredColimit_isIso",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.higherInvariants",
+   "CategoryTheory.CondensedDerivedRestriction.forgetCreatesFilteredColimit",
+   "CategoryTheory.CondensedDerivedRestriction.higherInvariants_filteredColimit_isIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteInvariantsFilteredContinuity.lean",
+  "statement": "theorem higherInvariants_filteredColimit_isIso (A : CondensedBar.Ring.{u}) (J : Type u) [Group J] [TopologicalSpace J] [IsTopologicalGroup J] [CompactSpace J] [T2Space J] [TotallyDisconnectedSpace J] (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (N : I ⥤ Equivariant A J) (q : ℕ) : IsIso (colimit.post N (higherInvariants A J q))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The companion theorem forgetCreatesFilteredColimit states creation of the underlying module colimit. higherInvariants is exactly H^q of the recorded ordinary derived invariants on degree-zero modules; colimit.post is the canonical map with the original coprojection legs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-086f03965",
+  "group": "NK",
+  "result": "pass",
+  "note": "All clauses match: CommMon condensed ring A, J with group/topological/compact/T2/totally-disconnected binders, recorded ActionModule (Equivariant), invariants and unbounded derived; higherInvariants = singleFunctor 0 ⋙ derived ⋙ homologyFunctor q (real def, no duplicate found); small filtered I : Type (u+1) per size convention; Nonempty (CreatesColimit N forgetAction) for the creation clause; IsIso (colimit.post N (higherInvariants A J q)) is the canonical map with coprojection legs. lean.statement verbatim; node unchanged vs side-live except lean; docstrings carry source, blueprint id and steps 1-5; imports per convention; sorry-only; no compile needed (no file changed). Advisory: CondensedBar.* and invariants/derived owner def nodes (def-sfb-condensed-equivariant-bar-data, def-sfb-condensed-derived-invariants) are not in the stage-1 stmt_deps; reached via public re-export of lem-sfb-condensed-derived-restriction-calculus."
  }
 }

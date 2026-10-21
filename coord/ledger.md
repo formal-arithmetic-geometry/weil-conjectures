@@ -23657,3 +23657,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:26 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 20:27 L: returned deliver/NA/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D1/D2, C5, C6 in content (also E5): the new node lem-sfb-supported-lattice-norm-costalk renames an existing ancestor nod)
 - 20:27 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 20:29 L: merged deliver/NK/lem-sfb-profinite-invariants-filtered-continuity (stage 2; reviewer PASS; parallel immutable checks)
+- 20:29 L: merged deliver/NY/lem-sfb-polynomial-translation-acyclic (stage 2; reviewer PASS; parallel immutable checks)
+- 20:29 L: merged deliver/Q18/lem-zl-classical-weil-filtration-heart-transport (stage 2; reviewer FIX; parallel immutable checks)
