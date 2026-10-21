@@ -64,6 +64,8 @@ theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfComp
     have : PreservesColimit (Discrete.functor fun j ↦ Φ.obj (M j))
         (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) c.g).rightDerivedFunctor :=
       PreservesCoproduct.of_iso_comparison _ _
+    have : PreservesColimit (Discrete.functor ((Discrete.functor M ⋙ Φ).obj ∘ Discrete.mk))
+        (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) c.g).rightDerivedFunctor := this
     have : PreservesColimit (Discrete.functor M ⋙ Φ)
         (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) c.g).rightDerivedFunctor :=
       preservesColimit_of_iso_diagram _ (Discrete.natIsoFunctor (F := Discrete.functor M ⋙ Φ)).symm
