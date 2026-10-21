@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Let $M,N$ be integral representatives and write $T_B(M,N)=M\\otimes^L_BN$ and $\\widehat T(M,N)=M\\widehat\\otimes^L_A N$. The latter is exactly the tensor on representatives in [def-weil-derived-pullback-tensor-hom]. Apply [lem-fix-constructible-tensor-completion]: the canonical quotient-tower map $\\chi_{M,N}:T_B(M,N)\\to\\widehat T(M,N)$ is a natural isomorphism. In particular the ordinary tensor is itself integral constructible, since it is isomorphic to the prescribed constructible completed tensor. On flat-term K-flat representatives $P,Q$, $\\chi$ has level-$n$ component $x\\otimes y\\mapsto\\bar x\\otimes\\bar y$ and zero shifted Roos component. This specifies the comparison used below; it is not an arbitrary isomorphism of the two objects.",
+   "text": "Let $M,N$ be integral representatives and write $T_B(M,N)=M\\otimes^L_BN$ and $\\widehat T(M,N)=M\\widehat\\otimes^L_A N$. The latter is exactly the tensor on representatives in [def-weil-derived-pullback-tensor-hom]. Apply [lem-fix-constructible-tensor-completion]: the canonical quotient-tower map $\\chi_{M,N}:T_B(M,N)\\to\\widehat T(M,N)$ is a natural isomorphism. In particular the ordinary tensor is itself integral constructible, since it is isomorphic to the prescribed constructible completed tensor. On flat-term K-flat representatives $P,Q$, $\\chi$ has level-$n$ component $x\\otimes y\\mapsto\\bar x\\otimes\\bar y$ and zero shifted Roos component. This specifies the comparison used below; it is not an arbitrary isomorphism of the two objects. The Lean presentation helper packages the ordinary tensor, representative isomorphism, cochain map and descended comparison from this same theorem, and copies its pure, shifted, descent and completeness clauses without changing them. This helper is proved; the remaining seven-step comparison construction is still pending.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
     "lem-fix-constructible-tensor-completion"
@@ -139,7 +139,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.5 and Proposition 6.8.14(2), Remark 6.8.15; explicit completed-tensor and scalar coherence using Stacks Tags 07A4 and 0D6D and existing quotient-system comparison nodes"
+  "place": "Lemma 6.5.5 and Proposition 6.8.14(2), Remark 6.8.15; explicit completed-tensor and scalar coherence using Stacks Tags 07A4 and 0D6D and existing quotient-system comparison nodes; M6 implements the presentation helper by existential elimination and record construction, retaining the existing main proof plan"
  },
  "mathlib_searches": [
   {
@@ -362,5 +362,15 @@
   "result": "pass",
   "note": "Re-delivery after the efd740dc RETURN; all 3 faults repaired: (1) Q36's lem-fix-constructible-tensor-completion record is byte-identical to live; the Normalized/Presentation/constructibleTensorCompletionPresentation helpers moved verbatim (only the blueprint tags changed) into the item module, are listed in its declarations and clash with no live name. (2) Theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by the new existing:true def node def-zl-ringed-site-duality-model owning RingedSiteDualityModel/ringedSiteDualityUnitComplex/ringedSiteDualityUnit; its statement matches the live structure field by field. (3) Unused stmt_dep lem-pur-kflat-total-tensor-model and its import dropped. Mechanical finding judged genuine: the pullbackTensorRational* structural maps are .exists.choose of ∃! theorems in lem-pur-derived-pullback-tensor-iso; completionData is .some of the item's verbatim repackaging of constructibleTensorCompletion (χ/T/e/τ are that theorem's constructed objects). Statement unchanged and faithful: J=J_pbc∘I, tensor/unit to E_T[0], associator/unitors/signed symmetry on the published maps, χ⁻¹ integral pin, fractions, all E≤F including reflexive. lean.statement is verbatim. Both files compile clean via nt_compile --json (3.7 s, 47.4 s). Advisory: 47 s is close to the 60 s limit; the unused proof-module imports could be trimmed."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261021T163813-L-1098808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
