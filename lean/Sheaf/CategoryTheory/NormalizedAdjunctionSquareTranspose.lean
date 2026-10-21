@@ -76,6 +76,19 @@ theorem normalizedAdjunctionSquare_transpose
         (theta.app (qA.obj a) ≫ s.map (alpha.app a) ≫ zeta.hom.app (F0.obj a)) =
       rho.hom.app a ≫ qAv.map (r0.map (adj0.unit.app a) ≫ tau.app (F0.obj a)) ≫
         iotaV.app (s0.obj (F0.obj a)) := by
-  sorry
+  have hGlobal := hHom a (F0.obj a) (𝟙 (F0.obj a))
+  simp only [Functor.comp_obj, homEquiv_unit, Functor.map_id, Category.comp_id] at hGlobal
+  have hBeta := beta.naturality (alpha.app a)
+  have hRho := rho.hom.naturality (adj0.unit.app a)
+  dsimp only [Functor.comp_map] at hBeta hRho
+  rw [homEquiv_unit]
+  simp only [Functor.map_comp, ← Category.assoc]
+  rw [hUnit]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hBeta]
+  rw [← r.map_comp_assoc, hGlobal, r.map_comp]
+  simp only [Category.assoc]
+  rw [hAugmentation]
+  rw [reassoc_of% hRho]
 
 end CategoryTheory.Adjunction
