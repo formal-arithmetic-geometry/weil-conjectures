@@ -363,5 +363,40 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-98a880e5b (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps in full, together with every cited statement. All 13 stmt_deps and 15 proof_deps are identical to side-live, and proof_deps equals the union of the steps' uses. There are no new nodes. This is a re-delivery of 69c966d6, which the earlier cc reader PASSed; that head was returned only for promotion. The diff against that head is limited to Step 6 and one added summary sentence. Step 6 now applies lem-pc-kflat-resolution to a complex K_0 that represents K, which is a correct tightening. The item is still unsplit in live and side-live, so it is not superseded. It is not on the route-pivot drop list, it has no repair note, so the re-split rule does not apply, and it cites no SGA. Steps 1-5 are the elementary strict construction, and I re-checked each by hand: the coefficient squares via the adjoints of constant-section maps; the three tensor balances; red∘ι_{m+1}=ι_m∘red; the finite-basis inverse of κ, whose sum runs over the basis index; and (μ,μ) commuting with the Roos differential (−dy−ux, dx). Step 6 correctly uses kflat-change-of-rings, derived-change-of-rings(2) and integral-operations-well-defined(2) for both E and L with a general g. Step 7 uses exact-functor-derived-factorization and, correctly, does not claim A_E(P) is K-flat. Step 8 meets the hypothesis t h_{m+1}=h_m t of the Roos homotopy node. Step 9 uses the first clause of site-derived-tensor-descent (W^{-1}P_R≃D(R)) and localization universal property (2)/(3). Steps 10-11 hold: the triple composite works because π^F j_LF = ι_LF π^L, and L=E gives the unitor. Possible duplicates I checked: pod-pullback-identities-scalar-extension, constant-weil-structure-stage-independence and isomorphism-comparison-scalar-extension. Each states different content or is a citer of this item, so none is a duplicate. The edge cases P=0, g=id, L=E, empty X and ramified Q_ℓ(√ℓ) at m=1,2 are all consistent. I accept the declared tool uses: the unit cites sk-def-sf-operations, and the k-flat resolution and localization tools are generic."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
+  "declaration": "WeilConjectures.scalarPullbackStrictConeNaturality",
+  "declarations": [
+   "WeilConjectures.scalarPullbackSourceTower",
+   "WeilConjectures.scalarPullbackTargetTower",
+   "WeilConjectures.scalarPullbackGenerator",
+   "WeilConjectures.scalarPullbackProductMap",
+   "WeilConjectures.scalarPullbackRoosEnd",
+   "WeilConjectures.ScalarPullbackGeneratorFormula",
+   "WeilConjectures.ScalarPullbackConeFormula",
+   "WeilConjectures.scalarPullbackConeMap",
+   "WeilConjectures.ScalarPullbackDescentFormula",
+   "WeilConjectures.ScalarPullbackStrictConeData",
+   "WeilConjectures.ScalarPullbackAssociationFormula",
+   "WeilConjectures.ScalarPullbackCompositionFormula",
+   "WeilConjectures.ScalarPullbackUnitFormula",
+   "WeilConjectures.scalarPullbackStrictConeNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarPullbackStrictConeNaturality.lean",
+  "statement": "theorem scalarPullbackStrictConeNaturality {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.residueField x)) (_hY : ∀ y : Y, IsUnit (l : Y.residueField y)) : (∀ K : ℕ → CochainComplex (integralTowerModules l E X) ℤ, IsIso (scalarPullbackProductMap l E L ι X K)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, integralOperationsGoodComplex l L Y ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, IsIso (completedScalarCounit l E L ι X ((integralOperationsPullbackComplexFunctor l E g).obj P.obj))) ∧ Nonempty (ScalarPullbackStrictConeData l E L ι g) ∧ Subsingleton (ScalarPullbackStrictConeData l E L ι g) ∧ (∀ D : ScalarPullbackStrictConeData l E L ι g, ScalarPullbackCompositionFormula l E L ι g D) ∧ (∀ D : ScalarPullbackStrictConeData l E E (AlgHom.id ℚ_[l] E) g, ScalarPullbackUnitFormula l E g D)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "One theorem states the full normalized strict tower/cone construction, unique derived descent, basis-independent product comparison, extension composition and identity; auxiliary definitions only express these witnesses and their generator/coordinate equations, using the recorded constructions unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93e344a71",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Only the item's lean field changed. The 13 stmt_dep records are identical to live and side-live, there are no new nodes, the statement field is verbatim and the declaration list matches the file. Not dropped or superseded. Clause by clause the Lean matches the node: the ℓ-invertibility hypotheses, the generator formula ((g⁻¹(p⊗a))⊗b)⊗s ↦ gen_L(1⊗p, ι a, ι(b)π_L(s)), the basis-free Pi.lift product map shown to be an isomorphism, the cone comparison pinned on both mappingCocone coordinates, the cone map as κ ≫ the diagonal Roos map, and the descent equation through the scalar counits and integral pullback comparisons. Nonempty ∧ Subsingleton is sound: level, cone, derived and the associators are all uniquely pinned. Composition (level and cone) is pinned by associators fixed on generators, and the unit case by completedScalarIdentityMultiplication. Edge cases covered (P=0, empty schemes, g=id, L=E, n=0, ramified ι_m, unbounded complexes). Docstrings carry source, blueprint tag and all 11 steps; the only sorry is in the main theorem. Not recompiled, per instruction; the worker reports clean scompile runs (36.1 s and 28.9 s). Advisory: integralScalarQuotientSheafMap is owned by a theorem node that is not a stmt_dep, and the strict tower and Roos functors are plain defs in the module of a theorem stmt_dep (the established pattern); a definition node should own them. The second-reading section was written by the delivering worker."
  }
 }
