@@ -60,7 +60,7 @@ theorem conjugation_counit (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
     ((E₁.toAdjunction.comp adj).comp E₂.symm.toAdjunction).counit.app K =
       E₂.inverse.map (F.map (E₁.counitIso.hom.app (G.obj (E₂.functor.obj K)))) ≫
         E₂.inverse.map (adj.counit.app (E₂.functor.obj K)) ≫ E₂.unitIso.inv.app K := by
-  sorry
+  simp [Adjunction.comp_counit_app, Functor.map_comp, Category.assoc]
 
 /-- The transpose of `L₁(a) ≫ c_G⁻¹` under the specified composite adjunction.
 Source: blueprint reconstruction-trace-coherence proof, abstract transpose calculation;
@@ -81,7 +81,29 @@ theorem conjugation_transpose (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
         (E₁.inverse.map a ≫ (E₂.invFunIdAssoc (G ⋙ E₁.inverse)).inv.app N) =
       (E₁.invFunIdAssoc (F ⋙ E₂.inverse)).hom.app P ≫
         E₂.inverse.map (F.map a ≫ adj.counit.app N) := by
-  sorry
+  simp only [Adjunction.homEquiv_symm_apply, conjugation_counit,
+    Functor.comp_map, Equivalence.invFunIdAssoc_inv_app,
+    Equivalence.invFunIdAssoc_hom_app]
+  simp only [Equivalence.symm_functor, Functor.comp_obj, Equivalence.symm_inverse,
+    Functor.id_obj, Functor.map_comp, Equivalence.fun_inv_map, Category.assoc,
+    Iso.inv_hom_id_app_assoc]
+  have hu : E₂.unitIso.inv.app (E₂.inverse.obj N) =
+      E₂.inverse.map (E₂.counitIso.hom.app N) := E₂.unitInv_app_inverse N
+  rw [hu]
+  simp only [← E₂.inverse.map_comp]
+  congr 1
+  simp only [← Category.assoc, ← F.map_comp]
+  simp only [Category.assoc, E₁.counitIso.inv_hom_id_app]
+  dsimp only [Functor.id_obj]
+  simp only [Functor.map_id, Category.id_comp, F.map_comp, Category.assoc]
+  have hε := adj.counit.naturality (E₂.counitIso.inv.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map,
+    Functor.id_obj] at hε
+  have hε' := congrArg (fun f => f ≫ E₂.counitIso.hom.app N) hε
+  simp only [Category.assoc, E₂.counitIso.inv_hom_id_app] at hε'
+  dsimp only [Functor.id_obj] at hε'
+  simpa only [Category.comp_id] using
+    congrArg (fun f => F.map (E₁.counitIso.hom.app P) ≫ F.map a ≫ f) hε'
 
 /-- The comparison is natural in transformations of functors. Its object-map naturality,
 including that of its inverse, is already supplied by `Equivalence.invFunIdAssoc`.
@@ -96,7 +118,12 @@ theorem conjugation_comparison_naturality (E₁ : C₁ ≌ N₁) (E₂ : C₂ �
       Functor.whiskerLeft E₁.inverse
         (Functor.whiskerRight (Functor.whiskerLeft E₁.functor α) E₂.inverse) ≫
           (E₁.invFunIdAssoc (F' ⋙ E₂.inverse)).hom := by
-  sorry
+  ext P
+  simp only [NatTrans.comp_app, Equivalence.invFunIdAssoc_hom_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_map]
+  rw [← E₂.inverse.map_comp, ← E₂.inverse.map_comp]
+  simpa only [Functor.comp_obj, Functor.id_obj] using
+    congrArg E₂.inverse.map (α.naturality (E₁.counit.app P))
 
 /-- The compositor, with component `L₃(H(e₂,F(R₁ K)))`, is natural in both functors.
 It is a natural isomorphism in `K` because it is the whiskering of `invFunIdAssoc`.
@@ -117,6 +144,18 @@ theorem conjugation_compositor_naturality
         Functor.whiskerRight (Functor.whiskerLeft E₂.functor β) E₃.inverse) ≫
           (Functor.isoWhiskerLeft (E₁.functor ⋙ F')
             (E₂.invFunIdAssoc (H' ⋙ E₃.inverse))).hom := by
-  sorry
+  ext K
+  simp only [NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Equivalence.invFunIdAssoc_hom_app, Functor.comp_map, NatTrans.hcomp_app,
+    Functor.map_comp]
+  simp only [← E₃.inverse.map_comp]
+  congr 1
+  have hβ := β.naturality (E₂.counit.app (F.obj (E₁.functor.obj K)))
+  have he := E₂.counit.naturality (α.app (E₁.functor.obj K))
+  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map,
+    Functor.id_map] at hβ he ⊢
+  rw [← Category.assoc, hβ, Category.assoc, ← H'.map_comp,
+    Category.assoc, ← H'.map_comp, ← he]
 
 end CategoryTheory.AdjointEquivalenceConjugation

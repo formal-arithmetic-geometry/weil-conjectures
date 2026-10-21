@@ -22446,3 +22446,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:09 L: merged deliver/X8/Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses (stage 3; reviewer PASS; first push; landing 20261021T120949-L-4022896 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:09 L: merged deliver/Y2/Sheaf.CategoryTheory.ModuleObjects.InternalTensorCompositionUnitNormalization (stage 3; reviewer PASS; first push; landing 20261021T120953-L-4026550 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:10 L: merged deliver/Y3/Sheaf.CategoryTheory.DerivedCategory.DegreeZeroAbelianCriterion (stage 3; reviewer PASS; first push; landing 20261021T120957-L-4029479 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:10 L: merged deliver/Y5/Sheaf.CategoryTheory.AdjointEquivalenceConjugation (stage 3; reviewer PASS; first push; landing 20261021T121002-L-4032359 (proof); batch 20261021T120309; modules 1; new nodes 0)
