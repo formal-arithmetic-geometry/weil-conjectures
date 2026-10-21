@@ -2,7 +2,7 @@
 
 219 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (24 clusters, 1012 modules)
+## Rework: quarantined by the upstream sync (23 clusters, 1012 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -16,7 +16,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.WeilTensorProduct` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -42,18 +41,18 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-tame-inertia-continuous-koszul` | 4010 | none |
-| `lem-sfb-condensed-derived-invariant-bar` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 4011 | none |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 4011 | none |
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
 | `lem-sfb-tame-root-tower-extension` | 4011 | none |
+| `lem-sfb-condensed-internal-bar-resolution` | 4012 | none |
 | `lem-sfb-internal-action-site-presentation` | 4012 | none |
 | `det-lem-stratified-lattice-scheme` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (31)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -73,6 +72,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-cbc-localized-strict-tensor-descent` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-complete-group-forgetful-automorphisms` | 1 | state | 0 |
+| `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-constructible-algcl-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
