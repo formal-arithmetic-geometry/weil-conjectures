@@ -1,0 +1,100 @@
+{
+ "id": "lem-coef-compact-support-normalized-realization",
+ "kind": "statement",
+ "title": "The specified compact-support quotient tower has a normalized coherent realization",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], with $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $\\varpi_E$. Put $A_n=R/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism [def-weil-scheme-morphism-properties]. Fix a compactification $c_0=(j_0,p_0)$ of $f$ [def-weil-compactifications-refinements]. On the small pro-étale sites [def-weil-pbc-proetale-site] write $F_n=Rf^{c_0}_{!,n}=Rp_{0*,n}j_{0!}$ [def-compact-support-direct-image-detailed].\n\nFor $T=X,Y$ put $B_{T,n}=(A_n)_T$ and $\\widehat R_T=\\varprojlim_n B_{T,n}$ [def-weil-completed-integral-coefficients]. Write $\\operatorname{Res}_{m,n}$ for restriction along $B_{T,m}\\to B_{T,n}$ and $\\operatorname{Res}_n$ for restriction along $\\widehat R_T\\to B_{T,n}$ [def-pc-sheaf-restrict-scalars]. Let $K\\in D^b_c(X,R)$ [def-weil-derived-complete-integral-detailed] and $K_n=K\\otimes^L_{\\widehat R_X}B_{X,n}$ [def-weil-integral-derived-reduction]. Assume there are integers $a\\leq b$ such that every $K_n$ has Tor amplitude $[a,b]$ [def-weil-finite-tor-amplitude].\n\nFor a K-flat representative $P$ of $K$ [def-pc-kflat-complex], let $\\rho_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ be induced by the quotient map $P\\otimes B_{X,m}\\to P\\otimes B_{X,n}$. Its adjoint $\\beta_{m,n}:K_m\\otimes^L_{B_{X,m}}B_{X,n}\\to K_n$ is the canonical iterated-reduction isomorphism. These maps are independent of the representative, have identity units, and satisfy the quotient cocycle for $r\\geq m\\geq n$.\n\nPut $M_n=F_nK_n$ and let\n$$\\tau_{m,n}:M_m\\xrightarrow{F_m(\\rho_{m,n})}F_m\\operatorname{Res}_{m,n}K_n\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}F_nK_n$$\nuse the specified compact-support restriction-of-scalars comparison in [def-weil-integral-rational-qbar-compact-support]. Then $(M_n,\\tau_{m,n})$ is a normalized DVR tower in the full sense of [def-coef-normalized-dvr-tower]. More explicitly, $\\tau_{n,n}=1$ and $\\tau_{r,n}=\\operatorname{Res}_{r,m}(\\tau_{m,n})\\circ\\tau_{r,m}$, and the tensor/restriction adjoint of $\\tau_{m,n}$ is precisely\n$$M_m\\otimes^L_{B_{Y,m}}B_{Y,n}\\longrightarrow F_n(K_m\\otimes^L_{B_{X,m}}B_{X,n})\\xrightarrow{F_n(\\beta_{m,n})}M_n,$$\nwhere the first arrow is the canonical compact-support tensor comparison; both arrows are isomorphisms. There exist cochain complexes $C_n$ of $B_{Y,n}$-module sheaves, identifications $[C_n]\\cong M_n$ in their derived categories [def-weil-abstract-derived-category], and chain maps $C_{n+1}\\to\\operatorname{Res}_{n+1,n}C_n$ representing $\\tau_{n+1,n}$. Their composites represent every $\\tau_{m,n}$. After restriction to $\\widehat R_Y$ these form a strict inverse sequence of complexes, hence a coherent realization $\\mathcal M_\\bullet\\in D(\\operatorname{Tow}_{\\widehat R_Y}(Y))$ with precisely the evaluations and transitions required by [def-coef-normalized-dvr-tower]. Its adjacent transitions are those specifying the integral compact-support limit in [def-weil-integral-rational-qbar-compact-support].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+  "place": "Proof paragraph 1, input reductions, and paragraph 2: \"The coefficient maps ... make these objects a normalized tower\"; old Steps 1–2 and 6–7, including specified transitions and coherent realization."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-kflat-complex",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fixed compactification sends the canonical reduction tower of an integral complex to a normalized tower with a coherent strict complex realization",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDesc; Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc; AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"limit\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*tower|strict.*tower|tower.*complex",
+   "results": "Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Module/Submodule/RestrictScalars.lean; Mathlib/Algebra/Module/Submodule/Range.lean; directory Mathlib/Algebra",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support coefficient change is the adjoint of quotient induced transition maps and the tower lifts to complexes",
+   "results": "ContDiffMapSupportedIn.postcompLM; CompactlySupportedContinuousMap.compLinearMap; Representation.finsuppToCoinvariants; ContDiffMapSupportedIn.toFun_eq_coe; Representation.coinvariantsToFinsupp; ContDiffMapSupportedIn.coe_coeHom; ContDiffMapSupportedIn.Simps.coe; CompactlySupportedContinuousMapClass.instCoeTCCompactlySupportedContinuousMap",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of compactly supported cohomology commutes with quotient coefficients and its inverse sequence has a coherent realization",
+   "results": "groupCohomologyIsoExt; groupCohomology.coindIso; Rep.barResolution.extIso; Rep.standardResolution.extIso; groupCohomology.linearYonedaObjResProjectiveResolutionIso; groupCohomology.isoShortComplexH1_hom; groupCohomologyIso; groupCohomology.isoShortComplexH2_hom",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"map\"",
+   "results": "DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; DerivedCategory.mappingCocone_triangle_distinguished; DerivedCategory.mappingCone_triangle_distinguished; DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso; DerivedCategory.isIso_Q_map_iff_quasiIso; DerivedCategory.Q_map_eq_of_homotopy; DerivedCategory.Q_map_single_map; DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*(inverse|sequence)|realiz.*tower|tower.*realiz",
+   "results": "No hits; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-integral-compact-support",
+  "date": "2026-10-21",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Proof paragraph 1, input reductions, and paragraph 2: \"The coefficient maps ... make these objects a normalized tower\"; old Steps 1–2 and 6–7, including specified transitions and coherent realization.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -25,101 +25,30 @@
  ],
  "proof": [
   {
-   "text": "Write $B_{T,n}=(A_n)_T$ and $\\widehat R_T=\\varprojlim_n B_{T,n}$. By the definition of the integral category, each $K_n$ is intrinsically bounded constructible; by hypothesis its Tor interval is $[a,b]$. Choose a K-flat complex $P$ representing $K$, using [lem-pc-kflat-resolution]. By [def-weil-integral-derived-reduction] and [lem-pur-derived-change-of-rings], $P_n=P\\otimes_{\\widehat R_X}B_{X,n}$ represents $K_n$, and the maps $P_m\\to\\operatorname{Res}_{m,n}P_n$ are the termwise quotient maps for $m\\geq n$. These are exactly the input reduction maps in [def-weil-integral-rational-qbar-compact-support].",
+   "text": "Fix the compactification $c_0$ defining the integral functor and put $M_n=Rf^{c_0}_{!,n}K_n$. The definition [def-weil-derived-complete-integral-detailed] gives intrinsic bounded constructibility of each $K_n$. Apply [lem-coef-finite-compact-support-uniform-tor] at every level with the hypothesized interval $[a,b]$. It gives intrinsic bounded constructibility and Tor interval $[a,b+2d]$ for every $M_n$, using a dense refinement only for the bound.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
-    "lem-pc-kflat-resolution",
-    "def-weil-integral-derived-reduction",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-integral-rational-qbar-compact-support"
+    "lem-coef-finite-compact-support-uniform-tor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, first paragraph: input reductions; explicit K-flat model (Stacks Tags 06YS and 06YY)."
+    "place": "Proof, paragraph 1; assembly step 1"
    }
   },
   {
-   "text": "The comparisons $K_m\\otimes^L_{B_{X,m}}B_{X,n}\\to K_n$ are canonical isomorphisms with the quotient cocycle. Indeed $P_m$ is K-flat over $B_{X,m}$: for an acyclic $B_{X,m}$-complex $N$, its underlying $\\widehat R_X$-complex is acyclic, and $P_m\\otimes_{B_{X,m}}N=P\\otimes_{\\widehat R_X}N$ is acyclic by [def-pc-kflat-complex]. Thus [lem-pur-derived-change-of-rings] computes the comparison by $(P\\otimes B_{X,m})\\otimes_{B_{X,m}}B_{X,n}\\to P\\otimes B_{X,n}$. The tensor definition [def-pur-sheaf-tensor-product] gives its inverse on pure tensors: $(x\\otimes u)\\otimes v\\mapsto x\\otimes\\overline u v$ and $x\\otimes v\\mapsto(x\\otimes1)\\otimes v$. These balanced maps commute with differentials and sheafification. For $r\\geq m\\geq n$ both composites send $((x\\otimes u)\\otimes v)\\otimes w$ to $x\\otimes\\overline u\\overline v w$, proving the cocycle and compatibility with the actual quotient transitions.",
+   "text": "Apply [lem-coef-compact-support-normalized-realization] to $K$ and the same $c_0$. It provides a normalized DVR tower with a coherent realization, whose transitions are exactly the quotient-induced compact-support transitions in the definition of $Rf_!K$. Its invertible reduction adjoints are the canonical tensor coefficient comparisons, including their quotient cocycles.",
    "uses": [
-    "def-pc-kflat-complex",
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, second paragraph: normalization of input reductions; balancing calculation underlying Stacks Tag 06YY."
-   }
-  },
-  {
-   "text": "Keep fixed the compactification $c_0=(j_0,p_0)$ used to define all finite-level functors and their transition maps in [def-weil-integral-rational-qbar-compact-support]. For the finite-level bound only, replace it by $c=\\mathsf{Dense}(c_0)$. The open immersion $j_0$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target], applied to $X\\to\\overline X_0\\to Y$ (the first composite is finite type and $p_0$ is proper, hence separated). By [def-nagata-dense-refinement] and [prop-nagata-dense-refinement], $c=(j,p)$ is a compactification of the same $f$ with ambient scheme $\\overline X=\\operatorname{SIm}(j_0)$. By [lemma-nagata-immersion-open-in-scheme-image], $j$ is also topologically dense. The ambient scheme is finite type over $k$: $p$ is proper, in particular finite type, and $Y$ is finite type over $k$ (finite generation of algebras composes on affine charts). Therefore [lem-kun-dimension-extension], for the dense open $X\\hookrightarrow\\overline X$, gives $\\dim\\overline X=\\dim X\\leq d$.",
-   "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "lemma-nagata-open-immersion-qc-over-separated-target",
-    "def-nagata-dense-refinement",
-    "prop-nagata-dense-refinement",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lem-kun-dimension-extension"
+    "lem-coef-compact-support-normalized-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, first paragraph: replace the ambient compactification by its scheme-theoretic closure and bound its dimension."
+    "place": "Proof, paragraph 2; assembly step 2"
    }
   },
   {
-   "text": "For every $n$, apply [lem-trf-open-ctf] to $j:X\\hookrightarrow\\overline X$ and $K_n$. It gives $j_!K_n\\in D^b_{ctf}(\\overline X_{\\mathrm{proet}},A_n)$ with Tor interval $[a,b]$. Apply [cor-sf-direct-image-ctf-proetale] to $p:\\overline X\\to Y$: both schemes are finite type over $k$, $p$ is proper and hence separated finite type, and $\\dim\\overline X\\leq d$. It follows that $Rp_{*,n}j_!K_n$ is intrinsically bounded constructible with Tor interval $[a,b+2d]$. This pro-étale corollary packages the source's étale direct-image theorem and $2d$ vanishing bound, so no étale theorem is being applied directly to a pro-étale complex.",
-   "uses": [
-    "lem-trf-open-ctf",
-    "cor-sf-direct-image-ctf-proetale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, first paragraph: extension by zero and finite-level direct-image Tor bound."
-   }
-  },
-  {
-   "text": "To pass this bound back to the original compactification, first apply [lem-sf-proetale-constructible-origin](ii) to $K_n$. It supplies a bounded constructible étale-origin witness, exactly the domain required by [prop-compactification-coherence-detailed]. That proposition supplies an isomorphism $Rp_{*,n}j_!K_n\\cong Rf^{c_0}_{!,n}K_n$. Put $M_n=Rf^{c_0}_{!,n}K_n$ from now on. Isomorphic objects have the same constructibility and Tor interval: tensoring the isomorphism with any degree-zero $A_n$-module sheaf gives isomorphic cohomology. Thus every $M_n$ is bounded constructible with interval $[a,b+2d]$. We have used the dense compactification only to prove this bound, and all tower maps below use the one fixed $c_0$.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "prop-compactification-coherence-detailed",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, first paragraph: compactification comparison on its stated étale-origin domain."
-   }
-  },
-  {
-   "text": "For $m\\geq n$ let $\\tau_{m,n}:M_m\\to\\operatorname{Res}_{m,n}M_n$ be $Rf^{c_0}_{!,m}$ of the input quotient transition, followed by the restriction-of-scalars isomorphism of [lem-sf-compact-support-restriction-of-scalars]. By that lemma's compatibility with composed ring maps and the quotient cocycle in Step 2, these maps have identity units and $\\tau_{r,n}=\\operatorname{Res}_{r,m}(\\tau_{m,n})\\tau_{r,m}$. Their adjoints under the tensor-restriction adjunction of [def-coef-normalized-dvr-tower] are\n$$\nM_m\\otimes^L_{B_{Y,m}}B_{Y,n}\\longrightarrow Rf^{c_0}_{!,n}(K_m\\otimes^L_{B_{X,m}}B_{X,n})\\longrightarrow Rf^{c_0}_{!,n}K_n.\n$$\nThe first arrow is the canonical tensor comparison of [lem-fix-compact-support-coefficient-change], and the second is $Rf^{c_0}_{!,n}$ of Step 2. To check that these are the adjoints of the actual transitions, use the adjunction formula $g\\mapsto(x\\mapsto g(x\\otimes1))$: the tensor comparison, evaluated at $1$, is $Rf_{!,m}$ of the input unit map to the restriction of its tensor reduction, followed by the restriction-of-scalars comparison. This is precisely the displayed definition of $\\tau_{m,n}$. The coefficient-change lemma explicitly identifies its map as this tensor comparison and asserts compatibility with its defining counits and successive reductions. Both arrows are isomorphisms: that lemma applies because $K_m$ is bounded constructible with finite Tor amplitude, and Step 2 gives the second arrow. This verifies normalization for the specified transitions, rather than merely constructing unrelated reduction isomorphisms.",
-   "uses": [
-    "lem-sf-compact-support-restriction-of-scalars",
-    "def-coef-normalized-dvr-tower",
-    "lem-fix-compact-support-coefficient-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, second paragraph: coefficient comparisons normalize the actual fixed-compactification tower."
-   }
-  },
-  {
-   "text": "The normalized-tower definition also requires a coherent derived realization. Here it can be supplied explicitly. Choose a complex $C_1$ of $B_{Y,1}$-modules representing $M_1$. Inductively suppose $C_n$ has been chosen with an identification $[C_n]\\cong M_n$. In the derived category of $B_{Y,n+1}$-modules represent $M_{n+1}\\xrightarrow{\\tau_{n+1,n}}\\operatorname{Res}_{n+1,n}[C_n]$ by a roof $V_{n+1}\\xleftarrow{\\sim}C_{n+1}\\to\\operatorname{Res}_{n+1,n}C_n$, using [lem-pc-quasi-isomorphisms-multiplicative-system]; here $V_{n+1}$ is any representative of $M_{n+1}$, and a representative chain map is chosen for the right leg in the homotopy category. The left quasi-isomorphism identifies $[C_{n+1}]$ with $M_{n+1}$. Restrict all $C_n$ to $\\widehat R_Y$ and use the chosen adjacent chain maps; define longer transition maps by composition. The resulting strict inverse sequence of complexes is a complex of towers, hence an object of the derived tower category, whose evaluations and transitions are the required $\\operatorname{Res}_nM_n$ and $\\operatorname{Res}_m\\tau_{m,n}$. Thus the coherent datum required by [def-coef-normalized-dvr-tower] exists. There are no additional relations to lift: the sequential index category is generated by adjacent arrows, and Step 6 identifies every composite with its prescribed transition.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, second paragraph: coherent realization needed to apply normalized-tower effectivity (Stacks Tag 05RT)."
-   }
-  },
-  {
-   "text": "Apply [lem-coef-normalized-dvr-effectivity] to the tower of Steps 6–7. It says that $M=R\\varprojlim_n\\operatorname{Res}_nM_n$ is derived complete and that its canonical counit maps $M\\otimes^L_{\\widehat R_Y}B_{Y,n}\\to M_n$ are coherent isomorphisms. This is the same inverse system, with the same adjacent maps, whose derived limit defines $Rf_!K$ in [def-weil-integral-rational-qbar-compact-support]; use that defining limit for $M$. The effectivity comparisons are adjoint to its projections $M\\to\\operatorname{Res}_nM_n$. These are exactly the compact-support coefficient comparisons: Step 6 checked the specified finite-stage maps and their adjoints. The coherence asserted by effectivity gives compatibility with successive reductions. No boundedness is needed for this application of effectivity.",
+   "text": "By [lem-coef-normalized-dvr-effectivity], the derived limit $M$ of this tower is derived complete and its projection-adjoint counit maps $M\\otimes^L_{\\widehat R_Y}B_{Y,n}\\to M_n$ are coherent isomorphisms. By [def-weil-integral-rational-qbar-compact-support] this is the defining limit $Rf_!K$. Step 2 identifies the actual transition maps, so these counit maps are the specified compact-support comparisons. Their coherence is the required compatibility with successive reductions.",
    "uses": [
     "lem-coef-normalized-dvr-effectivity",
     "def-weil-integral-rational-qbar-compact-support"
@@ -127,11 +56,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, second paragraph: effectivity gives the prescribed reductions and their canonical maps."
+    "place": "Proof, paragraph 2; assembly step 3"
    }
   },
   {
-   "text": "By Steps 5 and 8 all reductions of $Rf_!K$ are bounded constructible with the common Tor interval $[a,b+2d]$. Taking the degree-zero module sheaf $B_{Y,n}$ itself as the test module in [def-weil-finite-tor-amplitude] shows that the cohomology of every reduction vanishes outside $[a,b+2d]$: the unit identification $M_n\\otimes^L_{B_{Y,n}}B_{Y,n}\\cong M_n$ is given on a K-flat representative by $x\\otimes u\\mapsto ux$, with inverse $x\\mapsto x\\otimes1$. Thus the reductions have a single cohomological support interval independent of $n$. Together with the derived completeness from Step 8, these are exactly the membership conditions of [def-weil-derived-complete-integral-detailed]. Hence $Rf_!K\\in D^b_c(Y,R)$, and [def-weil-finite-tor-amplitude] gives the asserted uniform reduction Tor interval. This proves every clause without using the separate integral-constructibility theorem mentioned in the definition of $Rf_!$.",
+   "text": "Steps 1 and 3 give constructible reductions of $Rf_!K$ with Tor interval $[a,b+2d]$. In [def-weil-finite-tor-amplitude], test against the degree-zero coefficient module $B_{Y,n}$ itself: the tensor-unit identification is $x\\otimes u\\mapsto ux$, with inverse $x\\mapsto x\\otimes1$, on a K-flat model. Thus every reduction has cohomology zero outside that same interval. Derived completeness and these uniformly bounded constructible reductions are exactly [def-weil-derived-complete-integral-detailed], proving $Rf_!K\\in D^b_c(Y,R)$ and the asserted reduction Tor bounds.",
    "uses": [
     "def-weil-finite-tor-amplitude",
     "def-weil-derived-complete-integral-detailed"
@@ -139,38 +68,22 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-    "place": "Proof, second paragraph: derive integral constructible membership from the definition, with the uniform bound."
+    "place": "Proof, paragraph 2; assembly step 4"
    }
   }
  ],
  "proof_deps": [
   "def-weil-derived-complete-integral-detailed",
-  "lem-pc-kflat-resolution",
-  "def-weil-integral-derived-reduction",
-  "lem-pur-derived-change-of-rings",
+  "lem-coef-finite-compact-support-uniform-tor",
+  "lem-coef-compact-support-normalized-realization",
+  "lem-coef-normalized-dvr-effectivity",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product",
-  "lemma-nagata-open-immersion-qc-over-separated-target",
-  "def-nagata-dense-refinement",
-  "prop-nagata-dense-refinement",
-  "lemma-nagata-immersion-open-in-scheme-image",
-  "lem-kun-dimension-extension",
-  "lem-trf-open-ctf",
-  "cor-sf-direct-image-ctf-proetale",
-  "lem-sf-proetale-constructible-origin",
-  "prop-compactification-coherence-detailed",
-  "def-weil-finite-tor-amplitude",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "def-coef-normalized-dvr-tower",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-coef-normalized-dvr-effectivity"
+  "def-weil-finite-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-  "place": "Proof, both imported paragraphs, expanded in Steps 1–9; original literature files unavailable on this machine (WANTED in report.md)."
+  "place": "Both Proof paragraphs, assembled from two extracted statement-only lemmas and normalized-DVR effectivity; detailed original arguments preserved in report.md."
  },
  "mathlib_searches": [
   {
@@ -243,65 +156,12 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-coef-integral-compact-support",
   "worker": "stage1",
-  "summary": "Expanded the imported dense-compactification and normalized-DVR-tower proof into nine steps using existing nodes only. Made the inherited finite-field and completed-sheaf coefficient context explicit, checked the pro-etale and etale-origin domains, supplied the actual transition/adjunction and coherent-tower constructions, and deduced integral membership from the definition rather than invoking a theorem about it. Recorded actual Mathlib searches; original literature is absent and requested in report.md.",
-  "blueprint": "Steps 1–5 expand imported Proof paragraph 1 (input reductions, dense compactification, extension by zero, direct-image bound and finite comparison); Steps 6–9 expand paragraph 2 (coefficient comparisons, normalized tower, effectivity, canonical maps and integral constructibility). The unit and chapter route are unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of a K-flat representative on an arbitrary ringed site; used only to spell out the source reduction maps, not to replace the coefficient-tower route. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Computes derived coefficient change by K-flat representatives, needed for the explicit input quotient cocycle. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
-    "why": "The original compactification open immersion is quasi-compact, required to form its dense scheme-theoretic image. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "prop-nagata-dense-refinement",
-    "why": "Ensures the dense scheme-theoretic image is still a compactification of f, as the imported proof requests. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lemma-nagata-immersion-open-in-scheme-image",
-    "why": "Provides topological density, not merely scheme-theoretic density, for applying the dimension statement. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-kun-dimension-extension",
-    "why": "Equality of dimensions for a dense open in a scheme finite type over a field; supplies the imported compactification dimension argument. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-trf-open-ctf",
-    "why": "Finite-coefficient extension by zero preserves constructibility and the given Tor interval. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "cor-sf-direct-image-ctf-proetale",
-    "why": "The finite-level pro-etale version of the same direct-image theorem and 2d vanishing route already cited in the imported proof. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Supplies the etale-origin witness required by the existing compactification-comparison statement. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "prop-compactification-coherence-detailed",
-    "why": "Compares the dense compactification to the fixed one only for the finite-level bound; tower transitions retain the original compactification. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-sf-compact-support-restriction-of-scalars",
-    "why": "The specified tower transitions use this natural comparison and its composition law; needed to identify their adjoints. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-fix-compact-support-coefficient-change",
-    "why": "Exactly the finite coefficient tensor comparison and its compatibility with quotients and counits used in the imported normalization argument. No node of this item's unit states this auxiliary fact."
-   },
-   {
-    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "why": "Roof representatives lift the sequential transitions to a strict tower of complexes, supplying the coherence required by the existing normalization definition. No node of this item's unit states this auxiliary fact."
-   }
-  ],
+  "summary": "Human-requested re-split: extracted old Steps 3–5 as the finite-level dense-compactification Tor-bound lemma and old Steps 1–2,6–7 as the actual quotient-tower normalization and coherent-realization lemma. Both are statement-only unsplit nodes with genuine logged Mathlib searches. The unchanged item statement now has a short four-step effectivity/membership assembly. The report preserves all nine original arguments verbatim.",
+  "blueprint": "Assembly Step 1 realizes Proof paragraph 1 via lem-coef-finite-compact-support-uniform-tor. Step 2 realizes the input quotient and normalized-tower clause via lem-coef-compact-support-normalized-realization. Steps 3–4 realize paragraph 2, effectivity, the defining limit, canonical comparisons and membership. No unit or chapter route changes.",
+  "tool_uses": [],
   "statement_change": {
    "old_statement": "Let $f:X\\to Y$ be separated of finite type, with\n$\\dim X\\leq d$. For $K\\in D^b_c(X,R)$ with reduction\nTor interval $[a,b]$, the functor defined in\n[def-weil-integral-rational-qbar-compact-support] satisfies\n\n$$\nRf_!K\\in D^b_c(Y,R),\\qquad\n(Rf_!K)\\otimes_R^L A_n\\cong Rf_{!,n}K_n.\n$$\n\nOne uniform reduction Tor interval is $[a,b+2d]$. These are the\ncanonical compact-support coefficient comparisons.",
    "reason": "STATEMENT-DISPUTED (stand-alone scope): R, A_n and the base k are unbound in the imported text. Restored the global finite-field context of this unit and the completed-sheaf integral meaning explicitly; no smoothness, properness of f, or new finiteness hypothesis on K is imposed. The original phrase reduction Tor interval already means every reduction has the displayed common interval.",
@@ -345,12 +205,12 @@
   "lem-pc-quasi-isomorphisms-multiplicative-system"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q11-38734359b",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q61-71ed00a15",
+  "group": "Q61",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-38734359b (reviewer sub-agent of L); spot-checked: Read all nine steps, every cited statement, archived source locations, and the unit/chapter route. Checked hypotheses, canonical coefficient maps, coherent tower realization, edge cases, duplicates, and acyclicity. No repairs needed. review.md records the checks and distinguishes this lemma from the condensed-coefficient target comparisons."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-71ed00a15 (reviewer sub-agent of L); spot-checked: Re-split for the human's 2026-10-21 note (at least 2 new nodes; proof at most 3000 chars, 8517 before). The item statement and every field except proof, proof_deps, proof_origin and split_report are byte-identical to live. The item is not superseded (live still has the old 9-step proof), and neither the item nor the new ids are in the dropped list. The new proof is a 4-step assembly of 1876 chars. All 9 old steps are reproduced verbatim in the report, and each one maps to a node: old 3-5 to lem-coef-finite-compact-support-uniform-tor (Dense(c_0) qc/topological density/finite type and dim via lem-kun-dimension-extension, then lem-trf-open-ctf, then cor-sf-direct-image-ctf-proetale for [a,b+2d], then constructible-origin (ii) and compactification coherence back to c_0); old 1-2 and 6-7 to lem-coef-compact-support-normalized-realization (K-flat input cocycle, tau cocycle via the restriction-of-scalars composition law, adjoint of tau = tensor comparison (lem-fix, K_m ctf) followed by F_n(beta), strict-tower realization); old 8-9 to item steps 3-4 (effectivity on the defining limit of def-weil-integral-rational-qbar-compact-support with the same transitions, then the B_{Y,n} unit test and derived-complete membership; lem-sf-integral-compact-support-constructible is not used). No argument was dropped. The two nodes carry comparable work and neither restates the item. Both statements are true and were tested: A^1 to a point gives A_n[-2] in [0,2]; d=0; X empty; f=id; n=m; K=0. B1-B9 hold: statement-only, unsplit, blueprint from the item, three kinds of Mathlib search recorded. No duplicate found: thm-sf-ctf-stability (iv) gives no interval; the fibre-dimension nodes bound cohomology, not Tor amplitude. Advisory: B's input and realization clauses are supplied by lem-sfb-successive-derived-quotient-normalization and lem-weil-compact-support-reduction-tower-functor, so its prover should cite them; its core normalization is new. Minor B3 wording: the 'canonical compactification/tensor comparison' maps are named without stmt_deps, as in the accepted old text. No tool_uses, no fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralCompactSupportPrescribedReductions",

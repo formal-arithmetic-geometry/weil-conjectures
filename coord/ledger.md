@@ -20942,3 +20942,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q81/lem-pur-finite-etale-dualizing-normalization (reviewer FIX; after a return; new nodes: 5)
 - 08:09 L: merged deliver/NL/lem-weil-pbc-ringed-slice-pullback-mate-normalization (reviewer FIX; after a return; new nodes: 1)
 - 08:09 L: merged deliver/Q42/lem-weil-integral-twist-base-change (reviewer FIX; after a return; new nodes: 3)
+- 08:09 L: merged deliver/Q61/lem-coef-integral-compact-support (reviewer PASS; after a return; new nodes: 2)
