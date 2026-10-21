@@ -1,0 +1,171 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projection morphism is compatible with the etale to proetale comparison and restriction of scalars",
+   "results": "8 hits, including Limits.piComparison_comp_π, SheafOfModules.restrictScalars_map_val, ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc; none states the derived intrinsic comparison square.",
+   "date": "2026-10-21",
+   "verdict": "No match. These are products, underived restrictions, or projective resolutions rather than this canonical ringed-site compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the etale to proetale projection square with intrinsic coefficient realization and derived restriction of scalars",
+   "results": "8 hits about StandardEtalePresentation and Algebra.Etale; none about derived sheaf operations.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map\", \"IsIso\"",
+   "results": "12 hits, including Functor.map_isIso, NatIso.isIso_map_iff and Functor.FullyFaithful.isIso_of_isIso_map.",
+   "date": "2026-10-21",
+   "verdict": "General isomorphism calculus applies to the final assembly; no intrinsic projection comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection",
+   "results": "0 Mathlib hits. Local rg found the generic fixed-coefficient projection_comparison_etale_proetale and the separately normalized intrinsic scalar mate, but no theorem relating their coefficient realizations.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the intrinsic scalar projection square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperEtaleOriginScalarIsomorphism",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "First paragraph tensor comparison and final site transport: compatibility of the proper-factor projection with the scalar counit mate",
+   "via": [
+    "lem-fix-proper-etale-origin-scalar-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-fix-etale-origin-scalar-projection-square",
+ "kind": "statement",
+ "title": "The scalar restriction of the etale-origin projection square for a qcqs morphism",
+ "statement": "Let A→B be a map φ of finite commutative rings and p:Z→Y a qcqs morphism. In the canonical notation H,q,b,π_e of [def-fix-proper-etale-origin-scalar-data], take E in D⁺(Z_et,A) and assume H(E) is bounded below. Let χ:S_Y P_A→P_B S_Z be the specified intrinsic B-linear counit mate and d:U_Y P_B≅P_A U_Z the canonical restriction/direct-image isomorphism [lem-fix-proetale-scalar-mate-normalization, lem-weil-pbc-ring-sheaf-change-adjunction]. The following inverse-free square commutes: q_(R_e E) followed by US(b_E), U(χ_(F_Z E)), and d_(S_Z F_Z E) equals F_Y(π_e) followed by b_(H E) and P_A(q_E). This is an equality of the specified maps. No properness, flatness, finite Tor dimension or invertibility of a projection morphism is asserted.",
+ "stmt_deps": [
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Take N=B_Y[0] with its A-action. The canonical coefficient pullback identifies E tensor p* N with H(E); transfer the assumed bound across this isomorphism. E and this tensor are precisely the admissible pair for the fixed-coefficient projection-comparison theorem.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+   }
+  },
+  {
+   "text": "Specialize projection_comparison_etale_proetale to (E,N). Equate its two component expressions. Package its five included D⁺ comparison arrows as properOriginFixedMateIso. This gives F_fixed(π_e), then the fixed mate at the tensor, then direct image of the tensor/pullback comparison, equal to the tensor comparison followed by tensor of the fixed mate at E and the pro-etale projection.",
+   "uses": [
+    "lem-sfb-projection-comparison-etale-proetale",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+   }
+  },
+  {
+   "text": "Apply the intrinsic realization equivalence to that equality and insert its site-factorization and normalized direct-image comparisons. The definition of properOriginMateIso is exactly the resulting fixed-mate composite. Naturality moves the coefficient-pullback map past the tensor-input mate, giving b_(H E).",
+   "uses": [
+    "def-fix-proper-etale-origin-scalar-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+   }
+  },
+  {
+   "text": "Identify the tensor comparison on each side with properOriginTensorIso. For ordinary modules, all restriction and realization maps are identity on scalar-unit sections; the scalar extension adjunction sends x tensor b to the same balanced tensor. On flat K-flat total tensor representatives these maps preserve both bidegrees and signed differentials. The unique representative normalizations of the scalar/tensor comparisons and canonical tensor pullback therefore identify the composites. Naturality with respect to K-flat resolutions and cancellation after localization extend the equality to every unbounded input, including R_e E; no bound on its scalar extension is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-fix-proper-etale-origin-scalar-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+   }
+  },
+  {
+   "text": "Use proEtaleScalarMateNormalization to replace the intrinsic projection composite by U(χ) followed by the canonical d and the target scalar/tensor comparison. Cancel the intermediate tensor and realization isomorphisms. The resulting equation is q_(R_e E) US(b_E) U(χ) d = F_Y(π_e) b_(H E) P_A(q_E). This argument uses only the two stated lower bounds, applies to identity morphisms and zero rings, and nowhere uses properness or projection invertibility.",
+   "uses": [
+    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48 specialized to the constant B coefficient; Tag 0B56 identifies scalar-restricted counit mates. This records the independent intrinsic-realization compatibility part of the original argument."
+ },
+ "proof_deps": [
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOriginScalarProjectionSquare",
+  "file": "lean/Sheaf/Paper/EtaleOriginScalarProjectionSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleOriginScalarProjectionSquare",
+  "statement": "theorem etaleOriginScalarProjectionSquare\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)\n    [QuasiCompact p] [QuasiSeparated p]\n    (E : DerivedCategory.Plus\n      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))\n    (hH : ∃ n : ℤ,\n      (properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Z E.obj).IsGE n) :\n    (properOriginTensorIso φ Y\n        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).rightDerivedFunctor.obj\n          E.obj)).hom ≫\n      (directImageScalarExtension φ Y ⋙ (scalarMateRestriction φ Y).mapDerivedCategory).map\n        (properOriginMateIso A p E).hom ≫\n      (scalarMateRestriction φ Y).mapDerivedCategory.map\n        ((directImageScalarComparison φ p).app\n          ((finiteCoefficientIntrinsicDerivedComparison Z A).obj E.obj)) ≫\n      (scalarMateRestrictionPush φ p).hom.app\n        ((directImageScalarExtension φ Z).obj\n          ((finiteCoefficientIntrinsicDerivedComparison Z A).obj E.obj)) =\n    (finiteCoefficientIntrinsicDerivedComparison Y A).map\n        (properOriginEtaleProjection (RingHom.ulift.{u + 1, u + 1, u, u} φ) p E.obj) ≫\n      (properOriginMateIso A p\n        ⟨properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Z E.obj, hH⟩).hom ≫\n      (directImageConstantPush A p).map (properOriginTensorIso φ Z E.obj).hom",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7992d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T152415-L-1937288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7992d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T152415-L-1937288",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical, sorry→proof); 8 moved defs vs live bodies (identical, publicly re-exported); new square = item's equation conjunct for qcqs p without IsIso; item node proof_deps vs Lean proof; unit realized empty"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D1, 0H7J (coefficient direct-image map), 03D2, 00YV (restriction and realization), 06YY, 07A4 (derived tensors), 09A6 (fixed comparison mate), and 0B56 (projection arrow); unchanged definitions extracted from the original item"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projection morphism is compatible with the etale to proetale comparison and restriction of scalars",
+   "results": "8 hits, including Limits.piComparison_comp_π, SheafOfModules.restrictScalars_map_val, ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc; none states the derived intrinsic comparison square.",
+   "date": "2026-10-21",
+   "verdict": "No match. These are products, underived restrictions, or projective resolutions rather than this canonical ringed-site compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the etale to proetale projection square with intrinsic coefficient realization and derived restriction of scalars",
+   "results": "8 hits about StandardEtalePresentation and Algebra.Etale; none about derived sheaf operations.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map\", \"IsIso\"",
+   "results": "12 hits, including Functor.map_isIso, NatIso.isIso_map_iff and Functor.FullyFaithful.isIso_of_isIso_map.",
+   "date": "2026-10-21",
+   "verdict": "General isomorphism calculus applies to the final assembly; no intrinsic projection comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection",
+   "results": "0 Mathlib hits. Local rg found the generic fixed-coefficient projection_comparison_etale_proetale and the separately normalized intrinsic scalar mate, but no theorem relating their coefficient realizations.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the intrinsic scalar projection square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperEtaleOriginScalarIsomorphism",
+  "date": "2026-10-21",
+  "group": "W6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "First paragraph tensor comparison and final site transport: compatibility of the proper-factor projection with the scalar counit mate",
+   "via": [
+    "lem-fix-proper-etale-origin-scalar-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-fix-proper-etale-origin-scalar-data",
+ "kind": "definition",
+ "title": "Canonical scalar, tensor and direct-image comparisons at etale origins",
+ "statement": "Let A and B be finite commutative rings, φ:A→B, and p:Z→Y a qcqs scheme morphism. Use the ordinary unbounded module-sheaf derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules] and canonical site comparison [def-weil-pbc-site-comparison-morphism]. Write F for its intrinsic coefficient realization, U for exact scalar restriction [lem-weil-pbc-ring-sheaf-change-adjunction], S for derived scalar extension [lem-fix-proetale-scalar-mate-normalization], R_e for etale direct image and P for intrinsic pro-etale direct image. Define H(M)=M tensor_A^L B, q_M:F(H(M))≅USF(M) by the existing normalized scalar/tensor and site/scalar isomorphisms. For bounded-below E define b_E:F(R_e E)≅P(F(E)) by the included fixed counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate], followed by the section-normalized realization and direct-image comparisons. Define π_e:R_e(M) tensor B_Y→R_e(M tensor B_Z) to be the actual etale projection [def-kun-projection-formula-map] followed by the canonical coefficient pullback. These are exactly the eight constructions extracted, verbatim, from the proper scalar-isomorphism module; no data or signatures change.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Extraction of the existing supporting definitions; their expressions, scalar-section normalizations and derived representative normalizations are unchanged."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperEtaleOriginScalarData",
+  "file": "lean/Sheaf/Paper/ProperEtaleOriginScalarData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.properOriginPushIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properOriginPushIso",
+   "AlgebraicGeometry.ProEtale.properOriginRestrictionIso",
+   "AlgebraicGeometry.ProEtale.properOriginEtaleTensor",
+   "AlgebraicGeometry.ProEtale.properOriginScalarTensorImage",
+   "AlgebraicGeometry.ProEtale.properOriginTensorIso",
+   "AlgebraicGeometry.ProEtale.properOriginFixedMateIso",
+   "AlgebraicGeometry.ProEtale.properOriginMateIso",
+   "AlgebraicGeometry.ProEtale.properOriginEtaleProjection"
+  ],
+  "statement": "def properOriginPushIso (A : Type u) [CommRing A]\n    {Z Y : Scheme.{u}} (p : Z ⟶ Y) :\n    directImageConstantPush A p ≅ Scheme.proEtaleConstantDerivedDirectImage p A",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7992d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T152415-L-1937288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7992d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T152415-L-1937288",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical, sorry→proof); 8 moved defs vs live bodies (identical, publicly re-exported); new square = item's equation conjunct for qcqs p without IsIso; item node proof_deps vs Lean proof; unit realized empty"
+ }
+}

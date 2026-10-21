@@ -20,80 +20,57 @@
  ],
  "proof": [
   {
-   "text": "By [pqf-lem-proper-basic], $p$ is quasi-compact and quasi-separated. Set $N=B_{Y,\\mathrm{et}}$, regarded as a constant $A$-module in degree zero, and use [lem-sfb-geometric-inverse-image-constant-module] for the geometric inverse images $p_{\\mathrm{et}}^{-1}$ and $\\nu_T^*$: canonically $p_{\\mathrm{et}}^{-1}N=B_{Z,\\mathrm{et}}$ and $\\nu_T^*B_{T,\\mathrm{et}}=B_{T,\\mathrm{proet}}$. Thus the object $L=E_e\\otimes_A^Lp_{\\mathrm{et}}^{-1}N$ is $H_e$. Both $E_e$ and $L$ are bounded below by hypothesis. These are exactly the two boundedness assumptions in [lem-sfb-projection-comparison-etale-proetale]; no boundedness of a tensor of $Rp_*E_e$ is being inferred.",
+   "text": "Properness implies qcqs by Mathlib instances. Apply the independent etale-origin scalar projection square to E and its assumed bounded tensor H(E). This supplies the inverse-free equality of the actual maps.",
    "uses": [
-    "pqf-lem-proper-basic",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-sfb-projection-comparison-etale-proetale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison, hypotheses; constant objects: sites.tex Tags 0H7J and 00YV"
-   }
-  },
-  {
-   "text": "The finite additive group of $A$ has a positive exponent, so $A$ is a torsion ring. Apply [lem-kun-0f0g] to $p$, $E_e$, and $N=B_{Y,\\mathrm{et}}$. It says that the actual counit-defined projection arrow $\\pi_e:Rp_{\\mathrm{et},*}E_e\\otimes_A^LN\\to Rp_{\\mathrm{et},*}H_e$ is invertible. This theorem allows unbounded inputs and does not require $N$ to be flat or perfect. Its arrow is the arrow of [def-kun-projection-formula-map], rather than an unspecified isomorphism of the endpoints.",
-   "uses": [
-    "lem-kun-0f0g",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; named arrow from sites-cohomology.tex Tag 0B56"
-   }
-  },
-  {
-   "text": "Use the notation of [lem-sfb-projection-comparison-etale-proetale] with $K=E_e$, $N=B_{Y,\\mathrm{et}}$ and $L=H_e$: $F_T=\\nu_T^*$, $R_e=Rp_{\\mathrm{et},*}$, $R_p=Rp_{\\mathrm{proet},*}$, $a:F_Zp_{\\mathrm{et}}^{-1}\\simeq p_{\\mathrm{proet}}^{-1}F_Y$, $t_T:F_T(-\\otimes_A^L-)\\simeq F_T(-)\\otimes_A^LF_T(-)$, and $h=(1\\otimes a_N)t_{Z;E_e,p_{\\mathrm{et}}^{-1}N}$. Its equality is\n$$R_p(h)b_{H_e}F_Y(\\pi_e)=\\pi_p(b_{E_e}\\otimes1)t_{Y;R_eE_e,N}.$$\nHere $\\pi_p$ is precisely the ordinary $A$-linear pro-etale projection arrow at $(E,B_Y)$. The comparisons $b_{E_e},b_{H_e}$ are the counit-normalized mates of [lem-weil-pbc-comparison-direct-image-canonical-mate]. The comparisons $t_T$ are the canonical derived tensor isomorphisms of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus the displayed equality uses exactly the comparisons specified in the item.",
-   "uses": [
-    "lem-sfb-projection-comparison-etale-proetale",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-fix-etale-origin-scalar-projection-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, remark-compatible-with-diagram, specialized to the etale/pro-etale square; projection comparison node states the resulting named-map equation"
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
    }
   },
   {
-   "text": "Solve the equation in step 3 by composing on the right with $t_{Y;R_eE_e,N}^{-1}(b_{E_e}^{-1}\\otimes1)$:\n$$\\pi_p=R_p(h)b_{H_e}F_Y(\\pi_e)t_{Y;R_eE_e,N}^{-1}(b_{E_e}^{-1}\\otimes1).$$\nEvery factor is invertible: $h$ is a composite of tensor and pullback isomorphisms, the two $b$'s are invertible at the bounded-below objects from step 1, and $\\pi_e$ is invertible by step 2. Functors and tensoring take an inverse to an inverse. Consequently $\\pi_p$ is invertible, with precisely this conjugation formula.",
+   "text": "Cancel q_(R_e E) and US(b_E) on the source. Functoriality of US, and the hom/inverse equations for b_E and q, yield the displayed conjugation formula. No projection morphism is inverted in this cancellation.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, remark-compatible-with-diagram; elementary rearrangement of the equation in step 3"
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
    }
   },
   {
-   "text": "For the B-linear mate $\\chi_{p,E}$ specified in the statement, [lem-fix-proetale-scalar-mate-normalization] identifies its scalar restriction, using the canonical tensor and direct-image restriction identifications, with the same $\\pi_p$. Therefore the formula in step 4 is also the required formula for the scalar restriction of $\\chi_{p,E}$; in particular that restriction is invertible. Apply the conservativity assertion of [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_T=A_T$, $S_T=B_T$ and their canonical constant-coefficient structural identifications. It reflects this isomorphism, proving that $\\chi_{p,E}$ itself is an isomorphism in $D(Y_{\\mathrm{proet}},B)$. The normalization has no flatness or boundedness hypothesis, and the only boundedness used above was that of $E_e,H_e$.",
+   "text": "The additive group of finite A is torsion, by Mathlib isAddTorsion_of_finite. Apply the existing proper torsion projection theorem to E and the A-module B_Y. Its actual projection morphism is an isomorphism, as is the canonical coefficient pullback factor, so properOriginEtaleProjection is invertible.",
    "uses": [
-    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-kun-0f0g"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n; transport through the counit-mate etale/pro-etale comparisons"
+   }
+  },
+  {
+   "text": "Every factor on the right of the conjugation equation is an isomorphism, hence U(χ) composed with d is an isomorphism. Since d is invertible, so is U(χ). Exact scalar restriction preserves homology and reflects ordinary isomorphisms. Applying the unbounded homology criterion therefore reflects the isomorphism to χ itself.",
+   "uses": [
     "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 0D6D, 0D6E and 07A6 for the coefficient restriction comparisons"
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
    }
   }
  ],
  "proof_deps": [
-  "pqf-lem-proper-basic",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-fix-etale-origin-scalar-projection-square",
   "lem-kun-0f0g",
-  "def-kun-projection-formula-map",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-fix-proetale-scalar-mate-normalization",
   "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0G specialized to the constant A-module B, assembled with the existing named-map projection-comparison and scalar-mate-normalization statements"
+  "place": "Proper torsion projection (0F0G), combined with the independent qcqs intrinsic projection square (0E48/0B56); cancellation and conservative exact restriction are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -210,14 +187,6 @@
   "module": "Sheaf.Paper.ProperEtaleOriginScalarIsomorphism",
   "declaration": "AlgebraicGeometry.ProEtale.properEtaleOriginScalarIsomorphism",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.properOriginPushIso",
-   "AlgebraicGeometry.ProEtale.properOriginRestrictionIso",
-   "AlgebraicGeometry.ProEtale.properOriginEtaleTensor",
-   "AlgebraicGeometry.ProEtale.properOriginScalarTensorImage",
-   "AlgebraicGeometry.ProEtale.properOriginTensorIso",
-   "AlgebraicGeometry.ProEtale.properOriginFixedMateIso",
-   "AlgebraicGeometry.ProEtale.properOriginMateIso",
-   "AlgebraicGeometry.ProEtale.properOriginEtaleProjection",
    "AlgebraicGeometry.ProEtale.properEtaleOriginScalarIsomorphism"
   ],
   "file": "lean/Sheaf/Paper/ProperEtaleOriginScalarIsomorphism.lean",
@@ -234,5 +203,15 @@
   "group": "NO",
   "result": "pass",
   "note": "Only the item's lean field changed; the statement in the record matches the file verbatim; one module, theorem proof sorry, helpers canonical with real data, docstrings with source and blueprint and steps 1-5 present. H3: proper p, finite A→B (ULift size convention), E_e in D+ as DerivedCategory.Plus, hH = H_e (Etale.derivedTensor with scalarCoefficient) IsGE n, ν via finiteCoefficientIntrinsicDerivedComparison, χ = directImageScalarComparison (the same χ as the normalization stmt_dep); conjunct 1 IsIso; conjunct 2 = US(b_E⁻¹)≫q_Y⁻¹≫ν(π_e)≫b_H≫R_p(q_Z) with π_e = rightDerivedLowerStarProjectionMap at B_Y plus p*B_Y=B_Z, b = fixedComparisonDirectImageMatePlus at E_e and H_e; types checked end to end, no flatness or extra hypotheses; edge cases including Z/4→Z/2 exclusion fine. Not recompiled (no file changed; worker clean 6.7 s). Advisories: A1 q uses scalarTensorIso+siteScalarIso (theorem module lem-finite-compact-support-scalar-transport, not a stmt_dep) instead of the ringed-topoi tensor comparison, canonical and equivalent, stage 3 needs the routine q = scalarMateDerivedTensorIso∘t coherence; A2 report claims ringedTopoiCanonicalDerivedTensorComparison is used but it is not referenced (redundant public import)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7992d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T152415-L-1937288",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical, sorry→proof); 8 moved defs vs live bodies (identical, publicly re-exported); new square = item's equation conjunct for qcqs p without IsIso; item node proof_deps vs Lean proof; unit realized empty"
  }
 }
