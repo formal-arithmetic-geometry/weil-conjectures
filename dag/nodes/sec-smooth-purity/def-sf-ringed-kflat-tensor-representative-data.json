@@ -1,0 +1,113 @@
+{
+ "id": "def-sf-ringed-kflat-tensor-representative-data",
+ "kind": "definition",
+ "title": "Existing ringed-site tensor functors and resolving representative comparison",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site essentially small in a coefficient universe $r$, and let $R$ be a sheaf of commutative rings with values in that universe. Write $\\mathcal A=\\operatorname{Mod}(R)$ for the category of module sheaves [def-weil-sheaf-of-modules-category]. Define $\\operatorname{ordinaryTensor}_R:\\mathcal A\\to\\operatorname{Fun}(\\mathcal A,\\mathcal A)$ to be the curried sheafified tensor [def-pur-sheaf-tensor-product], and $\\operatorname{totalTensor}_R$ to be its curried signed direct-sum total tensor on integer-indexed cochain complexes [def-pc-tensor-complex-sheaves]. Given a localization universe for $D(R)$, define $\\operatorname{derivedTensor}_R$ to be the currying of the derived tensor selected by [lem-weil-pbc-site-derived-tensor-descent], with precisely that theorem's selected homotopy and resolving comparison isomorphisms. For K-flat complexes $A,B$ [def-pc-kflat-complex] whose terms are flat module sheaves [def-pc-flat-sheaf-modules], define\n$$\\operatorname{representativeIso}_{A,B}:Q_R\\operatorname{Tot}(A\\otimes_R B)\\xrightarrow{\\sim}\\operatorname{derivedTensor}_R(Q_RA,Q_RB)$$\nas the composite of the inverse under $Q_R$ of the selected homotopy-total comparison at $(A,B)$, followed by the selected resolving comparison at their images in the full subcategory of flat-term K-flat complexes. These are abbreviations for the existing module category and tensor functors, together with the comparison from the same selected descent data; no new tensor, resolution choice or triangulated-exactness assertion is part of this definition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YM and 06YU, signed total tensor and the K-flat derived tensor construction immediately preceding definition-derived-tor; the resolving comparison of lem-weil-pbc-site-derived-tensor-descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ringed site derived tensor flat term K-flat representative comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} R] :\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ ∀ (C : ShortComplex <| ModuleCat R) (_ : C.Exact), (C.map (tensorRight M) |>.Exact)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ PreservesFiniteLimits (tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory.Q",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "representativeIso|siteDerivedTensor|ordinaryTensor Algebra/Homology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l KFlatFixedTensor\\.(Modules|ordinaryTensor|totalTensor|derivedTensor|representativeIso) dag/nodes; rg -n representativeIso|namespace.*KFlatFixedTensor lean/WeilConjectures lean/Sheaf; blueprint_refs.py search representative tensor",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-kflat-fixed-tensor-triangulated.json\nOnly the theorem node names these helpers; no definition node owns them. Source search locates all five together in lean/Sheaf/Algebra/Homology/KFlatFixedTensorTriangulated.lean; no matching WeilConjectures definition. blueprint_refs search: 0 blueprint nodes match representative tensor.",
+   "date": "2026-10-21",
+   "verdict": "Existing published helpers, but no definition node carrying this data; bind existing:true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ringed-kflat-single-tensor-comparison",
+  "date": "2026-10-21",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-reduction-flat-model",
+   "place": "Proof, final sentence: K-flat tensor with a degree-zero module; expose the existing tensor functors and the resolving comparison used to normalize its canonical comparison.",
+   "via": [
+    "lem-sf-ringed-kflat-single-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-flat-model",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated",
+  "declaration": "SheafOfModules.KFlatFixedTensor.representativeIso",
+  "declarations": [
+   "SheafOfModules.KFlatFixedTensor.Modules",
+   "SheafOfModules.KFlatFixedTensor.ordinaryTensor",
+   "SheafOfModules.KFlatFixedTensor.totalTensor",
+   "SheafOfModules.KFlatFixedTensor.derivedTensor",
+   "SheafOfModules.KFlatFixedTensor.representativeIso"
+  ],
+  "statement": "def representativeIso\n    (A B : CochainComplex (Modules R) ℤ)\n    (hA : CochainComplex.IsKFlatIndependentCoefficients A)\n    (hB : CochainComplex.IsKFlatIndependentCoefficients B)\n    (hAf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X n))\n    (hBf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (B.X n)) :\n    DerivedCategory.Q.obj (((totalTensor R).obj A).obj B) ≅\n      (((derivedTensor R).obj (DerivedCategory.Q.obj A)).obj (DerivedCategory.Q.obj B))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Owns exactly the four existing abbreviations Modules, ordinaryTensor, totalTensor, derivedTensor and the existing representativeIso definition in this module. representativeIso composes the selected homotopy comparison with the selected resolving comparison from site_derived_tensor_descent_independentCoefficients; it does not use kFlat_fixed_tensor_triangulated. No module or declaration is added or modified."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f60ee4e1e",
+  "group": "Q18",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f60ee4e1e",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at b588d79c. Lean file byte-identical to the previously reviewed and clean-compiled module (37.1 s). Item record differs only in stmt_deps: the theorem node lem-weil-pbc-kflat-fixed-tensor-triangulated is replaced by the new existing:true def-sf-ringed-kflat-tensor-representative-data (owns exactly Modules/ordinaryTensor/totalTensor/derivedTensor/representativeIso in KFlatFixedTensorTriangulated; statement verbatim in live source; node text matches the construction (Qh c)^-1 then d from the descent theorem's .choose_spec; 6 genuine stmt_deps, all live; no competing owner) and def-pc-flat-sheaf-modules (IsFlatOnSite in hAf/hBf). No base stmt_dep dropped. Mathematics re-confirmed: independent universes, only K-flatness on P, arbitrary M, naturality right edge Q(T(u,f)), resolution normalization pins c so ∃! is legitimate; edge cases P=0, R[0], Z--2-->Z with Z/2, contractible non-flat terms. Report sections present. No fixes; no compile rerun (unchanged file)."
+ }
+}

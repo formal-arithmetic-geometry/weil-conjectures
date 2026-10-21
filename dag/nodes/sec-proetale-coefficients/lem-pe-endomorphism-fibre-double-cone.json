@@ -202,5 +202,32 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-0e1bac8a5 (reviewer sub-agent of L); spot-checked: I read the item in full and redid every step by hand, using the cone convention (db+fa,-da), the shift convention (-d, no sign on morphisms) and the -p boundary from def-weil-abstract-derived-category and Stacks 014E/011G. (1) K(V,r) has differential (dv,-du-rv) with square zero, and c=diag(t,s) is a chain map by fs=tf. (2) D_S=(db+fa,-da,-db'-fa'-tb,da'-sa) and D_T=(db+fa,-db'-tb+fh,-da,dh+sa); D_TΦ=ΦD_S. (3) Ψ is the inverse; naturality uses the three square hypotheses. (4) σ1 intertwines (-dv,du-sv) with (-dv,du+sv). ΦK(i)=i_{K(f)}=(b,b',0,0). σ1K(-p) and -p_{K(f)}Φ both give (-a,a'). (5) and (6) η_J is a chain map when sJ=0; J_C is a chain map with cJ_C=0; and Φη_{J_C}=(J'm',0,Jm,0)=Cone(η_J,η_{J'}). Edge cases checked: f=0, s=t=0, Z[0] with identities, characteristic 2. The statement and blueprint fields are unchanged from live, and the item matches the blueprint main-20261015 first-reduction Cones paragraph (lines 10-22) as the parent lem-pe-roos-cone-calculus uses it in its steps 4-5. The item is unsplit in live and side-live and has no repair note of its own, so the re-split rule does not apply. There are no new nodes. Only two Mathlib-leaf definition nodes are cited, so there is no route issue and no SGA. Duplicate check: lem-amb-signed-fibre-cone/-triangulated concern additive functors into Ab, which is a different setting, and lem-pe-principal-reduction-cone-calculus is a different construction. Advisory: steps 1 and 5 recompute pieces of the sibling lem-pe-endomorphism-fibre-coordinate-calculus inline instead of citing it; this is allowed because they are elementary. The report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.EndomorphismFibreDoubleCone",
+  "declaration": "CochainComplex.EndomorphismFibreDoubleCone.exists_interchange",
+  "declarations": [
+   "CochainComplex.EndomorphismFibreDoubleCone.coneEnd",
+   "CochainComplex.EndomorphismFibreDoubleCone.fibreMap",
+   "CochainComplex.EndomorphismFibreDoubleCone.sigmaOne",
+   "CochainComplex.EndomorphismFibreDoubleCone.Formula",
+   "CochainComplex.EndomorphismFibreDoubleCone.InverseFormula",
+   "CochainComplex.EndomorphismFibreDoubleCone.Augmentation",
+   "CochainComplex.EndomorphismFibreDoubleCone.exists_interchange"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/EndomorphismFibreDoubleCone.lean",
+  "statement": "theorem exists_interchange : ∃ e : ∀ {A B : CochainComplex D ℤ} (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t), mappingCocone (coneEnd s t f h) ≅ mappingCone (fibreMap s t f h), (∀ {A B : CochainComplex D ℤ} (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t), Formula s t f h (e s t f h) ∧ InverseFormula s t f h (e s t f h)) ∧ (∀ {A B A' B' : CochainComplex D ℤ} (s : A ⟶ A) (t : B ⟶ B) (s' : A' ⟶ A') (t' : B' ⟶ B') (f : A ⟶ B) (f' : A' ⟶ B') (h : s ≫ f = f ≫ t) (h' : s' ≫ f' = f' ≫ t') (α : A ⟶ A') (β : B ⟶ B') (hα : s ≫ α = α ≫ s') (hβ : t ≫ β = β ≫ t') (hsq : f ≫ β = α ≫ f'), ∃ (hc : coneEnd s t f h ≫ mappingCone.map f f' α β hsq = mappingCone.map f f' α β hsq ≫ coneEnd s' t' f' h') (hk : fibreMap s t f h ≫ fibreMap t t' β hβ = fibreMap s s' α hα ≫ fibreMap s' t' f' h'), fibreMap (coneEnd s t f h) (coneEnd s' t' f' h') (mappingCone.map f f' α β hsq) hc ≫ (e s' t' f' h').hom = (e s t f h).hom ≫ mappingCone.map (fibreMap s t f h) (fibreMap s' t' f' h') (fibreMap s s' α hα) (fibreMap t t' β hβ) hk) ∧ (∀ {A B : CochainComplex D ℤ} (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t), ∃ (hi : t ≫ mappingCone.inr f = mappingCone.inr f ≫ coneEnd s t f h) (hp : coneEnd s t f h ≫ (mappingCone.triangle f).mor₃ = (mappingCone.triangle f).mor₃ ≫ s⟦(1 : ℤ)⟧'), (fibreMap t (coneEnd s t f h) (mappingCone.inr f) hi ≫ (e s t f h).hom = mappingCone.inr (fibreMap s t f h)) ∧ (fibreMap (coneEnd s t f h) (s⟦(1 : ℤ)⟧') (mappingCone.triangle f).mor₃ hp ≫ (sigmaOne s).hom = (e s t f h).hom ≫ (mappingCone.triangle (fibreMap s t f h)).mor₃)) ∧ (∀ {A B M M' : CochainComplex D ℤ} (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (g : M ⟶ M') (J : M ⟶ A) (J' : M' ⟶ B), J ≫ s = 0 → J' ≫ t = 0 → ∀ hJ : J ≫ f = g ≫ J', ∃ (η : M ⟶ mappingCocone s) (η' : M' ⟶ mappingCocone t) (ηC : mappingCone g ⟶ mappingCocone (coneEnd s t f h)), Augmentation s J η ∧ Augmentation t J' η' ∧ Augmentation (coneEnd s t f h) (mappingCone.map g f J J' hJ.symm) ηC ∧ ∃ hs : g ≫ η' = η ≫ fibreMap s t f h, ηC ≫ (e s t f h).hom = mappingCone.map g (fibreMap s t f h) η η' hs)",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68bb3e67b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (30a72bc98408): the theorem stmt_dep lem-weil-signed-mapping-cocone-shift is dropped; Mathlib mappingCone.map and its (-1) shift replace coneMap/coconeMap; sigmaOne (verbatim signedCoconeShiftIso s 1) is an own-module helper with docstrings, the route the previous review allowed. Node fields other than lean equal side-live; stmt_deps are the original two. Re-checked against Mathlib source: mappingCocone fst/snd are plain v/u projections and the fibre differential is (dv,-du-sv); coneEnd=diag(t,s), fibreMap=diag(f,f); Formula/InverseFormula pin Phi=(b,b',a,-a') and Psi=(b,a,b',-h); naturality via hα/hβ/hsq; triangle.mor₃ is the -p boundary; sigmaOne = -(shiftIso.inv shifted) = (v,-u); Augmentations are unique, so no arbitrary maps. Statement field verbatim; single sorry; docstrings present; imports used. No compile (no file changed). Advisory: sigmaOne duplicates the m=1 signedCoconeShiftIso owned by a theorem-node module."
  }
 }

@@ -397,5 +397,51 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-851f5ae87 (reviewer sub-agent of L); spot-checked: The statement and stmt_deps are byte-identical to live. The item is unsplit in live, not on the 10-19 drop list and has no repair note, so the re-split rule does not apply. There are no new nodes and no SGA source. The pullback clause rests on Step 1's structural map: c is built from the constant maps c_n by the limit property, never by commuting inverse image with the limit. Step 3's map b_n is the inverse of the scalar-association isomorphism κ of def-pur-cochain-coefficient-arrows for the square (R_Y,S_{Y,n},R_X,S_{X,n}); I checked both formulas by hand, balancing over f^{-1}R_Y (using the square) and both composites. For the tensor clause, Step 4 constructs d_n and proves it invertible itself, using bilinear universality, tensor commuting with direct sums and the Koszul sign. Step 5's transitions and Step 8's augmentations, whose shifted-product coordinate stays 0, are verified. Step 9 identifies the cone model (u equals 1−s) with R lim through the strict Roos derivation and exact countable products; Step 10 descends the comparison uniquely through resolving-representative whiskering. Stacks 0G7E, 06YY, 07A4 and 0941 were read at their labels. No existing node states the item (lem-pur-coefficient-pullback-comparison is the generic κ, def-weil-pbc-completed-pullback a different presentation). Small cases checked: f = id, empty scheme, n = 1, degree-0 free modules, unbounded U and V. Generic cross-unit tool_uses accepted. Advisory: Step 4's cited tensor-reduction node gives no normalization, but the step does not need one."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "declaration": "WeilConjectures.IntegralAmbient.integralAmbientOperationModels",
+  "declarations": [
+   "WeilConjectures.IntegralAmbient.coefficientMap_existsUnique",
+   "WeilConjectures.IntegralAmbient.coefficientMap",
+   "WeilConjectures.IntegralAmbient.push",
+   "WeilConjectures.IntegralAmbient.push_isRightAdjoint",
+   "WeilConjectures.IntegralAmbient.pull",
+   "WeilConjectures.IntegralAmbient.adjunction",
+   "WeilConjectures.IntegralAmbient.push_additive",
+   "WeilConjectures.IntegralAmbient.pull_additive",
+   "WeilConjectures.IntegralAmbient.pullComplex",
+   "WeilConjectures.IntegralAmbient.pullSection",
+   "WeilConjectures.IntegralAmbient.finitePullSection",
+   "WeilConjectures.IntegralAmbient.pullTower",
+   "WeilConjectures.IntegralAmbient.tensorTower",
+   "WeilConjectures.IntegralAmbient.pullTowerModel",
+   "WeilConjectures.IntegralAmbient.tensorTowerModel",
+   "WeilConjectures.IntegralAmbient.pullTowerIso",
+   "WeilConjectures.IntegralAmbient.tensorTowerIso",
+   "WeilConjectures.IntegralAmbient.pullOperationUnit",
+   "WeilConjectures.IntegralAmbient.tensorOperationUnit",
+   "WeilConjectures.IntegralAmbient.pullOperationUnit_coordinates",
+   "WeilConjectures.IntegralAmbient.tensorOperationUnit_coordinates",
+   "WeilConjectures.IntegralAmbient.pull_good",
+   "WeilConjectures.IntegralAmbient.tensor_good",
+   "WeilConjectures.IntegralAmbient.tensorRepresentative",
+   "WeilConjectures.IntegralAmbient.integralAmbientOperationModels"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralAmbientOperationModels.lean",
+  "statement": "theorem integralAmbientOperationModels {X Y : Scheme.{t}} (f : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (ε : DerivedCategory.Q ⋙ F ⟶ pullComplex l E f ⋙ DerivedCategory.Q) (α : F ⋙ IntegralOnSlice.completion l E X none ≅ integralDerivedPullback l E f), F.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, IsIso (ε.app P.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, α.hom.app (DerivedCategory.Q.obj P.obj) ≫ (integralDerivedPullbackComparison l E f).hom.app P = (IntegralOnSlice.completion l E X none).map (ε.app P.obj) ≫ (IntegralOnSlice.completionComparison l E X none).hom.app ⟨(pullComplex l E f).obj P.obj, pull_good l E f P.obj P.property⟩ ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map ((pullTowerIso l E f).hom.app P.obj))) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, (IntegralOnSlice.completionUnit l E X none).app (F.obj (DerivedCategory.Q.obj P.obj)) ≫ α.hom.app (DerivedCategory.Q.obj P.obj) ≫ (integralDerivedPullbackComparison l E f).hom.app P = ε.app P.obj ≫ DerivedCategory.Q.map (pullOperationUnit l E f P.obj)) ∧ ∀ W : Scheme.{t}, W = X ∨ W = Y → ∃ β : (IntegralOnSlice.duality l E W none).closed.tensor ⋙ IntegralOnSlice.completion l E W none ≅ integralCompletedTensor l E W, (∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory, β.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫ (integralCompletedTensorComparison l E W).hom.app (P, Q) = (IntegralOnSlice.completion l E W none).map (tensorRepresentative l E W P Q).inv ≫ (IntegralOnSlice.completionComparison l E W none).hom.app ⟨_, tensor_good l E W P.obj Q.obj P.property Q.property⟩ ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map ((tensorTowerIso l E W).hom.app (P.obj, Q.obj)))) ∧ (∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory, (IntegralOnSlice.completionUnit l E W none).app ((IntegralOnSlice.duality l E W none).closed.tensor.obj (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)) ≫ β.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫ (integralCompletedTensorComparison l E W).hom.app (P, Q) = (tensorRepresentative l E W P Q).inv ≫ DerivedCategory.Q.map (tensorOperationUnit l E W P.obj Q.obj))",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary pullback is specified by the projection-induced coefficient map, its actual module adjunction and the universal left-derived counit. The natural comparisons are fixed on good representatives by the whole strict tower isomorphisms, with explicit balanced-generator normalizations and zero shifted-product augmentation coordinates. Site and coefficient universes remain independent. Supporting declarations belong to the canonical models introduced by this node; all theorem proofs are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01c6f03a2",
+  "group": "O3",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. ℓ-invertibility on X and Y, independent universes t/u, no extra hypotheses. coefficientMap is the unique map compatible with every finite projection; no identification f⁻¹R_Y=R_X. F is pinned by IsLeftDerivedFunctor plus counit invertible on flat-term K-flat complexes. α and β (W=X∨W=Y, recorded duality tensor) are pinned on good representatives as completion comparison ≫ Q(Roos(whole strict-tower iso)), so neither is hollow. pullTowerModel/tensorTowerModel are ∃! natural isos of whole towers, normalized on generators by the node's Step 3–4 formulas. Augmentation clauses plus the *_coordinates theorems give the product of finite insertions and the zero shifted-product coordinate. Right-hand sides are the recorded integralDerivedPullback/integralCompletedTensor. Statement verbatim; declarations complete; node differs from side-live only in lean; sorry-only proofs; source and blueprint docstrings present. Advisories: pull ≡ Mathlib SheafOfModules.pullback; existing completedModulePullback forces equal universes, so it is unusable here; augmentation clause 4 is derivable from clause 3. Compile: the 248-line prefix was clean in 45.1 s earlier; the full file hit the 60 s limit at load 172 after 24 s CPU (starvation). The pushed head implies deliver2's server compile passed. Land at lower load; if it times out, set linter.all false or split out the coordinate theorems."
+ }
 }

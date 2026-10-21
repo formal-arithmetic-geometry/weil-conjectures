@@ -15,7 +15,9 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-kun-projection-formula-map",
   "def-weil-pbc-cartesian-square",
-  "def-kun-unbounded-exchange"
+  "def-kun-unbounded-exchange",
+  "def-pur-open-coefficient-normalizations",
+  "def-pur-etale-scalar-pullback-iso"
  ],
  "proof": [
   {
@@ -209,5 +211,25 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-224bb61d7 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited statement and the source in full, and changed nothing; the review is in review.md. The delivery adds 0 new nodes. The live item is still unsplit, there is no repair note for it, and nothing it cites is in the dropped list. Source: Stacks sites-cohomology Tag 0E47 (remark-compose-base-change-horizontal, lines 4094-4123), where the verification is omitted. The item is that compatibility for the cube made of the coefficient square (A->B on the identity topos) and the geometric cartesian square; Steps 2-5 write out the omitted verification (D5). Step 1: the normalization lemma gives theta_{gf}=(f_B^*theta_g)(theta_f g_A^*). Inverting it gives lambda_{gf}=(lambda_f g_A^*)(f_B^*lambda_g), which matches the item. Applying it to fh=gf' with theta_R=c_{h,f}^{-1}c_{f',g} gives (*); I re-derived this. The constant-ring identification is clause (1)/(2) of prop-weil-pbc-inverse-image-modules-exact. Steps 2-5: I recomputed (C) from the definition of chi and the mate formula, (E) from the counit form of Ex in def-kun-unbounded-exchange, and the transposes T_L and T_R naturality by naturality. They match, and injectivity of the adjunction Hom bijection then gives the equality. No properness, boundedness, flatness or invertibility is used. Small cases checked: A=B (both sides reduce to Ex), the identity square, M=0, and the non-flat map Z/4->Z/2. Duplicates checked and none states the item: lem-fix-direct-image-scalar-exchange (pro-etale sites), fix-lem-exchanges clause 1 (D^b_c, finite type only), the ringed exchange/tensor coherence lemma (Tag 0E48), lem-pur-ringed-coefficient-projection-cocycle, lem-pur-etale-direct-image-scalar-composition, sbc-lem-base-change-composition, the module base-change pasting lemma and lem-weil-pbc-mate-pasting. Tool use lem-sfb-kflat-scalar-comparison-normalization is accepted: it is a generic scalar/pullback composition law that sk-prop-an does not supply. Batch 5: the flagged reach to lem-trf-geometric-inverse-image-exact is exactness of inverse image (Stacks 04JC). That is a general sheaf fact that neither assumption gives and that is not a step of the trace formula proof. Recomputed on side-live, both the normalization lemma and that node stay in the batch-5 closure without the item, so the citation adds nothing; accepted. Advisory: the inherited statement names lambda_u by lem-weil-pbc-ringed-topoi-derived-tensor-pullback, whose statement gives only an iso in D(A_W). Step 1 correctly reads lambda_u as the canonical K-flat balancing comparison of the normalization lemma (the same map on K-flat models); the stage-2 writer should define lambda by that lemma."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDirectImageScalarExchange",
+  "declaration": "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap_scalarExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDirectImageScalarExchange.lean",
+  "statement": "theorem exactDerivedBaseChangeMap_scalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X' X Y' Y : Scheme.{u}} (h : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) (sq : ChosenCartesianSquare h f' f g) (M : DerivedCategoryModule A X) : D(upperStar (ModuleCat.{u + 1} B) g).map ((scalarMate φ f).app M) ≫ (exactDerivedBaseChangeMap (ModuleCat.{u + 1} B) sq.toCommSq).app ((scalarExtension φ X).obj M) ≫ R(lowerStar (ModuleCat.{u + 1} B) f').map ((properOpenCoefficientPullbackIso φ h).hom.app M) = (properOpenCoefficientPullbackIso φ g).hom.app (R(lowerStar (ModuleCat.{u + 1} A) f).obj M) ≫ (scalarExtension φ Y').map ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sq.toCommSq).app M) ≫ (scalarMate φ f').app (D(upperStar (ModuleCat.{u + 1} A) h).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing canonical scalarMate and its K-flat-normalized scalarPullbackIso, transported to exact inverse image by properOpenCoefficientPullbackIso. The exchange is exactly exactDerivedBaseChangeMap on the chosen Cartesian square. No new helper or duplicated scalar construction.",
+  "fixed_by": "NT-stage2-cc-f75624857"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f75624857",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: scalarMate = mateEquiv of scalarPullbackIso under derivedUpperStarLowerStarAdjunction (node chi); properOpenCoefficientPullbackIso = exactness transport of scalarPullbackIso, direction u_B^*Q_T -> Q_W u_A^* (node lambda); exactDerivedBaseChangeMap on sq.toCommSq with CommSq h f' f g (g'=h); both composites in node order; no extra hypotheses; edge cases A=B, identity square, M=0, empty schemes, zero ring, Z/4->Z/2 covered; Steps 1-5 re-derived. Only the item changed vs live (lean, stmt_deps + 2 landed def nodes). FIX (H9/H10 mechanical): dropped unused plain imports Sheaf.Paper.KFlatScalarComparisonNormalization (no published olean, 60 s per-file timeout) and Mathlib.CategoryTheory.Adjunction.Mates; fixes/EtaleDirectImageScalarExchange.lean compiles clean in 31.3 s via nt_compile --json, signature unchanged. Advisories: scalarMate owner def-pur-etale-scalar-mate not in stmt_deps (S2 cannot add); report's proof-only-imports paragraph now stale."
  }
 }

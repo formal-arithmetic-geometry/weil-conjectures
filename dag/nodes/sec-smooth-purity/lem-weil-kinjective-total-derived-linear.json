@@ -245,5 +245,27 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-b00e24543 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to live side (unsplit there). The delivery adds only proof, proof_deps, proof_origin, split_report and searches, with no new nodes. The item is not in route-pivot-dropped, has no repair note and cites no SGA. Sources checked: derived.tex 070I lemma-K-injective (1)<=>(3) at l.9632, 070Y and 070K; dga.tex 09MJ and 09MK. Step 1: sums, scalar multiples and homotopies descend to K(A), and U_K is well defined and linear without exactness. Step 2: linearity of Q on cochain maps (lem-weil-linear-abelian-derived-category) passes to K(A) through representatives, so T=Q_B U_K is linear. Step 3: the unbounded K-injective Hom bijection (lem-weil-pbc-kinjective-hom-derived) is linear, so its inverse lift is additive and homogeneous. Step 4: I verified the directions of the maps: c_M=eta^{-1}RU(q_M), and naturality of the unit at the lift (def-sfb-right-derived-functor) gives c_N RU(h) c_M^{-1}=T(lift). Step 5: cancelling the isomorphisms gives linearity, with no functorial choice of resolutions. I tested a=0, R=0, U=id and non-exact U=lim (the parent's use); none needs exactness or boundedness. The parent lem-weil-compact-support-representative-independence supplies every hypothesis. A whole-DAG duplicate scan found no general duplicate. Advisory: lem-sf-kinjective-derived-map-computation states the same formula, but only for chain resolutions; the item's version takes arbitrary isomorphisms in D, so re-deriving it in two lines in Step 4 is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveTotalDerivedLinear",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutions_linear",
+  "declarations": [
+   "CategoryTheory.Functor.kInjectiveDerivedRepresentativeIso",
+   "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutions_linear"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveTotalDerivedLinear.lean",
+  "statement": "theorem rightDerivedFunctorOfQuasiIsoResolutions_linear (R : Type r) [CommRing R] [CategoryTheory.Linear R A] [CategoryTheory.Linear R B] [U.Linear R] : (U.rightDerivedFunctorOfQuasiIsoResolutions enough).Additive ∧ Functor.Linear R (U.rightDerivedFunctorOfQuasiIsoResolutions enough) ∧ (∀ (M N : DerivedCategory A) (I J : CochainComplex A ℤ) [I.IsKInjective] [J.IsKInjective] (qM : M ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj I)) (qN : N ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj J)) (f : M ⟶ N), (∃! g : (HomotopyCategory.quotient A (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient A (.up ℤ)).obj J, DerivedCategory.Qh.map g = qM.inv ≫ f ≫ qN.hom) ∧ (∀ g : (HomotopyCategory.quotient A (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient A (.up ℤ)).obj J, DerivedCategory.Qh.map g = qM.inv ≫ f ≫ qN.hom → (U.kInjectiveDerivedRepresentativeIso enough I qM).inv ≫ (U.rightDerivedFunctorOfQuasiIsoResolutions enough).map f ≫ (U.kInjectiveDerivedRepresentativeIso enough J qN).hom = DerivedCategory.Qh.map ((U.mapHomotopyCategory (.up ℤ)).map g)))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d699f66e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "I checked the Lean against the node clause by clause. Hypotheses: R is any commutative ring; A and B are abelian R-linear categories with independent universes and derived categories assumed to exist; `enough` is the same arbitrary quasi-isomorphism hypothesis as def-sfb-right-derived-functor; U is additive and R-linear with no exactness assumed. Conclusions: the conjuncts .Additive and Functor.Linear R are the node's two equations. The helper c_M is RU.mapIso q followed by the inverse unit at I (the unit's direction U_K⋙Qh ⟶ Qh⋙RU was checked) and is real data. The ∃! lift with Qh.map g = qM.inv ≫ f ≫ qN.hom, followed by the formula cM.inv ≫ RU.map f ≫ cN.hom = Qh.map(U_K.map g) for every lift, matches the node's order and targets. The Stacks source (070I (1)/(3), derived.tex l.9632) was read; Mathlib Qh_map_bijective is the proof dep. Edge cases R=0, a=0, zero U, non-exact U, unbounded complexes and independent universes are covered. No duplicate: Mathlib's derived-functor linearity needs an exact functor, the live RingedDerivedPushforwardLinear is a special case, and KInjectiveDerivedMapComputation covers actual resolutions only and has no linearity statement. Compared with live side only the lean field changes; lean.statement appears verbatim in the file; there are no new nodes. Docstrings carry the sources, the blueprint tag and all five proof steps; the only proof is sorry. Advisory: the private DerivedCategory.KInjective import is only for the later proof. No compile run (no file changed); the worker reports a clean compile."
  }
 }

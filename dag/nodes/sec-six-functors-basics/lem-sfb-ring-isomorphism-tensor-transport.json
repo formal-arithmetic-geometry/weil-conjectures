@@ -17,7 +17,9 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
   "def-sfb-preserves-kflat-quasi-iso",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-sfb-sheaf-tensor-pure-section"
  ],
  "proof": [
   {
@@ -337,5 +339,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-c9ffc7d98 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, 0 new nodes, 11 steps on an item that was statement-only, and no repair note, so it is not a re-split. Live and side-live still have the item unsplit, and it cites no SGA source. Source check: Stacks sites-cohomology l.3011 (06YP) is proved from 06YM plus the cone characterization of quasi-isomorphisms. Step 8 does exactly that with lem-pc-tensor-mapping-cone-iso and lem-pur-quasi-iso-cone-acyclic, plus the converse that 0→A is a quasi-isomorphism iff A is acyclic. I checked every step against the statements of the nodes it cites. Steps 1-3: since c_U is bijective, balancing over R(U) and over S(U) give the same relations, the unit map is e=c^{-1}, and the unit check s⊗m↦sm holds. Step 4 uses the exact-functor cohomology lemma, and the equivalence reflects zero objects. I recomputed the step-5 symmetry signs: (-1)^{pq} and (-1)^{pq+q} match. Steps 6-7 test every exact sequence and every acyclic complex through B. Step 9 descends C and B by the localization universal property. In step 10, C sends flat-term K-flat complexes over S to such complexes over R, and the descent lemma extends the comparison from those models. Fault (C1/C4): step 11 uses the derived associator, unitors and symmetry of D(T) but cites no node that defines them; the descent lemma gives only the bifunctor and its model isomorphisms. FIX: I added lem-sf-ringed-derived-closed-symmetric-monoidal (constraints induced on K-flat total tensor representatives, symmetry (-1)^{pq}) to step 11's uses and proof_deps, with one sentence saying that on flat-term K-flat models both nodes use Tot(P⊗Q). I declared it in split_report.tool_uses; there is no cycle, since the item is not in its closure. I accept the seven tool_uses: the six declared generic ringed-site tools plus the one added. There is no duplicate: I checked sheaf-scalar-extension-ring-iso, kun-exact-monoidal-equivalence-derived (it needs functorial flat resolutions), scalar-ordinary-tensor-comparison and the etale-module-ring-iso nodes. Edge cases checked: c=id, the zero ring, a conjugation automorphism, a singleton site, and unbounded complexes. Advisory, not changed: the statement's ⊗^L and 'coherent' have no stmt_deps; the proof now pins both.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingIsomorphismTensorTransport",
+  "declaration": "SheafOfModules.ringIso_tensor_transport",
+  "declarations": [
+   "SheafOfModules.ringIsoCochainMonoidal",
+   "SheafOfModules.ringIsoCochainMonoidalStruct",
+   "SheafOfModules.ringIsoDerivedRestriction",
+   "SheafOfModules.ringIsoRestrictionComparison",
+   "SheafOfModules.RingIsoDerivedTensorCompatible",
+   "SheafOfModules.RingIsoTensorTransport",
+   "SheafOfModules.ringIso_tensor_transport"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingIsomorphismTensorTransport.lean",
+  "statement": "theorem ringIso_tensor_transport (c : R ≅ S) [HasDerivedCategory.{wR} (scalarModules J R)] [HasDerivedCategory.{wS} (scalarModules J S)] : Nonempty (RingIsoTensorTransport c)",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses packaged in RingIsoTensorTransport; derived localization universes wR and wS remain independent. The added definition dependencies own the reused scalarModules/scalarRestriction abbreviations and the existing local pure-section constructor. Returned-head repair: cite def-sfb-sheaf-tensor-pure-section, not the ordinary comparison theorem, for ScalarHomOrdinary.pure. Cache the existing cochain monoidal structure in two transparent specialization helpers to avoid repeated expensive instance synthesis; no mathematical clause or definition body changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6306d1b4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery after the 34ed7f39 RETURN. Diff vs prior snapshot: only (1) item stmt_dep lem-sfb-scalar-ordinary-tensor-comparison -> new def node def-sfb-sheaf-tensor-pure-section (existing:true on SheafOfModules.ScalarHomOrdinary.pure; real sheafification-unit def at side-live ScalarHomOrdinaryTensorComparison.lean l.36, not .choose of the theorem; statement verbatim from 'def'; Stacks 03EK; citations = stmt_deps; no duplicate node), (2) two priority-2000 cache instances ringIsoCochainMonoidal/Struct that are inferInstance/projection of the existing Mathlib cochain monoidal structure, listed in declarations with docstrings. Item lean.statement verbatim in file, statement/proof/base deps unchanged, clause-by-clause reading from prior review stands; sole sorry is the theorem; universes independent. Worker reports scompile 39.1 s clean and deliver2 dry run OK; no compile here (no file changed). Advisory: pure's docstring names the theorem node as blueprint; cache instances are global rather than local."
+ }
 }

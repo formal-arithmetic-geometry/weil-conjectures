@@ -1,0 +1,110 @@
+{
+ "id": "def-weil-signed-mapping-cocone-functor",
+ "kind": "definition",
+ "title": "Functorial mapping cocones and their specified signed shift comparisons",
+ "status": "split",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], with integer cochain complexes, mapping cones and shifts as in [def-weil-abstract-derived-category]. For chain maps $\\varphi:K\\to L$, $\\psi:K^\\prime\\to L^\\prime$ and a commuting square $(a,b)$ with $b\\varphi=\\psi a$, define the mapping-cocone map $\\operatorname{Cone}(\\varphi)[-1]\\to\\operatorname{Cone}(\\psi)[-1]$ by shifting the diagonal mapping-cone map induced by $(a,b)$. For any category $S$, functors $F,G:S\\to\\operatorname{CochainComplex}(\\mathcal A,\\mathbb Z)$ and natural transformation $\\tau:F\\to G$, define the functor $C_\\tau(X)=\\operatorname{Cone}(\\tau_X)[-1]$ on maps by this construction for $(F(f),G(f))$. For every chain map $\\varphi$ and integer $m$, specify the signed comparison $\\operatorname{Cone}(\\varphi[m])[-1]\\cong(\\operatorname{Cone}(\\varphi)[-1])[m]$ as $(-1)^m$ times the inverse standard cone-shift comparison shifted by $[-1]$, followed by the canonical interchange of shifts. If $S$ has integer shifts, $F,G$ have coherent shift comparisons and $\\tau$ commutes with them, define $C_\\tau(X[m])\\cong C_\\tau(X)[m]$ by the mapping-cocone isomorphism of the square of these comparisons, followed by that signed comparison. These specified component isomorphisms define the natural isomorphism $C_\\tau\\circ[m]\\cong[m]\\circ C_\\tau$ (shift first on the left, shift last on the right). This definition specifies the data; the zero and successive-shift coherence laws are separate assertions.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Cones paragraph: functoriality on complexes and shifts; coordinate conventions Stacks Tags 014E (derived.tex, definition-cone) and 011G (homology.tex, definition-shift-cochain)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coconeFunctor|signedCoconeShiftIso|def mappingCocone",
+   "results": "1 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing Sheaf.Algebra.Homology.SignedMappingCoconeShift definitions; the Mathlib results do not supply this complete signed functor interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\", \"shift\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing Sheaf.Algebra.Homology.SignedMappingCoconeShift definitions; the Mathlib results do not supply this complete signed functor interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functorial mapping cocone of a natural transformation between functors to cochain complexes with its signed shift natural isomorphism",
+   "results": "8 hits: CategoryTheory.Limits.Cocones.precompose, CochainComplex.mappingCone.shiftIso, CochainComplex.ShiftSequence.shiftIso, CochainComplex.shiftFunctor, CochainComplex.mappingCone.map_δ, CategoryTheory.Functor.mapCochainComplexShiftIso, CochainComplex.ShiftSequence.shiftIso_inv_app, CochainComplex.singleFunctors",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing Sheaf.Algebra.Homology.SignedMappingCoconeShift definitions; the Mathlib results do not supply this complete signed functor interface."
+  },
+  {
+   "tool": "grep",
+   "query": "signed-mapping-cocone|SignedCoconeShift\\.(coconeMap|coconeFunctor|signedCoconeShiftIso) in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search \"signed mapping cocone\"",
+   "results": "DAG: lem-weil-signed-mapping-cocone-shift, lem-weil-roos-comm-shift, lem-pe-roos-cone-calculus, lem-pe-endomorphism-fibre-coordinate-calculus; project Lean: SignedMappingCoconeShift.lean and RoosCommShift.lean; no WeilConjectures matches; blueprint search: 0 blueprint nodes match. No definition node owns these constructions.",
+   "date": "2026-10-21",
+   "verdict": "Existing theorem node records coconeCommShift; add definition ownership as explicitly required by the independent H2 return, without duplicating Lean data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-endomorphism-fibre-coordinate-calculus",
+  "date": "2026-10-21",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "Cones paragraph: functorial fibre and its specified signed shift comparisons.",
+   "via": [
+    "lem-pe-endomorphism-fibre-coordinate-calculus",
+    "lem-pe-roos-cone-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SignedMappingCoconeShift",
+  "declaration": "CategoryTheory.SignedCoconeShift.coconeFunctor",
+  "declarations": [
+   "CategoryTheory.SignedCoconeShift.coconeMap",
+   "CategoryTheory.SignedCoconeShift.coconeFunctor",
+   "CategoryTheory.SignedCoconeShift.signedCoconeShiftIso",
+   "CategoryTheory.SignedCoconeShift.coconeFunctorShiftIso",
+   "CategoryTheory.SignedCoconeShift.coconeFunctorShiftNatIso"
+  ],
+  "statement": "def coconeFunctor : S ⥤ CochainComplex A ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership of the existing constructions, as required by the independent H2 return for 876ef0d871f2. Reuses the five listed declarations with no new Lean module. The theorem node lem-weil-signed-mapping-cocone-shift supplies coconeCommShift and its coherence conclusions; the present definition node specifies the actual functor and signed comparison data."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee52db35",
+  "group": "Q22",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee52db35",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 876ef0d8. Item Lean module byte-identical (sha256 b07c226d); prior clause-by-clause reading and clean compile stand, re-read confirms node match (pair category Endofunctor.Algebra, Cone(s)[-1] coords (dv,-du-sv), diag K(a), additive, sigma_r NatIso with (v,(-1)^r u) hom/inv, isoZero/isoAdd coherence, eta_J=mappingCocone.lift J 0, naturality, shift compatibility). Item node vs side-live differs only in lean record and stmt_deps swap to new def-weil-signed-mapping-cocone-functor (existing:true on unchanged Sheaf.Algebra.Homology.SignedMappingCoconeShift) owning coconeMap/coconeFunctor/signedCoconeShiftIso/coconeFunctorShiftIso/coconeFunctorShiftNatIso; read module source: definitions match node statement, real data, statement verbatim, universes bound. Item uses only coconeFunctor and coconeFunctorShiftNatIso, so H2 resolved. No competing ownership or re-split note. Advisory: existing module docstring names only theorem blueprint; coneMap still owned only by theorem node; lem-weil-roos-comm-shift may need same H2 check."
+ }
+}

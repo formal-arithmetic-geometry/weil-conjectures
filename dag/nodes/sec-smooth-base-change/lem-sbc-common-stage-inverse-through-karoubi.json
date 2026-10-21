@@ -243,5 +243,47 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-fbd930e3e (reviewer sub-agent of L); spot-checked: Read in full the item (10 steps, no new nodes; statement and stmt_deps byte-identical to live, including the Karoubi-extended comparisons from the Q29 FIX), the cited statements (lem-sbc-coherent-pair-functor-descent, def-weil-karoubi-envelope, def-weil-finite-subextension-directed-set, def-weil-size-convention) and sketch32 lines 1291-1359 and 1412-1455 (pair category, Kar(Pair) coefficient categories, preservation of Karoubi summands). The live item is still unsplit, so the delivery is not superseded. There is no repair note for this item. The unit sk-rem-rest has no steps. The ancestor's step 4 uses the inverse, conjugation and presentation formulas, and the statement gives them. Every formula checks out. Step 1: extension of functors and transformations; natural because J(u)x_p=x_BH(u)=x_rH(u). Step 2: the extended data meets the descent hypotheses. U+_{E/E}=1 and the associators/b+ at a repeated field are the projector, i.e. the Karoubi identity. Kar(additive) is additive via (A⊕B,p⊕r). Step 3: uses only the construction and the outer-extension clause of the descent statement (C3 is respected). Step 4: from da=ae, vd=ev follows, so wc=e and cw=d. Step 5: identities at stage E are [E,e] and [E,d]. Step 6: kg=fk from gh=hf, so KH=f and HK=g, for an arbitrary q. Step 7: v_M=bV(v)c^{-1}. Step 8: [M,V(a)]=[E,a] because a^B_{M,E,E} is a unit case. Step 9: inverses are unique. Step 10: naturality conjugation. Edge cases p=0, p=q=1, M=E and t=1 are consistent, and the naturality hypothesis is essential (a non-natural idempotent on diag(2,3) fails). Duplicate search: rg -L for Karoubi + inverse + common-stage over dag/nodes. prop-weil-pbc-common-stage-calculus and lem-weil-karoubi-envelope-idempotent-complete are not the same statement. The Mathlib search records are plausible, with the rate-limited LeanSearch recorded as unavailable. FIX (B3): the statement said 'additive categories' and 'additive transition functors' with no definition node. Added [def-weil-additive-category] and [def-weil-pbc-additive-functor] to the statement, stmt_deps and step 2 uses; proof_deps = union of uses. The fixed file is fixes/dag/nodes/sec-smooth-base-change/lem-sbc-common-stage-inverse-through-karoubi.json. No other change, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CommonStageKaroubiInverse",
+  "declaration": "CategoryTheory.CommonStage.commonStage_inverse_through_karoubi",
+  "declarations": [
+   "CategoryTheory.CommonStage.localInverse_extension_additive",
+   "CategoryTheory.CommonStage.Diagram.innerU",
+   "CategoryTheory.CommonStage.Diagram.innerAssoc",
+   "CategoryTheory.CommonStage.Diagram.innerUnit",
+   "CategoryTheory.CommonStage.Diagram.innerLeft",
+   "CategoryTheory.CommonStage.Diagram.innerRight",
+   "CategoryTheory.CommonStage.Diagram.innerPentagon",
+   "CategoryTheory.CommonStage.Diagram.innerKaroubi",
+   "CategoryTheory.CommonStage.Family.innerKaroubi",
+   "CategoryTheory.CommonStage.Family.innerCoherent",
+   "CategoryTheory.CommonStage.innerTransformation",
+   "CategoryTheory.CommonStage.innerCompatible",
+   "CategoryTheory.CommonStage.innerRestriction_formulas",
+   "CategoryTheory.CommonStage.localInverseRestriction",
+   "CategoryTheory.CommonStage.localInversePair",
+   "CategoryTheory.CommonStage.localInverseFunctor",
+   "CategoryTheory.CommonStage.localInverseTransformation",
+   "CategoryTheory.CommonStage.localInverseStageRep",
+   "CategoryTheory.CommonStage.localInverseClass",
+   "CategoryTheory.CommonStage.localInverseTransport",
+   "CategoryTheory.CommonStage.commonStage_inverse_through_karoubi"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CommonStageKaroubiInverse.lean",
+  "statement": "theorem commonStage_inverse_through_karoubi (l : ℕ) [Fact l.Prime] (K : Type w) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K] (D : DescentSystem.{w, max u v, v} (Padic.FiniteCoefficientFields l K)) (A B : Diagram.{w, u, v} (Padic.FiniteCoefficientFields l K)) (Φ Ψ : Family A B) (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent) (η : ∀ E, Φ.φ E ⟶ Ψ.φ E) (hη : Compatible η) (E : Padic.FiniteCoefficientFields l K) (X : A.C E) (v : (Ψ.φ E).obj X ⟶ (Φ.φ E).obj X) (hav : (η E).app X ≫ v = 𝟙 _) (hva : v ≫ (η E).app X = 𝟙 _) : (∀ (P : Karoubi (A.C E)) (hP : P.X = X) (Q : Karoubi (D.pair A.innerKaroubi).Obj) (hQ : Q.X = localInversePair D A E P), ∃ e : ((functorExtension₂ _ _).obj (localInverseFunctor D Φ hΦ)).obj Q ≅ ((functorExtension₂ _ _).obj (localInverseFunctor D Ψ hΨ)).obj Q, e.hom = ((functorExtension₂ _ _).map (localInverseTransformation D hΦ hΨ η hη)).app Q ∧ HEq e.inv.f ((localInverseFunctor D Ψ hΨ).map Q.p ≫ eqToHom (congrArg (localInverseFunctor D Ψ hΨ).obj hQ) ≫ localInverseClass D Ψ Φ hΨ hΦ E P ((Ψ.φ E).map (eqToHom hP) ≫ v ≫ (Φ.φ E).map (eqToHom hP.symm)) ≫ eqToHom (congrArg (localInverseFunctor D Φ hΦ).obj hQ.symm) ≫ (localInverseFunctor D Φ hΦ).map Q.p) ∧ HEq e.hom.f ((localInverseFunctor D Φ hΦ).map Q.p ≫ (localInverseTransformation D hΦ hΨ η hη).app Q.X ≫ (localInverseFunctor D Ψ hΨ).map Q.p) ∧ HEq e.hom.f ((localInverseFunctor D Φ hΦ).map Q.p ≫ eqToHom (congrArg (localInverseFunctor D Φ hΦ).obj hQ) ≫ localInverseClass D Φ Ψ hΦ hΨ E P ((η E).app P.X) ≫ eqToHom (congrArg (localInverseFunctor D Ψ hΨ).obj hQ.symm) ≫ (localInverseFunctor D Ψ hΨ).map Q.p) ∧ e.hom.f ≫ e.inv.f = (localInverseFunctor D Φ hΦ).map Q.p ∧ e.inv.f ≫ e.hom.f = (localInverseFunctor D Ψ hΨ).map Q.p ∧ (∀ (R : Karoubi (D.pair A.innerKaroubi).Obj) (t : Q ≅ R), ∃ r : ((functorExtension₂ _ _).obj (localInverseFunctor D Φ hΦ)).obj R ≅ ((functorExtension₂ _ _).obj (localInverseFunctor D Ψ hΨ)).obj R, r.hom = ((functorExtension₂ _ _).map (localInverseTransformation D hΦ hΨ η hη)).app R ∧ r.hom = ((functorExtension₂ _ _).obj (localInverseFunctor D Φ hΦ)).map t.inv ≫ e.hom ≫ ((functorExtension₂ _ _).obj (localInverseFunctor D Ψ hΨ)).map t.hom ∧ r.inv = ((functorExtension₂ _ _).obj (localInverseFunctor D Ψ hΨ)).map t.inv ≫ e.inv ≫ ((functorExtension₂ _ _).obj (localInverseFunctor D Φ hΦ)).map t.hom)) ∧ (∀ (M : Padic.FiniteCoefficientFields l K) (h : E ≤ M), (η M).app ((A.U h).obj X) ≫ localInverseTransport Φ Ψ h X v = 𝟙 _ ∧ localInverseTransport Φ Ψ h X v ≫ (η M).app ((A.U h).obj X) = 𝟙 _ ∧ HEq ((localInverseTransformation D hΦ hΨ η hη).app (localInversePair D A E ((toKaroubi _).obj X))) ((D.pair B.innerKaroubi).repr (localInverseStageRep Φ Ψ E M h ((toKaroubi _).obj X) ((Φ.b h).hom.app X ≫ (η M).app ((A.U h).obj X) ≫ (Ψ.b h).inv.app X))) ∧ HEq (localInverseClass D Ψ Φ hΨ hΦ E ((toKaroubi _).obj X) v) ((D.pair B.innerKaroubi).repr (localInverseStageRep Ψ Φ E M h ((toKaroubi _).obj X) ((Ψ.b h).hom.app X ≫ localInverseTransport Φ Ψ h X v ≫ (Φ.b h).inv.app X)))) ∧ (∀ v' : (Ψ.φ E).obj X ⟶ (Φ.φ E).obj X, (η E).app X ≫ v' = 𝟙 _ → v' ≫ (η E).app X = 𝟙 _ → v' = v)",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded CommonStage canonical quotient interface reexported by StageSystemFunctorDescent. Inner Karoubi constructions are Mathlib extensions, with named coherence statements for the clauses of this node. The DescentSystem parameter is the canonical representative-characterized data supplied by coherent_pair_functor_descent, not extra stage invertibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2112133b3",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, all stmt_deps, sketch32 1291-1359/1412-1455, the module and the CommonStage DescentSystem source. Every hypothesis and conclusion matches the node, read left to right: inner and outer projector formulas, inverse Fbar(q)[E,w]Gbar(q), forward arrow, composites equal to the actual Karoubi identities, v_M transport, M-representatives on Q0 via HEq with types equal through D.formula, inverse uniqueness, presentation conjugation. The DescentSystem parameter is the dependency's canonical specification, not an extra hypothesis. Inner-Karoubi helpers are real functorExtension₂ data; sorried coherences checked true and docstrings carry source, blueprint and proof. lean.statement verbatim; 21 declarations present; universes independent (max u v). No duplicate in Mathlib or the project. Advisory: item uses the re-exported CommonStage interface rather than the recorded StageSystem functor. Not recompiled per instruction; no files changed."
  }
 }

@@ -15,7 +15,9 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -282,5 +284,24 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-25b831954 (reviewer sub-agent of L); spot-checked: I read the item in full, with every cited statement. The delivery is one commit containing the item and its report. There are no new nodes, no unit change and no re-split note. Statement and stmt_deps are unchanged and the statement is true. Source: Stacks sites-cohomology 06YU (definition-derived-tor and the paragraph before it), plus 06YN/06YP/06YS. Small cases checked: P=0; P=R[0]; [Z-2->Z] with Z/2, giving H^-1=Tor_1; contractible [N-1->N] with N not flat. Step 1: the hypotheses of lem-sfb-derived-monoidal hold (Grothendieck on the w-small skeleton, closed symmetric additive tensor, functorial flat resolutions). Step 2: the two K-flat conventions agree; I recomputed the swap signs (-1)^{ij} and (-1)^{ij+j}. Step 3: reading mu as the derived counit, invertible with one K-flat argument, is the stated meaning of 'computed by replacing either argument' (confirmed in that node's steps 4, 5 and 8), so this is not C3. Step 4: theta comes from the extension/uniqueness clause in the statement of lem-weil-pbc-site-derived-tensor-descent, and m_{A,B}=beta^{-1}. Step 5: the degree-zero identification is elementary. Steps 6 and 7: I checked the naturality composite and the normalization equation c T(Qp,Qb) beta = Q(delta Tot(p tensor b)), which gives independence of choices. tool_uses: all 7 accepted as generic tools; the unit cites no units. Batch-5: lem-trf-site-functorial-flat-resolution is the generic fact that module sheaves have functorial flat resolutions (free-presheaf cover). Neither assumption gives it and it is no trace-formula/Poincaré-duality-specific step; the item's closure gains only this one trf node (182 vs 180 nodes), so accepted. No duplicate: lem-pc-kflat-single-tensor-representative and lem-pc-kflat-derived-tensor-comparison are for schemes only, lem-weil-pbc-source-kflat-tensor-single-model is for modules over a ring, and lem-sf-ringed-derived-native-tensor uses the native tensor. Advisory: citing lem-sf-ringed-derived-native-tensor in step 3 would remove steps 1-2 and the trf citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedKFlatSingleTensorComparison",
+  "declaration": "SheafOfModules.ringed_kFlat_single_tensor_comparison",
+  "file": "lean/Sheaf/Algebra/Homology/RingedKFlatSingleTensorComparison.lean",
+  "statement": "theorem ringed_kFlat_single_tensor_comparison : ∃! c : ∀ (P : CochainComplex (Modules R) ℤ) (_ : CochainComplex.IsKFlatIndependentCoefficients P) (M : Modules R), ((derivedTensor R).obj (DerivedCategory.Q.obj P)).obj (DerivedCategory.Q.obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≅ DerivedCategory.Q.obj ((((ordinaryTensor R).flip.obj M).mapHomologicalComplex (.up ℤ)).obj P), (∀ (P P' : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (hP' : CochainComplex.IsKFlatIndependentCoefficients P') (M M' : Modules R) (u : P ⟶ P') (f : M ⟶ M'), ((derivedTensor R).map (DerivedCategory.Q.map u)).app _ ≫ ((derivedTensor R).obj (DerivedCategory.Q.obj P')).map (DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map f)) ≫ (c P' hP' M').hom = (c P hP M).hom ≫ DerivedCategory.Q.map (((((ordinaryTensor R).flip.obj M).mapHomologicalComplex (.up ℤ)).map u) ≫ (NatTrans.mapHomologicalComplex ((ordinaryTensor R).flip.map f) (.up ℤ)).app P')) ∧ (∀ (P : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (M : Modules R) (A B : CochainComplex (Modules R) ℤ) (hA : CochainComplex.IsKFlatIndependentCoefficients A) (hB : CochainComplex.IsKFlatIndependentCoefficients B) (hAf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (A.X n)) (hBf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (B.X n)) (p : A ⟶ P) (b : B ⟶ (HomologicalComplex.single _ (.up ℤ) 0).obj M), QuasiIso p → QuasiIso b → (representativeIso R A B hA hB hAf hBf).hom ≫ ((derivedTensor R).map (DerivedCategory.Q.map p)).app _ ≫ ((derivedTensor R).obj (DerivedCategory.Q.obj P)).map (DerivedCategory.Q.map b) ≫ (c P hP M).hom = DerivedCategory.Q.map (((totalTensor R).map p).app B ≫ ((totalTensor R).obj P).map b ≫ (CochainComplex.mapBifunctorSingle₂Iso (ordinaryTensor R) M P).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Natural comparison for arbitrary acyclic-tensor K-flat complexes, using the published independent-universe site-derived tensor. The unique family is normalized against every pair of flat-term K-flat resolutions through the existing KFlatFixedTensor.representativeIso. No boundedness or flatness assumption on P terms or M; no statement correction. The added landed statement dependency owns the reused representativeIso and tensor abbreviations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f60ee4e1e",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at b588d79c. Lean file byte-identical to the previously reviewed and clean-compiled module (37.1 s). Item record differs only in stmt_deps: the theorem node lem-weil-pbc-kflat-fixed-tensor-triangulated is replaced by the new existing:true def-sf-ringed-kflat-tensor-representative-data (owns exactly Modules/ordinaryTensor/totalTensor/derivedTensor/representativeIso in KFlatFixedTensorTriangulated; statement verbatim in live source; node text matches the construction (Qh c)^-1 then d from the descent theorem's .choose_spec; 6 genuine stmt_deps, all live; no competing owner) and def-pc-flat-sheaf-modules (IsFlatOnSite in hAf/hBf). No base stmt_dep dropped. Mathematics re-confirmed: independent universes, only K-flatness on P, arbitrary M, naturality right edge Q(T(u,f)), resolution normalization pins c so ∃! is legitimate; edge cases P=0, R[0], Z--2-->Z with Z/2, contractible non-flat terms. Report sections present. No fixes; no compile rerun (unchanged file)."
  }
 }

@@ -1,0 +1,107 @@
+{
+ "id": "def-sfb-sheaf-tensor-pure-section",
+ "kind": "definition",
+ "title": "Canonical pure section in the sheaf tensor product",
+ "status": "split",
+ "statement": "Let $J$ be a site small in the coefficient universe [def-weil-pbc-sites-and-cohomology], with the size convention [def-weil-size-convention], and let $A$ be a sheaf of commutative rings. Use the category $\\operatorname{Mod}(A)$ of module sheaves [def-weil-sheaf-of-modules-category], written $\\mathrm{scalarModules}(J,A)$ [def-sfb-scalar-hom-comparison-data], and its sheafified balanced tensor [def-pur-sheaf-tensor-product]. For $M,N\\in\\operatorname{Mod}(A)$, an object $U$ of the site, and sections $x\\in M(U)$ and $y\\in N(U)$, define $\\operatorname{pure}_A(M,N,U,x,y)\\in(M\\otimes_A N)(U)$ to be the image of $x\\otimes_{A(U)}y$ under the canonical sheafification unit [def-weil-presheaf-modules-sheafification], followed by the canonical identification of the sheafified presheaf tensor with the monoidal sheaf tensor. Thus this is the canonical local pure-tensor section, without any choice of a tensor-comparison isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: sectionwise presheaf tensor followed by sheafification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|sheafificationAdjunction|def pure",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean.",
+   "date": "2026-10-21",
+   "verdict": "Sheaf tensor pure-section constructor not among the Mathlib results; reuse the exact existing project definition ScalarHomOrdinary.pure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical pure section in the sheaf tensor product of sheaves of modules",
+   "results": "8 hits: CategoryTheory.Sheaf.tensorProd_isSheaf, SheafOfModules.freeSection, Algebra.FormallyUnramified.sec, SheafOfModules.sections, CategoryTheory.sheafHomSectionsEquiv, PresheafOfModules.Monoidal.tensorHom, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.freeHomEquiv.",
+   "date": "2026-10-21",
+   "verdict": "Sheaf tensor pure-section constructor not among the Mathlib results; reuse the exact existing project definition ScalarHomOrdinary.pure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of a local pure tensor under the sheafification unit into tensor product of sheaves of modules",
+   "results": "8 hits: PresheafOfModules.toSheafify_app_apply', PresheafOfModules.toSheafify_app_apply, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.toSheafify, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafifyMap_val, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_toSheafify.",
+   "date": "2026-10-21",
+   "verdict": "Sheaf tensor pure-section constructor not among the Mathlib results; reuse the exact existing project definition ScalarHomOrdinary.pure."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l ScalarHomOrdinary\\.pure dag/nodes; blueprint_refs.py search \"sheaf tensor pure section\"; rg -n \"def .*pure|def .*Tmul|def .*tmul\" lean/WeilConjectures/Algebra/Category/ModuleCat/Sheaf lean/Sheaf/Algebra/Category/ModuleCat/Sheaf; rg -n \"pure|tensorObjIsoSheafification\" lean/Sheaf/Algebra/Homology/ScalarHomOrdinaryTensorComparison.lean",
+   "results": "DAG exact-name search finds only lem-sfb-scalar-ordinary-tensor-comparison, a theorem node that lists pure as a helper; blueprint search has zero matches. Upstream TensorBilinearUniversal and TensorHomAdjunction spell out the sheafification formula but define no public constructor. Sheaf SiteTensorFunctoriality.siteSheafTensorTmul has the independent siteSheafTensorRight target; ScalarHomOrdinary.pure at line 36 is the exact constructor in the monoidal tensor presentation used by this item.",
+   "date": "2026-10-21",
+   "verdict": "Bind the existing monoidal pure-section helper to a definition node, as required by the immutable-head return; no second Lean definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ring-isomorphism-tensor-transport",
+  "date": "2026-10-21",
+  "group": "Q86"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "The local pure-tensor normalization of the tensor comparison and its inverse in lem-sfb-ring-isomorphism-tensor-transport.",
+   "via": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarHomOrdinaryTensorComparison",
+  "declaration": "SheafOfModules.ScalarHomOrdinary.pure",
+  "statement": "def pure (A : Sheaf J CommRingCat.{r})\n    (M N : scalarModules J A) (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :\n    ((monoidalCategory A).tensorObj M N).val.obj V",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing definition, not a choice from the ordinary comparison theorem. Its body sends the sectionwise pure tensor through the sheafification unit and tensorObjIsoSheafification.inv. Registered separately on request of the immutable-head stage-2 review."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6306d1b4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6306d1b4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery after the 34ed7f39 RETURN. Diff vs prior snapshot: only (1) item stmt_dep lem-sfb-scalar-ordinary-tensor-comparison -> new def node def-sfb-sheaf-tensor-pure-section (existing:true on SheafOfModules.ScalarHomOrdinary.pure; real sheafification-unit def at side-live ScalarHomOrdinaryTensorComparison.lean l.36, not .choose of the theorem; statement verbatim from 'def'; Stacks 03EK; citations = stmt_deps; no duplicate node), (2) two priority-2000 cache instances ringIsoCochainMonoidal/Struct that are inferInstance/projection of the existing Mathlib cochain monoidal structure, listed in declarations with docstrings. Item lean.statement verbatim in file, statement/proof/base deps unchanged, clause-by-clause reading from prior review stands; sole sorry is the theorem; universes independent. Worker reports scompile 39.1 s clean and deliver2 dry run OK; no compile here (no file changed). Advisory: pure's docstring names the theorem node as blueprint; cache instances are global rather than local."
+ }
+}

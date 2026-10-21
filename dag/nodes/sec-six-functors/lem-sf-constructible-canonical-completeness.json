@@ -202,5 +202,28 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-c34800915 (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited statements, the unit sk-rem-sf-pf-done (no uses), the parent def-wf-tensor-product (main-20261015) and Stacks 0A0E/099M at their labels. Not dropped, not superseded (unsplit in live and side-live), no repair note, no SGA, no cycle. The delivered 6-step proof is correct. I checked: the Koszul fiber model and unit of lem-cbc-exact-linear-koszul-fiber match def-weil-pbc-intrinsic-completion; its hypotheses are met (A-linearity, exact products via det-pe-products-exact, invertible product comparison); and the naturality equations in Steps 3-5 have the right composition order. Fault (C5/D duplication, 1 point): Steps 1-3 and 5 re-derive lem-weil-pbc-intrinsic-to-tower-complete. That node was reviewed 2026-10-20 and its Lean pbcIntrinsicComplete_towerComplete is landed with 0 sorry in its file. Its hypothesis is exactly PbcIsIntrinsicallyComplete, which is this item's existential witness, and it concludes invertibility of the canonical tower unit. lem-weil-pbc-completed-koszul-quotient-comparison (reviewed, Lean landed with 0 sorry in its file) holds for every generating a, actual C and eC, and gives intrinsicCompletionUnit ≫ c = the same unit (completedReductionAugmentation is an abbrev for completedReductionTowerUnit). So every eta_{a,D,i} is invertible in one line. The report's claim that the tower node cannot give the arbitrary-unit clause is wrong. FIX: the proof is rewritten to 4 steps (tower completeness via intrinsic-to-tower-complete; arbitrary a, D, i via koszul-quotient-comparison, with the A/I^{n+1} reindexing stated; the reflector choice as a special case; the integral D^b_c inclusion). proof_deps, split_report summary/blueprint and tool_uses are updated. Statement, stmt_deps and nodes are unchanged. Edge cases checked: M=0, empty tuple, I=A, repeated generators. Maintainer note: in Lean this is pbcIntrinsicComplete_towerComplete combined with towerComplete_iff_intrinsic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfConstructibleCanonicalCompleteness",
+  "declaration": "AlgebraicGeometry.Scheme.sfConstructibleCanonicalCompleteness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfConstructibleCanonicalCompleteness",
+   "AlgebraicGeometry.Scheme.sfConstructibleCanonicalReflectorComplete",
+   "AlgebraicGeometry.Scheme.sfIntegralConstructibleCanonicalCompleteness"
+  ],
+  "file": "lean/Sheaf/Paper/SfConstructibleCanonicalCompleteness.lean",
+  "statement": "theorem sfConstructibleCanonicalCompleteness (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) : (∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (D : CochainComplex (reductionModules X (d.completedRing X)) ℤ) (i : DerivedCategory.Q.obj D ≅ M), IsIso (intrinsicCompletionUnit X d r a ha M D i)) ∧ d.TowerComplete X M",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44aaca91c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Lean matches node clause by clause. Hypothesis is the dep predicate PbcIsIntrinsicallyComplete (the dep category's first membership condition, as the node says). Main theorem concludes IsIso intrinsicCompletionUnit for all r, a, ha, D, i and d.TowerComplete X M. Reflector corollary is WfIsComplete at the canonical representative; integral corollary uses the recorded pbcBoundedConstructibleComplete binders exactly. No extra hypotheses; universes X:u, A:u+1. Recorded statement verbatim in the file; only the node's lean field differs from live; new module, no importers; 3 sorry, no definitions; docstrings give source place, blueprint tag and proof steps 1-4. No existing declaration states the whole node (pbcIntrinsicComplete_towerComplete, completedKoszulQuotientComparison, wfConstructible_complete are partial). Edge cases r=0, I=A, zero object, empty scheme OK. Advisory: some public stmt_dep record imports are not needed for the statement. No compile run: no file changed (2026-10-21 rule); worker compile clean."
  }
 }

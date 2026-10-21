@@ -15,7 +15,8 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-kun-projection-formula-map",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-pur-etale-scalar-pullback-iso"
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-etale-scalar-mate"
  ],
  "proof": [
   {
@@ -250,5 +251,27 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-5c1447074 (reviewer sub-agent of L); spot-checked: I read the item, all seven steps and every cited statement in full; cited nodes were read from clones/side-live because the snapshot's chapter symlinks dangle. First split (live: unsplit, no repair note). The delivery has no new nodes. The only statement change adds def-pur-etale-scalar-pullback-iso to the λ citation; it is the same K-flat-normalized scalarPullbackIso in the same direction, so no target is weakened. Source: Stacks 0E46 (remark-compose-base-change) omits the proof, so proof_origin=agent is correct. The blueprint place (cor-pur-vector-bundle-purity proof paragraph 2, main-20261015) checks out. I re-derived the mate pasting in Steps 4-6: the composite adjunct of F reduces to T through the κ/c adjunction compatibility of lem-sfb-ringed-derived-monoidal-comparisons, naturality of λ_sr and the Step-2 cocycle of lem-sf-scalar-pullback-composition (j1=r, v=s; its a_D and lem-sfb's c are both the K-flat ordinary composition iso P_sr→P_rP_s). G reduces to T through ε_s-naturality at χ_r, the Step-3 adjunct-counit equations and λ_r-naturality at ε_s; the Hom bijection then gives F=G. Step 7: c_id,id=1 on flat-term K-flat representatives (lem-pc-kflat-resolution), so λ_id is an invertible idempotent and χ_id=1. The step that identifies def-kun's adjunction with lem-sfb's (prop-weil-pbc-inverse-image-modules-exact (2)/(3)) is accepted as written. Accepted tool uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-sf-scalar-pullback-composition; lem-pc-kflat-resolution is on the route anyway. No cycle: the item is not in its 583-node dependency closure. No duplicate among the scalar/direct-image/cocycle/exchange/open-composition nodes. No SGA citation; proof_deps equals the union of the step uses. Edge cases checked: identity maps, M=0, nonflat Z/4→Z/2, B=0."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleDirectImageScalarComposition",
+  "declaration": "AlgebraicGeometry.Etale.scalarMate_directImage_composition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarMate_directImage_composition",
+   "AlgebraicGeometry.Etale.scalarMate_directImage_identity"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleDirectImageScalarComposition.lean",
+  "statement": "theorem scalarMate_directImage_composition {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z) (M : DerivedCategoryModule A X) : (scalarMate φ (r ≫ s)).app M ≫ (Functor.rightDerivedFunctorCompIso' (lowerStar (ModuleCat.{u + 1} B) r) (lowerStar (ModuleCat.{u + 1} B) s) (lowerStarComp (ModuleCat.{u + 1} B) r s)).inv.app ((scalarExtension φ X).obj M) = (scalarExtension φ Z).map ((Functor.rightDerivedFunctorCompIso' (lowerStar (ModuleCat.{u + 1} A) r) (lowerStar (ModuleCat.{u + 1} A) s) (lowerStarComp (ModuleCat.{u + 1} A) r s)).inv.app M) ≫ (scalarMate φ s).app (R(lowerStar (ModuleCat.{u + 1} A) r).obj M) ≫ R(lowerStar (ModuleCat.{u + 1} B) s).map ((scalarMate φ r).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41ef41a3d",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 8a9c2e521187: item stmt_deps now replace theorem node lem-pur-etale-scalar-mate-projection by the live existing:true definition node def-pur-etale-scalar-mate (owner of the plain def scalarMate = mateEquiv of scalarPullbackIso.hom; its stmt_deps do not reach the item, no cycle); this is the only node change vs the previous delivery, and vs live only that dep plus the lean record. Lean module byte-identical (sha256 5cdc5a44) to the version compiled clean in 48.6 s. Re-verified: scalarMate direction R f_* ⋙ Q ⟶ Q ⋙ R f_*; rightDerivedFunctorCompIso' : RF ⋙ RG ≅ RH so .inv = kappa R(sr)_* → Rs_*Rr_*; equation order matches the node; identity clause via R(lowerStarId)/rightDerivedFunctorIsoMapDerivedCategory/mapDerivedCategoryIdIso isos; no extra hypotheses; edge cases (identities, empty schemes, M=0, B=0, nonflat Z/4→Z/2, unbounded) admitted; sorry only; docstrings with source and blueprint; lean.statement verbatim; report sections present. Advisory: statement text could cite [def-pur-etale-scalar-mate]; compile time near 60 s limit."
  }
 }

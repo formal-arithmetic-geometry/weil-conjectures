@@ -235,5 +235,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e9499ba4a (reviewer sub-agent of L); spot-checked: Read the item and all 7 cited statements in full, and checked the sources at Stacks sites-cohomology.tex l.3097 (0G7B), sites-modules.tex l.4457 (03EX(2)) and l.1358 (03DB). The proof follows 0G7B. Step 1: termwise 03EX via lem-weil-pbc-site-flat-quotient-tensor-ses; its hypotheses (small site, commutative O, flat quotient P^p, arbitrary A^q) hold. Step 2: tensor swap for the left orientation that def-pc-kflat-complex needs. Step 3: the infinite total-degree coproduct is handled as a filtered colimit of finite biproducts, using the exact filtered colimits of lem-pur-ringed-site-grothendieck-abelian. Step 4: checked the chain-map signs in both orientations. Step 5: all three long-exact-sequence segments are correct, including the H^{n-1}(T_P)→H^n(T_L) shift. The statement and stmt_deps are unchanged from live, and live is still unsplit. There is no repair note, no new nodes, no cycle and no SGA citation. lem-kun-kflat-criteria(2) is two-out-of-three for triangles in K(Mod), not for a degreewise SES, so it is not a duplicate. The parent lem-kun-0f1m case (L,K K-flat ⇒ P) is covered. Accepted the declared tool_uses: generic 03EX and 03DB nodes that no node of the Künneth unit provides."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatShortExactQuotient",
+  "declaration": "CochainComplex.kflat_shortExact_flat_quotient",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatShortExactQuotient.lean",
+  "statement": "theorem kflat_shortExact_flat_quotient {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (S : ShortComplex (CochainComplex (ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)) (hS : S.ShortExact) (hP : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (S.X₃.X i)) : (∀ A : CochainComplex (ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ, (∃ h : (S.f ▷ A) ≫ (S.g ▷ A) = 0, (ShortComplex.mk (S.f ▷ A) (S.g ▷ A) h).ShortExact)) ∧ (S.X₁.IsKFlatIndependentCoefficients → S.X₂.IsKFlatIndependentCoefficients → S.X₃.IsKFlatIndependentCoefficients) ∧ (S.X₁.IsKFlatIndependentCoefficients → S.X₃.IsKFlatIndependentCoefficients → S.X₂.IsKFlatIndependentCoefficients) ∧ (S.X₂.IsKFlatIndependentCoefficients → S.X₃.IsKFlatIndependentCoefficients → S.X₁.IsKFlatIndependentCoefficients)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-818731457",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and Stacks 0G7B (sites-cohomology.tex l.3097): EssentiallySmall.{w} site with ring and modules in w, the KFlat dep's convention; S.ShortExact equivalent to degreewise SES; IsFlatOnSite only on S.X3 terms; for all A, ∃ zero-composite proof and ShortExact of (S.f ▷ A, S.g ▷ A), the canonical f⊗1 and g⊗1 on mapBifunctor/curriedTensor Tot; all three IsKFlatIndependentCoefficients two-out-of-three cases. Same localization tensor as the KFlat predicate up to proof irrelevance. No boundedness or splitting hypothesis, no unbound universes. lean.statement verbatim equal to the file signature; only the node's lean field changed versus side-live; first stage-2 delivery. Report sections present; docstrings carry the source and all five proof steps; proof is sorry only. No duplicate found (KFlatClosure mappingCone and IsKFlatForTotalTensor are triangle versions). Advisory: proof deps flat_quotient_tensor_shortExact and RingedSiteGrothendieckAbelian are single-universe and use WeilConjectures IsFlat, so stage 3 needs a small-model transport and an IsFlatOnSite/IsFlat bridge. No compile run because no file was changed."
  }
 }

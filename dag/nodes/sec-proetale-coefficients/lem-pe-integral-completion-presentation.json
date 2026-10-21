@@ -17,7 +17,10 @@
   "def-weil-derived-limit",
   "def-weil-derived-complete",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pe-integral-presentation-encoding",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -311,5 +314,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-7ea1d549a (reviewer sub-agent of L); spot-checked: Q16 7ea1d549, item lem-pe-integral-completion-presentation. The split has 8 steps and no new nodes; the statement, stmt_deps and blueprint are unchanged from the base. The parent det-prop-integral-criterion-reductions cites the item for exactly its two conclusions (same reduction tower; complete K satisfies def-weil-derived-complete). The blueprint source gives no proof of this comparison, so the agent proof origin is right. Small cases checked: K=0, X empty, K=B (L is lim R_n = B-hat), n=1. Step checks: (1) b_n = pi_n alpha and the relabelling is an exact iso of categories. (2) The K-flat test transfers through alpha(U) on presheaf tensors. (3) theta_n is balanced, since alpha(b)p tensor r = p tensor pi_n(alpha(b))r becomes bp tensor r = p tensor b_n(b)r, and it is R_n-linear. (4) The actual transition and unit maps agree (E5). (5) The cone sign was worked out: the inverse rotation of the cone triangle, then (x,y) to (x,-y), gives d(x,y) = (dx,(1-s)x-dy) with j the projection; eta = (gamma,0) is a chain map. (6) The strict-augmentation clause of lem-weil-strict-roos-comparison gives the canonical map; sk-def-pe-derived-completion's own proof also defines it as (c,0). (7) (u,id,id) is a TR1 triangle isomorphism. (8) c_n and t_n match def-weil-integral-reduction-tower and the well-definedness lemma, and the live fixed-first-map def-weil-derived-complete (its blueprint_update is not followed because this delivery does not touch that node). ell != p is used only in step 8. Stacks tags 06YS/06YN/06YT/06YY/0941/08TC/0145 have the cited labels; 06YY and 0941 were read. No SGA source. No duplicate found in the DAG search. Repairs (2, C1/C3): step 6 cited no node for applying sk-def-pe-derived-completion's completeness hypothesis, which is stated for internal module objects with the coequalizer tensor (Layer B), to the item's sectionwise module-sheaf category. Added lem-pe-internal-section-tensor-comparison with det-def-sfb-sheaf-tensor-structure and sk-def-sfb-sheaf-tensor (no cycle; recorded as a tool use). Step 3's canonicity argument assumed a map between any two resolutions; it is replaced by naturality of theta plus the universal property of the clause-(2) left derived functors. Accepted tool uses: lem-pc-kflat-resolution, lem-pur-derived-change-of-rings, lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence, lem-weil-strict-roos-comparison, lem-weil-integral-reduction-tower-well-defined, lem-pe-internal-section-tensor-comparison.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralCompletionPresentation",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_completion_presentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.FiniteEncoding",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.RestrictionSquare",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.SquareNormalized",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.derivedSquare",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.FiniteComparison",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.restrictedComparison",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.UnitCompatible",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_completion_reduction_comparisons",
+   "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_completion_presentation"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralCompletionPresentation.lean",
+  "statement": "theorem integral_completion_presentation (e : ∀ n : ℕ, FiniteEncoding l E X n) (a : ∀ n : ℕ, RestrictionSquare l E X A n (e n)) (_ha : ∀ n : ℕ, SquareNormalized l E X A n (e n) (a n)) (K : DerivedCategory (AdicCompletion.Modules l E X)) (_hK : AlgebraicGeometry.ProEtale.IsDerivedComplete l E X K) : IsSfDerivedComplete l E X (A.derived.functor.obj K) ∧ ∀ (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p), WeilConjectures.IsDerivedComplete l E X D hl (A.derived.functor.obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Both theorem declarations state this node: integral_completion_reduction_comparisons supplies canonical finite D(R_n) comparisons, their unit uniqueness and quotient-transition equations; integral_completion_presentation supplies the fixed-first-map Roos condition and its global legacy form. Encoding data are supplied explicitly and normalized on all abelian sections, not chosen by an arbitrary existence axiom. No boundedness, constructibility, or Noetherianity is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eca085c45",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery of 2a6d22f2 H2 RETURN. Lean byte-identical (sha 6890d3f5/9c7ecd3a); item statement/proof/proof_deps equal live; stmt_deps now cites new def node def-pe-finite-discrete-presentation-encoding (existing:true on unchanged Sheaf.Paper.FiniteDiscreteOrdinaryEncoding, 11 decls covering Encoding/.ordinary/.ordinary_functor/.ordinaryDerived used by the item; statement verbatim; check_existing clean) instead of theorem lem-sf-finite-discrete-normalized-encoding, which is now proof_deps only. New node statement matches the structure fields; its stmt_deps are existing def nodes; no cycle. Clauses re-read: ringIso pinned by SquareNormalized, unit-unique FiniteComparison, transition equation, IsDerivedComplete => IsSfDerivedComplete with fixed first map, global l != p form; edge cases n>=1, K=0, empty X, unbounded K. Not dropped, not landed elsewhere. No recompile (unchanged Lean; prior clean compile and delivery dry run OK). Advisory: upperStarFromPoint and continuousCoefficientRingObj owners not in the new node's stmt_deps, cited via sk-def-sfb nodes as in the landed owner theorem."
+ }
 }

@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-signed-mapping-cocone-functor"
  ],
  "proof": [
   {
@@ -220,5 +221,41 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-a5d7e3370 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged from side-live. The item is still unsplit with no proof on live and side-live, there is no re-split note for it, and the delivery has no new nodes. Sources checked: the main-20261015 first-reduction Cones paragraph ('functorial on complexes … Shifts are clear'); Stacks derived.tex definition-cone (014E: C(f)^n=L^n⊕K^{n+1}, d=[[d_L,f],[0,−d_K]]); homology.tex definition-shift-cochain (011G: d_{A[k]}=(−1)^k d, f[k] has no sign); and def-weil-abstract-derived-category, which carries the same cone and the [1]=−d shift. I recomputed every step. Step 1: intertwiners are closed under composition and sums. Step 2: Cone(s)[−1] reordered gives D(v,u)=(dv,−du−sv), and D²=(0,dsv−sdv)=0. Step 3: diag(a,a) is a chain map by ad=da and ta=as, and is additive. Step 4: both composites with σ_r give (εdv,−du−εsv), and ε²=1 gives the inverse. Step 5: naturality gives (av,εau), σ_0=id, and σ_r and σ_{r'} compose to σ_{r+r'}, including negative shifts. Step 6: η_J is a chain map by sJ=0, the naturality is (aJ,0)=(J'g,0), and σ η_{J[r]}=η_J[r]. Edge cases checked: V=0, s=0, s=1, r=−1, shifts 1 then −1, Z--2-->Z with s=3, and characteristic 2. The parent lem-pe-roos-cone-calculus steps 1 and 5 use exactly these clauses. lem-weil-signed-mapping-cocone-shift (another unit) generalizes only the shift clause, so this is not a duplicate. lem-amb-signed-fibre-shift concerns functors to Ab, and lem-pe-endomorphism-fibre-double-cone is a sibling. Calling all six steps elementary is right: each is a few-line biproduct calculation. All four search kinds are recorded. Delivery-errors A–F are clean. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.EndomorphismFibreCoordinateCalculus",
+  "declaration": "CochainComplex.endomorphismFibre_coordinates",
+  "declarations": [
+   "CochainComplex.endomorphismPairTransformation",
+   "CochainComplex.endomorphismFibreFunctor",
+   "CochainComplex.endomorphismPairTransformation_commShift",
+   "CochainComplex.endomorphismFibreShift",
+   "CochainComplex.endomorphismFibre_coordinates",
+   "CochainComplex.endomorphismFibre_additive",
+   "CochainComplex.endomorphismFibre_map_coordinates",
+   "CochainComplex.endomorphismFibreShift_coordinates",
+   "CochainComplex.endomorphismFibreShift_coherence",
+   "CochainComplex.endomorphismFibreAugmentation_condition",
+   "CochainComplex.endomorphismFibreAugmentation",
+   "CochainComplex.endomorphismFibreAugmentation_coordinates",
+   "CochainComplex.endomorphismFibreAugmentation_naturality",
+   "CochainComplex.endomorphismFibreAugmentation_shift_condition",
+   "CochainComplex.endomorphismFibreAugmentation_shift"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/EndomorphismFibreCoordinateCalculus.lean",
+  "statement": "theorem endomorphismFibre_coordinates (X : Endofunctor.Algebra (𝟭 (CochainComplex A ℤ))) (q : ℤ) : IsIso (biprod.lift ((mappingCocone.fst X.str).f q) ((mappingCocone.snd X.str).v q (q - 1) (by omega))) ∧ (mappingCocone X.str).d q (q + 1) ≫ (mappingCocone.fst X.str).f (q + 1) = (mappingCocone.fst X.str).f q ≫ X.a.d q (q + 1) ∧ (mappingCocone X.str).d q (q + 1) ≫ (mappingCocone.snd X.str).v (q + 1) q (by omega) = -((mappingCocone.snd X.str).v q (q - 1) (by omega) ≫ X.a.d (q - 1) q) - (mappingCocone.fst X.str).f q ≫ X.str.f q",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The complete statement is carried by the listed declarations. The existing Endofunctor.Algebra identity category and its preadditive and shift structures are reused. The canonical fibre functor and signed natural comparisons specialize the definitions owned by def-weil-signed-mapping-cocone-functor; no conclusion or choice from lem-weil-signed-mapping-cocone-shift is used. The strict augmentation is mappingCocone.lift with zero second cochain. The Lean module is unchanged from the returned delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee52db35",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 876ef0d8. Item Lean module byte-identical (sha256 b07c226d); prior clause-by-clause reading and clean compile stand, re-read confirms node match (pair category Endofunctor.Algebra, Cone(s)[-1] coords (dv,-du-sv), diag K(a), additive, sigma_r NatIso with (v,(-1)^r u) hom/inv, isoZero/isoAdd coherence, eta_J=mappingCocone.lift J 0, naturality, shift compatibility). Item node vs side-live differs only in lean record and stmt_deps swap to new def-weil-signed-mapping-cocone-functor (existing:true on unchanged Sheaf.Algebra.Homology.SignedMappingCoconeShift) owning coconeMap/coconeFunctor/signedCoconeShiftIso/coconeFunctorShiftIso/coconeFunctorShiftNatIso; read module source: definitions match node statement, real data, statement verbatim, universes bound. Item uses only coconeFunctor and coconeFunctorShiftNatIso, so H2 resolved. No competing ownership or re-split note. Advisory: existing module docstring names only theorem blueprint; coneMap still owned only by theorem node; lem-weil-roos-comm-shift may need same H2 check."
  }
 }

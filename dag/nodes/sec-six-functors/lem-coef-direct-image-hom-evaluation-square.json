@@ -16,7 +16,11 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-kun-projection-formula-map",
   "def-pur-derived-internal-hom",
-  "lem-sfb-dc-hom-scalar-adjunction"
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-coef-etale-tensor-model-comparison",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-etale-scalar-mate",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -227,5 +231,34 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-5717be273 (reviewer sub-agent of L); spot-checked: I read the whole split. It has 0 new nodes, the statement is unchanged and not weakened, and there is no re-split note. Source: master thm-coef-finite-hom proof paragraphs 1 and 4 (evaluation-defined v and 'transposing identifies their composite'); the main-20261015 copy has no proof. I recomputed all six steps and they are correct: (1) mu from lem-weil-pbc-ringed-topoi-derived-tensor-pullback, applied to the identity geometric morphism with ring map A→B. a comes from lem-sfb-ringed-derived-monoidal-comparisons, applied to the two factorizations of the one ringed-topos morphism (Y,B)→(X,A). The statement's iota is (a^{-1}⊗1)mu. (2) t=α∘P_B(c)=F(d)∘a_T, the inverse adjunct, using the f^{-1}⊣Rf_* of def-kun-projection-formula-map. (3) Counit naturality at w. (4) The transpose of u and naturality of ev in the second variable; the tensor order matches (right tensor by L). (5) mu naturality at (d,1). (6) The assembly, including iota^{-1}=mu^{-1}∘(a_T⊗1). Every step type-checks. Edge cases checked: f=id, A=B, b=0, L=0/N'=0, non-flat Z→Z/2. No flatness, boundedness or invertibility of b, u, c is used. There is no cycle: no cited node reaches the item. I accept the tool_uses lem-weil-pbc-ringed-topoi-derived-tensor-pullback and lem-sfb-ringed-derived-monoidal-comparisons as generic ordinary comparisons. No duplicate exists: the pairing-change parent, lem-pod-closed-uncurry-laws, lem-coef-completed-tensor-hom-transpose and lem-sc-derived-internal-hom-adjunction all differ. Fault C4: Step 4 cited only the definition def-coef-ringed-tensor-hom-model for the existence of the right-tensor ⊣ RHom adjunction with evaluation counit. A definition does not assert that the recorded H has such a structure. FIX: Step 4 now also cites the same-unit lem-sf-ringed-derived-tensor-hom-adjunction (the native tensor equals the K-flat tensor via lem-sf-ringed-derived-native-tensor), and proof_deps is updated. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-direct-image-hom-evaluation-square.json. Minor wording only: Step 1 calls a 'the inverse' of the statement's identification, but the directions used are consistent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImageHomEvaluationSquare",
+  "declaration": "AlgebraicGeometry.Etale.DirectImageHomEvaluation.square",
+  "declarations": [
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.evaluation",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.homComparison",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.homMap",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.directImageMap",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.ordinaryPairing",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.sourceComparison",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.transposedPairing",
+   "AlgebraicGeometry.Etale.DirectImageHomEvaluation.square"
+  ],
+  "file": "lean/Sheaf/Paper/DirectImageHomEvaluationSquare.lean",
+  "statement": "theorem square {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {X Y : Scheme.{u}} (f : Y ⟶ X) (L N : DerivedCategoryModule A Y) (N' : DerivedCategoryModule B Y) (b : (scalarExtension φ Y).obj N ⟶ N') : transposedPairing φ f L N N' b = (sourceComparison φ f ((Functor.rightDerivedFunctor (lowerStar (ModuleCat.{u + 1} A) f)).obj (((derivedHom (ModuleCat.{u + 1} A) Y).obj (op L)).obj N)) L).inv ≫ (scalarExtension φ Y).map (ordinaryPairing A f L N) ≫ b",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the published ordinary etale scalar extension, normalized tensor comparison, normalized scalar/pullback isomorphism and its geometric direct-image mate. Evaluation in Hom-tensor-input order is the canonical signed symmetry followed by the existing input-tensor-Hom counit. The item statement is unchanged; stmt_deps gains the four landed nodes owning the explicit canonical comparisons and symmetry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd407af10",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read item, 13 stmt_deps, master thm-coef-finite-hom paras 1/4, module and dep declarations in side-live. Lean matches node clause by clause; theorem proof is sorry only. ev_A = signed symmetry then counit of L⊗– ⊣ RHom(L,–), the canonical right-tensor evaluation; u = homEquiv(β ≫ etaleHomTensorComparison.hom ≫ F ev), which is the node's transpose since the symmetry squares to the identity. c = scalarMate, the mate of scalarPullbackIso.hom (F_X⋙f_B^* ≅ f_A^*⋙F_Y), i.e. the adjunct of F(α_A)∘a. ι = μ⁻¹ then (a⁻¹⊗1) as in Step 1; p_h and the equality ι.inv ≫ F(e_A) ≫ b are correct; b arbitrary, no extra hypotheses; universes A,B : Type(u+1) over Scheme.{u} as in the size convention. Mechanical finding: etaleHomTensorComparison is .choose of etaleHomTensorComparison_existsUnique and derivedTensorSymmetry is lem-kun-tensor-sym's own def record, so both theorem stmt_deps are genuine → PASS on that point. lean.statement verbatim, 8 declarations recorded with source/blueprint docstrings, six-step proof docstring, helpers not hollow, no pro-étale substitute; edge cases f=id, φ=id, ℤ→ℤ/2, zeros, empty scheme all admitted. No recompile (no file changed); worker reports clean scompile and preflight."
  }
 }

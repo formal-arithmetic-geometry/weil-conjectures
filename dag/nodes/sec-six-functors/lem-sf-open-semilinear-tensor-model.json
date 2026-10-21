@@ -294,5 +294,49 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-af8a43105 (reviewer sub-agent of L); spot-checked: I read the statement unchanged; it matches live/side-live. The item is still unsplit live, has no repair note and is not on the 2026-10-19 dropped list. The delivery creates no new nodes. Source checked: Stacks sites-modules 0E8I proves the statement through a Hom/Yoneda chain, and sites-cohomology 0GL1 says 'Details omitted'. The steps write those details out through explicit generators, marked proof_origin.by=agent. All 7 steps are mathematically correct. I recomputed: bilinearity of the pairing through O_U(V,f)=O(V); kappa∘psi=1 on generators [x]_f⊗a and psi∘kappa=1 through the adjunction unit x↦[x]_f, which is also the unit normalisation of lem-sf-open-tensor-normalization; the total-complex differential with sign (-1)^a for unbounded complexes; flatness of j_!G as a composite of exact functors, with K-flatness from the statement of lem-sf-ringed-open-total-tensor-kflat; the quotient-transition, naturality and augmentation squares on generators; descent through tensor-descent plus the localization universal property; and the evaluation at n as the gamma^{-1} adjunct characterisation. Edge cases: U empty, j=id, degree 0, odd a, n=m, m>n>r. Completeness and quasi-compactness are never used. lem-cbc-ringed-open-strict-reduction is the scalar-restricted Tow_A version, so it is not a duplicate. The only off-route citation is lem-sfb-localized-site-tensor-restriction (sk-lem-formal-closed-support-ii); it is declared in tool_uses, used as a generic tool, and accepted. FIX repairs two faults. (1) C4: steps 1 and 2 use the universal property of sheafification but cite only def-pur-sheaf-tensor-product, which does not state it; I added def-weil-presheaf-modules-sheafification. (2) C1/C2: step 5 was marked elementary but uses bilinear-extension uniqueness without citing it; I added lem-pc-sites-module-sheafification-bilinear-extension-uniqueness and set elementary=false. proof_deps is updated to match.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenSemilinearTensorModel",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openSemilinearTensorModel",
+  "declarations": [
+   "WeilConjectures.OpenSemilinearTensor.Operations",
+   "WeilConjectures.OpenSemilinearTensor.extensionComplex",
+   "WeilConjectures.OpenSemilinearTensor.restrictionComplex",
+   "WeilConjectures.OpenSemilinearTensor.total",
+   "WeilConjectures.OpenSemilinearTensor.tensor",
+   "WeilConjectures.OpenSemilinearTensor.summand",
+   "WeilConjectures.OpenSemilinearTensor.restrictedSection",
+   "WeilConjectures.OpenSemilinearTensor.OrdinaryTensorComparison",
+   "WeilConjectures.OpenSemilinearTensor.TotalTensorComparison",
+   "WeilConjectures.OpenSemilinearTensor.OrdinaryNaturality",
+   "WeilConjectures.OpenSemilinearTensor.OrdinaryGenerators",
+   "WeilConjectures.OpenSemilinearTensor.TotalSummands",
+   "WeilConjectures.OpenSemilinearTensor.TotalNaturality",
+   "WeilConjectures.OpenSemilinearTensor.TotalComparison",
+   "WeilConjectures.OpenSemilinearTensor.OrdinaryReduction",
+   "WeilConjectures.OpenSemilinearTensor.OrdinaryReduction.complexEvaluation",
+   "WeilConjectures.OpenSemilinearTensor.Computation",
+   "WeilConjectures.OpenSemilinearTensor.KFlatPreservation",
+   "WeilConjectures.OpenSemilinearTensor.ordinaryChain",
+   "WeilConjectures.OpenSemilinearTensor.RepresentativeSquare",
+   "WeilConjectures.OpenSemilinearTensor.Comparison",
+   "WeilConjectures.OpenSemilinearTensor.openSemilinearTensorModel"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenSemilinearTensorModel.lean",
+  "statement": "theorem openSemilinearTensorModel (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤))) (SX : CoefficientDerivedSystemCalculus l E X) (SU : CoefficientDerivedSystemCalculus l E U) (_cX : CoefficientDerivedSystemCoherence l E X SX) (_cU : CoefficientDerivedSystemCoherence l E U SU) (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)} (ProEt.topology X) (IntegralOpenReduction.rings l E X) (IntegralOpenReduction.transitions l E X)) (_hsections : ∀ (n : ℕ) N V x, HEq ((((sections.localization (IntegralOpenReduction.openObject j)).restrictionEvaluation n).hom.app N).val.app V x) x) : ∃ (o : Operations l E j) (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U) (tc : IntegralOpenReduction.TensorComparison l E j o), o.openSystems = sections.localization (IntegralOpenReduction.openObject j) ∧ Nonempty (Comparison l E j o SX SU AX AU tc)",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "One ordinary strict-system natural isomorphism is applied termwise before localization. Its derived comparison is pinned by the augmented representative square for every flat-term K-flat model, on the supplied calculi and semilinear localization construction. No completeness or quasi-compactness hypothesis. Existing IntegralOpenReduction operation and augmentation interfaces are reused without invoking its restricted comparison theorem. Reviewer FIX: the supplied semilinear section construction is normalized by its slice restriction evaluation being the identity on sections (hypothesis _hsections); otherwise its level extension evaluations can be twisted per level and Comparison.components has no system-map solution.",
+  "fixed_by": "NT-stage2-cc-c8c042ac8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8c042ac8",
+  "group": "Q102",
+  "result": "fix",
+  "note": "H3: `sections` is quantified over all inputs, but OpenSystems lets restrictionEvaluation/extensionEvaluation be twisted at a single level (unit/counit equations still hold). With o.openSystems forced to equal sections.localization, Comparison.components then forces a non-system map, so the statement is false for twisted inputs. FIX adds hypothesis _hsections (HEq identity-on-sections of restrictionEvaluation at openObject j, the same normalization as the landed Q73 FIX), plus docstring lines and an updated verbatim lean record. The fixed module compiles clean in 51.3 s. All other clauses checked: K-flat/flat-term preservation, signed Tot chain iso with summand and naturality pins, generator formula, strict r_Q via components + tc generators, r_K natural and pinned by the augmented representative square, existential witnesses o/AX/AU/tc/cU/cX fixed by their data, no completeness or quasi-compactness. Advisories: the interfaces are owned by the downstream parent theorem module (import cycle at stage 3); restrictedSection depends on the unpinned equivalence counit (affects only the Tot clause)."
  }
 }

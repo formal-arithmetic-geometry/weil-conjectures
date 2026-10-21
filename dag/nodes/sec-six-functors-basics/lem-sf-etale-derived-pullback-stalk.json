@@ -211,5 +211,24 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-28b4208b7 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; there are no new nodes. The statement is byte-identical to Q18's unsplit creation. It matches Stacks 03Q1(3) (etale-cohomology.tex l.4649), extended termwise; the route is correctly marked by:agent, and tags 03Q1/04EQ/015F/04VG exist with the labels given. The coefficient category is the exact constant-coefficient module u^* of prop-weil-pbc-inverse-image-modules-exact, the same functor the citer lem-sf-etale-stalk-tor-test uses. Step 1: the abelian iso and its naturality come from lem-weil-pbc-inverse-image-stalk-germ, the module compatibility from clause (2), and A-linearity from naturality at m_a, using c of clause (1) on constant sections and S(A_T)=A from lem-sfb-etale-stalk-constant-complex-exactness. Step 2 really is elementary (degreewise chain iso). Step 3: P is exact by clause (3) and S, R by the constant-complex node, and the factorization leaf applies with no boundedness. Step 4: I recomputed a_R∘D(c)∘μ^{-1}=Q(c_C)∘β with the directions right. Edge cases checked: A=0, empty U, u=id, a complex in one degree, non-flat u, unbounded complexes. The rg -L duplicate search (03Q1 and derived/stalk/pullback phrasings) found no equivalent node. The four declared tool_uses are generic and accepted; the other two cited nodes are Mathlib leaves. There is no cycle and no SGA citation. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleDerivedPullbackStalk",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleDerivedPullbackStalkIso",
+  "file": "lean/Sheaf/SixFunctors/EtaleDerivedPullbackStalk.lean",
+  "statement": "theorem exists_etaleDerivedPullbackStalkIso (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u}} (f : U ⟶ T) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ U) : ∃ α : (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory ⋙ (pointSmallEtale v).sheafFiber.mapDerivedCategory ≅ (pointSmallEtale (v ≫ f)).sheafFiber.mapDerivedCategory, ∀ C : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, α.hom.app (_root_.DerivedCategory.Q.obj C) ≫ (pointSmallEtale (v ≫ f)).sheafFiber.mapDerivedCategoryFactors.hom.app C = (pointSmallEtale v).sheafFiber.mapDerivedCategory.map ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategoryFactors.hom.app C) ≫ (pointSmallEtale v).sheafFiber.mapDerivedCategoryFactors.hom.app (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (ComplexShape.up ℤ)).obj C) ≫ _root_.DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) f v) (ComplexShape.up ℤ)).hom.app C)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded six-functor ModuleCat encoding of def-weil-pbc-derived-categories. The existing upstream Point.sheafFiber_additive declaration is activated locally, without importing or depending on a tensor theorem. The localization equation specifies the canonical degreewise comparison on every unbounded representing complex. Repair of H2 on returned head 9182a5b22d8b: the added tensor-stalk statement dependency and its import are removed; the theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f58b54c9e",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery of 9182a5b22d8b (RETURN H2) applies exactly the prescribed fix: the spurious theorem stmt_dep lem-sfb-etale-derived-tensor-stalk and its public import are removed, and the upstream Point.sheafFiber_additive is activated as a local instance. Node differs from the live base only in lean; stmt_deps equal the 7 base entries; the theorem signature is byte-identical and lean.statement is verbatim. Re-checked against Stacks 03Q1 (1),(3) + 015F/04VG: arbitrary f, geometric point, D(S)∘D(P) order, image point v≫f, alpha pinned on every Q.obj C via the canonical degreewise upperStarCompSheafFiberIso (canonical composite, not arbitrary), unbounded complexes, no extra hypotheses. Edge cases A=0, empty U, f=id, non-flat f OK. Proof is sorry only, docstrings carry source/blueprint/proof steps, no new defs, not dropped, report sections present. Not recompiled (no file changed); the prior review compiled this exact variant cleanly in 27.9 s. Advisory (base-era): prop-weil-pbc-inverse-image-modules-exact is a proof-only theorem stmt_dep."
  }
 }

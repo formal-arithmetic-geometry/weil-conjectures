@@ -244,5 +244,28 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-ef92b76c3 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, the Q55 report, the statements of all six cited nodes, the colimit-x and raw colimit-point unit records, and the main-20261015 sk-prop-sfb-qlbar-colimit-point proof.md. The statement and stmt_deps are unchanged from side-live. The statement matches the raw blueprint proposition: the same index poset of finite subextensions, the subspace topology on each E, a vertex of finite-subextension-valued maps (not all of C(-,Qlb)), and the category Sh(*_proet,Ab). The 6 steps write out the source's sectionwise directed-union route. (1) det-subextensions(1) gives a nonempty directed index, and the definition nodes give the functor laws and j_F∘ι=j_E. (2) Corestriction is continuous and j_E is injective, so A(S) is the union of the C(S,E). (3) The value does not depend on the representative, by comparing in a common compositum H. (4) The map is additive, and zero is represented over Q_l. (5) It is natural under precomposition, and A and G are sheaves, so it is a morphism of sheaves. (6) Factorization and uniqueness follow, which is the colimit definition. Every step is correct and genuinely elementary from cited statements, and proof_deps equals the union of the step uses. Proving the universal property directly removes the need for the generic sheafification-of-colimits fact; no argument of the source is dropped. Edge cases checked: S empty, S a point, a section represented over two fields, G=0, non-locally-constant maps; using all of C(-,Qlb) would break step 2, and the statement excludes it. There are no new nodes and no duplicate in the DAG; the closure (173 nodes) is acyclic; no SGA is used; the three Mathlib search kinds are recorded with real results. I accept the declared tool_uses (det-subextensions is on the route through sk-def-sfb-qlbar-condensed; the other two are definitions); none was actually needed. Maintainer notes: (a) possible B10 case: the project Lean has Profinite.isColimitPadicAlgClRingObjCocone in RingObjects/Condensed/FiniteSubextension.lean, around lines 173-196; that file has no sorry but I did not check its closure; lean_audit is {} because the dispatcher forbade attaching. (b) Unit sk-prop-sfb-qlbar-colimit-point still has an empty realized; this item is its statement. (c) The citations.json and searches.jsonl named in the report are not in the commit and are not needed."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+  "declaration": "Profinite.isColimitPadicAlgClRingObjCocone",
+  "declarations": [
+   "Profinite.isColimitPadicAlgClRingObjCocone",
+   "Profinite.padicSubfieldRingObjFunctor",
+   "Profinite.padicAlgClRingObjCocone"
+  ],
+  "statement": "noncomputable def isColimitPadicAlgClRingObjCocone :\n    IsColimit (padicAlgClRingObjCocone.{u} ℓ)",
+  "branch": "slopmaster2",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing colimit universal property in abelian sheaves on the coherent profinite site. Section binders are (ℓ : ℕ) [Fact ℓ.Prime], with arbitrary profinite universe u. The diagram uses FiniteIntermediateField ℓ and the recorded padicSubfieldRingObjMap; the cocone has vertex padicAlgClRingObj ℓ and the recorded padicSubfieldRingObjToPadicAlgCl legs. Its IsColimit data supplies the universal additive sheaf morphism, factorization and uniqueness. A clean server consumer checks the full colimit type, filteredness, desc/fac/uniq, endpoints, identity transitions, the bottom field and universes 0 and u+1. No duplicate module or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eeb83c67d",
+  "group": "NW",
+  "result": "pass",
+  "note": "Only change vs side-live: existing:true lean record binding the item to Profinite.isColimitPadicAlgClRingObjCocone (FiniteSubextension.lean:173-196, fully proved, no sorry); statement field verbatim. Clause match: FiniteIntermediateField ℓ (nonempty, IsFiltered) = poset I; diagram padicSubfieldRingObjFunctor uses the recorded padicSubfieldRingObjMap; cocone legs are the recorded padicSubfieldRingObjToPadicAlgCl; vertex padicAlgClRingObj has finiteIntermediateFieldValued sections (not all of C(-,Qbar)); IsColimit in Sheaf(coherentTopology Profinite.{u}) Ab.{u+1} gives exactly the explicit ∃! additive morphism clause; arbitrary u, no extra hypotheses. No other node owns the colimit/diagram/cocone declarations (def-sfb-qlbar-x-cocone owns the distinct ProEtale pullback cocone). Edge cases (empty S, point, G=0, non-locally-constant maps) covered. Advisory: continuousMapRingObj is owned by nodes outside stmt_deps, the same as in the landed dependency records. Nothing compiled (no FIX)."
  }
 }

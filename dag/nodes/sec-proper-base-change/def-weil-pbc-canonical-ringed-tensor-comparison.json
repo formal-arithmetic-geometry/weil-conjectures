@@ -73,8 +73,20 @@
   "declaration": "SheafOfModules.CanonicalRingedTensorComparison",
   "statement": "structure CanonicalRingedTensorComparison",
   "branch": "sheaf-dag",
-  "by": "A4",
-  "date": "2026-10-16"
+  "by": "Q64",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.CanonicalRingedTensorComparison",
+   "SheafOfModules.CanonicalRingedTensorComparisonOnSmallSites",
+   "SheafOfModules.ringedComparisonPure",
+   "SheafOfModules.ringedComparisonScalarSection",
+   "SheafOfModules.ringedComparisonInsertionCondition",
+   "SheafOfModules.ringedComparisonPureCondition",
+   "SheafOfModules.RingedComparisonInsertion",
+   "SheafOfModules.RingedComparisonTensor",
+   "SheafOfModules.ringedComparisonNaturality"
+  ],
+  "note": "Section 1(B), repair of return 413f37dfba29: preserve the landed module, primary declaration CanonicalRingedTensorComparison, and all five fields with unchanged types; repeated pure-section expressions are factored through helper definitions with definitionally equal bodies. Extend its owning module with the small-sites presentation of the same normalized comparison for EssentiallySmall sites with independent object and morphism universes, together with the actual pure tensor and scalar-extension sheafification helpers. The original interface equated all site universes with the coefficient universe and cannot express this item; it remains available for every existing user. The insertion and generalized-pure proposition types are factored through real definitions, retaining their complete equations definitionally while keeping generated record declarations compact."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -96,5 +108,13 @@
   "kind": "interface",
   "note": "independent Codex review: Delivered files match the packet; all 13 delivered/importer modules compile cleanly, interface changes are recorded, statements and DAG nodes agree, and no prohibited declarations or unaccounted adaptations were found."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ce279999",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 413f37dfba29; both corrections done. def-weil-pbc-algebraic-inverse-image record identical to live (AlgebraicInverseImageOfUniverses untouched); item imports AlgebraicInverseImage directly with lean.note. RingedTensorComparisonSmallSites dropped; CanonicalRingedTensorComparisonOnSmallSites and the ringedComparisonPure/ScalarSection/condition helpers added to A4's RingedTopoiTensorComparisonData. That record keeps module, declaration and statement, with a superset declarations list. The original structure keeps its parameters and 5 fields, now written through real helper defs (definitionally equal bodies). Item theorem byte-identical to the previously accepted head and re-read against the node: hφ, hobj/hmap, hunit, hlax/hlaxUnit pins; δ = every k'.mu with existence; IsIso; scalar and unit formulas with inverses; EssentiallySmall.{u} with independent universes; docstrings with source and Steps 1-5; sorry only. Other nodes and blueprint-index identical to live. Importers compiled against the delivered module: UnitUnique 11.0 s and UnitExistence 59.7 s clean (delivered module 54.7 s). Worker records Construction clean at 57.1 s. CanonicalTensorPullback not compiled because of load; its proof was read and its field uses compile in UnitExistence. At load ~180 the live pre-delivery module also times out at 60 s, so the cost is not new: retry landing at lower load if it times out."
+ }
 }

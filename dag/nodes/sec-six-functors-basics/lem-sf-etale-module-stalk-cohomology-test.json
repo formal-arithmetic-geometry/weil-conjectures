@@ -231,5 +231,33 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-7ceed5ee9 (reviewer sub-agent of L); spot-checked: I read the whole item. This is the first split of a node Q18 created on 2026-10-21; it is not in route-pivot-dropped, has no re-split note of its own, and is still unsplit on live and side-live. The statement is unchanged and there are no new nodes. Sources checked: Stacks 03PT(3), 03PU, 03DA, 03DB, 04EQ, 0DJJ, 015F(3,4), 010N; all tags match their labels. The coefficient category D(Mod(A_T)) matches def-weil-pbc-derived-categories and the parent lem-sf-etale-stalk-tor-test, which uses the item for the stalk comparison and zero detection on unbounded D. Step checks: step 1 uses forgetful (1) on the étale site and the exact-functor homology leaf. Step 2 is genuinely elementary: the germ action via constant sections a_V, made well defined by semilinear restriction. Step 3 checks module exactness on underlying groups through the abelian stalk-exact leaf. Step 4 uses the unbounded complex-cohomology leaf, so quasi-isomorphisms are preserved degree by degree. Step 5 uses the unbounded derived factorization, with naturality via inverses in the localization. Step 6 applies abelian conservativity to 0→U𝓕 and then faithfulness of U; it never uses the D⁺-only derived conservativity. Edge cases checked: A=0, T empty, an unbounded complex with zero differentials, a single degree, and Z/4 with ×2. I accept the tool_uses (generic forgetful and conservativity). Maintainer note: steps 1–4 repeat the statement of lem-sfb-etale-stalk-constant-complex-exactness (N9, other unit, created the same day, unsplit), so the overlap should share one Lean declaration. That is not a duplicate node, since the item adds the derived comparison and zero detection. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleStalkCohomologyTest",
+  "declaration": "AlgebraicGeometry.Etale.etaleModuleStalk_cohomology_test",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleModuleForget_preserves_cohomology",
+   "AlgebraicGeometry.Etale.moduleForget_preserves_cohomology",
+   "AlgebraicGeometry.Etale.etaleModuleStalk_exact",
+   "AlgebraicGeometry.Etale.etaleModuleStalk_preserves_quasiIso",
+   "AlgebraicGeometry.Etale.etaleModuleStalk_derived_factors",
+   "AlgebraicGeometry.Etale.etaleModuleStalk_cohomology_iso",
+   "AlgebraicGeometry.Etale.etaleModuleStalk_cohomology_test"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleStalkCohomologyTest.lean",
+  "statement": "theorem etaleModuleStalk_cohomology_test (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) (E : DerivedCategoryModule A T) (i : ℤ) : IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj E) ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).obj (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapDerivedCategory.obj E))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The seven declarations together render all clauses: forgetting module structures, exactness, termwise quasi-isomorphism preservation, the existing unbounded derived factorization, natural A-linear cohomology comparison, and vanishing detection. Uses the established constant-coefficient ModuleCat-valued sheaf encoding of def-weil-pbc-derived-categories. The nine live definition statement dependencies are unchanged. Imports WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper and enables CategoryTheory.GrothendieckTopology.Point.sheafFiber_additive locally; no theorem statement dependency is added solely for that Prop instance, and no new stalk or derived-category construction is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70009f0ae",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of fa81cbfe6594. Diff vs that snapshot: the module only swaps `public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk` for `WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper` and adds `attribute [local instance] CategoryTheory.GrothendieckTopology.Point.sheafFiber_additive` before the namespace; the seven theorem signatures, sorry bodies and docstrings are byte-identical. stmt_deps are back to the nine live definition nodes and only lean.note changed (accurately); the node differs from side-live only in `lean`. This exact variant compiled clean in 31.5 s in the prior review; the worker's scompile and deliver2 dry run were clean; no own compile (no file changed). lean.statement verbatim; DerivedCategoryModule = DerivedCategory(Sheaf T_et (ModuleCat.{u+1} A)); all clauses rendered as already checked in full (exactness, forgetful on sheaves and modules, quasi-iso preservation, mapDerivedCategory with factorization, natural comparison, zero detection with Ω quantified); edge cases empty T, A=0, unbounded complexes. Not dropped, no repair note, not superseded on side-live, no name clash, overlapping N9 node has no lean. Report has Worker report, Second reading by Q44 and a repair section. Advisory: pin the Nonempty isos to the canonical ones."
  }
 }
