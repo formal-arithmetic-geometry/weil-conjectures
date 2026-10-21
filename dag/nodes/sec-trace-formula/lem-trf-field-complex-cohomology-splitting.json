@@ -17,77 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Use [def-weil-abstract-derived-category] to write $Z^i=\\ker d^i$, $B^i=\\operatorname{im}d^{i-1}$ and $H^i(P)=Z^i/B^i$. The vector spaces $H^i(P)$ and $B^{i+1}$ are projective by [lem-weil-pbc-vector-space-projective]. Apply the lifting property of [def-weil-pbc-projective-module] to the identity of each target of the surjections $Z^i\\twoheadrightarrow H^i(P)$ and $d^i:P^i\\twoheadrightarrow B^{i+1}$. It supplies linear sections $t_i$ and $s_i$. Set $V^i=t_i(H^i(P))$ and $T^i=s_i(B^{i+1})$. For $x\\in P^i$, subtract $s_i(d^ix)$ to enter $Z^i$, then subtract $t_i$ of its quotient class to enter $B^i$. Applying $d^i$ and then the quotient proves uniqueness. Thus $P^i=B^i\\oplus V^i\\oplus T^i$, and $d^i:T^i\\to B^{i+1}$ is an isomorphism. These choices are independent in each integer degree; no boundedness is used.",
+   "text": "For each degree use the complemented modular lattice of subspaces and d²=0 to choose B-disjoint V with B⊔V=Z, and choose a complement T to Z. This proves the existence clause without lifting choices.",
+   "uses": [
+    "lem-weil-pbc-vector-space-projective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For prescribed V,T, form IsCompl V (B⊔T). Extend the cohomology quotient π from cycles to a linear b₀ on the term using injectivity of vector spaces. The restriction c=b₀|V is injective: exactness of P^(n-1)→cycles→homology sends a class-zero v to a boundary, and B∩V=0. It is surjective: write any cycle as b+v and b₀ kills B. Compose c and its inverse with projection onto V along B⊔T and inclusion. Obtain a,b with range a=V, ker b=B⊔T, ab=id in diagram order, iCycles≫b=π, a≫d=0, and d≫b=0. Assemble chain maps. Their first composite is identity and the second induces identity on homology, hence is homotopic to identity by lem-pc-split-category-null-homotopy applied to its difference from identity.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "lem-pc-split-category-null-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "All vector spaces are projective and injective. For any family φ of homology maps, choose sections a of the target π and extensions b of the source π, and set f^n=b_n≫φ_n≫a_n≫iCycles. The differential kills both ends, so f is a chain map. Cancel π and iCycles in homology naturality to verify H^n(f)=φ_n. Two maps with equal homology maps are homotopic by applying lem-pc-split-category-null-homotopy to their difference.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-derived-category-cohomology-functor",
+    "lem-pc-split-category-null-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The same null-homotopy lemma makes every complex K-projective: maps into an acyclic complex induce zero on homology. Mathlib CochainComplex.IsKProjective.quasiIso_iff supplies the homotopy equivalence with its hom equal to each given quasi-isomorphism. Its Qh_map_bijective makes every derived arrow between represented objects the localization of a chain map. Hence equal homology maps give equal derived maps by homotopy invariance. Lift arbitrary homology families using the preceding step and the canonical homologyFunctorFactors isomorphisms; use Q.objObjPreimageIso for arbitrary objects. This proves the stated canonical Hom bijection.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-vector-space-projective",
-    "def-weil-pbc-projective-module"
+    "def-weil-derived-category-cohomology-functor",
+    "lem-pc-split-category-null-homotopy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tags 09FN (lemma-vector-space-is-free), 09FP (lemma-field-semi-simple); lifting formulation in algebra.tex, Tag 05CF (lemma-characterize-projective)"
-   }
+   "elementary": true
   },
   {
-   "text": "For any chosen complements in the statement, identify $V^i$ with $H^i(P)$ using the quotient. Let $a_P:H(P)\\to P$ be inclusion of this block and $b_P:P\\to H(P)$ its projection. They are chain maps with $b_Pa_P=1$. Define $h_P^i:P^i\\to P^{i-1}$ as $(d^{i-1}|_{T^{i-1}})^{-1}$ on $B^i$ and zero on $V^i\\oplus T^i$. For $x=b+v+t$, one has $d^{i-1}h_P^i(x)=b$ and $h_P^{i+1}d^i(x)=t$. Hence $dh_P+h_Pd=1-a_Pb_P$, the required homotopy. Inclusion sends a cohomology class to its chosen cycle, and projection sends a cycle to its class, so both induced cohomology maps are identities under [def-weil-derived-category-cohomology-functor].",
-   "uses": [
-    "def-weil-derived-category-cohomology-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
-  },
-  {
-   "text": "If $f-g=dh+hd$ and $x$ is a cycle, then $(f-g)x=d(hx)$, a boundary. Thus homotopic maps induce the same cohomology maps, by the cycle formula of [def-weil-derived-category-cohomology-functor]. For any chain map $f:P\\to Q$, use the contractions of Step 2 on both complexes. Put $A_P=a_Pb_P$ and $A_Q=a_Qb_Q$. The degree $-1$ map $h_Qf+A_Qfh_P$ has $d(-)+(-)d=(1-A_Q)f+A_Qf(1-A_P)=f-A_QfA_P$. Thus $f$ is homotopic to $a_Q(b_Qfa_P)b_P$. The middle chain map between zero-differential complexes is exactly the degreewise map $H^i(f)$. In particular two maps inducing the same cohomology maps are homotopic.",
-   "uses": [
-    "def-weil-derived-category-cohomology-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
-  },
-  {
-   "text": "For a quasi-isomorphism $f:P\\to Q$, each $H^i(f)$ is invertible by [def-weil-abstract-derived-category]. Let $u:H(Q)\\to H(P)$ have components $H^i(f)^{-1}$ and put $g=a_Pub_Q$. The induced cohomology maps of $gf$ and $fg$ are identities, so Step 3 gives $gf\\simeq1_P$ and $fg\\simeq1_Q$. Conversely a homotopy equivalence induces inverse cohomology maps by Step 3. Consequently the images of all quasi-isomorphisms in the homotopy category $K(F)$ are already isomorphisms.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-derived-category-cohomology-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
-  },
-  {
-   "text": "Use the homotopy-category localization description in [def-weil-abstract-derived-category], and write $L:K(F)\\to D(F)$ for its localization functor. By Step 4 the identity functor of $K(F)$ already inverts the specified arrows. The localization universal property therefore factors it as $R L\\cong1_{K(F)}$ for a functor $R:D(F)\\to K(F)$. Precomposing $L R$ with $L$ gives $L R L\\cong L$, also the restriction of $1_{D(F)}$. The fully faithful part of the same universal property lifts this natural isomorphism and its inverse, giving $L R\\cong1_{D(F)}$. Thus $L$ is an equivalence. This is just two applications of the defining localization property, and uses no boundedness or finite-dimensionality assumption.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU (definition-unbounded-derived-category), localization at quasi-isomorphisms in the homotopy category"
-   }
-  },
-  {
-   "text": "A chain map $H(P)\\to H(Q)$ is an arbitrary family of linear maps $H^i(P)\\to H^i(Q)$, by the chain-map definition in [def-weil-abstract-derived-category]; both differentials are zero. A homotopy between two such maps forces their difference $dh+hd$ to be zero, so quotienting by homotopy identifies no distinct such families. Conjugating by $a_P,b_P,a_Q,b_Q$ in $K(F)$, then applying the equivalence of Step 5, gives the displayed bijection for derived Hom sets. Step 2 says these conjugating maps induce the identity on cohomology; hence this bijection is exactly the map induced by the functors of [def-weil-derived-category-cohomology-functor], not merely an abstract bijection.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-derived-category-cohomology-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
-  },
-  {
-   "text": "If $P\\in D^b_{\\mathrm{fd}}(F)$, [def-weil-point-fd-complexes] says its cohomology is finite-dimensional and supported in finitely many degrees. Thus Step 2 represents it by the bounded zero-differential complex $H(P)$. Each term is finitely generated, since the finite spanning condition of [def-weil-finite-dimensional-subspace] is the module condition of [def-weil-finitely-generated-module], and projective by [lem-weil-pbc-vector-space-projective]. This is precisely a bounded complex of finitely generated projectives, so $P$ is perfect by [def-pc-perfect-ring-complex].",
+   "text": "Build the zero-differential complex A^n=H^n(P) explicitly. Its homology is canonically A^n via isoHomologyπ and iCyclesIso. Lift these comparison isomorphisms by the Hom bijection; DerivedCategory.isIso_iff makes the lifted arrow an isomorphism. Finite cohomological support gives lower and upper bounds, including empty support, and termwise finite dimension is the given hypothesis. Each term is finite and projective, which proves IsPerfectRingComplex.",
    "uses": [
     "def-weil-point-fd-complexes",
     "def-weil-finite-dimensional-subspace",
@@ -95,53 +58,29 @@
     "lem-weil-pbc-vector-space-projective",
     "def-pc-perfect-ring-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
+   "elementary": true
   },
   {
-   "text": "Under Step 6, the idempotent $e$ is the family $E_i=H^i(e)$, with $E_i^2=E_i$ by functoriality [def-weil-derived-category-cohomology-functor]. Write $S^i=\\operatorname{im}E_i$ and $N^i=\\ker E_i$ with zero differentials. The maps $x\\mapsto(E_ix,(1-E_i)x)$ and $(s,n)\\mapsto s+n$ are inverse: $E_i$ fixes its image, kills its kernel, and $E_i(1-E_i)=0$. They give an isomorphism of zero-differential complexes $H(P)\\cong S\\oplus N$. Finite spanning sets for $H^i(P)$ project under $E_i$ and $1-E_i$ to finite spanning sets for these summands; outside the cohomological support both are zero. Hence $S,N\\in D^b_{\\mathrm{fd}}(F)$ by [def-weil-point-fd-complexes] and [def-weil-finite-dimensional-subspace].",
-   "uses": [
-    "def-weil-derived-category-cohomology-functor",
-    "def-weil-point-fd-complexes",
-    "def-weil-finite-dimensional-subspace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
-  },
-  {
-   "text": "Transport the preceding degreewise inclusion $S\\to H(P)$ and projection $H(P)\\to S$ along the isomorphism $H(P)\\cong P$ of Step 2. Call the resulting derived maps $i,r$. Their composites have cohomology $1_{S^j}$ and $E_j$ respectively, so the injectivity in Step 6 gives $ri=1_S$ and $ir=e$. Likewise the kernel summand gives the complementary summand of $P$. If $ve=ev$, functoriality of [def-weil-derived-category-cohomology-functor] gives $H^j(v)E_j=E_jH^j(v)$. For $s=E_jx$, $H^j(v)s=E_jH^j(v)x$ lies in $S^j$; for $n\\in\\ker E_j$, $E_jH^j(v)n=H^j(v)E_jn=0$. Thus $H^j(v)$ preserves both summands. On their direct sum $H^j(ve)$ has blocks $H^j(v)|_{S^j}$ and zero. The first is $H^j(rvi)$; faithfulness from Step 6 gives the asserted block description in $D(F)$.",
+   "text": "For each idempotent cohomology map E, use IsIdempotentElem.isCompl to split range E and ker E. Their inclusions and complement projections satisfy i≫r=id, r≫i=E, j≫s=id, s≫j=id-E, by projectionOnto_comp_subtype and eq_projection. Form the explicit zero-differential complexes of these spaces. Conjugate the inclusions/projections by their derivedZeroIso homology comparisons and lift by the Hom bijection. Injectivity of that bijection proves the four splitting equations in D(F).",
    "uses": [
     "def-weil-derived-category-cohomology-functor"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
+   "elementary": true
   },
   {
-   "text": "Finally let $(S,i,r)$ and $(S',i',r')$ split the same $e$. All the following are formal compositions in the category of [def-weil-abstract-derived-category]. From $ir=i'r'=e$, $ri=1$ and $r'i'=1$ one gets $ei=i$, $ei'=i'$, $re=r$ and $r'e=r'$. Thus $(ri')(r'i)=r e i=ri=1_S$ and $(r'i)(ri')=r'e i'=r'i'=1_{S'}$. Moreover $(r'i)(rvi)=r'evi=r'vi$, whereas $(r'vi')(r'i)=r'vei=r'vi$. This proves the inverse formula and the requested intertwining equation, including for any other splitting not chosen from the cohomology model.",
+   "text": "From the four splitting equations deduce i≫e=i, e≫r=r, j≫e=0, e≫s=0 and both cross composites zero. Then lift(r,s) and desc(i,j) are inverse by biprod.lift_desc and biproduct extensionality. If v commutes with e, e≫v≫s=0, so biproduct extensionality gives the stated diagonal block formula. For any two splittings, associate their composites and substitute r≫i=r′≫i′=e, i≫e=i, i′≫e=i′. The two comparison composites become identities, and ve=ev proves intertwining.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "First sentence: transported perfect complexes and compatible idempotents; explicit field-complex argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
   "lem-weil-pbc-vector-space-projective",
-  "def-weil-pbc-projective-module",
   "def-weil-derived-category-cohomology-functor",
+  "lem-pc-split-category-null-homotopy",
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
   "def-weil-point-fd-complexes",
   "def-weil-finite-dimensional-subspace",
   "def-weil-finitely-generated-module",
@@ -150,7 +89,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-  "place": "First sentence: explicit vector-space contraction and retract calculation expanding the extracted field-complex argument; background Stacks Tags 09FN, 09FP, 05CF and 05RU"
+  "place": "K6 Lean proof: the original ten-step field-complex argument, using the already proved split-category null-homotopy lemma and Mathlib K-projective localization API for steps 3–6; explicit complement normalization, finite cohomology model and retract equations."
  },
  "mathlib_searches": [
   {
@@ -299,5 +238,15 @@
   "result": "pass",
   "note": "Node statement/deps/proof unchanged vs side clone; lean.statement verbatim equal to file signature. All clauses checked against node: complements Z=B⊕V, P=Z⊕T with normalized HomotopyEquiv H(P)→P for every choice (range V, ker B⊔T, inv on cycles = homologyπ); QuasiIso f → HomotopyEquiv with hom=f; canonical Hom_D(P,Q)→∏_n Hom(H^nP,H^nQ) bijective; pointFiniteDimensional ⇒ bounded FD zero-differential model and IsPerfectRingComplex; idempotent splitting S≅im H(e), N≅ker H(e), i≫r=1, r≫i=e, j/s split 1−e, α=lift r s/desc i j with block identity (entries verified); arbitrary-splitting inverse and intertwining equations match (r'i)(rvi)=(r'vi')(r'i) in diagram order. Same HasDerivedCategory instance and universe u as dependencies; no extra hypotheses; edge cases P=0, empty support, e=0/1, v=0, unbounded/infinite-dim covered. No definitions, one sorry, docstrings with source and blueprint tag and 10 proof steps. nt_compile.py on the snapshot file: rc=0, 8.0 s, no errors or warnings. Second-reading section is an openly labelled self-review; this independent review covers it, not a fault."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261021T130045-L-2500778",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

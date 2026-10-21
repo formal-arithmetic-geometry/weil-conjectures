@@ -22476,3 +22476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:00 L: merged deliver/J1/WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization (stage 3; reviewer PASS; after a return; landing 20261021T130034-L-2498045 (proof); batch 20261021T125931; modules 1; new nodes 0)
 - 13:00 L: merged deliver/J3/Sheaf.Paper.ScalarModelFiniteFlatResolution (stage 3; reviewer PASS; first push; landing 20261021T130038-L-2498770 (interface); batch 20261021T125931; modules 1; new nodes 0; change records: coord/changes/J3-scalar-model-proof-scopes.md)
 - 13:00 L: merged deliver/K1/Sheaf.Paper.FiniteFreeCoefficientTransport (stage 3; reviewer PASS; first push; landing 20261021T130041-L-2499690 (proof); batch 20261021T125931; modules 1; new nodes 0)
+- 13:00 L: merged deliver/K6/Sheaf.Algebra.Homology.FieldComplexCohomologySplitting (stage 3; reviewer PASS; first push; landing 20261021T130045-L-2500778 (proof); batch 20261021T125931; modules 1; new nodes 0)
