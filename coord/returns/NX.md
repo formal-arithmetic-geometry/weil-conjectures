@@ -17,6 +17,3 @@ L: the delivery could not be prepared for review: NOT MERGED def-weil-pbc-bounde
 
 L (re-issued by the launcher; the entry had been lost): very.py return N3 thm-cbc-finite-level-proetale E1 and 7b: the delivery adds a supplied compactification and quasi-compact open hypothesis, weakening the exact master theorem. The exact blueprint source is present but the report incorrectly says it is absent. The conditional proof checks out, but the target-level source defect must be resolved without silently weakening the target. Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-pe-comparison-injective-left-modules-acyclic (2026-10-21 03:22 UTC, branch head a52e0e7be7)
-
-re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts again. Follow the note of this item: spread the work over new statement-only nodes of comparable size, each cited by the step that uses it; the item's proof becomes their short assembly (at most 3000 characters); never shorten or blur an argument instead of making it a node.
