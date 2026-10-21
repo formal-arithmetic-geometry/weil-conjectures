@@ -13,9 +13,123 @@
   "def-galois-fibre-functor",
   "def-galois-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $j$, write $\\mathcal F_j$ as a lisse $E_j$-sheaf extended to $\\Qlb$, with $E_j/\\mathbf Q_\\ell$ finite, using the pair description in [def-pod-lisse-l-adic-sheaves](4). Apply [cor-galois-lisse-representations](2) over $E_j$. Its fibre functor gives a finite-dimensional continuous $E_j$-representation $V_j$, and its scalar-extension compatibility identifies $V_j\\otimes_{E_j}\\Qlb$ equivariantly with $(\\mathcal F_j)_{\\bar x}$ for the natural stalk action. The connected, Noetherian, separated and $\\ell$-invertible hypotheses required by that corollary are exactly the hypotheses on $X$.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "The exact $\\Qlb$-equivalence of [cor-galois-lisse-representations](2) makes these stalk representations irreducible. Here every invariant vector subspace is an object of the representation category in [def-pod-l-adic-representations](3): choose a basis of an invariant subspace $W\\subset V_j\\otimes\\Qlb$ in reduced column-echelon form and a finite extension $L/E_j$ containing its finitely many coordinates. If $W_L$ is its $L$-span, pivot coordinates give $W\\cap(V_j\\otimes L)=W_L$. Every group element has its matrix in $E_j$, so it preserves this intersection; the pivot coordinates also express its action on $W_L$ as linear combinations over $L$ of the original continuous matrix entries. Thus $W_L$ is a continuous finite-dimensional $L$-representation and $W=W_L\\otimes_L\\Qlb$. A nonzero proper $W$ would therefore give a nonzero proper subobject under the exact equivalence, contradicting the assumed irreducibility of $\\mathcal F_j$. Nonzeroness is reflected by an equivalence as well.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "On a small skeleton of the finite locally constant category, the fibre functor of [def-galois-fibre-functor] has finite values and its automorphism group has the evaluation topology. Apply [lem-galois-aut-profinite] to conclude that $\\Pi$ is profinite, in particular a compact topological group.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-galois-aut-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR, lemma-aut-inverse-limit"
+   }
+  },
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_{E_j}$ is a DVR with fraction field $E_j$, finite residue field, and uniformizer $\\varpi_j$. Apply [lem-pod-profinite-stable-lattice] to the jointly continuous action from step 1 and compact group from step 3 to choose a stable full finite free lattice $L_j$. Apply the recorded statement of [lem-zl-finite-matrix-irreducibility] using step 2: it gives a possibly different stable lattice $D_j$ and $m_j\\geq1$ detecting irreducibility modulo $\\varpi_j^{m_j}D_j$. To use precisely that statement, compare the lattices explicitly. Express finite generators of $D_j$ in a basis of $L_j$, and express the finitely many basis vectors of $L_j$ in the $E_j$-span of generators of $D_j$. The finitely many coefficients lie in $E_j$; their valuations are bounded below. Choose $a_j\\geq0$ making all coefficients integral after multiplication by $\\varpi_j^{a_j}$. Then $\\varpi_j^{a_j}L_j\\subseteq D_j\\subseteq\\varpi_j^{-a_j}L_j$. Set $N_j=m_j+2a_j\\geq1$. If $\\rho_j(h)-\\rho_j(g)$ maps $L_j$ into $\\varpi_j^{N_j}L_j$, then it maps $D_j$ into $\\varpi_j^{N_j-a_j}L_j\\subseteq\\varpi_j^{m_j}D_j$. Hence any subgroup with the same reduction image on $L_j/\\varpi_j^{N_j}L_j$ also has the same image on $D_j/\\varpi_j^{m_j}D_j$ and acts absolutely irreducibly. This also agrees with the current given-integral-basis matrix-witness formulation, which applies directly to a basis of $L_j$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pod-profinite-stable-lattice",
+    "lem-zl-finite-matrix-irreducibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "Put $A_j=\\mathcal O_{E_j}/\\varpi_j^{N_j}\\mathcal O_{E_j}$ and $M_j=L_j/\\varpi_j^{N_j}L_j$. By [lem-weil-valued-dvr-finite-quotients], $A_j$ is finite and $\\varpi_j^{N_j}\\mathcal O_{E_j}=\\mathfrak m_{E_j}^{N_j}$. A lattice basis identifies $M_j$ with a finite power of $A_j$, so $\\operatorname{Aut}_{A_j}(M_j)$ is finite. Stability gives a homomorphism $\\alpha_j:\\Pi\\to\\operatorname{Aut}_{A_j}(M_j)$. For continuity, use the jointly continuous action in [def-pod-l-adic-representations](2), furnished in step 1. In a lattice basis, the topology of $V_j$ is the product topology on $E_j^{d_j}$, and $L_j$ corresponds to $\\mathcal O_{E_j}^{d_j}$. Since $\\mathfrak m_{E_j}^{N_j}=\\varpi_j^{N_j}\\mathcal O_{E_j}$ is an open ball about zero, every coset of $\\mathfrak m_{E_j}^{N_j}L_j$ is open in $L_j$ for its subspace topology. Evaluation of the action on each basis vector followed by reduction is therefore continuous to the finite discrete module $M_j$. A linear automorphism of $M_j$ is determined by those basis images, so the finite tuple of evaluations embeds its automorphism group into a finite discrete product. This proves continuity of $\\alpha_j$, and hence $K_j=\\ker\\alpha_j$ is open and normal.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "Define $\\alpha=(\\alpha_j)_j$ with target the finite product of the preceding finite automorphism groups, let $Q=\\alpha(\\Pi)$ with its discrete topology, and let $q:\\Pi\\to Q$ be $\\alpha$ with codomain restricted to its image. This is a continuous surjective homomorphism to a finite group, and $q(g)=1$ if and only if every $\\alpha_j(g)=1$. Thus $K=\\ker q=\\bigcap_jK_j$ is the required open normal subgroup. If $r=0$, the product and $Q$ are the trivial group and this intersection is $\\Pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "Apply the pointed form of [cor-galois-open-subgroups] to the open subgroup $K$. It supplies a nonempty connected finite etale cover $p:T\\to X$ and $t\\in|T_{\\bar x}|$ with stabilizer exactly $K$. The category of finite etale covers is a Galois category by [lem-fet-galois-category]; since $T$ is connected as a scheme, [lem-galois-finite-etale-connected-object] makes it a connected object. Then [lem-galois-transitive] says that $\\Pi$ acts transitively on its fibre. Define $Q\\to|T_{\\bar x}|$ by $q(g)\\mapsto g\\cdot t$. If $q(g)=q(h)$, then $h^{-1}g\\in K$, so $g\\cdot t=h\\cdot t$; the same implication reversed proves injectivity, and transitivity proves surjectivity. The identity $(ag)\\cdot t=a\\cdot(g\\cdot t)$ proves equivariance for the regular left action on $Q$. Invert this bijection for the stated fibre identification. For $r=0$ one can take $T=X$ and the identity cover.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "lem-fet-galois-category",
+    "lem-galois-finite-etale-connected-object",
+    "lem-galois-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  },
+  {
+   "text": "Finally let $H\\subseteq\\Pi$ satisfy $q(H)=Q$. For each $g\\in\\Pi$, choose $h\\in H$ with $q(h)=q(g)$. Then $h^{-1}g\\in\\ker q\\subseteq\\ker\\alpha_j$ for every $j$, so $\\alpha_j(h)=\\alpha_j(g)$. Hence $H$ and $\\Pi$ have exactly the same reduction image on each $M_j$. The conclusion of [lem-zl-finite-matrix-irreducibility] for the lattices and integers of step 4 gives irreducibility of every $V_j\\otimes_{E_j}\\Qlb$ under $H$. No closedness of $H$ is used: only equality of these finite images is needed. For the empty family this conclusion is vacuous.",
+   "uses": [
+    "lem-zl-finite-matrix-irreducibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+    "place": "proof: finite coefficient fields, finite reduction quotients, and intersection of open normal kernels"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "cor-galois-lisse-representations",
+  "def-pod-l-adic-representations",
+  "def-galois-fibre-functor",
+  "lem-galois-aut-profinite",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-profinite-stable-lattice",
+  "lem-zl-finite-matrix-irreducibility",
+  "lem-weil-valued-dvr-finite-quotients",
+  "cor-galois-open-subgroups",
+  "lem-fet-galois-category",
+  "lem-galois-finite-etale-connected-object",
+  "lem-galois-transitive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "first six sentences, completed using L19 Proposition 1.1.9 and Stacks 0BMR/0BNB/0BND"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +179,52 @@
    "results": "8 hits; Representation.IsIrreducible, Algebra.IsInvariant.isIntegral_of_profinite, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, InfiniteGalois.profiniteGalGrp, InfiniteGalois.asProfiniteGaloisGroupFunctor, Representation.IsIrreducible.toIsSimpleOrder, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial. Basic representation irreducibility and invariant-ring/profinite Galois results do not construct a finite etale cover detecting a family.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|finite.etale|fundamentalGroup|absolute.*irreducib",
+   "results": "0 hits: . No matching declarations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common finite quotient of the etale fundamental group detects absolute irreducibility of finitely many l-adic local systems",
+   "results": "8 hits: ProfiniteGrp.isIso_toLimit, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Field.absoluteGaloisGroupAbelianization, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, instFiniteAbelianization. Only abstract finite Galois actions, projective representations, invariant-ring results, or definitions of irreducibility; none states the common lisse-sheaf detecting-cover assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.IsIrreducible, CategoryTheory.PreGaloisCategory",
+   "results": "0 hits: . No matching declarations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of irreducible lisse l-adic sheaves on a connected scheme has one finite etale cover whose finite monodromy quotient detects irreducibility for every subgroup surjecting onto it",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected, CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.fiber_in_connected_component. Only abstract finite Galois actions, projective representations, invariant-ring results, or definitions of irreducibility; none states the common lisse-sheaf detecting-cover assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIrreducible|stable.*lattice|congruence",
+   "results": "6 hits: Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Irreducible.lean, Mathlib/RepresentationTheory/Irreducible.lean, Mathlib/RepresentationTheory/Irreducible.lean, Mathlib/RepresentationTheory/Irreducible.lean, Mathlib/RepresentationTheory/Irreducible.lean. Only abstract finite Galois actions, projective representations, invariant-ring results, or definitions of irreducibility; none states the common lisse-sheaf detecting-cover assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many absolutely irreducible continuous representations of a profinite group over finite extensions of the l-adic numbers admit one common finite congruence quotient that detects irreducibility on subgroups",
+   "results": "8 hits: FDRep.instProjectiveOfNeZeroCastCard, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, Rep.instProjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Rep.instInjective, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor. Only abstract finite Galois actions, projective representations, invariant-ring results, or definitions of irreducibility; none states the common lisse-sheaf detecting-cover assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-curve-testing-irreducibility",
@@ -85,5 +241,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-common-irreducibility-detecting-cover",
+  "worker": "stage1",
+  "summary": "Q97 repaired the returned delivery against the current DAG: retained the eight-step common-cover construction and re-read every cited statement. Step 4 now explicitly compares the stable finite free lattice with the lattice chosen by the recorded existential matrix witness, transferring detection by increasing the level; step 5 proves reduction continuity in coordinates. This makes the split valid for both the recorded statement and current general matrix formulation. No new nodes, statement changes or Lean changes. The delivery tool rebases onto current origin/sheaf-dag and preserves current maintainer metadata.",
+  "blueprint": "Realizes the first six sentences of lem-zl-curve-testing-irreducibility.proof.md: finite coefficient fields and reduction witnesses, intersecting open normal kernels, constructing the connected cover, and detection for subgroups surjecting onto every reduction.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "The generic exact fibre equivalence supplies continuous finite-coefficient representations and reflects subobjects; the unit has no separate sheaf/representation correspondence."
+   },
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "Compactness of the fundamental group supplies the hypothesis of the invariant-lattice tool; this is a generic automorphism-group fact."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "The generic compact-group theorem supplies a stable full finite free lattice; step 4 explicitly compares it with the matrix witness lattice, so no unrecorded arbitrary-lattice form of the witness is assumed."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The local-field coefficient theorem supplies the DVR, fraction-field, finite-residue-field and uniformizer hypotheses for the finite-matrix and finite-quotient tools."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic DVR coefficient-quotient finiteness turns each lattice reduction into a finite monodromy quotient."
+   },
+   {
+    "node": "cor-galois-open-subgroups",
+    "why": "Generic pointed finite etale correspondence realizes the constructed open kernel by a connected cover; no purity theorem is used."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Supplies the Galois-category hypothesis for the generic transitivity theorem."
+   },
+   {
+    "node": "lem-galois-finite-etale-connected-object",
+    "why": "Converts scheme connectedness of the chosen cover to the exact categorical hypothesis of transitivity."
+   },
+   {
+    "node": "lem-galois-transitive",
+    "why": "Generic transitivity identifies the fibre of the connected pointed cover explicitly with the regular quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-galois-lisse-representations",
+  "lem-galois-aut-profinite",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "cor-galois-open-subgroups",
+  "lem-fet-galois-category",
+  "lem-galois-finite-etale-connected-object",
+  "lem-galois-transitive"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-dbf8fbb7c",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-dbf8fbb7c (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes. It is a re-delivery of the PASSed head 24c23b06, which never reached live; live and side-live still hold the item unsplit, with the same statement and stmt_deps. Neither the item nor any cited node is on the dropped list, and there is no cycle with the parent lem-zl-curve-testing-irreducibility. The re-split note belongs to the parent and is resolved; this item has none. Against 24c23b06 only steps 4 and 5 changed, and I re-read all eight steps. Step 4: the recorded statement of lem-zl-finite-matrix-irreducibility gives its own lattice D and level m. The step takes L from lem-pod-profinite-stable-lattice (Π compact by step 3, joint continuity by step 1) and proves ϖ^a L ⊆ D ⊆ ϖ^{-a} L. With N=m+2a, a congruence mod ϖ^N on L gives one mod ϖ^m on D, since ϖ^{N-a}L = ϖ^m(ϖ^a L) ⊆ ϖ^m D. This repairs the old step's use of the existential statement for an arbitrary L, and it also agrees with the blueprint_update form. Step 5: lem-weil-valued-dvr-finite-quotients(1,2) gives A_j finite with ϖ^N O = m^N. Continuity comes from def-pod-l-adic-representations(2) on the actual lattice: ϖ^N L is open, so the finitely many basis evaluations are continuous into the discrete M_j and α_j is continuous. Steps 1-3 and 6-8 are unchanged and correct: the cor-galois-lisse-representations(2) hypotheses match X exactly; the echelon descent puts W_L in def-pod(3); lem-galois-aut-profinite gives profinite Π; the pointed cor-galois-open-subgroups cover has stabiliser K and transitivity gives the regular fibre bijection; q(H)=Q gives equal reduction images. I checked r=0, rank one, X a point, non-closed H and different E_j. I accept the 9 tool_uses as generic black boxes; no SGA source is used. Advisory only: the proof is 6.4k characters (each step under 2000), and step 7 identifies Aut(F_ȳ) on FLC with the action on |P_ȳ| through def-galois-fibre-functor and thm-galois-lc-etale, as the earlier PASS accepted."
  }
 }
