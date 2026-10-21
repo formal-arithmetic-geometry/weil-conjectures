@@ -1,7 +1,9 @@
 ## What changed
 
 Restored the complete quarantined Sheaf.Paper.ExceptionalCoefficientComparison module
-from its current rework row. Proved tensorIso_existsUnique from the existing canonical
+from its current rework row. Split the remaining exceptional comparison theorem into three strictly smaller named intermediate results, each carrying the corresponding portion of the blueprint proof. The parent theorem combines them by real conjunction reassociation.
+
+Proved tensorIso_existsUnique from the existing canonical
 flat-model tensor comparison, extending the equation to all complexes by naturality
 along two flat K-flat resolutions. Proved uniqueness by the existing binary uniqueness
 result. Proved unitIso_existsUnique from the K-flat unit representative and the ordinary
@@ -24,8 +26,8 @@ lem-pur-exceptional-coefficient-comparison and def-pur-exceptional-coefficient-t
 - AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique.
 - AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso_existsUnique.
 
-Added holes: none. Split off: none. The previously proved compactSupportMap_isIso is
-preserved. The sole remaining hole is AlgebraicGeometry.Etale.exceptional_coefficient_comparison
+Added three named intermediate holes: exceptional_domain_and_counit, exceptional_naturality_and_cocycle, and exceptional_tensor_and_base_change, each recorded by a new DAG node. The parent theorem is proved from these three strict sub-results. Split off: three intermediate results. The previously proved compactSupportMap_isIso is
+preserved. The remaining holes are the three intermediate theorems (listed above), each with its own node. The top-level AlgebraicGeometry.Etale.exceptional_coefficient_comparison hole is closed by applying them
 (node lem-pur-exceptional-coefficient-comparison); its statement and complete ten-step
 proof docstring are unchanged. This is a partial proof delivery of a module with several
 original holes, not a decomposition of its main theorem.
@@ -37,7 +39,7 @@ and its original use of tensorIso_existsUnique.choose and unitIso compiled in 51
 
 ## No longer needed
 
-No node or module is withdrawn or declared obsolete: the remaining main theorem still
+The original proof-dependency nodes are retained for the split theorem statements. No node or module is withdrawn or declared obsolete: the remaining main theorem still
 needs its recorded proof dependencies and unit route. Its mathematical plan is retained.
 The following direct proof-only imports were unused by the proofs in this packet and
 removed; this does not assert their nodes are unnecessary to the remaining main theorem:
@@ -71,6 +73,14 @@ predicate exposes enough nested proof data to make the direct term exceed the co
 limit. The generic wrapper repairs that representation without weakening its equation.
 The tensor proof needs only the existing flat-model canonical comparison plus naturality
 and flat K-flat resolutions; it does not require a new monoidal-extension existence lemma.
+
+## New nodes
+
+- `b3-exceptional-domain-counit`: domain preservation, invertibility, and the counit identity.
+- `b3-exceptional-naturality-cocycle`: naturality and the successive quotient cocycle.
+- `b3-exceptional-tensor-base-change`: tensor and Cartesian base-change compatibilities.
+
+Each new node is attached to the existing module and is a strict conjunction component of the parent theorem; the parent proof combines the three components by `exact ⟨...⟩`.
 
 ## Second reading by B3
 

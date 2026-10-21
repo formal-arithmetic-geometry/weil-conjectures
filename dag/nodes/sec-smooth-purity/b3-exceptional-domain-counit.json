@@ -1,0 +1,106 @@
+{
+ "id": "b3-exceptional-domain-counit",
+ "kind": "lemma",
+ "title": "Domain, invertibility and counit equation for exceptional coefficient mates",
+ "status": "split",
+ "statement": "The first two conjuncts of the exceptional coefficient comparison theorem: bounded constructible finite-Tor objects remain in the exceptional domain, and the canonical quotient comparison is invertible with its counit-transpose identity.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Domain check and counit-transpose calculation in the proof of compatibility (2)."
+ },
+ "proof": [
+  {
+   "text": "The displayed clauses are obtained by the corresponding domain, mate, projection and exchange calculations from the cited dependencies. The remaining categorical calculation is recorded as this intermediate result for independent proof.",
+   "uses": [
+    "lem-pur-finite-reduction-constructibility",
+    "thm-asd-smooth-tensor",
+    "lem-asd-proper-finite-coefficient-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-reduction-constructibility",
+  "thm-asd-smooth-tensor",
+  "lem-asd-proper-finite-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Domain check and counit-transpose calculation in the proof of compatibility (2).",
+  "note": "Strictly smaller conjunction used to assemble the parent theorem."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptional_domain_and_counit",
+   "results": "No existing exact declaration.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Domain, invertibility and counit equation for exceptional coefficient mates",
+   "results": "No exact existing theorem; only generic mate and tensor declarations.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Domain, invertibility and counit equation for exceptional coefficient mates",
+   "results": "No exact existing theorem; only generic categorical candidates.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "date": "2026-10-21",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-exceptional-coefficient-comparison",
+   "place": "Domain check and counit-transpose calculation in the proof of compatibility (2).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "file": "lean/Sheaf/Paper/ExceptionalCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exceptional_domain_and_counit",
+  "statement": "theorem exceptional_domain_and_counit (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (hm : 1 ≤ m) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] [SmoothOfRelativeDimension d f] (hInvertible : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (hb : ExceptionalCoefficients.CompactSupportCocycle l f) : (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) X ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧ (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y), DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K → IsIso (ExceptionalCoefficients.compactSupportMap (FiniteReduction.quotient l hmr) (HasCompactification.compactification f) ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧ (rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).map (ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).counit.app ((scalarExtension (FiniteReduction.quotient l hmr) Y).obj K) = ExceptionalCoefficients.comparisonInverse (FiniteReduction.quotient l hmr) (HasCompactification.compactification f) ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫ (scalarExtension (FiniteReduction.quotient l hmr) Y).map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T023257-L-2943750",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T023257-L-2943750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

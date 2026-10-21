@@ -770,6 +770,102 @@ def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}
 
 end ExceptionalCoefficients
 
+
+/-- Domain preservation, invertibility, and the counit equation for exceptional coefficients.
+Source: blueprint compatibility steps 1 and 4.
+Proof: the domain is obtained from finite-reduction constructibility and smooth tensor
+transport; the coefficient map is invertible by proper finite coefficient extension and
+its counit equation follows by transposing the defining mate.
+(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+theorem exceptional_domain_and_counit
+    (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (hm : 1 ≤ m)
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [SmoothOfRelativeDimension d f]
+    (hInvertible : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))
+    (hb : ExceptionalCoefficients.CompactSupportCocycle l f) :
+    (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) X
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧
+    (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      IsIso (ExceptionalCoefficients.compactSupportMap (FiniteReduction.quotient l hmr)
+        (HasCompactification.compactification f)
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K)) ∧
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).map
+          (ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K) ≫
+        (rightDerivedUpperShriekAdjunction
+          (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).counit.app
+            ((scalarExtension (FiniteReduction.quotient l hmr) Y).obj K) =
+      ExceptionalCoefficients.comparisonInverse (FiniteReduction.quotient l hmr)
+        (HasCompactification.compactification f)
+        ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫
+        (scalarExtension (FiniteReduction.quotient l hmr) Y).map
+          ((rightDerivedUpperShriekAdjunction
+            (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).counit.app K)) := by
+  sorry
+
+/-- Naturality and the successive quotient cocycle for exceptional coefficient mates.
+Source: blueprint compatibility steps 4--5.
+Proof: transpose both sides under the exceptional adjunction; naturality of the mate
+and the counit gives the first equality, and vertical mate pasting plus the assumed
+compact-support cocycle gives the successive quotient equality.
+(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+theorem exceptional_naturality_and_cocycle
+    (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (hm : 1 ≤ m)
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [SmoothOfRelativeDimension d f]
+    (hInvertible : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))
+    (hb : ExceptionalCoefficients.CompactSupportCocycle l f) :
+    (∀ (K K' : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K' →
+      ∀ h : K ⟶ K',
+        (scalarExtension (FiniteReduction.quotient l hmr) X).map
+            ((rightDerivedUpperShriek
+              (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).map h) ≫
+          ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K' =
+        ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K ≫
+          (rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l m)) f).map
+            ((scalarExtension (FiniteReduction.quotient l hmr) Y).map h)) ∧
+    (∀ (n : ℕ) (hnm : n ≤ m) (_hn : 1 ≤ n)
+      (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      (scalarExtension (FiniteReduction.quotient l hnm) X).map
+          (ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hmr) f K) ≫
+        ExceptionalCoefficients.mateMap (FiniteReduction.quotient l hnm) f
+          ((scalarExtension (FiniteReduction.quotient l hmr) Y).obj K) ≫
+        (rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l n)) f).map
+          ((ExceptionalCoefficients.quotientAssociator Y l hmr hnm).hom.app K) =
+      (ExceptionalCoefficients.quotientAssociator X l hmr hnm).hom.app
+          ((rightDerivedUpperShriek (ModuleCat.{u + 1} (FiniteReduction.Coeff l r)) f).obj K) ≫
+        ExceptionalCoefficients.mateMap (FiniteReduction.quotient l (hnm.trans hmr)) f K) := by
+  sorry
+
+/-- Tensor and Cartesian base-change compatibilities for exceptional coefficient mates.
+Source: blueprint compatibility steps 6--10.
+Proof: compare proper projection maps by ringed exchange, compare open extension by
+zero on stalks, and transpose the resulting compact-support square and smooth tensor
+square through the exceptional adjunctions.
+(blueprint: lem-pur-exceptional-coefficient-comparison). -/
+theorem exceptional_tensor_and_base_change
+    (l r m d : ℕ) [Fact l.Prime] (hmr : m ≤ r) (hm : 1 ≤ m)
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [HasCompactification f] [SmoothOfRelativeDimension d f]
+    (hInvertible : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))
+    (hb : ExceptionalCoefficients.CompactSupportCocycle l f) :
+    (∀ (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      ExceptionalCoefficients.TensorCompatibility (FiniteReduction.quotient l hmr) f K) ∧
+    (∀ (Y' : Scheme.{u}) [IsNoetherian Y'] (g : Y' ⟶ Y)
+      (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
+      DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
+      ExceptionalCoefficients.BaseChangeCompatibility (FiniteReduction.quotient l hmr) f g K) := by
+  sorry
+
 /-- Exceptional comparison for consecutive finite quotient coefficients, including
 its domain, counit identity, naturality, quotient cocycle, tensor and Cartesian
 base-change compatibilities. Source: blueprint main-20261015, sec-smooth-purity/
@@ -865,6 +961,9 @@ theorem exceptional_coefficient_comparison
       (K : DerivedCategoryModule (FiniteReduction.Coeff l r) Y),
       DerivedCategory.boundedConstructibleFiniteTor (FiniteReduction.Coeff l r) Y K →
       ExceptionalCoefficients.BaseChangeCompatibility (FiniteReduction.quotient l hmr) f g K) := by
-  sorry
+  obtain ⟨h₁, h₂⟩ := exceptional_domain_and_counit l r m d hmr hm f hInvertible hb
+  obtain ⟨h₃, h₄⟩ := exceptional_naturality_and_cocycle l r m d hmr hm f hInvertible hb
+  obtain ⟨h₅, h₆⟩ := exceptional_tensor_and_base_change l r m d hmr hm f hInvertible hb
+  exact ⟨h₁, h₂, h₃, h₄, h₅, h₆⟩
 
 end AlgebraicGeometry.Etale

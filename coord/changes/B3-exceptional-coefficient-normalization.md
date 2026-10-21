@@ -69,4 +69,4 @@ The quarantined sources were also searched explicitly.
 
 ## Status
 
-landed 20261021T020055-L-2581770 2026-10-21 (merge of deliver/B3/Sheaf.Paper.ExceptionalCoefficientComparison)
+landed 20261021T023257-L-2943750 2026-10-21 (merge of deliver/B3/Sheaf.Paper.ExceptionalCoefficientComparison)
