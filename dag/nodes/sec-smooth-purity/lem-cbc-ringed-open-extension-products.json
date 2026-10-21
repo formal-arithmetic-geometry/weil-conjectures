@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Let $i:Z\\hookrightarrow X$ be the reduced induced closed subscheme on $|X|\\setminus j(U)$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Write $L=j_!$, $J=j^{-1}$ and $I=i^{-1}$, with coefficients $R$, $J R=R|_U$ and $I R$ respectively. The ringed recollement statement [lem-weil-pbc-proetale-ringed-open-closed] applies: its hypotheses are precisely a closed immersion, its quasi-compact open complement and an arbitrary commutative ring sheaf. In particular there is a natural isomorphism $\\theta:JL\\xrightarrow{\\sim}\\mathrm{id}$, one has $IL=0$, and every $R$-module sheaf $M$ has the short exact sequence $0\\to LJM\\to M\\to i_*IM\\to0$. These assertions require no quasi-compactness or quasi-separatedness of $X$.",
+   "text": "Choose the reduced closed complement $i:Z\\hookrightarrow X$ by [lem-weil-pbc-reduced-induced-closed-subscheme]. Put $L=j_!$, $J=j^{-1}$, $I=i^{-1}$. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $i,j,R$: it gives $\\theta:JL\\cong\\mathrm{id}$, $IL=0$, exact $L,i_*$ and $0\\to LJM\\to M\\to i_*IM\\to0$ for every $M$. Only $j$ must be quasi-compact; no ambient qcqs clause is used.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-proetale-ringed-open-closed"
@@ -28,24 +28,24 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); closed complement: schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)."
+    "place": "Tag 09BP (lemma-j-shriek-limits), reduced closed complement; ringed localization input from lemma-ses-associated-to-open."
    }
   },
   {
-   "text": "Put $Q=\\prod_s F_s$ and $P=\\prod_s LF_s$, and let $c:LQ\\to P$ be the map with components $L(\\mathrm{pr}_s)$ in the question. These products exist as sectionwise module limits by [lem-weil-pbc-module-sheaves-limits-sectionwise]. Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the open immersion $j$. It gives an isomorphism $\\beta:JP\\xrightarrow{\\sim}Q$ whose component at $s$ is $\\theta_{F_s}\\circ J(\\mathrm{pr}_s)$. Naturality of $\\theta$ gives $\\mathrm{pr}_s\\circ\\beta\\circ Jc=\\theta_{F_s}\\circ JL(\\mathrm{pr}_s)=\\mathrm{pr}_s\\circ\\theta_Q$. By the product universal property, $\\beta\\circ Jc=\\theta_Q$, so $Jc$ is an isomorphism. The natural identification $JL\\cong\\mathrm{id}$ used here is exactly the one asserted in [lem-weil-pbc-proetale-ringed-open-closed]; no identification of an unrelated adjunction unit is required.",
+   "text": "Put $Q=\\prod_sF_s$, $P=\\prod_sLF_s$ and $c:LQ\\to P$ with components $L(\\mathrm{pr}_s)$. The products exist by [lem-weil-pbc-module-sheaves-limits-sectionwise]. Open restriction $J$ preserves them by [lem-weil-pbc-proetale-immersion-limit-preservation]. Apply [lem-cbc-retraction-product-comparison] to $L,J,\\theta$: its map $\\beta$ has components $\\theta_{F_s}J(\\mathrm{pr}_s)$ and satisfies $\\beta J(c)=\\theta_Q$, so $J(c)$ is invertible.",
    "uses": [
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-cbc-retraction-product-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP (lemma-j-shriek-limits), kernel argument; open restriction as slice restriction, with module limits from sites-modules.tex Tag 03DB (lemma-limits-colimits)."
+    "place": "Tag 09BP (lemma-j-shriek-limits), product comparison checked on the open; extracted retraction calculation."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the closed immersion $i$. Its module inverse image preserves all products, hence $IP\\cong\\prod_s ILF_s=\\prod_s0=0$, using $IL=0$ from [lem-weil-pbc-proetale-ringed-open-closed]. The last equality follows sectionwise from [lem-weil-pbc-module-sheaves-limits-sectionwise]: the product of any small family of zero modules is the zero module, also when the family is empty. Likewise $ILQ=0$. Thus $Ic$ is the unique map between two zero objects and is an isomorphism.",
+   "text": "Closed restriction $I$ preserves products by [lem-weil-pbc-proetale-immersion-limit-preservation]. Since $IL=0$ by [lem-weil-pbc-proetale-ringed-open-closed], one has $I(LQ)=0$ and $IP\\cong\\prod_sILF_s=0$. The last product is zero sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], including for an empty family. Thus $I(c)$ is a map between zero objects and is invertible.",
    "uses": [
     "lem-weil-pbc-proetale-immersion-limit-preservation",
     "lem-weil-pbc-proetale-ringed-open-closed",
@@ -54,24 +54,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AA (lemma-closed-immersion), clause (1), and Tag 09AG (lemma-jshriek-zero), as used in the kernel proof of Tag 09BP."
+    "place": "Tag 09BP (lemma-j-shriek-limits), closed restriction and lemma-closed-immersion."
    }
   },
   {
-   "text": "The module-sheaf categories are abelian by [def-weil-sheaf-of-modules-category]. Let $K=\\ker c$ and $C=\\operatorname{coker}c$. Both $J$ and $I$ are exact by [lem-weil-pbc-proetale-immersion-limit-preservation], so Steps 2 and 3 give $JK=IK=JC=IC=0$. For either $M=K$ or $M=C$, the sequence of [lem-weil-pbc-proetale-ringed-open-closed] now has zero outer terms: $LJM=L0=0$ because $L$ is exact, and $i_*IM=i_*0=0$ because $i_*$ is exact. Hence $M=0$. Thus $c$ has zero kernel and cokernel and is an isomorphism in the abelian module category.",
+   "text": "If $JM=IM=0$, the short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] has zero outer terms, since exact $L,i_*$ preserve zero; hence $M=0$. The module categories are abelian by [def-weil-sheaf-of-modules-category], and $J,I$ preserve zero morphisms and finite limits and colimits by [lem-weil-pbc-proetale-immersion-limit-preservation]. Apply [lem-cbc-exact-pair-detects-isomorphisms] to $c$, using Steps 2 and 3: $c$ is invertible.",
    "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-cbc-exact-pair-detects-isomorphisms"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH (lemma-ses-associated-to-open): elementary kernel/cokernel consequence of recollement, applied to the comparison in Tag 09BP."
+    "place": "Tag 09BP (lemma-j-shriek-limits), detection using lemma-ses-associated-to-open; extracted exact-pair kernel/cokernel criterion."
    }
   },
   {
-   "text": "For a map of families $(a_s:F_s\\to G_s)_s$, compare the two maps from $L(\\prod_sF_s)$ to $\\prod_sLG_s$. Their $s$-th components are both $L(a_s\\circ\\mathrm{pr}_s)=L(a_s)\\circ L(\\mathrm{pr}_s)$, so they agree by the product universal property. This proves naturality of the specified comparison, and of its inverse since each component comparison is invertible. If the index set is empty, both products are terminal zero module sheaves and $L0=0$ by exactness, so the unique comparison is again an isomorphism. The cases $U=\\varnothing$, $j=\\mathrm{id}_X$, $X=\\varnothing$ and the zero coefficient ring are included by the same formulas.",
+   "text": "For a family map $(a_s:F_s\\to G_s)_s$, both paths in the naturality square have $s$-th component $L(a_s\\circ\\mathrm{pr}_s)=L(a_s)\\circ L(\\mathrm{pr}_s)$. The product universal property proves equality; inverses are then natural too. For the empty family the sectionwise products are zero and exact $L$ preserves zero. These formulas also include $U=\\varnothing$, $j=\\mathrm{id}_X$, $X=\\varnothing$ and the zero coefficient ring.",
    "uses": [
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "lem-weil-pbc-proetale-ringed-open-closed"
@@ -79,7 +80,7 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP (lemma-j-shriek-limits), product comparison; naturality and the empty family by the product universal property."
+    "place": "Tag 09BP (lemma-j-shriek-limits), canonical comparison; naturality and empty family by product uniqueness."
    }
   }
  ],
@@ -88,12 +89,14 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "def-weil-sheaf-of-modules-category"
+  "lem-cbc-retraction-product-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-exact-pair-detects-isomorphisms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BP (lemma-j-shriek-limits), kernel/recollement argument, using Tags 09AA, 09AG, 09AH and 09BN in their existing ringed refinements; the two restrictions detect the kernel and cokernel of the canonical product comparison."
+  "place": "Tag 09BP (lemma-j-shriek-limits), existing ringed recollement refinement; re-split into a generic retraction product-comparison calculation and an exact-pair isomorphism criterion. The original open/closed comparison argument is retained."
  },
  "mathlib_searches": [
   {
@@ -197,20 +200,20 @@
   "date": "2026-10-21",
   "item": "lem-cbc-ringed-open-extension-products",
   "worker": "stage1",
-  "summary": "Retained the arbitrary-ring-sheaf statement and no ambient qcqs assumption. Used existing ringed open-closed recollement and immersion inverse-image limit preservation, checked against their full statements and Stacks 09BP/09AA/09AH. Proved the canonical product comparison by its open and closed restrictions, then explicitly killed its kernel and cokernel. Included naturality and the empty family. No new nodes, statement changes, Lean edits or compilation.",
-  "blueprint": "Realizes the final parenthetical countable-product assertion in the main-20261015 proof of lem-cbc-completed-extension-zero-comparison, with the already imposed quasi-compact-open correction. Replaces the unsupported sectionwise-extension explanation by the ringed recollement kernel argument; proves all small products.",
+  "summary": "Human-requested re-split. Statement and statement dependencies unchanged. Extracted two independently implementable categorical arguments as statement-only unsplit nodes: retraction product comparison (old Step 2) and exact-pair detection (old Step 4). Kept the closed restriction calculation, localization zero detection and naturality explicit. All searches executed by msearch.py. No Lean writes or compilation.",
+  "blueprint": "Final parenthetical assertion in the proof of lem-cbc-completed-extension-zero-comparison that open extension preserves countable products; the ringed correction is implemented by open and closed restrictions. Preserves the corrected ringed proof of that parenthetical assertion; new nodes realize its open projection and kernel/cokernel arguments.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "Constructs the reduced closed complement for an arbitrary scheme; the compact-support unit has no replacement construction."
+    "why": "Generic reduced complement construction, unavailable within the compact-support unit."
    },
    {
     "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic ringed pro-etale recollement gives the open restriction identity, closed vanishing and localization short exact sequence for arbitrary ring sheaves without ambient qcqs."
+    "why": "Generic ringed recollement and localization sequence, used with arbitrary coefficients and quasi-compact complementary open only."
    },
    {
     "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Generic immersion inverse image preserves small limits and is exact on arbitrary ring-sheaf modules; needed for the open and closed restrictions of the product comparison."
+    "why": "Generic immersion inverse-image exactness and small-product preservation on module sheaves."
    }
   ]
  },
@@ -222,10 +225,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q02-b327290ea",
-  "group": "Q02",
+  "reviewer": "NT-cc-NB-5560f47e6",
+  "group": "NB",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b327290ea (reviewer sub-agent of L); spot-checked: I read the item, the 5 cited statements and Stacks proetale.tex 09BP/09AA/09AG/09BN/09AH. The statement and stmt_deps are byte-identical to the live node. There are no new nodes and no repair note; the proof has 5 steps and 3275 characters, with no SGA source. The proof does not follow 09BP's own argument, which uses exactness of products after reducing to an affine X. Instead it checks the comparison c after restricting to U and to the closed complement Z, then kills ker c and coker c with the localization exact sequence. Step 1: lem-weil-pbc-proetale-ringed-open-closed needs only a closed immersion, a quasi-compact complementary open and an arbitrary ring sheaf; its qcqs clause is unused. It gives j^{-1}j_! ≅ id, i^{-1}j_! = 0, exactness of j_! and i_*, and the short exact sequence. Step 2: lem-weil-pbc-proetale-immersion-limit-preservation applies to the open immersion, and the projection equality shows that the restriction of the specified map c is invertible, not just that its endpoints are isomorphic. Step 3: the same node for the closed immersion, with i^{-1}j_! = 0, gives zero on both sides; the empty product is 0 sectionwise. Step 4: the kernel/cokernel argument is valid in the abelian module category. Step 5: naturality and the empty family check out. I tested U=∅, j=id, X=∅, the zero ring, the empty and singleton families, and a non-quasi-compact X. Duplicates: det-sf-open-closed-extension-zero-limits clause 3 is the qcqs special case of the item, which NV already created; advisory only. lem-sfb-condensed-open-extension-products is a different statement (derived categories, condensed coefficients). Accepted tool_uses: reduced-induced-closed-subscheme, proetale-ringed-open-closed and proetale-immersion-limit-preservation, all generic black-box tools; unit sk-prop-sf-cbc has an empty realized field. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-5560f47e6 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote no fixes. The human's 2026-10-21 re-split note (live coord/repair-notes) is still released. Under the 10:58Z maintenance rule (243a4db5baf) the item is judged on its merits even though it is already Lean-closed (E2 landing 06:10Z). Compared with the live node, only proof, proof_deps, proof_origin and split_report differ; statement, stmt_deps and lean are byte-identical, so no target is weakened. The proof went from 3275 to 2082 chars, still in 5 steps. Old step 2 (β with components θ_{F_s}J(pr_s), β∘J(c)=θ_Q) became the new node lem-cbc-retraction-product-comparison. The kernel/cokernel half of old step 4 became the new node lem-cbc-exact-pair-detects-isomorphisms. Old steps 1, 3 and 5 kept their content in full, with nothing dropped. Two generic nodes of comparable size, neither restating the item, answer the note's minimum of 1. Cited statements checked: ringed-open-closed needs only a closed immersion, a complementary quasi-compact open and an arbitrary ring sheaf, and gives JL≅id, IL=0, exactness of L and i_*, and the SES (its qcqs clause is unused). immersion-limit-preservation gives the module inverse image for both the open and the closed immersion as exact and preserving small limits. Products are sectionwise; abelianness comes from def-weil-sheaf-of-modules-category. In step 4 the zero detection follows from the SES because L0=0 and i_*0=0. Both new nodes are true. Node 1: β is ∏θ composed with J's product comparison, and the identity follows by projections and naturality of θ. I tested S=∅ (terminal objects), L=J=id with θ a non-identity automorphism, and L not product-preserving. Node 2: J and I preserve kernels and cokernels, so ker c and coker c are zero and c is mono and epi. I tested J=I=0, where the stated hypothesis is essential, and C=0. Both node statements are self-contained and statement-only, with correct stmt_deps, blueprint.from and created fields. The searches ran with all three kinds. Mathlib's Jointly.lean needs JointlyFaithful, and JointlyReflectIsomorphisms.isZero_iff goes the other way, so neither is a match. DAG duplicate search: jointly-reflect-short-exact assumes the conclusion. lem-exc-open-closed-detection states only the geometric zero detection, which the item derives in two lines (advisory only). No live NQ node exists. Sources: Stacks 09BP (proetale.tex l.5185), 09AH/09AA/09BN/09AG, 002I and 010N (homology l.1545). No SGA. tool_uses are unchanged from live. Maintainer: retire the repair note after merge so the item stops being re-dispatched; the landed jointly_detect_iso already proves node 2."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts",

@@ -1,0 +1,76 @@
+{
+ "id": "lem-cbc-retraction-product-comparison",
+ "kind": "statement",
+ "title": "Product comparison after a product-preserving retraction",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be categories [def-nagata-category], $S$ a set small in a fixed universe, and suppose both categories admit products indexed by $S$ [def-weil-category-product]. Let $L:\\mathcal A\\to\\mathcal B$ and $J:\\mathcal B\\to\\mathcal A$ be functors. Suppose $J$ preserves these products [def-galois-exact-functor], and let $\\theta:JL\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal A}$ be a specified natural isomorphism, meaning $\\theta_{A'}\\circ JL(f)=f\\circ\\theta_A$ for every $f:A\\to A'$. For any family $(F_s)_{s\\in S}$ put $Q=\\prod_sF_s$, $P=\\prod_sLF_s$, and let $c:LQ\\to P$ be the unique map with $\\mathrm{pr}_s\\circ c=L(\\mathrm{pr}_s)$. Let $\\beta:JP\\to Q$ be the unique map with $\\mathrm{pr}_s\\circ\\beta=\\theta_{F_s}\\circ J(\\mathrm{pr}_s)$. Then $\\beta$ is an isomorphism and\n$$\\beta\\circ J(c)=\\theta_Q.$$\nConsequently $J(c)$ is an isomorphism. The assertion includes $S=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002I (definition-product), products and projection maps; agent-formulated retraction comparison extracted from Step 2 of lem-cbc-ringed-open-extension-products, implementing the ringed refinement of the product argument in proetale.tex lemma-j-shriek-limits."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-category-product",
+  "def-galois-exact-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let L from A to B and J from B to A be functors with a natural isomorphism J composed with L to the identity. If J preserves products then J sends the canonical product comparison for L to an isomorphism",
+   "results": "{\"t\": \"2026-10-21T11:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Let L from A to B and J from B to A be functors with a natural isomorphism J composed with L to the identity. If J preserves products then J sends the canonical product comparison for L to an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.Limits.instIsIsoProdComparison\", \"CategoryTheory.Limits.instIsIsoPiComparison\", \"CategoryTheory.Limits.prodComparison_comp\", \"CategoryTheory.CartesianMonoidalCategory.isIso_prodComparison_of_preservesLimit_pair\", \"CategoryTheory.Limits.PreservesProduct.iso\", \"CategoryTheory.Limits.prodComparisonNatIso_hom\", \"CategoryTheory.Limits.PreservesProduct.of_iso_comparison\"], \"digest\": \"6cee8ae0a8aa1ca6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: piComparison_comp_π and PreservesProduct.iso give the projection law and the product comparison for J; instIsIsoPiComparison assumes preservation by the functor whose comparison is tested. None states the displayed comparison identity for JL naturally isomorphic to identity, or gives J(c) invertible without assuming L preserves products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural retraction of functors JL isomorphic to identity identifies J applied to the product comparison of L with an isomorphism when J preserves the product",
+   "results": "{\"t\": \"2026-10-21T11:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"A natural retraction of functors JL isomorphic to identity identifies J applied to the product comparison of L with an isomorphism when J preserves the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.Limits.prodComparison_inv_natural\", \"CategoryTheory.Limits.PreservesProduct.iso_hom\", \"CategoryTheory.Limits.instIsIsoPiComparison\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π\", \"CategoryTheory.Limits.prodComparison_inv_natural_assoc\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonNatIso\", \"CategoryTheory.Limits.prodComparisonNatIso_hom\"], \"digest\": \"88f381078d936fb1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: piComparison_comp_π and PreservesProduct.iso give the projection law and the product comparison for J; instIsIsoPiComparison assumes preservation by the functor whose comparison is tested. None states the displayed comparison identity for JL naturally isomorphic to identity, or gives J(c) invertible without assuming L preserves products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If J preserves products and J composed with L is naturally isomorphic to identity then J applied to the product comparison of L is invertible",
+   "results": "{\"t\": \"2026-10-21T11:01:23Z\", \"tool\": \"leansearch\", \"query\": \"If J preserves products and J composed with L is naturally isomorphic to identity then J applied to the product comparison of L is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.prodComparisonNatIso_inv\", \"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonNatIso_inv\", \"CategoryTheory.Limits.prodComparison_inv_natural_assoc\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso_inv\", \"CategoryTheory.monoidalOfHasFiniteProducts.instIsIsoδ\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Limits.instIsIsoPiComparison\"], \"digest\": \"5bfc9d2f82816978\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: piComparison_comp_π and PreservesProduct.iso give the projection law and the product comparison for J; instIsIsoPiComparison assumes preservation by the functor whose comparison is tested. None states the displayed comparison identity for JL naturally isomorphic to identity, or gives J(c) invertible without assuming L preserves products."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "{\"t\": \"2026-10-21T11:00:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"piComparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.piComparison\", \"CategoryTheory.Limits.piComparison_comp_π\", \"CategoryTheory.Limits.map_lift_piComparison\", \"CategoryTheory.Limits.piComparison_comp_π_assoc\", \"CategoryTheory.Limits.map_lift_piComparison_assoc\", \"CategoryTheory.Limits.piComparison_comp_π_apply\", \"CategoryTheory.Limits.instIsIsoPiComparison\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π\"], \"digest\": \"f3dbde1e1ca0c968\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: piComparison_comp_π and PreservesProduct.iso give the projection law and the product comparison for J; instIsIsoPiComparison assumes preservation by the functor whose comparison is tested. None states the displayed comparison identity for JL naturally isomorphic to identity, or gives J(c) invertible without assuming L preserves products."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison_comp|piComparison.*[Ii]so|[Ii]so.*piComparison",
+   "results": "{\"t\": \"2026-10-21T11:00:56Z\", \"tool\": \"grep\", \"query\": \"piComparison_comp|piComparison.*[Ii]so|[Ii]so.*piComparison\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Preserves.lean\", \"Mathlib/CategoryTheory/Sites/Preserves.lean\", \"Mathlib/CategoryTheory/Sites/Preserves.lean\"], \"digest\": \"7192b27f00252e08\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: piComparison_comp_π and PreservesProduct.iso give the projection law and the product comparison for J; instIsIsoPiComparison assumes preservation by the functor whose comparison is tested. None states the displayed comparison identity for JL naturally isomorphic to identity, or gives J(c) invertible without assuming L preserves products."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-ringed-open-extension-products",
+  "date": "2026-10-21",
+  "group": "NB"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Final parenthetical assertion in the proof of lem-cbc-completed-extension-zero-comparison that open extension preserves countable products; the ringed correction is implemented by open and closed restrictions. Extracts the open-restriction projection calculation of the corrected product proof (old Step 2).",
+   "via": [
+    "lem-cbc-ringed-open-extension-products"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
