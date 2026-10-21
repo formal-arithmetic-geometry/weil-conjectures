@@ -9,10 +9,6 @@ public import Sheaf.Paper.CompletedPrimitiveCounitComparison
 public import Sheaf.Paper.CompletedOperationExpressions
 public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.CategoryTheory.StrictRoosComparison
 
 /-! # Normalized tensor constraints through coherent realization
 
@@ -237,6 +233,54 @@ def quotientMap (A N H : coefficientSequenceDerived l E W)
       r.inv.app ((coefficientSequenceLimit l E W).obj N,
         (coefficientSequenceLimit l E W).obj A)
 
+private theorem beta_counit (A N : coefficientSequenceDerived l E W) :
+    S.reduction.map (PrimitiveCounit.tensorBeta l E W S r A N) ≫
+        S.adjunction.counit.app (S.systemClosed.tensor.obj (A, N)) =
+      contraction l E W S r ((coefficientSequenceLimit l E W).obj A)
+          ((coefficientSequenceLimit l E W).obj N) ≫
+        S.systemClosed.tensor.map (Prod.mkHom (S.adjunction.counit.app A)
+          (S.adjunction.counit.app N)) := by
+  dsimp only [PrimitiveCounit.tensorBeta, contraction]
+  rw [Functor.map_comp, Category.assoc]
+  have hn := S.adjunction.counit.naturality
+    (S.systemClosed.tensor.map (Prod.mkHom (S.adjunction.counit.app A)
+      (S.adjunction.counit.app N)))
+  dsimp only [Functor.comp_map, Functor.id_map, Functor.id_obj] at hn
+  rw [hn]
+  simp only [Category.assoc, Functor.comp_obj]
+
+private theorem beta_associator_source (A N H : coefficientSequenceDerived l E W) :
+    betaSource l E W S r A N H .associator =
+      r.hom.app _ ≫ (coefficientSequenceLimit l E W).map
+        (S.systemClosed.tensor.map
+          (Prod.mkHom (gammaSource l E W S r A N H .symmetry)
+            (S.adjunction.counit.app H))) := by
+  change (integralCompletedTensor l E W).map
+      (Prod.mkHom (PrimitiveCounit.tensorBeta l E W S r A N) (𝟙 _)) ≫
+      (r.hom.app _ ≫ _) = _
+  rw [← Category.assoc, r.hom.naturality]
+  simp only [Functor.comp_map, Functor.prod_map]
+  simp only [Category.assoc, ← Functor.map_comp]
+  congr 2
+  dsimp only [gammaSource, betaSource, systemSource, completedSource, Functor.id_obj]
+  simp only [prod_comp, S.reduction.map_id, Category.id_comp]
+
+private theorem beta_associator_target (A N H : coefficientSequenceDerived l E W) :
+    betaTarget l E W S r A N H .associator =
+      r.hom.app _ ≫ (coefficientSequenceLimit l E W).map
+        (S.systemClosed.tensor.map
+          (Prod.mkHom (S.adjunction.counit.app A)
+            (gammaSource l E W S r N H A .symmetry))) := by
+  change (integralCompletedTensor l E W).map
+      (Prod.mkHom (𝟙 _) (PrimitiveCounit.tensorBeta l E W S r N H)) ≫
+      (r.hom.app _ ≫ _) = _
+  rw [← Category.assoc, r.hom.naturality]
+  simp only [Functor.comp_map, Functor.prod_map]
+  simp only [Category.assoc, ← Functor.map_comp]
+  congr 2
+  dsimp only [gammaSource, betaSource, systemSource, completedSource, Functor.id_obj]
+  simp only [prod_comp, S.reduction.map_id, Category.id_comp]
+
 /-- Transport of all four normalized tensor constraints, with the actual quotient
 construction on the left side of the conjugation equality. The first clause supplies
 the inner contraction isomorphism needed by that construction, without a new hypothesis.
@@ -317,6 +361,90 @@ theorem normalizedTensorConstraintTransport
             (coefficientSequenceDerivedEvaluation l E W m).map
                 (systemMap l E W S σ C A N H k).hom ≫
               (coefficientSequenceDerivedTransition l E W h).app _) := by
-  sorry
+  obtain ⟨ρ₁, ρ₂, ⟨P⟩⟩ := completedPrimitiveCounitComparison l E (𝟙 W) W
+    _hl _hl _hl S S
+  have hi (X Y : DerivedCategory (scalarReductionSource l E W)) :
+      IsIso (contraction l E W S r X Y) := by
+    let D := S.integralClosed.tensor.obj (X, Y)
+    let e := S.reductionTensor.app (X, Y)
+    have : IsIso (S.adjunction.counit.app (S.reduction.obj D)) :=
+      P.counit_effective _ (S.reduction_normalized D)
+    have hn := S.adjunction.counit.naturality e.hom
+    dsimp only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
+      Functor.comp_map, Functor.id_map] at hn
+    have : IsIso
+        (S.reduction.map ((coefficientSequenceLimit l E W).map e.hom) ≫
+          S.adjunction.counit.app (S.systemClosed.tensor.obj
+            (S.reduction.obj X, S.reduction.obj Y))) := by
+      rw [hn]
+      infer_instance
+    have : IsIso (S.adjunction.counit.app
+        (S.systemClosed.tensor.obj (S.reduction.obj X, S.reduction.obj Y))) :=
+      IsIso.of_isIso_comp_left
+        (S.reduction.map ((coefficientSequenceLimit l E W).map e.hom)) _
+    dsimp only [contraction]
+    infer_instance
+  let := hi ((coefficientSequenceLimit l E W).obj N)
+    ((coefficientSequenceLimit l E W).obj H)
+  refine ⟨inferInstance, ?_⟩
+  intro k hbs hbt hgs hgt
+  have hsq : quotientMap l E W S σ C r A N H k ≫
+      betaTarget l E W S r A N H k =
+    betaSource l E W S r A N H k ≫
+      (coefficientSequenceLimit l E W).map (systemMap l E W S σ C A N H k).hom := by
+    cases k with
+    | leftUnitor =>
+      simp only [quotientMap, betaSource, betaTarget, systemMap,
+        PrimitiveCounit.tensorBeta, Functor.map_comp, Category.assoc, Category.comp_id]
+    | rightUnitor =>
+      simp only [quotientMap, betaSource, betaTarget, systemMap,
+        PrimitiveCounit.tensorBeta, Functor.map_comp, Category.assoc, Category.comp_id]
+    | symmetry =>
+      let := S.systemClosed.monoidal
+      let := σ
+      dsimp only [quotientMap, betaSource, betaTarget, systemMap,
+        PrimitiveCounit.tensorBeta]
+      simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      apply congrArg ((coefficientSequenceLimit l E W).map)
+      exact (BraidedCategory.braiding_naturality
+        (S.adjunction.counit.app A) (S.adjunction.counit.app N)).symm
+    | associator =>
+      rw [beta_associator_source, beta_associator_target]
+      dsimp only [quotientMap, quotientAssociator, systemMap]
+      simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      apply congrArg ((coefficientSequenceLimit l E W).map)
+      let := S.systemClosed.monoidal
+      have hg (X Y Z : coefficientSequenceDerived l E W) :
+          gammaSource l E W S r X Y Z .symmetry =
+            contraction l E W S r ((coefficientSequenceLimit l E W).obj X)
+                ((coefficientSequenceLimit l E W).obj Y) ≫
+              S.systemClosed.tensor.map (Prod.mkHom (S.adjunction.counit.app X)
+                (S.adjunction.counit.app Y)) :=
+        beta_counit l E W S r X Y
+      rw [hg A N H, hg N H A]
+      simp only [Category.assoc, ← Functor.map_comp, prod_comp,
+        Category.id_comp, IsIso.inv_hom_id_assoc]
+      dsimp only [CoefficientClosedStructure.tensor, MonoidalCategory.tensor]
+      rw [← MonoidalCategory.associator_naturality]
+      rw [← Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom]
+      dsimp only [Functor.id_obj, Functor.comp_obj, Functor.prod_obj, contraction,
+        CoefficientClosedStructure.tensor, MonoidalCategory.tensor]
+      simp only [Category.id_comp]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · apply (cancel_mono (betaTarget l E W S r A N H k)).1
+    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hsq
+  · dsimp only [gammaSource, gammaTarget]
+    rw [← Category.assoc, ← Functor.map_comp, hsq, Functor.map_comp, Category.assoc]
+    rw [show S.reduction.map ((coefficientSequenceLimit l E W).map
+        (systemMap l E W S σ C A N H k).hom) ≫ _ = _ from
+        S.adjunction.counit.naturality _]
+    simp only [Category.assoc, Functor.id_map]
+  · exact S.adjunction.counit.naturality _
+  · intro m n h
+    exact ((coefficientSequenceDerivedTransition l E W h).naturality _).symm
 
 end WeilConjectures.NormalizedTensorTransport

@@ -28,158 +28,69 @@
  ],
  "proof": [
   {
-   "text": "Use the whole-system construction, not independent choices of the evaluated objects. The semilinear system category is the module category of the ring object $B_\\bullet$ in the sequence topos. The normalized-operation model gives simultaneous flat-term K-flat models for the finite iterated operations in question, the actual tensor transition adjoints, and their quotient cocycles. In particular $T(A,N)$, $T(N,H)$ and all four source and target systems are normalized. We may calculate tensor constraints on those models, retaining every horizontal system map; no coefficient quotient is assumed flat.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-normalized-operation-system-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A2 (lemma-tensor-product-K-flat), 07A4 (lemma-pullback-tensor-product); simultaneous system application supplied by the cited system-model statements."
-   }
-  },
-  {
-   "text": "Apply the ringed-site derived symmetric-monoidal statement on this sequence topos. It supplies natural isomorphisms of whole systems with exactly the displayed reassociation, scalar-action and signed-symmetry formulas. These are the total-complex constraints of the tensor used here. Concretely, on degrees $(p,q,r)$ both reassociated differentials have coefficients $1,(-1)^p,(-1)^{p+q}$; after symmetry the differential coefficients agree since $(-1)^{(p+1)q}=(-1)^{pq+q}$ and $(-1)^p(-1)^{p(q+1)}=(-1)^{pq}$. The ring factor in a unitor has degree zero. The inverse formulas are reverse reassociation, $x\\mapsto1\\otimes x$, $x\\mapsto x\\otimes1$, and signed symmetry again. These formulas are taken on the actual sheafified tensor summands of the simultaneous complex models.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), with the total-complex formulas and representative normalization of the cited statement."
-   }
-  },
-  {
-   "text": "For $m\\ge n$ put $q^*=-\\otimes^L_{B_m}B_n$. The cochain scalar-extension tensor comparison respects all four constraints. Compose that comparison square with naturality in the actual input adjoints $\\alpha^A_{m,n},\\alpha^N_{m,n},\\alpha^H_{m,n}$. If $\\alpha_P,\\alpha_Q$ denote the output adjoints specified by the normalized-operation model, the resulting square is $a_n\\alpha_P=\\alpha_Q q^*(a_m)$. For reassociation both composites send a triple to the same three adjoint images with the same parenthesization. For action both multiply the same scalar after quotienting it. For symmetry both give $(-1)^{pq}$ times the reversed images, since the quotient scalars have degree zero. Composing this square with the scalar-extension units gives the square for the actual semilinear transitions. These are equations of the simultaneous chain constructions and their localizations; they are not deduced from faithfulness of evaluation. The case $m=n$ is the identity square, and composition for $r\\ge m\\ge n$ uses the input quotient cocycles.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-pur-normalized-operation-system-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), proof; Tag 03EL (sites-modules-lemma-tensor-product-pullback). Agent expansion for arbitrary transition adjoints."
-   }
-  },
-  {
-   "text": "Suppress $W$, and write $X=\\mathcal LA$, $Y=\\mathcal LN$, $Z=\\mathcal LH$. Write $r_{K,J}:\\widehat T(K,J)\\xrightarrow{\\sim}\\mathcal LT(\\mathcal RK,\\mathcal RJ)$ for the primitive quotient/Roos comparison. Put $D_{A,N}=T(\\mathcal RX,\\mathcal RY)$, $B_{A,N}=\\widehat T(X,Y)$, and $d_{A,N}=e_{D_{A,N}}\\mathcal R(r_{X,Y}):\\mathcal RB_{A,N}\\to D_{A,N}$. Finally put $\\delta_{A,N}=e_{T(A,N)}\\mathcal R(\\beta_{T(A,N)})$. Expanding the specified primitive beta and using counit naturality for $T(e_A,e_N):D_{A,N}\\to T(A,N)$ gives the whole-system identity\n$$\\delta_{A,N}=T(e_A,e_N)d_{A,N}.$$\nThe same notation and identity apply to $(N,H)$. Each $\\delta$ is invertible: its beta is the primitive isomorphism and $T(A,N)$ is normalized, so effectivity makes its counit invertible. Thus $d_{A,N}=T(e_A,e_N)^{-1}\\delta_{A,N}$ is invertible as well. No assertion that the counit is monoidal has been used.",
-   "uses": [
-    "lem-pur-completed-primitive-counit-comparison",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-normalized-operation-system-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent counit calculation using Tag 0941 (lemma-derived-limit-is-ok) for the underlying limit model; the adjunction and naturality are the cited system-calculus assertions."
-   }
-  },
-  {
-   "text": "For the associator pair put $V_L=T(\\mathcal RB_{A,N},\\mathcal RZ)$ and $V_R=T(\\mathcal RX,\\mathcal RB_{N,H})$. Set $r_L=r_{B_{A,N},Z}$, $r_R=r_{X,B_{N,H}}$, $h_L=T(\\delta_{A,N},e_H)$ and $h_R=T(e_A,\\delta_{N,H})$. Naturality of $r$ and then of $e$ expands the recursive beta exactly as\n$$\\beta_P=\\mathcal L(h_L)r_L,\\qquad \\beta_Q=\\mathcal L(h_R)r_R.$$\nFor example naturality moves $\\widehat T(\\beta_{T(A,N)},1)$ past $r_L$ to $\\mathcal LT(\\mathcal R\\beta_{T(A,N)},1)$, and the subsequent primitive comparison applies $T(e_{T(A,N)},e_H)$, giving $h_L$. The other parenthesization is the same expansion in the second variable.",
+   "text": "Apply completedPrimitiveCounitComparison with the identity of W and reduction data S twice. Its counit_effective clause makes the counit invertible on every reduction object, because S.reduction_normalized supplies normalization. For arbitrary completed inputs X,Y, transport this counit isomorphism along S.reductionTensor.app (X,Y) by counit naturality. This makes the counit at T(RX,RY) invertible. Composing it with R(r_(X,Y)) proves that the contraction is invertible. This argument needs no tensor-normalization closure lemma.",
    "uses": [
     "lem-pur-completed-primitive-counit-comparison",
     "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent expansion of the primitive comparison recursion; counit naturality before evaluation."
+    "place": "Tag 07A4 (lemma-pullback-tensor-product) and Modules on Sites Tag 03EL (lemma-tensor-product-pullback); explicit agent refinement of original item proof steps 9-10: arbitrary normalized transitions, canonical completed constraints and coherent reduction."
    }
   },
   {
-   "text": "Let $a_0:T(D_{A,N},\\mathcal RZ)\\to T(\\mathcal RX,D_{N,H})$ be the total-complex reassociation on the three reduced input systems. The actual quotient-model completed reassociation, after the outer identifications $r_L,r_R$, is obtained by the following explicit roof of system maps:\n$$v=T(1,d_{N,H})^{-1}\\,a_0\\,T(d_{A,N},1):V_L\\longrightarrow V_R.$$\nIndeed reducing the inner completed tensor gives $\\mathcal RB_{A,N}$; its contraction to the tensor of the two reduced inputs is exactly $e_{D_{A,N}}\\mathcal Rr_{X,Y}=d_{A,N}$, the scalar-extension adjoint of its total-limit projections. After that contraction the ordinary tensor complex can be reassociated by $a_0$, and the inverse contraction on the right gives $V_R$. Hence the quotient/Roos completed map is $r_R^{-1}\\mathcal L(v)r_L$. All arrows in this roof were constructed on whole systems. This describes the actual quotient construction before referring to the desired beta-conjugation identity.",
+   "text": "Expand the primitive tensor beta. Counit naturality for T(e_A,e_N) gives R(beta_AN) followed by e_T(A,N) equal to d_AN followed by T(e_A,e_N). Naturality of r, functoriality of tensor and composition of product morphisms then expand beta_source at the associator as r_L followed by L(T(gamma_AN,e_H)), and beta_target as r_R followed by L(T(e_A,gamma_NH)). These identities are proved as private helpers.",
    "uses": [
     "lem-pur-completed-primitive-counit-comparison",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent expansion of quotient-model reassociation; Tags 07A4 (lemma-pullback-tensor-product), 0FPT (lemma-symmetric-monoidal-derived)."
+    "place": "Tag 07A4 (lemma-pullback-tensor-product) and Modules on Sites Tag 03EL (lemma-tensor-product-pullback); explicit agent refinement of original item proof steps 9-10: arbitrary normalized transitions, canonical completed constraints and coherent reduction."
    }
   },
   {
-   "text": "Naturality of reassociation in $e_A,e_N,e_H$, and the identity $\\delta=T(e,e)d$, now give\n$$h_Rv=T(e_A,T(e_N,e_H))\\,a_0\\,T(d_{A,N},1)=a\\,T(T(e_A,e_N),e_H)\\,T(d_{A,N},1)=a h_L.$$\nIn the first equality $d_{N,H}$ cancels its inverse; the last equality is the corresponding identity for $\\delta_{A,N}$. Apply $\\mathcal L$ and insert the expansions of beta from the preceding steps. For the actual completed associator this gives $\\beta_Q\\widehat a=\\mathcal L(a)\\beta_P$, hence $\\widehat a=\\beta_Q^{-1}\\mathcal L(a)\\beta_P$. This is a calculation with the explicit quotient roof, rather than a definition of the completed associator by the last formula.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
+   "text": "For the associator, expand its already-defined quotient roof and cancel the outer r inverse with r. Substitute the preceding beta and gamma expansions. Tensor functoriality cancels d_NH inverse with d_NH. Naturality of the monoidal associator on e_A,e_N,e_H gives the beta square. For symmetry, cancel the outer realization isomorphisms and apply braiding naturality. For the two actions the beta square is functoriality of L applied to the defining action composite.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent reassociation naturality calculation on whole-system morphisms."
+    "place": "Tag 07A4 (lemma-pullback-tensor-product) and Modules on Sites Tag 03EL (lemma-tensor-product-pullback); explicit agent refinement of original item proof steps 9-10: arbitrary normalized transitions, canonical completed constraints and coherent reduction."
    }
   },
   {
-   "text": "For symmetry no inner contraction is present. In the quotient models the completed map is $r_{Y,X}^{-1}\\mathcal L(\\sigma_0)r_{X,Y}$, where $\\sigma_0:T(\\mathcal RX,\\mathcal RY)\\to T(\\mathcal RY,\\mathcal RX)$ is signed symmetry. Its naturality gives\n$$T(e_N,e_A)\\sigma_0=\\sigma_{A,N}T(e_A,e_N).$$\nTogether with $\\beta_{T(A,N)}=\\mathcal LT(e_A,e_N)r_{X,Y}$ and its reversed version, this gives $\\beta_Q\\widehat\\sigma=\\mathcal L(\\sigma_{A,N})\\beta_P$. The sign is the one on the homogeneous tensor summand, and is unchanged by the degree-zero quotient scalar factors.",
+   "text": "Cancel the invertible beta_target on the right of the beta square to obtain the displayed conjugation equality. Apply R to that square, postcompose with the target counit, and use whole-system counit naturality to obtain the gamma square.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-completed-primitive-counit-comparison"
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived); agent expansion of quotient/Roos symmetry."
+    "place": "Tag 07A4 (lemma-pullback-tensor-product) and Modules on Sites Tag 03EL (lemma-tensor-product-pullback); explicit agent refinement of original item proof steps 9-10: arbitrary normalized transitions, canonical completed constraints and coherent reduction."
    }
   },
   {
-   "text": "For the left action put $I=\\mathcal LU$. Its actual quotient model first contracts the reduced unit and the reduced input by $T(e_U,e_A):T(\\mathcal RI,\\mathcal RX)\\to T(U,A)$ and then applies the action $\\lambda_A:T(U,A)\\to A$. Thus its limit map is $\\mathcal L(\\lambda_AT(e_U,e_A))r_{I,X}=\\mathcal L(\\lambda_A)\\beta_{T(U,A)}$, with target $X=\\mathcal LA$. This is the displayed conjugation formula since beta at the input $A$ is the identity. The right action is $\\mathcal L(\\rho_AT(e_A,e_U))r_{X,I}$ and gives the same equation with $\\rho_A$. To check the normalization, $e_U$ at level $n$ is adjoint to the actual projection $I\\to\\operatorname{Res}B_n[0]$: on an extension tensor $z\\otimes b$ it gives $b p_n(z)$. Consequently both action formulas multiply precisely this coefficient with the image of the input; the ring factor is the actual $B_n[0]$ with its element $1$, and no scalar multiple or alternative unit identification is inserted.",
+   "text": "The third clause is counit naturality at systemMap.hom. The final clause is exactly naturality, in the opposite displayed orientation, of the actual coefficientSequenceDerivedTransition natural transformation. Thus it holds for all n <= m without using evaluation to detect equality.",
    "uses": [
-    "lem-pur-completed-primitive-counit-comparison",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-coef-normalized-dvr-tower"
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent unit calculation, using the scalar-extension adjoint formula and Tag 0FPT (lemma-symmetric-monoidal-derived)."
-   }
-  },
-  {
-   "text": "The preceding quotient-model descriptions remain valid after replacing any chosen resolution. The well-definedness theorem identifies the actual quotient-complex constructions with their descended functors on flat-term K-flat representatives. The primitive $r$ uses the natural strict Roos comparison $\\rho$. For a strict system map $u$ represented by commuting chain maps, the maps $\\prod u_n$ commute with $1-s$ and induce the map on the shifted cone; the same equalities therefore hold after applying the Roos construction. Naturality of $\\rho$ identifies these maps with $\\mathcal L(u)$. Thus the preceding roofs and their equations identify the actual completed functor constraints, not merely separately evaluated arrows or a possibly different limit-model choice.",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-completed-primitive-counit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), with the strict Roos normalization and descended quotient operations supplied by the cited statements."
-   }
-  },
-  {
-   "text": "For any one of the four pairs, apply the reduction functor to $\\beta_Q\\widehat a=\\mathcal L(a)\\beta_P$ and postcompose with $e_{S_Q}$. Counit naturality in the whole-system category gives\n$$\\gamma_Q\\mathcal R(\\widehat a)=e_{S_Q}\\mathcal R(\\mathcal L(a))\\mathcal R(\\beta_P)=a e_{S_P}\\mathcal R(\\beta_P)=a\\gamma_P.$$\nThe assumed invertibility of the specified comparisons identifies the vertices as well as the arrows. All factors here are whole-system maps: composing their transition equations proves the transition equation for this equality at every $m\\ge n$, including identities and iterated quotients. Naturality in input systems follows from naturality of the tensor constraints, $r$ and $e$ in the same computations. This proves the coherent reduction assertion without asserting that evaluation detects equality of arbitrary morphisms.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-completed-primitive-counit-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent functoriality and counit-naturality calculation in the derived system category."
+    "place": "Tag 07A4 (lemma-pullback-tensor-product) and Modules on Sites Tag 03EL (lemma-tensor-product-pullback); explicit agent refinement of original item proof steps 9-10: arbitrary normalized transitions, canonical completed constraints and coherent reduction."
    }
   }
  ],
  "proof_deps": [
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-normalized-operation-system-models",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-completed-primitive-counit-comparison",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
-  "def-coef-normalized-dvr-tower",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-strict-roos-comparison"
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "Natural coefficient-twist comparison, refined by the explicit quotient-system and counit computations for tensor constraints. Stacks Tags 07A4, 03EL, 0FPT and 0941 supply only the underlying tensor/limit tools."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "G8 Lean proof: formal counit and monoidal naturality calculation with the existing quotient roofs; contraction invertibility transported from reduction objects using the primitive comparison theorem."
  },
  "mathlib_searches": [
   {
@@ -316,12 +227,7 @@
   ]
  },
  "tool_uses": [
-  "lem-coef-semilinear-derived-sections",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-strict-roos-comparison"
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -369,5 +275,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of f15676c75687. Lean module byte-identical (sha256 7c22332f). Node delta vs earlier head and vs side-live base: stmt_deps now cites def-zl-ringed-derived-closed-symmetric-monoidal-data (landed existing:true, owns RingedDerivedTensorCoherence and ringedTensorUnitComplex) instead of the theorem lem-sf-ringed-derived-closed-symmetric-monoidal, which stays in proof_deps; lean.note and report updated; nothing else changed. Substance re-checked: C pins sigma, associator and unitors; r is constrained by TensorModel; quotientAssociator is the step-6 roof with correct domains, not defined by beta-conjugation; both conjugation equalities correctly oriented; transition clause for all n<=m; the four IsIso assumptions are the node's; contraction IsIso is a conclusion; no extra hypotheses; edge cases and universes fine; docstrings complete; single sorry; statement verbatim. Advisory: proof-only imports could be dropped (H9 hygiene). No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T182250-L-1171195",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
