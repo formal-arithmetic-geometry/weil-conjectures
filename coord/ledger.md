@@ -21208,3 +21208,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/N5/lem-pod-semilinear-field-operation-lifts (reviewer FIX+NODE(1); first push; new nodes: 1); claim not held by N5: not your claim
 - 08:42 L: merged deliver/Q159/lem-coef-finite-compact-support-uniform-tor (reviewer PASS; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q13/lem-weil-pbc-derived-tensor-shift-descent (reviewer FIX; first push; new nodes: 0)
+- 08:42 L: merged deliver/Q17/lem-pur-etale-sum-right-adjoint-coherence (reviewer FIX; first push; new nodes: 0)

@@ -36,9 +36,159 @@
   "def-weil-pbc-etale-shriek-base-change-map",
   "lem-weil-pbc-etale-shriek-base-change-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_a=a_{\\Sigma!}$ on sheaves and $R_a=a^*$. For an etale $a$, a map from the presheaf $\\bigoplus_s M(V,s)$ to a sheaf $N$ is a compatible family $M(V,s)\\to N(V)$, hence a map $M\\to R_aN$. The sheafification universal property therefore describes the sum adjunction. Its counit sends $i_s(x)$, with $x\\in(R_aN)(V,s)=N(V)$, to $x$; it folds finite sums. This is a calculation on the presenting presheaf, not an assertion that all sheaf sections are presheaf sums. Use [def-weil-pbc-etale-sum-extension], [lem-weil-pbc-etale-inverse-image-restriction] and [def-weil-presheaf-modules-sheafification]. Exactness and the adjunction on the entire unbounded derived categories are supplied by [lem-amb-etale-adjoint-locality]; [lem-weil-pbc-termwise-adjunction-homotopy] supplies its termwise counit. Exact inverse image is [prop-weil-pbc-inverse-image-modules-exact], so these calculations apply in every degree without boundedness. The localization uniqueness in [lem-weil-pbc-localization-universal-property] carries identities of these chain maps to identities of derived natural transformations.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), equation-j-p-shriek and exercise-jshriek-direct; Tag 03S5 (proposition-describe-jshriek); expanded counit calculation"
+   }
+  },
+  {
+   "text": "The definition of conjugate [def-weil-pbc-adjunction-conjugate], equivalently the transpose formula of [def-weil-pbc-adjunction-mate], applied to $d_a^{-1}:S_a\\to F_a$, says\n$$\\operatorname{ev}_{a,K}\\circ S_a(\\rho_{a,K})=\\varepsilon_{a,K}\\circ d_a^{-1}(G_aK).$$\nEquivalently $\\varepsilon_{a,K}=\\operatorname{ev}_{a,K}\\circ S_a(\\rho_{a,K})\\circ d_a(G_aK)$. Indeed $\\rho_{a,K}$ is by definition the $S_a\\dashv a^*$ adjunct of the right-hand composite in the first formula, and applying the inverse hom bijection gives the displayed equality. This also proves uniqueness of the right normalization preserving that counit.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1; elementary expansion of the specified adjunction conjugate"
+   }
+  },
+  {
+   "text": "For $e,v$ let $\\sigma:S_vS_e\\to S_{ve}$ denote the derived sum-composition comparison. Its sheaf comparison sends a nested summand labelled by $V\\to X$ and $V\\to U$ to the summand for the composite lift, as stated in [lem-sfb-quasifinite-compact-support-exact]. Under $(ve)^*\\cong e^*v^*$ the counit after this comparison and the composite counit both send each nested generator $i_t(i_s(x))$ to $x$. The sheafification universal property [def-weil-presheaf-modules-sheafification], first for the inner and then for the outer sum, proves equality on sheaves. The resulting counit is precisely $\\operatorname{ev}_v\\circ S_v(\\operatorname{ev}_e)$ by [def-weil-pbc-composite-adjunction]. Thus the conjugate of $\\sigma$ is the canonical pullback-composition comparison. This is also clear directly from the two successive hom bijections: both send a family $M(V,s)\\to N(V)$ to the same restriction map $M\\to e^*v^*N$. Step 1 makes this a degreewise argument on unbounded complexes, and [lem-weil-pbc-localization-universal-property] passes its equality to the derived categories.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F50 (lemma-f-shriek-composition), 0F7J (lemma-shriek-composition); etale sum specialization and its explicit counit"
+   }
+  },
+  {
+   "text": "By [lem-sfb-quasifinite-compact-support-exact], the actual compact-support compositor $\\alpha_{v,e}$ satisfies\n$$d_{ve}\\circ\\alpha_{v,e}=\\sigma\\circ(d_v S_e)\\circ(F_vd_e),$$\nwhere naturality identifies the two possible orders of the middle comparisons. Take conjugates, using compatibility with composition and inverses in [def-weil-pbc-adjunction-conjugate] and pasting along composite adjunctions in [lem-weil-pbc-mate-pasting], clause 2. Step 3 identifies the conjugate of $\\sigma$ with the pullback-composition map. Consequently, inserting that map, the resulting equality is exactly\n$$\\rho_{ve,K}=e^*(\\rho_{v,K})\\circ\\rho_{e,G_vK}\\circ c_{v,e,K}.$$\nFor the identity arrow, $d_{\\mathrm{id}}$ is the canonical identity by the identity clause of the same proper-support node; the conjugate of an identity is an identity. The identity adjunction in [def-weil-pbc-composite-adjunction] therefore gives the asserted identity normalization.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); take the specified conjugates"
+   }
+  },
+  {
+   "text": "Identify the specified sheaf base-change map before deriving it. Put $H=w^*$, $G=w'^*$, $L=e_{\\Sigma!}$, $L'=e'_{\\Sigma!}$, $R=e^*$, $R'=e'^*$, and let $\\chi:GR\\xrightarrow{\\sim}R'H$ be the pullback-composition identification. Write $u:\\mathrm{id}\\to RL$, $v:LR\\to\\mathrm{id}$ for the sum unit and counit, and $v'$ for the counit of $L'\\dashv R'$. The map $\\beta:L'G\\to HL$ of [def-weil-pbc-etale-shriek-base-change-map] is characterized by its conjugate $\\operatorname{Ex}^0:RH_*\\to G_*R'$. The inverse-image/direct-image adjunctions $H\\dashv H_*$, $G\\dashv G_*$ are [prop-weil-pbc-inverse-image-modules-exact]. If $u^G$ is the latter unit and $v^H$ the former counit, [def-weil-pbc-underived-exchange] gives\n$$\\operatorname{Ex}^0_N=G_*(R'(v^H_N)\\circ\\chi_{H_*N})\\circ u^G_{RH_*N}.$$\nIt is module-linear by [lem-weil-pbc-underived-exchange-module-linear]. Consider\n$$\\widetilde\\beta_M=v'_{HL M}\\circ L'(\\chi_{L M})\\circ L'G(u_M).$$\nIts transpose across $L'\\dashv R'$ is $\\chi_{L M}\\circ G(u_M)$ by [def-weil-pbc-adjunction-mate]. Expand its conjugate for $HL\\dashv RH_*$ and $L'G\\dashv G_*R'$ using [def-weil-pbc-composite-adjunction]. Naturality of $\\chi$ moves $R(v_{H_*N})$ next to $u_{RH_*N}$, which cancel by the $L\\dashv R$ triangle; the $L'\\dashv R'$ triangle has already cancelled in the first transpose. What remains is exactly the displayed formula for $\\operatorname{Ex}^0_N$. This is the twofold pasting of [lem-weil-pbc-mate-pasting], clauses 1 and 2. The conjugate bijection therefore gives $\\beta=\\widetilde\\beta$: the specified $\\beta$ is the mate of $\\chi$ for the sum adjunctions.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), proof comparing the two right adjoints; expansion of the two adjunctions"
+   }
+  },
+  {
+   "text": "With the notation of Step 5, naturality of $v'$ and $\\chi$ gives\n$$H(v_N)\\circ\\beta_{RN}=v'_{HN}\\circ L'(\\chi_N)\\circ L'G(R(v_N)\\circ u_{RN})=v'_{HN}\\circ L'(\\chi_N),$$\nsince $R(v_N)\\circ u_{RN}=1_{RN}$ is the sum-adjunction triangle. Thus the counit square is proved for every sheaf $N$, not just the constant sheaf. By [lem-weil-pbc-etale-shriek-base-change-modules], $\\beta$ is the specified isomorphism. Apply the equality degreewise to any unbounded representative; Step 1 and [lem-weil-pbc-localization-universal-property] identify its image with\n$$w^*\\operatorname{ev}_{e,K}\\circ(b^\\Sigma_{e^*K})^{-1}=\\operatorname{ev}_{e',w^*K}\\circ S_{e'}(\\chi_K).$$\nAt $K=A_X$, the canonical constant-sheaf identification in [prop-weil-pbc-inverse-image-modules-exact] identifies $\\chi_{A_X}$ with the identity on $A_{U'}$. This is exactly the required equality of derived evaluation counits.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-localization-universal-property",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); counit naturality and the triangle identity on representatives"
+   }
+  },
+  {
+   "text": "The proper-support $d_e$ in the statement is, for the chosen compactification $(j,r)$, the comparison $c_e^c$ of [lem-sfb-quasifinite-compact-support-exact] with its sum identification, which is exactly the comparison normalized in [lem-pur-etale-support-map-compatibility]. Clause (1) of that node, for $g=w$ and the pulled-back compactification $(j',r')$, gives the equality of actual derived transformations\n$$(d_{e'}w'^*)\\circ C_{e,w}=b^\\Sigma\\circ(w^*d_e),$$\nwhere its $C^c_{e,w}=Rr'_*(b_j)\\circ\\operatorname{Ex}_r$ is the proper exchange followed by the inverse open-extension comparison, i.e. the specified exchange of [lem-amb-unbounded-compact-support-comparisons] on this compactification, and its $b_e$ is our $b^\\Sigma$. It applies to any $w$ between Noetherian schemes; no etaleness, flatness or finiteness of $w$ or of $r$ is used. Hence\n$$C_{e,w}^{-1}\\circ d_{e'}^{-1}=w^*(d_e^{-1})\\circ(b^\\Sigma)^{-1}.$$\nThis formula fixes the exchange direction needed when transposing $b_{e,w}$; it uses the pulled-back compactification first, and the same formula for any other chosen one follows from the refinement compatibility in the two cited statements.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); specified proper/open comparison as normalized in the cited nodes"
+   }
+  },
+  {
+   "text": "Put $Q=G_eA_X$ and suppress the constant-pullback identifications. By the definition of $b=b_{e,w}$, $\\varepsilon_{e',A_{X'}}\\circ F_{e'}(b)=w^*\\varepsilon_{e,A_X}\\circ C_{e,w,Q}^{-1}$. Step 2 and naturality of $d_{e'}$ say that the $S_{e'}\\dashv e'^*$ transpose of $\\rho_{e',A_{X'}}\\circ b$ is\n$$w^*\\varepsilon_{e,A_X}\\circ C_{e,w,Q}^{-1}\\circ d_{e'}^{-1}(w'^*Q).$$\nSubstitute Step 7 and then Step 2. This becomes\n$$w^*\\operatorname{ev}_{e,A_X}\\circ w^*S_e(\\rho_{e,A_X})\\circ(b^\\Sigma_Q)^{-1}.$$\nNaturality of $(b^\\Sigma)^{-1}$ moves $\\rho_{e,A_X}$ to the right, giving\n$$w^*\\operatorname{ev}_{e,A_X}\\circ(b^\\Sigma_{e^*A_X})^{-1}\\circ S_{e'}(w'^*\\rho_{e,A_X})=\\operatorname{ev}_{e',A_{X'}}\\circ S_{e'}(\\chi_{A_X}\\circ w'^*\\rho_{e,A_X})$$\nby Step 6. The hom bijection [def-weil-pbc-adjunction-mate] is injective, so $\\rho_{e',A_{X'}}\\circ b=\\chi_{A_X}\\circ w'^*\\rho_{e,A_X}$. Compose with $e'^*A_{X'}\\cong A_{U'}$; the constant identifications of [prop-weil-pbc-inverse-image-modules-exact] identify the right side with $w'^*\\eta_e$. This proves $\\eta_{e'}\\circ b_{e,w}=w'^*\\eta_e$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: base-change normalization; explicit equality of the two counit transposes"
+   }
+  },
+  {
+   "text": "Finally take a proper refinement or a further Cartesian restriction by an open immersion. The $d_a$ comparisons agree under proper refinement by [lem-sfb-quasifinite-compact-support-exact]; the actual $\\alpha$ and $C$ agree by [lem-amb-unbounded-compact-support-comparisons], and the base-change square of Step 7 agrees with the proper-refinement identifications by the last sentence of [lem-pur-etale-support-map-compatibility]. Consequently their defining left-adjoint equalities, and hence their unique right-adjoint transposes, are unchanged. For successive base changes the pullback-composition maps $\\chi$ paste by associativity of inverse image; the mates $\\beta$ paste by clause 1 of [lem-weil-pbc-mate-pasting]. The compact-support exchanges paste by the cited unbounded-comparisons statement. Applying the transpose calculation of Step 8 to the pasted square therefore gives the composite of its calculations for the two squares. An open restriction is such a base change, so the displayed identities commute with every further Cartesian open restriction. No choice of a new right-adjoint normalization is made.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1: expand the etale normalization claim using Stacks 03S3, 03S6, 0F7J, 0F7K and the existing specified-map comparison lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +224,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
    "verdict": "no match: hits concern generic categorical adjunctions, ordinary module sheaves, or unrelated condensed/tensor constructions; none states this specified geometric map equality or gives a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(counit|shriek)|shriek.*(baseChange|comp)",
+   "results": "0 hits; names/files: none. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction, unrelated condensed/cotangent, or algebraic-etale results do not identify the specified compact-support maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+   "results": "12 hits; names/files: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction, unrelated condensed/cotangent, or algebraic-etale results do not identify the specified compact-support maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compact support sum extension right adjoint normalization respects composition and arbitrary base change of evaluation counits",
+   "results": "8 hits; names/files: Condensed.profiniteSolidCounit, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.counit_app_val, Condensed.profiniteSolidification, CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitAppApp. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction, unrelated condensed/cotangent, or algebraic-etale results do not identify the specified compact-support maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support normalized right adjoint counit composition base change",
+   "results": "8 hits; names/files: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.counit, CategoryTheory.Functor.ranCounit, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app, CategoryTheory.Under.postAdjunctionRight. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction, unrelated condensed/cotangent, or algebraic-etale results do not identify the specified compact-support maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating compact support composition of etale sum extensions gives restriction composition and evaluation commutes with base change",
+   "results": "8 hits; names/files: Algebra.Generators.CotangentSpace.compEquiv_symm_inr, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, galRestrict'_comp, ModuleCat.Tilde.toOpen_res, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.IsEtaleAt.comp, Algebra.Generators.CotangentSpace.fst_compEquiv, Algebra.Etale.comp. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction, unrelated condensed/cotangent, or algebraic-etale results do not identify the specified compact-support maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-etale-dualizing-normalization",
@@ -97,5 +282,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-sum-right-adjoint-coherence",
+  "worker": "stage1",
+  "summary": "Wrote the counit and mate calculations for identity, etale composition, arbitrary Noetherian base change, refinement and Cartesian open restriction. Reused existing proper-support composition, etale normalization, mate-pasting and localization nodes; no new nodes and no statement change.",
+  "blueprint": "thm-pur-composition-coherence, current main-20261015 proof Step 1: etale local normal forms and compatibility of the remaining smooth-base-change/co-projection factors with composition; this split realizes the etale normalization subargument in lem-pur-co-smooth-etale-locality proof Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Degreewise units and counits on complexes; a generic additive-category tool, not a replacement for any purity step."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient module inverse image and its canonical constant-ring identification; needed to calculate the maps on unbounded representatives."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Equality of natural transformations descends uniquely from complexes to their localization; a generic categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Invertibility of the specified module-sheaf sum-extension comparison for an arbitrary Cartesian base change."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-module-linear",
+    "why": "The ordinary exchange used in the defining conjugate is a module-sheaf map."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Clause (1): the specified proper exchange commutes with the lem-sfb proper-support/sum comparison d_e itself on every unbounded complex, with refinement agreement; no node of the purity unit states it."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Canonical compact-support compositor and exchange including refinement and pasting normalization."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "The proper-support/sum identification intertwines the actual compact-support compositor and identities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sfb-quasifinite-compact-support-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-1f047c783",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1f047c783 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement in full. The delivery creates 0 new nodes. The statement is byte-identical to live, where the item is still unsplit. The item is not dropped and has no re-split note. Sources checked: blueprint lem-pur-co-smooth-etale-locality Step 1, Stacks 03S6 l.11493, 0F7J and 0F7K. No SGA source is used. I recomputed Steps 2, 4, 5, 6 and 8: the conjugate counit identity; rho_ve = chi^-1 e*rho_v rho_e c_ve; beta equals the mate of chi, with its conjugate equal to Ex0 shown by a hom-set calculation; the counit square; and the transpose chain giving rho'b = chi w'*rho. All are correct. Small cases checked: identity, fold map, empty source, open immersion, A=0, unbounded complexes. FAULT (C3/C4) in Steps 7 and 9: they took the base-change square from lem-asd-etale-compact-support-normalization. That square is for asd's own graph comparison c, which no statement identifies with the lem-sfb comparison d_e that the item uses; agreeing degree-zero sheaf maps do not make two unbounded derived isomorphisms equal. FIXED: Steps 7 and 9 now cite the reviewed node lem-pur-etale-support-map-compatibility, whose clause (1) states exactly (c_e'^c' h*)C = b_e(g*c_e^c) for lem-sfb's c_e^c and lem-amb's exchange Rr'_*(b_j)Ex_r, with refinement agreement. proof_deps and tool_uses were updated; there is no cycle. Batch-5: the flagged asd citation is removed. The item's closure without asd already contains the same pod/trf nodes through the base cites of lem-sfb and lem-amb. The replacement adds lem-pod-etale-stalk-tensor-scalar, a general fact about stalks of tensor products and not part of Poincaré duality or the trace formula, so I accept it. The remaining declared tool uses are accepted. No duplicate found.; 1 file(s) fixed by the reviewer"
  }
 }
