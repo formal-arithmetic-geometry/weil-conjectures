@@ -23575,3 +23575,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:49 L: returned deliver/Q12/lem-sf-package-compactified-tower-comparisons (reviewer RETURN: L: independent stage-2 immutable head 8f9baa7fd194: Identical re-delivery (sha256 of the module, node record and report )
 - 19:49 L: returned deliver/NA/lem-sfb-finite-valued-cech-cocycle-descent (reviewer RETURN: L: independent stage-2 immutable head fb828afd6e93: H2.2: the delivery adds theorem node lem-weil-pbc-set-cech-nerve-fre)
 - 19:50 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 19:51 L: merged deliver/O4/lem-sfb-prime-to-ell-cochain-finite-quotient-descent (reviewer PASS; after a return; new nodes: 4)

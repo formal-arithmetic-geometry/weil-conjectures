@@ -13,9 +13,158 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The differential is a finite alternating sum of pullbacks by continuous maps, so it is continuous and $A_F(S)$-linear. The coface relations $\\delta_j\\delta_i=\\delta_i\\delta_{j-1}$ for $i<j$ follow from associativity in $K$ (and deleting an endpoint); pairing these equal terms with opposite signs gives $d^2=0$. A function factoring through $(K/U)^n$ retains that property after each face. Intersecting finitely many open normal subgroups provides a common quotient for any finite list of representatives. Thus both complexes and the specified inclusion are defined, and in degree zero they both equal $A_F$ with zero outgoing differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: well-defined differential, finite-quotient subcomplex and degree zero"
+   }
+  },
+  {
+   "text": "Let $L_0^\\bullet$ denote the finite-quotient subpresheaf before sheafification. Fix $S$ and $n\\geq1$. A cocycle $c\\in L_0^n(S)$ factors through $Q=K/U$. Its cocycle equation holds on $Q^{n+1}$ since $K\\to Q$ is surjective. Put $m=|Q|$ and\n$$b(s;g_1,\\ldots,g_{n-1})=(-1)^n m^{-1}\\sum_{h\\in Q}c(s;g_1,\\ldots,g_{n-1},h).$$\nThis is a continuous finite-quotient cochain. Sum the cocycle equation $(dc)(s;g_1,\\ldots,g_n,h)=0$ over $h\\in Q$. In the last multiplication term replace $g_nh$ by $h$; the first $n$ terms give $d$ of the unsigned sum, and the endpoint term gives $(-1)^{n+1}m c$. Hence $db=c$. For $n=1$ this equality reads $0=c$, consistent with $d^0=0$. It follows that $H^n(L_0^\\bullet(S))=0$ for $n>0$, for both coefficient fields; in degree zero it is $C(S,F)$. Only finite sums and $m^{-1}\\in F$ occur.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: finite quotient averaging with the sign and degree-one case"
+   }
+  },
+  {
+   "text": "For finite $F=E$, completeness and the nonarchimedean inequality are supplied by [lem-weil-l-adic-extension-complete] and [lem-weil-l-adic-extension-absolute-value]. Apply [lem-sfb-prime-to-ell-complete-scalar-integral] and put $h_E c=(-1)^n I_K(c(-,h))$ for a degree-$n$ cocycle. Integrating its cocycle equation gives $d h_E c=c$: left translation by $g_n$ handles the penultimate term, and normalization handles the last term, with the sign computed in step 2. The integral's parameter clause proves continuity, and its bound gives $\\|h_E c\\|_\\infty\\leq\\|c\\|_\\infty$. This works for every finite intermediate field, not just the originally fixed $E$.",
+   "uses": [
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-sfb-prime-to-ell-complete-scalar-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: bounded finite-field primitives with arbitrary profinite parameters"
+   }
+  },
+  {
+   "text": "Now let $z\\in C(S\\times K^n,\\Omega)$ be a cocycle, $n\\geq1$. Apply [lem-sfb-profinite-metric-function-quotients] to its metric-valued function, obtaining $p:S\\twoheadrightarrow S_0$, $q:K\\twoheadrightarrow G$ and $z_0\\in C(S_0\\times G^n,\\Omega)$. Surjectivity of $p\\times q^{n+1}$ shows $dz_0=0$. Every finite quotient of $G$ is a finite quotient of $K$, so has order prime to $\\ell$. It suffices to construct a primitive for $z_0$ and pull it back. Hence, for the next steps, write $S,G,z$ for the metrizable quotients and descended cocycle. If $S$ is empty take the unique zero cochain.",
+   "uses": [
+    "lem-sfb-profinite-metric-function-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: reduce a single family to metrizable profinite quotients"
+   }
+  },
+  {
+   "text": "By [lem-sfb-algcl-countable-closed-finite-cover], choose increasing finite fields $F_i\\subseteq\\Omega$ covering $\\Omega$. For each $i$ choose $p_i:\\Omega\\to F_i$ by [lem-sfb-norm-one-finite-subfield-projection]. Put $p_{-1}=0$ and $e_i=(p_i-p_{i-1})z$ for $i\\geq0$. Each $e_i$ is a continuous $F_i$-valued cocycle, since the projections are $\\mathbf Q_\\ell$-linear. For each fixed input, $e_i$ is eventually zero: both projections eventually fix its algebraic value. Also $p_i z\\to z$ uniformly. Indeed a finite $\\epsilon$-net for the compact image of $z$ lies in one $F_N$; for $i\\geq N$ the norm-one bound gives $|p_i x-x|\\leq\\epsilon$ on that image. Consequently $\\|e_i\\|_\\infty\\to0$ and $\\sum_{i=0}^N e_i=p_Nz$. The projections need not commute with one another.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-norm-one-finite-subfield-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: pointwise finite scalar components, uniformly tending to zero"
+   }
+  },
+  {
+   "text": "Put $f(s;g_0,\\ldots,g_n)=z(s;g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n)$. For every $s$, the inverse images of the closed fields $F_N$ cover the nonempty compact Hausdorff space $G^{n+1}$. By [lem-sfb-baire-closed-cover-interior], one has nonempty interior. A product neighbourhood therein contains a rectangle $Ha_0\\times\\cdots\\times Ha_n$ for an open normal $H$. Metrizability and compactness give a countable clopen basis for $G$ (take finite subcovers at each metric scale); every clopen is a finite union of basis elements. There are therefore only countably many such coset rectangles. Enumerate their pairs with field indices as $(B_j,N_j)_{j\\geq1}$. Define\n$$A_j=\\{s\\in S:f(s;B_j)\\subseteq F_{N_j}\\}.$$\nEach $A_j$ is closed, being an intersection of inverse images of $F_{N_j}$ under evaluations, and the Baire argument proves $S=\\bigcup_j A_j$. No open neighbourhood of $s$ is claimed to lie in $A_j$.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-baire-closed-cover-interior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: closed cover by finite-field rectangle certificates for each parameter"
+   }
+  },
+  {
+   "text": "Choose finite clopen partitions $\\mathcal P_i$ of the metrizable profinite $S$, refining one another and with mesh tending to zero. They exist by taking finite clopen refinements of metric-ball covers. Let $U_{j,i}$ be the union of atoms of $\\mathcal P_i$ meeting $A_j$. These clopen sets decrease to $A_j$: a point outside the closed $A_j$ is eventually in an atom disjoint from it. Let $k_i(s)$ be the least $j\\leq i$ with $s\\in U_{j,i}$, or $1$ if none exists; define $k_0=1$. Each $k_i$ is locally constant with finite range. For each $s$, let $j(s)$ be the least index with $s\\in A_j$. All smaller indices are eventually excluded from $U_{j,i}$ and $s$ always belongs to $U_{j(s),i}$; hence $k_i(s)=j(s)$ for all sufficiently large $i$. This is eventual stabilization separately at each parameter, with no uniform index or field asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: explicit locally constant approximations to the least closed-cover certificate"
+   }
+  },
+  {
+   "text": "For each rectangle certificate $j$, apply [lem-sfb-bounded-finite-evaluation-rectangle-replacement] to $G,H_j,n,(a_{j,r})$, giving $T_j,R_j$. The index $[G:H_j]$ is prime to $\\ell$ because $H_j$ is normal and $G/H_j$ is a finite quotient. Their choices are independent of coefficients. On each clopen piece on which $k_i=j$ is constant, form $r_i(s)=R_j e_i(s)$ and\n$$b_i(s)=T_j e_i(s)+h_{F_i}r_i(s).$$\nThe residual is an $F_i$-valued cocycle, so step 3 supplies its continuous bounded primitive. The finitely many clopen pieces glue these formulas to a continuous $F_i$-valued cochain on $S\\times G^{n-1}$. The replacement identity gives $db_i=e_i$, and all three operators have norm bound one; thus $\\|b_i\\|_\\infty\\leq\\|e_i\\|_\\infty\\to0$.",
+   "uses": [
+    "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+    "lem-sfb-prime-to-ell-complete-scalar-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: finite-field component primitives with a stabilized rectangle correction"
+   }
+  },
+  {
+   "text": "Fix $(s,x)\\in S\\times G^{n-1}$. Eventually $k_i(s)=j=j(s)$ and $i>N_j$. On $B_j$ one has $f(s,-)\\in F_{N_j}$; therefore the homogeneous function of $e_i(s,-)$ vanishes there, since both $p_i,p_{i-1}$ fix that field. The rectangle clause of [lem-sfb-bounded-finite-evaluation-rectangle-replacement] gives $R_j e_i(s)=0$ as a whole cochain. Thus eventually\n$$b_i(s,x)=(T_j e_i(s))(x)=\\sum_{a=1}^{u_j}\\alpha_{j,a}e_i(s,\\psi_{j,a}(x)).$$\nThere are only finitely many evaluations in this formula. At each of their fixed inputs, $e_i$ is eventually zero by step 5. Hence $b_i(s,x)=0$ for all sufficiently large $i$. This proves pointwise finiteness of the primitive series, including the parameter points outside every finite initial union of certificates.",
+   "uses": [
+    "lem-sfb-bounded-finite-evaluation-rectangle-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: the missing parametrized selection argument: finite evaluations force pointwise finite primitives"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-normed-field-completion] to view $\\Omega$ isometrically in its complete normed field $B$. Its nonarchimedean inequality follows by taking limits of the inequality on finite subextensions. Since $\\|b_i\\|_\\infty\\to0$, the ultrametric inequality makes the partial sums uniformly Cauchy on the compact domain: every tail has norm at most $\\sup_{i>N}\\|b_i\\|_\\infty$. Completeness gives a uniform limit $b:S\\times G^{n-1}\\to B$. To check continuity directly, fix a point and $\\epsilon>0$, choose a uniformly $\\epsilon$-close continuous partial sum, and use continuity of that sum and the ultrametric triangle inequality. Step 9 says each value of $b$ is actually a finite sum in $\\Omega$. The subspace metric on $\\Omega\\subseteq B$ then makes $b$ norm-continuous into $\\Omega$. Since $d$ is a finite sum of evaluations, $db=\\lim_N d(\\sum_{i\\leq N}b_i)=\\lim_N p_Nz=z$. Pullback as in step 4 proves objectwise positive-degree exactness for every original profinite $S$.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: uniform convergence in the completion, with algebraic values by pointwise finiteness"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact] with the constant ring $R=\\mathbf Z$, to the underlying abelian presheaf complexes. By step 2 the sheafification of $L_0^\\bullet$ has cohomology $A_F$ in degree zero and zero in positive degrees. The continuous-function complex is already a sheaf complex, and steps 3 and 10 say that every positive-degree kernel section lies in the image locally on a cover; its cohomology sheaves therefore vanish. Both complexes are zero in negative degrees. The inclusion is the identity in degree zero by step 1, so it induces isomorphisms on every underlying abelian cohomology sheaf. Kernels are stable submodules and images are the sheafifications of the stable pointwise images; these carry the inherited $A_F$-actions. Consequently the same inclusion induces isomorphisms on module cohomology and is a quasi-isomorphism of internal $A_F$-module complexes.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: exact sheafification and the specified inclusion on cohomology"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-derived-categories], localization at quasi-isomorphisms inverts this specified inclusion, giving the asserted isomorphism in $D(\\operatorname{Mod}_{A_F})$. If $S$ is empty all positive-degree section groups are zero. If $K=1$, the alternating differential is zero in even degree and the identity in odd positive degree, giving the same positive-degree acyclicity. Finite $K$ is already covered by the finite formula in step 2. These checks do not require $\\Omega$ to be complete.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: derived conclusion and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-sfb-prime-to-ell-complete-scalar-integral",
+  "lem-sfb-profinite-metric-function-quotients",
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-norm-one-finite-subfield-projection",
+  "lem-sfb-baire-closed-cover-interior",
+  "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+  "lem-sfb-normed-field-completion",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is geometric motivation only. Agent proof: bounded scalar projections, countable rectangle certificates, eventual locally constant certificate selection, bounded finite-evaluation replacement, and a pointwise finite primitive series. No completed-primitive descent assumption remains."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +200,131 @@
    "results": "8 hits: continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.homogeneousCochains, groupCohomology.shortComplexH0_exact, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff",
    "date": "2026-10-22",
    "verdict": "no match: the hits do not state this comparison for ordinary internal modules over all-continuous norm-topological scalar rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cochains of a pro prime to ell profinite group with trivial algebraic ell adic coefficients compare quasi isomorphically with finite quotient cochains",
+   "results": {
+    "t": "2026-10-21T18:56:19Z",
+    "tool": "leanfinder",
+    "query": "Continuous cochains of a pro prime to ell profinite group with trivial algebraic ell adic coefficients compare quasi isomorphically with finite quotient cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "ProfiniteGrp.isoLimittoFiniteQuotientFunctor",
+     "Rep.FiniteCyclicGroup.resolution_quasiIso",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "groupCohomology.inhomogeneousCochainsIso"
+    ],
+    "digest": "b51aa0372a77cd0f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": {
+    "t": "2026-10-21T18:56:41Z",
+    "tool": "loogle",
+    "query": "\"continuousCohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.π",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.map_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.map",
+     "ContinuousCohomology.resolutionMap_id"
+    ],
+    "digest": "d0b4f6d4782fce60"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|cohomolog).*(finite.quotient|locallyConstant)|(finite.quotient|locallyConstant).*(cochain|cohomolog)",
+   "results": {
+    "t": "2026-10-21T18:56:42Z",
+    "tool": "grep",
+    "query": "(cochain|cohomolog).*(finite.quotient|locallyConstant)|(finite.quotient|locallyConstant).*(cochain|cohomolog)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient continuous cochain comparison for a pro prime to ell group with noncomplete algebraic ell adic scalar coefficients",
+   "results": {
+    "t": "2026-10-21T18:58:34Z",
+    "tool": "leansearch",
+    "query": "Finite quotient continuous cochain comparison for a pro prime to ell group with noncomplete algebraic ell adic scalar coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "continuousCohomology",
+     "QuotientGroup.instContinuousConstSMul",
+     "ProfiniteGrp.isIso_toLimit",
+     "ContinuousCohomology.homogeneousCochains",
+     "ProfiniteGrp.isoLimittoFiniteQuotientFunctor"
+    ],
+    "digest": "76c8c5d385369724"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Averaging trivial continuous group cocycles with profinite parameters into incomplete algebraic p adic fields gives a coboundary",
+   "results": {
+    "t": "2026-10-21T18:58:36Z",
+    "tool": "leanfinder",
+    "query": "Averaging trivial continuous group cocycles with profinite parameters into incomplete algebraic p adic fields gives a coboundary",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "groupCohomology.IsMulCoboundary₁",
+     "groupCohomology.H1π_eq_zero_iff",
+     "groupCohomology.coboundaries₁_le_cocycles₁",
+     "groupCohomology.IsMulCoboundary₂",
+     "groupCohomology.isCoboundary₁_of_mem_coboundaries₁",
+     "groupCohomology.coboundariesOfIsMulCoboundary₁",
+     "groupCohomology.isMulCoboundary₁_of_mem_coboundaries₁"
+    ],
+    "digest": "59f55bb3438bc4c3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern real-valued Haar integration, finite-group averaging, Mahler expansions, completion constructions or definitions of continuous cohomology; none states this parameterized nonarchimedean assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-condensed-acyclicity",
@@ -79,5 +349,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "worker": "stage1",
+  "group": "O4",
+  "summary": "Repair of 7a6a786e8f9 and the earlier return at 4ff896a3 (D1/D2, D5, G1). Statement unchanged. Removed the whole-clause completed-primitive descent child. The item now proves parametrized algebraic primitives by pointwise finite field components and eventually stable rectangle choices. New generic inputs are metrizable factorization, norm-one finite-field projection and finite-evaluation rectangle replacement; the previously accepted complete integral is retained. All new nodes are statement-only.",
+  "blueprint": "Realizes the scalar tame-kernel input below paragraph (3) of the main-20261015 direct-images proof. The blueprint contains no analytic argument; this proof is agent-written. Nearest ancestor remains null with inherited via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-99abe5825",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-99abe5825 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and the statement of every cited node in full. Source: main-20261015 direct-images.proof.md paragraph (3). It has no analytic content, so the agent mark is right, and there is no SGA. The two earlier returns (4ff896a3 and 7a6a786e, D1/D2/D5/G1) are repaired. The child that carried the whole Omega clause is gone. Steps 4-10 now give the real argument: metrizable reduction; pointwise-finite components e_i=(p_i-p_{i-1})z from norm-one projections, converging uniformly by an epsilon-net in some F_N; a closed (not open) Baire certificate cover A_j of S; locally constant selectors k_i that stabilise at each s; and rectangle replacement. The replacement kills the residual as a whole cochain once i-1>=N_j, so b_i(s,x) becomes a fixed finite sum of evaluations of e_i and the primitive series is pointwise finite with values in Omega. The uniform limit in the completion is then Omega-continuous, and db=lim p_N z=z. I re-derived the averaging signs (dA=(-1)^n m c), the n=1 and K=1 cases, and the step-11 exact-sheafification and quasi-isomorphism argument. The four new nodes are true and none is a duplicate. complete-scalar-integral is unchanged and was accepted before (|1/|Q||=1; fails for Z_ell). Metric quotients: cumulative partitions, closed surjection. Norm-one projection: Ingleton, since a finite extension of Q_ell is spherically complete; it is stronger than the continuous-retraction and continuous-extension nodes. Rectangle replacement: colored join exact through degree n-1, then equivariant chain map and homotopy, dualising res f = delta(f s) + f IU, then transfer c = d((cor tc - kc)/m) + cor(Pc)/m with |1/m|=1; tested on H=G, H=1, and n=1, where homomorphisms vanishing on a coset are 0. All are statement-only, self-contained, with three kinds of search recorded and fresh ids. The item statement is identical to the previous snapshot, is still unsplit on live, has no repair note, and tool_uses=[] is correct. No fixes. Advisory: when the rectangle node is split, it should cite lem-sfb-ordered-join-partial-contraction. Step 3 is reused for the quotient G, which the integral node covers."
  }
 }
