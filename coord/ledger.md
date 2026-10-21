@@ -23885,3 +23885,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:23 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 22:24 L: merged deliver/Q09/lem-sfb-lattice-koszul-triangulated-cup-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 22:24 L: merged deliver/NL/lem-pur-line-zero-class-etale-realization (stage 2; reviewer FIX; parallel immutable checks)
+- 22:24 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
