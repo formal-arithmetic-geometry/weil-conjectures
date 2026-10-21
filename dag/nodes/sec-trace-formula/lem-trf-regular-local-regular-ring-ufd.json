@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-regular-local-regular-ring-ufd",
+ "kind": "statement",
+ "title": "The proved source-library regular local UFD theorem",
+ "statement": "Let A be a commutative regular local ring which is also a regular ring (every prime localization is regular local), in the sense of [def-weil-regular-scheme]. Then A is a unique factorization domain.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AG0, lemma-regular-local-UFD; already proved source-library specialization IsRegularLocalRing.uniqueFactorizationMonoid in WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization, lines 43-135."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source declaration IsRegularLocalRing.uniqueFactorizationMonoid A, with precisely the stated regular-local and regular-ring instances. This is a one-line application, not a new unproved UFD assertion. The source declaration proves the result by strong induction on the embedding dimension: localizations at nonmaximal primes have smaller dimension and are UFDs; choose a prime parameter x; ideals minimal over nonzero principal ideals of A[1/x] are locally principal by induction, hence invertible. Their contractions have finite projective dimension over A, so their localizations are stably free. An invertible stably free module is free, making those ideals principal. The principal-prime criterion makes A[1/x] a UFD and Nagata descent makes A a UFD. The field case starts the induction. All of this argument is already formalized in the attached source module; no statement or proof in that source module is changed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/RingTheory/RegularLocalRing/UniqueFactorization.lean",
+  "place": "IsRegularLocalRing.uniqueFactorizationMonoid and its proved induction helper; attached as an existing library theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every regular local ring is a unique factorization domain",
+   "results": "PrincipalIdealRing.to_uniqueFactorizationMonoid and DVR results, no general regular-local theorem. The project source library supplies the required theorem.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; existing source declaration found"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniqueFactorizationMonoid, IsRegularLocalRing",
+   "results": "No Mathlib theorem. Direct source search locates IsRegularLocalRing.uniqueFactorizationMonoid with the explicit additional IsRegularRing assumption.",
+   "date": "2026-10-21",
+   "verdict": "existing source declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocal.*UFD|uniqueFactorizationMonoid",
+   "results": "WeilConjectures/RingTheory/RegularLocalRing/UniqueFactorization.lean:131; theorem and induction helper contain no sorry.",
+   "date": "2026-10-21",
+   "verdict": "exact existing source declaration"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization",
+  "date": "2026-10-21",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Existing source-library regular-local UFD theorem reused in the boundary factorization argument, replacing its Steps 4-7.",
+   "via": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-snc-divisorial-log-chart",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization",
+  "declaration": "IsRegularLocalRing.uniqueFactorizationMonoid",
+  "statement": "theorem uniqueFactorizationMonoid (R : Type u) [CommRing R] [IsRegularLocalRing R]\n    [IsRegularRing R] : UniqueFactorizationMonoid R",
+  "branch": "slopmaster2",
+  "by": "K6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261021T155753-L-3443905",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261021T155753-L-3443905",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
