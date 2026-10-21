@@ -16,9 +16,82 @@
   "def-weil-pbc-algebraic-inverse-image",
   "def-weil-pbc-canonical-ringed-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L$ for the specified set-sheaf inverse image. By [lem-weil-pbc-left-exact-site-inverse-image-tensor], applied to the base-change functor and compatible small sites specified in [def-weil-proetale-inverse-image], $L$ preserves finite limits. Denote its binary-product comparison by $\\lambda_{X,Y}:L(X\\times Y)\\xrightarrow{\\sim}LX\\times LY$. The specified ring and module inverse images in [def-weil-proetale-inverse-image] use exactly the transported operations: for example the action on $I(M)$, through the canonical underlying-sheaf identifications, is $L(\\operatorname{act}_M)\\circ\\lambda_{|R|,|M|}^{-1}$; addition uses the same formula, and zero and one use the final-object comparison. Take these canonical identifications as $e_R,e_M$ of [def-weil-pbc-algebraic-inverse-image], and take its module functor to be $I$ itself. To verify the graph conditions, an equation $z=\\operatorname{act}_M\\circ\\langle x,y\\rangle$ gives $Lz=L(\\operatorname{act}_M)\\circ\\lambda^{-1}\\circ\\langle Lx,Ly\\rangle$, since the two sides of $\\lambda\\circ L\\langle x,y\\rangle=\\langle Lx,Ly\\rangle$ have identical projections. The same argument treats addition and multiplication; the final-object comparison treats zero and one. These are precisely the required graph equations. On morphisms the specified inverse image uses the underlying $Lf$, so $e_M$ is natural and the resulting presentation has exactly $I$ on both objects and arrows.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi; expanded matching of the specified transported operations"
+   }
+  },
+  {
+   "text": "For an $RI$-module sheaf $H$, sectionwise scalar multiplication $(b,m)\\mapsto bm$ is $RI$-bilinear: distributivity gives additivity in each argument and commutativity of $RI$ gives $(cb)m=c(bm)=b(cm)$. It commutes with every restriction. Thus [lem-pc-sites-sheaf-tensor-bilinear-universal] gives a unique module-sheaf map $a_H:RI\\otimes_{RI}H\\to H$ with $a_H(b\\otimes m)=bm$. The insertion $q_H:H\\to RI\\otimes_{RI}H$, $m\\mapsto1\\otimes m$, is a sheaf map by restriction compatibility and the presheaf-to-sheaf tensor map of [def-pur-sheaf-tensor-product]. It is additive, and is $RI$-linear because $1\\otimes cm=c\\otimes m=c(1\\otimes m)$, the balanced tensor relation. These computations take place in the sectionwise presheaf tensor and therefore hold after its map to the sheaf tensor.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product, tensor definition and displayed Hom--Bilin universal property; explicit identity-scalar formulas"
+   }
+  },
+  {
+   "text": "For every local section $m$ of $H$, $a_Hq_H(m)=1m=m$. The maps $q_Ha_H$ and $1$ from $RI\\otimes_{RI}H$ to itself agree after the pure-tensor pairing, since $q_Ha_H(b\\otimes m)=1\\otimes bm=b\\otimes m$. The injectivity in [lem-pc-sites-sheaf-tensor-bilinear-universal] makes them equal as sheaf morphisms. Consequently $a_H$ and $q_H$ are inverse $RI$-module-sheaf isomorphisms. This proves equality on the entire sheafified tensor, without assuming that every section is a global sum of pure tensors.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, displayed Hom--Bilin universal property; cancellation of multiplication and insertion"
+   }
+  },
+  {
+   "text": "For a module-sheaf map $v:H\\to H'$, $v(bm)=bv(m)$, so $v\\circ a_H$ and $a_{H'}\\circ(1\\otimes v)$ agree on the pure-tensor pairing and hence everywhere by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Also $(1\\otimes v)q_H(m)=1\\otimes v(m)=q_{H'}v(m)$. Apply this to $H=I(M)$ and $v=I(f)$. The assignments $T(M)=RI\\otimes_{RI}I(M)$, $T(f)=1\\otimes I(f)$ obey identity and composition laws: the two maps in each law agree on $b\\otimes m$ and thus everywhere by the same injectivity. They are exactly extension of scalars for $1_{RI}$, on objects and morphisms, by the sheaf tensor definition [def-pur-sheaf-tensor-product]. The maps $a_M:=a_{I(M)}$ and $q_M:=q_{I(M)}$ are the asserted natural inverse families.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product and Hom--Bilin universal property; naturality on scalar tensors"
+   }
+  },
+  {
+   "text": "Let $(\\widetilde q,\\mu)$ be any comparison in [def-weil-pbc-canonical-ringed-tensor-comparison] for this $T$ and the presentation of step 1. Its q_one condition says $\\widetilde q_H=q_H$ on every section. Put $Z=|M|\\times|N|$, let $x,y$ be its projections, and let $z:Z\\to|M\\otimes_RN|$ be the canonical pure-tensor pairing [def-pur-sheaf-tensor-product]. For $s\\in M(V)$ and $t\\in N(V)$, apply the comparison's generalized pure-tensor equation to the section $\\eta_{h,Z,V}(s,t)$ of $(LZ)(T'\\times_TV)$. Naturality of the specified unit [def-weil-proetale-inverse-image] for $x,y,z$ identifies its images with $h^{-1}s$, $h^{-1}t$, and $h^{-1}(s\\otimes t)$, respectively, under the canonical identifications of step 1. Hence $\\mu_{M,N}q_{M\\otimes_RN}(h^{-1}(s\\otimes t))=q_M(h^{-1}s)\\otimes q_N(h^{-1}t)$. Step 3 identifies $q_{M\\otimes_RN}$ with $a_{M\\otimes_RN}^{-1}$. Applying $a_M\\otimes a_N$ to this equality and using $a_Mq_M=a_Nq_N=1$ yields exactly $b_{M,N}(h^{-1}(s\\otimes t))=h^{-1}s\\otimes h^{-1}t$. All pure tensors here are followed by the presheaf-to-sheaf map. The argument uses a product test sheaf, so needs no representability assumption or unstated rule about inverse images of represented sections.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent-written evaluation of the normalized comparison and cancellation of identity scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-canonical-ringed-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL, Section 03EK, with sites.tex Tag 00YV. Explicit realization of the specified functor and scalar-unit cancellation of an arbitrary normalized comparison; the generalized-element argument is written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +141,52 @@
    "results": "[leanfinder] OK 8 hit(s); KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale in Mathlib/RingTheory/Etale/Kaehler; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply in Mathlib/RingTheory/Etale/Kaehler; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap in Mathlib/RingTheory/Etale/Kaehler; KaehlerDifferential.isBaseChange_of_formallyEtale in Mathlib/RingTheory/Etale/Kaehler; Algebra.Extension.tensorCotangentSpace in Mathlib/RingTheory/Etale/Kaehler; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul in Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified; Algebra.FormallyEtale.instTensorProduct in Mathlib/RingTheory/Etale/Basic; Algebra.FormallyEtale.of_restrictScalars in Mathlib/RingTheory/Etale/Basic",
    "date": "2026-10-21",
    "verdict": "no exact match: the hits do not realize the specified pro-etale module functor or identify scalar-unit conjugation of a given normalized comparison on original unit sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified inverse image of sheaves of modules is an algebraic inverse image and identity extension of scalars cancels a normalized tensor comparison",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsId",
+   "results": "9 hits: ModuleCat.extendScalarsId, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsId. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|CanonicalRingedTensorComparison|AlgebraicInverseImage",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor product of sheaves of modules with its ring sheaf is naturally isomorphic to the module sheaf by multiplication",
+   "results": "8 hits: IsLocalization.moduleLid, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObj, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObjMap, PiTensorProduct.instModule, PresheafOfModules.Sheafify.SMulCandidate.h, AlgebraicGeometry.Scheme.Modules. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of module objects by a finite product preserving sheaf inverse image functor preserves scalar operations with the same underlying inverse image",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.pullbackObjFreeIso, SheafOfModules.restrictScalars, CondensedMod.ofSheafCompHaus, SheafOfModules.restrictScalars_obj_val, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforward, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|leftUnitor",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Read ChangeOfRings.lean:954-974 and Sheaf/PullbackContinuous.lean:48-84 for the closest candidates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ModuleCat.extendScalarsId concerns modules over a single ring, and the site pullback declarations do not state the exact algebraic realization and original-unit normalization for an arbitrary given CanonicalRingedTensorComparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-proetale-inverse-image-tensor-comparison",
@@ -91,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-inverse-image-scalar-unit-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Matched the algebraic presentation to the specified transported operations rather than replacing the specified functor by an isomorphic choice. Constructed action and insertion using the existing sheaf tensor universal property, proved both inverse identities and naturality as sheaf maps, and evaluated the arbitrary normalized comparison on the unit of a product test sheaf before canceling the scalar units. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the tensor-base-change naturality in the last sentence of lem-pur-finite-kummer-level.proof.md, through the original inverse-image tensor-comparison proof steps 1-2. No change to the unit route or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Uses finite-limit preservation of the specified site inverse image; this generic site theorem supplies a foundational tool not a different purity proof route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Uses the Hom--Bilin bijection solely to construct multiplication and test equality of maps out of an ordinary sheaf tensor; no node of this conventions unit replaces this generic universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-0efb03ff4",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-0efb03ff4 (reviewer sub-agent of L); spot-checked: Ordinary one-level split, read in full: the item has no repair note, is unsplit in both live and side-live, is not in the dropped list and contains no SGA text. The statement is byte-identical to the one Q11 created as node A of the parent re-split. There are no new nodes, and proof_deps equals the union of the step uses. Sources checked: Stacks 03D2 (l.1020-1041) gives action transport via f^{-1}mu for any ring sheaf; 03EK, 03EL and 00YV are correctly labelled. Step 1: lem-weil-pbc-left-exact-site-inverse-image-tensor gives finite-limit preservation of L, and def-weil-proetale-inverse-image supplies its hypotheses. The graph equations follow because lambda∘L<x,y> = <Lx,Ly> (same projections), and the presentation's module functor is I itself. Step 2: lem-pc-sites-sheaf-tensor-bilinear-universal (the Hom-Bilin bijection) constructs a_H; q_H is RI-linear because 1⊗cm = c⊗m in the presheaf tensor. Steps 3-4: aq = 1 directly; qa = 1, naturality and the functor laws of T(f) = 1⊗I(f) follow from injectivity of the bijection. Step 5: Z = |M|×|N| with the projections and the pure-tensor pairing satisfies the generalized pure-tensor equation; unit naturality applied to eta_Z(s,t) gives h^{-1}s, h^{-1}t and h^{-1}(s⊗t); q_one forces q = a^{-1}, and applying a⊗a gives b(h^{-1}(s⊗t)) = h^{-1}s⊗h^{-1}t. The existence of a comparison is never used and the parent is not cited, so there is no cycle. Edge cases (R = 0, empty schemes, nonconstant R) hold. Both declared tool uses are generic and accepted. lem-sfb-sheaf-tensor-unit-comparison and the sibling nodes are not duplicates. Two advisories: e_M (identifying the Ab-valued inverse image's underlying set sheaf with the set inverse image) is taken from the definition's canonical identifications; the left-sided scalar extension follows the comparison node's convention. No fixes."
  }
 }
