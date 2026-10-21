@@ -23880,3 +23880,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:12 L: returned deliver/NK/lem-pur-affine-translation-trace (reviewer RETURN: L: independent stage-2 immutable head 14f5203ab74f: F1/H2 repaired: def-trf-ambient-affine-translation-trace existing:tr)
 - 22:12 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 22:12 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 22:13 L: returned deliver/NE/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: 14th push of this item. I read the item, all 10 steps and the 4 new nodes in full. The mathematics is sound: the Sylow i)
