@@ -19519,3 +19519,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:56 L: batch 20261021T014653 dependency take-out
 - 01:57 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 01:57 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-6d69d, head 6d69d90db) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.RingedProjecti)
+- 01:57 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
