@@ -23724,3 +23724,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T20:43:06Z L: superseded stage-1 delivery NK/lem-sfb-polynomial-translation-acyclic at 72fff3cec4908be4e7056187449ca35208165732; current completion retained; packet archived at refs/superseded/NK/lem-sfb-polynomial-translation-acyclic/72fff3cec4908be4e7056187449ca35208165732; stale return retired.
 - 20:43 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 20:43 L: merged deliver/O3/lem-sfb-trivial-ladic-derived-exterior (stage 2; reviewer PASS; parallel immutable checks)
+- 20:45 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
