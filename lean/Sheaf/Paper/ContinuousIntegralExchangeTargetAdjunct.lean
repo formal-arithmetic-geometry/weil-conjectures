@@ -186,14 +186,18 @@ private lemma bounded_counit_hom
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
     [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ T)) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app K).hom =
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app
+      K).hom =
       (derivedUpperStarLowerStarAdjunction Λ h).counit.app K.obj := by
   change (boundedConstructible _).ι.map
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app K) = _
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app K)
+      = _
   rw [boundedConstructibleUpperStarLowerStarAdjunction,
     Adjunction.map_restrictFullyFaithful_counit_app]
-  simp [boundedConstructibleUpperStarCompatibility, boundedConstructibleLowerStarCompatibility,
-    ObjectProperty.liftCompιIso]
+  simp only [boundedConstructibleUpperStarCompatibility,
+    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    OverClass.asOver_left, Functor.comp_obj, ObjectProperty.ι_obj, Functor.id_obj,
+    OverClass.asOverHom_left, Iso.symm_inv]
   dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
     ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj]
   change 𝟙 ((L((h)^*⟦Λ⟧)).obj ((R((h)_*⟦Λ⟧)).obj K.obj)) ≫
@@ -210,23 +214,28 @@ private lemma integralPull_counit
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
     [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
     (K : integralConstructible ℓ E T) :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of
+      k)))).map
         (integralConstructiblePushHom ℓ E k h K) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).counit.app
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ
+        (h.asOver (Spec (.of k)))).counit.app
           ((integralScalarConstructible ℓ E T).obj K) =
     (integralConstructiblePullIso ℓ E k h
       ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K)).inv ≫
       scalarMap (integralScalarConstructible ℓ E T)
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).counit.app K) := by
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (h.asOver (Spec
+          (.of k)))).counit.app K) := by
   apply ObjectProperty.hom_ext
   change L((h)^*⟦Profinite.continuousMapRingObj E⟧).map
       ((derivedPushHom (integralScalarMap ℓ E) h).app K.obj) ≫
-        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).counit.app
+        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ
+          (h.asOver (Spec (.of k)))).counit.app
             ((integralScalarConstructible ℓ E T).obj K)).hom =
     (derivedPullIso (integralScalarMap ℓ E) h).inv.app
       ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K).obj ≫
         (integralScalarExtension ℓ E T).map
-          (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).counit.app K).hom)
+          (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (h.asOver (Spec
+            (.of k)))).counit.app K).hom)
   rw [bounded_counit_hom (ℓ := ℓ) (k := k)
       (Λ := Profinite.continuousMapRingObj E) (h := h),
     bounded_counit_hom (ℓ := ℓ) (k := k) (Λ := integralCoeff ℓ E) (h := h)]
@@ -252,7 +261,8 @@ private lemma integralPull_naturality
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).map v) ≫
       integralConstructiblePullHom ℓ E k h L =
     integralConstructiblePullHom ℓ E k h K ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).map
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of
+        k)))).map
         (scalarMap (integralScalarConstructible ℓ E U) v) := by
   apply ObjectProperty.hom_ext
   exact (derivedPullIso (integralScalarMap ℓ E) h).hom.naturality v.hom
@@ -265,12 +275,14 @@ private lemma integralPull_inv_naturality
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
     [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
     {K L : integralConstructible ℓ E U} (v : K ⟶ L) :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of
+      k)))).map
         (scalarMap (integralScalarConstructible ℓ E U) v) ≫
       (integralConstructiblePullIso ℓ E k h L).inv =
     (integralConstructiblePullIso ℓ E k h K).inv ≫
       scalarMap (integralScalarConstructible ℓ E T)
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).map v) := by
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).map v) :=
+          by
   apply ObjectProperty.hom_ext
   exact (derivedPullIso (integralScalarMap ℓ E) h).inv.naturality v.hom
 
@@ -290,8 +302,10 @@ private lemma integralPull_eq
       integralConstructiblePullIso ℓ E k j K =
     integralConstructiblePullIso ℓ E k h K ≪≫
       (eqToIso (by subst j; rfl) :
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k))) ≅
-          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (j.asOver (Spec (.of k)))).app
+        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))
+          ≅
+          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (j.asOver (Spec (.of
+            k)))).app
           ((integralScalarConstructible ℓ E U).obj K) := by
   subst j
   change (integralScalarConstructible ℓ E T).mapIso (Iso.refl _) ≪≫ _ =
@@ -307,16 +321,20 @@ omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square_cube_iso
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     (integralScalarConstructible ℓ E X').mapIso
-        ((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M) ≪≫
+        ((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+          k)))).app M) ≪≫
       integralConstructiblePullIso ℓ E k g'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj M) ≪≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).mapIso
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).mapIso
         (integralConstructiblePullIso ℓ E k f M) =
     integralConstructiblePullIso ℓ E k f'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M) ≪≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).mapIso
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+        k)))).mapIso
         (integralConstructiblePullIso ℓ E k g M) ≪≫
-      (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
+      (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj M) := by
   have h₁ := integralConstructiblePullIso_comp ℓ E k g' f M
   have h₂ := integralConstructiblePullIso_comp ℓ E k f' g M
@@ -324,16 +342,22 @@ private lemma integralPull_square_cube_iso
   rw [boundedConstructiblePullbackSquareComparison_app,
     boundedConstructiblePullbackSquareComparison_app]
   exact mapped_iso_rectangle (integralScalarConstructible ℓ E X')
-      ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))).app M)
-      ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k))) (f.asOver (Spec (.of k)))).app M)
+      ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k))) (g.asOver
+        (Spec (.of k)))).app M)
+      ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k))) (f.asOver
+        (Spec (.of k)))).app M)
       ((eqToIso (by simp only [sq.w]) :
         boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ ((f' ≫ g).asOver (Spec (.of k))) ≅
         boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ ((g' ≫ f).asOver (Spec (.of k)))).app M)
-      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))).app ((integralScalarConstructible ℓ E Y).obj M))
-      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))) (f.asOver (Spec (.of k)))).app ((integralScalarConstructible ℓ E Y).obj M))
+      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+        k))) (g.asOver (Spec (.of k)))).app ((integralScalarConstructible ℓ E Y).obj M))
+      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k))) (f.asOver (Spec (.of k)))).app ((integralScalarConstructible ℓ E Y).obj M))
       ((eqToIso (by simp only [sq.w]) :
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ ((f' ≫ g).asOver (Spec (.of k))) ≅
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ ((g' ≫ f).asOver (Spec (.of k)))).app
+        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ ((f' ≫ g).asOver (Spec
+          (.of k))) ≅
+        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ ((g' ≫ f).asOver (Spec
+          (.of k)))).app
         ((integralScalarConstructible ℓ E Y).obj M))
       _ _ _ _ _ _ h₁ h₂ he
 
@@ -342,16 +366,20 @@ omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square_cube
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     scalarMap (integralScalarConstructible ℓ E X')
-        (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M).hom) ≫
+        (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+          k)))).app M).hom) ≫
       integralConstructiblePullHom ℓ E k g'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj M) ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullHom ℓ E k f M) =
     integralConstructiblePullHom ℓ E k f'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M) ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullHom ℓ E k g M) ≫
-      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
+      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj M)).hom := by
   simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
     integralConstructiblePullHom, scalarMap] using
@@ -361,16 +389,21 @@ omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     (integralConstructiblePullIso ℓ E k f'
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M)).inv ≫
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M)).inv
+          ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M).hom) ≫
+        (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+          k)))).app M).hom) ≫
       integralConstructiblePullHom ℓ E k g'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj M) =
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+      k)))).map
         (integralConstructiblePullHom ℓ E k g M) ≫
-      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
+      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj M)).hom ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullIso ℓ E k f M).inv := by
   simpa only [Category.assoc] using inverse_mapped_square
     (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))))
@@ -398,7 +431,8 @@ private lemma boundedBaseChange_adjunct
     ((boundedConstructiblePullbackSquareComparison Λ ℓ (sq.asOver (Spec (.of k)))).app
       ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj K)).hom ≫
         (boundedConstructibleUpperStar Λ ℓ (g'.asOver (Spec (.of k)))).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of k)))).counit.app K) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of
+            k)))).counit.app K) := by
   rw [Adjunction.homEquiv_counit]
   exact boundedConstructibleBaseChange_adjunct Λ ℓ (sq.asOver (Spec (.of k))) K
 
@@ -412,23 +446,32 @@ attribute [local irreducible] Adjunction.homEquiv
 
 private lemma integral_target_start
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).homEquiv _ _).symm
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k)))).homEquiv _ _).symm
       (scalarMap (integralScalarConstructible ℓ E Y')
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K) ≫
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)
+            ≫
         integralConstructibleTargetHom ℓ E k f' g' K) =
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).homEquiv
+        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec
+          (.of k)))).homEquiv
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
-            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K)).symm
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)) ≫
+              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+                K))
+            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj
+              K)).symm
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K))
+            ≫
       integralConstructiblePullHom ℓ E k g' K := by
   exact adjunct_target_start
-    (boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k))))
-    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of
+      k))))
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k))))
     ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)
     (integralConstructiblePushHom ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K))
@@ -447,46 +490,60 @@ private lemma integral_counit_pull_naturality
     (K : integralConstructible ℓ E X) :
     scalarMap (integralScalarConstructible ℓ E X')
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) ≫
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+            (.of k)))).counit.app K)) ≫
       integralConstructiblePullHom ℓ E k g' K =
     integralConstructiblePullHom ℓ E k g'
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
           ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+            (.of k)))).counit.app K)) := by
   exact integralPull_naturality ℓ E k g'
     (K := (boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
       ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
     (L := K)
-    ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)
+    ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of
+      k)))).counit.app K)
 
 private lemma finish_step1
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).homEquiv
+        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec
+          (.of k)))).homEquiv
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
-            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K)).symm
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)) ≫
+              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+                K))
+            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj
+              K)).symm
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K))
+            ≫
       integralConstructiblePullHom ℓ E k g' K =
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
-      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).hom) ≫
+      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+        k)))).app
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K)).hom) ≫
     scalarMap (integralScalarConstructible ℓ E X')
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+          (.of k)))).counit.app K)) ≫
     integralConstructiblePullHom ℓ E k g' K := by
   exact map_eq_whisker (integralScalarConstructible ℓ E X')
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv
     (integralConstructiblePullHom ℓ E k g' K) _ _ _
     (boundedBaseChange_adjunct ℓ k f g f' g' (integralCoeff ℓ E) sq K)
 
@@ -494,26 +551,35 @@ private lemma finish_step2
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
-      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).hom) ≫
+      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+        k)))).app
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K)).hom) ≫
     scalarMap (integralScalarConstructible ℓ E X')
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) ≫
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+          (.of k)))).counit.app K)) ≫
     integralConstructiblePullHom ℓ E k g' K =
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
-      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).hom) ≫
+      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+        k)))).app
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K)).hom) ≫
     integralConstructiblePullHom ℓ E k g'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
         ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+      k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+          (.of k)))).counit.app K)) := by
   conv_lhs =>
     rhs
     rhs
@@ -523,32 +589,46 @@ private lemma finish_step3
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
     scalarMap (integralScalarConstructible ℓ E X')
-      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).hom) ≫
+      (((boundedConstructiblePullbackSquareComparison (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of
+        k)))).app
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K)).hom) ≫
     integralConstructiblePullHom ℓ E k g'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
         ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+      k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) =
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+          (.of k)))).counit.app K)) =
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+      k)))).map
         (integralConstructiblePullHom ℓ E k g
           ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
+      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj
-            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).hom ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+              K))).hom ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+            K)).inv ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+            (.of k)))).counit.app K)) := by
   simpa only [Category.assoc] using congrArg
-    (fun v ↦ v ≫ (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+    (fun v ↦ v ≫ (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver
+      (Spec (.of k)))).map
       (scalarMap (integralScalarConstructible ℓ E X)
-        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)))
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+          (.of k)))).counit.app K)))
     (integralPull_square ℓ E k f g f' g' sq
       ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
 
@@ -556,26 +636,38 @@ private lemma integral_target_finish
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     (integralConstructiblePullIso ℓ E k f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+          K))).inv ≫
       scalarMap (integralScalarConstructible ℓ E X')
-        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).homEquiv
+        (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f'.asOver (Spec
+          (.of k)))).homEquiv
             ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
-              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
-            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K)).symm
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)) ≫
+              ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+                K))
+            ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj
+              K)).symm
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K))
+            ≫
       integralConstructiblePullHom ℓ E k g' K =
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+      k)))).map
         (integralConstructiblePullHom ℓ E k g
           ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
+      ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E Y).obj
-            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))).hom ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+              K))).hom ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+            K)).inv ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (scalarMap (integralScalarConstructible ℓ E X)
-          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+            (.of k)))).counit.app K)) := by
   exact (finish_step1 ℓ E k f g f' g' sq K).trans
     ((finish_step2 ℓ E k f g f' g' sq K).trans
       (finish_step3 ℓ E k f g f' g' sq K))
@@ -597,22 +689,31 @@ extension of the integral counit. This is the displayed composite. No push compa
 exchange is inverted. -/
 theorem integralConstructible_exchange_target_adjunct
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).homEquiv _ _).symm
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k)))).homEquiv _ _).symm
       ((integralScalarConstructible ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K) ≫
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K)
+            ≫
         integralConstructibleTargetHom ℓ E k f' g' K) =
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of
+      k)))).map
         (integralConstructiblePullHom ℓ E k g
           ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-      (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).hom.app
+      (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver
+        (Spec (.of k)))).hom.app
           ((integralScalarConstructible ℓ E Y).obj
-            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
+              ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+            K)).inv ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of
+        k)))).map
         ((integralScalarConstructible ℓ E X).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec
+            (.of k)))).counit.app K)) := by
   exact (integral_target_start ℓ E k f g f' g' sq K).trans
     (integral_target_finish ℓ E k f g f' g' sq K)
 
