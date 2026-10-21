@@ -9,11 +9,172 @@
  },
  "stmt_deps": [
   "def-weil-pbc-kahler-differentials",
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-endomorphism-trace",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-laurent-series",
+  "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a uniformizer $t$. The DVR definition gives a Noetherian local domain with maximal ideal $(t)$, so the unit-times-uniformizer-power lemma applies. For $f=a/b\\ne0$, factoring $a,b\\in O\\setminus\\{0\\}$ gives $fO=t^rO$ for an integer $r$. Multiplication by $t^j$ identifies $O/tO=\\kappa$ with $t^jO/t^{j+1}O$ for every integer $j$: cancellation proves injectivity, and surjectivity is its displayed description. Thus $t^aO/t^bO$ has $(b-a)[\\kappa:k]$ dimensions for $a\\le b$, by its finite filtration. Consequently $(fO+O)/O$ is finite-dimensional, including $f=0$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, p. 154, paragraph preceding Theorem 2 (applied to any DVR with finite residue extension)"
+   }
+  },
+  {
+   "text": "Use the ideals of the cited operator-ideal theorem with $V=K,A=O$. Step 1 gives $m_f\\in E$. Set $F_f=\\pi m_f\\in E_1$. Since $(\\pi-1)fO$ is the image of the finite-dimensional quotient $(O+fO)/O$, $F_f-m_f\\in E_2$. More generally, if $F-m_f,G-m_g\\in E_2$ and at least one of $F,G$ belongs to $E_1$, then $[F,G]\\in E_0$: it belongs to $E_1$ by the ideal property, and modulo $E_2$ it is $[m_f,m_g]=0$. Hence all these commutators are finite-potent. The trace-calculus theorem also establishes the item’s stable-subspace definition of trace for every finite-potent operator, not just these commutators.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, Propositions 1–2; §2, Theorem 1, lift conditions (a),(b)"
+   }
+  },
+  {
+   "text": "The trace of $[F,G]$ is independent of admissible lifts. With $F\\in E_1$ fixed, changing $G$ by an element of $E_2$ changes the commutator by an $[E_1,E_2]$ commutator, whose trace is zero. With $G\\in E$ fixed and $F,F'\\in E_1$ both lifting $f$, $F-F'\\in E_0$ and the change has trace zero by $[E_0,E]$. All additions are within $E_0$, where trace is linear. Interchanging the two arguments handles the case in which only the second lift lies in $E_1$. In particular $\\beta(f,g)=\\operatorname{Tr}_{\\mathrm{fp}}[F_f,F_g]$ equals $\\operatorname{Tr}_{\\mathrm{fp}}[\\pi m_f,m_g]$; changing $\\pi$ does not change it. Linearity of the chosen lifts and of trace on $E_0$ makes $\\beta$ $k$-bilinear; $\\beta(f,c)=0$ for $c\\in k$ by choosing $G=c\\,1$.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Theorem 1, independence and bilinearity"
+   }
+  },
+  {
+   "text": "For $f,g,h\\in K$, let $F,G,H\\in E_1$ lift their multiplications modulo $E_2$. The products $GH,FG,FH$ lift $gh,fg,fh$, because $E_2$ is an ideal of $E$. The operator identity\n$$[F,GH]-[FG,H]-[FH,G]=[G,[F,H]]$$\nhas right side of trace zero: $[F,H]\\in E_0$ and $G\\in E$. Taking traces and using the lift independence gives $\\beta(f,gh)=\\beta(fg,h)+\\beta(fh,g)$. The presentation of Kähler differentials in the cited definition now gives a unique $k$-linear map with $f\\,dg\\mapsto\\beta(f,g)$: additivity and $k$-constants follow from Step 3, and the displayed identity kills precisely the Leibniz relations, also after multiplication by any $f$. This is the required residue map, independent of the projection and trace subspace.",
+   "uses": [
+    "lem-pc-tate-endomorphism-ideals",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Theorem 1, descent through the presentation of differentials"
+   }
+  },
+  {
+   "text": "Here is the finite calculation that will also control completion. For nonzero $f,g$ put $T=[\\pi m_f,m_g]$, $B=O+gO$ and $C=B\\cap f^{-1}O\\cap(fg)^{-1}O$. Both $B,C$ are fractional ideals $t^bO,t^cO$, and Step 1 makes $B/C$ finite-dimensional. One has $T(K)\\subset B$, and for $x\\in C$, $fx,fgx\\in O$, whence $T(x)=fgx-gfx=0$. Apply trace additivity first to $B\\subset K$ and then to $C\\subset B$. The induced operator on $K/B$ and the restriction to $C$ are zero, so\n$$\\operatorname{Tr}_{\\mathrm{fp},K}(T)=\\operatorname{Tr}_k(T\\mid B/C).$$\nThe case $f=0$ or $g=0$ gives zero directly. If $f,g\\in O$, then $B=C=O$, so $\\operatorname{res}_O(f\\,dg)=0$. Every regular differential is a sum of such terms by the presentation of $\\Omega^1_{O/k}$, proving annihilation of its image.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Remark, formula (*), and R2"
+   }
+  },
+  {
+   "text": "For $u\\in O$, take $T=[\\pi m_{u/t},m_t]$. Its image is contained in $O$, and for $x\\in tO$, $T(x)=ux-t\\pi(ux/t)=0$. For $x\\in O$, reduction of $T(x)=ux-t\\pi(ux/t)$ modulo $tO$ is $\\bar u\\bar x$. Thus the same two invariant-subspace trace decompositions as Step 5 give $\\operatorname{Tr}_{\\mathrm{fp}}T=\\operatorname{Tr}_k(m_{\\bar u}\\mid O/tO)=\\operatorname{Tr}_{\\kappa/k}(\\bar u)$. This works for inseparable $\\kappa/k$ too; no coefficient field has been used.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, R4, specialized to g=t and h=u"
+   }
+  },
+  {
+   "text": "Put $R=\\widehat O=\\varprojlim O/t^nO$. The cited completion lemmas give completeness for $tR$ and $R/t^nR=O/t^nO$, compatibly with the canonical maps. This makes $R$ local with maximal ideal $tR$: an element whose residue is nonzero has an inverse modulo every $t^n$ (lift the residue inverse and use a finite geometric sum for the nilpotent error); uniqueness makes the inverses compatible. Multiplication by $t$ on $R$ is injective: if $tx=0$, its coordinate $x_{n+1}$ is in $t^nO/t^{n+1}O$ by cancellation in $O$, so $x_n=0$ for all $n$. Also $O\\to R$ is injective, since a nonzero $ut^r$ is not in $t^{r+1}O$. Completeness and the complete-pair lemma make the local ring $R$ henselian. If $\\kappa/k$ is separable, apply the cited residue-section lemma to $k,\\kappa,R$ with the empty separating family (so its generated subfield is $k$). It gives a $k$-algebra section $s:\\kappa\\to R$ of reduction.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-complete-pair-henselian",
+    "new-lem-sc-henselian-separably-generated-residue-section",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Completion and separable coefficient section: Stacks 05GG, 0ALJ, followed by the existing henselian separably generated residue-section tool"
+   }
+  },
+  {
+   "text": "With this section, define $\\kappa[[T]]\\to R$ by $\\sum a_iT^i\\mapsto\\sum s(a_i)t^i$, where the sum means its compatible finite truncations. Completeness makes it defined, and finite multiplication modulo each $t^n$ proves it is a $k$-algebra map. It is onto: successively subtract the residue lift and divide by $t$ to obtain all coefficients. It is injective: the first nonzero coefficient, after cancellation of its power of $t$, has nonzero residue. Thus $R\\cong\\kappa[[t]]$, identifying $t$ with $T$. Inverting $t$ identifies $R[1/t]$ with $\\kappa((t))$; this is a field, since a nonzero series is a power of $t$ times a series with invertible constant term, whose inverse is obtained recursively. The injection $O\\to R$ extends to $K\\hookrightarrow\\kappa((t))$. Moreover $K\\cap R=O$: a fraction $ut^r$ with $r<0$ cannot belong to $R$, by reduction modulo $t$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Coefficient-field power-series coordinates: explicit successive-residue construction supplementing Tate §3, Theorem 2"
+   }
+  },
+  {
+   "text": "The finite quotient in Step 5 proves that residue is preserved by $K\\hookrightarrow\\widehat K=\\kappa((t))$. Indeed $\\widehat K=K+R$: any finite principal part can be lifted from $O/t^nO$. Extend $\\pi$ to a projection $\\widehat\\pi:\\widehat K\\to R$ by $\\widehat\\pi(x+a)=\\pi(x)+a$ for $x\\in K,a\\in R$; the intersection equality of Step 8 makes this well-defined. For the fixed $f,g\\in K$, the completed $\\widehat B=R+gR$ and $\\widehat C=\\widehat B\\cap f^{-1}R\\cap(fg)^{-1}R$ have the same exponents $b,c$ as $B,C$. The quotient identifications modulo powers give $B/C\\cong\\widehat B/\\widehat C$. Since $\\widehat\\pi|_K=\\pi$, this isomorphism intertwines the induced commutators. Step 5 on both fields therefore equates their traces, with no continuity assertion about the arbitrary original $\\pi$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2, Remark formula (*), applied to completion; §3, definition of local residue"
+   }
+  },
+  {
+   "text": "Compute now on $\\widehat K$ with the projection $P$ taking the nonnegative powers of $t$. Let $f=\\sum_{i\\ge p}a_it^i$, $g=\\sum_{j\\ge q}b_jt^j$. For a coordinate $zt^r$, the coefficient of $t^r$ in $[Pm_f,m_g](zt^r)$ is\n$$z\\sum_{i+j=0}a_ib_j\\bigl(1_{r\\ge0}-1_{r+i\\ge0}\\bigr).$$\nThere are only finitely many contributing pairs, since $p\\le i\\le-q$. Compute the ordinary trace on $B/C=t^bR/t^cR$ from Step 5 using a $k$-basis of $\\kappa$ in each degree. Its diagonal block in degree $r$ is multiplication by the displayed sum. Terms outside this finite strip have zero diagonal, since the operator has image in $B$ and kills $C$. For each fixed $i$, summing $1_{r\\ge0}-1_{r+i\\ge0}$ over $r\\in\\mathbf Z$ gives $-i=j$ (count the finite interval between $0$ and $-i$, with its sign). Consequently\n$$\\operatorname{res}_R(f\\,dg)=\\sum_{i+j=0}j\\operatorname{Tr}_{\\kappa/k}(a_ib_j)=\\operatorname{Tr}_{\\kappa/k}([t^{-1}]f(t)g'(t)).$$\nThis is a finite quotient matrix calculation even when the series have infinitely many positive terms, so no passage of a trace through an infinite sum is used.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus",
+    "def-weil-endomorphism-trace",
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, Theorem 2, coefficient calculation; §2, formula (*) (expanded to finite separable coefficient fields)"
+   }
+  },
+  {
+   "text": "The canonical continuous differential of a Laurent series is $g\\mapsto g'(t)dt$, with the coefficients differentiated as zero. This is a $k$-derivation: coefficients of products are finite convolution sums and satisfy the termwise product rule. Separability makes this the usual continuous differential over $k$: for $a\\in\\kappa$ its separable minimal polynomial gives $0=P'(a)da$, hence $da=0$, and continuity then differentiates a power series term by term. The presentation of differentials sends $f\\,dg$ to $fg'(t)dt$. Every $\\xi\\in\\Omega^1_{K/k}$ is a finite sum of such generators. Combining Steps 9 and 10 and linearity gives $\\operatorname{res}_O(\\xi)=\\operatorname{Tr}_{\\kappa/k}(a_{-1})$ for its continuous Laurent differential. Since the left side was already constructed without coordinates, this comparison applies to every coefficient-field identification and uniformizer as stated.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-laurent-series",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, Theorem 2 and Theorem 4, comparison with classical residue; explicit continuous differential interpretation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-pc-tate-endomorphism-ideals",
+  "lem-pc-finite-potent-trace-calculus",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-complete-pair-henselian",
+  "new-lem-sc-henselian-separably-generated-residue-section",
+  "def-weil-endomorphism-trace",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-laurent-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1–§3, following Tate Theorem 1 and formula (*), with explicit completion and coefficient-field extension calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +203,45 @@
    "results": "8 hits: Valued.ResidueField, IsLocalRing.residue, IsLocalRing.finrank_CotangentSpace_eq_one, Algebra.trace_localization, IsLocalRing.finrank_CotangentSpace_eq_one_iff, IsLocalRing.isLocalHom_residue, coeSubmodule_differentIdeal_fractionRing, Algebra.trace_quotient_mk",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate residue of Kahler differentials of a discrete valuation field is independent of a linear projection and equals the trace of the Laurent coefficient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {K : outParam (Type u_5)} {L : outParam (Type u_6)} {Γ₀ : outParam (Type u_7)} {Γ₁ : outParam (Type u_8)}\\n  [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [inst_3 : LinearOrderedCommGroupWithZero Γ₀]\\n  [inst_4 : LinearOrderedCommGroupWithZero Γ₁] (vK : Valuation K Γ₀) (vL : Valuation L\", \"doc\": \"For any element $x$ in the valuation subring $K_0$, the composition of the algebra map from the residue field of $K_0$ to the residue field of $L_0$ with the residue map of $K_0$ equals the compositio\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R],\\n  Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 1\", \"doc\": \"For any discrete valuation ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) has finite rank 1 as a module over the residue \"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n  {\"name\": \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  {P : Algebra.Generators R S ι} (i : ι),\\n  P.toExtension.toKaehler (P.cotangentSpaceBasis i) = (KaehlerDifferential.D R S) (P.val i)\", \"doc\": \"For a commutative ring $ R $ and a set of generators $ \\\\iota $, the Kähler differential of the generator $ X_i $ in the algebra extension $ R[\\\\iota] $ corresponds to the basis element $ dX_i $ of the \"}\n  {\"name\": \"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  IsScalarTower R (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"For a commutative local ring $R$ with maximal ideal $\\\\mathfrak{m}$, the canonical module structures of $R$ on its residue field $k=R/\\\\mathfrak{m}$, of $k$ on the cotangent space $\\\\mathfrak{m}/\\\\mathfra\"}\n  {\"name\": \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] → [inst_1 : IsLocalRing R] → Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"For any commutative local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is equipped with a canonical module structure ov\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 1 ↔ IsDiscreteValuationRing R\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and a domain, the finite rank of the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) over the resi\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaurentSeries\", \"residue\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "TateResidue|localRes|residueTrace|finite.?potent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue of differentials on a discrete valuation field computed by the trace of a commutator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valued.ResidueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \"(K : Type u_1) →\\n  [inst : Field K] →\\n    {Γ₀ : outParam (Type u_2)} → [inst_1 : LinearOrderedCommGroupWithZero Γ₀] → [vK : Valued K Γ₀] → Type u_1\", \"doc\": \"For a field $ K $ equipped with a valuation into a linearly ordered commutative group with zero $ \\\\Gamma_0 $, this is the residue field obtained by quotienting the ring of integers $ \\\\mathcal{O}_K $ (\"}\n  {\"name\": \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"(x : K₀) :\\n  (algebraMap (ResidueField K₀) (ResidueField L₀)) (IsLocalRing.residue K₀ x) =\\n    IsLocalRing.residue L₀ (algebraMap K₀ L₀ x)\", \"doc\": \"For any element $x$ in the valuation subring $K_0$, the composition of the algebra map from the residue field of $K_0$ to the residue field of $L_0$ with the residue map of $K_0$ equals the compositio\"}\n  {\"name\": \"IsLocalRing.residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": R →+* ResidueField R\", \"doc\": \"The canonical ring homomorphism from a local ring $ R $ to its residue field, obtained by quotienting $ R $ by its unique maximal ideal consisting of all non-units.\"}\n  {\"name\": \"differentIdeal\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \": Ideal B\", \"doc\": \"The different ideal of a Dedekind domain extension $ B $ over $ A $ is defined as the preimage under the algebra map $ B \\\\to \\\\text{Frac}(B) $ of the submodule generated by the trace dual of $ A $ in $\"}\n  {\"name\": \"IsLocalRing.isLocalHom_residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R], IsLocalHom (IsLocalRing.residue R)\", \"doc\": \"For any commutative local ring $ R $, the canonical ring homomorphism from $ R $ to its residue field is a local homomorphism, meaning it preserves the maximal ideal structure by mapping the maximal i\"}\n  {\"name\": \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsDomain R] [IsDiscreteValuationRing R] : finrank (ResidueField R) (CotangentSpace R) = 1\", \"doc\": \"For any discrete valuation ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) has finite rank 1 as a module over the residue \"}\n  {\"name\": \"coeSubmodule_differentIdeal\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \": coeSubmodule L (differentIdeal A B) = 1 / Submodule.traceDual A K 1\", \"doc\": \"The image of the different ideal of the Dedekind domain extension $ B $ over $ A $ under the canonical embedding into the fraction field $ K $ is equal to the reciprocal of the trace dual of $ A $ eva\"}\n  {\"name\": \"FractionalIdeal.trace_mem_dual_one\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"(x : M) (hx : x ∈ dual A K (1 : FractionalIdeal C⁰ M)) : Algebra.trace L M x ∈ dual A K (1 : FractionalIdeal B⁰ L)\", \"doc\": \"If $ x $ is an element of the dual of $ A $ over $ K $ evaluated at the fractional ideal $ 1 $ in $ M $, then the trace of $ x $ from $ L $ to $ M $ lies in the dual of $ A $ over $ K $ evaluated at t\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local residue in a Laurent series field equals the field trace of coefficient minus one of a differential",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.exists_ratFunc_eq_v\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ {K : Type u_2} [inst : Field K] (x : LaurentSeries K), ∃ f, Valued.v f = Valued.v x\", \"doc\": \"For any Laurent series $x$ over a field $K$, there exists a rational function $f$ such that the $X$-adic valuation of $f$ equals the $X$-adic valuation of $x$.\"}\n  {\"name\": \"PowerSeries.residueFieldOfPowerSeries\", \"module\": \"Mathlib/RingTheory/PowerSeries/Inverse\", \"type\": \"{k : Type u_2} → [inst : Field k] → IsLocalRing.ResidueField (PowerSeries k) ≃+* k\", \"doc\": \"For any field $ k $, the residue field of the ring of univariate power series $ k[[X]] $ is isomorphic to $ k $. This isomorphism arises because the maximal ideal of $ k[[X]] $ consists of power serie\"}\n  {\"name\": \"LaurentSeries.valuation_def\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K],\\n  Valued.v = IsDedekindDomain.HeightOneSpectrum.valuation (LaurentSeries K) (PowerSeries.idealX K)\", \"doc\": \"The valuation $ v $ on the ring of Laurent series $ K((X)) $ is defined as the $ X $-adic valuation inherited from the power series ring $ K⟦X⟧ $, where the valuation of a Laurent series is determined\"}\n  {\"name\": \"LaurentSeries.exists_ratFunc_val_lt\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ {K : Type u_2} [inst : Field K] (f : LaurentSeries K) (γ : (WithZero (Multiplicative ℤ))ˣ),\\n  ∃ Q, Valued.v (f - (algebraMap (RatFunc K) (LaurentSeries K)) Q) < ↑γ\", \"doc\": \"For any Laurent series $ f $ over a field $ K $ and any $ \\\\gamma $ in the multiplicative integers with zero $ \\\\mathbb{Z}^{\\\\times}_0 $, there exists a rational function $ Q $ such that the valuation $ \"}\n  {\"name\": \"LaurentSeries.instValuedWithZeroMultiplicativeInt\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → Valued (LaurentSeries K) (WithZero (Multiplicative ℤ))\", \"doc\": \"The ring of Laurent series $ K((X)) $ is equipped with a canonical valuation structure taking values in the multiplicative integers with zero $ \\\\mathbb{Z}^\\\\times_0 $. This valuation is constructed usi\"}\n  {\"name\": \"RatFunc.valuation_eq_LaurentSeries_valuation\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (P : RatFunc K),\\n  (IsDedekindDomain.HeightOneSpectrum.valuation (RatFunc K) (Polynomial.idealX K)) P =\\n    (IsDedekindDomain.HeightOneSpectrum.valuation (LaurentSeries K) (PowerSeries.idealX K))\\n      ((algebraMap (RatFunc K) (LaurentSeries K)) P)\", \"doc\": \"For any rational function $ P $ over a field $ K $, the valuation of $ P $ with respect to the ideal generated by $ X $ in the polynomial ring $ K[X] $ is equal to the valuation of $ P $ in the ring o\"}\n  {\"name\": \"LaurentSeries.val_le_one_iff_eq_coe\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (f : LaurentSeries K), Valued.v f ≤ 1 ↔ ∃ F, (HahnSeries.ofPowerSeries ℤ K) F = f\", \"doc\": \"A Laurent series $ f $ over a field $ K $ satisfies $ v(f) \\\\leq 1 $ in the multiplicative integers with zero $ \\\\mathbb{Z}^\\\\times_0 $ if and only if $ f $ is the image of a power series under the canon\"}\n  {\"name\": \"LaurentSeries.valuation_compare\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (f : LaurentSeries K),\\n  Valued.v ((LaurentSeries.LaurentSeriesPkg K).compare LaurentSeries.ratfuncAdicComplPkg f) = Valued.v f\", \"doc\": \"For any Laurent series $ f $ over a field $ K $, the valuation of the comparison map applied to $ f $ in the adic completion of rational functions equals the valuation of $ f $ itself, i.e., $ v(\\\\text\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-picard-duality",
@@ -62,5 +258,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-dvr-residue-calculus",
+  "worker": "stage1",
+  "summary": "Checked Tate pp.149–157 and the live project source; supplied the operator-lift descent, finite-quotient trace argument, uniformizer normalization and separable Laurent comparison. Reused completion and henselian-section nodes; exposed two general linear-algebra tools, without splitting their statements. No statement correction was needed.",
+  "blueprint": "Statement of sk-thm-picard-duality: Tate’s k-linear residue at a closed point, its annihilation of regular differentials and comparison with the classical residue when the residue extension is separable.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic DVR factorization is needed to bound fractional ideals; the unit has no separate algebraic factorization lemma."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic finite-generated-ideal completion theorem supplies completeness and the residue quotient for the coefficient-field construction."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Canonical quotient identifications control the finite trace calculation after completion."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Completeness implies henselianity, needed solely for constructing a separable coefficient section."
+   },
+   {
+    "node": "new-lem-sc-henselian-separably-generated-residue-section",
+    "why": "Its empty separating-family case constructs the k-compatible finite separable residue-field section; no lemma in this unit gives this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-complete-pair-henselian",
+  "new-lem-sc-henselian-separably-generated-residue-section"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-479522247",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-479522247 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Tate pp.149–153 (T1–T5, Propositions 1–2, Theorem 1, (*), R2, R4) in full. Status: the item is unsplit on live and side-live, there is no repair note, and it is not on the dropped list. The statement is unchanged. Steps 1–11 are correct. Lifts F_f = πm_f lie in E₁ and differ from m_f by an element of E₂, because (π−1)fO is the image of (fO+O)/O. Lift independence uses the two commutator clauses of the ideals node. The Leibniz operator identity expands to [G,[F,H]], which has zero trace; Tate p.152 wrongly writes it as 0, and the delivery handles this correctly. The finite quotient B/C is Tate's (*). For u∈O, u t⁻¹dt has residue Tr_{κ/k}(ū) with positive sign, consistent with R4; no separability is used. Completion steps: R is complete and local, hence henselian. The residue-section lemma with the empty family gives the coefficient field. R≅κ[[t]] and K∩R=O. π̂ is well defined on K̂=K+R, and B/C≅B̂/Ĉ. I recomputed the Laurent strip: the diagonal coefficient is Σ_{i+j=0}a_ib_j(1_{r≥0}−1_{r+i≥0}), the sum over r is −i=j, and the result Tr([t⁻¹]fg′) holds in every characteristic. Both new nodes are true, self-contained, statement-only and not duplicates (rg -L over the DAG), and neither restates the item; I checked edge cases A=0, A=V and the cyclicity proof. I accept the tool uses complete-pair-henselian and henselian-separably-generated-residue-section as generic algebra. No SGA is used. FIX (B3, missing stmt_deps): the statement uses κ[[t]], κ((t)) and κ/k separable without their definition nodes. I added def-weil-pbc-laurent-series and def-weil-pbc-separable-algebraic-extension to stmt_deps, to the uses of steps 7, 8, 10 and 11, and to proof_deps. Advisory: 'continuous differentials' has no definition node; Step 11 realizes it as g↦g′dt.; 1 file(s) fixed by the reviewer"
  }
 }
