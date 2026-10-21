@@ -74,7 +74,3 @@ L: independent stage-2 immutable head 0e473be282bd: Errors H3/§1(C): the statem
 ## lem-per-henselian-valuation-coarsenings (2026-10-19 01:46 UTC, branch head 770249ea4cb)
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-per-henselian-valuation-coarsenings: lem-per-henselian-valuation-coarsenings: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
-
-## lem-trf-isomorphism-multiplication-cone-descent (2026-10-21 10:43 UTC, branch head no branch)
-
-(the landing tools, head 16af22db9) the delivery did not land: (merge queue) your landing 20261021T100703-NZ-4072136-1709 was taken out of the candidate: the global build of 67889a9512 failed in Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle Sheaf.AlgebraicGeometry.CoconeDerivedComparisonNormalForm Sheaf.AlgebraicGeometry.CoefficientMateDiagonalGraph Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization; this change is a possible cause
