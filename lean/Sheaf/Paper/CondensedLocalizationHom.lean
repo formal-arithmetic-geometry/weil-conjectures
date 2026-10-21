@@ -130,7 +130,43 @@ sectionwise localization homomorphisms preserve one and multiplication. The mono
 sheafification adjunction carries these identities back to the original ring object. -/
 theorem coefficientLocalizationMap_isMonHom (t : R Λ) :
     IsMonHom (coefficientLocalizationMap Λ t) := by
-  sorry
+  let J := coherentTopology Profinite.{u}
+  let S := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+    (localizedRing Λ t)
+  let : MonObj ((sheafCompose J (forget₂ RingCat Ab)).obj S).obj :=
+    S.obj.monObjCompForget₂
+  have h : IsMonHom ((sheafToPresheaf J Ab.{u + 1}).map
+      (coefficientLocalizationMap Λ t)) := by
+    constructor
+    · change _ ≫ (coefficientLocalizationMap Λ t).hom = _
+      rw [show η[((sheafToPresheaf J Ab.{u + 1}).obj (localized Λ t).X)] =
+        η[(S.obj ⋙ forget₂ RingCat Ab)] from Sheaf.ε_comp_map_one
+          ((sheafCompose J (forget₂ RingCat Ab)).obj S)]
+      ext U n
+      change (localizedRingMap Λ t).hom.app U
+        (((η[((sheafToPresheaf J Ab.{u + 1}).obj Λ.X)]).app U).hom n) = _
+      have hn : n = n.down • ULift.up (1 : ℤ) := by
+        apply ULift.ext
+        simp
+      have hη :
+          (((η[((sheafToPresheaf J Ab.{u + 1}).obj Λ.X)]).app U).hom n) =
+            n.down • (1 : (condensedSectionRing Λ.X).obj.obj U) := by
+        conv_lhs => rw [hn, map_zsmul]
+        rfl
+      rw [hη, map_zsmul, map_one]
+      change n.down • (1 : (localizedRing Λ t).obj.obj U) = (n.down :
+        (localizedRing Λ t).obj.obj U)
+      exact zsmul_one n.down
+    · change _ ≫ (coefficientLocalizationMap Λ t).hom = _
+      rw [show μ[((sheafToPresheaf J Ab.{u + 1}).obj (localized Λ t).X)] =
+        μ[(S.obj ⋙ forget₂ RingCat Ab)] from Sheaf.μ_comp_map_mul
+          ((sheafCompose J (forget₂ RingCat Ab)).obj S)]
+      ext U : 2
+      apply AddCommGrpCat.hom_ext_toIntLinearMap
+      apply TensorProduct.ext'
+      intro a b
+      exact ((localizedRingMap Λ t).hom.app U).hom.map_mul a b
+  exact Sheaf.isMonHom_of_isMonHom_map _
 
 /-- The actual coefficient map is a ring morphism.
 Source: HRS Section 5.3 (blueprint: lem-pod-condensed-localization-hom). -/
@@ -145,7 +181,15 @@ from the abelian sheaf map. Extensionality of ring homomorphisms gives uniquenes
 theorem scalarRingMap_existsUnique (t : R Λ) :
     ∃! j : R Λ →+* R (localized Λ t),
       ∀ r, j r = (coefficientLocalizationMap Λ t).hom.app (op (⊤_ Profinite.{u})) r := by
-  sorry
+  let f := ((sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon.map
+    (Mon.Hom.mk (coefficientLocalizationMap Λ t)))
+  let g := ((Monoidal.monFunctorCategoryEquivalence Profinite.{u}ᵒᵖ Ab.{u + 1}).functor.map
+    f).app (op (⊤_ Profinite.{u}))
+  let j : R Λ →+* R (localized Λ t) :=
+    (InternalAbelianSheafModule.monToRing.map g).hom
+  refine ⟨j, fun _ ↦ rfl, ?_⟩
+  intro j' hj'
+  exact RingHom.ext hj'
 
 /-- The canonical scalar homomorphism, selected by its pointwise characterization.
 Source: HRS Section 5.3 (blueprint: lem-pod-condensed-localization-hom). -/
