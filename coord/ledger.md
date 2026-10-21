@@ -22128,3 +22128,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:12 L: merged deliver/K1/Sheaf.Paper.FiniteSubextensionsDirected (stage 3; reviewer PASS; first push; landing 20261021T101221-L-30687 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:12 L: merged deliver/K3/Sheaf.CategoryTheory.Monoidal.ModuleRestrictionFiniteExact (stage 3; reviewer PASS; first push; landing 20261021T101226-L-36124 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:12 L: merged deliver/K4/Sheaf.Paper.FiniteStagePairCategory (stage 3; reviewer PASS; first push; landing 20261021T101230-L-40495 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/pbc-finite-stage-pair-category-proof-elaboration.md)
+- 10:12 L: merged deliver/K7/Sheaf.Topology.TopologicalBasisLiftSection (stage 3; reviewer PASS; first push; landing 20261021T101236-L-45561 (proof); batch 20261021T100250; modules 1; new nodes 0)
