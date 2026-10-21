@@ -15,7 +15,12 @@
   "lem-pur-derived-change-of-rings",
   "def-weil-abstract-derived-category",
   "def-pc-sheaf-restrict-scalars",
-  "lem-pc-derived-adjoint-functors"
+  "lem-pc-derived-adjoint-functors",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pe-principal-power-ring-quotients",
+  "lem-pe-restricted-kflat-tensor-identification",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-strict-roos-model"
  ],
  "proof": [
   {
@@ -490,5 +495,57 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-f83364e22 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps and every cited node's statement in full; there are no new nodes. statement, stmt_deps, source and created are identical to the Q107 creation, so nothing is weakened. No SGA; no cycle in the 288-node closure; no missing or merged citations; all twelve Stacks tag labels checked. I recomputed the signs and coordinates by hand. Step 2: d^2=0 on F_u, the map (x,y)->(-y,x) to Cone(u)[-1], and the Koszul sign (-1)^{q+1} on D_m(C)=Cone(t^m). Step 4: dH+Hd=1 on the finite-prefix kernel with U^{-1}=sum of s^j. Step 6: both differentials of D_m(F_u) and F_{D_m(u)} agree. Step 8: uv=1, x=diag(x_m)+vux, F_u = N plus a contractible summand, so e is inverse to diag, which is the strict augmentation in lem-weil-strict-roos-comparison. Step 10: the adjoint p⊗b -> b·g(p) is fixed by the unit normalization of lem-cbc-regular-quotient-cone-augmentation (A∘i^D=ρ^D, component Q(a_P)). Step 11: the cone/Hom argument proves conservativity only, not full faithfulness. Step 12: (t^{m-k},1) is a chain map and the augmentation squares commute. Step 13: the bound [a,b+1] follows from the H^{q-1}(P)->H^q(H)->H^q(P) segment; this is Bhatt–Scholze 3.1.11 via 3.1.9, with no quasi-compactness. Every hypothesis of the cited nodes holds where it is used: exact products for arbitrary T and ring sheaf, φ(t^m)=0 with the exact sequence, K-flat P, and equivalent K-injective notions. Small cases checked: h=1,2; m=k; t a unit; zero transitions; constant tower; Z with t=p. Not a duplicate: lem-weil-pbc-finite-reduction-reconstruction and lem-weil-pbc-completed-koszul-quotient-comparison are about constant Noetherian adic data and a derived-complete K or its completion. I accept all 11 declared tool_uses as generic homological tools. Maintainer notes: (1) the unit cites sk-prop-pe-replete, but this split gets exact products from lem-weil-proetale-countable-products-exact (proved via weakly contractible covers). sk-prop-pe-replete therefore stays unreached, contrary to the parent reviewer's expectation, and no DAG node states replete ⇒ exact products of module sheaves; this needs a decision at the unit's realization. (2) The item has no lean_audit field; it was already missing when Q107 created it. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KoszulRoosProjectionComparison",
+  "declaration": "CategoryTheory.KoszulRoos.koszulRoosProjectionComparison",
+  "declarations": [
+   "CategoryTheory.KoszulRoos.Modules",
+   "CategoryTheory.KoszulRoos.unitSection",
+   "CategoryTheory.KoszulRoos.K",
+   "CategoryTheory.KoszulRoos.B",
+   "CategoryTheory.KoszulRoos.quotient",
+   "CategoryTheory.KoszulRoos.tensor",
+   "CategoryTheory.KoszulRoos.assemble",
+   "CategoryTheory.KoszulRoos.summand",
+   "CategoryTheory.KoszulRoos.onTowers",
+   "CategoryTheory.KoszulRoos.tailIndex",
+   "CategoryTheory.KoszulRoos.tail",
+   "CategoryTheory.KoszulRoos.deletionProduct",
+   "CategoryTheory.KoszulRoos.tensorProduct",
+   "CategoryTheory.KoszulRoos.koszulStep",
+   "CategoryTheory.KoszulRoos.tensorStep",
+   "CategoryTheory.KoszulRoos.constant",
+   "CategoryTheory.KoszulRoos.ScalarModel",
+   "CategoryTheory.KoszulRoos.restriction",
+   "CategoryTheory.KoszulRoos.restrictComplex",
+   "CategoryTheory.KoszulRoos.pure",
+   "CategoryTheory.KoszulRoos.coordinates",
+   "CategoryTheory.KoszulRoos.onTowersMap",
+   "CategoryTheory.KoszulRoos.ordinaryTransition",
+   "CategoryTheory.KoszulRoos.Models",
+   "CategoryTheory.KoszulRoos.Normalization",
+   "CategoryTheory.KoszulRoos.Models.projection",
+   "CategoryTheory.KoszulRoos.Models.comparison",
+   "CategoryTheory.KoszulRoos.Models.familyMap",
+   "CategoryTheory.KoszulRoos.Compatibility",
+   "CategoryTheory.KoszulRoos.Conclusion",
+   "CategoryTheory.KoszulRoos.koszulRoosProjectionComparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KoszulRoosProjectionComparison.lean",
+  "statement": "theorem koszulRoosProjectionComparison (T : AlgebraicGeometry.Scheme.{t}) [EssentiallySmall.{t + 1} T.ProEt] (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)}) (s : (R.obj ⋙ forget CommRingCat.{max z (t + 1)}).sections) [∀ S : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)}, HasDerivedCategory.{w} (Modules S)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Modules R)] (_hs : Mono (globalSectionMultiplication R (unitSection R s))) : Conclusion R s",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All maps use the existing principal-power quotient sheaves, principal Koszul complexes, total sheaf tensor and strict Roos functor. Models stores comparison data; Normalization and Compatibility give its universal properties and all canonical-map equations. Conclusion includes existence of ring sheafification, available on the essentially small site, without a mathematical sheafification hypothesis. Positive indices are represented by predecessors and tensor is in the canonically symmetric scalar-first convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45b44c90c",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Read node (13 steps), source place, module in full, report, all stmt_dep declarations in side-live (principalKoszul/Transition/Tower, koszulTensorFunctor = K⊗P, koszulRepresentativeAugmentation, roosF=cone(1-s)[-1], roosχ/roosEval/roosι, DerivedChangeOfRingsCochainModel, restrictedTensorScalars, IsKFlatIndependentCoefficients). Every clause matches: arbitrary T and ring sheaf R (coefficient universe max z (t+1) ⊇ site objects), Mono t-multiplication, B_m/K_m by predecessor indexing, RF by IsRightDerivedFunctor with norm pinned by norm_unit, so projections are the canonical p_n; exact products and termwise derived products; tail deletion qis with projections; comparison a literal composite, iso, natural, projection clause; adjoint clause at h=m with strict family f, constant identification, ordinary unit 1⊗x and K-flat derived adjunction normalization (re-derived the equation); reflects isos; Koszul transition (t^{m-k},1) via mappingCone.map; coefficient squares with q/e/c pinned; bound [a,b+1]. Sign (-1)^a in chi_first verified against Mathlib's cone[-1] and ε₂ conventions. No hollow data: every Models field is pinned. Mechanical finding: restrictedTensorScalars.mapDerivedCategory needs the exactness instance theorems of lem-pe-restricted-kflat-tensor-identification (Mathlib restrictScalars only Additive), so the statement depends on the theorem's content: PASS on that point. Record statement verbatim; only the item node changed; added stmt_deps are landed nodes; docstrings with 13 steps; no line over 100 chars. Advisory: def-pc-kflat-complex not in stmt_deps (reached via lem-pur-derived-change-of-rings); base-era lem-pur-derived-change-of-rings plain structure (cite def-sfb-derived-change-of-rings-cochain-model later); second reading is a short self-audit. No compile (no file changed)."
  }
 }
