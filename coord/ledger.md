@@ -20623,3 +20623,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:17 L: returned deliver/Q90/def-nagata-scheme-image-factor (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-scheme-image-factor: cited node def-nagata-)
 - 07:17 L: returned deliver/Q113/def-nagata-scheme-image-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-scheme-image-comparison: cited node def-nag)
 - 07:17 L: returned deliver/Q89/lemma-nagata-immersion-open-in-scheme-image (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-immersion-open-in-scheme-image: cited nod)
+- 07:22 L: merged deliver/Q44/lem-weil-pbc-derived-pullback-top-cohomology (reviewer FIX; first push; new nodes: 0)
