@@ -21913,3 +21913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:28 L: merged deliver/Q07/lem-pur-derived-representable-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 09:28 L: returned deliver/Q61/lem-pur-proetale-direct-image-global-evaluation (reviewer RETURN: L: independent stage-2 immutable head 23b894b1070e: Item maths correct: all 12 node clauses match the Lean (K-injective )
 - 09:28 L: returned deliver/Q65/lem-sf-perfect-tensor-roos-completion (reviewer RETURN: L: independent stage-2 immutable head 29d7d53c90e5: H2/C5 (mechanical finding upheld): the statement takes only plain de)
+- 09:29 L: returned deliver/Q73/lem-pur-inverse-image-scalar-unit-normalization (reviewer RETURN: L: independent stage-2 immutable head 334650707987: H13+H4. Item maths correct: unrestricted h/R on actual ProEt sites; )
