@@ -11,11 +11,100 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-galois-finite-limits-colimits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$. Since the site is $w$-small, [prop-pur-kinjective-resolutions-exist] applies in universe $w$ and makes $\\mathcal A$ Grothendieck abelian. Morphisms are families of sectionwise linear maps indexed by the $w$-small site, hence have $w$-small sets. The nonempty directed poset $I$ is filtered by [def-weil-pbc-category-colimit]. Thus [lem-sfb-grothendieck-filtered-finite-limits] gives all required $w$-small limits and colimits in $\\mathcal A$, and says that $\\operatorname{colim}_I:\\mathcal A^I\\to\\mathcal A$ preserves finite limits. All subsequent colimits are in $\\mathcal A$, not presheaf or sectionwise colimits.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-category-colimit",
+    "lem-sfb-grothendieck-filtered-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, proof of (2), exactness of filtered colimits; Tag 03DB, lemma-limits-colimits."
+   }
+  },
+  {
+   "text": "For every $X\\in\\mathcal A$, [lem-weil-pbc-independent-sheaf-tensor-colimits] applied to $X\\otimes_R-$ sends the given cocone $(P,q_i)$ to a colimit cocone. The symmetry in [lem-pc-sheaf-modules-tensor-closed] identifies this diagram and cocone with $(P_i\\otimes_R X,q_i\\otimes1_X)$. Consequently the canonical map $\\alpha_X:\\operatorname{colim}_i(P_i\\otimes_R X)\\to P\\otimes_R X$ is an isomorphism, with $\\alpha_X\\iota_{i,X}=q_i\\otimes1_X$. For $f:X\\to Y$, both composites from $\\operatorname{colim}_i(P_i\\otimes_R X)$ to $P\\otimes_R Y$ agree after each $\\iota_{i,X}$ by tensor functoriality; colimit uniqueness [def-weil-pbc-category-colimit] therefore proves naturality of $\\alpha$ in $X$.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EP (lemma-tensor-commute-colimits), part (2), and 03EO (lemma-internal-hom-adjoint-tensor)."
+   }
+  },
+  {
+   "text": "Let $K$ be a finite category, $D:K\\to\\mathcal A$, and $(L,\\pi_k)$ a limit cone. By flatness [def-pc-flat-sheaf-modules], each tensor functor is exact, in particular it preserves finite limits; symmetry [lem-pc-sheaf-modules-tensor-closed] allows the factor $P_i$ on the left. Hence the canonical $\\gamma_i:P_i\\otimes_R L\\to\\lim_k(P_i\\otimes_R D(k))$, characterized by projection $1_{P_i}\\otimes\\pi_k$, is an isomorphism. For $i\\le j$, the two maps expressing compatibility of $\\gamma_i$ and $\\gamma_j$ have the same $k$-projection, namely $p_{ij}\\otimes\\pi_k$, so limit uniqueness proves compatibility. Thus the $\\gamma_i$ form an isomorphism of $I$-diagrams; its inverse is the family of inverses, whose naturality follows by composing the same equality with the inverses.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, hypothesis that the stage sheaves are flat; Tag 03ER, definition-flat, item (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-grothendieck-filtered-finite-limits] to the bifunctor $(i,k)\\mapsto P_i\\otimes_R D(k)$, using the Grothendieck category and sizes from Step 1. It gives the canonical isomorphism $\\beta:\\operatorname{colim}_i\\lim_k(P_i\\otimes_R D(k))\\to\\lim_k\\operatorname{colim}_i(P_i\\otimes_R D(k))$. Compose the following isomorphisms:\n$$P\\otimes_R L\\xrightarrow{\\alpha_L^{-1}}\\operatorname{colim}_i(P_i\\otimes_R L)\\xrightarrow{\\operatorname{colim}_i\\gamma_i}\\operatorname{colim}_i\\lim_k(P_i\\otimes_R D(k))\\xrightarrow{\\beta}\\lim_k\\operatorname{colim}_i(P_i\\otimes_R D(k))\\xrightarrow{\\lim_k\\alpha_{D(k)}}\\lim_k(P\\otimes_R D(k)).$$\nThe colimit and limit of the displayed isomorphisms are isomorphisms because the corresponding functors send their inverse families to inverse maps. Denote this composite by $\\kappa$.",
+   "uses": [
+    "lem-sfb-grothendieck-filtered-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, proof of (2), using exact filtered colimits; Tag 03DB, finite-limit formulation of exactness."
+   }
+  },
+  {
+   "text": "For $k\\in K$, precompose the $k$-projection of $\\kappa$ with $q_i\\otimes1_L=\\alpha_L\\iota_{i,L}$. By the defining projections of $\\beta$ and $\\gamma_i$ the result is $(q_i\\otimes1_{D(k)})(1_{P_i}\\otimes\\pi_k)=(1_P\\otimes\\pi_k)(q_i\\otimes1_L)$. The maps $q_i\\otimes1_L$ are colimit legs by Step 2, so colimit uniqueness [def-weil-pbc-category-colimit] identifies the $k$-projection of $\\kappa$ with $1_P\\otimes\\pi_k$. Limit uniqueness then identifies $\\kappa$ with the canonical comparison in the statement. This proves its invertibility. When $K$ is empty, Step 4 still applies: preservation of finite limits includes the terminal object, and the same cone uniqueness has no projection equations to check. Thus the empty-diagram clause is included.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, proof of (2); universal properties identifying the canonical finite-limit comparison."
+   }
+  },
+  {
+   "text": "Finally [lem-weil-pbc-independent-sheaf-tensor-colimits] and the symmetry of [lem-pc-sheaf-modules-tensor-closed] show that $P\\otimes_R-$ also preserves all $w$-small colimits, hence finite colimits. Steps 3–5 show that it preserves finite limits. It is therefore exact (left and right exact), and symmetry gives the same property for $-\\otimes_R P$. This is precisely flatness in [def-pc-flat-sheaf-modules]. The argument used sheaf tensor products and Grothendieck exactness throughout and required neither points of the site nor sectionwise flatness.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EP, part (2), and 03EU, part (2); Tag 03ER, definition-flat, item (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EU (lemma-colimits-flat), part (2), filtered-colimit clause; expanded using Tags 03DB (lemma-limits-colimits), 03EO (lemma-internal-hom-adjoint-tensor), and 03EP (lemma-tensor-commute-colimits)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +147,54 @@
    "results": "{\"t\": \"2026-10-21T03:28:08Z\", \"tool\": \"grep\", \"query\": \"colimit|[Ff]iltered\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"e7d957380d34b137\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned module-colimit and abstract-ring flatness declarations concern modules over a single ordinary ring; the sheaf hits establish colimits or AB5, not flatness of a colimit for the sheafified relative tensor. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119."
+  },
+  {
+   "tool": "grep",
+   "query": "flat|tensor|[Pp]reservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-21T03:44:37Z\", \"tool\": \"grep\", \"query\": \"flat|tensor|[Pp]reservesFiniteLimits\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"digest\": \"a6cde06cac1e19af\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119.",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of flat sheaves of modules on a ringed site are flat",
+   "results": "{\"t\": \"2026-10-21T03:44:38Z\", \"tool\": \"leansearch\", \"query\": \"Filtered colimits of flat sheaves of modules on a ringed site are flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.M.mk\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"ModuleCat.FilteredColimits.M\", \"ModuleCat.FilteredColimits.colimit\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.colimitCocone\"], \"digest\": \"a6e13f24fa1791bc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"flat\"",
+   "results": "{\"t\": \"2026-10-21T03:44:38Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of flat sheaves of modules over a sheaf of commutative rings on a small site is flat",
+   "results": "{\"t\": \"2026-10-21T03:44:39Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit of flat sheaves of modules over a sheaf of commutative rings on a small site is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.isColimitFreeCofan\", \"CategoryTheory.lan_flat_of_flat\", \"AlgebraicGeometry.Flat.instDescScheme\", \"SheafOfModules.isFinitePresentation\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\"], \"digest\": \"5b69a53026a3b7b2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|[Ff]iltered",
+   "results": "{\"t\": \"2026-10-21T03:44:53Z\", \"tool\": \"grep\", \"query\": \"colimit|[Ff]iltered\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"5fe41463de6b45b3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119.",
+   "subdirectory": "RingTheory/Flat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a filtered colimit of module sheaves with any fixed sheaf preserves finite limits when all the stage tensor functors are exact",
+   "results": "{\"t\": \"2026-10-21T03:44:55Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a filtered colimit of module sheaves with any fixed sheaf preserves finite limits when all the stage tensor functors are exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB4CondensedMod\", \"SheafOfModules.Finite.hasFiniteLimits\", \"Condensed.instAB5CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"instHasFiniteLimitsLightCondMod\"], \"digest\": \"f7aa4fb619e4c356\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: source inspection distinguishes module-sheaf colimit existence, exactness of condensed-module colimits, and ordinary-ring flatness from flatness for the sheafified tensor over an arbitrary commutative ring sheaf. Read Mathlib/RingTheory/Flat/CategoryTheory.lean:72-96 and Algebra/Category/ModuleCat/Sheaf/Limits.lean:59-119."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qlbar-flat",
@@ -78,5 +211,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-filtered-colimit-flat-module-sheaves",
+  "worker": "stage1",
+  "summary": "Expanded the filtered-colimit flatness argument of Stacks 03EU using existing nodes only. Verified arbitrary-site sheaf tensor compatibility, coefficient-universe smallness, exact filtered colimits, and the canonical finite-limit comparison including the empty diagram. No statement change and no new nodes. Repeated and recorded the item searches in this sandbox; ordinary-ring and condensed-module hits do not state this general ring-sheaf result.",
+  "blueprint": "Realizes the relative-tensor-colimit sentence and final exactness sentence of lem-sfb-qlbar-flat.proof.md in the current main-20261015 blueprint, without the parent-specific coefficient constructions.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Only its Grothendieck-abelian clause is used for Mod(R) on a small site; the coefficient-change unit supplies no general module-sheaf category theorem."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic sheaf tensor preservation of coefficient-small colimits, exactly the tensor-colimit operation requested by the unit route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic symmetric tensor structure supplies the natural interchange of left and right tensor factors; it does not replace the coefficient-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-bbb967d27",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-bbb967d27 (reviewer sub-agent of L); spot-checked: I read the item in full and recommend PASS with no changes. The commit has one item node plus the report and no new nodes. The statement is byte-identical to the live node, which is still unsplit, so no other group has superseded it. It is not on the route-pivot dropped list, has no repair or re-split note, and cites no SGA source. Source and route: the six steps expand Stacks 03EU(2) (sites-modules.tex l.4342-4360, a filtered colimit of flat sheaves of modules is flat, 'details omitted') using 03EP(2) (l.4001-4021, tensor commutes with colimits). This is exactly the blueprint main-20261015 route in lem-sfb-qlbar-flat.proof.md: tensor commutes with colimits, and filtered colimits are exact in a Grothendieck category. Step checks: Step 1 uses only the Grothendieck clause of prop-pur-kinjective-resolutions-exist, whose small-site hypothesis holds. The Mathlib leaf lem-sfb-grothendieck-filtered-finite-limits needs V-small Hom sets, which the step justifies, and gives that colim_I preserves finite limits. Step 2: the hypotheses of lem-weil-pbc-independent-sheaf-tensor-colimits (essentially small site in w, w-small diagram) hold, the tensor-closed node's symmetry puts P_i on the left, and alpha is natural by colimit uniqueness. Step 3: tensor is additive in each variable and exact, so it preserves finite limits; gamma_i is natural in i because both composites have k-projection p_ij tensor pi_k. Step 4 composes the isomorphisms correctly. Step 5: I recomputed the k-projection of kappa composed with the colimit legs; it is (1_P tensor pi_k)(q_i tensor 1_L), so kappa is the canonical comparison. The empty diagram is covered (terminal object 0). Step 6 gives finite colimits from tensor-colimits and exactness from Steps 3-5, and symmetry matches the definition's convention. Small cases tested: Q as colim (1/n!)Z, a singleton index set, the zero diagram, and kernels. A coequalizer such as coker(2) = Z/2 is not flat, which confirms that filteredness is genuinely used. Duplicates: I checked the nodes that mention flatness and colimits; none duplicates the item (coef cotorsion foundation and pc-kflat-closure treat coproducts and countable sums only; pc-module-filtered-colimits-tensor does not state flatness). Cycle check: none of the 9 deps reaches the item. I accepted the three worker-written off-unit tool_uses (kinjective Grothendieck clause, independent-sheaf-tensor-colimits, sheaf-modules-tensor-closed); they are generic facts the unit lacks and they realize the blueprint route. Advisory only: the added stmt_dep def-galois-finite-limits-colimits is not cited in the statement text, and the citations.json and searches.jsonl named in the report are not in the commit."
  }
 }
