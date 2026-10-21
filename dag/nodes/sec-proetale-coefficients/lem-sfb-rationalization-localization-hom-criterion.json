@@ -240,5 +240,23 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6eab3db46 (reviewer sub-agent of L); spot-checked: Read the item's nine steps, all nine cited node statements and the parent thm-sfb-extend-scalars-localization (its step 5 applies the item with R=Z, M={l^n}). Also read the main-20261015 source thm-sfb-extend-scalars-localization.proof.md (the 'Morphisms of the rationalization' and 'Full faithfulness' paragraphs and the closing equivalence sentence). The statement is unchanged and true; tested on M={1}, on R=Z with M={l^n} for -⊗Q, on 0∈M, and on the converse through scalar-fractions. Step-by-step: steps 1-2 check the hypotheses of the additive-localization-linear and linear-localization-descent Mathlib leaves (only G(rα)=rG(α) is used, not additivity of G). Step 4 cancels using the assumed invertibility of m·id_FB. Steps 5-6 write out the common denominator, including the third scalar p, so there is no E5 'clear denominators' gap. Step 7 transfers full faithfulness along isomorphisms. Step 8 is the asEquivalence leaf. Step 9 transports the functor-category equivalence via η. Minor remark: the canonical R-structure on L agrees with the one in sk-def because the structure is unique for a localization; not a fault. There are no new nodes, and I found no duplicate in the DAG (checked against lem-weil-linear-scalar-localization-triangulated, lem-pur-semilinear-scalar-localization and lem-fd-rational-coefficient-category-comparison). Route is fine: same-unit nodes plus definitions and Mathlib leaves, so no tool_uses are needed. Batch-5 flag on lem-trf-fully-faithful-ess-surj-equivalence: accepted, because it is the Mathlib leaf Functor.asEquivalence, a pure category-theory fact that is neither the trace formula, Poincaré duality nor a step of their proofs. No cycle, and no SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RationalizationLocalizationHomCriterion",
+  "declaration": "CategoryTheory.Rationalization.localization_hom_criterion",
+  "file": "lean/Sheaf/CategoryTheory/RationalizationLocalizationHomCriterion.lean",
+  "statement": "theorem localization_hom_criterion {R : Type w} [CommRing R] {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor C n).Linear R] [Pretriangulated C] [IsTriangulated C] {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear R D] (M : Submonoid R) (F : C ⥤ D) [F.Additive] [F.Linear R] [F.EssSurj] (hInv : (W M C).IsInvertedBy F) (hUnits : ∀ m ∈ M, ∀ Y : D, IsIso (m • 𝟙 Y)) (hSurj : ∀ (A B : C) (h : F.obj A ⟶ F.obj B), ∃ m ∈ M, ∃ u : A ⟶ B, m • h = F.map u) (hEq : ∀ (A B : C) (u v : A ⟶ B), F.map u = F.map v → ∃ n ∈ M, n • u = n • v) : (Localization.lift F hInv (Q M C)).Full ∧ (Localization.lift F hInv (Q M C)).Faithful ∧ (Localization.lift F hInv (Q M C)).EssSurj ∧ F.IsLocalization (W M C)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0dec8d0b4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Only the lean field changed on the item node. The new theorem CategoryTheory.Rationalization.localization_hom_criterion matches the node clause by clause: triangulated R-linear C with R-linear shifts, upstream W M C / Q M C from the live Rationalization module, preadditive R-linear D with no triangulated binders, additive linear EssSurj F, hInv, hUnits, (i) and (ii) with the same quantifiers. Conclusion: Full, Faithful, EssSurj of the actual Localization.lift, plus F.IsLocalization (W M C). Universes are independent; no stronger hypotheses; lean.statement is verbatim; the proof is sorry only; source and blueprint docstrings carry all 9 steps. The proved private theorem rationalization_localization_of_hom (UpstreamExtra/EllAdicRationalization.lean:164) has identical hypotheses and proves the IsLocalization conjunct, which confirms the statement is true and typable; it is private and partial, so it is not an existing:true match. nt_compile --json is clean (2.5 s). Advisory only: stage 3 can reuse that proof."
  }
 }

@@ -19954,3 +19954,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:45 L: merged deliver/Q74/lem-sf-module-object-ordinary-coefficient-equivalence (reviewer FIX; after a return; new nodes: 3)
 - 03:45 L: merged deliver/Q51/lem-weil-pbc-realization-scalar-functor (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T03:45:47Z L: superseded stage-1 delivery Q34/lem-weil-pbc-realization-completed-pull at 7f0e97c1cd1686d8e18262d259abe0f6e30b65e5; current completion retained; packet archived at refs/superseded/Q34/lem-weil-pbc-realization-completed-pull/7f0e97c1cd1686d8e18262d259abe0f6e30b65e5; stale return retired.
+- 03:45 L: merged deliver/Q10/lem-sfb-rationalization-localization-hom-criterion (stage 2; reviewer PASS; parallel immutable checks)
+- 03:45 L: merged deliver/Q14/lem-sfb-derived-lower-shriek-hom-iso (stage 2; reviewer PASS; parallel immutable checks)
+- 03:45 L: merged deliver/Q02/lem-sfb-abelian-functorial-flat-resolution (stage 2; reviewer PASS; parallel immutable checks)

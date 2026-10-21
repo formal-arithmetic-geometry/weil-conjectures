@@ -349,5 +349,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bac0fd5c4 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from live, which still has it unsplit, and the delivery adds no new nodes. Step 1 builds P(M) as the finitely supported functions on |M|; by def-weil-pbc-free-module this is free on the basis e_m, and P is a functor. Step 2 shows π is natural and an epimorphism directly, by cancelling on the e_m. Step 3 gets flatness from the 'every free module is flat' clause of the leaf lem-weil-pbc-projective-module-flat with R=Z; this matches the Stacks 051G proof opening. Step 4 gets injectivity and middle exactness on both sides from lem-weil-pbc-flat-tensor-exact and surjectivity at the end from lem-weil-pbc-tensor-right-exact, which together give short exact sequences. sk-def-sfb-sheaf-tensor fixes ⊗_Z, not the Cartesian product. Step 5 uses only the definition sentence of lem-sfb-sheaf-functorial-flat-resolution. That node's unit, sk-def-sfb-derived-categories, is cited by sk-def-sfb-module-derived-pushpull, so it is on route, and it is unsplit and generic, so there is no cycle. The other citations are Mathlib leaves used as tools, so no tool_uses are needed. Edge cases checked: M=0, Z/2, infinite M, non-injective f, and P not being additive. The 'flat' and 'functorial flat resolution' wording matches the sheaf-transfer node, which is what ancestor step 2 needs. Part 4 of the main-20261015 blueprint (Z_U sheaf cover) is the sheaf version of this free-cover argument. I found no duplicate: lem-pc-sites-modules-functorial-flat-cover is about module sheaves on a site and is off route, and the modobj and weil-pbc module-resolution nodes take a flat resolution as input. There are no SGA citations. Maintainer notes: (1) the report says the Lean claim was removed from source.place, but the place still names AddCommGrpCat.hasFunctorialFlatResolution (ModuleObject/Basic.lean:150-152, infer_instance) and RingObjects/Ab.lean:289-291 (flat-separator instance); I left it unchanged. (2) Whether that sheaf-project Lean should be attached instead of the split is the maintainer's attachment decision; nothing was compiled."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AddCommGrpCat.hasFunctorialFlatResolution",
+  "statement": "instance AddCommGrpCat.hasFunctorialFlatResolution :\n    Abelian.HasFunctorialFlatResolution Ab.{u}",
+  "branch": "slopmaster2",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing universe-polymorphic coefficient statement, checked in current live server source and by scompile.py. The concrete tensor structure is AddCommGrpCat.monoidalCategory of RingObjects.Ab (tensor over integers, unit ULift integers, internal hom additive homomorphisms). HasFunctorialFlatResolution expands to Nonempty (LeftResolution ObjectProperty.flat.ι): a functor with flat values, a natural transformation to identity, and epimorphic components. ObjectProperty.flat requires exact left and right tensor. Server #print axioms reports only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd81855c1",
+  "group": "Q02",
+  "result": "pass",
+  "note": "existing:true record AddCommGrpCat.hasFunctorialFlatResolution (side ModuleObject/Basic.lean:150-152); statement verbatim; node diff = lean only. Probe via nt_compile --json: compiles clean, MonoidalCategory Ab instance = AddCommGrpCat.monoidalCategory (⊗[ℤ], unit ULift ℤ, ihom = Hom group) by rfl, axioms propext/Classical.choice/Quot.sound. HasFunctorialFlatResolution = Nonempty LeftResolution flat.ι (F, π : F⋙ι⟶𝟭, epi π_app); flat = exact tensorLeft ∧ tensorRight, equivalent to both-sided SES preservation for additive functors; same predicate as lem-sfb-sheaf-functorial-flat-resolution dep hypothesis. Universe-polymorphic, no extra hypotheses; not dropped, no repair note. Advisory only: upstream docstring says 'free abelian groups' while proof uses flat separator."
  }
 }
