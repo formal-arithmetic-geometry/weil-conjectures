@@ -13,7 +13,8 @@
   "sk-def-sfb-derived-categories",
   "def-weil-size-convention",
   "sk-def-sfb-derived-tensor-hom",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-sfb-condensed-equivariant-bar-data"
  ],
  "proof": [
   {
@@ -455,5 +456,34 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c5acaabb0 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item, the new node lem-sfb-free-representable-derived-functions-model, every cited statement, and Stacks 09YP (sites-cohomology l.2905) and 03FD (l.1862). No statement changed and no node is dropped; the fix is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-profinite-derived-functions-filtered-colimit.json. New node: true, since U H_P(I)(V)=I(V×P) is a sheaf and module injectives are section-acyclic by 03FD, so a t_P Rι(UM)=t_P(UI). I tested P terminal, P empty, M=0 and R=0. It has no proof, its stmt_deps define what it uses, and it is not a clause of the item. It duplicates none of the derived-internal-hom-sections model, the derived-evaluation-slice lemma, profinite-constant-derived-functions, normed-scalar-profinite-hom-acyclic, or the rhom-colimit ladder/source-transport nodes. Step 2's use of 09YP via a constant system on (I^+)^op with F_o=0 is roundabout but correct: I checked filteredness, finite coverings, the colimit site and the arrows to o. Repairs: (1) C4/E5, step 1: the internal-module equivalence node says nothing about Hom, yet step 4 applies a model stated for def-pur-sheaf-hom. Fixed by citing det-def-sfb-sheaf-tensor-structure, lem-pe-internal-section-tensor-comparison and lem-pc-sheaf-modules-tensor-closed, then using uniqueness of right adjoints and free objects matching. A DFS shows none of the three reaches the item. (2) E5, step 4: natural isomorphisms in D were carried to a colimit of complexes without a model. Rewritten to work on cohomology sheaves only: c is a qis iff U c is, H^q of a filtered colimit is the colimit of H^q, and the model's naturality plus exactness of a and t_P make H^q(Uc) equal a t_P of the step-3 isomorphism. Step 3 is restated as the cohomology-presheaf isomorphism without β, and the now-unused lem-weil-pbc-filtered-colimit-abelian-groups-exact is dropped. proof_deps and tool_uses are updated, and every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProfiniteDerivedFunctionsFilteredColimit",
+  "declaration": "CategoryTheory.ProfiniteDerivedFunctions.comparison_isIso",
+  "declarations": [
+   "CategoryTheory.ProfiniteDerivedFunctions.onComplexes",
+   "CategoryTheory.ProfiniteDerivedFunctions.freeParameterMap",
+   "CategoryTheory.ProfiniteDerivedFunctions.parameterRestriction",
+   "CategoryTheory.ProfiniteDerivedFunctions.comparison",
+   "CategoryTheory.ProfiniteDerivedFunctions.comparison_coprojection",
+   "CategoryTheory.ProfiniteDerivedFunctions.comparison_isIso",
+   "CategoryTheory.ProfiniteDerivedFunctions.comparison_naturality",
+   "CategoryTheory.ProfiniteDerivedFunctions.comparison_parameterNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/ProfiniteDerivedFunctionsFilteredColimit.lean",
+  "statement": "theorem comparison_isIso (R : Ring.{u}) (P : Profinite.{u}) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (M : I ⥤ Modules R) (K : I ⥤ CochainComplex (Modules R) ℤ) (s : M ⋙ HomologicalComplex.single (Modules R) (ComplexShape.up ℤ) 0 ⟶ K) (c : Cocone K) (sLimit : (HomologicalComplex.single (Modules R) (ComplexShape.up ℤ) 0).obj (colimit M) ⟶ c.pt) (hs : ∀ i : I, QuasiIso (s.app i)) (hI : ∀ (i : I) (n : ℤ), Injective ((K.obj i).X n)) (hneg : ∀ (i : I) (n : ℤ), n < 0 → IsZero ((K.obj i).X n)) (hsLimit : QuasiIso sLimit) (hILimit : ∀ n : ℤ, Injective (c.pt.X n)) (hnegLimit : ∀ n : ℤ, n < 0 → IsZero (c.pt.X n)) (hcompat : ∀ i : I, s.app i ≫ c.ι.app i = (HomologicalComplex.single (Modules R) (ComplexShape.up ℤ) 0).map (colimit.ι M i) ≫ sLimit) : IsIso (comparison R P c)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical comparison is stated on arbitrary compatible nonnegative injective resolutions, exactly the complex-colimit convention in the node. Its source is Q of the termwise colimit of internal-Hom complexes and its target is Q of internal Hom of the colimit-module resolution. hcompat fixes every cocone leg by the original module coprojection. The coprojection normalization and coefficient/diagram and profinite-parameter naturality clauses are named in declarations. Ring, Modules and freeParameter are the existing CondensedBar abbreviations/construction; the added landed definition dependency names their owner. freeParameterMap applies the explicit free-abelian-sheafification and Mod.free composite, definitionally the functor defining freeParameter, so the internal-bar theorem is not a statement dependency. No statement correction or new independent notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-564f06834",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of c55170c5ab82. Snapshot diff vs prior run: only freeParameterMap body (InternalBar.free -> explicit Sheaf.composeAndSheafify AddCommGrpCat.free ⋙ Mod.free R.toMon.X composite, identical to the live CondensedBar.freeParameter body, so definitionally unchanged), stmt_deps drops lem-sfb-condensed-internal-bar-resolution (theorem) and keeps def-sfb-condensed-equivariant-bar-data, and report gains a real Second reading section. Live item still S2-open; no dep nodes changed. Clause table (ring/modules/free R[P]/all nonnegative injective resolutions/filtered I/coprojection-pinned comparison/IsIso/coefficient and parameter naturality) re-checked OK; edge cases OK; no hollow defs, sorry-only proofs, docstrings with source and blueprint, no pro-etale substitute, statement verbatim. Advisory only: unused proof-plan imports. No compile (no file changed)."
  }
 }

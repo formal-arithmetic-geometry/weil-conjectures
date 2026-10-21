@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-point-restriction-coordinates",
+ "kind": "definition",
+ "title": "Canonical point restriction coordinates and coefficient sections",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and its fixed uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme [def-weil-scheme-morphism-properties], with its small pro-etale site [def-weil-pbc-proetale-site]. The scheme universe $t$ and coefficient universe $u$ are independent; all scalar rings and modules are lifted to universe $\\max(u,t+1)$. For $a\\in\\operatorname{Option}(\\mathbf N)$, set $\\Lambda_a=R$ for $a=\\mathrm{none}$ and $\\Lambda_a=R/(\\varpi^{n+1})$ for $a=\\mathrm{some}(n)$. Let $B_{S,a}$ be the completed integral coefficient sheaf in the first case and the finite constant coefficient sheaf in the second [def-weil-completed-integral-coefficients]. For each site object $W$, define $\\lambda_{a,W}:\\Lambda_a\\to B_{S,a}(W)$ by the constant-section map, followed in the integral case by the canonical map to the completion. For a scheme automorphism $g:S\\to S$, use the canonical coefficient isomorphism $c_{g,a}:g^{-1}B_{S,a}\\to B_{S,a}$ [def-weil-inverse-image-pullback-comparison]. Define $G_{g,a}$ on module sheaves [def-weil-sheaf-of-modules-category] by the sectionwise inverse-image model, $(G_{g,a}M)(W\\xrightarrow w S)=M(W\\xrightarrow{gw}S)$, with action transported through $c_{g,a}^{-1}$ [lem-weil-proetale-isomorphism-inverse-image]. Put $U=(S\\xrightarrow{\\mathrm{id}}S)$ and $V=(S\\xrightarrow g S)$, and define $\\alpha_g:V\\to U$ to have underlying scheme map $g$. Define the additive map $\\sigma^{\\mathrm{raw}}_{g,a,M}:M(U)\\to(G_{g,a}M)(U)$ to be the presheaf restriction $M(\\alpha_g)$, using the sectionwise identification of the target with $M(V)$. When $S=\\operatorname{Spec}k$ for any field $k$ of universe $t$, define $\\Gamma_a$ to be evaluation at $U$ followed by restriction of scalars along $\\lambda_{a,U}$ [def-pc-sheaf-restrict-scalars], with its induced action on morphisms and additive-functor structure. Equip $\\operatorname{Mod}(\\Lambda_a)$ with its standard unbounded derived localization [def-weil-abstract-derived-category]. These are coordinate constructions only; no linearity or naturality assertion for $\\sigma^{\\mathrm{raw}}$ is included, and no finite-field, algebraic-closure, invertibility-of-$\\ell$, boundedness, constructibility or completeness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md; literature/stacks-project/sites-modules.tex",
+  "place": "Blueprint proof (3), point-factor prerequisite; Stacks Tags 03CW, 03CZ, 03D6 and 09A5. Existing coordinate definitions in Sheaf.Paper.PointAutomorphismRestrictionNatural, lines 56-162; ownership repair requested by L/H2 at 7023c01703ec."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical sections scalar restriction and inverse image coordinates for finite constant or completed integral coefficient sheaves on the pro etale site of a point",
+   "results": "[leansearch] OK 8 hit(s): PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.instAdditiveRestrictScalars, CategoryTheory.Sheaf.ΓRes, PresheafOfModules.restrictScalars, ModuleCat.Tilde.res_const, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "General scalar restriction ingredients only; the exact specialization already exists in Sheaf.Paper.PointAutomorphismRestrictionNatural and is reused, with no new Lean module."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, ModuleCat.restrictScalars",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "General scalar restriction ingredients only; the exact specialization already exists in Sheaf.Paper.PointAutomorphismRestrictionNatural and is reused, with no new Lean module."
+  },
+  {
+   "tool": "grep",
+   "query": "pointRestriction|isoSectionwiseModuleInverseImage",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "General scalar restriction ingredients only; the exact specialization already exists in Sheaf.Paper.PointAutomorphismRestrictionNatural and is reused, with no new Lean module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n pointRestrictionScalars|pointRestrictionSections|pointRestrictionInverseImage|pointRestrictionRaw lean/WeilConjectures lean/Sheaf; rg -l pointRestrictionScalars|pointRestrictionSections|pointRestrictionInverseImage|pointRestrictionRaw dag/nodes; blueprint_refs.py search restriction coordinates; blueprint_refs.py search point automorphism",
+   "results": "No source declaration in WeilConjectures; exact plain definitions in lean/Sheaf/Paper/PointAutomorphismRestrictionNatural.lean at lines 56, 114, 124, 141. The only DAG record naming these declarations is the theorem lem-weil-point-automorphism-restriction-natural, not a definition owner. Both blueprint searches returned 0 matches. No existing definition node owns this coordinate package.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the existing definitions under a new definition ownership node, as explicitly requested by L/H2; do not restate the theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-transport-descent",
+  "date": "2026-10-21",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: the naturality assertion g^*_{gamma,c} RΓ_c(X,f)=RΓ_c(X,Lg^*_gamma f) g^*_{gamma,c}; prerequisite point-factor construction in prop-trf-rational-frobenius-integral-model proof (3), extracted old item steps 1-3. Canonical scalar, section and restriction coordinates for the point-factor chain transport.",
+   "via": [
+    "lem-trf-point-system-transport-descent",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence",
+    "lem-trf-rational-global-frobenius-powers"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.PointAutomorphismRestrictionNatural",
+  "declaration": "AlgebraicGeometry.ProEtale.pointRestrictionSections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalars",
+   "AlgebraicGeometry.ProEtale.pointRestrictionRing",
+   "AlgebraicGeometry.ProEtale.pointRestrictionCoefficientMap",
+   "AlgebraicGeometry.ProEtale.pointRestrictionCoefficientMapIsIso",
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalarAt",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSections",
+   "AlgebraicGeometry.ProEtale.pointRestrictionInverseImage",
+   "AlgebraicGeometry.ProEtale.pointRestrictionArrow",
+   "AlgebraicGeometry.ProEtale.pointRestrictionRaw",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSectionsAdditive",
+   "AlgebraicGeometry.ProEtale.pointRestrictionScalarDerived"
+  ],
+  "statement": "def pointRestrictionSections (k : Type t) [Field k] (a : Option ℕ) :\n    SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of k)) a) ⥤\n      ModuleCat.{max u (t + 1)} (pointRestrictionScalars.{t, u} l E a)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership only, requested by L/H2 at 7023c01703ec. Reuses the unchanged published scalar/ring/coefficient-map, section, inverse-image, site-arrow and raw-restriction definitions and their definitional additive/standard-derived instances. Does not bind or choose data from point_automorphism_restriction_natural; that theorem remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edb20a86e",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edb20a86e",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 7023c01703ec (H2 theorem stmt_dep). Lean file byte-identical to 7023 (sha256 5bc0ecf4), whose maths was checked clause by clause and found correct; item node differs from live only in lean and stmt_deps, statement verbatim. Repair checked: lem-weil-point-automorphism-restriction-natural moved from stmt_deps to proof_deps; new existing:true def node def-trf-point-restriction-coordinates owns the 11 plain pointRestriction* defs/instances of Sheaf.Paper.PointAutomorphismRestrictionNatural (all present, none a .choose of the theorem, lean.statement verbatim to pointRestrictionSections, statement matches Option ℕ scalars, λ constant/completion map, c_g, sectionwise G, α_g=homMk g, raw restriction, Γ_a, standard derived instance; universes independent, no extra hypotheses; no other live owner). Advisory A1 also addressed: def-pur-integral-finite-pullback, def-coef-normalized-dvr-tower, def-sf-scalar-reduction-categories-restriction cited, and their live records list the used decls. All new-node stmt_deps exist live; item not yet landed, no supersession. Advisory: the new node cites the theorem node lem-weil-proetale-isomorphism-inverse-image for isoSectionwiseModuleInverseImage (sole recorded owner, also a base stmt_dep of the item); redundant imports and duplicate HasDerivedCategory instance remain, harmless. No file changed, no compile run."
+ }
+}

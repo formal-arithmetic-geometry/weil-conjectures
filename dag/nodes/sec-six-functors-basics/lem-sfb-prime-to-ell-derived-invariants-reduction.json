@@ -11,7 +11,12 @@
   "def-sfb-continuous-map-condensed-ring",
   "sk-def-sfb-module-objects",
   "def-weil-abstract-derived-category",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-continuous-representation-condensation",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-product-bar-comparison",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-derived-inflation-arrows"
  ],
  "proof": [
   {
@@ -229,5 +234,47 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-37f7c6fed (reviewer sub-agent of L); spot-checked: This re-delivery answers L's landing refusal of the PASSed head 35e7c657, which was refused for stale citations after NL corrected lem-sfb-internal-action-site-presentation on 2026-10-21 (generated Grothendieck topology instead of a bind-closed precoverage). Diff against the prior snapshot: both new nodes are identical; in the item only steps 3 and 4 and the summary changed, and the statement, stmt_deps and proof_deps are unchanged. Step 3 now uses the generated action site: the base has finite limits, C(-,Q×L) is a sheaf of groups and C_F is a sheaf of rings. Its conclusion uses only the unchanged final paragraph of the action-site statement (forgetting creates kernels and cokernels and detects zero), so η_F is a quasi-isomorphism and c∘inf=RΓ(η) makes inf invertible. Step 4 lifts locally on the base site through the base-sheafified cokernel and averages with m^{-1}Σq (m invertible in E); left exactness comes from the right-adjoint clause of lem-sfb-condensed-product-action-inflation. No bind axiom is needed. The cited statements equal side-live verbatim. I re-read steps 1, 2 and 5-8: open kernel and its normal core, finite sum of K-injectives, G=K=Q comparison plus the e-splitting, composition, naturality and coefficient clauses (e_Ω(1⊗v)=1⊗e_E(v)), and the K=1 normalization. New nodes: the scalar leaf is the B=K, L=1, V=E analytic core; small cases K=1 and K=Z_q (q≠ℓ) are fine, the noncomplete Ω stays WANTED, and compact images in Ω need not lie in a finite extension. The normal-subgroup comparison is formal: T is right adjoint to exact inflation and Res_K has the exact left adjoint A[Q×L]⊗−. Duplicate check against nodes added since: lem-sfb-condensed-derived-restriction-calculus has b_u restriction but no T, c_N or open-normal comparison, so it overlaps without duplicating; lem-sfb-trivial-ladic-derived-exterior is Z_ℓ^r; def-sfb-condensed-equivariant-bar-data is a cochain model. No repair note, not dropped, still unsplit live, no SGA, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrimeToEllDerivedInvariantsReduction",
+  "declaration": "Profinite.CondensedAction.PrimeToEll.primeToEll_derived_invariants_reduction",
+  "declarations": [
+   "Profinite.CondensedAction.PrimeToEll.extendedMap_equivariant",
+   "Profinite.CondensedAction.PrimeToEll.realizationMap",
+   "Profinite.CondensedAction.PrimeToEll.trivialFactorInvariantIso_unique",
+   "Profinite.CondensedAction.PrimeToEll.trivialFactorInvariantIso",
+   "Profinite.CondensedAction.PrimeToEll.trivialFactorPreservesKInjectives",
+   "Profinite.CondensedAction.PrimeToEll.trivialFactorDerivedIso",
+   "Profinite.CondensedAction.PrimeToEll.inclusion",
+   "Profinite.CondensedAction.PrimeToEll.reductionMap",
+   "Profinite.CondensedAction.PrimeToEll.HasReductionRealizations",
+   "Profinite.CondensedAction.PrimeToEll.ReductionIsIso",
+   "Profinite.CondensedAction.PrimeToEll.reductionMap_h0",
+   "Profinite.CondensedAction.PrimeToEll.inclusion_trivial_isIso",
+   "Profinite.CondensedAction.PrimeToEll.reductionMap_trivial_identity",
+   "Profinite.CondensedAction.PrimeToEll.fixedMap_equivariant",
+   "Profinite.CondensedAction.PrimeToEll.reduction_inclusion_natural",
+   "Profinite.CondensedAction.PrimeToEll.reductionMap_natural",
+   "Profinite.CondensedAction.PrimeToEll.coefficientInsertion_properties",
+   "Profinite.CondensedAction.PrimeToEll.realizationCoefficientMap",
+   "Profinite.CondensedAction.PrimeToEll.reductionMap_coefficients",
+   "Profinite.CondensedAction.PrimeToEll.reduction_realizations_exist",
+   "Profinite.CondensedAction.PrimeToEll.coefficientContinuity",
+   "Profinite.CondensedAction.PrimeToEll.primeToEll_derived_invariants_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/PrimeToEllDerivedInvariantsReduction.lean",
+  "statement": "theorem primeToEll_derived_invariants_reduction (_hB : ∀ N : OpenNormalSubgroup B, Nat.Coprime (Nat.card (B ⧸ N.toSubgroup)) ℓ) (_hρ : Continuous (fun x : (B × L) × V ↦ ρ x.1 x.2)) (_hfinite : Finite (Set.range (fun b : B ↦ ρ (b, 1)))) (_horder : Nat.Coprime (Nat.card (Set.range (fun b : B ↦ ρ (b, 1)))) ℓ) : ReductionIsIso E E B L V ρ ∧ ReductionIsIso E Ω B L V ρ",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3809aeb8",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery fixes the 5d0a RETURN. H2: lem-sfb-condensed-derived-invariant-bar is removed from the item's and the arrow node's stmt_deps and TeX. H3: reductionMap_h0 (unit square, H0 isos, inclusion formula), reduction_inclusion_natural plus reductionMap_natural (realizationMap of f, conclusions not assumptions), reductionMap_coefficients (realizationCoefficientMap, for every resolution and lift; F=Omega via coefficientContinuity) and reductionMap_trivial_identity ([Subsingleton B], identifications built independently of reductionMap) are all stated for reductionMap itself. Main theorem unchanged and matches the node: no completeness of Omega; presentations exist by reduction_realizations_exist. Theorem stmt_dep lem-sfb-condensed-product-bar-comparison is genuine: its Abelian/Grothendieck instances come from the conclusion of product_action_inflation, so PASS on that point. Arrow module byte-identical to 5d0a; realization module only gains @[instance_reducible]. Statement field verbatim; no hollow defs; all bodies sorry; docstrings OK; edge cases V=0, V^B=0, B=1, L=1, l=2, empty S covered. Advisory: overlap with the Koszul-specific Realization; V : Type (u+1) docstring note. No compile (no file changed)."
  }
 }

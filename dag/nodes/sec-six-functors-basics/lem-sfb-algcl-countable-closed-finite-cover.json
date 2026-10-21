@@ -346,5 +346,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-b7810abe1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, L19 Prop 1.1.9 first bullet (p.3), Mathlib AlgebraicCard.lean:42-74 and FiniteDimension.lean:530, and project Extension.lean:76-127 (source only). The statement is unchanged against live, where the item is still unsplit with no proof, so the delivery is not superseded and the item is not dropped. Step 1: algebraic elements of Ω over the countable field Q are countable (Mathlib Algebraic.countable). The enumeration with 0 as filler is correct and Ω is never claimed countable. Step 2: each K_j is finite by the finiteDimensional_adjoin leaf, because Ω is algebraic over Q_ℓ. Step 3: the finite-compositum clause of def-weil-finite-subextension-directed-set applies. Step 4: closedness follows from Submodule.closed_of_finiteDimensional. Q_ℓ is complete and nontrivially valued (|ℓ|=1/ℓ), Ω is metric and so T2, and the extended absolute value makes Ω a topological Q_ℓ-vector space. Completeness of Ω is not used. Step 5: the generator node gives b=b_n with x in Q_ℓ(b_n) ⊆ F_n. New node lem-sfb-algebraic-elements-countable is an exact one-line Mathlib leaf with the line recorded. New node lem-sfb-padic-rational-algebraic-generator is true: approximate the minimal polynomial by a monic rational one of the same degree, take the nearby root, and apply Krasner. The sorry-free project theorem PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple states it for the canonical model, and an algebraic isomorphism carries it to any Ω. It is statement-only, strictly smaller than the item and not a relabelling. Duplicate search over snapshot and live (countab*, Krasner, declaration names) found only the lem-per henselian Krasner and dense-henselian nodes, which are ingredients or a different, stronger statement and not one-line specializations. They are advisory citations for the later split of the generator. Every off-unit citation is a definition node or Mathlib leaf, so no tool_uses are needed. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.CountableClosedFiniteCover",
+  "declaration": "Padic.exists_monotone_closed_finiteIntermediateField_cover",
+  "file": "lean/Sheaf/NumberTheory/Padics/CountableClosedFiniteCover.lean",
+  "statement": "theorem exists_monotone_closed_finiteIntermediateField_cover (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) E] : ∃ F : ℕ → IntermediateField (Padic l) Ω, Monotone F ∧ (∀ j : ℕ, E ≤ F j ∧ FiniteDimensional (Padic l) (F j) ∧ IsClosed (F j : Set Ω)) ∧ (⋃ j : ℕ, (F j : Set Ω)) = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efcc9549d",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read item node, both stmt_deps (def-weil-l-adic-coefficient-extension, def-weil-algebraic-closure/IsAlgClosure), module, report, live node (only lean differs) and Extension.lean:82/132. Every clause matches: prime l via Fact l.Prime; arbitrary Ω : Type u with NormedField+NormedAlgebra Q_l (forces the unique extending absolute value) and IsAlgClosure, no completeness; E finite intermediate field; ∃ F : ℕ → IntermediateField, Monotone, E ≤ F j, FiniteDimensional, IsClosed, ⋃ = univ. Edge cases E=⊥, j=0, l=2, universe bound, autoImplicit off. lean.statement verbatim in file, no line >100, name new, sorry only, no defs, source and blueprint docstrings with the 5 proof steps. No duplicate in Mathlib or project. Private proof-plan imports advisory. No compile needed (no change). No findings."
  }
 }
