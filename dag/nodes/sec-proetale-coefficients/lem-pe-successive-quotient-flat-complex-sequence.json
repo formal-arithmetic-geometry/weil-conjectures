@@ -15,9 +15,137 @@
   "def-weil-abstract-derived-category",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q_j(U)=B(U)/(t_U^j)$ for the quotient presheaves in [def-pe-principal-power-ring-quotients]. The inclusions $(t_U^n)\\subseteq(t_U^{n-1})$ and $(t_U^n)\\subseteq(t_U)$ give compatible quotient ring maps $Q_n\\to Q_{n-1}$ and $Q_n\\to Q_1$. Sheafifying these ring maps gives $q_-,q_1$ by the universal property [def-weil-pbc-sheafification]. Their composites with $\\pi_n$ are $\\pi_{n-1},\\pi_1$, since these equations hold before sheafification.",
+   "uses": [
+    "def-pe-principal-power-ring-quotients",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: the quotient maps in the coefficient sequence; expanded using the quotient-presheaf definition."
+   }
+  },
+  {
+   "text": "For $A=B(U)$ and $x=t_U$, define $a_0:A/(x^{n-1})\\to A/(x^n)$ by $[c]\\mapsto[xc]$, and $b_0:A/(x^n)\\to A/(x)$ by $[c]\\mapsto[c]$. Changing $c$ by $x^{n-1}d$ changes $xc$ by $x^nd$, so $a_0$ is well-defined. Both maps are additive. With $A/(x^n)$ acting on the outer terms through its quotient maps, $a_0([r][c])=[xrc]=[r]a_0([c])$ and $b_0([r][c])=[r]b_0([c])$. These formulas commute with every restriction because $t$ is a global section. Thus they give morphisms of $Q_n$-module presheaves, also morphisms of $B$-module presheaves, with precisely the scalar restrictions of [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "def-pe-principal-power-ring-quotients",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: multiplication by the uniformizer and the quotient map; explicit presheaf formulas and linearity."
+   }
+  },
+  {
+   "text": "Multiplication by $t$ has zero kernel as a morphism of $B$-module sheaves. Since kernels are sectionwise [def-weil-sheaf-of-modules-category], multiplication by $x=t_U$ on $A=B(U)$ is injective. If $a_0([c])=0$, then $xc=x^nd=x(x^{n-1}d)$ for some $d$, and cancellation gives $c=x^{n-1}d$; hence $a_0$ is injective. The map $b_0$ is surjective, and $b_0([c])=0$ exactly when $c=xd$, in which case $[c]=a_0([d])$. Also $b_0a_0=0$. This proves the short exact sequence at every $U$. It is short exact as a sequence of $B$-module presheaves: the sectionwise kernel and cokernel factorizations commute with restrictions by their uniqueness.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph: exactness of the coefficient sequence, with regularity and cancellation made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] with coefficient presheaf $Q_n$ to the three module presheaves $Q_{n-1},Q_n,Q_1$ and the two morphisms of Step 2. It gives $R_n=Q_n^\\#$-module sheaves and $R_n$-linear sheafified morphisms. To identify the outer modules, the ring-sheafification units $Q_j\\to R_j$ are $Q_n$-linear for the actions induced by $q_-,q_1$. The interface therefore gives $R_n$-linear comparison maps from the module sheafifications to those restricted $R_j$. By [lem-pc-sites-sheafification-underlying-sets], both ring sheafification and abelian-group sheafification have the same underlying set sheafification, with the same unit. The comparison maps are consequently inverse on underlying sets by uniqueness of sheafification, hence are module isomorphisms. The same argument with coefficient presheaf $B$ identifies their underlying $B$-modules with the $B$-module sheafifications of $Q_j$. These identifications preserve the units and both maps, so their formulas are exactly the displayed $a,b$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-pe-principal-power-ring-quotients",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); underlying sets: sites.tex Tag 00YR (section-sheaves-algebraic-structures), assertions (gamma) and (epsilon)."
+   }
+  },
+  {
+   "text": "Sheafify the short exact sequence of $B$-module presheaves from Step 3. The functor is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact], applicable because $B$ is a ring sheaf on the given small site. The identifications of Step 4 give the sequence $0\\to R_{n-1}\\xrightarrow{a}R_n\\xrightarrow{b}R_1\\to0$ as a short exact sequence of $B$-module sheaves.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), applied with coefficient presheaf the sheaf B."
+   }
+  },
+  {
+   "text": "For any ring-sheaf map on this site, restricting scalars changes only the action [def-pc-sheaf-restrict-scalars]. The sectionwise kernel and the sheafified sectionwise cokernel from [def-weil-sheaf-of-modules-category] have unchanged underlying abelian sheaves: module sheafification has underlying abelian sheafification [def-weil-presheaf-modules-sheafification]. Consequently kernels, cokernels, and the image (kernel of the cokernel) have identical underlying abelian sheaves before and after restriction. Restriction therefore preserves and reflects short exactness. Apply this observation to $B\\to R_n$ and the $R_n$-linear sequence of Step 4. Step 5 proves its restricted sequence short exact, so the sequence itself is short exact in $\\operatorname{Mod}(R_n)$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), kernel/cokernel descriptions immediately preceding it, and restriction functor immediately after Tag 03EI."
+   }
+  },
+  {
+   "text": "Fix a degree $i$. The presheaf $U\\mapsto R_j(U)\\otimes_{B(U)}P^i(U)$ has the $R_j(U)$-action $r(s\\otimes p)=(rs)\\otimes p$. Its restriction maps preserve this action. Its sheafification is $C_j^i$ by [def-pur-sheaf-tensor-product], and [lem-pc-sites-module-sheafification-interface] extends this action to an $R_j$-module sheaf action. The maps $a\\otimes1$ and $b\\otimes1$ are balanced over $B$, because $a,b$ are $B$-linear. They are $R_n$-linear with the restricted outer actions: on generators, $(a\\otimes1)(q_-(r)s\\otimes p)=r\\,a(s)\\otimes p$ and $(b\\otimes1)(rs\\otimes p)=q_1(r)b(s)\\otimes p$. The interface sheafifies these linear maps. Substituting $s=\\pi_{n-1}(c)$ or $s=\\pi_n(c)$ gives the asserted formulas for $\\alpha^i,\\beta^i$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and associated sheaf; Tag 03CY for extending the first-factor actions."
+   }
+  },
+  {
+   "text": "Define $d_j^i=1\\otimes d_P^i$. It is $R_j$-linear, and $d_j^{i+1}d_j^i=1\\otimes(d_P^{i+1}d_P^i)=0$, so these are cochain complexes [def-weil-abstract-derived-category]. For $s\\otimes p$, both $d_n^i\\alpha^i$ and $\\alpha^{i+1}d_{n-1}^i$ give $a(s)\\otimes d_P^i(p)$; both $d_1^i\\beta^i$ and $\\beta^{i+1}d_n^i$ give $b(s)\\otimes d_P^i(p)$. Equality on pure tensors gives equality of the sectionwise tensor maps and hence of their sheafifications [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification]. Thus $\\alpha,\\beta$ are the claimed $R_n$-linear cochain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), applied to the cochain differential and its naturality squares."
+   }
+  },
+  {
+   "text": "For each $i$, flatness of $P^i$ means exactly that the sheaf tensor functor $M\\mapsto M\\otimes_B P^i$ is exact [def-pc-flat-sheaf-modules]. Apply this defining property to the short exact $B$-module sequence of Step 5. The resulting short exact sequence is the restriction to $B$ of $\\alpha^i,\\beta^i$ constructed in Step 7. By Step 6 it is short exact also over $R_n$. This proves degreewise short exactness of the cochain sequence. Every argument was either sheafification, a calculation in a single degree, or the exact-functor definition of flatness; no points, sectionwise flatness, K-flatness, or degree bounds were used.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), item (3): exactness of tensoring in the category of sheaf modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pe-principal-power-ring-quotients",
+  "def-weil-pbc-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph, coefficient short exact sequence. Expanded to the stated general ringed-site setting using Stacks Tags 03CY, 03EI, 03DA, 03EK, 03ER and Sites Tag 00YR."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +181,52 @@
    "results": "{\"t\": \"2026-10-21T05:50:19Z\", \"tool\": \"grep\", \"query\": \"smulShortComplex_shortExact|rTensor_shortComplex_exact|lTensor_shortComplex_exact\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Regular/Category.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\"], \"digest\": \"451ee68a2669a3d2\"}",
    "date": "2026-10-21",
    "verdict": "No match: the hits IsSMulRegular.smulShortComplex_shortExact (Mathlib/RingTheory/Regular/Category.lean:51) and Module.Flat.lTensor_shortComplex_exact / rTensor_shortComplex_exact (Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46) concern ordinary modules over a ring. They neither construct the local ring-sheaf coefficient maps nor the exact sheaf-complex sequence with its R_n-action."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact|[Ee]xact|[Ff]lat",
+   "results": "{\"t\": \"2026-10-21T06:27:51Z\", \"tool\": \"grep\", \"query\": \"shortExact|[Ee]xact|[Ff]lat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"15e66101244769dd\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat sheaf of modules preserves the short exact sequence of successive quotients by powers of a regular section after tensoring",
+   "results": "{\"t\": \"2026-10-21T06:27:51Z\", \"tool\": \"leansearch\", \"query\": \"A flat sheaf of modules preserves the short exact sequence of successive quotients by powers of a regular section after tensoring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.rTensor_exact\"], \"digest\": \"18c384ff3052b80f\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"exact\"",
+   "results": "{\"t\": \"2026-10-21T06:27:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site a regular section t gives an exact sequence B/t^(n-1) to B/t^n to B/t and tensoring by a termwise flat sheaf complex preserves it",
+   "results": "{\"t\": \"2026-10-21T06:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"On a small ringed site a regular section t gives an exact sequence B/t^(n-1) to B/t^n to B/t and tensoring by a termwise flat sheaf complex preserves it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"877e6c77a4afedcb\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "smulShortComplex_shortExact|rTensor_shortComplex_exact|lTensor_shortComplex_exact",
+   "results": "{\"t\": \"2026-10-21T06:28:09Z\", \"tool\": \"grep\", \"query\": \"smulShortComplex_shortExact|rTensor_shortComplex_exact|lTensor_shortComplex_exact\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/Category.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\"], \"digest\": \"2641a49435ec1f74\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of commutative rings and a nonzero divisor global section the quotient sheaves by successive powers form a short exact sequence linear over the middle quotient and termwise flat tensor preserves this exact sequence of complexes",
+   "results": "{\"t\": \"2026-10-21T06:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of commutative rings and a nonzero divisor global section the quotient sheaves by successive powers form a short exact sequence linear over the middle quotient and termwise flat tensor preserves this exact sequence of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\"], \"digest\": \"f1c7cce7446f9cae\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full ring-sheaf statement: the semantic hits are ordinary ring-module tensor exactness (Module.Flat, Mathlib/RingTheory/Flat/CategoryTheory.lean:41,46); IsSMulRegular.smulShortComplex_shortExact (RingTheory/Regular/Category.lean:51) is the different ordinary-module sequence M -> M -> M/tM. The SheafOfModules grep finds abelian-category infrastructure, not the successive-quotient sequence of ring-sheaf complexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-successive-quotient-linear-triangle",
@@ -75,5 +245,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-successive-quotient-flat-complex-sequence",
+  "worker": "stage1",
+  "summary": "Kept the statement and its six statement dependencies. Wrote nine steps: quotient maps, balanced linear maps, regular-element cancellation, compatible ring/module sheafification, exactness after sheafification, elementary scalar-restriction detection of exactness, tensor actions, cochain identities, and flatness degree by degree. All non-elementary sheafification inputs reuse existing Mathlib leaves; no new nodes. No project declaration states the whole item.",
+  "blueprint": "Realizes the second paragraph of det-prop-integral-criterion-reductions.proof.md, specifically the coefficient exact sequence before derived tensor; leaves the subsequent passage to the derived category to lem-pe-successive-quotient-linear-triangle.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-89d716883",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-89d716883 (reviewer sub-agent of L); spot-checked: I read the item in full: 9 steps, 0 new nodes, statement and stmt_deps unchanged. It is the first split of a new node that Q33 created for the parent linear-triangle on 2026-10-21; its base proof was empty and it has no re-split note. Steps 1-3 build the presheaf sequence Q_{n-1} -> Q_n -> Q_1 by elementary arguments: well-definedness, linearity through the quotient maps, regularity of t, and the cancellation xc=x^n d => c=x^{n-1}d. Step 4 applies lem-pc-sites-module-sheafification-interface with the presheaf Q_n (Stacks 03CY). Together with lem-pc-sites-sheafification-underlying-sets (same set sheafification and unit) it identifies Q_j^# with Res R_j as R_n-modules and as B-modules, and identifies a and b with the sheafified maps. Step 5 uses exactness of sheafification over the ring sheaf B (03EI). Step 6 shows restriction of scalars preserves and reflects short exactness, because kernels and cokernels are computed on underlying abelian sheaves (03DA); I accept it as elementary. Steps 7-8 give the first-factor R_j-actions on C_j, balanced R_n-linear maps alpha and beta with correct generator identities, and cochain identities on pure tensors. Step 9 is an instance of def-pc-flat-sheaf-modules, which defines flatness as exactness of G -> G tensor_O F (Stacks 03ER item 3, checked at sites-modules.tex:4243), combined with step 6. proof_deps equals the union of the step uses. Every cited node is a definition or a Mathlib leaf, so there is no route issue, no cycle and no tool_uses. No SGA is cited. Small cases: B=Z, t=2, n=2 and n=3 are exact; t a unit and B=0 are trivial. Without regularity (Z/4, t=2) a is not injective; without flatness (P^0=Z/2) the sequence fails, so both hypotheses are needed. I searched the whole DAG for duplicates and found none: kflat-scalar-tower-realization, flat-coefficient-reduction-adjunct, opcycles-tor-criterion and restriction-of-scalars-exact all state other things. Advisory: step 6 could cite lem-weil-pbc-restriction-derived-products. The report mentions citations.json and searches.jsonl, but neither file is in the commit. Maintainer note: every snapshot chapter directory except sec-proetale-coefficients is a dangling symlink to the missing dagsnap ba587727. I read the cited out-of-chapter nodes from dagsnap 78f93be7; the four I hashed are identical across all remaining dagsnaps. No fixes."
  }
 }
