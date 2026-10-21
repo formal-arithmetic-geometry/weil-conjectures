@@ -16,9 +16,95 @@
   "lem-sfb-scalar-hom-tensor-coherence",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each coefficient ring $W$, use the natural closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Composing its tensor argument with the specified symmetry gives the convention in the statement: $\\operatorname{Hom}(X,H_W(P,Q))\\cong\\operatorname{Hom}(P\\otimes X,Q)$. Write $e^W_{P,Q}:P\\otimes H_W(P,Q)\\to Q$. The inverse bijection sends $h$ to $e^W_{P,Q}(1_P\\otimes h)$, so it is injective. Naturality of this bijection gives $e^W_{P',Q'}(1\\otimes H_W(f,g))=g\\,e^W_{P,Q}(f\\otimes1)$ for $f:P'\\to P$ and $g:Q\\to Q'$. Throughout, juxtaposition denotes composition with the rightmost map applied first; tensors are derived over the current coefficient ring.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "Put $t^a_{P,X}=\\mu_a(P,X)^{-1}$. By the defining transpose, $c^a_{P,Q}$ is the unique arrow with $e^S_{T_aP,T_aQ}(1\\otimes c^a_{P,Q})=T_a(e^R_{P,Q})t^a_{P,H_R(P,Q)}$. The same equation holds for $b$ and $ba$. This is just application of the bijection of Step 1 to the composite in the statement; it imposes no invertibility condition on $c^a$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "We check both variables at once. Write $F=T_a$, $H=H_R(P,Q)$, $H'=H_R(P',Q')$ and $h=H_R(f,g)$, where $f:P'\\to P$, $g:Q\\to Q'$. The uncurried map of $H_S(Ff,Fg)c^a_{P,Q}$, relative to $FP'$, is\n$$Fg\\,F(e^R_{P,Q})t^a_{P,H}(Ff\\otimes1)=F\\bigl(g\\,e^R_{P,Q}(f\\otimes1)\\bigr)t^a_{P',H}=F(e^R_{P',Q'})t^a_{P',H'}(1\\otimes Fh).$$\nThe first equality is naturality of $t^a$ in $P$; the second is the evaluation identity of Step 1 and naturality of $t^a$ in $H$. The last expression is the uncurry of $c^a_{P',Q'}Fh$ by Step 2. Injectivity in Step 1 proves naturality, with exactly the asserted variance. Replace $a$ by $b$ or $ba$ for the other two maps.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "Write $F=T_a$, $G=T_b$, $K=GF$, $J=T_{ba}$, $H=H_R(P,Q)$ and $d=c^b_{FP,FQ}\\,G(c^a_{P,Q})$. Its uncurry relative to $KP$ is\n$$e^V_{KP,KQ}(1\\otimes d)=G(e^S_{FP,FQ})t^b_{FP,H_S(FP,FQ)}(1\\otimes Gc^a_{P,Q})=G\\bigl(e^S_{FP,FQ}(1\\otimes c^a_{P,Q})\\bigr)t^b_{FP,FH}=K(e^R_{P,Q})G(t^a_{P,H})t^b_{FP,FH}.$$\nHere Step 2 for $b$ gives the first equality, naturality of $t^b$ gives the second, and Step 2 for $a$ gives the third. Define $t^K_{P,X}=G(t^a_{P,X})t^b_{FP,FX}$. Thus the uncurried map is explicitly $K(e^R_{P,Q})t^K_{P,H}$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "Use the tensor-tower equation of [lem-sfb-scalar-hom-tensor-coherence], which is assumed for these comparisons in the item. In the notation of Step 4 it reads $(\\alpha_P\\otimes\\alpha_X)\\mu_b(FP,FX)G(\\mu_a(P,X))=\\mu_{ba}(P,X)\\alpha_{P\\otimes X}$. Composing with inverses of the tensor comparisons gives the useful form\n$$\\alpha_{P\\otimes X}t^K_{P,X}=t^{ba}_{P,X}(\\alpha_P\\otimes\\alpha_X).$$\nThis rearrangement only cancels the specified isomorphisms. In particular, precomposing at $X=H$ by $\\alpha_P^{-1}\\otimes1_{KH}$ yields $\\alpha_{P\\otimes H}t^K_{P,H}(\\alpha_P^{-1}\\otimes1)=t^{ba}_{P,H}(1_{JP}\\otimes\\alpha_H)$.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "We now uncurry the two arrows in the asserted tower equation relative to $JP$. By naturality of evaluation (Step 1), the left side uncurries to $\\alpha_Q e^V_{KP,KQ}(\\alpha_P^{-1}\\otimes d)$. Substituting Step 4, naturality of $\\alpha$ at $e^R_{P,Q}$, and then Step 5 gives the full calculation\n$$\\alpha_Q K(e^R_{P,Q})t^K_{P,H}(\\alpha_P^{-1}\\otimes1)=J(e^R_{P,Q})\\alpha_{P\\otimes H}t^K_{P,H}(\\alpha_P^{-1}\\otimes1)=J(e^R_{P,Q})t^{ba}_{P,H}(1\\otimes\\alpha_H).$$\nBy Step 2 this last map is $e^V_{JP,JQ}(1\\otimes c^{ba}_{P,Q}\\alpha_H)$, the uncurry of the right side. Injectivity in Step 1 proves precisely $H_V(\\alpha_P^{-1},\\alpha_Q)d=c^{ba}_{P,Q}\\alpha_H$. Both sides have source $KH$ and target $H_V(JP,JQ)$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  },
+  {
+   "text": "For the identity ring map put $I=T_{\\mathrm{id}}$ and let $u:I\\cong\\mathrm{Id}$ be the scalar multiplication unitor. The identity equation assumed from [lem-sfb-scalar-hom-tensor-coherence] is $u_P^{-1}\\otimes u_X^{-1}=\\mu_{\\mathrm{id}}(P,X)u_{P\\otimes X}^{-1}$. Cancel its isomorphisms to get $u_{P\\otimes X}t^{\\mathrm{id}}_{P,X}=u_P\\otimes u_X$. With $H=H_R(P,Q)$, the uncurry relative to $P$ of the transported comparison $H_R(u_P^{-1},u_Q)c^{\\mathrm{id}}_{P,Q}$ is therefore\n$$u_Q I(e^R_{P,Q})t^{\\mathrm{id}}_{P,H}(u_P^{-1}\\otimes1)=e^R_{P,Q}u_{P\\otimes H}t^{\\mathrm{id}}_{P,H}(u_P^{-1}\\otimes1)=e^R_{P,Q}(1\\otimes u_H).$$\nThe first equality is naturality of $u$, the second the just displayed tensor equation. The uncurried maps of the transported comparison and $u_H$ agree, so Step 1 gives $H_R(u_P^{-1},u_Q)c^{\\mathrm{id}}_{P,Q}=u_H$. Identifying $IH$ with $H$ by $u_H$ makes this exactly the identity claimed.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), equation-internal-hom; Tag 07A4 (sites-cohomology-lemma-pullback-tensor-product). Formal evaluation-transpose calculation by the worker, not a tower theorem stated in Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +140,45 @@
    "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.closedIhom_obj_map, CategoryTheory.MonoidalClosed.pre_comm_ihom_map, CategoryTheory.Functor.ihom_map, CategoryTheory.MonoidalClosed.pre_map, CategoryTheory.pre_map, CategoryTheory.Functor.closedIhom_map_app, CategoryTheory.MonoidalClosed.pre, CategoryTheory.MonoidalClosed.comp",
    "date": "2026-10-21",
    "verdict": "no match: expComparison is for Cartesian monoidal categories, not derived tensor categories; ihom composition and coevaluation hits do not give this coefficient-extension comparison or its tower equation"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|closedIhom",
+   "results": "Five hits, all in Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean (lines 39, 48, 54, 64, 70); closedIhom is the internal Hom of groupoid-indexed functors, not a scalar comparison. Subdirectory: CategoryTheory/Monoidal/Closed",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian exponential comparison assumes CartesianMonoidalCategory; ordinary ModuleCat extension adjunctions do not state the derived ring-sheaf Hom comparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:47-113."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.ihomComparison",
+   "results": "No hits; loogle: unknown identifier 'Functor.LaxMonoidal.ihomComparison'",
+   "date": "2026-10-21",
+   "verdict": "no match: unknown identifier; the lax-monoidal comparison exists in the project extension, not in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom comparison of a strong monoidal functor respects composition of strong monoidal functors and identity functors",
+   "results": "CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.expComparison; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three; CategoryTheory.expComparison_whiskerLeft; CategoryTheory.expComparison_ev; CategoryTheory.coev_expComparison; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian exponential comparison assumes CartesianMonoidalCategory; ordinary ModuleCat extension adjunctions do not state the derived ring-sheaf Hom comparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:47-113."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars internal Hom comparison naturality and coherence under a tower of ring homomorphisms",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.extendScalars_assoc'; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; IsScalarTower.of_algHom; ModuleCat.extendScalars_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian exponential comparison assumes CartesianMonoidalCategory; ordinary ModuleCat extension adjunctions do not state the derived ring-sheaf Hom comparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:47-113."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax monoidal functor internal hom comparison is the transpose of tensorator followed by evaluation",
+   "results": "CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.expComparison_ev; CategoryTheory.expComparison; CategoryTheory.coev_expComparison; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv; CategoryTheory.Functor.closedUnit; CategoryTheory.uncurry_expComparison; CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+   "date": "2026-10-21",
+   "verdict": "no match: Cartesian exponential comparison assumes CartesianMonoidalCategory; ordinary ModuleCat extension adjunctions do not state the derived ring-sheaf Hom comparison. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:47-113."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-operations-scalar-extension",
@@ -76,5 +197,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-scalar-hom-comparison-tower",
+  "worker": "stage1",
+  "group": "O1",
+  "summary": "Kept the statement and all seven statement dependencies unchanged. Supplied explicit uncurrying calculations for naturality, successive comparison, the alpha transport and the identity unitor. Reused the existing closed symmetric monoidal theorem and the assumed tensor coherence theorem; no new node is necessary. Checked both evaluation conventions using symmetry and kept the Hom comparisons as maps, without asserting invertibility.",
+  "blueprint": "Ancestor def-weil-derived-pullback-tensor-hom, final paragraph on compatible finite reductions and common-stage coefficient construction: this split supplies the evaluation-defined internal-Hom coefficient tower and unit equations needed for that compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Its natural closed tensor-Hom bijection and evaluation formula supply injective uncurrying and evaluation naturality on the ordinary unbounded categories; this is the generic closed-category tool for the coefficient clause."
+   },
+   {
+    "node": "lem-sfb-scalar-hom-tensor-coherence",
+    "why": "The item explicitly assumes its tensor-tower and identity equations; these are used as tensor equations only, to compute the transposes of the Hom tower and unit maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O1-43f2b50f4",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-43f2b50f4 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and redid each calculation. The verdict is PASS with no fixes. (1) The statement and stmt_deps are byte-identical to the unsplit node in the earlier parent runs O1__lem-pur-integral-operations-scalar-extension 3701cefb and bf31ebbf, so nothing was weakened. The delivery has no new nodes and touches no unit. (2) Step 1: using σ, the closed bijection of lem-sf-ringed-derived-closed-symmetric-monoidal gives the P⊗H convention. I re-derived the identity e'(1⊗H(f,g)) = g·e(f⊗1) from naturality in L and in M. Steps 2–4 (definition, naturality, two-stage uncurry K(e)t^K) and Step 6 (α-transport through α_P^{-1}: JP→KP and α_Q) all type-check and are correct. (3) I checked Steps 5 and 7 against the Lean record of lem-sfb-scalar-hom-tensor-coherence. ScalarInternalHomData.lean:384-395 fixes scalarHomExtensionComp as T_bT_a→T_{ba} and scalarHomExtensionId as T_id≅Id. With those directions, inverting the tensorators gives αt^K = t^{ba}(α⊗α) and u t = u⊗u. The identity clause comes out as H(u_P^{-1},u_Q)c^id = u_H. (4) Sources: Stacks 08J9 (lemma-internal-hom and equation-internal-hom, l.8844/8896) and 07A4 (l.3684), plus the main-20261015 ancestor def-weil-derived-pullback-tensor-hom, final paragraph. (5) There is no cycle: the closure of the deps is 345 nodes and does not contain the item. I accept both declared tool_uses: the closed adjunction, whose unit sk-prop-sf-biduality-general is in the unit's uses, and the coherence equations, which the item assumes explicitly. (6) Duplicates: the restriction-side nodes lem-sfb-closed-scalar-hom-comparison and lem-sfb-scalar-internal-hom-tower-coherence are about a different map. lem-coef-monoidal-square-hom-transport would give the tower clause only for strong symmetric monoidal functors with a monoidal h, and the item does not have those hypotheses. So it is not a one-line specialization; this is advisory only. Edge cases tested: identity legs, P=0, and Z→F_2→F_2. The item claims no invertibility and assumes no flatness."
  }
 }
