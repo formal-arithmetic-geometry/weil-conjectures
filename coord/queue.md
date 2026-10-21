@@ -1,6 +1,6 @@
 # Work queue
 
-386 items; claim with `tools/claim.py next <group> [--stage N]`.
+399 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 2095 modules)
 
@@ -24,15 +24,28 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 188, stage 3 186 items.
 
-## Stage 1: nodes to split (11)
+## Stage 1: nodes to split (24)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `lem-sbc-ambient-operations-scalar-linearity` | 3 | none |
+| `lem-sfb-filtered-ring-object-cocone-colimit` | 1001 | none |
+| `lem-cbc-ringed-open-extension-products` | 2004 | none |
+| `lem-asd-affine-roots-representability` | 2005 | none |
 | `lem-sfb-qcqs-proper-constructible-closed-base-change` | 2005 | none |
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
+| `def-pur-support-triangle` | 2009 | none |
+| `lem-sfb-grothendieck-sheafification` | 3003 | none |
 | `lem-sfb-continuous-algcl-open-scalar-comparison` | 4008 | none |
 | `lem-sfb-normal-continuous-algcl-monodromy` | 4009 | none |
+| `det-def-sfb-filtered-two-colimit-characterization` | - | none |
+| `det-def-sfb-filtered-two-colimit-model` | - | none |
+| `lem-sfb-bounded-bifunctor-devissage` | - | none |
+| `lem-sfb-finite-free-scalar-coordinates` | - | none |
+| `lem-sfb-internal-extension-finite-presentation` | - | none |
+| `lem-sfb-sheaf-pushforward-generator-comparison` | - | none |
 | `lem-sfb-cohomology-tor-interval` | - | none |
+| `lem-sfb-rationalization-localization-hom-criterion` | - | none |
 | `lem-zl-constant-sheaf-weight-zero` | - | none |
 | `lem-pod-stratified-dualizable-bounded` | - | none |
 | `lem-pod-stratified-dualizable-hom-continuity` | - | none |
