@@ -1,8 +1,8 @@
 # Work queue
 
-210 items; claim with `tools/claim.py next <group> [--stage N]`.
+207 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (23 clusters, 988 modules)
+## Rework: quarantined by the upstream sync (23 clusters, 970 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,9 +11,10 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
-| `Sheaf.SixFunctors.ClosedImmersionTensorProjection` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.WeilTensorProduct` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.IntegralIndConstructibleHeartClosure` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionTriangles` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -30,11 +31,10 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ReductionOpenEtaleOrigin` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (13)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -46,14 +46,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
 | `lem-sfb-tame-root-tower-extension` | 4011 | none |
 | `lem-sfb-cech-localization-unit-totalization` | 4012 | none |
-| `lem-sfb-condensed-internal-bar-resolution` | 4012 | none |
 | `lem-sfb-condensed-product-bar-comparison` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-root-tower-lisse-morphism-extension` | 4012 | none |
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (26)
+## Stage 2: nodes to state (27)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -73,6 +72,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-complete-group-forgetful-automorphisms` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
+| `lem-sfb-condensed-internal-bar-resolution` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
@@ -84,9 +84,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sp-supported-etale-tensor-origin` | 1 | state | 0 |
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 109 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 109 nodes that wait for a statement dependency (bottom-up), 12 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (139)
+## Stage 3: modules to prove (137)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -143,7 +143,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SliceTensorIntegerShiftCompatibility` | - | 3 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerExchange` | - | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerLimitSquare` | - | 1 | proof | 5 |
-| `Sheaf.CategoryTheory.ScalarLocalizationDerivedHom` | - | 2 | proof | 5 |
 | `Sheaf.Paper.CompletedLineTensorCoherence` | - | 23 | proof | 5 |
 | `Sheaf.Paper.CompletedOpenExchangeTransport` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedScalarUnitAdjunction` | - | 1 | proof | 5 |
@@ -212,7 +211,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.QuotientExpressionKFlatNormalization` | - | 1 | proof | 10 |
 | `Sheaf.Paper.SfOpenReductionAdjunctionTransport` | - | 1 | proof | 10 |
 | `Sheaf.SixFunctors.OpenQuotientKoszulCompleteness` | - | 1 | proof | 10 |
-| `Sheaf.SixFunctors.OpenScalarTensorNormalization` | - | 1 | proof | 10 |
 | `Sheaf.SixFunctors.OpenSemilinearTensorModel` | - | 1 | proof | 10 |
 | `Sheaf.CategoryTheory.TowerLimitTransposeNormalization` | - | 1 | proof | 11 |
 | `Sheaf.Paper.CompletedTensorUnitInsertion` | - | 1 | proof | 11 |
