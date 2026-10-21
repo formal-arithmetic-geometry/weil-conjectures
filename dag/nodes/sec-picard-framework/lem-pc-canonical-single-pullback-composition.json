@@ -16,15 +16,14 @@
  ],
  "proof": [
   {
-   "text": "Evaluate Functor.leftDerived_fac_app at the homotopy single complex of N, using the chosen composition hom equation and the chosen IsLeftDerivedFunctor witness. This identifies c(f,g).hom followed by ε_(f≫g) with Lf*(ε_g), then ε_f at the termwise g-pullback, then the mapped tensor composition mate. Postcompose by the single-complex comparison for f≫g and the single embedding of the unique tensor-to-ordinary left-adjoint isomorphism.",
+   "text": "Evaluate the existing perfectHomTensorCounit_comp at the homotopy single complex E of N. This is the selected derived composition counit factorization. It identifies C.hom followed by the selected counit for f ≫ g with Lf of the g counit, the f counit at the termwise g pullback, and the mapped tensor composition mate. The theorem is the same leftDerived_fac_app argument already proved in the library.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-canonical-single-pullback-comparison"
+    "lem-pc-perfect-hom-cochain-counit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply homotopySinglePullbackComposition to identify c ≫ r_(f≫g) with T_f(r_g) ≫ r_f ≫ single(pullbackComp.hom). Apply naturality of the chosen derived counit ε_f to r_g. Postcompose the evaluated leftDerived_fac_app equation with Qh(r_(f≫g)), substitute the homotopy composition identity, and use that naturality equation to obtain the two successive derived single comparisons. Unfold canonicalSinglePullbackMap and combine functor maps and associativity.",
+   "text": "Apply homotopySinglePullbackComposition to identify c ≫ r_(f≫g) with T_f(r_g) ≫ r_f ≫ single(pullbackComp.hom). Naturality of the selected counit ε_f at r_g identifies the middle two factors. A proved generic functoriality-and-associativity calculation pastes the three equations. The proved private singleComparison_eq expands the canonical comparison once as ε followed by Qh of its homotopy single comparison; apply it to f, g, and f ≫ g to conclude. No single comparison is inverted and no flatness is required.",
    "uses": [
     "lem-pc-homotopy-single-pullback-composition",
     "lem-pc-canonical-single-pullback-comparison"
@@ -33,14 +32,14 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-canonical-single-pullback-comparison",
-  "lem-pc-homotopy-single-pullback-composition"
+  "lem-pc-perfect-hom-cochain-counit",
+  "lem-pc-homotopy-single-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Cohomology; Mathlib derived-functor universal property",
-  "place": "Tag 0D5S; Functor.leftDerived_fac_app, counit naturality, and homotopySinglePullbackComposition"
+  "place": "Tag 0D5S; existing perfectHomTensorCounit_comp, counit naturality, and homotopySinglePullbackComposition"
  },
  "mathlib_searches": [
   {
@@ -95,7 +94,7 @@
   "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition",
   "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackComposition.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackComposition",
-  "statement": "theorem canonicalSinglePullbackComposition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules) :\n    ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) f g).hom.app\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj N) ≫\n      canonicalSinglePullbackMap (f ≫ g) N =\n    (derivedPullback f).map (canonicalSinglePullbackMap g N) ≫\n      canonicalSinglePullbackMap f ((pullback g).obj N) ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map\n          ((pullbackComp f g).hom.app N)",
+  "statement": "theorem canonicalSinglePullbackComposition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules) :\n    ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) f g).hom.app\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj N) ≫\n      canonicalSinglePullbackMap (f ≫ g) N =\n    (AlgebraicGeometry.derivedPullback f).map (canonicalSinglePullbackMap g N) ≫\n      canonicalSinglePullbackMap f ((pullback g).obj N) ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map\n          ((pullbackComp f g).hom.app N)",
   "branch": "sheaf-dag",
   "by": "U3",
   "date": "2026-10-13"
@@ -111,14 +110,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "C-f58ce",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T231636-L-1962573",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T004845-L-1795756",
+  "kind": "proof",
+  "note": "independent cc review: f58ceb105f07 files vs PASSed 6a6512073404 snapshot (diff -r empty) and vs quarantined module (only statement change: derivedPullback qualified as AlgebraicGeometry.derivedPullback, declared in change record); node vs live node (only proof/proof_deps/proof_origin/lean differ)"
  },
  "lean_audit": {
   "master": {
