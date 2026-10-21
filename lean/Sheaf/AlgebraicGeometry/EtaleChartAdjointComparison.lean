@@ -11,10 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import Mathlib.CategoryTheory.HomCongr
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.Etale.OpenExtensionZeroEtaleAdjunctionAgreement
 
 /-! # Natural Hom comparison on an ordinary etale factored chart
 
@@ -153,6 +149,8 @@ noncomputable def homChain
     (Iso.homCongr (closedNormalizationAmbient A i H).symm (Iso.refl _)) |>.trans
     (adjI.homEquiv H.obj _)
 
+-- Preserve the original chart hypotheses in the public signature.
+set_option linter.unusedSectionVars false in
 /-- The canonical Hom comparison is the inverse of `homChain`, natural in both variables.
 Neither representing target is required to be bounded below.
 
@@ -205,6 +203,64 @@ theorem exists_homEquiv
           (b : H.obj ⟶ I.obj (G.obj (D((v)^*[ModuleCat.{u + 1} A]).obj K))),
         e H K' (b ≫ I.map (G.map (D((v)^*[ModuleCat.{u + 1} A]).map a))) =
           e H K b ≫ D((s)^*[ModuleCat.{u + 1} A]).map (F.map a)) := by
-  sorry
+  refine ⟨fun H K ↦ (homChain A f s v i p w F G I adjF adjP adjI H K).symm,
+    fun _ _ ↦ rfl, ?_, ?_⟩
+  · intro H H' a K b
+    let e :=
+      (Functor.isoWhiskerLeft D+((s)_!open[ModuleCat.{u + 1} A])
+        (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) f)).symm ≪≫
+      Functor.isoWhiskerRight (leftComparisonPlus A f s v i p w) DerivedCategory.Plus.ι ≪≫
+      Functor.isoWhiskerRight
+        (Functor.isoWhiskerLeft D+((i)_*[ModuleCat.{u + 1} A])
+          (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) p))
+        D((v)_!open[ModuleCat.{u + 1} A])
+    have he : ∀ T, e.hom.app T = (leftComparison A f s v i p w T).hom :=
+      fun _ ↦ rfl
+    have hn := e.hom.naturality a
+    simp only [he, Functor.comp_map] at hn
+    change R(f)_![ModuleCat.{u + 1} A].map
+        (D((s)_!open[ModuleCat.{u + 1} A]).map (DerivedCategory.Plus.ι.map a)) ≫
+        (leftComparison A f s v i p w H).hom =
+      (leftComparison A f s v i p w H').hom ≫
+        D((v)_!open[ModuleCat.{u + 1} A]).map
+          (R(p)_![ModuleCat.{u + 1} A].map
+            (D((i)_*[ModuleCat.{u + 1} A]).map (DerivedCategory.Plus.ι.map a))) at hn
+    let c := (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A) i).symm ≪≫
+      Functor.isoWhiskerRight (closedNormalization A i) DerivedCategory.Plus.ι
+    have hc : ∀ T, c.inv.app T = (closedNormalizationAmbient A i T).inv :=
+      fun _ ↦ rfl
+    have hcn := c.inv.naturality a
+    simp only [hc, Functor.comp_map] at hcn
+    change D((i)_*[ModuleCat.{u + 1} A]).map (DerivedCategory.Plus.ι.map a) ≫
+        (closedNormalizationAmbient A i H).inv =
+      (closedNormalizationAmbient A i H').inv ≫
+        R(i)_![ModuleCat.{u + 1} A].map (DerivedCategory.Plus.ι.map a) at hcn
+    simp only [homChain, Equiv.symm_trans_apply, Equiv.symm_symm,
+      Iso.homCongr_symm, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom, Iso.refl_inv,
+      Category.comp_id]
+    simp only [Adjunction.homEquiv_naturality_left_symm]
+    rw [← Category.assoc (D((v)_!open[ModuleCat.{u + 1} A]).map _),
+      ← Functor.map_comp, ← Functor.map_comp, ← hcn,
+      Functor.map_comp, Functor.map_comp]
+    have h := congrArg
+      (fun t ↦
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction
+          (ModuleCat.{u + 1} A) s).homEquiv H'.obj (F.obj K)
+          (adjF.homEquiv _ K
+            (t ≫ D((v)_!open[ModuleCat.{u + 1} A]).map
+                (R(p)_![ModuleCat.{u + 1} A].map (closedNormalizationAmbient A i H).inv) ≫
+              ((derivedOpenImmersionLowerShriekUpperStarAdjunction
+                (ModuleCat.{u + 1} A) v).homEquiv _ K).symm
+                ((adjP.homEquiv _ _).symm ((adjI.homEquiv H.obj _).symm b)))))
+      hn.symm
+    simpa only [Category.assoc, Adjunction.homEquiv_naturality_left,
+      ObjectProperty.ι_obj] using h
+  · intro H K K' a b
+    simp only [homChain, Equiv.symm_trans_apply, Equiv.symm_symm,
+      Iso.homCongr_symm, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom, Iso.refl_inv,
+      Category.comp_id]
+    simp only [Adjunction.homEquiv_naturality_right_symm,
+      Adjunction.homEquiv_naturality_right, Category.assoc, ← Functor.map_comp]
+    simp only [← Category.assoc, Adjunction.homEquiv_naturality_right_symm]
 
 end AlgebraicGeometry.Etale.ChartAdjointComparison
