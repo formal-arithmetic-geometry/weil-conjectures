@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-completed-free-cell-ordinary-limit",
+ "kind": "statement",
+ "title": "The actual ordinary quotient tower of a finite free cell",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme T, with independent coefficient and scheme universes [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Let B be the published inverse limit of the constant positive uniformizer quotient sheaves [def-weil-completed-integral-coefficients]. Fix any auxiliary finite-field datum D with l distinct from its characteristic, as in [def-weil-integral-reduction-tower]. For every natural rank r and integer degree d, put P=B^r[d] in the complex category of B-module sheaves. The actual ordinary restricted scalar-extension tower and its specified units [def-weil-integral-reduction-tower] form a limit cone with vertex P. Each successor transition is epimorphic in every complex degree. The assertion includes rank zero, empty schemes, and all degrees; no derived-limit assertion is part of the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, finite-free ordinary quotient-limit calculation; Bhatt--Scholze Propositions 3.1.9--3.1.10."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the unit modules of the finite quotient rings to B. Their ring transitions are B-linear by the limit-projection compatibility. Forget modules to presheaves, evaluate at each site object and forget to additive groups. The resulting diagram is the underlying additive diagram of the defining ring inverse limit. These functors reflect limits, so the canonical coefficient-module cone is a limit.",
+   "uses": [
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant quotient map is surjective on sections. Factoring it through the completion shows that every coefficient projection is sectionwise surjective, hence epi. Each successor transition is epi because its composite with the previous coefficient projection is an epimorphic coefficient projection.",
+   "uses": [
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension of the unit is the quotient unit. Construct this isomorphism by transposing the coefficient projection under the ordinary scalar-extension adjunction. The inverse sends one to the unit of that adjunction. The unit-module section equivalence and the two adjunction identities verify the inverse equations and fix the augmentation. Additivity gives preservation of finite products. Apply the finite-power functor, then the single-complex functor in degree d; both preserve the coefficient limit and epimorphisms. The specified tower units agree with the ordinary adjunction units on local tensor generators. These comparisons give a natural isomorphism from the specified tower to the finite-power single-complex coefficient diagram, identifying its cone with the mapped coefficient cone. Transfer the limit and the degreewise epimorphism assertions through this natural isomorphism.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M6",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I; finite coordinates commute with the quotient inverse limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite products of a regular module sheaf over the inverse limit of quotient ring sheaves are limits of the corresponding quotient sheaves",
+   "results": "Ordinary AdicCompletion.pi and finite product equivalences, ModuleCat product limit constructions; no actual pro-etale scalar-extension tower statement.",
+   "date": "2026-10-21",
+   "verdict": "No match for the specified sheaf tower and its augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleMapHomologicalComplex\"",
+   "results": "11 hits in Mathlib.Algebra.Homology.Additive, including the natural single-complex comparison and its component formulas.",
+   "date": "2026-10-21",
+   "verdict": "Use the natural single-complex comparison in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Uu]nit|[Uu]nit.*changeOfRings",
+   "results": "0 matches.",
+   "date": "2026-10-21",
+   "verdict": "Construct the normalized unit comparison from the existing adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite free module over an inverse limit of quotient ring sheaves is the ordinary limit of its scalar extensions to the quotient ring sheaves, with surjective transition maps.",
+   "results": "Eight hits, including SheafOfModules.hasLimit, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.free, SheafOfModules.ιFree and algebraic direct-limit constructions.",
+   "date": "2026-10-21",
+   "verdict": "The sheaf results give generic existence of limits; none identifies the specified quotient-unit cone or proves its degreewise epimorphic transitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedCoefficientFreeResolution",
+  "date": "2026-10-21",
+  "group": "M6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof step 4: the ordinary finite-coordinate quotient-limit calculation, before the surjective Roos triangle.",
+   "via": [
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedFreeCellOrdinaryLimit",
+  "file": "lean/Sheaf/Paper/CompletedFreeCellOrdinaryLimit.lean",
+  "declaration": "WeilConjectures.completedFreeCell_ordinaryLimit",
+  "declarations": [
+   "WeilConjectures.completedFreeCellCone_compatibility",
+   "WeilConjectures.completedFreeCellCone",
+   "WeilConjectures.completedFreeCell_ordinaryLimit"
+  ],
+  "statement": "theorem completedFreeCell_ordinaryLimit (r : ℕ) (d : ℤ) :\n    let P := (CochainComplex.singleFunctor (scalarReductionSource l E T) d).obj\n      (∏ᶜ fun _ : Fin r ↦\n        SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T))\n    Nonempty (IsLimit (completedFreeCellCone l E T D hl P)) ∧\n      ∀ (n : ℕ) (i : ℤ), Epi ((integralTowerTransition l E T D hl P n).f i)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261021T225155-L-3786911",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261021T225155-L-3786911",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

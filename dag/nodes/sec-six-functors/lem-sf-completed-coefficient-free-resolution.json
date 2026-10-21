@@ -27,95 +27,78 @@
  ],
  "proof": [
   {
-   "text": "Write $\\underline R$ for the constant coefficient ring sheaf. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a domain and a principal ideal ring, and $\\varpi\\ne0$. Thus every ideal is finitely generated, so $R$ is Noetherian, and multiplication by $\\varpi^n$ is injective for every $n\\ge1$. The module sequence $0\\to R\\xrightarrow{\\varpi^n}R\\to R/\\varpi^n\\to0$ is exact: its quotient has exactly the kernel $\\varpi^nR$. Apply clause (1) of [lem-weil-pbc-constant-module-section-properties] on each site object. This gives $0\\to\\underline R\\xrightarrow{\\varpi^n}\\underline R\\to R_{n,T}\\to0$; the same clause applied to the surjections $R/\\varpi^{n+1}\\to R/\\varpi^n$ shows that the constant-sheaf transition maps are surjective on sections, hence epimorphisms.",
+   "text": "Sectionwise regularity of the completed uniformizer scalar and divisibility of the kernel of each completion projection give the short exact sequence of completed coefficient modules. Surjectivity of the constant quotient map gives epimorphic projections. Apply the single-complex functor, then the standard cone augmentation theorem for a short exact sequence. This gives the quasi-isomorphism, with its specified restriction to the degree-zero inclusion.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-constant-module-section-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093J, lemma-constant-exact; regular-uniformizer specialization using the cited DVR statement"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with $A=R$ and $I=(\\varpi)$. Its hypotheses hold by step 1, and its $B$ is exactly $B_T$. Flatness makes tensoring the exact sequence of step 1 with $B_T$ exact. The tensor-unit identification sends its first map to multiplication by $\\varpi^n$. The lemma's canonical reduction isomorphism identifies its last term $B_T\\otimes_{\\underline R}R_{n,T}$ with $R_{n,T}$: flatness identifies ordinary and derived tensor, and the reduction sends $b\\otimes\\bar r$ to $q_n(b)\\bar r$, where $q_n:B_T\\to R_{n,T}$ is the specified projection. We obtain $0\\to B_T\\xrightarrow{\\varpi^n}B_T\\xrightarrow{q_n}R_{n,T}\\to0$. Consequently $P_n=[B_T\\xrightarrow{\\varpi^n}B_T]$, in degrees $-1,0$, has zero cohomology in degree $-1$ and $R_{n,T}$ in degree $0$; its actual augmentation $\\epsilon_n$ is a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, lemma-completion-flat, applied to all powers of the principal ideal"
-   }
-  },
-  {
-   "text": "The sheaf $B_T$ is flat as a module over itself because tensoring with it is the identity functor. Thus $P_n$ is a bounded-above complex of flat $B_T$-modules, and [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. The same argument applies to $B_T^{\\oplus r}$ concentrated in any one degree: its tensor functor is a finite direct sum of copies of the identity, so its terms are flat.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-pod-completed-integral-scalar-regular",
+    "lem-sp-completed-integral-projection-divisibility",
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (the cited node gives this statement although its source metadata says 06YS)"
+    "place": "Tags 06YQ, 06YS, 06YY and 06YM; completed scalar calculation as in sites-modules.tex Tags 093J and 093M"
    }
   },
   {
-   "text": "First take $F=B_T^{\\oplus r}$ in degree $0$. Its K-flat model from step 3 computes scalar extension by [lem-pur-derived-change-of-rings], giving $F\\otimes^L_{B_T}R_{n,T}=R_{n,T}^{\\oplus r}$ with the quotient projection on every coordinate. These identifications commute with the quotient transitions because they send $b e_j\\otimes\\bar a$ to $q_n(b)\\bar a\\,e_j$. Regard this tower as a tower of $B_T$-modules. Its transitions are epimorphisms by step 1, so [lem-weil-proetale-surjective-tower-derived-limit] identifies its derived limit with its ordinary limit, with the actual projections. This ordinary limit is $B_T^{\\oplus r}$: a compatible family of $r$-tuples is exactly $r$ compatible families, each in $\\lim_n R_{n,T}=B_T$. This proves the required quotient-tower completeness. For a free cell in degree $d$, the identical calculation shifts the Roos triangle by $[-d]$; shifts preserve distinguished triangles and products, the latter because shifting is an equivalence. Hence its derived limit is $B_T^{\\oplus r}[-d]$, with precisely the shifted quotient projections. The argument includes $r=0$.",
+   "text": "The unit is flat; finite products of flat objects and biproducts of shifted unit terms are flat. The cone and finite free cells are bounded above. The independent-coefficient bounded-flat theorem makes both K-flat.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ, 06YS, 06YY and 06YM; completed scalar calculation as in sites-modules.tex Tags 093J and 093M"
+   }
+  },
+  {
+   "text": "Use the ordinary finite-free quotient calculation, including its actual augmentation and degreewise epimorphic transitions. The surjective-tower theorem makes one minus shift epimorphic degreewise. The ordinary limit is the kernel of this endomorphism. Its short exact sequence becomes a distinguished triangle after localization; preservation of countable products identifies it with the required Roos triangle with the original first arrow.",
+   "uses": [
+    "lem-sf-completed-free-cell-ordinary-limit",
     "lem-weil-proetale-surjective-tower-derived-limit",
     "def-weil-derived-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 3.1.9-3.1.10, pp. 17-18, with 3.2.3(1) and 4.2.8; finite coordinates and shifts of the Roos triangle"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ, 06YS, 06YY and 06YM; completed scalar calculation as in sites-modules.tex Tags 093J and 093M"
    }
   },
   {
-   "text": "For arbitrary, possibly unbounded $M$, choose a representative and a K-flat resolution $Q\\to M$ with flat terms using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $Q\\otimes_{B_T}R_{n,T}$ represents $M\\otimes^L_{B_T}R_{n,T}$ in $D(R_{n,T})$. After restriction this is the same underlying complex of $B_T$-modules. Since $Q$ is K-flat, tensoring with $Q$ preserves every quasi-isomorphism by [lem-weil-pbc-total-tensor-homotopy-cone-signs]. In particular $\\operatorname{Tot}(Q\\otimes_{B_T}P_n)\\xrightarrow{1\\otimes\\epsilon_n}Q\\otimes_{B_T}R_{n,T}$ is a quasi-isomorphism. This identifies the former complex with the scalar restriction of the derived reduction. The composite $Q\\to\\operatorname{Tot}(Q\\otimes P_n)\\to Q\\otimes R_{n,T}$, using inclusion of the degree-zero term of $P_n$, sends $x$ to $x\\otimes1$. It is exactly the canonical scalar-extension map, since $\\epsilon_n$ in degree zero is $q_n$.",
+   "text": "For a flat-term K-flat complex, tensor the coefficient short exact sequence degreewise. Tensor-unit and balanced scalar-extension isomorphisms identify the maps with the actual scalar action and the ordinary adjunction unit. Localization of the short exact sequence is distinguished. The normalized derived adjunction identifies its middle arrow with reductionMap. Choose an unbounded flat-term K-flat resolution of an arbitrary derived object, then transport the triangle along the resulting isomorphism.",
    "uses": [
     "lem-pc-kflat-resolution",
     "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-sf-completed-integral-scalar-action"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YP (lemma-K-flat-quasi-isomorphism); derived change of rings via K-flat models"
-   }
-  },
-  {
-   "text": "With the cone convention of [def-weil-abstract-derived-category], $P_n=\\operatorname{Cone}(\\varpi^n:B_T[0]\\to B_T[0])$. Apply [lem-pc-tensor-mapping-cone-iso] to $Q$ and this map. Tensor-unit identifications give $\\operatorname{Tot}(Q\\otimes P_n)\\cong\\operatorname{Cone}(\\varpi^n:Q\\to Q)$, compatibly with inclusion of the second $Q$. Its cone triangle is distinguished by the definition of the derived triangulation. Substituting the quasi-isomorphism of step 5 into this triangle gives $M\\xrightarrow{\\varpi^n}M\\to\\operatorname{Res}(M\\otimes^L_{B_T}R_{n,T})\\to M[1]$. The inclusion compatibility and the formula $x\\mapsto x\\otimes1$ in step 5 identify the middle arrow with the map induced by $q_n$, not just an unspecified morphism with isomorphic target. No boundedness of $Q$ or $M$ was used.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pc-tensor-mapping-cone-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YM, lemma-derived-tor-exact, and derived.tex remark-double-complex-as-tensor-product-of, cone triangles and derived triangulation; the cited tensor-cone node supplies the explicit inclusion-compatible comparison"
+    "place": "Tags 06YQ, 06YS, 06YY and 06YM; completed scalar calculation as in sites-modules.tex Tags 093J and 093M"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
+  "lem-pod-completed-integral-scalar-regular",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sf-completed-free-cell-ordinary-limit",
   "lem-weil-proetale-surjective-tower-derived-limit",
   "def-weil-derived-limit",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-  "def-weil-abstract-derived-category",
-  "lem-pc-tensor-mapping-cone-iso"
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-sf-completed-integral-scalar-action"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J and 093M; combined with sites-cohomology.tex Tags 06YQ, 06YS, 06YP and 06YM and Bhatt-Scholze Proposition 3.1.10. Specialized supporting calculation for proetale.tex Tag 09C3."
+  "by": "worker",
+  "group": "M6",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 06YS, 06YY, 06YM; sectionwise completed scalar regularity and projection divisibility; ordinary finite-free limit and countable Roos sequence."
  },
  "mathlib_searches": [
   {
@@ -257,15 +240,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-pur-derived-change-of-rings",
   "lem-weil-proetale-surjective-tower-derived-limit",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-  "lem-pc-tensor-mapping-cone-iso"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -303,5 +280,15 @@
   "group": "Q36",
   "result": "pass",
   "note": "Re-delivery of 5c777a52 (RETURN H2). Lean module byte-identical; only change: item stmt_dep lem-weil-integral-scalar-extension-well-defined -> new def node def-sf-completed-integral-scalar-action (existing:true on unchanged Sheaf.Paper.IntegralScalarExtensionWellDefined, declarations integralScalarFiniteConstant/Constant_existsUnique/Constant/ChainAction_existsUnique/ChainAction/DerivedAction). Node statement matches Lean: c_a unique by finite residues, sectionwise c_a·x chain action unique, derived action = localization preimage; real data, independent universes t,u, no extra hypotheses; statement verbatim except leading noncomputable (ignored by the reader); same ownership pattern as def-weil-pbc-integer-quotient-inclusions. Mechanical finding on lem-weil-derived-scalar-extension-restriction-adjunction: PASS on this point, reductionMap = .choose.unit of the theorem's normalized adjunction (genuine constructed object, pinned on K-flat representatives). Item maths rechecked: cone in degrees -1,0, unique augmentation via inr with actual q_n, QuasiIso + K-flat, free cells all r (incl. 0) and all d complete via canonical Roos triangle, triangle for all unbounded M, n+1 indexing. Item still split/unstated in side-live, no repair note, not dropped. No compile (no file changed). Advisories: new node could also cite def-weil-integral-reduction-tower; scalarReductionDerivedExtension is also owned by def-weil-integral-derived-reduction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261021T225155-L-3786911",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
