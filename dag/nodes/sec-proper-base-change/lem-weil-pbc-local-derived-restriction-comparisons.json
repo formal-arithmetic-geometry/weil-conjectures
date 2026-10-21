@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-local-derived-restriction-comparisons",
  "kind": "statement",
  "title": "Comparison of derived local restriction with exact inverse image and slice restriction",
- "statement": "Let $g:S\\to T$ be a morphism of schemes [def-pc-scheme], $R$ a sheaf of commutative rings on $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and $U$ an object of $S_{\\mathrm{proet}}$. Use the actual inverse-image ring $R'=g^{-1}R$ [def-weil-proetale-inverse-image] and its restriction $R'_U$ to the slice over $U$ [def-pur-localized-ringed-site]. Write $F_g:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$ for module inverse image without extension to a different coefficient ring, and $G_U:\\operatorname{Mod}(R')\\to\\operatorname{Mod}(R'_U)$ for slice restriction. These are exact. For $K\\in D(\\operatorname{Mod}(R))$ [def-weil-abstract-derived-category], choose the localization representative $C$ of $DF_g(K)$ and define $L_{g,U}(K)=Q_U(G_U C)$ as in [def-weil-pbc-ringed-site-derived-restriction]. There is a comparison\n$$DG_U(DF_gK)\\xrightarrow{\\sim}L_{g,U}(K)$$\nobtained from the localization representative isomorphism and the exact-functor localization factor. It transports morphisms and isomorphisms of $K$ functorially and is compatible with the natural isomorphisms\n$$G_UF_gH^q(K)\\xrightarrow{\\sim}H^q(L_{g,U}K),\\qquad L_{g,U}(M[r])\\xrightarrow{\\sim}(G_UF_gM)[r].$$\nHere $q,r\\in\\mathbf Z$, $M$ is any $R$-module sheaf, and $M[r]$ is its degree-zero complex shifted by $r$. No immersion, flatness, boundedness, or equality between $g^{-1}R$ and another scheme's completed coefficient ring is assumed.",
+ "statement": "Let $g:S\\to T$ be a morphism of schemes [def-pc-scheme], $R$ a sheaf of commutative rings on $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and $U$ an object of $S_{\\mathrm{proet}}$. Use the actual inverse-image ring $R'=g^{-1}R$ [def-weil-proetale-inverse-image] and its restriction $R'_U$ to the slice over $U$ [def-pur-localized-ringed-site]. Write $F_g:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$ for module inverse image without extension to a different coefficient ring, and $G_U:\\operatorname{Mod}(R')\\to\\operatorname{Mod}(R'_U)$ for slice restriction. These are exact. For $K\\in D(\\operatorname{Mod}(R))$ [def-weil-abstract-derived-category], choose the localization representative $C$ of $DF_g(K)$ and define $L_{g,U}(K)=Q_U(G_U C)$ as in [def-weil-pbc-ringed-site-derived-restriction]. There is a comparison\n$$DG_U(DF_gK)\\xrightarrow{\\sim}L_{g,U}(K)$$\nobtained from the localization representative isomorphism and the exact-functor localization factor [lem-weil-pbc-exact-functor-derived-factorization], which also defines $DF_g$ and $DG_U$. It transports morphisms and isomorphisms of $K$ functorially and is compatible with the natural isomorphisms\n$$G_UF_gH^q(K)\\xrightarrow{\\sim}H^q(L_{g,U}K),\\qquad L_{g,U}(M[r])\\xrightarrow{\\sim}(G_UF_gM)[r].$$\nHere $q,r\\in\\mathbf Z$, $M$ is any $R$-module sheaf, and $M[r]$ is its degree-zero complex shifted by $r$. No immersion, flatness, boundedness, or equality between $g^{-1}R$ and another scheme's completed coefficient ring is assumed.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 015F (lemma-right-derived-exact-functor: exact functors on unbounded derived categories), applied to actual inverse-image and localized module restriction; Bhatt–Scholze Proposition 6.8.11(3), implicit local cohomology comparison. The representative normalization is the DAG ringed-site-derived-restriction convention."
@@ -14,12 +14,119 @@
   "def-pur-localized-ringed-site",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "def-weil-pbc-ringed-site-derived-restriction",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=F_g$ and $G=G_U$. On underlying abelian sheaves, $F$ is naturally isomorphic to the exact abelian inverse image: use [lem-weil-pbc-proetale-module-inverse-image-comparison] and [lem-weil-pbc-left-exact-site-inverse-image-tensor], with the base-change functor defining $g^{-1}$ in [def-weil-proetale-inverse-image]. The forgetful functors from modules are faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. They reflect exact sequences: by [lem-sp-exact-functor-preserves-homology] the underlying homology of a sequence is the homology of its underlying sequence; a module with zero underlying abelian sheaf is zero, since faithfulness makes its identity zero. Applying this to the image under $F$ of a short exact sequence proves exactness of $F$. Additivity follows by forgetting addition of maps and using faithfulness. This uses the module action over the actual ring $g^{-1}R$, with no extension to a different ring.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-inverse-image-comparison",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 (lemma-pullback-module), 03DA (lemma-abelian); homology.tex Tag 010N (lemma-exact-functor)."
+   }
+  },
+  {
+   "text": "On the ringed site $(S_{\\mathrm{proet}},R')$, [lem-weil-pbc-finite-type-restriction-exact] says that restriction of $R'$-module sheaves to $R'_U$-module sheaves on the slice over any object $U$ preserves finite limits and finite colimits; the site is small because the pro-etale site is taken on its chosen small skeleton, as in the statement's pro-etale site convention. A functor between abelian categories preserving finite limits and finite colimits is additive (Tag 010N (1)), so $G$ is exact as a functor of module sheaves, not merely of abelian sheaves. Its source and target rings and its sectionwise formula are precisely those of [def-pur-localized-ringed-site]. No assumption that $U$ is an open subscheme or immersion is introduced.",
+   "uses": [
+    "lem-weil-pbc-finite-type-restriction-exact",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site), localization morphism with identity structure map; homology.tex Tag 010N (lemma-exact-functor) (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] separately to $F$ and $G$. Write $C(F),C(G)$ for their termwise complex functors, $Q_T,Q_S,Q_U$ for localization, and write their natural factorization isomorphisms as $\\varphi^F_A:DF(Q_TA)\\xrightarrow{\\sim}Q_SC(F)A$ and $\\varphi^G_B:DG(Q_SB)\\xrightarrow{\\sim}Q_UC(G)B$. The factors commute with every integer shift. In particular no boundedness or resolution hypothesis is needed for either factor.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4); exact-functor termwise factorization."
+   }
+  },
+  {
+   "text": "For $X=DF(K)$ let $C$ be the chosen localization representative in [def-weil-pbc-ringed-site-derived-restriction], with its representative isomorphism $\\epsilon_X:Q_SC\\xrightarrow{\\sim}X$. By definition $L(K)=Q_UC(G)C$. Define, in functional order,\n$$\\alpha_K=\\varphi^G_C\\circ DG(\\epsilon_X^{-1}):DG(X)\\xrightarrow{\\sim}L(K).$$\nBoth arrows are isomorphisms, so this proves the asserted comparison. For $a:K\\to K'$ define\n$$L(a)=\\alpha_{K'}\\circ DG(DF(a))\\circ\\alpha_K^{-1}.$$\nCancellation of $\\alpha_K^{-1}\\alpha_K$ proves $L(1)=1$ and $L(ba)=L(b)L(a)$. This also gives $L(a)\\alpha_K=\\alpha_{K'}DG(DF(a))$ and $L(a^{-1})=L(a)^{-1}$ whenever $a$ is invertible. Thus an objectwise choice of representative need not be a functor on complexes: these formulas supply the functor on derived objects.",
+   "uses": [
+    "def-weil-pbc-ringed-site-derived-restriction",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); explicit conjugation using the localization representative convention."
+   }
+  },
+  {
+   "text": "The construction also compares with every other representative. If $b:Q_SB\\xrightarrow{\\sim}X$, set $\\lambda_{B,b}=\\varphi^G_B\\circ DG(b^{-1})$. The comparison from the chosen local object to $Q_UC(G)B$ is $\\lambda_{B,b}\\alpha_K^{-1}$. Comparisons for three representatives compose because the middle $\\lambda^{-1}\\lambda$ cancels. If $h:B\\to B'$ is a chain map and $t:X\\to X'$ satisfies $t b=b'Q_S(h)$, naturality of $\\varphi^G$ gives\n$$Q_UC(G)(h)\\lambda_{B,b}=\\lambda_{B',b'}DG(t).$$\nIndeed substitute $Q_S(h)b^{-1}=(b')^{-1}t$ in that naturality equation. The same equation holds after inverting quasi-isomorphisms, since $C(G)$ preserves them. The localization universal property therefore gives the corresponding equation for arbitrary derived morphisms. This identifies the transported functor with termwise restriction on any representative, including the maps.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); localization at quasi-isomorphisms, explicit factorization naturality calculation."
+   }
+  },
+  {
+   "text": "For an exact functor $E$, [lem-weil-pbc-exact-functor-complex-cohomology] gives natural isomorphisms $c^q_{E,A}:H^q(C(E)A)\\xrightarrow{\\sim}E H^q(A)$, induced by its maps on kernels and images. By [def-weil-abstract-derived-category], both sides factor through localization: the first through $DE$ and $\\varphi^E$, and the second through $H^q$. Thus the inverse of $c^q$, composed with the inverse cohomology of $\\varphi^E$, gives\n$$h^q_{E,Y}:E H^q(Y)\\xrightarrow{\\sim}H^q(DE(Y)).$$\nThis formula on $Y=QA$ extends to all derived objects and maps: naturality holds on chain maps by naturality of $c^q$ and $\\varphi^E$, on inverses of quasi-isomorphisms by cancellation, and hence on localization morphisms. Apply it to $F$ and $G$. The required local comparison is explicitly\n$$G F H^q(K)\\xrightarrow{G(h^q_{F,K})}G H^q(DFK)\\xrightarrow{h^q_{G,DFK}}H^q(DGDFK)\\xrightarrow{H^q(\\alpha_K)}H^q(LK).$$\nNaturality of the first two arrows and the equation for $L(a)$ in step 4 prove naturality of this composite. Step 5 identifies it on any representative with the kernel/image comparison for termwise $GF$, so it is compatible with $\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), kernel and image comparison; derived.tex Tag 015F and the localization definition."
+   }
+  },
+  {
+   "text": "For $M[0]$, termwise application gives the degree-zero complexes $F(M)[0]$ and $GF(M)[0]$: an additive exact functor sends the zero object and zero differentials to zero. Factorization therefore gives $DF(M[0])\\cong F(M)[0]$ and $DG(F(M)[0])\\cong GF(M)[0]$. Combine these with the integer-shift isomorphisms of [lem-weil-pbc-exact-functor-derived-factorization] to obtain\n$$DGDF(M[r])\\xrightarrow{\\sim}(GF M)[r].$$\nComposing with $\\alpha_{M[r]}^{-1}$ gives the asserted $L(M[r])\\cong(GFM)[r]$. The shift/factorization compatibility in that cited statement makes this the comparison computed on $M[0][r]$: in degree $n$ the term is $GF(M[0]^{n+r})$ and the differential is $(-1)^rGF(d^{n+r})$, the same on both sides. The cohomology comparison of step 6 uses those same kernels and image projections. On this single complex it is the identity on $GFM$ in degree $-r$, and the unique map between zero objects in other degrees. Step 5 transports these equalities to the chosen representatives. Consequently the single/shift and cohomology comparisons agree with $\\alpha$ and with maps of $M$, for positive, zero and negative $r$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); signed shifts of complexes and degree-zero complexes, explicit calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-module-inverse-image-comparison",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), with explicit representative-conjugation, cohomology descent and shifted-single calculations; sites-modules.tex Tags 03D2, 03DA, 04IX and homology.tex Tag 010N supply the ingredients."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +162,45 @@
    "results": "{\"t\": \"2026-10-21T06:49:29Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison between derived pullback followed by localized module restriction and restriction of a derived representative, over the actual inverse image coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.res_apply\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"ModuleCat.Tilde.openToLocalization\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"ModuleCat.Tilde.res_const\"], \"digest\": \"f5b3db40b99ff957\"}",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib exact-functor and overFunctor constructions are ingredients, but do not state the comparison with this project local derived representative and actual pro-etale inverse-image module functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors on unbounded derived categories commute with cohomology and shifts and compare with a chosen representative followed by slice module restriction",
+   "results": "{\"t\": \"2026-10-21T08:13:17Z\", \"tool\": \"leanfinder\", \"query\": \"Exact functors on unbounded derived categories commute with cohomology and shifts and compare with a chosen representative followed by slice module restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\"], \"digest\": \"9efdeefedcba71f1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: exact-functor factors and shifts are existing ingredients, not the actual-ring pro-etale functor followed by the project canonical representative restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|objObjPreimageIso|mapDerivedCategorySingleFunctor|overFunctor",
+   "results": "{\"t\": \"2026-10-21T08:13:44Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryHomologyFunctorIso|objObjPreimageIso|mapDerivedCategorySingleFunctor|overFunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\"], \"digest\": \"be78e0fa17f391e3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: exact-functor factors and shifts are existing ingredients, not the actual-ring pro-etale functor followed by the project canonical representative restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor induces a functor on derived categories with natural homology and shift comparisons",
+   "results": "{\"t\": \"2026-10-21T08:13:44Z\", \"tool\": \"leansearch\", \"query\": \"An exact additive functor induces a functor on derived categories with natural homology and shift comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.mapExtAddHom.congr_simp\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapExtAddHom_apply\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"4d382420189f9b70\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: exact-functor factors and shifts are existing ingredients, not the actual-ring pro-etale functor followed by the project canonical representative restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "{\"t\": \"2026-10-21T08:13:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\"], \"digest\": \"3c19c5efb5a73fc2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: exact-functor factors and shifts are existing ingredients, not the actual-ring pro-etale functor followed by the project canonical representative restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived sheaf of modules to a slice site over an object is naturally isomorphic to exact restriction applied on complexes",
+   "results": "{\"t\": \"2026-10-21T08:14:43Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a derived sheaf of modules to a slice site over an object is naturally isomorphic to exact restriction applied on complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.SheafedSpace.restrictTopIso_hom\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app\"], \"digest\": \"57cb784efe68bb8e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: exact-functor factors and shifts are existing ingredients, not the actual-ring pro-etale functor followed by the project canonical representative restriction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -79,5 +221,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-local-derived-restriction-comparisons",
+  "worker": "stage1",
+  "group": "Q09",
+  "summary": "Proved the actual-inverse-image and slice functors exact using existing module/abelian comparison and restriction nodes; constructed the representative comparison explicitly and supplied formulas for morphisms, representative changes, cohomology and shifted singles. No new nodes, no statement change, no coefficient-ring identification or boundedness assumptions.",
+  "blueprint": "Realizes the local restriction/cohomology comparison needed by integral stratified perfect characterization, under the inherited thm-weil-pbc-finite-extension integral-lattice route. The main-20261015 ancestor statement has no proof paragraph; the inherited from.place refers to the earlier integral-lattice proof, not a new assertion in the current snapshot.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ef6a5025e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ef6a5025e (reviewer sub-agent of L); spot-checked: I read the item, all 12 cited statements and the cited sources (derived.tex 015F; sites-modules 03D2, 03DA, 03DH/04IX; homology 010N). No SGA source is cited. There are no new nodes, no repair note and nothing on the dropped list; the item is still unsplit in live and side-live. The statement is true and has no added hypotheses: no immersion, flatness or boundedness, and the coefficient ring stays the actual g^{-1}R. Checks by step: step 1 gets exactness of F_g from the abelian comparison, the exact abelian inverse image, and the faithful exact forgetful functor reflecting homology, which is correct. In step 4, alpha = phi^G_C ∘ DG(eps^{-1}) has the right directions, and the conjugation formula for L(a) is valid. In step 5 I recomputed the naturality identity Q_U C(G)(h) lambda_{B,b} = lambda_{B',b'} DG(t). Steps 6 and 7 compose the cohomology and shift comparisons correctly, with sign (-1)^r agreeing with tau and r checked for both signs. Edge cases checked: zero ring, empty S, unbounded K. Two repairs, written into the fixed item JSON. (1) C7/C8: step 2 used the off-unit tool lem-pur-site-restriction-module-adjunction-exact, and its tool_uses reason was false. lem-weil-pbc-finite-type-restriction-exact, in the same unit sk-thm-properbasechange and stage-3 reviewed, states exactly this exactness for any ring sheaf on a small site. Step 2 now cites it, with additivity from 010N(1); tool_uses is [] and proof_deps is updated. (2) B3: the statement used DF_g, DG_U and 'the exact-functor localization factor' with no citation. I added lem-weil-pbc-exact-functor-derived-factorization, a Mathlib leaf, to the statement text and stmt_deps; neither citation creates a cycle. Advisory only: lem-sf-site-perfect-derived-restriction-iso already gives the G-part of alpha, and def-sfb-proetale-ring-derived-inverse-image defines F_g and DF_g equivalently; stage 2 should reuse them.; 1 file(s) fixed by the reviewer"
  }
 }

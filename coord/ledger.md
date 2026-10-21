@@ -21414,3 +21414,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q152/lem-trf-isomorphism-multiplication-cone-descent (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q155/lem-pur-clopen-ringed-module-gluing (reviewer FIX; first push; new nodes: 0)
 - 08:53 L: merged deliver/Q106/lem-pur-injective-tower-roos-shifts (reviewer PASS; first push; new nodes: 0)
+- 08:53 L: merged deliver/Q09/lem-weil-pbc-local-derived-restriction-comparisons (reviewer FIX; first push; new nodes: 0)
