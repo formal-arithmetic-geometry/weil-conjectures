@@ -20979,3 +20979,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/NQ/lem-pe-endomorphism-fibre-coordinate-calculus (reviewer PASS; first push; new nodes: 0)
 - 08:10 L: merged deliver/Q60/lem-sfb-admissible-tensor-constructibility (reviewer FIX; after a return; new nodes: 3)
 - 08:10 L: merged deliver/Q19/lem-amb-tate-root-projection-reduction (reviewer FIX; first push; new nodes: 0)
+- 08:10 L: merged deliver/Q23/lem-sfb-qcqs-proper-localizing-coproducts (reviewer PASS; first push; new nodes: 1)

@@ -14,11 +14,106 @@
   "def-weil-size-convention",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T=X,Y$, the abelian sheaf category on the chosen small pro-étale site is closed symmetric monoidal Grothendieck abelian by [lem-weil-pbc-sheaf-tensor-closed], applied to $\\Ab$ with its usual tensor product. Its tensor is additive. The module-object theorem [lem-sfb-modobj-grothendieck] therefore makes $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck abelian. The termwise coproduct theorem [lem-kun-grothendieck-derived-coproducts] supplies all the ambient derived coproducts in the fixed universe, including the empty coproduct.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: ordinary ambient coproducts"
+   }
+  },
+  {
+   "text": "Coproducts in $\\mathcal A_T$ are exact: they are filtered colimits of finite direct sums, and filtered colimits are exact by the Grothendieck property established in Step 1. Consequently kernels, images and cokernels in a termwise sum of complexes are the sums of the corresponding kernels, images and cokernels. Thus $H^n(\\bigoplus_t C_t)=\\bigoplus_tH^n(C_t)$, naturally with the specified coprojections. The kernel/cokernel formulas of [def-kun-truncations] similarly identify $\\bigoplus_t\\tau_{\\geq a}C_t$ with $\\tau_{\\geq a}(\\bigoplus_t C_t)$ and identify the sum of the canonical truncation maps with the canonical truncation map of the sum. The termwise-derived-coproduct theorem makes these identities valid in $D_T$ for unbounded families.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: cohomology and good truncations of ambient sums"
+   }
+  },
+  {
+   "text": "Properness makes $f$ finite type, hence quasi-compact by [def-weil-finite-type-morphism], and separated, hence quasi-separated by [lem-pc-separated-quasi-separated]. For every integer $a$, [lem-sfb-adic-proper-bounded-below-coproducts] therefore applies to the family $(\\tau_{\\geq a}L_t)_t$: all its terms have zero cohomology below the SAME $a$. It gives an invertible canonical comparison\n$$\\beta_a:\\bigoplus_tRf_*\\tau_{\\geq a}L_t\\longrightarrow Rf_*\\bigl(\\bigoplus_t\\tau_{\\geq a}L_t\\bigr).$$\nThat theorem accepts any commutative condensed coefficient ring and any small indexing type, so it applies to every coefficient in the statement, including the empty family.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-sfb-adic-proper-bounded-below-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1); passage to arbitrary coproducts by finite partial sums"
+   }
+  },
+  {
+   "text": "Choose $c$ from [lem-sfb-qcqs-proper-hull-tail-bound]. Fix an output degree $n$ and set $a=n-c$. For every $K\\in\\mathcal L_X$, use the canonical triangle\n$$\\tau_{<a}K\\longrightarrow K\\xrightarrow{\\pi_K}\\tau_{\\geq a}K\\longrightarrow(\\tau_{<a}K)[1]$$\nof the standard t-structure. The actual total right derived functor is triangulated by [lem-pc-right-derived-functor-triangulated]. In its image triangle the tail estimate kills $H^n$ AND $H^{n+1}$ of the first term, since both degrees are at least $a+c=n$. Exactness of the cohomology sequence therefore gives an isomorphism $H^n(Rf_*\\pi_K)$. This applies to each $L_t$ and to $K=\\bigoplus_tL_t$, because the defining ambient localizing closure contains that sum. It does not require $\\tau_{\\geq a}K$ or $\\tau_{<a}K$ to belong to the hull.",
+   "uses": [
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: uniform tail removal before applying direct-sum continuity"
+   }
+  },
+  {
+   "text": "Write $\\beta:\\bigoplus_tRf_*L_t\\to Rf_*(\\bigoplus_tL_t)$ for the required comparison. The square with top row $\\beta$, bottom row $\\beta_a$, and vertical arrows induced by the $\\pi_{L_t}$ commutes: precompose either composite with the $t$-th coprojection and, after the Step 2 identification, both become $Rf_*(\\pi_{\\bigoplus_s L_s}\\circ\\iota_t)=Rf_*((\\tau_{\\geq a}\\iota_t)\\circ\\pi_{L_t})$, using naturality of $\\pi$. Step 2 identifies its lower right vertex with $Rf_*\\tau_{\\geq a}(\\bigoplus_tL_t)$ and its right vertical map with $Rf_*\\pi_{\\bigoplus_tL_t}$. After $H^n$, Step 4 makes the right vertical map invertible; Step 2 and the individual instances of Step 4 make the left vertical map invertible. Step 3 makes the bottom map invertible. The commutative square now makes $H^n(\\beta)$ invertible. As $n$ was arbitrary, [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $\\beta$ is an isomorphism in the ambient $D_Y$.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: natural coproduct comparison detected degree by degree"
+   }
+  },
+  {
+   "text": "For $I=\\varnothing$, the ambient sum is zero and the triangulated $Rf_*$ sends zero to zero, so the same canonical comparison is invertible. Each degree used its own cutoff $a=n-c$; the original family was never assigned a common cohomological bound. All constructions used ordinary ambient sums and good truncations, so no completeness assertion about the sum was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: empty family and absence of boundedness/completeness assumptions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-separated-quasi-separated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-adic-proper-bounded-below-coproducts",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-qcqs-proper-hull-tail-bound",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "sk-def-localizing-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), first paragraph. Explicit uniform-tail/continuity argument; the all-coefficient qcqs geometric tail estimate is isolated as its own unsplit statement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +156,52 @@
    "results": "Condensed.instAB5CondensedMod; Condensed.profiniteSolid; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; Condensed.profiniteSolidification; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; Condensed.profiniteSolidCounit; Condensed.hasExactColimitsOfShape; LightCondensed.lanLightCondSet",
    "date": "2026-10-21",
    "verdict": "no match: AB4/AB5 for condensed modules, existence of scheme coproducts and the universal definition of a right derived functor do not give coproduct preservation by this restricted proper pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived pushforward preserves arbitrary ambient coproducts on the localizing hull of constructible finite Tor complexes over a qcqs base",
+   "results": "8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme; Condensed.instAB4CondensedMod; AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty; Condensed.instAB5CondensedMod; CategoryTheory.Functor.isHomological_of_localization; AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(coproduct|direct.sum)|preserves.*coproduct",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/DirectSum/Module.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived proper direct image commutes with arbitrary direct sums on the ambient localizing hull of constructible complexes",
+   "results": "8 hits: CategoryTheory.Functor.IsRightDerivedFunctor.recOn; CategoryTheory.Functor.IsRightDerivedFunctor.mk; CategoryTheory.Functor.IsRightDerivedFunctor; CategoryTheory.Functor.IsRightDerivedFunctor.rec; CategoryTheory.Functor.rightDerivedNatTrans_fac; CategoryTheory.Functor.totalRightDerived; CategoryTheory.Functor.HasRightDerivedFunctor.mk; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]roper|[Pp]ushforward|[Ll]ocalizing",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/Etale.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; directory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coproduct preservation by total right derived direct image of a proper qcqs scheme morphism with condensed l adic coefficient rings on Loc Dctf",
+   "results": "8 hits: Condensed.instAB5CondensedMod; Condensed.profiniteSolid; AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteWalkingPairSpec; AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite; AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj; AlgebraicGeometry.preservesColimit_Γ; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-21",
+   "verdict": "no match: scheme coproducts, AB4/AB5 for condensed modules and universal right-derived-functor constructions do not assert the restricted proper direct-image comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-open-boundary-vanishing",
@@ -83,5 +220,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-proper-localizing-coproducts",
+  "worker": "stage1",
+  "summary": "Kept the exact qcqs/all-coefficient statement and ambient ordinary derived-category conventions. Separated bounded-below continuity (existing HRS Lemma 5.3 input) from the new genuinely geometric uniform lower-tail estimate, then wrote the canonical square and degreewise argument explicitly. One new statement-only node; no Lean edits or compilation. No finite-type-over-field result is applied outside its hypotheses.",
+  "blueprint": "Refinement proof (2), first paragraph: direct-sum preservation on the ambient localizing hull; uniform lower-tail amplitude input needed to reduce unbounded families to bounded-below continuity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic closed monoidal Grothendieck sheaf theorem used to verify the module-object theorem, independent of the compactification argument."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic Grothendieck property of internal module objects, needed for ordinary ambient derived sums."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic theorem identifying ordinary derived coproducts with termwise sums, including unbounded families."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme lemma verifying the quasi-separated hypothesis of bounded-below continuity."
+   },
+   {
+    "node": "lem-sfb-adic-proper-bounded-below-coproducts",
+    "why": "The general qcqs ordinary condensed-coefficient continuity theorem; no node of the compactification unit replaces this sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic exactness of the actual K-injective total right derived functor on truncation triangles."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence used for removal of the lower tail."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic detection of isomorphisms by all cohomology objects in an ordinary unbounded derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-adic-proper-bounded-below-coproducts",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-aa115fe3d",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-aa115fe3d (reviewer sub-agent of L); spot-checked: PASS, no fixes. Checks before reading the maths: the item is not dropped, has no repair note, and is still unsplit live (an O4 creation), so the delivery is not superseded. It is one commit, the item statement is byte-identical to live, the only added stmt_dep is the quasi-compact-scheme notion it uses, there is no SGA, and there is no cycle (its only citer is open-boundary-vanishing). Route: in the blueprint, refinement (2) gets sum preservation from sk-prop-proper-image-localizing per coefficient, but the DAG versions of those nodes all assume the field setting (sk-def-sfb-dc-setting), so they cannot serve the qcqs item. The delivered route mirrors the already-accepted field-case split lem-sfb-adic-proper-localizing-coproducts. Step 1: the tensor-closed sheaf theorem with Ab, then modobj-grothendieck, then termwise derived coproducts; each cited statement says this. Step 2: AB5 makes sums exact, so H^n and the τ≥a formulas commute with sums; correctly marked elementary. Step 3: I checked every hypothesis of lem-sfb-adic-proper-bounded-below-coproducts: a qcqs map via finite type plus separated⇒qs, any condensed ring, the common bound a, and the empty I. Step 4: the off-by-one is right; with a=n−c the tail vanishes in degrees n and n+1, so H^n(Rf_*π_K) is an isomorphism. The triangle, triangulated Rf_* and long exact sequence cites are exact, and the hull is closed under sums. Step 5: the square commutes on coprojections by naturality of π; the left vertical, right vertical and bottom maps are isomorphisms after H^n; iso detection by H^n concludes. Step 6: the empty family is handled. New node lem-sfb-qcqs-proper-hull-tail-bound is statement-only and self-contained, with correct blueprint from/via. It is not a restatement of the item: it makes no coproduct claim. Tests: f=id gives c=0; the empty case is trivial. The finite-Λ case holds: hull objects have classical cohomology, fibre dimension is bounded over a qc base, and BS Lemma 5.4.6 (p. 39) and Q60 lem-sfb-finite-proper-classical-amplitude give the bound. The adic case is plausible and matches the existing field versions lem-sfb-adic-proper-truncation-bound and det-sf-comp-continuous-algcl-lower-tail. It generalizes those nodes and is not a duplicate. Maintainer note: when this node is split, reuse finite-proper-classical-amplitude and Q38 lem-sfb-proper-geometric-fibre-torsion-bound for the torsion case. The generic tool_uses are accepted."
  }
 }
