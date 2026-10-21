@@ -13,10 +13,10 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.Algebra.Module.FinitePresentation
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Noetherian.Basic
 
@@ -64,6 +64,86 @@ instance localIntegralSliceHasDerivedCategory (S : Scheme.{u}) {R : Type (u + 1)
     HasDerivedCategory (SheafOfModules.{u + 1}
       (((adicLisseForget S).obj (adicLisseCompletedRing S I)).over U)) :=
   HasDerivedCategory.standard _
+
+set_option backward.isDefEq.respectTransparency false in
+-- Exactness on the original site, with independent object and morphism universes.
+private theorem localIntegral_constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
+    PreservesFiniteLimits (adicLisseConstantModules T A) ∧
+      PreservesFiniteColimits (adicLisseConstantModules T A) := by
+  let P : ModuleCat.{u + 1} A ⥤
+      PresheafOfModules.{u + 1} ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
+    siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
+      PresheafOfModules.pushforward₀
+        ((Functor.const T.ProEt).obj (Discrete.mk (ULift.up ())))
+        ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))
+  have : PreservesFiniteLimits P := by
+    constructor
+    intro K _ _
+    constructor
+    intro F
+    constructor
+    intro c hc
+    exact ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _ (fun X ↦ hc)⟩
+  have : PreservesFiniteColimits P := by
+    constructor
+    intro K _ _
+    constructor
+    intro F
+    constructor
+    intro c hc
+    exact ⟨PresheafOfModules.evaluationJointlyReflectsColimits _ _ (fun X ↦ hc)⟩
+  exact ⟨comp_preservesFiniteLimits P
+    (PresheafOfModules.sheafification (adicLisseConstantUnit T A)),
+    comp_preservesFiniteColimits P
+      (PresheafOfModules.sheafification (adicLisseConstantUnit T A))⟩
+
+-- Transport the canonical finite-ring tower comparison through identity components.
+private theorem localIntegral_coefficient_iso
+    (X T : Scheme.{u}) (f : X ⟶ T) {A : Type (u + 1)} [CommRing A]
+    (I : Ideal A) (hfinite : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :
+    ∃ β : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
+        (adicLisseCompletedRing T I) ⟶ adicLisseCompletedRing X I,
+      IsIso β ∧ ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem X I) (op n) =
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          (limit.π (adicLisseRingSystem T I) (op n)) ≫
+            proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
+              (CommRingCat.of (A ⧸ I ^ (n + 1))) := by
+  let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} := Functor.ofOpSequence
+    (X := fun n ↦ CommRingCat.of (A ⧸ I ^ (n + 1)))
+    (fun n ↦ CommRingCat.ofHom (Ideal.Quotient.factorPowSucc I (n + 1)))
+  let e (Z : Scheme.{u}) : adicLisseRingSystem Z I ≅ proEtaleCoefficientTower Z Q := by
+    let a : adicLisseRingSystem Z I ⟶ proEtaleCoefficientTower Z Q :=
+      NatTrans.ofOpSequence (fun n ↦ 𝟙 _) (fun n ↦ by
+        simp [adicLisseRingSystem, proEtaleCoefficientTower, Q])
+    have (n : ℕᵒᵖ) : IsIso (a.app n) := inferInstanceAs (IsIso (𝟙 _))
+    have : IsIso a := NatIso.isIso_of_isIso_app a
+    exact asIso a
+  have (n : ℕᵒᵖ) : Finite (Q.obj n) := hfinite n.unop
+  have : IsIso (proEtaleProfiniteComparison f Q) :=
+    (proEtale_profinite_coefficient_inverse_image Q).2.1 X T f
+  let F := proEtaleSheafInverseImage f CommRingCat.{u + 1}
+  let β := F.map (lim.mapIso (e T)).hom ≫ proEtaleProfiniteComparison f Q ≫
+    (lim.mapIso (e X)).inv
+  refine ⟨β, inferInstance, ?_⟩
+  intro n
+  dsimp only [β]
+  simp only [Category.assoc, Functor.mapIso_inv]
+  change F.map (lim.mapIso (e T)).hom ≫ proEtaleProfiniteComparison f Q ≫
+    limMap (e X).inv ≫ limit.π (adicLisseRingSystem X I) (op n) = _
+  rw [limMap_π]
+  rw [← Category.assoc (proEtaleProfiniteComparison f Q)]
+  rw [(proEtale_profinite_coefficient_inverse_image Q).2.2.1 X T f (op n)]
+  have hinv : (e X).inv.app (op n) = 𝟙 _ := by
+    simp [e]
+    rfl
+  simp only [hinv, Category.comp_id]
+  change F.map (limMap (e T).hom) ≫
+    F.map (limit.π (proEtaleCoefficientTower T Q) (op n)) ≫
+      proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
+        (CommRingCat.of (A ⧸ I ^ (n + 1))) = _
+  rw [← Category.assoc, ← F.map_comp, limMap_π]
+  have hhom : (e T).hom.app (op n) = 𝟙 _ := rfl
+  rw [hhom, Category.comp_id]
 
 /-- The completed coefficient identification and the cohomology of every local perfect
 scalar model, with the comparison induced by the specified model isomorphism.
@@ -140,6 +220,49 @@ theorem local_integral_perfect_model_cohomology
             (DerivedCategory.homologyFunctorFactors _ q).hom.app _ ≫
             ((localIntegralScalarRealization S (Padic.coefficientExtensionIdeal l E 1)
               U).mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app P) := by
-  sorry
+  -- Only the scalar ring is required to be Noetherian.
+  let R := Padic.coefficientExtensionIntegers l E
+  let I := Padic.coefficientExtensionIdeal l E 1
+  have hR := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  let : IsPrincipalIdealRing R := hR.2.2.2.2.2.2.2.2.1
+  let : IsNoetherianRing R := inferInstance
+  obtain ⟨β, hβ, hπ⟩ := localIntegral_coefficient_iso S X g I (by
+    intro n
+    simpa only [I, Padic.coefficientExtensionRing, Padic.coefficientExtensionIdeal, pow_one] using
+      Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.le_add_left 1 n))
+  let := hβ
+  -- The normalized comparison works for these finite quotients without an immersion.
+  let c := asIso β
+  refine ⟨c, hπ, ?_⟩
+  intro U
+  let := CompletedConstantReduction.constant_additive S R
+  let := (localIntegral_constant_exact S R).1
+  let := (localIntegral_constant_exact S R).2
+  have he := completed_constant_algebra_flat_quotients S I _ (Iso.refl _)
+    (CompletedConstantReduction.base S I) (by
+      intro n
+      simpa only [Iso.refl_inv, Category.id_comp, CompletedConstantReduction.base] using
+        (CompletedConstantReduction.base_exists S I).choose_spec.1 n)
+  let : PreservesFiniteLimits (completedAdicChange S (CompletedConstantReduction.base S I)) :=
+    he.2.1.1
+  let : PreservesFiniteColimits (completedAdicChange S (CompletedConstantReduction.base S I)) :=
+    he.2.1.2
+  refine ⟨inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, ?_⟩
+  intro K P a b ha hb hP α q
+  let : Module.Finite R (P.X q) := (hP q).2
+  -- Homology is a quotient of a submodule of the finite term P.X q.
+  let e := (P.sc q).moduleCatHomologyIso.toLinearEquiv
+  let : _root_.IsNoetherian R (P.X q) := inferInstance
+  let : Module.Finite R (LinearMap.ker ((P.sc q).g.hom)) :=
+    Module.Finite.of_injective (N := P.X q) (LinearMap.ker ((P.sc q).g.hom)).subtype
+      (Submodule.subtype_injective _)
+  let : Module.Finite R ((P.sc q).moduleCatLeftHomologyData.H) := by
+    change Module.Finite R (LinearMap.ker (P.sc q).g.hom ⧸
+      LinearMap.range (P.sc q).moduleCatToCycles)
+    infer_instance
+  let : Module.Finite R (P.homology q) := Module.Finite.equiv e.symm
+  exact ⟨Module.finitePresentation_of_finite R _, inferInstance⟩
 
 end AlgebraicGeometry.Scheme
