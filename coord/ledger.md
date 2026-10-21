@@ -20136,3 +20136,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:01 L: merged deliver/Q11/lem-sfb-scalar-model-finite-flat-resolution (stage 2; reviewer PASS; parallel immutable checks)
 - 04:01 L: merged deliver/Q03/lem-sfb-constructible-cocone-ambient-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 04:01 L: returned deliver/NA/lem-weil-pbc-stratum-completion-unit-restriction (reviewer RETURN: L: independent stage-2 immutable head 624ffde843d6: H2: the delivery added theorem stmt_deps that supply only plain defs)
+- 04:01 L: returned deliver/Q35/lem-sp-etale-sum-coefficient-computation (reviewer RETURN: L: independent stage-2 immutable head faee664b82df: H2: three of the four stmt_deps added by the delivery are theorem no)
