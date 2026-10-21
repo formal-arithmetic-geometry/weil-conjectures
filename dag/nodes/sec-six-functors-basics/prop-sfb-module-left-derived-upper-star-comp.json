@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Put $h=g\\circ f$, $\\mathcal A_T=\\Mod_{\\Lambda_T}$, $F_a=a^*$ and $L_a=La^*$ for $a=f,g,h$. These are the full module-object pullbacks and their total left derived functors of [sk-def-sfb-module-derived-pushpull], not functors on abelian sheaves alone. By [det-prop-sfb-module-pullback-exact-main], each $F_a$ is additive and preserves finite limits and finite colimits, for every commutative condensed $\\Lambda$ and every scheme morphism $a$. Let $Q_T:\\mathrm{CoCh}(\\mathcal A_T)\\to D(\\mathcal A_T)$ be the localization at quasi-isomorphisms of [def-weil-abstract-derived-category], in the chosen universes. Write $C(F_a)$ for application of $F_a$ to every term and differential. For $a:T\\to S$, the total left derived functor $L_a$ comes with its structure transformation $\\epsilon_a:L_aQ_S\\to Q_TC(F_a)$, and $(L_a,\\epsilon_a)$ is a right Kan extension of $Q_TC(F_a)$ along $Q_S$; this is the meaning of a (total) left derived functor used in [lem-weil-pbc-exact-functor-derived-functor].",
+   "text": "Put $h=g\\circ f$, $\\mathcal A_T=\\Mod_{\\Lambda_T}$, $F_a=a^*$ and $L_a=La^*$ for $a=f,g,h$, using [sk-def-sfb-module-derived-pushpull]. By [det-prop-sfb-module-pullback-exact-main] each $F_a$ is additive and exact. Write $Q_T:\\mathrm{CoCh}(\\mathcal A_T)\\to D(\\mathcal A_T)$ for the quasi-isomorphism localization [def-weil-abstract-derived-category] and $C(F_a)$ for termwise application. The total left derived pair has counit $\\epsilon_a:L_aQ_S\\to Q_TC(F_a)$ and is a right Kan extension along $Q_S$ ([lem-weil-pbc-exact-functor-derived-functor]).",
    "uses": [
     "sk-def-sfb-module-derived-pushpull",
     "det-prop-sfb-module-pullback-exact-main",
@@ -25,41 +25,42 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
-    "place": "First sentence: exactness of all pullbacks and the total left derived functors"
+    "place": "First sentence: exactness of the full module-object pullbacks"
    }
   },
   {
-   "text": "For $a:T\\to S$, [lem-weil-pbc-exact-functor-derived-factorization] says that $C(F_a)$ preserves quasi-isomorphisms and supplies $D_a:D(\\mathcal A_S)\\to D(\\mathcal A_T)$ with a natural isomorphism $\\varphi_a:D_aQ_S\\xrightarrow{\\sim}Q_TC(F_a)$. Clause (1) of [lem-weil-pbc-exact-functor-derived-functor] makes $(D_a,\\varphi_a)$ a total left derived pair. Compare it with the total left derived pair $(L_a,\\epsilon_a)$ from step 1, using the right Kan universal property. It gives unique maps $u_a:L_a\\to D_a$, $v_a:D_a\\to L_a$ with $\\varphi_a(u_aQ_S)=\\epsilon_a$ and $\\epsilon_a(v_aQ_S)=\\varphi_a$. Substitution gives $\\varphi_a(u_av_aQ_S)=\\varphi_a$ and $\\epsilon_a(v_au_aQ_S)=\\epsilon_a$, so the same uniqueness gives $u_av_a=1$ and $v_au_a=1$. Thus $u_a$ is the canonical natural isomorphism $L_a\\cong D_a$, and $p_a:=\\varphi_a(u_aQ_S):L_aQ_S\\xrightarrow{\\sim}Q_TC(F_a)$ is natural and invertible on every complex. No boundedness or preservation of K-flat objects by a second pullback is required.",
+   "text": "For $a:T\\to S$, [lem-weil-pbc-exact-functor-derived-factorization] supplies $D_a$ and $\\varphi_a:D_aQ_S\\cong Q_TC(F_a)$. Clause (1) of [lem-weil-pbc-exact-functor-derived-functor] makes this a right Kan pair. Apply [lem-sfb-right-kan-extension-unique-iso] to it and $(L_a,\\epsilon_a)$: there is a canonical $u_a:L_a\\cong D_a$ with $\\varphi_a(u_aQ_S)=\\epsilon_a$. Thus $p_a:=\\epsilon_a$ is an isomorphism, being a composite of isomorphisms.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-right-kan-extension-unique-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), exact-functor principle; left-derived version and its Kan uniqueness are supplied by the cited existing node"
+    "place": "Tag 015F (lemma-right-derived-exact-functor), left-derived exact-functor principle; canonical comparison by Mathlib rightKanExtensionUnique"
    }
   },
   {
-   "text": "Take exactly the underived natural isomorphism $b:F_h\\xrightarrow{\\sim}F_fF_g$ of [def-sfb-module-upper-star-comp]. On a cochain complex $K$ in $\\mathcal A_Z$, the maps $b_{K^n}$ form a chain isomorphism $B_K:C(F_h)K\\xrightarrow{\\sim}C(F_f)C(F_g)K$: its chain-map equation is $F_fF_g(d_K^n)b_{K^n}=b_{K^{n+1}}F_h(d_K^n)$, the naturality of $b$ at $d_K^n$. Its inverse is given degreewise by $b_{K^n}^{-1}$. Naturality at each component of a chain map proves that $B$ is natural in $K$.",
+   "text": "Let $b:F_h\\cong F_fF_g$ be [def-sfb-module-upper-star-comp]. Its components give a chain isomorphism $B_K:C(F_h)K\\cong C(F_f)C(F_g)K$: the chain-map equation $F_fF_g(d^n)b_{K^n}=b_{K^{n+1}}F_h(d^n)$ is naturality of $b$. Its inverse is degreewise $b^{-1}$, and naturality at the components of a chain map makes $B$ natural in $K$.",
    "uses": [
     "def-sfb-module-upper-star-comp"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
-    "place": "Second sentence: induce the comparison of levelwise functors from the specified underived isomorphism"
+    "place": "Second sentence: the specified underived isomorphism on cochain complexes"
    }
   },
   {
-   "text": "For $K\\in\\mathrm{CoCh}(\\mathcal A_Z)$ put $q_K=p_{f,C(F_g)K}\\circ L_f(p_{g,K})$. It is a natural isomorphism from $L_fL_gQ_ZK$ to $Q_XC(F_f)C(F_g)K$. Consequently\n$$t_K=q_K^{-1}\\circ Q_X(B_K)\\circ p_{h,K}:L_hQ_ZK\\xrightarrow{\\sim}L_fL_gQ_ZK$$\nis a natural isomorphism of functors on cochain complexes. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with localization $Q_Z$, target $D(\\mathcal A_X)$, and the functors $L_h$ and $L_fL_g$. Their composites with $Q_Z$ invert quasi-isomorphisms since $Q_Z$ inverts them and functors preserve inverses. With the comparison isomorphisms identities, that clause descends $t$ to a natural transformation $c:L_h\\to L_fL_g$ with $c_{Q_ZK}=t_K$. Descend $t^{-1}$ in the same way. Since descent respects composition and identities, the descended transformations are inverse, so $c$ is a natural isomorphism. Its defining equation\n$$q_K\\circ c_{Q_ZK}=Q_X(B_K)\\circ p_{h,K}$$\nidentifies it as the comparison induced by the specified $b$ under the canonical exact-derived identifications. Clause (3) of the same localization node makes a transformation with these components unique. This proves the claimed ambient comparison on unbounded derived categories.",
+   "text": "Set $q_K=p_{f,C(F_g)K}\\circ L_f(p_{g,K})$ and $t_K=q_K^{-1}\\circ Q_X(B_K)\\circ p_{h,K}$. These are natural isomorphisms, with $t:L_hQ_Z\\cong L_fL_gQ_Z$. Clause (2) of [lem-weil-pbc-localization-universal-property], with identity factorization isomorphisms, descends $t$ uniquely to an isomorphism $c:L_h\\cong L_fL_g$; the two composites invert quasi-isomorphisms because $Q_Z$ does. Its component equation $q_K\\circ c_{Q_ZK}=Q_X(B_K)\\circ p_{h,K}$ specifies precisely the comparison induced by $b$.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
-    "place": "Second and third sentences: descent of the degreewise comparison and transport along the canonical exact-derived identifications"
+    "place": "Second and third sentences: descend the comparison and transport along the exact-derived identifications"
    }
   }
  ],
@@ -67,15 +68,16 @@
   "sk-def-sfb-module-derived-pushpull",
   "det-prop-sfb-module-pullback-exact-main",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-right-kan-extension-unique-iso",
   "def-sfb-module-upper-star-comp",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
-  "place": "Full proof: exactness, termwise comparison, and transport, expanded by the existing exact-derived Kan comparison and localization universal property; Stacks Tag 015F is the exact-functor input."
+  "place": "Exactness, termwise comparison and localization transport; canonical Kan uniqueness extracted as a Mathlib leaf; Stacks Tag 015F supplies the exact-functor principle."
  },
  "mathlib_searches": [
   {
@@ -176,11 +178,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "prop-sfb-module-left-derived-upper-star-comp",
   "worker": "stage1",
-  "summary": "Preserved the statement and derived the specified ordinary module-object composition comparison on unbounded derived categories. Reused the existing pullback exactness, exact-derived factorization, exact-derived Kan characterization and localization nodes. Wrote out the canonical comparison and its component equation, rather than treating composition of arbitrary derived functors as automatic. No new nodes or Mathlib leaves were created; no slopmaster2 attachment exists for module objects.",
-  "blueprint": "Realizes the ambient-comparison paragraph of def-sfb-dc-upper-star-comp and the exactness/levelwise/descent/transport argument of the current main-20261015 prop-sfb-module-left-derived-upper-star-comp proof; it supplies the ambient comparison used in step 2 of the restricted-functor unit.",
+  "summary": "Repair of the human re-split request: unchanged statement and Lean binding. Extracted the universal-property comparison of two right Kan extensions as an exact Mathlib leaf, and reused the existing localization leaf for descent of natural isomorphisms instead of reproving its inverse and uniqueness assertions. The parent is now a short assembly; all remaining non-elementary inputs are cited nodes.",
+  "blueprint": "Ambient comparison paragraph of def-sfb-dc-upper-star-comp; exactness, termwise comparison, descent and canonical transport in the main-20261015 prop-sfb-module-left-derived-upper-star-comp proof.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-exact-functor-derived-functor",
@@ -192,12 +194,12 @@
   "lem-weil-pbc-exact-functor-derived-functor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q29-848abd312",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q44-bfa50fb72",
+  "group": "Q44",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-848abd312 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the blueprint main-20261015 statement, its proof and unit clause 4, the restricted-functor unit, Stacks derived.tex label lemma-right-derived-exact-functor (015F, line 5884), and Mathlib Localization/Predicate.lean:278-290. The statement is verbatim the blueprint statement and is not weakened. The coefficient category is the same Mod_{Λ_T} throughout, and f^* = Ext_{α_f}∘mapMod(f^*_Ab) is the same functor in def-sfb-module-upper-star and in sk-def-sfb-module-pushforward-pullback. The direction b: h^*→f^*g^* matches def-sfb-module-upper-star-comp. Step 1: exactness comes from det-prop-sfb-module-pullback-exact-main, applied to f, g and h. Step 2: the right-Kan comparison u_a/v_a, with inverse equations from uniqueness, is correct, and p_a = ε_a is invertible. Step 3: the termwise chain isomorphism is genuinely elementary. Step 4: I checked the types of q_K and t_K. The descent through localization clauses (2) and (3) is correct, and the component equation makes the 'induced by b' clause precise. The route follows the blueprint (exact ⇒ levelwise ⇒ transport). The missing blueprint node prop-sfb-module-left-derived-upper-star-levelwise is correctly replaced by the exactness node, the factorization leaf and tool clause (1). Accepted tool_use: lem-weil-pbc-exact-functor-derived-functor, a generic tool that is split and reviewed pass. There are no new nodes and no cycle (only the parent def-sfb-dc-upper-star-comp cites the item). Possible duplicates checked: def-sfb-derived-comap-upper-star-iso, new-comap-upper-star-iso-composition, lem-sfb-module-upper-star-kflat-quasi-iso; none states this result. No SGA source is used. Fixes: step 1 now introduces ε_a and says (L_a, ε_a) is a right Kan extension, with lem-weil-pbc-exact-functor-derived-functor added to its uses; step 2 had relied on ε_a 'from step 1' without it being introduced. I also added sk-def-sfb-condensed-ring to stmt_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-bfa50fb72 (reviewer sub-agent of L); spot-checked: Re-split repair answering the human's 2026-10-21 note. The proof drops from 3686 to 1815 characters (longest step 548) and adds one new node, the Mathlib leaf lem-sfb-right-kan-extension-unique-iso. It is an exact match for CategoryTheory.Functor.rightKanExtensionUnique: I read KanExtension/Basic.lean lines 77-145, and the counit equation (from liftOfIsRightKanExtension_fac) and uniqueness (from hom_ext_of_isRightKanExtension) are the node's clauses. The leaf is self-contained, cites def-nagata-category, runs four real searches, and is not a duplicate: def-sfb-left-derived-exact is an unnormalized special case and the localization leaf needs a localization. It does not restate a clause of the item. Compared with the live node, the statement and stmt_deps are byte-identical; only the proof fields changed. The item is not in route-pivot-dropped. Step checks: step 1 exactness via det-prop-sfb-module-pullback-exact-main applied to f, g and h, with the Kan convention from lem-weil-pbc-exact-functor-derived-functor (tool_use accepted). Step 2 factorization plus clause (1), then the leaf, gives u_a with phi_a(u_a Q) = eps_a, so eps_a is invertible. Step 3 is the elementary degreewise chain iso from b of def-sfb-module-upper-star-comp, in the correct direction. Step 4: the types of q_K and t_K check, and clause (2) of lem-weil-pbc-localization-universal-property (identity comparison isos) descends t uniquely; that clause states iso-to-iso lifting, so removing the old inline inverse argument is correct. The component equation pins c as the comparison induced by b. The route matches the main-20261015 blueprint proof (exact, levelwise, transport). Stacks 015F checked at derived.tex line 5884. No SGA is cited and no fixes were needed."
  },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
