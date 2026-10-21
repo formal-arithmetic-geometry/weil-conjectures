@@ -13,7 +13,10 @@
   "sk-def-sfb-module-objects",
   "def-sfb-condensed-action-module",
   "lem-sfb-condensed-product-action-inflation",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-ind-unipotent-system",
+  "def-sfb-condensed-derived-inflation-arrows",
+  "lem-sfb-condensed-product-bar-comparison"
  ],
  "proof": [
   {
@@ -301,5 +304,31 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-3a021ff4a (reviewer sub-agent of L); spot-checked: The item's statement and stmt_deps are unchanged from live; there is no cycle and no id collision. This head repairs the C4/E1 RETURN of bd874fb0: step 2 applies normed-scalar-profinite-hom-acyclic only to the complete field E, and Ω now uses the new node lem-sfb-norm-algcl-bar-augmentation. That node adds nothing beyond the inherited item: the item's case V=E, D=0, G=1, F=Ω plus the cochain node forces j_A to be an iso (in H^1, an injective A-linear map A->A is multiplication by a nonzero scalar). Steps 1-10 checked against the cited statements. Step 3 sign: natural automorphisms of RΓ_Z are scalars, so the degree-0-normalised Koszul λ makes the normalisation +ev_1. Steps 4-6: biproduct base, ker D filtration with continuous linear splitting, dimension induction with complex-ses-triangle and two-out-of-three. Steps 7-8: filtered continuity plus AB5. Step 9: conservative forgetting of G. Step 10: exp(D)-1 = D·U(D) with U(D) unipotent. Tested V=E with D=0, a 2x2 Jordan block (H^0 = ker D, H^1 = coker D), zero stages, G=1 and unbounded e_n. The open question of the previous review, H^2 for Ω cochains, is settled: the C_ℓ-Banach primitive normalised by h(1)=0 is Ω-valued, because Baire gives a box where f is E_N-valued, which makes h additive mod E_N there, so {h ∈ Ω} contains an open coset; this holds with parameters. Degrees q>=3 for Ω are not proved here and remain part of the unsplit WANTED obligation. The continuity node is true, and existing nodes profinite-derived-functions-filtered-colimit plus condensed-derived-invariant-bar give a route to split it, though they do not state it. The relative node is formal and true, and is not a restatement of the discrete-lattice Koszul node or the normal-subgroup comparison. I accept the tool uses (first-quadrant-total-column-comparison, triangle-two-out-of-three; complex-ses-triangle is a Mathlib leaf). Batch 5: lem-trf-bounded-below-derived-mate-model, reached via condensed-derived-restriction-calculus, is generic derived-mate homological algebra, not a step of the trace formula or Poincare duality, and the citer polynomial-translation-acyclic already has it in its stmt_deps. Accepted. No SGA is cited. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndUnipotentProcyclicDifference",
+  "declaration": "Profinite.CondensedAction.IndUnipotent.ind_unipotent_procyclic_difference",
+  "declarations": [
+   "Profinite.CondensedAction.IndUnipotent.retained",
+   "Profinite.CondensedAction.IndUnipotent.differenceComplex",
+   "Profinite.CondensedAction.IndUnipotent.invariantUnit",
+   "Profinite.CondensedAction.IndUnipotent.differenceH0Inclusion",
+   "Profinite.CondensedAction.IndUnipotent.DifferenceModel",
+   "Profinite.CondensedAction.IndUnipotent.ind_unipotent_procyclic_difference"
+  ],
+  "file": "lean/Sheaf/Paper/IndUnipotentProcyclicDifference.lean",
+  "statement": "theorem ind_unipotent_procyclic_difference (Ω : Type u) [NormedField Ω] [Algebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (hΩ : ∀ a : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] Ω a‖ = ‖a‖) (E : Type u) [NormedField E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (j : E →ₐ[ℚ_[ℓ]] Ω) (hE : ∀ a : E, ‖a‖ = ‖j a‖) [Algebra E Ω] (hj : algebraMap E Ω = j.toRingHom) [Algebra E F] (ι : F →ₐ[E] Ω) (hι : ∀ a : F, ‖ι a‖ = ‖a‖) (hF : Function.Surjective (algebraMap E F) ∨ Function.Surjective ι) (T : System ℓ E G) (P : Presentation ℓ E F G T) (c : Cocone P.diagram) (hc : IsColimit c) : DifferenceModel ℓ F G v c.pt",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c025c392",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: F=E or Ω via isometric ι with surjectivity disjunction (exactly the two cases); C(S,F) = normContinuousRing; profinite G; ℤ_ℓ as Multiplicative(ULift ℤ_ℓ) with p-adic topology and additive-1 generator; System pins finite-dim V_n, injective transitions, nilpotent D_n with per-stage e_n≥1, D/transition and D/G commutation, finite exponential H-action; Presentation pins the Realization of F⊗_E V_n (module topology), its sections/scalars/restrictions/action and the F⊗i_n transitions; M is an IsColimit cocone in the full G×H action category; d is uniquely pinned as (1,gen)·m−m; ProductInvariants v pins Γ_H^G (inclusion, image, residual, transposes); e is a derived iso RΓ_H^G(M[0]) ≅ Q(double d) in degrees 0,1, H^0-normalised by z and the common inclusion through the canonical invariantUnit/homologyFunctorFactors square. Edge cases G=1, V_n=0, D=0, unbounded e_n, empty S, noncomplete Ω covered. Statement fields verbatim; stmt_deps additions are a §1(A) new node plus landed nodes; no hollow defs; sorry only in the item theorem and exists_presentation; docstrings carry the source and steps 1-10. Mechanical theorem-stmt_dep finding: the Abelian/Grothendieck instances on ActionModule are built from the existential product_action_inflation conclusion and live only in the bar-comparison module (already cited for the same purpose by the landed def-sfb-condensed-derived-inflation-arrows), so the statement genuinely rests on a theorem conclusion; PASS on that point. Advisories: normContinuousRing reached via a module the item does not cite directly; proof-only imports; exists_presentation sorry theorem in a def node (exists_realization precedent); instance placement; thin second reading. No compile run, no files changed."
  }
 }
