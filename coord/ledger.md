@@ -21911,3 +21911,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:28 L: merged deliver/Q50/lem-pc-tate-dvr-residue-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 09:28 L: merged deliver/Q06/lem-sf-completed-coefficient-pullback-linearity (stage 2; reviewer PASS; parallel immutable checks)
 - 09:28 L: merged deliver/Q07/lem-pur-derived-representable-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 09:28 L: returned deliver/Q61/lem-pur-proetale-direct-image-global-evaluation (reviewer RETURN: L: independent stage-2 immutable head 23b894b1070e: Item maths correct: all 12 node clauses match the Lean (K-injective )
