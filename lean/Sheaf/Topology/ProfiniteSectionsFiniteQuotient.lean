@@ -10,9 +10,11 @@ public import Sheaf.Topology.ContinuousMapCondensedRingMap
 public import Mathlib.Topology.Algebra.Algebra
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Mathlib.Algebra.Homology.ShortComplex.Ab
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import WeilConjectures.CategoryTheory.Sites.MonObj
+import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
@@ -54,6 +56,98 @@ noncomputable def continuousSectionsModule
       (continuousMapRingSheafMapOfUniverse.{u, u} (algebraMap A T) (continuous_algebraMap A T) :
         continuousCoefficientRingSheaf A ⟶ continuousCoefficientRingSheaf T))).obj
     (Mod.regular (continuousCoefficientRingObj T))
+
+private def sectionsLinear
+    {A T U : Type u} [CommRing A] [CommRing T] [CommRing U]
+    [TopologicalSpace A] [TopologicalSpace T] [TopologicalSpace U]
+    [IsTopologicalRing A] [IsTopologicalRing T] [IsTopologicalRing U]
+    [Algebra A T] [Algebra A U] [ContinuousSMul A T] [ContinuousSMul A U]
+    (f : T →L[A] U) (S : Profinite.{u}) :
+    C(S, T) →ₗ[C(S, A)] C(S, U) where
+  toFun a := (⟨fun x ↦ f x, f.continuous⟩ : C(T, U)).comp a
+  map_add' a b := by ext s; exact map_add f _ _
+  map_smul' a b := by ext s; exact f.map_smul (a s) (b s)
+
+private theorem sectionsLinear_apply
+    {A T U : Type u} [CommRing A] [CommRing T] [CommRing U]
+    [TopologicalSpace A] [TopologicalSpace T] [TopologicalSpace U]
+    [IsTopologicalRing A] [IsTopologicalRing T] [IsTopologicalRing U]
+    [Algebra A T] [Algebra A U] [ContinuousSMul A T] [ContinuousSMul A U]
+    (f : T →L[A] U) (S : Profinite.{u})
+    (a : C(S, T)) (s : S) : sectionsLinear f S a s = f (a s) := rfl
+
+open CategoryTheory.MonoidalCategory in
+private noncomputable def sectionsMap
+    {A T U : Type u} [CommRing A] [CommRing T] [CommRing U]
+    [TopologicalSpace A] [TopologicalSpace T] [TopologicalSpace U]
+    [IsTopologicalRing A] [IsTopologicalRing T] [IsTopologicalRing U]
+    [Algebra A T] [Algebra A U] [ContinuousSMul A T] [ContinuousSMul A U]
+    (f : T →L[A] U) :
+    continuousSectionsModule A T ⟶ continuousSectionsModule A U := by
+  letI : MonObj (continuousCoefficientRingObj T).obj :=
+    (continuousCoefficientRingSheaf T).obj.monObjCompForget₂
+  letI : MonObj (continuousCoefficientRingObj U).obj :=
+    (continuousCoefficientRingSheaf U).obj.monObjCompForget₂
+  let k : continuousCoefficientRingObj T ⟶ continuousCoefficientRingObj U :=
+    ⟨{ app S := AddCommGrpCat.ofHom
+         { toFun a := ULift.up ((sectionsLinear f S.unop) a.down)
+           map_zero' := congrArg ULift.up (map_zero (sectionsLinear f S.unop))
+           map_add' a b := congrArg ULift.up (map_add (sectionsLinear f S.unop) _ _) }
+       naturality _ _ _ := by
+         ext a
+         apply ULift.ext
+         ext s
+         rfl }⟩
+  refine Mod.homMk k ?_
+  let aT : continuousCoefficientRingObj A ⟶ continuousCoefficientRingObj T :=
+    (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map
+      (continuousMapRingSheafMapOfUniverse.{u, u} (algebraMap A T)
+        (continuous_algebraMap A T) :
+        continuousCoefficientRingSheaf A ⟶ continuousCoefficientRingSheaf T)
+  let aU : continuousCoefficientRingObj A ⟶ continuousCoefficientRingObj U :=
+    (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map
+      (continuousMapRingSheafMapOfUniverse.{u, u} (algebraMap A U)
+        (continuous_algebraMap A U) :
+        continuousCoefficientRingSheaf A ⟶ continuousCoefficientRingSheaf U)
+  change (aT ▷ _ ≫ MonObj.mul) ≫ k =
+    _ ◁ k ≫ (aU ▷ _ ≫ MonObj.mul)
+  apply Sheaf.tensor_hom_ext
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.LaxMonoidal.μ_natural_left_assoc,
+    ← Functor.LaxMonoidal.μ_natural_right_assoc,
+    ← Functor.LaxMonoidal.μ_natural_left_assoc]
+  have hT := Sheaf.μ_comp_map_mul (continuousCoefficientRingObj T)
+  have hU := Sheaf.μ_comp_map_mul (continuousCoefficientRingObj U)
+  simp only [reassoc_of% hT, hU]
+  ext S : 2
+  apply AddCommGrpCat.hom_ext_toIntLinearMap
+  apply TensorProduct.ext'
+  intro a b
+  change (k.hom.app S)
+      ((MonObj.mul : (continuousCoefficientRingObj T).obj ⊗
+        (continuousCoefficientRingObj T).obj ⟶ _).app S
+          ((aT.hom.app S) a ⊗ₜ[ℤ] b)) =
+    (MonObj.mul : (continuousCoefficientRingObj U).obj ⊗
+      (continuousCoefficientRingObj U).obj ⟶ _).app S
+        ((aU.hom.app S) a ⊗ₜ[ℤ] (k.hom.app S) b)
+  apply ULift.ext
+  ext s
+  change f (algebraMap A T (a.down s) * b.down s) =
+    algebraMap A U (a.down s) * f (b.down s)
+  simpa only [Algebra.smul_def] using f.map_smul (a.down s) (b.down s)
+
+private theorem sectionsMap_apply
+    {A T U : Type u} [CommRing A] [CommRing T] [CommRing U]
+    [TopologicalSpace A] [TopologicalSpace T] [TopologicalSpace U]
+    [IsTopologicalRing A] [IsTopologicalRing T] [IsTopologicalRing U]
+    [Algebra A T] [Algebra A U] [ContinuousSMul A T] [ContinuousSMul A U]
+    (f : T →L[A] U) (S : Profinite.{u})
+    (a : ULift.{u + 1} C(S, T)) :
+    ((sectionsMap f).hom.hom.app (op S)) a =
+      ULift.up (sectionsLinear f S a.down) := by
+  rfl
 
 /-- Continuous sections preserve this short exact topological module sequence, both on each
 profinite set and as condensed internal modules. The section formulas uniquely specify the
@@ -105,6 +199,109 @@ theorem continuousSections_finiteDiscrete_shortExact
        (∀ (S : Profinite.{u}) (a : ULift.{u + 1} C(S, T₁)) (s : S),
          ((G.hom.hom.app (op S)) a).down s = g (a.down s)) ∧
        (ShortComplex.mk F G h).ShortExact) := by
-  sorry
+  classical
+  let F := fun S : Profinite.{u} ↦ sectionsLinear f S
+  let G := fun S : Profinite.{u} ↦ sectionsLinear g S
+  have hgf (t : T₀) : g (f t) = 0 := by
+    have ht : f t ∈ LinearMap.range f.toLinearMap := ⟨t, rfl⟩
+    rw [hex] at ht
+    exact ht
+  obtain ⟨e, he⟩ := hker
+  have hinj (S : Profinite.{u}) : Function.Injective (F S) := by
+    intro a b hab
+    ext s
+    apply hf
+    have hs := congrArg (fun c : C(S, T₁) ↦ c s) hab
+    change f (a s) = f (b s) at hs
+    exact hs
+  have hexa (S : Profinite.{u}) : Function.Exact (F S) (G S) := by
+    intro a
+    constructor
+    · intro ha
+      have hz (s : S) : a s ∈ LinearMap.ker g.toLinearMap := by
+        change g (a s) = 0
+        have hs := congrArg (fun c : C(S, T₂) ↦ c s) ha
+        change g (a s) = 0 at hs
+        exact hs
+      let b : C(S, LinearMap.ker g.toLinearMap) :=
+        ⟨fun s ↦ ⟨a s, hz s⟩, a.continuous.subtype_mk hz⟩
+      refine ⟨(⟨e.symm, e.symm.continuous⟩ : C(LinearMap.ker g.toLinearMap, T₀)).comp b, ?_⟩
+      ext s
+      exact (he _).symm.trans (congrArg Subtype.val (e.apply_symm_apply (b s)))
+    · rintro ⟨b, rfl⟩
+      ext s
+      change g (f (b s)) = 0
+      exact hgf (b s)
+  have hsurj (S : Profinite.{u}) : Function.Surjective (G S) := by
+    let r : C(T₂, T₁) := ⟨Function.surjInv hg, continuous_of_discreteTopology⟩
+    intro a
+    refine ⟨r.comp a, ?_⟩
+    ext s
+    change g (Function.surjInv hg (a s)) = a s
+    exact Function.surjInv_eq hg (a s)
+  refine ⟨fun S ↦ ⟨F S, G S, fun _ _ ↦ rfl, fun _ _ ↦ rfl,
+    hinj S, hexa S, hsurj S⟩, ?_⟩
+  let FF := sectionsMap f
+  let GG := sectionsMap g
+  have hcomp : FF ≫ GG = 0 := by
+    apply Mod.hom_ext
+    ext S a
+    apply ULift.ext
+    ext s
+    change (sectionsLinear g S.unop ((sectionsLinear f S.unop) a.down)) s = 0
+    rw [sectionsLinear_apply, sectionsLinear_apply]
+    exact hgf (a.down s)
+  refine ⟨FF, GG, hcomp, ?_, ?_, ?_⟩
+  · intro S a s
+    dsimp only [FF]
+    rw [sectionsMap_apply]
+    rfl
+  · intro S a s
+    dsimp only [GG]
+    rw [sectionsMap_apply]
+    rfl
+  · let M := ShortComplex.mk FF GG hcomp
+    let U := Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+      (continuousCoefficientRingObj A)
+    change M.ShortExact
+    apply ShortExact.reflects_shortExact_of_faithful U
+    let P := sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
+    let N := (M.map U).map P
+    have hN (S : Profinite.{u}ᵒᵖ) :
+        (N.map ((evaluation _ Ab.{u + 1}).obj S)).ShortExact := by
+      have hi : Function.Injective ((N.f.app S)) := by
+        intro a b hab
+        apply ULift.ext
+        exact hinj S.unop (congrArg ULift.down hab)
+      have hs : Function.Surjective ((N.g.app S)) := by
+        intro a
+        obtain ⟨b, hb⟩ := hsurj S.unop a.down
+        exact ⟨ULift.up b, congrArg ULift.up hb⟩
+      have hx : Function.Exact (N.f.app S) (N.g.app S) := by
+        intro a
+        constructor
+        · intro ha
+          obtain ⟨b, hb⟩ := (hexa S.unop a.down).1 (congrArg ULift.down ha)
+          exact ⟨ULift.up b, congrArg ULift.up hb⟩
+        · rintro ⟨b, rfl⟩
+          apply ULift.ext
+          exact (hexa S.unop ((F S.unop) b.down)).2 ⟨b.down, rfl⟩
+      exact ShortComplex.ShortExact.mk' ((ShortComplex.ab_exact_iff_function_exact _).2 hx)
+        ((AddCommGrpCat.mono_iff_injective _).2 hi)
+        ((AddCommGrpCat.epi_iff_surjective _).2 hs)
+    have hNN : N.ShortExact := by
+      have : Mono N.f := by
+        rw [NatTrans.mono_iff_mono_app]
+        exact fun S ↦ (hN S).mono_f
+      have : Epi N.g := by
+        rw [NatTrans.epi_iff_epi_app]
+        exact fun S ↦ (hN S).epi_g
+      refine ShortComplex.ShortExact.mk' ?_ inferInstance inferInstance
+      rw [ShortComplex.exact_iff_evaluation]
+      exact fun S ↦ (hN S).exact
+    exact ShortComplex.shortExact_of_iso
+      (ShortComplex.mapNatIso (M.map U)
+        (sheafificationNatIso (coherentTopology Profinite.{u}) Ab.{u + 1})).symm
+      (hNN.map_of_exact (presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
 
 end Profinite
