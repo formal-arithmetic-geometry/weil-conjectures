@@ -1,8 +1,8 @@
 # Work queue
 
-198 items; claim with `tools/claim.py next <group> [--stage N]`.
+196 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (22 clusters, 955 modules)
+## Rework: quarantined by the upstream sync (22 clusters, 954 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -85,7 +85,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 375 nodes that below a finished node, not needed, 107 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (129)
+## Stage 3: modules to prove (127)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -98,7 +98,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | repair | route |
 | `Sheaf.CategoryTheory.ElementRestrictionHom` | 9 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | proof | 1 |
-| `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 1 | proof | 2 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.InternalSectionScalarAdjunction` | - | 1 | proof | 2 |
@@ -107,17 +106,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
 | `Sheaf.Paper.PbcScalarExtension` | - | 16 | proof | 2 |
 | `Sheaf.Paper.CompletedDirectImageLimits` | 3 | 2 | proof | 3 |
-| `Sheaf.Paper.IntegralCompletedLocalPerfectCriterion` | 4 | 1 | proof | 3 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 6 | 14 | proof | 3 |
 | `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteFreeCompletionTransport` | - | 4 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteFreeStrictTowerTransport` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompletedExchangeCoherence` | - | 9 | proof | 3 |
-| `Sheaf.Paper.CompletedKoszulReductionRoosTriangle` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 3 | proof | 3 |
-| `Sheaf.Paper.PerfectStrataUniformReductions` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PullbackTensorCanonicalShiftUnit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RoosIntrinsicCompletenessEquivalence` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SbcCompletedOperations` | - | 15 | proof | 3 |
@@ -132,7 +128,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PbcAutomorphismTransport` | - | 13 | proof | 4 |
 | `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 4 |
 | `Sheaf.Paper.RingedSliceComparisonsShift` | - | 1 | proof | 4 |
-| `Sheaf.Paper.StratumCompletionUnitRestriction` | - | 11 | proof | 4 |
 | `Sheaf.Paper.StrictQuotientExchangeUnitEquation` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison` | 5 | 9 | proof | 5 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 6 | proof | 5 |
@@ -150,6 +145,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PulledReductionStrictTowerComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.QuotientDiagramScalarProjection` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 5 |
+| `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 1 | proof | 6 |
 | `Sheaf.CategoryTheory.RingedSiteDualityMaps` | 4 | 4 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedDualComponents` | - | 1 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly` | - | 1 | proof | 6 |
@@ -160,10 +156,12 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedRingStrictFiniteExchange` | - | 2 | proof | 6 |
 | `Sheaf.Paper.ConstantWeilStructure` | - | 3 | proof | 6 |
 | `Sheaf.Paper.RingedOpenStrictReduction` | - | 13 | proof | 6 |
+| `Sheaf.Paper.IntegralCompletedLocalPerfectCriterion` | 4 | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedHomCompositionModel` | - | 3 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedOrdinaryEvaluationLocalization` | - | 1 | proof | 7 |
 | `Sheaf.Algebra.Homology.RingedSignedBidualLocalization` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedFiniteExchangeCoordinates` | - | 2 | proof | 7 |
+| `Sheaf.Paper.CompletedKoszulReductionRoosTriangle` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedStrictOpenExchange` | - | 7 | proof | 7 |
 | `Sheaf.Paper.DerivedFiniteQuotientCoherence` | - | 1 | proof | 7 |
 | `Sheaf.Paper.DerivedPullbackTensorHom` | - | 12 | proof | 7 |
