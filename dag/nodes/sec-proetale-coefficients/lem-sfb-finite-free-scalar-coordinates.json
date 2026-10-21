@@ -14,9 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Put $e_i=\\theta\\iota_i:R\\to B$ and $q_i=\\pi_i\\theta^{-1}:B\\to R$. The two inverse identities for $\\theta$ give $q_i e_j=\\delta_{ij}\\operatorname{id}_R$ and $\\sum_i e_i q_i=\\operatorname{id}_B$. Since these are module maps, on every test object $U$ they say $q_i(b_j)=\\delta_{ij}$ and $s=\\sum_i\\varphi(q_i(s))b_i$ for $s\\in B(U)$, with $e_i(r)=\\varphi(r)b_i$. Here $b_i=e_i(1)$ is compatible with every restriction. Define $M^n(U)=M(U)^n$ with componentwise action; gluing tuples componentwise makes this a sheaf and an $R$-module. Its finite sums and coordinate maps are likewise componentwise.",
+   "text": "Use sfbSheafTensor_properties to obtain closedness and preservation of small colimits on both sides for the canonical sheaf tensor. Closedness and the abelian structure give MonoidalPreadditive by sfbSheafTensor_monoidalPreadditive; the abelian sheaf category has coequalizers. Introduce arbitrary instances of these Prop-valued consequences as required by FiniteFreeScalarCoordinates.",
    "uses": [
-    "sk-def-sfb-module-objects"
+    "sk-def-sfb-sheaf-tensor"
    ],
    "elementary": true,
    "source": {
@@ -25,11 +25,11 @@
    }
   },
   {
-   "text": "For every $i$ the rule $(s,m)\\mapsto q_i(s)m$ is additive in both variables and commutes with restrictions. The tensor universal property and sheafification of [sk-def-sfb-sheaf-tensor] therefore give a sheaf map $B\\otimes M\\to M$. It equalizes the defining arrows for relative tensor in [sk-def-sfb-change-of-scalars], because $q_i(s\\varphi(r))m=rq_i(s)m=q_i(s)(rm)$. Thus it factors uniquely through $B\\otimes_R M$. This factor is $R$-linear: $q_i(\\varphi(r)s)m=r(q_i(s)m)$, and equality as sheaf maps follows from the same universal properties. Collect these factors into $\\Phi_M:\\operatorname{Res}_\\varphi(B\\otimes_R M)\\to M^n$. This constructs the stated formula without requiring tensor sections to be sectionwise tensors.",
+   "text": "Write N = Res_phi(regular B). Commutativity of B and naturality of the braiding identify its induced right R-action with B tensor phi followed by multiplication. Thus the coequalizers defining Res_phi(extendScalars phi M) and N tensor_R M have the same parallel arrows. Descend their canonical projections in both directions. Cancellation of these epimorphisms proves the inverse identities. After precomposing with R tensor extendPi, the induced action formulas prove R-linearity. This constructs scalarTensorIso, with extendPi followed by its forward map equal to tensorObjPi, and tensorObjPi followed by its inverse equal to extendPi.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor"
    ],
    "elementary": true,
    "source": {
@@ -38,11 +38,10 @@
    }
   },
   {
-   "text": "The unit sheaf map $\\mathbf1\\to R$ followed by $e_i$ gives a sheaf map $\\mathbf1\\to B$. Tensor it with $M$ using the inverse left unitor and then the coequalizer map $B\\otimes M\\to B\\otimes_R M$. The resulting map $t_i:M\\to B\\otimes_R M$ sends $m$ to $b_i\\otimes m$. It is $R$-linear because $b_i\\otimes rm=(b_i\\varphi(r))\\otimes m=\\varphi(r)(b_i\\otimes m)$ by the coequalizer relation and commutativity of $B$. Define $\\Psi_M=\\sum_i t_i\\operatorname{pr}_i$. Finite sums preserve restrictions and $R$-linearity, so this is a module-sheaf morphism with the required tuple formula.",
+   "text": "Tensor theta inverse on the right by M, distribute tensor over the finite biproduct by Mathlib rightDistributor, apply the relative left unitor on each summand, and identify the biproduct with the finite product. Compose with scalarTensorIso. These actual isomorphisms construct finiteCoordinateIso; their inverse identities supply both composite identities without a separate sectionwise tensor calculation.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
+    "def-sfb-modobj-relative-tensor"
    ],
    "elementary": true,
    "source": {
@@ -51,22 +50,11 @@
    }
   },
   {
-   "text": "For a tuple $(m_j)_j$ of local sections, the $i$th coordinate of $\\Phi_M\\Psi_M((m_j)_j)$ is $\\sum_j q_i(b_j)m_j=\\sum_j\\delta_{ij}m_j=m_i$. Thus the composite is the identity as a sheaf map (equality holds at every object), and hence as a module map.",
+   "text": "Project this composite to coordinate i. Mathlib rightDistributor_hom_comp_biproduct_pi and biproduct.map_pi give scalarTensorIso.hom followed by (theta.inv followed by pi_i) tensor M and the relative left unitor. The relative left unitor composed after tensorObjPi is the module action, by the bimodule coequalizer description. Precomposing with extendPi therefore gives exactly the asserted forward formula.",
    "uses": [
-    "sk-def-sfb-module-objects"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
-   }
-  },
-  {
-   "text": "Precompose the other composite with the defining map $B\\otimes M\\to B\\otimes_R M$. On an elementary tensor of local sections its value is\n$$\\Psi_M\\Phi_M(s\\otimes m)=\\sum_i b_i\\otimes(q_i(s)m)=\\sum_i(b_i\\varphi(q_i(s)))\\otimes m=s\\otimes m.$$\nThe middle equality is the balancing relation; the last uses $\\sum_i e_iq_i=\\operatorname{id}_B$. Equality on these tensors implies equality of the maps out of the objectwise abelian tensor presheaf by its bilinear universal property, hence equality out of its sheafification $B\\otimes M$. Uniqueness in the coequalizer universal property then gives $\\Psi_M\\Phi_M=\\operatorname{id}$. This is a comparison of morphisms via universal properties, with no assertion that all relative-tensor sheaf sections are elementary tensors or sums of such sections on the same object.",
-   "uses": [
-    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor"
    ],
    "elementary": true,
    "source": {
@@ -75,11 +63,24 @@
    }
   },
   {
-   "text": "For a module morphism $f:M\\to N$, scalar extension acts on elementary tensors by $s\\otimes m\\mapsto s\\otimes f(m)$: this is its induced coequalizer map. The $i$th coordinate on the two sides of naturality of $\\Phi$ is respectively $q_i(s)f(m)$ and $f(q_i(s)m)$, which agree by $R$-linearity of $f$. The tensor, sheafification and coequalizer uniqueness arguments of step 5 give equality of sheaf maps. Naturality of $\\Psi$ follows as well from $\\sum_i b_i\\otimes f(m_i)$ on both sides (or from the inverse identities). Consequently these mutually inverse transformations give the required natural isomorphism. The formulas also cover $n=0$: the basis identity is $\\operatorname{id}_B=0$, $M^0$ is the zero module, and the same empty-sum calculation proves both inverse identities. No nonzero-ring, nonzero-module, or positive-rank assumption is used.",
+   "text": "Expand the inverse of rightDistributor by Mathlib rightDistributor_inv. Transporting this finite sum through the product comparison and the summand unitors gives the sum of pi_i followed by the relative inverse left unitor, (iota_i followed by theta.hom) tensor M, and scalarTensorIso.inv. The relative inverse left unitor is ambient inverse left unitor followed by eta_R tensor M and tensorObjPi: compose with the relative left unitor to verify it using the module unit axiom. The inverse projection identity for scalarTensorIso gives exactly the asserted tuple formula after applying the additive forgetful functor.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "Check naturality of scalarTensorIso after precomposing with extendPi, using extendPi_extendScalarsMap and tensorObjPi_whiskerLeft. Check finiteCoordinateIso naturality after every finite-product projection; the coordinate formula reduces it to this comparison naturality, whisker_exchange and naturality of the left unitor. NatIso.ofComponents now supplies the natural isomorphism. The finite biproduct/distributor identities include the empty Fin 0 case, so the same construction and empty-sum formulas prove rank zero with no positivity hypothesis.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor"
    ],
    "elementary": true,
    "source": {
@@ -91,12 +92,13 @@
  "proof_deps": [
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-relative-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring; explicit coordinate and balancing argument expanding the blueprint inference"
+  "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring; K3 categorical implementation by the existing relative tensor, finite-biproduct distributor, and canonical coequalizer comparisons"
  },
  "mathlib_searches": [
   {
@@ -242,5 +244,15 @@
   "result": "pass",
   "note": "Node unchanged except lean. Lean matches every clause: EssentiallySmall.{w} site with independent universes, canonical sfbSheafTensorStructure on Ab (tensor over Z), commutative ring objects, θ : finiteFree R n ≅ comap φ (regular B), natural iso extendScalars⋙comap ≅ const⋙lim, forward formula after the epi extendπ (pins Φ), inverse = Σ b_i⊗m_i, no sectionwise-tensor equality. Helper is a full Prop; its instance binders are Prop classes asserted to exist and follow from the sheaf-tensor dependency. Edge cases n=0, zero rings, empty site covered. No duplicate (CondensedQbarScalarBasisSections has only private helpers). H8/H9 docstrings and conventions ok; only sorry is the theorem proof. nt_compile --json clean in 2.6 s. Advisory: sfbSheafTensorStructure is reached through the sk-def-sfb-sheaf-tensor dependency."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261021T061441-L-1776006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
