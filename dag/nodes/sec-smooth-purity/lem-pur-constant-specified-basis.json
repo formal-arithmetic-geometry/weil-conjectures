@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-constant-specified-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, first paragraph: finite free coefficient extensions; the specified quotient basis construction in lem-pur-adic-basis-limit, proof step 2.",
+   "via": [
+    "lem-pur-adic-basis-limit",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A specified finite basis passes to constant ring sheaves",
+ "statement": "Let C be a site, J its topology, and A → B an algebra of commutative rings, in a universe containing the site. Let b be an A-basis of B indexed by Fin d, including d = 0. Write underline A and underline B for the associated constant ring sheaves [def-weil-pbc-constant-sheaf], and give underline B its underline A-module structure through the sheafified algebra map [def-weil-sheaf-of-modules-category]. Then the map from the product of d copies of the unit underline A-module to underline B, sending a tuple x of sections to the sum of the sheafified algebra map of x_i times the constant section b_i, is an isomorphism of underline A-module sheaves. This specifies its columns, rather than choosing a different basis after sheafification.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (module sheafification), 03CO (limits of module sheaves); sites.tex Tag 00WJ (left exact sheafification), and algebraic-structure sheafification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Sheafify the constant presheaf module B over the constant ring presheaf A. The ring-sheafification unit of B is A-linear after restriction along the unit of A, by naturality of ring sheafification. It induces a linear map from module sheafification to the ring sheaf underline B, restricted to underline A. Both units are locally bijective, so this comparison is an isomorphism.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (module sheafification), 03CO (limits of module sheaves); sites.tex Tag 00WJ (left exact sheafification), and algebraic-structure sheafification."
+   }
+  },
+  {
+   "text": "Apply module sheafification to the equivalence B ≃ A^(Fin d) supplied by the specified basis. Module sheafification preserves finite products. The comparison of the sheafification of the constant module A with the unit module of underline A is the identity on constant sections. Thus the resulting coordinate isomorphism sends a constant basis vector b_j to the vector whose i-th coordinate is delta(i,j).",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (module sheafification), 03CO (limits of module sheaves); sites.tex Tag 00WJ (left exact sheafification), and algebraic-structure sheafification."
+   }
+  },
+  {
+   "text": "For each b_i use the unit-module/global-section equivalence to define the column multiplying by its constant section. Sum these columns after the coordinate projections. Composing this map with the coordinate isomorphism gives the identity: evaluate on the unit section to compute each matrix entry as delta(i,j), then sum. Therefore this map is the inverse coordinate isomorphism. Evaluation preserves finite sums, giving the displayed section formula. No nonzero ring or inhabited basis hypothesis is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (module sheafification), 03CO (limits of module sheaves); sites.tex Tag 00WJ (left exact sheafification), and algebraic-structure sheafification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (module sheafification), 03CO (limits of module sheaves); sites.tex Tag 00WJ (left exact sheafification), and algebraic-structure sheafification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A specified finite basis of a ring algebra induces the corresponding basis isomorphism on constant sheaves of modules on a small site",
+   "results": "Eight hits: Module.Basis.coe_mapCoeffs, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, PowerBasis.basis, Module.finBasis, Algebra.PreSubmersivePresentation.basis, Module.Basis.reindex, CondensedMod.LocallyConstant.functorIsoDiscrete, Module.Free.constr. None gives the specified-column isomorphism of constant ring sheaves on an arbitrary site.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified finite basis of an algebra gives an isomorphism of constant sheaves of modules preserving the basis vector constant sections",
+   "results": "Eight results, including SheafOfModules.ιFree, Module.Basis.ofEquivFun_equivFun and condensed discrete-module comparison isomorphisms. None states the arbitrary-site constant-ring-sheaf result with prescribed columns.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; use existing module sheafification and finite-product comparison APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, Module.Basis",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Bb]asis|[Bb]asis.*constantSheaf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AdicBasisLimit",
+  "date": "2026-10-21",
+  "group": "U3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantSpecifiedBasis",
+  "file": "lean/Sheaf/CategoryTheory/ConstantSpecifiedBasis.lean",
+  "declaration": "CategoryTheory.constantSheaf_specifiedBasis",
+  "statement": "theorem constantSheaf_specifiedBasis (n : ℕ) (b : Module.Basis (Fin n) A B)\n    (f : A →+* B) (hf : f = algebraMap A B) :\n    ∃ β : (∏ᶜ (fun _ : Fin n ↦ SheafOfModules.unit\n          ((constantSheaf J RingCat.{max uC vC r}).obj (RingCat.of A)))) ≅\n        (SheafOfModules.restrictScalars\n          ((constantSheaf J RingCat.{max uC vC r}).map\n            (RingCat.ofHom f))).obj\n              (SheafOfModules.unit\n                ((constantSheaf J RingCat.{max uC vC r}).obj (RingCat.of B))),\n      ∀ (U : Cᵒᵖ)\n        (y : (∏ᶜ (fun _ : Fin n ↦ SheafOfModules.unit\n          ((constantSheaf J RingCat.{max uC vC r}).obj (RingCat.of A)))).val.obj U),\n        β.hom.val.app U y = ∑ i : Fin n,\n          ((constantSheaf J RingCat.{max uC vC r}).map\n            (RingCat.ofHom f)).hom.app U\n              ((Pi.π (fun _ : Fin n ↦ SheafOfModules.unit\n                ((constantSheaf J RingCat.{max uC vC r}).obj (RingCat.of A))) i).val.app U y) *\n          (show ((constantSheaf J RingCat.{max uC vC r}).obj (RingCat.of B)).obj.obj U from\n            (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B))).app U (b i))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ff223",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261021T140932-L-2777046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ff223",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261021T140932-L-2777046",
+  "kind": "interface",
+  "note": "independent cc review: delivered AdicBasisLimit.lean/ConstantSpecifiedBasis.lean and both node files against clones/live (item module, lem-pur-constant-finite-free-section-basis, blueprint ancestry) and the two change records against the diff"
+ }
+}
