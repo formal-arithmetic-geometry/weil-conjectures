@@ -71,11 +71,11 @@
    "elementary": false
   },
   {
-   "text": "Remaining obligation tensorOperations_nonempty: use semilinearDerivedSections on the actual quotient sequences, identify constant-coefficient inverse images with those sequences, and construct the exact universal ordinary operations. Construct the ordinary inverse-image tensor comparison as the transpose of the normalized lax tensor map and derive its signed-total K-flat model, as in the original declaration docstring.",
+   "text": "Construct the ordinary package from semilinearDerivedSections and the canonical varying-ring pullback and open extension, transporting its adjunction along direct_eq_varying. For every map apply the normalized tensor-comparison theorem on the actual tower. The equality between the two direct-image presentations transports sections by casts between definitionally equal carriers; proof irrelevance reduces these casts to the identity. Thus laxTensor_existsUnique supplies exactly the pure-tensor normalization hypothesis. Choose the per-map universal comparisons and assemble TensorOperations.",
    "uses": [
     "lem-coef-semilinear-derived-sections",
-    "def-coef-semilinear-system-models",
-    "def-coef-ringed-sequence-site"
+    "def-sp-varying-ring-operations",
+    "lem-pur-varying-ring-tensor-comparison"
    ],
    "elementary": false
   },
@@ -90,10 +90,11 @@
    "elementary": false
   },
   {
-   "text": "Remaining obligation TensorOperations.deltaInv_isIso: identify the supplied universal operations and their ordinary-unit and K-flat tensor normalizations with the localized open-restriction/extension operations. The specified transpose is then the inverse tensor comparison of openTensorNormalization, which is invertible for arbitrary unbounded systems, as in the original declaration docstring.",
+   "text": "Descend the inverse ordinary extension/restriction unit to an isomorphism of their derived composite with the identity; Adjunction.isIso_unit_of_iso makes the actual derived unit invertible. Compare the supplied ordinary pullback and extension with canonical varying-ring adjoints, then derive their natural isomorphism. Transport the ambient tensor support theorem along that extension comparison. Full faithfulness makes the derived counit invertible at the supported tensor target. Expand the specified adjunction transpose as extension applied to its adjunct followed by that counit. The adjunct is invertible because it is tensor of the invertible unit with the identity, followed by mu inverse. The whole composite is therefore invertible.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "def-coef-semilinear-system-models"
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-pur-varying-ring-tensor-support"
    ],
    "elementary": false
   }
@@ -108,13 +109,14 @@
   "def-weil-pbc-proetale-site",
   "def-sp-varying-ring-proper-open-arrows",
   "lem-coef-semilinear-derived-sections",
+  "lem-pur-varying-ring-tensor-comparison",
   "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-sf-open-tensor-normalization"
+  "lem-pur-varying-ring-tensor-support"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI and 03EK, with sites-cohomology.tex Tags 07A4 and 079P, and more-etale.tex Tags 0F7B and 09AE. Reapplication after the batch rollback, 2026-10-21: retain the coefficient, additive, K-injective, tensor and composition proofs; use existing varying-ring continuity and open-unit theorems in place of duplicate constructions. Operations.alpha_existsUnique follows from ordinary varying-ring open base change, the clopen lift, adjunction Hom bijections and naturality. The two original tensor-existence and delta-invertibility obligations remain unchanged."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0GL1, sites-modules.tex Tags 03DI, 03EL and 0E8I; R3 implements ordinary package construction and categorical assembly, retaining the separate one-map tensor comparison and tensor-support bridges as named obligations."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -267,12 +269,12 @@
   "note": "Wrote review.md. Checked immutable files, all statement dependencies, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, records, and route-pivot compliance. Both modules compile cleanly through scompile.py. No fixes required."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B8",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261020T230719-L-604533",
+  "landing": "20261021T005747-L-1889254",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

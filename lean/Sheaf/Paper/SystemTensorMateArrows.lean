@@ -13,6 +13,8 @@ public import Sheaf.Paper.FiniteFieldFiber
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
+import Sheaf.AlgebraicGeometry.VaryingRingTensorSupport
+import Sheaf.AlgebraicGeometry.VaryingRingTensorComparison
 
 /-!
 # Canonical tensor and proper/open arrows for varying coefficient systems
@@ -636,24 +638,6 @@ structure TensorOperations extends Operations l E where
         ((adj f).unit.app M) ((adj f).unit.app N) ≫
           laxTensor l E f ((pull f).obj M) ((pull f).obj N)
 
-/-- Universal presentations of the canonical system operations exist.
-Source: Zheng 4.1, 4.10; Stacks 03DI, 07A4, 0E8I, 0941
-(blueprint: def-pur-system-tensor-mate-arrows).
-Proof: use semilinearDerivedSections for each actual quotient sequence. On the
-vertical site form the module inverse image left adjoint to direct. The constant
-section map identifies its coefficient ring with the given quotient sequence,
-so this inverse image is exact. Open localization has the direct-sum and
-sheafification extension, which is exact and left adjoint to this inverse image.
-Their universal properties give the ordinary adjunctions. Derive on the ordinary
-system category, using its Grothendieck abelianness and K-injectives. The ordinary
-tensor inverse-image comparison is the transpose of laxTensor after the two
-units. It is invertible for inverse image of constant coefficients. Its inverse
-on every total summand gives the chain comparison; localize on flat-term K-flat
-systems to get mu and its TensorComparisonModel, precisely as in the geometric
-part of semilinearDerivedSections. No equalities are inferred from evaluation. -/
-theorem tensorOperations_nonempty : Nonempty (TensorOperations l E) := by
-  sorry
-
 private abbrev constantRings (n : ℕ) := CommRingCat.of
   (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
 private def quotientMaps (n : ℕ) : constantRings l E (n + 1) ⟶ constantRings l E n :=
@@ -800,6 +784,90 @@ private theorem direct_eq_varying {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [coefficient_eq_candidate]
   rfl
 
+attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
+  Functor.rightDerivedFunctor
+
+private def ordinaryOperations : Operations l E := {
+  systems := fun X ↦ (semilinearDerivedSections.{u + 1, u, u + 1}
+    (Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X)
+    (coefficientSequenceCommRingTransition l E X)).some.systems
+  pull := fun f ↦ ProEtale.VaryingRing.pull (constantRings l E) (quotientMaps l E) f
+  adj := fun f ↦
+    (ProEtale.VaryingRing.moduleAdj (constantRings l E) (quotientMaps l E) f).ofNatIsoRight
+      (eqToIso (direct_eq_varying l E f)).symm
+  extension := fun j ↦
+    ProEtale.VaryingRing.extension (constantRings l E) (quotientMaps l E) j
+  openAdj := fun j ↦
+    ProEtale.VaryingRing.moduleJAdj (constantRings l E) (quotientMaps l E) j
+  pullAdditive := fun f ↦
+    ProEtale.VaryingRing.pullAdditive (constantRings l E) (quotientMaps l E) f
+  pullLimits := fun f ↦
+    ProEtale.VaryingRing.pullLimits (constantRings l E) (quotientMaps l E) f
+  pullColimits := fun f ↦
+    ProEtale.VaryingRing.pullColimits (constantRings l E) (quotientMaps l E) f
+  extensionAdditive := fun j ↦
+    ProEtale.VaryingRing.extensionAdditive (constantRings l E) (quotientMaps l E) j
+  extensionLimits := fun j ↦
+    ProEtale.VaryingRing.extensionLimits (constantRings l E) (quotientMaps l E) j
+  extensionColimits := fun j ↦
+    ProEtale.VaryingRing.extensionColimits (constantRings l E) (quotientMaps l E) j }
+
+attribute [local irreducible] ordinaryOperations
+
+/-- Universal presentations of the canonical system operations exist.
+Source: Zheng 4.1, 4.10; Stacks 03DI, 07A4, 0E8I, 0941
+(blueprint: def-pur-system-tensor-mate-arrows).
+Proof: use semilinearDerivedSections for each actual quotient sequence. On the
+vertical site form the module inverse image left adjoint to direct. The constant
+section map identifies its coefficient ring with the given quotient sequence,
+so this inverse image is exact. Open localization has the direct-sum and
+sheafification extension, which is exact and left adjoint to this inverse image.
+Their universal properties give the ordinary adjunctions. Derive on the ordinary
+system category, using its Grothendieck abelianness and K-injectives. The ordinary
+tensor inverse-image comparison is the transpose of laxTensor after the two
+units. It is invertible for inverse image of constant coefficients. Its inverse
+on every total summand gives the chain comparison; localize on flat-term K-flat
+systems to get mu and its TensorComparisonModel, precisely as in the geometric
+part of semilinearDerivedSections. No equalities are inferred from evaluation. -/
+theorem tensorOperations_nonempty : Nonempty (TensorOperations l E) := by
+  let o := ordinaryOperations l E
+  let : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (o.pull f).Additive := o.pullAdditive
+  let : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), PreservesFiniteLimits (o.pull f) :=
+    o.pullLimits
+  let : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), PreservesFiniteColimits (o.pull f) :=
+    o.pullColimits
+  have h (X Y : Scheme.{u}) (f : X ⟶ Y) :
+      ∃ mu : o.T Y ⋙ o.P f ≅ (o.P f).prod (o.P f) ⋙ o.T X,
+        ∃ model : TensorComparisonModel.{u + 1, u, u + 1}
+          (coefficientSequenceTopology (Scheme.ProEt.topology Y))
+          (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E Y) (R l E X)
+          (o.pull f) (o.systems Y).closed (o.systems X).closed
+          (o.systems Y).tensorModels (o.systems X).tensorModels mu,
+          ∀ M N : S l E Y,
+            (o.adj f).homEquiv _ _ (model.ordinary M N).hom =
+              ordinaryTensorHom.{u + 1, u, u + 1}
+                (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (R l E Y)
+                ((o.adj f).unit.app M) ((o.adj f).unit.app N) ≫
+                laxTensor l E f ((o.pull f).obj M) ((o.pull f).obj N) := by
+    apply ProEtale.VaryingRing.tensorComparison_exists
+      (constantRings l E) (quotientMaps l E) f (direct l E f) (direct_eq_varying l E f)
+      (o.pull f) (o.adj f) (o.systems Y).closed (o.systems X).closed
+      (o.systems Y).tensorModels (o.systems X).tensorModels (laxTensor l E f)
+    intro M N V x y
+    change (laxTensor l E f M N).val.app V
+      (tensorSection.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (R l E Y)
+        ((direct l E f).obj M) ((direct l E f).obj N) V x y) =
+      tensorSection.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology X)) (R l E X)
+        M N ((base f).op.obj V) x y
+    exact (laxTensor_existsUnique l E f M N).choose_spec.1 V x y
+  choose mu model hm using h
+  exact ⟨{ toOperations := o
+           mu := fun {_ _} f ↦ mu _ _ f
+           model := fun {_ _} f ↦ model _ _ f
+           ordinary_unit := fun {_ _} f ↦ hm _ _ f }⟩
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction is a bijection on maps from a module pulled back from the larger
@@ -895,6 +963,34 @@ theorem ordinaryOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion
       (asIso (ProEtale.VaryingRing.moduleJAdj
         (constantRings l E) (quotientMaps l E) j).unit).symm
   exact (o.openAdj j).isIso_unit_of_iso e
+
+private theorem derivedOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : IsIso (o.derivedOpenAdj j).unit := by
+  have := o.ordinaryOpenUnit_isIso j
+  let e : o.J j ⋙ o.P j ≅ 𝟭 (D l E U) :=
+    (Functor.mapDerivedCategoryCompIso (o.extension j) (o.pull j)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso (o.openAdj j).unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso _
+  exact (o.derivedOpenAdj j).isIso_unit_of_iso e
+
+private theorem tensor_openSupported {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] (M : D l E U) (N : D l E X) :
+    (o.J j).essImage ((o.T X).obj ((o.J j).obj M, N)) := by
+  let c := (ProEtale.VaryingRing.moduleAdj (constantRings l E) (quotientMaps l E) j).ofNatIsoRight
+     (eqToIso (direct_eq_varying l E j)).symm
+  let ep := (o.adj j).leftAdjointUniq c
+  let ee := ((o.openAdj j).ofNatIsoRight ep).leftAdjointUniq
+    (ProEtale.VaryingRing.moduleJAdj (constantRings l E) (quotientMaps l E) j)
+  have := ProEtale.VaryingRing.extensionAdditive (constantRings l E) (quotientMaps l E) j
+  have := ProEtale.VaryingRing.extensionLimits (constantRings l E) (quotientMaps l E) j
+  have := ProEtale.VaryingRing.extensionColimits (constantRings l E) (quotientMaps l E) j
+  let e := Functor.mapDerivedCategoryNatIso ee
+  have hs := ProEtale.VaryingRing.tensor_openSupported
+    (constantRings l E) (quotientMaps l E) j (o.systems X).closed
+      (o.systems X).tensorModels M N
+  have ht := Functor.essImage.ofIso
+    ((o.T X).mapIso (Iso.prod (e.app M).symm (Iso.refl N))) hs
+  exact Functor.essImage.ofNatIso e.symm ht
 
 /-- The inverse open unit is fixed by its two inverse identities.
 Source: Stacks 03DI (blueprint: def-pur-system-tensor-mate-arrows). -/
@@ -1039,7 +1135,20 @@ under the unique compatible comparisons of universal presentations. That theorem
 applies with arbitrary coefficient transitions and arbitrary unbounded inputs. -/
 theorem deltaInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : D l E U) (N : D l E X) : IsIso (o.deltaInv j M N) := by
-  sorry
+  have := o.toOperations.derivedOpenUnit_isIso j
+  let ff := (o.derivedOpenAdj j).fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have hs := o.toOperations.tensor_openSupported j M N
+  have hc : IsIso ((o.derivedOpenAdj j).counit.app
+      ((o.T X).obj ((o.J j).obj M, N))) :=
+    (o.derivedOpenAdj j).isIso_counit_app_of_iso hs.getIso.symm
+  have hu : IsIso ((o.derivedOpenAdj j).unit.app M) := by infer_instance
+  have hp : IsIso (Prod.mkHom ((o.derivedOpenAdj j).unit.app M)
+      (𝟙 ((o.P j).obj N))) := (isIso_prod_iff _ _).2 ⟨hu, inferInstance⟩
+  unfold deltaInv
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
 
 /-- The canonical open tensor isomorphism, oriented toward extension of tensor.
 Source: Stacks 0E8I (blueprint: def-pur-system-tensor-mate-arrows). -/
