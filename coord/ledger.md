@@ -23264,3 +23264,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:01 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9. This is the 4th delivery of this item (after NV 01fd7610, NF 02bfa96d, NF 7bcbe869). The item and its cite)
 - 18:01 L: merged deliver/N5/lem-trf-bounded-below-derived-mate-model (stage 2; reviewer PASS; parallel immutable checks)
 - 18:01 L: merged deliver/NS/lem-sfb-integral-ambient-tower-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 18:02 L: merged deliver/NR/lem-sfb-action-topos-geometric-restriction (reviewer FIX; first push; new nodes: 0)
