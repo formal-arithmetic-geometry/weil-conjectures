@@ -8,24 +8,12 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyClass
 
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.CategoryTheory.Limits.MorphismProperty
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import all Sheaf.AlgebraicGeometry.CommutativeExchangeClassCompatibility
+import Sheaf.AlgebraicGeometry.CommutativeExchangeEvaluationCompatibility
+
+import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
+import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+
 
 /-!
 # Commutative-square exchange on etale cohomology charts
@@ -51,6 +39,13 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 set_option autoImplicit false
+
+
+
+attribute [local instance] RawRestrictedComparison.etaleComposition
+  RawRestrictedComparison.etaleIdentities RawRestrictedComparison.etalePullbacks
+  RawRestrictedComparison.etaleBaseChange RawRestrictedComparison.sheafifyInstance
+  RawRestrictedComparison.weakSheafifyInstance
 
 /-- The canonical map from chart cohomology to the evaluated higher direct image:
 inverse evaluation, derived adjunction, homology and the represented generator.
@@ -155,6 +150,154 @@ noncomputable def exchangeChartPullback
         0).hom.app _ ≫
         (CochainComplex.singleFunctor _ 0).map (exchangeChartCoefficientMap sq F U)))
 
+
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem rawClass_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : Y.Etale)
+    (z : (abelianHigherDirectImageRawPresheaf f q F).obj (op U)) :
+    rawRestrictedCohomologyClass f q F U (rawRestrictedCohomologyComparison f q F U z) =
+      z := by
+  let := isIso_rawRestrictedCohomologyComparison f q F U
+  apply (ConcreteCategory.bijective_of_isIso
+    (rawRestrictedCohomologyComparison f q F U)).1
+  exact rawRestrictedCohomologyClass_spec f q F U
+    (rawRestrictedCohomologyComparison f q F U z)
+
+private theorem class_restriction {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
+    (U V : Y.Etale) (i : V ⟶ U)
+    (z : (abelianHigherDirectImageRawPresheaf f q F).obj (op U)) :
+    abelianHigherDirectImageClass f q F V
+        ((abelianHigherDirectImageRawPresheaf f q F).map i.op z) =
+      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
+        ((R+((f)_*[AddCommGrpCat.{u + 1}])).obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj.map i.op
+        (abelianHigherDirectImageClass f q F U z) := by
+  exact congrArg (fun k ↦ k z) ((comparisonPresheafMap f q F).naturality i.op)
+
+private theorem adjunction_shifted_postcomp
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {L : C ⥤ D} {R : D ⥤ C} [R.CommShift ℤ] (adj : L ⊣ R)
+    (n : ℤ) {A : C} {K K' : D} (z : L.obj A ⟶ K⟦n⟧) (a : K ⟶ K') :
+    adj.homEquiv _ _ z ≫ (R.commShiftIso n).hom.app K ≫
+        (shiftFunctor C n).map (R.map a) =
+      adj.homEquiv _ _ (z ≫ (shiftFunctor D n).map a) ≫
+        (R.commShiftIso n).hom.app K' := by
+  rw [← Functor.commShiftIso_hom_naturality]
+  rw [← Category.assoc, ← adj.homEquiv_naturality_right]
+
+attribute [local irreducible] Functor.mapDerivedCategoryPlus Functor.rightDerivedFunctorPlus
+
+-- Keep shift-comparison algebra abstract before specializing the derived functors.
+private theorem adjunction_homology_postcomp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [HasShift C ℤ] [HasShift D ℤ]
+    {L : C ⥤ D} {R : D ⥤ C} [R.CommShift ℤ] (adj : L ⊣ R)
+    (H₀ Hq : C ⥤ E) (n : ℤ) (σ : shiftFunctor C n ⋙ H₀ ≅ Hq)
+    {B : C} {A : E} (s : A ⟶ H₀.obj B)
+    {T K K' : D} (c : L.obj B ⟶ T) (z : T ⟶ K⟦n⟧) (a : K ⟶ K') :
+    (s ≫ H₀.map (adj.homEquiv _ _ (c ≫ z)) ≫
+        (H₀.mapIso ((R.commShiftIso n).app K) ≪≫ σ.app (R.obj K)).hom) ≫
+        Hq.map (R.map a) =
+      s ≫ H₀.map (adj.homEquiv _ _ (c ≫ (z ≫ (shiftFunctor D n).map a))) ≫
+        (H₀.mapIso ((R.commShiftIso n).app K') ≪≫ σ.app (R.obj K')).hom := by
+  apply map_shifted_triangle_iso H₀ Hq n σ s _ _ _ _ _ _ rfl rfl
+  simpa only [Iso.app_hom, Category.assoc] using
+    adjunction_shifted_postcomp adj n (c ≫ z) a
+
+private theorem class_coefficient {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : F ⟶ G) (q : ℕ)
+    (U : Y.Etale)
+    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj
+      (((f)^*[AddCommGrpCat.{u + 1}]).obj ((abelianComparisonFree Y).obj U)) ⟶
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(q : ℤ)⟧) :
+    abelianHigherDirectImageClass f q G U
+        (z ≫ (shiftFunctor _ (q : ℤ)).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ)) =
+      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+        ((R+((f)_*[AddCommGrpCat.{u + 1}])).map
+          ((DerivedCategory.Plus.singleFunctor _ 0).map φ))).hom.app (op U)
+        (abelianHigherDirectImageClass f q F U z) := by
+  let H₀ := DerivedCategory.Plus.homologyFunctor
+    (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0
+  let Hq := DerivedCategory.Plus.homologyFunctor
+    (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
+  let a := (DerivedCategory.Plus.singleFunctor _ 0).map φ
+  let adj := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus
+  let A := (abelianComparisonFree Y).obj U
+  let c := (((f)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+  let K' := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  have hm := adjunction_homology_postcomp adj H₀ Hq (q : ℤ)
+    (H₀.shiftIso (q : ℤ) 0 (q : ℤ) (add_zero _))
+    ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app A) c z a
+  have hm' : higherClassMorphism f F q U z ≫
+      Hq.map (R+((f)_*[AddCommGrpCat.{u + 1}]).map a) =
+      higherClassMorphism f G q U (z ≫ (shiftFunctor _ (q : ℤ)).map a) := by
+    dsimp only [higherClassMorphism, abelianComparisonShift, H₀, Hq, adj, A, c] at hm ⊢
+    exact hm
+  let T := Hq.map (R+((f)_*[AddCommGrpCat.{u + 1}]).map a)
+  change _ = T.hom.app (op U) (abelianHigherDirectImageClass f q F U z)
+  calc
+    _ = freeRepresentableHomEquiv Y U _
+        (higherClassMorphism f G q U (z ≫ (shiftFunctor _ (q : ℤ)).map a)) :=
+      higher_class_evaluation f G q U _
+    _ = freeRepresentableHomEquiv Y U _ (higherClassMorphism f F q U z ≫ T) :=
+      congrArg (freeRepresentableHomEquiv Y U _) hm'.symm
+    _ = T.hom.app (op U)
+        (freeRepresentableHomEquiv Y U _ (higherClassMorphism f F q U z)) :=
+      freeRepresentableHomEquiv_comp Y U _ T
+    _ = _ := congrArg (T.hom.app (op U)) (higher_class_evaluation f F q U z).symm
+
+
+private theorem adjunction_unit_natural_comp
+    {C D : Type*} [Category C] [Category D]
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+    {A B : C} {T T' : D} (a : A ⟶ B) (E : L.obj A ⟶ T)
+    (E' : L.obj B ⟶ T') (b : T ⟶ T') (he : L.map a ≫ E' = E ≫ b) :
+    a ≫ adj.unit.app B ≫ R.map E' = adj.unit.app A ≫ R.map E ≫ R.map b := by
+  rw [← Category.assoc, ← adj.unit_naturality]
+  simp only [Category.assoc, ← R.map_comp]
+  rw [he]
+
+private theorem higherMap_coefficient
+    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
+    (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : F ⟶ G) (q : ℕ) :
+    ((g)^*[AddCommGrpCat.{u + 1}]).map
+        ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+          ((R+((f)_*[AddCommGrpCat.{u + 1}])).map
+            ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) ≫
+        exchangeChartHigherMap sq G q =
+      exchangeChartHigherMap sq F q ≫
+        (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+          ((R+((f')_*[AddCommGrpCat.{u + 1}])).map
+            ((DerivedCategory.Plus.singleFunctor _ 0).map
+              (((g')^*[AddCommGrpCat.{u + 1}]).map φ))) := by
+  let S := DerivedCategory.Plus.singleFunctor
+    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0
+  let R := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f
+  let R' := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f'
+  let H' := DerivedCategory.Plus.homologyFunctor
+    (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
+  let α := Functor.whiskerLeft (S ⋙ R)
+      ((((g)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusHomologyFunctorIso
+        (q : ℤ)).hom) ≫
+    Functor.whiskerLeft S
+      (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq) H') ≫
+    Functor.whiskerRight
+      ((((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom)
+      (R' ⋙ H')
+  have h := α.naturality φ
+  simp only [α, S, R, R', H', exchangeChartHigherMap, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.comp_obj, Functor.map_comp, DerivedCategory.Plus.homologyFunctor,
+    Category.assoc] at h ⊢
+  exact h
+
+
 /-- Commutative-square derived exchange agrees with cohomology pullback on every
 etale chart. The second and third clauses state naturality in the coefficient
 sheaf and in a morphism of test objects, using postcomposition and restriction
@@ -227,6 +370,61 @@ theorem commutativeExchangeChart
           ((DerivedCategory.Plus.singleFunctor _ 0).obj
             (((g')^*[AddCommGrpCat.{u + 1}]).obj F)))).obj.map (g.Etale.map i).op
         (exchangeChartValue sq F q U x)) := by
-  sorry
+  -- Use raw classes and derived evaluation instead of explicit resolution representatives.
+  refine ⟨?_, ?_, ?_⟩
+  · intro U x
+    let z := rawRestrictedCohomologyClass f q F U x
+    have hm : rawRestrictedCohomologyComparison f q F U ≫
+        exchangeChartPullback sq F q U =
+      commutativeExchangeRawPullbackMap sq F q U ≫
+        rawRestrictedCohomologyComparison f' q _ (g.Etale.obj U) :=
+      commutativeExchangeEvaluationCompatibility sq F q U
+    have he := congrArg (fun m ↦ m z) hm
+    simp only [ConcreteCategory.comp_apply] at he
+    rw [rawRestrictedCohomologyClass_spec] at he
+    have hr : rawRestrictedCohomologyClass f' q _ (g.Etale.obj U)
+        (exchangeChartPullback sq F q U x) =
+        commutativeExchangeRawPullbackMap sq F q U z := by
+      let := isIso_rawRestrictedCohomologyComparison f' q
+        (((g')^*[AddCommGrpCat.{u + 1}]).obj F) (g.Etale.obj U)
+      apply (ConcreteCategory.bijective_of_isIso
+        (rawRestrictedCohomologyComparison f' q _ (g.Etale.obj U))).1
+      rw [rawRestrictedCohomologyClass_spec]
+      exact he
+    dsimp only [exchangeChartValue, exchangeChartTheta]
+    rw [hr, commutativeExchangeRawPullbackMap_apply]
+    exact commutativeExchangeClassCompatibility sq F q U z
+  · intro G φ U x
+    let a := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+      ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).map
+        ((DerivedCategory.Plus.singleFunctor _ 0).map φ))
+    have he := higherMap_coefficient sq F G φ q
+    have h : a ≫ (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app _ ≫
+          ((g)_*[AddCommGrpCat.{u + 1}]).map (exchangeChartHigherMap sq G q) =
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app _ ≫
+          ((g)_*[AddCommGrpCat.{u + 1}]).map (exchangeChartHigherMap sq F q) ≫
+          ((g)_*[AddCommGrpCat.{u + 1}]).map
+            ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+              ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f').map
+                ((DerivedCategory.Plus.singleFunctor _ 0).map
+                  (((g')^*[AddCommGrpCat.{u + 1}]).map φ)))) := by
+      exact adjunction_unit_natural_comp
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g) a
+        (exchangeChartHigherMap sq F q) (exchangeChartHigherMap sq G q) _ he
+    dsimp only [exchangeChartValue, exchangeChartTheta]
+    rw [rawClass_comparison, class_coefficient]
+    exact congrArg (fun k ↦ k.hom.app (op U)
+      (abelianHigherDirectImageClass f q F U (rawRestrictedCohomologyClass f q F U x))) h
+  · intro U V i x
+    let H := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
+      ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+    let t := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H ≫
+      ((g)_*[AddCommGrpCat.{u + 1}]).map (exchangeChartHigherMap sq F q)
+    have hn := congrArg (fun k ↦ k (exchangeChartTheta f F q U x))
+      (t.hom.naturality i.op)
+    dsimp only [exchangeChartValue, exchangeChartTheta]
+    rw [rawClass_comparison, class_restriction]
+    exact hn
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,156 @@
+{
+ "id": "lem-kun-commutative-exchange-evaluation-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0ezt",
+   "place": "Proof paragraph invoking Tag 0EYM: the commutative exchange/cohomology chart diagram. Raw class evaluation commutes with geometric chart pullback.",
+   "via": [
+    "lem-kun-commutative-exchange-chart",
+    "lem-kun-0eym"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Raw class evaluation commutes with geometric chart pullback",
+ "statement": "In the commutative-square setting of [def-kun-commutative-exchange-raw-pullback], put V=U×_Y X and V′=U′×_Y′ X′, and let t:V′→V be induced by g′ and U′→U [def-pc-fibre-product]. For every F and q≥0, raw restricted derived-Hom evaluation ev [def-sbc-raw-restricted-cohomology-comparison-map] obeys t*(ev_f(z))=ev_f′(B(z)), where B is raw transport [def-kun-commutative-exchange-raw-pullback] and t* is raw complex cohomology pullback followed by the coefficient comparison (upperStarComp t p)⁻¹ then upperStarComp p′ g′ [def-sbc-raw-affine-restricted-cohomology]. This equality is stated as an equality of additive group morphisms, equivalently the asserted formula on every raw class. It contains no direct-image exchange or higher-image class morphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 07A6 (lemma-adjoint) and 0D6F (lemma-unbounded-cohomology-of-open); Etale Cohomology Tag 03Q8 (lemma-higher-direct-images)."
+ },
+ "stmt_deps": [
+  "def-kun-commutative-exchange-raw-pullback",
+  "def-pc-fibre-product",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The induced square V′→V over g′ is cartesian, regardless of cartesianness of the original square. Construct the inverse to V′→V×_X X′ by the two fibre-product universal properties. The unit formula for restriction along an etale map identifies ordinary sections under this square with global section pullback and the specified coefficient comparison.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-object-sections-base-change",
+    "lem-weil-pbc-etale-restriction-pullback-unit",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit form of the underived mate, naturality of the g-unit, and the free represented pullback Hom equivalence show that this ordinary section map carries the represented identity generator for f,U to that for f′,U′. This calculation is independent of degree and of the coefficient target.",
+   "uses": [
+    "def-kun-commutative-exchange-raw-pullback",
+    "lem-kun-commutative-exchange-class-compatibility",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-inverse-image",
+    "lem-sbc-restricted-comparison-generator-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct derived section pullback from the derived unit for t, the Leray comparison and the derived square of exact restrictions. The derived single-unit identity and its degree-zero comparison identify it with the ordinary section map. On singles, exact restriction composition identifies the coefficient with the specified underived square comparison. Shift compatibility then identifies its map on the q-shifted single with raw complex cohomology pullback followed by that coefficient.",
+   "uses": [
+    "lem-sbc-derived-section-pullback-zero",
+    "lem-sbc-derived-section-single-unit",
+    "lem-sbc-derived-restriction-zero-transport",
+    "lem-sbc-restricted-derived-sections-single",
+    "lem-sbc-restricted-derived-sections-shift-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of this derived section transformation to z, precompose with the inverse source single comparison and postcompose with the target shift comparison. Cancel the single comparisons. Evaluate at the inverse zero comparison of the represented generator. The generator identity from the preceding step gives the target raw evaluation, proving the asserted equality on every raw class.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-commutative-exchange-raw-pullback",
+  "def-pc-fibre-product",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-underived-exchange",
+  "lem-kun-commutative-exchange-class-compatibility",
+  "lem-sbc-derived-restriction-zero-transport",
+  "lem-sbc-derived-section-pullback-zero",
+  "lem-sbc-derived-section-single-unit",
+  "lem-sbc-restricted-comparison-generator-pullback",
+  "lem-sbc-restricted-derived-sections-shift-transport",
+  "lem-sbc-restricted-derived-sections-single",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-object-sections-base-change",
+  "lem-weil-pbc-etale-restriction-pullback-unit",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Read the cited Stacks source passages; the explicit adjunction, exact-functor comparison and represented-generator calculations are agent-written. Blueprint searches: exchange cohomology; derived evaluation; inverse image. No blueprint node states this separate raw-Hom comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image carries a raw derived Hom class to the section obtained from the degree q base change mate",
+   "results": "8 hits, including inverse morphisms of schemes, sheaf Hom adjunctions and right-derived resolution naturality; none asserts the mate/evaluation square for free represented abelian etale sheaves.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived Hom from a free represented sheaf commutes with cohomology pullback on an etale chart",
+   "results": "8 hits for free SheafOfModules and free-Hom pullback comparisons. None identifies this abelian etale chart evaluation diagram.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusHomologyFunctorIso_hom_app_(shiftIso|singleFunctor)",
+   "results": "No Mathlib hits. The required exact-functor single and shift comparisons are proved APIs of the adopted source library.",
+   "verdict": "no match in Mathlib; use the source-library API",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CommutativeExchangeChart",
+  "date": "2026-10-21",
+  "group": "H9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-kun-relative-continuity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommutativeExchangeEvaluationCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeExchangeEvaluationCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.commutativeExchangeEvaluationCompatibility",
+  "statement": "theorem commutativeExchangeEvaluationCompatibility\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : CommSq g' f' f g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : Y.Etale) :\n    let t := pullback.map (g.Etale.obj U).hom f' U.hom f\n      (pullback.fst U.hom g) g' g\n      (pullback.condition (f := U.hom) (g := g)).symm sq.w.symm\n    let c : ((t)^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.snd U.hom f)^*[AddCommGrpCat.{u + 1}]).obj F) ⟶\n        ((pullback.snd (g.Etale.obj U).hom f')^*[AddCommGrpCat.{u + 1}]).obj\n          (((g')^*[AddCommGrpCat.{u + 1}]).obj F) :=\n      (upperStarComp AddCommGrpCat.{u + 1} t (pullback.snd U.hom f)).inv.app F ≫\n      (upperStarComp AddCommGrpCat.{u + 1} (pullback.snd (g.Etale.obj U).hom f') g'\n        (t ≫ pullback.snd U.hom f) (pullback.lift_snd _ _ _)).hom.app F\n    rawRestrictedCohomologyComparison f q F U ≫\n      (rawAffineComplexPullback (q : ℤ) t\n        ((CochainComplex.singleFunctor _ 0).obj\n          (((pullback.snd U.hom f)^*[AddCommGrpCat.{u + 1}]).obj F)) ≫\n      (cohomology AddCommGrpCat.{u + 1} (pullback (g.Etale.obj U).hom f') (q : ℤ)).map\n        (DerivedCategory.Q.map\n          ((((t)^*[AddCommGrpCat.{u + 1}]).mapCochainComplexSingleFunctor 0).hom.app _ ≫\n            (CochainComplex.singleFunctor _ 0).map c))) =\n      commutativeExchangeRawPullbackMap sq F q U ≫\n        rawRestrictedCohomologyComparison f' q _ (g.Etale.obj U)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261021T014223-L-2389552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261021T014223-L-2389552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

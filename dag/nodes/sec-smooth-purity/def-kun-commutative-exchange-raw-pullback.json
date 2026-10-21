@@ -1,0 +1,158 @@
+{
+ "id": "def-kun-commutative-exchange-raw-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0ezt",
+   "place": "Proof paragraph invoking Tag 0EYM: the commutative exchange/cohomology chart diagram. Canonical transport of represented raw classes through a commutative square.",
+   "via": [
+    "lem-kun-commutative-exchange-chart",
+    "lem-kun-0eym"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical transport of represented raw classes through a commutative square",
+ "statement": "Let f:X→Y, f′:X′→Y′, g:Y′→Y and g′:X′→X form a commutative square of schemes [def-pc-scheme], and let U→Y be etale [def-weil-etale-morphism]. Put U′=U×_Y Y′ [def-pc-fibre-product] and let A_U be the free abelian sheaf represented by U [sbc-lem-higher-direct-image-presheaf]. Inverse-image composition [lem-weil-pbc-inverse-image-composition] and the free represented pullback comparison give a canonical isomorphism ρ:g′*f*A_U≅f′*A_U′. For q≥0 and a raw derived-Hom class z:f*A_U[0]→F[0][q] in the bounded-below derived category [def-weil-pbc-derived-categories], construct its pullback as the single of ρ⁻¹, the inverse exact inverse-image/single comparison, D⁺g′*(z), its q-shift comparison, and the shifted single comparison at F. This is a construction using exact inverse image [def-weil-pbc-derived-inverse-image], with no choice of a cohomology representative. The cached evaluation of a shifted raw class after an exact functor L and a left exact section functor R applies H⁰(RL) to the class, evaluates at the inverse degree-zero comparison of the chosen section, then applies the specified q-shift comparison [def-sbc-raw-restricted-cohomology-comparison-map]. This is the explicit evaluation formula, not an existence choice. These transport and evaluation constructions are bundled additive group morphisms. Exact derived inverse image is additive, and precomposition and postcomposition are additive, so transport preserves zero and sums. The point formulae identify these bundled morphisms with the stated raw class operations. The native raw comparison is exactly bundled evaluation at the represented identity generator; its definitional equation is cached in the evaluation API.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 07A6 (lemma-adjoint) and 0D6F (lemma-unbounded-cohomology-of-open); Etale Cohomology Tag 03Q8 (lemma-higher-direct-images)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-sbc-raw-restricted-cohomology-comparison-map"
+ ],
+ "proof": [
+  {
+   "text": "Adjunction, the free abelian adjunction, sheafification and Yoneda identify Hom(g*A_U,B) naturally with B(U′). The representing isomorphism identifies g*A_U with A_U′. Compose its f′ inverse image with the inverse sheaf square comparison to obtain ρ.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact inverse image on bounded-below derived categories. Insert its canonical single and shift comparisons and precompose with the single of ρ inverse. Each factor is a specified morphism, so the displayed composite constructs the pulled-back raw class.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cached point evaluation is the composite of inverse degree-zero comparison, H⁰ of the mapped class and the target shift comparison. Its formula theorem is reflexivity.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Additivity of the derived functor and bilinearity of composition show that exact transport preserves zero and sums. Use these proved laws to construct its additive group morphism. Evaluation is already an additive morphism from the derived-Hom group. Their application formulae are reflexivity. Unfold the cached bundled evaluation: the native raw comparison is the same evaluation map followed by the same shift comparison, so reflexivity gives its presentation equation.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-exact",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Read the cited Stacks source passages; the explicit adjunction, exact-functor comparison and represented-generator calculations are agent-written. Blueprint searches: exchange cohomology; derived evaluation; inverse image. No blueprint node states this separate raw-Hom comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image carries a raw derived Hom class to the section obtained from the degree q base change mate",
+   "results": "8 hits, including inverse morphisms of schemes, sheaf Hom adjunctions and right-derived resolution naturality; none asserts the mate/evaluation square for free represented abelian etale sheaves.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived Hom from a free represented sheaf commutes with cohomology pullback on an etale chart",
+   "results": "8 hits for free SheafOfModules and free-Hom pullback comparisons. None identifies this abelian etale chart evaluation diagram.",
+   "verdict": "no match",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusHomologyFunctorIso_hom_app_(shiftIso|singleFunctor)",
+   "results": "No Mathlib hits. The required exact-functor single and shift comparisons are proved APIs of the adopted source library.",
+   "verdict": "no match in Mathlib; use the source-library API",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CommutativeExchangeChart",
+  "date": "2026-10-21",
+  "group": "H9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-kun-relative-continuity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommutativeExchangeRawPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeExchangeRawPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.commutativeExchangeRawPullback",
+  "statement": "def commutativeExchangeRawPullback\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : CommSq g' f' f g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : Y.Etale)\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((f)^*[AddCommGrpCat.{u + 1}]).obj ((abelianComparisonFree Y).obj U)) ⟶\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(q : ℤ)⟧) :\n    (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((f')^*[AddCommGrpCat.{u + 1}]).obj\n        ((abelianComparisonFree Y').obj (g.Etale.obj U))) ⟶\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj\n        (((g')^*[AddCommGrpCat.{u + 1}]).obj F))⟦(q : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.commutativeExchangeTransport",
+   "AlgebraicGeometry.Etale.commutativeExchangeTransport_def",
+   "AlgebraicGeometry.Etale.commutativeExchangeTransport_zero",
+   "AlgebraicGeometry.Etale.commutativeExchangeTransport_add",
+   "AlgebraicGeometry.Etale.commutativeExchangeTransportHom",
+   "AlgebraicGeometry.Etale.commutativeExchangeTransportHom_apply",
+   "AlgebraicGeometry.Etale.commutativeExchangeEvaluationHom",
+   "AlgebraicGeometry.Etale.commutativeExchangeEvaluation",
+   "AlgebraicGeometry.Etale.commutativeExchangeEvaluationHom_apply",
+   "AlgebraicGeometry.Etale.commutativeExchangeEvaluation_def",
+   "AlgebraicGeometry.Etale.commutativeExchangeEvaluationHom_rawComparison",
+   "AlgebraicGeometry.Etale.commutativeExchangeRawSourceIso",
+   "AlgebraicGeometry.Etale.commutativeExchangeRawPullback",
+   "AlgebraicGeometry.Etale.commutativeExchangeRawPullbackMap",
+   "AlgebraicGeometry.Etale.commutativeExchangeRawPullbackMap_apply"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261021T014223-L-2389552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261021T014223-L-2389552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
