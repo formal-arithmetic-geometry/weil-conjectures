@@ -15,79 +15,65 @@
  },
  "proof": [
   {
-   "text": "For any term $T=E^i$, choose its splitting $T\\xrightarrow{i}\\mathcal O^{\\oplus r}\\xrightarrow{p}T$. With the standard sections $u_j$ and coordinate functionals $u_j^*$ put $t_j=p(u_j)$ and $\\lambda_j=u_j^*i$, so $\\sum_jt_j\\lambda_j=1_T$. The sheaf Hom and tensor definitions [def-pur-sheaf-hom, def-pur-sheaf-tensor-product] give, for every module sheaf $B$, mutually inverse maps\n$$B\\otimes T^\\vee\\longrightarrow\\mathcal Hom(T,B),\\quad b\\otimes\\phi\\longmapsto(t\\mapsto b\\phi(t)),\\qquad h\\longmapsto\\sum_jh(t_j)\\otimes\\lambda_j.$$\nIndeed their composites send $h$ to $h\\sum_jt_j\\lambda_j=h$ and $b\\otimes\\phi$ to $b\\otimes\\sum_j\\phi(t_j)\\lambda_j=b\\otimes\\phi$. All formulas are compatible with further restriction. The dual maps $p^\\vee,i^\\vee$ exhibit $T^\\vee$ as a summand of $(\\mathcal O^{\\oplus r})^\\vee=\\mathcal O^{\\oplus r}$. The double-dual map $t\\mapsto(\\phi\\mapsto\\phi(t))$ has inverse $\\alpha\\mapsto\\sum_j\\alpha(\\lambda_j)t_j$. Finally $\\mathcal Hom(T,-)$ is a retract, naturally in its argument, of $\\mathcal Hom(\\mathcal O^{\\oplus r},-)=(-)^{\\oplus r}$. The latter is exact by [lem-sc-finite-free-internal-hom-exact]. Applying the retraction to any short exact sequence splits its kernels, images and cokernels, so its retract sequence is exact too.",
+   "text": "Apply [lem-sfb-ringed-site-finite-retract-dual-exact] to the chosen retraction of each $E^i$. Each $(E^i)^\\vee$ has a finite-free retraction, each $\\delta_{E^i}$ is invertible, and every $\\mathcal Hom_R(E^i,-)$ is exact.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "lem-sc-finite-free-internal-hom-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, final finite-free/direct-summand calculation; dual splittings and termwise evaluation"
-   }
-  },
-  {
-   "text": "For the fixed K-injective augmentation F to I(F), Hom(E^i,-) is exact by step 1. The bounded exact-source Hom calculation [lem-pc-bounded-exact-term-hom-quasi-iso] therefore gives a quasi-isomorphism Hom-complex(E,F) to Hom-complex(E,I(F)). Equivalently, filter by the finitely many source degrees of E: the successive quotients are shifted exact termwise Hom functors, so induction and the cohomology long exact sequence apply to arbitrary unbounded F. This finite filtration proof works with independent site and coefficient universes; no exactness of infinite products is used.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "def-pur-hom-complex"
+    "lem-sfb-ringed-site-finite-retract-dual-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH, lemma-Rhom-strictly-perfect, ordinary-to-derived Hom comparison; bounded exact-source proof instead of its local-actual-map argument"
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
    }
   },
   {
-   "text": "The Hom-product description [def-pur-hom-complex] and the fact that O is concentrated in degree zero identify D^q with Hom(E^(-q),O), and d_D^q with (-1)^(q+1) times the dual of d_E^(-q-1). If E is supported in [a,b], then D is supported in [-b,-a]. Step 1 dualizes the chosen finite-free retractions, producing a finite-free retract package for D. Step 2 applied to D gives its augmentation comparison at O.",
+   "text": "Choose bounds $[a,b]$ for $E$. By [lem-sfb-ringed-site-bounded-dual-components], $D^q\\cong(E^{-q})^\\vee$ and $D$ has bounds $[-b,-a]$. Transport the retractions from step 1 across these isomorphisms. This is the required degreewise package; its inclusions and projections need not be chain maps. Apply [lem-sfb-ringed-site-finite-retract-dual-exact] to these retractions to obtain exactness of $\\mathcal Hom_R(D^q,-)$.",
    "uses": [
-    "def-pur-hom-complex",
+    "lem-sfb-ringed-site-bounded-dual-components",
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
     "def-weil-pbc-strict-perfect-coefficient-package"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, second paragraph, model of the dual and finite-free-summand dual terms"
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
    }
   },
   {
-   "text": "For the ordinary signed bidual map characterized in [lem-sfb-ringed-site-duality-maps], the Hom-product projections identify its degree-i component with (-1)^i times termwise double-dual evaluation. The dual basis identity of step 1 gives the inverse, including for odd i and in characteristic two. This proves invertibility as an actual chain map, not merely of its localization.",
+   "text": "The fixed augmentation $F\\to I(F)$ is a quasi-isomorphism by [def-pur-derived-internal-hom]. Apply [lem-pc-bounded-exact-term-hom-quasi-iso] with bounded exact-Hom source $E$ for arbitrary $F$, and with source $D$ and target $O$. These give exactly both required augmentation comparisons; the cited theorem permits unbounded targets.",
    "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pur-hom-complex"
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-exact-term-hom-quasi-iso"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, second paragraph: canonical bidual map is termwise evaluation up to sign; Tag 0A97 for the canonical map"
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
    }
   },
   {
-   "text": "In degree n, the ordinary evaluation of [lem-sfb-ringed-site-duality-maps] is the finite sum, over p+q=n, of F^p tensor (E^(-q))^dual to Hom(E^(-q),F^p), y tensor phi mapping to (x mapping to phi(x)y). The dual basis inverse of step 1 inverts every summand; both sides have the same finite indexing because E is bounded. Expanding the differentials gives d_F y tensor phi + (-1)^(p+q+1)y tensor (phi d_E) on the tensor side, exactly d_F f-(-1)^n f d_E on the Hom side. Thus the componentwise inverse is an inverse chain map. The formula also covers zero ranks, the zero ring and unbounded F.",
+   "text": "By [lem-sfb-ringed-site-bounded-dual-components], the signed ordinary bidual has components $(-1)^i\\delta_{E^i}$, hence is degreewise invertible by step 1. Inverting its chain-map equation gives an inverse chain map. For every $i,M$, [lem-pc-finite-projective-internal-hom-evaluation] applies to the chosen finite-free retraction of $E^i$ and supplies $\\theta_{i,M}$. Apply [lem-sfb-ringed-site-bounded-evaluation-assembly] to obtain an invertible ordinary evaluation for arbitrary $F$. The formulas in [lem-sfb-ringed-site-duality-maps] are precisely the signed bidual and sign-free evaluation used by these two nodes, so these are the actual maps in the statement.",
    "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "lem-sfb-ringed-site-bounded-dual-components",
+    "lem-pc-finite-projective-internal-hom-evaluation",
+    "lem-sfb-ringed-site-bounded-evaluation-assembly",
+    "lem-sfb-ringed-site-duality-maps"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, last three displays and final sentence, including the evaluation map; section-hom-complexes for signs"
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-tensor-product",
-  "lem-sc-finite-free-internal-hom-exact",
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "lem-sfb-ringed-site-bounded-dual-components",
+  "def-weil-pbc-strict-perfect-coefficient-package",
   "def-pur-derived-internal-hom",
   "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "def-pur-hom-complex",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-sfb-ringed-site-duality-maps",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-sfb-ringed-site-bounded-evaluation-assembly",
+  "lem-sfb-ringed-site-duality-maps"
  ],
  "proof_origin": {
   "by": "document",
@@ -122,6 +108,34 @@
    "results": "dualTensorHomEquivOfBasis; Module.dual_projective; dualTensorHomEquiv; Module.dual_finite; Module.instIsReflexiveOfFiniteOfProjective; LinearMap.IsPerfPair.dualEval; FGModuleCat.FGModuleCatDual; HomologicalComplex.instHasBinaryBiproductObjEval",
    "date": "2026-10-21",
    "verdict": "No match: ordinary module duality does not identify the signed sheaf Hom-complex maps or prove their augmentation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex on a ringed site has a bounded finite projective ordinary dual with bidual and tensor Hom isomorphisms and computes derived internal Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"CochainComplex.isKProjective_of_op\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K : CochainComplex C ℤ},\\n  ((CochainComplex.opEquivalence C).functor.obj (Opposite.op K)).IsKInjective → K.IsKProjective\", \"doc\": \"If the opposite of a cochain complex $ K $ in an abelian category $ \\\\mathcal{C} $ is K-injective in $ \\\\mathcal{C}^\\\\text{op} $, then $ K $ is K-projective in $ \\\\mathcal{C} $.\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsKProjective\", \"doc\": \"The cochain complex constructed from a projective resolution in an abelian category satisfies the K-projective property, meaning it is acyclic and has lifting properties with respect to quasi-isomorph\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module duality and K-projectivity do not give internal sheaf Hom exactness, signed ordinary evaluations, or the combined statement on arbitrary ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.HasRightDual",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match: module duality and K-projectivity do not give internal sheaf Hom exactness, signed ordinary evaluations, or the combined statement on arbitrary ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*dual|dual.*perfect|isIso.*evaluation",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"56\", \"text\": \"/-- Turn a perfect pairing between `M` and `N` into an isomorphism between `M` and the dual of `N`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"83\", \"text\": \"/-- A reflexive module has a perfect pairing with its dual. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"88\", \"text\": \"/-- A reflexive module has a perfect pairing with its dual. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"140\", \"text\": \"`V` in `N` are perfectly complementary w.r.t. `p` if their dual annihilators are complementary,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"line\": \"186\", \"text\": \"`M ≃ₗ[R] Dual R N`. Such equivalences are known as perfect pairings. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/SingleFunctors.lean\", \"line\": \"201\", \"text\": \"  inferInstanceAs <| IsIso ((evaluation C D n).map f)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/PerfectPairing.lean\", \"line\": \"21\", \"text\": \"there is a continuous perfect pairing between `M` and `WeakDual R M`, even though the map\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"line\": \"14\", \"text\": \"# Continuous Perfect Pairing for `topDualPairing`\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"line\": \"16\", \"text\": \"This file proves that `topDualPairing 𝕜 E` is a continuous perfect pairing when `E` is a\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"line\": \"21\", \"text\": \"* `topDualPairing_isContPerfPair`: The `topDualPairing` is a continuous perfect pairing for\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"line\": \"34\", \"text\": \"/-- The `topDualPairing` is a continuous perfect pairing for finite-dimensional\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"120\", \"text\": \"A variant of `isConstant_iff_isIso_counit_app` for a general left adjoint to evaluation at a\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Dual.lean\", \"line\": \"17\", \"text\": \"When the pairing is perfect, this gives us the algebraic dual of a cone. This is developed here.\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Cone/TensorProduct.lean\", \"line\": \"34\", \"text\": \"- A continuous perfect pairing between the module and its dual.\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Cone/Dual.lean\", \"line\": \"20\", \"text\": \"When the pairing is perfect, this gives us the algebraic dual of a cone.\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Cone/Dual.lean\", \"line\": \"68\", \"text\": \"/-- The dual cone of a set `s` with respect to a perfect pairing `p` is the cone consisting of all\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module duality and K-projectivity do not give internal sheaf Hom exactness, signed ordinary evaluations, or the combined statement on arbitrary ringed sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective sheaves on a ringed site has a finite projective ordinary dual, computes derived Hom, and ordinary signed biduality and tensor Hom evaluation are isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.dual_projective\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Projective R M] : Projective R (Dual R M)\", \"doc\": \"If $ M $ is a projective $ R $-module, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps from $ M $ to $ R $ is also a projective $ R $-module.\"}\n  {\"name\": \"Module.dual_finite\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Projective R M] : Module.Finite R (Dual R M)\", \"doc\": \"If $ M $ is a projective module over a semiring $ R $, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps from $ M $ to $ R $ is a finitely generated $ R $-module.\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"Module.instIsReflexiveOfFiniteOfProjective\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Module.Finite R N] [Projective R N] : IsReflexive R N\", \"doc\": \"For a commutative semiring $ R $, if a module $ N $ is both finitely generated and projective, then $ N $ is reflexive. This means the canonical evaluation map $ N \\to (N^*)^* $ from the module to its \"}\n  {\"name\": \"HomologicalComplex.instHasFiniteLimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteLimits C] : HasFiniteLimits (HomologicalComplex C c)\", \"doc\": \"If a category $ C $ has zero morphisms and finite limits, then the category of homological complexes over $ C $ with shape $ c $ also has finite limits.\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"HomologicalComplex.instHasBinaryBiproduct\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexBiprod\", \"type\": \": HasBinaryBiproduct K L\", \"doc\": \"In the category of homological complexes with a fixed shape and zero morphisms, any two objects $ K $ and $ L $ admit a binary biproduct. This biproduct serves as both the product and coproduct of $ K\"}\n  {\"name\": \"LinearMap.IsPerfPair.dualEval\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"[IsReflexive R M] : IsPerfPair (Dual.eval R M)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $, if $ M $ is reflexive (i.e., the canonical evaluation map $ M \\to (M^*)^* $ is an isomorphism), then this evaluation map defines a perfect pairin\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module duality and K-projectivity do not give internal sheaf Hom exactness, signed ordinary evaluations, or the combined statement on arbitrary ringed sites."
   }
  ],
  "mathlib_match": null,
@@ -156,14 +170,12 @@
   "date": "2026-10-21"
  },
  "reviewed": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U6",
+  "reviewer": "NT-cc-NU-5ec52588e",
+  "group": "NU",
   "result": "pass",
-  "landing": "20261020T221355-L-4179459",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-5ec52588e (reviewer sub-agent of L); spot-checked: Re-split note answered: the 5-step, 3221-character base proof is now a 4-step, 1637-character assembly with 3 new statement-only nodes; I found no newer live or side-live re-split and nothing dropped. Old step map: step 1 → new finite-retract-dual-exact plus existing lem-pc-finite-projective-internal-hom-evaluation (same b⊗φ↦(e↦bφ(e)) map, same p∘i=1 hypothesis); step 2 → existing lem-pc-bounded-exact-term-hom-quasi-iso (already cited; arbitrary targets); step 3 → new bounded-dual-components plus transported retractions; step 4 → components (−1)^iδ plus the dual-basis inverse; step 5 → new bounded-evaluation-assembly. Hand checks: Σλ_j(t)t_j=pit=t, φ=Σφ(t_j)λ_j, both composites of δ with its inverse are identities, and a retract of exact Hom(R^r,−) is exact. D^q=Hom(E^{-q},R) with support [−b,−a]; d_D=(−1)^{q+1}φd_E; d_{D'}=−d^{∨∨}; β has components (−1)^iδ and is a chain map. The tensor differential sign (−1)^{p+q+1} matches the Hom differential, so ε has no extra sign, matching the lem-sfb-ringed-site-duality-maps normalizations; sums are finite in each degree, so unbounded F is allowed. Edge cases r=0, R=0, odd one-term and two-term complexes, characteristic 2 all check out. Sources: Stacks sites-cohomology 08JH (l.11912) and 08JJ (l.13048), final paragraphs; no SGA. Not duplicates: the pc evaluation-assembly nodes are scheme-open only (the new node strictly generalizes them, advisory); the sf/pod finite-projective nodes are D^b_ctf over F̄_q. No cycles: new stmt_deps are definitions only. Both tool_uses accepted as generic ringed-site black boxes. Maintainer: new nodes have blueprint.from.node=null because the item's created.item is a Lean module name; set it to lem-sfb-ringed-site-perfect-duality and regenerate."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -175,5 +187,26 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-site-strict-perfect-hom",
+  "worker": "stage1",
+  "summary": "NU repair of the explicit human re-split request: retains the statement and all existing interface/audit fields. Separates finite-retract duality and exactness, bounded-dual component/sign calculation, and general ringed-site finite-support tensor-Hom assembly into three statement-only unsplit nodes. Reuses existing termwise sheaf evaluation and bounded exact-source Hom theorems. Full old argument retained with allocation in report.md. The existing created.item chain ends in a Lean module name; new nodes record the computed null ancestor, with the known blueprint location named explicitly in from.place and the report, following blueprint_refs.py documented broken-chain convention.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom: coefficient-duality sentence, via lem-sfb-ringed-site-perfect-duality; the local strictly perfect calculation of Stacks 08JJ, with comparison of Stacks 08JH.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Generic bounded exact-source internal Hom theorem for arbitrary ringed sites and unbounded targets; supplies both augmentation comparisons."
+   },
+   {
+    "node": "lem-pc-finite-projective-internal-hom-evaluation",
+    "why": "Generic canonical module-sheaf evaluation for a finite-free retract on an arbitrary ringed site; supplies termwise comparisons without duplicating its dual-basis proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-finite-projective-internal-hom-evaluation"
+ ]
 }
