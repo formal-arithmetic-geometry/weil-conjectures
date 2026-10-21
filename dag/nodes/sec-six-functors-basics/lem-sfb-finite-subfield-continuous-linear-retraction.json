@@ -379,5 +379,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-bc844f459 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement: the absolute-value, completeness, l-adic, properness and directed-set nodes, and the finite-dimensional-continuity Mathlib leaf. Also read blueprint direct-images.proof paragraph (3) and the parent's step 6, which uses the item exactly as stated. Step 1: uniqueness of the extended absolute value gives |.|_E; t=ell has |t|=ell^-1; closed balls are compact by properness, including radius r=0; Omega is ultrametric because x and y lie in a common finite L. Step 2: F/E is finite; the coordinate maps are continuous via LinearMap.continuous_of_finiteDimensional, and the topology on F is the subspace topology from Omega. Step 3: the hypotheses of the new node match exactly; neither node assumes completeness. Step 4 is an elementary assembly with p_F|F=id. Edge case F=E checked. The normalised-trace alternative is not continuous on Omega because |1/[L:F]| is unbounded, so the Hahn-Banach input is genuinely needed. The new node is Ingleton's non-archimedean Hahn-Banach theorem: compact closed balls imply spherical completeness, and I re-derived the Zorn plus nested-ball argument. It is true as stated without closedness of W or completeness of V, carries a statement only, introduces its own objects, and is a general lemma rather than a restatement of the item. Mathlib's StrongDual.exists_extension and exists_extension_norm_eq need IsRCLikeNormedField, and Mathlib has no SphericallyComplete, so the node is correctly unsplit. rg -L over the DAG for Hahn, Ingleton, spherically and retraction found no duplicate. The unit route is respected: every off-unit citation is a Mathlib leaf, and no tool_uses are needed. No SGA is cited. blueprint ancestor prints None, so from.node=null is correct. The WANTED line for Ingleton 1952 is appropriate, since literature/ has no non-archimedean functional analysis text. Advisory only: the item and new node have no lean_audit field. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.FiniteSubfieldContinuousLinearRetraction",
+  "declaration": "Padic.exists_finiteSubfield_continuousLinearRetraction",
+  "file": "lean/Sheaf/NumberTheory/Padics/FiniteSubfieldContinuousLinearRetraction.lean",
+  "statement": "theorem exists_finiteSubfield_continuousLinearRetraction (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) E] (F : IntermediateField E Ω) [FiniteDimensional (Padic l) F] : ∃ p : Ω →L[E] F, ∀ a : F, p (a : Ω) = a",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a556c665",
+  "group": "NO",
+  "result": "pass",
+  "note": "Item node identical to side-live except lean; statement verbatim in file; record complete. Clause match: (l:ℕ)[Fact l.Prime], Padic l, Ω NormedField+NormedAlgebra (Padic l)+IsAlgClosure = closure with extended abs value (no completeness; PadicAlgCl instantiates), E IntermediateField finite over Q_ℓ, F : IntermediateField E Ω finite over Q_ℓ (nesting encodes E⊆F, equivalent finiteness), ∃ p : Ω →L[E] F with p a = a on F. No extra hypotheses, universe u free, autoImplicit off. Edge cases E=Q_ℓ, F=E, ℓ=2, non-complete Ω covered; statement true via Ingleton Hahn–Banach. No duplicate in Mathlib (RCLike-only HB) or project. Docstrings carry source place, blueprint tag and 4 proof steps; sorry only. Advisory: proof-only imports unused by the statement; second reading done in the worker session but clause-by-clause. No file changed, no compile."
  }
 }

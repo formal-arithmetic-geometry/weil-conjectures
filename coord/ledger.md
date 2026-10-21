@@ -23484,3 +23484,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:27 L: returned deliver/V8/Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackNormalization (reviewer RETURN: (the landing tools, head 364eab3a2) the delivery did not land: every module of the delivery is in the library already, w)
 - 19:27 L: merged deliver/NR/lem-sfb-proper-ultrametric-scalar-extension (reviewer PASS; first push; new nodes: 0)
 - 19:27 L: merged deliver/B4/Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison (stage 3; reviewer PASS; first push; landing 20261021T192754-L-724351 (proof); batch 20261021T192711; modules 1; new nodes 0; change records: coord/changes/canonical-pullback-tensor-source-compatibility.md)
+- 19:28 L: merged deliver/NO/lem-sfb-finite-subfield-continuous-linear-retraction (stage 2; reviewer PASS; parallel immutable checks)
+- 19:28 L: merged deliver/NM/lem-sfb-normed-scalar-profinite-cech-exact (stage 2; reviewer PASS; parallel immutable checks)
+- 19:28 L: merged deliver/Q08/lem-sfb-proper-open-boundary-zero (stage 2; reviewer FIX; parallel immutable checks)
+- 19:28 L: merged deliver/NV/lem-sfb-profinite-constant-derived-functions (stage 2; reviewer PASS; parallel immutable checks)

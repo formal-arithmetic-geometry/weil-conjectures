@@ -69,6 +69,7 @@ The body is the published instance, cached to avoid repeatedly synthesizing the 
 presheaf internal-Hom diagrams when elaborating all the compatibility squares.
 Source: the item's existing internal tensor
 (blueprint: lem-sfb-profinite-constant-derived-functions). -/
+@[reducible]
 instance condensedSheafMonoidal :
     MonoidalCategory (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) := inferInstance
 
@@ -76,6 +77,7 @@ instance condensedSheafMonoidal :
 Its data is precisely the published monoidal instance, without a different tensor.
 Source: the item's existing internal tensor
 (blueprint: lem-sfb-profinite-constant-derived-functions). -/
+@[reducible]
 instance schemeSheafMonoidal (X : Scheme.{u}) :
     MonoidalCategory (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) := inferInstance
 

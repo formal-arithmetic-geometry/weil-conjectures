@@ -659,5 +659,29 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-77fe211b8 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, Bhatt–Scholze Lemma 4.3.9 with its proof (p.33), and the Stacks tags 08ZY/08ZZ/0A2P/0A2R. The item statement is unchanged and no repair note applies. Item steps: step 1 iterates lem-sfb-finite-quotient-fiber-product on P_{r+1}=P_r×_S T, and the d²=0 signs and the empty case are correct. Step 2's contraction v0=c0(σq0x0,…) is correct; it needs d c0=0 on the whole finite fibre power, and the new node supplies exactly that. Step 3's citations say what is used (DVR and uniformizer, finite A_m with surjective transitions, O→lim A_m a ring isomorphism and homeomorphism). Steps 4–6 set up the induction explicitly: a non-additive set-section lift, a cocycle error in the finite kernel, and a correction preserving both invariants. Step 7 rebuilds the O-valued primitive through the inverse homeomorphism and checks the equation via joint injectivity of the reductions. Step 8 bounds f by compactness, which gives one π^k denominator. New node lem-sfb-finite-valued-cech-cocycle-descent is true: compatible finite clopen partition pairs are cofinal, lim of the finite fibre powers is T_S^r, c factors through a finite stage, and the sets where the extended c0 fails the cocycle equation can't all be nonempty, by 0A2R. Small cases checked: empty spaces, a point with a constant cocycle (forces m=0 for odd n), M=0, n=1. It is statement-only, self-contained, strictly smaller than the item, and not a clause of the parent. rg -L DAG searches found no duplicate. Tool uses accepted as generic black boxes: fiber-product, integers-dvr, integers-profinite-tower. Coefficients are finite E with its norm topology, the statement is not weakened, there is no base-change morphism, no SGA, no cycle, and proof_deps equals the union of uses. from.node null is inherited from the detached chain. Advisory: the new node's source could also name Stacks 0A2R."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.NormedScalarProfiniteCechExact",
+  "declaration": "Profinite.normedScalarProfiniteCech_exact",
+  "declarations": [
+   "Profinite.scalarCechTuples",
+   "Profinite.scalarCechDelete",
+   "Profinite.normedScalarProfiniteCech_exact"
+  ],
+  "file": "lean/Sheaf/Topology/NormedScalarProfiniteCechExact.lean",
+  "statement": "theorem normedScalarProfiniteCech_exact (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (S T : Profinite.{v}) (q : C(T, S)) (hq : Function.Surjective q) (n : ℕ) (f : @ContinuousMap (scalarCechTuples q (n + 2)) E inferInstance (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace) (hf : ∀ x : scalarCechTuples q (n + 3), ∑ j : Fin (n + 3), (-1 : E) ^ j.val * f (scalarCechDelete q (n + 2) j x) = 0) : ∃ g : @ContinuousMap (scalarCechTuples q (n + 1)) E inferInstance (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace, ∀ x : scalarCechTuples q (n + 2), ∑ j : Fin (n + 2), (-1 : E) ^ j.val * g (scalarCechDelete q (n + 1) j x) = f x",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The positive degree is indexed as n + 1 for n : ℕ. Cocycle and coboundary equalities are the displayed differentials evaluated pointwise. E carries exactly the spectral-norm topology from the coefficient dependency; no local constancy, continuous section, or additional completeness hypothesis is imposed. Tuple and deletion helpers belong to this explicit Cech statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b4acd3ed",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause check of Profinite.normedScalarProfiniteCech_exact against the node: prime l; finite E/Q_l binders as in def-weil-l-adic-coefficient-extension; E topology from spectralNorm.normedField, the same spectral norm as Padic.coefficientExtensionAbsoluteValue, field ops are the given Field E (Mathlib SpectralNorm.lean:854); S T : Profinite.{v}, E : Type u independent; q continuous surjection with no section or Nonempty; scalarCechTuples = pairwise equal-image subtype of Fin r -> T with subspace topology; scalarCechDelete omits coordinate j via succAbove; degree n+1 indexing checked (f on n+2 tuples, cocycle over Fin (n+3), g on n+1 tuples, boundary over Fin (n+2)); signs (-1)^j. Edge cases: degree 1, q = id, empty spaces, universes. Node unchanged vs live except lean; lean.statement verbatim; helpers are real constructions; the only sorry is the theorem proof; docstrings carry source, blueprint id and 8 proof steps; no existing profinite Cech-tuple helper in side-live Sheaf/WeilConjectures. Advisory: unused plain proof-dep imports and a redundant public import of CoefficientExtensionFinite. No changes, no compile."
  }
 }

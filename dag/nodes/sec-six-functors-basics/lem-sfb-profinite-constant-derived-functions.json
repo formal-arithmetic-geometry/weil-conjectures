@@ -489,21 +489,20 @@
    "AlgebraicGeometry.ProEtale.ProfiniteFunctions.delta_wholeFamily",
    "AlgebraicGeometry.ProEtale.ProfiniteFunctions.comparison_scalarModel"
   ],
-  "file": "lean/Sheaf/Paper/ProfiniteConstantDerivedFunctions.lean",
   "statement": "def delta (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hpl : p ≠ l) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra (Padic l) E] [FiniteDimensional (Padic l) E] (F : Type u) [NormedField F] [NormedAlgebra E F] (hF : Nonempty (E ≃ₐ[E] F) ∨ IsAlgClosure E F) (X : Scheme.{u}) [IsAffine X] (s : X ⟶ Scheme.Spec.obj (op (CommRingCat.of k))) (P : Profinite.{u}) (M : Type u) [AddCommGroup M] [Module E M] [FiniteDimensional E M] : (CondensedRing.moduleObjectDerivedPushforward (continuousRing F).X (projection X P)).obj ((pointPullD (continuousRing F) (testScheme X P)).obj (constantModelD E F M)) ≅ (pointPullD (continuousRing F) X).obj ((functions (continuousRing F) P).obj (constantModelD E F M))",
-  "branch": "newtargets-dag",
-  "by": "NB",
+  "branch": "sheaf-dag",
+  "by": "NV",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The canonical derived isomorphism delta is the inverse of the explicitly constructed evaluation-adjoint comparisonApp. All supporting construction, normalization, base-change, whole-family and scalar-restriction declarations are recorded in declarations. Helpers belong to the maps and models explicitly introduced in this node, and reuse the existing module, free, coefficient and derived functors. No node statement or dependency record is changed. Reviewer FIX: added pointParameterMap, testSchemeMap and comparison_parameterNaturality, stating the item's naturality in continuous parameter maps P' to P directly for comparisonApp (hence for delta), with the displayed target p_X^* RHom(C_F[P],M_F).",
-  "fixed_by": "NT-stage2-cc-f6ad750ce"
+  "note": "Reuses the already landed NB statement and all 111 recorded declarations. The unchanged module failed the required dry-run compile at the 60-second limit both in the overlay and server confirmation. This delivery changes only the two cached canonical sheaf MonoidalCategory instances by marking condensedSheafMonoidal and schemeSheafMonoidal reducible. Their data, all declaration types, evaluation-adjoint maps, continuous models and theorem proofs are unchanged. These transparency annotations let instance comparison unfold the canonical aliases directly rather than repeatedly compare expanded tensor structures. The stale stage-2 queue entry and the prior NB landing are reported explicitly; no second definition or new mathematical assertion is introduced.",
+  "file": "lean/Sheaf/Paper/ProfiniteConstantDerivedFunctions.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f6ad750ce",
-  "group": "NB",
-  "result": "fix",
-  "note": "Read the node, all 8 stmt_dep records, the full 1381-line module, the report and the side-live sources. Every hypothesis and clause matches: primes, char p, the normed E/F with NormedAlgebra forcing the extended norm (no completeness), all-continuous C(Q,F) and C(Q,F⊗M) with moduleTopology = product topology, the InternalBar.free module, (ihom A).rightDerivedFunctor, moduleObjectDerivedPushforward, and delta = inverse of the explicit evaluation-adjoint comparisonApp with normalization, M-naturality, base change, linear maps, the X[Q] family and the E→Ω scalar square. F1 (H3): naturality of δ in continuous parameter maps P'→P was stated only for sliceDelta on the scheme-side model; no lemma relates relativeFreeMap(h_φ) to p_X^* of the free map of φ, and none gives pointHomComparison naturality in P. FIX adds pointParameterMap, testSchemeMap and comparison_parameterNaturality (sorry plus a proof docstring), and the lean-record override adds the declarations and pins the verbatim statement (refit_record check: no notes or refusals). Compile: the full fixed file timed out at 60 s at load ~155; a prefix through the new theorem compiled clean in 53.6 s at load ~167; the remainder is byte-identical to the delivered text (worker: 47.9 s clean). Advisory: continuousRing rebundles the recorded sheaf by the same construction; the pointAbelian/testScheme finite-limit sorry instances are already derivable; the lisse import is unused."
+  "reviewer": "NT-stage2-cc-e63117d39",
+  "group": "NV",
+  "result": "pass",
+  "note": "Redelivery of NB's landed and maintainer-fixed module. The module differs from the landed text only by @[reducible] on condensedSheafMonoidal and schemeSheafMonoidal (types and inferInstance bodies unchanged; transparency only). No other module imports it. All non-lean node fields are unchanged; lean.statement equals the def delta signature verbatim; the 111 declarations, module, file and existing:false are unchanged. Spot re-read of delta (inverse of evaluation-adjoint comparisonApp), source/target, hypotheses and clause declarations agrees with the earlier review. Worker reports a clean compile in 43.6/39.9 s versus the previous 60 s timeout; not recompiled per instruction. Advisory: the record drops fixed_by and replaces the descriptive note; a stale stage-2 queue entry should be cleared."
  }
 }
