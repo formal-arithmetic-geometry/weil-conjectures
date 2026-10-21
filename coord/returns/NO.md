@@ -92,9 +92,3 @@ L: independent stage-2 immutable head 2c82faae39d6: Read the node, all 5 stmt_de
 
 
 
-## lem-sf-compact-support-restriction-of-scalars (dedicated repair handoff; head 100b8fa832869045abf34c00f31fca7b56574dfe)
-
-The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 7412 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (982 characters); step 2 (1050 characters); step 4 (832 characters); step 7 (1043 characters). Lean module: Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction.
-
-Compiler messages and attribution:
-re-split (decision of the human, 2026-10-21): the proof in words is 7412 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (982 characters); step 2 (1050 characters); step 4 (832 characters); step 7 (1043 characters). Lean module: Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction.

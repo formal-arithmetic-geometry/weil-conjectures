@@ -19703,3 +19703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:16 L: returned deliver/Q08/det-prop-sfb-cartesian-coefficients-twists (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED det-prop-sfb-cartesian-coefficients-twists: cited node)
 - 03:16 L: merged deliver/Q44/prop-sfb-module-left-derived-upper-star-comp (reviewer PASS; after a return; new nodes: 1)
 - 03:16 L: returned deliver/U2/Sheaf.Paper.IntegralScalarExtensionWellDefined (reviewer RETURN: (reviewer C-20907, head 209070cd6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralScalar)
+- 03:17 L: merged deliver/NO/lem-sf-compact-support-restriction-of-scalars (reviewer PASS; after a return; new nodes: 1)
