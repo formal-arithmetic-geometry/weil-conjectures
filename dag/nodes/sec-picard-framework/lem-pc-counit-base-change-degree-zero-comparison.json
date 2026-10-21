@@ -102,10 +102,11 @@
   "module": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeDegreeZeroComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/Picard/CounitBaseChangeDegreeZeroComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.counitBaseChange_degreeZero_comparison",
-  "statement": "theorem counitBaseChange_degreeZero_comparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (sq : IsPullback g' f' f g)\n    [HasInjectiveResolutions X.Modules] [HasInjectiveResolutions X'.Modules]\n    (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M]\n    (h0 : SheafOfModules.IsInvertible.{u, u, u}\n      (((pushforward f).rightDerived 0).obj M))\n    (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) :\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0\n    let c := (pullbackComp g' f).app ((pushforward f).obj M) ≪≫\n      (pullbackCongr sq.w).app ((pushforward f).obj M) ≪≫\n      ((pullbackComp f' g).app ((pushforward f).obj M)).symm\n    ∃ (a : (pullback g).obj ((pushforward f).obj M) ≅\n        H.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)))\n      (b : H.obj ((schemeDerivedDirectImage f').obj ((derivedPullback g').obj E)) ≅\n        (pushforward f').obj ((pullback g').obj M)),\n      (pullbackPushforwardAdjunction f').homEquiv _ _\n          (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)) =\n        a.hom ≫ H.map (schemeDerivedBaseChangeMap f f' g g' sq.w E) ≫ b.hom",
+  "statement": "theorem counitBaseChange_degreeZero_comparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (sq : IsPullback g' f' f g)\n    [HasInjectiveResolutions X.Modules] [HasInjectiveResolutions X'.Modules]\n    (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M]\n    (h0 : SheafOfModules.IsInvertible.{u, u, u}\n      (((pushforward f).rightDerived 0).obj M))\n    (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) :\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0\n    let c := (pullbackComp g' f).app ((pushforward f).obj M) ≪≫\n      (pullbackCongr sq.w).app ((pushforward f).obj M) ≪≫\n      ((pullbackComp f' g).app ((pushforward f).obj M)).symm\n    ∃ (a : (pullback g).obj ((pushforward f).obj M) ≅\n        H.obj ((AlgebraicGeometry.derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)))\n      (b : H.obj ((schemeDerivedDirectImage f').obj\n          ((AlgebraicGeometry.derivedPullback g').obj E)) ≅\n        (pushforward f').obj ((pullback g').obj M)),\n      (pullbackPushforwardAdjunction f').homEquiv _ _\n          (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)) =\n        a.hom ≫ H.map (schemeDerivedBaseChangeMap f f' g g' sq.w E) ≫ b.hom",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-12"
+  "by": "A5",
+  "date": "2026-10-21",
+  "note": "Restore the quarantined zero-hole implementation. Qualify AlgebraicGeometry.derivedPullback in the statement and proof to keep the specified shared derived-category universes, distinct from Scheme.Modules.derivedPullback. All hypotheses, comparison maps, proof dependencies and unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,14 +119,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
+  "reviewer": "C-3c8cd",
+  "group": "A5",
   "result": "pass",
-  "landing": "20261012T135306-L-1687425",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T022426-L-2845861",
+  "kind": "proof",
+  "note": "independent cc review: delivered module vs quarantine/ original (diff: only AlgebraicGeometry.derivedPullback qualification at 3 sites), node lean.statement vs delivered signature, change record Old/New vs quarantine/delivery; compiled 6.7 s clean, axioms propext/choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
