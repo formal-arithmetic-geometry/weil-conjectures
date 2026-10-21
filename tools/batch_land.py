@@ -1597,7 +1597,10 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
     for _m, _deps in _imports.items():
         for _d in _deps:
             _importers.setdefault(_d, set()).add(_m)
-    _gone = {f['module'] for i in ids if i in _recs for f in _recs[i].get('files') or [] if f.get('module')}
+    # only a file the drop removes (one the landing created, e.g. a restore from quarantine) leaves dangling imports;
+    # a changed file goes back to the version its importers were compiled against
+    _gone = {f['module'] for i in ids if i in _recs for f in _recs[i].get('files') or []
+             if f.get('module') and not f.get('existed', True)}
     _seen, _todo = set(_gone), list(_gone)
     while _todo:
         for _x in _importers.get(_todo.pop(), ()):
