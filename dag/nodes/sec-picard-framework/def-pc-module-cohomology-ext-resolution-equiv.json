@@ -1,0 +1,130 @@
+{
+ "id": "def-pc-module-cohomology-ext-resolution-equiv",
+ "kind": "definition",
+ "title": "Resolution-normalized module/abelian cohomology comparison",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category], and $q\\in\\mathbf N$. Write $H^q_{\\mathrm{mod}}(X,F)$ for module-derived cohomology [def-sc-ringed-space-module-cohomology], and $H^q_{\\mathrm{ab}}(X,F_{\\mathrm{ab}})$ for the cohomology of its underlying abelian sheaf [def-sc-topological-abelian-cohomology], represented as Ext from the constant integer sheaf. Define the additive equivalence $E^q_{X,F}:H^q_{\\mathrm{mod}}(X,F)\\simeq H^q_{\\mathrm{ab}}(X,F_{\\mathrm{ab}})$ as follows: compute module-derived sections on the standard module injective resolution; forget scalars using exact forgetting of homology; identify the two section complexes; apply the inverse acyclic-resolution comparison for the forgotten resolution; apply the inverse Ext/derived-sections comparison constructed from Hom complexes and the section adjunction; and precompose Ext by the inverse canonical isomorphism from the free abelian sheaf on the terminal representable to the constant integer sheaf. Package this same composite as a natural isomorphism in $F$, and obtain $E^q_{X,F}$ by taking its component and forgetting to an additive equivalence. The site-Ext and site-H identifications are identity isomorphisms. These are specified composites with their specified inverses, with no choice of an arbitrary equivalence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; Tags 015E and 06XR for the acyclic-resolution and Ext comparisons; blueprint sk-thm-picard-duality residue-sequence normalization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of module sheaf derived cohomology with abelian sheaf Ext using injective resolutions",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "date": "2026-10-21",
+   "verdict": "General ingredients only; the full normalized composite is in the existing upstream module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheaf cohomology naturally additively equivalent to abelian sheaf cohomology via injective resolutions",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-21",
+   "verdict": "General ingredients only; reuse the existing upstream comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyExtResolutionEquiv|moduleCohomologyExtResolutionNatIso|ExtEdgeResolution",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration with these names."
+  },
+  {
+   "tool": "rg",
+   "query": "moduleCohomologyExtResolutionEquiv|moduleCohomologyExtResolutionNatIso in lean/WeilConjectures and lean/Sheaf; definition-node ownership search in dag/nodes",
+   "results": "Upstream ModuleCohomologyExtResolutionNaturality.lean:563 defines moduleCohomologyExtResolutionNatIso; :592 defines moduleCohomologyExtResolutionEquiv; :613 states its separate naturality theorem. Sheaf consumers include CanonicalCoherentEtaleComparison, CoherentEtaleEffacingSequence and QcoherentNormalizedComparison; no second definition. No definition node owns either comparison. The theorem node new-module-cohomology-ext-resolution-naturality lists the definitions as helpers.",
+   "date": "2026-10-21",
+   "verdict": "Record the existing definitions on their own definition node, as requested by the independent return."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "resolution-normalized; module/Ext; module cohomology resolution",
+   "results": "0 blueprint nodes match 'resolution-normalized'; 0 blueprint nodes match 'module/Ext'; 26 blueprint nodes match 'module cohomology resolution', all about other constructions.",
+   "date": "2026-10-21",
+   "verdict": "No existing blueprint definition node for this normalized comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-picard-duality",
+  "date": "2026-10-21",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-duality",
+   "place": "The residue-sequence construction of the dimension-one trace: the canonical comparison from module-derived H¹ to the abelian-sheaf H¹ used by residueTrace.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteExtNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteHNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionForgetObjIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionHomologyIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsObjIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.resolutionSectionsNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.moduleComparisonEquiv",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.extSourceNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.terminalSourceIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.extRightDerivedHomComplexIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.extRightDerivedHomObjIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.freeSectionsEquiv",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionsEquiv",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.sectionsIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.derivedSectionsIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteSectionsNatIso",
+   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.siteSectionsObjIso"
+  ],
+  "statement": "def moduleCohomologyExtResolutionEquiv (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :\n    ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ H F q",
+  "branch": "slopmaster2",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing, explicitly constructed definitions in the adopted upstream owner; no module is copied or introduced. This node records the comparison and its natural-isomorphism and ExtEdgeResolution construction helpers, not the separate coefficient-naturality theorem. The consumer only applies moduleCohomologyExtResolutionEquiv; it does not choose data from that theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03410d2da",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03410d2da",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after the 7c4db176 H2 RETURN. Lean file byte-identical (sha256 65307a98); the only node change is stmt_deps new-module-cohomology-ext-resolution-naturality -> def-pc-module-cohomology-ext-resolution-equiv, as prescribed. New existing:true def node: statement verbatim from `def` (ModuleCohomologyExtResolutionNaturality.lean:592-593, @[irreducible] excluded); all 19 listed decls exist as defs (no theorems, no privates); NL composite matches the code (resolutionSectionsNatIso, inverse siteSectionsNatIso, Iso.refl siteExt/siteH, Ext precomposition by the inverse terminalSourceIso, AddEquiv via moduleComparisonEquiv); real construction, no choice; target Modules.H = Sheaf.H of the underlying abelian sheaf = def-sc-topological-abelian-cohomology; q=0, empty X and zero F covered; Stacks 03FD/015E/06XR source fits; required fields present. Item Lean re-read: n=0 Algebra.trace pin; n=1 componentwise residueTrace pin over all finite integral cofans, incl. empty; pinned LinearEquiv for all q:Z with zero negative degrees; naturality direction correct; helpers real; sorry only; genus clause only under IsAlgClosed. No compile (no file changed). Advisory: residueTrace, IsFunctionFieldAlgebra and the Modules.H wrapper have no dedicated owner node."
+ }
+}

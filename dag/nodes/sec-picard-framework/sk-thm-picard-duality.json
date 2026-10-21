@@ -20,7 +20,9 @@
   "pqf-def-cohomology",
   "def-sc-field-linear-module-cohomology-operations",
   "lem-pc-vector-bundle-principal-parts",
-  "lem-pc-tate-dvr-residue-calculus"
+  "lem-pc-tate-dvr-residue-calculus",
+  "def-sc-scalar-global-sections-comparison",
+  "def-pc-module-cohomology-ext-resolution-equiv"
  ],
  "proof": [
   {
@@ -402,5 +404,36 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-0081a5bd5 (reviewer sub-agent of L); spot-checked: I read the whole delivery, the cited statements and Tate 1968 pp.149–159. Infrastructure: state/dagsnap/967e9e9 was deleted during the review, so the chapter symlinks broke. The delivered chapter is a real directory and was read from the snapshot; base nodes in other chapters were read from clones/live. Pre-checks: the item is not in route-pivot-dropped, there is no repair note, the live item is still imported, there is no cycle, and the citers det-picard-rr-duality and sk-thm-picard-rr (n=1, q=1) still hold. Statement change: n∈{0,1}, a componentwise trace for disconnected X (components are integral), zero trace for the empty X. This is a reported strengthening, not a weakening. New nodes: (1) principal parts: exact stalkwise, both later sheaves flasque, H^0=∩E_x and H^1=coker; true, regularity is surplus; no duplicate (only flasque-acyclic and ℓ-adic residue-sequence hits). (2) local Tate residue: matches Thm 1, (*), R2, R4 (res(u dt/t)=Tr ū checked) and Thm 2/4 for separable κ; V=K,A=O agrees with Tate's completed version via B/C. (3) adelic reciprocity: Tate's Thm 3 proof via R5 with exactly the finite ∩ and coker hypotheses; true; not a restatement of perfection. Steps: 1 component reduction; 2 relative dimension 1, ω rank 1, D(D(E))≅E, coherence, 02O5, vanishing above dimension; 3 n=0 via 06LH, étale, projective sections, 0BJF trace form, summand splitting; 4 DVRs, Zariski lemma, reciprocity hypotheses checked from step 2, trace descends; 5 separable point (056U) gives t_X≠0 by R4; 6 dimension equality from thm-sc-serre-duality-curve over k̄ (same unit, projective-line route via thm-sc-p1-duality + lem-sc-finite-duality) and flat base change; 7 Q supported in dimension 0 so H^1(Q)=0, H^2(N)=0, H^1(b) surjective; 8 Hom(E,ω)→H^1(E)^∨ injective, then bijective by dimension, q=0 via D(E), cup identification by the degree-zero formulas; 9 naturality by cup coefficient naturality and the evaluation identity, genus clause. Batch 5: all five flagged citations reach sec-poincare-duality only at def-pod-ring-scalar-extension, a general definition of module scalar extension that is no part of the trace formula or PD; accepted. tool_uses: written by the worker (C8), 24 generic tools, none replacing the unit route; accepted. FIX (B2): lem-pc-tate-dvr-residue-calculus used finite-potent without defining it and wrote T^N(K) for an arbitrary vector space; the corrected statement defines finite-potence and Tr_fp on W and notes the commutator is finite-potent on K. No assertion changed; fixes/dag/nodes/sec-picard-framework/lem-pc-tate-dvr-residue-calculus.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicardDuality",
+  "declaration": "AlgebraicGeometry.Scheme.picard_duality_one",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardCohomologyZ",
+   "AlgebraicGeometry.Scheme.Modules.picardCohomologyZMap",
+   "AlgebraicGeometry.Scheme.Modules.picardTracePairing",
+   "AlgebraicGeometry.Scheme.Modules.IsPicardTraceDuality",
+   "AlgebraicGeometry.Scheme.Modules.picardDifferentialPullback",
+   "AlgebraicGeometry.Scheme.Modules.picardDifferentialCohomologyPullback",
+   "AlgebraicGeometry.Scheme.picard_duality_zero",
+   "AlgebraicGeometry.Scheme.picard_duality_one",
+   "AlgebraicGeometry.Scheme.picard_duality_structureSheaf",
+   "AlgebraicGeometry.Scheme.picard_duality_genus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicardDuality.lean",
+  "statement": "theorem picard_duality_one [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] : ∃ t : Module.Dual k (scalarCohomology (X ↘ Spec (.of k)) (X ↘ Spec (.of k)).relativeDifferentials 1), (∀ (I : Type u) [Fintype I] (Y : I → Scheme.{u}) [∀ i, IsIntegral (Y i)] [∀ i, (Y i).Over (Spec (.of k))] [∀ i, Algebra k (Y i).functionField] [∀ i, IsFunctionFieldAlgebra k (Y i)] [∀ i, SmoothOfRelativeDimension 1 (Y i ↘ Spec (.of k))] [∀ i, IsProper (Y i ↘ Spec (.of k))] (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] (h : ∀ i, j i ≫ (X ↘ Spec (.of k)) = (Y i ↘ Spec (.of k))) (_hc : IsColimit (Cofan.mk X j)) (z : scalarCohomology (X ↘ Spec (.of k)) (X ↘ Spec (.of k)).relativeDifferentials 1), t z = ∑ i, residueTrace k (Y i) (moduleCohomologyExtResolutionEquiv (Y i) (Y i ↘ Spec (.of k)).relativeDifferentials 1 (picardDifferentialCohomologyPullback (X ↘ Spec (.of k)) (Y i ↘ Spec (.of k)) (j i) (h i) z))) ∧ IsPicardTraceDuality (X ↘ Spec (.of k)) (X ↘ Spec (.of k)).relativeDifferentials 1 t",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The listed declarations jointly state both pure dimensions, all integer degrees, normalized finite-etale and componentwise Tate residue traces, naturality, the structure-sheaf specialization and genus equality. Helpers extend the recorded cohomology by zero and assemble its canonical maps; no auxiliary data is chosen from existence. The residue normalization uses the existing residueTrace through the canonical resolution-normalized module/abelian comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03410d2da",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after the 7c4db176 H2 RETURN. Lean file byte-identical (sha256 65307a98); the only node change is stmt_deps new-module-cohomology-ext-resolution-naturality -> def-pc-module-cohomology-ext-resolution-equiv, as prescribed. New existing:true def node: statement verbatim from `def` (ModuleCohomologyExtResolutionNaturality.lean:592-593, @[irreducible] excluded); all 19 listed decls exist as defs (no theorems, no privates); NL composite matches the code (resolutionSectionsNatIso, inverse siteSectionsNatIso, Iso.refl siteExt/siteH, Ext precomposition by the inverse terminalSourceIso, AddEquiv via moduleComparisonEquiv); real construction, no choice; target Modules.H = Sheaf.H of the underlying abelian sheaf = def-sc-topological-abelian-cohomology; q=0, empty X and zero F covered; Stacks 03FD/015E/06XR source fits; required fields present. Item Lean re-read: n=0 Algebra.trace pin; n=1 componentwise residueTrace pin over all finite integral cofans, incl. empty; pinned LinearEquiv for all q:Z with zero negative degrees; naturality direction correct; helpers real; sorry only; genus clause only under IsAlgClosed. No compile (no file changed). Advisory: residueTrace, IsFunctionFieldAlgebra and the Modules.H wrapper have no dedicated owner node."
  }
 }
