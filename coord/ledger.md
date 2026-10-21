@@ -22544,3 +22544,10 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: merged deliver/NO/lem-dl-a1-integral-normal-residue-etale-splitting (reviewer FIX; first push; new nodes: 2)
 - 2026-10-21T13:32:21Z L: superseded stage-1 delivery NF/lem-sfb-qcqs-integral-finite-model-completeness at 0fd73773405b494712a12e4342196f0ef1284d5c; current completion retained; packet archived at refs/superseded/NF/lem-sfb-qcqs-integral-finite-model-completeness/0fd73773405b494712a12e4342196f0ef1284d5c; stale return retired.
 - 2026-10-21T13:32:22Z L: superseded stage-1 delivery NH/lem-sfb-qcqs-integral-finite-model-completeness at f8bc13801af97ba8228e45ea33fde23b92f5f771; current completion retained; packet archived at refs/superseded/NH/lem-sfb-qcqs-integral-finite-model-completeness/f8bc13801af97ba8228e45ea33fde23b92f5f771; stale return retired.
+- 13:32 L: merged deliver/NI/lem-weil-pbc-quotient-diagram-scalar-projection (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/Q43/lem-weil-pbc-pulled-reduction-normalization-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/N8/lem-pur-finite-product-derived-tensor-calculus (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/NL/lem-sfb-bounded-finite-model-generation (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/Q58/lem-sf-boundary-bounded-tensor-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/NX/lem-pur-exact-pullback-signed-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:32 L: merged deliver/Q110/lem-pur-origin-class-projective-comparison (stage 2; reviewer PASS; parallel immutable checks)

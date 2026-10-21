@@ -280,5 +280,30 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-3a59985a5 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement is kept verbatim; the only change to it is the added stmt_dep lem-weil-pbc-constant-tower-pushforward-normalization, which is correct. I type-checked the equation and checked each step. Step 2 identifies the projection maps correctly with the adjuncts of t^a and t^0 of augmented-diagram-projection-mate, through the strict counit equation of the constant-tower node. Steps 3, 5 and 6 (adjunct algebra, line-by-line calculation, Hom-bijection injectivity) are correct. Two faults, both repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-quotient-diagram-scalar-projection.json. (1) C4/E1, Step 1: the profinite-coefficient node covers only finite rings and their limit, so the identification c_R : u^{-1}\\underline A_V ≅ \\underline A_U for a Noetherian, possibly infinite A, needed by flat-ringed-diagram-restriction, was missing, and so was its compatibility with the scalar map. Fixed by citing lem-pe-constant-left-module-inverse-image (generic, declared in tool_uses, no cycle) and writing out the check through constant sections. (2) E5, Step 4: the step did not say why the balancing node's τ and B^0G ≅ GB^0 are the inverses of the reduction-pullback comparisons s^a and s^0. Added the representative-level argument, citing lem-weil-pbc-ringed-topoi-derived-tensor-pullback. No new nodes and no SGA. Advisory: the parent ordered-exchange-coefficient-comparison and the sibling strict-quotient-scalar-balancing make the same implicit c_R use. Process note: an early background search over runs/ was stopped at its time limit; it was not needed for this verdict and was not rerun.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientDiagramScalarProjection",
+  "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.quotientDiagramScalarProjection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.quotientProjection",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.ordinaryScalarDirect",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.diagramScalarDirect",
+   "AlgebraicGeometry.Scheme.StrictScalarBalancing.quotientDiagramScalarProjection"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientDiagramScalarProjection.lean",
+  "statement": "theorem quotientDiagramScalarProjection {X Y : Scheme.{u}} (f : X ⟶ Y) (d : AdicCoefficientDatum A) (bal : Balancing d) (p : PullCompatibility f d (bal.ρ Y) (bal.ρ X)) (Ra : D (ring X d true) ⥤ D (ring Y d true)) (R0 : D (ring X d false) ⥤ D (ring Y d false)) (Ha : TD (ring X d true) ⥤ TD (ring Y d true)) (H0 : TD (ring X d false) ⥤ TD (ring Y d false)) (ordinaryAdjA : p.completed.ordinary ⊣ Ra) (ordinaryAdj0 : p.constant.ordinary ⊣ R0) (diagramAdjA : p.completed.diagrams ⊣ Ha) (diagramAdj0 : p.constant.diagrams ⊣ H0) : IsIso (ordinaryScalarDirect f d bal p Ra R0 ordinaryAdjA ordinaryAdj0) ∧ IsIso (diagramScalarDirect f d bal p Ha H0 diagramAdjA diagramAdj0) ∧ ∀ K : D (ring X d true), (tdres (scalar Y d)).map ((quotientProjection f d true p.completed Ra Ha ordinaryAdjA diagramAdjA p.τ).app K) ≫ (diagramScalarDirect f d bal p Ha H0 diagramAdjA diagramAdj0).app ((reduction X d true).obj K) ≫ H0.map ((bal.ρ X).hom.app K) = (bal.ρ Y).hom.app (Ra.obj K) ≫ (reduction Y d false).map ((ordinaryScalarDirect f d bal p Ra R0 ordinaryAdjA ordinaryAdj0).app K) ≫ (quotientProjection f d false p.constant R0 H0 ordinaryAdj0 diagramAdj0 p.constantReassociation).app ((dres (scalar X d)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the published StrictScalarBalancing.Balancing and PullCompatibility with their canonical coefficient maps and representative normalizations. Direct images are arbitrary right adjoints of these actual derived pullbacks, with adjunctions supplied; this parameterizes the unique adjunction-preserving presentation of the ordinary derived direct images. Scalar direct comparisons and projection maps are defined by the actual Mathlib mate equivalence, not unconstrained maps. Naturality is retained by defining them as natural transformations; the conclusion holds at every ambient object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5db7aa0fd",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause. Only the lean field was added to the node; the statement is verbatim; not dropped; no repair note. rho, the PullModel pullbacks, a, p, tau and the constant reassociation are pinned by the reviewed Balancing/PullCompatibility fields (BalancingComputes, a_computes, p_computes, PullReductionComputes). chi and d are mateEquiv right mates of a.inv and p.inv; checked by hand that they satisfy the flat-ringed-diagram-restriction adjunct identity, orientation r_Y R^a -> R^0 r_X correct. quotientProjection is the mate of tau.inv = adjunct of B_X(eps) after tau^-1 = counit tensor identity (node Step 2). Equation arrow order and types traced: both sides go r_Y B^a_Y R^a K -> H0 B^0_X r_X K. forall K is arbitrary; no extra hypotheses. Right adjoints are passed with adjunctions, unique up to compatible iso, and the equation is invariant. Universes follow the datum convention. Edge cases fine. Real mate defs, only the theorem is sorry, docstrings with source/blueprint and 7 proof steps, imports exist. Advisories: projection mate re-formed rather than reusing proEtaleProjectionFormulaMate (stated for ordinary tensor products, not strict diagrams); proetale-operations and constant-tower stmt_deps not referenced in Lean (stage-3 bridge); docstring typo. Not recompiled per instruction."
  }
 }

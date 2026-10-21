@@ -219,5 +219,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-aa169d8cb (reviewer sub-agent of L); spot-checked: I read in full the item, every cited statement (lem-sfb-finite-model-stratum-filtration, lem-weil-pbc-complex-ses-triangle, lem-weil-pbc-truncation-cohomology, lem-weil-pbc-truncation-triangle, def-weil-abstract-derived-category, sk-def-sfb-constructible, sk-def-sfb-derived-categories, def-weil-triangulated-category), the unit, the parent's step 5, Stacks 08J5/0152/0118/09Y5 and Bhatt–Scholze Lemma 6.3.14 and Prop. 6.8.11. The statement is unchanged. Coefficients are any commutative condensed ring in the ordinary D(Mod_{B_X}), and constructibility uses the finite constant local model predicate, the same one the filtration node uses. Step 1: the filtration node's hypotheses are exactly the item's, and its quotients v_{k!}(t_k)_*L_k are exactly the generators. Step 2: degree-0 short exact sequence triangles, with an explicit induction whose base is F_0 = 0. Step 3: honestly elementary; τ≤a-1 K is acyclic and τ≤b K → K is a quasi-isomorphism. Step 4: the 08J5 triangle with a = q-1, the [-q] shift of the constructible H^q, and extension closure. Step 5: finite counts. proof_deps equals the union of the step uses, and the graph is acyclic. The tool_use of lem-weil-pbc-truncation-triangle (generic, abelian-category level, existence only) is accepted. Tested on the empty scheme, acyclic K, a single sheaf, a two-step extension and O_E/ϖ torsion models. rg over dag/nodes found no duplicate. No new nodes, no SGA, no target touched, no re-split note for this item."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.BoundedFiniteModelGeneration",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.bounded_finiteModel_generation",
+  "file": "lean/Sheaf/Paper/BoundedFiniteModelGeneration.lean",
+  "statement": "theorem bounded_finiteModel_generation (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (C : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))) [C.IsClosedUnderIsomorphisms] [C.IsTriangulated] (hgen : ∀ (V S : Scheme.{u}) (v : V ⟶ X) [IsOpenImmersion v] (t : S ⟶ V) [IsClosedImmersion t] [IsReduced S] (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)), HasFiniteConstantLocalModel Λ S L → C ((DerivedCategory.singleFunctor _ 0).obj ((openImmersionLowerShriek Λ v).obj ((lowerStar Λ t).obj L)))) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (hK : constantModelBoundedConstructible Λ X K) : C K ∧ ∃ (N : ℕ) (F : Fin (N + 1) → DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), Nonempty (F (Fin.last N) ≅ K) ∧ ∀ r : Fin (N + 1), IsZero (F r) ∨ (∃ (V S : Scheme.{u}) (v : V ⟶ X), Exists fun [IsOpenImmersion v] ↦ ∃ t : S ⟶ V, IsClosedImmersion t ∧ IsReduced S ∧ ∃ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S), HasFiniteConstantLocalModel Λ S L ∧ Nonempty (F r ≅ (DerivedCategory.singleFunctor _ 0).obj ((openImmersionLowerShriek Λ v).obj ((lowerStar Λ t).obj L)))) ∨ (∃ (i : Fin (N + 1)) (n : ℤ), i < r ∧ Nonempty (F r ≅ (F i) ⟦n⟧)) ∨ (∃ (i j : Fin (N + 1)), i < r ∧ j < r ∧ ∃ (f : F i ⟶ F r) (g : F r ⟶ F j) (h : F j ⟶ (F i) ⟦(1 : ℤ)⟧), Pretriangulated.Triangle.mk f g h ∈ distTriang _)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b38bd099b",
+  "group": "NL",
+  "result": "pass",
+  "note": "Delivery adds only Sheaf/Paper/BoundedFiniteModelGeneration.lean (one theorem, sorry) and the item's lean field; no other node or dependency record changed. Mathlib's ObjectProperty.IsTriangulated (ContainsZero, IsStableUnderShift ℤ, IsTriangulatedClosed₂) plus IsClosedUnderIsomorphisms is exactly the node's class: contains zero, closed under shifts, extensions and isomorphism. hgen = singleFunctor 0 of openImmersionLowerShriek∘lowerStar over all open v, closed t with S reduced, and HasFiniteConstantLocalModel L; no quasi-compactness. hK = recorded constantModelBoundedConstructible (bounded t-structure plus IsConstantModelConstructible for every H^n), the same predicate as the filtration theorem's input. The finite Fin (N+1) witness (zero, generator, shift of an earlier entry, middle term of a triangle on earlier entries) is equivalent to the 'finitely many extensions and shifts' clause and not vacuous. NoetherianSpace hypothesis; universes u/u+1 consistent; lean.statement verbatim; docstrings carry source place, blueprint and the 5 proof steps; no defs or axioms; report sections present (second reading by the same worker, noted). No compile: no file changed."
+ }
 }

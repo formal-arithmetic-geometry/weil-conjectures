@@ -26,7 +26,9 @@
   "lem-asd-ordinary-supported-kummer",
   "def-asd-ordinary-supported-kummer-boundary",
   "def-pc-divisor-line-bundle",
-  "def-pc-projective-space-twist"
+  "def-pc-projective-space-twist",
+  "def-pur-origin-comparison-arrows",
+  "def-sc-p1-standard"
  ],
  "proof": [
   {
@@ -363,5 +365,27 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5232be712 (reviewer sub-agent of L); spot-checked: PASS, no changes. Q89 splits lem-pur-origin-class-projective-comparison into 6 steps with 0 new nodes. Shape: the statement is byte-identical to live; the only stmt_dep added is def-pc-projective-space-twist, which is needed for O_P(1). The item is not in the drop list and has no repair note; its only citer is thm-pur-rank-one-thom. No cycle, no missing or merged ids, uses = proof_deps, no SGA. Route: every cited statement is on the sk-prop-an route (sk-thm-p1, sk-prop-sf-cbc, sk-def-exchange, sk-prop-h2, sk-prop-cd, sk-thm-reduction, sk-thm-picard-*). The one off-route citation is the definition def-weil-exact-derived-adjunction; its declared tool use is accepted. Step 1: O(D_0) ≅ O(1) via dual frames g0=t^-1 g1, which matches e0=(x0/x1)e1, and the divisor section is x1; checked by hand. Step 2: F|U1=0 (U1×_P S empty), and lem-weil-pbc-open-closed-short-exact (module version) makes ε_F an isomorphism. Step 3: the exact derived adjunction has the localized counit. Step 4: the Kummer pullback clause applies (D' is Cartier); the twist-pullback node and counit naturality give the equation. I checked that the open-immersion exchange agrees with restriction, and the argument stays consistent under any fixed identification. Step 5: ī finite and exact, rī=id, the derived composition, module-forget and geometric-point nodes give RΓ(P,F)=A[0] normalized at 1, and RΓ(e)λ=RΓ(u)η is fixed by the image of 1. Step 6: c_D u_D = c_1(O(D_0)) is a statement clause of lem-asd-ordinary-supported-kummer, so aτ = h with coefficient +1. Sources checked: current thm-pur-rank-one-thom.proof Step 2 and master sk-prop-an Step 5(d), lines 248-257. Edge cases A=0, N=1, non-flat A and the chart orientation all hold."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OriginClassProjectiveComparison",
+  "declaration": "AlgebraicGeometry.Etale.origin_class_projective_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.OriginProjectiveComparison",
+   "AlgebraicGeometry.Etale.origin_class_projective_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OriginClassProjectiveComparison.lean",
+  "statement": "theorem origin_class_projective_comparison (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (N : ℕ) (hN : 0 < N) (hΩ : IsUnit (N : Ω)) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) : Nonempty (OriginProjectiveComparison A N hA (Spec (.of Ω)))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fabede180",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Q110 lem-pur-origin-class-projective-comparison fabede180106: Nonempty(OriginProjectiveComparison) with every data field pinned: transport by its normalizations plus the landed uniqueness theorem; restriction.hom = supportedConstantExchange; boundary classes unique via ordinary_supported_kummer_uniqueBoundary; chern via ordinaryFiniteP1ChernSpec (O(1)); sourceIso via λ≫RΓ(e)=η≫RΓ(u) with IsIso e. e and ε are the actual sheaf counits, localized. Counit square and a∘τ=h present; chart orientation checked (infinityChart = D+(T0), infinity = zeroSection≫infinityChart = [1:0]). Verbatim statements; def-sc-p1-standard is a landed stmt_dep addition (allowed); new def node fields ok; one sorry; docstrings ok. Edge cases N=1, A=0, positive characteristic ok; u+1 coefficient convention. Advisories: non-stmt_dep owner decls, local RΓ(P,j_!-) compact model, Nonempty TwistData clause redundant, unused proof-plan imports, brief second reading. No compile (no changes)."
  }
 }

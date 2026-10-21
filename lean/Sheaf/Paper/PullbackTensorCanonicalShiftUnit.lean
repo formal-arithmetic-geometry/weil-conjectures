@@ -25,6 +25,8 @@ representative comparisons, cochain unitors and pullback maps are existing ones.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe uC vC uD vD r wR wS
 
@@ -44,6 +46,8 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- Normalization of the two derived tensor shifts by signed total-complex shifts.
 The fixed-argument comparisons agree with the published resolving comparison.
 `CommShift` includes the zero and addition laws, and `CommShift₂Int` includes
@@ -66,6 +70,11 @@ def HasCanonicalTensorShifts [(derivedTensor R).CommShift₂Int] : Prop :=
         (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n)),
         cR.app Q = representativeIso.{uC, vC, r, wR} R Q P hq hp hg hf)
 
+
+set_option genSizeOf false in
+set_option genCtorIdx false in
+set_option genInjectivity false in
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The action unitors, specified on flat-term K-flat representatives by the
 ordinary cochain action maps. The ring complex is itself a resolving complex.
 Source: Stacks 06YU and 03EL
@@ -94,21 +103,26 @@ structure ActionUnits where
       ell.hom.app (DerivedCategory.Q.obj P) =
         DerivedCategory.Q.map (HomologicalComplex.leftUnitor P).hom
 
+
 variable (f : RingedPullback.{r, uC, vC, uD, vD} R S)
   (k : Comparison.{r, uC, vC, uD, vD} f)
   (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))
   (epsilon : DerivedCategory.Q ⋙ L ⟶ pull.{r, uC, vC, uD, vD} f ⋙ DerivedCategory.Q)
 
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The two derived bifunctors in the comparison.
 Source: Stacks 07A4
 (blueprint: lem-weil-pbc-pullback-tensor-canonical-shift-unit). -/
 abbrev Phi := Functor.uncurry.obj (derivedTensor R) ⋙ L
 
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- Pull back each input before taking the published derived tensor.
 Source: Stacks 07A4
 (blueprint: lem-weil-pbc-pullback-tensor-canonical-shift-unit). -/
 abbrev Psi := (L.prod L) ⋙ Functor.uncurry.obj (derivedTensor S)
 
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The Tag 07A4 representative square, in an equivalent form avoiding inverses
 of computation maps. Its cochain comparison is the prescribed insertion-of-one map.
 Source: Stacks 07A4
@@ -134,6 +148,10 @@ def IsNormalized (tau : Phi L ⟶ Psi L) : Prop :=
             ((pull.{r, uC, vC, uD, vD} f).obj P) ((pull.{r, uC, vC, uD, vD} f).obj Q)
             hp' hq' hf' hg').hom
 
+
+attribute [local irreducible] HasCanonicalTensorShifts IsNormalized
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- Canonical derived pullback tensor comparison, coherent with both integer
 shifts and both normalized tensor action units, for arbitrary ringed topoi.
 The universal left-derived comparison is written on complexes rather than the
@@ -217,5 +235,6 @@ theorem pullback_tensor_canonical_shift_unit
                 ((derivedTensor S).map u.hom).app (L.obj N) ≫ aS.ell.hom.app (L.obj N) =
               L.map (aR.ell.hom.app N)) := by
   sorry
+
 
 end SheafOfModules.PullbackTensorCanonical

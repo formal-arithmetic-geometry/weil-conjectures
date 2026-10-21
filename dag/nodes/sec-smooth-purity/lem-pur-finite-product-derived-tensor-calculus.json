@@ -410,5 +410,46 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-53719b0d5 (reviewer sub-agent of L); spot-checked: I read the item in full: all 12 steps, the statement of every cited node, the parent, the unit route and the Stacks tag map. There are no new nodes and the statement is unchanged. The item is unsplit on live and side-live, is not on the dropped list, and has no re-split note of its own (the 2026-10-21 note concerns only its parent lem-pur-finite-clopen-derived-decomposition). Steps 1-10 and 12 are correct. Step 1 detects quasi-isomorphisms through the exact module equivalence. Step 2 localizes via lem-sfb-product-localization, which allows an empty finite J, with unit and counit lifted by localization clauses (2) and (3). Step 3 handles the cone matrices and detection. Step 4 builds the restriction tensorator from the bilinear universal property; ba=1 and ab=1 were checked using V x_X X_i = V. Step 5 shows r_i is left adjoint to e_i and checks the Koszul differential. Steps 6 and 7 test flatness and K-flatness by restriction and zero insertion. Step 8 descends along K-flat flat-term models by the bifunctor clause of the descent node. Step 9: the K-flat derived tensors of the sf-ringed monoidal node and the descent node agree on P_R x P_R. Step 10: derived change of rings holds for arbitrary R->S. Step 12 covers the coefficient identifications and the empty and zero cases. Edge cases tested: I empty, empty components, the singleton partition, a zero ring, and the non-flat quotient chain Z->Z/4->Z/2. Tags checked: 06YN and 0D6D (the report's corrections are right), 06YS, 0G7D, 06YU, 0GMW, 015F, 05RU, 05V4. No SGA source. All ten declared tool_uses are generic and accepted. I checked closures: no cycle. FIX (C5/B3, one fault): step 11, marked elementary, rebuilt by hand the 'canonical comparison for composites of coefficient ring maps' as (p@s)@t -> p@psi(s)t. The existing reviewed node lem-sfb-successive-derived-quotient-normalization (Q02 PASS 2026-10-17) states exactly this natural isomorphism with that representative formula. The corrected item cites it in step 11 (now non-elementary), adds it to proof_deps and declares it in split_report.tool_uses; the node has no cycle back to the item. The cancellation-based K-flatness argument is kept. The statement is untouched. Advisory: the proof is about 10.9k characters in one node, so the maintainer may want to re-split it later.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.Modules",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.rings",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction_exact",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionLimits",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionColimits",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedMonoidal",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedSymmetric",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.pure",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.tensorComparison",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedTensorComparison",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_tensor_calculus",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.Presentations",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.scalarComposite",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.scalarHomotopyComparison",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_scalar_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteClopenTensorCalculus.lean",
+  "statement": "theorem finite_clopen_derived_calculus (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t}) (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i)) (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) : ∃ E : DerivedCategory (Modules.{t, u} R) ≌ (∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R))), E.functor = Functor.pi' (fun i ↦ derivedRestriction (j i) R) ∧ (∀ i, (derivedRestriction.{t, u} (j i) R).IsTriangulated) ∧ (∀ i (m : ℤ), Nonempty (derivedRestriction (j i) R ⋙ DerivedCategory.homologyFunctor _ m ≅ DerivedCategory.homologyFunctor _ m ⋙ restriction (j i) R)) ∧ (∀ K : DerivedCategory (Modules.{t, u} R), IsZero K ↔ ∀ i, IsZero ((derivedRestriction.{t, u} (j i) R).obj K)) ∧ (∀ (K L : DerivedCategory (Modules.{t, u} R)) (f : K ⟶ L), IsIso f ↔ ∀ i, IsIso ((derivedRestriction.{t, u} (j i) R).map f)) ∧ (∃ e : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤ DerivedCategory (Modules.{t, u} R), (∀ i, Nonempty (e i ⋙ derivedRestriction (j i) R ≅ 𝟭 _)) ∧ (∀ i k, i ≠ k → ∀ K, IsZero ((e k ⋙ derivedRestriction (j i) R).obj K)) ∧ (∃ s : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤ (∀ k, DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))), ∀ i, e i = s i ⋙ E.inverse ∧ Nonempty (s i ⋙ Pi.eval (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ≅ 𝟭 _) ∧ (∀ k, k ≠ i → ∀ K, IsZero ((s i).obj K k))) ∧ (∃ b : Bicone (fun i ↦ derivedRestriction (j i) R ⋙ e i), b.pt = 𝟭 _ ∧ Nonempty b.IsBilimit) ∧ (∃ b : Bicone (fun i ↦ Pi.eval (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ⋙ e i), b.pt = E.inverse ∧ Nonempty b.IsBilimit)) ∧ (∀ i, IsEmpty (Y i) → Nonempty (DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ≌ Discrete PUnit)) ∧ (IsEmpty I → IsEmpty X ∧ Nonempty (DerivedCategory (Modules.{t, u} R) ≌ Discrete PUnit))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The node is stated jointly by finite_clopen_derived_calculus, finite_clopen_tensor_calculus and finite_clopen_scalar_calculus. Other declarations transparently specialize the recorded restriction, localization, tensorator and universal coefficient-presentation interfaces; restriction_exact supplies the exactness proof needed by their definitions. The comparisons are normalized on pure tensors, total-complex generators and K-flat universal counits, with arbitrary coefficient maps and their existing normalized compositors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a57f6b079",
+  "group": "N8",
+  "result": "pass",
+  "note": "Only the item's lean field changed (stmt_deps unchanged, no new nodes or dep modules); statement verbatim in the file; no line over 100; defs have real data, theorems sorry. Every node clause is rendered: E.functor = pi' of the actual derived restrictions, each triangulated; homology commutes; joint detection of zero and iso; insertion bicones with pt identity and E.inverse; empty I, empty components and empty X explicit. Ordinary tensorator pinned on pure tensors (unit forced by the unit laws); total-complex iso pinned on (p,q) generators; flat and K-flat iff componentwise, unbounded; derived Braided tensorator pinned on K-flat representatives via RingedDerivedNative.tensorIso and mapDerivedCategoryFactors. Scalar comparisons for arbitrary R->S over the pinned Presentation (obj_eq/map_eq/universal): c pinned on sectionTensor, gamma by the counit square on flat-term K-flat P, composite square with Normalization.derived. Advisories: derived insertions e existential (characterized up to iso, same form as the gluing dep); homology iso Nonempty; statement uses decls of lem-sf-ringed-derived-native-tensor, def-coef-ringed-tensor-hom-model and def-pbc-successive-derived-scalar-normalization-data, which are not stmt_deps (base stmt_deps unchanged, so advisory); restriction_exact is a helper that follows from the gluing dep. No file changed and no compile run; the worker reports clean compiles of 19.1 s and 18.6 s."
  }
 }

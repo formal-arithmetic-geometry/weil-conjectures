@@ -270,5 +270,45 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-341ac5beb (reviewer sub-agent of L); spot-checked: First split of an item that had no proof. Live still has it unsplit and there is no repair note. Statement, stmt_deps and blueprint are byte-identical to live, and there are no new nodes and no cycle. I read the 15 cited statements. Step 1: Res P is K-flat over R_T by the flatness of Â over A in lem-weil-pbc-constant-completion-equivalence plus the K-flatness of P over B_T. Step 2: the flat-term K-flat models come from lem-weil-pbc-ringed-pullback-preserves-kflat, including u=id for scalar extension. Step 3: the formula for tau_n is chi_g^{-1} from lem-sfb-kflat-scalar-comparison-normalization composed with kappa from lem-weil-pbc-flat-coefficient-reduction-adjunct. Kappa's hypotheses hold: B is R-flat and B/I^nB is S_n. Step 4: theta^H is chi^{-1} followed by g_a^* of the datum's balancing isomorphism, so it is invertible with no flatness of S_b->S_a; its orientation matches the mate theta_h. Steps 5 and 6: I recomputed the square, the triple and the unit on generators; they need only that q is a ring map and the cocycle, so they are elementary. Step 7 descends through lem-weil-pbc-site-derived-tensor-descent. Tested on g=id, A=Z_l with I=(l) (non-flat quotient map), K=0, and b=a. The Stacks tags 07A4, 0D6D, 0G7E, 06YS, 06YY, 06YT, 0G7D and 03EL match their labels in tags/tags, and no SGA is cited. I accept the 4 generic tool_uses (lem-pc-kflat-resolution, lem-pur-derived-change-of-rings, lem-sfb-kflat-scalar-comparison-normalization, lem-sfb-successive-derived-quotient-normalization). They serve the parent lemma-weil-pbc-completed-pullback-reduction step 6. Advisory only: the map A->P_n used in step 5 lives in the constant-completion node, and the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PulledReductionNormalizationComparison",
+  "declaration": "AlgebraicGeometry.Scheme.PulledNormalization.pulled_reduction_normalization_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PulledNormalization.scalarPresentation",
+   "AlgebraicGeometry.Scheme.PulledNormalization.finitePull",
+   "AlgebraicGeometry.Scheme.PulledNormalization.H",
+   "AlgebraicGeometry.Scheme.PulledNormalization.N",
+   "AlgebraicGeometry.Scheme.PulledNormalization.ordinaryH",
+   "AlgebraicGeometry.Scheme.PulledNormalization.hCounit",
+   "AlgebraicGeometry.Scheme.PulledNormalization.quotientComp",
+   "AlgebraicGeometry.Scheme.PulledNormalization.ScalarNormalization",
+   "AlgebraicGeometry.Scheme.PulledNormalization.scalarAssoc",
+   "AlgebraicGeometry.Scheme.PulledNormalization.thetaN",
+   "AlgebraicGeometry.Scheme.PulledNormalization.QuotientCompatibility",
+   "AlgebraicGeometry.Scheme.PulledNormalization.thetaH",
+   "AlgebraicGeometry.Scheme.PulledNormalization.finiteGenerator",
+   "AlgebraicGeometry.Scheme.PulledNormalization.ordinaryN",
+   "AlgebraicGeometry.Scheme.PulledNormalization.constantGenerator",
+   "AlgebraicGeometry.Scheme.PulledNormalization.nCounit",
+   "AlgebraicGeometry.Scheme.PulledNormalization.quotientAssociator",
+   "AlgebraicGeometry.Scheme.PulledNormalization.Comparison",
+   "AlgebraicGeometry.Scheme.PulledNormalization.pulled_reduction_normalization_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/PulledReductionNormalizationComparison.lean",
+  "statement": "theorem pulled_reduction_normalization_comparison : Nonempty (Comparison d g)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The specification bundles exactly the finite coefficient normalization square, triple and unit coherence, natural functor comparisons and the actual sheaf-tensor representative formulas. Scalar functors, pullback, quotient maps and counits reuse the published interfaces, with all site and coefficient universes explicit. No completeness assumption on K."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3dbd073c",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Item differs from side-live only in lean; statement verbatim, 19 declarations present, imports = stmt_dep modules + the 9 proof_dep modules, docstrings and line width OK. thetaH is the canonical mate followed by g_a^* of the datum's normalization, a definition. QuotientCompatibility is a proved Prop field, true by stratumFiniteCoefficient_naturality. tau and the ordinary maps are uniquely pinned by generator formulas built from the ∃!-pinned proEtaleRingModuleAdjunction plus universal-counit representative clauses. ScalarNormalization is pinned by Normalization.representative. Square, triple, unit, invertibility, naturality and P-independence clauses all match the node; arbitrary K; zero-based indices cover b>=a>=1 including b=a; no flatness of q assumed. Advisories: A1 tau re-pinned in finite coordinates by the strict-tower formula rather than taken from the existential strictTowerComparison (only plain defs res/ordinarySource/source used; stmt_dep unchanged from base); A2 decls from non-stmt_dep owners (FourCorners mate, OrderedExchange.quotient); A3 redundant first triple conjunct. No file changed, no compile."
  }
 }
