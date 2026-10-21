@@ -20484,3 +20484,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:07 L: merged deliver/Q86/sk-lem-integral-models (reviewer PASS; after a return; new nodes: 0)
 - 07:07 L: merged deliver/Q111/def-nagata-final-basechanged-compactification (reviewer PASS; first push; new nodes: 0)
 - 07:07 L: merged deliver/NG/lem-weil-pbc-flat-curve-derived-structure-model (reviewer PASS; first push; new nodes: 0)
+- 07:07 L: merged deliver/Q12/lem-coef-sequence-projection-derived-adjunction (reviewer FIX; first push; new nodes: 0)

@@ -1,0 +1,49 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors/lem-coef-sequence-projection-derived-adjunction.json` (statement, now split; no exact Mathlib match), `citations.json` (12 verbatim statement quotations). There are **0 new nodes and 0 new Mathlib leaves**. `searches.jsonl` records the five new actual searches; inherited item searches have been preserved. `prepare.py` is sandbox-only preparation material, not a delivered node.
+
+Attachments: none. Searching `lean/WeilConjectures/` by the exact blueprint tag, sequence adjunction, ringed sequence and semilinear concepts found no declaration stating all clauses. General ordinary adjunctions do not attach this item.
+
+WANTED: none.
+
+The statement is unchanged. The imported item had no proof. Its source described the opening sequence-site paragraphs as Tag 0941; the local Stacks tag table identifies their section `section-derived-limits` as **0940** and the subsequent homotopy-limit comparison as 0941. I corrected the source location, not a mathematical assertion. The authoritative pages also confirm this distinction: [0940](https://stacks.math.columbia.edu/tag/0940), [06YY](https://stacks.math.columbia.edu/tag/06YY), [07A6](https://stacks.math.columbia.edu/tag/07A6).
+
+Nothing is left unfinished in this one-level split. Its cited nodes retain their existing proofs/status; a split is not a claim that their Lean declarations are complete. No Lean file was written and no compiler, Lake or build tool was run. No repository or launcher file was changed.
+
+## Route and reuse
+
+I read `dag/chapters/sec-six-functors.json`, `dag/units/sk-prop-sf-biduality-general.json`, and the current-brief blueprint ancestor `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md` and its proof. The item serves paragraph 2's first and last derived Hom comparisons. It does not change a unit or chapter statement, introduce exceptional operations, or use a prohibited source. All proof sources used here are Stacks.
+
+The generic ringed-site and derived-category theorems are existing nodes. Off-unit tool uses are declared in `split_report.tool_uses` with their purposes. A traversal of their statement/proof dependencies found no path back to this item. I searched the DAG by the source tags and titles and used blueprint searches for derived adjunction, K-flat, sequence, ringed sequence projection and resolving adjunction. The specialized geometric/condensed adjunctions do not state this arbitrary inverse-ring-sequence lemma; the existing generic ringed-topos results supply the needed tools. No duplicate node or clause of the item was created.
+
+## Mathlib results
+
+All new Mathlib searches used the required `msearch.py Q12 lem-coef-sequence-projection-derived-adjunction ...` command. Both LeanFinder phrasings returned ordinary sheaf pullback/pushforward and condensed adjunctions; LeanSearch also returned ordinary sheaf and scheme adjunctions. Reading `Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60` confirms that `SheafOfModules.pullbackPushforwardAdjunction` concerns ordinary module sheaves. Loogle found `CategoryTheory.Adjunction.derived`; reading `Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143` shows additional derived-composite/absoluteness assumptions. It does not by itself construct the unbounded derived pullback and direct image on this sequence site, a flat-term K-flat resolving class, or the representative identifications. The source grep found that same abstract derived-adjunction file. These are useful ingredients, not exact or one-line specializations of the whole item. Every new query and its actual outcome is appended to the preserved item search record.
+
+## Review by Q12
+
+I read delivery-errors B through E, including the repeated merged copy, and checked the split against those failures with the source and cited statements open. No new nodes exist, so the statement-only, new-node notions, source-tag collision and new-node search gates require no new files. I retained the imported statement and blueprint provenance and supplied every proof dependency as an existing, unmerged node. The 12 quotes in `citations.json` are copied from those statements, not their proof texts.
+
+For the item I read Stacks `sites-cohomology.tex`, the opening paragraphs of `section-derived-limits` (0940), `lemma-K-flat-resolution` (06YS), the statement and proof of `lemma-derived-base-change` (06YY), `section-unbounded` (07A5), and `lemma-adjoint` (07A6). I also read `sites-modules.tex` `lemma-adjoint-pullback-pushforward-modules` (03D7), and `derived.tex` `lemma-enough-K-injectives-implies` (070K) and `lemma-derived-adjoint-functors` (09T5). There are no new-node sources to review.
+
+Step 1 uses `lem-pur-system-ringed-sequence-site` for its actual equivalence between strict semilinear systems and sequence-site module sheaves and its vertical-evaluation identification. `def-weil-sheaf-of-modules-category` really states abelianness and the sectionwise kernel/sheafified cokernel formulas. The argument that these operations are levelwise uses the fixed-index covering definition in the system-site statement. Smallness is preserved by the countable index category; all module sheaves are in a common universe containing the site and the specified ring sheaves. This does not assume exactness of infinite products.
+
+Step 2 uses the same site statement and `def-pc-sheaf-restrict-scalars`, which really defines restriction of a module sheaf through the structural ring morphism. The step proves the limit assertion: it constructs compatible tuples, checks their A-action, glues them componentwise and identifies maps out of a constant object. It uses the given constant inverse image of p. No theorem about homotopy limits, normalized systems or completion is smuggled into this ordinary limit calculation.
+
+Step 3 uses `lem-weil-pbc-ringed-topoi-module-adjunction`, whose statement explicitly gives the tensor-formula inverse image and canonical module Hom bijection for arbitrary ringed topoi, not merely schemes. The hypothesis is satisfied by the p of the item, with structural maps A to B_n. The system-site statement supplies the fixed-index covers; restricting the sheafified tensor to such covers gives the level tensor. I wrote both directions of the transpose, checked the balanced tensor relation and the transition equation using semilinearity, and evaluated their composites on local pure tensors. The formula is for local generators and then sheafifies; it does not identify sections of a tensor sheaf with the tensor of global sections.
+
+Step 4 uses `prop-pur-kinjective-resolutions-exist`, which actually applies to any small ringed site, for a K-injective resolution in the whole B-module category. It uses `lem-weil-pbc-kinjective-total-derived`, whose statement gives existence and the comparison isomorphism for an exact homotopy-category functor when enough K-injectives exist. Additivity of p_* follows directly from the componentwise limit formula; the cone and homotopy formulas show why its termwise homotopy functor is exact. Thus the theorem's hypotheses are present without a boundedness, exact-products or p_*-preserves-K-injectives assumption.
+
+Step 5 uses `lem-pc-kflat-resolution` for a flat-term K-flat resolution on the base ringed site and `lem-weil-pbc-ringed-topoi-derived-pullback` for the actual unbounded derived pullback, its universal comparison, quasi-isomorphism preservation on the resolving class and naturality of representative comparisons. Those conclusions occur in the cited statement, so no argument is taken from its proof. The entire tower is obtained from this one base resolution; independently selected level resolutions are never substituted. No B_n-flatness over A is assumed.
+
+Step 6 uses `lem-weil-pbc-termwise-adjunction-homotopy`, which explicitly gives the homotopy adjunction from additive ordinary adjoints, and `lem-sfb-resolving-derived-adjunction-normalization`, which gives the unbounded adjunction and its normalized chain-level transpose formula. Its resolving-class hypotheses are supplied by step 5, its unbounded K-injective hypothesis by step 4, and its universal left/right pairs by those two steps. I checked the direction of epsilon_Q and the q,j inverses in the formula. For a map h into p_*I the transpose is the local tensor formula already verified in step 3. Bifunctoriality then extends this equality through further quasi-isomorphism denominators. I explicitly avoided the false extra assertion that maps from a fixed K-flat resolution to p_*I represent every derived morphism: K-flat need not be K-projective, and p_*I need not be K-injective.
+
+Small-case checks: the zero complex gives zero on both sides; a constant tower B_n=A recovers constant-sequence pullback and ordinary limit direct image; B_n=0 gives zero module categories and a zero Hom correspondence. On the one-point site, A=Z, constant B_n=Z/2 and P=Z/2 in degree zero require a single flat resolution and yield the expected nonzero negative Tor term, demonstrating why ordinary degree-zero reduction must not replace derived pullback. Non-surjective ring transitions still give the displayed semilinearity equation. The proof uses no surjectivity, Mittag-Leffler, noetherian, torsion, finite-Tor, boundedness, or exact-countable-product hypothesis. All six proof steps are below 2000 characters; none hides a separate unnamed comparison lemma.
+
+## Not duplicates
+
+No new nodes: all general results are cited from the existing DAG.
+
+## Validation
+
+The required server dry run exited successfully: `OK (not pushed) deliver/Q12/lem-coef-sequence-projection-derived-adjunction at d515f58bd7d: preflight passed`. It ran the server preflight, including DAG and split checks. After this validation note, the final report is checked again before the push.

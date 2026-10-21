@@ -2,7 +2,7 @@
  "id": "lem-coef-sequence-projection-derived-adjunction",
  "kind": "statement",
  "title": "Derived adjunction of a ringed sequence projection",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Write $\\mathscr S(B)$ for strict semilinear systems of module sheaves, with componentwise exactness, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$ [lem-pur-system-ringed-sequence-site]. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $A$ be a sheaf of commutative rings with compatible maps $A\\to B_n$. Let $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ have inverse image on underlying sheaves the constant sequence, with ring map given by $A\\to B_n$. The functors $Lp^*:D(A)\\to D(\\mathscr S(B))$ and $Rp_*:D(\\mathscr S(B))\\to D(A)$ exist and form a canonical adjunction. Its Hom bijection is the derived fraction extension of the ordinary correspondence $h:P\\to p_*N\\mapsto(x\\otimes b\\mapsto b\\pi_nh(x))_n$. For one flat-term K-flat representative $Q\\to P$ [def-pc-kflat-complex], $Lp^*P$ is represented by the strict complex $(Q\\otimes_A B_n)_n$, naturally in derived $P$. Ordinary direct image is $p_*N=\\lim_n\\operatorname{Res}_{A\\to B_n}N_n$ [def-pc-sheaf-restrict-scalars].",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Write $\\mathscr S(B)$ for strict semilinear systems of module sheaves, with componentwise exactness, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$ [lem-pur-system-ringed-sequence-site]. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $A$ be a sheaf of commutative rings with compatible maps $A\\to B_n$. Let $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ have inverse image on underlying sheaves the constant sequence, with ring map given by $A\\to B_n$. The functors $Lp^*:D(A)\\to D(\\mathscr S(B))$ and $Rp_*:D(\\mathscr S(B))\\to D(A)$ exist and form a canonical adjunction. Its Hom bijection is the derived fraction extension of the ordinary correspondence $h:P\\to p_*N\\mapsto(x\\otimes b\\mapsto b\\pi_nh(x))_n$. For one flat-term K-flat representative $Q\\to P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], $Lp^*P$ is represented by the strict complex $(Q\\otimes_A B_n)_n$ [def-pur-sheaf-tensor-product], naturally in derived $P$. Ordinary direct image is $p_*N=\\lim_n\\operatorname{Res}_{A\\to B_n}N_n$ [def-pc-sheaf-restrict-scalars].",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 0941 (section-derived-limits before lemma-derived-limit-is-ok), 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); application to the ringed sequence projection."
@@ -12,11 +12,103 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-pur-system-ringed-sequence-site"
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the stated equivalence between strict semilinear systems and module sheaves on $\\mathcal T$. The index category $\\mathbf N_{\\ge1}$ is small, so $\\mathcal T$ is small in the same module universe as $\\mathcal C$. Module sheaves form an abelian category. Under the equivalence a kernel has levels $\\ker(f_n)$; a cokernel is the vertical sheafification of the levelwise cokernels, because covers have fixed index. Consequently exactness and quasi-isomorphisms agree with componentwise exactness and quasi-isomorphisms of strict systems. We may compute in $\\operatorname{Mod}(B)$ on $\\mathcal T$ and interpret the result in $\\mathscr S(B)$.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, first paragraph; ringed-module interpretation"
+   }
+  },
+  {
+   "text": "For a strict system $N$, define $L(U)=\\{(z_n)\\in\\prod_n N_n(U):t_n(z_{n+1})=z_n\\}$, with componentwise addition and $A(U)$-action through $A(U)\\to B_n(U)$. Compatibility of the structural maps makes this action preserve $L(U)$. Compatible families of local sections glue uniquely in each $N_n$; their transition equalities hold after gluing by uniqueness. Thus $L$ is an $A$-module sheaf and is the limit of the scalar restrictions. A map from a constant sheaf $F$ to the underlying tower is exactly a compatible family $F\\to N_n$, hence a map $F\\to L$. Since $p^{-1}$ is the constant sequence, this is the underlying direct-image adjunction. Its induced $A$-action is precisely the action just specified. Therefore $p_*N=L=\\lim_n\\operatorname{Res}_{A\\to B_n}N_n$, naturally in $N$.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, opening description of constant inverse image and limit direct image"
+   }
+  },
+  {
+   "text": "The ordinary module adjunction gives $p^*M=B\\otimes_{p^{-1}A}p^{-1}M$ and $p^*\\dashv p_*$. Since $p^{-1}M$ is constant and all covers are vertical, its tensor sheaf at level $n$ is $M\\otimes_A B_n$: the presheaf tensor and its sheafification are computed at that fixed index. The transition sends $x\\otimes b$ to $x\\otimes\\rho_n(b)$, where $\\rho_n:B_{n+1}\\to B_n$. For $h:M\\to p_*N$, its transpose has local pure-tensor formula $x\\otimes b\\mapsto b\\pi_nh(x)$. This is balanced over $A$ and compatible with transitions because $\\rho_n(b)\\pi_nh(x)=t_n(b\\pi_{n+1}h(x))$; it therefore sheafifies. Conversely a strict $B$-linear family $f_n:M\\otimes_A B_n\\to N_n$ yields $x\\mapsto(f_n(x\\otimes1))_n$ in the limit. These maps are inverse: one composite evaluates at $b=1$, and the other uses $f_n(x\\otimes b)=b f_n(x\\otimes1)$. Both formulas commute with precomposition in $M$ and postcomposition in $N$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules, tensor/restriction proof, specialized to the sequence site"
+   }
+  },
+  {
+   "text": "Apply existence of unbounded K-injective resolutions to the small ringed site $(\\mathcal T,B)$. Every strict-system complex $N$ therefore has a quasi-isomorphism $j:N\\to I$ with $I$ K-injective as a complex of modules on the sequence site. The additive functor $p_*$ induces an exact functor $K(B)\\to D(A)$: applying an additive functor degreewise preserves shifts and the finite-biproduct formulas for mapping cones and homotopies. The total-right-derived theorem now supplies $Rp_*:D(B)\\to D(A)$, computed by $p_*I$. Through step 1 this has domain $D(\\mathscr S(B))$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded; derived.tex Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "Apply the general ringed-topos derived-pullback theorem to $p$, with source ring $A$ and target ring $B$ on $\\mathcal T$. It supplies the universal $Lp^*$, inverts quasi-isomorphisms between flat-term K-flat complexes after termwise pullback, and supplies its canonical comparison isomorphism on every such complex. A flat-term K-flat resolution $q:Q\\to P$ exists on $(\\mathcal C,A)$. The theorem identifies $Lp^*P$ with $p^*Q$, whose levels by step 3 are $(Q\\otimes_A B_n)_n$ with transition $1\\otimes\\rho_n$. One $Q$ supplies the entire strict complex. The theorem's naturality and compatibility with composition of comparisons give the asserted naturality in derived $P$, independently of the chosen resolution.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change, statement and proof"
+   }
+  },
+  {
+   "text": "Use the ordinary adjunction from step 3 and its termwise homotopy adjunction. The flat-term K-flat class is left resolving: every complex has a resolution in this class and termwise $p^*$ followed by localization inverts its quasi-isomorphisms, as established in step 5. The source of $p_*$ has unbounded K-injective resolutions by step 4. Apply the resolving derived-adjunction normalization theorem to these universal left and right derived pairs. It gives $Lp^*\\dashv Rp_*$ naturally in both derived variables. More explicitly, for $q:Q\\to P$, $j:N\\to I$ as above and any chain map $h:Q\\to p_*I$, let $\\widetilde h:p^*Q\\to I$ be the ordinary transpose. Under $Rp_*N\\simeq[p_*I]$, the class $[h][q]^{-1}$ transposes to $[j]^{-1}[\\widetilde h]\\epsilon_Q Lp^*([q])^{-1}$, where $\\epsilon_Q:Lp^*[Q]\\xrightarrow{\\sim}[p^*Q]$ is the left comparison. At each level $\\widetilde h_n(x\\otimes b)=b\\pi_nh(x)$ by step 3. The normalization theorem and bifunctoriality give the same formula after further quasi-isomorphism denominators, hence exactly the canonical derived fraction extension of the stated ordinary correspondence. This uses the localized Hom bijection, without assuming that a fixed $Q$ represents every derived morphism by a chain map.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, via the fraction characterization in Tag 0FND, lemma-pre-derived-adjoint-functors-general; sites-cohomology.tex Tag 07A6, lemma-adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940, 06YS, 06YY, 07A5 and 07A6; ordinary module adjunction Tag 03D7 and derived normalization Tag 09T5/0FND, specialized explicitly to the sequence projection."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +151,45 @@
    "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S))) (SheafOfModules.pull\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary sheaf pullback adjunctions and free sheaves do not construct the unbounded derived sequence projection or its simultaneous K-flat model"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djun|[Aa]djun.*derived",
+   "results": "Actual search returned 4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback/pushforward adjunctions do not supply the unbounded sequence-site construction; CategoryTheory.Adjunction.derived additionally requires absolute derived-functor data (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143-149), so it is a tool candidate, not a one-line specialization for this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback left adjoint derived pushforward modules ringed site unbounded complexes",
+   "results": "Actual search returned 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullback. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback/pushforward adjunctions do not supply the unbounded sequence-site construction; CategoryTheory.Adjunction.derived additionally requires absolute derived-functor data (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143-149), so it is a tool candidate, not a one-line specialization for this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "Actual search returned 9 hits: CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_counit. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback/pushforward adjunctions do not supply the unbounded sequence-site construction; CategoryTheory.Adjunction.derived additionally requires absolute derived-functor data (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143-149), so it is a tool candidate, not a one-line specialization for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction between pullback and pushforward for modules on a ringed topos computed by unbounded K flat resolutions",
+   "results": "Actual search returned 8 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback/pushforward adjunctions do not supply the unbounded sequence-site construction; CategoryTheory.Adjunction.derived additionally requires absolute derived-functor data (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143-149), so it is a tool candidate, not a one-line specialization for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse sequence of sheaves of rings the derived extension from a fixed base ring is left adjoint to derived inverse limit of scalar restrictions",
+   "results": "Actual search returned 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, CondensedMod.LocallyConstant.adjunction, Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback/pushforward adjunctions do not supply the unbounded sequence-site construction; CategoryTheory.Adjunction.derived additionally requires absolute derived-functor data (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:143-149), so it is a tool candidate, not a one-line specialization for this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-derived-system-evaluation-calculus",
@@ -82,5 +209,65 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-sequence-projection-derived-adjunction",
+  "worker": "stage1",
+  "group": "Q12",
+  "summary": "Reused existing ringed-site K-flat, K-injective and normalized derived-adjunction results; wrote the sequence-site direct-image limit and local tensor transpose explicitly. No new nodes. Corrected source tag for the opening sequence-site paragraphs from 0941 to 0940; statement unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2: first and last derived Hom comparisons by derived coefficient adjunction; provides the ambient ringed sequence projection and its normalized ordinary-to-derived transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Identifies strict semilinear systems with modules on the sequence site; the current unit has no replacement for this site-level realization. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General tensor-formula module adjunction for the specified ringed-topos morphism. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded K-injective existence for modules on an arbitrary small ringed site, applied to the sequence site. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Existence and K-injective computation of a total right derived functor. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Unbounded ringed-topos left derived pullback and its flat-term K-flat comparison. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a single flat-term K-flat resolution of an arbitrary base complex. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "General normalized derived adjunction from a resolving class and K-injective resolutions, including its ordinary-transpose formula. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Ordinary additive adjunction descends termwise to homotopy categories. It is a tool for the existing coefficient-adjunction route, not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-fb951ec0e",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-fb951ec0e (reviewer sub-agent of L); spot-checked: I read the full split: 6 steps, 0 new nodes, statement byte-identical to the NZ base. Stacks 0940 (C×N site, g^{-1} constant, g_* = lim), 06YY and 07A6 were read at their labels; the item is 07A6 applied to this projection, with explicit models. Every step's use matches the cited statement. Step 2 checks p_* = lim of the scalar restrictions. Step 3 checks the tensor-formula transpose and its semilinearity identity using the module adjunction node; the A-action comes through A→lim B_n. Step 4 gives Rp_* from K-injectives on the small site T, with Q∘p_* exact on K(B). Step 5 gives Lp^* = p^*Q from one flat-term K-flat Q. Step 6 matches the hypotheses of the resolving-normalization node: the resolving class and the K-injective target are supplied, and the transpose formula is correct. No cycle in the 454-node closure. No duplicate: the generic Lf^*⊣Rf_* nodes do not state this lemma. All 8 declared tool uses are generic and accepted. Edge cases B_n=0, constant B_n=A and Z→Z/2 (Tor_1 term) all check out. Fixed in the item: B3, added [def-pc-flat-sheaf-modules] and [def-pur-sheaf-tensor-product] for 'flat-term' and '⊗_A' to the statement and stmt_deps; B5, source.place changed from tag 0941 to 0940 to match the report and proof_origin.; 1 file(s) fixed by the reviewer"
+ }
 }
