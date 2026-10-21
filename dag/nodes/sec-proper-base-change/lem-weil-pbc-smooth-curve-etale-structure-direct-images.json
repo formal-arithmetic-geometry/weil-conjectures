@@ -43,7 +43,7 @@
  ],
  "proof": [
   {
-   "text": "Smoothness gives flatness and local finite presentation; properness gives quasi-compactness and a closed-immersion diagonal, hence quasi-separatedness and finite presentation. Each fibre is proper and geometrically reduced. Geometric connectedness and the field $H^0$ criterion give the canonical isomorphism $\\kappa(s)\\cong H^0(X_s,\\mathcal O)$.",
+   "text": "Smoothness gives flatness and local finite presentation. Properness gives quasi-compactness and a closed-immersion diagonal, hence quasi-separatedness and finite presentation. Fibres are proper and geometrically reduced. Geometric connectedness and the $H^0$ criterion give the canonical bijection $\\kappa(s)\\to H^0(X_s,\\mathcal O)$. Their dimension is one by hypothesis.",
    "uses": [
     "lem-pc-smooth-flat",
     "def-weil-proper-morphism",
@@ -55,81 +55,44 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, proof of (a); Tag 0E62 hypotheses"
+    "place": "Tag 0GKA, hypotheses for the perfect-complex argument"
    }
   },
   {
-   "text": "For $K=Rf_*\\mathcal O_X[0]$, perfect direct image applies to the rank-one module $\\mathcal O_X$, flat over $S$. It gives perfectness and canonical arbitrary base change. The derived structure unit has invertible degree-zero fibres by Step 1 and no negative fibre cohomology. The degree-zero criterion gives $H^0(K)=\\mathcal O_S$ by the structural map and locally $K\\cong\\mathcal O_S[0]\\oplus P$, with $P$ perfect of positive Tor amplitude.",
+   "text": "Apply the flat-curve derived-model lemma to $f$. Thus $K=Rf_*\\mathcal O_X[0]$ has $H^0(K)=\\mathcal O_S$ by the structural map, $E=H^1(K)$ is finite locally free and quasi-coherent, locally $K\\cong\\mathcal O_S[0]\\oplus E[-1]$, and every canonical $\\delta_g$ is invertible. Apply the coherent affine-edge lemma with $G=\\mathcal O_X$ and $A=H^0(K)$: it supplies simultaneous linear bijections $e_v:H^1(X_V,\\mathcal O)\\cong\\Gamma(V,v^*E)$ with the required restriction equation.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-flat-derived-structure-unit",
-    "lem-sc-perfect-degree-zero-fibre-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, local splitting; Tags 0B91 and 0E62"
-   }
-  },
-  {
-   "text": "The fibre $X_s$ is quasi-compact and finite type over a field, hence Noetherian, and has dimension one. Dimension vanishing and derived base change kill $H^i(Li_s^*P)$ for $i>1$; positive Tor amplitude kills $i\\le0$. The residue-model lemma thus represents $P$ near $s$ by one finite free term in degree one. Consequently $E=H^1(K)$ is finite locally free (thus quasi-coherent) and locally $K\\cong\\mathcal O_S[0]\\oplus E[-1]$.",
-   "uses": [
-    "def-weil-proper-morphism",
-    "pqf-lem-locnoeth-lft",
-    "lem-sc-noetherian-cohomology-above-dimension",
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-finite-free-residue-model",
-    "def-sc-finite-locally-free-sheaf",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, fibre vanishing and final local model; Tags 02UZ and 0BCD"
-   }
-  },
-  {
-   "text": "Apply the affine coherent edge lemma to $G=\\mathcal O_X$, $A=\\mathcal O_S$ and $E$ from Step 3. It gives linear bijections $e_v:H^1(X_V,\\mathcal O)\\cong\\Gamma(V,v^*E)$, compatible with all arrows between affine etale base objects.",
-   "uses": [
+    "lem-weil-pbc-flat-curve-derived-structure-model",
     "lem-weil-pbc-coherent-affine-base-change-edge-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, last sentence: compatible with base change"
+    "place": "Tag 0GKA, local model and compatible base change"
    }
   },
   {
-   "text": "Write $\\mathcal P(V)=H^1(X_V{}_{\\mathrm{et}},\\mathcal O_{X_V,\\mathrm{et}})$. For affine etale $V$, properness makes $X_V$ quasi-compact separated. The simultaneous lifted comparison followed by $e_v$ gives bijections $b_V:\\mathcal P(V)\\cong L\\Gamma(V,v^*E)$. Its pullback square gives restriction compatibility; its naturality for multiplication and linearity of $e_v$ give $b_V(ax)=a b_V(x)$. Use the same sectionwise lift $L$ throughout. The higher-image theorem identifies $R^1f_*\\mathcal O_{X,\\mathrm{et}}$ with $\\mathcal P^\\#$.",
+   "text": "Use the affine-cohomology realization lemma with $q=1$, $G=\\mathcal O_X$ and these $e_v$. Properness gives the required quasi-compact separated morphism. It yields $R^1f_*\\mathcal O_{X,\\mathrm{et}}\\cong E_{\\mathrm{et}}$ with the natural scalar action, simultaneous coefficient lift and normalized raw-class formula. This includes restriction compatibility and linearity on all etale objects.",
    "uses": [
-    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
-    "lem-weil-pbc-proper-fp-permanence",
-    "sbc-lem-higher-direct-image-presheaf",
-    "def-sc-etale-qcoherent-module"
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03P2 and 03Q8, associated-coefficient comparison"
+    "place": "Tag 03Q8 with the simultaneous coherent comparison; affine restriction and sheafification"
    }
   },
   {
-   "text": "Affine open covers give cover density, and finite affine refinement of etale covers shows that the affine subsite topology is induced. On that subsite $b$ is a presheaf isomorphism to the sheaf $E_{\\mathrm{et}}$. Affine-site equivalence and dense-subsite sheafification compatibility therefore give $\\mathcal P^\\#\\cong E_{\\mathrm{et}}$. Linearity holds globally since equality of the scalar-action morphisms is detected by faithful restriction. In degree zero, for affine etale $v:V\\to S$, universal proper-flat global sections gives an $\\mathcal O_V$-module isomorphism $f_{V,*}\\mathcal O_{X_V}\\cong\\mathcal O_V$, so $B=\\Gamma(X_V,\\mathcal O)$ is free of rank one over $R=\\Gamma(V,\\mathcal O_V)$, say $B=Re$. Writing $1_B=ce$ and $e^2=de$, the equation $e=1_Be=cde$ gives $cd=1$, so the structural pullback $R\\to B$, $r\\mapsto rce$, is bijective; degree-zero comparison identifies this with the structural etale map. The same faithful equivalence detects its invertibility.",
+   "text": "For degree zero, universal proper-flat global sections applies because $f$ is proper flat finitely presented with geometrically reduced connected fibres. For affine etale $V$, it makes $B=\\Gamma(X_V,\\mathcal O)$ free of rank one over $R=\\Gamma(V,\\mathcal O_V)$. Write $B=Re$, $1_B=ce$, $e^2=de$. From $e=1_Be=cde$ follows $cd=1$, so the structural map $r\\mapsto rce$ is bijective. The degree-zero coherent comparison identifies it with the structural etale map, using the same lift. Affine opens cover every etale object; faithful affine restriction detects that this structural map is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-pc-dense-subsite-sheafification-compatibility",
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-etale-site",
-    "lem-sc-etale-qcoherent-descent",
     "lem-sc-proper-flat-global-sections",
     "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-affine-etale-site-topos"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 04HR, lemma-alternative; 03P2 and 0E0L; dense-subsite sheafification compatibility"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, degree zero; perfect.tex Tag 0E0L; topologies.tex Tag 04HR"
    }
   }
  ],
@@ -140,31 +103,17 @@
   "sbc-lem-smooth-geometrically-reduced",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-pc-h0-geom-connected",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-flat-derived-structure-unit",
-  "lem-sc-perfect-degree-zero-fibre-criterion",
-  "pqf-lem-locnoeth-lft",
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "lem-sc-perfect-finite-free-residue-model",
-  "def-sc-finite-locally-free-sheaf",
-  "pqf-def-coherent",
+  "lem-weil-pbc-flat-curve-derived-structure-model",
   "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
-  "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
-  "sbc-lem-higher-direct-image-presheaf",
-  "def-sc-etale-qcoherent-module",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-pc-dense-subsite-sheafification-compatibility",
-  "lem-weil-pbc-affine-opens-basis",
-  "def-weil-pbc-etale-site",
-  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-affine-cohomology-etale-module-realization",
   "lem-sc-proper-flat-global-sections",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+  "lem-weil-pbc-affine-etale-site-topos"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0GKA proof with 03P2 comparison; repair assembles existing general nodes, a new canonical affine-edge compatibility input, and the affine etale site equivalence (04HR)."
+  "place": "Tag 0GKA perfect-complex/fibre route, retaining the existing coherent affine-edge lemma; Tag 03Q8 affine realization and Tag 03P2 structural degree-zero comparison."
  },
  "mathlib_searches": [
   {
@@ -244,76 +193,32 @@
   "date": "2026-10-21",
   "item": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
   "worker": "stage1",
-  "summary": "Dedicated 2026-10-21 repair: retain the statement and Lean record verbatim; replace the 8850-character proof by a short assembly. Extract the two-degree coherent affine edge/base-change naturality argument as a general statement-only node. Reuse affine etale site equivalence and dense-subsite sheafification compatibility instead of repeating gluing. Complete natural-language proof of the new node is in report.md, kept below 3000 characters; the node stays unsplit under the stage-1 delivery contract.",
-  "blueprint": "Same 0GKW/0GKV characteristic-prime structure-cohomology input in thm-weil-pbc-direct-image-finiteness-proper; 0GKA perfect-complex/fibre route unchanged; its base-change compatibility is factored through the new affine-edge interface, followed by 03P2 and 04HR.",
+  "summary": "Deliberate re-split under the human instruction: preserve the live statement, statement dependencies and Lean record, and retain the already landed affine-edge lemma. Create two comparable statement-only tasks for the coherent derived structure model and the affine-to-etale normalized module realization. The parent proof is a short assembly with explicit geometry and structural degree-zero rank-one argument. Every old argument is assigned to one of these nodes or the retained affine-edge node in report.md.",
+  "blueprint": "The same 0GKW/0GKV case (b) in thm-weil-pbc-direct-image-finiteness-proper: 0GKA fibre/perfect-complex argument, canonical affine edges, 03P2 common-lift comparison, 03Q8 higher images and affine gluing; no unit route changed.",
   "tool_uses": [
    {
     "node": "lem-pc-smooth-flat",
-    "why": "General Smooth morphisms are flat input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
+    "why": "Generic Smooth morphisms are flat input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
    },
    {
     "node": "sbc-lem-smooth-geometrically-reduced",
-    "why": "General Smooth morphisms have geometrically reduced fibres input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
+    "why": "Generic Smooth morphisms have geometrically reduced fibres input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
    },
    {
     "node": "lem-weil-pbc-proper-fp-permanence",
-    "why": "General Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
    },
    {
     "node": "lem-pc-h0-geom-connected",
-    "why": "General $H^0=k$ is equivalent to geometric connectedness input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-pc-rf-perfect-base-change",
-    "why": "General Perfectness of $Rf_*\\mathcal{G}$ and base change input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-sc-flat-derived-structure-unit",
-    "why": "General Derived structure unit and its ordinary and fibre comparisons input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-sc-perfect-degree-zero-fibre-criterion",
-    "why": "General Perfect complex with residue-field degree-zero fibres input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "pqf-lem-locnoeth-lft",
-    "why": "General Finite type over a locally Noetherian base input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-sc-noetherian-cohomology-above-dimension",
-    "why": "General Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-sc-perfect-finite-free-residue-model",
-    "why": "General Finite-free local model with prescribed fibre ranks input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "sbc-lem-higher-direct-image-presheaf",
-    "why": "General Higher direct image as a sheafified cohomology presheaf input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-etale-covering-affine-refinement",
-    "why": "General An etale covering of an affine scheme is refined by a finite family of affine opens of its members input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-affine-etale-site-topos",
-    "why": "General The small affine etale site computes the etale topos and its cohomology input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-pc-dense-subsite-sheafification-compatibility",
-    "why": "General Sheafification commutes with restriction to a dense subsite input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-affine-opens-basis",
-    "why": "General The affine opens of a scheme form a basis of its topology (Stacks 01IT) input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
-   },
-   {
-    "node": "lem-sc-etale-qcoherent-descent",
-    "why": "General Descent for quasi-coherent modules input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
+    "why": "Generic $H^0=k$ is equivalent to geometric connectedness input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
    },
    {
     "node": "lem-sc-proper-flat-global-sections",
-    "why": "General Proper flat geometrically reduced connected fibres have universal structure-sheaf pushforward input for the retained 0GKA/03P2 route; no statement of this unit supplies this tool, and no unit-level argument is replaced."
+    "why": "Generic Proper flat geometrically reduced connected fibres have universal structure-sheaf pushforward input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic The small affine etale site computes the etale topos and its cohomology input to the retained 0GKA/03P2 route; this unit has no replacement for the general tool."
    }
   ]
  },
@@ -347,10 +252,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NN-e931008d7",
-  "group": "NN",
+  "reviewer": "NT-cc-Q05-19ea5698e",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-e931008d7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is the re-split asked for by the human repair note of 2026-10-21; the live NW split of 2026-10-17 had 8850 characters. Statement, Lean record and stmt_deps are byte-identical to live. The proof is now a 6-step assembly of 2664 characters (longest step 691), plus one new statement-only node, so it answers the note. Sources read: curves.tex 0GKA (lines 5018-5056), perfect.tex 0E0L, cohomology.tex 0ATM (the printed Lh_* is a typo for Lh^*), 01FB/01F8, topologies.tex 04HR and 0218. Step checks: step 1 gives fp via a qs closed-immersion diagonal and H^0=κ(s). Step 2 checks the hypotheses of rf-perfect-base-change (O_X flat, finite presentation; pinned def-pc-derived-module-base-change-map), the structure unit and the 0E62 criterion, giving K≅O⊕P locally. Step 3 matches 0GKA: X_s is Noetherian of dimension 1, 02UZ gives vanishing above degree 1, Tor amplitude gives vanishing at or below 0, and 0BCD gives P≅O^d[-1]. Step 4: the new node's hypotheses (qc separated f, quasi-coherent G, A=H^0(K)≅O_S, local model, δ_g iso for all g) are all met. Step 5: X_V is qc and separated; the comparison's pullback square with the new node's equation gives restriction compatibility (ρ_h = restriction of def-sc-etale-qcoherent-module), and its multiplication clause gives linearity. Step 6: the affine subsite is cover-dense and its topology is induced (0218 refinement); 04HR equivalence plus dense-subsite sheafification gives P^#≅E_et. New node lem-weil-pbc-coherent-affine-base-change-edge-naturality is true. τ is canonical since H^{≥2}=0. γ_g is the identity locally, because the Ext^1(A,E) part dies on H^1. ε_T is iso by affine vanishing and leray-degenerate (2). The square follows from 0ATM pasting, the unit composition law and edge naturality. Small cases checked: empty base, G=0/E=0, identity h, non-flat g. It is general (no proper, smooth, curve or étale hypotheses), not a clause of the item, and B1-B9 hold with three search kinds. I found no duplicate after grepping 0ATM, Leray/edge/base-change statements, the 23 listed candidates and Mathlib. One fault fixed (C4): the step-6 degree-zero clause cites lem-sc-proper-flat-global-sections, whose statement gives only an unpinned f_*O_X≅O_S, but the step uses bijectivity of structural pullback. I added the elementary rank-one-algebra argument to step 6 (B=Re, 1=ce, e²=de give cd=1); uses and proof_deps are unchanged (fixes/dag/nodes/sec-proper-base-change/<item>.json). Batch-5 flag: lem-sc-proper-flat-global-sections reaches def-pod-ring-scalar-extension, which is the general definition of scalar extension of modules, not part of the trace formula or Poincaré duality or their proofs. The live item already reached it through lem-sc-perfect-finite-free-residue-model. Accepted. split_report.tool_uses (general inputs) accepted. Maintainer note: the node-level tool_uses still lists old-step entries.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-19ea5698e (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes. Re-split per the 2026-10-21 human note, which was reopened because the landed 6-step proof (2947 chars) had only 1 new node. The item is not dropped and nothing supersedes it: the live and side-live clones still hold the 6-step base. The item statement, stmt_deps and lean record are unchanged. The delivered proof has 4 steps and 1837 chars. Every base argument has a home. Base steps 2-3 (0B91 perfect and base change, flat structure unit, 0E62 degree-zero criterion, Noetherian dim-1 vanishing by 02UZ, 0BCD residue model) are now lem-weil-pbc-flat-curve-derived-structure-model. I checked it against curves.tex l.5018 (0GKA proof); it is true without the nodal hypothesis. Edge cases: empty fibres are excluded by the κ(s)≅H⁰ hypothesis, dimension 0 gives E=0, and the rank is local. Base steps 5-6, degree one (03P2 comparison square and multiplication, 03Q8 presheaf, dense affine subsite, descent, faithful linearity), are now lem-weil-pbc-affine-cohomology-etale-module-realization. It is true for any q, G and E given compatible linear e_v. Base step 4 stays in item step 2 through the landed edge node; its compatibility equation matches node 2's hypothesis exactly. The degree-zero argument (0E0L, B=Re, cd=1, affine-site detection) stays explicit in item step 4. The two new nodes are of comparable size, neither restates the item, and I found no duplicate after searching for 0GKA, E[-1] and 0E62 and checking the sec-abelian-varieties and sbc raw-comparison nodes. Batch-5 finding: the realization node's citation of qcoherent-cohomology-comparison-pullback reaches def-pod-ring-scalar-extension, a general scalar-extension definition and not a Poincaré-duality proof step. The base item already cited that node, so the batch-5 closure does not change; accepted. Advisory: node 2 writes P(V) with L((G_V)_et) and leaves the canonical identification with r^{-1}L(G_et) implicit, as base step 5 already did."
  },
  "lean_audit": {
   "master": {

@@ -20163,3 +20163,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:03 L: returned deliver/Q41/lem-sp-finite-compact-site-coherence (reviewer RETURN: L: independent stage-2 immutable head 67a0b64dece2: H2/H12: stmt_deps add theorem nodes lem-sf-class-compact-support-com)
 - 04:03 L: merged deliver/Q44/lem-sp-etale-derived-chain-transpose (reviewer FIX; first push; new nodes: 0)
 - 04:03 L: merged deliver/Q33/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer FIX; after a return; new nodes: 0)
+- 04:03 L: merged deliver/Q05/lem-weil-pbc-smooth-curve-etale-structure-direct-images (reviewer PASS; after a return; new nodes: 2)
