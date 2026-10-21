@@ -280,5 +280,23 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e41a9107a (reviewer sub-agent of L); spot-checked: Read the item's 7-step proof and every cited statement. Source checked: ILO IX Prop 2.1 proof, printed p.133, which uses the full root algebra A[x]/(x_i^n-t_i) and leaves its regularity implicit. The statement is unchanged and true. Edge cases checked: A=0, r=0, n=1, k[s] and k[s,u]. Repeated branches are excluded, and that hypothesis is needed (k[x,y]/(x^n-y^n) is singular). The induction is set up properly: B_{J,K} for disjoint J⊆S, K⊆I∖J, by induction on |K|, with base R_J regular local by the SNC dimension clauses and 00CT/stalk identification. Step 4: t_i≠0 in R_J follows from the two dimension equalities; R_J is a domain, so t_i is injective on the free D. Step 5: D/(t_i)=B_{J∪{i},K'}, and the root-at-divisor lemma applies with all four hypotheses verified (the lemma itself re-derived via 00NU). Step 6: D[1/t_i] regular, E[T] regular, and ∂F=nT^{n-1} is a unit because T is invertible and n is a unit; then 07PF applies. Step 7 is a valid localization identification. The five declared tool_uses are generic algebra and are accepted. Batch-5: lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no proof_deps; neither batch-5 assumption gives it and it is not part of either proof, so it is accepted. No duplicates: lem-per-snc-root-algebra-structure is only the strictly henselian local case. No new nodes, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteRootRegularRing",
+  "declaration": "AlgebraicGeometry.isRegularRing_snc_finiteRoot",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteRootRegularRing.lean",
+  "statement": "theorem isRegularRing_snc_finiteRoot (A : Type u) [CommRing A] (hA : IsRegularScheme (Spec (.of A))) (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hreduced : ∀ i : Fin r, _root_.IsReduced (A ⧸ Ideal.span ({t i} : Set A))) (hdistinct : Function.Injective (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A))) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (n : ℕ) (hn : 0 < n) (hnunit : IsUnit (n : A)) : IsRegularRing (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ (MvPolynomial.X i : MvPolynomial (Fin r) A) ^ n - MvPolynomial.C (t i))))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6630a9023",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: IsRegularScheme for Spec A; IsStrictNormalCrossingsBoundary H; hbranches makes the zero loci of t_i exactly the irreducible components of |H| (same convention as consumer SNCRootLimitNormalCharts); hreduced (A/(t_i) reduced) and hdistinct (injective zero loci) follow from the node and are needed (t=s^2 and k[x,y]/(x^n-y^n) counterexamples); n>0 and n a unit in A; MvPolynomial(Fin r) A modulo (X_i^n - C t_i); conclusion IsRegularRing (Noetherian + regular local at every prime). No added Noetherian, field, nontriviality or universe assumption. Edge cases A=0, r=0, n=1 and unit t_i handled. Item node unchanged except lean; the 3 dependency records are identical to live; lean.statement verbatim; imports are exactly the dependency modules, all checked to exist; existing:false justified. No defs, proof is sorry, docstrings give the source and blueprint id and the 7 proof steps, report has both sections. No fix, so no compile; worker reports a clean compile. Advisory: consumer sncRootLimit_normal_charts must derive reduced/distinct from radicality of H when citing this node."
  }
 }
