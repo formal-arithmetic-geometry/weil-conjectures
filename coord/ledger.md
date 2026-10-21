@@ -21057,3 +21057,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q31/lem-sfb-locally-free-derived-scalars (reviewer PASS; after a return; new nodes: 1)
 - 08:15 L: merged deliver/Q95/def-nagata-affine-proj (reviewer FIX; after a return; new nodes: 0)
 - 08:15 L: merged deliver/Q107/sk-lem-sp-tower (reviewer FIX; after a return; new nodes: 6)
+- 08:15 L: merged deliver/Q38/lem-sfb-scalar-matrix-inverse-image (reviewer PASS; after a return; new nodes: 2)
