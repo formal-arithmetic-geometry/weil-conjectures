@@ -23797,3 +23797,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:35 L: returned deliver/N7/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C6 + C1/C3: Step 2 depends on lem-per-gabber-regular-pair-purity (ILO XVI 3.1.1) for the isomorphism A_Z≃Ri^!A_T(1)[2]. )
 - 21:36 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 21:36 L: returned deliver/NE/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: I read the item, all four new nodes and ILO X 1.1, X 2.1-2.3 and (2.a)-(2.e) on pp.135-136 and 148-152. The mathematics )
+- 21:36 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
