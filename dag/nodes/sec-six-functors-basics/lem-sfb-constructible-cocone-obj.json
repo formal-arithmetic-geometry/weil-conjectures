@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Fix the coefficient conventions before invoking descent. The ring $\\underline E$ has sections $C(S,E)$ by [def-sfb-padic-subfield-condensed-ring], and $\\underline{\\Qlb}(S)$ consists of the continuous functions valued in a finite subextension by [sk-def-sfb-qlbar-condensed]. Both are pulled back using the same $p_X^*$ of [sk-def-sfb-pullback-from-point], and by [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar] the cocone categories $D_{\\mathrm{cons}}(X,E)$ and $D_{\\mathrm{cons}}(X,\\Qlb)$ are the bounded constructible categories of [sk-def-sfb-bounded-constructible] over exactly these pulled-back rings $E_X=p_X^*\\underline E$ and $\\QbarX=p_X^*\\underline{\\Qlb}$. Thus the coefficient rings denoted $E_X^c,\\Omega_X^c$ in [def-weil-pbc-condensed-e-module-category] are exactly $E_X,\\QbarX$ here. In [def-sfb-finitely-presented-module], finite presentation means a cokernel of a map between finite sums of the regular module. Consequently [def-sfb-locally-finitely-presented] and [def-sfb-constructible-module] give exactly the stratified local cokernel presentations used in that condensed module category. By [sk-def-sfb-bounded-constructible], the resulting bounded categories are the same full subcategories of the same ambient derived module categories. This identification imposes no completeness condition and does not replace local finite presentation by the stronger scalar-constant-model convention.",
+   "text": "Use $E_X=p_X^*C(-,E)$ and $\\QbarX=p_X^*\\underline{\\Qlb}$, where the latter sections have image in one finite subfield. These are exactly $E_X^c,\\Omega_X^c$ of the cited condensed-module definition: the pullback functors agree by their formulas. The cited local-presentation definitions both say locally a cokernel of finite free modules on each stratum. Thus their bounded constructible full subcategories agree. Put $\\mathcal C_E=D_{\\mathrm{cons}}(X,E)$ and $\\mathcal D=D(\\Mod_{\\QbarX})$.",
    "uses": [
     "def-sfb-padic-subfield-condensed-ring",
     "sk-def-sfb-qlbar-condensed",
@@ -38,26 +38,13 @@
    }
   },
   {
-   "text": "For a finite field $E$ put $\\mathcal C_E=D_{\\mathrm{cons}}(X,E)$, and let $\\mathcal D=D(\\Mod_{\\QbarX})$. Since $X$ is topologically Noetherian, [lem-weil-pbc-condensed-finite-model-proof-api] makes $\\mathcal C_E$ triangulated. By [lem-weil-pbc-condensed-flat-coefficient-calculus], extension to a finite field or to $\\Qlb$ is exact on modules, its derived functor is termwise tensor, and it preserves shifts and distinguished triangles. These are the specified functors $T_{E,F}$ and $T_{E,\\Qlb}$ by [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar], using step 1. Use the cocone [def-sfb-constructible-cocone], now with its vertex included in $\\mathcal D$: its transition functors, scalar-extension functors and comparisons supply a cocone with triangulated source categories and triangulated functors $\\Phi_E:\\mathcal C_E\\to\\mathcal D$. The target inclusion preserves triangles because its triangles are the inherited ambient ones.",
+   "text": "The finite-model API makes each $\\mathcal C_E$ triangulated, using topological Noetherianity. Flat coefficient calculus makes scalar extension exact and termwise on derived categories. Therefore the cocone, with vertex included in $\\mathcal D$, has triangulated functors $\\Phi_E:\\mathcal C_E\\to\\mathcal D$ and the same transition comparisons; the source inclusions are exact by the triangulated-subcategory definition.",
    "uses": [
     "lem-weil-pbc-condensed-finite-model-proof-api",
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
     "def-sfb-derived-extend-subfield",
     "def-sfb-derived-extend-to-qlbar",
-    "def-sfb-constructible-cocone"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Modules and Complexes paragraphs; unit proof (3), finite sheaf descent followed by Postnikov induction"
-   }
-  },
-  {
-   "text": "Let $P(Y)$ mean that $Y\\in\\mathcal D$ is isomorphic to $\\Phi_E(K_E)$ for some finite $E$ and $K_E\\in\\mathcal C_E$. The index is nonempty and directed by [def-weil-finite-subextension-directed-set]. Any ambient morphism $\\Phi_E(K_E)\\to\\Phi_F(L_F)$ is a morphism in the full subcategory $D_{\\mathrm{cons}}(X,\\Qlb)$; [lem-sfb-constructible-cocone-hom-surj] therefore descends it to one common finite stage, with precisely the cocone comparisons. The hypotheses of [lem-weil-pbc-directed-triangulated-image] now hold for the ambient cocone of step 2. It follows that $P$ is triangulated: it contains zero, is stable under shifts, and is closed under extensions in distinguished triangles. It is also invariant under isomorphism: compose the isomorphism exhibiting a model with the given isomorphism of target objects. This is the cone-lifting mechanism required by the unit's Postnikov argument; it makes no claim that a single stage functor is full.",
-   "uses": [
-    "def-weil-finite-subextension-directed-set",
-    "lem-sfb-constructible-cocone-hom-surj",
-    "lem-weil-pbc-directed-triangulated-image",
+    "def-sfb-constructible-cocone",
     "def-weil-triangulated-subcategory"
    ],
    "elementary": false,
@@ -67,10 +54,27 @@
    }
   },
   {
-   "text": "Every constructible $\\QbarX$-module $M$ has a model for its degree-zero complex. Indeed its finite stratification and local finite presentations are exactly those checked in step 1, so [lem-weil-pbc-condensed-finite-presentation-descent] gives a finite $E$, a constructible $E_X$-module $M_E$, and an isomorphism $\\QbarX\\otimes_{E_X}M_E\\cong M$. The complex $M_E[0]$ lies in $\\mathcal C_E$ by [sk-def-sfb-bounded-constructible]: its only possible nonzero cohomology is $M_E$, and zero modules have the presentation $E_X^0\\to E_X^0\\to0$. Exact, termwise scalar extension from [lem-weil-pbc-condensed-flat-coefficient-calculus] identifies $\\Phi_E(M_E[0])$ with $M[0]$. Thus $P(M[0])$, and step 3 gives $P(M[0][-q])$ for every integer $q$. The cited sheaf-descent theorem supplies the gluing across strata as well as the local coefficient models; a local matrix argument alone would not give this conclusion.",
+   "text": "Put $P(Y)\\iff\\exists E,\\ \\exists K_E\\in\\mathcal C_E,\\ Y\\cong\\Phi_E(K_E)$. The field index is nonempty. Fullness of $D_{\\mathrm{cons}}(X,\\Qlb)\\subset\\mathcal D$ lets Hom-surjectivity lift every ambient arrow between images to a common stage, with the specified comparisons. The directed-triangulated-image lemma gives that $P$ is triangulated. Composing witnessing isomorphisms makes $P$ isomorphism-closed.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-sfb-dcons-qlbar",
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-constructible-cocone-hom-surj",
+    "lem-weil-pbc-directed-triangulated-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
+    "place": "Modules and Complexes paragraphs; unit proof (3), finite sheaf descent followed by Postnikov induction"
+   }
+  },
+  {
+   "text": "Finite-presentation descent gives, for every constructible $\\QbarX$-module $M$, a constructible $E_X$-module $M_E$ with $\\QbarX\\otimes_{E_X}M_E\\cong M$. Its single complex is bounded constructible: $H^0=M_E$, all other cohomology is zero, with presentation $0\\to0\\to0$. Exact-functor single-complex compatibility and flat coefficient calculus give $\\Phi_E(M_E[0])\\cong M[0]$. Hence $P(M[0])$.",
    "uses": [
     "lem-weil-pbc-condensed-finite-presentation-descent",
     "sk-def-sfb-bounded-constructible",
+    "def-sfb-finitely-presented-module",
+    "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-condensed-flat-coefficient-calculus"
    ],
    "elementary": false,
@@ -80,22 +84,22 @@
    }
   },
   {
-   "text": "Take $K\\in D_{\\mathrm{cons}}(X,\\Qlb)$ and choose integers $a\\le b$ with $H^q(K)=0$ outside $[a,b]$, as in [sk-def-sfb-bounded-constructible]. Represent $K$ by a complex and use its standard truncations. For every $q$ the triangle of [lem-weil-pbc-truncation-triangle] is\n$$\\tau_{\\le q-1}K\\longrightarrow\\tau_{\\le q}K\\longrightarrow H^q(K)[-q]\\longrightarrow(\\tau_{\\le q-1}K)[1].$$\nInduct for $q=a,\\ldots,b$ on $P(\\tau_{\\le q}K)$. The initial truncation $\\tau_{\\le a-1}K$ is acyclic and hence isomorphic to zero in the localization [def-weil-abstract-derived-category], so it has $P$ by step 3. At the induction step, $H^q(K)$ is constructible by the chosen category definition, so its shifted single complex has $P$ by step 4. Extension closure of $P$ from step 3 gives $P(\\tau_{\\le q}K)$. Finally $\\tau_{\\le b}K\\to K$ is a quasi-isomorphism, since it induces the identity on the surviving cohomology and both sides have zero cohomology above $b$. Hence $P(K)$. This is a finite induction, including the acyclic case, and therefore ends with one finite coefficient field.",
+   "text": "Apply finite truncation devissage [lem-sfb-dc-module-devissage] to $\\mathcal R=\\QbarX$ and $P$: step 3 supplies triangulation and isomorphism closure, and step 4 supplies all constructible degree-zero objects. It gives $P(K)$ for every bounded constructible $K$.",
    "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "lem-weil-pbc-truncation-triangle",
-    "def-weil-abstract-derived-category"
+    "lem-sfb-dc-module-devissage",
+    "sk-def-sfb-bounded-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; applied to the unit proof (3), Complexes paragraph"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
+    "place": "Modules and Complexes paragraphs; unit proof (3), finite sheaf descent followed by Postnikov induction"
    }
   },
   {
-   "text": "Unpack $P(K)$ to obtain $E$ and $K_E\\in D_{\\mathrm{cons}}(X,E)$ with $T_{E,\\Qlb}K_E\\cong K$ in the ambient derived category. Both objects belong to the full subcategory $D_{\\mathrm{cons}}(X,\\Qlb)$, so this is also an isomorphism in that subcategory. The cocone [def-sfb-constructible-cocone] has these very scalar-extension functors; this proves exactly (Obj) of [sk-def-sfb-filtered-two-colimit].",
+   "text": "Unpack $P(K)$. Both $K$ and $\\Phi_E(K_E)$ lie in the full cocone vertex, so the ambient isomorphism and its inverse are vertex morphisms. They exhibit exactly (Obj) for the specified cocone.",
    "uses": [
     "def-sfb-constructible-cocone",
+    "def-sfb-dcons-qlbar",
     "sk-def-sfb-filtered-two-colimit"
    ],
    "elementary": true,
@@ -114,21 +118,21 @@
   "def-sfb-locally-finitely-presented",
   "def-sfb-constructible-module",
   "sk-def-sfb-bounded-constructible",
+  "def-sfb-dcons-subfield",
+  "def-sfb-dcons-qlbar",
   "lem-weil-pbc-condensed-finite-model-proof-api",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "def-sfb-derived-extend-subfield",
   "def-sfb-derived-extend-to-qlbar",
   "def-sfb-constructible-cocone",
+  "def-weil-triangulated-subcategory",
   "def-weil-finite-subextension-directed-set",
   "lem-sfb-constructible-cocone-hom-surj",
   "lem-weil-pbc-directed-triangulated-image",
-  "def-weil-triangulated-subcategory",
   "lem-weil-pbc-condensed-finite-presentation-descent",
-  "lem-weil-pbc-truncation-triangle",
-  "def-weil-abstract-derived-category",
-  "sk-def-sfb-filtered-two-colimit",
-  "def-sfb-dcons-subfield",
-  "def-sfb-dcons-qlbar"
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-dc-module-devissage",
+  "sk-def-sfb-filtered-two-colimit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -226,11 +230,11 @@
   }
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "item": "lem-sfb-constructible-cocone-obj",
   "worker": "stage1",
-  "summary": "Kept the statement and its topological Noetherian hypothesis. Replaced informal across-stratum gluing by the existing finite-presentation sheaf-descent input, supplied finite-stage triangulated closure from the actual coefficient API, and applied the existing generic triangulated-image lemma using same-unit Hom-surjectivity. Wrote the finite Postnikov induction with its acyclic base, all shifts, truncation triangles, and final full-subcategory isomorphism. Checked the coefficient and local-presentation conventions explicitly. No new nodes.",
-  "blueprint": "Realizes Modules and Complexes of lem-sfb-constructible-cocone-obj.proof.md and unit proof (3)-(4): sheaf descent, descent of connecting morphisms, and finite Postnikov induction. The generic triangulated-image tool packages the cone-lifting argument; the unit route is unchanged.",
+  "summary": "Repair of the human resplit return: replaced the inline Postnikov induction by the existing finite truncation devissage node and the implicit single-complex comparison by the existing exact-derived-functor Mathlib leaf. Retained the previously accepted coefficient, finite-module descent, finite-stage triangulation and directed-image inputs. The statement is unchanged; the proof is now a short assembly, with no duplicate helper nodes.",
+  "blueprint": "Modules paragraph: finite-presentation module descent and the single-complex comparison (step 4). Complexes paragraph and unit proof (3)-(4): ambient triangulated cocone (steps 1-2), morphism descent and triangulated image (step 3), finite Postnikov devissage supplied by the existing lem-sfb-dc-module-devissage (step 5), and full-subcategory return (step 6).",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-condensed-finite-model-proof-api",
@@ -247,6 +251,10 @@
    {
     "node": "lem-weil-pbc-condensed-finite-presentation-descent",
     "why": "Descent of one constructible sheaf including across-stratum gluing with the actual local-cokernel predicate; the same-unit object-descent node assumes the narrower standing-scheme and constant-local-model conventions."
+   },
+   {
+    "node": "lem-sfb-dc-module-devissage",
+    "why": "The general module-object finite Postnikov induction with exactly the constructibility predicate of this item; it realizes the unit Complexes paragraph and avoids duplicating its existing proved helper."
    }
   ]
  },
@@ -254,15 +262,16 @@
   "lem-weil-pbc-condensed-finite-model-proof-api",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "lem-weil-pbc-directed-triangulated-image",
-  "lem-weil-pbc-condensed-finite-presentation-descent"
+  "lem-weil-pbc-condensed-finite-presentation-descent",
+  "lem-sfb-dc-module-devissage"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NU-8ad00920c",
-  "group": "NU",
+  "reviewer": "NT-cc-Q50-12850bd82",
+  "group": "Q50",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8ad00920c (reviewer sub-agent of L); spot-checked: FIX for one citation fault; the mathematics is sound and I read all of it. Not dropped, not superseded (live and side-live still have the item and hom-surj as imported), no cycle in the 1052-node closure. The statement is word for word the main-20261015 node 1772, with the topologically Noetherian X kept. The six steps follow the item's blueprint Modules/Complexes proof and match the live Lean proof of constructibleCocone_essSurjObj (TwoColimit.lean:560-640): ambientCocone, isTriangulated_exists_essImage from ambientHomSurj, single_model via finite-presentation descent, then prop_of_bounded and fullyFaithfulι.preimageIso. Hypotheses checked: finite-model-proof-api and flat-calculus need a Noetherian space; the generic triangulated-image lemma needs a nonempty preorder and triangulated Φ_E = ι∘T_{E,Q̄ℓ}, and its arrow-lifting hypothesis is exactly hom-surj, since the targets lie in the full subcategory D_cons(X,Q̄ℓ). Descent: same rings (padicSubfieldRingObj = condensedRingObj C(-,E) = E_X) and the same stratified local coker presentation. Stacks 08J5 = derived.tex:4076; the truncation-triangle node states τ≤q−1→τ≤q→H^q[−q]. Induction: acyclic base, finite [a,b], τ≤b K→K a quasi-isomorphism. The 4 sk-thm-properbasechange tool uses are accepted: the unit's own object route (det-lem-coefficient-finite-descent-objects, sk-lem-coefficient-heart) needs a standing scheme, which the item does not assume. Edge cases checked: X empty, K=0, a single shifted sheaf, two degrees with nonzero δ. The fault (C3/B3): step 1 identifies D_cons(X,E) and D_cons(X,Q̄ℓ) with the pbc categories without citing the nodes that define them. Fixed by adding def-sfb-dcons-subfield and def-sfb-dcons-qlbar to step 1's text, uses and proof_deps; both are same-unit and already in the closure.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-12850bd82 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited node's statement. The statement is word for word main-20261015 order 1772 and unchanged, as are stmt_deps, source, lean and item tool_uses; only proof, proof_deps and split_report changed. This answers the human re-split request: proof text is 2157 chars, steps are 489/418/406/392/262/190, and the inline Postnikov induction is replaced by existing lem-sfb-dc-module-devissage. Step-by-step checks: Step 1 matches the coefficient rings and the definitions of E_X, Q̄_ℓ,X and the stratified local-coker constructibility with the condensed-e-module definitions. Step 2: finite-model-api makes each finite stage triangulated, flat-calculus gives exact termwise scalar extension, and the inclusion is exact by def-weil-triangulated-subcategory. Step 3: the directed-triangulated-image lemma's hypotheses hold (Q_ℓ in the index; arrow lifting is exactly hom-surj because D_cons(X,Q̄_ℓ) is full in D(Mod)). Step 4: finite-presentation-descent's hypothesis is exactly constructibility, and the Mathlib leaf (mapDerivedCategorySingleFunctor) gives Φ_E(M_E[0]) ≅ M[0]. Step 5: devissage applies with R = Q̄_ℓ,X and the same constructibility predicate. Step 6 is the full-subcategory unpacking. The route matches the blueprint Modules/Complexes proof, with no SGA. The 1060-node dependency closure is acyclic (the in_cycle import flag is stale). No new nodes, no duplicates. Edge cases checked: empty X, zero/acyclic/shifted objects, nonzero connecting maps, ℓ=2. Maintainer: record lem-sfb-dc-module-devissage (unit sk-def-sfb-dc-restricted-functors) in tool_uses, as declared in split_report; it is the generic version of the unit's own truncation induction."
  },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
