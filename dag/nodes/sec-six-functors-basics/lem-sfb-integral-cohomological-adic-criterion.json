@@ -38,11 +38,10 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-pbc-pid-noetherian-normal], $R$ is Noetherian local with maximal ideal $(\\pi)$ and residue field $k$. Clause (1) of [lem-sfb-integers-profinite-tower] gives $R\\simeq\\varprojlim_n R/\\pi^n$. Thus [lem-sfb-adic-stratified-perfect] applies with $A=R$, $I=(\\pi)$ and $\\widehat A_X=B$; its condition (a) is exactly (2).",
+   "text": "The coefficient-integers DVR theorem supplies the unique maximal uniformizer ideal. Reuse the proved coefficientIntegers_complete helper of AdicLimitFiniteModules (its compact closed-ball proof of adic completeness), then transport the DVR, ideal and completeness through ULift.ringEquiv. Apply adic_stratified_perfect with these actual lifted coefficients. No ring or coefficient presentation is replaced.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-sfb-integers-profinite-tower",
+    "lem-pod-adic-limit-finite-modules",
     "lem-sfb-adic-stratified-perfect"
    ],
    "elementary": false,
@@ -52,60 +51,75 @@
    }
   },
   {
-   "text": "For a constructible sheaf $F$, choose its finite stratification and models $B_S\\otimes_R P$ as in [sk-def-sfb-constructible]. Identify the pulled-back coefficients with $B_S$ by [det-prop-sfb-qlbar-colimit-x-integral-limit]. The integral case of [lem-sfb-finite-constant-model-two-term-free-resolution] gives a scalar two-term finite free complex resolving each $P$ and an extended complex resolving its model. These are the perfect scalar models in condition (b) of [lem-sfb-adic-stratified-perfect]. Hence $F[0]$ satisfies (a).",
+   "text": "The completed scalar realization is the constant-module functor followed by completed scalar extension. The former is exact by the proved constant_exact helper of CompletedConstantSheafReduction; the latter is exact by completed_constant_algebra_flat_quotients. Inverse image of modules is exact by the proved ProEtaleOperations helper, and localized module restriction is exact by localizedSystemExact. Restriction along the identity of the inverse-image coefficient ring is naturally the identity, so uniqueness of left adjoints identifies the published ringed pullback with ordinary module inverse image. Comparing both constructions on derived-category representatives identifies sfbLocalRestriction with the derived exact composite. Thus scalar realization and local restriction commute with homology and degree-zero single objects.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "lem-sfb-finite-constant-model-two-term-free-resolution",
-    "lem-sfb-adic-stratified-perfect",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), constructible sheaves concentrated in degree zero"
+    "place": "Proposition 6.8.11(3), coefficient specialization of Proposition 6.6.11"
    }
   },
   {
-   "text": "Assume (1), with cohomology in $[u,v]$. Step 2 and shift closure give (a) for $H^q(K)[-q]$. Starting with $\\tau_{\\leq u-1}K=0$, apply [lem-weil-pbc-truncation-triangle] for $q=u,\\ldots,v$. The triangle has vertices $\\tau_{\\leq q-1}K$, $\\tau_{\\leq q}K$, $H^q(K)[-q]$. The triangulated closure in [lem-sfb-adic-stratified-perfect] gives (a) successively for $\\tau_{\\leq q}K$, ending with $K\\simeq\\tau_{\\leq v}K$. This proves (2).",
+   "text": "For each finitely presented scalar module, Module.FinitePresentation.exists_fin' gives a finite free surjection. Submodule.basisOfPid gives a finite basis of its kernel. The resulting short exact sequence has a two-term double complex in degrees -1 and 0; the existing proved twoTerm_augmentation helper identifies this complex with the module in degree zero in the derived category. Both terms are finite projective. Apply the exact scalar realization and exact local restriction to this isomorphism. Convert the finite locally closed stratification to Stratification.ofNoetherianSpace without changing any stratum or covering sieve. These are precisely the perfect models of a completed-constant stratified module in degree zero.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle",
+    "lem-sfb-scalar-model-finite-flat-resolution",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "def-sfb-completed-constant-stratified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), coefficient specialization of Proposition 6.6.11"
+   }
+  },
+  {
+   "text": "Apply the degreewise bounded devissage theorem already proved in DerivedCategory.TStructure. The property is IsSfbAdicConstructible; its zero, isomorphism, shift and extension closure come from adic_stratified_perfect. The previous step and the standard single-functor shift isomorphism supply every required degreewise hypothesis. This proves adic constructibility from bounded completed-constant stratified cohomology.",
+   "uses": [
+    "lem-sfb-degreewise-bounded-devissage",
     "lem-sfb-adic-stratified-perfect"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), finite cohomological dévissage"
+    "place": "Proposition 6.8.11(3), coefficient specialization of Proposition 6.6.11"
    }
   },
   {
-   "text": "Assume (2). By [lem-sfb-adic-stratified-perfect], $K$ is bounded and has a finite constructible locally closed stratification with pro-étale local perfect scalar models $B_S\\otimes_R P^\\bullet$. Apply [lem-sfb-local-integral-perfect-model-cohomology] on each covering object of each stratum. It identifies the restriction of $H^q(K)$ with $B_S\\otimes_R H^q(P^\\bullet)$, where the scalar module is finitely presented. These are exactly the models of [sk-def-sfb-constructible]. Thus every $H^q(K)$ is constructible, proving (1).",
+   "text": "Conversely adic_stratified_perfect supplies boundedness and local bounded finite-projective scalar models. A scalar model has finitely generated cycles because the coefficient ring is Noetherian; its homology is a quotient of the cycles, hence finite and finitely presented. Exact scalar realization and exact local restriction identify the restricted homology of K with the restricted completed scalar realization of this homology module. Retain each original stratum and covering sieve and forget only the redundant Noetherian structure to obtain FiniteLocallyClosedStratification. These witnesses are exactly IsCompletedConstantStratified for every cohomology sheaf. This argument compares the two predicates over their common inverse-image coefficient ring and needs no new identification with coefficients constructed on the stratum.",
    "uses": [
     "lem-sfb-adic-stratified-perfect",
-    "lem-sfb-local-integral-perfect-model-cohomology",
-    "sk-def-sfb-constructible"
+    "def-sfb-completed-constant-stratified",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), final sentence via Proposition 6.6.11"
+    "place": "Proposition 6.8.11(3), coefficient specialization of Proposition 6.6.11"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-sfb-integers-profinite-tower",
+  "lem-pod-adic-limit-finite-modules",
   "lem-sfb-adic-stratified-perfect",
-  "sk-def-sfb-constructible",
-  "lem-sfb-finite-constant-model-two-term-free-resolution",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-sfb-local-integral-perfect-model-cohomology"
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sfb-scalar-model-finite-flat-resolution",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "def-sfb-completed-constant-stratified",
+  "lem-sfb-degreewise-bounded-devissage"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.11(3), using Proposition 6.6.11, Definition 6.5.1 and Lemma 6.5.3"
+  "place": "Proposition 6.8.11(3): finite projective resolutions, bounded truncation devissage and cohomology of perfect scalar models; J4 uses existing exact-functor comparisons and the common inverse-image coefficient presentation of the two published Lean predicates."
  },
  "mathlib_searches": [
   {
@@ -189,17 +203,8 @@
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-weil-pbc-constant-module-section-properties",
-  "def-pc-flat-sheaf-modules",
   "sk-def-sfb-constructible",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "def-weil-pbc-ringed-derived-restriction",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-sfb-integers-profinite-tower",
-  "lem-sfb-finite-constant-model-two-term-free-resolution"
+  "lem-weil-pbc-pid-noetherian-normal"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -232,5 +237,15 @@
   "group": "N4",
   "result": "pass",
   "note": "Re-delivery after the RETURN of 6854bf38. R1 repaired: lem-sfb-adic-stratified-perfect is no longer a stmt_dep (it stays in proof_deps); the new def node def-sfb-adic-stratified-perfect-data gives an existing:true record (no file) on the unchanged live AdicStratifiedPerfect module, with 6 plain def/abbrev declarations and the IsSfbAdicConstructible statement verbatim (l.150-151). R2 repaired: sk-def-sfb-constructible is JSON-equal to the live N7 record, and the new def node def-sfb-completed-constant-stratified owns IsCompletedConstantStratified, citing the 4 prescribed defs plus def-pc-scheme. Both new nodes meet the H12 field rules. Against live side the item differs only in lean and stmt_deps (+2 new nodes); def-pc-scheme differs only in whitespace. The item Lean is byte-identical to the returned delivery and its statement was re-checked against the node: l prime; E finite over Q_l; R = ULift O_E with ideal span{pi}; Noetherian X; B = actual limit; condition (1) = bounded + stratified finitely presented local models on every H^q; condition (2) = complete + bounded constructible etale k-complex + residue iso along nu + Tor test against every N; iff. Edge cases and universes are OK. nt_compile --json exit 0, clean (7.9 s / 12.4 s; dependency modules up to 23.6 s). Advisory only: CompletedConstantConstructibility's public import of CondensedConstantConstructibility is unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T160059-L-3498537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
