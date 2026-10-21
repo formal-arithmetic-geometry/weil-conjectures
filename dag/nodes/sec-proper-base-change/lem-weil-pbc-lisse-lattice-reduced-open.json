@@ -18,9 +18,134 @@
   "def-weil-open-immersion",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We will use restriction to open subschemes with the following explicit conventions. The localization equivalence identifies the small pro-etale site of an open $V\\subset T$ with the slice at $V$. Its coefficient restriction has value $C(|Z|,A)$, respectively $C(|Z|,E)$, on $Z\\to V$, hence is exactly $A_V$, respectively $E_V$. Restricting a trivializing cover gives a covering of $V$ and restricts $A_T^{\\oplus r}$ to $A_V^{\\oplus r}$ (likewise for $E$), so local finite freeness survives. The ringed-topos tensor comparison identifies the restriction of $E_T\\otimes_{A_T}M$ with $E_V\\otimes_{A_V}(M|_V)$. Thus an integral lattice pair restricts to an integral lattice pair on every open. These statements also apply to an open in a member of an etale covering, without any quasi-compactness assumption on that member.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1, Proposition 6.8.4(6); slice restriction and Stacks 03EL (sites-modules-lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "Apply etale-local lattice existence to $L$. Obtain an etale covering family $(Y_i\\to X)_i$ and lisse $A_{Y_i}$-modules $M_i$ with $E_{Y_i}\\otimes_{A_{Y_i}}M_i\\cong L|_{Y_i}$. Since $X$ is nonempty and the family is jointly surjective, some $Y_i$ has a point. Choose a nonempty affine open $B\\subset Y_i$ and restrict this lattice pair to $B$ as in step 1. Put $M_B=M_i|_B$.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph"
+   }
+  },
+  {
+   "text": "Let $W$ be the image of $B\\to X$. It is nonempty and open because the etale map $Y_i\\to X$ is open. The map $p:B\\to W$ is etale and surjective: in the affine-local definition of etaleness, restricting the source or restricting the target to an open containing the entire image leaves the same local ring maps. The open subscheme $W$ is noetherian and therefore quasi-compact; it is quasi-separated by local noetherianity. The affine scheme $B$ is quasi-compact and quasi-separated. These are the hypotheses needed to stratify $p$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S0 (lemma-etale-stratified-finite), hypotheses; properties.tex Tags 01OW, 01OY; morphisms.tex Tag 03WT"
+   }
+  },
+  {
+   "text": "Apply the finite-etale stratification theorem to $p:B\\to W$. It gives a finite partition by locally closed subschemes $S_a\\to W$ such that $B\\times_W S_a\\to S_a$ is finite etale. No lattice descent has been used yet.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S0 (lemma-etale-stratified-finite)"
+   }
+  },
+  {
+   "text": "Some stratum contains a nonempty open of $W$. Here is the finite topological argument. Set $C_a=\\overline{|S_a|}$; these finitely many closed sets cover $W$. Choose a subfamily minimal among those covering $W$, and one index $a$ in it. Then $O=W\\setminus\\bigcup_{b\\ne a}C_b$ (union over that subfamily) is nonempty, open, and contained in $C_a$. Since $S_a$ is locally closed, write $|S_a|=H_a\\cap C_a$ with $H_a$ open. Density of $|S_a|$ in $C_a$ shows $U=O\\cap H_a$ is nonempty. It is open in $W$, hence open in $X$, and its underlying set is contained in $|S_a|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S0; elementary extraction of an open from a finite locally closed partition"
+   }
+  },
+  {
+   "text": "Regard $U$ as the open subscheme of $X$. It is reduced, since its local rings are those of the reduced scheme $X$. Factor the immersion $S_a\\to W$ as a closed immersion $S_a\\to T$ followed by an open immersion $T\\to W$. Its set-theoretic image contains $U$, so $U\\subset T$. The reduced-source factorization lemma applied to $U\\to T$ gives a factorization $U\\to S_a\\to T$. Consequently $U$ maps to $S_a$ over $W$. This supplies the actual scheme morphism required to base change over $S_a$, rather than inferring factorization from containment of sets alone.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction), applied to the closed part of the stratum immersion"
+   }
+  },
+  {
+   "text": "Put $B_U=B\\times_W U$ and $p_U:B_U\\to U$. Because $U\\to W$ factors through $S_a$, $p_U$ is the base change of the finite etale map $B\\times_W S_a\\to S_a$; hence it is finite etale. It is surjective by base change of the single-member etale cover $p:B\\to W$. The projection $B_U\\to B$ identifies $B_U$ with the open inverse image of $U$. Restrict the pair $(M_B,E_B\\otimes_{A_B}M_B\\cong L|_B)$ to this open, using step 1. This supplies a lisse $A_{B_U}$-module with rationalization $p_U^{-1}(L|_U)$. Here every inverse image along an object $r:Z\\to X$ of $X_{\\mathrm{proet}}$ (for $Z=Y_i,B,B_U,U$) is identified with the slice restriction, $r^{-1}G\\cong G|_Z$ naturally for sheaves of sets, abelian groups and rings, by the object inverse-image restriction lemma; applied to $E_X$, to $L$ and to the action map, and with $E_X|_Z=E_Z$ from step 1, this identifies $u_i^{-1}L$ restricted to $B_U$ with $L|_{B_U}$ as $E_{B_U}$-modules. The equality of the two restrictions of $L$, $L|_{B_U}\\cong p_U^{-1}(j^{-1}L)$, uses the canonical inverse-image composition comparison for $B_U\\to U\\to X$, whose monoidality also preserves the scalar-extension identification.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph; finite etale base change: Stacks 01WL, 02GO, 01S1; inverse-image composition and tensor comparison: 00X6, 03EL"
+   }
+  },
+  {
+   "text": "The open subscheme $U$ is noetherian and quasi-compact by noetherian-open permanence. Its underlying space is noetherian: take a finite affine cover by spectra of noetherian rings, apply the affine noetherian-space theorem to each chart, then the finite-union theorem to that cover. The restriction $L|_U$ is lisse by step 1. Thus finite-etale lattice descent applies to the finite etale surjection $p_U$ and the lattice of step 7. It yields a lisse $A_U$-module $M_U$ with $E_U\\otimes_{A_U}M_U\\cong L|_U\\cong j^{-1}L$, the last isomorphism by the object inverse-image restriction lemma for the open immersion $j$ (an object of $X_{\\mathrm{proet}}$), compatible with the $E_U$-actions as in step 7. This is the required scalar-extension isomorphism. For every affine open $V\\subset X$, first $V$ and then $U\\cap V$ are noetherian by the same open permanence. Thus $j^{-1}(V)$ is quasi-compact: $j$ is a quasi-compact morphism as well. Nonemptiness was proved in step 5, and no step imposes positive or constant rank.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-kun-finite-union-noetherian",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph, finite-etale lattice descent; noetherian topology: Stacks Tags 01OW, 0053 and 01OZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finite-etale-category",
+  "lem-kun-finite-union-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, first paragraph, with Stacks 03S0; explicit finite-partition open extraction and reduced-source factorization supplied by Q79"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +188,45 @@
    "results": "[grep] OK 0 hit(s); searched Mathlib/AlgebraicGeometry",
    "date": "2026-10-21",
    "verdict": "no match: zero hits in the relevant Mathlib subdirectory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsFiniteLocallyFree\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned types concern finite-type generators, integral schemes, or etale infrastructure, not existence of a continuous integral lattice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse sheaf over a finite extension of Q_l admits a finite locally free integral lattice on a nonempty open subscheme of a reduced noetherian scheme",
+   "results": "OK: 8 hits; SheafOfModules.IsFiniteType.exists_localGeneratorsData, AlgebraicGeometry.IsIntegral.component_integral, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, IsIntegralClosure.finite, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType, AlgebraicGeometry.IsFinite.instIsIntegralHom",
+   "date": "2026-10-21",
+   "verdict": "no match: returned types concern finite-type generators, integral schemes, or etale infrastructure, not existence of a continuous integral lattice"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|integral.?lattice|constructible.*module",
+   "results": "OK: 0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: returned types concern finite-type generators, integral schemes, or etale infrastructure, not existence of a continuous integral lattice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse p-adic sheaf admits an integral lattice on a nonempty open subscheme",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegral.casesOn, AlgebraicGeometry.IsIntegral.recOn, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, PadicInt, AlgebraicGeometry.isReduced_of_isIntegral",
+   "date": "2026-10-21",
+   "verdict": "no match: returned types concern finite-type generators, integral schemes, or etale infrastructure, not existence of a continuous integral lattice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous local system of finite dimensional vector spaces over a nonarchimedean local field has an integral model locally for the etale topology and after finite stratification",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.etaleTopology, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsIntegral.component_integral",
+   "date": "2026-10-21",
+   "verdict": "no match: returned types concern finite-type generators, integral schemes, or etale infrastructure, not existence of a continuous integral lattice"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
@@ -87,5 +247,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-lisse-lattice-reduced-open",
+  "worker": "stage1",
+  "summary": "Reused the existing etale-local lattice, finite-etale stratification and finite-etale lattice descent nodes. Wrote the finite-partition nonempty-open argument and checked the scheme factorization using reducedness. No new nodes, coefficient-category changes, or statement changes. Maintainer review: steps 7 and 8 now cite lem-sfb-proetale-object-inverse-image-restriction for the identification of inverse images along pro-etale objects (and j) with slice restrictions.",
+  "blueprint": "Realizes thm-weil-pbc-finite-extension historical proof first sentence, Choose an integral lattice for K, through Bhatt-Scholze 6.8.13 first paragraph; supplies the reduced-open input to the parent constructible integral-model induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Uses the generic equivalence between the small pro-etale site of an open and the slice, with its coverings, to restrict finite free presentations; the unit has no replacement for this site-theoretic tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Steps 7 and 8 take its clause (1), r^{-1}G = G|_W for an object r of the pro-etale site, to identify the inverse images of L along Y_i, B_U and the open immersion j with slice restrictions; added by the maintainer reader Q79 review, no node of sk-thm-properbasechange states this generic site fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-f3eb1599c",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f3eb1599c (reviewer sub-agent of L); spot-checked: Read B-S 6.8.13 (first paragraph, p.61), Stacks 03S0/0356 and every cited statement. The item statement and stmt_deps are unchanged from the unsplit base. There are no new nodes, no dropped or superseded ids and no cycle. Step 1: localization (1) plus the ringed-topoi tensor node; slice coefficients agree. Step 2: etale-local lattice gives a nonempty Y_i; affine B. Step 3: open image W; B to W etale; W and B qcqs (all hypotheses of 03S0). Step 4: 03S0 partition. Step 5: the minimal-closed-subfamily argument is correct; edge cases checked (empty strata, one stratum, reducible W). Step 6: reduced U factors through S_a via closed-then-open factorization and 0356, avoiding the E3 set-inclusion trap. Step 7: base change gives finite etale surjective p_U; B_U is open in B. Step 8: U has a noetherian space by the affine-chart and finite-union nodes; finite-etale descent applies; j is quasi-compact. Fault C1/C4: steps 7-8 identify u_i^{-1}L, p_U^{-1}(L|_U) and j^{-1}L (def-weil-proetale-inverse-image, sheafified colimit) with slice restrictions without citation. FIX: steps 7 and 8 now cite lem-sfb-proetale-object-inverse-image-restriction clause (1), with E_X|_Z=E_Z from step 1. It is added to proof_deps and declared in split_report.tool_uses (generic site fact, unit sk-lem-proper-heart-bound); its closure does not reach the item. Advisory: lem-weil-pbc-lattice-pair-restriction states step 1's restriction and could be cited. Accepted tool use: lem-weil-proetale-weakly-etale-localization. The run's dagsnap symlinks went dangling mid-review; all statements had already been read, and the later cycle and route checks used clones/side-live.; 1 file(s) fixed by the reviewer"
  }
 }
