@@ -31,9 +31,112 @@
   "lem-weil-pbc-ringed-derived-slice-localization",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=f^*$, $G=f_*$, $F_v=(f_V)^*$, $G_v=(f_V)_*$ on complexes and $r=j_V^*$, $s=j_U^*$ for restrictions. In this proof $a;b$ means first $a$, then $b$. The localization theorem supplies the localized continuous morphism and its ring map, with no assumption that $f$ is flat. Let $\\tau_I:rGI\\to G_vsI$ be the ordinary direct-image comparison. By [lem-weil-pbc-localize-ringed-site-morphism] it is identity on sections with the restricted scalar action. The ordinary inverse-mate assertion [lem-weil-pbc-slice-module-pullback-isIso] identifies the ordinary comparison $\\sigma_P:F_vrP\\to sFP$ by\n$$\\mathsf T'_0(\\sigma_P)=r(\\eta^0_P);\\tau_{FP},$$\nwhere $\\mathsf T'_0$ is the local ordinary adjunction bijection and $\\eta^0$ the global ordinary unit. Applied degreewise this is the same identity for complexes: naturality of all components with the differential makes the displayed arrows chain maps.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-slice-module-pullback-isIso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 04J0 (sites-modules.tex, lemma-localize-morphism-ringed-sites), ordinary localization square and its adjoint normalization"
+   }
+  },
+  {
+   "text": "Put $L=Lf^*$, $R=Rf_*$, $L_v=Lf_V^*$ and $R_v=R(f_V)_*$. Use the normalized presentations supplied by [lem-weil-pbc-ringed-slice-derived-image-exists]: write $\\alpha_A:LqA\\to qFA$, $\\iota_I:qGI\\to RqI$, and $\\alpha',\\iota'$ for their local counterparts. With $\\mathsf T_D,\\mathsf T_0$ the global derived and ordinary Hom bijections, their normalization is\n$$\\mathsf T_D(\\alpha_A;q h)=q(\\mathsf T_0(h));\\iota_I\\quad(h:FA\\to I),$$\nand similarly locally. By [lem-weil-pbc-ringed-slice-derived-comparisons], the canonical $\\beta$ satisfies, for every complex $I$,\n$$r(\\iota_I);\\beta_{qI}=q(\\tau_I);\\iota'_{sI}.$$\nHere and below all termwise restriction factorizations are inserted: $rqA\\cong q(rA)$ and $sqI\\cong q(sI)$ are the canonical identifications of [def-weil-pbc-ringed-derived-restriction]; these identifications are natural in chain maps. The $\\beta$ and inverse mate in this normalized presentation are the canonical comparisons of [lem-weil-pbc-ringed-derived-slice-localization]. Its pullback comparison in the orientation of the item is $\\theta:L_vr\\to sL$ (the inverse of the comparison written in the opposite orientation there).",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-derived-image-exists",
+    "lem-weil-pbc-ringed-slice-derived-comparisons",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 08FI (lemma-restrict-K-injective-to-open); normalized derived adjunction and direct-image comparison"
+   }
+  },
+  {
+   "text": "Apply the K-flat preservation clause of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the localization morphism $j_V$ with identity coefficient map. Its ordinary pullback is restriction, so $rP$ is K-flat with flat terms whenever $P$ is. By [lem-weil-pbc-ringed-topoi-derived-pullback], $\\alpha_P$ and $\\alpha'_{rP}$ are isomorphisms. Exact derived restrictions have the termwise factorizations of [def-weil-pbc-ringed-derived-restriction], so these are precisely the two K-flat identifications specified in the item. In the remaining calculation we keep the comparison arrows visible rather than replace them by identities.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Derived restriction discussion preceding Tag 08FI; K-flat pullback model of Tag 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "Let $\\eta^D,\\eta'^D$ be the global and local derived units. Specializing Step 2's global normalized Hom identity to $h=1_{FP}$ gives\n$$\\eta^D_{qP};R(\\alpha_P)=q(\\eta^0_P);\\iota_{FP},$$\nsince the adjunct of an identity is the unit. Compatibility with units in [lem-weil-pbc-ringed-derived-slice-localization] gives\n$$\\eta'^D_{rqP};R_v(\\theta_{qP})=r(\\eta^D_{qP});\\beta_{LqP}.$$\nIndeed its unit equation with $\\theta^{-1}$ becomes this equation after composing with $R_v(\\theta)$ and cancelling the inverse. No invertibility of a right-derived augmentation is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-derived-image-exists",
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), units and normalization; mate unit identity"
+   }
+  },
+  {
+   "text": "Compute the local derived transpose of $a=\\theta_{qP};s(\\alpha_P)$, with target $sqFP=q(sFP)$. By the unit formula for the adjunction bijection, Step 4 and naturality of $\\beta$ at $\\alpha_P$, it is\n$$\\begin{aligned}\n\\mathsf T'_D(a)\n&=r(\\eta^D_{qP});\\beta_{LqP};R_v(s(\\alpha_P))\\\\\n&=r(\\eta^D_{qP};R(\\alpha_P));\\beta_{qFP}\\\\\n&=q(r(\\eta^0_P));r(\\iota_{FP});\\beta_{qFP}\\\\\n&=q(r(\\eta^0_P);\\tau_{FP});\\iota'_{sFP}.\n\\end{aligned}$$\nThe third equality substitutes Step 4's normalized global unit. The last substitutes the normalized right square of [lem-weil-pbc-ringed-slice-derived-comparisons] at the actual complex $I=FP$. Naturality of the restriction factorizations in Step 2 gives the displayed $q(r(\\eta^0_P))$; thus the computation is also valid with all those canonical isomorphisms inserted. The complex $FP$ need not be K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-derived-comparisons",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), explicit unit/naturality calculation with Tag 04J0 direct-image normalization"
+   }
+  },
+  {
+   "text": "For $b=\\alpha'_{rP};q(\\sigma_P)$, the local normalized Hom identity of [lem-weil-pbc-ringed-slice-derived-image-exists], applied to the chain map $\\sigma_P:F_vrP\\to sFP$, and Step 1 give\n$$\\mathsf T'_D(b)=q(\\mathsf T'_0(\\sigma_P));\\iota'_{sFP}\n=q(r(\\eta^0_P);\\tau_{FP});\\iota'_{sFP}.$$\nThis equals Step 5. Injectivity of the local adjunction bijection proves\n$$\\theta_{qP};s(\\alpha_P)=\\alpha'_{rP};q(\\sigma_P).$$\nCancel the two model isomorphisms of Step 3 to obtain exactly $\\theta_{qP}=q(\\sigma_P)$ under the identifications in the statement. This is equality of the specified maps; it does not merely show that both are invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-derived-image-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 04J0; normalized transpose calculation on flat-term K-flat models"
+   }
+  },
+  {
+   "text": "Every derived object has a flat-term K-flat representative by [lem-pc-kflat-resolution]. Explicitly, for a complex $A$ choose a quasi-isomorphism $p:P\\to A$ of that kind. Its image $qp$ is invertible, and naturality forces\n$$\\theta_{qA}=L_vr(qp)^{-1};\\theta_{qP};sL(qp).$$\nThus the model equality just proved determines $\\theta$ on all objects and is independent of the chosen resolution. It is the pullback comparison induced by the ordinary ringed localization square. The counit compatibility in [lem-weil-pbc-ringed-derived-slice-localization] says\n$$L_v(\\beta_M);\\varepsilon'_{sM}=\\theta_{RM};s(\\varepsilon_M).$$\nBy the defining mate bijection [def-weil-pbc-adjunction-mate], this says precisely that $\\beta_M$ is the transpose of $\\theta_{RM};s(\\varepsilon_M)$. Stacks 07A7 defines the base change map of this ringed square as that transpose, proving the final identification.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change): adjoint of pullback of the counit; K-flat resolution independence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-slice-module-pullback-isIso",
+  "lem-weil-pbc-ringed-slice-derived-image-exists",
+  "lem-weil-pbc-ringed-slice-derived-comparisons",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 07A7 (remark-base-change), 08FI (lemma-restrict-K-injective-to-open), and sites-modules.tex Tag 04J0 (lemma-localize-morphism-ringed-sites); explicit normalized unit/transpose calculation supplied by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +158,52 @@
    "results": "none",
    "date": "2026-10-21",
    "verdict": "no match: no derived categories of module sheaves with derived pullback/pushforward in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site commutes with derived module pullback and the derived direct image comparison is its adjunction mate",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(over|slice)|(over|slice).*derived|mateEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For module sheaves on ringed sites restriction to slice sites commutes with derived pullback compatibly with adjunction mates",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.over",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|leftDerived.*[Cc]omp|[Cc]omp.*leftDerived",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change mate for derived sheaf functors agrees with the ordinary slice localization pullback isomorphism on K-flat complexes",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullback, general mates and derived universal transformations do not alone state the slice comparison normalization for derived module sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +220,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-ringed-slice-pullback-mate-normalization",
+  "worker": "stage1",
+  "summary": "Proved the representative equality by a normalized adjunction-unit calculation, using existing ordinary inverse-mate, derived normalization and K-flat preservation statements. No new nodes and no changes to the statement. Kept all restriction factorization and K-flat comparison arrows explicit up to the stated canonical identifications; derived base change is identified by its counit transpose.",
+  "blueprint": "lemma-weil-pbc-perfect-projection-formula, Detailed form: 'Hence it contains every perfect complex'; the ringed localization argument supporting locality on the target in Stacks 0944. This supplies the normalization needed in Step 2 of lem-weil-pbc-ringed-projection-restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Used solely to choose a flat-term K-flat representative for an arbitrary module-sheaf complex, for independence and determination of the derived comparison. This general resolution existence theorem is not a replacement of the proper-base-change unit route and no node of this unit gives the more general existence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-eaf152205",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-eaf152205 (reviewer sub-agent of L); spot-checked: I read all 7 steps and checked every cited statement, including the Lean statements: RingedSliceDerivedImage.normalized at RingedDerivedSliceData.lean l.118, the RingedSliceAdjunctionSquare unit and counit fields, the right-derived-unit square in ringedDerivedSliceComparisons and in ringedDerivedSliceLocalization, and the lambda adjunct formula in localize_ringed_site_morphism_general. Step 1: sigma is pinned by T'_0(sigma_P)=r(eta^0_P);tau_FP, which matches the slice-module-pullback-isIso formula. Steps 4-6: I recomputed the transpose of theta;s(alpha) through beta naturality, the normalized global unit and the right square at I=FP, and it equals the local normalization at sigma_P. Injectivity then gives theta_qP=q(sigma_P) after cancelling alpha and alpha', which are K-flat isomorphisms (restriction keeps K-flat flat-term complexes K-flat by the tensor-pullback clause applied to j_V with the identity ring map). Step 7: the counit field plus the def-weil-pbc-adjunction-mate transpose shows beta is the mate of theta, which is the Stacks 07A7 base change map (sites-cohomology l.4033, square g=j_V, f'=f_V, g'=j_U); the 04J0 square in sites-modules l.2369 also matches. Edge cases checked: singleton sites, a non-flat A->A/(a), unbounded complexes. No new nodes, no duplicate of the item in the DAG, no SGA. Accepted tool use: lem-pc-kflat-resolution, which is generic resolution existence. Maintainer notes, not faults of this delivery: slice-module-pullback-isIso writes its orientations garbled in words; the word statement of ringed-derived-slice-localization does not name the right-derived-unit square that pins beta (only its Lean statement does); step 1's source.document is sites-cohomology although its place correctly names sites-modules 04J0."
  }
 }
