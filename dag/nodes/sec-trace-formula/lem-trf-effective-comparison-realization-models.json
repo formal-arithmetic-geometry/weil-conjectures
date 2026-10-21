@@ -25,9 +25,144 @@
   "lem-pur-derived-change-of-rings",
   "def-weil-derived-complete-integral-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each scheme $W$ and coefficient field $F$, form the same strict-tower cone functor $H(D)=\\operatorname{Cone}(1-s_D)[-1]$ on restricted quotient-system complexes. Countable products of $R_{F,W}$-modules are exact by [lem-weil-proetale-countable-products-exact]. Thus [lem-weil-strict-roos-comparison] supplies a natural isomorphism $\\rho_D:H(D)\\simeq R\\lim D$ on the entire derived tower category. Use this functor and this comparison throughout. Its specified inclusion of an ordinary limit into the cone is the limit tuple in the unshifted product and zero in the shifted product. Its comparison with a K-injective tower model is independent of the resolution. This constructs the Roos part of the requested interface, including its normalization, before choosing any pullback or scalar representatives.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective limit and product-cone computation; strict normalization as specified in the cited comparison node"
+   }
+  },
+  {
+   "text": "Use the specified derived adjunction $\\mathcal R\\dashv\\mathcal L$ of [lem-coef-derived-system-evaluation-calculus], rather than selecting maps independently at its levels. For a restricted tower $D=\\operatorname{Res}C$ and a K-injective resolution $q:D\\to I$, compute $R\\lim D$ by $\\lim I$ using [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Its limit projections are represented, simultaneously as a map of towers, by\n$$\\Delta\\lim I\\longrightarrow I\\xrightarrow{[q]^{-1}}D.$$\nIndeed the first map is the ordinary limit cone; composing its $n$th projection with $[q_n]^{-1}$ is precisely the total-limit projection to $D_n$. The evaluation of $e_C$ is its scalar-extension adjunct by [lem-coef-derived-system-evaluation-calculus]. This gives the formula in the statement for $\\epsilon_D$, with the indicated order of composition. The whole-system counit, including its quotient transitions, already exists in that adjunction; the calculation identifies its evaluated adjuncts and does not attempt to construct a system map from a collection of unrelated derived maps.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, limit of a K-injective tower; simultaneous adjunction specified by the cited system-calculus node"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $P\\to K$ using [lem-pc-kflat-resolution]. Its quotient complexes $P_{F,n}=P\\otimes_{R_{F,Y}}(A_{F,n})_Y$ are flat-term K-flat over the quotient rings by [lem-pur-kflat-change-of-rings]. They represent $\\mathcal R_{F,Y}K$ with the actual quotient maps by [lem-coef-derived-system-evaluation-calculus]. The whole-system inverse image of [def-trf-integral-comparison-sequence-systems] is represented here by $(f_n^*P_{F,n})_n$: finite constant-coefficient inverse image is exact by [prop-weil-pbc-proetale-constant-exact], and its transitions are the images of $P_{F,m}\\to P_{F,n}$. The defining formula of [def-pur-integral-derived-operations] for $\\widehat U_{f,F}K$ is exactly the Roos realization of this restricted tower. Apply $\\rho$ of Step 1 to this same tower. This gives the primitive isomorphism $\\widehat U_{f,F}K\\simeq\\mathcal L_{F,X}U_{f,F}\\mathcal R_{F,Y}K$ with the prescribed quotient-complex representative, without interchanging inverse image with an infinite product.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-sequence-systems",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5), completed pullback as quotient realization; representative construction uses sites-cohomology.tex Tags 06YS and 0G7E"
+   }
+  },
+  {
+   "text": "For a coefficient inclusion $E\\subset L$ and the same kind of representative $P$, the scalar-changed whole system of [def-trf-integral-comparison-sequence-systems] is represented at level $n$ by $(P\\otimes_{R_{E,X}}(A_{E,n})_X)\\otimes_{(A_{E,n})_X}(A_{L,n})_X$. The simultaneous scalar-association isomorphism in [lem-pur-coefficient-extension-reduction-model] identifies this, with all its transitions, with $P\\otimes_{R_{E,X}}(A_{L,n})_X$ by $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$. These tensors compute derived extension even for ramified inclusions: the first quotient complex is K-flat over $(A_{E,n})_X$ by [lem-pur-kflat-change-of-rings]. By [def-weil-integral-scalar-extension], its Roos cone is the defining value of $\\widehat S_{L/E,X}K$. Compose the identification of cones with $\\rho$ of Step 1 to obtain the scalar primitive isomorphism. The association map commutes with $n+1\\to n$ since both paths send $(x\\otimes a)\\otimes b$ to $x\\otimes\\overline{ab}$. For a third field $M$, both associations send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes abc$; for equal fields multiplication gives the unit comparison. Hence all inclusions use the same simultaneous quotient normalization.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, lemma-pullback-K-flat, and 0D6D, lemma-derived-pullback-composition; scalar quotient construction in the cited reduction-model node"
+   }
+  },
+  {
+   "text": "For the initial completion map use the actual adjunction unit, not an arbitrary map having its levelwise projections. On $P\\to K$ the strict quotient augmentation is\n$$v_P:P\\longrightarrow H(\\operatorname{Res}\\mathcal RP),\\qquad z\\longmapsto(0,(z\\otimes1)_n),$$\nwhere the shifted product is written first. It is a chain map because each quotient transition sends $z\\otimes1$ to $z\\otimes1$, so $(1-s)(z\\otimes1)_n=0$. The whole-morphism equality $u_K=\\rho[v_P][P\\to K]^{-1}$, including its resolution-independent interpretation, is exactly [lem-trf-completion-unit-strict-quotient-model]. This gives the zero shifted coordinate required by [def-trf-integral-comparison-realization-models].",
+   "uses": [
+    "lem-trf-completion-unit-strict-quotient-model",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; actual quotient-unit identification supplied by the cited strict-quotient-model node"
+   }
+  },
+  {
+   "text": "The reduction system $\\mathcal R_EK$ is normalized by [lem-pur-normalized-actual-reconstruction-maps]. Its whole-system inverse image is normalized by the inverse-image clause of [lem-pur-system-normalized-tensor-closure], applied to the pro-etale inverse-image morphism and the constant quotient coefficient sheaves. Their identification with the target constant sheaves is part of [prop-weil-pbc-proetale-constant-exact]. The scalar system $S_{L/E,Y}\\mathcal R_EK$ is normalized by [lem-pur-coefficient-extension-reduction-model], which applies to arbitrary ambient $K$ and explicitly permits ramification. Apply [lem-pur-normalized-actual-reconstruction-maps] separately over $E$ on $X$ and over $L$ on $Y$: both realizations are derived complete and their actual counits $e$ are isomorphisms in the derived categories of whole strict systems. When $K$ is derived complete the same node makes its actual unit $u_K$ invertible. Thus effectivity concerns the actual maps fixed in Steps 2 and 5; it is not inferred merely from the existence of some levelwise isomorphisms.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-pur-system-normalized-tensor-closure",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-pur-coefficient-extension-reduction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final sentence, Frobenius transport through the common-stage category: normalized integral realization; generic reconstruction and inverse-image tools are used as stated"
+   }
+  },
+  {
+   "text": "Now let $K\\in\\mathcal C_E(Y)$. By [lem-pur-integral-operations-preserve-constructible] the completed pullback $\\widehat U_{f,E}K$ belongs to $\\mathcal C_E(X)$. By [lem-weil-integral-scalar-extension-constructible] the completed scalar extension $\\widehat S_{L/E,Y}K$ belongs to $\\mathcal C_L(Y)$. The primitive isomorphisms constructed in Steps 3 and 4 identify these with the two realizations in the statement. Hence those realizations have the required bounded constructible reductions and the single uniform cohomological interval of [def-weil-derived-complete-integral-detailed]. These two preservation statements have precisely the arbitrary scheme-map and finite coefficient-extension hypotheses in force here. No separate flatness or finite Tor-amplitude assumption on the finite quotient coefficient map is inserted.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-integral-scalar-extension-constructible",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final sentence, integral comparison underlying common finite coefficient stages; constructibility is supplied by the cited preservation theorems"
+   }
+  },
+  {
+   "text": "Finally descend the construction simultaneously. A comparison between flat-term K-flat representatives is sent to a quasi-isomorphism of pullback Roos complexes by [lem-pur-integral-operations-well-defined], and to one of scalar Roos complexes by [lem-weil-integral-scalar-extension-well-defined]. Both nodes give descended functors and canonical comparison isomorphisms compatible with every K-flat representative. Scalar association is independent of the representative as a coherent system comparison by [lem-pur-coefficient-extension-reduction-model]. The comparison $\\rho$ is natural on the derived category of whole towers and independent of K-injective resolutions by [lem-weil-strict-roos-comparison]. Thus the primitive maps are composites of these natural comparisons, so commute with every change of representative and with a common refinement. The counit is already a natural transformation of whole-system derived functors, by [lem-coef-derived-system-evaluation-calculus]; its representative formula in Step 2 computes that fixed transformation on any resolution. Consequently changing a tower resolution also leaves it unchanged. All these comparisons are formed before the limit from strict quotient maps or from functors of the whole diagram. They retain every quotient transition. Use this single Roos functor, this fixed adjunction, and these comparisons for each field and scheme; the generator identities in Step 4 hold on any simultaneous representative and survive localization. They therefore give the simultaneous models of [def-trf-integral-comparison-realization-models], with the asserted natural descent.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-weil-strict-roos-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution, 0G7E, lemma-pullback-K-flat, and 0941, lemma-derived-limit-is-ok; simultaneous descent through the cited well-definedness theorems"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Final sentence, common-stage Frobenius transport; explicit assembly of the cited quotient, Roos, reconstruction and constructibility results. Tag 099N supplies the completed pullback route, not the simultaneous model assertion verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +198,59 @@
    "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, BDeRhamPlus, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; ",
    "date": "2026-10-21",
    "verdict": "no match: hits give ordinary adjunction/derived-functor counits, K-injective complexes or ordinary adic rings; none gives normalized effective completed pullback and ramified scalar models with the prescribed quotient normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(Roos|KInjective|K.injective).*(counit|scalar|pullback)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit realization counit of a normalized system of quotient module sheaves",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit, Condensed.profiniteSolidCounit, InverseSystem.invLimEquiv.congr_simp, ModuleCat.directLimitCocone, InverseSystem.invLimEquiv_symm_apply_coe, Profinite.lim, Profinite.asLimit, SheafOfModules.Presentation.isColimit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"lim\"",
+   "results": "12 hits: CategoryTheory.Limits.Cone.postcomposeEquivalence_counitIso, CategoryTheory.Limits.Cocone.precomposeEquivalence_counitIso, CategoryTheory.Limits.Cone.whiskeringEquivalence_counitIso, CategoryTheory.Limits.Cone.functorialityEquivalence_counitIso, CategoryTheory.Limits.coneOpEquiv_counitIso, CategoryTheory.Limits.coconeLeftOpOfConeEquiv_counitIso, CategoryTheory.Limits.coconeRightOpOfConeEquiv_counitIso, CategoryTheory.Limits.Cocone.whiskeringEquivalence_counitIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective normalized quotient system realization of completed pullback and ramified scalar extension on pro etale sheaves with K flat representatives",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.instFormallyEtaleRing, Algebra.IsEtaleAt.comp, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction and completion adjunction with unit and counit represented by quotient complex Roos cones",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε_fac_app",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem derived_counit|def derivedε|theorem derivedε_fac_app",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalized|adic).*(tower|system)|(tower|system).*(normalized|adic)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary derived adjunctions and cone equivalences do not supply the pro-etale quotient-system, completed pullback and ramified scalar realization models with the stated normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-pullback-comparison-realization",
@@ -84,5 +268,95 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-effective-comparison-realization-models",
+  "worker": "stage1",
+  "group": "Q105",
+  "summary": "Assembled the simultaneous normalized model interface from existing strict Roos comparison, actual derived system adjunction, K-flat quotient models, scalar reduction model, reconstruction and constructibility theorems. No new nodes or statement changes. The actual unit and counit are retained as whole-diagram maps; no finite quotient flatness or Tor bound is assumed.",
+  "blueprint": "prop-trf-karoubi-independence.proof.md final sentence on Frobenius transport in the common-stage category: realizes the integral normalized comparison interfaces used by the ancestor, within sk-thm-trace-transport Steps 2–4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact products justify the strict Roos cone on module sheaves for any pro-etale scheme. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The normalized natural comparison between the strict cone and total derived limit is a generic tower tool. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The specified whole-system reduction/realization adjunction identifies the actual counit and supplies coherent derived evaluation. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "K-injective tower resolutions compute the actual derived limit and its projections. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolutions exist on a ringed site. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Quotient change of rings preserves flat-term K-flat representatives without flatness of the ring map. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Finite constant-coefficient inverse image is exact and identifies source and target constant coefficient sheaves. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-coefficient-extension-reduction-model",
+    "why": "The existing scalar-association system comparison gives normalization and transitions for ramified finite coefficient extensions. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Actual unit and whole-system counit invertibility is the generic reconstruction tool. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-system-normalized-tensor-closure",
+    "why": "Exact system inverse image preserves normalized transition adjoints. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Constructibility of the completed pullback is used with the existing operation, not as an alternative proof route. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Constructibility of finite integral scalar extension is the existing coefficient operation theorem. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Pullback Roos models descend canonically through all K-flat representative changes. No node of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Scalar Roos models descend canonically through all K-flat representative changes. No node of the trace-transport unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-14bb0da2b",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-14bb0da2b (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited node statements, Stacks 099N (2),(5) and the main-20261015 prop-trf-karoubi-independence proof (final sentence). Shape: one commit, no new nodes, and the statement and stmt_deps are identical to the live unsplit node. There is no repair note, the item is not on the dropped list, there is no cycle, proof_deps equals the union of the step uses, and there is no SGA. Step 1: product exactness on Y_proet meets the hypothesis of lem-weil-strict-roos-comparison, which gives ρ with the limit-tuple/zero-shifted normalization. Step 2: the counit evaluation matches the calculus node and the K-injective total-limit model, and the whole-system e is taken from the adjunction. Step 3: the K-flat quotient complexes come from lem-pur-kflat-change-of-rings, which holds for any ring map. The system inverse image is levelwise and exact by prop-weil-pbc-proetale-constant-exact, and def-pur-integral-derived-operations' Lf* is the same Roos tower. Step 4: the scalar association, its transitions and transitivity are stated in lem-pur-coefficient-extension-reduction-model, and the Roos value is def-weil-integral-scalar-extension. Step 5: the unit identity is lem-trf-completion-unit-strict-quotient-model; I checked the chain-map claim. Step 6: normalization comes from the reduction, inverse-image closure and reduction-model nodes, and the counit and unit isomorphisms from lem-pur-normalized-actual-reconstruction-maps (only needs ℓ invertible). Step 7: the two constructibility nodes cover an arbitrary f and Y and finite E⊂L in the same C_E category. Step 8: the descent comes from the two well-definedness nodes and the naturality of ρ and the adjunction. Edge cases: the ramified case Q_ℓ(ℓ^{1/2}) (A_{E,n}→A_{L,n} is not flat, and nothing uses flatness), n=1, L=E, f=id and K=0 all behave. I accept the 14 declared tool_uses as generic calculus tools. I found no duplicate node. No changes."
  }
 }
