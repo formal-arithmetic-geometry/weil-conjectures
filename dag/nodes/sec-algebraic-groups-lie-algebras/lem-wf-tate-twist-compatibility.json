@@ -299,5 +299,26 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-3ae46b1b3 (reviewer sub-agent of L); spot-checked: Read in full: the item, all nine steps and all 18 relevant statements (the cited nodes, def-wf-tensor-product, def-wf-internal-hom and prop-weil-pbc-scalar-extension), all current in side-live. Also read the master and main-20261015 source and proof (verbatim identical) and unit sk-p-cyclotomic. The item is still imported live, there is no repair note, nothing is dropped, there is no SGA source and no cycle (closure of 12227 nodes). This re-delivers 8008145b, which was PASSed and then refused at landing over a changed lem-wf-internal-hom-weil statement. The delta is step 1 'left-associated' and the step 3 rebracketing, both correct: the ordered-generator and dual identification works for m=0, ±1 and 3. Steps 1–4, 7 and 9 check: X is noetherian and finite-dimensional with ℓ invertible, so the stratified-perfect criterion applies, (ii)⇒(i) with one stratum and O_E[0]. ρ_E equals φ_1 of def-wf-tate-twist. The negative datum matches H(φ⁻¹,φ)α. b_FE is local multiplication. Clause 4 gives the a'-compatibility hypothesis of the signed-line naturality clause. One fault (E4/C4), repaired: steps 5 and 6 typed β for the quotient-tower C_FE ('not just for ordinary uncompleted tensor'). But T_{F/E} of def-wf-weil-category is the ordinary K⊗^L Ô_F of prop-weil-pbc-scalar-extension, with T_{E/E}=id literally. The FIX makes step 5 use β̄ of lem-pur-completed-line-tensor-coherence for B_FE, with completion isomorphisms and the E=F identity, and makes step 6 refer to β̄. Step 8's χ paragraph is replaced by the same product, 1−t and projection argument run on def-wf-tensor-product's Koszul completion model. prop-weil-pbc-scalar-extension and def-wf-tensor-product are added to uses and proof_deps, with a tool_use for the prop. One fault and three steps touched, so within the ceiling. Fixed file: fixes/dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-tate-twist-compatibility.json. Note for the maintainer: if this landing is refused again, re-apply the fix onto the next head.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WfTateTwistCompatibility",
+  "declaration": "WeilConjectures.wf_tate_twist_compatibility",
+  "declarations": [
+   "WeilConjectures.wf_tate_twist_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/WfTateTwistCompatibility.lean",
+  "statement": "theorem wf_tate_twist_compatibility (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] : (IsIso (FrobeniusCoefficientTwists.rootLineMap c.l (D.geometricFrobenius X₀).hom) ∧ IsPurRootLimitComparison (D.geometricFrobenius X₀).hom c.l (FrobeniusCoefficientTwists.rootLineMap c.l (D.geometricFrobenius X₀).hom)) ∧ ∀ (m : ℤ) (E F : Padic.FiniteCoefficientFields c.l c.Qbar) (h : E ≤ F), Nonempty (WfTateTwist.functor D c X₀ E m ⋙ weilScalarExtension D c X₀ h ≅ weilScalarExtension D c X₀ h ⋙ WfTateTwist.functor D c X₀ F m)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e3300024",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read item, 3 stmt_deps, source place, both modules (item + §1(B) WfTateTwist), report, and the used declarations (WeilD/weilScalarExtension, pbcTate*, rootLineMap/signedLineMaps, IsPurRootLimitComparison, pbcConditionalRational, mapOfNatIso). Clauses match: inherited sep/finite-type hyps only; clause 1 = IsIso + projection identity of the actual root-limit map, which by definition underlies rationalLineMap 1 (∃!-pinned to signedLineMaps); clause 2 ∀ m:ℤ, E≤F (E=F, ramified allowed), Nonempty iso in functors to WeilD F, so the Frobenius square is included. The §1(B) repair is justified (upstream record is a Q̄ constant twist on WeilComplex) and faithful: degree-0 signed lines, evaluation-normalized negative maps = H(φ⁻¹,φ), tensor Weil map (φ_K⊗φ_m)∘μ via ∃!-pinned comparisons; the ordinary flat-line tensor instead of the completed tensor is the identification of the item's steps 1/5 and wf_tensor_weil gives only ∃ T W. Only lean fields changed, the item statement matches the file, all helpers are listed, ≤100 chars, sorry only, docstrings with 9 steps, proof-dep imports present, Mathlib ProEt. Advisories: rootLineMap/IsPurRootLimitComparison owners not in stmt_deps (H2 forbids adding them); Nonempty for clause 2 is fine since no citer needs β. No recompile (no changes)."
  }
 }

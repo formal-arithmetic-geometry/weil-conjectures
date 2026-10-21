@@ -112,18 +112,39 @@
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-ab-cyclotomic",
  "lean": {
-  "module": "WeilConjectures.WeilSheaf.TateTwist",
-  "declaration": "AlgebraicGeometry.WeilSheaf.cyclotomicUnit",
-  "branch": "slopmaster2",
-  "line": 73,
+  "module": "Sheaf.Paper.WfTateTwist",
+  "declaration": "WeilConjectures.WfTateTwist.functor",
   "declarations": [
-   "AlgebraicGeometry.WeilSheaf.cyclotomicUnit",
-   "AlgebraicGeometry.WeilSheaf.tateTwistSheafNat",
-   "AlgebraicGeometry.WeilSheaf.tateTwistSheaf",
-   "AlgebraicGeometry.WeilComplex.tateTwist"
+   "WeilConjectures.WfTateTwist.stalkUnits",
+   "WeilConjectures.WfTateTwist.Modules",
+   "WeilConjectures.WfTateTwist.line",
+   "WeilConjectures.WfTateTwist.pull",
+   "WeilConjectures.WfTateTwist.sectionMap",
+   "WeilConjectures.WfTateTwist.lineMap_exists",
+   "WeilConjectures.WfTateTwist.lineMap",
+   "WeilConjectures.WfTateTwist.line_mem",
+   "WeilConjectures.WfTateTwist.integralLine",
+   "WeilConjectures.WfTateTwist.ambientLineMap",
+   "WeilConjectures.WfTateTwist.rationalLine",
+   "WeilConjectures.WfTateTwist.rationalLineMap",
+   "WeilConjectures.WfTateTwist.weilLine",
+   "WeilConjectures.WfTateTwist.tensor",
+   "WeilConjectures.WfTateTwist.tensorComparison_exists",
+   "WeilConjectures.WfTateTwist.tensorComparison",
+   "WeilConjectures.WfTateTwist.ambientComparison",
+   "WeilConjectures.WfTateTwist.integral",
+   "WeilConjectures.WfTateTwist.rational",
+   "WeilConjectures.WfTateTwist.rationalComparison_exists",
+   "WeilConjectures.WfTateTwist.rationalComparison",
+   "WeilConjectures.WfTateTwist.functor"
   ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  "file": "lean/Sheaf/Paper/WfTateTwist.lean",
+  "statement": "def functor (m : ℤ) : WeilD D c X₀ E ⥤ WeilD D c X₀ E",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "§1(B) dependency-interface repair. The former upstream TateTwist record defines a Qbar constant-twist model and provides neither the prescribed finite-field raw PBC category nor its scalar-extension functors. This module uses the existing PBC signed line sheaves and exact tensor, and the existing root-projection-normalized Frobenius signed maps, transports the maps through the canonical coefficient isomorphism, places them in degree zero and rationalizes in the unchanged PBC category. The resulting Weil pair and tensor functor retain the ordered positive powers, inverse-positive dual maps and all localized arrows. Only comparison maps uniquely determined by their section or integral-representative equations are selected; no arbitrary isomorphism or coefficient-category equivalence is chosen. The four postponed interface theorems concern the membership and canonical comparisons in this definition."
  },
  "split_report": {
   "date": "2026-10-21",
@@ -140,5 +161,13 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-e4644082c (reviewer sub-agent of L); spot-checked: PASS, no fixes. Shape (A): the delivery is one commit containing the item and its report; review_split gives PASS with 0 new nodes. Base: the item was 'imported' in an earlier run's snapshot and in both clones (live, side-live), so this is its first split. It is not superseded, has no repair note, is not dropped, and no SGA source is cited. Source: master order 2566 and main-20261015 order 2910 are verbatim identical apart from frontmatter. The delivered statement keeps every clause of the source (Z_ell(1) as lim mu with ell-power transitions; E(1) = Z_ell(1) tensor E; E(0); derived tensor powers E(m); E(-m) = RHom(E(m), E_X); and (-)(m) = - tensor^L E(m) on WeilD(X_0,E)) and only makes the inherited setting and the Weil maps explicit. I checked all 15 stmt_deps against how the item uses them: the setting matches def-wf-weil-category; mu, the transitions and the module structure come from def-pur-roots-of-unity-sheaf; the limit from def-pur-sheaf-inverse-limit; local freeness of the lattice and Zl-hat tensor R = B from lem-pur-twist-sheaf-locally-free clauses 2 and 3. Membership in the integral category comes from lem-weil-pbc-integral-stratified-perfect-characterization, (ii) implies (i), with one stratum and P = R[0]; its hypotheses hold because X is of finite type over k, hence noetherian and finite-dimensional, with ell != p invertible. The maps c_r come from def-pur-roots-of-unity-inverse-image and lem-pur-roots-of-unity-inverse-image-iso clauses 1-3. tau_B comes from lem-weil-proetale-isomorphism-inverse-image clauses 2 and 3 and is the same map as the coefficient identification in def-wf-automorphism-completed-transport and def-wf-tensor-product. The extension to L_R uses sigma from lem-pur-isomorphism-inverse-image-tensor-hom; its semilinearity over tau_B is a short check from clause 2 plus naturality. The tensor and internal-Hom Weil maps come from def-wf-tensor-product and def-wf-internal-hom (the latter uses phi_K^{-1} contravariantly), and restriction to WeilD from lem-wf-tensor-weil and lem-wf-internal-hom-weil. The full dependency closure (11,899 nodes) does not contain the item, so there is no cycle. Duplicate search: def-coefficient-twists-detailed has no Weil structure and is cited for the lattice; def-weil-frobenius-coefficient-twists is a separate blueprint node in D^b_{c,W}(Y,Lambda) with sheaf-level powers, related but not the same definition (advisory only: a future comparison of the two Weil structures may be worth recording); sk-def-sp-tate-twist uses another coefficient model. The slopmaster2 TateTwist.lean declarations build Qbar constant Weil twists, not this finite-E definition, so they are not an exact attachment; keeping the record unchanged is right. Edge cases checked: m = 0, 1, -1; E = Q_ell; ramified E (the ell-power tower against the varpi-power tower, reconciled by clause 3); X empty; the geometric-Frobenius convention. Three kinds of Mathlib search are recorded (LeanSearch, LeanFinder, Loogle, grep), all with no match."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e3300024",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read item, 3 stmt_deps, source place, both modules (item + §1(B) WfTateTwist), report, and the used declarations (WeilD/weilScalarExtension, pbcTate*, rootLineMap/signedLineMaps, IsPurRootLimitComparison, pbcConditionalRational, mapOfNatIso). Clauses match: inherited sep/finite-type hyps only; clause 1 = IsIso + projection identity of the actual root-limit map, which by definition underlies rationalLineMap 1 (∃!-pinned to signedLineMaps); clause 2 ∀ m:ℤ, E≤F (E=F, ramified allowed), Nonempty iso in functors to WeilD F, so the Frobenius square is included. The §1(B) repair is justified (upstream record is a Q̄ constant twist on WeilComplex) and faithful: degree-0 signed lines, evaluation-normalized negative maps = H(φ⁻¹,φ), tensor Weil map (φ_K⊗φ_m)∘μ via ∃!-pinned comparisons; the ordinary flat-line tensor instead of the completed tensor is the identification of the item's steps 1/5 and wf_tensor_weil gives only ∃ T W. Only lean fields changed, the item statement matches the file, all helpers are listed, ≤100 chars, sorry only, docstrings with 9 steps, proof-dep imports present, Mathlib ProEt. Advisories: rootLineMap/IsPurRootLimitComparison owners not in stmt_deps (H2 forbids adding them); Nonempty for clause 2 is fine since no citer needs β. No recompile (no changes)."
  }
 }
