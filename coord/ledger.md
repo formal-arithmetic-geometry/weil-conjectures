@@ -20445,3 +20445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:35 L: merged deliver/NY/lem-pur-supported-triangle-mate-identification (reviewer PASS; first push; new nodes: 0)
 - 06:35 L: merged deliver/N8/lem-sfb-exact-tensor-functor-derived-normalization (reviewer FIX; first push; new nodes: 1)
 - 06:35 L: merged deliver/Q11/lem-pur-proetale-inverse-image-tensor-comparison (reviewer FIX; after a return; new nodes: 3)
+- 06:35 L: merged deliver/NG/lem-fix-site-perfect-scalar-hom (reviewer FIX; first push; new nodes: 2)

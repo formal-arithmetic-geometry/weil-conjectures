@@ -18,9 +18,84 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $R\\to S$ as the structural ring map of the identity geometric morphism of the sheaf topos. Its module pullback is scalar extension, so its total derived pullback is the functor $F$ in the statement, computed on K-flat representatives [lem-pur-derived-change-of-rings]. Equip $D(R),D(S)$ with the canonical closed symmetric monoidal structures [lem-sf-ringed-derived-closed-symmetric-monoidal]. The canonical comparisons of [lem-sfb-ringed-derived-monoidal-comparisons], specialized to this ringed-topos morphism, make $F$ strong monoidal, with tensorator the inverse of the displayed pullback-tensor comparison. In particular this is the actual comparison used in the definition of $c_{P,Q}$, and its unit identifies $F(R)$ with $S$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 0FPU (example-dual-derived), and 07A4 (lemma-pullback-tensor-product); current blueprint lem-fix-operation-reduction.proof.md, paragraph 1."
+   }
+  },
+  {
+   "text": "Put $D=H_R(P,R)$ and let $e:P\\otimes_R^{\\mathbf L}D\\to R$ be coefficient evaluation in the stated tensor order, that is, the evaluation $H_R(P,R)\\otimes_R^{\\mathbf L}P\\to R$ of [lem-sf-ringed-derived-closed-symmetric-monoidal] precomposed with the symmetry $\\sigma_{P,D}$. Use on $D(R)$ (and likewise on $D(S)$) the bijections $\\operatorname{Hom}(P\\otimes A,B)\\cong\\operatorname{Hom}(A\\otimes P,B)\\cong\\operatorname{Hom}(A,H_R(P,B))$ obtained from the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal] by precomposing with the symmetry; they are natural in all three variables, and under them evaluation $\\operatorname{ev}_{P,N}:P\\otimes H_R(P,N)\\to N$ is the counit composed with $\\sigma$. For $N\\in D(R)$ let $\\phi_N:D\\otimes_R^{\\mathbf L}N\\to H_R(P,N)$ be the transpose of $P\\otimes(D\\otimes N)\\cong(P\\otimes D)\\otimes N\\xrightarrow{e\\otimes1_N}R\\otimes N\\cong N$. By [lem-sfb-ringed-site-duality-maps] the canonical comparison $e_{P,N}:N\\otimes_R^{\\mathbf L}D\\to H_R(P,N)$ is the internal composition $H_R(R,N)\\otimes H_R(P,R)\\to H_R(P,N)$ after $N\\cong H_R(R,N)$, and internal composition is the transpose of the composite of the two evaluations [def-coef-ringed-tensor-hom-model]. Transposing $e_{P,N}\\circ\\sigma_{D,N}$ and using naturality of the adjunction bijection, the hexagon identity and the unit isomorphism $N\\cong H_R(R,N)$ (whose transpose is the unitor), its transpose is the displayed map $(e\\otimes1_N)$ up to the associator and unitor; hence $\\phi_N=e_{P,N}\\circ\\sigma_{D,N}$. Perfectness of $P$ is exactly the local bounded finite-free-retract hypothesis of [lem-sfb-ringed-site-perfect-duality], whose canonical evaluation comparison $D\\otimes^{\\mathbf L}_RN\\to H_R(P,N)$ is this map $e_{P,N}\\circ\\sigma_{D,N}$; that theorem makes it an isomorphism for every $N\\in D(R)$. So every $\\phi_N$ is an isomorphism. These assertions apply to all unbounded $N$; no tensor-Hom isomorphism other than the transpose of $e\\otimes 1_N$ is chosen.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-site-duality-maps",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 0FPU (example-dual-derived), and 07A4 (lemma-pullback-tensor-product); current blueprint lem-fix-operation-reduction.proof.md, paragraph 1."
+   }
+  },
+  {
+   "text": "Apply [lem-fix-closed-evaluation-dual-criterion] to these actual evaluation comparisons. Its coevaluation is $c=\\phi_P^{-1}u_P:R\\to D\\otimes_R^{\\mathbf L}P$, where $u_P$ transposes $1_P$. Both triangle identities follow from that criterion. Thus $P$ has an exact dual pair with $D$ in the canonical monoidal structure, with evaluation equal to the evaluation used in defining the scalar Hom map.",
+   "uses": [
+    "lem-fix-closed-evaluation-dual-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 0FPU (example-dual-derived), and 07A4 (lemma-pullback-tensor-product); current blueprint lem-fix-operation-reduction.proof.md, paragraph 1."
+   }
+  },
+  {
+   "text": "Apply [lem-fix-monoidal-dual-hom-comparison] with $G=F$, the strong monoidal structure from step 1, and the dual pair from step 3. It gives an isomorphism $F H_R(P,Q)\\to H_S(FP,FQ)$ for every $Q\\in D(R)$. Its defining transpose is precisely $F(\\operatorname{ev}_{P,Q})\\circ\\mu_{P,H_R(P,Q)}$, which is the transpose specified in the item. Bijectivity of the tensor-Hom adjunction therefore identifies this isomorphism with $c_{P,Q}$ itself.",
+   "uses": [
+    "lem-fix-monoidal-dual-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 0FPU (example-dual-derived), and 07A4 (lemma-pullback-tensor-product); current blueprint lem-fix-operation-reduction.proof.md, paragraph 1."
+   }
+  },
+  {
+   "text": "The evaluation identity is the inverse-transpose equation: $\\operatorname{ev}_{FP,FQ}\\circ(1_{FP}\\otimes c_{P,Q})=F(\\operatorname{ev}_{P,Q})\\circ\\mu_{P,H_R(P,Q)}$. For $a:P'\\to P$ and $b:Q\\to Q'$, transpose the two maps from $F H_R(P,Q)$ to $H_S(FP',FQ')$. Naturality of evaluation and of $\\mu$ makes both transposes $F(b\\circ\\operatorname{ev}_{P,Q}\\circ(a\\otimes1))\\circ\\mu_{P',H_R(P,Q)}$. Hence $H_S(Fa,Fb)c_{P,Q}=c_{P',Q'}F(H_R(a,b))$. This proves both naturalities and preservation of the specified evaluation. None of the preceding statements requires flatness of $S$ or any finiteness or boundedness assumption on $Q$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 0FPU (example-dual-derived), and 07A4 (lemma-pullback-tensor-product); current blueprint lem-fix-operation-reduction.proof.md, paragraph 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-fix-closed-evaluation-dual-criterion",
+  "lem-fix-monoidal-dual-hom-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sfb-ringed-site-perfect-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JJ and 0FPU, combined with canonical ringed-topos monoidality (07A4) and the existing project theorem on strong-monoidal Hom comparison from an exact dual pair. This is a categorical expansion of the current blueprint paragraph 1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +159,38 @@
    "results": "0 hits; ; top results: ",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves of rings commutes with derived internal Hom from a locally perfect complex to any unbounded complex",
+   "results": "8 hits; ; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsRightAdjointPushforward; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; SheafOfModules.pushforwardSections_unitHomEquiv; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module scalar extension, underived sheaf adjunctions, perfect-field declarations and Cartesian comparisons do not state this arbitrary-ring-sheaf perfect-source derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"dual\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module scalar extension, underived sheaf adjunctions, perfect-field declarations and Cartesian comparisons do not state this arbitrary-ring-sheaf perfect-source derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(Hom|[Hh]om|scalar)|[Dd]ualizable.*[Hh]om",
+   "results": "18 hits; ; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean; Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module scalar extension, underived sheaf adjunctions, perfect-field declarations and Cartesian comparisons do not state this arbitrary-ring-sheaf perfect-source derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of sheaves of rings commutes with internal Hom from a perfect complex",
+   "results": "8 hits; ; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.coextendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.restrictCoextendScalarsAdj; AlgHom.extendScalars; ModuleCat.CoextendScalars.obj'; ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary module scalar extension, underived sheaf adjunctions, perfect-field declarations and Cartesian comparisons do not state this arbitrary-ring-sheaf perfect-source derived comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-operation-reduction",
@@ -102,5 +205,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-site-perfect-scalar-hom",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-ring-sheaf statement and arbitrary unbounded second variable. Used existing small ringed-site perfect duality and canonical derived monoidality. Separated the generic evaluation criterion and the generic strong-monoidal comparison; the latter attaches to an existing project proof. Identified the actual comparison by transposition and wrote the two-variable naturality calculation. No Lean written or compiled. Maintainer reader FIX: step 2 now identifies the duality theorem's comparison with the transpose of evaluation through lem-sfb-ringed-site-duality-maps and the closed tensor-Hom model.",
+  "blueprint": "Current lem-fix-operation-reduction.proof.md paragraph 1: perfect-source coefficient-change Hom comparison and compatibility of actual evaluations. Dual-pair calculus packages the same finite-projective argument through the existing 08JJ node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "General perfect-source duality on any small ringed site supplies all-target evaluation isomorphisms; the current unit uses but does not reconstruct this local finite-projective theorem."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "General unbounded ringed-site tensor-Hom adjunction and symmetry fix the evaluation convention; not a replacement for a geometric unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General canonical ringed-topos derived monoidality, specialized to the identity geometric morphism with structural ring map R to S, supplies the specified tensorator."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Generic small-ringed-site normalization of the canonical evaluation comparison P^vee tensor N to RHom(P,N) (internal composition), needed to identify the map inverted by the perfect-duality tool with the transpose of e tensor 1; no node of the unit defines it. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-701c3eb9f",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-701c3eb9f (reviewer sub-agent of L); spot-checked: Verdict FIX: the split is correct, with one fault (C3/C4) in step 2, now repaired. I read the item, both new nodes, every cited statement, the unit and chapter route, and these sources: Stacks 08JJ, 0FPU (the omitted triangle checks), 0GM7(1), and paragraph 1 of the main-20261015 lem-fix-operation-reduction proof. Checks: the item statement is byte-identical to the live base; the item is still unsplit live; there is no repair note; it is not on the dropped list; no SGA source is cited; no cited node's closure leads back to the item or its parent. Step 1: the identity topos with ring map R to S is a ringed-topos morphism, and ringed derived monoidality makes F symmetric strong monoidal with mu = t^-1, without flatness. Steps 3-5 are correct: the criterion's data match ExactPairing D P, the comparison node's gamma is the same transpose that defines c_{P,Q}, and the naturality calculation in step 5 is truly elementary. lem-fix-closed-evaluation-dual-criterion is true. Triangle 1 is the transpose of phi_P c = u_P. Triangle 2 follows from e(1 tensor g) = e by interchange, then phi_1 invertible. It is the generic form of lem-pc-dualizable-evaluation-criterion, which covers schemes only. lem-fix-monoidal-dual-hom-comparison is true and matches the sorry-free project lemma isIso_ihomComparison_app_of_exactPairing (GenericFibre/Comparison.lean:72-81, Mathlib convention). It is not a duplicate of the etale or constructible variants. Neither new node restates part of the item, and both carry three search kinds. The fault: step 2 said the perfect-duality theorem's comparison is the transpose of (e tensor 1_N), but that theorem does not state it. The map is defined in lem-sfb-ringed-site-duality-maps as internal composition N tensor D to H(P,N), in the other tensor order, and that node was not cited. Repaired in fixes/dag/nodes/sec-smooth-purity/lem-fix-site-perfect-scalar-hom.json. Step 2 now fixes the symmetry-converted tensor-Hom bijection and defines phi_N. It cites duality-maps and def-coef-ringed-tensor-hom-model, and derives phi_N = e_{P,N} o sigma_{D,N}, so every phi_N is invertible by the perfect-duality theorem. proof_deps were recomputed and lem-sfb-ringed-site-duality-maps is declared as a generic tool use.; 1 file(s) fixed by the reviewer"
  }
 }
