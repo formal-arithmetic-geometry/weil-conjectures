@@ -23367,3 +23367,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:40:58Z L: superseded stage-1 delivery NC/lem-pur-affine-chart-exceptional-identification at cd45125148d0f5fded1c9f9c44e71265f53847fc; current completion retained; packet archived at refs/superseded/NC/lem-pur-affine-chart-exceptional-identification/cd45125148d0f5fded1c9f9c44e71265f53847fc; stale return retired.
 - 18:41 L: returned deliver/NY/lem-sfb-normed-scalar-profinite-hom-acyclic (reviewer RETURN: E2: the new node lem-sfb-normed-scalar-profinite-cech-exact is false for F=Omega with the norm topology, and so is the i)
 - 18:41 L: merged deliver/O3/lem-sfb-rational-polynomial-bar-contraction (stage 2; reviewer PASS; parallel immutable checks)
+- 18:42 L: returned deliver/O4/lem-sfb-prime-to-ell-cochain-finite-quotient-descent (reviewer RETURN: D1/D2 and D5. The new node lem-sfb-prime-to-ell-completed-boundary-reflection only appears to be smaller than the item. )
