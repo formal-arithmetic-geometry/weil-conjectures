@@ -67,15 +67,14 @@ automorphism `σ` in place of `Spec k` and the identity.
 - `ProEtale.CondensedRing.weilGlobalSupertrace_point_unit`: the normalization test N1, the
   global trace of the unit of the base is `1`.
 
-`WeilConjectures.TraceFormula.Main` states the trace formula in the model-Frobenius setting of the
-blueprint (`ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`,
-`ProEtale.CondensedRing.trace_globalOperator_unit_eq_card`), for an endomorphism `Φ` of `X` and
-its iterates `ProEtale.CondensedRing.frobeniusIterate Φ m`, with the iterated Weil structures
-`ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr`. The statements here are the variants
-for the Frobenius of `Spec k̄` twisted by an automorphism `e` of `X`, with the powers
-`CategoryTheory.Iso.powSucc e n` and the iterated Weil structures
-`ProEtale.CondensedRing.WeilSheaf.powSucc` on homology sheaves. Relating the two settings is not
-done here.
+These are the project's statements of the trace formula. They are stated for the Frobenius of
+`Spec k̄` twisted by an automorphism `e` of `X`, with the powers `CategoryTheory.Iso.powSucc e n`
+and the iterated Weil structures `ProEtale.CondensedRing.WeilSheaf.powSucc` on homology sheaves.
+`WeilConjectures.TraceFormula.Main` collects results for the model-Frobenius setting of the
+blueprint (an endomorphism `Φ` of `X` with its iterates
+`ProEtale.CondensedRing.frobeniusIterate Φ m` and the iterated Weil structures
+`ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr`), such as additivity of the trace
+along an open subscheme and its closed complement.
 
 -/
 
