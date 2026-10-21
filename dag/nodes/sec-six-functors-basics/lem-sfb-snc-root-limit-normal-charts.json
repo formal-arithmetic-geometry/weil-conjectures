@@ -13,7 +13,8 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-normal-ring"
+  "def-weil-pbc-normal-ring",
+  "def-sfb-strict-local-kummer-tame-module"
  ],
  "proof": [
   {
@@ -318,5 +319,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-f6a456de2 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full; sources: ILO IX Prop 2.1 pp.133-134, Stacks 033G/037D/00NP/00HN/0BI9-0BIA. The item is live and not on the drop list, its citer lem-sfb-root-tower-lisse-morphism-extension is live, side-live still has the item unsplit with the same statement, and there is no repair note. Mechanical dropped-route finding: lem-per-faithfully-flat-normal-ring-descent (drop line 1541, Steps 3/5) and lem-per-ind-etale-regular-coordinate-locus (line 1648, Step 6) are cited only for generic algebra, so I repaired the citations instead of returning. Fix 1: new statement-only node lem-sfb-faithfully-flat-normal-ring-descent (Stacks 033G, created.item = this item), cited in Steps 3/5. No live general 033G node exists, only the field-extension special case, and Mathlib has none. Fix 2: Step 6 rewritten from live nodes. A is regular (new node at n=1), so each A_m is a domain [lem-sc-regular-local-domain]. If t_d/1=0 in A_m, the generic point q of A_m lies in V(t_d) with dim A_q=0, contradicting the SNC codimension clause with J={d}. So y/1=0 in every A_m and y=0 by lem-weil-pbc-ideal-membership-at-maximal-localizations with J=0. This drops lem-pc-cartier-affine-generator-regular; proof_deps and tool_uses updated to match. The fixed closure (525 nodes) contains no dropped id. Batch-5 finding: def-trf-strict-normal-crossings-boundary is a general definition, already cited by the item statement on base and not part of the trace formula or Poincare duality, so accepted. The new node C_n=A[x]/(x_i^n-t_i) regular is true: t_J is part of a regular system of parameters at p, roots of unit branch equations are etale, the unique maximal ideal is (m,x_J), and C_n is finite over the Noetherian A. Tested on r=0, k[u,v], and the report's repeated-branch and n=p counterexamples; it duplicates no node. Steps 1,2,4,7,8,9 check out (Bezout, pushout, directed system, flatness plus monomial basis, eventual equality, edge cases). Statement unchanged, no SGA used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SNCRootLimitNormalCharts",
+  "declaration": "AlgebraicGeometry.ProEtale.sncRootLimit_normal_charts",
+  "file": "lean/Sheaf/Paper/SNCRootLimitNormalCharts.lean",
+  "statement": "theorem sncRootLimit_normal_charts (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, t i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type v) [CommRing R] (a : A →+* R) (ha : a.WeaklyEtale) (Q : Type w) [CommRing Q] [Algebra (tameRootAlgebra p (fun i ↦ a (t i))) Q] [Algebra.WeaklyEtale (tameRootAlgebra p (fun i ↦ a (t i))) Q] : (∀ (q : Ideal Q) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)) ∧ Function.Injective (fun z : Q ↦ algebraMap (tameRootAlgebra p (fun i ↦ a (t i))) Q (algebraMap R (tameRootAlgebra p (fun i ↦ a (t i))) (a (∏ i, t i))) * z)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a06da7ea",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Lean matches node clause by clause. The SNC predicate, the product-ideal condition and the condition that the V(t_i) are exactly the irreducible components are together equivalent to 'reduced SNC divisor whose branches are precisely V(t_d)', not stronger. S is rendered by the landed tameRootAlgebra, the standard presentation of the colimit over divisibility, reused from def-sfb-strict-local-kummer-tame-module and by the citer RootTowerLisseMorphismExtension; the added stmt_dep is live, not dropped and acyclic. A -> R uses RingHom.WeaklyEtale (= Algebra.WeaklyEtale), Q arbitrary weakly etale. Normality is the recorded inline form; injectivity uses the canonical A->R->S->Q image. Edge cases r=0, empty chart, Q=0 and n=1 are covered; universes u/v/w with no silent restriction. Only sorry, no definitions, docstrings with source and blueprint tag and the 9 proof steps, statement verbatim, report sections present. No compile: no file changed; the worker reports a clean compile. Advisory only: colimit is rendered by its presentation."
  }
 }
