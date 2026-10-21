@@ -3,24 +3,81 @@
  "blueprint": {
   "is": "sk-d-geometry",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Affine geometry and matrix groups",
- "statement": "An affine variety over $k$ is the spectrum of a\nfinitely generated reduced commutative $k$-algebra; reduced means that\nthe algebra has no nonzero nilpotents. Closed subvarieties are given by\nradical ideals, and regular maps by homomorphisms of coordinate algebras\nin the opposite direction. The Zariski topology has polynomial zero\nloci as its closed sets. A closure is the smallest closed set containing\na given subset. A space is connected if it has no decomposition into\ntwo nonempty disjoint open sets, and irreducible if it is not the union\nof two proper closed sets. A constructible set is a finite union of\nintersections of open and closed sets. Dimension is the supremum of\nlengths of strict chains of prime ideals in the coordinate algebra.\n\nThe general linear group $\\GL(V)=\\GL_n$ is the affine group scheme\n$\\operatorname{Spec}k[x_{ij},\\det^{-1}]$, whose $R$-points, for a\ncommutative $k$-algebra $R$, are the invertible $n\\times n$ matrices over\n$R$. A matrix algebraic group is a closed subgroup scheme\n$G\\subseteq\\GL(V)$ cut out by a Hopf ideal $I$ of $k[x_{ij},\\det^{-1}]$\n(not necessarily radical): its $R$-points are the invertible matrices over\n$R$ on which every equation in $I$ vanishes, and multiplication and\ninversion are regular; its homomorphisms are regular group homomorphisms,\nthat is, homomorphisms of group schemes over $k$; a homomorphism\n$G\\to\\GL_m$ is a rational representation of $G$ on $k^m$.\nWe identify its $k$-points with their matrices when writing products. The\nidentity component $G^\\circ$ is the reduced closed subgroup on the\nconnected component of $1$. The center $Z(G)$ is the reduced closed subgroup of\n$G$ consisting of the elements of $G$ commuting with all $g\\in G(k)$\n(not the centralizer of $G$ in $\\GL(V)$).",
+ "statement": "Use the coefficient convention of [sk-d-linear]: $k$ is an algebraically closed field of characteristic zero, and $V$ is a finite-dimensional $k$-vector space. An affine variety over $k$ is $\\operatorname{Spec}B$ [def-weil-affine-spectrum] for a finitely generated commutative $k$-algebra $B$ [def-weil-pbc-finite-type-algebra, def-weil-pbc-algebra-hom-quotient] that is reduced, meaning that it has no nonzero nilpotents. Closed subvarieties are $\\operatorname{Spec}(B/J)$ for radical ideals $J$ (an ideal is radical if $b^r\\in J$, $r\\geq1$, implies $b\\in J$); the inclusion is induced by $B\\to B/J$ [def-weil-closed-immersion]. Regular maps $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ are the maps induced by $k$-algebra homomorphisms $B\\to C$, in the opposite direction. The Zariski closed sets are $V(J)=\\{\\mathfrak p:J\\subseteq\\mathfrak p\\}$; in a polynomial presentation of $B$ [def-weil-pbc-mv-polynomial-ring] these are polynomial zero loci.\n\nThe closure of a subset is the intersection of all closed sets containing it. As in this sketch, connected means having no decomposition into two nonempty disjoint open sets, and irreducible means not being a union of two proper closed sets. These two no-decomposition conditions allow the empty space; no nonemptiness condition is implicit in these words here. A constructible set, in the underlying space of an affine variety, is a finite union of locally closed sets, that is, intersections of an open and a closed set [def-weil-locally-closed-subset]. Dimension is the Krull dimension of the coordinate algebra [def-weil-pbc-krull-dimension-ring], the supremum of the lengths of strict chains of prime ideals (with value $-\\infty$ for the zero algebra).\n\nChoose a basis of $V$, put $n=\\dim_kV$, $P=k[x_{ij}:1\\leq i,j\\leq n]$, $D=\\det(x_{ij})$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-matrix-determinant], and $A=P[1/D]$ [def-weil-ring-localization-away]. The general linear group $\\mathrm{GL}(V)$ is identified in this basis with $\\mathrm{GL}_{n,k}=\\operatorname{Spec}A$. For $n\\geq1$ this is the general linear group scheme of [def-sc-general-linear-group]; for $n=0$ the empty determinant is $1$, $A=k$, and $\\mathrm{GL}_{0,k}=\\operatorname{Spec}k$ with its trivial group law. A group scheme and its homomorphisms mean [def-sc-group-scheme]. The $R$-points of $\\mathrm{GL}_{n,k}$, for any commutative $k$-algebra $R$, are the invertible $n\\times n$ matrices over $R$. Write $\\Delta=m^*:A\\to A\\otimes_kA$, $\\varepsilon=e^*:A\\to k$ and $S=i^*:A\\to A$ for the coordinate maps of multiplication, identity and inversion. Thus $\\Delta(x_{ij})=\\sum_r x_{ir}\\otimes x_{rj}$, $\\varepsilon(x_{ij})=\\delta_{ij}$, and $S((x_{ij}))=(x_{ij})^{-1}$, with the values on $D^{-1}$ forced by these formulas. Tensor products here are the commutative algebra tensor products of [lem-weil-pbc-algebra-tensor-pushout-universal-property].\n\nA matrix algebraic group is a closed subgroup scheme $G\\subseteq\\mathrm{GL}_{n,k}$ [def-sc-group-scheme-subgroup] cut out by a Hopf ideal $I$ of $A$, not required to be radical. Explicitly, for the quotient map $q:A\\to A/I$ [def-weil-pbc-algebra-hom-quotient], the Hopf-ideal conditions are $\\varepsilon(I)=0$, $(q\\otimes q)\\Delta(I)=0$ in $(A/I)\\otimes_k(A/I)$, and $S(I)\\subseteq I$. The scheme is $G=\\operatorname{Spec}(A/I)$, included in $\\operatorname{Spec}A$ by $\\operatorname{Spec}q$, and its group operations are induced by these three coordinate maps. Its $R$-points are exactly the invertible matrices over $R$ on which all equations in $I$ vanish. Multiplication and inversion are regular, and a homomorphism means a homomorphism of group schemes over $k$, equivalently a regular group homomorphism. A homomorphism $G\\to\\mathrm{GL}_{m,k}$ is a rational representation of $G$ on $k^m$. When writing products we identify $G(k)$ with its matrices.\n\nThe identity component $G^\\circ$ is the reduced closed subgroup on the connected component $C$ of the identity point in the underlying space of $G$. Concretely $C$ is the union of the connected subsets containing that point, and its reduced closed structure is given by the ideal $\\bigcap_{\\mathfrak p\\in C}\\mathfrak p$ in $A/I$, or by its inverse image in $A$; reduction means [def-weil-pbc-scheme-reduction]. The center $Z(G)$ is the reduced closed subgroup of $G$ whose $k$-points commute with every $h\\in G(k)$, rather than the centralizer in the ambient $\\mathrm{GL}(V)$. Concretely, if $X=(x_{ij})$ over $A$, its ideal in $A$ is the radical $\\sqrt{J}$ of the sum $J=I+(\\text{all entries of }Xh-hX:\\ h\\in G(k))$, the ideal generated by $I$ and these entries; it contains $I$, so $Z(G)=\\operatorname{Spec}(A/\\sqrt J)$ is a closed subscheme of $G$, and its $k$-points are the $g\\in G(k)$ with $gh=hg$ for all $h\\in G(k)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-d-geometry/_section.md",
   "place": "node sk-d-geometry, order 2819"
  },
  "stmt_deps": [
-  "sk-d-linear"
+  "sk-d-linear",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-locally-closed-subset",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-ring-localization-away",
+  "def-sc-general-linear-group",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-scheme-reduction"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GeneralLinearGroup|IsHopfIdeal|CoordinateRing",
+   "results": "Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+   "date": "2026-10-21",
+   "verdict": "no whole-item match: Hopf ideals are available, but the general linear group scheme and the full definition bundle are absent from Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine group scheme GL_n has coordinate algebra k[x_ij, det inverse] and closed subgroup schemes defined by Hopf ideals",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.isAffine_affineScheme, Subgroup.HasDetOne, Matrix.GeneralLinearGroup.det, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, Subgroup.HasDetOne.mk, GroupLike.instCommGroup",
+   "date": "2026-10-21",
+   "verdict": "no whole-item match: affine schemes, ideal-sheaf subschemes and matrix groups are individual ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Ideal.IsHopfIdeal",
+   "results": "HopfAlgebra.Quotient.instQuotientIdeal",
+   "date": "2026-10-21",
+   "verdict": "partial match only: quotient Hopf-algebra structure, not the bundled affine-geometry and matrix-group definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine varieties and closed matrix group schemes defined by Hopf ideals of the coordinate algebra of GL_n, with reduced identity component and center",
+   "results": "MatrixGroups.termPSL(_,_), Matrix.SpecialLinearGroup, MatrixGroups.term𝒮ℒ, Matrix.ProjectiveSpecialLinearGroup, MatrixGroups.termSL(_,_), Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, SpecialLinearGroup, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt",
+   "date": "2026-10-21",
+   "verdict": "no whole-item match: the hits concern special linear groups or finite-type algebra facts"
+  },
+  {
+   "tool": "grep",
+   "query": "GeneralLinearGroup|CoordinateRing|subgroupScheme",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are the coordinate rings of elliptic curves, not a general linear group scheme; no GeneralLinearGroup scheme or subgroupScheme declaration in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of a finitely generated reduced algebra; general linear algebraic group as the spectrum of the determinant localization",
+   "results": "spectrum.nonempty_of_isAlgClosed_of_finiteDimensional, Algebra.FiniteType.exists_fgAlgCatSkeleton, Algebra.IsGeometricallyReduced.of_forall_fg, exists_finite_inj_algHom_of_fg, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.SubmersivePresentation, Algebra.EssFiniteType, Algebra.IsStandardSmooth.out",
+   "date": "2026-10-21",
+   "verdict": "no whole-item match: the hits concern special linear groups or finite-type algebra facts"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -60,5 +117,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-geometry",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-d-geometry",
+  "worker": "stage1",
+  "summary": "Definition split: reuse fifteen existing underlying notions, make the inherited field convention and the Hopf-ideal, component and center constructions explicit, preserve the sketch's empty-space topology convention, and cover rank zero. No new node or proof lemma was needed. Existing project declarations implement the matrix-group clauses but do not state the entire affine-geometry bundle. All six logged Mathlib searches were read.",
+  "blueprint": "Current main-20261015 sk-d-geometry: first paragraph (affine spectra, finite type, reduced quotients, Zariski topology, closure, connectedness, irreducibility, constructibility, dimension); second paragraph (GL coordinate algebra, all-algebra-valued points, Hopf-ideal subgroups, regular homomorphisms and rational representations, reduced identity component and center). This is a definition unit with no proof steps; its clauses are made explicit through statement dependencies."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-2630ad3eb",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-2630ad3eb (reviewer sub-agent of L); spot-checked: Read in full: the item, all 15 statement deps, the main-20261015 sk-d-geometry source and the unit record. The item is a definition split with 0 new nodes. live and side-live both still have it imported, there is no repair note, and neither the item nor any dep is dropped. The statement matches the current blueprint clause by clause, and the k̄, char 0 convention comes from sk-d-linear. Affine variety, closed subvariety, regular map and Zariski topology are checked against def-weil-affine-spectrum, finite-type, closed-immersion and polynomial ring. The literal source definitions of connected/irreducible allow the empty space, and the item says so; I checked that no downstream use in sk-i-geometry or sk-p-geometry needs nonemptiness. Constructible sets and Krull dimension (−∞ for B = 0) are correct. GL_n: the det and adjugate inverse agree with def-sc-general-linear-group for c ≥ 1, and n = 0 is handled separately (A = k). The Hopf-ideal conditions with (q⊗q)Δ(I) = 0 equal the coideal condition and Mathlib's Ideal.IsHopfIdeal (Quotient.lean:89). Small cases checked: (x−1), μ_2, I = A excluded, I = 0. Nonradical I cannot occur in char 0 (lem-ag-cartier-reduced). The reduced structure ∩p on G° is correct, and its subgroup property is existing lem-wf-algebraic-component-cosets. Two repairs: (1) the Z(G) ideal 'radical of I plus the ideal generated by entries of Xh−hX' was ambiguous (it also parses as √I + (…)); it is now √J with J = I + (entries), and the fix records Z(G)(k) = {g : gh = hg}. (2) mathlib_searches[4]: the verdict was copied from another entry and did not match its elliptic-curve results (B7); now corrected. Advisory: citer sk-d-monodromy says 'a field k' while Z(G) assumes k̄, char 0; stage 2 should use IsPreconnected/IsPreirreducible.; 1 file(s) fixed by the reviewer"
+ }
 }
