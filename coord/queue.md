@@ -2,7 +2,7 @@
 
 200 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (23 clusters, 955 modules)
+## Rework: quarantined by the upstream sync (22 clusters, 955 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -17,7 +17,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -47,13 +46,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-cech-localization-unit-totalization` | 4012 | none |
 | `lem-sfb-condensed-product-bar-comparison` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
-| `lem-sfb-root-tower-lisse-morphism-extension` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
+| `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (24)
+## Stage 2: nodes to state (25)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -77,6 +76,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-internal-action-site-presentation` | 1 | state | 0 |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
+| `lem-sfb-root-tower-lisse-morphism-extension` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
