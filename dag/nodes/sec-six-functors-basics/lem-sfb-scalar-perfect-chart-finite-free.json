@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-scalar-perfect-chart-finite-free",
+ "kind": "statement",
+ "title": "Normalized finite free scalar models on slice sites",
+ "statement": "Let (C,J) be a site admitting ring and abelian sheafification in a coefficient universe s, locally bijective units, and coefficient-sized essentially small models of C and its slices [def-weil-size-convention]. Let R be a commutative ring, B a commutative ring sheaf, and phi:underline R→B. With the actual constant-module and chart functors [def-weil-pbc-strict-perfect-coefficient-package], for each U and n≥0 there is an isomorphism G_U(R^(Fin n)) ≅ product_(Fin n) B|U. Its kth coordinate on the pure section b tensor x is b*phi(eta(x_k)), including n=0.\n\nPrecise quantified statement, in the contexts recorded by the Lean module:\ntheorem exists_scalarPerfectChartFiniteFreeIso (U : C) (n : ℕ) :\n    ∃ e : (scalarPerfectChartFunctor J R φ U).obj (ModuleCat.of R (Fin n → R)) ≅\n        ∏ᶜ fun _ : Fin n ↦ unit ((scalarPerfectRingUnderlying J B).over U),\n      ∀ (W : (Over U)ᵒᵖ) (b : B.obj.obj (Opposite.op W.unop.left))\n        (x : Fin n → R) (k : Fin n),\n        (e.hom ≫ Pi.π _ k).val.app W\n          (scalarPerfectChartSection J R φ U (ModuleCat.of R (Fin n → R)) W b x) =\n          b * φ.hom.app (Opposite.op W.unop.left)\n            ((scalarPerfectRingUnit J R).app (Opposite.op W.unop.left) (x k))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03EK and 0GMW; parent proof step 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Map the constant rank-one module presheaf to the ring unit using the ring sheafification unit. Extend this map by the module sheafification adjunction. Its composite with the module unit is the ring unit. Local bijectivity of both units implies the resulting map is an isomorphism of module sheaves.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict this rank-one isomorphism to C/U and apply scalar extension. Compose with scalarExtensionUnitIso. The module-unit formula, scalarExtension_map_tmul and scalarExtensionUnitIso_tmul give b tensor r ↦ b*phi(eta(r)).",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-pur-localized-ringed-site",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ModuleCat.piIsoPi for the concrete finite free module. Additive functors between these module categories preserve finite products. Compose the product comparison with the rank-one isomorphisms. Naturality of the module unit and scalar-extension maps identifies each coordinate with the required formula; the same construction applies to the empty product.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-localized-ringed-site",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "V8 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03EK and 0GMW; parent proof step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf finite free module scalar extension normalized product comparison",
+   "results": "Algebra.TensorProduct.instFree; SheafOfModules.free; SheafOfModules.ιFree",
+   "date": "2026-10-21",
+   "verdict": "no exact match; ingredients used in the complete Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesProduct.iso",
+   "results": "PreservesProduct.iso; PreservesProduct.iso_hom",
+   "date": "2026-10-21",
+   "verdict": "no exact match; ingredients used in the complete Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "piIsoPi|piComparison_comp_π|sheafificationHomEquiv in Mathlib",
+   "results": "ModuleCat.piIsoPi; ModuleCat.piIsoPi_inv_kernel_ι; piComparison_comp_π; PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no exact match; ingredients used in the complete Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarPerfectRefinement",
+  "date": "2026-10-21",
+  "group": "V8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2 final sentence, locally constant perfect coefficient dual; paragraph 3 parenthetical that perfect factors lie in Dctf: finite uniform strict-model extraction (returned parent proof steps 2 and scalar-extension part of 3).; Normalized finite free scalar models on slice sites",
+   "via": [
+    "lem-sfb-internal-hom-dual-tor-amplitude",
+    "lem-sfb-finite-scalar-perfect-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPerfectFiniteFree",
+  "file": "lean/Sheaf/Paper/ScalarPerfectFiniteFree.lean",
+  "declaration": "SheafOfModules.exists_scalarPerfectChartFiniteFreeIso",
+  "statement": "theorem exists_scalarPerfectChartFiniteFreeIso (U : C) (n : ℕ) :\n    ∃ e : (scalarPerfectChartFunctor J R φ U).obj (ModuleCat.of R (Fin n → R)) ≅\n        ∏ᶜ fun _ : Fin n ↦ unit ((scalarPerfectRingUnderlying J B).over U),\n      ∀ (W : (Over U)ᵒᵖ) (b : B.obj.obj (Opposite.op W.unop.left))\n        (x : Fin n → R) (k : Fin n),\n        (e.hom ≫ Pi.π _ k).val.app W\n          (scalarPerfectChartSection J R φ U (ModuleCat.of R (Fin n → R)) W b x) =\n          b * φ.hom.app (Opposite.op W.unop.left)\n            ((scalarPerfectRingUnit J R).app (Opposite.op W.unop.left) (x k))",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261021T140945-L-2780168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261021T140945-L-2780168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

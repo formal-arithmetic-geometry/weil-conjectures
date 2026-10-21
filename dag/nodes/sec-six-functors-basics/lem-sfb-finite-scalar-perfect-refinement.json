@@ -22,112 +22,47 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite affine cover lemma to the quasi-compact open $S\\subset S$, obtaining a finite affine open cover $\\{A_k\\}_{k\\in K}$. For each $k$, apply the covering condition to the original family over $A_k$. Its affine-target refinement clause supplies a finite affine covering $\\{V_{kt}\\to A_k\\}_{t\\in J_k}$, with each $V_{kt}$ an affine open of some $U_{\\alpha(k,t)}\\times_S A_k$. This fibre product is the inverse image of the open $A_k$, so $V_{kt}$ is also an affine open in $U_{\\alpha(k,t)}$. Use the finite affine refinement asserted in the site node, not merely joint surjectivity of an arbitrary family.",
+   "text": "Apply finite_affine_proetale_refinement to obtain the finite nonempty affine refinement, with the original chosen scalar complex attached to each chart.",
    "uses": [
-    "lem-pqf-finite-affine-cover-qc-open",
-    "def-weil-pbc-proetale-site",
-    "sk-def-pe-site"
+    "lem-sfb-finite-affine-cover-refinement-general"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Definition 0989 (definition-fpqc-covering), applied on the finite affine open cover; the finite affine refinement clause recorded in sk-def-pe-site."
-   }
+   "elementary": false
   },
   {
-   "text": "The family $\\{A_k\\to S\\}$ is a Zariski cover and hence a pro-étale cover by the site node. Both this family and each $\\{V_{kt}\\to A_k\\}$ are fpqc. Composition of fpqc covering families makes $\\{V_{kt}\\to S\\}_{(k,t)}$ fpqc. Each composite is weakly étale by stability under composition, hence this is a pro-étale cover by its definition. Set $J=\\coprod_{k\\in K}J_k$ and retain the indicated function $\\alpha:J\\to I$. A finite union of finite sets is finite. The images of these charts cover $S$; since $S$ is nonempty, $J$ is nonempty. This argument uses neither quasi-separatedness of $S$ nor quasi-compactness of the original $U_i$.",
-   "uses": [
-    "sk-def-pe-site",
-    "lem-weil-pbc-fpqc-covering-axioms",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "def-weil-pbc-proetale-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Lemma 098C (lemma-proetale), composition; its fpqc and weakly-etale components are the cited covering-axiom and stability nodes."
-   }
-  },
-  {
-   "text": "For each $j$, boundedness of the given complex $F_{\\alpha(j)}^\\bullet$ supplies an ordered interval $[a_j,b_j]$ outside which its terms vanish. If that complex is zero, choose $a_j=b_j=0$. Since $J$ is finite and nonempty, define $a=\\min_j a_j$ and $b=\\max_j b_j$. For every $j$ one has $a\\le a_j\\le b_j\\le b$; choosing any $j\\in J$ also gives $a\\le b$. Thus $[a_j,b_j]\\subseteq[a,b]$. These choices use only the fixed complexes.",
+   "text": "For any supplied bounds l_i,h_i put lo_j=min(l_alpha(j),h_alpha(j)) and hi_j=max(l_alpha(j),h_alpha(j)). These are ordered and retain vanishing outside the interval. Choose attained extrema over Fin n using Finset.exists_min_image and Finset.exists_max_image. Any index proves a≤b.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Finite minimum and maximum applied to the bounded models in the hypothesis (elementary extraction after the covering refinement)."
-   }
+   "elementary": true
   },
   {
-   "text": "Use slice sites for restriction. For $V_j\\to U_{\\alpha(j)}$, successive restriction is sectionwise the identity on a test object over $V_j$. The slice forgetful functor preserves covers, and a cover of its underlying test object lifts uniquely to a cover over the slice object, so it is continuous and cocontinuous. Apply the restriction/sheafification comparison to the constant module presheaves, whose restrictions are the same constant presheaves. It identifies $(\\underline{F_{\\alpha(j)}^r})|_{V_j}$ with $\\underline{F_{\\alpha(j)}^r}$ on the smaller slice, naturally in all linear maps and differentials. Apply the natural tensor restriction comparison over the constant ring sheaf $\\underline R$, with $B$ regarded as an $\\underline R$-module, to identify\n$$(B|_{U_{\\alpha(j)}}\\otimes_{\\underline R}\\underline{F_{\\alpha(j)}^\\bullet})|_{V_j}\\cong B_j\\otimes_{\\underline R}\\underline{F_{\\alpha(j)}^\\bullet}=E_j^\\bullet.$$\nThe maps commute with differentials by the naturality in the cited comparisons.",
+   "text": "Further slice restriction is additive and preserves finite limits, as detected by its forgetful presheaf functor. It preserves finite colimits because overMap has a right adjoint when the site has pullbacks. Apply the induced derived functor to the given representing isomorphism. The comparison overFunctorMap identifies successive and direct restriction of the chosen representative of P. The scalar chart restriction comparison, lifted to cochain complexes, identifies the two models.",
    "uses": [
+    "lem-sfb-scalar-perfect-chart-restriction",
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-slice-module-sheafification",
-    "lem-weil-pbc-slice-tensor-natural"
+    "def-weil-pbc-ringed-site-derived-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site); restriction/sheafification and tensor comparisons."
-   }
+   "elementary": false
   },
   {
-   "text": "Module restriction to a slice is exact by the module restriction/extension-by-zero lemma. Therefore its derived functor is represented by termwise restriction, as specified in the derived-restriction definition. Restrict the given representing isomorphism for $P|_{U_{\\alpha(j)}}$, and use relocalization and the comparison of step 4. This gives $P|_{V_j}\\simeq E_j^\\bullet$. If $r\\notin[a_j,b_j]$, the term is $B_j\\otimes_{\\underline R}\\underline 0=0$: every generator $b\\otimes0$ is zero. Thus $E_j^r=0$ outside the same interval; no preservation of a nonsplit exact sequence is involved.",
+   "text": "The chart functor is additive, hence preserves zero objects, giving termwise vanishing. Choose its normalized finite-free isomorphisms degreewise. Apply the chart functor to each supplied inclusion and projection, and conjugate by these isomorphisms. Functoriality and hom_inv_id transport the splitting identity; ranks remain exactly the supplied ranks. The finite-free coordinate formula is the required normalization.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-pbc-ringed-site-derived-restriction",
-    "def-pur-localized-ringed-site",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-scalar-perfect-chart-finite-free",
+    "def-weil-pbc-strict-perfect-coefficient-package"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site), and ordinary sheaf tensor definition."
-   }
-  },
-  {
-   "text": "For $N\\ge0$, identify $B_j\\otimes_{\\underline R}\\underline{R^{\\oplus N}}$ with $B_j^{\\oplus N}$ as follows. The tensor/sheafification lemma, applied to the constant ring presheaf $R$, identifies its left side with the sheafification of $W\\mapsto B_j(W)\\otimes_R R^{\\oplus N}$. Sectionwise the map $b\\otimes(r_t)_t\\mapsto(br_t)_t$ has inverse $(b_t)_t\\mapsto\\sum_t b_t\\otimes e_t$. These formulas respect restrictions, so they identify this presheaf with the already-sheaf $B_j^{\\oplus N}$. They also apply for $N=0$, with the empty sum. No flatness hypothesis occurs in these inverse formulas.",
-   "uses": [
-    "lem-pc-sites-module-sheafification-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW (lemma-sheafification-tensor), final sheaf-factor specialization and elementary finite-basis tensor calculation."
-   }
-  },
-  {
-   "text": "Choose the degreewise splitting $F_{\\alpha(j)}^r\\xrightarrow{i_{jr}}R^{\\oplus N_{jr}}\\xrightarrow{p_{jr}}F_{\\alpha(j)}^r$ in the finite-projective hypothesis. Apply constant sheafification and then $B_j\\otimes_{\\underline R}-$, and use step 6 on the middle term. The resulting maps $I_{jr},P_{jr}$ satisfy $P_{jr}I_{jr}(b\\otimes v)=b\\otimes p_{jr}i_{jr}(v)=b\\otimes v$. This is an equality of presheaf tensor maps and hence of their sheafifications. They therefore give exactly the strict-perfect coefficient package of the definition. Only finitely many nonzero degrees of finitely many selected complexes require choices; outside their intervals take $N_{jr}=0$ and the zero splitting. All intervals, ranks and maps have now been chosen from the cover, the models and their splittings, before introducing any test module sheaf. The entire construction uses functoriality and split identities, so requires no flatness or exactness of scalar extension.",
-   "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW (lemma-sheafification-tensor) and the degreewise splitting convention of def-weil-pbc-strict-perfect-coefficient-package; elementary application of the two functors to a split identity."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pqf-finite-affine-cover-qc-open",
-  "def-weil-pbc-proetale-site",
-  "sk-def-pe-site",
-  "lem-weil-pbc-fpqc-covering-axioms",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "def-weil-pbc-proetale-covering",
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-sfb-scalar-perfect-chart-restriction",
   "def-pur-localized-ringed-site",
-  "lem-weil-pbc-slice-module-sheafification",
-  "lem-weil-pbc-slice-tensor-natural",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "def-weil-pbc-ringed-site-derived-restriction",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-tensor",
+  "lem-sfb-scalar-perfect-chart-finite-free",
   "def-weil-pbc-strict-perfect-coefficient-package"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "V8 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-  "place": "Paragraph 2 final sentence and paragraph 3 parenthetical perfect-factor assertion; explicit uniform-model argument using Stacks proetale.tex and sites-modules.tex as recorded stepwise."
+  "place": "Paragraph 2 final sentence and paragraph 3 parenthetical perfect-factor assertion; explicit uniform-model argument using Stacks proetale.tex and sites-modules.tex as recorded stepwise. Implemented using Mathlib finite affine refinements, exact further slice restriction, and the proved independent-universe chart comparisons."
  },
  "mathlib_searches": [
   {
@@ -366,14 +301,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-fpqc-covering-axioms",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-slice-module-sheafification",
-  "lem-weil-pbc-slice-tensor-natural",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-pc-sites-module-sheafification-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -413,5 +341,15 @@
   "group": "Q15",
   "result": "pass",
   "note": "All hypotheses and conclusions match the node: nonempty CompactSpace S with no separation; ProEt site with object universe t+1 and morphism universe t, not equated; UnivLE.{t+1,r} is the size convention; proetalePrecoverage cover keeps the 0989 finite refinement; bounded F with spl splittings; restriction iso to the chart complex (constant sheaf, slice restriction, change of rings along restricted phi). Conclusion: Fin n with n>0; affine V_j in U_alpha(j) with composite cover; lo/hi bounds; attained min/max and a<=b; restricted derived iso; vanishing; packages pinned to chart.map of spl.i/spl.p via e, which the pure-section formula s tensor x to s*phi(x_k) determines, so no arbitrary map. True by 0989 and functoriality; edge cases checked (I infinite, zero complex, disjoint intervals, N=0, nonflat B, zero ring). Statement verbatim; all declarations present; only sorry Prop helpers with docstrings. Dependency module StrictPerfectCoefficientPackageOfUniverses is a strict superset of the unchanged live file, record statement verbatim, no name clashes in 19 importers. Not dropped; first delivery. Advisories: constant-module functor repeats Q11's theorem-module copy; derived and slice restriction owners are proof_deps only; dep record by moves Q33 to Q15. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261021T140945-L-2780168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

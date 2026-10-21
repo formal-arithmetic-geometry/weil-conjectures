@@ -10,11 +10,11 @@ public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.Algebra.Homology.SliceModuleSheafification
-import Sheaf.Algebra.Homology.SliceTensorNatural
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Paper.FiniteAffineProEtaleRefinement
+import Sheaf.Paper.ScalarPerfectFiniteFree
+import Sheaf.Paper.ScalarPerfectChartRestriction
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.Data.Finset.Max
 
 /-! # Finite uniform scalar-perfect models on a pro-etale refinement
 
@@ -132,7 +132,7 @@ Proof plan:
 2. Compose these covers using fpqc transitivity and stability of weak etaleness (098C).
    The finite union of finite sets is finite and is nonempty because S is nonempty.
    No quasi-separatedness or quasi-compactness of the original charts is used.
-3. Choose ordered bounds for the selected complexes, choosing [0,0] for the zero complex.
+3. Replace the supplied endpoints by their minimum and maximum, giving ordered bounds.
    The finite nonempty set of lower and upper endpoints has an attained minimum and maximum.
 4. Localize to slice sites. The constant-presheaf restriction is literally constant, and
    the continuous cocontinuous slice functor commutes with module sheafification.
@@ -213,6 +213,98 @@ theorem finite_scalar_perfect_refinement [Nonempty S] [CompactSpace S]
                 s * φ.hom.app (Opposite.op W.unop.left)
                   ((scalarPerfectRingUnit.{t + 1, t, r} (ProEt.topology S) R).app
                     (Opposite.op W.unop.left) (x (Fin.cast (congrFun hN q) k))) := by
-  sorry
+  classical
+  obtain ⟨n, hn, α, V, hV, hcov⟩ := finite_affine_proetale_refinement S I U _hcover
+  have : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
+  choose l h hl using _hbounded
+  let lo : Fin n → ℤ := fun j ↦ min (l (α j)) (h (α j))
+  let hi : Fin n → ℤ := fun j ↦ max (l (α j)) (h (α j))
+  have hlohi (j) : lo j ≤ hi j := min_le_max
+  have hF (j) (q : ℤ) (hq : q < lo j ∨ hi j < q) : IsZero ((F (α j)).X q) := by
+    apply hl (α j) q
+    rcases hq with hq | hq
+    · exact Or.inl (hq.trans_le (min_le_left _ _))
+    · exact Or.inr ((le_max_right _ _).trans_lt hq)
+  obtain ⟨ja, _, hja⟩ := Finset.exists_min_image Finset.univ lo Finset.univ_nonempty
+  obtain ⟨jb, _, hjb⟩ := Finset.exists_max_image Finset.univ hi Finset.univ_nonempty
+  refine ⟨n, hn, α, V, lo, hi, lo ja, hi jb, hV, hcov, hlohi, hF,
+    (fun j ↦ hja j (Finset.mem_univ _)), ⟨ja, rfl⟩,
+    (fun j ↦ hjb j (Finset.mem_univ _)), ⟨jb, rfl⟩,
+    (hlohi ja).trans (hjb ja (Finset.mem_univ _)), ?_⟩
+  intro j
+  let W := scalarPerfectOpenChart (U (α j)) (V j)
+  let G := scalarPerfectChartFunctor.{t + 1, t, r} (ProEt.topology S) R φ W
+  have hC := scalarPerfectConstantFunctor_additive (ProEt.topology S) R
+  have hE := scalarPerfectExtensionFunctor_additive ((ProEt.topology S).over W)
+    (((ProEt.topology S).overPullback CommRingCat.{r} W).map φ)
+  have hO : (overFunctor.{r}
+      (scalarPerfectRingUnderlying (ProEt.topology S)
+        (scalarPerfectRing (ProEt.topology S) R)) W).Additive :=
+    ⟨fun {_ _} f g ↦ by ext T x; rfl⟩
+  have hG : G.Additive := inferInstanceAs
+    ((scalarPerfectConstantFunctor (ProEt.topology S) R ⋙
+      overFunctor (scalarPerfectRingUnderlying (ProEt.topology S)
+        (scalarPerfectRing (ProEt.topology S) R)) W ⋙
+      scalarPerfectExtensionFunctor.{t + 1, t, r} ((ProEt.topology S).over W)
+        (((ProEt.topology S).overPullback CommRingCat.{r} W).map φ)).Additive)
+  have hzero (q) (hq : q < lo j ∨ hi j < q) :
+      IsZero ((scalarPerfectLocalModel S R B φ W (F (α j))).X q) :=
+    G.map_isZero (hF j q hq)
+  have he (q : ℤ) := exists_scalarPerfectChartFiniteFreeIso
+    (ProEt.topology S) R φ W ((spl (α j)).N q)
+  choose e he using he
+  let pkg : StrictPerfectCoefficientPackageOnSite ((scalarPerfectProEtRing S B).over W)
+      (scalarPerfectLocalModel S R B φ W (F (α j))) :=
+    { N := (spl (α j)).N
+      i q := G.map ((spl (α j)).i q) ≫ (e q).hom
+      p q := (e q).inv ≫ G.map ((spl (α j)).p q)
+      splitting q := by
+        simp only [Category.assoc, Iso.hom_inv_id_assoc, ← G.map_comp,
+          (spl (α j)).splitting, G.map_id]
+        rfl }
+  refine ⟨?_, hzero, pkg, rfl, e, (fun _ ↦ rfl), (fun _ ↦ rfl), ?_⟩
+  · let O := scalarPerfectProEtRing S B
+    let f : W ⟶ U (α j) := MorphismProperty.Over.homMk (V j).ι rfl trivial
+    let H := overMap.{r} O f
+    have : H.Additive := ⟨fun {_ _} g h ↦ by ext T x; rfl⟩
+    have : PreservesFiniteColimits H := inferInstance
+    let T := SheafOfModules.forget.{r} (O.over W) ⋙ PresheafOfModules.toPresheaf (O.over W).obj
+    have : PreservesFiniteLimits (H ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{r} (O.over (U (α j))) ⋙
+          PresheafOfModules.toPresheaf (O.over (U (α j))).obj) ⋙
+            (Functor.whiskeringLeft _ _ _).obj (Over.map f).op)
+      infer_instance
+    have : PreservesFiniteLimits H := preservesFiniteLimits_of_reflects_of_preserves H T
+    have : (overFunctor.{r} O (U (α j))).Additive :=
+      ⟨fun {_ _} g h ↦ by ext T x; rfl⟩
+    have : (overFunctor.{r} O W).Additive :=
+      ⟨fun {_ _} g h ↦ by ext T x; rfl⟩
+    let K := DerivedCategory.Q.objPreimage P
+    let ec := (Functor.mapHomologicalComplexCompIso (overFunctorMap O f) (.up ℤ)).app K
+    let e₀ := (DerivedCategory.Q.mapIso ec).symm ≪≫
+      (H.mapDerivedCategoryFactors.app
+        (((overFunctor.{r} O (U (α j))).mapHomologicalComplex (.up ℤ)).obj K)).symm ≪≫
+      H.mapDerivedCategory.mapIso (Classical.choice (_hrep (α j))) ≪≫
+      H.mapDerivedCategoryFactors.app (scalarPerfectLocalModel S R B φ (U (α j)) (F (α j)))
+    let G₀ := scalarPerfectChartFunctor.{t + 1, t, r} (ProEt.topology S) R φ (U (α j))
+    have hO₀ : (overFunctor.{r}
+        (scalarPerfectRingUnderlying (ProEt.topology S)
+          (scalarPerfectRing (ProEt.topology S) R)) (U (α j))).Additive :=
+      ⟨fun {_ _} g h ↦ by ext T x; rfl⟩
+    have hE₀ := scalarPerfectExtensionFunctor_additive ((ProEt.topology S).over (U (α j)))
+      (((ProEt.topology S).overPullback CommRingCat.{r} (U (α j))).map φ)
+    have : G₀.Additive := inferInstanceAs
+      ((scalarPerfectConstantFunctor (ProEt.topology S) R ⋙
+        overFunctor (scalarPerfectRingUnderlying (ProEt.topology S)
+          (scalarPerfectRing (ProEt.topology S) R)) (U (α j)) ⋙
+        scalarPerfectExtensionFunctor.{t + 1, t, r} ((ProEt.topology S).over (U (α j)))
+          (((ProEt.topology S).overPullback CommRingCat.{r} (U (α j))).map φ)).Additive)
+    let e₁ := (Functor.mapHomologicalComplexCompIso
+      (Classical.choice (scalarPerfectChartRestrictionIso f R φ)).symm (.up ℤ)).app (F (α j))
+    exact ⟨e₀ ≪≫ DerivedCategory.Q.mapIso e₁⟩
+  · intro q T b x k
+    exact he q T b x k
+
 
 end AlgebraicGeometry.Scheme
