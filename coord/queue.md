@@ -1,6 +1,6 @@
 # Work queue
 
-450 items; claim with `tools/claim.py next <group> [--stage N]`.
+451 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 1358 modules)
 
@@ -35,14 +35,14 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-pbc-pulled-reduction-strict-tower-comparison` | 5 | none |
 | `sk-thm-purity-transport` | 5 | none |
 | `lem-sbc-ringed-site-perfect-projection-formula` | 7 | none |
-| `lem-weil-pbc-lisse-e-constructible-integral-lattice` | 9 | none |
 | `lem-weil-pbc-integral-constructible-hom-sums` | 10 | none |
 | `lem-weil-pbc-integral-model-open-closed-pieces` | 10 | none |
 | `lem-weil-pbc-integral-models-extension-closed` | 10 | none |
 | `lem-weil-pbc-lisse-lattice-reduced-open` | 10 | none |
 | `lem-weil-pbc-affine-cohomology-etale-module-realization` | 17 | none |
-| `lem-weil-pbc-coherent-affine-base-change-edge-naturality` | 17 | none |
 | `lem-weil-pbc-flat-curve-derived-structure-model` | 17 | none |
+| `lem-weil-pbc-derived-pullback-top-cohomology` | 18 | none |
+| `lem-weil-pbc-top-base-change-presheaf` | 18 | none |
 | `lem-sfb-qlbar-point-abelian-colimit` | 1001 | none |
 | `lem-pur-adic-basis-limit` | 1003 | none |
 | `lem-pur-finite-free-quotient-completion` | 1003 | none |
@@ -224,7 +224,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-a1-fppf-integer-model` | - | none |
 
-## Stage 2: nodes to state (110)
+## Stage 2: nodes to state (111)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -324,6 +324,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sp-varying-ring-open-unit-coherence` | 1 | state | 0 |
 | `lem-sp-varying-ring-pullback-unit-coherence` | 1 | state | 0 |
 | `lem-weil-pbc-bounded-complex-triangulated-devissage` | 1 | state | 0 |
+| `lem-weil-pbc-coherent-affine-base-change-edge-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-discrete-exchange-site-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-finite-basis-cech-first-limit` | 1 | state | 0 |
 | `lem-weil-pbc-finite-etale-cover-cech-stage-comparison` | 1 | state | 0 |
@@ -339,7 +340,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-classical-localizing` | 2 | state | 0 |
 | `lem-sfb-modobj-cokernels` | 3 | state | 0 |
 
-Not open yet: 372 nodes that below a finished node, not needed, 109 nodes that wait for stage 1 (statement downstream not grounded), 129 nodes that wait for a statement dependency (bottom-up), 41 nodes that wait for stage 1 deeper in its statement downstream.
+Not open yet: 372 nodes that below a finished node, not needed, 110 nodes that wait for stage 1 (statement downstream not grounded), 129 nodes that wait for a statement dependency (bottom-up), 41 nodes that wait for stage 1 deeper in its statement downstream.
 
 ## Stage 3: modules to prove (122)
 
