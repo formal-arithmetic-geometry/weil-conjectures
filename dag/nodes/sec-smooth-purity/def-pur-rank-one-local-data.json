@@ -1,0 +1,145 @@
+{
+ "id": "def-pur-rank-one-local-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Statement and proof: canonical section, coefficient and boundary constructions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical section, Kummer and comparison data",
+ "statement": "The fixed rank-one calculation uses derived evaluation in ModuleCat A, the kernel support complex and its resolution-normalized snake boundary, the coefficient image of the actual Kummer extension under the normalized Ext comparison, and the unit-induced etale to pro-etale section comparison. These are the existing definitions formerly in [thm-pur-rank-one-local-calculation], with all maps and signs unchanged. The curried section functor has the standard additive and finite-limit-preserving instances, definitionally those of explicit evaluation.",
+ "source": {
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-support-cohomology",
+  "def-sc-kummer-sequence",
+  "thm-pur-with-support-exactness",
+  "lem-sc-primitive-root",
+  "def-sc-mu-trivialization",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-sbc-affine-space",
+  "def-weil-pbc-etale-cohomology",
+  "def-pur-affine-line-datum",
+  "def-asd-finite-etale-tate-sheaf",
+  "det-pbc-conventions-module-cohomology",
+  "def-weil-pbc-etale-open-comparison-data",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "lem-weil-pbc-comparison-global-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "These are the explicit existing constructions: evaluation, the restriction kernel, the short complex, its snake boundary and the canonical coefficient comparisons. All three objects of the short complex are specified explicitly, which changes no map or object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Lectures on Etale Cohomology",
+    "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer cohomology of the punctured affine line over an algebraically closed field finite torsion coefficient module Tate twist",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique; Field.absoluteGaloisGroupAbelianization; FunctionField.classNumber; groupCohomology.Hilbert90.aux_ne_zero; Algebra.H1Cotangent; groupCohomology.Hilbert90.aux; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, ModuleCat",
+   "results": "CategoryTheory.Iso.toLinearEquiv; LinearEquiv.toModuleIso; linearEquivIsoModuleIso; CategoryTheory.Iso.toLinearEquiv_symm; LinearEquiv.toModuleIso_hom; LinearEquiv.toModuleIso_inv; linearEquivIsoModuleIso_inv; linearEquivIsoModuleIso_hom",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "idealX.*valuation|valuation.*idealX",
+   "results": "Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the punctured affine line over an algebraically closed field with finite torsion coefficients, Kummer coordinate generator and cohomology with support",
+   "results": "Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Locus); Algebra.etaleLocus_eq_compl_support; Algebra.Etale.of_isLocalization_Away; Algebra.isOpen_etaleLocus; RingHom.Etale; Algebra.Etale.recOn; RingHom.Etale.toAlgebra; Algebra.formallyEtale_iff. These concern the etale algebra locus and cotangent H1, not ordinary sheaf cohomology.",
+   "date": "2026-10-22",
+   "verdict": "No match; use the proved adopted source Kummer calculation and Mathlib homology sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-21",
+  "group": "G6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityRankOneLocalData",
+  "file": "lean/Sheaf/Paper/PurityRankOneLocalData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.constantUnit",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.RankOne.sections",
+   "WeilConjectures.PurityFiniteSetting.RankOne.openImmersion_isOpenImmersion",
+   "WeilConjectures.PurityFiniteSetting.RankOne.openObject",
+   "WeilConjectures.PurityFiniteSetting.RankOne.restriction",
+   "WeilConjectures.PurityFiniteSetting.RankOne.proCoefficient",
+   "WeilConjectures.PurityFiniteSetting.RankOne.sectionComplex",
+   "WeilConjectures.PurityFiniteSetting.RankOne.support_degree_relation",
+   "WeilConjectures.PurityFiniteSetting.RankOne.IsBoundary",
+   "WeilConjectures.PurityFiniteSetting.RankOne.evaluationRepresented",
+   "WeilConjectures.PurityFiniteSetting.RankOne.evaluationExt",
+   "WeilConjectures.PurityFiniteSetting.RankOne.kummerClass",
+   "WeilConjectures.PurityFiniteSetting.RankOne.comparisonSections",
+   "WeilConjectures.PurityFiniteSetting.RankOne.comparisonCohomology",
+   "WeilConjectures.PurityFiniteSetting.RankOne.constantUnit",
+   "WeilConjectures.PurityFiniteSetting.RankOne.sheafSections_obj_additive",
+   "WeilConjectures.PurityFiniteSetting.RankOne.sheafSections_obj_preservesFiniteLimits"
+  ],
+  "statement": "def constantUnit (Ω : Type u) [Field Ω] (c : Ωˣ) :\n    Γ(Punctured (Spec (CommRingCat.of Ω)), ⊤)ˣ",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "independent cc review: 794a4cae Lean and node files byte-identical to the reviewed head 9df0da84 (only the change record's Users and the report differ); rankOne_local_calculation statement byte-identical to live; 6 delivered modules and all 4 direct importers (plus PurityFrameIndependence and PurityDivisorClass, which lack published oleans) compiled in a sandbox"
+ }
+}

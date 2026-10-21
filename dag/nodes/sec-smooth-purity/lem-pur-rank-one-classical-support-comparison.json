@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-rank-one-classical-support-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Proof Steps 4 and 7: actual support sequence and site transport.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Classical boundaries and ordinary site comparison",
+ "statement": "For a finite commutative ring A, scheme X, monomorphism j:W to V in the small etale site, and A-module sheaf F, the canonical comparison of derived evaluations at every etale object is invertible in every nonnegative degree. On both sites there exists a support boundary normalized on every injective resolution as in [def-pur-rank-one-local-data].",
+ "source": {
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "stmt_deps": [
+  "def-pur-rank-one-local-data",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof": [
+  {
+   "text": "Comparison direct image preserves injectives, and derived comparison has invertible unit. Apply its composition comparison after evaluation to show that pulled-back injectives are evaluation-acyclic. The canonical derived base-change transformation is therefore invertible. The adopted library proves these comparison properties.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Milne, Lectures on Etale Cohomology",
+    "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+   }
+  },
+  {
+   "text": "Restriction of an injective sheaf along a monomorphism is surjective: its presheaf is injective, and lift the represented free section map along the induced monomorphism of free Yoneda presheaves. The support section complex is thus short exact. Define its snake boundary on a fixed resolution; lifting the identity between resolutions and snake naturality prove the prescribed normalization on every resolution.",
+   "uses": [
+    "def-pur-rank-one-local-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Lectures on Etale Cohomology",
+    "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-rank-one-local-data",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer cohomology of the punctured affine line over an algebraically closed field finite torsion coefficient module Tate twist",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique; Field.absoluteGaloisGroupAbelianization; FunctionField.classNumber; groupCohomology.Hilbert90.aux_ne_zero; Algebra.H1Cotangent; groupCohomology.Hilbert90.aux; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, ModuleCat",
+   "results": "CategoryTheory.Iso.toLinearEquiv; LinearEquiv.toModuleIso; linearEquivIsoModuleIso; CategoryTheory.Iso.toLinearEquiv_symm; LinearEquiv.toModuleIso_hom; LinearEquiv.toModuleIso_inv; linearEquivIsoModuleIso_inv; linearEquivIsoModuleIso_hom",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "idealX.*valuation|valuation.*idealX",
+   "results": "Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the punctured affine line over an algebraically closed field with finite torsion coefficients, Kummer coordinate generator and cohomology with support",
+   "results": "Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Locus); Algebra.etaleLocus_eq_compl_support; Algebra.Etale.of_isLocalization_Away; Algebra.isOpen_etaleLocus; RingHom.Etale; Algebra.Etale.recOn; RingHom.Etale.toAlgebra; Algebra.formallyEtale_iff. These concern the etale algebra locus and cotangent H1, not ordinary sheaf cohomology.",
+   "date": "2026-10-22",
+   "verdict": "No match; use the proved adopted source Kummer calculation and Mathlib homology sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-21",
+  "group": "G6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RankOneClassicalSupportComparison",
+  "file": "lean/Sheaf/Paper/RankOneClassicalSupportComparison.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.classical_support_comparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.RankOne.classical_support_comparison"
+  ],
+  "statement": "theorem classical_support_comparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (X : Scheme.{u}) {V W : X.Etale} (j : W ⟶ V) [Mono j]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :\n    (∀ (T : X.Etale) (q : ℕ), IsIso ((comparisonCohomology A X T q).app F)) ∧\n    (∃ δet, IsBoundary X.smallEtaleTopology A j F δet) ∧\n    (∃ δpro, IsBoundary (Scheme.ProEt.topology X) A ((Scheme.toProEt X).map j)\n      (proCoefficient A X F) δpro)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "independent cc review: 794a4cae Lean and node files byte-identical to the reviewed head 9df0da84 (only the change record's Users and the report differ); rankOne_local_calculation statement byte-identical to live; 6 delivered modules and all 4 direct importers (plus PurityFrameIndependence and PurityDivisorClass, which lack published oleans) compiled in a sandbox"
+ }
+}

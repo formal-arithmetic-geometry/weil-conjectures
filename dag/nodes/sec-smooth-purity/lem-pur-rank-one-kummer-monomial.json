@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-rank-one-kummer-monomial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Proof Step 5: scalar units and Laurent exponents.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kummer class of a Laurent monomial",
+ "statement": "Over an algebraically closed field Omega, let m>0 kill a commutative ring A, let F be any module sheaf on the affine line, and let f:mu_m to underlying F be any coefficient map. For the Ext-normalized Kummer class of [def-pur-rank-one-local-data], kappa(c t^r)=r kappa(t) for every c in Omega units and every integer r.",
+ "source": {
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "stmt_deps": [
+  "def-pur-rank-one-local-data"
+ ],
+ "proof": [
+  {
+   "text": "The class is the composite of additive homomorphisms: represented sections, Ext in degree zero, composition with the Kummer extension, coefficient postcomposition and inverse comparison maps. Every c has an m-th root. Its constant pullback therefore has zero class since m kills every A-module. Additivity sends the r-th power of t to r times its class, for all integers r.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Lectures on Etale Cohomology",
+    "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Sections 9, 14 (Proposition 14.3) and 16 (Example 16.3); blueprint sk-prop-a1-kummer"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer cohomology of the punctured affine line over an algebraically closed field finite torsion coefficient module Tate twist",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique; Field.absoluteGaloisGroupAbelianization; FunctionField.classNumber; groupCohomology.Hilbert90.aux_ne_zero; Algebra.H1Cotangent; groupCohomology.Hilbert90.aux; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, ModuleCat",
+   "results": "CategoryTheory.Iso.toLinearEquiv; LinearEquiv.toModuleIso; linearEquivIsoModuleIso; CategoryTheory.Iso.toLinearEquiv_symm; LinearEquiv.toModuleIso_hom; LinearEquiv.toModuleIso_inv; linearEquivIsoModuleIso_inv; linearEquivIsoModuleIso_hom",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "idealX.*valuation|valuation.*idealX",
+   "results": "Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/RingTheory/LaurentSeries.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean; Mathlib/FieldTheory/RatFunc/AsPolynomial.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct supported-cohomology theorem; the adopted source-library Kummer and valuation APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the punctured affine line over an algebraically closed field with finite torsion coefficients, Kummer coordinate generator and cohomology with support",
+   "results": "Algebra.exists_etale_of_isEtaleAt (Mathlib.RingTheory.Etale.Locus); Algebra.etaleLocus_eq_compl_support; Algebra.Etale.of_isLocalization_Away; Algebra.isOpen_etaleLocus; RingHom.Etale; Algebra.Etale.recOn; RingHom.Etale.toAlgebra; Algebra.formallyEtale_iff. These concern the etale algebra locus and cotangent H1, not ordinary sheaf cohomology.",
+   "date": "2026-10-22",
+   "verdict": "No match; use the proved adopted source Kummer calculation and Mathlib homology sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-21",
+  "group": "G6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RankOneKummerMonomial",
+  "file": "lean/Sheaf/Paper/RankOneKummerMonomial.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.kummer_monomial",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.RankOne.kummer_monomial"
+  ],
+  "statement": "theorem kummer_monomial\n    (A : Type (u + 1)) [CommRing A] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (m : ℕ) (hmpos : 0 < m) (hA : (m : A) = 0)\n    (F : Sheaf (Line (Spec (.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hm : IsUnit (m : Γ(Line (Spec (.of Ω)), ⊤)))\n    (f : (Line (Spec (.of Ω))).rootsOfUnitySheaf m ⟶\n      (Etale.moduleAbelianForget A (Line (Spec (.of Ω)))).obj F)\n    (c : Ωˣ) (r : ℤ) :\n    kummerClass A _ (openObject (Spec (.of Ω))) F m hm f\n        (constantUnit Ω c * coordinateUnit (Spec (.of Ω)) ^ r) =\n      r • kummerClass A _ (openObject (Spec (.of Ω))) F m hm f\n        (coordinateUnit (Spec (.of Ω)))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "independent cc review: 794a4cae Lean and node files byte-identical to the reviewed head 9df0da84 (only the change record's Users and the report differ); rankOne_local_calculation statement byte-identical to live; 6 delivered modules and all 4 direct importers (plus PurityFrameIndependence and PurityDivisorClass, which lack published oleans) compiled in a sandbox"
+ }
+}

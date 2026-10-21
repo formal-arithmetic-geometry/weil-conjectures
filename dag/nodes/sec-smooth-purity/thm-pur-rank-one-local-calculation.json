@@ -41,134 +41,83 @@
  ],
  "proof": [
   {
-   "text": "Put $m=\\ell^N$ and $R=\\mathbf Z/m$. Since $\\ell\\neq\\operatorname{char}\\Omega$, [lem-sc-primitive-root] supplies a primitive $m$-th root $\\zeta$. By [def-sc-mu-trivialization], $\\mu_m$ on $X$ and $U$ is the constant free rank-one $R$-sheaf. For every finite $R$-module $M$ write $M(1)=\\mu_m\\otimes_R\\underline M$; this is therefore isomorphic to $\\underline M$ on each curve. Both curves are nonempty and connected: their coordinate rings $\\Omega[t]$ and $\\Omega[t,t^{-1}]$ are domains, and the zero prime belongs to every nonempty principal open, so two nonempty opens cannot be disjoint. The statement [lem-weil-pbc-constant-sheaf-sections-connected] now identifies $H^0(X,M(1))$ and $H^0(U,M(1))$ with $M$, using this same $\\zeta$. Restriction is the identity because it restricts the constant section labelled by $a\\in M$ to the section with the same label. These identifications are natural in $M$.",
+   "text": "The finite coefficient ring is finite, and ell is invertible in Omega by the characteristic of the finite ground field. Map its ell^N unit into global sections and use the actual pure-tensor root coefficient map z |-> 1 tensor z of def-asd-ordinary-finite-p1-kummer-class. Apply lem-pur-rank-one-finite-kummer-cohomology to obtain the coordinate basis tau, the ordinary higher vanishings and invertible degree-zero restriction. The adopted source proves finite-abelian coefficient cohomology directly; no free coefficient hypothesis is imposed.",
    "uses": [
-    "lem-sc-primitive-root",
-    "def-sc-mu-trivialization",
-    "lem-weil-pbc-constant-sheaf-sections-connected"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Imported proof paragraph 1: the identical H^0 identifications and their restriction map"
-   }
-  },
-  {
-   "text": "We extend the free-coefficient computation to all finite $R$-modules, without imposing freeness on $A$. Define\n$$\n\\tau_M:M\\longrightarrow H^1(U,M(1)),\\qquad a\\longmapsto H^1(x\\mapsto x\\otimes a)(\\delta_N(t)).\n$$\nThis map is additive and natural in $M$: for $f:M\\to M'$, the coefficient maps satisfy $(1\\otimes f)(x\\otimes a)=x\\otimes f(a)$, and cohomology preserves their sums and composites. It is also $R$-linear: for $r\\in R$, the coefficient map $i_{ra}:x\\mapsto x\\otimes ra$ equals multiplication by $r$ composed with $i_a$, so $\\tau_M(ra)=r\\tau_M(a)$. We prove by induction on $|M|$ that $H^{q>0}(X,M(1))=0$, $H^{q\\geq2}(U,M(1))=0$, and $\\tau_M$ is an isomorphism. For $M=0$ these claims are immediate. For $M=\\mathbf F_\\ell$, [lem-asd-etale-finite-twist-pullback], with levels $\\ell\\mid\\ell^N$, identifies $\\mu_{\\ell^N}\\otimes_R\\mathbf F_\\ell$ with $\\mu_\\ell$. It carries $\\delta_N(t)$ to $\\delta_1(t)$: the diagram of the two exact Kummer sequences [lem-sc-kummer-exact] uses $z\\mapsto z^{\\ell^{N-1}}$ on the first $\\mathbf G_m$ and the identity on the second, so the powers commute. Equivalently, local roots $v_i^{\\ell^N}=t$ give roots $v_i^{\\ell^{N-1}}$ of $t$ of order $\\ell$, with transition ratios raised to $\\ell^{N-1}$. Use the $\\mathcal V$-small skeleton of each site fixed by [def-weil-size-convention], so the site-size hypothesis below holds. Abelian sheaves on this site have enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. The natural connecting maps of [lem-weil-pbc-right-derived-universal-delta-functor] give the asserted equality of classes. Apply [thm-pur-kummer-affine-line] at exponent one and coefficient ring $\\mathbf F_\\ell$, which is free of rank one over itself. This proves precisely the induction claims for $\\mathbf F_\\ell$.",
-   "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-sc-kummer-exact",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "thm-pur-kummer-affine-line",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "def-weil-size-convention"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Unit proof, Coefficients and Degrees 0 and 1: prime-coefficient base of the coefficient devissage needed in imported proof paragraph 1"
-   }
-  },
-  {
-   "text": "For a nonzero finite $R$-module $M$ not isomorphic to the base module $\\mathbf F_\\ell$, choose $a\\neq0$ and the least $r\\geq1$ with $\\ell^r a=0$. Then $b=\\ell^{r-1}a$ has order $\\ell$, so its cyclic submodule $C=Rb$ is isomorphic to $\\mathbf F_\\ell$. Put $Q=M/C$; both $|C|$ and $|Q|$ are smaller than $|M|$. The base computation applies to $C$ through the isomorphism $\\mathbf F_\\ell\\to C$, $1\\mapsto b$, and the naturality of $\\tau$; thus the induction is on modules up to isomorphism. The sequence $0\\to\\underline C\\to\\underline M\\to\\underline Q\\to0$ is exact: it is the sheafification of the objectwise exact sequence of constant presheaves, and [lem-weil-pbc-sheafification-exact] states that sheafification is exact. Tensoring with $\\mu_m$ preserves this sequence because the trivialization of step 1 identifies that tensor functor with the identity. Apply [lem-weil-pbc-pullback-cohomology-long-exact-ladder] with the identity scheme map on each of $X,U$, to obtain the coefficient long exact sequences. The induction hypotheses for $C,Q$ imply all the required higher vanishings for $M$: the relevant cohomology group is between the zero groups for $C,Q$. On $U$, the degree-zero map $M\\to Q$ is surjective by step 1, and $H^2(U,C(1))=0$, so the same sequence gives\n$$\n0\\to H^1(U,C(1))\\to H^1(U,M(1))\\to H^1(U,Q(1))\\to0.\n$$\nNaturality of $\\tau$ puts this under $0\\to C\\to M\\to Q\\to0$. The outside vertical maps are isomorphisms. Explicitly, to lift a middle cohomology class, lift its $Q$-label to $M$ and subtract its $\\tau_M$-image; the remainder comes from $H^1(U,C(1))$ and hence from $C$. If $\\tau_M(a)=0$, its $Q$-label is zero, so $a$ comes from $C$; injectivity of the left cohomology arrow and of $\\tau_C$ gives $a=0$. Thus $\\tau_M$ is an isomorphism, completing the induction. In particular it applies to $M=A$ for every $n$. For $A$, $\\tau_A(a)=a\\kappa_A(t)$, so this is an $A$-linear isomorphism.",
-   "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Unit proof, Coefficients: full induction step, retaining arbitrary n rather than the free-coefficient restriction of thm-pur-kummer-affine-line"
-   }
-  },
-  {
-   "text": "Apply [thm-pur-with-support-exactness] to the closed origin $Z\\subset X$ and the torsion sheaf $A(1)$. Substituting steps 1--3 gives\n$$\n0\\to H^0_Z(X,A(1))\\to A\\xrightarrow{\\mathrm{id}}A\\to H^1_Z(X,A(1))\\to0\\to A\\xrightarrow{\\partial\\tau_A}H^2_Z(X,A(1))\\to0.\n$$\nHence $H^0_Z=H^1_Z=0$ and $\\partial\\tau_A$ is an isomorphism. For $q\\geq3$, exactness puts $H^q_Z$ between $H^{q-1}(U,A(1))=0$ and $H^q(X,A(1))=0$, so it vanishes too. Functoriality of the support sequence in $F$ makes $\\partial$ commute with multiplication by every $a\\in A$; hence $\\partial$ and $\\partial\\tau_A$ are $A$-linear. Define $\\rho=(\\partial\\tau_A)^{-1}$, an $A$-linear isomorphism. This proves all asserted groups and the normalization $\\rho(\\partial\\kappa_A(t))=1$.",
-   "uses": [
-    "thm-pur-with-support-exactness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Imported proof paragraph 1: support long exact sequence; paragraph 2: all vanishing groups and normalized degree-two isomorphism"
-   }
-  },
-  {
-   "text": "By [lem-pur-affine-punctured-line-algebra], every global unit of $U$ is $c t^r$, with $c\\in\\Omega^\\times$ and $r\\in\\mathbf Z$. The Kummer boundary from the exact sequence [lem-sc-kummer-exact] is a group homomorphism. Since $\\Omega$ is algebraically closed, $c$ has an $m$-th root, so its boundary is zero; therefore $\\kappa_A(c t^r)=r\\kappa_A(t)$. Applying $\\rho\\partial$ gives $r\\cdot1_A$. For a polynomial, factor out the highest power of $t$; for a quotient of polynomials subtract these exponents. This defines $\\operatorname{ord}_0$ on $\\Omega(t)^\\times$. A unit in $\\Omega[t]_{(t)}$ has numerator and denominator both nonzero at zero, hence order zero, while $\\operatorname{ord}_0(t)=1$. In particular $\\operatorname{ord}_0(c t^r)=r$, proving the claimed residue formula with its sign fixed by $t$.",
-   "uses": [
-    "lem-pur-affine-punctured-line-algebra",
-    "lem-sc-kummer-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Imported proof paragraph 2: replace the erroneous unit/completed-local-ring/orbit sentence by the explicit valuation normalization"
-   }
-  },
-  {
-   "text": "The map $\\partial\\tau_A$ is defined using only the specified support boundary and the coefficient image of the Kummer class of $t$; neither definition uses $\\zeta$. Thus its inverse $\\rho$ is independent of the primitive root used to compute the degree-zero groups. Since $\\partial\\kappa_A(t)$ is an $A$-basis, any $A$-linear map taking it to $1$ must equal $\\rho$, proving uniqueness and canonicity. The freeness in this argument is the conclusion that $H^1(U,A(1))$ is free of rank one over $A$; no freeness of $A$ over $R$ has been assumed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Imported proof paragraph 2: canonicity of the normalized isomorphism"
-   }
-  },
-  {
-   "text": "Put $F=A(1)$ and $F_p=\\nu_X^*F$. Apply [lem-pur-support-comparison-boundary] to $(T,C)=(X,Z)$ over the algebraically closed field $\\Omega$: $X=\\operatorname{Spec}\\Omega[t]$ is separated and finite type over $\\Omega$, $Z=V(t)$ is closed, and $A$ is a finite commutative ring. Thus the lemma applies even when $\\Omega$ is not finite type over the fixed field $k$. The coefficient sheaf is the ordinary finite discrete $A$-module sheaf, in degree zero. Write $c_U$ for its ordinary degree-one comparison and $c_Z$ for its supported degree-two comparison. These are isomorphisms by [lem-weil-pbc-comparison-global-cohomology] and [lem-pur-support-site-comparison], respectively. The boundary compatibility supplied by the new lemma is\n$$c_Z\\partial_{\\mathrm{et}}=\\partial_{\\mathrm{pro}}c_U.$$\nThe same comparisons in every degree transfer the ordinary and supported vanishings of steps 1--4 to the pro-etale site, and transfer the degree-zero restriction map as well.",
-   "uses": [
-    "lem-pur-support-comparison-boundary",
-    "lem-weil-pbc-comparison-global-cohomology",
-    "lem-pur-support-site-comparison"
+    "lem-pur-rank-one-finite-kummer-cohomology",
+    "def-asd-ordinary-finite-p1-kummer-class"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
-    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
    }
   },
   {
-   "text": "All maps in the boundary square of step 7 are $A$-linear by [lem-pur-support-comparison-boundary]. Solving that square, using the invertible maps already established, gives\n$$\\partial_{\\mathrm{pro}}=c_Z\\partial_{\\mathrm{et}}c_U^{-1},\\qquad c_Z=\\partial_{\\mathrm{pro}}c_U\\partial_{\\mathrm{et}}^{-1}.$$\nSet $\\tau_{\\mathrm{pro}}=c_U\\tau_A$ and $\\rho_{\\mathrm{pro}}=(\\partial_{\\mathrm{pro}}\\tau_{\\mathrm{pro}})^{-1}$. Then\n$$\\rho_{\\mathrm{pro}}c_Z=(\\partial_{\\mathrm{et}}\\tau_A)^{-1}=\\rho.$$\nThis is the original conjugation construction of the supported comparison, now identified with its canonical comparison map.",
+   "text": "Apply lem-pur-rank-one-classical-support-comparison to get the ordinary comparison in all degrees and boundaries normalized on every injective resolution. On an injective resolution, the support short complex is short exact. Its snake boundary in degrees 1,2 is an isomorphism because affine-line cohomology in both degrees vanishes. The degree-zero restriction is an isomorphism, so support degrees zero and one vanish by exactness; all higher degrees other than two vanish between the ordinary vanishing groups.",
    "uses": [
-    "lem-pur-support-comparison-boundary"
+    "lem-pur-rank-one-classical-support-comparison",
+    "def-pur-rank-one-local-data"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
-    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
    }
   },
   {
-   "text": "The inverse-image coefficient class on the pro-etale site is $c_U\\kappa_A(u)$. Hence the square and the inverse identity in steps 7--8 give\n$$\\rho_{\\mathrm{pro}}\\partial_{\\mathrm{pro}}c_U\\kappa_A(u)=\\rho\\partial_{\\mathrm{et}}\\kappa_A(u)=r\\cdot1_A\\quad(u=ct^r).$$\nFor $u=t$ this value is $1$. The element $c_U\\kappa_A(t)$ is an $A$-basis since $c_U\\tau_A$ is an isomorphism, so its boundary determines $\\rho_{\\mathrm{pro}}$ uniquely. The definitions use no primitive root, and the vanishing in every other supported degree was transferred in step 7. This proves all the pro-etale assertions.",
+   "text": "The ordinary comparisons transfer the ordinary higher vanishings to the pro-etale site. Naturality of the underived comparison unit transfers invertibility of degree-zero restriction. The same short-complex argument makes the normalized pro-etale boundary invertible and kills its other support degrees. Thus cZ = delta_et inverse followed by cU and delta_pro is an isomorphism satisfying the boundary square; since the boundaries are invertible this square uniquely determines cZ.",
+   "uses": [
+    "lem-pur-rank-one-classical-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
+   }
+  },
+  {
+   "text": "Let e = tau followed by delta_et and rho_et = e inverse. Define rho_pro = cZ inverse followed by rho_et. Their normalization follows from tau(1)=kappa(t) and inverse identities. The comparison identity is immediate. For uniqueness, precompose a candidate with e (or e followed by cZ); A-linear maps out of A are determined by the value at 1. None of these constructions uses a primitive root.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
-    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
+   }
+  },
+  {
+   "text": "The adopted punctured-line unit computation gives v = c t^r. Apply lem-pur-rank-one-kummer-monomial and linearity of the boundaries and rho to get residue r times 1 on both sites, using the boundary square for the pro-etale formula.",
+   "uses": [
+    "lem-pur-rank-one-kummer-monomial",
+    "lem-pur-affine-punctured-line-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
+   }
+  },
+  {
+   "text": "A polynomial nonzero at zero is outside the ideal (X), so its X-adic integer valuation is one. The quotient formula gives valuation one for a/b with both evaluations nonzero. The valuation of X is exp(-1), that of a nonzero constant is one, and multiplicativity for integer powers gives valuation(c X^r)=exp(-r). This fixes ord_0(t)=1 and order zero for local units.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
    }
   }
  ],
  "proof_deps": [
-  "def-sc-mu-trivialization",
-  "def-weil-size-convention",
-  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-pur-rank-one-local-data",
   "lem-pur-affine-punctured-line-algebra",
-  "lem-pur-support-comparison-boundary",
-  "lem-pur-support-site-comparison",
-  "lem-sc-kummer-exact",
-  "lem-sc-primitive-root",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-constant-sheaf-sections-connected",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "thm-pur-kummer-affine-line",
-  "thm-pur-with-support-exactness"
+  "lem-pur-rank-one-classical-support-comparison",
+  "lem-pur-rank-one-finite-kummer-cohomology",
+  "lem-pur-rank-one-kummer-monomial"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
-  "place": "Current blueprint proof, expanded by the existing finite-module coefficient induction and the localization-boundary comparison refinement; Milne Sections 9, 14 and 16 read for the curve and support computations."
+  "place": "Support sequence, normalization and site transport; ordinary computation as in the adopted AffineLineKummer source."
  },
  "mathlib_searches": [
   {
@@ -307,16 +256,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-constant-sheaf-sections-connected",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-site-sheaves-enough-injectives"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -361,27 +301,24 @@
   "module": "Sheaf.Paper.PurityRankOneLocalCalculation",
   "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.rankOne_local_calculation",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.RankOne.sections",
-   "WeilConjectures.PurityFiniteSetting.RankOne.openImmersion_isOpenImmersion",
-   "WeilConjectures.PurityFiniteSetting.RankOne.openObject",
-   "WeilConjectures.PurityFiniteSetting.RankOne.restriction",
-   "WeilConjectures.PurityFiniteSetting.RankOne.proCoefficient",
-   "WeilConjectures.PurityFiniteSetting.RankOne.sectionComplex",
-   "WeilConjectures.PurityFiniteSetting.RankOne.IsBoundary",
-   "WeilConjectures.PurityFiniteSetting.RankOne.evaluationRepresented",
-   "WeilConjectures.PurityFiniteSetting.RankOne.evaluationExt",
-   "WeilConjectures.PurityFiniteSetting.RankOne.kummerClass",
-   "WeilConjectures.PurityFiniteSetting.RankOne.comparisonSections",
-   "WeilConjectures.PurityFiniteSetting.RankOne.comparisonCohomology",
-   "WeilConjectures.PurityFiniteSetting.RankOne.constantUnit",
    "WeilConjectures.PurityFiniteSetting.RankOne.rankOne_local_calculation"
   ],
   "file": "lean/Sheaf/Paper/PurityRankOneLocalCalculation.lean",
-  "statement": "theorem rankOne_local_calculation (P : PurityFiniteSetting.{u}) (N : ℕ) (hN : 1 ≤ N) (hA : ((P.coefficients.l ^ N : ℕ) : P.Coefficient) = 0) (Y : Scheme.{u}) (aY : Y ⟶ Spec (CommRingCat.of P.field.k)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω] (y : Spec (CommRingCat.of Ω) ⟶ Y) (hy : y ≫ aY = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))) : ∃ (hm : IsUnit (((P.coefficients.l ^ N : ℕ)) : Γ((Line (Spec (CommRingCat.of Ω))), ⊤))) (f : (Line (Spec (CommRingCat.of Ω))).rootsOfUnitySheaf ((P.coefficients.l ^ N : ℕ)) ⟶ (Etale.moduleAbelianForget (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)), (∀ (V : (Line (Spec (CommRingCat.of Ω))).Etaleᵒᵖ) (z : ((Line (Spec (CommRingCat.of Ω))).rootsOfUnitySheaf ((P.coefficients.l ^ N : ℕ))).obj.obj V), f.hom.app V z = Scheme.finiteEtaleTateOneGenerator (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA V 1 z) ∧ ∃ (δet : ((sections (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (P.Coefficient) (openObject (Spec (CommRingCat.of Ω)))).rightDerived 1).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ⟶ (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))) (δpro : ((sections (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (P.Coefficient) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).obj (openObject (Spec (CommRingCat.of Ω))))).rightDerived 1).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ⟶ (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)))), IsBoundary (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (P.Coefficient) (restriction (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) δet ∧ IsBoundary (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (P.Coefficient) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω)))) (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) δpro ∧ IsIso δet ∧ IsIso δpro ∧ IsIso ((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ∧ ∃ (ρet : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅ ModuleCat.of (P.Coefficient) (P.Coefficient)) (ρpro : (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))) ≅ ModuleCat.of (P.Coefficient) (P.Coefficient)) (cZ : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅ (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)))), ρet.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω))))) = 1 ∧ ρpro.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω)))))) = 1 ∧ (∀ ρ : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅ ModuleCat.of (P.Coefficient) (P.Coefficient), ρ.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω))))) = 1 → ρ = ρet) ∧ (∀ ρ : (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))) ≅ ModuleCat.of (P.Coefficient) (P.Coefficient), ρ.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω)))))) = 1 → ρ = ρpro) ∧ δet ≫ cZ.hom = ((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≫ δpro ∧ cZ.hom ≫ ρpro.hom = ρet.hom ∧ (∀ q : ℕ, q ≠ 2 → IsZero (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived q).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ∧ IsZero (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived q).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)))) ∧ (∀ v : Γ(Punctured (Spec (CommRingCat.of Ω)), ⊤)ˣ, ∃ (c : Ωˣ) (r : ℤ), v = constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r) ∧ (∀ (a b : Polynomial Ω), a.eval 0 ≠ 0 → b.eval 0 ≠ 0 → (Polynomial.idealX Ω).valuation (RatFunc Ω) (RatFunc.mk a b) = 1) ∧ (∀ (c : Ωˣ) (r : ℤ), (Polynomial.idealX Ω).valuation (RatFunc Ω) (RatFunc.C (c : Ω) * (RatFunc.X : RatFunc Ω) ^ r) = WithZero.exp (-r) ∧ ρet.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r))) = r • (1 : (P.Coefficient)) ∧ ρpro.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f) (constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r)))) = r • (1 : (P.Coefficient)))",
+  "statement": "theorem rankOne_local_calculation (P : PurityFiniteSetting.{u})\n    (N : ℕ) (hN : 1 ≤ N) (hA : ((P.coefficients.l ^ N : ℕ) : P.Coefficient) = 0)\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (CommRingCat.of P.field.k))\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω]\n    (y : Spec (CommRingCat.of Ω) ⟶ Y)\n    (hy : y ≫ aY = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))) :\n    ∃ (hm : IsUnit (((P.coefficients.l ^ N : ℕ)) : Γ((Line (Spec (CommRingCat.of Ω))), ⊤)))\n      (f : (Line (Spec (CommRingCat.of Ω))).rootsOfUnitySheaf ((P.coefficients.l ^ N : ℕ)) ⟶\n        (Etale.moduleAbelianForget (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))).obj\n        (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec\n        (CommRingCat.of Ω))) hA 1)),\n      (∀ (V : (Line (Spec (CommRingCat.of Ω))).Etaleᵒᵖ) (z : ((Line (Spec (CommRingCat.of\n        Ω))).rootsOfUnitySheaf ((P.coefficients.l ^ N : ℕ))).obj.obj V),\n        f.hom.app V z = Scheme.finiteEtaleTateOneGenerator (P.Coefficient) ((P.coefficients.l ^ N :\n          ℕ)) (Line (Spec (CommRingCat.of Ω))) hA V 1 z) ∧\n      ∃ (δet : ((sections (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (P.Coefficient)\n        (openObject (Spec (CommRingCat.of Ω)))).rightDerived 1).obj (Scheme.finiteEtaleTateSheaf\n        (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ⟶\n        (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology\n        (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of Ω)))).rightDerived\n        2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec\n        (CommRingCat.of Ω))) hA 1)))\n        (δpro : ((sections (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (P.Coefficient)\n          ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).obj (openObject (Spec (CommRingCat.of\n            Ω))))).rightDerived 1).obj (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of\n            Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line\n            (Spec (CommRingCat.of Ω))) hA 1)) ⟶ (((Sheaf.supportedSectionsFunctor\n            (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1}\n            (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction\n            (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line\n            (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n            ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)))),\n        IsBoundary (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology (P.Coefficient) (restriction\n          (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l\n          ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) δet ∧\n        IsBoundary (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (P.Coefficient)\n          ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of\n          Ω)))) (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n          (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec\n          (CommRingCat.of Ω))) hA 1)) δpro ∧\n        IsIso δet ∧ IsIso δpro ∧\n        IsIso ((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject\n          (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n          ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ∧\n        ∃ (ρet : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of\n          Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec\n          (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n          ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅ ModuleCat.of\n          (P.Coefficient) (P.Coefficient)) (ρpro : (((Sheaf.supportedSectionsFunctor\n          (Scheme.ProEt.topology (Line (Spec (CommRingCat.of Ω)))) (ModuleCat.{u + 1}\n          (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of Ω)))).map (restriction (Spec\n          (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient (P.Coefficient) (Line (Spec\n          (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N :\n          ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))) ≅ ModuleCat.of (P.Coefficient)\n          (P.Coefficient))\n          (cZ : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of\n            Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec\n            (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n            ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅\n            (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec (CommRingCat.of\n            Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of\n            Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj (proCoefficient\n            (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf\n            (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)))),\n          ρet.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject\n            (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n            ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^\n            N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω))))) = 1 ∧\n          ρpro.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n            (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf\n            (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))\n            ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec\n            (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N\n            : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f)\n            (coordinateUnit (Spec (CommRingCat.of Ω)))))) = 1 ∧\n          (∀ ρ : (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of\n            Ω))).smallEtaleTopology (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec\n            (CommRingCat.of Ω)))).rightDerived 2).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n            ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≅ ModuleCat.of\n            (P.Coefficient) (P.Coefficient),\n            ρ.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject\n              (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n              ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l\n              ^ N : ℕ)) hm f) (coordinateUnit (Spec (CommRingCat.of Ω))))) = 1 → ρ = ρet) ∧\n          (∀ ρ : (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec\n            (CommRingCat.of Ω)))) (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec\n            (CommRingCat.of Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived 2).obj\n            (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n            (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec\n            (CommRingCat.of Ω))) hA 1))) ≅ ModuleCat.of (P.Coefficient) (P.Coefficient),\n            ρ.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n              (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf\n              (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))\n              ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec\n              (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^\n              N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f)\n              (coordinateUnit (Spec (CommRingCat.of Ω)))))) = 1 → ρ = ρpro) ∧\n          δet ≫ cZ.hom = ((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n            (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf\n            (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ≫\n            δpro ∧ cZ.hom ≫ ρpro.hom = ρet.hom ∧\n          (∀ q : ℕ, q ≠ 2 →\n            IsZero (((Sheaf.supportedSectionsFunctor (Line (Spec (CommRingCat.of\n              Ω))).smallEtaleTopology\n              (ModuleCat.{u + 1} (P.Coefficient)) (restriction (Spec (CommRingCat.of\n                Ω)))).rightDerived q).obj (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n                ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1)) ∧\n            IsZero (((Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology (Line (Spec\n              (CommRingCat.of Ω))))\n              (ModuleCat.{u + 1} (P.Coefficient)) ((Scheme.toProEt (Line (Spec (CommRingCat.of\n                Ω)))).map (restriction (Spec (CommRingCat.of Ω))))).rightDerived q).obj\n                (proCoefficient (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n                (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line\n                (Spec (CommRingCat.of Ω))) hA 1)))) ∧\n          (∀ v : Γ(Punctured (Spec (CommRingCat.of Ω)), ⊤)ˣ,\n            ∃ (c : Ωˣ) (r : ℤ), v = constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r)\n              ∧\n          (∀ (a b : Polynomial Ω), a.eval 0 ≠ 0 → b.eval 0 ≠ 0 →\n            (Polynomial.idealX Ω).valuation (RatFunc Ω) (RatFunc.mk a b) = 1) ∧\n          (∀ (c : Ωˣ) (r : ℤ),\n            (Polynomial.idealX Ω).valuation (RatFunc Ω)\n              (RatFunc.C (c : Ω) * (RatFunc.X : RatFunc Ω) ^ r) =\n                WithZero.exp (-r) ∧\n            ρet.hom (δet ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject\n              (Spec (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient)\n              ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l\n              ^ N : ℕ)) hm f) (constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r))) =\n              r • (1 : (P.Coefficient)) ∧\n            ρpro.hom (δpro (((comparisonCohomology (P.Coefficient) (Line (Spec (CommRingCat.of Ω)))\n              (openObject (Spec (CommRingCat.of Ω))) 1).app (Scheme.finiteEtaleTateSheaf\n              (P.Coefficient) ((P.coefficients.l ^ N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1))\n              ((kummerClass (P.Coefficient) (Line (Spec (CommRingCat.of Ω))) (openObject (Spec\n              (CommRingCat.of Ω))) (Scheme.finiteEtaleTateSheaf (P.Coefficient) ((P.coefficients.l ^\n              N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f)\n              (constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r)))) =\n              r • (1 : (P.Coefficient)))",
   "branch": "newtargets-dag",
   "by": "Q76",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The snake-boundary characterization fixes the actual support map and its sign. Module-valued right derived sections encode the A action. All N killing A are allowed. Helper definitions only name canonical constructions; the sole postponed theorem is the node itself."
+  "note": "Existing theorem signature unchanged. Canonical helper declarations are publicly reexported from Sheaf.Paper.PurityRankOneLocalData."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-794a4",
+  "group": "G6",
+  "result": "fix",
+  "landing": "20261021T225136-L-3779193",
+  "kind": "interface",
+  "note": "independent cc review: 794a4cae Lean and node files byte-identical to the reviewed head 9df0da84 (only the change record's Users and the report differ); rankOne_local_calculation statement byte-identical to live; 6 delivered modules and all 4 direct importers (plus PurityFrameIndependence and PurityDivisorClass, which lack published oleans) compiled in a sandbox"
  }
 }
