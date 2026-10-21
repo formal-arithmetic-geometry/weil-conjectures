@@ -27,9 +27,118 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "sk-thm-pe-direct-image-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-kflat-resolution] to the small etale site of $Y$ and its constant ring sheaf $A_Y$. It gives a quasi-isomorphism $P\\to K$, with $P$ K-flat and flat in every degree (indeed the map can be taken termwise surjective). Fix any such $P$ for the remaining steps; no special choice of this resolution will be used.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "Regard $l_R^0,p_R^0,C_Z^{R,0}$ as module pullbacks of their geometric morphisms, with the canonical isomorphisms on constant rings. The inverse-image square and exactness are the first assertion of [sk-thm-pe-direct-image-comparison]; its later qcqs assertion is not used. Regard $E_Z^t$ as module pullback for the identity geometric morphism with structural map $A_Z\\to B_Z$. Thus every letter in either route is a pullback of ringed topoi, including the letters that change coefficients. Apply the preservation clause of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] after each letter, starting at $P$. Induction on the length of the ordinary word shows that every suffix and every full vertex word is K-flat with flat terms over its current ring. This preservation does not assume that $B$ is flat over $A$.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "For clarity list the six ordinary vertices (all evaluated on $P$):\n$$W_0=p_B^0E_Y^pC_Y^{A,0}P,\\quad W_1=E_X^pp_A^0C_Y^{A,0}P,\\quad W_2=E_X^pC_X^{A,0}l_A^0P,$$\n$$W_3=C_X^{B,0}E_X^el_A^0P,\\quad W_4=p_B^0C_Y^{B,0}E_Y^eP,\\quad W_5=C_X^{B,0}l_B^0E_Y^eP.$$\nThe paths are $0\\to1\\to2\\to3$ and $0\\to4\\to5\\to3$. For any suffix $W$ of these words define $j_W$ from the corresponding derived word on $Q_AP$ to $Q(W(P))$ recursively. Set $j_{\\varnothing}=1$ and\n$$j_{hW}=\\epsilon_{h,W(P)}\\circ Lh^*(j_W),$$\nwhere $h$ is the ringed morphism for the next letter. The counit and its naturality are supplied by [lem-weil-pbc-ringed-topoi-derived-pullback]. Step 2 checks precisely its K-flat and flat-term hypotheses, so every $j_W$ is invertible. For the scalar letters this is the derived extension of scalars and its counit [lem-pur-derived-change-of-rings]. For the exact geometric letters, the exact localization is a left derived functor with its localization comparison as counit [lem-weil-pbc-exact-functor-derived-functor]. Hence these are the successive canonical representative identifications of the statement, including at the two common endpoints.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "The square map $d_R$ is, by [sk-thm-pe-direct-image-comparison], the exact localization of $d_R^0$. Consequently, using the geometric-letter identifications of Step 3, its component at $QN$ is $Q(d_{R,N}^0)$ for every ordinary complex $N$. This applies to $N=P$ for $R=A$, and to $N=E_Y^eP$ for $R=B$. For the latter face the actual input is $T_Y^eQ_AP$; naturality of $d_B$ along the scalar representative isomorphism $T_Y^eQ_AP\\to Q_BE_Y^eP$ gives the same formula. Thus the unwhiskered site-square faces have their required ordinary representatives.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "We next check $c^p$ and $\\delta_Z$ on their two-letter inputs. For each one, the two orders of coefficient extension and geometric pullback are composites of ringed morphisms with the same underlying geometric inverse image. Their structural ring maps agree: under the constant-ring identifications both send a local constant $a$ to its image in $B$. The normalized lifts of all these ringed morphisms, and of their composites, are those recorded by the System of [lem-sfb-ringed-derived-monoidal-comparisons]; by [def-sfb-ringed-derived-comparison-data] a System records a lift for every morphism together with its Composition and TwoIso comparisons, so no further existence of lifts is needed. Apply [lem-sfb-ringed-derived-composition-comparison] to each path, and [lem-sfb-ringed-derived-two-iso-comparison] to the specified identity geometric isomorphism between the resulting composites. These nodes give ordinary and derived comparisons with the flat-term K-flat representative formulas. Cancelling their common single-pullback representative identifies the derived path comparison with the localization of the ordinary path comparison under the $j$'s. The ordinary comparison in the direction $h_B^0E\\to Eh_A^0$ sends the pulled-back scalar insertion $b\\otimes m$ to $b\\otimes h_A^0m$; its inverse is used for $\\delta_Z^0$. These are exactly the generalized pure-tensor normalizations stipulated in the statement, rather than arbitrary isomorphisms between the two composites. The canonical ringed comparisons [lem-sfb-ringed-derived-monoidal-comparisons] are these composition/transport comparisons. Therefore $c^p$ and $\\delta_Z$ have representatives $c^{p,0}$ and $\\delta_Z^0$, respectively. The argument applies to $C_Y^{A,0}P$ and to $l_A^0P$ as needed, by Step 2.",
+   "uses": [
+    "lem-sfb-ringed-derived-composition-comparison",
+    "lem-sfb-ringed-derived-two-iso-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sfb-ringed-derived-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "For the etale face use the specified normalization, not an unspecified derived isomorphism. In [def-pur-etale-scalar-pullback-iso] substitute the chosen $P$ into\n$$c^e_{Q_AP};T_X^e(g_{A,P});r_{l_A^0P}=l_B(r_P);g_{B,E_Y^eP};Q_B(c^{e,0}_P).$$\nHere $g$ and $r$ are the geometric and scalar representative counits. They are precisely the two successive factors defining $j_{E_X^el_A^0}$ and $j_{l_B^0E_Y^e}$ in Step 3. Their invertibility was established there. Consequently the displayed defining equation says exactly that the conjugate of $c^e_{Q_AP}$ by those two $j$'s is $Q_B(c^{e,0}_P)$. Its ordinary comparison $a_P$ equals $c^{e,0}_P$. Indeed $a$ is the conjugate of the sectionwise identity $\\mathrm{Res}\\,f_{B,*}=f_{A,*}\\mathrm{Res}$, so it carries the unit of the composite adjunction $f_B^*E_Y\\dashv\\mathrm{Res}\\,f_{B,*}$ to that of $E_Xf_A^*\\dashv f_{A,*}\\mathrm{Res}$. Evaluated on a local section $m$, the first unit is $m\\mapsto$ the pulled-back insertion of $1\\otimes m$, the second is $m\\mapsto1\\otimes(\\text{pulled-back }m)$. Hence $a_P$ sends the pulled-back $1\\otimes m$ to $1\\otimes f_A^0m$, and by $B_X$-linearity it sends $b\\otimes m$ to $b\\otimes f_A^0m$ on generalized pure tensors. That is the normalization defining $c^{e,0}$; since such tensors generate after sheafification, the two $B_X$-linear maps coincide. No uniqueness of an unnormalized isomorphism is being assumed.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "The face computations remain valid with their outer letters. Indeed, suppose $\\alpha:L(U)\\to L(V)$ has ordinary representative $\\alpha^0:U^0(P)\\to V^0(P)$, meaning $j_V\\alpha=Q(\\alpha^0)j_U$. Apply a derived outer letter $Lh^*$ and then its representative counit. Naturality of that counit [lem-weil-pbc-ringed-topoi-derived-pullback] gives\n$$j_{hV}\\,Lh^*(\\alpha)=Q(h^0\\alpha^0)\\,j_{hU}.$$\nAll counits here are invertible by Step 2. Apply this identity to the outer scalar letter $E_X^p$ on $d_A$, to the outer geometric letter $p_B^0$ on $\\delta_Y$, and to the outer geometric letter $C_X^{B,0}$ on $c^e$. Together with Steps 4–6 this gives, in the order of the statement, the representatives $c^{p,0}$, $E_X^p(d_A^0)$, $\\delta_X^0$, $p_B^0(\\delta_Y^0)$, $d_B^0$, and $C_X^{B,0}(c^{e,0})$. The $j_{W_i}$ used here were fixed once in Step 3, so the identifications at a vertex shared by two faces are the same.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  },
+  {
+   "text": "For a chain map $v:P\\to P'$ between flat-term K-flat resolving complexes, naturality of each counit gives $j_W(P')\\,W^{\\mathrm{der}}(Qv)=Q(W^0v)\\,j_W(P)$, by induction on the word length in Step 3. The ordinary comparison maps and all six derived comparisons are natural, so their representative equations commute with these chain maps as well. This proves the asserted naturality and simultaneous normalization. The proof only used smallness of the fixed sites, flat-term K-flatness of the representatives, and the ringed structural maps; it used no boundedness of $P$, no finiteness of $f$, and no flatness of $A\\to B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-scalar-pullback-iso",
+  "def-sfb-ringed-derived-comparison-data",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-composition-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-derived-two-iso-comparison",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); representative calculation specialized to the scalar/site cube. The six-vertex bookkeeping and specified etale-face normalization are the agent argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +175,46 @@
    "results": "{\"t\": \"2026-10-21T05:50:26Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of change of ring derived pullback natural transformations by the representative counit on flat K flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"comonadicExtendScalars\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"64bca6d6e253db27\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary presheaf/sheaf pullback composition, exact functor factorization, projective derived functors and etale ring algebra do not compute the six specified mixed-site faces on one unbounded flat-term K-flat model."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|representative.*counit",
+   "results": "{\"t\": \"2026-10-21T08:11:24Z\", \"tool\": \"grep\", \"query\": \"KFlat|K.flat|representative.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module pullback/free objects, site flatness or etale ring algebra; none provides the unbounded common K-flat representative and all six specified derived comparison faces.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with extension of scalars for sheaves on etale and proetale sites",
+   "results": "{\"t\": \"2026-10-21T08:11:25Z\", \"tool\": \"leansearch\", \"query\": \"Derived pullback commutes with extension of scalars for sheaves on etale and proetale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"PresheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"1ae89dea1f5460fa\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module pullback/free objects, site flatness or etale ring algebra; none provides the unbounded common K-flat representative and all six specified derived comparison faces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"t\": \"2026-10-21T08:11:25Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module pullback/free objects, site flatness or etale ring algebra; none provides the unbounded common K-flat representative and all six specified derived comparison faces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common K flat complex with flat terms computes all derived pullback composition and change of scalars comparisons for etale and proetale sheaves",
+   "results": "{\"t\": \"2026-10-21T08:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"A common K flat complex with flat terms computes all derived pullback composition and change of scalars comparisons for etale and proetale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"Algebra.Etale.comp\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"RingHom.Etale.stableUnderComposition\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"7026b4393210f90e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module pullback/free objects, site flatness or etale ring algebra; none provides the unbounded common K-flat representative and all six specified derived comparison faces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived ringed topos scalar pullback isomorphisms evaluated on a flat term K flat resolution equal localization of ordinary tensor comparisons",
+   "results": "{\"t\": \"2026-10-21T08:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived ringed topos scalar pullback isomorphisms evaluated on a flat term K flat resolution equal localization of ordinary tensor comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"f510efa4693c1832\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module pullback/free objects, site flatness or etale ring algebra; none provides the unbounded common K-flat representative and all six specified derived comparison faces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-proetale-scalar-pullback-cube",
@@ -89,5 +234,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-etale-proetale-cube-flat-model",
+  "worker": "stage1",
+  "summary": "Reused existing site K-flat resolution, ringed pullback preservation, representative counits, and normalized composition/2-isomorphism comparisons. Wrote all six vertices, checked the specified etale scalar comparison by its defining counit equation, and proved outer whiskering and chain-map naturality. No new nodes and no statement change.",
+  "blueprint": "det-prop-scalar-six-direct-image formal-properties clause and finite-ring etale/pro-etale transport, through the two recorded ancestors; realizes the common-representative step of lem-sfb-etale-proetale-scalar-pullback-cube.",
+  "tool_uses": [
+   {
+    "node": "def-pur-etale-scalar-pullback-iso",
+    "why": "Generic definition of the specified etale face tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic site resolution existence tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic uncompleted scalar extension tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-composition-comparison",
+    "why": "Generic normalized ringed composition/2-isomorphism comparison tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized ringed composition/2-isomorphism comparison tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-two-iso-comparison",
+    "why": "Generic normalized ringed composition/2-isomorphism comparison tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact localization as a left derived functor tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic natural representative counit tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation under ringed pullback tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic exact etale/pro-etale inverse-image square tool; the scalar-six unit needs this foundation for its finite-ring site comparison and supplies no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-composition-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-derived-two-iso-comparison",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-7f6ddf63a",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-7f6ddf63a (reviewer sub-agent of L); spot-checked: Read in full: the item, the 10 cited proof nodes, the key stmt_deps (def-kun-projection-formula-map, def-sfb-ringed-derived-comparison-data, the restrict-scalars comparisons) and the Stacks sites-cohomology sources 06YS, 0G7E, 06YY, 0D6D and 07A4. The proof is the 0D6D single-representative route. No SGA is cited, no cycle (transitive closure checked), nothing from the dropped list, statement unchanged against live, 0 new nodes. Steps 1-4 and 7-8 are correct: the preservation clause of ringed-tensor-pullback also covers the identity morphism with the nonflat map A→B, j recursion types and invertibility checked, d_R is the exact localization (first paragraph of sk-thm-pe only), and the outer-whisker naturality recomputed. Two small faults fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-cube-flat-model.json: (C4) Step 5 applied the composition and two-iso nodes, which explicitly do not assert that lifts exist; it now takes the lifts from the System of lem-sfb-ringed-derived-monoidal-comparisons, by def-sfb-ringed-derived-comparison-data, which is added to uses and proof_deps. (E5) Step 6 asserted a_P = c^{e,0}_P without argument; the step now carries the mate-unit calculation (the pulled-back 1⊗m goes to 1⊗f^0m, then B-linearity and generation). Def-pur orientation checked: j_{El}∘c^e = Q(a_P)∘j_{lE}. Edge cases checked: P=0, X empty, A=B, f=id, Z→F_p nonflat, unbounded P. The ten declared tool_uses are accepted as generic tools. Maintainer note: the proof is 6558 characters with 0 new nodes, about the size that led to the parent's re-split. This is advisory, not a fault.; 1 file(s) fixed by the reviewer"
  }
 }
