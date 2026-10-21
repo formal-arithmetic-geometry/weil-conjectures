@@ -3,25 +3,70 @@
  "blueprint": {
   "is": "sk-def-kernel",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-fd-kernel"
+  ]
  },
  "kind": "definition",
  "title": "The Fourier kernel and integrand",
- "statement": "Let $\\Lambda$ be a commutative ring in which $p$ is invertible, let\n$\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes with\n$V\\times_SV'$ of characteristic $p$, let\n$b\\in\\Gamma(V\\times_SV',\\mathcal O)$ (the pairing) and let\n$\\Psi:\\Fp\\to\\Lambda^\\times$ be an additive character. The *Fourier\nkernel* is the Artin–Schreier sheaf (for $k=\\Fp$) of $b$,\n\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}=b^*\\mathcal L_\\Psi\n$$\n\non the small étale site of $V\\times_SV'$, $b$ being viewed as a morphism\n$V\\times_SV'\\to\\Aone_{\\Fp}$; see [sk-def-as]. In the application\n$V=V_0\\to S=S_0$ is a vector bundle of rank $r$, $V'=V_0^\\vee$, and\n$b(x,\\xi)=\\langle x,\\xi\\rangle$ is the evaluation pairing; on $\\Aone$\n($r=1$, $S_0=\\Spec k_0$) this is $\\mathcal K_\\psi=\\mathcal L_{\\psi(x\\xi)}$.",
+ "statement": "Let $p$ be a prime and let $\\Lambda$ be a commutative ring in which $p$ is invertible. Let $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes, put $W=V\\times_S V'$, and assume $p=0$ in $\\Gamma(W,\\mathcal O_W)$. Thus $W$ is canonically an $\\mathbf F_p$-scheme, including when $W$ is empty. Let $b\\in\\Gamma(W,\\mathcal O_W)$ be a global function (the pairing), viewed as a morphism $b:W\\to\\mathbf A^1_{\\mathbf F_p}$. Let $\\Psi:(\\mathbf F_p,+)\\to\\Lambda^\\times$ be an additive character, meaning $\\Psi(0)=1$ and $\\Psi(a+a')=\\Psi(a)\\Psi(a')$.\n\nUsing the Artin–Schreier sheaf construction of [def-fd-artin-schreier-sheaf] with $k=\\mathbf F_p$ and $q=p$, define the Fourier kernel to be the sheaf of $\\Lambda$-modules on the small étale site of $W$\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}=b^*\\mathcal L_\\Psi.\n$$\nHere $b^*$ is inverse image of étale sheaves with the same constant coefficient ring $\\Lambda$; the equality is the definition of $\\mathcal L_{\\Psi,b}$, not an additional base-change assertion.\n\nIn the vector-bundle application, take $k_0=\\mathbf F_q$ from the finite-field conventions of [def-fourier-set], with $q$ a power of $p$, let $S_0$ be a $k_0$-scheme, let $V_0\\to S_0$ be a vector bundle of rank $r$, and let $V_0^\\vee$ be its dual. Take $S=S_0$, $V=V_0$, $V'=V_0^\\vee$, and $b(x,\\xi)=\\langle x,\\xi\\rangle$ (evaluation of a linear functional on a vector), composed with $\\mathbf A^1_{S_0}\\to\\mathbf A^1_{\\mathbf F_p}$. On the affine line, $r=1$, $S_0=\\operatorname{Spec}k_0$ and $b(x,\\xi)=x\\xi$, giving $\\mathcal K_\\psi=\\mathcal L_{\\Psi,x\\xi}$, also denoted $\\mathcal L_{\\psi(x\\xi)}$. In this notation $\\mathcal L_{\\psi(x\\xi)}$ is the prime-field sheaf $\\mathcal L_{\\Psi,x\\xi}$ just defined (Artin–Schreier construction with $k=\\mathbf F_p$, pulled back along $x\\xi$ composed with $\\mathbf A^1_{k_0}\\to\\mathbf A^1_{\\mathbf F_p}$); it is not the construction of [def-fd-artin-schreier-sheaf] with $k=k_0$ and the character $\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$, and no comparison between the two is part of this definition.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-kernel/_section.md",
   "place": "node sk-def-kernel, order 3034"
  },
  "stmt_deps": [
-  "sk-def-as",
-  "sk-def-fourier-set"
+  "def-fd-artin-schreier-sheaf",
+  "def-fourier-set"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]rtin.?[Ss]chreier|fourierKernel",
+   "results": "0 hits: none. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne kernel as an Artin Schreier sheaf on the product of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_of_isAffine, FourierModule, AlgebraicGeometry.Scheme.Hom.support_ker, FourierInvModule, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.IdealSheafData.map, SchwartzMap.fourierInv_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"artinSchreier\"",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier kernel on a fiber product of schemes defined as the pullback of an Artin Schreier sheaf along a global function",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local system associated to an additive character by taking an isotypic summand of the Artin Schreier covering and pulling back along a regular function",
+   "results": "8 hits: groupCohomology.Hilbert90.aux, Field.absoluteGaloisGroupAbelianization, arithFrobAt, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, WittVector.instAddCommGroupStandardOneDimIsocrystal, Algebra.etaleLocus_eq_compl_support, StandardEtalePair.instFormallyEtaleRing, InfiniteGalois.proj",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artinSchreier|fourierKernel|[Ff]ourier.?[Dd]eligne",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: no Artin–Schreier sheaf or Fourier–Deligne kernel; hits concern scheme pullbacks, ideal sheaves, analytic Fourier notation, or field theory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -49,5 +94,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-fourier-transform",
  "unit": "sk-def-kernel",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-kernel",
+  "worker": "stage1",
+  "summary": "Definition split with no new nodes: specialize the existing general Artin–Schreier definition (main-20261015 blueprint_update of def-fd-artin-schreier-sheaf) to k=F_p and f=b. Make the implicit prime p explicit, interpret characteristic p as p=0 as the current detailed blueprint specifies, and retain empty fiber products. Replace the cyclic sketch dependencies by the actual general construction and the acyclic detailed finite-field conventions; spell out the vector-bundle and affine-line notation without imposing adic coefficient hypotheses. The Lean fourierKernel declaration requires CharP of global sections, so is not an exact attachment on the empty-product case.",
+  "blueprint": "main-20261015 sk-def-kernel/_section.md, defining formula and vector-bundle/affine-line specialization; def-fd-kernel.md clarifies the condition p=0. The current unit is a definition with no proof steps and no integrand clause. The stored unit record still contains the older master integrand paragraph; its text was not edited."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-b1d66b5d8",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-b1d66b5d8 (reviewer sub-agent of L); spot-checked: Read the item in full against main-20261015 sk-def-kernel/_section.md and def-fd-kernel.md, and against Laumon PMIHES 65, PDF pp. 10-11 ((1.1.3.6) L(f)=f^*L; (1.2.1) the F_p Artin-Schreier sheaf and the canonical pairing). The delivery has no new nodes. The item matches the current blueprint clause by clause: general Lambda with p invertible, arbitrary V->S and V'->S, p=0 in Gamma(W) (including W empty), b in Gamma, Psi on F_p, and K_psi:=L_{Psi,b}=b^*L_Psi as a sheaf of Lambda-modules on the small etale site. The master integrand clause is gone from the current blueprint (it moved into def-fd-transform), so dropping it weakens nothing. The stale unit text is for the maintainer. Citations: def-fd-artin-schreier-sheaf is used through its blueprint_update (k=F_p, q=p, any k-scheme; I checked def-weil-pbc-scheme-conventions and it imposes no finite type). Its stored Qbar/finite-type statement is old and that node must be split to its BU. def-fourier-set gives only k0=F_q for the application. Both belong to the units the item's unit uses, so no tool_uses. No cycle: neither cited node reaches the item. def-fd-kernel is correctly recorded in same_as. Lean: slopmaster2 fourierKernel requires CharP Gamma(W) p, which fails for empty W, so the worker was right not to attach it. Tested: W empty, Lambda=0, p=2, trivial Psi, b=0, rank 0 and rank 1. FIX: one sentence added to the item statement. In the source, L_{psi(x xi)} here means the prime-field L_{Psi,x xi}, while the BU of def-fd-artin-schreier-sheaf reserves L_{psi(af)} for the k0-construction with Psi∘Tr. The two are only isomorphic, which is a lemma, so the notation had two meanings (E6). Advisory, not repaired: the vector-bundle, dual and evaluation-pairing notions in the application paragraph have no definition node (the same as the landed NR def-fd-transform). No SGA is used.; 1 file(s) fixed by the reviewer"
+ }
 }
