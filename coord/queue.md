@@ -1,6 +1,6 @@
 # Work queue
 
-135 items; claim with `tools/claim.py next <group> [--stage N]`.
+134 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (14 clusters, 948 modules)
 
@@ -11,7 +11,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
-| `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -49,7 +49,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-thm-pe-wc-cover` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (31)
+## Stage 2: nodes to state (30)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -64,7 +64,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
-| `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-faithfully-flat-normal-ring-descent` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
