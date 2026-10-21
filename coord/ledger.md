@@ -19948,3 +19948,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:45:24Z L: superseded stage-1 delivery Q92/lem-sp-finite-compact-support-domains at 5683997e58c6abe660217a5fa8ca1e5797847c03; current completion retained; packet archived at refs/superseded/Q92/lem-sp-finite-compact-support-domains/5683997e58c6abe660217a5fa8ca1e5797847c03; stale return retired.
 - 03:45 L: merged deliver/Q01/lem-sfb-grothendieck-sheafification (reviewer FIX; first push; new nodes: 4)
 - 03:45 L: merged deliver/Q20/lem-pe-comparison-etale-slice-abelian-pullback (reviewer PASS; first push; new nodes: 0)
+- 03:45 L: merged deliver/Q64/lem-sp-finite-coefficient-input-models (reviewer FIX; first push; new nodes: 0); claim not held by Q64: not your claim

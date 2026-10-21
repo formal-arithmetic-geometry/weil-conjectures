@@ -22,9 +22,129 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sf-etale-flat-constructible] with $\\Lambda=A$, $K=L$ and the given integers $a\\leq b$. Its hypotheses are exactly that $A$ is finite, $X$ is Noetherian, and $L$ is bounded constructible with Tor amplitude in $[a,b]$. It supplies a complex $P$ whose terms are flat constructible $A_X$-module sheaves, with $P^q=0$ outside $[a,b]$, and an isomorphism $L\\simeq P$ in the derived category. This chooses the one input model used throughout the proof.",
+   "uses": [
+    "lem-sf-etale-flat-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
+    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-209; the existing DAG theorem is used as a black box"
+   }
+  },
+  {
+   "text": "The bound $P^q=0$ for $q>b$ makes $P$ a bounded-above complex of flat module sheaves. Thus [lem-pc-bounded-above-flat-kflat-site] makes it K-flat on the ringed small etale site $(X_{\\rm et},A_X)$. This is K-flatness against arbitrary acyclic complexes, not just bounded acyclic test complexes.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, label lemma-bounded-flat-K-flat (the cited node has the older incorrect tag 06YS in its source field, but its statement is precisely this lemma)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to the identity topos with ring map $A_X\\to B_X$, and to the site comparison with its constant-ring identification from [lem-sf-comparison-pullback-exact]. Starting with $P$, these applications give K-flatness and flat terms for $P\\otimes_A B$ and $N_XP$; applying the identity-topos change of rings on the pro-etale site to $N_XP$ gives them for $(N_XP)\\otimes_A B$. All these functors send zero modules to zero modules, so the degree interval stays $[a,b]$. The computing comparison of [lem-weil-pbc-ringed-topoi-derived-pullback], applied to the two coefficient morphisms, identifies the first and third complexes with $L_B$ and $(N_XL)_B$. Exactness in [lem-sf-comparison-pullback-exact] identifies termwise $N_XP$ with $N_XL$: it sends the isomorphism represented by $P$ to its derived isomorphism. No coefficient ring map in the K-flat pullback statement is assumed flat.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 06YY (lemma-derived-base-change), applied to the identity-topos coefficient morphisms and the comparison morphism"
+   }
+  },
+  {
+   "text": "For every degree $q$, apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to $P^q$ and the etale $A_X$-module $B_X$. The constant-module isomorphism of [lem-sfb-geometric-inverse-image-constant-module], with $R=A$ and $M=B$, identifies $N_XB_X$ with the pro-etale $B_X$, including its $A$-action. Hence the canonical comparison gives $N_X(P^q\\otimes_A B)\\simeq N_XP^q\\otimes_A B$. It is $B_X$-linear: scalar multiplication by a section of $B_X$ acts on the second tensor factor on both sides. Naturality in $P^q$ makes the isomorphisms commute with the differentials, giving the asserted isomorphism of complexes. Its image in the derived category is the canonical derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]: that node defines the comparison on K-flat representatives by these same termwise tensor maps. In particular the fourth complex also represents $(N_XL)_B$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback; sites-cohomology.tex Tag 07A4, label lemma-pullback-tensor-product, its comparison on K-flat representatives"
+   }
+  },
+  {
+   "text": "Fix a degree $q$ and a finite constructible stratification witnessing constructibility of $P^q$ in [def-weil-pbc-etale-constructible-sheaf]. On a stratum $i:S\\to X$ the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] identifies $i^*(P^q\\otimes_A B)$ with $i^*P^q\\otimes_A i^*B_X$, and the constant-module isomorphism of [lem-sfb-geometric-inverse-image-constant-module] (with $R=A$, $M=B$, $f=i$) identifies $i^*B_X$ with $B_S$, compatibly with the $B$-action by its naturality in the $A$-linear maps $b\\cdot-:B\\to B$; so $i^*(P^q\\otimes_A B)\\simeq i^*P^q\\otimes_A B_S$. The scalar-extension clause of [lem-pod-lisse-tensor-and-scalar-extension] makes this a finite locally constant $B_S$-module: on a trivializing etale cover it has value $M\\otimes_A B$ for a finite $A$-module $M$. Concretely, if $r$ elements generate $M$, their tensors with $1$ generate $M\\otimes_A B$ over the finite ring $B$, so its underlying set is finite. Empty strata give the zero sheaf and need no choice of a geometric point; on every nonempty stratum a geometric point exists, as in the lisse lemma. Thus the same finite partition witnesses constructibility over $B$ for each term of $P\\otimes_A B$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pod-lisse-tensor-and-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKB, label lemma-tensor-constructible, same-stratification argument; the local scalar-extension input is the existing lisse lemma"
+   }
+  },
+  {
+   "text": "Put $Q=P\\otimes_A B$. By Step 5 its terms are constructible $B_X$-modules. Apply [thm-constructible-serre] over the finite ring $B$: $Z^q=\\ker(Q^q\\to Q^{q+1})$ is constructible, and $H^q(Q)=\\operatorname{coker}(Q^{q-1}\\to Z^q)$ is constructible. These are maps between constructible sheaves, so the kernel and cokernel clauses apply directly. Since $Q$ is zero outside $[a,b]$, so is its cohomology. Step 3 therefore proves bounded constructibility of $L_B$.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ, label lemma-constructible-abelian, kernel and cokernel clauses"
+   }
+  },
+  {
+   "text": "The given finite affine cover makes $X$ quasi-compact. It is locally Noetherian, so [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. Each finite coefficient ring is Noetherian, since it has only finitely many ideals. Consequently the forward constructible-sheaf comparison in [sk-thm-pe-constructible-comparison] applies to both $A$ and $B$. Exactness of $N_X$ in [lem-sf-comparison-pullback-exact] gives $H^q(N_XL)\\simeq N_XH^q(L)$, so $N_XL$ is bounded constructible. Apply the same statements over $B$ to the bounded constructible etale complex $L_B$ obtained in Step 6. This gives bounded constructibility of $N_XL_B$, hence of $(N_XL)_B$ by Step 4. To check the global finite-stratification convention explicitly, take the finite stratification of each etale cohomology sheaf. For each stratum $i:S\\to X$, [lem-weil-pbc-comparison-pullback] identifies $i^*N_XF$ with $N_Si^*F$. A trivializing etale covering is also a pro-etale covering, and [lem-sfb-geometric-inverse-image-constant-module] identifies its constant values with the same finite modules. Thus that same finite partition witnesses the pro-etale constructibility required here.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-thm-pe-constructible-comparison",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md",
+    "place": "forward directions of (1) and (2); locally Noetherian quasi-separatedness is the separately cited scheme lemma"
+   }
+  },
+  {
+   "text": "Finally apply the implication from a flat model to Tor amplitude in [lem-sp-ringed-site-tor-flat-model], on $(X_{\\rm et},B_X)$, $(X_{\\rm proet},A_X)$, and $(X_{\\rm proet},B_X)$ respectively. Step 3 has supplied, for $L_B$, $N_XL$ and $(N_XL)_B$, flat representatives zero outside $[a,b]$. The cited equivalence therefore gives Tor amplitude in precisely this interval for all three objects, against every module sheaf on the appropriate site. Together with Steps 1-7 this proves every claim. In particular $B$ itself is never used as a K-flat or flat $A$-module: only $P$ and its pullbacks are used to compute the derived extensions.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1, label lemma-tor-amplitude, implication (2) to (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-flat-constructible",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "thm-constructible-serre",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sp-ringed-site-tor-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.md",
+  "place": "finite coefficient extension on Charts: bounded-flat input verification, assembled from the separately cited Stacks and project theorems"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +181,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary algebra, sheafification, categorical mates or underived sheaves; none states this normalized geometric derived assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|flatConstructible|constructible.*[Tt]or",
+   "results": "{\"t\": \"2026-10-21T03:30:39Z\", \"tool\": \"grep\", \"query\": \"KFlat|flatConstructible|constructible.*[Tt]or\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned hits concern scheme/ring flatness, general sheaf pullback, or derived localization; none states bounded flat constructible models with both site and coefficient extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image and change of coefficient rings preserve bounded flat constructible sheaf complexes and their Tor amplitude",
+   "results": "{\"t\": \"2026-10-21T03:30:39Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image and change of coefficient rings preserve bounded flat constructible sheaf complexes and their Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"RingHom.Flat.isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.fullyFaithfulForget_preimage_val\", \"RingHom.Flat.respectsIso\"], \"digest\": \"c8b613fb473b031f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned hits concern scheme/ring flatness, general sheaf pullback, or derived localization; none states bounded flat constructible models with both site and coefficient extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex",
+   "results": "{\"t\": \"2026-10-21T03:30:40Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instAdditiveCochainComplexIntQ\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.Q_obj_single_obj\"], \"digest\": \"279cd3356f4a36e4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned hits concern scheme/ring flatness, general sheaf pullback, or derived localization; none states bounded flat constructible models with both site and coefficient extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible etale complexes of finite Tor amplitude have flat constructible models preserved by finite scalar extension and proetale inverse image",
+   "results": "{\"t\": \"2026-10-21T03:30:47Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded constructible etale complexes of finite Tor amplitude have flat constructible models preserved by finite scalar extension and proetale inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"0af7bc26e27009eb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned hits concern scheme/ring flatness, general sheaf pullback, or derived localization; none states bounded flat constructible models with both site and coefficient extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat sheaves is K flat and scalar extension preserves finite constructibility on etale sites",
+   "results": "{\"t\": \"2026-10-21T03:31:30Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of flat sheaves is K flat and scalar extension preserves finite constructibility on etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"CategoryTheory.compatiblePreservingOfFlat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"CategoryTheory.lan_flat_of_flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\"], \"digest\": \"76358d784bd59cea\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned hits concern scheme/ring flatness, general sheaf pullback, or derived localization; none states bounded flat constructible models with both site and coefficient extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-et-proet-coefficient-compatibility",
@@ -83,5 +238,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-finite-coefficient-input-models",
+  "worker": "stage1",
+  "summary": "Kept the statement and all coefficient/site hypotheses. Wrote eight steps using only existing DAG results: etale flat constructible replacement, site K-flatness, ringed pullback and computation, the canonical termwise tensor comparison, scalar constructibility and Serre closure, constructible site comparison, and the same-interval Tor conclusion. No new nodes or Mathlib leaves. Corrected the source-tag reference for bounded-above site K-flatness in the proof without editing the cited node.",
+  "blueprint": "Realizes det-sp-reduction-exceptional Charts finite coefficient-extension input, through lem-sp-et-proet-coefficient-compatibility: gives the bounded models required before chart and locality arguments. No change to any unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Finite-ring Noetherian etale flat constructible replacement supplies P; it is a domain theorem, not an alternative exceptional-pullback route. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site bounded-flat K-flatness, including unbounded acyclic tests. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-topos K-flat and flat-term preservation for comparison and coefficient morphisms. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact constant-coefficient site comparison and its cohomology compatibility. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic computing comparison for coefficient extension on K-flat representatives. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic canonical underived tensor comparison, used on coefficients and on stratum restriction. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic constant-module inverse image identifies the A-module underlying B across sites. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Identifies the concrete chain tensor comparison with the specified derived comparison. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Only part (3), ordinary finite locally constant scalar extension, used on constructible strata. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Kernel/cokernel constructibility for the cohomology of the bounded B-model. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme fact verifies the comparison theorem qcqs hypothesis. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Only forward preservation of constructible sheaves and bounded complexes by the actual site inverse image. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic flat-model-to-Tor implication for each target ringed site. The compatibility unit has no separate domain lemma with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Compatibility of site comparison with stratum restriction verifies the global finite-stratification convention. This generic inverse-image comparison is not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-flat-constructible",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "thm-constructible-serre",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-thm-pe-constructible-comparison",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-9958c918a",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-9958c918a (reviewer sub-agent of L); spot-checked: Read the item, all 15 cited statements and the Stacks sources in full: 06YQ (the item's tag correction is right; 06YS is lemma-K-flat-resolution), 0G7E, 06YY, 03EL, 07A4, 0GKB, 03RZ, 08G1, 0GL6. Statement unchanged and true. Small cases checked: Z/4->Z/2 with L=A[0] gives B[0] with Tor amplitude [0,0]; B=0, the empty scheme, a=b and the identity map are also consistent. Steps 1-8 are correct. Step 7 checks the global finite-stratification convention directly through lem-weil-pbc-comparison-pullback and the constant-module lemma, so it does not rely on the affine-local Cons of sk-thm-pe-constructible-comparison. FIX (C1): Step 5 used i^*B_X ≅ B_S without a citation; it now cites lem-sfb-geometric-inverse-image-constant-module, which was already in proof_deps. Batch-5 flag on lem-pod-lisse-tensor-and-scalar-extension accepted: its 70-node closure reaches only two other generic pod nodes (lem-pod-etale-stalk-tensor-scalar, def-pod-ring-scalar-extension) and no trace-formula node, transport node or batch-4 target. The node is Stacks 093V/03EL lisse sheaf algebra, and only clause (3) is used. No duplicate: the overlaps found (det-sp-scalar-extension-functor (2), det-prop-scalar-six-ctf (3), lem-sf-etale-flat-constructible) each give only part of the item, or work in another setting. The 14 tool_uses are generic and accepted. No SGA citation. Maintainer notes: the source.place of lem-pc-bounded-above-flat-kflat-site should read 06YQ; the item statement cites det-sp-scalar-extension-functor, a pro-étale-only node, for the étale L_B (inherited, advisory).; 1 file(s) fixed by the reviewer"
  }
 }
