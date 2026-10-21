@@ -21,18 +21,56 @@
  ],
  "proof": [
   {
-   "text": "For a tower $T$ write $T_{n,1}:T_n\\to T_1$ for the composite transition. The maps $\\operatorname{Hom}(T,\\Delta A)\\to\\operatorname{Hom}(T_1,A)$ and $a\\mapsto(a\\circ T_{n,1})_{n\\geq1}$ are inverse: naturality along $n\\to1$ forces every component, and the transition composition law verifies naturality of the displayed family. They are natural in $T,A$, proving $\\operatorname{ev}_1\\dashv\\Delta$. The levelwise kernel and cokernel formulas of the cited node make $\\operatorname{ev}_n$ exact and make $\\Delta$ exact, since the kernel or cokernel of a constant morphism is the corresponding constant tower.",
+   "text": "Construct the adjunction evaluation at op 0 left adjoint to constants: the unit at a tower T has nth component its transition T_n to T_0, and the counit is the identity. Naturality is functoriality of transitions and the two triangles reduce to identity transitions. Constants and evaluations preserve finite limits and colimits by the pointwise Mathlib instances. The exact-left-adjoint criterion gives preservation of K-injectives by constants; use the existing tower evaluation theorem for evaluation.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian"
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ; explicit terminal-index adjunction"
+   }
+  },
+  {
+   "text": "Retain the existing moduleResolutions and towerResolutions constructions: sheaf modules are Grothendieck abelian and small module diagrams are Grothendieck abelian. Transport the latter instance along the AsSmall index equivalence. The source library supplies HasKInjectiveResolutions and its canonical right derived functors and derived adjunctions.",
+   "uses": [
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 079P and 07A5; existing source-library Grothendieck/K-injective instances"
+   }
+  },
+  {
+   "text": "For any exact square and ordinary adjunctions, compute its canonical derived mate on an arbitrary complex. First derive the cochain counit normalization from Adjunction.derivedε_fac_app for the homotopy adjunction, using the quotient comparison identities. Transpose the asserted mate equation under the target derived adjunction. Counit naturality, the mate/counit identity, exact localization factorization, and naturality of the exact-functor factors reduce it to Q of the ordinary mate/counit identity degree by degree.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC, 0FND and 015F; source-library derivedε_fac_app"
+   }
+  },
+  {
+   "text": "The ordinary mate of the constant inverse-image comparison is compConstIso for the direct image; the ordinary evaluation mate is the identity. Check both degreewise using the ordinary triangles. Specialize the preceding cochain calculation to obtain exactly the two representative normalization equations in ComparisonsCompatible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, exact-left-adjoint criterion; the terminal-index adjunction is the explicit elementary argument here"
+    "place": "Tags 070K and 0DVC; explicit identity-component mate calculation"
    }
   },
   {
-   "text": "Apply the exact-left-adjoint criterion to $\\operatorname{ev}_1\\dashv\\Delta$: $\\Delta$ preserves K-injectives. Evaluation preserves K-injectives by the cited evaluation theorem, reindexing $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ by $n\\mapsto n-1$ if necessary. The exact coefficient-preserving $u^*$ and its termwise tower functor are left adjoint to $u_*$ and $u_*^{\\mathcal T}$ respectively, so these two right adjoints also preserve K-injectives. The tower adjunction has the ordinary unit and counit at every index: their naturality makes them tower maps and their two triangle identities hold at each component.",
+   "text": "On a K-injective complex the canonical right-derived unit is invertible. Its constant tower and its evaluations are K-injective by the first step, so the normalization equations express both comparison components as composites of isomorphisms. Given any derived object X, choose a preimage complex, a K-injective resolution, and the induced isomorphism X to QI. Naturality transfers invertibility of the component at QI to that at X; componentwise invertibility proves both comparison transformations are isomorphisms.",
    "uses": [
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "lem-weil-tower-evaluation-kinjective"
@@ -40,127 +78,41 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; evaluation theorem specialized to the inverse-sequence poset"
+    "place": "Tags 070I and 070K; source-library rightDerivedFunctorUnit isomorphism on K-injectives"
    }
   },
   {
-   "text": "The small diagram-site realization identifies each tower category with modules on a small ringed site. Thus the cited resolution theorem applies both to the two original module categories and to their tower categories: they are Grothendieck abelian and have unbounded K-injective resolutions. Exact-functor descent applies to $u^*,u^*_{\\mathcal T},\\Delta,\\operatorname{ev}_n$. The two termwise inverse-image identities therefore descend with their specified localization comparisons; uniqueness on natural transformations follows from localization's universal property. Total right derived direct images are computed on K-injectives. Its hypothesis on the homotopy-category functor is satisfied: an additive functor on complexes commutes with the shift and the cone matrix (which uses only finite biproducts), so its composite with localization is triangulated.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A5, section-unbounded; injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tags 015F and 070K"
-   }
-  },
-  {
-   "text": "For $N\\cong QI$ with $I$ K-injective on $\\mathcal U$, step 2 makes $\\Delta_{\\mathcal U}I$ K-injective. The two sides of $b^\\Delta_N$ are therefore represented by the same complex $\\Delta_{\\mathcal V}u_*I=u_*^{\\mathcal T}\\Delta_{\\mathcal U}I$; take its identity, using the total-derived comparisons. This defines a natural isomorphism on all derived objects: a derived map $QI\\to QI'$ between K-injectives is the image of a unique homotopy class $[a]:I\\to I'$ by the cited Hom bijection. Both sides carry it to the homotopy class of the same tower map $\\Delta_{\\mathcal V}u_*a=u_*^{\\mathcal T}\\Delta_{\\mathcal U}a$. Changes of K-injective representative are represented by homotopy equivalences by the same node, and the displayed equality intertwines those equivalences too. Hence the identities are independent of representatives, natural, and invertible.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070K, lemma-K-injective and lemma-enough-K-injectives-implies; constant-tower identity application"
-   }
-  },
-  {
-   "text": "For a K-injective tower complex $I$, step 2 makes $I_n$ K-injective. Thus $\\operatorname{ev}_n\\mathscr R_u(QI)$ and $Ru_*\\operatorname{ev}_n(QI)$ are both represented by $u_*I_n$; let $b^n_{QI}$ be its identity under the total-derived comparisons. A derived map between K-injective tower complexes is represented by a unique homotopy class of tower maps. Evaluation and direct image in either order give exactly the same evaluated map. The Hom bijection and the homotopy-equivalence assertion for K-injectives consequently make these identities independent of representatives and natural, exactly as in step 4. This proves the comparison assertions of (2) with the required normalizations.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070K, lemma-K-injective and lemma-enough-K-injectives-implies; evaluation identity application"
-   }
-  },
-  {
-   "text": "Use $F=u^*$, $G=u_*$, or their tower versions. For a complex $M$ and K-injective $I$, the Hom bijection into K-injectives, the homotopy adjunction, and step 2 give the natural composite\n$$\\operatorname{Hom}_D(FQM,QI)\\cong\\operatorname{Hom}_K(FM,I)\\cong\\operatorname{Hom}_K(M,GI)\\cong\\operatorname{Hom}_D(QM,QGI).$$\nFor a chain map $a:FM\\to I$ it sends $Q(a)$ to $Q(G(a)\\circ\\eta_M^0)$. This is the canonical derived adjunction, with the canonical total-derived comparison on $GI$: apply the cited normalization theorem with left resolving class all of $K(\\mathcal A)$, which is allowed because $F$ is exact and hence inverts quasi-isomorphisms after localization. Its formula identifies this composite with the specified canonical adjunction, rather than merely producing an unspecified adjunction.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-sfb-resolving-derived-adjunction-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 0DVC/0FND; canonical normalization also sites-cohomology.tex Tag 07A6, lemma-adjoint"
-   }
-  },
-  {
-   "text": "Represent $M$ by a complex and $N$ by a K-injective $I$. Every derived $t:u^*M\\to N$ is represented by a chain map $a:u^*M\\to I$ modulo homotopy. Since $\\Delta I$ is K-injective, the corresponding tower map represents $\\Delta(t)$. The two ordinary transposes satisfy the equality of actual chain maps\n$$u_*^{\\mathcal T}(\\Delta a)\\circ\\eta^{0,\\mathcal T}_{\\Delta M}=\\Delta(u_*a\\circ\\eta^0_M),$$\nbecause both the unit and the functors are termwise. Applying the normalized Hom formula of step 6 and the identity normalization of $b^\\Delta$ in step 4 proves\n$$(\\Delta t)^\\sharp=b^\\Delta_N\\circ\\Delta(t^\\sharp).$$\nThe Hom bijection justifies the representative for every derived $t$, including unbounded $M$; replacement is allowed by the independence proved in step 4.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-sfb-resolving-derived-adjunction-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 0DVC, resolved transpose formula applied to constant towers"
-   }
-  },
-  {
-   "text": "Represent the source tower by a complex $M$ and the target by a K-injective tower complex $I$. A derived $t:u^*_{\\mathcal T}M\\to N$ is represented by a chain map $a:u^*_{\\mathcal T}M\\to I$, since its target is K-injective. Evaluating gives a chain representative of $\\operatorname{ev}_n(t)$ into K-injective $I_n$. Its transpose is\n$$u_*(a_n)\\circ\\eta^0_{M_n}=\\bigl(u_*^{\\mathcal T}(a)\\circ\\eta^{0,\\mathcal T}_M\\bigr)_n.$$\nThe normalized Hom formula of step 6 and the identity normalization of step 5 therefore give\n$$(\\operatorname{ev}_n t)^\\sharp=b^n_N\\circ\\operatorname{ev}_n(t^\\sharp).$$\nThis argument computes in the Hom sets of the derived categories themselves; it does not infer equality of tower morphisms from equality of evaluations.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-sfb-resolving-derived-adjunction-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 0DVC, resolved transpose formula applied to evaluation"
-   }
-  },
-  {
-   "text": "The unit is the transpose of $1_{u^*M}$ and the counit is the inverse transpose of $1_{Ru_*N}$. Substitution in steps 7 and 8 gives\n$$\\eta^{\\mathcal T}_{\\Delta M}=b^\\Delta_{u^*M}\\circ\\Delta\\eta_M,\\qquad \\Delta\\varepsilon_N=\\varepsilon^{\\mathcal T}_{\\Delta N}\\circ u^*_{\\mathcal T}(b^\\Delta_N),$$\n$$\\eta_{M_n}=b^n_{u^*_{\\mathcal T}M}\\circ\\operatorname{ev}_n\\eta^{\\mathcal T}_M,\\qquad \\operatorname{ev}_n\\varepsilon^{\\mathcal T}_N=\\varepsilon_{N_n}\\circ u^*(b^n_N).$$\nFor example the inverse transpose of $b^\\Delta_N$ is $\\varepsilon^{\\mathcal T}_{\\Delta N}\\circ u^*_{\\mathcal T}(b^\\Delta_N)$, which proves the first counit identity; the second is the same substitution into step 8. All inverse-image identifications here are those of step 3.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Adjunction definitions: unit/counit as transposes of identities; substitution in steps 7 and 8"
-   }
-  },
-  {
-   "text": "Write the square as $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $h:X'\\to X$, with inverse-image comparison $\\theta:f'^*g^*\\xrightarrow{\\sim}h^*f^*$. In this step $X,Y,X',Y'$ denote ringed sites. By the definition of a square mate, its component $E_K:g^*Rf_*K\\to Rf'_*h^*K$ is the adjunct under $f'^*\\dashv Rf'_*$ of\n$$c_K=h^*(\\varepsilon^f_K)\\circ\\theta_{Rf_*K}.$$\nThe tower mate $E^{\\mathcal T}$ is defined by the identical formula with tower functors. The hypothesis on the square identifies $\\Delta\\theta$ and $\\operatorname{ev}_n\\theta^{\\mathcal T}$ with the corresponding tower and ordinary comparisons. We now compare adjuncts using these formulas, which is a direct check of the specified mates.",
+   "text": "For any square and its mate, the two Hom formulas follow by expanding homEquiv through the unit, applying naturality of the mate, and using unit_mateEquiv. Specialize to the constant and evaluation inverse-image comparisons. unit_mateEquiv and mateEquiv_counit give the four specified unit/counit equations (cancel the invertible evaluation comparison on the inverse-image side for the final counit clause).",
    "uses": [
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change, counit-transpose definition"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Adjunction Hom bijection and Mathlib mate identities"
    }
   },
   {
-   "text": "For constants the desired precise equality is\n$$E^{\\mathcal T}_{\\Delta K}\\circ g_{\\mathcal T}^*(b^\\Delta_{f,K})=b^\\Delta_{f',h^*K}\\circ\\Delta(E_K).$$\nBy step 7 the transpose of the right side is $\\Delta(c_K)$. The transpose of the left side, by the mate definition, is\n$$h_{\\mathcal T}^*\\varepsilon^{f,\\mathcal T}_{\\Delta K}\\circ\\theta^{\\mathcal T}_{\\mathscr R_f\\Delta K}\\circ f'^*_{\\mathcal T}g^*_{\\mathcal T}(b^\\Delta_{f,K}).$$\nNaturality of $\\theta^{\\mathcal T}$ rewrites this as\n$$h_{\\mathcal T}^*\\bigl(\\varepsilon^{f,\\mathcal T}_{\\Delta K}\\circ f^*_{\\mathcal T}(b^\\Delta_{f,K})\\bigr)\\circ\\theta^{\\mathcal T}_{\\Delta Rf_*K}=\\Delta(c_K),$$\nwhere the equality uses the constant counit equation of step 9 and the termwise comparison of step 10. Injectivity of the adjunction Hom bijection gives the asserted equality of derived tower morphisms.",
+   "text": "For constants form the six-face cube with the four compConstIso comparisons, the given inverse-image square, and its termwise tower square. It commutes at every index because the constant comparisons are identities. For evaluation form the analogous cube with four strict evaluation identities. Apply mapDerivedCategory_exactCube and its exact-localization face definitions; for evaluation the localized identity face is the inverse of towerDerivedEvaluationInterchange. This proves the two exact derived comparison cubes.",
    "uses": [
-    "def-weil-pbc-adjunction-mate"
+    "lem-fix-site-open-exchange-localization"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; naturality and the constant counit equation"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S7 and 014F; exact localization preserves cubes"
    }
   },
   {
-   "text": "For evaluation the precise equality is\n$$b^n_{f',h^*_{\\mathcal T}K}\\circ\\operatorname{ev}_n(E^{\\mathcal T}_K)=E_{K_n}\\circ g^*(b^n_{f,K}).$$\nBy step 8 the left side has transpose $\\operatorname{ev}_n(c^{\\mathcal T}_K)$. The right side has transpose\n$$h^*\\varepsilon^f_{K_n}\\circ\\theta_{Rf_*K_n}\\circ f'^*g^*(b^n_{f,K}).$$\nNaturality of $\\theta$ rewrites it as\n$$h^*\\bigl(\\varepsilon^f_{K_n}\\circ f^*(b^n_{f,K})\\bigr)\\circ\\theta_{\\operatorname{ev}_n\\mathscr R_fK}=\\operatorname{ev}_n(c^{\\mathcal T}_K),$$\nby the evaluated counit equation of step 9 and the termwise comparison of step 10. The ordinary derived adjunction Hom bijection gives the equality. Steps 11 and 12 establish (4) without assuming that evaluation is faithful or that either square mate is invertible.",
+   "text": "Apply exchangeMate_cube to the ordinary and tower canonical derived adjunctions and the constant derived comparison cube. Its symmetry is the first equation in SquareCompatible. Apply the same theorem with tower categories as the upper categories and evaluations as vertical functors; its equation is the second equation in SquareCompatible. All maps are the specified canonical maps and no faithfulness of evaluation or invertibility of a square mate is used.",
    "uses": [
+    "lem-weil-pbc-exchange-mate-cube",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; naturality and the evaluation counit equation"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Sites-cohomology Tag 07A7; exchange-mate cube by adjunction transposition"
    }
   }
  ],
@@ -168,20 +120,18 @@
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-tower-evaluation-kinjective",
-  "lem-weil-pbc-diagram-site-realization",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-exchange-mate-cube"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 08BJ, 070I, 070K, 0DVC and 0FND, with sites-cohomology.tex Tags 07A5-07A7; explicit constant-tower/evaluation application and square-mate computation by Q22"
+  "place": "B8: Tags 08BJ, 070I, 070K, 0DVC, 0FND, 015F; source canonical derived-counit factorization, Mathlib mates, existing exact-localization and exchange-mate cube theorems"
  },
  "mathlib_searches": [
   {
@@ -351,14 +301,9 @@
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-tower-evaluation-kinjective",
-  "lem-weil-pbc-diagram-site-realization",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-sfb-resolving-derived-adjunction-normalization",
   "def-weil-pbc-adjunction-mate"
  ],
  "reviewed": {
@@ -404,5 +349,15 @@
   "group": "Q38",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN on ecb7b129. The item Lean module is byte-identical to the previously reviewed head (sha256 802512b7), which was found correct on clauses (1)-(4). It recompiles clean via nt_compile --json (32.1 s, exit 0, no warnings). H2 repaired: stmt_dep lem-weil-pbc-tower-derived-evaluation-normalization is replaced by new def-sbc-tower-derived-evaluation-interchange. The new node is existing:true on the unchanged live TowerDerivedEvaluationNormalization and owns towerDerivedEvaluationInterchange plus the two towerNormalization_preservesFinite* instances. Its statement is verbatim the live signature (l.83-92); its NL composite c^{-1} then c matches the Lean; H12 fields are OK; it cites only live def nodes; its id is not in live. Mechanical finding on lem-weil-pbc-small-module-diagrams-grothendieck: genuine. towerResolutions builds the Prop instance HasKInjectiveResolutions on towers from the theorem smallModuleDiagrams_isGrothendieckAbelian, so PASS on that point. Not in the dropped list; report sections present. Advisories: constant-tower-pushforward-normalization overlap should reuse constantComparison; live docstrings still name the old blueprint node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261021T110938-L-3832600",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
