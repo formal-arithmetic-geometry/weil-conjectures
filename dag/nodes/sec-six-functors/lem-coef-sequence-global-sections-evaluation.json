@@ -1,0 +1,78 @@
+{
+ "id": "lem-coef-sequence-global-sections-evaluation",
+ "kind": "statement",
+ "title": "Derived termwise global sections with finite evaluation and transition normalization",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative rings. Write $\\mathscr S(B)$ for strict semilinear systems of module sheaves, with componentwise exactness, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$ [lem-pur-system-ringed-sequence-site]. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $A$ be a sheaf of commutative rings with compatible maps $A\\to B_n$. Let $U:D(\\mathscr S(B))\\to D(\\operatorname{Tow}(\\operatorname{Mod}(A)))$ be exact termwise scalar restriction [def-pc-sheaf-restrict-scalars]. The termwise global-sections functor on constant-$A$ towers has a total right derived functor $R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}$, computed by a K-injective resolution in the constant-$A$ tower category [def-pur-kinjective-complex]. Consequently $$G=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}\\circ U:D(\\mathscr S(B))\\longrightarrow D(\\operatorname{Tow}(\\operatorname{Ab}))$$ is an actual functor on the ordinary derived category of strict systems. There are specified natural isomorphisms $$e_nG(J)\\cong R\\Gamma(\\mathcal C,\\operatorname{Res}_{A\\to B_n}J_n)\\cong R\\Gamma(\\mathcal C,J_n),$$ the last expression computed in $B_n$-modules and then regarded as an abelian complex. The first comparison is induced by evaluating the same constant-$A$ tower resolution; the second is the derived direct-image composition comparison for scalar restriction followed by global sections. These isomorphisms intertwine the actual tower transitions with the maps of derived sections induced by $J_{n+1}\\to\\operatorname{Res}_{B_{n+1}\\to B_n}J_n$. They are natural for input derived morphisms. No assertion that varying-ring evaluation preserves K-injectives is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 (lemma-derived-limit-is-ok, constant-coefficient tower evaluation preserving K-injectives) and 0D6E (lemma-derived-pushforward-composition); agent combines these for varying-ring systems after exact scalar restriction, returned calculus step 12, first half."
+ },
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total derived termwise global sections of strict varying ring sheaf towers evaluate to the finite derived global sections after exact scalar restriction",
+   "results": "8 hits including SheafOfModules.Presentation.map_π_eq, CondensedMod.ofSheafProfinite, localCohomology.diagram, SheafOfModules.GeneratingSections.opEpi_comp, instAbelianCondensedMod, CategoryTheory.Sheaf.H, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory and Ext; these are underived sheaf constructions, ordinary cohomology or localization infrastructure.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sections/evaluation and abstract derived universal properties do not construct the unbounded strict coefficient-system sections functor with its finite transition-compatible comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "12 hits in Mathlib.CategoryTheory.Functor.Derived.RightDerived: IsRightDerivedFunctor, its constructors, rightDerivedDesc, rightDerivedUnique, rightDerivedNatTrans and rightDerivedNatIso; these give the universal property, without constructing tower sections or evaluation comparisons.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sections/evaluation and abstract derived universal properties do not construct the unbounded strict coefficient-system sections functor with its finite transition-compatible comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ee]val|[Ee]val.*rightDerived|KInjective.*[Ee]val|[Ee]val.*KInjective",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sections/evaluation and abstract derived universal properties do not construct the unbounded strict coefficient-system sections functor with its finite transition-compatible comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived global sections on strict coefficient systems commute with evaluation at each level via constant coefficient K injective tower resolutions",
+   "results": "8 hits: CategoryTheory.Sheaf.Γ, CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, CategoryTheory.Sheaf.isLimitConeΓ, CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal, CategoryTheory.constantSheafΓAdj, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; ordinary sections and individual injective resolutions do not state the strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sections/evaluation and abstract derived universal properties do not construct the unbounded strict coefficient-system sections functor with its finite transition-compatible comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a K injective tower computes natural derived global sections of coefficient sheaves at each finite ring level",
+   "results": "8 hits: smoothSheafCommRing.ι_evalHom, smoothSheafCommRing.ι_evalHom_apply, smoothSheafCommRing.evalHom, SheafOfModules.evaluation, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.Γ, ModuleCat.tilde and SheafOfModules.sectionsFunctor; all concern ordinary evaluation or sections, not the unbounded derived tower functor.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sections/evaluation and abstract derived universal properties do not construct the unbounded strict coefficient-system sections functor with its finite transition-compatible comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-21",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last mapping-complex comparisons: total derived termwise sections and their finite evaluations, extracted from returned calculus step 12, first half.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

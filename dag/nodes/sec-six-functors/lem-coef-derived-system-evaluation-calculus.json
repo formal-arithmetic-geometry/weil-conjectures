@@ -42,279 +42,94 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=W_{\\mathrm{proet}}$ and $A=\\widehat R_W$. Form the small site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$: a morphism $(V,k)\\to(U,n)$ consists of $V\\to U$ and $k\\le n$, and coverings have fixed integer coordinate and are coverings in $\\mathcal C$. A sheaf on $\\mathcal T$ is precisely a strict inverse sequence of sheaves on $\\mathcal C$: the sheaf condition at $(U,n)$ is exactly the sheaf condition for its nth component; the arrows $(U,k)\\to(U,n)$ supply the transitions. The ring sheaf $B$ on $\\mathcal T$ is $B(U,n)=B_n(U)$, with restriction $B_n(U)\\to B_k(V)$ given by the coefficient quotient and site restriction. Consequently $\\operatorname{Mod}_{\\mathcal T}(B)=\\mathscr S_W$ by the same sectionwise description, with kernels and cokernels componentwise. This is an identification of abelian categories and of their complex categories. By [prop-pur-kinjective-resolutions-exist], it is Grothendieck and has functorial termwise-injective K-injective resolutions; [lem-pc-kflat-resolution] applies to the same small ringed site. Thus simultaneous resolutions are taken in the actual system category, not chosen independently at different levels.",
+   "text": "Apply [lem-coef-sequence-projection-derived-adjunction] and [lem-coef-sequence-pushforward-limit-projections] to $A=\\widehat R_W$ and the quotient tower. They give the functor $\\mathcal R_W$, its one-K-flat representative model, $\\mathcal L_W$, the actual unit/counit projections and triangle identities.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kflat-resolution"
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, section-derived-limits, product-site construction immediately preceding lemma-derived-limit-is-ok; Tags 079P and 06YS for resolutions"
+    "place": "Tags 0941 (section-derived-limits before lemma-derived-limit-is-ok), 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); application to the ringed sequence projection."
    }
   },
   {
-   "text": "The projection $p:\\operatorname{Sh}(\\mathcal T)\\to\\operatorname{Sh}(\\mathcal C)$ has exact inverse image the constant sequence and right adjoint ordinary inverse limit. The maps $A\\to B_n$ give the ring map $p^{-1}A\\to B$. By [lem-weil-pbc-ringed-topoi-module-adjunction], its module pullback is $p^*P=(P\\otimes_A B_n)_n$, with strict quotient transitions, and its module direct image is $p_*N=\\lim_n\\operatorname{Res}_n N_n$. The underlying topos adjunction is checked by sending a map of constant sequences to its compatible components, equivalently a map into the limit; the constant sequence functor preserves finite limits componentwise. The pullback theorem [lem-weil-pbc-ringed-topoi-derived-pullback] gives $Lp^*$ on all unbounded derived objects and computes it on one flat-term K-flat representative $Q\\to P$ by the actual strict complex $(Q\\otimes_A B_n)_n$. On the other side [lem-weil-pbc-kinjective-total-derived] and the resolutions of step 1 give $Rp_*$. The ordinary additive adjunction therefore derives by [lem-pc-pre-derived-adjoint-functors-general]: its canonical fraction formula defines natural inverse Hom bijections $\\operatorname{Hom}(Lp^*P,N)=\\operatorname{Hom}(P,Rp_*N)$. This proves functoriality as well as the derived adjunction, without requiring functorial choices of K-flat representatives.",
+   "text": "Evaluations jointly detect isomorphisms by [lem-pur-system-level-left-extension]. Evaluation is ringed inverse image by [lem-pur-system-evaluation-topos], so tensor evaluates componentwise. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], reductions satisfy $$(Q\\otimes_A B_m)\\otimes_{B_m}B_n\\cong Q\\otimes_A B_n,$$ via $(x\\otimes b)\\otimes c\\mapsto x\\otimes bc$, inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. The theorem preserves flat-term K-flatness, so these compute derived reductions and their cocycle: $\\mathcal R_WP$ is normalized.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); underlying projection as in section-derived-limits"
-   }
-  },
-  {
-   "text": "Factor $p$ as $q\\circ a$, where $a:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal T),p^{-1}A)$ is the identity topos with structural map $p^{-1}A\\to B$, and $q$ is the constant-coefficient sequence projection. Its module direct image $a_*=U_W$ only changes the scalar action. It preserves kernels and cokernels because the underlying abelian sheaves and maps are unchanged, so it is exact; [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-exact-functor-derived-functor] identify $Ra_*$ with termwise $U_W$. The canonical comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $Rp_*$ with $Rq_*Ra_*$. On constant $A$-systems $q_*=\\lim$; hence the K-injective total right derived model of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] identifies $Rq_*$ with its specified $R\\lim$. This identifies $Rp_*$ with $\\mathcal L_W=R\\lim\\,U_W$, including the total-limit projections, by the resolution normalization of the composition comparison. We henceforth take $\\mathcal R_W=Lp^*$ and transport the adjunction along this specified comparison. In particular, no preservation of K-injectives by restriction of scalars, or flatness of $A\\to B_n$, is assumed.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6E (lemma-derived-pushforward-composition) and 0941 (lemma-derived-limit-is-ok); identity-topos restriction of scalars"
-   }
-  },
-  {
-   "text": "Normalize the adjunction maps by the Hom bijection of step 2. At the module/complex level its correspondence sends $h:P\\to p_*N$ to the system map with nth component $x\\otimes b\\mapsto b\\,\\pi_nh(x)$; the inverse sends a compatible family $g_n$ to $x\\mapsto(g_n(x\\otimes1))_n$. Balancing and the quotient identities make these inverse maps. The fraction characterization in [lem-pc-pre-derived-adjoint-functors-general] transports these same formulas through K-flat and K-injective resolutions. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] then shows that $\\pi_nu_P$ is the actual reduction map and $e_{N,n}$ is the scalar-extension adjunct of the actual total-limit projection $\\pi_n:\\mathcal L_WN\\to\\operatorname{Res}_nN_n$. This is the finite adjunction with its specified unit in [lem-weil-derived-scalar-extension-restriction-adjunction]. Naturality of the inverse Hom bijections gives $\\Phi(h)=e_N\\mathcal R_Wh$ and $\\Phi^{-1}(g)=\\mathcal L_Wg\\,u_P$; evaluating the two inverse laws on identities proves $e_{\\mathcal R_WP}\\mathcal R_Wu_P=1$ and $\\mathcal L_We_N\\,u_{\\mathcal L_WN}=1$ as system/ambient maps.",
-   "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-derived-scalar-extension-restriction-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), normalized derived unit/counit; Tag 0D6E resolution comparison"
-   }
-  },
-  {
-   "text": "Evaluation $\\operatorname{ev}_n:\\mathscr S_W\\to\\operatorname{Mod}(B_n)$ is exact, since kernels and cokernels are componentwise, so [lem-weil-pbc-exact-functor-derived-factorization] supplies exact derived evaluations. They jointly detect isomorphisms: if all evaluations of $v$ are isomorphisms, an exact evaluation of a cone $C$ of $v$ is acyclic at every level. Its cohomology system is therefore zero componentwise, so $C$ is acyclic and represents zero in the derived-category localization. The cone criterion [lem-kun-distinguished-cone-zero] gives that $v$ is an isomorphism. Each evaluation is also pullback for the ringed-topos inclusion $i_n:(\\operatorname{Sh}(\\mathcal C),B_n)\\to(\\operatorname{Sh}(\\mathcal T),B)$; its underlying inverse image is evaluation and $i_n^{-1}B=B_n$. Thus [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] makes derived tensor in $D(\\mathscr S_W)$ componentwise. It also makes $\\mathcal R_W$ strong monoidal. For $m\\ge n$, [lem-weil-pbc-ringed-pullback-preserves-kflat] makes $Q\\otimes_A B_m$ K-flat with flat terms. Applying [lem-pur-derived-change-of-rings], its further reduction is $(Q\\otimes_A B_m)\\otimes_{B_m}B_n=Q\\otimes_A B_n$ via $(x\\otimes b)\\otimes c\\mapsto x\\otimes bc$, with inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. These actual chain isomorphisms compose under further quotients. Therefore $\\mathcal R_WP$ is normalized for arbitrary $P$.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-kun-distinguished-cone-zero",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-evaluation-topos",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-system-ringed-sequence-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat) and 06YY; elementary componentwise cone detection"
+    "place": "Tags 07A4 and 0941; evaluation and iterated tensor on a common K-flat representative."
    }
   },
   {
-   "text": "For any small ringed site $(\\mathcal V,D)$, write $H_D(L,M)=R\\mathcal Hom_D(L,M)$. It is a functor by [def-pur-derived-internal-hom, lem-pur-rhom-well-defined]. The currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by [lem-pur-rhom-global-sections], gives natural bijections $\\operatorname{Hom}(T,H_D(L,M))=H^0R\\Gamma H_D(T,H_D(L,M))=H^0R\\Gamma H_D(T\\otimes_D^LL,M)=\\operatorname{Hom}(T\\otimes_D^LL,M)$. Hence define evaluation to be the transpose of $1_{H_D(L,M)}$. Define composition as the transpose of two successive evaluations. The two evaluation orders for three factors both send a homogeneous local triple $(f,g,x)$ to $f(g(x))$, with the same tensor associator; the Hom differential $d(f)=df-(-1)^{|f|}fd$ verifies that this is a chain map. Tensor-Hom transposition and its inverse are the currying maps. Their inverse identities and the associativity/unit identities follow from these formulas and naturality, so they are identities of derived maps on this one ringed site. In particular they apply to the ringed sequence site $(\\mathcal T,B)$, with simultaneous K-flat/K-injective models, not merely to its separate evaluations.",
+   "text": "Use the closed structure [lem-sf-ringed-derived-closed-symmetric-monoidal] on the sequence site and define $\\mathcal I_W(M,N)=H_B(M,N)$. The fiber identifications and actual scalar-extension transitions, carrying system evaluation to level evaluation, are [lem-coef-semilinear-derived-sections]. Apply [lem-coef-ringed-pullback-hom-evaluation-comparison] to $p$ to obtain $\\beta$, its finite formula and evaluation/transpose/composition identities as system maps.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "def-pur-hom-complex"
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-ringed-pullback-hom-evaluation-comparison",
+    "lem-pur-system-ringed-sequence-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A95, 08J9 (lemma-internal-hom), 0A98 (lemma-internal-hom-composition); agent spells out evaluation and transpose identities"
+    "place": "Tags 08J9 (lemma-internal-hom), 07A4 (lemma-pullback-tensor-product) and 0941 (sequence site); agent finite-prefix Yoneda computation and transition calculation, original calculus steps 9-10."
    }
   },
   {
-   "text": "Here is the additional finite-prefix computation needed to identify that internal Hom fiberwise. Fix $n$. For a $B_n$-module sheaf $T$, define $F_nT$ to have level $k\\le n$ equal to $T\\otimes_{B_n}B_k$, level $k>n$ zero, and the evident quotient transitions. For $h:T\\to M_n$ the corresponding map $F_nT\\to M$ at $k\\le n$ is $x\\otimes b\\mapsto b\\,\\tau_{n,k}h(x)$; at $k>n$ it is zero. Its inverse is the nth component under $T\\otimes_{B_n}B_n=T$. These formulas prove $F_n\\dashv\\operatorname{ev}_n$, natural in both arguments, including all transition equations. On a flat-term K-flat complex $Q$ of $B_n$-modules, the same formula computes $LF_n$: quasi-isomorphisms between such $Q$ remain quasi-isomorphisms after tensoring with each $B_k$ by [lem-pur-derived-change-of-rings], hence in the system category by componentwise exactness. Resolutions exist by [lem-pc-kflat-resolution]; [lem-pur-left-derived-from-kflat-class] therefore gives the everywhere-defined derived functor. Since evaluation is exact, [lem-weil-pbc-exact-functor-derived-functor] gives $R\\operatorname{ev}_n=\\operatorname{ev}_n$. Apply [lem-pc-pre-derived-adjoint-functors-general] to obtain $LF_n\\dashv\\operatorname{ev}_n$, with $\\operatorname{ev}_nLF_nT=T$. No flatness of the finite quotient maps is used.",
+   "text": "Define $\\mathcal H_W=G\\mathcal I_W$ using [lem-coef-sequence-global-sections-evaluation]. Its evaluations are the finite global mapping complexes. Use [lem-coef-sequence-sections-limit-comparison] for the two-order total-sections comparison. Apply [lem-coef-closed-adjunction-enriched-isomorphism] to $F=\\mathcal R_W$, $G=\\mathcal L_W$ and their tensor comparison. Its $b=H_B(1,e_N)\\beta$ gives $\\delta:H_A(P,\\mathcal L_WN)\\cong\\mathcal L_WH_B(\\mathcal R_WP,N)$. Taking derived sections and the preceding comparison defines $\\gamma$. The actual projection and degree-zero formula are [lem-coef-enriched-sequence-projection-formula].",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent finite-prefix induction calculation on the sequence site of Tag 0941; derived-functor arguments of Tags 06YY and 07A6"
-   }
-  },
-  {
-   "text": "Let $M$ be normalized and $T\\in D(B_n)$. Using $LF_n\\dashv\\operatorname{ev}_n$, define the system map $s:LF_n(T\\otimes^L_{B_n}M_n)\\to LF_nT\\otimes_B^LM$ as the adjunct of the identity $T\\otimes^LM_n=\\operatorname{ev}_n(LF_nT\\otimes_B^LM)$, where tensor commutes with evaluation by step 5. For $k\\le n$, its evaluation is, under the tensor pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the map $(T\\otimes^LM_n)\\otimes^L_{B_n}B_k\\cong(T\\otimes^L_{B_n}B_k)\\otimes^L_{B_k}(M_n\\otimes^L_{B_n}B_k)\\xrightarrow{1\\otimes\\alpha_{n,k}}(T\\otimes^L_{B_n}B_k)\\otimes^L_{B_k}M_k$. Indeed the induction formula of step 7 sends a tensor $t\\otimes x\\otimes b$ to $t\\otimes b\\tau_{n,k}(x)$, which is this map; the canonical derived adjunction preserves that formula. At $k>n$ both sides are zero. Each $\\alpha_{n,k}$ is an isomorphism by [def-coef-normalized-dvr-tower]; thus step 5 proves that the actual system map $s$ is an isomorphism. This proves the finite-prefix projection formula as an isomorphism of derived systems.",
-   "uses": [
+    "lem-coef-sequence-sections-limit-comparison",
+    "lem-coef-closed-adjunction-enriched-isomorphism",
+    "lem-coef-enriched-sequence-projection-formula",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-coef-normalized-dvr-tower",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-coef-sequence-global-sections-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent projection formula for induction, using Tag 07A4 and the quotient normalization cocycle"
+    "place": "Tags 07A6 (lemma-adjoint) and 0D6E (lemma-derived-pushforward-composition); agent uncurrying of the enriched finite projection, original calculus step 14. No integral Hom/tensor base-change isomorphism is used."
    }
   },
   {
-   "text": "Define $\\mathcal I_W(M,N)=H_B(M,N)$ in $D(\\mathscr S_W)$, using step 6. For normalized $M$ (and in particular for both inputs normalized), steps 7-8 give, naturally in $T\\in D(B_n)$, $\\operatorname{Hom}(T,\\operatorname{ev}_nH_B(M,N))\\cong\\operatorname{Hom}(LF_nT,H_B(M,N))\\cong\\operatorname{Hom}(LF_nT\\otimes_B^LM,N)\\cong\\operatorname{Hom}(LF_n(T\\otimes^LM_n),N)\\cong\\operatorname{Hom}(T\\otimes^LM_n,N_n)\\cong\\operatorname{Hom}(T,H_{B_n}(M_n,N_n))$. Apply [lem-galois-yoneda-hom-bijection] to this natural isomorphism and its inverse: evaluation at the respective identities gives inverse morphisms, whose two composites are identities by naturality. This gives the specified natural identification $\\operatorname{ev}_n\\mathcal I_W(M,N)\\cong R\\mathcal Hom_{B_n}(M_n,N_n)$. Following an element through the displayed bijections shows that this identification transposes the evaluated system evaluation map. Therefore it identifies the system evaluation and transposition with finite tensor-Hom evaluation and transposition, not just the underlying objects.",
+   "text": "Naturality is [lem-coef-closed-adjunction-naturality]. For composition apply [lem-coef-monoidal-adjunction-parameter-composition] with $K=H_B(N,N\\prime)$, $T=H_A(P,\\mathcal L_WN)$, $S=\\mathcal L_WK$, $f=\\mathrm{ev}_{P,\\mathcal L_WN}$ and $g=\\mathrm{ev}_{N,N\\prime}(e_K\\otimes1)$. Its right side is successive system evaluation, its left side evaluation after $\\mathcal L_W$. Closed transposition and derived sections give the composition identity for $\\gamma$. The unit/counit specializations use $e_{\\mathcal R_WP}\\mathcal R_Wu_P=1$ and $\\mathcal L_We_Nu_{\\mathcal L_WN}=1$ from step 1. This proves all required compatibilities.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent fiberwise identification by the proved finite-prefix projection formula and Tag 08J9; Yoneda Tag 001P"
-   }
-  },
-  {
-   "text": "Specify the transitions and their coherence. For $m\\ge n$, let $c_{m,n}:H_{B_m}(M_m,N_m)\\otimes^L_{B_m}B_n\\to H_{B_n}(M_m\\otimes^L_{B_m}B_n,N_m\\otimes^L_{B_m}B_n)$ be the transpose of coefficient reduction of finite evaluation, using the monoidal comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Under step 9 the transition-adjoint map of the already constructed system $H_B(M,N)$ is $H_{B_n}(\\alpha_{m,n}^{M,-1},\\alpha_{m,n}^N)\\,c_{m,n}$. To check the identity, transpose it: both sides evaluate an element of the Hom factor on the transitioned first input and then use the transition of $N$. This is the transition equation for the actual evaluation map $H_B(M,N)\\otimes^LM\\to N$, and the invertibility of $\\alpha^M$ permits its cancellation. Thus transposition is injective and the two maps agree. For $r\\ge m\\ge n$, both iterated and direct transitions transpose to that same iterated evaluation followed by $\\tau_{r,n}^N=\\tau_{m,n}^N\\tau_{r,m}^N$; the normalized quotient cocycle identifies the first inputs. This proves the specified scalar-extension transitions and their cocycle. Every map used here is the evaluation or transition of an existing derived system, so no faithfulness of levelwise evaluation on morphisms is asserted.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-coef-normalized-dvr-tower",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent transpose computation using Tag 07A4 and the normalized quotient cocycle; internal adjunction Tag 08J9"
-   }
-  },
-  {
-   "text": "For arbitrary ambient $P,Q$, define $\\beta_{P,Q}$ to be the transpose in $D(\\mathscr S_W)$ of $\\mathcal R_WH_A(P,Q)\\otimes_B^L\\mathcal R_WP\\xrightarrow{\\sim}\\mathcal R_W(H_A(P,Q)\\otimes_A^LP)\\xrightarrow{\\mathcal R_W(\\mathrm{ev})}\\mathcal R_WQ$. The tensor comparison exists by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and both reduced inputs are normalized by step 5, so step 9 identifies its target with the required $\\mathcal I_W(\\mathcal R_WP,\\mathcal R_WQ)$. Evaluation of this definition at $n$ is exactly the ordinary evaluation-defined reduction comparison. Naturality follows by transposing the naturality square for evaluation. Its evaluation square commutes by definition. For composition, transpose the two system maps from $\\mathcal R_WH_A(Q,T)\\otimes^L\\mathcal R_WH_A(P,Q)$ to $H_B(\\mathcal R_WP,\\mathcal R_WT)$: both composites evaluate first on $P$, then on $Q$, and apply $\\mathcal R_W$ to $f(g(x))$. The associative tensor identifications are induced by the same balanced-tensor reassociation, so the composites agree. Transposition is preserved because its defining evaluation square is preserved, and the inverse currying identities of step 6 give the inverse assertion. These verifications occur in the system tensor-Hom adjunction itself. They do not infer equality of system maps from equality of their evaluations, and do not claim $\\beta$ invertible.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JF (remark-prepare-fancy-base-change), canonical evaluation-induced Hom comparison; agent checks system composition and transposition by uncurrying"
-   }
-  },
-  {
-   "text": "For any system complex $J$, put $G(J)=R\\Gamma_{\\mathcal C}^{\\mathrm{Tow}}(U_WJ)$, the total right derived termwise global-sections functor from constant-$A$ systems to systems of abelian groups. Construct it using K-injective resolutions on the constant-$A$ sequence site, as in [lem-weil-pbc-kinjective-total-derived]. By [lem-weil-tower-evaluation-kinjective], evaluating such a resolution at $n$ is K-injective in $\\operatorname{Mod}(A)$, so $G(J)_n=R\\Gamma(\\mathcal C,\\operatorname{Res}_nJ_n)$. Ring-restriction direct image is exact. The composition theorem [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to restriction followed by global sections, gives its canonical identification with $R\\Gamma(\\mathcal C,J_n)$ computed in $B_n$-modules. For $J=\\mathcal I_W(M,N)$, step 9 therefore identifies $G(J)_n$ with the stated finite global mapping complex. Define $\\mathcal H_W(M,N)=G(\\mathcal I_W(M,N))$ as an actual object/functor in $D(\\operatorname{Tow}(\\operatorname{Ab}))$. Finally global sections on $\\mathcal T$ can be taken in either order: first limit of the sheaf sequence and then global sections, or first termwise global sections and then limit of abelian groups. Both are the same direct image to the point. The composition theorem, with the exact restriction identification of step 3, supplies the canonical natural comparison $R\\Gamma(\\mathcal C,Rp_*J)\\cong R\\lim\\,G(J)$. Its finite projections come from the actual projection of the same total direct image, since the composition comparison has its specified resolution normalization.",
-   "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, composition with the sequence projections and the point; Tag 0941, the constant-coefficient total-limit model"
-   }
-  },
-  {
-   "text": "Construct the enriched comparison before taking global sections. Set $F=H_A(P,Rp_*N)$ and $J=H_B(\\mathcal R_WP,N)$. Transpose $\\mathcal R_WF\\otimes_B^L\\mathcal R_WP\\cong\\mathcal R_W(F\\otimes_A^LP)\\xrightarrow{\\mathcal R_W(\\mathrm{ev})}\\mathcal R_WRp_*N\\xrightarrow{e_N}N$ to a system map $b:\\mathcal R_WF\\to J$; equivalently $b=H_B(1,e_N)\\beta_{P,Rp_*N}$. Its reduction/limit adjunct is $\\delta:F\\to Rp_*J$. It is invertible: for every $T\\in D(A)$ the closed adjunction of step 6, the derived adjunction of step 2 and the monoidal comparison give natural bijections $\\operatorname{Hom}(T,F)\\cong\\operatorname{Hom}(T\\otimes_A^LP,Rp_*N)\\cong\\operatorname{Hom}(\\mathcal R_W(T\\otimes_A^LP),N)\\cong\\operatorname{Hom}(\\mathcal R_WT\\otimes_B^L\\mathcal R_WP,N)\\cong\\operatorname{Hom}(\\mathcal R_WT,J)\\cong\\operatorname{Hom}(T,Rp_*J)$. This composite sends $h$ to $\\delta h$, by the definitions of $b$ and the counit. Applying [lem-galois-yoneda-hom-bijection] to it and its inverse gives inverse maps as in step 9, proving $\\delta$ is an isomorphism. For normalized $N$, use $J=\\mathcal I_W(\\mathcal R_WP,N)$. Apply $R\\Gamma(\\mathcal C,-)$ to $\\delta$ and compose with step 12 to define the required $\\gamma_{P,N}:R\\operatorname{Hom}_{W,A}(P,\\mathcal L_WN)\\xrightarrow{\\sim}R\\lim\\,\\mathcal H_W(\\mathcal R_WP,N)$. This construction works for arbitrary $P$; it does not tensor an integral mapping complex with $B_n$.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent enriched adjunction derived from Tags 08J9, 07A6 and 07A4; global total-limit identification from step 12"
-   }
-  },
-  {
-   "text": "Check the actual projections of this specified $\\gamma$. Under the total-direct-image comparison of step 12, the nth projection of $\\delta$ is induced by the nth component $b_n:F\\otimes_A^LB_n\\to H_{B_n}(P_n,N_n)$ of its adjunct $b$. Its tensor-Hom transpose is a $B_n$-linear map $(F\\otimes_A^LB_n)\\otimes_{B_n}^LP_n\\to N_n$. The monoidal comparison of step 5 identifies its source with $(F\\otimes_A^LP)\\otimes_A^LB_n$. The definition of $b$ in step 13 and the evaluation square for $\\beta$ in step 11 identify this map with coefficient reduction of evaluation followed by $e_{N,n}:(\\mathcal L_WN)\\otimes_A^LB_n\\to N_n$. By step 4 this last map is the scalar-extension adjunct of $\\pi_n$. Consequently the scalar-extension adjunct of the transposed $b_n$, now an $A$-linear map, is exactly $F\\otimes_A^LP\\xrightarrow{\\mathrm{ev}}\\mathcal L_WN\\xrightarrow{\\pi_n}\\operatorname{Res}_nN_n$. Thus the enriched projection is the internal scalar-extension adjunction with first input extended and second restricted, obtained by the displayed natural Hom-bijection calculation of step 13 applied to the identity-topos ring map $A\\to B_n$. Taking global sections gives the mapping-complex projection in the statement. On degree-zero Hom the normalized finite adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction] therefore sends $h$ to $e_{N,n}\\circ(h\\otimes_A^LB_n)$. These are equations of evaluation and adjunction transformations on the simultaneous system resolutions. The comparison normalization in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies them with the projections of the selected total-limit model.",
-   "uses": [
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 with actual unit/counit normalization; Tag 0D6E; agent uncurrying of the gamma projection"
-   }
-  },
-  {
-   "text": "Apply [lem-coef-closed-adjunction-naturality] with $\\mathcal C=D(A)$, $\\mathcal D=D(\\mathscr S_W)$, $F=\\mathcal R_W$ and $G=\\mathcal L_W$. Its hypotheses hold: the tensor bifunctors are the derived tensors $\\otimes_A^L$ and $\\otimes_B^L$; steps 2-4 give the adjunction with the normalized Hom bijection; step 5 gives the natural isomorphism $\\mu$, the inverse of the tensor-pullback comparison; step 6 gives $H_A$, $H_B$ with tensor-Hom bijections natural in all three variables. No associativity or unit coherence of $\\mu$ is needed. Its $b$ and $\\delta$ are exactly those defined in step 13. Hence, for $a:P'\\to P$ and $v:N\\to N'$, $b_{P',N'}\\mathcal R_WH_A(a,\\mathcal L_Wv)=H_B(\\mathcal R_Wa,v)b_{P,N}$ and $\\delta_{P',N'}H_A(a,\\mathcal L_Wv)=\\mathcal L_WH_B(\\mathcal R_Wa,v)\\delta_{P,N}$. Apply derived global sections and the natural total-direct-image comparison of step 12: this proves naturality of the specified $\\gamma$ for derived input morphisms, including the actual projections already checked in step 14.",
-   "uses": [
-    "lem-coef-closed-adjunction-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
-   }
-  },
-  {
-   "text": "Write $R=\\mathcal R_W$, $L=\\mathcal L_W$. Apply [lem-coef-monoidal-adjunction-parameter-composition] to the adjunction of steps 2-4 and the natural tensor-comparison isomorphism $\\mu$ of step 5 (only its naturality and invertibility are used). Put $K=H_B(N,N')$, $T=H_A(P,LN)$, $S=LK$, $f=\\mathrm{ev}_{P,LN}$ and $g=\\mathrm{ev}_{N,N'}(e_K\\otimes1_N)$. Step 13 defines $b_{P,N}$ as the transpose of $f^\\sharp=e_N Rf$, with the tensor comparison understood. The cited equation identifies the adjunct of $Lg\\,\\lambda_{LK,N}(1_{LK}\\otimes f)$ with $g(1_{RLK}\\otimes f^\\sharp)$. The latter is successive system evaluation, with the counit on its mapping-object parameter; the former is the corresponding evaluation after passing to $L$. These are precisely the two composition actions on the mapping objects in step 13. Taking their closed transposes and then derived global sections, with step 12's natural limit comparison, gives the mapping-complex composition compatibility. No invertibility of the projection map $\\lambda$ is needed.",
-   "uses": [
+    "lem-coef-closed-adjunction-naturality",
     "lem-coef-monoidal-adjunction-parameter-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
-   }
-  },
-  {
-   "text": "The remaining unit/counit equations use the inverse adjunction bijections already established in step 4: $(u_P)^\\sharp=e_{RP}Ru_P=1_{RP}$, and the adjunct of $e_N$ is $Le_Nu_{LN}=1_{LN}$. Inserting these identities into the composition equation of step 16 gives its identity specializations. The closed transposition maps of step 6 are inverse bijections, so taking their inverse recovers the same evaluation equations. This verifies compatibility with unit, counit and transposition as actual system maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general); agent-formulated closed monoidal consequence, preserving the original step-15 route."
-   }
-  },
-  {
-   "text": "For completeness the signs require only the definitions [def-pur-hom-complex, def-pc-tensor-complex-sheaves]. For homogeneous $f:L\\to M$ of degree $r$ and $g:K\\to L$ of degree $s$,\n$$d(f)g+(-1)^rf\\,d(g)=(d_Mf-(-1)^rf d_L)g+(-1)^rf(d_Lg-(-1)^sgd_K)=d_Mfg-(-1)^{r+s}fgd_K=d(fg).$$\nLikewise $d_M(f(x))=d(f)(x)+(-1)^rf(d_Lx)$, the total-tensor chain identity for evaluation. These local formulas commute with restriction and hence hold for sheaf maps and their total tensor summands. Thus the evaluation and composition representatives used above are chain maps with the stated signs. Together with step 5 and the preceding steps, this completes all clauses without claiming reconstruction or invertibility of the unit or arbitrary-input $\\beta$.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X (section-hom-complexes), 0A91 (lemma-composition): explicit elementary differential calculation."
+    "place": "Agent assembly of the previously reviewed categorical coherence steps 15-17."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-kun-distinguished-cone-zero",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-pur-derived-change-of-rings",
-  "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "def-pur-hom-complex",
-  "lem-pur-left-derived-from-kflat-class",
-  "def-coef-normalized-dvr-tower",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-tower-evaluation-kinjective",
+  "lem-coef-closed-adjunction-enriched-isomorphism",
   "lem-coef-closed-adjunction-naturality",
+  "lem-coef-enriched-sequence-projection-formula",
   "lem-coef-monoidal-adjunction-parameter-composition",
-  "def-pc-tensor-complex-sheaves"
+  "lem-coef-ringed-pullback-hom-evaluation-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Product sequence site of section-derived-limits (preceding Tag 0941); general derived adjunction Tags 06YY and 07A6, direct-image composition 0D6E, derived tensor 07A4 and internal Hom 08J9. Agent supplies finite-prefix induction/projection formula and coherence checks."
+  "place": "Human-requested finer split, 2026-10-21. Same sequence-site, finite-prefix and enriched-adjunction route as the reviewed proof; seven extracted generic lemmas and existing sequence/closed-structure results assemble the unchanged statement."
  },
  "mathlib_searches": [
   {
@@ -482,95 +297,27 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-coef-derived-system-evaluation-calculus",
-  "worker": "stage1",
-  "summary": "Retained the statement and proved it on the explicit small ringed sequence site. Derived reduction/limit adjunction comes from general ringed-topos pullback, direct-image composition and normalized adjunction maps. The fiberwise Hom assertion is proved using derived induction from one level and its finite-prefix projection formula, both calculated inside the item. Constructed beta and gamma by tensor-Hom transposition as actual system maps and checked total-limit projections, units/counits and composition. No new nodes: previously drafted clause-only helpers were removed. Dedicated Q105 repair of the 2026-10-17 return: preserve statement, Lean record and proof steps 1-14 verbatim; extract the two non-elementary categorical arguments of former step 15 as general statement-only nodes, cite them in short steps 15-16, and write the unit and differential identities as elementary steps 17-18. All proof steps are now below 2000 characters.",
-  "blueprint": "Parent prop-coef-integral-exceptional-adjoint, proof paragraph 1 reconstruction unit and proof paragraph 2 first/last mapping-complex comparisons. Steps 1-5 supply the derived reduction/total-limit unit, counit and projections; steps 6-11 construct coherent evaluation and beta; steps 12-15 supply the enriched mapping-complex gamma and its actual projections. Steps 15-18 replace only the former final coherence step, along the same parent proof paragraph 2.",
+  "worker": "NZ",
+  "summary": "Repair of the human re-split: unchanged statement; seven statement-only independent helper arguments and a short assembly proof. The seventh separates strict-system derived sections/evaluation from the two-order sections/limit comparison; all retained arguments, searches and duplicate reviews are preserved in report.md.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: first and last mapping-complex comparisons with their specified maps; paragraph 1: actual reduction unit.",
   "tool_uses": [
    {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Step 1 takes functorial K-injective resolutions for modules on any small ringed site, here the sequence site; the biduality unit supplies no resolution theorem."
+    "node": "lem-pur-system-evaluation-topos",
+    "why": "Generic sequence-site/evaluation or ringed-topos tensor infrastructure used on the small sequence site; the integral exceptional-adjoint route is unchanged."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Steps 1 and 7 take flat-term K-flat resolutions on the sequence site and at one coefficient level; these general unbounded resolutions are not a geometric biduality step."
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Generic sequence-site/evaluation or ringed-topos tensor infrastructure used on the small sequence site; the integral exceptional-adjoint route is unchanged."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Step 2 takes the ordinary module pullback/direct-image adjunction for the sequence projection, which the biduality unit does not construct."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Step 2 takes the unbounded derived pullback computed on K-flat representatives for a general small ringed-topos morphism; no biduality-unit node supplies this infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Steps 2 and 12 use total right derived functors computed by K-injectives, for direct image and termwise global sections; this is generic resolution infrastructure absent from the unit."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Steps 2, 4, 7, 8, 14 and 15 take the canonical derived adjunction with its fraction normalization, needed to identify actual projections; the unit does not prove this categorical theorem."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Steps 3 and 5 descend exact scalar restriction and evaluation to triangulated derived functors; the geometric biduality unit has no such generic factorization theorem."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "Steps 3, 7 and 12 identify the derived functor of an exact restriction/evaluation with the termwise functor; no unit-specific result replaces this exact-functor fact."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Steps 3, 4, 12 and 14 use the canonical direct-image composition comparison, including its normalization on resolutions, to retain actual limit projections; no unit node gives this generic comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Steps 3 and 12 use the specified total derived limit on constant-coefficient strict towers only, after exact scalar restriction; the unit does not construct this unbounded limit model."
-   },
-   {
-    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "why": "Steps 4 and 14 take the finite A-to-B_n derived Hom adjunction and specified reduction unit to identify degree-zero projections; the biduality unit has no replacement for coefficient adjunction."
-   },
-   {
-    "node": "lem-kun-distinguished-cone-zero",
-    "why": "Step 5 uses the general triangulated criterion that a morphism with zero cone is invertible, after a componentwise acyclicity calculation; this categorical criterion is not a biduality lemma."
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic sequence-site/evaluation or ringed-topos tensor infrastructure used on the small sequence site; the integral exceptional-adjoint route is unchanged."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Steps 5, 8 and 10-13 take the strong derived monoidal comparison for pullback, applied to sequence projection, evaluation and ring quotient; the unit does not supply tensor-resolution infrastructure."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Step 5 uses preservation of flat-term K-flat representatives under ringed pullback without a flatness assumption on the quotient; no geometric step of the unit gives this fact."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Steps 5 and 7 take quotient extension computed on K-flat complexes and invariance under quasi-isomorphisms; these general unbounded coefficient facts are absent from the unit."
-   },
-   {
-    "node": "lem-pur-rhom-well-defined",
-    "why": "Step 6 takes well-defined functorial derived internal Hom on a small ringed site, applied also to the sequence site; the unit does not construct this bifunctor."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Steps 6 and 9-15 use the general derived currying isomorphism to obtain tensor-Hom transposition; the coefficient-system projection formula itself is proved here, not taken from this node or substituted for the unit route."
-   },
-   {
-    "node": "lem-pur-rhom-global-sections",
-    "why": "Steps 6, 9, 11 and 13 use only H^0 RΓ RHom = categorical Hom to turn currying into the closed adjunction; the enriched limit comparison is proved here, and no unit node supplies this generic identification."
-   },
-   {
-    "node": "lem-pur-left-derived-from-kflat-class",
-    "why": "Step 7 uses the resolving-class criterion to derive the explicitly constructed finite-prefix induction functor; no unit node constructs this auxiliary functor."
-   },
-   {
-    "node": "lem-galois-yoneda-hom-bijection",
-    "why": "Steps 9 and 13 use the actual general Yoneda Hom bijection and naturality to construct inverse morphisms from natural Hom bijections, rather than relying on mere full faithfulness; the unit has no replacement for Yoneda."
-   },
-   {
-    "node": "lem-weil-tower-evaluation-kinjective",
-    "why": "Step 12 takes preservation of K-injectives by evaluation on constant-A towers, not on varying-coefficient systems; no unit node provides that resolution property."
+    "why": "Generic sequence-site/evaluation or ringed-topos tensor infrastructure used on the small sequence site; the integral exceptional-adjoint route is unchanged."
    }
   ]
  },
@@ -595,15 +342,18 @@
   "lem-pur-rhom-global-sections",
   "lem-pur-left-derived-from-kflat-class",
   "lem-galois-yoneda-hom-bijection",
-  "lem-weil-tower-evaluation-kinjective"
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-ringed-sequence-site"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q105-4c8ee7a26",
-  "group": "Q105",
+  "reviewer": "NT-cc-NZ-6813aa34c",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-4c8ee7a26 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics, both new nodes, every cited statement, Stacks 0FND (derived.tex:9517) and the main-20261015 proof of prop-coef-integral-exceptional-adjoint (paragraph 2). Steps 1-14 match their cited statements; this delivery did not change them, and the 21 declared tool uses are generic infrastructure, which I accept. I checked both new lemmas by hand. lem-coef-closed-adjunction-naturality holds: uncurrying both sides gives v e_N F(ev) mu (1 tensor Fa), and the delta equation follows from naturality of the unit. lem-coef-monoidal-adjunction-parameter-composition holds: naturality of mu cancels the tensorators and leaves g(1 tensor f#). I tested both with identity functors and unit parameters. Neither is a duplicate; I read the closest candidates in full (lem-pod-closed-uncurry-laws, lem-sfb-adjunction-oplax-mate, lem-coef-cartesian-section-adjoint-mates, def-coef-ringed-tensor-hom-model). Neither restates a clause of the item. Steps 15-16 apply them correctly, and I verified the signs in steps 17-18. Repairs (E1): both new nodes required monoidal categories and a strong monoidal F with pentagon and unit coherence, but the cited nodes give only the derived tensor bifunctors and a natural isomorphism mu (lem-weil-pbc-ringed-topoi-derived-tensor-pullback). Neither proof uses coherence, so I restated both nodes for categories with tensor bifunctors and a natural isomorphism mu; this is a strict generalization, and stmt_deps are now def-nagata-category and lem-weil-pbc-adjunction-of-natural-bijection. In node 1 I replaced 'evaluation natural also in X', which is ill-typed, with a tensor-Hom bijection natural in T, X and Y, and ev defined as its inverse at the identity. In the item, steps 15-16 now say which steps supply each hypothesis; steps 1-14, the statement and the Lean record are unchanged. I also added the missing lean_audit field to both new nodes. Corrected files are in fixes/dag/nodes/sec-six-functors/ and the checks are in review.md.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-6813aa34c (reviewer sub-agent of L); spot-checked: I read the whole re-split: the base 18-step proof (21383 characters, live node), the new 5-step assembly (2577 characters, statement and stmt_deps byte-identical to the base), all 7 new statement-only nodes and the statements of all 15 cited nodes. No old argument is dropped or blurred; each became a new or existing node. Steps 2, 3-4, 11, 12 (split in two halves), 13 and 14 became the 7 new nodes. Steps 1, 5, 6, 7-10 and 15-16 go to existing nodes: pur-system-ringed-sequence-site, level-left-extension, evaluation-topos, sf-ringed-derived-closed-symmetric-monoidal, coef-semilinear-derived-sections (fiber identification for cartesian first input, transition formula) and the coherence nodes. Step 17 is elementary in step 5. The step-18 signs moved into the ringed-pullback statement. Checks: no cycle (closures of all 15 proof_deps; semilinear-derived-sections is not downstream of the item). No duplicates found by statement search (pod-derived-automorphism-hom-evaluation is only for isomorphisms and cites the item; qcqs/asd internal adjunctions are different functors). Maths verified: Yoneda chain sends h to G(b)u_V h with only naturality of mu; projection of delta has adjunct b_n with the displayed transpose; the adjunct of h is e_{N,n}(h tensor B_n). Evaluation on constant-A towers preserves K-injectives (exact left adjoint), and the statement correctly makes no varying-ring claim. The two-order sections comparison holds since both sides are the direct image to the point (0D6E). Stacks 0941/06YY/07A6/0D6E/07A4/08J9/0A98/079P checked in the tex and tags file; no SGA. FIX (B3/C): lem-coef-ringed-pullback-hom-evaluation-comparison cites def-pur-hom-complex and def-pc-tensor-complex-sheaves in its statement but lacked them in stmt_deps; I added both. Advisory: the item's top-level tool_uses is the stale base list (maintainer field).; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
