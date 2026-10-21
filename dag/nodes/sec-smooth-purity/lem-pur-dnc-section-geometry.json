@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-pur-dnc-section-geometry",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-lem-geometry"
+  ]
  },
  "kind": "statement",
  "title": "Geometry of the deformation",
@@ -23,57 +25,234 @@
  ],
  "proof": [
   {
-   "text": "For the finite purity coefficients of [def-pur-conventions], use the maximal-ideal membership and uniformizer-generation clauses of [lem-weil-l-adic-extension-integers-dvr]. The spectral absolute value of ell is its p-adic norm, strictly less than one. Hence ell lies in the maximal ideal, so ell^n lies in its nth power and vanishes in O_E/(varpi^n), including its ULift. Mathlib charP_of_card_eq_prime_pow gives characteristic p for k_0 from its recorded cardinality, and injectivity of k_0 to k gives characteristic p for k. Since ell and p are distinct primes, ell is nonzero in k and therefore a unit. Map this unit to global sections of T. This proves invertibleExponent without a ramification-index divisibility hypothesis.",
+   "text": "Work at the finite coefficient stage $\\Lambda=A_{E,n}$ specified for this part of [def-pur-conventions]. Fix $b\\in B$. Apply [sbc-thm-etale-local-normal-form] near $s(b)$, shrinking the affine base so its section lies in the chosen source neighbourhood. Translate the affine coordinates by their values along $s$; then the chart $e:U\\to\\mathbf A^r_W$ sends $s|_W$ to zero. The chart is smooth of relative dimension zero by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]; composing with the affine projection and using [lem-sbc-smooth-relative-dimension-permanence] shows that $r=d$, since the relative dimension at $s(b)$ is $d$. The chart is separated: its diagonal is the pullback of the closed diagonal of $U\\to W$. By [lem-weil-pbc-etale-scheme-base-change], $Z=U\\times_{\\mathbf A^d_W}W\\to W$ is separated etale with section $s|_W$. By [lem-weil-pbc-etale-section-clopen-immersion] that section is open and closed in $Z$. Delete $Z\\setminus s(W)$ from $U$. Thus the inverse image of zero is exactly $s(W)$ scheme-theoretically, and on affine subcharts the ideal is $I=(x_1,\\ldots,x_d)R$ for an etale $C=A[x_1,\\ldots,x_d]\\to R$. This is relative linearization; the absolute regular-immersion lemma is not applied to a possibly singular base.",
    "uses": [
     "def-pur-conventions",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (2), relative coordinates; expanded using Stacks 054L (morphisms.tex, lemma-smooth-etale-over-affine-space), 02GO and 024T (etale.tex, proposition-properties-sections)."
+   }
   },
   {
-   "text": "For compactifiable, finite type of B over the field implies that B is locally Noetherian and quasi-compact (Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace), hence quasi-separated. Apply [thm-nagata-compactification] to g. No new hypothesis or compactification datum is added.",
+   "text": "Use the actual affine charts $D=R[t,I/t]$ of [def-pur-dnc-section-family]. On each chart meeting the section, [lem-pur-dnc-etale-rees-chart] gives $D\\cong R\\otimes_{A[x]}A[t,u]$, $x_i=tu_i$, and its projection to $\\operatorname{Spec}A[t]$ is smooth of relative dimension $d$. An affine open disjoint from the section has $I=R$, hence $R[t,I/t]=R[t,t^{-1}]$; its projection is the base change of $g$ to $\\mathbf G_{m,B}$, smooth of relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence]. These opens cover $V$, so their inverse images cover the actual deformation scheme and prove clause (2). Smoothness here is checked on the displayed local smooth ring presentations, as in [def-sbc-smooth-morphisms]. In particular no isomorphism $D\\cong A[t,u]$ is asserted for a general etale $R$.",
    "uses": [
-    "thm-nagata-compactification"
+    "def-pur-dnc-section-family",
+    "lem-pur-dnc-etale-rees-chart",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (2), the Rees chart; correction of the unit proof Coordinates paragraph: an etale chart, not necessarily an isomorphism."
+   }
   },
   {
-   "text": "For the normal projection use the canonical closed-immersion factorization purityNormalProjection of [def-pur-normal-bundle]. Its composite with s is the affine relative-gluing projection to V. Since s is separated, IsAffineHom.of_comp makes this projection to B affine. It equals the published normalConeProj g s by purityNormalProjection_eq and s followed by g equal to the identity. This gives normalQuasiCompact. The published normalConeData, obtained by base change from smoothOfRelativeDimension_deformationSpaceProj along t=0, supplies smoothness of relative dimension d. Affineness supplies separatedness and quasi-compactness, and smoothness supplies local finite type. Apply compactifiable to prove normalCompactifiable.",
+   "text": "Inverting $t$ in the subalgebra $D=R[t,I/t]\\subseteq R[t,t^{-1}]$ gives exactly $R[t,t^{-1}]$: the inclusion gives one direction and $R,t,t^{-1}$ generate the other. Consequently its $t=1$ fibre is $R$, since $t$ is already a unit modulo $t-1$. For the zero fibre use [lem-pur-rees-associated-graded-chart]: $D/(t)\\cong\\operatorname{gr}_I R$, with $[a/t^m]\\leftrightarrow[a]_m$. The normal cone is precisely the relative spectrum of this graded algebra [def-pur-normal-bundle]. On the section charts of step 1, reduction of $R\\otimes_{A[x]}A[t,u]$ modulo $t$ gives $(R/I)[u]$, with $u_i$ the classes of $x_i$ in degree one. Thus the canonical symmetric-algebra comparison is locally a polynomial-algebra isomorphism and the normal cone is the rank-$d$ normal bundle. All the identifications agree on overlaps: the punctured map fixes $R$ and $t$ and the graded map sends every $a/t^m$ to $[a]_m$. Under the augmentation $r\\mapsto\\bar r$, $a/t^m\\mapsto0$ for $m>0$, the section restricts to $s$ at one and to the graded augmentation zero section at zero. This proves the geometric fibre and punctured-trivialization assertions.",
    "uses": [
+    "def-pur-dnc-section-family",
+    "lem-pur-rees-associated-graded-chart",
+    "lem-pur-dnc-etale-rees-chart",
     "def-pur-normal-bundle"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Items (1), (3), Rees description; Stacks 0630 (definition-conormal-sheaf), 0632 (equation-conormal-algebra-quotient)."
+   }
   },
   {
-   "text": "Retain the actual section-invariant and finite comparison realization of [def-pur-finite-section-comparison]. For sectionBaseChange, apply the general smooth exceptional base-change compatibility theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general of [prop-asd-smooth-base-change], retaining the upstream-sync public compatibility import, to the actual compact-support adjunction mate. Evaluate at the coefficient unit, pass to dualizingComplexBaseChangeMap using its IsIso equivalence, and compose the two canonical inverse-image composition isomorphisms along hs. This gives the displayed isomorphism, rather than choosing an arbitrary endpoint isomorphism.",
+   "text": "For a Cartesian square of a smooth separated pure-dimensional map $f:X\\to Y$ and $v:Y'\\to Y$, write $u:X'\\to X$ and $f':X'\\to Y'$, and suppose its sections obey $u s'=s v$. By [thm-pur-cohomological-smoothness], the canonical base-change map $Lu^*\\omega_f\\to\\omega_{f'}$ is invertible. Its map is the adjunction transpose specified in condition (3) of [def-pur-co-smoothness], rather than an arbitrary isomorphism between the endpoints. Apply $Ls'^*$ and the composition isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition] to obtain\n$$Lv^*C(f,s)=Lv^*Ls^*\\omega_f\\simeq Ls'^*Lu^*\\omega_f\\xrightarrow{\\sim}Ls'^*\\omega_{f'}=C(f',s').$$\nHere $C$ is the actual object of [def-pur-section-invariant]. Every map to which this is applied below is smooth separated of finite type over the finite-type schemes of the conventions; the theorem has exactly these domains. This supplies the cohomological-smoothness hypothesis that the definition alone would not prove.",
    "uses": [
-    "def-pur-finite-section-comparison",
-    "prop-asd-smooth-base-change"
+    "thm-pur-cohomological-smoothness",
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-pur-section-invariant"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Items (1), (3), (5), condition (3) of cohomological smoothness, with its hypothesis supplied by the theorem."
+   }
   },
   {
-   "text": "For fibreOne and fibreZero, retain the published extended-Rees deformation space and its actual one- and zero-fibre pullback squares. Supply their smoothness from smoothOfRelativeDimension_deformationSpaceProj, coefficient invertibility from invertibleExponent, and compactifiability from compactifiable and normalCompactifiable. Apply sectionBaseChange to each square and the published augmentation-section identities. The local-coordinate, punctured-trivialization, standard-pair and geometric base-change calculations remain the existing upstream constructions imported through Coordinates and BaseChange; this module only assembles the canonical fibre comparisons. No unit-level step is replaced.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply step 4 to $\\widetilde g$ along $i_1,i_0$, using its smoothness from step 2 and the fibre squares and section identifications of step 3. Since $F=C(\\widetilde g,\\widetilde s)$ [def-pur-dnc-section-family], this gives $Li_1^*F\\simeq C(g,s)$ and $Li_0^*F\\simeq C(\\pi_N,0_N)$. For the punctured object, first apply that same square construction along $j:\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$, obtaining $Lj^*F\\simeq C(g\\times_B\\mathbf G_m,s\\times1)$. Apply it again to $g$ along $a j:\\mathbf G_{m,B}\\to B$. The inverse of the second comparison followed after the first gives\n$$\\kappa^\\circ:Lj^*F\\xrightarrow{\\sim}L(a j)^*C(g,s)\\simeq Lj^*La^*C(g,s).$$\nThe last arrow is [lem-weil-pbc-proetale-derived-pullback-composition]. Thus both fibre comparisons and the punctured comparison use the specified base-change maps.",
+   "uses": [
+    "def-pur-dnc-section-family",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Items (1) and (3), the two fibre isomorphisms and the specified punctured isomorphism."
+   }
+  },
+  {
+   "text": "For $V=\\mathbf A^d_B$ and its zero section, use [lem-pur-dnc-etale-rees-chart] with $R=C=A[x_1,\\ldots,x_d]$. It gives the actual standard deformation algebra $A[t,u_1,\\ldots,u_d]$ with $x_i=tu_i$. The map $D_0\\mathbf A^d_B\\to\\mathbf A^1_B$ and its section are consequently the base change of $(\\mathbf A^d_B\\to B,0)$ along $a$. Step 4 identifies its family object with $La^*C(p_d,0)$. Apply [cor-pur-vector-bundle-purity] to the trivial rank-$d$ bundle and the étale coefficient unit $A_B^{\\mathrm{et}}$. That corollary is stated in the ordinary-étale realization: it gives $p_d^{\\times}A_B^{\\mathrm{et}}\\cong A^{\\mathrm{et}}_{\\mathbf A^d_B}(d)[2d]$ with the étale Tate line $\\mu_{\\ell^r}\\otimes_{\\mathbf Z/\\ell^r}A$. The item's $\\omega_{p_d}$ is the pro-étale constructible exceptional image: by [def-weil-exceptional-inverse-image], on the étale-origin input $\\Lambda_B=\\nu_B^*A_B^{\\mathrm{et}}$ (the case $a=0$ of [lem-amb-finite-tate-site-descent]) its value is $\\nu_{\\mathbf A^d_B}^*p_d^{\\times}A_B^{\\mathrm{et}}$. Apply $\\nu^*_{\\mathbf A^d_B}$ to the étale isomorphism and compose with the comparison $\\nu_T^*A_T^{\\mathrm{et}}(d)\\cong A^{\\mathrm{pro}}_T(d)$ of [lem-amb-finite-tate-site-descent] for $T=\\mathbf A^d_B$ (the shift commutes with the exact functor $\\nu^*$). This gives $\\omega_{p_d}\\cong\\Lambda_{\\mathbf A^d_B}(d)[2d]$ with the pro-étale twist of [def-coefficient-twists-detailed]. Pull back along zero to obtain $C(p_d,0)\\cong L0^*(\\Lambda_{\\mathbf A^d_B}(d))[2d]$. For the twist pullback, use [lem-pur-integral-twist-line-inverse-image](3) for the integral line and (1) for its completed ring. Reduce its semilinear isomorphism modulo $\\varpi_E^n$ (tensor with $(A_{E,n})$) using the reduction identification of [lem-pur-twist-sheaf-locally-free](3). The resulting finite line is exactly the line of [def-coefficient-twists-detailed]. Its d-fold tensor power pulls back by [lem-pur-derived-pullback-tensor-iso]; hence the pulled-back twist is $\\Lambda_B(d)$. This proves clause (4), including $d=0$.",
+   "uses": [
+    "lem-pur-dnc-etale-rees-chart",
+    "cor-pur-vector-bundle-purity",
+    "def-weil-exceptional-inverse-image",
+    "lem-amb-finite-tate-site-descent",
+    "lem-pur-integral-twist-line-inverse-image",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (4), the standard pair and vector-bundle purity."
+   }
+  },
+  {
+   "text": "Let $B'\\to B$ be arbitrary within the scheme conventions. On affine base opens write it as $A\\to A'$. For a section chart as in step 1 put $C'=A'[x]$, $R'=R\\otimes_AA'$, and $I'=(x)R'$. Etale base change [lem-weil-pbc-etale-scheme-base-change] allows [lem-pur-dnc-etale-rees-chart] over both bases. Its canonical tensor maps give\n$$R[t,I/t]\\otimes_AA'\\cong(R\\otimes_CA[t,u])\\otimes_AA'\\cong R'\\otimes_{C'}A'[t,u]\\cong R'[t,I'/t].$$\nThe middle isomorphism is the unique one fixing the two coefficient factors and $t,u$; its inverse fixes those same generators. The tensor pushout universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] verifies these maps and their inverse composites. Hence the resulting map is the canonical Rees comparison $r\\otimes a'\\mapsto ra'$, $(f/t)\\otimes1\\mapsto f'/t$, not an existence-only comparison. Away from $s(B)$, $I=R$ and the same formula is just the Laurent-polynomial base-change isomorphism, with inverse defined on $R',t,t^{-1}$. This argument imposes no flatness on $A\\to A'$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pur-dnc-etale-rees-chart",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (5), arbitrary base change: explicit tensor calculation on section charts and on the complement."
+   }
+  },
+  {
+   "text": "The local comparisons of step 7 agree on overlaps because all send each Rees generator $r,t,f/t$ to its functorial image. Apply the relative-Spec base-change theorem [lem-weil-pbc-relative-spec-base-change] to these isomorphisms of the chart algebras to identify $D_{s'}V'$ with $D_sV\\times_{\\mathbf A^1_B}\\mathbf A^1_{B'}$. The augmentation maps commute on those same generators ($f/t$ maps to zero); thus the comparison preserves $\\widetilde s$. Inverting $t$ and setting $t=1,0$ in the very same maps gives the punctured and fibre comparisons, so they commute with this base change, rather than only admitting unrelated isomorphisms. The degree-one and higher-degree maps at zero send $[f]_m$ to $[f']_m$; hence they also give the canonical base-change identification of the normal bundles. Restriction of these formulas to source open subcharts and to etale charts is the tensor formula of [lem-pur-dnc-etale-rees-chart]; this supplies etale localization as well.",
+   "uses": [
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-pur-dnc-etale-rees-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (5), gluing the Rees comparisons and checking punctured and zero-section compatibility."
+   }
+  },
+  {
+   "text": "Write $a':\\mathbf A^1_{B'}\\to\\mathbf A^1_B$ and $h:D_{s'}V'\\to D_sV$ for step 8. Apply the canonical exceptional base change of [thm-pur-cohomological-smoothness] to $\\widetilde g$, and pull it back along $\\widetilde s'$:\n$$La'^*F\\simeq L\\widetilde s'^*Lh^*\\omega_{\\widetilde g}\\xrightarrow{\\sim}L\\widetilde s'^*\\omega_{\\widetilde g'}=F'.$$\nThe first arrow uses the section equality and [lem-weil-pbc-proetale-derived-pullback-composition]. This proves the family-object part of clause (5). For successive changes of base, finite etale compact-support exchanges paste by [thm-cbc-finite-torsion]. The transport of [thm-cbc-finite-level-proetale] gives the same equation on etale-origin pro-etale objects: in the two successive conjugated maps the intermediate comparison isomorphisms cancel. Their exceptional mates then paste by [lem-weil-pbc-mate-pasting], because the exceptional comparison is precisely the counit transpose of the inverse compact-support exchange [def-pur-co-smoothness]. Pulling the pasted equality back along the sections gives the same comparison as the successive maps. Applying this to the squares with $i_0,i_1,j$ shows that the fibre and punctured object identifications above commute with base change. In the standard pair it is the same square for $p_d$. Clause (5) concerns the family object; the base-change behaviour of the twist identification of step 6 is not used here.",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-mate-pasting",
+    "thm-cbc-finite-torsion",
+    "thm-cbc-finite-level-proetale",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+    "place": "Item (5), family-object base change and compatibility of the specified comparisons."
+   }
   }
  ],
  "proof_deps": [
   "def-pur-conventions",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "thm-nagata-compactification",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-pur-dnc-section-family",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-pur-rees-associated-graded-chart",
   "def-pur-normal-bundle",
-  "def-pur-finite-section-comparison",
-  "prop-asd-smooth-base-change"
+  "thm-pur-cohomological-smoothness",
+  "def-pur-co-smoothness",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-pur-section-invariant",
+  "cor-pur-vector-bundle-purity",
+  "def-weil-exceptional-inverse-image",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "thm-cbc-finite-torsion",
+  "thm-cbc-finite-level-proetale"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.md",
-  "place": "G3 stage-3 proof: coefficient exponent, Nagata domain checks, affine normal projection and canonical actual-fibre base-change maps; original unit route retained."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+  "place": "All five clauses, with the relative chart, Rees and canonical section-base-change computations expanded; unit proof affine-space overstatement corrected to an etale chart."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "deformationToNormalCone|deformationSpace|extendedRees|sectionInvariant",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "deformation to the normal cone smooth closed section dualizing complex base change",
+   "results": "IsBaseChange.dual; IsBaseChange.toDualBaseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; Algebra.Smooth.baseChange; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; RingHom.isStandardSmooth_isStableUnderBaseChange; IsBaseChange.toDual_apply; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Ideal, ReesAlgebra",
+   "results": "; loogle: unknown identifier 'ReesAlgebra'",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone of a smooth morphism with a closed section: fibres, smoothness, punctured trivialization and base change",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.instIsPreimmersionFiberι; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "Rees|rees|normalCone|NormalCone",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/MvPowerSeries/Trunc.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/IsAdjoinRoot.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deformation\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended Rees algebra of an ideal and the associated graded special fibre with Laurent polynomial generic fibre",
+   "results": "reesAlgebra; adjoin_monomial_eq_reesAlgebra; Ideal.Filtration.submodule; mem_reesAlgebra_iff; reesAlgebra.monomial_mem; Ideal.Filtration.submoduleInfHom; reesAlgebra.fg; Ideal.Filtration.submodule_span_single",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "\\breesAlgebra\\b|deformation|normalCone",
+   "results": "21; 23; 39; 64; 68",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete deformation geometry and canonical sheaf comparisons"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -141,5 +320,114 @@
   "landing": "20261019T192740-L-1862566",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-dnc-section-geometry",
+  "worker": "stage1",
+  "summary": "Replaced the inherited implementation narrative by nine mathematical proof steps for all five clauses. Reused the existing etale Rees and graded-fibre lemmas; no new nodes. Supplied cohomological smoothness from its theorem, derived canonical fibre/punctured maps, and proved arbitrary base change by etale polynomial charts rather than an invalid blanket Rees base-change assertion. Statement unchanged. Reviewer FIX (2026-10-21): step 6 transports the ordinary-étale vector-bundle purity to the pro-étale constructible exceptional image through def-weil-exceptional-inverse-image and lem-amb-finite-tate-site-descent; step 9 no longer claims the étale purity map's base change for the pro-étale objects.",
+  "blueprint": "Unit sk-lem-geometry proof Rees description is realized by steps 3-5; Coordinates is realized by steps 1-2, 6-9. The false general affine-space isomorphism in the Coordinates proof is corrected to the etale-chart calculation, with explicit counterexample in report.md. Same statement is also imported as sk-lem-geometry; its proof depends on this item and is not used circularly.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Relative smooth local coordinates, used as a geometric tool; absolute regular-immersion linearization would require hypotheses on the base not present here."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Converts the etale chart to smooth relative dimension zero to identify its number of coordinates."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic relative dimension under composition and base change, including the punctured chart."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "The affine projection has the stated relative dimension, so the normal-form chart has d coordinates."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic etale base change for the zero preimage and the section-coordinate algebra after arbitrary base change."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Removes the other components of the inverse image of zero; a generic section-of-etale-map fact."
+   },
+   {
+    "node": "lem-pur-dnc-etale-rees-chart",
+    "why": "Existing algebraic tool calculating the tensor-product Rees chart and its smooth projection; no new copy is made."
+   },
+   {
+    "node": "lem-pur-rees-associated-graded-chart",
+    "why": "Existing algebraic zero-fibre calculation used for the canonical normal-cone identification."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Orientation-free smoothness theorem supplies the hypothesis of condition (3); the definition alone cannot supply it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical composition of pullbacks used to compute the actual section comparisons."
+   },
+   {
+    "node": "lem-pur-integral-twist-line-inverse-image",
+    "why": "Inverse image of the actual integral twist line; reduction gives the finite twist."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Identifies the finite twist line with the reduction of the integral rank-one line."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Monoidal derived pullback transports the positive tensor powers defining the d-th twist."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebraic pushout used to verify the chart base-change maps and their inverses."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic relative-Spec construction transfers the canonical algebra comparison to schemes."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic adjunction calculus verifies that successive canonical family comparisons are compatible."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Horizontal pasting for the finite ordinary etale compact-support exchanges."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Specified transport of those exchanges to the witnessed pro-etale objects; intermediate comparison maps cancel in pasting."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-pur-rees-associated-graded-chart",
+  "thm-pur-cohomological-smoothness",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "thm-cbc-finite-torsion",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-28804dd09",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-28804dd09 (reviewer sub-agent of L); spot-checked: Read the whole 9-step split, every cited statement, the main-20261015 proof.md and the sk-lem-geometry unit. The statement, stmt_deps and blueprint fields are unchanged from live; the unit record changes only in realized/realized_by. There are no new nodes. The live node is still imported, there is no repair note, the item is not on the dropped list, nothing cites SGA, and no cited node reaches the item (checked for cycles). Step 1 (relative linearization) is correct: 054L normal form, r=d by relative-dimension permanence, e separated, and the clopen-section lemma gives e^{-1}(0)=s(W) scheme-theoretically with I=(x)R; the absolute regular-immersion lemma is rightly avoided. Step 2 is exactly lem-pur-dnc-etale-rees-chart, with Laurent charts away from s. Step 3: D[1/t]=R[t,t^-1] and D/(t)=gr_I R by lem-pur-rees-associated-graded-chart. The augmentation gives s and the zero section, and the local polynomial form gives a rank-d bundle. Step 4 uses thm-pur-cohomological-smoothness(3) on its stated domain, with beta as in def-pur-co-smoothness(3). Step 5: the kappa-circ direction matches the statement. Steps 7-8: Rees base change via the etale chart and the tensor pushout, with no flatness (checked on the non-flat k[e]/e^2 -> k), glued through relative-Spec base change. Step 9: pasting via the thm-cbc-finite-torsion pasting clause, the finite-level pro-etale transport and mate-pasting(1). The worker's unit source error is correct: for B=Spec k, V=G_m, D=k[t,u,(1+tu)^-1] is not k[t,u]. It is fixed inside the unit route. FIX, C4/E4: step 6 applied cor-pur-vector-bundle-purity, which is stated in the ordinary-etale realization, directly to the item's pro-etale omega = nu^* f^x Rnu_*, silently identifying the two coefficient categories. Repaired by citing def-weil-exceptional-inverse-image and lem-amb-finite-tate-site-descent (sk-prop-an, on the route): nu^*A^et(d) = A^pro(d), and the a=0 case gives the unit. In the same step, 'mod uniformizer' becomes 'mod varpi^n'. Step 9 dropped its overclaim that the corollary's etale base change applies to the pro-etale twist identification; clause (5) does not need it. Tool uses accepted: lem-pur-rees-associated-graded-chart (generic algebra) and thm-pur-cohomological-smoothness (the unit text cites sk-prop-cohsm (c)). Note: Q53 2ab03abc delivered the same item in parallel and got PASS; whichever lands first supersedes the other.; 1 file(s) fixed by the reviewer"
  }
 }
