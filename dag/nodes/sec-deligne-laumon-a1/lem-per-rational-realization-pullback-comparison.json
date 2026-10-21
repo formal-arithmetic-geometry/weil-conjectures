@@ -26,9 +26,123 @@
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-pbc-localization-inverse-image-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $K$: it has finite stratified perfect local $A$-models, and this characterization includes the compatible etale-origin witnesses. Apply [lem-tw-ordinary-pullback-stratified-models] to $g$ and those models. The inverse-image strata, omitting empty ones, form a finite constructible stratification of $X\\prime$; the pulled covers are pro-etale covers, and the ordinary pullback of each model is $B_{S\\prime}\\otimes_A^L P$, computed termwise on its finite-projective representative. Apply the reverse characterization on $X\\prime$. Thus $P_gK\\in\\mathcal C_{X\\prime}$, including completeness, the uniform reduction bound and compatible etale witnesses. Both schemes are noetherian and finite-dimensional and have $\\ell$ invertible, as required by that characterization; no geometric assumption on $g$ beyond being a morphism is needed.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-ordinary-pullback-stratified-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; ordinary pullback of stratified perfect models, Remark 6.8.15"
+   }
+  },
+  {
+   "text": "The rings $A/\\varpi^n$ are finite [lem-weil-valued-dvr-finite-quotients], using the absolute value, discrete valuation ring and finite residue field of [def-weil-l-adic-coefficient-extension]. Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to $g$ and the tower $(A/\\varpi^n)_n$: its comparison is the unique map with the finite projection equations, hence equals $c_g$ of [def-weil-pbc-completed-pullback], and it is an isomorphism. This is proved there, not assumed; it also identifies the pulled finite coefficient sheaves and transitions with those of $X'$. So module pullback along $c_g$ is exact and $P_g$ is termwise pullback. Apply [lem-weil-pbc-reduction-pullback-derived-tower] to $g$ with $R_X=B_X$, $R_{X'}=B_{X'}$, this isomorphism and $Q_{X,\\bullet}=((A/\\varpi^n)_X)_n$. Its $B_X(K)$ is the reduction tower $K_\\bullet$ of [def-weil-pbc-adic-coefficient-datum], and its termwise pullback is $Lg^*_{\\operatorname{Tow}}K_\\bullet$ of [def-weil-pbc-completed-pullback], which is levelwise module pullback on the same flat-term K-flat class. The natural isomorphism $\\tau_K:Lg^*_{\\operatorname{Tow}}K_\\bullet\\to(P_gK)_\\bullet$ satisfies $\\tau_K\\,Lg^*_{\\operatorname{Tow}}(i_K)=i_{P_gK}$. By definition $\\gamma_{g,K}$ is the constant-tower unit $P_gK\\to R\\lim\\Delta P_gK$ followed by $R\\lim Lg^*_{\\operatorname{Tow}}(i_K)$. Naturality of that unit and the augmentation equation give $R\\lim(\\tau_K)\\circ\\gamma_{g,K}=u_{P_gK}$, the constant-tower unit of $P_gK$ followed by $R\\lim$ of its strict quotient augmentation. This is an equality of functorially induced maps, not an inference from projections. By Step 1, $P_gK\\in\\mathcal C_{X'}$ is intrinsically derived $\\varpi$-complete [def-weil-pbc-bounded-constructible-complete], so [lem-weil-pbc-intrinsic-to-tower-complete] makes $u_{P_gK}$ invertible. Hence $\\gamma_{g,K}$ is an isomorphism, natural in $K$ by naturality of $\\tau$ and of the units, and $\\widehat P_gK\\in\\mathcal C_{X'}$, which is closed under isomorphism.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-complete",
+    "lem-weil-pbc-intrinsic-to-tower-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), Remark 6.8.15; completion unit of ordinary pullback of a complete constructible complex, via the strict reduction tower"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution $T^\\bullet\\to K$ by [lem-pc-kflat-resolution]. Write $R=g^{-1}B_X$, $S=B_{X\\prime}$, $U=E_{X\\prime}$ and $N=g^{-1}T^\\bullet$. By [lem-weil-pbc-localization-inverse-image-coherence], $g^{-1}E_X=R[1/\\varpi]$ canonically, preserving the unit, and inverse image and scalar localization are exact. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] successively to the inverse-image ringed topos with structural map $\\mathrm{id}_R$, the coefficient change $R\\to S$, and the localizations. Thus $N$, $S\\otimes_R N$, $R[1/\\varpi]\\otimes_R N$, and their further scalar extensions are flat-term K-flat over their respective rings. [lem-weil-pbc-ringed-topoi-derived-pullback] computes the corresponding derived pullbacks by these complexes and makes their comparison maps independent of resolution. In particular both iterated derived tensors below can be computed by ordinary iterated tensors on these representatives.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), and 0D6D (lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "By the object formula in [lem-per-rational-module-realization-functor], the ordinary integral side realizes to $J_{X\\prime}(QP_gK)=U\\otimes_S^L(S\\otimes_R^L g^{-1}K)$. On the representatives of Step 3 its flattening to $U\\otimes_R N$ sends $u\\otimes(s\\otimes n)$ to $us\\otimes n$; its inverse sends $u\\otimes n$ to $u\\otimes(1\\otimes n)$. These formulas respect both balancing relations, are mutually inverse and commute with differentials. They define a natural chain isomorphism and hence a natural derived isomorphism $a_K:J_{X\\prime}(QP_gK)\\xrightarrow{\\sim}U\\otimes_R^L g^{-1}K$.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; explicit balanced calculation on the K-flat representatives of Step 3"
+   }
+  },
+  {
+   "text": "Apply the localization comparison of [lem-weil-pbc-localization-inverse-image-coherence] to $T^\\bullet$. The other ordinary side is represented by $U\\otimes_{R[1/\\varpi]}(R[1/\\varpi]\\otimes_R N)$. The map to $U\\otimes_R N$ sends $u\\otimes(r/\\varpi^m\\otimes n)$ to $u\\,c_g(r)\\varpi^{-m}\\otimes n$, and its inverse sends $u\\otimes n$ to $u\\otimes(1\\otimes n)$. The extension of $c_g$ to $R[1/\\varpi]\\to U$ exists because $\\varpi$ is invertible in $U$. The balancing and fraction relations show that these maps are well defined and inverse, and they commute with differentials and maps in $N$. Sheaf tensor is the sheafification of balanced tensors [def-pur-sheaf-tensor-product], so the formulas give sheaf chain maps. Thus they give a natural derived isomorphism $b_K: E_{X\\prime}\\otimes^L_{g^{-1}E_X}g^{-1}(J_XQK)\\xrightarrow{\\sim}U\\otimes_R^L g^{-1}K$.",
+   "uses": [
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; the localization-unit-preserving identification and explicit balanced inverse"
+   }
+  },
+  {
+   "text": "Define $\\alpha_{g,QK}=b_K^{-1}\\circ a_K\\circ J_{X\\prime}(Q\\gamma_{g,K}^{-1})$. Every factor is invertible by Steps 2, 4 and 5. Naturality of $\\gamma$ and of the two chain comparisons gives, for every integral morphism $f:K\\to L$, the equation $G(f)\\alpha_{g,QK}=\\alpha_{g,QL}H(f)$, where $H(K)=J_{X\\prime}(Q\\widehat P_gK)$ and $G(K)=E_{X\\prime}\\otimes^L_{g^{-1}E_X}g^{-1}(J_XQK)$. This proves naturality on integral representatives and the asserted normalization through the inverse of the specified unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; elementary composition of the natural comparisons of Steps 2, 4 and 5"
+   }
+  },
+  {
+   "text": "The maps $c_g$ preserve constant $A$-scalars: their finite projections send each $a\\in A$ to its constant residue. Thus [lem-pur-ringed-derived-pullback-linear] makes $P_g$ $A$-linear. Naturality of the invertible $B_{X\\prime}$-linear maps $\\gamma$ gives $\\widehat P_g(f)=\\gamma_{g,L}P_g(f)\\gamma_{g,K}^{-1}$. Conjugating sums and scalar multiples by these maps proves that $\\widehat P_g$ is $A$-linear as well. Extend it to [def-weil-pbc-rational-category] by $f/\\varpi^n\\mapsto\\widehat P_g(f)/\\varpi^n$. If $f/\\varpi^n=h/\\varpi^m$, some $r\\geq0$ has $\\varpi^r(\\varpi^m f-\\varpi^n h)=0$; applying this $A$-linear functor proves independence of representative, and the sum and composition formulas follow in the same way. By the fraction formula for $J$ in [lem-per-rational-module-realization-functor], both $H(f/\\varpi^n)$ and $G(f/\\varpi^n)$ are $\\varpi^{-n}$ times the integral maps. Multiplying the naturality equation of Step 6 by $\\varpi^{-n}$ proves it for every fraction. Hence $\\alpha_g$ is the required natural isomorphism on raw rationalizations. All maps used $c_g$ and its localization; its invertibility is the proved statement cited in Step 2, never an assumption.",
+   "uses": [
+    "lem-pur-ringed-derived-pullback-linear",
+    "def-weil-pbc-rational-category",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and scalar-localization construction; explicit fraction relation and naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-rational-category",
+  "lem-pc-kflat-resolution",
+  "lem-per-rational-module-realization-functor",
+  "lem-pur-ringed-derived-pullback-linear",
+  "lem-tw-ordinary-pullback-stratified-models",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-valued-dvr-finite-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15; specified-unit comparison from existing DAG lemmas and explicit K-flat balanced-tensor/fraction argument following Stacks Tags 06YS, 0G7E, 06YY, 0D6D"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +178,31 @@
    "results": "12 hits: SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso. Ordinary sheaf module pullback and pullbackComp, not the quotient-tower unit or rational realization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of completed constructible adic sheaves commutes with rationalization by inverting a uniformizer",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.map_of, IsAdicComplete.of_lift, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.of_comp_lift, AdicCompletion.map_val_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.map_mk. Ordinary pullback, ring/module localization or adic completion only; no specified completed constructible pullback/rational realization comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of coefficient ring sheaves commutes with derived module inverse image by canonical balanced tensor maps",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.tensor, LocalizedModule.coe_map_eq, IsLocalization.Away.tensorEquiv, ModuleCat.Tilde.stalkIso, IsLocalization.tensorRight, IsLocalizedModule.rTensor. Ordinary pullback, ring/module localization or adic completion only; no specified completed constructible pullback/rational realization comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompleted.*[Pp]ullback|[Pp]ullback.*[Cc]omplet",
+   "results": "8 hits: Mathlib/Topology/Algebra/UniformField.lean, Mathlib/Geometry/Manifold/VectorField/LieBracket.lean, Mathlib/Order/CompleteLattice/Basic.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean. Ordinary pullback, ring/module localization or adic completion only; no specified completed constructible pullback/rational realization comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -88,5 +223,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-realization-pullback-comparison",
+  "worker": "stage1",
+  "summary": "Reused the integral specified-unit comparison and stratified perfect models. Gave an explicit K-flat computation of both balanced tensor identifications, their inverse maps, and fraction-level naturality. No statement change and no new nodes. Review FIX (Q149 maintainer reader): Step 2 now proves invertibility of the specified pbc unit through the profinite coefficient isomorphism, the pulled reduction-tower comparison and intrinsic-to-tower completeness, instead of identifying it with the unit of a different completed-pullback model without a bridge.",
+  "blueprint": "First proof paragraph of lem-per-smooth-pullback-t-exact: coefficient-realization input before ordinary pullback cohomology; expands retained ancestor steps 12-13 as recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-pur-ringed-derived-pullback-linear",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-tw-ordinary-pullback-stratified-models",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic integral coefficient, stratified-model, or ringed-topos K-flat/localization interface used with its stated hypotheses to compute the ambient realization comparison; the perverse unit supplies no such general interface."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic statement that pro-etale inverse image along any scheme morphism preserves the completed coefficient sheaf of a finite-ring tower; used in Step 2 to identify c_g as an isomorphism; the perverse unit has no such interface."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "Generic ringed-topos comparison of pulled-back reduction towers with their augmentations; used in Step 2 to normalize the specified completion unit; the perverse unit has no such interface."
+   },
+   {
+    "node": "lem-weil-pbc-intrinsic-to-tower-complete",
+    "why": "Generic statement that intrinsic completeness makes the strict quotient-tower unit invertible; used in Step 2; the perverse unit has no such interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-ringed-derived-pullback-linear",
+  "lem-tw-ordinary-pullback-stratified-models",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-intrinsic-to-tower-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-346c5b8e7",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-346c5b8e7 (reviewer sub-agent of L); spot-checked: I read the whole item and the full statement of every cited node. Sources read: Bhatt–Scholze Lemma 6.5.9(4)-(5), Prop. 6.6.11 and Rem. 6.8.15; Stacks 06YS/0G7E/06YY/0D6D. This is a first split: the item is unsplit on live and side, there is no repair note, the statement and stmt_deps are unchanged, there are no new nodes, no cycle, no dropped nodes and no SGA citation. One fault, C4/E5, in Step 2. It takes eta from lem-tw-ordinary-completed-integral-pullback, which maps into the def-pur-integral-derived-operations Cone(1-s) model, and declares it equal to the def-weil-pbc-completed-pullback unit gamma. Neither cited node bridges the two models, and the only existing comparison (lem-a1-integral-pullback-completed-comparison) matches projections only; lim^1 means that does not determine the map. FIX: I rewrote Step 2 along the route of lem-weil-pbc-realization-completed-pull, using only nodes valid for any morphism. lem-weil-valued-dvr-finite-quotients gives finite A/varpi^n. lem-weil-pbc-profinite-coefficient-inverse-image shows c_g is an isomorphism; this is proved there, not assumed. lem-weil-pbc-reduction-pullback-derived-tower gives tau with tau·Lg*_Tow(i_K)=i_{P_gK}, so Rlim(tau)∘gamma equals the tower unit of P_gK as maps. That unit is invertible by lem-weil-pbc-intrinsic-to-tower-complete, since P_gK lies in C_{X'} by Step 1. I reworded Step 7's last sentence. proof_deps is now the union of the uses. In tool_uses I added the three pbc lemmas and removed lem-tw-ordinary-completed-integral-pullback and constant-completion-equivalence, which the proof no longer uses. Steps 1 and 3–7 were checked against the hypotheses of the cited nodes, and the balanced tensor and fraction maps were checked by hand. Edge cases checked: empty X', K=0, g=id, a free model, and the torsion cone. Tool uses accepted: kflat-resolution, ringed-derived-pullback-linear, tw stratified models, the integral stratified characterization, localization coherence, ringed-topoi derived pullback, ringed-topos kflat pullback, and the three new pbc lemmas. Advisory: lem-weil-pbc-realization-completed-pull is the finite-type-over-k special case; this item is the general version.; 1 file(s) fixed by the reviewer"
  }
 }
