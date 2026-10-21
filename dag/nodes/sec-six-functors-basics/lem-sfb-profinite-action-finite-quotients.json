@@ -12,9 +12,117 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First suppose $P$ is empty. Its sole finite clopen partition is empty, its quotient set is empty, and its inverse system has one object and empty limit; all forward assertions hold. For the forward argument below assume $P\\ne\\varnothing$. Fix a finite clopen partition $\\alpha$. For each $x\\in P$ let $A_x\\in\\alpha$ contain $x$. Continuity of the action at $(1,x)$ gives open neighbourhoods $V_x$ of $1$ and $W_x$ of $x$, shrinking $W_x$ inside $A_x$, such that $V_xW_x\\subseteq A_x$. Choose finitely many $W_{x_1},\\ldots,W_{x_r}$ covering $P$ by compactness. Set $V=\\bigcap_tV_{x_t}$. If $v\\in V$ and $y\\in A\\in\\alpha$, choose $t$ with $y\\in W_{x_t}$. Then $A=A_{x_t}$ and $vy\\in A$, so $vA\\subseteq A$ for every block. By the assumed neighbourhood basis choose an open normal subgroup $N\\subseteq V$. For $n\\in N$, both $nA\\subseteq A$ and $n^{-1}A\\subseteq A$ hold, hence $nA=A$. This proves uniform block preservation directly from the open-cover definition of compactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of the compact-action refinement implicit in Bhatt–Scholze Example 4.1.10, p. 28"
+   }
+  },
+  {
+   "text": "The open left cosets $gN$ cover compact $G$, so finitely many $g_1N,\\ldots,g_sN$ cover it. If $g=g_tn$ with $n\\in N$, then $gA=g_tA$ for each $A\\in\\alpha$. Consequently the family $\\mathcal T=\\{g\\alpha:g\\in G\\}$ of translated partitions is finite and contains $\\alpha$. Take their common refinement $\\beta$: its blocks are the nonempty intersections obtained by choosing one block of each partition in $\\mathcal T$. These intersections are clopen, disjoint, cover $P$, and form a finite collection. Every $h\\in G$ sends the family $\\mathcal T$ bijectively to itself, so it permutes the intersection blocks. Thus $\\beta$ is $G$-invariant and refines $\\alpha$. Translations preserve clopens because $x\\mapsto gx$ and $x\\mapsto g^{-1}x$ are continuous inverse maps. No finiteness-of-index theorem is being invoked: the needed finite coset cover was just obtained from compactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of the compact-action refinement implicit in Example 4.1.10, p. 28"
+   }
+  },
+  {
+   "text": "Let $J$ be the set of $G$-invariant finite clopen partitions of $P$, and write $i\\leq j$ when $j$ refines $i$. It is small under [def-weil-size-convention]: partitions form a subset of the power set of the power set of the underlying small set $P$. It is nonempty, using $\\{P\\}$ (or the empty partition when $P$ is empty). Intersecting the blocks of two invariant partitions and discarding empty intersections gives an invariant common refinement. Thus $J$ is directed and $J^{\\mathrm{op}}$ is cofiltered. Let $P_i$ be the finite discrete set of blocks of $i$, and $r_{ji}:P_j\\to P_i$ send a block to its unique containing block. These maps satisfy $r_{ii}=1$ and $r_{ki}=r_{ji}\\circ r_{kj}$ for $i\\leq j\\leq k$. Each is surjective: choose a point in a coarse block and its block in the finer partition. The quotient $q_i:P\\to P_i$ is likewise surjective, and $r_{ji}q_j=q_i$. Empty quotient sets cause no exception.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, directed set of finite clopen decompositions, restricted to invariant decompositions"
+   }
+  },
+  {
+   "text": "For $i\\in J$, define $g\\cdot B=gB$ on its blocks. The action identities follow from those on $P$, and $q_i(gx)=gq_i(x)$. The containing-block construction gives $r_{ji}(gB)=g r_{ji}(B)$, so all maps are equivariant. To check continuity of the finite action, for each block $B$ choose $x_B\\in B$. For blocks $B,C$, invariance and disjointness give $gB=C$ if and only if $gx_B\\in C$. Therefore $\\{g:gB=C\\}$ is open, being the inverse image of clopen $C$ under the continuous orbit map $g\\mapsto gx_B$. The inverse image of $\\{C\\}$ under $G\\times P_i\\to P_i$ is the finite union of these open sets times $\\{B\\}$. The action is continuous. Also $q_i$ is continuous because the inverse image of $\\{B\\}$ is $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28; explicit check of finite discrete continuous actions"
+   }
+  },
+  {
+   "text": "Finite invariant partitions separate points. If $x\\ne y$ in $P$, choose an open neighbourhood $U$ of $x$ excluding $y$ by Hausdorffness. Apply [lem-weil-pbc-profinite-clopen-basis], with the given compactness, Hausdorffness and total disconnectedness of $P$, to find clopen $A$ with $x\\in A\\subseteq U$. The partition $\\{A,P\\setminus A\\}$ separates $x,y$. Steps 1–2 supply an invariant finite refinement, which still separates them. Hence the canonical map $\\phi:P\\to L:=\\{(B_i)\\in\\prod_{i\\in J}P_i:r_{ji}(B_j)=B_i\\ (i\\leq j)\\}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, injectivity; clopen separation of points"
+   }
+  },
+  {
+   "text": "Let $(B_i)\\in L$. The $B_i\\subseteq P$ are nonempty closed blocks. Any finite collection of indices has a common refinement $j$, and compatibility says $B_j\\subseteq B_i$ for every index in that collection. Thus every finite intersection of the $B_i$ is nonempty. If their total intersection were empty, the open complements $P\\setminus B_i$ would cover compact $P$; a finite subcover would contradict the preceding nonempty finite intersections. Choose $x$ in their total intersection. Then $q_i(x)=B_i$ for all $i$, so $\\phi$ is surjective. If $P$ is empty, the empty partition contributes an empty coordinate, so $L$ is empty as already checked. This writes out the finite-intersection argument, rather than using a further lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite, surjectivity) and 005D (lemma-intersection-closed-in-quasi-compact, open-cover proof)"
+   }
+  },
+  {
+   "text": "The map $\\phi$ is continuous for the specified topology: the inverse image of a basic cylinder in the product is a finite intersection of inverse images under the continuous $q_i$, and passing to the subspace $L$ preserves this assertion. Distinct compatible families differ at a coordinate, whose distinct singleton cylinders are disjoint open neighbourhoods; hence $L$ is Hausdorff. Apply [lem-weil-pbc-compact-hausdorff-bijection] to $\\phi$ with whole source and target as the two subspaces: $P$ is compact by hypothesis, $L$ is Hausdorff as just verified, and steps 5–6 prove bijectivity. It follows that $\\phi$ is a homeomorphism. Equivariance holds coordinatewise by step 4. The coordinate action preserves compatibility because every $r_{ji}$ is equivariant; its continuity is checked for arbitrary systems in step 10 below.",
+   "uses": [
+    "lem-weil-pbc-compact-hausdorff-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08YE (lemma-bijective-map) and 0A2P (lemma-describe-limits, compatibility subspace topology)"
+   }
+  },
+  {
+   "text": "Now let $(Q_i,r_{ji})$ be any inverse system in the converse, with its given small nonempty directed index set $I$. Every finite discrete $Q_i$ is compact: an open cover has a finite subcover by choosing one member for each of its finitely many points. By [lem-weil-pbc-tychonoff-product-quasi-compact], the product $T=\\prod_iQ_i$ with its product topology is compact. For each $i\\leq j$, the equation $r_{ji}(z_j)=z_i$ cuts out a closed subset of $T$: at any failure the cylinder specifying $z_i$ and $z_j$ is an open neighbourhood consisting entirely of failures. Their intersection $Q$ is closed. It is compact directly from the open-cover definition: extend any cover of $Q$ by relative opens to opens of $T$, add $T\\setminus Q$, and take a finite subcover of $T$. If any $Q_i$ is empty, $T$ and $Q$ are empty, and the same compactness conclusion holds.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZU (theorem-tychonov) and Tag 08ZV (lemma-inverse-limit-quasi-compact, closed-subspace construction)"
+   }
+  },
+  {
+   "text": "The product $T$, and thus its subspace $Q$, is Hausdorff: any two distinct families differ at some coordinate, and the two distinct singleton cylinders at that coordinate separate them. It is also totally disconnected without any assumption on the transition maps. Indeed if a subset $C\\subseteq Q$ contained distinct points, a singleton cylinder distinguishing their differing coordinate would give a nonempty proper clopen subset of $C$. This separates $C$ into two nonempty disjoint relatively open subsets, so $C$ is not connected. Therefore every connected subset has at most one point. These assertions include $Q=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, proof of (1) implies (2): separation by finite discrete coordinates"
+   }
+  },
+  {
+   "text": "Finally define $(gz)_i=gz_i$ for $g\\in G$ and $z\\in Q$. Equivariance of each transition map gives $r_{ji}(gz_j)=g r_{ji}(z_j)=gz_i$, so this family lies in $Q$. The unit and multiplication identities hold in each coordinate. For a finite cylinder $\\bigcap_{i\\in F}\\{z:z_i\\in U_i\\}$, its inverse image under $G\\times Q\\to Q$ is the finite intersection of the inverse images of $U_i$ under $(g,z)\\mapsto gz_i$. Each latter map is continuous: it is the composite of $(g,z)\\mapsto(g,z_i)$ and the given continuous action on $Q_i$. These finite cylinders form a basis of the subspace topology of $Q$, so their open inverse images prove joint continuity of the coordinatewise action. This applies both to the arbitrary inverse system and to the partition system of steps 3–7.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, profinite continuous G-sets; explicit product-topology check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-compact-hausdorff-bijection",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10, p. 28; expanded compact-action refinement and equivariance, following the clopen-partition proof of Stacks topology.tex Tag 08ZY and the product-limit construction of Tags 08ZU, 08ZV, 0A2P"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -153,10 +261,273 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: Profinite.asLimit concerns spaces without actions; finite G-set decomposition and profinite-group limits do not give invariant quotient partitions of an arbitrary profinite action."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*[Pp]artition|[Pp]artition.*invariant|[Pp]rofinite.*[Aa]ction|[Aa]ction.*[Pp]rofinite",
+   "results": {
+    "t": "2026-10-21T18:47:39Z",
+    "tool": "grep",
+    "query": "invariant.*[Pp]artition|[Pp]artition.*invariant|[Pp]rofinite.*[Aa]ction|[Aa]ction.*[Pp]rofinite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous action of a compact group on a totally disconnected compact Hausdorff space is an inverse limit of finite continuous actions",
+   "results": {
+    "t": "2026-10-21T18:47:40Z",
+    "tool": "leansearch",
+    "query": "A continuous action of a compact group on a totally disconnected compact Hausdorff space is an inverse limit of finite continuous actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.of",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.isIso_toLimit",
+     "ContAction",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "LightProfinite.instTotallyDisconnectedSpaceCarrierToTopTruePtCompHausLimitConeCompLightProfiniteToCompHaus",
+     "Profinite.isoindexConeLift",
+     "Profinite.asLimitCone"
+    ],
+    "digest": "1f2cf354ca82165f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"Action\"",
+   "results": {
+    "t": "2026-10-21T18:47:40Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every continuous action of a compact group on a profinite space has cofinal finite invariant clopen partitions and is the inverse limit of finite continuous group sets",
+   "results": {
+    "t": "2026-10-21T18:47:41Z",
+    "tool": "leanfinder",
+    "query": "Every continuous action of a compact group on a profinite space has cofinal finite invariant clopen partitions and is the inverse limit of finite continuous group sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemSubgroupLimitConePtAux",
+     "ProfiniteAddGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemAddSubgroupLimitConePtAux",
+     "ProperSMul",
+     "IsCompact.exists_finite_cover_smul"
+    ],
+    "digest": "b8a3aa5d7aade84f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "grep",
+   "query": "tube_lemma|TubeLemma|nhds.*prod.*compact|isOpen.*stabilizer|stabilizer.*[Cc]lopen",
+   "results": {
+    "t": "2026-10-21T18:48:49Z",
+    "tool": "grep",
+    "query": "tube_lemma|TubeLemma|nhds.*prod.*compact|isOpen.*stabilizer|stabilizer.*[Cc]lopen",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/CompactOpen.lean",
+     "Mathlib/Topology/Compactness/LocallyCompact.lean",
+     "Mathlib/Topology/Algebra/MulAction.lean",
+     "Mathlib/Topology/Algebra/MulAction.lean",
+     "Mathlib/Topology/Order/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean"
+    ],
+    "digest": "835b7521a5c8061e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stabilizer of a clopen subset under a continuous action on a compact space is open and has finite index for a compact acting group",
+   "results": {
+    "t": "2026-10-21T18:48:50Z",
+    "tool": "leanfinder",
+    "query": "The stabilizer of a clopen subset under a continuous action on a compact space is open and has finite index for a compact acting group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsTopologicalGroup.exist_openNormalSubgroup_sub_clopen_nhds_of_one",
+     "stabilizer_isOpen",
+     "Subgroup.quotient_finite_of_isOpen'",
+     "IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one",
+     "IsTopologicalGroup.exists_mulInvClosureNhd",
+     "Subgroup.quotient_finite_of_isOpen",
+     "ProperlyDiscontinuousSMul.finite_stabilizer'",
+     "ProperlyDiscontinuousSMul.finite_stabilizer"
+    ],
+    "digest": "2b6ec66df27265a4"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: finite Galois actions, profinite groups, the definition ContAction, and ordinary Profinite.asLimit do not provide cofinal invariant clopen partitions for an arbitrary continuous profinite action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tube lemma: if an open subset of X times Y contains the product of compact sets K and L then it contains U times V for open neighborhoods U of K and V of L",
+   "results": {
+    "t": "2026-10-21T18:48:51Z",
+    "tool": "leanfinder",
+    "query": "Tube lemma: if an open subset of X times Y contains the product of compact sets K and L then it contains U times V for open neighborhoods U of K and V of L",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "generalized_tube_lemma",
+     "generalized_tube_lemma'",
+     "generalized_tube_lemma_left",
+     "generalized_tube_lemma_right",
+     "IsCompact.nhdsSet_prod_eq",
+     "TopologicalSpace.Clopens.exists_prod_subset",
+     "IsCompact.nhdsSetWithin_prod_eq",
+     "IsCompact.mem_nhdsSet_prod_of_forall"
+    ],
+    "digest": "ac2bd0e4db2a69f3"
+   },
+   "date": "2026-10-21",
+   "verdict": "match for the auxiliary tube lemma only, not for this item; no new node created because step 1 writes the needed finite-subcover argument directly"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSpace_pi|pi_compactSpace|isCompact_univ_pi|tychonoff|Tychonoff",
+   "results": {
+    "t": "2026-10-21T18:49:30Z",
+    "tool": "grep",
+    "query": "compactSpace_pi|pi_compactSpace|isCompact_univ_pi|tychonoff|Tychonoff",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Compactness/SigmaCompact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/LocallyCompact.lean",
+     "Mathlib/Topology/Compactness/LocallyCompact.lean"
+    ],
+    "digest": "7bc2684b0fb69571"
+   },
+   "date": "2026-10-21",
+   "verdict": "auxiliary product compactness matches Pi.compactSpace, Mathlib/Topology/Compactness/Compact.lean:1183; already represented by lem-weil-pbc-tychonoff-product-quasi-compact, which is cited instead of creating a duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every product of compact topological spaces is compact",
+   "results": {
+    "t": "2026-10-21T18:49:31Z",
+    "tool": "leansearch",
+    "query": "Every product of compact topological spaces is compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instCompactSpaceProd",
+     "Function.compactSpace",
+     "Pi.compactSpace",
+     "isCompact_univ_pi",
+     "TopologicalSpace.Compacts.prod",
+     "TopologicalSpace.Compacts.instSProdProd",
+     "IsCompact.prod",
+     "isCompact_pi_infinite"
+    ],
+    "digest": "8eb1ec56978c0a02"
+   },
+   "date": "2026-10-21",
+   "verdict": "auxiliary product compactness matches Pi.compactSpace, Mathlib/Topology/Compactness/Compact.lean:1183; already represented by lem-weil-pbc-tychonoff-product-quasi-compact, which is cited instead of creating a duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompactSpace\", \"Pi\"",
+   "results": {
+    "t": "2026-10-21T18:49:31Z",
+    "tool": "loogle",
+    "query": "\"CompactSpace\", \"Pi\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Pi.compactSpace",
+     "Pi.locallyCompactSpace_of_finite",
+     "Pi.locallyCompactSpace"
+    ],
+    "digest": "d840406da238d1a2"
+   },
+   "date": "2026-10-21",
+   "verdict": "auxiliary product compactness matches Pi.compactSpace, Mathlib/Topology/Compactness/Compact.lean:1183; already represented by lem-weil-pbc-tychonoff-product-quasi-compact, which is cited instead of creating a duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary product of compact topological spaces with the product topology is compact, Tychonoff theorem",
+   "results": {
+    "t": "2026-10-21T18:49:32Z",
+    "tool": "leanfinder",
+    "query": "An arbitrary product of compact topological spaces with the product topology is compact, Tychonoff theorem",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Pi.compactSpace",
+     "instCompactSpaceProd",
+     "Function.compactSpace",
+     "isCompact_pi_infinite",
+     "isCompact_univ_pi",
+     "Pi.isCompact_iff",
+     "instCompactIccSpaceForall",
+     "Pi.locallyCompactSpace"
+    ],
+    "digest": "7d61ec6339ae0b1a"
+   },
+   "date": "2026-10-21",
+   "verdict": "auxiliary product compactness matches Pi.compactSpace, Mathlib/Topology/Compactness/Compact.lean:1183; already represented by lem-weil-pbc-tychonoff-product-quasi-compact, which is cited instead of creating a duplicate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-field-profinite-galois-site",
@@ -181,5 +552,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-action-finite-quotients",
+  "worker": "stage1",
+  "summary": "Proved invariant refinement by uniform block preservation, a finite coset cover, and common refinement of all translated partitions. Constructed the small finite continuous G-set system and proved the equivariant homeomorphism by clopen separation and compactness. Proved the converse by a closed compatibility subspace of a compact product and a basis check of joint continuity. Reused three existing Mathlib leaves and the size convention; no new nodes and no statement change.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). Its inherited from.place identifies the field-site presentation in Bhatt–Scholze Example 4.1.10, p. 28, Paragraph (3) of its creation route. Steps 1–7 expand the finite-G-set-to-profinite-G-set identification there, and steps 8–10 prove its inverse construction. Searches of the whole blueprint found no equal statement."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-3216d9bc4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-3216d9bc4 (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full; the delivery has no new nodes and leaves the statement unchanged. Steps 1-2: compactness of P and a continuity tube give an open normal N fixing every block; a finite coset cover makes the set of translates gα finite; their common refinement is G-invariant and refines α. This matches BS Ex 4.1.10, and the compactness of G excludes the non-compact Z-action counterexample of BS Ex 4.1.12. Steps 3-4: the refinement poset J is small, nonempty and directed, the maps r_ji are surjective, and the block action is jointly continuous via the test gB=C iff g·x_B∈C. Steps 5-7 follow Stacks 08ZY (topology.tex l.4134ff): injectivity via the cited clopen-basis leaf, surjectivity by finite intersections in compact P, and the homeomorphism via the cited compact-Hausdorff-bijection leaf with U=P, V=L. Steps 8-10: compactness via the Tychonoff leaf plus the closed compatibility locus, Hausdorff and totally disconnected via coordinate cylinders, and joint continuity of the action via act_i∘(id×pr_i). All cited nodes are Mathlib leaves or def-weil-size-convention, so there is no route issue and no tool_uses are needed. proof_deps equals the union of the uses, and no SGA source is cited. Edge cases checked: P empty, empty Q_i, a trivial group, and non-surjective transition maps. No duplicate exists: rg -L found only the Galois base-change partition node, the discrete-action orbit coproduct and the stalk realization node. Both uses in the only citer, lem-sfb-field-profinite-galois-site (steps 2 and 4), match the statement. Nothing to fix."
  }
 }

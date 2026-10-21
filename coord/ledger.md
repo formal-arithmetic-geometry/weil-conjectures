@@ -23408,3 +23408,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:58 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 18:59 L: returned deliver/B2/Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent (reviewer RETURN: (reviewer C-51828, head 518284896) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.De)
 - 18:59 L: merged deliver/ND/lem-fix-compactification-completed-realization (stage 2; reviewer PASS; parallel immutable checks)
+- 19:01 L: merged deliver/NN/lem-sfb-profinite-action-finite-quotients (reviewer PASS; first push; new nodes: 0)
