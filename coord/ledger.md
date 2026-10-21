@@ -23385,3 +23385,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:47 L: merged deliver/Q08/lem-sf-open-tensor-quotient-augmentation (stage 2; reviewer PASS; parallel immutable checks)
 - 18:49 L: merged deliver/Q07/lem-sfb-internal-bar-roof-adjunction (reviewer FIX; first push; new nodes: 0)
 - 18:50 L: merged deliver/NN/lem-sfb-profinite-algcl-derived-invariants-comparison (reviewer PASS; first push; new nodes: 4)
+- 18:50 L: returned deliver/NK/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D2 together with a hidden circularity (D4/C6 kind). New node lem-sfb-norm-support-generator-scalar says the support scal)
