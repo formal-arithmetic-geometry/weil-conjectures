@@ -1,6 +1,6 @@
 # Work queue
 
-148 items; claim with `tools/claim.py next <group> [--stage N]`.
+140 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (14 clusters, 708 modules)
 
@@ -25,7 +25,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
-## Stage 1: nodes to split (22)
+## Stage 1: nodes to split (20)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,35 +35,33 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
-| `lem-sfb-closed-test-derived-exchange-model` | 4013 | none |
-| `lem-sfb-condensed-galois-global-descent` | 4013 | none |
-| `lem-sfb-condensed-split-coset-induction` | 4013 | none |
 | `lem-sfb-geometric-condensed-finite-scalar-model` | 4013 | none |
-| `lem-sfb-internal-bar-ordered-cup` | 4013 | none |
 | `lem-sfb-normed-scalar-profinite-hom-acyclic` | 4013 | none |
 | `lem-sfb-prime-to-ell-cochain-finite-quotient-descent` | 4013 | none |
 | `lem-sfb-profinite-algcl-derived-invariants-comparison` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
-| `lem-sfb-snc-finite-root-face-regular` | 4013 | none |
 | `lem-sfb-torsion-acyclic-norm-coefficient-test` | 4013 | none |
 | `lem-sfb-equivariant-resolution-bar-normalization` | 4014 | none |
+| `lem-sfb-field-profinite-galois-site` | 4014 | none |
 | `lem-sfb-integral-cubical-chain-diagonal` | 4014 | none |
+| `lem-sfb-internal-bar-roof-adjunction` | 4014 | none |
+| `lem-sfb-internal-inflation-graded-cup` | 4014 | none |
 | `lem-sfb-polynomial-translation-acyclic` | 4014 | none |
 | `lem-sfb-product-chain-proper-interval-homology` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (42)
+## Stage 2: nodes to state (36)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `sk-def-sf-orientation` | 2 | state | 17 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
-| `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 6 |
+| `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 8 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
 | `lem-sf-open-tensor-quotient-augmentation` | 1 | state | 1 |
-| `lem-sfb-discrete-lattice-koszul-resolution` | 1 | state | 1 |
+| `lem-sfb-condensed-galois-global-descent` | 1 | state | 1 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
@@ -73,33 +71,27 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-affine-chart-exceptional-identification` | 1 | state | 0 |
 | `lem-pur-dualizing-unit-composite` | 1 | state | 0 |
 | `lem-pur-finite-site-counit-projection-transport` | 1 | state | 0 |
-| `lem-sf-locally-closed-relative-transpose-normalization` | 1 | state | 0 |
 | `lem-sfb-action-topos-geometric-restriction` | 1 | state | 0 |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
+| `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
+| `lem-sfb-condensed-split-coset-induction` | 1 | state | 0 |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
-| `lem-sfb-filtered-colimit-strictly-henselian-local` | 1 | state | 0 |
 | `lem-sfb-integral-closure-ind-etale-base-change` | 1 | state | 0 |
-| `lem-sfb-integral-lisse-closed-base-change` | 1 | state | 0 |
-| `lem-sfb-norm-algcl-cohomology-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-polynomial-derived-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
 | `lem-sfb-rational-polynomial-bar-contraction` | 1 | state | 0 |
 | `lem-sfb-root-coordinate-supported-vanishing` | 1 | state | 0 |
+| `lem-sfb-snc-finite-root-face-regular` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
-| `lem-sfb-snc-tame-root-etale-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wcontractible-component-derived-hom` | 1 | state | 0 |
-| `lem-sfb-wstrict-lisse-component-cohomology` | 1 | state | 0 |
-| `lem-wf-internal-hom-weil` | 1 | state | 0 |
-| `lem-zl-adic-hom-tensor-lisse-criterion` | 1 | state | 0 |
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
 | `lem-pod-semilinear-field-operation-lifts` | 2 | state | 0 |
-| `lem-sfb-prime-to-ell-condensed-acyclicity` | 2 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 
-Not open yet: 372 nodes that below a finished node, not needed, 105 nodes that wait for a statement dependency (bottom-up), 21 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 372 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 19 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
