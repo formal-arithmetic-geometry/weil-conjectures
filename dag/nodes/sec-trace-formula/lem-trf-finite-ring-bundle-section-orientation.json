@@ -24,9 +24,181 @@
   "thm-amb-vector-bundle-purity",
   "def-amb-vector-integration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Check the geometric hypotheses on the objects used below. The projective completion of [lem-amb-vector-projective-completion] gives Noetherian total and compactification spaces for every bundle over a Noetherian base, including the trivial bundle. The open-subscheme lemma makes every trivializing open and every intersection of such opens Noetherian. Thus all the compact-support functors and right adjoints below are defined. For every affine open in its target, the inverse image under an open immersion is an open in a Noetherian scheme, hence quasi-compact by the same lemma. Each open immersion in question is therefore quasi-compact and is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type], and etale by [lem-weil-pbc-open-immersion-etale]. Its diagonal identifies with the identity of its source, so is closed: the immersion is separated. Isomorphisms are open immersions onto the whole target and satisfy the same hypotheses. Thus the open adjunctions and composition comparisons apply. Invertibility of $N$ restricts to these opens, and $A$ remains finite with $NA=0$. Write $L_X=A_X(d)[2d]$; the Tate pullback identifications identify this object under each map of schemes used below.",
+   "uses": [
+    "lem-amb-vector-projective-completion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, hypotheses for vector-bundle integration and linear changes of frame"
+   }
+  },
+  {
+   "text": "For an affine-space projection $p=p_{d,T}$, use the actual coordinate-tower adjunction $F_d\\dashv G_d$ in [lem-amb-affine-space-top-trace], with $G_d=p^*(-)(d)[2d]$. The unbounded compact-support composition comparisons identify its left functor $F_d$ with $Rp_!$ on the whole ordinary derived category: each affine-line factor is the chosen proper/open compactification functor, and the tower compositor is the one of the comparison theorem. Its restriction on $L_X$ is therefore the bounded-below comparison used to define $t_p$. Conjugating this left-functor isomorphism gives a counit-preserving isomorphism $G_d\\cong p^\\times$ by [def-weil-pbc-adjunction-conjugate]. At $A_T$ its component is exactly the adjunct $\\alpha_p:L_X\\to p^\\times A_T$ of $t_p$, because the defining equation for this conjugate is equality of the counits. Hence $\\alpha_p$ is invertible. This uses the affine-space adjunction, rather than inferring invertibility of an adjunct from invertibility of its trace alone.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, specified coordinate adjunction and its counit normalization"
+   }
+  },
+  {
+   "text": "Make the restriction comparison precise. For an open $u:T\\hookrightarrow S$, put $v:E_T\\hookrightarrow E$ and $b=\\pi_T$. Compose the open adjunctions of [lem-amb-etale-adjoint-locality] with compact supports. For every $M\\in D(E_T{}_{\\mathrm{et}},A)$ the resulting natural Hom identifications are\n$$\\operatorname{Hom}(M,v^*\\pi^\\times A_S)\\cong\\operatorname{Hom}(v_!M,\\pi^\\times A_S)\\cong\\operatorname{Hom}(R\\pi_!v_!M,A_S)\\cong\\operatorname{Hom}(u_!Rb_!M,A_S)\\cong\\operatorname{Hom}(Rb_!M,A_T)\\cong\\operatorname{Hom}(M,b^\\times A_T).$$\nThe middle identification uses $\\pi v=ub$ and the unbounded compact-support compositor. Thus the conjugate comparisons for the two composite adjunctions give the counit-preserving isomorphism $c_u:v^*\\omega_\\pi\\cong\\omega_b$. The mate-pasting identities show that these comparisons compose under nested opens and source isomorphisms. In particular, a restricted adjunct is the adjunct of the restricted trace after compact-support exchange. These are the canonical restriction maps in the statement; no unrestricted exceptional base-change assertion is needed.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, canonical restriction and counit-preserving source comparison"
+   }
+  },
+  {
+   "text": "Apply the preceding Hom calculation to $p_{d,T}$ and an open $W\\subseteq T$. The base-change equality for the actual trace in [lem-amb-affine-space-top-trace] says $t_{p_{d,W}}C=u^*t_{p_{d,T}}$, where $C$ is compact-support exchange on $L$. The canonical Tate pullback identification and the Hom calculation therefore give\n$$c_u\\,v^*\\alpha_{p_{d,T}}=\\alpha_{p_{d,W}}.$$\nInvert and pull back by zero. This proves restriction compatibility of the proposed affine section orientations. The trace equality applies even when $W$ is not affine: it is Noetherian by Step 1, and the affine-space trace theorem permits any Noetherian base. Pasting gives the same equation after transporting through a frame.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, restriction of the coordinate adjunction to overlaps"
+   }
+  },
+  {
+   "text": "Over a Noetherian overlap $W$, let $a_g$ be an invertible linear substitution and let $\\theta_g:a_g^*L\\cong L$ be Tate pullback. Let $c_g:a_g^*\\omega_p\\cong\\omega_p$ be the counit-preserving comparison for $pa_g=p$. Under the adjunction $Rp_!\\dashv p^\\times$, the map $c_g a_g^*\\alpha_p\\theta_g^{-1}:L\\to\\omega_p$ has transpose $t_p\\rho_g^{-1}$: one moves the pulled-back argument across the isomorphism adjunction, so its compact-support identification is inverse to the pullback action $\\rho_g$ specified in [lem-amb-linear-trace-invariance]. This is the source-isomorphism case of mate pasting. That lemma gives $t_p\\rho_g=t_p$, hence also $t_p\\rho_g^{-1}=t_p$. Injectivity of the adjunction Hom bijection yields\n$$c_g a_g^*\\alpha_p=\\alpha_p\\theta_g.$$\nSince $a_g0=0$, inversion and zero-section pullback identify the two section orientations. By [def-asd-vector-bundle-zero-section], two frames on any overlap differ by exactly such a matrix over $\\Gamma(W,\\mathcal O_W)$. Together with Step 4 this proves equality of the prescribed $o_\\phi$ on all overlaps, including arbitrary invertible linear changes, without a determinant factor.",
+   "uses": [
+    "lem-amb-linear-trace-invariance",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, linear normalization and preservation by a linear bundle isomorphism"
+   }
+  },
+  {
+   "text": "Choose an affine trivializing cover $(T_i)$. Put $M=(z^*\\omega_\\pi)[-2d]$ and $P=A_S(d)[0]$. Exact inverse image and the canonical Tate comparisons identify $M|_{T_i}$ and $P|_{T_i}$ with $A_{T_i}(d)[0]$ by Step 2 and the open comparison of Step 3. Both therefore have cohomology only in degree zero on this cover. Apply [lem-pur-degree-zero-derived-map-gluing] to $M,P$ and the compatible maps $o_{\\phi_i}[-2d]$ from Steps 4--5. It supplies a unique global map. Apply the same lemma to their inverses, which agree because the maps do; uniqueness applied to the two composites makes them identity maps. Shifting back gives the isomorphism $o_E$. For a frame not in the chosen cover, compare on its intersections with the $T_i$ and apply the same injectivity statement there. Thus $o_E$ has every prescribed frame restriction and is uniquely determined by them. This glues maps between locally degree-zero objects, not arbitrary derived morphisms.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, gluing the frame restrictions; Stacks Tags 06XS, 03EM and 04TQ"
+   }
+  },
+  {
+   "text": "Let $h:E\\xrightarrow{\\sim}E'$ be an $S$-linear bundle isomorphism. A frame $\\phi'$ on $E'_T$ induces the frame $\\phi'h$ on $E_T$, and $h z=z'$. The source-isomorphism adjunction comparison identifies $h^*\\omega_{\\pi'}$ with $\\omega_\\pi$ by [lem-amb-etale-adjoint-locality]. Conjugation and mate pasting make the comparison for $\\phi'h$ the composite of those for $h$ and $\\phi'$. Hence, after zero-section pullback, the map obtained from $o_{E'}$ by $h$ has local restriction precisely $o_{\\phi'h}$. Step 6 makes this map equal to $o_E$. This proves the stated naturality, using the specified counit-preserving source comparison.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, preservation by linear isomorphisms"
+   }
+  },
+  {
+   "text": "At $d=0$ the coordinate tower is the identity adjunction, $A(0)[0]=A$, and its counit and adjunct are identities. The rank-zero symmetric algebra and its augmentation identify $E,z,\\pi$ with $S,1_S,1_S$. Thus all frame maps are identities and unique gluing gives $o_E=1$. If $S$ is empty the degree-zero gluing statement includes the empty cover. If $A=0$, every unital $A$-module is zero, so all the displayed objects are zero objects and their unique maps are the asserted isomorphisms. In particular $N=1$ is covered, since $NA=0$ then forces $A=0$.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "def-asd-vector-bundle-zero-section",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, identity normalization and degenerate cases"
+   }
+  },
+  {
+   "text": "For the final coefficient comparison, first compute the canonical projection map at $K=A_S$. Under tensor-unit identifications its proper factor is identity: in [def-kun-projection-formula-map] the adjoint defining this factor reduces to the counit $r^*Rr_*L\\to L$, whose transpose is $1_{Rr_*L}$ by the triangle identity. The coefficient-first projection map named in [thm-amb-vector-bundle-purity] is, by [lem-amb-proper-coproducts-projection], this $\\mathrm{PF}_r$ conjugated by the derived symmetries $\\sigma$ of [lem-kun-tensor-sym]; at the unit $A_S$ in degree zero the sign $(-1)^{pq}$ is $1$ and each symmetry followed by the unitor is the other unitor, so it gives the same map. Its open factor is identity under the unitors as well: the open tensor comparison is induced by $j_!P\\otimes A\\cong j_!(P\\otimes j^*A)$, which sends a local section to itself. Consequently inverse projection followed by $1\\otimes t_\\pi$ and the unitor, at $K=A_S$, is exactly $t_\\pi$. Thus the map called $\\gamma_{\\pi,A_S}$ in the statement is the adjunct of $t_\\pi$, with no residual unit automorphism.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-tensor-unit",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, comparison to integration-normalized bundle purity; projection map at the coefficient unit"
+   }
+  },
+  {
+   "text": "Now take $A=\\mathcal O_F/\\varpi_F^n$ and $\\ell$ invertible on $S$. The theorem [thm-amb-vector-bundle-purity] applies on these ordinary unbounded categories to $K=A_S$ and gives the specified invertible $\\gamma_{\\pi,A_S}$. By [def-amb-vector-integration], $t_\\pi$ restricts, through a frame and compact-support exchange, to the very same coordinate-tower counit $t_{p_d}$. Steps 3 and 9 then identify the restriction of $\\gamma_{\\pi,A_S}$ with $\\alpha_{p_d}$. Invert and pull back along $z_T$: the frame restrictions of $z^*(\\gamma_{\\pi,A_S}^{-1})$ are $o_\\phi$. The uniqueness in Step 6 proves the desired equality with $o_E$. The coefficient identifications are exactly those in the bundle-purity theorem. In particular, if its Tate line uses an $\\ell$-power annihilator instead of $N$, compare both with a common-multiple annihilator; [lem-asd-etale-finite-twist-pullback] identifies the lines by the roots-of-unity power maps, compatibly with their tensors and inverse images. No field assumption on $A$, flatness over $\\mathbf Z/N$, or general smooth-purity theorem enters the argument.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "def-amb-vector-integration",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, comparison with the inverse vector-bundle purity map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-vector-projective-completion",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-amb-etale-adjoint-locality",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-linear-trace-invariance",
+  "def-asd-vector-bundle-zero-section",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-unit",
+  "lem-pur-etale-open-derived-tensor",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration",
+  "lem-amb-proper-coproducts-projection",
+  "lem-kun-tensor-sym"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, expanded using the coordinate-tower counit, linear trace invariance and degree-zero sheaf-map gluing; ordinary finite-ring formulation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +248,52 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation|purity|vectorBundle",
+   "results": "{\"t\": \"2026-10-21T08:10:41Z\", \"tool\": \"grep\", \"query\": \"orientation|purity|vectorBundle\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not state finite-ring etale bundle orientation; orientation hits concern ordered linear algebra or topological bundles"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-21T08:10:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.Adjunction.ofIsRightAdjoint\"], \"digest\": \"d2183a4d275d6f7e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary adjunction infrastructure, not a finite-ring etale orientation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ring etale cohomology affine vector bundle zero section orientation invariant under linear coordinates and normalized integration",
+   "results": "{\"t\": \"2026-10-21T08:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finite ring etale cohomology affine vector bundle zero section orientation invariant under linear coordinates and normalized integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Orientation.map_apply\", \"Orientation.volumeForm_map\", \"IsLocalFrameOn.coeff_apply_zero_at\", \"Orientation.map_eq_det_inv_smul\", \"Orientation.volumeForm\", \"Orientation.volumeForm_comp_linearIsometryEquiv\", \"Orientation.volumeForm_zero_neg\", \"Orientation.volumeForm_zero_pos\"], \"digest\": \"8e142b95956b9513\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not state finite-ring etale bundle orientation; orientation hits concern ordered linear algebra or topological bundles"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.section|compact.support|[Tt]ate",
+   "results": "{\"t\": \"2026-10-21T08:11:26Z\", \"tool\": \"grep\", \"query\": \"zero.section|compact.support|[Tt]ate\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"8f6ab8b06ded1df1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not state finite-ring etale bundle orientation; orientation hits concern ordered linear algebra or topological bundles"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical purity isomorphism for a vector bundle in etale cohomology is independent of linear trivialization",
+   "results": "{\"t\": \"2026-10-21T08:11:26Z\", \"tool\": \"leansearch\", \"query\": \"The canonical purity isomorphism for a vector bundle in etale cohomology is independent of linear trivialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.linearEquivAt.congr_simp\", \"Trivialization.coordChangeL\", \"Trivialization.symmₗ.congr_simp\", \"Trivialization.linearMapAt.congr_simp\", \"Trivialization.symmL.congr_simp\", \"Trivialization.symm_continuousLinearEquivAt_eq\", \"Pretrivialization.linearEquivAt.congr_simp\", \"Trivialization.symm_apply_eq_mk_continuousLinearEquivAt_symm\"], \"digest\": \"8edc8c5cef9175d9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not state finite-ring etale bundle orientation; orientation hits concern ordered linear algebra or topological bundles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Tate orientation of algebraic vector bundles obtained as inverse adjoint of compact support trace etale cohomology",
+   "results": "{\"t\": \"2026-10-21T08:11:33Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical Tate orientation of algebraic vector bundles obtained as inverse adjoint of compact support trace etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Orientation\", \"Module.Oriented.positiveOrientation\", \"EuclideanGeometry.o\", \"Orientation.volumeForm_def\", \"Bundle.ContinuousLinearMap.memTrivializationAtlas\", \"Module.Oriented\", \"Orientation.map_apply\", \"Module.Basis.orientation\"], \"digest\": \"b9695193bde82c0b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results do not state finite-ring etale bundle orientation; orientation hits concern ordered linear algebra or topological bundles"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -101,5 +315,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-finite-ring-bundle-section-orientation",
+  "worker": "stage1",
+  "summary": "Proved the finite-ring zero-section orientation by the normalized affine-space adjunction, explicit open Hom comparison, linear trace invariance and gluing after a common shift into the heart. Checked bundle-isomorphism naturality, rank zero, empty schemes and zero coefficients, and identified the specified valuation-quotient purity map by its trace at the tensor unit. No new nodes and no statement changes.",
+  "blueprint": "lem-trf-local-term-locality proof (2), normal-cone specialization; current orientation-charts proof Step 4, linear normalization and comparison to bundle purity. Steps 1--5 justify local maps and overlap equality, 6 glues, 7--8 prove naturality and normalization, 9--10 identify inverse bundle purity.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-vector-projective-completion",
+    "why": "Supplies Noetherian total spaces and projective compactifications for bundles, a geometric tool for the existing normal-bundle route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Verifies the Noetherian hypothesis on all overlaps, including non-affine intersections."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Existing statement-level input for the specified ordinary-etale section orientation; used as a local tool without replacing the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Existing statement-level input for the specified ordinary-etale section orientation; used as a local tool without replacing the contracting-correspondence route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Supplies the ordinary finite Tate line and its coherent inverse-image and annihilator comparisons."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Supplies the prescribed affine coordinate adjunction and actual normalized trace, including base restriction and dimension zero."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Supplies coherent compact-support compositors on the unbounded ordinary categories, so the affine adjunction and open restriction comparisons have the correct domain."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Defines counit-preserving right-adjoint comparison and states its invertibility and composition properties."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Supplies exact open and isomorphism adjunctions used to identify the actual dualizing objects, as a local tool within the section-deformation argument."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Defines the exact Hom bijections and identity normalization used to compare open restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic category-theoretic coherence for pasting counit-defined comparisons; does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-amb-linear-trace-invariance",
+    "why": "Supplies the normalized affine trace invariance under every linear coordinate substitution, the precise local input to the orientation argument."
+   },
+   {
+    "node": "lem-pur-degree-zero-derived-map-gluing",
+    "why": "Supplies unique gluing after shifting the section object into degree zero; no unit-specific alternative provides this sheaf descent tool."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Defines the actual counit projection used in the normalization computation at the coefficient unit."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Supplies the canonical unit isomorphisms in the projection normalization computation."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Supplies the specified open tensor comparison in the canonical compact-support projection at the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-vector-projective-completion",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-amb-etale-adjoint-locality",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-linear-trace-invariance",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-unit",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-3b3f1720e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-3b3f1720e (reviewer sub-agent of L); spot-checked: Read the whole 0-new-node split: item statement, all 10 steps, every cited statement and the source (main-20261015 orientation-charts proof Step 4, lines 26-31). Statement, stmt_deps, source and blueprint are byte-identical to live; no target weakened. No repair note on this item (it is a Q58 re-split child), so the ordinary split rules apply. Nothing cited is in the dropped list, no SGA, no cycle. Checks: Step 1 gets Noetherian overlaps and qc/finite-type/etale/separated open immersions from the cited lemmas, never assuming affine overlaps (E1). Step 2 gets invertibility of alpha_p by conjugating the unbounded compositor iso Rp_!=F_d (lem-amb-unbounded-compact-support-comparisons, def-weil-pbc-adjunction-conjugate); the A_T-component is the adjunct of t_p. Step 3's Hom chain was checked and its domains are right; the mate identity is supported by the exchange/compositor normalizations in lem-amb-unbounded. Step 4 uses the trace base-change clause for any Noetherian W. Step 5 is a_{g!}=(a_g^-1)^*, and lem-amb-linear-trace-invariance holds for all g, so rho_g^-1 or rho_{g^-1} both work; no determinant. Step 6 applies degree-zero gluing to M=z^*omega[-2d] and P=A(d)[0], hypotheses met, inverses glued. Step 7 is naturality via locality plus mate pasting. Step 8 covers d=0, empty S, A=0 and N=1. Step 10 uses thm-amb-vector-bundle-purity with K=A_S and the local traces from def-amb-vector-integration; the l^r vs N Tate line comparison works via m|m' since char A divides N. FIX (C1/C4): Step 9 used the symmetric composite sigma*PF*sigma that thm-amb-vector-bundle-purity takes from lem-amb-proper-coproducts-projection, but cited neither that node nor lem-kun-tensor-sym. Added both to the uses and proof_deps and named them in the text; at the degree-0 unit the sign is 1 and symmetry followed by the unitor is the other unitor. Advisory: Q58 sibling lem-trf-section-coordinate-counit-normalization contains Step 4's open case; not a duplicate. Off-unit generic tools in split_report.tool_uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }
