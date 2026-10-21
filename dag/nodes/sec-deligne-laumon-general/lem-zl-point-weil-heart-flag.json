@@ -11,11 +11,141 @@
   "def-weil-punctual-weights",
   "def-weil-weil-sheaf-complex",
   "def-weil-local-frobenius-trace",
-  "lem-weil-point-fibre-equivalence"
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "def-wf-positive-real-logarithm"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First choose an actual finite heart stage for the given sheaf. Write its underlying common-stage object as $(E_0,K)$. The constructible truncation theorem identifies $\\mathcal H^0(E_0,K)$ with $(E_0,\\mathcal H^0K)$, and the canonical truncation isomorphism identifies this with $\\mathcal F$, since $\\mathcal F$ is in the heart. Use this identification to replace the representative by the heart object $\\mathcal H^0K$. Represent the Weil map, its inverse, the identification with the original object and its inverse at common finite stages. There are finitely many inverse and intertwining equations. By the equality rule in the Hom colimits, each holds at a further finite stage; a common upper bound makes all hold simultaneously. Thus, after one enlargement, there is a genuine heart object $M$ over $E_0$ with an isomorphism $\\theta:Lg_s^*M\\to M$ whose image is the prescribed Weil sheaf. No continuity of the powers of $\\theta$ is required by the Weil-pair definition.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "prop-constructible-truncations",
+    "def-weil-constructible-heart",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "Use the stated point-fibre equivalence at finite coefficient fields together with the point-realization cohomology theorem. Its restriction to hearts is a fully faithful equivalence with finite-dimensional vector spaces: a heart object has fibre concentrated in degree zero; conversely, if a preimage $C$ of $W[0]$ is chosen under the equivalence, then $\\mathcal H^0 C$ is a heart preimage, because $\\operatorname{Fib}_s(\\mathcal H^0 C)\\cong H^0(\\operatorname{Fib}_s C)[0]=W[0]$. Full faithfulness is inherited from the full derived subcategories. This equivalence preserves and reflects kernels and cokernels: their universal factorization properties transfer bijectively across the Hom bijections. It therefore preserves and reflects short exact sequences. These fibre identifications commute with enlarging the finite coefficient field by the scalar/cohomology compatibility in the point-realization theorem. In particular the fibre $V_0$ of $M$ is finite dimensional and $V=V_0\\otimes_{E_0}\\Qlb$.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-a1-point-realization-standard-cohomology",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "Apply the invariant-flag theorem over the algebraically closed coefficient field $\\Qlb$, rather than over the geometric base field $k$, to $F:V\\to V$. It gives $0=W_0\\subset W_1\\subset\\cdots\\subset W_d=V$ with $\\dim W_j=j$ and $F(W_j)\\subset W_j$. Each restriction is injective because $F$ is, and sends a basis of $W_j$ to $j$ independent vectors in the $j$-dimensional space $W_j$; these form a basis. Hence $F(W_j)=W_j$ and also $F^{-1}(W_j)=W_j$. Thus $F$ and $F^{-1}$ induce mutually inverse operators on every $W_j/W_{j-1}$. Choose $b_j\\in W_j\\setminus W_{j-1}$ successively. Their images generate the one-dimensional successive quotients, so $b_1,\\ldots,b_j$ is a basis of $W_j$. On the $j$th quotient the induced operator is multiplication by a scalar $\\alpha_j$, nonzero because it is invertible. This argument allows repeated eigenvalues and nonzero off-diagonal entries.",
+   "uses": [
+    "p-linear-triangular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "Choose an $E_0$-basis of $V_0$. Let $B$ be the change-of-basis matrix whose columns are the adapted vectors $b_j$ in this basis after extension to $\\Qlb$. Enlarge $E_0$ to a finite field $E\\subset\\Qlb$ containing all entries of $B$, $B^{-1}$ and the matrices of $F$ and $F^{-1}$ in the adapted basis. Such an extension is finite: every one of these finitely many entries is algebraic over $\\mathbf Q_\\ell$, and adjoining them successively multiplies finitely many finite degrees. Put $W_{j,E}=\\operatorname{span}_E(b_1,\\ldots,b_j)$ inside $V_0\\otimes_{E_0}E$. The triangular matrix equations for $F$ and $F^{-1}$ hold over $E$ because they hold in its containing field $\\Qlb$. They preserve every $W_{j,E}$; the scalar on $W_{j,E}/W_{j-1,E}$ is $\\alpha_j\\in E^\\times$. The coordinate inclusion and quotient maps, and the bases exhibiting their exact sequences, are now all over this same $E$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "At this finite stage use the heart equivalence in step 2 to choose heart objects $M_j$ with specified fibres $W_{j,E}$, taking $M_d=M\\otimes_{E_0}E$. Write $A_j=F|_{W_{j,E}}$ under these identifications. Let $\\iota_{M_j}:\\operatorname{Fib}_s(M_j)\\to\\operatorname{Fib}_s(Lg_s^*M_j)$ be the specified point transport. It is an isomorphism. Full faithfulness of the point-fibre equivalence lifts the map $A_j\\circ\\iota_{M_j}^{-1}$ uniquely to a map $\\theta_j:Lg_s^*M_j\\to M_j$; it lifts its inverse as well, so faithfulness gives the two inverse identities. Pullback along the scheme automorphism $g_s$ commutes with constructible truncations, hence both source and target are in the heart. Thus $(M_j,\\theta_j)$ is an actual constructible $E$-Weil sheaf. For $j=d$, the equation $F=\\operatorname{Fib}_s(\\theta)\\circ\\iota_M$ in the definition of local Frobenius shows that this is exactly the original Weil structure after scalar extension, not a separately chosen automorphism.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-a1-point-realization-standard-cohomology",
+    "lem-weil-frobenius-cohomology-transport-iso",
+    "def-weil-frobenius-point-transport",
+    "prop-constructible-truncations",
+    "def-weil-local-frobenius-trace",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "Lift each vector inclusion $u:W_{j-1,E}\\to W_{j,E}$ by full faithfulness. It is a monomorphism and its cokernel has the prescribed quotient fibre by the exact heart equivalence of step 2. Naturality of point transport says $\\operatorname{Fib}_s(Lg_s^*u)\\iota_{M_{j-1}}=\\iota_{M_j}\\operatorname{Fib}_s(u)$. Combining this with $A_ju=uA_{j-1}$ and the formula in step 5 gives $\\operatorname{Fib}_s(u\\theta_{j-1})=\\operatorname{Fib}_s(\\theta_j Lg_s^*u)$; faithfulness proves Weil equivariance. For the cokernel $Q_j$, define its Weil isomorphism by lifting the induced quotient automorphism composed with $\\iota_{Q_j}^{-1}$, just as in step 5. The same equation with the quotient projection makes that projection Weil equivariant. Therefore the lifted sequence is short exact in the underlying constructible heart, with the required Weil structures. Composition of the lifted inclusions makes $M_j$ a Weil subobject of $M_d$; pass to $\\Qlb$ and identify the endpoint with $\\mathcal F$. All these constructions and inverse maps were made at the single field $E$. After extension to $\\Qlb$ the adapted coordinate bases still exhibit exact vector-space sequences; the same point equivalence and cohomology comparison at the common stage reflect their exactness in the common-stage heart.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-a1-point-realization-standard-cohomology",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-weil-frobenius-cohomology-transport-iso",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "The unique closed point of $\\operatorname{Spec}k_0$ has residue cardinality $q$. The specified fibre and point-transport identifications give local Frobenius $\\alpha_j$ on the quotient, by the defining composite of local Frobenius and step 5. Since $\\iota$ is a field isomorphism and $\\alpha_j\\ne0$, the number $r_j=|\\iota(\\alpha_j)|$ is positive. Put $w_j=2\\log(r_j)/\\log(q)$. Since $q>1$, $\\log(q)>0$, and the positive real power convention gives $q^{w_j/2}=\\exp((\\log(r_j)/\\log(q))\\log(q))=r_j$. The purity definition therefore makes the quotient punctually $\\iota$-pure of weight $w_j$. The finite Weil filtration constructed above is exactly the mixedness filtration of that definition (and, when a bound is wanted, take the maximum of its finitely many weights).",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-punctual-weights",
+    "def-weil-real-power",
+    "def-wf-positive-real-logarithm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  },
+  {
+   "text": "If $d=0$, the faithful heart equivalence identifies $\\mathcal F$ with zero; take the empty filtration with its sole endpoint $0=\\mathcal F$. There are no quotient or weight conditions to check. For a finite extension of $k_0$, carry out the same construction with that finite field as the base datum and its cardinality $q'$ in the logarithmic calculation. The point equivalence, the natural invertible point transports, and the truncation assertions are stated for every finite-field datum, so the proof has the same hypotheses. No step imposed reality, diagonalizability, or semisimplicity.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "prop-constructible-truncations",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-point-fibre-equivalence",
+  "lem-a1-point-realization-standard-cohomology",
+  "p-linear-triangular",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-frobenius-point-transport",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-punctual-weights",
+  "def-weil-real-power",
+  "def-wf-positive-real-logarithm"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; explicit realization, inverse-transport and coefficient-matrix argument by Q111, using the existing point and triangularization nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +181,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (G : Type u_3) →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G S] →\\n                [SMulCommClass G R S] →\\n                  (Q : Ide\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, this definition asserts\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"IsArithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {M : Type u_3} →\\n            [inst_3 : Monoid M] → [inst_4 : MulSemiringAction M S] → [SMulCommClass M R S] → M → Ideal S → Prop\", \"doc\": \"Given a monoid $M$ acting on a semiring $S$ via scalar multiplication, commuting with a scalar multiplication from a commutative semiring $R$, this proposition states that for a monoid element $\\\\sigma\"}\n  {\"name\": \"AlgHom.IsArithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (S →ₐ[R] S) → Ideal S → Prop\", \"doc\": \"For an algebra homomorphism $\\\\varphi: S \\\\to S$ over $R$ and an ideal $Q \\\\subseteq S$, the proposition states that for all $x \\\\in S$, the difference $\\\\varphi(x) - x^{\\\\#(R/Q_{\\\\text{under}} R)}$ lies in \"}",
    "date": "2026-10-21",
    "verdict": "no match: the displayed hits do not state this classical adic/constructible Weil-heart assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf on a finite field point admits a full Frobenius invariant flag with pure rank one quotients at a common finite coefficient field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"WittVector.isocrystal_classification\", \"IsArithFrobAt.arithFrobAt\", \"arithFrobAt\", \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"WittVector.StandardOneDimIsocrystal\", \"WittVector.instModuleFractionRingStandardOneDimIsocrystal\", \"WittVector.Isocrystal\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End, Submodule.finrank",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Submodule.finrank'\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: identifier rejected by Loogle; no declaration returned"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|Frobenius.*flag|flag.*Frobenius",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional invertible linear operator over an algebraically closed l-adic field has an invariant flag realized in the constructible Weil sheaf heart on a point",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial\", \"Module.End.exists_eigenvalue\", \"LinearMap.finiteDimensional\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LinearMap.isUnit_iff_range_eq_top\", \"LinearMap.isUnit_iff_ker_eq_bot\", \"LinearMap.finiteDimensional'\", \"WittVector.isocrystal_classification\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional vector space with an automorphism is equivalent to a constructible Weil sheaf on a geometric point and its invariant subspaces give Weil subsheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"WittVector.isocrystal_classification\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CondensedMod.LocallyConstant.functor\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.exists_eigenvalue",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.End.exists_eigenvalue\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_eigenvalue|def finFree",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/Analysis/InnerProductSpace/Spectrum.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert a full flag in the raw constructible Weil heart at a common finite coefficient field"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-real-mixed-by-curves",
@@ -71,5 +250,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-point-weil-heart-flag",
+  "worker": "stage1",
+  "summary": "Realized the dimension-zero full flag in the raw Weil heart by the existing t-exact point equivalence. Wrote out descent of the given Weil pair, finite adapted-basis descent, lifting by inverse point transport, equivariance of inclusions and quotients, and the purity calculation. Reused all existing lemmas; no new node or statement correction.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md, paragraph 7: the dimension-zero Jordan filtration with weights 2 log_{q_x}|iota(alpha)|; also unit sk-i-dl-general-real, step 1, dimension zero.",
+  "tool_uses": [
+   {
+    "node": "p-linear-triangular",
+    "why": "Generic single-operator linear algebra flag theorem; the unit supplies no separate linear algebra lemma. The scalar field is the algebraically closed coefficient field, as allowed by its unit statement."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic raw point realization equivalence, used at finite stages to lift linear maps; no step of the real-sheaf reduction is replaced."
+   },
+   {
+    "node": "lem-a1-point-realization-standard-cohomology",
+    "why": "Generic t-exactness and normalized scalar/cohomology comparison for the same point realization; needed to work in the heart, not just the derived category."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic constructible truncation and automorphism compatibility tool; needed to descend a heart representative and keep Frobenius pullback in the heart."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Generic invertibility of specified point transport (clause 1 only), needed to lift a fibre automorphism to a Weil isomorphism."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic naturality and coefficient extension of point transport (clause 2), needed for the explicit Weil-equivariance equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-linear-triangular",
+  "lem-weil-point-fibre-equivalence",
+  "lem-a1-point-realization-standard-cohomology",
+  "prop-constructible-truncations",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-517916739",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-517916739 (reviewer sub-agent of L); spot-checked: PASS: I read the item's statement and all 8 steps in full. No new nodes; the statement is unchanged from the Q124 creation; the 3 stmt_deps it adds (constructible heart, common-stage coefficients, positive log) are all used in the statement; proof_deps equal the union of the step uses; no cycle. Source: main-20261015 thm-zl-real-mixed-by-curves.proof.md, the 'in dimension zero a Jordan filtration …' sentence, and unit step 1 of sk-i-dl-general-real. Step checks: (1) the Hom-colimit equality rule and the truncations of prop-constructible-truncations give a finite-stage heart Weil pair. (2) Point equivalence plus the t-exact δ of lem-a1-point-realization-standard-cohomology give an exact heart equivalence, with H^0 used for the preimage. (3) p-linear-triangular applies over Qlb (its unit assumes an algebraically closed field); the invariance and alpha_j≠0 arguments are correct. (4) Finitely many algebraic matrix entries give a finite E, needed for example for [[0,c],[1,0]]. (5) θ_j lifts A_j∘ι^{-1}, using clause 1 of transport-iso; g_s is a scheme automorphism, so Lg_s^* keeps the heart; θ_d=θ⊗E by faithfulness. (6) I recomputed the equivariance equation from naturality clause 2. (7) The weight calculation is correct; real weights are allowed, and the bound is the maximum. (8) V=0 and finite extensions are covered. Small cases tested: d=0, d=1, a Jordan block, an irreducible 2×2 case, a non-integral weight. Duplicate search found nothing: invariant-flag-categorical-filtration and classical-weil-filtration-heart-transport are different statements. All 6 tool_uses accepted as generic. Batch-5: p-linear-triangular is linear algebra that neither assumption gives, with no deps of its own, and it is already in the batch-5 closure (via lem-rp-upper-bound and others); the closure added by the item's deps over the base is empty. Accepted. Maintainer note: the p-linear-triangular statement omits 'algebraically closed', which only its unit states."
  }
 }
