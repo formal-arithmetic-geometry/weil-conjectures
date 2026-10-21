@@ -19,48 +19,155 @@
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-etale-origin-witness"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply clause (ii) of [lem-sf-proetale-constructible-origin] to the given intrinsically bounded constructible $A$-complex $K$. Choose $K_e\\in D^b_c(X_{\\mathrm{et}},A)$ and $\\alpha:\\nu_X^*K_e\\cong K$. The coefficient is the finite stage $A_{E,n}$ required there; no Noetherian hypothesis on $X$ is needed.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-coefficient-pullback-comparison] to the geometric inverse image $\\nu_X^{-1}$, the constant ring map $A\\to B$, and $K_e$, and also to $\\nu_Z^{-1}$ and $E_e=j_!^{\\mathrm{et},A}K_e$. Its derived comparisons give B-linear isomorphisms $\\delta_X:\\nu_X^*S_X^{\\mathrm{et}}K_e\\cong S_X\\nu_X^*K_e$ and $\\delta_Z:\\nu_Z^*S_Z^{\\mathrm{et}}E_e\\cong S_Z\\nu_Z^*E_e$. The geometric morphisms and constant-scalar lifts are [def-weil-pbc-site-comparison-morphism]; their module inverse images are exact by [prop-weil-pbc-site-comparison-finite-level]. The scalar functors are the K-flat derived extensions of [lem-pur-derived-change-of-rings]. Thus this is an application to the actual ringed topoi, not a comparison merely after forgetting B-linearity. Compose $\\delta_X$ with $S_X\\alpha$ to obtain the first comparison in the statement.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  },
+  {
+   "text": "On either site the underlying A-complex of $S_TH$ is $H\\otimes_A^LB$. Indeed choose a flat-term K-flat resolution $P\\to H$ by [lem-pc-kflat-resolution]. Derived scalar extension is represented by $P\\otimes_AB$ by [lem-pur-derived-change-of-rings]; after restriction its terms are the ordinary A-module tensors by [lem-pur-change-of-rings-tensor-comparison]. The same K-flat $P$ computes derived tensor with the degree-zero A-module B by [def-weil-derived-tensor] on the pro-etale site and [def-kun-derived-tensor] on the etale site. Scalar restriction [def-pc-sheaf-restrict-scalars] changes only the action, hence cohomology as an abelian sheaf is unchanged. In particular apply the given Tor-amplitude condition [def-weil-finite-tor-amplitude] to the A-module sheaf B on $X_{\\mathrm{proet}}$: $S_XK$ has cohomology only in $[a,b]$, as a B-complex as well as after restriction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison",
+    "def-weil-derived-tensor",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-finite-tor-amplitude",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  },
+  {
+   "text": "The exact etale extension by zero of [lem-weil-pbc-extension-by-zero-exact] commutes with cohomology, so $E_e=j_!^{\\mathrm{et},A}K_e$ is bounded: $\\mathcal H^q(E_e)=j_!^{\\mathrm{et},A}\\mathcal H^q(K_e)$. Apply [lem-cbc-proetale-extension-zero-comparison] degreewise. Both open extensions are exact (on the pro-etale site by [lem-cbc-proetale-extension-zero]), so its natural sheaf isomorphism descends to $\\nu_Z^*E_e\\cong j_!^A\\nu_X^*K_e\\cong j_!^AK$. Exactness of comparison inverse image is supplied by [prop-weil-pbc-site-comparison-finite-level].",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  },
+  {
+   "text": "Compose $\\delta_Z$ from step 2, scalar extension of the isomorphism of step 4, and the B-linear open comparison of [lem-fix-open-scalar-tensor-normalization]. The result is the required canonical B-linear chain of isomorphisms $\\nu_Z^*S_Z^{\\mathrm{et}}E_e\\cong S_Zj_!^AK\\cong j_!^BS_XK$. Its last term has cohomology only in $[a,b]$: by [lem-cbc-proetale-extension-zero], $j_!^B$ is exact and $\\mathcal H^q(j_!^BS_XK)=j_!^B\\mathcal H^q(S_XK)$, and step 3 gives the vanishing. This proves the asserted range on the pro-etale side without any flatness assumption on $A\\to B$.",
+   "uses": [
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  },
+  {
+   "text": "For $T=X,Z$ put respectively $H=S_X^{\\mathrm{et}}K_e,S_Z^{\\mathrm{et}}E_e$. Exactness in [prop-weil-pbc-site-comparison-finite-level] gives $\\mathcal H^q(\\nu_T^*H)=\\nu_T^*\\mathcal H^q(H)$: exact inverse image preserves the kernels, images and quotients defining cohomology. Steps 2--5 show that this is zero for $q\\notin[a,b]$. The same cited node, now at the finite coefficient B, gives the sheaf unit $\\mathcal H^q(H)\\cong\\nu_{T,*}\\nu_T^*\\mathcal H^q(H)=0$. Thus both etale scalar extensions have precisely the asserted vanishing range, and are bounded. By step 3 their underlying A-complexes are the two derived tensors in the statement; restriction changes no kernels or quotients, so those are bounded too. Together with bounded $K_e,E_e$ from steps 1 and 4, the displayed isomorphisms give bounded etale-origin pairs in the sense of [def-weil-pbc-etale-origin-witness].",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-pur-coefficient-pullback-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "def-weil-derived-tensor",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-fix-open-scalar-tensor-normalization",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Finite Tor amplitude gives bounded derived coefficient reduction of etale origin and of its extension by zero",
    "results": "8 hits: Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.formallyEtale, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.instEtaleRing, Algebra.Etale.comp, RingHom.Etale.toAlgebra, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
    "date": "2026-10-21",
-   "verdict": "No match: hits give algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after a nonflat finite reduction and open extension."
+   "verdict": "No match: inspected hits concern algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after nonflat reduction and open extension.",
+   "digest": "670eae638c4bfff7"
   },
   {
    "tool": "leansearch",
    "query": "Bounded constructible proetale complex and its derived coefficient reduction have bounded etale realizations",
-   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, Condensed.lanCondensedSet, Condensed.profiniteSolidification, Condensed.lanSheafProfinite, HomologicalComplex.instHasLimitDiscreteWalkingPairCompPairEval, HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
    "date": "2026-10-21",
-   "verdict": "No match: hits give algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after a nonflat finite reduction and open extension."
+   "verdict": "No match: inspected hits concern algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after nonflat reduction and open extension.",
+   "digest": "f8ec613d29c942f7"
   },
   {
    "tool": "loogle",
    "query": "\"KFlat\", \"Sheaf\"",
    "results": "0 hits: ",
    "date": "2026-10-21",
-   "verdict": "No match: hits give algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after a nonflat finite reduction and open extension."
+   "verdict": "No match: inspected hits concern algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after nonflat reduction and open extension.",
+   "digest": "4f53cda18c2baa0c"
   },
   {
    "tool": "grep",
    "query": "etale.*(tensor|Tor)|pro[Ee]tale|[Ee]taleOrigin",
    "results": "21 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
    "date": "2026-10-21",
-   "verdict": "No match: hits give algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after a nonflat finite reduction and open extension."
+   "verdict": "No match: inspected hits concern algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after nonflat reduction and open extension.",
+   "digest": "fa9e96f41f920222"
   },
   {
    "tool": "leanfinder",
    "query": "Exact fully faithful etale to proetale comparison reflects boundedness after derived scalar extension",
    "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.comp, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.comp",
    "date": "2026-10-21",
-   "verdict": "No match: hits give algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after a nonflat finite reduction and open extension."
+   "verdict": "No match: inspected hits concern algebraic etaleness, abstract bounded representatives, or definitions of the pro-etale site; none supplies B-linear bounded etale-origin witnesses after nonflat reduction and open extension.",
+   "digest": "081d46f3d11f7f4e"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-compact-support-coefficient-change",
@@ -78,5 +185,69 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-reduction-open-etale-origin",
+  "worker": "stage1",
+  "summary": "Assemble bounded etale witnesses using existing constructible-origin, B-linear inverse-image/scalar comparison and open scalar comparison nodes. Reflect the reduction bounds through the exact comparison and its sheaf unit. No new nodes; no flatness, Noetherianity or geometric-stalk conservativity assumption added. Statement unchanged.",
+  "blueprint": "Ancestor lem-fix-compact-support-coefficient-change, second proof paragraph finite-Tor bounds for coefficient reduction and final etale/pro-etale transport sentence; isolates the bounded domain calculation, retaining the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-pur-coefficient-pullback-comparison",
+    "why": "Generic Canonical inverse-image coefficient comparison tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic Exactness and full faithfulness at finite level tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Generic Natural comparison of restricted scalar extension and sheaf tensor tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic Extension by zero on the pro-etale site tool for the bounded etale-origin domain calculation. The trace-perfectness unit has no replacement for this comparison, tensor, or exact open-extension fact; the compactification route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-pur-coefficient-pullback-comparison",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-a9a17807b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-a9a17807b (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Delivery: 0 new nodes, statement and stmt_deps unchanged from the base, not dropped, no repair note, live copy still unsplit, no cycle (closure of 2939 nodes does not reach the item), no SGA. Sources checked: Stacks 06YY, 0G7E and 07A4 in sites-cohomology.tex, and the parent lem-fix-compact-support-coefficient-change step 1, which consumes exactly these witnesses. Step 1: clause (ii) of lem-sf-proetale-constructible-origin holds for any scheme and A_{E,n}, with the same intrinsic constructibility notion as the item. Step 2: lem-pur-coefficient-pullback-comparison applied to nu^{-1} and constant A->B gives the B-linear derived iso; exactness comes from prop-weil-pbc-site-comparison-finite-level. Step 3: a flat-term K-flat P computes both S_T and the restricted -⊗^L_A B (lem-pur-change-of-rings-tensor-comparison, def-weil-derived-tensor, def-kun-derived-tensor); the Tor-amplitude definition is applied to M=B, so no flatness of B is used. Step 4: both j_! and nu^* are exact, so the sheaf comparison lifts termwise to D. Step 5: beta_j from the same-unit lem-fix-open-scalar-tensor-normalization (first paragraph), and exactness of j_!^B gives the [a,b] range. Step 6: the bounds are reflected to the étale side by exactness plus the unit F≅nu_*nu^*F at finite B; this is elementary, and D^+ is established before def-weil-pbc-etale-origin-witness is used. Edge cases j=id, X empty, A=B and non-flat Z/l^2->Z/l are all consistent. No duplicate found in the DAG. All nine declared off-unit tool_uses are accepted."
+ }
 }
