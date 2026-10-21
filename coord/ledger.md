@@ -23205,3 +23205,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:34 L: returned deliver/Q03/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C1 + G4. This is the 6th push of this item (earlier RETURNs: N5 68c9bff0, NL, NX af5315f6, NN b8613865, NZ 8589c9f9). St)
 - 17:35 L: returned deliver/NX/lem-sfb-finite-closed-cover-resolution (reviewer RETURN: L: independent stage-2 immutable head 23a13b10a3d7: F1 (H3/hollow): FiniteClosedPullbackCompatible only quantifies a com)
 - 17:35 L: returned deliver/NM/lem-sfb-root-tower-coordinate-face (reviewer RETURN: L: independent stage-2 immutable head ae952e25753c: H2/H3: the delivery adds theorem stmt_deps lem-sfb-snc-universal-res)
+- 17:35 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
