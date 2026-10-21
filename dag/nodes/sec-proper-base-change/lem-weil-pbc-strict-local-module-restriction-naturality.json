@@ -17,33 +17,15 @@
  ],
  "proof": [
   {
-   "text": "Use the base-change cone with its two projection formulas. Pullback extensionality identifies its legs with strictHenselizationBaseChangeMap.",
+   "text": "Use strictHenselizationAffineBaseChangeCone_exists in the official canonical strictLocalizationToBase presentation. Pullback extensionality identifies its legs with strictHenselizationBaseChangeMap. Naturality of those cone legs and pullback extensionality give graph compatibility; adjunction-unit naturality and contravariant functoriality give the restriction equation. This is the unchanged proof in the adopted source module.",
    "uses": [
     "lem-weil-pbc-strict-henselization-base-change-cone"
    ],
    "elementary": false
-  },
-  {
-   "text": "Naturality of those cone legs gives baseChangeMap_j followed by B(a) equal to baseChangeMap_k. Compose with pullback symmetry. Two applications of pullback extensionality prove δ_j followed by p.Etale.map B(a) equals δ_k.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Naturality of the module adjunction unit moves F(B(a)) past the unit. Contravariant functoriality and the preceding graph identity identify the two restrictions. Postcompose with the common inverse terminal-section identification.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
-   "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-base-change-cone",
-  "def-weil-pbc-small-strict-local-section-maps"
+  "lem-weil-pbc-strict-henselization-base-change-cone"
  ],
  "proof_origin": {
   "by": "agent",
@@ -97,14 +79,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalRestrictionNaturality.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/QcqsStrictLocalRestrictionNaturality.lean",
   "declaration": "AlgebraicGeometry.Etale.qcqsStrictLocalRestriction_naturality",
-  "statement": "theorem qcqsStrictLocalRestriction_naturality (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (r : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), F.obj.obj (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (hr : ∀ j, r j = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictHenselizationStructuralMap s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : ∀ {j k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)} (a : j ⟶ k), F.obj.map ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a).op ≫ r j = r k",
+  "statement": "theorem qcqsStrictLocalRestriction_naturality (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (r : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), F.obj.obj (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ⟶ (Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F)) (hr : ∀ j, r j = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictLocalizationToBase s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictLocalizationToBase s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictLocalizationToBase s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : ∀ {j k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)} (a : j ⟶ k), F.obj.map ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a).op ≫ r j = r k",
   "branch": "sheaf-dag",
   "by": "T1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "N4 retirement: official theorem uses the canonical strictLocalizationToBase presentation. The small-model consumer proves its transported cocone equation in its own proof; it no longer imports the retired duplicate."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -119,12 +102,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-59f3f",
-  "group": "E3",
+  "reviewer": "C-4dddc",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261021T183343-L-1605786",
+  "landing": "20261021T203716-L-3857412",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin of SetsPushforwardStalkStrictHenselization against the WeilConjectures twin; the new small-model transport map's _fst/_snd lemmas match the old pullback.lift components, so the 4 changed consumer statements are unchanged in meaning; change record lists all edited unclaimed modules; 8 delivered modules plus 5 external direct importers compiled in sandbox; axioms clean"
+  "note": "independent cc review: withdrawn item stub + item node retargeted to the WeilConjectures twin (statement matches) against retire-items row 2601 and the retirement hand-off; inlined naturality proof in the unclaimed consumer QcqsStrictLocalModuleComparison against the retired proof (compiled, axioms clean, signatures/definitions/public imports unchanged)"
  },
  "lean_audit": {}
 }

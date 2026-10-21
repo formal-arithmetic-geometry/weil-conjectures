@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
 import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism
 
 /-! # The module-valued strict-local continuity comparison
@@ -139,6 +139,61 @@ theorem exists_qcqsStrictLocalModuleComparison
     (Functor.Final.isColimitWhiskerEquiv N.op _).symm
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P)
   let r := qcqsStrictLocalSectionRestriction Λ f s F
+  -- The concrete small-model graph has compatible projections under refinement.
+  have h (j k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s))
+      (a : j ⟶ k) :
+      F.obj.map ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a).op ≫
+        r j = r k := by
+    let B := Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale
+    let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+    let H := (upperStar (ModuleCat.{u + 1} Λ) p).obj F
+    let δ := qcqsStrictLocalNeighbourhoodSection f s
+    obtain ⟨π, _, hp, hf⟩ := Scheme.strictHenselizationBaseChangeCone_exists f s
+    have hπ (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
+        π.app j = Scheme.smallStrictHenselizationBaseChangeMap f s j := by
+      apply pullback.hom_ext
+      · exact (hf j).trans
+          (Scheme.smallStrictHenselizationBaseChangeMap_fst f s j).symm
+      · exact (hp j).trans
+          (Scheme.smallStrictHenselizationBaseChangeMap_snd f s j).symm
+    have hn : Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ (B.map a).left =
+        Scheme.smallStrictHenselizationBaseChangeMap f s k := by
+      have h := π.naturality a
+      change π.app k = π.app j ≫ (B.map a).left at h
+      simpa only [hπ] using h.symm
+    have hδ : δ j ≫ p.Etale.map (B.map a) = δ k := by
+      apply MorphismProperty.Over.Hom.ext
+      apply pullback.hom_ext
+      · change (pullback.lift _ _ _ ≫ pullback.lift _ _ _) ≫ pullback.fst _ p =
+          pullback.lift _ _ _ ≫ pullback.fst _ p
+        simp only [Category.assoc, pullback.lift_fst]
+        rw [pullback.lift_fst_assoc]
+        simpa only [Category.assoc] using congrArg
+          (fun g ↦
+            (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ g)
+          hn
+      · change (pullback.lift _ _ _ ≫ pullback.lift _ _ _) ≫ pullback.snd _ p =
+          pullback.lift _ _ _ ≫ pullback.snd _ p
+        simp only [Category.assoc, pullback.lift_snd]
+        exact pullback.lift_snd _ _ _
+    change F.obj.map (B.map a).op ≫
+        (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.app
+          (op (B.obj j)) ≫ H.obj.map (δ j).op ≫ _) =
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.app
+        (op (B.obj k)) ≫ H.obj.map (δ k).op ≫ _
+    rw [← Category.assoc, ← Category.assoc]
+    have hu :=
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.naturality
+        (B.map a).op
+    change F.obj.map (B.map a).op ≫
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.app
+          (op (B.obj j)) =
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app F).hom.app
+        (op (B.obj k)) ≫ H.obj.map (p.Etale.map (B.map a)).op at hu
+    rw [hu]
+    simp only [Category.assoc]
+    rw [← H.obj.map_comp_assoc]
+    rw [← op_comp, hδ]
   let c : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙ P) :=
     { pt := _
       ι := { app := fun j ↦ r j.unop
@@ -147,7 +202,7 @@ theorem exists_qcqsStrictLocalModuleComparison
                  ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a.unop).op ≫
                    r k.unop = r j.unop ≫ 𝟙 _
                rw [Category.comp_id]
-               exact qcqsStrictLocalRestriction_naturality Λ f s F r (fun _ ↦ rfl) a.unop } }
+               exact h _ _ a.unop } }
   let a := hc.desc c
   have ha : IsQcqsStrictLocalModuleComparison Λ f s F a := by
     intro j
