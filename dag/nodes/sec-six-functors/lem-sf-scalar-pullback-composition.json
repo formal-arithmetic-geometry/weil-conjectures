@@ -14,10 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Choose a flat-term K-flat representative P for N. Successive geometric pullbacks preserve K-flatness and flat terms. Apply the representative normalization of scalarPullbackIso to P and to its pullback.",
+   "text": "Use the proved private scalarPullback_eq identification from EtaleProEtaleScalarMate: the normalized scalar/pullback isomorphism is the inverse scalar-adjunction mate of scalarRestrictionPullbackIso. Its inverse consequently satisfies the scalar-adjunction unit equation for every derived object, with arbitrary coefficient rings.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-etale-proetale-scalar-mate",
     "lem-pur-etale-scalar-mate-projection"
    ],
    "elementary": false,
@@ -27,22 +26,43 @@
    }
   },
   {
-   "text": "The ordinary scalar/pullback square for two composable maps commutes: both paths send each tensor generator m tensor b to its twice pulled-back generator with coefficient b. The composition identifications are the canonical module comparisons, so this is ringed-pullback composition (03D8), including coefficient change over the identity topos. Apply these identities degreewise and sheafify.",
+   "text": "Transport the unit equation along leftDerivedUpperStarIsoMapDerivedCategory. Naturality of the scalar unit and of the geometric comparison isomorphism cancels the two geometric transports, leaving the exact derived restriction square. Typed private definitions preserve the chosen derived-category instances during this transport.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition-module-linear",
     "lem-sbc-canonical-restrict-scalars-functor-comparisons"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, lemma-push-pull-composition-modules; ordinary ringed-pullback composition."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; with Tag 0G7E and sites-modules.tex Tag 03D8. Specialization to geometric inverse image and change of constant coefficients."
    }
   },
   {
-   "text": "Use the exact-functor localization factorization identities for the inverse-image compositor and the normalizations from step 1 to identify both derived paths with the ordinary paths in step 2. Cancel the invertible representative counits and transfer equality to N by naturality along its resolution isomorphism. The displayed transports merely replace exact left-derived inverse image by mapDerivedCategory.",
+   "text": "Identify upperStarRestrictScalarsIsoSheaf with upperStarRestrictScalarsIso by conjugating both to the identity. Apply upperStarRestrictScalarsIso_comp_hom and mapDerivedCategorySquareIso_hom_app_comp. This gives composition of the three exact derived restriction squares with the exact geometric compositors.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; with Tag 0G7E and sites-modules.tex Tag 03D8. Specialization to geometric inverse image and change of constant coefficients."
+   }
+  },
+  {
+   "text": "Transpose the pasted inverse comparison under the last scalar adjunction. The two unit equations and naturality of the second restriction square express its transpose as the pasted restriction square after the first scalar unit. The restriction composition equation and naturality of the geometric compositor identify it with the transpose of the composite inverse comparison. Injectivity of the Hom bijection proves the inverse-comparison equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; with Tag 0G7E and sites-modules.tex Tag 03D8. Specialization to geometric inverse image and change of constant coefficients."
+   }
+  },
+  {
+   "text": "Precompose the desired forward equation with the inverse comparison for the composite map. Substitute the inverse-comparison equation and cancel the two remaining inverse/hom pairs. Replace j2 by j1 followed by v using h. The exact geometric compositors and scalar transports are precisely the displayed ones.",
    "uses": [
     "lem-pur-etale-scalar-mate-projection",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
@@ -52,17 +72,16 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
+  "lem-sfb-etale-proetale-scalar-mate",
   "lem-pur-etale-scalar-mate-projection",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6D, lemma-derived-pullback-composition; with Tag 0G7E and sites-modules.tex Tag 03D8. Specialization to geometric inverse image and change of constant coefficients. Explicit normalized composition square, following the representative argument of that lemma."
+  "place": "Tag 0D6D with Tags 03D8 and 0G7E; formalized by K5 using the existing scalarPullback_eq identification in EtaleProEtaleScalarMate, exact derived restriction-square composition, and scalar-adjunction unit naturality."
  },
  "mathlib_searches": [
   {
@@ -132,12 +151,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "K5",
   "result": "pass",
-  "landing": "20261020T051447-L-1688209",
+  "landing": "20261021T233736-L-856135",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
