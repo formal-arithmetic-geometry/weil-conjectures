@@ -23,11 +23,12 @@
  ],
  "proof": [
   {
-   "text": "Write $L_R=j_{!,R}$, $J_R=j_R^*$, $L'_R=j'_{!,R}$, $J'_R=j_R'^*$, $G_R=g_R^*$ and $H_R=h_R^*$. Put $Q=Q_T$, $Q'=Q_{T'}$, $S=Q_U$, $S'=Q_{U'}$, $i=\\beta_j^{-1}$, $i'=\\beta_{j'}^{-1}$ and $d_R=e_R^{-1}$. Let $c_R:H_RJ_R\\xrightarrow{\\sim}J'_RG_R$ be the canonical square comparison. More explicitly, if $a_{v,u}:(vu)_R^*\\cong u_R^*v_R^*$, then $c_R=a_{g,j'}a_{j,h}^{-1}$, using $jh=gj'$. The open tensor lemma supplies the adjunctions on the whole derived categories and the balancing isomorphisms. The prescribed transpose normalizations give\n$$J_B(i_M)\\eta_{B,SM}=\\lambda_{j,L_AM}^{-1}S(\\eta_{A,M}),\\qquad\nJ'_B(i'_V)\\eta'_{B,S'V}=\\lambda_{j',L'_AV}^{-1}S'(\\eta'_{A,V}),$$\n$$J'_R(d_{R,M})\\eta'_{R,H_RM}=c_{R,L_RM}H_R(\\eta_{R,M}).$$\nHere $V\\in D_A(U')$, and juxtaposition composes right to left. The last identity is precisely the unit formula for the inverse base-change mate; its degreewise version descends with the normalized exact open adjunction. These identities specify the actual maps, without claiming that pullback alone detects equality.",
+   "text": "Write $L_R=j_{!,R}$, $J_R=j_R^*$, $L'_R=j'_{!,R}$, $J'_R=j_R'^*$, $G_R=g_R^*$ and $H_R=h_R^*$. Put $Q=Q_T$, $Q'=Q_{T'}$, $S=Q_U$, $S'=Q_{U'}$, $i=\\beta_j^{-1}$, $i'=\\beta_{j'}^{-1}$ and $d_R=e_R^{-1}$. Let $c_R:H_RJ_R\\xrightarrow{\\sim}J'_RG_R$ be the canonical square comparison. More explicitly, if $a_{v,u}:(vu)_R^*\\cong u_R^*v_R^*$, then $c_R=a_{g,j'}a_{j,h}^{-1}$, using $jh=gj'$. The open tensor lemma supplies the adjunctions on the whole derived categories and the balancing isomorphisms. The prescribed transpose normalizations give\n$$J_B(i_M)\\eta_{B,SM}=\\lambda_{j,L_AM}^{-1}S(\\eta_{A,M}),\\qquad\nJ'_B(i'_V)\\eta'_{B,S'V}=\\lambda_{j',L'_AV}^{-1}S'(\\eta'_{A,V}),$$\n$$J'_R(d_{R,M})\\eta'_{R,H_RM}=c_{R,L_RM}H_R(\\eta_{R,M}).$$\nHere $V\\in D_A(U')$, and juxtaposition composes right to left. The last identity is precisely the unit formula for the inverse base-change mate; its degreewise version descends with the normalized exact open adjunction. These identities specify the actual maps, without claiming that pullback alone detects equality. In Lean, the open tensor package states its restriction law using openScalarRestriction. Identify its hom with the inverse of properOpenCoefficientPullbackIso: use the existing proved scalarPullback_eq in EtaleProEtaleScalarMate to identify the inverse scalar mate, transport along leftDerivedUpperStarIsoMapDerivedCategory, and use the existing openRestrictScalarsIso_inv_eq and inverse_mate_transport identities. Invert the q_restricts equation to obtain the first two displayed unit formulas. The third is the published derived mate theorem mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso_mate.",
    "uses": [
     "lem-coef-etale-open-tensor",
     "def-pur-open-coefficient-normalizations",
-    "lem-cbc-extension-zero-base-change"
+    "lem-cbc-extension-zero-base-change",
+    "lem-sfb-etale-proetale-scalar-mate"
    ],
    "elementary": false,
    "source": {
@@ -100,12 +101,13 @@
   "def-pur-open-coefficient-normalizations",
   "lem-cbc-extension-zero-base-change",
   "lem-coef-etale-open-tensor",
-  "lem-sf-scalar-pullback-composition"
+  "lem-sf-scalar-pullback-composition",
+  "lem-sfb-etale-proetale-scalar-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+  "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7. Lean realization by F5: the six-step transpose argument, with explicit identification of the existing scalar mate normalizations."
  },
  "mathlib_searches": [
   {
@@ -246,5 +248,15 @@
   "group": "Q35",
   "result": "pass",
   "note": "Q35 lem-pur-etale-open-scalar-exchange 4cbd2553: only the lean field is added (diffed vs side-live), not dropped, first delivery. Each factor checked against the node: β_j = openScalarExtension (q field of EtaleOpenTensorComparisons), λ = properOpenCoefficientPullbackIso (def-pur-open-coefficient-normalizations), e_R = .inv of mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso on (IsPullback.of_hasPullback g j).flip (h=snd, j'=fst, direction correct); both composites typed g_B^*Q_T j_!M → j'_!Q_U' h^*M, diagrammatic order matches. The node's β^{-1} open-unit transpose holds for openScalarExtension via compactScalarOpen_normalization (openIso.inv = properOpenCoefficientOpenInverse) and the he/heq transport identifications. No hypotheses beyond the node (Finite A B, arbitrary g, unbounded M); edge cases empty U/T', g=id, zero rings and non-flat φ are fine; no duplicate. nt_compile --json clean in 38.8 s, exit 0. Statement verbatim; source/blueprint docstrings and the six proof steps present; report sections present. Advisory: upperStar and openScalarExtension are owned by non-stmt_dep nodes but are interface types of cited deps; the plain ScalarPullbackComposition import is a stage-3 proof dep."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T140811-L-2752417",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
