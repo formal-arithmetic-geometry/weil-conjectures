@@ -12,11 +12,185 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-inverse-system",
+  "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=-\\otimes_R S$ on module sheaves [def-pur-sheaf-tensor-product] and $U=\\operatorname{Res}_{R\\to S}$ [def-pc-sheaf-restrict-scalars]. By [det-def-sfb-ring-object-sheaf], $R$ and $S$ are commutative ring objects of abelian sheaves and $a$ is a ring-object map; their reconstructed section-ring sheaves are $R,S$ and $a$ again, since the multiplication extends the objectwise one. By [lem-sfb-internal-section-scalar-adjunction], the equivalences preserving underlying sheaves identify the internal adjunction $\\operatorname{Ext}_a\\dashv\\operatorname{Res}_a$ of [sk-def-sfb-change-of-scalars] with $F\\dashv U$, units and counits included. By [lem-weil-pbc-restriction-derived-products], $U$ is conservative and preserves limits. Since restriction changes only the action, it is exact and detects zero objects and exactness. Choose a basis only for this proof. The given isomorphism $R^{\\oplus d}\\cong S$ is one of underlying sheaves, hence an internal $R$-module isomorphism. Transported along these identifications, the coordinate isomorphism [lem-sfb-finite-free-scalar-coordinates] identifies $UF(M)$ naturally with $M^d$. Thus $F$ is exact: applying $U$ to an $F$-image of a short exact sequence gives its finite direct sum. The exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] identifies termwise $F$ with $C$ and supplies its cochain shift comparison. This is also the derived tensor of [lem-pur-derived-change-of-rings], since exact $F$ sends a K-flat resolution to a quasi-isomorphism. Exactness in tower categories is levelwise [lem-weil-tower-category-levelwise-abelian], so the same argument supplies $C^{\\operatorname{Tow}}$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "det-def-sfb-ring-object-sheaf",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-sfb-finite-free-scalar-coordinates",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "Let $\\phi:F(\\prod_n A_n)\\to\\prod_n F(A_n)$ be the ordinary product comparison, defined by its projections. After $U$ and the coordinates of [lem-sfb-finite-free-scalar-coordinates], transported as in Step 1, it is exactly $(\\prod_n A_n)^d\\to\\prod_n(A_n^d)$, sending a tuple of families to the family of tuples; its inverse interchanges the same two indices. It is therefore invertible. Likewise the canonical map $\\beta_T:F(\\lim T)\\to\\lim F^{\\operatorname{Tow}}T$ is invertible: its underlying map is $(\\lim T)^d\\to\\lim(T^d)$, with inverse taking the $d$ compatible coordinate families separately. These are isomorphisms of $S$-modules because the original maps are $S$-linear and $U$ is conservative and preserves limits [lem-weil-pbc-restriction-derived-products]. Their definitions by projections show that $\\phi$ and $\\beta$ are natural and do not depend on the chosen basis. The argument applies degreewise to complexes and commutes with differentials.",
+   "uses": [
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-sfb-finite-free-scalar-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product); finite coordinate argument from the cited blueprint coordinate lemma"
+   }
+  },
+  {
+   "text": "Use [prop-pur-kinjective-resolutions-exist] for functorial K-injective resolutions with injective terms over $R$ and $S$. For towers use [lem-weil-pbc-diagram-site-realization] with the small category $\\mathbf N_{\\ge1}^{\\mathrm{op}}$ and the constant coefficient sheaf, and apply the same resolution theorem on that small site. On modules and on towers, $U$ carries K-injectives to K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]: its left adjoint is $F$, respectively termwise $F$, already proved exact. If $I$ is K-injective over $R$, then $UF I\\cong I^d$ is K-injective by the product theorem [lem-pc-ringed-space-product-kinjective], also for $d=0$. This assertion applies equally in the abelian tower category. We do not assert that $F I$ is K-injective over $S$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "Represent $M_n$ by complexes and resolve them as $M_n\\to I_n$ over $R$; choose $r_n:F I_n\\to J_n$ K-injective resolutions over $S$. The complexes $I_n,J_n$ compute the two derived products by [lem-pc-ringed-space-product-kinjective]. Each $U(r_n)$ is a quasi-isomorphism between K-injectives: its source is $I_n^d$ and its target is K-injective by the preceding exact-adjoint argument. By [lem-weil-pbc-kinjective-hom-derived] it is a homotopy equivalence. Products of these homotopy equivalences are homotopy equivalences, since the inverse and both homotopies are specified separately at every projection. Consequently $F(\\prod I_n)\\xrightarrow{\\phi}\\prod F I_n\\xrightarrow{\\prod r_n}\\prod J_n$ is a quasi-isomorphism: after $U$, its first arrow is an isomorphism and its second a homotopy equivalence. Its $n$th projection is $r_nF(\\mathrm{pr}_n)$, so its derived image is the canonical projection comparison required in the statement. In particular this also proves that $\\prod F I_n$ represents the derived product of the $F M_n$.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "For a representative strict tower complex $X$, choose $q:X\\to I$ K-injective with injective tower terms, and $r:F^{\\operatorname{Tow}} I\\to J$ a K-injective $S$-tower resolution with injective tower terms. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $L_R X$ is represented by $\\lim I$, and $L_S C^{\\operatorname{Tow}}X$ by $\\lim J$ using the resolution $rF(q)$. Define $\\lambda_X$ by the chain map\n$$F(\\lim I)\\xrightarrow{\\beta_I}\\lim F^{\\operatorname{Tow}}I\\xrightarrow{\\lim r}\\lim J.$$\nThis is precisely the ordinary limit/tensor comparison followed by the right-derived comparison unit on the image tower, with the inverse of the derived image of $F(q)$. Thus it is the total derived-functor comparison specified in the item, rather than a choice of an isomorphism between abstract cones. Functorial resolutions make this construction natural on complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "The map $U^{\\operatorname{Tow}}r$ is a quasi-isomorphism between K-injective $R$-tower complexes: its source is $I^d$ and its target is K-injective by Step 3. Hence it is a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. Applying the additive functor $\\lim$ preserves its inverse and homotopies. Since $U$ commutes with limits [lem-weil-pbc-restriction-derived-products], $U(\\lim r)$ is a homotopy equivalence. Exact conservative $U$ detects quasi-isomorphisms, so the map in Step 5 is a quasi-isomorphism. The natural comparison thus descends through localization [def-weil-abstract-derived-category] to a natural isomorphism on $D(\\operatorname{Tow}(R))$: both its source and target functors invert quasi-isomorphisms. It is independent of resolutions. Indeed comparisons between two source resolutions are unique up to homotopy under $X$ by the cited K-injective Hom bijection; $F$ preserves these homotopies. The same bijection for target resolutions under $FX$ makes the resulting square commute up to homotopy. Applying $\\lim$, and naturality of $\\beta$, therefore give the same derived map.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-restriction-derived-products",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "To check the entire specified Roos triangles, work with the injective-term resolutions $I,J$ of Step 5. Here is the elementary injectivity calculation needed for their ordinary product sequences. For any injective tower $T$, let $P_n(A)$ be $A$ at levels $m\\le n$, zero at $m>n$, with identity nonzero transitions. There is a monomorphism $P_n(A)\\to P_{n+1}(A)$. The map $P_n(T_n)\\to T$ whose component at $n$ is the identity extends across this monomorphism by injectivity [def-sp-injective-resolutions]. Its component at $n+1$ is a section $\\sigma_n:T_n\\to T_{n+1}$ of the transition $t_n$. In each cochain degree, $1-s$ on $\\prod T_n$ consequently has a right inverse: for an input $(x_n)$ set $y_1=0$ and $y_{n+1}=\\sigma_n(y_n-x_n)$. Each coordinate is a finite sum of coordinate morphisms, and $y_n-t_ny_{n+1}=x_n$. The product universal property therefore defines the asserted right inverse without any product-exactness hypothesis.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, injective-tower product sequence; explicit prefix extension and recursive splitting"
+   }
+  },
+  {
+   "text": "The kernel of $1-s$ consists exactly of compatible families, hence is $\\lim T$ by the limit universal property. Applied degreewise to $I$ and $J$, Step 7 therefore gives short exact sequences of complexes\n$$0\\to\\lim I\\to P_I\\xrightarrow{1-s_I}P_I\\to0,\\qquad 0\\to\\lim J\\to P_J\\xrightarrow{1-s_J}P_J\\to0,$$\nwhere $P_I=\\prod I_n$ and $P_J=\\prod J_n$. Their products represent the derived products: evaluation of a K-injective tower is K-injective by [lem-weil-tower-evaluation-kinjective], and then apply [lem-pc-ringed-space-product-kinjective]. The natural short-exact-sequence triangles [lem-weil-pbc-complex-ses-triangle] are the resolved functorial Roos triangles used to compute $L_R,L_S$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. This identifies the construction of these triangles, not merely their objects.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); derived.tex Tags 0BK6 and 0152"
+   }
+  },
+  {
+   "text": "Apply exact $F$ to the first short exact sequence of Step 8. Map it to the second by $\\ell=(\\lim r)\\beta_I$ on the left and $b=(\\prod r_n)\\phi_I$ on both product terms. The left square commutes after each projection by the definition of $\\beta_I$. For the right square, if $t_n:I_{n+1}\\to I_n$ and $u_n:J_{n+1}\\to J_n$ are the transitions, then\n$$\\mathrm{pr}_n bF(s_I)=r_nF(t_n)F(\\mathrm{pr}_{n+1})=u_nr_{n+1}F(\\mathrm{pr}_{n+1})=\\mathrm{pr}_n s_Jb.$$\nThus $bF(1-s_I)=(1-s_J)b$. By Step 7 the first sequence is split in every degree (a degreewise right inverse of $1-s_I$ gives the splitting), so [lem-sc-p1-split-ses-boundary-comparison] gives $\\delta_I=Q(d_I)$ for its cochain boundary $d_I$, built from the splitting. Additive $F$ carries the splitting to a splitting of the $F$-image, whose cochain boundary is therefore $F(d_I)$, and the same lemma gives its connecting map as $Q(F(d_I))$. Naturality of $\\varphi$ and the shift compatibility (2) of [lem-weil-pbc-exact-functor-derived-factorization], with $\\tau$ the identity, identify $C(\\delta_I)$ with $Q(F(d_I))$; call $\\xi$ this shift comparison. Naturality of the connecting map in [lem-weil-pbc-complex-ses-triangle] for the morphism $(\\ell,b,b)$ of short exact sequences then gives\n$$\\ell[1]\\,\\xi\\,C(\\delta_I)=\\delta_J b.$$\nUnder Step 4, $b$ is exactly the canonical derived-product comparison, and under Step 5, $\\ell$ is $\\lambda_X$. This proves compatibility with all arrows, including the connecting arrow; it does not invoke uniqueness of cone fillers.",
+   "uses": [
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "For completeness identify the augmentation without discarding its strict data. The constant-tower functor $\\Delta_R$ is exact by levelwise exactness [lem-weil-tower-category-levelwise-abelian] and is left adjoint to $\\lim$ by the limit universal property, with $\\lim\\Delta_RM=M$. Hence $\\lim I$ is K-injective [lem-weil-pbc-right-adjoint-preserves-kinjective]. By [lem-weil-pbc-kinjective-hom-derived], $\\operatorname{Hom}_{D}(\\Delta_RM,X)\\cong\\operatorname{Hom}_{K}(\\Delta_RM,I)$ through $q$, and $\\operatorname{Hom}_{K}(M,\\lim I)\\cong\\operatorname{Hom}_D(M,\\lim I)$; the ordinary adjunction respects homotopies, so it gives a bijection $\\operatorname{Hom}_D(\\Delta_RM,X)\\cong\\operatorname{Hom}_D(M,L_RX)$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit], natural in both variables and independent of $q$ by the same Hom bijection. This is the derived adjunction $D(\\Delta_R)\\dashv L_R$, with $D(\\Delta_R)$ the termwise functor of [lem-weil-pbc-exact-functor-derived-factorization]. For a strict chain map $z_\\bullet:\\Delta_R M\\to X$, its canonical derived adjunct $z$ is thus represented by\n$$M\\xrightarrow{\\lim(qz_\\bullet)}\\lim I.$$\nThe $S$-augmentation $z'$ is represented, using the target resolution $rF(q)$, by\n$$FM\\xrightarrow{\\lim(rF(qz_\\bullet))}\\lim J.$$\nNaturality of $\\beta$ and its defining projection equations identify the latter chain map with $(\\lim r)\\beta_I F(\\lim(qz_\\bullet))$. This is precisely $\\lambda_X C(z)=z'$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives) and 0BK6 (lemma-product-K-injective); agent finite-free comparison argument"
+   }
+  },
+  {
+   "text": "A map of entire augmented towers is a pair $h:M\\to N$, $v:X\\to Y$ satisfying $v_nz_n=w_nh$ for every $n$. Functorial $q,r$, naturality of $\\beta,\\phi$, and the componentwise equality in Step 10 make its augmentation comparison square commute. Step 9 gives the corresponding natural morphism of whole Roos triangles. No definition of these maps used a basis: $\\phi,\\beta$ were defined by projections, and $\\lambda$ by their derived comparison units. The basis was used solely to prove those maps invertible and to prove the K-injective homotopy-equivalence tests. Thus all comparisons are basis independent. Empty finite coordinates ($d=0$), zero complexes, and arbitrary unbounded degrees obey the same formulas. No step takes cohomology through an unresolved infinite product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; elementary naturality and basis-independence conclusion from the preceding construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-ring-object-sheaf",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-p1-split-ses-boundary-comparison",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940/0941, with derived.tex Tags 08BJ, 070I, 0BK6 and 0152; finite-free canonical comparison argument, not an assertion quoted from Tag 0A0E"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +233,52 @@
    "results": "; 1 hits: Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean. Candidates concern finite limits of ordinary modules, free-sheaf colimits, or ordinary adjunctions. None states canonical total derived strict-tower transport with its augmentation and connecting arrow.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor|changeOfRings).*(derivedLimit|homotopyLimit|Roos)|PreservesKInjectiveComplexes",
+   "results": "; 0 hits: . Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.*free.*(limit|product)|PreservesKInjectiveComplexes|rightDerived.*[Ll]imit)",
+   "results": "; 1 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean. Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison for finite free tensor of sheaves of modules with unbounded derived products and derived inverse limits",
+   "results": "; 8 hits: ModuleCat.FreeMonoidal.μIso, TensorProduct.directLimitRight, Submodule.FG.rTensor.directLimit, TensorProduct.directLimitLeft, SheafOfModules.free, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.ιFree, SheafOfModules.freeCofan. Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesKInjectiveComplexes",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.PreservesKInjectiveComplexes'; 0 hits: . Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of sheaf rings preserves derived products and canonical total derived inverse limits of strict towers including Roos connecting maps",
+   "results": "; 8 hits: SheafOfModules.mapFree, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, Condensed.profiniteSolid, localCohomology.diagram, CategoryTheory.Functor.mapDerivedCategoryFactors, LightCondensed.free_internallyProjective_iff_tensor_condition. Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact conservative restriction of scalars identifies tensor with a finite direct sum and detects isomorphisms of derived inverse limits",
+   "results": "; 8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod. Candidates concern ordinary free sheaves, direct limits, special condensed categories, or exact-functor factorization; none gives the full arbitrary ringed-site derived-product and augmented strict-tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-scalar-extension",
@@ -79,5 +295,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-finite-free-strict-tower-transport",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and split it into eleven steps using existing nodes only. Constructed the derived comparison on injective tower resolutions; restriction of scalars detects its invertibility through finite powers of K-injectives. Verified all Roos arrows by a morphism of short exact sequences, and the augmented-tower equality by the derived adjunction. No exactness of countable sheaf products used. Maintainer reader (cc, 2026-10-21): steps 1-2 now bridge internal module objects to sectionwise module sheaves; step 9 transports the connecting map through the split-boundary formula; step 10 writes the derived adjunct explicitly.",
+  "blueprint": "prop-weil-pbc-scalar-extension: integral finite scalar extension and its pullback/completed Koszul comparison (returned parent proof step 6 and augmented tower step 9); current main-20261015 coherent pullback comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Its statement is for every abelian category with the indicated products; generic K-injective product computation, without exactness of sheaf products."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic identification of the specified derived tensor with its termwise exact model."
+   },
+   {
+    "node": "lem-sfb-finite-free-scalar-coordinates",
+    "why": "Generic finite-free internal scalar coordinate isomorphism, applied to arbitrary sheaves of rings; the proper-base-change unit has no such coordinate lemma."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic homological algebra tool used exactly as stated; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic homological algebra tool used exactly as stated; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic homological algebra tool used exactly as stated; no replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic functorial injective-term K-injective resolutions on small ringed sites, including the small diagram site."
+   },
+   {
+    "node": "det-def-sfb-ring-object-sheaf",
+    "why": "Generic: a sheaf of commutative rings is a commutative ring object of abelian sheaves, needed to apply the internal scalar nodes to the given ring sheaves; no node of the unit gives it."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic bridge identifying internal extension/restriction and their adjunction with sectionwise change of rings and restriction; added by the maintainer reader so that the internal coordinate and adjunction nodes apply to Mod(R)."
+   },
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic: the connecting map of a degreewise split short exact sequence of complexes is the localized cochain boundary; used to transport the Roos connecting map along exact F."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "det-def-sfb-ring-object-sheaf",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-443ebf6f4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-443ebf6f4 (reviewer sub-agent of L); spot-checked: I read the item in full: 11 steps, no new nodes, statement unchanged from live. Live and side-live still have the item unsplit, so this delivery is not superseded. There is no re-split note, no dropped node and no SGA citation, and the added citations create no cycle. Sources read: Stacks 0941 (sites-cohomology l.5067-5120), 0A0E (context only, correctly not credited), the tag table entries 070I/08BJ/0BK6/0152/09T5, and the main-20261015 prop-weil-pbc-scalar-extension. Small cases d=0, d=1, zero towers and unbounded complexes are fine. Steps 3-8 and 11 are correct: finite powers of K-injectives, the homotopy-equivalence product, conservative U, and the sections of injective-tower transitions with y_n - t_n y_{n+1} = x_n checked. Faults repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-free-strict-tower-transport.json. (1) C4/E6, steps 1-2 and 6: sk-def-sfb-change-of-scalars and lem-sfb-finite-free-scalar-coordinates are about internal module objects but were applied to sectionwise Mod(R) and the sheafified tensor F without a bridge. Now cited: det-def-sfb-ring-object-sheaf, lem-sfb-internal-section-scalar-adjunction (which identifies Ext/Res and the adjunction), and lem-weil-pbc-restriction-derived-products (in the unit; U is conservative and preserves limits). (2) E5/C4, step 9: the claim that exact F carries the SES connecting map to the connecting map of the image is in no cited statement; the SES-triangle node gives only existence and naturality. The rows are degreewise split by step 7, so lem-sc-p1-split-ses-boundary-comparison gives delta = Q(d) on both sides, and phi with shift compatibility (2) of the factorization node gives the identification. (3) C3 tightening, step 10: lem-pc-derived-adjoint-functors gives no formula on representatives. The adjunct lim(qz) is now built explicitly: Delta is left adjoint to lim with Delta exact, so lim I is K-injective by right-adjoint-preserves-kinjective, then the K-injective Hom bijections apply. lem-pc-derived-adjoint-functors and its tool_use are dropped. Three tool_uses are added, proof_deps equals the union of uses, and every step is at most 2000 characters. Advisory: the Roos connecting arrow of lem-weil-pbc-ringed-strict-tower-homotopy-limit is pinned only by that node's construction. The item's statement refers to that triangle, so step 8 reads the node's SES construction. The maintainer should pin the arrow in that node's statement.; 1 file(s) fixed by the reviewer"
  }
 }
