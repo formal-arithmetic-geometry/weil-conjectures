@@ -21496,3 +21496,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/N5/lem-weil-pbc-flat-scalar-tower-limit-square (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/NK/lem-sfb-continuous-algcl-open-finiteness (reviewer PASS; first push; new nodes: 2)
 - 08:58 L: merged deliver/Q144/lem-per-continuous-coefficient-slice-normalization (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q02/lemma-nagata-strict-transform-chart-closed (reviewer PASS; after a return; new nodes: 0)

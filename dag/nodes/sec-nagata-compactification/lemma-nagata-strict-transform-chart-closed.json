@@ -3,38 +3,64 @@
  "blueprint": {
   "is": "lemma-nagata-strict-transform-chart-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closedness of the strict-transform chart",
- "statement": "The quotient map\n$C_a(A,B,I)\\to C_a^{\\mathrm{st}}(A,B,I)$ defines a closed immersion of\nthe strict-transform chart into the ordinary base-change chart.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $I\\subseteq A$ an ideal, and $a\\in I$. Write $C=C_a(A,B,I)$ for the base-change chart ring, $\\alpha\\in C$ for the structural image of $a$, and $T=\\Gamma_{(\\alpha)}(C)$ for its power-torsion ideal, so that $C_a^{\\mathrm{st}}(A,B,I)=C/T$, as in [def-nagata-strict-transform-chart-ring]. The quotient map $q:C\\to C/T$ induces a closed immersion [def-weil-closed-immersion]\n$$\n\\operatorname{Spec}(q):\\operatorname{Spec}C_a^{\\mathrm{st}}(A,B,I)\\longrightarrow\\operatorname{Spec}C_a(A,B,I),\n$$\nwhere the affine spectra and their contravariant morphisms are those of [def-weil-affine-spectrum].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-closed.md",
   "place": "node lemma-nagata-strict-transform-chart-closed, order 145"
  },
  "stmt_deps": [
-  "def-nagata-strict-transform-chart-ring"
+  "def-nagata-strict-transform-chart-ring",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01IG, label example-closed-immersion-affines; the general quotient-spectrum assertion is supplied directly by the verified Mathlib match."
+ },
+ "mathlib_searches": [
   {
-   "text": "The power-torsion subset is an ideal by\n[lemma-nagata-power-torsion-submodule], applied to the regular module\n$C_a(A,B,I)$. The spectrum of a quotient ring is a closed subscheme.",
-   "uses": [
-    "lemma-nagata-power-torsion-submodule"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "The spectrum of the quotient of a commutative ring by an ideal is a closed immersion into the spectrum of the ring",
+   "results": "8 hits. The first is AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion), with the exact quotient-spectrum type; also spec_of_surjective and Spec_iff. Read the pinned source at lines 101-117.",
+   "date": "2026-10-21",
+   "verdict": "match: AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk specialized to the chart ring and its power-torsion ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "spec_of_surjective|quotient.*[Cc]losed|[Cc]losed.*quotient",
+   "results": "10 hits under Mathlib/AlgebraicGeometry, including Morphisms/ClosedImmersion.lean:101 (spec_of_surjective), :116 (the quotient instance conclusion), :117 (spec_of_surjective _ Ideal.Quotient.mk_surjective). Read lines 101-117; the instance declaration spec_of_quotient_mk is at line 115.",
+   "date": "2026-10-21",
+   "verdict": "match: AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk specialized to the chart ring and its power-torsion ideal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum map of the quotient ring R modulo an ideal is a closed immersion",
+   "results": "8 hits. AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk is the exact quotient-spectrum theorem; spec_of_surjective, Spec_iff, SpecMap_residue, PrimeSpectrum.isClosedEmbedding_comap_of_surjective and other scheme lemmas also returned.",
+   "date": "2026-10-21",
+   "verdict": "match: AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk specialized to the chart ring and its power-torsion ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Spec.map",
+   "results": "4 hits: AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, spec_of_quotient_mk, spec_of_surjective, Spec_iff (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion). The quotient instance has type {R : CommRingCat} (I : Ideal R) : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).",
+   "date": "2026-10-21",
+   "verdict": "match: AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk specialized to the chart ring and its power-torsion ideal"
   }
  ],
- "proof_deps": [
-  "lemma-nagata-power-torsion-submodule"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-closed.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": 115,
+  "how": "specializes in one line: take R = CommRingCat.of C_a(A,B,I) and I = the ideal Γ_(α)(C_a(A,B,I)) in AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:115-117), where α is the structural image of a. The current statement of def-nagata-strict-transform-chart-ring defines the strict-transform chart ring as this very quotient C/T, so no comparison theorem is needed. The optional project abbreviations agree: AffineBlowup.baseChangeChartTorsion and StrictChart, WeilConjectures/Blowup/Affine/StrictTransformChart.lean:57-65."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -72,5 +98,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-strict-transform-chart-closed",
+  "worker": "stage1",
+  "summary": "Q02 verified the current blueprint claim and identified it as a one-line specialization of Mathlib IsClosedImmersion.spec_of_quotient_mk. Made the implicit ring parameters, ideal and contravariant spectrum map explicit without changing the assertion; added the existing spectrum and closed-immersion definition nodes. Removed the imported proof in favor of a verified Mathlib leaf. No new nodes. Searched project declarations, the whole DAG and blueprint; all four recorded Mathlib searches returned the quotient-spectrum instance. Repair of the returned side-completion delivery: rebuilt the item from the current live DAG, preserving all live maintainer fields and the retained searches, and re-read every statement dependency. Explicitly named the structural image α in the torsion ideal to match the now-reviewed chart-ring definition. Rechecked the Mathlib instance at lines 115-117 and retained the leaf classification; no new nodes or new search claims.",
+  "blueprint": "Realizes main-20261015 order 153 and the unit sentence about quotienting the pulled-back chart by a_i-power torsion. The master proof first observes that this torsion is an ideal and then invokes the quotient-spectrum closed immersion; the already split chart-ring definition supplies that ideal and Mathlib supplies the conclusion. No change of unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-a9eb9ac40",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-a9eb9ac40 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item is now a Mathlib leaf, a one-line specialization of AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk at ClosedImmersion.lean:115-117 with R=C and I=T. That declaration takes any commutative ring and ideal, and its proof is spec_of_surjective (line 101). The arrow direction Spec(C/T)→Spec C is correct. def-nagata-strict-transform-chart-ring (status split) defines C^st literally as the quotient ring C/T, and its own statement already uses lemma-nagata-power-torsion-submodule to make T an ideal. So no comparison theorem is needed, and dropping that lemma from the old proof_deps loses no argument. The statement matches main-20261015 order 153 and master order 145. Only the notation is made explicit: no hypothesis is added and nothing is weakened. Stacks 01IG (schemes.tex:1577) confirms the general fact, and no SGA is cited. lem-weil-pbc-spec-quotient-closed-immersion is the generic leaf of the same declaration; this imported blueprint item specializes it and is not a new duplicate. Edge cases all agree with the statement: α nilpotent, α a unit, C=0, and the Z×Z/2 torsion example. Against the side-live and live copies, only split-owned fields changed. The prior return L was a landing refusal, not a mathematical fault; this re-delivery differs from the earlier head 7584cde81d8f only by naming α. The item is not in the dropped list and has no re-split note. No new nodes, no fixes, no tool_uses."
  }
 }
