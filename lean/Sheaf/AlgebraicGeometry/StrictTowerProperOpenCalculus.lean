@@ -12,8 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.StrictTowerPullbackSquarePasting
-import Sheaf.AlgebraicGeometry.StrictTowerGammaEvaluation
-import Sheaf.AlgebraicGeometry.SingleProperOpenFiniteNormalization
 import Mathlib.CategoryTheory.Adjunction.Triple
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
@@ -164,6 +162,19 @@ theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     rw [hc]
     exact disjoint_compl_right
   exact (derived_disjoint_extension B s c hc' ((G B s).obj M)).eq_of_tgt _ _
+
+/-- Cartesian squares recover beta from the intrinsic clopen construction.
+Source: Stacks, Tag 0F7B and blueprint, fourth proof step
+(blueprint: lem-cbc-strict-tower-proper-open-calculus).
+Proof: the fibre-product lift is the canonical isomorphism of the cartesian square.
+Its complementary open is empty, so its component projection is identity. The
+normalized compositors and the open-unit transpose identify the remaining map with beta. -/
+theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
+    alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom := by
+  sorry
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem moduleR_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
@@ -832,6 +843,24 @@ theorem beta_id {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     exact betaInv_id B j h N
   exact congr_app (iso_unit_cancel (beta B (𝟙 U) j j (𝟙 X) h hsq) _ _ he) M
 
+private theorem alpha_identities :
+    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+      (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),
+      (alpha B j (𝟙 U) (𝟙 X) j h).app M ≫
+          (J B j).map ((gId B U).hom.app M) =
+        (gId B X).hom.app ((J B j).obj M)) ∧
+    (∀ {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
+      (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : Derived B X),
+      (alpha B (𝟙 U) p p (𝟙 X) h).app M ≫
+          (jId B U).hom.app ((G B p).obj M) =
+        (G B p).map ((jId B X).hom.app M)) := by
+  constructor
+  · intro U X j _ _ h M
+    rw [alpha_cartesian B j (𝟙 U) (𝟙 X) j h (IsPullback.of_id_snd (f := j))]
+    exact beta_id B j h.symm (IsPullback.of_id_snd (f := j)).flip M
+  · intro U X p _ h M
+    rw [alpha_cartesian B (𝟙 U) p p (𝟙 X) h (IsPullback.of_id_fst (f := p))]
+    exact beta_id_open B p h.symm (IsPullback.of_id_fst (f := p)).flip M
 
 end NormalizedIdentities
 
@@ -947,461 +976,13 @@ theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
       (beta B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
   exact beta_open_comp_aux B k j k₁ j₁ a b g wk wj w sk sj s M
 
-section CartesianNormalization
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-attribute [local irreducible] G R J gComp gId jAdj adj jComp jCongr pi alpha
-  towers_hasDerivedCategory
-
-private theorem clopen_map_injective {U X : Scheme.{u}} (s : U ⟶ X)
-    [IsOpenImmersion s] [IsClosedImmersion s] {M : Derived B X} {N : Derived B U}
-    {f g : M ⟶ (J B s).obj N} (h : (G B s).map f = (G B s).map g) : f = g := by
-  have := openToR_isIso B s
-  apply (cancel_mono ((openToR B s).app N)).1
-  apply ((adj B s).homEquiv M N).symm.injective
-  simp only [Adjunction.homEquiv_counit, Functor.map_comp, h]
-
-private theorem counit_pi {U X : Scheme.{u}} (s : U ⟶ X)
-    [IsOpenImmersion s] [IsClosedImmersion s] (N : Derived B X) :
-    (jAdj B s).counit.app N ≫ (pi B s).app N = 𝟙 _ := by
-  have := jAdj_unit_isIso B s
-  apply clopen_map_injective B s
-  rw [Functor.map_comp, pi_image]
-  apply (cancel_epi ((jAdj B s).unit.app ((G B s).obj N))).1
-  rw [← Category.assoc, (jAdj B s).right_triangle_components]
-  erw [Category.id_comp, (G B s).map_id, Category.comp_id]
-
-private theorem counit_precomp_injective {U X W : Scheme.{u}}
-    (s : U ⟶ X) (b : X ⟶ W) [IsOpenImmersion s] [IsClosedImmersion s]
-    [IsOpenImmersion b] (M : Derived B X) (Y : Derived B U)
-    (f g : (J B b).obj M ⟶ (J B b).obj ((J B s).obj Y))
-    (h : (J B b).map ((jAdj B s).counit.app M) ≫ f =
-      (J B b).map ((jAdj B s).counit.app M) ≫ g) : f = g := by
-  have := jAdj_unit_isIso B b
-  let ff := (jAdj B b).fullyFaithfulLOfIsIsoUnit
-  have := ff.full
-  have := ff.faithful
-  let f₀ := (J B b).preimage f
-  let g₀ := (J B b).preimage g
-  have h₀ : (jAdj B s).counit.app M ≫ f₀ = (jAdj B s).counit.app M ≫ g₀ := by
-    apply (J B b).map_injective
-    simpa only [f₀, g₀, Functor.map_comp, Functor.map_preimage] using h
-  have := jAdj_unit_isIso B s
-  have hε : IsIso ((G B s).map ((jAdj B s).counit.app M)) := by
-    have hc : IsIso ((jAdj B s).unit.app ((G B s).obj M) ≫
-        (G B s).map ((jAdj B s).counit.app M)) := by
-      rw [(jAdj B s).right_triangle_components]
-      exact IsIso.id _
-    exact IsIso.of_isIso_comp_left ((jAdj B s).unit.app ((G B s).obj M)) _
-  have h₁ : (G B s).map f₀ = (G B s).map g₀ := by
-    apply (cancel_epi ((G B s).map ((jAdj B s).counit.app M))).1
-    simpa only [Functor.map_comp] using congrArg (G B s).map h₀
-  have h₂ := clopen_map_injective B s h₁
-  have h₃ := congrArg (J B b).map h₂
-  simpa only [f₀, g₀, Functor.map_preimage] using h₃
-
-private theorem identity_open_unit (S : Scheme.{u}) (N : Derived B S) :
-    (jAdj B (𝟙 S)).unit.app N ≫ (gId B S).hom.app ((J B (𝟙 S)).obj N) =
-      (jId B S).inv.app N := by
-  apply (cancel_mono ((jId B S).hom.app N)).1
-  rw [Category.assoc, Iso.inv_hom_id_app]
-  have hn := (gId B S).hom.naturality ((jId B S).hom.app N)
-  dsimp only [Functor.id_map] at hn
-  rw [← hn, ← Category.assoc, jId_transpose]
-  exact Iso.inv_hom_id_app _ _
-
-private theorem squareG_identity_bottom {U X S : Scheme.{u}}
-    (s : U ⟶ X) (q : X ⟶ S) (N : Derived B S) :
-    (squareG B (s ≫ q) s (𝟙 S) q (Category.comp_id _)).inv.app N =
-      (G B (s ≫ q)).map ((gId B S).hom.app N) ≫ (gComp B s q).hom.app N := by
-  have hu := congr_app (gComp_id_right B (s ≫ q)) N
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hu
-  simp only [squareG, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, eqToIso.inv]
-  apply (cancel_epi ((gComp B (s ≫ q) (𝟙 S)).hom.app N)).1
-  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-  rw [hu]
-  rfl
-
-private theorem jComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (N : Derived B U) :
-    (jComp B (𝟙 U) j).hom.app N ≫
-        (jCongr B (Category.id_comp j)).hom.app N =
-      (J B j).map ((jId B U).hom.app N) := by
-  let I := {f : U ⟶ X // IsOpenImmersion f}
-  let L : I → Derived B U ⥤ Derived B X := fun f ↦ letI := f.2; J B f.1
-  let R₀ : I → Derived B X ⥤ Derived B U := fun f ↦ G B f.1
-  let a : ∀ f, L f ⊣ R₀ f := fun f ↦ letI := f.2; jAdj B f.1
-  let f : I := ⟨(𝟙 U) ≫ j, inferInstance⟩
-  let g : I := ⟨j, inferInstance⟩
-  have e : f = g := Subtype.ext (Category.id_comp j)
-  have hd : (gComp B (𝟙 U) j).symm ≪≫ eqToIso (congrArg R₀ e) =
-      Functor.isoWhiskerLeft (G B j) (gId B U) ≪≫ Functor.rightUnitor (G B j) := by
-    apply Iso.ext
-    ext M
-    have hh := congr_app (gComp_id_left B j) M
-    simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hh
-    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
-    change (gComp B (𝟙 U) j).inv.app M ≫
-      (eqToIso (congrArg (G B) (Category.id_comp j))).hom.app M =
-        (gId B U).hom.app ((G B j).obj M) ≫ 𝟙 _
-    rw [← hh, ← Category.assoc, Iso.inv_hom_id_app]
-    erw [Category.id_comp, Category.comp_id]
-  have hh := leftAdjointCompIso_transport L R₀ a (jAdj B (𝟙 U)) (jAdj B j)
-    e (gComp B (𝟙 U) j).symm
-  rw [hd, Adjunction.leftAdjointCompIso_id_comp _ _ _ _ rfl] at hh
-  have hn := congrArg (fun t ↦ t.hom.app N) hh
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hn
-  simpa only [jComp, jCongr, jId, Functor.comp_obj, Functor.id_obj,
-    Category.comp_id] using hn
-
-private theorem betaInv_open_comp_app {V U X V₁ U₁ X₁ : Scheme.{u}}
-    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
-    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
-    [IsOpenImmersion k] [IsOpenImmersion j]
-    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
-    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
-    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g) (M : Derived B V) :
-    (betaInv B b (k₁ ≫ j₁) (k ≫ j) g w).app M =
-      (jComp B k₁ j₁).inv.app ((G B b).obj M) ≫
-        (J B j₁).map ((betaInv B b k₁ k a wk).app M) ≫
-        (betaInv B a j₁ j g wj).app ((J B k).obj M) ≫
-        (G B g).map ((jComp B k j).hom.app M) := by
-  have hp (N : Derived B X) :
-      (G B b).map ((gComp B k j).hom.app N) ≫
-        (squareG B b k₁ k a wk).inv.app ((G B j).obj N) ≫
-        (G B k₁).map ((squareG B a j₁ j g wj).inv.app N) =
-      (squareG B b (k₁ ≫ j₁) (k ≫ j) g w).inv.app N ≫
-        (gComp B k₁ j₁).hom.app ((G B g).obj N) := by
-    have hh := squareG_pasting_inv B g a b j k j₁ k₁
-      wj.symm wk.symm w.symm N
-    rw [squareG_flip B a j₁ j g wj, squareG_flip B b k₁ k a wk,
-      squareG_flip B b (k₁ ≫ j₁) (k ≫ j) g w] at hh
-    simp only [Iso.symm_inv] at hh
-    apply (cancel_epi ((squareG B b (k₁ ≫ j₁) (k ≫ j) g w).hom.app N)).1
-    rw [← Category.assoc, ← hh]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
-      ← Functor.map_comp, Iso.hom_inv_id_app]
-    erw [(G B k₁).map_id, Category.comp_id]
-  have hi := congr_app (betaInv_open_comp B k j k₁ j₁ a b g wk wj w hp) M
-  dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans] at hi
-  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc] using hi
-
-private theorem betaInv_transport_opens {U' U X' X : Scheme.{u}}
-    (a : U' ⟶ U) (j₁ j₂ : U ⟶ X) (k₁ k₂ : U' ⟶ X') (g : X' ⟶ X)
-    [IsOpenImmersion j₁] [IsOpenImmersion j₂]
-    [IsOpenImmersion k₁] [IsOpenImmersion k₂]
-    (ej : j₁ = j₂) (ek : k₁ = k₂)
-    (w₁ : a ≫ j₁ = k₁ ≫ g) (w₂ : a ≫ j₂ = k₂ ≫ g) (N : Derived B U) :
-    (jCongr B ek).inv.app ((G B a).obj N) ≫
-        (betaInv B a k₁ j₁ g w₁).app N ≫
-        (G B g).map ((jCongr B ej).hom.app N) =
-      (betaInv B a k₂ j₂ g w₂).app N := by
-  subst j₂
-  subst k₂
-  simp only [jCongr, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
-  erw [(G B g).map_id, Category.id_comp, Category.comp_id]
-
-private theorem betaInv_identity_bottom {U X S : Scheme.{u}}
-    (s : U ⟶ X) (q : X ⟶ S) [IsOpenImmersion s] (N : Derived B S) :
-    (betaInv B (s ≫ q) s (𝟙 S) q (Category.comp_id _)).app N =
-      (J B s).map ((G B (s ≫ q)).map ((jId B S).inv.app N)) ≫
-        (J B s).map ((gComp B s q).hom.app ((J B (𝟙 S)).obj N)) ≫
-          (jAdj B s).counit.app ((G B q).obj ((J B (𝟙 S)).obj N)) := by
-  change betaInvApp B _ _ _ _ _ N = _
-  rw [betaInvApp, Adjunction.homEquiv_counit, squareG_identity_bottom,
-    ← Category.assoc, ← Functor.map_comp, identity_open_unit]
-  rw [Functor.map_comp, Category.assoc]
-
-private theorem betaInv_identity_bottom_counit {U X S : Scheme.{u}}
-    (s : U ⟶ X) (q : X ⟶ S) [IsOpenImmersion s] (N : Derived B S) :
-    (betaInv B (s ≫ q) s (𝟙 S) q (Category.comp_id _)).app N ≫
-        (G B q).map ((jId B S).hom.app N) =
-      (J B s).map ((gComp B s q).hom.app N) ≫
-        (jAdj B s).counit.app ((G B q).obj N) := by
-  rw [betaInv_identity_bottom]
-  have hn := (jAdj B s).counit.naturality ((G B q).map ((jId B S).hom.app N))
-  dsimp only [Functor.comp_map, Functor.id_map] at hn
-  simp only [Category.assoc]
-  rw [← hn]
-  have hg := (gComp B s q).hom.naturality ((jId B S).hom.app N)
-  dsimp only [Functor.comp_map] at hg
-  rw [← (J B s).map_comp_assoc, ← (J B s).map_comp_assoc]
-  simp only [Category.assoc]
-  rw [← hg, ← (G B (s ≫ q)).map_comp_assoc, Iso.inv_hom_id_app]
-  erw [(G B (s ≫ q)).map_id, Category.id_comp]
-  simp only [Functor.id_obj]
-
-private theorem betaInv_factor {V P W S T : Scheme.{u}}
-    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    [IsOpenImmersion s] [IsOpenImmersion b] [IsOpenImmersion i]
-    (w₀ : q ≫ i = b ≫ p) (w : (s ≫ q) ≫ i = (s ≫ b) ≫ p)
-    (N : Derived B S) :
-    (betaInv B (s ≫ q) (s ≫ b) i p w).app N =
-      (J B (s ≫ b)).map ((gComp B s q).hom.app N) ≫
-        (jComp B s b).inv.app ((G B s).obj ((G B q).obj N)) ≫
-        (J B b).map ((jAdj B s).counit.app ((G B q).obj N)) ≫
-        (betaInv B q b i p w₀).app N := by
-  let w' : (s ≫ q) ≫ ((𝟙 S) ≫ i) = (s ≫ b) ≫ p := by
-    rw [Category.id_comp]; exact w
-  have ht := betaInv_open_comp_app B (𝟙 S) i s b q (s ≫ q) p
-    (Category.comp_id _) w₀ w' N
-  have ht' := congrArg (fun f ↦ f ≫
-    (G B p).map ((jCongr B (Category.id_comp i)).hom.app N)) ht
-  simp only [Category.assoc] at ht'
-  rw [← (G B p).map_comp, jComp_id_left] at ht'
-  have hn := (betaInv B q b i p w₀).naturality ((jId B S).hom.app N)
-  dsimp only [Functor.comp_map] at hn
-  rw [← hn, ← (J B b).map_comp_assoc, betaInv_identity_bottom_counit] at ht'
-  rw [(J B b).map_comp] at ht'
-  have hj := (jComp B s b).inv.naturality ((gComp B s q).hom.app N)
-  dsimp only [Functor.comp_map] at hj
-  simp only [Category.assoc] at ht'
-  rw [← reassoc_of% hj] at ht'
-  have hb := betaInv_transport_opens B (s ≫ q) ((𝟙 S) ≫ i) i
-    (s ≫ b) (s ≫ b) p (Category.id_comp i) rfl w' w N
-  simp only [jCongr, eqToIso_refl, Iso.refl_inv, NatTrans.id_app] at hb
-  erw [Category.id_comp] at hb
-  simp only [jCongr] at ht'
-  rw [hb] at ht'
-  simpa only [Category.assoc, Functor.comp_obj, Functor.id_obj] using ht'
-
-private theorem betaInv_factor_transport {V P W S T : Scheme.{u}}
-    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    (r : V ⟶ S) (k : V ⟶ W)
-    [IsOpenImmersion s] [IsOpenImmersion b] [IsOpenImmersion i] [IsOpenImmersion k]
-    (er : s ≫ q = r) (ek : s ≫ b = k)
-    (w₀ : q ≫ i = b ≫ p) (w : r ≫ i = k ≫ p) (N : Derived B S) :
-    (betaInv B r k i p w).app N =
-      (J B k).map ((gCongr B er).inv.app N ≫
-        (gComp B s q).hom.app N) ≫
-        (jCongr B ek).inv.app ((G B s).obj ((G B q).obj N)) ≫
-        (jComp B s b).inv.app ((G B s).obj ((G B q).obj N)) ≫
-        (J B b).map ((jAdj B s).counit.app ((G B q).obj N)) ≫
-        (betaInv B q b i p w₀).app N := by
-  subst r
-  subst k
-  simp only [gCongr_refl, jCongr, eqToIso_refl, Iso.refl_inv, NatTrans.id_app,
-    Category.id_comp]
-  erw [Category.id_comp]
-  exact betaInv_factor B s b q p i w₀ w N
-
-private theorem betaInv_comp {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
-    (j : U ⟶ X) (j₁ : U₁ ⟶ X₁) (j₂ : U₂ ⟶ X₂)
-    (g : X₁ ⟶ X) (h : X₂ ⟶ X₁) (a : U₁ ⟶ U) (b : U₂ ⟶ U₁)
-    [IsOpenImmersion j] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
-    (w₁ : a ≫ j = j₁ ≫ g) (w₂ : b ≫ j₁ = j₂ ≫ h)
-    (w : (b ≫ a) ≫ j = j₂ ≫ (h ≫ g))
-    (M : Derived B U) :
-    (J B j₂).map ((gComp B b a).hom.app M) ≫
-      (betaInv B b j₂ j₁ h w₂).app ((G B a).obj M) ≫ (G B h).map ((betaInv B a j₁ j g w₁).app M) =
-        (betaInv B (b ≫ a) j₂ j (h ≫ g) w).app M ≫ (gComp B h g).hom.app ((J B j).obj M) := by
-  exact transposed_pasting (jAdj B j) (jAdj B j₁) (jAdj B j₂)
-    (gComp B b a).hom (gComp B h g).hom
-    (squareG B a j₁ j g w₁).inv (squareG B b j₂ j₁ h w₂).inv
-    (squareG B (b ≫ a) j₂ j (h ≫ g) w).inv
-    (betaInv B a j₁ j g w₁) (betaInv B b j₂ j₁ h w₂)
-    (betaInv B (b ≫ a) j₂ j (h ≫ g) w)
-    (betaInv_unit B a j₁ j g w₁) (betaInv_unit B b j₂ j₁ h w₂)
-    (betaInv_unit B (b ≫ a) j₂ j (h ≫ g) w)
-    (squareG_pasting_inv B j j₁ j₂ g h a b w₁ w₂ w) M
-
-private theorem betaInv_transport_vertical {V S W T : Scheme.{u}}
-    (r₀ r₁ : V ⟶ S) (k : V ⟶ W) (i : S ⟶ T) (p₀ p₁ : W ⟶ T)
-    [IsOpenImmersion k] [IsOpenImmersion i]
-    (er : r₀ = r₁) (ep : p₀ = p₁)
-    (h₀ : r₀ ≫ i = k ≫ p₀) (h₁ : r₁ ≫ i = k ≫ p₁) (N : Derived B S) :
-    (J B k).map ((eqToIso (congrArg (G B) er)).inv.app N) ≫
-        (betaInv B r₀ k i p₀ h₀).app N ≫
-        (eqToIso (congrArg (G B) ep)).hom.app ((J B i).obj N) =
-      (betaInv B r₁ k i p₁ h₁).app N := by
-  subst r₁
-  subst p₁
-  simp only [eqToIso_refl, Iso.refl_inv, Iso.refl_hom, NatTrans.id_app]
-  erw [(J B k).map_id, Category.id_comp, Category.comp_id]
-
-private theorem squareG_hom_comp {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    (h : k ≫ p = r ≫ i) (N : Derived B T) :
-    (squareG B k r p i h).hom.app N =
-      (gComp B r i).inv.app N ≫
-        (eqToIso (congrArg (G B) h)).inv.app N ≫ (gComp B k p).hom.app N := by
-  have hs : (squareG B k r p i h).hom =
-      (gComp B r i).inv ≫ (eqToIso (congrArg (G B) h)).inv ≫ (gComp B k p).hom := by
-    simp only [squareG, Iso.trans_hom, Iso.symm_hom, eqToIso.hom, eqToIso.inv]
-  exact congr_app hs N
-
-private theorem betaInv_cube {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
-    (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
-    (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
-    (a : W₁ ⟶ W) (b : T₁ ⟶ T) (c : S₁ ⟶ S) (d : V₁ ⟶ V)
-    [IsOpenImmersion k] [IsOpenImmersion i]
-    [IsOpenImmersion k₁] [IsOpenImmersion i₁]
-    (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
-    (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ b)
-    (wp : a ≫ p = p₁ ≫ b) (wr : d ≫ r = r₁ ≫ c) (N : Derived B S) :
-    (betaInv B r₁ k₁ i₁ p₁ h₁.symm).app ((G B c).obj N) ≫
-        (G B p₁).map ((betaInv B c i₁ i b wi).app N) ≫
-        (squareG B a p₁ p b wp).hom.app ((J B i).obj N) =
-      (J B k₁).map ((squareG B d r₁ r c wr).hom.app N) ≫
-        (betaInv B d k₁ k a wk).app ((G B r).obj N) ≫
-        (G B a).map ((betaInv B r k i p h.symm).app N) := by
-  let w₀ : (d ≫ r) ≫ i = k₁ ≫ (a ≫ p) := by
-    calc
-      (d ≫ r) ≫ i = d ≫ (r ≫ i) := Category.assoc _ _ _
-      _ = d ≫ (k ≫ p) := by rw [← h]
-      _ = (d ≫ k) ≫ p := (Category.assoc _ _ _).symm
-      _ = (k₁ ≫ a) ≫ p := by rw [wk]
-      _ = k₁ ≫ (a ≫ p) := Category.assoc _ _ _
-  let w₁ : (r₁ ≫ c) ≫ i = k₁ ≫ (p₁ ≫ b) := by
-    rw [← wr, ← wp]
-    exact w₀
-  have hv := betaInv_comp B i k k₁ p a r d h.symm wk w₀ N
-  have hv₁ := betaInv_comp B i i₁ k₁ b p₁ c r₁ wi h₁.symm w₁ N
-  have ht := betaInv_transport_vertical B (d ≫ r) (r₁ ≫ c) k₁ i
-    (a ≫ p) (p₁ ≫ b) wr wp w₀ w₁ N
-  have ht' : (betaInv B (r₁ ≫ c) k₁ i (p₁ ≫ b) w₁).app N ≫
-      (eqToIso (congrArg (G B) wp)).inv.app ((J B i).obj N) =
-      (J B k₁).map ((eqToIso (congrArg (G B) wr)).inv.app N) ≫
-        (betaInv B (d ≫ r) k₁ i (a ≫ p) w₀).app N := by
-    rw [← ht]
-    simp only [Category.assoc, Iso.hom_inv_id_app]
-    erw [Category.comp_id]
-  have hv₁' : (betaInv B r₁ k₁ i₁ p₁ h₁.symm).app ((G B c).obj N) ≫
-      (G B p₁).map ((betaInv B c i₁ i b wi).app N) =
-      (J B k₁).map ((gComp B r₁ c).inv.app N) ≫
-        (betaInv B (r₁ ≫ c) k₁ i (p₁ ≫ b) w₁).app N ≫
-        (gComp B p₁ b).hom.app ((J B i).obj N) := by
-    apply (cancel_epi ((J B k₁).map ((gComp B r₁ c).hom.app N))).1
-    rw [← (J B k₁).map_comp_assoc, Iso.hom_inv_id_app]
-    erw [(J B k₁).map_id, Category.id_comp]
-    exact hv₁
-  rw [squareG_hom_comp, squareG_hom_comp]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hv₁']
-  simp only [Iso.hom_inv_id_app_assoc]
-  rw [reassoc_of% ht', ← hv]
-
-private theorem beta_inv_eq {U' U X' X : Scheme.{u}}
-    (a : U' ⟶ U) (k : U' ⟶ X') (i : U ⟶ X) (p : X' ⟶ X)
-    [IsOpenImmersion i] [IsOpenImmersion k] (w : a ≫ i = k ≫ p)
-    (sq : IsPullback a k i p) :
-    (beta B a k i p w sq).inv = betaInv B a k i p w := by
-  rfl
-
-attribute [local irreducible] beta
-
-private theorem betaInv_alpha {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
-    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (N : Derived B S) :
-    (betaInv B r k i p h.symm).app N ≫ (alpha B k r p i h).app N = 𝟙 _ := by
-  let s := squareLift k r p i h
-  let b := pullback.fst p i
-  let q := pullback.snd p i
-  let : IsOpenImmersion s := squareLift_open k r p i h
-  let : IsClosedImmersion s := squareLift_closed k r p i h
-  let ek : s ≫ b = k := pullback.lift_fst k r h
-  let er : s ≫ q = r := pullback.lift_snd k r h
-  let w₀ : q ≫ i = b ≫ p := pullback.condition.symm
-  have hf := betaInv_factor_transport B s b q p i r k er ek w₀ h.symm N
-  exact projectedComparison_cancel_of_factor
-    (J B i) (G B p) (G B q) (G B s) (J B s) (J B b)
-    (J B (s ≫ b)) (J B k) (G B (s ≫ q)) (G B r)
-    (beta B q b i p w₀ (IsPullback.of_hasPullback p i).flip)
-    (jAdj B s).counit (pi B s) (jComp B s b) (jCongr B ek)
-    (gComp B s q).symm (gCongr B er) (counit_pi B s)
-    (alpha B k r p i h) (alpha_def B k r p i h)
-    (betaInv B q b i p w₀)
-    (beta_inv_eq B q b i p w₀ (IsPullback.of_hasPullback p i).flip).symm N
-    ((betaInv B r k i p h.symm).app N) hf
-
-private theorem betaInv_precomp_injective {V W S T : Scheme.{u}}
-    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
-    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
-    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
-    (N : Derived B S) (Y : Derived B V)
-    (f g : (G B p).obj ((J B i).obj N) ⟶ (J B k).obj Y)
-    (hfg : (betaInv B r k i p h.symm).app N ≫ f =
-      (betaInv B r k i p h.symm).app N ≫ g) : f = g := by
-  let s := pullback.lift k r h
-  let b := pullback.fst p i
-  let q := pullback.snd p i
-  let : IsOpenImmersion s := squareLift_open k r p i h
-  let : IsClosedImmersion s := squareLift_closed k r p i h
-  let ek : s ≫ b = k := pullback.lift_fst k r h
-  let er : s ≫ q = r := pullback.lift_snd k r h
-  let w₀ : q ≫ i = b ≫ p := pullback.condition.symm
-  have hf := betaInv_factor_transport B s b q p i r k er ek w₀ h.symm N
-  rw [hf] at hfg
-  simp only [Category.assoc] at hfg
-  have h₁ := (cancel_epi ((J B k).map
-    ((gCongr B er).inv.app N ≫ (gComp B s q).hom.app N))).1 hfg
-  have h₂ := (cancel_epi ((jCongr B ek).inv.app
-    ((G B s).obj ((G B q).obj N)))).1 h₁
-  have h₃ := (cancel_epi ((jComp B s b).inv.app
-    ((G B s).obj ((G B q).obj N)))).1 h₂
-  let e := jComp B s b ≪≫ jCongr B ek
-  have h₄ := congrArg (fun v ↦ v ≫ e.inv.app Y) h₃
-  simp only [Category.assoc] at h₄
-  have hx := counit_precomp_injective B s b ((G B q).obj N) Y
-    ((betaInv B q b i p w₀).app N ≫ f ≫ e.inv.app Y)
-    ((betaInv B q b i p w₀).app N ≫ g ≫ e.inv.app Y) h₄
-  have := betaInv_isIso B q b i p w₀ (IsPullback.of_hasPullback p i).flip
-  apply (cancel_mono (e.inv.app Y)).1
-  apply (cancel_epi ((betaInv B q b i p w₀).app N)).1
-  simpa only [Category.assoc] using hx
-
-/-- Cartesian squares recover beta from the intrinsic clopen construction.
-Source: Stacks, Tag 0F7B and blueprint, fourth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: factor the reverse open-unit comparison through the clopen lift. The
-clopen counit followed by pi is identity, so betaInv followed by alpha is identity.
-For a cartesian square betaInv is invertible, and cancelling it identifies alpha with beta. -/
-theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
-    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
-    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
-    (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
-    alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom := by
-  ext N
-  have := betaInv_isIso B r k i p h.symm hsq.flip
-  apply (cancel_epi ((betaInv B r k i p h.symm).app N)).1
-  rw [betaInv_alpha B k r p i h N]
-  rw [← beta_inv_eq B r k i p h.symm hsq.flip]
-  exact (beta B r k i p h.symm hsq.flip).inv_hom_id_app N |>.symm
-
-
-private theorem alpha_identities :
-    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-      (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),
-      (alpha B j (𝟙 U) (𝟙 X) j h).app M ≫
-          (J B j).map ((gId B U).hom.app M) =
-        (gId B X).hom.app ((J B j).obj M)) ∧
-    (∀ {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
-      (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : Derived B X),
-      (alpha B (𝟙 U) p p (𝟙 X) h).app M ≫
-          (jId B U).hom.app ((G B p).obj M) =
-        (G B p).map ((jId B X).hom.app M)) := by
-  constructor
-  · intro U X j _ _ h M
-    rw [alpha_cartesian B j (𝟙 U) (𝟙 X) j h (IsPullback.of_id_snd (f := j))]
-    exact beta_id B j h.symm (IsPullback.of_id_snd (f := j)).flip M
-  · intro U X p _ h M
-    rw [alpha_cartesian B (𝟙 U) p p (𝟙 X) h (IsPullback.of_id_fst (f := p))]
-    exact beta_id_open B p h.symm (IsPullback.of_id_fst (f := p)).flip M
-
-
-
 /-- Intrinsic alpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: precomposition by the reverse comparison detects maps into the upper
-open extension. The reverse vertical pasting equation reduces both sides to the
-same pullback compositor after cancelling betaInv followed by alpha in each square. -/
+Proof: after beta, the two clopen projections select nested open components.
+On every test object's intersections of the two clopen decompositions the two
+composites are both identity or both zero. Sheaf uniqueness proves equality,
+termwise extension preserves it, and exact localization descends it. -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -1415,21 +996,14 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
         (alpha B k r₁ p₁ i h₁).app ((G B r₂).obj N) =
       (alpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app N ≫
         (J B k).map ((gComp B r₁ r₂).hom.app N) := by
-  apply betaInv_precomp_injective B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h N
-    ((G B r₁).obj ((G B r₂).obj N))
-  rw [← reassoc_of% (betaInv_comp B j i k p₂ p₁ r₂ r₁ h₂.symm h₁.symm h.symm N)]
-  rw [← (G B p₁).map_comp_assoc, betaInv_alpha B i r₂ p₂ j h₂ N]
-  erw [(G B p₁).map_id, Category.id_comp]
-  rw [betaInv_alpha B k r₁ p₁ i h₁ ((G B r₂).obj N)]
-  rw [reassoc_of% (betaInv_alpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h N)]
-  exact Category.comp_id _
+  sorry
 
 /-- Intrinsic alpha agrees with horizontal pasting on every input.
 Source: Stacks, Tag 0F7D and blueprint, fifth proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: normalize by the lower open compositor and precompose by the total
-reverse comparison. Its open-composition equation reduces the two sides to identity,
-using the two betaInv-alpha cancellation equations and the upper open compositor. -/
+Proof: the first clopen projection selects l(W), and the second selects lk(V)
+inside it. Their composite selects lk(V) and vanishes on its complement. Use the
+open-composition beta equation and exact localization to identify the displayed maps. -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -1443,34 +1017,15 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (alpha B l p q j h₂).app ((J B i).obj N) ≫
         (J B l).map ((alpha B k r p i h₁).app N) ≫
         (jComp B k l).hom.app ((G B r).obj N) := by
-  suffices hn : (alpha B (k ≫ l) r q (i ≫ j) h).app N =
-      (G B q).map ((jComp B i j).inv.app N) ≫
-        (alpha B l p q j h₂).app ((J B i).obj N) ≫
-        (J B l).map ((alpha B k r p i h₁).app N) ≫
-        (jComp B k l).hom.app ((G B r).obj N) by
-    rw [hn, ← (G B q).map_comp_assoc, Iso.hom_inv_id_app]
-    erw [(G B q).map_id, Category.id_comp]
-  apply betaInv_precomp_injective B (k ≫ l) r q (i ≫ j) h N ((G B r).obj N)
-  rw [betaInv_alpha B (k ≫ l) r q (i ≫ j) h N]
-  rw [betaInv_open_comp_app B i j k l p r q h₁.symm h₂.symm h.symm N]
-  simp only [Category.assoc]
-  rw [← (G B q).map_comp_assoc, Iso.hom_inv_id_app]
-  erw [(G B q).map_id, Category.id_comp]
-  rw [reassoc_of% (betaInv_alpha B l p q j h₂ ((J B i).obj N))]
-  rw [← (J B l).map_comp_assoc, betaInv_alpha B k r p i h₁ N]
-  erw [(J B l).map_id, Category.id_comp, Iso.inv_hom_id_app]
-  rfl
+  sorry
 
--- The reverse cube needs only commutativity; retain the original pullback hypotheses.
-set_option linter.unusedVariables false in
 /-- Intrinsic alpha commutes with the canonical pullback cube.
 Source: Stacks, Tag 0F7F and blueprint, fifth proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: paste reverse comparisons along the two diagonals of the cube. Transport
-along the two vertical-face equalities identifies these pastings. Precompose the
-normalized alpha cube by the upper reverse comparison; its injectivity and the two
-betaInv-alpha cancellation equations prove equality. The proof only needs the open
-faces to be cartesian, retaining all hypotheses of the original statement. -/
+Proof: base change takes the selected clopen image and its complementary open to
+the corresponding two components. Exact inverse image preserves the split
+identity/zero projection. The beta comparison identifies open extension on these
+components. Sheaf uniqueness and localization give equality before evaluation. -/
 theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -1490,28 +1045,7 @@ theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
         (J B k₁).map ((squareG B d r₁ r c wr).inv.app N) =
       (G B p₁).map ((beta B c i₁ i b wi si).hom.app N) ≫
         (alpha B k₁ r₁ p₁ i₁ h₁).app ((G B c).obj N) := by
-  have hc := betaInv_cube B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ wk wi wp wr N
-  rw [← beta_inv_eq B c i₁ i b wi si, ← beta_inv_eq B d k₁ k a wk sk] at hc
-  have hx : (G B p₁).map ((beta B c i₁ i b wi si).inv.app N) ≫
-      (squareG B a p₁ p b wp).hom.app ((J B i).obj N) ≫
-      (G B a).map ((alpha B k r p i h).app N) ≫
-      (beta B d k₁ k a wk sk).hom.app ((G B r).obj N) ≫
-      (J B k₁).map ((squareG B d r₁ r c wr).inv.app N) =
-      (alpha B k₁ r₁ p₁ i₁ h₁).app ((G B c).obj N) := by
-    apply betaInv_precomp_injective B k₁ r₁ p₁ i₁ h₁
-      ((G B c).obj N) ((G B r₁).obj ((G B c).obj N))
-    rw [betaInv_alpha B k₁ r₁ p₁ i₁ h₁ ((G B c).obj N)]
-    rw [reassoc_of% hc]
-    rw [← (G B a).map_comp_assoc, betaInv_alpha B k r p i h N]
-    erw [(G B a).map_id, Category.id_comp]
-    simp only [Iso.inv_hom_id_app_assoc, ← (J B k₁).map_comp,
-      Iso.hom_inv_id_app]
-    exact (J B k₁).map_id _
-  apply (cancel_epi ((G B p₁).map ((beta B c i₁ i b wi si).inv.app N))).1
-  rw [hx, ← (G B p₁).map_comp_assoc, Iso.inv_hom_id_app]
-  erw [(G B p₁).map_id, Category.id_comp]
-
-end CartesianNormalization
+  sorry
 
 /-- Select the second witness without repeatedly expanding a large normalization
 predicate in the kernel. This is precisely the nested choice used by the finite
@@ -1584,22 +1118,6 @@ noncomputable def finiteTarget {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
   (moduleDirectImage B p).rightDerivedFunctor.mapIso ((evalJ B k n).symm.app M) ≪≫
   ((@asIso _ _ _ _ (evalR B p n) (evalR_isIso B p n)).app ((J B k).obj M)).symm
 
-private theorem comparison_transport
-    {C D : Type*} [Category C] [Category D] (F G : C ⥤ D) (a : F ⟶ G)
-    {O M : C} (e : O ≅ M) {A Z P Q : D}
-    (s : A ≅ F.obj O) (t : Z ≅ G.obj O)
-    (es : P ≅ F.obj M) (et : Q ≅ G.obj M) (v : P ⟶ Q) (f : A ⟶ Z)
-    (he : es.hom ≫ a.app M = v ≫ et.hom)
-    (hf : s.hom ≫ a.app O = f ≫ t.hom) :
-    (s ≪≫ F.mapIso e ≪≫ es.symm).hom ≫ v =
-      f ≫ (t ≪≫ G.mapIso e ≪≫ et.symm).hom := by
-  apply (cancel_mono et.hom).1
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Category.assoc, Iso.inv_hom_id, Category.comp_id]
-  rw [← he, Iso.inv_hom_id_assoc, a.naturality]
-  rw [← Category.assoc, hf]
-  simp only [Category.assoc]
-
 /-- The n-th evaluation is this particular normalized finite comparison, including
 refinements, and not just some isomorphism between the same objects.
 Source: Stacks, Tag 0F7B and blueprint, seventh and eighth proof steps
@@ -1620,34 +1138,7 @@ theorem gamma_evaluation {V W S T : Scheme.{u}}
     (finiteSource B r i M n w).hom ≫ (ev B T n).map ((gamma B k r p i h).app M) =
       (HD B T w.Λ w.φ).map ((finiteGamma w.Λ k r p i h).hom.app w.origin.L) ≫
         (finiteTarget B k p M n w).hom := by
-  let F := (moduleDirectImage B r).rightDerivedFunctor ⋙ (moduleJ B i).mapDerivedCategory
-  let G₀ := (moduleJ B k).mapDerivedCategory ⋙ (moduleDirectImage B p).rightDerivedFunctor
-  let es := (evalJ B i n).app ((R B r).obj M) ≪≫
-    (moduleJ B i).mapDerivedCategory.mapIso
-      ((@asIso _ _ _ _ (evalR B r n) (evalR_isIso B r n)).app M)
-  let et := (@asIso _ _ _ _ (evalR B p n) (evalR_isIso B p n)).app ((J B k).obj M) ≪≫
-    (moduleDirectImage B p).rightDerivedFunctor.mapIso ((evalJ B k n).app M)
-  have he : es.hom ≫ (singleGamma B k r p i h).app ((ev B V n).obj M) =
-      (ev B T n).map ((gamma B k r p i h).app M) ≫ et.hom := by
-    simpa only [es, et, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-      asIso_hom, Category.assoc] using gamma_single_evaluation B k r p i h M n
-  have hf : (singleFiniteSource B r i w.Λ w.φ w.origin.L).hom ≫
-      (singleGamma B k r p i h).app ((HD B V w.Λ w.φ).obj w.origin.L) =
-      (HD B T w.Λ w.φ).map ((finiteGamma w.Λ k r p i h).hom.app w.origin.L) ≫
-        (singleFiniteTarget B k p w.Λ w.φ w.origin.L).hom := by
-    simpa only [finiteGamma, secondWitness] using
-      singleGamma_finite_normalization B k r p i h w.Λ w.φ w.origin.L
-  have ht := comparison_transport F G₀ (singleGamma B k r p i h) (originIso B w)
-    (singleFiniteSource B r i w.Λ w.φ w.origin.L)
-    (singleFiniteTarget B k p w.Λ w.φ w.origin.L) es et
-    ((ev B T n).map ((gamma B k r p i h).app M))
-    ((HD B T w.Λ w.φ).map ((finiteGamma w.Λ k r p i h).hom.app w.origin.L)) he hf
-  simpa only [finiteSource, finiteTarget, singleFiniteSource, singleFiniteTarget,
-    es, et, F, G₀, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
-    Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv,
-    asIso_hom, asIso_inv, Functor.comp_map,
-    Functor.map_comp, Category.assoc] using ht
-
+  sorry
 
 /-- Proper/open interchange is invertible for independently bounded finite etale
 origins at every positive level, with no uniform bound on those origins.
