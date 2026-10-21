@@ -14,9 +14,114 @@
   "sk-def-sfb-constructible",
   "def-weil-proetale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E_T$ for the coefficient equivalence for each scheme $T$. By [lem-sf-module-object-ordinary-coefficient-equivalence], $p_T^*\\underline A\\simeq A_T$, and $E_T$ is exact, with a termwise derived equivalence. Its section-action description [def-weil-pbc-internal-abelian-sheaf-module-equivalence] retains the underlying abelian sheaf. The pullback comparison in [lem-sfb-internal-module-operations-transport] identifies $E_Z(g^*M)$ with $g^*E_X(M)$ for a stratum immersion $g:Z\\to X$ and for covering objects. Thus the restrictions in the two constructibility conventions concern the same ordinary module sheaves, with their specified constant coefficient actions.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph, coefficient identification for finite quotient coefficients; exact section-action and pullback comparisons."
+   }
+  },
+  {
+   "text": "For an $A$-module $P$, finite presentation [def-sc-finitely-presented-module] implies that $P$ is a quotient of $A^n$, hence is a finite set because $A$ is finite. Conversely, if $P$ is a finite set, send the basis vector indexed by $p\\in P$ of $A^{P}$ to $p$. This is a surjection. Its kernel $R$ is a subset of the finite set $A^{P}$, hence finite, and the map $A^{R}\\to A^{P}$ sending the basis vector indexed by $r$ to $r$ has image exactly $R$. Enumerating the two finite indexing sets gives a finite presentation of $P$. This also proves that finite generation is equivalent to finiteness as a set: a finite generating family gives a quotient of $A^n$, and all elements generate a finite module.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Paragraph before Tag 099Y (lemma-compare-locally-constant): algebraic finite presentation; finite-ring specialization written out."
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline A$ one has $\\Lambda(*)=A$. The local model of [det-def-sfb-constructible-local-model] is $\\Lambda_U\\otimes_{A_U}\\underline P_U$. Under step 1 this is $A_U\\otimes_{A_U}\\underline P_U\\simeq\\underline P_U$. Explicit inverse maps are $a\\otimes m\\mapsto am$ and $m\\mapsto1\\otimes m$; the balancing relation gives $a\\otimes m=1\\otimes am$. These are module-sheaf maps since the formulas commute with restriction and satisfy the tensor universal property. Consequently, on any fixed cover the finite constant models in [sk-def-sfb-constructible] are exactly the constant sheaves of finitely presented $A$-modules, with those very same trivializations.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Clause 1, scalar local model; tensor with the regular constant coefficient module."
+   }
+  },
+  {
+   "text": "Fix a stratum $Z$ and a finite constant model cover for $M|_Z$. By steps 2 and 3 the corresponding ordinary sheaf is constant on each covering object with a finite module as value. It is therefore locally constant, and [lem-weil-pbc-proetale-finite-model-stalks] says that all its geometric stalks are finite. This gives the local condition required by [def-weil-proetale-constructible-sheaf], using the original cover and the original stratum.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AJ (definition-constructible) and finite constant values on the covers used in Tag 099Y."
+   }
+  },
+  {
+   "text": "Conversely, fix a locally constant finite-stalk restriction $F$ on $Z$ and any trivializing cover $\\{r_i:U_i\\to Z\\}$ from [def-weil-proetale-constructible-sheaf], with constant values $P_i$. Discard the empty $U_i$; the cover still covers, since empty objects contribute no points or affine opens to the covering condition [def-weil-pbc-proetale-site]. For every remaining $U_i$, choose a point and an algebraic closure of its residue field, giving a geometric point $\\bar u_i$. By [lem-sfb-proetale-object-inverse-image-restriction], the localized restriction in the trivialization is $r_i^*F$. The inverse-image stalk isomorphism [lem-pur-proetale-inverse-image-stalk] identifies its underlying abelian stalk at $\\bar u_i$ with $F_{r_i\\bar u_i}$, which is finite. The constant-stalk isomorphism [lem-weil-proetale-constant-sheaf-stalk] identifies that same stalk with $P_i$. Thus $P_i$ is finite, hence finitely presented by step 2; step 3 gives the required scalar local model. This proves the reverse local implication on the original nonempty covering objects, without a refinement.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y (lemma-compare-locally-constant), choice of constant local values; Tag 0993 (lemma-classical-point); stalk computations made explicit."
+   }
+  },
+  {
+   "text": "Apply steps 4 and 5 separately on each stratum of any finite constructible locally closed stratification of $X$. The condition of [sk-def-sfb-constructible] for a Noetherian scheme and the condition of [def-weil-proetale-constructible-sheaf] then hold for exactly the same stratifications. The local arguments retain their trivializing covers, except for removing empty covering objects. Empty strata impose no condition: the empty family covers the empty scheme. In particular the empty scheme and the zero sheaf are included. We have proved both implications for sheaves and the stated assertion about their witnesses.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph, finite-stalk constructibility convention for quotient coefficients."
+   }
+  },
+  {
+   "text": "Let $\\mathbb E$ be the termwise derived equivalence furnished by [lem-sf-module-object-ordinary-coefficient-equivalence]. For a representative complex $C^\\bullet$, exactness of $E_X$ identifies $E_X(\\ker d^q/\\operatorname{im}d^{q-1})$ with $\\ker E_X(d^q)/\\operatorname{im}E_X(d^{q-1})$. Hence $H^q(\\mathbb E K)\\simeq E_X(H^q(K))$ for every integer $q$. The inverse equivalence gives the converse identification, so $H^q(K)=0$ if and only if $H^q(\\mathbb E K)=0$. Step 6 gives equivalence of constructibility for each cohomology sheaf. For each fixed $a\\le b$, these two tests identify precisely the complexes with constructible cohomology vanishing outside $[a,b]$. Restricting the equivalence and its inverse to these full subcategories proves the bounded constructible equivalence asserted in the statement; the bounded-constructible convention is the one explicitly defined in [sk-def-sfb-constructible]. No Tor-amplitude or completeness condition has been introduced.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph, passage from constructible cohomology to bounded constructible complexes and the uniform interval."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sc-finitely-presented-module",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-proetale-constant-sheaf-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph, spelling out the finite-stalk/local-model convention using Stacks Tags 099Y and 09AJ and the existing coefficient and stalk lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +164,45 @@
    "results": "{\"t\": \"2026-10-21T03:03:45Z\", \"tool\": \"grep\", \"query\": \"constructible|finitePresentation\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"d8b4ca7577704312\"}",
    "date": "2026-10-21",
    "verdict": "No match for the finite-stalk/finite-constant-model constructibility equivalence on a scheme. Constant sheaf and general sheaf finite-presentation declarations supply infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*finite|finite.*constructib|constant.*local.*model",
+   "results": "{\"t\": \"2026-10-21T03:21:22Z\", \"tool\": \"grep\", \"query\": \"constructib.*finite|finite.*constructib|constant.*local.*model\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits give constant sheaf functors, condensed discrete modules, or general finite presentations, but not the asserted finite-stalk/local-model and derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite discrete coefficient ring has the same bounded constructible derived category for internal module objects and ordinary module sheaves",
+   "results": "{\"t\": \"2026-10-21T03:21:23Z\", \"tool\": \"leansearch\", \"query\": \"A finite discrete coefficient ring has the same bounded constructible derived category for internal module objects and ordinary module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.isDiscrete_tfae\", \"instAB4StarModuleCat\", \"instAbelianCondensedMod\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"CondensedMod\", \"Condensed.instAB4CondensedMod\", \"SheafOfModules.Finite.hasFiniteLimits\", \"LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete\"], \"digest\": \"d493bd5dffb83d66\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits give constant sheaf functors, condensed discrete modules, or general finite presentations, but not the asserted finite-stalk/local-model and derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "{\"t\": \"2026-10-21T03:21:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheaf\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafAdj_counit_w\", \"CategoryTheory.instAdditiveSheafConstantSheaf\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf\"], \"digest\": \"57fd174c691b0536\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits give constant sheaf functors, condensed discrete modules, or general finite presentations, but not the asserted finite-stalk/local-model and derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite commutative ring, constructible module sheaves with finitely presented constant local models are exactly locally constant finite stalk sheaves on strata",
+   "results": "{\"t\": \"2026-10-21T03:21:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite commutative ring, constructible module sheaves with finitely presented constant local models are exactly locally constant finite stalk sheaves on strata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\", \"LightCondMod.LocallyConstant.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"0f11adcbb57c59f1\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits give constant sheaf functors, condensed discrete modules, or general finite presentations, but not the asserted finite-stalk/local-model and derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant finite module sheaves on the pro-etale site coincide with finitely presented scalar local models, and exact coefficient equivalence preserves bounded constructible cohomology",
+   "results": "{\"t\": \"2026-10-21T03:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"Constant finite module sheaves on the pro-etale site coincide with finitely presented scalar local models, and exact coefficient equivalence preserves bounded constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.IsFinitePresentation\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"LightCondMod.ofSheafLightProfinite\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"8cbddc5b92767f68\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits give constant sheaf functors, condensed discrete modules, or general finite presentations, but not the asserted finite-stalk/local-model and derived comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-integral-criterion-reductions",
@@ -79,5 +219,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-finite-coefficient-model-comparison",
+  "worker": "stage1",
+  "summary": "Compared the two finite-coefficient conventions on their actual scalar models and original covers. Wrote the finite-presentation/finite-set algebra explicitly, used existing coefficient, restriction and stalk lemmas, checked empty objects and non-field finite rings, and proved preservation and reflection of each cohomological vanishing interval. No new nodes and no statement change.",
+  "blueprint": "Realizes the second paragraph of det-prop-integral-criterion-reductions.proof.md: the classical finite-stalk constructibility convention for all finite quotient coefficients, before its extension argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Exact coefficient/derived equivalence for finite discrete rings is a generic tool; this unit uses it to compare its quotient-coefficient constructibility convention."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Naturality of the section-action equivalence for restrictions to strata and covers; no statement of this unit supplies this general module-operation comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Finite constant local values have finite geometric stalks; used only as a general stalk-computation tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies the localized restriction in a trivialization with scheme inverse image so the inverse-image stalk formula applies."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "General stalk comparison for restriction along a covering object, used only to transfer the assumed finiteness to a point of that object."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Identifies a nonempty constant local value with its geometric stalk; no claim of constructibility is taken from it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-proetale-constant-sheaf-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-5301aceed",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-5301aceed (reviewer sub-agent of L); spot-checked: I read every step of the one-level split of lem-pe-finite-coefficient-model-comparison and found no fault, so I made no changes. Source: the blueprint main-20261015 proof sk-prop-integral-criterion-reductions.proof.md, paragraph (1)⇒(2), which relies on the 'classical finite-stalk theory' that this item makes explicit. Against the live side node, only the proof fields, split_report and the Mathlib searches changed; the statement and stmt_deps are unchanged. There are no new nodes, no cycle (closure of 735 nodes), no node from the dropped list and no SGA. The item comes from Q34's re-split of its parent; no re-split note targets the item itself. Step checks: (1) the coefficient equivalence is the canonical κ_T one, it keeps the underlying abelian sheaves, and lem-sfb-internal-module-operations-transport gives compatibility with pullback to strata and to covering objects. (2) Over a finite ring A, finitely presented is the same as finite as a set (A^P→P, finite kernel R, A^R→A^P); I tested A=0 and A=Z/4 with P=Z/2. (3) The scalar local model Λ_U⊗_{Λ(*)_U}P_U is just P_U, with explicit inverse maps. (4) lem-weil-pbc-proetale-finite-model-stalks gives finite geometric stalks on the same cover. (5) For the converse, discarding empty covering objects keeps an fpqc cover, and this clause is genuinely needed: the constant sheaf of an infinite module on an empty object is zero. On each remaining object a geometric point plus inverse-image-restriction, inverse-image-stalk and constant-sheaf-stalk show each P_i is finite, on the original cover. (6) Both definitions use the same stratifications; empty strata impose nothing. (7) The exact equivalence commutes with H^q and the inverse equivalence reflects vanishing, so the bounded constructible subcategories correspond with the same vanishing intervals. Duplicate search: the existing constructible comparisons (classicality, étale versus pro-étale, adic locally-finitely-presented versus local model, the curves case) do not state this one. The 6 declared tool uses are generic and accepted."
  }
 }
