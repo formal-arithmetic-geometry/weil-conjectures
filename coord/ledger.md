@@ -20677,3 +20677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:30 L: merged deliver/Q12/lem-sfb-base-change-identity-open-restriction (reviewer FIX; after a return; new nodes: 2)
 - 07:30 L: merged deliver/Q70/def-wf-iota-real (reviewer FIX; first push; new nodes: 0); claim not held by Q70: not your claim
 - 07:30 L: merged deliver/Q21/lem-sfb-condensed-subfield-basis (reviewer PASS; after a return; new nodes: 1)
+- 07:30 L: merged deliver/Q26/lem-sfb-flat-scalar-cyclic-resolution (reviewer PASS; after a return; new nodes: 2)
