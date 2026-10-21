@@ -18,7 +18,8 @@
   "sk-def-sfb-constructible",
   "sk-def-sfb-derived-extension-of-scalars",
   "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sfb-all-continuous-scalar-mate"
  ],
  "proof": [
   {
@@ -248,5 +249,24 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-adcf6833e (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes, every cited statement and the blueprint unit (sk-thm-sf-ctf-stability direct-images, paragraph 3). The item statement is byte-identical to the base, there is no SGA citation, the item is not in route-pivot-dropped, and the item is still unsplit in side-live. Steps are correct as follows. Step 1: restriction of scalars reflects isos, ring-sheaf-change gives d, and the adjunct formula identifies r(β) with π_{C,B_X}. The projection first-shift node and 2-of-3 then show the iso locus is triangulated. Step 2: the retract inverse is F(r)β_G^{-1}H(i). Step 3: A_E is admissible E, V and Y are Noetherian, and the finite-E branch of rational-open constructibility applies. Step 4: the kflat θ-composition, the monoidal-comparisons composite adjunction and the mate-pasting(2) formula give β_{fg}=Rf(β_g)∘β_f(Rg). Step 5: the square jq=pj' then gives the assembly. FIX (item only): step 4 now states that the statement's pullback/tensor comparison is χ_f on K-flat representatives, which equals θ_f^{-1} by the kflat node, so β is exactly that mate. Step 3's justification of the constant model for lisse L is reworded (it was 'since E is a field'). New nodes are statement-only and self-contained, with 5 searches each; all three are judged true and none is a duplicate. tame-pair-proper-generators: true by de Jong alteration (any field) after a Cartier blow-up of the boundary; mod-ℓ trivialization gives pro-ℓ monodromy, which is tame by Abhyankar, then trace splitting and induction; it differs from the qbar-constructible-generators and trf/det generation nodes. continuous-algcl-proper-scalar-comparison is the proper projection formula with P=B_T; no E arbitrary-P node exists (det-thm-sf-pf-adic-projection covers O_E/Loc only). The tame-boundary node is a local Kummer calculation, strictly smaller than the item. All batch-5 flags are accepted as generic, not trace formula or Poincaré duality: pd-section-derived-pushpull-normalization is internal/section derived bookkeeping, trf-geometric-inverse-image-exact is exactness of inverse image, and def-trf-strict-normal-crossings-boundary is a definition. All declared tool_uses are accepted. Maintainer: a parallel NA delivery f3d54e52 of the same item exists; merge only one.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousAlgClOpenScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousAlgClOpenScalarComparison_isIso",
+  "file": "lean/Sheaf/Paper/ContinuousAlgClOpenScalarComparison.lean",
+  "statement": "theorem continuousAlgClOpenScalarComparison_isIso (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [Fact p.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : PadicAlgCl.FiniteIntermediateField ℓ) {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (j : U ⟶ X) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j] (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.1) U))) (_hC : constantModelBoundedConstructible (Profinite.continuousMapRingObj E.1) U C) : IsIso (tameBoundaryScalarComparison ℓ E j C)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the already landed def-sfb-all-continuous-scalar-mate. Its tameBoundaryScalarComparison is exactly the normalized counit mate in this node, with all continuous functions into the normed PadicAlgCl; no flatness assumption or filtered-union coefficient is substituted. That existing definition node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23043262",
+  "group": "O2",
+  "result": "pass",
+  "note": "Delivery changes the item only in lean plus stmt_deps gaining the landed, reviewed def-sfb-all-continuous-scalar-mate (allowed by brief-stage2 l.141); statement, proof and source are byte-identical to live. Lean reuses tameBoundaryScalarComparison with f:=j, which is the homEquiv adjunct of the K-flat-normalized δ followed by T_U(ε), in the item's direction. All-continuous C(-,E) and C(-,PadicAlgCl) rings (not padicAlgClRingObj, not the completion); constantModelBoundedConstructible = bounded ⊓ constant-model constructible homology (sk-def-sfb-constructible). All of ℓ, p≠ℓ, char k, separated finite type, qc open k-immersion and finite E are present, with no extra hypotheses. Conclusion is IsIso in the derived category. Edge cases (C=0, empty schemes, j=id, p=2, E=Q_ℓ) and universes are fine. lean.statement matches the file verbatim, sorry is the only proof, docstrings carry the source and 5 steps, all 13 imports exist live, no name collision. No FIX, no compile."
  }
 }
