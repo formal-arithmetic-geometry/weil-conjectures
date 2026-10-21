@@ -1,0 +1,101 @@
+{
+ "id": "def-weil-pbc-system-scalar-model",
+ "kind": "definition",
+ "title": "Normalized ordinary and derived scalar model data",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category with a Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology]. Fix a coefficient universe in which $\\mathcal C$ is essentially small, sheafification of abelian presheaves exists, local bijections are precisely the sheafification equivalences, and forgetting commutative rings to rings preserves sheaves. Let $\\varphi:R\\to S$ be a map of sheaves of commutative rings, and use their module categories [def-weil-sheaf-of-modules-category] and standard derived localizations [def-weil-abstract-derived-category]. A normalized scalar model consists of the recorded derived-change-of-rings cochain model $(E,T,\\epsilon)$ [lem-pur-derived-change-of-rings], an ordinary adjunction $E\\dashv\\operatorname{Res}_\\varphi$, and a derived adjunction $T\\dashv D(\\operatorname{Res}_\\varphi)$, subject to the following normalizations. For a module sheaf $P$, an object $U$ of $\\mathcal C$, $c\\in S(U)$ and $x\\in P(U)$, define $\\operatorname{tmul}(P,U,c,x)$ as the image of $c\\otimes x$ under sheafification and the specified identification of $EP$ with the ordinary sheafified tensor extension. The ordinary unit sends $x$ to $\\operatorname{tmul}(P,U,1,x)$. For every pair of cochain complexes $P,K$ and every chain map $f:E(P)\\to K$, the derived transpose of $\\epsilon_P$ followed by $Q(f)$ is $Q$ of the degreewise ordinary transpose of $f$, followed by the inverse exact-restriction localization comparison. Here $Q$ is the localization to the derived category, and $E(P)$ means termwise application of $E$. This defines the structure and its local pure-tensor map; it does not assert existence or choose a model.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; Tag 03EK, section-tensor-product; Tag 06YY, lemma-derived-base-change; Tag 0FND, lemma-pre-derived-adjoint-functors-general. Normalized model data used in prop-weil-pbc-scalar-extension, retained steps 6-7."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized ordinary and derived scalar extension model for sheaves of modules with restriction adjunction",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, RestrictScalars, SheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv. Mathlib does not bundle this normalized cochain model. The project already defines SystemScalarModel and systemModelTmul in Sheaf.CategoryTheory.SystemScalarModel; reused unchanged. The DAG has the existence theorem lem-pur-system-scalar-model, but no separate definition node for its structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf module derived scalar extension adjunction model pure tensor normalized unit",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, PresheafOfModules.Sheafify.one_smul, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.Sheafify.smulCandidate, SheafOfModules.pushforwardSections_unitHomEquiv, PresheafOfModules.Sheafify.module. Mathlib does not bundle this normalized cochain model. The project already defines SystemScalarModel and systemModelTmul in Sheaf.CategoryTheory.SystemScalarModel; reused unchanged. The DAG has the existence theorem lem-pur-system-scalar-model, but no separate definition node for its structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SystemScalarModel|systemModelTmul",
+   "results": "0 hits: . Mathlib does not bundle this normalized cochain model. The project already defines SystemScalarModel and systemModelTmul in Sheaf.CategoryTheory.SystemScalarModel; reused unchanged. The DAG has the existence theorem lem-pur-system-scalar-model, but no separate definition node for its structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-free-completion-transport",
+  "date": "2026-10-21",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Finite-free scalar extension comparison: the normalized derived scalar model and its unit/composition maps in retained proof steps 6-7.",
+   "via": [
+    "lem-weil-pbc-finite-free-completion-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemScalarModel",
+  "declaration": "SheafOfModules.SystemScalarModel",
+  "declarations": [
+   "SheafOfModules.SystemScalarModel",
+   "SheafOfModules.systemModelTmul"
+  ],
+  "statement": "structure SystemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing structure and pure-tensor definition only, not nonempty_systemScalarModel or a choice from it. Definition record requested by the independent return on 34d6bea90465; the owning module is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-839bf84c5",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-839bf84c5",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 34d6bea90465 (H2 RETURN). Lean module byte-identical (diff), lean.statement verbatim; item differs from live base only in stmt_deps/lean. H2 repaired: theorem stmt_deps lem-pur-system-scalar-model/-coherence replaced by new def nodes def-weil-pbc-system-scalar-model (existing:true on unchanged SystemScalarModel; structure fields model/ordinaryAdj/unit_normalized/adjunction/transpose and systemModelTmul faithfully stated; statement verbatim l.102) and def-weil-pbc-system-scalar-coherence (existing:true on unchanged SystemScalarCoherence; restriction unit/composition identity-on-sections and derived unit/composition via leftAdjointUniq, no .choose; statement verbatim l.160); lem-sfb-ringed-complete-triangulated dropped (kept in proof_deps). No duplicate def records, no cycle. Math re-checked: u : T≅𝟭 and α : A.T⋙B.T≅F.T directions match node id/tower formulas; ∃! unit-normalized κ true by reflector cancellation; shift clause valid for any CommShift on T; single universe forced by RingedKoszulSystem; lem-pur-finite-free-completion-exchange(-coherence) narrower, not duplicates. No recompile (Lean unchanged; prior nt_compile 48.3 s clean). Advisories: coherence def body uses exactDerivedRestriction* (theorem-owned lem-pur-exact-restriction-composition) not in stmt_deps; systemRingHasDerived instance not listed; inherited unused reflector theorem stmt_dep."
+ }
+}

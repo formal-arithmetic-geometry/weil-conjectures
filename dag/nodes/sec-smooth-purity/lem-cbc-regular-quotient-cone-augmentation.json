@@ -301,5 +301,35 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-a77d6f13d (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps in full. There are no new nodes and the statement is unchanged; it is identical to the live side-live statement. The item matches what parent lem-cbc-finite-extension-reduction-cone-bound uses in steps 2 and 3: the natural iso Q C(r·id_P) ≅ Res Lφ^* with component (y,x)↦y⊗1, and compatibility of the cone inclusion with the actual scalar-extension unit. Step 1 uses Mathlib quasiIso_descShortComplex on the exact principal sequence. Step 2 uses φ_R of total-tensor-homotopy-cone-signs (identity on both summands); I recomputed the Tot(B⊗P) differential as (dy+rx,−dx), and the swap sign at degree 0 is 1. The K-flat clause for H^P gives the quasi-isomorphism, and def-pc-kflat-complex is on the right factor, as used. Step 3 is elementary and checked: rx⊗1 = x⊗φ(r) = 0. Step 4 is checked: φ_L with sign (−1)^p, r·id_E is a quasi-isomorphism between acyclics, so its cone is acyclic and B is K-flat, hence C_r preserves all quasi-isomorphisms. In Step 6 the descent equivalence makes Q|P_R a localization, and the localization clause (2) gives A on all of D(R). Step 7 correctly cancels Q C_r(s) for non-flat-term K-flat P. Step 8 uses unit clause (1) only on flat-term K-flat P and extends it by clause (3). Step 9 is elementary naturality and cocycle. Small cases checked: Z, r=2, F_2; r a unit; P=0; and Z/2[0] showing that K-flatness is needed. Sources: Stacks 06YP/06YS/06YY tags verified; no SGA. The item, its stmt_deps and its proof_deps are not in route-pivot-dropped. Duplicate search over dag/nodes found only different settings: lem-pe-principal-reduction-cone-calculus (pro-étale O_E), lem-pe-scalar-cone-tensor-model (abstract monoidal, no quotient or unit normalization) and lem-pod-principal-* (ordinary rings). The 8 declared tool_uses are generic homological algebra and are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
+  "declaration": "SheafOfModules.RegularQuotientCone.nonempty_augmentation",
+  "declarations": [
+   "SheafOfModules.RegularQuotientCone.Modules",
+   "SheafOfModules.RegularQuotientCone.restriction",
+   "SheafOfModules.RegularQuotientCone.scalar",
+   "SheafOfModules.RegularQuotientCone.ringMap",
+   "SheafOfModules.RegularQuotientCone.complexScalar",
+   "SheafOfModules.RegularQuotientCone.cone",
+   "SheafOfModules.RegularQuotientCone.inclusion",
+   "SheafOfModules.RegularQuotientCone.Augmentation",
+   "SheafOfModules.RegularQuotientCone.nonempty_augmentation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RegularQuotientConeAugmentation.lean",
+  "statement": "theorem nonempty_augmentation (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫ ringMap φ = 0) (_hexact : (ShortComplex.mk ((scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R))) (ringMap φ) ht).ShortExact) (d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) : Nonempty (Augmentation φ t d)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary Augmentation structure spells out all chain-level and derived normalization clauses; its ordinary maps are fixed sectionwise and degreewise. All functors are the recorded constructions or their specified localizations; no arbitrary comparison map is substituted. Source and target localization universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3e47669d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; statement verbatim. Clauses checked against the node, DerivedChangeOfRingsCochainModel, changeOfRingsPresheaf/changeOfRings and Mathlib mappingCone (d_fst_v/d_snd_v match the node's cone convention, inr = y↦(y,0)). Hypotheses match: EssentiallySmall.{r}, independent universes u v r wR wS, t a unit-module section with lsmul action, ht ⇔ φ(t)=0, categorical ShortExact. Augmentation fields all pinned: ρ by sectionwise sheafified 1⊗x, a = snd≫ρ, V/D are localization lifts, A and the adjunction unit fixed on K-flat P where d.computes makes ε invertible, so the Nonempty is not hollow. A_components, unit_identity and unit_normalization checked true; cocycle/resolution independence via naturality of A. Only sorry is the main theorem; docstrings with source and blueprint; no extra assumptions; no duplicate (also checked lem-pur-regular-quotient-completion-unit and def-pur-principal-quotient-completion-model). No recompile (no change). Advisory: plain import DerivedCategory.ExactFunctor is not a recorded proof-dep module; the second reading was done in the worker's own session."
  }
 }

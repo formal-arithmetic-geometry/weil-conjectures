@@ -14,7 +14,8 @@
   "def-weil-abstract-derived-category",
   "def-pur-localized-ringed-site",
   "def-weil-extension-by-zero-presheaf",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "proof": [
   {
@@ -218,5 +219,36 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-2ab5db7b1 (reviewer sub-agent of L); spot-checked: I read the Q15 split of lem-sp-subterminal-cover-module-ses in full. It has 0 new nodes and the statement is byte-identical to the live node. There is no repair note, the item is not on the dropped list, and nothing cites SGA. Source: Stacks cohomology.tex Tag 08BU (lemma-exact-sequence-lower-shriek), whose stalk check says 'computation omitted'. The delivery replaces it with two slice calculations plus joint detection of exactness, and proof_origin=agent is correct. Every non-elementary input comes from the stated hypotheses and adjunction/identification clauses of the unsplit same-unit node lem-sp-subterminal-module-local-calculus. Step 1: j_U^*j_{W!}=k_{U!}(F|_W) holds because U is subterminal (C→W exists iff C→V when C→U); I checked this against the special case of def-weil-extension-by-zero-presheaf. Step 2: the triangle identity gives ε_U i_U=ε_W. Step 3: I recomputed the local forms (i,−1),(1,i) on U and (1,−i'),(i',1) on V at presheaf level. Step 4: all eight split identities check. Step 5 applies joint detection to the whole sequence with zero ends. Step 6 covers naturality and complexes. Edge cases checked: U=V=1, empty overlap, F=0, characteristic 2. I found no duplicate among about 30 subterminal or open-cover nodes, and the Mathlib MayerVietoris SES is for free abelian sheaves only. The only citer is parent clause (2), with matching signs, and there is no cycle. One minor point needs no action: the A_W restriction identification is built by hand in step 1 rather than taken from the local-calculus node, but it is correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SubterminalCoverModuleSES",
+  "declaration": "SheafOfModules.SubterminalCover.shortExact",
+  "declarations": [
+   "SheafOfModules.SubterminalCover.ring",
+   "SheafOfModules.SubterminalCover.modules",
+   "SheafOfModules.SubterminalCover.supported",
+   "SheafOfModules.SubterminalCover.counit",
+   "SheafOfModules.SubterminalCover.nested",
+   "SheafOfModules.SubterminalCover.localDescription",
+   "SheafOfModules.SubterminalCover.overlap",
+   "SheafOfModules.SubterminalCover.first",
+   "SheafOfModules.SubterminalCover.second",
+   "SheafOfModules.SubterminalCover.shortExact"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SubterminalCoverModuleSES.lean",
+  "statement": "theorem shortExact [J.Subcanonical] [Mono (terminal.from U)] [Mono (terminal.from V)] (hcover : Sieve.ofArrows (fun b : Bool ↦ if b then U else V) (fun b ↦ terminal.from (if b then U else V)) ∈ J (⊤_ C)) : (∀ F : modules.{c, v, r} R, nested.{c, v, r} R (prod.fst : U ⨯ V ⟶ U) F ≫ counit.{c, v, r} R U F = counit.{c, v, r} R (overlap U V) F ∧ nested.{c, v, r} R (prod.snd : U ⨯ V ⟶ V) F ≫ counit.{c, v, r} R V F = counit.{c, v, r} R (overlap U V) F ∧ ∃ h : first.{c, v, r} R U V F ≫ second.{c, v, r} R U V F = 0, (ShortComplex.mk (first.{c, v, r} R U V F) (second.{c, v, r} R U V F) h).ShortExact) ∧ (∀ (F G : modules.{c, v, r} R) (a : F ⟶ G), (supported.{c, v, r} R (overlap U V)).map a ≫ first.{c, v, r} R U V G = first.{c, v, r} R U V F ≫ biprod.map ((supported.{c, v, r} R U).map a) ((supported.{c, v, r} R V).map a) ∧ biprod.map ((supported.{c, v, r} R U).map a) ((supported.{c, v, r} R V).map a) ≫ second.{c, v, r} R U V G = second.{c, v, r} R U V F ≫ a) ∧ localDescription.{c, v, r} R (overlap U V) U V prod.fst prod.snd ∧ localDescription.{c, v, r} R (overlap U V) V U prod.snd prod.fst ∧ (∀ (K : CochainComplex (modules.{c, v, r} R) ℤ) (i j : ℤ), (supported.{c, v, r} R (overlap U V)).map (K.d i j) ≫ first.{c, v, r} R U V (K.X j) = first.{c, v, r} R U V (K.X i) ≫ biprod.map ((supported.{c, v, r} R U).map (K.d i j)) ((supported.{c, v, r} R V).map (K.d i j)) ∧ biprod.map ((supported.{c, v, r} R U).map (K.d i j)) ((supported.{c, v, r} R V).map (K.d i j)) ≫ second.{c, v, r} R U V (K.X j) = second.{c, v, r} R U V (K.X i) ≫ K.d i j) ∧ (∀ (K : CochainComplex (modules.{c, v, r} R) ℤ) (n : ℤ), ∃ h : first.{c, v, r} R U V (K.X n) ≫ second.{c, v, r} R U V (K.X n) = 0, (ShortComplex.mk (first.{c, v, r} R U V (K.X n)) (second.{c, v, r} R U V (K.X n)) h).ShortExact) ∧ (∀ (K L : CochainComplex (modules.{c, v, r} R) ℤ) (a : K ⟶ L) (n : ℤ), (supported.{c, v, r} R (overlap U V)).map (a.f n) ≫ first.{c, v, r} R U V (L.X n) = first.{c, v, r} R U V (K.X n) ≫ biprod.map ((supported.{c, v, r} R U).map (a.f n)) ((supported.{c, v, r} R V).map (a.f n)) ∧ biprod.map ((supported.{c, v, r} R U).map (a.f n)) ((supported.{c, v, r} R V).map (a.f n)) ≫ second.{c, v, r} R U V (L.X n) = second.{c, v, r} R U V (K.X n) ≫ a.f n)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All canonical global maps use the existing section-normalized localizedSystemAdjunction and sectionwise overFunctorMap. localDescription packages natural slice identifications with every component formula; nested extension is characterized by its left-adjoint universal property, uniquely up to counit-compatible isomorphism. The added statement dependency is the landed normalized adjunction interface; no dependency is restated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a47bd6ef",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 08BU generalization: small site (c,v independent, coeffs max c v r), Subcanonical, HasFiniteLimits, comm ring sheaf, Mono(terminal.from U/V), Bool-sieve cover; nested = homEquiv(W).symm(overFunctorMap.inv ≫ overMap.map unit ≫ overFunctorMap.hom) checked against Mathlib directions = node's i_U; ε_U i_U=ε_V i_V=ε_W, ShortExact of (i_U,-i_V),(ε_U,ε_V), naturality, both local forms via localDescription (eSelf forced = r_Zε_Z, eOverlap = r_Z(i_q)≫eOther, eOther pinned by r_Zε_T = eOther≫i; −eOther breaks eq 2; k fixed by adjunction) = iso with explicit split SES, same W and summand order on V; complex differentials, all degrees, cochain maps. Mechanical theorem stmt_dep: localizedSystemAdjunction is .choose of localizedSystemAdjunction_existsUnique, so the dependency is genuine (PASS on point); other names are abbrevs of cited def-node records. Only lean/stmt_deps of item changed; deps identical to live; statement verbatim; docstrings/H8 OK; ≤100 cols; one sorry. Edge cases U=V, empty overlap, F=0, zero ring all covered. No duplicate (Mathlib MayerVietoris is free abelian; upstream open_cover version topological only). Advisory: unused [HasPullbacks C] on nested/localDescription, redundant dep imports. No compile run (no change); worker scompile clean."
  }
 }

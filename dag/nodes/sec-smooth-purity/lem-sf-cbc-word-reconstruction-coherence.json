@@ -336,5 +336,35 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f9670a02c (reviewer sub-agent of L); spot-checked: Read the item in full (8 steps, 0 new nodes). Statement, stmt_deps and source are identical to the side-live base. The item is not on the drop list and has no repair note, and live still has it unsplit. Both cited statements were read: def-nagata-category (Category leaf) and lem-amb-natural-transformation-whisker-exchange, checked against whiskerLeft_comp_whiskerRight at Whiskering.lean:203-207 in diagrammatic order. I recomputed every step. Step 2: type of q_eW and the naturality chain, using G_e of the inductive square and naturality of q_e at F_W u. Step 3: one-edge case and uniqueness by length induction. Step 4: closure of F_W(E_s) in E_t and the explicit inverse q_e(F_Wx)^-1 G_e(q_W x^-1). Step 5: a_W naturality, invertibility via eta_t on E_t, and a_1=eta. Step 6: concatenation by induction on |V|. Step 7: expression-tree induction, with empty leaves covered. Step 8: the exchange instance F=F_W, G=F_E, H=1, K=L_tR_t gives L_t(d_E R_s) a_W = a_E c_E. Tested on empty S, no edges, a singleton word, a three-edge word in both bracketings, and identity R, L, eta. The source is fix-lem-exchanges Step 5 in main-20261015 (lines 43-49), an agent-stated prerequisite; proof_origin agent is correct. The parent lem-sf-cbc-compact-support-composition-limit Step 5 uses exactly this statement. The DAG-wide duplicate search (parenthesization, word, flattening, free/path category) found no duplicate. Paths.liftNatTrans/liftNatIso exist at MorphismProperty.lean:66,78 and are not a match. No SGA. FIX (B4): Step 2 contained a raw U+000B control character in place of '\\v', so it rendered 'q_{arnothing_s}'. Corrected to '\\varnothing' in fixes/dag/nodes/sec-smooth-purity/lem-sf-cbc-word-reconstruction-coherence.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WordReconstructionCoherence",
+  "declaration": "CategoryTheory.WordReconstruction.word_reconstruction_coherence",
+  "declarations": [
+   "CategoryTheory.WordReconstruction.wordFunctor",
+   "CategoryTheory.WordReconstruction.wordCompIso",
+   "CategoryTheory.WordReconstruction.Expression",
+   "CategoryTheory.WordReconstruction.Expression.flatten",
+   "CategoryTheory.WordReconstruction.Expression.functor",
+   "CategoryTheory.WordReconstruction.Expression.flattenIso",
+   "CategoryTheory.WordReconstruction.Expression.comparison",
+   "CategoryTheory.WordReconstruction.IsWordComparison",
+   "CategoryTheory.WordReconstruction.reconstruct"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/WordReconstructionCoherence.lean",
+  "statement": "theorem word_reconstruction_coherence (E : ∀ s, D s → Prop) (L : ∀ s, T s ⥤ D s) (η : ∀ s, 𝟭 (D s) ⟶ R s ⋙ L s) (hη : ∀ (s : S) (x : D s), E s x → IsIso ((η s).app x)) (hF : ∀ {s t : S} (f : s ⟶ t) (x : D s), E s x → E t ((F f).obj x)) (hq : ∀ {s t : S} (f : s ⟶ t) (x : D s), E s x → IsIso ((qEdge f).app x)) : ∃ q : ∀ {s t : S} (W : Quiver.Path s t), wordFunctor F W ⋙ R t ⟶ R s ⋙ wordFunctor G W, IsWordComparison R F G qEdge q ∧ (∀ q' : ∀ {s t : S} (W : Quiver.Path s t), wordFunctor F W ⋙ R t ⟶ R s ⋙ wordFunctor G W, IsWordComparison R F G qEdge q' → @q' = @q) ∧ (∀ {s t : S} (W : Quiver.Path s t) (x : D s), E s x → E t ((wordFunctor F W).obj x) ∧ IsIso ((q W).app x) ∧ IsIso ((reconstruct R L η (wordFunctor F W) (wordFunctor G W) (q W)).app x)) ∧ (∀ {s t r : S} (W : Quiver.Path s t) (V : Quiver.Path t r), q (W.comp V) ≫ whiskerLeft (R s) (wordCompIso G W V).hom = whiskerRight (wordCompIso F W V).hom (R r) ≫ whiskerLeft (wordFunctor F W) (q V) ≫ whiskerRight (q W) (wordFunctor G V)) ∧ (∀ s : S, reconstruct R L η (𝟭 (D s)) (𝟭 (T s)) (q (.nil : Quiver.Path s s)) = η s) ∧ (∀ {s t : S} (A : Expression s t), (q A.flatten ≫ whiskerLeft (R s) (A.flattenIso G).hom = whiskerRight (A.flattenIso F).hom (R t) ≫ Expression.comparison R F G qEdge A) ∧ (reconstruct R L η (wordFunctor F A.flatten) (wordFunctor G A.flatten) (q A.flatten) ≫ whiskerRight (whiskerLeft (R s) (A.flattenIso G).hom) (L t) = (A.flattenIso F).hom ≫ reconstruct R L η (A.functor F) (A.functor G) (Expression.comparison R F G qEdge A)))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper declarations give precisely the word, expression, flattening, defining-equation and reconstruction notation introduced by this node. They contain explicit data and are listed here under the owning-node helper authorization. Full subcategories are encoded by their object predicates; componentwise IsIso is equivalent to natural invertibility of the restrictions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d78b18078",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read the node, def-nagata-category, the whisker-exchange proof leaf, the module and report.md. The node changes only by its new lean record, and the lean.statement is verbatim in the file. Clause by clause the Lean matches the node in diagrammatic order: q_W existence and uniqueness via IsWordComparison (empty, singleton and recursion clauses, which are consistent), E-preservation and IsIso of q_W and a_W on E, concatenation with wordCompIso, a_empty = eta, and both flattening equations on all of D_s via Expression.comparison and flattenIso. The canonical isos are built only from Mathlib associators and unitors. Edge cases checked: empty S, no edges, empty E, empty words, singleton, three-edge bracketings. H4: the scheme-specific SfCbc words and ExactDerivedPasting (exact or derived functor words) are different notions, and Mathlib Paths.liftNatTrans does not match. Helpers carry explicit data; only sorry; docstrings and the 8 proof steps are present; universes are bound; no stronger assumptions. No recompile, since no file was changed. No findings."
  }
 }

@@ -235,5 +235,27 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-206141b98 (reviewer sub-agent of L); spot-checked: I read the whole delivery and recomputed all 5 steps with types. The statement, stmt_deps, source and blueprint fields are unchanged from side-live, and only the proof fields changed. There are no new nodes, no repair note, no SGA citation and no dropped-list entry, and the item is still unsplit live. Step 1: I typed the tensor-action hypothesis and inverted it at (L_f, L_g, P_gK); α^{-1}(1⊗δ) is exactly σ_K. Step 2: associator naturality moves the arbitrary t_f. The coherence leaf lem-coef-monoidal-structural-coherence (Stacks 0HAY(2), matching Mathlib leftUnitor_tensor) is used only for λ_{B⊗C}α_{1,B,C} = λ_B⊗1_C, which has the same formal endpoints on both sides. Step 3 gives d_{f,B⊗C} = (a⊗1)q_{L,C}F_f σ_K. Step 4 is the inverse naturality of PF_g at a, with no action law for g. Step 5 assembles to the stated right-hand side with b = t_g F_g(a), and domain and codomain match. Edge cases: strict monoidal with identity functors, rescaling one PF, zero t, and no braiding used. There is no citation cycle with the parent composite-integration-counit, and proof_deps equal the union of the step uses. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TensorActionTraceContraction",
+  "declaration": "CategoryTheory.tensorAction_trace_contraction",
+  "declarations": [
+   "CategoryTheory.tensorTraceContraction",
+   "CategoryTheory.tensorAction_trace_contraction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TensorActionTraceContraction.lean",
+  "statement": "theorem tensorAction_trace_contraction {X : Type uX} [Category.{vX} X] [MonoidalCategory X] {Y : Type uY} [Category.{vY} Y] [MonoidalCategory Y] {Z : Type uZ} [Category.{vZ} Z] [MonoidalCategory Z] (Ff : X ⥤ Y) (Fg : Y ⥤ Z) (Pf : Y ⥤ X) (Pg : Z ⥤ Y) (PfMonoidal : Pf.CoreMonoidal) (_PgMonoidal : Pg.CoreMonoidal) (Df : X → Y → Prop) (Dg : Y → Z → Prop) (PFf : ∀ (M : X) (N : Y), Df M N → (Ff.obj M ⊗ N ≅ Ff.obj (M ⊗ Pf.obj N))) (PFg : ∀ (M : Y) (N : Z), Dg M N → (Fg.obj M ⊗ N ≅ Fg.obj (M ⊗ Pg.obj N))) (_hf_natural : ∀ (M M' : X) (N N' : Y) (h : Df M N) (h' : Df M' N') (r : M ⟶ M') (s : N ⟶ N'), (Ff.map r ⊗ₘ s) ≫ (PFf M' N' h').hom = (PFf M N h).hom ≫ Ff.map (r ⊗ₘ Pf.map s)) (_hg_natural : ∀ (M M' : Y) (N N' : Z) (h : Dg M N) (h' : Dg M' N') (r : M ⟶ M') (s : N ⟶ N'), (Fg.map r ⊗ₘ s) ≫ (PFg M' N' h').hom = (PFg M N h).hom ≫ Fg.map (r ⊗ₘ Pg.map s)) (_hf_action : ∀ (M : X) (N N' : Y) (h : Df M N) (h' : Df (M ⊗ Pf.obj N) N') (h'' : Df M (N ⊗ N')), (PFf M (N ⊗ N') h'').hom = (α_ (Ff.obj M) N N').inv ≫ ((PFf M N h).hom ⊗ₘ 𝟙 N') ≫ (PFf (M ⊗ Pf.obj N) N' h').hom ≫ Ff.map ((α_ M (Pf.obj N) (Pf.obj N')).hom ≫ (M ◁ (PfMonoidal.μIso N N').hom))) (Lf : X) (Lg : Y) (tf : Ff.obj Lf ⟶ 𝟙_ Y) (tg : Fg.obj Lg ⟶ 𝟙_ Z) (K : Z) (hfl : Df Lf Lg) (hft : Df Lf (Lg ⊗ Pg.obj K)) (hfs : Df (Lf ⊗ Pf.obj Lg) (Pg.obj K)) (hgl : Dg Lg K) (hgc : Dg (Ff.obj (Lf ⊗ Pf.obj Lg)) K) : Fg.map (tensorTraceContraction (PFf Lf (Lg ⊗ Pg.obj K) hft).inv tf) ≫ tensorTraceContraction (PFg Lg K hgl).inv tg = Fg.map (Ff.map ((Lf ◁ (PfMonoidal.μIso Lg (Pg.obj K)).inv) ≫ (α_ Lf (Pf.obj Lg) (Pf.obj (Pg.obj K))).inv)) ≫ Fg.map (PFf (Lf ⊗ Pf.obj Lg) (Pg.obj K) hfs).inv ≫ (PFg (Ff.obj (Lf ⊗ Pf.obj Lg)) K hgc).inv ≫ ((Fg.map (tensorTraceContraction (PFf Lf Lg hfl).inv tf) ≫ tg) ⊗ₘ 𝟙 K) ≫ (λ_ K).hom",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b0e44641",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim in file; no repair note, not dropped, no name clash. Clause-by-clause check: tensor-action equation, sigma_K = (Lf ◁ μIso.inv) ≫ α.inv, d helper = q ≫ (t ⊗ₘ 𝟙) ≫ λ (real composite), a, b, both sides typed from Fg Ff (Lf ⊗ Pf (Lg ⊗ Pg K)) to K; δ = CoreMonoidal.μIso.inv confirmed in Mathlib Functor.lean:620. Domain predicates Df/Dg with naturality over all arrows between permitted pairs give full domains; True recovers the unrestricted case, so no stronger hypothesis. The five memberships suffice for proof steps 1-5 (action law at (Lf,Lg,PgK); g-naturality at a with hgc/hgl). Six independent universes; no adjunction, braiding, unit axiom or g action law. Docstrings cite source and blueprint and carry the 5 proof steps; proof is sorry only. No compile: no file changed."
  }
 }

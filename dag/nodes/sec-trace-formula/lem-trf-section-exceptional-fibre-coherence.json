@@ -352,5 +352,45 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-137e5d5f4 (reviewer sub-agent of L); spot-checked: Read the item in full: all 10 steps, the statements of all cited nodes, the main-20261015 sk-thm-dnc proof and Stacks 03S6. The statement is unchanged from the version Q58 created; only proof, proof_deps, proof_origin, searches and split_report changed. There are no new nodes and no SGA citations. The item is unsplit in both live and side-live, so the delivery is not superseded. The proof expands old parent Steps 12-14 without dropping anything: 12 becomes Steps 1-3, 14 becomes Steps 4-7 and 10, 13 becomes Steps 8-9. Coefficient category and base-change map: ordinary unbounded D(T_et,A) with the counit-defined beta, which matches prop-asd-smooth-base-change and def-asd-smooth-dualizing-base-change-arrows exactly. Checks: Step 2 mate pasting (1) applied to C^{-1} gives beta_{f,vw}=beta_{f',w}v^* o r'^*beta_{f,v}. Step 3's two factorizations give theta' i1'^*b_F=b_C v^*theta. Step 4 defines lambda as the conjugate of alpha^{-1}; the statement prescribes this counit normalization, and the conjugate of an isomorphism is invertible. I recomputed both transposes in Step 6 and both equal v^*t_K o C^{-1}_{f1,v}. Step 7 gives h_V and h_E as base changes of h_D. Steps 8-10 are checked by hand. Edge cases checked: A=0, d=0, empty base, identity maps. No duplicate nodes found. Fault repaired (C3/E5): Step 5 derived r^*ev_e = ev_{e'} o B_e from a summand-by-summand formula for the etale-shriek comparison beta, but def-weil-pbc-etale-shriek-base-change-map defines beta only as the conjugate of Ex^0. I rewrote Step 5 to prove the identity formally by comparing transposes under E'r1^* -| r1_*e'^*, using the definition of beta, naturality of Ex^0 and three triangle identities. The step now cites the shriek-map definition, the underived-exchange definition, the restriction-injectives lemma and the composite-adjunction definition. It is marked non-elementary with its source set to 03S6. I recomputed proof_deps and declared restriction-injectives in tool_uses. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionExceptionalFibreCoherence",
+  "declaration": "AlgebraicGeometry.Etale.sectionExceptional_fibre_coherence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalSectionPair",
+   "AlgebraicGeometry.Etale.ExceptionalSectionChange",
+   "AlgebraicGeometry.Etale.sectionCoherencePullbackIso",
+   "AlgebraicGeometry.Etale.sectionExceptionalComparison",
+   "AlgebraicGeometry.Etale.exceptionalFamilyPoint",
+   "AlgebraicGeometry.Etale.ExceptionalSectionFamily",
+   "AlgebraicGeometry.Etale.ExceptionalSectionFamily.fibreMap",
+   "AlgebraicGeometry.Etale.ExceptionalFamilyBaseChange",
+   "AlgebraicGeometry.Etale.sectionStructuralLocalityIso",
+   "AlgebraicGeometry.Etale.ExceptionalSectionEtaleMap",
+   "AlgebraicGeometry.Etale.sectionExceptionalLocalityIso",
+   "AlgebraicGeometry.Etale.ExceptionalFamilyEtaleMap",
+   "AlgebraicGeometry.Etale.ExceptionalSectionFamily.IsNormalized",
+   "AlgebraicGeometry.Etale.ExceptionalSectionFamily.specialization",
+   "AlgebraicGeometry.Etale.sectionExceptional_fibre_coherence",
+   "AlgebraicGeometry.Etale.sectionExceptional_comparison_comp",
+   "AlgebraicGeometry.Etale.sectionExceptional_etale_fibre_coherence",
+   "AlgebraicGeometry.Etale.sectionExceptional_normalized_baseChange",
+   "AlgebraicGeometry.Etale.sectionExceptional_normalized_etale"
+  ],
+  "file": "lean/Sheaf/Paper/SectionExceptionalFibreCoherence.lean",
+  "statement": "theorem sectionExceptional_fibre_coherence (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {S S' : Scheme.{u}} {d : ℕ} (P : ExceptionalSectionFamily S d) (P' : ExceptionalSectionFamily S' d) (hInvertible : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) (v : S' ⟶ S) (e : ExceptionalFamilyBaseChange P P' v) : IsIso (sectionExceptionalComparison A e.ambient) ∧ ∀ t : Bool, IsIso (P.fibreMap A t) ∧ IsIso (P'.fibreMap A t) ∧ IsIso (sectionExceptionalComparison A (e.fibre t)) ∧ (sectionCoherencePullbackIso A v (exceptionalFamilyPoint S t) (exceptionalFamilyPoint S' t) (AffineSpace.map (ULift.{u} (Fin 1)) v) (e.point_comm t) (sectionInvariant A P.ambient.map P.ambient.sect)).hom ≫ (upperStar (ModuleCat.{u + 1} A) (exceptionalFamilyPoint S' t)).leftDerivedFunctor.map (sectionExceptionalComparison A e.ambient) ≫ P'.fibreMap A t = (upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.map (P.fibreMap A t) ≫ sectionExceptionalComparison A (e.fibre t)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The five theorem declarations jointly render every clause: both fibre squares and invertibility, structural transitivity, etale fibre squares, normalized base-change formulas and normalized etale formulas. The accompanying records package only the geometric diagrams; comparison data are constructed from existing counit mates and the uniquely characterized etale locality isomorphism. The kappa equations are written after precomposition with the invertible ambient comparison, equivalently the displayed inverse formulas in the node. No statement correction or new mathematical notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f7065ea2",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node, module, report and exact decls (sectionInvariant=Ls^*ω_g ordinary étale; dualizingComplexBaseChangeMap = mate of inv Ex_! + unit iso = node's counit-transpose β; leftDerivedUpperStarComp/CompSectionIso; existsUnique_etaleAmbientAdjointLocalityIso). Every clause rendered: IsIso of b_F/b_C/b_H/θ/η/θ'/η'; fibre squares for t∈Bool; transitivity b_vw=comp≫w^*b_v≫b'_w; étale squares via ∃!-determined counit-normalized locality iso; κ/δ base-change and étale formulas (κ multiplied by invertible b_F, equivalent). Records contain only geometry; fibre fields follow by base change; no extra hypotheses; v arbitrary. Edge cases d=0, empty, A=0, identity maps covered; universes u/u+1 bound. lean.statement verbatim, 19 declarations present, no name clashes, stmt_deps unchanged, imports exist. No compile (no change). Advisories: β via upstream dualizingComplexBaseChangeMap (same mate as recorded smoothDualizingBaseChangeMap, owner is a proof_dep); Q71 second reading is a self-audit."
  }
 }

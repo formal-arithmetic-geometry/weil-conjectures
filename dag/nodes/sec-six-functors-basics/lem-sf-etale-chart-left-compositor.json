@@ -217,5 +217,32 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6fa18623c (reviewer sub-agent of L); spot-checked: I read the item in full (6 steps, no new nodes). Statement, stmt_deps, source and blueprint are byte-identical to the creation state in the parent split (Q17), so the target is not weakened. Each step checks against the full statements of lem-sf-etale-immersion-shriek-normalization (n_j:Rj_!→Dj_!, n_c:Rc_!→Dc_* on D^+, natural and compatible with compactification changes) and lem-amb-etale-compact-comparisons (natural compositor on D^+, independent of choices, coherent). Step 1 checks the D^+ domain of every Rq_!=Rr_*Dj_! through same-lower-bound injective representatives and their K-injectivity (013K/070J/01DU nodes) plus the K-injective formula of def-amb-etale-compact-support; this is correct for any m and needs no cohomological-dimension bound. The six arrows are correctly typed; n_v is evaluated at Rp_!Di_*H, which lies in D^+. The fs=vpi transport is substitution of equal morphisms. Steps 4 and 5 (inverse, naturality pasting) are genuinely elementary. Step 6 pastes the cited choice-independence squares with interchange, and the endpoints c_0 and c_6 are correct. Sources read: Stacks more-etale 0F7I (the construction before it and the change isomorphisms), 0F7J (lines 3159-3199) and 0F7K. The route is the unit's step 4 (composition and open locality), with no SGA. Small cases: U empty, i=id, shifts of H, p not proper (only Rp_! is used). The rg -L duplicate search found only the parent, the unit and det-thm-restriction-local. Accepted tool_uses: the compact comparisons node and the two generic injective nodes. Not a delivery fault: the item lacks a lean_audit field since its creation in the parent split. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartLeftCompositor",
+  "declaration": "AlgebraicGeometry.Etale.etaleChartLeftCompositor_spec",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleChartOpenNormalization",
+   "AlgebraicGeometry.Etale.etaleChartClosedNormalization",
+   "AlgebraicGeometry.Etale.etaleChartCompactSupportCompositor",
+   "AlgebraicGeometry.Etale.etaleChartCompactSupportTransport",
+   "AlgebraicGeometry.Etale.etaleChartLeftCompositorPlus",
+   "AlgebraicGeometry.Etale.etaleChartLeftCompositor",
+   "AlgebraicGeometry.Etale.etaleChartLeftCompositor_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartLeftCompositor.lean",
+  "statement": "theorem etaleChartLeftCompositor_spec (A : Type (u + 1)) [CommRing A] [Finite A] {X Y U V P : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian U] [IsNoetherian V] [IsNoetherian P] (f : X ⟶ Y) (s : U ⟶ X) (v : V ⟶ Y) (i : U ⟶ P) (p : P ⟶ V) [IsOpenImmersion s] [IsOpenImmersion v] [IsClosedImmersion i] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] (h : s ≫ f = (i ≫ p) ≫ v) (cf : Compactification f) (cs : Compactification s) (cv : Compactification v) (ci : Compactification i) (cp : Compactification p) (csf : Compactification (s ≫ f)) (cip : Compactification (i ≫ p)) (cipv : Compactification ((i ≫ p) ≫ v)) : (∀ (H' H : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (a : H' ⟶ H), (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cf).map ((openImmersionLowerShriek (ModuleCat.{u + 1} A) s).mapDerivedCategory.map (DerivedCategory.Plus.ι.map a)) ≫ (etaleChartLeftCompositor A f s v i p h cf cs cv ci cp csf cip cipv).hom.app H = (etaleChartLeftCompositor A f s v i p h cf cs cv ci cp csf cip cipv).hom.app H' ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory.map ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cp).map ((lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategory.map (DerivedCategory.Plus.ι.map a)))) ∧ (∀ (cf' : Compactification f) (cs' : Compactification s) (cv' : Compactification v) (ci' : Compactification i) (cp' : Compactification p) (csf' : Compactification (s ≫ f)) (cip' : Compactification (i ≫ p)) (cipv' : Compactification ((i ≫ p) ≫ v)), (Functor.isoWhiskerLeft (openImmersionLowerShriek (ModuleCat.{u + 1} A) s).mapDerivedCategoryPlus (rightDerivedLowerShriekOfCompactificationPlusιIso A cf cf')).hom ≫ (etaleChartLeftCompositor A f s v i p h cf' cs' cv' ci' cp' csf' cip' cipv').hom = (etaleChartLeftCompositor A f s v i p h cf cs cv ci cp csf cip cipv).hom ≫ (Functor.isoWhiskerRight (Functor.isoWhiskerLeft (lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategoryPlus (rightDerivedLowerShriekOfCompactificationPlusιIso A cp cp')) (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory).hom)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fd9709e1",
+  "group": "NH",
+  "result": "pass",
+  "note": "Only the lean record changed; one module; statement verbatim (whitespace-normalized). Clause check: A:Type(u+1) finite comm ring (recorded ModuleCat encoding), five Noetherian Scheme.{u}, s/v open, i closed, h : s≫f=(i≫p)≫v, explicit compactifications cf..cipv; separated/finite type for the immersions and composites follows from the hypotheses (QuasiCompact synthesized), no stronger assumption. The six-arrow etaleChartLeftCompositorPlus matches the node formula in order and variance: Rf_!(n_s^-1), alpha_{f,s}, subst+canonical PlusIso transport, alpha_{v,pi}^-1, Rv_!(alpha_{p,i}^-1), Rv_!Rp_!(n_i), n_v at Rp_!Di_*H. Normalizations are the recorded etale{Open,Closed}CompactSupportNormalization moved to D+ by fullyFaithfulCancelRight; the compositor is the recorded rightDerivedLowerShriekPlusCompIso conjugated by canonical PlusIso (as in _hom_eq). Naturality conjunct correctly oriented (follows from the NatIso type, faithful to the node); the change clause over all eight choices has real content. Gates: one sorry, source and blueprint docstrings, 6-step proof plan, no pro-etale substitute. Advisory: parent ChartAdjointComparison.leftComparisonPlus builds the same gamma with global choices (maintainer note: reuse on the parent restatement); Compactification node not in stmt_deps (transitive via def-amb-etale-compact-support); PlusιIso not listed in the declarations of lem-amb-etale-compact-comparisons; two unused proof-only imports. No compile (no change of mine)."
  }
 }

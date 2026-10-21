@@ -227,5 +227,27 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1bb441fa3 (reviewer sub-agent of L); spot-checked: I read the item's seven steps in full and checked each identity. Step 2's symmetry and normalization calculation is correct. Step 3's equality test does not assume Q is faithful: it works for maps out of 1⊗JM and (C⊗C')⊗JM because v is already invertible. Step 4's unit law is correct, using the inverted strong-monoidal left-unit axiom and naturality of λ. Steps 5–7 are correct: the inverted associativity axiom, postcomposed with 1⊗(1⊗r_M), gives E by naturality of α. Sources checked: Stacks 0037/0FFK/0FFL; 0GL1 (sites-cohomology.tex:4578) and 0E8I (sites-modules.tex:4051); blueprint main-20261015 sk-prop-cohsm (G13), the projection-formula arrow. No SGA is cited. The statement is identical to live, the live item is still unsplit, and there is no re-split note. There are no new nodes. The three cited statements say what the steps take from them. Edge cases tested: J=Q=Id; a non-faithful Q (pr1 from Vect×Vect, J(M)=(M,0)), where both laws hold; and a scaled γ, which breaks the normalization. One C1 fault: invertibility of the unit u, used as r=u^{-1} in every step, was not cited. FIX: Step 1 and proof_deps now cite the Mathlib leaf lem-sp-adjunction-unit-fully-faithful-left (Adjunction.unit_isIso_of_L_fully_faithful); it adds no cycle and no route departure. No tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OpenLeftProjectionAction",
+  "declaration": "CategoryTheory.openLeftProjection_action",
+  "declarations": [
+   "CategoryTheory.openLeftProjectionIso",
+   "CategoryTheory.openLeftProjection_action"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OpenLeftProjectionAction.lean",
+  "statement": "theorem openLeftProjection_action [SymmetricCategory C] [SymmetricCategory D] (Q : C ⥤ D) [Q.Braided] (J : D ⥤ C) [J.Full] [J.Faithful] (adj : J ⊣ Q) (γ : ∀ (M : D) (X : C), J.obj M ⊗ X ≅ J.obj (M ⊗ Q.obj X)) (hγ_natural : ∀ (M N : D) (X Y : C) (m : M ⟶ N) (c : X ⟶ Y), (J.map m ⊗ₘ c) ≫ (γ N Y).hom = (γ M X).hom ≫ J.map (m ⊗ₘ Q.map c)) (hγ_normalized : ∀ (M : D) (X : C), Q.map (γ M X).hom ≫ inv (adj.unit.app (M ⊗ Q.obj X)) = Functor.OplaxMonoidal.δ Q (J.obj M) X ≫ (inv (adj.unit.app M) ⊗ₘ 𝟙 (Q.obj X))) : (∀ (X Y : C) (M N : D) (c : X ⟶ Y) (m : M ⟶ N), (openLeftProjectionIso Q J γ X M).hom ≫ J.map (Q.map c ⊗ₘ m) = (c ⊗ₘ J.map m) ≫ (openLeftProjectionIso Q J γ Y N).hom) ∧ (∀ (X : C) (M : D), Q.map (openLeftProjectionIso Q J γ X M).hom ≫ inv (adj.unit.app (Q.obj X ⊗ M)) = Functor.OplaxMonoidal.δ Q X (J.obj M) ≫ (𝟙 (Q.obj X) ⊗ₘ inv (adj.unit.app M))) ∧ (∀ (M : D), (openLeftProjectionIso Q J γ (𝟙_ C) M).hom ≫ J.map ((Functor.OplaxMonoidal.η Q ⊗ₘ 𝟙 M) ≫ (λ_ M).hom) = (λ_ (J.obj M)).hom) ∧ (∀ (X Y : C) (M : D), (openLeftProjectionIso Q J γ (X ⊗ Y) M).hom ≫ J.map ((Functor.OplaxMonoidal.δ Q X Y ⊗ₘ 𝟙 M) ≫ (α_ (Q.obj X) (Q.obj Y) M).hom) = (α_ X Y (J.obj M)).hom ≫ (𝟙 X ⊗ₘ (openLeftProjectionIso Q J γ Y M).hom) ≫ (openLeftProjectionIso Q J γ X (Q.obj Y ⊗ M)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ffedd6fc",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Lean signature matches the node clause by clause: symmetric C,D; Q.Braided = symmetric strong monoidal with δ/η the inverse structure maps; J Full+Faithful left adjoint, unit convention = dep's Ψ(a)=G(a)∘η; γ natural with normalization Q(γ)≫u⁻¹ = δ≫(u⁻¹⊗1); v = β ≪≫ γ ≪≫ J.mapIso β (real data); four conjuncts naturality, left normalization, unit law with η Q, assoc law with δ Q X Y then α, indices correct. No extra hypotheses (no faithfulness of Q), independent bound universes, IsIso of unit components from Mathlib FullyFaithful:71. lean.statement verbatim in file; only the lean field differs from live; docstrings carry source, blueprint tag and 7 proof steps; one sorry; worker report and second reading present; no duplicate in live Sheaf/WeilConjectures. No compile (no FIX)."
  }
 }

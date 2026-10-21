@@ -273,5 +273,41 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a0ac99f30 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, 0 new nodes, statement and stmt_deps unchanged (Q40-created item, no repair note, not dropped, no cycle). Source: Stacks sites-cohomology Tag 0BKV kernel/image argument; 0D6I not needed; no SGA. Each step checked against the statements it cites. S1 uses the Grothendieck-abelian, enough-injectives and D+ injective K-injective representative nodes plus the slice section model (small site, unital Λ, natural in the complex). S2 uses presheaf-sheafification-exact (1)+(2) with (iI)^#=I; cycle↦class is the unit leg. S3: the Hom bijection needs a K-injective target, given by S1; homotopy changes a cycle by a boundary. S4 (elementary): shift with −d keeps kernels and images. S5: ν^* is exact (finite-limit-preserving left adjoint on module sheaves); the exact-functor cohomology node states the cycle/quotient compatibility; a is a quasi-isomorphism. S6: trf unit formula R⁺(φ)η^D=α_{LI}Q(η_I), with α natural and α_J invertible, gives I→RLI→RJ. Right adjoints preserve injectives, so RJ is termwise injective; (RJ)(T)=J(T); derived-sections-pushforward applies (A_{E,n} finite); sk-prop-sf-comparison gives invertibility of the specified unit, not an arbitrary iso. S7: unit naturality plus H^r(a). S8: ta≃a'Lb, then the S6 formula on I[1],a[1]. Edge cases: F[0] (e^0=id, e^{r>0}=0), F[1], r=0 site square, zero object and empty scheme. Duplicate search (0BKV, 'local class'): only the ringed-space analogue, Ab(S_et) germ nodes and scheme top-edge, none states this. Batch-5 flag lem-trf-bounded-below-derived-adjunction: unsplit generic D+ adjunction for an exact left adjoint (Adjunction.derivedPlus), only generic definition deps, not part of the proof of the trace formula or Poincaré duality, so accepted (as before on NW 45bd4f27). The generic other-unit tool_uses are accepted for the maintainer to record. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedLocalClassEdgeComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedLocalClassEdgeComparison",
+  "declarations": [
+   "CategoryTheory.derivedLocalClassMate",
+   "CategoryTheory.localClassPresheavesHasDerivedCategory",
+   "CategoryTheory.derivedLocalCohomologyPresheaf",
+   "CategoryTheory.derivedLocalClassSheafification",
+   "CategoryTheory.derivedLocalClassPresheafMap",
+   "CategoryTheory.derivedGlobalLocalClassEdge",
+   "CategoryTheory.localClassCohomologyShift",
+   "CategoryTheory.localClassPlusCohomologyShift",
+   "CategoryTheory.localClassObjectCohomologyIso",
+   "CategoryTheory.localClassTerminalCohomologyIso",
+   "CategoryTheory.DerivedLocalClassEdgeLaws",
+   "AlgebraicGeometry.ProEtale.localClassSiteComparison",
+   "AlgebraicGeometry.ProEtale.localClassSectionPullback",
+   "AlgebraicGeometry.ProEtale.DerivedLocalClassSiteLaws",
+   "AlgebraicGeometry.ProEtale.derivedLocalClassEdgeComparison"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedLocalClassEdgeComparison.lean",
+  "statement": "theorem derivedLocalClassEdgeComparison (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) : DerivedLocalClassEdgeLaws T.smallEtaleTopology P.Coefficient ∧ DerivedLocalClassEdgeLaws (Scheme.ProEt.topology T) P.Coefficient ∧ DerivedLocalClassSiteLaws P T",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical edges are fixed by derived adjunction counits. Presheaf values are identified with derived sections by exact evaluation. localClassSiteComparison is homology of boundedBelowComparisonGlobalSections, retaining the specified derived unit. The two law predicates are expanded clause by clause in the worker report. The ordinary cohomology functor uses the dependency mathlib_match DerivedCategory.homologyFunctor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ede00271",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps, the module and the source declarations (boundedBelowComparisonGlobalSections = derived unit ≫ Leray; R(Sheaf.Γ) for both sites; mapDerivedCategoryRightDerivedAdjunction = Mathlib Adjunction.derived; constantSheafΓAdj). Every clause matches: IsIso of the canonical sheafification map, e = transpose of H^r of the derived constant⊣Γ counit and equal to the presheaf map at terminal W, naturality for all D+ maps, sign-free shift law, c = H^r of the specified comparison, c iso, the square with unit ≫ Γ-terminal iso ≫ H^r(ν*) iso, c natural and shift-compatible. No extra hypotheses; arbitrary T and r ∈ ℤ; universes bound; one sorry; docstrings carry all 8 steps; statement verbatim; node changes only in lean; not dropped. Second reading is an honest self-audit, accepted. No compile run (none required). Advisories: global presheaf HasDerivedCategory.standard instance (no clash found); unused helper localClassObjectCohomologyIso; boundedBelowComparisonGlobalSections is a plain def owned by theorem sk-prop-sf-comparison (S1-era stmt_dep); def-weil-derived-cohomology-sheaves lean record names sfModelCohomology, while its mathlib_match homologyFunctor is what the delivery uses."
  }
 }

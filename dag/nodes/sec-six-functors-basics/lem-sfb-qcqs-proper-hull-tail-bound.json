@@ -259,5 +259,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-0996b821e (reviewer sub-agent of L); spot-checked: I read the item in full: all 5 steps, every cited statement, the new node, the parent lem-sfb-qcqs-proper-localizing-coproducts (its Step 4 uses this item) and blueprint det-sf-comp-coherence-refinement proof (2). There is no repair note, the item is not dropped and there is no SGA citation. Step 1 holds: module objects in Sh(proét,Ab) are Grothendieck, sums are exact, and H^i commutes with sums. Step 2: the cohomology class C_X meets def-weil-triangulated-subcategory (extension, shift, zero), is closed under sums by Step 1, and contains Dctf, so L_X is inside C_X. Truncations keep their cohomology in P_X. Step 3: f_* is additive and left exact, and K-injectives give a triangulated Rf_*. Bounded-heart dévissage applies to tau_{>=-n}tau_{<=a-1}K with upper endpoint a-1. Step 4: module Postnikov–Roos gives the Roos triangle and H^j preserving N-products, so r>a+d gives vanishing. Step 5: c=d+1. The new node lem-sfb-qcqs-proper-serre-heart-bound is statement-only and self-contained. Its P_X is the weak Serre coproduct closure that Step 2 needs. It is a degree-0 bound, strictly smaller than the item, not a restatement. Small cases: id gives d=0; for finite Lambda, P_X lies in nu^*(torsion étale), so proper base change and fibre cd give d=2·(fibre dim), including l=p; P^1 with Q_l gives d=2. I found no counterexample, and the general proof is honest downstream work. No duplicate: the existing heart nodes (sk-lem-proper-heart-bound, det-proper-heart-bound-*, lem-sfb-noetherian-proper-heart-uniform-bound, lem-sfb-proper-serre-heart-continuous, thm-sf-fullcd-etale-origin) all assume a field, a Noetherian base, l≠p, finite coefficients or étale origin. I accept the declared generic tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsProperHullTailBound",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_uniform_lowerTail_bound_of_isProper",
+  "file": "lean/Sheaf/Paper/QcqsProperHullTailBound.lean",
+  "statement": "theorem exists_uniform_lowerTail_bound_of_isProper (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {S Y X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S) [IsProper q] (f : X ⟶ Y) [IsProper f] : ∃ c : ℕ, ∀ (a : ℤ) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), localizingClosureProEtale Λ X K → ∀ r : ℤ, a + (c : ℤ) ≤ r → IsZero ((DerivedCategory.homologyFunctor _ r).obj ((moduleObjectDerivedPushforward Λ f).obj ((DerivedCategory.TStructure.t.truncLE (a - 1)).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5af82075e",
+  "group": "Q64",
+  "result": "pass",
+  "note": "All clauses match the node: ℓ, the recorded coefficient predicate, qcqs S, proper q and f, K in the hull (finite-Tor constructible generators, ordinary ambient sums), c chosen before a and K, good truncation τ≤(a−1), full total right derived pushforward, H^r = 0 for r ≥ a+c. Edge cases (empty schemes, K = 0, any integers, c = 0) are covered and no assumption is added. lean.statement is verbatim, only the lean field changed, the proof is sorry only, docstrings carry the source, blueprint id and all 5 steps, the report has both sections, and imports match the statement and proof dependency modules. No duplicate: ellAdic_proper_lowerTail_bound is a different, Noetherian node. Advisory: the item's hull is closed under sums indexed by the object universe, while the parent uses localizingClosureOfSize.{u+1}; the parent's class is contained in the item's, so the parent can use it, and the two coincide mathematically. No recompile and no fixes."
  }
 }

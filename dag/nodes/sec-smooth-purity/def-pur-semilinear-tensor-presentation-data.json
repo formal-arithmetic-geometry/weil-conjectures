@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-semilinear-tensor-presentation-data",
+ "kind": "definition",
+ "title": "Data for semilinear transport of sheaf tensor presentations",
+ "statement": "For sites small in a common value universe [def-weil-size-convention], use sheaves of modules [def-weil-sheaf-of-modules-category] and their sheafified tensors [def-pur-sheaf-tensor-product]. A tensor presentation of a fixed ring map D → A is a sheaf B, a map D → B, a sheaf R and maps A → R, B → R forming a pushout in commutative-ring sheaves; equivalently it is an isomorphism A ⊗_D B ≅ R, recorded by its inclusions. For an inverse-image functor F of a geometric morphism [def-weil-pbc-ringed-topos-morphism], compatible presentation transport consists of ring isomorphisms d,a,b,c on the inverse-image underlying sheaves, preserving all ring-operation graphs on every test sheaf, and commuting with the two D-structure maps and both presentation inclusions. Define additive and semilinear transport by preservation of their addition and scalar-action graphs on every test sheaf. For an A-module M, use the existing sheafified tensor N=M ⊗_D B and its actual pure pairing. The presentation action predicate on sectionwise R-module structures on N requires semilinear restrictions and (i_A(x)i_B(v)) · (m ⊗ w) = (x · m) ⊗ (vw). For an adjunction F ⊣ V, the adjunct-normalization predicate on r:FN_Y ≅ N_X is the equality of maps out of M_Y × B_Y between its actual adjunct after the pure pairing and V of the target pairing after the actual adjuncts of s,b, using the inverse canonical product comparison of the right adjoint V. A coefficient change consists of D-algebra maps q:B → B′ and ring maps i:R → R′ commuting with both presentation inclusions. Its additive tensor map is characterized by m ⊗ v ↦ m ⊗ q(v). Underlying-set, underlying-abelian-sheaf and restriction-of-scalars views are the existing forgetful functors; no additional module structures or maps are chosen.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph; packaging of the abstract tensor-presentation transport data used in lem-pur-semilinear-tensor-presentation-transport, with Stacks Modules on Sites Tags 03CY, 03D2, 03EK and 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image semilinear isomorphism of module sheaves tensor ring presentation naturality adjunct",
+   "results": "[leanfinder] OK 8 hit(s). Hits concern SheafOfModules pullback of free modules, its naturality, and module-presentation generators and relations. None supplies the tensor-presentation transport data.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, TensorProduct.map",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of sheaves of commutative rings and semilinear inverse image tensor presentations",
+   "results": "8 hits: CommRingCat.isPushout_tensorProduct; Algebra.pushoutDesc; CommRingCat.pushoutCocone; CommRingCat.tensorProdIsoPushout; instIsPushout; CommRingCat.tensorProdObjIsoPushoutObj; Algebra.IsPushout; CommRingCat.pushoutCoconeIsColimit. Ordinary ring tensor is a categorical pushout; reused IsPushout, no sheaf transport datum.",
+   "date": "2026-10-21",
+   "verdict": "no match for the packaged data"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|tensorObjMap (Mathlib/Algebra/Category/ModuleCat/Sheaf); tensor.*[Pp]ushout|[Tt]ensor[Pp]resentation|semilinear (WeilConjectures/ and Sheaf/); blueprint_refs.py search \"tensor presentation\"; rg on dag/nodes",
+   "results": "Mathlib: [grep] OK 0 hit(s). Blueprint search: 0 blueprint nodes match tensor presentation. Project: TensorPushoutAction requires sectionwise ring pushouts and is not applicable to a sheafified ring pushout; RingedToposRingData has a structural map and geometric adjunction but no tensor presentation or tensor adjunct; AlgebraicInverseImage transports the entire module category and has no ring-presentation coefficient-change datum. No occurrence of the item id in WeilConjectures. Reuse their module, tensor, pairing, adjunction and categorical pushout definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-semilinear-tensor-presentation-transport",
+  "date": "2026-10-21",
+  "group": "Q63"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Integral twist paragraph, module structure and inverse image of the tensor line; abstract sheaf-theoretic transport argument underlying old step 3 (tensor isomorphism and semilinearity) and step 5 (coefficient naturality) of lem-pur-integral-twist-line-inverse-image, serving prop-weil-twist-preserves proof's final integral scalar-extension sentence.",
+   "via": [
+    "lem-pur-semilinear-tensor-presentation-transport",
+    "lem-pur-integral-twist-line-inverse-image",
+    "lem-weil-integral-twist-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemilinearTensorPresentationData",
+  "declaration": "SheafOfModules.TensorPresentationTransport.Presentation",
+  "declarations": [
+   "SheafOfModules.TensorPresentationTransport.ringSets",
+   "SheafOfModules.TensorPresentationTransport.abSets",
+   "SheafOfModules.TensorPresentationTransport.Presentation",
+   "SheafOfModules.TensorPresentationTransport.moduleAb",
+   "SheafOfModules.TensorPresentationTransport.restrictModule",
+   "SheafOfModules.TensorPresentationTransport.coefficientModule",
+   "SheafOfModules.TensorPresentationTransport.tensorModule",
+   "SheafOfModules.TensorPresentationTransport.pure",
+   "SheafOfModules.TensorPresentationTransport.IsRingTransport",
+   "SheafOfModules.TensorPresentationTransport.IsAdditiveTransport",
+   "SheafOfModules.TensorPresentationTransport.IsSemilinearTransport",
+   "SheafOfModules.TensorPresentationTransport.Transport",
+   "SheafOfModules.TensorPresentationTransport.IsTensorAction",
+   "SheafOfModules.TensorPresentationTransport.pairing",
+   "SheafOfModules.TensorPresentationTransport.HasAdjunctFormula",
+   "SheafOfModules.TensorPresentationTransport.CoefficientChange",
+   "SheafOfModules.TensorPresentationTransport.IsTensorMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemilinearTensorPresentationData.lean",
+  "statement": "structure Presentation {D A : Sheaf J CommRingCat.{u}} (da : D ⟶ A)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a39c9713",
+  "group": "Q63",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a39c9713",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Item statement unchanged (only lean + new def-node stmt_dep vs side-live); lean.statement verbatim, all 17 declarations present; imports = proof-dep modules; no line >100, sorry only. Clause check: IsPushout presentation ≡ β iso; IsRingTransport/IsAdditive/IsSemilinear graph tests on universal test sheaves ≡ ring/additive/semilinear transport (F left exact); iA/iB_comm ≡ cFβ=β(a⊗b)σ; IsTensorAction pins the unique transported R-action; HasAdjunctFormula uses actual homEquiv and inv prodComparison V (directions checked); uniqueness among additive isos without semilinearity; naturality with t'.d=t.d, t'.a=t.a, CoefficientChange ≡ D-alg q and iβ=β'(1⊗q), jY/jX pinned by pure normalization, ∀ r' ≡ the unique primed r'. Edge cases (M=0, zero rings, F=id, B=D, non-injective q, empty site, local generation only) and single universe u OK. H4: no existing equivalent. Advisory: unused public import of RingedToposMorphism; self second-reading."
+ }
+}

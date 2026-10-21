@@ -316,5 +316,50 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-46f6035c5 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement in full (def-exchange-projection, lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-derived-direct-image-composition and its proof Step 1, lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition, def-weil-pbc-proetale-operations, lem-weil-proetale-isomorphism-inverse-image, def-weil-pbc-composite-adjunction, lem-pur-proetale-constant-ring-composition), Stacks 0E48 (remark-compatible-with-diagram plus equation-projection-formula-map; its verification is omitted) and lem-sf-kunneth-coherence.proof.md l.26-33. The delivery is valid: statement and stmt_deps match the base exactly, the base proof was empty, there are 0 new nodes, the item is still unsplit on live and side-live, it is not in the dropped list, there is no repair note, and there is no SGA citation and no cycle. I recomputed each step's mathematics myself. Typing with f=a, g=b, f'=t, g'=r is correct. Step 2: v-hat=Lr*eps_a tensor 1, from the pi-transpose (eps tensor 1)mu and the Ex-transpose Lr*eps_a theta. Step 3: w-hat=1 tensor eps_b, from mu commuting with the signed symmetry, naturality of sigma, and sigma sigma=1. Steps 4-5: the composite transpose is v-hat composed with P_t(w-hat), giving P_r eps_a tensor P_t eps_b. Step 6: S=R_c(d)kappa^{-1}R_{c'}(eta_s) equals the transport along the swap and sigma; the transpose is d P_s(u-hat) by counit naturality and the triangle identity. Step 7: r's=t, t's=r, and symmetry naturality and involution close it. Edge cases checked: zero objects, empty schemes, identities, odd shifts, unbounded tensors at n>1. No duplicate found (lem-trf-exceptional-kunneth-counit and lem-sf-kv-alpha-transpose-coherence state different things). All nine tool_uses are accepted as generic coherence tools. Advisory only: Step 1 identifies the finite compositor of lem-weil-derived-direct-image-composition with the ringed-topos kappa via that node's proof Step 1; this is acceptable because the ringed lemma's normalization determines the comparison for the same K-injective functors. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProperProductTranspose",
+  "declaration": "WeilConjectures.FiniteProperProduct.finiteProperProductTranspose",
+  "declarations": [
+   "WeilConjectures.FiniteProperProduct.A",
+   "WeilConjectures.FiniteProperProduct.D",
+   "WeilConjectures.FiniteProperProduct.tensor",
+   "WeilConjectures.FiniteProperProduct.pull",
+   "WeilConjectures.FiniteProperProduct.push",
+   "WeilConjectures.FiniteProperProduct.adj",
+   "WeilConjectures.FiniteProperProduct.comp",
+   "WeilConjectures.FiniteProperProduct.sigma",
+   "WeilConjectures.FiniteProperProduct.residueInverse",
+   "WeilConjectures.FiniteProperProduct.mu",
+   "WeilConjectures.FiniteProperProduct.realization",
+   "WeilConjectures.FiniteProperProduct.pushModel",
+   "WeilConjectures.FiniteProperProduct.iteratedPushModel",
+   "WeilConjectures.FiniteProperProduct.kappa",
+   "WeilConjectures.FiniteProperProduct.theta",
+   "WeilConjectures.FiniteProperProduct.exchange",
+   "WeilConjectures.FiniteProperProduct.projection",
+   "WeilConjectures.FiniteProperProduct.external",
+   "WeilConjectures.FiniteProperProduct.v",
+   "WeilConjectures.FiniteProperProduct.w",
+   "WeilConjectures.FiniteProperProduct.omega",
+   "WeilConjectures.FiniteProperProduct.swapTensor",
+   "WeilConjectures.FiniteProperProduct.swapPush",
+   "WeilConjectures.FiniteProperProduct.finiteProperProductTranspose"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProperProductTranspose.lean",
+  "statement": "theorem finiteProperProductTranspose (P : PurityFiniteSetting.{u}) (B Y Z : Over (Spec (.of P.field.k))) (a : Y ⟶ B) (b : Z ⟶ B) [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsProper a.left] [IsProper b.left] (H : D P Y.left) (J : D P Z.left) : ((adj P (pullback.snd a.left b.left)).homEquiv _ _).symm (v P a.left b.left Z.hom H J) = (mu P (pullback.snd a.left b.left) (pullback.snd a.left b.left ≫ Z.hom) Z.hom _ J).hom ≫ (tensor P (pullback a.left b.left)).map (Prod.mkHom ((theta P a.left b.left).hom.app ((push P a.left).obj H) ≫ (pull P (pullback.fst a.left b.left)).map ((adj P a.left).counit.app H)) (𝟙 _)) ∧ ((adj P b.left).homEquiv _ _).symm (w P a.left b.left B.hom Z.hom H J) = (mu P b.left Z.hom B.hom _ _).hom ≫ (tensor P Z.left).map (Prod.mkHom (𝟙 _) ((adj P b.left).counit.app J)) ∧ ((adj P (pullback.snd a.left b.left ≫ b.left)).homEquiv _ _).symm (omega P a.left b.left B.hom Z.hom H J) = (mu P (pullback.snd a.left b.left ≫ b.left) (pullback.snd a.left b.left ≫ Z.hom) B.hom _ _).hom ≫ (tensor P (pullback a.left b.left)).map (Prod.mkHom ((eqToIso (congrArg (fun f ↦ (pull P f).obj ((push P a.left).obj H)) (pullback.condition (f := a.left) (g := b.left)).symm)).hom ≫ (comp P (pullback.fst a.left b.left) a.left).hom.app ((push P a.left).obj H) ≫ (pull P (pullback.fst a.left b.left)).map ((adj P a.left).counit.app H)) ((comp P (pullback.snd a.left b.left) b.left).hom.app ((push P b.left).obj J) ≫ (pull P (pullback.snd a.left b.left)).map ((adj P b.left).counit.app J))) ∧ ((adj P (pullback.snd a.left b.left ≫ b.left)).homEquiv _ _).symm (omega P a.left b.left B.hom Z.hom H J) = (comp P (pullback.snd a.left b.left) b.left).hom.app ((tensor P B.left).obj ((push P a.left).obj H, (push P b.left).obj J)) ≫ (((adj P b.left).comp (adj P (pullback.snd a.left b.left))).homEquiv _ _).symm (w P a.left b.left B.hom Z.hom H J ≫ (push P b.left).map (v P a.left b.left Z.hom H J)) ∧ (((adj P b.left).comp (adj P (pullback.snd a.left b.left))).homEquiv _ _).symm (w P a.left b.left B.hom Z.hom H J ≫ (push P b.left).map (v P a.left b.left Z.hom H J)) = (pull P (pullback.snd a.left b.left)).map (((adj P b.left).homEquiv _ _).symm (w P a.left b.left B.hom Z.hom H J)) ≫ ((adj P (pullback.snd a.left b.left)).homEquiv _ _).symm (v P a.left b.left Z.hom H J) ∧ omega P a.left b.left B.hom Z.hom H J = (sigma P B.left ((push P a.left).obj H) ((push P b.left).obj J)).hom ≫ omega P b.left a.left B.hom Y.hom J H ≫ swapPush P a.left b.left Y.hom Z.hom H J",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All six clauses, including the explicit composite Hom bijection and actual swap transport, on the ordinary unbounded intrinsic coefficient category. Helper definitions specialize the recorded operations and canonical comparisons; kappa transports finiteDirectImageComposition through the existing section/K-injective-normalized realization equivalences. The API index level-1 has exponent (level-1)+1=level by the recorded positivity. No statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed1cf20d9",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, the item module and the exact side-live declarations (canonicalFinitePullbackTensor and its composition/braiding laws, sfIntrinsicDerivedPullbackComp, sfIntrinsicConstantModuleAdjunction, proEtaleConstantDerivedDirectImage = recorded sfFiniteDerivedDirectImage, finiteDirectImageComposition, ExchangeProjection/SuppliedDomains, PurityFiniteSetting). Hypotheses: separated + LocallyOfFiniteType + QuasiCompact on B/Y/Z, IsProper a and b, arbitrary unbounded H and J; level-1+1 = level by level_pos; ell-invertibility derived, not assumed. exchange = mateEquiv of comp(t,b)^-1 >> eq >> comp(r,a); variance checked against Mathlib, equal to eta_t >> Rt(theta) >> Rt Lr(eps_a). projection = homEquiv(mu >> eps (x) 1). kappa = transported recorded compositor. Six clauses verified by hand: v-hat, w-hat, Omega-hat (via the mu composition law), the composite-adjunction pair with kappa, and the swap with S = Rc'(eta_s) >> kappa^-1 >> eq >> Rc(mu_s, comps, sigma) in the node's order. Edge cases: n=1, empty schemes, zero objects, identity maps, odd shifts, universes. Only the lean field changed; statement verbatim; one sorry; docstrings and 100-char lines OK; report sections present. Not recompiled per the 2026-10-21 instruction; the worker reports a clean compile. Advisories only: local exchange/projection specialisations instead of the fixed-scalar finiteExchangeProjection; self-reread second reading; push/adj owned by a proof_dep, not a stmt_dep."
  }
 }

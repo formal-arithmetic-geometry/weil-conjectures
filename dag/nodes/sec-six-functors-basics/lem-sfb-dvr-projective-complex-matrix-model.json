@@ -213,5 +213,24 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-648aae436 (reviewer sub-agent of L); spot-checked: PASS with no changes, no new nodes and no tool_uses. Shape: one commit with the item and its report. The statement and stmt_deps are identical to the item as Q71 efb90aa7 created it, nothing is weakened, and no SGA is cited. There is no repair note, so the re-split rule does not apply. Sources read: blueprint main-20261015 sk-lem-int-integral-heart-local-model clause (1), Stacks 05CF, and Stacks 0AUW(3) at more-algebra.tex:4954, which says a finite torsion-free module over a PID is finite free. Step 1: the split i/s from def-weil-pbc-projective-module (whose statement includes 05CF) plus the domain property of the DVR give torsion-freeness; this is elementary and correct. Step 2: lem-sc-dvr-fg-torsionfree-free is a Mathlib leaf (Module.free_of_finite_type_torsion_free', PID) from another unit; a Mathlib leaf needs no tool_use, and it has no proof_deps, so there is no cycle. Its hypotheses are checked, and n_i=0 outside [a,b]. Steps 3-5: the matrix entries are coordinates of e^{-1}de(u_j), linearity gives de=eD, injectivity of e_{i+2} gives D_{i+1}D_i=0, and the e_i^{-1} form an inverse chain map; all correct with the column convention and empty matrices. Edge cases tested: P=0, a=b, the two-term complex R--π^m-->R, R/π excluded as non-projective, and a non-complete DVR. Duplicate search with rg -L: nilpotent-marked-free-complex-lift, stage3-b4-bounded-finite-free-resolution and the other hits are different statements. The Lean candidate gives only a quasi-isomorphism, so it is rightly not attached."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DVRProjectiveComplexMatrixModel",
+  "declaration": "CochainComplex.exists_finite_matrix_model_of_projective_over_dvr",
+  "file": "lean/Sheaf/Algebra/Homology/DVRProjectiveComplexMatrixModel.lean",
+  "statement": "theorem exists_finite_matrix_model_of_projective_over_dvr (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (a b : ℤ) (hab : a ≤ b) (P : CochainComplex (ModuleCat.{v} R) ℤ) (hP : ∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) [∀ i : ℤ, Module.Finite R (P.X i)] [∀ i : ℤ, Module.Projective R (P.X i)] : ∃ (n : ℤ → ℕ) (e : ∀ i : ℤ, (Fin (n i) → R) ≃ₗ[R] P.X i) (D : ∀ i : ℤ, Matrix (Fin (n (i + 1))) (Fin (n i)) R), (∀ i : ℤ, i < a ∨ b < i → n i = 0) ∧ (∀ (i : ℤ) (x : Fin (n i) → R), (P.d i (i + 1)).hom (e i x) = e (i + 1) ((D i).mulVec x)) ∧ (∀ i : ℤ, D (i + 1) * D i = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The strict complex isomorphism is stated in its full component form: degreewise linear equivalences commuting with the differentials. This permits independent universes for the scalar ring and the original module carriers; it does not use the universe-specialized MatrixComplex.complex interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7996f3fdd",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: DVR via IsDomain+IsDiscreteValuationRing; a≤b; CochainComplex (ModuleCat.{v} R) ℤ with independent universes u,v; IsZero support outside [a,b]; Module.Finite/Module.Projective instances; ∃ n:ℤ→ℕ zero outside [a,b], e i : (Fin (n i)→R) ≃ₗ[R] P.X i, D i : Matrix (Fin (n (i+1))) (Fin (n i)) R with d(e x)=e(D.mulVec x) and D(i+1)*D i=0; complex-iso clause follows from the components. No extra assumptions; edge cases (zero complex, a=b, Fin 0, negative indices) covered. Node changes only by lean record; lean.statement verbatim in file; stmt_dep records are existing Mathlib decls used exactly. No duplicate (side MatrixComplex/MinimalMatrixComplex differ); no definitions, sorry-only proof, source and blueprint docstrings with 5-step plan; report sections present. No recompile per 2026-10-21 instruction; no fixes."
  }
 }

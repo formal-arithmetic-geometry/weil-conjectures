@@ -223,5 +223,35 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-f5380e07f (reviewer sub-agent of L); spot-checked: PASS, no changes. I read all four steps against every cited statement; no faults. Shape: one commit; only fields owned by the split changed; statement and stmt_deps are byte-identical to live; live item is unsplit with no proof; not in the dropped list; no SGA. The def-wf-tensor-product re-split note is about the parent, and this item had no base proof. Step 1 (quotient p: P→H is identity on objects and full, so restriction along p×p is fully faithful into any E) is correct and does not claim p is faithful. Step 2 combines that bijection with the last clause of lem-weil-pbc-site-derived-tensor-descent (bijection along Q_R|P×Q_R|P, reviewed NI PASS), then conjugates by αι: q≅ℓp, with α: Q≅Q_hπ from def-weil-abstract-derived-category. It uses only cited statements. Step 3: r = T(α⁻¹,α⁻¹)∘ρ∘(πt≅t_h)∘α, directions checked, natural. Step 4: lift r'∘r⁻¹ and its inverse; faithfulness gives an isomorphism and uniqueness with r;eF=r'. The hypotheses (site small for w, flat-term K-flat predicates, sheaf tensor, signed Tot) match the descent node exactly; the coefficient category is the same Mod(R) and no base change is involved. Sources checked: Stacks 013H/06YS/06YT/06YU labels, 06YT and the 06YU construction (sites-cohomology.tex 3233-3300), and the blueprint def-wf-tensor-product first sentence. Edge cases: zero ring or empty site; one-object field site (homotopy quotient still needed); unbounded complexes; arbitrary E. No duplicate: lem-pe-coefficient-tor-flat-model and lem-sc-localized-open-kflat-tensor-restriction state different things. Accepted tool use: the descent node, a generic localization black box; unit sk-rem-sf-pf-done has no steps or uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CochainTensorModelRigidity",
+  "declaration": "SheafOfModules.cochain_tensor_model_rigidity",
+  "declarations": [
+   "SheafOfModules.cochainTensorFlatRepresentatives",
+   "SheafOfModules.cochainTensorHomotopyRepresentatives",
+   "SheafOfModules.cochainTensorRepresentativeQuotient",
+   "SheafOfModules.cochainTensorRepresentativeLocalization",
+   "SheafOfModules.cochainTensorTotal",
+   "SheafOfModules.cochainTensorHomotopyTotal",
+   "SheafOfModules.cochainTensorHomotopyTotalComparison",
+   "SheafOfModules.cochainTensorHomotopyDerivedComparison",
+   "SheafOfModules.cochainTensorRepresentativeArrow",
+   "SheafOfModules.cochain_tensor_model_rigidity"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CochainTensorModelRigidity.lean",
+  "statement": "theorem cochain_tensor_model_rigidity : ∃ r : (((cochainTensorFlatRepresentatives J R).ι.prod (cochainTensorFlatRepresentatives J R).ι) ⋙ cochainTensorTotal J R ⋙ DerivedCategory.Q) ≅ ((cochainTensorRepresentativeLocalization J R).prod (cochainTensorRepresentativeLocalization J R)) ⋙ siteDerivedTensorIndependentCoefficients J R, (∀ X, r.hom.app X = cochainTensorRepresentativeArrow J R X) ∧ (∀ (T' : (DerivedCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))) × (DerivedCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))) ⥤ (DerivedCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)))) (r' : (((cochainTensorFlatRepresentatives J R).ι.prod (cochainTensorFlatRepresentatives J R).ι) ⋙ cochainTensorTotal J R ⋙ DerivedCategory.Q) ≅ ((cochainTensorRepresentativeLocalization J R).prod (cochainTensorRepresentativeLocalization J R)) ⋙ T'), ∃! e : siteDerivedTensorIndependentCoefficients J R ≅ T', r.hom ≫ Functor.whiskerLeft ((cochainTensorRepresentativeLocalization J R).prod (cochainTensorRepresentativeLocalization J R)) e.hom = r'.hom) ∧ (∀ (E : Type e) (_ : Category.{z} E) (U V : (DerivedCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))) × (DerivedCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))) ⥤ E), Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft ((cochainTensorRepresentativeLocalization J R).prod (cochainTensorRepresentativeLocalization J R)) τ))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-646cb4d49",
+  "group": "NG",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; lean.statement verbatim in the file; 10 declarations listed match the file, all with source/blueprint docstrings; one sorry (main theorem). Clauses match the node: EssentiallySmall.{w} site with R : Sheaf J CommRingCat.{w}; P = IsKFlatIndependentCoefficients ∧ ∀n IsFlatOnSite (the descent theorem's membership characterization); t = uncurry curriedTensor.map₂HomologicalComplex with the recorded monoidal instance (defeq to the dep's, forced by compile); T = siteDerivedTensorIndependentCoefficients, with helpers projecting the same descent packet at universes 0,0. r's component = α⁻¹;Qh(σ⁻¹);ρ;T(α,α) (Step 3, directions checked); ∃! e : T ≅ T' with r;e(q×q)=r'; bijective whiskering for every E : Type e with Category.{z}. No extra assumptions; all universes bound. Advisory: σ and ρ are Nonempty-chosen in the landed dependency (inherited, harmless given uniqueness); the NG second-reading section is only a self-check. No duplicates found in a grep of side-live lean/Sheaf. No recompile: no change made; worker reports clean 40.5/31.1 s compiles."
  }
 }

@@ -229,5 +229,34 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-1713fd889 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 5 steps, every cited statement (def-weil-proetale-inverse-image, continuous-functor adjunction 00WX/00VE, lem-sfb-proetale-object-inverse-image-restriction clauses (1)-(2), def-pur-localized-ringed-site, left-exact inverse-image tensor, constant sheaf, def-sfb-finite-upper-star/lower-star) and Stacks 03CE (sites.tex l.6094), 00VE (l.567), 00Y0 and sites-modules 03EL. The statement and stmt_deps are identical to side-live and live, where the item is unsplit. It is not dropped and has no repair note. As node A of the Q121 re-split it carries old Steps 2-4 of the Q47 parent, and I found no argument shortened. Checks: unit = j_{T,id} followed by sheafification; the initial index (W,(id,v)), and p is an I_W arrow since (p x id)gamma = id; on I^op the cocone relation is j_{T,id} = j_{W,gamma} R(p), and I checked the direction; graph naturality via pr_T gamma_b = b; delta case at the terminal V/V; z_r unit normalization with clause (2), A=Z. Edge cases: u=id, V empty, r=0, V=B disjoint-union B. No duplicates: the open-unit-evaluation and finite-coefficient open-restriction nodes are open-immersion special cases. No SGA. Tool uses accepted: the restriction lemma and the tensor lemma; the other two are a Mathlib leaf and a definition. One C3/C4 fault, repaired: beta is typed on u^{-1} of def-sfb-finite-upper-star but e_u lands in def-weil-proetale-inverse-image's u^{-1}, and the proof never identified them. Step 1 now states that both are the sheafified pointwise Lan along the same base-change functor, up to the product swap, and cites def-sfb-finite-upper-star; it is added to proof_deps. Fix: fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-localized-ring-mate-graph-evaluation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalizedRingMateGraphEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleLocalizedRingMateGraphEvaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedRingMate",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedRingIso",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizationGraph",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizationIdentityIso",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedSectionMap",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedIntegerUnit",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedAbelianComparison",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedPulledSection",
+   "AlgebraicGeometry.Scheme.proEtaleLocalizedRingMateGraphEvaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalizedRingMateGraphEvaluation.lean",
+  "statement": "theorem proEtaleLocalizedRingMateGraphEvaluation {B : Scheme.{u}} (V : B.ProEt) (c : ProEtaleObjectRestrictionComparison V CommRingCat.{u + 1}) (cA : ProEtaleObjectRestrictionComparison V AddCommGrpCat.{u + 1}) (R : Sheaf (ProEt.topology B) CommRingCat.{u + 1}) (S : Sheaf (ProEt.topology V.left) CommRingCat.{u + 1}) (β : (proEtaleSheafInverseImage V.hom CommRingCat.{u + 1}).obj R ≅ S) : (∀ (T : B.ProEt) (a : R.obj.obj (op T)), (c.sheafIso.hom.app R).hom.app (op ((proEtaleBaseChange V.hom).obj T)) (((proEtaleSheafAdjunction V.hom CommRingCat.{u + 1}).unit.app R).hom.app (op T) a) = R.obj.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ V.hom V.prop trivial).counit.app T).op a) ∧ (∀ (T : B.ProEt) (a : R.obj.obj (op T)), (proEtaleLocalizedRingMate V R S β).hom.app (op T) a = (proEtaleLocalizedRingIso V c R S β).hom.hom.app (op ((proEtaleBaseChange V.hom).obj T)) (R.obj.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ V.hom V.prop trivial).counit.app T).op a)) ∧ (∀ (T : B.ProEt) (a : R.obj.obj (op T)) (U : V.left.ProEt) (b : (MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj U ⟶ T), S.obj.map (proEtaleLocalizationGraph V U T b).op ((proEtaleLocalizedRingMate V R S β).hom.app (op T) a) = (proEtaleLocalizedRingIso V c R S β).hom.hom.app (op U) (R.obj.map b.op a)) ∧ ((proEtaleLocalizedRingMate V R S β).hom.app (op V) ≫ S.obj.map (proEtaleLocalizationGraph V (ProEt.mk (𝟙 V.left)) V (proEtaleLocalizationIdentityIso V).hom).op = R.obj.map (proEtaleLocalizationIdentityIso V).hom.op ≫ (proEtaleLocalizedRingIso V c R S β).hom.hom.app (op (ProEt.mk (𝟙 V.left)))) ∧ IsIso ((proEtaleLocalizedRingMate V R S β).hom.app (op V) ≫ S.obj.map (proEtaleLocalizationGraph V (ProEt.mk (𝟙 V.left)) V (proEtaleLocalizationIdentityIso V).hom).op) ∧ ((proEtaleLocalizedIntegerUnit V cA).hom ≫ proEtaleConstantInverseImageMap V.hom AddCommGrpCat.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} ℤ)) = 𝟙 _) ∧ (∀ r : R.obj.obj (op (ProEt.mk (𝟙 B))), (proEtaleLocalizedPulledSection V c cA R S β r).hom.app (op (ProEt.mk (𝟙 V.left))) ((toSheafify (ProEt.topology V.left) ((Functor.const V.left.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app (op (ProEt.mk (𝟙 V.left))) (ULift.up 1)) = (proEtaleLocalizedRingIso V c R S β).hom.hom.app (op (ProEt.mk (𝟙 V.left))) (R.obj.map ((MorphismProperty.Over.mkIdTerminal @WeaklyEtale B).from ((MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj (ProEt.mk (𝟙 V.left)))).op r))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ac04a7ae",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Only the item lean record, one module and the report are delivered; statement verbatim; 9 declarations present; single sorry; item and deps not dropped. proEtaleSheafInverseImage is the same sheafPullback along Over.pullback as ProEtale.upperStar (one definition). c/cA are fully pinned normalized restriction comparisons (coprojection + sheafIso_inv fields; existence from proEtaleObjectInverseImageRestriction), so not free maps or extra hypotheses. Every node clause checked and true: unit = R(pr_T) via the j_{T,id}=j_{W,(id,v)}R(p) cocone relation; mate formula; graph = mapPullbackAdj.homEquiv (b,U->V); diagonal equality plus IsIso; integer unit pinned as inverse of proEtaleConstantInverseImageMap; additive z_r global-section formula. Edge cases empty/zero/r=0/u=id/non-mono covered; no universe restriction; docstrings carry sources, blueprint tags and the 5 proof steps. Not recompiled (worker scompile clean). Advisory: two imports unused by name; second reading is a brief self-review."
  }
 }

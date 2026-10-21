@@ -15,7 +15,9 @@
   "lem-trf-constant-coefficient-composition",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "pur713-def-pullback-comparison",
+  "lem-trf-derived-pullback-coherence"
  ],
  "proof": [
   {
@@ -262,5 +264,35 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-f00210f2e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 6-step proof, no new nodes, statement and stmt_deps unchanged, no repair note, no cycle (the closures of the item and of lem-trf-derived-pullback-coherence contain neither the item nor def-pur-scheme-geometric-frobenius). I recomputed the three applications of lem-trf-derived-pullback-coherence, whose convention c_{f,g}:L(gf)*→Lf*Lg* is the item's. (u,r_Y,s_Y) gives (P_u d_Y)c_{u,t_Y}=(c_{u,r_Y}P_{s_Y})c_{r_Y u,s_Y}, and c_{u,r_Y}^{±1} cancels. (r_X,u,s_Y) cancels P_{r_X}c_{u,s_Y}^{±1}. (r_X,s_X,u) gives (d_X P_u)c_{t_X,u}. The equality transports compose to t_Y u=u t_X, so the result is (d_X P_u)C_t. The substitution identities of step 2 hold by eliminating the equality. Step 6 (K-flat representatives) follows from lem-weil-pbc-ringed-pullback-preserves-kflat, the termwise normalization of the binary composition comparison, and the definition of Lv* as the exact functor applied termwise. The coefficient identifications agree through lem-trf-constant-coefficient-composition and prop-weil-pbc-proetale-constant-ring-map (empty source included). The citer's use is consistent: def-pur-scheme-geometric-frobenius step 5 takes u=f, r=F^{(q)}, s=g_γ, Φ=g_γF, with A=O_E/ϖ^n finite commutative. This matches the blueprint main-20261015 display Lf*κ_Y=κ_X Lf* at lines 62-66. Stacks 0D6D (sites-cohomology.tex 3658-3681) checked; the pasting is correctly marked as an agent deduction, and no SGA source is used. No duplicate: the iterate-coherence and Frobenius-power-coherence nodes only cover iterates or powers of a single map. I accept the declared tool uses (the generic pseudofunctor associativity and the pbc coefficient/K-flat nodes). Small cases checked: identities, empty schemes, zero ring. Minor: the report mentions a citations.json that the commit does not carry."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FactorizedProEtalePullbackPasting",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleFactorizedPullback_pasting",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtalePastingOrdinaryComposition",
+   "AlgebraicGeometry.Scheme.proEtalePastingOrdinarySquare",
+   "AlgebraicGeometry.Scheme.proEtalePastingOrdinaryLeft",
+   "AlgebraicGeometry.Scheme.proEtalePastingOrdinaryRight",
+   "AlgebraicGeometry.Scheme.proEtalePastingDerivedSquare",
+   "AlgebraicGeometry.Scheme.proEtalePastingDerivedLeft",
+   "AlgebraicGeometry.Scheme.proEtalePastingDerivedRight",
+   "AlgebraicGeometry.Scheme.proEtaleFactorizedPullback_pasting",
+   "AlgebraicGeometry.Scheme.proEtaleFactorizedPullback_pasting_representatives"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FactorizedProEtalePullbackPasting.lean",
+  "statement": "theorem proEtaleFactorizedPullback_pasting {X Y : Scheme.{u}} (u : X ⟶ Y) (rX sX : X ⟶ X) (rY sY : Y ⟶ Y) (er : u ≫ rY = rX ≫ u) (es : u ≫ sY = sX ≫ u) (et : u ≫ (rY ≫ sY) = (rX ≫ sX) ≫ u) (A : Type u) [CommRing A] [Finite A] : (proEtalePastingDerivedLeft u rX sX rY sY er es A).hom = (proEtalePastingDerivedRight u rX sX rY sY et A).hom",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The equality of natural transformations is primary; proEtaleFactorizedPullback_pasting_representatives states both K-flat representative component formulas. Real-data helpers name the canonical ordinary and derived square comparisons and both pasting paths, including explicit equality transports and functor associators. Reuses the published constant-coefficient compositor and unit-normalized ordinary comparison; no Cartesian or geometric assumptions. stmt_deps additionally cites the landed owners of the reused compositor and ordinary-normalization interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-044077136",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Checked every clause of the module against the node. Compositor direction (.inv = c_{h,k}), C_v as Comp u vY, then eqToIso e, then (Comp vX u).symm, both path factor orders, whiskerings and associators, the outer equality et (follows from er and es, irrelevant by proof irrelevance), A : Type u CommRing Finite, recorded ProEt site and constant-ring derived pullback with no universe equality, and the K-flat representative clause via recorded IsKFlatIndependentCoefficients and IsFlatOnSite with mapDerivedCategorySquareIso of the ordinary paths: all correct. Only the item node (lean, plus 2 added stmt_deps) and the new module changed; no cycle; statement verbatim; 9 declarations present; real-data helpers; sorry only; docstrings carry source, blueprint tag and proof steps 1-6. Mechanical theorem-stmt_dep finding: the statement uses the coherence module only through Classical.choose of proEtaleConstantRingPullbackComposition_ordinary, an ordinary compositor fixed uniquely by its unit-section clause; ordinaryComp is private and no definition node exposes it, so the statement genuinely depends on an object constructed by the theorem: PASS on that point. Advisory: trfPullbackSquareComparison (theorem node lem-trf-pullback-coefficient-iterate-coherence) is the same square comparison with the opposite orientation, and reusing it would mean citing a theorem node for a plain definition; unused proof-only import KFlatRingedToposPullback; trailing whitespace on 4 lines. No compile run (no file changed)."
  }
 }

@@ -12,7 +12,11 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-koszul-completion-reflector"
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-pbc-system-scalar-model",
+  "def-weil-pbc-system-scalar-coherence",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
  ],
  "proof": [
   {
@@ -241,5 +245,30 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-c065b772c (reviewer sub-agent of L); spot-checked: I read the whole split: seven steps, no new nodes, statement and stmt_deps byte-identical to live, item not dropped and not split elsewhere. Source: Stacks algebraization 099B/0A0E, read at lines 1024 and 1091, plus sites-cohomology 0A0A. No SGA. The finite-free transport is marked as agent assembly. I read every cited statement in full and checked each use. Step 1: exact termwise ⊗S; the balanced map to the S-Koszul tower for s=a(t) commutes with differentials, transitions and augmentations. Step 2: λ_X and its augmented-tower clause give κ^s with κ^s C(η^R)=η^{S,s}; the reflector and transport nodes use the same L_R. Step 3: Čech–Koszul θ for s and v plus unit-power completeness (s=wv^e, w a unit, e≥1) give a unit-carrying h; the localization inverses check. Step 4: the iff criterion and the Hom bijection give preservation of complete objects and cancellation of C(η^R). Steps 5–7: I composed out the shift square, the identity unitor case and the tower case A vs B after precomposition; all reduce to the same unit expressions; ba(t)=b(w)u^e z^{ef}; T≅R^{dj}. Edge cases checked: d=0, t=v=0, units, zero divisors, e=1. Closure over snapshot+side-live (690 nodes) has no cycle. The narrower injective/exact-product exchange nodes and the koszul-completion-scalar-comparison node are not duplicates. Accepted tool_uses: lem-pur-derived-change-of-rings, lem-pur-unit-power-completeness, lem-sfb-ringed-complete-triangulated, all generic."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteFreeCompletionTransport",
+  "declaration": "CategoryTheory.finiteFreeCompletionTransport",
+  "declarations": [
+   "CategoryTheory.finiteFreeCompletionTransport",
+   "CategoryTheory.finiteFreeCompletionTransport_shift",
+   "CategoryTheory.finiteFreeCompletionTransport_id",
+   "CategoryTheory.finiteFreeCompletionTransport_comp"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteFreeCompletionTransport.lean",
+  "statement": "theorem finiteFreeCompletionTransport (A : SystemScalarModel.{u, u, u} a) (hfree : ∃ d : ℕ, Nonempty ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj (SheafOfModules.unit (derivedChangeRingIndependentCoefficients J S)) ≅ ∐ (fun _ : Fin d ↦ SheafOfModules.unit (derivedChangeRingIndependentCoefficients J R)))) (t : (R.obj ⋙ forget CommRingCat).sections) (v w : (S.obj ⋙ forget CommRingCat).sections) (e : ℕ) (hw : ∀ U : Cᵒᵖ, IsUnit (w.val U)) (he : 1 ≤ e) (hparam : ∀ U : Cᵒᵖ, a.hom.app U (t.val U) = w.val U * v.val U ^ e) (D : RingedKoszulLimitPresentation R 1 (fun _ ↦ t)) (E : RingedKoszulLimitPresentation S 1 (fun _ ↦ v)) : (∃! κ : D.completion ⋙ A.model.T ≅ A.model.T ⋙ E.completion, ∀ M : ringedSiteDerived R, A.model.T.map (D.unit M) ≫ κ.hom.app M = E.unit (A.model.T.obj M)) ∧ ∀ M : ringedSiteDerived R, IsLocallyDerivedRingedIdealComplete R (image (ringedKoszulScalar R t)) (image.ι (ringedKoszulScalar R t)) M → IsLocallyDerivedRingedIdealComplete S (image (ringedKoszulScalar S v)) (image.ι (ringedKoszulScalar S v)) (A.model.T.obj M)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four theorem statements together render all clauses: unique unit-normalized natural comparison and preservation of local completeness, integer shifts, actual tensor-unit normalization, and balanced coefficient-tower composition. Uses the published normalized SystemScalarModel and its existing canonical unit/associator; no basis or arbitrary scalar map is supplied. Standard derived localizations are used for coefficients, as prescribed by SystemScalarModel; tower localization instances only fix their chosen size."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-839bf84c5",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 34d6bea90465 (H2 RETURN). Lean module byte-identical (diff), lean.statement verbatim; item differs from live base only in stmt_deps/lean. H2 repaired: theorem stmt_deps lem-pur-system-scalar-model/-coherence replaced by new def nodes def-weil-pbc-system-scalar-model (existing:true on unchanged SystemScalarModel; structure fields model/ordinaryAdj/unit_normalized/adjunction/transpose and systemModelTmul faithfully stated; statement verbatim l.102) and def-weil-pbc-system-scalar-coherence (existing:true on unchanged SystemScalarCoherence; restriction unit/composition identity-on-sections and derived unit/composition via leftAdjointUniq, no .choose; statement verbatim l.160); lem-sfb-ringed-complete-triangulated dropped (kept in proof_deps). No duplicate def records, no cycle. Math re-checked: u : T≅𝟭 and α : A.T⋙B.T≅F.T directions match node id/tower formulas; ∃! unit-normalized κ true by reflector cancellation; shift clause valid for any CommShift on T; single universe forced by RingedKoszulSystem; lem-pur-finite-free-completion-exchange(-coherence) narrower, not duplicates. No recompile (Lean unchanged; prior nt_compile 48.3 s clean). Advisories: coherence def body uses exactDerivedRestriction* (theorem-owned lem-pur-exact-restriction-composition) not in stmt_deps; systemRingHasDerived instance not listed; inherited unused reflector theorem stmt_dep."
  }
 }

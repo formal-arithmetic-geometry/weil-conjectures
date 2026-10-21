@@ -311,5 +311,29 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-e28b41852 (reviewer sub-agent of L); spot-checked: I read the item in full: no new nodes and the statement is unchanged. Before reading I checked that the item is not on the side-live route-pivot drop list, is still unsplit on live, and has no re-split note. Sources read: sk-prop-a1 proof (opening localization triangle before Rp_*), sk-thm-pe-direct-image-comparison proof (mate built from the D^+ adjunction, iso for qcqs g, Stacks 03Q6/09A6), Stacks 015F, 06XW/070J and proetale 09BM. Coefficients are ordinary constant A_{E,n}-modules on both sites, matching lem-exc-closed-support-triangle and the comparison theorem. Checked: qcqs of i and j (affine, monomorphism); exactness of i_* on both sites; termwise = derived; D^+ preservation; the mate unit identity, including the orientation of c; all three squares of the triangle isomorphism with TR1, so b' has an explicit sign; naturality by conjugation; edge cases Z=∅, U=∅, B=0. One fault (E5/C2), repaired: the source triangle lem-exc-closed-support-triangle uses the total unbounded Rj_* and its unit, while the comparison theorem and lem-pe-direct-image-mate-compatibility use the D^+ functor R^+j_*, and the delivery identified the two silently. I added elementary Step 3: bounded-below injective complexes are K-injective (lem-weil-pbc-dplus-injective-representative, prop-weil-pbc-kinjective-resolutions-exist) and K-injectives compute the total Rj_* (lem-weil-pbc-kinjective-total-derived), so Rj_* preserves D^+; D^+ is full, so uniqueness of adjoints gives a unique μ:R^+j_*≅Rj_*|D^+ with μη^+=η. I threaded μ through γ, the unit computation and naturality, renumbered the step references, recomputed proof_deps and declared the two generic K-injective tools in tool_uses. Declared tool uses accepted. Not duplicates: lem-weil-finite-duality-closed-comparison and the sibling lem-pur-closed-finite-adjoint-counit-transport. Side note: lem-exc-proetale-closed-exact should cite Stacks 09BM rather than 09A9 (not this item's fault).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClassicalLocalizationTriangleTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalLocalizationTriangleTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.classicalLocalizationDirectImageMap",
+   "AlgebraicGeometry.ProEtale.ClassicalLocalizationTriangleTransport",
+   "AlgebraicGeometry.ProEtale.classicalLocalizationTriangleTransport"
+  ],
+  "file": "lean/Sheaf/Paper/ClassicalLocalizationTriangleTransport.lean",
+  "statement": "theorem classicalLocalizationTriangleTransport (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X U : Scheme.{u}} [Z.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [IsSeparated (Z ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of P.field.k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ClassicalLocalizationTriangleTransport P i j",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The property spells out both canonical mate identifications, the actual open unit, the conjugated boundary with canonical shift, and naturality for all admissible derived morphisms. The unbounded etale source is normalized using rightDerivedFunctorPlusCompatibility, not identified silently with the D+ direct image."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fca120d4",
+  "group": "O1",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. Hypotheses match the node and are no stronger; universes u/u+1 as in both deps. alpha and gamma are pinned to canonical maps (rightDerivedFunctorPlusCompatibility plus comparisonDirectImageCanonicalMate; gamma also uses the inverse of directImageComparisonPullbackPlusIso, orientation checked). Unit equation agrees with the direct-image comparison theorem's unit clause. epsilon' = alpha.inv then F(counit); b' = gamma.inv, F(delta), commShiftIso, alpha[1], no sign; distinguished triangle; three naturality equations. Existential delta mirrors exists_etale_closedSupportTriangle and is unique by open/closed orthogonality, so the sign is determined. No hollow definitions; only sorry is the main theorem; docstrings carry source, blueprint id and all 8 steps; all imports exist. Edge cases Z empty, U empty, B=0, unequal bounds, n=1. Advisory only: some imports serve only proof deps. Compile not re-run per instruction."
  }
 }

@@ -370,5 +370,35 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-8a62f547e (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, plus the statement of every cited node; the delivery creates no new nodes. The statement is unchanged from live and is true in all six coefficient cases. The only change outside the proof is two added stmt_deps (condensed ring, constant sheaf), and the statement does use both. No cycle (only citer is the parent lem-sfb-internal-hom-dual-constructible-models). No repair note, not dropped, still unsplit in clones/live and side-live, no SGA. Source checks: Stacks sites-modules 093J (lemma-constant-exact, line 8198) and 093M (lemma-completion-flat, line 8261), proofs read; 093M holds on any site, matching lem-weil-pbc-completed-constant-sheaf-reduction. Blueprint main-20261015 internal-hom proof, paragraphs 2-3, read; from.place is correct. Steps: S1 Noetherianity (finite ring/field by hand; O_E is a PID by DVR clause 2, whose absolute-value hypothesis comes from E inside Qbar_l; Z_l is E=Q_l). S2 additivity, elementary. S3 uses the constant-functor exactness node, which has no finite-generation hypothesis. S4 finite case: the normalized encoding makes B_T=A_T an R_T-algebra iso, so C_T is the constant functor. S5 det-prop clause 3, plus an argued constant-scalar/projection compatibility. S6 flatness over all R_T-module sheaves (R Noetherian, I=(pi)). S7 field case: vector-space splitting, kept by additive C_T; no finiteness condition on continuous Qbar_l sections is needed. S8 slices via lem-sfb-coefficient-sections-localization. Advisory: S8's 'transporting' leaves implicit that alpha_u respects the constant scalars; this follows from the cited theta/h^sharp compatibility, or from restricting the S4-S5 isos sectionwise, so I did not FIX it. Edge cases checked: A=0, A=Z/l^2, infinite modules, E=Q_l, Qbar_l-valued functions not landing in any finite extension. Duplicate search over the DAG found no node with the six-case claim; the closest are generic completed-sheaf, finitely presented two-term and point-only nodes. The 7 declared off-unit tool_uses are generic scalar or coefficient bookkeeping; accepted. Review at review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdmissibleScalarRealizationExact",
+  "declaration": "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.admissible_scalar_realization_exact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.localizedModel",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.ScalarAssertions",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.scalarMap",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.CompletedIdentification",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.LocalizedFlatness",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.CompletedAssertions",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.IntegralAssertions",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.RationalAssertions",
+   "AlgebraicGeometry.ProEtale.AdmissibleScalarRealization.admissible_scalar_realization_exact"
+  ],
+  "file": "lean/Sheaf/Paper/AdmissibleScalarRealizationExact.lean",
+  "statement": "theorem admissible_scalar_realization_exact (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) : (∀ (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A], (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) → ScalarAssertions A T ∧ IsIso (FiniteDiscreteOrdinary.canonicalAbelianMap A T)) ∧ (ScalarAssertions (ULift.{u} ℤ_[ℓ]) T ∧ CompletedAssertions (ULift.{u} ℤ_[ℓ]) T (ℓ : ULift.{u} ℤ_[ℓ])) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E], IntegralAssertions ℓ E T ∧ RationalAssertions ℓ E T) ∧ ScalarAssertions (ULift.{u} ℚ_[ℓ]) T ∧ ScalarAssertions (ULift.{u} (PadicAlgCl ℓ)) T",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All six cases use the existing continuous scalar model functor. Clause-packaging helpers retain the actual pulled-back ring, constant scalar map, normalized positive quotient limit, full sheaf-module flatness and localized restrictions. Standard scalar rings are transported by ULift with their induced topology; finite extension rings use the recorded spectral topology. The algebraic-closure case uses all continuous functions, not the extra finite-subextension-valued alternative in the broad admissibility predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72d35600f",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Only the item lean record changed vs live; statement verbatim in file. All six coefficients via recorded modelFunctor/continuousCoefficientRingObj (Qbar all continuous maps); finite A: IsIso of canonical canonicalAbelianMap (ring map); O_E (all uniformizers) and Z_l (pi=l): ∃! ring iso to adicLisseCompletedRing with levels n+1≥1, normalized on constant scalars (uniqueness true via B_T/pi^n = constant), full flatness via Mod.extendScalars exactness + localized IsFlatOnSite; additive/exact/localized clauses for all; Noetherian via Λ(*)≅A. Edge cases A=0, n=0, empty T, E=Q_l, infinite modules OK; no hollow defs, sorry only, docstrings OK. Advisory: Padic.coefficientExtension* and adicLisse* owners (def-weil-l-adic-coefficient-extension, def-weil-pbc-adic-lisse-module) not in stmt_deps; Integral/RationalAssertions could reuse integralModel/rationalModel (defeq). Not recompiled per instruction."
  }
 }

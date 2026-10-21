@@ -1,0 +1,100 @@
+{
+ "id": "def-weil-pbc-system-scalar-coherence",
+ "kind": "definition",
+ "title": "Canonical scalar restriction and derived tensor unit and composition maps",
+ "status": "split",
+ "statement": "Let $\\mathcal C,J$ and the coefficient universe satisfy the site, sheafification and size assumptions of [def-weil-pbc-system-scalar-model]. For maps $\\varphi:R\\to S$, $\\psi:S\\to T$ and $\\gamma:R\\to T$ of sheaves of commutative rings, with a specified equality $\\gamma=\\psi\\circ\\varphi$, define the scalar-restriction composition isomorphism $\\operatorname{Res}_\\varphi\\operatorname{Res}_\\psi\\cong\\operatorname{Res}_\\gamma$ by the identity maps on sections, regarded as linear maps through this equality. For $\\varphi:R\\to R$ with a specified equality $\\varphi=1_R$, define $\\operatorname{Res}_\\varphi\\cong 1$ in the same way. Given normalized scalar models $A,B,F$ [def-weil-pbc-system-scalar-model] for $\\varphi,\\psi,\\gamma$, define the derived tensor composition isomorphism $B.T\\circ A.T\\cong F.T$ to be the left-adjoint uniqueness isomorphism between the composite derived adjunction, transported by the exact derived scalar-restriction composition isomorphism, and $F$'s derived adjunction. Given a normalized model $A$ for $\\varphi=1_R$, define $A.T\\cong1_{D(R)}$ by left-adjoint uniqueness between its derived adjunction transported by the exact derived restriction identity isomorphism and the identity adjunction. The exact derived restriction comparisons here are obtained by localization of the preceding sectionwise restriction isomorphisms, using the composition and identity comparisons of exact derived functors. These are definitions of specified maps, without asserting their representative formulas or choosing comparisons from an existence theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-system-scalar-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 03EK, section-tensor-product (ordinary tensor unit and associativity); Tag 0FND, lemma-pre-derived-adjoint-functors-general (derived adjunction). Canonical left-adjoint uniqueness construction for prop-weil-pbc-scalar-extension, retained steps 6-7."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived scalar extension unit and composition isomorphisms from uniqueness of left adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Functor.leftKanExtensionUniqueOfIso, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app, CategoryTheory.Functor.instIsIsoAppLanUnit_1, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc, CategoryTheory.Functor.instIsIsoAppLanUnit. Mathlib supplies general adjoint uniqueness and derived adjunction machinery. The four specific definitions are already in Sheaf.CategoryTheory.SystemScalarCoherence and are reused unchanged. The DAG has lem-pur-system-scalar-coherence for representative theorems, but no separate definition node for these maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived change of rings associator and identity via leftAdjointUniq",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη. Mathlib supplies general adjoint uniqueness and derived adjunction machinery. The four specific definitions are already in Sheaf.CategoryTheory.SystemScalarCoherence and are reused unchanged. The DAG has lem-pur-system-scalar-coherence for representative theorems, but no separate definition node for these maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "systemScalarModelDerivedUnit|systemScalarModelDerivedComposition|systemScalarRestrictionUnit|systemScalarRestrictionComposition",
+   "results": "0 hits: . Mathlib supplies general adjoint uniqueness and derived adjunction machinery. The four specific definitions are already in Sheaf.CategoryTheory.SystemScalarCoherence and are reused unchanged. The DAG has lem-pur-system-scalar-coherence for representative theorems, but no separate definition node for these maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-free-completion-transport",
+  "date": "2026-10-21",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Finite-free scalar extension comparison: the normalized derived scalar model and its unit/composition maps in retained proof steps 6-7.",
+   "via": [
+    "lem-weil-pbc-finite-free-completion-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemScalarCoherence",
+  "declaration": "SheafOfModules.systemScalarModelDerivedComposition",
+  "declarations": [
+   "SheafOfModules.systemScalarModelDerivedUnit",
+   "SheafOfModules.systemScalarModelDerivedComposition",
+   "SheafOfModules.systemScalarRestrictionUnit",
+   "SheafOfModules.systemScalarRestrictionComposition"
+  ],
+  "statement": "def systemScalarModelDerivedComposition {R S T : Sheaf J CommRingCat.{w}}\n    {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T} (hγ : γ = φ ≫ ψ)\n    (A : SystemScalarModel φ) (B : SystemScalarModel ψ) (D : SystemScalarModel γ) :\n    A.model.T ⋙ B.model.T ≅ D.model.T",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing concrete leftAdjointUniq definitions and sectionwise restriction maps only. No representative theorem or choice from it is used to define the maps. Definition record requested by the independent return on 34d6bea90465; the owning module is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-839bf84c5",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-839bf84c5",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 34d6bea90465 (H2 RETURN). Lean module byte-identical (diff), lean.statement verbatim; item differs from live base only in stmt_deps/lean. H2 repaired: theorem stmt_deps lem-pur-system-scalar-model/-coherence replaced by new def nodes def-weil-pbc-system-scalar-model (existing:true on unchanged SystemScalarModel; structure fields model/ordinaryAdj/unit_normalized/adjunction/transpose and systemModelTmul faithfully stated; statement verbatim l.102) and def-weil-pbc-system-scalar-coherence (existing:true on unchanged SystemScalarCoherence; restriction unit/composition identity-on-sections and derived unit/composition via leftAdjointUniq, no .choose; statement verbatim l.160); lem-sfb-ringed-complete-triangulated dropped (kept in proof_deps). No duplicate def records, no cycle. Math re-checked: u : T≅𝟭 and α : A.T⋙B.T≅F.T directions match node id/tower formulas; ∃! unit-normalized κ true by reflector cancellation; shift clause valid for any CommShift on T; single universe forced by RingedKoszulSystem; lem-pur-finite-free-completion-exchange(-coherence) narrower, not duplicates. No recompile (Lean unchanged; prior nt_compile 48.3 s clean). Advisories: coherence def body uses exactDerivedRestriction* (theorem-owned lem-pur-exact-restriction-composition) not in stmt_deps; systemRingHasDerived instance not listed; inherited unused reflector theorem stmt_dep."
+ }
+}

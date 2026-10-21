@@ -224,5 +224,23 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-b7e860f02 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full and recomputed each one by hand. There are no new nodes. The statement is byte-identical to base/side-live. The item is still unsplit in live and side-live, is not in route-pivot-dropped, and has no SGA. The cited nodes are def-sfb-monoidal-category (associator naturality, bifunctor), def-sfb-strong-monoidal-functor (forward tensorator naturality, associativity axiom with F=Q giving Q(α^D)m(m⊗1)=m(1⊗m)α^C) and lem-weil-pbc-adjunction-of-natural-bijection (Ψ naturality, Ψ(a)=G(a)η, Ψ^{-1}(b)=εF(b), triangle identities); these supply every fact used. Typing checks: κ: J(M⊗QN)→JM⊗N, and both sides of equation 1 go J((M⊗QN1)⊗QN2)→(JM⊗N1)⊗N2. Steps 3-5: T(L)=m(m⊗1)((v⊗1)⊗1), and T(R)=Q(α^{-1})m(1⊗m)α^C((v⊗1)⊗1) with the associator kept explicit; the Q-associativity axiom equates them. Steps 6-7: both transposes equal m by the right triangle identity. No step uses invertibility of κ, full faithfulness, symmetry or exactness, and the elementary flags are justified. Edge cases checked: the identity adjunction and terminal monoidal categories. Not a duplicate: lem-pur-open-left-projection-action and lem-pur-adjoint-left-projection-action need symmetry or other hypotheses, and def-sfb-adjunction-projection-formula is the invertible package. Mathlib searches cover all three kinds, and the Monoidal/Functor.lean adjunction lemmas are not one-line specializations. Stacks 0GL1 (sites-cohomology l.4578) and 0E8I (sites-modules l.4051) are cited only as motivation, and the proof is correctly marked agent-written. The blueprint place is the last sentence of the main-20261015 lem-pur-projection-purity-agreement proof. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnitAdjunctTensorAction",
+  "declaration": "CategoryTheory.Adjunction.unitAdjunctTensorAction",
+  "file": "lean/Sheaf/CategoryTheory/UnitAdjunctTensorAction.lean",
+  "statement": "theorem unitAdjunctTensorAction {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] {J : C ⥤ D} {Q : D ⥤ C} (adj : J ⊣ Q) [Q.Monoidal] : (∀ {M M' : C} {N N' : D} (a : M ⟶ M') (h : N ⟶ N'), J.map (a ⊗ₘ Q.map h) ≫ ((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app M').app N' = ((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app M).app N ≫ (J.map a ⊗ₘ h)) ∧ (∀ (M : C) (N₁ N₂ : D), ((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app (M ⊗ Q.obj N₁)).app N₂ ≫ (((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app M).app N₁ ⊗ₘ 𝟙 N₂) = J.map ((α_ M (Q.obj N₁) (Q.obj N₂)).hom ≫ (𝟙 M ⊗ₘ Functor.LaxMonoidal.μ Q N₁ N₂)) ≫ ((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app M).app (N₁ ⊗ N₂) ≫ (α_ (J.obj M) N₁ N₂).inv) ∧ (∀ (F N : D), J.map (Functor.LaxMonoidal.μ Q F N) ≫ adj.counit.app (F ⊗ N) = ((adj.projectionMap Q (curriedTensor C) (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj F)).app N ≫ (adj.counit.app F ⊗ₘ 𝟙 N))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ff6c62af",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Single-module delivery (UnitAdjunctTensorAction.lean plus the item lean record; node statement byte-identical to live; lean.statement equals the file signature). κ is the canonical Adjunction.projectionMap with δ = LaxMonoidal.μNatTrans Q; its transpose (η⊗1)≫μ is the node's b = μ⁻¹∘(v⊗1). [Q.Monoidal] and adj : J ⊣ Q are the Mathlib encodings of the dependency nodes (CoreMonoidal/mkOfHomEquiv). The three conjuncts match the node's joint naturality, action equation (α_.hom/α_.inv orientation, types J((M⊗QN₁)⊗QN₂)→(JM⊗N₁)⊗N₂) and counit equation exactly, with no extra hypotheses and independent universes. The seven proof steps were checked by hand. No duplicate node or full existing statement: projectionMap_assoc and projectionMap_app_app_comp_map_counit are partial. Docstrings carry source, blueprint and proof steps; proof is sorry only. No compile, as no fix was made. Advisory: the Second-reading section is an author self-check."
  }
 }
