@@ -23893,3 +23893,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:30 L: merged deliver/NK/lem-pur-affine-translation-trace (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T22:31:15Z L: superseded stage-1 delivery NN/lem-sfb-lattice-koszul-triangulated-cup-comparison at 0b90a4341870a974038df8757492f92b637fa547; current completion retained; packet archived at refs/superseded/NN/lem-sfb-lattice-koszul-triangulated-cup-comparison/0b90a4341870a974038df8757492f92b637fa547; stale return retired.
 - 22:31 L: merged deliver/NK/lem-sfb-countable-normed-orthogonal-basis (reviewer FIX; first push; new nodes: 2)
+- 22:31 L: returned deliver/NE/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1 (cites dropped nodes; route rule), C5/B9, G1/G4. This is the 15th push of the item; all 14 earlier pushes were RETURN)
