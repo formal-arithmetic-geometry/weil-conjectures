@@ -17,9 +17,82 @@
   "def-weil-pbc-cartesian-square",
   "def-kun-unbounded-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_{u,R}=u_R^*$ and $F_{u,R}=Ru_{*,R}$, and write $\\theta_R:P_{f',R}P_{g,R}\\cong P_{h,R}P_{f,R}$ for the specified square comparison in [def-kun-unbounded-exchange]. The constant-ring identifications of [prop-weil-pbc-inverse-image-modules-exact] identify this situation with inverse images of ring sheaves in [lem-sfb-kflat-scalar-comparison-normalization]. That lemma identifies the canonical K-flat balancing comparison $\\lambda_u$ with the inverse of its scalar-adjunction mate and asserts its compatibility with composition. The tool writes scalar extension as $B\\otimes_A^{\\mathbf L}(-)$; the canonical switch $b\\otimes p\\mapsto p\\otimes b$ identifies this with $Q$. Since $b$ has degree zero, the switch introduces no sign and commutes with each inverse image and compositor. Invert its composition formula: for $v:V\\to W$, $u:W\\to T$, it gives $\\lambda_{uv}=(\\lambda_v P_{u,A})\\circ(P_{v,B}\\lambda_u)$ under the canonical inverse-image compositors. Apply this once to $fh$ and once to $gf'$. Since $fh=gf'$, both composites equal the same $\\lambda_{fh}$, with the compositors defining $\\theta_R$ inserted. Hence for every $N\\in D_A(Y)$,\n$$\\lambda_{h,P_{f,A}N}\\circ P_{h,B}(\\lambda_{f,N})\\circ\\theta_{B,Q_YN}\n=Q_{X'}(\\theta_{A,N})\\circ\\lambda_{f',P_{g,A}N}\\circ P_{f',B}(\\lambda_{g,N}).\\tag{*}$$\nBoth sides go from $P_{f',B}P_{g,B}Q_YN$ to $Q_{X'}P_{h,A}P_{f,A}N$. Thus this is the equality for the specified tensor comparisons and square, including coefficient actions.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source"
+   }
+  },
+  {
+   "text": "The derived adjunctions used below are the canonical ones of [def-kun-projection-formula-map]. The mate formula of [def-weil-pbc-adjunction-mate], applied to the definition of $\\chi$ in the statement, gives\n$$\\varepsilon_{u,B,Q_WE}\\circ P_{u,B}(\\chi_{u,E})=Q_W(\\varepsilon_{u,A,E})\\circ\\lambda_{u,F_{u,A}E}.\\tag{C}$$\nThe definition of the specified exchange [def-kun-unbounded-exchange] gives, for $R=A,B$,\n$$\\varepsilon_{f',R,P_{h,R}E}\\circ P_{f',R}(\\operatorname{Ex}_{R,E})\n=P_{h,R}(\\varepsilon_{f,R,E})\\circ\\theta_{R,F_{f,R}E}.\\tag{E}$$\nThese equations are just the two defining adjoint-transpose equations; they do not assert invertibility of either map.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "def-weil-pbc-adjunction-mate",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source"
+   }
+  },
+  {
+   "text": "Fix $M\\in D_A(X)$ and put $N=F_{f,A}M$. Transpose the left side of the desired identity under $P_{f',B}\\dashv F_{f',B}$: apply $P_{f',B}$ and then its counit. Counit naturality at $\\lambda_{h,M}$ and (E) identify this transpose with\n$$\\lambda_{h,M}\\circ P_{h,B}(\\varepsilon_{f,B,Q_XM})\\circ\\theta_{B,F_{f,B}Q_XM}\\circ P_{f',B}P_{g,B}(\\chi_{f,M}).$$\nNaturality of $\\theta_B$ at $\\chi_{f,M}$ moves the last map past $\\theta_B$, giving $P_{h,B}P_{f,B}(\\chi_{f,M})\\circ\\theta_{B,Q_YN}$. Substitute (C) for $u=f,E=M$, and then use naturality of $\\lambda_h$ at $\\varepsilon_{f,A,M}:P_{f,A}N\\to M$. The resulting transpose is\n$$T_L=Q_{X'}P_{h,A}(\\varepsilon_{f,A,M})\\circ\\lambda_{h,P_{f,A}N}\\circ P_{h,B}(\\lambda_{f,N})\\circ\\theta_{B,Q_YN}.$$\nEvery rewrite is naturality or one of the explicit transpose equations in Step 2 [def-weil-pbc-adjunction-mate, def-kun-unbounded-exchange].",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source"
+   }
+  },
+  {
+   "text": "Transpose the right side under the same adjunction. Equation (C) for $u=f',E=P_{h,A}M$ first gives\n$$Q_{X'}(\\varepsilon_{f',A,P_{h,A}M})\\circ\\lambda_{f',F_{f',A}P_{h,A}M}\\circ P_{f',B}(Q_{Y'}(\\operatorname{Ex}_{A,M}))\\circ P_{f',B}(\\lambda_{g,N}).$$\nNaturality of $\\lambda_{f'}$ at $\\operatorname{Ex}_{A,M}$ replaces its middle pair by $Q_{X'}P_{f',A}(\\operatorname{Ex}_{A,M})\\circ\\lambda_{f',P_{g,A}N}$. Combine the first two factors by functoriality of $Q_{X'}$ and apply (E) for $R=A,E=M$. Thus the transpose is\n$$T_R=Q_{X'}P_{h,A}(\\varepsilon_{f,A,M})\\circ Q_{X'}(\\theta_{A,N})\\circ\\lambda_{f',P_{g,A}N}\\circ P_{f',B}(\\lambda_{g,N}).$$\nAs in Step 3 these are precisely the transpose formula and naturality, with no resolution or acyclicity assertion [def-weil-pbc-adjunction-mate, def-kun-unbounded-exchange].",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source"
+   }
+  },
+  {
+   "text": "Postcompose equation (*) of Step 1 with $Q_{X'}P_{h,A}(\\varepsilon_{f,A,M})$ to obtain $T_L=T_R$. The Hom bijection of the canonical derived adjunction [def-kun-projection-formula-map], with its counit transpose formula [def-weil-pbc-adjunction-mate], is injective, so the original two morphisms are equal. Their common source and target are those in the statement, since $N=F_{f,A}M$. Naturality in $M$ follows because $\\lambda$, $\\theta$, the counits and their mates are natural transformations and composition and whiskering preserve their naturality. This proves the identity for every unbounded $M$ and every square in the statement.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source; Step 1 uses the existing normalized composition lemma and Steps 2–5 supply the omitted calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +128,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y),\\n  (ModuleCat.ExtendRestrictScalarsAdj.homEquiv f).symm g =\\n    ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars f g\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, an $ R $-module $ X $, an $ S $-module $ Y $, and an $ R $-linear map $ g : X → \\text{Res}_f(Y) $, the inverse of the natur\"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  (ModuleCat.extendScalars f).IsLeftAdjoint\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the extension of scalars functor from the category of $ R $-modules to the category of $ S $-modules along $ f $ is a\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary modules, scheme structure-sheaf modules, or generic mates; none states this normalized unbounded small-etale coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficient scalars is compatible with the base change mate for a square of etale sheaves on unbounded derived categories",
+   "results": "OK 8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.of_restrictScalars, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, PresheafOfModules.Derivation.Universal.fac, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary ring/module or exact-functor declarations do not state this specified unbounded small-etale coefficient/exchange identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp, Mathlib/CategoryTheory/Adjunction/Mates.lean:209–211 (source read): mates commute with horizontal composition of abstract squares.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate pasting does not supply the specified unbounded small-etale scalar/pullback normalization and its cube"
+  },
+  {
+   "tool": "grep",
+   "query": "(extendScalars|scalarExtension).*(baseChange|exchange)|(baseChange|exchange).*(extendScalars|scalarExtension)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived base change with respect to extension of coefficient rings",
+   "results": "OK 8 hits: Algebra.Extension.baseChange, KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.mapBaseChange, LieAlgebra.derivedSeriesOfIdeal_baseChange, KaehlerDifferential.mapBaseChange.congr_simp, LinearMap.baseChangeHom, IsBaseChange.of_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary ring/module or exact-functor declarations do not state this specified unbounded small-etale coefficient/exchange identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit base change natural transformation commutes with coefficient change by derived tensor product",
+   "results": "OK 8 hits: isBaseChange_tensorProduct_map, IsBaseChange.of_comp, IsBaseChange.comp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, IsBaseChange.comp_iff, Algebra.TensorProduct.cancelBaseChange_tmul, LinearMap.baseChange_baseChange, Algebra.Generators.baseChange_val",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary ring/module or exact-functor declarations do not state this specified unbounded small-etale coefficient/exchange identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-compact-scalar-coherence",
@@ -77,5 +185,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-direct-image-scalar-exchange",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited provenance/search records. Gave five explicit proof steps: normalized scalar/pullback composition yields the coefficient/geometric cube, then the two specified composites have equal counit transposes. Reused existing nodes; no new nodes and no new Mathlib leaves. Read the cited statements and source; distinguished the pro-etale and bounded-below restriction-of-scalars neighbors.",
+  "blueprint": "Realizes cor-pur-vector-bundle-purity.proof.md paragraph 2: coefficient reduction and geometric base change commute for the specified counits before transposing the affine-space and vector-bundle compatibility maps. This item supplies the ordinary small-etale direct-image exchange constituent extracted through lem-pur-etale-compact-scalar-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "General small-site K-flat normalization and geometric composition for scalar/pullback isomorphisms. This is a generic tool, valid for constant rings on the small etale sites; sk-prop-an does not supply its own coefficient normalization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-224bb61d7",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-224bb61d7 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited statement and the source in full, and changed nothing; the review is in review.md. The delivery adds 0 new nodes. The live item is still unsplit, there is no repair note for it, and nothing it cites is in the dropped list. Source: Stacks sites-cohomology Tag 0E47 (remark-compose-base-change-horizontal, lines 4094-4123), where the verification is omitted. The item is that compatibility for the cube made of the coefficient square (A->B on the identity topos) and the geometric cartesian square; Steps 2-5 write out the omitted verification (D5). Step 1: the normalization lemma gives theta_{gf}=(f_B^*theta_g)(theta_f g_A^*). Inverting it gives lambda_{gf}=(lambda_f g_A^*)(f_B^*lambda_g), which matches the item. Applying it to fh=gf' with theta_R=c_{h,f}^{-1}c_{f',g} gives (*); I re-derived this. The constant-ring identification is clause (1)/(2) of prop-weil-pbc-inverse-image-modules-exact. Steps 2-5: I recomputed (C) from the definition of chi and the mate formula, (E) from the counit form of Ex in def-kun-unbounded-exchange, and the transposes T_L and T_R naturality by naturality. They match, and injectivity of the adjunction Hom bijection then gives the equality. No properness, boundedness, flatness or invertibility is used. Small cases checked: A=B (both sides reduce to Ex), the identity square, M=0, and the non-flat map Z/4->Z/2. Duplicates checked and none states the item: lem-fix-direct-image-scalar-exchange (pro-etale sites), fix-lem-exchanges clause 1 (D^b_c, finite type only), the ringed exchange/tensor coherence lemma (Tag 0E48), lem-pur-ringed-coefficient-projection-cocycle, lem-pur-etale-direct-image-scalar-composition, sbc-lem-base-change-composition, the module base-change pasting lemma and lem-weil-pbc-mate-pasting. Tool use lem-sfb-kflat-scalar-comparison-normalization is accepted: it is a generic scalar/pullback composition law that sk-prop-an does not supply. Batch 5: the flagged reach to lem-trf-geometric-inverse-image-exact is exactness of inverse image (Stacks 04JC). That is a general sheaf fact that neither assumption gives and that is not a step of the trace formula proof. Recomputed on side-live, both the normalization lemma and that node stay in the batch-5 closure without the item, so the citation adds nothing; accepted. Advisory: the inherited statement names lambda_u by lem-weil-pbc-ringed-topoi-derived-tensor-pullback, whose statement gives only an iso in D(A_W). Step 1 correctly reads lambda_u as the canonical K-flat balancing comparison of the normalization lemma (the same map on K-flat models); the stage-2 writer should define lambda by that lemma."
  }
 }
