@@ -22,9 +22,120 @@
   "def-pur-supported-cup",
   "lem-asd-etale-finite-twist-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any $A_P$-module sheaf $F$ and any etale test object $W\\to T$, [lem-weil-pbc-etale-inverse-image-restriction] identifies $(e^{-1}F)(W)$ with $F(W\\to P)$. The identification respects the $A$-action: restriction applies the very same action maps, using the constant-ring identification of [prop-weil-pbc-inverse-image-modules-exact]. The inverse-image closed set on $W$ is both $W\\times_TZ$ and $W\\times_PC$. Thus the two support kernels are literally the same submodule $\\ker(F(W)\\to F(W\\setminus(W\\times_PC)))$. The equality commutes with every restriction map in $W$ and with morphisms $F\\to G$, giving $e^{-1}Q_CF=Q_Z(e^{-1}F)$ with the same kernel inclusions. This is the normalization in [def-pur-etale-coordinate-support], not an unspecified automorphism of a support functor.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-etale-coordinate-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S2 (section-extension-by-zero, restriction paragraph) and 09XP (section-cohomology-support, support subsheaf)"
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective resolution $A_P(r)\\to I^\\bullet$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-etale-restriction-injectives] make $e^{-1}I^\\bullet$ an injective resolution of $A_T(r)$, with the coefficient identification of [lem-asd-etale-finite-twist-pullback]. Apply Step 1 termwise: $e^{-1}Q_CI^\\bullet=Q_Ze^{-1}I^\\bullet$. The two sides represent $e^{-1}RQ_C(A_P(r))$ and $RQ_Z(A_T(r))$, respectively. This derives the specified kernel equality. Put $\\bar x=e\\bar t$ and $D_r=(RQ_Z(A_T(r)))_{\\bar t}$. The natural pullback-stalk identification [lemma-openclosed-stalk-upperstar], applied termwise, identifies $D_r$ with $(RQ_C(A_P(r)))_{\\bar x}$. The exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] also applies to $A$-modules, since the action on the stalk is induced on the same kernels and quotients. Hence the assumed concentration and degree-$2b$ identification at $\\bar x$ give those at $\\bar t$. No finiteness property of $B$ is used.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-asd-etale-finite-twist-pullback",
+    "lemma-openclosed-stalk-upperstar",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09XP, 03Q1 (lemma-stalk-pullback); module restriction uses sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "Write $q=2b$ and let $c_N\\in H^q_{\\{0\\}}(N,A(b))$ be the ordered coordinate class in the hypotheses. The normalized germ map $\\gamma_r:K_r\\to D_r$ of [def-pur-etale-coordinate-support] is derived from restriction to the inverse-image support followed by the ordinary germ map. Its map on a supported cocycle is therefore the germ of the pulled-back cocycle. By [lem-pur-supported-cup-functoriality], pullback respects Kummer classes, localization boundaries, their ordered supported cup product, and composition. Consequently $H^q(\\gamma_b)(c_N)$ is exactly the germ of $e^*p^*c_N$, under the kernel normalization of Steps 1--2. For $v\\in L_{r-b}$, the same construction and the tensor/evaluation comparisons of [lem-asd-etale-finite-twist-pullback] give $H^q(\\gamma_r)(c_N\\otimes v)=\\operatorname{germ}_{\\bar t}(e^*p^*c_N\\otimes v)$. This fixes the scalar and the order; no change of coordinates or sign permutation is made.",
+   "uses": [
+    "def-pur-etale-coordinate-support",
+    "lem-pur-supported-cup-functoriality",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (supported cocycles); supported cup naturality as formulated in lem-pur-supported-cup-functoriality from sites-cohomology.tex Tags 0FPL/0FPM"
+   }
+  },
+  {
+   "text": "Let $u_K:L_{r-b}\\xrightarrow{\\sim}H^q(K_r)$ and $u_D:L_{r-b}\\xrightarrow{\\sim}H^q(D_r)$ denote the orientation identifications in the hypotheses, the second transported by Step 2. Their defining formulas are $u_K(v)=c_N\\otimes v$ and $u_D(v)=\\operatorname{germ}_{\\bar t}(e^*p^*c_N\\otimes v)$. Step 3 says $H^q(\\gamma_r)u_K=u_D$. Thus $u_D^{-1}H^q(\\gamma_r)u_K=1_{L_{r-b}}$. This uses every coefficient $v$, so it does not require choosing a generator of the twist line.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, with the explicit input orientation identifications"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-good-truncation-exact-normalization] to the ordinary derived category of $A$-modules and the shifted objects $K_r[q]$, $D_r[q]$. Both have cohomology only in degree zero by the hypotheses and Step 2. Shift its natural truncation isomorphisms back and compose with $u_K^{-1}[-q]$, $u_D^{-1}[-q]$ to obtain $a_K:K_r\\xrightarrow{\\sim}L_{r-b}[-q]$ and $a_D:D_r\\xrightarrow{\\sim}L_{r-b}[-q]$. The lemma applies to the actual derived morphism $\\gamma_r[q]$, not just to a chosen chain map, and its naturality and Step 4 give $a_D\\gamma_r=a_K$. Hence $\\gamma_r=a_D^{-1}a_K$ is an isomorphism and its inverse is $a_K^{-1}a_D$. These are precisely the two good-truncation identifications required by the statement. The lemma also says that maps between these concentrated objects are determined by $H^q$, a fact used below.",
+   "uses": [
+    "lem-pur-good-truncation-exact-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations), specialized through the existing good-truncation normalization lemma"
+   }
+  },
+  {
+   "text": "For a further etale map $V\\to T$, or the restriction $B_0\\hookrightarrow B$ to an affine open and the corresponding restriction of $P$ and $T$, the kernel calculation of Step 1 is unchanged: on each common test object the section and its restriction to the complement are identical. Its composition with a second restriction is again that same map. The normalized supported germ comparisons commute with these restrictions by [def-pur-etale-coordinate-support]; [lem-pur-supported-cup-functoriality] identifies the restricted coordinate class with its pullback. Apply the naturality of [lem-pur-good-truncation-exact-normalization] to the resulting maps of concentrated stalk complexes. In degree $q$ the squares are the identity on the same coefficient line by Step 4; faithfulness on concentrated objects makes the derived squares commute. Inverting these commuting isomorphisms gives the same compatibility for their inverses.",
+   "uses": [
+    "def-pur-etale-coordinate-support",
+    "lem-pur-supported-cup-functoriality",
+    "lem-pur-good-truncation-exact-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (restriction of supported sections), with homology.tex Tag 0118 normalization"
+   }
+  },
+  {
+   "text": "For twist compatibility use the specified $A(r)=A(b)\\otimes_A A(r-b)$ in the input data. [lem-asd-etale-finite-twist-pullback] makes pullback commute with tensor products and evaluation, including dual powers for negative integers. [lem-pur-supported-cup-functoriality] makes the coordinate class obey the same tensor comparison. Therefore the degree-$q$ comparison sends $c_N\\otimes v$ to its pulled-back germ for every $v$, just as in Step 3. When the input concentration data use these coefficient identifications, their induced squares on degree-$q$ cohomology commute. The bijection on morphisms in [lem-pur-good-truncation-exact-normalization], shifted by $q$, then proves the squares for the germ isomorphisms and the truncation inverses. This uses exactly the coefficient comparisons specified in the hypotheses; in particular evaluation for a negative twist introduces no shift and no extra sign.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-supported-cup-functoriality",
+    "lem-pur-good-truncation-exact-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK (section-kummer), with the tensor/evaluation and truncation lemmas explicitly cited"
+   }
+  },
+  {
+   "text": "On a common etale refinement of two affine neighbourhoods with compatible input data, Steps 1 and 6 identify the support kernels and the germ morphisms; their degree-$q$ orientation maps agree by compatibility of the input. Step 5 consequently gives the identical formula $a_D^{-1}a_K$ on that refinement. For $b=0$, $q=0$, the coordinate class is the empty product $1$, both support functors have full support, and the normalized germ map sends $1\\otimes v$ to $v$. Steps 4--5 become the degree-zero coefficient-line germ identification. Empty $B$ or $Z$ gives no geometric point $\\bar t$ and hence no instance to check.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, degree-zero case; specialization of Steps 1--7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-etale-coordinate-support",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-asd-etale-finite-twist-pullback",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pur-supported-cup-functoriality",
+  "lem-pur-good-truncation-exact-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP support kernel, Tag 03S2 restriction, and homology.tex Tag 0118; conditional argument realizing the etale-local germ comparison in lem-pur-frame-independence, not a purity assertion of these tags."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +171,45 @@
    "results": "{\"t\": \"2026-10-21T06:19:03Z\", \"tool\": \"grep\", \"query\": \"supported.*stalk|stalk.*supported|etale.*injective|injective.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Skyscraper.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"5fd765ce9c2799ce\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebraic-geometry, sheaf or homological declarations do not state the complete supported-coordinate assertion; inspected the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*stalk|stalk.*supported|etale.*injective|injective.*etale",
+   "results": "{\"t\": \"2026-10-21T08:22:40Z\", \"tool\": \"grep\", \"query\": \"supported.*stalk|stalk.*supported|etale.*injective|injective.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/Topology/Sheaves/Skyscraper.lean\"], \"digest\": \"45f3254c4bd86731\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; open-immersion structure-sheaf stalks, sheafification isomorphisms and generic single-complex facts do not state this conditional ordinary-etale supported germ comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale inverse image commutes with derived sheaf sections supported in a closed subscheme",
+   "results": "{\"t\": \"2026-10-21T08:22:41Z\", \"tool\": \"leansearch\", \"query\": \"etale inverse image commutes with derived sheaf sections supported in a closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.Scheme.Hom.appIso_inv_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\"], \"digest\": \"0915b2c1d131f2d8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; open-immersion structure-sheaf stalks, sheafification isomorphisms and generic single-complex facts do not state this conditional ordinary-etale supported germ comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-21T08:22:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType\", \"CategoryTheory.Presheaf.isIso_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda\", \"CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf\", \"CategoryTheory.GrothendieckTopology.isIso_toSheafify\", \"CategoryTheory.isIso_toSheafify\", \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\"], \"digest\": \"7d7b95c76d4cd623\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; open-immersion structure-sheaf stalks, sheafification isomorphisms and generic single-complex facts do not state this conditional ordinary-etale supported germ comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale restriction derived support kernel concentrated cohomology canonical global to stalk comparison isomorphism",
+   "results": "{\"t\": \"2026-10-21T08:22:42Z\", \"tool\": \"leanfinder\", \"query\": \"etale restriction derived support kernel concentrated cohomology canonical global to stalk comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.morphismRestrictStalkMap\", \"AlgebraicGeometry.Scheme.Hom.resLEStalkMap\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"ModuleCat.Tilde.toOpen_germ\", \"ModuleCat.Tilde.stalkIso\"], \"digest\": \"1b4882924f34f21f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; open-immersion structure-sheaf stalks, sheafification isomorphisms and generic single-complex facts do not state this conditional ordinary-etale supported germ comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a canonical morphism between complexes with a single nonzero cohomology group is an isomorphism if it preserves the chosen orientation generator",
+   "results": "{\"t\": \"2026-10-21T08:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"a canonical morphism between complexes with a single nonzero cohomology group is an isomorphism if it preserves the chosen orientation generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ConnectData.homologyIsoPos\", \"CochainComplex.exists_iso_single\", \"HomologicalComplex.singleObjOpcyclesSelfIso_hom\", \"HomologicalComplex.pOpcycles_singleObjOpcyclesSelfIso_inv\", \"HomologicalComplex.homologyι_singleObjOpcyclesSelfIso_inv\", \"HomologicalComplex.singleObjOpcyclesSelfIso\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CochainComplex.quasiIsoAt₀_iff\"], \"digest\": \"101a7c7cfa57e969\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; open-immersion structure-sheaf stalks, sheafification isomorphisms and generic single-complex facts do not state this conditional ordinary-etale supported germ comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-coordinate-model",
@@ -83,5 +229,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-concentrated-support-etale-transfer",
+  "worker": "stage1",
+  "summary": "Q74 split the conditional transfer using literal support-kernel equality, preservation of injectives under etale restriction, preservation of the specified coordinate class, and existing functorial good-truncation normalization. All concentration hypotheses are retained. No new nodes or Lean files. Checked b=0, empty support, arbitrary affine base, negative twists, composition and common refinements.",
+  "blueprint": "lem-pur-frame-independence, first two proof sentences: sheaf-theoretic support class and etale-local comparison, via coordinate-model Steps 5--7; concentration remains external input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic ordinary-etale exact inverse-image, restriction, injective or stalk comparison tool used to derive the literal support-kernel equality; it does not replace any coordinate cohomology calculation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary-etale exact inverse-image, restriction, injective or stalk comparison tool used to derive the literal support-kernel equality; it does not replace any coordinate cohomology calculation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic ordinary-etale exact inverse-image, restriction, injective or stalk comparison tool used to derive the literal support-kernel equality; it does not replace any coordinate cohomology calculation."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic finite twist inverse-image, tensor and evaluation comparisons; the coordinate unit does not supply the coefficient algebra."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic ordinary-etale exact inverse-image, restriction, injective or stalk comparison tool used to derive the literal support-kernel equality; it does not replace any coordinate cohomology calculation."
+   },
+   {
+    "node": "lem-pur-good-truncation-exact-normalization",
+    "why": "Generic natural good-truncation and morphism-faithfulness tool for ordinary A-module complexes; the coordinate unit supplies concentration and the class but no abstract truncation normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-asd-etale-finite-twist-pullback",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-pur-good-truncation-exact-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-395674c0d",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-395674c0d (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement in full. The statement is identical to the live unsplit node (unchanged). The item is not in the drop list, has no repair note and has not been split elsewhere; it adds no new nodes. Hypotheses: k = F̄_q, so all schemes are k-schemes and supported-cup-functoriality applies for any affine B; ℓ ≠ p makes m invertible, as the twist-pullback lemma needs; |Z| = f^{-1}(0) for f = p∘e meets the def-pur-etale-coordinate-support requirement; x̄ = e t̄ lies on C, so the concentration hypothesis applies there. Steps 1–2: W×_T Z = W×_P C gives literally equal kernels; exact étale restriction plus preservation of injectives represents both derived objects; the stalk-pullback identification and exact stalks transport concentration from x̄ to t̄. Step 3: composition of supported pullbacks gives f^* = e^*p^*, and the coefficient v goes through the twist-pullback lemma. Steps 4–5: I checked a_D γ = S(u_D^{-1} H^qγ) ε = a_K using the naturality and Hom bijection of lem-pur-good-truncation-exact-normalization in D(A-Mod) after shifting by q. Steps 6–8: the definition's restriction commutation, the twist lemma and the Hom bijection give the stated compatibilities; b = 0, empty Z and non-Noetherian B are fine. Small case b = 1, B = Spec k, e = id: the item gives the identity on the rank-one Kummer line, as expected. Stacks sources (09XP at lines 13966ff, 03Q1, 03PK, 0118, 0FPL/0FPM) and the blueprint place (lem-pur-frame-independence, first two proof sentences) are correctly labelled. No duplicate: finite-type-coordinate-support-orientation, etale-supported-kernel-adjunction and concentrated-complex-shift differ. Batch-5: lem-pur-supported-cup-functoriality reaches lem-pod-etale-stalk-tensor-scalar, a generic stalk/tensor/scalar identity that is neither trace formula nor Poincaré duality nor a step of their proofs, so the citation is accepted. The declared tool uses are generic and accepted. Cosmetic only: the report mentions a citations.json that is not in the commit."
  }
 }
