@@ -110,6 +110,55 @@ theorem composite_relative_tensor_action
         (π (J.obj M) N₁ ⊗ₘ 𝟙 N₂) ≫ π (J.obj M ⊗ P.obj N₁) N₂ ≫
           R.map ((δ M (P.obj N₁) ⊗ₘ 𝟙 (P.obj N₂)) ≫
             δ (M ⊗ Q.obj (P.obj N₁)) (P.obj N₂))) := by
-  sorry
+  have factor (M : C) (N T : E) :
+      (compositeRelativeTensorAction P Q J R π δ M N ⊗ₘ 𝟙 T) ≫
+          compositeRelativeTensorAction P Q J R π δ (M ⊗ Q.obj (P.obj N)) T =
+        (π (J.obj M) N ⊗ₘ 𝟙 T) ≫ π (J.obj M ⊗ P.obj N) T ≫
+          R.map ((δ M (P.obj N) ⊗ₘ 𝟙 (P.obj T)) ≫
+            δ (M ⊗ Q.obj (P.obj N)) (P.obj T)) := by
+    have hn := hπ _ _ T T (δ M (P.obj N)) (𝟙 T)
+    simp only [P.map_id] at hn
+    simp only [compositeRelativeTensorAction, tensorHom_id, comp_whiskerRight,
+      Functor.map_comp, Category.assoc]
+    simpa only [tensorHom_id, Category.assoc] using
+      congrArg (fun f ↦ (π (J.obj M) N ⊗ₘ 𝟙 T) ≫ f ≫
+        R.map (δ (M ⊗ Q.obj (P.obj N)) (P.obj T))) hn
+  refine ⟨?_, ?_, factor⟩
+  · intro M M' N N' a b
+    dsimp only [compositeRelativeTensorAction]
+    rw [← Category.assoc, hπ, Category.assoc, ← R.map_comp, hδ, R.map_comp]
+    simp only [Category.assoc]
+  · intro M N T
+    rw [factor]
+    let X := P.obj N
+    let Y := P.obj T
+    let V := P.obj (N ⊗ T)
+    let u : V ⟶ X ⊗ Y := (p.μIso N T).inv
+    let c : M ⊗ Q.obj (X ⊗ Y) ⟶ (M ⊗ Q.obj X) ⊗ Q.obj Y :=
+      (𝟙 M ⊗ₘ (q.μIso X Y).inv) ≫ (α_ M (Q.obj X) (Q.obj Y)).inv
+    have hd : δ M (X ⊗ Y) ≫ J.map c =
+        (α_ (J.obj M) X Y).inv ≫
+          (δ M X ⊗ₘ 𝟙 Y) ≫ δ (M ⊗ Q.obj X) Y := by
+      rw [← hδ_action]
+      simp only [Iso.inv_hom_id_assoc]
+      rfl
+    have hn := hδ M M V (X ⊗ Y) (𝟙 M) u
+    simp only [J.map_id] at hn
+    have inner : δ M V ≫ J.map
+        ((𝟙 M ⊗ₘ (Q.map u ≫ (q.μIso X Y).inv)) ≫
+          (α_ M (Q.obj X) (Q.obj Y)).inv) =
+        ((𝟙 (J.obj M) ⊗ₘ u) ≫ (α_ (J.obj M) X Y).inv) ≫
+          (δ M X ⊗ₘ 𝟙 Y) ≫ δ (M ⊗ Q.obj X) Y := by
+      have split :
+          ((𝟙 M ⊗ₘ (Q.map u ≫ (q.μIso X Y).inv)) ≫
+            (α_ M (Q.obj X) (Q.obj Y)).inv) = (𝟙 M ⊗ₘ Q.map u) ≫ c := by
+        simp only [c, id_tensorHom, whiskerLeft_comp, Category.assoc]
+      rw [split, J.map_comp, ← Category.assoc, ← hn, Category.assoc, hd]
+      simp only [Category.assoc]
+    rw [← Category.assoc (π (J.obj M) N ⊗ₘ 𝟙 T), ← hπ_action]
+    simp only [compositeRelativeTensorAction, Category.assoc, ← R.map_comp]
+    simpa only [Category.assoc] using
+      congrArg (fun f ↦ (α_ (R.obj (J.obj M)) N T).hom ≫
+        π (J.obj M) (N ⊗ T) ≫ R.map f) inner
 
 end CategoryTheory
