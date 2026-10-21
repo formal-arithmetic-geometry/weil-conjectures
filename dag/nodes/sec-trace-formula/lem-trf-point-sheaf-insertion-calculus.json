@@ -17,9 +17,109 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $r\\geq1$ and put $f=h^r$. Since $f$ is an isomorphism, [lem-weil-iso-weakly-etale] makes $(s,f)$ an object of $s_{\\mathrm{proet}}$. Apply clauses (1) and (2) of [lem-sfb-proetale-object-inverse-image-restriction] with $X=W=s$ and $W\\to X=f$. Write $P_r=f^{-1}$ on underlying abelian sheaves. It gives a natural isomorphism $p_{r,F}:R_rF\\xrightarrow{\\sim}P_rF$ of abelian sheaves: at $(U,u)$ it sends $x\\in F(U,fu)$ to the coprojection indexed by $(U,fu)$ with graph $(u,\\mathrm{id}_U)$, followed by sheafification. This also applies to ring sheaves and their module actions. The same lemma identifies $R_rA_s\\to P_rA_s\\xrightarrow{c^f_A}A_s$ with the constant-section-preserving restriction comparison. Thus the scalar transport on $R_rF$ in the statement is exactly the one belonging to this $p_{r,F}$. The isomorphisms are natural both in $F$ and in all restriction maps; no evaluation-exactness or constructibility hypothesis is needed.",
+   "uses": [
+    "lem-weil-iso-weakly-etale",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; its graph-index restriction specialization"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-proetale-constant-ring-map], the specified $c^f_A:P_rA_s\\to A_s$ is an isomorphism, not a separately chosen coefficient identification. Apply [lem-weil-sheaf-scalar-extension-ring-iso] with $R=P_rA_s$, $S=A_s$ and $M=P_rF$. Its normalized comparison, followed by $p_{r,F}^{-1}$ from step 1, gives $e_{r,F}:H_rF\\xrightarrow{\\sim}R_rF$. Explicitly, on the sheafification image of a pure tensor $y\\otimes a$ it is $p_{r,F}^{-1}((c^f_A)^{-1}(a)y)$. The inverse, denoted $\\rho_{r,F}$, sends $x\\in R_rF(U)$ to the sheafification image of $p_{r,F}(x)\\otimes1$. The cited tensor comparison is natural and linear, so $e$ is natural in modules and site objects and is $A_s$-linear for the action in step 1. Substitution of $y=p_{r,F}(x)$ and $a=1$ proves precisely the requested graph-insertion normalization.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, and Tag 03EK, section-tensor-product; invertible-ring-map specialization"
+   }
+  },
+  {
+   "text": "Write $a_{1,m}:h^{-1}(h^m)^{-1}\\xrightarrow{\\sim}(h^{m+1})^{-1}$ for the adjunction-compatible sheaf compositor. The same-unit lemma [lem-trf-constant-coefficient-composition], with its $h=h$ and $k=h^m$, gives $c^{h^{m+1}}_A\\circ a_{1,m,A_s}=c^h_A\\circ h^{-1}(c^{h^m}_A)$; its displayed $\\alpha$ is $a_{1,m}^{-1}$. Hence the coefficients satisfy exactly the hypothesis of [lem-sf-proetale-tensor-composition-unit]. That theorem identifies the actual canonical module compositor $T_{m,F}$ with the explicit tensor comparison formed from $a_{1,m}$ and scalar multiplication. In particular nested scalar units go to the direct scalar unit, since its formula $(y\\otimes a)\\otimes b\\mapsto y\\otimes c^h_A(a)b$ sends $(y\\otimes1)\\otimes1$ to $y\\otimes1$. This fixes the orientation as $H_1H_m\\to H_{m+1}$, with no freedom to choose another isomorphism.",
+   "uses": [
+    "lem-trf-constant-coefficient-composition",
+    "lem-sf-proetale-tensor-composition-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites; normalized module comparison as in sites-modules.tex Tag 03D3"
+   }
+  },
+  {
+   "text": "At $(U,u)$ take $x\\in F(U,h^{m+1}u)$. First $R_1(\\rho_{m,F})$ inserts it at $(U,h^{m+1}u)$ with graph $(hu,\\mathrm{id}_U)$; then $\\rho_{1,H_mF}$ inserts the resulting section with graph $(u,\\mathrm{id}_U)$. The formula of [lem-trf-site-inverse-image-composition-generators], applied to the base-change functors $B_{h^m}$ followed by $B_h$, sends these nested abelian coprojections to their composite graph. In the iterated fibre product its three coordinates are $(u,hu,\\mathrm{id}_U)$; the canonical map to $s\\times_{s,h^{m+1}}U$ retains the first and last coordinates, so its graph is $(u,\\mathrm{id}_U)$, by [def-pc-fibre-product]. The tensor formula identified in step 3 by [lem-sf-proetale-tensor-composition-unit] sends both scalar units to the scalar unit. Therefore, for every such $x$,\n$$T_{m,F}\\circ\\rho_{1,H_mF}\\circ R_1(\\rho_{m,F})(x)=\\rho_{m+1,F}(x).$$\nThese are maps with source $R_1R_mF=R_{m+1}F$, so testing every section on every object proves equality of sheaf maps. Composing with the inverse isomorphisms gives $e_{m+1,F}\\circ T_{m,F}=R_1(e_{m,F})\\circ e_{1,H_mF}$. This argument does not assume arbitrary sections of a sheafification are single colimit representatives: its source sections are the actual $x\\in F(U,h^{m+1}u)$.",
+   "uses": [
+    "lem-trf-site-inverse-image-composition-generators",
+    "def-pc-fibre-product",
+    "lem-sf-proetale-tensor-composition-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites, on nested coprojections; sites-modules.tex Tag 03D3 for tensor units"
+   }
+  },
+  {
+   "text": "At the final object $(s,\\mathrm{id})$, $\\rho_{r,F}(s)$ is insertion at $(s,h^r)$ with graph $(\\mathrm{id}_s,\\mathrm{id}_s)$ followed by the tensor unit. Thus the definition of $j$ is exactly\n$$j_{r,F}=\\rho_{r,F}(s)\\circ\\operatorname{res}_{h^r}^F,$$\nwhich gives $e_{r,F}(s)j_{r,F}=\\operatorname{res}_{h^r}^F$. By [def-weil-sheaf-of-modules-category], restriction and a module morphism commute; restriction is $A$-linear through constant sections, since constants restrict to the same constants [def-weil-pbc-constant-sheaf]. Step 2 makes $\\rho(s)$ linear as well. For $v:F\\to G$, naturality of $\\rho$ and the restriction square give\n$$(H_rv)(s)j_{r,F}=\\rho_{r,G}(s)(R_rv)(s)\\operatorname{res}_{h^r}^F=\\rho_{r,G}(s)\\operatorname{res}_{h^r}^Gv(s)=j_{r,G}v(s).$$",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 06UM, section-pullback; explicit restriction/insertion formula and naturality"
+   }
+  },
+  {
+   "text": "To prove the composition law, apply the isomorphism $e_{m+1,F}(s)$ to its proposed right side. Step 4 followed by step 5 for the module $H_mF$ gives\n$$e_{m+1,F}(s)T_{m,F}(s)j_{1,H_mF}j_{m,F}=e_{m,F}(s,h)\\operatorname{res}^{H_mF}_{h}j_{m,F}.$$\nNaturality of $e_{m,F}$ in the site arrow $h:(s,h)\\to(s,\\mathrm{id})$ changes this to\n$$\\operatorname{res}^{R_mF}_{h}\\,e_{m,F}(s)j_{m,F}=\\operatorname{res}^{R_mF}_{h}\\operatorname{res}^{F}_{h^m}.$$\nThe first restriction here is $F$'s restriction along $h:(s,h^{m+1})\\to(s,h^m)$. Presheaf functoriality, part of [def-weil-sheaf-of-modules-category], identifies the composite with $\\operatorname{res}^F_{h^mh}=\\operatorname{res}^F_{h^{m+1}}=e_{m+1,F}(s)j_{m+1,F}$. Cancelling $e_{m+1,F}(s)$ proves the stated equality. All maps have source $F(s,\\mathrm{id})$ and target $(H_{m+1}F)(s,\\mathrm{id})$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 06UM, section-pullback; composition of restrictions under the normalized compositor"
+   }
+  },
+  {
+   "text": "Use cochain complexes and chain maps as defined in [def-weil-abstract-derived-category]. The natural comparison with $R_r$ from step 2 shows $H_r$ is additive: after conjugating by $e$, its action on a sum of maps is the sum of their restrictions. Hence $C(H_r)K$ is a complex. Apply step 5 with $v=d_K^i:K^i\\to K^{i+1}$; it gives\n$$(H_rd_K^i)(s)j_{r,K^i}=j_{r,K^{i+1}}d_K^i(s),$$\nexactly the chain-map equation for the degreewise $A$-linear maps $j_{r,K^i}$. Applying the same equality to each component of a chain map $K\\to L$ proves naturality on complexes. The naturality of $T_m$ in step 3 similarly makes its degreewise components a chain isomorphism. Finally step 6 in each degree is the required composition identity of chain maps, since chain maps are equal when all their components agree. No derived localization or boundedness argument is involved.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 06UM, section-pullback; agent degreewise extension using the definitions of complex and chain map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-site-inverse-image-composition-generators",
+  "lem-weil-iso-weakly-etale",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CE (lemma-localize-given-products), 03CB (lemma-composition-morphisms-sites), 06UM (section-pullback); sites-modules.tex Tags 03CZ and 03D3. Explicit graph-index specialization and degreewise argument by Q64, following the transport paragraph of blueprint lem-trf-frobenius-operator-compact-description."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +155,38 @@
    "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso",
    "date": "2026-10-21",
    "verdict": "no match: generic compositors and free-sheaf formulas do not give the normalized initial-index point-section insertion and its sheaf/chain-map calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of constant module sheaves along powers of an automorphism is restriction on the small proetale site, normalized on graph colimit insertions, and the normalized comparison respects pullback composition",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheaf pullback composition or free-sheaf comparisons do not state the automorphic pro-etale graph-index normalization, section cocycle and chain-map clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackObjFreeIso|conjugateEquiv_pullbackComp",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; directory Mathlib/Algebra/Category/ModuleCat/Sheaf (read PullbackContinuous.lean:167-182 and PullbackFree.lean:118-142)",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheaf pullback composition or free-sheaf comparisons do not state the automorphic pro-etale graph-index normalization, section cocycle and chain-map clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism from successive module sheaf pullback to pullback along the composite sends nested inverse image colimit coprojections with tensor units to the direct coprojection",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullback_comp_id, SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackIso, PresheafOfModules.pullback_id_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheaf pullback composition or free-sheaf comparisons do not state the automorphic pro-etale graph-index normalization, section cocycle and chain-map clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of small sites identifies the sheafified left Kan extension with precomposition by its inverse, and graph coprojections tensored with one give the comparison and a natural cocycle on global sections",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility, CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeSheafSheafComposeNatTransPlusPlusAdjunction, CategoryTheory.GrothendieckTopology.sheafToPresheaf_map_sheafComposeNatTrans_eq_sheafifyCompIso_inv, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.sheafComposeIso_hom_fac, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.sheafComposeIso_inv_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: general sheaf pullback composition or free-sheaf comparisons do not state the automorphic pro-etale graph-index normalization, section cocycle and chain-map clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-point-transport-composition",
@@ -78,5 +206,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-point-sheaf-insertion-calculus",
+  "worker": "stage1",
+  "summary": "Seven-step split with no new nodes: reuse normalized site-object restriction, invertible-ring scalar extension, constant-coefficient composition, and normalized sheaf/module compositors. Compute both graph coordinates, prove the point-section cocycle by a typed restriction calculation, then extend degreewise. The statement and its dependencies are unchanged; new Mathlib searches confirm only generic compositor/free-sheaf candidates, not a leaf for the whole item.",
+  "blueprint": "Realizes the paragraph beginning \"That action transports the pair\" in main-20261015 lem-trf-frobenius-operator-compact-description.proof.md, via point-transport-composition: Steps 1-2 give the normalized ordinary point-sheaf model; Steps 3-4 its pullback compositor; Steps 5-6 its section insertion naturality and composition; Step 7 the ordinary cochain version used before deriving.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic site-object restriction comparison, including the distinguished initial comma index, applies to h^r; no node of sk-d-weil supplies this local site computation."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic sheaf tensor comparison along an invertible ring map supplies the pure-tensor normalization, not a replacement for the unit transport route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical finite constant-ring structure map is invertible; a coefficient tool already required by the item statement."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Generic module-compositor tensor and adjunction normalization identifies the specific T_m; the unit has no theorem giving its local tensor formula."
+   },
+   {
+    "node": "lem-trf-site-inverse-image-composition-generators",
+    "why": "Generic inverse-image compositor on nested coprojections, needed to compute the two graph insertions; no sk-d-weil node supplies this colimit-level formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-trf-site-inverse-image-composition-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-2337ebdd6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-2337ebdd6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics holds. It is one commit with the item and the report, a first split with no new nodes and no repair note. The item is still unsplit in live and side-live, so it is not superseded, and it is not on the dropped list. The statement is byte-identical to live, including Q96's added sheafification citation. The 7 steps total 6311 characters and contain all of Q96's old parent Steps 2-5 with more detail. The dependency closure (275 nodes) does not reach the item, so there is no cycle. Step 1: lem-sfb-proetale-object-inverse-image-restriction (1)-(3) applies with X=W=s and r=h^r, since an isomorphism is weakly étale (Mathlib leaf). G|_W(U,u)=F(U,h^r u) is R_rF, and the initial index is (U,h^r u) with graph (u,id_U). Step 2: lem-weil-sheaf-scalar-extension-ring-iso applies with R=P_rA_s, S=A_s and c=c^{h^r}_A, which is invertible by prop-weil-pbc-proetale-constant-ring-map. Its inverse m↦η(m⊗1) gives the stated normalization. Step 3: lem-trf-constant-coefficient-composition with h and k=h^m gives exactly the definition of c_{kh} in lem-sf-proetale-tensor-composition-unit, because α=a^{-1} by uniqueness of the adjunction-compatible comparison. So that lemma's (kh)^* is H_{m+1}, and t_{h,k} is T_m in the direction H_1H_m→H_{m+1}. Step 4: I recomputed the nested graphs. ψ=(hu,id) into s×_{h^m}U and φ=(u,id) into s×_hU give u(ψ)φ=(u,hu,id_U). The q of def-pc-fibre-product sends this to (u,id_U), which is the index of ρ_{m+1}. The tensor formula sends (y⊗1)⊗1 to y⊗1. Equality is tested on every section x of the source, so no single-representative assumption is used. Steps 5-7 are elementary and I checked them with typed domains: e_r(s)j_r=res_{h^r}; then e_m(s,h)res_h=res^{R_mF}_h e_m(s), and res^F along (s,h^{m+1})→(s,h^m) composed with res_{h^m} is res_{h^{m+1}}; the chain-map clauses hold degreewise, with additivity coming through e. Edge cases checked: h=id, m=1, U empty, F=0 and F=A_s. Stacks tags 03CE, 03CB, 06UM, 03CZ and 03D3 were checked against tags/tags and sites.tex:6094. No SGA is cited. Not duplicates: lem-weil-frobenius-point-transport-natural (r=1 only), lem-trf-point-system-power-roos-coherence (integral systems) and lem-trf-integral-point-transport-tower-powers (integral towers). I accept all five declared tool_uses as generic sheaf, site and coefficient black boxes. Advisory: the statement's 'canonical compositor' T_m names no node, but Step 3 pins it to the unique adjunction-compatible comparison of lem-sf-proetale-tensor-composition-unit. No changes."
  }
 }
