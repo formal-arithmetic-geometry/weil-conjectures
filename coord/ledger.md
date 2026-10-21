@@ -19896,3 +19896,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:40 L: merged deliver/NE/lemma-weil-pbc-perfect-projection-formula (reviewer FIX; after a return; new nodes: 2)
 - 03:40 L: merged deliver/Q23/lem-sfb-dc-lower-star-preserves (reviewer FIX; after a return; new nodes: 6)
 - 03:40 L: merged deliver/Q89/lem-sfb-constant-field-tor-bounds (reviewer FIX; first push; new nodes: 0); claim not held by Q89: not your claim
+- 03:40 L: merged deliver/Q84/lem-sfb-subfield-flat (reviewer FIX; after a return; new nodes: 1)

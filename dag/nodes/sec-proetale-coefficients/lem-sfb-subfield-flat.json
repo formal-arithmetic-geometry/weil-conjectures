@@ -71,14 +71,16 @@
    }
   },
   {
-   "text": "For a finite diagram $D:J\\to\\operatorname{Mod}_R$ with limit $L$, steps 3-4 identify the restricted canonical limit comparison with $L^n\\to\\lim_j(D_j^n)$. By [lem-weil-pbc-module-sheaves-limits-sectionwise], on sections its inverse just reorders the indices of a compatible family $(x_{i,j})$; each arrow imposes the same coordinate equations. This includes the empty diagram, whose limit is zero. The comparison $a$ is $B$-linear and bijective on sections. Its inverse is $B$-linear since $a(b\\,a^{-1}y)=b\\,y=a(a^{-1}(by))$ and $a$ is injective. The sectionwise inverse commutes with restrictions by uniqueness. Thus $a$ is an isomorphism of internal $B$-modules under the equivalence of step 3, proving preservation of finite limits.",
+   "text": "Apply [lem-sfb-scalar-coordinate-limit-criterion] on the small pro-etale site of $X$, with the sheafified tensor of [sk-def-sfb-sheaf-tensor], the scalar map $\\varphi:E_X\\to F_X$, and $T=F_X\\otimes_{E_X}-$ of [sk-def-sfb-change-of-scalars]. Step 4 supplies its required natural isomorphism $\\operatorname{Res}_\\varphi T\\cong(-)^n$. The criterion therefore makes $T$ preserve every finite limit, including the empty one. This is the asserted flatness.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+    "lem-sfb-scalar-coordinate-limit-criterion",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Assembly of the finite-basis proof"
+    "place": "Final sentence: finite direct sums are exact; internal-module limit comparison following the natural tensor-coordinate isomorphism"
    }
   }
  ],
@@ -87,19 +89,20 @@
   "sk-def-sfb-pullback-from-point",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-sfb-preserving-colimits-additive",
+  "sk-def-sfb-sheaf-tensor",
   "lem-sfb-monoidal-finite-free-transport",
   "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-subfield-coefficient-map",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-def-sfb-sheaf-tensor",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "sk-def-sfb-change-of-scalars",
-  "lem-sfb-finite-free-scalar-coordinates"
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-scalar-coordinate-limit-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "Original finite-basis route; short assembly through condensed basis, additive monoidal transport, internal/sectionwise equivalence, and natural tensor coordinates"
+  "place": "Finite-basis route, retaining the existing condensed-basis, additive monoidal transport and tensor-coordinate nodes; the last limit inference is factored into the scalar-coordinate limit criterion"
  },
  "mathlib_searches": [
   {
@@ -177,22 +180,22 @@
   "date": "2026-10-21",
   "item": "lem-sfb-subfield-flat",
   "worker": "stage1",
-  "summary": "Repair of the 2026-10-21 coarse-split return. Statement and Lean record unchanged. Extracted three strictly smaller arguments: condensed finite-field basis, additive monoidal finite-free transport, and natural tensor coordinates. Replaced the inline internal/sectionwise module identification by the existing equivalence node. Retained the explicit elementary comparison of finite-coordinate limits. New nodes are statement-only unsplit nodes as required by stage-1 delivery; complete short proofs in words are supplied in report.md.",
-  "blueprint": "First two sentences are realized by lem-sfb-condensed-subfield-basis; the third by lem-sfb-monoidal-finite-free-transport; the tensor assertion in the last sentence by lem-sfb-finite-free-scalar-coordinates; the last finite-limit inference is the explicit coordinate comparison in step 5. The unit finite-free route is unchanged.",
+  "summary": "Further re-split of the current live proof under the explicit human 2026-10-21 instruction. Retained all three existing Q43 statement-only nodes and their applications. Extracted the remaining internal-module finite-limit comparison into one strictly smaller, functorial scalar-coordinate criterion, statement-only and unsplit. The item statement, statement dependencies, Lean records and previous metadata are unchanged; the complete coordinate and inverse-linearity argument is recorded in report.md for the new worker. The five-step assembly has fewer than 3000 characters.",
+  "blueprint": "The point-basis sentence is realized by lem-sfb-condensed-subfield-basis; additive pullback and finite-free transport by lem-sfb-monoidal-finite-free-transport; the natural tensor-power isomorphism by lem-sfb-finite-free-scalar-coordinates; the last finite-direct-sum exactness inference by the new lem-sfb-scalar-coordinate-limit-criterion. The internal/sectionwise bridge and sectionwise limits in step 3 are retained.",
   "tool_uses": [
    {
     "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "why": "Generic equivalence between internal modules in tensor abelian sheaves and sectionwise module sheaves, needed to use sectionwise limits; no node of this unit states this equivalence."
+    "why": "The generic internal/sectionwise equivalence preserves underlying sheaves and section groups identically, so sectionwise module limits apply to the internal coefficient modules. No node of this unit states that encoding equivalence."
    }
   ]
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q43-d6e99aca1",
-  "group": "Q43",
+  "reviewer": "NT-cc-Q84-6ce78c842",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-d6e99aca1 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the blueprint main-20261015 lem-sfb-subfield-flat .md/.proof.md and the unit sk-prop-sfb-cartesian-coefficients step (2). This is a legitimate re-split: the human's repair note of 2026-10-21 released the reviewed 6-step, 5664-character proof for a finer split. The item is not in route-pivot-dropped, and no parallel node exists on live or side. Only split-owned fields changed. The statement, stmt_deps, lean and blueprint fields are unchanged. Steps: (1) basis existence plus the new condensed-basis node; (2) p_X^* is a strong monoidal left adjoint, additive via the Mathlib leaves 0038 and rightExactFunctor_le_additiveFunctor, and the transported ring and module are exactly Res_{ι_X} F_X over E_X; (3) the internal-to-sectionwise equivalence, whose site-smallness and monoidal-sheafification hypotheses come from sk-def-sfb-sheaf-tensor, plus the sectionwise-limits leaf, and Res preserves limits; (4) the new tensor-coordinates node with R=E_X, B=F_X; (5) an elementary reorder of the coordinate limits with a B-linear inverse. All three new nodes are true, strictly smaller than the item, not duplicates (checked against det-prop-sfb-cartesian-coefficients-finite-free, which would be circular, lem-pur-constant-finite-free-power-iso, lem-weil-pbc-condensed-finite-free-tensor-exact, condensed-flat-coefficient-calculus and def-sfb-modobj-transport), statement-only, and searched three ways. They were tested on E=F, E=Q_ℓ, n=0, the zero module, X empty and the empty diagram. The coordinate homeomorphism uses completeness of Q_ℓ only. The closure is acyclic. FIX: step 2 applied lem-sfb-monoidal-finite-free-transport without checking its finite-biproduct and tensor-additive-in-each-variable hypotheses. I added that both sheaf categories are abelian and that A⊗− and −⊗A preserve colimits by sk-def-sfb-sheaf-tensor 2, hence are additive by lem-sfb-preserving-colimits-additive; sk-def-sfb-sheaf-tensor is added to the step's uses. Accepted tool use: def-weil-pbc-internal-abelian-sheaf-module-equivalence. No SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-6ce78c842 (reviewer sub-agent of L); spot-checked: The delivery is a legitimate continuation of the human's re-split note (2026-10-21, reopened). Base 18a6496 already carries the landed Q43 split. Field diff against the Q43 fixed item: the statement, stmt_deps, lean, source and blueprint fields are unchanged, and steps 1–4 are byte-identical, so Q43's step-2 hypothesis FIX survives. Only step 5 changed: the old elementary coordinate-limit argument is now the new node lem-sfb-scalar-coordinate-limit-criterion. The route matches blueprint main-20261015 lem-sfb-subfield-flat.proof.md (E-basis, then additive monoidal p_X^*, then F_X⊗M≅M^n, then finite sums exact). No SGA is used, and the coefficient category and scalar map are internal Mod_{E_X} with def-sfb-subfield-coefficient-map. Step 5 instantiates the criterion with φ=E_X→F_X, T=Ext_φ and α from step 4 (lem-sfb-finite-free-scalar-coordinates, whose (−)^n is the node's P_n). The site and monoidal-sheafification hypotheses are those of sk-def-sfb-sheaf-tensor, already checked in step 3. The new node is true: Res_φ is the identity on underlying objects, so it is conservative and preserves the limits that exist sectionwise in Mod_B, hence it reflects them, and Res∘T≅P_n preserves finite limits. I tested n=0 (T is zero-valued, still a limit), J empty, n=1, products and equalizers; naturality is correctly required. It is statement-only, self-contained and strictly smaller than the item. It is not a duplicate: rg found only lem-sfb-finite-exactness-nat-iso (transfer along F≅G) and lem-sfb-extend-scalars-preserves-homology (converse direction); det-prop-sfb-cartesian-coefficients-finite-free would be circular. There is no cycle and the assembly is 2161 characters. FIX (B3): the new node said 'commutative ring objects' without citing their definition, so I added [sk-def-sfb-ring-object] and the ambient Sh(C,Ab) in the statement and in stmt_deps. Advisory: step 3's sectionwise-limit facts are now used only through the new node. Accepted tool use: def-weil-pbc-internal-abelian-sheaf-module-equivalence.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
