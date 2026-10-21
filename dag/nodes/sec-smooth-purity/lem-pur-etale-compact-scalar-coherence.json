@@ -53,13 +53,12 @@
    }
   },
   {
-   "text": "Choose a K-flat resolution $P\\to M$ with flat terms. Step 2 and derived change of rings compute $Q_Tj_{!,A}M$ by $(j_{!,A}P)\\otimes_A A'$. The balancing map gives an isomorphism of $A'$-module complexes\n$$(j_{!,A}P)\\otimes_A A'\\cong j_{!,A'}(P\\otimes_A A').$$\nIt is $A′$-linear because multiplication by $b′$ carries $m\\otimes a′$ to $m\\otimes a′b′$ on both sides. It is induced before sheafification by the identity on the summand over an object factoring through $U$, and the unique zero map otherwise. Thus it is precisely the open scalar map $\\beta_j$ specified in the statement. Its inverse has open-adjunction transpose $\\lambda_j^{-1}Q_U(\\eta_{j,A})$: restriction of the displayed map to $U$ is the scalar tensor identity and the open unit is the identity there. The open unit is invertible, since restricting the defining presheaf and its sheafification back to $U$ recovers $P$. The unbounded derived open adjunction in the cited locality node therefore determines this inverse uniquely. K-flat computation and its canonical resolution identifications make $\\beta_j$ natural in every unbounded $M$.",
+   "text": "For the open normalization there is a shorter adjunction argument, implemented in compactScalarOpen_normalization. Transport the exact open adjunctions to left-derived pullback using leftDerivedUpperStarIsoMapDerivedCategory. The published ExceptionalCoefficients.openIso is the conjugate under the composite open/scalar adjunctions. Apply iterated_mateEquiv_conjugateEquiv_symm: its inverse is the open mate of the inverse scalar-restriction mate. The proved private scalarPullback_eq of lem-sfb-etale-proetale-scalar-mate identifies this inner mate with scalarPullbackIso.inv. Apply unit_mateEquiv_symm and transport back to exact pullback. Naturality of the exact-pullback comparison and cancellation of its inverse and forward components identify the transpose with properOpenCoefficientOpenInverse. Injectivity of the open adjunction Hom equivalence proves the required equality on every unbounded input, without a fresh K-flat calculation.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-pbc-extension-by-zero",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-amb-etale-adjoint-locality"
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-pur-exceptional-coefficient-comparison",
+    "def-pur-open-coefficient-normalizations",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
@@ -68,7 +67,7 @@
    }
   },
   {
-   "text": "On the fixed compactification put $\\chi_p=\\beta_p$ of [lem-asd-proper-finite-coefficient-extension]. It is an isomorphism on every derived input, normalized as the transpose of $Q(\\varepsilon_{p,A})\\lambda_p$. Step 3 gives an isomorphism $\\beta_j$. Hence\n$$q_f=Rp_{*,A'}(\\beta_j)\\circ\\chi_p(j_{!,A}(-))$$\nis a natural isomorphism on the entire category, with exactly the specified normalization. The ambient compactification is Noetherian because its proper map to $Y$ is finite type and $Y$ is Noetherian. Open subschemes used below are Noetherian as well, by the cited open-subscheme result. Thus the geometric hypotheses of the proper coefficient comparison hold here and on every restricted compactification.",
+   "text": "On the fixed compactification put $\\chi_p=\\beta_p$ of [lem-asd-proper-finite-coefficient-extension]. It is an isomorphism on every derived input, normalized as the transpose of $Q(\\varepsilon_{p,A})\\lambda_p$. Step 3 gives an isomorphism $\\beta_j$. Hence\n$$q_f=Rp_{*,A'}(\\beta_j)\\circ\\chi_p(j_{!,A}(-))$$\nis a natural isomorphism on the entire category, with exactly the specified normalization. The ambient compactification is Noetherian because its proper map to $Y$ is finite type and $Y$ is Noetherian. Open subschemes used below are Noetherian as well, by the cited open-subscheme result. Thus the geometric hypotheses of the proper coefficient comparison hold here and on every restricted compactification. Naturality is implemented separately as compactScalarMap_naturality: use scalarMate.naturality on the open-extension image of a morphism, then openIso.hom.naturality, and combine the latter maps using proper direct-image functoriality.",
    "uses": [
     "lem-asd-proper-finite-coefficient-extension",
     "lem-weil-pbc-finite-type-over-noetherian",
@@ -213,6 +212,7 @@
  "proof_deps": [
   "def-kun-projection-formula-map",
   "def-kun-unbounded-exchange",
+  "def-pur-open-coefficient-normalizations",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-extension-by-zero",
   "lem-amb-etale-adjoint-locality",
@@ -222,9 +222,10 @@
   "lem-cbc-extension-zero-base-change",
   "lem-cbc-extension-zero-composition",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-pur-etale-open-derived-tensor",
+  "lem-pur-exceptional-coefficient-comparison",
   "lem-sf-proper-open-coefficient-refinement",
+  "lem-sfb-etale-proetale-scalar-mate",
   "lem-sp-proper-open-coefficient-mate",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
@@ -243,7 +244,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; explicit coherence proof using Tags 0F7I, 0F7J, 0F7L and sites-cohomology.tex Tags 0GL1, 0E48, 0E46, 0E47"
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; explicit coherence proof using Tags 0F7I, 0F7J, 0F7L and sites-cohomology.tex Tags 0GL1, 0E48, 0E46, 0E47; M1 partial stage-3 proof: open normalization by the iterated-mate identity and the existing normalized inverse-mate identification, plus naturality by pasting; other coherence steps remain the original plan"
  },
  "mathlib_searches": [
   {
@@ -509,5 +510,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The listed declarations state the full package: canonical open-unit normalization, natural scalar map on each compactification, all-input isomorphism and ordered projection coherence, bounded-below-pair refinement and composition, all-input open restriction, and multiplication-unit coherence. The scalar tensor, scalar unit and componentwise compact-support map reuse the already published canonical helpers of ExceptionalCoefficients, not its exceptional-pullback comparison theorem. The new definition node def-pur-open-coefficient-normalizations records precisely the two plain proper/open helper definitions used by the statement. The refinement theorem stays only in proof_deps. The landed exceptional coefficient node remains a genuine statement dependency because tensorIso and unitIso are selected from its uniquely normalized existence theorems; its exceptional-pullback comparison is not assumed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T021917-L-2792072",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
