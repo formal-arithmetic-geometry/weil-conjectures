@@ -3,17 +3,22 @@
  "blueprint": {
   "is": "def-kun-separably-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Separably closed fields",
- "statement": "A field $K$ is *separably closed* if it admits no nontrivial\nfinite separable extension. A *separable closure* of a field\n$K$ is a separable algebraic extension $K^{\\mathrm{sep}}/K$ whose\ntop field is separably closed.",
+ "statement": "A field $K$ [def-weil-field] is *separably closed* if every separable polynomial [def-pc-separable-polynomial] over $K$ [def-weil-polynomial-ring] splits over $K$ (equivalently, $K$ admits no nontrivial finite separable field extension [def-pc-field-tower]). Here splitting means that the polynomial is a nonzero constant times a finite product of linear factors $T-a$ with $a\\in K$, allowing an empty product. A *separable closure* of a field $K$ is a field extension $K^{\\mathrm{sep}}/K$ [def-pc-field-extension] which is separable algebraic [def-weil-pbc-separable-algebraic-extension] and whose top field is separably closed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/def-kun-separably-closed.md",
   "place": "node def-kun-separably-closed, order 989"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-field",
+  "def-pc-separable-polynomial",
+  "def-weil-polynomial-ring",
+  "def-pc-field-tower",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
  ],
  "proof": [],
  "proof_deps": [],
@@ -26,10 +31,64 @@
     "Mathlib.FieldTheory.IsSepClosed:66 (class)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separably closed field is a field in which every separable polynomial splits; a separable closure is a separable algebraic extension whose top field is separably closed",
+   "results": "SeparableClosure.isSepClosed, isSepClosure_iff, IsSepClosure.sep_closed, IsSepClosed, SeparableClosure, IsSepClosure, separableClosure.isSepClosure, IsSepClosure.self_of_isSepClosed",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsSepClosed|class IsSepClosure|isAlgebraic|algebraMap_bijective",
+   "results": "48, 66, 211, 227, 240; verified in the local source: Mathlib/FieldTheory/IsSepClosed.lean:66-67 IsSepClosed, :227-229 IsSepClosure, :258-260 isSepClosure_iff; Mathlib/FieldTheory/Separable.lean:570-572 Algebra.IsSeparable.isAlgebraic; single-file grep output misparses the line numbers as file names; the subsequent directory grep supplies the correct file/line pairs",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separable closure of a field is a separable extension with separably closed top field",
+   "results": "separableClosure.isSepClosure, IsSepClosure.recOn, SeparableClosure.isSepClosed, separableClosure, IsSepClosure.mk, IsSepClosure, isSepClosure_iff, SeparableClosure",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, IsSepClosure",
+   "results": "IsSepClosure.self_of_isSepClosed, IsSepClosure.sep_closed, IsSepClosure.mk, isSepClosure_iff, separableClosure.isSepClosure",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsSepClosed|class IsSepClosure|isSepClosure_iff|algebraMap_bijective|separable.isAlgebraic",
+   "results": "Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean; verified in the local source: Mathlib/FieldTheory/IsSepClosed.lean:66-67 IsSepClosed, :227-229 IsSepClosure, :258-260 isSepClosure_iff; Mathlib/FieldTheory/Separable.lean:570-572 Algebra.IsSeparable.isAlgebraic",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The predicate IsSepClosed says every separable polynomial splits and IsSepClosure k K means IsSepClosed K and Algebra.IsSeparable k K",
+   "results": "isSepClosure_iff, IsSepClosure.sep_closed, IsSepClosure, IsSepClosure.isSeparable, IsSepClosure.separable, IsSepClosed, SeparableClosure.isSepClosed, IsSepClosure.self_of_isSepClosed",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
+  },
+  {
+   "tool": "grep",
+   "query": "isSepClosed_iff|class IsSepClosed|class IsSepClosure|isSepClosure_iff",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/IsSepClosed.lean; verified in the local source: Mathlib/FieldTheory/IsSepClosed.lean:66-67 IsSepClosed, :227-229 IsSepClosure, :258-260 isSepClosure_iff; Mathlib/FieldTheory/Separable.lean:570-572 Algebra.IsSeparable.isAlgebraic",
+   "date": "2026-10-21",
+   "verdict": "match: IsSepClosed and IsSepClosure; definitions checked in pinned local source"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "IsSepClosed, IsSepClosure",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "line": 66,
+  "how": "One declaration per definition: IsSepClosed (lines 66-67) is exactly the current blueprint's polynomial-splitting definition; IsSepClosure (lines 227-229) is a separably closed top field together with Algebra.IsSeparable for the extension (also isSepClosure_iff, lines 258-260). Algebra.IsSeparable.isAlgebraic (Mathlib/FieldTheory/Separable.lean:570-572) supplies the redundant algebraicity condition automatically for fields. The finite-extension formulation is the equivalent characterization already recorded in the blueprint, not an additional definition or existence assertion; IsSepClosed.algebraMap_bijective (lines 211-213) gives triviality of any separable extension. The project theorem IsSepClosed.iff_forall_finrank_eq_one (WeilConjectures/Mathlib/FieldTheory/IsSepClosed.lean) independently proves the stated equivalence; it does not cover the separable-closure definition and is not an attachment for the entire item."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -87,5 +146,20 @@
   "statement": "A field $K$ is *separably closed* if every separable polynomial\nover $K$ splits over $K$ (equivalently, $K$ admits no nontrivial\nfinite separable extension). A *separable closure* of a field\n$K$ is a separable algebraic extension $K^{\\mathrm{sep}}/K$ whose\ntop field is separably closed.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-kun-separably-closed",
+  "worker": "stage1",
+  "summary": "Followed blueprint_update/main-20261015: made the polynomial-splitting formulation primary and retained the equivalent finite-extension formulation and the separable-closure clause. Both notions are existing Mathlib definitions, IsSepClosed and IsSepClosure; no new node or Lean code is needed. Replaced the unused scheme-conventions dependency by the actual field, polynomial, separability, and extension notions. Read local declarations and logged all current searches. Related Picard definitions cover only parts or add other assertions, so are not duplicates of this whole item.",
+  "blueprint": "Current blueprint sec-proetale-coefficients/sk-prop-sf-comparison/def-kun-separably-closed.md, statement first sentence (IsSepClosed) and second sentence (IsSepClosure). This is a definition with no proof steps; the imported source/chapter/unit and all blueprint_update metadata are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-dd6de3a59",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-dd6de3a59 (reviewer sub-agent of L); spot-checked: I read the whole item and accept it as a Mathlib leaf with 0 new nodes. Context: the item is not in route-pivot-dropped (live or side-live) and has no repair note, so it is not a re-split. The live node is still imported, so no other group has superseded it. Statement: it follows blueprint_update main-20261015 (sec-proetale-coefficients/sk-prop-sf-comparison, order 997) word for word: every separable polynomial splits, equivalently no nontrivial finite separable extension; a separable closure is a separable algebraic extension with separably closed top field. It adds one correct sentence: splitting means a nonzero constant times a possibly empty product of linear factors. Nothing is weakened. Small cases I tested: a nonzero constant is separable and splits as an empty product; 0 is not separable; F_q fails via T^q-T-1; separable closure differs from algebraic closure for imperfect k. Mathlib match: IsSepClosed at Mathlib/FieldTheory/IsSepClosed.lean:66-67. Polynomial.Separable = IsCoprime f f' (Separable.lean:44-45), the same as def-pc-separable-polynomial. IsSepClosure at :227-229 and isSepClosure_iff at :258-260. Algebra.IsSeparable plus the .isAlgebraic instance (Separable.lean:548-572) give exactly separable algebraic. All quoted line numbers are correct. The equivalence remark is proved in the project by IsSepClosed.iff_forall_finrank_eq_one (WeilConjectures/Mathlib/FieldTheory/IsSepClosed.lean:131). I read all six stmt_deps; they cover every notion and none is spurious. Dropping the unused def-weil-pbc-scheme-conventions is correct, and it is kept in uses_not_cited. No SGA, no proof steps, and the Lean and reviewed_lean records are unchanged. Maintainer notes: the first clause duplicates def-pc-separably-closed (root form), a pre-existing blueprint duplication; a same_as/merge could be considered later. The report carries about 30 retry sections from the external proof_deps defect in lem-kun-proper-torsion-cd-bound, which is now resolved."
  }
 }
