@@ -1,366 +1,358 @@
 {
-  "id": "lem-sfb-derived-internal-hom-sections-model",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "det-lem-int-ext-formula",
-      "place": "Proof (2), first displayed chain and the sentence '$R\\operatorname{Hom}_S(L,-)=R\\Gamma(S,\\cHom(L,-))$': identification of global derived Hom with sections of the derived internal Hom, used for the two adjunction isomorphisms.",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sfb-derived-internal-hom-sections-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-formula",
+   "place": "Proof (2), first displayed chain and the sentence '$R\\operatorname{Hom}_S(L,-)=R\\Gamma(S,\\cHom(L,-))$': identification of global derived Hom with sections of the derived internal Hom, used for the two adjunction isomorphisms.",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Derived internal Hom into a K-injective and its derived global sections",
-  "statement": "Let $\\mathcal C$ be a site that is small in the sense of [def-weil-size-convention] and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Use the category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], its unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category], Hom complexes $\\mathcal Hom^\\bullet$ [def-pur-hom-complex], and K-flat and K-injective complexes [def-pc-kflat-complex, def-pur-kinjective-complex]. The derived tensor product $K\\otimes^{\\mathbf L}_{\\mathcal O}N$ is represented by $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal N^\\bullet)$ [def-pc-tensor-complex-sheaves] for a K-flat complex $\\mathcal P^\\bullet$ representing $K$ and any complex $\\mathcal N^\\bullet$ representing $N$. Fix $K\\in D(\\mathcal O)$ and let $H_K:D(\\mathcal O)\\to D(\\mathcal O)$ be any right adjoint of $K\\otimes^{\\mathbf L}_{\\mathcal O}-$ . Let $\\mathcal A^\\bullet$ be any complex of $\\mathcal O$-modules representing $K$, and let $\\mathcal J^\\bullet$ be a K-injective complex representing $M\\in D(\\mathcal O)$. Then:\n\n1. There is an isomorphism $H_K(M)\\cong\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)$ in $D(\\mathcal O)$, natural with respect to morphisms of K-injective complexes $\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$.\n2. The derived global sections $R\\Gamma(\\mathcal C,H_K(M))$ [def-pur-ringed-site-zeroth-hypercohomology] are represented, in the derived category of abelian groups [def-weil-abstract-derived-category], by the complex of global morphisms $\\operatorname{Hom}^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)=\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet))$, whose degree-$n$ term is $\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$, naturally with respect to morphisms of complexes $\\mathcal A'^\\bullet\\to\\mathcal A^\\bullet$ and of K-injective complexes $\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$. In particular $H^n R\\Gamma(\\mathcal C,H_K(M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,M[n])$ for every integer $n$.\n\nNo boundedness of $K$ or $M$ and no flatness of $\\mathcal A^\\bullet$ is assumed.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 'Internal hom in the derived category' (Tag 08J7, label section-internal-hom): the construction $R\\mathcal Hom(L,M)=\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)$ with equation-internal-hom and Yoneda; Lemma 08JA (lemma-section-RHom-over-U); Lemma 08J9 (lemma-internal-hom); Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective)."
-  },
-  "stmt_deps": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "def-pur-hom-complex",
-    "def-pc-kflat-complex",
-    "def-pur-kinjective-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-ringed-site-zeroth-hypercohomology",
-    "def-weil-size-convention",
-    "def-pur-derived-internal-hom"
-  ],
-  "proof": [
-    {
-      "text": "For tensorRightAdjoint_iso, use the existing ringed-site closed symmetric monoidal derived structure (lem-sf-ringed-derived-closed-symmetric-monoidal). Choose a K-flat resolution P of a representative L of K by lem-pc-kflat-resolution, and localize its augmentation to obtain QP ≅ K. The hypothesis model identifies Q ⋙ T with Tot(P tensor -) ⋙ Q. The closed structure's one-K-flat tensor comparison h.tensorIso, with h.tensorIso_naturality applied to (identity P,f), gives a natural isomorphism from that functor to Q ⋙ tensorLeft(QP). Transport through QP ≅ K. Fully faithful whiskering with the derived localization lifts the natural isomorphism to T ≅ tensorLeft(K). Compose with the symmetry tensorLeft(K) ≅ tensorRight(K). Uniqueness of right adjoints for the given adjunction and S.adjunction K gives H ≅ internalHom(K,-). All steps are implemented in Lean. The second theorem remains sorry with the representative and derived-sections argument in the original steps below.",
-      "uses": [
-        "lem-sf-ringed-derived-closed-symmetric-monoidal",
-        "lem-pc-kflat-resolution",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Section 08J7, Lemma 08J9; existing closed symmetric monoidal theorem, Tags 0FPT and 08J9."
-      }
-    },
-    {
-      "text": "Choose a K-flat resolution $r:\\mathcal P^\\bullet\\to\\mathcal A^\\bullet$ by [lem-pc-kflat-resolution]. Put $B_{\\mathcal A}=\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)$ and $C=\\mathcal Hom^\\bullet(\\mathcal P^\\bullet,\\mathcal J^\\bullet)$. By [lem-pur-rhom-well-defined], applied to $r$ and the identity of the K-injective $\\mathcal J^\\bullet$, precomposition gives a quasi-isomorphism $r^*:B_{\\mathcal A}\\to C$. By [lem-pur-hom-kflat-into-kinjective], $C$ is K-injective. The definition [def-pur-derived-internal-hom] therefore represents its functor $R\\mathcal Hom(K,M)$ by either $B_{\\mathcal A}$ or $C$, with the canonical comparison just described, functorial in chain maps of the representatives. The hypotheses here are precisely a small ringed site, a K-flat source resolution, and a K-injective target; $\\mathcal A^\\bullet$ itself need not be flat.",
-      "uses": [
-        "lem-pc-kflat-resolution",
-        "lem-pur-rhom-well-defined",
-        "lem-pur-hom-kflat-into-kinjective",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 06YS (lemma-K-flat-resolution), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective); Section 08J7 (section-internal-hom)"
-      }
-    },
-    {
-      "text": "We need ordinary global sections of $B_{\\mathcal A}$ to compute its derived sections, even though $B_{\\mathcal A}$ need not be K-injective. First compute ordinary global Hom cohomology in every degree. For any complex $\\mathcal T^\\bullet$ and integer $n$, [def-pur-hom-complex] gives the chain isomorphism $\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J)[n]\\cong\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J[n])$ by identity on each component indexed by $p$ (the differentials on both sides are $(-1)^n d_{\\mathcal J}f-(-1)^a f d_{\\mathcal T}$ in degree $a$). Apply [lem-pur-hom-complex-global-homotopy] in degree zero to $\\mathcal T$ and $\\mathcal J[n]$. The complex $\\mathcal J[n]$ is K-injective directly from [def-pur-kinjective-complex]: a map from acyclic $V$ to $\\mathcal J[n]$ is a shifted map from the acyclic $V[-n]$ to $\\mathcal J$, so its null homotopy shifts back. Hence [lem-weil-pbc-kinjective-hom-derived] gives, naturally in both variables,\n$$H^n\\Gamma\\mathcal Hom^\\bullet(\\mathcal T,\\mathcal J)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(Q\\mathcal T,M[n]).$$\nTake $\\mathcal T=\\mathcal A$ and $\\mathcal T=\\mathcal P$. The map on these groups induced by $\\Gamma(r^*)$ is precomposition with $Qr$, which is invertible because $r$ is a quasi-isomorphism. Thus $\\Gamma(r^*):\\Gamma B_{\\mathcal A}\\to\\Gamma C$ is a quasi-isomorphism of abelian-group complexes. This uses no exactness assumption on $\\Gamma$ or on infinite products.",
-      "uses": [
-        "def-pur-hom-complex",
-        "lem-pur-hom-complex-global-homotopy",
-        "def-pur-kinjective-complex",
-        "lem-weil-pbc-kinjective-hom-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Equation 0A8Z (equation-global-cohomology-hom-complex); Tag 0A94 (lemma-RHom-into-K-injective), global calculation; derived.tex Tags 070H and 070I"
-      }
-    },
-    {
-      "text": "Use the unbounded K-injective definition of $R\\Gamma$ in [def-pur-ringed-site-zeroth-hypercohomology], with the functorial K-injective resolutions in [prop-pur-kinjective-resolutions-exist]. The resolution maps give a natural comparison $\\delta_E:Q_{\\operatorname{Ab}}\\Gamma E\\to R\\Gamma(QE)$ for every sheaf complex $E$. When $E$ is K-injective, its resolution map is a quasi-isomorphism between K-injectives and hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]; applying $\\Gamma$ preserves its inverse and homotopy equations. Thus $\\delta_C$ is an isomorphism. In the naturality square for $r^*:B_{\\mathcal A}\\to C$, the upper horizontal arrow $Q_{\\operatorname{Ab}}\\Gamma(r^*)$ is invertible by the ordinary global-Hom calculation, and the lower horizontal arrow $R\\Gamma(Qr^*)$ is invertible by the representative comparison. Consequently\n$$\\delta_{B_{\\mathcal A}}=(R\\Gamma(Qr^*))^{-1}\\,\\delta_C\\,Q_{\\operatorname{Ab}}\\Gamma(r^*)$$\nis invertible. Together with clause (1), this proves the asserted representation of $R\\Gamma(\\mathcal C,H_K(M))$ by $\\Gamma B_{\\mathcal A}$. The comparison $\\delta$ is natural before the auxiliary choice of $\\mathcal P$, so this identification is natural for all chain maps $\\mathcal A'\\to\\mathcal A$ and all maps of K-injectives $\\mathcal J\\to\\mathcal J'$. No natural choice of K-flat resolution is needed for that conclusion.",
-      "uses": [
-        "def-pur-ringed-site-zeroth-hypercohomology",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-weil-pbc-kinjective-hom-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08JA (lemma-section-RHom-over-U), proof using 0A96 and 0A94; Section 07A5 (section-unbounded); functorial resolutions via injectives.tex Tag 079P"
-      }
-    },
-    {
-      "text": "Finally, [def-pur-hom-complex] computes the degree-$n$ term of $\\Gamma B_{\\mathcal A}$ by taking sections of $\\prod_p\\mathcal Hom_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$. Global sections commute with these products: a morphism $\\mathcal O\\to\\prod_p F_p$ is exactly a family of morphisms $\\mathcal O\\to F_p$. By [def-pur-sheaf-hom], global sections of each factor are $\\operatorname{Hom}_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$. Its differential is $d_{\\mathcal J}f-(-1)^n f d_{\\mathcal A}$, so the resulting complex is exactly the stated global morphism complex, not just a termwise identification. Pre- and postcomposition are the maps of this complex by the functoriality in [def-pur-hom-complex]. Combining the derived-sections comparison with the degree-$n$ ordinary global-Hom calculation for $\\mathcal T=\\mathcal A$ gives $H^nR\\Gamma(\\mathcal C,H_K(M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,M[n])$ for all integers $n$, proving the final assertion of clause (2).",
-      "uses": [
-        "def-pur-hom-complex",
-        "def-pur-sheaf-hom"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Section 0A8X (section-hom-complexes), Equation 0A8Z (equation-global-cohomology-hom-complex); Tag 08JA"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived internal Hom into a K-injective and its derived global sections",
+ "statement": "Let $\\mathcal C$ be a site that is small in the sense of [def-weil-size-convention] and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Use the category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], its unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category], Hom complexes $\\mathcal Hom^\\bullet$ [def-pur-hom-complex], and K-flat and K-injective complexes [def-pc-kflat-complex, def-pur-kinjective-complex]. The derived tensor product $K\\otimes^{\\mathbf L}_{\\mathcal O}N$ is represented by $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal N^\\bullet)$ [def-pc-tensor-complex-sheaves] for a K-flat complex $\\mathcal P^\\bullet$ representing $K$ and any complex $\\mathcal N^\\bullet$ representing $N$. Fix $K\\in D(\\mathcal O)$ and let $H_K:D(\\mathcal O)\\to D(\\mathcal O)$ be any right adjoint of $K\\otimes^{\\mathbf L}_{\\mathcal O}-$ . Let $\\mathcal A^\\bullet$ be any complex of $\\mathcal O$-modules representing $K$, and let $\\mathcal J^\\bullet$ be a K-injective complex representing $M\\in D(\\mathcal O)$. Then:\n\n1. There is an isomorphism $H_K(M)\\cong\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)$ in $D(\\mathcal O)$, natural with respect to morphisms of K-injective complexes $\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$.\n2. The derived global sections $R\\Gamma(\\mathcal C,H_K(M))$ [def-pur-ringed-site-zeroth-hypercohomology] are represented, in the derived category of abelian groups [def-weil-abstract-derived-category], by the complex of global morphisms $\\operatorname{Hom}^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet)=\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal J^\\bullet))$, whose degree-$n$ term is $\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_{\\mathcal O}(\\mathcal A^p,\\mathcal J^{p+n})$, naturally with respect to morphisms of complexes $\\mathcal A'^\\bullet\\to\\mathcal A^\\bullet$ and of K-injective complexes $\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$. In particular $H^n R\\Gamma(\\mathcal C,H_K(M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,M[n])$ for every integer $n$.\n\nNo boundedness of $K$ or $M$ and no flatness of $\\mathcal A^\\bullet$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 'Internal hom in the derived category' (Tag 08J7, label section-internal-hom): the construction $R\\mathcal Hom(L,M)=\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)$ with equation-internal-hom and Yoneda; Lemma 08JA (lemma-section-RHom-over-U); Lemma 08J9 (lemma-internal-hom); Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-size-convention",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "For tensorRightAdjoint_iso, use the existing ringed-site closed symmetric monoidal derived structure (lem-sf-ringed-derived-closed-symmetric-monoidal). Choose a K-flat resolution P of a representative L of K by lem-pc-kflat-resolution, and localize its augmentation to obtain QP ≅ K. The hypothesis model identifies Q ⋙ T with Tot(P tensor -) ⋙ Q. The closed structure's one-K-flat tensor comparison h.tensorIso, with h.tensorIso_naturality applied to (identity P,f), gives a natural isomorphism from that functor to Q ⋙ tensorLeft(QP). Transport through QP ≅ K. Fully faithful whiskering with the derived localization lifts the natural isomorphism to T ≅ tensorLeft(K). Compose with the symmetry tensorLeft(K) ≅ tensorRight(K). Uniqueness of right adjoints for the given adjunction and S.adjunction K gives H ≅ internalHom(K,-). All steps are implemented in Lean.",
+   "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-hom-kflat-into-kinjective",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "lem-pur-hom-complex-global-homotopy",
-    "def-pur-kinjective-complex",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-ringed-site-zeroth-hypercohomology",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-sheaf-hom"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Sections 08J7 and 0FPT, Lemma 08J9; remaining full sections comparison as in original plan.",
-    "note": "V9 proves tensorRightAdjoint_iso from the existing closed symmetric monoidal structure and localization uniqueness. derived_internalHom_sections_model remains unchanged and unproved. No split-off statements."
+    "place": "Section 08J7, Lemma 08J9; existing closed symmetric monoidal theorem, Tags 0FPT and 08J9."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "On a ringed site the right adjoint to derived tensor is the sheaf Hom complex into a K-injective, and derived global sections are computed by the global Hom complex",
-      "results": "8 hit(s); SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.Sheaf.adjunction",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "grep",
-      "query": "HomComplex|IsKInjective|tensorHomAdjunction",
-      "results": "25 hit(s); Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; directory Mathlib/Algebra/Homology",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "grep",
-      "query": "SheafOfModules.*(derived|Derived|[Hh]om)|[Dd]erived.*[Ii]nternal[Hh]om",
-      "results": "25 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived sections of the internal Hom of module sheaves on a ringed site are computed by Hom complexes into K-injective resolutions",
-      "results": "8 hit(s); CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.sheafHom; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.injectiveResolutions; SheafOfModules.Hom; SheafOfModules.Hom.mk.injEq",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules, CochainComplex.IsKInjective",
-      "results": "0 hit(s); none",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "grep",
-      "query": "def sheafHom|def HomComplex|def homEquiv|def derived",
-      "results": "7 hit(s); Mathlib/CategoryTheory/Sites/Sheaf.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean; directory Mathlib/CategoryTheory/Sites",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"HomComplex\"",
-      "results": "12 hit(s); CochainComplex.HomComplex.Triplet; CochainComplex.HomComplex.Triplet.p; CochainComplex.HomComplex.Triplet.q; CochainComplex.HomComplex.Triplet.mk; CochainComplex.HomComplex.Triplet.hpq; CochainComplex.HomComplex.Cochain.diff; CochainComplex.HomComplex.Cocycle.diff; CochainComplex.HomComplex.Cochain",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective resolutions; taking derived sections recovers Ext in every degree",
-      "results": "8 hit(s); CategoryTheory.Sheaf.H; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Abelian.Ext.hom; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.hasExt_of_hasDerivedCategory; Ext; instHasExtModuleCatOfSmall",
-      "date": "2026-10-16",
-      "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The internal Hom right adjoint in the unbounded derived category of modules over a sheaf of rings is represented by a Hom complex with K-injective target; its global derived sections compute derived morphisms",
-      "results": "8 hit(s); CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective; CategoryTheory.Sheaf.H; Ext; CochainComplex.IsKInjective.Qh_map_bijective; SheafOfModules.instAbelian; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.Abelian.Ext.homEquiv",
-      "date": "2026-10-16",
-      "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
-    },
-    {
-      "tool": "grep",
-      "query": "SheafOfModules.*(Closed|ihom)|RHom|InternalHom",
-      "results": "25 hit(s); Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules, \"Hom\"",
-      "results": "12 hit(s); SheafOfModules.Hom; SheafOfModules.instAddCommGroupHom; SheafOfModules.unitHomEquiv; SheafOfModules.Hom.mk; SheafOfModules.Hom.val; SheafOfModules.Hom.ext; SheafOfModules.Hom.ext_iff; SheafOfModules.hom_ext",
-      "date": "2026-10-16",
-      "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "On a ringed site the unbounded derived tensor right adjoint is represented by sheaf Hom into any K-injective target and its derived global sections by the global Hom complex",
-      "results": "{\"t\": \"2026-10-16T20:45:26Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site the unbounded derived tensor right adjoint is represented by sheaf Hom into any K-injective target and its derived global sections by the global Hom complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"Ext\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\"], \"digest\": \"399be6e424215332\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules, CochainComplex.IsKInjective",
-      "results": "{\"t\": \"2026-10-16T20:45:24Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CochainComplex.IsKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "HomComplex|IsKInjective|tensorHomAdjunction",
-      "results": "{\"t\": \"2026-10-16T20:45:23Z\", \"tool\": \"grep\", \"query\": \"HomComplex|IsKInjective|tensorHomAdjunction\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"27d3bd2e0ebe2f26\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived global sections of the internal Hom of unbounded module sheaf complexes are computed by global Hom into a K-injective resolution",
-      "results": "{\"t\": \"2026-10-16T20:45:24Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections of the internal Hom of unbounded module sheaf complexes are computed by global Hom into a K-injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CochainComplex.IsKInjective\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\"], \"digest\": \"8f14d6a2f3ead559\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective replacements and applying derived global sections gives the global mapping complex",
-      "results": "{\"t\": \"2026-10-16T20:45:45Z\", \"tool\": \"leanfinder\", \"query\": \"The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective replacements and applying derived global sections gives the global mapping complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.PullbackConstruction.adjunction\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CategoryTheory.Sheaf.H\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"], \"digest\": \"373dea3185d73d70\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "def sheafHom|def HomComplex|def homEquiv|def derived",
-      "results": "{\"t\": \"2026-10-16T20:45:39Z\", \"tool\": \"grep\", \"query\": \"def sheafHom|def HomComplex|def homEquiv|def derived\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\"], \"digest\": \"edd20be6e20b9714\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"HomComplex\"",
-      "results": "{\"t\": \"2026-10-16T20:45:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Triplet\", \"CochainComplex.HomComplex.Triplet.p\", \"CochainComplex.HomComplex.Triplet.q\", \"CochainComplex.HomComplex.Triplet.mk\", \"CochainComplex.HomComplex.Triplet.hpq\", \"CochainComplex.HomComplex.Cochain.diff\", \"CochainComplex.HomComplex.Cocycle.diff\", \"CochainComplex.HomComplex.Cochain\"], \"digest\": \"ae87404bf051b77c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "det-lem-int-ext-formula",
-    "date": "2026-10-17",
-    "group": "Q25"
-  },
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-int-ext",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sfb-derived-internal-hom-sections-model",
-    "worker": "stage1",
-    "summary": "No statement change and no new node. Reused generic ringed-site K-flat/K-injective and Hom-complex statements. Expanded the adjunction, explicit uniqueness of its right adjoint, and the global-sections comparison for an arbitrary nonflat source, including naturality in both variables and every integer degree. Checked against Stacks 08J7/08J9/08JA/0A95/0A96 and the existing node statements.",
-    "blueprint": "Realizes det-lem-int-ext-formula proof (2), its global derived-Hom/derived-sections identification. The imported un-derived-looking cHom is used here as derived internal Hom, exactly as the parent corrected statement specifies.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic ringed-site resolution theorem 06YS, required to compute unbounded tensor; the Ext unit supplies no replacement."
-      },
-      {
-        "node": "lem-pur-rhom-well-defined",
-        "why": "Generic quasi-isomorphism invariance of the sheaf Hom model (0A95), required for arbitrary representatives."
-      },
-      {
-        "node": "lem-pur-hom-kflat-into-kinjective",
-        "why": "Generic ringed-site K-injective model theorem 0A96, required to compute derived global sections."
-      },
-      {
-        "node": "def-pur-derived-internal-hom",
-        "why": "Existing generic K-injective construction and descended bifunctor on a small ringed site, used to identify all representative models."
-      },
-      {
-        "node": "lem-pur-hom-complex-global-homotopy",
-        "why": "Generic global Hom-complex/homotopy-category identification 0A8Z, needed for the adjunction and all-degree comparison."
-      },
-      {
-        "node": "lem-sc-derived-hom-tensor-total",
-        "why": "Generic ringed-site total tensor/Hom identity 0A90; its statement has no scheme restriction."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Generic functorial K-injective resolutions, used for the canonical natural map to derived global sections."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-hom-kflat-into-kinjective",
+  {
+   "text": "Choose the functorial K-injective replacement I and its augmentation η. The comparison for derivedInternalHomOfUniverses identifies the localized Hom(A,I(-)) with the canonical derived internal Hom. On the subcategory of K-injectives, η is a quasi-isomorphism between K-injectives; quasiIso_homComplex_mapOfUniverses therefore makes the comparison from Hom(A,J) to Hom(A,I(J)) invertible. This constructs the first natural representative isomorphism.",
+   "uses": [
     "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-rhom-well-defined-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every additive functor F between the relevant abelian categories, construct the canonical natural comparison Q(F(E)) → RF(Q(E)) using the homotopy-category factorization and rightDerivedFunctorUnit. This is invertible when E is K-injective by Mathlib's computation of a right derived functor on K-injectives. Apply this to global sections.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat resolution p:P→A. Hom(P,J) is K-injective by the independent-universe Hom-K-injectivity theorem, whereas precomposition Hom(A,J)→Hom(P,J) is a quasi-isomorphism by quasiIso_homComplex_mapOfUniverses. The global Hom comparison identifies ordinary sections of these Hom complexes with the external Mathlib Hom complexes. Their homology maps identify, through homologyAddEquiv and CohomologyClass.homAddEquiv, with precomposition by p in the homotopy category. The localization map on morphisms into every shift of J is bijective because J is K-injective, and Q(p) is invertible. Thus this precomposition map is bijective, so ordinary sections of Hom(A,J)→Hom(P,J) is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+    "lem-pur-rhom-well-defined-universes",
     "lem-pur-hom-complex-global-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the naturality square of the sections comparison for Hom(A,J)→Hom(P,J), both horizontal arrows and the comparison at Hom(P,J) are invertible. Consequently the comparison at Hom(A,J) is invertible. Its construction was natural before the auxiliary K-flat choice; assemble its components into a natural isomorphism and combine with the representative isomorphism. No boundedness or K-flatness of A and no exactness of products or sections is assumed.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-coef-hom-kflat-into-kinjective-independent-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reuse the globalComplexIso and its naturality, whose components are the degreewise global-cochain maps, to give the stated global Hom complex and the formula for pre- and postcomposition. Finally, choose representatives of K and M and the functorial K-injective replacement of M. Apply derived homology to the sections isomorphism, identify homology of the external Hom complex with degree-n cohomology classes, identify these with morphisms into the shift of the target in the homotopy category, and use IsKInjective.Qh_map_bijective together with the localization shift isomorphism. Transport along the chosen representative isomorphisms to obtain the additive equivalence with Hom(K,M[n]).",
+   "uses": [
+    "lem-pur-hom-complex-global-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
     "prop-pur-kinjective-resolutions-exist"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-N9-2c48f1adb",
-    "group": "N9",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-2c48f1adb (reviewer sub-agent of L); spot-checked: Read in full: the item and its six steps, all 13 proof deps and 8 stmt deps (statements), the parent det-lem-int-ext-formula (steps 6-7 cite clause (2)), unit sk-lem-int-ext, and Stacks sites-cohomology.tex lines 8590-8930. That covers 0A8Z, 0A90, 0A94, 0A95, 0A96, 08J7, 08JA and 08J9, with the tag-to-label pairs checked in tags/tags. Shape: one commit with the item and the report, no new nodes. The statement differs from live only by the cited [def-weil-abstract-derived-category] and a cosmetic stray space before a period; no weakening. Step 1: 0A95 applied with s=id and t=r gives the precomposition quasi-iso in the right direction; 0A96 needs a K-flat source and a K-injective target, and both are present. Step 2: the chain of bijections checks out, and lem-sc-derived-hom-tensor-total really is a ringed-site statement; I recomputed the Koszul swap signs against def-pc-tensor-complex-sheaves and they match. Step 3: the explicit Yoneda argument gives gf=1 and fg=1; correct and elementary. Step 4: the shift identities of Hom complexes are correct with d_{K[1]}=-d_K; J[n] is K-injective; Gamma(r^*) is a quasi-iso without assuming Gamma exact. Step 5: the natural comparison delta is invertible at C, so by the square it is invertible at B_A; naturality is kept. Step 6: Gamma commutes with products and Gamma of sheaf Hom is Hom_O, as stated in def-pur-sheaf-hom. Small case: point site over Z with A=Z/2 and J=(Q->Q/Z) gives H^0=0 and H^1=Z/2, matching Ext. Duplicates: lem-pur-rhom-global-sections (H^0 only) and the sc-* nodes (schemes only) do not state the item; no cycle. Searches cover all three kinds with logged results. Accepted all 7 declared tool_uses as generic homological black boxes; no unit step is replaced and there is no SGA citation. No fixes were made."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-7482cad87",
-    "group": "Q94",
-    "result": "pass",
-    "note": "Read the node, its 9 statement dependencies (Lean sources for derivedInternalHomOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, homComplex_exists, IsKFlatIndependentCoefficients, map₂HomologicalComplex = mapBifunctor), the report and the module. Every clause is rendered: tensorRightAdjoint_iso takes any right adjoint H of a T characterized by Tot(P⊗-) on K-flat representatives and gives H≅RHom(K,-); conjunct 1 gives RHom(QA,QI)≅Q Hom•(A,I), natural in A and in K-injective I; conjunct 2 gives the full-complex RΓ comparison through the same rightDerivedFunctor of Hom(O,-) as the recorded H0 definition; conjunct 3 gives a chain iso to Mathlib HomComplex (signs d_I f-(-1)^n f d_A checked) with the pre/postcomposition equation; conjunct 4 gives H^n for all n:ℤ. No boundedness or flatness of A; universes independent and bound; no hollow definitions; sorry-only proofs; source and blueprint docstrings; lean.statement verbatim. Added statement dependency def-pur-derived-internal-hom is landed with no cycle; the citer det-lem-int-ext-formula is served. nt_compile.py on the snapshot against the local side overlay: rc=0, no errors."
-  },
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel",
-    "declaration": "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model",
-    "declarations": [
-      "CategoryTheory.DerivedInternalHomSectionsModel.Modules",
-      "CategoryTheory.DerivedInternalHomSectionsModel.Complexes",
-      "CategoryTheory.DerivedInternalHomSectionsModel.Derived",
-      "CategoryTheory.DerivedInternalHomSectionsModel.sections",
-      "CategoryTheory.DerivedInternalHomSectionsModel.derivedSections",
-      "CategoryTheory.DerivedInternalHomSectionsModel.internalHom",
-      "CategoryTheory.DerivedInternalHomSectionsModel.injectiveProperty",
-      "CategoryTheory.DerivedInternalHomSectionsModel.representedInternalHom",
-      "CategoryTheory.DerivedInternalHomSectionsModel.representativeHom",
-      "CategoryTheory.DerivedInternalHomSectionsModel.globalHom",
-      "CategoryTheory.DerivedInternalHomSectionsModel.totalTensor",
-      "CategoryTheory.DerivedInternalHomSectionsModel.tensorRightAdjoint_iso",
-      "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model"
-    ],
-    "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSectionsModel.lean",
-    "statement": "theorem derived_internalHom_sections_model : Nonempty (representedInternalHom.{c, v, r, w} R ≅ representativeHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ Nonempty (representedInternalHom.{c, v, r, w} R ⋙ derivedSections.{c, v, r, w, z} R ≅ globalHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ (∃ e : ∀ (A I : Complexes.{c, v, r} R), ((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I) ≅ CochainComplex.HomComplex A I, ∀ (A A' I I' : Complexes.{c, v, r} R) (f : A' ⟶ A) (g : I ⟶ I') (n p q : ℤ) (hpq : p + n = q) (s : (((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I)).X n), ((e A' I').hom.f n ((((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).map (((homComplexFunctor (R := R)).map f.op).app I ≫ ((homComplexFunctor (R := R)).obj (op A')).map g)).f n s)).v p q hpq = f.f p ≫ ((e A I).hom.f n s).v p q hpq ≫ g.f q) ∧ (∀ (K M : Derived.{c, v, r, w} R) (n : ℤ), Nonempty (((DerivedCategory.homologyFunctor.{z} AddCommGrpCat.{max c v r} n).obj ((derivedSections.{c, v, r, w, z} R).obj (((internalHom.{c, v, r, w} R).obj (op K)).obj M))) ≃+ (K ⟶ M⟦n⟧)))",
-    "branch": "newtargets-dag",
-    "by": "Q94",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Two complementary statements render the node: tensorRightAdjoint_iso identifies any specified right adjoint of derived tensor with the existing derived internal Hom; derived_internalHom_sections_model supplies the natural representative and full derived-global-sections comparisons, the ordinary global Hom complex with its componentwise naturality, and the cohomology formula in every integer degree. The added landed dependency def-pur-derived-internal-hom provides the canonical bifunctor; no second internal Hom is constructed. All helper definitions are transparent specializations/composites of the recorded operations. Site object, site morphism, coefficient and derived morphism universes remain independent."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "V9",
-    "result": "pass",
-    "landing": "20261019T034333-L-422704",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined-universes",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+  "lem-pur-hom-complex-global-homotopy",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7, 08JA, 0A95 and 0A96; equation-global-cohomology-hom-complex",
+  "description": "K5: the canonical right-derived-functor comparison, tested after K-flat replacement, and the external Hom homology calculation. Keeps the already proved tensorRightAdjoint_iso route. All new glue is proved in this packet; the independent-universe K-injectivity theorem is reused from the landed library."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the right adjoint to derived tensor is the sheaf Hom complex into a K-injective, and derived global sections are computed by the global Hom complex",
+   "results": "8 hit(s); SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.Sheaf.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex|IsKInjective|tensorHomAdjunction",
+   "results": "25 hit(s); Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(derived|Derived|[Hh]om)|[Dd]erived.*[Ii]nternal[Hh]om",
+   "results": "25 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of the internal Hom of module sheaves on a ringed site are computed by Hom complexes into K-injective resolutions",
+   "results": "8 hit(s); CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.sheafHom; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.injectiveResolutions; SheafOfModules.Hom; SheafOfModules.Hom.mk.injEq",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex.IsKInjective",
+   "results": "0 hit(s); none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafHom|def HomComplex|def homEquiv|def derived",
+   "results": "7 hit(s); Mathlib/CategoryTheory/Sites/Sheaf.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\"",
+   "results": "12 hit(s); CochainComplex.HomComplex.Triplet; CochainComplex.HomComplex.Triplet.p; CochainComplex.HomComplex.Triplet.q; CochainComplex.HomComplex.Triplet.mk; CochainComplex.HomComplex.Triplet.hpq; CochainComplex.HomComplex.Cochain.diff; CochainComplex.HomComplex.Cocycle.diff; CochainComplex.HomComplex.Cochain",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective resolutions; taking derived sections recovers Ext in every degree",
+   "results": "8 hit(s); CategoryTheory.Sheaf.H; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Abelian.Ext.hom; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.hasExt_of_hasDerivedCategory; Ext; instHasExtModuleCatOfSmall",
+   "date": "2026-10-16",
+   "verdict": "no match: hits provide underived sheaf morphisms, ordinary sheaf cohomology, global Hom complexes or abstract K-injective computations; none identifies a ringed-site abstract tensor right adjoint and its full derived global-sections complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom right adjoint in the unbounded derived category of modules over a sheaf of rings is represented by a Hom complex with K-injective target; its global derived sections compute derived morphisms",
+   "results": "8 hit(s); CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective; CategoryTheory.Sheaf.H; Ext; CochainComplex.IsKInjective.Qh_map_bijective; SheafOfModules.instAbelian; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(Closed|ihom)|RHom|InternalHom",
+   "results": "25 hit(s); Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"Hom\"",
+   "results": "12 hit(s); SheafOfModules.Hom; SheafOfModules.instAddCommGroupHom; SheafOfModules.unitHomEquiv; SheafOfModules.Hom.mk; SheafOfModules.Hom.val; SheafOfModules.Hom.ext; SheafOfModules.Hom.ext_iff; SheafOfModules.hom_ext",
+   "date": "2026-10-16",
+   "verdict": "no match: generic K-injective derived morphisms, ordinary module sheaf Hom and unrelated name matches do not identify the tensor right adjoint with a sheaf Hom complex or compute its full derived sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the unbounded derived tensor right adjoint is represented by sheaf Hom into any K-injective target and its derived global sections by the global Hom complex",
+   "results": "{\"t\": \"2026-10-16T20:45:26Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site the unbounded derived tensor right adjoint is represented by sheaf Hom into any K-injective target and its derived global sections by the global Hom complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"Ext\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\"], \"digest\": \"399be6e424215332\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex.IsKInjective",
+   "results": "{\"t\": \"2026-10-16T20:45:24Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CochainComplex.IsKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex|IsKInjective|tensorHomAdjunction",
+   "results": "{\"t\": \"2026-10-16T20:45:23Z\", \"tool\": \"grep\", \"query\": \"HomComplex|IsKInjective|tensorHomAdjunction\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"27d3bd2e0ebe2f26\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of the internal Hom of unbounded module sheaf complexes are computed by global Hom into a K-injective resolution",
+   "results": "{\"t\": \"2026-10-16T20:45:24Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections of the internal Hom of unbounded module sheaf complexes are computed by global Hom into a K-injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CochainComplex.IsKInjective\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\"], \"digest\": \"8f14d6a2f3ead559\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective replacements and applying derived global sections gives the global mapping complex",
+   "results": "{\"t\": \"2026-10-16T20:45:45Z\", \"tool\": \"leanfinder\", \"query\": \"The closed monoidal derived category of sheaves of modules has internal Hom computed by K-injective replacements and applying derived global sections gives the global mapping complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.PullbackConstruction.adjunction\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CategoryTheory.Sheaf.H\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"], \"digest\": \"373dea3185d73d70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafHom|def HomComplex|def homEquiv|def derived",
+   "results": "{\"t\": \"2026-10-16T20:45:39Z\", \"tool\": \"grep\", \"query\": \"def sheafHom|def HomComplex|def homEquiv|def derived\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\"], \"digest\": \"edd20be6e20b9714\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\"",
+   "results": "{\"t\": \"2026-10-16T20:45:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Triplet\", \"CochainComplex.HomComplex.Triplet.p\", \"CochainComplex.HomComplex.Triplet.q\", \"CochainComplex.HomComplex.Triplet.mk\", \"CochainComplex.HomComplex.Triplet.hpq\", \"CochainComplex.HomComplex.Cochain.diff\", \"CochainComplex.HomComplex.Cocycle.diff\", \"CochainComplex.HomComplex.Cochain\"], \"digest\": \"ae87404bf051b77c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SheafHom.lean:226-263 (underived sheaf of types and sections) and DerivedCategory/KInjective.lean:41-85 (generic K-injective derived morphisms). The returned ordinary pullback adjunctions, light condensed underived closed structure, bounded-below injective-resolution Ext, and Hom cochains do not supply the ringed-site unbounded tensor right-adjoint model and full derived-global-sections comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-ext-formula",
+  "date": "2026-10-17",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-derived-internal-hom-sections-model",
+  "worker": "stage1",
+  "summary": "No statement change and no new node. Reused generic ringed-site K-flat/K-injective and Hom-complex statements. Expanded the adjunction, explicit uniqueness of its right adjoint, and the global-sections comparison for an arbitrary nonflat source, including naturality in both variables and every integer degree. Checked against Stacks 08J7/08J9/08JA/0A95/0A96 and the existing node statements.",
+  "blueprint": "Realizes det-lem-int-ext-formula proof (2), its global derived-Hom/derived-sections identification. The imported un-derived-looking cHom is used here as derived internal Hom, exactly as the parent corrected statement specifies.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolution theorem 06YS, required to compute unbounded tensor; the Ext unit supplies no replacement."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic quasi-isomorphism invariance of the sheaf Hom model (0A95), required for arbitrary representatives."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic ringed-site K-injective model theorem 0A96, required to compute derived global sections."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Existing generic K-injective construction and descended bifunctor on a small ringed site, used to identify all representative models."
+   },
+   {
+    "node": "lem-pur-hom-complex-global-homotopy",
+    "why": "Generic global Hom-complex/homotopy-category identification 0A8Z, needed for the adjunction and all-degree comparison."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Generic ringed-site total tensor/Hom identity 0A90; its statement has no scheme restriction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic functorial K-injective resolutions, used for the canonical natural map to derived global sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-complex-global-homotopy",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-2c48f1adb",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-2c48f1adb (reviewer sub-agent of L); spot-checked: Read in full: the item and its six steps, all 13 proof deps and 8 stmt deps (statements), the parent det-lem-int-ext-formula (steps 6-7 cite clause (2)), unit sk-lem-int-ext, and Stacks sites-cohomology.tex lines 8590-8930. That covers 0A8Z, 0A90, 0A94, 0A95, 0A96, 08J7, 08JA and 08J9, with the tag-to-label pairs checked in tags/tags. Shape: one commit with the item and the report, no new nodes. The statement differs from live only by the cited [def-weil-abstract-derived-category] and a cosmetic stray space before a period; no weakening. Step 1: 0A95 applied with s=id and t=r gives the precomposition quasi-iso in the right direction; 0A96 needs a K-flat source and a K-injective target, and both are present. Step 2: the chain of bijections checks out, and lem-sc-derived-hom-tensor-total really is a ringed-site statement; I recomputed the Koszul swap signs against def-pc-tensor-complex-sheaves and they match. Step 3: the explicit Yoneda argument gives gf=1 and fg=1; correct and elementary. Step 4: the shift identities of Hom complexes are correct with d_{K[1]}=-d_K; J[n] is K-injective; Gamma(r^*) is a quasi-iso without assuming Gamma exact. Step 5: the natural comparison delta is invertible at C, so by the square it is invertible at B_A; naturality is kept. Step 6: Gamma commutes with products and Gamma of sheaf Hom is Hom_O, as stated in def-pur-sheaf-hom. Small case: point site over Z with A=Z/2 and J=(Q->Q/Z) gives H^0=0 and H^1=Z/2, matching Ext. Duplicates: lem-pur-rhom-global-sections (H^0 only) and the sc-* nodes (schemes only) do not state the item; no cycle. Searches cover all three kinds with logged results. Accepted all 7 declared tool_uses as generic homological black boxes; no unit step is replaced and there is no SGA citation. No fixes were made."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7482cad87",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Read the node, its 9 statement dependencies (Lean sources for derivedInternalHomOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, homComplex_exists, IsKFlatIndependentCoefficients, map₂HomologicalComplex = mapBifunctor), the report and the module. Every clause is rendered: tensorRightAdjoint_iso takes any right adjoint H of a T characterized by Tot(P⊗-) on K-flat representatives and gives H≅RHom(K,-); conjunct 1 gives RHom(QA,QI)≅Q Hom•(A,I), natural in A and in K-injective I; conjunct 2 gives the full-complex RΓ comparison through the same rightDerivedFunctor of Hom(O,-) as the recorded H0 definition; conjunct 3 gives a chain iso to Mathlib HomComplex (signs d_I f-(-1)^n f d_A checked) with the pre/postcomposition equation; conjunct 4 gives H^n for all n:ℤ. No boundedness or flatness of A; universes independent and bound; no hollow definitions; sorry-only proofs; source and blueprint docstrings; lean.statement verbatim. Added statement dependency def-pur-derived-internal-hom is landed with no cycle; the citer det-lem-int-ext-formula is served. nt_compile.py on the snapshot against the local side overlay: rc=0, no errors."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel",
+  "declaration": "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model",
+  "declarations": [
+   "CategoryTheory.DerivedInternalHomSectionsModel.Modules",
+   "CategoryTheory.DerivedInternalHomSectionsModel.Complexes",
+   "CategoryTheory.DerivedInternalHomSectionsModel.Derived",
+   "CategoryTheory.DerivedInternalHomSectionsModel.sections",
+   "CategoryTheory.DerivedInternalHomSectionsModel.derivedSections",
+   "CategoryTheory.DerivedInternalHomSectionsModel.internalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.injectiveProperty",
+   "CategoryTheory.DerivedInternalHomSectionsModel.representedInternalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.representativeHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.globalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.totalTensor",
+   "CategoryTheory.DerivedInternalHomSectionsModel.tensorRightAdjoint_iso",
+   "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSectionsModel.lean",
+  "statement": "theorem derived_internalHom_sections_model : Nonempty (representedInternalHom.{c, v, r, w} R ≅ representativeHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ Nonempty (representedInternalHom.{c, v, r, w} R ⋙ derivedSections.{c, v, r, w, z} R ≅ globalHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ (∃ e : ∀ (A I : Complexes.{c, v, r} R), ((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I) ≅ CochainComplex.HomComplex A I, ∀ (A A' I I' : Complexes.{c, v, r} R) (f : A' ⟶ A) (g : I ⟶ I') (n p q : ℤ) (hpq : p + n = q) (s : (((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I)).X n), ((e A' I').hom.f n ((((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).map (((homComplexFunctor (R := R)).map f.op).app I ≫ ((homComplexFunctor (R := R)).obj (op A')).map g)).f n s)).v p q hpq = f.f p ≫ ((e A I).hom.f n s).v p q hpq ≫ g.f q) ∧ (∀ (K M : Derived.{c, v, r, w} R) (n : ℤ), Nonempty (((DerivedCategory.homologyFunctor.{z} AddCommGrpCat.{max c v r} n).obj ((derivedSections.{c, v, r, w, z} R).obj (((internalHom.{c, v, r, w} R).obj (op K)).obj M))) ≃+ (K ⟶ M⟦n⟧)))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Two complementary statements render the node: tensorRightAdjoint_iso identifies any specified right adjoint of derived tensor with the existing derived internal Hom; derived_internalHom_sections_model supplies the natural representative and full derived-global-sections comparisons, the ordinary global Hom complex with its componentwise naturality, and the cohomology formula in every integer degree. The added landed dependency def-pur-derived-internal-hom provides the canonical bifunctor; no second internal Hom is constructed. All helper definitions are transparent specializations/composites of the recorded operations. Site object, site morphism, coefficient and derived morphism universes remain independent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261021T003508-L-1643733",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

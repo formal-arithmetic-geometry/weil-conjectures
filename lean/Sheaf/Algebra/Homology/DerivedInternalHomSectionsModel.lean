@@ -17,11 +17,11 @@ import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import all Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
+import Sheaf.Algebra.Homology.KInjectiveHomComplexOfUniverses
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 /-! # K-injective models for internal Hom and its derived global sections
 
 Source: Stacks Project, sites-cohomology.tex, Section 08J7 (section-internal-hom),
@@ -44,6 +44,150 @@ universe c v r w z
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 
 namespace CategoryTheory.DerivedInternalHomSectionsModel
+
+set_option backward.isDefEq.respectTransparency false in
+open CochainComplex HomComplex Preadditive in
+private noncomputable def precompHomologyData
+    {D : Type*} [Category* D] [Preadditive D]
+    {A A' B : CochainComplex D ℤ} (f : A' ⟶ A) (n : ℤ) :
+    ShortComplex.LeftHomologyMapData
+      ((HomologicalComplex.shortComplexFunctor _ _ n).map
+        (CategoryTheory.externalMap f (𝟙 B)))
+      (HomComplex.leftHomologyData A B n) (HomComplex.leftHomologyData A' B n) where
+  φK := AddCommGrpCat.ofHom
+    { toFun := fun z ↦ z.precomp f
+      map_zero' := by ext; simp
+      map_add' := by intros; ext; simp }
+  φH := (CohomologyClass.homAddEquiv (K := A) (L := B) (n := n)).toAddCommGrpIso.hom ≫
+    (AddCommGrpCat.ofHom
+      { toFun := fun a ↦ (HomotopyCategory.quotient D (.up ℤ)).map f ≫ a
+        map_zero' := by simp
+        map_add' := by intros; simp [comp_add] }) ≫
+      (CohomologyClass.homAddEquiv (K := A') (L := B) (n := n)).toAddCommGrpIso.inv
+  commi := by
+    ext z
+    change (z.precomp f).1 = (CategoryTheory.externalMap f (𝟙 B)).f n z.1
+    simp [CategoryTheory.externalMap, Cocycle.precomp]
+    rfl
+  commf' := by
+    rw [← cancel_mono (HomComplex.leftHomologyData A' B n).i]
+    simp only [Category.assoc, ShortComplex.LeftHomologyData.f'_i]
+    have hi : AddCommGrpCat.ofHom
+        { toFun := fun z : Cocycle A B n ↦ z.precomp f
+          map_zero' := by ext; simp
+          map_add' := by intros; ext; simp } ≫
+        (HomComplex.leftHomologyData A' B n).i =
+      (HomComplex.leftHomologyData A B n).i ≫
+        (CategoryTheory.externalMap f (𝟙 B)).f n := by
+      ext z
+      change (z.precomp f).1 = (CategoryTheory.externalMap f (𝟙 B)).f n z.1
+      simp [CategoryTheory.externalMap, Cocycle.precomp]
+      rfl
+    rw [hi, ShortComplex.LeftHomologyData.f'_i_assoc]
+    exact ((HomologicalComplex.shortComplexFunctor _ _ n).map
+      (CategoryTheory.externalMap f (𝟙 B))).comm₁₂.symm
+  commπ := by
+    ext z
+    apply (CohomologyClass.homAddEquiv (K := A') (L := B) (n := n)).injective
+    change (CohomologyClass.homAddEquiv (K := A') (L := B) (n := n))
+      ((CohomologyClass.homAddEquiv (K := A') (L := B) (n := n)).symm
+        ((HomotopyCategory.quotient D (.up ℤ)).map f ≫
+          CohomologyClass.toHom (CohomologyClass.mk z))) =
+      CohomologyClass.toHom (CohomologyClass.mk (z.precomp f))
+    rw [AddEquiv.apply_symm_apply, CohomologyClass.toHom_mk,
+      CohomologyClass.toHom_mk, ← Functor.map_comp]
+    congr 1
+    ext p
+    simp [Cocycle.equivHomShift_symm_apply, Cocycle.homOf, Cocycle.rightShift,
+      Cochain.rightShift_v, Cocycle.precomp, Cochain.zero_cochain_comp_v]
+
+private theorem bijective_precomp_quotient
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {K L T : CochainComplex A ℤ} (t : K ⟶ L) [QuasiIso t] [T.IsKInjective] :
+    Function.Bijective (fun f :
+      (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj L ⟶
+        (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj T ↦
+      (HomotopyCategory.quotient A (ComplexShape.up ℤ)).map t ≫ f) := by
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let a := DerivedCategory.Qh.map (q.map t)
+  have ha : IsIso a := by
+    change IsIso ((q ⋙ DerivedCategory.Qh).map t)
+    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) t).2 inferInstance
+  have hK := CochainComplex.IsKInjective.Qh_map_bijective (q.obj K) T
+  have hL := CochainComplex.IsKInjective.Qh_map_bijective (q.obj L) T
+  constructor
+  · intro f g h
+    apply hL.injective
+    apply (cancel_epi a).mp
+    change DerivedCategory.Qh.map (q.map t) ≫ _ = _
+    simpa only [a, q, Functor.map_comp] using congrArg DerivedCategory.Qh.map h
+  · intro g
+    obtain ⟨f, hf⟩ := hL.surjective (inv a ≫ DerivedCategory.Qh.map g)
+    refine ⟨f, hK.injective ?_⟩
+    rw [Functor.map_comp, hf]
+    exact IsIso.hom_inv_id_assoc a _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem externalMap_quasiIso
+    {D : Type*} [Category* D] [Abelian D] [HasDerivedCategory D]
+    {A A' B : CochainComplex D ℤ} (f : A' ⟶ A) [QuasiIso f] [B.IsKInjective] :
+    QuasiIso (CategoryTheory.externalMap f (𝟙 B)) := by
+  refine ⟨fun n ↦ ?_⟩
+  rw [quasiIsoAt_iff_isIso_homologyMap]
+  have h := (precompHomologyData (B := B) f n).homologyMap_eq
+  change HomologicalComplex.homologyMap (CategoryTheory.externalMap f (𝟙 B)) n = _ at h
+  rw [h]
+  have hpre : IsIso (AddCommGrpCat.ofHom
+      { toFun := fun a :
+          (HomotopyCategory.quotient D (.up ℤ)).obj A ⟶
+            (HomotopyCategory.quotient D (.up ℤ)).obj (B⟦n⟧) ↦
+          (HomotopyCategory.quotient D (.up ℤ)).map f ≫ a
+        map_zero' := by simp
+        map_add' := by intros; simp [Preadditive.comp_add] }) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact bijective_precomp_quotient (T := B⟦n⟧) f
+  dsimp only [precompHomologyData]
+  infer_instance
+
+
+open CochainComplex HomComplex in
+private noncomputable def externalDerivedEquiv
+    {D : Type*} [Category* D] [Abelian D] [HasDerivedCategory D]
+    (A I : CochainComplex D ℤ) [I.IsKInjective] (n : ℤ) :
+    (HomComplex A I).homology n ≃+
+      (DerivedCategory.Q.obj A ⟶ (DerivedCategory.Q.obj I)⟦n⟧) :=
+  (HomComplex.homologyAddEquiv A I n).trans
+    ((CohomologyClass.homAddEquiv (K := A) (L := I) (n := n)).trans
+      ((AddEquiv.ofBijective DerivedCategory.Qh.mapAddHom
+        (IsKInjective.Qh_map_bijective _ (I⟦n⟧))).trans
+        (Linear.homCongr ℤ ((DerivedCategory.quotientCompQhIso D).app A)
+          ((DerivedCategory.quotientCompQhIso D).app (I⟦n⟧) ≪≫
+            (DerivedCategory.Q.commShiftIso n).app I)).toAddEquiv))
+
+private noncomputable def sectionsComparison
+    {D E : Type*} [Category* D] [Category* E] [Abelian D] [Abelian E]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions D] (F : D ⥤ E) [F.Additive] :
+    F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
+  (Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)) DerivedCategory.Qh ≪≫
+    Functor.isoWhiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso E)).inv ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient D (.up ℤ)) F.rightDerivedFunctorUnit ≫
+      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso D)
+        F.rightDerivedFunctor).hom
+
+private theorem isIso_sectionsComparison
+    {D E : Type*} [Category* D] [Category* E] [Abelian D] [Abelian E]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions D] (F : D ⥤ E) [F.Additive]
+    (T : CochainComplex D ℤ) [T.IsKInjective] :
+    IsIso ((sectionsComparison F).app T) := by
+  dsimp [sectionsComparison]
+  infer_instance
+
+attribute [local irreducible] sectionsComparison Functor.rightDerivedFunctor
+  Functor.rightDerivedFunctorUnit
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max c v r})
@@ -141,6 +285,21 @@ noncomputable def totalTensor :
   (curriedTensor (Modules.{c, v, r} R)).map₂HomologicalComplex
     (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
 
+attribute [local irreducible] homComplexFunctor CategoryTheory.globalComplexIso
+
+set_option backward.isDefEq.respectTransparency false in
+omit [HasDerivedCategory.{z} AddCommGrpCat.{max c v r}] in
+private theorem globalMap_quasiIso
+    {A P I : Complexes.{c, v, r} R} (p : P ⟶ A) [QuasiIso p] [I.IsKInjective] :
+    QuasiIso ((CategoryTheory.globalBifunctor.{c, v, r} R).map
+      (X := (op A, I)) (Y := (op P, I)) (p.op, 𝟙 I)) := by
+  have : QuasiIso (CategoryTheory.externalMap p (𝟙 I)) := externalMap_quasiIso p
+  have h := CategoryTheory.globalComplexIso_naturality.{c, v, r} R p (𝟙 I)
+  apply (quasiIso_iff_comp_right _ (CategoryTheory.globalComplexIso.{c, v, r}
+    R (op P, I)).hom).mp
+  rw [h]
+  infer_instance
+
 set_option backward.isDefEq.respectTransparency true in
 set_option synthInstance.maxSize 2048 in
 set_option linter.unusedSectionVars false in
@@ -200,6 +359,11 @@ theorem tensorRightAdjoint_iso
     (S.adjunction K)⟩
 
 
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 300000 in
+-- Naturality compares several composites through product functors and localization.
 /-- Natural K-injective models for the internal Hom, its full derived global sections,
 and all of its hypercohomology groups. The third comparison identifies the ordinary
 sections complex with the usual global Hom complex, including its differential and
@@ -246,6 +410,117 @@ theorem derived_internalHom_sections_model :
         ((derivedSections.{c, v, r, w, z} R).obj
           (((internalHom.{c, v, r, w} R).obj (op K)).obj M))) ≃+
           (K ⟶ M⟦n⟧))) := by
-  sorry
+  classical
+  let A := Modules.{c, v, r} R
+  let : IsGrothendieckAbelian.{max c v r} A :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r}
+      J R).1
+  let I := CochainComplex.kInjectiveResolutionFunctor.{max c v r} A
+  let η := CochainComplex.toKInjectiveResolution.{max c v r} A
+  let G := (𝟭 (Complexes.{c, v, r} R)ᵒᵖ).prod (injectiveProperty.{c, v, r} R).ι
+  let H := Functor.uncurry.obj (homComplexFunctor (R := R))
+  obtain ⟨e₀⟩ := derivedInternalHomOfUniverses_comparison.{c, v, r, w} J R I η (fun M ↦
+    ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} A M).2,
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v r} A M⟩)
+  let α := Functor.whiskerLeft G
+    (Functor.whiskerRight (NatTrans.prod (𝟙 (𝟭 (Complexes.{c, v, r} R)ᵒᵖ)) η)
+      (H ⋙ DerivedCategory.Q))
+  have : IsIso α := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro X
+    have : X.2.obj.IsKInjective := X.2.property
+    have : (I.obj X.2.obj).IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v r} A _
+    have : QuasiIso (η.app X.2.obj) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} A _).2
+    apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr
+    exact quasiIso_homComplex_mapOfUniverses.{c, v, r}
+      (I' := X.2.obj) (I := I.obj X.2.obj) (η.app X.2.obj) (𝟙 X.1.unop)
+  let a : representedInternalHom.{c, v, r, w} R ≅
+      representativeHom.{c, v, r} R ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerLeft G e₀ ≪≫ (asIso α).symm
+  have hb : Nonempty (representedInternalHom.{c, v, r, w} R ⋙
+      derivedSections.{c, v, r, w, z} R ≅ globalHom.{c, v, r} R ⋙
+        DerivedCategory.Q) := by
+    let Γ := sections.{c, v, r} R
+    let Gs := Γ.mapHomologicalComplex (.up ℤ)
+    let δ := sectionsComparison Γ
+    have hδ (T : Complexes.{c, v, r} R) [T.IsKInjective] : IsIso (δ.app T) :=
+      isIso_sectionsComparison Γ T
+    let F := representativeHom.{c, v, r} R
+    let γ := Functor.whiskerLeft F δ
+    have hγ : ∀ X, IsIso (γ.app X) := by
+      rintro ⟨L, I'⟩
+      have : I'.obj.IsKInjective := I'.property
+      obtain ⟨P, p, hP, _, hp, _⟩ :=
+        CochainComplex.exists_isKFlatResolutionIndependentCoefficients L.unop
+      have : QuasiIso p := hp
+      let f : (L, I') ⟶ (op P, I') := (p.op, 𝟙 I')
+      have hflat : (homComplex (R := R) P I'.obj).IsKInjective :=
+        CochainComplex.isKInjective_homComplex_of_isKFlatOfUniverses.{r, c, v} P I'.obj hP
+      have hf : QuasiIso (F.map f) := by
+        exact quasiIso_homComplex_mapOfUniverses.{c, v, r} (𝟙 I'.obj) p
+      have : IsIso ((F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor).map f) := by
+        change IsIso (Γ.rightDerivedFunctor.map (DerivedCategory.Q.map (F.map f)))
+        infer_instance
+      have : QuasiIso (Gs.map (F.map f)) := by
+        change QuasiIso ((CategoryTheory.globalBifunctor.{c, v, r} R).map
+          (X := (L, I'.obj)) (Y := (op P, I'.obj)) (p.op, 𝟙 I'.obj))
+        exact globalMap_quasiIso R p
+      have : IsIso ((F ⋙ Gs ⋙ DerivedCategory.Q).map f) := by
+        change IsIso (DerivedCategory.Q.map (Gs.map (F.map f)))
+        infer_instance
+      have : IsIso (γ.app (op P, I')) := by
+        change IsIso (δ.app (homComplex (R := R) P I'.obj))
+        exact hδ _
+      have hn := γ.naturality f
+      have : IsIso (γ.app (L, I') ≫
+          (F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor).map f) := by
+        rw [← hn]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _
+        ((F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor).map f)
+    have : IsIso γ := (NatTrans.isIso_iff_isIso_app γ).mpr hγ
+    exact ⟨Functor.isoWhiskerRight a (derivedSections.{c, v, r, w, z} R) ≪≫
+      (asIso γ).symm⟩
+  refine ⟨⟨a⟩, hb, ?_, ?_⟩
+  · refine ⟨fun A I ↦ CategoryTheory.globalComplexIso.{c, v, r} R (op A, I), ?_⟩
+    intro A A' I I' f g n p q hpq s
+    have hn := CategoryTheory.globalComplexIso_naturality.{c, v, r} R f g
+    have hv := ConcreteCategory.congr_hom
+      (congrArg (fun k ↦ k.f n) hn) s
+    exact (congrArg (fun x ↦ x.v p q hpq) hv).trans
+      (CategoryTheory.externalMap_v f g n _ p q hpq)
+  · intro K M n
+    let L := DerivedCategory.Q.objPreimage K
+    let N := DerivedCategory.Q.objPreimage M
+    let T := I.obj N
+    have : T.IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v r} A N
+    have : QuasiIso (η.app N) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v r} A N).2
+    let eL : DerivedCategory.Q.obj L ≅ K := DerivedCategory.Q.objObjPreimageIso K
+    let eM : DerivedCategory.Q.obj T ≅ M :=
+      (asIso (DerivedCategory.Q.map (η.app N))).symm ≪≫
+        DerivedCategory.Q.objObjPreimageIso M
+    let ii : (injectiveProperty.{c, v, r} R).FullSubcategory :=
+      ⟨T, (show T.IsKInjective from inferInstance)⟩
+    obtain ⟨b⟩ := hb
+    let h : (((internalHom.{c, v, r, w} R).obj (op K)).obj M) ≅
+        (representedInternalHom.{c, v, r, w} R).obj (op L, ii) :=
+      (derivedInternalHomOfUniverses.{c, v, r, w} J R).mapIso (eL.op.prod eM.symm)
+    let Hd := DerivedCategory.homologyFunctor.{z} AddCommGrpCat.{max c v r} n
+    let hc := (derivedSections.{c, v, r, w, z} R).mapIso h ≪≫ b.app (op L, ii)
+    let ht : Hd.obj ((derivedSections.{c, v, r, w, z} R).obj
+          (((internalHom.{c, v, r, w} R).obj (op K)).obj M)) ≅
+        (CochainComplex.HomComplex L T).homology n :=
+      Hd.mapIso hc ≪≫
+        (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{max c v r} n).app
+          ((globalHom.{c, v, r} R).obj (op L, ii)) ≪≫
+        (HomologicalComplex.homologyFunctor AddCommGrpCat.{max c v r} (.up ℤ) n).mapIso
+          (CategoryTheory.globalComplexIso.{c, v, r} R (op L, T))
+    exact ⟨(ht.addCommGroupIsoToAddEquiv).trans
+      ((externalDerivedEquiv L T n).trans
+        (Linear.homCongr ℤ eL ((shiftFunctor _ n).mapIso eM)).toAddEquiv)⟩
 
 end CategoryTheory.DerivedInternalHomSectionsModel
