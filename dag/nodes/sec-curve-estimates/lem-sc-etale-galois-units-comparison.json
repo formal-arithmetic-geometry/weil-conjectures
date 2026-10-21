@@ -13,36 +13,33 @@
  ],
  "proof": [
   {
-   "text": "The homogeneous continuous cochain model is naturally equivalent in degree two to the quotient of continuous inhomogeneous two-cocycles by continuous one-cochain coboundaries.",
+   "text": "Use the adopted source construction gmSheafFiberGaloisPointAddEquiv: transport the evaluation equivalence at the algebraic closure to the Galois point using galoisPointSheafFiberIso. Evaluation on germs identifies the stalk with separable-closure units. Naturality of evaluation under field automorphisms, as proved in gmSheafFiberGaloisPointAddEquiv_presheafFiberAct, gives equivariance.",
    "uses": [
-    "lem-sc-galois-units-homogeneous-comparison"
+    "lem-sc-etale-units-stalk-evaluation-overfield"
    ],
    "elementary": false
   },
   {
-   "text": "The stalk equivalence of abelian etale sheaves with discrete continuous Galois modules identifies degree-two etale cohomology of the units sheaf with the explicit inhomogeneous cocycle quotient.",
+   "text": "Specialize the existing additive stalk cohomology comparison sheafHAddEquivContinuousCohomology at Ks = SeparableClosure K, F = gmSheaf, M = galoisUnitsTopRep K, and n = 2. The discrete topology instance is supplied by rfl, and the preceding stalk equivalence and equivariance supply its two arguments. This is exactly the body of the attached source construction cohomologicalBrauerGroupAddEquivGaloisUnitsH2.",
    "uses": [
-    "lem-sc-etale-units-two-cocycle-comparison"
+    "lem-sc-etale-stalk-continuous-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compose the two equivalences.",
-   "uses": [
-    "lem-sc-galois-units-homogeneous-comparison",
-    "lem-sc-etale-units-two-cocycle-comparison"
-   ],
+   "text": "The inverse additive equivalence, with additivity forgotten, is a bijection from Field.GaloisUnitsH2 K to the cohomological Brauer group. Thus the source construction proves the unchanged node statement; the old Sheaf theorem and the inhomogeneous-cocycle detour are redundant.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-galois-units-homogeneous-comparison",
-  "lem-sc-etale-units-two-cocycle-comparison"
+  "lem-sc-etale-units-stalk-evaluation-overfield",
+  "lem-sc-etale-stalk-continuous-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Etale Cohomology, Lemmas 04JQ and 03QU, Example 03QV (2), Section 0DVG",
-  "place": "The homogeneous/inhomogeneous change of variables and stalk comparison"
+  "by": "worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EtaleGaloisUnitsComparison.lean",
+  "place": "cohomologicalBrauerGroupAddEquivGaloisUnitsH2, specializing sheafHAddEquivContinuousCohomology with gmSheafFiberGaloisPointAddEquiv and its equivariance theorem; Stacks 04JQ, 03QU, 03QV (2), 0DVG"
  },
  "mathlib_searches": [
   {
@@ -99,14 +96,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleGaloisUnitsComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGaloisUnitsComparison.lean",
-  "declaration": "AlgebraicGeometry.Scheme.nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup",
-  "statement": "theorem nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] : Nonempty (Field.GaloisUnitsH2 K ≃ (Spec (.of K)).CohomologicalBrauerGroup)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleGaloisUnitsComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleGaloisUnitsComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cohomologicalBrauerGroupAddEquivGaloisUnitsH2",
+  "statement": "noncomputable def cohomologicalBrauerGroupAddEquivGaloisUnitsH2 (K : Type u) [Field K] :\n    (Spec (.of K)).CohomologicalBrauerGroup ≃+ Field.GaloisUnitsH2 K",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "N3",
+  "date": "2026-10-21",
+  "note": "The adopted source additive equivalence implies the former Nonempty bijection by .symm.toEquiv. The exact old theorem was compiled from it, with only the three permitted axioms. The zero-hole Sheaf duplicate is retired; the mathematical statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -119,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-85013",
   "group": "N3",
   "result": "pass",
-  "landing": "20261012T085313-L-28982",
+  "landing": "20261021T012416-L-2186534",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf theorem nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup with source def cohomologicalBrauerGroupAddEquivGaloisUnitsH2 (.symm.toEquiv proves the old statement, axioms clean); node diff limited to lean/proof/proof_deps/proof_origin; zero importers"
  }
 }
