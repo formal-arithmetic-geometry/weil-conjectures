@@ -11,9 +11,102 @@
   "def-weil-affine-spectrum",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=R^\\Gamma$, $C=R^I$, and $\\mathfrak p=\\mathfrak q\\cap A$. By [lem-dl-a1-finite-invariant-prime-orbits-residues], $R$ is integral over $A$, the primes above $\\mathfrak p$ form one finite $\\Gamma$-orbit, and their residue extensions are algebraic normal with finite automorphism groups (each such group is the image of a subgroup of finite $\\Gamma$). Apply [lem-dl-a1-integral-normal-residue-etale-splitting] to $A\\to R$ and the chosen $\\mathfrak q$. We obtain an etale $A$-algebra $B$, $\\mathfrak p'\\subset B$, a lift $\\mathfrak q'\\subset S=B\\otimes_A R$ of $\\mathfrak q$ and $\\mathfrak p'$, and a product $S=\\prod_{j=1}^nD_j$ with one fibre prime per factor, all residue extensions over $\\mathfrak p'$ purely inseparable. Label the factor containing $\\mathfrak q'$ by $1$.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-dl-a1-integral-normal-residue-etale-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; second reduction paragraph, integral quotient and normal residue fields"
+   }
+  },
+  {
+   "text": "The action on $S$ is $g(b\\otimes r)=b\\otimes g(r)$. For any prime $Q$ of a ring with a group action, its inertia subgroup is exactly $\\{g:g(r)-r\\in Q\\text{ for all }r\\}$: the difference condition gives identity on the quotient and, using $g^{-1}$, preservation of $Q$, hence identity on its fraction field; the reverse implication follows from the injection of the domain quotient into its fraction field. If $g\\in I$, then for $s=\\sum b_a\\otimes r_a$ we have $g(s)-s=\\sum b_a\\otimes(g(r_a)-r_a)\\in\\mathfrak q'$. Conversely, the difference condition at $\\mathfrak q'$ applied to $1\\otimes r$ contracts to the difference condition at $\\mathfrak q$. Thus $I_{\\mathfrak q'}=I$. This argument also works for any later base localization.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; first reduction paragraph; elementary proof of inertia base change (pione lemma-inertia-base-change)"
+   }
+  },
+  {
+   "text": "Since $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale, $B$ is flat over $A$ by [def-weil-etale-morphism]. Apply [lem-dl-a1-flat-base-change-finite-invariants] first with $H=\\Gamma$ and then with $H=I$. The canonical identifications are $S^\\Gamma=B\\otimes_A R^\\Gamma=B$ and $S^I=B\\otimes_A C$. Therefore the square formed by $\\operatorname{Spec}S^I\\to\\operatorname{Spec}C$ and $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is cartesian. The top map is etale by [lem-weil-pbc-etale-scheme-base-change]. Its point $\\mathfrak q'\\cap S^I$ maps to $\\mathfrak q_I$. The same conclusions hold after any principal localization of $B$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-dl-a1-flat-base-change-finite-invariants",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; first reduction paragraph, the two invariant base-change identifications"
+   }
+  },
+  {
+   "text": "Let $U_j=\\operatorname{Spec}D_j\\subset\\operatorname{Spec}S$. Refine the finite clopen partition by all its $\\Gamma$-translates: its nonempty atoms are the intersections $\\bigcap_{g\\in\\Gamma}g(U_{a(g)})$. They are clopen, partition the spectrum, are permuted by $\\Gamma$, and each contains at most one point of the fibre over $\\mathfrak p'$. Let $Z$ be the union of atoms containing none of those points. It is closed. Since $S^\\Gamma=B$, [lem-dl-a1-finite-invariant-prime-orbits-residues] gives integrality of $B\\to S$, so [lem-weil-pbc-integral-spec-closed-map] says its image of $Z$ is closed and misses $\\mathfrak p'$. Choose $b\\in B\\setminus\\mathfrak p'$ with $D(b)$ disjoint from that image, and replace $B,S$ by $B_b,S_b$. This is permissible by step 3 and [lem-weil-pbc-etale-composition-cancellation], since a principal localization is an open immersion. Now every remaining atom has exactly one fibre point. By [lem-weil-pbc-spec-clopen-idempotent], the atoms give orthogonal idempotents $e_j$ summing to $1$: disjointness gives $D(e_ie_j)=\\varnothing$, so uniqueness of the idempotent of the empty clopen gives $e_ie_j=0$; the union gives $1-\\sum e_j=0$. Thus $S\\simeq\\prod_j e_jS$ via $s\\mapsto(e_js)_j$, with inverse summation. Relabel these factors and their fibre points. This product is now permuted by $\\Gamma$; the residue fields have not changed, because we localized away from $\\mathfrak p'$.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-weil-pbc-integral-spec-closed-map",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; third reduction paragraph, equivariant clopen refinement and removal of empty-fibre atoms"
+   }
+  },
+  {
+   "text": "Write $D=\\{g:g\\mathfrak q'=\\mathfrak q'\\}$. Every $g\\in D$ acts over $\\kappa(\\mathfrak p')$ on the purely inseparable field $\\kappa(\\mathfrak q')$, hence acts trivially: in characteristic $p$, $x^{p^a}=c$ has at most one root, and in characteristic zero the extension is trivial. Thus $D=I_{\\mathfrak q'}=I$. Because the factors are permuted and each has exactly one fibre point, the stabilizer of the first factor is $I$. By [lem-dl-a1-finite-invariant-prime-orbits-residues], $\\Gamma$ is transitive on these fibre points and therefore on these factors. Choose representatives $g_jI$ with $g_1=1$ sending factor $1$ to factor $j$. Projection gives a ring isomorphism $S^\\Gamma\\simeq(e_1S)^I$: its inverse sends $a\\in(e_1S)^I$ to the tuple whose $j$-th entry is $g_j(a)$. If $g g_j=g_k h$ with $h\\in I$, then $g(g_j(a))=g_k(a)$, so the tuple is invariant; this also proves independence of the representatives. Projection and this tuple map are inverse since every invariant tuple is determined by its first coordinate. In particular $B\\simeq(e_1S)^I$.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; last paragraph, purely inseparable residue action and the transitive-product invariant calculation"
+   }
+  },
+  {
+   "text": "Since $I$ fixes $e_1$, taking invariants gives $S^I=(e_1S)^I\\times((1-e_1)S)^I$. Under step 5 the composite $B=S^\\Gamma\\to S^I\\to(e_1S)^I$ is the identity of $B$. Thus the first component $W=\\operatorname{Spec}(e_1S)^I$ of $\\operatorname{Spec}S^I$ is isomorphic over $\\operatorname{Spec}B$ to $\\operatorname{Spec}B$ and contains $\\mathfrak q'\\cap S^I$. The component inclusion is an open immersion by [lem-weil-pbc-finite-affine-coproduct-spectrum]. Its composite $W\\to\\operatorname{Spec}C$ is etale by step 3 and [lem-weil-pbc-etale-composition-cancellation]. Its image $V$ is open by [lem-weil-pbc-etale-morphism-open-map], and contains $\\mathfrak q_I$. The map $W\\to V$ is surjective and etale (cancellation with the open inclusion $V\\hookrightarrow\\operatorname{Spec}C$). The composite $W\\to V\\to\\operatorname{Spec}A$ is etale, since it is the isomorphism $W\\simeq\\operatorname{Spec}B$ followed by the etale neighbourhood map. Apply [lem-trf-etale-descent-through-source-cover] with $Y=W$, $X=V$, and $T=\\operatorname{Spec}A$. It proves that $V\\to\\operatorname{Spec}A$ is etale, as required.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, proof; last paragraph and descent through the first reduction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-finite-invariant-prime-orbits-residues",
+  "lem-dl-a1-integral-normal-residue-etale-splitting",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-etale-morphism",
+  "lem-dl-a1-flat-base-change-finite-invariants",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-trf-etale-descent-through-source-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +142,38 @@
    "results": "8 hits: IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Algebra.IsUnramifiedAt, Algebra.IsEtaleAt.comp. The hits define etaleness at a prime, Frobenius elements or inertia degrees; none proves etaleness of this invariant subring. The grep has no matching theorem.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*[Ee]tale|[Ee]tale.*inertia|inertiaInvariants",
+   "results": "0 hits: .  The hits define etale loci, inertia groups/degrees and field invariant extensions. None states this arbitrary-ring inertia-invariant etaleness theorem. The project generic integral-closure theorem has Dedekind/curve hypotheses, so it is not an attachment.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite group acting on a ring the fixed ring of the inertia subgroup is etale locally at that prime",
+   "results": "8 hits: IsGalois.of_fixed_field, FixedPoints.subalgebra, Ideal.Quotient.ker_stabilizerHom, Ideal.card_inertia_eq_ramificationIdxIn, AddSubgroup.inertia, IsGaloisGroup.fixedPoints, FixedPoints.isIntegral, Ideal.Quotient.map_ker_stabilizer_subtype.  The hits define etale loci, inertia groups/degrees and field invariant extensions. None states this arbitrary-ring inertia-invariant etaleness theorem. The project generic integral-closure theorem has Dedekind/curve hypotheses, so it is not an attachment.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, FixedPoints.subring",
+   "results": "0 hits: .  The hits define etale loci, inertia groups/degrees and field invariant extensions. None states this arbitrary-ring inertia-invariant etaleness theorem. The project generic integral-closure theorem has Dedekind/curve hypotheses, so it is not an attachment.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inertia fixed subring is etale at the prime above the finite group invariant ring without noetherian hypotheses",
+   "results": "8 hits: Algebra.IsEtaleAt, arithFrobAt, Ideal.inertiaDegIn_ne_zero, Ideal.inertiaDegIn_mul_inertiaDegIn, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsUnramifiedAt, Algebra.IsEtaleAt.comp, Ideal.inertiaDegIn_eq_inertiaDeg.  The hits define etale loci, inertia groups/degrees and field invariant extensions. None states this arbitrary-ring inertia-invariant etaleness theorem. The project generic integral-closure theorem has Dedekind/curve hypotheses, so it is not an attachment.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
@@ -72,5 +193,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BST without Noetherian or tame hypotheses. Kept inertia base change and the finite Boolean refinement/product-invariant computation as explicit steps; reused existing closed-image, clopen-idempotent, etale permanence and source descent nodes. Added flat invariant base change, a Mathlib quotient-prime/residue leaf, and integral normal-residue etale splitting (the existing split requires finite-dimensional full residue extensions).",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions, lisse extension iff trivial inertia, through the finite-quotient step of the normal-scheme Galois inertia presentation. Steps realize all four paragraphs of the proof of Stacks 0BST at that node-level tool.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic source-etale descent for the final neighbourhood W -> V; the setup unit has no scheme descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-descent-through-source-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-6f80e5f58",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-6f80e5f58 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the sources in full: pione.tex 0BST and 0BSS, more-algebra 0BRH/0BRI/0BRJ, more-morphisms 0BSR. The statement is unchanged against live, which is still unsplit, and agrees with 0BST (arbitrary ring, no Noetherian or tame hypothesis). This is the first delivery, with no re-split note, and the item is not on the dropped list. Steps: (1) the leaf gives integrality, a single finite orbit and normal residue fields with surjective stabilizer, hence finite Aut, which is exactly the hypothesis of the splitting node. (2) The inertia criterion g(r)-r in Q is checked in both directions, using g^-1 for preservation of Q; it is elementary and replaces 0BSS, which has no node. (3) The flat node applied with H=Gamma and H=I over A=R^Gamma gives a cartesian square; base change is etale by 02GO. (4) I checked that the atoms of the Gamma-translates are permuted, that the image of Z is closed by the integral closed-map leaf, the principal localization, and orthogonality of the idempotents. (5) Purely inseparable residue fields give D=I, the stabilizer of factor 1 is I, and the tuple map g_j(a) is invariant and independent of representatives. (6) The component W is iso to Spec B; W->V is etale and surjective, and descent gives V->Spec A etale. New nodes: the leaf's 4 declarations were read at Basic.lean:139/147/353 and Galois.lean:85 and the lines are correct. The flat-invariants node is true (finite kernel sequence, modular actions allowed) and is not lem-per-tame-invariants-arbitrary-base-change, which needs |G| invertible; Mathlib has no IsInvariant flat/tensor result. The 0BSR variant (normal residue fields with finite Aut give a finite separable part, and q' lifts through the nonzero tensor product) is not lem-weil-pbc-integral-fibre-etale-splitting, which needs finite-dimensional residue fields; here the inseparable part can be infinite. All three new nodes are statement-only, introduce their own objects and are strictly smaller than the item, so this is not a relabelling. Small cases checked: swap on kxk, Artin-Schreier, x->-x, trivial action. Batch-5 flag: lem-trf-etale-descent-through-source-cover is generic descent (036W/02K6). Its 219-node closure contains no other sec-trace-formula node and no poincare, sk-thm-trace-transport or nt-* node, so it is outside both assumptions; accepted. Its split_report tool_use is accepted as a generic black-box tool. No changes."
  }
 }
