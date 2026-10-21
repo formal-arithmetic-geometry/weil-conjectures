@@ -19947,3 +19947,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:45:11Z L: superseded stage-1 delivery Q111/lem-pd-section-derived-pushpull-normalization at 996f938c0c850662109b56b75a803f68fa8f3c5c; current completion retained; packet archived at refs/superseded/Q111/lem-pd-section-derived-pushpull-normalization/996f938c0c850662109b56b75a803f68fa8f3c5c; stale return retired.
 - 2026-10-21T03:45:24Z L: superseded stage-1 delivery Q92/lem-sp-finite-compact-support-domains at 5683997e58c6abe660217a5fa8ca1e5797847c03; current completion retained; packet archived at refs/superseded/Q92/lem-sp-finite-compact-support-domains/5683997e58c6abe660217a5fa8ca1e5797847c03; stale return retired.
 - 03:45 L: merged deliver/Q01/lem-sfb-grothendieck-sheafification (reviewer FIX; first push; new nodes: 4)
+- 03:45 L: merged deliver/Q20/lem-pe-comparison-etale-slice-abelian-pullback (reviewer PASS; first push; new nodes: 0)

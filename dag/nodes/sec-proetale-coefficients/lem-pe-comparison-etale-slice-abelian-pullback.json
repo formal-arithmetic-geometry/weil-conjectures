@@ -17,9 +17,71 @@
   "def-weil-pbc-inverse-image",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the étale slice explicitly. Send $(T\\to W)$ in $W_{\\mathrm{ét}}$ to $(T\\to W\\xrightarrow{v}X,\\ T\\to W)$ in $X_{\\mathrm{ét}}/W$. The composite is étale by clause (2) of [lem-weil-pbc-etale-composition-cancellation]. Conversely an object of the slice has $T\\to X$ and $W\\to X$ étale, so its $X$-map $T\\to W$ is étale by clause (3) of that node. These operations leave the underlying schemes and arrows unchanged and are inverse, before passage to compatible small skeletons. By [def-weil-pbc-etale-site] and [def-pur-localized-ringed-site], a family on either side covers precisely when its underlying étale arrows are jointly surjective. Thus this is an equivalence of sites. The restriction of $F$ through this identification evaluates at $T\\to W$ as $F(T\\to X)$, including its original restriction homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GN (lemma-composition-etale), 02GW (lemma-etale-permanence); sites.tex Tag 00Y0 (definition-localize) and the following restriction formula"
+   }
+  },
+  {
+   "text": "The inclusion of étale objects into weakly étale objects in [def-weil-pbc-site-comparison-morphism] makes $v:W\\to X$ an object of $X_{\\mathrm{proét}}$. Apply clause (1) of [lem-weil-proetale-weakly-etale-localization] to this object (choose the auxiliary commutative ring $A=\\mathbf Z$, whose value is irrelevant to that clause). It identifies $W_{\\mathrm{proét}}$ with $X_{\\mathrm{proét}}/W$, by the same composition and forgetful operations as in step 1, and identifies their coverings. For an abelian sheaf $G$ the slice restriction is therefore the sheaf $G|_W$ with $G|_W(T\\to W)=G(T\\to X)$ and the restriction maps of $G$.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), functoriality of the small pro-étale site; more-morphisms.tex Tags 094T (lemma-composition-weakly-etale), 0951 (lemma-weakly-etale-permanence), and sites.tex Tag 00Y0"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-etale-inverse-image-restriction] to the étale map $v$ and the abelian sheaf $F$, obtaining $\\rho_{e,F}:v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\sim}F|_W$, natural in $F$. Apply the abelian-sheaf part of clause (1) of [lem-sfb-proetale-object-inverse-image-restriction] to the object $v$ of step 2, obtaining $\\rho_{p,G}:v_{\\mathrm{proét}}^{-1}G\\xrightarrow{\\sim}G|_W$, natural in $G$. These are the geometric inverse images induced by the scheme map $v$, not merely the restriction functors on the abstract slice. Their section formulas are exactly those of steps 1 and 2. The abelian clauses used here require neither a finite coefficient ring nor that $v$ be a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE (lemma-localize-given-products), identifying the geometric morphism from base change with localization; etale-cohomology.tex Tag 03S2 (section-extension-by-zero), restriction along an étale map"
+   }
+  },
+  {
+   "text": "Use the abelian comparison square [lem-weil-pbc-comparison-pullback] with $u=v$, $U=W$ and $V=X$. Write its component as $c_F:\\nu_W^{-1}v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\sim}v_{\\mathrm{proét}}^{-1}\\nu_X^{-1}F$. The required component is the following explicit composite of abelian-sheaf isomorphisms on $W_{\\mathrm{proét}}$:\n$$ (\\nu_X^{-1}F)|_W\\xrightarrow{\\rho_{p,\\nu_X^{-1}F}^{-1}}v_{\\mathrm{proét}}^{-1}\\nu_X^{-1}F\\xrightarrow{c_F^{-1}}\\nu_W^{-1}v_{\\mathrm{ét}}^{-1}F\\xrightarrow{\\nu_W^{-1}(\\rho_{e,F})}\\nu_W^{-1}(F|_W). $$\nEvery adjacent domain and codomain agrees as written. Each factor is invertible, and naturality in $F$ follows by composing the naturality equations of $\\rho_p$, $c$, and $\\rho_e$ from step 3 and the cited comparison square. This is precisely the comparison square expressed using the two restriction identifications, proving the final assertion.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), commutative diagram of small-site morphisms and the inverse-image equality immediately before lemma-morphism-comparison; expressed via the restriction identifications of step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Y0 and 03CE; assembly of existing étale/pro-étale restriction and comparison-square lemmas, with the final composite written explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +117,59 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, Algebra.FormallyEtale.localization_map, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.FormallyEtale.localization_base, StandardEtalePair.HasMap.map",
    "date": "2026-10-21",
    "verdict": "no match: site localization and overPullback definitions and unrelated etale algebra do not state the comparison inverse-image square on the two small sites; read Mathlib/CategoryTheory/Sites/Over.lean and AlgebraicGeometry/Sites/Proetale.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|upperStarIsoLocalizationRestriction|overPullback",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Sheaf",
+   "results": "7 hits: CategoryTheory.GrothendieckTopology.overPullback, TopologicalSpace.Opens.instIsRightAdjointSheafSubtypeCarrierMemGrothendieckTopologySheafRestrictOfOverOverOverPullback, TopologicalSpace.Opens.sheafRestrictSheafEquivOver, TopologicalSpace.Opens.overPullbackSheafEquivOver, CategoryTheory.Sheaf.isIso_of_coversTop, CategoryTheory.Sheaf.isIso_iff_of_coversTop, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of an abelian sheaf along a morphism of schemes commutes with the comparison between the etale and proetale sites",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.appIso_inv_app, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.inverse.congr_simp, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian sheaf inverse image for the etale to proetale comparison commutes with restriction to an etale object and identifies its localized sites",
+   "results": "8 hits: CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.GrothendieckTopology.plusCompIso_inv_eq_plusLift, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.Equivalence.sheafCongr.counitIso_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison|[Ll]ocalization|[Oo]ver",
+   "results": "5 hits: 13, 16, 24, 30, 48; the command returned line numbers in its file column for this single-file search (13,16,24,30,48); read the actual file directly. These are imports, introductory text, and the big-site heading.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a site over an object identifies inverse image with restriction and commutes with change from the small etale to the proetale topology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, AlgebraicGeometry.Scheme.etaleTopology, Topology.IsOpenEmbedding.compatiblePreserving, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]roetale|comparison|localization",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic over-site restriction, topology and sheaf equivalence infrastructure does not state the étale/pro-étale abelian comparison on a slice; read Mathlib/CategoryTheory/Sites/Over.lean:248-290 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:140-200"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-comparison-injective-left-modules-acyclic",
@@ -70,12 +181,52 @@
  "blueprint": {
   "from": {
    "node": "sk-prop-sf-comparison",
-   "place": "First paragraph of sk-prop-sf-comparison.proof.md: localization of comparison pullbacks of injective terms; old item step 2, including identification of pro-étale inverse image with slice restriction.",
+   "place": "First paragraph of main-20261015 sk-prop-sf-comparison.proof.md: the injective-acyclicity input to the derived unit; in the parent lem-pe-comparison-injective-left-modules-acyclic, localization to an étale object and identification of the restricted comparison pullback.",
    "via": [
     "lem-pe-comparison-injective-left-modules-acyclic"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-comparison-etale-slice-abelian-pullback",
+  "worker": "stage1",
+  "group": "Q20",
+  "summary": "Statement unchanged. Four-step proof: explicit étale slice equivalence, existing weakly étale slice equivalence, the two existing abelian restriction isomorphisms, and their explicit composite with the canonical comparison square. No new nodes or Mathlib leaves. Checked every cited statement, hypotheses, coefficient scope, and dependency acyclicity.",
+  "blueprint": "Realizes the localization input used by parent lem-pe-comparison-injective-left-modules-acyclic for the first paragraph of main-20261015 sk-prop-sf-comparison.proof.md (injective acyclicity and the derived comparison unit). No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Its clause (1) supplies the equivalence of the small pro-étale site of a site object with the localized site. This is a general localization tool; the unit has no replacement for this site identification."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Its abelian clause (1) identifies the geometric inverse image along any étale morphism with sectionwise restriction. This generic localization tool does not replace the unit comparison/acyclicity route."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Only its abelian clause (1) is used: inverse image along any small pro-étale site object equals restriction. No coefficient-ring or module assertion is imported; the unit has no such general restriction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Use the canonical abelian inverse-image comparison for an arbitrary scheme morphism, specialized to v. This is the generic comparison square that the item must express on slices, not a replacement for the unit cohomology argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-897df58de",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-897df58de (reviewer sub-agent of L); spot-checked: I read every step in full and found no faults. Delivery shape: one commit on db59bdc; no new nodes. The statement and stmt_deps are byte-identical to the live copy, where the item is still unsplit. The item is not on any dropped list and has no repair note, so the re-split rules do not apply; it cites no SGA. Step 1: the clause (2)/(3) composition and cancellation leaf, plus the covering and restriction definitions, give W_et = X_et/W; the elementary mark is justified. Step 2: the étale-to-weakly-étale inclusion of def-weil-pbc-site-comparison-morphism makes v an object of X_proet; clause (1) of lem-weil-proetale-weakly-etale-localization gives the pro-étale slice. Step 3: clause (1) of lem-weil-pbc-etale-inverse-image-restriction (abelian) and the abelian part of clause (1) of lem-sfb-proetale-object-inverse-image-restriction. I re-derived that (U→W→X,(str,id)) is initial in I_U because φ is a W-morphism, so no monomorphism is needed; this confirms the finite étale degree-2 case. Step 4: lem-weil-pbc-comparison-pullback with u=v gives c_F in the written direction. Each factor of the composite ρ_p^{-1}, c_F^{-1}, ν_W^{-1}ρ_e is typed and invertible. Sources checked: Stacks 03CE (sites.tex:6094), 00Y0, 09A5 (the ε^{-1}f_et^{-1}=f_proet^{-1}ε^{-1} display), 03S2, 02GN/02GW, 0951/094T. No cycle (closure of 236 nodes). Duplicate check: det-pe-injective-acyclicity-reduction clause 2 covers only injective I and affine W, so it is narrower and not a duplicate. I accept all four declared tool_uses: weakly-étale-localization, etale-inverse-image-restriction, proetale-object-inverse-image-restriction and comparison-pullback. The last two of these were already accepted on the parent in the same unit. Mathlib searches cover all three kinds."
  }
 }
