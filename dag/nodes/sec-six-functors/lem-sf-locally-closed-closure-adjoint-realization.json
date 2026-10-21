@@ -33,9 +33,203 @@
   "def-weil-pbc-adjunction-conjugate",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $(0)$ and $(1)$, so $\\operatorname{Spec}k$ is a single Noetherian affine. Apply [lem-weil-pbc-finite-type-over-noetherian] to the given structure maps of $T$ and $S$. Thus $T$ and $S$ are Noetherian. Since $V$ is an open subscheme of $T$, [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes $V$ Noetherian as well. Every open subscheme of any of these three schemes is therefore quasi-compact. In particular $s,c,v$ are quasi-compact morphisms: the inverse image of an affine open is an open subscheme of their respective Noetherian source. This checks the quasi-compactness hypothesis needed for the scheme-theoretic image, rather than assuming it for an arbitrary immersion.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 01OW, 01OZ and topology.tex Tag 04ZA, as combined in the cited open-subscheme node"
+   }
+  },
+  {
+   "text": "Use [def-nagata-scheme-theoretic-image] for $s$. Its image inclusion $i:\\bar S\\hookrightarrow T$ is closed, its canonical factor $u$ satisfies $iu=s$, and its defining ideal is the largest quasi-coherent subideal of $\\ker(\\mathcal O_T\\to s_*\\mathcal O_S)$. Since Step 1 proves $s$ quasi-compact, the same node identifies this ideal with that kernel itself. Apply [lemma-nagata-immersion-open-in-scheme-image] to the quasi-compact immersion $s$: the canonical map $u:S\\to\\bar S$ is a quasi-compact open immersion. Thus these are precisely the canonical maps of the statement, including any nilpotent scheme structure, rather than maps chosen only from a topological closure.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R6/01R7, lemma-scheme-theoretic-image/definition-scheme-theoretic-image; Tag 01R8, lemma-quasi-compact-scheme-theoretic-image; Tag 01RG, lemma-quasi-compact-immersion"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-proper], $i$ and $c$ are proper, in particular separated and of finite type. The quasi-compact open immersions $v,u$ are of finite type by [lem-weil-pbc-qc-open-immersion-finite-type], and are separated by [lem-weil-pbc-separated-cancellation]. Finite-type composition [lem-sfb-finite-type-composition-base-change] now gives finite type over $k$ for $V$ and $\\bar S$, and finite type of $s=vc=iu$. Separated composition, clause (e) of [lem-weil-pbc-proper-fp-permanence], gives separatedness over $k$ for $V$ and $\\bar S$, since $T$ is separated over $k$. As $u$ is open, $i$ proper and $iu=s$, the pair $(u,i)$ is a compactification by [def-weil-compactifications-refinements].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W5, lemma-closed-immersion-proper; Tag 01T2, lemma-immersion-locally-finite-type; Tag 01T3, lemma-composition-finite-type; schemes.tex Tags 01L7 and 01KU"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-over-noetherian] to $i:\\bar S\\to T$ to see that $\\bar S$ is Noetherian. Every open complement in $V$ or $\\bar S$ is an open subscheme of a Noetherian scheme, hence is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Finally [lem-kun-dimension-finite-type] applies to the finite-type $k$-scheme $\\bar S$. The chain definition of $\\kundim$ in [def-kun-dimension] is exactly the topological Krull dimension in [def-kun-topological-krull-dimension]. Thus choose an integer $D\\ge0$ bounding it. If $\\bar S$ is empty its dimension is $-\\infty$ and take $D=0$. This establishes the uniform dimension assertion without using finite-dimensionality of a general Noetherian scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-kun-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Finite-type dimension assertion; Noetherianity and open complements use Stacks Tags 01T6, 01OW, 01OZ and 04ZA"
+   }
+  },
+  {
+   "text": "On the etale site, the abelian direct images $c_{e,*},i_{e,*}$ are exact by [lem-pur-etale-supported-kernel-adjunction]. The constant-$A$ module direct image has the same sections and commutes with the forgetful functors to abelian sheaves [def-weil-pbc-direct-image]; module kernels are sectionwise and module cokernels are the sheafified sectionwise ones, as for abelian sheaves [def-weil-sheaf-of-modules-category]. So forgetting scalars is exact and faithful, hence reflects exactness, and the module functors $c_{e,*},i_{e,*}$ are exact as well. The open functors $v_{e,!},u_{e,!}$ are exact by [lem-weil-pbc-extension-by-zero-exact]. On the pro-etale site, apply [lem-exc-proetale-closed-exact] to $c$ and $i$; their open complements are quasi-compact by Steps 1 and 4. The functors $v_{p,!},u_{p,!}$ are exact by [lem-weil-extension-by-zero-exact]. Each composite $F_\\tau$ and $E_\\tau$ is therefore exact: applying its two factors successively to a short exact sequence gives a short exact sequence. By [lem-weil-pbc-exact-functor-derived-factorization] they induce termwise functors on the ordinary unbounded derived categories. By [lem-weil-pbc-exact-functor-complex-cohomology], $\\mathcal H^r(GK)\\cong G\\mathcal H^r(K)$ for each such exact factor or composite $G$. Consequently each preserves every lower bound, with no restriction on upper cohomology.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-exc-proetale-closed-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, support adjunction (exactness of closed pushforward, made module-linear via the forgetful functor); sites-modules.tex Tag 03DJ; proetale.tex Tag 09BM; homology.tex Tag 010N; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "On etale module sheaves, apply [lem-sfb-etale-locally-closed-extension-comparison] with $X=T$, $a=s$, $W=V$, $h=c$ and with the canonical closure $\\bar S$. Its normalized identification $i_{e,*}u_{e,!}\\cong v_{e,!}c_{e,*}$ has an inverse $q_e:F_e\\to E_e$, still restricting to the identity on $S$. On pro-etale module sheaves, [lem-sfb-locally-closed-extension-coherence] gives precisely the normalized identification $q_p:v_{p,!}c_{p,*}\\cong i_{p,*}u_{p,!}$. For each immersion involved, [prop-weil-pbc-proetale-constant-ring-map] identifies the inverse image of the finite constant-$A$ ring sheaf with the specified constant ring sheaf on its source. Thus the coefficients satisfy the pulled-back-ring hypothesis of that node, including its canonical scalar maps. Apply these natural transformations in every degree of a complex. Naturality makes them chain maps and their inverses remain chain maps. Step 5 ensures that all four functors invert quasi-isomorphisms after localization; [lem-weil-pbc-localization-universal-property], clause (2), descends the two isomorphisms and their inverses to the unbounded derived categories. These are the required $q_\\tau$, with the specified sheaf normalization.",
+   "uses": [
+    "lem-sfb-etale-locally-closed-extension-comparison",
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-weil-pbc-localization-universal-property",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ1, lemma-compatible-shriek-push-finite, closed case and closure consequence; proetale.tex Tags 09AA, 09BM, 09BN, 09AH; localization of natural isomorphisms as in the cited universal-property node"
+   }
+  },
+  {
+   "text": "Use the compactification $(u,i)$ from Step 3 in [def-amb-etale-compact-support]. It gives $Rs_!^{(u,i)}=Ri_{e,*}\\,u_{e,!}$. The module sheaf functor $i_{e,*}$ is exact by Step 5 (via [lem-pur-etale-supported-kernel-adjunction]), so [lem-weil-pbc-exact-functor-derived-factorization] identifies its total right derived functor with its termwise functor on every unbounded complex. Therefore $Rs_!^{(u,i)}=i_{e,*}u_{e,!}=E_e$ under the specified canonical identifications. The hypotheses of [thm-amb-etale-exceptional-adjoint] hold: $S,\\bar S,T$ are Noetherian, $u$ is open, $i$ is proper of finite type and $A$ is a finite commutative ring. Hence its chosen ambient right adjoint $s^\\times$ is a right adjoint to this same $E_e$.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
+    "place": "Ordinary ambient exceptional adjoint; chosen-compactification definition and Stacks derived.tex Tag 015F for exact closed direct image"
+   }
+  },
+  {
+   "text": "Keep the pasted adjunction $F_e\\dashv J_e$ in the hypotheses and the adjunction $E_e\\dashv s^\\times$ from Step 7. Apply [def-weil-pbc-adjunction-conjugate] to $q_e^{-1}:E_e\\to F_e$. Its conjugate is a natural isomorphism $r:J_e\\to s^\\times$, because conjugation sends inverse isomorphisms to inverse isomorphisms. More explicitly its Hom bijection is characterized by sending $\\alpha:F_eL\\to M$ to $\\alpha q_{e,L}^{-1}:E_eL\\to M$ before transposing under $E_e\\dashv s^\\times$. Denoting the two units and counits by $\\eta^F,\\varepsilon^F$ and $\\eta^E,\\varepsilon^E$, transposing the identity gives\n$$r_{E_eL}\\,J_e(q_{e,L})\\,\\eta^F_L=\\eta^E_L,\\qquad \\varepsilon^E_M\\,E_e(r_M)\\,q_{e,J_eM}=\\varepsilon^F_M.$$\nThese are exactly preservation of the units and counits under $q_e,r$, and fix the direction and normalization of the right-adjoint identification.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "conjugateEquiv (line 275), conjugateEquiv_counit (line 286), unit_conjugateEquiv (line 303), conjugateIsoEquiv (line 425); equations also follow by expanding the cited conjugation definition"
+   }
+  },
+  {
+   "text": "Let $M\\in D^b_c(T_e,A)$, and choose $a\\le b$ outside which its cohomology sheaves vanish. By [prop-weil-pbc-inverse-image-modules-exact] the constant-coefficient inverse image $v_e^*$ is exact. The cohomology identification of [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^r(v_e^*M)\\cong v_e^*\\mathcal H^r(M)$, so it vanishes outside the same interval. For each of the finitely many relevant cohomology sheaves, intersect its finite constructible locally closed stratification with $V$. The resulting strata remain locally closed and are constructible in $V$ by [lem-weil-pbc-constructible-open-restriction]. Restrict each etale cover trivializing the finite locally constant $A$-module on a stratum to its open intersection with $V$; it still trivializes the same finite module. Thus this is a finite lisse stratification on $V$, as required by [def-weil-pbc-constructible-complexes]. Consequently $N=v_e^*M\\in D^b_c(V_e,A)$, with lower bound $a$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-constructible-open-restriction",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact, constant-coefficient case; homology.tex Tag 010N; topology.tex Tag 005J; restriction of a finite lisse stratification"
+   }
+  },
+  {
+   "text": "The adjunction $c_{e,*}\\dashv Rc_e^!$ is the one on ordinary unbounded derived categories of [lem-exc-closed-ambient]. Its left functor is the termwise module direct image, exact by Step 5 (abelian exactness of [lem-pur-etale-supported-kernel-adjunction] transported through the forgetful functor), with the required localization factorization from [lem-weil-pbc-exact-functor-derived-factorization]. Apply clause (1) of [lem-pur-exact-derived-adjunction-bounds]: $Rc_e^!$ preserves every standard lower cohomological bound. Since Step 9 gives $N\\in D^{\\ge a}(V_e,A)$, it follows that $H=Rc_e^!N=J_eM\\in D^{\\ge a}(S_e,A)\\subset D^+(S_e,A)$. Only the bounded-below assertion is needed here; no constructibility claim about this value of the closed right adjoint is used.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-exact-derived-adjunction-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing, and the standard exact-adjunction lower-bound consequence stated in lem-pur-exact-derived-adjunction-bounds (1)"
+   }
+  },
+  {
+   "text": "For any $L\\in D^+(S_e,A)$ choose a lower bound for $L$. Step 5 preserves this bound under $c_{e,*},u_{e,!}$ and either further extension $v_{e,!},i_{e,*}$. The same holds for $H$ by Step 10. The closed immersions $c,i$ are quasi-compact by Steps 1--4 and separated by [lem-weil-pbc-separated-cancellation], hence quasi-separated by [lem-pc-separated-quasi-separated]. Thus [prop-weil-pbc-comparison-direct-image] is defined for $c$ at $L,H$, giving $\\nu_V^*Rc_{e,*}L\\cong Rc_{p,*}\\nu_S^*L$ and the same formula for $H$. It is also defined for $i$ at $u_{e,!}L,u_{e,!}H$, which are bounded below, and gives $\\nu_T^*Ri_{e,*}u_{e,!}L\\cong Ri_{p,*}\\nu_{\\bar S}^*u_{e,!}L$, likewise for $H$. More generally the open immersions $u,v$ are quasi-compact and separated by the same geometry, so the cited comparison can be applied at every intervening bounded-below source as well. This verifies the domain assertion after either factorization of the immersion.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison, bounded-below qcqs direct-image comparison; schemes.tex Tag 01L7 and the paragraph after Definition 01KK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-compactifications-refinements",
+  "lem-kun-dimension-finite-type",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-etale-locally-closed-extension-comparison",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-weil-pbc-localization-universal-property",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-adjunction-conjugate",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-constructible-open-restriction",
+  "def-weil-pbc-constructible-complexes",
+  "lem-exc-closed-ambient",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pc-separated-quasi-separated",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph, locally closed Rs^! comparison: explicit geometric and bounded-input prerequisites, closure compactification and adjunction conjugation; component Stacks places are given in the proof steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +286,38 @@
    "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; generic adjunction or scheme/site declarations only; no stated site-derived normalization result.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally closed immersion of schemes its extension by zero through the scheme theoretic closure is exact and its derived right adjoint preserves bounded below complexes",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, HomologicalComplex.extend_exactAt, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.extend_exactAt_iff, HomologicalComplex.exactAt_of_isSupported; 8 hits. Read actual returned signatures. Scheme.Modules.restrictAdjunction concerns Zariski structure-sheaf restriction, not the two small constant-coefficient sites; scheme image and immersion declarations cover geometry alone.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale compact support of an immersion is exact and its right adjoint computed by closed support after open restriction is bounded below",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, HasCompactSupport.comp_isClosedEmbedding, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; 8 hits. Read actual returned signatures. Scheme.Modules.restrictAdjunction concerns Zariski structure-sheaf restriction, not the two small constant-coefficient sites; scheme image and immersion declarations cover geometry alone.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, CategoryTheory.Adjunction",
+   "results": "No hits; 0 hits. Read actual returned signatures. Scheme.Modules.restrictAdjunction concerns Zariski structure-sheaf restriction, not the two small constant-coefficient sites; scheme image and immersion declarations cover geometry alone.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally closed immersion factors as an open immersion into its scheme theoretic image followed by a proper closed immersion and the two small site extension by zero functors agree",
+   "results": "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Scheme.Hom.toImage_imageι, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.Hom.toImage_imageι_assoc, AlgebraicGeometry.IsOpenImmersion.lift_fac, AlgebraicGeometry.IsOpenImmersion.lift; 8 hits. Read actual returned signatures. Scheme.Modules.restrictAdjunction concerns Zariski structure-sheaf restriction, not the two small constant-coefficient sites; scheme image and immersion declarations cover geometry alone.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-finite-duality-locally-closed-comparison",
@@ -114,5 +336,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-locally-closed-closure-adjoint-realization",
+  "worker": "stage1",
+  "summary": "Split the unchanged composite statement into eleven steps using existing geometric, open/closed sheaf, localization, adjunction and bounded-comparison nodes. No new nodes. Checked both ordinary finite constant-coefficient sites, canonical scheme-theoretic image maps, all Noetherian/qcqs hypotheses, preservation of lower bounds, conjugate direction and its two adjunction identities. The bounded input only requires the exact-adjunction lower-bound lemma, not a dimension estimate for the right adjoint.",
+  "blueprint": "Realizes the geometric prerequisites, closure compactification and bounded-input part of the second proof paragraph of lem-weil-finite-duality-site-comparison, specifically its locally closed exceptional comparison sentence. The unit closed-support/open-locality route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies finite dimension of the closure as a finite-type scheme over a field; the immersion-adjoint unit has no replacement dimension theorem."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Only exactness of the abelian etale closed direct image is used; module exactness follows through the exact faithful forgetful functor (Step 5). Replaces a closed-sheaf internal-adjunction node dropped by the route pivot of 2026-10-19."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of ordinary etale open extension is a sheaf tool."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Exactness of pro-etale closed pushforward with quasi-compact open complement is a sheaf tool."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Exactness of ordinary pro-etale open extension is a sheaf tool."
+   },
+   {
+    "node": "lem-sfb-etale-locally-closed-extension-comparison",
+    "why": "Uses the existing sheaf-level normalized closed/open interchange to pass between the two immersion factorizations."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Uses the existing pro-etale normalized factorization identification on ordinary constant-module derived categories."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Supplies the ordinary etale ambient compact-support right adjoint already named in the item."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient etale restriction is a sheaf tool used to retain cohomological bounds."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Supplies the ambient closed right adjunction already named in the item."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Only clause (1), the generic lower-bound consequence of an exact termwise left adjoint, is used for the existing ordinary etale closed adjunction."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Uses the generic bounded-below qcqs site-comparison domain and its natural isomorphism."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the ordinary intrinsic finite constant coefficient rings with the pulled-back rings required by the pro-etale factorization-coherence tool; no change of coefficient category is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sfb-etale-locally-closed-extension-comparison",
+  "lem-sfb-locally-closed-extension-coherence",
+  "thm-amb-etale-exceptional-adjoint",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-exc-closed-ambient",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-13ecc3e71",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-13ecc3e71 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and all 46 cited statements in full. Statement, stmt_deps, source and blueprint are byte-identical to the live unsplit node, so no target is weakened. No new nodes, no re-split note, no SGA. Mechanical finding: the cited lem-per-etale-closed-sheaf-internal-adjunction is dropped (route-pivot-dropped.txt line 1521). The item itself, its citer lem-weil-finite-duality-locally-closed-comparison and the ancestor lem-weil-finite-duality-site-comparison are all live, so this is a repairable citation fault (same as the NU injective-support-sequence precedent). The node was used in Steps 5, 7 and 10 only for module exactness of etale c_* and i_*. Fix: Step 5 now cites lem-pur-etale-supported-kernel-adjunction (abelian i_* is exact). The module direct image commutes with forgetting scalars (def-weil-pbc-direct-image), and module kernels and cokernels are the abelian ones (def-weil-sheaf-of-modules-category), so the exact faithful forgetful functor transfers exactness. Steps 7 and 10 now point to Step 5, and proof_deps and tool_uses are updated. The fixed closure contains no dropped id and no cycle. No Artin-Gabber forbidden ingredient is used. Maths checked: Step 1 Noetherianity gives quasi-compactness of s, c, v. Step 2 uses the qc scheme-theoretic image (01R8) and makes u a qc open immersion (01RG), keeping nilpotents. Step 3 checks every requirement of def-weil-compactifications-refinements for (u,i). Step 4 gives finite dim via lem-kun-dimension-finite-type, with the empty case D=0. Step 5 composite exactness preserves lower bounds, including the pro-etale closed case with qc complement. Step 6 uses the normalized closure identifications of lem-sfb-etale-locally-closed-extension-comparison and lem-sfb-locally-closed-extension-coherence, with the coefficient bridge prop-weil-pbc-proetale-constant-ring-map, and descends them by localization (2). Step 7: Ri_* is termwise because i_* is exact, and thm-amb-etale-exceptional-adjoint's hypotheses hold. Step 8: conjugating q^{-1}:E->F gives J->s^x; I re-derived both unit and counit identities from the mate relations. Step 9 shows D^b_c is stable under v^* via 005J and lisse restriction. Step 10 applies clause (1) of the exact-adjunction bounds node, giving H in D^{>=a}. Step 11 applies the bounded-below qcqs comparison at c and i. Source: blueprint main-20261015 site-comparison proof, paragraph 2 sentence on locally closed Rs^!. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-locally-closed-closure-adjoint-realization.json.; 1 file(s) fixed by the reviewer"
  }
 }
