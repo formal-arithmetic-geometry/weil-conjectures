@@ -20740,3 +20740,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:37 L: returned deliver/Q08/lem-sfb-constant-scalar-restriction-tensor (reviewer RETURN: L: independent stage-2 immutable head 482787df52b5: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
 - 07:38 L: returned deliver/Q138/def-nagata-flat-pullback-rees-map (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-flat-pullback-rees-map: cited node def-naga)
 - 07:39 L: returned deliver/NS/lem-pur-supported-triangle-mate-identification (reviewer RETURN: L: independent stage-2 immutable head 4cf6c25017c5: H2 theorem stmt_dep upheld: lem-pur-etale-scalar-mate-projection was)
+- 07:39 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
