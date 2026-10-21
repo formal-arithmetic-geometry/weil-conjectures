@@ -20638,3 +20638,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/NS/sk-thm-picard-pn (reviewer FIX; first push; new nodes: 0)
 - 07:23 L: merged deliver/Q107/def-sfb-left-derived-functor (reviewer PASS; first push; new nodes: 1)
 - 07:23 L: merged deliver/Q68/lem-a1-mixed-direct-summand (reviewer PASS; first push; new nodes: 0); claim not held by Q68: not your claim
+- 07:23 L: merged deliver/Q37/def-wf-semisimple-lie-algebra (reviewer PASS; first push; new nodes: 0)

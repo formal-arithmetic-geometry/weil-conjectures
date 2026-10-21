@@ -1,0 +1,29 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-algebraic-groups-lie-algebras/def-wf-semisimple-lie-algebra.json` (definition, Mathlib leaf), `citations.json` (empty because there are no proof steps), and this report. No new nodes and one Mathlib leaf (the item).
+2. Attachments: none. This delivery records the Mathlib leaf requested after the rejected attachment, rather than resubmitting an attachment claim.
+3. WANTED: none.
+4. The item statement is correct and unchanged. The previous rejection concerned an absent project wrapper. In this session's read clone the wrapper is now present at `lean/WeilConjectures/Mathlib/Algebra/Lie/Radical.lean:62-64`, and is a direct application of the Mathlib criterion. The delivery relies on the Mathlib source itself. The initial root-level sandbox copy had no split, report, citations or search records; it agrees with the repository item. It was retained, and the delivery file was written at the required DAG-relative path.
+5. Nothing remains unfinished for this item. No Lean files were written, no compiler or Lake tool was run, and no repository or launcher files were changed.
+
+## Mathlib correspondence
+
+Read `Mathlib/Algebra/Lie/Semisimple/Defs.lean:50-65` and `Mathlib/Algebra/Lie/Semisimple/Basic.lean:49-69`. The predicate to use is `LieAlgebra.HasTrivialRadical`, with `LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals` giving precisely the blueprint's defining condition. The latter is over any commutative ring: specializing R to the stated characteristic-zero field k is immediate and does not require finite dimensionality. We retain both hypotheses in the natural-language statement.
+
+Mathlib's `LieAlgebra.IsSemisimple` at Defs.lean:105 is a direct-sum-of-simple-ideals condition. No equivalence with that different definition is used or promised. The exact no-solvable-ideals iff is already available, so no new comparison lemma is needed.
+
+Executed all searches using `msearch.py Q37 def-wf-semisimple-lie-algebra`: LeanFinder for the trivial-radical iff, Loogle for `LieAlgebra.HasTrivialRadical, LieAlgebra.IsSolvable`, grep for the criterion and classes under `Algebra/Lie`, and LeanSearch for semisimplicity and solvable ideals. All services succeeded, and their hits were read; exact queries and results are recorded in the item and `searches.jsonl`. The grep fixes the criterion's declaration at Basic.lean:67 and the predicate at Defs.lean:64.
+
+## Not duplicates
+
+No new nodes. Searched the whole DAG for no nonzero solvable ideals, HasTrivialRadical, trivial radical and semisimple Lie algebras, and ran `tools/blueprint_refs.py search` for `semisimple` and `solvable ideal`. The radical/centre definition defines different notions; the Killing-form node proves a consequence assuming this definition; the Lie-algebra bundle defines solvability but does not define semisimple Lie algebras. No other blueprint node states this definition; `same_as` is empty. The item is imported, so `blueprint.from` stays null. The unit sk-d-lie has no proof steps, and this small definition node is not the entire unit statement, so no unit record is changed.
+
+## Review by Q37
+
+I read the item's defining sentence in both `literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-lie/def-wf-semisimple-lie-algebra.md` (order 2464) and `literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-d-lie/def-wf-semisimple-lie-algebra.md` (order 2808); they agree verbatim. I also read the chapter record and sk-d-lie's statement. The item retains characteristic zero and finite dimensionality exactly as the source says. There is no source error or route change.
+
+For the statement citation I opened `def-wf-lie-algebra`: it explicitly defines an ideal by [L,I] contained in I and solvability by vanishing of the derived series. These are precisely the notions used by the item. It is already a reviewed Mathlib leaf, so its definition bundle is reused; no additional statement dependencies are needed. There are no proof steps, hence no step citations or non-elementary facts to account for under C1/C4, and citations.json is correctly empty. In particular no proof of a dependency is being used in place of its statement.
+
+I checked the Mathlib criterion's full context at Basic.lean:51 and both directions at lines 54-69. Its only assumptions are CommRing R, LieRing L and LieAlgebra R L, all supplied by the item's field and Lie algebra. Its right-hand side quantifies over every Lie ideal, with solvability of that ideal as a Lie algebra, and forces equality to the zero ideal; this is exactly the stated definition, with no restriction to proper ideals. Thus it also correctly excludes a nonzero solvable algebra by taking I=L. For small cases, the zero Lie algebra satisfies the condition (all ideals are zero); a one-dimensional abelian algebra over Q fails (its nonzero top ideal has zero first derived algebra). Neither side introduces a Nontrivial L assumption. These tests also guard against confusing semisimple with simple or treating only proper ideals.
+
+Against delivery-errors B-E: no new statement-only nodes, duplicate facts, missing hypotheses or inline claims are introduced; the statement is unchanged and self-contained through its existing definition dependency. The leaf records exact declarations, source files and lines read, and the actual successful search results. No proof steps are disguised as elementary, no content is moved into a restatement, and no cycles or off-unit proof citations are added. All fields outside the split are retained. The material correction to the prior attempt is packaging the exact Mathlib criterion as a leaf rather than proposing the rejected attachment. The required deliver.py --no-push run exited successfully and printed OK (not pushed) at 6ed12ad12cf, with server preflight passed. The final push reruns the delivery checks.

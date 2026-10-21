@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-wf-semisimple-lie-algebra",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Semisimple Lie algebra",
@@ -18,9 +18,42 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasTrivialRadical_iff_no_solvable_ideals|class HasTrivialRadical|class IsSemisimple",
+   "results": "Mathlib/Algebra/Lie/Semisimple/Basic.lean:67 hasTrivialRadical_iff_no_solvable_ideals (statement lines 67-69); Mathlib/Algebra/Lie/Semisimple/Defs.lean:64 HasTrivialRadical; Defs.lean:105 IsSemisimple.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semisimple Lie algebra has no nonzero solvable ideals",
+   "results": "8 hits including LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals (Mathlib.Algebra.Lie.Semisimple.Basic), LieAlgebra.hasTrivialRadical_of_no_solvable_ideals, LieAlgebra.IsSemisimple, and LieAlgebra.IsSemisimple.instHasTrivialRadical.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.HasTrivialRadical, LieAlgebra.IsSolvable",
+   "results": "3 hits: LieAlgebra.hasTrivialRadical_of_no_solvable_ideals, LieAlgebra.HasTrivialRadical.eq_bot_of_isSolvable, LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals (Mathlib.Algebra.Lie.Semisimple.Basic).",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Lie algebra has trivial radical if and only if every solvable Lie ideal is zero",
+   "results": "8 hits including LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals (Mathlib/Algebra/Lie/Semisimple/Basic), LieAlgebra.hasTrivialRadical_of_no_solvable_ideals, LieAlgebra.hasTrivialRadical_iff, and LieAlgebra.HasTrivialRadical.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LieAlgebra.HasTrivialRadical; LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals",
+  "file": "Mathlib/Algebra/Lie/Semisimple/Defs.lean; Mathlib/Algebra/Lie/Semisimple/Basic.lean",
+  "how": "Specializes in one line: for the given characteristic-zero field k and finite-dimensional Lie algebra L, use HasTrivialRadical k L (Defs.lean:64-65) as the predicate called semisimple in this blueprint. The theorem hasTrivialRadical_iff_no_solvable_ideals k L (Basic.lean:67-69, hypotheses at line 51) says exactly HasTrivialRadical k L iff every ideal I with IsSolvable I equals bottom, i.e. there is no nonzero solvable ideal. The theorem requires only CommRing k, LieRing L and LieAlgebra k L; no additional hypotheses or comparison argument is needed. The same LieIdeal and IsSolvable notions are already recorded by def-wf-lie-algebra. This does not identify the definition with Mathlib IsSemisimple, whose direct-sum definition is different."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -30,5 +63,20 @@
  ],
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-d-lie"
+ "unit": "sk-d-lie",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-wf-semisimple-lie-algebra",
+  "worker": "stage1",
+  "summary": "Verified the definition against both blueprint snapshots and the definition bundle def-wf-lie-algebra. Recorded Mathlib HasTrivialRadical with its exact no-solvable-ideals criterion as a Mathlib leaf, with four executed and logged searches. No statement change, proof steps or new nodes.",
+  "blueprint": "Realizes the entire defining sentence of def-wf-semisimple-lie-algebra in sk-d-lie. Its master and main-20261015 texts agree; there is no proof to subdivide. Whole-blueprint searches for semisimple and solvable ideal found no other node stating this definition; from remains null because this is an imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-52819729f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-52819729f (reviewer sub-agent of L); spot-checked: Read the item, both blueprint texts and the Mathlib source. Blueprint master order 2464 and main-20261015 order 2808 are verbatim identical: a finite-dimensional characteristic-zero Lie algebra with no nonzero solvable ideal. The statement and stmt_deps (def-wf-lie-algebra, which defines ideals and solvability by the derived series) are unchanged from base. The node is not superseded: it is still imported in live and side-live, and there is no repair note. The Mathlib leaf is correct. LieAlgebra.HasTrivialRadical is at Defs.lean:64-65 (radical = ⊥). hasTrivialRadical_iff_no_solvable_ideals is at Basic.lean:67-69, with variables at :51 (CommRing, LieRing, LieAlgebra only). It says HasTrivialRadical ↔ every solvable LieIdeal is ⊥, which is exactly the blueprint definition, including I = L and with no Nontrivial assumption. The agreement is a Mathlib theorem, so this is a one-line specialization and not a B8 unsplit case. The how field rightly does not identify the item with IsSemisimple (direct sum of atoms, Defs.lean:105). Small cases agree under both definitions: L = 0 is semisimple (Subsingleton instance); 1-dimensional abelian is not; sl_2 is; gl_2 is not (central ideal). Searches cover all three kinds: grep, leansearch, loogle and leanfinder. No duplicate definition was found by rg -L over dag/nodes: def-wf-lie-radical-centre defines rad and Z, and the citers killing-nondegenerate, central-radical-quotient and faithful-semisimple only use the notion. There are no proof steps and no new nodes, the unit record is untouched, no tool_uses are needed and no SGA is used. No fixes."
+ }
 }
