@@ -24,9 +24,200 @@
   "def-weil-pbc-completed-pullback",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the finite-stage heart with constructible continuous $E_X$-modules using the t-exact equivalence $J_X$. Choose a lisse stratum through $\\bar x$ and an affine etale lattice chart there. Write $N_\\bullet$ for its normalized finite-free etale reduction system and $M_{\\bar x}=\\varprojlim_n(N_n)_{\\bar x}$. The normalized fibre is $M_{\\bar x}[1/\\varpi_E]$, and an integral system map divided by $\\varpi_E^a$ acts as $\\varpi_E^{-a}\\varprojlim u_n$. The reduction equivalence reconstructs the chosen lisse lattice from $N_\\bullet$. All subsequent local computations use precisely these quotient and localization maps; they make no claim about arbitrary pro-etale stalks commuting with inverse limits.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3, 6.8.6; Proposition 6.8.4(1),(4),(6)"
+   }
+  },
+  {
+   "text": "For a finite-level etale module sheaf $H$, let $c_{g,H}:(g^{-1}H)_{\\bar y}\\to H_{\\bar x}$ be the inverse-image stalk isomorphism. It is linear: naturality applied to multiplication by any coefficient gives $c_{g,H}(as)=a c_{g,H}(s)$. Its germ formula sends the germ of a pulled section back to its original germ. Hence it commutes with every quotient transition; the identity and composite-pullback comparisons agree because both send each pulled germ to that same original germ. For any finite coefficient homomorphism $R\\to R'$, the stalk scalar comparison sends $a\\otimes s_{\\bar x}$ to $(a\\otimes s)_{\\bar x}$. Pulling back this germ and then applying $c_g$ gives $a\\otimes s_{\\bar x}$ as well. Since these tensors generate stalk scalar extension, this proves the finite-level pullback/scalar square, including non-flat quotient homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Tag 03Q1, etale-cohomology.tex, lemma-stalk-pullback (3), germ formula; sheaf scalar stalk formula"
+   }
+  },
+  {
+   "text": "Apply the previous step to every $N_n$. The maps $c_{g,N_n}$ form an isomorphism of inverse systems, so their inverse limit is an isomorphism $\\varprojlim_n(g^{-1}N_n)_{\\bar y}\\cong M_{\\bar x}$. Invert $\\varpi_E$ to define $\\alpha_{g,F}:\\omega_{\\bar y,E}(g^*F)\\xrightarrow{\\sim}\\omega_{\\bar x,E}(F)$. This computes the specified completed rational pullback: the lisse reduction comparison commutes with module pullback, $J$ identifies completed rational pullback with derived module inverse image, and stratified pullback t-exactness identifies its local finite-free degree-zero model on $Y\\times_X S$. The pulled chart $U\\times_X(Y\\times_XS)$ is etale and affine over the stratum $Y\\times_XS$ but need not be an affine scheme; replace it by an affine open neighbourhood of the lift $(\\bar u,\\bar y)$, which leaves the stalks at that point unchanged, so it is an affine etale lattice chart of the pulled stratum as the normalization requires. Thus the calculation is made on the actual pullback of the chosen lattice chart, even when $g$ is not flat and that inverse-image stratum is empty away from $\\bar y$. For a map $u/\\varpi_E^a$, the two routes are $\\varpi_E^{-a}\\varprojlim c_g u_n$ and $\\varpi_E^{-a}\\varprojlim u_n c_g$, equal by naturality. This proves naturality in the whole finite-stage heart.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-normalized-fibre-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4; Remark 6.8.15, explicit module inverse image"
+   }
+  },
+  {
+   "text": "Put $A=A_E$, $D=A_L$, $t=\\varpi_E$, $v=\\varpi_L$. Use the scalar system prescribed for lisse sheaves: at level $m$ it is $N_{n(m)}\\otimes_{A/t^{n(m)}}D/v^m$, where $n(m)=\\lceil m/e\\rceil$ and $e$ is the ramification index. Finite scalar stalk comparison and adic reconstruction identify its stalk with $M_{\\bar x}\\otimes_A D/v^m$. Since $M_{\\bar x}$ is finite free, $M_{\\bar x}\\otimes_A D$ is finite free over $D$; reconstruction over $D$ therefore makes the canonical map\n$$M_{\\bar x}\\otimes_A D\\longrightarrow\\varprojlim_m(M_{\\bar x}\\otimes_A D/v^m)$$\nan isomorphism. This is a statement about finite modules, not tensor commuting with an arbitrary inverse limit. This system is that of the actual $T_{L/E}F$: $T_{L/E}$ is completed integral coefficient change followed by localization, and on representatives $J_L(T_{L/E}QK)=L_X\\otimes^L_{B_{L,X}}(K\\otimes^L_{B_{E,X}}B_{L,X})\\cong L_X\\otimes_{E_X}J_E(QK)$ by balancing, the comparison of $J$ with finite coefficient extension; on the chart the lattice $N$ is locally free, so $N\\otimes_{B_{E,X}}B_{L,X}$ is a lisse lattice of $T_{L/E}F$, and the lisse system comparison identifies its reduction modulo $v^m$ with the displayed level-$m$ term ($t^{n(m)}\\in v^mD$). Its inverse followed by localization gives\n$$\\beta_{L/E,F}:\\omega_{\\bar x,L}(T_{L/E}F)\\xrightarrow{\\sim}M_{\\bar x}[1/t]\\otimes_E L.$$\nIndeed both localized modules are canonically $M_{\\bar x}\\otimes_A L$. The scalar stalk maps and the reconstruction maps are natural, so the formula also commutes with every fractional lattice map.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-pod-adic-limit-finite-modules",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-continuous-rational-derived-realization",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4); finite integral scalar comparison, Stacks Tags 09B8, 031D, 00MA"
+   }
+  },
+  {
+   "text": "The comparisons have the required coherence with the specified functor comparisons. On a quotient, scalar extension maps a pure tensor $(s\\otimes a)\\otimes b$ to $s\\otimes ab$; pulling back changes only the germ of $s$, and the map of step 2 sends that pulled germ back to $s$. Consequently both routes through the mixed pullback/scalar square agree on every pure tensor. In a tower $E\\subset L\\subset P$ both scalar routes send $(s\\otimes a)\\otimes b$ to $s\\otimes ab$; identity extension sends $s\\otimes1$ to $s$. These are the balancing associators used by $T$, not arbitrary chosen isomorphisms. Quotient projections commute with all of these formulas. Equality after every finite quotient implies equality of maps into the inverse limit, and localization preserves the equations. The composite-pullback equation similarly follows from the germ equation in step 2. This proves the quotient, identity, scheme-composition, coefficient-composition and mixed-square equations for $\\alpha$ and $\\beta$.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4, quotient-normalized comparisons; Remark 6.8.15, balancing maps"
+   }
+  },
+  {
+   "text": "The formulas descend from the chosen charts. On a common etale refinement, a change of lisse lattice is an isomorphism of rational lisse realizations; full faithfulness of raw lattice rationalization represents it by a fractional integral map. Naturality just proved says that conjugating $\\alpha$ or $\\beta$ by that map gives the comparison computed from the other lattice. The same argument applies to changes of chart and adapted stratification using the normalized fibre identifications. Explicitly, after clearing the finitely many denominators of a comparison, the equality is the equality of the finite-level diagrams, multiplied by the same inverse power of $\\varpi_E$. If another fractional representative is chosen, equality in the localized Hom group means some power of $\\varpi_E$ kills their difference; its rational fibre map is therefore zero. Thus no lattice, chart, stratification or denominator choice survives.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(4),(6); affine-local fractional maps"
+   }
+  },
+  {
+   "text": "For a heart pair $(E,F)$ set $V_{\\bar x}(E,F)=\\omega_{\\bar x,E}(F)\\otimes_E\\overline{\\mathbf Q}_\\ell$. If $[M,u]:(E,F)\\to(L,G)$ is represented at a common field $M$, use $\\beta_{M/E}$ and $\\beta_{M/L}$ to identify the two sides with $\\omega_{\\bar x,M}(T_{M/E}F)\\otimes_M\\overline{\\mathbf Q}_\\ell$ and $\\omega_{\\bar x,M}(T_{M/L}G)\\otimes_M\\overline{\\mathbf Q}_\\ell$, and apply $\\omega_{\\bar x,M}(u)\\otimes_M\\overline{\\mathbf Q}_\\ell$ between them. Step 5 says exactly that replacing $u$ by $a\\,T(u)\\,a^{-1}$ at a larger field leaves this map unchanged. The pair-category equivalence relation and common-stage calculus therefore give a well-defined additive functor, with identities and composition computed at one common stage. Common-stage truncations say every object of the heart is isomorphic to such a finite-stage heart pair. Transport along these isomorphisms extends the construction to that heart; the functorial equations make this independent up to its natural comparison isomorphism.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-per-adic-common-stage-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14, finite coefficient descent; pair-category and truncation formulas"
+   }
+  },
+  {
+   "text": "Finite-stage inclusions into the pair category preserve kernels and cokernels of heart maps: complete a map at that stage to a cone triangle, compute its kernel and cokernel as $H^{-1}$ and $H^0$ of the cone, and use the common-stage cone definition and truncation comparisons. Thus kernels, images, cokernels and homology of any finite heart complex are represented by the corresponding finite-stage objects after a common enlargement. A zero object represented at a finite stage becomes zero at a further stage: apply the equality criterion of common-stage calculus to its identity being zero. Hence any short exact sequence in the common heart is short exact at some finite enlargement (kill its endpoint and middle homology obstructions there). At that stage $\\omega_{\\bar x,M}$ is exact, and extension $-\\otimes_M\\overline{\\mathbf Q}_\\ell$ is exact. Applying these to that short exact sequence proves exactness of $V_{\\bar x}$. This also verifies exactness for heart objects originally given only up to isomorphism.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-pbc-common-stage-cones",
+    "lem-per-adic-common-stage-truncations",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and common-stage cones/truncations; heart cone kernel and cokernel formulas"
+   }
+  },
+  {
+   "text": "Extension of vector-space scalars to a field is faithful and reflects zero: choose a basis, so $W\\otimes_M\\overline{\\mathbf Q}_\\ell\\cong\\overline{\\mathbf Q}_\\ell^{(B)}$, and $w\\mapsto w\\otimes1$ is injective. Naturality of this injection also detects zero linear maps; exactness identifies the scalar-extended homology with the homology after scalar extension. Represent an object, a morphism, or a short complex over a common heart stage. If all its common-stage fibres vanish, are zero maps, or are short exact, respectively, these elementary scalar tests imply the same finite-stage fibre assertions. Finite-stage normalized fibres detect zero objects, zero maps and short exactness. Passing the resulting assertions through the common-stage inclusion gives the claimed detection. Applied to the kernel and cokernel of a map, zero-object detection and exactness show joint conservativity as well.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite-stage normalized fibre detection; finite-diagram descent and elementary basis argument"
+   }
+  },
+  {
+   "text": "For a common-stage heart object represented by $(E,F)$, tensor $\\alpha_{g,F}$ with $\\overline{\\mathbf Q}_\\ell$. The mixed-square equation of step 5 makes this independent of enlarging $E$ and compatible with the action on $[M,u]$ in step 7. Consequently it defines the displayed pullback comparison on common-stage fibres, natural in all common-stage maps. Identity and composite-pullback equations descend as well, since each finite diagram is represented over one field and the equations already hold there. The descended pullback is the actual common-stage pullback supplied by stratified pullback t-exactness.",
+   "uses": [
+    "lem-per-adic-stratified-pullback-texact",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; common-stage morphism formulas"
+   }
+  },
+  {
+   "text": "By the heart realization, choose a finite locally closed stratification with lisse continuous realization on each stratum $S$. To apply the existing lisse-rank theorem, identify its pulled condensed coefficient ring with the continuous coefficient ring, and hence with $E_S=B_{E,S}[1/\\varpi_E]$. Transport of a module along this ring isomorphism preserves its finite-free trivializations. The rank theorem supplies clopen rank loci in $S$ and a finite range because $S$ is noetherian, hence quasi-compact. Its rank equals the normalized fibre dimension: on an etale lattice chart the normalized reduction equivalence gives finite locally free $N_n$ of the same local rank $r$, the reconstructed lattice has that rank, and its inverse-limit fibre is free of rank $r$. After inversion it is $E^r$. This uses only the finite-level stalk of a constant module, which is that module. Thus every geometric point over $x\\in S$ has dimension $r(x)$, independent of chart and geometric point. Two such fibres are isomorphic as $E$-vector spaces by choosing bases of their equal dimension; this asserts no canonical choice of path or isomorphism.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "det-lem-stratified-lattice-rank",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-pod-lisse-tensor-and-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3, 6.8.6; Proposition 6.8.4(1),(6); lisse-rank theorem"
+   }
+  },
+  {
+   "text": "For each of the finitely many $S$, intersect it with its finitely many nonempty clopen rank loci. These subsets are locally closed in $X$, pairwise disjoint and cover $X$, so they are a finite stratification. A fibre is nonzero exactly when its rank is positive, since it is finite-dimensional. Thus the nonzero-fibre locus is the union of the positive-rank strata; a finite union of locally closed subsets in this noetherian space is constructible. For a finite field extension, an $E$-basis of a fibre becomes an $L$-basis of its scalar extension, so step 4 proves rank and nonzero-locus invariance. For any common-stage heart object, choose a finite-stage representative as in step 7; the same basis argument gives equal rank after extension to $\\overline{\\mathbf Q}_\\ell$. The resulting strata and nonzero locus therefore have all the asserted properties, independent of the representative, since the functor sends isomorphisms to fibre isomorphisms.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-constructible-subset",
+    "lem-per-adic-common-stage-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.6; Stacks Tags 09XZ and 005L; finite-field representative and basis argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-per-adic-stratified-pullback-texact",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-pod-adic-limit-finite-modules",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-per-adic-common-stage-truncations",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-pbc-common-stage-cones",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "det-lem-stratified-lattice-rank",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, especially Proposition 6.8.4, Definitions 6.8.3 and 6.8.6, Proposition 6.8.14 and Remark 6.8.15; explicit quotient, finite-module and common-stage arguments using existing DAG tools"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +246,45 @@
    "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"130\", \"text\": \"  have : IsScalarTower ↑Γ(X, U) ↑(X.presheaf.stalk x) ↑X.functionField :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"88\", \"text\": \"    [Nonempty U] : IsScalarTower Γ(X, U) (X.presheaf.stalk x) X.functionField := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"597\", \"text\": \"    IsScalarTower R ((structurePresheafInCommRingCat R).stalk x)\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern generic category, sheaf, ring or scheme constructions; none supplies this normalized constructible adic assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized lattice fibres of constructible l-adic sheaves commute with completed pullback and finite field extension, and have constructible rank loci",
+   "results": "8 hits: CompHausLike.LocallyConstant.incl_comap; Profinite.exists_locallyConstant_finite_aux; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functor; SheafOfModules.pullbackObjFreeIso_hom_naturality; CompHausLike.LocallyConstant.incl_of_counitAppApp; Profinite.exists_locallyConstant_finite_nonempty.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the normalized constructible adic fibre comparisons, common-stage descent and rank-locus assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.fiber, SheafOfModules.pullback",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the normalized constructible adic fibre comparisons, common-stage descent and rank-locus assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*rank|adic.*(stalk|fiber|fibre)|scalar.*stalk",
+   "results": "[grep] OK 3 hit(s), subdirectory AlgebraicGeometry: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean:130; Mathlib/AlgebraicGeometry/FunctionField.lean:88; Mathlib/AlgebraicGeometry/StructureSheaf.lean:597. All are IsScalarTower statements.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the normalized constructible adic fibre comparisons, common-stage descent and rank-locus assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric coefficient fibres of l-adic constructible sheaves under inverse image and extension of fields, locally constant ranks on strata",
+   "results": "8 hits: TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant; CondensedSet.LocallyConstant.functorFullyFaithful; TopologicalSpace.Fiber.instCompactSpaceElemValSetMemRangeCoeLocallyConstantPreimageSingleton; CompHausLike.LocallyConstant.fiber; LightCondensed.lanLightCondSet; Condensed.lanSheafProfinite; IntermediateField.LinearDisjoint.lift_adjoin_rank_eq_lift_rank_right_of_isAlgebraic_right; IntermediateField.relfinrank_mul_finrank_top.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the normalized constructible adic fibre comparisons, common-stage descent and rank-locus assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|normalizedFibre|normalizedFiber",
+   "results": "[grep] OK 0 hit(s), subdirectory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the normalized constructible adic fibre comparisons, common-stage descent and rank-locus assertion, nor a one-line specialization of it"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-adic-heart-pullback-fibres",
@@ -78,5 +304,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-adic-normalized-fibre-comparisons",
+  "worker": "stage1",
+  "summary": "Q86 wrote a twelve-step proof without new nodes. Finite quotient germ and tensor formulas produce the two comparisons; finite-module adic reconstruction supplies the scalar limit, and explicit tensor equations give coherence and chart independence. Common-stage calculus and heart cone formulas give the descended exact conservative fibres. Existing lisse-rank and continuous-coefficient comparison nodes give rank strata. The statement and imported provenance are unchanged.",
+  "blueprint": "Realizes the ordinary-pullback and constructible-support input of the first proof paragraph of lem-per-smooth-pullback-t-exact (master snapshot); main-20261015 retains the ancestor statement but omits its proof. This item is the allocation of returned steps 12–14 of lem-per-adic-heart-pullback-fibres, as its existing blueprint.from.place records. It does not change the perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Generic Adic systems of finite modules over a complete discrete valuation ring: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Generic Common-stage additive and shift calculus: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic Short exact sequences in the heart are triangles: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-weil-field-scalar-extension-exact",
+    "why": "Generic Extension of scalars along a field extension is an exact functor: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Generic Canonical continuous coefficient realizations commute with ring maps: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "det-lem-stratified-lattice-rank",
+    "why": "Generic The rank of a lisse sheaf is locally constant: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Generic Tensor products, scalar extension and stalks of lisse sheaves of modules: used only for its stated module, stalk, coefficient, heart, rank or finite-diagram comparison; it does not replace the perverse unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-adic-limit-finite-modules",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "det-lem-stratified-lattice-rank",
+  "lem-pod-lisse-tensor-and-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-c8d66c64a",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-c8d66c64a (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full, together with the full statements of all 20 cited nodes. Sources: Bhatt–Scholze 6.8.4(1)(4)(6), 6.8.5–6.8.7, 6.8.14 and Remark 6.8.15 (f^* = naive pullback ⊗ Λ_Y), and Stacks 03Q1 lemma-stalk-pullback. No SGA is cited. This is the first split of a statement-only node that the Q119 re-split of lem-per-adic-heart-pullback-fibres created. That repair note belongs to the parent and is resolved, so ordinary stage-1 rules apply. There are no new nodes. The statement and stmt_deps are byte-identical to live, every step is under 2000 characters, and there is no cycle. All arguments of old parent steps 12–14 reappear in more explicit form. The mathematics checks out: germ-formula linearity and composition; the pullback/scalar square on pure tensors with no flatness; α as limit and localization, computed on the actual pullback via J and the stratified node's degree-zero model; β via the def-pod(3) system with index ⌈m/e⌉, stalk M⊗D/v^m and finite-module completeness; associator coherence; chart independence via fractional representatives; the Q̄ functor well defined by transport; exactness via cones H^{-1}/H^0, zero objects vanishing at a finite stage and Q̄ flatness; detection by bases; ranks via the condensed↔continuous E_X identification and det-lem-stratified-lattice-rank; the constructible locus by Stacks 005L. Edge cases checked: empty X, rank 0, identity g and E, ramified L, non-flat g, disconnected strata. Two fixes. Step 4 (C3/C4) did not tie the def-pod(3) system to the actual T_{L/E}F. I added the bridge J_L∘T ≅ L_X⊗_{E_X}J_E by balancing, with T defined as integral change of coefficients followed by localization, and the lattice N⊗_{B_E}B_L. Its uses gain the realization node and prop-weil-pbc-scalar-extension, both already in proof_deps. In step 3 the pulled chart U×_X(Y×_X S) is affine over the stratum but need not be an affine scheme; I shrink it to an affine neighbourhood of (ū,ȳ). Batch-5 flags: lisse-completed-system-comparison, etale-stalk-tensor-scalar, def-pod-lisse-l-adic-sheaves, adic-limit-finite-modules and lisse-tensor-and-scalar-extension. Their closures reach only def-pod-ring-scalar-extension, stalk tensor algebra and adic tower reconstruction. These are general definitions or O_E-module algebra, not the trace formula, Poincaré duality or a step of either proof, so I accept all five. I accept all 10 tool_uses as generic. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
  }
 }
