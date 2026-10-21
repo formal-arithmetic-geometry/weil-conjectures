@@ -508,6 +508,80 @@ Source: integral operations, node proof step 4
       coefficientExtensionSystem l E L ι W SE A :=
   @asIso _ _ _ _ (coefficientExtensionCounit l E L ι W SE SL A d.completion) d.comparison_isIso
 
+/- Coherent finite reduction of completed scalar extension on the entire derived category.
+Source: integral operations, Stacks 06YS, 0G7E, 06YY
+(blueprint: lem-pur-coefficient-extension-reduction-model).
+Proof: choose one flat-term K-flat P. Change of rings preserves K-flatness and flat
+terms even for ramified quotient maps. The balanced maps (x⊗a)⊗b ↦ x⊗ι(a)b and
+x⊗b ↦ (x⊗1)⊗b are inverse and commute with differentials. Quotient reduction
+commutes with these formulas, giving a strict system isomorphism and normalization
+by the same association with B_m→B_n. Its cocycle is the quotient cocycle. The
+Roos construction computes the specified total limit and its projections, hence
+completion. Apply normalized DVR effectivity with coefficient field L: its counit
+is invertible and normalized by the actual limit projections. Transport it through
+the simultaneous association to obtain exactly coefficientExtensionCounit.
+Naturality on chain maps descends through the localization of flat-term K-flat
+complexes; quasi-isomorphisms and roofs give the canonical resolution comparisons,
+including their composition for a third representative. The equations hold for all
+m≥n, including identities, because the comparison is a map of coherent systems.
+For identity extension scalar association is the action unitor, so this is the
+usual reduction counit of the completion, without assuming K itself complete.
+For three fields the two scalar associations multiply the same coefficients.
+Apply coefficient extension to this coherent counit and then use counit naturality
+h e_H = e_J R_F L_F(h). This is an equality of system maps before evaluation,
+and gives the composition equation stated below. No finiteness of K is used. -/
+
+/-- The coherent reduction data before the final counit isomorphism.
+Source: integral operations and normalized DVR effectivity
+(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+def CoefficientExtensionReductionSkeleton :=
+  CoefficientReductionModelData
+    (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
+      integralScalarReduction l E L ι W n)
+    ((integralOperationsGoodComplex l E W).FullSubcategory ⥤
+      CochainComplex (coefficientSequenceModules l L W) ℤ)
+    (coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
+      integralScalarExtensionOfUniverses l E L ι W)
+    (IsCoefficientExtensionAssociation l E L ι W A)
+    (fun direct ↦ ∀ n : ℕ,
+      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
+        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
+    (IsCoefficientExtensionStrictTransition l E L ι W)
+    (fun direct ↦ integralOperationsGoodLocalization l E W ⋙
+      coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q)
+    (IsCoefficientExtensionModelEvaluation l E L ι W SE A)
+    (∀ K : DerivedCategory (scalarReductionSource l E W),
+      IsNormalizedCoefficientSequence l L W
+        ((coefficientExtensionSystem l E L ι W SE A).obj K))
+    (IsCoefficientExtensionCompletionProjection l E L ι W SE A)
+    (fun _ ↦ True)
+
+/-- Construction of the normalized reduction skeleton from flat-term
+representatives and finite quotient scalar association.
+Source: integral operations and K-flat change of rings
+(blueprint: lem-pur-coefficient-extension-reduction-model).
+Proof: choose a flat-term K-flat representative, form the finite quotient scalar
+models, transport their balanced maps through every quotient transition, and
+assemble the strict model, normalized tower, completion projection, and all
+evaluation equations into the displayed skeleton. -/
+theorem coefficientExtensionReductionSkeleton_exists
+    (_hl : IsUnit (l : Γ(W, ⊤))) :
+    Nonempty (CoefficientExtensionReductionSkeleton l E L ι W SE A) := by
+  sorry
+
+/-- The normalized tower counit of a reduction skeleton is invertible.
+Source: normalized DVR effectivity
+(blueprint: lem-pur-coefficient-extension-reduction-model).
+Proof: regard the skeleton's normalized sequence and completion projection as
+the normalized DVR tower data, apply normalized effectivity to its Roos limit,
+and identify the resulting canonical counit with `coefficientExtensionCounit`.
+-/
+theorem coefficientExtensionReductionSkeleton_comparison_isIso
+    (_hl : IsUnit (l : Γ(W, ⊤)))
+    (s : CoefficientExtensionReductionSkeleton l E L ι W SE A) :
+    IsIso (coefficientExtensionCounit l E L ι W SE SL A s.completion) := by
+  sorry
+
 /-- Coherent finite reduction of completed scalar extension on the entire derived category.
 Source: integral operations, Stacks 06YS, 0G7E, 06YY
 (blueprint: lem-pur-coefficient-extension-reduction-model).
@@ -533,7 +607,13 @@ and gives the composition equation stated below. No finiteness of K is used. -/
 theorem coefficientExtensionReductionModel
     (_hl : IsUnit (l : Γ(W, ⊤))) :
     Nonempty (CoefficientExtensionReductionData l E L ι W SE SL A) := by
-  sorry
+  obtain ⟨s⟩ := coefficientExtensionReductionSkeleton_exists
+    l E L ι W SE A _hl
+  have hcomp := coefficientExtensionReductionSkeleton_comparison_isIso
+    l E L ι W SE SL A _hl s
+  refine ⟨⟨⟨⟨s.association, s.association_section⟩, s.direct,
+    s.directEvaluation, s.direct_transition⟩, s.model, s.model_evaluation,
+    s.normalized, s.completion, s.completion_projection, hcomp⟩⟩
 
 section SuccessiveExtension
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
@@ -573,6 +653,44 @@ Source: integral operations, node proof step 8
       (coefficientExtensionSuccessiveSystemIso l E L ι W SE SL A F j B D dEL a)
       (coefficientSequenceLimit l F W) ≪≫ dEF.completion
 
+/-- Existence of the balanced scalar association for three coefficient fields.
+Source: integral scalar operations
+(blueprint: lem-pur-coefficient-extension-reduction-model).
+Proof: on finite quotient sections send nested pure tensors to the product of
+their two new coefficients and use insertion of one for the inverse. Quotient
+naturality makes these maps coherent; the K-flat derived scalar comparison
+then supplies the normalized derived equation. -/
+theorem coefficientExtensionScalarAssociation_exists :
+    Nonempty (CoefficientScalarAssociation.{t + 1, t, u} A.scalar B.scalar D.scalar) := by
+  sorry
+
+/-- The successive-extension comparison equation for a fixed association.
+Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+def CoefficientExtensionReductionCompositionEquation
+    (a : CoefficientScalarAssociation.{t + 1, t, u} A.scalar B.scalar D.scalar) : Prop :=
+  ∀ K : DerivedCategory (scalarReductionSource l E W),
+    (coefficientExtensionReductionIso l L F j W SL SF B dLF).hom.app
+          ((integralScalarExtensionOfUniverses l E L ι W).obj K) ≫
+        (coefficientExtensionSuccessiveSystemIso l E L ι W SE SL A F j B D dEL a).hom.app K =
+      SF.reduction.map
+          ((coefficientExtensionSuccessiveIso l E L ι W SE SL A F j SF
+            B D dEL dLF dEF a).hom.app K) ≫
+        (coefficientExtensionReductionIso l E F (j.comp ι) W SE SF D dEF).hom.app K
+
+/-- Counit naturality gives the successive-extension comparison equation for
+a fixed balanced scalar association.
+Source: integral scalar operations
+(blueprint: lem-pur-coefficient-extension-reduction-model).
+Proof: use naturality of the coherent counit in the derived system category,
+then substitute the successive system isomorphism and the three completion
+identifications. The equality is obtained before evaluation, hence holds for
+every derived object K. -/
+theorem coefficientExtensionReductionCompositionEquation_proved
+    (a : CoefficientScalarAssociation.{t + 1, t, u} A.scalar B.scalar D.scalar) :
+    CoefficientExtensionReductionCompositionEquation l E L ι W SE SL A F j SF B D
+      dEL dLF dEF a := by
+  sorry
+
 /-- The direct and successive reduction comparisons agree as coherent system maps.
 Source: integral operations, node proof steps 7--8
 (blueprint: lem-pur-coefficient-extension-reduction-model).
@@ -595,7 +713,11 @@ theorem coefficientExtensionReduction_composition
             ((coefficientExtensionSuccessiveIso l E L ι W SE SL A F j SF
               B D dEL dLF dEF a).hom.app K) ≫
           (coefficientExtensionReductionIso l E F (j.comp ι) W SE SF D dEF).hom.app K := by
-  sorry
+  obtain ⟨a⟩ := coefficientExtensionScalarAssociation_exists
+    (l := l) (E := E) (L := L) (ι := ι) (W := W) (A := A) (B := B) (D := D)
+  refine ⟨a, ?_⟩
+  exact coefficientExtensionReductionCompositionEquation_proved
+    l E L ι W SE SL A F j SF B D dEL dLF dEF a
 end SuccessiveExtension
 
 /-- The actual identity coefficient inclusion induces identity on every quotient sheaf.

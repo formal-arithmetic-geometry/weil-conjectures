@@ -23,146 +23,33 @@
  ],
  "proof": [
   {
-   "text": "The finite quotient sheaf maps commute with transitions: apply faithfulness of forgetting commutativity, functoriality of constant sheafification, and integralScalarQuotientMap_transition to the ULift-transported ring maps. A private ring-level calculation within the same module handles the ULift representatives. This proves coefficientExtensionQuotient_naturality; the following steps record the proved identity clause and the plans for the two remaining main theorem holes.",
+   "text": "Apply coefficientExtensionReductionSkeleton_exists to obtain the construction skeleton, then coefficientExtensionReductionSkeleton_comparison_isIso and assemble its fields into CoefficientExtensionReductionData. This is a genuine record assembly: the comparison condition is supplied separately.",
    "uses": [
-    "lem-weil-integral-scalar-extension-well-defined"
+    "stage3-pur-reduction-skeleton-exists",
+    "stage3-pur-reduction-skeleton-counit-iso"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Choose a flat-term K-flat representative $P\\to K$ by [lem-pc-kflat-resolution]. Set $P_m=P\\otimes_{R_E}A_m$ and $D_m=P\\otimes_{R_E}B_m$, with the actual quotient maps on the coefficient factor. By [lem-pur-kflat-change-of-rings], both are flat-term K-flat over their respective finite coefficient sheaves. By [lem-pur-derived-change-of-rings], $P_m$ computes $K_m$, and $P_m\\otimes_{A_m}B_m$ computes $C_{E,L}(K)_m$. The same lemma applies to $D_m\\otimes_{B_m}B_n$ and, later, to extension from $B_m$ to a third coefficient quotient. All these are applications to morphisms of sheaves of rings on the same site, so no flatness of any coefficient homomorphism is required.",
+   "text": "For successive coefficient fields, obtain the balanced scalar association and apply the fixed-association coherent comparison equation. The target theorem is then the existential packaging of those two strictly smaller results.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings"
+    "stage3-pur-scalar-association-exists",
+    "stage3-pur-reduction-composition-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), and 06YY (lemma-derived-base-change), identity underlying topos"
-   }
-  },
-  {
-   "text": "Define $a_m:P_m\\otimes_{A_m}B_m\\to D_m$ by $(x\\otimes a)\\otimes b\\mapsto x\\otimes\\iota_m(a)b$. Its inverse is $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. The balancing relations for $R_E\\to A_m\\to B_m$ make both maps well-defined and their composites identities. These formulas on sectionwise tensors induce the sheaf maps of [def-pur-sheaf-tensor-product]; extending over either sheafified factor is justified by [lem-pc-sites-module-sheafification-bilinear-extension]. They commute with the differentials since coefficients have degree zero. For $m\\geq n$, either route through the quotient-transition square sends $(x\\otimes a)\\otimes b$ to $x\\otimes\\iota_n(q^A_{m,n}(a))q^B_{m,n}(b)$: this equals $x\\otimes q^B_{m,n}(\\iota_m(a)b)$ by [def-weil-integral-scalar-extension]. Thus $a_\\bullet$ is an isomorphism of strict quotient systems, not just a family of isomorphisms in the level categories.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-module-sheafification-bilinear-extension",
-    "def-weil-integral-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Integral operations clause: simultaneous scalar association on the actual quotient models; agent supplies the formulas"
-   }
-  },
-  {
-   "text": "Read $D_\\bullet$ as a strict tower of $R_L$-complexes through the maps $R_L\\to B_m$ of [def-weil-integral-scalar-extension]. It therefore supplies the coherent tower datum required by [def-coef-normalized-dvr-tower]. For $m\\geq n$, K-flatness from [lem-pur-kflat-change-of-rings] and [lem-pur-derived-change-of-rings] compute the normalization comparison by\n$$(P\\otimes_{R_E}B_m)\\otimes_{B_m}B_n\\longrightarrow P\\otimes_{R_E}B_n,\\qquad(x\\otimes b)\\otimes c\\longmapsto x\\otimes q^B_{m,n}(b)c.$$\nIts inverse is $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$, using exactly the balancing argument of step 2. The adjoint of this map is $x\\otimes b\\mapsto x\\otimes q^B_{m,n}(b)$, the specified transition. For $r\\geq m\\geq n$, the two composites take $x\\otimes b$ to $x\\otimes q^B_{r,n}(b)$, and $q^B_{n,n}=1$. This proves normalization and its cocycle. The strict isomorphism $a_\\bullet$ of step 2 transports these properties to $C_{E,L}(K)$ with its stated transitions.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "def-coef-normalized-dvr-tower",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Integral operations clause: normalization of the coefficient-extension quotient system"
-   }
-  },
-  {
-   "text": "Let $\\mathcal L_LD=R\\lim_m\\operatorname{Res}^L_mD_m$. By [def-weil-integral-scalar-extension, lem-weil-integral-scalar-extension-well-defined] this is $S_{E,L}K$, with the same limit projections. The functors $\\mathcal R_L\\dashv\\mathcal L_L$ and their counit in the derived system category are those of [lem-coef-derived-system-evaluation-calculus]. Apply [lem-coef-normalized-dvr-effectivity] to the normalized tower of step 3, using coefficient field $L$. Its coherent counit is an isomorphism $e_D:\\mathcal R_L\\mathcal L_LD\\xrightarrow{\\sim}D$. Consequently\n$$\\phi_{E,L,K}=a_\\bullet^{-1}e_D:\\mathcal R_L(S_{E,L}K)\\xrightarrow{\\sim}C_{E,L}(K).$$\nThe reduction tower here is the one of [def-weil-integral-reduction-tower]. Coherence of $e_D$ and strict transition compatibility of $a_\\bullet$ prove compatibility of $\\phi$ with every quotient $B_m\\to B_n$. Effectivity assumes neither boundedness nor constructibility, so this applies to the arbitrary $K$ in the statement.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-coef-normalized-dvr-effectivity",
-    "def-weil-integral-reduction-tower",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.md",
-    "place": "Canonical coherent counit isomorphisms for every normalized DVR tower"
-   }
-  },
-  {
-   "text": "For a chain map $u:P\\to P'$, the maps in steps 2 and 3 commute with $u\\otimes1$ on every quotient: both composites send $(x\\otimes a)\\otimes b$ to $u(x)\\otimes\\iota_m(a)b$. The derived-system adjunction of [lem-coef-derived-system-evaluation-calculus] makes its counit natural for the induced system morphism; its evaluations are adjoint to the limit projections. Thus $\\phi$ is natural on flat-term K-flat representatives. By [lem-pur-derived-change-of-rings], a quasi-isomorphism of such representatives induces quasi-isomorphisms on all their quotient models; by [lem-weil-integral-scalar-extension-well-defined] it also induces the canonical isomorphism on the completed extension. The equivalence $W_{R_E}^{-1}\\mathcal P_{R_E}\\simeq D(R_E)$ of [lem-weil-pbc-site-derived-tensor-descent] now descends this naturality: invert the arrows of a roof, and the same commuting square holds because its vertical arrows are isomorphisms. This proves naturality for arbitrary derived morphisms and independence under the canonical resolution comparisons, including their composition for a third representative.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Integral operations clause: independence of K-flat representatives and naturality; agent supplies the localization argument"
-   }
-  },
-  {
-   "text": "For identity coefficients, prove the actual finite quotient maps are identities by quotient induction and functorial constant sheafification. The sectionwise specification of systemMap then makes the sequence ring map the identity. Restriction along identity is naturally isomorphic to identity on module sheaves. Transport the ordinary scalar adjunction along this restriction unitor; uniqueness of left adjoints gives the ordinary scalar unitor. Its unit equation and the specified unit_section give the formula a tensor x maps to a times x. Apply uniqueness of left derived functors to this ordinary unitor; the universal counit factorization supplies precisely the required model equation, for every complex (in particular every K-flat one). Whisker this unitor by SE.reduction. Expanding the specified comparison gives reduction of the inverse completion followed by the reduction/limit counit. Its naturality proves coefficientExtensionReduction_identity. No effectivity theorem or completeness of K is used for this identity clause.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-derived-change-of-rings",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Identity coefficient extension and the reduction counit"
-   }
-  },
-  {
-   "text": "For $E\\subset L\\subset F$, put $T_m=(\\mathcal O_F/\\varpi_F^m)_W$. Its maps $A_m\\to B_m\\to T_m$ compose to the direct $A_m\\to T_m$, by the inclusions and quotients of [def-weil-integral-scalar-extension]. Write $M=\\mathcal L_LD=S_{E,L}K$ and form the coherent system $H_m=(M\\otimes^L_{R_L}B_m)\\otimes^L_{B_m}T_m$. The simultaneous derived coefficient-extension models of [lem-coef-semilinear-derived-sections] apply to the coherent counit $e_D$ and evaluate to derived extension at each index. Applying this functor and reassociating gives\n$$h_m:H_m\\xrightarrow{\\ e_{D,m}\\otimes^L1\\ }D_m\\otimes^L_{B_m}T_m\\xrightarrow{\\sim}P\\otimes_{R_E}T_m.$$\nThe second map is computed without another resolution because $D_m$ is flat-term K-flat [lem-pur-kflat-change-of-rings, lem-pur-derived-change-of-rings]. It sends $(x\\otimes b)\\otimes c$ to $x\\otimes\\jmath_m(b)c$, with inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. The quotient calculation of step 2 and coherence of $e_D$ make $h$ an isomorphism of coherent systems. On iterated scalar tensors the direct and successive rebracketings both send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes\\kappa_m(a)\\jmath_m(b)c$, where $\\jmath_m:B_m\\to T_m$ and $\\kappa_m:A_m\\to T_m$. Hence this is the stipulated scalar-association identification, including its transitions.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Successive coefficient extensions: substitute the coherent counit into finite quotient scalar extension and check the scalar-association formula"
-   }
-  },
-  {
-   "text": "Set $J_m=P\\otimes_{R_E}T_m$. The reasoning of steps 1--4 applies independently to the pair $(L,F)$ and the object $M$, and to $(E,F)$ and $K$; it yields counits $e_H:\\mathcal R_F\\mathcal L_FH\\to H$ and $e_J:\\mathcal R_F\\mathcal L_FJ\\to J$. By the definitions and scalar associations already proved, $\\mathcal L_FH=S_{L,F}S_{E,L}K$ and $\\mathcal L_FJ=S_{E,F}K$. The derived limit functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit] sends the coherent isomorphism $h$ to the canonical successive-extension comparison $v=\\mathcal L_F(h)$. Naturality of the counit in the derived system category [lem-coef-derived-system-evaluation-calculus] gives the identity of coherent-system maps\n$$h\\,e_H=e_J\\,\\mathcal R_F(v).$$\nIndeed, at level $m$ both are adjoint to the composite of the limit projection with $h_m$; their coherence is the naturality of the same counit on coherent systems, not an inference from equality of unrelated level maps. Substitute $h$ from step 7 and $\\phi=a^{-1}e$ from step 4 into this identity. The scalar-association formula at the end of step 7 identifies its left side with the successive comparisons and its right side with the direct comparison. This proves the final compatibility clause. Only finite coefficient associations and functoriality have been used, so ramification, unboundedness, and lack of constructibility cause no additional hypotheses.",
-   "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Successive coefficient extensions: counit naturality before taking the derived limit; agent supplies the coherent identity"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "def-weil-integral-scalar-extension",
-  "def-coef-normalized-dvr-tower",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-coef-normalized-dvr-effectivity",
-  "def-weil-integral-reduction-tower",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "stage3-pur-reduction-skeleton-exists",
+  "stage3-pur-reduction-skeleton-counit-iso",
+  "stage3-pur-scalar-association-exists",
+  "stage3-pur-reduction-composition-equation"
  ],
  "proof_origin": {
+  "kind": "from-document",
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral operations clause; explicit coefficient-association and coherent-counit argument using Stacks Tags 06YS, 0G7E, 06YY and normalized DVR effectivity; R8 proves the identity clause by ordinary adjoint uniqueness, universal left-derived uniqueness and coherent counit naturality; the two other theorem proofs remain the existing plan"
+  "place": "Integral operations and normalized coefficient reduction model; split into construction and comparison components."
  },
  "mathlib_searches": [
   {
@@ -374,7 +261,13 @@
    "WeilConjectures.CoefficientStrictModelData",
    "WeilConjectures.CoefficientReductionModelData",
    "WeilConjectures.IsCoefficientExtensionModelEvaluation",
-   "WeilConjectures.IsCoefficientExtensionCompletionProjection"
+   "WeilConjectures.IsCoefficientExtensionCompletionProjection",
+   "WeilConjectures.CoefficientExtensionReductionSkeleton",
+   "WeilConjectures.coefficientExtensionReductionSkeleton_exists",
+   "WeilConjectures.coefficientExtensionReductionSkeleton_comparison_isIso",
+   "WeilConjectures.coefficientExtensionScalarAssociation_exists",
+   "WeilConjectures.CoefficientExtensionReductionCompositionEquation",
+   "WeilConjectures.coefficientExtensionReductionCompositionEquation_proved"
   ],
   "file": "lean/Sheaf/Paper/CoefficientExtensionReductionModel.lean",
   "statement": "theorem coefficientExtensionReductionModel (_hl : IsUnit (l : Γ(W, ⊤))) : Nonempty (CoefficientExtensionReductionData l E L ι W SE SL A)",
@@ -385,12 +278,12 @@
   "note": "The existing sequence-site reduction calculus and canonical semilinear scalar models give the coherent quotient systems with independent site and coefficient universes. The main theorem returns the representative-normalized comparison; the identity and composition theorems retain the usual counit and an equality of coherent system maps. Helper structures package these same clauses; no new independent notion or coefficient construction is introduced. Stage-3 compile repair: cache the concrete record parameters in generic records, and cache the two large model equations in named predicates; the data and mathematical equations are unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R8",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261020T230830-L-618313",
+  "landing": "20261021T002940-L-1582346",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
