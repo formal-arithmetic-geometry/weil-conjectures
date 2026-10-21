@@ -330,5 +330,43 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-ec9dbe8de (reviewer sub-agent of L); spot-checked: Read all nine steps and every cited statement. The statement is byte-identical to the live node. The only stmt_dep added is lem-pur-proetale-module-pullback-composition, which supplies the compositor T_m that the statement uses. There are no new nodes. The item is still unsplit live, with no repair note, so it is not superseded and not a re-split. No SGA source is used. Step 1: prop-weil-pbc-proetale-constant-exact (any morphism, finite ring) plus lem-weil-point-proetale-sections-exact (k algebraically closed) give exactness, with restriction of scalars exact. Step 2: exact-functor factorization plus the derived-functor (Kan extension) node match the K-flat Q_r of def-weil-derived-pullback-tensor-hom. Step 3: lem-trf-constant-coefficient-composition with k=h^m gives exactly the composite ring identification that the derived-composition lemma requires; the direction of the lem-pur compositor (H_{m+1}->H_1H_m) was checked, and T_m is its inverse. Step 4: K-flat flat-term resolution (lem-pc-kflat-resolution), with c_{h,h^m} equal to the termwise class, as in Stacks 0D6D l.3658-3681. Step 5: I rechecked the two naturality squares and the cancellation of the invertible a; it is valid for unbounded, non-K-flat K. Step 6: h^r is an isomorphism, and lem-weil-isomorphism-derived-pullback (ell invertible since ell!=p, n>=1) gives D^b_c preservation; Fib_s clause 1 and point-sections-finiteness (1) give V_amb|D^b_c = V. Steps 7-9: chain maps from naturality, then localization universal property parts (2) and (3), with phi_2 = v∘V(e). This gives a unique alpha^D with the stated components, with no invertibility assumption on alpha. Stacks tags 0D6D/06YS/06YY/015F/03D8/03CB/0H7J/04VG/0982/098H resolve to the named labels. The blueprint 'transports the pair' paragraph exists in the main-20261015 compact-description proof. Edge cases checked: alpha=0, m=1, K=0, n>1. The generic tool_uses are accepted. Minor, no change: Step 9 is marked elementary while citing localization (2)/(3)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointExactDerivedModel",
+  "declaration": "WeilConjectures.PointExactDerivedModel.composition",
+  "declarations": [
+   "WeilConjectures.PointExactDerivedModel.frobenius",
+   "WeilConjectures.PointExactDerivedModel.power",
+   "WeilConjectures.PointExactDerivedModel.modules",
+   "WeilConjectures.PointExactDerivedModel.pullback",
+   "WeilConjectures.PointExactDerivedModel.derivedPullback",
+   "WeilConjectures.PointExactDerivedModel.pullbackFactors",
+   "WeilConjectures.PointExactDerivedModel.evaluation",
+   "WeilConjectures.PointExactDerivedModel.evaluationFactors",
+   "WeilConjectures.PointExactDerivedModel.ordinaryComposition",
+   "WeilConjectures.PointExactDerivedModel.derivedComposition",
+   "WeilConjectures.PointExactDerivedModel.exactness",
+   "WeilConjectures.PointExactDerivedModel.composition",
+   "WeilConjectures.PointExactDerivedModel.preserves_constructible",
+   "WeilConjectures.PointExactDerivedModel.evaluation_restriction",
+   "WeilConjectures.PointExactDerivedModel.descent",
+   "WeilConjectures.PointExactDerivedModel.descendedTransformation",
+   "WeilConjectures.PointExactDerivedModel.restrictedTransformation"
+  ],
+  "file": "lean/Sheaf/Paper/PointExactDerivedModel.lean",
+  "statement": "theorem composition (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (_ι : E →ₐ[ℚ_[l]] Ω) (n : ℕ) (_hn : 1 ≤ n) (m : ℕ) (K : CochainComplex (modules D (Padic.coefficientExtensionRing l E n)) ℤ) : (derivedComposition D (Padic.coefficientExtensionRing l E n) m).hom.app (DerivedCategory.Q.obj K) ≫ (pullbackFactors D (Padic.coefficientExtensionRing l E n) (m + 2)).hom.app K = (derivedPullback D (Padic.coefficientExtensionRing l E n) 1).map ((pullbackFactors D (Padic.coefficientExtensionRing l E n) (m + 1)).hom.app K) ≫ (pullbackFactors D (Padic.coefficientExtensionRing l E n) 1).hom.app (((pullback D (Padic.coefficientExtensionRing l E n) (m + 1)).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map (((ordinaryComposition D (Padic.coefficientExtensionRing l E n) m).hom.mapHomologicalComplex (.up ℤ)).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are supplied by exactness, the canonical factorization abbreviations, composition, preserves_constructible, evaluation_restriction and descent. descendedTransformation selects only the uniquely characterized descent, and restrictedTransformation is its actual whiskering with the full constructible inclusion. The original small-site universes and constant-section coefficient maps are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50a946375",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Statement verbatim in file; node identical to live except lean; not dropped. Clause by clause: D/ℓ≠p/E⊂Ω/n≥1 exact; h=Spec(geometricFrobeniusAlgEquivOfAlgebraic)=Spec((x↦x^q)⁻¹), power(m+2)=h≫power(m+1) defeq composite; H_r=proEtaleConstantRingPullback with the canonical comparison; Q_r=recorded proEtaleConstantRingDerivedPullback; Γ=pointFiniteSections (constant-scalar restriction), V_amb its mapDerivedCategory; T=symm of choose of proEtaleConstantRingModulePullbackComposition (uniquely fixed by sectionwise d plus the conjugate bijection); t=proEtaleConstantRingPullbackComposition, exact inverse of the recorded integralFiniteCanonicalPullbackComposition; composition equation on arbitrary K via mapDerivedCategoryFactors; preserves_constructible r+1; evaluation_restriction = definition of pointFiniteFibre; descent ∃! for arbitrary α with the w⁻¹τv formula; whiskered D^b_c restriction. Edge cases m=r=1 (offset), n=1, zero α, unbounded K; universes kept. Advisory only: frobenius coincides with frobeniusPointIso.hom; pointFiniteSections and proEtaleConstantRingPullbackComposition are owned by non-stmt_dep nodes; a few imports unused. No recompile (no file changed)."
  }
 }

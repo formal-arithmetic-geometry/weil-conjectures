@@ -368,5 +368,29 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-939022a99 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement and stmt_deps are identical to live and side-live, where the item is still unsplit. It is not in the dropped list. The 10-21 re-split note belongs to the parent lem-sfb-internal-hom-localization-comparison, not to this item. The previous head 28a07bb245b was approved by the reader and returned only because the landing refused an unpromoted side completion. This head changes only the proof text of steps 3-4 and split_report. Step 1: naturality of i and R-linearity of i_P give Q(I(s_P))=Q(s_J) once the invertible Q(i_P) is cancelled. lem-weil-pbc-kinjective-hom-derived (Stacks 070I (1)=>(3), derived.tex l.9632) with N=I=J then gives h. I is not assumed linear. Step 2: I re-derived the signs from the def-pur-hom-complex differential: with H(f)^p=h^{p+n}f^p, dH+Hd=t1-t2. Step 3: lem-kun-complex-colimit-hocolim applies to arbitrary unbounded sequences of module sheaves with non-monic transitions. Its cone matrix matches def-weil-abstract-derived-category, and p|_A=q, so p_k v_k e_n=j_n^(k). Step 4: with K e_n=-e_{n+1}H, dK+Kd=u1-u2 holds. F(b,c)=(b+K^{r+1}c,c) is a chain isomorphism with inverse b-Kc, and F v1 e_n=v2 e_n for all n including n=0. Step 5: gamma=Q(p2)Q(F)Q(p1)^{-1} satisfies the condition on every leg. The elementary flags are correct, proof_deps equals the union of the uses, there is no cycle (345-node closure) and no SGA. Small case: on a point site with R=Z, s=2 and I(Z)=Q->Q/Z, both telescopes give Z[1/2]. The duplicate scan (telescope, homotopy with colimit, Hom-complex homotopy) found no duplicate. The tool use of lem-kun-complex-colimit-hocolim is accepted: it is the generic cone-to-colimit quasi-isomorphism, and the restricted-functors unit has no telescope lemma. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveHomScalarTelescope",
+  "declaration": "CategoryTheory.kInjectiveHom_scalar_telescope",
+  "declarations": [
+   "CategoryTheory.kInjectiveHomScalarEndomorphism",
+   "CategoryTheory.kInjectiveHomFunctorialScalarTower",
+   "CategoryTheory.kInjectiveHomScalarTower",
+   "CategoryTheory.kInjectiveHom_scalar_telescope"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveHomScalarTelescope.lean",
+  "statement": "theorem kInjectiveHom_scalar_telescope [AB5OfSize.{max c v r, max c v r} (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] [HasDerivedCategory.{w} (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] (I : CochainComplex (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ ⥤ CochainComplex (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) (η : 𝟭 (CochainComplex (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) ⟶ I) (hI : ∀ M : CochainComplex (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ, QuasiIso (η.app M) ∧ (I.obj M).IsKInjective) (s : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat.{max c v r} RingCat.{max c v r})) (A P : CochainComplex (ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) : Nonempty (Homotopy (((homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).obj (op A)).map (I.map (kInjectiveHomScalarEndomorphism.{c, v, r} J R s P))) (kInjectiveHomScalarEndomorphism.{c, v, r} J R s (homComplex.{c, v, max c v r, max c v r} (R := R) A (I.obj P)))) ∧ ∃ γ : DerivedCategory.Q.obj (colimit (kInjectiveHomFunctorialScalarTower.{c, v, r} J R I s A P)) ≅ DerivedCategory.Q.obj (colimit (kInjectiveHomScalarTower.{c, v, r} J R I s A P)), ∀ n : ℕ, DerivedCategory.Q.map (colimit.ι (kInjectiveHomFunctorialScalarTower.{c, v, r} J R I s A P) n) ≫ γ.hom = DerivedCategory.Q.map (colimit.ι (kInjectiveHomScalarTower.{c, v, r} J R I s A P) n)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-175226c2f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Clause-by-clause check of KInjectiveHomScalarTelescope against the node: site/module universes max c v r, R CommRingCat sheaf via sheafCompose, AB5OfSize in the module universe (node hypothesis), I/η/hI identical to the DerivedInternalHomOfUniverses interface with no linearity, s ∈ sectionsSubring = Γ(R), X = homComplex A (I P), t1 = homComplexFunctor (op A).map (I.map (s•𝟙 P)), t2 = s•𝟙 X via canonical homLinear (sectionsSMul), Nonempty Homotopy t1 t2, Functor.ofSequence towers with colimits in complexes before Q, ∃ γ with Q(j_n^1) ≫ γ.hom = Q(j_n^2) ∀ n incl. 0. lean.statement matches the file verbatim, one sorry, universes bound, docstrings carry source and blueprint tag and all 5 proof steps; helper defs are real; no duplicate found; only the lean field differs from live; item not dropped. Edge cases s=0/1, zero ring, empty site, unbounded degrees OK. Advisory: Second reading by Q43 is an author self-reading (brief-stage2 l.188 asks for another worker), but it is substantive; this review supplies the independent reading. No fixes, no compile needed."
  }
 }

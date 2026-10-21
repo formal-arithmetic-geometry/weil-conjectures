@@ -221,5 +221,23 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-6f4345455 (reviewer sub-agent of L); spot-checked: I read the item in full and wrote no fixes. The delivery adds 0 new nodes; the statement, stmt_deps, source and unit are unchanged, there is no repair note for the item, and no SGA source is cited. Source check: HRS arXiv 2305.18131, Example 3.1, p. 6, says Λ_X = U ↦ Maps_cont(U,Λ) for any scheme X. Blueprint main-20261015 sk-lem-stratified-lattice-rank.proof.md, paragraph 1, says transition isomorphisms preserve rank because E_X(W)≠0. The item states exactly this comparison, with rank 0 included and no hypothesis weakened. Parent det-lem-stratified-lattice-rank steps 1–2 apply it on W = U_i×_X U_j, and the hypotheses match. Step 1: lem-weil-l-adic-extension-absolute-value makes |·|_E ultrametric, so balls are clopen and E is totally disconnected. lem-sfb-continuous-ring-universe-realization then gives an isomorphism of ring sheaves E_W ≅ C(|−|,E), and both inverse identities transport along it. That node is an accepted tool_use from unit sk-def-sfb-dc-restricted-functors: it is only the coefficient bridge and is not supplied in this unit. The closure of the six proof_deps has 350 nodes and contains neither the item nor its parent, so there is no cycle. Step 2: the biproduct coordinates p_j i_k = δ and Σ i_j p_j = 1 are correct; adding module morphisms uses the module-morphism equation of sk-def-sfb-module-objects. Step 3: h_W(a) = a·h_W(1). I checked the indices (A is n×m, B is m×n); the (j,k) entry of gf at 1 is (BA)_jk, so BA = I_m and AB = I_n. Step 4: evaluation at w ∈ |W| is a ring homomorphism, so A(w) and B(w) are mutually inverse; no claim about field stalks is used. Step 5: the coordinate basis gives dim E^n = n, the images of the basis under A(w) are independent, and the card-le-dimension node gives m ≤ n and, by symmetry, n ≤ m. Edge cases: m=0<n forces I_n = 0, which is impossible; W = ∅ shows the nonemptiness hypothesis is necessary; non-qc, disconnected and nonreduced W need no extra hypotheses. Duplicates: rg -L for invariant-basis and rank phrasings found only ordinary field, ring or scheme statements, none for continuous or condensed coefficient sheaves."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousCoefficientFreeRank",
+  "declaration": "AlgebraicGeometry.ProEtale.continuous_coefficient_finiteFree_rank",
+  "file": "lean/Sheaf/Paper/ContinuousCoefficientFreeRank.lean",
+  "statement": "theorem continuous_coefficient_finiteFree_rank (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (W : Scheme.{u}) [Nonempty W] (m n : ℕ) (_e : Mod.finiteFree (condensedRingObj (Profinite.continuousCoefficientRingObj E) W) m ≅ Mod.finiteFree (condensedRingObj (Profinite.continuousCoefficientRingObj E) W) n) : m = n",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61a9fcfdd",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_dep records and the exact declarations (continuousCoefficientRingObj, condensedRingObj with the Obj-scoped MonObj, Mod.finiteFree as the Fin-n biproduct of regular, Mathlib Mod, Scheme.ProEt), HRS Ex. 3.1 p.6 and the blueprint rank proof paragraph 1. The Lean matches clause by clause: prime ℓ, finite E/ℚ_ℓ, arbitrary W : Scheme.{u} with [Nonempty W], iso in Mod over condensedRingObj ⇒ m = n, rank 0 included, no extra hypotheses or universe collapse. The NormedField/NormedAlgebra encoding of E equals the spectral (ℓ-adic) topology by NormedAlgebra.norm_eq_spectralNorm and is always available via spectralNorm.normedField/normedAlgebra, so the parent can instantiate it; the earlier Codex H3 return on the same encoding (Q85 62e4e13a) was overturned in arbitration. Own rg duplicate search found none. lean.statement is verbatim; non-lean fields equal live; one sorry, no definitions, docstrings carry source, blueprint tag and 5 proof steps; report sections present. No compile (human 2026-10-21); worker reports a clean scompile."
  }
 }

@@ -17,7 +17,10 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "def-pur-kinjective-complex",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ringed-presentation-comparison-data",
+  "def-weil-pbc-local-coefficient-localization",
+  "def-pur-ringed-coefficient-counit-presentations"
  ],
  "proof": [
   {
@@ -342,5 +345,31 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-eb359844c (reviewer sub-agent of L); spot-checked: I read the item and all nine steps in full; there are no new nodes. The statement is byte-identical to base, live and side-live, where the item is still unsplit and unreviewed. There is no repair note and the item is not in any dropped list. The only stmt_deps change adds def-weil-pbc-adjunction-mate, which the statement uses. Source: Stacks 04IF (sites-modules.tex line 2705) agrees with the ordinary square and f'_*j^*=j^*f_*. 04H1 gives the slice right adjoint G×_{f_*F}f_*E used in step 1. Tags 0G7E, 08FI, 07A6, 07A7, 08BJ, 070I, 09T5, 03EL, 03D7, 03D3, 06YY and 06YS all match their labels in tags/tags. No SGA is cited. Steps: (1) the slice right adjoint follows from the original adjunction, and L_A(F×A)=LF×B. (2) Restricting c gives the ring map. module-pullback-tensor is applied to j_B with ring O=f^{-1}R_Y and the identity map, so σ needs no flatness. (3) δ comes from V(E×B)=VE×VB. Its transpose identity uses geometric-module-transport, which says the module transpose is the underlying sheaf transpose. (4) right-adjoint-preserves-kinjective applies with v=j_! exact (stated in the slice-adjunction node), and kflat-pullback applies with c an isomorphism. (5) β is defined on a K-injective I. kinjective-hom-derived gives independence of the choice and naturality. (6) The direction of the inverse-mate formula matches def-weil-pbc-adjunction-mate (G=r_Y, H=r_X). (7) h=(r_X i)σ_T termwise. (8) I checked the hypotheses of resolving-derived-adjunction-normalization. The normalization fixes the adjunction uniquely, and it is the 09T5 adjunction of projection-mate-exact. Pushing r_X(Q(i)ε_T) through by naturality gives θ_{QT}=Q(σ_T). (9) Invertibility follows by K-flat resolution, and the counit equation is exactly the transpose characterization of the mate. Duplicate search: every existing ringed-slice comparison node (derived-slice-localization, pullback-mate-normalization, slice-derived-comparisons, mate-isIso, comparisons-shift) assumes a continuous u and a site object V. The item strictly generalizes them and duplicates none. I accept all 12 declared tool_uses: they are generic module and derived tools, and sk-rem-rest is a stepless remark with no route. Edge cases checked: A terminal (identities), A empty (zero module categories), A representable (agrees with the site-object nodes), nonflat Z→Z/2 over a point. Two minor wording points need no change: R_{X,B}-linearity of σ in step 2, and in step 8 the reading of the canonical adjunction as the normalized one, which rests on 09T5 being their common origin. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SheafSliceDerivedComparison",
+  "declaration": "CategoryTheory.ringedSheafSliceDerivedComparison",
+  "declarations": [
+   "CategoryTheory.sheafSliceUnderlyingRestriction",
+   "CategoryTheory.SheafSliceSetLocalization",
+   "CategoryTheory.RingedSheafSliceOrdinaryComparison",
+   "CategoryTheory.HasRingedSheafSliceDerivedComparison",
+   "CategoryTheory.ringedSheafSliceDerivedComparison"
+  ],
+  "file": "lean/Sheaf/Paper/SheafSliceDerivedComparison.lean",
+  "statement": "theorem ringedSheafSliceDerivedComparison {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (RX : Sheaf J CommRingCat.{u}) (RY : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (localCoefficientRings RX) (localCoefficientRings RY)) (A : Sheaf K (Type u)) [HasDerivedCategory.{w} (modules RX)] [HasDerivedCategory.{w} (modules RY)] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} (elementRing (localCoefficientRings RX) (f.inverse.obj A)))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} (elementRing (localCoefficientRings RY) A))] : ∃ o : RingedSheafSliceOrdinaryComparison RX RY f A, HasRingedSheafSliceDerivedComparison.{u, w} o",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary output record and derived output proposition give the arbitrary sheaf-slice ringed morphism, the geometric/ordinary mate normalizations, actual exact derived restrictions, K-flat and K-injective computations, representative-normalized derived adjunctions, the two natural isomorphisms, their representative formulas and the counit identity. The existing normalized DerivedAdjunction is owned by def-pur-ringed-coefficient-counit-presentations; presentationElementRing is owned by def-weil-pbc-ringed-presentation-comparison-data; localCoefficientRings is owned by def-weil-pbc-local-coefficient-localization. These three landed definition nodes are added as statement dependencies. No ringed-presentation-transport theorem is used. Module pullbacks are specified by their universal property as left adjoints to the supplied induced module direct images, uniquely up to adjunction-preserving isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04a3a95f2",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of b223c3c7dc81: Lean module byte-identical (sha256 b298…ca0b4); stmt_deps now replace theorem lem-weil-pbc-ringed-presentation-transport with def-weil-pbc-ringed-presentation-comparison-data and add def-weil-pbc-local-coefficient-localization (records byte-identical to live/side-live); report and lean.note fixed. Every declaration used (RingedToposMorphism, localCoefficientRings, presentationElementRing, DerivedAdjunction/modules/underlying/onComplex, ringedSiteModules, IsKFlatIndependentCoefficients, IsFlatOnSite, DerivedCategory) is owned by a stmt_dep. Item still split, no lean, live/side-live; no repair note; not dropped. Substance re-read: slice square pinned by prodComparison/sections/sets_formula/structural; delta pinned on underlying sheaves, sigma by ordinary_mate; homFormula-normalized DerivedAdjunction; theta determined by theta_representative + flat computations, beta by beta_representative and mateEquiv; K-flat/K-injective restriction clauses and counit equation present. Edge cases (empty/terminal/representable A, unbounded, non-flat c) and gates OK. No compile (no file changed). Advisory: element* helpers owned by theorem node lem-weil-pbc-ringed-sheaf-slice-adjunction (stage-1)."
  }
 }

@@ -299,5 +299,52 @@
   "group": "Q156",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-076983b17 (reviewer sub-agent of L); spot-checked: The item and all 13 cited statements were read in full, along with Stacks derived.tex 08TC/07KC (labels and text checked) and the parent's old steps 7 and 9 from the Q109 base. The delivery is one commit with the item and its report. It has no new nodes, and the statement and stmt_deps are byte-identical to base. The item is not dropped, has no own repair note, and is still unsplit live. proof_deps equals the union of the step uses, there is no cycle, and there is no SGA citation. Step checks: 1 strict-tower gluing via lem-pur-clopen-ringed-module-gluing, which covers any ring sheaf. 2 sectionwise products, using U×_X X_j=∅ for j≠i. 3 the strict-roos-model coordinates; the connecting-map sign does not affect the restriction comparison. 4 products-core plus an exact equivalence onto the product triangulated category reflects distinguished triangles. 5 the actual c_n=[γ_n][q]^{-1} and τ_n are identified through K-flat restriction and the coefficient identifications. 6 the converse keeps the fixed first map c by lifting the tuple (δ_i). 7 fixed-interval detection at each A_{E,n}, then min/max over the finite I for the uniform cohomological and Tor bounds. 8 the completed tensor tower with its unit. 9 the scalar-extension tower along ρ_m=ι_mπ_m, with ramification harmless. 10 the empty partition. Edge cases tested: I=∅, |I|=1, empty components, unequal bounds, a constant tower, ramified E⊂L. No duplicate in the DAG: open-exchange-roos-restriction, int-restriction-glue and clopen-lisse-complete-localization are different statements. Accepted tool_use: lem-weil-derived-limit-products-core, the generic Stacks 07KC product fact. lem-weil-proetale-countable-products-exact is already on the route through sk-def-sf-operations. Advisories: every step carries the same source place, and Res_n is only implicit in step 8. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClopenRoosIntegralDescent",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_membership",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralSiteSmall",
+   "WeilConjectures.PurityFiniteSetting.clopenConstantMap",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMap_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMap",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMapIsIso",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestriction_exact",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionAdditive",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionLimits",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionColimits",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralDerivedRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralDerivedRestrictionShift",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralComplexRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralStrictRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralComplexTowers",
+   "WeilConjectures.PurityFiniteSetting.clopenStrictReductionFunctor",
+   "WeilConjectures.PurityFiniteSetting.clopenDerivedReductionFunctor",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_tower_equivalence",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_roos_comparison",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_derived_roos_descent",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_augmented_reduction",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_resolution_reduction",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_membership",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_subcategories",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_completed_tensor_unit",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_tensor_reductions",
+   "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_scalar_extension"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenRoosIntegralDescent.lean",
+  "statement": "theorem finiteClopen_integral_membership (K : DerivedCategory (scalarReductionSource P.coefficients.l P.extension X.left)) : (IntegralOnSlice.IsComplete P.coefficients.l P.extension X.left none K ↔ ∀ i, IntegralOnSlice.IsComplete P.coefficients.l P.extension (Xi i).left none ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) ∧ (sfIntegralConstructible P.coefficients.l P.extension X.left K ↔ ∀ i, sfIntegralConstructible P.coefficients.l P.extension (Xi i).left ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) ∧ (finiteTorConstructibleIntegral P.coefficients.l P.extension X.left K ↔ ∀ i, finiteTorConstructibleIntegral P.coefficients.l P.extension (Xi i).left ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) ∧ (∀ a b : ℤ, a ≤ b → ((∀ n : ℕ, Scheme.proEtaleCohomologicalSupport ((scalarReductionDerivedExtension P.coefficients.l P.extension X.left n).obj K) ⊆ Set.Icc a b) ↔ ∀ (i : I) (n : ℕ), Scheme.proEtaleCohomologicalSupport ((scalarReductionDerivedExtension P.coefficients.l P.extension (Xi i).left n).obj ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) ⊆ Set.Icc a b)) ∧ (∀ a b : ℤ, a ≤ b → ((∀ n : ℕ, Scheme.HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension X.left n).obj K) a b) ↔ ∀ (i : I) (n : ℕ), Scheme.HasProEtaleTorAmplitude (Xi i).left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension (Xi i).left n).obj ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) a b))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df7bebcb0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Only the item's lean field differs from live; 16 dep records byte-identical; statement verbatim; declarations match the file; lines ≤99; 12 sorry, all theorem proofs. Clauses match the node: finite-type X, finite disjoint open+closed cover with I:Type w and no Nonempty; strict-tower equivalence with functor = tuple of restrictions and inverse pinned by φ (scalar action, restrictions, transitions, differentials, morphisms); Roos comparison with IsIso piComparison, the roosU 1−s equation, both roosχ cone summands and roosEval projections; IsDerivedLimitTriangle ↔ componentwise with first map r(c)≫piComparison and last map via commShiftIso; actual reduction units and canonicalIntegralReductionTowerMap on K-flat resolutions; completeness (IsComplete none), sfIntegralConstructible and finiteTorConstructibleIntegral componentwise, plus same-[a,b] support and Tor bounds for all positive levels; both full-subcategory equivalences tied to the ambient restriction; completed tensor and scalar extension with strict towers pinned on generators (derived isos Nonempty, matching the node's no-canonical-cone wording and the parent's form). Empty partition covered. Real defs; completion map is .choose of an ∃! pinned by projections. Maintainer note: the item imports the parent theorem module FiniteClopenDerivedDecomposition (whose proof_deps cite the item) for clopenSiteInclusion/clopenRingRestriction/clopenRestriction, a stage-3 import cycle; split those helpers into a def-node module or inline them; siblings at the same risk. Advisory: the strict tensor/scalar tower functors, integralConstantCoefficientObject, HasProEtaleTorAmplitude, proEtaleCohomologicalSupport and proEtaleBaseChange are owned by nodes not in stmt_deps. No compile (no file changed); worker reports clean 29.2 s."
  }
 }

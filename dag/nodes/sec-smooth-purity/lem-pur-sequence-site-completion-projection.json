@@ -284,5 +284,40 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-20a6c3146 (reviewer sub-agent of L); spot-checked: PASS. I read the item's 9-step split (7.3k chars, no new nodes) in full, checked every cited statement, and read the source, Stacks sites-cohomology Tag 0940 (section-derived-limits, line 5016: site C×N, fixed-index covers, g^{-1}=constant system, g_*=lim) and Tag 06YY (lemma-derived-base-change). The statement and stmt_deps are byte-identical to the Q05 and Q81 snapshots, and the base proof was empty. The item is not in route-pivot-dropped and has no repair note of its own (the re-split note is on the parent tower-functor). It is still unsplit in live and side-live, so no other group has superseded it. Steps: (1) lem-pur-system-ringed-sequence-site gives the site, the ring sheaf and the module equivalence; equivalence-injective-resolutions (2) makes it exact. (2) Sheaves on the site = towers; this is elementary. (3) Δ⊣L via the sectionwise-limit lemma; Δ is left exact, so this is the ringed-topos morphism in the sense of that node. (4) The ring map ρ_n and π_*N = lim Res N_n. (5) π^*M ≅ (M⊗B_n)_n via the ordinary scalar adjunction at each ρ_n and on the sequence site; I checked the compatibility equivalence on x⊗a by hand. (6) Lπ^* from the generic ringed derived-pullback theorem, with one flat-term K-flat P over B. (7) Evaluation gives K⊗^L B_n by derived-change-of-rings, natural on homotopies and on inverted quasi-isomorphisms. (8) Strict composition q_{m,n}q_{l,m}=q_{l,n} on pure tensors. (9) U is B-linear (ρ_n(b) semilinearity) and exact via Res finite-exactness and levelwise exactness in the tower category. Edge cases: one-object site, identity tower, zero level, non-surjective transitions, non-flat B_n, empty site. I accept both tool_uses (ringed-topoi-derived-pullback, pc-kflat-resolution). Maintainer note: the later NZ node lem-coef-sequence-projection-derived-adjunction (unsplit, created 2026-10-21, absent from the 55a1 snapshot where this item was created) generalizes steps 3–7 (arbitrary A→B_n, plus Rp_* and the adjunction). When it is split it should cite or extend this item rather than repeat steps 3–7. There is no cycle and no change here."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequenceSiteCompletionProjection",
+  "declaration": "WeilConjectures.SemilinearSections.sequenceSiteCompletionProjection",
+  "file": "lean/Sheaf/Paper/SequenceSiteCompletionProjection.lean",
+  "statement": "theorem sequenceSiteCompletionProjection (b : Cone (rings.{c, v, r} J B τ)) (_hb : IsLimit b) : PreservesFiniteLimits (completionSystemEquivalence.{c, v, r} J B τ).inverse ∧ PreservesFiniteColimits (completionSystemEquivalence.{c, v, r} J B τ).inverse ∧ Nonempty (SequenceCompletionProjection.{c, v, r} J B τ b)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ringedToposRingForgetCompose",
+   "CategoryTheory.ringedToposAbelianForgetCompose",
+   "CategoryTheory.ringedToposCommRingForgetCompose",
+   "CategoryTheory.RingedToposMorphismOfUniverses",
+   "WeilConjectures.SemilinearSections.completionSystemEquivalence",
+   "WeilConjectures.SemilinearSections.completionUnderlying",
+   "WeilConjectures.SemilinearSections.completionLocalization",
+   "WeilConjectures.SemilinearSections.completionScalarSection",
+   "WeilConjectures.SemilinearSections.SequenceSetProjection",
+   "WeilConjectures.SemilinearSections.SequenceModuleRestriction",
+   "WeilConjectures.SemilinearSections.SequenceOrdinaryPullback",
+   "WeilConjectures.SemilinearSections.SequenceDerivedPullback",
+   "WeilConjectures.SemilinearSections.SequenceCompletionProjection",
+   "WeilConjectures.SemilinearSections.sequenceSiteCompletionProjection"
+  ],
+  "note": "The independent-universe RingedToposMorphismOfUniverses interface is owned by this item module; the landed def-weil-pbc-ringed-topos-morphism record and module remain unchanged. Its fields are the same as the recorded interface. The three ForgetCompose instances are scoped to CategoryTheory. The equivalence uses the recorded def-coef-semilinear-system-models realization: Systems is definitionally the actual sequence-site module category, so completionSystemEquivalence retains all objects and maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d1100f9f",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after the 1bcaab63 H13/H2 RETURN. The def-weil-pbc-ringed-topos-morphism record is now byte-identical to side-live and the separate dependency module is removed. RingedToposMorphismOfUniverses moved into the item module with identical fields (diffed against the previous version), item blueprint docstrings, listed in lean.declarations with a lean.note, and no name collision live or in side-live. The three ForgetCompose instances are now scoped[CategoryTheory]; HasSheafCompose is a Prop class, so leaking through open CategoryTheory is harmless (advisory). The advisory on the equivalence clauses is resolved: they use completionSystemEquivalence := Equivalence.refl from Mod V C• to Systems, which is canonical because def-coef-semilinear-system-models defines S(B•) as those module sheaves (abbrev Systems, line 212), and strictSystemSequenceEquivalence is no longer in the statement. All other clauses (site and universes, tower, limit cone and rho_n, π with its pinned sections, U with actual transitions and exactness, ordinary pullback normalization, derived pullback with representative square and evaluation K⊗^L B_n) re-checked against the node. Statement verbatim, all 14 declarations present, only the theorem is sorry, no stronger assumptions, item not dropped or superseded. Not compiled, per the 2026-10-21 instruction; the worker reports clean compiles at 40.1 s and 50.0 s."
  }
 }

@@ -236,5 +236,28 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-dcd295b8e (reviewer sub-agent of L); spot-checked: Read the item in full, the three cited proof nodes' statements and blueprint_update, and main-20261015 prop-weil-pbc-descent-functors (statement and proof, the 'exact' sentence). The statement and stmt_deps are unchanged against side-live, so the target is not weakened. The item is unsplit in live and side-live and not in route-pivot-dropped, and there is no repair note. Recomputed every step. Step 1: σ/associator compatibility at E=E=E with unit associators and T_{E/E}=id gives σ=σ², so σ_{E/E}=1 and G[E,v]=[E,Φ_E v]. Step 3: naturality checked by hand. With r_L=T_{M/F}(s_F) and the β–σ hypothesis at M/E and M/F, postcomposing with b_L[n]q_L reduces both sides to s_{M,n,B}Φ_M(u[n])Φ_M(t_K)b'_K = Φ_M(u)[n]s_{M,n,A}Φ_M(t_K)b'_K, which is naturality of s_M; all types check. Steps 5 and 6: the zero and addition laws reduce to the stage laws, with c_{n,-n} kept. Step 7: κ has identity components and both composite comparisons are [E,s_{E,n,K}]. Edge cases checked: n=0, n<0, m=-n, Φ=id with β=1, E≠F. No cycle (BFS over 2933 dependency nodes); all cited nodes are in sk-thm-properbasechange; no new nodes; no SGA. Not a duplicate: lem-sbc-coherent-pair-functor-descent has no shifts, and lem-fd-common-stage-comparison-descent and lem-a1-texact-coefficient-stage-descent are other settings. Advisory: step 2 fixes the ℤ-shift zero and addition identifications of P_H as [E,z] and [E,c] itself, because common-stage-calculus states only [1] and [-1]. This is a natural unpacking of the item's 'canonical integer shifts', not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcPairFunctorShiftCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.pbcPairFunctorShiftCoherence",
+  "declarations": [
+   "CategoryTheory.StageSystem.Morphism.PairFunctorShiftCoherenceSpec",
+   "AlgebraicGeometry.Scheme.pbcPairFunctorShiftCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/PbcPairFunctorShiftCoherence.lean",
+  "statement": "theorem pbcPairFunctorShiftCoherence (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (T : Scheme.{u}) (S : Scheme.{v}) [IsNoetherian T] [IsNoetherian S] (hTdim : ∃ d : ℕ, topologicalKrullDim T ≤ d) (hSdim : ∃ d : ℕ, topologicalKrullDim S ≤ d) (hTl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) (hSl : ∀ s : S, IsUnit (l : S.presheaf.stalk s)) (A : StageSystem.Morphism (pbcScalarSystem l Ω T hTdim hTl) (pbcScalarSystem l Ω S hSdim hSl)) [∀ E, (A.Φ E).Additive] [∀ E, (A.Φ E).CommShift ℤ] : StageSystem.Morphism.PairFunctorShiftCoherenceSpec (pbcScalarSystem l Ω T hTdim hTl) (pbcScalarSystem l Ω S hSdim hSl) A",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "PairFunctorShiftCoherenceSpec packages every displayed hypothesis and conclusion over the existing stage systems; the theorem specializes that predicate to the concrete normalized PBC systems, avoiding repeated unfolding of concrete quotient Hom types. G remains arbitrary with its prescribed object and representative formulas; no triangle preservation is assumed or concluded. The helper is the statement predicate, not a new mathematical construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2e9fa040",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except lean; lean.statement verbatim, single sorry; report has Worker report + Second reading by N8. Clause check: ℓ/Ω/T,S noetherian finite-dim ℓ-invertible same interface as commonStageCalculus; A.β direction and A.coh = node associator equation; β_{E/E}=1 HEq meaningful via pbcScalarSystem_units; NatTrans.CommShift (A.β h).hom expands to the node's β–σ–s equation; G arbitrary additive with object and representative formulas (= mapAt); ∃ q : G.CommShift with zero/add = displayed formulas, components pinned to ι.map s_{E,n,K}; κ identity components + NatTrans.CommShift using q via the instance-lambda. Import closure excludes StageSystem.Shift, so pbcPairHasShift/pbcStageInclusionCommShift (canonical common-stage shift) are used. All HEqs same-category with propositionally equal endpoints → provable, not hollow. Edge cases n=0, n<0, m=-n, E=F, empty schemes, independent universes OK. No existing public declaration (only private descendedCommShift). Advisories: unused plain imports Triangulated.Functor and PbcScalarExtension; σ = pbcScalarCommShift of the normalized system (inherited accepted model); second reading done in-thread by the same group."
  }
 }

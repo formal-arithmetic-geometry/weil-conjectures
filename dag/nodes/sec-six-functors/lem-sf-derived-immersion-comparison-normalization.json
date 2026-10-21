@@ -410,5 +410,38 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-52e9ad3cb (reviewer sub-agent of L); spot-checked: Read the whole item (statement and 9 steps), all 39 cited node statements, the citer lem-weil-finite-duality-locally-closed-comparison and the main-20261015 proof of lem-weil-finite-duality-site-comparison. The statement, stmt_deps and source are byte-identical to the earlier unsplit copy, so nothing was weakened. Not a re-split delivery, no new nodes, no SGA. Step 2: lem-sf-open-comparison-unit-normalization states the open unit equation with the same canonical a and c. Step 3: recomputed the counit transpose (unit equation at rM, naturality of a, triangle identity give transpose a_M) and the indices match the statement. Step 4: def-weil-exact-derived-adjunction plus the pasting node, which allows non-invertible cells; all edges are exact by Step 1, unbounded case included. Step 6: Noetherian X makes the complement retrocompact, so 09BM applies; the etale exactness and counit come from the trf closed-subtopos node; 09AA gives the pro-etale counit; qcqs is checked through three Mathlib leaves. Step 7: def-weil-pbc-proetale-operations defines the canonical derived adjunction as the 0FND bijection; checked the cocones QF(s)^-1 and QG(t)^-1 and that the localized adjunction satisfies the same characterizing formula, so uniqueness identifies the counits. Step 8: D(delta^0) and delta_h have the same p-adjunction transpose, so they are equal. Step 9: cancelling the invertible localized counits gives the identity. Edge cases (empty U or Z, identity immersions, A=0, nonreduced Z) hold. Checked Stacks tags 09BM, 09AA, 09AF, 0F70, 04JC, 03DJ, 015F, 0FND and 0B65 at their labels. All off-unit tool uses are declared and generic; I accept them. No duplicate found among the open-comparison counit/unit nodes. Minor, no change needed: the report calls 08BJ a componentwise adjunction argument, but its label is adjoint-preserve-K-injectives; no step cites it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedImmersionComparisonNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedImmersionClosed_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.derivedImmersionEtaleRestriction_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.derivedImmersionProEtaleRestriction_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.derivedImmersionOpenPullbackComparison",
+   "AlgebraicGeometry.ProEtale.derivedImmersionOpenExtensionComparison",
+   "AlgebraicGeometry.ProEtale.derivedImmersionOpenEtaleAdjunction",
+   "AlgebraicGeometry.ProEtale.derivedImmersionOpenProEtaleAdjunction",
+   "AlgebraicGeometry.ProEtale.derivedImmersionOpen_normalization",
+   "AlgebraicGeometry.ProEtale.derivedImmersionClosedEtale_exact",
+   "AlgebraicGeometry.ProEtale.derivedImmersionClosedProEtale_exact",
+   "AlgebraicGeometry.ProEtale.derivedImmersionClosed_sheaf_transpose",
+   "AlgebraicGeometry.ProEtale.derivedImmersionClosedTermwiseComparison",
+   "AlgebraicGeometry.ProEtale.derivedImmersionClosed_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedImmersionComparisonNormalization.lean",
+  "statement": "theorem derivedImmersionClosed_normalization (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (h : Z ⟶ X) [IsClosedImmersion h] (L : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))) : ((fixedComparisonDirectImageMatePlus A h).app L ≫ (lowerStar (ModuleCat.{u + 1} A) h).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.app ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.obj L) = (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.map ((Etale.lowerStar (ModuleCat.{u + 1} A) h ).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.app L) ≫ (derivedImmersionClosedTermwiseComparison A h).hom.app L) ∧ ((fixedComparisonPullbackPlus A h).hom.app ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) h).obj L) ≫ (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategoryPlus.map ((fixedComparisonDirectImageMatePlus A h).app L) ≫ (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) h).counit.app ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.obj L) = (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.map ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) h).counit.app L)) ∧ IsIso ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) h).counit.app L) ∧ IsIso ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) h).counit.app ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.obj L))",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The open unit/counit equations on unbounded derived categories are derivedImmersionOpen_normalization. The closed clauses are derivedImmersionClosedEtale_exact, derivedImmersionClosedProEtale_exact, derivedImmersionClosed_sheaf_transpose and derivedImmersionClosed_normalization. Helper definitions localize the recorded canonical comparisons and adjunctions with their canonical exact-functor compositors. All module sheaves use the existing fixed-scalar presentation, equivalent to the intrinsic constant coefficient module categories of the dependency nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6958efd0",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node (only the lean field is new vs live), all 13 stmt_dep records and the used declarations in side-live, and the source place. Open: a_j/o_j localize the recorded canonical isos; units/counits are exactDerivedAdjunction of the ordinary j_!⊣j^* adjunctions; both equations hold for all unbounded inputs in the correct order, mirroring openComparison_unit_normalization; the unit IsIso clauses render 'restriction of o_j is the identity'. Closed: exactness of both direct images; delta^0 = lowerStarComparisonUpperStarBaseChange with transpose via comparisonUpperStarCompUpperStarIso.hom = a^-1; termwise descent equals fixedComparisonDirectImageMatePlus under the rightDerivedUnique identifications; counit equation (= the dep theorem, a recall in the node) and both counits IsIso. Noetherian = IsLocallyNoetherian + CompactSpace; A : Type (u+1) as in all deps; statement verbatim; all bodies sorry; docstrings ok; real pro-etale site. Advisories: fixed-scalar ProEtale.openImmersionLowerShriek is not listed in the def-weil-extension-by-zero record (sfIntrinsicExtensionByZero is its transport); exactDerivedAdjunction owner is only a proof_dep; the etale closed exactness restates the proved Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom; possibly unused proof imports. No compile (no file changed)."
  }
 }

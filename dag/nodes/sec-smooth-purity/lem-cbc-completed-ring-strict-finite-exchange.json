@@ -15,7 +15,9 @@
   "def-weil-pbc-completed-pullback",
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-cbc-proetale-extension-zero-base-change",
-  "prop-weil-pbc-proetale-constant-exact"
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-completed-finite-exchange-coordinates"
  ],
  "proof": [
   {
@@ -317,5 +319,37 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8e4e16c58 (reviewer sub-agent of L); spot-checked: Live node still unsplit and queued, not dropped, no repair note. Q52 is reviewing a parallel delivery of the same item, but nothing has landed, so I judged this one on its merits. Statement and stmt_deps are byte-identical to live; only split_report is new; proof_deps equals the union of uses (21); no cycle (the item is outside its 2964-node dependency closure; the only citer is the parent); no SGA. Step checks: (1) A_X|_U=A_U by sectionwise limits and weakly-etale localization; c_g|_U=c_{g_U} by projections. (2) Exact E with E⊣j^*, and the ringed module adjunction with no invertibility hypothesis, give composite adjunctions L1=g^*E, L2=E'g_U^*. (3) localize-ringed-site-morphism (Stacks 04J0) plus the cartesian a_V give t:R1≅R2. (4) The conjugate lemma with δ=t^{-1}; mate formulas typed; inverse by uniqueness (0B65). (5) Degreewise naturality gives strict inverse maps. (6) diagram-kflat-replacements plus ringed-open-flat-resolution (verbatim) plus resolving-class theorem: the iso descends independently of the replacement. (7) strict-reduction for arbitrary K and the completed-pullback evaluation clause, which is legitimate on reduction towers (Tor vanishing checked via flatness of Â); finite pullback exact. (8) open-tensor-normalization mate characterization plus finite-open-exchange-scalars pin b_{K,n} to the canonical 03DI-type exchange. (9) Transitions, cocycle and A_{X'}-linearity from the scalars lemma and the datum. The 9 tool_uses are the same ones the parent's reviewer accepted; I accept them. Edge cases: U empty, g=id, j=id, I=A, K=0, unbounded K, non-qc j. No fixes. Advisory: overlaps the diagram clause of lem-sf-open-tensor-normalization, but the item adds finite-component, transition and linearity pins."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedRingStrictFiniteExchange",
+  "declaration": "AlgebraicGeometry.Scheme.completedRingStrictFiniteExchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcFiniteReductionModelMap",
+   "AlgebraicGeometry.Scheme.cbcFiniteSourceModelMap",
+   "AlgebraicGeometry.Scheme.cbcFiniteTargetModelMap",
+   "AlgebraicGeometry.Scheme.CbcSourceFiniteNormalization",
+   "AlgebraicGeometry.Scheme.CbcTargetFiniteNormalization",
+   "AlgebraicGeometry.Scheme.cbcFiniteComparisons_existsUnique",
+   "AlgebraicGeometry.Scheme.cbcSourceFiniteComparison",
+   "AlgebraicGeometry.Scheme.cbcTargetFiniteComparison",
+   "AlgebraicGeometry.Scheme.cbcFiniteInverse",
+   "AlgebraicGeometry.Scheme.cbcFiniteInverse_isIso",
+   "AlgebraicGeometry.Scheme.cbcFiniteExchange",
+   "AlgebraicGeometry.Scheme.completedRingStrictFiniteExchange"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedRingStrictFiniteExchange.lean",
+  "statement": "theorem completedRingStrictFiniteExchange : CbcStrictExchangeNormalization d sq (cbcStrictExchange d sq) ∧ ∀ (K : DerivedCategory (pbcModules U (pbcAdicCompletion U d))) (n : ℕ), HEq ((pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map ((cbcReductionStrictExchange d sq).hom.app K) ≫ (cbcTargetFiniteComparison d sq n).hom.app K) ((cbcSourceFiniteComparison d sq n).hom.app K ≫ (cbcFiniteExchange d sq n).hom.app ((cbcFiniteReduction d U n).obj K))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cce39fbb8",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of e75eae498358: def-weil-pbc-completed-pullback record now byte-identical to live (Q99 PbcQbarCompletedPullback, 4 pbcQbar* decls kept); 3 Lean modules and 2 new def-node records byte-identical to the previously substance-checked delivery; item differs from live only in lean + 2 new def-node stmt_deps; not dropped, not landed elsewhere. Independently re-read: J_j = whiskered cbcOpenShriek (extensionByZeroPresheaf+sheafification), G = completedTowerPullback, b_K on all of D(Mod A_U) via reduction with no Rlim/completeness/qc; strict exchange ∃!-pinned on levelwise K-flat towers against levelwise cbcUnderivedInverseExchange (conjugate of the sectionwise cartesian cbcRightExchange), with types of both sides checked; finite comparisons ∃!-pinned via identity-on-sections and generator-normalized mates; cbcFiniteExchange = inverse of singleBetaInv (j'_! adjunct of gU^* unit then moduleSquareG.inv) restricted through the finite projection; HEq endpoints agree by unfolding; edge cases U empty, g = id, I = A, K = 0, unbounded K, non-qc j, n = 0 not excluded; statements verbatim, declarations present, no hollow def, sorry only. Advisory: redundant first conjunct, cbcStrictOpenModule defeq to cbcCompletedTowerExtension, singleBetaInv module owner outside stmt_deps, parent-module import (listed import-cycle note), unused plain proof-plan imports (H9). No compile (no file changed)."
  }
 }

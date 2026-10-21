@@ -1,0 +1,128 @@
+{
+ "id": "def-cbc-completed-strict-open-exchange",
+ "kind": "definition",
+ "title": "Canonical completed-ring strict open exchange",
+ "status": "split",
+ "statement": "For an adic datum $(A,I)$ as in [def-weil-pbc-adic-coefficient-datum] and an open Cartesian square $s$ as in [def-cbc-open-immersion-square], write $E_j$ for sheafified module extension, constructed from [def-weil-extension-by-zero-presheaf] and [def-weil-presheaf-modules-sheafification], over the actual completed rings $A_T$. Define $J_j$ by applying $E_j$ at every strict tower index and deriving this exact functor, and likewise for $j'$. Let $G_g,G_{g_U}$ be the total derived levelwise module pullbacks of [def-weil-pbc-completed-pullback]. Define the simultaneous inverse strict diagram map by applying the ordinary completed-ring inverse open exchange at every index, with its ordinary sectionwise Cartesian right-adjoint normalization. Define $\\beta:G_g\\circ J_j\\simeq J_{j'}\\circ G_{g_U}$ as the unique derived natural isomorphism characterized on every objectwise K-flat strict tower complex $P$ by the equation: $\\beta^{-1}_{QP}$ followed by the source model map equals the target model map followed by the image of the strict inverse map under localization. Here $\\gamma$ is that fixed simultaneous inverse strict map, and the two model maps are the composites of the exact-extension factor and the actual universal pullback counit, in the indicated source and target orders. On reduction towers define the reduced exchange by precomposition with the actual completed reduction functor. No completed ring-map invertibility, quasi-compactness, completeness, constructibility or boundedness is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange/reduction identification before Rlim; Stacks 03DI, sites-modules.tex, lemma-extension-by-zero; completed-ring strict exchange is an agent-written refinement."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical strict tower completed ring open extension exchange specified by universal derived counits",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit, ModuleCat.RestrictionCoextensionAdj.counit', PresheafOfModules.Derivation.Universal.desc, Condensed.profiniteSolidCounit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, PresheafOfModules.Derivation'.Universal.mk.",
+   "date": "2026-10-21",
+   "verdict": "No exact construction: the hits are generic derived counits or scalar restriction, not these completed-ring strict/open coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"restrictScalars\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*[Ee]xchange|completed.*[Ff]inite.*[Cc]omparison (Mathlib CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "rg",
+   "query": "cbcStrictOpen|cbcStrictInverse|cbcFiniteRes|cbcSourceLevel|cbcFiniteLevel (lean/WeilConjectures and lean/Sheaf)",
+   "results": "Only cbcFiniteRestrictionMap_exists and cbcFiniteRestrictionMap in Sheaf/Paper/CompletedExtensionZeroComparison.lean; no strict exchange or finite coordinate construction.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing ordinary helpers, supply the missing canonical strict and finite coordinate constructions."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "strict open exchange",
+   "results": "0 blueprint nodes match 'strict open exchange'",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-completed-ring-strict-finite-exchange",
+  "date": "2026-10-21",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "The sentence \"its reduction maps are Lg_n^* j_!K_n, which ... identifies with j′_! Lg_(U,n)^*K_n\"; simultaneous completed-ring strict-tower identification before applying derived limits.",
+   "via": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedStrictOpenExchange",
+  "declaration": "AlgebraicGeometry.Scheme.cbcStrictExchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcStrictOpenModule",
+   "AlgebraicGeometry.Scheme.cbcStrictOpenModule_additive",
+   "AlgebraicGeometry.Scheme.cbcStrictOpenModule_limits",
+   "AlgebraicGeometry.Scheme.cbcStrictOpenModule_colimits",
+   "AlgebraicGeometry.Scheme.cbcStrictOpen",
+   "AlgebraicGeometry.Scheme.cbcStrictInverseLevel_naturality",
+   "AlgebraicGeometry.Scheme.cbcStrictInverseComponent",
+   "AlgebraicGeometry.Scheme.cbcStrictInverseComponent_naturality",
+   "AlgebraicGeometry.Scheme.cbcStrictInverseModule",
+   "AlgebraicGeometry.Scheme.cbcStrictInverseModule_isIso",
+   "AlgebraicGeometry.Scheme.CbcStrictExchangeNormalization",
+   "AlgebraicGeometry.Scheme.cbcStrictExchange_existsUnique",
+   "AlgebraicGeometry.Scheme.cbcStrictExchange",
+   "AlgebraicGeometry.Scheme.cbcReductionStrictExchange"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedStrictOpenExchange.lean",
+  "statement": "def cbcStrictExchange",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cce39fbb8",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cce39fbb8",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of e75eae498358: def-weil-pbc-completed-pullback record now byte-identical to live (Q99 PbcQbarCompletedPullback, 4 pbcQbar* decls kept); 3 Lean modules and 2 new def-node records byte-identical to the previously substance-checked delivery; item differs from live only in lean + 2 new def-node stmt_deps; not dropped, not landed elsewhere. Independently re-read: J_j = whiskered cbcOpenShriek (extensionByZeroPresheaf+sheafification), G = completedTowerPullback, b_K on all of D(Mod A_U) via reduction with no Rlim/completeness/qc; strict exchange ∃!-pinned on levelwise K-flat towers against levelwise cbcUnderivedInverseExchange (conjugate of the sectionwise cartesian cbcRightExchange), with types of both sides checked; finite comparisons ∃!-pinned via identity-on-sections and generator-normalized mates; cbcFiniteExchange = inverse of singleBetaInv (j'_! adjunct of gU^* unit then moduleSquareG.inv) restricted through the finite projection; HEq endpoints agree by unfolding; edge cases U empty, g = id, I = A, K = 0, unbounded K, non-qc j, n = 0 not excluded; statements verbatim, declarations present, no hollow def, sorry only. Advisory: redundant first conjunct, cbcStrictOpenModule defeq to cbcCompletedTowerExtension, singleBetaInv module owner outside stmt_deps, parent-module import (listed import-cycle note), unused plain proof-plan imports (H9). No compile (no file changed)."
+ }
+}

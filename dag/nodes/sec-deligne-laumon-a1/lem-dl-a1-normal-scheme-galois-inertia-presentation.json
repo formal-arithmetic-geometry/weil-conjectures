@@ -14,7 +14,8 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-galois-fibre-functor",
   "def-weil-geometric-point",
-  "def-weil-algebraic-closure"
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -377,5 +378,24 @@
   "group": "Q151",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-814e07007 (reviewer sub-agent of L); spot-checked: I read Stacks 0BTD (setup and proof), 0BST and 0BSX at their labels, the item, both new nodes and the statement of every cited node; the reasoning is in review.md. The item states 0BTD (1)=(3) for any normal integral scheme, plus surjectivity via 0BQM, continuity, and independence of the embeddings. Nothing in it is weakened. The ten steps are correct: the q_X variance and continuity, surjectivity by extending the section of a coset cover through generic full faithfulness, triviality of J_x on finite étale covers, the fixed field L being normal, conjugacy of local inertia through localization, I_q=1 via 0BSX with M=Omega, Y->X finite étale via 0BST with I=1 then integral plus lft (qcqs of Spec L->X checked), stabilizer U, and the core argument for open normal overgroups. New 0BSX node: matches the source (infinite towers, arbitrary primes). It does not duplicate lem-exc-finite-galois-prime-residue-lifting (one finite extension) or lem-exc-finite-tame-character-tower (finite towers over a DVR). New 0BST node: matches the source and holds in the tests Z/2 on k[t] (t->-t at (t) and (t-1), and char 2 t->t+1). Both new nodes are statement-only and self-contained, each with 5 Mathlib searches; neither restates a clause of the item. No cycle, no SGA source. FIX, two C1/C4 citations: step 3 used compactness of the Krull group with no cited node, so I cited lem-exc-galois-krull-finite-limit and lem-weil-pbc-separable-closure-exists-galois. Step 4 applied the henselian finite-étale equivalence and a separably closed residue field without a node saying the strict henselization is strictly henselian, so I cited lem-weil-pbc-strict-henselization-local-structure and added a tool_uses entry for it. The statement is unchanged; the corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-normal-scheme-galois-inertia-presentation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.NormalSchemeGaloisInertiaPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.normalScheme_galois_inertia_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/NormalSchemeGaloisInertiaPresentation.lean",
+  "statement": "theorem normalScheme_galois_inertia_presentation {X : Scheme.{u}} [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) {Ω Ωbar : Type u} [Field Ω] [Field Ωbar] [Algebra X.functionField Ω] [IsSepClosure X.functionField Ω] [Algebra Ω Ωbar] [IsAlgClosure Ω Ωbar] [IsAlgClosed Ωbar] [Algebra X.functionField Ωbar] [IsScalarTower X.functionField Ω Ωbar] (Ωx : X → Type u) [∀ x, Field (Ωx x)] [∀ x, IsAlgClosed (Ωx x)] (sx : ∀ x, Spec (.of (Ωx x)) ⟶ X) (hsx : ∀ x, (X.SpecToEquivOfField (Ωx x) (sx x)).1 = x) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((fiber (pointOfAlgebra (K := X.functionField) Ωbar (X.fromSpecStalk (genericPoint X)))).obj P)] [IsFundamentalGroup (fiber (pointOfAlgebra (K := X.functionField) Ωbar (X.fromSpecStalk (genericPoint X)))) G] : (∀ x, IsDomain (strictHenselizationRing (sx x))) ∧ (∀ x, ∃ j : FractionRing (strictHenselizationRing (sx x)) →+* Ω, Function.Injective j ∧ Spec.map (CommRingCat.ofHom (j.comp (algebraMap (strictHenselizationRing (sx x)) (FractionRing (strictHenselizationRing (sx x)))))) ≫ strictHenselizationStructuralMap (sx x) = Spec.map (CommRingCat.ofHom (algebraMap X.functionField Ω)) ≫ X.fromSpecStalk (genericPoint X)) ∧ (∀ σ : Gal(Ω / X.functionField), ∃! σbar : Gal(Ωbar / X.functionField), ∀ a : Ω, σbar (algebraMap Ω Ωbar a) = algebraMap Ω Ωbar (σ a)) ∧ ∃ q : Gal(Ω / X.functionField) →* G, (∀ (σ : Gal(Ω / X.functionField)) (σbar : Gal(Ωbar / X.functionField)), (∀ a : Ω, σbar (algebraMap Ω Ωbar a) = algebraMap Ω Ωbar (σ a)) → q σ = galoisToFundamentalGroup (K := X.functionField) (X.fromSpecStalk (genericPoint X)) (Iso.refl _) G σbar) ∧ Continuous q ∧ Function.Surjective q ∧ ∀ j : (x : X) → FractionRing (strictHenselizationRing (sx x)) →+* Ω, (∀ x, Function.Injective (j x)) → (∀ x, Spec.map (CommRingCat.ofHom ((j x).comp (algebraMap (strictHenselizationRing (sx x)) (FractionRing (strictHenselizationRing (sx x)))))) ≫ strictHenselizationStructuralMap (sx x) = Spec.map (CommRingCat.ofHom (algebraMap X.functionField Ω)) ≫ X.fromSpecStalk (genericPoint X)) → q.ker = (Subgroup.normalClosure (⋃ x, (fixingSubgroup Gal(Ω / X.functionField) (Set.range (j x)) : Set Gal(Ω / X.functionField)))).topologicalClosure",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The arbitrary small fundamental-group model G is the standard project encoding; the existing fibre equivalence identifies it canonically with Aut(flcFiber). The Galois homomorphism is specified by its geometric-fibre action, using the unique extensions to the algebraic closure. Domains and compatible embeddings are conclusions, not assumptions. The structural-map dependency is already landed; its canonical map expresses K-compatibility by a diagram over X."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c993c9361",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, Stacks pione.tex 0BTD setup+lemma, all 8 dep records, GaloisAction (galoisToAut/galoisToFundamentalGroup), StrictHenselization and StrictHenselizationStructuralMap sources, STATE π1 convention. Every clause matches: normal integral X (IsIntegral + integrally closed stalks, no extra hypotheses), K = functionField, IsSepClosure Ω, IsAlgClosure Ω̄ with unique-extension conjunct, arbitrary geometric points over each x, domain + compatible injective embedding as conclusions (square over X ⇔ K-embedding), q pinned to the canonical galoisToFundamentalGroup via σ̄, continuity/surjectivity, ker = closure of normalClosure of the fixing subgroups for every compatible embedding family. The added stmt_dep def-weil-pbc-strict-henselization-structural-map is landed (allowed). Statement verbatim, lines ≤100, docstrings with source/blueprint/10 steps, sorry only, no helpers, no H4 duplicate found. Advisory: redundant IsAlgClosed Ωbar; short worker-authored second reading. No compile run (no file changed)."
  }
 }

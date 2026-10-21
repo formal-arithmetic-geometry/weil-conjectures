@@ -1,0 +1,150 @@
+{
+ "id": "def-cbc-completed-finite-exchange-coordinates",
+ "kind": "definition",
+ "title": "Fixed finite coordinates for completed-ring open exchange",
+ "status": "split",
+ "statement": "For the adic datum [def-weil-pbc-adic-coefficient-datum], open square and completed strict extensions [def-cbc-completed-strict-open-exchange], for $n\\in\\mathbf N$ put $B_n=A/I^{n+1}$ and let $r_{T,n}$ restrict finite constant-ring module sheaves to $A_T$ through the actual finite projection followed by the inverse constant-section coefficient comparison. These are the finite coordinates of [lem-weil-pbc-constant-completion-equivalence]. For any morphism $f:S\\to T$, fix the direct-image comparison $r_{T,n}\\circ f_{n*}\\simeq f_*\\circ r_{S,n}$ by identity on every underlying section, where completed module pullback and its right adjoint are those of [def-weil-pbc-completed-pullback]. Define the finite pullback comparison as its adjoint mate. For an open immersion $e:W\\hookrightarrow T$ define the finite open-restriction comparison by sending each inverse-image unit generator to restriction along its adjoint localized-site arrow, and define the open-extension comparison as its mate. Use the finite constant-coefficient pullback of [prop-weil-pbc-proetale-constant-exact]. Compose these specified comparisons to identify the source and target ordinary open-exchange composites with their finite constant-coefficient composites followed by $r_{X',n}$. Define the finite-level coordinate change for a reduction tower by identity on sections, and combine it with those source and target comparisons. Finite reduction itself is derived scalar extension through the actual completed projection followed by restriction through the constant-section ring isomorphism. All comparisons are natural and completed-ring linear, with no completeness or quasi-compactness assumption. On cochain representatives, also define the reduction model map by the actual universal reduction counit; define the source and target model maps by composing that map with the exact open-extension factors and the actual universal completed-tower pullback counits, in their indicated source and target orders.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-completed-strict-open-exchange",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange/reduction identification before Rlim; Stacks 03DI, sites-modules.tex, lemma-extension-by-zero; completed-ring strict exchange is an agent-written refinement."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient scalar restriction open extension pullback coordinate comparison normalized on sections",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Hom.appLE, PresheafOfModules.restrictScalarsObj, VectorField.mpullback_smul_apply, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, LinearMap.restrictScalarsₗ, HasFPowerSeriesWithinAt.restrictScalars, ContinuousLinearMap.coe_restrictScalarsₗ.",
+   "date": "2026-10-21",
+   "verdict": "No exact construction: the hits are generic derived counits or scalar restriction, not these completed-ring strict/open coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"restrictScalars\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*[Ee]xchange|completed.*[Ff]inite.*[Cc]omparison (Mathlib CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "rg",
+   "query": "cbcStrictOpen|cbcStrictInverse|cbcFiniteRes|cbcSourceLevel|cbcFiniteLevel (lean/WeilConjectures and lean/Sheaf)",
+   "results": "Only cbcFiniteRestrictionMap_exists and cbcFiniteRestrictionMap in Sheaf/Paper/CompletedExtensionZeroComparison.lean; no strict exchange or finite coordinate construction.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing ordinary helpers, supply the missing canonical strict and finite coordinate constructions."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "finite scalar restriction",
+   "results": "0 blueprint nodes match 'finite scalar restriction'",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-completed-ring-strict-finite-exchange",
+  "date": "2026-10-21",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "The sentence \"its reduction maps are Lg_n^* j_!K_n, which ... identifies with j′_! Lg_(U,n)^*K_n\"; simultaneous completed-ring strict-tower identification before applying derived limits.",
+   "via": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedFiniteExchangeCoordinates",
+  "declaration": "AlgebraicGeometry.Scheme.cbcFiniteSourceRes",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcFiniteRing",
+   "AlgebraicGeometry.Scheme.cbcFiniteRing_finite",
+   "AlgebraicGeometry.Scheme.cbcFiniteProjection",
+   "AlgebraicGeometry.Scheme.cbcFiniteRes",
+   "AlgebraicGeometry.Scheme.cbcFiniteDirectRes_existsUnique",
+   "AlgebraicGeometry.Scheme.cbcFiniteDirectRes",
+   "AlgebraicGeometry.Scheme.cbcFinitePullRes",
+   "AlgebraicGeometry.Scheme.cbcFinitePullRes_isIso",
+   "AlgebraicGeometry.Scheme.cbcFiniteOpenRestriction_existsUnique",
+   "AlgebraicGeometry.Scheme.cbcFiniteOpenRestriction",
+   "AlgebraicGeometry.Scheme.cbcFiniteOpenRes",
+   "AlgebraicGeometry.Scheme.cbcFiniteOpenRes_isIso",
+   "AlgebraicGeometry.Scheme.cbcFiniteSourceRes",
+   "AlgebraicGeometry.Scheme.cbcFiniteTargetRes",
+   "AlgebraicGeometry.Scheme.cbcFiniteReductionModule",
+   "AlgebraicGeometry.Scheme.cbcFiniteReductionModule_additive",
+   "AlgebraicGeometry.Scheme.cbcFiniteReduction",
+   "AlgebraicGeometry.Scheme.cbcFiniteLevel_existsUnique",
+   "AlgebraicGeometry.Scheme.cbcFiniteLevel",
+   "AlgebraicGeometry.Scheme.cbcFiniteSource",
+   "AlgebraicGeometry.Scheme.cbcFiniteTarget",
+   "AlgebraicGeometry.Scheme.cbcFiniteSource_additive",
+   "AlgebraicGeometry.Scheme.cbcFiniteSource_limits",
+   "AlgebraicGeometry.Scheme.cbcFiniteSource_colimits",
+   "AlgebraicGeometry.Scheme.cbcFiniteTarget_additive",
+   "AlgebraicGeometry.Scheme.cbcFiniteTarget_limits",
+   "AlgebraicGeometry.Scheme.cbcFiniteTarget_colimits",
+   "AlgebraicGeometry.Scheme.cbcFiniteSourceModel_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.cbcFiniteTargetModel_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.cbcSourceLevel_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.cbcTargetLevel_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.cbcSourceLevel",
+   "AlgebraicGeometry.Scheme.cbcTargetLevel",
+   "AlgebraicGeometry.Scheme.cbcReductionModelMap",
+   "AlgebraicGeometry.Scheme.cbcSourceModelMap",
+   "AlgebraicGeometry.Scheme.cbcTargetModelMap"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedFiniteExchangeCoordinates.lean",
+  "statement": "def cbcFiniteSourceRes (n : ℕ) : cbcFiniteRes d U n ⋙ cbcOpenShriek d j sq.isOpenImmersion ⋙ completedModulePullback g d ≅ (@moduleJ.{u} (cbcFiniteRing d n) _ U X j sq.isOpenImmersion) ⋙ modulePullback (cbcFiniteRing d n) g ⋙ cbcFiniteRes d X' n",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cce39fbb8",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cce39fbb8",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of e75eae498358: def-weil-pbc-completed-pullback record now byte-identical to live (Q99 PbcQbarCompletedPullback, 4 pbcQbar* decls kept); 3 Lean modules and 2 new def-node records byte-identical to the previously substance-checked delivery; item differs from live only in lean + 2 new def-node stmt_deps; not dropped, not landed elsewhere. Independently re-read: J_j = whiskered cbcOpenShriek (extensionByZeroPresheaf+sheafification), G = completedTowerPullback, b_K on all of D(Mod A_U) via reduction with no Rlim/completeness/qc; strict exchange ∃!-pinned on levelwise K-flat towers against levelwise cbcUnderivedInverseExchange (conjugate of the sectionwise cartesian cbcRightExchange), with types of both sides checked; finite comparisons ∃!-pinned via identity-on-sections and generator-normalized mates; cbcFiniteExchange = inverse of singleBetaInv (j'_! adjunct of gU^* unit then moduleSquareG.inv) restricted through the finite projection; HEq endpoints agree by unfolding; edge cases U empty, g = id, I = A, K = 0, unbounded K, non-qc j, n = 0 not excluded; statements verbatim, declarations present, no hollow def, sorry only. Advisory: redundant first conjunct, cbcStrictOpenModule defeq to cbcCompletedTowerExtension, singleBetaInv module owner outside stmt_deps, parent-module import (listed import-cycle note), unused plain proof-plan imports (H9). No compile (no file changed)."
+ }
+}

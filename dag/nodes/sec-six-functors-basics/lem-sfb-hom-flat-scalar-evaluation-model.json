@@ -329,5 +329,43 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-46c5f0e23 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps, every cited statement (chain-transpose, scalar-chain identification, coefficient adjunction, scalar Hom adjunction, scalar comparison data, ringed tensor-Hom model, the tensor and chain coherence nodes, tensor quasi-iso invariance, K-flat resolution, exact-functor nodes, derived change of rings), Stacks sites-cohomology 06YP l.3011, 07A4 l.3684, 08J9 l.8896, 0D6D l.3658, and the blueprint lem-sfb-dc-hom-preserves.proof.md final sentence. The statement is unchanged from base. There are no new nodes, no repair note, no SGA citation, and the DFS from the cited deps does not reach the item, so there is no cycle. Recomputed: adjunct of λ = (ε⊗1)μ; the step-3 cancellation along w⊗1_P without K-flat UEV; h_{b_V} = s⊗b(tv)(p) and descent along UEt⊗1_P; the step-6 Θ-transpose chain; the step-7 naturality transposes; the step-9 tower via tensor coherence; the step-11 τ/κ generator formulas. Edge cases tested: φ=id, Z→Q with D=Z/2, S=0. No duplicate found (rg -lL; the pod/coef hits are specialized point, finite-free or integral cases). Accepted the generic tool_uses kflat-resolution, kflat-tensor-quasiiso, sheaf-ring coefficient adjunction and exact-functor derived-functor. One fault, C4/C1: step 1 uses that E^L is the left derived functor of termwise extension but did not cite lem-pur-derived-change-of-rings (already a stmt_dep). Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hom-flat-scalar-evaluation-model.json by adding it to the step-1 uses and to proof_deps, with one clarifying sentence.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "declaration": "CategoryTheory.FlatScalarEvaluation.model_exists",
+  "declarations": [
+   "CategoryTheory.FlatScalarEvaluation.extension",
+   "CategoryTheory.FlatScalarEvaluation.extensionSection",
+   "CategoryTheory.FlatScalarEvaluation.representative",
+   "CategoryTheory.FlatScalarEvaluation.exactRepresentative",
+   "CategoryTheory.FlatScalarEvaluation.unitTensor",
+   "CategoryTheory.FlatScalarEvaluation.transpose",
+   "CategoryTheory.FlatScalarEvaluation.sourceTransport",
+   "CategoryTheory.FlatScalarEvaluation.extendedEvaluation",
+   "CategoryTheory.FlatScalarEvaluation.adjunctionEvaluation",
+   "CategoryTheory.FlatScalarEvaluation.squareTransport",
+   "CategoryTheory.FlatScalarEvaluation.Representatives",
+   "CategoryTheory.FlatScalarEvaluation.Calculation",
+   "CategoryTheory.FlatScalarEvaluation.ChainPresentation",
+   "CategoryTheory.FlatScalarEvaluation.ChainSquare",
+   "CategoryTheory.FlatScalarEvaluation.DerivedCoherence",
+   "CategoryTheory.FlatScalarEvaluation.Model",
+   "CategoryTheory.FlatScalarEvaluation.model_exists"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatScalarEvaluationModel.lean",
+  "statement": "theorem model_exists : Nonempty (Model M μ Θ)",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary structures package the literal generator formulas, canonical one-K-flat-factor identifications, arbitrary-resolution descent, evaluation-normalized adjunction transpose and full coefficient-square equations. All notions and canonical comparisons are reused from the recorded dependencies; data are specified uniquely by these normalizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1025b7ab",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Node unchanged except lean record; statement verbatim. All clauses matched: exact E via PreservesFiniteLimits; P flat-term K-flat, I K-injective, D arbitrary; evaluate/scalarEvaluate/nu/chainUnitTensor generator-pinned; tensorIso pinned by K-flat normalization plus chain naturality (P K-flat makes Q(t⊗1) invertible); exactRepresentative uses asIso of the universal counit; derived_formula, adjunction_formula (coefficientBaseChangeHom = node's c^φ, Θ.iso direction checked), resolution descent for every t (generator check), DerivedCoherence orientation identical to landed scalarHomComparisonTower; ChainSquare checked on generators. Dropping exactness from the coherence clauses is true (node step 9). No hollow data; single sorry; docstrings with source, blueprint and 11 steps; report sections present; no cycle; no duplicate. Advisories: coefficientBaseChangeHom owner def-pur-coefficient-base-change-hom and StrictScalarHom owner (theorem, proof_dep) not in stmt_deps; coherence clauses overlap lem-pur-scalar-hom-comparison-tower; proof-only private imports (H9). No compile run (no file changed)."
  }
 }

@@ -17,7 +17,9 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-kflat-scalar-comparison-normalization"
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-sp-open-scalar-operations"
  ],
  "proof": [
   {
@@ -307,5 +309,51 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-774ae5681 (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited statements in full; there are no new nodes and no fixes. Against N0's base copy, the statement changes only by adding [lem-sfb-kflat-scalar-comparison-normalization] to the λ_j citation and to stmt_deps; it is not weakened. No SGA source, no cycle (item absent from the 2929-node dep closure), and no re-split note. Steps 1–8 re-derived with all directions written out. (1) λ^{-1} is the scalar mate of r_A U_X = U_U r_B (K-flat node), so ν_U = U_U(λ) r_A ν_X; λ is monoidal as c'∘c^{-1} of the two ringed-topos factorisations of (U,B)→(X,A) (monoidal-comparisons node). (2–3) The conjugate lemma applies with L1 = S_X e_A, L2 = e_B S_U. Composite units plus scalar-unit naturality give (*): r_B(b) u^B = λ^{-1} S_U(u^A). (4) (**) matches the Yoneda chain of Stacks 0E8I (sites-modules l.4051), the projection-formula node's imported proof, and the reviewed lem-sf-open-tensor-normalization. Advisory only: the step reads which canonical map is meant from the source. (5) U_X b = δ^A_{K,B_X} follows from the restriction/extension identification and the tensorator a_A. (6) The cocycle follows by pasting conjugates, then the successive-quotient units and uniqueness; the identity case works. (7–8) (***) is exactly the inverse of routes (i)/(ii). (J) and the left-side reduction agree after using λ-monoidality as t_U S_U(a_A) λ = (λ⊗λ) a_B r_B(t_X); no symmetry is used, so no sign. Edge cases checked: U empty, j = id, A = B, Q = A, the nonflat map Z/4→Z/2. Tool uses (8 generic comparison and adjunction nodes; unit uses = []) accepted. Maintainer note: the β existence/inverse clause, which was already in N0's base statement, overlaps the reviewed lem-sf-open-tensor-normalization (g = id). That node lacks the restricted-β, cocycle and mixed-square clauses, so this delivery has no fault there. lem-sp-proetale-open-scalar-cocycle is a special case (ℓ-power rings), not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenScalarTensorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Models",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarPair",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalar",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarIso",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.tensor",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.unit",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.coefficient",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openAdj",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.rightSquare",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.lambda",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.beta",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.restrictionOpen",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.tensorModel",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.restrictionTensor",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.OpenMonoidal",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openDelta",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.openUnit",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Choices",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarProjection",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.coefficientPullback",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Projection",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarComp",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarId",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.Normalization",
+   "AlgebraicGeometry.ProEtale.OpenScalarTensor.open_scalar_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenScalarTensorNormalization.lean",
+  "statement": "theorem open_scalar_tensor_normalization : ∃ m : Models.{u}, ∃ c : Choices m, Nonempty (Normalization m c)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical scalar and tensor operations are expressed through the recorded ScalarHomModels presentations; the theorem supplies these presentations existentially, without adding hypotheses. Site-object universe u+1 and site-Hom universe u remain distinct. Repair of return 0dc45a25334e: beta transports the recorded openScalarIso by scalarIso; the existing scalar/open definitions are cited through def-sp-open-scalar-operations, with no dependency on openScalarExchange or the two proof-only existence theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3df368e79",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 0dc45a25334e. Lean delta: beta = isoWhiskerLeft(scalarIso X) ≫ openScalarIso ≫ isoWhiskerRight(scalarIso U).symm; openScalarIso is the same leftAdjointUniq construction with the same adjunctions and right square, so the map and all clauses are unchanged. Two theorem-only imports and stmt_deps (scalar-tensor-comparison, dc-hom-scalar-adjunction) dropped. New def-sp-open-scalar-operations is existing:true on the unchanged OpenScalarExchange (six data decls, theorem excluded): it lists every owner decl the item uses, has no competing owner, its TeX matches the bodies, check_existing reports no failures (noncomputable note only), no cycle, not dropped. Item node differs from live only in lean/stmt_deps and the 11 dependency records are identical. Clause table re-checked (beta_inverse, restricted_beta, coefficient_comp/id, tensor_square for arbitrary Q, unit normalization); existentials pinned (generators/K-flat square, open_normalization, Projection adjunct); edge cases empty U, j=id, A=B, zero rings, Z/4→Z/2. One sorry, verbatim signature, docstrings present. Advisories: new node cites by notion, not Lean-level owners four-corners/projection-compactification; openScalarIso docstring blueprint tag; redundant citation imports. No compile (no file changed); report records clean 47 s compile."
  }
 }

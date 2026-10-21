@@ -11,7 +11,11 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-pod-l-adic-representations",
   "def-galois-fibre-functor",
-  "def-galois-categories"
+  "def-galois-categories",
+  "def-pod-galois-correspondence-data-e4",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
@@ -305,5 +309,28 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-dbf8fbb7c (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes. It is a re-delivery of the PASSed head 24c23b06, which never reached live; live and side-live still hold the item unsplit, with the same statement and stmt_deps. Neither the item nor any cited node is on the dropped list, and there is no cycle with the parent lem-zl-curve-testing-irreducibility. The re-split note belongs to the parent and is resolved; this item has none. Against 24c23b06 only steps 4 and 5 changed, and I re-read all eight steps. Step 4: the recorded statement of lem-zl-finite-matrix-irreducibility gives its own lattice D and level m. The step takes L from lem-pod-profinite-stable-lattice (Π compact by step 3, joint continuity by step 1) and proves ϖ^a L ⊆ D ⊆ ϖ^{-a} L. With N=m+2a, a congruence mod ϖ^N on L gives one mod ϖ^m on D, since ϖ^{N-a}L = ϖ^m(ϖ^a L) ⊆ ϖ^m D. This repairs the old step's use of the existential statement for an arbitrary L, and it also agrees with the blueprint_update form. Step 5: lem-weil-valued-dvr-finite-quotients(1,2) gives A_j finite with ϖ^N O = m^N. Continuity comes from def-pod-l-adic-representations(2) on the actual lattice: ϖ^N L is open, so the finitely many basis evaluations are continuous into the discrete M_j and α_j is continuous. Steps 1-3 and 6-8 are unchanged and correct: the cor-galois-lisse-representations(2) hypotheses match X exactly; the echelon descent puts W_L in def-pod(3); lem-galois-aut-profinite gives profinite Π; the pointed cor-galois-open-subgroups cover has stabiliser K and transitivity gives the regular fibre bijection; q(H)=Q gives equal reduction images. I checked r=0, rank one, X a point, non-closed H and different E_j. I accept the 9 tool_uses as generic black boxes; no SGA source is used. Advisory only: the proof is 6.4k characters (each step under 2000), and step 7 identifies Aut(F_ȳ) on FLC with the action on |P_ȳ| through def-galois-fibre-functor and thm-galois-lc-etale, as the earlier PASS accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CommonIrreducibilityDetectingCover",
+  "declaration": "AlgebraicGeometry.Scheme.exists_common_irreducibility_detecting_cover",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IrreducibilityDetectingModel",
+   "AlgebraicGeometry.Scheme.exists_common_irreducibility_detecting_cover"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/CommonIrreducibilityDetectingCover.lean",
+  "statement": "theorem exists_common_irreducibility_detecting_cover (X : Scheme.{u}) [ConnectedSpace X] [IsNoetherian X] [X.IsSeparated] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (l : ℕ) [Fact l.Prime] [∀ z : X, Invertible (l : X.residueField z)] (K : Type (u + 1)) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K] (G : ProfiniteGrp.{u}) [∀ P, MulAction G ((FiniteEtale.fiber x).obj P)] [IsFundamentalGroup (FiniteEtale.fiber x) G] (r : ℕ) (F : Fin r → LisseAlgebraicSheaf l X K) (hF : ∀ j : Fin r, ¬ IsZero (F j) ∧ ∀ (A : LisseAlgebraicSheaf l X K) (f : A ⟶ F j), Mono f → IsZero A ∨ IsIso f) : ∃ (c : GaloisLisseFiniteCorrespondence x G) (d : GaloisLisseAdicCorrespondence x G c l K) (M : Fin r → IrreducibilityDetectingModel l K G), (∀ j : Fin r, ∃ e : (K ⊗[(M j).E.val] (Fin (M j).rank → (M j).E.val)) ≃ₗ[K] ((lisseAlgebraicFiberFunctor l X x K).obj (F j)), ∀ (g : G) (v : K ⊗[(M j).E.val] (Fin (M j).rank → (M j).E.val)), e (Representation.coefficientScalarExtension (M j).E.val K G (Fin (M j).rank → (M j).E.val) (M j).ρ g v) = d.τA.hom.app (F j) (((d.eA.functor.obj (F j)).obj.ρ g) (d.τA.inv.app (F j) (e v)))) ∧ ∃ (Q : Type u) (_ : Group Q) (_ : Finite Q) (q : G →* Q), @Continuous G Q inferInstance ⊥ q ∧ Function.Surjective q ∧ (∀ g : G, q g = 1 ↔ ∀ (j : Fin r) (v : Fin (M j).rank → (M j).E.val), v ∈ (M j).lattice → ∃ w ∈ (M j).lattice, (M j).ρ g v - v = ((M j).uniformizer.val ^ (M j).N) • w) ∧ (∃ T : X.FiniteEtale, ConnectedSpace T.obj.left ∧ ∃ e : ((FiniteEtale.fiber x).obj T) ≃ Q, ∀ (g : G) (t : (FiniteEtale.fiber x).obj T), e (g • t) = q g * e t) ∧ ∀ H : Subgroup G, q '' (H : Set G) = Set.univ → ∀ j : Fin r, Representation.IsIrreducible (LinearEquiv.automorphismGroup.toLinearMapMonoidHom.comp ((Representation.coefficientScalarExtension (M j).E.val K G (Fin (M j).rank → (M j).E.val) (M j).ρ).comp H.subtype))",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary structure only bundles the existential coefficient/lattice witnesses in coordinates. The existing evaluation-normalized finite and adic correspondence certificates are existential conclusions, not extra hypotheses. The reduction-kernel identity is stated elementwise. The scalar tensor is written K ⊗_E V, identified with V ⊗_E K by the canonical tensor flip."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-659d91eca",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Matched every node clause to the Lean: connected Noetherian separated X; geometric point; l invertible; pi1 as IsFundamentalGroup of ProfiniteGrp.{u} (as in cor-galois); irreducible lisse sheaves via not IsZero plus the mono dichotomy, r=0 allowed; FiniteCoefficientFields E_j; IsContinuousCoefficient rho in coordinates; K-linear e equivariant for the tauA-conjugated eA action of the existential correspondence c,d. Checked that d's clauses (algebraicModelScalarExtension, rational and integral evaluation, finiteEtaleAction) pin this action up to an inner automorphism, and every LisseAlgebraicSheaf object is lisseAlgebraicOfModel of its pair. Stable full finite free lattices stated inline, as in lem-pod-profinite-stable-lattice; uniformizer generating the maximal ideal; N>=1; continuous surjective q to a finite discrete Q; kernel identity stated elementwise; connected FiniteEtale T with regular-action fibre bijection; irreducibility for every H with q(H)=Q via Mathlib IsIrreducible of the scalar extension, no closedness of H. Edge cases checked: r=0, a point, rank 1, different E_j. Records: only lean and stmt_deps changed (4 existing definition nodes added, no theorem node); dep files byte-identical to side-live; statement verbatim; no line over 100; sorry only; docstrings with source and all 8 proof steps; proof-dependency imports non-public; nothing on the dropped list; no name collisions. No compile (no file changed). Advisory only: redundant public imports FLCFiber/GaloisCategories; a for-all-correspondences form would be easier for citers; the group's second-reading section is short."
  }
 }
