@@ -23190,3 +23190,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:29 L: merged deliver/NW/lem-sfb-integral-general-lfp-hom-finiteness (stage 2; reviewer FIX; parallel immutable checks)
 - 17:30 L: merged deliver/Q08/lem-sfb-discrete-lattice-cup-exterior (reviewer FIX; first push; new nodes: 1)
 - 2026-10-21T17:30:52Z L: superseded stage-1 delivery O2/lem-sfb-faithfully-flat-normal-ring-descent at fbabec2a56044cba41d456ad3d65b59e53570f98; current completion retained; packet archived at refs/superseded/O2/lem-sfb-faithfully-flat-normal-ring-descent/fbabec2a56044cba41d456ad3d65b59e53570f98; stale return retired.
+- 2026-10-21T17:30:56Z L: superseded stage-1 delivery Q01/lem-sfb-simplex-lattice-shuffle-boundary at efb2aabb741c56e737ff8d9007699d9c0d9ee2d5; current completion retained; packet archived at refs/superseded/Q01/lem-sfb-simplex-lattice-shuffle-boundary/efb2aabb741c56e737ff8d9007699d9c0d9ee2d5; stale return retired.
