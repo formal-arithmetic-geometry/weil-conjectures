@@ -3,28 +3,26 @@
  "blueprint": {
   "is": "lemma-nagata-scheme-image-ideal-qc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Mathlib scheme-theoretic image interface",
- "statement": "For a morphism $g\\colon T\\to Y$, Mathlib defines its scheme-theoretic image\nas the closed subscheme cut out by the ideal sheaf $\\operatorname{ker}(g)$.\nIt also supplies the closed immersion\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ and the\nfactor map $g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$.\nWhen $g$ is quasi-compact, the stalk maps of $g^{\\mathrm{im}}$ are\ninjective and the support of $\\operatorname{ker}(g)$ is the closure of the\ntopological range of $g$.",
+ "statement": "For a morphism $g\\colon T\\to Y$, the scheme-theoretic image is the closed\nsubscheme $\\operatorname{SIm}(g)$ cut out by the quasi-coherent ideal sheaf\n$\\operatorname{ker}(g)$; it comes with the closed immersion\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ and a factor\nmap $g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$ with\n$g_{\\mathrm{im}}\\circ g^{\\mathrm{im}}=g$.\nWhen $g$ is quasi-compact, the maps on sections and stalks\n$\\mathcal O_{\\operatorname{SIm}(g)}\\to g^{\\mathrm{im}}_*\\mathcal O_T$ are\ninjective and the support of $\\operatorname{ker}(g)$ is the closure of the\ntopological range of $g$.\nHere $T,Y$ are schemes [def-pc-scheme], and closed immersion and quasi-compact morphism have the meanings of [def-weil-closed-immersion] and [def-weil-finite-type-morphism]. The notation $\\ker(g)$ means Mathlib's kernel ideal: the largest quasi-coherent ideal contained in $\\ker(\\mathcal O_Y\\to g_*\\mathcal O_T)$; quasi-coherent ideals are specified on affine opens by ideals compatible with localization. Its support here means its vanishing locus $V(\\ker(g))$, the underlying closed subset of the associated closed subscheme. The stalk assertion concerns the displayed morphism of sheaves on $\\operatorname{SIm}(g)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-ideal-qc.md",
   "place": "node lemma-nagata-scheme-image-ideal-qc, order 64"
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "This block records the existing Mathlib construction. The closed\nsubscheme is `Scheme.Hom.image g`, its inclusion is the declaration\n`Scheme.Hom.imageι g`, and the factor map is\n`Scheme.Hom.toImage g`; the displayed composite is the theorem\n`Scheme.Hom.toImage_imageι`. The additional quasi-compact\nassertions are exactly the two declarations named in the implementation\nnote, so no direct-image calculation is silently imported here.",
-   "uses": [],
-   "elementary": null
-  }
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
  ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-scheme-image-ideal-qc.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01R6 (morphisms-lemma-scheme-theoretic-image), 01R7 (morphisms-definition-scheme-theoretic-image), 01R8 (morphisms-lemma-quasi-compact-scheme-theoretic-image); Mathlib clause mapping and section/stalk specialization recorded in mathlib_match.how"
  },
  "mathlib_searches": [
   {
@@ -34,10 +32,70 @@
     "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme:662 (abbrev)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage_app_injective|toImage_imageι|support_map|map_bot|def image|abbrev image",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; directory AlgebraicGeometry/IdealSheaf",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme theoretic image of a quasi compact morphism injective on sections closure range",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, AlgebraicGeometry.Scheme.Hom.toImage_app",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.toImage",
+   "results": "12 hits; AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.Hom.toImage_imageι, AlgebraicGeometry.Scheme.Hom.toImage_imageι_assoc, AlgebraicGeometry.Scheme.kerAdjunction_counit_app, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic image factorization closed immersion injective maps on sections quasi compact support closure range",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.Scheme.Hom.imageι, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.Scheme.Hom.toImage_imageι",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "app_injective_of_stalk|app_injective.*[Bb]asis|app_injective|stalkFunctor_map_injective",
+   "results": "5 hits; Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean; directory Topology/Sheaves",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom\\.ker|Hom\\.support_ker|Hom\\.image|Hom\\.toImage|IsClosedImmersion.*subschemeι",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Limits.lean; directory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom\\.ker_apply|Hom\\.support_ker|Hom\\.image|Hom\\.toImage|IsClosedImmersion.*subschemeι",
+   "results": "15 hits; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; directory AlgebraicGeometry/IdealSheaf",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion I.subschemeι",
+   "results": "1 hits; 94; directory AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-21",
+   "verdict": "match: declarations checked clause by clause in local Mathlib source"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.image",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "how": "One declaration per clause, plus a one-line application for arbitrary sections: Scheme.Hom.ker is the largest quasi-coherent ideal contained in the component-wise kernel (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:689-693; IdealSheafData:62-74 encodes localization). Scheme.Hom.image (Subscheme.lean:662) is definitionally g.ker.subscheme; Scheme.Hom.imageι (665) is g.ker.subschemeι, closed by the instance for IdealSheafData.subschemeι (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:94). Scheme.Hom.toImage (Subscheme.lean:710) and Scheme.Hom.toImage_imageι (715) give the factorization without hypotheses. Under precisely QuasiCompact g, Scheme.Hom.toImage_app_injective (754) covers inverse images of affine opens, and Scheme.Hom.stalkFunctor_toImage_injective (760) is exactly injectivity on stalks of the sheaf morphism O_image -> (g.toImage)_* O_T. On any open W of g.image, apply TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective (Mathlib/Topology/Sheaves/Stalks.lean:540) to g.toImage.c with h := fun x _ => g.stalkFunctor_toImage_injective x; its domain is the structure sheaf. Finally Scheme.Hom.support_ker (Basic.lean:845) states exactly V(g.ker) = closure(range g). All names in this paragraph beginning Scheme are in AlgebraicGeometry."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -96,5 +154,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-scheme-image-ideal-qc",
+  "worker": "stage1",
+  "summary": "Q93: promoted the current-blueprint statement (including factorization and all-open section/stalk injectivity) to a Mathlib leaf after reading the actual declarations. No new nodes. Disambiguated kernel ideal, vanishing-locus support, and stalks of the direct-image sheaf. Kept all import metadata.",
+  "blueprint": "main-20261015, lemma-nagata-scheme-image-ideal-qc, entire statement; realizes the scheme-image interface in the first sentence of sk-lem-nagata-sketch-closure, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-f2b339975",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-f2b339975 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It makes the item a Mathlib leaf (no new nodes, no unit or tool_uses changes). The statement is the main-20261015 blueprint_update text verbatim, which main-20261017 also has unchanged. The added conventions do not weaken it. ker(g) as the largest quasi-coherent subideal equals the full kernel under quasi-compactness (Basic.lean:697 ker_apply). 'Support' as V(ker g) matches IdealSheafData.support (:328/:330). I checked every clause against the pinned Mathlib and every cited line is correct: Subscheme.lean:662 image and :665 imageι; ClosedImmersion.lean:94 closed-immersion instance; :710 toImage and :715 toImage_imageι (factorization, no hypotheses); :754 toImage_app_injective and :760 stalkFunctor_toImage_injective (both under QuasiCompact); Stalks.lean:540 app_injective_of_stalkFunctor_map_injective, a one-line step giving injectivity on every open; Basic.lean:845 support_ker. The old note calling support_ker 'invented' is stale. The Stacks tags 01R6/01R7/01R8 for proof_origin are confirmed. Small cases checked: empty T, the identity, closed immersions, affine Spec B→Spec A; the non-quasi-compact case is excluded as Stacks 01R8 requires. I read the three stmt_deps. Citers (sketch-closure, det-nagata-affine-opens-projective, trf/pbc users) use only clauses that remain, and the new statement is stronger than the base. No duplicates: lem-weil-pbc-scheme-image-qc-kernel is only partial, and def-nagata-scheme-theoretic-image would make a cycle. No re-split note and no dropped-list entry for the item. Advisory: source.document still points to the master path (order 64) although the statement follows main-20261015 (order 72); this is provenance only."
  }
 }
