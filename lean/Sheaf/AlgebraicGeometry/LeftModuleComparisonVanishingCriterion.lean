@@ -9,9 +9,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Objectwise derived evaluation detects comparison direct-image vanishing
@@ -73,6 +74,18 @@ theorem isZero_rightDerived_comparisonLowerStar_of_evaluation
         (evaluation X.ProEtᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op ((Scheme.toProEt X).obj W)) ⋙
         forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).rightDerived q).obj M)) :
     IsZero (((comparisonLowerStar (ModuleCat.{u + 1} Λ) X).rightDerived q).obj M) := by
-  sorry
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  let I := injectiveResolution M
+  refine IsZero.of_iso ?_ (I.isoRightDerivedObj _ (n + 1))
+  rw [HomologicalComplex.homologyFunctor_obj,
+    ← HomologicalComplex.exactAt_iff_isZero_homology]
+  apply (sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).reflects_exact_of_faithful
+  rw [ShortComplex.exact_iff_evaluation]
+  intro W
+  apply (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).reflects_exact_of_faithful
+  have hW := (h W.unop).of_iso (I.isoRightDerivedObj _ (n + 1)).symm
+  rw [HomologicalComplex.homologyFunctor_obj,
+    ← HomologicalComplex.exactAt_iff_isZero_homology] at hW
+  exact hW
 
 end AlgebraicGeometry.ProEtale

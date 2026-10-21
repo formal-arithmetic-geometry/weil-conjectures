@@ -19,9 +19,9 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the small pro-étale site and its constant ring sheaf $\\Lambda_{X_{\\mathrm{proét}}}$. Its left-module category is Grothendieck abelian, with no commutativity hypothesis, so [lem-sp-grothendieck-enough-injectives] gives enough injectives. Construct a resolution $M\\to I^\\bullet$ as follows: embed $M$ into an injective $I^0$; embed $I^0/M$ into an injective $I^1$ and define $d^0$ by the quotient followed by this embedding. Recursively embed $\\operatorname{coker}(d^{n-1})$ into an injective $I^{n+1}$ and let $d^n$ be the quotient followed by that embedding. The kernel of $d^n$ is the image of $d^{n-1}$, so this is an injective resolution concentrated in nonnegative degrees.",
+   "text": "Specialize [lem-sfb-proetale-sheaves-grothendieck] to the Grothendieck abelian coefficient category ModuleCat Λ (Mathlib.Algebra.Category.ModuleCat.AB). The existing pro-etale sheaf instance and [lem-sp-grothendieck-enough-injectives] supply enough injectives and hence an injective resolution I of M. This uses the fixed-scalar encoding already present in the statement, without constructing or transporting a category of modules over a varying ring sheaf.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-proetale-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false,
@@ -42,10 +42,8 @@
    }
   },
   {
-   "text": "In the étale module category let $Z=\\ker(d^q:J^q\\to J^{q+1})$. Kernels of module sheaves are sectionwise [def-weil-sheaf-of-modules-category], so $Z(W)=\\ker(d^q(W))$. Since $d^q d^{q-1}=0$, the previous differential factors as $J^{q-1}\\xrightarrow{p}Z\\hookrightarrow J^q$. The equality $H^q(J^\\bullet(W))=0$ from Step 2 means that every $z\\in Z(W)$ equals $d^{q-1}(W)(y)$ for some $y\\in J^{q-1}(W)$; consequently $p(W)$ is surjective for every étale $W$. Here $q>0$ ensures that the preceding degree is in the chosen resolution.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
+   "text": "Let S be the short complex at degree q of J. Apply the faithful forgetful functor from etale sheaves to presheaves. By CategoryTheory.ShortComplex.exact_iff_evaluation (WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact), it suffices to check exactness at each etale object W. Forget scalars using the faithful additive functor ModuleCat Λ to abelian groups. The short complex obtained this way is definitionally the degree-q short complex of the evaluation of I used in Step 2. Thus its exactness is exactly the vanishing supplied by the hypothesis, via HomologicalComplex.exactAt_iff_isZero_homology.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
@@ -53,8 +51,10 @@
    }
   },
   {
-   "text": "The map $p$ is an epimorphism of module sheaves: if $a,b:Z\\to N$ satisfy $a p=b p$, for every $W$ and $z\\in Z(W)$ choose $y$ with $p(W)(y)=z$; then $a(W)(z)=a(W)(p(W)(y))=b(W)(p(W)(y))=b(W)(z)$. Equality at every object is equality of sheaf morphisms. Therefore $\\operatorname{coker}(p)=0$. The cohomology object $\\mathcal H^q(J^\\bullet)$ is precisely this cokernel of the preceding differential with codomain restricted to its cycle object $Z$. Step 2 now gives $R^q\\nu_{X,*}M=0$.",
-   "uses": [],
+   "text": "Apply Mathlib CategoryTheory.Functor.reflects_exact_of_faithful first to forgetting scalars and then to the faithful additive inclusion of module-valued sheaves into presheaves. These are functors between abelian categories, and no assertion that sheaf evaluation preserves cokernels is used. This proves S exact; HomologicalComplex.exactAt_iff_isZero_homology identifies this with zero degree-q cohomology of J, and the injective-resolution isomorphism of Step 2 gives the required zero higher direct image.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
@@ -63,7 +63,7 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
   "def-sp-left-exact-additive",
   "def-weil-sheaf-of-modules-category"
@@ -71,7 +71,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099V (lemma-relative-comparison), first-paragraph vanishing argument expanded using one module-injective resolution and sectionwise kernels (sites-modules.tex Tag 03DA)"
+  "place": "Tag 099V, first-paragraph vanishing criterion; one injective resolution, with the sectionwise exactness argument implemented using ShortComplex.exact_iff_evaluation and Mathlib faithful reflection of exactness."
  },
  "mathlib_searches": [
   {
@@ -191,7 +191,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives"
  ],
  "reviewed": {
@@ -221,5 +220,15 @@
   "result": "pass",
   "note": "Every clause matches lem-pe-left-module-comparison-vanishing-criterion: X : Scheme.{u}; Λ : Type (u+1) with only [Ring Λ], the same fixed-scalar ModuleCat encoding as the recorded parent lem-pe-comparison-injective-left-modules-acyclic; M arbitrary; q : ℕ with 0 < q; ∀ W : X.Etale (not only affine W), evaluated at the actual pro-étale object (toProEt X).obj W; rightDerived applied to the whole sheafToPresheaf ⋙ evaluation ⋙ forget₂ composite, so module-injective resolutions are used. The conclusion is IsZero of (comparisonLowerStar (ModuleCat Λ) X).rightDerived q applied to M. comparisonLowerStar is the canonical restriction functor; the [Finite Λ] of the recorded proEtaleSiteComparisonModules does not apply to the functor itself. Only the lean field of the node changes, and lean.statement is verbatim in the file. Docstrings give Stacks 099V/03DA and the blueprint id; the theorem docstring carries the 4 proof steps. No definitions; proof is sorry. No duplicate in side-live Sheaf/WeilConjectures or Mathlib (ProEtaleVanishingDetection, AffineComparisonInjective* and isZero_rightDerived_obj_injective_succ state other things). Edge cases Λ=0, empty X or W, noncommutative Λ and q=1 are covered. nt_compile --json: clean, 2.5 s. Advisory: RingedSiteModules, ConstantSheaf and the private RingedSiteModulesGrothendieckOfUniverses imports are redundant for the statement (it compiles without them) but document the stmt_dep and proof_dep modules. The 'Second reading by NI' is openly a self-check."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T101000-L-4182866",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
