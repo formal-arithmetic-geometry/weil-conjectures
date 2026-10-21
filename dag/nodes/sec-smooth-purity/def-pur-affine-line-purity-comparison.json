@@ -36,7 +36,8 @@
   "thm-sf-ambient-adjoint-class",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-kun-dimension-finite-type",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-affine-line-purity-source"
  ],
  "proof": [],
  "proof_deps": [],
@@ -199,5 +200,36 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-4ab78e734 (reviewer sub-agent of L); spot-checked: I read the whole definition. Every clause checks against the current main-20261015 blueprint (order 2318), the sk-prop-an opening paragraph on integration, and the user thm-pur-affine-line-purity, whose proof Steps 3 and 5 use the same ingredients. Trace: t_q^p = C_Y(t_q^e)∘β_q^{-1}, with τ, β_q and t_q^p β_q = C(t_q^e) taken from the statement of lem-pur-vector-integration-site-comparison; B_T equals the A_T(1) of def-amb-p1-trace with N = ℓ^r. Integration: ∫_p = t_q^p∘Rq_*(the j_!⊣j^{-1} counit of lem-cbc-proetale-extension-zero), with Rp_! = Rq_*j_! from def-compact-support-direct-image-detailed. Projection map: I typed Π_K = s∘PF^{-1}∘Rp_!(s) against def-exchange-projection's PF_{f,K,L}: Rf_!K⊗L → Rf_!(K⊗Lf^*L) and it is correct; it is invertible by lem-weil-finite-compact-projection-formula, with first input F = A_X(1)[2] (witness B_X[2]) and finite-Tor second input K^e from det-pe-finite-tor-comparison-noetherian (Y qcqs, A Noetherian). Transpose: γ = Φ(a_K) under thm-sf-ambient-adjoint-class(2); all its hypotheses hold (finite type over F̄_q, separated, compactification (j,q), dim P ≤ d by lem-kun-dimension-finite-type, bounded-below étale-origin source, D^+ target), and its R_c is exactly the finite-level Rp^! of def-weil-exceptional-inverse-image. Edge cases tested: Y empty, Y = Spec k with K = A, K = 0 or a shift, and e = 2 with n = 1. No dependency cycle (all 23 dependencies traversed). Dropping def-pur-affine-line-datum is right: it now constructs G_m and the Kummer torsor and assumes e | n. Not duplicates: pur9-def-purity-comparison is a rank-c generalization and pur9-def-affine-line-trace defines only the trace. The slopmaster2 AffineSpace.lean:269-305 states existence only and is sorry, so nothing is attached. I accept all six declared tool_uses: they are statement dependencies of a definition, each used only through its stated clauses. No SGA. Repairs: (1) source still named the master copy, order 1974, although the report says it was updated; set to main-20261015, order 2318. (2) The derived C_T = ν_T^* cited only the sheaf-level def-weil-pbc-site-comparison-morphism (B3); added [def-sf-comparison-derived-pullback] inline and to stmt_deps. No mathematical change and no target weakened. Corrected item: fixes/dag/nodes/sec-smooth-purity/def-pur-affine-line-purity-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineLinePurityComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineLinePurity.affineLinePurityComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.integration",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.projection_isIso",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.projectionIso",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.augmentation",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.ordinaryLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.comparisonFromOrigin",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.Ring",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.ringEquiv",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.primeUnit",
+   "AlgebraicGeometry.ProEtale.AffineLinePurity.affineLinePurityComparison"
+  ],
+  "file": "lean/Sheaf/Paper/AffineLinePurityComparison.lean",
+  "statement": "def affineLinePurityComparison (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (Ring P)))) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) : source P.coefficients.l P.extension (P.level - 1) Y r hA K.obj ⟶ (sfFiniteExceptionalAt (Ring P) (affineTraceLineCompactification Y)).obj K.obj",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Actual open-counit integration and inverse canonical projection, followed by the specified etale-origin Hom transpose. Canonical coordinate operations and the retained bounded source are supplied by the two new definition nodes. Ring is the existing quotient, with ringEquiv to the positive-level purity coefficient."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c19b0049b",
+  "group": "NI",
+  "result": "pass",
+  "note": "First stage-2 delivery (commit c19b0049: 3 modules, 2 new def nodes; the coordinate-maps record is in the commit, not the snapshot). Clause by clause: Ring P = finiteTateCoefficient(level-1) with ringEquiv, the reindexing already used in SupportedBottomGluing/AffineTranslationTrace; Y separated finite type via aY, Noetherian derived; (j,q) = affineTraceLineCompactification (affineChart, ProjectiveLine projection); t^p = projectiveTrace, and ProjectiveCompatibility gives beta then t^p = C(t^e); integration = Rq_* of the actual openAdjunction counit after the inverse-image comparison, then the trace; Pi_K = inverse of s_Y, PF_c, Rp_!(s_X), the node's order; a_K = inverse projection, 1 tensor integration, canonical unit iso and native right unitor; gamma = specifiedExceptionalHomEquiv with target sfFiniteExceptionalAt, both recorded stmt_dep declarations; the witness is the displayed ordinary p_e^*K^e tensor j_e^*B_P[2] with its canonical comparison. M_K is in tau-coordinates C_X(j_e^*B_P[2]), which the node allows; coefficientTwistIso links it to A_X(1)[2]. Sorry'd coordinate equalities are true by unfold/rfl, so the eqToIso transports are identities. Boundedness, projection_isIso and primeUnit are true. Edge cases: Y empty, n=1, every exponent, K=0, universes unchanged. Statements verbatim (script check); only new def node added to item stmt_deps; no cycle; docstrings and both report sections present; no recompile since no file changed (worker reports 25.4/15.0/10.8 s clean). Advisories: owner nodes outside stmt_deps (finite-site-coordinates, tensor-projection, proetale-affine-line-counit, supported-projective-site-arrows); coefficientFinite duplicates vectorBundlePurityFiniteCoefficient; public priority-2000 coefficientRing instance; unused tensorTrace/moduleTensorTrace/source_eq/ringEquiv/coefficientTwistIso; primeUnit restates a private conventions lemma; independence of gamma from (Ke,eK) rests on thm-sf-ambient-adjoint-class."
  }
 }

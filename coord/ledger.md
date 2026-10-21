@@ -23913,3 +23913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:44 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 2026-10-21T22:45:28Z L: superseded stage-1 delivery NE/lem-pur-affine-translation-trace at 89c93bebb82736ea8c273b1bfbc8723373d18d2c; current completion retained; packet archived at refs/superseded/NE/lem-pur-affine-translation-trace/89c93bebb82736ea8c273b1bfbc8723373d18d2c; stale return retired.
 - 22:46 L: merged deliver/NF/lem-sfb-uncountable-almost-disjoint-family (reviewer PASS; first push; new nodes: 1)
+- 22:46 L: merged deliver/NI/def-pur-affine-line-purity-comparison (stage 2; reviewer PASS; parallel immutable checks)
