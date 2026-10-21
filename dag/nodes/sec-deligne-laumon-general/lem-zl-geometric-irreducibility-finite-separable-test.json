@@ -26,12 +26,10 @@
    }
   },
   {
-   "text": "We record the scalar identifications used below. For fields $k\\subseteq E\\subseteq F$, put $A_E=R\\otimes_kE$ and $A_F=R\\otimes_kF$. There is an isomorphism $A_E\\otimes_EF\\simeq A_F$ sending $(r\\otimes e)\\otimes f$ to $r\\otimes ef$, with inverse $r\\otimes f\\mapsto(r\\otimes1)\\otimes f$. The bilinearity relations of [def-weil-pbc-module-tensor-product] make both formulas well-defined; on pure tensors their composites are identities by $E$-balancing. The multiplication and unit in [lem-weil-pbc-algebra-tensor-pushout-universal-property] show they are ring maps. The map $A_E\\to A_F$ thereby becomes $a\\mapsto a\\otimes1$. Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] with base field $E$, extension $F/E$, and algebra $D=A_E$, followed by the $I=0$ clause of [lem-weil-pbc-faithfully-flat-ideal-contraction]: this map is injective. For $E=k$, use also $R\\otimes_kk\\simeq R$, $r\\otimes c\\mapsto cr$, inverse $r\\mapsto r\\otimes1$, verified by the same relations.",
+   "text": "Use Mathlib tensor-product algebra maps, symmetry, congruence and cancelBaseChange for the scalar identifications. Tensoring a field-linear injection with a vector space is injective by Module.Flat.lTensor_preserves_injective_linearMap or Module.Flat.rTensor_preserves_injective_linearMap. These supply all scalar-map injections directly; no ideal-contraction lemma is needed. The finite test quantifies over Type (max u v w), so transport it to fields in Type u using ULift.algEquiv and TensorProduct.congr.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
    ],
    "elementary": true,
    "source": {
@@ -40,10 +38,11 @@
    }
   },
   {
-   "text": "Assume (2). Take a separable closure $k_s/k$ as in [def-pd-separable-closure], which is separably closed and is the filtered union of its finite separable subextensions. Condition (2) for $E=k$ and the unit isomorphism in Step 2 give irreducibility of $\\operatorname{Spec}R$, hence $1_R\\ne0$ by [lem-zl-spectrum-irreducible-nilradical-prime]. Step 2 makes $R\\to A=R\\otimes_kk_s$ injective, so $1_A\\ne0$. Thus the nilradical $N_A$ is proper: $1_A^n=1_A\\ne0$ for every positive integer $n$.",
+   "text": "Choose Mathlib SeparableClosure k. The test at E=k gives a nonempty prime spectrum of R tensor k, hence that tensor ring and R are nontrivial. The separable closure is a nonzero vector space over k and therefore faithfully flat; Mathlib faithful-flat tensor nontriviality makes R tensor SeparableClosure k nontrivial. Thus its nilradical is proper, using Ideal.radical_eq_top.",
    "uses": [
     "def-pd-separable-closure",
-    "lem-zl-spectrum-irreducible-nilradical-prime"
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat"
    ],
    "elementary": true,
    "source": {
@@ -52,7 +51,7 @@
    }
   },
   {
-   "text": "To show $N_A$ is prime, take $x,y\\in A$ with $(xy)^n=0$ for some $n\\ge1$. By the pure-tensor generation in [def-weil-pbc-module-tensor-product], $x$ and $y$ are finite sums of pure tensors. Their finitely many coefficients in $k_s$ lie together in one finite separable subextension $E/k$, by the filtered-union assertion of [def-pd-separable-closure]. Hence $x,y$ are images of elements $x_E,y_E\\in A_E$. Step 2 gives injectivity of $A_E\\to A$, so $(x_Ey_E)^n=0$. Condition (2) and [lem-zl-spectrum-irreducible-nilradical-prime] make $N_{A_E}$ prime, whence $x_E$ or $y_E$ is nilpotent. Its image $x$ or $y$ is nilpotent. Thus $N_A$ is prime and proper, and the same criterion proves $\\operatorname{Spec}A$ irreducible. This proves the separable-closure intermediate assertion without assuming finite generation of $R$.",
+   "text": "For x,y in R tensor SeparableClosure k, apply Mathlib exists_fg_and_mem_baseChange to each and take the supremum D of the resulting finitely generated coefficient subalgebras. Algebra.IsAlgebraic.toIntermediateField makes D an intermediate field E without changing its underlying algebra. It is finite-dimensional by Algebra.IsIntegral.finite, and separable as a subextension of the separable closure. Tensor-map composition lifts x,y to xE,yE in R tensor E. The map to R tensor SeparableClosure k is injective by flatness over k, so nilpotence of xy implies nilpotence of xE*yE. The test at E makes its nilradical prime; hence xE or yE is nilpotent. Mapping that nilpotence equation back proves x or y nilpotent. Thus the proper nilradical of R tensor SeparableClosure k is prime and its spectrum is irreducible.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
     "def-pd-separable-closure",
@@ -65,7 +64,7 @@
    }
   },
   {
-   "text": "Let $L/k$ now be any field extension. Apply [lem-weil-common-extension-fields] to $L/k$ and $k_s/k$ to obtain a field $M$ and compatible $k$-embeddings $L\\to M$ and $k_s\\to M$. Regard $M$ as a $k_s$-algebra via the latter embedding. The nilradical of a field is the zero ideal: a nonzero element is invertible, so cannot have a zero positive power; and a product of two nonzero elements is invertible. It is proper because $1_M\\ne0$. Therefore [lem-zl-spectrum-irreducible-nilradical-prime] makes $\\operatorname{Spec}M$ irreducible. Since $k_s$ is separably closed and Step 4 gives irreducibility of $\\operatorname{Spec}A$, apply [lem-zl-sepclosed-algebras-tensor-irreducible] over $k_s$ to $A$ and $M$. It gives irreducibility of $\\operatorname{Spec}(A\\otimes_{k_s}M)$. Step 2 identifies this ring with $C=R\\otimes_kM$.",
+   "text": "Apply Field.exists_common_extension over k to SeparableClosure k and the arbitrary test field L, obtaining compatible embeddings i and j into M. Use i to give M its SeparableClosure k-algebra structure and scalar tower. The spectrum of M is irreducible because M is a field. Tensor symmetry identifies the irreducible spectrum from the previous step with that of SeparableClosure k tensor R. Apply IsSepClosed.irreducibleSpace_tensorProduct over SeparableClosure k to M and SeparableClosure k tensor R. TensorProduct.cancelBaseChange identifies the resulting tensor ring with M tensor R, proving its spectrum irreducible.",
    "uses": [
     "lem-weil-common-extension-fields",
     "lem-zl-spectrum-irreducible-nilradical-prime",
@@ -78,7 +77,7 @@
    }
   },
   {
-   "text": "Put $B=R\\otimes_kL$. Step 2 applied to $L\\subseteq M$ gives an injective unital ring map $v:B\\to C$. For each $b\\in B$, $v(b)$ is nilpotent if and only if $b$ is nilpotent: $v(b)^n=v(b^n)$, and injectivity detects zero. Thus $N_B=v^{-1}(N_C)$. By Step 5 and [lem-zl-spectrum-irreducible-nilradical-prime], $N_C$ is prime and proper. Its preimage is proper since $v(1)=1\\notin N_C$. If $bb\\prime\\in N_B$, then $v(b)v(b\\prime)\\in N_C$, so $v(b)$ or $v(b\\prime)$ lies in $N_C$, and consequently $b$ or $b\\prime$ lies in $N_B$. Thus $N_B$ is prime, and the same criterion gives irreducibility of $\\operatorname{Spec}B$. This holds for every $L/k$, proving (1).",
+   "text": "The map TensorProduct.map j (AlgHom.id k R) from L tensor R to M tensor R is injective by Module.Flat.rTensor_preserves_injective_linearMap. For an injective unital ring map f, nilpotence of f(x) is equivalent to nilpotence of x, by map_pow and injectivity. Thus the source nilradical equals the comap of the target nilradical. A comap of a prime ideal is prime, so the nilradical criterion descends irreducibility to L tensor R. Tensor symmetry gives the required spectrum of R tensor L. This proves the reverse implication for every L.",
    "uses": [
     "lem-zl-spectrum-irreducible-nilradical-prime"
    ],
@@ -92,17 +91,16 @@
  "proof_deps": [
   "def-weil-pbc-module-tensor-product",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
   "def-pd-separable-closure",
   "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
   "lem-weil-common-extension-fields",
   "lem-zl-sepclosed-algebras-tensor-irreducible"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 037K, lemma-geometrically-irreducible, (1) implies (2), (2) implies (3), and the final common-overfield argument using Tag 00I7 directly over the separable closure. Finite support and nilradicals spell out the same scalar-extension argument."
+  "place": "Tag 037K, finite-separable tests imply the separable-closure test, followed by the common-overfield argument and Tag 00I7 over that separable closure. The Lean proof implements finite coefficient support via Mathlib finitely generated subalgebras, promotes the algebraic coefficient subalgebra to an intermediate field, and uses flatness over a field for tensor-map injectivity; it does not use ideal contraction."
  },
  "mathlib_searches": [
   {
@@ -245,5 +243,15 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261021T111343-L-78447",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
