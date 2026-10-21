@@ -10,6 +10,8 @@ public import Sheaf.Paper.WeilCompletedTensorReflector
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.ResolvingRepresentativeWhiskering
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.RingTheory.Localization.BaseChange
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
@@ -271,6 +273,7 @@ abbrev wfOrdinaryDerivedTensor :
     PbcCompletedDerived X d × PbcCompletedDerived X d ⥤ PbcCompletedDerived X d :=
   SheafOfModules.wfSiteDerivedTensor (ProEt.topology X) (pbcAdicCompletion X d)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The localization model's natural comparison on flat-term K-flat representatives.
 Source: Stacks 06YT; blueprint order 2107 (blueprint: def-wf-tensor-product).
 Proof: take the natural representative comparison from site-derived-tensor descent.
@@ -297,7 +300,100 @@ theorem wfTensorRepresentative_exists :
                 DerivedCategory.Q).prod
               ((proEtaleFlatRepresentatives X (pbcAdicCompletion X d)).ι ⋙
                 DerivedCategory.Q))) e.hom = b.representative.hom := by
-  sorry
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} _
+  let R : Sheaf (ProEt.topology X) CommRingCat.{u + 1} := pbcAdicCompletion X d
+  let h := SheafOfModules.wf_site_derived_tensor_descent.{u + 1, u, u + 2, 0, 0}
+    (ProEt.topology X) R
+  let S := h.choose
+  have hS := h.choose_spec.1
+  let c := h.choose_spec.2.2.1.choose_spec.1.some
+  let t := h.choose_spec.2.2.1.choose_spec.2.choose_spec.some
+  let P := proEtaleFlatRepresentatives X R
+  let J : P.FullSubcategory ⥤ S.FullSubcategory :=
+    ObjectProperty.lift S (P.ι ⋙ HomotopyCategory.quotient _ _) (by
+      intro K
+      apply (hS _).2
+      refine ⟨K.property.1, ?_⟩
+      intro n
+      exact (exactFunctor (proEtaleRingModules X R) (proEtaleRingModules X R)).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (C := X.ProEt) (J := ProEt.topology X) R (K.obj.X n))
+        (K.property.2 n))
+  let L := HomotopyCategory.quotient (proEtaleRingModules X R) (.up ℤ)
+  let B := h.choose_spec.2.2.1.choose
+  let T := h.choose_spec.2.2.1.choose_spec.2.choose
+  let tc := Functor.uncurry.obj
+    ((proEtaleOrdinaryTensor X R).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
+  have hc : (L.prod L) ⋙ B ≅ tc ⋙ L := c
+  have ht : (S.ι.prod S.ι) ⋙ B ⋙ DerivedCategory.Qh ≅
+      ((S.ι ⋙ DerivedCategory.Qh).prod (S.ι ⋙ DerivedCategory.Qh)) ⋙ T := t
+  have hj : (P.ι.prod P.ι) ⋙ (L.prod L) = (J.prod J) ⋙ (S.ι.prod S.ι) := rfl
+  let i0 := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft (P.ι.prod P.ι) hc.symm) DerivedCategory.Qh
+  let middle := Functor.isoWhiskerRight (eqToIso hj) (B ⋙ DerivedCategory.Qh)
+  let i1 := i0 ≪≫ middle ≪≫ Functor.isoWhiskerLeft (J.prod J) ht
+  have hjQ : (J.prod J) ⋙
+      ((S.ι ⋙ DerivedCategory.Qh).prod (S.ι ⋙ DerivedCategory.Qh)) =
+      ((P.ι ⋙ L ⋙ DerivedCategory.Qh).prod (P.ι ⋙ L ⋙ DerivedCategory.Qh)) := rfl
+  let q := Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _)
+  let i2 := i1 ≪≫ Functor.isoWhiskerRight (eqToIso hjQ) T
+  let i3 := i2 ≪≫ Functor.isoWhiskerRight (NatIso.prod q q) T
+  let i := Functor.isoWhiskerLeft ((P.ι.prod P.ι) ⋙ tc)
+    (DerivedCategory.quotientCompQhIso _).symm ≪≫ i3
+  have hT : T = wfOrdinaryDerivedTensor X d := by
+    unfold T wfOrdinaryDerivedTensor SheafOfModules.wfSiteDerivedTensor
+    rfl
+  rw [hT] at i
+  refine ⟨i, ?_⟩
+  intro b
+  let H : ObjectProperty (HomotopyCategory (pbcModules X (pbcAdicCompletion X d)) (.up ℤ)) :=
+    fun K ↦ P K.as
+  have hres : ∀ K : HomotopyCategory (pbcModules X (pbcAdicCompletion X d)) (.up ℤ),
+      ∃ (L : H.FullSubcategory) (f : L.obj ⟶ K),
+        HomotopyCategory.quasiIso _ (.up ℤ) f := by
+    intro K
+    obtain ⟨L, f, hk, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (C := X.ProEt) (J := ProEt.topology X) (R := R) K.as
+    refine ⟨⟨(HomotopyCategory.quotient _ (.up ℤ)).obj L, hk, ?_⟩,
+      (HomotopyCategory.quotient _ (.up ℤ)).map f, ?_⟩
+    · intro n
+      exact (exactFunctor (proEtaleRingModules X R) (proEtaleRingModules X R)).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (C := X.ProEt) (J := ProEt.topology X) R (L.X n)).symm (hf n)
+    · exact (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hq
+  set_option backward.isDefEq.respectTransparency true in
+    have hff := CategoryTheory.resolvingRepresentativesFullyFaithfulWhiskering
+      (K := CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ)
+      (H := HomotopyCategory (pbcModules X (pbcAdicCompletion X d)) (.up ℤ))
+      (D := PbcCompletedDerived X d) (PbcCompletedDerived X d)
+      (HomotopyCategory.quotient _ (.up ℤ)) HomotopyCategory.quotient_obj_surjective
+      (HomotopyCategory.quasiIso _ (.up ℤ)) DerivedCategory.Qh P H
+      (fun _ ↦ Iff.rfl) hres
+  obtain ⟨ff⟩ := hff
+  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (PbcCompletedDerived X d)).mapIso
+    (NatIso.prod (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))
+      (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))))
+  have hmap : Functor.whiskerLeft
+      ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))
+      (ff'.preimageIso (i.symm ≪≫ b.representative)).hom =
+        (i.symm ≪≫ b.representative).hom :=
+    ff'.map_preimage (i.symm ≪≫ b.representative).hom
+  refine ⟨ff'.preimageIso (i.symm ≪≫ b.representative), ?_, ?_⟩
+  · change i.hom ≫ Functor.whiskerLeft
+        ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)) _ = _
+    rw [hmap]
+    exact i.hom_inv_id_assoc _
+  · intro e he
+    apply Iso.ext
+    apply ff'.map_injective
+    change Functor.whiskerLeft
+        ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)) e.hom =
+      Functor.whiskerLeft ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))
+        (ff'.preimageIso (i.symm ≪≫ b.representative)).hom
+    apply (cancel_epi i.hom).1
+    rw [he, hmap]
+    exact (i.hom_inv_id_assoc _).symm
 
 /-- The existing pullback-comparison interface with this very localized tensor.
 Source: Stacks 06YT; blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -669,7 +765,41 @@ theorem wfConstructibleInclusion_exists (p : A) :
       pbcRationalization X d p ⋙ F =
         wfIntegralConstructibleInclusion X d r a ha ⋙
           ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p := by
-  sorry
+  let I := wfIntegralConstructibleInclusion X d r a ha
+  let : I.Additive := ⟨fun {_ _ _ _} ↦ rfl⟩
+  let : I.Linear A := ⟨fun {_ _} _ _ ↦ rfl⟩
+  let F : PbcRationalCategory X d p ⥤ WfAmbientRationalCategory X d r a ha p :=
+    { obj := fun M ↦ ⟨I.obj M.obj⟩
+      map := fun f ↦ (I.mapLinearMap A).baseChange (Localization.Away p) f
+      map_id := fun M ↦ by
+        change (I.mapLinearMap A).baseChange (Localization.Away p)
+          (1 ⊗ₜ[A] 𝟙 M.obj) = (1 : Localization.Away p) ⊗ₜ[A] 𝟙 (I.obj M.obj)
+        rw [LinearMap.baseChange_tmul]
+        rfl
+      map_comp := fun {M N P} f g ↦ by
+        change (I.mapLinearMap A).baseChange (Localization.Away p)
+            (ScalarLocalization.composition A _ p _ _ _ g f) =
+          ScalarLocalization.composition A _ p _ _ _
+            ((I.mapLinearMap A).baseChange (Localization.Away p) g)
+            ((I.mapLinearMap A).baseChange (Localization.Away p) f)
+        induction f using TensorProduct.induction_on with
+        | zero => simp only [map_zero]
+        | add f f' hf hf' => simp only [map_add, hf, hf']
+        | tmul s f =>
+          induction g using TensorProduct.induction_on with
+          | zero => simp only [map_zero, LinearMap.zero_apply]
+          | add g g' hg hg' => simp only [map_add, LinearMap.add_apply, hg, hg']
+          | tmul t g => simp only [ScalarLocalization.composition_tmul, LinearMap.baseChange_tmul,
+              Functor.coe_mapLinearMap, Functor.map_comp] }
+  have hF : pbcRationalization X d p ⋙ F = I ⋙
+      ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p := by
+    refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
+    intro M N f
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    exact LinearMap.baseChange_tmul (I.mapLinearMap A) 1 f
+  refine ⟨F, hF, ?_⟩
+  intro G hG
+  exact scalarLocalization_precomp_injective p G F (hG.trans hF.symm)
 
 /-- The raw rational inclusion with its actual unchanged integral object function.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -687,7 +817,19 @@ theorem wfConstructiblePullback_obj (p : A) (M : PbcRationalCategory X d p) :
         ((wfConstructibleInclusion X d r a ha p).obj M) =
       (wfConstructibleInclusion X d r a ha p).obj
         ((pbcRationalIsoPullback e d p).obj M) := by
-  sorry
+  have hobj (K : PbcBoundedConstructibleComplete X d) :
+      (wfConstructibleInclusion X d r a ha p).obj ⟨K⟩ =
+        (ScalarLocalization.localization A (WfCompleteCategory X d r a ha) p).obj
+          ((wfIntegralConstructibleInclusion X d r a ha).obj K) :=
+    Functor.congr_obj (wfConstructibleInclusion_exists X d r a ha p).exists.choose_spec K
+  rcases M with ⟨M⟩
+  change (wfAmbientRationalPullback X d r a ha e p).obj
+      ((wfConstructibleInclusion X d r a ha p).obj ⟨M⟩) =
+    (wfConstructibleInclusion X d r a ha p).obj ⟨(pbcIsoIntegralPullback e.hom d).obj M⟩
+  rw [hobj, hobj]
+  apply congrArg (ScalarLocalization.mk (R := A) (p := p))
+  apply ObjectProperty.FullSubcategory.ext
+  rfl
 
 end AlgebraicGeometry.Scheme
 
