@@ -12,9 +12,98 @@
   "def-weil-presheaf-modules-sheafification",
   "def-pur-presheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_A:A(V)\\to A(W)$ and $r_P:P(V)\\to P(W)$ for restriction along $u:W\\to V$. By [def-pur-presheaf-tensor-product], restriction on $T_P(A)$ sends $a\\otimes p$ to $r_A(a)\\otimes r_P(p)$. Semilinearity over $r_R:R(V)\\to R(W)$ respects the balancing relation: both restrictions of $(ca)\\otimes p=a\\otimes(cp)$ equal $r_R(c)r_A(a)\\otimes r_P(p)$. For a module-presheaf morphism $h:A\\to B$, the maps $h_V\\otimes1$ commute with these restrictions, since $r_Bh_V=h_Wr_A$. The identities for composition, identity arrows and addition hold on pure tensors, which generate each tensor module. Thus the stated $T_P$ is an additive functor.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-presheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  },
+  {
+   "text": "For $f:A\\to B$, put $K(V)=\\{a\\in A(V):f_V(a)=0\\}$, with the induced $R(V)$-module structure. Naturality of $f$ restricts $r_A$ to semilinear maps $K(V)\\to K(W)$; the presheaf laws are inherited from $A$. A morphism $h:H\\to A$ with $fh=0$ has the unique factorization $h_V(x)\\mapsto h_V(x)\\in K(V)$ at every $V$. These factorizations are linear and commute with restrictions, so $K$ with its inclusion $i:K\\to A$ is the categorical kernel.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  },
+  {
+   "text": "For a finite family $(A_i)_{i\\in I}$, form $Q(V)=\\prod_{i\\in I}A_i(V)$ with coordinatewise operations and restrictions. The projections are module-presheaf morphisms, and a family of morphisms $h_i:H\\to A_i$ has the unique factorization $x\\mapsto(h_i(x))_i$ into $Q$, which is linear and natural coordinatewise. Hence $Q$ is the categorical product. For $I=\\varnothing$ it is the zero presheaf, with its unique maps. The same construction applies to the family $(T_P(A_i))_i$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  },
+  {
+   "text": "Fix $V$. The section sequence $0\\to K(V)\\xrightarrow{i_V}A(V)\\xrightarrow{f_V}B(V)$ is exact by step 2. Apply [lem-weil-pbc-flat-tensor-exact] with the commutative ring $R(V)$ and its flat module $P(V)$, using precisely the sectionwise flatness hypothesis. It gives an exact sequence $0\\to K(V)\\otimes_{R(V)}P(V)\\xrightarrow{i_V\\otimes1}A(V)\\otimes_{R(V)}P(V)\\xrightarrow{f_V\\otimes1}B(V)\\otimes_{R(V)}P(V)$. Consequently $i_V\\otimes1$ has zero kernel and image $\\ker(f_V\\otimes1)$. Its corestriction $\\alpha_V:K(V)\\otimes_{R(V)}P(V)\\to\\ker(f_V\\otimes1)$ is therefore an $R(V)$-linear isomorphism; it is characterized by $j_V\\alpha_V=i_V\\otimes1$, where $j_V$ is the target kernel inclusion.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), tensor exactness; applied sectionwise as in sites-modules.tex Tag 03ES (lemma-flatness-presheaves)."
+   }
+  },
+  {
+   "text": "The maps $\\alpha_V$ commute with restrictions. Indeed, for $u:W\\to V$ and $k\\otimes p\\in K(V)\\otimes_{R(V)}P(V)$, the images of the two possible composites under $j_W$ both equal $r_A(i_V(k))\\otimes r_P(p)=i_W(r_K(k))\\otimes r_P(p)$. The injectivity of $j_W$ and generation by pure tensors give equality of these semilinear maps on every element. Thus $\\alpha$ is the canonical morphism of presheaves $T_P(K)\\to\\ker T_P(f)$, and $j\\alpha=T_P(i)$. Its component inverses are linear and natural: the identity $r\\alpha_V=\\alpha_Wr$ implies $r\\alpha_V^{-1}=\\alpha_W^{-1}r$ with the source and target restrictions in their respective positions. Hence $\\alpha$ is an isomorphism of module presheaves compatible with the inclusions.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-presheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  },
+  {
+   "text": "For the products from step 3, the tensor-projection morphisms give $\\beta:T_P(Q)\\to\\prod_iT_P(A_i)$. At $V$ it sends $(a_i)_i\\otimes p$ to $(a_i\\otimes p)_i$. Choose a bijection of the finite set $I$ with $\\{1,\\ldots,t\\}$, the same bijection for all $V$. Apply [lem-weil-pbc-tensor-finite-product] over $R(V)$, with factors $A_i(V)$ and $N=P(V)$: $\\beta_V$ is an isomorphism, also for $t=0$. Along $u:W\\to V$ both orders of restriction and $\\beta$ send $(a_i)_i\\otimes p$ to $(r_{A_i}(a_i)\\otimes r_P(p))_i$. Thus $\\beta$ is natural, and its component inverses are natural by the inverse identity used in step 5. It is the canonical presheaf isomorphism induced by the projections. For the empty family both sides are zero; alternatively, every pure tensor in $0\\otimes P(V)$ is $0\\otimes p=0$.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-presheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  },
+  {
+   "text": "Finally let $D:J\\to\\mathrm{PMod}(R)$ be any finite diagram. Put $Q_0=\\prod_{i\\in\\operatorname{Ob}J}D_i$, $Q_1=\\prod_{a:i\\to j\\in\\operatorname{Mor}J}D_j$, and define $\\delta:Q_0\\to Q_1$ by $\\operatorname{pr}_a\\delta=D(a)\\operatorname{pr}_i-\\operatorname{pr}_j$. Then $L=\\ker\\delta$, with the restricted projections, is a limit: a map $H\\to Q_0$ is a tuple $(h_i)$, and $\\delta(h_i)=0$ is exactly the cone equations $D(a)h_i=h_j$; step 2 gives their unique factorization through $L$. All these maps are module-presheaf morphisms. Under the product comparisons of step 6, $T_P(\\delta)$ is the corresponding difference map for $T_P D$: its $a$-component on a pure tensor is $(D(a)x_i-x_j)\\otimes p=D(a)x_i\\otimes p-x_j\\otimes p$. This uses the additivity from step 1. The kernel comparison of steps 4–5 now identifies $T_P(L)$ with the kernel of that difference map, compatibly with every projection, hence with the limiting cone of $T_PD$. This includes the empty diagram by step 6. Thus the canonical comparisons for every finite diagram are isomorphisms, which is preservation of finite limits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-presheaf-tensor-product",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03ES (lemma-flatness-presheaves), whose proof says immediate from the definitions; explicit kernel, product, restriction and finite-diagram arguments supplied here, with Tag 00HD for tensor exactness."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +153,52 @@
    "results": "{\"t\": \"2026-10-21T05:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring with a presheaf of modules is left exact when tensoring with every evaluation module is left exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"LinearMap.rTensor_exact_iff_lTensor_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Condensed.instAB4CondensedMod\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"6b6dd597f48b7f42\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat flat tensor and presheaf evaluation/limit/sheafification results are ingredients; none states finite-limit preservation by tensor with a sectionwise-flat varying-ring module presheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat|PreservesFiniteLimits|tensorRight",
+   "results": "{\"t\": \"2026-10-21T06:32:58Z\", \"tool\": \"grep\", \"query\": \"[Ff]lat|PreservesFiniteLimits|tensorRight\", \"sub\": \"Algebra/Category/ModuleCat/Presheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\"], \"digest\": \"8440034cde9c5b09\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "PresheafOfModules tensorRight finite limit preservation when each evaluation is a flat module",
+   "results": "{\"t\": \"2026-10-21T06:32:59Z\", \"tool\": \"leansearch\", \"query\": \"PresheafOfModules tensorRight finite limit preservation when each evaluation is a flat module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"PresheafOfModules.limitPresheafOfModules\", \"PresheafOfModules.evaluation_preservesLimit\", \"PresheafOfModules.evaluation_preservesFiniteLimits\"], \"digest\": \"9473ed8cacc5eca4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-21T06:32:59Z\", \"tool\": \"loogle\", \"query\": \"PresheafOfModules, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_preservesFiniteLimits\", \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\"], \"digest\": \"389db44fed2881ad\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor with a sectionwise flat presheaf of modules over a presheaf of commutative rings preserves finite limits",
+   "results": "{\"t\": \"2026-10-21T06:33:00Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor with a sectionwise flat presheaf of modules over a presheaf of commutative rings preserves finite limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"PresheafOfModules.hasFiniteLimits\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"PresheafOfModules.toPresheaf_preservesFiniteLimits\", \"SheafOfModules.Finite.hasFiniteLimits\"], \"digest\": \"10360dd4e1dd7e96\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_of_evaluation|[Ff]lat|evaluation.*[Tt]ensor|[Tt]ensor.*evaluation",
+   "results": "{\"t\": \"2026-10-21T06:33:13Z\", \"tool\": \"grep\", \"query\": \"preservesFiniteLimits_of_evaluation|[Ff]lat|evaluation.*[Tt]ensor|[Tt]ensor.*evaluation\", \"sub\": \"Algebra/Category/ModuleCat/Presheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a presheaf of modules is left exact if every section module is flat over the corresponding section ring",
+   "results": "{\"t\": \"2026-10-21T06:33:13Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring with a presheaf of modules is left exact if every section module is flat over the corresponding section ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.iff_lTensor_exact'\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"2b885843e6e2ff29\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sectionwise-flat tensor exactness in ordinary ModuleCat and evaluation limits separately; no declaration states tensor finite-limit preservation for varying-ring module presheaves with the specified comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-scalar-localization-sheaf-exact",
@@ -89,5 +220,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-sectionwise-flat-presheaf-tensor",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 03ES into sectionwise kernel exactness, finite-product comparisons, explicit semilinear naturality and the finite-diagram difference-kernel construction. Reused the existing flat-tensor-exact and tensor-finite-product Mathlib leaves; created no nodes. Read the live Lean and found no declaration stating the entire item. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the sectionwise-flat tensor finite-limit subargument extracted in step 2 of lem-weil-pbc-scalar-localization-sheaf-exact, below the integral-lattice rationalization paragraph of thm-weil-pbc-finite-extension (main-20261015 proof: by prop-weil-pbc-rational-transport it remains an isomorphism after rationalization)."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-19dd9af05",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-19dd9af05 (reviewer sub-agent of L); spot-checked: Read the whole item (7 steps, no new nodes) against Stacks sites-modules.tex 03ER(1) and 03ES (l.4241-4286). The statement is unchanged from base and asserts the finite-limit half of 03ER's exactness, which is what the parent scalar-localization-sheaf-exact step 2 uses. The inline flatness (⊗P(V) preserves injections) equals def-weil-pbc-flat-ring-map, the notion in the hypothesis of lem-weil-pbc-flat-tensor-exact. Steps 1-3 (functoriality via the balancing check, sectionwise kernels, finite products including I=∅) are elementary and correct. Step 4 applies the 'in particular' clause of flat-tensor-exact (rTensor_exact, Flat/Basic.lean:340) with R(V), P(V). Step 5 proves naturality of α by injectivity of j_W and pure tensors. Step 6 uses tensor-finite-product (piLeft, Pi.lean:115; t=0 allowed) with naturality of β. Step 7 writes the full equalizer-as-kernel argument (pr_a δ = D(a)pr_i − pr_j, J finite, empty diagram included). Edge cases checked: ℤ/2 with f=2 shows flatness is needed and is used only in step 4; restriction ring maps are arbitrary. Duplicate search (DAG with -R, Mathlib ModuleCat/Presheaf) found nothing; free-sheaf-flat and presheaf-finite-limits-objectwise are different statements. The item is not on the 2026-10-19 drop list and live is still unsplit. No SGA, no tool_uses, no fixes."
  }
 }

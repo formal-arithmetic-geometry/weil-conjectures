@@ -20867,3 +20867,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q82/prop-every-iterate-trace (reviewer FIX; after a return; new nodes: 2)
 - 08:07 L: merged deliver/Q94/lem-sfb-internal-hom-dual-constructible-models (reviewer PASS; after a return; new nodes: 2)
 - 08:07 L: merged deliver/Q48/lem-sfb-divisible-extension-derived-reduction (reviewer FIX; after a return; new nodes: 3)
+- 08:07 L: merged deliver/NU/lem-weil-pbc-sectionwise-flat-presheaf-tensor (reviewer PASS; first push; new nodes: 0)
