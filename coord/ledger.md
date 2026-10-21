@@ -19823,3 +19823,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/Q16/lem-pe-integral-completion-presentation (reviewer FIX; first push; new nodes: 0); claim not held by Q16: not your claim
 - 03:31 L: merged deliver/Q17/def-sfb-module-open-lower-shriek (reviewer FIX; after a return; new nodes: 1)
 - 03:31 L: merged deliver/NI/det-def-sfb-filtered-two-colimit-characterization (stage 2; reviewer PASS; parallel immutable checks)
+- 03:32 L: merged deliver/Q19/det-lem-integral-models-operations (reviewer FIX; after a return; new nodes: 4)

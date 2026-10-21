@@ -1,438 +1,394 @@
 {
-  "id": "det-lem-integral-models-operations",
-  "blueprint": {
-    "is": "det-lem-integral-models-operations",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Inverse image, tensor product and extension by zero preserve $D^b_c(-,\\mathcal O_E)$",
-  "statement": "Let $E/\\mathbf Q_\\ell$ be finite and all schemes Noetherian.\n\n1. For $f\\colon X\\to Y$ and $K\\in\\Dbc(Y,\\cO_E)$, $f^*K\\in\\Dbc(X,\\cO_E)$.\n2. For $K,M\\in\\Dbc(X,\\cO_E)$, $K\\otimes^{\\mathbf L}_{\\cO_{E,X}}M\\in\\Dbc(X,\\cO_E)$ (no completion is\n   needed).\n3. For a locally closed immersion $a=i\\circ u\\colon S\\hookrightarrow\\overline S\\hookrightarrow X$\n   and $L\\in\\Dbc(S,\\cO_E)$, $a_!L=i_*u_!L\\in\\Dbc(X,\\cO_E)$.\n4. For $a$ as in (3), $L\\in D(S_{\\mathrm{proét}},\\cO_E)$ and $M\\in D(X_{\\mathrm{proét}},\\cO_E)$,\n   $(a_!L)\\otimes^{\\mathbf L}M\\simeq a_!(L\\otimes^{\\mathbf L}a^*M)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.md",
-    "place": "node det-lem-integral-models-operations, order None"
-  },
-  "stmt_deps": [
+ "id": "det-lem-integral-models-operations",
+ "blueprint": {
+  "is": "det-lem-integral-models-operations",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Inverse image, tensor product and extension by zero preserve $D^b_c(-,\\mathcal O_E)$",
+ "statement": "Let $E/\\mathbf Q_\\ell$ be finite and all schemes Noetherian.\n\n1. For $f\\colon X\\to Y$ and $K\\in\\Dbc(Y,\\cO_E)$, $f^*K\\in\\Dbc(X,\\cO_E)$.\n2. For $K,M\\in\\Dbc(X,\\cO_E)$, $K\\otimes^{\\mathbf L}_{\\cO_{E,X}}M\\in\\Dbc(X,\\cO_E)$ (no completion is\n   needed).\n3. For a locally closed immersion $a=i\\circ u\\colon S\\hookrightarrow\\overline S\\hookrightarrow X$\n   and $L\\in\\Dbc(S,\\cO_E)$, $a_!L=i_*u_!L\\in\\Dbc(X,\\cO_E)$.\n4. For $a$ as in (3), $L\\in D(S_{\\mathrm{proét}},\\cO_E)$ and $M\\in D(X_{\\mathrm{proét}},\\cO_E)$,\n   $(a_!L)\\otimes^{\\mathbf L}M\\simeq a_!(L\\otimes^{\\mathbf L}a^*M)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.md",
+  "place": "node det-lem-integral-models-operations, order None"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-lower-shriek",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$, $R_T=\\mathcal O_{E,T}$. Use bounded cohomology with finite constant scalar-model constructibility [sk-def-sfb-constructible]; no completeness is imposed.",
+   "uses": [
     "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-derived-categories",
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-def-sfb-module-lower-shriek",
-    "def-weil-closed-immersion"
-  ],
-  "proof": [
-    {
-      "text": "Use the integral coefficient ring sheaf $R_T=\\mathcal O_{E,T}$ and write $A=\\mathcal O_E$. Here $\\Dbc(T,A)$ means bounded complexes with constructible cohomology, with finite constant local models $R_V\\otimes_A P$ for finitely presented scalar $A$-modules $P$, as in [sk-def-sfb-constructible, sk-def-sfb-bounded-constructible]. Thus we can prove membership directly from cohomology and strata; we do not assume that an arbitrary bounded complex of finite free modules splits into its terms. No additional completeness condition is inserted into this definition.",
-      "uses": [
-        "sk-def-sfb-constructible",
-        "sk-def-sfb-bounded-constructible"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-        "place": "opening paragraph, interpreted using the current definitions"
-      }
-    },
-    {
-      "text": "For clause (1), [sk-prop-sfb-cartesian-coefficients] identifies $f^*R_Y=R_X$ and says that module pullback is exact inverse image. It therefore preserves kernels, images, cokernels and cohomology, so $H^q(f^*K)=f^*H^q(K)$ with the same bounds. For each constructible $H^q(K)$ pull its finite stratification back to $X$ using [lemma-constructible-pullback-stratification]. Pull each pro-étale covering of a stratum back to its fibre product with $X$; it is again a covering: weakly étale arrows remain weakly étale by [lem-weil-pbc-weakly-etale-composition-base-change], and the family remains fpqc by [lem-galois-fpqc-covering-base-change]. The covering definition [def-weil-pbc-proetale-site] then applies, even though the new base is not an object of the old small site. A scalar finite presentation $A^m\\to A^n\\to P\\to0$ gives $R_V^m\\to R_V^n\\to R_V\\otimes_A P\\to0$; exact inverse image pulls this cokernel presentation back to the same scalar matrix over the new coefficient ring. Thus the pulled-back cohomology has finite constant local models. The pulled-back strata are locally closed and hence constructible on the Noetherian scheme $X$. This proves $f^*K\\in\\Dbc(X,A)$ for every $f$, without any finite-type or field-base hypothesis.",
-      "uses": [
-        "sk-prop-sfb-cartesian-coefficients",
-        "lemma-constructible-pullback-stratification",
-        "def-weil-pbc-proetale-site",
-        "sk-def-sfb-constructible",
-        "sk-def-sfb-bounded-constructible",
-        "sk-def-sfb-derived-categories",
-        "lem-weil-pbc-weakly-etale-composition-base-change",
-        "lem-galois-fpqc-covering-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-        "place": "paragraph (1): exact inverse image and pullback of strata and covers"
-      }
-    },
-    {
-      "text": "For clause (3), first take an open immersion $j:U\\hookrightarrow T$ and its complementary closed immersion $i:Z\\hookrightarrow T$. Every open subset of a Noetherian topological space is quasi-compact, by Noetherian induction on closed subsets: if a finite subcover did not exist, choose a minimal closed subset on which it fails; removing one cover member containing a point gives a proper closed subset, covered finitely by minimality, and adjoining that member contradicts minimality. Apply this standard lemma to the underlying Noetherian spaces; the open immersion is quasi-compact. With the inverse-image coefficient rings, [lem-weil-pbc-proetale-ringed-open-closed] says that $j_!$ and $i_*$ are exact, restrict to the identity on their own loci, and restrict to zero on the complementary loci. The coefficient rings agree with $R_U,R_Z$ by [sk-prop-sfb-cartesian-coefficients]. Given a finite stratification for a constructible sheaf on $U$ (respectively $Z$), regard its strata as locally closed subschemes of $T$ and append the complementary closed (respectively open) locus. On the original strata the extended sheaf has the same scalar local models; on the added locus its model is zero. Hence both functors preserve constructible sheaves. Since they are exact, their termwise functors commute with cohomology and preserve bounds, proving preservation of $\\Dbc$. Apply the open conclusion to $u:S\\hookrightarrow\\overline S$ and then the closed conclusion to $i:\\overline S\\hookrightarrow X$ to obtain $a_!L=i_*u_!L\\in\\Dbc(X,A)$.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "sk-prop-sfb-cartesian-coefficients",
-        "sk-def-sfb-constructible",
-        "sk-def-sfb-bounded-constructible",
-        "sk-def-sfb-derived-categories"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); blueprint paragraph (3)"
-      }
-    },
-    {
-      "text": "For the tensor calculation first take constructible sheaves $F,G$ in degree zero. Intersect their finite stratifications, forming the actual fibre products of strata using [lemma-constructible-pullback-stratification]; the intersections are locally closed, disjoint and cover $X$. On each stratum $T$ intersect the two pro-étale trivializing covers by fibre products $V_\\alpha\\times_T W_\\beta$. The base-change and composition axioms of a site [def-weil-pbc-sites-and-cohomology] make this a covering: first pull the second cover back over each member of the first, then compose. On its objects $V$, exact inverse image and the scalar cokernel argument of step 2 identify the two sheaves with $R_V\\otimes_A P$ and $R_V\\otimes_A Q$ for finitely presented scalar modules $P,Q$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the restriction of $F\\otimes^{\\mathbf L}_{R_X}G$ is the derived tensor of these two models.",
-      "uses": [
-        "sk-def-sfb-constructible",
-        "lemma-constructible-pullback-stratification",
-        "def-weil-pbc-proetale-site",
-        "sk-prop-sfb-cartesian-coefficients",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A4 (lemma-pullback-tensor-product); blueprint tensor paragraph, local case"
-      }
-    },
-    {
-      "text": "The ring $A=\\mathcal O_E$ is a DVR, and each nonzero element is a unit times a power of a uniformizer $\\pi$ [lem-weil-l-adic-extension-integers-dvr]. Choose a finite free surjection $A^n\\twoheadrightarrow P$, with kernel $N\\subset A^n$. By [lem-sc-dvr-saturation-line-smith-normal-form] the inclusion of $N$ has a diagonal matrix in finite bases, of rank at most $n$. Each diagonal entry is nonzero because the inclusion is injective, and can be replaced by $\\pi^r$ after multiplying a basis vector by a unit. Taking the cokernel gives a finite direct sum decomposition of $P$ into copies of $A$ and $A/\\pi^r$ with $r\\geq1$; unit entries give zero summands. Do the same for $Q$. Right exactness of ordinary tensor gives decompositions of the two local models into copies of $R=R_V$ and $R/\\pi^rR$.",
-      "uses": [
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-sc-dvr-saturation-line-smith-normal-form",
-        "sk-def-sfb-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-        "place": "tensor paragraph: expand the finite free local calculation using scalar Smith normal form"
-      }
-    },
-    {
-      "text": "The constant-to-completed coefficient map $A_V\\to R_V$ is flat by clause (1) of [det-prop-integral-criterion-constant-coefficients]. The constant presheaf map given by multiplication $A\\xrightarrow{\\pi^r}A$ is injective because $A$ is a domain. Its sheafification is multiplication on the constant ring sheaf [def-weil-pbc-constant-sheaf] and is still injective by exact sheafification [lem-weil-pbc-sheafification-exact]. Flatness here means that the sheaf tensor functor $-\\otimes_{A_V}R_V$ is exact [def-pc-flat-sheaf-modules]. Applying that functor to the kernel sequence $0\\to A_V\\xrightarrow{\\pi^r}A_V$, and identifying $A_V\\otimes_{A_V}R_V=R_V$, gives the kernel sequence $0\\to R_V\\xrightarrow{\\pi^r}R_V$. Hence this multiplication on $R$ is injective. Consequently $[R\\xrightarrow{\\pi^r}R]$, placed in degrees $-1,0$, resolves $R/\\pi^rR$. It is K-flat directly from [def-pc-kflat-complex]: tensoring it with any acyclic complex gives the cone of multiplication by $\\pi^r$ on that complex, up to the usual shift, which is acyclic by the cohomology long exact sequence [lem-sf-derived-homology-long-exact]. Also $R[0]$ is K-flat because tensoring with it is the identity. Thus these explicit complexes compute the derived tensors, using [sk-def-sfb-derived-tensor-hom].",
-      "uses": [
-        "det-prop-integral-criterion-constant-coefficients",
-        "def-pc-kflat-complex",
-        "lem-sf-derived-homology-long-exact",
-        "sk-def-sfb-derived-tensor-hom",
-        "def-weil-pbc-constant-sheaf",
-        "lem-weil-pbc-sheafification-exact",
-        "def-pc-flat-sheaf-modules"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 06YN (definition-K-flat), 06YU (definition-derived-tor); scalar coefficient flatness from the cited node"
-      }
-    },
-    {
-      "text": "Tensoring a free summand with another summand leaves it in degree zero. For two torsion summands the explicit resolution of step 6 gives\n$$ (R/\\pi^rR)\\otimes_R^{\\mathbf L}(R/\\pi^sR)\\simeq[R/\\pi^sR\\xrightarrow{\\pi^r}R/\\pi^sR]. $$\nIf $r\\geq s$, the differential is zero, so both cohomology sheaves are $R/\\pi^sR$. If $r<s$, the cokernel is $R/\\pi^rR$ and the kernel is $\\pi^{s-r}R/\\pi^sR\\cong R/\\pi^rR$. To check the latter for sheaves, lift a quotient section locally to $x\\in R$. The equation $\\pi^r x=0$ modulo $\\pi^s$ means, after a refinement, $\\pi^r x=\\pi^s y$. Cancellation using step 6 gives $x=\\pi^{s-r}y$. For the map $R\\to R/\\pi^sR$, $y\\mapsto\\pi^{s-r}y$, a section in its kernel locally satisfies $\\pi^{s-r}y=\\pi^s z$. Injectivity of $\\pi^{s-r}$ gives $y=\\pi^r z$; conversely every $y=\\pi^r z$ maps to zero. Its kernel is therefore exactly $\\pi^rR$. Thus in both cases $H^{-1}$ and $H^0$ are $R/\\pi^{\\min(r,s)}R$, and other cohomology vanishes. Finite sums give the calculation for the local models in step 5. These resulting cohomology sheaves have finite constant scalar models, and all local tensors have amplitude in $[-1,0]$. Exact restrictions commute with cohomology. By [lem-weil-pbc-noetherian-stratum-detection], these restrictions detect vanishing outside that interval globally. The models themselves give constructibility by [sk-def-sfb-constructible]. Hence $F\\otimes^{\\mathbf L}G\\in\\Dbc(X,A)$.",
-      "uses": [
-        "sk-def-sfb-derived-tensor-hom",
-        "sk-prop-sfb-cartesian-coefficients",
-        "lem-weil-pbc-noetherian-stratum-detection",
-        "sk-def-sfb-constructible",
-        "sk-def-sfb-bounded-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-        "place": "tensor paragraph: explicit replacement for the assertion about sums of shifts"
-      }
-    },
-    {
-      "text": "Extend the sheaf calculation to clause (2) by two finite cohomological inductions. The standard truncation triangles of [def-sbc-standard-tstructure-derived-category] give, for bounded $K$ with cohomology in $[a,b]$,\n$$\\tau_{\\leq b-1}K\\longrightarrow K\\longrightarrow H^b(K)[-b]\\longrightarrow(\\tau_{\\leq b-1}K)[1].$$\nDerived tensor is exact in each variable [lem-weil-pbc-ringed-projection-mate-exact], and $\\Dbc(X,A)$ is a triangulated subcategory on Noetherian $X$ [sk-def-sfb-bounded-constructible]. Fix a constructible sheaf $G$. The empty interval is the zero case and the one-degree case is step 7 shifted. Tensoring the displayed triangle with $G$, the first term is handled by induction on $b-a$ and the third by the sheaf case; closure under triangles gives $K\\otimes^{\\mathbf L}G$. Now fix such a $K$ and induct on an interval $[c,d]$ containing the cohomology of $M$. The empty interval is again zero, the one-degree case is the conclusion just established shifted, and the triangle for $M$ gives outer terms $K\\otimes^{\\mathbf L}\\tau_{\\leq d-1}M$ and $(K\\otimes^{\\mathbf L}H^d(M))[-d]$. They belong to $\\Dbc$ by induction and the first induction. Therefore the middle term $K\\otimes^{\\mathbf L}M$ belongs to $\\Dbc$. All these are ambient derived tensors; no completion is taken.",
-      "uses": [
-        "def-sbc-standard-tstructure-derived-category",
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "sk-def-sfb-bounded-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 08J5 (remark-truncation-distinguished-triangle); tensor exactness as in sites-cohomology.tex Tag 06YM (lemma-derived-tor-exact); blueprint tensor paragraph, dévissage"
-      }
-    },
-    {
-      "text": "For clause (4), prove the open projection formula on the unbounded ambient categories. For $j:U\\hookrightarrow T$, the pro-étale site of $U$ is the localized site of $T$ at $U$ [lem-weil-proetale-weakly-etale-localization], and the coefficient ring restricts to $R_U$ [sk-prop-sfb-cartesian-coefficients]. Choose a representative complex for $L$ and a K-flat resolution $P\\to M$ with flat terms [lem-pc-kflat-resolution]. The complex $j^*P$ is K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus $j_!L\\otimes^{\\mathbf L}M$ is represented by $j_!L\\otimes P$, and $L\\otimes^{\\mathbf L}j^*M$ by $L\\otimes j^*P$. Apply [lem-weil-pbc-ringed-slice-extension-tensor] in each bidegree. Since $j_!$ is left adjoint to $j^*$ and exact [lem-weil-pbc-proetale-ringed-open-closed], it preserves the direct sums in totalization [lem-weil-pbc-left-adjoint-preserves-colimits] and induces its termwise derived functor. Write the bidegree isomorphism as $\\theta_{p,q}:(j_!L^p)\\otimes P^q\\to j_!(L^p\\otimes j^*P^q)$. Naturality in its first argument makes $\\theta$ commute with the maps induced by $d_L^p$, and naturality in its second argument makes it commute with the maps induced by $d_P^q$. Additivity then makes it commute with their signed sum $d_L\\otimes1+(-1)^p1\\otimes d_P$ in bidegree $(p,q)$. Summing these maps over $p+q=n$ gives an isomorphism of total complexes, naturally\n$$j_!L\\otimes^{\\mathbf L}M\\simeq j_!(L\\otimes^{\\mathbf L}j^*M).$$\nThis argument imposes no bounds or constructibility on $L,M$.",
-      "uses": [
-        "lem-weil-proetale-weakly-etale-localization",
-        "sk-prop-sfb-cartesian-coefficients",
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-ringed-slice-extension-tensor",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-left-adjoint-preserves-colimits",
-        "sk-def-sfb-derived-categories"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 0E8I (lemma-j-shriek-and-tensor); its derived version in sites-cohomology.tex, lemma-j-shriek-and-tensor; blueprint paragraph (4)"
-      }
-    },
-    {
-      "text": "For a closed immersion $i:Z\\hookrightarrow T$ with open complement $j$, $i_*$ is exact since $T$ is Noetherian [lem-weil-pbc-proetale-ringed-open-closed]. Thus $Ri_*=i_*$ termwise and $Li^*=i^*$ because the coefficient system is Cartesian [sk-prop-sfb-cartesian-coefficients]. The natural projection map of [lem-weil-pbc-ringed-projection-mate-exact] is\n$$i_*N\\otimes^{\\mathbf L}M\\longrightarrow i_*(N\\otimes^{\\mathbf L}i^*M).$$\nIts restriction by $i^*$ is the identity on $N\\otimes^{\\mathbf L}i^*M$: the defining mate uses the counit $i^*i_*N\\to N$, which is an isomorphism, and the monoidal pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its restriction by $j^*$ is a map $0\\to0$, since $j^*i_*=0$ and pullback commutes with derived tensor. The identities and vanishings are those of [lem-weil-pbc-proetale-ringed-open-closed]. The two strata $Z,U$ jointly detect isomorphisms by [lem-weil-pbc-noetherian-stratum-detection], so this projection map is an isomorphism for arbitrary $N,M$.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "sk-prop-sfb-cartesian-coefficients",
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-noetherian-stratum-detection",
-        "sk-def-sfb-derived-categories"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0B56 (equation-projection-formula-map); proetale.tex Tags 09AA, 09BM, 09AH; blueprint paragraph (4)"
-      }
-    },
-    {
-      "text": "Finally apply step 10 with $N=u_!L$ and then step 9 inside $\\overline S$:\n$$ (i_*u_!L)\\otimes^{\\mathbf L}M\\simeq i_*(u_!L\\otimes^{\\mathbf L}i^*M)\\simeq i_*u_!(L\\otimes^{\\mathbf L}u^*i^*M)=a_!(L\\otimes^{\\mathbf L}a^*M). $$\nHere $a^*=u^*i^*$ by composition of inverse-image functors [lem-weil-pbc-site-morphism-composition] and the Cartesian coefficient identifications already fixed. Both factors are the ambient, exact immersion functors from step 3. This proves clause (4) with precisely its stated arbitrary derived objects and is natural in both arguments.",
-      "uses": [
-        "lem-weil-pbc-site-morphism-composition"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-        "place": "paragraph (4): compose the open and closed formulas"
-      }
-    }
-  ],
-  "proof_deps": [
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lemma-constructible-pullback-stratification",
-    "def-weil-pbc-proetale-site",
-    "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-galois-fpqc-covering-base-change",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-saturation-line-smith-normal-form",
-    "det-prop-integral-criterion-constant-coefficients",
-    "def-pc-kflat-complex",
-    "lem-sf-derived-homology-long-exact",
-    "sk-def-sfb-derived-tensor-hom",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-sheafification-exact",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-site-morphism-composition"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "proof paragraphs (1)–(4), with explicit scalar cyclic resolutions and cohomological induction replacing the local splitting claim"
+    "place": "refinement of the original proof"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
-      "results": "none (grep root AlgebraicGeometry)",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
-      "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constructible\", \"tensor\"",
-      "results": "none",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
-      "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "(pro.?etale|pro.?étale).*(construct|tensor)|construct.*(pro.?etale|pro.?étale)",
-      "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Extension by zero along a locally closed immersion projection formula derived tensor of sheaves of modules",
-      "results": "Function.ExtendByZero.linearMap; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; ContinuousLinearMap.extend_zero; AlgebraicGeometry.RingedSpace.res_zero; dualTensorHom_prodMap_zero; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; KaehlerDifferential.mulActionBaseChange_smul_zero",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Constructible\"",
-      "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Stability of constructible integral adic sheaves under inverse image tensor and extension by zero for locally closed immersions",
-      "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "def tensorObj|def HasTensor",
-      "results": "none (grep root Algebra/Homology/Monoidal.lean)",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "ofTensorProductEquivOfFiniteNoetherian",
-      "results": "328; 333; 334; 338; 340 (grep root RingTheory/AdicCompletion/AsTensorProduct.lean)",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "def restrictFunctor|def restrictAdjunction",
-      "results": "348; 416; 425; 453; 459 (grep root AlgebraicGeometry/Modules/Sheaf.lean)",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "exists_iso_Q_obj_of_isGE_of_isLE",
-      "results": "180; 192 (grep root Algebra/Homology/DerivedCategory/TStructure.lean)",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "sk-prop-integral-criterion",
-    "det-prop-sfb-cartesian-coefficients-finite-free",
+  {
+   "text": "For (1), [lem-sfb-pullback-constant-model-constructible] preserves constructible sheaves (quasi-compact by hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]). Cartesian pullback is exact, so its derived functor is termwise [sk-def-sfb-derived-categories], hence $H^q(f^*K)=f^*H^q(K)$ with unchanged bounds.",
+   "uses": [
+    "lem-sfb-pullback-constant-model-constructible",
     "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-dc-restricted-functors"
-  ],
-  "uses_not_cited": [
-    "det-prop-sfb-cartesian-coefficients-finite-free",
-    "sk-def-sfb-dc-restricted-functors"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-integral-models",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "det-lem-integral-models-operations",
-    "worker": "stage1",
-    "summary": "All four clauses unchanged. Prove exact functor preservation directly from the current finite constant local model definition; replace the false finite-sum-of-shifts assertion by Smith decomposition, explicit two-term resolutions and two finite truncation inductions. Derive open and closed projection formulas separately on arbitrary unbounded objects. Reuse existing nodes only; avoid the circular integral-model/heart dependencies and finite-type-over-a-field preservation lemmas.",
-    "blueprint": "Proof paragraph (1) is step 2; paragraph (3) is step 3; the local tensor and dévissage paragraph (2) is steps 4–8; paragraph (4) is steps 9–11. The preliminary completeness criterion is unnecessary for the current stated definition.",
-    "tool_uses": [
-      {
-        "node": "lemma-constructible-pullback-stratification",
-        "why": "Base change of a finite stratification supplies the strata for pullback and common refinement; the integral-model unit has no separate stratification lemma."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-ringed-open-closed",
-        "why": "Exactness, adjunctions and complementary vanishings of module immersion functors give extension preservation and the closed projection formula; these are general pro-etale topos identities."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "The general unbounded monoidal pullback theorem transports each local tensor and preserves the K-flat resolutions needed in the open projection formula."
-      },
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "The scalar valuation ring is a DVR with a uniformizer and unit-times-power decomposition; these scalar facts are not an operation-preservation clause."
-      },
-      {
-        "node": "lem-weil-pbc-noetherian-stratum-detection",
-        "why": "Conservativity of finite stratum restrictions detects the tensor cohomology bounds and the closed projection-map isomorphism."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-projection-mate-exact",
-        "why": "Exactness of derived tensor supports the two finite truncation inductions, and the explicitly defined mate supplies the canonical closed projection map."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "The small pro-etale site over an open is the slice site, allowing the general ringed-slice tensor identity to apply."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Unbounded module complexes on a ringed site admit K-flat resolutions with flat terms, used to prove the open projection formula without boundedness assumptions."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-        "why": "The sheaf-level tensor identity for extension from a slice yields the open derived formula bidegree by bidegree; it does not restate the integral constructibility clauses."
-      },
-      {
-        "node": "lem-weil-pbc-site-morphism-composition",
-        "why": "Composition of inverse-image functors identifies a^* with u^* i^* when the two immersion formulas are composed."
-      },
-      {
-        "node": "lem-weil-pbc-sheafification-exact",
-        "why": "Exact sheafification carries the injective scalar constant-presheaf map to an injective constant-sheaf map before flat change of coefficients; this is a general site tool."
-      }
-    ]
+    "sk-def-sfb-bounded-constructible",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
   },
-  "tool_uses": [
-    "lemma-constructible-pullback-stratification",
-    "lem-weil-pbc-proetale-ringed-open-closed",
+  {
+   "text": "For (3), [lem-sfb-scalar-model-immersion-extension] preserves constructible sheaves under $u_!$ and $i_*$. Their exactness implies $H^q(i_*u_!L)=i_*u_!H^q(L)$ with the same bounds; their derived functors are termwise. Hence $a_!L\\in\\Dbc(X,A)$.",
+   "uses": [
+    "lem-sfb-scalar-model-immersion-extension",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
+  },
+  {
+   "text": "For constructible sheaves $F,G$, intersect adapted strata [lem-weil-pbc-constructible-stratification-intersection], then their trivializing covers by site base change and composition. Pullback preserves the scalar models. Monoidal derived pullback identifies the restricted tensor with $(R_V\\otimes_A P)\\otimes^{\\mathbf L}_{R_V}(R_V\\otimes_A Q)$. Here $A$ is a DVR and $A_V\\to R_V$ is flat. The cyclic resolutions [lem-sfb-flat-scalar-cyclic-resolution] compute the torsion factors; [lem-sfb-flat-dvr-scalar-tensor] supplies finite scalar cohomology models in degrees $-1,0$. Exact restrictions and stratum-and-cover detection give the global vanishing; these models certify constructibility.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sfb-pullback-constant-model-constructible",
+    "def-weil-pbc-sites-and-cohomology",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-l-adic-extension-integers-dvr",
+    "det-prop-integral-criterion-constant-coefficients",
+    "lem-sfb-flat-dvr-scalar-tensor",
     "lem-weil-pbc-noetherian-stratum-detection",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-flat-scalar-cyclic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
+  },
+  {
+   "text": "Integral scalar-model sheaves are closed under kernels, cokernels and extensions by [lem-sfb-integral-constant-model-heart-closure]; the weak-Serre cohomology theorem makes their bounded derived subcategory triangulated. Derived tensor is exact in both variables. Apply [lem-sfb-bounded-bifunctor-devissage] to the sheaf case of step 4. This proves (2) for bounded constructible $K,M$, using ambient tensors throughout.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
     "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-sfb-bounded-bifunctor-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
+  },
+  {
+   "text": "For (4), [lem-sf-open-tensor-normalization] gives the unbounded open projection formula for $u$ and ring $R_{\\overline S}$ (identity base-change square). Cartesian coefficients identify the restricted rings. [lem-weil-proetale-closed-tensor-projection] gives the closed formula for $i$; its complementary open is quasi-compact by [lem-sfb-noetherian-space-compact-subsets] ($|X|$ is Noetherian).",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-proetale-closed-tensor-projection",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
+  },
+  {
+   "text": "Apply the closed formula to $N=u_!L$, then the open formula inside $\\overline S$. This gives $$(i_*u_!L)\\otimes^{\\mathbf L}M\\simeq i_*(u_!L\\otimes^{\\mathbf L}i^*M)\\simeq i_*u_!(L\\otimes^{\\mathbf L}u^*i^*M).$$ Composition of inverse images gives $u^*i^*=a^*$, proving (4) naturally in $L,M$. The extension by zero of step 6 is $u_!$ of [sk-def-sfb-module-lower-shriek]: both are left adjoint to restriction under $u^{-1}R_{\\overline S}=R_S$ [sk-prop-sfb-cartesian-coefficients]. As $i_*,u_!,i^*$ are exact, $Ri_*=i_*$, $Li^*=i^*$ termwise [sk-def-sfb-derived-categories].",
+   "uses": [
     "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-sheafification-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q08-8fbceedbe",
-    "group": "Q08",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-8fbceedbe (reviewer sub-agent of L); spot-checked: Step 3 used an invalid maximal-open-cover argument for quasi-compactness of Noetherian opens. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors-basics/det-lem-integral-models-operations.json. All other clauses, citations, hypotheses, route checks, coefficient category, base-change maps, and edge cases passed.; 1 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.Paper.IntegralModelsOperations",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralModelsOperations",
-    "file": "lean/Sheaf/Paper/IntegralModelsOperations.lean",
-    "statement": "theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) : (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) f).mapDerivedCategory).obj K)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X M → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj M)) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) S L → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), Nonempty ((((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))).obj M) ≅ ((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) S).obj L).obj (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) (j ≫ i)).mapDerivedCategory).obj M)))))",
-    "branch": "newtargets-dag",
-    "by": "Q86",
-    "date": "2026-10-18",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-d76c7c007",
-    "group": "Q86",
-    "result": "pass",
-    "note": "Read the node, all 7 statement dependencies, the report and the module, plus the side declarations constantModelBoundedConstructible, padicIntegersRingObj, upperStar, lowerStar, openImmersionLowerShriek and derivedTensor. All four clauses match: an arbitrary f for pullback; the uncompleted derived tensor; a_! = R i_* u_! via an explicit open-then-closed factorization with i_* exact; and the projection formula for unbounded L and M with a^* = (j≫i)^*, stated as Nonempty iso for the node's assertion. Dbc is the scalar finite-constant-model predicate that proof step 1 fixes, with no completeness. Every scheme is Noetherian (AlgebraicGeometry.IsNoetherian) and nothing stronger is assumed. One universe u with Ab.{u+1}; everything is bound. lean.statement equals the file signature; the node changes only by its lean field. No new definitions, no duplicate. Docstrings have the source and blueprint tag and the 11 proof steps; the proof is sorry only (axioms checked). The report has a Worker report and a Second reading section. nt_compile.py --json: exit 0, 4.8 s, clean; a control copy with an injected error was reported."
+    "sk-def-sfb-module-lower-shriek",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "refinement of the original proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sfb-pullback-constant-model-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-scalar-model-immersion-extension",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-sfb-flat-dvr-scalar-tensor",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-flat-scalar-cyclic-resolution",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-bounded-bifunctor-devissage",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-proetale-closed-tensor-projection",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-site-morphism-composition",
+  "sk-def-sfb-module-lower-shriek"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "reviewed scalar-model route; four statement-only sublemmas and reuse of existing pullback/projection formulas, per human re-split order 2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
+   "results": "none (grep root AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
+   "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro.?etale|pro.?étale).*(construct|tensor)|construct.*(pro.?etale|pro.?étale)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a locally closed immersion projection formula derived tensor of sheaves of modules",
+   "results": "Function.ExtendByZero.linearMap; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; ContinuousLinearMap.extend_zero; AlgebraicGeometry.RingedSpace.res_zero; dualTensorHom_prodMap_zero; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; KaehlerDifferential.mulActionBaseChange_smul_zero",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability of constructible integral adic sheaves under inverse image tensor and extension by zero for locally closed immersions",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def tensorObj|def HasTensor",
+   "results": "none (grep root Algebra/Homology/Monoidal.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian",
+   "results": "328; 333; 334; 338; 340 (grep root RingTheory/AdicCompletion/AsTensorProduct.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictFunctor|def restrictAdjunction",
+   "results": "348; 416; 425; 453; 459 (grep root AlgebraicGeometry/Modules/Sheaf.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "180; 192 (grep root Algebra/Homology/DerivedCategory/TStructure.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "sk-prop-integral-criterion",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-dc-restricted-functors"
+ ],
+ "uses_not_cited": [
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "sk-def-sfb-dc-restricted-functors"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "det-lem-integral-models-operations",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replace the 12149-character proof by a short assembly, extracting four strictly smaller statement-only unsplit lemmas (immersion sheaf models, cyclic flat resolutions, flat-DVR scalar tensor, bounded bifunctor devissage). Reuse the existing scalar-model pullback and the existing unbounded open and closed projection formulas. Retained child proof sketches are in report.md, not in the new nodes. This is the explicit human re-split repair of 2026-10-21.",
+  "blueprint": "Paragraph (1): scalar-model sheaf pullback and exact cohomology. Paragraph (3): sheaf immersion extensions then exact cohomology. Paragraph (2): scalar cyclic resolutions, local DVR tensor calculation, finite truncation induction. Paragraph (4): existing open and closed projection formulas and their composition.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Preserves exactly the scalar-model constructibility and witnessing covers used in (1) and in the tensor refinement; applies to qcqs schemes, hence to Noetherian schemes."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies coefficient pullbacks and says the module inverse-image functors are exact."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Supplies the actual fibre-product common stratification, not merely containment of images."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies the natural monoidal pullback identification on strata and covering objects."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Identifies the scalar valuation ring as a DVR for the local tensor lemma."
+   },
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Only clause (1), flatness of constant-to-completed coefficients, is used; derived completeness is not imposed."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Detects vanishing outside degrees -1,0 using exact stratum-and-cover restrictions."
+   },
+   {
+    "node": "lem-sfb-integral-constant-model-heart-closure",
+    "why": "Provides kernels, cokernels and extension closure for exactly finite scalar-model integral sheaves."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Turns the verified heart closure into a triangulated bounded cohomology subcategory."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Supplies exactness in both variables of uncompleted derived tensor."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Its gamma is the projection formula for an arbitrary ring sheaf and arbitrary unbounded inputs; the identity square supplies the open part of (4)."
+   },
+   {
+    "node": "lem-weil-proetale-closed-tensor-projection",
+    "why": "Supplies the closed part of (4) for arbitrary unbounded inputs with a quasi-compact complementary open."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Makes the complementary opens quasi-compact, with no finite-type-over-a-field assumption."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Identifies the composite inverse image with successive inverse images in the final formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-sfb-pullback-constant-model-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-proetale-closed-tensor-projection",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-6d66c6d00",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-6d66c6d00 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the old 11-step proof in full. This re-split follows the human's 2026-10-21 note (clones/live/coord/repair-notes): at least 4 statement-only unsplit nodes are delivered and the assembly is 2464 characters, 2834 after my fix. No old argument is dropped. Old step 2 is now carried by the existing lem-sfb-pullback-constant-model-constructible (O_E is admissible; Noetherian implies qcqs). Old step 3 moved to the new scalar-model-immersion-extension node, old steps 5-7 to the new flat-scalar-cyclic-resolution and flat-dvr-scalar-tensor nodes, and old step 8 to the new bounded-bifunctor-devissage node. Old steps 9 and 10 are carried by the existing lem-sf-open-tensor-normalization (with g = id) and lem-weil-proetale-closed-tensor-projection; both cover arbitrary rings and unbounded complexes, and the closed one needs a quasi-compact complement, which holds because |X| is Noetherian. All four new statements are true. Small cases checked: units, r<s, r=s, r>s, the zero and free factors, empty intervals, and U empty or equal to T. No new node is a duplicate. The immersion node generalizes lem-sf-open-extension-zero-constant-model-constructible, which covers only the open case over finite-type k-schemes (advisory). Stacks 06YQ, 06YU and 08J5 exist and support the claims. review_split.py passes, with 4 declared tool uses that I accept. No node cites back to the item, no batch-5 target enters the closure, no SGA is cited, and the item is not on the drop list. The item statement, Lean fields and blueprint fields are unchanged. Two small citation gaps are fixed in fixes/dag/nodes/sec-six-functors-basics/det-lem-integral-models-operations.json. (1) Step 2: derived f^* is termwise only by the exact-functor clause of sk-def-sfb-derived-categories, which was missing. (2) Step 7: the open formula's extension by zero is now identified with u_! of sk-def-sfb-module-lower-shriek (left adjoints of the same restriction under the Cartesian coefficients), and the closed formula's derived i_* and i^* are now shown to equal the ordinary i_* and i^* applied termwise. Step 6 now states explicitly that |X| is Noetherian. Maintainer: the item-level tool_uses still lists the old route's nodes; replace it with the split_report tool uses at the merge.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModelsOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralModelsOperations",
+  "file": "lean/Sheaf/Paper/IntegralModelsOperations.lean",
+  "statement": "theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) : (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) f).mapDerivedCategory).obj K)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X M → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj M)) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) S L → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), Nonempty ((((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))).obj M) ≅ ((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) S).obj L).obj (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) (j ≫ i)).mapDerivedCategory).obj M)))))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d76c7c007",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the node, all 7 statement dependencies, the report and the module, plus the side declarations constantModelBoundedConstructible, padicIntegersRingObj, upperStar, lowerStar, openImmersionLowerShriek and derivedTensor. All four clauses match: an arbitrary f for pullback; the uncompleted derived tensor; a_! = R i_* u_! via an explicit open-then-closed factorization with i_* exact; and the projection formula for unbounded L and M with a^* = (j≫i)^*, stated as Nonempty iso for the node's assertion. Dbc is the scalar finite-constant-model predicate that proof step 1 fixes, with no completeness. Every scheme is Noetherian (AlgebraicGeometry.IsNoetherian) and nothing stronger is assumed. One universe u with Ab.{u+1}; everything is bound. lean.statement equals the file signature; the node changes only by its lean field. No new definitions, no duplicate. Docstrings have the source and blueprint tag and the 11 proof steps; the proof is sorry only (axioms checked). The report has a Worker report and a Second reading section. nt_compile.py --json: exit 0, 4.8 s, clean; a control copy with an injected error was reported."
+ }
 }
