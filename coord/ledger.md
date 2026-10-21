@@ -23326,3 +23326,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:26 L: merged deliver/Q19/lem-pur-affine-chart-exceptional-identification (stage 2; reviewer PASS; parallel immutable checks)
 - 18:26 L: merged deliver/NR/lem-sfb-integral-closure-ind-etale-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 18:27 L: merged deliver/N6/lem-sfb-cech-localization-unit-totalization (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T18:27:50Z L: superseded stage-1 delivery NK/lem-sfb-integral-ambient-tower-comparison at a60ecfb62799f12a52ae2bd782c6612965f77f6f; current completion retained; packet archived at refs/superseded/NK/lem-sfb-integral-ambient-tower-comparison/a60ecfb62799f12a52ae2bd782c6612965f77f6f; stale return retired.
