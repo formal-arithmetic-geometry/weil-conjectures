@@ -11,9 +11,111 @@
   "def-sp-abelian",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sfb-preserving-colimits-additive], $H$ is additive: its hypotheses are exactly our abelian categories and preservation of finite colimits. In each abelian group of morphisms, $H(0)=H(0+0)=H(0)+H(0)$ implies $H(0)=0$ by cancellation. Thus all zero morphisms, including those involving rank zero, are preserved.",
+   "uses": [
+    "lem-sfb-preserving-colimits-additive",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor (1), right-exact case"
+   }
+  },
+  {
+   "text": "For every $r\\geq0$, $X^r$ with its injections is the colimit of the finite discrete diagram on $r$ copies of $X$. Hence $(H(X^r),(H(\\iota_{j,X})))$ is a coproduct of $r$ copies of $H(X)$, by the hypothesis on $H$ and [def-weil-pbc-category-colimit]. Also $(Y^r,(\\iota_{j,Y}e))$ is a coproduct of the same diagram: a family $a_j:H(X)\\to T$ corresponds to $(a_je^{-1}:Y\\to T)$. The unique isomorphism between these colimit cocones is $E_r$, and $E_rH(\\iota_{j,X})=\\iota_{j,Y}e$. This is exactly the finite-coproduct comparison followed by the coproduct of the copies of $e$, since that composite has these same restrictions. For $r=0$ both cocones are initial, and colimit uniqueness gives the same isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit and the immediately following uniqueness observation; finite discrete and parallel-pair diagrams"
+   }
+  },
+  {
+   "text": "To prove the projection equation for fixed $i<r$, compare the maps $\\pi_{i,Y}E_r$ and $eH(\\pi_{i,X})$ out of the coproduct $H(X^r)$. On $H(\\iota_{j,X})$ their values are $\\pi_{i,Y}\\iota_{j,Y}e$ and $eH(\\pi_{i,X}\\iota_{j,X})$. Both are $e$ when $i=j$ and zero otherwise, using the biproduct relations and step 1. Coproduct uniqueness therefore gives $\\pi_{i,Y}E_r=eH(\\pi_{i,X})$. If $r=0$ there is no $i$ to check.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit and the immediately following uniqueness observation; finite discrete and parallel-pair diagrams"
+   }
+  },
+  {
+   "text": "For clarity, arbitrary entries really determine maps, including empty matrices. Set $p=\\sum_{i<n,j<m}\\iota_{i,X}p_{ij}\\pi_{j,X}$ and analogously $q=\\sum_{i<n,j<m}\\iota_{i,Y}q_{ij}\\pi_{j,Y}$. Distributivity and $\\pi_i\\iota_j=\\delta_{ij}$ give the specified entries. For any map $t:X^m\\to X^n$, inserting the two identities $1=\\sum_i\\iota_i\\pi_i$ and $1=\\sum_j\\iota_j\\pi_j$ gives $t=\\sum_{i,j}\\iota_i(\\pi_it\\iota_j)\\pi_j$. Thus the entries determine the map uniquely. These finite sums and distributivity belong to the preadditive structure of [def-sp-abelian]. Empty sums are zero, and the rank-zero identity is $1_0=0$, so the same calculation covers $m=0$ or $n=0$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, via the local coefficient models on strata: categorical finite-coproduct, entrywise matrix, and cokernel arguments abstracted from the scalar presentation"
+   }
+  },
+  {
+   "text": "Let $a=E_nH(p)$ and $b=qE_m$, both maps $H(X^m)\\to Y^n$. For every $i<n,j<m$, steps 2 and 3 and functoriality give $\\pi_{i,Y}aH(\\iota_{j,X})=eH(\\pi_{i,X}p\\iota_{j,X})=eH(p_{ij})=q_{ij}e=\\pi_{i,Y}q\\iota_{j,Y}e=\\pi_{i,Y}bH(\\iota_{j,X})$. The target projections detect equality: if all $\\pi_i s=\\pi_i t$, then $s=(\\sum_i\\iota_i\\pi_i)s=(\\sum_i\\iota_i\\pi_i)t=t$. Hence $aH(\\iota_{j,X})=bH(\\iota_{j,X})$ for every $j$; the source coproduct universal property now yields $a=b$. This also handles empty families: for $n=0$ the target identity is zero, and for $m=0$ the source is initial.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, via the local coefficient models on strata: categorical finite-coproduct, entrywise matrix, and cokernel arguments abstracted from the scalar presentation"
+   }
+  },
+  {
+   "text": "Write $K_p=\\operatorname{coker}(p)$, $K_q=\\operatorname{coker}(q)$ and $k=H(\\kappa_p)$. The cokernel universal property in the statement is precisely the coequalizer property for the two arrows $p,0:X^m\\rightrightarrows X^n$: a map $t$ coequalizes them exactly when $tp=0$. More explicitly, a cocone also has a leg from $X^m$, forced to be $tp=t0=0$, so that it is completely specified by this $t$. The parallel-pair indexing category has two objects and just two nonidentity arrows, hence is finite and small. Preservation of this colimit, together with $H(0)=0$, shows that $k$ is a cokernel of $H(p)$. In particular $kH(p)=H(\\kappa_pp)=0$, and any $t:H(X^n)\\to T$ killing $H(p)$ factors uniquely through $k$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit and the immediately following uniqueness observation; finite discrete and parallel-pair diagrams"
+   }
+  },
+  {
+   "text": "Step 5 gives $E_nH(p)=qE_m$. Therefore $(\\kappa_qE_n)H(p)=\\kappa_qqE_m=0$. The cokernel property of $k$ from step 6 gives a unique map $u:H(K_p)\\to K_q$ with $uk=\\kappa_qE_n$. Multiplying the square by the inverses of $E_n,E_m$ gives $E_n^{-1}q=H(p)E_m^{-1}$, so $(kE_n^{-1})q=kH(p)E_m^{-1}=0$. The defining cokernel property of $\\kappa_q$ gives a unique $v:K_q\\to H(K_p)$ with $v\\kappa_q=kE_n^{-1}$. These constructions use the cokernel universal properties already present in the statement; no existence or preservation theorem is being assumed.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, via the local coefficient models on strata: categorical finite-coproduct, entrywise matrix, and cokernel arguments abstracted from the scalar presentation"
+   }
+  },
+  {
+   "text": "Using step 7, $(vu)k=v\\kappa_qE_n=kE_n^{-1}E_n=k$ and $(uv)\\kappa_q=ukE_n^{-1}=\\kappa_qE_nE_n^{-1}=\\kappa_q$. Uniqueness in the two cokernel universal properties gives $vu=1_{H(K_p)}$ and $uv=1_{K_q}$. Thus $u$ is an isomorphism with inverse $v$, and both required projection equations hold. Any other isomorphism with the stated equation has the same underlying morphism by uniqueness of factorization through $k$, so $u$ is unique. All constructions used only finite discrete diagrams, the finite parallel-pair diagram, biproduct identities, and the hypotheses in the statement; the proof covers either zero rank and the zero functor.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, via the local coefficient models on strata: categorical finite-coproduct, entrywise matrix, and cokernel arguments abstracted from the scalar presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-preserving-colimits-additive",
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "Constructible complexes, 'via the local coefficient models on strata': explicit categorical proof of the finite-coproduct, matrix-entry, and cokernel calculations, using Stacks Tags 010N and 002F"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +165,45 @@
    "results": "14 hits: Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Mat.lean, Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean; Mathlib scope: CategoryTheory",
    "date": "2026-10-21",
    "verdict": "no match: mapBiproduct and PreservesCokernel.iso are components; Mat_.additiveObjIsoBiproduct_naturality concerns a functor out of Mat_, not the specified arbitrary H and transported object comparison. The full entrywise-conjugacy construction requires combining these comparisons and proving their compatibility, not one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBiproduct|PreservesCokernel.iso|π_iso_hom",
+   "results": "25 hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean; scope CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give individual biproduct or cokernel comparisons, or functors with domain Mat_, rather than the specified entrywise-conjugacy construction together with its cokernel equations; the required compatibility is proved in steps 2–8"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBiproduct\"",
+   "results": "5 hits: CategoryTheory.Functor.mapBiproduct, CategoryTheory.Functor.mapBiproduct_hom, CategoryTheory.Functor.mapBiproduct_inv, CategoryTheory.Limits.biproduct.mapBiproduct_hom_desc, CategoryTheory.Limits.biproduct.mapBiproduct_inv_map_desc",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give individual biproduct or cokernel comparisons, or functors with domain Mat_, rather than the specified entrywise-conjugacy construction together with its cokernel equations; the required compatibility is proved in steps 2–8"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite colimit preserving functor comparison conjugates arbitrary finite matrices and induces the compatible cokernel isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels, CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ, CategoryTheory.Limits.PreservesFiniteColimits.casesOn, CategoryTheory.Limits.PreservesCokernel.π_iso_hom, CategoryTheory.Limits.instIsIsoCokernelComparison, CategoryTheory.Limits.PreservesCokernel.π_iso_hom_assoc, CategoryTheory.Limits.PreservesCokernel.iso, CategoryTheory.Limits.preserves_cokernel_iso_comp_cokernel_map",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give individual biproduct or cokernel comparisons, or functors with domain Mat_, rather than the specified entrywise-conjugacy construction together with its cokernel equations; the required compatibility is proved in steps 2–8"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving finite colimits between abelian categories transports entrywise conjugate matrices on finite biproducts and their cokernel projections",
+   "results": "8 hits: CategoryTheory.Limits.biproduct.map_matrix, CategoryTheory.Mat_.additiveObjIsoBiproduct_hom_π, CategoryTheory.Mat_.lift, CategoryTheory.Limits.biproduct.matrix_map, CategoryTheory.Mat_.lift_map, CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality_assoc, CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality', CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give individual biproduct or cokernel comparisons, or functors with domain Mat_, rather than the specified entrywise-conjugacy construction together with its cokernel equations; the required compatibility is proved in steps 2–8"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating every entry of a rectangular matrix by an object isomorphism conjugates its biproduct morphism and gives an isomorphism of its cokernels",
+   "results": "8 hits: CategoryTheory.Biprod.gaussian', CategoryTheory.Limits.cokernelBiproductιIso, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv, CategoryTheory.Mat_.isoBiproductEmbedding, CategoryTheory.Limits.cokernelBiproductιIso_hom, CategoryTheory.Limits.cokernelBiprodInrIso",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits give individual biproduct or cokernel comparisons, or functors with domain Mat_, rather than the specified entrywise-conjugacy construction together with its cokernel equations; the required compatibility is proved in steps 2–8"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-scalar-matrix-inverse-image",
@@ -86,5 +223,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-colimit-matrix-cokernels",
+  "worker": "stage1",
+  "group": "Q57",
+  "summary": "Statement unchanged. Eight steps establish zero preservation using the existing additivity Mathlib leaf, construct the finite-coproduct comparisons, check projections and arbitrary matrix entries, and construct mutually inverse cokernel factorizations. All universal-property arguments are written explicitly, including zero ranks. No new nodes are needed.",
+  "blueprint": "Realizes the finite-presentation categorical argument underlying det-proper-base-change-unbounded-pullback, paragraph Constructible complexes, 'via the local coefficient models on strata'; respects the scalar-presentation route of its parent lem-sfb-scalar-matrix-inverse-image.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-5ff008cc1",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-5ff008cc1 (reviewer sub-agent of L); spot-checked: Q57 5ff008cc: the item lem-sfb-finite-colimit-matrix-cokernels is still unsplit in clones/live and side-live, and has no repair note. Compared with live, the statement, stmt_deps, blueprint and unit are unchanged; all 7 inherited searches are kept and 5 were added (leanfinder/loogle/grep/leansearch). No new nodes, no unit edits, no tool_uses. proof_deps equals the union of the step uses. Read all 8 steps. (1) Additivity via the Mathlib leaf lem-sfb-preserving-colimits-additive (rightExactFunctor_le_additiveFunctor, AdditiveFunctor.lean:330, re-read; Stacks 010N(1) homology.tex:1545); the hypotheses match, and H(0)=0 follows by cancellation. (2) Biproduct = coproduct over discrete Fin(r); E_r is the unique comparison with (Y^r, ι_j e), and r=0 gives initial objects. (3) Projection equation checked on the mapped injections, using H(0)=0. (4) Matrix existence and uniqueness via Σ ι p π, empty cases included. (5) π_i E_n H(p) H(ι_j) = eH(p_ij) = q_ij e = π_i q E_m H(ι_j); projections detect equality, then the source coproduct gives the square. (6) Cokernel = coequalizer of (p,0) over the finite parallel-pair category, preserved by H, so H(κ_p) is a cokernel of H(p). (7)-(8) u and v come from the two cokernel properties, with the inverse-square orientation checked; they are mutually inverse and u is unique. The elementary flags are justified. Route: the only off-definition citation is the Mathlib leaf; no cycle (the scalar-matrix parent is not cited). Tested m=n=0, m=0, n=0, r=0, the zero functor and ⊗Z/2 on Ab: the statement is true and needs no further hypotheses. Duplicate scan of the DAG (finite colimit/right exact × cokernel/biproduct, entrywise, mapBiproduct): no duplicate; lem-sp-exact-functor-preserves-homology needs exact functors. The Mathlib components (mapBiproduct, PreservesCokernel.iso, Mat_ naturality) do not make the item a one-line leaf. Blueprint from-chain det-proper-base-change-unbounded-pullback via [scalar-matrix, pullback-constant-model-constructible] is correct; proof_origin agent is correct (blueprint proof.md line 9 says only 'via the local coefficient models on strata'). No fixes."
  }
 }
