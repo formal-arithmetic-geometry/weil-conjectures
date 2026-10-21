@@ -21887,3 +21887,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:25 L: returned deliver/NJ/lem-sf-derived-completed-tensor-bilinearity (reviewer RETURN: L: independent stage-2 immutable head e9f6c5282de0: H13/H4: the (B) record for lem-weil-pbc-ringed-koszul-completion-ref)
 - 09:25 L: returned deliver/NB/lem-pur-completed-primitive-counit-comparison (reviewer RETURN: L: independent stage-2 immutable head ed0adcb47716: H3 (hollow pin): the tensor realization rT, and so beta_T, is pinned)
 - 09:26 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 09:27 L: returned deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer RETURN: Superseded (A6/A7/B10); the maths is sound. A stage-3 landing closed this item's Lean before the re-split note could app)
