@@ -66,6 +66,33 @@ theorem scalar_unit_equality_detection
       (Cocone.mk (U.obj (F.obj B)) t)))
     (f g : K ⟶ B) (hfg : F.map f = F.map g) :
     ∃ n : ℕ, a ^ n • f = a ^ n • g := by
-  sorry
+  have hunit : f ≫ t.app 0 = g ≫ t.app 0 := by
+    rw [hzero, ← adj.unit_naturality f, ← adj.unit_naturality g, hfg]
+  let c := (preadditiveCoyoneda.obj (op K)).mapCocone
+    (Cocone.mk (U.obj (F.obj B)) t)
+  let : PreservesFilteredColimitsOfSize.{0, 0} (forget AddCommGrpCat.{vA}) :=
+    preservesFilteredColimitsOfSize_shrink.{0, vA, 0, vA} _
+  have hc : IsColimit ((forget AddCommGrpCat).mapCocone c) :=
+    isColimitOfPreserves (forget AddCommGrpCat) hcolimit
+  obtain ⟨n, q, hq⟩ := (Types.FilteredColimit.isColimit_eq_iff' hc f g).mp hunit
+  have hmap (n : ℕ) (q : 0 ⟶ n) :
+      (Functor.ofSequence (fun _ : ℕ ↦ a • 𝟙 B)).map q = a ^ n • 𝟙 B := by
+    induction n with
+    | zero =>
+      have hq : q = 𝟙 0 := Subsingleton.elim _ _
+      rw [hq, Functor.map_id]
+      change 𝟙 B = a ^ 0 • 𝟙 B
+      simp
+    | succ n ih =>
+      have hq : q = homOfLE (Nat.zero_le n) ≫ homOfLE (Nat.le_succ n) :=
+        Subsingleton.elim _ _
+      rw [hq, Functor.map_comp, Functor.ofSequence_map_homOfLE_succ, ih]
+      change (a ^ n • 𝟙 B) ≫ (a • 𝟙 B) = a ^ (n + 1) • 𝟙 B
+      simp only [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.id_comp,
+        smul_smul, pow_succ, mul_comm]
+  refine ⟨n, ?_⟩
+  change f ≫ (Functor.ofSequence (fun _ : ℕ ↦ a • 𝟙 B)).map q =
+    g ≫ (Functor.ofSequence (fun _ : ℕ ↦ a • 𝟙 B)).map q at hq
+  simpa [hmap, Preadditive.comp_nsmul] using hq
 
 end CategoryTheory
