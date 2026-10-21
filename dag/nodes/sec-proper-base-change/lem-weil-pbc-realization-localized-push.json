@@ -18,55 +18,181 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-continuous-coefficients-immersion-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the coefficient identifications and their maps. By [lem-weil-pbc-continuous-coefficients-immersion-restriction], $A_V$ is the continuous integral ring and $E_V=A_V[1/\\varpi]$ for $V=T,U$. The canonical charts of [lem-weil-pbc-continuous-coefficient-realizations] identify these rings with the pulled-back condensed coefficient rings and intertwine the inclusion $A\\to E$. The scheme-naturality equation of [lem-weil-pbc-continuous-chart-scheme-naturality], together with the composition isomorphism of [lem-weil-pbc-profinite-point-pullback], identifies the coefficient structural maps with precomposition by the base-change projection. Thus the two coefficient inclusions and the two maps along $h$ commute. In particular the coefficient inverse-image isomorphisms required by [lem-weil-pbc-ring-sheaf-change-adjunction] are obtained by transporting the pulled-back condensed coefficient isomorphisms through these charts. Use its specified comparison $d:r_U Rh_{c,*}\\cong Rh_{*,A}r_T$; $r_V$ denotes exact coefficient restriction and reflects isomorphisms. The module encoding of [def-weil-pbc-continuous-coefficient-module-encoding] identifies the internal and sectionwise module actions. By [def-weil-pbc-continuous-coefficient-module-encoding] the integral and field encodings commute with restriction of scalars along the coefficient inclusion, so the isomorphism of [lem-weil-pbc-continuous-module-encoding-scalar-extension] may be taken to be the canonical comparison of two left adjoints of one right adjoint; that comparison carries the internal extension unit to the sectionwise unit $m\\mapsto1\\otimes m$. The encodings are exact equivalences, hence extend termwise to derived categories compatibly with derived scalar extension, restriction and these units. They also intertwine module direct image along $h$: both sides have underlying abelian sheaf $h_*$, with action through $\\eta_h$, resp. through precomposition, and these agree by the scheme-naturality equation above.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-chart-scheme-naturality",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, Lemma 6.8.2 and Remark 6.8.15; canonical chart and coefficient-change identifications"
+   }
+  },
+  {
+   "text": "The schemes $T,U$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their finite-type structure maps to $\\operatorname{Spec}k$. Consequently $h$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field and $\\ell=u\\varpi^e$ for a unit $u$ and an integer $e>0$: the exponent is positive because $|\\ell|<1$ and $|\\varpi|<1$. A DVR is Noetherian since every ideal is principal. Each quotient $P_n=A/\\varpi^n$ is finite by [lem-weil-valued-dvr-finite-quotients] and is perfect, with free resolution $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$. This verifies the adic hypotheses used below. In particular localizing at $\\ell$ and at $\\varpi$ gives the same coefficient algebra and the same scalar-extension unit. By [lem-weil-pbc-integral-stratified-perfect-characterization], the given $M$ belongs to the integral category of [def-weil-derived-complete-integral-detailed], and it has bounded cohomology. The assumed Noetherian, finite-dimensional and $\\ell$-invertible hypotheses are exactly those of that characterization.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.5 coefficient hypotheses and proof of Lemma 6.7.2"
+   }
+  },
+  {
+   "text": "The ambient $Rh_{*,A}$ uses the coefficient identification $c_h:h^{-1}A_U\\cong A_T$ of [lem-weil-pbc-profinite-coefficient-inverse-image], as [prop-weil-pbc-direct-image-limits] requires; it equals the chart-transported identification of step 1: both are adjoint to maps $A_U\\to h_*A_T$ whose $n$-th projections send a section to its precomposition with the base-change projection (reduction modulo $\\varpi^n$ of continuous $A$-valued functions commutes with precomposition), and a map into the limit $A_T$ is determined by its projections. Put $N=Rh_{*,A}M$, using ordinary ambient direct image. By [prop-weil-pbc-direct-image-limits], completeness of $M$ gives a canonical identification $N\\cong R\\varprojlim_n Rh_{*,A}(\\operatorname{Res}_nM_n)$, including the specified quotient-tower transition maps. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the two equal composites of ringed-topos morphisms from $(T,(P_n)_T)$ to $(U,A_U)$. Since coefficient restriction is exact, its derived functor is restriction itself, and this comparison identifies each term with $\\operatorname{Res}_n Rh_{*,n}M_n$, naturally in $n$. This is exactly the completed integral direct image of [def-weil-derived-direct-image], with its prescribed tower, rather than an unspecified isomorphism on each level. By [lem-sf-integral-direct-image-constructible] the latter object is in the derived-complete integral category on $U$: the hypotheses are finite-type schemes over the field $k$ and $\\ell$ invertible in $k$, with no properness or algebraic-closedness assumption. Finally [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this category with $\\mathcal I_U$, including compatible etale-origin witnesses. Thus $N\\in\\mathcal I_U$ and in particular $N$ is bounded below.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-derived-direct-image",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9 and proof of Lemma 6.7.2; derived ringed-topos composition also Stacks Tag 0D6E"
+   }
+  },
+  {
+   "text": "Write $\\eta_{V,K}:K\\to r_VF_VK$ for the scalar-extension unit. The adjunction in [lem-weil-pbc-realization-scalar-functor] defines $\\beta_{h,M}$ as the unique adjunct of\n$$N\\xrightarrow{Rh_{*,A}(\\eta_{T,M})}Rh_{*,A}r_TF_TM\\xrightarrow{d_{F_TM}^{-1}}r_URh_{c,*}F_TM.$$\nConsequently, setting $g=d_{F_TM}\\circ r_U(\\beta_{h,M})$, the unit-adjunct identity reads\n$$g\\circ\\eta_{U,N}=Rh_{*,A}(\\eta_{T,M}).$$\nThis is precisely the requested normalization; it uses the specified $d$ from [lem-weil-pbc-ring-sheaf-change-adjunction]. Naturality of the unit, $d$, and the adjunction bijection makes $\\beta$ natural in $M$.",
+   "uses": [
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; adjunction definition of the scalar-extension/direct-image comparison"
+   }
+  },
+  {
+   "text": "Use the $\\ell$-telescope of [def-weil-pbc-integral-localization-telescope]. Under step 1's encodings its vertex at a complex $K$ is $r_VF_VK$ and its $n$-th leg is $\\ell^{-n}\\eta_{V,K}$. This is the same scalar extension as $\\varpi$-localization by step 2, and the unit is the same actual inclusion. Apply [lem-weil-pbc-integral-localization-homology-colimit] on $U$ to $N$ (bounded below by step 3): for each $q$, the maps $H^q(\\ell^{-n}\\eta_{U,N})$ exhibit $H^q(r_UF_UN)$ as the colimit of $H^q(N)\\xrightarrow{\\ell}H^q(N)\\to\\cdots$. Apply [lem-weil-pbc-integral-localization-push-continuity] to $h$ and $M$: its hypotheses are qcqs from step 2 and the lower bound on $M$, also from step 2. It exhibits $H^q(Rh_{*,A}r_TF_TM)$ as the colimit of the image of the same telescope under $H^qRh_{*,A}$. Both diagrams are canonically $H^q(N)\\xrightarrow{\\ell}H^q(N)\\to\\cdots$, because the direct-image functor is additive and carries multiplication by the integer $\\ell$ to multiplication by $\\ell$.",
+   "uses": [
+    "def-weil-pbc-integral-localization-telescope",
+    "lem-weil-pbc-integral-localization-homology-colimit",
+    "lem-weil-pbc-integral-localization-push-continuity",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its common-lower-bound requirement; Bhatt–Scholze Lemma 6.8.2 for the localization telescope"
+   }
+  },
+  {
+   "text": "The map $g$ of step 4 commutes with all telescope legs, not only the zeroth. Indeed multiplication by $\\ell$ is invertible on $F_UN$ and $F_TM$, hence on the two restricted vertices and on $Rh_{*,A}r_TF_TM$. Any additive map commutes with multiplication by the integer $\\ell$, and therefore with its inverse when it is invertible. The unit equation of step 4 thus gives, for every $n\\geq0$,\n$$g\\circ(\\ell^{-n}\\eta_{U,N})=Rh_{*,A}(\\ell^{-n}\\eta_{T,M}).$$\nApply $H^q$. The two colimit cocones from step 5 now have $H^q(g)$ as a morphism with identity map on their common diagram. The universal property supplies an inverse morphism; each composite agrees with the identity on every leg and so is the identity. Therefore $H^q(g)$ is invertible for every $q$.",
+   "uses": [
+    "def-weil-pbc-integral-localization-telescope",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; equality of all scalar-localization legs"
+   }
+  },
+  {
+   "text": "To pass from these cohomology isomorphisms to an isomorphism in the derived category, choose a K-injective representative $I$ of the target using [prop-pur-kinjective-resolutions-exist]. By [lem-weil-pbc-kinjective-hom-derived], $g$ is represented by a chain map into $I$ from a representative of its source. Its cohomology maps are those of $g$, so this chain map is a quasi-isomorphism and becomes invertible by [def-weil-abstract-derived-category]. Thus $g$ is invertible. Since $d$ is an isomorphism, $r_U(\\beta)$ is invertible; reflection of isomorphisms in [lem-weil-pbc-ring-sheaf-change-adjunction] proves that $\\beta$ is invertible. The construction and the leg identities hold for every $M$ and its morphisms, giving the asserted natural comparison. All uses of direct-image continuity required qcqs only; no properness hypothesis entered.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; K-injective computation and localization at quasi-isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-integral-localization-telescope",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+  "lem-weil-pbc-integral-localization-homology-colimit",
+  "lem-weil-pbc-integral-localization-push-continuity",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-realization-scalar-functor",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-valued-dvr-finite-quotients",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.5.9 and 6.7.2, Lemma 6.8.2 and Remark 6.8.15, with Hemo–Richarz–Scholbach Lemma 5.3(1); explicit adjunction-unit normalization and all telescope legs written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "integralLocalization|localization.*[Pp]ush|[Pp]ush.*localization|proEtale",
-   "results": "Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Localization/BaseChange.lean; Mathlib/RingTheory/Kaehler/TensorProduct.lean; Mathlib/RingTheory/LocalIso.lean",
+   "query": "(localiz|scalar|rational).*(pushforward|directImage)|(pushforward|directImage).*(localiz|scalar|rational)",
+   "results": "{\"t\": \"2026-10-21T03:29:50Z\", \"tool\": \"grep\", \"query\": \"(localiz|scalar|rational).*(pushforward|directImage)|(pushforward|directImage).*(localiz|scalar|rational)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/GroupWithZero/Action/Defs.lean\", \"Mathlib/Algebra/GroupWithZero/Action/Defs.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\"], \"digest\": \"7c168ef1952cbad3\"}",
    "date": "2026-10-21",
-   "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived direct image of bounded constructible integral sheaf complexes commutes with localization at a uniformizer via the canonical localization unit",
-   "results": "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom; ModuleCat.Tilde.res_const",
-   "date": "2026-10-21",
-   "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\" \"pushforward\"",
-   "results": "0 hits; loogle: Function expected at\n  \"DerivedCategory\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"pushforward\"",
-   "date": "2026-10-21",
-   "verdict": "unavailable"
+   "verdict": "no match: retrieved algebraic localization, ordinary sheaf pushforward, or derived-category localization infrastructure, not the integral constructible continuous-coefficient statement with its specified comparison"
   },
   {
    "tool": "leansearch",
-   "query": "Direct image continuous integral sheaves rationalization localization cocone cohomology",
-   "results": "AlgebraicGeometry.LocallyRingedSpace.coproductCofan; AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit; TopCat.coconeOfCoconeForget; AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit; CategoryTheory.Sheaf.sheafifyCocone; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; CategoryTheory.Sheaf.sheafifyCocone_ι_app_val_assoc; AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected",
+   "query": "The canonical extension of scalars comparison for derived direct image is an isomorphism for integral constructible sheaves and l adic rationalization",
+   "results": "{\"t\": \"2026-10-21T03:29:51Z\", \"tool\": \"leansearch\", \"query\": \"The canonical extension of scalars comparison for derived direct image is an isomorphism for integral constructible sheaves and l adic rationalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.coe_extendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"f5d2bcdd25b68680\"}",
    "date": "2026-10-21",
-   "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Quasi compact quasi separated pro etale pushforward scalar extension integral coefficients to a finite l adic field natural isomorphism",
-   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.IsEtaleAt.comp; Algebra.Etale.exists_subalgebra_fg; Algebra.Etale.comp; Algebra.FormallyEtale.of_restrictScalars; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
-   "date": "2026-10-21",
-   "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
+   "verdict": "no match: retrieved algebraic localization, ordinary sheaf pushforward, or derived-category localization infrastructure, not the integral constructible continuous-coefficient statement with its specified comparison"
   },
   {
    "tool": "loogle",
-   "query": "\"DerivedCategory\", \"pushforward\"",
-   "results": "0 hits",
+   "query": "\"DerivedCategory\", \"localization\"",
+   "results": "{\"t\": \"2026-10-21T03:29:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"DerivedCategory.Plus.instIsLocalizationPlusQhQuasiIso\", \"DerivedCategory.Plus.instIsLocalizationPlusQQuasiIso\", \"DerivedCategory.Plus.instIsLocalizationPlusQhTrWSubcategoryAcyclic\"], \"digest\": \"17d1e93e0585c88d\"}",
    "date": "2026-10-21",
-   "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
+   "verdict": "no match: retrieved algebraic localization, ordinary sheaf pushforward, or derived-category localization infrastructure, not the integral constructible continuous-coefficient statement with its specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of bounded constructible adic sheaves commutes with inverting a uniformizer via the scalar extension unit",
+   "results": "{\"t\": \"2026-10-21T03:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pushforward of bounded constructible adic sheaves commutes with inverting a uniformizer via the scalar extension unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"BDeRhamPlus\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"SheafOfModules.pushforwardNatIso_inv\"], \"digest\": \"a9ca6dac0b9aaae5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved algebraic localization, ordinary sheaf pushforward, or derived-category localization infrastructure, not the integral constructible continuous-coefficient statement with its specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated morphism of schemes has derived direct image commuting with the filtered telescope of multiplication by a scalar on bounded below complexes",
+   "results": "{\"t\": \"2026-10-21T03:30:23Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact quasi separated morphism of schemes has derived direct image commuting with the filtered telescope of multiplication by a scalar on bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardComp_hom_app_val_app\"], \"digest\": \"2bddcfccb1c3b586\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved algebraic localization, ordinary sheaf pushforward, or derived-category localization infrastructure, not the integral constructible continuous-coefficient statement with its specified comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-condensed-e-realization",
@@ -84,5 +210,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-realization-localized-push",
+  "worker": "stage1",
+  "summary": "Reused existing integral characterization, completed direct-image finiteness, canonical coefficient charts and localization telescope lemmas. Proved ordinary/completed agreement with its tower maps, checked coefficient comparisons, and identified the specified beta on every localization leg before proving invertibility. No statement change and no new nodes.",
+  "blueprint": "Realizes the integral-lattice rationalization and direct-image compatibility obligation below thm-weil-pbc-finite-extension, through lem-weil-pbc-condensed-e-realization; steps 2–3 give integral stability, steps 1 and 4–7 give the actual normalized scalar comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic integral finite-type direct-image finiteness over the arbitrary field k, needed after identifying the ambient direct image with the completed tower; no proper base change is used."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic exact integral-category characterization, used to identify the two existing integral conventions and obtain boundedness; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic DVR structure of O_E (finite residue field, ell = u varpi^e) in step 2; algebra about the coefficient ring, no proper-base-change unit node states it."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective resolutions of module-sheaf complexes on a small site, used in step 7 to detect an isomorphism on cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-106d7b66b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-106d7b66b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item at 106d7b66 with 7 steps and no new nodes, every cited statement, and Bhatt–Scholze Lemma 6.7.2 and Remark 6.8.15. The source covers the non-proper case for finite type over a field (quasi-excellent, ℓ-coprime). A DFS over the whole DAG finds no cycle. The statement is unchanged. Its β is the F⊣r adjunct of d^{-1}∘Rh_*(η_T), which is the stated normalization. The coefficient categories are I_T and its raw ϖ-localization, with nothing silently identified. Steps 2, 4, 6 and 7 check out against their cited statements. Step 2: h is qcqs by qcqs-morphism-permanence (1); A is a DVR, ℓ=uϖ^e with e>0, P_n is perfect; M is bounded by characterization (iii). Step 4: the unit-adjunct identity holds. Step 6: g commutes with every leg ℓ^{-n}η because ℓ is invertible on both vertices. Step 7: K-injective representation plus reflection by r_U. Step 3 is correct after fix 2: direct-image-limits plus the ringed-topoi composition identify Rh_{*,A}M with the completed tower of def-weil-derived-direct-image, and lem-sf-integral-direct-image-constructible (any field K_0) then gives membership in I_U. Edge cases tested: T empty, M=0, h=id, an open immersion, ramified E with e>1, ℓ-torsion M (both sides 0), and non-algebraically-closed k. Two faults are repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-realization-localized-push.json. (1) C3, step 1: unit compatibility (internal unit to m↦1⊗m) came from the proof of lem-weil-pbc-continuous-module-encoding-scalar-extension, whose statement gives only Nonempty ≅. Step 1 now derives it from the encoding's commutation with restriction of scalars and the canonical comparison of left adjoints. It also states that the encodings intertwine derived scalar extension and h_* (by chart scheme-naturality), which step 5 needs because the continuity lemmas are stated for internal condensed modules. (2) Step 3: prop-weil-pbc-direct-image-limits uses the coefficient identification of lem-weil-pbc-profinite-coefficient-inverse-image, while d uses the chart-transported one. Step 3 now cites that node and shows the two agree: their projections are both precomposition. Tool uses: I accept lem-sf-integral-direct-image-constructible, which is a sec-smooth-purity chapter back edge with no node cycle. Maintainer note: its closure contains the proper-base-change theorems. I also added the generic lem-weil-l-adic-extension-integers-dvr and prop-pur-kinjective-resolutions-exist to split_report.tool_uses. The characterization lemma was declared as a tool but is in the item's own unit.; 1 file(s) fixed by the reviewer"
  }
 }
