@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-point-integral-sections-conservative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Integral equivalence, reduction part of step 8; Integral equivalence, completeness part of step 8",
+   "via": [
+    "lem-weil-point-fibre-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral point sections detect zero objects",
+ "statement": "Let D be a finite-field datum [def-weil-finite-field-fiber], let l be prime distinct from its characteristic, and let E/Q_l be finite. Use the integral constructible category and the finite and integral section functors of [def-weil-finite-coefficient-point]. Assume that the finite fibre functor is an equivalence at every positive reduction level. If K is an integral constructible complex and its integral section complex is zero, then K is zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Integral point sections detect zero objects; extracted from the point-fibre argument; lean/Sheaf/Paper/PointIntegralSectionsConservative.lean, pointIntegralSections_conservative"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Compare the small section-derived category and its standard large model using their exact homology comparison isomorphisms. Vanishing of integral sections thus holds in the model used by the normalized sections/reduction comparison. Derived tensor is triangulated and sends this zero section complex to zero. Apply the sections/reduction isomorphism to see that sections of every finite reduction vanish.",
+   "uses": [
+    "lem-pod-point-sections-derived-reduction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Integral equivalence, reduction part of step 8"
+   }
+  },
+  {
+   "text": "Finite fibre equivalence reflects zero. Thus each actual finite reduction of K is zero. Restricting coefficients preserves zero, and the universal property of the product makes the product of all restricted reductions zero. In the defining Roos completeness triangle for K both product vertices are zero, so its first vertex K is zero. No tensor resolution is assigned any finite amplitude in this argument.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Integral equivalence, completeness part of step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-point-sections-derived-reduction",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The corresponding integral, rational or common-stage part of the equivalence assertion, made explicit in the Lean docstring and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complexes with all derived finite reductions zero are zero by the Roos completeness triangle, and exact geometric point sections commute with finite reduction",
+   "results": "DerivedCategory.instHasZeroObject, ShortComplex.exact_iff_isZero_rightHomology and localization-Q declarations; no geometric-point conservativity theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of derived complete constructible sheaves on an algebraically closed point are conservative using finite reductions and a Roos completeness triangle",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit and other affine-scheme limit-section results, and CondensedMod.ofSheafCompHaus; none concerns derived complete constructible point complexes.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg: isZero₁_of_isZero₂₃; commShiftOfLocalization; ofComp_compatibility; equivTensorProduct_apply_mk; completedConstant|perfect.*Hom|lattice in Mathlib/CategoryTheory, Algebra/Homology, RingTheory and LinearAlgebra",
+   "results": "Pretriangulated.lean:357 supplies zero-object detection; Shift/Localization.lean:178 supplies generic shift descent; Shift/CommShift.lean:580 supplies compatibility; Localization/BaseChange.lean:83 supplies pure tensor representatives. Lattice hits concern ordered real/integer lattices; no declaration gives this completed-coefficient point assertion. The relevant generic declarations were read and used where applicable.",
+   "date": "2026-10-21",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "worker": "B5",
+  "summary": "A strict component of the point-fibre proof: Integral point sections detect zero objects. The statement retains the prescribed completed coefficients and canonical fibre functors.",
+  "blueprint": "The ancestor asserts four point equivalences. This lemma isolates only the indicated component. The unit has no realized proof steps to bypass.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Uses the stated generic Sections at the point commute with derived reduction modulo a power of the uniformizer result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Uses the stated generic Derived tensor over R with a complex of A-modules result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Uses the stated generic Bounded constructible derived-complete integral coefficients result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointIntegralSectionsConservative",
+  "file": "lean/Sheaf/Paper/PointIntegralSectionsConservative.lean",
+  "declaration": "WeilConjectures.pointIntegralSections_conservative",
+  "statement": "theorem pointIntegralSections_conservative\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (hf : ∀ (n : ℕ) (hn : 1 ≤ n), (pointFiniteFibre D l hl E n hn).IsEquivalence)\n    (K : sfIntegralConstructibleCategory l E (Spec (.of D.k)))\n    (hK : IsZero ((pointFibreIntegralAmbient D l E).obj K.obj)) : IsZero K.obj",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-point-rational-fibre-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Rational exactness, step 10",
+   "via": [
+    "lem-weil-point-fibre-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exactness of the normalized rational point fibre",
+ "statement": "Fix D, l and E as in [def-weil-finite-coefficient-point], with l different from the characteristic. The specified rational fibre, composed with the full-subcategory inclusion into the derived category of E-modules, admits an integer-shift comparison carrying every distinguished triangle of the raw rational constructible category [def-weil-rationalization-karoubi] to a distinguished triangle. No equivalence or essential-surjectivity assertion is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Exactness of the normalized rational point fibre; extracted from the point-fibre argument; lean/Sheaf/Paper/PointRationalFibreExact.lean, pointRationalFibre_exact"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-rationalization-karoubi",
+  "def-weil-point-fd-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Integral sections followed by flat scalar extension to E is the exact termwise functor defining the large rational fibre. Its derived functor commutes with shifts and preserves distinguished triangles. The canonical exact carrier lift on bounded finite-dimensional complexes is an equivalence. Its counit transports the comparison to the small integral-rational fibre, with the specified object and morphism normalization.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Rational exactness, step 10"
+   }
+  },
+  {
+   "text": "First prove that the bounded finite-dimensional target predicate is closed under isomorphisms and distinguished triangles: the homology sequence bounds the support by the union of the two outer supports and gives finite-dimensionality of the middle term. Equip the carrier-size descent with the shift structure induced by its counit with the exact size lift, and transport exactness by that counit. The pure-tensor formula with coefficient one identifies the restriction of the specified rational fibre along localization with the integral-rational fibre. The existing proved private rawLocalization helper in ScalarExtensionExactIntrinsic supplies the raw localization universal property; no new localization theorem is assumed. Descend its shift comparison through localization using the shift universal property. Its zero and addition equations descend by faithfulness of precomposition. Every distinguished rational triangle is isomorphic to the localization of an integral distinguished triangle. The factorization isomorphism commutes with shifts, hence identifies all three arrows of the corresponding image triangles; closure under isomorphisms proves exactness.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Rational exactness, step 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-coefficient-point",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-localization-flat",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The corresponding integral, rational or common-stage part of the equivalence assertion, made explicit in the Lean docstring and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The functor on a raw scalar localization induced by exact point sections commutes with shifts and preserves distinguished triangles",
+   "results": "Triangulated.Localization.isTriangulated_functor, Functor.commShiftOfLocalization and its iso, and exact mapDerivedCategory instances provide generic descent infrastructure; no factorization of the specified rational point fibre or its size-descent normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible derived category of a geometric point with l-adic coefficients is equivalent to finite dimensional complexes of vector spaces",
+   "results": "LocallyConstant condensed and light-condensed module comparison functors, without the specified raw rational fibre or its triangulation.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg: isZero₁_of_isZero₂₃; commShiftOfLocalization; ofComp_compatibility; equivTensorProduct_apply_mk; completedConstant|perfect.*Hom|lattice in Mathlib/CategoryTheory, Algebra/Homology, RingTheory and LinearAlgebra",
+   "results": "Pretriangulated.lean:357 supplies zero-object detection; Shift/Localization.lean:178 supplies generic shift descent; Shift/CommShift.lean:580 supplies compatibility; Localization/BaseChange.lean:83 supplies pure tensor representatives. Lattice hits concern ordered real/integer lattices; no declaration gives this completed-coefficient point assertion. The relevant generic declarations were read and used where applicable.",
+   "date": "2026-10-21",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "worker": "B5",
+  "summary": "A strict component of the point-fibre proof: Exactness of the normalized rational point fibre. The statement retains the prescribed completed coefficients and canonical fibre functors.",
+  "blueprint": "The ancestor asserts four point equivalences. This lemma isolates only the indicated component. The unit has no realized proof steps to bypass.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Uses the stated generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Uses the stated generic The l-adic field is the localization of its integers at a uniformizer result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Uses the stated generic A localization is a flat algebra result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Uses the stated generic Rationalization (scalar localization) result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Uses the stated generic The scalar localization of a linear triangulated category is triangulated result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRationalFibreExact",
+  "file": "lean/Sheaf/Paper/PointRationalFibreExact.lean",
+  "declaration": "WeilConjectures.pointRationalFibre_exact",
+  "statement": "theorem pointRationalFibre_exact\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∃ c : (pointRationalFibre D l hl E ⋙\n        (DerivedCategory.pointFiniteDimensional E).ι).CommShift ℤ,\n      ∀ T, T ∈ distTriang _ →\n        (@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

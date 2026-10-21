@@ -1,0 +1,272 @@
+{
+ "id": "lem-weil-point-integral-perfect-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Tags 093J and 093M, lemma-constant-exact and lemma-completion-flat; continuous coefficient identification as in Bhatt-Scholze Lemma 6.8.2; Tags 03EI and 093M; the displayed adjunction and finite-presentation calculation are written out from the sheafification and tensor definitions; Tag 015F, lemma-right-derived-exact-functor; termwise adjunction identities; homology compatibility from homology.tex Tag 010N; Tags 0AUW, lemma-dedekind-torsion-free-flat (3), and 066U, lemma-cohomology-perfect; Definition 6.5.1 and Propositions 6.6.11, 6.8.11(3), as specialized and compared in the cited characterization; sites-modules.tex Tag 093M for the explicit reductions",
+   "via": [
+    "lem-weil-point-fibre-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed perfect realization is fully faithful and left adjoint to point sections",
+ "statement": "Let D, l and E be as in [def-weil-finite-field-fiber] and [def-weil-finite-coefficient-point], with l different from the characteristic. There exists a functor from the bounded finitely generated derived-complete O_E module complexes of [def-weil-point-fg-complete-complexes] to integral constructible complexes on Spec(D.k), left adjoint to the specified integral fibre functor, whose adjunction unit is invertible at every object. No assertion about the counit on arbitrary integral constructible complexes is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Completed perfect realization is fully faithful and left adjoint to point sections; extracted from the point-fibre argument; lean/Sheaf/Paper/PointIntegralPerfectRealization.lean, pointIntegralPerfectRealization"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=\\mathcal O_E$, $\\pi=\\varpi_E$, $A_n=A/\\pi^n$ and $B=\\widehat{\\mathcal O}_{E,s}$. The coefficient DVR theorem makes $A$ a domain with every ideal principal, hence Noetherian, and with finite residue field. Choosing a finite set of residue representatives and successively writing $x=r_0+\\pi x_1$ shows that every element of $A_n$ is represented by $\\sum_{j=0}^{n-1}r_j\\pi^j$; thus $A_n$ is finite and Noetherian. The continuous-coefficient description, applied to the noetherian scheme $s$, identifies $\\Gamma(s,B)$ canonically with $C(\\{*\\},A)=A$, preserving constants and all quotient projections. The completed-constant reduction theorem gives flatness of $B$ over $\\underline A$ and $B\\otimes^L_{\\underline A}\\underline{A_n}\\simeq\\underline{A_n}$. Indeed the resolution $[A\\xrightarrow{\\pi^n}A]$ of $A_n$ becomes $[B\\xrightarrow{\\pi^n}B]$. Constant-sheaf exactness and this flatness make its negative cohomology zero. Exactness of sections therefore gives $\\Gamma(s,\\underline{A_n})=A_n$, with the canonical map from constant values as the identification. No identification of $B$ with the discrete constant sheaf $\\underline A$ is made.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J and 093M, lemma-constant-exact and lemma-completion-flat; continuous coefficient identification as in Bhatt-Scholze Lemma 6.8.2"
+   }
+  },
+  {
+   "text": "For either $(R,\\mathcal R)=(A_n,\\underline{A_n})$ or $(A,B)$ define $L_{\\mathcal R}(M)=\\mathcal R\\otimes_{\\underline R}\\underline M$ for an $R$-module $M$. Here constant sheaves and sheaf tensor products have exactly their existing definitions. There is an adjunction $L_{\\mathcal R}\\dashv\\Gamma(s,-)$: a sheaf map $u:L_{\\mathcal R}M\\to F$ gives $m\\mapsto u_s(1\\otimes m)$; conversely $t:M\\to F(s)$ gives, before sheafification, $b\\otimes m\\mapsto b\\,t(m)|_U$ on every object $U$, and then extends uniquely to the sheaf tensor product. These constructions are inverse and natural; the balancing relation is precisely $R$-linearity of $t$. Constant sheafification is exact by the arbitrary-site module-sheafification theorem. Thus $L_{\\underline{A_n}}$ is exact, and $L_B$ is exact by flatness in step 1. Both right adjoints are exact by the point-sections theorem. For any finitely presented $R$-module $M$, a presentation $R^a\\to R^b\\to M\\to0$ and exactness give $\\Gamma(s,L_{\\mathcal R}M)\\cong\\operatorname{coker}(R^a\\to R^b)=M$. On free generators this is $m\\mapsto1\\otimes m$, so the isomorphism is precisely the adjunction unit, not an arbitrary identification.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EI and 093M; the displayed adjunction and finite-presentation calculation are written out from the sheafification and tensor definitions"
+   }
+  },
+  {
+   "text": "Apply the exact-functor derived factorization to the two exact adjoints in step 2. They act termwise, commute with every shift and preserve distinguished triangles. Their termwise unit and counit are chain maps; naturality makes them commute with differentials, and the two triangle identities hold degree by degree. They descend through the localization, with the same identities, to an adjunction on the unbounded derived categories. Exact-functor preservation of homology identifies the cohomology of the unit $M\\to\\Gamma(s,L_{\\mathcal R}M)$ with the underived unit at $H^i(M)$. Consequently this derived unit is an isomorphism whenever all $H^i(M)$ are finitely presented, by the cohomological isomorphism criterion. In particular it is an isomorphism on $D^b_{\\mathrm{fin}}(A_n)$ and on $D^b_{\\mathrm{fg}}(A)$: finite modules over the finite Noetherian ring $A_n$, and finitely generated modules over the Noetherian ring $A$, are finitely presented. This argument uses the descended termwise unit and counit themselves, so their normalization is fixed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-weil-point-finite-cohomology-complexes",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise adjunction identities; homology compatibility from homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "Every bounded $A$-complex with finitely generated cohomology is perfect. To verify the needed hypotheses explicitly, take a finitely generated module $N$. The Noetherian finite-free-resolution theorem gives $A^{r_1}\\to A^{r_0}\\to N\\to0$. Its kernel $J\\subset A^{r_0}$ is finitely generated, being the image of the first finite free term, and is torsion free because $A$ is a domain and $A^{r_0}$ is torsion free. The finite torsion-free DVR theorem makes $J$ finite free. Thus $0\\to J\\to A^{r_0}\\to N\\to0$ is a bounded finite-free resolution. The perfect-cohomology assembly theorem now gives a bounded finite-projective representative $Q$ for every $M\\in D^b_{\\mathrm{fg}}(A)$. The argument includes $N=0$ and does not impose finite Tor dimension on modules over $A_n$; those rings may be singular.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AUW, lemma-dedekind-torsion-free-flat (3), and 066U, lemma-cohomology-perfect"
+   }
+  },
+  {
+   "text": "For any bounded finite-projective $A$-complex $Q$, $L_BQ=B\\otimes_{\\underline A}\\underline Q$ is in $D^b_c(s,A)$ by the integral stratified-perfect characterization, using its explicit comparison with the category of derived-complete integral coefficients in the statement. Its hypotheses hold: $s$ is noetherian, of dimension zero, and $\\ell$ is invertible in $k$ because $\\ell\\ne p$; use the single stratum $s$ and the identity trivializing cover. This is its condition (ii), with the specified completed sheaf $B$. In particular this assertion includes completeness and the reductions required in the present definition, rather than silently identifying two integral categories. The reduction calculation of step 1 also gives $L_BQ\\otimes_B^L\\underline{A_n}\\cong\\underline{Q\\otimes_A A_n}$: for a finite projective term take a direct summand of a finite free term and use the same quotient map. These reductions have bounded finite cohomology in the fixed term interval of $Q$, independent of $n$. Thus step 6 shows $L_B$ carries every object of $D^b_{\\mathrm{fg}}(A)$ into the integral source. Point-sections finiteness carries the integral source into $D^b_{\\mathrm{fg}}(A)$. The adjunction of step 3 therefore restricts to these full subcategories, and its unit is an isomorphism there.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-point-sections-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Propositions 6.6.11, 6.8.11(3), as specialized and compared in the cited characterization; sites-modules.tex Tag 093M for the explicit reductions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-point-sections-finiteness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The corresponding integral, rational or common-stage part of the equivalence assertion, made explicit in the Lean docstring and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completed constant sheaf realization of finitely generated perfect complexes is fully faithful left adjoint to global sections at an algebraically closed geometric point",
+   "results": "Sheaf.Γ, constantSheafΓAdj, constantSheafAdj and locally constant condensed-set full-faithfulness; no completed perfect realization with this integral constructible target.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed constant sheaf tensor realization of perfect complexes over the ring of integers is a fully faithful left adjoint to sections",
+   "results": "CondensedMod.LocallyConstant.fullyFaithfulFunctor and adjunction, LightCondMod versions and freeForgetAdjunction; these use discrete constant coefficients, not the completed algebra sheaf and the recorded integral constructible category.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg: isZero₁_of_isZero₂₃; commShiftOfLocalization; ofComp_compatibility; equivTensorProduct_apply_mk; completedConstant|perfect.*Hom|lattice in Mathlib/CategoryTheory, Algebra/Homology, RingTheory and LinearAlgebra",
+   "results": "Pretriangulated.lean:357 supplies zero-object detection; Shift/Localization.lean:178 supplies generic shift descent; Shift/CommShift.lean:580 supplies compatibility; Localization/BaseChange.lean:83 supplies pure tensor representatives. Lattice hits concern ordered real/integer lattices; no declaration gives this completed-coefficient point assertion. The relevant generic declarations were read and used where applicable.",
+   "date": "2026-10-21",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "worker": "B5",
+  "summary": "A strict component of the point-fibre proof: Completed perfect realization is fully faithful and left adjoint to point sections. The statement retains the prescribed completed coefficients and canonical fibre functors.",
+  "blueprint": "The ancestor asserts four point equivalences. This lemma isolates only the indicated component. The unit has no realized proof steps to bypass.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses the stated generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Uses the stated generic Continuous coefficient sheaves, localization and restriction to immersions result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Uses the stated generic Completed constant coefficients and finite reduction result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Uses the stated generic Constant section properties result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Uses the stated generic Constant sheaf on a site result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "why": "Uses the stated generic Presheaves of R-modules on a site: sectionwise kernels and cokernels, and exact sheafification result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Uses the stated generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Uses the stated generic Exact functors preserve kernels, cokernels, images, inverse images and homology result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Uses the stated generic Isomorphisms in the unbounded derived category detected by cohomology result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "Uses the stated generic Finite modules over Noetherian rings are finitely presented result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Uses the stated generic A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP) result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Uses the stated generic Finite torsion-free modules over a DVR are free result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sf-perfect-cohomology-assembly",
+    "why": "Uses the stated generic Bounded complexes with perfect cohomology result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Uses the stated generic Stratified perfect description of the integral completed category result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Uses the stated generic Bounded constructible derived-complete integral coefficients result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointIntegralPerfectRealization",
+  "file": "lean/Sheaf/Paper/PointIntegralPerfectRealization.lean",
+  "declaration": "WeilConjectures.pointIntegralPerfectRealization",
+  "statement": "theorem pointIntegralPerfectRealization\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∃ L : (DerivedCategory.pointFgComplete\n        (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))\n        (Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E)})).FullSubcategory ⥤\n        sfIntegralConstructibleCategory l E (Spec (.of D.k)),\n      ∃ a : L ⊣ pointIntegralFibre D l hl E, ∀ M, IsIso (a.unit.app M)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

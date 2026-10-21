@@ -18,51 +18,27 @@ public import Sheaf.Paper.PointFiniteCohomologyComplexes
 public import Sheaf.Paper.PointFgCompleteComplexes
 public import Sheaf.Paper.PointFdComplexes
 public import Sheaf.Paper.PointFdQbarCategory
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.PointQbarFibreShiftDescent
+import Sheaf.Paper.PointRationalSectionsHom
+import Sheaf.Paper.PointRationalSectionsLattice
+import Sheaf.Paper.PointRationalFibreExact
+import Mathlib.RingTheory.Localization.BaseChange
+import Sheaf.Paper.PointIntegralSectionsConservative
+import Sheaf.Paper.PointIntegralPerfectRealization
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
+import WeilConjectures.CategoryTheory.FilteredTwoColimitTransport
+import Mathlib.CategoryTheory.Localization.Adjunction
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Sheaf.Paper.PointSectionsFiniteness
-import WeilConjectures.RingTheory.FiniteFreeResolution
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Sheaf.CategoryTheory.DerivedCategory.PerfectCohomologyAssembly
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
-import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Sheaf.Paper.PointSectionsScalarExtension
-import Mathlib.Algebra.Colimit.Module
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Paper.CompletedScalarShift
-import Sheaf.Paper.PointSectionsTensorShift
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Exact equivalences given by the four geometric-point fibre functors
@@ -80,14 +56,254 @@ The fourth target uses its recorded common-stage distinguished-triangle predicat
 @[expose] public section
 
 set_option autoImplicit false
+set_option cleanup.letToHave false
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated TensorProduct
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
+
+section ExactAdjunction
+
+variable {C : Type*} {C' : Type*} [Category C] [Category C'] [Abelian C] [Abelian C']
+  [HasDerivedCategory C] [HasDerivedCategory C'] (L : C ⥤ C') (R : C' ⥤ C)
+  [L.Additive] [R.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+  [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+
+@[instance_reducible] private noncomputable def pointExactDerivedSquare :
+    CatCommSq (L.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q DerivedCategory.Q
+      L.mapDerivedCategory := ⟨L.mapDerivedCategoryFactors.symm⟩
+
+attribute [local instance] pointExactDerivedSquare
+
+private noncomputable def pointExactDerivedAdjunction (adj : L ⊣ R) :
+    L.mapDerivedCategory ⊣ R.mapDerivedCategory :=
+  (adj.mapHomologicalComplex (.up ℤ)).localization
+    DerivedCategory.Q (HomologicalComplex.quasiIso C (.up ℤ))
+    DerivedCategory.Q (HomologicalComplex.quasiIso C' (.up ℤ))
+    L.mapDerivedCategory R.mapDerivedCategory
+
+private theorem pointExactDerivedUnit_isIso (adj : L ⊣ R)
+    [∀ M, IsIso (adj.unit.app M)] (K : DerivedCategory C) :
+    IsIso ((pointExactDerivedAdjunction L R adj).unit.app K) := by
+  let e := DerivedCategory.Q.objObjPreimageIso K
+  rw [← NatTrans.isIso_app_iff_of_iso _ e]
+  dsimp only [pointExactDerivedAdjunction]
+  rw [Adjunction.localization_unit_app]
+  have : IsIso ((adj.mapHomologicalComplex (.up ℤ)).unit.app
+      (DerivedCategory.Q.objPreimage K)) :=
+      by
+        have (i : ℤ) : IsIso (((adj.mapHomologicalComplex (.up ℤ)).unit.app
+            (DerivedCategory.Q.objPreimage K)).f i) := by
+          change IsIso (adj.unit.app _)
+          infer_instance
+        exact HomologicalComplex.Hom.isIso_of_components _
+  infer_instance
+
+private theorem pointExactDerivedCounit_isIso (adj : L ⊣ R) (K : DerivedCategory C')
+    (h : ∀ i : ℤ, IsIso (adj.counit.app ((DerivedCategory.homologyFunctor C' i).obj K))) :
+    IsIso ((pointExactDerivedAdjunction L R adj).counit.app K) := by
+  let P := DerivedCategory.Q.objPreimage K
+  let e : DerivedCategory.Q.obj P ≅ K := DerivedCategory.Q.objObjPreimageIso K
+  rw [← NatTrans.isIso_app_iff_of_iso _ e]
+  dsimp only [pointExactDerivedAdjunction]
+  rw [Adjunction.localization_counit_app]
+  have hP : QuasiIso ((adj.mapHomologicalComplex (.up ℤ)).counit.app P) := by
+    rw [quasiIso_iff]
+    intro i
+    rw [quasiIsoAt_iff_isIso_homologyMap]
+    let ei : P.homology i ≅ (DerivedCategory.homologyFunctor C' i).obj K :=
+      ((DerivedCategory.homologyFunctorFactors C' i).app P).symm ≪≫
+        (DerivedCategory.homologyFunctor C' i).mapIso e
+    have : IsIso (adj.counit.app (P.sc i).homology) :=
+      (NatTrans.isIso_app_iff_of_iso adj.counit ei).mpr (h i)
+    change IsIso (ShortComplex.homologyMap ((P.sc i).mapNatTrans adj.counit))
+    rw [ShortComplex.homologyMap_mapNatTrans]
+    infer_instance
+  infer_instance
+
+end ExactAdjunction
+
+private theorem pointRestrictedRight_equivalence
+    {C C' : Type*} [Category C] [Category C'] {L : C ⥤ C'} {R : C' ⥤ C}
+    (adj : L ⊣ R) (P : ObjectProperty C') (Q : ObjectProperty C)
+    (F : P.FullSubcategory ⥤ Q.FullSubcategory) (e : F ⋙ Q.ι ≅ P.ι ⋙ R)
+    (hL : ∀ M : Q.FullSubcategory, P (L.obj M.obj))
+    (hu : ∀ M : Q.FullSubcategory, IsIso (adj.unit.app M.obj))
+    (hc : ∀ K : P.FullSubcategory, IsIso (adj.counit.app K.obj)) : F.IsEquivalence := by
+  let G := P.lift (Q.ι ⋙ L) hL
+  let a : G ⊣ F := adj.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι
+    (Iso.refl _) e.symm
+  have (M : Q.FullSubcategory) : IsIso (a.unit.app M) := by
+    rw [← isIso_iff_of_reflects_iso _ Q.ι]
+    dsimp only [a]
+    rw [adj.map_restrictFullyFaithful_unit_app]
+    have : IsIso (adj.unit.app (Q.ι.obj M)) := hu M
+    infer_instance
+  have (K : P.FullSubcategory) : IsIso (a.counit.app K) := by
+    rw [← isIso_iff_of_reflects_iso _ P.ι]
+    dsimp only [a]
+    rw [adj.map_restrictFullyFaithful_counit_app]
+    have : IsIso (adj.counit.app (P.ι.obj K)) := hc K
+    infer_instance
+  exact a.toEquivalence.isEquivalence_inverse
+
+section FiniteReconstruction
+
+variable (k B : Type u) [Field k] [IsAlgClosed k] [CommRing B] [Finite B]
+
+omit [IsAlgClosed k] [Finite B] in
+private theorem pointFiniteSheafifyProEt :
+    HasSheafify (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) := inferInstance
+
+attribute [local instance] pointFiniteSheafifyProEt
+
+omit [IsAlgClosed k] [Finite B] in
+private theorem pointFiniteSheafifyEtale :
+    HasSheafify (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) := inferInstance
+
+attribute [local instance] pointFiniteSheafifyEtale
+
+private noncomputable def pointFiniteConstant :
+    ModuleCat.{u + 1} (ULift.{u + 1, u} B) ⥤
+      proEtaleRingModules (Spec (.of k)) (proEtaleConstantRing (Spec (.of k)) B) :=
+  constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⋙
+    (proEtaleModuleEncoding (Spec (.of k)) B).inverse
+
+private noncomputable def pointFiniteConstantAdjunction :
+    pointFiniteConstant k B ⊣ pointFiniteSections k B :=
+  ((constantSheafAdj (ProEt.topology (Spec (.of k)))
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) (ProEt.isTerminalMkId _)).comp
+      (proEtaleModuleEncoding (Spec (.of k)) B).symm.toAdjunction)
+
+omit [Finite B] in
+private theorem pointFiniteConstant_full : (pointFiniteConstant k B).Full := by
+  let e := AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed
+    (ULift.{u + 1, u} B) (k := k)
+  have : (constantSheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).Full :=
+    inferInstanceAs e.functor.Full
+  have : (constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).Full :=
+    Functor.Full.of_iso (AlgebraicGeometry.ProEtale.comparisonUpperStarConstantSheafIso
+      (ULift.{u + 1, u} B) (Spec (.of k)))
+  exact inferInstanceAs (constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⋙
+    (proEtaleModuleEncoding (Spec (.of k)) B).inverse).Full
+
+attribute [local instance] pointFiniteConstant_full
+
+omit [Finite B] in
+private theorem pointFiniteConstant_faithful :
+    (pointFiniteConstant k B).Faithful := by
+  let e := AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed
+    (ULift.{u + 1, u} B) (k := k)
+  have : (constantSheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).Faithful :=
+    inferInstanceAs e.functor.Faithful
+  have : (constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).Faithful :=
+    Functor.Faithful.of_iso (AlgebraicGeometry.ProEtale.comparisonUpperStarConstantSheafIso
+      (ULift.{u + 1, u} B) (Spec (.of k)))
+  exact inferInstanceAs (constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⋙
+    (proEtaleModuleEncoding (Spec (.of k)) B).inverse).Faithful
+
+attribute [local instance] pointFiniteConstant_faithful
+
+omit [IsAlgClosed k] [Finite B] in
+private theorem pointFiniteConstant_limits :
+    PreservesFiniteLimits (pointFiniteConstant k B) := by
+  dsimp only [pointFiniteConstant]
+  infer_instance
+
+attribute [local instance] pointFiniteConstant_limits
+
+omit [IsAlgClosed k] [Finite B] in
+private theorem pointFiniteConstant_additive :
+    (pointFiniteConstant k B).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+attribute [local instance] pointFiniteConstant_additive
+
+omit [IsAlgClosed k] [Finite B] in
+private theorem pointFiniteConstant_colimits :
+    PreservesFiniteColimits (pointFiniteConstant k B) := by
+  let : PreservesColimitsOfSize.{0, 0} (pointFiniteConstant k B) :=
+    (pointFiniteConstantAdjunction k B).leftAdjoint_preservesColimits
+  infer_instance
+
+attribute [local instance] pointFiniteConstant_colimits
+
+private theorem pointFiniteConstant_counit (F :
+    proEtaleRingModules (Spec (.of k)) (proEtaleConstantRing (Spec (.of k)) B))
+    (hF : IsConstructibleProEtaleModuleSheaf (Spec (.of k)) B F) :
+    IsIso ((pointFiniteConstantAdjunction k B).counit.app F) := by
+  let E := proEtaleModuleEncoding (Spec (.of k)) B
+  have h := (proEtaleModuleRestriction_constructible_iff (Spec (.of k)) B F).mp hF
+  obtain ⟨G, _, ⟨eG⟩⟩ :=
+    AlgebraicGeometry.ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj
+      (ULift.{u + 1, u} B) h
+  let A := AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed
+    (ULift.{u + 1, u} B) (k := k)
+  let ν := AlgebraicGeometry.ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) (Spec (.of k))
+  let e : (constantSheaf (ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).obj (A.inverse.obj G) ≅ E.functor.obj F :=
+    ((AlgebraicGeometry.ProEtale.comparisonUpperStarConstantSheafIso
+      (ULift.{u + 1, u} B) (Spec (.of k))).app (A.inverse.obj G)).symm ≪≫
+        ν.mapIso (A.counitIso.app G) ≪≫ eG
+  apply (pointFiniteConstantAdjunction k B).isIso_counit_app_iff_mem_essImage.mpr
+  exact ⟨A.inverse.obj G, ⟨E.inverse.mapIso e ≪≫ E.unitIso.symm.app F⟩⟩
+
+omit [IsAlgClosed k] in
+private theorem pointFiniteConstant_constructible
+    (M : ModuleCat.{u + 1} (ULift.{u + 1, u} B)) [Finite M] :
+    IsConstructibleProEtaleModuleSheaf (Spec (.of k)) B
+      ((pointFiniteConstant k B).obj M) := by
+  let E := proEtaleModuleEncoding (Spec (.of k)) B
+  apply (proEtaleModuleRestriction_constructible_iff (Spec (.of k)) B _).mpr
+  have : Module.Finite (ULift.{u + 1, u} B) M := Module.Finite.of_finite
+  have := Scheme.isConstructibleSheaf_constantSheaf
+    (X := Spec (.of k)) M
+  let e : (AlgebraicGeometry.ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) (Spec (.of k))).obj
+      ((constantSheaf (Spec (.of k)).smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} B))).obj M) ≅
+        E.functor.obj ((pointFiniteConstant k B).obj M) :=
+    (AlgebraicGeometry.ProEtale.comparisonUpperStarConstantSheafIso
+      (ULift.{u + 1, u} B) (Spec (.of k))).app M ≪≫ (E.counitIso.app _).symm
+  exact AlgebraicGeometry.ProEtale.isConstructible_of_iso e
+    (AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj _)
+
+omit [IsAlgClosed k] in
+private theorem pointConstructible_of_iso
+    {F G : proEtaleRingModules (Spec (.of k)) (proEtaleConstantRing (Spec (.of k)) B)}
+    (e : F ≅ G) (hF : IsConstructibleProEtaleModuleSheaf (Spec (.of k)) B F) :
+    IsConstructibleProEtaleModuleSheaf (Spec (.of k)) B G := by
+  apply (proEtaleModuleRestriction_constructible_iff (Spec (.of k)) B G).mpr
+  exact AlgebraicGeometry.ProEtale.isConstructible_of_iso
+    ((proEtaleModuleRestriction (Spec (.of k)) B).mapIso e)
+    ((proEtaleModuleRestriction_constructible_iff (Spec (.of k)) B F).mp hF)
+
+end FiniteReconstruction
+
+attribute [local instance] pointFiniteSheafifyProEt
+attribute [local instance] pointFiniteSheafifyEtale
+attribute [local instance] pointFiniteConstant_full
+attribute [local instance] pointFiniteConstant_faithful
+attribute [local instance] pointFiniteConstant_limits
+attribute [local instance] pointFiniteConstant_additive
+attribute [local instance] pointFiniteConstant_colimits
+
 
 /-- Expose the existing inherited torsion-source triangulation, without choosing a
 new structure. Source: blueprint order 1454, bounded constructible subcategory;
@@ -112,232 +328,376 @@ noncomputable instance pointFibreTorsionSourceIsoClosed
   (proEtale_bounded_constructible_isTriangulated Y
     (Padic.coefficientExtensionRing l E n)).1
 
-/-- Each of the four specified fibre functors is an equivalence, commutes with all
-integer shifts and preserves distinguished triangles. The first three exactness
-clauses use the inherited structures through the full-subcategory inclusions.
-Source: blueprint order 1509; main-20261015 order 1868
+private theorem pointFiniteFibre_equivalence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (n : ℕ) (hn : 1 ≤ n) : (pointFiniteFibre D l hl E n hn).IsEquivalence := by
+  classical
+  let B := Padic.coefficientExtensionRing l E n
+  let : Finite B := Padic.finite_coefficientExtensionRing l E n hn
+  let : HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  let L := pointFiniteConstant D.k B
+  let R := pointFiniteSections D.k B
+  let adj := pointFiniteConstantAdjunction D.k B
+  apply pointRestrictedRight_equivalence (pointExactDerivedAdjunction L R adj)
+    (intrinsicFiniteTorsionConstructible l E n hn (Spec (.of D.k)))
+    (DerivedCategory.pointFiniteCohomology (ULift.{u + 1, u} B)) _ (Iso.refl _)
+  · intro M
+    refine ⟨?_, fun i ↦ ?_⟩
+    · obtain ⟨s, hs⟩ := M.property.1
+      apply s.finite_toSet.subset
+      intro i hi
+      by_contra hin
+      exact hi (L.isZero_homologyFunctor_mapDerivedCategory_obj (hs i hin))
+    · have := M.property.2 i
+      exact pointConstructible_of_iso D.k B
+        ((L.mapDerivedCategoryHomologyFunctorIso i).app M.obj)
+        (pointFiniteConstant_constructible D.k B _)
+  · intro M
+    have (N : ModuleCat.{u + 1} (ULift.{u + 1, u} B)) :
+        IsIso (adj.unit.app N) :=
+      inferInstance
+    exact pointExactDerivedUnit_isIso L R adj M.obj
+  · intro K
+    apply pointExactDerivedCounit_isIso L R adj K.obj
+    intro i
+    exact pointFiniteConstant_counit D.k B _ (K.property.2 i)
+
+private theorem pointIntegralFibre_equivalence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    (pointIntegralFibre D l hl E).IsEquivalence := by
+  classical
+  let : HasDerivedCategory.{u + 1}
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  let P := sfIntegralConstructible l E (Spec (.of D.k))
+  let F := pointIntegralFibre D l hl E
+  let G := P.ι ⋙ pointFibreIntegralAmbient D l E
+  have hc (K : P.FullSubcategory) (hK : IsZero (G.obj K)) : IsZero K := by
+    have h := pointIntegralSections_conservative D l hl E
+      (fun n hn ↦ pointFiniteFibre_equivalence D l hl E n hn) K hK
+    exact IsZero.of_full_of_faithful_of_isZero P.ι K h
+  have hG : G.ReflectsIsomorphisms := by
+    constructor
+    intro X Y f hf
+    obtain ⟨Z, g, h, hT⟩ := distinguished_cocone_triangle f
+    let T := Triangle.mk f g h
+    have hz : IsZero (G.obj Z) :=
+      Triangle.isZero₃_of_isIso₁ (G.mapTriangle.obj T) (G.map_distinguished T hT) hf
+    exact (Triangle.isZero₃_iff_isIso₁ T hT).mp (hc Z hz)
+  have hF : F.ReflectsIsomorphisms := by
+    constructor
+    intro X Y f hf
+    have : IsIso (G.map f) := by
+      change IsIso ((DerivedCategory.pointFgComplete _ _).ι.map (F.map f))
+      infer_instance
+    exact isIso_of_reflects_iso f G
+  obtain ⟨L, a, hu⟩ := pointIntegralPerfectRealization D l hl E
+  have : ∀ M, IsIso (a.unit.app M) := hu
+  have : L.Full := a.full_L_of_isSplitEpi_unit_app
+  have : L.Faithful := a.faithful_L_of_mono_unit_app
+  have : ∀ K, IsIso (a.counit.app K) := by
+    intro K
+    apply isIso_of_reflects_iso _ F
+  exact a.toEquivalence.isEquivalence_inverse
+
+
+private theorem pointTensor_eq_tmul {R : Type*} [CommRing R] (p : R)
+    {M : Type*} [AddCommGroup M] [Module R M]
+    (t : Localization.Away p ⊗[R] M) : ∃ a m, t = a ⊗ₜ[R] m := by
+  let e := LocalizedModule.equivTensorProduct (Submonoid.powers p) M
+  obtain ⟨y, rfl⟩ := e.surjective t
+  induction y using LocalizedModule.induction_on with
+  | _ m q =>
+    exact ⟨Localization.mk 1 q, m,
+      LocalizedModule.equivTensorProduct_apply_mk (Submonoid.powers p) m q⟩
+
+private theorem pointFullSubcategory_heq
+    {C : Type*} [Category C] {P : ObjectProperty C}
+    {X Y X' Y' : P.FullSubcategory} (hX : X = X') (hY : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (h : HEq f.hom g.hom) : HEq f g := by
+  subst X'
+  subst Y'
+  exact heq_of_eq (ObjectProperty.hom_ext P (eq_of_heq h))
+
+private theorem pointCopyObj_map
+    {C : Type*} [Category C] {D : Type*} [Category D] (F : C ⥤ D)
+    (φ : C → D) (hφ : ∀ X, F.obj X = φ X) {X Y : C} (f : X ⟶ Y)
+    (g : φ X ⟶ φ Y) (h : HEq (F.map f) g) :
+    (F.copyObj φ (fun X ↦ eqToIso (hφ X))).map f = g := by
+  have hh := (conj_eqToHom_iff_heq _ _ (hφ X) (hφ Y)).mpr h
+  dsimp only [Functor.copyObj, eqToIso]
+  rw [hh]
+  simp [Category.assoc]
+
+private theorem pointRationalFibre_equivalence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    (pointRationalFibre D l hl E).IsEquivalence := by
+  classical
+  let F := pointRationalFibre D l hl E
+  let φ (X : sfRationalConstructibleCategory l E (Spec (.of D.k))) :=
+    (pointIntegralRationalFibre D l hl E).obj X.obj
+  have ho : ∀ X, F.obj X = φ X :=
+    (pointRationalFibre_existsUnique D l hl E).exists.choose_spec.1
+  let G := F.copyObj φ (fun X ↦ eqToIso (ho X))
+  have hi := pointIntegralFibre_equivalence D l hl E
+  choose e he using pointRationalSectionsHom D l hl E hi
+  have hm (X Y : sfRationalConstructibleCategory l E (Spec (.of D.k)))
+      (f : X ⟶ Y) : G.map f = e X.obj Y.obj f := by
+    obtain ⟨a, g, rfl⟩ := pointTensor_eq_tmul _ f
+    apply pointCopyObj_map F φ ho
+    apply pointFullSubcategory_heq (ho X) (ho Y)
+    exact ((pointRationalFibre_existsUnique D l hl E).exists.choose_spec.2
+      X.obj Y.obj g a).trans (heq_of_eq (he X.obj Y.obj a g).symm)
+  have : G.Full := by
+    constructor
+    intro X Y f
+    obtain ⟨g, rfl⟩ := (e X.obj Y.obj).surjective f
+    exact ⟨g, hm X Y g⟩
+  have : G.Faithful := by
+    constructor
+    intro X Y f g hfg
+    apply (e X.obj Y.obj).injective
+    simpa only [hm] using hfg
+  have : G.EssSurj := by
+    constructor
+    intro V
+    obtain ⟨K, hK⟩ := pointRationalSectionsLattice D l hl E hi V
+    exact ⟨⟨K⟩, hK⟩
+  have : G.IsEquivalence := ⟨inferInstance, inferInstance, inferInstance⟩
+  exact Functor.isEquivalence_of_iso (F.isoCopyObj φ (fun X ↦ eqToIso (ho X))).symm
+
+
+private theorem pointCommonStage_equivalence
+    {I : Type*} [Preorder I] [IsDirectedOrder I] {C : I → Type*}
+    [∀ i, Category (C i)] {V : Type*} [Category V]
+    (S : StageSystem C) (Φ : ∀ i, C i ⥤ V)
+    (β : ∀ {i j} (h : i ≤ j), S.T h ⋙ Φ j ≅ Φ i)
+    (hc : (CategoryCocone.mk S.T Φ β).IsFilteredTwoColimit)
+    (F : S.PairCategory ⥤ V) (ho : ∀ X, F.obj X = (Φ X.stage).obj X.obj)
+    (hm : ∀ (X Y : S.PairCategory) (i : I) (hx : X.stage ≤ i) (hy : Y.stage ≤ i)
+      (f : X.toStage hx ⟶ Y.toStage hy),
+      HEq (F.map (StageSystem.PairCategory.mkHom i hx hy f))
+        ((β hx).inv.app X.obj ≫ (Φ i).map f ≫ (β hy).hom.app Y.obj)) :
+    F.IsEquivalence := by
+  let G := F.copyObj (fun X ↦ (Φ X.stage).obj X.obj) (fun X ↦ eqToIso (ho X))
+  have hG (X Y : S.PairCategory) (i : I) (hx : X.stage ≤ i) (hy : Y.stage ≤ i)
+      (f : X.toStage hx ⟶ Y.toStage hy) :
+      G.map (StageSystem.PairCategory.mkHom i hx hy f) =
+        (β hx).inv.app X.obj ≫ (Φ i).map f ≫ (β hy).hom.app Y.obj := by
+    have h := (conj_eqToHom_iff_heq _ _ (ho X) (ho Y)).mpr (hm X Y i hx hy f)
+    dsimp only [G, Functor.copyObj, eqToIso]
+    rw [h]
+    simp [Category.assoc]
+  have : G.Full := by
+    constructor
+    intro X Y f
+    obtain ⟨i, hx, hy, g, hg⟩ := hc.homSurj X.stage Y.stage X.obj Y.obj f
+    exact ⟨StageSystem.PairCategory.mkHom i hx hy g, (hG X Y i hx hy g).trans hg.symm⟩
+  have : G.Faithful := by
+    constructor
+    intro X Y f g hfg
+    obtain ⟨i, -, hx, hy, hx', hy', u, v, rfl, rfl⟩ :=
+      StageSystem.PairCategory.exists_common_stage f g X.stage
+    rw [hG, hG] at hfg
+    have huv : (Φ i).map u = (Φ i).map v :=
+      (cancel_epi ((β hx).inv.app X.obj)).mp
+        ((cancel_mono ((β hy).hom.app Y.obj)).mp
+          (by simpa only [Category.assoc] using hfg))
+    obtain ⟨j, hij, hj⟩ := hc.homInj i _ _ u v huv
+    exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff u v).mpr ⟨j, hij, hj⟩
+  have : G.EssSurj := by
+    constructor
+    intro Z
+    obtain ⟨i, x, e⟩ := hc.essSurjObj Z
+    exact ⟨⟨i, x⟩, e⟩
+  have : G.IsEquivalence := ⟨inferInstance, inferInstance, inferInstance⟩
+  exact Functor.isEquivalence_of_iso
+    (F.isoCopyObj (fun X ↦ (Φ X.stage).obj X.obj) (fun X ↦ eqToIso (ho X))).symm
+
+private noncomputable def pointFdScalarIdentity (K : Type u) [Field K] :
+    DerivedCategory.pointFdScalarExtension (RingHom.id K) ≅
+      𝟭 (DerivedCategory.pointFiniteDimensional K).FullSubcategory :=
+  ((DerivedCategory.pointFiniteDimensional K).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (DerivedCategory.pointFiniteDimensional K).ι
+      (DerivedCategory.fieldScalarUnit K))
+
+private theorem pointFdScalarEquivalence {K L : Type u} [Field K] [Field L]
+    (e : K ≃+* L) : (DerivedCategory.pointFdScalarExtension e.toRingHom).IsEquivalence := by
+  let F := DerivedCategory.pointFdScalarExtension e.toRingHom
+  let G := DerivedCategory.pointFdScalarExtension e.symm.toRingHom
+  let α : F ⋙ G ≅ 𝟭 _ := pointFibreFdTensorTower _ _ ≪≫
+    eqToIso (congrArg DerivedCategory.pointFdScalarExtension
+      (show e.symm.toRingHom.comp e.toRingHom = RingHom.id K by ext; simp)) ≪≫
+        pointFdScalarIdentity K
+  let β : G ⋙ F ≅ 𝟭 _ := pointFibreFdTensorTower _ _ ≪≫
+    eqToIso (congrArg DerivedCategory.pointFdScalarExtension
+      (show e.toRingHom.comp e.symm.toRingHom = RingHom.id L by ext; simp)) ≪≫
+        pointFdScalarIdentity L
+  exact (CategoryTheory.Equivalence.mk F G α.symm β).isEquivalence_functor
+
+
+private theorem pointMapTriple_eq
+    {C V : Type*} [Category C] [Category V] (F : C ⥤ V)
+    {X₀ X₁ X₂ X₃ : C} {A B : V} (a : A ⟶ F.obj X₀)
+    (b : X₀ ⟶ X₁) (c : X₁ ⟶ X₂) (d : X₂ ⟶ X₃) (e : F.obj X₃ ⟶ B) :
+    a ≫ F.map (b ≫ c ≫ d) ≫ e = (a ≫ F.map b) ≫ F.map c ≫ (F.map d ≫ e) := by
+  simp only [Functor.map_comp, Category.assoc]
+
+private theorem pointTransportRepresentative_eq
+    {I : Type*} [Preorder I] {C C' : I → Type*}
+    [∀ i, Category (C i)] [∀ i, Category (C' i)] {V : Type*} [Category V]
+    (c : CategoryCocone C' V) (T : ∀ {i j : I}, i ≤ j → (C i ⥤ C j))
+    (F : ∀ i, C i ⥤ C' i)
+    (β : ∀ {i j : I} (h : i ≤ j), T h ⋙ F j ≅ F i ⋙ c.T h)
+    {i j k : I} (hx : i ≤ k) (hy : j ≤ k) (X : C i) (Y : C j)
+    (f : (T hx).obj X ⟶ (T hy).obj Y) :
+    ((c.transport T F β).iso hx).inv.app X ≫
+        ((c.transport T F β).Φ k).map f ≫ ((c.transport T F β).iso hy).hom.app Y =
+      ((c.iso hx).inv.app ((F i).obj X) ≫ (c.Φ k).map ((β hx).inv.app X)) ≫
+        (c.Φ k).map ((F k).map f) ≫
+        ((c.Φ k).map ((β hy).hom.app Y) ≫ (c.iso hy).hom.app ((F j).obj Y)) := by
+  rfl
+
+attribute [local irreducible] pointStageFibre pointStageFibreScalarIso pointQbarFibre
+  Functor.mapDerivedCategory DerivedCategory.pointFdQbarStageComp
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pointQbarRepresentative_eq
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (X Y : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
+    (i : Padic.FiniteCoefficientFields l Ω) (hx : X.stage ≤ i) (hy : Y.stage ≤ i)
+    (f : X.toStage hx ⟶ Y.toStage hy) :
+    pointQbarFibreRepresentative D l hl Ω X Y i hx hy f =
+      (((DerivedCategory.pointFdQbarStageComp l Ω hx).inv.app _ ≫
+        (DerivedCategory.pointFdQbarStage l Ω i).map
+          ((pointStageFibreScalarIso D l hl Ω _ _ hx).inv.app X.obj)) ≫
+        (DerivedCategory.pointFdQbarStage l Ω i).map ((pointStageFibre D l hl Ω i).map f) ≫
+        ((DerivedCategory.pointFdQbarStage l Ω i).map
+          ((pointStageFibreScalarIso D l hl Ω _ _ hy).hom.app Y.obj) ≫
+        (DerivedCategory.pointFdQbarStageComp l Ω hy).hom.app _)) := by
+  unfold pointQbarFibreRepresentative
+  exact pointMapTriple_eq (DerivedCategory.pointFdQbarStage l Ω i)
+    ((DerivedCategory.pointFdQbarStageComp l Ω hx).inv.app _)
+    ((pointStageFibreScalarIso D l hl Ω _ _ hx).inv.app X.obj)
+    ((pointStageFibre D l hl Ω i).map f)
+    ((pointStageFibreScalarIso D l hl Ω _ _ hy).hom.app Y.obj)
+    ((DerivedCategory.pointFdQbarStageComp l Ω hy).hom.app _)
+
+private noncomputable def pointQbarCocone
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] :
+    CategoryCocone (GeneralAlgebraicallyClosedCoefficients.Stage l Ω (Spec (.of D.k)))
+      (DerivedCategory.PointFdQbar l Ω) :=
+  (DerivedCategory.pointFdQbarCocone l Ω).transport
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).T
+    (pointStageFibre D l hl Ω) (fun {_ _} h ↦ pointStageFibreScalarIso D l hl Ω _ _ h)
+
+private theorem pointQbarCocone_colimit
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (hs : ∀ i, (pointStageFibre D l hl Ω i).IsEquivalence) :
+    (pointQbarCocone D l hl Ω).IsFilteredTwoColimit := by
+  have : ∀ i, (pointStageFibre D l hl Ω i).IsEquivalence := hs
+  exact (DerivedCategory.pointFdQbarCocone_isFilteredTwoColimit l Ω).transport
+
+private theorem pointQbarCocone_obj
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (X : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :
+    ((pointQbarCocone D l hl Ω).Φ X.stage).obj X.obj =
+      pointQbarFibreObj D l hl Ω X := rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pointQbarCocone_map
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (X Y : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
+    (i : Padic.FiniteCoefficientFields l Ω) (hx : X.stage ≤ i) (hy : Y.stage ≤ i)
+    (f : X.toStage hx ⟶ Y.toStage hy) :
+    HEq (pointQbarFibreRepresentative D l hl Ω X Y i hx hy f)
+      (((pointQbarCocone D l hl Ω).iso hx).inv.app X.obj ≫
+        ((pointQbarCocone D l hl Ω).Φ i).map f ≫
+        ((pointQbarCocone D l hl Ω).iso hy).hom.app Y.obj) := by
+  have ht := pointTransportRepresentative_eq (DerivedCategory.pointFdQbarCocone l Ω)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).T
+    (pointStageFibre D l hl Ω)
+    (fun {_ _} h ↦ pointStageFibreScalarIso D l hl Ω _ _ h) hx hy X.obj Y.obj f
+  have hr := pointQbarRepresentative_eq D l hl Ω X Y i hx hy f
+  exact (heq_of_eq hr).trans (heq_of_eq ht.symm)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pointQbarFormula_equivalence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (hstage : ∀ i, (pointStageFibre D l hl Ω i).IsEquivalence)
+    (F : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)) ⥤
+      DerivedCategory.PointFdQbar l Ω)
+    (ho : ∀ X, F.obj X = pointQbarFibreObj D l hl Ω X)
+    (hm : ∀ X Y i (hx : X.stage ≤ i) (hy : Y.stage ≤ i)
+      (f : X.toStage hx ⟶ Y.toStage hy),
+      HEq (F.map (StageSystem.PairCategory.mkHom i hx hy f))
+        (pointQbarFibreRepresentative D l hl Ω X Y i hx hy f)) :
+    F.IsEquivalence := by
+  apply pointCommonStage_equivalence
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k)))
+    (pointQbarCocone D l hl Ω).Φ (pointQbarCocone D l hl Ω).iso
+    (pointQbarCocone_colimit D l hl Ω hstage) F
+    (fun X ↦ (ho X).trans (pointQbarCocone_obj D l hl Ω X).symm)
+  intro X Y i hx hy f
+  exact (hm X Y i hx hy f).trans (pointQbarCocone_map D l hl Ω X Y i hx hy f)
+
+
+private theorem pointQbarFibre_equivalence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (hstage : ∀ i, (pointStageFibre D l hl Ω i).IsEquivalence) :
+    (pointQbarFibre D l hl Ω).IsEquivalence := by
+  unfold pointQbarFibre
+  exact pointQbarFormula_equivalence D l hl Ω hstage _
+    (pointQbarFibre_existsUnique D l hl Ω).exists.choose_spec.1
+    (pointQbarFibre_existsUnique D l hl Ω).exists.choose_spec.2
+
+
+/-- The four specified geometric-point fibres are exact equivalences.
+Source: blueprint order 1509; main-20261015 order 1868.
 (blueprint: lem-weil-point-fibre-equivalence).
 
-Proof:
-1. Write $A=\mathcal O_E$, $\pi=\varpi_E$, $A_n=A/\pi^n$ and $B=\widehat{\mathcal O}_{E,s}$. The
-coefficient DVR theorem makes $A$ a domain with every ideal principal, hence Noetherian, and
-with finite residue field. Choosing a finite set of residue representatives and successively
-writing $x=r_0+\pi x_1$ shows that every element of $A_n$ is represented by
-$\sum_{j=0}^{n-1}r_j\pi^j$; thus $A_n$ is finite and Noetherian. The continuous-coefficient
-description, applied to the noetherian scheme $s$, identifies $\Gamma(s,B)$ canonically with
-$C(\{*\},A)=A$, preserving constants and all quotient projections. The completed-constant
-reduction theorem gives flatness of $B$ over $\underline A$ and $B\otimes^L_{\underline
-A}\underline{A_n}\simeq\underline{A_n}$. Indeed the resolution $[A\xrightarrow{\pi^n}A]$ of
-$A_n$ becomes $[B\xrightarrow{\pi^n}B]$. Constant-sheaf exactness and this flatness make its
-negative cohomology zero. Exactness of sections therefore gives $\Gamma(s,\underline{A_n})=A_n$,
-with the canonical map from constant values as the identification. No identification of $B$ with
-the discrete constant sheaf $\underline A$ is made.
-Uses: lem-weil-l-adic-extension-integers-dvr,
-lem-weil-pbc-continuous-coefficients-immersion-restriction,
-lem-weil-pbc-completed-constant-sheaf-reduction,
-lem-weil-pbc-constant-module-section-properties, lem-weil-point-proetale-sections-exact.
+Proof: for finite coefficients the constant-module/sections adjunction descends
+termwise through derived localization. Finite constructible origin and the
+algebraically closed etale-point equivalence identify the counit on constructible
+cohomology; the constant functor is fully faithful, so the unit is invertible.
+Restriction therefore gives the specified finite fibre equivalence.
 
-2. For either $(R,\mathcal R)=(A_n,\underline{A_n})$ or $(A,B)$ define $L_{\mathcal
-R}(M)=\mathcal R\otimes_{\underline R}\underline M$ for an $R$-module $M$. Here constant sheaves
-and sheaf tensor products have exactly their existing definitions. There is an adjunction
-$L_{\mathcal R}\dashv\Gamma(s,-)$: a sheaf map $u:L_{\mathcal R}M\to F$ gives $m\mapsto
-u_s(1\otimes m)$; conversely $t:M\to F(s)$ gives, before sheafification, $b\otimes m\mapsto
-b\,t(m)|_U$ on every object $U$, and then extends uniquely to the sheaf tensor product. These
-constructions are inverse and natural; the balancing relation is precisely $R$-linearity of $t$.
-Constant sheafification is exact by the arbitrary-site module-sheafification theorem. Thus
-$L_{\underline{A_n}}$ is exact, and $L_B$ is exact by flatness in step 1. Both right adjoints
-are exact by the point-sections theorem. For any finitely presented $R$-module $M$, a
-presentation $R^a\to R^b\to M\to0$ and exactness give $\Gamma(s,L_{\mathcal
-R}M)\cong\operatorname{coker}(R^a\to R^b)=M$. On free generators this is $m\mapsto1\otimes m$,
-so the isomorphism is precisely the adjunction unit, not an arbitrary identification.
-Uses: def-weil-pbc-constant-sheaf, def-pur-sheaf-tensor-product,
-lem-weil-pbc-site-r-module-presheaf-sheafification-exact,
-lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-point-proetale-sections-exact.
+Integral sections are conservative: reduction commutes with sections, the finite
+fibres detect each zero reduction, and the completeness triangle detects the
+original zero object. The completed perfect-realization adjunction has invertible
+unit. The triangle identity and reflection of isomorphisms make its counit
+invertible as well.
 
-3. Apply the exact-functor derived factorization to the two exact adjoints in step 2. They act
-termwise, commute with every shift and preserve distinguished triangles. Their termwise unit and
-counit are chain maps; naturality makes them commute with differentials, and the two triangle
-identities hold degree by degree. They descend through the localization, with the same
-identities, to an adjunction on the unbounded derived categories. Exact-functor preservation of
-homology identifies the cohomology of the unit $M\to\Gamma(s,L_{\mathcal R}M)$ with the
-underived unit at $H^i(M)$. Consequently this derived unit is an isomorphism whenever all
-$H^i(M)$ are finitely presented, by the cohomological isomorphism criterion. In particular it is
-an isomorphism on $D^b_{\mathrm{fin}}(A_n)$ and on $D^b_{\mathrm{fg}}(A)$: finite modules over
-the finite Noetherian ring $A_n$, and finitely generated modules over the Noetherian ring $A$,
-are finitely presented. This argument uses the descended termwise unit and counit themselves, so
-their normalization is fixed.
-Uses: lem-weil-pbc-exact-functor-derived-factorization, lem-sp-exact-functor-preserves-homology,
-lem-weil-pbc-unbounded-derived-iso-cohomology,
-lem-sc-noetherian-finite-module-finite-presentation, def-weil-point-finite-cohomology-complexes,
-def-weil-point-fg-complete-complexes.
+The normalized rational Hom comparison identifies every morphism of the copied
+rational fibre: each localization tensor is a single pure tensor. The comparison
+is an additive isomorphism, giving full faithfulness. The integral lattice theorem
+gives essential surjectivity. Finite-stage fibres are rational fibres followed by
+scalar extension along the coefficient ring equivalence. Transport the target
+filtered two-colimit cocone along them. Its Hom-surjectivity, eventual
+Hom-injectivity and object-surjectivity give the common-stage equivalence, with
+exactly the representative formula defining the specified Qbar fibre.
 
-4. For a constructible $A_n$-module sheaf $F$ on $s_{\mathrm{proet}}$, finite-ring constructible
-origin gives $F\cong\nu_s^*G$ with $G$ constructible on $s_{\mathrm{et}}$. Every nonempty
-locally closed subscheme of $s$ is $s$, since a field has no nontrivial ideals and its spectrum
-has one point. Thus $G$ is finite locally constant. The algebraically closed etale-point theorem
-identifies $G$ naturally with the constant sheaf of $G(s)$; the same isomorphism respects
-addition and every scalar action, by its naturality in maps of underlying sheaves. Its identity
-stalk is $G(s)$, and the finite-locally-constant module-values theorem explicitly turns its
-finite constant-value trivializations into finite geometric stalks. Hence $G(s)$ is finite.
-Pullback $\nu_s^*$ carries constant module sheaves to constant module sheaves: both composites
-are left adjoint to sections, since sections of $\nu_{s,*}F$ are $F(s)$ by the
-comparison-morphism definition; equivalently their maps send each constant value to that same
-value. The finite comparison unit gives $G(s)\cong(\nu_s^*G)(s)=F(s)$. It follows that the
-canonical evaluation counit $\underline{F(s)}\to F$ is an isomorphism. Conversely a constant
-finite module sheaf is locally constant and has finite geometric stalks by the constant-stalk
-theorem, so is constructible. In particular sections detect zero sheaves within this
-constructible subcategory.
-Uses: lem-weil-pbc-finite-ring-constructible-sheaf-origin,
-def-weil-pbc-etale-constructible-sheaf, lem-weil-pbc-finite-locally-constant-module-values,
-lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant,
-def-weil-pbc-site-comparison-morphism, prop-weil-pbc-site-comparison-finite-level,
-def-weil-pbc-constant-sheaf, lem-weil-proetale-constant-sheaf-stalk.
-
-5. For $M\in D^b_{\mathrm{fin}}(A_n)$, exactness of $L_{\underline{A_n}}$ identifies its
-cohomology sheaves with the constant finite modules $\underline{H^i(M)}$; these vanish outside a
-finite interval and are constructible by step 4. Thus $L_{\underline{A_n}}M\in D^b_c(s,A_n)$.
-Conversely sections have the asserted target by point-sections finiteness. For $K\in
-D^b_c(s,A_n)$, the cohomology maps of the derived counit $L_{\underline{A_n}}\Gamma(s,K)\to K$
-are exactly the evaluation counits of its cohomology sheaves, by exact-functor homology
-compatibility. Step 4 makes them isomorphisms, and the derived isomorphism criterion makes this
-counit an isomorphism. Together with the unit in step 3 this proves the torsion equivalence. It
-also proves the detection statement used below: a bounded constructible torsion complex with
-zero section complex is zero. Its exactness and shift compatibility are already those of
-termwise sections in the point-sections theorem.
-Uses: def-weil-finite-torsion-constructibility, lem-weil-point-sections-finiteness,
-lem-sp-exact-functor-preserves-homology, lem-weil-pbc-unbounded-derived-iso-cohomology,
-lem-weil-point-proetale-sections-exact.
-
-6. Every bounded $A$-complex with finitely generated cohomology is perfect. To verify the needed
-hypotheses explicitly, take a finitely generated module $N$. The Noetherian
-finite-free-resolution theorem gives $A^{r_1}\to A^{r_0}\to N\to0$. Its kernel $J\subset
-A^{r_0}$ is finitely generated, being the image of the first finite free term, and is torsion
-free because $A$ is a domain and $A^{r_0}$ is torsion free. The finite torsion-free DVR theorem
-makes $J$ finite free. Thus $0\to J\to A^{r_0}\to N\to0$ is a bounded finite-free resolution.
-The perfect-cohomology assembly theorem now gives a bounded finite-projective representative $Q$
-for every $M\in D^b_{\mathrm{fg}}(A)$. The argument includes $N=0$ and does not impose finite
-Tor dimension on modules over $A_n$; those rings may be singular.
-Uses: lem-weil-l-adic-extension-integers-dvr, lem-weil-pbc-finite-free-resolution-noetherian,
-lem-sc-dvr-fg-torsionfree-free, lem-sf-perfect-cohomology-assembly,
-def-weil-point-fg-complete-complexes.
-
-7. For any bounded finite-projective $A$-complex $Q$, $L_BQ=B\otimes_{\underline A}\underline Q$
-is in $D^b_c(s,A)$ by the integral stratified-perfect characterization, using its explicit
-comparison with the category of derived-complete integral coefficients in the statement. Its
-hypotheses hold: $s$ is noetherian, of dimension zero, and $\ell$ is invertible in $k$ because
-$\ell\ne p$; use the single stratum $s$ and the identity trivializing cover. This is its
-condition (ii), with the specified completed sheaf $B$. In particular this assertion includes
-completeness and the reductions required in the present definition, rather than silently
-identifying two integral categories. The reduction calculation of step 1 also gives
-$L_BQ\otimes_B^L\underline{A_n}\cong\underline{Q\otimes_A A_n}$: for a finite projective term
-take a direct summand of a finite free term and use the same quotient map. These reductions have
-bounded finite cohomology in the fixed term interval of $Q$, independent of $n$. Thus step 6
-shows $L_B$ carries every object of $D^b_{\mathrm{fg}}(A)$ into the integral source.
-Point-sections finiteness carries the integral source into $D^b_{\mathrm{fg}}(A)$. The
-adjunction of step 3 therefore restricts to these full subcategories, and its unit is an
-isomorphism there.
-Uses: lem-weil-pbc-integral-stratified-perfect-characterization,
-lem-weil-pbc-completed-constant-sheaf-reduction, def-weil-derived-complete-integral-detailed,
-lem-weil-point-sections-finiteness.
-
-8. Sections are conservative on the integral source as well. If $C\in D^b_c(s,A)$ and
-$\Gamma(s,C)=0$, compute its $n$-th reduction using the finite free resolution
-$[B\xrightarrow{\pi^n}B]\to\underline{A_n}$ from step 1. Tensoring this resolution with a K-flat
-representative of $C$ gives the cone of multiplication by $\pi^n$; the K-flat property ensures
-that tensoring the resolution quasi-isomorphism remains a quasi-isomorphism. Hence, after
-restriction of scalars, $C\xrightarrow{\pi^n}C\to C_n\to C[1]$ is distinguished. Exact sections
-show $\Gamma(s,C_n)=0$. Its actual $A_n$-coefficient reduction is bounded constructible by the
-integral definition, so step 5 makes it zero (forgetting its scalar structure does not change
-its cohomology). All reductions of $C$ therefore vanish. Its derived-completeness Roos triangle
-is $C\to0\to0\to C[1]$, so $C=0$, for example by the long exact cohomology sequence and the
-cohomological isomorphism criterion. For arbitrary integral $K$, form the cone $C$ of the
-restricted counit $L_B\Gamma(s,K)\to K$. It is in the integral source by its
-triangulated-subcategory theorem. Applying sections makes this counit an isomorphism by the unit
-isomorphism and the adjunction triangle identity; thus $\Gamma(s,C)=0$. The preceding argument
-gives $C=0$, hence the counit is an isomorphism. This proves the integral equivalence, with the
-exactness and shift comparisons of sections.
-Uses: def-weil-integral-derived-reduction, lem-pc-kflat-resolution, def-pc-kflat-complex,
-lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-point-proetale-sections-exact,
-def-weil-derived-complete-integral-detailed, def-weil-derived-complete,
-lem-weil-integral-constructible-triangulated, lem-sf-derived-homology-long-exact,
-lem-weil-pbc-unbounded-derived-iso-cohomology.
-
-9. For the rational stage first check full faithfulness for the specified raw localization. Put
-$M=\Gamma(s,K)$, $N=\Gamma(s,K')$ for integral objects. The integral equivalence is $A$-linear:
-all its maps above are maps of $A$-modules and the section action is the canonical one. Thus it
-identifies $\operatorname{Hom}(K,K')$ with $\operatorname{Hom}_{D(A)}(M,N)$ as $A$-modules. Both
-$M,N$ are perfect by step 6. Apply perfect RHom base change to $A\to E$ and the first argument
-$M$. Here $E=A[1/\pi]$ by the uniformizer localization theorem and is flat by localization
-flatness. Consequently taking $H^0$ of that base-change isomorphism, using flat-tensor
-exactness, gives the canonical bijection
-$\operatorname{Hom}_{D(A)}(M,N)\otimes_AE\cong\operatorname{Hom}_{D(E)}(M\otimes_AE,N\otimes_AE)$.
-The identification $H^0(R\operatorname{Hom}(M,N))=\operatorname{Hom}_{D(A)}(M,N)$ is precisely
-the K-injective Hom-complex theorem applied on the one-object ringed site (and likewise for
-$E$). The base-change theorem specifies its map to be the scalar extension of the
-functor-induced Hom map; hence this bijection sends $f\otimes a$ to $a(f\otimes E)$, exactly the
-morphism map defining the rational fibre functor. The rationalization definition gives the
-left-hand Hom groups, so this proves full faithfulness without adjoining idempotents.
-Uses: def-weil-rationalization-karoubi, lem-weil-l-adic-integers-localization-uniformizer,
-lem-weil-pbc-localization-flat, lem-pc-base-change-rhom-perfect, lem-weil-pbc-flat-tensor-exact,
-def-pur-derived-internal-hom, lem-pur-rhom-into-kinjective-local,
-def-weil-finite-coefficient-point.
-
-10. For $V\in D^b_{\mathrm{fd}}(E)$ choose a representing complex. For each of its finitely many
-nonzero $H^i(V)$ choose a finite basis and lift each basis vector to a cycle in degree $i$. The
-basis theorem supplies these bases; the lifts exist by the definition of cohomology as cycles
-modulo boundaries. Sending the standard basis in degree $i$ to these cycles defines a chain map
-from the zero-differential bounded finite free complex $P_E=\bigoplus_iE^{d_i}[-i]$ to the
-representative of $V$. It induces the chosen isomorphism on every cohomology module, so is a
-quasi-isomorphism. Let $P_A=\bigoplus_iA^{d_i}[-i]$ with zero differential. Step 7 puts $L_BP_A$
-in the integral source, and step 3 identifies its sections with $P_A$; after rationalization its
-image is $P_E\cong V$. This proves essential surjectivity, including $V=0$ by the empty sum. The
-rational functor commutes with shifts and preserves distinguished triangles: sections does so,
-and flat tensoring with $E$ is an exact functor and hence has the exact derived factorization.
-Every distinguished triangle in the raw rationalization is isomorphic to an image of an integral
-distinguished triangle by its definition. Thus the specified rational fibre functor is an exact
-equivalence.
-Uses: def-weil-point-fd-complexes, lem-weil-pbc-vector-space-basis-through-vector,
-lem-weil-pbc-unbounded-derived-iso-cohomology, def-weil-rationalization-karoubi,
-lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-flat-tensor-exact.
-
-11. For source objects $(E,K)$ and $(E',K')$ in the common-stage category, a morphism is
-represented over a finite common field $L$. The scalar-extension comparison $\varphi_{L/E}$
-identifies its image under the fibre functor with conjugation by the canonical comparisons at
-$E$ and $E'$. At each common field $L$, Steps 9–10 give the rational fibre equivalence and hence
-a bijection on the represented Hom groups. The identity and three-field composition equations in
-the section scalar-extension theorem make these bijections compatible with all transition maps.
-Uses: lem-weil-point-sections-scalar-extension, def-weil-finite-coefficient-point.
-
-12. The directed-colimit statement [def-weil-directed-colimit-abelian-groups] gives
-representatives and equality after passage to a common later stage for exactly these
-abelian-group Hom colimits. A target representative lifts through the rational Hom bijection at
-its stage. If two images agree, they agree at a common later stage; compatibility from Step 11
-and injectivity at that stage make the original representatives agree there. Thus the
-Hom-colimit map is bijective. A target object $(E,V)$ has a preimage $(E,K)$ by Step 10 at the
-same field $E$. Hence the common-stage functor is fully faithful and essentially surjective.
-Uses: def-weil-directed-colimit-abelian-groups, def-weil-point-fd-qlbar-category,
-def-weil-algebraically-closed-coefficients.
-
-13. The section scalar-extension theorem defines
-$\varphi_{L/E,K}=(\Gamma(s,\chi_{L/E,K})\circ\theta_{L/E,K})^{-1}$. The completion comparison
-commutes with every integer shift by [lem-weil-point-completed-scalar-shift], and the
-sections-tensor comparison does so by [lem-weil-point-sections-tensor-shift]. Exact termwise
-sections preserves the first equality, so the composite and its inverse commute with the
-specified shifts. Tensoring with $L$ preserves that equality at the rational stage. Naturality
-and the scalar-extension theorem's identity and three-field equations make it compatible with
-the common-stage transition maps. Thus the common-stage fibre functor commutes with shifts.
-Uses: lem-weil-point-sections-scalar-extension, lem-weil-point-completed-scalar-shift,
-lem-weil-point-sections-tensor-shift, lem-weil-point-proetale-sections-exact.
-
-14. Finally, every distinguished source triangle in the common-stage category is represented at
-one finite stage. The rational fibre functor is exact at that stage by Step 10, and the scalar
-comparisons at the three vertices and the last shifted arrow are compatible by Step 13. Hence
-the image triangle is distinguished in the target common-stage category. This proves the fourth
-equivalence, with the exact shifts and triangles specified in the statement.
-Uses: def-weil-point-fd-qlbar-category, lem-weil-point-sections-scalar-extension,
-def-weil-algebraically-closed-coefficients, lem-weil-point-completed-scalar-shift,
-lem-weil-point-sections-tensor-shift.
--/
+Finite and integral exactness are inherited from termwise derived sections.
+Rational exactness descends through the actual raw scalar localization, using its
+coefficient-one factorization isomorphism and shift universal property. For Qbar,
+use the common-stage shift comparison and finite-stage exactness; every source
+distinguished triangle is isomorphic to a stage image. Applying the fibre and
+realization to that triangle isomorphism transports the stage witness, including
+its last arrow, to the required target distinguished-triangle predicate. -/
 theorem point_fibre_equivalence
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -365,6 +725,63 @@ theorem point_fibre_equivalence
       ∀ T, T ∈ distTriang _ →
         DerivedCategory.pointFdQbarDistinguished l Ω
           ((@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T)) := by
-  sorry
+  classical
+  have hfinite : (pointFiniteFibre D l hl E.val n hn).IsEquivalence :=
+    pointFiniteFibre_equivalence D l hl E.val n hn
+  have hintegral : (pointIntegralFibre D l hl E.val).IsEquivalence :=
+    pointIntegralFibre_equivalence D l hl E.val
+  have hrational : (pointRationalFibre D l hl E.val).IsEquivalence :=
+    pointRationalFibre_equivalence D l hl E.val
+  have hqbar : (pointQbarFibre D l hl Ω).IsEquivalence := by
+    apply pointQbarFibre_equivalence D l hl Ω
+    intro i
+    unfold pointStageFibre
+    have := pointRationalFibre_equivalence D l hl
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i)
+    have := pointFdScalarEquivalence
+      (Shrink.algEquiv ℚ_[l] i.val).toRingEquiv
+    infer_instance
+  refine ⟨hfinite, hintegral, hrational, hqbar, ?_, ?_, ?_, ?_⟩
+  · have : CategoryTheory.IsGrothendieckAbelian.{u + 1}
+        (ModuleCat.{u + 1} (ULift.{u + 1, u}
+          (Padic.coefficientExtensionRing l E.val n))) := inferInstance
+    let : HasDerivedCategory.{u + 1}
+        (ModuleCat.{u + 1} (ULift.{u + 1, u}
+          (Padic.coefficientExtensionRing l E.val n))) :=
+      HasDerivedCategory.ofIsGrothendieckAbelian _
+    let F := pointFiniteFibre D l hl E.val n hn ⋙
+      (DerivedCategory.pointFiniteCohomology
+        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.val n))).ι
+    have hF : F = (intrinsicFiniteTorsionConstructible l E.val n hn
+        (Spec (.of D.k))).ι ⋙
+        (pointFiniteSections D.k
+          (Padic.coefficientExtensionRing l E.val n)).mapDerivedCategory.{u + 2, u + 1} := rfl
+    rw [show (pointFiniteFibre D l hl E.val n hn ⋙ _) = _ from hF]
+    refine ⟨inferInstance, ?_⟩
+    exact Functor.map_distinguished _
+  · let : HasDerivedCategory.{u + 1}
+        (ModuleCat.{u + 1} (ULift.{u + 1, u}
+          (Padic.coefficientExtensionIntegers l E.val))) :=
+      HasDerivedCategory.ofIsGrothendieckAbelian _
+    let F := pointIntegralFibre D l hl E.val ⋙
+      (DerivedCategory.pointFgComplete
+        (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E.val))
+        (Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E.val)})).ι
+    have hF : F = (sfIntegralConstructible l E.val (Spec (.of D.k))).ι ⋙
+        pointFibreIntegralAmbient D l E.val := rfl
+    rw [show (pointIntegralFibre D l hl E.val ⋙ _) = _ from hF]
+    refine ⟨inferInstance, ?_⟩
+    exact Functor.map_distinguished _
+  · exact pointRationalFibre_exact D l hl E.val
+  · obtain ⟨c, hc⟩ := pointQbarFibre_shift_descent D l hl Ω
+    let := c
+    refine ⟨c, ?_⟩
+    intro T hT
+    obtain ⟨i, U, hU, ⟨e⟩⟩ :=
+      (GeneralAlgebraicallyClosedCoefficients.distinguished_iff T).mp hT
+    obtain ⟨j, V, hV, h₁, h₂, h₃, ⟨a⟩⟩ := hc i U hU
+    exact ⟨j, V, hV, h₁, h₂, h₃,
+      ⟨a ≪≫ (DerivedCategory.pointFdQbarRealization l Ω).mapTriangle.mapIso
+        ((pointQbarFibre D l hl Ω).mapTriangle.mapIso e.symm)⟩⟩
 
 end WeilConjectures

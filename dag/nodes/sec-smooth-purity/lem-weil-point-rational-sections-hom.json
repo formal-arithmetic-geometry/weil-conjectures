@@ -1,0 +1,207 @@
+{
+ "id": "lem-weil-point-rational-sections-hom",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Tags 0AUW, lemma-dedekind-torsion-free-flat (3), and 066U, lemma-cohomology-perfect; Tag 0A6A, lemma-base-change-RHom (1), with its preceding canonical-map construction; algebra.tex Tag 00HT",
+   "via": [
+    "lem-weil-point-fibre-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized rational Hom comparison for integral point sections",
+ "statement": "Fix D, l and E as in [def-weil-finite-coefficient-point], with l different from the characteristic, and suppose its specified integral fibre functor is an equivalence. For integral constructible objects K and M there is an additive isomorphism from O_E[1/varpi_E] tensor over O_E with Hom(K,M) to Hom of their specified integral-rational fibres. It sends a tensor f to sfRationalCoefficientEquiv(a) times the integral-rational fibre of f, as a morphism in the ambient derived category. The localization and rational fibre are exactly those of [def-weil-rationalization-karoubi] and [def-weil-finite-coefficient-point].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The normalized rational Hom comparison for integral point sections; extracted from the point-fibre argument; lean/Sheaf/Paper/PointRationalSectionsHom.lean, pointRationalSectionsHom"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Every bounded $A$-complex with finitely generated cohomology is perfect. To verify the needed hypotheses explicitly, take a finitely generated module $N$. The Noetherian finite-free-resolution theorem gives $A^{r_1}\\to A^{r_0}\\to N\\to0$. Its kernel $J\\subset A^{r_0}$ is finitely generated, being the image of the first finite free term, and is torsion free because $A$ is a domain and $A^{r_0}$ is torsion free. The finite torsion-free DVR theorem makes $J$ finite free. Thus $0\\to J\\to A^{r_0}\\to N\\to0$ is a bounded finite-free resolution. The perfect-cohomology assembly theorem now gives a bounded finite-projective representative $Q$ for every $M\\in D^b_{\\mathrm{fg}}(A)$. The argument includes $N=0$ and does not impose finite Tor dimension on modules over $A_n$; those rings may be singular.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AUW, lemma-dedekind-torsion-free-flat (3), and 066U, lemma-cohomology-perfect"
+   }
+  },
+  {
+   "text": "For the rational stage first check full faithfulness for the specified raw localization. Put $M=\\Gamma(s,K)$, $N=\\Gamma(s,K')$ for integral objects. The integral equivalence is $A$-linear: all its maps above are maps of $A$-modules and the section action is the canonical one. Thus it identifies $\\operatorname{Hom}(K,K')$ with $\\operatorname{Hom}_{D(A)}(M,N)$ as $A$-modules. Both $M,N$ are perfect by step 6. Apply perfect RHom base change to $A\\to E$ and the first argument $M$. Here $E=A[1/\\pi]$ by the uniformizer localization theorem and is flat by localization flatness. Consequently taking $H^0$ of that base-change isomorphism, using flat-tensor exactness, gives the canonical bijection $\\operatorname{Hom}_{D(A)}(M,N)\\otimes_AE\\cong\\operatorname{Hom}_{D(E)}(M\\otimes_AE,N\\otimes_AE)$. The identification $H^0(R\\operatorname{Hom}(M,N))=\\operatorname{Hom}_{D(A)}(M,N)$ is precisely the K-injective Hom-complex theorem applied on the one-object ringed site (and likewise for $E$). The base-change theorem specifies its map to be the scalar extension of the functor-induced Hom map; hence this bijection sends $f\\otimes a$ to $a(f\\otimes E)$, exactly the morphism map defining the rational fibre functor. The rationalization definition gives the left-hand Hom groups, so this proves full faithfulness without adjoining idempotents.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-into-kinjective-local",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom (1), with its preceding canonical-map construction; algebra.tex Tag 00HT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-into-kinjective-local",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The corresponding integral, rational or common-stage part of the equivalence assertion, made explicit in the Lean docstring and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For constructible complexes on an algebraically closed point, finite reductions detect zero in the derived complete category; completed constant perfect realization is fully faithful and rational sections have finite free lattices and exact scalar comparisons",
+   "results": "Condensed full-faithfulness, derived-zero and complex-limit declarations; no normalized rational Hom comparison for the specified point sections.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact tensor functor gives an isomorphism from localized derived Hom modules of perfect complexes over a discrete valuation ring to Hom after extending to its fraction field",
+   "results": "Functor.mapExactFunctor_smul, Abelian.Ext.mapExactFunctor_hom, instLinearDerivedCategoryMapDerivedCategory, ModuleCat.localizedModule_functor_map_exact and Localization.functor_linear_iff concern linearity or exactness; none gives the perfect derived Hom base-change isomorphism with the required normalization.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg: isZero₁_of_isZero₂₃; commShiftOfLocalization; ofComp_compatibility; equivTensorProduct_apply_mk; completedConstant|perfect.*Hom|lattice in Mathlib/CategoryTheory, Algebra/Homology, RingTheory and LinearAlgebra",
+   "results": "Pretriangulated.lean:357 supplies zero-object detection; Shift/Localization.lean:178 supplies generic shift descent; Shift/CommShift.lean:580 supplies compatibility; Localization/BaseChange.lean:83 supplies pure tensor representatives. Lattice hits concern ordered real/integer lattices; no declaration gives this completed-coefficient point assertion. The relevant generic declarations were read and used where applicable.",
+   "date": "2026-10-21",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "worker": "B5",
+  "summary": "A strict component of the point-fibre proof: The normalized rational Hom comparison for integral point sections. The statement retains the prescribed completed coefficients and canonical fibre functors.",
+  "blueprint": "The ancestor asserts four point equivalences. This lemma isolates only the indicated component. The unit has no realized proof steps to bypass.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses the stated generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Uses the stated generic A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP) result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Uses the stated generic Finite torsion-free modules over a DVR are free result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-sf-perfect-cohomology-assembly",
+    "why": "Uses the stated generic Bounded complexes with perfect cohomology result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Uses the stated generic Rationalization (scalar localization) result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Uses the stated generic The l-adic field is the localization of its integers at a uniformizer result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Uses the stated generic A localization is a flat algebra result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "Uses the stated generic RHom base change for a perfect complex result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Uses the stated generic Tensoring with a flat module preserves exact sequences result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Uses the stated generic Derived internal Hom on a ringed site result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "Uses the stated generic Hom into a K-injective complex computes localized derived morphisms result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRationalSectionsHom",
+  "file": "lean/Sheaf/Paper/PointRationalSectionsHom.lean",
+  "declaration": "WeilConjectures.pointRationalSectionsHom",
+  "statement": "theorem pointRationalSectionsHom\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (hi : (pointIntegralFibre D l hl E).IsEquivalence)\n    (K M : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :\n    ∃ e : (Localization.Away (Padic.coefficientExtensionUniformizer l E) ⊗[\n          Padic.coefficientExtensionIntegers l E] (K ⟶ M)) ≃+\n        ((pointIntegralRationalFibre D l hl E).obj K ⟶\n          (pointIntegralRationalFibre D l hl E).obj M),\n      ∀ (a : Localization.Away (Padic.coefficientExtensionUniformizer l E)) (f : K ⟶ M),\n        (e (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f)).hom =\n          (sfRationalCoefficientEquiv l E a) •\n            ((pointIntegralRationalFibre D l hl E).map f).hom",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

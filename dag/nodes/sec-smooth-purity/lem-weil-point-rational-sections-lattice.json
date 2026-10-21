@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-point-rational-sections-lattice",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Rational essential surjectivity, the lattice part of step 10",
+   "via": [
+    "lem-weil-point-fibre-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Every finite-dimensional point complex has an integral section lattice",
+ "statement": "Fix D, l and E as in [def-weil-finite-coefficient-point], with l different from the characteristic, and suppose the specified integral fibre is an equivalence. For each object V of the bounded finite-dimensional E-complex category [def-weil-point-fd-complexes], there is an integral constructible complex K whose specified integral-rational fibre is isomorphic to V. This is an object-existence assertion and contains no Hom comparison or rational functor full-faithfulness assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Every finite-dimensional point complex has an integral section lattice; extracted from the point-fibre argument; lean/Sheaf/Paper/PointRationalSectionsLattice.lean, pointRationalSectionsLattice"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fg-complete-complexes"
+ ],
+ "proof": [
+  {
+   "text": "For the finitely many nonzero cohomology spaces of V choose finite bases. Lift their vectors to cycles in a representative complex. The zero-differential bounded complex of the corresponding finite free E-spaces maps quasi-isomorphically to that representative. The same finite ranks define a bounded finite free O_E complex P. Completeness of O_E makes P derived complete; its cohomology is finitely generated with finite support. The integral equivalence therefore supplies an integral constructible K with integral sections isomorphic to P. Tensoring with E, and then the specified carrier-size descent counit, identifies its integral-rational fibre with V. Empty support gives the zero complex and the same construction works.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-point-fg-complete-complexes",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Rational essential surjectivity, the lattice part of step 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The corresponding integral, rational or common-stage part of the equivalence assertion, made explicit in the Lean docstring and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite dimensional vector spaces over a p-adic field has a bounded finite free lattice over its ring of integers",
+   "results": "ZLattice.module_free and Submodule.IsLattice.of_rank_le are real/integer lattice results, not integral models of derived field complexes.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded finite dimensional complex over a p-adic field has a bounded finite free lattice over its complete valuation ring",
+   "results": "PadicComplex, its rank-one valuation and field instances, spectralNorm.completeSpace and WithAbs.instFiniteDimensional; no bounded derived lattice theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg: isZero₁_of_isZero₂₃; commShiftOfLocalization; ofComp_compatibility; equivTensorProduct_apply_mk; completedConstant|perfect.*Hom|lattice in Mathlib/CategoryTheory, Algebra/Homology, RingTheory and LinearAlgebra",
+   "results": "Pretriangulated.lean:357 supplies zero-object detection; Shift/Localization.lean:178 supplies generic shift descent; Shift/CommShift.lean:580 supplies compatibility; Localization/BaseChange.lean:83 supplies pure tensor representatives. Lattice hits concern ordered real/integer lattices; no declaration gives this completed-coefficient point assertion. The relevant generic declarations were read and used where applicable.",
+   "date": "2026-10-21",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "date": "2026-10-21",
+  "group": "B5"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.PointFibreEquivalence",
+  "worker": "B5",
+  "summary": "A strict component of the point-fibre proof: Every finite-dimensional point complex has an integral section lattice. The statement retains the prescribed completed coefficients and canonical fibre functors.",
+  "blueprint": "The ancestor asserts four point equivalences. This lemma isolates only the indicated component. The unit has no realized proof steps to bypass.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-vector-space-basis-through-vector",
+    "why": "Uses the stated generic A nonzero vector lies in a basis result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses the stated generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field result, with the exact coefficient/site objects specified here; the current unit has no replacement result."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRationalSectionsLattice",
+  "file": "lean/Sheaf/Paper/PointRationalSectionsLattice.lean",
+  "declaration": "WeilConjectures.pointRationalSectionsLattice",
+  "statement": "theorem pointRationalSectionsLattice\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (hi : (pointIntegralFibre D l hl E).IsEquivalence)\n    (V : (DerivedCategory.pointFiniteDimensional E).FullSubcategory) :\n    ∃ K : sfIntegralConstructibleCategory l E (Spec (.of D.k)),\n      Nonempty ((pointIntegralRationalFibre D l hl E).obj K ≅ V)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T110935-L-3828189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
