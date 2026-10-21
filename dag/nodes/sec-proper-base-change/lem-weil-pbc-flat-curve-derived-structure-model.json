@@ -23,9 +23,72 @@
   "def-sc-finite-locally-free-sheaf",
   "def-pc-derived-module-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-rf-perfect-base-change] to $\\mathcal G=\\mathcal O_X$. This module has the one-element presentation with no relations, and is flat over $S$ by the assumed flatness of $f$. Thus $K=Rf_*(\\mathcal O_X[0])$ is perfect. Moreover, for every $g:T\\to S$ its canonical module base-change map is invertible. The ordinary tensor pullback of $\\mathcal O_X$ is $\\mathcal O_{X_T}$: multiplication identifies $\\mathcal O_{X_T}\\otimes_{g_X^{-1}\\mathcal O_X}g_X^{-1}\\mathcal O_X$ with $\\mathcal O_{X_T}$. Consequently the map in that lemma is precisely $\\delta_g$ of the statement. Also [lem-sc-perfect-qcoherent] gives quasi-coherence of every $H^i(K)$, in particular of $E=H^1(K)$.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B91, lemma-flat-proper-perfect-direct-image-general (2); its specialization in the proof of Tag 0GKA"
+   }
+  },
+  {
+   "text": "Properness makes $f$ quasi-compact and separated. Apply [lem-sc-flat-derived-structure-unit] to obtain a map $a:\\mathcal O_S[0]\\to K$ whose degree-zero map is the structural map and whose residue pullbacks have zero negative cohomology. At every $s$, the assumed bijection $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$ makes $H^0(Li_s^*a)$ invertible. Step 1 makes $K$ perfect with quasi-coherent cohomology. Therefore [lem-sc-perfect-degree-zero-fibre-criterion], applied to this $a$, shows that $H^0(a)$ is invertible and supplies an open cover on which $K\\cong\\mathcal O_S[0]\\oplus P$, with $P$ perfect of Tor-amplitude in $[1,\\infty)$. Under the canonical identification $H^0(K)=f_*\\mathcal O_X$, both $H^0(a)$ and the stated $H^0(u)$ are the structural function pullback; hence $H^0(u)$ is invertible. Only equality of their degree-zero maps is needed.",
+   "uses": [
+    "lem-sc-flat-derived-structure-unit",
+    "lem-sc-perfect-degree-zero-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E62, lemma-proper-flat-h0, proof; the initial local decomposition in Tag 0GKA"
+   }
+  },
+  {
+   "text": "For every $s\\in S$, properness includes finite type, so [lem-sfb-finite-type-composition-base-change](2) makes $X_s\\to\\operatorname{Spec}\\kappa(s)$ finite type. A field has only the ideals $0$ and the whole field, and its spectrum is a single point, so $\\operatorname{Spec}\\kappa(s)$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $X_s$ is Noetherian. Its dimension is at most one by hypothesis. The structure sheaf is quasi-coherent (on an affine open it is the sheaf associated to the ring itself). Thus [lem-sc-noetherian-cohomology-above-dimension] gives $H^i(X_s,\\mathcal O_{X_s})=0$ for $i>1$. Step 1, with $g=i_s$, identifies $H^i(Li_s^*K)$ with these groups: direct image to the one-point scheme $\\operatorname{Spec}\\kappa(s)$ is global sections, and its right derived functor is sheaf cohomology.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, lemma-genus-in-nodal-family-of-curves, proof: residue cohomology and Proposition 02UZ"
+   }
+  },
+  {
+   "text": "Work on an open of the decomposition in step 2, and fix $s$ there. Since $P$ has Tor-amplitude in $[1,\\infty)$, $H^i(Li_s^*P)=0$ for $i<1$. Pulling the direct sum of step 2 to $s$, its degree $i>1$ cohomology is $H^i(Li_s^*P)=H^i(Li_s^*K)=0$ by step 3, because the other summand is $\\kappa(s)[0]$. Hence the only possibly nonzero residue Betti number of $P$ is $d_1$. Apply [lem-sc-perfect-finite-free-residue-model] on this open. After shrinking around $s$, its finite free representative has zero terms in every degree other than one and term $\\mathcal O^{\\oplus d_1}$ in degree one. Its differentials are therefore zero. Its cohomology is zero outside degree one, and $H^1(P)$ on this neighbourhood is $\\mathcal O^{\\oplus d_1}$. The decomposition identifies $H^1(P)$ with $E$. These neighbourhoods cover $S$, so $E$ is finite locally free, $P\\cong E[-1]$ on each such neighbourhood, and $K\\cong\\mathcal O_S[0]\\oplus E[-1]$ there. Computing cohomology of this explicit complex gives $H^i(K)=0$ locally, hence globally, for $i\\notin\\{0,1\\}$.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, lemma-genus-in-nodal-family-of-curves, final proof paragraph; Tag 0BCD, more-algebra-lemma-lift-perfect-from-residue-field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-flat-derived-structure-unit",
+  "lem-sc-perfect-degree-zero-fibre-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-finite-free-residue-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0GKA, label lemma-genus-in-nodal-family-of-curves, proof; use Tag 0E62 with the explicitly assumed fibrewise constant functions rather than deducing them from nodal connected fibres."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +124,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {I : C}\\n  [CategoryTheory.Injective I] {L : CochainComplex C ℤ} {i : ℤ} (ι : (CochainComplex.singleFunctor C i).obj I ⟶ L)\\n  [L.IsStrictlyGE i] [QuasiIsoAt ι i], CategoryTheory.IsSplitMono ι\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with enough injectives. For an injective object $I \\\\in \\\\mathcal{C}$, a cochain complex $L$ strictly supported in degrees $\\\\geq i$, and a morphism $\\\\iota: I[ -i\"}\n  {\"name\": \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {P : C}\\n  [CategoryTheory.Projective P] {K : CochainComplex C ℤ} {i : ℤ} (π : K ⟶ (CochainComplex.singleFunctor C i).obj P)\\n  [K.IsStrictlyLE i] [QuasiIsoAt π i], CategoryTheory.IsSplitEpi π\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with enough projectives, $P$ a projective object in $\\\\mathcal{C}$, $K$ a cochain complex in $\\\\mathcal{C}$ strictly supported at index $i \\\\in \\\\mathbb{Z}$, and $\"}\n  {\"name\": \"CochainComplex.cocycleOfDegreewiseSplit\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) →\\n        ((n : ℤ) → (S.map (HomologicalComplex.eval C (ComplexShape.up ℤ) n)).Splitting) →\\n          CochainComplex.HomComplex.\", \"doc\": \"Given a short complex $ S $ of cochain complexes over $ \\\\mathbb{Z} $ equipped with degree-wise splittings $ \\\\sigma_n $, this cocycle in degree $ 1 $ of the homomorphism complex $ \\\\text{Hom}(S.X_3, S.X\"}\n  {\"name\": \"CochainComplex.homOfDegreewiseSplit\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) →\\n        ((n : ℤ) → (S.map (HomologicalComplex.eval C (ComplexShape.up ℤ) n)).Splitting) →\\n          (S.X₃ ⟶ (CategoryTheory.sh\", \"doc\": \"Given a short complex $ S $ of cochain complexes over $ \\\\mathbb{Z} $ equipped with degree-wise splittings $ \\\\sigma_n $, this constructs a chain map from $ S.X_3 $ to the shift $ S.X_1⟦1⟧ $ by converti\"}\n  {\"name\": \"CochainComplex.homOfDegreewiseSplit_f\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (S : CategoryTheory.ShortComplex (CochainComplex C ℤ))\\n  (σ : (n : ℤ) → (S.map (HomologicalComplex.eval C (ComplexShape.up ℤ) n)).Splitting) (n : ℤ),\\n  (CochainComplex.homOfDegreewiseSplit S σ).f n\", \"doc\": \"For each integer $ n $, the component of the chain map $ S.X_3 \\to S.X_1⟦1⟧ $ constructed from the degree-wise splitting $ \\\\sigma $ at degree $ n $ is equal to the morphism component of the associated \"}\n  {\"name\": \"Algebra.Extension.formallySmooth_iff_split_injection\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (P : Algebra.Extension R A)\\n  [Algebra.FormallySmooth R P.Ring], Algebra.FormallySmooth R A ↔ ∃ l, l ∘ₗ P.cotangentComplex = LinearMap.id\", \"doc\": \"An algebra extension $ A $ over a commutative ring $ R $ is formally smooth if and only if there exists an $ R $-linear map $ l $ such that the composition of $ l $ with the cotangent complex map $ \\\\k\"}\n  {\"name\": \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n        {K L : CochainComplex C ℤ} →\\n          (φ : K ⟶ L) →\\n            (n : ℤ) →\\n              ((CochainComplex.mappingCone.\", \"doc\": \"For each integer $ n $, this constructs a splitting of the short complex obtained by rotating the homotopy exact triangle associated to a morphism $ \\\\phi $ between cochain complexes. The splitting is \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits provide flatness, sections, or abstract complex splittings, not this geometric derived model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented morphism with one dimensional fibres and residue fields equal to fibre global functions the derived structure sheaf direct image splits locally as the structure sheaf plus a finite locally free module in degree one",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.residue_descResidueField, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.residue_descResidueField_assoc, Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme morphisms, flatness or abstract complex splittings, not the geometric derived structure model"
+  },
+  {
+   "tool": "grep",
+   "query": "(proper|flat).*(perfect|cohomology)|(higherDirectImage|rightDerived).*(locallyFree|finiteFree)",
+   "results": "4 hits: Mathlib/NumberTheory/Divisors.lean, Mathlib/Topology/MetricSpace/Perfect.lean, Mathlib/Topology/Separation/PerfectlyNormal.lean, Mathlib/Topology/Perfect.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme morphisms, flatness or abstract complex splittings, not the geometric derived structure model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat family of curves with fibrewise constant global functions has a two term locally free derived direct image of its structure sheaf",
+   "results": "8 hits: AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.casesOn",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme morphisms, flatness or abstract complex splittings, not the geometric derived structure model"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme morphisms, flatness or abstract complex splittings, not the geometric derived structure model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure complex of a proper flat family whose fibres have cohomology only in degrees zero and one and H0 equal to the residue field splits locally as the structure sheaf plus a vector bundle shifted by minus one",
+   "results": "8 hits: CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.homOfDegreewiseSplit_f, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern scheme morphisms, flatness or abstract complex splittings, not the geometric derived structure model"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
@@ -91,5 +189,64 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-curve-derived-structure-model",
+  "worker": "stage1",
+  "summary": "Realized the 0GKA perfect-complex argument in four steps, reusing the existing canonical module base-change theorem, the degree-zero fibre criterion, Noetherian fibre vanishing and the finite-free residue model. Checked the structural unit on H0, arbitrary nonflat base change, non-Noetherian bases and dimension-zero fibres. No statement changes or new nodes.",
+  "blueprint": "0GKV case (b) inside the classical torsion-constructibility input of thm-weil-pbc-direct-image-finiteness-proper: the 0GKA perfect structure complex, degree-zero unit, positive summand and one-dimensional-fibre residue model (item former steps 2 and 3).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Generic coherent module theorem supplying perfectness and the exact canonical derived module base-change isomorphism; the proper-base-change unit does not prove this coherent input."
+   },
+   {
+    "node": "lem-sc-perfect-qcoherent",
+    "why": "Generic property of perfect complexes needed for quasi-coherence and for the degree-zero criterion."
+   },
+   {
+    "node": "lem-sc-flat-derived-structure-unit",
+    "why": "Generic coherent structure-unit and residue comparison needed before applying the degree-zero criterion."
+   },
+   {
+    "node": "lem-sc-perfect-degree-zero-fibre-criterion",
+    "why": "Generic perfect-complex fibre criterion supplies the degree-zero structural isomorphism and positive summand, following the 0GKA route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic stability of finite type under arbitrary base change, used solely to verify the Noetherian hypothesis on fibres."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence theorem applies over the residue field, not over the arbitrary base S."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Zariski cohomological dimension bound used on the Noetherian fibres, exactly as in 0GKA."
+   },
+   {
+    "node": "lem-sc-perfect-finite-free-residue-model",
+    "why": "Generic 0BCD normal form of a perfect complex converts one-degree fibre cohomology into a local single finite free term."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-flat-derived-structure-unit",
+  "lem-sc-perfect-degree-zero-fibre-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-finite-free-residue-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-c9e7d9056",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-c9e7d9056 (reviewer sub-agent of L); spot-checked: I read the whole item. This is a zero-new-node split. The statement is byte-identical to the version Q05 created, and the item is still unsplit in live and side, so no other group has done it. Source: Stacks 0GKA, statement and proof, read in full. The 4 steps follow its proof exactly, with the nodal and connected hypotheses replaced by the facts actually used (proper flat finite presentation, kappa(s) = H^0 of the fibre, fibre dimension at most 1); nothing is weakened. Step 1: 0B91 (lem-pc-rf-perfect-base-change) applies to G = O_X, which is finitely presented and S-flat; it gives perfectness and the canonical def-pc-derived-module-base-change-map isomorphism for arbitrary g, and G_T = O_{X_T}. Step 2: the 0E62 unit lemma (f is quasi-compact separated flat) and the degree-zero criterion give H^0(a) iso and K = O_S + P locally, P of tor amplitude [1,inf). H^0(u) is invertible because H^0(a)e_1 = e_0 f# with e_i isomorphisms; the step's wording is slightly loose but the inference is valid. Step 3: the fibre is finite type over a Noetherian field spectrum, hence Noetherian; 02UZ with topological dimension at most 1 kills H^q for q > 1, and base change along i_s identifies these groups with H^i of the pulled-back complex. Step 4: only d_1 can be nonzero; the 0BCD residue model gives P = O^{d_1}[-1] locally, so E is finite locally free. Edge cases checked: empty base or fibre, X = S, P^1 and elliptic families, degree-2 etale cover excluded, disconnected base, non-flat g. No duplicate: the proper-flat-global-sections nodes give only f_*O = O_S. No SGA source. The tool_uses entries for 0B91, perfect quasi-coherence, the 0E62 unit and criterion, 02UZ and 0BCD are accepted as generic coherent inputs. Batch 5: in the closures of both flagged citations (degree-zero-fibre-criterion and finite-free-residue-model), the only pod or trf node is def-pod-ring-scalar-extension. It is a general definition of scalar extension, not part of the proof of either assumption, so both flags are accepted."
+ }
 }
