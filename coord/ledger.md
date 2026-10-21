@@ -22551,3 +22551,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: merged deliver/Q58/lem-sf-boundary-bounded-tensor-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:32 L: merged deliver/NX/lem-pur-exact-pullback-signed-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 13:32 L: merged deliver/Q110/lem-pur-origin-class-projective-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T13:32:49Z L: superseded stage-1 delivery NU/lem-sfb-tame-pair-proper-generators at 60b4a5b5e39c43d16ca244a6b3b1b34447d65433; current completion retained; packet archived at refs/superseded/NU/lem-sfb-tame-pair-proper-generators/60b4a5b5e39c43d16ca244a6b3b1b34447d65433; stale return retired.
