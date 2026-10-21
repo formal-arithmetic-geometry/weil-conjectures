@@ -16,9 +16,73 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a scheme morphism $f:Y\\to X$, put $A_Y=f^{-1}A$ and give the induced morphism of topoi the identity structural map $f^{-1}A\\to A_Y$. The transported module inverse image $F_f:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(A_Y)$ is exact by [lem-trf-geometric-inverse-image-exact]. Hence [lem-weil-pbc-exact-functor-derived-factorization] gives its unbounded derived functor by applying $F_f$ termwise, and [lem-weil-pbc-exact-functor-derived-functor] identifies this functor with $Lf^*$. We denote it by $f^{-1}$, consistently with the statement. By [lem-weil-pbc-exact-functor-complex-cohomology], for any complex representative of $E\\in D(\\operatorname{Mod}(A))$ and every integer $q$,\n$$H^q(f^{-1}E)\\cong f^{-1}H^q(E).$$\nThis holds for unbounded $E$, and $f^{-1}(M[0])=(f^{-1}M)[0]$ for any module sheaf $M$.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), with derived.tex Tag 015F (lemma-right-derived-exact-functor) and homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism of ringed topoi with source coefficient ring $f^{-1}A$. Its tensor comparison, together with step 1, gives, for every $A$-module sheaf $M$,\n$$f^{-1}(K\\otimes_A^{\\mathbf L}M[0])\\cong(f^{-1}K)\\otimes_{f^{-1}A}^{\\mathbf L}(f^{-1}M)[0].$$\nHere the theorem applies to arbitrary unbounded complexes and arbitrary sheaves of commutative rings on the chosen small sites. The structural ring map is the identity, so the pullback is precisely the transported inverse image of step 1; no flatness assertion about a change to a different coefficient ring is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), using Tag 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "For (i), fix an arbitrary $A$-module sheaf $M$ and $q\\notin[c,d]$, and set $F=H^q(K\\otimes_A^{\\mathbf L}M[0])$. For $u_i:V_i\\to X$, steps 1 and 2 identify $u_i^{-1}F$ with $H^q((u_i^{-1}K)\\otimes_{u_i^{-1}A}^{\\mathbf L}(u_i^{-1}M)[0])$, which vanishes by the assumed Tor bound. The abelian-sheaf clause of [lem-sfb-proetale-object-inverse-image-restriction] identifies the underlying $u_i^{-1}F$ with slice restriction $F|_{V_i}$; that clause applies to every abelian sheaf (one may instantiate its unused constant ring parameter with $\\mathbf Z$), without restricting the coefficient sheaf $A$. For each site object $W$, the pullbacks $W\\times_XV_i\\to W$ form a covering by the pullback axiom for the site [def-weil-pbc-proetale-site], and their domains map to the $V_i$. Thus the family of slice restrictions satisfies the covering-sieve hypothesis of [lem-sfb-sheaf-cover-local-isomorphism]. Apply that lemma to the underlying abelian-sheaf map $F\\to0$: every restriction is an isomorphism since $F|_{V_i}=0$. It follows that $F=0$ as an abelian sheaf and therefore as an $A$-module sheaf (the zero abelian sheaf has a unique module action). Since $M$ and $q$ were arbitrary, this proves (i).",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CE (lemma-localize-given-products) and 04TQ (lemma-glue-maps); covering base change in the site axioms"
+   }
+  },
+  {
+   "text": "For (ii), fix any $A$-module sheaf $M$ and $q\\notin[c,d]$ and again put $F=H^q(K\\otimes_A^{\\mathbf L}M[0])$. Steps 1 and 2, first with $f=i$ and then with $f=j$, give\n$$i^{-1}F\\cong H^q((i^{-1}K)\\otimes_{i^{-1}A}^{\\mathbf L}(i^{-1}M)[0])=0,\\qquad\nj^{-1}F\\cong H^q((j^{-1}K)\\otimes_{j^{-1}A}^{\\mathbf L}(j^{-1}M)[0])=0.$$\nThe equalities are exactly the two assumed Tor bounds, tested on the module sheaves $i^{-1}M$ and $j^{-1}M$. Now [lem-exc-open-closed-detection] applies to $F$ with $R_X=A$, $R_Z=i^{-1}A$, $R_U=j^{-1}A$ and the identity coefficient identifications. Its hypotheses are the given closed immersion and complementary quasi-compact open immersion; it allows an arbitrary sheaf of commutative rings. It gives $F=0$. Varying $M$ and $q$ proves (ii), with precisely the same interval $[c,d]$.",
+   "uses": [
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), zero-sheaf consequence combined with steps 1 and 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-exc-open-closed-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Locality and Strata: cohomology-sheaf detection argument, expanded using Stacks Tags 04JC, 015F, 010N, 07A4, 03CE, 04TQ and 09AH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +118,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {B : Type u₄} [inst_2 : CategoryTheory.Category.{v₄, u₄} B]\\n  (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C] [inst_4 : CategoryTheory.FinitaryExtensiv\", \"doc\": \"If a category is preregular and finitary extensive, all its objects are projective, and a functor preserves finite products, then the coherent topology on the category satisfies the sheaf composition \"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective. If $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor preserving finite products and $F : \\\\mathcal{C}^{\\\\text\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {B : Type u₄} [inst_2 : CategoryTheory.Category.{v₄, u₄} B]\\n  (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C] [inst_4 : CategoryTheory.FinitaryExtensiv\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular finitary extensive category where every effective epimorphism has a pullback, and a functor $s$ preserves finite limits, then the coherent Grothendieck topology on $\\\\m\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W.transport_isMonoidal\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₃)\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.MonoidalCategory A] {D : Type u₂}\\n  [inst_3 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.Grothen\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ between sites with Grothendieck topologies $ K $ and $ J $, if $ G $ is cover-dense, fully faithful, and its sheaf pushforward is essenti\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite products. If a presheaf $F : \\\\m\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}",
    "date": "2026-10-21",
    "verdict": "no match: component scalar algebra, generic homological, sheaf or topological infrastructure does not state this ringed-site assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|openClosed|open_closed",
+   "results": "21 hits; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/PadicIntegers.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits; none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image of ringed topos sheaves commutes with derived tensor and detects cohomology vanishing on covers",
+   "results": "8 hits; AlgebraicGeometry.StructureSheaf.comap_id'; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; SheafOfModules.pushforwardNatIso_inv; CategoryTheory.Functor.IsCoverDense.Types.sheafIso_inv_val; CategoryTheory.Functor.IsCoverDense.sheafIso_inv_val; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; ModuleCat.Tilde.stalkIso_inv; SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of sheaf complexes is detected after restriction to a proetale cover or complementary open and closed immersions",
+   "results": "8 hits; DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.IsLE",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|TorAmplitude|finiteTor",
+   "results": "0 hits; none; directory Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jointly conservative exact tensor functors reflect Tor amplitude bounds on unbounded derived categories",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Tor'_obj_obj; CategoryTheory.Functor.exact_tfae; CategoryTheory.Tor_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state fixed-interval Tor detection for arbitrary ring-sheaf coefficients; generic infrastructure is cited through existing DAG nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-def-localizing-closure-ctf-equals-bc",
@@ -74,5 +180,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-tor-interval-local-detection",
+  "worker": "stage1",
+  "summary": "Expanded fixed-interval Tor locality into exact inverse-image/cohomology and derived tensor comparisons followed by cover-local or open-closed zero detection. All tools already exist; no new nodes and no statement change. Checked arbitrary sheaf coefficients, unbounded complexes and all stated geometric hypotheses. The available constant-coefficient Lean open-closed theorem is only partial coverage, not an attachment.",
+  "blueprint": "Nearest ancestor det-def-localizing-closure-ctf-equals-bc: Locality is steps 1-3, and Strata fixed-interval detection is steps 1, 2 and 4. This realizes the already stated restriction/detection route of the item.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of transported module inverse image for arbitrary geometric morphisms; the unit supplies no such arbitrary-ring-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic unbounded localization of an exact functor, used only to interpret inverse image on complexes."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic identification of exact termwise inverse image with its total left derived functor."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor/cohomology comparison, a Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos derived tensor pullback comparison; supplies the tensor compatibility required by Locality."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic identification of site-object inverse image with slice restriction, used only on underlying abelian sheaves."
+   },
+   {
+    "node": "lem-sfb-sheaf-cover-local-isomorphism",
+    "why": "Generic cover-local detection theorem for sheaves, a Mathlib leaf."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Existing arbitrary-ring-sheaf open-closed zero detection tool, implementing Strata by restriction of tensor cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-exc-open-closed-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-c64b9e8b8",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-c64b9e8b8 (reviewer sub-agent of L); spot-checked: Read the item's four steps and all nine cited statements, plus the ancestor's Locality and Strata paragraphs (main-20261015 ctf-equals-bc.proof.md lines 18-30). No new nodes, no repair note, item not on the 2026-10-19 drop list, no SGA source. Step 1 is correct: f_proet is a geometric morphism via lem-weil-pbc-left-exact-site-inverse-image-tensor, so the module inverse image is exact (lem-trf-geometric-inverse-image-exact), and the termwise derived functor is a left derived functor, hence equal to Lu^*. Step 2 is correct: the ringed-topoi tensor pullback with S=u^{-1}R and the identity ring map gives u^*=u^{-1}. Step 3 is correct: the abelian clause of object inverse image = slice restriction, cover base change gives the CoversTop condition, then Sheaf.isIso_of_coversTop applied to F->0. Step 4 is correct: lem-exc-open-closed-detection (arbitrary R_X, j quasi-compact) is applied to F=H^q(K⊗^L M), with the bounds tested on i^{-1}M and j^{-1}M. Edge cases checked: empty X and empty cover, Z or U empty, c=d, F_ℓ over Z/ℓ². No cycle, and no duplicate (lem-sf-site-tor-interval-restriction is the converse direction). Batch-5 flag on lem-trf-geometric-inverse-image-exact accepted: it is generic exactness of inverse image along any geometric morphism, its closure contains only two general trf definitions (def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation), and the batch-5 targets already reach it without this item through weil-pbc nodes. lem-weil-pbc-site-pullback-abelian-exact could replace it, but that is optional. The worker-recorded tool_uses (8 generic tools) are accepted."
  }
 }
