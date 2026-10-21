@@ -138,7 +138,124 @@ theorem finite_quotient_fiber_product
             ∃ (h : topologicalFiber f₁ f₂ ≃ₜ finitePartitionLimit b),
               ∀ (q : topologicalFiber f₁ f₂),
                 h q = ⟨fun i => p i q, coh q⟩ := by
-  sorry
+  classical
+  -- The pullback is a closed subspace of the compact product.
+  have hclosed : IsClosed {q : S₁ × S₂ | f₁ q.1 = f₂ q.2} :=
+    isClosed_eq (f₁.continuous.comp continuous_fst) (f₂.continuous.comp continuous_snd)
+  have hcompact : CompactSpace (topologicalFiber f₁ f₂) :=
+    isCompact_iff_compactSpace.mp hclosed.isCompact
+  let trivialSpan : CompatibleFinitePartitionSpan f₁ f₂ :=
+    ⟨⊤, ⊤, ⊤, fun _ _ _ ↦ trivial, fun _ _ _ ↦ trivial⟩
+  have directed : ∀ i j : CompatibleFinitePartitionSpan f₁ f₂,
+      ∃ k, compatiblePartitionRefines i k ∧ compatiblePartitionRefines j k := by
+    intro i j
+    refine ⟨⟨i.left ⊓ j.left, i.middle ⊓ j.middle, i.right ⊓ j.right,
+      ?_, ?_⟩, ?_, ?_⟩
+    · exact fun _ _ h ↦ ⟨i.leftCompatible h.1, j.leftCompatible h.2⟩
+    · exact fun _ _ h ↦ ⟨i.rightCompatible h.1, j.rightCompatible h.2⟩
+    · exact ⟨inf_le_left, inf_le_left, inf_le_left⟩
+    · exact ⟨inf_le_right, inf_le_right, inf_le_right⟩
+  let p : ∀ i : CompatibleFinitePartitionSpan f₁ f₂,
+      topologicalFiber f₁ f₂ → finitePartitionFiber i := fun i q ↦
+    ⟨⟨i.left.proj q.1.1, i.right.proj q.1.2⟩, by
+      simpa only [DiscreteQuotient.map_proj] using congrArg i.middle.proj q.2⟩
+  have p_continuous : ∀ i, Continuous (p i) := by
+    intro i
+    exact ((i.left.proj_continuous.comp continuous_subtype_val.fst).prodMk
+      (i.right.proj_continuous.comp continuous_subtype_val.snd)).subtype_mk _
+  have map_natural {X Y : Type u} [TopologicalSpace X] [TopologicalSpace Y]
+      (f : C(X, Y)) {A A' : DiscreteQuotient X} {B B' : DiscreteQuotient Y}
+      (c : DiscreteQuotient.LEComap f A B) (c' : DiscreteQuotient.LEComap f A' B')
+      (hA : A' ≤ A) (hB : B' ≤ B) (a : A') :
+      DiscreteQuotient.map f c (DiscreteQuotient.ofLE hA a) =
+        DiscreteQuotient.ofLE hB (DiscreteQuotient.map f c' a) := by
+    obtain ⟨a, rfl⟩ := A'.proj_surjective a
+    simp only [DiscreteQuotient.ofLE_proj, DiscreteQuotient.map_proj]
+  let b : ∀ (i j : CompatibleFinitePartitionSpan f₁ f₂),
+      compatiblePartitionRefines i j → finitePartitionFiber j → finitePartitionFiber i :=
+    fun i j hij x ↦
+      ⟨⟨DiscreteQuotient.ofLE hij.1 x.1.1, DiscreteQuotient.ofLE hij.2.2 x.1.2⟩, by
+        rw [map_natural f₁ i.leftCompatible j.leftCompatible hij.1 hij.2.1,
+          map_natural f₂ i.rightCompatible j.rightCompatible hij.2.2 hij.2.1, x.2]⟩
+  have b_comp : ∀ (i j k : CompatibleFinitePartitionSpan f₁ f₂)
+      (hij : compatiblePartitionRefines i j) (hjk : compatiblePartitionRefines j k)
+      (hik : compatiblePartitionRefines i k) (x : finitePartitionFiber k),
+      b i k hik x = b i j hij (b j k hjk x) := by
+    intro i j k hij hjk hik x
+    apply Subtype.ext
+    apply Prod.ext <;> simp only [b, DiscreteQuotient.ofLE_ofLE]
+  have coh : ∀ (q : topologicalFiber f₁ f₂)
+      (i j : CompatibleFinitePartitionSpan f₁ f₂) (hij : compatiblePartitionRefines i j),
+      b i j hij (p j q) = p i q := by
+    intro q i j hij
+    apply Subtype.ext
+    apply Prod.ext <;> simp only [b, p, DiscreteQuotient.ofLE_proj]
+  let toLimit : topologicalFiber f₁ f₂ → finitePartitionLimit b :=
+    fun q ↦ ⟨fun i ↦ p i q, coh q⟩
+  -- Every source quotient occurs with trivial middle and opposite source quotients.
+  let leftSpan : DiscreteQuotient S₁ → CompatibleFinitePartitionSpan f₁ f₂ :=
+    fun Q ↦ ⟨Q, ⊤, ⊤, fun _ _ _ ↦ trivial, fun _ _ _ ↦ trivial⟩
+  let rightSpan : DiscreteQuotient S₂ → CompatibleFinitePartitionSpan f₁ f₂ :=
+    fun Q ↦ ⟨⊤, ⊤, Q, fun _ _ _ ↦ trivial, fun _ _ _ ↦ trivial⟩
+  have inj : Injective toLimit := by
+    intro q q' heq
+    apply Subtype.ext
+    apply Prod.ext
+    · apply DiscreteQuotient.eq_of_forall_proj_eq
+      intro Q
+      exact congrArg (fun x : finitePartitionLimit b ↦ (x.1 (leftSpan Q)).1.1) heq
+    · apply DiscreteQuotient.eq_of_forall_proj_eq
+      intro Q
+      exact congrArg (fun x : finitePartitionLimit b ↦ (x.1 (rightSpan Q)).1.2) heq
+  have surj : Surjective toLimit := by
+    intro x
+    obtain ⟨s₁, hs₁⟩ := DiscreteQuotient.exists_of_compat
+      (fun Q ↦ (x.1 (leftSpan Q)).1.1) (by
+        intro A B h
+        exact congrArg (fun z ↦ z.1.1)
+          (x.2 (leftSpan B) (leftSpan A) ⟨h, le_rfl, le_rfl⟩))
+    obtain ⟨s₂, hs₂⟩ := DiscreteQuotient.exists_of_compat
+      (fun Q ↦ (x.1 (rightSpan Q)).1.2) (by
+        intro A B h
+        exact congrArg (fun z ↦ z.1.2)
+          (x.2 (rightSpan B) (rightSpan A) ⟨le_rfl, le_rfl, h⟩))
+    have all_left (i : CompatibleFinitePartitionSpan f₁ f₂) :
+        i.left.proj s₁ = (x.1 i).1.1 := by
+      have hi := congrArg (fun z ↦ z.1.1)
+        (x.2 (leftSpan i.left) i ⟨le_rfl, le_top, le_top⟩)
+      simpa only [b, DiscreteQuotient.ofLE_refl_apply] using (hs₁ i.left).trans hi.symm
+    have all_right (i : CompatibleFinitePartitionSpan f₁ f₂) :
+        i.right.proj s₂ = (x.1 i).1.2 := by
+      have hi := congrArg (fun z ↦ z.1.2)
+        (x.2 (rightSpan i.right) i ⟨le_top, le_top, le_rfl⟩)
+      simpa only [b, DiscreteQuotient.ofLE_refl_apply] using (hs₂ i.right).trans hi.symm
+    -- Comapping every middle quotient forces the reconstructed images to agree.
+    have heq : f₁ s₁ = f₂ s₂ := by
+      apply DiscreteQuotient.eq_of_forall_proj_eq
+      intro Q
+      let i : CompatibleFinitePartitionSpan f₁ f₂ :=
+        ⟨Q.comap f₁, Q, Q.comap f₂, le_rfl, le_rfl⟩
+      have hi : DiscreteQuotient.map f₁ i.leftCompatible (i.left.proj s₁) =
+          DiscreteQuotient.map f₂ i.rightCompatible (i.right.proj s₂) := by
+        rw [all_left i, all_right i]
+        exact (x.1 i).2
+      exact hi
+    refine ⟨⟨⟨s₁, s₂⟩, heq⟩, ?_⟩
+    apply Subtype.ext
+    funext i
+    apply Subtype.ext
+    exact Prod.ext (all_left i) (all_right i)
+  have toLimit_continuous : Continuous toLimit :=
+    (continuous_pi fun i ↦ p_continuous i).subtype_mk _
+  -- Compact-to-Hausdorff upgrades the canonical continuous bijection.
+  let e := Equiv.ofBijective toLimit ⟨inj, surj⟩
+  let h : topologicalFiber f₁ f₂ ≃ₜ finitePartitionLimit b :=
+    Continuous.homeoOfEquivCompactToT2 (f := e) toLimit_continuous
+  refine ⟨hcompact, inferInstance, inferInstance, ⟨trivialSpan⟩, directed,
+    p, ?_, p_continuous, b, ?_, b_comp, coh, h, ?_⟩
+  · exact fun _ _ ↦ ⟨rfl, rfl⟩
+  · exact fun _ _ _ _ ↦ ⟨rfl, rfl⟩
+  · exact fun _ ↦ rfl
 
 end Topology
 
