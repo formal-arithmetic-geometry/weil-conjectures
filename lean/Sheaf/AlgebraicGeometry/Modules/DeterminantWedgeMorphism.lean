@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocal
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocal
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # The wedge morphism associated to a short exact sequence
@@ -27,6 +27,15 @@ open CategoryTheory Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
+    (exteriorSheafPowerIso M n).hom.app U (exteriorSheafSection M n U a) =
+      wedge (M := M) (r := n) (U := U) a := by
+  rw [← exteriorSheafPowerIso_inv_wedge M n U a]
+  exact inv_app_hom_app_apply_of_iso (exteriorSheafPowerIso M n).symm _
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The wedge formula descends to a morphism, without asserting its invertibility.
 Only the first term needs a finite locally free rank for this construction.
 
@@ -61,7 +70,20 @@ theorem determinant_wedgeMorphism_exists {X : Scheme.{v}} (S : ShortComplex X.Mo
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  apply determinant_wedgeMorphism_of_local_data S hS r₁ r₂ r₃ hr
-  exact determinant_wedgeMorphism_local_data S hS r₁ r₂ r₃ hr
+  obtain ⟨ψ, hψ⟩ := determinant_wedgeMorphism_of_local_data S hS r₁ r₂ r₃ hr
+    (determinant_wedgeMorphism_local_data S hS r₁ r₂ r₃ hr)
+  refine ⟨((exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+    (exteriorSheafPowerIso S.X₃ r₃).hom) ≫ ψ ≫
+      (exteriorSheafPowerIso S.X₂ r₂).inv, ?_⟩
+  intro U a b c hc
+  change (exteriorSheafPowerIso S.X₂ r₂).inv.app U
+    (ψ.app U ((((exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+      (exteriorSheafPowerIso S.X₃ r₃).hom).app U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₃ r₃ U b)))) = _
+  rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_hom_wedge,
+    exteriorSheafPowerIso_hom_wedge]
+  exact (congrArg ((exteriorSheafPowerIso S.X₂ r₂).inv.app U) (hψ U a b c hc)).trans
+    (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ U _)
 
 end AlgebraicGeometry.Scheme.Modules

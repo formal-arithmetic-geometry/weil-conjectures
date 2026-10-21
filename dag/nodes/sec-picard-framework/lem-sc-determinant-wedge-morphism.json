@@ -14,40 +14,31 @@
  ],
  "proof": [
   {
-   "text": "For a finite tuple of sections of C on V, local surjectivity of the sheaf epimorphism g gives lifts on a common refinement of finitely many covers. Differences of two such lift tuples locally belong to the image of f by sheaf exactness.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Trivialize A. Changing one lift alters the concatenated wedge by a wedge with r1+1 factors from A. Expand these factors in a basis of size r1: every term repeats a factor and is zero by alternation. Changing one lift at a time proves independence of the whole tuple. This is the vanishing above the rank from the finite free exterior-power basis theorem.",
+   "text": "Apply the official determinant_wedgeMorphism_local_data to S, hS, the ranks and hr, giving local wedge maps of official exterior powers. Apply determinant_wedgeMorphism_of_local_data to this family, obtaining a global morphism psi with its formula on every open.",
    "uses": [
-    "lem-weil-pbc-exterior-power-free-basis"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Separatedness glues the resulting sections independently of local lifts. Common lifts show multilinearity, alternation separately in the two tuples, and compatibility with restriction. Linearize separately through the exterior-power universal properties, giving a bilinear rule on the two exterior-power presheaves with values in the exterior sheaf of B.",
-   "uses": [
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-determinant-wedge-morphism-local-data",
+    "lem-sc-determinant-wedge-morphism-glue"
    ],
    "elementary": true
   },
   {
-   "text": "Extend the bilinear rule to sheafifications locally using representatives of sections. Restriction compatibility and separatedness show independence of representatives and agreement on overlaps. The sheaf tensor universal property gives phi. Its formula on arbitrary given lifts follows from its construction and separatedness. Empty tuples require no lifts, so there are no exceptions in rank zero or on the empty scheme.",
+   "text": "Precompose psi with the tensor of the hom maps of exteriorSheafPowerIso for the first and third terms, and postcompose with the inverse comparison for the middle term. Derive the hom wedge formula from the inverse wedge formula and the isomorphism identity. Tensor-section naturality, the hom wedge formulas, the formula for psi and the inverse wedge formula give exactly the unchanged legacy exteriorSheaf formula. The comparison works for all degrees and all opens, including degree zero and the empty open.",
    "uses": [
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-exterior-power-free-basis",
-  "def-sc-sheaf-exterior-power"
+  "lem-sc-determinant-wedge-morphism-local-data",
+  "lem-sc-determinant-wedge-morphism-glue",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "N4 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; details written by T2 from preserved blueprint proof text"
+  "place": "Proof of (*), determinant paragraph",
+  "note": "The local-construction and gluing steps use their proved official implementations. A final canonical comparison transport preserves the existing public statement and the determinant unit route."
  },
  "mathlib_searches": [
   {
@@ -115,18 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-1bd92",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T165505-L-2931120",
+  "landing": "20261021T021023-L-2692789",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_exists"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: delivered stub + adapted consumer DeterminantWedgeMorphism + 3 node files + change record vs live clone, retire-items row 1465 and the WeilConjectures twin (node lean.statement verbatim); --all compile clean, original consumer fails vs stub (forced), importer DeterminantShortExactExists compiles, axioms clean"
  },
  "lean_audit": {
   "master": {
