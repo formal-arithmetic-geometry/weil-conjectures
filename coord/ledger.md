@@ -23073,3 +23073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:39 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 16:40 L: merged deliver/Q01/lem-sfb-finite-closed-cover-resolution (reviewer PASS; first push; new nodes: 0)
 - 16:41 L: returned deliver/C2/Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated (reviewer RETURN: (reviewer C-17c01, head 17c0184b9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.KFl)
+- 16:41 L: merged deliver/Q07/lem-sfb-faithfully-flat-normal-ring-descent (reviewer PASS; first push; new nodes: 0)
