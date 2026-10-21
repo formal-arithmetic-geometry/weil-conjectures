@@ -29,9 +29,160 @@
   "lem-pur-supported-hom",
   "lem-sc-p1-rhom-hom-derived-roof"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the small representatives stipulated in the statement. The category of ordinary $A_X$-module sheaves is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], applied to the constant ring sheaf on either small site. It therefore has enough injectives by [lem-sp-grothendieck-enough-injectives]. All subsequent derivations take place in this module-sheaf category, with values in abelian groups; no assertion that forgetting the $A$-action preserves injectives is needed.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5 (section-unbounded), first paragraph; Injectives Tag 079H (theorem-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "For any module sheaf $M$, define $e_X:\\operatorname{Hom}(A_X,M)\\to M(X)$ by $g\\mapsto g_X(1)$. Its inverse sends $m$ to the morphism with component $A_X(V)\\to M(V)$, $b\\mapsto b\\,m|_V$. Semilinearity of restriction makes these components commute with restriction. Conversely, $g_V(b)=b\\,g_V(1)=b\\,g_X(1)|_V$, so they are inverse additive maps, natural in $M$. This uses exactly the module-sheaf definition and the unit of the constant ring sheaf. The identical calculation over $U$ identifies $\\operatorname{Hom}(A_U,j^{-1}M)$ with $M(U)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Example 9.5, p. 66, and the Ext proof of Theorem 9.4, p. 67; explicit module-valued normalization written by the agent"
+   }
+  },
+  {
+   "text": "Write $\\epsilon:j_!A_U\\to A_X$ for the open counit. The adjunctions [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-extension-by-zero-adjunction] apply respectively in the etale and pro-etale topology. The adjunct of $g\\epsilon$ is $j^{-1}g:j^{-1}A_X=A_U\\to j^{-1}M$: the counit is adjunct to the identity, and the adjunction bijection is natural in its target. Evaluation at $1$ sends this to $g_U(1)=g_X(1)|_U$. Thus precomposition by this actual counit, under the evaluations just constructed, is the actual restriction map, without a scalar or sign.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Example 9.5, p. 66, and the Ext proof of Theorem 9.4, p. 67; explicit module-valued normalization written by the agent"
+   }
+  },
+  {
+   "text": "On the etale site apply [lem-weil-pbc-open-closed-short-exact] to $A_X$; its maps are the open counit $\\epsilon$ and the closed unit $\\rho$. The canonical constant-ring pullback identification of [prop-weil-pbc-inverse-image-modules-exact](1) gives $i^{-1}A_X=A_Z$ and identifies this unit with the stated constant restriction. On the pro-etale site [lem-pur-proetale-supported-constant-presentation] states directly that the same $\\rho$ is a cokernel of $\\epsilon$. For $s\\in S(M)$, the preceding steps give a unique $g_s:A_X\\to M$ with $g_s(1)=s$, and $g_s\\epsilon=0$ because its adjunct evaluates to $s|_U=0$. The cokernel property gives a unique $f_s:P\\to M$ with $f_s\\rho=g_s$. Conversely $f\\rho\\epsilon=0$ implies $(f\\rho)(1)|_U=0$. These constructions are inverse, proving $\\theta$. Uniqueness of factorization proves additivity and naturality: $f_{s+t}=f_s+f_t$ and $f_{S(u)s}=u f_s$. Hence this is the specified kernel isomorphism, rather than an unspecified natural automorphism of $S$.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-pur-proetale-supported-constant-presentation",
+    "def-pur-support-cohomology",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Example 9.5, p. 66, and the Ext proof of Theorem 9.4, p. 67; explicit module-valued normalization written by the agent"
+   }
+  },
+  {
+   "text": "Put $v=\\operatorname{Hom}(P,-)$ and $t=\\theta^{-1}:S\\to v$. Applied termwise, $t_I:S(I)\\to v(I)$ is an isomorphism of cochain complexes: naturality of $t$ for $d_I^r$ says $t_{I^{r+1}}S(d_I^r)=v(d_I^r)t_{I^r}$. In particular a supported cocycle $s$ is sent to $f_s$, and $d_I^a f_s=0$. If $s$ changes by $S(d_I^{a-1})(b)$, then $f_s$ changes by $d_I^{a-1}f_b$, a coboundary in $v(I)$. These are equalities in the complexes themselves, with no comparison choice.",
+   "uses": [
+    "def-pur-support-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Example 9.5, p. 66, and the Ext proof of Theorem 9.4, p. 67; explicit module-valued normalization written by the agent"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-right-derived-plus-injective] for $S$ and $v$, writing their derived units as $\\alpha_S$ and $\\alpha_v$. Its universal property applied to $\\alpha_v\\circ Q(t)$ defines a unique $Rt:RS\\to Rv$ satisfying $(Rt)_{QL}\\alpha_{S,L}=\\alpha_{v,L}Q(t_L)$. Doing the same with $t^{-1}$, uniqueness makes the two composites identities. Thus $Rt$ is a natural isomorphism. For a specified $e:F\\to I$, put $c_{S,e}=(RS(Qe))^{-1}\\alpha_{S,I}$ and $c_{v,e}=(Rv(Qe))^{-1}\\alpha_{v,I}$. The units on $I$ are isomorphisms by clause (2) of that lemma, and naturality gives $(Rt)_{QF}c_{S,e}=c_{v,e}Q(t_I)$. This proves directly that deriving $t$ carries the class transported from $s$ to the class transported from $f_s$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), 070J (lemma-bounded-below-injectives-K-injective), and 070I (lemma-K-injective); explicit normalization written by the agent"
+   }
+  },
+  {
+   "text": "The given bounded-below degreewise injective $I$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Apply [lem-sc-p1-rhom-hom-derived-roof] in the abelian category of module sheaves, with $M=P$, $K=F$, $\\varepsilon=e$, and integer $n=a$. It sends the class transported from $f_s$ by $c_{v,e}$ to $(Qe)[a]^{-1}\\circ Q(f_s)$. The preceding step therefore gives the required formula for the composite $\\chi^a_{i,F}=\\psi^a_{QF}\\circ H^a((Rt)_{QF})$. This realizes the supported-Hom isomorphism with exactly the evaluation normalization on the pro-etale site and the same construction on the etale site. The complex map corresponding to $f_s$ has its sole nonzero component in degree zero; the cochain convention $(I[a])^0=I^a$ introduces no sign into that component.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sc-p1-rhom-hom-derived-roof",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), 070J (lemma-bounded-below-injectives-K-injective), and 070I (lemma-K-injective); explicit normalization written by the agent"
+   }
+  },
+  {
+   "text": "The map just defined is natural in $F$ because both $Rt$ and the isomorphisms $\\psi^a$ of [lem-sc-p1-rhom-hom-derived-roof] are natural. Explicitly for $u:QF\\to QG$, naturality gives $\\chi^a_{i,G}H^a(RS(u))=u[a]\\circ\\chi^a_{i,F}$. It is defined on $H^a(RS(QF))$ without choosing $e$ or $s$. Since the roof calculation applies to every specified $e$, any two resolutions yield the same value after their canonical derived-unit comparisons. Step 5 shows directly that a coboundary change of $s$ does not change its transported class. This proves both independence assertions, including for negative $a$.",
+   "uses": [
+    "lem-sc-p1-rhom-hom-derived-roof",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), 070J (lemma-bounded-below-injectives-K-injective), and 070I (lemma-K-injective); explicit normalization written by the agent"
+   }
+  },
+  {
+   "text": "For the etale cone comparison set $E=I(X)$, $B=I(U)$ and $r:E\\to B$ equal to restriction. By [lem-weil-pbc-open-closed-short-exact], $\\epsilon:j_!A_U\\to A_X$ is a monomorphism. For each injective $I^q$, its defining extension property [def-sp-injective-resolutions] makes $\\operatorname{Hom}(A_X,I^q)\\to\\operatorname{Hom}(j_!A_U,I^q)$ surjective. Steps 2--4 identify this map with $r^q$, and its kernel with $S(I^q)=v(I^q)$. Moreover $j^{-1}I^q$ is injective: $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact]; for a monomorphism $N\\to N'$ on $U$, apply $j_!$, extend a map $j_!N\\to I^q$ to $j_!N'$, then transpose by [lem-weil-pbc-extension-by-zero-adjunction]. The exactness assertion of [prop-weil-pbc-inverse-image-modules-exact](3) ensures $j^{-1}e$ is a quasi-isomorphism. Consequently the bounded-below complexes $E$ and $B$ compute respectively $R\\Gamma(X,F)$ and $R\\Gamma(U,j^{-1}F)$ by [lem-weil-pbc-right-derived-plus-injective]. The comparison arrow $r$ is their actual derived restriction, since it is restriction in every degree.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); Modules on Sites Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact); Derived Categories Tags 05TH and 05TI"
+   }
+  },
+  {
+   "text": "Now apply [lem-weil-degreewise-epi-kernel-cocone-qis] to $r:E\\to B$. Its specified comparison is $\\kappa:S(I)\\to\\operatorname{Cone}(r)[-1]$, $s\\mapsto(0,s)$, and it is a quasi-isomorphism. Thus the cone realization of $R\\operatorname{Hom}(P,F)$ in [lem-amb-closed-support-hom] is, on this resolution, the map $v(I)\\xrightarrow{\\theta_I}S(I)\\xrightarrow{\\kappa}\\operatorname{Cone}(r)[-1]$. To see the normalization, realize the Hom triangle by the short exact sequence of complexes from Step 9. Its canonical map to the shifted cone is inclusion in the shifted source summand: in degree $q$ it sends $f:P\\to I^q$ to $(0,(f\\rho)(1))$. Steps 2--4 identify this with $\\kappa\\theta_I$. This computes the comparison itself, rather than inferring it merely from its composite to $E$. A supported cocycle is represented there by $(0,s)$; applying the inverse comparison and then the roof comparison gives $f_s$ and the roof of Step 7. The shifted cone differential is $(y,x)\\mapsto(-d_By-r(x),d_Ex)$ as specified in the kernel-cone lemma, so $(0,s)$ has exactly the asserted sign. This identifies the etale restriction-cone normalization with the same $\\chi$. Only the etale argument used that $\\epsilon$ is monic; the pro-etale evaluation and roof arguments used just the cokernel presentation, which explicitly requires no quasi-compactness of $U$. No other finiteness or purity hypothesis has entered.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-amb-closed-support-hom",
+    "lem-sc-p1-rhom-hom-derived-roof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-amb-closed-support-hom.proof.md",
+    "place": "Exact constant open-closed sequence and resulting Hom triangle; explicit kernel-to-shifted-cone map and its normalization written by the agent, using Stacks Tag 070M (lemma-difficulty-K-injectives) as recorded in the kernel-cone node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pur-proetale-supported-constant-presentation",
+  "def-pur-support-cohomology",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-amb-closed-support-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and Ext proof of Theorem 9.4, pp. 66--67; agent-written ordinary module and bounded-below normalization, using the listed Stacks and existing DAG comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +218,45 @@
    "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; CochainComplex.HomComplex.CohomologyClass; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_symm_mk_hom|supportedHom|ΓHomEquiv",
+   "results": "13 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the geometric supported-unit evaluation together with the bounded-below derived normalization. Read Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:33--60 and CategoryTheory/Sites/GlobalSections.lean:70--116; ordinary Ext cocycles and constant-sheaf global sections are only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed support cohomology as derived Hom normalized by evaluation at one and an injective cocycle roof",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_hom, groupCohomology.cocycles₁, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.cocycle, CochainComplex.HomComplex.Cocycle.toSingleMk, CochainComplex.HomComplex.Cocycle.mk, CategoryTheory.PresheafOfGroups.OneCochain.mk.inj",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the geometric supported-unit evaluation together with the bounded-below derived normalization. Read Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:33--60 and CategoryTheory/Sites/GlobalSections.lean:70--116; ordinary Ext cocycles and constant-sheaf global sections are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+   "results": "12 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_neg, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_smul, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_neg, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_sub",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the geometric supported-unit evaluation together with the bounded-below derived normalization. Read Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:33--60 and CategoryTheory/Sites/GlobalSections.lean:70--116; ordinary Ext cocycles and constant-sheaf global sections are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one identifies Hom from the constant sheaf supported on a closed subscheme with sections with support; deriving this identifies an injective resolution cocycle with its localized morphism",
+   "results": "8 hits: ModuleCat.Tilde.const_apply, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.StructureSheaf.res_const, ModuleCat.Tilde.exists_const, CategoryTheory.Sheaf.H, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.StructureSheaf.locally_const_basicOpen",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the geometric supported-unit evaluation together with the bounded-below derived normalization. Read Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:33--60 and CategoryTheory/Sites/GlobalSections.lean:70--116; ordinary Ext cocycles and constant-sheaf global sections are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of restriction of sections to an open complement is represented by the pushforward of the constant coefficient unit on a closed subscheme, with a natural derived cocycle comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.kerAdjunction_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the geometric supported-unit evaluation together with the bounded-below derived normalization. Read Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:33--60 and CategoryTheory/Sites/GlobalSections.lean:70--116; ordinary Ext cocycles and constant-sheaf global sections are only ingredients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-supported-hom-pullback",
@@ -89,5 +275,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-supported-hom-cocycle-normalization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all original fields; proved evaluation by the two existing constant presentations and open adjunctions, derived its actual inverse using the universal property, applied the existing roof normalization, and checked the etale cone sign by the specified kernel inclusion. No new nodes; no assertion that coefficient forgetting preserves injectives. All proof citations were checked against their statements.",
+  "blueprint": "thm-pur-affine-line-orientation, proof: supported Cartier map naturality and its normalized geometric fibre; via lem-pur-supported-hom-pullback, original steps 4 and 6. Steps 2--4 fix evaluation, steps 5--8 fix the cocycle roof, and steps 9--10 identify the etale restriction cone. The unit and chapter route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-21568217b",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-21568217b (reviewer sub-agent of L); spot-checked: I read all 10 steps of this no-new-node split in full and checked them against every cited statement. The item was created statement-only by Q55. It has no repair note of its own, is unsplit live, and is not dropped; it contains no SGA citation and its statement is unchanged. Sources checked: Milne LEC pp. 66–67 (Ex. 9.5 evaluation at 1; Thm 9.4 Ext proof with the open/closed sequence), the blueprint main-20261015 lem-amb-closed-support-hom proof (Hom triangle equals cone), and Stacks tags 07A5, 079H, 095L, 03DI, 03DJ, 05TH, 05TI, 070I, 070J, 070M, all present with the stated labels. Steps 2–4: θ(f)=(fρ)(1) is correct. On the étale site it follows from the Λ-module open/closed short exact sequence plus part (1) of prop-weil-pbc-inverse-image-modules-exact (i_*c∘η = constant restriction); on the pro-étale site from the cokernel presentation node, with no quasi-compactness needed. The existing lem-pur-supported-sections-hom is pro-étale only and does not fix the map, so this is not a duplicate. Step 6: Rt comes from the universal property in clause (1) of lem-weil-pbc-right-derived-plus-injective, its inverse from uniqueness, and c_{S,e}, c_{v,e} from clause (2); the identity checks. Step 7: the roof lemma applies with M=P and I K-injective, giving (Qe)[a]^{-1}∘Q(f_s). Step 9: injective module sheaves restrict surjectively, j^{-1}I is injective (j_! exact and left adjoint), and j^{-1}e is a quasi-isomorphism. Step 10: the kernel-cone convention matches Mathlib mappingCone, and the map v(I)→Cone[-1] is computed as κθ_I, so the sign is correct. Edge cases Z=∅, Z=X, a<0 and coboundary change of s all hold. The cross-unit generic homological tools listed in the report are accepted as tool_uses. Advisory: def-pur-support-cohomology derives Γ_Z on abelian sheaves, while this item derives it on module sheaves as its statement prescribes. The comparison between the two is in step 2 of lem-pur-supported-hom, and the canonical isomorphisms the statement names come from the proofs of lem-pur-supported-hom and lem-amb-closed-support-hom. Both points are inherited from Q55's statement, not faults of this delivery."
  }
 }
