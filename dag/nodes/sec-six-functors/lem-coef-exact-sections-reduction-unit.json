@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "The underlying abelian sheaf is unchanged by coefficient restriction. Thus, for an $\\mathcal O'$-complex $H$, $\\operatorname{Res}_{R\\to A}G'H=G\\operatorname{Res}_{\\mathcal O\\to\\mathcal O'}H$, with the scalar actions equal by the assumed coefficient square. Exactness of sections gives $H^j(\\Gamma K)=\\Gamma H^j(K)$: compute cycles as kernels and cohomology as cokernels of boundaries into cycles. Consequently sections preserve quasi-isomorphisms and induce $G,G'$ on the localized categories. These identifications also apply to maps, not only objects.",
+   "text": "Form the ordinary identity-on-sections restriction square using the coefficient compatibility. Its derived square is obtained by exact localization; the localization factorization is checked using the exact functor compositor formulas.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pc-sheaf-restrict-scalars",
@@ -26,81 +26,65 @@
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian; elementary consequence of the assumed exactness of sections and derived.tex Tag 05RU, definition-derived-category."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); agent extraction of the exact-sections principal-quotient comparison with its scalar-extension unit, using derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)."
    }
   },
   {
-   "text": "Represent $N$ by a complex $M$ and choose a quasi-isomorphism $p:P\\to M$ with $P$ K-flat and flat terms, using the sheaf resolution theorem. Tensoring the assumed coefficient exact sequence with $P^j$ stays exact by the definition of flatness. In particular $t:P^j\\to P^j$ is a monomorphism, so $t:C^j\\to C^j$ is injective for $C=\\Gamma P$. Use the comparison supplied by the resolution-independence node:\n$$\\beta_P=\\theta_Pc_C: L(Q_RC)\\longrightarrow G'T(Q_{\\mathcal O}P).$$\nIts $\\theta_P:C/tC\\cong\\Gamma(P/tP)$ sends the class of a section to its quotient section; its naturality in $P$ and its independence under transport along $p$ are precisely the assertions of that node. The hypotheses hold with the specified quotient $R\\to A=R/(t)$ and its specified compatible coefficient map; no assumption that $R$ is a domain is needed.",
+   "text": "Choose the normalized ordinary sheaf coefficient adjunction. Apply the resolving-class derived-adjunction theorem to sheaf K-flat complexes, using K-flat resolutions and preservation of quasi-isomorphisms by coefficient extension. Transport the resulting derived adjunction to the specified functor T and counit epsilon: the universal comparison is invertible on K-flat models, and hence on all derived objects by resolutions and naturality. This preserves the normalized transpose formula for every cochain map. Do the same for L and its mixed-tensor counit, using ordinary K-flat resolutions, extension of scalars on K-flat quasi-isomorphisms, and the K-flat computation of the mixed-tensor counit. Evaluating the transpose formulas on identities gives both required unit formulas.",
    "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-resolving-class-derived-adjunction",
     "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules",
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-extension-kflat-quasi-iso",
+    "lem-pc-mixed-tensor-pointwise-left-derived",
     "lem-pod-derived-reduction-sheaf-resolution-independence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change; sites-modules.tex Tag 03ER, definition-flat (3). The comparison and its coherence are the stated existing resolution-independence lemma."
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); agent extraction of the exact-sections principal-quotient comparison with its scalar-extension unit, using derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)."
    }
   },
   {
-   "text": "Choose a flat-term K-flat ordinary-module resolution $q:Q\\to C$. The ordinary resolution theorem supplies it without boundedness. Tensoring the injection $t:R\\to R$ with each flat module $Q^j$ preserves injectivity, by flat tensor exactness, so multiplication by $t$ is injective on every $Q^j$. Write $\\bar q:Q/tQ\\to C/tC$. Specialize mixed derived tensor to $A[0]$, identifying ordinary tensor with quotient by $x\\otimes\\bar a\\mapsto ax\\bmod t$ and inverse $\\bar x\\mapsto x\\otimes1$. Its natural counit gives\n$$c_C\\,L(Q_Rq)=Q_A(\\bar q)c_Q.$$\nHere $c_Q:L(Q_RQ)\\xrightarrow{\\sim}Q_A(Q/tQ)$ is invertible by K-flatness. Hence, after identifying $L(Q_RC)$ with $Q_A(Q/tQ)$ through $q$, the map $\\beta_P$ is represented by $\\theta_P\\bar q$, namely $\\bar x\\mapsto q(x)\\bmod t$. This derives the representative from the actual universal counit; it does not assume $C$ K-flat.",
+   "text": "Define beta as the adjoint mate of the derived restriction square. The mate identity gives exactly the required unit equation and the adjunction bijection gives uniqueness. On ordinary sheaves define the tensor-to-quotient-sections map by a tensor x going to a times the quotient section of x. Its transpose is sections of the ordinary sheaf unit, checked on 1 tensor x. Apply the normalized derived-mate comparison theorem: on any flat-term K-flat P the map beta equals the existing alpha_P, since the ordinary comparison equals theta_P on pure tensors. Thus beta is already natural for all derived morphisms without a common-refinement argument.",
+   "uses": [
+    "lem-pur-derived-mate-comparison",
+    "lem-pod-derived-reduction-sheaf-resolution-independence",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); agent extraction of the exact-sections principal-quotient comparison with its scalar-extension unit, using derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)."
+   }
+  },
+  {
+   "text": "For a flat sheaf M, tensor the coefficient short exact sequence with M and apply exact sections. Its first map is multiplication by t on sections, so t is injective on Gamma(M). For any ordinary complex K with termwise injective t, resolve K by a flat-term K-flat Q. Regularity of t on R implies regularity on each flat module Q^i (Mathlib Module.Flat.isSMulRegular_of_isRegular, valid for any commutative ring). The principal-quotient quasi-isomorphism lemma makes extension of Q to A quasi-isomorphic to extension of K. Naturality of the mixed-tensor counit, its invertibility on Q, and the invertibility of L(q) imply that c_K is invertible. Consequently alpha_P is invertible for every flat-term K-flat P. Resolve an arbitrary derived object by such a P; naturality of beta shows its component there is invertible as well, giving the required natural isomorphism.",
    "uses": [
     "lem-pc-source-module-kflat-resolution",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-pc-mixed-tensor-pointwise-left-derived",
-    "lem-pc-derived-tensor-second-factor-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y4, lemma-K-flat-resolution; Tag 06Y6, lemma-derived-base-change and its preceding construction; algebra.tex Tag 00HD, lemma-flat."
-   }
-  },
-  {
-   "text": "The map $q:Q\\to C$ is a quasi-isomorphism and both complexes have termwise injective multiplication by $t$, by steps 2 and 3. Apply the existing principal-quotient quasi-isomorphism theorem to the specified surjection $R\\to A$, whose kernel is $tR$. It says exactly that $\\bar q:Q/tQ\\to C/tC$ is a quasi-isomorphism. Thus $Q_A(\\bar q)$ is invertible. The formula in step 3 shows $c_C$ invertible because $c_Q$ and $L(Q_Rq)$ are invertible. Since $\\theta_P$ is already an isomorphism, $\\beta_P$ is an isomorphism. This argument works in $D(A)$ itself and uses regularity of $t$ on $R$ only to establish regularity on the flat terms of $Q$.",
-   "uses": [
     "lem-pod-principal-quotient-quasi-iso",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change: principal-quotient comparison; the existing principal-quotient quasi-isomorphism lemma supplies the quotient step. Localization at quasi-isomorphisms is derived.tex Tag 05RU, definition-derived-category."
-   }
-  },
-  {
-   "text": "We now check the unit, including its normalization. Apply the normalized sheaf coefficient adjunction both on $\\mathcal C$ and on the one-object site with only the identity cover. Modules on the latter site are literally ordinary modules; its tensor, restriction and derived extension are the ordinary ones. On that site the derived extension $-\\otimes^{\\mathbf L}_RA$ of [lem-pur-derived-change-of-rings] and the mixed derived tensor of [lem-pc-mixed-tensor-pointwise-left-derived] with second factor $A[0]$ are both left derived functors of $E\\mapsto E\\otimes_RA$ with respect to quasi-isomorphisms; by the universal property of left derived functors there is a unique isomorphism between them compatible with their structure maps. Both structure maps are invertible at the flat-term K-flat complex $Q$, so this isomorphism carries the canonical isomorphism $c_Q$ of the adjunction statement to the counit $c_Q$ of step 3; we identify the two throughout. For $P$, the sheaf unit $v$ is represented by $\\pi_P:P\\to P/tP$. For the flat-term K-flat ordinary complex $Q$, the module unit satisfies $\\operatorname{Res}(c_Q)u_{Q_RQ}=Q_R(\\pi_Q)$. Naturality of $u$ for $Q_Rq$ and the counit equation from step 3 give\n$$\\operatorname{Res}(\\beta_P)u_{Q_RC}Q_Rq\n=Q_R(\\theta_P\\bar q\\pi_Q)\n=Q_R(\\pi_Cq),$$\nwhere $\\pi_C:C\\to\\Gamma(P/tP)$ is the sectionwise quotient: the second equality sends $x$ on both sides to the quotient section of $q(x)$. Cancel the invertible $Q_Rq$ to obtain $\\operatorname{Res}(\\beta_P)u_{Q_RC}=G(v_{Q_{\\mathcal O}P})$. Equivalently, the adjunct of the representative $\\theta_P\\bar q$ is $Q\\to\\Gamma(P/tP)$, $x\\mapsto q(x)\\bmod t$, by clause (2) of the normalized adjunction.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-mixed-tensor-pointwise-left-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; derived.tex Tag 0FND, lemma-pre-derived-adjoint-functors-general. The normalized unit and transpose formulas are clauses (1) and (2) of the cited node, also specialized to the point site."
-   }
-  },
-  {
-   "text": "Define $\\alpha_N=G'T(p)\\beta_P\\,LG(p)^{-1}$, inserting the localization identification $Q_{\\mathcal O}M=N$. The resolution-independence theorem states exactly that this expression is unchanged for a different flat-term K-flat sheaf resolution. Step 4 makes it an isomorphism. Naturality of the two units and the equation of step 5 give\n$$\\operatorname{Res}(\\alpha_N)u_{GN}\n=G\\operatorname{Res}(T(p))G(v_P)G(p)^{-1}\n=G(v_N).$$\nThe normalized extension/restriction adjunction identifies a map $LGN\\to G'TN$ with its composite with $u_{GN}$ after restriction, so this equation specifies $\\alpha_N$ uniquely. For $f:N\\to N'$, the adjuncts of $G'T(f)\\alpha_N$ and $\\alpha_{N'}LG(f)$ are respectively $G(\\operatorname{Res}T(f)\\,v_N)$ and $G(v_{N'}f)$; these are equal by naturality of $v$. Injectivity of the adjunction bijection proves naturality for every derived morphism $f$, not merely for chain maps.",
-   "uses": [
+    "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-pc-kflat-resolution",
     "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "def-pc-flat-sheaf-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general). Agent calculation of naturality from the normalized adjunct."
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); agent extraction of the exact-sections principal-quotient comparison with its scalar-extension unit, using derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)."
    }
   },
   {
-   "text": "For every choice of the ordinary resolution $q$, step 3 expresses its representative as the same intrinsic map $\\theta_Pc_C$, after the canonical K-flat computation of $L(Q_RC)$. Thus changing $q$ changes neither that derived map nor its adjunct. Changing $P\\to M$ preserves the transported map by step 6, and the unit equation characterizes its adjunct without any resolution choice. These observations prove both requested independence assertions and all the representative formulas in the statement. At no point was K-flatness or flatness of $\\Gamma P$ inferred.",
-   "uses": [],
+   "text": "For any ordinary cochain map q into Gamma(P), extension followed by theta sends 1 tensor x to the quotient section of q(x), and its ordinary adjunct sends x to the same section. Substitute beta_P = alpha_P, cancel the derived-model and sections-factor isomorphisms, and apply counit naturality to obtain the required derived representative equation. The normalized derived transpose formula of step 2 yields its adjunct equation. Finally beta naturality along any sheaf-resolution quasi-isomorphism p, together with beta_P = alpha_P, identifies the existing resolvedComparison with beta_M. This proves independence of both resolutions, without assuming that Gamma(P) is K-flat.",
+   "uses": [
+    "lem-pod-derived-reduction-sheaf-resolution-independence"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Elementary conclusion from steps 3, 5 and 6: the two resolutions represent the same intrinsic comparison and its uniquely specified adjunct."
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); agent extraction of the exact-sections principal-quotient comparison with its scalar-extension unit, using derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)."
    }
   }
  ],
@@ -108,21 +92,21 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-sheaf-restrict-scalars",
   "def-weil-abstract-derived-category",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-resolving-class-derived-adjunction",
   "lem-pc-kflat-resolution",
-  "def-pc-flat-sheaf-modules",
-  "lem-pod-derived-reduction-sheaf-resolution-independence",
   "lem-pc-source-module-kflat-resolution",
-  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-extension-kflat-quasi-iso",
   "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pod-derived-reduction-sheaf-resolution-independence",
+  "lem-pur-derived-mate-comparison",
   "lem-pod-principal-quotient-quasi-iso",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pur-derived-change-of-rings"
+  "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YY and 07A6; more-algebra.tex Tags 06Y4 and 06Y6; derived.tex Tag 0FND. Agent extraction of the exact-sections principal-quotient argument with its unit normalization."
+  "place": "Tags 06YY and 07A6, with derived.tex Tag 0FND. V3 Lean proof uses normalized resolving adjunctions and the derived mate comparison instead of a point-site identification and common-refinement transport. Regularity on flat modules follows from Mathlib RingTheory/Flat/TorsionFree.lean."
  },
  "mathlib_searches": [
   {
@@ -304,11 +288,8 @@
   "lem-pc-kflat-resolution",
   "lem-pod-derived-reduction-sheaf-resolution-independence",
   "lem-pc-source-module-kflat-resolution",
-  "lem-weil-pbc-flat-tensor-exact",
   "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pod-principal-quotient-quasi-iso",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  "lem-pod-principal-quotient-quasi-iso"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -346,5 +327,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Only the item lean record and a new module ExactSectionsReductionUnit changed; the record statement equals the file signature verbatim and all 8 declarations exist with source/blueprint docstrings. Each hypothesis matches the node via PrincipalReduction.Setup: exact sections, ht regular t with no domain assumption, specified surjective quotient with kernel tR, short exact coefficient sequence, compatible coefficient square. The existential adjunctions a/b/d are uniquely pinned (sectionwise unit; units on flat-term K-flat P/Q via the invertible extension.ε and D.c), so they are the dependency's normalized adjunctions, kept with separate localization universes wO/wS/wR/wA. The restriction square is the identity on sections. Clauses checked true by hand: unit equation, adjunct uniqueness, α_QP = D.alpha, representative formulas tied to the actual adjunct via d.homEquiv, independence of q for every q, resolvedComparison = α for every p; no K-flatness of ΓP is assumed. Edge cases: non-domain R, t a unit, zero ring, unbounded complexes, nonzero Tor. No H4 duplicate: the PrincipalReduction(Flat)Comparison modules need a domain and PointSectionsDerivedReductionIso is point-only. Advisory: Prop exactness instances come from sheafRingCoefficientOrdinaryAdjunction, which is not a stmt_dep. No recompile, per the 2026-10-21 instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261021T144016-L-36705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
