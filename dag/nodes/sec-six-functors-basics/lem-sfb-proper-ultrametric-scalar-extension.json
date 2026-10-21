@@ -413,5 +413,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c0b082da1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 proof steps and the full statements of the 3 cited nodes. Nothing is wrong. The delivery keeps the imported statement word for word (stmt_deps def-weil-field) and creates no new nodes. The statement is Ingleton's scalar nonarchimedean Hahn-Banach theorem. It is true because a field with compact closed balls is spherically complete; small cases W=0, W=V, dense W and Q_p^2 checked. Step 1: lem-trf-continuous-linear-map-norm-bound gives C>0; nontriviality comes from t, the triangle inequality from max<=sum. Step 2: |g(u)-g(v)|<=max(R_u,R_v) makes the balls totally ordered and closed; the inclusion direction checks. Step 3: inside the compact ball B_0, the finite intersections contain the least-radius centre (F empty included); lem-sfb-compact-closed-finite-intersection (Stacks 005D / CompactSpace.iInter_nonempty) gives b. Step 4: with v=-a^{-1}u, g(u)+ab=a(b-g(v)), so the bound C||u+ax|| holds; signs and the a=0 case checked. Steps 5-6: chains of graphs have upper bounds (graph of f for the empty chain), and lem-weil-pbc-zorn-lemma (zorn_subset) plus steps 2-4 force U=V. Step 7: delta=eps/C gives continuity. The steps marked elementary are short calculations; no cycle. Duplicate search over the snapshot DAG (Hahn, Ingleton, spherically, ultrametric, functional extension) finds nothing that states this theorem; Mathlib's StrongDual.exists_extension needs IsRCLikeNormedField. Batch 5: the newly cited lem-trf-continuous-linear-map-norm-bound is a Mathlib leaf (ContinuousLinearMap.bound), general functional analysis whose only stmt_dep is a definition. It is not part of the statements or proofs of the trace formula or Poincare duality, so the citation is accepted and no tool_uses entry is needed. No SGA cited. Advisory: blueprint.from.node was changed from null to det-thm-sf-ctf-stability-direct-images, which is consistent with the via chain; the Ingleton reference is WANTED. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.Module.ProperUltrametricScalarExtension",
+  "declaration": "ContinuousLinearMap.exists_extension_of_proper_ultrametric",
+  "file": "lean/Sheaf/Analysis/Normed/Module/ProperUltrametricScalarExtension.lean",
+  "statement": "theorem exists_extension_of_proper_ultrametric {K : Type u} [NormedField K] [IsUltrametricDist K] [ProperSpace K] (hnontrivial : ∃ t : K, 0 < ‖t‖ ∧ ‖t‖ < 1) {V : Type v} [NormedAddCommGroup V] [NormedSpace K V] [IsUltrametricDist V] (W : Submodule K V) (f : W →L[K] K) : ∃ g : V →L[K] K, ∀ w : W, g (w : V) = f w",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74a702ac3",
+  "group": "NC",
+  "result": "pass",
+  "note": "All node clauses match the Lean: NormedField + IsUltrametricDist K + literal 0<|t|<1 witness + ProperSpace K (balls with r<0 are empty, so no stronger); NormedAddCommGroup/NormedSpace + IsUltrametricDist V; arbitrary Submodule W with induced topology; f : W →L[K] K; ∃ g : V →L[K] K agreeing on W. W need not be closed, V need not be complete; independent universes u,v; lean.statement verbatim in the file; only the lean field changed vs live. Statement true (compact balls ⇒ spherically complete ⇒ Ingleton). No duplicate in Mathlib (Hahn-Banach needs IsRCLike or a dense range), Sheaf, WeilConjectures or the DAG. No definitions, proof sorry only, docstrings carry the source place, blueprint tag and 7 proof steps; report has both required sections. Advisory: plain proof-only imports Operator.Basic/Compactness.Compact/Order.Zorn. No compile: no file changed."
  }
 }

@@ -18,7 +18,9 @@
   "def-weil-closed-immersion",
   "def-pc-fibre-product",
   "def-weil-pbc-proetale-site",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-adjunction-square-exchange"
  ],
  "proof": [
   {
@@ -506,5 +508,63 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-2bfeed53f (reviewer sub-agent of L); spot-checked: I read the whole item (11 steps) against all 23 cited statements, proetale.tex 09BK and 09BL (including the proof of (2)), and how the parent lem-sfb-integral-lisse-closed-base-change uses it in steps 1 and 5-7. The statement is unchanged and correct; I checked I=0, I=A (empty Z), and the zero ring and zero module. It asserts no invertibility. No new nodes, and nothing else in the DAG states it: det-sf-open-closed-pullback-limits needs a quasi-compact open complement, which fails for an arbitrary ideal. I checked the mate calculation in step 5 and the transpose in step 6 independently: the exchange is x -> h^{-1}x, the unit section for a. Steps 7-11 are correct; step 10 derives the coefficient comparison Res Rf'_* -> Rf_* Res by the universal property and claims no invertibility. I repaired three faults in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-closed-test-derived-exchange-model.json. F1 (C4), step 1: exactness of module inverse images was credited to the locality lemma, which only states derived exactness. It now cites sk-def-sfb-coefficient-morphisms (alpha_f is an isomorphism), sk-def-sfb-change-of-scalars (5), and det-pe-topos-functoriality-inverse-image (4). F2 (C1/C4), step 2: weak contractibility was not carried over to the basis site Z_app; it now cites lem-weil-pbc-ind-etale-basis. Also, the closed-evaluation isomorphism was natural but not fixed, while step 5 used it as the unit section. It is now defined as the actual unit-section map, shown invertible by the Lean-closed new-lem-weil-pbc-specialization-closed-site-counit and new-lem-weil-pbc-specialization-unit-comparison applied at B=Spec Gamma(v(V)). Steps 3, 5 and 8 were reworded to match. F3 (C1), step 4: the identification (h^*K)|_{T_0} = a^*(K|_T) is the localization-square isomorphism, so step 4 now cites lem-weil-pbc-localize-ringed-site-morphism. proof_deps was recomputed and four tool_uses were added; a closure check shows no cycle. The 23 declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestDerivedExchangeModel",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closed_test_derived_exchange_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.condensedMonoidal",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.proetaleMonoidal",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.moduleAbelian",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.moduleSectionsAdditive",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.pull",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.adj",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.pullComp",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.square",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.exchange",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.pushSectionsIso",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.lowerStarPreservesKInjective",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.pushDerivedSectionsIso",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restriction",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.sectionsOver",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restrictionOver",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.sectionComparison",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closedComparison",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closedMap",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.testMap",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.testRestriction",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.evaluatedExchange",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.sectionsArrow",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.fibreMap",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.TestNaturality",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closed_test_test_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.section_comparison_base_change_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.derived_restriction_localization",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restrict",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restrictPush",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restrictSections",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.restrictSectionsOver",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.scalarUnit",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.CoefficientSectionComparison",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.CoefficientClosedComparison",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.CoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closed_test_coefficient_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel.closed_test_derived_exchange_model"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedTestDerivedExchangeModel.lean",
+  "statement": "theorem closed_test_derived_exchange_model (A : Type u) [CommRing A] (I : Ideal A) {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A)) (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ I))) (w : IsPullback h fZ f (closedMap A I)) (V : (Spec (.of (A ⧸ I))).AffineProEt) [IsWContractibleRing Γ(V.left, ⊤)] [IsWContractibleRing Γ(((Scheme.AffineProEt.closedSiteLift A I).obj V).left, ⊤)] : ∃ eLeft : DerivedCategory.Plus.ι ⋙ CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ pull Λ (closedMap A I) ⋙ sectionsOver Λ V.hom ≅ DerivedCategory.Plus.ι ⋙ sectionsOver Λ (pullback.fst f ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom), ∃ eRight : DerivedCategory.Plus.ι ⋙ pull Λ h ⋙ CondensedRing.moduleObjectDerivedPushforward Λ fZ ⋙ sectionsOver Λ V.hom ≅ DerivedCategory.Plus.ι ⋙ pull Λ h ⋙ sectionsOver Λ (pullback.fst fZ V.hom), (∀ K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), IsIso ((closedComparison Λ A I V).app ((CondensedRing.moduleObjectDerivedPushforward Λ f).obj K.obj)) ∧ (closedComparison Λ A I V).app ((CondensedRing.moduleObjectDerivedPushforward Λ f).obj K.obj) ≫ eLeft.hom.app K = (sectionComparison Λ (IsPullback.of_hasPullback f ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom).toCommSq).app K.obj) ∧ eRight.hom = Functor.whiskerLeft (DerivedCategory.Plus.ι ⋙ pull Λ h) (sectionComparison Λ (IsPullback.of_hasPullback fZ V.hom).toCommSq) ∧ Functor.whiskerLeft DerivedCategory.Plus.ι (evaluatedExchange Λ A I w.toCommSq V) ≫ eRight.hom = eLeft.hom ≫ Functor.whiskerLeft DerivedCategory.Plus.ι (testRestriction Λ A I w.toCommSq V)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Derived-form statement with canonical mate and restriction maps. The additional theorems state the test, square/localization and coefficient naturality clauses of this same node. The scalar comparison is the right-derived map induced by the ordinary section identity; it is not assumed invertible. Repair H12/H4 of immutable head 790046091fff: cite landed def-sfb-condensed-module-sections and use its condensedModuleSections everywhere. The ordinary pushforward section isomorphism is transported through Sheaf.ΓNatIsoSheafSections on both schemes. No duplicate definition node or FormalClosedSupport import remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53c6a5796",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Re-delivery after the H12/H4 RETURN of 790046091fff. Diffed against that snapshot: the duplicate node def-sfb-condensed-module-global-sections is dropped; stmt_deps now cite the landed def-sfb-condensed-module-sections (existing:true record of ProEtale.condensedModuleSections, byte-identical to side-live, same Ab.{u+1} and site u+1/u universes); every formalClosedSupportSections use is replaced by condensedModuleSections; the FormalClosedSupport import is replaced by CondensedQcqsPushforwardContinuity plus RightDerivedFunctor.Adjunction. pushSectionsIso = ΓNatIsoSheafSections.symm ≫ globalSectionsLowerStarIso ≫ ΓNatIsoSheafSections (sources read: the canonical section identity). The new moduleSectionsAdditive instance is inferInstance. The main signature is unchanged; H3 re-read against the node and 09BL/0D6F found no mismatch, with no invertibility asserted for exchange or restriction. lean.statement is verbatim; all 37 declarations are present; 5 sorry, no axiom/opaque/admit; no cycle; edge cases I=0, I=A, zero ring and empty scheme are fine; both report sections are present. No compile was run (no FIX); the worker reports a 32.3 s server compile and a passing dry run. Maintainer note: two library declarations for module sections remain (pre-existing)."
  }
 }

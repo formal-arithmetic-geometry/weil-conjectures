@@ -23567,3 +23567,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T19:48:31Z L: superseded stage-1 delivery NV/lem-trf-point-sections-completion-cone at 59e608d66657976626a18bf1aff0afea081a5ac9; current completion retained; packet archived at refs/superseded/NV/lem-trf-point-sections-completion-cone/59e608d66657976626a18bf1aff0afea081a5ac9; stale return retired.
 - 2026-10-21T19:48:41Z L: superseded stage-1 delivery NU/lem-sf-open-projection-roos-completion at f366122ec055f9b5e8d4c268e9eca0973f9ac4d3; current completion retained; packet archived at refs/superseded/NU/lem-sf-open-projection-roos-completion/f366122ec055f9b5e8d4c268e9eca0973f9ac4d3; stale return retired.
 - 2026-10-21T19:48:48Z L: superseded stage-1 delivery NJ/lem-sfb-internal-homogeneous-functions-injective at 923419cfdc957da8860230fd4465a1b01a872e92; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-internal-homogeneous-functions-injective/923419cfdc957da8860230fd4465a1b01a872e92; stale return retired.
+- 19:49 L: merged deliver/Q26/lem-sfb-closed-test-derived-exchange-model (stage 2; reviewer PASS; parallel immutable checks)
+- 19:49 L: merged deliver/Q04/lem-sfb-derived-invariants-normal-subgroup-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 19:49 L: merged deliver/NC/lem-sfb-proper-ultrametric-scalar-extension (stage 2; reviewer PASS; parallel immutable checks)
+- 19:49 L: merged deliver/NJ/det-lem-bounded-continuity-sections (stage 2; reviewer PASS; parallel immutable checks)

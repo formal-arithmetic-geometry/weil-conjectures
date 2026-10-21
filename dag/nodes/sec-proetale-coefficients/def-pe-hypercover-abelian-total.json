@@ -1,0 +1,151 @@
+{
+ "id": "def-pe-hypercover-abelian-total",
+ "kind": "definition",
+ "title": "Abelian sections, alternating rows and coproduct total for ring-module sheaves",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $X_{\\mathrm{pro\\acute et}}$ be its small pro-etale site [sk-def-pe-site], let $R$ be an arbitrary sheaf of rings on this site, let $U$ be a site object, and let $W_\\bullet$ be a simplicial object over $U$. Work with $R$-module sheaves [def-weil-sheaf-of-modules-category] and abelian groups in any common universe containing the site and coefficient universes. Define the abelian evaluation functor $M\\mapsto M(U)$ by forgetting the $R(U)$-module structure. Define the cosimplicial abelian sections of $M$ to have degree $r$ equal to $M(W_r)$, with the actual restriction maps induced by $W$. Define its alternating row complex in nonnegative simplicial degrees by $\\delta^r=\\sum_{i=0}^{r+1}(-1)^i\\partial_i^*$ and extend it by zero to negative integer degrees. For any integer cochain complex $K$ of $R$-module sheaves, apply these rows degreewise, put simplicial degree first by flipping the resulting bicomplex, and take the coproduct total [def-sp-double-complex-total]. Its degree $q$ is $\\bigoplus_{r\\geq0,\\,r+m=q}K^m(W_r)$ and its differential on bidegree $(r,m)$ is $\\delta+(-1)^r d_K$. Module-sheaf morphisms and coefficient chain maps act by their section maps on every component. These definitions require no covering, affineness, weak contractibility, boundedness or qcqs hypotheses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-sections.md",
+  "place": "clause (2), section bicomplex and total; Stacks Project proetale.tex Tag 09A2, construction s(E(K))"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercoverAbelianSections|hypercoverAbelianRows|hypercoverAbelianTotal|hypercoverAbelianEvaluation",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "Mathlib provides alternating-coface and total primitives, not this ring-sheaf section composite; reuse landed HypercoverComplex definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cosimplicial abelian sections of a simplicial object in a ringed site, alternating coface rows and coproduct total complex",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.AlternatingCofaceMapComplex.objD",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicTopology.alternatingFaceMapComplex",
+     "CategoryTheory.CosimplicialObject.instCategory",
+     "AlgebraicTopology.AlternatingFaceMapComplex.objD",
+     "AlgebraicTopology.AlternatingFaceMapComplex.obj",
+     "CategoryTheory.CosimplicialObject"
+    ],
+    "digest": "7662f27ced8abe0f"
+   },
+   "date": "2026-10-21",
+   "verdict": "Mathlib provides alternating-coface and total primitives, not this ring-sheaf section composite; reuse landed HypercoverComplex definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alternating total complex of abelian sections of a complex of sheaves over a simplicial proetale object",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.AlternatingFaceMapComplex.obj",
+     "AlgebraicTopology.alternatingCofaceMapComplex_obj",
+     "ChainComplex.alternatingConst_obj",
+     "AlgebraicTopology.alternatingFaceMapComplex",
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "AlgebraicTopology.NormalizedMooreComplex.obj",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex"
+    ],
+    "digest": "ef9b8dc72d0a9b7d"
+   },
+   "date": "2026-10-21",
+   "verdict": "Mathlib provides alternating-coface and total primitives, not this ring-sheaf section composite; reuse landed HypercoverComplex definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n hypercoverAbelian(Sections|Rows|Total|Evaluation) lean/WeilConjectures lean/Sheaf; rg -l same-pattern dag/nodes",
+   "results": "No declarations in WeilConjectures. HypercoverComplex defines all four at lines 74, 87, 124, 136; consumers in ProEtaleBoundedContinuitySections. Only det-pe-hypercover-complex records these names as theorem helpers. def-weil-pbc-proetale-abelian-hypercover-total has abelian-sheaf inputs and fixed coefficient universe t+1.",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing ring-module definitions with existing:true; no duplicate Lean data or theorem-record change."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search \"hypercover abelian total\"; python3 tools/blueprint_refs.py ancestor det-lem-bounded-continuity-sections",
+   "results": "0 blueprint nodes match 'hypercover abelian total'; ancestor = det-lem-bounded-continuity-sections.",
+   "date": "2026-10-21",
+   "verdict": "New definition node attaches to clause (2) of the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-bounded-continuity-sections",
+  "date": "2026-10-21",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-bounded-continuity-sections",
+   "place": "clause (2) and proof paragraph (2): alternating abelian section bicomplex and coproduct total computing RΓ; clause (1) evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-cor-pe-bounded-continuity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.HypercoverComplex",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianTotal",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianSections",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianRows",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianTotal",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianEvaluation"
+  ],
+  "statement": "def hypercoverAbelianTotal (X : Scheme.{t})\n    (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt)\n    (W : SimplicialObject (Over U)) :\n    CochainComplex (ringedSiteModules.{max u v (t + 1)} R) ℤ ⥤\n      CochainComplex AddCommGrpCat.{max u v (t + 1)} ℤ",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership repair requested by immutable-head d6edf3f9a790 review. All four declarations are unchanged existing noncomputable def/abbrev data in the landed module, not choices from hypercover_complex_natural_iso. det-pe-hypercover-complex and its record are untouched. The abelian-sheaf-input def-weil-pbc-proetale-abelian-hypercover-total does not supply arbitrary ring-module inputs and independent coefficient universes."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb8c74b2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb8c74b2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN on d6edf3f9a790 (H2). Lean module byte-identical to the previous head. Item differs from live only in stmt_deps/lean: det-pe-hypercover-complex replaced by new definition node def-pe-hypercover-abelian-total, which owns hypercoverAbelianSections/Rows/Total/Evaluation with existing:true on the unchanged landed HypercoverComplex module. Checked: all four are real noncomputable def/abbrev data, not .choose; the node TeX matches the Lean (actual restrictions, alternating cofaces extended by zero, flipped coproduct total with differential delta+(-1)^r d_K, forget2 evaluation); site universes t+1/t and coefficients max u v (t+1); recorded statement starts at the def keyword and is verbatim in the live file; no competing owner; def-weil-pbc-proetale-abelian-hypercover-total is a different notion. Mechanical finding: det-pe-wc-sections-derived supplies only moduleQuasiIsoKInjectiveResolutions, a Prop-valued proof that K-injective resolutions exist, needed to form R-Gamma, so this is a genuine theorem dependency (Q64 precedent): PASS on that point. Clauses (1)-(3), the derived and per-degree forms, the finite total term, the canonical colimit.post, and the edge cases (empty diagram, q<a, negative a, K=0) re-checked and correct; no extra hypotheses; docstrings and both report sections present. Advisory only: HypercoverComplex docstrings still name the theorem node; properFaceDiagram still comes through the base-era det-pe-hypercover-existence. No compile (no file changed)."
+ }
+}

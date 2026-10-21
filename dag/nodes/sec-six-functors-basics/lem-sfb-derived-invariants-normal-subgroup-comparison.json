@@ -11,7 +11,9 @@
   "sk-def-sfb-condensed-ring",
   "def-weil-size-convention",
   "def-sfb-condensed-action-module",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-normal-invariant-comparison-data"
  ],
  "proof": [
   {
@@ -391,5 +393,52 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-82d4d1906 (reviewer sub-agent of L); spot-checked: I read the full item (14 steps), the new node lem-sfb-condensed-split-coset-induction, the statements of all cited nodes, Stacks 0D6E and 08BJ, and blueprint direct-images paragraph (3). Every step is correct, and I made no fixes. Step 2: Q is finite, the section s is continuous, the residual action does not depend on the lift, normality makes the fixed sections stable, and Γ_{G×L}=Γ_{Q×L}T. Step 3: H=K×1 in P=G×L has coset space Q×L with section (s,1), so Ind is an exact left adjoint of Res_K. The exact-left-adjoint criterion then applies with the right directions to Res_K, T and Γ_P. Step 4: the roles in the exact-square theorem (H'=T, H=Γ_K, r=Res_K, s=U) match, the square holds on the nose, and the normalization is the identity on (I|_K)^K. Step 5: the conjugate of the identity inflation is the identity on invariants. Steps 6–7: b:J→TI is unique up to homotopy, its transpose represents inf_N, and c_N∘inf_N=RΓ(η_N) with the directions checked. Step 9 uses the invariant inclusions and does not claim that r_h preserves K-injectives. Steps 10–11: the coefficient squares follow from the ringed-topos composition theorem and the cocycle node, which covers coefficient changes on identity topoi, with the same identity normalization as step 5 and no flatness assumption. Steps 12–13: the transitivity argument gives the actual arrow. Step 14: the K=1 and degenerate cases hold. The new node's statement is true: a section makes A(S)[P_S] free over A(S)[H_S] on C(S,X), so induction is exact sectionwise up to sheafification and the transpose formulas are well defined. I checked it on H=P, H=1, finite X and the zero ring. It is statement-only, strictly smaller than the item, and has three kinds of search. I searched for duplicates (induction, coinduction, exact left adjoint, normal subgroup) and found none. The ten tool uses are generic categorical lemmas, accepted. No SGA source is cited. The null blueprint.from.node is inherited from the parent chain and is not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedNormalSubgroupComparison",
+  "declaration": "Profinite.CondensedAction.normal_subgroup_comparison",
+  "declarations": [
+   "Profinite.CondensedAction.normalScalarRestriction",
+   "Profinite.CondensedAction.NormalScalars",
+   "Profinite.CondensedAction.normalChange",
+   "Profinite.CondensedAction.normalChangeExact",
+   "Profinite.CondensedAction.NormalChangeData",
+   "Profinite.CondensedAction.NormalChangeData.derivedTotal",
+   "Profinite.CondensedAction.NormalChangeData.derivedQuotient",
+   "Profinite.CondensedAction.NormalChangeData.derivedOuter",
+   "Profinite.CondensedAction.NormalChangeCompatible",
+   "Profinite.CondensedAction.normalChangeForget",
+   "Profinite.CondensedAction.NormalChangeData.derivedKernelRestriction",
+   "Profinite.CondensedAction.NormalChangeData.derivedKernel",
+   "Profinite.CondensedAction.NormalBetaCompatible",
+   "Profinite.CondensedAction.NormalChangeData.quotientComplex",
+   "Profinite.CondensedAction.NormalInflationCompatible",
+   "Profinite.CondensedAction.NormalInflationNatural",
+   "Profinite.CondensedAction.normalTowerAdditive",
+   "Profinite.CondensedAction.normalTowerOrdinary",
+   "Profinite.CondensedAction.normalTowerPreserves",
+   "Profinite.CondensedAction.normalTowerComparison",
+   "Profinite.CondensedAction.normalTowerInflation",
+   "Profinite.CondensedAction.NormalTowerCompatible",
+   "Profinite.CondensedAction.NormalAdjunctionNormalized",
+   "Profinite.CondensedAction.NormalTrivialKernel",
+   "Profinite.CondensedAction.NormalAssertion",
+   "Profinite.CondensedAction.normal_subgroup_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedNormalSubgroupComparison.lean",
+  "statement": "theorem normal_subgroup_comparison : NormalAssertion.{u}",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "NormalAssertion packages the categorical conclusions and normalized comparison diagrams, using the new normalized-invariant datum node. All auxiliary definitions and instances have real data; the sole postponed proof is normal_subgroup_comparison. The canonical derived left-inflation iso is owned by the datum definition node; general adjunction normalization remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-648a81400",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of adef578762a9. Snapshot diff: only the derivedCompositionLeftIso use was replaced by normalDerivedInflationIso, owned by the new def node def-sfb-normal-invariant-comparison-data (body = derivedCompositionLeftIso's term up to Prop letI instances, real data, docstrings, listed). The theorem node lem-sfb-derived-composition-adjunction-normalization was dropped from stmt_deps and kept in proof_deps; its module is now a private import, with an explicit public import of RightDerivedFunctor.Adjunction. No hypothesis, clause or universe changed; sole sorry is the main theorem; lean.statement verbatim for both nodes; not landed in side-live, no name collision. No findings."
  }
 }
