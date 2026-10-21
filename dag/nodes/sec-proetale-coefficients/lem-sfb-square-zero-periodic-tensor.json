@@ -16,109 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Define $P^i=R$ for $i\\leq0$, $P^i=0$ for $i>0$, and $d^i=t\\cdot-$ for $i<0$, with all other differentials zero. Augment $P^0$ by the quotient map $\\pi:R\\to F$. The equations $t^2=0$ and $\\pi(tR)=0$ make this an augmented complex. At every negative degree its kernel and incoming image are both $tR$, by the annihilator hypothesis. At degree zero, $\\ker\\pi=tR$ is the incoming image and $\\pi$ is surjective. Thus the augmented sequence is exact, each nonzero term is free of rank one, and $P\\to F[0]$ is a quasi-isomorphism: $H^0(P)=R/tR$ and all other cohomology vanishes.",
+   "text": "On the one-point site, multiplication by $t$ on $R$ has kernel and image $tR$. Apply [lem-sfb-exact-scalar-periodic-resolution]: the specified augmented rank-one free complex $P$ resolves $F$ and is K-flat. Apply [lem-sfb-periodic-tensor-normal-form] to $M=F$, on which $t$ acts by zero. By [lem-pc-derived-tensor-second-factor-functor] (2), with $R\\to R$ the identity, this computes the specified derived tensor independently of the chosen resolution. Its cohomology is $F$ in degrees $-q$, including zero. Reindexing the same free resolution by $i=-q$ computes $\\operatorname{Tor}_q^R(F,F)$ and gives the asserted Tor identification.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "The examples: the periodic multiplication resolution, with t in place of ell"
-   }
-  },
-  {
-   "text": "The maps $R\\otimes_R M\\to M$, $r\\otimes m\\mapsto rm$, and $m\\mapsto1\\otimes m$ are inverse, since $r\\otimes m=1\\otimes rm$; hence $R$ is flat and the zero module is flat. The complex $P$ is bounded above by zero, so [lem-pc-module-bounded-flat-kflat] makes it K-flat. Regard $R$ as a sheaf of rings on the one-point site, so that K-flatness is that of [def-pc-kflat-complex], as in the statement. By [lem-pc-derived-tensor-second-factor-functor] (2), applied to the identity ring map $R\\to R$ and $N=F[0]$, for every K-flat resolution of $F$, in particular $P\\to F[0]$, the canonical map identifies $F\\otimes_R^{\\mathbf L}F$ with $\\operatorname{Tot}(P\\otimes_RF[0])$ in $D(R)$, canonically and independently of the K-flat resolution chosen. Since $F[0]$ has only its degree-zero term, the total tensor has $R\\otimes_R F\\cong F$ in every degree $i\\leq0$, zero in positive degrees, and differential $\\bar x\\mapsto t\\bar x=0$. There is only one nonzero summand in each total degree; no convergence or interchange of infinite sums is needed.",
-   "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "def-pc-kflat-complex",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "def-pc-tensor-complex-sheaves"
+    "lem-sfb-exact-scalar-periodic-resolution",
+    "lem-sfb-periodic-tensor-normal-form",
+    "lem-pc-derived-tensor-second-factor-functor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism; computation following the periodic resolution in the blueprint"
-   }
-  },
-  {
-   "text": "For the zero-differential complex just obtained, in degree $-q$ the kernel is $F$ and the incoming image is zero, for every $q\\geq0$, including $q=0$ where the outgoing target is zero. Thus $H^{-q}(F\\otimes_R^{\\mathbf L}F)\\cong F$. Here $\\operatorname{Tor}^R_q(F,F)$ is the degree-$q$ homology of a free resolution of the first $F$ tensored with the second $F$; reindexing this resolution by $i=-q$ gives the same calculation.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "The examples: Tor in every nonnegative degree"
+    "place": "The examples: periodic resolution and all-degree Tor computation, followed by the constant-sheaf argument of the returned split"
    }
   },
   {
-   "text": "Let $V$ be any scheme and take its small pro-etale site with the size convention of [def-weil-pbc-proetale-site]. Apply the constant module sheaf functor to the augmented complex of step 1, term by term. Its terms are $R_V$ in degrees at most zero, its differentials are multiplication by the constant section $t$, and its augmentation is the constant quotient map to $F_V$. By [lem-weil-pbc-finite-type-constant-exact], this functor preserves kernels and cokernels, hence images (as kernels of cokernels). It therefore preserves each equality of incoming image and outgoing kernel from step 1. Consequently $P_V\\to F_V[0]$ is a quasi-isomorphism. This uses exactness on sheaves, and imposes no Noetherian, finite-coefficient or connectedness hypothesis.",
+   "text": "For any scheme $V$, [lem-sfb-constant-periodic-resolution-nonzero] supplies the specified constant rank-one K-flat resolution $P_V\\to F_V[0]$, and verifies $tF_V=0$. It also gives $F_V\\ne0$ whenever $F\\ne0$ and $V$ is nonempty. No nonvanishing is needed for empty $V$.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-finite-type-constant-exact"
+    "lem-sfb-constant-periodic-resolution-nonzero"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093J, lemma-constant-exact; constant sheaves of modules in section-constant"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples: periodic resolution and all-degree Tor computation, followed by the constant-sheaf argument of the returned split"
    }
   },
   {
-   "text": "For any $R_V$-module sheaf $M$, the sectionwise maps $R_V(U)\\otimes_{R_V(U)}M(U)\\to M(U)$, $a\\otimes m\\mapsto am$, have inverse $m\\mapsto1\\otimes m$ and commute with restrictions. Sheafifying gives $R_V\\otimes_{R_V}M\\cong M$ by [def-pur-sheaf-tensor-product]. Thus tensoring with $R_V$ is the identity functor up to this natural isomorphism and is exact; $R_V$ is flat by [def-pc-flat-sheaf-modules], and the zero sheaf is flat for the same reason with the zero functor. Hence every term of $P_V$ is flat.",
+   "text": "The zero map $t:F\\to F$ sheafifies to zero on $F_V$. Apply [lem-sfb-periodic-tensor-normal-form] with $M=F_V$. By [def-weil-derived-tensor] and [lem-weil-derived-tensor-resolution-independent], its total tensor computes the stated derived self-tensor using $P_V$, even if the definition chose another resolution. Its degree-$-q$ cohomology is therefore $F_V$ for every $q\\geq0$. Under the nonzero hypotheses, step 2 and these isomorphisms make every displayed cohomology sheaf nonzero.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ER, definition-flat, and the unit tensor maps written explicitly"
-   }
-  },
-  {
-   "text": "The complex $P_V$ is zero in positive degrees and termwise flat by step 5, so [lem-pc-bounded-above-flat-kflat-site] applies to $(V_{\\mathrm{proet}},R_V)$ and makes it K-flat. By [def-weil-derived-tensor], $F_V\\otimes_{R_V}^{\\mathbf L}F_V$ is $P'\\otimes_{R_V}F_V[0]$ for the chosen K-flat resolution $P'\\to F_V[0]$; by [lem-weil-derived-tensor-resolution-independent], applied to $P'$ and $P_V\\to F_V[0]$, it is canonically isomorphic in $D(V_{\\mathrm{proet}},R)$ to $P_V\\otimes_{R_V}F_V[0]$, which therefore represents it. The total tensor definition gives one term $R_V\\otimes_{R_V}F_V\\cong F_V$ in each nonpositive degree. Under the unit isomorphism of step 5, its differential is multiplication by $t$, which is zero: the linear map $F\\to F$, $\\bar x\\mapsto t\\bar x$, is zero and its constant sheaf map is zero. Its cohomology in degree $-q$ is therefore $\\ker(0)/\\operatorname{im}(0)=F_V$ for every $q\\geq0$.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sfb-periodic-tensor-normal-form",
     "def-weil-derived-tensor",
-    "lem-weil-derived-tensor-resolution-independent",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "lem-weil-derived-tensor-resolution-independent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat, and section-flat derived tensor construction"
-   }
-  },
-  {
-   "text": "Suppose $F\\ne0$ and $V$ is nonempty. Choose $0\\ne a\\in F$. If the constant section $a$ mapped to zero in $F_V(V)$, local injectivity of the constant module unit [lem-sf-constant-module-unit-locally-bijective] would give a covering of $V$ on which the two constant presheaf sections $a$ and $0$ coincide. A pro-etale covering is jointly surjective on underlying points by [def-weil-pbc-proetale-site], so at least one member is nonempty. On it the constant presheaf restriction is the identity of $F$, forcing $a=0$, a contradiction. Thus $F_V$ is nonzero, and step 6 makes every displayed cohomology sheaf nonzero. When $V$ is empty no nonvanishing is claimed.",
-   "uses": [
-    "lem-sf-constant-module-unit-locally-bijective",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CY and 093T, constant module sheafification unit; covering argument written explicitly"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples: periodic resolution and all-degree Tor computation, followed by the constant-sheaf argument of the returned split"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-pc-module-bounded-flat-kflat",
-  "def-pc-kflat-complex",
+  "lem-sfb-exact-scalar-periodic-resolution",
+  "lem-sfb-periodic-tensor-normal-form",
   "lem-pc-derived-tensor-second-factor-functor",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-finite-type-constant-exact",
-  "def-pur-sheaf-tensor-product",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-constant-periodic-resolution-nonzero",
   "def-weil-derived-tensor",
-  "lem-weil-derived-tensor-resolution-independent",
-  "lem-sf-constant-module-unit-locally-bijective"
+  "lem-weil-derived-tensor-resolution-independent"
  ],
  "proof_origin": {
   "by": "agent",
@@ -213,25 +154,9 @@
   "date": "2026-10-21",
   "item": "lem-sfb-square-zero-periodic-tensor",
   "worker": "stage1",
-  "summary": "Q26 writes the periodic resolution and zero-differential tensor calculations explicitly, for ordinary modules and constant pro-etale sheaves. Reuses the four general facts already present in the DAG; creates no nodes. Checks arbitrary rings, q=0, empty schemes, and zero coefficients. No statement change or attachment. Reviewer FIX (2026-10-21): steps 2 and 6 now cite the resolution-independence lemmas for the ordinary and pro-etale derived tensor.",
-  "blueprint": "Realizes the periodic resolution and all-degree self-Tor calculation in The examples of det-def-localizing-closure-ctf-equals-bc.proof.md; extends the same calculation to constant sheaves exactly as the item states.",
+  "summary": "Q43 repairs the human-requested re-split into three statement-only tasks: exact scalar periodic K-flat resolution, tensor normal form, and constant pro-etale resolution with nonvanishing. Every construction and argument from the old proof is allocated explicitly in report.md. The parent only assembles these statements with the two existing resolution-independence tools; statement and published Lean metadata unchanged.",
+  "blueprint": "The examples: the infinite periodic multiplication resolution and the Tor computation for all q; retains the generalized exact-square-zero-divisor route and its constant pro-etale realization.",
   "tool_uses": [
-   {
-    "node": "lem-pc-module-bounded-flat-kflat",
-    "why": "Generic bounded-above flat criterion for ordinary modules; used for the explicitly constructed periodic complex. The localizing-closure unit does not state this general tool, and its periodic-resolution route is retained."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-constant-exact",
-    "why": "Generic constant module sheafification exactness for arbitrary rings and small sites, used to sheafify the explicit resolution. The localizing-closure unit does not state this general tool, and its periodic-resolution route is retained."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic bounded-above flat criterion on a ringed site; applies to the explicit rank-one resolution on the small pro-etale site. The localizing-closure unit does not state this general tool, and its periodic-resolution route is retained."
-   },
-   {
-    "node": "lem-sf-constant-module-unit-locally-bijective",
-    "why": "Generic local injectivity of the constant module sheafification unit; used with the covering definition to detect a nonzero constant section. The localizing-closure unit does not state this general tool, and its periodic-resolution route is retained."
-   },
    {
     "node": "lem-pc-derived-tensor-second-factor-functor",
     "why": "Generic independence of the ordinary derived tensor from the K-flat resolution (Stacks 064L/064M); identifies F⊗^L F with the tensor of the explicit periodic resolution. The localizing-closure unit states no such tool."
@@ -253,10 +178,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q26-54391ecdc",
-  "group": "Q26",
+  "reviewer": "NT-cc-Q43-b19a7e387",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-54391ecdc (reviewer sub-agent of L); spot-checked: Fix: added resolution-independence citations to steps 2 and 6 (C4); no new nodes, statement unchanged. Source: the 'The examples' paragraph of main-20261015 sk-def-localizing-closure-ctf-equals-bc.proof.md (periodic resolution over Z/ell^2), generalized correctly to t^2=0 with Ann(t)=tR. Stacks tags 06YQ, 093J, 064K/064L and 06YT checked in tags and .tex; the report's metadata remarks on dependency tags are correct. Small cases checked: Z/4 with t=2, k[e]/e^2, R=0, t=0 with R nonzero (excluded, correctly), q=0, empty V, disconnected V. Steps 1, 3, 4, 5 and 7 verified against the cited statements: annihilator exactness, constant sheafification exact on a small site, R_V tensor unit, local injectivity on a nonempty cover. Fault C4 in step 2: it called the ordinary derived tensor a one-point specialization of def-weil-derived-tensor, which is pro-etale only and built from a chosen resolution, and it computed with its own P without any independence result. Step 6 had the same gap for P_V. Fix: step 2 now cites lem-pc-derived-tensor-second-factor-functor (2) with the identity ring map R->R and N=F[0], plus def-pc-kflat-complex. Step 6 now cites lem-weil-derived-tensor-resolution-independent. Both are existing generic nodes and are added to split_report.tool_uses; neither closure contains the item, so no cycle. proof_deps updated to the union of all uses. Item not dropped, no repair or re-split note, no SGA citation.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-b19a7e387 (reviewer sub-agent of L); spot-checked: Re-split of the human's 2026-10-21 note: the item proof is now a 3-step, 1388-character assembly; the 4867-character, 7-step Q26 proof was the base. Every old argument has a new place. (a) Old step 1, the flatness/K-flatness part of step 2, and step 5 go to lem-sfb-exact-scalar-periodic-resolution (ringed site, ker mu_t = im mu_t, H^0 = coker, flat terms, K-flat via Stacks 06YQ). (b) The tensor computation of steps 2, 3 and 6 goes to lem-sfb-periodic-tensor-normal-form (Tot(P tensor M[0]) is isomorphic to the zero-differential Z_M when t^2=0 and tM=0; H^{-q} = M). (c) Steps 4 and 7, and the K-flatness of P_V from step 6, go to lem-sfb-constant-periodic-resolution-nonzero (constant exactness transfer via lem-weil-pbc-finite-type-constant-exact and Stacks 093J; F -> F_V(V) injective for nonempty V via local injectivity and a nonempty cover member). Resolution independence stays explicit in item steps 1 and 3: lem-pc-derived-tensor-second-factor-functor (2) with the identity R->R, and lem-weil-derived-tensor-resolution-independent without a comparison map. Both are declared tool uses and accepted. The three new nodes are statement-only, of comparable size and self-contained, with all three search kinds recorded and correct blueprint.from (det-def-localizing-closure-ctf-equals-bc, The examples, via [item]). None restates the item or one of its clauses. Small cases tested: Z/4 with t=2, k[e]/e^2, R=0, Z/8 with t=4 (correctly excluded), t=0, M=0, V empty, V disconnected. The coefficient category is R_V-modules on V_proet, matching def-weil-derived-tensor. The item differs from live only in proof, proof_deps and split_report. It is not in the dropped list, no other group has re-split it, and nothing cites SGA. No duplicates in the DAG: nearest are lem-sfb-cyclic-periodic-resolution and lem-pur-constant-two-term-resolution. Advisory: node 3's flatness/K-flatness clause partly overlaps node 1; the item's maintainer tool_uses still lists four old-proof tools."
  },
  "lean": {
   "module": "Sheaf.Paper.SquareZeroPeriodicTensor",

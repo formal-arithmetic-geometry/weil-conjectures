@@ -1,0 +1,79 @@
+{
+ "id": "lem-sfb-periodic-tensor-normal-form",
+ "kind": "statement",
+ "title": "The zero-differential normal form of a periodic tensor",
+ "statement": "Let $\\mathcal C$ be a small site, $\\mathcal O$ a sheaf of commutative rings, and $t=(t_U)_U$ a restriction-compatible family of sections with $t_U^2=0$. Let $M$ be a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] such that multiplication by $t$ on $M$ is zero. Define a cochain complex $P$ [def-pc-cochain-complex-modules] by $P^i=\\mathcal O$ for $i\\leq0$, $P^i=0$ for $i>0$, and differential multiplication by $t$ for $i<0$, zero otherwise. Let $Z_M^i=M$ for $i\\leq0$ and $Z_M^i=0$ for $i>0$, with every differential zero, and let $M[0]$ have $M$ only in degree zero. There is an isomorphism of cochain complexes $\\operatorname{Tot}(P\\otimes_{\\mathcal O}M[0])\\cong Z_M$ for the total tensor [def-pc-tensor-complex-sheaves]. Its degree-$i$ map for $i\\leq0$ is induced by the unit tensor isomorphism $\\mathcal O\\otimes_{\\mathcal O}M\\to M$, locally $a\\otimes m\\mapsto am$, with inverse $m\\mapsto1\\otimes m$ [def-pur-sheaf-tensor-product]. These isomorphisms are natural in $\\mathcal O$-linear maps of sheaves annihilated by $t$, and $H^{-q}(\\operatorname{Tot}(P\\otimes_{\\mathcal O}M[0]))\\cong M$ for every $q\\geq0$, while its positive cohomology vanishes [def-weil-abstract-derived-category]. In particular, if $\\varepsilon:P\\to E[0]$ is a K-flat resolution [def-pc-kflat-complex] of an $\\mathcal O$-module sheaf $E$, this zero-differential complex represents the tensor $E[0]\\otimes_{\\mathcal O}^{\\mathbf L}M[0]$ computed using that resolution. This assertion includes ordinary modules by taking the one-point site; no annihilator condition on $\\mathcal O$ and no nonzero hypothesis on $M$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples: the all-degree Tor computation after tensoring the periodic resolution; generalized to an arbitrary annihilated module sheaf"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "alternatingConst.*[Tt]ensor|[Tt]ensor.*alternatingConst|zero.*[Dd]ifferential|[Dd]ifferential.*zero",
+   "results": "; Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; inspected the returned source and nearby declarations",
+   "date": "2026-10-21",
+   "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total tensor of a periodic multiplication complex with a module killed by the scalar is a zero differential complex",
+   "results": "; TensorProduct.zero_smul, PiTensorProduct.zero_tprodCoeff, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.tensor_unit_d₂, ModuleCat.smulShortComplex, HomologicalComplex₂.total, LinearMap.lTensor_zero, TensorProduct.smul_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": "; HomologicalComplex.tensorUnit, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.tensorUnitIso, HomologicalComplex.HasTensor, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.instHasTensorXTensorUnit_1",
+   "date": "2026-10-21",
+   "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site and a global scalar t acting trivially on M, total tensor of the complex with O in nonpositive degrees and differential t with M concentrated in degree zero is canonically isomorphic to the constant zero differential complex of M",
+   "results": "; HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.tensorUnitIso, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.leftUnitor', HomologicalComplex.rightUnitor', HomologicalComplex.rightUnitor",
+   "date": "2026-10-21",
+   "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a rank one periodic cochain complex with a module sheaf annihilated by its differential scalar gives the zero differential complex with that module in every nonpositive degree",
+   "results": "; CochainComplex.cm5b.I_d, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorXTensorUnit, CochainComplex.singleFunctor_obj_d, Rep.isZero_Tor_succ_of_projective, CochainComplex.HomComplex.δ_shape",
+   "date": "2026-10-21",
+   "verdict": "no match: generic total tensor, unit-complex and zero-differential infrastructure do not identify this unbounded periodic tensor with the specified zero-differential complex for arbitrary annihilated module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-periodic-tensor",
+  "date": "2026-10-21",
+  "group": "Q43"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "blueprint": {
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "The examples, the calculation of Tor in every nonnegative degree by tensoring the periodic resolution; chain-level normal form for any module annihilated by the scalar",
+   "via": [
+    "lem-sfb-square-zero-periodic-tensor"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
