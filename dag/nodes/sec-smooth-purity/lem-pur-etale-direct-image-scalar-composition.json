@@ -2,7 +2,7 @@
  "id": "lem-pur-etale-direct-image-scalar-composition",
  "kind": "statement",
  "title": "Counit scalar maps respect ordinary etale direct-image composition",
- "statement": "Let $\\varphi:A\\to B$ be a unital map of finite commutative rings. All schemes and morphisms below are arbitrary [def-pc-scheme]. Write $D_R(T)=D(T_{\\mathrm{et}},R)$ for the ordinary unbounded derived category of constant-ring module sheaves [def-weil-pbc-derived-categories], $Q_T=(-)\\otimes_A^{\\mathbf L}B$ [lem-pur-derived-change-of-rings], and $u_R^*$ for exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Use the canonical K-flat scalar/pullback isomorphism $\\lambda_u:u_B^*Q_T\\cong Q_Wu_A^*$ for $u:W\\to T$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Use the canonical derived adjunction $u_R^*\\dashv Ru_{*,R}$ [def-kun-projection-formula-map]. Define $\\chi_{u,E}:Q_TRu_{*,A}E\\to Ru_{*,B}Q_WE$ to have adjunct $Q_W(\\varepsilon_{u,A,E})\\circ\\lambda_{u,Ru_{*,A}E}$, where $\\varepsilon_{u,A}$ is the counit. Let $X\\xrightarrow rY\\xrightarrow sZ$. Write $\\kappa_R:R(sr)_{*,R}\\cong Rs_{*,R}Rr_{*,R}$ for the K-injective-normalized direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. For every $M\\in D_A(X)$,\n$$\\kappa_{B,Q_XM}\\circ\\chi_{sr,M}=Rs_{*,B}(\\chi_{r,M})\\circ\\chi_{s,Rr_{*,A}M}\\circ Q_Z(\\kappa_{A,M}).$$\nUnder the canonical identity direct-image comparisons $\\chi_{\\mathrm{id}}$ is the identity. No properness, Noetherian hypothesis, boundedness, flatness, or invertibility of $\\chi$ is asserted.",
+ "statement": "Let $\\varphi:A\\to B$ be a unital map of finite commutative rings. All schemes and morphisms below are arbitrary [def-pc-scheme]. Write $D_R(T)=D(T_{\\mathrm{et}},R)$ for the ordinary unbounded derived category of constant-ring module sheaves [def-weil-pbc-derived-categories], $Q_T=(-)\\otimes_A^{\\mathbf L}B$ [lem-pur-derived-change-of-rings], and $u_R^*$ for exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Use the canonical K-flat scalar/pullback isomorphism $\\lambda_u:u_B^*Q_T\\cong Q_Wu_A^*$ for $u:W\\to T$ [def-pur-etale-scalar-pullback-iso], the coefficient-change form of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Use the canonical derived adjunction $u_R^*\\dashv Ru_{*,R}$ [def-kun-projection-formula-map]. Define $\\chi_{u,E}:Q_TRu_{*,A}E\\to Ru_{*,B}Q_WE$ to have adjunct $Q_W(\\varepsilon_{u,A,E})\\circ\\lambda_{u,Ru_{*,A}E}$, where $\\varepsilon_{u,A}$ is the counit. Let $X\\xrightarrow rY\\xrightarrow sZ$. Write $\\kappa_R:R(sr)_{*,R}\\cong Rs_{*,R}Rr_{*,R}$ for the K-injective-normalized direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. For every $M\\in D_A(X)$,\n$$\\kappa_{B,Q_XM}\\circ\\chi_{sr,M}=Rs_{*,B}(\\chi_{r,M})\\circ\\chi_{s,Rr_{*,A}M}\\circ Q_Z(\\kappa_{A,M}).$$\nUnder the canonical identity direct-image comparisons $\\chi_{\\mathrm{id}}$ is the identity. No properness, Noetherian hypothesis, boundedness, flatness, or invertibility of $\\chi$ is asserted.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0E46, label remark-compose-base-change; coefficient identity-topos squares pasted along the geometric adjunctions"
@@ -14,11 +14,102 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-kun-projection-formula-map",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-pur-etale-scalar-pullback-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_{u,R}=u_R^*$ and $R_{u,R}=Ru_{*,R}$. The exact constant-ring inverse image is the module pullback, so the canonical ringed-topos comparisons apply to these functors. Write $a_R:P_{sr,R}\\xrightarrow{\\sim}P_{r,R}P_{s,R}$. The adjunction-compatibility assertion of [lem-sfb-ringed-derived-monoidal-comparisons], with constant ring $R=A$ or $B$, identifies the specified K-injective-normalized $\\kappa_R$ with the right-adjoint comparison for $a_R$. Thus, when $P_{sr,R}$ and $R_{sr,R}$ are written as $P_{r,R}P_{s,R}$ and $R_{s,R}R_{r,R}$ using these comparisons, the counit is exactly\n$$\\varepsilon_{r,R,M}\\circ P_{r,R}(\\varepsilon_{s,R,R_{r,R}M}).$$\nThis uses the actual canonical adjunction of the item. The cited theorem also identifies the identity pullback/direct-image adjunction with the identity adjunction. All sites are taken in the small representatives used by the derived categories; there is no assumption on the schemes or on the complexes beyond those in the item.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); normalized constant-ring specialization"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-scalar-pullback-composition] to $j_1=r$, $v=s$, $j_2=sr$. Its scalarPullbackIso is exactly the K-flat-normalized $\\lambda$ specified in [def-pur-etale-scalar-pullback-iso]. For every $N\\in D_A(Z)$ the result is\n$$\\lambda_{r,P_{s,A}N}\\circ P_{r,B}(\\lambda_{s,N})\\circ a_{B,Q_ZN}\n =Q_X(a_{A,N})\\circ\\lambda_{sr,N}.$$\nIn particular, after the comparisons in Step 1, the scalar map for the composite is the pasted left square $\\lambda_{r,P_{s,A}N}\\circ P_{r,B}(\\lambda_{s,N})$. The cited result explicitly allows arbitrary commutative rings, morphisms and unbounded complexes, so it applies also when $B$ is not flat over $A$.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition",
+    "def-pur-etale-scalar-pullback-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, label remark-compose-base-change, explicit verification of the omitted pasting calculation; Tags 07A6 and 0D6E for the canonical adjunctions and compositors"
+   }
+  },
+  {
+   "text": "By the adjunction Hom bijection of [def-kun-projection-formula-map] and the counit characterization [lem-weil-pbc-adjunct-counit-identity], the definition of $\\chi$ gives, for $u=r,s,sr$ and every $E$,\n$$\\varepsilon_{u,B,Q_WE}\\circ P_{u,B}(\\chi_{u,E})\n =Q_W(\\varepsilon_{u,A,E})\\circ\\lambda_{u,R_{u,A}E},$$\nwhere $u:W\\to T$. Adjuncts are unique because this is a Hom bijection. Only this equality will be used about $\\chi$; no invertibility of $\\chi$ is required.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, label remark-compose-base-change, explicit verification of the omitted pasting calculation; Tags 07A6 and 0D6E for the canonical adjunctions and compositors"
+   }
+  },
+  {
+   "text": "Fix $M\\in D_A(X)$, put $U=R_{r,A}M$ and $V=R_{s,A}U$, and transport the source of the desired equation along $Q_Z(\\kappa_{A,M})$. The two arrows now have source $Q_ZV$ and target $R_{s,B}R_{r,B}Q_XM$. They are\n$$F=\\kappa_{B,Q_XM}\\circ\\chi_{sr,M}\\circ Q_Z(\\kappa_{A,M})^{-1},\\qquad\nG=R_{s,B}(\\chi_{r,M})\\circ\\chi_{s,U}.$$\nUnder the composite adjunction of Step 1, the adjunct of $F$, by the defining equation of Step 3 and the scalar equation of Step 2, is\n$$T=Q_X(\\varepsilon_{r,A,M})\\circ Q_X(P_{r,A}(\\varepsilon_{s,A,U}))\\circ\n\\lambda_{r,P_{s,A}V}\\circ P_{r,B}(\\lambda_{s,V}).$$\nNaturality of $\\lambda_{sr}$ at $\\kappa_{A,M}^{-1}$ moves the source inverse through the scalar comparison; the counit normalization in Step 1 then replaces the composite counit by its two factors. Here the source is $P_{r,B}P_{s,B}Q_ZV$ and the target is $Q_XM$. The inverse in $F$ is legitimate because $Q_Z$ is a functor and $\\kappa_A$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, label remark-compose-base-change, explicit verification of the omitted pasting calculation; Tags 07A6 and 0D6E for the canonical adjunctions and compositors"
+   }
+  },
+  {
+   "text": "Expand the adjunct of $G$ using the same composite counit. It is\n$$\\varepsilon_{r,B,Q_XM}\\circ P_{r,B}(\\varepsilon_{s,B,R_{r,B}Q_XM})\\circ P_{r,B}P_{s,B}\\bigl(R_{s,B}(\\chi_{r,M})\\circ\\chi_{s,U}\\bigr).$$\nNaturality of $\\varepsilon_{s,B}$ at the arrow $\\chi_{r,M}:Q_YU\\to R_{r,B}Q_XM$ reads\n$$\\varepsilon_{s,B,R_{r,B}Q_XM}\\circ P_{s,B}R_{s,B}(\\chi_{r,M})\n=\\chi_{r,M}\\circ\\varepsilon_{s,B,Q_YU}.$$\nSubstitution, followed by functoriality of $P_{r,B}$, rewrites the expanded adjunct as\n$$\\varepsilon_{r,B,Q_XM}\\circ P_{r,B}(\\chi_{r,M})\\circ\nP_{r,B}\\bigl(\\varepsilon_{s,B,Q_YU}\\circ P_{s,B}(\\chi_{s,U})\\bigr).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, label remark-compose-base-change, explicit verification of the omitted pasting calculation; Tags 07A6 and 0D6E for the canonical adjunctions and compositors"
+   }
+  },
+  {
+   "text": "Use the Step-3 equations first for $s,U$ and then for $r,M$. The last expression becomes\n$$Q_X(\\varepsilon_{r,A,M})\\circ\\lambda_{r,U}\\circ\nP_{r,B}\\bigl(Q_Y(\\varepsilon_{s,A,U})\\circ\\lambda_{s,V}\\bigr).$$\nNaturality of $\\lambda_r$ at $\\varepsilon_{s,A,U}:P_{s,A}V\\to U$ says\n$$\\lambda_{r,U}\\circ P_{r,B}Q_Y(\\varepsilon_{s,A,U})\n=Q_XP_{r,A}(\\varepsilon_{s,A,U})\\circ\\lambda_{r,P_{s,A}V}.$$\nAfter this substitution and functoriality, the expression is exactly $T$ from Step 4. Consequently the adjuncts of $F$ and $G$ coincide. Injectivity of the composite Hom bijection gives $F=G$, and precomposing with $Q_Z(\\kappa_{A,M})$ gives precisely the displayed equation of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, label remark-compose-base-change, explicit verification of the omitted pasting calculation; Tags 07A6 and 0D6E for the canonical adjunctions and compositors"
+   }
+  },
+  {
+   "text": "For the identity clause, use the identity comparisons of Step 1. The comparison $a_R$ when $r=s=\\mathrm{id}$ is the identity: the cited canonical composition comparison is computed by ordinary pullback composition on K-flat representatives, where the two identity pullbacks insert no scalar and give the identity chain map. Every derived object admits such a representative by [lem-pc-kflat-resolution], so the equality holds at every object. Applying Step 2 with both maps the identity therefore gives $\\lambda_{\\mathrm{id}}\\circ\\lambda_{\\mathrm{id}}=\\lambda_{\\mathrm{id}}$. Since $\\lambda_{\\mathrm{id}}$ is an isomorphism by [def-pur-etale-scalar-pullback-iso], cancellation yields $\\lambda_{\\mathrm{id}}=1$. The identity adjunction has identity counit by [lem-sfb-ringed-derived-monoidal-comparisons]; the Step-3 characterization now reads $\\chi_{\\mathrm{id},E}=Q_T(1_E)\\circ1=1_{Q_TE}$. This proves the identity assertion without deducing any invertibility for nonidentity $\\chi$.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-scalar-pullback-composition",
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E and 07A6, identity comparisons; identity specialization of the scalar composition equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-scalar-pullback-composition",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46 (remark-compose-base-change) omits the verification; the steps give the counit/naturality verification for the coefficient-change squares, using the existing normalized-comparison statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +145,59 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, this is the counit natural transformation of the adjunction between extending scalars from $ R $ \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"ModuleCat.extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R₁ R₂ R₃ : Type u₁} →\\n  [inst : CommRing R₁] →\\n    [inst_1 : CommRing R₂] →\\n      [inst_2 : CommRing R₃] →\\n        (f₁₂ : R₁ →+* R₂) →\\n          (f₂₃ : R₂ →+* R₃) →\\n            ModuleCat.extendScalars (f₂₃.comp f₁₂) ≅ (ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)\", \"doc\": \"Given commutative rings $ R_1, R_2, R_3 $ and ring homomorphisms $ f_{12} : R_1 → R_2 $, $ f_{23} : R_2 → R_3 $, the extension of scalars functor for the composite homomorphism $ f_{23} ∘ f_{12} $ is \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"ModuleCat.ExtendScalars.map'_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{M₁ M₂ M₃ : ModuleCat.{v} R} (l₁₂ : M₁ ⟶ M₂) (l₂₃ : M₂ ⟶ M₃) : map' f (l₁₂ ≫ l₂₃) = map' f l₁₂ ≫ map' f l₂₃\", \"doc\": \"For any ring homomorphism $ f : R → S $ and composable $ R $-linear maps $ φ : M_1 → M_2 $ and $ ψ : M_2 → M_3 $, the extension of scalars functor satisfies $ \\\\text{Ext}_f(ψ ∘ φ) = \\\\text{Ext}_f(ψ) ∘ \\\\\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τr =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pushforwardComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ of schemes, the counit component of the pseudofunctor's composition map $\\\\tau_{g \\\\circ f}$ is naturally isomorphic to the composition of counits $\\\\tau_g \\\\ci\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary modules, scheme structure-sheaf modules, or generic mates; none states this normalized unbounded small-etale coefficient identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(scalar|coefficient).*(pushforward|direct.image).*(comp)|derived.*[Pp]ushforward.*[Cc]omp",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting coefficient change natural transformations for unbounded derived pushforward of sheaves of modules",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardNatTrans_app_val_app\", \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"PresheafOfModules.pushforward_map_app_apply\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforwardNatTrans\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardSections\", \"PresheafOfModules.pushforward_id_comp\"], \"digest\": \"1de1356e0da091b0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Adjunction.comp",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.comp_unit_app\", \"CategoryTheory.Adjunction.comp_counit_app_assoc\", \"CategoryTheory.Adjunction.comp_unit_app_assoc\", \"CategoryTheory.Adjunction.comp_counit\"], \"digest\": \"ac2dfcadb3e25da5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit mate of derived coefficient extension commutes with composition of etale direct images",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.comp\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.IsEtaleAt.comp\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"StandardEtalePair.HasMap.map\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\"], \"digest\": \"c1186ec3b537c726\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|comp_counit_app",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"f68e2d48236f4896\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars comparison with right derived functors is compatible with composition",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.rightDerived_fac_assoc\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.totalRightDerived\", \"ModuleCat.ExtendScalars.map'_comp\"], \"digest\": \"f30a964e6d77a5f4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting squares of adjoint functors takes their mates to the composite natural transformation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Bicategory.mateEquiv_square\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.Bicategory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\"], \"digest\": \"5cc6cd97a6447a5f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not identify the specified geometric and scalar derived comparisons; generic mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-compact-scalar-coherence",
@@ -76,5 +216,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-direct-image-scalar-composition",
+  "worker": "stage1",
+  "summary": "Expanded the omitted Stacks 0E46 verification into the actual counit calculation. Reused existing scalar/pullback composition and normalized derived-adjunction comparisons, proved the identity clause by invertible idempotence, and added the precise definition reference for the already specified scalar/pullback map. No new nodes or mathematical statement changes.",
+  "blueprint": "Current main-20261015 cor-pur-vector-bundle-purity proof, paragraph 2: coefficient reduction of the projective-line integration and composition of its adjunctions, before transposing the compatibility. This item supplies the ordinary direct-image scalar/composition square.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical derived ringed-topos composition and identity adjunction normalization; this identifies the specified K-injective compositor with the composite counit and does not replace the purity unit route."
+   },
+   {
+    "node": "lem-sf-scalar-pullback-composition",
+    "why": "Generic unbounded constant-coefficient scalar/pullback composition equation, needed before transposing to direct images; the purity unit does not state this coefficient square."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat representatives is a generic site-derived-category tool used only to check the identity composition comparison on its specified representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-scalar-pullback-composition",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-5c1447074",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-5c1447074 (reviewer sub-agent of L); spot-checked: I read the item, all seven steps and every cited statement in full; cited nodes were read from clones/side-live because the snapshot's chapter symlinks dangle. First split (live: unsplit, no repair note). The delivery has no new nodes. The only statement change adds def-pur-etale-scalar-pullback-iso to the λ citation; it is the same K-flat-normalized scalarPullbackIso in the same direction, so no target is weakened. Source: Stacks 0E46 (remark-compose-base-change) omits the proof, so proof_origin=agent is correct. The blueprint place (cor-pur-vector-bundle-purity proof paragraph 2, main-20261015) checks out. I re-derived the mate pasting in Steps 4-6: the composite adjunct of F reduces to T through the κ/c adjunction compatibility of lem-sfb-ringed-derived-monoidal-comparisons, naturality of λ_sr and the Step-2 cocycle of lem-sf-scalar-pullback-composition (j1=r, v=s; its a_D and lem-sfb's c are both the K-flat ordinary composition iso P_sr→P_rP_s). G reduces to T through ε_s-naturality at χ_r, the Step-3 adjunct-counit equations and λ_r-naturality at ε_s; the Hom bijection then gives F=G. Step 7: c_id,id=1 on flat-term K-flat representatives (lem-pc-kflat-resolution), so λ_id is an invertible idempotent and χ_id=1. The step that identifies def-kun's adjunction with lem-sfb's (prop-weil-pbc-inverse-image-modules-exact (2)/(3)) is accepted as written. Accepted tool uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-sf-scalar-pullback-composition; lem-pc-kflat-resolution is on the route anyway. No cycle: the item is not in its 583-node dependency closure. No duplicate among the scalar/direct-image/cocycle/exchange/open-composition nodes. No SGA citation; proof_deps equals the union of the step uses. Edge cases checked: identity maps, M=0, nonflat Z/4→Z/2, B=0."
  }
 }

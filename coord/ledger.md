@@ -20930,3 +20930,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q93/def-pur-scheme-geometric-frobenius (reviewer PASS; after a return; new nodes: 2)
 - 08:09 L: merged deliver/Q62/lem-sf-point-fibre-derived-tensor (reviewer FIX; after a return; new nodes: 3)
 - 08:09 L: merged deliver/Q75/lem-pur-compact-support-completed-projection-coherence (reviewer FIX; after a return; new nodes: 5)
+- 08:09 L: merged deliver/O4/lem-pur-etale-direct-image-scalar-composition (reviewer PASS; first push; new nodes: 0)
