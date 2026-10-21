@@ -22,41 +22,189 @@
   "lem-per-continuous-rational-derived-realization",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Both $X$ and $Y$ satisfy the noetherian and finite-dimensional hypotheses of the cited adic results. Apply the finite-type noetherian theorem to their structure maps to $\\operatorname{Spec}k$ (a field is noetherian). Apply the finite-type fibre dimension bound to the same maps: their unique fibres are $X$ and $Y$. The base is quasi-compact. Invertibility of $\\ell$ is inherited from $k$. No smoothness, flatness or assumption that $k$ is algebraically closed is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Hypotheses of Proposition 6.6.11 and Remark 6.8.15; scheme-hypothesis verification"
+   }
+  },
+  {
+   "text": "Write $\\mathcal C_W=D^b_c(W,A_E)$ with exactly the compatible etale-origin witnesses in the statement. The integral stratified-perfect characterization identifies this category with the detailed integral category used by the chart lemmas, with the same completed ring and reduction functors. The rational-realization pullback comparison states that ordinary ringed pullback $P_g$ preserves $\\mathcal C$ and that the specified quotient-tower unit $\\gamma_g:P_gK\\to\\widehat P_gK$ is invertible; it also retains the compatible etale witnesses. Thus the actual completed pullback restricts to $\\mathcal C_X\\to\\mathcal C_Y$. The completed-pullback triangle theorem supplies its shift comparison and preservation of distinguished triangles. These are inherited ambient triangles, not newly chosen triangles. The functor is $A_E$-linear by the chart-restriction lemma (equivalently its scalar action on all quotient-tower maps).",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-a1-integral-stratum-chart-restrictions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), Proposition 6.6.11; specified-unit comparison supplied by the cited DAG lemma"
+   }
+  },
+  {
+   "text": "Fix integral $K$ with ambient cohomology supported in a finite interval $[a,b]$. The chart-restriction lemma supplies a finite locally closed stratification $S_\\alpha$ and pro-etale covers $V_{\\alpha t}\\to S_\\alpha$ on which $K$ is $C_V(P)=B_{E,V}\\otimes_{\\underline{A_E}}\\underline{P^\\bullet}$ for bounded finite-projective $A_E$-complexes $P^\\bullet$. Its exact restriction assertion puts each such model in $[a,b]$. Set $S'_\\alpha=Y\\times_XS_\\alpha$, $V'_{\\alpha t}=Y\\times_XV_{\\alpha t}$ and $g_{\\alpha t}:V'_{\\alpha t}\\to V_{\\alpha t}$. The same lemma states that the nonempty $S'_\\alpha$ stratify $Y$, the $V'_{\\alpha t}$ cover them pro-etale, and the restriction of $\\widehat P_gK$ is the specified completed pullback of this model along $g_{\\alpha t}$. In particular we take fibre-product strata, not a factorization deduced merely from inclusion of images.",
+   "uses": [
+    "lem-a1-integral-stratum-chart-restrictions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, Lemma 6.5.8 and Remark 6.5.10; chart and restriction part"
+   }
+  },
+  {
+   "text": "Apply the completed perfect scalar-pullback calculation on every $g_{\\alpha t}$. It gives $Lg_{\\alpha t}^*C_V(P)\\cong C_{V'}(P)$, with the actual finite quotient projections and transitions. Its cohomology and balanced-tensor assertions give $\\mathcal H^jC_{V'}(P)\\cong g_{\\alpha t}^*\\mathcal H^jC_V(P)$ and therefore zero for $j\\notin[a,b]$. The exact restrictions in the previous step identify these sheaves with the restrictions of $\\mathcal H^j(\\widehat P_gK)$. Apply noetherian stratum detection on $Y$ to each such abelian sheaf to obtain global vanishing. Empty strata contribute nothing; if $K=0$ the additive functor sends it to zero, covering an empty interval. Finally the integral standard t-structure is bounded and its halves are defined by ambient vanishing: for an integral nonpositive object choose a bound $[a,0]$, and for a nonnegative one choose $[0,b]$. The same argument proves preservation of both integral halves. This checks the crucial hypothesis of coefficient-stage descent, without assuming flatness of $g^{-1}B_{E,X}\\to B_{E,Y}$.",
+   "uses": [
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-a1-integral-stratum-chart-restrictions",
+    "prop-weil-pbc-integral-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5) and Proposition 6.6.11, local perfect-model calculation followed by vanishing detection; Stacks Tags 093M, 09AH and 09AB through the cited lemmas"
+   }
+  },
+  {
+   "text": "Rationalize the $A_E$-linear exact functor using semilinear scalar localization with $R=S=A_E$ and $t=u=\\varpi_E$: on a fraction it is $f/\\varpi_E^n\\mapsto\\widehat P_g(f)/\\varpi_E^n$. The localized t-structure has exactly the image halves required by descent. The scalar-extension package gives the completed integral comparison $C_{L/E,Y}\\widehat P_{g,E}\\cong\\widehat P_{g,L}C_{L/E,X}$ and its identity, composition, coefficient-tower and shift equations. Since Step 2 proved constructible preservation, these comparisons restrict here, and semilinear localization preserves their equations. Thus they are the exact rational-stage comparisons $\\beta_{L/E}:T_{L/E,Y}F_E\\cong F_LT_{L/E,X}$, with their stated unit and associator normalizations.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "prop-weil-localized-tstructure",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2) and Remark 6.8.15; raw scalar localization and the specified coherent scalar package"
+   }
+  },
+  {
+   "text": "Apply coefficient-stage descent with integral categories $\\mathcal C_X,\\mathcal C_Y$ and integral functors $\\widehat P_{g,E}$ for every finite field $E$. Step 2 gives linear exactness, Step 4 gives preservation of integral halves, and Step 5 gives the exact scalar comparisons. The common-stage truncation theorem supplies t-exact transitions and the bounded common-stage t-structures with finite-stage truncations; the scalar-extension package supplies exact transition functors with literal identities and associators; the pair-category definition supplies the same common-stage morphisms and cone triangles (a triangle is distinguished iff isomorphic to the image of one finite-stage triangle), and the Verdier-axioms theorem proves that these data form a triangulated category. These are precisely the remaining hypotheses of descent. Consequently each rational $F_E$ and the functor $F_{\\overline{\\mathbf Q}_\\ell}$ are exact and t-exact. Explicitly the latter sends $(E,K)$ to $(E,F_EK)$ and sends a common-stage arrow $u$ over $L$ to $\\beta_{\\mathrm{target}}^{-1}F_L(u)\\beta_{\\mathrm{source}}$. The unit and tower equations proved in Step 5 make this independent of further enlargement, as asserted by descent. This constructs the requested common-stage pullback, with its actual arrow action.",
+   "uses": [
+    "lem-a1-texact-coefficient-stage-descent",
+    "lem-per-adic-common-stage-truncations",
+    "def-weil-pbc-qbar-category",
+    "prop-weil-pbc-scalar-extension",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1)-(2); abstract coefficient-stage descent applied to the actual pair categories"
+   }
+  },
+  {
+   "text": "For the additional finite-stage local formula, use $J$ to write the realized pullback of a constructible module sheaf $F$ as $G_gF=E_Y\\otimes^L_{g^{-1}E_X}g^{-1}F$. Let $i:S\\hookrightarrow X$ be the chosen stratum and $i':S'=Y\\times_XS\\hookrightarrow Y$. Their coefficient maps are isomorphisms and their pullbacks are exact restrictions, by continuous rational realization. Composition for ambient ringed derived pullbacks identifies $i'^*G_gF$ with $G_{g_S}i^*F$, since $g i'=i g_S$; the structural coefficient maps agree by the finite quotient normalization. On a pro-etale chart $v:U\\to S$, put $U'=S'\\times_SU$. Slice normalization identifies its restriction with $G_{g_U}(F|_U)$, where $g_U:U'\\to U$. This uses restriction for a site object, so imposes no noetherian hypothesis on $U$ or $U'$.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-per-continuous-coefficient-slice-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2, Definitions 6.8.6 and 6.8.8, Remark 6.8.15; restriction and balanced composition"
+   }
+  },
+  {
+   "text": "On a chart trivializing $F|_S$ as $E_U^r$, the derived pullback unit $G_{g_U}(E_U)\\cong E_{U'}$ and additivity give $G_{g_U}(E_U^r)\\cong E_{U'}^r[0]$. The balanced-tensor map is $e'\\otimes(e_1,\\ldots,e_r)\\mapsto(e'g_U^\\sharp(e_1),\\ldots,e'g_U^\\sharp(e_r))$; its inverse sends the $j$-th basis vector with coefficient $a$ to $a\\otimes e_j$. These are inverse by the balancing relation. For $r=0$ both sides are zero. Since pro-etale restriction is exact, all nonzero-degree cohomology sheaves restrict to zero on this cover and hence are zero; alternatively apply stratum detection to the one-stratum scheme $S'$ with these charts. Thus the restriction to $S'$ is concentrated in degree zero, with exactly the asserted continuous finite free chart model. For empty $S'$ this assertion is vacuous. The calculation uses only the derived pullback unit, not flatness of its coefficient map.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-per-continuous-coefficient-slice-normalization",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; finite direct sum of the derived tensor unit and its explicit balanced-tensor formula"
+   }
+  },
+  {
+   "text": "The descent theorem gives exactness on both hearts and the canonical truncation comparisons $\\alpha^-:F\\tau^{\\le m}\\cong\\tau^{\\le m}F$ and $\\alpha^+:F\\tau^{\\ge m}\\cong\\tau^{\\ge m}F$, characterized by their counit and unit equations. It also gives $F\\mathcal H^j\\cong\\mathcal H^jF$ and compatibility with every $\\beta_{L/E}$. On a heart object define $g^*=F|_{\\mathrm{heart}}$; invert this cohomology comparison to get $\\mathcal H^j(Lg^*K)\\cong g^*\\mathcal H^j(K)$ in the direction in the statement. Preservation of every interval is just preservation of the intersection $D^{\\ge a}\\cap D^{\\le b}$, using t-exactness and the shift comparisons; an empty interval contains only zero. These conclusions hold at each finite stage and on the common-stage category by the same theorem.",
+   "uses": [
+    "lem-a1-texact-coefficient-stage-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; uniqueness-normalized truncation and cohomology consequences of the cited descent theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-a1-integral-stratum-chart-restrictions",
+  "lem-a1-completed-perfect-scalar-pullback",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-pur-semilinear-scalar-localization",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-scalar-extension",
+  "lem-a1-texact-coefficient-stage-descent",
+  "lem-per-adic-common-stage-truncations",
+  "def-weil-pbc-qbar-category",
+  "thm-weil-pbc-verdier-axioms",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-per-continuous-coefficient-slice-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9, Proposition 6.6.11, Lemma 6.8.2, Definitions 6.8.6 and 6.8.8, Proposition 6.8.14 and Remark 6.8.15; agent synthesis using the existing local-model, detection and coefficient-descent nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Completed derived inverse image of rational constructible adic complexes is t-exact by finite free calculation on pullbacks of lisse strata",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"ModuleCat.localizedModule_functor_map_exact\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Localization\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : Small.{v, u} R] (S : Submonoid R)\\n  (T : CategoryTheory.ShortComplex (ModuleCat R)), T.Exact → (T.map (ModuleCat.localizedModule_functor S)).Exact\", \"doc\": \"For a small commutative ring $ R $, a submonoid $ S $, and an exact short complex $ T $ in the category of left $ R $-modules, the image of $ T $ under the localization functor from $ R $-modules to $\"}\n  {\"name\": \"CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ\", \"module\": \"Mathlib/Algebra/Homology/LeftResolution/Basic\", \"type\": \"∀ {A : Type u_1} {C : Type u_2} [inst : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_1} A] {ι : CategoryTheory.Functor C A}\\n  (Λ : CategoryTheory.Abelian.LeftResolution ι) (X : A) [inst_2 : ι.Full] [inst_3 : ι.Faithful]\\n  [inst_4 : CategoryTheory.Limits.HasZeroMo\", \"doc\": \"For any natural number $n$, the chain complex obtained by applying the full and faithful functor $\\\\iota: \\\\mathcal{C} \\\\to \\\\mathcal{A}$ to the left resolution $\\\\Lambda$'s chain complex $\\\\Lambda.\\\\text{ch\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_exact₁\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"The short complex constructed from the δ-morphism in the homology sequence of a triangulated functor is exact, meaning the image of the incoming morphism equals the kernel of the outgoing morphism at \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_exact₂\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ to an abelian category $ \\\\mathcal{A} $, and a distinguished triangle $ T = (X \\\\xrightarrow\"}",
    "date": "2026-10-21",
-   "verdict": "no match: hits concern generic category, sheaf, ring or scheme constructions; none supplies this normalized constructible adic assertion or a one-line specialization"
-  },
-  {
-   "tool": "leansearch",
-   "query": "For an arbitrary morphism of schemes completed l-adic pullback preserves the constructible standard heart and its cohomological intervals without flatness of the coefficient ring map",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) {s : Set Y} (hs : IsConstructible s) : IsConstructible (f ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}",
-   "date": "2026-10-21",
-   "verdict": "no match: hits concern generic category, sheaf, ring or scheme constructions; none supplies this normalized constructible adic assertion or a one-line specialization"
+   "verdict": "no match: generic adic completion, ordinary module pullback, homological functors or standard derived-category bounds do not state the completed constructible adic pullback assertion or specialize to it in one line"
   },
   {
    "tool": "loogle",
    "query": "SheafOfModules.pullback, CategoryTheory.Triangulated.TStructure",
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-21",
-   "verdict": "no match: hits concern generic category, sheaf, ring or scheme constructions; none supplies this normalized constructible adic assertion or a one-line specialization"
+   "verdict": "no match: generic adic completion, ordinary module pullback, homological functors or standard derived-category bounds do not state the completed constructible adic pullback assertion or specialize to it in one line"
   },
   {
    "tool": "grep",
    "query": "adic.*[tT]Exact|[tT]Exact.*pullback|completed.*pullback",
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
-   "verdict": "no match: hits concern generic category, sheaf, ring or scheme constructions; none supplies this normalized constructible adic assertion or a one-line specialization"
+   "verdict": "no match: generic adic completion, ordinary module pullback, homological functors or standard derived-category bounds do not state the completed constructible adic pullback assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary morphism of schemes completed l-adic pullback preserves the constructible standard heart and its cohomological intervals without flatness of the coefficient ring map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) {s : Set Y} (hs : IsConstructible s) : IsConstructible (f ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adic completion, ordinary module pullback, homological functors or standard derived-category bounds do not state the completed constructible adic pullback assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact derived functor on bounded constructible complete pro-etale coefficient complexes preserves cohomological bounds by checking finite projective models on strata",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : C \\\\to D $ between abelian categories with enough projectives, the $(n+1)$-th left-derived functor $ L^{n+1}F $ evaluated at any projective object $ X \\\\in C $ yields a zer\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adic completion, ordinary module pullback, homological functors or standard derived-category bounds do not state the completed constructible adic pullback assertion or specialize to it in one line"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-adic-heart-pullback-fibres",
@@ -76,5 +224,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-adic-stratified-pullback-texact",
+  "worker": "stage1",
+  "summary": "Reused the existing integral chart, completed perfect-scalar calculation, stratum detection and coefficient-stage descent. Verified integral hypotheses and retained the actual completion unit and compatible etale witnesses. Proved integral cohomological bounds locally before rational/common-stage descent; supplied the explicit rational free-chart tensor map. No statement correction and no new nodes.",
+  "blueprint": "First paragraph of lem-per-smooth-pullback-t-exact.proof.md: the assertion that Lf* is exact and its cohomology sheaves are pulled back. Realizes the ordinary-degree part allocated from Steps 6–8 of lem-per-adic-heart-pullback-fibres. No smoothness or support-dimension estimate is used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type noetherianity used only to discharge scheme hypotheses; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic dimension bound used only to discharge finite-dimensionality; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic identification of completed integral conventions, including etale witnesses; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Generic triangulatedness of the actual strict-tower pullback; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-a1-integral-stratum-chart-restrictions",
+    "why": "Generic stratified perfect charts and their specified restriction and composition comparisons, valid over arbitrary noetherian finite-dimensional schemes; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-a1-completed-perfect-scalar-pullback",
+    "why": "Generic pullback and cohomology calculation for a bounded finite-projective scalar complex, with no flatness hypothesis on the coefficient map; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-a1-texact-coefficient-stage-descent",
+    "why": "Generic abstract descent of exact integral functors preserving halves, with normalized truncation and cohomology comparisons; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic joint detection by exact restrictions to strata and charts; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Generic ambient cohomological description of integral halves; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic exact functor and comparison descent to fraction morphisms; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic image-half description of the raw rational t-structure; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic specified finite-field pullback comparisons and coherence; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "def-weil-pbc-qbar-category",
+    "why": "Generic specified pair-category notions; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ambient pullback composition and tensor-unit comparison; this unit has no replacement for this underlying adic or categorical tool."
+   },
+   {
+    "node": "thm-weil-pbc-verdier-axioms",
+    "why": "Generic Verdier axioms for the common-stage pair category, needed for the triangulated pair-category hypothesis of coefficient-stage descent; this unit has no replacement for this underlying categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-a1-integral-stratum-chart-restrictions",
+  "lem-a1-completed-perfect-scalar-pullback",
+  "lem-a1-texact-coefficient-stage-descent",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-pur-semilinear-scalar-localization",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-qbar-category",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-7e24bca30",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-7e24bca30 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement (unchanged from base), all 9 steps, and the statements of all 18 cited nodes. Sources checked: Bhatt–Scholze 6.8.2, 6.8.6/6.8.8, 6.8.14 and Rem. 6.8.15 (f^*K = f_naive^*K⊗Λ_Y), and the first proof paragraph of blueprint main-20261015 lem-per-smooth-pullback-t-exact. Delivery facts: no new nodes, no cycle (closure of 3905 nodes), not dropped, still unsplit in live. The item has no repair note of its own; it carries old parent steps 6–8 from the reviewed Q119 re-split. Step results: Step 1 Noetherian and finite-dimensional via the structure maps to Spec k. Step 2 P_gK ∈ C and γ invertible (rational-realization-pullback-comparison), triangles from cbc, R-linearity from the chart lemma. Steps 3–4 use fibre-product strata from the chart lemma, perfect-scalar pullback preserving [a,b] with no flatness, Noetherian stratum detection, and integral halves defined by ambient vanishing. Step 5 semilinear localization with φ=id, image halves, and scalar-extension comparisons that restrict once preservation holds. Steps 7–8 J-transport, the c_{f,g} composition comparison, slice restriction to non-Noetherian U, and the unit comparison e_h giving E_{U'}^r[0]; Step 8 is genuinely elementary and covers r=0, empty S' and varying rank. Step 9 reads α^±, F𝓗^j≅𝓗^jF and intervals off the descent lemma. Edge cases tested: empty schemes, rank 0, g=id, a point immersion, non-flat coefficient map; all true. No duplicates found (prop-constructible-truncations and lem-a1-constructible-pullback-t-exact are finite-field or automorphism variants). Off-unit tool uses accepted as generic black boxes. One fault, C4 in Step 6: lem-a1-texact-coefficient-stage-descent assumes the pair categories are triangulated and the transitions exact with associators. The step credited this to def-weil-pbc-qbar-category, which only defines cone triangles and defers the Verdier axioms to thm-weil-pbc-verdier-axioms. Repaired: Step 6 now cites thm-weil-pbc-verdier-axioms and prop-weil-pbc-scalar-extension, with the text updated; proof_deps and split_report.tool_uses updated. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-adic-stratified-pullback-texact.json.; 1 file(s) fixed by the reviewer"
  }
 }
