@@ -1,0 +1,84 @@
+{
+ "id": "lem-fix-cofinal-roos-restriction",
+ "kind": "statement",
+ "title": "Cofinal subsequence comparison of strict Roos complexes",
+ "statement": "Let $\\mathcal C$ be a small site and $A$ a sheaf of commutative rings. Work in sheaves of $A$-modules and their unbounded cochain complexes [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Assume countable products exist and are exact. Let $X_\\bullet$ be a strict inverse sequence of complexes with chain transitions $t_{i,j}:X_j\\to X_i$ for $1\\le i\\le j$, with $t_{i,i}=1$ and $t_{i,j}t_{j,k}=t_{i,k}$ [def-weil-inverse-system]. Put $H(X)=\\operatorname{Cone}(1-s:\\prod_{i\\ge1}X_i\\to\\prod_{i\\ge1}X_i)[-1]$, with $(s x)_i=t_{i,i+1}x_{i+1}$ and the specified shifted-cone coordinates of [def-weil-strict-roos-model]. Let $\\phi:\\mathbf N_{\\ge1}\\to\\mathbf N_{\\ge1}$ be strictly increasing and unbounded, and let $\\phi^*X$ have $n$th term $X_{\\phi(n)}$ and the composite transitions. The product maps\n$$a_\\phi(x)_n=x_{\\phi(n)},\\qquad b_\\phi(y)_n=\\sum_{i=\\phi(n)}^{\\phi(n+1)-1}t_{\\phi(n),i}y_i$$\nsatisfy $b_\\phi(1-s)=(1-s_{\\phi^*X})a_\\phi$. Their induced shifted-cone map $r_{\\phi,X}:H(X)\\to H(\\phi^*X)$ is a quasi-isomorphism, natural in strict chain maps of towers. For two such maps $\\phi,\\psi$ one has\n$$r_{\\psi,\\phi^*X}r_{\\phi,X}=r_{\\phi\\circ\\psi,X},\\qquad r_{\\mathrm{id},X}=1.$$\nIf a strict compatible family $q_i:P\\to X_i$ defines the augmentation $q:P\\to H(X)$ with zero shifted-product coordinate, then $r_{\\phi,X}q$ is precisely the augmentation with components $q_{\\phi(n)}$ and zero shifted-product coordinate. These assertions concern the specified maps of complexes, before localization, and hence their images in the derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, Roos realization; agent-formulated arbitrary-subsequence refinement of the arithmetic formulas in lem-sp-strict-tower-arithmetic-restriction. The finite-block elimination argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|roos|subsequence.*quasi|quasi.*subsequence",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal subsequences preserve homotopy inverse limits of cochain complexes, by the canonical map of shifted mapping cones of one minus shift",
+   "results": "8 hits; CochainComplex.mappingCone.shiftIso, Homotopy.shift, CochainComplex.mappingCone.liftHomotopy, CochainComplex.mappingCone, CochainComplex.mappingCone.descHomotopy, CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.triangle, CochainComplex.HomComplex.Cochain.shift",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"limit\"",
+   "results": "12 hits; HomologicalComplex.instHasFiniteColimits, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instHasColimitsOfShape, HomologicalComplex.instHasLimitsOfShape, HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits, HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits, HomologicalComplex.instPreservesFiniteColimitsSingle, HomologicalComplex.instPreservesFiniteLimitsSingle",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly increasing cofinal subsequence of a strict inverse tower induces a quasi-isomorphism of Roos mapping fibre complexes by selection and finite block sums, compatible with augmentation and composition",
+   "results": "8 hits; CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE, HomologicalComplex.HomologySequence.quasiIso_τ₃, CochainComplex.cm5b, quasiIsoAt_of_comp_left",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal.*(inverse|limit)|subsequence|StrictMono",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindexing a countable inverse system of complexes by an unbounded strictly increasing map preserves its homotopy limit; the map is coordinate selection and finite sums of transition maps",
+   "results": "8 hits; InverseSystem.pEquivOnLim, InverseSystem.piLTLim, InverseSystem.piLTLim_apply, InverseSystem.globalEquiv, InverseSystem.globalEquiv_compatibility, InverseSystem.invLimEquiv_apply_coe, InverseSystem.globalEquiv_naturality, InverseSystem.invLimEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-scalar-completion-associator",
+  "date": "2026-10-21",
+  "group": "Q09"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "Paragraph 3, transport to field stages by the specified scalar extensions: independence of cofinal exponent choices in the strict product-cone scalar associator.",
+   "via": [
+    "lem-fix-scalar-completion-associator"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

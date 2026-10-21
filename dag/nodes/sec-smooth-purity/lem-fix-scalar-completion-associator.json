@@ -24,55 +24,172 @@
   "lem-weil-integral-scalar-extension-well-defined",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=R_E$, $S=R_L$, $T=R_M$. The finite-free comparison theorem gives the canonical finite-free maps $R\\to S\\to T$. They compose to the canonical map $R\\to T$: at each finite projection both maps are induced by the same valuation-ring inclusion, so the inverse-limit universal property gives equality. Absolute-value uniqueness and the DVR factorization give $t_E=u t_L^e$ and $t_L=z t_M^f$ with units $u,z$ and $e,f\\ge1$. These equalities survive in the completed sheaves. Each DVR is Noetherian because every ideal is principal; completed-constant flatness identifies $R_F/t_F^nR_F$ with $B_{F,n}$. Exact constant sheafification followed by tensoring with the flat completion preserves injective uniformizer multiplication, so the sections are regular. Countable products of modules over all three rings, and of abelian sheaves, are exact on the small pro-etale site. Thus the finite-free completion-exchange hypotheses hold for both maps and their composite.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "Write $D_F=I_{F/F}$ with quotient unit $\\eta^F$, and $C_a=C_{L/E}$, $C_b=C_{M/L}$, $C_{ba}=C_{M/E}$. On a flat-term K-flat representative $P$, change of rings preserves that resolving class. The balanced map $(P\\otimes_R S)\\otimes_S B_{L,n}\\to P\\otimes_R B_{L,n}$ sends $(p\\otimes s)\\otimes\\bar v$ to $p\\otimes\\bar s\\bar v$, with inverse $p\\otimes\\bar v\\mapsto(p\\otimes1)\\otimes\\bar v$. It commutes with quotient transitions and with the $R$-action, since the coefficient map is precisely $\\rho^{L/E}_n$. Applying the strict cone functor gives $I_{L/E}=D_L C_a$ and $\\chi_{L/E}=\\eta^L C_a$, as specified natural identifications, and likewise for the other pairs. Quotient-scalar descent and the integral-extension well-definedness theorem make these identifications independent of $P$. The ordinary successive-scalar theorem supplies $\\alpha=a^C:C_bC_a\\cong C_{ba}$, including its iterated coherence.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-quotient-scalar-comparison-descent",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "Apply finite-free completion exchange to $S\\to T$. It gives the specified natural isomorphism $\\epsilon:C_bD_L\\cong D_M C_b$, satisfying $\\epsilon_H C_b(\\eta^L_H)=\\eta^M_{C_bH}$. This is the canonical tensor/product map, quotient reassociation and inverse arithmetic-subsequence comparison. It therefore uses the actual cocones and both actual cone coordinates. In particular it is independent of a basis and does not require a Roos representative to be K-flat. The exchange-coherence theorem identifies its successive coefficient comparisons and their augmentations on the strict Roos coordinates; its hypotheses are exactly those verified in step 1.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange",
+    "lem-pur-finite-free-completion-exchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "For complete $K$, put $J=I_{M/E}K=D_M C_{ba}K$ and define\n$$d_K=D_M(\\alpha_K)\\,\\epsilon_{C_aK}: C_b I_{L/E}K\\longrightarrow J.$$\nThe finite-free comparison theorem makes $C_{ba}K$ and $J$ complete; its identity-extension case makes the actual unit $\\eta^M_J$ invertible. Define\n$$a^I_K=(\\eta^M_J)^{-1}D_M(d_K):D_M C_b I_{L/E}K\\longrightarrow J.$$\nIts source is exactly $I_{M/L}I_{L/E}K$ by step 2. All factors are natural and invertible: $d_K$ is a composite of the exchange isomorphism and the image of the ordinary associator. This constructs $a^I$ from the prescribed tensor/product-cone exchange and the inverse of the prescribed completeness unit; it introduces no arbitrary isomorphism between values.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "Naturality of $\\eta^M$ gives $a^I_K\\eta^M_{C_b I_{L/E}K}=d_K$. Also, by step 3 and naturality of $\\eta^M$,\n$$d_K C_b(\\chi_{L/E,K})=D_M(\\alpha_K)\\epsilon_{C_aK}C_b(\\eta^L_{C_aK})\n=D_M(\\alpha_K)\\eta^M_{C_bC_aK}=\\chi_{M/E,K}\\alpha_K.$$\nFinally $I_{M/L}(\\chi_{L/E,K})\\chi_{M/L,C_aK}=\\eta^M_{C_bI_{L/E}K}C_b(\\chi_{L/E,K})$. Substitution proves the displayed normalization. Every naturality here is naturality of the descended quotient unit, whose zero shifted-product component is fixed in step 2.",
+   "uses": [
+    "lem-pur-quotient-scalar-comparison-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "The three $\\chi$ factors in step 5 are isomorphisms on complete inputs by finite-free scalar comparison; that theorem also makes $C_aK$ complete. Thus the normalization uniquely determines $a^I$. Representatives give the same $\\chi$, $\\alpha$ and $\\epsilon$ by the descent, successive-scalar and exchange statements already cited, so uniqueness proves representative independence. For cofinal exponent changes apply the cofinal Roos restriction theorem to the actual quotient towers: selection and weighted finite blocks carry their quotient units to the restricted units, with zero remaining zero. Arithmetic restriction is its $\\phi(n)=en$ case. Both subsequence choices compare to the same full quotient tower by invertible restriction maps; the comparison from one to the other is the second restriction composed with the inverse of the first, and therefore identifies their augmentations. Finite-free tensor commutes with these block maps because it commutes with products and finite sums; each projection of the two maps is the same finite sum of tensor-extended transitions. Hence the construction in steps 2-4 has the same normalization under every such comparison, and uniqueness proves the asserted cofinal-choice independence.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-fix-cofinal-roos-restriction",
+    "lem-pur-finite-free-completion-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  },
+  {
+   "text": "For four fields $E\\subset L\\subset M\\subset N$, precompose both associator-pentagon routes by the threefold comparison from $C_{N/M}C_{M/L}C_{L/E}K$ to $I_{N/M}I_{M/L}I_{L/E}K$, formed by the specified $\\chi$ maps and their functorial images. It is invertible because finite-free scalar extension preserves completeness. Naturality moves each $\\chi$ past the intervening map; step 5 replaces each adjacent $I$ associator by the corresponding ordinary $C$ associator followed by the final $\\chi_{N/E}$. Both routes become $\\chi_{N/E}$ followed by the two ordinary reassociations. The successive-scalar theorem makes those equal; cancel the invertible threefold comparison. For a repeated adjacent field, the identity case of finite-free scalar comparison identifies $\\chi_{F/F}$ with the completeness unit under multiplication. The same substitution reduces both unit equations to $(p\\otimes1)\\otimes s\\mapsto p\\otimes s$ and $(p\\otimes s)\\otimes1\\mapsto p\\otimes s$. These are the ordinary multiplication unit identities.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-finite-free-completion-exchange-coherence",
+  "lem-fix-cofinal-roos-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Paragraph 3 expanded by normalized quotient-completion exchange; Stacks 0941 and 099B/0A0E."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "For finite extensions of p-adic fields the ordinary tensor to completed scalar extension comparison is compatible with associativity for a tower of three fields",
-   "results": "8 hits; ; AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_tmul, PadicComplex.instIsScalarTowerPadicPadicAlgCl, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, PadicComplex.instAlgebraPadic",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"AdicCompletion\", \"tensor\"",
-   "results": "12 hits; ; AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
-  },
-  {
    "tool": "grep",
-   "query": "completion.*(associ|tower)|scalar.*completion",
-   "results": "0 hits; ; ",
+   "query": "completion.*associ|scalar.*completion",
+   "results": "0 hits; ",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
   },
   {
    "tool": "leansearch",
-   "query": "The canonical comparison from finite free derived scalar tensor to derived inverse limit of its quotient tower respects successive scalar extensions",
-   "results": "8 hits; ; Algebra.Presentation.tensorModelOfHasCoeffsHom, TensorProduct.fromDirectLimit, Submodule.FG.lTensor.directLimit, TensorProduct.directLimitRight, LinearMap.coeIsScalarTower, LinearEquiv.extendScalarsOfIsLocalizationEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "query": "derived scalar completion associator for quotient towers",
+   "results": "8 hits; Algebra.TensorProduct.assoc, AdicCompletion.instIsScalarTower, TensorProduct.tensorTensorTensorAssoc, AdicCompletion.instIsScalarTower_1, Submodule.Quotient.isScalarTower, IsScalarTower.recOn, AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule, AdicCompletion.instModuleOfIsScalarTower",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion tensor associator",
+   "results": "0 hits; ; loogle: Unknown identifier `tensor`",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
   },
   {
    "tool": "leanfinder",
-   "query": "Canonical completion comparison for finite free scalar extension respects the tensor associator between three complete valuation rings on a ringed site",
-   "results": "8 hits; ; AdicCompletion.tensor_map_id_left_eq_map, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AdicCompletion.ofTensorProduct_naturality, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "query": "canonical scalar completion associator for a tower of finite extensions and quotient product cones",
+   "results": "8 hits; galLift_comp, IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower', AdicCompletion.instIsScalarTower, AdicCompletion.piEquivFin, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.instIsScalarTower_1, AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivOfFintype",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
   },
   {
    "tool": "grep",
    "query": "[Dd]erived.*[Cc]omplet|[Cc]omplet.*[Dd]erived",
-   "results": "0 hits; ; ",
+   "results": "0 hits; ",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary AdicCompletion tensor maps and ordinary module scalar composition do not compare the specified derived ring-sheaf Roos cocones across uniformizers"
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"tensor\"",
+   "results": "12 hits; AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of sheaves commutes with derived completion and the natural comparison respects tensor reassociation for three coefficient rings",
+   "results": "8 hits; SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.mapFree, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-operation-reduction",
@@ -87,5 +204,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-scalar-completion-associator",
+  "worker": "stage1",
+  "summary": "Retained and checked the previous Q09 split against the now-present live item: statement, source and provenance agree. Constructed the prescribed associator from finite-free quotient-completion exchange and its actual unit, proved the normalization algebraically, and deduced coherence by cancellation. Added only the generic arbitrary-cofinal-subsequence Roos comparison missing from the live arithmetic statements. Revalidated all cited statements and verbatim quotes on resumption.",
+  "blueprint": "lem-fix-operation-reduction paragraph 3: strict completed scalar comparisons underlying field-stage transport, tensor associativity and units. Steps 1-3 fix their actual models, steps 4-5 construct and normalize, steps 6-7 give choices and coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pur-quotient-scalar-comparison-descent",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pur-finite-free-completion-exchange",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pur-finite-free-completion-exchange-coherence",
+    "why": "Generic ringed-site, local-field or derived tensor/completion tool supplying the explicitly cited part of this coefficient calculation; no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-finite-free-completion-exchange-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ba21a6bf3",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ba21a6bf3 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement. The item statement and stmt_deps are unchanged from side-live, and the item is still unsplit on live with no repair note, so this is a first split. There is no cycle, no merged or missing citation, and no SGA. Step 1: the finite-free comparison gives R->S->T; the DVR gives t_E=u t_L^e and t_L=z t_M^f; constant-completion flatness plus exact sheafification gives regularity and R/t^n=B_n; products are exact; so every hypothesis of finite-free-completion-exchange holds. Step 2: the balanced iso gives I_{L/E}=D_L C_a and chi=eta^L C_a; descent and well-definedness give representative independence. Step 3: the exchange unit equation eps C_b(eta^L)=eta^M. Steps 4-5: J is complete via chi_{M/E} and the C_{ba} completeness, and the L=E clause makes eta^M_J invertible. I recomputed a^I eta=d, d C_b(chi)=chi_{M/E} alpha and the naturality identity; the normalization is exact. Step 6: on complete inputs all three chi are invertible, so a^I is unique; the new node's augmentation clause keeps any cofinal variant of eps unit-compatible. Step 7: the pentagon and unit equations follow by cancelling the invertible threefold chi. New node lem-fix-cofinal-roos-restriction: telescoping gives b(1-s)=(1-s')a; block elimination with unitriangular blocks proves the quasi-isomorphism; composition and augmentation checked; tested on id, en, n+2 and n^2. It is a genuine generalization of the arithmetic-only lem-sp-strict-tower-arithmetic-restriction and lem-pur-compact-support-roos-cofinality and satisfies B1-B9. Off-unit tool uses (local-field DVR, constant completion, sheafification, kflat resolution, successive normalization, exchange and exchange-coherence) are generic and accepted. Advisory: exchange-coherence is cited but not needed. Maintainer note: lem-weil-integral-twist-scalar-coherence already defines a_C on D^b_c as transport by chi of tensor associativity, which overlaps the item (a pre-existing NY node); later citers should identify the two."
  }
 }
