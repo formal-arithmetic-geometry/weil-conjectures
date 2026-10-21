@@ -11,10 +11,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Sheaf.Paper.ConstructibleHomContinuityDevissage
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 import Sheaf.Paper.CondensedSheafExtContinuity
 import Sheaf.CategoryTheory.DerivedCategory.BoundedCohomologyConeWitness
-import Mathlib.CategoryTheory.Triangulated.Triangulated
 
 /-! # Shifted Hom continuity for bounded constructible condensed complexes
 
@@ -37,6 +35,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+set_option maxHeartbeats 800000 in
+-- The internal-module and derived-category comparisons need extra elaboration heartbeats.
 /-- The canonical additive comparison for a bounded constructible condensed complex is
 an isomorphism in every integer shift, for a filtered diagram with a common termwise
 lower bound and any supplied termwise colimit cocone.
@@ -79,6 +79,46 @@ theorem isIso_boundedConstructible_condensed_hom_colimit
     IsIso (colimit.desc _
       ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙
         preadditiveCoyoneda.obj (op K.obj)).mapCocone c)) := by
-  sorry
+  -- Work with all shifts of the chosen complex-colimit comparison.
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (padicSubfieldRingObj X ℓ E)
+  let P := complexHomContinuityLocus A N
+  obtain ⟨hs, hi, he, _⟩ :=
+    constructibleHomContinuity_devissage (Profinite.continuousMapRingObj E.val) X N
+  let : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ hi _ _ e h⟩
+  let : P.IsStableUnderShift ℤ :=
+    { isStableUnderShiftBy := fun m ↦ ⟨fun C h ↦ hs C m h⟩ }
+  have hbase (q : ℤ) : P ((DerivedCategory.singleFunctor A 0).obj
+      ((DerivedCategory.homologyFunctor A q).obj K.obj)) := by
+    intro m
+    apply (ConcreteCategory.isIso_iff_bijective _).mp
+    exact isIso_constructible_condensed_sheaf_hom_colimit X ℓ E
+      ((DerivedCategory.homologyFunctor A q).obj K.obj) (K.property.2 q) N hN m
+  -- Boundedness gives a finite cone construction from cohomology modules.
+  obtain ⟨t, F, hlast, hF⟩ :=
+    DerivedCategory.bounded_cohomology_cone_witness A K.obj K.property.1
+  have hmem : ∀ r, P (F r) := by
+    intro r
+    induction r using WellFoundedLT.induction with
+    | ind r ih =>
+      rcases hF r with ⟨q, m, ⟨e⟩⟩ | ⟨i, j, hir, hjr, m, f, g, h, hT⟩
+      · exact hi _ _ e.symm (hs _ m (hbase q))
+      · have hcone := he _ (Pretriangulated.rot_of_distTriang _ hT) (ih j hjr)
+          (hs _ 1 (ih i hir))
+        exact (P.prop_shift_iff_of_isStableUnderShift (F r) m).mp hcone
+  have hK : P K.obj := hlast ▸ hmem (Fin.last t)
+  have hchosen : IsIso (colimit.desc _
+      ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙
+        preadditiveCoyoneda.obj (op K.obj)).mapCocone (colimit.cocone N))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr (hK n)
+  -- Transfer preservation of this colimit to the supplied degreewise colimit cocone.
+  let H := DerivedCategory.Q ⋙ shiftFunctor _ n ⋙ preadditiveCoyoneda.obj (op K.obj)
+  have hcol : IsColimit c := HomologicalComplex.isColimitOfEval N c hc
+  obtain ⟨hchosenCol⟩ :=
+    (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.mpr hchosen
+  have hpres : PreservesColimit N H :=
+    preservesColimit_of_preserves_colimit_cocone (colimit.isColimit N) hchosenCol
+  exact (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.mp
+    ⟨isColimitOfPreserves H hcol⟩
 
 end AlgebraicGeometry.ProEtale
