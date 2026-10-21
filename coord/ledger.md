@@ -23660,3 +23660,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:29 L: merged deliver/NK/lem-sfb-profinite-invariants-filtered-continuity (stage 2; reviewer PASS; parallel immutable checks)
 - 20:29 L: merged deliver/NY/lem-sfb-polynomial-translation-acyclic (stage 2; reviewer PASS; parallel immutable checks)
 - 20:29 L: merged deliver/Q18/lem-zl-classical-weil-filtration-heart-transport (stage 2; reviewer FIX; parallel immutable checks)
+- 2026-10-21T20:29:48Z L: superseded stage-1 delivery NJ/lem-sfb-prime-to-ell-complete-scalar-integral at afff8dd065b3adb16947f3bb611bf3af643d52ec; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-prime-to-ell-complete-scalar-integral/afff8dd065b3adb16947f3bb611bf3af643d52ec; stale return retired.
