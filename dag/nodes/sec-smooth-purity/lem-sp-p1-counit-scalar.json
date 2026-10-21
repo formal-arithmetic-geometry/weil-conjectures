@@ -17,9 +17,114 @@
   "lem-sp-et-proet-coefficient-compatibility",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_R=R_P(1)[2]$, $H_R=F_RL_R$, and write $t_R:H_R\\to R_S$ for the normalized trace. Let $\\lambda:T_PL_A\\xrightarrow{\\sim}L_B$ be the balanced twist comparison and $b=F_B(\\lambda)\\circ\\beta_q(L_A):T_SH_A\\to H_B$. Write $m_{U,V}:T_S(U\\otimes_A^LV)\\xrightarrow{\\sim}T_SU\\otimes_B^LT_SV$ and $e:T_SA_S\\xrightarrow{\\sim}B_S$ for the tensor and unit comparisons. The normalized adjunction gives $\\epsilon_{R,K}=u_{R,K}\\circ(1_K\\otimes t_R)\\circ\\pi_{R,K}^{-1}$, where $\\pi_{R,K}:K\\otimes_R^LH_R\\to F_R(q_R^*K\\otimes_R^LL_R)$ is the forward projection map and $u_{R,K}:K\\otimes_R^LR_S\\to K$ is the right unitor. This is a formula for the actual counit. The twist is locally free of rank one, so its derived coefficient extension is the balanced ordinary one, and the exact derived scalar functor commutes with the shift.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "Use the geometric adjunctions $q_A^*\\dashv F_A$ and $q_B^*\\dashv F_B$, distinct from the exceptional adjunctions in the assertion. The square is the canonical isomorphism $q_B^*T_S\\simeq T_Pq_A^*$. Its mate is precisely the specified $\\beta_q$, because both are defined as the transpose of the scalar extension of the geometric counit. Its tensor compatibility is supplied by the monoidal composition comparisons for ringed-topos derived pullback: the two composites of coefficient change and geometric inverse image are the same ringed-topos pullback. Thus their comparison respects tensor products, unitors and symmetry. This applies to the identity geometric morphisms with structural ring maps $A_T\\to B_T$, without assuming these maps flat. It also identifies the composite comparison on $q_A^*K\\otimes L_A$, followed by $1\\otimes\\lambda$, with the specified $a_K$.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "Apply the projection-mate square to the geometric adjunctions of step 2, with $N_D=T_S$, $N_C=T_P$, the tensor comparisons $m$ on both sites, $M=L_A$ and the base tensor factor $K$. Its hypothesis ComparisonCompatible is exactly the monoidal square verified in step 2. The result is the coefficient/projection square for the order $H_A\\otimes K$. By lem-amb-proper-coproducts-projection the forward projection map of step 1 is exactly $\\pi_{R,K}=F_R(\\sigma)\\circ\\mathrm{PF}_q(L_R,K)\\circ\\sigma$, with $\\mathrm{PF}_q$ the counit-transpose map of def-kun-projection-formula-map (the map $P$ of the square) and $\\sigma$ the derived tensor symmetries. Precompose and postcompose with these symmetries to use $K\\otimes H_A$ instead; compatibility with symmetry from step 2 and naturality of $\\beta_q$ give, after applying $F_B(1\\otimes\\lambda)$, the equality\n$$F_B(a_K)\\circ\\beta_q(G_AK)\\circ T_S(\\pi_{A,K})=\\pi_{B,T_SK}\\circ(1_{T_SK}\\otimes b)\\circ m_{K,H_A}.$$\nAll maps here are the normalized ones: the projection map is the geometric counit transpose, and the coefficient map is its stated mate. In particular this square is not inferred merely from invertibility of projection maps.",
+   "uses": [
+    "lem-sp-categorical-projection-mate-square",
+    "def-kun-projection-formula-map",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "The scalar compatibility of the normalized two-summand splitting gives the trace equation $t_B\\circ b=e\\circ T_S(t_A)$. Here the $b$ of step 1 includes the same balanced twist comparison as that splitting statement. Thus the trace is compatible with this particular coefficient map, including its normalization by the Kummer class; no assertion about an arbitrarily chosen right adjoint or trace is used.",
+   "uses": [
+    "lem-sp-p1-splitting-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "The projection maps $\\pi_{A,K}$ and $\\pi_{B,T_SK}$ are isomorphisms by lem-amb-proper-coproducts-projection, since $q$ is proper of finite type between Noetherian schemes (step 6) and $A,B$ are finite rings. Cancel these projection maps in the square of step 3 and substitute the actual counit formula of step 1. For $X=T_SK$ this gives\n$$\\begin{aligned}\\epsilon_{B,X}F_B(a_K)\\beta_q(G_AK)&=u_{B,X}(1_X\\otimes t_Bb)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=u_{B,X}(1_X\\otimes e)(1_X\\otimes T_St_A)m_{K,H_A}T_S(\\pi_{A,K}^{-1})\\\\&=T_S\\bigl(u_{A,K}(1_K\\otimes t_A)\\pi_{A,K}^{-1}\\bigr)=T_S(\\epsilon_{A,K}).\\end{aligned}$$\nThe second line uses step 4. The third uses naturality of $m$ at $(1_K,t_A)$ and its right-unit equation $u_{B,X}(1_X\\otimes e)m_{K,A_S}=T_S(u_{A,K})$. These are precisely the unit and naturality identities of the cited strong monoidal comparison.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  },
+  {
+   "text": "The standing base $S$ is Noetherian: a field is Noetherian and finite-type morphisms preserve this property by lem-weil-pbc-finite-type-over-noetherian. Apply lem-sp-finite-coefficient-input-models to represent $K$ by a bounded flat constructible complex $P$; it also gives $T_SK\\in D^b_{ctf}$. The exact inverse-image functor preserves the degree support, and ringed-topos pullback preserves its flat terms. Since $q^{-1}$ is exact, $H^i(q^{-1}P)=q^{-1}H^i(P)$. If $(\\iota_k:Z_k\\to S)$ is a stratification witnessing constructibility of $H^i(P)$ in the sense of def-weil-pbc-etale-constructible-sheaf, the base changes $\\iota'_k:Z_k\\times_SP\\to P$ are immersions whose images $q^{-1}(T_k)$ partition $P$ into locally closed subsets, constructible by lem-pur-scheme-constructible-preimage; and $\\iota_k'^{-1}q^{-1}H^i(P)\\cong q_k^{-1}\\iota_k^{-1}H^i(P)$ for $q_k:Z_k\\times_SP\\to Z_k$, which is finite locally constant on the base-changed trivializing etale covers. Tensoring $q^{-1}P$ with the twist, flat and locally isomorphic to $A_P$ by lem-asd-finite-etale-twist-line, gives a complex of flat terms with cohomology $q^{-1}H^i(P)\\otimes A_P(1)$, finite locally constant on the strata after refining by the trivializing covers of the twist; shifting by $[2]$ gives a bounded K-flat constructible model of $G_AK$. A bounded complex of flat terms in $[a,b]$ computes its derived tensor with any module $H[0]$ termwise, so it has Tor amplitude in $[a,b]$. This verifies that the coefficient isomorphism theorem applies at $G_AK$; the same argument works over $B$. All comparisons used above are natural. Precomposing step 5 with $\\beta_q(G_AK)^{-1}$ identifies $a_K$ as the unique transpose of $T_S(\\epsilon_{A,K})\\circ\\beta_q(G_AK)^{-1}$ under the exceptional adjunction over $B$. The defining mate bijection therefore identifies $a$ with the mate of $\\beta_q^{-1}$ for $F_A\\dashv G_A$ and $F_B\\dashv G_B$.",
+   "uses": [
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-asd-finite-etale-twist-line",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sp-finite-coefficient-input-models",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compatibility of iterated projective-line integration, actual counit at a complex; retained Step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-kun-projection-formula-map",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-categorical-projection-mate-square",
+  "lem-amb-proper-coproducts-projection",
+  "lem-sp-p1-splitting-scalar",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sp-finite-coefficient-input-models",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-scheme-constructible-preimage",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph: expanded actual counit calculation via the normalized projection map; Stacks Tags 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram), and 0GL6 (remark-Rf-lower-shriek-change-of-rings)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +160,45 @@
    "results": "{\"t\": \"2026-10-21T03:03:06Z\", \"tool\": \"leansearch\", \"query\": \"Projective line integration counit and scalar extension projection formula coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Coalgebra.counitCoalgHom\", \"Coalgebra.counitCoalgHom_toLinearMap\"], \"digest\": \"490cc3b863277c18\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state this geometric finite-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLine.*(trace|counit)|counit.*projectiveLine|projectionFormula",
+   "results": "{\"t\": \"2026-10-21T03:32:41Z\", \"tool\": \"grep\", \"query\": \"projectiveLine.*(trace|counit)|counit.*projectiveLine|projectionFormula\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: geometric counit and finite-coefficient projection normalization are absent; hits concern abstract adjunctions, ordinary modules, linear traces, or etale algebras"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line etale integration counit scalar extension projection formula",
+   "results": "{\"t\": \"2026-10-21T03:32:42Z\", \"tool\": \"leansearch\", \"query\": \"Projective line etale integration counit scalar extension projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"WeierstrassCurve.Projective.map_addU\", \"Pi.counit_comp_single\", \"WeierstrassCurve.Projective.Point.toAffine_smul\", \"WeierstrassCurve.Projective.smul_eq\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"6b7f17bf76cfdf3c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: geometric counit and finite-coefficient projection normalization are absent; hits concern abstract adjunctions, ordinary modules, linear traces, or etale algebras"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of the projective line etale adjunction commutes with derived extension of finite coefficient rings",
+   "results": "{\"t\": \"2026-10-21T03:32:43Z\", \"tool\": \"leanfinder\", \"query\": \"The counit of the projective line etale adjunction commutes with derived extension of finite coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.HasMap.map\", \"StandardEtalePair.homEquiv_apply_coe\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"StandardEtalePresentation.toPresentation_algebra_algebraMap_apply\", \"Algebra.Etale.comp\"], \"digest\": \"55a9b388f72f37b8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: geometric counit and finite-coefficient projection normalization are absent; hits concern abstract adjunctions, ordinary modules, linear traces, or etale algebras"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "{\"t\": \"2026-10-21T03:32:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.mk'_counit\", \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\", \"CategoryTheory.Equivalence.toAdjunction_counit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.id_counit\", \"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.toEquivalence_functor\"], \"digest\": \"525089b2615389d4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: geometric counit and finite-coefficient projection normalization are absent; hits concern abstract adjunctions, ordinary modules, linear traces, or etale algebras"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula tensor counit trace compatibility under nonflat change of rings",
+   "results": "{\"t\": \"2026-10-21T03:32:44Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula tensor counit trace compatibility under nonflat change of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_tensorProduct\", \"LinearMap.trace_baseChange\", \"Algebra.trace_comp_trace\", \"Algebra.trace_trace\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"LinearMap.trace_eq_contract_apply\", \"LinearMap.trace_tensorProduct'\", \"LinearMap.trace_eq_contract\"], \"digest\": \"8c4baabc23738bc4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: geometric counit and finite-coefficient projection normalization are absent; hits concern abstract adjunctions, ordinary modules, linear traces, or etale algebras"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -75,5 +215,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-p1-counit-scalar",
+  "worker": "stage1 Q35",
+  "summary": "Kept the statement unchanged. Expanded the actual exceptional counit as inverse normalized projection followed by tensor of the normalized trace, applied the existing general projection-mate square to coefficient extension, and used the existing splitting/trace scalar equation. Wrote the naturality and right-unitor calculation, then the mate characterization. No new nodes.",
+  "blueprint": "Charts paragraph of det-sp-reduction-exceptional: the sentence asserting that the scalar-extended counit at K is the counit at K_B under the canonical twist/tensor comparison; retained Step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General unbounded ringed-topos tensor, unit, symmetry and composition coherence identifies the geometric/coefficient square; this is a generic normalization tool, not an alternate purity route."
+   },
+   {
+    "node": "lem-sp-finite-coefficient-input-models",
+    "why": "Bounded flat constructible models and nonflat scalar-extension preservation verify the precise domain of the coefficient isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity of a finite-type scheme over a field, used only for applicability of the bounded-model theorem."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness of ordinary constant-ring module inverse image verifies the bounded model under geometric pullback."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Its statement defines the ordered proper projection map pi (symmetry, counit-transpose PF, symmetry) used in the counit formula of lem-asd-ordinary-finite-p1-adjunction, and asserts its invertibility; no node of the unit states it. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-finite-coefficient-input-models",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-proper-coproducts-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-31182de1b",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-31182de1b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged and true, with 6 steps and no new nodes. The mathematics checks out. Step 1's counit formula is quoted verbatim from lem-asd-ordinary-finite-p1-adjunction. Step 2: beta_q is the mate of the monoidal square q_B^*T_S≅T_Pq_A^* (lem-sfb composition comparisons, no flatness assumed). Step 3 matches the Lean square map_rightAdjointProjectionMap_comp_mateEquiv with F=q_A^*, N_D=T_S, N_C=T_P, M=L_A, L=K. Step 4 uses only the statement of lem-sp-p1-splitting-scalar. I recomputed the unitor and naturality calculation of step 5 and it is correct. The mate clause follows by uniqueness of transposes. Two faults, both repaired. (1) C4: steps 3 and 5 rely on the ordered projection map π=Rq_*(σ)∘PF∘σ and on its invertibility without citing lem-amb-proper-coproducts-projection, which states both; it is now cited and the identity is written. (2) C1: step 6 claimed that a constructible stratification pulls back without citing the constructibility of the pulled-back strata (condition (a) of def-weil-pbc-etale-constructible-sheaf). I added lem-pur-scheme-constructible-preimage and the definition, and wrote out the base-changed strata and covers, the twist refinement and the Tor amplitude of a bounded flat complex. I also updated proof_deps and added the tool_use for lem-amb-proper-coproducts-projection. review_split on the fixed node gives PASS. No SGA is used. The off-unit uses (p1 adjunction, tensor pullback, et/proet coefficient compatibility) are stmt_deps of the item's own statement and are accepted. No duplicate exists: lem-asd-proper-finite-coefficient-extension and def-asd-ordinary-finite-trace-counit state different facts. Edge cases checked: K=0, identity coefficient map, Z/ℓ^2→Z/ℓ, empty S, even shift.; 1 file(s) fixed by the reviewer"
  }
 }

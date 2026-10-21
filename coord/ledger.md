@@ -19967,3 +19967,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:47:18Z L: superseded stage-1 delivery Q15/lem-sp-etale-sum-counit-scalar at 25968c05f7facea75d4d32a3bb2a1cc92ee56fc4; current completion retained; packet archived at refs/superseded/Q15/lem-sp-etale-sum-counit-scalar/25968c05f7facea75d4d32a3bb2a1cc92ee56fc4; stale return retired.
 - 03:47 L: merged deliver/Q41/det-sp-reduction-exceptional (reviewer PASS; after a return; new nodes: 6)
 - 03:47 L: merged deliver/Q126/lem-sp-open-scalar-site-coherence (reviewer FIX; first push; new nodes: 0)
+- 03:47 L: merged deliver/Q35/lem-sp-p1-counit-scalar (reviewer FIX; first push; new nodes: 0); claim not held by Q35: not your claim
