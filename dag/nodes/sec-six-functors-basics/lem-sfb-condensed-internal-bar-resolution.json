@@ -11,7 +11,11 @@
   "sk-def-sfb-condensed-ring",
   "def-weil-size-convention",
   "sk-def-sfb-module-objects",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sfb-condensed-action-module",
+  "def-sfb-modobj-relative-tensor",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -318,5 +322,37 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-41e5e72e7 (reviewer sub-agent of L); spot-checked: Read the item's 10 steps in full against every cited statement: the three sheafification lemmas (interface, tensor, bilinear-extension), ringed-site abelianness, lem-pc-sheaf-modules-tensor-closed, and modobj kernels/cokernels/abelian. Their hypotheses hold: small site via def-weil-size-convention, A commutative, B⊗− a left adjoint so it preserves finite colimits, B noncommutative allowed. The mathematics is correct. Double-deletion signs (−1)^{i+j} against (−1)^{i+j−1} cancel. The contraction h_n[g]=[1,g] gives ∂h+h∂=id, and in degree 0 ∂₁h₀[g]=[g]−[1] with h₋₁ε=id. Kernels factor through d, ε is split, and exactness passes to Mod_{A[G]} because the forgetful functor creates kernels and cokernels. Tensoring with any T is additive, so no flatness is needed. c_n is equivariant for left translation on the first coordinate. Small cases: trivial G (alternating 1/0 differentials), n=0, non-flat T, A=0. No new nodes. The only near match, lem-sfb-bar-resolution-cochains, is the ordinary Z[G] resolution and not a duplicate. No SGA, no re-split note. Fault C1/C4: the statement is about internal A-module objects [sk-def-sfb-module-objects] with the internal relative tensor, but all steps work in Mod(A) with ⊗_A and nothing identified the two. FIX: step 1 now opens with a transfer through def-weil-pbc-internal-abelian-sheaf-module-equivalence and lem-pe-internal-section-tensor-comparison (exact, tensor- and unit-compatible, underlying sheaves unchanged). Both were added to uses and proof_deps, and the tensor comparison to split_report.tool_uses. Checked acyclic. All 8 declared tool uses accepted as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedInternalBarResolution",
+  "declaration": "Profinite.CondensedAction.InternalBar.exists_resolution",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBar.free",
+   "Profinite.CondensedAction.InternalBar.freeAdjunction",
+   "Profinite.CondensedAction.InternalBar.tuples",
+   "Profinite.CondensedAction.InternalBar.freePower",
+   "Profinite.CondensedAction.InternalBar.generator",
+   "Profinite.CondensedAction.InternalBar.onSections",
+   "Profinite.CondensedAction.InternalBar.basis",
+   "Profinite.CondensedAction.InternalBar.pureTensor",
+   "Profinite.CondensedAction.InternalBar.regularOne",
+   "Profinite.CondensedAction.InternalBar.Resolution",
+   "Profinite.CondensedAction.InternalBar.exists_resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedInternalBarResolution.lean",
+  "statement": "theorem exists_resolution : Nonempty (Resolution R G)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The normalized resolution and theorem are unchanged. Repair of immutable head 5f61e04a9f33: pureTensor is constructed inline by the lax sheafToPresheaf tensor map followed by Mod.tensorObjπ, not obtained from the comparison theorem. The statement cites the landed internal-action, relative-tensor, sheaf-tensor-structure, and section-module-equivalence definition nodes. The internal-section comparison and closed tensor theorem are proof-only imports; the former is removed from the worker-added stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e5ba0fad",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L (H2 on 5f61e04a9f33). pureTensor is now built inline as Mod.tensorObjπ after the LaxMonoidal.μ of sheafToPresheaf (canonical sheafification-unit map, same body as the former comparison_internalTmul). Theorem node lem-pe-internal-section-tensor-comparison removed from stmt_deps; its module is a non-public, proof-only import. Def nodes def-sfb-condensed-action-module, def-sfb-modobj-relative-tensor (owns Mod.monoidalCategory/tensorObjπ), det-def-sfb-sheaf-tensor-structure and def-weil-pbc-internal-abelian-sheaf-module-equivalence (owns sectionRings) added; no base stmt_dep dropped; node diff vs side-live is only lean and stmt_deps. All clauses re-checked: free adjunction, diagonal action, ε to regularOne, alternating succAbove differential, ShortComplex exactness, tensor exactness for all T, coordinates_generator. Edge cases n=0, trivial G, zero ring, T=0, non-flat T, empty S. Single universe u, docstrings with all 10 steps, one sorry, statement verbatim, no duplicate (Rep.barResolution is the ordinary case). No compile (no file changed). Advisory: base stmt_dep lem-pc-sheaf-modules-tensor-closed is used only by the proof."
  }
 }

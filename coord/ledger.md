@@ -23034,3 +23034,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:24 L: merged deliver/NE/lem-sfb-root-tower-lisse-morphism-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 16:25 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 16:26 L: merged deliver/NI/lem-sfb-root-tower-boundary-acyclicity (reviewer PASS; first push; new nodes: 3)
+- 16:26 L: merged deliver/NO/lem-sfb-condensed-internal-bar-resolution (stage 2; reviewer PASS; parallel immutable checks)
