@@ -1,0 +1,137 @@
+{
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; Tag 03Q1, lemma-stalk-pullback; sites-cohomology Tag 06YY, lemma-change-of-rings"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-asd-ordinary-supported-kummer-boundary"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerScalarSource",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Final scalar-extension paragraph of lem-amb-cartier-kummer-map, as used by the supported diagonal Kummer class.",
+   "via": [
+    "lem-asd-supported-kummer-scalar-source",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-asd-supported-kummer-scalar-maps",
+ "kind": "statement",
+ "title": "Normalized supported scalar maps",
+ "statement": "For a ring map φ : ULift (ZMod N) → A, construct coefficient maps between the ordinary constant module sheaves [def-asd-ordinary-finite-p1-kummer-class, def-weil-pbc-constant-sheaf] on a closed support D and its ambient scheme T. On every étale object, each map sends the sheafification of r to the sheafification of φ(r). More generally, any two maps with these generator formulas, for arbitrary commutative coefficient rings and any morphism i : D → T, commute with the constant adjunction unit [def-asd-ordinary-supported-kummer-boundary], under the objectwise restriction-of-scalars/direct-image comparison [def-weil-pbc-direct-image].",
+ "proof": [
+  {
+   "text": "Define the coefficient map by the constant-sheaf/global-sections adjunction from the linear map r ↦ φ(r) times the target section one. The adjunction identity proves its terminal-object formula. Naturality of the sheafification units and of the map transports this formula to every étale object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the supported constant unit with the constant-presheaf sheafification unit. Unfolding uniqueness of left adjoints, naturality and the triangle identities identify it with restriction of the target sheafification unit. To compare the coefficient/unit composites, the constants adjunction and linearity reduce equality to the generator one at the terminal object. The generator formulas on D and T identify both values with the same restricted φ(1).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; Tag 03Q1, lemma-stalk-pullback; sites-cohomology Tag 06YY, lemma-change-of-rings"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerScalarMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerScalarMaps.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_supported_kummer_scalar_maps",
+  "statement": "theorem exists_supported_kummer_scalar_maps (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A] (φ : ULift.{u + 1} (ZMod N) →+* A) {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] : ∃ (ηD : ordinaryFiniteConstant (ULift.{u + 1} (ZMod N)) D ⟶ (Sheaf.restrictScalars D.smallEtaleTopology φ).obj (ordinaryFiniteConstant A D)) (ηT : ordinaryFiniteConstant (ULift.{u + 1} (ZMod N)) T ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj (ordinaryFiniteConstant A T)), (∀ (U : D.Etaleᵒᵖ) (r : ULift.{u + 1} (ZMod N)), ηD.hom.app U ((toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj (ModuleCat.of (ULift.{u + 1} (ZMod N)) (ULift.{u + 1} (ZMod N))))).app U r) = (toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj (ModuleCat.of A A))).app U (φ r)) ∧ (∀ (U : T.Etaleᵒᵖ) (r : ULift.{u + 1} (ZMod N)), ηT.hom.app U ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of (ULift.{u + 1} (ZMod N)) (ULift.{u + 1} (ZMod N))))).app U r) = (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of A A))).app U (φ r))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.normalizedConstantMap",
+   "AlgebraicGeometry.Etale.exists_supported_kummer_scalar_maps",
+   "AlgebraicGeometry.Etale.supported_kummer_scalar_units_commute"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportedCoefficientComparison|coefficientUnitModule|SupportedDerivedScalarUnit",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact supported derived scalar-unit theorem; the constants adjunction is used for the ordinary map and unit arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"restrictScalars\"",
+   "results": "No hits",
+   "date": "2026-10-20",
+   "verdict": "No exact supported derived scalar-unit theorem; the constants adjunction is used for the ordinary map and unit arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of a constant sheaf supported on a closed immersion is the constant sheaf with extended coefficients",
+   "results": "ModuleCat.Tilde.res_const; ModuleCat.tilde; CategoryTheory.Sheaf.isConstant_of_forget; CompHausLike.LocallyConstantModule.functor; ModuleCat.tildeInModuleCat; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; CategoryTheory.Sheaf.isConstant_iff_forget; SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-20",
+   "verdict": "No exact supported derived scalar-unit theorem; the constants adjunction is used for the ordinary map and unit arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*naturality|restrictScalars.*map.*toSheafify",
+   "results": "Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-20",
+   "verdict": "No exact supported derived scalar-unit theorem; the constants adjunction is used for the ordinary map and unit arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars of a constant sheaf supported on a closed immersion",
+   "results": "SheafOfModules.restrictScalars; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict; AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
+   "date": "2026-10-21",
+   "verdict": "No exact supported derived scalar-unit theorem; the constants adjunction is used for the ordinary map and unit arguments."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T002126-L-1489563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T002126-L-1489563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

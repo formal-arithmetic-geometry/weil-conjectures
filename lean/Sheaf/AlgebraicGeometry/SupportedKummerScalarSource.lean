@@ -6,28 +6,14 @@ Authors: SHEAF group Q98
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerScalar
+import Sheaf.AlgebraicGeometry.SupportedKummerScalarMaps
+import Sheaf.AlgebraicGeometry.SupportedKummerScalarDerived
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.AlgebraicGeometry.Scheme
-
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Finite.BaseChange
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Derived scalar extension of a closed supported constant sheaf
@@ -163,6 +149,12 @@ theorem supported_kummer_scalar_source
           (lowerStarCompRestrictScalarsIso
             (supportedScalarMap N A hA) i).inv.app
             (ordinaryFiniteConstant A D) := by
-  sorry
+  have _ := hN
+  let φ := supportedScalarMap N A hA
+  obtain ⟨ηD, ηT, hD, hT⟩ := exists_supported_kummer_scalar_maps T N A φ i
+  obtain ⟨huD, huI, huT⟩ :=
+    supported_kummer_scalar_derived_units T (ULift.{u + 1} (ZMod N)) A φ i ηD ηT hD hT
+  exact ⟨ηD, ηT, hD, hT, huD, huI, huT,
+    supported_kummer_scalar_units_commute φ i ηD ηT hD hT⟩
 
 end AlgebraicGeometry.Etale
