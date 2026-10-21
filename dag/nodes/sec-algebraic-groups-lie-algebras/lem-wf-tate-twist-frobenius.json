@@ -3,41 +3,188 @@
  "blueprint": {
   "is": "lem-wf-tate-twist-frobenius",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Frobenius on the stalk of a twist",
- "statement": "For every $m\\in\\mathbf Z$ and every closed point $x$ of $X_0$, the\ngeometric Frobenius $\\varphi_{E(m)}$ on $E(m)_{\\bar x}$ is\n$Q_x^{-m}\\mathrm{id}$, where $Q_x=|\\kappa(x)|$.",
+ "statement": "Use the finite-field, coefficient and scheme data of [def-wf-tate-twist]: distinct primes $p,\\ell$, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, a finite intermediate extension $\\mathbf Q_\\ell\\subset E\\subset\\overline{\\mathbf Q}_\\ell$, a separated finite-type $k_0$-scheme $X_0$, and $X=X_0\\times_{k_0}k$. Let $E(m)$, with its specified roots-of-unity, tensor and internal-Hom Weil maps, be the signed twist of that definition. Interpret the fiber and its closed-point local geometric Frobenius by [def-weil-local-frobenius-trace], on the integral twist lattice followed by rationalization.\n\nFor every $m\\in\\mathbf Z$ and every closed point $x$ of $X_0$, the geometric Frobenius $\\varphi_{E(m)}$ on $E(m)_{\\bar x}$ is $Q_x^{-m}\\mathrm{id}$, where $Q_x=|\\kappa(x)|$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.md",
   "place": "node lem-wf-tate-twist-frobenius, order 2573"
  },
  "stmt_deps": [
+  "def-wf-tate-twist",
+  "def-wf-tensor-product",
   "def-wf-internal-hom",
-  "def-wf-tensor-product"
+  "def-weil-local-frobenius-trace"
  ],
  "proof": [
   {
-   "text": "On $\\mu_{\\ell^n}$ the geometric Frobenius, i.e. the Weil structure of\n$E(1)$ given by the strict arrow of [lem-wf-tate-twist-compatibility], acts by raising to the\ninverse $q$-th power, hence on\n$\\mathbf Z_\\ell(1)=\\varprojlim_n\\mu_{\\ell^n}$ it is multiplication by\n$Q_x^{-1}$ on the stalk at $\\bar x$; the $E$-twist and the\ntensor/internal-Hom constructions of [def-wf-tate-twist] then give\n$Q_x^{-m}$ for $E(m)_{\\bar x}$.",
+   "text": "Choose a primitive $\\ell$-th root $\\zeta_1\\in k$ by [lem-sc-primitive-root], applicable since $k$ is algebraically closed and $\\ell\\ne p$. Recursively choose $\\zeta_{r+1}\\in k$ with $\\zeta_{r+1}^{\\ell}=\\zeta_r$. Such a root exists by algebraic closedness. It has order $\\ell^{r+1}$: its $\\ell^{r+1}$-th power is $1$, whereas its $\\ell^r$-th power is $\\zeta_r^{\\ell^{r-1}}\\ne1$. Thus $\\zeta=(\\zeta_r)$ is a compatible primitive-root tuple for the inverse limit in [def-wf-tate-twist].",
    "uses": [
-    "lem-wf-tate-twist-compatibility",
+    "lem-sc-primitive-root",
     "def-wf-tate-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Opening sentence, compatible coordinates for the root tower"
+   }
+  },
+  {
+   "text": "These roots give compatible sheaf isomorphisms $(\\mathbf Z/\\ell^r\\mathbf Z)_X\\to\\mu_{\\ell^r,X}$ by $b\\mapsto\\zeta_r^b$. Here is the check on the actual pro-etale site, without invoking the curve-only trivialization definition. For an affine open in any site object and a root section $u$, factor $u^{\\ell^r}-1=\\prod_b(u-\\zeta_r^b)$. The differences of distinct $\\zeta_r^b$ are units. The opens on which $\\prod_{c\\ne b}(u-\\zeta_r^c)$ is invertible cover: a prime containing all these products would contain two distinct factors. On the $b$-th open the factorization forces $u=\\zeta_r^b$, and these opens are disjoint. Hence roots are uniquely locally powers of $\\zeta_r$, as required by the constant-sheaf definition. Transitions agree because $(\\zeta_{r+1}^{b})^\\ell=\\zeta_r^b$. Taking sectionwise limits as in [def-wf-tate-twist] gives $\\widehat{\\mathbf Z}_{\\ell,X}\\xrightarrow{\\sim}\\mathbf Z_\\ell(1)_X$, with basis $e=\\zeta$. This is a sheaf isomorphism before any fiber is taken.",
+   "uses": [
+    "def-wf-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Opening sentence, inverse limit of roots of unity"
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O_E$ and $B=\\widehat{\\mathcal O}_{E,X}$. The completed coefficient identification and integral lattice in [def-wf-tate-twist] turn the basis of step 2 into $B\\xrightarrow{\\sim}L_R$, $1\\mapsto e\\otimes1$. Thus $E(1)$, as an underlying object, is the rationalization of the free rank-one module $B[0]$, and $E(0)$ is the rationalized unit $B[0]$. All signed twists can consequently be computed on free rank-one modules. For the positive powers the K-flat tensor model of [def-wf-tensor-product] gives $B[0]\\otimes_B^L B[0]=B[0]$; its completion is again $B[0]$, which is complete by the specified coefficient-unit construction. For the negative powers the model of [def-wf-internal-hom] gives $R\\mathcal Hom_B(B[0],B[0])=B[0]$: if $B[0]\\to I$ is a K-injective resolution, $\\mathcal Hom_B^\\bullet(B[0],I)=I$. Hence the positive tensor bases $e_m=e^{\\otimes m}$ and their evaluation-dual bases for negative $m$ compute exactly the derived twists, without replacing the adic category by discrete $E$-module sheaves.",
+   "uses": [
+    "def-wf-tate-twist",
+    "def-wf-tensor-product",
+    "def-wf-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Final sentence, integral representatives for tensor powers and internal Homs"
+   }
+  },
+  {
+   "text": "Let $\\gamma:z\\mapsto z^{1/q}$, so $\\Phi_X=\\mathrm{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ by [def-weil-frobenius-detailed]. The strict arrow of [lem-wf-tate-twist-compatibility] is the functorial pullback of roots. Its definition [def-pur-roots-of-unity-inverse-image] pulls a root section back by the ring map on functions. Therefore on the pulled-back generator $\\zeta_r$ it has value $\\gamma(\\zeta_r)=\\zeta_r^{b_r}$, where $b_rq\\equiv1\\pmod{\\ell^r}$. Indeed applying $z\\mapsto z^q$ to this value gives $\\zeta_r$, and that map is an automorphism of $k$. The residues $b_r$ are unique and compatible under reduction since $\\ell\\nmid q$. They represent the unit $q^{-1}\\in\\mathbf Z_\\ell^\\times$. In the basis $e$, the degree-one Weil map is thus $q^{-1}$ times the coefficient-unit Weil map. Extending to $L_R$ and rationalizing, exactly as in [def-wf-tate-twist], leaves that scalar $q^{-1}\\in E$ unchanged.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-wf-tate-twist-compatibility",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-wf-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Opening sentence, inverse q-th power action and extension to E"
+   }
+  },
+  {
+   "text": "The unit Weil map of [def-wf-tate-twist] sends the pulled-back coefficient basis $1$ to $1$, so its scalar is $1$. For $m>0$, [def-wf-tensor-product] first compares pullback with tensor and then tensors the two Weil maps. On the free bases of step 3 its comparison is the identity on the ordered pure tensor. Induction, starting with step 4 and using the left-associated powers of [def-wf-tate-twist], therefore gives scalar $(q^{-1})^m=q^{-m}$ on $e_m$. This includes the separately specified unit at $m=0$.",
+   "uses": [
+    "def-wf-tate-twist",
+    "def-wf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Final sentence, nonnegative tensor powers"
+   }
+  },
+  {
+   "text": "For $m=-h<0$, [def-wf-internal-hom] defines the Weil map by $R\\mathcal Hom(\\varphi_{E(h)}^{-1},\\varphi_{E(0)})$ after its transport comparison. The first argument is contravariant: on the dual basis a functional $f$ goes to the functional $v\\mapsto f(q^h v)=q^h f(v)$, since the unit map has scalar $1$. Equivalently the evaluation of the transported dual basis with the image $q^{-h}e_h$ of the positive basis must be $1$, forcing scalar $q^h$ on the dual basis. The free-module computation of step 3 identifies these with the derived internal-Hom maps. Thus the scalar for every integer $m$ is $q^{-m}$.",
+   "uses": [
+    "def-wf-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Final sentence, negative twists by internal Hom"
+   }
+  },
+  {
+   "text": "Fix a closed point $x$. [def-weil-local-frobenius-trace] takes framework Weil complexes, while $E(m)$ is a pair for the completed pullback $P_E$ of [def-wf-tate-twist]. The equivalence $J_{X,E}$ of [lem-fd-rational-coefficient-category-comparison] is the identity on integral objects and localized maps, and identifies the two categories of Weil pairs through its pullback comparison $b$, which is the identity on the common finite-reduction tower. So $(E(m),\\varphi_{E(m)})$ and the unit are read as framework Weil complexes on the same lattices, and $b$, being natural, preserves the relation $\\varphi_{E(m)}=q^{-m}\\cdot(\\text{unit map})$ in the bases of steps 3--6. By [lem-kun-closed-point-field](a), the residue field of $x$ is a finite extension of $k_0$; put $d=[\\kappa(x):k_0]\\geq1$. By [def-weil-local-frobenius-trace], the local operator at $x$ uses the $d$-fold iterated Weil map and the return $\\Phi_X^d\\bar x=\\bar x\\,\\operatorname{Spec}(\\gamma)^d$, not an equality fixing the geometric point as a scheme morphism. In the coefficient-unit basis, each point transport in [def-weil-frobenius-point-transport] preserves coefficients: restriction of a constant section followed by the insertion and the coefficient comparison sends $a$ to the same $a$. This holds at every finite quotient, and hence in the completed coefficient unit; rationalization sends the same scalar to itself. The functor [def-weil-finite-coefficient-point] evaluates this unit on $s=\\operatorname{Spec}k$ and tensors with $E$, giving $E[0]$. Consequently the local operator of the unit is the identity. By the naturality statement [lem-weil-frobenius-point-transport-natural](2), the underlying basis isomorphisms in step 3 identify the point transports for the twist with those of the unit. All the pullback-composition comparisons on these units also send $1$ to $1$. Since coefficient transport fixes $q^{-m}$, the $d$-fold Weil map of the twist multiplies its basis by $(q^{-m})^d=q^{-md}$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-local-frobenius-trace",
+    "def-weil-frobenius-point-transport",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Opening sentence, passage from q to the closed-point cardinality"
+   }
+  },
+  {
+   "text": "The $d$-dimensional $k_0$-vector space $\\kappa(x)$ has $q^d$ elements (count the $d$ coordinates in any basis). Hence $Q_x=q^d$ and $q^{-md}=Q_x^{-m}$. The scalar identity proved in step 7 is therefore $\\varphi_{E(m)}=Q_x^{-m}\\mathrm{id}$ on the fiber. Conjugating a scalar map by any change of the chosen root or fiber basis leaves it unchanged; thus the auxiliary compatible primitive roots do not enter the assertion. For $X_0=\\varnothing$ the assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+    "place": "Conclusion, all integer exponents and all closed points"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sc-primitive-root",
+  "def-wf-tate-twist",
+  "def-wf-tensor-product",
+  "def-wf-internal-hom",
+  "def-weil-frobenius-detailed",
   "lem-wf-tate-twist-compatibility",
-  "def-wf-tate-twist"
+  "def-pur-roots-of-unity-inverse-image",
+  "lem-kun-closed-point-field",
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-point-transport",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-fd-rational-coefficient-category-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-tate-twist-frobenius.proof.md",
+  "place": "Entire proof, expanded in compatible-root coordinates and with the closed-point degree iteration made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric Frobenius on the stalk of an l adic Tate twist E(m) at a closed point x is multiplication by cardinality of the residue field to the power minus m",
+   "results": "Returned 8 hits: arithFrobAt, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgHom.IsArithFrobAt.restrict_apply, IsArithFrobAt.arithFrobAt, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, AlgHom.IsArithFrobAt.mk_apply, IsArithFrobAt.exists_of_isInvariant, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "cyclotomicCharacter",
+   "results": "Returned 4 hits: cyclotomicCharacter, cyclotomicCharacter.continuous, cyclotomicCharacter.spec, cyclotomicCharacter.toZModPow. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|cyclotomicCharacter_frobenius",
+   "results": "No hits. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius on roots of unity and on integer Tate twists of l adic sheaves",
+   "results": "Returned 8 hits: LinearMap.frobenius, frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, FiniteField.Extension.frob, Polynomial.roots_expand_map_frobenius, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|frobeniusAlgEquivOfAlgebraic_apply",
+   "subdirectory": "NumberTheory/Cyclotomic",
+   "results": "Returned 5 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of ell power roots of unity with geometric Frobenius, tensor powers and duals has scalar action q to the negative integer power",
+   "results": "Returned 8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toFun_apply, cyclotomicCharacter, cyclotomicCharacter.toZModPow_toFun, WittVector.StandardOneDimIsocrystal.frobenius_apply, cyclotomicCharacter.toFun_spec, cyclotomicCharacter.toFun, WittVector.instModuleFractionRingStandardOneDimIsocrystal. Read the candidates: ring automorphisms/cyclotomic characters and isocrystals do not state the stalk action on finite-E adic Weil twists.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +202,49 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-cyclotomic"
+ "unit": "sk-p-cyclotomic",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-wf-tate-twist-frobenius",
+  "worker": "stage1",
+  "summary": "Expanded the source proof into eight explicit steps, with no new nodes. Made the inherited finite-E setting and local Frobenius convention explicit. Constructed compatible-root coordinates before taking fibers, computed the actual completed/derived signed lines, checked inverse-q scalar and contravariant dual signs, then iterated through the closed-point degree. The existing Qbar stalk theorem is a different coefficient specialization and does not attach the full finite-E statement. Every Mathlib search was run through msearch.py; no exact match was found.",
+  "blueprint": "Steps 1-4 realize the first sentence of the master proof and main-20261015 proof: roots of unity, their limit and the strict arrow. Steps 3, 5 and 6 realize the final tensor/internal-Hom sentence for all integers. Steps 7-8 spell out the implicit degree d iteration changing q into Q_x. This preserves the sk-p-cyclotomic root-action route; the item is not the unit key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Primitive roots in the algebraically closed field supply coordinates for the root tower; the cyclotomic unit has no separate primitive-root existence node."
+   },
+   {
+    "node": "lem-wf-tate-twist-compatibility",
+    "why": "The strict roots-of-unity Weil arrow is the specified one used by the source proof; no replacement of the cyclotomic computation is made."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Its finite-residue-field clause supplies the degree used in the local Frobenius definition; this generic closed-point fact is not separately stated in the cyclotomic unit."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality identifies point transport under the chosen integral line basis; this generic transport property is not supplied by any node in the cyclotomic unit."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Identifies the Weil pairs of def-wf-weil-category (completed PBC pullback) with those of def-weil-weil-sheaf-complex on which def-weil-local-frobenius-trace is defined; a generic coefficient-model comparison, not part of the cyclotomic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "lem-wf-tate-twist-compatibility",
+  "lem-kun-closed-point-field",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-0d77449dc",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-0d77449dc (reviewer sub-agent of L); spot-checked: I read the item, all eight steps and every cited statement. There are no new nodes, no re-split repair note, and neither the item nor any cited node is in the route-pivot drop list. The item is still imported on live. The statement is the same in master (order 2573) and main-20261015, whose proof is one paragraph: the inverse q-th power on mu_{l^n} gives Q_x^{-m}. No SGA source is used. Steps 1-6 and 8 are correct. Step 1 (lem-sc-primitive-root, which has no curve hypothesis) gives compatible primitive roots. Step 2's factorization argument holds: the loci D_b are disjoint and cover, because a prime containing every product would contain a unit. In step 3, B ≅ L_R because R is finite free over Z_l, B⊗^L B = B and Hom(B,I) = I. Step 4's sign is right: by def-pur-roots-of-unity-inverse-image, c = ε∘f^{-1}β with β = pr^♯, and Φ^♯ sends the constant ζ to γ(ζ) = ζ^{q^{-1}}, so the scalar is q^{-1}. Step 5 gives q^{-m} for positive m, and step 6 gives q^h on the dual basis via RHom(φ^{-1},φ_0). Step 8 is the count Q_x = q^d. Edge cases m = 0, ±1, a degree-2 point, l = 2, ramified E and empty X_0 all hold. F1 (C4/E4, step 7): def-weil-local-frobenius-trace is defined for pairs of def-weil-weil-sheaf-complex, with the framework pullback Lg^* of def-weil-derived-pullback-tensor-hom. But (E(m),φ) is a pair of def-wf-weil-category, with the PBC completed pullback. The step applied the operator definition to E(m) with no identification of the two pair categories. I added lem-fd-rational-coefficient-category-comparison to step 7, proof_deps and tool_uses: its J_{X,E} is the identity on integral objects and identifies the Weil pairs through b, which is the identity on the finite tower, so the scalar relation is preserved. The earlier N9 deliveries of this item cited the same node. F2 (B3): the delivery dropped the base stmt_deps def-wf-tensor-product and def-wf-internal-hom, which are blueprint uses and define the Weil maps the statement mentions. I restored them and set uses_not_cited to []. Step 7 is now 1977 characters. Accepted tool_uses: lem-sc-primitive-root, lem-kun-closed-point-field, lem-weil-frobenius-point-transport-natural and the added J comparison, all generic. Batch 5: def-weil-local-frobenius-trace is the general definition of the closed-point local Frobenius operator, which the statement needs, and not a step of the trace-formula or Poincaré duality proofs, so I accept it. By a closure diff on the snapshot, it is the only sec-trace-formula/sec-poincare-duality node the delivery adds. The J comparison adds 9 sec-fourier-transform nodes and no trace-formula or Poincaré node, and it creates no cycle.; 1 file(s) fixed by the reviewer"
+ }
 }

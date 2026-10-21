@@ -21842,3 +21842,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T09:17:21Z L: superseded stage-1 delivery Q22/lem-pur-line-zero-class-etale-realization at 2cbe778154e1ac253394e15e48a206176cf02aa5; current completion retained; packet archived at refs/superseded/Q22/lem-pur-line-zero-class-etale-realization/2cbe778154e1ac253394e15e48a206176cf02aa5; stale return retired.
 - 09:17 L: returned deliver/N0/det-def-sfb-filtered-two-colimit-model (reviewer RETURN: Superseded again: A6, A7, B10 and G4 (fourth push of this split). Process: the live item is split and reviewed. E1's sta)
 - 09:17 L: merged deliver/Q56/lem-sfb-intrinsic-finite-derived-pullback (reviewer PASS; first push; new nodes: 0)
+- 09:17 L: merged deliver/Q85/lem-wf-tate-twist-frobenius (reviewer FIX; first push; new nodes: 0)
