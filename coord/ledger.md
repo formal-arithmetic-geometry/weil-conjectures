@@ -22936,3 +22936,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:33 L: returned deliver/N0/def-per-support-condition (reviewer RETURN: C1/F. The item is live: it is not on the drop list, and the live lem-per-artin-gabber-affine-curve and def-per-perverse-)
 - 15:33 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 15:33 L: returned deliver/NY/def-per-support-condition (reviewer RETURN: I read the master order-2738 source, the delivered item, the report and the statements of every cited node. The STATEMEN)
+- 15:33 L: merged deliver/NZ/lem-sfb-continuous-algcl-open-finiteness (stage 2; reviewer PASS; parallel immutable checks)
