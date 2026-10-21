@@ -13,16 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.RingedSiteInjectiveMonoRestriction
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
+import WeilConjectures.SixFunctors.OpenClosed.Derived
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
@@ -44,17 +39,118 @@ set_option Elab.async false
 
 universe u
 
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+open scoped CategoryTheory.Functor
+
+/- Compatibility of derived adjunction maps with their fixed complex comparisons. -/
+section
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]
+
+private theorem quotient_hom (E : Type*) [Category E] [Abelian E]
+    [HasDerivedCategory E] (I : CochainComplex E ℤ) :
+    (DerivedCategory.quotientCompQhIso E).hom.app I = 𝟙 (DerivedCategory.Q.obj I) := rfl
+
+private theorem quotient_inv (E : Type*) [Category E] [Abelian E]
+    [HasDerivedCategory E] (I : CochainComplex E ℤ) :
+    (DerivedCategory.quotientCompQhIso E).inv.app I = 𝟙 (DerivedCategory.Q.obj I) := rfl
+
+private theorem homotopy_inv (I : CochainComplex C ℤ) :
+    (L.mapHomotopyCategoryFactors (.up ℤ)).inv.app I =
+      𝟙 ((HomotopyCategory.quotient _ _).obj
+        ((L.mapHomologicalComplex (.up ℤ)).obj I)) := rfl
+
+variable [HasDerivedCategory C] [HasDerivedCategory D]
+  [Abelian.HasKInjectiveResolutions D]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R)
+
+private theorem derivedUnit_Q (I : CochainComplex C ℤ)
+    [CochainComplex.IsKInjective ((L.mapHomologicalComplex (.up ℤ)).obj I)] :
+    DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
+      (R.rightDerivedFunctorObjQIso ((L.mapHomologicalComplex (.up ℤ)).obj I)).inv =
+    adj.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I) ≫
+      R.rightDerivedFunctor.map (L.mapDerivedCategoryFactors.hom.app I) := by
+  have h := (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+    (HomotopyCategory.quasiIso C (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    R.rightDerivedFunctorUnit ((HomotopyCategory.quotient _ _).obj I)
+  rw [L.mapDerivedCategoryFactorsh_hom_app,
+    Adjunction.mapHomotopyCategory_unit_app_quotient (c := .up ℤ) adj I] at h
+  simp only [quotient_hom, quotient_inv, homotopy_inv, CategoryTheory.Functor.map_id] at h
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
+    Iso.app_hom, Iso.app_inv,
+    Functor.mapIso_symm, Functor.mapIso_hom, asIso_hom, quotient_hom, quotient_inv,
+    Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+    Category.comp_id] at h
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact h.symm
+
+private theorem derivedUnit_Q_normalized (I : CochainComplex C ℤ)
+    [CochainComplex.IsKInjective ((L.mapHomologicalComplex (.up ℤ)).obj I)] :
+    DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
+        (R.rightDerivedFunctorObjQIso ((L.mapHomologicalComplex (.up ℤ)).obj I)).inv ≫
+        R.rightDerivedFunctor.map (L.mapDerivedCategoryFactors.inv.app I) =
+      adj.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I) := by
+  rw [← Category.assoc, derivedUnit_Q adj I, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+
+private theorem derivedCounit_Q (I : CochainComplex D ℤ) [I.IsKInjective] :
+    L.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso I).inv ≫
+      adj.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Q.obj I) =
+    L.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
+      DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+  have h := (adj.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
+    (HomotopyCategory.quasiIso D (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    R.rightDerivedFunctorUnit ((HomotopyCategory.quotient _ _).obj I)
+  erw [L.mapDerivedCategoryFactorsh_hom_app ((R.mapHomologicalComplex (.up ℤ)).obj I),
+    Adjunction.mapHomotopyCategory_counit_app_quotient (c := .up ℤ) adj I] at h
+  simp only [quotient_hom, quotient_inv, homotopy_inv, CategoryTheory.Functor.map_id] at h
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
+    Iso.app_hom, Iso.app_inv,
+    Functor.mapIso_symm, Functor.mapIso_hom, asIso_hom, quotient_hom, quotient_inv,
+    Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+    Category.comp_id] at h
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact h
+private theorem derivedCounit_Q_normalized [Abelian.HasKInjectiveResolutions C]
+    {T : DerivedCategory D ⥤ DerivedCategory C} (other : L.rightDerivedFunctor ⊣ T)
+    (I : CochainComplex D ℤ) [I.IsKInjective] :
+    L.mapDerivedCategoryFactors.inv.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        L.rightDerivedFunctorIsoMapDerivedCategory.inv.app
+          (DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj I)) ≫
+        L.rightDerivedFunctor.map ((R.rightDerivedFunctorObjQIso I).inv ≫
+          (((adj.mapDerivedCategoryRightDerivedAdjunction).ofNatIsoLeft
+              L.rightDerivedFunctorIsoMapDerivedCategory.symm).rightAdjointUniq other).hom.app
+            (DerivedCategory.Q.obj I)) ≫
+        other.counit.app (DerivedCategory.Q.obj I) =
+      DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [Adjunction.rightAdjointUniq_hom_app_counit]
+  simp only [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Iso.symm_inv]
+  rw [← L.rightDerivedFunctorIsoMapDerivedCategory.inv.naturality_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [derivedCounit_Q adj I]
+  simp only [Iso.inv_hom_id_app_assoc]
+
+end
+
+-- Keep chosen derived adjoints abstract when checking the comparison morphisms.
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Adjunction.mapHomologicalComplex
   _root_.DerivedCategory.Q _root_.DerivedCategory.Qh
-
-open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
-open scoped CategoryTheory.Functor
+  CategoryTheory.Functor.rightAdjoint CategoryTheory.Adjunction.ofIsLeftAdjoint
+  CategoryTheory.Functor.rightDerivedFunctorObjQIso
+  CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategoryFactors
 
 namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] upperStar lowerStar closedUpperShriek
   lowerStarClosedUpperShriekAdjunction upperStarLowerStarAdjunction
+  derivedLowerStarClosedUpperShriekAdjunction mapDerivedUpperStarLowerStarAdjunction
 
 variable (A : Type (u + 1)) [CommRing A]
   {Z P U : Scheme.{u}} (i : Z ⟶ P) [IsClosedImmersion i]
@@ -94,7 +190,14 @@ theorem etaleSupportSequence_zero
     (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
     (etaleSupportInclusion A i j hij).app I ≫
       (etaleSupportRestriction A j).app I = 0 := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro r
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.zero_f,
+    etaleSupportInclusion, etaleSupportRestriction,
+    Adjunction.mapHomologicalComplex_counit_app_f, Adjunction.mapHomologicalComplex_unit_app_f]
+  change (lowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} A) i j hij).counit.app
+      (I.X r) ≫ (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app (I.X r) = 0
+  exact lowerStar_map_comp_unit_app_eq_zero (ModuleCat.{u + 1} A) i j hij _
 
 /-- The canonical sequence `i_*H_A(I) → I → j_*j^*I`, with H_A the existing
 closed supported inverse image, and maps the termwise counit and unit.
@@ -124,6 +227,56 @@ noncomputable def etaleSupportSequenceMap
       (lowerStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).map f)
     ((etaleSupportInclusion A i j hij).naturality f)
     ((etaleSupportRestriction A j).naturality f)
+
+private theorem supportSequence_shortExact
+    (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    [∀ r : ℤ, Injective (I.X r)] :
+    (etaleSupportSequence A i j hij I).ShortExact := by
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro r
+  let S := (etaleSupportSequence A i j hij I).map
+    (HomologicalComplex.eval _ (.up ℤ) r)
+  have hmono : Mono S.f := by
+    change Mono (((lowerStarClosedUpperShriekAdjunction
+      (ModuleCat.{u + 1} A) i j hij).mapHomologicalComplex (.up ℤ)).counit.app I |>.f r)
+    rw [Adjunction.mapHomologicalComplex_counit_app_f]
+    infer_instance
+  have hepi : Epi S.g := by
+    change Epi (((upperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).unit.app I |>.f r)
+    rw [Adjunction.mapHomologicalComplex_unit_app_f]
+    have := isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective
+      (ModuleCat.{u + 1} A) j i hij (I.X r)
+    infer_instance
+  refine ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel S ?_) hmono hepi
+  have hf : S.f = (lowerStarClosedUpperShriekAdjunction
+      (ModuleCat.{u + 1} A) i j hij).counit.app (I.X r) :=
+    Adjunction.mapHomologicalComplex_counit_app_f _ _ _ _
+  have hg : S.g = (upperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} A) j).unit.app (I.X r) :=
+    Adjunction.mapHomologicalComplex_unit_app_f _ _ _ _
+  exact IsKernel.ofIso _ (kernelIsKernel
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app (I.X r)))
+    (KernelFork.ofι S.f S.zero) (Iso.refl _) (Iso.refl _)
+    ((closedUpperShriekCompLowerStarIso (ModuleCat.{u + 1} A) i j hij).app (I.X r)).symm
+    (by simpa only [Iso.refl_hom, Category.id_comp, Category.comp_id] using hg)
+    (by
+      change ((closedUpperShriekCompLowerStarIso
+        (ModuleCat.{u + 1} A) i j hij).app (I.X r)).inv ≫ S.f =
+        kernel.ι ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app (I.X r)) ≫ 𝟙 _
+      rw [hf, lowerStarClosedUpperShriekAdjunction_counit_app]
+      simp only [Iso.app_inv, Iso.inv_hom_id_app_assoc, Category.comp_id]
+      rfl)
+
+private theorem supportRestriction_isKInjective
+    (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    [I.IsKInjective] :
+    CochainComplex.IsKInjective
+      (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj I) := by
+  have : (upperStar (ModuleCat.{u + 1} A) j).PreservesKInjectiveComplexes :=
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
+      |>.preservesKInjectiveComplexes
+  exact Functor.PreservesKInjectiveComplexes.isKInjective_map I
 
 /-- The computation of `Ri_A^!` on a K-injective complex, using the derived unit and
 then the unique counit-compatible comparison to the recorded ordinary right adjoint.
@@ -180,6 +333,37 @@ noncomputable def etaleSupportThirdComparison
     (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj I)).symm ≪≫
     (R(lowerStar (ModuleCat.{u + 1} A) j)).mapIso
       ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.app I).symm
+
+private theorem supportFirst_counit [Finite A]
+    (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    [I.IsKInjective] :
+    (etaleSupportFirstComparison A i j hij I).hom ≫
+        (Adjunction.ofIsLeftAdjoint
+          (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app
+            (_root_.DerivedCategory.Q.obj I) =
+      _root_.DerivedCategory.Q.map ((etaleSupportInclusion A i j hij).app I) := by
+  dsimp only [etaleSupportFirstComparison, etaleSupportShriekComparison,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom]
+  simp only [Category.assoc]
+  unfold derivedLowerStarClosedUpperShriekAdjunction
+  exact derivedCounit_Q_normalized
+    (lowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} A) i j hij)
+    (Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))) I
+
+private theorem supportThird_unit
+    (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    (hJ : CochainComplex.IsKInjective
+      (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj I)) :
+    _root_.DerivedCategory.Q.map ((etaleSupportRestriction A j).app I) ≫
+        (etaleSupportThirdComparison A j I hJ).hom =
+      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app
+        (_root_.DerivedCategory.Q.obj I) := by
+  let := hJ
+  dsimp only [etaleSupportThirdComparison, etaleSupportRestriction, Iso.trans_hom,
+    Iso.symm_hom, Functor.mapIso_hom, Iso.app_inv]
+  unfold mapDerivedUpperStarLowerStarAdjunction
+  exact derivedUnit_Q_normalized
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j) I
 
 /-- A degreewise-injective K-injective model gives the short exact support sequence,
 and its canonical SES triangle realizes the actual derived counit/unit triangle,
@@ -257,7 +441,55 @@ theorem etale_injective_support_sequence [Finite A] :
           t.hom.hom₃ = (etaleSupportThirdComparison A j I hJ).hom ≫
             (R(lowerStar (ModuleCat.{u + 1} A) j)).map
               ((D(upperStar (ModuleCat.{u + 1} A) j)).map e.hom) := by
-  sorry
+  classical
+  obtain ⟨δ, hδ⟩ := exists_etale_closedSupportTriangle A i j hij
+  refine ⟨δ, hδ, ?_⟩
+  intro I _ _ L e
+  let hS := supportSequence_shortExact A i j hij I
+  let hJ := supportRestriction_isKInjective A j I
+  let F := R(lowerStar (ModuleCat.{u + 1} A) i)
+  let G := R(lowerStar (ModuleCat.{u + 1} A) j)
+  let J := D(upperStar (ModuleCat.{u + 1} A) j)
+  let e₁ := etaleSupportFirstComparison A i j hij I ≪≫ F.mapIso (F.rightAdjoint.mapIso e)
+  let e₃ := etaleSupportThirdComparison A j I hJ ≪≫ G.mapIso (J.mapIso e)
+  have h₁ : e₁.hom ≫ (Adjunction.ofIsLeftAdjoint F).counit.app L =
+      _root_.DerivedCategory.Q.map ((etaleSupportSequence A i j hij I).f) ≫ e.hom := by
+    dsimp only [e₁, Iso.trans_hom, Functor.mapIso_hom]
+    rw [Category.assoc]
+    erw [(Adjunction.ofIsLeftAdjoint F).counit_naturality]
+    rw [← Category.assoc, supportFirst_counit]
+    rfl
+  have h₃ : _root_.DerivedCategory.Q.map ((etaleSupportSequence A i j hij I).g) ≫ e₃.hom =
+      e.hom ≫ (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app L := by
+    change _root_.DerivedCategory.Q.map ((etaleSupportRestriction A j).app I) ≫
+      e₃.hom = _
+    dsimp only [e₃, Iso.trans_hom, Functor.mapIso_hom]
+    rw [← Category.assoc, supportThird_unit]
+    exact ((mapDerivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} A) j).unit.naturality e.hom).symm
+  obtain ⟨t, ht₁, ht₂⟩ := exists_iso_of_arrow_iso _ _
+    (_root_.DerivedCategory.triangleOfSES_distinguished hS) (hδ L)
+    (Arrow.isoMk e₁ e h₁)
+  have horth : Subsingleton
+      ((F.obj (F.rightAdjoint.obj L))⟦(1 : ℤ)⟧ ⟶ G.obj (J.obj L)) := by
+    have hz : IsZero (J.obj ((F.obj (F.rightAdjoint.obj L))⟦(1 : ℤ)⟧)) :=
+      ((shiftFunctor _ (1 : ℤ)).map_isZero
+        (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
+          (ModuleCat.{u + 1} A) j i (by rw [hij]; exact disjoint_compl_right) _)).of_iso
+        ((J.commShiftIso (1 : ℤ)).app _)
+    have : Subsingleton (J.obj ((F.obj (F.rightAdjoint.obj L))⟦(1 : ℤ)⟧) ⟶ J.obj L) :=
+      ⟨fun _ _ ↦ hz.eq_of_src _ _⟩
+    exact ((mapDerivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} A) j).homEquiv _ _).symm.subsingleton
+  have : Subsingleton
+      ((_root_.DerivedCategory.triangleOfSES hS).obj₁⟦(1 : ℤ)⟧ ⟶ G.obj (J.obj L)) :=
+    (((shiftFunctor _ (1 : ℤ)).mapIso e₁).homCongr (Iso.refl _)).subsingleton
+  refine ⟨hS, hJ, t, ht₁, ht₂, ?_⟩
+  apply Triangle.cancel_mor₂_of_subsingleton (Y := G.obj (J.obj L))
+    (_root_.DerivedCategory.triangleOfSES_distinguished hS)
+  rw [t.hom.comm₂, ht₂]
+  exact h₃.symm
+
 
 /-- Naturality of the entire support SES triangle, including its canonical boundary,
 for chain maps between degreewise-injective K-injective models.
@@ -279,6 +511,7 @@ theorem etaleSupportSequence_boundary_naturality [Finite A]
         (_root_.DerivedCategory.Q.map (etaleSupportSequenceMap A i j hij f).τ₁)⟦1⟧' =
       _root_.DerivedCategory.Q.map (etaleSupportSequenceMap A i j hij f).τ₃ ≫
         _root_.DerivedCategory.triangleOfSESδ hJ := by
-  sorry
+  exact _root_.DerivedCategory.triangleOfSESδ_naturality hI hJ
+    (etaleSupportSequenceMap A i j hij f)
 
 end AlgebraicGeometry.Etale
