@@ -20019,3 +20019,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:51 L: merged deliver/Q25/lem-cbc-open-localized-counit-comparison (reviewer PASS; first push; new nodes: 0)
 - 03:51 L: merged deliver/Q11/sk-def-sfb-module-lower-shriek (reviewer FIX; after a return; new nodes: 2)
 - 03:51 L: returned deliver/Q27/lem-weil-pbc-realization-adjoint-comparisons (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-realization-adjoint-comparisons: cited no)
+- 2026-10-21T03:52:05Z L: superseded stage-1 delivery Q52/lem-sp-supported-etale-tensor-origin at 3b273f535475265af521638115f015774dd9f6f3; current completion retained; packet archived at refs/superseded/Q52/lem-sp-supported-etale-tensor-origin/3b273f535475265af521638115f015774dd9f6f3; stale return retired.
