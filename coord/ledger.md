@@ -21747,3 +21747,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:13 L: merged deliver/N6/lem-pur-completed-coefficient-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 09:13 L: returned deliver/Q154/lem-fix-open-scalar-tensor-normalization (reviewer RETURN: L: independent stage-2 immutable head 0dc45a25334e: Statement mathematically faithful (all clauses, directions, unit pin)
 - 09:13 L: returned deliver/Q48/lem-pur-signed-line-scalar-tensor-tower (reviewer RETURN: L: independent stage-2 immutable head 67b6ac920743: H2: stmt_deps cite theorem nodes lem-sp-scalar-extension-binary-cohe)
+- 09:13 L: returned deliver/Q34/lem-weil-proetale-tor-interval-triangle (reviewer RETURN: L: independent stage-2 immutable head 7f8cef57ee0e: H13: the delivery rebinds landed dependency records. (1) def-weil-de)
