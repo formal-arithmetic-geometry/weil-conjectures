@@ -19890,3 +19890,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:39 L: merged deliver/Q17/lem-weil-pbc-flat-constant-tensor-pro-zero-cones (reviewer PASS; first push; new nodes: 0)
 - 03:39 L: merged deliver/Q103/lem-sfb-coefficient-cocone-comparison-agreement (reviewer FIX; first push; new nodes: 0)
 - 03:39 L: merged deliver/NG/lem-weil-pbc-augmented-diagram-projection-mate (reviewer FIX; first push; new nodes: 0)
+- 03:39 L: merged deliver/Q127/sk-def-sfb-coefficient-comparisons (reviewer PASS; first push; new nodes: 0); claim not held by Q127: not your claim

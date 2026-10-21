@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-coefficient-comparisons",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Comparison maps for a change of coefficients",
@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "*Formal input.* For a lax monoidal functor and a commutative square of ring objects,\nrestriction of scalars commutes with \"transport, then restrict along the vertical maps\"\n([def-sfb-comap-mapmod-square], identity on underlying objects by\n[lem-sfb-comap-mapmod-square-underlying]). In a square of adjunctions, an isomorphism between the\ncomposites of right adjoints has a conjugate isomorphism between the composites of left adjoints\n([def-sfb-conjugate-pull-iso]) and a mate ([def-sfb-mate-push-hom]). Restriction of scalars\ncommutes with extension of scalars along isomorphisms ([def-sfb-extend-comap-iso-of-iso]) and\nwith the linearization of a functor satisfying a projection formula\n([def-sfb-projection-formula-comap]).",
+   "text": "Fix $a$ and $f$ as in the statement. The formal constructions used below are the restriction/transport square of [def-sfb-comap-mapmod-square], whose components are identities on underlying objects by [lem-sfb-comap-mapmod-square-underlying], and conjugation and mates of [def-sfb-conjugate-pull-iso] and [def-sfb-mate-push-hom]. Conjugation is applied to composite adjunctions, so its output is an isomorphism; taking a mate alone supplies a transformation. For pullback the invertible-vertical scalar square is [def-sfb-extend-comap-iso-of-iso]; for the linear extension by zero the restriction comparison is [def-sfb-projection-formula-comap]. These specify the formal operations, including their directions, used in the following constructions.",
    "uses": [
     "def-sfb-comap-mapmod-square",
     "lem-sfb-comap-mapmod-square-underlying",
@@ -31,48 +31,94 @@
     "def-sfb-extend-comap-iso-of-iso",
     "def-sfb-projection-formula-comap"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "Formal input, entire paragraph"
+   }
   },
   {
-   "text": "*Pushforward and pullback.* The second square of [sk-def-sfb-coefficient-change] gives\n$\\operatorname{Res}_{a_Y}\\circ f_*\\cong f_*\\circ\\operatorname{Res}_{a_X}$\n([def-sfb-comap-lower-star-iso]); its conjugate and mate are the underived (Pull) and (Push)\n([def-sfb-pull-iso], [def-sfb-push-hom]). Since every $\\alpha_f$ is invertible\n([sk-prop-sfb-cartesian-coefficients]), restriction of scalars also commutes with $f^*$\n([def-sfb-comap-upper-star-iso]), levelwise also on derived categories\n([def-sfb-derived-comap-upper-star-iso]).",
+   "text": "Let $U_W=\\operatorname{Res}_{a_W}$ and $E_W=\\operatorname{Ext}_{a_W}$. The pushforward coefficient square of [sk-def-sfb-coefficient-change] commutes. Substituting it into the restriction/transport square gives the natural isomorphism $c:U_Y f_*^{\\Lambda'}\\cong f_*^\\Lambda U_X$ of [def-sfb-comap-lower-star-iso]. The pushforwards here are the composites defined in [sk-def-sfb-module-pushforward-pullback], so the square applies to exactly these functors. Define underived (Pull) by conjugating $c$ along $E_W\\dashv U_W$ ([sk-def-sfb-change-of-scalars]) and $f^*\\dashv f_*$ for both coefficient rings. This gives $E_X f^*_{\\Lambda}\\cong f^*_{\\Lambda'}E_Y$, with the convention fixed by [def-sfb-pull-iso]. Define underived (Push) to be its prescribed mate of $c$: its component is\n$$E_Yf_*^\\Lambda M\\xrightarrow{E_Yf_*^\\Lambda\\eta^X_M}E_Yf_*^\\Lambda U_XE_XM\\xrightarrow{E_Yc^{-1}_{E_XM}}E_YU_Yf_*^{\\Lambda'}E_XM\\xrightarrow{\\varepsilon^Y}f_*^{\\Lambda'}E_XM.$$\nHere $\\eta^X$ and $\\varepsilon^Y$ are the coefficient adjunction unit and counit. This is [def-sfb-push-hom]. Naturality follows from that of these three transformations. No exactness of $E_W$ is used.",
    "uses": [
     "sk-def-sfb-coefficient-change",
     "def-sfb-comap-lower-star-iso",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-change-of-scalars",
     "def-sfb-pull-iso",
-    "def-sfb-push-hom",
-    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-push-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "Pushforward and pullback, first sentence and conjugate/mate constructions"
+   }
+  },
+  {
+   "text": "For the inverse-image square, apply [lem-sfb-alpha-iso] separately to the arbitrary condensed rings $\\Lambda$ and $\\Lambda'$: both vertical maps $\\alpha_f$ and $\\alpha'_f$ are invertible. Thus no restriction to the listed adic coefficient rings is being imposed. The invertible-square construction of step 1 gives the restriction/pullback isomorphism $U_X f^*_{\\Lambda'}\\cong f^*_{\\Lambda}U_Y$ of [def-sfb-comap-upper-star-iso]. Use its levelwise version [def-sfb-derived-comap-upper-star-iso] on the unbounded categories. This is the right-adjoint comparison used for the open-immersion construction below and is available without flatness of $a$.",
+   "uses": [
+    "lem-sfb-alpha-iso",
     "def-sfb-comap-upper-star-iso",
     "def-sfb-derived-comap-upper-star-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "Pushforward and pullback, invertibility and levelwise comparison"
+   }
   },
   {
-   "text": "*Derived (Pull) and (Push).* Under the flatness assumption $\\operatorname{Ext}_{a_X}$ is exact\n([lem-sfb-extend-scalars-preserves-homology]) and $\\operatorname{Res}_{a_X}$ preserves\nK-injective complexes ([lem-sfb-comap-preserves-k-injectives]), so restriction of scalars\ncommutes with $Rf_*$ ([def-sfb-derived-comap-lower-star-iso]). Its conjugate along\n$Lf^*\\dashv Rf_*$ and $T\\dashv D(\\operatorname{Res})$ is (Pull) ([def-sfb-derived-pull-iso]), and\nits mate along $T\\dashv D(\\operatorname{Res})$ is (Push) ([def-sfb-derived-push-hom]).",
+   "text": "Now assume the stated flatness at every scheme $W$. It implies that $E_W$ preserves finite limits, so [lem-sfb-extend-scalars-preserves-homology] applies; [lem-sfb-comap-preserves-k-injectives] gives preservation of K-injective complexes by $U_W$. Use [def-sfb-derived-comap-lower-star-iso] to obtain $\\bar c:D(U_Y)Rf_*^{\\Lambda'}\\cong Rf_*^{\\Lambda}D(U_X)$ on unbounded categories. Define derived (Pull) to be its conjugate along $Lf^*\\dashv Rf_*$, supplied by [sk-def-sfb-module-derived-pushpull], and $T^W\\dashv D(U_W)$, supplied by [sk-def-sfb-coefficient-change]. This is the isomorphism of [def-sfb-derived-pull-iso]. Define derived (Push) as in [def-sfb-derived-push-hom]: apply the three-arrow formula of step 2 with $E_W,U_W,c,f_*$ replaced by $T^W,D(U_W),\\bar c,Rf_*$. Its source is $T^Y Rf_*^{\\Lambda}$ and its target is $Rf_*^{\\Lambda'}T^X$. Conjugation gives an isomorphism for (Pull), whereas the mate formula does not assert invertibility for (Push).",
    "uses": [
     "lem-sfb-extend-scalars-preserves-homology",
     "lem-sfb-comap-preserves-k-injectives",
     "def-sfb-derived-comap-lower-star-iso",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-coefficient-change",
     "def-sfb-derived-pull-iso",
     "def-sfb-derived-push-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "Derived (Pull) and (Push), entire paragraph"
+   }
   },
   {
-   "text": "*Extension by zero.* Restriction of scalars commutes with $j_!$\n([def-sfb-comap-open-immersion-shriek-iso]); the extension-by-zero isomorphisms are the\nconjugates of the commutation of restriction of scalars with $j^*$ along $j_!\\dashv j^*$, resp.\n$D(j_!)\\dashv D(j^*)$ ([def-sfb-open-immersion-shriek-iso],\n[def-sfb-derived-open-immersion-shriek-iso]); no flatness is needed.",
+   "text": "For an open immersion $j:U\\to X$, the linearization comparison in step 1 yields the restriction/extension-by-zero isomorphism [def-sfb-comap-open-immersion-shriek-iso]. For extension of scalars, use the restriction/pullback comparison of step 3 at $j$. Its conjugate along the coefficient adjunctions and $j_!\\dashv j^*$ is, by [def-sfb-open-immersion-shriek-iso], $E_Xj_!^{\\Lambda}\\cong j_!^{\\Lambda'}E_U$. The adjunction and exactness of $j_!$ are supplied by [sk-def-sfb-module-lower-shriek]. At the derived level use [def-sfb-derived-open-immersion-shriek-iso], which supplies the conjugate along $D(j_!)\\dashv D(j^*)$ and $T\\dashv D(U)$, including these ambient derived adjunctions, and gives $T^XD(j_!^{\\Lambda})\\cong D(j_!^{\\Lambda'})T^U$. Its statement explicitly applies to every coefficient morphism without flatness. We use this derived conjugate, rather than deriving a composite of nonexact scalar-extension functors without a comparison theorem.",
    "uses": [
     "def-sfb-comap-open-immersion-shriek-iso",
     "def-sfb-open-immersion-shriek-iso",
+    "sk-def-sfb-module-lower-shriek",
     "def-sfb-derived-open-immersion-shriek-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "Extension by zero, entire paragraph"
+   }
   },
   {
-   "text": "*(Shriek).* [def-sfb-derived-lower-shriek-hom], and the isomorphism criterion is\n[lem-sfb-derived-lower-shriek-hom-iso].",
+   "text": "Retain flatness and choose the same compactification $X\\xrightarrow{i}Z\\xrightarrow{g}Y$ for both rings. By [sk-def-sfb-module-derived-lower-shriek], $Rf_!^\\Lambda=Rg_*^\\Lambda D(i_!^\\Lambda)$ and likewise for $\\Lambda'$. Whisker derived (Push) for $g$ on the right by $D(i_!^\\Lambda)$, then whisker the isomorphism of step 5 for $i$ on the left by $Rg_*^{\\Lambda'}$. Define (Shriek) as their composite, with the canonical reassociations:\n$$T^Y Rg_*^\\Lambda D(i_!^\\Lambda)\\xrightarrow{\\mathrm{Push}_g}Rg_*^{\\Lambda'}T^Z D(i_!^\\Lambda)\\xrightarrow{Rg_*^{\\Lambda'}(\\sigma_i)}Rg_*^{\\Lambda'}D(i_!^{\\Lambda'})T^X.$$\nThis is precisely [def-sfb-derived-lower-shriek-hom], and its endpoints are $T^YRf_!^\\Lambda$ and $Rf_!^{\\Lambda'}T^X$. The transformation is attached to the chosen compactification; no independence assertion is required.",
    "uses": [
-    "def-sfb-derived-lower-shriek-hom",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "def-sfb-derived-lower-shriek-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "(Shriek), definition expanded as the two whiskered factors"
+   }
+  },
+  {
+   "text": "If derived (Push) for $g$ is an isomorphism, the criterion [lem-sfb-derived-lower-shriek-hom-iso] applies. Explicitly, write the two factors of step 6 as $u$ and $v$. Then $u^{-1}$ is the component of $\\mathrm{Push}_g^{-1}$ evaluated on $D(i_!)$, and $v^{-1}=Rg_*^{\\Lambda'}(\\sigma_i^{-1})$. Functoriality gives $v^{-1}v=vv^{-1}=1$, and the inverse of $vu$ is $u^{-1}v^{-1}$, with inverse associators inserted in reverse order. Both inverse equations follow by cancellation. Thus (Shriek) is invertible under exactly the stated hypothesis on the proper part.",
+   "uses": [
     "lem-sfb-derived-lower-shriek-hom-iso"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+    "place": "(Shriek), isomorphism criterion"
+   }
   }
  ],
  "proof_deps": [
@@ -84,30 +130,85 @@
   "def-sfb-projection-formula-comap",
   "sk-def-sfb-coefficient-change",
   "def-sfb-comap-lower-star-iso",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-change-of-scalars",
   "def-sfb-pull-iso",
   "def-sfb-push-hom",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-alpha-iso",
   "def-sfb-comap-upper-star-iso",
   "def-sfb-derived-comap-upper-star-iso",
   "lem-sfb-extend-scalars-preserves-homology",
   "lem-sfb-comap-preserves-k-injectives",
   "def-sfb-derived-comap-lower-star-iso",
+  "sk-def-sfb-module-derived-pushpull",
   "def-sfb-derived-pull-iso",
   "def-sfb-derived-push-hom",
   "def-sfb-comap-open-immersion-shriek-iso",
   "def-sfb-open-immersion-shriek-iso",
+  "sk-def-sfb-module-lower-shriek",
   "def-sfb-derived-open-immersion-shriek-iso",
+  "sk-def-sfb-module-derived-lower-shriek",
   "def-sfb-derived-lower-shriek-hom",
   "lem-sfb-derived-lower-shriek-hom-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md",
+  "place": "Five paragraphs of the unit proof, expanded using the existing comparison nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of condensed coefficient rings commutes with pro-etale pullback and extension by zero, with comparison maps for derived pushforward",
+   "results": "CondensedMod.hom_naturality_apply; LightCondMod.hom_naturality_apply; LightCondensed.ihomPoints_symm_comp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.freeFunctorCompPullbackIso; PresheafOfModules.pullbackComp; SheafOfModules.pushforwardCongr; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "comapLowerStarIso|derivedPullIso|derivedPushHom|derivedOpenImmersionShriekIso|derivedLowerShriekHom",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of condensed coefficients and six functors on pro-etale module sheaves",
+   "results": "instAbelianCondensedMod; CondensedMod.isDiscrete_tfae; CondensedMod.hom_naturality_apply; Condensed.free; LightCondensed.free; LightCondensed.freeForgetAdjunction; CondensedMod.LocallyConstant.adjunction; LightCondensed.ofSheafLightProfinite",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, CategoryTheory.Adjunction.mateEquiv",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.mateEquiv'",
+   "date": "2026-10-21",
+   "verdict": "invalid query: unknown identifier; rerun with CategoryTheory.conjugateIsoEquiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over pulled back rings, extension of scalars has canonical mates for direct image and conjugate isomorphisms for inverse image and open extension by zero",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackIso; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|pullbackPushforwardAdjunction|pullbackComp",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations states all condensed pro-etale underived and derived comparison constructions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -595,5 +696,29 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-sfb-coefficient-comparisons",
+  "worker": "stage1",
+  "summary": "Reused the existing formal and coefficient comparison nodes; specified mates and conjugates, the chosen-compactification composite, and its inverse. Replaced the restricted Cartesian-coefficients citation by the general alpha-isomorphism lemma. No new nodes.",
+  "blueprint": "Formal input: step 1; pushforward and pullback: steps 2–3; derived comparisons: step 4; extension by zero: step 5; Shriek: steps 6–7.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "General invertibility for an arbitrary condensed ring is needed in the unit pullback square; sk-prop-sfb-cartesian-coefficients states only listed admissible coefficients. This generic coefficient lemma preserves the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-a17acfaba",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-a17acfaba (reviewer sub-agent of L); spot-checked: I read the item, the unit, the 5-paragraph blueprint proof (main-20261015) and the statements of all 34 cited nodes. The statement is identical to the blueprint's, there are no new nodes and no cycle, proof_deps equals the union of the step uses, and the unit realized fields map paragraphs 1–5 to steps 1/2–3/4/5/6–7. The live item is still imported and there is no repair or re-split note. The directions of the underived and derived conjugates and mates match def-sfb-pull-iso/push-hom and derived-pull-iso/push-hom: Pull is E_X f^*≅f'^*E_Y and Push is E_Y f_*→f'_*E_X via unit, c^{-1} and counit. The coefficient-change squares instantiate def-sfb-comap-mapmod-square and def-sfb-extend-comap-iso-of-iso correctly. Flatness gives the finite-limit hypotheses of the homology and K-injective lemmas. The extension-by-zero conjugates need no flatness, which I checked (j_! of a K-flat complex is K-flat). The Shriek composite has the right whiskered endpoints for the same chosen compactification. The one change replaces sk-prop-sfb-cartesian-coefficients, whose clause (1) covers only admissible rings, with lem-sfb-alpha-iso (any condensed ring, reviewed N0 pass, proof c_f at Λ). This is correct, and I accept that tool use because the base citation was already off-route and the lemma is a generic black box. Edge cases f=id, a=id, U=∅ and non-flat Z→Z/2 are all fine. Advisory: the report's attachment of AddCommGrpCat.hasFunctorialFlatResolution to lem-sfb-abelian-functorial-flat-resolution looks right, but it sits at live Basic.lean:150, not 148."
  }
 }
