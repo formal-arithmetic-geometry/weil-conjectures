@@ -334,5 +334,29 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-e50b2c896 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, no new nodes, statement unchanged. The proof expands the parent's old steps 3–4 (read in the Q05 snapshot of the parent) and drops none of their argument. Every cited statement was checked against its use. Step 1: the stratified-perfect characterization's last clause identifies the framework and PBC integral categories as the same full subcategory. Finite-free transport puts the ordinary extension K⊗^L R_L in that category. χ is invertible and natural on derived-complete inputs. Step 3: the point-shift lemma holds on any scheme and gives α(x,y)=(x,(−1)^m y) with αχ=χ[m]; the sign check on (c(z),0) is correct. Step 4: the scalar-completion associator's normalization (equal fields allowed) agrees with the χ-conjugated associator that the item's hypothesis fixes. Step 5: I recomputed the cancellation; it matches a^p P(j) j = j J(a^s) term by term. Step 6: the unit cases handle P_{E/E}=id literally against the multiplication isomorphism. Step 7: semilinear localization applies with φ:O_E→O_L, since ϖ_E is a unit in L. Step 8: the four-field diagram follows from the cocycle and both pentagons. Edge cases checked: empty T, K=0, m=0,±1, repeated fields. No cycle. Tool uses accepted: all are generic coefficient-category facts, and unit sk-def-trace is a definition with no comparison lemma on its route. Batch-5 flag on lem-weil-pbc-finite-free-constructible-scalar-transport → lem-trf-geometric-inverse-image-exact: that node only states that inverse image along a geometric morphism of topoi is exact, which is generic and not part of the trace formula or Poincaré duality. The trace-formula/Poincaré part of the item's closure is also identical before and after the delivery (added = none), so I accept it. lem-trf-integral-pullback-comparison-realization was already a stmt_dep and is used only for its associator convention. FIX, one error E1 in step 2: the step applied lem-pur-quotient-scalar-comparison-descent without checking its hypothesis that countable products of module sheaves are exact. I added the citation lem-weil-proetale-countable-products-exact, wrote out the check with R, S and B_n=(O_L/ϖ_L^n)_T, and updated proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdCompletionInverseScalarCoherence",
+  "declaration": "WeilConjectures.fdCompletionInverseScalarCoherence",
+  "declarations": [
+   "WeilConjectures.FdInverseScalarCoherence",
+   "WeilConjectures.FdCompletionIntegralComparison",
+   "WeilConjectures.FdCompletionScalarComparison",
+   "WeilConjectures.fdCompletionInverseScalarCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/FdCompletionInverseScalarCoherence.lean",
+  "statement": "theorem fdCompletionInverseScalarCoherence (_D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ _D.p) (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (T : Scheme.{u}) [IsNoetherian T] [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) : Nonempty (FdCompletionScalarComparison l Ω T stage)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3c925b6c",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node and the dependency declarations in side-live (StageSystem.Morphism, the framework stage system, pbcScalarSystem, FdCoefficientComparison, sfIntegralScalarComp/sfIntegralOrdinaryComparison). β points PBC to framework and j = β.symm; I checked the arrow types in the cocycle and both four-field equations. Every data field is pinned: ordinary by generators, comparison by chi (same form as the landed FdCoefficientComparison.chi), integral by restriction, Φ by finite_functor, β on every object by scalar_lift. scalar_lift is not vacuous because pbcFiniteField and Coefficient are both Shrink E.val. unit is typed correctly because pbcScalarExtension at le_refl is the identity, and it is a real claim. The framework associator is by definition ordinary balancing conjugated by the χ-normalized comparisons, as the node requires. Statement verbatim, sorry only, docstrings carry source place, blueprint id and all 8 steps, no stmt_dep change. Edge cases: repeated fields, base field, empty T, shifts 0 and ±1. Advisory only: unused public import of IntegralPullbackComparisonRealization. No recompile, as instructed."
  }
 }

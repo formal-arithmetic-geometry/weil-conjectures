@@ -94,13 +94,36 @@
   }
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "Sheaf.Paper.FourierAdicCharacterOf",
+  "declaration": "WeilConjectures.fourierCharacterOf",
   "declarations": [
-   "AlgebraicGeometry.Etale.artinSchreierTranslation_comp_artinSchreierMap",
-   "AlgebraicGeometry.Etale.artinSchreierTranslationAction",
-   "AlgebraicGeometry.Etale.artinSchreierTranslationAction_zero",
-   "AlgebraicGeometry.Etale.artinSchreierTranslationAction_add"
+   "WeilConjectures.fourierBaseFintype",
+   "WeilConjectures.fourierPrimeAlgebra",
+   "WeilConjectures.fourierIntegralTraceCharacter",
+   "WeilConjectures.fourierIntegerCardInvertible",
+   "WeilConjectures.fourierEtaleCharacterOf",
+   "WeilConjectures.fourierIntegralCharacterOf",
+   "WeilConjectures.fourierIntegralCharacterOf_mem",
+   "WeilConjectures.fourierCharacterOf",
+   "AlgebraicGeometry.Etale.artinSchreierSheaf",
+   "AlgebraicGeometry.Etale.artinSchreierSheafOf",
+   "AlgebraicGeometry.Etale.artinSchreierIdempotent",
+   "AlgebraicGeometry.Etale.artinSchreierTranslationAction"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-21 04:26 UTC for group Q27, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_e47efb5a.jsonl.gz: "
+  "file": "lean/Sheaf/Paper/FourierAdicCharacterOf.lean",
+  "statement": "def fourierCharacterOf (F : FourierSetting.{u}) (X : Scheme.{u}) [X.Over (Spec (.of F.field.k₀))] [IsNoetherian X] (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (f : Γ(X, ⊤)) : generalAlgebraicallyClosedConstructibleCategory F.coefficients.l F.coefficients.Qbar X",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "§1(B): the old attachment records only translation actions, not the image sheaf or its pullbacks. The public upstream import retains artinSchreierSheaf/artinSchreierSheafOf for every commutative coefficient ring with q invertible. This module additionally realizes that exact degree-q image at the fixed integral Fourier stage, completes, rationalizes, and includes it at the common stage. It uses the k0 structure map on X, so no CharP hypothesis on its possibly zero global-section ring excludes the empty scheme. The already published prime-degree realization is reused for its integral character and completion, not substituted for the degree-q sheaf."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13584520d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery of 155fabd7 H2 RETURN. Lean byte-identical to the returned head (sha 1e672ee9/038cbf4d); item statement = live; only stmt_deps changed. Theorem stmt_deps replaced by definition owners: new def-fd-artin-schreier-function-cover existing:true on unchanged ArtinSchreierTraceCoverMap (artinSchreierFunctionCover/Projection/Root/BaseConstants/FibreMap; statement matches each body, no primality/etaleness, deps def-sbc-affine-space/def-pc-fibre-product/def-weil-scheme-over-base) and def-a1-common-stage-coefficient-unit (pullbackTensorCommonUnit); added def-weil-derived-pullback-tensor-hom (commonStageDerivedTensor) and def-weil-weil-sheaf-complex (sfWeilPrimeInvertible). Trace-cover theorem kept in proof_deps. check_existing and check_new_node clean against side-live; item still S2-open live; no other owner of the cover decls. Maths as read in the prior review, no substance fault. Advisory: centralizer ≃* LocallyConstant clause not pinned to translation; second-reading section is self-check; artinSchreierMap has no DAG owner. No compile (Lean unchanged, no fix)."
  }
 }

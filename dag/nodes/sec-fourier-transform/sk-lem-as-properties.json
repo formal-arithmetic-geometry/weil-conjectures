@@ -16,7 +16,14 @@
   "sk-def-as",
   "sk-def-fourier-set",
   "def-fd-additive-character",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-fd-adic-fourier-realization",
+  "def-weil-pbc-qbar-category",
+  "def-fd-trace-function",
+  "def-fd-artin-schreier-function-cover",
+  "def-a1-common-stage-coefficient-unit",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof": [
   {
@@ -298,5 +305,50 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-33cdcd123 (reviewer sub-agent of L); spot-checked: Q36 sk-lem-as-properties @33cdcd12, no new nodes. This re-delivers 5de68829, which I reviewed as FIX; the landing then refused it because def-fd-additive-character had changed. Against 5de68829 the item changes in only three places: the statement preamble, Step 4 and the last sentence of Step 7 now specialize def-fd-additive-character to F'=E. That is correct: char E=0≠p and μ_p⊂E give E(μ_p)=E, so Ψ is the standing E-valued character. The snapshot's def-fd-additive-character and the five other cited Fourier-chapter nodes I compared are identical to live and side-live, so the same refusal will not recur. The worker re-pushed its own head, so the earlier FIX of Steps 5 and 7 was lost. I re-read all eight steps against the cited statements and the main-20261015 source. Step 1 (lem-fd-as-cover): the S_3 example and empty X_0 behave as stated. Step 2 (lem-fd-as-cover-affine-line, lem-fd-as-characters) gives the decomposition. Step 3: the hypotheses of lem-fd-finite-etale-adic-cohomology hold and the projectors are integral. Step 4: I verified θσ_c=τ_{Tr c}θ and the two inverse eigenfunction maps, which use ψ|_{ker Tr}=1 and surjectivity of Tr. Step 5: since Y_q is the fibre product, the exchange clause gives f^*(AS_q)_*≅π_{q*}. Step 6 gives F_u=F_z^{(n)}. Step 7: the double trace sum is correct and a=0 is covered. Step 8: the character and constant cohomology nodes cover all a∈k_0 after base change to k̄_0. Not superseded (live and side-live both imported), not dropped, no cycle, no SGA. The six tool_uses are accepted as generic. Batch-5 findings: def-weil-local-frobenius-trace and def-pod-lisse-l-adic-sheaves are definitions. lem-pod-derived-exact-square-composition is homological algebra on derived squares, lem-weil-isomorphism-derived-pullback-comparison-normalization is normalization along isomorphisms, and lem-trf-proper-finite-fibre-finite-near is generic geometry. None is a step of the trace formula or of Poincaré duality, so all are accepted. FIX (C3/C4), re-applied: Step 5 now says that the L_{ψ,f} of lem-fd-as-characters and lem-fd-as-lisse is the prime-degree e_Ψ-summand of def-fd-artin-schreier-sheaf, and that their formulas are transported along the Step 4–5 isomorphism. Step 7 now says that lem-fd-as-trace's sheaf is that summand, identified with M over k_0, so local operators and traces are preserved; the worker's F'=E sentence is kept. def-fd-artin-schreier-sheaf is added to the uses of both steps and lem-fd-as-characters to Step 5; proof_deps is the union of the uses. Maintainer note: a re-delivery after a landing refusal should start from the reviewer-FIXed head.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FourierArtinSchreierProperties",
+  "declaration": "WeilConjectures.fourierCharacter_lisse_tensor_inverse",
+  "declarations": [
+   "WeilConjectures.fourierPropertyPrimeInvertible",
+   "WeilConjectures.fourierPrimeOver",
+   "WeilConjectures.fourierPrimeEtaleCharacterOf",
+   "WeilConjectures.fourierPrimeIntegralObject",
+   "WeilConjectures.fourierPrimeIntegralObject_mem",
+   "WeilConjectures.fourierPrimeObject",
+   "WeilConjectures.fourierCharacterWeil",
+   "WeilConjectures.fourierClosedCharacterValue",
+   "WeilConjectures.fourierClosedPrimeValue",
+   "WeilConjectures.fourierCharacterCohomology",
+   "WeilConjectures.fourierPrimeCover_properties",
+   "WeilConjectures.fourierPrimeCover_zero",
+   "WeilConjectures.fourierPrimeCover_three_aut",
+   "WeilConjectures.fourierPrimeCover_line",
+   "WeilConjectures.fourierCharacter_lisse_tensor_inverse",
+   "WeilConjectures.fourierPrimeCharacters_decomposition",
+   "WeilConjectures.fourierCharacter_closedFrobenius",
+   "WeilConjectures.fourierPropertyLine_finiteType",
+   "WeilConjectures.fourierPropertyLine_quasiCompact",
+   "WeilConjectures.fourierPropertyLine_separated",
+   "WeilConjectures.fourierPropertyLine_noetherian",
+   "WeilConjectures.fourierPropertyLineModel_noetherian",
+   "WeilConjectures.fourierCharacter_linear_trace",
+   "WeilConjectures.fourierCharacter_affine_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/FourierArtinSchreierProperties.lean",
+  "statement": "theorem fourierCharacter_lisse_tensor_inverse (F : FourierSetting.{u}) (X : Scheme.{u}) [X.Over (Spec (.of F.field.k₀))] [IsNoetherian X] [IsSeparated (X ↘ Spec (.of F.field.k₀))] [LocallyOfFiniteType (X ↘ Spec (.of F.field.k₀))] [QuasiCompact (X ↘ Spec (.of F.field.k₀))] (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (f g : Γ(X, ⊤)) : SheafOfModules.IsFiniteLocallyFreeOfRank.{u + 1, u, u + 1} (fourierCompletedRealization F.coefficients.l (fourierCoefficient F) X (fourierEtaleCharacterOf F X Ψ f)) 1 ∧ Nonempty (fourierCharacterOf F X Ψ f ≅ fourierPrimeObject F X Ψ f false) ∧ Nonempty ((@commonStageDerivedTensor F.coefficients.l _ F.coefficients.Qbar _ _ _ X (fourierPropertyPrimeInvertible F (Over.mk (X ↘ Spec (.of F.field.k₀))))).obj (fourierCharacterOf F X Ψ f, fourierCharacterOf F X Ψ g) ≅ fourierCharacterOf F X Ψ (f + g)) ∧ Nonempty (fourierCharacterOf F X Ψ 0 ≅ @pullbackTensorCommonUnit F.coefficients.l _ F.coefficients.Qbar _ _ _ X (fourierPropertyPrimeInvertible F (Over.mk (X ↘ Spec (.of F.field.k₀))))) ∧ Nonempty ((@commonStageDerivedTensor F.coefficients.l _ F.coefficients.Qbar _ _ _ X (fourierPropertyPrimeInvertible F (Over.mk (X ↘ Spec (.of F.field.k₀))))).obj (fourierCharacterOf F X Ψ f, fourierCharacterOf F X Ψ (-f)) ≅ @pullbackTensorCommonUnit F.coefficients.l _ F.coefficients.Qbar _ _ _ X (fourierPropertyPrimeInvertible F (Over.mk (X ↘ Spec (.of F.field.k₀)))))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The clauses are stated by the recorded family of declarations: prime-cover geometry, split cover and S3 example, coordinate cover, completed character decomposition, comparison with the current degree-q definition, rank one, tensor and inverse, arbitrary-function closed Frobenius, linear trace, and ordinary adic cohomology. Helpers use actual idempotent images and completion; all postponed proofs are sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13584520d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery of 155fabd7 H2 RETURN. Lean byte-identical to the returned head (sha 1e672ee9/038cbf4d); item statement = live; only stmt_deps changed. Theorem stmt_deps replaced by definition owners: new def-fd-artin-schreier-function-cover existing:true on unchanged ArtinSchreierTraceCoverMap (artinSchreierFunctionCover/Projection/Root/BaseConstants/FibreMap; statement matches each body, no primality/etaleness, deps def-sbc-affine-space/def-pc-fibre-product/def-weil-scheme-over-base) and def-a1-common-stage-coefficient-unit (pullbackTensorCommonUnit); added def-weil-derived-pullback-tensor-hom (commonStageDerivedTensor) and def-weil-weil-sheaf-complex (sfWeilPrimeInvertible). Trace-cover theorem kept in proof_deps. check_existing and check_new_node clean against side-live; item still S2-open live; no other owner of the cover decls. Maths as read in the prior review, no substance fault. Advisory: centralizer ≃* LocallyConstant clause not pinned to translation; second-reading section is self-check; artinSchreierMap has no DAG owner. No compile (Lean unchanged, no fix)."
  }
 }

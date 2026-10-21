@@ -1,0 +1,108 @@
+{
+ "id": "def-fd-artin-schreier-function-cover",
+ "kind": "definition",
+ "title": "The function Artin–Schreier cover, its root, constants and induced fibre map",
+ "status": "split",
+ "statement": "For a scheme $X$, a natural number $n$, and $f\\in\\Gamma(X,\\mathcal O_X)$, let $A_n:\\mathbf A^1_X\\to\\mathbf A^1_X$ be $t\\mapsto t^n-t$, and let $s_f:X\\to\\mathbf A^1_X$ be the section with coordinate $f$, using affine space [def-sbc-affine-space]. Define the function cover $Y_{n,f}=\\mathbf A^1_X\\times_{A_n,\\mathbf A^1_X,s_f}X$ by the chosen fibre product [def-pc-fibre-product], its projection $\\pi_{n,f}:Y_{n,f}\\to X$ to be the second projection, and its tautological root $y_{n,f}\\in\\Gamma(Y_{n,f},\\mathcal O_{Y_{n,f}})$ to be the pullback of the coordinate along the first projection. When $X$ is a scheme over a field $k$ [def-weil-scheme-over-base], its base-constant map $k\\to\\Gamma(X,\\mathcal O_X)$ is the inverse of the canonical global-sections identification for $\\operatorname{Spec}k$, followed by pullback along the given structure morphism. For schemes $Y,Z,T$, morphisms $\\pi:Y\\to X$, $\\rho:Z\\to X$, $x:T\\to X$ and $a:Y\\to Z$ satisfying $\\rho\\circ a=\\pi$, define the induced fibre map $Y\\times_XT\\to Z\\times_XT$ to be the functorial pullback map determined by $a$ and $\\operatorname{id}_T$ [def-pc-fibre-product]. In characteristic $p$ the specialization $n=p$ is the auxiliary cover $y^p-y=f$; this definition itself assumes neither primality nor etaleness.",
+ "stmt_deps": [
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "def-weil-scheme-over-base"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/_section.md",
+  "place": "First paragraph: the auxiliary prime-degree cover and translations; explicit pullback construction in Sheaf.AlgebraicGeometry.ArtinSchreierTraceCoverMap, lines 39–84, following Laumon (1.1.3) and Stacks 01LX."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "artinSchreierFunction|artinSchreierBaseConstants|artinSchreierFibreMap|artinSchreierMap",
+   "results": "{\"t\": \"2026-10-21T14:03:19Z\", \"tool\": \"grep\", \"query\": \"artinSchreierFunction|artinSchreierBaseConstants|artinSchreierFibreMap|artinSchreierMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib cover construction; reuse the exact existing project definitions without creating Lean declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-21T14:03:19Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineSpace, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.over_over\"], \"digest\": \"2bf1dcafaeaa1eec\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib cover construction; reuse the exact existing project definitions without creating Lean declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier cover of a scheme for a global function as pullback with tautological root and induced fibre map",
+   "results": "{\"t\": \"2026-10-21T14:03:19Z\", \"tool\": \"leansearch\", \"query\": \"Artin Schreier cover of a scheme for a global function as pullback with tautological root and induced fibre map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_I₀\"], \"digest\": \"1918aae1ce722122\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib cover construction; reuse the exact existing project definitions without creating Lean declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"artinSchreierFunctionCover|artinSchreierFunctionProjection|artinSchreierFunctionRoot|artinSchreierBaseConstants|artinSchreierFibreMap\" dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search \"Artin.Schreier.*cover\"",
+   "results": "DAG: lem-a1-artin-schreier-trace-cover-map and lem-a1-artin-schreier-prime-character-comparison only, both theorem nodes; no definition owner. WeilConjectures: no exact named hits; AffineSpace.ArtinSchreier has the universal artinSchreierMap. Sheaf: ArtinSchreierTraceCoverMap.lean defines all five notions; ArtinSchreierPrimeCharacterComparison.lean consumes them. Blueprint search: 0 blueprint nodes match Artin.Schreier.*cover.",
+   "date": "2026-10-21",
+   "verdict": "Add missing definition ownership with existing:true; no duplicate construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-as-properties",
+  "date": "2026-10-21",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-as-properties",
+   "place": "First paragraph: objects, root coordinates and geometric fibres of the auxiliary cover.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-lem-as-properties",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierTraceCoverMap",
+  "declaration": "AlgebraicGeometry.artinSchreierFunctionCover",
+  "declarations": [
+   "AlgebraicGeometry.artinSchreierFunctionCover",
+   "AlgebraicGeometry.artinSchreierFunctionProjection",
+   "AlgebraicGeometry.artinSchreierFunctionRoot",
+   "AlgebraicGeometry.artinSchreierBaseConstants",
+   "AlgebraicGeometry.artinSchreierFibreMap"
+  ],
+  "statement": "def artinSchreierFunctionCover (X : Scheme.{u}) (n : ℕ) (f : Γ(X, ⊤)) : Scheme.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership requested by independent stage-2 return L H2 at 155fabd72c24. All five declarations are plain definitions with actual data in the unchanged existing module, rather than choices from artinSchreier_trace_cover_map. That theorem remains solely a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13584520d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13584520d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery of 155fabd7 H2 RETURN. Lean byte-identical to the returned head (sha 1e672ee9/038cbf4d); item statement = live; only stmt_deps changed. Theorem stmt_deps replaced by definition owners: new def-fd-artin-schreier-function-cover existing:true on unchanged ArtinSchreierTraceCoverMap (artinSchreierFunctionCover/Projection/Root/BaseConstants/FibreMap; statement matches each body, no primality/etaleness, deps def-sbc-affine-space/def-pc-fibre-product/def-weil-scheme-over-base) and def-a1-common-stage-coefficient-unit (pullbackTensorCommonUnit); added def-weil-derived-pullback-tensor-hom (commonStageDerivedTensor) and def-weil-weil-sheaf-complex (sfWeilPrimeInvertible). Trace-cover theorem kept in proof_deps. check_existing and check_new_node clean against side-live; item still S2-open live; no other owner of the cover decls. Maths as read in the prior review, no substance fault. Advisory: centralizer ≃* LocallyConstant clause not pinned to translation; second-reading section is self-check; artinSchreierMap has no DAG owner. No compile (Lean unchanged, no fix)."
+ }
+}

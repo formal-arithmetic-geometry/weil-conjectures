@@ -15,7 +15,8 @@
   "sk-def-sfb-coefficient-change",
   "sk-def-sfb-bounded-constructible",
   "def-sfb-lisse-coefficient-module",
-  "lem-sfb-locally-closed-extension-coherence"
+  "lem-sfb-locally-closed-extension-coherence",
+  "def-sfb-scalar-six-coefficient-interfaces"
  ],
  "proof": [
   {
@@ -229,5 +230,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-f7921d30d (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, against main-20261015 sk-thm-sfb-proper-base-change-rational.proof.md (2)-(3). This is a first split with the statement unchanged; the item is not dropped, has no repair note and is not superseded (unsplit on live and side). Step 1: det-def-sfb-qlbar-condensed-subextensions (1) with n=2 gives F=E1E2. Step 2: uniqueness of the extended absolute value gives O_Ei=Ei∩O_F, the condensed maps match the sections of sk-def-sfb-qlbar-condensed, and coefficient change is functorial; correctly marked elementary. Step 3: the hypotheses of lem-sfb-locally-free-derived-scalars hold (a cover of Z_i pulls back to every object), and it gives lisse with the same ranks plus the degree-0 derived comparison. Step 4 (C1/C4, repaired): det-lem-integral-models-generators (3) uses a_! = closed pushforward after open extension, while the item's a_! is that of lem-sfb-locally-closed-extension-coherence. The identification a_!≅i_*u_! (W_i Noetherian) was used without a citation. The fix adds the citation to step 4 uses, proof_deps and split_report.tool_uses; there is no cycle because the lemma is already an item stmt_dep. Step 5: det-prop-scalar-six-pullback (2) on L_i[0], step 3, then (3) on O_E→O_F→Qlbar gives the stated composite in the correct direction. The parent's step 5 needs only some isomorphism (naturality), so moving the two theorems from stmt_deps to proof_deps is acceptable. Accepted tool uses: qlbar-condensed-subextensions, scalar-six-pullback, locally-closed-extension-coherence. The duplicate search found nothing that states this comparison; no SGA source is cited.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SixFunctors.CommonFieldLatticeGenerators",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.common_field_lattice_generators",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeIntegralRing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeClosureRing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeIntegerInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeIntegralMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeRationalMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeScalarSingleComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeExtendedObject",
+   "AlgebraicGeometry.ProEtale.CondensedRing.latticeComparisonNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.common_field_lattice_generators"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CommonFieldLatticeGenerators.lean",
+  "statement": "theorem common_field_lattice_generators (ell p : ℕ) [Fact ell.Prime] [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hne : ell ≠ p) (H : LocallyClosedExtensionData.{u}) (_hH : H.Coherent) (D : H.DerivedCoherence) (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u}) (W Z : Fin 2 → Over (Spec (.of k))) [∀ i : Fin 2, LocallyOfFiniteType (W i).hom] [∀ i : Fin 2, QuasiCompact (W i).hom] [∀ i : Fin 2, IsSeparated (W i).hom] [∀ i : Fin 2, LocallyOfFiniteType (Z i).hom] [∀ i : Fin 2, QuasiCompact (Z i).hom] (a : ∀ i : Fin 2, Z i ⟶ W i) [∀ i : Fin 2, IsImmersion (a i).left] (E : Fin 2 → PadicAlgCl.FiniteIntermediateField ell) (L : ∀ i : Fin 2, ModuleRingedComparison.internalModules (latticeIntegralRing ell (E i)).X (Z i).left) (hL : ∀ i : Fin 2, IsLisseCoefficientModule (latticeIntegralRing ell (E i)).X (L i)) : ∃ (F : PadicAlgCl.FiniteIntermediateField ell) (h : ∀ i : Fin 2, E i ≤ F), ∀ i : Fin 2, IsLisseCoefficientModule (latticeIntegralRing ell F).X ((Mod.extendScalars (coefficientMap (Λ := (latticeIntegralRing ell (E i)).X) (Λ' := (latticeIntegralRing ell F).X) (latticeIntegralMap ell (h i)).hom.hom (Z i).left)).obj (L i)) ∧ boundedConstructible (condensedRingObj (latticeIntegralRing ell F).X (W i).left) (latticeExtendedObject H G (latticeIntegralRing ell F) (a i) ((Mod.extendScalars (coefficientMap (Λ := (latticeIntegralRing ell (E i)).X) (Λ' := (latticeIntegralRing ell F).X) (latticeIntegralMap ell (h i)).hom.hom (Z i).left)).obj (L i))) ∧ ∃ e : (scalarSixChange (latticeRationalMap ell F) (W i).left).obj (latticeExtendedObject H G (latticeIntegralRing ell F) (a i) ((Mod.extendScalars (coefficientMap (Λ := (latticeIntegralRing ell (E i)).X) (Λ' := (latticeIntegralRing ell F).X) (latticeIntegralMap ell (h i)).hom.hom (Z i).left)).obj (L i))) ≅ (scalarSixChange (latticeRationalMap ell (E i)) (W i).left).obj (latticeExtendedObject H G (latticeIntegralRing ell (E i)) (a i) (L i)), latticeComparisonNormalized H D G C ell (h i) (a i) (L i) e",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary declarations specialize existing integer/condensed coefficient maps and module-object functors. latticeComparisonNormalized characterizes the canonical comparison by restriction to its locally closed stratum using the derived counit and scalar transitivity. H, D, G and C are the existing normalized extension/coefficient witnesses, not arbitrary substitute functors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce563c7aa",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery after landing Return L (28 name collisions from the copied ScalarSixCoefficientInterfaces module on ccd92d734587, which an earlier review had passed). The copied module and the replacement ScalarSixPullback module are withdrawn. def-sfb-scalar-six-coefficient-interfaces now records the published Sheaf.SixFunctors.ScalarSixPullback with existing:true; that module's 28 abbrev/def/structure/instance declarations (lines 55-425) equal lean.declarations name for name, and 'structure ScalarSixPullbackData' is verbatim at line 254. The live det-prop-scalar-six-pullback record (Q17) lists only its theorem, so there is no ownership overlap, no module change and no collision. Item Lean is byte-identical to the previous head apart from replacing the interface import with a public ScalarSixPullback import; the item JSON is identical. The scalar-six names it uses (ScalarSixRing, scalarSixChange/Pull/Tower/Extension/Restriction, ScalarSixGeometry, ScalarSixPullbackData) are all in the recorded list; the theorem is not used and stays in proof_deps. Mathematics re-checked: hypotheses equal to the node, common F before the per-i clauses, ordinary L_{i,F} lisse, K_{i,F} bounded constructible, iso pinned by latticeComparisonNormalized, finite-subextension Qbar model, edge cases and universes fine, docstrings and sorry fine. Advisories: inherited imports from nodes outside the definition node's stmt_deps; three proof-only plain imports. No compile run (no file changed); the worker reports a clean compile in about 23 s and a passing dry run including the existing-declaration probe."
+ }
 }

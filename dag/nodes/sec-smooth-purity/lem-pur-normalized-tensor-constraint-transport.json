@@ -23,7 +23,8 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "lem-pur-completed-primitive-counit-comparison",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
  ],
  "proof": [
   {
@@ -329,5 +330,44 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-d82b182b5 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and every cited statement in full. There are no new nodes, no repair or re-split note, and this is the first delivery. The statement and metadata are kept, proof_deps equals the union of the step uses, and there is no cycle and no SGA. Stacks tags 07A2, 07A4, 0FPT, 0941 and 03EL match their labels, and I read 07A4, 0FPT and 0941. I recomputed the steps. Step 4: delta = T(e_A,e_N) d by counit naturality, and d is invertible by effectivity on T(A,N) together with the primitive beta. Step 5: beta_P = L(T(delta,e_H)) r_L. Step 6: the roof v = T(1,d_NH)^-1 a_0 T(d_AN,1) has the right domains and codomains, and it is the quotient-level construction itself, not defined from the conclusion. Step 7: h_R v = a h_L by naturality of reassociation. Steps 8-9: the symmetry and unit equations follow by naturality. Step 9's normalization z⊗b ↦ b p_n(z) comes from def-coef-normalized-dvr-tower. Step 10: Roos/rho naturality. Step 11: gamma_Q R(â) = a gamma_P. I hand-checked the Koszul signs of Tot reassociation and symmetry, and tested the edge cases: empty site, zero inputs, A=N=H=U, A=N, characteristic 2, unbounded complexes, m=n. The DAG search found no duplicate; the nearest nodes are lem-fix-scalar-completion-associator and lem-pur-expression-counit-substitution-coherence, which are different statements. I accept the six declared off-unit tool uses as generic tools. Two advisories, no change: the sequence topos needs the small site C×N for the ringed-site theorem, and effectivity on D(S(B)) via U_W is inherited from the statement."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedTensorConstraintTransport",
+  "declaration": "WeilConjectures.NormalizedTensorTransport.normalizedTensorConstraintTransport",
+  "declarations": [
+   "WeilConjectures.NormalizedTensorTransport.Kind",
+   "WeilConjectures.NormalizedTensorTransport.Kind.expressions",
+   "WeilConjectures.NormalizedTensorTransport.unit",
+   "WeilConjectures.NormalizedTensorTransport.leftAction",
+   "WeilConjectures.NormalizedTensorTransport.rightAction",
+   "WeilConjectures.NormalizedTensorTransport.systemSource",
+   "WeilConjectures.NormalizedTensorTransport.systemTarget",
+   "WeilConjectures.NormalizedTensorTransport.systemMap",
+   "WeilConjectures.NormalizedTensorTransport.completedSource",
+   "WeilConjectures.NormalizedTensorTransport.completedTarget",
+   "WeilConjectures.NormalizedTensorTransport.betaSource",
+   "WeilConjectures.NormalizedTensorTransport.betaTarget",
+   "WeilConjectures.NormalizedTensorTransport.gammaSource",
+   "WeilConjectures.NormalizedTensorTransport.gammaTarget",
+   "WeilConjectures.NormalizedTensorTransport.contraction",
+   "WeilConjectures.NormalizedTensorTransport.quotientAssociator",
+   "WeilConjectures.NormalizedTensorTransport.quotientMap",
+   "WeilConjectures.NormalizedTensorTransport.normalizedTensorConstraintTransport"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedTensorConstraintTransport.lean",
+  "statement": "theorem normalizedTensorConstraintTransport (_hl : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (ρ : PrimitiveCounit.RoosRealization l E W) (_hr : PrimitiveCounit.TensorModel l E W S ρ r) (A N H : coefficientSequenceDerived l E W) (_hA : IsNormalizedCoefficientSequence l E W A) (_hN : IsNormalizedCoefficientSequence l E W N) (_hH : IsNormalizedCoefficientSequence l E W H) : ∃ _i : IsIso (contraction l E W S r ((coefficientSequenceLimit l E W).obj N) ((coefficientSequenceLimit l E W).obj H)), ∀ k : Kind, ∀ [IsIso (betaSource l E W S r A N H k)] [IsIso (betaTarget l E W S r A N H k)] [IsIso (gammaSource l E W S r A N H k)] [IsIso (gammaTarget l E W S r A N H k)], quotientMap l E W S σ C r A N H k = betaSource l E W S r A N H k ≫ (coefficientSequenceLimit l E W).map (systemMap l E W S σ C A N H k).hom ≫ inv (betaTarget l E W S r A N H k) ∧ S.reduction.map (quotientMap l E W S σ C r A N H k) ≫ gammaTarget l E W S r A N H k = gammaSource l E W S r A N H k ≫ (systemMap l E W S σ C A N H k).hom ∧ S.reduction.map ((coefficientSequenceLimit l E W).map (systemMap l E W S σ C A N H k).hom) ≫ S.adjunction.counit.app (systemTarget l E W S A N H k) = S.adjunction.counit.app (systemSource l E W S A N H k) ≫ (systemMap l E W S σ C A N H k).hom ∧ (∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition l E W h).app _ ≫ (normalizedDVRRes l E W h).map ((coefficientSequenceDerivedEvaluation l E W n).map (systemMap l E W S σ C A N H k).hom) = (coefficientSequenceDerivedEvaluation l E W m).map (systemMap l E W S σ C A N H k).hom ≫ (coefficientSequenceDerivedTransition l E W h).app _)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four expression pairs are expanded with their named systems as input leaves, exactly as specified in the node. The completed arrows are the quotient/Roos contraction roofs; they are not defined by beta conjugation. Canonical tensor data are supplied through the existing representative-normalized RingedDerivedTensorCoherence interface; the primitive comparison is required to satisfy PrimitiveCounit.TensorModel. The signature uses the plain definitions RingedDerivedTensorCoherence and ringedTensorUnitComplex owned by def-zl-ringed-derived-closed-symmetric-monoidal-data, which is cited in stmt_deps. No choice from or conclusion of ringedDerived_closed_symmetric_monoidal is used to state the theorem; lem-sf-ringed-derived-closed-symmetric-monoidal remains in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7e05dd7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of f15676c75687. Lean module byte-identical (sha256 7c22332f). Node delta vs earlier head and vs side-live base: stmt_deps now cites def-zl-ringed-derived-closed-symmetric-monoidal-data (landed existing:true, owns RingedDerivedTensorCoherence and ringedTensorUnitComplex) instead of the theorem lem-sf-ringed-derived-closed-symmetric-monoidal, which stays in proof_deps; lean.note and report updated; nothing else changed. Substance re-checked: C pins sigma, associator and unitors; r is constrained by TensorModel; quotientAssociator is the step-6 roof with correct domains, not defined by beta-conjugation; both conjugation equalities correctly oriented; transition clause for all n<=m; the four IsIso assumptions are the node's; contraction IsIso is a conclusion; no extra hypotheses; edge cases and universes fine; docstrings complete; single sorry; statement verbatim. Advisory: proof-only imports could be dropped (H9 hygiene). No compile (no FIX)."
  }
 }

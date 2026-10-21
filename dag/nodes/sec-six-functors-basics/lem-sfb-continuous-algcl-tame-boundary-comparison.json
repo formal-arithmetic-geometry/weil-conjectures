@@ -21,7 +21,9 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-weil-open-immersion",
   "def-sfb-lisse-coefficient-module",
-  "def-sfb-module-open-lower-shriek"
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-all-continuous-scalar-mate"
  ],
  "proof": [
   {
@@ -280,5 +282,27 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-26a608e08 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps, all 3 new nodes, every cited statement and paragraph (3) of det-thm-sf-ctf-stability-direct-images in blueprint main-20261015. No SGA source is cited. The statement is unchanged. The citer, open-scalar-comparison step 5, uses it exactly on the tame-pair generator data. The base item had an empty proof, so this is a first split and no re-split note applies. Steps: (1) the open-scalar conjugate (def-sfb-derived-open-immersion-shriek-iso), with lisse L flat and K-flat in degree 0. (2) The transverse exchange for Y°=Y minus the inner components, whose objects j,b,c,a match the node exactly. (3) Stratum descent on (Y°, D∩Y°), which is still SNC because each outer D_a meets Y° in a dense open. (4) The Koszul node, whose finite prime-to-ℓ Q comes from step 3. (5) Finite free terms, K-flat by the finite-free lemma (0→C^n) and the split stupid filtration. (6) Unit normalization through kflat θ=χ^{-1}, the adjunct formula of the ring-sheaf change adjunction and mate uniqueness; I checked it by hand. (7) Detection: the strata of the filtration by closed loci Z_m are open-and-closed in Z_m∖Z_{m+1}, the open/closed calculus applies with the pro-étale open/closed lemma as input, and covers are handled by cover conservativity. (8) The assembly square through scalar adjuncts, using the transverse naturality clause; A_i=∅ and A_out=∅ are trivial. New nodes: each is statement-only, self-contained and searched five times. Koszul: d²=0 (for i<i' the two orders cancel), r=0 gives the identity, and γ↦u in 1+𝔪 with u≠1 gives an acyclic complex, as it should. Descent: I=∅ is a trivialization, and the finite H_I image is automatic because GL_n(O_E) has an open pro-ℓ subgroup. Exchange: e_F is well defined since V∩Y°=W, and inner vanishing holds by the local Künneth picture. None restates the item. They are not duplicates of lem-per-strict-local-snc-kummer-cohomology, the per procyclic/classifying nodes or the sbc root-chart nodes. FIX (C1): step 5 used the c_P identification (derived scalar extension of a K-flat flat-term complex is the ordinary tensor) without citing lem-pur-sheaf-ring-derived-coefficient-adjunction. The corrected item is under fixes/dag/nodes/sec-six-functors-basics/. Batch-5 flags: (a) the item's new cite of lem-sfb-kflat-scalar-comparison-normalization reaches only def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation and lem-trf-geometric-inverse-image-exact, i.e. exactness of topos inverse image. That is generic, outside both assumptions and not a step of their proofs, so I accept it. (b) def-trf-strict-normal-crossings-boundary, cited by the descent and exchange nodes, is a general definition that the item already cites, so I accept it. I accept the 7 generic tool uses. Maintainer note: \\underline{Ω} (all continuous maps, norm topology) is not solid, and Haar averaging over pro-prime-to-ℓ H can leave Ω. So the Koszul node's Ω case (RΓ_H(\\underline Ω)=Ω[0]) is an open analytic question. The item's own statement already carries the same question; the node makes it explicit as WANTED, and its future split must settle it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TameBoundaryScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tameBoundaryScalarComparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.tameBoundaryComponents",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tameBoundaryScalarComparison_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/TameBoundaryScalarComparison.lean",
+  "statement": "theorem tameBoundaryScalarComparison_isIso (p : ℕ) [Fact p.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (Y V W : Scheme.{u}) [Y.Over (Spec (.of k))] [V.Over (Spec (.of k))] [W.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] (_hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (out : Finset (Fin hD.2.2.choose)) (j : V ⟶ Y) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (b : W ⟶ V) [IsOpenImmersion b] [b.IsOver (Spec (.of k))] (_hj : Set.range j = (⋃ a ∈ out, ((tameBoundaryComponents D hD a).support : Set Y))ᶜ) (_hb : Set.range (b ≫ j) = (D.support : Set Y)ᶜ) (L : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.1) W)) (_hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj E.1) L) (_htame : IsStrictLocalKummerTameModule p (Profinite.continuousMapRingObj E.1) D (b ≫ j) L) : IsIso (tameBoundaryScalarComparison ℓ E j ((DerivedCategory.singleFunctor _ 0).obj ((openImmersionLowerShriek (Profinite.continuousMapRingObj E.1) b).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd3719391",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read the item, both new def nodes, every stmt_dep record and the three snapshot modules; checked SNC/lisse/IsFree/ChangeOfCoefficients sources in side-live. β = homEquiv adjunct of δ.app ≫ T(counit), exactly the node; δ is the unique K-flat-normalized iso through pullIso (canonical; upstream derivedPullIso needs exact scalar extension, correctly avoided). Coefficients are all-continuous C(-,E)→C(-,Ω) by the inclusion. The SNC witness family equals the irreducible components (codimension-1 condition plus PIT), so `out` loses no pair. Tameness: all geometric points × all regular-parameter boundary tuples, compatible prime-to-p roots, pulled back to W, finite free = constant; r=0 is the identity. Hypotheses not stronger; edge cases (D=∅, out=∅, rank 0, r=0) covered. Statements verbatim; item differs from live only in lean and the 2 new stmt_deps; no new name clashes; no hollow defs; sorry only; docstrings OK. Not recompiled (no change). Advisory: diagrammatic δ notation in the new node text; upstream continuousMapRingObj used (rfl to the recorded OfUniverse); Ω analytic issue flagged as WANTED."
  }
 }
