@@ -61,6 +61,6 @@ I read the item in full; the delivery adds no new nodes. Support half (SuppCon â
 
 L: independent stage-2 immutable head 0e5c7e1cc703: H1: there is no Lean module and no item lean record, and the report has no '## Second reading by NQ' section; this is a stage-1 split head sent on the S2 lane. H2: the item's proof/proof_deps/proof_origin/split_report/status were changed, but stage 2 permits only lean and stmt_deps. H12: the 3 new nodes (tame-transverse-open-exchange, tame-stratum-inertia-model, tame-condensed-inertia-koszul) are statement-only lem- nodes, not def- nodes with modules. Superseded: NF 26a608e08's split of this item LANDed at 21:31:15 and is live with status split, reviewed by NT-cc-NF-26a608e08, lean null; the side-live clone is out of date. Correction: drop this head; a stage-2 delivery must state the item in one Lean module with a sorry proof on top of the live NF split, with a verbatim lean record, a Worker report and a Second reading by NQ, and no changes to proof fields. No compile: there is no file and no FIX.
 
-## sk-lem-picard-cech-computes (2026-10-21 19:44 UTC, branch head 778e137c8f6)
+## sk-lem-picard-cech-computes (2026-10-21 19:53 UTC, branch head 8dbe90e2256)
 
 L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-computes: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
