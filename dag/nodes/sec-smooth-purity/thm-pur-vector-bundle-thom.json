@@ -17,7 +17,9 @@
   "def-pur-vector-bundle-zero-section",
   "def-pur-vector-bundle-thom-class",
   "def-coefficient-twists-detailed",
-  "def-compact-support-direct-image-detailed"
+  "def-compact-support-direct-image-detailed",
+  "def-pur-vector-bundle-thom-comparisons",
+  "def-pur-vector-bundle-thom-sum-product"
  ],
  "proof": [
   {
@@ -286,5 +288,38 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c60f5ba31 (reviewer sub-agent of L); spot-checked: Read the item in full: all eight steps, all 19 proof dependencies and 5 statement dependencies, the unit sk-prop-an, and the main-20261015 blueprint text, whose statement and proof match master. Statement unchanged and no target weakened. One commit, no new nodes, no cycles, no SGA source. Coefficient category: everything is at finite level A_{E,n} in D(T_proet,A) (sk-def-sf-operations, def-exchange-projection, lem-pur-finite-product-compactification). Base-change map: the pro-étale exchange of thm-cbc-finite-level-proetale, normalized by thm-cbc-finite-torsion and the identity normalization of alpha in thm-sf-comp-composition. Mathematics: r=0 comes from the Thom-class definition, and r=1 matches the rank-one theorem via (L1). Base change holds for nonflat g by (L2), which covers the tautological section. The model case is an induction tau_{j+1}=kappa_c(tau_j⊗tau_1), from the identity u_{Z×W}kappa^{Z,W}=kappa_c(u_Z⊗u_W) and the even-degree cup clause, with point supports proper. Invertibility follows from Zariski charts and clause 1 of lem-cbc-proetale-stalk-conservative. Reversing the six arrows of kappa^rel gives exactly T_{f,g}, which is Rc_*(e)∘Omega, i.e. kappa_c. The direct-sum identity is checked locally via Kunneth (iii) and degree-zero Hom-gluing. Edge cases r=0, a rank-0 summand, empty base, nonreduced base and nonflat g all hold. Zariski charts plus compact base change in place of the blueprint's geometric stalks is the mechanism of unit Step 7. Accepted tool uses: sk-thm-sf-kunneth-relative and lem-pur-degree-zero-derived-map-gluing; the other declared ones are on the route anyway. No duplicate: thm-amb-vector-bundle-purity, cor-pur-vector-bundle-purity and pur9-def-thom-class state different maps. Batch-5 check: lem-pod-etale-stalk-tensor-scalar only says stalks commute with tensor, a generic fact. Without this item it is already in the batch-5 closure via def-coefficient-twists-detailed. sk-thm-sf-kunneth-relative, fix-prop-coherence and thm-pod-finite-reduction are also already in that closure without this item, through non-trace, non-PD paths (sk-thm-sf-package, prop-functor-package). Relative Künneth is given by neither assumption and is used only to name kappa_B, so both flagged citations are outside the assumptions. Wrote review.md; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VectorBundleThom",
+  "declaration": "WeilConjectures.PurityFiniteSetting.isIso_vectorBundleThomTau",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.isIso_vectorBundleThomTau",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleTrace",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleTrace_inverse",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomTau_baseChange",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleTrace_baseChange",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomUnitMultiplyHom",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomUnitMultiplySpec",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_vectorBundleThomUnitMultiply",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomUnitMultiply",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomTensorEquation",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleTraceTensorEquation",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomTau_directSum",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleTrace_directSum"
+  ],
+  "file": "lean/Sheaf/Paper/VectorBundleThom.lean",
+  "statement": "theorem isIso_vectorBundleThomTau (V : PurityVectorBundle P B hB r) : IsIso (vectorBundleThomTau V)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49c2a9c48",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsIso of the actual vectorBundleThomTau, including rank 0 and the empty base. Base change for arbitrary nonflat g, with a vector-bundle base-change predicate (generator iso), via proper/open exchange + twist pullback + compactification comparison. Direct sums in forward form (tau1⊗tau2)≫T = m≫tau, with T = kappa_B^{-1} the forward six-arrow product + root product. Trace = inv tau, with both inverse identities and base-change/direct-sum squares. The HEq-packaged ∃!/choose pins were probed: functorialCupTwist true B 0 = P.constant B by rfl (5.8 s, twist-1 control fails); cupDerivedCoefficientMap and vectorBundleThomTau elaborate at the derivedTensor Hom types; the full Hom-type rfl hits a kernel timeout (advisory for stage 3). Not hollow. The two new def nodes have correct fields and verbatim records; the item changed only stmt_deps(+2 new defs)/lean; other nodes identical to live; not dropped. Advisories: H9 transitive proof-dep imports, H11 stub second reading (Worker report matches), framework vs canonical cbc exchange bridge for stage 3. Compile: Maps 59.1 s at load ~121 (land at lower load), Product 11.9 s, item 25.0 s."
  }
 }

@@ -1,0 +1,239 @@
+{
+ "id": "def-pur-vector-bundle-thom-comparisons",
+ "kind": "definition",
+ "title": "Canonical comparisons for vector-bundle Thom inputs",
+ "status": "split",
+ "statement": "In the finite purity setting [def-pur-conventions], for bundles and generator-normalized projections [def-pur-vector-bundle-zero-section], [def-pur-vector-bundle-thom-class], put $Q_X(r)=A_X(r)[2r]$, using the signed twists [def-coefficient-twists-detailed]. Each $Q_X(r)$ is bounded below and has etale origin. Define its canonical pullback by exact inverse image, its shift comparison and the root-normalized twist pullback. Define $Q_X(r)\\otimes^L Q_X(s)\\to Q_X(r+s)$ by the native derived single-complex tensor comparison, the ordinary root multiplication, and the even-shift comparison $2r+2s=2(r+s)$. These normalizations uniquely specify the maps; no scalar trivialization is chosen. For an arbitrary base change $g:B'\\to B$ within the finite-type setting, define the compact-support comparison [def-compact-support-direct-image-detailed] as proper/open exchange, followed by the preceding coefficient pullback and the normalized compactification comparison. A map of total spaces represents vector-bundle base change precisely when it is induced on symmetric-algebra generators by an isomorphism $g^*\\mathcal M\\cong\\mathcal M'$. For a direct-sum identification $\\mathcal M\\cong\\mathcal M_1\\oplus\\mathcal M_2$, the prescribed two projections give $E=E_1\\times_B E_2$; the second projection is quasi-compact and compactifiable and its composite with $\\pi_2$ equals $\\pi$; this composite is compactifiable. The exterior input $L p_1^*Q_{E_1}(r)\\otimes^L Lp_2^*Q_{E_2}(s)$ has bounded-below etale origin. Define its map to $Q_E(r+s)$ by the two preceding pullbacks followed by root multiplication. Also define the coefficient-postcomposed forward product for an arbitrary finite ring by the published forward product [lem-pur-finite-forward-product-symmetry], the equality of the structure maps, and compact direct image of the specified coefficient morphism, in that order. All constructions allow zero ranks, the empty base, and nonflat base change.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-pur-vector-bundle-thom-class",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "lem-pur-finite-forward-product-symmetry"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+  "place": "proof Steps 1, 2 and 5: coefficient, pullback, Cartesian product and compact-support comparison maps"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support Thom base change and vector bundle direct sum comparison morphisms",
+   "results": [
+    {
+     "name": "IsBaseChange.directSum",
+     "module": "Mathlib.RingTheory.TensorProduct.IsBaseChangePi",
+     "type": "(ibc : ∀ i, IsBaseChange S (ε i)) : IsBaseChange S (lmap ε)",
+     "doc": "If each module $M_i$ in a family satisfies the base change property from $R$ to $S$, then the direct sum $\\bigoplus_{i \\in \\iota} M_i$ also satisfies the base change property."
+    },
+    {
+     "name": "IsBaseChange.directSumPow",
+     "module": "Mathlib.RingTheory.TensorProduct.IsBaseChangePi",
+     "type": "(ibc : IsBaseChange S ε) : IsBaseChange S (lmap fun _ : ι ↦ ε)",
+     "doc": "If each module in a family satisfies the base change condition with respect to a scalar extension, then their direct sum inherits this base change compatibility through component-wise linear maps, pre"
+    },
+    {
+     "name": "DirectSum.sum_support_of",
+     "module": "Mathlib.Algebra.DirectSum.Basic",
+     "type": "[∀ (i : ι) (x : β i), Decidable (x ≠ 0)] (x : ⨁ i, β i) : (∑ i ∈ x.support, of β i (x i)) = x",
+     "doc": "For any element $ x $ in the direct sum $ \\bigoplus_{i \\in \\iota} \\beta(i) $, it holds that $ x = \\sum_{i \\in \\text{support}(x)} \\text{of}_i(x_i) $, where $ \\text{of}_i $ denotes the canonical inclusi"
+    },
+    {
+     "name": "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "module": "Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact",
+     "type": ": MorphismProperty.IsStableUnderBaseChange @QuasiCompact",
+     "doc": "If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact."
+    },
+    {
+     "name": "IsBaseChange.finsuppPow",
+     "module": "Mathlib.RingTheory.TensorProduct.IsBaseChangePi",
+     "type": "(ibc : IsBaseChange S ε) : IsBaseChange S (Finsupp.mapRange.linearMap (α := ι) ε)",
+     "doc": "If the base change construction satisfies the tensor product universal property for a linear map $\\varepsilon$, then the induced linear map on the space of finite support functions $\\alpha \\to_0 M$ al"
+    },
+    {
+     "name": "finsuppLEquivDirectSum",
+     "module": "Mathlib.Algebra.DirectSum.Finsupp",
+     "type": ": (ι →₀ M) ≃ₗ[R] ⨁ _ : ι, M",
+     "doc": "Under decidable equality on the index type $\\iota$ and decidable zero test for elements of the $R$-module $M$, this constructs a canonical linear equivalence between the space of finite support functi"
+    },
+    {
+     "name": "CompHausLike.sigmaComparison",
+     "module": "Mathlib.Topology.Category.CompHausLike.SigmaComparison",
+     "type": ": X.obj ⟨(of P ((a : α) × σ a))⟩ ⟶ ((a : α) → X.obj ⟨of P (σ a)⟩)",
+     "doc": "A morphism comparing the product of a compact Hausdorff-like space constructed from a disjoint union with the product of its components, defined by mapping each element through the continuous inclusio"
+    },
+    {
+     "name": "HasCompactSupport.comp₂_left",
+     "module": "Mathlib.Topology.Algebra.Support",
+     "type": "∀ {α : Type u_2} {β : Type u_4} {γ : Type u_5} {δ : Type u_6} [inst : TopologicalSpace α] [inst_1 : Zero β]\n  [inst_2 : Zero γ] [inst_3 : Zero δ] {f : α → β} {f₂ : α → γ} {m : β → γ → δ},\n  HasCompactSupport f → HasCompactSupport f₂ → m 0 0 = 0 → HasCompactSupport fun x => m (f x) (f₂ x)",
+     "doc": "If $ f : X \\to \\beta $ and $ f_2 : X \\to \\gamma $ have compact support, and $ m : \\beta \\times \\gamma \\to \\delta $ satisfies $ m(0, 0) = 0 $, then the function $ x \\mapsto m(f(x), f_2(x)) $ also has c"
+    }
+   ],
+   "date": "2026-10-21",
+   "verdict": "No exact compact-support Thom comparison or prescribed sum-product declaration; the reusable native maps are project declarations, not Mathlib matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteForwardProduct, vectorBundleThomInputPullback, vectorBundleThomSumProduct",
+   "results": [
+    "0 hits; loogle: unknown identifier 'finiteForwardProduct'"
+   ],
+   "date": "2026-10-21",
+   "verdict": "No exact compact-support Thom comparison or prescribed sum-product declaration; the reusable native maps are project declarations, not Mathlib matches."
+  },
+  {
+   "tool": "grep",
+   "query": "Thom|forwardProduct|ForwardProduct",
+   "results": [
+    {
+     "file": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
+     "line": "2",
+     "text": "Copyright (c) 2026 Thomas Browning. All rights reserved."
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
+     "line": "4",
+     "text": "Authors: Thomas Browning"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+     "line": "188",
+     "text": "        TopCat.Sheaf.restrictHomEquivHom (structureSheaf (Γ.obj (op X))).1 _ isBasis_basic_opens"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "line": "223",
+     "text": "noncomputable def uliftHom {S : Scheme.{u}} (𝒰 : PreZeroHypercover S) [QuasiCompactCover 𝒰] :"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "line": "262",
+     "text": "    ⟨TopCat.Sheaf.restrictHomEquivHom _ _ isBasis_basic_opens"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "line": "319",
+     "text": "    apply (TopCat.Sheaf.restrictHomEquivHom _ _ PrimeSpectrum.isBasis_basic_opens).symm.injective"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "line": "328",
+     "text": "    dsimp [TopCat.Sheaf.restrictHomEquivHom, Functor.IsCoverDense.restrictHomEquivHom,"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "line": "351",
+     "text": "    apply (TopCat.Sheaf.restrictHomEquivHom _ _ PrimeSpectrum.isBasis_basic_opens).symm.injective"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "line": "360",
+     "text": "      TopCat.Sheaf.restrictHomEquivHom, Functor.IsCoverDense.restrictHomEquivHom,"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+     "line": "174",
+     "text": "    refine ⟨𝒰.forgetQc.qculift.I₀, Sum.elim 𝒰.forgetQc.idx (QuasiCompactCover.uliftHom _).s₀,"
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean",
+     "line": "2",
+     "text": "Copyright (c) 2026 Thomas Browning, Andrew Yang. All rights reserved."
+    },
+    {
+     "file": "Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean",
+     "line": "4",
+     "text": "Authors: Thomas Browning, Andrew Yang"
+    }
+   ],
+   "date": "2026-10-21",
+   "verdict": "No exact compact-support Thom comparison or prescribed sum-product declaration; the reusable native maps are project declarations, not Mathlib matches."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"Thom comparison|Thom.*comparison|forward product.*coefficient|forward product.*postcompos|Thom.*base.change\" dag/nodes lean/WeilConjectures lean/Sheaf; blueprint_refs.py search Thom",
+   "results": [
+    "Five blueprint nodes: def-pur-vector-bundle-thom-class, pur9-def-thom-class, pur9-def-thom-class-affine, thm-pur-rank-one-thom, thm-pur-vector-bundle-thom. The recorded Thom-class node supplies tau and its projections, but not the comparison maps or the sum-product specialization. Reuse ProEtale.finiteForwardProduct from lem-pur-finite-forward-product-symmetry."
+   ],
+   "date": "2026-10-21",
+   "verdict": "No existing node defines these comparison composites or this sum-product specialization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-vector-bundle-thom",
+  "date": "2026-10-21",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-vector-bundle-thom",
+   "place": "proof Steps 1, 2 and 5: coefficient, pullback, Cartesian product and compact-support comparison maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.VectorBundleThomMaps",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorBundleThomBaseChangeMap",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomProductGeneric",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomTensorMap",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomInput",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomInput_origin",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomInputPullback",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomUnitPullback",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomInputProductGeneric",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomInputProductHom",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomInputProductSpec",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_vectorBundleThomInputProduct",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomInputProduct",
+   "WeilConjectures.PurityFiniteSetting.VectorBundleThomBaseChange",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomBaseChangeMap",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSum_geometry",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSum_projection_comp",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSum_composite_compactifiable",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSumExternal",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSumExternal_origin",
+   "WeilConjectures.PurityFiniteSetting.vectorBundleThomSumCoefficient"
+  ],
+  "file": "lean/Sheaf/Paper/VectorBundleThomMaps.lean",
+  "statement": "def vectorBundleThomBaseChangeMap : (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.obj ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) V.p).obj (vectorBundleThomInput P V.E r)) ⟶ (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) V'.p).obj (vectorBundleThomInput P V'.E r)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49c2a9c48",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49c2a9c48",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsIso of the actual vectorBundleThomTau, including rank 0 and the empty base. Base change for arbitrary nonflat g, with a vector-bundle base-change predicate (generator iso), via proper/open exchange + twist pullback + compactification comparison. Direct sums in forward form (tau1⊗tau2)≫T = m≫tau, with T = kappa_B^{-1} the forward six-arrow product + root product. Trace = inv tau, with both inverse identities and base-change/direct-sum squares. The HEq-packaged ∃!/choose pins were probed: functorialCupTwist true B 0 = P.constant B by rfl (5.8 s, twist-1 control fails); cupDerivedCoefficientMap and vectorBundleThomTau elaborate at the derivedTensor Hom types; the full Hom-type rfl hits a kernel timeout (advisory for stage 3). Not hollow. The two new def nodes have correct fields and verbatim records; the item changed only stmt_deps(+2 new defs)/lean; other nodes identical to live; not dropped. Advisories: H9 transitive proof-dep imports, H11 stub second reading (Worker report matches), framework vs canonical cbc exchange bridge for stage 3. Compile: Maps 59.1 s at load ~121 (land at lower load), Product 11.9 s, item 25.0 s."
+ }
+}
