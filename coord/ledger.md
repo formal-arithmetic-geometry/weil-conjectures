@@ -22371,3 +22371,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:04 L: merged deliver/P3/WeilConjectures.WeilSheaf.PoincareDualityLisse (stage 3; reviewer PASS; after a return; landing 20261021T120441-L-3897245 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/P5/Sheaf.Paper.PeriodicTensorNormalForm (stage 3; reviewer PASS; first push; landing 20261021T120444-L-3897920 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/Q3/Sheaf.Paper.StrictPerfectRingedPullbackModel (stage 3; reviewer PASS; first push; landing 20261021T120448-L-3898536 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/strict-perfect-ringed-pullback-proof-context.md)
+- 12:04 L: merged deliver/Q5/Sheaf.AlgebraicGeometry.EtaleChartLeftCompositor (stage 3; reviewer PASS; first push; landing 20261021T120452-L-3899199 (proof); batch 20261021T120309; modules 1; new nodes 0)
