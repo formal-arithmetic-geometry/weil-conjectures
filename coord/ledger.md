@@ -23311,3 +23311,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:20 L: merged deliver/Q07/lem-sfb-integral-lisse-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 18:20 L: returned deliver/Q17/lem-coef-compact-support-normalized-realization (reviewer RETURN: L: independent stage-2 immutable head dd28bbf6c515: H2/C3: stmt_dep lem-weil-compact-support-reduction-tower-functor is )
 - 2026-10-21T18:21:21Z L: superseded stage-1 delivery Q13/lem-sfb-finite-closed-cover-resolution at f42a2438e9316f347bc88e4c2d600be31392458a; current completion retained; packet archived at refs/superseded/Q13/lem-sfb-finite-closed-cover-resolution/f42a2438e9316f347bc88e4c2d600be31392458a; stale return retired.
+- 18:22 L: merged deliver/Q33/lem-pod-semilinear-field-operation-lifts (stage 2; reviewer PASS; parallel immutable checks)

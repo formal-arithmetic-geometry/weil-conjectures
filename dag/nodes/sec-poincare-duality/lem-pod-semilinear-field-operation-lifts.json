@@ -318,5 +318,40 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-18aaf87f5 (reviewer sub-agent of L); spot-checked: FIX: I read the whole item (9 steps, no new nodes) and every cited statement. The sources were main-20261015 prop-weil-operations.proof.md sentence 1 and lem-fix-weil-operations.proof.md (equivariant lifts via Ex_*/Ex_!, g_X^*f^*=f^*g_Y^*, inverse Weil map on the contravariant Hom argument). No SGA is cited. The item is unsplit on live and side-live and has no repair note. The statement, base change, coefficient categories (raw E, common-stage Q̄_ℓ) and domains are unchanged and match def-weil-weil-sheaf-complex and prop-weil-operations. Steps 1, 2 and 5–9 check out: the Cartesian square and k-structure; the λ-based inverse transport; the mate types L=L'=Lf^*, G=P_Y, G'=P_X, with the mate equal to Ex_* of def-exchange-projection and invertible by lem-weil-mate-iso-along-equivalences; Ex_! by lem-pod-weil-frobenius-compact-support-exchange (acyclic, no separatedness); and the covariant, tensor and contravariant-Hom arrow identities. I tested the point case (scalars ab and b/a, a=ℓ with no lattice), f=id and non-separated bases. Two faults, both repaired: (1) E5/C4 in Steps 3–4. Q̄_ℓ naturality of the inverse identities and of a=c_{f,g_Y}c_{g_X,f}^{-1} needs the integral composition and inverse-identity isomorphisms to commute with the scalar-extension comparisons α of lem-pur-integral-operations-scalar-extension. No DAG node states this; lem-sf-scalar-pullback-composition, lem-weil-pbc-continuous-integral-pull-composition and lem-trf-frobenius-transports-scalar-extension are other models or cover Frobenius iterates only. I added the statement-only node lem-pod-pullback-identities-scalar-extension (unsplit, created.by reviewer, from prop-weil-operations via the item) and cite it in Steps 3–4. (2) C4 in Step 4: the unsupported claim that the integral c^{O_E} equal the ambient ringed composition maps is removed. lem-weil-pbc-proetale-derived-pullback-composition is now cited only for the finite reductions, and def-exchange-projection is added to uses. Corrected item and new node are in fixes/dag/nodes/sec-poincare-duality/. I accept the declared tool_uses, all generic site, coefficient or categorical inputs.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SemilinearFieldOperationLifts",
+  "declaration": "WeilConjectures.semilinearFieldOperationLifts",
+  "declarations": [
+   "WeilConjectures.PodCovariantWeilLiftSpec",
+   "WeilConjectures.pod_covariant_field_operation_lift",
+   "WeilConjectures.PodTensorWeilLiftSpec",
+   "WeilConjectures.podWeilHomPairs",
+   "WeilConjectures.podWeilHomPairForget",
+   "WeilConjectures.PodHomWeilLiftSpec",
+   "WeilConjectures.pod_tensor_hom_field_operation_lifts",
+   "WeilConjectures.pod_supplied_field_operation_lifts",
+   "WeilConjectures.podRationalSquarePullbackComponent",
+   "WeilConjectures.podCommonSquarePullbackComponent",
+   "WeilConjectures.pod_actual_pullback_field_lifts",
+   "WeilConjectures.PodRationalFrobeniusTransportSpec",
+   "WeilConjectures.PodFieldOperationTransportSpec",
+   "WeilConjectures.semilinearFieldOperationLifts"
+  ],
+  "file": "lean/Sheaf/Paper/SemilinearFieldOperationLifts.lean",
+  "statement": "theorem semilinearFieldOperationLifts (X₀ Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : IsPullback (D.geometricFrobenius X₀).hom ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left (D.geometricFrobenius Y₀).hom ∧ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫ (D.geometricFrobenius Y₀).hom ≫ (D.geometricFiber Y₀).hom = (D.geometricFrobenius X₀).hom ≫ (D.geometricFiber X₀).hom ∧ PodFieldOperationTransportSpec D l hl X₀ E Ω ∧ PodFieldOperationTransportSpec D l hl Y₀ E Ω",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly state all clauses: semilinearFieldOperationLifts gives the actual geometry and exact rational/common-stage transports; pod_actual_pullback_field_lifts fixes both canonical pullback comparisons; pod_supplied_field_operation_lifts gives the specified Ex_* and Ex_! lifts on the recorded supplied domains; the covariant and tensor/Hom declarations state the complete object/arrow formulas. All helper definitions are specifications or explicit canonical component composites of this same node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-938ceda80",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Full delivery read: the item node changes only in lean; statement verbatim; all 14 declarations present; sorry only; docstrings with source and blueprint tag and all 9 steps; report has Worker report and Second reading. Geometry: IsPullback gX f f gY and f≫gY≫aY=gX≫aX. Integral and rational/common-stage equivalences, with forward ε pinned to pullbackIdentityEpsilon and the termwise inverse-image realization. Lf^* comparison pinned to (comp f gX)⁻¹≫eqToIso≫comp gY f, direction checked. Ex_*/Ex_! = S.exchange/S.compactExchange of the supplied ExchangeProjectionStage, true for every such stage. Tensor μ and Hom κ pinned to the canonical maps; Hom lift uses θ_M⁻¹ in the contravariant variable on exactly the permitted pairs. Advisories: common-stage stage-level δ not pinned; exactness via ∃ CommShift instead of fieldRationalPullShift; Ex_! clause needs an endo-shaped stage (compactification over k₀), so the base-changed c′ of lem-pod-weil-frobenius-compact-support-exchange needs a coherence comparison; statement uses decls of theorem nodes outside stmt_deps (podRationalHomComparison, canonicalRationalPullbackTensor, pullbackIdentityEpsilon, isomorphismIntegralTermwiseInverseImage); duplicated integral ε clause. No compile run (no file changed); worker reports a clean compile in 18.2 s."
  }
 }
