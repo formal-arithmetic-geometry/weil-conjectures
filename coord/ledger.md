@@ -21270,3 +21270,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:44 L: merged deliver/NC/lem-sfb-stratified-constant-model-product-bound (reviewer FIX; first push; new nodes: 0)
 - 08:44 L: merged deliver/Q137/lem-weil-point-derived-sections-tensor-descent (reviewer PASS; first push; new nodes: 0)
 - 08:44 L: merged deliver/Q89/lem-pur-proetale-injective-support-global-model (reviewer PASS; first push; new nodes: 0)
+- 08:44 L: merged deliver/NY/lem-weil-boundary-comparison-composition-transport (reviewer PASS; first push; new nodes: 0); claim not held by NY: not your claim
