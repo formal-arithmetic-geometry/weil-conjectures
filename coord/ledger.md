@@ -20871,3 +20871,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q20/lem-sfb-internal-abelian-finite-limit-creation (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q57/lem-pur-support-quotient-product (reviewer FIX; after a return; new nodes: 2)
 - 08:07 L: merged deliver/N8/lem-sfb-etale-proetale-scalar-pullback-cube (reviewer FIX; after a return; new nodes: 2)
+- 08:07 L: merged deliver/Q98/cor-cbc-proper-coincidence (reviewer FIX; first push; new nodes: 0)

@@ -3,63 +3,166 @@
  "blueprint": {
   "is": "cor-cbc-proper-coincidence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper morphisms: compact supports equal direct image",
- "statement": "For a proper\n$f:X\\to Y$ and the canonical identification\n$Rf_!\\xrightarrow{\\sim}Rf_*$ of\n[def-compact-support-direct-image-detailed] (the compactification\n$j=\\operatorname{id}$, $p=f$), the map $\\operatorname{Ex}_!$\nof [def-cbc-exchange-map] is the proper-base-change exchange map\nof [def-weil-pbc-derived-exchange]; consequently the\ncompact-support base change of\n[thm-cbc-finite-torsion] specializes to proper base change for\nproper $f$.",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and let\n$$\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\ f'\\downarrow&&\\downarrow f\\\\ Y'&\\xrightarrow{g}&Y\\end{array}$$\nbe a cartesian square of schemes with $f$ proper [def-weil-proper-morphism], regarded as a compact-support square [def-cbc-compact-support-square]. Work throughout in $D^+(T_{\\mathrm{et}},\\Lambda)$, the bounded-below derived categories of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories]. Let $c_0=(\\operatorname{id}_X,f)$ be the identity compactification [def-weil-pbc-projection-compactification], and identify its base change with $c'_0=(\\operatorname{id}_{X'},f')$ by the canonical pullback identification. Let $a_T:(\\operatorname{id}_T)_!\\xrightarrow{\\sim}\\operatorname{id}$ be the canonical identification furnished by the sheafification description of extension by zero [def-weil-pbc-extension-by-zero], applied degreewise. Define\n$$\\alpha_{f,K}=Rf_*(a_{X,K}):Rf_!^{c_0}K=Rf_*(\\operatorname{id}_X)_!K\\xrightarrow{\\sim}Rf_*K,$$\nand define $\\alpha_{f',L}$ in the same way.\n\nThe same identity-open normalization is used for the finite-level pro-etale compact-support direct image. Suppose moreover that $X,Y$ are finite-type schemes over a field $K_0$ in which a prime $\\ell$ is invertible, fix a finite extension $E/\\mathbf Q_\\ell$ and $n\\geq1$, and put $A=A_{E,n}$, as in [def-compact-support-direct-image-detailed]. Let $a^{\\mathrm{proet}}_{T}:(\\operatorname{id}_T)_!\\xrightarrow{\\sim}\\operatorname{id}$ be the canonical identification furnished by the sheafification description of pro-etale extension by zero [def-weil-extension-by-zero], applied degreewise, and define\n$$\\alpha^{\\mathrm{proet}}_{f,M}=Rf_{*,n}(a^{\\mathrm{proet}}_{X,M}):Rf_{!,n}^{c_0}M=Rf_{*,n}(\\operatorname{id}_X)_!M\\xrightarrow{\\sim}Rf_{*,n}M,\\qquad M\\in D(X_{\\mathrm{proet}},A_{E,n}),$$\nwith $Rf_{!,n}^{c_0}$ the functor of [def-compact-support-direct-image-detailed] at the identity compactification and $Rf_{*,n}$ the derived direct image [def-weil-derived-direct-image]. This natural isomorphism is the canonical proper identification $Rf_{!,n}\\xrightarrow{\\sim}Rf_{*,n}$ at the identity compactification.\n\nFor every $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$, the compact-support exchange of [def-cbc-exchange-map] satisfies\n$$\\alpha_{f',g'^{-1}K}\\circ\\operatorname{Ex}^{c_0}_!(K)\n=\\operatorname{Ex}^{\\Lambda}_{*,\\square}(K)\\circ g^{-1}(\\alpha_{f,K}),$$\nwhere $\\operatorname{Ex}^{\\Lambda}_{*,\\square}$ is the module-coefficient mate of [def-weil-pbc-derived-exchange], as specified in [lem-weil-pbc-exchange-forget-coefficients]. These are the exchange transformations typed in [sk-def-sf-exchanges], here for the specified finite-ring etale operations. The equality is natural in $K$. It also describes the compactification-independent exchange of [thm-cbc-finite-torsion] after its canonical comparisons with $c_0,c'_0$. Consequently the isomorphism asserted there specializes, for proper $f$, to the isomorphism for this specified proper-base-change exchange. No additional hypothesis on $g$, constructibility, residue characteristics, or quasi-compactness of the schemes is imposed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/cor-cbc-proper-coincidence.md",
   "place": "node cor-cbc-proper-coincidence, order 1876"
  },
  "stmt_deps": [
-  "def-compact-support-direct-image-detailed",
+  "def-weil-proper-morphism",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
   "def-cbc-exchange-map",
   "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
   "thm-cbc-finite-torsion",
-  "def-weil-pbc-scheme-conventions"
+  "sk-def-sf-exchanges",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-extension-by-zero",
+  "def-weil-derived-direct-image"
  ],
  "proof": [
   {
-   "text": "Use the identity-open compactification in [def-cbc-exchange-map]. Compare the levelwise derived identity-open adjunction isomorphism with the identity isomorphism shId of the derived compact-support formalism: their conjugates agree, since on the localization functor Qh the derived unit is the levelwise unit and the underived leftAdjointIdIso is conjugate to the inverse pullback identity. Then baseChange_id_vert cancels the identity-open factor in shriekBaseChange. Naturality of the proper exchange in [def-weil-pbc-derived-exchange] gives the required identity for the two identity-open compactifications.",
+   "text": "Use the identity compactification of [def-weil-pbc-projection-compactification]; its base change is the identity-open compactification of $f'$ under the canonical pullback identification, as in [def-cbc-compact-support-square]. For $j=\\operatorname{id}_T$, every etale object $V\\to T$ factors uniquely through $j$. Thus the presheaf defining $j_!F$ in [def-weil-pbc-extension-by-zero] is exactly $F$, with the same restrictions. Since $F$ is already a sheaf its sheafification identifies canonically with $F$; this is $a_{T,F}$. The explicit counit in [lem-weil-pbc-extension-by-zero-adjunction] is the identity on every $F(V)$, so this identification is precisely the identity-open adjunction normalization, not an arbitrary automorphism of the identity functor. Its unit is the inverse identification by the triangle identity. Applying the identification degreewise gives $a_T$ on complexes and in $D^+$, and applying $Rf_*$ gives the isomorphism $\\alpha_f$ in the statement.",
+   "uses": [
+    "def-weil-pbc-projection-compactification",
+    "def-cbc-compact-support-square",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3, definition-extension-zero and equation-j-p-shriek; identity-open specialization; Tag 03S4, exercise-jshriek-direct"
+   }
+  },
+  {
+   "text": "The pro-etale identification of the statement is defined exactly as in step 1. For $j=\\operatorname{id}_T$ every object $V\\to T$ of $T_{\\mathrm{proet}}$ factors uniquely through $j$, so the module presheaf $P_M$ of [def-weil-extension-by-zero] is $M$ itself, with the same restrictions and the same $A$-action. Since $M$ is already a sheaf of $A$-modules, the sheafification map $M=P_M\\to P_M^\\#$ of [def-weil-presheaf-modules-sheafification] is an $A$-linear isomorphism; its inverse is $a^{\\mathrm{proet}}_{T,M}:(\\operatorname{id}_T)_!M\\to M$. It is natural in $M$ because $(\\operatorname{id}_T)_!\\alpha$ is the sheafification of $P_\\alpha=\\alpha$. Thus $(\\operatorname{id}_T)_!$ is naturally isomorphic to the identity functor; it is exact and acts degreewise [lem-cbc-proetale-extension-zero], so the degreewise isomorphism of complexes preserves quasi-isomorphisms and descends to $D(T_{\\mathrm{proet}},A_{E,n})$. For the identity compactification $c_0=(\\operatorname{id}_X,f)$ the functor of [def-compact-support-direct-image-detailed] is $Rf_{*,n}(\\operatorname{id}_X)_!$, so applying $Rf_{*,n}$ to $a^{\\mathrm{proet}}_X$ gives the natural isomorphism $\\alpha^{\\mathrm{proet}}_f$ of the statement. No exchange property is asserted on the pro-etale side.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-proetale-extension-zero",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/_section.md",
+    "place": "Single proof paragraph: 'on this model Rf_!=Rf_* o id_!=Rf_*', at finite pro-etale level"
+   }
+  },
+  {
+   "text": "In the upper open square both vertical open immersions are identities. Write $I_T=(\\operatorname{id}_T)_!$, $H=g'^{-1}$, and let $\\beta_K:HI_XK\\to I_{X'}HK$ be the degreewise map of [cor-cbc-derived-extension-zero-base-change]. Its inverse is, by [lem-cbc-extension-zero-base-change], the adjoint transpose of the unit followed by the inverse-image square identification. Under $a_X:I_X\\cong\\operatorname{id}$ and $a_{X'}:I_{X'}\\cong\\operatorname{id}$ the two units are identities, by the explicit adjunction of [lem-weil-pbc-extension-by-zero-adjunction] and step 1. The square identification is also the identity after the canonical identity-inverse-image identifications: both paths are restriction along $g'$. Hence that transpose is the identity of $HK$, and its inverse is the identity as well. In the original notation this says exactly\n$$a_{X',HK}\\circ\\beta_K=H(a_{X,K}).$$\nThis is a calculation with the specified mate, not merely the existence of a base-change isomorphism. It holds degreewise and hence on the derived categories.",
+   "uses": [
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 and 03S6, definition-extension-zero and lemma-shriek-base-change; compute the identity-open mate"
+   }
+  },
+  {
+   "text": "Put $E_M=\\operatorname{Ex}^{\\Lambda}_{*,\\square}(M)$. The coefficient version is the same mate as [def-weil-pbc-derived-exchange], by [lem-weil-pbc-exchange-forget-coefficients]. In particular it is a natural transformation in $M$. Formula [def-cbc-exchange-map] for $c_0$ reads\n$$\\operatorname{Ex}^{c_0}_!(K)=Rf'_*(\\beta_K)\\circ E_{I_XK}.$$\nCompose with $\\alpha_{f',HK}=Rf'_*(a_{X',HK})$. Step 3 and functoriality, followed by naturality of $E$ for $a_{X,K}:I_XK\\to K$, give the explicit equality\n$$\\begin{aligned}\n\\alpha_{f',HK}\\circ\\operatorname{Ex}^{c_0}_!(K)\n&=Rf'_*(a_{X',HK}\\circ\\beta_K)\\circ E_{I_XK}\\\\\n&=Rf'_*(H(a_{X,K}))\\circ E_{I_XK}\\\\\n&=E_K\\circ g^{-1}(Rf_*(a_{X,K}))\n=E_K\\circ g^{-1}(\\alpha_{f,K}).\n\\end{aligned}$$\nEvery equality is an equality of the displayed arrows, and the constructions are natural in $K$. This proves the required coincidence with the specified proper exchange.",
    "uses": [
     "def-cbc-exchange-map",
-    "def-weil-pbc-derived-exchange"
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek, displayed two-arrow construction, specialized to j=id; naturality calculation written here"
+   }
   },
   {
-   "text": "The identity-open compactification of the base-changed proper map refines the literal pullback compactification via the latter open immersion. Its refinement square is cartesian because both vertical identity maps are isomorphisms. Write the canonical comparison of [lem-weil-pbc-etale-shriek-compactification-independence] using this refinement and the identity refinement. The refinement compatibility of the exchange construction [def-cbc-exchange-map] identifies the identity-open exchange with the literal-pullback exchange followed by this canonical comparison. The derivedPlusFormalism_shriekIso comparison identifies this formalism comparison with the specified candidate comparison. Compose with the identity-open identification on the base-changed scheme.",
+   "text": "Apply [thm-cbc-finite-torsion] to $c_0$. Its hypotheses are precisely a finite commutative ring, a separated finite-type map with a supplied compactification, an arbitrary base change, and a bounded-below complex. Proper $f$ is separated and finite type by [def-weil-proper-morphism], and $c_0$ supplies the compactification, so all these hypotheses hold. The theorem makes $\\operatorname{Ex}^{c_0}_!(K)$ invertible. Both $\\alpha$ maps and their inverse-image images are isomorphisms, so the equality of step 4 makes $E_K$ invertible. The same theorem says its exchange maps agree under canonical compactification comparisons, independently of the common refinement. Therefore its compactification-independent map becomes the map computed in step 4 when the functors are identified using $c_0,c'_0$. This also proves the asserted specialization for any initial compactification. No compactification-independence lemma with an extra qcqs hypothesis is needed.",
    "uses": [
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "def-cbc-exchange-map"
+    "thm-cbc-finite-torsion",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
-  },
-  {
-   "text": "A finite commutative coefficient ring is additively torsion. Apply the finite-ring form isIso_baseChange_of_isProper_of_isAddTorsion_ring of [thm-weil-pbc-bounded-below] to the supplied cartesian square. The equality baseChange_eq_derivedBaseChangeMapPlus identifies that invertible transformation with the specified proper derived exchange. Pair this invertibility with the equality already proved.",
-   "uses": [
-    "thm-weil-pbc-bounded-below",
-    "def-weil-pbc-derived-exchange"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/_section.md",
+    "place": "Single proof paragraph: identity compactification, independence, and specialization of sk-prop-sf-cbc to proper base change"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-projection-compactification",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-proetale-extension-zero",
+  "def-compact-support-direct-image-detailed",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-cbc-extension-zero-base-change",
   "def-cbc-exchange-map",
   "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-etale-shriek-compactification-independence",
-  "thm-weil-pbc-bounded-below"
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-cbc-finite-torsion",
+  "def-weil-proper-morphism"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "F4",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/cor-cbc-proper-coincidence.md",
-  "place": "Identity-open normalization proof, expanded using the existing compact-support formalism identity/refinement laws and the ordinary proper-base-change theorem."
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-comp-proper/_section.md",
+  "place": "Single proof paragraph, expanded by the identity-open adjunction mate and its naturality square; Stacks Tags 03S3, 03S6 and 0F7L supply the constructions."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properCoincidence|shriekBaseChange|rightDerivedLowerShriek",
+   "results": "; no hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+   "results": "; CategoryTheory.Adjunction.leftAdjointIdIso, CategoryTheory.Adjunction.leftAdjointIdIso_inv_app, CategoryTheory.Adjunction.leftAdjointIdIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom; read Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:44-50: generic left-adjoint identity iso, not the etale compact-support exchange theorem",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image with compact support of a proper morphism equals usual derived direct image and its base change map",
+   "results": "; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.Scheme.Hom.isProperMap; hits concern structure-sheaf modules, open immersions, or stability of properness, not the required etale derived compact-support exchange",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism the compact support base change exchange equals the derived direct image proper base change map under the identity compactification",
+   "results": "; AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; hits concern structure-sheaf modules, open immersions, or stability of properness, not the required etale derived compact-support exchange",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.by.zero|proper.base.change|compact.support",
+   "results": "; no hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for the identity open immersion and naturality of the compactification derived base change transformation",
+   "results": "; AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc; hits concern structure-sheaf modules, open immersions, or stability of properness, not the required etale derived compact-support exchange",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -119,5 +222,35 @@
   "landing": "20261019T112448-L-3942303",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "cor-cbc-proper-coincidence",
+  "worker": "stage1",
+  "group": "Q98",
+  "summary": "Made the finite-ring bounded-below etale coefficient setting explicit, repairing an imported pro-etale/etale type mismatch. Replaced implementation-level proof sketches by an identity-open sheaf/counit normalization, computation of the specified extension-zero mate, and an explicit naturality equality. Existing finite-torsion CBC supplies invertibility and compactification compatibility; no new nodes. Review FIX (Q98 maintainer reader): restored the finite-level pro-etale identity-open identification Rf_{!,n}=Rf_{*,n} of def-compact-support-direct-image-detailed (old statement's reference, used by reviewed citers) as a defined clause with its own step 2; no pro-etale exchange claim.",
+  "blueprint": "The single paragraph of sk-prop-sf-comp-proper is realized by steps 1-2 (identity compactification and j_!=id, etale and finite-level pro-etale), 3-4 (Ex_! is Ex_*), and 5 (independence and proper-base-change specialization).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic explicit extension-zero adjunction and its counit are needed to normalize the identity-open mate; no node of the proper-coincidence unit states this sheaf-level tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Identifies the finite-ring module exchange with the abelian mate of def-weil-pbc-derived-exchange, preventing an unjustified coefficient-category identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-1fbda5599",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-1fbda5599 (reviewer sub-agent of L); spot-checked: Read the full item: statement, 4 delivered steps, every cited statement, the unit sk-prop-sf-comp-proper and the main-20261015 text, Stacks 03S3/03S4/03S6 (etale-cohomology.tex 11361/11418/11493) and 0F7L (more-etale.tex 3429). No new nodes, no SGA. The item is already Lean-closed: ProperCoincidenceNormalized.lean, reviewed_proof 2026-10-19. The delivered square alpha_{f'}∘Ex_!^{c0} = Ex_*∘g^{-1}(alpha_f) with IsIso is exactly the landed Etale.properCoincidence_exchange. The STATEMENT-DISPUTED diagnosis is correct: the old text mixed the pro-etale A_{E,n} def-compact-support-direct-image-detailed with the etale finite-Lambda Ex_! of def-cbc-exchange-map, so the old equation was untyped. The etale retyping is not a weakening. Steps checked. Step 1: for j=id, j_{p!}F=F, and the explicit counit of lem-weil-pbc-extension-by-zero-adjunction fixes a_T. Step 2: the unit-mate inverse of lem-cbc-extension-zero-base-change gives a_{X'}∘beta = g'^{-1}a_X. Step 3: re-derived from the def-cbc-exchange-map composite and naturality of the mate (lem-weil-pbc-exchange-forget-coefficients (3)). Step 4: thm-cbc-finite-torsion applies to c0 with no qcqs hypothesis, the closure is acyclic, and the theorem gives invertibility and compactification independence. Edge cases f=id, g=id, empty X, Lambda=0 all hold. Tool uses (extension-by-zero adjunction, exchange-forget-coefficients) accepted as generic. FIX (citer-clause drop): the rewrite deleted the finite-level pro-etale identity-open identification Rf_{!,n}=Rf_{*,n} of def-compact-support-direct-image-detailed. Reviewed citers take exactly that from this item: lem-trf-proper-composition-site-transport (s=p), det-sp-trace-basic step 6, thm-pod-proper-poincare-duality step 2, def-pod-trace-cup-reading. The item's Lean also owns ProEtale.properCoincidenceIdentityOpenPlus. Restored as a definitional statement paragraph: alpha^proet = Rf_{*,n}(a^proet), with a^proet from the sheafification description of def-weil-extension-by-zero, and no pro-etale exchange claim. New stmt_deps: def-compact-support-direct-image-detailed, def-weil-extension-by-zero, def-weil-derived-direct-image. Added an elementary step 2 (P_M=M for id, sheafification of a sheaf, exactness via lem-cbc-proetale-extension-zero) and renumbered the step cross-references. Maintainer notes: this is an S1 split of an item whose Lean proof already landed. The Lean proof gets invertibility from thm-weil-pbc-bounded-below while DAG step 5 uses thm-cbc-finite-torsion; both are valid, advisory only.; 1 file(s) fixed by the reviewer"
  }
 }
