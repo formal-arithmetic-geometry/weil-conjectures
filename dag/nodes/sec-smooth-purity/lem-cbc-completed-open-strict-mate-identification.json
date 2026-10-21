@@ -23,9 +23,140 @@
   "lem-cbc-exact-product-functor-strict-limit",
   "lem-cbc-completed-ring-strict-finite-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-completed-ring-strict-finite-exchange] with $X=T$, $X'=T'$, $g=u$, $g_U=v$. Precompose its source with the assumed canonical identification $(j_!K)_\\bullet\\simeq J_jK_\\bullet$. This gives the specified isomorphism $\\omega_K:Q\\simeq Q'$ together with its inverse on simultaneous strict diagram representatives. The cited assertion supplies completed-ring linearity, all quotient-transition squares, and the inverse's open-unit transpose normalization. Thus this step selects the actual strict map, rather than selecting finite derived arrows and attempting to lift them. No completeness condition is needed for this application; the completeness assumptions will type the completed endpoints.",
+   "uses": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  },
+  {
+   "text": "Fix the scalar and finite-reduction endpoint comparisons $a,b$ in the question using [lem-weil-pbc-constant-completion-equivalence]. Restriction of scalars keeps the underlying abelian sheaves and maps [def-pc-sheaf-restrict-scalars]. It commutes with open extension: on its presheaf [def-weil-extension-by-zero-presheaf] both orders give the identical direct sum of the same sections with the restricted action; [def-weil-presheaf-modules-sheafification] sheafifies precisely that abelian presheaf. The extension adjunction unit is the same section on an object over the open, by [lem-sf-open-tensor-normalization]. Consequently the scalar/open comparison preserves this unit; this is the isomorphism $e$ of [lem-cbc-ringed-open-scalar-limit-coherence], which identifies the units and counits of the two open-extension adjunctions on sheaves, complexes and derived strict towers. The finite-reduction comparisons commute with quotient transitions by the completion-equivalence lemma, so $a,b$ compare strict diagrams, with these unit identifications, before passing to their derived categories. On strict flat representatives the finite tensor comparisons reassociate tensor factors and send a local pure tensor to the same tensor. Applying an open unit changes only its section by the identity on the open. Thus these comparisons intertwine the pulled-back unit and the inverse-image square compositor; the equality persists after deriving.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-ringed-open-scalar-limit-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  },
+  {
+   "text": "Write $H=G_vM$, and denote the constant-coefficient open unit by $e_M:M\\to G_jJ_jM$. Let $t_H:H\\to G_{j'}N$ be $G_v(e_M)$ followed by the canonical inverse-image square identification. By [lem-cbc-strict-tower-proper-open-calculus], $\\beta_{j,u,M}^{-1}$ is the $J_{j'}\\dashv G_{j'}$ adjunct of $t_H$. Compute the restricted inverse from Step 1 using Step 2. Its unit is $e_M$, its square comparison is the same inverse-image comparison, and its transpose is therefore exactly $t_H$. This calculation is valid for strict diagram topoi by [lem-sf-open-tensor-normalization]. By the mate formula of [def-weil-pbc-adjunction-mate], on representatives its adjunct is the explicit composite $J_{j'}H\\xrightarrow{J_{j'}t_H}J_{j'}G_{j'}N\\xrightarrow{\\varepsilon'_N}N$. The scalar compatibility of the finite units, counits and transitions is [lem-cbc-finite-open-exchange-scalars]. Hence the restricted inverse and the constant inverse are the same strict diagram map, with source and target compared by $b$ and $a$.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-finite-open-exchange-scalars",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  },
+  {
+   "text": "Localize the strict representative equality of Step 3 at tower quasi-isomorphisms. The uniqueness and composition clauses of [lem-weil-pbc-localization-universal-property] identify the descended maps, including the comparisons of representatives. They give $a\\,r_{T'}(\\omega_K^{-1})\\,b^{-1}=\\beta_{j,u,M}^{-1}$ in the derived category of constant-$A$ strict towers. Invert this equality and multiply on the right by $a$ to obtain $b\\,r_{T'}(\\omega_K)=\\beta_{j,u,M}a$. This argument descends equality of strict maps; it never infers equality from equality of their derived evaluations.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  },
+  {
+   "text": "The open $j'$ is quasi-compact by [lem-pc-quasi-compact-base-change], applied to the given cartesian square and the assumed quasi-compact $j$. Its constant-$A$ ringed extension by zero is exact by [lem-pur-site-restriction-module-adjunction-exact] and preserves countable products with the canonical projection comparison by [lem-cbc-ringed-open-extension-products]. Countable products in both constant-$A$ module-sheaf categories are exact by [lem-weil-proetale-countable-products-exact]. Apply [lem-cbc-exact-product-functor-strict-limit] to this exact functor. At $H=G_vM$ it supplies precisely the specified normalized isomorphism $\\lambda_{j',H}:j'_!L_{U'}H\\simeq L_{T'}J_{j'}H=L_{T'}N'$.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-completed-pullback] to identify the completed source with the completed-ring derived limit of $Q$ and the completed pullback on $U'$ with the limit of $Lv^*_{\\operatorname{Tow}}K_\\bullet$. The scalar comparisons of [lem-weil-pbc-constant-completion-equivalence] identify these limits and their quotient-tower completion units with the constant-coefficient limits. Write $\\lambda_{r}$ for the normalized scalar/limit comparison $r\\,R\\lim\\xrightarrow{\\sim}L\\,r$ of [lem-cbc-exact-product-functor-strict-limit] for the exact, product-preserving functor $r$ (identity product comparison on underlying abelian sheaves). The source comparison is therefore $L_{T'}(a)\\circ\\lambda_{r_{T'},Q}$. For the target apply [lem-cbc-ringed-open-scalar-limit-coherence] to the quasi-compact open $j'$ of Step 5, the ring map $\\underline A_{T'}\\to A_{T'}$ and $M'=Lv^*_{\\operatorname{Tow}}K_\\bullet$: its natural isomorphism $e:r_{T'}J_{j'}\\simeq J_{j'}r_{U'}$ identifies the open units, and its displayed equation $L_{T'}(e_{M'})\\lambda_{r_{T'},J_{j'}M'}r_{T'}(\\lambda^{\\mathrm{comp}}_{j',M'})=\\lambda_{j',r_{U'}M'}\\,j'_!(\\lambda_{r_{U'},M'})\\,e_{R\\lim M'}$ rewrites the scalar restriction of the completed extension/limit comparison $\\lambda^{\\mathrm{comp}}_{j'}$ used in [lem-cbc-completed-extension-zero-comparison] as the constant-$A$ comparison $\\lambda_{j'}$. Composing with $j'_!L_{U'}$ of the $U'$-level comparison $r_{U'}M'\\simeq G_vM$ (whose $J_{j'}$-image after $e$ is $b$) and naturality of $\\lambda_{j'}$ gives the target endpoint $r(j'_!Lv^*_{\\mathrm{comp}}K)\\simeq j'_!L_{U'}H$, and shows that $r_{T'}(\\lambda^{\\mathrm{comp},-1}_{j'})$ becomes $\\lambda_{j',H}^{-1}\\circ L_{T'}(b)$ under these endpoint identifications. The normalized $\\lambda$ of Step 5 is the comparison from preserving ordinary inverse limit and resolving the image tower, as stated in [lem-cbc-exact-product-functor-strict-limit]. Its strict-augmentation clause preserves the quotient-tower completion maps. These facts fix the endpoint identifications with their units, without choosing an arbitrary isomorphism between the limits.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-cbc-ringed-open-scalar-limit-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: take the defining derived limits; normalized strict-limit and completion-unit refinement."
+   }
+  },
+  {
+   "text": "By the definition of the canonical map in [lem-cbc-completed-extension-zero-comparison], first take derived limit of the finite open exchange and then apply the inverse extension/limit comparison. Here those finite arrows are the actual simultaneous strict map $\\omega_K$ of Step 1. Functoriality of derived inverse limit [prop-weil-pbc-rlim-functoriality], naturality of $\\lambda_r$ applied to $\\omega_K$, and the endpoint comparisons of Step 6 (the scalar/open limit square of [lem-cbc-ringed-open-scalar-limit-coherence] for the final factor) therefore express the restricted completed map, in the stated endpoints, as the ordered composite\n$$\\lambda_{j',H}^{-1}\\circ L_{T'}(b)\\circ L_{T'}(r_{T'}\\omega_K)\\circ L_{T'}(a)^{-1}.$$\nApply $L_{T'}$ to the strict-derived equality in Step 4. The middle three factors become $L_{T'}(\\beta_{j,u,M})$. Thus the ordered composite is exactly $\\lambda_{j'}^{-1}\\circ L_{T'}(\\beta_{j,u,M})$, as required.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-cbc-ringed-open-scalar-limit-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite exchanges followed by the extension/derived-limit comparison, with its order made explicit."
+   }
+  },
+  {
+   "text": "All maps used above are natural in $K$: Step 1 supplies a natural strict isomorphism, the scalar/reduction comparisons are natural, the constant open mate is natural, and $\\lambda$ is a natural transformation. Composing their naturality squares proves naturality of the two displayed equalities. Applying evaluation to the already constructed $\\omega_K$ recovers the specified finite open exchange by [lem-cbc-completed-ring-strict-finite-exchange]. No part of Steps 1--7 uses etale-origin data or boundedness: the finite strict assertion is unbounded, and the exact-product comparison applies to arbitrary strict tower complexes.",
+   "uses": [
+    "lem-cbc-completed-ring-strict-finite-exchange",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero: explicit transpose from the extension-by-zero presheaf; strict-diagram and derived refinements are agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-finite-open-exchange-scalars",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-cbc-ringed-open-scalar-limit-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange and final derived-limit paragraphs, refined with the strict unit-transpose construction of Stacks Tag 03DI (sites-modules.tex, lemma-extension-by-zero)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +206,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
    "verdict": "no match: no such extension-by-zero declaration in CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*(exchange|baseChange)|completed.*(mate|exchange)|strict.*tower",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction, scalar-restriction, or sheaf pullback declarations do not state the normalized strict-tower and completed-limit equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with derived inverse limits of strict towers and preserves the base change adjunction mate",
+   "results": "8 hits: CategoryTheory.Adjunction.homAddEquiv_symm_zero, CategoryTheory.Functor.preservesZeroMorphisms_of_isLeftAdjoint, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Functor.preservesZeroMorphisms_of_isRightAdjoint, DerivedCategory.instHasZeroObject, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Abelian.Ext.zero_hom, CategoryTheory.Limits.spanExt_inv_app_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction, scalar-restriction, or sheaf pullback declarations do not state the normalized strict-tower and completed-limit equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction, scalar-restriction, or sheaf pullback declarations do not state the normalized strict-tower and completed-limit equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars identifies the strict tower open base change unit mate and its derived inverse limit completed comparison",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'_inv_app, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.restrictScalarsComp'App_inv_apply, ModuleCat.restrictScalarsId'App_inv_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction, scalar-restriction, or sheaf pullback declarations do not state the normalized strict-tower and completed-limit equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change for extension by zero is the inverse transpose of the pulled back adjunction unit for a Cartesian open square",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev, CategoryTheory.ExponentiableMorphism.ev_def",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction, scalar-restriction, or sheaf pullback declarations do not state the normalized strict-tower and completed-limit equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-complete-proetale-strict-tower-realization",
@@ -97,5 +263,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-completed-open-strict-mate-identification",
+  "worker": "stage1",
+  "summary": "Q106: supplied eight explicit steps using existing strict finite exchange, unit-normalized diagram open tensor, scalar completion and normalized exact-product/derived-limit nodes. Proved equality on strict representatives before descent, and computed the ordered completed composite. No statement change and no new nodes.",
+  "blueprint": "thm-cbc-complete-proetale proof, first sentence: the two isomorphisms defining def-cbc-completed-exchange-map; realizes its final open factor through the finite-exchange and final limit paragraphs of lem-cbc-completed-extension-zero-comparison.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "The constant/completed coefficient equivalence supplies finite-reduction, limit and completion-unit identifications already required in the statement."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The arbitrary-ringed-diagram open unit and transpose normalization identifies the actual scalar-restricted map; this is a general adjunction/tensor tool, not an alternate compact-support base-change proof."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic uniqueness of descent transports equality of actual strict chain maps to derived morphisms."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic base-change stability types the quasi-compact open product comparison for j prime."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact localized ringed adjunction supplies the existing open extension functor."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic module-sheaf exactness supplies the product hypothesis of the in-unit normalized limit comparison."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic strict derived-limit functoriality permits applying L to the already established equality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-751be40ba",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-751be40ba (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited nodes in full, plus Stacks 03DI (sites-modules l.2058) and the main-20261015 lem-cbc-completed-extension-zero-comparison proof. The statement is unchanged. The item is not dropped, has no re-split note, has no new nodes and is still unsplit live. I found no duplicate: the lem-zl-framework and lem-fix compactification comparisons state other things. Steps 1-5 and 8 are correct. The strict finite exchange supplies the simultaneous strict maps and the inverse open-unit transpose; restriction to constant A preserves the units (open-tensor-normalization, finite-open-exchange-scalars over a ring sheaf acting through (P_n)); the strict equality descends to b r(omega) = beta a (I checked the inversion order); and Step 5 checks every hypothesis of the exact-product lemma for j'_! (j' quasi-compact by base change). Defect (C1/C4/E5): Steps 6-7 turn the scalar restriction of the completed-ring extension/limit comparison lambda^comp_{j'} into the constant-A lambda_{j'}. That needs the pasting equation between the scalar/limit comparisons lambda_r, the iso e: r J = J r and the two lambda_J; the step only gestured at it, through a one-functor characterization. The existing same-unit node lem-cbc-ringed-open-scalar-limit-coherence states exactly this equation; it is unsplit with no proof deps, so citing it creates no cycle, and its hypotheses hold (j' quasi-compact; constant A -> completed A ring map). FIX: Steps 2, 6 and 7 now cite it, Step 6 writes out the source comparison L(a) lambda_r and the target comparison via the lemma's equation, and proof_deps is updated. I checked the edge cases U empty, u = id, K = 0 and unbounded K. I accepted the generic tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
