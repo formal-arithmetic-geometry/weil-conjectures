@@ -20875,3 +20875,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/N5/lem-pur-etale-direct-image-scalar-exchange (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/NZ/lem-weil-pbc-kinjective-exact-square-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q41/lem-sfb-slice-scalar-hom-chain-adjunction (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q58/lem-trf-finite-ring-section-deformation (reviewer PASS; after a return; new nodes: 8)

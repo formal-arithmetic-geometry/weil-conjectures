@@ -36,295 +36,103 @@
  ],
  "proof": [
   {
-   "text": "Work locally on $S$ with an affine open $S_i$ and an affine neighbourhood $U_i$ of $s(S_i)$ in $V\\times_SS_i$. Such neighbourhoods exist: start at $s(b)$, choose an affine neighbourhood in $V$, and shrink the base inside its inverse image under $s$. The smooth normal form gives a separated etale map $e_i:U_i\\to\\mathbf A^d_{S_i}$, with $d$ the given relative dimension. Subtract the values of its coordinates on the section, so $e_is=0$. The inverse image $P_i=e_i^{-1}(0)$ is separated etale over $S_i$ and its section is open and closed. Its complement to $s(S_i)$ is closed in $P_i$, hence closed in $U_i$. Remove that complement, and choose affine neighbourhoods and shrink the base once more if needed. Thus the centre square is Cartesian. Write $S_i=\\operatorname{Spec}R$, $U_i=\\operatorname{Spec}B$, $P=R[x_1,\\ldots,x_d]$, $J=(x_1,\\ldots,x_d)$; then $I=JB$ and $B/I=R$. The etale algebra $B$ is flat over $P$.",
+   "text": "Apply the centred-coordinate lemma to $(g,s)$, obtaining a regular section, rank-$d$ conormal and its canonical symmetric-to-graded isomorphism. The Rees-geometry lemma then gives $D$, its closed section, the two pairs, smooth Noetherian geometry and all required compactifications.",
    "uses": [
-    "sbc-thm-etale-local-normal-form",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-affine-source-morphism-separated",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-separated-base-change",
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "sbc-lem-affine-space-smooth"
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-trf-section-rees-noetherian-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, first paragraph; Stacks 054L/lemma-smooth-etale-over-affine-space and 024T/proposition-properties-sections"
+    "place": "Assembly of extracted arguments; 1, 2"
    }
   },
   {
-   "text": "The coordinates $x_1,\\ldots,x_d$ are a regular sequence in $P$: successive quotients are polynomial rings over $R$ and multiplication by the next variable is injective by comparison of coefficients. Flat tensor exactness for $P\\to B$ preserves these successive injections, so their images form a regular sequence defining the section. Tensoring $0\\to J^{m+1}\\to J^m\\to J^m/J^{m+1}\\to0$ identifies $I^m/I^{m+1}$ with $B\\otimes_P(J^m/J^{m+1})$. The monomials of degree $m$ give an $R$-basis of $J^m/J^{m+1}$, and $B\\otimes_PR=B/I=R$. Hence $I/I^2$ is free of rank $d$, and the canonical multiplication map $\\operatorname{Sym}_{B/I}(I/I^2)\\to\\bigoplus_{m\\geq0}I^m/I^{m+1}$ is an isomorphism, sending each basis monomial to its class. These canonical maps agree on restrictions. This proves regularity, codimension $d$ in the regular-immersion sense, local freeness of the conormal, and the global symmetric-to-graded identification.",
+   "text": "The Rees functoriality lemma identifies the entire family and its sections after arbitrary Noetherian base change. For an etale neighbourhood it identifies the zero-fibre map with the induced linear normal-bundle isomorphism.",
    "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-pur-conormal-graded-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, regular-coordinate algebra; compare Stacks 067U/lemma-immersion-smooth-into-smooth-regular-immersion"
-   }
-  },
-  {
-   "text": "The etale Rees chart lemma gives\n$$B[t,I/t]\\cong B\\otimes_P R[t,u_1,\\ldots,u_d],\\qquad x_j\\mapsto tu_j.$$\nThus the induced deformation chart $D_{U_i}\\to\\mathbf A^d_{\\mathbf A^1_{S_i}}$ is etale and its structural morphism is smooth of relative dimension $d$. In the full extended Rees algebra the Laurent coefficient in degree $-m$ is $I^m$, for $m>0$, and in degree $k\\geq0$ it is $B$. Quotient by $t$ therefore has pieces $I^m/I^{m+1}$. Step 2 identifies its spectrum with $N_s$ and its augmentation with the zero section. Inverting $t$ gives $\\mathcal O_V[t,t^{-1}]$, with section $s\\times1$; evaluating at $1$ gives $(V,s)$. The charts $D_{U_i}$ cover the zero fibre because their images cover the centre; together with the punctured deformation they cover $D$. Smooth permanence on the punctured part and on the etale charts proves smoothness of $\\widetilde g$ of dimension $d$ everywhere.",
-   "uses": [
-    "lem-pur-dnc-etale-rees-chart",
-    "lem-pur-conormal-graded-algebra",
-    "lem-sbc-smooth-relative-dimension-permanence"
+    "lem-trf-section-rees-base-change-etale"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, deformation charts and the two fibres"
+    "place": "Assembly of extracted arguments; 3"
    }
   },
   {
-   "text": "Every affine ideal of the centre is finitely generated since $V$ is Noetherian: $V$ is finite type over the Noetherian $S$. If $I=(f_1,\\ldots,f_r)$, its extended Rees algebra is generated by $t,f_1/t,\\ldots,f_r/t$. Consequently $D\\to V$ is finite type, so $D$ is Noetherian. Its map to $V\\times_S\\mathbf A^1_S$ is affine and hence separated. Composing with the separated base change of $g$ proves that $\\widetilde g$ is separated. The bundle $\\pi$ is affine, separated, smooth of dimension $d$ and finite type by its local polynomial descriptions. Every Noetherian scheme here is quasi-compact and quasi-separated: an open subscheme of a Noetherian scheme is quasi-compact, in particular every intersection of two affine opens. Nagata therefore supplies compactifications of $\\pi$, $\\widetilde g$, and every separated finite-type chart map and composite used below. Their open source schemes are again Noetherian.",
+   "text": "The local dualizing-comparison lemma supplies the shifted rank-one sheaves, the specified fibre maps $\\theta,\\eta$, and normalized local maps. Apply normalized shifted-line descent with $m=2d$ to obtain the unique $\\kappa$ with $i_1^*\\kappa=\\theta$. Set $\\delta=\\eta\\circ(i_0^*\\kappa)^{-1}$; under the stipulated fibre identification this is the asserted inverse-zero formula.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-separated-base-change",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-asd-vector-bundle-zero-section",
-    "sbc-lem-affine-space-smooth",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "thm-nagata-compactification"
+    "lem-trf-section-local-dualizing-comparisons",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, finite type and compactifiability of the Rees family"
+    "place": "Assembly of extracted arguments; 4, 5"
    }
   },
   {
-   "text": "For arbitrary, possibly nonflat, $S'\\to S$, work over an affine $\\operatorname{Spec}R'\\subset S'\\times_SS_i$. Put $P'=R'[x]$, $B'=B\\otimes_RR'$, $I'=JB'$. The chart $P'\\to B'$ is etale and flat. Applying the Rees chart formula before and after this change gives\n$$B[t,I/t]\\otimes_RR'\\cong B'\\otimes_{P'}R'[t,u]\\cong B'[t,I'/t].$$\nThe maps send $t$ to $t$, $b$ to $b\\otimes1$, and $x_j/t$ to $x'_j/t$; likewise the conormal basis $[x_j]$ maps to $[x'_j]$. Off $t=0$ the equality is simply Laurent-polynomial base change. These canonical maps agree on restrictions and glue, proving compatibility of the entire deformation, both sections and both fibre identifications with arbitrary base change. Smoothness and relative dimension survive by smooth permanence; the base-changed closed section is still closed. Its separated finite-type structural maps are again compactifiable by Step 4 over the Noetherian $S'$.",
+   "text": "For $v:S^{\\prime}\\to S$, fibre coherence gives $\\theta^{\\prime}i_1^{\\prime *}b_F=b_Cv^*\\theta$ and $\\eta^{\\prime}i_0^{\\prime *}b_F=b_Hv^*\\eta$. Hence $a^{\\prime *}b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}$ is normalized at $1$. Uniqueness identifies it with $\\kappa^{\\prime}$; restricting at $0$ and inverting yields $\\delta^{\\prime}b_C=b_Hv^*\\delta$.",
    "uses": [
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-pur-dnc-etale-rees-chart",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-pod-separated-finite-type-base-change",
-    "thm-nagata-compactification"
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, explicit base-change maps"
+    "place": "Assembly of extracted arguments; 6, 5"
    }
   },
   {
-   "text": "For a separated etale map $h:V'\\to V$ of neighbourhoods over $S$ with a Cartesian square of centres, on affine charts write $B\\to B'$ and $I'=IB'$. Flat tensor exactness identifies $B'\\otimes_BI^m$ with $I'^m$ and $B'\\otimes_B(I^m/I^{m+1})$ with $I'^m/I'^{m+1}$. Tensoring the Laurent degree pieces yields $B'\\otimes_BB[t,I/t]\\cong B'[t,I'/t]$, inside $B'[t,t^{-1}]$. Thus the deformation map is a base change of $h$, hence etale. On the zero fibre its degree-one map is the conormal pullback isomorphism $[b]\\mapsto[h^\\sharp b]$; the induced symmetric-algebra map is exactly the linear isomorphism of normal bundles. The maps fix $t$ and preserve augmentations, so they preserve the sections and the fibre at $1$.",
+   "text": "For an etale map of pairs use the locality maps $b_C,b_F,b_H$. Fibre coherence makes $a^*b_C\\circ\\kappa\\circ b_F^{-1}$ normalized, so uniqueness gives $\\kappa_1$ and restriction at zero gives $\\delta_1b_C=b_H\\delta$. Step 2 identifies this $b_H$ with the comparison for the induced linear map.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-pur-conormal-graded-algebra",
-    "def-asd-vector-bundle-zero-section"
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, etale maps of pairs; orientation-charts proof Steps 1–2"
+    "place": "Assembly of extracted arguments; 6, 5"
    }
   },
   {
-   "text": "Apply the ordinary-etale smooth tensor theorem to $g$, $\\pi$, and $\\widetilde g$. Their sources and bases are Noetherian, the maps are separated, compactifiable, smooth of dimension $d$, and the same finite ring $A$ is killed by $N$, which remains invertible on every scheme involved. Thus $\\omega_b[-2d]$ is a locally constant free rank-one sheaf. Exact constant-coefficient inverse image preserves this property, giving the asserted statements for $C[-2d]$ and $F[-2d]$. No change of coefficient category is involved.",
+   "text": "The coordinate-counit lemma says the local map obtained from the Kummer-normalized affine-space adjoint orientations is already normalized: its correction $h_i$ is the identity. Uniqueness therefore identifies its identity in Tate-line coordinates with the restriction of $\\kappa$ in every centred section chart.",
    "uses": [
-    "thm-asd-smooth-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-trf-section-coordinate-counit-normalization",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Opening paragraph: shifted locally constant dualizing lines"
+    "place": "Assembly of extracted arguments; 7, 5"
    }
   },
   {
-   "text": "Apply counit-defined exceptional base change to $\\widetilde g$ and $i_r:S\\to\\mathbf A^1_S$, $r=0,1$, and pull to the section. With Step 3 this gives the specified isomorphisms\n$$\\theta:i_1^*F\\xrightarrow{\\sim}C,\\qquad \\eta:i_0^*F\\xrightarrow{\\sim}z^*\\omega_\\pi.$$\nThe theorem applies to these closed changes of base without a flatness assumption. All pullbacks are the exact inverse images stipulated in the statement.",
+   "text": "Apply the bundle-section orientation lemma to $N_s$: its frame restrictions glue, linear changes preserve them, and for valuation-ring quotients it equals the section restriction of inverse vector-bundle purity. Its dimension-zero clause and the coordinate identity adjunction give the required standard-pair identities for $d=0$.",
    "uses": [
-    "prop-asd-smooth-base-change",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-section-coordinate-counit-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Opening paragraph: fibre identifications"
-   }
-  },
-  {
-   "text": "Etale locality of the compact-support right adjoint identifies its restriction to $U_i$ with $e_i^*\\omega_{p_d}$, and on the deformation chart identifies its restriction with $\\widetilde e_i^*\\omega_{p_{d,\\mathbf A^1_{S_i}}}$. Here the open restrictions and chart composites satisfy the Noetherian and compactifiability hypotheses by Step 4. The affine-space adjunction, compared with the Brown right adjoint by uniqueness respecting counits, identifies these dualizing objects with $A(d)[2d]$. Tate pullback then identifies both section restrictions with the corresponding pullbacks of $A_{S_i}(d)[2d]$. Smooth base change for $S_i\\to S$ makes this a local isomorphism $\\lambda_i:F|_{\\mathbf A^1_{S_i}}\\to a_i^*(C|_{S_i})$. Define $h_i=(i_1^*\\lambda_i)\\theta_i^{-1}$ and replace $\\lambda_i$ by $a_i^*h_i^{-1}\\lambda_i$. This gives $i_1^*\\lambda_i=\\theta_i$.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "cor-amb-affine-space-adjunction",
-    "det-sp-unique-right-adjoint",
-    "lem-asd-etale-finite-twist-pullback",
-    "prop-asd-smooth-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, affine-space adjunction and normalization"
-   }
-  },
-  {
-   "text": "Shift all local comparisons by $[-2d]$. Full faithfulness of degree-zero complexes identifies them with actual sheaf morphisms. On an overlap their ratio is an automorphism of $a^*C[-2d]$. In a basis it is multiplication by a section of the constant unit sheaf $A^\\times$; this description is independent of the basis since $A$ is commutative. More explicitly, the constant-module Hom lemma with $P=Q=A$ identifies local endomorphisms with scalar sections; the invertible ones are precisely the units. Pulling to a geometric fibre gives an automorphism of a constant free rank-one sheaf on $\\mathbf A^1_\\Omega$. The ring $\\Omega[t]$ is a domain, so its zero prime is dense and its spectrum is irreducible, hence connected. Sections of a constant sheaf on this connected scheme are constant. The ratio has value $1$ at $t=1$, so it is the identity on the entire fibre. Every geometric point of $\\mathbf A^1_S$ lies over such a geometric fibre. Exactness and conservativity of geometric stalks imply the ratio is globally the identity: the image of its difference from identity has zero stalks and hence is zero. The same argument proves uniqueness for any two global normalized comparisons.",
-   "uses": [
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-site-constant-module-hom",
-    "lem-weil-pbc-polynomial-ring-domain",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-pc-irreducible-space-connected",
-    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, connected geometric affine-line fibres"
-   }
-  },
-  {
-   "text": "Sheaf-Hom gluing applies to the normalized maps and their inverses, since Step 10 proves agreement on overlaps. They glue to inverse global maps. Shifting back yields $\\kappa:F\\xrightarrow{\\sim}a^*C$ with $i_1^*\\kappa=\\theta$, unique by Step 10. At $0$ the actual section comparison is\n$$\\delta=\\eta\\circ(i_0^*\\kappa)^{-1}:C\\xrightarrow{\\sim}z^*\\omega_\\pi.$$\nUnder the stipulated identification by $\\eta$ this is precisely the statement's formula.",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-weil-pbc-derived-single-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, global normalized comparison and restriction at zero"
-   }
-  },
-  {
-   "text": "We first check coherence of the fibre maps. For any smooth compactifiable $b$, let $b_v:v_X^*\\omega_b\\to\\omega_{b'}$ be the mate defined by transposing the pulled-back counit through inverse compact-support exchange. The unbounded compact-support exchanges commute with composite base changes and with composition of structural maps. Mate pasting therefore gives $b_{vw}=b'_w\\circ w_X^*b_v$, with the inverse-image compositors understood. For $v:S'\\to S$ write $b_C:v^*C\\to C'$, $b_F:\\bar v^*F\\to F'$ and $b_N:v^*z^*\\omega_\\pi\\to z'^*\\omega_{\\pi'}$ for their section pullbacks. The two decompositions of $\\bar v i'_r=i_rv$ and Step 5 give\n$$\\theta' i_1'^*b_F=b_Cv^*\\theta,\\qquad \\eta'i_0'^*b_F=b_Nv^*\\eta.$$\nThese identities establish coherence with the chosen fibre identifications; exactness of pullback alone would not suffice.",
-   "uses": [
-    "prop-asd-smooth-base-change",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, naturality of the normalized comparison under base change"
-   }
-  },
-  {
-   "text": "All maps $b_C,b_F,b_N$ are isomorphisms by exceptional smooth base change. The candidate comparison over $S'$ is\n$$\\kappa^v=a'^*b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}.$$\nIts restriction at $1$ is $\\theta'$ by Step 12, so uniqueness gives $\\kappa^v=\\kappa'$. At $0$, the second equality in Step 12 and the inverse formula of Step 11 give $\\delta'b_C=b_Nv^*\\delta$. These are the required compatibilities with arbitrary Noetherian changes of base.",
-   "uses": [
-    "prop-asd-smooth-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, uniqueness and arbitrary-base-change compatibility"
-   }
-  },
-  {
-   "text": "For an etale map of pairs as in Step 6, the locality isomorphisms for right adjoints give $b_C:C\\to C'$ and $b_F:F\\to F'$ on the common bases, and the induced normal-bundle linear isomorphism gives $b_N:z^*\\omega_\\pi\\to z'^*\\omega_{\\pi'}$. Compatibility of locality with the fibre comparisons follows from the same mate-pasting calculation: locality is the comparison between the composite adjunction for $Rh_!\\dashv h^*$ and the compact-support adjunction for the composite structural map. Compact-support composition and base-change coherence commute these two decompositions; pasting mates yields $\\theta'i_1^*b_F=b_C\\theta$ and $\\eta'i_0^*b_F=b_N\\eta$. Thus $a^*b_C\\circ\\kappa\\circ b_F^{-1}$ is normalized at $1$ and equals $\\kappa'$ by Step 10. Restriction at $0$ gives $\\delta'b_C=b_N\\delta$. This proves the etale-neighbourhood compatibility with exactly the linear map of Step 6.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-weil-pbc-mate-pasting",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction and orientation-charts proof Step 3, etale locality"
-   }
-  },
-  {
-   "text": "For the standard pair the Rees calculation is $R[t,u]$ with $x_j=tu_j$. Identify $\\omega_{p_d}$ and its affine-line base change by the adjoints of the specified Kummer-normalized coordinate-tower counits. The actual trace maps commute with arbitrary Noetherian base change. Transposing their equality and comparing right adjoints by their counits gives that the exceptional fibre comparison at $1$ is the identity in these orientations. For a section chart $e_i$, locality and fibre comparison commute by the pasting calculation of Step 14. Thus the unnormalized chart map $\\lambda_i$ of Step 9 already restricts to $\\theta_i$ when these orientations are used, so its correction $h_i$ is the identity. Consequently $\\kappa$ is precisely the identity between the two pullbacks of the affine-space dualizing line in every such chart, as asserted.",
-   "uses": [
-    "lem-amb-affine-space-top-trace",
-    "cor-amb-affine-space-adjunction",
-    "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-mate-pasting",
-    "lem-amb-etale-adjoint-locality",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, standard model; orientation-charts proof Step 3"
-   }
-  },
-  {
-   "text": "On a trivializing open of $N_s$, pull the inverse of the adjoint affine-space orientation to its zero section, obtaining $z^*\\omega_\\pi\\to A_S(d)[2d]$. On overlaps two trivializations differ by an invertible linear change of coordinates. Linear trace invariance says their coordinate-tower counits agree after this change. Uniqueness of right adjoints compatible with counits gives equality of the adjoint orientations. After section restriction they are maps between shifted sheaves, so full faithfulness and sheaf-Hom gluing give the stated normal-bundle orientation for arbitrary finite $A$. Linear isomorphisms preserve it by exactly the same equality. For coefficients in the scope of the vector-bundle-purity theorem, that theorem defines its integration by these same affine traces; its inverse purity map therefore has the same local restrictions and agrees after gluing. When $d=0$ the standard adjunction is the identity and all coordinate calculations have no variables; the claimed identities follow. If $S$ is empty all maps are unique; if $A$ is the zero ring all module sheaves vanish, and the comparisons remain unique isomorphisms.",
-   "uses": [
-    "def-asd-vector-bundle-zero-section",
-    "lem-amb-linear-trace-invariance",
-    "lem-amb-affine-space-top-trace",
-    "det-sp-unique-right-adjoint",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "thm-amb-vector-bundle-purity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction and orientation-charts proof Step 4, linear normalization"
+    "place": "Assembly of extracted arguments; 8, 7"
    }
   }
  ],
  "proof_deps": [
-  "sbc-thm-etale-local-normal-form",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-separated-base-change",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "sbc-lem-affine-space-smooth",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-pur-conormal-graded-algebra",
-  "lem-pur-dnc-etale-rees-chart",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-proper-fp-permanence",
-  "def-asd-vector-bundle-zero-section",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "thm-nagata-compactification",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-pod-separated-finite-type-base-change",
-  "thm-asd-smooth-tensor",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-asd-smooth-base-change",
-  "lem-amb-etale-adjoint-locality",
-  "cor-amb-affine-space-adjunction",
-  "det-sp-unique-right-adjoint",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-pur-site-constant-module-hom",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-  "lem-pc-irreducible-space-connected",
-  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-weil-pbc-mate-pasting",
-  "lem-amb-affine-space-top-trace",
-  "lem-amb-linear-trace-invariance",
-  "thm-amb-vector-bundle-purity"
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-trf-section-rees-noetherian-geometry",
+  "lem-trf-section-rees-base-change-etale",
+  "lem-trf-section-local-dualizing-comparisons",
+  "lem-trf-etale-shifted-line-normalized-descent",
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-trf-section-coordinate-counit-normalization",
+  "lem-trf-finite-ring-bundle-section-orientation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Local construction and Gluing; adaptation to arbitrary finite rings and ordinary-etale Noetherian bases using the cited affine adjunctions; orientation-charts proof Steps 1–4."
+  "place": "Local construction and Gluing, regrouping the existing 16-step proof; orientation-charts proof Steps 1–4."
  },
  "mathlib_searches": [
   {
@@ -424,177 +232,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-trf-finite-ring-section-deformation",
-  "worker": "stage1",
-  "summary": "Expanded the normalized section deformation into explicit local coordinate/Rees geometry, rank-one sheaf gluing, counit-mate coherence, and coordinate/linear normalization. Reused existing DAG statements throughout; no new nodes. Corrected the out-of-scope vector-bundle-orientation reference by explicitly defining its finite-ring extension by affine trace gluing, retaining agreement with the existing valuation-ring-quotient theorem.",
-  "blueprint": "Realizes lem-trf-local-term-locality proof (2), normal-cone specialization, through the ambient diagonal purity input; follows sk-thm-dnc Local construction and Gluing, and orientation-charts Steps 1–4.",
-  "tool_uses": [
-   {
-    "node": "sbc-thm-etale-local-normal-form",
-    "why": "Used only for its stated Etale-local normal form of a smooth morphism assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Used only for its stated Base change and composition of smooth morphisms of fixed relative dimension assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-affine-source-morphism-separated",
-    "why": "Used only for its stated A morphism with affine source is separated assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-etale-scheme-base-change",
-    "why": "Used only for its stated Base change of an etale morphism of schemes is etale (Stacks 02GO) assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-separated-base-change",
-    "why": "Used only for its stated Separated morphisms are stable under base change (Stacks 01KU (3)) assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-etale-section-clopen-immersion",
-    "why": "Used only for its stated A section of a separated etale morphism is an open and closed immersion assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
-    "why": "Used only for its stated Flatness of a scheme morphism on affine charts assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-flat-tensor-exact",
-    "why": "Used only for its stated Tensoring with a flat module preserves exact sequences assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pur-conormal-graded-algebra",
-    "why": "Used only for its stated Conormal graded algebra on a closed subscheme assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pur-dnc-etale-rees-chart",
-    "why": "Used only for its stated Étale deformation chart and its smooth projection assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Used only for its stated A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Used only for its stated Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-proper-fp-permanence",
-    "why": "Used only for its stated Permanence of proper, separated, finite type, finitely presented morphisms and of immersions assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "Used only for its stated Affine space is smooth assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Used only for its stated An open subscheme of a Noetherian scheme is Noetherian assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "thm-nagata-compactification",
-    "why": "Used only for its stated Nagata compactification, [stacks-project] assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-scheme-morphism-gluing",
-    "why": "Used only for its stated Morphisms of schemes glue along an open cover assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-base-change",
-    "why": "Used only for its stated Base change of a closed immersion is a closed immersion assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pod-separated-finite-type-base-change",
-    "why": "Used only for its stated Separated finite-type morphisms are stable under base change assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "thm-asd-smooth-tensor",
-    "why": "Used only for its stated Smooth cohomological duality without a chosen orientation assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Used only for its stated Inverse image of etale sheaves of modules over a constant ring is exact assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "prop-asd-smooth-base-change",
-    "why": "Used only for its stated Arbitrary base change for smooth ambient duality assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-amb-etale-adjoint-locality",
-    "why": "Used only for its stated Etale localization of the ambient adjoint assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "cor-amb-affine-space-adjunction",
-    "why": "Used only for its stated Affine-space ambient adjunction assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "det-sp-unique-right-adjoint",
-    "why": "Used only for its stated Right adjoints are unique up to a unique counit-compatible isomorphism assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Used only for its stated Finite Tate lines on the small etale site and their pullback assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-derived-single-fully-faithful",
-    "why": "Used only for its stated The single-complex embedding of an abelian category is fully faithful assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pur-site-constant-module-hom",
-    "why": "Used only for its stated Internal Hom of constant modules with finitely presented source assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-polynomial-ring-domain",
-    "why": "Used only for its stated A polynomial ring in any set of variables over an integral domain is an integral domain assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "why": "Used only for its stated Closures of points and irreducible closed subsets of the spectrum of a ring assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pc-irreducible-space-connected",
-    "why": "Used only for its stated An irreducible space is connected assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
-    "why": "Used only for its stated Sections of a set-valued constant etale sheaf on a connected scheme assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "prop-weil-pbc-geometric-stalks-exact",
-    "why": "Used only for its stated Exactness of geometric stalks assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Used only for its stated Conservativity of geometric stalks assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pur-sheaf-hom-cover-gluing",
-    "why": "Used only for its stated Gluing O-linear maps on one covering family assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-amb-unbounded-compact-support-comparisons",
-    "why": "Used only for its stated Unbounded ordinary etale compact-support comparisons assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Used only for its stated Mates of pasted squares and of conjugate-whiskered squares assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-amb-affine-space-top-trace",
-    "why": "Used only for its stated The affine-space trace is an isomorphism assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-amb-linear-trace-invariance",
-    "why": "Used only for its stated Linear changes of coordinates preserve integration assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "thm-amb-vector-bundle-purity",
-    "why": "Used only for its stated Vector-bundle purity before smooth orientation assertion as a generic tool in the coordinate/Rees, sheaf-gluing, or counit-normalization argument; the contracting-correspondence unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "why": "The etale chart has relative dimension zero and affine space has its stated relative dimension, so their composite has the given relative dimension; generic geometric inputs to the local-coordinate argument."
-   }
-  ]
+  "worker": "Q58 stage1 direct delivery",
+  "summary": "Human-requested re-split: eight independent statement-only tasks cover every argument of the former sixteen steps. The parent retains its exact statement and becomes a short assembly; all old proof text and lower-level citations are preserved verbatim in report.md for the future workers. No Lean was changed or compiled.",
+  "blueprint": "Normal-cone specialization in lem-trf-local-term-locality proof (2), via the existing ancestor chain; sk-thm-dnc Local construction and Gluing, orientation-charts Steps 1–4; old Steps 1–16 mapped to eight new nodes in report.md."
  },
  "tool_uses": [
   "sbc-thm-etale-local-normal-form",
@@ -640,12 +282,12 @@
   "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q87-3eb09f96a",
-  "group": "Q87",
+  "reviewer": "NT-cc-Q58-23f5a74bf",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-3eb09f96a (reviewer sub-agent of L); spot-checked: I read the item in full: the base and new statements, all 16 steps, and the statements of all 44 cited nodes. The delivery has no new nodes and tools/review_split.py passes. Sources checked: blueprint main-20261015 sk-thm-dnc (_section and proof: Local construction, Gluing), sk-prop-sp-orientation-charts Steps 1-4, and Stacks 054L/024T/067U by label. Statement correction accepted: the old clause cited thm-amb-vector-bundle-purity, which only covers A=O_F/varpi^n, so it was ill-typed for A=F_2xF_3, N=6 (characteristic not a prime power). The new text defines the orientation by gluing affine adjoint orientations, well-defined by lem-amb-linear-trace-invariance (stated for arbitrary finite A), and asserts agreement with that theorem in its scope. In that scope ell divides N, so ell is invertible. The only citer (lem-trf-ambient-diagonal-purity-base-change, Steps 2/5/7/10) uses A=O_E/varpi^n and stays valid. Steps checked: 1 normal form, translation, clopen removal (separated etale holds), I=JB; 2 flat regular sequence, gr=Sym; 3 Rees chart gives smoothness of dimension d everywhere and both fibres; 4 Noetherian, separated, Nagata (bases are qcqs); 5 base change without flatness via the chart; 6 etale pairs give a base change and the linear normal map; 7 to 8 smooth tensor and base change, all within finite-A/Noetherian scope; 9 locality hypotheses hold (chart is affine-source separated and of finite type); 10 geometric fibres A^1_Omega are connected, uniqueness by stalks; 11 gluing on the Zariski cover {A^1_{S_i}}; 12 to 14 mate-pasting coherence and uniqueness; 15 trace base-change equality gives h_i=1; 16 GL_d invariance and agreement with t_pi. Edge cases tested: d=0, d=1 standard pair, mixed-prime A, nonflat S', empty S, A=0. Not duplicates: lem-pur-noetherian-etale-section-specialization (Z/ell^n only) and thm-pur-dnc-invariance (fixed field, constructible). All 41 tool_uses accepted as generic tools. Fix: removed the duplicate split_report.tool_uses entry for sbc-lem-affine-space-smooth; corrected file in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-23f5a74bf (reviewer sub-agent of L); spot-checked: Re-split (human note 2026-10-21) done correctly. The item statement is byte-identical to the base; only proof, proof_deps, proof_origin and split_report changed. The parent proof is a 7-step assembly of about 2164 characters citing 8 new unsplit, statement-only nodes of comparable size (1594-3232 characters). A script check shows the report keeps all 16 base steps with identical text and uses. Mapping: steps 1-2 to centred-coordinates, 3-4 to rees-noetherian-geometry, 5-6 to rees-base-change-etale, 7-9 to local-dualizing-comparisons, 10-11 to shifted-line-normalized-descent, 12-14 to exceptional-fibre-coherence, 15 to coordinate-counit-normalization, 16 to bundle-section-orientation. No argument was dropped, and no node restates the whole item. Nodes 2 and 8 each match one item clause but carry exactly the separate old argument for it. Mathematics checked: d=0 charts; base change through R to R/J needs no flatness; for etale pairs, B1 tensor I^m equals I1^m. Rigidity: End(L)=A_S, and an automorphism of a^*L equal to 1 at t=1 is a locally constant unit, which is 1 on each connected fibre A^1_kappa(s); this holds for any S and for A=0. Base-change and etale naturality re-derived: i1'^* of a'^*b_C composed with vbar^*kappa and b_F^{-1} equals theta'. For the coordinate normalization, beta composed with v^*alpha equals alpha', transposed from lem-amb-affine-space-top-trace. In the bundle orientation, o_E = z^*gamma^{-1} with K=A_S in thm-amb-vector-bundle-purity, and l is invertible because l divides N. The base-change morphism (counit-defined, ordinary etale D(T_et,A)) and the coefficient category are the item's. Sources read: main-20261015 sk-thm-dnc.proof.md and sk-prop-sp-orientation-charts Steps 1-4; Stacks 054L, 024T and 067U checked by label. No duplicates found: the existing nodes are the Z/l^n versions (lem-pur-noetherian-etale-section-specialization, lem-pur-diagonal-orientation-compatibility, lem-per-etale-section-deformation-comparison) or pro-etale or field-trait versions. Not dropped, no SGA, all stmt_deps exist. No parallel re-split exists live. The snapshot's chapter symlinks were broken (dagsnap gone), so I read the cited nodes from the side-live clone. Advisories only: the parent steps' source.place 'Assembly of extracted arguments' is not a real place; node 4 leaves the deformation chart implicit."
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteRingSectionDeformation",
