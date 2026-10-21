@@ -18,124 +18,101 @@
   "det-nagata-definition-refinement",
   "sk-def-localizing-closure",
   "def-sfb-module-derived-lower-shriek-compactification",
-  "det-sf-comp-coherence-refinement",
-  "det-sf-comp-composition-interchange"
+  "def-sf-comp-refinement-data"
  ],
  "proof": [
   {
-   "text": "Put $F_c=Rp_*j_!$. The candidate is the composite on the ordinary unbounded derived categories of module objects, as in [def-sfb-module-derived-lower-shriek-compactification]. Restrict its source to the indicated localizing category and retain the ambient target $D(\\Mod_{\\Lambda_Y})$; preservation of the target localizing category is not required for this comparison theorem. Throughout use the canonical comparison $R(ph)_*\\simeq Rp_*Rh_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the pro-etale ringed topoi with the pulled-back coefficient sheaves. These are the module pushforwards of [sk-def-sfb-module-pushforward-pullback]. Their inverse images are exact by [sk-prop-sfb-cartesian-coefficients], so their direct images preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Consequently all the comparisons for a string of proper maps can be computed on the same K-injective complex: both parenthesizations identify with the successive underived direct images of that complex. The underived comparison is the sheaf composition comparison of [def-sfb-module-lower-star-comp]; at a site object its two triple composites both use the canonical identification with the same iterated fibre product. Thus these derived comparisons have the identity and associativity normalizations. No completed or common-stage coefficient category is substituted for the ordinary module-object category.",
+   "text": "Put $F_c=Rp_*j_!$ using [def-sfb-module-derived-lower-shriek-compactification], with source restricted to $\\Loc(\\Dctf)$ and ambient derived target. Use the coherent compositor $\\kappa$ of [lem-sfb-module-derived-compositor-coherence] and the natural normalized arrows $e_h:j_!\\to Rh_*j\\prime_!$ of [lem-sfb-normalized-open-refinement-coherence]. These are the compositor and the refinement maps $e_h$ (adjoint of $\\theta_h^{-1}$) constructed in [def-sf-comp-refinement-data].",
    "uses": [
     "def-sfb-module-derived-lower-shriek-compactification",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-sfb-module-lower-star-comp"
+    "lem-sfb-module-derived-compositor-coherence",
+    "lem-sfb-normalized-open-refinement-coherence",
+    "def-sf-comp-refinement-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Refinement isomorphisms: derived direct-image identifications; Stacks Tag 0D6E, lemma-derived-pushforward-composition"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms: normalized comparisons"
    }
   },
   {
-   "text": "Let $h:c'\\to c$ be a refinement with $c'$ scheme-theoretically dense; $c$ need not be dense. Apply [det-sf-comp-composition-interchange] with its proper map $p=\\operatorname{id}_X$, its open immersion $i=j:X\\hookrightarrow Z$, and its dense compactification $(j':X\\hookrightarrow Z',r=h)$ of $j\\circ\\operatorname{id}_X$. All its hypotheses hold: $j$ is quasi-compact by the definition of compactification, $h$ is proper and $hj'=j$, and $j'$ is dense. Clauses (2) and (3), using $R\\operatorname{id}_*\\simeq\\operatorname{id}$, give $e_h:j_!K\\xrightarrow{\\sim}Rh_*j'_!K$ for every $K\\in\\Loc(\\Dctf(X,\\Lambda))$, uniquely characterized by restriction to $\\operatorname{id}_K$. These maps are natural in $K$: the exact open adjunction of [sk-def-sfb-module-lower-shriek] induces the derived adjunction by the exact-functor and derived-adjunction clauses of [sk-def-sfb-derived-categories]; $e_h$ is the adjoint of the natural restriction identification with $K$. In particular, when both compactifications are dense this is exactly the map of [det-sf-comp-coherence-refinement], by its clause (1). This establishes the comparison with arbitrary $c$ directly; the Noetherian closure-normalization lemma is not used.",
+   "text": "For $h:d\\to c$ with $d$ dense, [det-nagata-refinement-morphisms](1) gives properness. Apply [lem-sfb-qcqs-proper-open-boundary-vanishing] with $S=Y$, $U=X$ and the two compactification structure maps. Thus $i^*Rh_*j\\prime_!K=0$ on the closed complement of $j$. By [lem-sfb-condensed-support-derived-localization], also $i^*j_!K=0$ and the open/closed restrictions jointly detect isomorphisms. Use $r_h:j^*Rh_*\\simeq j\\prime^*$ from [lem-sfb-identity-open-derived-restriction]; under $r_h$ and the open units, $j^*e_h$ is $1_K$ by Step 1. Both restrictions are therefore invertible, so $e_h$ is invertible.",
    "uses": [
-    "det-sf-comp-composition-interchange",
-    "sk-def-sfb-module-lower-shriek",
-    "sk-def-sfb-derived-categories",
-    "det-sf-comp-coherence-refinement"
+    "det-nagata-refinement-morphisms",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing",
+    "lem-sfb-condensed-support-derived-localization",
+    "lem-sfb-identity-open-derived-restriction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Dense replacement and Refinement isomorphisms; replace the unsupported Noetherian reduction by the identity-proper-map specialization of det-sf-comp-composition-interchange"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Dense replacement and Refinement isomorphisms: general-base boundary argument"
    }
   },
   {
-   "text": "We record explicitly the restriction normalization used in composing these maps. Suppose $h^{-1}(j(X))=j'(X)$ and $h|_X=\\operatorname{id}_X$. For a sheaf $M$ on $Z'$, restriction of $h_*M$ to an object $V\\to X$ is $M(V\\times_ZZ')=M(V)$ on the copy of $X$ in $Z'$: this is the base-change formula of [def-sfb-finite-lower-star], lifted with the same coefficient action by [def-sfb-module-lower-star]. Hence $j^*h_*=j'^*$, with its canonical identification. For a K-injective resolution $I$ of a complex on $Z'$, $j'^*I$ is K-injective because $j'^*$ is right adjoint to the exact $j'_!$ of [sk-def-sfb-module-lower-shriek], by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Exact restriction therefore gives $j^*Rh_*\\simeq j'^*$ on the ordinary unbounded derived categories. Applying the same calculation to successive maps restricts each to the identity on $X$, so these restriction identifications commute with the derived composition comparison of Step 1.",
+   "text": "Define $\\rho_h=\\kappa_{p,h}^{-1}Rp_*(e_h):F_c\\xrightarrow{\\sim}F_d$. Substitute $\\kappa_{h,k}e_{hk}=Rh_*(e_k)e_h$ from [lem-sfb-normalized-open-refinement-coherence] in this formula. Naturality moves $Rp_*(e_h)$ past the compositor; associativity in [lem-sfb-module-derived-compositor-coherence] identifies the two remaining threefold compositors. Hence $\\rho_{hk}=\\rho_k\\rho_h$. The two unit laws give $\\rho_1=1$.",
    "uses": [
-    "def-sfb-finite-lower-star",
-    "def-sfb-module-lower-star",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-sfb-normalized-open-refinement-coherence",
+    "lem-sfb-module-derived-compositor-coherence"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Refinement isomorphisms and Independence: restriction of composites to X"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms: transport of the normalized composition law"
    }
   },
   {
-   "text": "For $h:c'\\to c$ with $c'$ dense define $\\rho_h:F_c\\to F_{c'}$ by applying $Rp_*$ to $e_h$ and then the inverse of the composition comparison of Step 1. It is a natural isomorphism. If $k:c''\\to c'$ is a further refinement with $c''$ dense, the two maps $e_{hk}$ and $Rh_*(e_k)\\circ e_h$ from $j_!K$ to $R(hk)_*j''_!K$ restrict to $\\operatorname{id}_K$, by Step 3. Clause (2) of [det-sf-comp-composition-interchange], applied with $p=\\operatorname{id}_X$, $i=j$, $r=hk$, makes them equal. Applying $Rp_*$, naturality of the composition comparison and its associativity from Step 1 give $\\rho_{hk}=\\rho_k\\circ\\rho_h$. For a dense $c$, the same uniqueness identifies $e_{\\operatorname{id}}$ with the identity, hence $\\rho_{\\operatorname{id}}=\\operatorname{id}$; this is also clause (3) of [det-sf-comp-coherence-refinement]. Only the source and intermediate compactifications were required to be dense.",
-   "uses": [
-    "det-sf-comp-composition-interchange",
-    "det-sf-comp-coherence-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Refinement isomorphisms: identity and transitivity, including a nondense final target"
-   }
-  },
-  {
-   "text": "For $c_1,c_2$, choose a common scheme-theoretically dense refinement $d$ with maps $h_a:d\\to c_a$ using [det-nagata-refinement-common-dense], and put $\\phi_{c_2,c_1}=\\rho_{h_2}^{-1}\\circ\\rho_{h_1}:F_{c_1}\\xrightarrow{\\sim}F_{c_2}$. This has the correct source and target because $\\rho_{h_a}:F_{c_a}\\to F_d$. The cited geometric lemma gives proper maps and the inverse-image-of-$X$ property even when the $c_a$ are not dense. The refinements compose with the boundary property by [det-nagata-definition-refinement].",
+   "text": "Choose a common dense refinement $d$ of $c_1,c_2$, with maps $h_1,h_2$, by [det-nagata-refinement-common-dense]. Put $\\phi_{c_2,c_1}=\\rho_{h_2}^{-1}\\rho_{h_1}:F_{c_1}\\xrightarrow{\\sim}F_{c_2}$. Reflections of the boundary condition under composition are the explicit equations of [det-nagata-definition-refinement]. No density of either $c_a$ is needed.",
    "uses": [
     "det-nagata-refinement-common-dense",
     "det-nagata-definition-refinement"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Definition"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Definition"
    }
   },
   {
-   "text": "Let $(d',h'_1,h'_2)$ be another such common dense refinement. Apply [det-nagata-refinement-common-dense] to $d,d'$ to get a dense $d''$ with maps $k:d''\\to d$, $k':d''\\to d'$. For each $a$, $h_ak$ and $h'_ak'$ are $Y$-morphisms $d''\\to c_a$ restricting to the given $j_a$ on $X$. They are equal by clause (3) of [det-nagata-refinement-morphisms], whose hypothesis is scheme-theoretic density of the source $d''$, not mere topological density and not density of $c_a$. Step 4 now gives, as natural transformations,\n$$\\rho_{h_2}^{-1}\\rho_{h_1}\n=(\\rho_k\\rho_{h_2})^{-1}(\\rho_k\\rho_{h_1})\n=\\rho_{h_2k}^{-1}\\rho_{h_1k}\n=\\rho_{h'_2k'}^{-1}\\rho_{h'_1k'}\n=(\\rho_{k'}\\rho_{h'_2})^{-1}(\\rho_{k'}\\rho_{h'_1})\n=\\rho_{h'_2}^{-1}\\rho_{h'_1}.$$\nEach equality after Step 4 is associativity and cancellation of an isomorphism with its inverse. Thus the comparison is independent of the common dense refinement, including its projection maps.",
+   "text": "For another choice $d\\prime$, choose a common dense $d\\prime\\prime$ of $d,d\\prime$ by [det-nagata-refinement-common-dense], with maps $k,k\\prime$. Uniqueness in [det-nagata-refinement-morphisms](3), applied to the dense source $d\\prime\\prime$, gives $h_ak=h\\prime_ak\\prime$. Step 3 and cancellation give\n$$\\rho_{h_2}^{-1}\\rho_{h_1}=(\\rho_k\\rho_{h_2})^{-1}(\\rho_k\\rho_{h_1})=\\rho_{h_2k}^{-1}\\rho_{h_1k}=\\rho_{h\\prime_2k\\prime}^{-1}\\rho_{h\\prime_1k\\prime}=\\rho_{h\\prime_2}^{-1}\\rho_{h\\prime_1}.$$\nThis proves independence, including the projection maps.",
    "uses": [
     "det-nagata-refinement-common-dense",
     "det-nagata-refinement-morphisms"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Independence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Independence"
    }
   },
   {
-   "text": "For $c_1,c_2,c_3$ choose one common dense refinement with maps $h_1,h_2,h_3$ by the finite-family conclusion of [det-nagata-refinement-common-dense]. Independence lets us use it in all three comparisons. Therefore\n$$\\phi_{c_3,c_2}\\circ\\phi_{c_2,c_1}\n=(\\rho_{h_3}^{-1}\\rho_{h_2})(\\rho_{h_2}^{-1}\\rho_{h_1})\n=\\rho_{h_3}^{-1}\\rho_{h_1}=\\phi_{c_3,c_1}.$$\nFor $\\phi_{c,c}$ take any common dense refinement $d\\to c,c$; the two projections agree by [det-nagata-refinement-morphisms] (3), or choose the same projection twice. The definition gives $\\rho_h^{-1}\\rho_h=\\operatorname{id}_{F_c}$. This also proves the identity for a nondense $c$; taking $c$ itself as a dense refinement would not be valid then. The formulas are equalities of natural transformations, so establish every claimed clause on the stated localizing category.",
+   "text": "Use one common dense refinement of three compactifications from [det-nagata-refinement-common-dense]. Independence gives\n$$\\phi_{c_3,c_2}\\phi_{c_2,c_1}=(\\rho_{h_3}^{-1}\\rho_{h_2})(\\rho_{h_2}^{-1}\\rho_{h_1})=\\rho_{h_3}^{-1}\\rho_{h_1}=\\phi_{c_3,c_1}.$$\nFor identity use the same dense projection twice: $\\rho_h^{-1}\\rho_h=1$, even for nondense $c$. All formulas are equalities of natural transformations.",
    "uses": [
-    "det-nagata-refinement-common-dense",
-    "det-nagata-refinement-morphisms"
+    "det-nagata-refinement-common-dense"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-    "place": "Proof, Cocycle and identity normalization"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Cocycle and identity"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-module-derived-lower-shriek-compactification",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-sfb-module-lower-star-comp",
-  "det-sf-comp-composition-interchange",
-  "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-derived-categories",
-  "det-sf-comp-coherence-refinement",
-  "def-sfb-finite-lower-star",
-  "def-sfb-module-lower-star",
+  "lem-sfb-module-derived-compositor-coherence",
+  "lem-sfb-normalized-open-refinement-coherence",
+  "def-sf-comp-refinement-data",
+  "det-nagata-refinement-morphisms",
+  "lem-sfb-qcqs-proper-open-boundary-vanishing",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-identity-open-derived-restriction",
   "det-nagata-refinement-common-dense",
-  "det-nagata-definition-refinement",
-  "det-nagata-refinement-morphisms"
+  "det-nagata-definition-refinement"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-  "place": "Proof: common dense refinements and cancellation, with direct comparison to nondense targets by det-sf-comp-composition-interchange at p=id_X; composition normalized by Stacks Tag 0D6E"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+  "place": "Refinement isomorphisms, Definition, Independence and Cocycle; general-base boundary calculation extracted as a separate statement-only obligation"
  },
  "mathlib_searches": [
   {
@@ -192,19 +169,25 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sf-comp-coherence",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "det-sf-comp-coherence-cocycle",
   "worker": "stage1",
-  "summary": "Kept the statement and coefficient categories. Replaced an inapplicable Noetherian closure normalization and an application of a dense-target refinement theorem to nondense targets by the existing proper/open interchange theorem at p=id_X. Filled statement dependencies, naturality, unbounded composition/open-restriction normalization, all missing common-refinement and schematic-uniqueness citations, and explicit independence/cocycle cancellations. No new nodes. The stored unit record is the older finite-etale-origin unit in sec-smooth-purity, whereas this main-20261015 item belongs to the localizing-category unit text in sec-six-functors-basics; reported the metadata mismatch without changing maintainer-owned fields.",
-  "blueprint": "Steps 1-4 realize Dense replacement and Refinement isomorphisms, repairing the non-Noetherian/nondense gap using the existing interchange tool. Step 5 realizes Definition, Step 6 Independence, and Step 7 Cocycle, including identity for nondense compactifications."
+  "summary": "Human-requested fine re-split with the statement unchanged. Three retained categorical arguments are new statement-only nodes; a fourth child exposes boundary vanishing in the actual general-qcqs coefficient scope. Removed the inapplicable field-restricted interchange/refinement theorem citations. Open/closed detection and explicit common-refinement cancellations assemble the result. Retained earlier proof sketches, search results and reports in the sandbox. Repair of the returned uncited-child fault: Step 2 now explicitly applies the open-restriction child r_h to identify j^*e_h with the identity under the open units; every new node is directly cited by an assembly step.",
+  "blueprint": "Steps 1-3 realize Refinement isomorphisms and replace the unsupported Dense replacement by direct boundary detection for a dense source and possibly nondense target. Steps 4-6 realize Definition, Independence and Cocycle.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-condensed-support-derived-localization",
+    "why": "Uses only mixed restriction vanishing and joint detection for ordinary unbounded condensed modules. This generic open/closed tool has no field, constructibility or completeness assumption, and does not replace the unit proper-base-change route."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-NJ-494e26fe1",
-  "group": "NJ",
+  "reviewer": "NT-cc-Q09-e84a51e77",
+  "group": "Q09",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-494e26fe1 (reviewer sub-agent of L); spot-checked: Read the item, route, current blueprint proofs, every cited DAG statement/source, and all edge cases. The seven steps are mathematically supported, including the p=id_X proper/open-interchange repair for nondense and non-Noetherian targets; coefficient categories and base-change maps are correct. No new nodes were delivered. The copied unit record is stale (old sec-smooth-purity metadata) and requires separate maintainer metadata repair."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-e84a51e77 (reviewer sub-agent of L); spot-checked: I read the 2026-10-21 human re-split note, the base 7-step proof, the delivered item, all four new nodes, every cited statement, the blueprint main-20261015 cocycle and refinement proofs, and Stacks 0D6E/08BJ/08FI/0D6G/09AH. The item is not on the dropped list. Re-split: every old argument went to a node. Old step 1 is now the compositor-coherence node and old step 3 the identity-open-restriction node (r_h). Old step 2 is the normalized-arrow node for existence, uniqueness and naturality, plus the qcqs boundary-vanishing node and the generic lem-sfb-condensed-support-derived-localization tool for invertibility. Old step 4 is the transitivity and associativity chase, now step 3. Old steps 5-7 are kept in full as the assembly in steps 4-6. The parent proof is 2670 characters; the four nodes are statement-only and of comparable size; none restates the item. The scope correction is right: det-sf-comp-composition-interchange and det-sf-comp-coherence-refinement assume sk-def-sfb-dc-setting (a field of characteristic p≠ℓ), but the item is over a general qcqs Y. That is an E1 fault in the old step 2, and the new boundary node is exactly the closed-complement argument of the blueprint refinement proof (2). Checks: step 2's hypotheses hold (h proper by det-nagata-refinement-morphisms(1), qcqs base, boundary condition, i^*j_!=0, joint detection, open part via the r_h normalization). I worked out step 3's chase in full; step 5 uses uniqueness (3) on a dense source; step 6 covers the identity for nondense c. All four new statements hold on edge cases: U empty or the whole of Z, h=id, nondense targets, ℓ not invertible. No cycles; the tool use is accepted. One fault, repaired (C4/E6): the delivery dropped det-sf-comp-coherence-refinement from stmt_deps and put the two Lean-less theorem children there. The unchanged landed Lean statement uses localizingRefinementMap and refinementDerivedLowerStarComp, which are owned by def-sf-comp-refinement-data (existing:true, no field restriction), and that node is what gives meaning to 'refinement isomorphisms'. The fix puts def-sf-comp-refinement-data in place of the two children in stmt_deps; the children stay in proof_deps. Step 1 gains one sentence identifying κ and e_h with that node's constructions; the proof is now 2800 characters. Notes: the compositor child overlaps lem-pur-ringed-derived-composition-cocycle (ringed topoi, NS 10-21) and its next split should cite it. Stage 2 should re-check the item's Lean imports against the new stmt_deps; I could not inspect the Lean file. The unit record metadata is still stale.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {},
  "reviewed_lean": {
@@ -230,5 +213,8 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The source-restricted candidate abbreviates the existing unbounded module-object composite. The canonical refinement component is Rp_* of the recorded localizingRefinementMap, followed by the inverse recorded derived compositor and the proper triangle equality. The theorem existentially supplies natural isomorphisms, with normalization against every common dense refinement, identity and cocycle equations. No density is assumed for the two compared compactifications, and no localizing-target preservation is assumed."
- }
+ },
+ "tool_uses": [
+  "lem-sfb-condensed-support-derived-localization"
+ ]
 }

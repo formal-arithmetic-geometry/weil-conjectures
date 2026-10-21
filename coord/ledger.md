@@ -20290,3 +20290,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:06 L: merged deliver/NI/lem-sf-open-finite-constructibility-interval (reviewer FIX; first push; new nodes: 0)
 - 06:06 L: merged deliver/N9/lem-sfb-module-object-ringed-site-derived-comparison (reviewer PASS; after a return; new nodes: 2)
 - 06:06 L: merged deliver/NY/lem-fix-operation-reduction (reviewer FIX; after a return; new nodes: 4)
+- 06:06 L: merged deliver/Q09/det-sf-comp-coherence-cocycle (reviewer FIX; after a return; new nodes: 4)
