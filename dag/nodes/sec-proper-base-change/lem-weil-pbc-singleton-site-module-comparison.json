@@ -51,10 +51,11 @@
    }
   },
   {
-   "text": "Let $\\varphi:R\\to S$. By [def-pc-sheaf-restrict-scalars], restriction changes the action at $*$ to $r\\cdot n=\\varphi(r)n$, leaving elements and maps unchanged. By [def-pur-sheaf-tensor-product] and step 3, extension has sole value $M\\otimes_RS$ and sends $a$ to $a\\otimes1$. The extension/restriction adjunction is explicit here: $u:M\\otimes_RS\\to N$ corresponds to $m\\mapsto u(m\\otimes1)$; an $R$-linear $v:M\\to N$ has inverse transpose $m\\otimes s\\mapsto s v(m)$, well defined by the balancing relation. Both composites are identities, and the formulas commute with maps of $M,N$. Taking $u$ to be the identity gives the unit $m\\mapsto m\\otimes1$. These formulas are identical for sheaves and modules under evaluation.",
+   "text": "Construct sectionwise extension followed by module sheafification, and use the sheafification unit, which is invertible for the bottom topology, to compare evaluation with ordinary extension. Restriction commutes with evaluation by identity components. Apply [lem-pur-sheaf-ring-coefficient-ordinary-adjunction]; its transpose formula on pure tensors gives the ordinary unit square.",
    "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-pc-sheaf-restrict-scalars",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
    ],
    "elementary": true,
    "source": {
@@ -97,11 +98,11 @@
    }
   },
   {
-   "text": "By [def-pc-tensor-complex-sheaves], total tensor in degree $n$ is $\\bigoplus_{p+q=n}K^p\\otimes L^q$ and has differential $d_K\\otimes1+(-1)^p1\\otimes d_L$ on the $(p,q)$ summand. Steps 2 and 3 identify every summand, the direct sum, and both differential components with their module versions. Therefore evaluation identifies the two total tensor complexes by the identity on each pure tensor in each summand. For any acyclic module complex $A$, $C_R(A)$ is acyclic by step 6; applying the K-flat test [def-pc-kflat-complex] and this total-tensor identity proves that evaluation carries a K-flat sheaf complex to a K-flat module complex. Conversely every acyclic sheaf complex is $C_R(A)$ for its acyclic evaluation, so the same test proves the reverse implication. Also flat terms correspond: by [def-pc-flat-sheaf-modules], flatness means exactness of tensoring, and steps 2 and 3 identify the two exactness tests.",
+   "text": "Transport the monoidal structure from module presheaves through the sheafification equivalence. Evaluation of presheaves is strong monoidal with identity tensor and unit comparisons. Its oplax total-bifunctor comparison is invertible because evaluation preserves all coproducts. Thus evaluation identifies the total tensor complexes. Exactness preserves and reflects acyclicity. Applying the acyclic-tensor criterion for K-flatness and the braiding proves both directions; an arbitrary module test complex is lifted by the inverse complex equivalence.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
@@ -110,10 +111,10 @@
    }
   },
   {
-   "text": "Choose a K-flat resolution $P\\to K$ with flat terms using [lem-pc-kflat-resolution]. By steps 6 and 8, its evaluation is an ordinary-module K-flat resolution with flat terms, and conversely an ordinary-module resolution gives one by $C_R$. The computation isomorphism of [lem-pur-derived-change-of-rings] represents sheaf derived extension by $Q(P\\otimes_{\\underline R}\\underline S)$. Steps 3--4 identify its chain representative with $E_R(P)\\otimes_RS$, and step 7 identifies its localization with the ordinary-module localization. A chain map between K-flat representatives is carried to the same tensor map on both sides. The quasi-isomorphism invariance and canonical comparison for different K-flat resolutions in [lem-pur-derived-change-of-rings] therefore give the same derived computation independently of the resolution. Here the ring map is arbitrary; exactness of extension of scalars is not assumed.",
+   "text": "Apply [lem-pur-derived-change-of-rings] to obtain the actual sectionwise sheaf extension functor E and its universal left derived pair LS, epsilonS, computing on K-flat complexes. Apply [lem-pur-sheaf-ring-derived-hom-comparison] to obtain its adjunction to exact derived restriction and normalize the unit on every homotopy representative by applying the Hom comparison to the identity. No explicit resolution is chosen in this proof.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-hom-comparison"
    ],
    "elementary": false,
    "source": {
@@ -122,9 +123,9 @@
    }
   },
   {
-   "text": "Finally apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to this small singleton site and $\\underline\\varphi$. Its normalized unit at $QP$, for the flat-term K-flat resolution just chosen, is represented by $P\\to\\operatorname{Res}(P\\otimes_{\\underline R}\\underline S)$, $x\\mapsto x\\otimes1$. Step 4 identifies this chain map, including every degree, with the ordinary unit. The same cited statement identifies the transpose of a chain map $g$ by $x\\otimes s\\mapsto s g(x)$, which evaluation also leaves unchanged. For $q:QP\\xrightarrow{\\sim}QK$, naturality gives $\\eta_{QK}=\\operatorname{Res}(L\\varphi^*(q))\\circ\\eta_{QP}\\circ q^{-1}$. Evaluation preserves each factor by steps 4, 7 and 9. Hence the comparison of derived computations preserves the unit also at $QK$, as well as on K-flat representatives, proving the final assertion.",
+   "text": "Apply [lem-pbc-normalized-derived-adjunction-transport] to the exact additive evaluation equivalences and the ordinary extension/restriction squares of step 4. It provides the ordinary-module universal derived pair, both canonical derived comparisons and their localization factorizations, the ordinary normalized adjunction and the global unit square. Its counit factorization transports invertibility of epsilonS on a K-flat complex to epsilonM on its evaluated complex. Restrict the two normalization formulas to K-flat representatives to obtain exactly the final conjunct.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-pbc-normalized-derived-adjunction-transport"
    ],
    "elementary": false,
    "source": {
@@ -138,19 +139,19 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
   "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  "lem-pur-sheaf-ring-derived-hom-comparison",
+  "lem-pbc-normalized-derived-adjunction-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00X9 punctual topos paragraph; explicit module/complex specialization, with sites-modules and sites-cohomology results cited separately in the steps"
+  "place": "Tag 00X9; proof follows evaluation, sheafification and total tensor comparison, then transports the existing universal derived pair and normalized adjunction. C3, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -279,9 +280,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -338,5 +337,15 @@
   "note": "Retains the landed punctual-site data and repairs the Lean interface to express the whole unchanged DAG statement: canonical natural tensor comparison, ordinary unit compatibility, universal derived scalar comparison, and the unit square at every derived object. Replaces the erroneous HasDerivedCategory.{0} requirement by the standard u+1 localization universe. No natural-language statement or dependency edge is changed. Reviewer fix: singletonDerivedScalarComparison now takes the sheaf adjunction a and normalizes the sheaf derived unit aS on every K-flat representative by the localized degreewise unit of a (as aM is normalized by ModuleCat.extendRestrictScalarsAdj); without it the final unit square was satisfiable by transporting aM and said nothing about the sheaf derived unit.",
   "fixed_by": "NT-stage2-cc-23994bb91"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T120327-L-3772964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

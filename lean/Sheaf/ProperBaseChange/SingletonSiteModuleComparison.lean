@@ -13,10 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Sheaf.Algebra.Homology.SheafRingDerivedHomComparison
+import Sheaf.CategoryTheory.NormalizedDerivedAdjunctionTransport
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
@@ -26,7 +25,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 /-!
 # Module comparison for the punctual ringed site
 
@@ -381,6 +381,305 @@ def singletonDerivedScalarComparison (a : E ⊣ singletonSheafRestriction φ) : 
 
 end DerivedScalars
 
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem punctualSheafificationUnit_isIso (R : Type u) [CommRing R]
+    (P : PresheafOfModules.{u}
+      ((singletonRingSheaf R).obj ⋙ forget₂ CommRingCat.{u} RingCat.{u})) :
+    IsIso ((PresheafOfModules.sheafificationAdjunction.{u}
+      (R := (sheafCompose singletonTopology (forget₂ CommRingCat.{u} RingCat.{u})).obj
+        (singletonRingSheaf R)) (𝟙 _)).unit.app P) := by
+  rw [← isIso_iff_of_reflects_iso _ (PresheafOfModules.toPresheaf _),
+    PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+  exact isIso_toSheafify singletonTopology (Presheaf.isSheaf_bot _)
+
+private noncomputable def punctualTensorIso (R : Type u) [CommRing R]
+    (M N : singletonModuleCategory R) :
+    (singletonEvaluation R).obj ((SheafOfModules.siteSheafTensorRight N).obj M) ≅
+      MonoidalCategory.tensorObj ((singletonEvaluation R).obj M)
+        ((singletonEvaluation R).obj N) := by
+  let P := SheafOfModules.siteTensorPresheaf M.val N.val
+  let η := (PresheafOfModules.sheafificationAdjunction.{u}
+    (R := (sheafCompose singletonTopology (forget₂ CommRingCat.{u} RingCat.{u})).obj
+      (singletonRingSheaf R)) (𝟙 _)).unit.app P
+  let : IsIso η := punctualSheafificationUnit_isIso R P
+  exact ((PresheafOfModules.evaluation _ (op (⟨PUnit.unit⟩ : singletonSite))).mapIso
+    (asIso η)).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem punctualTensorComparison (R : Type u) [CommRing R] :
+    singletonTensorComparison R := by
+  refine ⟨punctualTensorIso R, ?_, ?_⟩
+  · intro M N x y
+    exact ConcreteCategory.congr_hom
+      (Iso.inv_hom_id (punctualTensorIso R M N)) (x ⊗ₜ[R] y)
+  · intro M M' N N' f g
+    apply (cancel_epi (punctualTensorIso R M N).inv).1
+    apply (cancel_mono (punctualTensorIso R M' N').inv).1
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id,
+      Category.comp_id]
+    let a := PresheafOfModules.sheafificationAdjunction.{u}
+      (R := (sheafCompose singletonTopology
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj (singletonRingSheaf R)) (𝟙 _)
+    have hn := a.unit.naturality
+      ((SheafOfModules.siteTensorRight N.val).map f.val ≫
+        SheafOfModules.siteTensorSecondMap M'.val g.val)
+    convert congrArg (fun k ↦ k.app (op (⟨PUnit.unit⟩ : singletonSite))) hn.symm
+      using 1
+    · rfl
+    · simp only [Functor.map_comp, PresheafOfModules.comp_app,
+        SheafOfModules.siteSheafTensorRight, Functor.comp_map]
+      rfl
+    · apply ModuleCat.hom_ext
+      apply TensorProduct.ext'
+      intro x y
+      rfl
+
+attribute [local irreducible] SheafOfModules.monoidalCategory
+
+set_option backward.isDefEq.respectTransparency false in
+@[instance_reducible]
+private noncomputable def punctualEvaluationMonoidal (R : Type u) [CommRing R] :
+    (singletonEvaluation R).Monoidal := by
+  let A := (sheafCompose singletonTopology
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj (singletonRingSheaf R)
+  let a := PresheafOfModules.sheafificationAdjunction.{u} (R := A) (𝟙 _)
+  let : ∀ P, IsIso (a.unit.app P) := fun P ↦ punctualSheafificationUnit_isIso R P
+  let : IsIso a.unit := NatIso.isIso_of_isIso_app a.unit
+  let e := a.toEquivalence
+  let : e.functor.Monoidal := by
+    change (PresheafOfModules.sheafification.{u} (R := A) (𝟙 _)).Monoidal
+    infer_instance
+  letI := e.inverseMonoidal
+  let V := PresheafOfModules.evaluation.{u} A.obj (op (⟨PUnit.unit⟩ : singletonSite))
+  letI : V.Monoidal := Functor.CoreMonoidal.toMonoidal
+    { εIso := Iso.refl _
+      μIso := fun _ _ ↦ Iso.refl _
+      μIso_hom_natural_left := by intros; simp only [Iso.refl_hom,
+        Category.comp_id, Category.id_comp]; rfl
+      μIso_hom_natural_right := by intros; simp only [Iso.refl_hom,
+        Category.comp_id, Category.id_comp]; rfl
+      associativity := by intros; simp; rfl
+      left_unitality := by intros; simp; rfl
+      right_unitality := by intros; simp; rfl }
+  exact Functor.Monoidal.transport
+    (NatIso.ofComponents (F := e.inverse ⋙ V) (G := singletonEvaluation R)
+      (fun _ ↦ Iso.refl _) (by intros; rfl))
+
+attribute [local irreducible] punctualEvaluationMonoidal
+
+private noncomputable def punctualComponent (R : Type u) [CommRing R]
+    (M : singletonModuleCategory R) (X : singletonSiteᵒᵖ) :
+    M.val.obj X ≅ ((singletonEvaluation R ⋙ singletonConstantModuleSheaf R).obj M).val.obj X := by
+  rcases X with ⟨⟨⟨⟩⟩⟩
+  exact Iso.refl _
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def punctualUnit (R : Type u) [CommRing R] :
+    𝟭 (singletonModuleCategory R) ≅ singletonEvaluation R ⋙ singletonConstantModuleSheaf R := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · let i := PresheafOfModules.isoMk (punctualComponent R M) (by
+      intro X Y f
+      rcases X with ⟨⟨⟨⟩⟩⟩
+      rcases Y with ⟨⟨⟨⟩⟩⟩
+      rw [show f = 𝟙 _ from Subsingleton.elim _ _]
+      ext x
+      simp)
+    exact
+      { hom := ⟨i.hom⟩
+        inv := ⟨i.inv⟩
+        hom_inv_id := SheafOfModules.hom_ext i.hom_inv_id
+        inv_hom_id := SheafOfModules.hom_ext i.inv_hom_id }
+  · intro M N f
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro X
+    rcases X with ⟨⟨⟨⟩⟩⟩
+    rfl
+
+private noncomputable def punctualEquivalence (R : Type u) [CommRing R] :
+    singletonModuleCategory R ≌ ModuleCat.{u} R where
+  functor := singletonEvaluation R
+  inverse := singletonConstantModuleSheaf R
+  unitIso := punctualUnit R
+  counitIso := NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
+  functor_unitIso_comp M := by
+    change ((punctualUnit R).hom.app M).val.app _ ≫ 𝟙 _ = 𝟙 _
+    rfl
+
+private theorem punctualEvaluationIsEquivalence (R : Type u) [CommRing R] :
+    (singletonEvaluation R).IsEquivalence := (punctualEquivalence R).isEquivalence_functor
+
+private noncomputable def punctualComplexEquivalence (R : Type u) [CommRing R] :
+    CochainComplex (singletonModuleCategory R) ℤ ≌ CochainComplex (ModuleCat.{u} R) ℤ :=
+  (punctualEquivalence R).mapHomologicalComplex (.up ℤ)
+
+private theorem punctualComplexEquivalence_functor (R : Type u) [CommRing R] :
+    (punctualComplexEquivalence R).functor =
+      (singletonEvaluation R).mapHomologicalComplex (.up ℤ) := rfl
+
+attribute [local irreducible] punctualComplexEquivalence
+
+private theorem punctualAcyclic (R : Type u) [CommRing R]
+    (K : CochainComplex (singletonModuleCategory R) ℤ) :
+    (((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj K).Acyclic ↔ K.Acyclic := by
+  let : (singletonEvaluation R).IsEquivalence := punctualEvaluationIsEquivalence R
+  simp only [HomologicalComplex.acyclic_iff, HomologicalComplex.exactAt_iff]
+  exact forall_congr' fun n ↦ (K.sc n).exact_map_iff_of_faithful (singletonEvaluation R)
+
+private theorem moduleKFlat_iff_tensorAcyclic (R : Type u) [CommRing R]
+    (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat K ↔
+      ∀ F : CochainComplex (ModuleCat.{u} R) ℤ, F.Acyclic →
+        (CochainComplex.mapBifunctor F K (MonoidalCategory.curriedTensor _)).Acyclic := by
+  constructor
+  · intro h F hF
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+      HomotopyCategory.kFlat_iff_preserves_acyclic] at h
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
+      (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).2 hF)).2
+  · intro h
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+      HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro F hF
+    obtain ⟨F, rfl⟩ := F.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hF
+    have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
+      (CochainComplex.mapBifunctor F K (MonoidalCategory.curriedTensor _))).2 (h F hF)
+    exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso
+      (BraidedCategory.braiding _ _) hr, hr⟩
+
+private noncomputable def punctualTotalTensorIso (R : Type u) [CommRing R]
+    (K L : CochainComplex (singletonModuleCategory R) ℤ) :
+    ((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj
+        (CochainComplex.mapBifunctor K L (MonoidalCategory.curriedTensor _)) ≅
+      CochainComplex.mapBifunctor
+        (((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj K)
+        (((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj L)
+        (MonoidalCategory.curriedTensor _) := by
+  let : (singletonEvaluation R).IsEquivalence := punctualEvaluationIsEquivalence R
+  let : (singletonEvaluation R).Monoidal := punctualEvaluationMonoidal R
+  exact asIso (HomologicalComplex.mapBifunctorComparison
+    (Functor.OplaxMonoidal.δNatTrans (singletonEvaluation R)) (.up ℤ) K L)
+
+attribute [local irreducible] punctualTotalTensorIso
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem punctualKFlat (R : Type u) [CommRing R]
+    (K : CochainComplex (singletonModuleCategory R) ℤ) :
+    CochainComplex.IsKFlatIndependentCoefficients
+        (J := singletonTopology) (R := singletonRingSheaf R) K ↔
+      (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat
+        (((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj K) := by
+  let : (singletonEvaluation R).IsEquivalence := punctualEvaluationIsEquivalence R
+  let ec := punctualComplexEquivalence R
+  have he : ec.functor = (singletonEvaluation R).mapHomologicalComplex (.up ℤ) :=
+    punctualComplexEquivalence_functor R
+  rw [moduleKFlat_iff_tensorAcyclic]
+  constructor
+  · intro h F hF
+    let L := ec.inverse.obj F
+    let q : ((singletonEvaluation R).mapHomologicalComplex (.up ℤ)).obj L ≅ F :=
+      (eqToIso (congrArg (fun G ↦ G.obj L) he)).symm ≪≫ ec.counitIso.app F
+    have hL : L.Acyclic := (punctualAcyclic R L).1
+      (fun n ↦ (hF n).of_iso q.symm)
+    have ht := (punctualAcyclic R _).2 (h L hL)
+    let i := punctualTotalTensorIso R L K ≪≫
+      (((MonoidalCategory.curriedTensor (ModuleCat.{u} R)).map₂HomologicalComplex
+        (.up ℤ) (.up ℤ) (.up ℤ)).mapIso q).app _
+    exact fun n ↦ (ht n).of_iso i
+  · intro h F hF
+    have ht := h _ ((punctualAcyclic R F).2 hF)
+    exact (punctualAcyclic R _).1
+      (fun n ↦ (ht n).of_iso (punctualTotalTensorIso R F K).symm)
+
+private noncomputable def punctualExtensionPresheaf
+    {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) :
+    singletonModuleCategory R ⥤ PresheafOfModules.{u}
+      ((singletonRingSheaf S).obj ⋙ forget₂ CommRingCat.{u} RingCat.{u}) where
+  obj M := SheafOfModules.changeOfRingsPresheaf.{0, 0, u} (singletonRingMap φ) M
+  map f :=
+    { app := fun U ↦ (ModuleCat.extendScalars ((singletonRingMap φ).hom.app U).hom).map
+        (f.val.app U)
+      naturality := SheafOfModules.changeOfRingsHom_naturality (singletonRingMap φ) _ f }
+  map_id M := by
+    apply PresheafOfModules.hom_ext
+    intro U
+    exact (ModuleCat.extendScalars ((singletonRingMap φ).hom.app U).hom).map_id _
+  map_comp f g := by
+    apply PresheafOfModules.hom_ext
+    intro U
+    exact (ModuleCat.extendScalars ((singletonRingMap φ).hom.app U).hom).map_comp _ _
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def punctualExtensionComparison
+    {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)
+    (E : singletonModuleCategory R ⥤ singletonModuleCategory S)
+    (h : ∀ M, E.obj M = singletonSheafExtensionObj φ M)
+    (hm : ∀ {M N} (f : M ⟶ N), E.map f =
+      eqToHom (h M) ≫ singletonSheafExtensionMap φ f ≫ eqToHom (h N).symm) :
+    E ⋙ singletonEvaluation S ≅ singletonEvaluation R ⋙ ModuleCat.extendScalars φ := by
+  let A := (sheafCompose singletonTopology
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj (singletonRingSheaf S)
+  let a := PresheafOfModules.sheafificationAdjunction.{u} (R := A) (𝟙 _)
+  let P := punctualExtensionPresheaf φ
+  let T := PresheafOfModules.sheafification.{u} (R := A) (𝟙 _)
+  let i : E ≅ P ⋙ T := NatIso.ofComponents (fun M ↦ eqToIso (h M)) (by
+    intro M N f
+    change E.map f ≫ eqToHom (h N) = eqToHom (h M) ≫ singletonSheafExtensionMap φ f
+    rw [hm]
+    simp)
+  let : ∀ M, IsIso ((Functor.whiskerLeft P a.unit).app M) :=
+    fun M ↦ punctualSheafificationUnit_isIso S (P.obj M)
+  let : IsIso (Functor.whiskerLeft P a.unit) := NatIso.isIso_of_isIso_app _
+  let j := Functor.isoWhiskerRight (asIso (Functor.whiskerLeft P a.unit))
+    (PresheafOfModules.evaluation _ (op (⟨PUnit.unit⟩ : singletonSite)))
+  exact Functor.isoWhiskerRight i (singletonEvaluation S) ≪≫
+    NatIso.ofComponents (fun M ↦ (j.app M).symm) (by
+      intro M N f
+      exact j.inv.naturality f)
+
+private noncomputable def punctualRestrictionComparison
+    {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) :
+    singletonSheafRestriction φ ⋙ singletonEvaluation R ≅
+      singletonEvaluation S ⋙ ModuleCat.restrictScalars φ :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem punctualExtensionComparison_tmul
+    {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)
+    (E : singletonModuleCategory R ⥤ singletonModuleCategory S)
+    (h : ∀ M, E.obj M = singletonSheafExtensionObj φ M)
+    (hm : ∀ {M N} (f : M ⟶ N), E.map f =
+      eqToHom (h M) ≫ singletonSheafExtensionMap φ f ≫ eqToHom (h N).symm)
+    (M : singletonModuleCategory R) (b : S) (x : (singletonEvaluation R).obj M) :
+    ((punctualExtensionComparison φ E h hm).hom.app M)
+        ((singletonEvaluation S).map (eqToHom (h M).symm)
+          (singletonExtensionTmul φ M b x)) = b ⊗ₜ[R, φ] x := by
+  let A := (sheafCompose singletonTopology
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj (singletonRingSheaf S)
+  let a := PresheafOfModules.sheafificationAdjunction.{u} (R := A) (𝟙 _)
+  let P := (punctualExtensionPresheaf φ).obj M
+  let : IsIso (a.unit.app P) := punctualSheafificationUnit_isIso S P
+  let j : (ModuleCat.extendScalars φ).obj ((singletonEvaluation R).obj M) ≅
+      (singletonEvaluation S).obj (singletonSheafExtensionObj φ M) :=
+    (PresheafOfModules.evaluation _ (op (⟨PUnit.unit⟩ : singletonSite))).mapIso
+      (asIso (a.unit.app P))
+  have ht := ConcreteCategory.congr_hom (Iso.hom_inv_id j) (b ⊗ₜ[R, φ] x)
+  have heq : (singletonEvaluation S).map (eqToHom (h M).symm) ≫
+      (punctualExtensionComparison φ E h hm).hom.app M = j.inv := by
+    simp only [punctualExtensionComparison, j, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, NatIso.ofComponents_hom_app, Iso.symm_hom,
+      Functor.mapIso_inv, asIso_inv]
+    rw [← Functor.map_comp_assoc]
+    simp
+    rfl
+  have hv := ConcreteCategory.congr_hom heq (singletonExtensionTmul φ M b x)
+  refine hv.trans ?_
+  convert ht using 1 <;> rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation is the exact tensor equivalence from the punctual ringed site to ordinary
 modules. Scalar extension, restriction and their units agree, as do complexes, homotopy
 categories, localization, quasi-isomorphisms, K-flatness and normalized derived change of rings.
@@ -407,17 +706,14 @@ the inverse isomorphisms by the fully faithful localization universal property. 
 standard localization universe u+1, without imposing a small-Hom condition.
 8. Direct sums and tensor products agree under evaluation, including the total-tensor
 sign (-1)^p. The two acyclic-tensor tests therefore agree (def-pc-kflat-complex).
-9. Resolve by lem-pc-kflat-resolution and apply lem-pur-derived-change-of-rings.
-The ordinary and sheaf extension homotopy functors correspond by the degreewise comparison;
-universality transports their left derived pairs and their counits. On a K-flat object the
-counit is invertible; for a resolution q, compose it with the inverse image of q. This gives
-canonical comparisons independent of resolution and compatible with maps.
-10. Apply lem-pur-sheaf-ring-derived-coefficient-adjunction. Its normalized unit on a
-K-flat representative is the localized degreewise sheaf unit `x ↦ x ⊗ 1`; the ordinary
-normalized unit is the localized degreewise ordinary unit. Evaluation preserves this map
-and its transpose (step 4).
-Naturality transports the normalization from a K-flat resolution to every derived object;
-the displayed unit square expresses exactly this compatibility. -/
+9. Apply lem-pur-derived-change-of-rings to obtain the universal sheaf derived pair,
+including its counit on K-flat complexes. The normalized derived Hom comparison supplies
+its adjunction and its unit formula on every homotopy representative.
+10. Transport this universal pair and normalized adjunction through the exact evaluation
+equivalences. The ordinary scalar unit square from step 4 gives the transported normalization;
+the derived comparison is the corresponding mate. Its counit factorization also transports
+the K-flat computation, and its mate-unit identity gives the unit square on every derived object.
+-/
 theorem singleton_site_module_comparison (R : Type u) [CommRing R] :
     ∃ e : singletonModuleCategory R ≌ ModuleCat.{u} R,
       e.functor = singletonEvaluation R ∧
@@ -457,6 +753,120 @@ theorem singleton_site_module_comparison (R : Type u) [CommRing R] :
             (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u} R))
             (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u} S)),
             singletonDerivedScalarComparison φ E s r a) := by
-  sorry
+  classical
+  let e := punctualEquivalence R
+  let : e.functor.Additive := singletonEvaluationAdditive R
+  let : e.inverse.Additive := e.toAdjunction.right_adjoint_additive
+  let : (singletonEvaluation R).IsEquivalence := e.isEquivalence_functor
+  refine ⟨e, rfl, rfl, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro T hT
+    exact hT.map_of_exact (singletonEvaluation R)
+  · exact punctualTensorComparison R
+  · exact ⟨punctualComplexEquivalence R, punctualComplexEquivalence_functor R⟩
+  · let F := (singletonEvaluation R).mapHomotopyCategory (.up ℤ)
+    let : F.Full := inferInstanceAs
+      ((singletonEvaluation R).mapHomotopyCategory (.up ℤ)).Full
+    let : F.Faithful := inferInstanceAs
+      ((singletonEvaluation R).mapHomotopyCategory (.up ℤ)).Faithful
+    let : F.EssSurj := ⟨fun K ↦ by
+      obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+      let ec := e.mapHomologicalComplex (.up ℤ)
+      refine ⟨(HomotopyCategory.quotient _ _).obj (ec.inverse.obj L), ⟨?_⟩⟩
+      exact ((singletonEvaluation R).mapHomotopyCategoryFactors (.up ℤ)).app _ ≪≫
+        (HomotopyCategory.quotient _ _).mapIso (ec.counitIso.app L)⟩
+    let : F.IsEquivalence := ⟨inferInstance, inferInstance, inferInstance⟩
+    exact ⟨F.asEquivalence, rfl⟩
+  · intro K L f
+    exact (HomologicalComplex.quasiIso_map_iff_of_preservesHomology f
+      (singletonEvaluation R)).symm
+  · let := HasDerivedCategory.standard (singletonModuleCategory R)
+    let := HasDerivedCategory.standard (ModuleCat.{u} R)
+    exact ⟨inferInstance, inferInstance,
+      e.mapDerivedCategory, ⟨(singletonEvaluation R).mapDerivedCategoryFactorsh⟩⟩
+  · exact punctualKFlat R
+  · intro S _ φ
+    let hR := HasDerivedCategory.standard (singletonModuleCategory R)
+    let hS := HasDerivedCategory.standard (singletonModuleCategory S)
+    let : (singletonEvaluation S).IsEquivalence := punctualEvaluationIsEquivalence S
+    let hRM := HasDerivedCategory.standard (ModuleCat.{u} R)
+    let hSM := HasDerivedCategory.standard (ModuleCat.{u} S)
+    obtain ⟨E, h, hm, hE, _, _, LS, εS, hLS, _, hcompute⟩ :=
+      SheafOfModules.derivedChangeOfRingsIndependentCoefficients (singletonRingMap φ)
+    let : E.Additive := hE
+    obtain ⟨hUlim, hUcolim, hadj⟩ :=
+      SheafOfModules.sheafRingCoefficientOrdinaryAdjunction (singletonRingMap φ)
+    let : PreservesFiniteLimits (singletonSheafRestriction φ) := hUlim
+    let : PreservesFiniteColimits (singletonSheafRestriction φ) := hUcolim
+    obtain ⟨a, ha⟩ := hadj E h hm
+    let s := punctualExtensionComparison φ E h hm
+    let r := punctualRestrictionComparison φ
+    have hu : singletonScalarUnitCompatible φ E h s r a := by
+      refine ⟨punctualExtensionComparison_tmul φ E h hm, fun _ _ ↦ rfl, ?_⟩
+      intro M
+      apply ModuleCat.hom_ext
+      ext x
+      have hv := ha M (E.obj M) (eqToHom (h M).symm)
+        (op (⟨PUnit.unit⟩ : singletonSite)) x
+      have hi : a.homEquiv M (E.obj M)
+          (eqToHom (h M) ≫ eqToHom (h M).symm) = a.unit.app M := by
+        rw [eqToHom_trans, eqToHom_refl, a.homEquiv_id]
+      rw [hi] at hv
+      change (s.hom.app M) (((a.unit.app M).val.app _) x) = (1 : S) ⊗ₜ[R, φ] x
+      exact (congrArg (fun y : (singletonEvaluation S).obj (E.obj M) ↦
+        (s.hom.app M) y) hv).trans (punctualExtensionComparison_tmul φ E h hm M 1 x)
+    refine ⟨E, h, hm, hE, s, r, a, hu, ?_, hR, hS, hRM, hSM, ?_⟩
+    · intro M x
+      rfl
+    obtain ⟨aS, hhom⟩ := SheafOfModules.sheafRingDerivedHomComparison
+      (singletonRingMap φ) E h hm a LS εS hLS
+    have hn (H : HomotopyCategory (singletonModuleCategory R) (.up ℤ)) :
+        aS.unit.app (DerivedCategory.Qh.obj H) ≫
+            (singletonSheafRestriction φ).mapDerivedCategory.map (εS.app H) ≫
+            (singletonSheafRestriction φ).mapDerivedCategoryFactorsh.hom.app
+              ((E.mapHomotopyCategory (.up ℤ)).obj H) =
+          DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app H) := by
+      have ht := hhom H ((E.mapHomotopyCategory (.up ℤ)).obj H) (𝟙 _)
+      have hiε : εS.app H ≫ DerivedCategory.Qh.map
+          (𝟙 ((E.mapHomotopyCategory (.up ℤ)).obj H)) = εS.app H := by
+        rw [Functor.map_id]
+        exact Category.comp_id _
+      rw [hiε, (a.mapHomotopyCategory (.up ℤ)).homEquiv_id H,
+        aS.homEquiv_unit] at ht
+      let κ := (singletonSheafRestriction φ).mapDerivedCategoryFactorsh.app
+        ((E.mapHomotopyCategory (.up ℤ)).obj H)
+      have ht' : aS.unit.app (DerivedCategory.Qh.obj H) ≫
+          (singletonSheafRestriction φ).mapDerivedCategory.map (εS.app H) =
+          DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app H) ≫ κ.inv := by
+        convert ht using 1 <;> rfl
+      have hh := (Iso.eq_comp_inv κ).1 ht'
+      simp only [Category.assoc] at hh
+      convert hh using 1
+      rfl
+    let er := punctualEquivalence R
+    let es := punctualEquivalence S
+    let : er.functor.Additive := singletonEvaluationAdditive R
+    let : es.functor.Additive := singletonEvaluationAdditive S
+    let : er.inverse.Additive := er.toAdjunction.right_adjoint_additive
+    let : es.inverse.Additive := es.toAdjunction.right_adjoint_additive
+    obtain ⟨LM, εM, c, b, aM, hLM, hc, hb, hnM, hunit⟩ :=
+      normalizedDerivedAdjunctionTransport er es E (singletonSheafRestriction φ)
+        (ModuleCat.extendScalars φ) (ModuleCat.restrictScalars φ)
+        a (ModuleCat.extendRestrictScalarsAdj φ) s r hu.2.2 LS εS hLS aS hn
+    refine ⟨hUlim, hUcolim, er.mapDerivedCategory, es.mapDerivedCategory,
+      (singletonEvaluation R).mapDerivedCategoryFactorsh,
+      (singletonEvaluation S).mapDerivedCategoryFactorsh,
+      LS, εS, LM, εM, c, b, aS, aM, hLS, hLM, ?_, hc, hb, ?_, ?_, hunit⟩
+    · intro P hP
+      refine ⟨hcompute P hP, ?_⟩
+      let H := (HomotopyCategory.quotient _ _).obj P
+      let : IsIso (εS.app H) := hcompute P hP
+      have hh := hc H
+      change IsIso (εM.app ((er.functor.mapHomotopyCategory (.up ℤ)).obj H))
+      rw [← isIso_comp_left_iff (LM.map (er.functor.mapDerivedCategoryFactorsh.hom.app H)), hh]
+      infer_instance
+    · intro P _
+      exact hn ((HomotopyCategory.quotient _ _).obj P)
+    · intro P _
+      exact hnM ((HomotopyCategory.quotient _ _).obj P)
 
 end CategoryTheory

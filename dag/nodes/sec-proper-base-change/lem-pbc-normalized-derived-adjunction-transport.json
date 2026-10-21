@@ -1,0 +1,123 @@
+{
+ "id": "lem-pbc-normalized-derived-adjunction-transport",
+ "kind": "statement",
+ "title": "Transport of a normalized left derived adjunction through exact equivalences",
+ "statement": "Let A, B, A′, B′ be abelian categories with derived localizations in independent universes. Let e:A≃A′ and g:B≃B′ be additive equivalences. Let L⊣U and L′⊣U′ be additive adjunctions with exact right adjoints. Suppose natural isomorphisms Lg≅eL′ and Ue≅gU′ commute with the ordinary units. Given a universal left derived pair (LS,epsilonS) for L and an adjunction LS⊣D(U) whose unit followed by D(U)(epsilonS) and the fixed exact localization comparison equals the localized ordinary unit on every homotopy representative, there exist a universal left derived pair (LM,epsilonM) for L′ and an adjunction LM⊣D(U′), normalized by the ordinary L′⊣U′ unit. The derived left and right comparison isomorphisms D(e)LM≅LS D(g) and D(U)D(e)≅D(g)D(U′) satisfy respectively the counit and exact localization factorization identities specified in the Lean statement. They commute with the derived adjunction units on every object. This is transport of the universal pair and its normalized adjunction [def-weil-abstract-derived-category], without any exactness assumption on L or L′.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RR and 0FND, localization universal property and derived adjunction; sites-cohomology.tex Tag 07A6"
+ },
+ "proof": [
+  {
+   "text": "Conjugate LS by D(e).inverse and D(g).functor. The two exact localization comparisons and the ordinary left square define the counit epsilonM. Transport the right Kan extension universal property through equivalences of its source, localized category and target. The equivalence unit supplies the derived left comparison and its counit factorization.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary right square using the composition and natural-isomorphism APIs for exact derived functors. Their homotopy localization factorizations give the displayed right comparison formula.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the source derived adjunction through the two derived equivalences, then transport its left and right functors by the two comparison isomorphisms. Equivalently use the invertible mate and full faithfulness of whiskering by an equivalence to adjust the right adjoint isomorphism. The mate-unit identity is the required unit square at every derived object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the target unit-normalization equation with the source localization comparison. Naturality of the transported unit and the left counit factorization replace it by the source derived unit followed by the right comparison. Use naturality and the right localization factorization, then the source normalization. What remains is precisely the degreewise ordinary unit square, mapped to homotopy categories and localized. The source homotopy equivalence is essentially surjective, so naturality extends this equality to every target homotopy representative.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RR and 0FND; explicit transport of normalized derived adjunction data through equivalences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(derived.*[Aa]djunction.*[Ee]quivalence|isLeftDerivedFunctor.*[Ee]quivalence)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No theorem includes transport of the universal pair, both fixed localization factors, the normalized adjunction and its unit square. The Kan-extension and mate APIs give separate steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Equivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No theorem includes transport of the universal pair, both fixed localization factors, the normalized adjunction and its unit square. The Kan-extension and mate APIs give separate steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences transport a universal left derived functor and its adjunction preserving the localized ordinary unit",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+   "date": "2026-10-21",
+   "verdict": "No theorem includes transport of the universal pair, both fixed localization factors, the normalized adjunction and its unit square. The Kan-extension and mate APIs give separate steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a left derived adjunction through equivalences and preserve its unit normalization",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.adjunctionOfEquivRight_unit_app, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived', CategoryTheory.Abelian.LeftResolution.transport, CategoryTheory.Adjunction.derivedη",
+   "date": "2026-10-21",
+   "verdict": "The general derived-adjunction API constructs an adjunction from derived composite hypotheses, but does not transport the given universal pair with prescribed left and right comparison factorizations and its normalized unit. The present proof uses equivalence transport and invertible mates."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ProperBaseChange.SingletonSiteModuleComparison",
+  "date": "2026-10-21",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-singleton-site-module-comparison",
+   "place": "Proof steps 9 and 10: transport the universal derived scalar computation and its normalized adjunction"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedDerivedAdjunctionTransport",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedDerivedAdjunctionTransport.lean",
+  "declaration": "CategoryTheory.normalizedDerivedAdjunctionTransport",
+  "statement": "theorem normalizedDerivedAdjunctionTransport\n    {A : Type a} {B : Type b} {A' : Type a'} {B' : Type b'}\n    [Category.{av} A] [Category.{bv} B] [Category.{av'} A'] [Category.{bv'} B']\n    [Abelian A] [Abelian B] [Abelian A'] [Abelian B']\n    [HasDerivedCategory.{da} A] [HasDerivedCategory.{db} B]\n    [HasDerivedCategory.{da'} A'] [HasDerivedCategory.{db'} B']\n    (e : A ≌ A') (g : B ≌ B') [e.functor.Additive] [e.inverse.Additive]\n    [g.functor.Additive] [g.inverse.Additive]\n    (L : A ⥤ B) (U : B ⥤ A) (L' : A' ⥤ B') (U' : B' ⥤ A')\n    [L.Additive] [U.Additive] [L'.Additive] [U'.Additive]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits U'] [PreservesFiniteColimits U']\n    (a : L ⊣ U) (a' : L' ⊣ U')\n    (s : L ⋙ g.functor ≅ e.functor ⋙ L')\n    (r : U ⋙ e.functor ≅ g.functor ⋙ U')\n    (hu : ∀ X : A, e.functor.map (a.unit.app X) ≫ r.hom.app (L.obj X) ≫\n      U'.map (s.hom.app X) = a'.unit.app (e.functor.obj X))\n    (LS : DerivedCategory A ⥤ DerivedCategory B)\n    (εS : DerivedCategory.Qh ⋙ LS ⟶ L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hLS : LS.IsLeftDerivedFunctor εS (HomotopyCategory.quasiIso A (.up ℤ)))\n    (aS : LS ⊣ U.mapDerivedCategory)\n    (hn : ∀ H : HomotopyCategory A (.up ℤ),\n      aS.unit.app (DerivedCategory.Qh.obj H) ≫ U.mapDerivedCategory.map (εS.app H) ≫\n        U.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj H) =\n      DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app H)) :\n    let DR := e.mapDerivedCategory\n    let DS := g.mapDerivedCategory\n    let kR := e.functor.mapDerivedCategoryFactorsh\n    let kS := g.functor.mapDerivedCategoryFactorsh\n    let sH := Functor.mapHomotopyCategoryCompIso s (.up ℤ) ≪≫\n      (Functor.mapHomotopyCategoryCompIso (Iso.refl (e.functor ⋙ L')) (.up ℤ)).symm\n    let rH := Functor.mapHomotopyCategoryCompIso r (.up ℤ) ≪≫\n      (Functor.mapHomotopyCategoryCompIso (Iso.refl (g.functor ⋙ U')) (.up ℤ)).symm\n    ∃ (LM : DerivedCategory A' ⥤ DerivedCategory B')\n      (εM : DerivedCategory.Qh ⋙ LM ⟶ L'.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n      (c : DR.functor ⋙ LM ≅ LS ⋙ DS.functor)\n      (d : U.mapDerivedCategory ⋙ DR.functor ≅ DS.functor ⋙ U'.mapDerivedCategory)\n      (aM : LM ⊣ U'.mapDerivedCategory),\n      LM.IsLeftDerivedFunctor εM (HomotopyCategory.quasiIso A' (.up ℤ)) ∧\n      (∀ H : HomotopyCategory A (.up ℤ),\n        LM.map (kR.hom.app H) ≫ εM.app ((e.functor.mapHomotopyCategory (.up ℤ)).obj H) =\n          c.hom.app (DerivedCategory.Qh.obj H) ≫ DS.functor.map (εS.app H) ≫\n            kS.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj H) ≫\n            DerivedCategory.Qh.map (sH.hom.app H)) ∧\n      (∀ H : HomotopyCategory B (.up ℤ),\n        d.hom.app (DerivedCategory.Qh.obj H) =\n          DR.functor.map (U.mapDerivedCategoryFactorsh.hom.app H) ≫\n            kR.hom.app ((U.mapHomotopyCategory (.up ℤ)).obj H) ≫\n            DerivedCategory.Qh.map (rH.hom.app H) ≫\n            U'.mapDerivedCategoryFactorsh.inv.app\n              ((g.functor.mapHomotopyCategory (.up ℤ)).obj H) ≫\n            U'.mapDerivedCategory.map (kS.inv.app H)) ∧\n      (∀ H : HomotopyCategory A' (.up ℤ),\n        aM.unit.app (DerivedCategory.Qh.obj H) ≫ U'.mapDerivedCategory.map (εM.app H) ≫\n          U'.mapDerivedCategoryFactorsh.hom.app ((L'.mapHomotopyCategory (.up ℤ)).obj H) =\n        DerivedCategory.Qh.map ((a'.mapHomotopyCategory (.up ℤ)).unit.app H)) ∧\n      (∀ K : DerivedCategory A,\n        DR.functor.map (aS.unit.app K) ≫ d.hom.app (LS.obj K) =\n          aM.unit.app (DR.functor.obj K) ≫ U'.mapDerivedCategory.map (c.hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T120327-L-3772964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261021T120327-L-3772964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
