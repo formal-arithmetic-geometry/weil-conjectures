@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-finite-linear-avoidance",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Avoiding finitely many linear subspaces",
@@ -13,22 +13,57 @@
   "place": "node lem-pc-finite-linear-avoidance, order 647"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "For each $j$, extend a basis of $W_j$ to one of $V$ and take a\nnonzero coordinate functional $\\lambda_j$ vanishing on $W_j$.\nTheir product is a nonzero polynomial on $V$, since the polynomial\nring over $k$ is a domain. A nonzero polynomial over an infinite\nfield cannot vanish at every point of affine space: in one variable\nit has at most its degree many roots; in several variables first\nchoose values at which one nonzero coefficient polynomial is nonzero,\nby induction, and then choose the last coordinate avoiding the\nfinitely many roots of the resulting one-variable polynomial.\nA point where $\\prod_j\\lambda_j$ does not vanish belongs to none\nof the $W_j$. For $s=0$ any vector suffices.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-linear-avoidance.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iUnion.*(ne_top|eq_top)|(union|Union).*submodule|not_mem.*(iUnion|finset)",
+   "results": "{\"t\": \"2026-10-21T04:14:33Z\", \"tool\": \"grep\", \"query\": \"iUnion.*(ne_top|eq_top)|(union|Union).*submodule|not_mem.*(iUnion|finset)\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dimension/Constructions.lean\", \"Mathlib/LinearAlgebra/Span/Defs.lean\", \"Mathlib/LinearAlgebra/Dimension/RankNullity.lean\"], \"digest\": \"10263f1cf49c28d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the broad grep found dimension and span files, not the finite-union theorem; the later CosetCover grep locates the match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A vector space over an infinite field cannot be a finite union of proper subspaces",
+   "results": "{\"t\": \"2026-10-21T04:14:33Z\", \"tool\": \"leansearch\", \"query\": \"A vector space over an infinite field cannot be a finite union of proper subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.exists_eq_top_of_iUnion_eq_univ\", \"Subspace.biUnion_ne_univ_of_top_notMem\", \"Subspace.top_mem_of_biUnion_eq_univ\", \"Submodule.finrank_add_finrank_le_of_disjoint\", \"LinearIndependent.lt_aleph0_of_finiteDimensional\", \"cardinal_lt_aleph0_of_finiteDimensional\", \"VectorSpace.card_fintype\", \"finite_of_fin_dim_affineIndependent\"], \"digest\": \"22910ff32b39f2b7\"}",
+   "date": "2026-10-21",
+   "verdict": "match: Subspace.biUnion_ne_univ_of_top_notMem, Mathlib/GroupTheory/CosetCover.lean:380-387, specializes to the finite family in the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, Set.Finite, Infinite",
+   "results": "{\"t\": \"2026-10-21T04:14:34Z\", \"tool\": \"loogle\", \"query\": \"Submodule, Set.Finite, Infinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the recorded pattern returned no hits; LeanSearch and LeanFinder do return the exact finite-union theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector space over an infinite field is not the union of finitely many proper linear subspaces",
+   "results": "{\"t\": \"2026-10-21T04:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"A vector space over an infinite field is not the union of finitely many proper linear subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.biUnion_ne_univ_of_top_notMem\", \"Subspace.exists_eq_top_of_iUnion_eq_univ\", \"Subspace.top_mem_of_biUnion_eq_univ\", \"Submodule.exists_forall_notMem_of_forall_ne_top\", \"Submodule.iUnion_ssubset_of_forall_ne_top_of_card_lt\", \"Module.Dual.exists_forall_mem_ne_zero_of_forall_exists\", \"infinite_range_add_smul_iff\", \"Combinatorics.Subspace.exists_mono_in_high_dimension\"], \"digest\": \"5ffc81c989bc1620\"}",
+   "date": "2026-10-21",
+   "verdict": "match: Subspace.biUnion_ne_univ_of_top_notMem, Mathlib/GroupTheory/CosetCover.lean:380-387, specializes to the finite family in the item."
+  },
+  {
+   "tool": "grep",
+   "query": "biUnion_ne_univ_of_top_notMem|exists_eq_top_of_iUnion_eq_univ",
+   "results": "{\"t\": \"2026-10-21T04:20:07Z\", \"tool\": \"grep\", \"query\": \"biUnion_ne_univ_of_top_notMem|exists_eq_top_of_iUnion_eq_univ\", \"sub\": \"GroupTheory/CosetCover.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"380\", \"392\", \"394\"], \"digest\": \"d50cdd41232984c6\"}",
+   "date": "2026-10-21",
+   "verdict": "match: Subspace.biUnion_ne_univ_of_top_notMem, Mathlib/GroupTheory/CosetCover.lean:380-387, specializes to the finite family in the item."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Subspace.biUnion_ne_univ_of_top_notMem",
+  "file": "Mathlib/GroupTheory/CosetCover.lean",
+  "line": 380,
+  "how": "specializes in one line: at lines 376-387 the theorem assumes an infinite division ring k, a k-vector space E, and a finite set s of subspaces not containing top. Take E = V and s = Finset.univ.image (fun j : Fin s => W_j), so top not in this image is exactly properness of every W_j; simplifying the biUnion gives the indexed union in the item. Reverse the inequality to match the displayed order. A field is a division ring; finite-dimensionality is unused. Empty families and the zero vector space are allowed."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -37,5 +72,20 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-finite-linear-avoidance",
+  "worker": "stage1",
+  "summary": "Q144 repair: deliver the item itself as a Mathlib leaf, using Subspace.biUnion_ne_univ_of_top_notMem at Mathlib/GroupTheory/CosetCover.lean:380-387. Retain the statement exactly, including the empty-family case. Reuse all four earlier logged searches, add the precise logged CosetCover grep, remove the imported proof and its null elementary flag, and create no nodes.",
+  "blueprint": "The entire conclusion of lem-pc-finite-linear-avoidance is a one-line specialization of the Mathlib finite-union theorem. This closes the node directly; no polynomial-avoidance proof steps or auxiliary nodes remain. The master statement and main-20261015 statement agree. Blueprint searches for subspaces and avoiding found only this node with the same assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-dbd803de6",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-dbd803de6 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It changes only the item and the report, adds no new nodes, and makes no changes. The item becomes a Mathlib leaf on Subspace.biUnion_ne_univ_of_top_notMem. I read Mathlib/GroupTheory/CosetCover.lean: the variables (DivisionRing k, Infinite k, Module k E, s : Finset (Subspace k E)) are at lines 376-377 and the theorem at 380-386. The recorded range is 380-387, and line 387 is blank, which does not matter. The theorem specializes in one line: a field is a division ring; take s as the image of the W_j, so that top not in s means every W_j is proper; the union over s equals the union of the W_j. Finite-dimensionality is not used, so Mathlib states a generalization. The statement is verbatim from both the master blueprint (order 647) and main-20261015 (order 653) and is not weakened. Edge cases hold: s=0, V=0, dimension 1, repeated subspaces. Over F_2 the plane is covered by its three lines, so the infinite-field hypothesis is needed. The search record has all three kinds: LeanSearch and LeanFinder both return the exact declaration, Loogle returned 0 hits (recorded honestly), and the greps found it. The two citers, lem-pc-projective-curve-linear-pair and lem-a1-semilocal-submodule-basis, use the statement as written. There is no re-split repair note for this item, no SGA citation, and no duplicate; blueprint.is is correct and same_as is []. The Mathlib indexed form Subspace.exists_eq_top_of_iUnion_eq_univ (line 394) would also match."
+ }
 }
