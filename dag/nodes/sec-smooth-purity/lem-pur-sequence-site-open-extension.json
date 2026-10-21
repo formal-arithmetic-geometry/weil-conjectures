@@ -2,7 +2,7 @@
  "id": "lem-pur-sequence-site-open-extension",
  "kind": "statement",
  "title": "Geometric and levelwise open extension on ringed sequence sites",
- "statement": "Let $j:V\\hookrightarrow W$ be an open immersion of schemes [def-weil-open-immersion], and fix small pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be a strict tower of commutative ring sheaves on $W_{\\mathrm{proet}}$, set $C_n=j^{-1}B_n$, and use their ringed sequence sites and strict semilinear module categories $\\mathscr S_W(B),\\mathscr S_V(C)$ [lem-pur-sequence-site-completion-projection, def-coef-semilinear-system-models]. The levelwise inverse image induces a geometric morphism $\\widetilde j$ of sequence topoi; it is localization at the constant sequence of the subterminal sheaf represented by $V\\to W$ [def-pur-localized-ringed-site, lem-weil-proetale-weakly-etale-localization]. Its ring-sheaf inverse image identifies $B_\\bullet$ with $C_\\bullet$.\n\nUnder the canonical equivalences with semilinear systems, module extension by zero along $\\widetilde j$ [lem-pur-site-restriction-module-adjunction-exact] identifies naturally with the exact functor $J:\\mathscr S_V(C)\\to\\mathscr S_W(B)$ whose value at level $n$ is $j_{!,B_n}M_n$. For every $m\\ge n$ its actual restriction-form transition is $j_{!,B_m}(a_{m,n})$ followed by the canonical coefficient comparison $j_{!,B_m}\\operatorname{Res}_{m,n}\\cong\\operatorname{Res}_{m,n}j_{!,B_n}$ [def-pc-sheaf-restrict-scalars]. This comparison is identity on underlying additive sheaves, is compatible with composition of coefficient maps, and is compatible with the units and counits of open extension/restriction. The same identifications hold for termwise derived descent on the ordinary unbounded derived system categories [def-weil-abstract-derived-category, lem-weil-pbc-exact-functor-derived-factorization], naturally on derived morphisms. If compatible homomorphisms from a commutative ring $R$ to $\\Gamma(W,B_n)$ specify scalar actions, $J$ preserves their actual scalar endomorphisms [def-weil-linear-functor].",
+ "statement": "Let $j:V\\hookrightarrow W$ be an open immersion of schemes [def-weil-open-immersion], and fix small pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be a strict tower of commutative ring sheaves on $W_{\\mathrm{proet}}$, set $C_n=j^{-1}B_n$, and use their ringed sequence sites and strict semilinear module categories $\\mathscr S_W(B),\\mathscr S_V(C)$ [lem-pur-sequence-site-completion-projection, def-coef-semilinear-system-models]. The levelwise inverse image induces a geometric morphism $\\widetilde j$ of sequence topoi; it is localization at the constant sequence of the subterminal sheaf represented by $V\\to W$, in the sense of localization of a ringed site at a sheaf of sets [lem-weil-pbc-ringed-sheaf-slice-adjunction, def-pur-localized-ringed-site, lem-weil-proetale-weakly-etale-localization]. Its ring-sheaf inverse image identifies $B_\\bullet$ with $C_\\bullet$.\n\nUnder the canonical equivalences with semilinear systems, module extension by zero along $\\widetilde j$ [lem-pur-site-restriction-module-adjunction-exact] identifies naturally with the exact functor $J:\\mathscr S_V(C)\\to\\mathscr S_W(B)$ whose value at level $n$ is $j_{!,B_n}M_n$. For every $m\\ge n$ its actual restriction-form transition is $j_{!,B_m}(a_{m,n})$ followed by the canonical coefficient comparison $j_{!,B_m}\\operatorname{Res}_{m,n}\\cong\\operatorname{Res}_{m,n}j_{!,B_n}$ [def-pc-sheaf-restrict-scalars]. This comparison is identity on underlying additive sheaves, is compatible with composition of coefficient maps, and is compatible with the units and counits of open extension/restriction. The same identifications hold for termwise derived descent on the ordinary unbounded derived system categories [def-weil-abstract-derived-category, lem-weil-pbc-exact-functor-derived-factorization], naturally on derived morphisms. If compatible homomorphisms from a commutative ring $R$ to $\\Gamma(W,B_n)$ specify scalar actions, $J$ preserves their actual scalar endomorphisms [def-weil-linear-functor].",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), applied to the ringed sequence topos open localization; comparison with its levelwise construction is the extracted assertion."
@@ -13,6 +13,7 @@
   "def-weil-size-convention",
   "lem-pur-sequence-site-completion-projection",
   "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
   "def-pur-localized-ringed-site",
   "lem-weil-proetale-weakly-etale-localization",
   "lem-pur-site-restriction-module-adjunction-exact",
@@ -21,9 +22,135 @@
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=W_{\\mathrm{proet}}$, $I=\\mathbf N_{\\ge1}^{\\mathrm{op}}$, and let $\\mathcal T_W$ be the sequence site in [lem-pur-sequence-site-completion-projection]. Put $H=h_V$. By [lem-weil-proetale-weakly-etale-localization], $H(U)=\\operatorname{Hom}_W(U,V)$ has at most one element and $\\mathcal C/H=\\mathcal C/V$ identifies with $V_{\\mathrm{proet}}$, including coverings. By [lem-weil-pbc-diagram-site-realization], the constant diagram $\\Delta H$ is a sheaf on $\\mathcal T_W$. Its element site has objects $(U,n,s:U\\to V)$; an arrow consists of $a:U'\\to U$ and $k\\le n$ with $s'=sa$. Its generating covers are precisely the fixed-index covers over $V$. Thus this element site is $(\\mathcal C/V)\\times\\mathbf N_{\\ge1}$ with the sequence topology. Apply [lem-weil-pbc-ringed-sheaf-slice-adjunction] on $\\mathcal T_W$ at $\\Delta H$: its sheaf topos is $\\operatorname{Sh}(\\mathcal T_W)/\\Delta H$, and restriction is the inverse image of the localization morphism. This identifies that morphism with $\\widetilde j$. The ring restricted to $(U,n,s)$ is $B_n(U)$, exactly $C_n(U\\to V)$. The same section formula on modules is levelwise $j^{-1}$.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04GZ (lemma-localize-topos) and 0791 (lemma-localize-topos-site); explicit element-site identification for the vertical sequence topology."
+   }
+  },
+  {
+   "text": "Use the exact equivalences of [lem-pur-sequence-site-completion-projection] for the two coefficient towers. If small skeleta were chosen, use the induced ringed presentation equivalences of [lem-weil-pbc-ringed-presentation-transport]; the structural ring identifications are the identities $B_n(U)=C_n(U\\to V)$ from step 1. Under these equivalences $\\widetilde j^*$ is the levelwise restriction functor $L$. Write $\\widetilde J$ for module extension by zero on this slice topos, transported to systems. Applying [lem-weil-pbc-ringed-sheaf-slice-adjunction] to the same small sequence site and its ring $B_\\bullet$ gives an exact additive adjunction $\\widetilde J\\dashv L$. This application is at the sheaf $\\Delta H$, not at an asserted representing object of the sequence site.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IE (lemma-localize-ringed-topos), via the element site of Tag 0791; Tags 03DI and 03DJ for its exact module left adjoint."
+   }
+  },
+  {
+   "text": "For any map of ring sheaves $q:D\\to E$ on $W_{\\mathrm{proet}}$, construct $e_q:j_{!,D}\\operatorname{Res}_{q|_V}\\xrightarrow{\\sim}\\operatorname{Res}_qj_{!,E}$. By [def-weil-extension-by-zero-presheaf], at $U$ both extension presheaves have the same additive group $\\bigoplus_{s:U\\to V}M(U,s)$, and the same restrictions. By [def-pc-sheaf-restrict-scalars], in either construction $d\\in D(U)$ acts on its $s$-summand through $q_U(d)\\in E(U)$. By [def-weil-presheaf-modules-sheafification], both underlying additive sheaves are the sheafification of this same presheaf, and the module action is its unique extension. The identity of that additive sheaf is therefore $D$-linear and is $e_q$; it is natural in $M$ and is inverse to itself with these identifications. No finiteness or flatness of $q$ is used.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), displayed extension presheaf; Tag 03CY (lemma-sheafification-presheaf-modules), unique extended action."
+   }
+  },
+  {
+   "text": "For composable $D\\xrightarrow q E\\xrightarrow r F$, both $e_{rq}$ and the composite of $e_q,e_r$, after the identity restriction-of-scalars comparisons, act identically on every extension-presheaf summand. The actions agree because $d\\cdot x=r(q(d))x$ on both sides. Uniqueness of factorization through the sheafification unit [def-weil-presheaf-modules-sheafification] makes these maps equal; the identity coefficient map gives the identity. For the adjunction of [lem-pur-site-restriction-module-adjunction-exact], the transpose of $f:j_!M\\to N$ sends $x\\in M(U,s)$ to $f_U(\\iota_s x)$, where $\\iota_s$ is the summand inclusion followed by the sheafification unit. Conversely these values define the presheaf map and hence its unique sheafified extension. Since $e_q$ preserves every $\\iota_s x$, these transpose formulas commute with coefficient restriction. Taking $f=1$ gives compatibility with the unit; applying the inverse transpose to $1$ gives compatibility with the counit.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), proof: mutually inverse maps on Hom sets; Tag 03CY, uniqueness through the sheafification unit."
+   }
+  },
+  {
+   "text": "For a strict semilinear system $M$, let $(JM)_n=j_{!,B_n}M_n$ and set $t_{m,n}=e_{q_{m,n},M_n}\\circ j_{!,B_m}(a_{m,n})$. On a system map $f$ set $(Jf)_n=j_{!,B_n}(f_n)$. These are maps to the actual restriction of scalars of the next component, as required by [def-coef-semilinear-system-models]. For $l\\ge m\\ge n$, naturality of $e_{q_{l,m}}$ moves $j_{!,B_m}(a_{m,n})$ across that comparison; the composition equation of step 4 then identifies $\\operatorname{Res}_{l,m}(t_{m,n})t_{l,m}$ with $e_{q_{l,n}}j_{!,B_l}(\\operatorname{Res}_{l,m}(a_{m,n})a_{l,m})=t_{l,n}$. Here the last equality is the strict system axiom for $M$. At equality indices $t_{n,n}=1$. The same naturality calculation with $f_n$ is the transition square for $Jf$; levelwise preservation of identities and composition makes $J$ a functor. Additivity follows from the additive sheafification of the summandwise maps in steps 3-4.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, extension presheaf functoriality, applied to the actual tower maps; coefficient composition checked explicitly."
+   }
+  },
+  {
+   "text": "For systems $M$ on $V$ and $N$ on $W$, transpose each $f_n:j_{!,B_n}M_n\\to N_n$ using [lem-pur-site-restriction-module-adjunction-exact], obtaining $g_n:M_n\\to j^{-1}N_n$. Let $b_{m,n}$ be the transition of $N$. The condition that $f$ is a system map is $b_{m,n}f_m=\\operatorname{Res}_{m,n}(f_n)e_{q_{m,n}}j_{!,B_m}(a_{m,n})$. Transpose this equality under the $B_m$ open adjunction. Naturality of the Hom bijection and its coefficient compatibility proved in step 4 give precisely $j^{-1}(b_{m,n})g_m=\\operatorname{Res}_{m,n}(g_n)a_{m,n}$, the condition that $g$ is a system map. The inverse transpose reverses this implication. Hence the component bijections restrict to a natural bijection $\\operatorname{Hom}(JM,N)=\\operatorname{Hom}(M,LN)$, with units and counits the componentwise ones. Thus $J\\dashv L$. By [lem-weil-pbc-conjugate-iso-unit-equation], $J$ and $\\widetilde J$ of step 2 have a unique unit-preserving natural isomorphism. Its counit equation follows by transposing the identity on $LN$. Since $\\widetilde J$ is exact, this comparison proves exactness of $J$ and is the required geometric/levelwise identification.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, Hom adjunction applied componentwise; comparison of the two left adjoints by the unit-preserving adjoint isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact additive system functors $J,\\widetilde J,L$, and to the level and coefficient restriction functors, which are exact by [def-coef-semilinear-system-models]. This gives their ordinary unbounded derived functors by termwise application. Each ordinary comparison above gives a chain isomorphism on every complex: its degreewise naturality is exactly commutation with the differential. Apply [lem-weil-pbc-localization-universal-property], clause (2), to descend these comparisons and the units and counits through the quasi-isomorphism localizations. That clause also preserves their composition and identity equations, so all the coefficient, transition, unit and counit equations remain equalities of derived natural transformations. In particular the comparisons are natural on every derived morphism. This argument takes place on the derived category of systems itself.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence, open-extension factor before derived limit: ordinary exact descent; localization universal property applied to the specified natural comparisons."
+   }
+  },
+  {
+   "text": "Finally let $r\\in R$. Its compatible images $r_n\\in\\Gamma(W,B_n)$ act on the $n$th extension presheaf by $x\\mapsto r_n|_U x$ in every summand indexed by $U\\to V$ [def-weil-extension-by-zero-presheaf]. Applying that presheaf construction to $r\\,1_{M_n}$ gives exactly this same endomorphism; the sheafification unit and its unique module extension [def-weil-presheaf-modules-sheafification] therefore give $j_{!,B_n}(r\\,1_{M_n})=r\\,1_{j_{!,B_n}M_n}$. Compatibility of the $r_n$ with the tower maps makes these actual endomorphisms maps of systems. Thus $J(r\\,1_M)=r\\,1_{JM}$ before localization. The same equality holds termwise on complexes and after localization by [lem-weil-pbc-localization-universal-property]. Together with additivity this is the scalar preservation required by [def-weil-linear-functor]; explicitly, $J(rf)=J((r\\,1)f)=rJ(f)$.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, module action on extension summands; Tag 03CY, extension of the action through sheafification; actual scalar endomorphisms retained by termwise descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-completion-projection",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "def-weil-extension-by-zero-presheaf",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ; sites.tex Tags 04GZ and 0791. Agent comparison of the sequence element site with the levelwise system adjunction, using the cited existing general lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +187,102 @@
    "results": "8 hits; AlgebraicGeometry.RingedSpace.res_zero, SheafOfModules.evaluation, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.evaluationPreservesLimit, smoothSheafCommRing.eval, smoothSheafCommRing.evalHom, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.evaluationPreservesLimitsOfSize",
    "date": "2026-10-21",
    "verdict": "no match: results do not identify the ringed sequence-site comparison asserted here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module extension by zero on a sequence topos equals levelwise open extension for a tower of ring sheaves, coherently with restriction of scalars",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "ModuleCat.Tilde.toOpen",
+     "SheafOfModules.Presentation.map_π_eq",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.tildeInModuleCat",
+     "ModuleCat.Tilde.res_apply",
+     "PresheafOfModules.Sheafify.module",
+     "PresheafOfModules.Sheafify.SMulCandidate.x",
+     "localCohomology.diagram"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: none states the ringed sequence-site open-extension comparison; generic adjunction and sheafification results are already represented by the cited DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "PresheafOfModules.sheafificationAdjunction",
+     "SheafOfModules.overMapPushforwardAdj",
+     "SheafOfModules.overPushforwardOverAdj",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: none states the ringed sequence-site open-extension comparison; generic adjunction and sheafification results are already represented by the cited DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: none states the ringed sequence-site open-extension comparison; generic adjunction and sheafification results are already represented by the cited DAG nodes.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open localization of the topos of inverse sequences is the inverse sequence topos of the open subtopos, with extension by zero on modules computed at every level",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "ModuleCat.Tilde.openToLocalization",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply",
+     "TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf",
+     "TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "CategoryTheory.Localization.instHasZeroObjectLocalization",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_left",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: none states the ringed sequence-site open-extension comparison; generic adjunction and sheafification results are already represented by the cited DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram category localized over a constant subterminal object is the diagram category of the localized topos; module extension by zero is componentwise",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "localCohomology.diagram",
+     "CompHausLike.LocallyConstantModule.functor_obj_val",
+     "ModuleCat.localizedModule_functor",
+     "CategoryTheory.Functor.IsLocalization.instDiscreteObjWhiskeringRightFunctorCategoryOfFiniteOfContainsIdentities",
+     "CategoryTheory.Localization.HasProductsOfShapeAux.limitFunctor",
+     "LightCondMod.LocallyConstant.functorToPresheaves",
+     "LightCondMod.LocallyConstant.functor",
+     "ModuleCat.instAdditiveLocalizationLocalizedModule_functor"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: none states the ringed sequence-site open-extension comparison; generic adjunction and sheafification results are already represented by the cited DAG nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-reduction-tower-functor",
@@ -83,5 +302,39 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-sequence-site-open-extension",
+  "worker": "stage1",
+  "summary": "Q81: identified the element site of the constant open subterminal with the sequence site over the open; constructed coefficient comparisons from identical additive extension presheaves and their unique sheafification actions; checked strict transitions and transposed system morphisms; identified geometric and levelwise extension by the unit-preserving adjoint comparison, and descended all transformations on the unbounded derived system categories. No new node is needed.",
+  "blueprint": "First sentence of lem-weil-compact-support-representative-independence.proof.md: the open-extension factor in the coherent finite-level compact-support tower, and its exact scalar-preserving ordinary derived descent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic vertical product-site realization supplies the constant-diagram sheaf; no statement in this unit supplies the arbitrary-index sheaf equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic localization at an arbitrary sheaf supplies the slice topos and exact module extension; the constant subterminal need not be a represented sequence-site object."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Generic ringed equivalence transports between chosen small site presentations; no compact-support or coefficient theorem is substituted for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-presentation-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-fc0f5e6c0",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-fc0f5e6c0 (reviewer sub-agent of L); spot-checked: I read the item's statement, all 8 steps and the statements of all 15 cited nodes in full, plus Stacks 03DI/03DJ/03CY/04IE (sites-modules.tex, extension by zero at l.2058) and 04GZ/0791. I also read the first proof sentence of lem-weil-compact-support-representative-independence in main-20261015. Pre-checks: the item is not in route-pivot-dropped; it is unsplit on live and side-live with no proof (no supersession); there is no re-split note for the item (the parent's 10-21 re-split note created this node); the statement is byte-identical to base; there is no SGA citation. The maths is correct. Step 1: ΔH is a sheaf by diagram-site-realization with J=N^op; its element site is (C/V)×N, and slice-adjunction applies at a non-representable sheaf. Step 2: exact J̃⊣L. Step 3: e_q is the identity on the common additive sheafification. Step 4: composition, plus a transpose formula the step derives itself from sheafification. Step 5: I recomputed the triple-index transition t_{l,n}=Res(t_{m,n})t_{l,m}. Step 6: transposing system maps gives J⊣L, and conjugate-iso gives a unit-preserving J≅J̃. Step 7: exact termwise descent plus localization (2). Step 8: scalar endomorphisms. Edge cases checked: V empty, V=W, zero ring, non-flat q, m=n, unbounded complexes. 0 new nodes, no duplicate. lem-sf-open-extension-scalar-restriction-coherence covers finite constant rings only. I accepted the three generic tool_uses: diagram-site-realization, ringed-sheaf-slice-adjunction and ringed-presentation-transport. FIX (B3): the statement's 'localization at the constant sequence of the subterminal sheaf' cited only def-pur-localized-ringed-site, which defines localization at a site object, but ΔH is not representable in the sequence site. I added [lem-weil-pbc-ringed-sheaf-slice-adjunction] (localization at a sheaf of sets) to that sentence and to stmt_deps; the meaning is unchanged, and the node was already a proof_dep, so no cycle. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-sequence-site-open-extension.json.; 1 file(s) fixed by the reviewer"
+ }
 }
