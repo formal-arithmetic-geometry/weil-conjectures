@@ -3,24 +3,128 @@
  "blueprint": {
   "is": "def-nagata-sheaf-rees-algebra",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Sheaf Rees algebra",
- "statement": "Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal sheaf. Define\nits sheaf Rees algebra by\n\n$$\n\\mathcal R_X(\\mathcal I)=\\bigoplus_{n\\geq0}\\mathcal I^n,\n$$\n\nwith multiplication induced by the canonical multiplication maps\n$\\mathcal I^m\\otimes_{\\mathcal O_X}\\mathcal I^n\\to \\mathcal I^{m+n}$ and unit the degree-zero copy of $\\mathcal O_X$.\nThe direct sum is taken in sheaves of $\\mathcal O_X$-modules. Define\nmultiplication on homogeneous summands by the displayed maps and extend it\nby the universal property of the direct sum; the degree-zero inclusion is\nthe unit. Associativity and the unit laws are exactly\n[lemma-nagata-sheaf-ideal-powers-assoc], so this is a graded\nquasi-coherent $\\mathcal O_X$-algebra. The multiplication maps need not be\ninjective, and no such hypothesis is used.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal sheaf [pqf-def-coherent]. Use the ideal powers $\\mathcal I^0=\\mathcal O_X$, $\\mathcal I^{n+1}=\\mathcal I^n\\mathcal I$ of [def-sbc-ideal-sheaf-powers] and their canonical associative, unital multiplication maps $\\mu_{m,n}:\\mathcal I^m\\otimes_{\\mathcal O_X}\\mathcal I^n\\to\\mathcal I^{m+n}$ [lemma-nagata-sheaf-ideal-powers-assoc], where tensor products are those of [def-pur-sheaf-tensor-product]. Define the sheaf Rees algebra by\n$$\\mathcal R_X(\\mathcal I)=\\bigoplus_{n\\geq0}\\mathcal I^n.$$\nThis is the coproduct (the colimit of the discrete diagram indexed by $\\mathbf N$, [def-weil-pbc-category-colimit]) in sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with inclusions $\\iota_n$. Concretely it is the sheaf of locally finite-support tuples of sections of the $\\mathcal I^n$, as in [lem-pur-module-sheaf-coproduct-local-support]. Define its product on homogeneous summands by\n$$\\iota_m(a)\\,\\iota_n(b)=\\iota_{m+n}(\\mu_{m,n}(a\\otimes b)),$$\nand on locally finite sums by bilinear extension; the associated map from the sheaf tensor product is furnished by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Its structure morphism and unit are the degree-zero inclusion $\\mathcal O_X=\\mathcal I^0\\xrightarrow{\\iota_0}\\mathcal R_X(\\mathcal I)$. The grading has degree-$n$ summand $\\mathcal I^n$, and products add degrees. The associative and unit laws are supplied by [lemma-nagata-sheaf-ideal-powers-assoc]; commutativity is inherited from $\\mathcal O_X$. This is a sheaf of commutative $\\mathcal O_X$-algebras in the sense of [def-weil-pbc-comm-algebra-sheaf], and its underlying module is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-coproduct-closure]. No injectivity of $\\mu_{m,n}$ is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-sheaf-rees-algebra.md",
   "place": "node def-nagata-sheaf-rees-algebra, order 105"
  },
  "stmt_deps": [
-  "lemma-nagata-sheaf-ideal-powers-assoc"
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sbc-ideal-sheaf-powers",
+  "lemma-nagata-sheaf-ideal-powers-assoc",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-module-sheaf-coproduct-local-support",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For each $n\\in\\mathbf N$, take the quasi-coherent ideal power $\\mathcal I^n$ of [def-sbc-ideal-sheaf-powers]. Apply [lem-pur-module-sheaf-coproduct-local-support] on the open-set site of $X$ to this countable family. This site is small in the chosen universe and has fibre products given by intersections; module sheafification is supplied by [def-weil-presheaf-modules-sheafification]. The result is a specified sheaf $\\mathcal R$ of locally finite-support tuples, whose coordinate insertions exhibit the required coproduct in module sheaves. This constructs the underlying object without choosing data from a mere existence claim.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-pur-module-sheaf-coproduct-local-support",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-sheaf-rees-algebra.md",
+    "place": "definition, direct sum in sheaves of modules"
+   }
+  },
+  {
+   "text": "Use the canonical maps and identities of [lemma-nagata-sheaf-ideal-powers-assoc]. On any open where two tuples have finite support, define their product in degree $k$ by $\\sum_{m+n=k}\\mu_{m,n}(a_m\\otimes b_n)$. Its support is contained in the finite sum of the two support sets. Restriction commutes with this formula since every $\\mu_{m,n}$ is a sheaf morphism. The locally finite-support description [lem-pur-module-sheaf-coproduct-local-support] therefore makes the formulas agree on overlaps and glue to a bilinear sheaf pairing. By [lem-pc-sites-sheaf-tensor-bilinear-universal] it gives the specified map $\\mathcal R\\otimes\\mathcal R\\to\\mathcal R$. On a common open with finite supports, the two parenthesized triple products expand into the sums of $\\mu_{m+n,r}(\\mu_{m,n}(a_m\\otimes b_n)\\otimes c_r)$ and $\\mu_{m,n+r}(a_m\\otimes\\mu_{n,r}(b_n\\otimes c_r))$, respectively. The cited associativity identifies each term. The degree-zero element $1$ is a two-sided unit by the cited unit laws. Swapping $m,n$ and using $ab=ba$ in $\\mathcal O_X$ shows commutativity, because the canonical ideal multiplication maps are induced by that product [def-sbc-ideal-sheaf-powers]. Distributivity and scalar compatibility follow termwise from bilinearity. Thus these operations give the stated algebra with its degree-zero structure map; the formula itself shows that multiplication adds degrees.",
+   "uses": [
+    "lemma-nagata-sheaf-ideal-powers-assoc",
+    "lem-pur-module-sheaf-coproduct-local-support",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-sheaf-rees-algebra.md",
+    "place": "definition, homogeneous multiplication and degree-zero unit"
+   }
+  },
+  {
+   "text": "Each $\\mathcal I^n$ is quasi-coherent by [def-sbc-ideal-sheaf-powers]. The family is indexed by the small set $\\mathbf N$, and its underlying module was constructed as its categorical coproduct. Apply [lem-weil-pbc-quasi-coherent-module-coproduct-closure] to conclude that $\\mathcal R$ is quasi-coherent. No finite generation, Noetherian, quasi-compactness, or injectivity hypothesis on multiplication has entered the construction.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-sheaf-rees-algebra.md",
+    "place": "definition, graded quasi-coherent algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "lem-pur-module-sheaf-coproduct-local-support",
+  "lemma-nagata-sheaf-ideal-powers-assoc",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-sheaf-rees-algebra.md",
+  "place": "Definition: explicit locally finite-sum construction and verification, using the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rees algebra of a quasi coherent ideal sheaf as a direct sum of its powers in sheaves of modules",
+   "results": "LeanFinder returned Scheme.IdealSheafData.ofIdeals and reesAlgebra, with filtration declarations; the Rees construction is for a single ring, not an algebra object in sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|reesGrading",
+   "results": "Five lines in RingTheory/ReesAlgebra.lean, including reesAlgebra at line 39 and mem_reesAlgebra_iff at line 64. Read lines 32-75: the definition is a subalgebra of R[X].",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DirectSum",
+   "results": "No hits for SheafOfModules, DirectSum.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of powers of a quasi coherent ideal sheaf is a graded algebra sheaf",
+   "results": "Eight hits including Algebra.directSumGAlgebra, TensorPower.galgebra, Submodule.galgebra, GradedAlgebra and DirectSum.GAlgebra.mk. They concern modules over a ring, not sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rees|rees|Graded",
+   "results": "Six hits, all freeSection occurrences in Sheaf/Free.lean and Sheaf/LocallyFree.lean; no Rees or graded sheaf algebra construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded commutative algebra object on a coproduct of sheaves of modules with homogeneous multiplication",
+   "results": "Eight hits including Submodule.galgebra, DirectSum.GAlgebra and graded tensor products. Read DirectSum/Algebra.lean lines 38-58: GAlgebra takes a ring and a family of module types, not sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -45,5 +149,40 @@
   "statement": "Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal sheaf. Define\nits sheaf Rees algebra by\n\n$$\n\\mathcal R_X(\\mathcal I)=\\bigoplus_{n\\geq0}\\mathcal I^n,\n$$\n\nwith multiplication induced by the canonical multiplication maps\n$\\mathcal I^m\\otimes_{\\mathcal O_X}\\mathcal I^n\\to \\mathcal I^{m+n}$ and unit the degree-zero copy of $\\mathcal O_X$.\nThe direct sum is taken in sheaves of $\\mathcal O_X$-modules. Define\nmultiplication on homogeneous summands by the displayed maps and extend it\nby the universal property of the direct sum; the degree-zero inclusion is\nthe unit. Associativity and the unit laws are exactly\n[lemma-nagata-sheaf-ideal-powers-assoc], so this is a graded\nquasi-coherent $\\mathcal O_X$-algebra. The multiplication maps need not be\ninjective.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-sheaf-rees-algebra",
+  "worker": "stage1",
+  "group": "Q141",
+  "summary": "Split the sheaf Rees definition into existing notions: ideal powers, module-sheaf coproducts with locally finite support, sheaf tensor pairing, commutative algebra sheaves, and quasi-coherent coproduct closure. Wrote the local convolution construction and checked all algebra identities using the existing ideal-power associativity node. No new nodes. Mathlib only supplies ring-level Rees/direct-sum constructions.",
+  "blueprint": "Current main-20261015 definition: the direct sum sentence is realized by construction step 1; homogeneous multiplication, degree-zero unit and algebra laws by step 2; quasi-coherence by step 3. This stays in the Rees/Proj clause of unit sk-lem-nagata-sketch-blowups.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-module-sheaf-coproduct-local-support",
+    "why": "Generic explicit coproduct of module sheaves, applied on the open-set site; the blow-up unit has no such construction."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property converting a bilinear sheaf pairing to a tensor-product morphism; independent of the blow-up route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic closure of quasi-coherent modules under small coproducts; the blow-up unit has no closure theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-module-sheaf-coproduct-local-support",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-9d4d4468a",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-9d4d4468a (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full, the current blueprint (main-20261015; text unchanged in main-20261017 apart from added Lean names), Stacks 01OF/01OG (definition-blow-up, Proj_X of the direct sum of I^n) and unit sk-lem-nagata-sketch-blowups step 1. The statement keeps every blueprint clause: the direct sum in Mod(O_X), the homogeneous mu_{m,n} multiplication, the degree-zero unit and structure map, the associativity and unit laws from lemma-nagata-sheaf-ideal-powers-assoc, graded and quasi-coherent, no injectivity of mu. It is not weakened. The added 'commutative' is correct: the maps come from the product in O_X, per def-sbc-ideal-sheaf-powers and the blueprint proof of the associativity lemma. Step 1 applies lem-pur-module-sheaf-coproduct-local-support on the open-set site (small, fibre products are intersections, sheafification from def-weil-presheaf-modules-sheafification, index set N), giving an explicit coproduct of locally-finite-support tuples. Step 2: local convolution on a common refinement, agreeing on overlaps because each mu is a sheaf map, glued as a bilinear pairing and turned into a map from the tensor product by lem-pc-sites-sheaf-tensor-bilinear-universal. Associativity and unit come termwise from the lemma, commutativity from O_X, and the unit law makes mu_{0,n} the module action, so the module structure from the algebra is the original one. Step 3 uses lem-weil-pbc-quasi-coherent-module-coproduct-closure (any scheme, any small family, no finiteness). Edge cases checked: I=0 gives O_X; I=O_X gives O_X[t] with locally bounded degree on non-quasi-compact opens; I=(p) on Spec Z gives Z[pt]; square-zero I; empty X. No duplicate: def-nagata-rees-algebra is ring-level and def-weil-pbc-graded-sheaf-structures is a generic notion (advisory). Dependency closure of 132 nodes: all exist, none merged, no cycle. No SGA cited. I accept the three generic tool uses: the coproduct construction, the tensor bilinear universal property and the quasi-coherent coproduct closure. Advisory: step 2 is marked elementary although it cites lemmas; its reasoning is written out in full and is routine. No changes made."
  }
 }
