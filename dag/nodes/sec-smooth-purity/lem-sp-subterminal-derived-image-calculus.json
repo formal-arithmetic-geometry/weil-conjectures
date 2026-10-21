@@ -273,5 +273,42 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-57a16a0f3 (reviewer sub-agent of L); spot-checked: I read the whole delivery, the item and every cited statement; I changed nothing and wrote no fixes. The delivery is the first split of an item that Q106 created statement-only on 2026-10-21 when it re-split lem-sp-ringed-topos-binary-descent (this item carries that proof's old steps 4-5). The item is unsplit on live and is not in any dropped list. The statement is unchanged and true: it is the direct-image part of Stacks 08DG (cohomology.tex lemma-glue, lines 11071-11124), generalised to subterminal objects of a small site with finite limits. No covering hypothesis is needed, and subterminality is used only in two places: the graph and the first projection are inverse on T×U for T→U, and T×W≅T×_U W. I checked all 9 steps by hand. Step 1: the module version of the 03CE/trf slice formula has R(T)→R(T×Z)→R(T) equal to the identity, its two transpose formulas are mutually inverse, and its counit is restriction along the graph. Step 2: the hypotheses of the 08BJ criterion hold, applied first to extension by zero ⊣ restriction and then to restriction ⊣ direct image. Step 3: 070K applies because a termwise additive functor carries cones and shifts to cones and shifts (014X, argued in the step). Step 4: the derived adjunction follows from the 070I bijections. Its counit is the ordinary counit at a K-injective I. Its unit is the ordinary one when M is K-injective, which the step correctly requires. Steps 5-6: the product identifications T×_U(U×V)≅T×V, T×W≅T×_U W and (C×U)×_U W≅C×W hold, and the scalar actions agree. Step 7: the derived comparisons hold on K-injective representatives, because k_V^*J and k_{U*}L are K-injective. Step 8: I recomputed the transpose of ρ_I; it is k_U^*ε, since T→T×W→T×U is the graph. Step 9: on U the map is the unit, ρ_J is the identity under the cross identifications, and on W both maps are identities by the triangle identity. Small cases tested: U=V=1, U=V, disjoint opens, U initial, a non-covering pair, the zero ring. No duplicate exists. The nearest nodes are subterminal-module-local-calculus (the extension-by-zero side, with a covering hypothesis), the scheme-only lem-pc Mayer-Vietoris and open-image nodes, and kinjective-restrict-localized (a single clause). I accept all six declared tool_uses as generic foundations; no SGA is cited. Batch 5: I accept the citation of lem-trf-slice-subtopos-site-presentation. It is the generic Stacks 03CE/00Y2 slice-site lemma. Its 121-node closure contains only generic site, sheaf and module foundations and the definition def-trf-geometric-morphism, with no trace-formula, Poincaré or batch-4 node. It is not a statement or proof step of either assumption, and Q08 passed it on 2026-10-17. Advisory only: lem-pur-kinjective-restrict-localized gives the restriction-preserves-K-injectives half of step 2 directly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SubterminalDerivedImageCalculus",
+  "declaration": "CategoryTheory.SubterminalImageCalculus.subterminal_derived_image_calculus",
+  "declarations": [
+   "CategoryTheory.SubterminalImageCalculus.smallSheafify",
+   "CategoryTheory.SubterminalImageCalculus.smallLocalCriterion",
+   "CategoryTheory.SubterminalImageCalculus.pushforwardAdditive",
+   "CategoryTheory.SubterminalImageCalculus.overAdditive",
+   "CategoryTheory.SubterminalImageCalculus.overMapAdditive",
+   "CategoryTheory.SubterminalImageCalculus.overPullbackAdditive",
+   "CategoryTheory.SubterminalImageCalculus.DerivedPair",
+   "CategoryTheory.SubterminalImageCalculus.direct",
+   "CategoryTheory.SubterminalImageCalculus.overlap",
+   "CategoryTheory.SubterminalImageCalculus.ring",
+   "CategoryTheory.SubterminalImageCalculus.modules",
+   "CategoryTheory.SubterminalImageCalculus.sliceModules",
+   "CategoryTheory.SubterminalImageCalculus.restrictionComp",
+   "CategoryTheory.SubterminalImageCalculus.CompositionNormalization",
+   "CategoryTheory.SubterminalImageCalculus.Comparisons",
+   "CategoryTheory.SubterminalImageCalculus.subterminal_derived_image_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SubterminalDerivedImageCalculus.lean",
+  "statement": "theorem subterminal_derived_image_calculus {C : Type u} [SmallCategory C] [HasFiniteLimits C] (J : GrothendieckTopology C) [J.Subcanonical] (R : Sheaf J CommRingCat.{max u r}) (U V : C) (hU : IsSubterminal U) (hV : IsSubterminal V) [HasDerivedCategory.{w0} (modules R)] [HasDerivedCategory.{wU} (sliceModules R U)] [HasDerivedCategory.{wV} (sliceModules R V)] [HasDerivedCategory.{wW} (sliceModules R (U ⨯ V))] : ∃ (pU : DerivedPair (SheafOfModules.overFunctor.{max u r} (ring R) U) (direct (ring R) U) (SheafOfModules.overPushforwardOverAdj (R := ring R) U)) (pV : DerivedPair (SheafOfModules.overFunctor.{max u r} (ring R) V) (direct (ring R) V) (SheafOfModules.overPushforwardOverAdj (R := ring R) V)) (pW : DerivedPair (SheafOfModules.overFunctor.{max u r} (ring R) (U ⨯ V)) (direct (ring R) (U ⨯ V)) (SheafOfModules.overPushforwardOverAdj (R := ring R) (U ⨯ V))) (pKU : DerivedPair (SheafOfModules.overMap.{max u r} (ring R) (Limits.prod.fst : U ⨯ V ⟶ U)) (SheafOfModules.overPullback.{max u r} (ring R) (Limits.prod.fst : U ⨯ V ⟶ U)) (SheafOfModules.overMapPushforwardAdj (ring R) (Limits.prod.fst : U ⨯ V ⟶ U))) (pKV : DerivedPair (SheafOfModules.overMap.{max u r} (ring R) (Limits.prod.snd : U ⨯ V ⟶ V)) (SheafOfModules.overPullback.{max u r} (ring R) (Limits.prod.snd : U ⨯ V ⟶ V)) (SheafOfModules.overMapPushforwardAdj (ring R) (Limits.prod.snd : U ⨯ V ⟶ V))) (cU : pW.left ≅ pU.left ⋙ pKU.left) (cV : pW.left ≅ pV.left ⋙ pKV.left), CompositionNormalization (A := modules R) (B := sliceModules R U) (D := sliceModules R (U ⨯ V)) pU.qF pKU.qF pW.qF cU (restrictionComp R (Limits.prod.fst : U ⨯ V ⟶ U)) ∧ CompositionNormalization (A := modules R) (B := sliceModules R V) (D := sliceModules R (U ⨯ V)) pV.qF pKV.qF pW.qF cV (restrictionComp R (Limits.prod.snd : U ⨯ V ⟶ V)) ∧ Nonempty (Comparisons pU.adj pV.adj pW.adj pKU.adj pKV.adj cU cV)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The five DerivedPair witnesses package the actual Mathlib restriction/direct-image functors, K-injective resolutions and preservation, and normalized derived adjunctions. Comparisons records all natural isomorphisms with canonical mate equations and all six overlap identities. Auxiliary records package precisely this node, without extra hypotheses or independent notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce93ee8c6",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Node unchanged except lean field; lean.statement verbatim; 16 declarations match the file; only the theorem is sorry. Hypotheses match the node exactly (small site, HasFiniteLimits, Subcanonical, subterminal U,V, W=U⨯V, no cover); ring and modules in max u r (small-site size convention), independent HasDerivedCategory universes. All functors and adjunctions are Mathlib's: overFunctor, overMap, pushforwardOver (sections over Z×C, scalar via prod.snd), overPullback, overPushforwardOverAdj, overMapPushforwardAdj. DerivedPair pins left (qF, localization), right (adj), qG (transpose to the termwise mapHomologicalComplex adjunction, plus naturality), and asserts resolutions and K-injective preservation for all four categories; CompositionNormalization pins cU,cV to Q of overFunctorMap.symm. Every Comparisons iso is a pinned mate or counit (selfU/V/W counits; crossUV/VU base-change mates; toUW/VW; compositeU/V), so the content is that canonical maps are isos, not hollow. overlap = W-transpose of cU ≫ kU counit = r_A; the six overlap laws match the unit, cross-identity and W-identity clauses. Docstrings carry source, blueprint and the 9-step proof; both report sections present. Edge cases (U=V, U=V=1, initial U, disjoint, zero ring) covered. No compile run (no file changed); worker's server compile 50.4 s. Advisories: duplicate-pattern sheafification instances under new names; self second reading."
  }
 }

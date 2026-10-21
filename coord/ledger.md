@@ -22090,3 +22090,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:09 L: merged deliver/F3/Sheaf.AlgebraicGeometry.ScalarMatrixInverseImage (stage 3; reviewer PASS; first push; landing 20261021T100953-L-4180815 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/F3-scalar-matrix-proof-commands.md)
 - 10:10 L: merged deliver/F4/Sheaf.AlgebraicGeometry.LeftModuleComparisonVanishingCriterion (stage 3; reviewer PASS; first push; landing 20261021T101000-L-4182866 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:10 L: merged deliver/F4/Sheaf.Paper.SfDerivedDirectImage (stage 3; reviewer PASS; first push; landing 20261021T101005-L-4184293 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/sf-derived-restriction-map-endpoints.md)
+- 10:10 L: merged deliver/NI/lem-pc-tate-endomorphism-ideals (stage 2; reviewer PASS; parallel immutable checks)
+- 10:10 L: merged deliver/Q115/lem-sp-subterminal-derived-image-calculus (stage 2; reviewer PASS; parallel immutable checks)

@@ -241,5 +241,24 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-5c1569e8d (reviewer sub-agent of L); spot-checked: Read the whole item; no new nodes. The statement is unchanged from side-live and matches Tate ASENS 1968 §1 pp.150-151: Prop. 1 without the commensurability clause, plus Prop. 2. One stmt_dep was added, def-weil-finite-dimensional-subspace, which is correct. Nine steps checked. The finite-error equivalence and subspace finiteness come via the complement leaf. Closure computations: (RT)(A) ⊆ A+W_R+R(W_T); for E1, (TR)(V) ⊆ T(V); for E2, (TR)(A) ⊆ T(A)+T(W_R). E1+E2=E via PT∈E1 and (1-P)T∈E2, because ((1-P)T)(A) ⊆ (1-P)(W). E2·E1 products have finite image in the right order (S(A)+S(W)). Linearity on E0 uses the pairwise-product additivity clause of lem-pc-finite-potent-trace-calculus (Tate T4, n=2) together with homogeneity. Cyclicity is applied with a=T, b=S for [E0,E] and with a=S, b=T for [E1,E2]; in each case the ba hypothesis is checked as finite-potent. Edge cases checked: A=0, A=V, V finite-dimensional, and the even/odd basis example. No duplicate found by rg -L. The only citer, lem-pc-tate-dvr-residue-calculus (steps 2-4), uses exactly these clauses. Live and side-live still have the item unsplit. Batch-5: lem-trf-vector-subspace-complement is a Mathlib leaf (Submodule.exists_isCompl) with no proof deps; it is generic linear algebra and no part of the proof of the trace formula or Poincaré duality, so it is accepted, and the declared tool_use is accepted with it. Cosmetic only: step 7 reuses the letter V for an operator. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateResidue.EndomorphismIdeals",
+  "declaration": "TateResidue.tate_endomorphism_ideals",
+  "file": "lean/Sheaf/RingTheory/TateResidue/EndomorphismIdeals.lean",
+  "statement": "theorem tate_endomorphism_ideals (k : Type u) [Field k] (V : Type v) [AddCommGroup V] [Module k V] (A : Submodule k V) : ∃ (B : Subalgebra k (Module.End k V)) (I₁ I₂ : Submodule k (Module.End k V)), (∀ T : Module.End k V, T ∈ B ↔ E A T) ∧ (∀ T : Module.End k V, T ∈ I₁ ↔ E₁ A T) ∧ (∀ T : Module.End k V, T ∈ I₂ ↔ E₂ A T) ∧ I₁ ≤ B.toSubmodule ∧ I₂ ≤ B.toSubmodule ∧ (∀ R : Module.End k V, R ∈ B → ∀ T : Module.End k V, T ∈ I₁ → R * T ∈ I₁ ∧ T * R ∈ I₁) ∧ (∀ R : Module.End k V, R ∈ B → ∀ T : Module.End k V, T ∈ I₂ → R * T ∈ I₂ ∧ T * R ∈ I₂) ∧ I₁ ⊔ I₂ = B.toSubmodule ∧ (∀ S T : Module.End k V, S ∈ I₂ → T ∈ I₁ → FiniteDimensional k (LinearMap.range (S * T))) ∧ (∀ U : Module.End k V, U ∈ I₁ ⊓ I₂ → U.IsFinitePotent) ∧ (∃ tr : ↥(I₁ ⊓ I₂) →ₗ[k] k, ∀ U : ↥(I₁ ⊓ I₂), tr U = Module.End.tateTrace (U : Module.End k V)) ∧ (∀ S T : Module.End k V, ((S ∈ I₁ ⊓ I₂ ∧ T ∈ B) ∨ (S ∈ I₁ ∧ T ∈ I₂)) → S * T - T * S ∈ I₁ ⊓ I₂ ∧ (S * T - T * S).tateTrace = 0)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the upstream E, E₁, E₂ and AlmostLE predicates without redefining them. Supplies subalgebra/submodule structures with exactly these carriers, both ideal laws, their sum, finite-rank products in the specified order, finite potency and a linear trace on the intersection, and both commutator membership/trace conclusions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11af8638a",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node unchanged vs side-live apart from the new lean field; lean.statement verbatim in the file; one sorry, no new definitions; docstrings carry the source place, blueprint tag and 9 steps. Read upstream TateIdeals.lean (AlmostLE, E, E1, E2) and FinitePotent.lean (IsFinitePotent, tateTrace), both free of sorry. Iff carrier clauses pin E, E1, E2 exactly, so B, I1, I2 are unique, not arbitrary. Subalgebra = unital; ideals are two-sided in E only; I1 ⊔ I2 = B; finite rank for E2·E1 in the node's order; IsFinitePotent with n>=0 is equivalent to N>=1; trace linear on E0 via a linear map agreeing with tateTrace; both commutator cases give membership and trace 0, verified through the ideal laws. Same tateTrace as the landed trace-calculus dep (H4). Edge cases V=0, A=0, A=V, finite-dimensional V, c=0 and an infinite-rank ST example all covered. No universe link or extra hypotheses. No recompile per the 2026-10-21 rule. Advisory: the Second reading section is a worker self-check."
  }
 }
