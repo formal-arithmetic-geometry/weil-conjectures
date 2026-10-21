@@ -20281,3 +20281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:11 L: merged deliver/NA/lem-sf-compact-support-proper-image-tower (reviewer PASS; first push; new nodes: 0); claim not held by NA: not your claim
 - 04:11 L: returned deliver/NY/lem-pur-scalar-hom-comparison-tower (reviewer RETURN: L: independent stage-2 immutable head e85e0a80dc1b: stmt_deps cite theorem node lem-coef-derived-system-evaluation-calcu)
 - 04:11 L: merged deliver/Q01/lem-weil-pbc-lisse-e-constructible-integral-lattice (reviewer FIX; after a return; new nodes: 4)
+- 2026-10-21T04:11:41Z L: superseded stage-1 delivery Q13/lem-sp-proetale-scalar-tensor-normalization at 377723e71fca40f5b548b57897640d653724d434; current completion retained; packet archived at refs/superseded/Q13/lem-sp-proetale-scalar-tensor-normalization/377723e71fca40f5b548b57897640d653724d434; stale return retired.
