@@ -1,8 +1,8 @@
 # Work queue
 
-201 items; claim with `tools/claim.py next <group> [--stage N]`.
+200 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (22 clusters, 965 modules)
+## Rework: quarantined by the upstream sync (23 clusters, 955 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -17,6 +17,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -52,12 +53,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (26)
+## Stage 2: nodes to state (24)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
-| `sk-d-real-weights` | 1 | state | 0 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 5 |
 | `lem-sfb-integral-quotient-direct-image-comparison` | 1 | state | 2 |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 1 | state | 2 |
@@ -67,7 +67,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
-| `lem-sf-cbc-localized-strict-tensor-descent` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
