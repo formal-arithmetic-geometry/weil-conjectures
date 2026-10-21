@@ -24,7 +24,7 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.AdicCompletionReduction
 import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcFiniteCompletedCoefficientMap
 import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.WeilCompletedTensorReflector

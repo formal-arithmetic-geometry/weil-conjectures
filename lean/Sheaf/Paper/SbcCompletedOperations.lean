@@ -31,7 +31,7 @@ import Sheaf.Paper.CondensedAmbientExchange
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcFiniteCompletedCoefficientMap
 import Sheaf.Paper.PerfectProjectionFormula
 import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
 import Sheaf.Paper.RingedExchangeTensorCoherence

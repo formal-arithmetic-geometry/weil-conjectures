@@ -9,6 +9,9 @@ public import Sheaf.Paper.PbcActualStrictPullback
 public import Sheaf.Paper.PbcDescentFunctors
 import Sheaf.Paper.PbcUniformCompleteTriangulated
 import Sheaf.Paper.PbcActualRingedExchange
+import Sheaf.Paper.PbcConstructibleReductionPullback
+import Sheaf.Paper.PbcConstructibleReductionCriterion
+import Sheaf.Paper.PbcUniformReductionCriterion
 
 /-! # Completed pullback on the actual common-stage Qbar category
 
@@ -34,6 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
   [iY : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   (f : X ⟶ Y)
 
+set_option linter.unusedSectionVars false in
 /-- Restriction of the actual completed pullback to the integral constructible objects.
 Source: BS 6.8.2 and Remark 6.8.15; Stacks 099N
 (blueprint: def-weil-pbc-completed-pullback).
@@ -47,7 +51,41 @@ theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω Y E) :
     PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
       ((pbcActualCompletedPull f (pbcStageDatum.{u} l Ω E)).obj K.obj) := by
-  sorry
+  let E' := pbcFiniteField.{u} l Ω E
+  let d := pbcIntegralDatum l E'
+  obtain ⟨a, b, hp⟩ := (pbcUniformReductionCriterion l E' Y K.obj).mp
+    ⟨K.property.2.1, K.property.2.2⟩
+  have hb : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcCompletedReduction Y d n).obj K.obj)) := by
+    intro n q hq
+    let R := pbcRestrict (pbcLevelConstantComparison Y d n).hom
+    have := (hp n).1
+    have := (hp n).2.1
+    have hz : IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcConstantReduction Y d n).obj K.obj)) := by
+      rcases hq with hq | hq
+      · exact DerivedCategory.isZero_of_isGE _ a q hq
+      · exact DerivedCategory.isZero_of_isLE _ b q hq
+    have hz' := hz.of_iso ((R.mapDerivedCategoryHomologyFunctorIso q).app
+      ((pbcCompletedReduction Y d n).obj K.obj))
+    have : R.Faithful := by
+      constructor
+      intro M N α β h
+      apply SheafOfModules.Hom.ext
+      exact (PresheafOfModules.restrictScalars _).map_injective
+        (congrArg SheafOfModules.Hom.val h)
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply R.map_injective
+    simpa using (IsZero.iff_id_eq_zero _).mp hz'
+  obtain ⟨hc, hcons, hbounds⟩ := pbc_constructible_reduction_pullback l E' f a b K.obj
+    K.property.1 (fun n ↦ (hp n).2.2) hb
+  have hstrict := (pbc_constructible_reduction_criterion l E' X a b _ hbounds).mpr
+    ⟨hc, hcons⟩
+  let e := (pbcActualCompletedPullback_tower d f).exists.choose.app
+    ⟨K.obj, K.property.1⟩
+  let := (pbcIntegralUniformComplete_isTriangulated l E' X dX.out iX.out).1
+  exact ObjectProperty.prop_of_iso _ e hstrict
 
 /-- The coherent pullback family is fixed by the actual integral pullback and the
 normalized scalar comparison; in particular no arbitrary natural isomorphism is chosen.
