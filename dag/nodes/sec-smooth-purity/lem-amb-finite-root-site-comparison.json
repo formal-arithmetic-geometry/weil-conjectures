@@ -23,118 +23,109 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-cbc-comparison-pullback-sections] to the underlying set sheaf of $\\mu_{m,T}^{\\mathrm{et}}$. At each weakly etale $f:W\\to T$ it identifies its comparison inverse image with $\\Gamma(W_{\\mathrm{et}},f_{\\mathrm{et}}^{-1}\\mu_{m,T}^{\\mathrm{et}})$. Since $m$ is invertible on $T$, it is invertible on $W$. The root pullback isomorphism of [lem-asd-etale-finite-twist-pullback] identifies the latter group with $\\mu_{m,W}^{\\mathrm{et}}(W)$, exactly the roots in $\\Gamma(W,\\mathcal O_W)^\\times$. Its compatibility with composition identifies restriction along $g:W'\\to W$ with $g^\\sharp$ on those roots. These bijections therefore assemble to $c_{m,T}$ with target [def-pur-roots-of-unity-sheaf]. Multiplication of roots and integer powers are preserved by the root pullback maps; thus this is an abelian-sheaf isomorphism. Both sheaves are killed by $m$, so [lem-pur-torsion-sheaf-constant-module] makes it $(\\mathbf Z/m)$-linear. This establishes the stated sectionwise identification on every test, without an affineness restriction.",
+   "text": "Use the existing Cartier root isomorphism and its kernel-inclusion equation. Evaluation preserves kernels; identify etale and pro-etale kernel sections with actual roots of unity. Compose these equivalences with the normalized etale root pullback to obtain root_sections. Transpose Cartier units comparison to prove root_unit, and use naturality for every restriction W to U.",
    "uses": [
-    "lem-cbc-comparison-pullback-sections",
-    "lem-asd-etale-finite-twist-pullback",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-sfb-cartier-reduction-data",
     "def-pur-roots-of-unity-sheaf",
-    "lem-pur-torsion-sheaf-constant-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale, applied to the finite etale root sheaf"
-   }
-  },
-  {
-   "text": "For etale $U/T$, the unit clause of [lem-cbc-comparison-pullback-sections] identifies the comparison unit on a root $z$ with that same section over $U$. Restricting along any $T$-map $f:W\\to U$, the restriction calculation of step 1 sends it to $f^\\sharp(z)$. For $m\\mid m'$ put $q=m'/m$. Naturality of that section comparison in the coefficient sheaf, and the power transition in [def-pur-roots-of-unity-sheaf], identify the two composites with $z\\mapsto z^q$ on every weakly etale test. In particular $f^\\sharp(z^q)=f^\\sharp(z)^q$. This proves the unit normalization and the root-only power square.",
-   "uses": [
-    "lem-cbc-comparison-pullback-sections",
-    "def-pur-roots-of-unity-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0GLZ, naturality of the section formula and its restriction to etale objects"
-   }
-  },
-  {
-   "text": "Put $B=(\\mathbf Z/m)_{T_{\\mathrm{et}}}$. The geometric inverse image of [def-weil-pbc-site-comparison-morphism] transports the ring and module operations by finite products, giving the algebraic inverse-image presentation of [def-weil-pbc-algebraic-inverse-image]. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to $M=\\mu_{m,T}^{\\mathrm{et}}$ and $N=A_{T_{\\mathrm{et}}}$ as $B$-modules. By [lem-sf-comparison-pullback-exact](1), with coefficient rings $\\mathbf Z/m$ and $A$, the pulled-back constant rings identify with the corresponding pro-etale constant rings and the fixed-coefficient module pullback is the underlying inverse image. These identifications preserve constant sections: their adjuncts are the constant-section maps defining the comparison. Hence the tensor comparison followed by $c_{m,T}\\otimes1$ gives an $A$-linear isomorphism $\\sigma_{m,T}$. The $A$-action is multiplication on the second tensor factor; naturality of the tensor comparison in that multiplication makes this map $A$-linear. Its generalized pure-tensor formula and step 2 give $z\\otimes a\\mapsto f^\\sharp(z)\\otimes a$ on the unit followed by restriction. This is the asserted balanced-tensor map; no flatness assumption on $A$ over $\\mathbf Z/m$ was used.",
-   "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-algebraic-inverse-image",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-sf-comparison-pullback-exact"
+    "lem-asd-etale-finite-twist-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-ring identifications and the root comparison"
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
    }
   },
   {
-   "text": "We check the root-only scheme square with the canonical $\\kappa_v$ of [lem-weil-pbc-comparison-pullback]. The right adjoints of $v_{\\mathrm{proet}}^{-1}\\nu_T^{-1}$ and $\\nu_{T'}^{-1}v_{\\mathrm{et}}^{-1}$ agree: at etale $U/T$ both evaluate a sheaf $G$ as $G(T'\\times_TU)$, by [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-direct-image] and [def-weil-proetale-inverse-image]. By [def-per-site-comparison-pullback-data], the canonical isomorphism $\\nu_{T'}^*v_{\\mathrm{et}}^{-1}\\cong v_{\\mathrm{proet}}^{-1}\\nu_T^*$ of [lem-weil-pbc-comparison-pullback] is defined as the adjunction mate of this sectionwise identification of direct images. With the composite adjunctions of [def-weil-pbc-composite-adjunction], [lem-weil-pbc-conjugate-iso-unit-equation] makes it the unique isomorphism carrying one composite adjunction unit to the other; $\\kappa_v$ is its inverse. Take adjuncts of the two root-square arrows under these composite adjunctions. At $U$, both adjuncts send $z$ to $\\mathrm{pr}_U^\\sharp(z)$: on one side this is the definition [def-pur-roots-of-unity-inverse-image] after step 2; on the other it is the etale root pullback of [lem-asd-etale-finite-twist-pullback], then step 1 on $T'$. Adjunction is a bijection on maps, so the root square commutes. All maps here are $(\\mathbf Z/m)$-linear by their power formulas.",
+   "text": "Compose the sheafification adjunction, the sectionwise extension/restriction-of-scalars adjunction, and the equivalence between additive and Z/m-linear maps from roots. This gives natural Hom equivalences for the two root tensors. Combine them with comparison adjunction and the Cartier root isomorphism to define sigma. Precomposition by sigma is bijective on every Hom set, hence sigma is an isomorphism. The adjunction units give its generator equation; A-linearity and naturality give arbitrary scalars and restrictions.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism",
+    "def-asd-finite-etale-tate-twist",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
+   }
+  },
+  {
+   "text": "Define d explicitly by transposing the recorded pro-etale root projection map through the scalar Hom equivalence and inverse-image adjunction. The generator equation follows from the two adjunction units. This construction does not require invertibility of m.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
     "def-weil-proetale-inverse-image",
+    "def-asd-finite-etale-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
+   }
+  },
+  {
+   "text": "Transpose the inverse canonical comparison mate under the two composite adjunctions. The general unit equation for conjugate adjoints identifies this with postcomposition by the canonical right-image comparison. At every etale U, both root adjuncts pull a unit along the same fibre-product projection: use the Cartier inclusion equation, the recorded pro-etale root projection formula, and the normalized etale root inclusion law. Injectivity of the root inclusion and of adjunction proves root_square. Applying the scalar Hom equivalence, both tensor adjuncts have the same generator values by the normalized etale law and d_unit. This proves scheme_square. All other factors in that square are isomorphisms, proving d_isIso after pulling back the inverse of m.",
+   "uses": [
+    "def-per-site-comparison-pullback-data",
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-pur-roots-of-unity-inverse-image",
     "lem-asd-etale-finite-twist-pullback",
-    "def-weil-pbc-direct-image",
-    "def-per-site-comparison-pullback-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0GLZ together with canonical comparison of the two composite inverse images; adjunction-unit calculation"
-   }
-  },
-  {
-   "text": "For tensor coefficients the pro-etale constant-ring map is the constant-section isomorphism of [prop-weil-pbc-proetale-constant-ring-map], applied to $A$ and $\\mathbf Z/m$. Thus $d_m^v$ is induced by the root map just used and the unchanged scalars. The tensor comparisons for all the geometric inverse images have the normalized formula of [lem-weil-pbc-algebraic-inverse-image-tensor-comparison]; their algebraic lifts are the transported operations in the inverse-image definitions. Take composite adjuncts of the two sides of the desired equation, as in step 4. On every pure section $z\\otimes a$ of $E_{m,T}$ over etale $U/T$ they both give $\\mathrm{pr}_U^\\sharp(z)\\otimes a$: first use the formula for $\\sigma$, then the root-square formula and the constant-section map. A scalar section is locally a constant section by [def-weil-pbc-constant-sheaf], so the equality holds for arbitrary scalar sections too. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] shows the adjuncts are equal on the sheaf tensor, hence the original arrows are equal. This proves $d_m^v v_{\\mathrm{proet}}^*\\sigma_{m,T}=\\sigma_{m,T'}\\nu_{T'}^*(e_m^v)\\kappa_v$. Every factor on the right and $v_{\\mathrm{proet}}^*\\sigma_{m,T}$ is invertible, so $d_m^v$ is invertible. Invertibility of $m$ on $T'$ follows by pulling back its inverse.",
-   "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-weil-pbc-constant-sheaf",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-weil-pbc-composite-adjunction"
+    "lem-sp-cartier-reduction-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, pure-tensor normalization; equality tested after adjunction and bilinear universality"
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
    }
   },
   {
-   "text": "For an identity scheme map the root formula is $z\\mapsto z$; for $T''\\xrightarrow{w}T'\\xrightarrow{v}T$ the iterated formula is $z\\mapsto\\mathrm{pr}_w^\\sharp(\\mathrm{pr}_v^\\sharp z)$, equal to pullback along the composite under the canonical fibre-product identification. The constant scalar is unchanged. Equality of the corresponding adjuncts, then [lem-pc-sites-sheaf-tensor-bilinear-universal], proves the identity and composition laws for $c$, $d$ and the displayed $\\sigma$ squares. These use exactly the identity/composition comparisons in [lem-weil-pbc-comparison-pullback] and [lem-asd-etale-finite-twist-pullback]. Finally for $m\\mid m'$ the transition is $z\\otimes a\\mapsto z^{m'/m}\\otimes a$. It is balanced over $\\mathbf Z/m'$ into the tensor over $\\mathbf Z/m$ because powers commute with integer multiplication and the action on $A$ factors through $\\mathbf Z/m$. The step-2 root square and the step-3 tensor formula give this same value on both sides of the $\\sigma$ power square; bilinear universality again proves equality. The same calculation commutes with scheme pullback since pullback of units commutes with powers. This proves every coherence assertion, including $m=1$, the zero ring, and the empty scheme.",
+   "text": "The normalized etale tensor identity and composition laws, the canonical comparison coherence, and cancellation of the invertible sigma give d_id and d_comp. For roots, transpose the canonical identity and composition comparisons. Their right-image maps restrict along the identity and associativity maps of fibre products. The projection equations and functoriality of global sections identify the two root formulas, proving root_id and root_comp.",
    "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
     "lem-weil-pbc-comparison-pullback",
     "lem-asd-etale-finite-twist-pullback",
-    "def-pur-roots-of-unity-sheaf"
+    "def-pur-roots-of-unity-inverse-image",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL and proetale.tex Tag 0GLZ; explicit identity, composite, and semilinear power calculations"
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
+   }
+  },
+  {
+   "text": "Take the normalized etale exponent-change q and tE. Define tP through the scalar Hom equivalence from the recorded pro-etale power transition, obtaining its generator formula. Postcompose the root power square by the monic inclusion into units. The q inclusion equation, the kernel-lift equation for the pro-etale transition, and integer linearity of Cartier comparison give equality. Transposing through the scalar Hom equivalence and comparison adjunction now proves the tensor power square. All calculations include exponent one, zero coefficients and the empty scheme.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-asd-finite-etale-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates."
    }
   }
  ],
  "proof_deps": [
-  "lem-cbc-comparison-pullback-sections",
-  "lem-asd-etale-finite-twist-pullback",
+  "lem-sp-cartier-reduction-site-comparison",
+  "def-sfb-cartier-reduction-data",
   "def-pur-roots-of-unity-sheaf",
-  "lem-pur-torsion-sheaf-constant-module",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-finite-etale-tate-twist",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-algebraic-inverse-image",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-comparison-pullback",
+  "def-pur-roots-of-unity-inverse-image",
   "def-weil-proetale-inverse-image",
+  "def-per-site-comparison-pullback-data",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-pur-roots-of-unity-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-constant-sheaf",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "def-weil-pbc-direct-image",
-  "def-per-site-comparison-pullback-data"
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; combined with sites-modules.tex Tag 03EL, lemma-tensor-product-pullback, and explicit root/tensor adjunction calculations."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; scalar-extension adjunction, with proetale.tex Tag 0GLZ and canonical adjunction mates. G7: explicit scalar Hom equivalences replace the general ringed tensor comparison."
  },
  "mathlib_searches": [
   {
@@ -281,15 +272,9 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-comparison-pullback-sections",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-torsion-sheaf-constant-module",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
   "def-per-site-comparison-pullback-data"
  ],
  "reviewed": {
@@ -325,5 +310,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Re-delivery of the H2 return of 7fcd82765c8d. The theorem stmt_dep lem-cbc-constant-ring-module-sheaves is replaced by the owning definition node def-sfb-constant-ring-module-restriction, as requested. That node record is byte-identical to the live node (existing:true, N8). constantRingModuleRestriction (ConstantRingModuleSheaves.lean:56) is a plain def that restricts scalars along toSheafify, not a .choose. lean.note and the report are updated. The Lean module is byte-identical to the returned head (sha256 597db5af…a43c). Independent re-read: the hypotheses match the node (arbitrary T; A : Type (u+1) is forced by the deps). c is the fixed cartierRootsIso, pinned by root_unit. σ and d are existential but pinned by tensor_unit and d_unit. The scheme square uses κ_v = .inv of the recorded mate. The id/comp laws use the canonical comparisons, and the power squares are pinned. Edge cases m=1, A=0, T=∅ and non-étale v are covered. The item and the added deps are not in route-pivot-dropped. The live item is unlanded and differs only in stmt_deps/lean. Advisory only: the root_sections clause quantifies a free equivalence e and adds nothing; its content is carried by root_unit. No compile run (no fix); the worker records a clean scompile and an OK dry run at 1fbea631abd."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261021T171801-L-3136903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
