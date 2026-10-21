@@ -23860,3 +23860,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:59 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head cd552a575238: A7/A6: head cd552a575238 is byte-identical to the returned NC head d)
 - 22:02 L: returned deliver/D2/Sheaf.Paper.StratifiedLatticeRank (reviewer RETURN: (reviewer C-1ec74, head 1ec7410dd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.StratifiedLatt)
 - 22:02 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 22:02 L: merged deliver/Q05/lem-sfb-tame-stratum-kummer-descent (stage 2; reviewer PASS; parallel immutable checks)

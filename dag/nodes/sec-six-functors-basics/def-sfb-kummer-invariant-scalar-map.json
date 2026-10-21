@@ -1,0 +1,113 @@
+{
+ "id": "def-sfb-kummer-invariant-scalar-map",
+ "kind": "definition",
+ "title": "Kummer Invariant Scalar Map",
+ "status": "split",
+ "statement": "Define the right-hand derived object as exact point pullback, after canonical localization transport, of ordinary right-derived invariants of the existing all-continuous equivariant module. Define its actual invariant-resolution complex and resolution comparison using the actual augmentation. The point scalar comparison is the canonical module inverse-image comparison. Built from [def-sfb-kummer-coefficient-models], [sk-def-sfb-module-objects], [sk-def-sfb-module-derived-pushpull].",
+ "stmt_deps": [
+  "def-sfb-kummer-coefficient-models",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary local calculation: geometric Kummer-nerve descent and its counit on the boundary strata Agent-formulated input; exact all-continuous proof/reference WANTED, not a finite-coefficient theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized coherent Cech bar comparison on a full Kummer root tower",
+   "results": "8 hits: KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp; Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; RingOfIntegers.norm_norm; adjoinRootXPowSubCEquiv; Normal.tower_top_of_normal; adjoinRootXPowSubCEquiv_root; Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom; groupCohomology.inhomogeneousCochainsIso",
+   "date": "2026-10-21",
+   "verdict": "No exact all-continuous internal-module stratum comparison; ordinary discrete group cochains are not the requested notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Cech nerve normalized derived bar comparison and scalar restriction counit on a Kummer stratum",
+   "results": "8 hits: classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule; CategoryTheory.Idempotents.DoldKan.hε; classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget; Rep.standardComplex.compForgetAugmentedIso; CategoryTheory.Idempotents.DoldKan.hη; AlgebraicTopology.DoldKan.N₁Γ₀; CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f; CategoryTheory.Idempotents.DoldKan.η_hom_app_f",
+   "date": "2026-10-21",
+   "verdict": "No exact continuous internal-module geometric comparison; reuse the existing generic bar and exact functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Condensed\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep kummer(Cech|Bar|Invariant|Nerve|Scalar)|KummerNormalizedChart|KummerStratumChart; rg same pattern Mathlib, lean/WeilConjectures, lean/Sheaf; blueprint_refs search Kummer; rg DAG coherent Kummer|normalized Kummer|Kummer nerve|scalar invariant",
+   "results": "msearch Mathlib: 0 hits. Mathlib and WeilConjectures exact helper names: no hits. Sheaf has unrelated PurityFiniteKummerDefinitions.kummerScalarMap. Blueprint search 52 Kummer nodes; DAG search includes existing root-tower, partial-Kummer and internal-bar inputs, which are reused. No existing node supplies these normalized assembly interfaces.",
+   "date": "2026-10-21",
+   "verdict": "New helper notion after reusing existing root-tower, condensed-action and bar notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-stratum-kummer-descent",
+  "date": "2026-10-21",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), normalized whole-stratum Kummer-nerve and internal-bar assembly",
+   "via": [
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.KummerInvariantScalarMap",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.kummerInvariantObject",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerInvariantObject",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerInvariantComplex",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerInvariantResolutionIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.kummerPointScalarIso"
+  ],
+  "file": "lean/Sheaf/Paper/KummerInvariantScalarMap.lean",
+  "statement": "def kummerInvariantObject (B : Model A G) (S : Scheme.{u}) (N : Equivariant A G) : DerivedCategory (KummerModules A.X S)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fae3d232",
+  "group": "Q05",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fae3d232",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery after RETURN a0510f1c. F1 fixed: KummerRefinementNatural now requires, for every g:S'→S, a full KummerGlobalChart over g≫s/g≫i whose comparison equals the pulled-back original comparison, which is not tautological; it is used for both E and Ω in KummerStratumChart, and def-sfb-kummer-refinement cites global-chart without a cycle. F2 fixed: KummerParameterEvaluation removed; def-sfb-kummer-parameter-evaluation is existing:true on ProfiniteFunctions (verbatim); parameter_iso and the bar column use the published comparisonApp; the Mod.ihom≅ihom transport is the .choose of an evaluation-pinned ∃!. F3 fixed: four existing:true def nodes (condensed-point-pullback-comparisons, exact-derived-module-adjunction, finite-continuous-kummer-coefficient-model, tame-root-chart-geometry), verbatim and previously owned only by theorem nodes; the item gains landed def-sfb-strict-local-kummer-tame-module and derived-profinite-evaluation (allowed); the remaining theorem stmt_deps are instance/lemma uses only (advisory). F4 fixed: eight-step docstring with node ids. All lean.statement fields verbatim; no opaque/axiom; 20 sorry on Prop theorems only; no collisions, dropped nodes or dropped modules; edge cases unchanged. No compile (2026-10-21 rule). Advisory: unused _J parameter; parameter_iso is redundant with comparison_isIso; prior A1/A2 stand."
+ }
+}

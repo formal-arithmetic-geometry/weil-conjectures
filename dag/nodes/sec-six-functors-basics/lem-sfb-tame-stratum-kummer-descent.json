@@ -18,7 +18,38 @@
   "def-sfb-lisse-coefficient-module",
   "def-weil-open-immersion",
   "def-weil-pbc-proetale-site",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-normalized-kummer-comparison",
+  "def-sfb-kummer-bar-resolution",
+  "def-sfb-kummer-nerve-geometric-map",
+  "def-sfb-kummer-global-chart",
+  "def-sfb-kummer-refinement",
+  "def-sfb-kummer-resolved-descent",
+  "def-sfb-kummer-scalar-invariant-square",
+  "def-sfb-kummer-parameterized-term",
+  "def-sfb-kummer-resolution-columns",
+  "def-sfb-kummer-term-mate",
+  "def-sfb-kummer-stratum-geometry",
+  "def-sfb-kummer-geometric-columns",
+  "def-sfb-kummer-scalar-restriction",
+  "def-sfb-kummer-cech-descent",
+  "def-sfb-kummer-local-source",
+  "def-sfb-kummer-nerve-coordinates",
+  "def-sfb-kummer-stratum-chart",
+  "def-sfb-kummer-nerve-transport",
+  "def-sfb-kummer-constant-nerve-term",
+  "def-sfb-kummer-coefficient-models",
+  "def-sfb-kummer-invariant-scalar-map",
+  "def-sfb-kummer-chart-geometry-maps",
+  "def-sfb-kummer-normalized-chart",
+  "def-sfb-kummer-parameter-evaluation",
+  "def-sfb-kummer-coherent-roof",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-derived-profinite-evaluation",
+  "def-sfb-exact-derived-module-adjunction",
+  "def-sfb-condensed-point-pullback-comparisons",
+  "def-sfb-finite-continuous-kummer-coefficient-model",
+  "def-sfb-tame-root-chart-geometry"
  ],
  "proof": [
   {
@@ -266,5 +297,27 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-81f850b7b (reviewer sub-agent of L); spot-checked: There is no twin delivery and nothing has landed (the live item is unsplit; svc.log has only this START). The item statement and stmt_deps are byte-identical to live, the source is the agent-expanded §(3) of sk-thm-sf-ctf-stability-direct-images, and no node cites SGA. I read all 8 steps. Step 1: the nerve T°[G_I^n] follows from iterating the torsor isomorphism of the extension node, and over U° the levels are finite étale because n is prime to p and t is a unit. Step 2: finite quotients of H_I are prime to ℓ. Step 3: scalar extension is elementary, C(P,F)⊗C(P,E)^d = C(P,F)^d. Step 4: slice localization and the derived slice comparison with counits come before the new Čech descent node, with X=U°, V=T° and h=S_α; the boundary is pulled back after localizing. Step 5: the root-tower term node's hypotheses all hold, and the first face is ρ(g_1) because root automorphisms fix S. Step 6: the condensed bar node applies with A=C_F and G=G_I. Step 7: ring-sheaf-change-adjunction gives the E→Ω compatibility, and the counit and refinement clauses are cited. Step 8: I=∅ and rank 0 work. New nodes: (1) Čech totalization is true (v_{n*} preserves injectives, first-quadrant Tot, exact h^* commutes) and is not a duplicate of Stacks 03FC or det-pe-hypercover-complex. (2) The condensed bar node is true (free condensed modules are flat, so restriction preserves injectives) and is distinct from the discrete bar-resolution-cochains node. (3) Prime-to-ℓ finite image is true: the stable lattice from L19 Prop. 1.1.9, plus a pro-ℓ congruence kernel and an open preimage whose finite quotients are prime to ℓ. (4) The tame extension node is geometric input only and is not the potential-kummer-tameness node. (5) The root-tower term node checks out for finite P, r=0 and empty S. For r=1, P=* with finite coefficients it gives M[0] by absolute purity plus integral base change. The incomplete-Ω all-continuous case is the inherited open core of the parent family, isolated as WANTED, and is not a split fault. None of the new nodes restates the item. Batch-5 flags: def-trf-strict-normal-crossings-boundary is a general definition, already in the base stmt_deps, and is not part of the trace formula or Poincaré duality, so I accepted it for both citing nodes. I accept the declared tool_uses: coefficient-sections-localization, ringed-derived-slice-localization and ring-sheaf-change-adjunction are generic. Minor B2 nit not repaired: the root-tower node leaves D unnamed, but the meaning is unambiguous."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TameStratumKummerDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tameStratumKummerDescent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.TameStratumKummerAssertion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tameStratumKummerDescent"
+  ],
+  "file": "lean/Sheaf/Paper/TameStratumKummerDescent.lean",
+  "statement": "theorem tameStratumKummerDescent (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : PadicAlgCl.FiniteIntermediateField ℓ) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (_hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (L : KummerModules (Profinite.continuousMapRingObj E.1) (tameBoundaryOpen D).toScheme) (_hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj E.1) L) (_htame : IsStrictLocalKummerTameModule p (Profinite.continuousMapRingObj E.1) D (tameBoundaryOpen D).ι L) (I : Finset (Fin hD.2.2.choose)) : TameStratumKummerAssertion p ℓ E D hD L I",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fae3d232",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery after RETURN a0510f1c. F1 fixed: KummerRefinementNatural now requires, for every g:S'→S, a full KummerGlobalChart over g≫s/g≫i whose comparison equals the pulled-back original comparison, which is not tautological; it is used for both E and Ω in KummerStratumChart, and def-sfb-kummer-refinement cites global-chart without a cycle. F2 fixed: KummerParameterEvaluation removed; def-sfb-kummer-parameter-evaluation is existing:true on ProfiniteFunctions (verbatim); parameter_iso and the bar column use the published comparisonApp; the Mod.ihom≅ihom transport is the .choose of an evaluation-pinned ∃!. F3 fixed: four existing:true def nodes (condensed-point-pullback-comparisons, exact-derived-module-adjunction, finite-continuous-kummer-coefficient-model, tame-root-chart-geometry), verbatim and previously owned only by theorem nodes; the item gains landed def-sfb-strict-local-kummer-tame-module and derived-profinite-evaluation (allowed); the remaining theorem stmt_deps are instance/lemma uses only (advisory). F4 fixed: eight-step docstring with node ids. All lean.statement fields verbatim; no opaque/axiom; 20 sorry on Prop theorems only; no collisions, dropped nodes or dropped modules; edge cases unchanged. No compile (2026-10-21 rule). Advisory: unused _J parameter; parameter_iso is redundant with comparison_isIso; prior A1/A2 stand."
  }
 }
