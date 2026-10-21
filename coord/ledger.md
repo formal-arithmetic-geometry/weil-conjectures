@@ -19920,3 +19920,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: merged deliver/Q78/lem-sfb-qlbar-flat (reviewer PASS; after a return; new nodes: 2)
 - 03:42 L: merged deliver/Q49/lem-sfb-finite-free-scalar-coordinates (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T03:42:27Z L: superseded stage-1 delivery Q93/lem-sp-direct-image-change-ring-transpose at 6ec76ee9c2abc3cedccb31631b8231a3ad48cd86; current completion retained; packet archived at refs/superseded/Q93/lem-sp-direct-image-change-ring-transpose/6ec76ee9c2abc3cedccb31631b8231a3ad48cd86; stale return retired.
+- 03:42 L: merged deliver/Q129/lem-sfb-finite-proper-classical-coproducts (reviewer FIX; first push; new nodes: 0)

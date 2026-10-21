@@ -15,9 +15,217 @@
   "sk-def-sfb-derived-categories",
   "sk-def-pe-classical-definition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A_T=\\operatorname{Mod}(A_T)$ for $T=X,Y$, on small site representatives in one common universe containing $I$. These categories, and the corresponding étale module categories, are Grothendieck abelian and have enough injectives. Properness makes $f$ finite type, hence quasi-compact, and separated, hence quasi-separated. Thus all qcqs comparison and coproduct inputs below apply even if $Y$ is not quasi-compact. Since $A$ is finite and discrete, the two finite-discrete coefficient lemmas identify the coefficient ring $A_T$ of the statement with the constant ring sheaf $\\nu_T^*A_{T,\\mathrm{\\acute et}}$, so the classical and comparison statements for constant coefficients below apply to $\\mathcal A_T$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer: categories and qcqs hypotheses"
+   }
+  },
+  {
+   "text": "Ambient coproducts in each of these unbounded derived categories are represented by termwise coproducts, with their specified coprojections. The sum functor on each abelian category is exact: finite sums are exact, and an arbitrary sum is the filtered colimit of its finite partial sums, so use exact filtered colimits from step 1. Applying the exact-functor cohomology identity to this sum functor gives $H^q(\\bigoplus_s L_s)=\\bigoplus_s H^q(L_s)$ naturally. Exactness also preserves the kernel and cokernel in the explicit good-truncation formulas, so $\\tau_{\\le b}$ and $\\tau_{\\ge a}$ commute with these coproducts, including their canonical inclusion and projection maps. This covers the empty family.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products (1)-(2); good truncation formulas of def-kun-truncations"
+   }
+  },
+  {
+   "text": "For either $T$, classical $A_T$-module sheaves are precisely the essential image of the exact fully faithful left adjoint $\\nu_T^*$ on étale module sheaves. If $M_s\\simeq\\nu_T^*N_s$, the left-adjoint colimit theorem identifies $\\bigoplus_sM_s$ with $\\nu_T^*(\\bigoplus_sN_s)$, hence it is classical. Therefore step 2 implies that ambient coproducts of classical-cohomology complexes again have classical cohomology. Their good truncations have classical cohomology as well, since each cohomology sheaf is either one of the original ones or zero. Moreover the exact termwise functor $\\nu_T^*$ preserves coproducts on the unbounded derived categories, by the exact-derived-coproduct theorem. No claim about essential surjectivity on unbounded complexes is used.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-exact-derived-coproducts",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer: compatibility with sums, used only on the bounded-below classical comparison"
+   }
+  },
+  {
+   "text": "Write $G=Rf_{\\mathrm{proét},*}$. The ordinary constant-coefficient pro-étale operations give the unbounded adjunction $f^*\\dashv G$; its left adjoint is exact and acts termwise. Thus $G$ preserves countable products by the right-adjoint limit theorem, and is triangulated and commutes with shifts by the K-injective right-derived-functor theorem. It preserves lower bounds: if $L\\in D^{\\ge a}(\\mathcal A_X)$, choose a K-injective complex $J$ of injectives, zero in degrees below $a$, representing $L$. Then $f_*J$, which computes this same total $G(L)$, is zero below $a$. Consequently $G(L)\\in D^{\\ge a}(\\mathcal A_Y)$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/_section.md",
+    "place": "Second paragraph: unbounded K-injective right adjoints preserve products; lower bounds via bounded-below injective representatives"
+   }
+  },
+  {
+   "text": "Set $c=2e$. There is an integer $n>0$ with $n1_A=0$: two of the finitely many elements $0,1_A,2\\cdot1_A,\\ldots$ coincide. Hence every $A$-module sheaf has torsion underlying abelian sheaf. The assumed fibre bound applies to $f$ itself, so the proper torsion cohomological-dimension theorem gives $R^qf_{\\mathrm{ét},*}F=0$ for $q>c$ on underlying abelian sheaves. The higher-direct-image forgetful comparison and the faithful exact forgetful functor give the same vanishing for every étale $A$-module sheaf. Apply the finite-cd qcqs direct-image coproduct theorem with this fixed $c$: $E=Rf_{\\mathrm{ét},*}$ preserves all small coproducts of arbitrary unbounded étale $A$-complexes, with the canonical maps induced by coprojections.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-exc-direct-image-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U, lemma-cohomological-dimension-proper; Tag 0F0D, lemma-proper-mod-n-direct-sums, and finite-cd coproduct theorem; coefficient comparison is Tag 0D6J, sites-cohomology.tex, lemma-modules-abelian-unbounded"
+   }
+  },
+  {
+   "text": "Let $M$ be any classical $A_X$-module sheaf and write $M\\simeq\\nu_X^*F$ using the module-sheaf comparison equivalence. Apply the canonical bounded-below direct-image comparison to $F[0]$: $G(M[0])\\simeq\\nu_Y^*Rf_{\\mathrm{ét},*}(F[0])$. Compatibility of bounded-below and total right derived functors identifies its cohomology with the classical higher direct images. By step 5 these vanish for $q>c$. Exactness of $\\nu_Y^*$, with its natural cohomology identification, proves $H^q(G(M[0]))=0$ for $q>c$. All these comparisons concern bounded-below inputs, not arbitrary unbounded étale origins.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "sk-thm-pe-direct-image-comparison",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Transfer: bounded-below direct-image comparison applied to a classical sheaf"
+   }
+  },
+  {
+   "text": "Countable products in both pro-étale module categories are exact, and the canonical truncation tower is left complete. Their derived countable products exist and are represented by termwise products. Apply the class-relative left-complete heart upper-bound theorem with source $\\mathcal A_X$, target $\\mathcal A_Y$, functor $G$, class $\\mathcal S$ of classical module sheaves, and bound $c$. Its functor hypotheses are step 4 and its heart hypothesis is step 6. It follows that, for every classical-cohomology $L$ and integer $b$, $L\\in D^{\\le b}$ implies $G(L)\\in D^{\\le b+c}$. This controls the entire unbounded negative tail; it imposes no cohomological bound on nonclassical heart objects or on a ground field.",
+   "uses": [
+    "det-pe-products-exact",
+    "det-pe-left-complete-iso",
+    "lem-weil-derived-countable-products-core",
+    "lem-sfb-left-complete-heart-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products; Tag 08TC, definition-derived-limit; Tag 0H72, remark-map-into-derived-limit-truncations; class-relative bound as stated by lem-sfb-left-complete-heart-upper-bound"
+   }
+  },
+  {
+   "text": "First consider a family $(L_s)$ with classical cohomology in one common interval $[a,b]$. The bounded-below derived unit theorem and classical derived equivalence give étale complexes $B_s$ and isomorphisms $\\nu_X^*B_s\\simeq L_s$. Exact faithful $\\nu_X^*$ reflects vanishing of cohomology, so each $B_s$ lies in $[a,b]$; their étale coproduct also lies there by step 2. The bounded-below direct-image comparison applies both to every $B_s$ and to $\\bigoplus_sB_s$. Combining it with step 3 (derived $\\nu_X^*,\\nu_Y^*$ preserve sums) and step 5 ($E$ preserves sums) gives isomorphisms\n$$\\bigoplus_sG L_s\\simeq\\nu_Y^*\\bigoplus_s E B_s\\xrightarrow{\\sim}\\nu_Y^*E(\\bigoplus_sB_s)\\xrightarrow{\\sim}G(\\nu_X^*\\bigoplus_sB_s)\\simeq G(\\bigoplus_sL_s).$$\nThis composite is the canonical comparison: on the $s$-th coprojection it is $G$ of the corresponding coprojection, by naturality of the direct-image comparison and of the chosen isomorphisms. Thus the actual comparison is invertible on uniformly bounded families. No unbounded étale/pro-étale equivalence has been assumed.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer: direct sums for the bounded truncation windows"
+   }
+  },
+  {
+   "text": "Fix an arbitrary integer $m$. For the given family define $U_s=\\tau_{\\le m}K_s$, with inclusion $u_s:U_s\\to K_s$. The standard truncation triangle has third term $\\tau_{\\ge m+1}K_s$. By step 4 its image under $G$ lies in degrees at least $m+1$. Apply $G$ to the triangle and read the long exact sequence in degrees $m-1,m$: the two groups of the third term vanish, hence $H^m(G u_s)$ is an isomorphism. All $U_s$ retain classical cohomology by step 3.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements: finite cohomological window, first remove the upper tail"
+   }
+  },
+  {
+   "text": "Put $V_s=\\tau_{\\ge m-c}U_s$, with projection $v_s:U_s\\to V_s$. These complexes have classical cohomology and lie in the common finite interval $[m-c,m]$. The first term of the truncation triangle for $v_s$ is $W_s=\\tau_{\\le m-c-1}U_s$. It has classical cohomology and is at most $m-c-1$, so step 7 gives $G W_s\\in D^{\\le m-1}$. In particular $H^m(GW_s)=H^{m+1}(GW_s)=0$. The long exact sequence after applying $G$ therefore makes $H^m(Gv_s)$ an isomorphism. Step 8 applies to the family $(V_s)$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements: finite cohomological window, remove the lower tail using the uniform bound"
+   }
+  },
+  {
+   "text": "The same two computations apply to the ambient sum $K=\\bigoplus_sK_s$: by steps 2–3 it has classical cohomology and its truncations identify, with the canonical arrows, with $U=\\bigoplus_sU_s$ and $V=\\bigoplus_sV_s$. Hence $H^m(G(\\bigoplus_su_s))$ and $H^m(G(\\bigoplus_sv_s))$ are isomorphisms by steps 9–10. On the other side, the canonical cohomology/coproduct identification of step 2 shows that $H^m(\\bigoplus_sG u_s)$ and $H^m(\\bigoplus_sG v_s)$ are the coproducts of the isomorphisms proved in those steps, hence are isomorphisms. The bounds here depend only on $m,c$, and not on $s$.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements: apply the uniform finite window to each summand and to their ambient sum"
+   }
+  },
+  {
+   "text": "For a family $T_s$ write $\\sigma_T:\\bigoplus_sGT_s\\to G(\\bigoplus_sT_s)$ for the comparison. Its naturality for a family of arrows $h_s:T_s\\to T'_s$ is the equality\n$$G(\\bigoplus_sh_s)\\,\\sigma_T=\\sigma_{T'}\\,(\\bigoplus_sGh_s).$$\nIndeed both sides composed with the $s$-th coprojection equal $G(\\iota'_sh_s)$; the coproduct universal property gives equality. Apply this to $u_s$ and $v_s$. After $H^m$, all vertical maps in the two resulting squares are isomorphisms by step 11, and $H^m(\\sigma_V)$ is an isomorphism by step 8. Cancellation first gives invertibility of $H^m(\\sigma_U)$, then of $H^m(\\sigma_K)$. Since $m$ was arbitrary, the unbounded derived cohomology criterion makes $\\sigma_K$ an isomorphism. For $I=\\varnothing$ all sums are zero, and additive $G$ sends zero to zero; the same comparison is the unique isomorphism $0\\to0$.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+    "place": "Étale statements and Transfer: canonical coproduct comparison, detected in every degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proper-morphism",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-left-complete-iso",
+  "det-pe-products-exact",
+  "lem-exc-direct-image-coproducts",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-separated-quasi-separated",
+  "lem-pur-exact-derived-coproducts",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-left-complete-heart-upper-bound",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Étale statements and Transfer; fill the unbounded classical direct-sum passage by finite truncation windows, using Stacks Tags 095U, 0F0D, 07KC and the existing class-relative heart upper-bound lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +268,45 @@
    "results": "; 10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; scope Mathlib/AlgebraicGeometry",
    "date": "2026-10-21",
    "verdict": "no match: general definitions and infrastructure do not give the stated scheme/coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated functor with finite cohomological amplitude on a subcategory stable under truncations and coproducts preserves arbitrary coproducts if it preserves uniformly bounded coproducts",
+   "results": "; 8 hits: CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Pretriangulated.instHasFiniteCoproducts, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair",
+   "date": "2026-10-21",
+   "verdict": "no match: the read hits give generic categorical infrastructure or underived pushforward/site definitions, not this finite-coefficient classical pro-etale coproduct theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_sigmaComparison_of_bounded|[Pp]roper.*[Cc]oproduct|etaleOrigin",
+   "results": "; 25 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/Algebra/DirectSum/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the read hits give generic categorical infrastructure or underived pushforward/site definitions, not this finite-coefficient classical pro-etale coproduct theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated functor of finite cohomological amplitude on a subcategory preserves arbitrary coproducts if it preserves uniformly bounded coproducts",
+   "results": "; 8 hits: CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair",
+   "date": "2026-10-21",
+   "verdict": "no match: the read hits give generic categorical infrastructure or underived pushforward/site definitions, not this finite-coefficient classical pro-etale coproduct theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|etaleOrigin|[Pp]roper.*[Cc]oproduct",
+   "results": "; 10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: the read hits give generic categorical infrastructure or underived pushforward/site definitions, not this finite-coefficient classical pro-etale coproduct theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of unbounded complexes of classical pro-etale sheaves over a finite ring commutes with arbitrary direct sums using a uniform fibre dimension bound",
+   "results": "; 8 hits: SheafOfModules.pushforwardComp, Condensed.profiniteSolid, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, LightCondensed.free_internallyProjective_iff_tensor_condition, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: the read hits give generic categorical infrastructure or underived pushforward/site definitions, not this finite-coefficient classical pro-etale coproduct theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-ctf-finite-proper-localizing",
@@ -75,10 +318,159 @@
  "blueprint": {
   "from": {
    "node": "det-ctf-finite-proper-localizing",
-   "place": "Étale statements, direct sums from finite cohomological dimension; old split steps 11–12",
+   "place": "Étale statements, first two sentences: preservation of arbitrary direct sums from finite cohomological dimension; Transfer, compatibility with sums, realized via bounded-below comparison and finite classical truncation windows.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-proper-classical-coproducts",
+  "worker": "stage1",
+  "summary": "Preserved the general-proper-morphism statement. Gave twelve steps using only existing nodes: exact ambient sums, classical closure, proper etale heart bound, bounded-below comparison, left-complete classical upper bound, uniformly bounded sum comparison, and two natural truncation squares. No new nodes. Avoided the finite-type-over-a-field restriction of the existing project coproduct theorem and avoided assuming an unbounded etale/classical equivalence.",
+  "blueprint": "Steps 1–7 realize the finite-cohomological-dimension input in Étale statements and bounded-below comparison in Transfer; step 8 transfers direct sums only on bounded windows; steps 9–12 supply the missing uniform unbounded passage and identify its canonical ambient comparison.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "The canonical bounded-below etale/pro-etale comparison theorem on the unit route, used only for bounded-below inputs. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "The canonical bounded-below etale/pro-etale comparison theorem on the unit route, used only for bounded-below inputs. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "det-pe-left-complete-iso",
+    "why": "Canonical pro-etale truncation tower limit, used only for lower-tail bounds. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "det-pe-products-exact",
+    "why": "Exact countable products for pro-etale ring-module categories, used only for left-complete tail control. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-exc-direct-image-coproducts",
+    "why": "Generic qcqs finite-cd etale coproduct theorem, precisely the etale direct-sum input of the unit route. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic identification of termwise and ambient derived sums. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Stacks 095U proper torsion fibre-dimension bound, the exact geometric input of the unit route. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective right-derived triangulated structure, needed for the truncation triangles. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separatedness supplies the qcqs hypothesis of bounded-below direct-image comparison. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-pur-exact-derived-coproducts",
+    "why": "Generic extension of exact sum preservation from abelian categories to their ordinary derived categories. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Coefficient-forgetting theorem transfers the abelian proper bound to constant-A modules. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of each truncation triangle. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-sfb-left-complete-heart-upper-bound",
+    "why": "Generic class-relative tail bound; applies to classical heart sheaves without a ground-field dimension assumption. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Identifies cohomology of the bounded-below derived image of a heart sheaf with its classical higher direct images. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives for the generic bounded-below injective representative theorem. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-derived-countable-products-core",
+    "why": "Existence and termwise realization of the derived countable products. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic representative theorem proves preservation of each lower bound without imposing a bound on all inputs. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology identity, applied to sums and to comparison inverse image. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic preservation of sheaf coproducts by the comparison inverse image. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Faithful exact forgetting detects zero higher-direct-image module sheaves. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic preservation of products by the actual unbounded right adjoint. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Small ringed-site module categories are Grothendieck; used to form exact ambient sums and K-injective derived categories. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic degreewise detection of the final unbounded comparison isomorphism. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The canonical bounded-below etale/pro-etale comparison theorem on the unit route, used only for bounded-below inputs. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The canonical bounded-below etale/pro-etale comparison theorem on the unit route, used only for bounded-below inputs. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Identifies the total right-derived restriction with bounded-below calculations. No node of the proper finite-coefficient unit replaces this general input; it supplies an existing tool, not a different unit-level proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-derived-equivalence",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-left-complete-iso",
+  "det-pe-products-exact",
+  "lem-exc-direct-image-coproducts",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-separated-quasi-separated",
+  "lem-pur-exact-derived-coproducts",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-left-complete-heart-upper-bound",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-16a23cc9a",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-16a23cc9a (reviewer sub-agent of L); spot-checked: I read the whole split: 12 steps, no new nodes, statement unchanged and not weakened (arbitrary proper f, any finite A, uniform fibre bound e, empty family allowed). It follows unit sk-prop-ctf-finite-proper step 2 and the parent proof.md (Étale statements/Transfer): étale sums via finite cd, then transfer. It avoids the unbounded D(X_et)=Loc(Dctf) identification, which is unavailable for arbitrary schemes, by transferring only uniformly bounded families (step 8) and using truncation windows [m-c,m] (steps 9-12). Every cited statement checks out. Step 4: def-weil-pbc-proetale-operations gives the unbounded Lu^*⊣Ru_*, so G preserves products; the lower bound comes from bounded-below injective (K-injective) representatives. Step 5: 095U (etale-cohomology.tex:18786: proper, fibre dim ≤n, torsion, no other hypotheses) gives R^q=0 for q>2e; forgetful comparison; lem-exc-direct-image-coproducts hypotheses match exactly. Step 6: D^+ comparison plus plus/total and single-object identification. Step 7: all hypotheses of lem-sfb-left-complete-heart-upper-bound hold (det-pe-products-exact, det-pe-left-complete-iso Roos cone = derived products via CountableAB4*, class S = classical sheaves). Step 8: the composite is identified with the canonical σ on coprojections through naturality of ν^*E→Gν^*. Steps 9/10: the LES tail degrees are correct. Steps 11/12: the squares and cancellation are correct. Edge cases checked: I=∅, A=0, e=0, non-qc Y, unbounded shifted families. Stacks 07D9/07KC/08TC/0H72/0D6J/0F0D labels verified. No cycle (closure of 10018 nodes contains neither the item nor the parent), no SGA, proof_deps = uses. FIX (B3/C3-type missing citation): steps 3/6/8 apply det-pe-classical-sheaves-modules, sk-thm-pe-direct-image-comparison, det-pe-classical-derived-equivalence and sk-def-pe-classical-definition, all stated for the constant ring ν^*Λ, to Mod over the def-weil-pbc-proetale-modules ring (Cont(π0|U|,A))^#. Step 1 now cites lem-weil-pbc-finite-discrete-condensed-ring-constant and lem-weil-pbc-finite-discrete-scheme-ring-constant for this identification, as the parent does; both are generic (186-node closures, no trf/pod). Batch 5: the citation of lem-kun-proper-torsion-cd-bound (Stacks 095U, a general cd bound that neither assumption gives and that is not a step of the trace formula or Poincaré duality proofs) is accepted. Its 9706-node closure has only generic pod/trf nodes (scalar extension, lisse modules as module objects, local constancy of modules, separated finite-type base change, localization essential surjectivity, proper finite-fibre finite nearby) and no thm-trf/pod, nt-assume or trace-transport node. Declared tool_uses accepted. Advisory: the sibling Q130 lem-sfb-finite-proper-classical-truncation overlaps the classical upper-tail argument of steps 6/7/10; this is not a duplicate fault.; 1 file(s) fixed by the reviewer"
  }
 }
