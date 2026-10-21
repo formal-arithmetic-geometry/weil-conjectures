@@ -21230,3 +21230,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q115/lem-sfb-ringed-hom-composition-model (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q93/lem-a1-point-realization-standard-cohomology (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q24/lem-sp-subterminal-module-local-calculus (reviewer PASS; first push; new nodes: 0)
+- 08:43 L: merged deliver/NN/lem-sf-open-quotient-koszul-completeness (reviewer PASS; after a return; new nodes: 0)
