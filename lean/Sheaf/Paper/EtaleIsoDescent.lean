@@ -13,19 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Isomorphisms descend along étale surjections
@@ -97,6 +86,43 @@ theorem isIso_of_surjective_etale_pullback (P : PurityFiniteSetting.{u})
       (Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
         P.level P.level_pos) U.left X.left f.left).map φ.hom)) :
     IsIso φ := by
-  sorry
+  let A := P.Ring
+  let : Finite A := Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
+    P.level P.level_pos
+  let C := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  have hcover : Presieve.ofArrows (fun _ : Unit ↦ U.left)
+      (fun _ ↦ f.left) ∈ Scheme.proetalePrecoverage X.left := by
+    apply Scheme.etalePrecoverage_le_proetalePrecoverage
+    apply (Scheme.ofArrows_mem_precoverage_iff _).mpr
+    refine ⟨?_, fun _ ↦ inferInstance⟩
+    intro x
+    obtain ⟨y, hy⟩ := f.left.surjective x
+    exact ⟨(), y, hy⟩
+  have hfixed : (ProEtale.upperStar C f.left).ReflectsIsomorphisms := by
+    constructor
+    intro K L a ha
+    apply ProEtale.isIso_of_isIso_localizationRestriction C a
+      (fun _ : Unit ↦ f.left) hcover
+    intro i
+    exact (NatIso.isIso_map_iff
+      (ProEtale.upperStarIsoLocalizationRestriction C f.left inferInstance) a).mp ha
+  have hintrinsic : (sfIntrinsicPullback A f.left).ReflectsIsomorphisms :=
+    inferInstanceAs ((sfIntrinsicModuleEquivalence X.left A).inverse ⋙
+      ProEtale.upperStar C f.left ⋙
+      (sfIntrinsicModuleEquivalence U.left A).functor).ReflectsIsomorphisms
+  have hambient : IsIso φ.hom := by
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    have hi : IsIso ((sfIntrinsicPullback A f.left).map
+        ((DerivedCategory.homologyFunctor _ n).map φ.hom)) :=
+      (NatIso.isIso_map_iff
+        ((sfIntrinsicPullback A f.left).mapDerivedCategoryHomologyFunctorIso n) φ.hom).mpr
+        (Functor.map_isIso (DerivedCategory.homologyFunctor _ n)
+          ((sfIntrinsicDerivedPullback A f.left).map φ.hom))
+    exact @isIso_of_reflects_iso _ _ _ _ _ _ _ (sfIntrinsicPullback A f.left)
+      hi hintrinsic
+  exact @isIso_of_reflects_iso _ _ _ _ _ _ φ
+    (intrinsicFiniteTorsionConstructible P.coefficients.l P.extension
+      P.level P.level_pos X.left).ι hambient inferInstance
 
 end WeilConjectures
