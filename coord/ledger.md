@@ -23234,3 +23234,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:47 L: merged deliver/NC/lem-fd-whole-tower-integral-pullback-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 17:47 L: returned deliver/Q10/lem-sfb-lattice-supported-hom-reduction-tower (reviewer RETURN: L: independent stage-2 immutable head d5b286bb7b51: H2: delivery adds theorem node det-lem-formal-closed-support-stratum)
 - 2026-10-21T17:48:05Z L: superseded stage-1 delivery NZ/sk-thm-pe-indetale-refinement at 1382904a666060c0ea34baa79e95259103c138cd; current completion retained; packet archived at refs/superseded/NZ/sk-thm-pe-indetale-refinement/1382904a666060c0ea34baa79e95259103c138cd; stale return retired.
+- 17:49 L: merged deliver/N5/lem-sfb-prime-to-ell-condensed-acyclicity (reviewer PASS; first push; new nodes: 2)
