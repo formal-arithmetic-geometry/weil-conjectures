@@ -20,13 +20,12 @@
  ],
  "proof": [
   {
-   "text": "Write $t_C(A,B):A\\otimes_pB\\to U_C(A\\otimes B)$ and $u_C:\\underline{\\mathbf Z}\\to U_C\\mathbf1_C$ for the actual sheafification units, and similarly on the other sites. By [det-def-sfb-sheaf-tensor-structure] and [def-weil-pbc-sheafification], a sheaf map out of $A\\otimes B$ is determined by precomposition with $t_C(A,B)$. By [det-def-sfb-ring-object-transport], for a monoid $S$ on $D$ the multiplication on $P_FS$ is $P_F(m_S)\\circ\\mu_F$ and its unit is $P_F(e_S)\\circ e_F$. Applying [lem-sfb-sheaf-pushforward-generator-comparison] gives\n$$U_C(P_Fm_S\\circ\\mu_F)\\circ t_C(P_FS,P_FS)=P_F(U_Dm_S\\circ t_D(S,S)),$$\nand the analogous unit equation with $u_C,u_D$. If $S$ is commutative, the resulting section products commute; the multiplication and its composite with symmetry therefore agree after $t_C$, hence agree as sheaf maps. Thus $P_FS$ is commutative. For such $S$, reconstruction as in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] gives precisely the section ring $V\\mapsto B_S(FV)$: the product of $a,b\\in S(FV)$ is their original product and its unit is $1\\in S(FV)$. This uses the generator formula, not preservation of tensor products by evaluation.",
+   "text": "Identify inclusion followed by restriction with restriction followed by inclusion using the sheafification unit, the actual counit transport, and functor associators. This is a monoidal isomorphism by the monoidal adjunction identities. Its components are identities by the triangle identity. The monoidal equations give the tensor and unit normalization with independent site universes. The sheafification Hom bijections imply injectivity after these generators. Forgetting the section-ring restriction to abelian presheaves proves its sheaf condition.",
    "uses": [
     "det-def-sfb-sheaf-tensor-structure",
     "def-weil-pbc-sheafification",
-    "lem-sfb-sheaf-pushforward-generator-comparison",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "det-def-sfb-ring-object-transport"
+    "det-def-sfb-ring-object-transport",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
    "elementary": false,
    "source": {
@@ -35,8 +34,9 @@
    }
   },
   {
-   "text": "The monoid-map equations [sk-def-sfb-ring-object] for $\\psi$ imply on the tensor generator $r\\otimes s$ that $\\psi_V(rs)=\\psi_V(r)\\psi_V(s)$, by Step 1, and on the unit generator $1$ that $\\psi_V(1)=1$. Its components are already additive and commute with restriction. Hence they define a morphism of ring sheaves $\\phi_\\psi:B_C\\to P_FB_D$. A ring-sheaf morphism with these additive components must coincide at every section with this one, so is unique. In particular no change of coefficient rings is implicit in the notation $P_FB_D$.",
+   "text": "Apply mapMon to the coefficient morphism and the monoidal underlying-restriction isomorphism, using the canonical mapMon composition isomorphisms to identify iterated transport. Evaluating the resulting monoid morphism gives a ring homomorphism at each section. Its additive map is the given coefficient component, and its naturality is that of the coefficient map. Extensionality of ring homomorphisms gives uniqueness.",
    "uses": [
+    "det-def-sfb-ring-object-transport",
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "sk-def-sfb-ring-object"
    ],
@@ -47,13 +47,12 @@
    }
   },
   {
-   "text": "For an internal $R_D$-module $M$ with action $a_M:R_D\\otimes M\\to M$, [sk-def-sfb-transport] and clause 1 of [sk-def-sfb-change-of-scalars] give the internal pushforward action\n$$P_F(a_M)\\circ\\mu_{F,R_D,M}\\circ(\\psi\\otimes1).$$\nPrecompose with $t_C(R_C,P_FM)$. Naturality of the sheafification unit [det-def-sfb-sheaf-tensor-structure, def-weil-pbc-sheafification] first moves $\\psi\\otimes1$ to the sectionwise tensor; [lem-sfb-sheaf-pushforward-generator-comparison] then replaces $\\mu_F\\circ t_C$ by the restricted $t_D$. Thus the reconstructed action on $r\\in R_C(V)$ and $n\\in M(FV)$ is exactly\n$$a_{M,FV}\\bigl(t_{D,R_D,M,FV}(\\psi_V(r)\\otimes n)\\bigr)=\\psi_V(r)n.$$\nThe reconstruction convention is that of [def-weil-pbc-internal-abelian-sheaf-module-equivalence].",
+   "text": "For an internal $R_D$-module $M$ with action $a_M:R_D\\otimes M\\to M$, [sk-def-sfb-transport] and clause 1 of [sk-def-sfb-change-of-scalars] give the internal pushforward action\n$$P_F(a_M)\\circ\\mu_{F,R_D,M}\\circ(\\psi\\otimes1).$$\nPrecompose with $t_C(R_C,P_FM)$. Naturality of the sheafification unit [det-def-sfb-sheaf-tensor-structure, def-weil-pbc-sheafification] first moves $\\psi\\otimes1$ to the sectionwise tensor; the generator normalization proved in Step 1 then replaces $\\mu_F\\circ t_C$ by the restricted $t_D$. Thus the reconstructed action on $r\\in R_C(V)$ and $n\\in M(FV)$ is exactly\n$$a_{M,FV}\\bigl(t_{D,R_D,M,FV}(\\psi_V(r)\\otimes n)\\bigr)=\\psi_V(r)n.$$\nThe reconstruction convention is that of [def-weil-pbc-internal-abelian-sheaf-module-equivalence].",
    "uses": [
     "sk-def-sfb-transport",
     "sk-def-sfb-change-of-scalars",
     "det-def-sfb-sheaf-tensor-structure",
     "def-weil-pbc-sheafification",
-    "lem-sfb-sheaf-pushforward-generator-comparison",
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
    "elementary": false,
@@ -74,9 +73,8 @@
    }
   },
   {
-   "text": "The map $c_{\\kappa,A}(V)=A(\\kappa_V)$ is natural in $A$ and $V$, and has inverse $A(\\kappa_V^{-1})$. It is monoidal for the normalized lax structures. Indeed precompose\n$$c_{\\kappa,A\\otimes B}\\circ P_F(\\mu_G)\\circ\\mu_F=\\mu_K\\circ(c_{\\kappa,A}\\otimes c_{\\kappa,B})$$\nwith $t_C(P_FP_GA,P_FP_GB)$. Twice [lem-sfb-sheaf-pushforward-generator-comparison] turns the left side at $V$ into $(A\\otimes B)(\\kappa_V)\\circ t_{H,GFV}$. Naturality of $t_C$ and the comparison for $K$ turn the right side into $t_{H,KV}\\circ(A(\\kappa_V)\\otimes B(\\kappa_V))$. These are equal by presheaf naturality of the sheafification unit [det-def-sfb-sheaf-tensor-structure, def-weil-pbc-sheafification]. The same calculation on $u_C$ reduces the unit equation to $\\mathbf1_H(\\kappa_V)u_{H,GFV}=u_{H,KV}$, since the constant presheaf restriction is the identity. Unique extension under sheafification proves both equations. By [det-def-sfb-ring-object-transport], $c_\\kappa$ takes the transported monoid structure to the $P_K$ structure, and $\\chi=c_{\\kappa,R_H}P_F(\\theta)\\psi$ is a monoid morphism.",
+   "text": "The natural isomorphism from twice-restricted abelian presheaves to restriction along T has components RH(κ_V). Its unit and tensor equations hold pointwise for the pointwise monoidal structure. Lift this monoidal natural isomorphism with mapMon. The monoidal underlying-restriction isomorphisms from Step 1, and the mapMon composition isomorphisms, identify its source and target with the included monoid objects of the two restricted sheaves. Their underlying maps are identities, so the transported monoid morphism has exactly the prescribed κ components. The faithful sheaf inclusion reflects the monoid-map equations. Composition with ψ and the restricted θ proves that the composite coefficient is a monoid morphism.",
    "uses": [
-    "lem-sfb-sheaf-pushforward-generator-comparison",
     "det-def-sfb-sheaf-tensor-structure",
     "def-weil-pbc-sheafification",
     "det-def-sfb-ring-object-transport"
@@ -123,12 +121,12 @@
    }
   },
   {
-   "text": "The category of abelian sheaves is abelian [def-weil-pbc-sites-and-cohomology]. By [det-def-sfb-sheaf-tensor-closed], its sheafified tensor is additive in each variable and $R_C\\otimes-$ preserves finite colimits. Hence [lem-sfb-modobj-abelian] applies to the internal module category; the sectionwise module category is abelian by [def-weil-sheaf-of-modules-category], since the site is small in the coefficient universe. Apply clause (2) of [lem-weil-pbc-equivalence-injective-resolutions] to the additive equivalence $E_C$ and, separately, to its additive quasi-inverse from Step 8. They preserve kernels, cokernels and exact sequences, and are exact in the finite-limit/finite-colimit sense of [def-galois-exact-functor]. If an image sequence is exact, applying the quasi-inverse and then the equivalence unit gives an isomorphic exact original sequence. The converse follows by applying $E_C$. Interchanging $E_C$ and its quasi-inverse proves the last assertion in both directions, on every site in the statement.",
+   "text": "Use the coefficient-universe bound to replace the site by its small model. Mathlib transports the local-bijectivity criterion from that model and makes sectionwise module sheaves abelian. Reconstruction preserves addition because its maps are the original additive section maps, and its inverse is additive by the equivalence identities. Transfer the abelian structure to internal modules across this equivalence. The equivalence and its inverse preserve finite limits and colimits. Their faithful preservation of homology gives exactness in both directions for every short complex.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "det-def-sfb-sheaf-tensor-closed",
-    "lem-sfb-modobj-abelian",
     "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-additive-functor",
     "lem-weil-pbc-equivalence-injective-resolutions",
     "def-galois-exact-functor"
    ],
@@ -142,24 +140,21 @@
  "proof_deps": [
   "det-def-sfb-sheaf-tensor-structure",
   "def-weil-pbc-sheafification",
-  "lem-sfb-sheaf-pushforward-generator-comparison",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "det-def-sfb-ring-object-transport",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "sk-def-sfb-ring-object",
   "sk-def-sfb-transport",
   "sk-def-sfb-change-of-scalars",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-additive-functor",
   "def-weil-pbc-sites-and-cohomology",
-  "det-def-sfb-sheaf-tensor-closed",
-  "lem-sfb-modobj-abelian",
   "lem-weil-pbc-equivalence-injective-resolutions",
   "def-galois-exact-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03D6, definition-pushforward, and Tag 03DA, lemma-abelian, supply sectionwise context; tensor/internal reconstruction and general-site composition are the agent-written argument in the proof steps."
+  "place": "Tag 03D6 and Tag 03DA; the existing agent-written Steps 1–9, with normalization proved using the monoidal adjunction and exactness using abelian transport across the reconstruction equivalence."
  },
  "mathlib_searches": [
   {
@@ -407,5 +402,15 @@
   "group": "Q51",
   "result": "pass",
   "note": "Re-delivery after RETURN 5d056c4632b3 (H13/H4). Fixed as prescribed (option 1): the lem-sfb-sheaf-pushforward-generator-comparison record is byte-identical to live (Q46, 8 decls incl. generatorRestriction kept). The 4 coefficientRestriction* helpers moved into the item module with signatures and bodies unchanged, only blueprint tags changed, and are listed in lean.declarations. SheafCoefficientRestriction.lean removed. The other 20 item decls are identical to the returned head. statement/stmt_deps/source unchanged; lean.statement is verbatim in the file; all 24 decls are present; no full-name clash. Independent re-read of every node clause: ∃! ring map, Res_ψ∘mapMod, sectionwise pushforward via φ_ψ, ∃! identity comparison and action, κ-pinned compositors and square, identity case, additive/exact both ways; independent universes; no hollow defs; 11 sorries, all in theorems. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T140819-L-2756681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
