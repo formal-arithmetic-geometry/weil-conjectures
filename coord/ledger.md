@@ -22297,3 +22297,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:16 L: merged deliver/T3/Sheaf.CategoryTheory.DerivedCategory.AbstractKFlatResolution (stage 3; reviewer PASS; first push; landing 20261021T111633-L-445466 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 2026-10-21T11:17:17Z L: superseded stage-1 delivery NJ/lem-pod-stratified-dualizable-bounded at 0fe536fe660cc19164ff6f7457b57a5cf0e42d23; current completion retained; packet archived at refs/superseded/NJ/lem-pod-stratified-dualizable-bounded/0fe536fe660cc19164ff6f7457b57a5cf0e42d23; stale return retired.
 - 11:19 L: merged deliver/NG/def-pur-support-triangle (reviewer PASS; after a return; new nodes: 0)
+- 11:19 L: merged deliver/NI/lem-weil-pbc-augmented-diagram-projection-mate (stage 2; reviewer PASS; parallel immutable checks)

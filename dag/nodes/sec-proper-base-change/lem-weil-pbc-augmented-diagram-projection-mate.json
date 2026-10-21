@@ -213,5 +213,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-7ba21e078 (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit, no new nodes, statement and stmt_deps byte-identical to base. All five steps are correct. Checked against Stacks 0943/0B56 (sites-cohomology l.13658-13679; projection map is the adjoint of the counit-tensor map, built with 07A4 and 07A6) and against the main-20261015 parent prop-weil-pbc-direct-image-limits (finite-level projection isomorphisms, completion map). Step 2: h=α_{Δ_XK,Q}(χ_K⊗1); source and target agree because F exact gives L=F^Tow and LQ_Y=Q_X. Step 3: I recomputed the transpose ε^Tow F^Tow h=(Δ_Xε_K⊗1)τ, using the mate formula, naturality of μ and the strict counit equation of the constant node. μ_{Δ_YM,Q}=τ_M on flat-term K-flat representatives, by τ's uniqueness clause and the 07A4 construction. Step 4: the evaluated transpose is (ε_K⊗1)μ, which is the ambient 0B56 map. Step 5: both transposes equal i_{X,K}Δ_X(ε_K), by the τ augmentation equation and naturality of the counit. Edge cases checked: f=id, Q=R constant, K=0, non-invertible transitions. No cycle, all citations in unit sk-thm-properbasechange, no SGA. Two repairs in the whole-file fix fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-augmented-diagram-projection-mate.json. (1) E1/C4: step 1 applies diagram-site-realization and ringed-projection-mate-exact, which both require commutative ring sheaves, without checking it. Added a sentence that R_T is commutative, presupposed by the commutative R_Y-algebras and the tensors over R_T; the statement is unchanged. (2) C1/E1: step 4 applies tower-derived-evaluation-normalization, whose Grothendieck abelian hypotheses were not checked. It now cites lem-weil-pbc-small-module-diagrams-grothendieck (J=N^op, and J=pt) and lem-weil-tower-category-levelwise-abelian; proof_deps updated to the union of all uses. Advisory: the report wrongly says the worker corrected doubled backslashes; the base already had single backslashes. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AugmentedDiagramProjectionMate",
+  "declaration": "CategoryTheory.StrictReduction.augmentedDiagramProjectionMate",
+  "declarations": [
+   "CategoryTheory.StrictReduction.AugmentedProjectionDirectImage",
+   "CategoryTheory.StrictReduction.augmentedDiagramProjection",
+   "CategoryTheory.StrictReduction.augmentedDiagramProjectionMate"
+  ],
+  "file": "lean/Sheaf/Paper/AugmentedDiagramProjectionMate.lean",
+  "statement": "theorem augmentedDiagramProjectionMate (f : RingedPullback R S) [IsIso f.coefficient] [f.V.Additive] [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L] (k : Comparison f) (Q : CommMon (ℕᵒᵖ ⥤ Modules R)) (MY : RingedModel Q.X (MonObj.one (X := Q.X))) (MX : RingedModel (Q.X ⋙ f.L) (pulledUnit f.L (moduleUnit f k) Q.X (MonObj.one (X := Q.X)))) (tau : MY.B ⋙ (termwise f.L).mapDerivedCategory ≅ f.L.mapDerivedCategory ⋙ MX.B) (htau : IsNormalized f.L Q.X (MonObj.one (X := Q.X)) (moduleUnit f k) (flatRepresentatives R) (flatRepresentatives S) MY MX k.mu k.naturality tau) (P : AugmentedProjectionDirectImage f.L f.V f.moduleAdj) : (∀ M : DerivedCategory (Modules S), (termwise f.L).mapDerivedCategory.map ((augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M) ≫ P.dT.counit.app (MX.B.obj M) = tau.hom.app (P.RG.obj M) ≫ MX.B.map (P.d.counit.app M)) ∧ (∀ (n : ℕᵒᵖ) (M : DerivedCategory (Modules S)), ((evaluation ℕᵒᵖ (Modules R)).obj n).mapDerivedCategory.map ((augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M) ≫ (P.beta n).hom.app (MX.B.obj M) = P.d.homEquiv (((evaluation ℕᵒᵖ (Modules R)).obj n).mapDerivedCategory.obj (MY.B.obj (P.RG.obj M))) (((evaluation ℕᵒᵖ (Modules S)).obj n).mapDerivedCategory.obj (MX.B.obj M)) ((towerDerivedEvaluationInterchange f.L n).inv.app (MY.B.obj (P.RG.obj M)) ≫ ((evaluation ℕᵒᵖ (Modules S)).obj n).mapDerivedCategory.map (tau.hom.app (P.RG.obj M)) ≫ ((evaluation ℕᵒᵖ (Modules S)).obj n).mapDerivedCategory.map (MX.B.map (P.d.counit.app M)))) ∧ (∀ M : DerivedCategory (Modules S), MY.i.app (P.RG.obj M) ≫ (augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M = P.chi.hom.app M ≫ P.RT.map (MX.i.app M))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b8c286d4",
+  "group": "NI",
+  "result": "pass",
+  "note": "Only the item lean record and the new module changed; statement verbatim, sorry-only theorem, docstrings with source, blueprint id and 5 proof steps. h = dT.unit ≫ RT(τ) ≫ RT(B_X ε) is the node's 'equivalently' adjoint description (Stacks 0B56), one natural transformation in D(Tow). Dropping the separate diagram-site α∘(χ⊗1) clause is accepted: the landed reduction dependency renders B_T as a left-derived functor, not a diagram-site ⊗^L, and the stmt citer only needs this map. τ is pinned by IsNormalized (∃! in the dependency); MY/MX are the dependency's RingedModels; the struct fields chi_counit and beta_counit match the dependencies verbatim and fix χ and β as transposes; d and dT are fixed by the dependency Hom normalizations. Conjuncts checked: adjoint description; evaluation = d-adjunct of interchange⁻¹ ≫ ev τ ≫ ev B_X(ε) (types and directions verified); augmentation i_Y≫h = χ≫RT(i_X) before evaluation or Rlim, provable since constantDerivedSquare and ringedConstantTowerPullback are both identity-component. No perfectness, completeness or IsIso; universes independent; [f.V.Additive] redundant but provable (right_adjoint_additive). Advisories: the def equals Mathlib mateEquiv d dT componentwise; unused public import RingedToposMorphism; proof-plan imports per rule 7. No compile run (no changes)."
+ }
 }
