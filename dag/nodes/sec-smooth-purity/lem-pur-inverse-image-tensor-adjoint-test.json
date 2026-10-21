@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-inverse-image-tensor-adjoint-test",
+ "kind": "statement",
+ "title": "Adjoint bilinear test for maps out of an inverse-image tensor",
+ "statement": "Let $h:T'\\to T$ be any morphism of schemes [def-weil-scheme-morphism-properties]. Use compatible small pro-etale sites [def-weil-pbc-proetale-site] and the specified sheaf inverse image $h^{-1}$, direct image $h_*$ and unit $\\eta_h$ of [def-weil-proetale-inverse-image]. Let $R$ be a sheaf of commutative rings on $T_{\\mathrm{proet}}$, let $M,N$ be sheaves of $R$-modules, and let $K$ be any sheaf of $h^{-1}R$-modules on $T'_{\\mathrm{proet}}$ [def-weil-sheaf-of-modules-category]. Give $h_*K$ its $R$-action through $\\eta_{h,R}:R\\to h_*h^{-1}R$. Use the sheaf tensor product [def-pur-sheaf-tensor-product].\n\nFor an $h^{-1}R$-linear map $\\alpha:h^{-1}(M\\otimes_RN)\\to K$, define the map of underlying sheaves\n$$\\widehat\\alpha=h_*\\alpha\\circ\\eta_{h,M\\otimes_RN}:M\\otimes_RN\\longrightarrow h_*K.$$\nThen $\\widehat\\alpha$ is $R$-linear. The assignment $\\alpha\\mapsto\\widehat\\alpha$ is a bijection from the displayed module Hom set to $\\operatorname{Hom}_R(M\\otimes_RN,h_*K)$, natural in $M,N,K$; its underlying maps are exactly the adjuncts under the specified set-sheaf adjunction.\n\nLet $\\operatorname{Bilin}_R(M\\times N,h_*K)$ denote maps of sheaves of sets that are $R(V)$-bilinear on sections over every site object $V$. The assignment\n$$\\alpha\\longmapsto\\bigl((s,t)\\longmapsto\\alpha_{T'\\times_TV}(h^{-1}(s\\otimes t))\\bigr)$$\nis a bijection onto $\\operatorname{Bilin}_R(M\\times N,h_*K)$, where $s\\in M(V)$, $t\\in N(V)$, pure tensors are their sheafification images, and $h^{-1}(s\\otimes t)$ is the unit image. Consequently two such maps $\\alpha,\\beta$ are equal if and only if they agree on $h^{-1}(s\\otimes t)$ for every $V,s,t$. No generation assumption on sections over objects of $T'_{\\mathrm{proet}}$ is imposed.\n\nThe following evaluations are included in the test. Suppose that for each scheme map $f$ under consideration and each commutative coefficient ring sheaf $S$ on its target, maps\n$$b^f_{S,P,Q}:f^{-1}(P\\otimes_SQ)\\longrightarrow f^{-1}P\\otimes_{f^{-1}S}f^{-1}Q$$\nare supplied for $S$-module sheaves $P,Q$, and satisfy $b^f(f^{-1}(p\\otimes q))=f^{-1}p\\otimes f^{-1}q$ on all original unit sections. Neither invertibility nor naturality of the supplied maps is assumed.\n\nFor a ring map $\\phi:R\\to R'$ and $R'$-module sheaves $M,N$, let $\\pi$ and $\\pi'$ be the canonical maps from tensor over $R$ to tensor over $R'$, and from tensor over $h^{-1}R$ to tensor over $h^{-1}R'$, respectively; both send pure tensors to the corresponding pure tensors. The values of $b^h_{R',M,N}\\circ h^{-1}\\pi$ and $\\pi'\\circ b^h_{R,M,N}$ on $h^{-1}(s\\otimes_Rt)$ are both $h^{-1}s\\otimes_{h^{-1}R'}h^{-1}t$.\n\nFor a second scheme map $g:T''\\to T'$, suppose a natural set-sheaf isomorphism $\\delta:(h\\circ g)^{-1}\\cong g^{-1}h^{-1}$ is supplied, is compatible with the transported ring/module operations, and satisfies $\\delta_H((h\\circ g)^{-1}s)=g^{-1}h^{-1}s$ for every object $V$ of $T_{\\mathrm{proet}}$ and every $s\\in H(V)$, the two sides being compared over $T''\\times_TV\\cong T''\\times_{T'}(T'\\times_TV)$ through the canonical fibre-product associator. Identify scalar rings along $\\delta_R$. The values of\n$$b^g\\circ g^{-1}(b^h)\\circ\\delta_{M\\otimes_RN}\\quad\\text{and}\\quad(\\delta_M\\otimes\\delta_N)\\circ b^{h\\circ g}$$\non $(h\\circ g)^{-1}(s\\otimes_Rt)$ are both $g^{-1}h^{-1}s\\otimes g^{-1}h^{-1}t$, under the same associator identification of the objects. These assertions are evaluations of the displayed composites for supplied data, not existence assertions about $b$ or $\\delta$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, label lemma-adjoint-pullback-pushforward-modules, at the identity coefficient map; Section 03EK, label section-tensor-product, bilinear universal property. Agent-written identification with the specified set-sheaf adjunct and the resulting original-section equality test; original parent proof step 3. Includes the coefficient and iterated-comparison evaluations of original parent steps 4 and 7, conditional on supplied pure-tensor-normalized maps and a unit-normalized algebraic compositor."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two linear maps from the inverse image of a sheaf tensor product are equal when they agree on inverse images of all original pure tensors by adjunction",
+   "results": "[leanfinder] OK 8 hit(s); PresheafOfModules.sheafificationAdjunction_homEquiv_apply in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify; PresheafOfModules.free_hom_ext in Mathlib/Algebra/Category/ModuleCat/Presheaf/Free; SheafOfModules.hom_ext in Mathlib/Algebra/Category/ModuleCat/Sheaf; AlgebraicGeometry.Scheme.Modules.hom_ext in Mathlib/AlgebraicGeometry/Modules/Sheaf; SheafOfModules.hom_ext_iff in Mathlib/Algebra/Category/ModuleCat/Sheaf; AlgebraicGeometry.Scheme.Modules.hom_ext_iff in Mathlib/AlgebraicGeometry/Modules/Sheaf; SheafOfModules.Hom.ext in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "[loogle] OK 5 hit(s); SheafOfModules.pullbackPushforwardAdjunction in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.conjugateEquiv_pullbackId_hom in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.conjugateEquiv_pullbackComp_inv in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|[Bb]ilinear",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean:85   Equiv.symm_apply_apply (free I).freeHomEquiv _; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:55 noncomputable def restrictHomEquivOfIsLocallySurjective; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:82   Adjunction.mkOfHomEquiv; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:83     { homEquiv := fun F G ↦; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:84         ((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).homEquiv _ _).trans; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85             (((PresheafOfModules.pullbackPushforwardAdjunction φ.hom).homEquiv F.val G.val).trans; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:86               ((fullyFaithfulForget S).homEquiv (Y := (pushforward φ).obj G)).symm); Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:49   epi : Epi (M.freeHomEquiv.symm s) := by infer_instance; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:58 noncomputable abbrev π (σ : M.GeneratingSections) : free σ.I ⟶ M := M.freeHomEquiv.symm σ.s; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:68     rw [← freeHomEquiv_symm_comp]; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:80   simp [ofEpi, freeHomEquiv_symm_comp]; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean:173   s := freeHomEquiv (F.obj M) (G.mapFreeHom F η); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:72 lemma pushforwardSections_unitHomEquiv; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:74     pushforwardSections φ (M.unitHomEquiv f) =; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:75       ((pushforward φ).obj M).unitHomEquiv; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:88   ((pullbackPushforwardAdjunction.{u} φ).homEquiv _ _).symm (unitToPushforwardObjUnit φ); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:91 lemma pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit :; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:21 * In case the category `C` has a terminal object `X`, promote `freeHomEquiv`; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:61 noncomputable def freeHomEquiv (M : SheafOfModules.{u} R) {I : Type u} :; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:63   toFun f i := M.unitHomEquiv (ιFree i ≫ f); Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:64   invFun s := Cofan.IsColimit.desc (isColimitFreeCofan I) (fun i ↦ M.unitHomEquiv.symm (s i)); Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:69 lemma freeHomEquiv_comp_apply {M N : SheafOfModules.{u} R} {I : Type u}; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:78   s := M.freeHomEquiv g; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:85     (generatorsOfIsCokernelFree f g H H').π = g := M.freeHomEquiv.symm_apply_apply g; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:97   s := (kernel (generatorsOfIsCokernelFree f g H H').π).freeHomEquiv <| kernel.lift",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction on module sheaves gives a bijection from maps out of inverse image of a tensor product to bilinear maps into direct image",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction in Mathlib.AlgebraicGeometry.Modules.Sheaf; SheafOfModules.PullbackConstruction.adjunction in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; AlgebraicGeometry.Scheme.Modules.restrictAdjunction in Mathlib.AlgebraicGeometry.Modules.Sheaf; ModuleCat.monoidalClosedHomEquiv in Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed; ModuleCat.restrictCoextendScalarsAdj in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; SheafOfModules.pushforwardPushforwardAdj in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; TopCat.Sheaf.pullbackPushforwardAdjunction in Mathlib.Topology.Sheaves.Functors",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of morphisms out of a sheaf inverse image tensor product detected by adjoint bilinear pairings on sections of source site",
+   "results": "[leanfinder] OK 8 hit(s); PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply in Mathlib/Algebra/Category/ModuleCat/Sheaf; PresheafOfModules.homEquivOfIsLocallyBijective_apply in Mathlib/Algebra/Category/ModuleCat/Sheaf; PresheafOfModules.sheafifyHomEquiv' in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify; PresheafOfModules.homEquivOfIsLocallyBijective in Mathlib/Algebra/Category/ModuleCat/Sheaf; PresheafOfModules.sheafificationAdjunction_homEquiv_apply in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification; PresheafOfModules.sheafificationHomEquiv in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification; CategoryTheory.sheafComposeNatTrans_app_uniq in Mathlib/CategoryTheory/Sites/PreservesSheafification",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "grep",
+   "query": "ext|[Tt]ensor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: adjunction, sheafification and extensionality infrastructure do not state the module-tensor original-unit-section test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image tensor comparison normalized on original pure tensor unit sections automatically commutes with coefficient restriction and composition if the underlying compositor preserves unit sections",
+   "results": "8 hits; id_tensor_π_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_desc, rTensor.inverse_of_rightInverse_comp_rTensor, ModuleCat.restrictScalarsComp'App_inv_naturality, lTensor.inverse_of_rightInverse_comp_lTensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, CategoryTheory.FreeMonoidalCategory.normalize_naturality, CategoryTheory.FreeMonoidalCategory.normalizeIso",
+   "date": "2026-10-21",
+   "verdict": "no exact match: existing pullback and sheafification infrastructure does not state the original-section evaluations for arbitrary supplied normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(comp|change)|comp.*tensor",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no exact match: existing pullback and sheafification infrastructure does not state the original-section evaluations for arbitrary supplied normalized comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-inverse-image-tensor-comparison",
+  "date": "2026-10-21",
+  "group": "Q11"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Final sentence of the proof: 'The compatibility with the derived tensor product and with base change is the naturality of the displayed projection and of the tensor product' (naturality of the tensor product under base change); original comparison proof steps 1-3",
+   "via": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pur-tate-inverse-limit-base-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

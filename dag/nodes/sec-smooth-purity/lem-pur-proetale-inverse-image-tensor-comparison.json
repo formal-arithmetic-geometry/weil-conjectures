@@ -17,113 +17,75 @@
  ],
  "proof": [
   {
-   "text": "Put $L=h^{-1}$, $V=h_*$ on sets, $R=\\mathcal O$, and $RI=S=L\\mathcal O$, with $c=\\mathrm{id}_{RI}$. These are small sites in the larger sheaf universe. By [def-weil-proetale-inverse-image], $L\\dashv V$ preserves finite limits and the inverse-image ring and module operations are precisely the images of the original operation maps through the finite-product comparisons. Thus take $I(M)=h^{-1}M$, with the canonical underlying-sheaf identifications $e_R,e_M$. These give the algebraic inverse-image presentation of [def-weil-pbc-algebraic-inverse-image]: applying $L$ to the graph equality for any addition, multiplication or action gives the transported equality, since $L$ preserves products; zero and one use its terminal-object comparison. Define $T(M)=RI\\otimes_{RI}I(M)$ by sheafified scalar extension and define $T(f)=1\\otimes I(f)$. Hence both hobj and hmap in [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] hold by definition, with this specified functor $T$. Apply that statement to get a comparison $\\mu:T(M\\otimes_RN)\\cong T(M)\\otimes_{RI}T(N)$ with insertion $q$ and generalized normalization as in [def-weil-pbc-canonical-ringed-tensor-comparison]. This application supplies all its data, rather than assuming an unconstructed module adjunction.",
+   "text": "Use [lem-pur-inverse-image-scalar-unit-normalization] to obtain the algebraic presentation of the specified $I=h^{-1}$, the specified scalar-extension functor $T$, and its natural isomorphism $a:T\\cong I$. Apply [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] at $c=1_{h^{-1}R}$; its object and morphism hypotheses hold for this $T$. Define $\\sigma^h=(a_F\\otimes a_G)\\mu a_{F\\otimes_R G}^{-1}$. It is a natural isomorphism, and the normalization node gives exactly the required formula on $h^{-1}(s\\otimes t)$.",
    "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-algebraic-inverse-image",
-    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-    "def-weil-pbc-canonical-ringed-tensor-comparison"
+    "lem-pur-inverse-image-scalar-unit-normalization",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2 (lemma-pullback-module) and 03EL (lemma-tensor-product-pullback); normalized construction interface"
+    "place": "Tags 03D2 and 03EL: algebraic realization and scalar-unit normalization"
    }
   },
   {
-   "text": "The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] gives $a_M:T(M)\\to I(M)$ by $a\\otimes m\\mapsto am$. Its inverse is the insertion $q_M:m\\mapsto1\\otimes m$ of [def-weil-pbc-canonical-ringed-tensor-comparison]: $a_Mq_M(m)=m$, and $q_Ma_M(a\\otimes m)=1\\otimes am=a\\otimes m$. The same universal property checks the latter equality and naturality on pure tensors. Set\n$$\\sigma^h_{F,G}=(a_F\\otimes a_G)\\mu_{F,G}a_{F\\otimes_R G}^{-1}.$$\nThis is an isomorphism natural in both variables. To extract its section formula, take in the generalized normalization $Z=|F|\\times|G|$, $x,y$ the projections and $z$ the pure-tensor map. The unit sends $(s,t)\\in Z(V)$ to the pair $(h^{-1}s,h^{-1}t)$: this follows by naturality with the two projections and the product comparisons of $h^{-1}$ and $h_*$. The normalized equation evaluated at this unit section, followed by $a_Mq_M=1$, is exactly $\\sigma^h(h^{-1}(s\\otimes t))=h^{-1}s\\otimes h^{-1}t$.",
+   "text": "Apply [lem-pur-inverse-image-tensor-adjoint-test] with $K=h^{-1}F\\otimes_{h^{-1}R}h^{-1}G$. Any map with the formula of clause 1 agrees with $\\sigma^h$ on every indicated unit-image pure tensor, hence equals it. This proves uniqueness.",
+   "uses": [
+    "lem-pur-inverse-image-tensor-adjoint-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK: original pure-tensor equality test"
+   }
+  },
+  {
+   "text": "By [lem-pc-sites-sheaf-tensor-bilinear-universal], the larger-ring pure pairing, restricted to the smaller ring, induces $\\pi$ and $\\pi'$. Both composites of clause 2 are $h^{-1}\\mathcal O$-linear maps into the tensor over $h^{-1}\\mathcal O'$. Naturality of the inverse-image unit for $\\pi$ and step 1 send each $h^{-1}(s\\otimes t)$ to $h^{-1}s\\otimes h^{-1}t$ along either route. The equality test [lem-pur-inverse-image-tensor-adjoint-test] proves the square.",
    "uses": [
     "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-weil-pbc-canonical-ringed-tensor-comparison"
+    "lem-pur-inverse-image-tensor-adjoint-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), bilinear universal property; Tag 03EL normalized pure-tensor construction"
+    "place": "Section 03EK: coefficient restriction; adjunction equality test"
    }
   },
   {
-   "text": "Here is the equality criterion needed for uniqueness, for any $RI$-module sheaf $K$. If $\\alpha,\\beta:h^{-1}(F\\otimes_R G)\\to K$ are $RI$-linear and agree on all $h^{-1}(s\\otimes t)$, their underlying abelian-sheaf adjoints are $h_*\\alpha\\circ\\eta_{F\\otimes_R G}$ and $h_*\\beta\\circ\\eta_{F\\otimes_R G}$ by [def-weil-proetale-inverse-image]. They are $R$-linear for the action on $h_*K$ through $\\eta_R:R\\to h_*RI$: apply [lem-weil-pbc-ringed-topoi-module-adjunction] with $S=RI,c=1$, identifying scalar extension with $h^{-1}$ by $a_M$ from step 2. The two adjoints agree on every $s\\otimes t$ by the assumed formula. The injective Hom-to-bilinear-map correspondence of [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore makes the adjoints equal; injectivity of the inverse-image adjunction makes $\\alpha=\\beta$. Applying this to two maps satisfying clause 1 proves uniqueness. No claim that pulled-back original pure tensors locally generate on $T'$ is needed.",
+   "text": "Apply [lem-pur-site-algebraic-composition-unit] to the base-change functors $u_h,u_g$. Their smallness, sheaf-preserving precomposition and left-exact inverse images are supplied by [def-weil-proetale-inverse-image]; identify the composite by the fibre-product associator. It gives the unique unit-normalized $\\gamma$, including its ring and semilinear module identifications, and thus the adjunction-compatible comparison of [det-pe-topos-functoriality-inverse-image](5). On $(h\\circ g)^{-1}(s\\otimes t)$ the left tensor composite becomes $g^{-1}h^{-1}s\\otimes g^{-1}h^{-1}t$ by the formula for $\\gamma$ and two applications of step 1. The right composite gives the same tensor by step 1 and the formulas for $\\gamma_F,\\gamma_G$. Both are linear over $(h\\circ g)^{-1}\\mathcal O$ after the specified scalar identification, so [lem-pur-inverse-image-tensor-adjoint-test] for $h\\circ g$ proves the composition equation.",
    "uses": [
+    "lem-pur-site-algebraic-composition-unit",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EL and the bilinear universal property in Section 03EK"
-   }
-  },
-  {
-   "text": "The maps $\\pi,\\pi'$ in clause 2 exist by the tensor universal property: the pure-tensor pairing over the larger ring is bilinear over the smaller ring [lem-pc-sites-sheaf-tensor-bilinear-universal]. Regard both composites in clause 2 as $h^{-1}\\mathcal O$-linear maps with the common source $h^{-1}(F\\otimes_{\\mathcal O}G)$. On $h^{-1}(s\\otimes t)$, naturality of $\\eta_h$ for $\\pi$ and the formula of step 2 give $h^{-1}s\\otimes h^{-1}t$ in the tensor over $h^{-1}\\mathcal O'$ for each composite. The equality criterion in step 3 gives the required equation.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), restriction of scalars and pure-tensor universal property"
-   }
-  },
-  {
-   "text": "For composition apply [lem-trf-site-inverse-image-composition-generators] with $\\mathcal C=T_{\\mathrm{proet}}$, $\\mathcal D=T'_{\\mathrm{proet}}$, $\\mathcal E=T''_{\\mathrm{proet}}$, $v=u_h$, $u=u_g$. The smallness and sheaf-preserving precomposition hypotheses hold by [def-weil-proetale-inverse-image]. Identify $u_gu_h(V)$ with $u_{h\\circ g}(V)$ by the canonical fibre-product associator. The cited lemma gives $\\kappa:g^{-1}h^{-1}\\cong(h\\circ g)^{-1}$ and\n$$h_*g_*\\kappa\\circ h_*\\eta_g\\circ\\eta_h=\\eta_{h\\circ g}.$$\nPut $\\gamma=\\kappa^{-1}$. Evaluating this equation on $s\\in H(V)$ gives exactly $\\gamma((h\\circ g)^{-1}s)=g^{-1}(h^{-1}s)$. It is the adjunction-compatible comparison in [det-pe-topos-functoriality-inverse-image] (5). If another natural isomorphism has this formula, then for each $H$ its postcomposition with $\\eta_{h\\circ g,H}$ has the same components on every section of every $V$; injectivity of the set-sheaf adjunction for $h\\circ g$ identifies it with $\\gamma_H$. This proves the asserted uniqueness, not merely existence of some comparison.",
-   "uses": [
-    "lem-trf-site-inverse-image-composition-generators",
-    "def-weil-proetale-inverse-image",
-    "det-pe-topos-functoriality-inverse-image"
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-pur-inverse-image-tensor-adjoint-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB (lemma-composition-morphisms-sites); Tags 00VE (lemma-adjoints-u) and 00WX (lemma-adjoint-sheaves), unit normalization"
+    "place": "Tags 03CB, 00VE, 00WX: composition, with operation transport and pure-tensor equality test"
    }
   },
   {
-   "text": "Write $L_0=(h\\circ g)^{-1}$ and $L_1=g^{-1}h^{-1}$, and let $p_i:L_i(A\\times B)\\cong L_iA\\times L_iB$ be their product comparisons. Naturality of $\\gamma$ with both projections and the defining property of a product give\n$$p_1\\gamma_{A\\times B}=(\\gamma_A\\times\\gamma_B)p_0.$$\nFor every operation $m:A\\times B\\to C$, naturality also gives $\\gamma_CL_0(m)=L_1(m)\\gamma_{A\\times B}$. Substituting the displayed product equation identifies the transported operation maps. Apply this to ring addition and multiplication, module addition and the scalar action. The analogous terminal-object equation treats zero and one, and additive inverses follow from addition and zero. Since the structures are defined by exactly these operation maps [def-weil-proetale-inverse-image], $\\gamma_{\\mathcal O}$ is a ring isomorphism and $\\gamma_F$ is module-linear through it. Thus the tensor transports in clause 3 are well defined by [lem-pc-sites-sheaf-tensor-bilinear-universal].",
+   "text": "Identify the identity base-change functor with the identity by $T\\times_TV\\cong V$. Then [lem-pur-site-algebraic-composition-unit] identifies $\\eta_{\\mathrm{id}}$ as an isomorphism, including its ring/module identifications. Under it step 1 fixes every pure tensor $s\\otimes t$. The injectivity part of [lem-pc-sites-sheaf-tensor-bilinear-universal] makes $\\sigma^{\\mathrm{id}}$ the identity.",
    "uses": [
-    "def-weil-proetale-inverse-image",
+    "lem-pur-site-algebraic-composition-unit",
     "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D2 (lemma-pullback-module), operation transport through finite-product comparisons"
-   }
-  },
-  {
-   "text": "After the scalar identification of step 6, both sides of clause 3 are $(h\\circ g)^{-1}\\mathcal O$-linear maps with source $(h\\circ g)^{-1}(F\\otimes_{\\mathcal O}G)$ and the same target. Evaluate on $(h\\circ g)^{-1}(s\\otimes t)$. The unit formula of step 5 changes its image under $\\gamma$ into $g^{-1}h^{-1}(s\\otimes t)$. The two pure-tensor formulas of step 2 change the left composite into $g^{-1}h^{-1}s\\otimes g^{-1}h^{-1}t$. Applying the formula of step 2 first for $h\\circ g$ and then the unit formula to the two factors gives the identical result for the right composite. Apply step 3 with the morphism $h\\circ g$ and this common target. This proves the displayed composition equation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback), coherence checked using adjoints and pure-tensor normalization"
-   }
-  },
-  {
-   "text": "For $h=\\mathrm{id}_T$, the category $\\mathcal I_U$ of [def-weil-proetale-inverse-image] has the INITIAL object $(U,\\mathrm{id}_U)$: its unique arrow to $(W,\\phi:U\\to W)$ is $\\phi$. Consequently $(U,\\mathrm{id}_U)$ is terminal in the actual colimit index $\\mathcal I_U^{\\mathrm{op}}$. The colimit is $H(U)$, with cocone map $H(W)\\to H(U)$ equal to restriction along $\\phi$ and with the coprojection at $(U,\\mathrm{id})$ the identity. These identifications commute with restriction in $U$. Since $H$ is already a sheaf, the universal property of [def-weil-pbc-sheafification] identifies its sheafification with $H$ and identifies the sheafification unit with an isomorphism. The adjunction unit $\\eta_{\\mathrm{id}}$ is this coprojection followed by sheafification, hence is an isomorphism. Under it, step 2 sends $s\\otimes t$ to itself, so [lem-pc-sites-sheaf-tensor-bilinear-universal] identifies $\\sigma^{\\mathrm{id}}$ with the identity.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sheafification",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00VE (lemma-adjoints-u), identity comma index; Tag 00WH (proposition-sheafification-adjoint)"
+    "place": "Tags 00VE and 00WH: identity unit; tensor universal property"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-algebraic-inverse-image",
-  "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "def-weil-pbc-sheafification",
   "def-weil-proetale-inverse-image",
   "det-pe-topos-functoriality-inverse-image",
   "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-trf-site-inverse-image-composition-generators",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-pur-inverse-image-scalar-unit-normalization",
+  "lem-pur-inverse-image-tensor-adjoint-test",
+  "lem-pur-site-algebraic-composition-unit",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -211,47 +173,27 @@
  },
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-proetale-inverse-image-tensor-comparison",
   "worker": "stage1",
-  "summary": "Repaired the returned split without changing the statement. Instantiated the focused canonical normalized tensor construction, proved uniqueness via the module adjunction and tensor universal property, supplied unit-normalized composition and explicit operation transport, corrected the comma-index orientation, restored the original blueprint ancestry and declared generic cross-unit tools. No new nodes.",
-  "blueprint": "Retains ancestry through lem-pur-tate-inverse-limit-base-change to lem-pur-finite-kummer-level, final proof sentence on tensor-product naturality under base change. Steps 1-4 realize that tensor naturality; steps 5-8 supply composition and identity compatibility.",
+  "summary": "Human-directed re-split of the 7417-character proof into three independent statement-only arguments: realization and scalar-unit normalization, adjoint bilinear equality test, and site composition/identity algebraic transport. The unchanged statement is assembled in five steps of at most 3000 characters total; the report preserves every old proof step verbatim and maps it to its new owner.",
+  "blueprint": "Final sentence of the proof: 'The compatibility with the derived tensor product and with base change is the naturality of the displayed projection and of the tensor product' (naturality of the tensor product under base change); retains the same ancestry and unit route, realizes tensor naturality with explicit scalar, composition and identity coherence.",
   "tool_uses": [
    {
-    "node": "def-weil-pbc-algebraic-inverse-image",
-    "why": "Definition of the algebraic presentation used to instantiate the existing normalized tensor construction."
-   },
-   {
-    "node": "def-weil-pbc-canonical-ringed-tensor-comparison",
-    "why": "Definition of the normalized pure-tensor interface, including insertion-of-one and the generalized normalization equation."
-   },
-   {
-    "node": "def-weil-pbc-sheafification",
-    "why": "Universal-property definition of sheafification needed in the identity case."
-   },
-   {
     "node": "def-weil-proetale-inverse-image",
-    "why": "Existing definition of the pro-etale geometric morphism, its adjunction and transported operations; a generic input, not a replacement of the purity route."
+    "why": "Generic sheaf inverse-image infrastructure already used by the item."
    },
    {
     "node": "det-pe-topos-functoriality-inverse-image",
-    "why": "Generic pro-etale composition comparison already named in the item statement; used only to identify the normalized comparison."
+    "why": "Identifies the already specified pro-etale composition comparison; no route is replaced."
    },
    {
     "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "why": "Generic sheaf tensor universal property used for scalar-unit identifications and equality of adjuncts; the purity unit has no replacement."
-   },
-   {
-    "node": "lem-trf-site-inverse-image-composition-generators",
-    "why": "Generic site inverse-image comparison with its explicit adjunction-unit normalization, needed for composition coherence."
+    "why": "Generic tensor universal property for restriction of scalars and the identity comparison."
    },
    {
     "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-    "why": "Generic ringed-topos tensor construction at identity scalar map; supplies precisely the normalized isomorphism used by the purity tensor argument."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic module adjunction, used at identity scalar map for the uniqueness argument."
+    "why": "Generic normalized ringed-topos tensor construction; the purity unit has no replacement for this construction."
    }
   ]
  },
@@ -267,12 +209,12 @@
   "lem-weil-pbc-ringed-topoi-module-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q106-199328229",
-  "group": "Q106",
+  "reviewer": "NT-cc-Q11-3b7e95c7f",
+  "group": "Q11",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-199328229 (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, cited statements, source passages and blueprint route. Verified tensor normalization, adjoint uniqueness, coefficient compatibility, composition coherence and identity-index orientation. No new nodes, cycles, forbidden batch-5 dependencies or non-elementary steps over 2000 characters. Accepted nine generic tool uses; detailed checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-3b7e95c7f (reviewer sub-agent of L); spot-checked: This is the human re-split (2026-10-21) of the 7417-character, 8-step proof. The item is not superseded: live and side-live still hold the old reviewed split and none of the new ids exist live. The item statement and every maintainer field are unchanged. The proof is now a 5-step assembly of 2530 characters citing three statement-only unsplit nodes of comparable size (A scalar-unit-normalization 1831 chars, B tensor-adjoint-test 3258, C site-algebraic-composition-unit 2263). Every old argument reappears in a node or an assembly step: old 1-2 in A plus step 1; old 3 in B; the evaluations of old 4 and 7 in B plus steps 3-4; old 5-6 in C; old 8 in C (eta_id iso) plus step 5. Nothing was shortened away, and no node restates the item. C generalizes the gamma sentence of clause 3 to arbitrary small sites and adds operation transport and the identity unit, so it is a separate argument, not D1 relabelling. All three statements checked true by hand. A: a q = 1, and the normalization with Z=|M|x|N| evaluated at the unit image gives b(h^-1(s⊗t)) = h^-1 s ⊗ h^-1 t. B: Stacks 03D7 at c=1 plus the bilinear universal property; the pi and composition evaluations follow from unit naturality. C: unit-equation types match; uniqueness by transposition; existence as the inverse of kappa from lem-trf-site-inverse-image-composition-generators; eta_id iso via the initial object of I_U. Hypotheses at each step are supplied by def-weil-proetale-inverse-image. Stacks tags 03D2/03D7/03EK/03EL/03CB/00VE/00WX/00WH verified. Not duplicates of lem-sfb-site-inverse-image-bilinear-adjunction, multimap-universal, the trf composition-generators node (C is strictly larger), or lem-weil-pbc-inverse-image-composition-module-linear (étale sites, constant coefficients). No SGA, no cycle. Tool uses (def-weil-proetale-inverse-image, det-pe-topos-functoriality-inverse-image, lem-pc-sites-sheaf-tensor-bilinear-universal, canonical-ringed-tensor-comparison-construction) were already accepted and are accepted again. FIX 1: B's composition evaluation compared sections over T''x_T V and T''x_T'(T'x_T V) without naming the identification; the canonical fibre-product associator is now stated. FIX 2: C's blueprint.from.place wording repaired. Details in review.md.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison",

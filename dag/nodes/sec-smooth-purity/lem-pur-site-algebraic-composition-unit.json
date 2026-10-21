@@ -1,0 +1,93 @@
+{
+ "id": "lem-pur-site-algebraic-composition-unit",
+ "kind": "statement",
+ "title": "Algebraic transport of unit-normalized site composition and identity",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be small sites in a fixed larger sheaf universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $v:\\mathcal C\\to\\mathcal D$ and $u:\\mathcal D\\to\\mathcal E$ be functors whose precomposition functors preserve sheaves of sets. For $w=v,u,uv,\\mathrm{id}_{\\mathcal C}$, let $L_w$ be the specified inverse image, left adjoint to $P_w(H)=H\\circ w$, with unit $\\eta^w$, constructed by the comma colimit and sheafification [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Assume $L_v,L_u,L_{uv}$ preserve finite limits. Lift these functors to ring sheaves and module sheaves by applying them to operation maps through the canonical finite-product and terminal-object comparisons, with the underlying-sheaf identifications of [def-weil-pbc-algebraic-inverse-image]. Module sheaves are those of [def-weil-sheaf-of-modules-category].\n\nThere is a unique natural isomorphism $\\gamma:L_{uv}\\xrightarrow{\\sim}L_uL_v$ satisfying\n$$P_vP_u(\\gamma_H)\\circ\\eta^{uv}_H=P_v(\\eta^u_{L_vH})\\circ\\eta^v_H.$$\nEquivalently, for every $W\\in\\mathcal C$ and $s\\in H(W)$, it satisfies $\\gamma_H((uv)^{-1}s)=u^{-1}(v^{-1}s)$ in $(L_uL_vH)(uv(W))$, where each inverse-image section is the corresponding unit image. This section equation alone determines the natural isomorphism.\n\nFor $i=0,1$ put $L_0=L_{uv}$, $L_1=L_uL_v$, and let $p^i_{A,B}:L_i(A\\times B)\\xrightarrow{\\sim}L_iA\\times L_iB$ and $p^i_*:L_i(*)\\xrightarrow{\\sim}*$ be the canonical comparisons. Then\n$$p^1_{A,B}\\gamma_{A\\times B}=(\\gamma_A\\times\\gamma_B)p^0_{A,B},\\qquad p^1_*\\gamma_*=p^0_*.$$\nFor every commutative ring sheaf $R$ on $\\mathcal C$, $\\gamma_R$ is a ring-sheaf isomorphism. For every $R$-module sheaf $M$, $\\gamma_M$ is a natural additive isomorphism semilinear through $\\gamma_R$: $\\gamma_M(a m)=\\gamma_R(a)\\gamma_M(m)$ on all local sections. These maps respect zero, one, addition, multiplication and module scalar action.\n\nThe identity adjunction unit $\\eta^{\\mathrm{id}}_H:H\\to L_{\\mathrm{id}}H$ is an isomorphism for every set sheaf $H$ (identifying $P_{\\mathrm{id}}$ with the identity). On commutative ring sheaves it is a ring isomorphism, and for every $R$-module $M$ its component is additive and semilinear through $\\eta^{\\mathrm{id}}_R$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CB, label lemma-composition-morphisms-sites; Tag 00VE, label lemma-adjoints-u; Tag 00WX, label lemma-adjoint-sheaves; Tag 00WH, label proposition-sheafification-adjoint. Operation transport is agent-written from sites-modules.tex Tag 03D2, label lemma-pullback-module. Original parent proof steps 5, 6 and the identity-unit argument of step 8; arbitrary small sites, no tensor comparison asserted."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit normalized composition isomorphism of inverse image on proetale sheaves preserves ring and module operations and the identity inverse image unit is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous; SheafOfModules.unitToPushforwardObjUnit_val_app_apply in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction in Mathlib/Condensed/Discrete/LocallyConstant; SheafOfModules.pushforwardSections_unitHomEquiv in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.PreservesFiniteProducts",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackId|lowerStarComp|lowerStarId",
+   "results": "[grep] OK 10 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:139 noncomputable def pullbackId : pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _ :=; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:144 lemma conjugateEquiv_pullbackId_hom :; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:145     conjugateEquiv .id (pullbackPushforwardAdjunction.{v} _) (pullbackId S).hom =; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167 noncomputable def pullbackComp :; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:177 lemma conjugateEquiv_pullbackComp_inv :; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:117 noncomputable def pullbackId : pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _ :=; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:131 noncomputable def pullbackComp :; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:143     isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:144       pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ whiskerLeft G.op ψ') =; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:145     (associator _ _ _).symm ≪≫ isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between finite product preserving functors transports ring objects and module structures and identity sheaf inverse image agrees with identity",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.PreservesProduct.iso in Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products; ModuleCat.restrictScalarsId in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; SheafOfModules.pullback_comp_id in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; ModuleCat.restrictScalarsId'_inv_app in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; SheafOfModules.pullback_id_comp in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; ModuleCat.restrictScalarsId' in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; SheafOfModules.pushforwardId in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous; SheafOfModules.pushforwardNatTrans_id in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf inverse image composition comparison on sets lifts canonically to commutative ring sheaves and semilinear module sheaves through product naturality",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pullbackObjFreeIso_hom_naturality in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.ιFree_mapFree_inv_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/Free; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.map_ιFree_mapFree_hom_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/Free; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; SheafOfModules.ιFree_mapFree_inv in Mathlib/Algebra/Category/ModuleCat/Sheaf/Free; SheafOfModules.map_ιFree_mapFree_hom in Mathlib/Algebra/Category/ModuleCat/Sheaf/Free",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*(Comp|Id)|sheafPullbackComp|sheafPullbackId",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "[loogle] OK 5 hit(s); SheafOfModules.pullbackComp in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_comp_id in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_id_comp in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.pullback_assoc in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous; SheafOfModules.conjugateEquiv_pullbackComp_inv in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous",
+   "date": "2026-10-21",
+   "verdict": "no exact match: module pullbackComp/pullbackId do not identify the underlying set inverse-image compositor with the specified operation transports and unit-section normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-inverse-image-tensor-comparison",
+  "date": "2026-10-21",
+  "group": "Q11"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-finite-kummer-level",
+   "place": "Final sentence of the proof: 'The compatibility with the derived tensor product and with base change is the naturality of the displayed projection and of the tensor product' (naturality of the tensor product under base change); original comparison proof steps 5, 6 and the identity-unit argument of step 8",
+   "via": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pur-tate-inverse-limit-base-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
