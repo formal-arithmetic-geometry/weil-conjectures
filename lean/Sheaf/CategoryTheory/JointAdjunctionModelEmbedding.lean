@@ -54,7 +54,26 @@ theorem mono_pi_lift_adjunction_models
     (M : A) (models : ∀ i : I, B i) (e : ∀ i : I, (F i).obj M ≅ models i)
     [HasProduct (fun i : I ↦ (G i).obj (models i))] :
     Mono (Pi.lift (fun i : I ↦ (adj i).unit.app M ≫ (G i).map (e i).hom)) := by
-  sorry
+  let u := Pi.lift (fun i : I ↦ (adj i).unit.app M ≫ (G i).map (e i).hom)
+  apply Preadditive.mono_of_isZero_kernel u
+  apply hzero
+  intro i
+  have hk : kernel.ι u ≫ (adj i).unit.app M ≫ (G i).map (e i).hom = 0 := by
+    calc
+      _ = (kernel.ι u ≫ u) ≫ Pi.π (fun i : I ↦ (G i).obj (models i)) i := by
+        simp only [Category.assoc, u, Pi.lift_π]
+      _ = 0 := by simp
+  have hmap : (F i).map (kernel.ι u) = 0 := by
+    have heq : (F i).map (kernel.ι u) ≫ (e i).hom =
+        (F i).map (0 : kernel u ⟶ M) ≫ (e i).hom := by
+      apply ((adj i).homEquiv (kernel u) (models i)).injective
+      rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left,
+        Adjunction.homEquiv_apply, zero_comp]
+      exact hk
+    simpa using (cancel_mono (e i).hom).mp heq
+  have hlim := isLimitOfHasKernelOfPreservesLimit (F i) u
+  have : Mono ((F i).map (kernel.ι u)) := mono_of_isLimit_fork hlim
+  exact IsZero.of_mono_eq_zero _ hmap
 
 /-- The map with the adjunction units as components is monic whenever its product exists.
 
@@ -76,6 +95,7 @@ theorem mono_pi_lift_adjunction_units
     (M : A) [HasProduct (fun i : I ↦ (G i).obj ((F i).obj M))] :
     Mono (Pi.lift (f := fun i : I ↦ (G i).obj ((F i).obj M))
       (fun i : I ↦ (adj i).unit.app M)) := by
-  sorry
+  simpa using mono_pi_lift_adjunction_models F G adj hzero M
+    (fun i : I ↦ (F i).obj M) (fun i : I ↦ Iso.refl ((F i).obj M))
 
 end CategoryTheory
