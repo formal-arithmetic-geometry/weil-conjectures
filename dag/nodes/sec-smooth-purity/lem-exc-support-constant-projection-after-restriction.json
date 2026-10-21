@@ -1,0 +1,112 @@
+{
+ "id": "lem-exc-support-constant-projection-after-restriction",
+ "kind": "statement",
+ "title": "Scalar-restricted constant support projection",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-adjoint-admissibility",
+   "place": "proof step identifying the scalar-restricted support mate with the constant projection"
+  },
+  "same_as": []
+ },
+ "statement": "For finite commutative rings A and B, a ring map A → B, a compactification c of f : X → Y, an ambient support adjunction for A, and K in the derived category of pro-etale A-module sheaves on X, the constant-coefficient projection for the scalar-restricted coefficient object B is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, projection formula for the scalar-restricted constant coefficient"
+ },
+ "stmt_deps": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The fixed support functor is a left adjoint under the ambient support adjunction and therefore preserves the discrete colimits required by the constant-support projection theorem; apply that theorem to the scalar-restricted constant coefficient object.",
+   "uses": [
+    "lem-exc-proetale-constant-support-projection",
+    "lem-exc-support-scalar-projection-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-constant-support-projection",
+  "lem-exc-support-scalar-projection-normalization"
+ ],
+ "proof_origin": "Strictly componentwise intermediate result used by the arrow-isomorphism transport in the parent theorem.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant coefficient projection formula after restriction of scalars for compact support",
+   "results": "No exact declaration; returned ordinary sheaf projection and scalar restriction results.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso rightDerivedLowerStarProjectionMap constantSheaf",
+   "results": "No exact pro-etale declaration matching the scalar-restricted coefficient object.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSupportProjection|restrictScalars.*Projection",
+   "results": "Only the existing generic constant-support theorem and unrelated scalar restriction declarations.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalSupportProjectionIso",
+  "file": "lean/Sheaf/Paper/ExceptionalSupportProjectionIso.lean",
+  "declaration": "WeilConjectures.exceptionalSupport_constantProjection_isIso",
+  "statement": "theorem exceptionalSupport_constantProjection_isIso {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A} (_a : sfAmbientCompactSupportCandidate A c ⊣ G) (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) : IsIso (((ProEtale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.g).app ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory.obj K)).app ((constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj ((ModuleCat.restrictScalars.{u + 1} φ.ulift).obj (ModuleCat.of (ULift.{u + 1, u} B) (ULift.{u + 1, u} B))))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalAdjointAdmissibility",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T001144-L-1378231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T001144-L-1378231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
