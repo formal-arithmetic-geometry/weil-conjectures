@@ -19,7 +19,10 @@
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-derived-change-of-rings",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-complete",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof": [
   {
@@ -261,5 +264,45 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-0cf47139d (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, all 15 cited statements, and Stacks 09C3 (proetale.tex, the 'If b > a' paragraph whose residue-cone Tor-amplitude details are omitted). The item is still unsplit on live, is not on the dropped list, has no repair note and is not superseded. There are 0 new nodes, the statement and metadata are unchanged, and there is no cycle (BFS over 750 reachable nodes). Step checks: step 1, bounds node gives H^{b+1}(M)=0, then the n=1 reduction triangle and the long exact sequence give an epimorphism on H^b. Step 2, exact evaluation gives surjectivity on T-sections, and the Hom bijection of the split-model node (with C=B_T, valid for any A) lifts the basis; f_1 induces theta_b by naturality of the reduction unit. Step 3, the ring identification O_{E,T} = lim (O_E/pi^n)_T (det-prop-sfb-qlbar-colimit-x-integral-limit (3)) matches completeness with sk-def-pe-derived-completion, and the Nakayama node's cone-closure clause makes L complete. Step 5, I checked C(i)^j = V^j + A^{j+1}: the extra copy sits in degree b-1 with identity differential, h^b = id gives dh+hd = id, and TR3 plus the triangle-iso leaf finish. Step 6, the elementary K-flat tensor computation gives Tor amplitude [a,b-1]. Step 7 covers a=b, r_b=0 and empty T. Small-case test: T a geometric point, M = B + k in degree 0, f: B^2 -> B + k gives L = B[1] and L_1 = k[1], as the statement predicts. The worker's tool_uses (evaluation-exact, qlbar integral limit, Nakayama, pur change of rings) are generic tools and accepted. FIX (C4): step 4 said the split-model node gives 'under every such model f_1 is the top inclusion', but the node states this only for its displayed chain-map model V -> Z. I rewrote the step to derive it for any isomorphism phi: V -> M_1 in D inducing theta_q: phi composed with i and f_1 send the generators to the same theta_b(e_j), so they are equal by injectivity of the shifted-free Hom bijection (C=k_T, q=b). The whole node file is in fixes/dag/nodes/sec-six-functors/; only that sentence changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteTopResidueCellCone",
+  "declaration": "WeilConjectures.complete_top_residue_cell_cone",
+  "declarations": [
+   "WeilConjectures.topCellAbLocallyBijective",
+   "WeilConjectures.topCellAbSheafify",
+   "WeilConjectures.topCellSplitComplex",
+   "WeilConjectures.topCellSplitInclusion",
+   "WeilConjectures.topCellSourceAbelian",
+   "WeilConjectures.topCellTargetAbelian",
+   "WeilConjectures.topCellSourceDerived",
+   "WeilConjectures.topCellTargetDerived",
+   "WeilConjectures.topCellRestrictionLimits",
+   "WeilConjectures.topCellRestrictionColimits",
+   "WeilConjectures.topCellIntegralFree",
+   "WeilConjectures.topCellResidueFree",
+   "WeilConjectures.topCellFreeQuotient",
+   "WeilConjectures.topCellReductionComparison",
+   "WeilConjectures.topCellResidueSplit",
+   "WeilConjectures.topCellResidueInclusion",
+   "WeilConjectures.topCellReducedMap",
+   "WeilConjectures.complete_top_residue_cell_cone"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteTopResidueCellCone.lean",
+  "statement": "theorem complete_top_residue_cell_cone [CompactSpace X] (_hweak : ∀ (F G : Sheaf (ProEt.topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 X))))) (M : DerivedCategory (scalarReductionSource.{u, u} l E X)) (_hcomplete : IsDerivedCompleteUnrestricted.{u, u} l E X M) (a b : ℤ) (hab : a ≤ b) (r : ℤ → ℕ) (theta : ∀ q : Set.Icc a b, topCellResidueFree.{u} l E X (r q.val) ≅ (DerivedCategory.homologyFunctor (scalarReductionTarget.{u, u} l E X 0) q.val).obj ((scalarReductionDerivedExtension.{u, u} l E X 0).obj M)) (_hTor : ∀ V : X.ProEt, HasProEtaleTorAmplitude.{u} V.left (Padic.coefficientExtensionRing l E 1) ((proEtaleRingDerivedPullback.{u} V.hom (proEtaleConstantRing X (Padic.coefficientExtensionRing l E 1)) (proEtaleConstantRing V.left (Padic.coefficientExtensionRing l E 1)) (AlgebraicGeometry.ProEtale.StrictTower.constantRingIso.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)) V.hom)).obj ((scalarReductionDerivedExtension.{u, u} l E X 0).obj M)) a b) : ∃ (e : (scalarReductionDerivedExtension.{u, u} l E X 0).obj ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj (topCellIntegralFree.{u} l E X (r b))) ≅ (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E X 0) b).obj (topCellResidueFree.{u} l E X (r b))) (f : (DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj (topCellIntegralFree.{u} l E X (r b)) ⟶ M) (L : DerivedCategory (scalarReductionSource.{u, u} l E X)) (g : M ⟶ L) (delta : L ⟶ ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj (topCellIntegralFree.{u} l E X (r b)))⟦(1 : ℤ)⟧), e.hom = topCellReductionComparison.{u} l E X (r b) b ∧ Triangle.mk f g delta ∈ distTriang _ ∧ IsDerivedCompleteUnrestricted.{u, u} l E X L ∧ (DerivedCategory.homologyFunctor (scalarReductionTarget.{u, u} l E X 0) b).map (topCellReducedMap.{u} l E X (r b) b M e f) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (scalarReductionTarget.{u, u} l E X 0) b).hom.app (topCellResidueFree.{u} l E X (r b)) ≫ (theta ⟨b, hab, le_rfl⟩).hom ∧ (∀ phi : DerivedCategory.Q.obj (topCellResidueSplit.{u} l E X a b r) ≅ (scalarReductionDerivedExtension.{u, u} l E X 0).obj M, (∀ q : Set.Icc a b, (DerivedCategory.homologyFunctor (scalarReductionTarget.{u, u} l E X 0) q.val).map (DerivedCategory.Q.map (topCellResidueInclusion.{u} l E X a b r q) ≫ phi.hom) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (scalarReductionTarget.{u, u} l E X 0) q.val).hom.app (topCellResidueFree.{u} l E X (r q.val)) ≫ (theta q).hom) → topCellReducedMap.{u} l E X (r b) b M e f = DerivedCategory.Q.map (topCellResidueInclusion.{u} l E X a b r ⟨b, hab, le_rfl⟩) ≫ phi.hom) ∧ Nonempty ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L ≅ DerivedCategory.Q.obj (CochainComplex.mappingCone (topCellResidueInclusion.{u} l E X a b r ⟨b, hab, le_rfl⟩))) ∧ Nonempty (CochainComplex.mappingCone (topCellResidueInclusion.{u} l E X a b r ⟨b, hab, le_rfl⟩) ≅ topCellResidueSplit.{u} l E X a (b - 1) r ⨿ CochainComplex.mappingCone (𝟙 ((HomologicalComplex.single (scalarReductionTarget.{u, u} l E X 0) (.up ℤ) b).obj (topCellResidueFree.{u} l E X (r b))))) ∧ Nonempty (Homotopy (𝟙 (CochainComplex.mappingCone (𝟙 ((HomologicalComplex.single (scalarReductionTarget.{u, u} l E X 0) (.up ℤ) b).obj (topCellResidueFree.{u} l E X (r b)))))) 0) ∧ Nonempty ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L ≅ DerivedCategory.Q.obj (topCellResidueSplit.{u} l E X a (b - 1) r)) ∧ (∀ q : Set.Icc a (b - 1), Nonempty (topCellResidueFree.{u} l E X (r q.val) ≅ (DerivedCategory.homologyFunctor (scalarReductionTarget.{u, u} l E X 0) q.val).obj ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L))) ∧ (a < b → ∀ V : X.ProEt, HasProEtaleTorAmplitude.{u} V.left (Padic.coefficientExtensionRing l E 1) ((proEtaleRingDerivedPullback.{u} V.hom (proEtaleConstantRing X (Padic.coefficientExtensionRing l E 1)) (proEtaleConstantRing V.left (Padic.coefficientExtensionRing l E 1)) (AlgebraicGeometry.ProEtale.StrictTower.constantRingIso.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)) V.hom)).obj ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L)) a (b - 1)) ∧ (a = b → IsZero ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L) ∧ IsZero L ∧ IsIso f) ∧ (r b = 0 → IsZero (topCellIntegralFree.{u} l E X (r b)))",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Finite coproducts of single-term complexes render the split models. The source reduction comparison is the adjoint of the actual coefficient projection on standard generators, through the normalized published adjunction. All helper definitions have real data; only the main theorem is postponed.",
+  "fixed_by": "NT-stage2-cc-0f039d38e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f039d38e",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Every clause matches the node and Stacks 09C3 (completeness via IsDerivedCompleteUnrestricted, _hweak as in the evaluation-exact theorem, theta, Tor on every site object, pinned e = adjoint of the generator-wise quotient, H^b(f_1)=theta_b, all-model top inclusion, cone and Cone(id) decomposition, L_1 iso to the lower split model, Tor [a,b-1], a=b and r_b=0 cases). Mechanical theorem stmt_dep finding: the statement uses derivedScalarExtensionRestrictionAdjunction.choose.homEquiv, which is canonical because the unit is pinned on K-flat representatives -> PASS on that point. The dep record def-weil-derived-cohomology-sheaves is identical to Q20's live record. FIX: dropped the two unused plain imports Sheaf.SixFunctors.ProEtale.DerivedCompletion and Sheaf.Paper.DerivedNakayamaFirstReduction, quarantined 2026-10-21T09:43Z (rework.tsv 705/1407, stale oleans only); no other quarantined module in the import closure; fixes/CompleteTopResidueCellCone.lean compiled with nt_compile --json in 15.6 s, rc=0; lean record unchanged."
  }
 }

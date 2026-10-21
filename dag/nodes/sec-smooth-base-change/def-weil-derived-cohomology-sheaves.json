@@ -96,18 +96,18 @@
   ],
   "statement": "noncomputable def homologyFunctor (n : ℤ) : DerivedCategory C ⥤ C",
   "branch": "mathlib",
-  "by": "Q20",
+  "by": "Q34",
   "date": "2026-10-21",
   "existing": true,
-  "note": "§1(B), exact existing Mathlib interface: the previous primary sfModelCohomology is standard geometric cohomology in the common-stage Weil coefficient-pair category and cannot be applied to an arbitrary ringed site and ring sheaf. Use the general DerivedCategory.homologyFunctor already named by this node's unchanged mathlib_match; specializing C to SheafOfModules gives precisely all the cohomology sheaves in the statement. homologyFunctorFactors supplies the comparison with representatives. No cohomology construction or definition is copied, and the specialized Weil declarations remain available in their original module."
+  "note": "Section 1(B): sfModelCohomology is specialized to the intrinsic common-stage Weil category and cannot accept arbitrary ring-sheaf modules, required by this node. The exact existing generic homology functor and its representative comparison are declared in Mathlib.Algebra.Homology.DerivedCategory.HomologySequence. homologyFunctorFactors identifies it with ker(d)/im(d) of any representative; DerivedCategory.TStructure.t (imported by the consumer) gives the stated standard t-structure. No category, definition or mathematical statement changes."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5f4df347d",
-  "group": "Q20",
-  "result": "pass",
-  "note": "Re-delivery of RETURNed d17c0eceb3b5: SplitPerfectDualTorWindow.lean byte-identical (sha256 2325…8dca); item node differs only in stmt_deps (theorem lem-sf-ringed-derived-closed-symmetric-monoidal replaced by def-zl-ringed-derived-closed-symmetric-monoidal-data, existing:true definition node, reviewed pass, owning RingedTensorModules and ringedTensorUnitComplex, live RingedDerivedClosedSymmetricMonoidal.lean l.50-61) and lean.note, so the H2 finding is resolved. Mechanical theorem-stmt_dep finding judged genuine for both remaining deps: homComplexπ = Classical.choose homComplex_projections_exists, siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients; PASS on that point. Mathematics re-checked: sign (n+1).negOnePow re-derived from the live homComplexπ differential lemma (the B[0] term vanishes), splitting p^* then i^* matches i≫p=𝟙, qis for every K-injective resolution, support [-b,-a], flatness, both Tor windows for every M, universes c,v,r,w independent, edge cases E=0, N=0, a=b, B=0. Only other node difference vs live: the def-weil-derived-cohomology-sheaves rebind to Mathlib homologyFunctor (the node's mathlib_match), identical to the previous delivery, live record unmoved; N5's 12 old declarations are unused outside their module (grep of both live trees), so only a maintainer note about orphaned owners. No compile run (no file changed; module identical to the compiled delivery)."
+  "reviewer": "NT-stage2-cc-0f039d38e",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Every clause matches the node and Stacks 09C3 (completeness via IsDerivedCompleteUnrestricted, _hweak as in the evaluation-exact theorem, theta, Tor on every site object, pinned e = adjoint of the generator-wise quotient, H^b(f_1)=theta_b, all-model top inclusion, cone and Cone(id) decomposition, L_1 iso to the lower split model, Tor [a,b-1], a=b and r_b=0 cases). Mechanical theorem stmt_dep finding: the statement uses derivedScalarExtensionRestrictionAdjunction.choose.homEquiv, which is canonical because the unit is pinned on K-flat representatives -> PASS on that point. The dep record def-weil-derived-cohomology-sheaves is identical to Q20's live record. FIX: dropped the two unused plain imports Sheaf.SixFunctors.ProEtale.DerivedCompletion and Sheaf.Paper.DerivedNakayamaFirstReduction, quarantined 2026-10-21T09:43Z (rework.tsv 705/1407, stale oleans only); no other quarantined module in the import closure; fixes/CompleteTopResidueCellCone.lean compiled with nt_compile --json in 15.6 s, rc=0; lean record unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-19",
