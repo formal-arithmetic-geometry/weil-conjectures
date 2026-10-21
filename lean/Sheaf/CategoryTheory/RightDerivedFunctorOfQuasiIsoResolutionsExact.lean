@@ -72,6 +72,15 @@ theorem rightDerivedFunctorOfQuasiIsoResolutionsIsoMapDerivedCategory_hom_fac :
         Functor.whiskerLeft DerivedCategory.Qh
           (F.rightDerivedFunctorOfQuasiIsoResolutionsIsoMapDerivedCategory h).hom =
       F.mapDerivedCategoryFactorsh.inv := by
-  sorry
+  let := isRightDerivedFunctor_of_inverts
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    F.mapDerivedCategory F.mapDerivedCategoryFactorsh
+  let := IsRightDerivedFunctor.isLeftKanExtension F.mapDerivedCategory
+    F.mapDerivedCategoryFactorsh.inv (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+  exact Classical.choose_spec (ExistsUnique.exists
+    (F.rightDerivedFunctorOfQuasiIsoResolutions_unique h F.mapDerivedCategory
+      F.mapDerivedCategoryFactorsh.inv (fun G ↦
+        (F.mapDerivedCategory.homEquivOfIsLeftKanExtension
+          F.mapDerivedCategoryFactorsh.inv G).bijective)))
 
 end CategoryTheory.Functor
