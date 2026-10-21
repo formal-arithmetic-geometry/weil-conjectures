@@ -2,7 +2,7 @@
  "id": "lem-pur-proetale-injective-support-global-model",
  "kind": "statement",
  "title": "Injective model for global sections of the closed support object",
- "statement": "Fix a finite commutative ring $A$. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules] and their derived categories [def-weil-pbc-derived-categories], with exact $i_*$ and $i^*,j^*$ as in [def-weil-pbc-proetale-operations]. Put $i^!_0M=i^*\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and write $S=Ri^!_0$ on $D^+$, with its support counit $\\epsilon:i_*SK\\to K$ as in [lem-pur-support-localization-triangle]. The sheaf functor $i^!_0$ is right adjoint to the exact sheaf functor $i_*$ and preserves injective objects. For every bounded-below complex of injective $A_X$-module sheaves $I$ representing $K\\in D^+(X_{\\mathrm{proet}},A)$, the complex $i^!_0I$ is bounded below and termwise injective, represents $SK$, and computes its derived global sections. There is an equality of complexes, natural in chain maps of such representatives,\n$$\\Gamma(Z,i^!_0I)=\\Gamma(X,i_*i^!_0I)=\\ker\\bigl(I(X)\\to I(U)\\bigr)=\\Gamma_Z(X,I),$$\nwith all differentials induced by those of $I$. Consequently it induces a canonical natural isomorphism\n$$R\\Gamma(Z,SK)\\xrightarrow{\\sim}R\\Gamma_Z(X,K)$$\nin the derived category of $A$-modules. Here $\\Gamma_Z$ is the kernel-of-restriction functor and $R\\Gamma_Z$ its bounded-below right derived functor [def-pur-support-cohomology]; the isomorphism in degree $r\\in\\mathbf Z$ is an isomorphism of cohomology modules, not an identification with a sheaf.",
+ "statement": "Fix a finite commutative ring $A$. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules] and their derived categories [def-weil-pbc-proetale-site, def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories], with exact $i_*$ and $i^*,j^*$ as in [def-weil-pbc-proetale-operations]. Put $i^!_0M=i^*\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and write $S=Ri^!_0$ on $D^+$, with its support counit $\\epsilon:i_*SK\\to K$ as in [lem-pur-support-localization-triangle]. The sheaf functor $i^!_0$ is right adjoint to the exact sheaf functor $i_*$ and preserves injective objects. For every bounded-below complex of injective $A_X$-module sheaves $I$ representing $K\\in D^+(X_{\\mathrm{proet}},A)$, the complex $i^!_0I$ is bounded below and termwise injective, represents $SK$, and computes its derived global sections. There is an equality of complexes, natural in chain maps of such representatives,\n$$\\Gamma(Z,i^!_0I)=\\Gamma(X,i_*i^!_0I)=\\ker\\bigl(I(X)\\to I(U)\\bigr)=\\Gamma_Z(X,I),$$\nwith all differentials induced by those of $I$. Consequently it induces a canonical natural isomorphism\n$$R\\Gamma(Z,SK)\\xrightarrow{\\sim}R\\Gamma_Z(X,K)$$\nin the derived category of $A$-modules. Here $\\Gamma_Z$ is the kernel-of-restriction functor and $R\\Gamma_Z$ its bounded-below right derived functor [def-pur-support-cohomology]; the isomorphism in degree $r\\in\\mathbf Z$ is an isomorphism of cohomology modules, not an identification with a sheaf.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09XQ, lemma-sections-with-support-acyclic (Hom argument); Tag 09XP, section-cohomology-support; ordinary pro-etale module version (old item Steps 6--7)"
@@ -13,15 +13,122 @@
   "def-weil-open-immersion",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-derived-categories",
   "def-weil-pbc-proetale-operations",
   "def-pur-flasque-support",
   "lem-pur-support-localization-triangle",
-  "def-pur-support-cohomology"
+  "def-pur-support-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the small-site and module-universe convention of [def-weil-pbc-proetale-site]. For $T=X,Z$, put $\\mathcal A_T=\\operatorname{Mod}(A_T)$. These categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the constant sheaf of rings on that small site, and therefore have enough injectives by [lem-sp-grothendieck-enough-injectives]. All the sheaf functors below are additive. Thus the general bounded-below derived-functor theorem can be applied to them; no etale/pro-etale comparison or constructibility restriction is involved.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D, final sentence), 079H (theorem-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "Write $G_ZM=\\ker(M\\to j_*j^*M)$. Since $j$ is quasi-compact, [def-pur-flasque-support] supplies its natural comparison $q_M:G_ZM\\xrightarrow{\\sim}i_*i^!_0M$. For any $N\\in\\mathcal A_Z$, [lem-weil-pbc-proetale-ringed-open-closed] gives $j^*i_*N=0$. The adjunction $j^*\\dashv j_*$ of [def-weil-pbc-proetale-operations] therefore shows that every composite $i_*N\\to M\\to j_*j^*M$ is zero. The universal property of the kernel gives a unique factorization through $G_ZM$. Composing with $q_M$ and using full faithfulness from [lem-exc-proetale-closed-fully-faithful] gives natural bijections\n$$\\operatorname{Hom}_X(i_*N,M)\\cong\\operatorname{Hom}_X(i_*N,G_ZM)\\cong\\operatorname{Hom}_X(i_*N,i_*i^!_0M)\\cong\\operatorname{Hom}_Z(N,i^!_0M).$$\nThis is $i_*\\dashv i^!_0$, with counit $i_*i^!_0M\\xrightarrow{q_M^{-1}}G_ZM\\hookrightarrow M$. The factorization is unique, so the displayed bijections commute with maps in both variables.",
+   "uses": [
+    "def-pur-flasque-support",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-proetale-operations",
+    "lem-exc-proetale-closed-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic, Hom argument); proetale.tex Tags 09AA (lemma-closed-immersion), 09AH (lemma-ses-associated-to-open), ordinary module version"
+   }
+  },
+  {
+   "text": "The exactness of $i_*$ is supplied by [lem-weil-pbc-proetale-ringed-open-closed], whose quasi-compact-complement hypothesis holds. Apply [lem-sp-right-adjoint-preserves-injectives] to the adjunction just constructed: $i^!_0$ preserves injective objects. Concretely, a map $N\\to i^!_0J$ with $J$ injective transposes to $i_*N\\to J$; along a monomorphism $N\\hookrightarrow N'$ exactness makes $i_*N\\hookrightarrow i_*N'$ monic, so an extension exists and its transpose is the desired extension to $N'$. Hence if $I$ is as in the statement, each $i^!_0I^n$ is injective. Additivity gives $i^!_0(0)=0$, so the same lower bound holds for $i^!_0I$. Its differential is $i^!_0(d_I^n)$, whose square is zero by functoriality.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic, exactness and injectivity argument); proetale.tex Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-derived-plus-injective] to $v=i^!_0$ and the given bounded-below injective representative $I$ of $K$. Its clause (2) identifies $Q_Z(i^!_0I)$ with $SK=Ri^!_0K$. By the preceding step this is itself a bounded-below injective complex on $Z$. Apply the same theorem to $v=\\Gamma(Z,-):\\mathcal A_Z\\to\\operatorname{Mod}(A)$: the complex $\\Gamma(Z,i^!_0I)$ therefore represents $R\\Gamma(Z,SK)$. Here $\\Gamma(Z,-)$ is simply evaluation at the final site object $Z$ with its ordinary $A$-module structure, so it is additive. The comparison isomorphisms in clause (2) are components of the natural transformation in clause (1), and hence are natural in chain maps of representatives.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI (lemma-enough-injectives-right-derived), using Tag 05TH (lemma-injective-acyclic)"
+   }
+  },
+  {
+   "text": "For each degree $n$, the direct-image formula of [def-weil-pbc-proetale-operations] identifies $(i_*i^!_0I^n)(X)$ with $(i^!_0I^n)(Z)$. Under $q_{I^n}^{-1}$ from [def-pur-flasque-support], this module is $(G_ZI^n)(X)=\\{a\\in I^n(X):a|_U=0\\}$. This last equality is the explicit section formula in that definition, evaluated at $X$; it is also $\\Gamma_Z(X,I^n)$ by [def-pur-support-cohomology]. Thus the displayed equality of complexes means these canonical identifications (the kernel is realized as that submodule). Naturality of $q$, of direct image and of restriction makes each identification commute with $d_I^n$ and with every chain map $I\\to I'$. In particular all the differentials are precisely those induced by $d_I$, restricted to the kernel, with no choice of a splitting or change of sign.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pur-flasque-support",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (section-cohomology-support, definitions of supported sections and supported subsheaf); ordinary pro-etale module version"
+   }
+  },
+  {
+   "text": "The functor $\\Gamma_Z(X,-)$ of [def-pur-support-cohomology] is additive: a sheaf map acts on the submodule of global sections whose restriction is zero, and addition is inherited from global sections. Apply [lem-weil-pbc-right-derived-plus-injective], clause (2), to this functor and $I$. It says that $\\Gamma_Z(X,I)$ represents $R\\Gamma_Z(X,K)$. The chain isomorphism of step 5 and the two derived comparison isomorphisms of steps 4 and 6 now give\n$$R\\Gamma(Z,SK)\\xrightarrow{\\sim}R\\Gamma_Z(X,K).$$\nExplicitly, invert the comparison from $Q\\Gamma(Z,i^!_0I)$ to the left side, apply the canonical chain identification, and then apply the comparison from $Q\\Gamma_Z(X,I)$ to the right side. Every map here is $A$-linear.",
+   "uses": [
+    "def-pur-support-cohomology",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI (lemma-enough-injectives-right-derived); etale-cohomology.tex Tag 09XP (section-cohomology-support)"
+   }
+  },
+  {
+   "text": "To check canonicity on the derived category rather than only on chosen complexes, use [lem-weil-pbc-dplus-injective-representative]: bounded-below injective complexes are K-injective and represent every object of $D^+(\\mathcal A_X)$. By [lem-weil-pbc-kinjective-hom-derived], a derived morphism between two such representatives is represented by a unique homotopy class of chain maps. Naturality in chain maps was checked in steps 4--6. If two lifts differ by a chain homotopy $h$, each additive functor used above sends the equation $f-g=dh+hd$ to the same equation for the images; the comparison maps commute with $h$ by their degreewise naturality. Thus the resulting square is independent of the lift. An isomorphism between representatives lifts with its inverse to mutually inverse homotopy classes; applying the same observation proves independence of the representative. This proves canonical naturality in $K$. Taking degree-$r$ cohomology, for any $r\\in\\mathbf Z$, gives an isomorphism of $A$-modules, since both complexes in step 5 consist of $A$-modules. It is not a statement identifying these modules with cohomology sheaves.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070J (lemma-bounded-below-injectives-K-injective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-pur-flasque-support",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-support-cohomology",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XQ and 09XP: Hom and supported-section arguments adapted explicitly to ordinary pro-etale module sheaves using the existing pro-etale nodes; derived comparison from Tags 05TI, 070I, 070J"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +164,45 @@
    "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; AlgebraicGeometry.Scheme.IdealSheafData.mk.inj; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; ModuleCat.Tilde.res_const",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|support.*[Ii]njective|[Ii]njective.*support",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the pro-etale closed-support global-section comparison for arbitrary bounded-below complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on a closed subscheme computed as kernel of restriction on a bounded below injective complex of proetale module sheaves",
+   "results": "CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; CategoryTheory.Sheaf.natTransΓRes_app; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.Scheme.Opens.topIso; AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι; SheafOfModules.sections",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the pro-etale closed-support global-section comparison for arbitrary bounded-below complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesInjectiveObjects\"",
+   "results": "CategoryTheory.Functor.PreservesInjectiveObjects; CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence; CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj; CategoryTheory.Functor.PreservesInjectiveObjects.mk; CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects; CategoryTheory.Functor.preservesInjectiveObjects_comp; ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall",
+   "date": "2026-10-21",
+   "verdict": "no match: generic right-adjoint injectivity result covers only step 3, not the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ordinary module sheaves on a proetale site the closed support right adjoint preserves injectives and its derived global sections are derived sections with closed support",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; LightCondensed.freeForgetAdjunction; PresheafOfModules.instIsLocallyInjectiveToSheafify; SheafOfModules.instAbelian; PresheafOfModules.sheafificationAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the pro-etale closed-support global-section comparison for arbitrary bounded-below complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of sections supported on a closed subset equals global sections of the derived closed support functor computed by injective resolutions",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.mapDerivedCategoryFactorsh; DerivedCategory.Q; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the pro-etale closed-support global-section comparison for arbitrary bounded-below complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-retracted-support-localization-comparison",
@@ -79,5 +221,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-proetale-injective-support-global-model",
+  "worker": "stage1",
+  "summary": "Reuse the pro-etale supported-kernel comparison, closed fully faithful pushforward and exact open/closed operations; prove the adjunction by kernel factorization, then compute both derived global-section functors on the same bounded-below injective complex. Repair the etale-only derived-category citation. No new nodes.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3; sk-prop-a1 separate global supported-cohomology identification. This item supplies its ordinary pro-etale injective-model calculation through lem-pur-retracted-support-localization-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site module category theorem supplies enough-injectives input with the existing Grothendieck theorem; no special etale statement is used."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ordinary pro-etale open/closed calculus supplies exactness of i_* and j^*i_*=0 for the adjunction argument."
+   },
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Generic closed-immersion module pushforward full faithfulness finishes the kernel Hom adjunction. No orientation theorem replaces this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-exc-proetale-closed-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-e027022d3",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-e027022d3 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against every cited statement. Statement: identical to the base except one repaired citation. def-weil-pbc-derived-categories is étale-only, so replacing it with def-weil-pbc-proetale-site, def-weil-abstract-derived-category and def-weil-pbc-bounded-derived-subcategories is correct and changes no hypothesis or conclusion. S=Ri^!_0 is the same functor as in lem-pur-support-localization-triangle. Source: I read Stacks 09XQ (etale-cohomology.tex l.14023, Hom formula and exact i_*) and 09XP (l.13966, Γ_Z = ker(I(X)→I(U))); the pro-étale adaptation is honestly marked agent. Steps: Step 1 gives Grothendieck and enough injectives for any ring sheaf; the constant sheaf equals (Cont(π0,A))^# for finite A. Step 2 is correct: η∘f has adjunct j^*f, which is 0 since j^*i_*=0; q is the qc-j iso of def-pur-flasque-support; closed-fully-faithful gives full faithfulness; the counit is q^{-1} followed by the inclusion. Step 3 is the Mathlib leaf for right adjoints of exact functors. Steps 4 and 6 use clause (2) of right-derived-plus-injective three times, with composites in the correct direction. Step 5's sectionwise identification uses the direct-image formula and the explicit kernel formula. Step 7's lift and representative independence uses K-injective Hom bijections and is written out, not hand-waved. Small cases checked: Z=∅, Z=X, X1⊔X2, negative shifts; no Noetherian hypothesis is needed. No cycle; nothing cites a dropped node; no SGA. I accept the 3 tool_uses (ring-sheaves-grothendieck, proetale-ringed-open-closed, exc-proetale-closed-fully-faithful) as generic tools. Overlap: lem-exc-proetale-derived-adjunction-triangle and lem-exc-proetale-closed-support prove a similar adjunction but only for Noetherian T, so they are not duplicates of this arbitrary-X item. Advisory: the i^{-1}i_*≅id clause of ringed-open-closed would make the third tool use unnecessary. No fixes."
  }
 }
