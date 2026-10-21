@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.LinearAlgebra.TensorProduct.Pi
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Tensoring with a sectionwise flat module presheaf
@@ -81,6 +83,21 @@ theorem tensorRight_preservesFiniteLimits_of_sectionwise_flat
       (∀ (I : Type t) [Finite I]
         (A : I → PresheafOfModules.{w} (R.obj ⋙ forget₂ CommRingCat RingCat)),
         IsIso (piComparison (tensorRight P) A)) := by
-  sorry
+  have hT : PreservesFiniteLimits (tensorRight P) := by
+    refine ⟨fun K _ _ ↦ ?_⟩
+    exact ⟨⟨fun hc ↦ ⟨evaluationJointlyReflectsLimits _ _
+      (fun V ↦ by
+        haveI := hP V
+        exact isLimitOfPreserves
+          (tensorRight (show ModuleCat (R.obj.obj V) from P.obj V))
+          (isLimitOfPreserves (evaluation _ V) hc))⟩⟩⟩
+  have := hT
+  refine ⟨hT, ?_, ?_⟩
+  · intro A B f
+    refine ⟨PreservesKernel.iso (tensorRight P) f, ?_⟩
+    rw [PreservesKernel.iso_hom]
+    exact kernelComparison_comp_ι f (tensorRight P)
+  · intro I _ A
+    infer_instance
 
 end PresheafOfModules

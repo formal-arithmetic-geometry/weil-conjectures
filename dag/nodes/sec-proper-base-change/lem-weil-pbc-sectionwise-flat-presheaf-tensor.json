@@ -14,95 +14,48 @@
  ],
  "proof": [
   {
-   "text": "Write $r_A:A(V)\\to A(W)$ and $r_P:P(V)\\to P(W)$ for restriction along $u:W\\to V$. By [def-pur-presheaf-tensor-product], restriction on $T_P(A)$ sends $a\\otimes p$ to $r_A(a)\\otimes r_P(p)$. Semilinearity over $r_R:R(V)\\to R(W)$ respects the balancing relation: both restrictions of $(ca)\\otimes p=a\\otimes(cp)$ equal $r_R(c)r_A(a)\\otimes r_P(p)$. For a module-presheaf morphism $h:A\\to B$, the maps $h_V\\otimes1$ commute with these restrictions, since $r_Bh_V=h_Wr_A$. The identities for composition, identity arrows and addition hold on pure tensors, which generate each tensor module. Thus the stated $T_P$ is an additive functor.",
+   "text": "At each object V, the hypothesis hP V supplies Module.Flat for P(V). Mathlib.RingTheory.Flat.CategoryTheory packages the exactness of [lem-weil-pbc-flat-tensor-exact] as finite-limit preservation of tensorRight (P.obj V). Given a limiting cone of any finite diagram of module presheaves, apply evaluation at V, which preserves finite limits, and then this flat tensor functor. The resulting cone is definitionally the evaluation of the cone mapped by tensorRight P, since [def-pur-presheaf-tensor-product] and its action on morphisms are sectionwise.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "def-pur-presheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
-   }
-  },
-  {
-   "text": "For $f:A\\to B$, put $K(V)=\\{a\\in A(V):f_V(a)=0\\}$, with the induced $R(V)$-module structure. Naturality of $f$ restricts $r_A$ to semilinear maps $K(V)\\to K(W)$; the presheaf laws are inherited from $A$. A morphism $h:H\\to A$ with $fh=0$ has the unique factorization $h_V(x)\\mapsto h_V(x)\\in K(V)$ at every $V$. These factorizations are linear and commute with restrictions, so $K$ with its inclusion $i:K\\to A$ is the categorical kernel.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
-   }
-  },
-  {
-   "text": "For a finite family $(A_i)_{i\\in I}$, form $Q(V)=\\prod_{i\\in I}A_i(V)$ with coordinatewise operations and restrictions. The projections are module-presheaf morphisms, and a family of morphisms $h_i:H\\to A_i$ has the unique factorization $x\\mapsto(h_i(x))_i$ into $Q$, which is linear and natural coordinatewise. Hence $Q$ is the categorical product. For $I=\\varnothing$ it is the zero presheaf, with its unique maps. The same construction applies to the family $(T_P(A_i))_i$.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
-   }
-  },
-  {
-   "text": "Fix $V$. The section sequence $0\\to K(V)\\xrightarrow{i_V}A(V)\\xrightarrow{f_V}B(V)$ is exact by step 2. Apply [lem-weil-pbc-flat-tensor-exact] with the commutative ring $R(V)$ and its flat module $P(V)$, using precisely the sectionwise flatness hypothesis. It gives an exact sequence $0\\to K(V)\\otimes_{R(V)}P(V)\\xrightarrow{i_V\\otimes1}A(V)\\otimes_{R(V)}P(V)\\xrightarrow{f_V\\otimes1}B(V)\\otimes_{R(V)}P(V)$. Consequently $i_V\\otimes1$ has zero kernel and image $\\ker(f_V\\otimes1)$. Its corestriction $\\alpha_V:K(V)\\otimes_{R(V)}P(V)\\to\\ker(f_V\\otimes1)$ is therefore an $R(V)$-linear isomorphism; it is characterized by $j_V\\alpha_V=i_V\\otimes1$, where $j_V$ is the target kernel inclusion.",
-   "uses": [
+    "def-pur-presheaf-tensor-product",
     "lem-weil-pbc-flat-tensor-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HD (lemma-flat), tensor exactness; applied sectionwise as in sites-modules.tex Tag 03ES (lemma-flatness-presheaves)."
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ES (lemma-flatness-presheaves); Mathlib/RingTheory/Flat/CategoryTheory.lean, Module.Flat.iff_preservesFiniteLimits_tensorRight and its instance."
    }
   },
   {
-   "text": "The maps $\\alpha_V$ commute with restrictions. Indeed, for $u:W\\to V$ and $k\\otimes p\\in K(V)\\otimes_{R(V)}P(V)$, the images of the two possible composites under $j_W$ both equal $r_A(i_V(k))\\otimes r_P(p)=i_W(r_K(k))\\otimes r_P(p)$. The injectivity of $j_W$ and generation by pure tensors give equality of these semilinear maps on every element. Thus $\\alpha$ is the canonical morphism of presheaves $T_P(K)\\to\\ker T_P(f)$, and $j\\alpha=T_P(i)$. Its component inverses are linear and natural: the identity $r\\alpha_V=\\alpha_Wr$ implies $r\\alpha_V^{-1}=\\alpha_W^{-1}r$ with the source and target restrictions in their respective positions. Hence $\\alpha$ is an isomorphism of module presheaves compatible with the inclusions.",
+   "text": "Apply PresheafOfModules.evaluationJointlyReflectsLimits to the mapped cone and the sectionwise limiting cones from step 1. This proves that tensorRight P preserves the limit of every finite diagram, including the empty diagram. The joint reflection construction builds module-presheaf morphisms and their naturality, so no separate restriction-map argument is necessary.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-presheaf-tensor-product"
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+    "place": "Tag 03ES (lemma-flatness-presheaves); Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, evaluationJointlyReflectsLimits."
    }
   },
   {
-   "text": "For the products from step 3, the tensor-projection morphisms give $\\beta:T_P(Q)\\to\\prod_iT_P(A_i)$. At $V$ it sends $(a_i)_i\\otimes p$ to $(a_i\\otimes p)_i$. Choose a bijection of the finite set $I$ with $\\{1,\\ldots,t\\}$, the same bijection for all $V$. Apply [lem-weil-pbc-tensor-finite-product] over $R(V)$, with factors $A_i(V)$ and $N=P(V)$: $\\beta_V$ is an isomorphism, also for $t=0$. Along $u:W\\to V$ both orders of restriction and $\\beta$ send $(a_i)_i\\otimes p$ to $(r_{A_i}(a_i)\\otimes r_P(p))_i$. Thus $\\beta$ is natural, and its component inverses are natural by the inverse identity used in step 5. It is the canonical presheaf isomorphism induced by the projections. For the empty family both sides are zero; alternatively, every pure tensor in $0\\otimes P(V)$ is $0\\otimes p=0$.",
-   "uses": [
-    "lem-weil-pbc-tensor-finite-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-presheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
-   }
-  },
-  {
-   "text": "Finally let $D:J\\to\\mathrm{PMod}(R)$ be any finite diagram. Put $Q_0=\\prod_{i\\in\\operatorname{Ob}J}D_i$, $Q_1=\\prod_{a:i\\to j\\in\\operatorname{Mor}J}D_j$, and define $\\delta:Q_0\\to Q_1$ by $\\operatorname{pr}_a\\delta=D(a)\\operatorname{pr}_i-\\operatorname{pr}_j$. Then $L=\\ker\\delta$, with the restricted projections, is a limit: a map $H\\to Q_0$ is a tuple $(h_i)$, and $\\delta(h_i)=0$ is exactly the cone equations $D(a)h_i=h_j$; step 2 gives their unique factorization through $L$. All these maps are module-presheaf morphisms. Under the product comparisons of step 6, $T_P(\\delta)$ is the corresponding difference map for $T_P D$: its $a$-component on a pure tensor is $(D(a)x_i-x_j)\\otimes p=D(a)x_i\\otimes p-x_j\\otimes p$. This uses the additivity from step 1. The kernel comparison of steps 4–5 now identifies $T_P(L)$ with the kernel of that difference map, compatibly with every projection, hence with the limiting cone of $T_PD$. This includes the empty diagram by step 6. Thus the canonical comparisons for every finite diagram are isomorphisms, which is preservation of finite limits.",
+   "text": "Install the finite-limit preservation from step 2. For each f use Limits.PreservesKernel.iso; its forward map is kernelComparison f (tensorRight P), whose composite with the target kernel inclusion is the tensor of the original inclusion. For any finite index type I in any universe, finite-limit preservation implies preservation of its discrete product diagram, and hence IsIso (piComparison (tensorRight P) A). These are the canonical categorical comparisons, so their components are natural and linear. Finite-products preservation handles the empty family as well.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), expanding its proof; Section 03EK (section-tensor-product) and Section 03CS (section-presheaves-modules)."
+    "place": "Tag 03ES (lemma-flatness-presheaves), explicit comparisons; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean and Products.lean."
    }
   }
  ],
  "proof_deps": [
   "def-weil-presheaf-modules-sheafification",
   "def-pur-presheaf-tensor-product",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-finite-product"
+  "lem-weil-pbc-flat-tensor-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03ES (lemma-flatness-presheaves), whose proof says immediate from the definitions; explicit kernel, product, restriction and finite-diagram arguments supplied here, with Tag 00HD for tensor exactness."
+  "place": "Tag 03ES (lemma-flatness-presheaves). Sectionwise proof implemented using Mathlib flat tensor finite-limit preservation and evaluationJointlyReflectsLimits, then canonical kernel/product comparison APIs. A5, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -253,5 +206,15 @@
   "group": "Q69",
   "result": "pass",
   "note": "Only change from live: new module SectionwiseFlatPresheafTensor.lean (one theorem, proof sorry) plus the item's lean record; no new nodes or statement change. Clause-by-clause: Precoverage+IsSiteForCoverings (recorded dep), R : Sheaf J.toGrothendieck CommRingCat.{w}, P : PresheafOfModules (R.obj ⋙ forget₂), hP = Module.Flat at every V (equivalent to the node's injectivity test, not stronger); conclusion PreservesFiniteLimits (tensorRight P) ∧ kernel iso pinned to the canonical map by e.hom ≫ kernel.ι = T.map (kernel.ι f) (kernel.ι monic) ∧ IsIso piComparison for every Finite I : Type t (Empty included). Universes: site u,v free; ring = module universe w is Mathlib Monoidal's convention, already recorded on def-pur-presheaf-tensor-product; index universe t free. Edge cases checked; flatness needed (Z, P = Z/2, f = 2). No duplicate in Mathlib Presheaf or side lean/Sheaf (flat_of_sectionwise_flat is a private scheme stalk lemma). Docstrings give source and blueprint id and carry all 7 steps; lean.statement verbatim; not on dropped list; report has Worker report and Second reading by Q69. nt_compile --json clean in 28.9 s; error-injected control copy reports the error. Advisory only: proof-only TensorProduct.Pi import; brief second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T100712-L-4113076",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
