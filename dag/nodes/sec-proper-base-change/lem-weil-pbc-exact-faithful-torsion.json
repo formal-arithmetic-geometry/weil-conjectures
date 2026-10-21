@@ -235,5 +235,35 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-ea28ac012 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full. The delivery adds no new nodes and does not change the statement. The base item had no proof, and there is no re-split repair note for it. Steps 1-7 are correct. Step 1 builds the kernel diagram on the divisibility poset, which is small and filtered, with transition maps from m=rn. Step 2 uses Stacks 03DA/03DB (sites-modules.tex l.1336-1400, read; tags checked): forgetting the module structure preserves kernels and colimits, and it reflects isomorphisms by a sectionwise linearity argument, so U(c_E)=c_{UE}. Step 3 gets A(n id)=n id from additivity and compares the kernels; kernel preservation is assumed, which is needed because a left adjoint only preserves cokernels. Step 4 proves naturality of the kernel isomorphisms using monic kernel inclusions. Step 5 uses Stacks 0038(1) (categories.tex l.3471) to show beta_n is a colimit cocone and gives theta. Step 6 checks c_AF theta = A(c_F) on the colimit legs, in the right direction. Step 7 lifts the inverse by fullness and reflects it by faithfulness. This supplies the reflect direction that sk-thm-properbasechange step 0 needs for A_X=nu_X^*. Edge cases checked: n=1, a torsion-free group on the point site, Q/Z (no uniform exponent needed), and A=0 (shows full faithfulness is needed). A whole-DAG scan for torsion with preserve/reflect plus fully faithful/kernel found no duplicate. I accept the declared off-unit tool_use of lem-weil-pbc-module-sheaves-colimits-forgetful (unit sk-thm-reduction) as a generic black-box tool. No SGA source is used, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactFaithfulTorsion",
+  "declaration": "CategoryTheory.exact_fullyFaithful_integerTorsion",
+  "declarations": [
+   "CategoryTheory.integerKernelTransition_condition",
+   "CategoryTheory.integerKernelTransition",
+   "CategoryTheory.integerKernelTransition_id",
+   "CategoryTheory.integerKernelTransition_comp",
+   "CategoryTheory.integerKernelDiagram",
+   "CategoryTheory.integerKernelDiagram_inclusions",
+   "CategoryTheory.integerKernelCocone",
+   "CategoryTheory.IsIntegerTorsion",
+   "CategoryTheory.exact_fullyFaithful_integerTorsion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactFaithfulTorsion.lean",
+  "statement": "theorem exact_fullyFaithful_integerTorsion {C : Type uC} [Category.{vC} C] [Small.{w} C] [LocallySmall.{w} C] {D : Type uD} [Category.{vD} D] [Small.{w} D] [LocallySmall.{w} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} [HasSheafify J AddCommGrpCat.{w}] [HasSheafify K AddCommGrpCat.{w}] (R : Sheaf J RingCat.{r}) (S : Sheaf K RingCat.{s}) (A : ringedSiteModules.{w} R ⥤ ringedSiteModules.{w} S) [A.Additive] [A.Full] [A.Faithful] [A.IsLeftAdjoint] [∀ (X Y : ringedSiteModules.{w} R) (f : X ⟶ Y), PreservesLimit (parallelPair f 0) A] (F : ringedSiteModules.{w} R) : ∃ alpha : integerKernelDiagram F ⋙ A ≅ integerKernelDiagram (A.obj F), (∀ n : PNat.DvdOrder, alpha.hom.app n ≫ kernel.ι (n.val • 𝟙 (A.obj F)) = A.map (kernel.ι (n.val • 𝟙 F))) ∧ Nonempty (ColimitCocone (integerKernelDiagram F)) ∧ Nonempty (ColimitCocone (integerKernelDiagram (A.obj F))) ∧ (∀ (c : ColimitCocone (integerKernelDiagram F)) (d : ColimitCocone (integerKernelDiagram (A.obj F))), ∃ theta : A.obj c.cocone.pt ≅ d.cocone.pt, (∀ n : PNat.DvdOrder, A.map (c.cocone.ι.app n) ≫ theta.hom = alpha.hom.app n ≫ d.cocone.ι.app n) ∧ theta.hom ≫ d.isColimit.desc (integerKernelCocone (A.obj F)) = A.map (c.isColimit.desc (integerKernelCocone F))) ∧ (IsIntegerTorsion ((SheafOfModules.toSheaf.{w} R).obj F) ↔ IsIntegerTorsion ((SheafOfModules.toSheaf.{w} S).obj (A.obj F)))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical integer-kernel diagram, cocone, and torsion predicate are helpers belonging to the constructions explicitly introduced in this node. The kernel and colimit comparisons are uniquely characterized by equations on inclusions and coprojections. ColimitCocone avoids an additional colimit-existence hypothesis or an arbitrary chosen comparison. Site and morphism universes are independent; Small and LocallySmall express the common larger universe of the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31899292d",
+  "group": "NG",
+  "result": "pass",
+  "note": "Item node unchanged vs live except lean; lean.statement verbatim. H3: sites with Small/LocallySmall.{w} (independent uC,vC,uD,vD,r,s,w), HasSheafify for AddCommGrpCat.{w} on both sites, ringedSiteModules (=SheafOfModules) via recorded deps, Additive, kernel preservation exactly as PreservesLimit (parallelPair f 0), Full+Faithful, IsLeftAdjoint. integerKernelDiagram over PNat.DvdOrder (≤ is ∣ by Iff.rfl) with kernel.lift transitions and kernel.ι cocone; alpha pinned by its kernel-inclusion equation; colimit existence asserted as conclusions; theta pinned on every leg; θ≫c_AF = A(c_F) in the right direction; torsion iff on toSheaf underlying abelian sheaves. Edge cases: n=1, zero module, empty site, no uniform exponent, ring universe ≠ w. H4: existing IsTorsionAbelianSheaf/torsionKernelTransition only for scheme étale sites; Sheaf.IsTorsion is a different formulation; the node defines its own notion, so helpers are allowed (advisory). H5/H6/H8/H9 ok (real data, sorry only, source+blueprint docstrings, 7-step proof docstring, no line >100). nt_compile --json clean 17.5 s exit 0. Advisories: overlap with scheme-only étale torsion API; proof-only imports unused by the statement."
  }
 }

@@ -19977,3 +19977,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:48:07Z L: superseded stage-1 delivery O1/lem-sp-proetale-open-scalar-cocycle at 8e7e51defd8d3461b381531e9a6c11e1626918a7; current completion retained; packet archived at refs/superseded/O1/lem-sp-proetale-open-scalar-cocycle/8e7e51defd8d3461b381531e9a6c11e1626918a7; stale return retired.
 - 03:48 L: returned deliver/Q13/lem-sp-etale-ctf-chart-domain (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sp-etale-ctf-chart-domain: cited node lem-sp-finit)
 - 03:48 L: returned deliver/Q30/lem-weil-pbc-realization-completed-mate (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-realization-completed-mate: cited node le)
+- 03:48 L: merged deliver/Q09/lem-sfb-internal-extension-finite-presentation (stage 2; reviewer PASS; parallel immutable checks)
+- 03:48 L: merged deliver/NG/lem-weil-pbc-exact-faithful-torsion (stage 2; reviewer PASS; parallel immutable checks)
+- 03:48 L: merged deliver/Q07/lem-sfb-cohomology-tor-interval (stage 2; reviewer PASS; parallel immutable checks)
+- 03:48 L: merged deliver/Q12/lem-weil-pbc-finite-postnikov-isomorphism (stage 2; reviewer PASS; parallel immutable checks)

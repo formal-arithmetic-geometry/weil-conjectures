@@ -227,5 +227,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0bb28a461 (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, Stacks 08J5 (derived.tex l.4076) and the main-20261015 sk-thm-properbasechange 'Bounded below complexes' paragraph. The delivery creates no new nodes and keeps the statement unchanged. Step 1: truncation-cohomology and the D+ subcategory give the objects E_q and C_q in D+, and the induction claim P(q) is stated. Step 2: E_{a-1} has no cohomology, so it is zero by the cohomology-detection leaf; additivity then makes the zero map an inverse of η. This proves the b=a-1 case. Step 3 is correctly elementary: it conjugates by the shift isomorphisms in both directions, uses naturality along isomorphisms, and checks that H^q[0][-q] sits in degree q. Step 4: the truncation triangle (only existence and boundedness used) plus two-out-of-three, whose shift-compatibility hypothesis is exactly the item's equation. Step 5: induction on N=b-a+1. Edge cases checked: empty interval, a single degree, negative degrees, unbounded above, non-split. No duplicate: lem-sp-finite-filtration-induction is about filtered objects and sbc-lem-finite-range-comparison is about a specific exchange. There is no cycle, proof_deps equals the union of the steps' uses, and no SGA source is cited. I accept the declared tool use of lem-sf-triangle-two-out-of-three: it is a generic lemma, Lean-closed and reviewed PASS. The route matches the blueprint's finite Postnikov sentence, and no target, coefficient category or base-change morphism is changed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinitePostnikovIsomorphism",
+  "declaration": "DerivedCategory.Plus.isIso_app_truncLE_of_isIso_app_homology",
+  "file": "lean/Sheaf/CategoryTheory/FinitePostnikovIsomorphism.lean",
+  "statement": "theorem isIso_app_truncLE_of_isIso_app_homology {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] {T : Type uT} [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ] [∀ (n : ℤ), (shiftFunctor T n).Additive] [Pretriangulated T] [IsTriangulated T] (Φ Ψ : DerivedCategory.Plus A ⥤ T) [Φ.CommShift ℤ] [Ψ.CommShift ℤ] [Φ.IsTriangulated] [Ψ.IsTriangulated] (η : Φ ⟶ Ψ) (hη : ∀ M : DerivedCategory.Plus A, η.app (M⟦(1 : ℤ)⟧) ≫ (Ψ.commShiftIso (1 : ℤ)).hom.app M = (Φ.commShiftIso (1 : ℤ)).hom.app M ≫ (η.app M)⟦(1 : ℤ)⟧') (E : DerivedCategory.Plus A) (a b : ℤ) (hab : a - 1 ≤ b) (hE : ∀ (q : ℤ), q < a → IsZero ((homologyFunctor A q).obj E)) (hH : ∀ (q : ℤ), a ≤ q → q ≤ b → IsIso (η.app ((singleFunctor A 0).obj ((homologyFunctor A q).obj E)))) : IsIso (η.app ((DerivedCategory.TStructure.t.onPlus.truncLE b).obj E))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6f823831",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement verbatim; node differs from side-live only in lean. Clause by clause matches the node: A abelian with HasDerivedCategory.{w}; T Pretriangulated+IsTriangulated per def-weil-triangulated-category; Φ,Ψ : DerivedCategory.Plus A ⥤ T with CommShift ℤ + IsTriangulated (standard encoding, equivalent to a single [1] iso); hη is the degree-1 equation in the correct direction; hE, hH via Plus.homologyFunctor/Plus.singleFunctor 0 (confirmed by a pp.fullNames probe); conclusion uses t.onPlus.truncLE b. Edge cases b=a-1 (zero object), negative degrees, unbounded-above E, any target: covered and true. No duplicate: PlusDevissage lemmas have the narrower Plus D target. Stacks 08J5 at derived.tex l.4076 checked. Docstrings carry the source place, blueprint tag and 5-step proof; sorry only; universes bound; not in route-pivot-dropped. nt_compile --json clean (3.0 s). Advisory only: proof-stage plain imports unused by the statement."
  }
 }

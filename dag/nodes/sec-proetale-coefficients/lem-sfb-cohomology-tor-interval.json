@@ -223,5 +223,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-99295d841 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full. Blueprint main-20261015 ctf-equals-bc Complexes paragraph (the item is its general-[c,d] version, same truncation and extension route). Stacks 0118, 08J5 (derived.tex:4076) and 06YU (sites-cohomology.tex:3300), checked against tags/tags. Not on the drop list, no repair note, still unsplit on live with the same statement. No new nodes, statement unchanged and true (checked K=0, a=b, a flat module in negative degree, a=2,b=3,[c,d]=[-1,0]). Steps 1, 4 and 5 are correct: the truncation-descends cohomology formula gives T_{a-1}≅0 and T_b≅K; the induction m=0..b-a+1 is set up with base and step; the extension clause needs the same interval, which the fixed I gives. One fault, C4/E6: steps 2-3 took shift compatibility and zero-preservation from the exactness sentence of off-unit lem-weil-pbc-ringed-projection-mate-exact. That node's tensor is the sectionwise ringed-site K-flat tensor, while det-def-sfb-constructible-tor-amplitude tests with the Layer-B relative derived tensor of internal module objects (sk-def-sfb-derived-tensor-hom). No node identifies the two. FIX: step 2 now cites sk-def-sfb-derived-tensor-hom and computes with a K-flat resolution P→N. The degree-r term of Tot(M[-q]⊗P) is M⊗P^{r-q}, which is (M⊗P)[-q] up to the sign of each differential, so H^r=H^{r-q} for every integer q. Step 3 gets zero-preservation from additivity, 0⊗P=0. proof_deps recomputed; ringed-projection-mate-exact and def-weil-triangulated-category removed from steps and tool_uses. Remaining tool uses accepted (generic truncation lemmas and notion nodes). No duplicates: lem-sf-source-tensor-cohomology-interval is the converse-type K⊗N cohomology bound. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CohomologyTorInterval",
+  "declaration": "AlgebraicGeometry.ProEtale.torAmplitudeIn_of_cohomology_interval",
+  "file": "lean/Sheaf/Paper/CohomologyTorInterval.lean",
+  "statement": "theorem torAmplitudeIn_of_cohomology_interval (X : Scheme.{u}) (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d) (hK : ∀ q : ℤ, q ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) (hH : ∀ q : ℤ, q ∈ Set.Icc a b → DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj ((DerivedCategory.homologyFunctor _ q).obj K))) : DerivedCategory.torAmplitudeIn _ (a + c) (b + d) K",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1df66d5c",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement matches node clause by clause (X Scheme.{u}; Λ : Profinite.CondensedRing.{u} with IsCommMonObj Λ.X; K in D(Mod(condensedRingObj Λ.X X)) as in det-def-sfb-constructible-tor-amplitude record; a≤b, c≤d; hK zero outside Icc a b; hH torAmplitudeIn c d of single 0 of H^q for q in Icc; conclusion [a+c,b+d]); no constructibility/extra assumptions; universes as dep. Check file: torAmplitudeIn is Iff.rfl the Layer-B CondensedRing.derivedTensor test, and the dep's wellDefined extension clause applies directly to the item's types. Math true; edge cases K=0, a=b, negative q, [-1,0] blueprint case. Source Complexes paragraph (proof.md l.31) matches. One sorry, no defs, docstrings with source/blueprint tag and 5 proof steps; lean.statement verbatim; node unchanged except lean. Imports = recorded stmt/proof dep modules. No duplicate in Sheaf/WeilConjectures/Mathlib. nt_compile --json clean 8.9 s, no warnings."
  }
 }
