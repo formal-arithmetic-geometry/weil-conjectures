@@ -63,6 +63,20 @@ theorem finite_limits_colimits_exact_comap
     HasFiniteLimits (Mod C R) ∧ HasFiniteColimits (Mod C R) ∧
       HasFiniteLimits (Mod C S) ∧ HasFiniteColimits (Mod C S) ∧
       exactFunctor (Mod C S) (Mod C R) (comap (D := C) φ) := by
-  sorry
+  have hRlim : HasFiniteLimits (Mod C R) := ⟨fun _ _ _ ↦ inferInstance⟩
+  have hRcolim : HasFiniteColimits (Mod C R) := ⟨fun _ _ _ ↦ inferInstance⟩
+  have hSlim : HasFiniteLimits (Mod C S) := ⟨fun _ _ _ ↦ inferInstance⟩
+  have hScolim : HasFiniteColimits (Mod C S) := ⟨fun _ _ _ ↦ inferInstance⟩
+  refine ⟨hRlim, hRcolim, hSlim, hScolim, ?_⟩
+  rw [exactFunctor_iff]
+  constructor
+  · refine ⟨fun J _ _ ↦ ?_⟩
+    have : PreservesLimitsOfShape J (comap (D := C) φ ⋙ forget R) :=
+      inferInstanceAs (PreservesLimitsOfShape J (forget (D := C) S))
+    exact preservesLimitsOfShape_of_reflects_of_preserves (comap φ) (forget R)
+  · refine ⟨fun J _ _ ↦ ?_⟩
+    have : PreservesColimitsOfShape J (comap (D := C) φ ⋙ forget R) :=
+      inferInstanceAs (PreservesColimitsOfShape J (forget (D := C) S))
+    exact preservesColimitsOfShape_of_reflects_of_preserves (comap φ) (forget R)
 
 end CategoryTheory.Mod
