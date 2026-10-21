@@ -13,11 +13,148 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-pc-kflat-complex",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the underlying geometric morphism directly from the sequence-site description in [def-coef-ringed-sequence-site]. A sheaf is a tower of sheaves on $\\mathcal V$. The constant-tower functor $c$ is left adjoint to limit: a map $cF\\to H$ is a compatible family $F\\to H_n$, equivalently a map $F\\to\\lim H_n$. Finite limits of towers are levelwise, so $c$ preserves finite limits. Thus $(c,\\lim)$ is a geometric morphism $g$. Give its source the constant ring $A^{\\mathrm{const}}=cA$. The compatible projections $A\\to B_n$ are a ring map $cA\\to B$ on the sequence site; with the identity geometric morphism this defines $a:(\\mathcal T,B)\\to(\\mathcal T,cA)$. Put $p=g\\circ a$. Its scalar restriction $a_*=U$ is exact: kernels and cokernels of a semilinear system are levelwise, and restriction changes only the scalar action, not the underlying additive maps. On modules $g_*=\\lim$, hence $p_*=\\lim U$. The sites remain small, since the index set is countable and $\\mathcal V$ was fixed small.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), paragraphs constructing g and its constant-system inverse image; changing the ring by cA to B"
+   }
+  },
+  {
+   "text": "The module pullback for $p$ is the strict system $p^*Q=(Q\\otimes_A B_n)_n$, by the tensor formula of [lem-weil-pbc-ringed-topoi-module-adjunction]. Write $\\pi_n:\\lim UM\\to UM_n$ for the ordinary limit projections. The forward Hom correspondence sends $h:Q\\to\\lim UM$ to $f_n(x\\otimes b)=b\\pi_nh(x)$. Conversely $f=(f_n)_n$ sends $x$ to $(f_n(x\\otimes1))_n$. Compatibility of $f$ with the quotient transitions is exactly compatibility of this family in the limit. The two constructions are inverse by $B_n$-linearity, commute with restriction to every object of the site, and are natural in $Q,M$. This identifies the ordinary adjunction, including its particular Hom bijection, rather than merely proving existence of some adjoint.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), specialized tensor-Hom formulas"
+   }
+  },
+  {
+   "text": "Choose one flat-term K-flat resolution $q:Q\\to P$ using [lem-pc-kflat-resolution]. Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to $p$. Its canonical comparison identifies $Lp^*P$ with $p^*Q$, naturally in maps of resolutions and with the canonical comparison for a third resolution. The latter strict system is exactly the representative defining $\\mathcal R(P)$ in the supplied [lem-coef-derived-system-evaluation-calculus]. Both comparisons use the same termwise functor and its universal left-derived comparison, so their composite defines $Lp^*\\cong\\mathcal R$ on the derived category; it also identifies maps, not just objects. At level $n$, [lem-pur-derived-change-of-rings] computes $-\\otimes_A^LB_n$ on the same $Q$. The comparison there is consequently the canonical finite scalar-extension comparison. Every horizontal map is still induced by $B_{n+1}\\to B_n$; no independently chosen finite resolutions or transitions have been substituted.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 06YT (lemma-derived-tor-quasi-isomorphism-other-side)"
+   }
+  },
+  {
+   "text": "The shift of this representative is literal. Indeed, for any acyclic $T$, the map $T\\otimes Q[r]\\to(T\\otimes Q)[r]$ multiplying the summand $T^p\\otimes Q^{q+r}$ by $(-1)^{rp}$ is a chain isomorphism: the $d_T$ coefficients on both sides are $(-1)^{r(p+1)}$, and the $d_Q$ coefficients are $(-1)^{rp+p+r}$. Hence $Q[r]$ is K-flat by [def-pc-kflat-complex] and [def-pc-tensor-complex-sheaves]; its terms remain flat and $q[r]$ remains a quasi-isomorphism since cohomology is reindexed. For scalar extension, $p^*(Q[r])$ and $(p^*Q)[r]$ both have degree-$i$ term $Q^{i+r}\\otimes_A B_n$ and differential $(-1)^r(d_Q\\otimes1)$. Their comparison is the identity on these terms, on maps of resolutions, and on quotient transitions. Using $Q[r]$ in step 3 proves the required left shift equation, also for each finite scalar extension.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat), with the tensor-total differential and the cochain shift convention"
+   }
+  },
+  {
+   "text": "Since $U$ is exact, its derived functor is its termwise localization, with the identity shift comparison [lem-weil-pbc-exact-functor-derived-factorization]. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $a,g$ from step 1. It gives $\\kappa:Rp_*\\xrightarrow{\\sim}Rg_*D(U)=\\mathcal L$, where $Rg_*=R\\lim$ is the strict-tower total limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Specifically, if $I$ is K-injective over $B$ and $j:UI\\to J$ is a K-injective replacement over $A^{\\mathrm{const}}$, its normalization says that $\\lim j:\\lim UI\\to\\lim J$ is a quasi-isomorphism representing $\\kappa_I$. Such replacements exist on both small ringed sites by [prop-pur-kinjective-resolutions-exist]. This application does not require $UI$ to be K-injective: its replacement $j$ is precisely the intermediate replacement in the cited composition theorem.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), normalized K-injective comparison; Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "For completeness fix any complex $N$ and any simultaneous replacement $v:UN\\to J$. Choose $i:N\\to I$ K-injective over $B$. Exactness of $U$ makes $Ui$ a quasi-isomorphism. By [lem-weil-pbc-kinjective-hom-derived], precomposition with $Ui$ induces a bijection into the K-injective $J$ on homotopy classes. Thus there is a unique class $b:UI\\to J$ with $bUi\\simeq v$; it is a quasi-isomorphism by two-out-of-three. Step 5 applies with $j=b$ and represents $\\kappa_N$ by $\\lim b:\\lim UI\\to\\lim J$ under the resolution identifications. This gives the asserted model $\\mathcal L(N)\\cong\\lim J$ for this particular $v$, not only for replacements obtained by first resolving $N$. Changes of $I$ and $J$, and arbitrary derived morphisms in $N$, are computed by the unique homotopy classes of comparison maps in [lem-sf-kinjective-derived-map-computation]; their composition and cocycle formulas imply independence and naturality of these identifications.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); sites-cohomology.tex Tag 0D6E for the comparison represented by lim b"
+   }
+  },
+  {
+   "text": "Identify the adjunctions using their full Hom correspondences. By [lem-coef-sequence-projection-derived-adjunction], the adjunction $Lp^*\\dashv Rp_*$ is the derived fraction extension of the ordinary correspondence in step 2. The normalization in [lem-sfb-resolving-derived-adjunction-normalization] makes this explicit: a chain map $f:p^*Q\\to I$ transposes to $Q\\to p_*I=\\lim UI$, followed, under step 5, by $\\lim j:\\lim UI\\to\\lim J$. Thus its transpose is the class of $(\\lim j)\\operatorname{adj}_0(f)$. The canonical comparison and transported adjunction in [lem-coef-sequence-pushforward-limit-projections] are this reduction/total-limit construction: their projections are the reduction maps and their counit is the scalar-extension transpose of the actual total-limit projections. These are the canonical constructions stipulated by the supplied [lem-coef-derived-system-evaluation-calculus]. Hence steps 3 and 5 identify its adjunction with $Lp^*\\dashv Rp_*$ by the normalized derived Hom correspondence. In particular, units and counits agree: each is the inverse image of the identity under this same Hom bijection. This argument uses the derived extension on whole system Hom sets, rather than inferring equality of arbitrary system maps from equality of evaluated maps.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tags 0DVC (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors), with the specified resolution normalization"
+   }
+  },
+  {
+   "text": "For any integer $r$, [lem-weil-pbc-kinjective-shift] makes $I[r]$ and $J[r]$ K-injective and makes $j[r]:U(I[r])=(UI)[r]\\to J[r]$ a valid replacement. Apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to exactly this map. It represents $\\kappa_{I[r]}$ by $\\lim(j[r])$. Degreewise limit commutes with reindexing and multiplication of a differential by $(-1)^r$, so $\\lim(J[r])=(\\lim J)[r]$ and $\\lim(j[r])=(\\lim j)[r]$, with degree-$i$ map $\\lim j^{i+r}$. Therefore the shift square for $\\kappa$ commutes on these representatives. For the arbitrary $v$ in step 6 use $v[r]$ and $b[r]$: $b[r]U(i[r])\\simeq v[r]$, and uniqueness of the class into $J[r]$ shows that it is exactly the comparison for the shifted replacement. The comparison and change-of-resolution formulas in [lem-sf-kinjective-derived-map-computation] now give the same equation for arbitrary derived inputs and morphisms. This is the prescribed total-limit shift, not a new shift structure chosen through an abstract adjunction.",
+   "uses": [
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective) and its following shift observation; Tag 070Y (lemma-K-injective-defined); sites-cohomology.tex Tag 0D6E"
+   }
+  },
+  {
+   "text": "Finally, for two shifts $r,s$ use the same representatives $Q[r+s]$, $I[r+s]$, and $j[r+s]$. Shifting twice gives these same terms and maps, since $(-1)^r(-1)^s=(-1)^{r+s}$; shifting by zero is the identity, and shifting by $-r$ is inverse to shifting by $r$. Thus the comparisons in steps 4 and 8 respect addition, zero and inverse shifts with the usual cochain shift identifications. Their already established naturality makes these equations coherent in all derived inputs. The arguments cover $r<0$, the zero complex and the empty scheme. They used neither a normalized-system condition nor completeness of $P$, and no product-exactness assertion occurred.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Coherent cochain shift convention; representative calculations in steps 4 and 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940, 06YS, 06YY, 07A6 and 0D6E, together with derived.tex Tags 070I, 070Y and 09T5; explicit normalization and shift calculation for the supplied coefficient calculus."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +190,45 @@
    "results": "Hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. ",
    "date": "2026-10-21",
    "verdict": "no match: generic adjunction or derived-functor infrastructure does not identify the prescribed quotient-system resolution comparisons and shifts"
+  },
+  {
+   "tool": "grep",
+   "query": "sequenceSite|StrictRingSystem|derived.*pushforward.*composition|rightDerived.*[Cc]omp",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf adjunctions and generic derived-functor comparisons do not state this simultaneous quotient-system normalization and shift identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "Hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf adjunctions and generic derived-functor comparisons do not state this simultaneous quotient-system normalization and shift identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction for quotient coefficient systems identifies derived reduction with left derived pullback and total inverse limit with right derived pushforward",
+   "results": "Hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.PullbackConstruction.adjunction. ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf adjunctions and generic derived-functor comparisons do not state this simultaneous quotient-system normalization and shift identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a composite of ringed topos morphisms the right derived direct image comparison on a K injective complex is computed by applying direct image to a resolution of its intermediate pushforward, and commutes with cochain shifts",
+   "results": "Hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.sheafComposeIso_hom_fac. ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf adjunctions and generic derived-functor comparisons do not state this simultaneous quotient-system normalization and shift identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback on a ringed sequence site is quotient tensor reduction and its right adjoint is the total derived inverse limit, with canonical resolution comparisons commuting with shifts",
+   "results": "Hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback. ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived sheaf adjunctions and generic derived-functor comparisons do not state this simultaneous quotient-system normalization and shift identification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-reduction-limit-shift-adjunction",
@@ -77,5 +249,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-sequence-adjoint-resolution-shifts",
+  "worker": "stage1",
+  "summary": "Constructed the ringed projection and ordinary transpose, identified canonical K-flat and K-injective models using existing DAG statements, extended the right normalization to any simultaneous replacement, and checked the full derived Hom correspondence and every integer shift. No new nodes and no statement correction.",
+  "blueprint": "Nearest ancestor thm-pur-rational-and-qbar-purity, through adic projection / integral realization / reduction-limit shift coherence: the coefficient-comparison sentence of fix-prop-coherence.proof.md and unit Step 2 transport through the reduction/total-limit adjunction. Steps 1–7 identify that actual adjunction; steps 4, 8–9 identify and cohere its prescribed resolution shifts.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic Coherent derived reduction, limit adjunction and fiberwise evaluation used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-coef-sequence-projection-derived-adjunction",
+    "why": "Generic Derived adjunction of a ringed sequence projection used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Generic Restricted total-limit comparison with adjunction projections used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic Computation of unbounded derived morphisms on arbitrary K-injective resolutions used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic Derived adjunction normalized by a left resolving class and K-injectives used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic Derived pullback on ringed topoi computed by K-flat resolutions used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used for its representative or adjunction statement in this coefficient comparison; the compatibility unit supplies no replacement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-bb8da660b",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-bb8da660b (reviewer sub-agent of L); spot-checked: Faithful 9-step split; I read all of it. Nothing supersedes the delivery and it is not on the drop list: the item, created by Q120's re-split of lem-pur-reduction-limit-shift-adjunction, is still unsplit in live and side-live. The statement is byte-identical; the two added stmt_deps (ringed-topos morphism, flat sheaf modules) are both used by the statement. There are no new nodes, no cycle (its only citer is the parent) and no SGA citation. The only off-route node, lem-sfb-resolving-derived-adjunction-normalization, is declared in tool_uses, and I accept the generic tools. Source checks: Stacks section-derived-limits (sites-cohomology.tex 5016-5060) matches step 1 (sheaves are towers, g^{-1} is the constant system, g_*=lim); Tag 0D6E gives existence only, and the lim j normalization comes from the DAG statement of lem-weil-pbc-ringed-topoi-derived-pushforward-composition. Step checks: step 2's tensor and transpose formulas are the ones in lem-coef-sequence-projection-derived-adjunction. In step 4 I recomputed the (-1)^{rp} sign isomorphism (d_T coefficient (-1)^{r(p+1)}, d_Q coefficient (-1)^{rp+p+r}); p^*(Q[r])=(p^*Q)[r] holds literally. Step 5's composition normalization does not need UI to be K-injective. Step 6's b, with b·Ui homotopic to v, comes from the Hom bijections into K-injectives plus two-out-of-three. Step 7: the resolving-normalization hypotheses hold (flat-term K-flat resolving class, p^* inverts quasi-isomorphisms there), and it pins the Hom bijection with transpose (lim j)·adj_0(f). Step 8: lim(j[r])=(lim j)[r], with degree-i map lim j^{i+r}. Edge cases checked: r=0, r=±1, r+s, non-flat R→R/t^n, empty W and the zero complex. Advisory 1: the proof is 8306 characters, longer than the parent's re-split threshold, but no rule or repair note on this item forbids it. Advisory 2: the 'any supplied calculus S' identification rests on the calc statement's 'canonical derived adjunction' (its own step 1 builds it from the same two sequence lemmas); levelwise unit/counit data alone would leave a phantom automorphism of L. Advisory 3: Ra_*=D(U) on K-injectives is a one-line fact left implicit."
  }
 }
