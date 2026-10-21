@@ -8,6 +8,7 @@ public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 /-! # Coherent finite reduction of completed coefficient extension
 
 Source: main-20261015 blueprint, sec-proetale-coefficients/sk-def-sf-operations,
@@ -123,6 +124,167 @@ abbrev CoefficientScalarAssociation :=
         B.T.map (A.model.ε.app P) ≫
           B.model.ε.app ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P))
+
+private theorem scalarSection_eq_unit {f : R ⟶ S}
+    (A : SemilinearSections.ScalarData.{c, v, max c v r} f)
+    (M : SemilinearSections.Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
+    (x : M.val.obj U) :
+    SemilinearSections.scalarExtensionSection.{c, v, r} f A M U x =
+      @id ((A.model.E.obj M).val.obj U)
+        ((A.ordinaryAdjunction.unit.app M).val.app U x) := by
+  unfold SemilinearSections.scalarExtensionSection
+  rw [← A.unit_section M U x]
+  erw [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
+    ← SheafOfModules.comp_val, eqToHom_trans, eqToHom_refl]
+  rfl
+
+private theorem scalarTranspose_all {f : R ⟶ S}
+    (A : SemilinearSections.ScalarData.{c, v, max c v r} f)
+    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)
+    (Q : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J S) ℤ)
+    (z : (A.model.E.mapHomologicalComplex (.up ℤ)).obj P ⟶ Q) :
+    (A.adjunction.homEquiv _ _) (A.model.ε.app P ≫ DerivedCategory.Q.map z) ≫
+        (SemilinearSections.res f).mapDerivedCategoryFactors.hom.app Q =
+      DerivedCategory.Q.map
+        (((A.ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv P Q) z) := by
+  obtain ⟨P', q, hP', _, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) P
+  have : QuasiIso q := hq
+  apply (cancel_epi (DerivedCategory.Q.map q)).1
+  calc
+    _ = (A.adjunction.homEquiv _ _)
+          (A.model.ε.app P' ≫ DerivedCategory.Q.map
+            ((A.model.E.mapHomologicalComplex (.up ℤ)).map q ≫ z)) ≫
+          (SemilinearSections.res f).mapDerivedCategoryFactors.hom.app Q := by
+      rw [← Category.assoc, ← Adjunction.homEquiv_naturality_left]
+      congr 1
+      rw [Functor.map_comp, ← Category.assoc]
+      congr 1
+      simpa only [Functor.comp_map, Category.assoc] using
+        congrArg (fun k ↦ k ≫ DerivedCategory.Q.map z) (A.model.ε.naturality q)
+    _ = _ := A.transpose_model P' Q hP' _
+    _ = _ := by
+      rw [Adjunction.homEquiv_naturality_left, Functor.map_comp]
+
+private def scalarRestrictionCompIso (hf : f ≫ g = h) :
+    SemilinearSections.res.{c, v, max c v r} g ⋙
+      SemilinearSections.res.{c, v, max c v r} f ≅
+      SemilinearSections.res.{c, v, max c v r} h :=
+    NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        (ModuleCat.restrictScalarsComp'App (f.hom.app U).hom (g.hom.app U).hom
+          (h.hom.app U).hom (congrArg (fun z ↦ (z.hom.app U).hom) hf.symm)
+          (M.val.obj U)).symm) (by intros; ext x; rfl))) (by intros; ext U x; rfl)
+
+private theorem scalarAssociation_ordinary_formula (hf : f ≫ g = h) :
+    let adj := (A.ordinaryAdjunction.comp B.ordinaryAdjunction).ofNatIsoRight
+      (scalarRestrictionCompIso.{c, v, r} hf)
+    let a := adj.leftAdjointUniq D.ordinaryAdjunction
+    ∀ (M : SemilinearSections.Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
+      (s : S.obj.obj U) (t : T.obj.obj U) (x : M.val.obj U),
+        (a.hom.app M).val.app U
+          (t • SemilinearSections.scalarExtensionSection.{c, v, r} g B (A.model.E.obj M) U
+            (s • SemilinearSections.scalarExtensionSection.{c, v, r} f A M U x)) =
+          (((g.hom.app U) s * t) •
+            SemilinearSections.scalarExtensionSection.{c, v, r} h D M U x) := by
+  let adj := (A.ordinaryAdjunction.comp B.ordinaryAdjunction).ofNatIsoRight
+    (scalarRestrictionCompIso.{c, v, r} hf)
+  let a := adj.leftAdjointUniq D.ordinaryAdjunction
+  dsimp only
+  intro M U s t x
+  rw [scalarSection_eq_unit, scalarSection_eq_unit, scalarSection_eq_unit]
+  have hu := adj.unit_leftAdjointUniq_hom_app D.ordinaryAdjunction M
+  have hx := congrArg (fun z ↦ (z.val.app U) x) hu
+  dsimp only [adj, Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Adjunction.comp_unit_app] at hx
+  change (a.hom.app M).val.app U
+      ((B.ordinaryAdjunction.unit.app (A.model.E.obj M)).val.app U
+        ((A.ordinaryAdjunction.unit.app M).val.app U x)) =
+    (D.ordinaryAdjunction.unit.app M).val.app U x at hx
+  rw [map_smul]
+  have hs := ((B.ordinaryAdjunction.unit.app (A.model.E.obj M)).val.app U).hom.map_smul s
+    ((A.ordinaryAdjunction.unit.app M).val.app U x)
+  change (B.ordinaryAdjunction.unit.app (A.model.E.obj M)).val.app U
+      (s • @id ((A.model.E.obj M).val.obj U)
+        ((A.ordinaryAdjunction.unit.app M).val.app U x)) =
+    (g.hom.app U s) • @id ((B.model.E.obj (A.model.E.obj M)).val.obj U)
+      ((B.ordinaryAdjunction.unit.app (A.model.E.obj M)).val.app U
+        ((A.ordinaryAdjunction.unit.app M).val.app U x)) at hs
+  rw [hs]
+  dsimp only [id]
+  erw [map_smul, hx, smul_smul, mul_comm]
+
+private theorem scalarTranspose_comp (hf : f ≫ g = h)
+    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)
+    (Q : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J T) ℤ)
+    (z : (B.model.E.mapHomologicalComplex (.up ℤ)).obj
+      ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ⟶ Q) :
+    let ρ := scalarRestrictionCompIso.{c, v, r} hf
+    let ρD := Functor.mapDerivedCategoryCompNatIso ρ
+    let adj := (A.adjunction.comp B.adjunction).ofNatIsoRight ρD
+    adj.homEquiv _ _
+        (B.T.map (A.model.ε.app P) ≫
+          B.model.ε.app ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map z) ≫
+        (SemilinearSections.res h).mapDerivedCategoryFactors.hom.app Q =
+      DerivedCategory.Q.map
+        ((((A.ordinaryAdjunction.comp B.ordinaryAdjunction).ofNatIsoRight ρ).mapHomologicalComplex
+          (.up ℤ)).homEquiv P Q z) := by
+  dsimp only
+  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Category.assoc,
+    Functor.mapDerivedCategoryCompNatIso_hom_app_Q]
+  rw [Adjunction.comp_homEquiv]
+  change (A.adjunction.homEquiv _ _) ((B.adjunction.homEquiv _ _) _) ≫ _ = _
+  erw [← Category.assoc, ← Adjunction.homEquiv_naturality_right,
+    Adjunction.homEquiv_naturality_left]
+  simp only [Category.assoc]
+  erw [scalarTranspose_all.{c, v, r} B
+    ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) Q z]
+  change (A.adjunction.homEquiv _ _)
+      (A.model.ε.app P ≫ DerivedCategory.Q.map
+        ((B.ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv _ _ z)) ≫ _ = _
+  erw [← Category.assoc, scalarTranspose_all.{c, v, r} A P
+    (((SemilinearSections.res g).mapHomologicalComplex (.up ℤ)).obj Q)
+    ((B.ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv _ _ z),
+    ← DerivedCategory.Q.map_comp]
+  congr 1
+
+private theorem scalarAssociation_exists (hf : f ≫ g = h) :
+    Nonempty (CoefficientScalarAssociation.{c, v, r} A B D) := by
+  let ρ := scalarRestrictionCompIso.{c, v, r} hf
+  let adjO := (A.ordinaryAdjunction.comp B.ordinaryAdjunction).ofNatIsoRight ρ
+  let a := adjO.leftAdjointUniq D.ordinaryAdjunction
+  let adjD := (A.adjunction.comp B.adjunction).ofNatIsoRight
+    (Functor.mapDerivedCategoryCompNatIso ρ)
+  let d := adjD.leftAdjointUniq D.adjunction
+  refine ⟨⟨a, scalarAssociation_ordinary_formula.{c, v, r} A B D hf, d, ?_⟩⟩
+  intro P _
+  apply (adjD.homEquiv _ _).injective
+  apply (cancel_mono ((SemilinearSections.res h).mapDerivedCategoryFactors.hom.app
+    ((D.model.E.mapHomologicalComplex (.up ℤ)).obj P))).1
+  calc
+    _ = (D.adjunction.homEquiv _ _) (D.model.ε.app P) ≫
+        (SemilinearSections.res h).mapDerivedCategoryFactors.hom.app
+          ((D.model.E.mapHomologicalComplex (.up ℤ)).obj P) := by
+      rw [Adjunction.homEquiv_naturality_right,
+        Adjunction.homEquiv_leftAdjointUniq_hom_app, ← Adjunction.homEquiv_unit]
+    _ = DerivedCategory.Q.map
+        ((D.ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).unit.app P) := by
+      have hz := scalarTranspose_all.{c, v, r} D P
+        ((D.model.E.mapHomologicalComplex (.up ℤ)).obj P) (𝟙 _)
+      rw [DerivedCategory.Q.map_id] at hz
+      erw [Category.comp_id, Adjunction.homEquiv_id] at hz
+      exact hz
+    _ = DerivedCategory.Q.map
+        ((adjO.mapHomologicalComplex (.up ℤ)).homEquiv _ _
+          ((NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app P)) := by
+      congr 1
+      ext i : 1
+      change D.ordinaryAdjunction.unit.app (P.X i) =
+        adjO.homEquiv _ _ (a.hom.app (P.X i))
+      exact (adjO.homEquiv_leftAdjointUniq_hom_app D.ordinaryAdjunction (P.X i)).symm
+    _ = _ := (scalarTranspose_comp.{c, v, r} A B hf P _
+      ((NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app P)).symm
 
 /-- The identity extension unitor with its ordinary and derived normalizations.
 Source: integral operations, node proof step 6
@@ -653,6 +815,68 @@ Source: integral operations, node proof step 8
       (coefficientExtensionSuccessiveSystemIso l E L ι W SE SL A F j B D dEL a)
       (coefficientSequenceLimit l F W) ≪≫ dEF.completion
 
+private theorem quotientSheaf_comp (n : ℕ) :
+    integralScalarQuotientSheafMap l E L ι W n ≫
+        integralScalarQuotientSheafMap l L F j W n =
+      integralScalarQuotientSheafMap l E F (j.comp ι) W n := by
+  have hq : (integralScalarQuotientMap l L F j n).comp
+      (integralScalarQuotientMap l E L ι n) =
+      integralScalarQuotientMap l E F (j.comp ι) n := by
+    apply RingHom.ext
+    intro x
+    induction x using Quotient.inductionOn' with
+    | h x => rfl
+  unfold integralScalarQuotientSheafMap
+  rw [← Functor.map_comp]
+  congr 1
+  apply CommRingCat.hom_ext
+  apply RingHom.ext
+  intro x
+  exact congrArg ULift.up (RingHom.congr_fun hq x.down)
+
+private theorem systemMap_comp :
+    SemilinearSections.systemMap.{t + 1, t, max u (t + 1)} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+        (integralCoefficientCommRingSheaf l L W) (coefficientSequenceCommRingTransition l L W)
+        (integralScalarQuotientSheafMap l E L ι W)
+        (coefficientExtensionQuotient_naturality l E L ι W) ≫
+      SemilinearSections.systemMap.{t + 1, t, max u (t + 1)} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l L W) (coefficientSequenceCommRingTransition l L W)
+        (integralCoefficientCommRingSheaf l F W) (coefficientSequenceCommRingTransition l F W)
+        (integralScalarQuotientSheafMap l L F j W)
+        (coefficientExtensionQuotient_naturality l L F j W) =
+      SemilinearSections.systemMap.{t + 1, t, max u (t + 1)} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+        (integralCoefficientCommRingSheaf l F W) (coefficientSequenceCommRingTransition l F W)
+        (integralScalarQuotientSheafMap l E F (j.comp ι) W)
+        (coefficientExtensionQuotient_naturality l E F (j.comp ι) W) := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  rcases U with ⟨⟨n, U⟩⟩
+  have hEL := (SemilinearSections.systemMap_existsUnique.{t + 1, t, max u (t + 1)}
+    (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+    (integralCoefficientCommRingSheaf l L W) (coefficientSequenceCommRingTransition l L W)
+    (integralScalarQuotientSheafMap l E L ι W)
+    (coefficientExtensionQuotient_naturality l E L ι W)).exists.choose_spec n (op U)
+  have hLF := (SemilinearSections.systemMap_existsUnique.{t + 1, t, max u (t + 1)}
+    (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l L W) (coefficientSequenceCommRingTransition l L W)
+    (integralCoefficientCommRingSheaf l F W) (coefficientSequenceCommRingTransition l F W)
+    (integralScalarQuotientSheafMap l L F j W)
+    (coefficientExtensionQuotient_naturality l L F j W)).exists.choose_spec n (op U)
+  have hEF := (SemilinearSections.systemMap_existsUnique.{t + 1, t, max u (t + 1)}
+    (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
+    (integralCoefficientCommRingSheaf l F W) (coefficientSequenceCommRingTransition l F W)
+    (integralScalarQuotientSheafMap l E F (j.comp ι) W)
+    (coefficientExtensionQuotient_naturality l E F (j.comp ι) W)).exists.choose_spec n (op U)
+  change _ ≫ _ = _
+  dsimp only [SemilinearSections.systemMap]
+  rw [hEL, hLF, hEF]
+  exact congrArg (fun z ↦ z.hom.app (op U)) (quotientSheaf_comp l E L ι W F j n)
+
 /-- Existence of the balanced scalar association for three coefficient fields.
 Source: integral scalar operations
 (blueprint: lem-pur-coefficient-extension-reduction-model).
@@ -662,7 +886,8 @@ naturality makes these maps coherent; the K-flat derived scalar comparison
 then supplies the normalized derived equation. -/
 theorem coefficientExtensionScalarAssociation_exists :
     Nonempty (CoefficientScalarAssociation.{t + 1, t, u} A.scalar B.scalar D.scalar) := by
-  sorry
+  exact scalarAssociation_exists.{t + 1, t, u} A.scalar B.scalar D.scalar
+    (systemMap_comp l E L ι W F j)
 
 /-- The successive-extension comparison equation for a fixed association.
 Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
@@ -677,6 +902,16 @@ def CoefficientExtensionReductionCompositionEquation
             B D dEL dLF dEF a).hom.app K) ≫
         (coefficientExtensionReductionIso l E F (j.comp ι) W SE SF D dEF).hom.app K
 
+private theorem counit_comparison_comp
+    {C D : Type*} [Category C] [Category D] {R : C ⥤ D} {G : D ⥤ C}
+    (adj : R ⊣ G) {X Z : D} {Y V : C} (x : Y ⟶ G.obj X)
+    (e : G.obj Z ≅ V) (h : X ⟶ Z) :
+    R.map x ≫ adj.counit.app X ≫ h =
+      R.map (x ≫ G.map h ≫ e.hom) ≫ R.map e.inv ≫ adj.counit.app Z := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← R.map_comp_assoc e.hom e.inv, e.hom_inv_id, R.map_id, Category.id_comp]
+  exact congrArg (fun f ↦ R.map x ≫ f) (adj.counit_naturality h).symm
+
 /-- Counit naturality gives the successive-extension comparison equation for
 a fixed balanced scalar association.
 Source: integral scalar operations
@@ -689,7 +924,21 @@ theorem coefficientExtensionReductionCompositionEquation_proved
     (a : CoefficientScalarAssociation.{t + 1, t, u} A.scalar B.scalar D.scalar) :
     CoefficientExtensionReductionCompositionEquation l E L ι W SE SL A F j SF B D
       dEL dLF dEF a := by
-  sorry
+  intro K
+  have h := counit_comparison_comp SF.adjunction
+    (dLF.completion.inv.app ((integralScalarExtensionOfUniverses l E L ι W).obj K))
+    (dEF.completion.app K)
+    ((coefficientExtensionSuccessiveSystemIso l E L ι W SE SL A F j B D dEL a).hom.app K)
+  dsimp only [Iso.app_hom, Iso.app_inv] at h
+  convert h using 1 <;>
+    simp only [coefficientExtensionReductionIso, asIso_hom, coefficientExtensionCounit,
+      coefficientExtensionSuccessiveIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Functor.rightUnitor_hom_app, Functor.map_comp,
+      Category.id_comp, Category.assoc]
+  · erw [Category.id_comp]
+  · erw [Category.comp_id]
 
 /-- The direct and successive reduction comparisons agree as coherent system maps.
 Source: integral operations, node proof steps 7--8
