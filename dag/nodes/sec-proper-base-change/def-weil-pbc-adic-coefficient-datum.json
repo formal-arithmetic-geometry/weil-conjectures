@@ -43,65 +43,76 @@
  ],
  "proof": [
   {
-   "text": "In the completed-coefficient companion implementation, prove commutativity of each finite coefficient sheaf locally on the sheafification image sieve, using pointwise commutativity of continuous functions. The projections of the evaluated inverse-limit cone are jointly injective, so the completed ring is commutative. Cone naturality makes the finite quotient transition linear over the completed ring and proves uniqueness from its section formula. Tensor additivity is checked at every tower index.",
+   "text": "Construct the continuous-function coefficient sheaves, their quotient system and its actual limit. Forgetting commutativity preserves this sheafification, as the unit remains locally bijective. The tower category is Grothendieck abelian by the small-diagram theorem.",
    "uses": [
     "def-weil-pbc-proetale-modules",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Apply the general-site K-flat resolution theorem to each source complex. Convert acyclic-tensor K-flatness to the homotopy-category K-flat property. Tensoring a quasi-isomorphism between such models with a fixed module preserves quasi-isomorphisms by the tensor/cone criterion and the single-complex tensor comparison. Evaluation detects quasi-isomorphisms of tower complexes. Apply the resolving-class left-derived theorem to the additive ordinary tower functor, obtaining its universal counit and invertibility on the K-flat class.",
+   "text": "Construct scalar transitions through the normalized ordinary coefficient adjunction. Its section formula gives the transition on pure tensors; generation by local pure tensors proves naturality and uniqueness.",
    "uses": [
-    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use K-flat resolutions and scalar-extension invariance at each level. Exact scalar restriction and levelwise tower cohomology show that the ordinary tower construction preserves quasi-isomorphisms between K-flat complexes. Apply the resolving-class derived-functor theorem, retaining its universal counit and triangulated structure.",
+   "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-left-derived-from-kflat-class",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction of scalars preserves finite limits and finite colimits because its composite with the faithful exact functor to abelian sheaves is the unchanged underlying-sheaf functor. Reflection of finite limits and colimits by that forgetful functor gives the two exactness instances.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Construct the natural ordinary comparison between restricted scalar extension and tensoring with the restricted target ring. Restriction commutes with module sheafification: the canonical comparison becomes the identity after forgetting to abelian sheaves and is therefore invertible. The identity on section tensors is natural before sheafification. Compose these comparisons with the tensor-sheafification isomorphism and the braiding. For the derived comparison, compose both counits with the exact evaluation and restriction comparisons. A resolving-class universal pair receives a comparison from each functor. These maps are invertible on the resolving class by their counit equations, then on every derived object by a resolution and naturality. Their composite gives the asserted natural isomorphism.",
-   "uses": [
-    "lem-pur-change-of-rings-tensor-comparison",
     "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution"
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pur-left-derived-from-kflat-class"
    ],
    "elementary": false
   },
   {
-   "text": "Use the normalized ordinary scalar-extension adjunction for the actual chosen ordinary functors. Restriction along a composite is the composite of restrictions. Uniqueness of left adjoints identifies iterated scalar extension with extension along the composite. Its Hom-adjunction equation fixes the map on tensors of units; linearity gives the full balancing formula s tensor (z tensor x) maps to s times psi(z) tensor x. Apply the resulting natural isomorphism termwise to a complex. The same normalized adjunction equation proves uniqueness of every chain map with this formula. Finally, the commutative coefficient projections satisfy their composition law by forgetting commutativity and applying the limit-cone naturality equation.",
+   "text": "Evaluate the specified balancing map on pure tensors. Naturality follows from the tensor formula for a module map. For the cocycle, compare both maps on triple pure tensors and use preservation of products and associativity. Repeated tensor-generation and the balancing isomorphism prove equality on the sheafified complexes.",
    "uses": [
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
     "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the homotopy derived counits to complex counits using the quotient factorization isomorphisms. Extend their composite and the natural balancing isomorphism by the right Kan universal property. On flat-term K-flat resolutions, scalar extension remains K-flat, so every counit in the composite is invertible. Resolution-wise extensionality proves invertibility and uniqueness on the full derived category.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived scalar-extension/restriction adjunction allows postcomposition of the scalar right Kan extension by derived restriction. Its ordinary target is the same complex functor as exact evaluation of the tower. Compare the two complex counits by that Kan property. Both are invertible on K-flat resolutions; resolution-wise extensionality gives the unique invertible natural transformation with exactly the specified evaluation formula.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "def-pur-sheaf-tensor-product",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution",
-  "lem-pur-left-derived-from-kflat-class",
   "def-pc-sheaf-restrict-scalars",
-  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "proof_origin": {
-  "by": "B2 stage 3",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YY and 06XN; module sheafification and scalar-extension adjunction from Modules on Sites, Tag 03EK",
-  "note": "Proofs of the nine completedAdic declarations in the companion module Sheaf.Paper.CompletedAdicCoefficientDatum. Existing AdicCoefficientDatum Lean attachment and all mathematical statements are preserved. The universal derived pair, scalar-extension normalization and the unit route are unchanged; categorical and tensor glue is proved by private helpers."
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-adic-coefficient-datum.md",
+  "place": "order 1239; tensor-generator, quotient-normalization and evaluation calculations; Stacks Tags 03EK, 06YY and 015F"
  },
  "mathlib_searches": [
   {
@@ -244,9 +255,11 @@
    "AlgebraicGeometry.Scheme.reductionTowerHasDerivedCategory",
    "AlgebraicGeometry.Scheme.reductionRingModulesHasDerivedCategory",
    "AlgebraicGeometry.Scheme.reductionTowerDerivedEvaluation",
+   "AlgebraicGeometry.Scheme.reductionChangeSpec",
    "AlgebraicGeometry.Scheme.reductionChangeExistence",
    "AlgebraicGeometry.Scheme.reductionChange",
    "AlgebraicGeometry.Scheme.reductionChangeAdditive",
+   "AlgebraicGeometry.Scheme.reductionDerivedSpec",
    "AlgebraicGeometry.Scheme.reductionDerivedExistence",
    "AlgebraicGeometry.Scheme.reductionDerivedChange",
    "AlgebraicGeometry.Scheme.reductionDerivedCounit",
@@ -317,13 +330,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "C-bb327",
+  "group": "U7",
   "result": "pass",
-  "landing": "20261020T230713-L-603478",
+  "landing": "20261021T005753-L-1891154",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered AdicCoefficientDatum.lean (byte-identical to PASSed b0635f9c/77542233) and node vs live; item rebuilt (83.6 s, clean) and 28 direct importers + 8 name-users compiled against its olean, all rc 0; #print axioms of the 5 closed holes + completedReductionTower_exists clean; rfl of reductionChange/reductionDerivedChange to original witnesses"
  }
 }
