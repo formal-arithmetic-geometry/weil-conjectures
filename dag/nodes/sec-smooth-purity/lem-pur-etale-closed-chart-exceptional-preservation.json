@@ -19,9 +19,169 @@
   "lem-exc-closed-ambient",
   "thm-amb-vector-bundle-purity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the domains of the operations. The coefficient datum makes $A$ finite. In the DVR $\\mathcal O_E$, $|\\ell|_E=\\ell^{-1}<1$, so $\\ell$ belongs to its maximal ideal $(t)$; hence $\\ell^n\\in(t^n)$ and $\\ell^n A=0$. Since $\\ell\\ne p$, $\\ell^n$ is invertible on every scheme under consideration. A field is Noetherian (its only ideals are zero and the unit ideal), so finite-type-over-Noetherian makes $X,Y$ Noetherian. Their open subschemes $U,V$ are Noetherian. Put $W=P\\setminus i(U)$ and write $j:W\\hookrightarrow P$. The affine presentation $V=\\operatorname{Spec}B$, $P=\\operatorname{Spec}B[x_1,\\ldots,x_r]$ shows that $P\\to V$ is finite type. The opens $U,V$ are quasi-compact and their inclusions are quasi-compact: intersect with an affine open of their Noetherian targets and use quasi-compactness of a Noetherian open. Thus the quasi-compact-open finite-type theorem and composition show that $U,V,P$, and then $W$, are finite type over $k$; $W$ is Noetherian and $j$ is quasi-compact by the same argument. Closed immersions are proper, so $i$ is compactifiable by $(\\mathrm{id},i)$; the intermediate separated finite-type maps admit compactifications by Nagata. Every ambient right adjoint used below therefore exists on the whole ordinary etale derived category. None is being formed by restriction to bounded constructible objects.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type); coefficient and compactification hypotheses of the cited nodes"
+   }
+  },
+  {
+   "text": "Use exact open extension on the ordinary etale categories. The first assertion of [lem-amb-etale-adjoint-locality] gives $u_!\\dashv u^*$ and $v_!\\dashv v^*$ on the entire derived categories. For these open immersions its sum extension is the usual extension by zero, including the evaluation counit, by [lem-cbc-open-extension-zero-etale-adjunction-agreement]; applying its equality degreewise preserves that normalization. Let $F=Rf_{!,A}$ and $H=R\\pi_{!,A}$. The unbounded compact-support composition comparisons and $fu=v\\pi i$ give the specified natural isomorphism\n$$\\lambda:F u_!\\xrightarrow{\\sim}v_!H i_*.$$\nHere compact support along an open $a$ is $a_!$ via $(a,\\mathrm{id})$, with the source-open normalization of [lem-amb-compact-support-open-source-composition]. Compact support along the proper closed immersion $i$ is computed by the candidate $Ri_*$ of $(\\mathrm{id},i)$. The closed immersion $i$ is separated, quasi-finite and of finite type between Noetherian schemes, so [lem-sfb-quasifinite-compact-support-exact] gives a canonical isomorphism $c_i$ from every compactification candidate to the termwise exact functor $D(i^{\\mathrm{supp}}_!)$ on the whole unbounded categories, compatible with the refinement comparisons. Here $i^{\\mathrm{supp}}_!=i_*$: for etale $W\\to P$ the support of a section over $U\\times_PW$ is closed in $U\\times_PW$, which is closed in $W$, hence proper over $W$ [lem-weil-pbc-closed-immersion-proper]. This termwise $i_*$ is exactly the closed direct image of [lem-exc-closed-support-triangle] and [lem-exc-closed-ambient]. All these comparisons have unbounded domains.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-compact-support-open-source-composition",
+    "def-amb-etale-compact-support",
+    "lem-exc-closed-support-triangle",
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open, torsion-ring case), 0F7J (lemma-shriek-composition); source-open normalization"
+   }
+  },
+  {
+   "text": "The affine presentation of $P$ identifies $\\pi$ with the trivial rank-$r$ vector bundle. Apply [thm-amb-vector-bundle-purity] over $V$: it identifies $\\pi_A^\\times$ with $G=\\pi^*(-)(r)[2r]$ on all objects, and normalizes the adjunction $H\\dashv G$ by the displayed integration counit, denoted $\\epsilon^\\pi$. Use $i_*\\dashv Ri_A^!$ from [lem-exc-closed-ambient]. For arbitrary $M\\in D(U_{\\mathrm{et}},A)$ and $L\\in D(Y_{\\mathrm{et}},A)$, take the following natural bijections:\n$$\\operatorname{Hom}_U(M,u^*f_A^\\times L)\\cong\\operatorname{Hom}_X(u_!M,f_A^\\times L)\\cong\\operatorname{Hom}_Y(Fu_!M,L)\\cong\\operatorname{Hom}_Y(v_!Hi_*M,L)\\cong\\operatorname{Hom}_V(Hi_*M,v^*L)\\cong\\operatorname{Hom}_P(i_*M,Gv^*L)\\cong\\operatorname{Hom}_U(M,Ri_A^!Gv^*L).$$\nIn the third bijection a map $Fu_!M\\to L$ is precomposed with $\\lambda_M^{-1}$. Composition and uniqueness of right adjoints, with their pasted units and counits [lem-cat-right-adjoint-composition], identify the two representing functors. This gives a natural isomorphism $\\alpha_L:u^*f_A^\\times L\\xrightarrow{\\sim}Ri_A^!(\\pi^*v^*L(r)[2r])$. The Hom chain and purity apply before imposing any boundedness hypothesis on either $L$ or $f_A^\\times L$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "thm-amb-vector-bundle-purity",
+    "lem-exc-closed-ambient",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality and Charts, expanded to a closed affine chart using unbounded vector-bundle purity"
+   }
+  },
+  {
+   "text": "Make the counit assertion explicit. The left adjoint of the right side is $J=v_!Hi_*$ and its counit at $L$ is\n$$e^J_L=\\epsilon^v_L\\circ v_!(\\epsilon^\\pi_{v^*L})\\circ v_!H(\\epsilon^i_{Gv^*L}).$$\nThe left adjoint of the left side is $Fu_!$ and its pasted counit is\n$$e^{Fu}_L=\\epsilon^f_L\\circ F(\\epsilon^u_{f_A^\\times L}).$$\nFor $T_L=u^*f_A^\\times L$, the Hom chain sends $1_{T_L}$ first to $\\epsilon^u$, then to $e^{Fu}_L$, then to $e^{Fu}_L\\circ\\lambda_{T_L}^{-1}$, and finally to $\\alpha_L$. Thus the inverse-transpose formula gives\n$$e^J_L\\circ J(\\alpha_L)\\circ\\lambda_{T_L}=e^{Fu}_L.$$\nThis is exactly counit preservation relative to the specified compact-support composition comparison and the normalized purity counit. The same chain is natural in $L$ and $M$, so it specifies one natural transformation, not objectwise choices of isomorphisms. The pasted-counit formula is the one in [lem-cat-right-adjoint-composition]; the purity counit is the transpose normalization in [thm-amb-vector-bundle-purity].",
+   "uses": [
+    "lem-cat-right-adjoint-composition",
+    "thm-amb-vector-bundle-purity",
+    "lem-amb-compact-support-open-source-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence, uniqueness, naturality and Locality: expand the counit/transpose calculation"
+   }
+  },
+  {
+   "text": "Now let $L$ be bounded constructible of Tor amplitude $[a,b]$. Put $L'=\\pi^*v^*L$. Exact constant-coefficient inverse image and its cohomology comparison give $\\mathcal H^q(L')=\\pi^*v^*\\mathcal H^q(L)$, so the same cohomological bounds hold. Constructibility is preserved by [prop-constructible-pullback], applied to each cohomology sheaf (with the module-sheaf interpretation of [lem-weil-pbc-constructible-etale-module-sheaf-comparison]). Apply the consequence for every scheme morphism in [lem-sf-etale-stalk-tor-test] first to $v$ and then to $\\pi$: $L'$ has Tor amplitude $[a,b]$. These assertions concern $L'$ directly; they use no preservation assertion for $f_A^\\times$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-etale-stalk-tor-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "lemma-pullback-constructible; ordinary constant-coefficient pullback and the cited geometric-stalk Tor criterion"
+   }
+  },
+  {
+   "text": "The ordinary Tate sheaf $B=A_P(r)$ is finite locally constant, flat and locally free of rank one by [lem-asd-finite-etale-twist-line], with $N=\\ell^n$. It is constructible: the single stratum $P$ and its finite locally constant sheaf satisfy the definition. The flat constructible tensor computation [lem-fd-flat-constructible-tensor] makes $L'\\otimes_A^L B$ bounded constructible. At every geometric point $\\bar x$ choose a rank-one trivialization $B_{\\bar x}\\cong A$. The derived tensor/stalk comparison of [lem-sfb-etale-derived-tensor-stalk] gives, for every $A$-module $Q$,\n$$(L'\\otimes_A^L B)_{\\bar x}\\otimes_A^LQ\\cong L'_{\\bar x}\\otimes_A^LQ.$$\nHence the two directions of [lem-sf-etale-stalk-tor-test] preserve the same Tor interval. Put $K=(L'\\otimes_A^LB)[2r]$. Since $\\mathcal H^q(C[2r])=\\mathcal H^{q+2r}(C)$, the shift makes $K$ bounded constructible of Tor amplitude $[a-2r,b-2r]$. This also covers $r=0$, for which $B=A_P$ and the shift is zero.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-weil-pbc-constructible-complexes",
+    "lem-fd-flat-constructible-tensor",
+    "lem-sf-etale-stalk-tor-test",
+    "lem-sfb-etale-derived-tensor-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Affine-space paragraph: flat rank-one Tate twist; geometric-stalk verification of its Tor bound"
+   }
+  },
+  {
+   "text": "Obtain a bound for all module sheaves on the open complement, over the arbitrary field $k$ of the statement. Apply [lem-kun-uniform-field-extension-dimension-bound] to the finite-type $k$-scheme $W$: there is $d\\geq0$ such that every field base change $W_L$ has dimension at most $d$. For any etale $A$-module sheaf $M$ on $W$, its underlying abelian sheaf is torsion, since $\\ell^n$ kills all its sections. Apply [lem-kun-torsion-abelian-direct-image-dimension-bound] to the $k$-morphism $j:W\\to P$. Its hypotheses are exactly the finite-type structure maps established in Step 1 and the just-chosen field-extension bound. Thus the abelian $R^qj_*$ vanishes for $q>2d$. The all-degree comparison [lem-sbc-higher-direct-image-forget-comparison] identifies this with the underlying abelian sheaf of the module $R^qj_*M$. A module sheaf whose underlying abelian sheaf is zero has only zero sections and is zero. Consequently $R^qj_*M=0$ for every module sheaf $M$ and $q>c$, with $c=2d$. No separable-closedness or absolute cohomological-dimension hypothesis on $k$ has been inserted.",
+   "uses": [
+    "lem-kun-uniform-field-extension-dimension-bound",
+    "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10 (lemma-finite-cd), arbitrary-field relative bound; cited field-extension dimension and coefficient-forgetting refinements"
+   }
+  },
+  {
+   "text": "For a constructible $A$-module sheaf $F$ on $W$, apply [thm-dg-finite-type-constructibility] to $F[0]$ and $j:W\\to P$. Both schemes are finite type over the same field $k$, and $A$ is finite and killed by the invertible integer $\\ell^n$. It follows that every $R^qj_*F$ is constructible. Together with Step 7 this verifies both direct-image hypotheses of [prop-exc-closed-tor], with the quasi-compact complementary open $j$, the closed immersion $i:U\\hookrightarrow P$, and the unchanged coefficient ring $\\mathcal O_E/t^n$. Apply that theorem to the bounded constructible object $K$ from Step 6, with its Tor interval $[a-2r,b-2r]$. It gives $Ri_A^!K$ bounded constructible with Tor amplitude\n$$[a-2r,b-2r+c+1].$$\nThis is the required expression and a finite interval. Steps 2–4 already established its identification with $u^*f_A^\\times L$ for all $L$, independently of this preservation argument.",
+   "uses": [
+    "thm-dg-finite-type-constructibility",
+    "prop-exc-closed-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-exc-closed-tor.proof.md",
+    "place": "Closed-support Tor argument; direct-image finiteness supplies its second hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-compact-support-open-source-composition",
+  "def-amb-etale-compact-support",
+  "lem-exc-closed-support-triangle",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "thm-amb-vector-bundle-purity",
+  "lem-exc-closed-ambient",
+  "lem-cat-right-adjoint-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-etale-stalk-tor-test",
+  "lem-asd-finite-etale-twist-line",
+  "def-weil-pbc-constructible-complexes",
+  "lem-fd-flat-constructible-tensor",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lem-kun-uniform-field-extension-dimension-bound",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-dg-finite-type-constructibility",
+  "prop-exc-closed-tor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts; closed-chart expansion using the existing unbounded etale compact-support and closed-support nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +224,38 @@
    "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.corepresentableBy; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.representableBy; CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ext_iff; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebra/category theory or unrelated geometry, not this etale/coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|UpperShriek|exceptional|torAmplitude",
+   "results": "0 hits; ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are general adjunctions, structure-sheaf pullbacks or unrelated geometry, not this etale compact-support and finite-Tor assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint to compactly supported etale direct image along a closed immersion followed by affine space projection is closed support applied to smooth purity",
+   "results": "8 hits; ; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, HasCompactSupport.comp_isClosedEmbedding, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are general adjunctions, structure-sheaf pullbacks or unrelated geometry, not this etale compact-support and finite-Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For etale module derived categories, restriction of a compact support right adjoint to a closed affine space chart is closed exceptional pullback of a Tate twisted shifted pullback, preserving constructibility and finite Tor dimension",
+   "results": "8 hits; ; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are general adjunctions, structure-sheaf pullbacks or unrelated geometry, not this etale compact-support and finite-Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image on the etale site for an affine chart factors as sections with closed support composed with smooth purity, on unbounded complexes",
+   "results": "8 hits; ; AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are general adjunctions, structure-sheaf pullbacks or unrelated geometry, not this etale compact-support and finite-Tor assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-coefficient-adjoint-comparisons",
@@ -88,5 +276,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-closed-chart-exceptional-preservation",
+  "worker": "stage1",
+  "summary": "Eight explicit proof steps, no new nodes: unbounded etale compact-support composition and a Hom chain give the normalized chart isomorphism; exact pullback, a Tate line, arbitrary-field relative torsion vanishing and the existing closed-support Tor theorem prove preservation. Checked all cited statements and coefficient domains; the statement is unchanged.",
+  "blueprint": "The seed has blueprint.from.node=null as confirmed by blueprint_refs ancestor. Steps 2–4 expand Locality and Charts of the cited exceptional-reduction proof for a closed affine chart; Steps 5–8 realize the corresponding arbitrary-map closed-chart supplement extracted from the finite-coefficient adjoint comparisons. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactifiability supplies intermediate ambient adjoints; it does not replace the affine-chart route."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "why": "Generic identification of the two ordinary etale extension-by-zero adjunctions fixes their evaluation normalization."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic compact-support pseudofunctor on whole ordinary etale derived categories is needed before any preservation conclusion."
+   },
+   {
+    "node": "lem-amb-compact-support-open-source-composition",
+    "why": "Generic source-open normalization tracks the canonical counit of the chart restriction."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Only its termwise closed direct-image convention is matched with the compact-support candidate (identified via lem-sfb-quasifinite-compact-support-exact); no boundedness is extracted."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Generic Vector-bundle purity before smooth orientation used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic closed-immersion adjoint supplies the last Hom bijection on all objects."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructible pullback tool, used on cohomology sheaves only."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic finite-module interpretation of constructibility keeps the cohomology statement in the correct coefficient category."
+   },
+   {
+    "node": "lem-sf-etale-stalk-tor-test",
+    "why": "Generic ordinary-etale geometric-stalk criterion preserves Tor intervals under exact pullback and rank-one twists."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic Finite torsion Tate twists are etale locally free lines used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "lem-fd-flat-constructible-tensor",
+    "why": "Generic ordinary-etale flat tensor calculation preserves constructible cohomology under the Tate line."
+   },
+   {
+    "node": "lem-kun-uniform-field-extension-dimension-bound",
+    "why": "Generic finite-type dimension bound verifies the arbitrary-field relative cohomological bound."
+   },
+   {
+    "node": "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "why": "Generic relative higher-direct-image vanishing over an arbitrary field bounds all complement sheaves."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic module/abelian derived-image comparison transfers the torsion bound to the actual A-module categories."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Generic Bounded constructibility of every finite-type direct image used as a black box in the explicit ordinary-etale affine-chart proof; the coefficient-transport unit has no replacement for this local tool."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Generic ordinary-etale closed-support Tor estimate completes the closed-chart argument after both complement hypotheses are checked."
+   },
+   {
+    "node": "lem-sfb-etale-derived-tensor-stalk",
+    "why": "Generic unbounded tensor/stalk comparison justifies the rank-one Tate twist calculation; the coefficient-transport unit has no such stalk theorem."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Generic identification of ordinary etale compact support along a quasi-finite (here closed) immersion with the exact termwise functor on unbounded categories; the coefficient-transport unit has no node for Ri_!=i_*."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-compact-support-open-source-composition",
+  "lem-exc-closed-support-triangle",
+  "thm-amb-vector-bundle-purity",
+  "lem-exc-closed-ambient",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-etale-stalk-tor-test",
+  "lem-asd-finite-etale-twist-line",
+  "lem-fd-flat-constructible-tensor",
+  "lem-kun-uniform-field-extension-dimension-bound",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-dg-finite-type-constructibility",
+  "prop-exc-closed-tor",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lem-sfb-quasifinite-compact-support-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-c6256a665",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c6256a665 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full, with every cited statement. The statement is unchanged (no target weakened), there are 0 new nodes, and neither the item nor any cited node is in route-pivot-dropped. It is an ordinary one-level split of the statement-only node from the N8 re-split of lem-pur-finite-coefficient-adjoint-comparisons, and it keeps that parent's old Steps 5–6 route: unbounded compact-support composition, a Hom chain, vector-bundle purity for π, prop-exc-closed-tor for i. It is the closed-chart supplement to main-20261015 sk-lem-sp-reduction-exceptional Locality/Charts. No SGA. Checks: ℓ∈(t) so ℓ^nA=0. Noetherian and finite-type domains hold, and the compactifications are (id,i) and Nagata. The Hom chain type-checks. I recomputed the counit identity e^J∘J(α)∘λ=e^{Fu}. Purity hypotheses match: V Noetherian, ℓ invertible, A=O_F/ϖ^n, K unrestricted. The twist line with N=ℓ^n is the same A^et(1). The Tor interval moves to [a−2r,b−2r] under the [2r] shift. Uniform R^qj_* vanishing over an arbitrary k comes from the kun dimension nodes plus the forget comparison (Stacks 0F10 read). finite-type constructibility and prop-exc-closed-tor give [a−2r,b−2r+c+1]. Edge cases r=0, U=∅, W=∅, n=1 all hold. One fault, F1 (C1 missing citation), fixed: Step 2 identified the compact-support candidate Ri_* (a K-injective total derived functor in def-amb-etale-compact-support) with the termwise exact i_* only by citing the convention of lem-exc-closed-support-triangle. The fix cites the existing lem-sfb-quasifinite-compact-support-exact: a closed immersion is a separated, quasi-finite, finite-type morphism of Noetherian schemes, which gives c_i on unbounded categories independent of compactification. i^supp_!=i_* because closed supports are proper over W (lem-weil-pbc-closed-immersion-proper). proof_deps and tool_uses are updated, and adding the cite brings 0 new nodes into the batch-5 closure. Batch-5 flags lem-sf-etale-stalk-tor-test and lem-sfb-etale-derived-tensor-stalk both end in lem-pod-etale-stalk-tensor-scalar, which is generic stalk/tensor sheaf algebra and not part of the trace-formula or Poincaré-duality proofs, so both are accepted. That node is already in the closure via thm-amb-vector-bundle-purity. Declared tool_uses accepted. The snapshot's chapter symlinks point to a pruned dagsnap, so statements outside sec-smooth-purity were read from clones/side-live.; 1 file(s) fixed by the reviewer"
  }
 }

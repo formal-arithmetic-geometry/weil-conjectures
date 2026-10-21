@@ -21034,3 +21034,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q136/def-nagata-strict-transform-chart-comparison (reviewer PASS; after a return; new nodes: 0)
 - 08:15 L: merged deliver/Q124/thm-zl-real-mixed-by-curves (reviewer FIX; after a return; new nodes: 6)
 - 08:15 L: merged deliver/Q97/lem-weil-frobenius-point-transport-natural (reviewer PASS; after a return; new nodes: 4)
+- 08:15 L: merged deliver/NR/lem-pur-etale-closed-chart-exceptional-preservation (reviewer FIX; first push; new nodes: 0)
