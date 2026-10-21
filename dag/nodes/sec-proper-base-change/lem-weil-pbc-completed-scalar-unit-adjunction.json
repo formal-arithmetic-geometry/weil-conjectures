@@ -26,142 +26,74 @@
  ],
  "proof": [
   {
-   "text": "Put $C_T^a=\\mathcal L_T^a\\mathcal R_T^a$ and $C_T^0=\\mathcal L_T^0\\mathcal R_T^0$, and denote their quotient units by $c^a,c^0$. Choose finite generators of $I$. Apply the ringed Koszul reflector to their images in $A_T$; the Koszul/quotient comparison identifies its unit with $c^a$. Thus $C_T^aM$ is complete and precomposition with $c_M^a$ is a bijection into every complete $A_T$-object, for every ambient $M$. The constant-coefficient completion adjunction gives the identical assertion for $C_T^0,c^0$. The coefficient equivalence identifies these local complete subcategories with those in the statement and says $A_T$ is flat over $\\underline A_T$. Hence the exact restriction functors, their preservation of K-injectives, and the normalized scalar comparisons apply. No completeness of $M$ has been assumed.",
+   "text": "Apply koszul_quotient_reflector to a finite generating family of the adic ideal. Its quotient criterion and bijective precomposition give CompletionFacts. Transport the coefficient equivalence to its restriction functor using a componentwise full-subcategory isomorphism.",
    "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-sp-completed-pullback-adjunction",
     "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
+    "lem-sp-completed-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, completion and reconstruction inputs; agent assembly of Stacks 099M and algebraization 099B/0A0E."
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
    }
   },
   {
-   "text": "Write $e_T^a:M\\to\\mathcal L_T^a\\Delta M$ and $e_T^0:r_TM\\to\\mathcal L_T^0\\Delta r_TM$ for the constant/limit maps used to construct the quotient units. The specified $\\lambda$ satisfies $\\lambda_{\\Delta M}r_T(e_T^a)=e_T^0$. Indeed, choose a complex representing $M$ and a K-injective tower replacement $\\Delta M\\to H$. Restriction is exact and preserves K-injectives, so $\\Delta r_TM\\to r_TH$ is an allowed replacement for the other side. The first map is the compatible-family map $r_TM\\to r_T\\lim H$ followed by $r_T\\lim H\\to\\lim r_TH$; the second is the map into $\\lim r_TH$ with those same component maps. These are equal by the defining universal property of the ordinary limit. This computes the specified derived comparison, since its normalization is precisely the ordinary comparison conjugated by the total-derived units. The equality consequently holds on the derived categories, independently of the chosen replacement.",
+   "text": "Choose derivedLimitRestriction and its specified comparison formula. The strictScalarCompletionUnit theorem identifies the actual quotient completion units on every ambient object.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-flat-scalar-tower-limit-square"
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-strict-scalar-completion-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, normalization of the reconstruction maps: compatible-family calculation before applying quotient augmentation."
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
    }
   },
   {
-   "text": "Let $h_M^a:\\Delta M\\to\\mathcal R_T^aM$ and $h_{r_TM}^0:\\Delta r_TM\\to\\mathcal R_T^0r_TM$ be the strict quotient augmentations. Define $\\beta_M=\\mathcal L_T^0(\\rho_M)\\lambda_{\\mathcal R_T^aM}:r_TC_T^aM\\xrightarrow{\\sim}C_T^0r_TM$. Strict balancing says $\\rho_Mr_T(h_M^a)=h_{r_TM}^0$. Naturality of $\\lambda$ and Step 2 therefore give\n$$\\beta_Mr_T(c_M^a)=\\mathcal L_T^0(\\rho_Mr_T(h_M^a))\\lambda_{\\Delta M}r_T(e_T^a)=\\mathcal L_T^0(h_{r_TM}^0)e_T^0=c_{r_TM}^0.$$\nThis proves the asserted identification of the actual completion units on every ambient input, using equality of strict augmentation maps before taking the limit.",
+   "text": "Define phi by applying constant completion to the ordinary scalar comparison after the completion scalar comparison. Naturality of lambda and the strict balancing equation prove the fixed reconstruction identity. The quotient-unit identity proves unit normalization. Precomposition with the constant quotient unit is injective into a complete object, proving uniqueness.",
    "uses": [
     "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-flat-scalar-tower-limit-square"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, quotient-unit normalization of the same reconstruction isomorphisms."
-   }
-  },
-  {
-   "text": "Use the canonical pullback/tensor reassociation $\\tau_{u,L}:\\mathcal R_U^aL_u^aL\\cong\\mathscr L_u^a\\mathcal R_V^aL$ from strict balancing. In the quotient-completion model for $F_u^a=C_U^aL_u^a$, its fixed reconstruction is $r_{u,L}=\\mathcal L_U^a(\\tau_{u,L})$; in any canonically identified model the same equation includes that model identification. The analogous constant reconstruction uses $\\tau^0:\\mathcal R_U^0G_u\\cong G_u\\mathcal R_V^0$. These identifications respect the maps from ordinary pullback: applying either side to its quotient augmentation sends a tensor $x$ to $x\\otimes1$, at every quotient, with its quotient transition. They are exactly the strict-tower maps used in the definition of $j^a,j^0$, not maps selected from their evaluations. With the statement's convention suppressing $\\tau^0$, naturality of $\\lambda$ and the balancing equation give\n$$\\mathcal L_U^0(q_{u,L})\\lambda_{\\mathscr L_u^a\\mathcal R_V^aL}r_U(r_{u,L})=r^0_{u,r_VL}\\,C_U^0(a_{u,L})\\beta_{L_u^aL}.$$\nIndeed, move $\\mathcal L_U^a(\\tau_{u,L})$ across $\\lambda$ by naturality and substitute $q_{u,L}r_U(\\tau_{u,L})=\\mathcal R_U^0(a_{u,L})\\rho_{L_u^aL}$, with $\\tau^0$ restored on the right when necessary.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-flat-scalar-tower-limit-square"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, same reconstruction isomorphisms: explicit pullback/tensor and scalar normalization calculation."
-   }
-  },
-  {
-   "text": "Define $\\phi_{u,L}=C_U^0(a_{u,L})\\beta_{L_u^aL}$, using the quotient-completion models of Step 4. Both factors are natural isomorphisms, so this is a natural isomorphism; Step 4 is exactly its displayed reconstruction normalization in the statement. By Step 3 and naturality of $c^0$,\n$$\\phi_{u,L}r_U(j^a_{u,L})=C_U^0(a_{u,L})c^0_{r_UL_u^aL}=c^0_{G_ur_VL}a_{u,L}=j^0_{u,r_VL}a_{u,L}.$$\nFor uniqueness, $\\beta_{L_u^aL}$ identifies $r_U(j^a_{u,L})$ with the constant completion unit. Since its target and $F_u^0r_VL$ are complete, precomposition with this unit is injective by the constant completion adjunction. Any other comparison satisfying the required equation equals $\\phi_{u,L}$. This argument uses full faithfulness of restriction only on the complete subcategories; it makes no full-faithfulness assertion about the ambient categories.",
-   "uses": [
-    "lem-sp-completed-pullback-adjunction",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, uniqueness of completion-unit normalized reconstruction comparison."
-   }
-  },
-  {
-   "text": "Let $L$ and $N$ be complete on $V$ and $U$, respectively. Direct image preserves completeness, so the ordinary adjunction restricts after composing with the completion reflector. Its Hom bijection sends $t:F_u^aL\\to N$ first to $t j^a_{u,L}:L_u^aL\\to N$, and then to its ordinary adjunct $L\\to R_u^aN$. The first operation is bijective by Step 1; the second is the ordinary derived adjunction. This defines $F_u^a\\dashv R_u^a$. On constant coefficients these are precisely the two Hom bijections specifying $F_u^0\\dashv R_u^0$. To compare them put $t_0=r_U(t)\\phi_{u,L}^{-1}$. The unit equation from Step 5 gives\n$$t_0j^0_{u,r_VL}=r_U(tj^a_{u,L})a_{u,L}^{-1}.$$\nThe normalized scalar adjunction comparison says that the ordinary adjunct of the right side is $\\chi_{u,N}r_V((tj^a_{u,L})^\\sharp)$. Hence the two completed Hom bijections agree under restriction, $\\phi$ and $\\chi$. The coefficient equivalences on complete subcategories supply the required bijections on both Hom sets.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-pbc-proetale-operations",
-    "lem-sp-completed-pullback-adjunction",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
     "lem-weil-pbc-constant-completion-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, completed adjunctions: explicit comparison of the two successive Hom bijections."
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
    }
   },
   {
-   "text": "A unit is the adjunct of the identity on the left-adjoint value, and a counit is the inverse adjunct of the identity on the right-adjoint value. Applying the equality of Hom bijections in Step 6 to these identities proves their compatibility, including the indicated $\\phi$ and $\\chi$ components. For composition, the scalar inverse-image comparisons $a_u$ come from the identical inverse image on underlying abelian sheaves, so the comparison for $uv$ equals the composite comparisons for $u$ and $v$, and the identity comparison is the identity. The ordinary direct-image composition maps are the adjunction conjugates of these inverse-image composition identifications. Applying the adjunct compatibility of flat restriction to their defining adjuncts shows that $\\chi$ carries the completed-coefficient direct-image composition and identity maps to the constant-coefficient ones: both have the same adjunct, hence are equal. Finally the completed pullback composition and identity maps are, by definition, their conjugates for the completed adjunctions. Step 6 identifies those adjunctions, so applying the same Hom bijections to the defining conjugates identifies the completed pullback maps as well. Bijectivity of conjugation rules out any additional automorphism in these identifications.",
+   "text": "Use strictScalarOrdinaryAdjunction for the ordinary right adjoints, their normalized invertible mate and completeness preservation. Any Operations bundle has these preservation properties by right-adjoint uniqueness. Construct completed adjunctions by composing quotient reflector Hom bijections with ordinary adjunctions.",
    "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
+    "lem-weil-pbc-strict-scalar-ordinary-adjunction",
+    "lem-sp-completed-pullback-adjunction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, transport of units, counits and adjunction-conjugate composition/identity maps."
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
    }
   },
   {
-   "text": "All maps used in Step 4 are natural transformations in the derived strict-tower categories: strict balancing supplies natural $\\rho,q$, and the scalar limit square supplies natural $\\lambda$. Thus applying functoriality to any morphism of complete inputs gives the reconstruction equality on that morphism. More explicitly, for an isomorphism $h:r_VL\\xrightarrow{\\sim}L_0$ of constant complete objects, postcompose the equality by $\\mathcal L_U^0G_u(\\mathcal R_V^0h)$. Naturality of $r^0$ gives\n$$\\mathcal L_U^0G_u(\\mathcal R_V^0h)\\mathcal L_U^0(q_{u,L})\\lambda\\,r_U(r_{u,L})=r^0_{u,L_0}F_u^0(h)\\phi_{u,L}.$$\nThis is the asserted normalization after changing the identification of the constant complete input, with the induced strict reduction and completed-pullback maps. Invertibility of $h$ makes all comparison maps isomorphisms; the same computation works for arbitrary morphisms.",
-   "uses": [
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-flat-scalar-tower-limit-square",
-    "def-weil-pbc-completed-pullback"
-   ],
+   "text": "The categorical mate transpose identity and unit normalization identify the completed Hom bijections. Apply unit_mateEquiv and mateEquiv_counit to identify units and counits. The conjugation mate identity transports all specified adjunction conjugates. Naturality of the constant reconstruction yields the change-of-input equation.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, naturality of the same reconstruction conjugations and change of complete input."
-   }
-  },
-  {
-   "text": "For any morphism $f$ and any complete $K$, $R_f^aK$ is complete by direct-image preservation. Substitute $L=R_f^aK$ in Steps 4–8. Every argument there is in the unbounded ambient or full complete categories and uses only the stipulated coefficient datum. Consequently this substitution imposes none of properness, boundedness, constructibility, or etale origin.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, applicability to complete direct-image inputs."
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-proetale-operations",
   "lem-sp-completed-pullback-adjunction",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-flat-scalar-tower-limit-square",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-weil-pbc-strict-quotient-scalar-balancing",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction"
+  "lem-weil-pbc-strict-scalar-completion-unit",
+  "lem-weil-pbc-strict-scalar-ordinary-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second paragraph: same reconstruction conjugations; explicit completion-unit and Hom-bijection normalization, using Stacks 099M/099N and 099B/0A0E."
+  "place": "A9 Lean proof: quotient reflector, normalized quotient-unit square, ordinary derived mate, completed Hom bijections and categorical mates. No unit-level route is bypassed."
  },
  "mathlib_searches": [
   {
@@ -316,5 +248,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Read node, report (Worker report + Second reading by NH), the item module and the published declarations it uses (StrictQuotientScalarBalancing PullModel/PullCompatibility/Balancing with their *Computes normalizations; ConstantCompletionEquivalence IsComplete/finiteMap/rlim/limitComparison/completion/completionUnit/limitRestriction/koszul_quotient_reflector). Records: node copy changes only lean; lean.statement verbatim; all 16 declarations present; one sorry; source/blueprint docstrings and all 9 proof steps. Clause check: hypotheses are exactly AdicCoefficientDatum; balancing and operation data are normalized, chi = mate of a^-1 (direction checked); lambda pinned by LimitNormalized; unit identification for every ambient L = Step 3; phi exists, is unique and unit-normalized; the reconstruction equation L0(q) lambda r(r) = r0 phi has its types and order checked; Hom bijections homA/hom0/hom_comparison = Step 6; unit/counit/mate; change_input for any h; pushA covers L = R_f K. Edge cases I=A, I=0, empty scheme, n=0 indexing are fine. Advisories: (1) the composition/identity clause is a generic conjugation field that follows from mate and assumes chi-compatibility of ordinary direct-image composition (Step 7); no pro-etale node defines those maps (same advisory as stage 1) and the only citer uses unconditional clauses; (2) H9: about ten imports are unused by name; (3) lambda is characterized locally, with the same normalization as flatScalarTowerLimitSquare. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261021T214733-L-1843231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

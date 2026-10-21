@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-strict-scalar-ordinary-adjunction",
+ "kind": "statement",
+ "title": "Normalized ordinary scalar adjunctions preserve complete objects",
+ "statement": "Let $A$ be a commutative ring, $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], $B$ normalized strict scalar balancing, $f:U\\to V$ a scheme morphism and $P$ a normalized $\\mathrm{PullCompatibility}$ for $B$ [lem-weil-pbc-strict-quotient-scalar-balancing]. The supplied completed- and constant-coefficient ordinary unbounded derived pullbacks $L^a:D(A_V)\\to D(A_U)$ and $L^0:D(\\underline A_V)\\to D(\\underline A_U)$ admit right adjoints $R^a,R^0$ and a natural isomorphism $\\chi:R^ar_V\\cong r_UR^0$ equal to the mate of $P.a^{-1}$, with $r_U,r_V$ scalar restriction and composition in execution order. Both $R^a$ and $R^0$ preserve the published intrinsic derived ideal completeness predicate [lem-weil-pbc-constant-completion-equivalence]. There is no geometric restriction on $f$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case, part (1), and its proof citing algebraization-lemma-pushforward-derived-complete-adjoint; transport by the normalized scalar mate."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized ordinary derived adjunction existence theorem for the right adjoints and invertible mate.",
+   "uses": [
+    "lem-weil-pbc-strict-scalar-ordinary-adjoints-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
+   }
+  },
+  {
+   "text": "The constant canonical exact pullback has a derived right adjoint preserving completeness. Left-derived uniqueness identifies its pullback with P.constant.ordinary; right-adjoint uniqueness transfers completeness preservation to right0.",
+   "uses": [
+    "lem-sp-exact-pullback-derived-adjunction",
+    "lem-sp-constant-direct-image-preserves-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
+   }
+  },
+  {
+   "text": "Scalar restriction preserves completeness by the complete coefficient equivalence. It also reflects completeness: use the quotient-unit criterion, the completion scalar comparison, and conservativity of derived restriction. The component of chi identifies the restricted rightA value with right0 of the restricted complete input, proving completeness of rightA.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-constant-direct-image-preserves-complete",
+  "lem-sp-exact-pullback-derived-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "lem-weil-pbc-strict-scalar-ordinary-adjoints-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "A9 detailed Lean scalar comparison proof, using the cited quotient and derived-adjunction constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completion reflector scalar restriction comparison preserves adjunction units and Hom equivalences",
+   "results": "{\"t\": \"2026-10-21T13:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"Completion reflector scalar restriction comparison preserves adjunction units and Hom equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"CategoryTheory.unitCompPartialBijectiveAux\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"ModuleCat.instIsRightAdjointRestrictScalars\"], \"digest\": \"69c74e2c2acf6d4b\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.ObjectProperty.lift",
+   "results": "{\"t\": \"2026-10-21T13:53:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.ObjectProperty.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*(restrictFullyFaithful|conjugate)|mateEquiv.*(homEquiv|conjugate)",
+   "results": "{\"t\": \"2026-10-21T13:53:39Z\", \"tool\": \"grep\", \"query\": \"Adjunction.*(restrictFullyFaithful|conjugate)|mateEquiv.*(homEquiv|conjugate)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\"], \"digest\": \"187c474a33f12f83\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "completedMap.*[Ii]so|[Ii]so.*completedMap|StrictScalar.*Adjunction",
+   "results": "{\"t\": \"2026-10-21T15:51:01Z\", \"tool\": \"grep\", \"query\": \"completedMap.*[Ii]so|[Ii]so.*completedMap|StrictScalar.*Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"0858721044ec5817\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Aa]dj|[Aa]dj.*restrictScalars|[Dd]erived.*[Aa]djunction",
+   "results": "{\"t\": \"2026-10-21T16:26:13Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*[Aa]dj|[Aa]dj.*restrictScalars|[Dd]erived.*[Aa]djunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Rank.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Rank.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Tower.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Tower.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Analysis/InnerProductSpace/Rayleigh.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\"], \"digest\": \"011a7b19a685e494\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-21T16:26:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-21T17:55:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived adjunction scalar restriction invertible right mate K injective",
+   "results": "{\"t\": \"2026-10-21T17:55:28Z\", \"tool\": \"leanfinder\", \"query\": \"Exact derived adjunction scalar restriction invertible right mate K injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.ofFaithful\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"CategoryTheory.tensorLeftAdjunction\", \"ModuleCat.homEquiv_extendScalarsId\"], \"digest\": \"43be5acfbffc6557\"}",
+   "date": "2026-10-21",
+   "verdict": "No existing theorem states this strict pro-etale coefficient comparison. Abstract adjunction and mate lemmas are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat restriction of ring sheaf scalars, the normalized derived inverse limit comparison preserves the quotient completion unit",
+   "results": "{\"t\": \"2026-10-21T16:26:13Z\", \"tool\": \"leansearch\", \"query\": \"For flat restriction of ring sheaf scalars, the normalized derived inverse limit comparison preserves the quotient completion unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.RestrictScalars.normedSpaceOrig\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"instSeminormedAddCommGroupRestrictScalars\", \"PresheafOfModules.limitPresheafOfModules\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"instRingRestrictScalars\", \"instNormedRingRestrictScalars\"], \"digest\": \"b764006fef931114\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact strict derived scalar comparison was found; ordinary module scalar and adjunction results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of sheaves of modules has a right adjoint and scalar restriction commutes with derived direct image as the normalized adjunction mate",
+   "results": "{\"t\": \"2026-10-21T16:29:11Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse image of sheaves of modules has a right adjoint and scalar restriction commutes with derived direct image as the normalized adjunction mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"SheafOfModules.pushforwardNatIso_inv\", \"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"0a159e5ff9275807\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact strict derived scalar comparison was found; ordinary module scalar and adjunction results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedScalarUnitAdjunction",
+  "date": "2026-10-22",
+  "group": "A9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Second paragraph: same reconstruction isomorphisms, strict coefficient supplement old Steps 9-11. Agent argument; Stacks 099M (proetale.tex, lemma-naive-completion), 099N (proetale.tex, lemma-pushforward-Noetherian-case), with quotient-unit normalization as an additional comparison.",
+   "via": [
+    "lem-weil-pbc-completed-scalar-unit-adjunction",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictScalarOrdinaryAdjunction",
+  "file": "lean/Sheaf/Paper/StrictScalarOrdinaryAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictScalarOrdinaryAdjunction",
+  "statement": "theorem strictScalarOrdinaryAdjunction (d : AdicCoefficientDatum A) (B : Balancing d)\n    {U V : Scheme.{u}} (f : U ⟶ V)\n    (P : PullCompatibility f d (B.ρ V) (B.ρ U)) :\n    ∃ (rightA : D (ring U d true) ⥤ D (ring V d true))\n      (right0 : D (ring U d false) ⥤ D (ring V d false))\n      (adjA : P.completed.ordinary ⊣ rightA)\n      (adj0 : P.constant.ordinary ⊣ right0)\n      (χ : rightA ⋙ dres (scalar V d) ≅ dres (scalar U d) ⋙ right0),\n      χ.hom = (mateEquiv adjA adj0 (TwoSquare.mk _ _ _ _ P.a.inv)).natTrans ∧\n      (∀ N : D (ring U d true), IsComplete (finiteMap (topology U) A d.ideal true 0) N →\n        IsComplete (finiteMap (topology V) A d.ideal true 0) (rightA.obj N)) ∧\n      (∀ N : D (ring U d false), IsComplete (finiteMap (topology U) A d.ideal false 0) N →\n        IsComplete (finiteMap (topology V) A d.ideal false 0) (right0.obj N))",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-strict-scalar-ordinary-adjunction",
+  "worker": "A9",
+  "summary": "Separate fully proved lemma used in the main scalar-unit adjunction argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-exact-pullback-derived-adjunction",
+    "why": "Generic unbounded module-sheaf derived adjunction/completeness tool. It does not replace any unit-level proper-base-change step."
+   },
+   {
+    "node": "lem-sp-constant-direct-image-preserves-complete",
+    "why": "Generic unbounded module-sheaf derived adjunction/completeness tool. It does not replace any unit-level proper-base-change step."
+   }
+  ],
+  "blueprint": "Completed-exchange-coherence proof, second paragraph: the same reconstruction conjugations, unit normalization and completed adjunctions. No exact blueprint duplicate found by search."
+ },
+ "lean_audit": {},
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261021T214733-L-1843231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261021T214733-L-1843231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
