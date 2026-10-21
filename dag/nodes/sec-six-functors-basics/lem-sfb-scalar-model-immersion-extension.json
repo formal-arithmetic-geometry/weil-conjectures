@@ -13,9 +13,109 @@
   "sk-prop-sfb-cartesian-coefficients",
   "sk-def-sfb-constructible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First the source schemes are qcqs. The open subscheme $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The closed immersion $i$ is of finite type by clause (a) of [lem-weil-pbc-closed-immersion-proper], so $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Both are quasi-compact by the meaning of Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus [sk-def-sfb-constructible] supplies finite adapted stratifications $s_a:U_a\\hookrightarrow U$ for a constructible module $F$ on $U$, and $t_b:Z_b\\hookrightarrow Z$ for a constructible module $G$ on $Z$, with covers and finitely presented scalar modules witnessing every local model. Fix these witnesses; no change to their covers or scalar modules will be needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), setup for the stratumwise constructibility argument; finite constant local models as in sk-def-sfb-constructible (2)"
+   }
+  },
+  {
+   "text": "The minimal-closed-subset property of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] implies the descending-chain condition: a descending chain has a minimal member among its members, after which every member is equal. Thus $|T|$ is Noetherian. By [lem-sfb-noetherian-space-compact-subsets], every subset of $|T|$ is quasi-compact. In particular, $j$ is quasi-compact: over an affine open $W\\subseteq T$, its inverse image is homeomorphic to $j(U)\\cap W$ by [def-weil-open-immersion], hence is quasi-compact. By the immersion clause (e) of [lem-weil-pbc-proper-fp-permanence], each $j\\circ s_a$ and $i\\circ t_b$ is an immersion. The families $(j\\circ s_a)_a$ together with $i$, and $(i\\circ t_b)_b$ together with $j$, have pairwise disjoint images covering $T$. They are finite stratifications by [def-constructible-stratification]. Each image is locally closed, hence constructible in this Noetherian space by [def-weil-constructible-subset].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), Noetherian quasi-compactness and extending the adapted source stratification by the complementary locus; Stacks 01OZ, 02V0 and 005L"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $R_T$ (reconstructed as a section-ring sheaf) and the quasi-compact open complement verified in step 2. The Cartesian isomorphisms of [sk-prop-sfb-cartesian-coefficients] identify the inverse-image rings with $R_U$ and $R_Z$. The exact equivalences and operation/adjunction comparisons of [lem-sfb-internal-module-operations-transport] transfer the ringed-site assertions to the specified internal module functors, including their units and counits. We obtain $j^*j_!F\\cong F$, $i^*j_!F=0$, $i^*i_*G\\cong G$ and $j^*i_*G=0$, and exactness of $j_!$ and $i_*$. The comparisons preserve the module actions, so these are isomorphisms of modules over the identified coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), exact open/closed extension; Stacks 09AA, 09BM, 09BN, 09AG, 09AH with internal-module operation comparisons"
+   }
+  },
+  {
+   "text": "For an old open-side stratum, the module-pullback composition isomorphism in [sk-def-sfb-module-pushforward-pullback] gives $(j\\circ s_a)^*j_!F\\cong s_a^*(j^*j_!F)\\cong s_a^*F$, using step 3. On every original trivializing cover member $v:V\\to U_a$, pull this isomorphism back once more. The fixed input model therefore gives $v^*(j\\circ s_a)^*j_!F\\cong R_V\\otimes_{\\Lambda(*)}P_{a,v}$. Thus exactly the old cover and the old finitely presented scalar module certify the model on that stratum [sk-def-sfb-constructible]. No extension functor has been applied to a presentation matrix.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), open extension: retain the chosen local models on the original strata"
+   }
+  },
+  {
+   "text": "On the additional closed stratum, $i^*j_!F=0$ by step 3. It has a finite constant model on the identity pro-etale cover, with scalar module $P=0$: the presentation $\\Lambda(*)^0\\to\\Lambda(*)^0\\to0\\to0$ is finite, and $R_Z\\otimes_{\\Lambda(*)}0=0$ (equivalently its matrix presentation is the zero map between free modules of rank zero). Combining this model with step 4 and the first stratification of step 2 gives constructibility of $j_!F$ directly by [sk-def-sfb-constructible].",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), open extension: the complementary closed locus has zero scalar model"
+   }
+  },
+  {
+   "text": "For an old closed-side stratum, composition of module pullbacks [sk-def-sfb-module-pushforward-pullback] and step 3 give $(i\\circ t_b)^*i_*G\\cong t_b^*(i^*i_*G)\\cong t_b^*G$. On each original cover member $w:V\\to Z_b$, this identifies the restricted extension with its original model $R_V\\otimes_{\\Lambda(*)}Q_{b,w}$. On the additional open stratum, $j^*i_*G=0$ by step 3; use its identity cover and the rank-zero scalar presentation from step 5. The second stratification of step 2 therefore makes $i_*G$ constructible by [sk-def-sfb-constructible], retaining every original local model and adding only the zero model on $U$. Together with the exactness proved in step 3 this proves all assertions.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "paragraph (3), closed direct image: retain the chosen models on the original strata and add the zero open stratum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "paragraph (3), constructibility assertion expanded from the finite constant scalar-model definition and the ringed open/closed identities; no derived-completeness argument is used"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +144,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not state this ringed-site/scalar-model assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves constructible module sheaves with finite scalar presentations on strata",
+   "results": "[leansearch] OK 8 hit(s): DFinsupp.lmk, Function.ExtendByZero.linearMap, ContMDiff.extend_zero, Finsupp.extendDomain, HasCompactSupport.extend_zero, Finsupp.extendDomain.congr_simp, FractionalIdeal.extended_zero, ContinuousLinearMap.extend_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underlying constructible subsets, ordinary functions, or scheme finiteness, not preservation of finite constant scalar-model constructibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"constructible\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underlying constructible subsets, ordinary functions, or scheme finiteness, not preservation of finite constant scalar-model constructibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension by zero and closed direct image preserve finite constant scalar models on a finite stratification of a Noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underlying constructible subsets, ordinary functions, or scheme finiteness, not preservation of finite constant scalar-model constructibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves are preserved by extension by zero along a locally closed immersion",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.preimage_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.preimage_of_isClosedEmbedding, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underlying constructible subsets, ordinary functions, or scheme finiteness, not preservation of finite constant scalar-model constructibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-integral-models-operations",
@@ -59,10 +187,45 @@
  "blueprint": {
   "from": {
    "node": "det-lem-integral-models-operations",
-   "place": "paragraph (3): extension by zero and closed direct image preserve constructibility",
+   "place": "paragraph (3): the exact open extension by zero and closed direct image preserve constructibility; expanded using the original source strata and a zero complementary stratum",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-model-immersion-extension",
+  "worker": "stage1",
+  "group": "NW",
+  "summary": "Six-step proof using existing nodes only. Verifies the Noetherian/qcqs and retrocompact-open hypotheses, constructs the actual composite-stratum immersions, transports ringed-site identities to the specified internal module functors, and retains the chosen covers and scalar modules on old strata. Complementary strata use the scalar zero module. No new nodes, statement change or Lean attachment.",
+  "blueprint": "det-lem-integral-models-operations.proof.md, paragraph (3): steps 1–2 arrange finite adapted stratifications and the quasi-compact open hypothesis; step 3 gives the exact extension/restriction identities; steps 4–6 prove preservation by retaining finite constant scalar models and adding a zero complementary stratum.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed-site open/closed identities and exactness; used at R_T with quasi-compact complement, without replacing the unit constructibility route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic exact equivalence and comparison of internal and sectionwise ringed module operations, including adjunctions; ensures the open/closed identities concern the specified internal coefficient functors."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Generic composition isomorphism for module inverse images; identifies restriction along the composite stratum immersion with iterated restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NW-813d24e64",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-813d24e64 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the statements of all 15 cited nodes. The statement is byte-identical to side-live and the delivery creates no new nodes. There is no cycle: the 3224-node closure does not reach the item. The item is not superseded, not in the dropped list, and has no repair note. Source checked: main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3); the item is used by step 3 of det-lem-integral-models-operations. Step 1: U and Z are Noetherian (open-subscheme node; closed immersion of finite type by closed-immersion-proper (a) plus finite-type-over-noetherian), hence qcqs, so clause (2) of sk-def-sfb-constructible applies. Step 2: the minimal-closed-subset property gives the descending chain condition, every subset of |T| is quasi-compact so j is quasi-compact, proper-fp-permanence (e) makes the composite strata immersions, and these form finite stratifications whose strata are constructible in a Noetherian space. Step 3: ringed-open-closed (quasi-compact complement) gives j^-1 j_! ≅ id, i^-1 i_* ≅ id, the two zero restrictions and exactness. The transport node identifies the internal j_!, i_* and pullback with the sectionwise ones on the same pro-étale site, via the α ring isomorphism. Steps 4–6: the pullback composition isomorphism (sk-def-sfb-module-pushforward-pullback) keeps the old covers and P's, and the complement gets the zero model with a rank-zero presentation; this is elementary and correct. Edge cases checked: empty T, U or Z, Λ = 0, nonreduced Z, infinite covers. Overlap: lem-sf-open-extension-zero-constant-model-constructible is a special case of the open half (finite-type k-schemes, reduced Z), not a duplicate; it could later be derived from this item. Minor point: steps 5 and 6 need T qcqs, which step 1 states only for U and Z; it follows at once from T Noetherian by the same cited nodes, so it is not counted as a fault. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-sfb-internal-module-operations-transport, sk-def-sfb-module-pushforward-pullback."
  }
 }
