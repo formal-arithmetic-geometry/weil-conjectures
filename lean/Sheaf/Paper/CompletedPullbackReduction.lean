@@ -10,24 +10,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
-import Sheaf.Paper.CompleteCoefficientDatum
-import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.StrictPerfectPackageOnSite
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.Paper.ProjectionFormulaTotalization
-
-import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.AdicCompletionReduction
-import Sheaf.Paper.IntrinsicCompletionCompleted
-import Sheaf.Paper.PbcFiniteCompletedCoefficientMap
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.WeilCompletedTensorReflector
+
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import all Sheaf.Paper.AdicCoefficientDatum
+import all Sheaf.Paper.ReductionPullbackDerivedTower
 /-! # Finite reduction of completed pullback
 
 Source: Stacks Project, Tag 099N (5), and blueprint order 1262
@@ -417,6 +404,117 @@ def HasCompletedReductionTargetTransitionNormalization (a b : ℕ) (h : a ≤ b)
 
 attribute [irreducible] HasCompletedReductionTargetTransitionNormalization
 
+/-- Descend an ordinary map through invertible computations on a resolving class. -/
+private theorem completedReduction_descend_map
+    {B D : Type*} [Category* B] [Abelian B] [HasDerivedCategory B] [Category* D]
+    (good : CochainComplex B ℤ → Prop)
+    (res : ∀ P, ∃ (V : CochainComplex B ℤ) (v : V ⟶ P), good V ∧ QuasiIso v)
+    (H J : DerivedCategory B ⥤ D) (E F : CochainComplex B ℤ ⥤ D)
+    (α : DerivedCategory.Q ⋙ H ⟶ E) (β : DerivedCategory.Q ⋙ J ⟶ F)
+    (hβ : ∀ P, good P → IsIso (β.app P)) (v : E ⟶ F) :
+    ∃! τ : H ⟶ J, ∀ P, good P →
+      α.app P ≫ v.app P = τ.app (DerivedCategory.Q.obj P) ≫ β.app P := by
+  let P : ObjectProperty (CochainComplex B ℤ) := good
+  let L := P.ι ⋙ DerivedCategory.Q
+  let ff := _root_.cochainRepresentativeWhiskering good res D
+  let αP := Functor.whiskerLeft P.ι α
+  let βP := Functor.whiskerLeft P.ι β
+  have : ∀ V : P.FullSubcategory, IsIso (βP.app V) :=
+    fun V ↦ hβ V.obj V.property
+  have : IsIso βP := NatIso.isIso_of_isIso_app βP
+  let t : L ⋙ H ⟶ L ⋙ J :=
+    αP ≫ Functor.whiskerLeft P.ι v ≫ inv βP
+  let τ : H ⟶ J := ff.preimage t
+  have ht (V : P.FullSubcategory) : τ.app (DerivedCategory.Q.obj V.obj) = t.app V :=
+    congr_app (ff.map_preimage t) V
+  have hτ (V : CochainComplex B ℤ) (hV : good V) :
+      α.app V ≫ v.app V = τ.app (DerivedCategory.Q.obj V) ≫ β.app V := by
+    rw [ht ⟨V, hV⟩]
+    change α.app V ≫ v.app V =
+      (α.app V ≫ v.app V ≫ (inv βP).app ⟨V, hV⟩) ≫ β.app V
+    have he := congr_app (IsIso.inv_hom_id βP) ⟨V, hV⟩
+    change (inv βP).app ⟨V, hV⟩ ≫ β.app V = 𝟙 _ at he
+    simp only [Category.assoc, he]
+    exact congrArg (fun z ↦ α.app V ≫ z) (Category.comp_id (v.app V)).symm
+  refine ⟨τ, hτ, ?_⟩
+  intro τ' hτ'
+  apply ff.map_injective
+  ext V
+  have : IsIso (β.app V.obj) := hβ V.obj V.property
+  apply (cancel_mono (β.app V.obj)).mp
+  exact (hτ' V.obj V.property).symm.trans (hτ V.obj V.property)
+
+/-- Descent of a termwise transition, retaining its factored component formula. -/
+private theorem completedReduction_descend_composite
+    {B C C' D' D : Type*}
+    [Category* B] [Category* C] [Category* C'] [Category* D'] [Category* D]
+    [Abelian B] [Abelian C] [Abelian C'] [Abelian D'] [Abelian D]
+    [HasDerivedCategory B] [HasDerivedCategory D'] [HasDerivedCategory D]
+    (good : CochainComplex B ℤ → Prop)
+    (res : ∀ P, ∃ (V : CochainComplex B ℤ) (v : V ⟶ P), good V ∧ QuasiIso v)
+    (F : B ⥤ C) (G : C ⥤ D) (F' : B ⥤ C') (G' : C' ⥤ D') (R : D' ⥤ D)
+    [F.Additive] [G.Additive] [F'.Additive] [G'.Additive] [R.Additive]
+    (H : DerivedCategory B ⥤ DerivedCategory D)
+    (J : DerivedCategory B ⥤ DerivedCategory D')
+    (S : DerivedCategory D' ⥤ DerivedCategory D)
+    (α : DerivedCategory.Q ⋙ H ⟶
+      F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (γ : DerivedCategory.Q ⋙ J ⟶
+      F'.mapHomologicalComplex (.up ℤ) ⋙ G'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (δ : DerivedCategory.Q ⋙ S ≅ R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (hγ : ∀ P, good P → IsIso (γ.app P))
+    (t : F ⋙ G ⟶ F' ⋙ G' ⋙ R) :
+    ∃! τ : H ⟶ J ⋙ S, ∀ P, good P →
+      α.app P ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app P) =
+        τ.app (DerivedCategory.Q.obj P) ≫ S.map (γ.app P) ≫
+          δ.hom.app ((G'.mapHomologicalComplex (.up ℤ)).obj
+            ((F'.mapHomologicalComplex (.up ℤ)).obj P)) := by
+  let E := F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ⋙
+    DerivedCategory.Q
+  let E' := F'.mapHomologicalComplex (.up ℤ) ⋙ G'.mapHomologicalComplex (.up ℤ)
+  let β : DerivedCategory.Q ⋙ (J ⋙ S) ⟶
+      E' ⋙ R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight γ S ≫ Functor.whiskerLeft E' δ.hom
+  have hβ P (hP : good P) : IsIso (β.app P) := by
+    have := hγ P hP
+    change IsIso (S.map (γ.app P) ≫ δ.hom.app _)
+    infer_instance
+  let v : E ⟶ E' ⋙ R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q
+  exact completedReduction_descend_map good res H (J ⋙ S) E _ α β hβ v
+
+/-- The finite computation is natural in the cochain representative. -/
+private def completedReductionFiniteModelNat (n : ℕ) :
+    DerivedCategory.Q ⋙ completedReductionFiniteTarget g d n ⟶
+      (reductionChange Y (completedReductionProjection Y d n)).mapHomologicalComplex (.up ℤ) ⋙
+        (completedReductionFiniteModules g d n).mapHomologicalComplex (.up ℤ) ⋙
+          DerivedCategory.Q where
+  app P := completedReductionFiniteModelMap g d n P
+  naturality P P' f := by
+    let ρ := Functor.whiskerRight
+      (complexCounitNat (pbcExtend (completedReductionProjection Y d n))
+        (pbcDerivedExtend (completedReductionProjection Y d n))
+        (pbcExtensionCounit (completedReductionProjection Y d n)))
+      (completedReductionFiniteDerived g d n) ≫
+        Functor.whiskerLeft
+          ((reductionChange Y (completedReductionProjection Y d n)).mapHomologicalComplex
+            (.up ℤ))
+          (completedReductionFiniteModules g d n).mapDerivedCategoryFactors.hom
+    have hn := ρ.naturality f
+    simp only [ρ, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      complexCounitNat_app] at hn
+    exact hn
+
+/-- K-flat representatives compute the finite target. -/
+private theorem completedReductionFiniteModelMap_isIso (n : ℕ)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := ProEt.topology Y) (R := pbcAdicCompletion Y d) P) :
+    IsIso (completedReductionFiniteModelMap.{u} g d n P) := by
+  have := pbcExtensionCounit_isIso.{u} (completedReductionProjection Y d n) P hP
+  unfold completedReductionFiniteModelMap pbcComplexCounit
+  infer_instance
+
 /-- The derived quotient transition, characterized by the universal K-flat comparisons.
 Source: blueprint transitions (blueprint: lemma-weil-pbc-completed-pullback-reduction).
 Proof: the ordinary quotient formula is natural on K-flat complexes and commutes
@@ -428,7 +526,30 @@ theorem completedReductionTargetTransition_exists (a b : ℕ) (h : a ≤ b) :
         completedReductionFiniteTarget g d a ⋙
           pbcDerivedRestrict (reductionCoefficientMap X d b a h),
       HasCompletedReductionTargetTransitionNormalization g d a b h τ := by
-  sorry
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+  let good := fun P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ ↦
+    CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := ProEt.topology Y) (R := pbcAdicCompletion Y d) P
+  have res (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
+      ∃ (V : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (v : V ⟶ P),
+        good V ∧ QuasiIso v := by
+    obtain ⟨V, v, hV, _, hv, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
+        (R := pbcAdicCompletion Y d) P
+    exact ⟨V, v, hV, hv⟩
+  unfold HasCompletedReductionTargetTransitionNormalization
+  exact completedReduction_descend_composite good res
+    (reductionChange Y (completedReductionProjection Y d b))
+    (completedReductionFiniteModules g d b)
+    (reductionChange Y (completedReductionProjection Y d a))
+    (completedReductionFiniteModules g d a)
+    (pbcRestrict (reductionCoefficientMap X d b a h))
+    (completedReductionFiniteTarget g d b) (completedReductionFiniteTarget g d a)
+    (pbcDerivedRestrict (reductionCoefficientMap X d b a h))
+    (completedReductionFiniteModelNat g d b) (completedReductionFiniteModelNat g d a)
+    (completedReductionRestrictionFactors X (reductionCoefficientMap X d b a h))
+    (fun P hP ↦ completedReductionFiniteModelMap_isIso g d a P hP)
+    (completedReductionOrdinaryTransition g d a b h)
 
 /-- The canonical derived transition before scalar-extension adjunction.
 Source: blueprint transitions (blueprint: lemma-weil-pbc-completed-pullback-reduction). -/
