@@ -20,9 +20,118 @@
   "def-weil-abstract-derived-category",
   "lem-weil-point-proetale-sections-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Compute the distinguished coprojection before sheafification. For every site object $T=(T\\xrightarrow t s)$, use [lem-weil-proetale-isomorphism-inverse-image] (1) to form the site object $B_T=(T\\xrightarrow{g\\circ t}s)$ and let $\\beta_T:T\\to u_g(B_T)$ have projections $(t,\\mathrm{id}_T)$. This is defined since both composites to the target $s$ are $g\\circ t$. For an index $(W,\\phi:T\\to u_g(W))$ of [def-weil-proetale-inverse-image], let $a:T\\to W$ be the second projection of $\\phi$. The fibre-product equation is $w\\circ a=g\\circ t$, so $a:B_T\\to W$ is a site morphism and $u_g(a)\\beta_T=\\phi$. Conversely that equality forces $a$ to be this projection. Thus $(B_T,\\beta_T)$ is initial in $\\mathcal I_T$, hence terminal in $\\mathcal I_T^{\\mathrm{op}}$. For any sheaf $F$, the restrictions $F(W)\\to F(B_T)$ form a colimit cocone: a cocone is determined by its component at this terminal index, and every other component is its composite with the restriction just displayed. Consequently the coprojection $F(B_T)\\to(u_{g,p}F)(T)$ is invertible, with inverse sending the coprojection of $x\\in F(W)$ to $F(a)(x)$. These formulas commute with maps of sheaves and with restrictions in $T$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u, preceding definition of the index category and colimit; explicit initial-index calculation for an isomorphism g (agent)."
+   }
+  },
+  {
+   "text": "The presheaf just computed is $T\\mapsto F(B_T)=F(\\Phi_gT)$. By [lem-weil-proetale-isomorphism-inverse-image] (1), $\\Phi_g$ is an equivalence preserving coverings in both directions. In particular it preserves the fibre products of a covering family, so the sheaf equalizer condition for this presheaf is exactly that for $F$ on the image covering; hence it is already a sheaf. Its sheafification map is therefore an isomorphism: by the universal property in [def-weil-pbc-sheafification], the identity map to this sheaf extends to an inverse, and uniqueness makes both composites identities. We have thus obtained the natural evaluation identification of that inverse-image lemma using the actual coprojections, with the distinguished coprojection equal to the identity in these coordinates. For $T=U$, $B_T=V$ and $\\beta_T=(\\mathrm{id},\\mathrm{id})$. Hence the map $\\sigma^g_M=\\operatorname{ins}_{g,M}\\operatorname{res}_g$ in the statement identifies precisely with the restriction $M(g):M(U)\\to M(V)$, not an unspecified isomorphism of those section modules.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; specialization to an isomorphism as stated in lem-weil-proetale-isomorphism-inverse-image (1), combined with Tag 00WH, sites-proposition-sheafification-adjoint."
+   }
+  },
+  {
+   "text": "At finite level write $A=A_{E,n}$. A constant section $b$ restricts to the same constant $b$ on $V$, since all restrictions of the constant presheaf are identities [def-weil-pbc-constant-sheaf]. The structure map is the adjoint of $\\rho_A^g:A_s\\to g_*A_s$ [def-weil-proetale-inverse-image]. The adjunction of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] is the colimit adjunction followed by sheafification. Explicitly, its adjoint at the coprojection indexed by $(W,\\phi:T\\to u_g(W))$ sends $x\\in A_s(W)$ to $A_s(\\phi)(\\rho_{A,W}^g(x))$: these maps are a cocone because restrictions commute with $\\rho_A^g$, and sheafification extends this cocone uniquely. For the distinguished index $(V,\\beta_U)$ and a constant $b$, $\\rho_{A,V}^g(b)$ is constant $b$ on $u_g(V)$ by its definition, and restriction along $\\beta_U$ is constant $b$ on $U$. Therefore $c_A\\sigma^g_{A_s}(b)=b$. Since $c_A$ is invertible by [lem-weil-proetale-isomorphism-inverse-image] (3), $\\sigma^g_{A_s}(b)=c_A^{-1}(b)$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u, explicit cocone in its proof; Tag 00WX, lemma-adjoint-sheaves; Tag 0H7J, example-constant-sheaf. The coefficient normalization calculation is agent-written."
+   }
+  },
+  {
+   "text": "For integral coefficients put $R=\\widehat{\\mathcal O}_{E,s}$ with projections $\\pi_m:R\\to(A_{E,m})_s$ [def-weil-completed-integral-coefficients]. For $b\\in\\mathcal O_E$, its constant section is the compatible family of constants $b_m=b\\bmod\\varpi_E^m$. Naturality of restriction and of the coprojections, proved above, gives $(G\\pi_m)\\sigma^g_R(b)=\\sigma^g_{(A_{E,m})_s}(b_m)$. The structure isomorphism of [def-weil-inverse-image-pullback-comparison] satisfies $\\pi_m c_{\\mathcal O_E}=c_{A_{E,m}}G\\pi_m$. Hence, by the finite-level calculation, $\\pi_m c_{\\mathcal O_E}\\sigma^g_R(b)=c_{A_{E,m}}\\sigma^g_{(A_{E,m})_s}(b_m)=b_m=\\pi_m(b)$ for every $m$. Sections of the limit are compatible families, so their projections are jointly injective [def-pur-sheaf-inverse-limit]. It follows that $c_{\\mathcal O_E}\\sigma^g_R(b)=b$, and invertibility of $c_{\\mathcal O_E}$ gives $\\sigma^g_R(b)=c_{\\mathcal O_E}^{-1}(b)$. This compares sections of the completed sheaf itself; no identification with the discrete constant sheaf $\\mathcal O_E$ is used.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CO, lemma-limits-colimits-abelian-sheaves (2), and 03DB, lemma-limits-colimits; the completed structure map is the one defined in def-weil-inverse-image-pullback-comparison."
+   }
+  },
+  {
+   "text": "For either coefficient sheaf $R=\\Lambda_s$, restriction in a sheaf of modules obeys $\\operatorname{res}_g(ax)=\\operatorname{res}_g(a)\\operatorname{res}_g(x)$ [def-weil-sheaf-of-modules-category]. The inverse image carries the action map $R\\times M\\to M$ to $GR\\times GM\\to GM$ using its finite-product comparison [def-weil-proetale-inverse-image]. In the evaluation coordinates computed in steps 1-2 these are precisely the original ring and module operations on $R(V)$ and $M(V)$: apply naturality of those coordinates to the action, addition and zero maps; the product comparison is coordinatewise. Thus $\\operatorname{ins}_{g,M}(a_Vx_V)=\\operatorname{ins}_{g,R}(a_V)\\operatorname{ins}_{g,M}(x_V)$. Combining the two displayed identities yields $\\sigma^g_M(ax)=\\sigma^g_R(a)\\sigma^g_M(x)$. For a constant $a=b\\in\\Lambda$, steps 3-4 identify $\\sigma^g_R(b)$ with $c_\\Lambda^{-1}(b)$. The target's $\\Lambda_s$-action is exactly multiplication by $c_\\Lambda^{-1}$ [def-weil-inverse-image-pullback-comparison]. Therefore this semilinearity identity is $\\Lambda$-linearity for the actions in the statement. Additivity follows in the same coordinates from additivity of restriction and of the inverse-image coprojection.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 06UM, section-pullback (pullback of sections); proetale.tex Tag 09A5, section-morphism. Explicit action-map calculation from the cited definitions (agent)."
+   }
+  },
+  {
+   "text": "Let $f:M\\to M'$ be a module-sheaf morphism. Its presheaf naturality gives $f_V\\operatorname{res}_g=\\operatorname{res}_g f_U$, and functoriality of the colimit and sheafification gives $(Gf)_U\\operatorname{ins}_{g,M}=\\operatorname{ins}_{g,M'}f_V$ [def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category]. Multiplication of these equations gives $(Gf)_U\\sigma^g_M=\\sigma^g_{M'}f_U$. Apply this first to each differential $d^i:N^i\\to N^{i+1}$. The resulting identity says that the maps $\\sigma^g_{N^i}$ are a chain map between the two termwise section complexes [def-weil-abstract-derived-category]; step 5 gives its $\\Lambda$-linearity in every degree. Apply the same identity to each component of any chain map $N\\to N'$ to obtain naturality on complexes. The argument is degreewise for every $i\\in\\mathbf Z$, so it applies to unbounded complexes.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u (bifunctorial colimit adjunction), and Tag 06UM, section-pullback; derived.tex Tag 05RU, definition-derived-category. Explicit degreewise naturality calculation (agent)."
+   }
+  },
+  {
+   "text": "By [lem-weil-point-proetale-sections-exact], sections at $s=\\operatorname{Spec}k$ are exact on modules over every ring sheaf, preserve quasi-isomorphisms termwise and induce the stated functor on the entire unbounded derived category; its field hypothesis holds since $k$ in the item is algebraically closed. Regarding these section modules as $\\Lambda$-modules through constant sections changes neither kernels nor images, so it also preserves quasi-isomorphisms with values in $D(\\Lambda)$. The transported module inverse image $G$ is exact and preserves quasi-isomorphisms also for completed coefficients, as stated in [def-weil-inverse-image-pullback-comparison]. Let $Q_s$ and $Q_\\Lambda$ be the localization functors of [def-weil-abstract-derived-category]. Thus both complex functors $F=Q_\\Lambda\\Gamma(s,-)$ and $H=Q_\\Lambda\\Gamma(s,G(-))$ invert all quasi-isomorphisms. Step 6 gives a natural transformation $F\\to H$. Apply [lem-weil-pbc-localization-universal-property] (2) to $L=Q_s$, $W$ the quasi-isomorphisms and target category $D(\\Lambda)$: this transformation descends uniquely to the two indicated derived functors with components the classes of $\\sigma^g_N$. Its naturality for every derived morphism $v:N\\to N'$ is exactly $\\Gamma(s,Gv)\\sigma^g_N=\\sigma^g_{N'}\\Gamma(s,v)$. The cited localization statement imposes no boundedness, constructibility or completeness assumption, and neither do the two exact functors used here.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation clause given by Mathlib CategoryTheory.Localization.liftNatTrans, Predicate.lean:326-337, as recorded by lem-weil-pbc-localization-universal-property. derived.tex Tag 05RU, definition-derived-category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "The first transport arrows in the ordinary and compactly supported cohomology composites. Explicit restriction/coprojection and completed coefficient calculation using the cited Stacks constructions; Deligne (1.1.7) supplies the transport-of-structure motivation, not this ambient pro-etale statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +160,38 @@
    "results": "CategoryTheory.Sheaf.natTransΓRes; PresheafOfModules.restriction_app; CategoryTheory.Sheaf.natTransΓRes_app; PresheafOfModules.restrictScalarsObj; groupCohomology.resNatTrans; ModuleCat.restrictScalars; PresheafOfModules.restrictScalars; ModuleCat.RestrictScalars.obj'",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary presheaf restriction or abstract underived point fibers, not the distinguished pro-etale coprojection, its completed coefficient normalization, and the unbounded derived transformation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of global sections for an automorphism of a pro etale geometric point is natural for arbitrary derived morphisms and preserves constant completed coefficient scalars",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; AlgebraicGeometry.Scheme.Γevaluation_naturality; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc; AlgebraicGeometry.Scheme.evaluation_naturality_assoc; AlgebraicGeometry.Scheme.evaluation_naturality_apply; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; CategoryTheory.PreGaloisCategory.AutGalois.π_apply; 8 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scheme evaluation, global-section restriction or abstract point-fiber comparison supplies ingredients only; none identifies the distinguished pro-etale coprojection with its finite/completed coefficient normalization and ambient derived transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "natTransΓRes|sheafFiberComapIso|completed.*[Nn]atural",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; 3 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scheme evaluation, global-section restriction or abstract point-fiber comparison supplies ingredients only; none identifies the distinguished pro-etale coprojection with its finite/completed coefficient normalization and ambient derived transformation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme automorphism induces linear natural restriction maps on pro etale global sections with completed integral coefficients and on unbounded derived categories",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; CategoryTheory.Sheaf.natTransΓRes_app; ModuleCat.Tilde.toOpen; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.Scheme.Opens.ι_app; AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; AlgebraicGeometry.Scheme.Γ_def; 8 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scheme evaluation, global-section restriction or abstract point-fiber comparison supplies ingredients only; none identifies the distinguished pro-etale coprojection with its finite/completed coefficient normalization and ambient derived transformation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"natTransΓRes\"",
+   "results": "CategoryTheory.Sheaf.natTransΓRes; CategoryTheory.Sheaf.natTransΓRes_app; 2 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary scheme evaluation, global-section restriction or abstract point-fiber comparison supplies ingredients only; none identifies the distinguished pro-etale coprojection with its finite/completed coefficient normalization and ambient derived transformation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-frobenius-point-transport-natural",
@@ -75,5 +212,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-point-automorphism-restriction-natural",
+  "worker": "stage1",
+  "summary": "Q91 preserves the complete statement and all original searches. Seven explicit steps compute the distinguished inverse-image coprojection, check finite and completed coefficient scalars, establish module and complex naturality, and use the existing localization-universal-property leaf for all derived morphisms. No new nodes, no Lean changes. Every cited statement was read and its used clause quoted in citations.json.",
+  "blueprint": "The first transport arrows in both composites of def-weil-global-geometric-frobenius (main-20261015, order 2405); through the existing from.via chain this proves precisely restriction/coprojection naturality and coefficient normalization at the geometric point, not the separate completed pullback comparison. Whole-blueprint searches for restriction transport, automorphism restriction and point transport found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site-equivalence evaluation and finite coefficient structure isomorphism for any scheme isomorphism; the unit contains no substitute for these point-transport calculations."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exactness of evaluation at an algebraically closed point, needed to descend the degreewise sections functors on arbitrary unbounded complexes."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Generic colimit/sheafification adjunction identifies the actual coefficient structure map on the distinguished coprojection; this is not a replacement of a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-23e6342ea",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-23e6342ea (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, and the statement of every node it cites. The statement and its 11 stmt_deps are unchanged and there are no new nodes. The live and side-live copies are still unsplit, so nothing supersedes it; there is no cycle (the item is not in the closure of its deps) and no SGA citation. Steps 1-2: I_T has the initial index (B_T=(T,g∘t), β_T=(t,id)) and the unique arrow is the second projection. The presheaf F∘Φ_g is a sheaf because Φ_g is a covering-preserving equivalence (lem-weil-proetale-isomorphism-inverse-image (1)); the inverse to sheafification follows from the universal property. So σ is restriction along g:V→U. Step 3: c_A=ε∘G(ρ) with the explicit 00VE counit, which I checked at sites.tex lines 594-607; this gives c_Aσ(b)=b, and lemma (3) gives invertibility. Step 4 uses π_m c_O = c_{A_m}G(π_m) and invertibility from def-weil-inverse-image-pullback-comparison, plus sectionwise limits from def-pur-sheaf-inverse-limit; the completed sheaf is used throughout, not a discrete constant sheaf. Steps 5-6 are elementary semilinearity, chain-map and naturality computations, degreewise for unbounded complexes. Step 7: sections are exact at an algebraically closed k, G is exact on transported completed modules (comparison definition), and the transformation descends by localization-universal-property leaf clause (2). Hypotheses check out: ℓ≠p makes ℓ invertible on s, k is algebraically closed, and nothing assumes g fixes k_0. I accept the three declared tool_uses (two generic sk-def-sf-admissible lemmas and one Mathlib adjunction leaf). The citer lem-weil-frobenius-point-transport-natural uses the item for its clause 1 unchanged. Advisory, not a fault: the statement attributes 'the natural evaluation identification' to the iso lemma, whose statement only asserts that some natural iso exists; step 2 constructs the explicit one."
  }
 }
