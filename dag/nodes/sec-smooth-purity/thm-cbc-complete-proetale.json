@@ -28,12 +28,13 @@
  ],
  "proof": [
   {
-   "text": "Fix $c$ and its base change. The localized-site identification supplies the ringed-site extension functor for $A_{\\overline X}$. Restriction to the open site is evaluation on objects lying over $X$, so it commutes with limits and identifies $A_{\\overline X}|_X=\\varprojlim_n(P_n)_X=A_X$. The localized module lemma gives exactness and the adjunction for these actual sheaves of rings; we do not apply the finite-constant-coefficient extension lemma to $A_{\\overline X}$. All four operations below consequently have the completed-coefficient types written in the statement.",
+   "text": "Fix $c$ and its base change. The localized-site identification supplies the ringed-site extension functor for $A_{\\overline X}$. Restriction to the open site is evaluation on objects lying over $X$, so it commutes with limits and identifies $A_{\\overline X}|_X=\\varprojlim_n(P_n)_X=A_X$. The localized module lemma gives exactness and the adjunction for these actual sheaves of rings; we do not apply the finite-constant-coefficient extension lemma to $A_{\\overline X}$. All four operations below consequently have the completed-coefficient types written in the statement. For the section-normalized restriction comparison, first check the coefficient counit and unit equations on finite constant sections using [lem-cbc-completed-extension-zero-comparison]; pass to the completed coefficients by joint monicity of the finite projections. These equations construct restriction left adjoint to the specified direct image. Uniqueness of left adjoints identifies its unit transpose with the recorded pullback-to-restriction isomorphism. For the derived open unit, specialize the Cartesian open comparison of step 5 to the self-pullback square of the open immersion. Identity pullback is an equivalence, so transposition preserves invertibility and whiskering by identity pullback reflects it.",
    "uses": [
     "def-cbc-compact-support-square",
     "lem-weil-proetale-weakly-etale-localization",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-cbc-completed-extension-zero-comparison"
    ],
    "elementary": false,
    "source": {
@@ -211,7 +212,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
-  "place": "Proof, expanded; literature/stacks-project/proetale.tex Tags 09BP, 099M, 099N, 09C9 and sites-cohomology.tex Tag 07A7 provide the cited interfaces"
+  "place": "Proof, expanded; literature/stacks-project/proetale.tex Tags 09BP, 099M, 099N, 09C9 and sites-cohomology.tex Tag 07A7 provide the cited interfaces; stage-3 A5 supplies the finite-projection coefficient unit/counit calculation in step 1 and derives the open unit from the existing self-base-change comparison of step 5"
  },
  "mathlib_searches": [
   {
@@ -438,5 +439,15 @@
   "group": "Q45",
   "result": "pass",
   "note": "Read the node (statement, 8 proof steps, deps), the immutable module (35 declarations) and the report (real Worker report and Second reading by Q45 sections). Only the node's lean field changed; lean.statement is verbatim. Clauses: completedCompactSupportExchange is exactly proper exchange then pushed open comparison, iso and natural; identity, horizontal, compactification comparisons/cocycle, refinement C'_u e^{c2}=e^{c1}G_g C_u, vertical e^{hf}=(Rh'_!e^f)(e^h Rf_!) and composition-refinement C_hf D2=D1(C_h)(F_h2 C_f) all match proof steps 7-8 in direction and order. Hypotheses no stronger: f is separated+LOFT+QC, nothing on g, IsProper p derivable, completeness witnesses are conclusions; ChosenCartesianSquare data is unique. Edge cases r=0, empty schemes, identity arrows covered; universes t+1/t as in the recorded datum. No hollow definitions (cbcRestrictionUnit chosen from an exists-unique, inverses from postponed IsIso), all 13 theorems sorry with docstring proofs, no duplicate notion found. nt_compile: as is, fails only in dependency ProEtaleFiniteModules (stale live .olean duplicate import, known environment fault also in the Q67 review); with that import dropped in a /tmp copy, rc 0, no errors or warnings, delivered module 6.0 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T100716-L-4115285",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
