@@ -12,14 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Sheaf.AlgebraicGeometry.FiniteTypeNoetherianSpectrum
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.ExactOpenClosedUnboundedCalculus
-import Sheaf.CategoryTheory.ExactDerivedComposition
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.CondensedOpenClosedRecollement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Bounded integral base change for a stratum extension
 
@@ -127,10 +125,229 @@ def closedMate [PreservesFiniteColimits (CondensedRing.lowerStar Λ a)]
     (closedAdjunction Λ a')
     (pullbackSquare Λ sq).symm
 
+private instance pullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (pullback Λ f).Additive :=
+  inferInstanceAs (CondensedRing.upperStar Λ f).mapDerivedCategory.Additive
+
 end Maps
+
+private theorem open_unit_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : IsIso (openAdjunction Λ j).unit := by
+  have : IsIso (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful _
+  exact Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
+
+private theorem cartesian_module_counit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {U X Up Xp : Scheme.{u}}
+    {j : U ⟶ X} {g : Xp ⟶ X} {jp : Up ⟶ Xp} {gp : Up ⟶ U}
+    [IsOpenImmersion j] [IsOpenImmersion jp] (sq : IsPullback gp jp j g)
+    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) :
+    IsIso ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ jp).counit.app
+      ((CondensedRing.upperStar Λ g).obj
+        ((CondensedRing.openImmersionLowerShriek Λ j).obj M))) := by
+  let e := (profinitePointModuleForgetPullbackIso Λ g).app
+      ((CondensedRing.openImmersionLowerShriek Λ j).obj M) ≪≫
+    ((ProEtale.openImmersionLowerShriekBaseChangeIso Ab.{u + 1} sq).app M.X).symm
+  apply (Adjunction.isIso_counit_app_iff_mem_essImage _).2
+  apply CondensedRing.mem_essImage_openImmersionLowerShriek_of_mem_essImage Λ jp
+  exact ⟨_, ⟨e.symm⟩⟩
+
+private theorem cartesian_derived_counit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {U X Up Xp : Scheme.{u}}
+    {j : U ⟶ X} {g : Xp ⟶ X} {jp : Up ⟶ Xp} {gp : Up ⟶ U}
+    [IsOpenImmersion j] [IsOpenImmersion jp] (sq : IsPullback gp jp j g)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) :
+    IsIso ((openAdjunction Λ jp).counit.app
+      ((pullback Λ g).obj ((openExtension Λ j).obj K))) := by
+  let F := CondensedRing.openImmersionLowerShriek Λ j ⋙ CondensedRing.upperStar Λ g
+  let L := CondensedRing.openImmersionLowerShriek Λ jp
+  let R := CondensedRing.upperStar Λ jp
+  let adj := CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ jp
+  have : IsIso adj.unit := Adjunction.unit_isIso_of_L_fully_faithful _
+  have ff := adj.mapDerivedCategoryAdjunction.fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  let α : F ⋙ (R ⋙ L) ⟶ F :=
+    Functor.whiskerLeft F adj.counit ≫ (Functor.rightUnitor F).hom
+  have hαapp (M) : IsIso (α.app M) := by
+    have : IsIso (adj.counit.app (F.obj M)) := cartesian_module_counit Λ sq M
+    dsimp only [α, NatTrans.comp_app, Functor.whiskerLeft_app]
+    infer_instance
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  let e : F.mapDerivedCategory ⋙ (R.mapDerivedCategory ⋙ L.mapDerivedCategory) ≅
+      F.mapDerivedCategory :=
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso R L).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F (R ⋙ L)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso α)
+  have hc := adj.mapDerivedCategoryAdjunction.isIso_counit_app_of_iso (e.app K).symm
+  exact (NatTrans.isIso_app_iff_of_iso adj.mapDerivedCategoryAdjunction.counit
+    ((Functor.mapDerivedCategoryCompIso _ _).symm.app K)).2 hc
+
+private theorem open_mate_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {U X Up Xp : Scheme.{u}}
+    {j : U ⟶ X} {g : Xp ⟶ X} {jp : Up ⟶ Xp} {gp : Up ⟶ U}
+    [IsOpenImmersion j] [IsOpenImmersion jp] (sq : IsPullback gp jp j g) :
+    IsIso (openMate Λ sq.toCommSq) := by
+  have := open_unit_iso Λ j
+  have h (K) : IsIso ((openMate Λ sq.toCommSq).app K) := by
+    have := cartesian_derived_counit Λ sq K
+    simp only [openMate, Adjunction.exchangeLeft_app]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+private theorem closed_data
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ) :
+    PreservesFiniteColimits (CondensedRing.lowerStar Λ i) ∧
+      IsIso (CondensedRing.upperStarLowerStarAdjunction Λ i).counit := by
+  obtain ⟨hc, hs⟩ := CondensedRing.condensed_open_closed_recollement Λ i j hij
+  have := hs.2.2.2.2.2.2.2.2.2.1
+  have := hs.2.2.2.2.2.2.2.2.2.2.1
+  exact ⟨hc, Adjunction.counit_isIso_of_R_fully_faithful _⟩
+
+private theorem mixed_closed_zero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsOpenImmersion j]
+    [PreservesFiniteColimits (CondensedRing.lowerStar Λ i)]
+    (hij : Disjoint (Set.range j) (Set.range i))
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    IsZero ((pullback Λ j).obj ((closedDirectImage Λ i).obj K)) := by
+  apply (CondensedRing.upperStar Λ j).isZero_mapDerivedCategory_obj
+  intro n
+  let M := (DerivedCategory.homologyFunctor _ n).obj K
+  have hz (N) : IsZero ((CondensedRing.upperStar Λ j).obj
+      ((CondensedRing.lowerStar Λ i).obj N)) := by
+    apply (IsZero.iff_id_eq_zero _).2
+    apply ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv
+      _ _).symm.injective
+    apply ((CondensedRing.upperStarLowerStarAdjunction Λ i).homEquiv _ _).symm.injective
+    exact (CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint
+      Λ j i hij _).eq_of_src _ _
+  exact (hz M).of_iso ((CondensedRing.upperStar Λ j).mapIso
+    (((CondensedRing.lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n).symm.app K))
+
+private theorem open_mate_unit
+    {A B Ap Bp : Type*} [Category A] [Category B] [Category Ap] [Category Bp]
+    {J : A ⥤ B} {P : B ⥤ A} {Jp : Ap ⥤ Bp} {Pp : Bp ⥤ Ap}
+    {H : A ⥤ Ap} {G : B ⥤ Bp} (a : J ⊣ P) (ap : Jp ⊣ Pp)
+    (θ : P ⋙ H ≅ G ⋙ Pp) (K : A) :
+    ap.unit.app (H.obj K) ≫ Pp.map ((Adjunction.exchangeLeft a ap θ).app K) =
+      H.map (a.unit.app K) ≫ θ.hom.app (J.obj K) := by
+  simpa only [Adjunction.exchangeLeft_app, Adjunction.homEquiv_unit,
+    Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc, Functor.id_obj] using
+    (ap.homEquiv _ _).apply_symm_apply
+      (H.map (a.unit.app K) ≫ θ.hom.app (J.obj K))
+
+private theorem closed_mate_counit
+    {A B Ap Bp : Type*} [Category A] [Category B] [Category Ap] [Category Bp]
+    {Q : B ⥤ A} {I : A ⥤ B} {Qp : Bp ⥤ Ap} {Ip : Ap ⥤ Bp}
+    {H : A ⥤ Ap} {G : B ⥤ Bp} (a : Q ⊣ I) (ap : Qp ⊣ Ip)
+    (θ : G ⋙ Qp ≅ Q ⋙ H) (K : A) :
+    Qp.map ((Adjunction.exchangeRight a ap θ).app K) ≫ ap.counit.app (H.obj K) =
+      θ.hom.app (I.obj K) ≫ H.map (a.counit.app K) := by
+  simpa only [Adjunction.exchangeRight_app, Adjunction.homEquiv_unit,
+    Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc, Functor.id_obj] using
+    (ap.homEquiv _ _).symm_apply_apply
+      (θ.hom.app (I.obj K) ≫ H.map (a.counit.app K))
+
+private theorem closed_mate_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {U Z X Up Zp Xp : Scheme.{u}}
+    {j : U ⟶ X} {i : Z ⟶ X} {jp : Up ⟶ Xp} {ip : Zp ⟶ Xp}
+    {g : Xp ⟶ X} {gp : Up ⟶ U} {gz : Zp ⟶ Z}
+    [IsOpenImmersion j] [IsClosedImmersion i] [QuasiCompact j]
+    [IsOpenImmersion jp] [IsClosedImmersion ip] [QuasiCompact jp]
+    [PreservesFiniteColimits (CondensedRing.lowerStar Λ i)]
+    [PreservesFiniteColimits (CondensedRing.lowerStar Λ ip)]
+    (hij : Set.range j = (Set.range i)ᶜ)
+    (hijp : Set.range jp = (Set.range ip)ᶜ)
+    (squ : CommSq gp jp j g) (sqz : CommSq gz ip i g)
+    (hc : IsIso (closedAdjunction Λ i).counit)
+    (hcp : IsIso (closedAdjunction Λ ip).counit) :
+    IsIso (closedMate Λ sqz) := by
+  have hd := Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory
+    (CondensedRing.upperStar Λ jp) (CondensedRing.upperStar Λ ip)
+    (CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl Λ ip jp
+      (by rw [hijp]; exact (isCompl_compl (x := Set.range ip))))
+  have h (K) : IsIso ((closedMate Λ sqz).app K) := by
+    have hz₁ : IsZero ((pullback Λ jp).obj
+        (((closedDirectImage Λ i) ⋙ (pullback Λ g)).obj K)) :=
+      ((pullback Λ gp).map_isZero
+        (mixed_closed_zero Λ i j (by rw [hij]; exact disjoint_compl_left) K)).of_iso
+          ((pullbackSquare Λ squ).symm.app ((closedDirectImage Λ i).obj K))
+    have hz₂ := mixed_closed_zero Λ ip jp
+      (by rw [hijp]; exact disjoint_compl_left) ((pullback Λ gz).obj K)
+    apply hd.isIso_of_pairFunctor _
+    · exact isIso_of_source_target_iso_zero _ hz₁.isoZero hz₂.isoZero
+    · have he := closed_mate_counit (closedAdjunction Λ i)
+        (closedAdjunction Λ ip) (pullbackSquare Λ sqz).symm K
+      have hcomp : IsIso ((pullback Λ ip).map ((closedMate Λ sqz).app K) ≫
+          (closedAdjunction Λ ip).counit.app ((pullback Λ gz).obj K)) := by
+        change IsIso ((pullback Λ ip).map
+          ((Adjunction.exchangeRight _ _ _).app K) ≫ _)
+        rw [he]
+        infer_instance
+      have : IsIso ((closedAdjunction Λ ip).counit.app ((pullback Λ gz).obj K)) :=
+        inferInstance
+      change IsIso ((pullback Λ ip).map ((closedMate Λ sqz).app K))
+      let := hcomp
+      exact IsIso.of_isIso_comp_right
+        ((pullback Λ ip).map ((closedMate Λ sqz).app K))
+        ((closedAdjunction Λ ip).counit.app ((pullback Λ gz).obj K))
+  exact NatIso.isIso_of_isIso_app _
+
+private theorem complementary_base_change
+    {U Z X Up Zp Xp : Scheme.{u}}
+    {j : U ⟶ X} {i : Z ⟶ X} {jp : Up ⟶ Xp} {ip : Zp ⟶ Xp}
+    {g : Xp ⟶ X} {gp : Up ⟶ U} {gz : Zp ⟶ Z}
+    (hij : Set.range j = (Set.range i)ᶜ)
+    (squ : IsPullback gp jp j g) (sqz : IsPullback gz ip i g) :
+    Set.range jp = (Set.range ip)ᶜ := by
+  have hu := Scheme.image_preimage_eq_of_isPullback squ Set.univ
+  have hz := Scheme.image_preimage_eq_of_isPullback sqz Set.univ
+  simp only [Set.preimage_univ, Set.image_univ] at hu hz
+  rw [hu, hz, hij, Set.preimage_compl]
+
+private theorem closed_square_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {Z X Zp Xp : Scheme.{u}}
+    {i : Z ⟶ X} {ip : Zp ⟶ Xp} {g : Xp ⟶ X} {gz : Zp ⟶ Z}
+    [IsClosedImmersion i] [IsClosedImmersion ip]
+    [IsLocallyNoetherian X] [IsLocallyNoetherian Xp]
+    (sq : IsPullback gz ip i g) :
+    Exists fun [_hi : PreservesFiniteColimits (CondensedRing.lowerStar Λ i)] ↦
+    Exists fun [_hip : PreservesFiniteColimits (CondensedRing.lowerStar Λ ip)] ↦
+      IsIso (closedMate Λ sq.toCommSq) := by
+  let U : X.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  let j := U.ι
+  let jp := CategoryTheory.Limits.pullback.snd j g
+  let gp := CategoryTheory.Limits.pullback.fst j g
+  have hu : Set.range j = (Set.range i)ᶜ := U.range_ι
+  have squ : IsPullback gp jp j g := IsPullback.of_hasPullback j g
+  have hup := complementary_base_change hu squ sq
+  obtain ⟨hi, hc⟩ := closed_data Λ i j hu
+  obtain ⟨hip, hcp⟩ := closed_data Λ ip jp hup
+  have hdc : IsIso (closedAdjunction Λ i).counit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
+  have hdcp : IsIso (closedAdjunction Λ ip).counit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
+  exact ⟨hi, hip, closed_mate_iso Λ hu hup squ.toCommSq sq.toCommSq hdc hdcp⟩
 
 open CondensedRing (integralCoefficientRing)
 
+set_option maxHeartbeats 1600000 in
+-- The large conjunction elaborates several exactness witnesses and derived functor instances.
 /-- The canonical open and closed mates are natural isomorphisms on all bounded inputs,
 with identity restrictions on their own stratum and zero restrictions on its complement.
 The existential exactness witnesses supply the termwise closed derived functors.
@@ -272,7 +489,58 @@ theorem integral_bounded_open_closed_base_change
             ((closedMate
             (integralCoefficientRing l
             E) sqZ.toCommSq).app N.obj) = 0) := by
-  sorry
+  let Λ := integralCoefficientRing l E
+  have : QuasiCompact j.left := by
+    have : QuasiCompact (j.left ≫ T.hom) := by rw [Over.w j]; infer_instance
+    exact QuasiCompact.of_comp j.left T.hom
+  have : QuasiCompact jp.left := by
+    have : QuasiCompact (jp.left ≫ Tp.hom) := by rw [Over.w jp]; infer_instance
+    exact QuasiCompact.of_comp jp.left Tp.hom
+  have hcomp' := complementary_base_change hcomp sqU sqZ
+  obtain ⟨hi, hci⟩ := closed_data Λ i.left j.left hcomp
+  obtain ⟨hip, hcip⟩ := closed_data Λ ip.left jp.left hcomp'
+  have hdi : IsIso (closedAdjunction Λ i.left).counit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
+  have hdip : IsIso (closedAdjunction Λ ip.left).counit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_counit _
+  have hβ := open_mate_iso Λ sqU
+  have hγ := closed_mate_iso Λ hcomp hcomp' sqU.toCommSq sqZ.toCommSq hdi hdip
+  refine ⟨hi, hip, ⟨Functor.isoWhiskerLeft _ (asIso (openMate Λ sqU.toCommSq)), rfl⟩,
+    ⟨Functor.isoWhiskerLeft _ (asIso (closedMate Λ sqZ.toCommSq)), rfl⟩, ?_, ?_⟩
+  · intro N
+    have hu := open_unit_iso Λ j.left
+    have hup := open_unit_iso Λ jp.left
+    have hz₁ := (CondensedRing.isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint
+      Λ jp.left ip.left (by rw [hcomp']; exact disjoint_compl_left)
+      ((pullback Λ hU.left).obj N.obj)).of_iso
+        ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ ip.left).app _).symm
+    have hz₂ := ((pullback Λ hZ.left).map_isZero
+      ((CondensedRing.isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint
+        Λ j.left i.left (by rw [hcomp]; exact disjoint_compl_left) N.obj).of_iso
+          ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ i.left).app _).symm)).of_iso
+            ((pullbackSquare Λ sqZ.toCommSq).symm.app
+              ((openExtension Λ j.left).obj N.obj))
+    refine ⟨(CondensedRing.openImmersionLowerShriek Λ jp.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.upperStar Λ hU.left).bounded_mapDerivedCategory_obj N.property),
+      (CondensedRing.upperStar Λ h.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.openImmersionLowerShriek Λ j.left).bounded_mapDerivedCategory_obj
+          N.property), inferInstance, inferInstance, ?_, hz₁, hz₂, hz₁.eq_of_src _ _⟩
+    exact open_mate_unit _ _ _ _
+  · intro N
+    have hz₁ := ((pullback Λ hU.left).map_isZero
+      (mixed_closed_zero Λ i.left j.left
+        (by rw [hcomp]; exact disjoint_compl_left) N.obj)).of_iso
+          ((pullbackSquare Λ sqU.toCommSq).symm.app
+            ((closedDirectImage Λ i.left).obj N.obj))
+    have hz₂ := mixed_closed_zero Λ ip.left jp.left
+      (by rw [hcomp']; exact disjoint_compl_left) ((pullback Λ hZ.left).obj N.obj)
+    refine ⟨(CondensedRing.upperStar Λ h.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.lowerStar Λ i.left).bounded_mapDerivedCategory_obj N.property),
+      (CondensedRing.lowerStar Λ ip.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.upperStar Λ hZ.left).bounded_mapDerivedCategory_obj N.property),
+      inferInstance, inferInstance, ?_, hz₁, hz₂, hz₁.eq_of_src _ _⟩
+    exact closed_mate_counit _ _ _ _
+
 
 /-- Locally closed base change is the composite of the open beta and the inverse closed
 gamma, with a fixed open--closed factorization. The displayed equation specifies that
@@ -340,6 +608,31 @@ theorem integral_bounded_locally_closed_base_change
             ((openMate
             (integralCoefficientRing l
             E) sqU.toCommSq).app M.obj) := by
-  sorry
+  let Λ := integralCoefficientRing l E
+  have : IsLocallyNoetherian T.left := LocallyOfFiniteType.isLocallyNoetherian T.hom
+  have : IsLocallyNoetherian Tp.left := LocallyOfFiniteType.isLocallyNoetherian Tp.hom
+  obtain ⟨hi, hip, hγ⟩ := closed_square_iso Λ sqI
+  have hβ := open_mate_iso Λ sqU
+  let β := asIso (openMate Λ sqU.toCommSq)
+  let γ := asIso (closedMate Λ sqI.toCommSq)
+  let e₀ :
+      (pullback Λ hS.left) ⋙ (openExtension Λ up.left) ⋙ (closedDirectImage Λ ip.left) ≅
+        (openExtension Λ u₀.left) ⋙ (closedDirectImage Λ i.left) ⋙ (pullback Λ h.left) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight β _ ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ γ.symm
+  refine ⟨hi, hip, Functor.isoWhiskerLeft DerivedCategory.Bounded.ι e₀, ?_⟩
+  intro M
+  refine ⟨(CondensedRing.lowerStar Λ ip.left).bounded_mapDerivedCategory_obj
+      ((CondensedRing.openImmersionLowerShriek Λ up.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.upperStar Λ hS.left).bounded_mapDerivedCategory_obj M.property)),
+    (CondensedRing.upperStar Λ h.left).bounded_mapDerivedCategory_obj
+      ((CondensedRing.lowerStar Λ i.left).bounded_mapDerivedCategory_obj
+        ((CondensedRing.openImmersionLowerShriek Λ u₀.left).bounded_mapDerivedCategory_obj
+          M.property)), ?_⟩
+  dsimp [e₀, β, γ, Λ]
+  simp only [Category.id_comp]
+  simp only [NatIso.isIso_inv_app, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+
 
 end AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange

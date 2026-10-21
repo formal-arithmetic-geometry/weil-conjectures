@@ -22979,3 +22979,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:49 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 15:50 L: merged deliver/NN/lem-sf-cbc-localized-strict-tensor-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 15:51 L: merged deliver/D7/Sheaf.Paper.CompletedOpenStrictMateIdentification (stage 3; reviewer PASS; first push; landing 20261021T155058-L-3250489 (proof); batch 20261021T155055; modules 1; new nodes 0)
+- 15:51 L: merged deliver/Y3/Sheaf.Paper.IntegralBoundedStratumBaseChange (stage 3; reviewer PASS; first push; landing 20261021T155101-L-3251851 (proof); batch 20261021T155055; modules 1; new nodes 0)
