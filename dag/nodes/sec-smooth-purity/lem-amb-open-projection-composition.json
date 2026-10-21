@@ -1,0 +1,137 @@
+{
+ "id": "lem-amb-open-projection-composition",
+ "kind": "statement",
+ "title": "Composition of the canonical derived open tensor isomorphisms",
+ "statement": "Let B be a Grothendieck abelian symmetric monoidal closed coefficient category with monoidal preadditivity and functorial flat resolutions, whose etale inverse images preserve flat objects; assume the concrete sheaf-composition hypotheses of the existing open projection API. On the ordinary unbounded derived categories [def-weil-pbc-derived-categories], let j:X→Y and b:Y→Z be open immersions, let a:X→Z be open and h:j≫b=a. Write J_j=D(j!), J_b=D(b!), J_a=D(a!), T_X and T_Z for derived tensor [def-kun-derived-tensor], and E:J_j⋙J_b≅J_a for the specified derived open compositor [lem-cbc-extension-zero-composition]. Write gamma for the inverse canonical open projection isomorphism [lem-pur-etale-open-derived-tensor], and c:L(a*)≅L(b*)⋙L(j*) for the canonical pullback compositor. For arbitrary M in D(X,B), N in D(Z,B), the actual arrows satisfy (E_M tensor 1_N)≫gamma_a(M,N)≫J_a(1_M tensor c_N)=gamma_b(J_j M,N)≫J_b(gamma_j(M,L(b*)N))≫E_(M tensor L(j*)L(b*)N). No boundedness or Tor-amplitude hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I; composition normalization in more-etale.tex Tag 0F7J."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "For adjunctions F adjoint R and G adjoint S, transpose the projection map for their composite. Composition of units and naturality of the tensor comparison give G of the first projection followed by the second projection. This is a formal equality of arrows; no projection is inverted in this step.",
+   "uses": [
+    "lem-asd-adjunction-projection-map-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the unit of the derived open extension along the composite with the composite of the two units through the specified open and pullback compositors. At the sheaf level this is the unit equation for the canonical comparison of left adjoints. Descend the equation through the exact functors to complexes, homotopy categories, and their localization.",
+   "uses": [
+    "lem-cbc-extension-zero-composition",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pullback tensor comparisons respect composition. Transport this equation through the canonical isomorphisms from left derived pullback to termwise exact pullback, using their naturality. Hence the tensor comparison for the composite is the composite comparison through the same pullback compositor. Apply projectionMap_mate with identity horizontal functors to the unit equation and this tensor equation.",
+   "uses": [
+    "lem-asd-adjunction-projection-map-mate",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The resulting equality is the composition formula for the forward open projection isomorphisms. Invert it; inverses reverse composites and commute with functor maps. The inverse of tensor applied to the compositor is tensor applied to its inverse. Transport along j followed by b equals a to obtain the displayed inverse projection formula.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-adjunction-projection-map-mate",
+  "lem-cbc-extension-zero-composition",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I; composition normalization in more-etale.tex Tag 0F7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionMapOfCompactification.*comp",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No existing composite derived open projection formula; use the proved source-library adjunction and pullback APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedOpenImmersionLowerShriekProjectionIso",
+   "results": "0 hits: ; loogle: unknown identifier 'derivedOpenImmersionLowerShriekProjectionIso'",
+   "date": "2026-10-21",
+   "verdict": "No existing composite derived open projection formula; use the proved source-library adjunction and pullback APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition compatibility of the projection formula for extension by zero along two open immersions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac_assoc, AlgebraicGeometry.IsOpenImmersion.comp_lift_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'_assoc",
+   "date": "2026-10-21",
+   "verdict": "No existing composite derived open projection formula; use the proved source-library adjunction and pullback APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of the derived tensor projection isomorphism for extension by zero along two open immersions",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.comp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc; AlgebraicGeometry.IsImmersion.comp; AlgebraicGeometry.isOpenImmersion_isMultiplicative; AlgebraicGeometry.Scheme.Hom.comp_appIso; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; CategoryTheory.Abelian.Ext.mk₀_comp_mk₀",
+   "date": "2026-10-21",
+   "verdict": "No match. The results concern underlying scheme morphisms, ordinary sheaf pushforwards or degree-zero Ext; none asserts the canonical derived projection-coherence formula proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ShriekTensorComposition",
+  "date": "2026-10-21",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-shriek-tensor-composition",
+   "place": "Proof step 2: composition of the canonical derived open tensor isomorphisms.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenImmersionProjectionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionProjectionComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_comp",
+  "statement": "theorem derivedOpenImmersionLowerShriekProjectionIso_inv_comp\n    {X Y Z : Scheme.{u}} (j : X ⟶ Y) (b : Y ⟶ Z) (a : X ⟶ Z)\n    [IsOpenImmersion j] [IsOpenImmersion b] [IsOpenImmersion a]\n    (h : j ≫ b = a)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (N : DerivedCategory (Sheaf Z.smallEtaleTopology B)) :\n    let J := (openImmersionLowerShriek B j).mapDerivedCategory\n    let I := (openImmersionLowerShriek B b).mapDerivedCategory\n    let A := (openImmersionLowerShriek B a).mapDerivedCategory\n    let E := (mapDerivedCategoryOpenImmersionLowerShriekComp B j b).symm ≪≫\n      mapDerivedCategoryOpenImmersionLowerShriekCongr B h\n    let L := (upperStar B b).leftDerivedFunctor\n    let T := derivedTensor B X\n    let U := derivedTensor B Z\n    (U.map (E.hom.app M)).app N ≫\n        ((derivedOpenImmersionLowerShriekProjectionIso B a).inv.app M).app N ≫\n        A.map ((T.obj M).map ((leftDerivedUpperStarComp B j b a h.symm).hom.app N)) =\n      ((derivedOpenImmersionLowerShriekProjectionIso B b).inv.app (J.obj M)).app N ≫\n        I.map (((derivedOpenImmersionLowerShriekProjectionIso B j).inv.app M).app (L.obj N)) ≫\n        E.hom.app ((T.obj M).obj ((upperStar B j).leftDerivedFunctor.obj (L.obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261021T005743-L-1888393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261021T005743-L-1888393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

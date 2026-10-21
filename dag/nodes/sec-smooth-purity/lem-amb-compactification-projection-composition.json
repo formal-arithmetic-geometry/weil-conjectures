@@ -1,0 +1,136 @@
+{
+ "id": "lem-amb-compactification-projection-composition",
+ "kind": "statement",
+ "title": "Projection maps respect the explicit proper/open compactification tower",
+ "statement": "Let A be a finite commutative ring. Work in ordinary unbounded etale module derived categories [def-weil-pbc-derived-categories] with derived tensor [def-kun-derived-tensor]. For arbitrary scheme maps f:X→Y and g:Y→Z, choose a compactification d=(i:Y→Q,s:Q→Z) of g and e=(a:X→P,p:P→Q) of f followed by i. Restriction of e to Y gives c=(j:X→V,q:V→Y), with V=P×_Q Y and b:V→P open; the composite gives h=(a,p followed by s) [def-amb-etale-compact-support]. Let F=Rf!^c, G=Rg!^d, H=R(fg)!^h. Let E:F⋙G≅H be the specified compositor: Rs* of the cartesian open/proper exchange, followed by the proper and open compositors [lem-amb-unbounded-compact-support-comparisons]. Write pi_c for the canonical proper projection followed by open tensor extension and pullback composition [def-kun-projection-formula-map, lem-pur-etale-open-derived-tensor]. For arbitrary unbounded M in D(X,A) and K in D(Z,A), pi_d(FM,K) followed by G(pi_c(M,Lg*K)) followed by E_(M tensor Lf*Lg*K) equals (E_M tensor 1_K) followed by pi_h(M,K) followed by H(1_M tensor (L(fg)*K→Lf*Lg*K)). These are equal arrows with the specified pullback compositor, with no boundedness, Tor-amplitude or projection-isomorphism hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J; sites-cohomology.tex Tag 0E48. The compatible tower and tensor pasting in original lem-amb-shriek-tensor-composition steps 3, 4, 12 and 13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-amb-etale-compact-support",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Express the cartesian open/proper exchange as the mate of the inverse open base-change isomorphism. The existing source-library derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange gives compatibility of open base change with the tensor comparison. Taking mates with the two derived pullback/direct-image adjunctions gives the mixed projection square. This uses only actual derived transformations and their units; no cohomology or stalk detection is used.",
+   "uses": [
+    "lem-asd-adjunction-projection-map-mate",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the two compactification projection maps. Transport the mixed square along the compactification pullback comparisons using naturality of proper projection and of the exchange. The proper projection compositor identity is already proved in the source as rightDerivedLowerStarProjectionMap_comp, by composition of counits and compatibility of pullback tensor comparison. Compose the open tensor maps by the proved open-composition lemma, with coefficient changes transported by naturality.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lem-amb-open-projection-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Paste the mixed, proper and open squares using associativity and naturality of the exchange, proper compositor and open compositor. The resulting coefficient path is the canonical pullback compositor: expand each compactification comparison as inverse pullback composition, apply the four pullback coherence identities for the cartesian square and the two outer composites, and cancel inverse pairs. This proves the equality for the explicit tower compositor.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "lem-amb-open-projection-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-adjunction-projection-map-mate",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J; sites-cohomology.tex Tag 0E48. The compatible tower and tensor pasting in original lem-amb-shriek-tensor-composition steps 3, 4, 12 and 13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionMap.*comp",
+   "results": "0 hits: ; ",
+   "date": "2026-10-21",
+   "verdict": "No existing full compactification tower formula. Use the proved source-library projection composition, open base-change tensor and pullback coherence APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap'",
+   "date": "2026-10-21",
+   "verdict": "No existing full compactification tower formula. Use the proved source-library projection composition, open base-change tensor and pullback coherence APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor projection compatibility for composite open proper compactification tower",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; ",
+   "date": "2026-10-21",
+   "verdict": "No existing full compactification tower formula. Use the proved source-library projection composition, open base-change tensor and pullback coherence APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection maps for derived compact support pushforwards on a compatible proper and open compactification tower respect composition",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardContinuousComp; TopCat.Presheaf.Pushforward.comp_eq; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.Functor.sheafPushforwardContinuousComp'; TopCat.Presheaf.Pushforward.comp; SheafOfModules.pushforwardComp; Algebra.PreSubmersivePresentation.comp_map; AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-21",
+   "verdict": "No match. The results concern underlying scheme morphisms, ordinary sheaf pushforwards or degree-zero Ext; none asserts the canonical derived projection-coherence formula proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ShriekTensorComposition",
+  "date": "2026-10-21",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-shriek-tensor-composition",
+   "place": "Original proof steps 3, 4, 12 and 13: proper/open tower pasting before changing compactifications or tensor conventions.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactificationProjectionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationProjectionComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectionMapOfCompactification_tower_comp",
+  "statement": "theorem projectionMapOfCompactification_tower_comp\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (d : Compactification g) (e : Compactification (f ≫ d.i))\n    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) :\n    ((projectionMapOfCompactification (ModuleCat.{u + 1} A) d).app\n      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) e.restrict).obj M)).app K ≫\n        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map\n          (((projectionMapOfCompactification (ModuleCat.{u + 1} A) e.restrict).app M).app\n          (((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor).obj K)) ≫\n        (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app (((derivedTensor\n          (ModuleCat.{u + 1} A) X).obj M).obj (((upperStar (ModuleCat.{u + 1} A)\n          f).leftDerivedFunctor).obj (((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor).obj\n          K))) =\n      ((derivedTensor (ModuleCat.{u + 1} A) Z).map\n        ((rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app M)).app K ≫\n        ((projectionMapOfCompactification (ModuleCat.{u + 1} A) (d.comp e)).app M).app K ≫\n        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (d.comp e)).map\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map ((leftDerivedUpperStarComp\n          (ModuleCat.{u + 1} A) f g (f ≫ g) rfl).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261021T005743-L-1888393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261021T005743-L-1888393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
