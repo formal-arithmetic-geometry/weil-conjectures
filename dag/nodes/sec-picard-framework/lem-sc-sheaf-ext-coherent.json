@@ -15,63 +15,70 @@
  },
  "proof": [
   {
-   "text": "Coherence, being quasi-coherent of finite type on a locally Noetherian scheme [pqf-lem-coherent-ft-locnoeth], is checked on an affine open cover. Let $x\\in X$ and choose, by [pqf-def-locnoeth], an affine open $U=\\operatorname{Spec}(A)\\ni x$ with $A$ Noetherian. By [pqf-lem-coherent-ft-locnoeth] $\\mathcal F$ and $\\mathcal G$ are quasi-coherent of finite type, so $M=\\mathcal F(U)$ and $N=\\mathcal G(U)$ are finite $A$-modules by [lem-weil-pbc-quasi-coherent-finite-type-affine](a), and the counits give isomorphisms $\\widetilde M\\cong\\mathcal F|_U$, $\\widetilde N\\cong\\mathcal G|_U$ by [lem-weil-pbc-affine-tilde-gamma-adjunction](3) (Tag 01XZ).",
+   "text": "At each point choose an affine neighbourhood inside a finite generating neighbourhood of F. Local Noetherianity makes its coordinate ring Noetherian; quasi-coherence and finite type identify F with the tilde of a finite module. Resolve that module by finite free modules and sheafify. The private local_free_resolution repeats the construction of lem-sc-coherent-affine-free-resolution with only IsLocallyNoetherian: its construction needs no compactness. Obtain a bounded-above finite free resolution on the over-site of the chosen open, and transport it to the open subscheme through overEquiv.",
    "uses": [
     "pqf-def-locnoeth",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XZ, affine characterization of coherent modules on a locally Noetherian scheme"
-   }
-  },
-  {
-   "text": "By [def-weil-pbc-sheaf-ext], $\\mathcal Ext^q_{\\mathcal O_X}(\\mathcal F,\\mathcal G)|_U=\\mathcal H^q(R\\mathcal Hom_{\\mathcal O_X}(\\mathcal F[0],\\mathcal G[0]))|_U$, and cohomology sheaves commute with restriction to the open $U$ (they are computed termwise). By [lem-sc-derived-internal-hom-restrict-open] (Tag 08DL) this is $\\mathcal H^q(R\\mathcal Hom_{\\mathcal O_U}(\\mathcal F|_U[0],\\mathcal G|_U[0]))$, which through the isomorphisms of Step 1 and the functoriality of $R\\mathcal Hom$ is $\\mathcal H^q(R\\mathcal Hom_U(\\widetilde M[0],\\widetilde N[0]))$. By [lem-sc-affine-rhom-qcoherent] this is $0$ for $q<0$ and $\\widetilde{\\operatorname{Ext}^q_A(M,N)}$ for $q\\ge0$.",
-   "uses": [
-    "def-weil-pbc-sheaf-ext",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-affine-rhom-qcoherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DL (lemma-restriction-RHom-to-U), with the affine computation of the cited node"
-   }
-  },
-  {
-   "text": "For $q\\ge0$, $\\operatorname{Ext}^q_A(M,N)$ is a finite $A$-module by [lem-sc-ext-noetherian-finite], so its associated sheaf $\\widetilde{\\operatorname{Ext}^q_A(M,N)}$ is quasi-coherent [pqf-def-coherent] and, its global sections being $\\operatorname{Ext}^q_A(M,N)$ [lem-weil-pbc-affine-tilde-gamma-adjunction](2), of finite type by [lem-weil-pbc-quasi-coherent-finite-type-affine](a); for $q<0$ it is the zero sheaf. Quasi-coherence and finite type are local, and the $U$ cover $X$, so $\\mathcal Ext^q_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth] (Tag 01XZ).",
-   "uses": [
-    "lem-sc-ext-noetherian-finite",
-    "pqf-def-coherent",
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-finite-free-resolution-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "lemma-ext-noetherian, with Cohomology of Schemes Lemma 01XZ"
+    "place": "lemma-resolution-by-finite-free (00LP), and coherent.tex 01XZ"
+   }
+  },
+  {
+   "text": "Compute sheaf Ext by a bounded-below injective resolution I of G[0]. The private local_homology_model generalizes the existing scalar computation to the arbitrary coefficient G. Restriction preserves K-injectives and commutes with the ordinary Hom complex. The representative comparison for derivedInternalHom, exactness of restriction, and homologyFunctorFactors identify restricted sheaf Ext with H^q Hom(E,G|U[0]); derivedInternalHom_of_boundedAbove_finiteFree removes I. Computation on U uses the standard derived-category universe and hence applies to the arbitrary ambient universe in the theorem.",
+   "uses": [
+    "def-weil-pbc-sheaf-ext",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-hom-complex-restrict-scheme",
+    "lem-sc-derived-hom-finite-free-model",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "08DL, restriction of RHom; 0GM8, bounded-above finite free computation"
+   }
+  },
+  {
+   "text": "Hom(E,G|U[0]) is the signed dual complex with term Hom(E^(-i),G|U). Since E^(-i) is finite free of rank r, this term is a finite direct sum of copies of G|U, hence coherent. Its degree-q homology is the cokernel of the map from the preceding term into the kernel of the next differential. Closure of coherent modules under kernels, cokernels, finite sums and isomorphisms makes this homology coherent in every integer degree, without a separate negative-degree case. Coherence descends from the open cover. Zero ranks and empty schemes are included by finite sum and cover locality.",
+   "uses": [
+    "lem-sc-hom-complex-to-single",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "lemma-coherent-internal-hom (0D0C), degree-zero specialization via a finite free resolution; Modules 01BY"
    }
   }
  ],
  "proof_deps": [
   "pqf-def-locnoeth",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sc-finite-free-resolution-sheafification",
   "def-weil-pbc-sheaf-ext",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-affine-rhom-qcoherent",
-  "lem-sc-ext-noetherian-finite",
-  "pqf-def-coherent"
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-scheme",
+  "lem-sc-derived-hom-finite-free-model",
+  "def-pur-derived-internal-hom",
+  "lem-sc-hom-complex-to-single",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-coherent-module-local-on-open-cover"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0D0C, expanded via the affine calculation and Algebra lemma-ext-noetherian"
+  "place": "Tag 0D0C, degree-zero case computed directly by a finite free resolution (00LP), open restriction (08DL), and coherent kernel/cokernel closure (01BY)"
  },
  "mathlib_searches": [
   {
@@ -128,8 +135,7 @@
   "tool_uses": []
  },
  "tool_uses": [
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "reviewed": {
   "date": "2026-10-10",
@@ -156,5 +162,15 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261021T152312-L-1858696",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
