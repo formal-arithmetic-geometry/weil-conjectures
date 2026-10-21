@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Write $p:K^a\\twoheadrightarrow N$ for the cokernel projection and $I=\\operatorname{im}d^{a-1}$. Since $d^ad^{a-1}=0$, the cokernel universal property gives a unique $\\bar d:N\\to K^{a+1}$ with $\\bar d p=d^a$. Moreover $d^{a+1}\\bar d=0$, since its composite with the epimorphism $p$ is zero. Together with the retained differentials this defines $P=\\tau_{\\ge a}K$ as in [def-kun-truncations]. The components $q^i=0$ for $i<a$, $q^a=p$, and $q^i=1$ for $i>a$ obey the chain-map equations of [def-pc-cochain-complex-modules]: at $a-1$ this is $pd^{a-1}=0$, at $a$ it is $\\bar d p=d^a$, and elsewhere it is immediate.",
+   "text": "Use Mathlib good lower truncation and its quotient chain map. The component formulas pi_f_self and pi_f_above are proved from liftExtend and the restriction component formulas: at a the map is pOpcycles followed by the boundary isomorphism inverse, and above a it is the truncation identification inverse. Below a the target is zero. No new truncation construction is introduced.",
    "uses": [
     "def-kun-truncations",
     "def-pc-cochain-complex-modules"
@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "Compute the maps on cohomology using [def-pc-acyclic-complex-modules]. For $i<a$, both cohomology sheaves are zero by the hypothesis and the zero terms of $P$. At $a$, because $I\\subseteq\\ker d^a$, the kernel of $\\bar d:K^a/I\\to K^{a+1}$ is $(\\ker d^a)/I$; this is $H^a(K)$ and $H^a(q)$ is the resulting identification. At $a+1$, the cycles are unchanged and the boundaries are unchanged because $\\operatorname{im}\\bar d=\\operatorname{im}d^a$ (the map $p$ is epic). In all higher degrees the adjacent terms and differentials are unchanged. Thus $H^i(q)$ is an isomorphism in every degree, which is precisely the quasi-isomorphism assertion of [def-pc-quasi-iso-modules].",
+   "text": "Apply CochainComplex.quasiIso_πTruncGE_iff. Its IsGE condition is equivalent to exactness in each degree i<a, which is equivalent to IsZero (K.homology i). This is exactly the vanishing hypothesis.",
    "uses": [
     "def-pc-acyclic-complex-modules",
     "def-pc-quasi-iso-modules"
@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "The kernels of the components of $q$ are $K^i$ for $i<a$, $I=\\ker p$ for $i=a$, and zero for $i>a$. The induced differential from degree $a-1$ to $a$ is the image factorization $K^{a-1}\\twoheadrightarrow I$ of $d^{a-1}$; all earlier differentials are retained and the differential out of $I$ is zero. These differentials square to zero, by the equations for $K$ and the monomorphism $I\\hookrightarrow K^a$, so they define the kernel complex $L$ [def-pc-cochain-complex-modules]. Every $q^i$ is epic, and the degreewise sequences are $0\\to K^i\\xrightarrow{1}K^i\\to0\\to0$ for $i<a$, $0\\to I\\to K^a\\xrightarrow{p}N\\to0$ for $i=a$, and $0\\to0\\to K^i\\xrightarrow{1}K^i\\to0$ for $i>a$. This proves the claimed degreewise short exact sequence.",
+   "text": "Evaluation preserves kernels, so evaluate the kernel fork of the quotient in each degree. Below a the quotient is zero and the kernel inclusion is invertible. Above a the quotient is invertible and its kernel is zero. At a cancel the invertible truncation identification to identify the evaluated kernel with a kernel of pOpcycles. The exact cokernel sequence of the incoming differential makes its categorical image another such kernel. Uniqueness of kernel limits supplies the boundary isomorphism commuting with inclusion. Cancel the image monomorphism in the chain-map identity for the kernel inclusion to obtain the asserted image-factorization differential. The quotient is epic in every degree; map its short exact kernel sequence through evaluation.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
@@ -55,10 +55,13 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-flat-quotient-tensor-ses] to $0\\to I\\to K^a\\to N\\to0$ on the chosen small site with ring sheaf $\\Lambda_T$. Its middle term $K^a$ is flat by the termwise-flat hypothesis and its quotient $N$ is flat by assumption, so its kernel-flatness clause gives that $I$ is flat. The zero sheaf is flat because tensoring with it is the zero exact functor [def-pc-flat-sheaf-modules]. Consequently every term of $P$ is flat: its terms are zero, $N$, or retained terms of $K$. Likewise every term of $L$ is flat: its terms are retained terms of $K$, $I$, or zero.",
+   "text": "Use the flat-quotient tensor-row argument of lem-weil-pbc-site-flat-quotient-tensor-ses, reusing its proved private mono_bottom_of_tensor_rows chase. Its public theorem identifies site and coefficient universes, so carry out its remaining formal argument in the general braided tensor category of module sheaves. Functorial flat covers are supplied by the proved independent-coefficient hasFunctorialFlatResolution_kfi API in lem-pc-kflat-resolution. Tensor preserves colimits by lem-weil-pbc-independent-sheaf-tensor-colimits. The siteSheafTensorRightIso comparison translates IsFlatOnSite to categorical tensor flatness and back. Apply the resulting kernel-flatness argument to image(d) -> K.X a -> K.opcycles a. Flatness is invariant under the displayed isomorphisms and holds for zero objects, proving termwise flatness of the truncation and kernel.",
    "uses": [
     "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "def-pc-flat-sheaf-modules"
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
    "elementary": false,
    "source": {
@@ -67,10 +70,9 @@
    }
   },
   {
-   "text": "The explicit terms give $L^i=0$ for all $i>a$, so $a$ is an upper bound for $L$. Apply clause (1) of [lem-kun-kflat-criteria] to this bounded-above complex of flat $\\Lambda_T$-module sheaves. It gives that $L$ is K-flat in the convention of [def-kun-derived-tensor] used by that node; by the sign symmetry recorded in [def-kun-derived-tensor] this is the ringed-site K-flatness of [def-pc-kflat-complex] asserted in the statement. This completes all the assertions.",
+   "text": "The evaluated kernels vanish in every degree above a. Apply the first clause of etale_kflat_criteria to this upper bound and the proved flat terms. At this site the coefficient universe is the maximum of the site universes, so isKFlatIndependentCoefficients_iff_isKFlat identifies the conclusion directly with the required independent-coefficient predicate. No derived tensor or symmetry comparison is needed.",
    "uses": [
     "lem-kun-kflat-criteria",
-    "def-kun-derived-tensor",
     "def-pc-kflat-complex"
    ],
    "elementary": false,
@@ -87,14 +89,18 @@
   "def-pc-quasi-iso-modules",
   "lem-weil-pbc-site-flat-quotient-tensor-ses",
   "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "lem-kun-kflat-criteria",
-  "def-kun-derived-tensor",
   "def-pc-kflat-complex"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), proof: lower truncation and its kernel"
+  "by": "worker",
+  "group": "B9",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0F1M lower truncation and kernel paragraphs; Tags 03EX/03EY flat-quotient tensor chase, implemented at independent coefficient universes using the existing flat-cover API and Mathlib truncation/kernel limits"
  },
  "mathlib_searches": [
   {
@@ -263,5 +269,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Read the item node, all 9 stmt_deps, the module, the report (Worker report and Second reading by Q14 both present) and check-brief2. Only the lean field differs from the live node; the statement field matches the file verbatim; one sorry and no definitions. Each clause matches node and Tag 0F1M: hflat/hvanish (i<a)/hquotient (opcycles a = coker d^{a-1}); P,q = Mathlib truncGE/πTruncGE; QuasiIso; P flat; kernel ι iso below a; e : L^a ≅ image(d) pinned by e.hom≫image.ι = ι.f a plus the factorThruImage equation (the second follows from the first, kept as explicit wording, advisory); I flat; L zero above a; L flat; IsKFlatIndependentCoefficients = def-pc-kflat-complex Tot(F⊗K); degreewise ShortExact of kernelSequence. Universes IsFlatOnSite.{u+1,u,u+1,u+1} match the site and the etale_kflat_criteria and parent 0F1M conventions. Statement checked true by hand (a-1, a, a+1); edge cases a≤0, zero complex, F→F, ·2 excluded. No duplicate found (parent hasTorAmplitudeGE_iff_exists_kFlat_flat_model is existential). Not dropped. Proof-only imports = recorded proof-dep modules, all present in live. Docstrings carry source and blueprint with 5 proof steps. No compile run since no fix."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261021T120324-L-3763671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
