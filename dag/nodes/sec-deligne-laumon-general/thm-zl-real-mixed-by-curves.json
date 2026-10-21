@@ -19,253 +19,92 @@
  ],
  "proof": [
   {
-   "text": "Use the datum of [def-weil-punctual-weights], with $\\ell\\ne\\operatorname{char}k_0$ and $\\iota:\\Qlb\\cong\\mathbf C$, and the constructible Weil heart of [def-weil-weil-sheaf-complex]. By [lem-zl-constant-extension-weil-heart-equivalence](a), restriction to $k_m$ is exact, replaces $\\theta$ by $\\theta^{[m]}$, and at a closed point $z$ above $x$ replaces the normalized local operator by a conjugate of $F_x^f$, with $q_z=q_x^f$ and $f=[\\kappa(z):\\kappa(x)]$. This statement uses the geometric-Frobenius point transports of [def-weil-local-frobenius-trace]. Triangularize $F_x$ over the algebraically closed field $\\Qlb$ using [p-linear-triangular]. Its $f$th power has diagonal entries the $f$th powers of its diagonal entries, with multiplicity. Complex conjugation commutes with these positive integral powers. Thus a conjugation-stable eigenvalue multiset remains conjugation-stable, so constant extension preserves reality as defined in [def-wf-iota-real].",
+   "text": "For a real classical lisse $\\mathcal G$ on a nonempty smooth geometrically connected affine base of positive dimension, [lem-zl-geometric-constituents-any-base] gives a geometric-constituent filtration after a finite constant extension. Smoothness survives by [lem-pc-proper-base-change](2); affineness and geometric connectedness survive by the affine tensor presentation and the unchanged geometric fibre. [lem-zl-classical-weil-filtration-heart-transport] makes it an actual exact filtration in the constructible Weil heart. Reality survives by [lem-zl-constant-extension-mixed-descent]. By the current [def-wf-iota-real] definition, this is the statement that each local characteristic factor has real coefficients, equivalently that its Frobenius eigenvalue multiset is stable under complex conjugation; the cited extension lemma applies to this precise notion.",
    "uses": [
-    "def-weil-punctual-weights",
-    "def-weil-weil-sheaf-complex",
-    "lem-zl-constant-extension-weil-heart-equivalence",
-    "def-weil-local-frobenius-trace",
-    "p-linear-triangular",
+    "lem-zl-geometric-constituents-any-base",
+    "lem-pc-proper-base-change",
+    "lem-zl-classical-weil-filtration-heart-transport",
+    "lem-zl-constant-extension-mixed-descent",
     "def-wf-iota-real"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 1, 3 and 7: constant extensions, reality and normalized local Frobenius powers."
+    "place": "Paragraph 1"
    }
   },
   {
-   "text": "First let $X_0$ be nonempty smooth geometrically connected affine of positive dimension and $\\mathcal G$ a real constructible Weil sheaf in the heart of [def-weil-weil-sheaf-complex] that is lisse in the sense obtained in Step 9: its realization is a lisse adic Weil sheaf of [def-pod-lisse-l-adic-sheaves]. Apply [lem-zl-geometric-constituents-any-base] to that realization, obtaining after one finite constant extension an actual finite filtration by lisse Weil subsheaves with geometrically irreducible nonzero quotients $\\mathcal S_1,\\ldots,\\mathcal S_r$. This filtration returns to the heart. By [lem-tw-lisse-rational-realization] its terms, inclusions, quotient maps and Weil maps are realized fully faithfully by lisse objects of the heart, whose point fibres are the stalks of the lisse sheaves compatibly with the iterated point transports, so the local operators of [def-weil-local-frobenius-trace] agree. Under the heart identification $J$ of Step 8 ([lem-fd-rational-coefficient-category-comparison], fibres computed by [lem-a1-integral-pullback-completed-comparison]) geometric fibres on the heart are exact and jointly conservative by [lem-per-adic-heart-pullback-fibres]. Each realized sequence $0\\to\\mathcal G_{i-1}\\to\\mathcal G_i\\to\\mathcal S_i\\to0$ is exact on every geometric fibre, hence exact in the heart: the filtration consists of constructible Weil subsheaves of $\\mathcal G$. The base remains smooth by [lem-pc-proper-base-change](2), affine by the presentation $\\operatorname{Spec}(B\\otimes_{k_0}k_m)$, and geometrically connected by its definition, since its geometric fibre is still $X$. Step 1 preserves reality. Work over this new finite field. If the filtration is empty, $\\mathcal G=0$ and its empty filtration is mixed. Otherwise each quotient has positive rank at every geometric point.",
+   "text": "[lem-zl-two-point-curve-constituent-purity] makes every nonzero quotient pure with its fixed-anchor weight. The finite filtration is mixed by [def-weil-punctual-weights], with the maximum of its finitely many weights (bound $0$ if empty). Descend the extension by [lem-zl-constant-extension-mixed-descent]. This proves the positive-dimensional lisse case.",
    "uses": [
-    "lem-zl-geometric-constituents-any-base",
+    "lem-zl-two-point-curve-constituent-purity",
     "def-weil-punctual-weights",
-    "lem-pc-proper-base-change",
-    "def-pod-lisse-l-adic-sheaves",
-    "lem-tw-lisse-rational-realization",
-    "def-weil-local-frobenius-trace",
-    "lem-fd-rational-coefficient-category-comparison",
-    "lem-a1-integral-pullback-completed-comparison",
-    "lem-per-adic-heart-pullback-fibres",
-    "def-weil-weil-sheaf-complex"
+    "lem-zl-constant-extension-mixed-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 1: the lisse case and the finite geometric-constituent filtration."
+    "place": "Paragraphs 2-5"
    }
   },
   {
-   "text": "Choose a closed point $x_*$ of the nonempty affine $X_0$: a maximal ideal exists and [lem-kun-closed-point-field](a) makes its residue field finite. For any closed point $x$, apply [lem-zl-curve-testing-irreducibility] through geometric lifts of $x_*$ and $x$, simultaneously for all $\\mathcal S_j$. The base is smooth affine geometrically connected of dimension at least one and the quotients are geometrically irreducible, so it gives a smooth connected affine geometric curve $C$ preserving their irreducibility. By [lem-zl-bertini-finite-field-descent] it has a closed model $C_m\\hookrightarrow X_0\\times_{k_0}k_m$. This model is affine and of finite presentation over $k_m$. Write it $\\operatorname{Spec}B_m$. Apply [lem-sbc-smooth-pushout-filtered-colimit-stage] with $A=k_m$, $B=B_m$, and the filtered diagram of finite subfields $k_n\\subset k$ containing $k_m$, whose colimit is $k$. Its pushouts are $B_m\\otimes_{k_m}k_n$; the limiting pushout is smooth because it is $C$. Enlarge $m$ to that $n$, making the curve model smooth. Its geometric fibre remains $C$, hence connected. Pullback is exact and identifies stalk Frobenius by [lem-zl-immersion-weil-local-behavior](1). Each restricted quotient is geometrically irreducible, hence an irreducible Weil constituent of the restricted lisse sheaf. Step 1 and that stalk identification preserve reality. The smooth geometrically connected affine curve now meets every hypothesis of [thm-rp-real-lisse-purity-affine], which makes each restricted $\\mathcal S_j$ pure.",
+   "text": "For the given $\\mathcal F$ on arbitrary $X_0$, restrict to the reduction; [lem-zl-immersion-weil-local-behavior](1) preserves constructibility and reality. [lem-zl-raw-heart-adic-lisse-stratification] supplies a finite adapted partition of its reduced geometric base. Apply [lem-zl-smooth-affine-frontier-stratification] to obtain over one $k_m$ a finite reduced closed chain with open differences finite disjoint unions of smooth geometrically connected affine pieces refining that partition.",
    "uses": [
-    "lem-kun-closed-point-field",
-    "lem-zl-curve-testing-irreducibility",
-    "lem-zl-bertini-finite-field-descent",
-    "lem-sbc-smooth-pushout-filtered-colimit-stage",
     "lem-zl-immersion-weil-local-behavior",
-    "thm-rp-real-lisse-purity-affine"
+    "lem-zl-raw-heart-adic-lisse-stratification",
+    "lem-zl-smooth-affine-frontier-stratification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 2: a curve through both anchor and test point, preserving every quotient."
+    "place": "Paragraphs 6-7"
    }
   },
   {
-   "text": "Fix $j$ and one eigenvalue $\\alpha\\ne0$ of $\\mathcal S_j$ at $x_*$, and define $w_j=2\\log_{q_{x_*}}|\\iota(\\alpha)|$. Such an eigenvalue exists because this stalk has positive finite rank over $\\Qlb$. If the curve point over $x_*$ has residue degree $e\\geq1$, Step 1 identifies its operator with $F_{x_*}^e$ and its cardinality with $q_{x_*}^e$. If the curve purity weight is $v$, then\n$$|\\iota(\\alpha)|^e=(q_{x_*}^e)^{v/2},$$\nso $v=w_j$ since $q_{x_*}>1$. This holds for every testing curve. For any eigenvalue $\\beta$ at $x$ and the corresponding curve point of residue degree $f\\geq1$, the same calculation gives $|\\iota(\\beta)|^f=(q_x^f)^{w_j/2}$, hence $|\\iota(\\beta)|=q_x^{w_j/2}$. Thus every $\\mathcal S_j$ is pure of weight $w_j$ on the entire base. The filtration in Step 2 is a mixed filtration as defined in [def-weil-punctual-weights], with upper bound $\\max_jw_j$.",
+   "text": "Every piece has a classical lisse Weil restriction by [lem-zl-raw-heart-adic-lisse-stratification]: all inclusions are over the same $k_m$. It is real by [lem-zl-constant-extension-mixed-descent] and [lem-zl-immersion-weil-local-behavior](1). Positive-dimensional pieces are mixed by Steps 1-2. A zero-dimensional piece is $\\operatorname{Spec}k_m$ by [lem-zl-smooth-affine-frontier-stratification], and is mixed by [lem-zl-point-weil-heart-flag], including nonsemisimple Frobenius.",
    "uses": [
-    "def-weil-punctual-weights"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 3-4: the anchor fixes the weight, and testing every point proves purity."
-   }
-  },
-  {
-   "text": "Here is the constant-extension descent argument, valid on any separated finite-type base. Let $g:X_m\\to X_0$ be a finite constant extension of degree $m$ and suppose $g^*\\mathcal F$ is mixed for the $k_m$-structure. The comparison [lem-zl-constant-extension-weil-heart-equivalence] identifies this object with the corresponding $k_0$-Weil sheaf on the geometric disjoint union of $m$ copies of $X$, matching its subobjects, finite filtrations, local Frobenius operators and weight bounds. Thus the mixed filtration just constructed is an input in the $k_0$-constructible category used by the finite direct-image theorem. Choose an upper bound $w$ for its finitely many quotient weights (take $0$ for the zero object). The morphism $g$ is separated, quasi-finite and of finite type; its target is separated, hence quasi-separated, of finite type. The unit's quasi-finite lemma [sk-l-dl-general-quasifinite] therefore makes $g_!g^*\\mathcal F=R^0g_!g^*\\mathcal F$ mixed of weights at most $w$. The degree-zero complex $g^*\\mathcal F$ lies in $D_{\\leq w}$ by [def-weil-complex-weights], so the equality $Rg_*=Rg_!$ in [lem-zl-finite-pushforward] applies to it. By [lem-zl-finite-adic-direct-image], $Rg_*$ is concentrated in degree zero on this sheaf. Hence $g_*g^*\\mathcal F=g_!g^*\\mathcal F$ is mixed of weights at most $w$.",
-   "uses": [
-    "lem-zl-constant-extension-weil-heart-equivalence",
-    "sk-l-dl-general-quasifinite",
-    "def-weil-complex-weights",
-    "lem-zl-finite-pushforward",
-    "lem-zl-finite-adic-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 5: finite pushforward of a bounded mixed sheaf is a bounded mixed sheaf."
-   }
-  },
-  {
-   "text": "In the finite-stalk formula of [lem-zl-finite-adic-direct-image], the unit $\\eta:\\mathcal F\\to g_*g^*\\mathcal F$ is diagonal on the $m$ geometric sheets. The comparison [lem-zl-constant-extension-weil-heart-equivalence] identifies the $k_m$-filtration with the sheetwise filtration on this induced $k_0$-object, so a trace retraction can be checked sheet by sheet. Etale locally $g$ is a disjoint union of $m$ copies of the base. Sum the $m$ component maps to define $\\operatorname{Tr}:g_*g^*\\mathcal F\\to\\mathcal F$ on that cover. On overlaps the copies are permuted and summation is unchanged, so these maps agree and glue. The same permutation invariance and the semilinear naturality of the finite-stalk formula show that the trace commutes with the Weil isomorphisms. On each such cover $\\operatorname{Tr}\\eta=m\\operatorname{id}$; thus this holds globally. Since $\\Qlb$ has characteristic zero, $m^{-1}\\operatorname{Tr}$ is a retraction in the Weil category. Apply [lem-a1-mixed-direct-summand](3) to Step 5. This descends mixedness. In particular Steps 2-4 prove the positive-dimensional lisse case over its original finite field.",
-   "uses": [
-    "lem-zl-constant-extension-weil-heart-equivalence",
-    "lem-zl-finite-adic-direct-image",
-    "lem-a1-mixed-direct-summand"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 5: construct the trace retraction and descend the filtration bound."
-   }
-  },
-  {
-   "text": "Now let $\\mathcal F$ be the given constructible real Weil sheaf on arbitrary $X_0$. Write $r:(X_0)_{\\mathrm{red}}\\hookrightarrow X_0$ for the reduction of [def-weil-pbc-scheme-reduction]. Its underlying set and every residue field are unchanged. By [lem-zl-immersion-weil-local-behavior](1), $r^*\\mathcal F$ is a constructible real Weil sheaf. Apply [prop-sf-open-closed-triangle-all-stages] with closed complement $r$ and empty open: its triangle is $0\\to\\mathcal F\\to Rr_*r^*\\mathcal F\\to0$. Its arrows are Weil-equivariant, so $\\mathcal F\\cong Rr_*r^*\\mathcal F$. If $r^*\\mathcal F$ is mixed, choose a finite upper bound and apply the finite bound of [sk-l-dl-general-quasifinite] and the properness identity and degree-zero exactness in Step 5 to this finite closed immersion. The isomorphism then makes $\\mathcal F$ mixed. It suffices to treat the reduced base. This uses the rational-stage localization theorem directly.",
-   "uses": [
-    "def-weil-pbc-scheme-reduction",
+    "lem-zl-raw-heart-adic-lisse-stratification",
+    "lem-zl-constant-extension-mixed-descent",
     "lem-zl-immersion-weil-local-behavior",
-    "prop-sf-open-closed-triangle-all-stages",
-    "sk-l-dl-general-quasifinite",
-    "lem-zl-finite-pushforward",
-    "def-weil-complex-weights",
-    "lem-zl-finite-adic-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 6: reduction without changing rational coefficient categories."
-   }
-  },
-  {
-   "text": "Pass to an adapted partition in the raw coefficient heart. The equivalence $J$ of [lem-fd-rational-coefficient-category-comparison] is identity on the common integral objects and localized Hom groups. The integral cohomological halves and their rational/common-stage isomorphism closures agree by [def-weil-constructible-standard-tstructure] and the heart description of [lem-per-adic-heart-pullback-fibres], so $J$ identifies the two raw hearts. Restrictions agree on derived-complete integral representatives by [lem-a1-integral-pullback-completed-comparison], hence after localization and finite scalar extension. Work at a finite coefficient field representing $J(r^*\\mathcal F)$ in the heart, using the common-stage heart assertion of [lem-per-adic-heart-pullback-fibres]. At this stage [lem-per-continuous-rational-derived-realization] identifies the raw heart with constructible modules over $E_T=\\widehat{\\mathcal O}_{E,T}[1/\\varpi]$ and identifies locally closed restrictions with ordinary inverse image. Its constructibility condition gives a finite partition with pro-etale lisse restrictions. We refine this partition to classical adic lissity in the next step.",
-   "uses": [
-    "lem-fd-rational-coefficient-category-comparison",
-    "def-weil-constructible-standard-tstructure",
-    "lem-per-adic-heart-pullback-fibres",
-    "lem-a1-integral-pullback-completed-comparison",
-    "lem-per-continuous-rational-derived-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.8: Definitions 6.8.3, 6.8.6; Proposition 6.8.4; Lemma 6.8.13 and Proposition 6.8.14. Refinement to integral lisse lattices before the classical adic constituent theorem."
-   }
-  },
-  {
-   "text": "On each lisse stratum of Step 8, identify its continuous coefficient ring with the pulled-back condensed ring by the explicit ring-sheaf isomorphism of [lem-weil-pbc-condensed-e-realization]. Use only this ring isomorphism, not an identification of raw categories by their names. Apply [sk-lem-stratified-lattice] to the lisse module: after a further finite locally closed partition it has a lisse integral lattice. Clause (3) of [det-prop-sfb-qlbar-colimit-x-integral-limit] identifies the pulled-back integral ring with $\\widehat{\\mathcal O}_{E,T}$; [lem-per-lisse-completed-system-comparison] identifies its reductions with a normalized inverse system of finite locally free etale $\\mathcal O_E/\\varpi^n$-sheaves, compatibly with pullback and scalar extension. Thus these finer restrictions are lisse $E$-sheaves in precisely [def-pod-lisse-l-adic-sheaves], and after common-stage inclusion are lisse $\\Qlb$-sheaves. Their realization back in the sf raw/common-stage heart is [lem-tw-lisse-rational-realization], combined with the integral restriction comparison of Step 8. The faithful realization identifies the maps as well as the objects, so any Weil map on a stable restriction is a map in this adic lisse category. This supplies exactly the lissity used by [lem-zl-geometric-constituents-any-base]. No global lattice on an arbitrary singular stratum, and no Frobenius-stable integral lattice, is asserted.",
-   "uses": [
-    "lem-weil-pbc-condensed-e-realization",
-    "sk-lem-stratified-lattice",
-    "lem-per-lisse-completed-system-comparison",
-    "def-pod-lisse-l-adic-sheaves",
-    "lem-tw-lisse-rational-realization",
-    "lem-zl-geometric-constituents-any-base",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.8: Definitions 6.8.3, 6.8.6; Proposition 6.8.4; Lemma 6.8.13 and Proposition 6.8.14. Refinement to integral lisse lattices before the classical adic constituent theorem."
-   }
-  },
-  {
-   "text": "Apply [lem-zl-smooth-affine-frontier-stratification] to the finite adapted partition of Step 9 on the reduced geometric base. It gives, over one finite constant extension, a chain $Z_a$ with open differences finite disjoint unions of smooth geometrically connected affine pieces $U_{a,b}$. The lisse integral systems on the adapted strata remain lisse upon restriction to the finer pieces: each finite-level trivializing cover pulls back, and the normalized transition and scalar-extension formulas of [def-pod-lisse-l-adic-sheaves] are unchanged. All inclusions are defined over the same finite field, so the corresponding power Weil map restricts to each piece. By Step 9 this is an actual lisse adic Weil object of the kind used in Step 2. Step 1 and [lem-zl-immersion-weil-local-behavior](1) preserve reality. The positive-dimensional pieces are mixed by Steps 2-6.",
-   "uses": [
     "lem-zl-smooth-affine-frontier-stratification",
-    "def-pod-lisse-l-adic-sheaves",
-    "lem-zl-immersion-weil-local-behavior"
+    "lem-zl-point-weil-heart-flag"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 6-7: smooth affine strata over a common finite field, refining the adic lisse partition."
+    "place": "Paragraph 7"
    }
   },
   {
-   "text": "A zero-dimensional piece is $\\operatorname{Spec}k_m$ by the stratification lemma. Its geometric fibre is $\\operatorname{Spec}k$. The point-fibre equivalence [lem-weil-point-fibre-equivalence] identifies its constructible sheaf with a finite-dimensional $\\Qlb$-vector space $V$ and the Weil isomorphism with an invertible operator $F$. Apply [p-linear-triangular] over $\\Qlb$ to obtain a full invariant flag. Since $F$ is injective and the subspaces are finite-dimensional, invariance is equality, so the flag and its quotients have invertible Frobenius. Each one-dimensional quotient has a scalar $\\alpha\\ne0$ and weight $2\\log_{q^m}|\\iota(\\alpha)|$. Under the point equivalence these are Weil subsheaves and pure quotient sheaves, hence give the required mixed filtration. There is no semisimplicity hypothesis; a nontrivial Jordan block is included. For $V=0$ use the empty flag. The finitely many flag spaces and their structure maps are defined at a common finite coefficient field by adjoining their finitely many basis coordinates, so they are objects in the common-stage category.",
+   "text": "Apply [lem-zl-reduced-frontier-mixed-gluing] to $X_0\\times_{k_0}k_m$ and the mixed component restrictions. It gives a finite mixed Weil filtration on that entire scheme, including recovery from its reduction. [lem-zl-constant-extension-mixed-descent] descends it to $\\mathcal F$ on $X_0$. The empty scheme and zero sheaf are included in these two lemmas.",
    "uses": [
-    "lem-weil-point-fibre-equivalence",
-    "p-linear-triangular",
-    "def-weil-punctual-weights"
+    "lem-zl-reduced-frontier-mixed-gluing",
+    "lem-zl-constant-extension-mixed-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7: the dimension-zero Frobenius flag."
-   }
-  },
-  {
-   "text": "For fixed $a$, the finitely many disjoint open and closed pieces of $U_a$ now carry mixed filtrations. Apply extension by zero along each component inclusion and concatenate the resulting filtrations in their finite direct sum. These functors are exact and their nonzero stalks have unchanged Frobenius by [lem-zl-immersion-weil-local-behavior](2). Thus each pure quotient stays pure, with zero stalks on the other components. The direct sum of the component restrictions is the original sheaf on $U_a$, since a sheaf on a finite disjoint union is specified independently on its open and closed components. The concatenated filtration is therefore a finite mixed Weil filtration on $U_a$. Its weight bound is the maximum of the finitely many bounds; use $0$ if there are no components.",
-   "uses": [
-    "lem-zl-immersion-weil-local-behavior",
-    "def-weil-punctual-weights"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7: concatenate component filtrations."
-   }
-  },
-  {
-   "text": "Induct backwards along the finite chain, starting with the zero sheaf on $Z_t=\\varnothing$. For the open $j:U_a\\hookrightarrow Z_a$ and closed complement $i:Z_{a+1}\\hookrightarrow Z_a$, [prop-sf-open-closed-triangle-all-stages] gives the Weil-equivariant localization triangle. Pullbacks are exact on the constructible heart by [lem-zl-immersion-weil-local-behavior](1); open extension is exact by its clause (2), and closed direct image is exact by [lem-zl-finite-adic-direct-image]. Taking cohomology therefore gives\n$$0\\longrightarrow j_!j^*\\mathcal F\\longrightarrow\\mathcal F|_{Z_a}\\longrightarrow i_*i^*\\mathcal F\\longrightarrow0.$$\nThe open term is mixed: apply exact $j_!$ to the filtration of Step 12; its stalks are unchanged on $U_a$ and zero outside, so pure quotients remain pure. The closed term is mixed by the induction hypothesis and the finite-pushforward argument of Step 5 using [sk-l-dl-general-quasifinite], [lem-zl-finite-pushforward] and [def-weil-complex-weights]. Choose a common upper bound for these two finite filtrations and apply [lem-a1-mixed-direct-summand](2). This makes $\\mathcal F|_{Z_a}$ mixed. Explicitly, a filtration of the subobject followed by inverse images of the quotient filtration is finite, and all its arrows are Weil-equivariant. At $a=0$ this proves mixedness after the common constant extension.",
-   "uses": [
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-zl-immersion-weil-local-behavior",
-    "lem-zl-finite-adic-direct-image",
-    "lem-a1-mixed-direct-summand",
-    "sk-l-dl-general-quasifinite",
-    "lem-zl-finite-pushforward",
-    "def-weil-complex-weights"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 8-9: exact open-closed sequence and backward filtration induction."
-   }
-  },
-  {
-   "text": "Apply Steps 5-6 to descend the common constant extension used in Step 10. The comparison [lem-zl-constant-extension-weil-heart-equivalence] is the required identification between the $k_m$-structure on the geometric base and the $k_0$-structure on the induced disjoint union, including matching subobjects, local Frobenius and purity weights. This makes $r^*\\mathcal F$ mixed on the original reduced base. Apply Step 7 to recover mixedness on $X_0$. Every operation used finite filtrations, finitely many components and a finite closed chain, so the resulting Weil filtration is finite in precisely the sense of [def-weil-punctual-weights]. The empty scheme and zero sheaf give the empty filtration.",
-   "uses": [
-    "lem-zl-constant-extension-weil-heart-equivalence",
-    "def-weil-punctual-weights"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Last sentence of paragraph 9: final constant-extension descent and recovery of the original scheme."
+    "place": "Paragraphs 8-9"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-punctual-weights",
-  "def-weil-weil-sheaf-complex",
-  "lem-zl-constant-extension-weil-heart-equivalence",
-  "def-weil-local-frobenius-trace",
-  "p-linear-triangular",
-  "def-wf-iota-real",
   "lem-zl-geometric-constituents-any-base",
   "lem-pc-proper-base-change",
-  "lem-kun-closed-point-field",
-  "lem-zl-curve-testing-irreducibility",
-  "lem-zl-bertini-finite-field-descent",
-  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-zl-classical-weil-filtration-heart-transport",
+  "lem-zl-constant-extension-mixed-descent",
+  "def-wf-iota-real",
+  "lem-zl-two-point-curve-constituent-purity",
+  "def-weil-punctual-weights",
   "lem-zl-immersion-weil-local-behavior",
-  "thm-rp-real-lisse-purity-affine",
-  "sk-l-dl-general-quasifinite",
-  "def-weil-complex-weights",
-  "lem-zl-finite-pushforward",
-  "lem-zl-finite-adic-direct-image",
-  "lem-a1-mixed-direct-summand",
-  "def-weil-pbc-scheme-reduction",
-  "prop-sf-open-closed-triangle-all-stages",
-  "lem-fd-rational-coefficient-category-comparison",
-  "def-weil-constructible-standard-tstructure",
-  "lem-per-adic-heart-pullback-fibres",
-  "lem-a1-integral-pullback-completed-comparison",
-  "lem-per-continuous-rational-derived-realization",
-  "lem-weil-pbc-condensed-e-realization",
-  "sk-lem-stratified-lattice",
-  "lem-per-lisse-completed-system-comparison",
-  "def-pod-lisse-l-adic-sheaves",
-  "lem-tw-lisse-rational-realization",
+  "lem-zl-raw-heart-adic-lisse-stratification",
   "lem-zl-smooth-affine-frontier-stratification",
-  "lem-weil-point-fibre-equivalence",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+  "lem-zl-point-weil-heart-flag",
+  "lem-zl-reduced-frontier-mixed-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-  "place": "Proof paragraphs 1-9, expanded with rational-stage exactness and geometric-stratification inputs."
+  "place": "Paragraphs 1-9, assembled from six separate statement-only argument nodes; the returned argument and its allocation are retained verbatim in report.md."
  },
  "mathlib_searches": [
   {
@@ -337,83 +176,19 @@
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "thm-zl-real-mixed-by-curves",
   "worker": "stage1",
-  "summary": "Repaired all five returned findings: removed trace-formula operator dependencies, corrected constant-extension exponents to residue degrees and distinguished the two Weil hearts, used actual raw/continuous coefficient realization, stratified integral lisse lattices and normalized finite etale systems with integral pullback comparison, descended smoothness at a larger finite stage, and delivered unit realizations. Retained the two previously created statement-only nodes and the curve-testing/anchor/gluing argument.",
-  "blueprint": "Steps 1-4 realize main-20261015 paragraphs 1-4 (constituents, two-point curve, anchor weight); Steps 5-6 paragraph 5 (descent); Steps 7-12 paragraphs 6-7 (reduction, actual raw coefficient realization and integral lisse-lattice refinement, smooth affine finite-field strata, dimension zero); Steps 13-14 paragraphs 8-9 (gluing and final descent). The current two-point anchor calculation supplies the curve-independent weight of unit step 2.",
+  "summary": "Human-requested re-split of the 15938-character proof into six self-contained unsplit statements: raw-heart classical adic strata, actual Weil filtration realization, two-point curve/anchor purity, constant-extension reality and trace descent, point-case full flags, and reduced-frontier gluing. Parent statement unchanged; every returned argument is allocated and retained verbatim in report.md. After the landing return, reread the current def-wf-iota-real statement and made its reality criterion explicit in assembly Step 1.",
+  "blueprint": "Steps 1-2 realize paragraphs 1-5 (constituents, exact heart transport, two-point curves, anchor and descent); Steps 3-4 realize paragraphs 6-7 (raw coefficients, lattice refinement, smooth affine frontier and point flags); Step 5 realizes paragraphs 8-9 (Weil gluing, reduction recovery and final descent).",
   "tool_uses": [
-   {
-    "node": "lem-zl-finite-pushforward",
-    "why": "The finite properness identity Rg_*=Rg_! and finite weight bound, paired with the unit quasi-finite lemma rather than taking exactness from a weight statement."
-   },
-   {
-    "node": "p-linear-triangular",
-    "why": "Full invariant flag of an operator over the algebraically closed coefficient field, used only for finite-dimensional stalk linear algebra."
-   },
-   {
-    "node": "lem-kun-closed-point-field",
-    "why": "Finite residue field at a closed point, needed for the two finite-field curve test points."
-   },
-   {
-    "node": "lem-zl-immersion-weil-local-behavior",
-    "why": "Exact rational immersion operations and unchanged Frobenius stalks; the unit uses these operations but does not itself prove their sheaf-theoretic interface."
-   },
-   {
-    "node": "lem-zl-finite-adic-direct-image",
-    "why": "Exact rational finite direct image and its natural stalk formula; required in addition to the unit finite-pushforward weight bound."
-   },
-   {
-    "node": "prop-sf-open-closed-triangle-all-stages",
-    "why": "Rational localization and Weil-equivariant arrows, the precise open-closed input of the unit."
-   },
-   {
-    "node": "lem-weil-point-fibre-equivalence",
-    "why": "Rational/common-stage sheaves at a geometric point are finite-dimensional vector spaces; needed for the dimension-zero flag."
-   },
    {
     "node": "lem-pc-proper-base-change",
     "why": "Only clause (2), smoothness under base change, ensures that constant extension remains in the curve-testing geometric domain; no proper-base-change cohomology is used."
    },
    {
-    "node": "lem-sbc-smooth-pushout-filtered-colimit-stage",
-    "why": "Descent of the smooth affine curve model to a larger finite subfield by its finitely presented coordinate ring; no finite-presentation hypothesis on the infinite algebraic extension is used."
-   },
-   {
-    "node": "lem-fd-rational-coefficient-category-comparison",
-    "why": "Identity-induced equivalence between the sf and pbc RAW rational/common-stage categories only; combined with their matching integral cohomological halves."
-   },
-   {
-    "node": "lem-per-adic-heart-pullback-fibres",
-    "why": "Its raw rational/common-stage heart description and explicit finite lisse stratification with adic fibres, not a condensed-category identification."
-   },
-   {
-    "node": "lem-a1-integral-pullback-completed-comparison",
-    "why": "On derived-complete integral representatives it identifies the two pullbacks for every morphism, in particular locally closed restrictions."
-   },
-   {
-    "node": "lem-per-continuous-rational-derived-realization",
-    "why": "Its actual equivalence of the PBC raw rational heart with continuous coefficient modules, together with restriction and coefficient-extension comparisons, supplies the finite-stage constructible module."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-e-realization",
-    "why": "Only its explicit continuous/pulled-back coefficient RING-SHEAF isomorphism (E and the displayed completed integral coefficient sheaf) is used to apply the stratified-lattice theorem; no proper-base-change conclusion is used."
-   },
-   {
-    "node": "sk-lem-stratified-lattice",
-    "why": "A pro-etale lisse rational module has integral lisse lattices after finite stratification; needed before interpreting it as a classical adic system."
-   },
-   {
-    "node": "lem-per-lisse-completed-system-comparison",
-    "why": "The normalized equivalence of completed integral lisse modules and finite-level etale systems, with pullback and scalar-extension compatibility."
-   },
-   {
-    "node": "lem-tw-lisse-rational-realization",
-    "why": "Fully faithful realization of the sf raw lisse heart, normalized on pullback and coefficient extension; identifies the lattice-system object and its maps in the original heart."
-   },
-   {
-    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Clause (3) explicitly identifies the pulled-back condensed integral coefficient sheaf with the inverse limit of the constant finite quotient sheaves, needed to apply the normalized integral-system equivalence."
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "Exact rational immersion operations and unchanged Frobenius stalks; the unit uses these operations but does not itself prove their sheaf-theoretic interface."
    }
   ]
  },
@@ -438,11 +213,11 @@
   "det-prop-sfb-qlbar-colimit-x-integral-limit"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q18-898390b64",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q124-95b51e41b",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-898390b64 (reviewer sub-agent of L); spot-checked: I read all 14 steps of the item against the main-20261015 item proof (paragraphs 1-9), both new nodes, every cited statement, and Stacks 0B8X/06LH/01ZM. One repair in fixes/: Step 2 never said how the filtration from lem-zl-geometric-constituents-any-base, which lives in the def-pod/def-wf lisse category, becomes constructible Weil subsheaves of the sf heart, which def-weil-punctual-weights requires. I wrote that argument out: lem-tw-lisse-rational-realization realizes terms, maps and Weil maps fully faithfully with matching point fibres; through J (lem-fd) and lem-a1-integral-pullback-completed-comparison, fibres are exact and jointly conservative by lem-per-adic-heart-pullback-fibres, so the realized sequences are exact. The added uses were already in proof_deps. Statement and target unchanged. New lemma (a) checked: f=m/gcd(d,m) (d=m=2 gives f=1; d=2,m=3 gives f=3), and (b), the cyclic-sheet equivalence, is correct. It is not a duplicate: lem-zl-weil-constant-extension-frobenius is lisse-only and the constructible case is needed at Step 10. The frontier lemma is true (perfect field, generic-point opens, finite descent) and holds for the empty and nonreduced cases and Spec F_{q^2}. Batch-5 check: all 13 listed citations accepted. Most reach only definitions (local Frobenius, punctual and complex weights, def-pod lisse) or plain linear algebra (p-linear-triangular). lem-trf-integral-pullback-comparison-realization, reached via lem-fd and lem-tw, sits in unit sk-thm-trace-transport but only normalizes integral pullback composition on coefficient categories; it is not given by nt-assume-trace-formula and its closure reaches no trace theorem. For the maintainer, not this delivery: the item reaches thm-trf-trace-formula-e only through the existing chain thm-rp-real-lisse-purity-affine -> lem-rp-upper-bound -> cor-rp-euler-product, which should cite nt-assume-trace-formula. All 18 declared tool_uses accepted.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-95b51e41b (reviewer sub-agent of L); spot-checked: Human re-split (repair note 2026-10-21: at least 5 nodes, assembly of at most 3000 characters). The delivery adds 6 statement-only unsplit nodes, and the item proof is 5 assembly steps, 2549 characters. Item statement and stmt_deps are the same as live. The item is not superseded, and neither it nor any cited id is in the dropped list. All 14 live steps are verbatim in the report, and each argument is now stated in a new node: old 1/5/6 in constant-extension-mixed-descent (F_z~F_x^f with f=m/gcd(d,m); g_*g^* mixed; Tr∘η=m·id; then lem-a1-mixed-direct-summand(3)); old 2 in classical-weil-filtration-heart-transport; old 3-4 in two-point-curve-constituent-purity (anchor weight w_j=2log_{q_x*}|ια| and the e/f power calculation; checked against curve-testing-irreducibility d>=1 and thm-rp, which covers any constituent of a real lisse sheaf); old 7/12/13 in reduced-frontier-mixed-gluing; old 8-10 in raw-heart-adic-lisse-stratification; old 11 in point-weil-heart-flag; old 14 is item Step 5. Nothing was shortened, and no node restates the item. I read the main-20261015 proof paragraphs 1-9 and every cited statement, including the current def-wf-iota-real. All new statements are true; small cases tested: r=0, x=x*, dim 1, Jordan block, V=0, m=1, Spec k[ε]/ε², empty scheme or components, components with different weights. FIX (B3, one point): this head lost the earlier reviewer's FIX (head 0729f598, returned at landing for a stale def-wf-iota-real). I re-applied it: def-weil-derived-pullback-tensor-hom and def-weil-derived-direct-image are now cited for g^*, g_* and η in the descent node; the gluing node now cites those two plus def-weil-integral-rational-qbar-compact-support for j_!, i_*, r_* and r^*. I also cited lem-tw-lisse-rational-realization and lem-per-continuous-rational-derived-realization for the two realization functors in the raw-heart node. stmt_deps are updated; BFS finds no cycle. Batch-5: punctual-weights, iota-real, local-frobenius-trace and pod-lisse are general definitions, and the constant-extension equivalence is not a trace-formula or Poincaré-duality step. All were already in the base proof_deps, so the closure does not grow. Accepted. tool_uses lem-pc-proper-base-change(2) and immersion-weil-local-behavior accepted.; 3 file(s) fixed by the reviewer"
  }
 }

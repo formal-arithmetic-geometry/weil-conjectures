@@ -21032,3 +21032,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q126/def-nagata-strict-transform-closed-chart-model (reviewer FIX; after a return; new nodes: 0)
 - 08:15 L: merged deliver/Q02/lem-wf-tate-twist-compatibility (reviewer FIX; after a return; new nodes: 0)
 - 08:15 L: merged deliver/Q136/def-nagata-strict-transform-chart-comparison (reviewer PASS; after a return; new nodes: 0)
+- 08:15 L: merged deliver/Q124/thm-zl-real-mixed-by-curves (reviewer FIX; after a return; new nodes: 6)
