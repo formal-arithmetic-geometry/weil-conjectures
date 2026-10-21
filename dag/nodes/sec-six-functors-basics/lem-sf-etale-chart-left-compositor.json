@@ -21,9 +21,90 @@
   "lem-sf-etale-immersion-shriek-normalization",
   "lem-amb-etale-compact-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the domains in the ambient unbounded category. For any chosen compactification $q=rj$ occurring here and $K$ with $\\mathcal H^a(K)=0$ for $a<m$, the module-sheaf categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] on the source to represent $K$ by an injective complex $I$ zero in degrees below $m$. By [def-amb-etale-compact-support], $Dj_!K$ is represented by the degreewise complex $j_!I$, also zero below $m$. Apply the same representative lemma on the compactification to obtain an injective complex $J$, zero below $m$, representing $Dj_!K$. It is K-injective by part (2) of that lemma. The computation of total direct image in [def-amb-etale-compact-support], applied to the identity resolution of $J$, gives $Rq_!K\\cong Q(r_*J)$. This complex is zero below $m$, since degreewise extension by zero and direct image carry the zero module sheaf to zero. Thus every compact-support candidate used below preserves $D^{\\ge m}$ and hence $D^+$. This argument applies to the already chosen compactifications; it needs no cohomological-dimension bound.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K (lemma-injective-resolutions-exist), parts (2)-(3), and Tag 070J (lemma-bounded-below-injectives-K-injective), applied to the candidate of more-etale.tex preceding Tag 0F7I; enough injectives: injectives.tex Tag 01DU."
+   }
+  },
+  {
+   "text": "By [lem-sf-etale-immersion-shriek-normalization], $Ds_!H$ and $Di_*H$ are bounded below whenever $H$ is, and so is $Dv_!L$ for bounded-below $L$. Step 1 now places $Rp_!Di_*H$ and every iterated compact-support value below in $D^+$. All applications of the compositors in [lem-amb-etale-compact-comparisons] are legitimate: $(f,s)$, $(v,pi)$ and $(p,i)$ consist of compactifiable separated finite-type maps of Noetherian schemes, including the indicated composite $pi$, by the hypotheses. Start with the following three isomorphisms, in the displayed order: $$Rf_!Ds_!H\\xrightarrow{Rf_!(n_{s,H}^{-1})}Rf_!Rs_!H\\xrightarrow{\\alpha_{f,s,H}}R(fs)_!H\\xrightarrow{\\alpha_{v,pi,H}^{-1}}Rv_!R(pi)_!H.$$ In the last arrow first transport $R(fs)_!H$ to $R(vpi)_!H$ along the specified equality $fs=vpi$. This transport is substitution along equality, so is natural in $H$; one may eliminate that equality to check this with identical functors.",
+   "uses": [
+    "lem-sf-etale-immersion-shriek-normalization",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), with Tag 0F7I (lemma-shriek-well-defined); normalized factored-chart specialization."
+   }
+  },
+  {
+   "text": "Continue the preceding chain by $$Rv_!R(pi)_!H\\xrightarrow{Rv_!(\\alpha_{p,i,H}^{-1})}Rv_!Rp_!Ri_!H\\xrightarrow{Rv_!Rp_!(n_{i,H})}Rv_!Rp_!Di_*H\\xrightarrow{n_{v,Rp_!Di_*H}}Dv_!Rp_!Di_*H.$$ The first arrow is the inverse of the $(p,i)$ compositor of [lem-amb-etale-compact-comparisons], whiskered by $Rv_!$. The second and third arrows use exactly the closed normalization $n_i:Ri_!\\to Di_*$ and the open normalization $n_v:Rv_!\\to Dv_!$ of [lem-sf-etale-immersion-shriek-normalization]. In particular $n_v$ is evaluated at $Rp_!Di_*H$, which is bounded below by steps 1 and 2. Compose these three arrows with those of step 2 and call the resulting morphism $\\gamma_H$. Reading the arrows from right to left as a product gives exactly the six-factor formula in the statement, with the specified equality transport.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-sf-etale-immersion-shriek-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), with Tag 0F7I (lemma-shriek-well-defined); normalized factored-chart specialization."
+   }
+  },
+  {
+   "text": "Each arrow in steps 2 and 3 is an isomorphism. For a functor $F$ and an isomorphism $u$, $F(u^{-1})F(u)=F(u^{-1}u)=1$ and likewise in the other order. Thus whiskering preserves each inverse. Reversing the six arrows (and the equality transport) and taking their inverses gives an inverse to $\\gamma_H$: adjacent pairs cancel by associativity. This proves invertibility with the specified component formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), with Tag 0F7I (lemma-shriek-well-defined); normalized factored-chart specialization."
+   }
+  },
+  {
+   "text": "Let $F_0,\\ldots,F_6$ be the successive functors in the six-arrow chain of steps 2 and 3, with the equality transport included in the third arrow, and let $t_j:F_{j-1}\\to F_j$ be its arrows. For $a:H^\\prime\\to H$ in $D^+(U_{\\mathrm{et}},A)$, naturality of the normalizations in [lem-sf-etale-immersion-shriek-normalization] and of the compositors in [lem-amb-etale-compact-comparisons] gives $$t_{j,H}F_{j-1}(a)=F_j(a)t_{j,H^\\prime}.$$ This also holds for inverses by multiplying the original naturality equation by the two inverse components, and for whiskered arrows by applying the outer functor; for $n_v$ apply its naturality to $(Rp_!Di_*)(a)$. Substituting these six equalities successively in $t_{6,H}\\cdots t_{1,H}F_0(a)$ gives $$\\gamma_HF_0(a)=F_6(a)\\gamma_{H^\\prime}.$$ Consequently the constructed components define an actual natural transformation on $D^+(U_{\\mathrm{et}},A)$ with values in $D(Y_{\\mathrm{et}},A)$. Together with step 4 this is the required natural isomorphism.",
+   "uses": [
+    "lem-sf-etale-immersion-shriek-normalization",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), with Tag 0F7I (lemma-shriek-well-defined); normalized factored-chart specialization."
+   }
+  },
+  {
+   "text": "Finally change any chosen compactifications. Denote the old and new chain functors by $F_j,F_j^\\prime$ and their arrows by $t_j,t_j^\\prime$. The canonical comparisons of [lem-amb-etale-compact-comparisons], whiskered through the successive factors, give $c_j:F_j\\xrightarrow{\\sim}F_j^\\prime$; the exact functors $Ds_!,Di_*,Dv_!$ themselves stay fixed. Independence of the compositors from compactification choices gives the comparison squares for the compositor arrows. Compatibility of the specified normalizations with compactification changes in [lem-sf-etale-immersion-shriek-normalization] gives those squares for the normalization arrows. For an inverse arrow multiply its comparison square by inverses; for an outer functor that also changes, first use the naturality of its comparison at the inner arrow and then the inner comparison square. These operations give, for each $j$, $$c_jt_j=t_j^\\prime c_{j-1}.$$ Equality transport is compatible with these equations by eliminating $fs=vpi$. Multiply the six equations and cancel the intermediate comparisons to obtain $$c_6\\gamma=\\gamma^\\prime c_0.$$ Here $c_0$ is the change of $Rf_!Ds_!$, and $c_6$ is $Dv_!$ applied to the change of $Rp_!$ at $Di_*$. This is precisely compatibility with canonical changes of compactification. The identity and cocycle laws already stated in [lem-amb-etale-compact-comparisons] make this valid for successive changes as well.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-sf-etale-immersion-shriek-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I (lemma-shriek-well-defined), Tag 0F7J (lemma-shriek-composition), choice-independence diagram; Tag 0F7K (lemma-pseudo-functor), coherent composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-amb-etale-compact-support",
+  "lem-sf-etale-immersion-shriek-normalization",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I, 0F7J, 0F7K, specialized by whiskering and composing the specified immersion normalizations; lower-bound check uses derived.tex Tags 013K and 070J and injectives.tex Tag 01DU."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +140,31 @@
    "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, HasCompactSupport.comp_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.IsClosedImmersion.comp_iff, HasCompactMulSupport.comp_isClosedEmbedding, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison Rf shriek Ds extension by zero to Dv extension by zero Rp shriek Di pushforward for equal factorizations f s = v p i of ordinary etale derived compact support",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_hom_app_app, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab, AlgebraicGeometry.Scheme.Hom.appLE_map', AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, SheafOfModules.pushforwardCongr_hom_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism for derived etale compact support of equal factorizations using extension by zero and closed immersion pushforward",
+   "results": "SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.leftDerivedZeroIsoSelf",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose natural isomorphisms for derived compactly supported pushforward and exact immersion functors on bounded below etale sheaves to compare equal factorizations",
+   "results": "AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-chart-adjoint-comparison",
@@ -81,5 +183,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-chart-left-compositor",
+  "worker": "stage1",
+  "summary": "Retained the statement and specified six-factor comparison. Proved its bounded-below domain by existing injective-representative and compact-support construction nodes, then wrote the typed six-arrow chain, explicit inverse, componentwise naturality calculation and comparison-square pasting for changes of compactification. Reused existing nodes throughout; no new nodes and no Lean edits.",
+  "blueprint": "Opening and final paragraphs of main-20261015 sk-prop-sf-rf-shriek-preservation.proof.md: composition on a closed/projection chart with source and target open restrictions. This item supplies the specified left-functor comparison used by the parent chart-adjoint comparison, without asserting a right-adjoint comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic bounded-below ordinary etale compact-support compositors and canonical compactification changes; the preservation unit has no other node constructing these comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic existence of injectives in ordinary constant-ring module sheaves supplies the hypothesis of the lower-bound representative theorem, without changing the chart route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic bounded-below injective representatives, with the same lower bound, and their K-injectivity verify all intermediate compact-support domains; no fact of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6fa18623c",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6fa18623c (reviewer sub-agent of L); spot-checked: I read the item in full (6 steps, no new nodes). Statement, stmt_deps, source and blueprint are byte-identical to the creation state in the parent split (Q17), so the target is not weakened. Each step checks against the full statements of lem-sf-etale-immersion-shriek-normalization (n_j:Rj_!→Dj_!, n_c:Rc_!→Dc_* on D^+, natural and compatible with compactification changes) and lem-amb-etale-compact-comparisons (natural compositor on D^+, independent of choices, coherent). Step 1 checks the D^+ domain of every Rq_!=Rr_*Dj_! through same-lower-bound injective representatives and their K-injectivity (013K/070J/01DU nodes) plus the K-injective formula of def-amb-etale-compact-support; this is correct for any m and needs no cohomological-dimension bound. The six arrows are correctly typed; n_v is evaluated at Rp_!Di_*H, which lies in D^+. The fs=vpi transport is substitution of equal morphisms. Steps 4 and 5 (inverse, naturality pasting) are genuinely elementary. Step 6 pastes the cited choice-independence squares with interchange, and the endpoints c_0 and c_6 are correct. Sources read: Stacks more-etale 0F7I (the construction before it and the change isomorphisms), 0F7J (lines 3159-3199) and 0F7K. The route is the unit's step 4 (composition and open locality), with no SGA. Small cases: U empty, i=id, shifts of H, p not proper (only Rp_! is used). The rg -L duplicate search found only the parent, the unit and det-thm-restriction-local. Accepted tool_uses: the compact comparisons node and the two generic injective nodes. Not a delivery fault: the item lacks a lean_audit field since its creation in the parent split. No fixes."
  }
 }
