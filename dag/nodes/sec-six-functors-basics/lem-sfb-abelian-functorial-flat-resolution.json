@@ -11,9 +11,76 @@
   "sk-def-sfb-sheaf-tensor",
   "lem-sfb-sheaf-functorial-flat-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\mathcal U$. For an abelian group $M$, let $P(M)=\\bigoplus_{m\\in |M|}\\mathbf Z$, concretely the finitely supported integer-valued functions on the underlying set of $M$, with pointwise addition. Write $e_m$ for the function equal to $1$ at $m$ and $0$ elsewhere. Each element has the unique expression $\\sum_m a_m e_m$ given by its coordinates, so $(e_m)_{m\\in |M|}$ is a basis by [def-weil-pbc-free-module]. This construction stays in $\\mathcal U$. For a homomorphism $f:M\\to N$ define $P(f)(\\sum_m a_m e_m)=\\sum_m a_m e_{f(m)}$. The sum is finite; repeated indices are added, and distributivity makes this an additive homomorphism. Both $P(\\mathrm{id}_M)$ and the identity send $e_m$ to $e_m$, while $P(g\\circ f)$ and $P(g)\\circ P(f)$ send $e_m$ to $e_{g(f(m))}$. Additivity and the displayed expression give equality on every element. Thus $P$ is a functor.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4, canonical free abelian cover: coefficient version on underlying sets; finite-sum construction written out by NH (Stacks Tag 00C2, algebra-item-free-module, for the basis convention)"
+   }
+  },
+  {
+   "text": "Define $\\pi_M:P(M)\\to M$ by $\\pi_M(\\sum_m a_m e_m)=\\sum_m a_m m$, where integers act by repeated addition and negatives. Finite-sum distributivity proves additivity. For $f:M\\to N$, additivity gives $f(\\sum_m a_m m)=\\sum_m a_m f(m)$, so $f\\circ\\pi_M=\\pi_N\\circ P(f)$ on every element. Hence $\\pi:P\\to\\mathrm{id}$ is natural. Since $\\pi_M(e_m)=m$, each $\\pi_M$ is surjective. It is also an epimorphism: if $a,b:M\\to T$ satisfy $a\\circ\\pi_M=b\\circ\\pi_M$, evaluate on $e_m$ to get $a(m)=b(m)$ for every $m$, whence $a=b$. No additive structure on the functor $P$ is asserted or needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4, sentence: the canonical map is a functorial epimorphism; coefficient finite-sum and cancellation argument written out by NH"
+   }
+  },
+  {
+   "text": "The canonical integer action makes every abelian group a $\\mathbf Z$-module, and every additive homomorphism is $\\mathbf Z$-linear (the positive integer case follows by induction on repeated addition, and the negative case by preservation of negatives). The basis in step 1 makes $P(M)$ a free $\\mathbf Z$-module. Apply the free-module clause of [lem-weil-pbc-projective-module-flat] with $R=\\mathbf Z$: $P(M)$ is flat as a module, without a finite-rank hypothesis.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051G, algebra-lemma-local-artinian-characterize-flat, opening sentence of the proof: every projective module is flat and every free module is projective; the cited node isolates this unrestricted fact"
+   }
+  },
+  {
+   "text": "Take a short exact sequence $0\\to A\\xrightarrow{i}B\\xrightarrow{q}C\\to0$ of abelian groups. It is the same short exact sequence of $\\mathbf Z$-modules: kernels are the subgroups mapping to zero and cokernels are quotients by image, with their inherited integer actions. For the flat module $P(M)$, [lem-weil-pbc-flat-tensor-exact] gives injectivity of the first tensored map and exactness at the middle, for tensoring on either side. Apply [lem-weil-pbc-tensor-right-exact] to $A\\to B\\to C\\to0$ to obtain surjectivity of the last tensored map, again on either side. These are exactly the three conditions for a short exact sequence. The tensors here are precisely those specified for $\\operatorname{Ab}_{\\mathcal U}$ in [sk-def-sfb-sheaf-tensor], namely $\\otimes_{\\mathbf Z}$, so $P(M)$ is flat in the sense of the item.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (algebra-lemma-flat) and 00DF (algebra-lemma-tensor-product-exact): flat tensor preserves exactness and tensor is right exact"
+   }
+  },
+  {
+   "text": "Steps 1 and 4 give a functor with flat values, and step 2 gives a natural transformation to the identity whose components are epimorphisms. This is exactly the meaning of functorial flat resolution stated in [lem-sfb-sheaf-functorial-flat-resolution]. The universe was arbitrary, so the assertion holds for every $\\mathcal U$.",
+   "uses": [
+    "lem-sfb-sheaf-functorial-flat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4, functorial flat resolutions via the canonical free cover; assembled coefficient input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-sheaf-functorial-flat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+  "place": "Part 4, free abelian cover argument specialized to coefficient abelian groups; explicit finite-sum construction and functoriality by NH, with Stacks Tags 00C2, 051G, 00HD and 00DF for the cited module facts"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +137,176 @@
    "results": "AddCommGrpCat.free; AddCommGrpCat.free_obj_coe; FreeAbelianGroup.of; FreeAbelianGroup; AddCommGrpCat.free_map_coe; FreeAbelianGroup.instMonad; FreeAbelianGroup.instLawfulMonad; AddCommGrpCat.instIsLeftAdjointFree",
    "date": "2026-10-21",
    "verdict": "no exact match: free functor, free-forgetful adjunction and module flatness do not alone state functorial flat resolutions for the tensor monoidal category of abelian groups"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFunctorialFlatResolution|hasFunctorialFlatResolution|FunctorialFlatResolution",
+   "results": {
+    "t": "2026-10-21T03:21:02Z",
+    "tool": "grep",
+    "query": "HasFunctorialFlatResolution|hasFunctorialFlatResolution|FunctorialFlatResolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGrpCat.free",
+   "results": {
+    "t": "2026-10-21T03:21:17Z",
+    "tool": "loogle",
+    "query": "AddCommGrpCat.free",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AddCommGrpCat.free",
+     "AddCommGrpCat.instIsLeftAdjointFree",
+     "AddCommGrpCat.instPreservesMonomorphismsFree",
+     "AddCommGrpCat.free_obj_coe",
+     "AddCommGrpCat.free_obj",
+     "AddCommGrpCat.free_map",
+     "AddCommGrpCat.adj",
+     "AddCommGrpCat.free_map_coe"
+    ],
+    "digest": "145b4fa33f9f4620"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free abelian groups on underlying sets provide natural epimorphisms with flat sources",
+   "results": {
+    "t": "2026-10-21T03:21:18Z",
+    "tool": "leansearch",
+    "query": "Free abelian groups on underlying sets provide natural epimorphisms with flat sources",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FreeAddGroup",
+     "AddCommGrpCat.free",
+     "Module.Flat.of_free",
+     "FreeAbelianGroup",
+     "AddGroup.fg_iff_exists_freeAddGroup_hom_surjective",
+     "AddCommGrpCat.adj",
+     "FreeAbelianGroup.lift",
+     "FreeAddGroup.lift"
+    ],
+    "digest": "e6151aa4c3af837a"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian groups admit a functorial surjection from free tensor-flat abelian groups",
+   "results": {
+    "t": "2026-10-21T03:21:19Z",
+    "tool": "leanfinder",
+    "query": "Abelian groups admit a functorial surjection from free tensor-flat abelian groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddCommGrpCat.free",
+     "AddCommGrpCat.instIsLeftAdjointFree",
+     "AddCommGrpCat.adj",
+     "LinearMap.kerLTensorEquivOfSurjective",
+     "AddCommGrpCat.tensorObj_eq",
+     "rTensor.toFun",
+     "rTensor.inverse_comp_rTensor",
+     "lTensor.toFun"
+    ],
+    "digest": "a0831e83cdd5c71e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "def free|def adj",
+   "results": {
+    "t": "2026-10-21T03:21:45Z",
+    "tool": "grep",
+    "query": "def free|def adj",
+    "sub": "Algebra/Category/Grp/Adjunctions.lean",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "53",
+     "72",
+     "117",
+     "123"
+    ],
+    "digest": "86d8eda94be87142"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "of_free|lTensor_exact|rTensor_exact",
+   "results": {
+    "t": "2026-10-21T03:21:47Z",
+    "tool": "grep",
+    "query": "of_free|lTensor_exact|rTensor_exact",
+    "sub": "RingTheory/Flat/Basic.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "45",
+     "52",
+     "55",
+     "231",
+     "323"
+    ],
+    "digest": "ec67524d3d16b44e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian group functor counit is surjective and tensoring its values over integers preserves short exact sequences",
+   "results": {
+    "t": "2026-10-21T03:21:48Z",
+    "tool": "leanfinder",
+    "query": "Free abelian group functor counit is surjective and tensoring its values over integers preserves short exact sequences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddCommGrpCat.instIsLeftAdjointFree",
+     "AddCommGrpCat.adj",
+     "ModuleCat.free_shortExact",
+     "AddCommGrpCat.free",
+     "rTensor_exact",
+     "lTensor_exact",
+     "Profinite.NobelingProof.succ_exact",
+     "rTensor.inverse_comp_rTensor"
+    ],
+    "digest": "fe25b8762c13fce4"
+   },
+   "date": "2026-10-21",
+   "verdict": "no exact match for the whole item: free-functor, adjunction and algebraic flatness hits supply ingredients, not this functorial tensor-flat cover statement; the Cartesian tensor hit is a different monoidal structure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-sfb-module-derived-pushpull-adjunction",
@@ -96,10 +329,25 @@
  "blueprint": {
   "from": {
    "node": "def-sfb-module-derived-pushpull-adjunction",
-   "place": "Proof: left derivability via K-flat resolutions; the coefficient flat-resolution input in the module-category hypothesis verification (old step 2).",
+   "place": "Proof of def-sfb-module-derived-pushpull-adjunction: left derivability via K-flat resolutions; current split step 2 applies sheaf flat-resolution transfer to Ab and needs this coefficient input. This realizes Part 4 of sk-prop-sfb-module-category, canonical free abelian flat cover.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-abelian-functorial-flat-resolution",
+  "worker": "stage1",
+  "summary": "Constructed the free abelian cover on underlying sets, proved the functor laws, naturality and epimorphic components by finite-sum formulas, and combined existing Mathlib leaves for free-module flatness and both tensor exactness directions. No new nodes. Did not repeat the rejected attachment. Removed the unsupported named-declaration assertion from the source place; retained prior search and candidate metadata.",
+  "blueprint": "Ancestor def-sfb-module-derived-pushpull-adjunction, current proof step 2: the Ab coefficient flat-resolution input. Steps 1–2 realize the canonical free-cover sentence of sk-prop-sfb-module-category Part 4; steps 3–4 justify flatness and step 5 assembles the coefficient hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-bac0fd5c4",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bac0fd5c4 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from live, which still has it unsplit, and the delivery adds no new nodes. Step 1 builds P(M) as the finitely supported functions on |M|; by def-weil-pbc-free-module this is free on the basis e_m, and P is a functor. Step 2 shows π is natural and an epimorphism directly, by cancelling on the e_m. Step 3 gets flatness from the 'every free module is flat' clause of the leaf lem-weil-pbc-projective-module-flat with R=Z; this matches the Stacks 051G proof opening. Step 4 gets injectivity and middle exactness on both sides from lem-weil-pbc-flat-tensor-exact and surjectivity at the end from lem-weil-pbc-tensor-right-exact, which together give short exact sequences. sk-def-sfb-sheaf-tensor fixes ⊗_Z, not the Cartesian product. Step 5 uses only the definition sentence of lem-sfb-sheaf-functorial-flat-resolution. That node's unit, sk-def-sfb-derived-categories, is cited by sk-def-sfb-module-derived-pushpull, so it is on route, and it is unsplit and generic, so there is no cycle. The other citations are Mathlib leaves used as tools, so no tool_uses are needed. Edge cases checked: M=0, Z/2, infinite M, non-injective f, and P not being additive. The 'flat' and 'functorial flat resolution' wording matches the sheaf-transfer node, which is what ancestor step 2 needs. Part 4 of the main-20261015 blueprint (Z_U sheaf cover) is the sheaf version of this free-cover argument. I found no duplicate: lem-pc-sites-modules-functorial-flat-cover is about module sheaves on a site and is off route, and the modobj and weil-pbc module-resolution nodes take a flat resolution as input. There are no SGA citations. Maintainer notes: (1) the report says the Lean claim was removed from source.place, but the place still names AddCommGrpCat.hasFunctorialFlatResolution (ModuleObject/Basic.lean:150-152, infer_instance) and RingObjects/Ab.lean:289-291 (flat-separator instance); I left it unchanged. (2) Whether that sheaf-project Lean should be attached instead of the split is the maintainer's attachment decision; nothing was compiled."
  }
 }
