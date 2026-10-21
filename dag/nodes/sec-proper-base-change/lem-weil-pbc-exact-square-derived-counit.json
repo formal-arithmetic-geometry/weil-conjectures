@@ -13,9 +13,75 @@
   "def-sfb-right-derived-functor",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either adjunction, [lem-weil-pbc-termwise-adjunction-homotopy] supplies the specified termwise adjunction on complexes and homotopy categories, including the ordinary counit and transpose. By [lem-weil-pbc-exact-functor-derived-factorization], exactness of $F$ makes its termwise functor preserve quasi-isomorphisms and supplies $D(F)$ and $\\varphi$. By [lem-weil-pbc-exact-functor-derived-functor](1), this factorization is a universal left derived pair. Here one can use the homotopy localization: the definition of the derived category identifies it with complex localization, and the termwise functors and comparisons factor through homotopy. Apply [lem-sfb-resolving-derived-adjunction-normalization] with its $A=\\mathcal B$, $B=\\mathcal A$, $G=F$, its right adjoint equal to $G$, and its resolving class the whole $K(\\mathcal B)$. The identity represents every complex in this class, and exactness gives the required inversion of quasi-isomorphisms. The target has K-injective resolutions by hypothesis. Work in a common ambient universe containing the fixed categories and their chosen derived Hom sets. The lemma gives $D(F)\\dashv RG$ with exactly the stated Hom formula for every chain map $f:F(M)\\to I$. Apply the same argument to the primed pair. The universal right pairs in that lemma are the independently fixed pairs in the statement, so no change of $RG,RG',\\eta,\\eta'$ is made.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+   }
+  },
+  {
+   "text": "Take $M=G(I)$ and $f=\\varepsilon^0_I:F G(I)\\to I$ in Step 1. Its ordinary transpose is $1_{G(I)}$ by the adjunction triangle identity. Thus the derived transpose of $Q(\\varepsilon^0_I)\\circ\\varphi_{G(I)}$ is $\\eta_I$. The inverse derived transpose sends $h$ to $\\varepsilon^D_{QI}\\circ D(F)(h)$, so\n$$\\varepsilon^D_{QI}\\circ D(F)(\\eta_I)=Q(\\varepsilon^0_I)\\circ\\varphi_{G(I)}.$$\nThis is the required counit equation with its localization comparison written explicitly. The calculation holds for every complex $I$, in particular for K-injectives. Repeating it for $F'\\dashv G'$ gives the primed equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+   }
+  },
+  {
+   "text": "The fixed universal right pairs have $\\eta_I$ and $\\eta'_J$ invertible whenever $I,J$ are K-injective, by [def-sfb-right-derived-functor]. Consequently Step 2 determines the counit at each such $QI$ uniquely, by cancelling $D(F)(\\eta_I)$. By [def-weil-abstract-derived-category], every derived object has a complex representative and localization inverts its quasi-isomorphism to a K-injective resolution. Hence every object is isomorphic to some $QI$. Naturality determines the counit everywhere from its values on these representatives. Two adjunctions on the fixed functors satisfying the Hom formula therefore have equal counits and equal inverse Hom maps $h\\mapsto\\varepsilon^D\\circ D(F)(h)$; their Hom bijections and units agree. This proves the asserted canonical specification, and the same reasoning applies to the primed adjunction.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+   }
+  },
+  {
+   "text": "Fix a K-injective $J$ of $\\mathcal A'$. Suppress only the canonical localization/composition isomorphisms, which are natural and induced by the strict functor identities. Put $a_J=D(s)(\\eta'_J)$ and $\\lambda_J=D(F)(a_J)$; it is an isomorphism by Step 3. The two proposed counit-square arrows at $QJ$ have the same source, using $D(r)D(F')=D(F)D(s)$. Precompose the first with $\\lambda_J$. Step 2 and the termwise ordinary-counit hypothesis give\n$$D(r)(\\varepsilon'^{D}_{QJ})\\circ\\lambda_J=Q(r(\\varepsilon'^0_J))=Q(\\varepsilon^0_{rJ}).$$\nFor the second arrow use the assumed normalization $\\beta_{QJ}\\circ a_J=\\eta_{rJ}$ and then Step 2:\n$$\\varepsilon^D_{Q(rJ)}\\circ D(F)(\\beta_{QJ})\\circ\\lambda_J=\\varepsilon^D_{Q(rJ)}\\circ D(F)(\\eta_{rJ})=Q(\\varepsilon^0_{rJ}).$$\nHere $rJ$ is K-injective by the stated preservation hypothesis, and $D(r)(QJ)=Q(rJ)$ under the localization comparison. Cancelling the isomorphism $\\lambda_J$ proves the square equation at $QJ$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+   }
+  },
+  {
+   "text": "Write $T=D(r)D(F')RG'$, identified with $D(F)D(s)RG'$ by the specified exact-functor composition comparisons, and put $L_N=D(r)(\\varepsilon'^{D}_N)$ and $R_N=\\varepsilon^D_{D(r)N}\\circ D(F)(\\beta_N)$. Both are natural transformations $T\\to D(r)$: this follows directly from naturality of the two counits, $\\beta$, and the comparison isomorphisms. For arbitrary $N$, choose an isomorphism $u:N\\xrightarrow{\\sim}QJ$ as in Step 3. Naturality gives\n$$D(r)(u)\\circ L_N=L_{QJ}\\circ T(u),\\qquad D(r)(u)\\circ R_N=R_{QJ}\\circ T(u).$$\nStep 4 makes the right sides equal; cancel $D(r)(u)$ to obtain $L_N=R_N$. Thus only normalization on K-injectives was used. No postcomposition universality of $D(s)RG'$ and no normalization on another complex enters this argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 070Y (lemma-K-injective-defined); exact-square calculation by NV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F, 09T5, 0DVC and 070Y; normalized adjunction via the existing resolving-class lemma, followed by the explicit counit and exact-square cancellation in Steps 2-5"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +124,45 @@
    "results": "{\"top\": [\"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: the read derived-adjunction hits concern one adjunction; none derives a square from normalization only on K-injectives without a postcomposition universality hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact square preserving K injectives and ordinary adjunction counits intertwines derived adjunction counits when the comparison is normalized only on K injectives",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_unit\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:44-150; derivedε_fac_app (125), derived (144), derived_counit concern one derived adjunction with additional absolute-derived hypotheses and do not state the exact-square result from normalization only on K-injectives"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*counit|derivedε_fac_app|mapDerivedCategory.*Adjunction",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"n_hits\": 4, \"note\": \"\", \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:44-150; derivedε_fac_app (125), derived (144), derived_counit concern one derived adjunction with additional absolute-derived hypotheses and do not state the exact-square result from normalization only on K-injectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derived_counit\"], \"n_hits\": 1, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:44-150; derivedε_fac_app (125), derived (144), derived_counit concern one derived adjunction with additional absolute-derived hypotheses and do not state the exact-square result from normalization only on K-injectives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived adjunction counits in a commuting exact square from comparison normalization on K injective complexes",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:44-150; derivedε_fac_app (125), derived (144), derived_counit concern one derived adjunction with additional absolute-derived hypotheses and do not state the exact-square result from normalization only on K-injectives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms between derived right adjoints respecting ordinary counits on injective resolutions preserve derived adjunction counits",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_unit\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:44-150; derivedε_fac_app (125), derived (144), derived_counit concern one derived adjunction with additional absolute-derived hypotheses and do not state the exact-square result from normalization only on K-injectives"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-tower-derived-evaluation-normalization",
@@ -80,5 +181,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-exact-square-derived-counit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Applied existing exact-left-derived and resolving-class normalization tools to the whole homotopy category, specialized the Hom formula to the ordinary counit, proved canonical uniqueness on K-injective representatives, and calculated the exact square by invertible precomposition and naturality. No new nodes. Searches found only single-derived-adjunction Mathlib formulas, not the complete normalized exact-square assertion.",
+  "blueprint": "Realizes the first sentence of main-20261015 prop-weil-pbc-direct-image-limits.proof.md: evaluation of the total right derived tower direct image, specifically old normalization Steps 6-8 carried by this generic exact-square counit item. No change to the proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic derived-adjunction existence with an all-chain-map Hom formula, used with the whole homotopy category as resolving class; the proper-base-change unit does not supply this homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies the termwise exact factorization as a universal left derived pair, needed to apply the normalization theorem; this is a localization tool, not a geometric replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Supplies the termwise ordinary transpose and counit on complexes and homotopy categories for the normalized derived adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-e96f07142",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-e96f07142 (reviewer sub-agent of L); spot-checked: Read the item and the six cited statements in full; there are no new nodes. The statement and stmt_deps are unchanged against the NM creation snapshot. There is no repair note, so the re-split rule does not apply. proof_deps equals the union of the step uses. A closure check over 247 nodes finds no path back to the item or its parent, so there is no cycle. No SGA is cited. Stacks derived.tex 015F, 0DVC, 09T5 and 070Y were read and support the use made of them; the square calculation is agent-written, so proof_origin agent is right. Step 1: the hypotheses of lem-sfb-resolving-derived-adjunction-normalization hold with its A,B,G,F equal to the item's B,A,F,G. Both categories are abelian, the target has K-injective resolutions, P is all of K(B) because identity resolutions work and exact F inverts quasi-isomorphisms, and the universe is the common chosen one. The left pair from exact-functor-derived-functor(1) moves from complexes to the homotopy category along the full, object-surjective quotient. Step 2: the counit has transpose 1, so ε^D D(F)(η_I) = Q(ε0_I)φ_{GI}; the φ factor is covered by the statement's comparison convention. Step 3: def-sfb-right-derived-functor states that η is invertible on K-injectives. With essential surjectivity of Q and naturality this fixes the counit and hence the adjunction. Step 4: both composites precomposed with λ_J = D(F)D(s)η'_J equal Q(ε0_{rJ}), by the counit hypothesis and by the β normalization with Step 2. λ_J is invertible because J is K-injective, so cancelling it is valid. Step 5: naturality along u: N ≅ QJ gives the equation for every N. Small cases checked: identity r, s and β, zero categories, unbounded complexes, and β being fixed by its K-injective values. Not a duplicate: lem-kun-derived-adjoint-square-comparison assumes D(W)RR is right derived with normalization on all complexes; lem-sbc-unbounded-exact-adjunction-square is a geometric special case; lem-weil-pbc-kinjective-exact-square-comparison only constructs β. Parent step 4 uses the item as stated. Tool uses accepted: lem-sfb-resolving-derived-adjunction-normalization is a generic black box; the two sk-def-exchange tools are already on the route. No fixes."
  }
 }
