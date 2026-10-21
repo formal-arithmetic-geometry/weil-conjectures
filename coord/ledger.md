@@ -23654,3 +23654,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T20:26:24Z L: superseded stage-1 delivery NV/lem-sfb-prime-to-ell-cochain-finite-quotient-descent at 7b4dcb4fd301f1f952821aa37e9089bbf8acdb27; current completion retained; packet archived at refs/superseded/NV/lem-sfb-prime-to-ell-cochain-finite-quotient-descent/7b4dcb4fd301f1f952821aa37e9089bbf8acdb27; stale return retired.
 - 20:26 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 20:26 L: merged deliver/NI/lem-sfb-ind-unipotent-procyclic-difference (stage 2; reviewer PASS; parallel immutable checks)
+- 20:26 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
