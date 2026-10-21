@@ -22104,3 +22104,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:11 L: merged deliver/H2/Sheaf.CategoryTheory.FormalExactProjectionMate (stage 3; reviewer PASS; first push; landing 20261021T101102-L-8284 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:11 L: merged deliver/H2/Sheaf.CategoryTheory.TensorArrowMateRightUnit (stage 3; reviewer PASS; first push; landing 20261021T101107-L-9211 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:11 L: merged deliver/H2/Sheaf.Paper.ReductionPullbackDerivedTower (stage 3; reviewer PASS; first push; landing 20261021T101111-L-10073 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:11 L: merged deliver/H2/WeilConjectures.SixFunctors.Etale.Derived.Exchange (stage 3; reviewer PASS; after a return; landing 20261021T101116-L-10637 (interface); batch 20261021T100250; modules 1; new nodes 0; change records: coord/changes/H2-etale-exchange-local-proof-attributes.md)
