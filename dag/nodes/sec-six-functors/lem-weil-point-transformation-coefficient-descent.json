@@ -23,9 +23,111 @@
   "def-weil-algebraically-closed-coefficients",
   "def-weil-point-fd-qlbar-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-weil-isomorphism-derived-pullback] with the automorphism $g$ of $s$; $\\ell$ is invertible since $\\ell\\ne p$. Thus $P_E$ preserves the integral category. By [def-weil-rationalization-karoubi] the rational category has exactly the integral objects and Hom groups tensored with $E$. The formulas in [def-weil-finite-coefficient-point] and [def-weil-derived-pullback-tensor-hom] give, for an integral $v:K\\to K'$ and $a\\in E$, $F_E(v\\otimes a)=a(F_E^{\\mathrm{int}}(v)\\otimes E)$ and $H_E(v\\otimes a)=a(F_E^{\\mathrm{int}}(P_Ev)\\otimes E)$. In particular the proposed component $t_{E,K}:=\\eta^E_K\\otimes E$ has source $F_EK$ and target $H_EK$, both in $D^b_{\\mathrm{fd}}(E)$.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-rationalization-karoubi",
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "For integral $v:K\\to K'$, the assumed naturality is $F_E^{\\mathrm{int}}(P_Ev)\\eta^E_K=\\eta^E_{K'}F_E^{\\mathrm{int}}(v)$. Apply the module-complex scalar-extension functor $-\\otimes_{\\mathcal O_E}E$ and multiply the resulting equality by $a\\in E$. The formulas of [def-weil-finite-coefficient-point] and [def-weil-derived-pullback-tensor-hom] give $H_E(v\\otimes a)t_{E,K}=t_{E,K'}F_E(v\\otimes a)$. Every tensor is a finite sum of pure tensors by [def-weil-rationalization-karoubi]. Bilinearity of composition therefore gives, for $u=\\sum_jv_j\\otimes a_j$, $H_E(u)t_{E,K}=\\sum_j a_j(H_E(v_j\\otimes1)t_{E,K})=\\sum_j a_j(t_{E,K'}F_E(v_j\\otimes1))=t_{E,K'}F_E(u)$. This includes zero, sums and every balanced tensor representative, since both functor maps already factor through the tensor product.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "For $E\\subset L$, tensor the assumed integral compatibility equation with $L$ over $\\mathcal O_L$. The last display of [lem-weil-point-sections-scalar-extension] identifies its sections comparisons with precisely $\\bar\\varphi_{E,L}$, and rationalizing the pullback comparison of [lem-pur-integral-operations-scalar-extension] gives precisely $\\bar\\alpha_{E,L}$. Consequently the equation becomes\n$$b_{E,L,K}\\,t_{L,K\\otimes_E L}=(t_{E,K}\\otimes_E L)\\,\\bar\\varphi_{E,L,K}. \\tag{*}$$\nNo comparison is replaced by an arbitrary isomorphism: tensoring is a functor, so it preserves the composite and the inverse occurring in the supplied equation. Tensoring the unit and tower equations in the two cited statements preserves those equations too. This proves the specified rational scalar compatibility, including equality of fields.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "Write $S_{L/E}K=K\\otimes_E L$, $T_{L/E}A=A\\otimes_E L$, and write $a^C:S_{N/L}S_{L/E}\\xrightarrow{\\sim}S_{N/E}$ and $a^D:T_{N/L}T_{L/E}\\xrightarrow{\\sim}T_{N/E}$ for the specified associators. For $E\\subset L\\subset N$, suppress these associators momentarily. The two cited tower equations read\n$$\\bar\\alpha_{E,N}=\\bar\\alpha_{L,N,S_{L/E}K}\\,S_{N/L}(\\bar\\alpha_{E,L}),\\qquad \\bar\\varphi_{E,N}=(\\bar\\varphi_{E,L}\\otimes_LN)\\bar\\varphi_{L,N,S_{L/E}K}.$$\nInsert these expressions into $b_{E,N}=\\bar\\varphi_{E,N,P_EK}F_N(\\bar\\alpha_{E,N})^{-1}$ and use naturality of $\\bar\\varphi_{L,N}$ for $\\bar\\alpha_{E,L}^{-1}$. The result, with associators restored, is\n$$b_{E,N,K}H_N(a^C_K)=a^D_{H_EK}(b_{E,L,K}\\otimes_LN)b_{L,N,S_{L/E}K}. \\tag{**}$$\nExplicitly the middle interchange is $\\bar\\varphi_{L,N,S_{L/E}P_EK}F_N(S_{N/L}\\bar\\alpha_{E,L}^{-1})=(F_L(\\bar\\alpha_{E,L}^{-1})\\otimes_LN)\\bar\\varphi_{L,N,P_LS_{L/E}K}$. This gives (**), and the unit equations give $b_{E,E}=1$ under unit identifications. Naturality follows by composing the two natural isomorphisms defining $b$. All the inputs here are the naturality, identity and tower assertions of [lem-weil-point-sections-scalar-extension] and [lem-pur-integral-operations-scalar-extension].",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "Let $u:S_{L/E}K\\to S_{L/E'}K'$ represent a common-stage arrow as in [def-weil-algebraically-closed-coefficients]. The point-fiber action in [def-weil-finite-coefficient-point] is $A_L(u)=\\bar\\varphi_{E',L,K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1}$. The pullback action of [def-weil-derived-pullback-tensor-hom] first gives $\\bar\\alpha_{E',L,K'}^{-1}P_L(u)\\bar\\alpha_{E,L,K}$. Apply the point-fiber action to this arrow, now between $P_EK$ and $P_{E'}K'$. Expanding $F_L$ of the composite gives exactly $B_L(u)=b_{E',L,K'}H_L(u)b_{E,L,K}^{-1}$. Thus these are the two specified functors, rather than alternative realizations. At a common stage they preserve identities and composition: the intermediate $\\bar\\varphi^{-1}\\bar\\varphi$ or $b^{-1}b$ cancels, and $F_L,H_L$ are functors. The two tower equations (the sections equation and (**)) show that scalar extension of $A_L(u),B_L(u)$ is respectively $A_N(u_N),B_N(u_N)$ after the source and target associators. Hence their classes are unchanged by further extension, and by changing to any equivalent representative, using the equality criterion of [def-weil-point-fd-qlbar-category].",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "The proposed component at $(E,K)$ is the finite-stage class of $t_{E,K}$. Put $t^L_{E,K}=t_{E,K}\\otimes_E L$ with the target-category unit identifications of [def-weil-point-fd-qlbar-category]. Equation (*) says $b_{E,L,K}^{-1}t^L_{E,K}=t_{L,S_{L/E}K}\\bar\\varphi_{E,L,K}^{-1}$. Apply Step 2 at field $L$ to the arbitrary rational morphism $u:S_{L/E}K\\to S_{L/E'}K'$ and calculate in $D(L)$:\n$$\\begin{aligned} B_L(u)t^L_{E,K}&=b_{E',L,K'}H_L(u)t_{L,S_{L/E}K}\\bar\\varphi_{E,L,K}^{-1}\\\\ &=b_{E',L,K'}t_{L,S_{L/E'}K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1}\\\\ &=t^L_{E',K'}\\bar\\varphi_{E',L,K'}F_L(u)\\bar\\varphi_{E,L,K}^{-1}=t^L_{E',K'}A_L(u).\\end{aligned}$$\nThis is naturality over the very same field $L$, before passing to any colimit.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  },
+  {
+   "text": "For a further finite field $N\\supset L$, apply $-\\otimes_LN$ to the equality of Step 6 and conjugate by the source and target tower associators. Functoriality preserves the equality and the expansions of Step 5 identify it with the equation for $u_N$. If $[L,u]=[L',v]$, [def-weil-algebraically-closed-coefficients] gives $N\\supset L,L'$ with $u_N=v_N$. The two equations then have identical sides in $D(N)$; by [def-weil-point-fd-qlbar-category] they yield the same equality of morphism classes. Therefore all supplied integral components give the claimed natural transformation on the common-stage category. This proves independence of representative without assuming injectivity of transition maps, invertibility of $\\eta$, or any special formula for its components.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), p. 150: rational Hom tensors and finite-field coefficient colimit; explicit formal argument by Q93 using the normalized comparisons stated in the cited DAG nodes. (1.1.7), pp. 150-151 supplies the point-transport context only."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +163,52 @@
    "results": "Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean",
    "date": "2026-10-21",
    "verdict": "no match: read the returned source; ordinary free-sheaf naturality or formal localization descent alone does not state the completed pro-etale normalized comparison and coefficient realization."
+  },
+  {
+   "tool": "grep",
+   "query": "rationaliz.*[Nn]at[Tt]rans|[Nn]at[Tt]rans.*rationaliz|commonStage.*[Nn]atur",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between linear functors remains natural on sums of morphism tensors after extension of scalars",
+   "results": "CategoryTheory.functorCategoryLinear; CategoryTheory.NatTrans.sum'; LinearMap.ltoFun; ModuleCat.extendScalars; CategoryTheory.Free.ext; CategoryTheory.NatTrans.sum; ModuleCat.ExtendScalars.map'; CategoryTheory.NatTrans.app_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\"",
+   "results": "CategoryTheory.NatTrans; CategoryTheory.NatTrans.id; CategoryTheory.NatTrans.instInhabited; CategoryTheory.NatTrans.vcomp; CategoryTheory.NatTrans.app; CategoryTheory.NatTrans.id_app'; CategoryTheory.NatTrans.ext; CategoryTheory.NatTrans.ext_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar compatible natural transformations on integral linear categories extend to rationalized categories by tensoring morphisms and then to common finite coefficient field representatives",
+   "results": "CategoryTheory.Functor.ratLinear; CategoryTheory.Functor.mapExtLinearMap; CategoryTheory.Functor.mapLinearMap; CategoryTheory.Localization.linear; CategoryTheory.Free.ext; CategoryTheory.Functor.mapExtLinearMap_coe; CategoryTheory.Free.lift_linear; CategoryTheory.InducedCategory.homLinearEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation on scalar localization with tensor product Hom groups and compatible descent through a filtered colimit of coefficient categories",
+   "results": "IsLocalizedModule.map_lTensor; CategoryTheory.Localization.functor_linear_iff; IsLocalizedModule.mapExtendScalars; IsLocalizedModule.mapExtendScalars_apply_apply; CategoryTheory.Localization.linear; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; CategoryTheory.Localization.Monoidal.tensorBifunctor; PresheafOfModules.Monoidal.tensorHom",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
+  },
+  {
+   "tool": "grep",
+   "query": "natTransExtension|def mapLinearMap|theorem functor_linear_iff",
+   "results": "Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Localization/Construction.lean; Mathlib/CategoryTheory/Linear/LinearFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: general linear-functor or localization results do not state the specified normalized completed point comparisons and their common-stage naturality. Read NatTrans, LinearFunctor.mapLinearMap and Localization.Construction.natTransExtension; the item needs the explicit comparison calculations above."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-frobenius-point-transport-natural",
@@ -85,5 +229,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-point-transformation-coefficient-descent",
+  "worker": "stage1",
+  "summary": "Expanded arbitrary tensor-sum naturality, rationalized the supplied normalized scalar equation, computed the composite comparison b and its tower equation, and verified naturality over the same common finite field and independence of representatives. No statement change and no new nodes.",
+  "blueprint": "Realizes the rational and common-stage part of the first cohomology-transport arrow in def-weil-global-geometric-frobenius, via the inherited point-transport chain; specifically original point-naturality steps 6 and 9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Steps 3-4 take the specified sections comparison phi, its naturality, unit and tower equations and its rationalization from the statement of this coefficient-comparison node (unit sk-thm-sf-compatibility); the inherited f^! preservation unit supplies no such comparison, and the item statement itself names phi from this node."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Steps 3-4 take the specified pullback scalar comparison alpha, its naturality, unit and tower compatibility from the statement of this generic coefficient-comparison node (unit sk-thm-sf-compatibility); the inherited f^! preservation unit supplies no such comparison, and def-weil-derived-pullback-tensor-hom uses the same alpha for the common-stage pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-0f70d4cc4",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-0f70d4cc4 (reviewer sub-agent of L); spot-checked: I read the whole item (statement and 7 steps), every cited statement, Deligne Weil II (1.1.3)/(1.1.7) pp.150-151, the parent lem-weil-frobenius-point-transport-natural and its sibling lem-weil-point-automorphism-transport-scalar-extension (same α direction), and the inherited unit sk-prop-sf-rf-shriek-preservation. This is the first split of an unsplit Q97 node; there are no new nodes and no statement change. The hypothesis types correctly. The Q̄ actions match def-weil-finite-coefficient-point item 4 (conjugation by φ̄) and def-weil-derived-pullback-tensor-hom (conjugation by θ^{f*}=ᾱ). I recomputed the steps. S2 is tensor-sum naturality and needs no lifting or injectivity. S3 rationalizes the hypothesis to (*). S4: (**) follows via φ̄_{L,N} naturality at ᾱ_{E,L}^{-1}, using integral naturality. S5 expands b'H_L(u)b^{-1}. S6 is the 3-line D(L) calculation. S7 gives independence of representative via the colimit criterion. S5 leaves rational-arrow naturality implicit; it is elementary. Edge cases checked: E=L, g=id, η=0, zero and torsion objects. No SGA, no cycle, uses=proof_deps. Duplicate check: rg -L found only lem-fd-common-stage-comparison-descent, a different statement (equivalences between two frameworks). One fault (C8/route): lem-weil-point-sections-scalar-extension and lem-pur-integral-operations-scalar-extension belong to sk-thm-sf-compatibility, which is off the item's unit route, but split_report.tool_uses was []. Both are generic coefficient-comparison tools whose φ and α the statement itself names, and the parent already had them accepted. FIX: I declared both in split_report.tool_uses (fixes/dag/nodes/sec-six-functors/lem-weil-point-transformation-coefficient-descent.json, otherwise byte-identical) and I accept them. coord/dag-sync.md is absent from the snapshot.; 1 file(s) fixed by the reviewer"
  }
 }

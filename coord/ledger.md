@@ -21345,3 +21345,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:50 L: merged deliver/Q11/lem-sf-projective-top-cell-attachment (reviewer PASS; first push; new nodes: 0)
 - 08:50 L: merged deliver/Q81/lem-pur-external-evaluation-two-shift-squares (reviewer PASS; first push; new nodes: 0)
 - 08:50 L: merged deliver/Q148/lem-per-rational-realization-finite-cone-models (reviewer FIX; first push; new nodes: 0)
+- 08:50 L: merged deliver/Q93/lem-weil-point-transformation-coefficient-descent (reviewer FIX; first push; new nodes: 0)
