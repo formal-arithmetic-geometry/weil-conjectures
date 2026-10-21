@@ -1,397 +1,367 @@
 {
- "id": "lem-cbc-complete-proetale-strict-tower-realization",
- "kind": "statement",
- "title": "Strict Tower Realization",
- "statement": "Let $(A,I)$ be the adic datum of [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$, completed coefficient sheaves $A_T$, and strict quotient towers. Let $f:X\\to Y$ be separated of finite type, $g:Y'\\to Y$ any scheme map, and $X'=X\\times_YY'$ with projections $f',g'$ [def-cbc-compact-support-square]. Supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ and its base change $c'=(j',p')$, with ambient map $\\bar g$ [def-weil-pbc-projection-compactification]. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived $I$-complete [def-weil-pbc-intrinsic-completion], with compatible witnesses $\\nu_X^*L_n\\simeq K_n$, $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness]. Assume $j_!K$ is complete and identify its quotient tower with $j_!K_\\bullet$ using the canonical tensor comparisons. Here $j_!$ is the exact ringed-site functor of [lem-pur-site-restriction-module-adjunction-exact].\nPut $\\mathcal T_T=\\operatorname{Tow}(\\underline A_T)$ and let $\\operatorname{Res}_T$ restrict along $\\underline A_T\\to A_T$ [lem-weil-pbc-constant-completion-equivalence]. Use constant-coefficient strict-tower operations $G_u,R_u^{\\mathcal T}$ and $J_j$ [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Restriction of scalars canonically commutes with $j_!$ on sheaves, complexes, and strict towers. For $M_\\bullet=\\operatorname{Res}_X K_\\bullet$ define the actual strict-tower morphism\n$$e^c_M=(R_{p'}^{\\mathcal T}\\beta_{j,\\bar g})\\circ E_p^{\\mathcal T}:G_gR_p^{\\mathcal T}J_jM_\\bullet\\longrightarrow R_{p'}^{\\mathcal T}J_{j'}G_{g'}M_\\bullet,$$\nwhere $E_p^{\\mathcal T}$ is the normalized proper mate [lem-weil-pbc-strict-tower-exchange-mate-normalization] and $\\beta$ the open unit-mate [lem-cbc-strict-tower-proper-open-calculus]. The ordered completed exchange $\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)$ of [def-cbc-completed-exchange-map], with its open factor specified by the ordered $R\\lim(\\beta)$ formula, is exactly the image of $R\\lim(e^c_M)$ under the canonical constant/completed, finite-reduction, direct-image/limit, and extension/limit identifications [prop-weil-pbc-direct-image-limits, lem-cbc-exact-product-functor-strict-limit]. This identification is natural in $K$ and identifies evaluation of $e^c_M$ at each $n$ with the specified finite proper/open exchange; it does not characterize a tower map only by evaluations.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
-  "place": "Proof: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms: the completed proper base change [thm-weil-pbc-complete-proetale] applied to the proper p ... and the completed extension-by-zero comparison'; strict-tower form as in lem-weil-pbc-strict-tower-exchange-mate-normalization"
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-cbc-compact-support-square",
-  "def-weil-pbc-projection-compactification",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-etale-origin-witness",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-cbc-strict-constant-tower-operations",
-  "def-cbc-strict-tower-open-extension",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "def-cbc-completed-exchange-map",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-cbc-exact-product-functor-strict-limit"
- ],
- "proof": [
-  {
-   "text": "Put $F=j_!K$. Its assumed intrinsic completeness gives $\\operatorname{comp}_F:F\\simeq R\\lim F_\\bullet$ by unit-compatible Koszul reconstruction. Its witnesses are $j_!^{\\mathrm{et}}L_n$: etale extension is exact, and the natural open site comparison descends degreewise since both comparison pullback and open extension are exact. Thus $\\nu_{\\overline X}^*j_!^{\\mathrm{et}}L_n\\simeq j_!K_n=F_n$, with the given transitions and each individual lower bound. Apply the scalar/open comparison of [lem-cbc-ringed-open-scalar-limit-coherence] to identify $\\operatorname{Res}F_\\bullet=J_jM_\\bullet$.",
-   "uses": [
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sf-comparison-pullback-exact",
+  "id": "lem-cbc-complete-proetale-strict-tower-realization",
+  "kind": "statement",
+  "title": "Strict Tower Realization",
+  "statement": "Let $(A,I)$ be the adic datum of [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$, completed coefficient sheaves $A_T$, and strict quotient towers. Let $f:X\\to Y$ be separated of finite type, $g:Y'\\to Y$ any scheme map, and $X'=X\\times_YY'$ with projections $f',g'$ [def-cbc-compact-support-square]. Supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ and its base change $c'=(j',p')$, with ambient map $\\bar g$ [def-weil-pbc-projection-compactification]. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived $I$-complete [def-weil-pbc-intrinsic-completion], with compatible witnesses $\\nu_X^*L_n\\simeq K_n$, $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness]. Assume $j_!K$ is complete and identify its quotient tower with $j_!K_\\bullet$ using the canonical tensor comparisons. Here $j_!$ is the exact ringed-site functor of [lem-pur-site-restriction-module-adjunction-exact].\nPut $\\mathcal T_T=\\operatorname{Tow}(\\underline A_T)$ and let $\\operatorname{Res}_T$ restrict along $\\underline A_T\\to A_T$ [lem-weil-pbc-constant-completion-equivalence]. Use constant-coefficient strict-tower operations $G_u,R_u^{\\mathcal T}$ and $J_j$ [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Restriction of scalars canonically commutes with $j_!$ on sheaves, complexes, and strict towers. For $M_\\bullet=\\operatorname{Res}_X K_\\bullet$ define the actual strict-tower morphism\n$$e^c_M=(R_{p'}^{\\mathcal T}\\beta_{j,\\bar g})\\circ E_p^{\\mathcal T}:G_gR_p^{\\mathcal T}J_jM_\\bullet\\longrightarrow R_{p'}^{\\mathcal T}J_{j'}G_{g'}M_\\bullet,$$\nwhere $E_p^{\\mathcal T}$ is the normalized proper mate [lem-weil-pbc-strict-tower-exchange-mate-normalization] and $\\beta$ the open unit-mate [lem-cbc-strict-tower-proper-open-calculus]. The ordered completed exchange $\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)$ of [def-cbc-completed-exchange-map], with its open factor specified by the ordered $R\\lim(\\beta)$ formula, is exactly the image of $R\\lim(e^c_M)$ under the canonical constant/completed, finite-reduction, direct-image/limit, and extension/limit identifications [prop-weil-pbc-direct-image-limits, lem-cbc-exact-product-functor-strict-limit]. This identification is natural in $K$ and identifies evaluation of $e^c_M$ at each $n$ with the specified finite proper/open exchange; it does not characterize a tower map only by evaluations.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms: the completed proper base change [thm-weil-pbc-complete-proetale] applied to the proper p ... and the completed extension-by-zero comparison'; strict-tower form as in lem-weil-pbc-strict-tower-exchange-mate-normalization"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-cbc-compact-support-square",
+    "def-weil-pbc-projection-compactification",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-etale-origin-witness",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-cbc-ringed-open-scalar-limit-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
-    "place": "First sentence and its parenthetical witness check; use the assumed completeness and unit-compatible reconstruction rather than deducing completeness merely from exactness."
-   }
-  },
-  {
-   "text": "The proper square and $F$ now satisfy [lem-weil-pbc-strict-tower-exchange-mate-normalization]. The completed-exchange definition uses exactly its $H,H'$ and $v=H'\\mathcal R(e_F)H^{-1}$. Hence its specified $b,d$ give $d\\operatorname{Res}(v)=E_p^{\\mathcal T}b$ before evaluation. Here $b,d$ use [lem-weil-pbc-constant-completion-equivalence] and $c$ is that of [prop-weil-pbc-direct-image-limits]. The definition's ordered proper factor is therefore $\\gamma_F=c_N^{-1}\\mathcal L(E_p^{\\mathcal T})s_K$, under scalar restriction (Step 3 identifies $c$), where $N=G_{\\bar g}J_jM_\\bullet$ and $s_K$ includes $\\mathcal L(b)$.",
-   "uses": [
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "def-cbc-completed-exchange-map",
     "lem-weil-pbc-constant-completion-equivalence",
-    "prop-weil-pbc-direct-image-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
-    "place": "Proper factor of the ordered composite; strict H,H prime realization in the current DAG definition and proper normalization statement. Stacks 0A07 supplies the direct-image/limit comparison, not the additional strict mate equality."
-   }
-  },
-  {
-   "text": "Both opens are quasi-compact by the completed-exchange definition. Apply [lem-cbc-completed-open-strict-mate-identification] to their open square: for $N'=J_{j'}G_{g'}M_\\bullet$ its actual strict map is $\\beta:N\\to N'$, and its ordered completed factor is $\\lambda_{j'}^{-1}\\mathcal L(\\beta)$. The scalar/open limit square of [lem-cbc-ringed-open-scalar-limit-coherence] identifies the extension comparisons and their completion units. Apply [lem-cbc-flat-scalar-direct-image-limit-coherence] to $p'$: coefficient flatness is supplied by constant/completed equivalence, exact countable products hold on pro-etale module sheaves, and the coefficient identifications are those of the direct-image/limit proposition. Thus its completed comparison restricts to $c$.",
-   "uses": [
-    "def-cbc-completed-exchange-map",
-    "lem-cbc-completed-open-strict-mate-identification",
-    "lem-cbc-ringed-open-scalar-limit-coherence",
-    "lem-cbc-flat-scalar-direct-image-limit-coherence",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-proetale-countable-products-exact",
-    "prop-weil-pbc-direct-image-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
-    "place": "Final open factor, with the ordered Rlim(beta) normalization required in the item; compare the current blueprint open-comparison proof, last paragraph, replacing its incorrect sectionwise justification by Steps 5-6."
-   }
-  },
-  {
-   "text": "Naturality gives $c_{N'}Rp'_*(\\mathcal L\\beta)=\\mathcal L(R_{p'}^{\\mathcal T}\\beta)c_N$. Substitute the two ordered factors into the definition, cancel $c_Nc_N^{-1}$, and use functoriality of $\\mathcal L=R\\lim$:\n$$\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)=t_K\\mathcal L((R_{p'}^{\\mathcal T}\\beta)E_p^{\\mathcal T})s_K,\\qquad t_K=Rp'_*(\\lambda_{j'}^{-1})c_{N'}^{-1}.$$\nThese are the specified endpoint comparisons, so this is the asserted equality of morphisms.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lem-cbc-flat-scalar-direct-image-limit-coherence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-cbc-completed-exchange-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), natural comparison; substitution in the ordered compact-support definition. The composition identity is functoriality on strict towers."
-   }
-  },
-  {
-   "text": "All factors are natural in $K$. Evaluation preserves the already constructed composite: proper normalization gives its specified finite proper factor, as its lift has the finite evaluations $v'_n$ of [def-weil-pbc-completed-base-change-map], and the strict open calculus gives its inverse-unit finite open factor. Their ordered composite is the required finite exchange. No reconstruction from evaluations is used.",
-   "uses": [
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "lem-cbc-strict-tower-proper-open-calculus",
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-completed-exchange-map",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-cbc-exact-product-functor-strict-limit"
+  ],
+  "proof": [
+    {
+      "text": "Put $F=j_!K$. Its assumed intrinsic completeness gives $\\operatorname{comp}_F:F\\simeq R\\lim F_\\bullet$ by unit-compatible Koszul reconstruction. Its witnesses are $j_!^{\\mathrm{et}}L_n$: etale extension is exact, and the natural open site comparison descends degreewise since both comparison pullback and open extension are exact. Thus $\\nu_{\\overline X}^*j_!^{\\mathrm{et}}L_n\\simeq j_!K_n=F_n$, with the given transitions and each individual lower bound. Apply the scalar/open comparison of [lem-cbc-ringed-open-scalar-limit-coherence] to identify $\\operatorname{Res}F_\\bullet=J_jM_\\bullet$.",
+      "uses": [
+        "prop-weil-pbc-koszul-reconstruction",
+        "lem-weil-pbc-extension-by-zero-exact",
+        "lem-cbc-proetale-extension-zero-comparison",
+        "lem-sf-comparison-pullback-exact",
+        "lem-pur-site-restriction-module-adjunction-exact",
+        "lem-sf-exact-functor-derived-triangulated",
+        "lem-cbc-ringed-open-scalar-limit-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+        "place": "First sentence and its parenthetical witness check; use the assumed completeness and unit-compatible reconstruction rather than deducing completeness merely from exactness."
+      }
+    },
+    {
+      "text": "The proper square and $F$ now satisfy [lem-weil-pbc-strict-tower-exchange-mate-normalization]. The completed-exchange definition uses exactly its $H,H'$ and $v=H'\\mathcal R(e_F)H^{-1}$. Hence its specified $b,d$ give $d\\operatorname{Res}(v)=E_p^{\\mathcal T}b$ before evaluation. Here $b,d$ use [lem-weil-pbc-constant-completion-equivalence] and $c$ is that of [prop-weil-pbc-direct-image-limits]. The definition's ordered proper factor is therefore $\\gamma_F=c_N^{-1}\\mathcal L(E_p^{\\mathcal T})s_K$, under scalar restriction (Step 3 identifies $c$), where $N=G_{\\bar g}J_jM_\\bullet$ and $s_K$ includes $\\mathcal L(b)$.",
+      "uses": [
+        "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+        "def-cbc-completed-exchange-map",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "prop-weil-pbc-direct-image-limits"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
+        "place": "Proper factor of the ordered composite; strict H,H prime realization in the current DAG definition and proper normalization statement. Stacks 0A07 supplies the direct-image/limit comparison, not the additional strict mate equality."
+      }
+    },
+    {
+      "text": "Both opens are quasi-compact by the completed-exchange definition. Apply [lem-cbc-completed-open-strict-mate-identification] to their open square: for $N'=J_{j'}G_{g'}M_\\bullet$ its actual strict map is $\\beta:N\\to N'$, and its ordered completed factor is $\\lambda_{j'}^{-1}\\mathcal L(\\beta)$. The scalar/open limit square of [lem-cbc-ringed-open-scalar-limit-coherence] identifies the extension comparisons and their completion units. Apply [lem-cbc-flat-scalar-direct-image-limit-coherence] to $p'$: coefficient flatness is supplied by constant/completed equivalence, exact countable products hold on pro-etale module sheaves, and the coefficient identifications are those of the direct-image/limit proposition. Thus its completed comparison restricts to $c$.",
+      "uses": [
+        "def-cbc-completed-exchange-map",
+        "lem-cbc-completed-open-strict-mate-identification",
+        "lem-cbc-ringed-open-scalar-limit-coherence",
+        "lem-cbc-flat-scalar-direct-image-limit-coherence",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "lem-weil-proetale-countable-products-exact",
+        "prop-weil-pbc-direct-image-limits"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
+        "place": "Final open factor, with the ordered Rlim(beta) normalization required in the item; compare the current blueprint open-comparison proof, last paragraph, replacing its incorrect sectionwise justification by Steps 5-6."
+      }
+    },
+    {
+      "text": "Naturality gives $c_{N'}Rp'_*(\\mathcal L\\beta)=\\mathcal L(R_{p'}^{\\mathcal T}\\beta)c_N$. Substitute the two ordered factors into the definition, cancel $c_Nc_N^{-1}$, and use functoriality of $\\mathcal L=R\\lim$:\n$$\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)=t_K\\mathcal L((R_{p'}^{\\mathcal T}\\beta)E_p^{\\mathcal T})s_K,\\qquad t_K=Rp'_*(\\lambda_{j'}^{-1})c_{N'}^{-1}.$$\nThese are the specified endpoint comparisons, so this is the asserted equality of morphisms.",
+      "uses": [
+        "prop-weil-pbc-direct-image-limits",
+        "lem-cbc-flat-scalar-direct-image-limit-coherence",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "def-cbc-completed-exchange-map"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), natural comparison; substitution in the ordered compact-support definition. The composition identity is functoriality on strict towers."
+      }
+    },
+    {
+      "text": "All factors are natural in $K$. Evaluation preserves the already constructed composite: proper normalization gives its specified finite proper factor, as its lift has the finite evaluations $v'_n$ of [def-weil-pbc-completed-base-change-map], and the strict open calculus gives its inverse-unit finite open factor. Their ordered composite is the required finite exchange. No reconstruction from evaluations is used.",
+      "uses": [
+        "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+        "lem-cbc-strict-tower-proper-open-calculus",
+        "def-cbc-strict-constant-tower-operations",
+        "def-cbc-strict-tower-open-extension",
+        "lem-cbc-completed-open-strict-mate-identification",
+        "def-weil-pbc-completed-base-change-map"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
+        "place": "Evaluation and naturality of the two specified factors; the proper lift and strict open-unit mate are fixed before evaluation."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-cbc-completed-exchange-map",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-weil-pbc-completed-base-change-map",
     "lem-cbc-completed-open-strict-mate-identification",
-    "def-weil-pbc-completed-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-cbc-flat-scalar-direct-image-limit-coherence",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-proetale-countable-products-exact",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-koszul-reconstruction"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
-    "place": "Evaluation and naturality of the two specified factors; the proper lift and strict open-unit mate are fixed before evaluation."
-   }
-  }
- ],
- "proof_deps": [
-  "def-cbc-completed-exchange-map",
-  "def-cbc-strict-constant-tower-operations",
-  "def-cbc-strict-tower-open-extension",
-  "def-weil-pbc-completed-base-change-map",
-  "lem-cbc-completed-open-strict-mate-identification",
-  "lem-cbc-flat-scalar-direct-image-limit-coherence",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-ringed-open-scalar-limit-coherence",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
-  "place": "Ordered proper and open factors, made explicit as an equality of actual strict-tower morphisms using the cited normalization lemmas."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Completed compact support exchange is the derived inverse limit of its strict tower exchange after constant to completed coefficient comparison",
-   "results": "AdicCompletion, Profinite.isoAsLimitConeLift, IsAdicComplete.StrictMono.of_comp_lift, Profinite.asLimitConeIso, AdicCompletion.transitionMap_comp_eval_apply, Profinite.lim, Profinite.asLimit, Profinite.lim'; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+    "place": "Ordered proper and open factors, made explicit as an equality of actual strict-tower morphisms using the cited normalization lemmas."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Canonical natural comparison between completed compact support exchange and derived inverse limit of strict tower proper and open adjunction mates",
-   "results": "Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_left_triangle, LightCondensed.isoLocallyConstantOfIsColimit_inv, Condensed.isoLocallyConstantOfIsColimit_inv, Condensed.profiniteSolidification, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, CompHausLike.LocallyConstant.adjunction_counit; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Completed compact support exchange is the derived inverse limit of its strict tower exchange after constant to completed coefficient comparison",
+      "results": "AdicCompletion, Profinite.isoAsLimitConeLift, IsAdicComplete.StrictMono.of_comp_lift, Profinite.asLimitConeIso, AdicCompletion.transitionMap_comp_eval_apply, Profinite.lim, Profinite.asLimit, Profinite.lim'; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical natural comparison between completed compact support exchange and derived inverse limit of strict tower proper and open adjunction mates",
+      "results": "Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_left_triangle, LightCondensed.isoLocallyConstantOfIsColimit_inv, Condensed.isoLocallyConstantOfIsColimit_inv, Condensed.profiniteSolidification, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, CompHausLike.LocallyConstant.adjunction_counit; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, \"mate\"",
+      "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "compactification.*(exchange|refinement)|properOpen|proper_open|strictTower|strict_tower",
+      "results": "No hits; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "strictTower|strict_tower|completedExchange|completed_exchange|compactSupport.*exchange",
+      "results": "No hits.",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived inverse limit preserves a composite of natural transformations for compact support base change",
+      "results": "CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π, CategoryTheory.Limits.instHasLimitCompOfPreservesLimit, CategoryTheory.Limits.comp_preservesLimit, CategoryTheory.Limits.limitCompCoyonedaIsoCone_inv, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.preservesLimit_comp_of_createsLimit, CategoryTheory.Limits.limitIsoFlipCompLim_inv_app, CategoryTheory.preservesLimitNatIso_inv_app",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Completed compact support base change is the derived inverse limit of strict tower proper and open adjunction mates",
+      "results": "Condensed.profiniteSolid, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction, LightCondSet.topCatAdjunctionUnit_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.adjunction",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Realize the completed compact support base change morphism as the derived inverse limit of a composite of strict tower adjunction mates",
+      "results": "Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "thm-cbc-complete-proetale",
+    "date": "2026-10-17",
+    "group": "Q125"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"mate\"",
-   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "blueprint": {
+    "from": {
+      "node": "thm-cbc-complete-proetale",
+      "place": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence)",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "tool": "grep",
-   "query": "compactification.*(exchange|refinement)|properOpen|proper_open|strictTower|strict_tower",
-   "results": "No hits; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-cbc-complete-proetale-strict-tower-realization",
+    "worker": "stage1",
+    "summary": "Human-requested re-split: three independent statement-only work packages for ringed open scalar/limit coherence (old Steps 1,5,6), actual strict open mate and ordered completed open comparison (4,7), and flat scalar direct-image/limit coherence (8). The parent retains witness admissibility, strict proper normalization, naturality/cancellation assembly and evaluation. The complete original arguments are preserved verbatim in report.md, with the existing product lemma reused. Statement unchanged.",
+    "blueprint": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence)",
+    "tool_uses": [
+      {
+        "node": "lem-pur-site-restriction-module-adjunction-exact",
+        "why": "Generic exact ringed-site open adjunction supplies the very j_! stipulated in the item, including non-finite coefficients."
+      },
+      {
+        "node": "lem-sf-exact-functor-derived-triangulated",
+        "why": "Generic descent of an exact functor justifies degreewise open comparisons on unbounded derived categories."
+      },
+      {
+        "node": "lem-weil-pbc-constant-completion-equivalence",
+        "why": "Generic coefficient and finite-reduction comparison keeps constant and completed coefficients distinct and identifies the specified tower units."
+      },
+      {
+        "node": "lem-weil-pbc-extension-by-zero-exact",
+        "why": "Exact etale extension preserves each witness lower bound; the unit requires these witnesses and does not replace this general sheaf theorem."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "why": "Generic functorial derived inverse limit permits composition of actual tower maps for constant coefficient sheaves."
+      },
+      {
+        "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+        "why": "Proper base-change strict mate normalization is the proper factor explicitly required by the unit route."
+      },
+      {
+        "node": "lem-weil-proetale-countable-products-exact",
+        "why": "Generic pro-etale module countable-product exactness verifies the hypotheses of the normalized strict-limit comparison."
+      },
+      {
+        "node": "prop-weil-pbc-direct-image-limits",
+        "why": "Generic natural direct-image/limit comparison is needed to compose the proper and open factors on strict towers."
+      },
+      {
+        "node": "prop-weil-pbc-koszul-reconstruction",
+        "why": "Unit-compatible reconstruction converts the assumed intrinsic completeness of j_!K to the quotient-unit hypothesis of proper normalization."
+      },
+      {
+        "node": "lem-sf-comparison-pullback-exact",
+        "why": "Exactness of finite-coefficient etale/pro-etale comparison pullback justifies the degreewise witness comparison on derived categories."
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "strictTower|strict_tower|completedExchange|completed_exchange|compactSupport.*exchange",
-   "results": "No hits.",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived inverse limit preserves a composite of natural transformations for compact support base change",
-   "results": "CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π, CategoryTheory.Limits.instHasLimitCompOfPreservesLimit, CategoryTheory.Limits.comp_preservesLimit, CategoryTheory.Limits.limitCompCoyonedaIsoCone_inv, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.preservesLimit_comp_of_createsLimit, CategoryTheory.Limits.limitIsoFlipCompLim_inv_app, CategoryTheory.preservesLimitNatIso_inv_app",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Completed compact support base change is the derived inverse limit of strict tower proper and open adjunction mates",
-   "results": "Condensed.profiniteSolid, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction, LightCondSet.topCatAdjunctionUnit_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.adjunction",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Realize the completed compact support base change morphism as the derived inverse limit of a composite of strict tower adjunction mates",
-   "results": "Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not identify the ordered completed proper/open exchange with its specified actual strict-tower realization"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "thm-cbc-complete-proetale",
-  "date": "2026-10-17",
-  "group": "Q125"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc",
- "blueprint": {
-  "from": {
-   "node": "thm-cbc-complete-proetale",
-   "place": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence)",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-cbc-complete-proetale-strict-tower-realization",
-  "worker": "stage1",
-  "summary": "Human-requested re-split: three independent statement-only work packages for ringed open scalar/limit coherence (old Steps 1,5,6), actual strict open mate and ordered completed open comparison (4,7), and flat scalar direct-image/limit coherence (8). The parent retains witness admissibility, strict proper normalization, naturality/cancellation assembly and evaluation. The complete original arguments are preserved verbatim in report.md, with the existing product lemma reused. Statement unchanged.",
-  "blueprint": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence)",
   "tool_uses": [
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exact ringed-site open adjunction supplies the very j_! stipulated in the item, including non-finite coefficients."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic descent of an exact functor justifies degreewise open comparisons on unbounded derived categories."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic coefficient and finite-reduction comparison keeps constant and completed coefficients distinct and identifies the specified tower units."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-exact",
-    "why": "Exact etale extension preserves each witness lower bound; the unit requires these witnesses and does not replace this general sheaf theorem."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic functorial derived inverse limit permits composition of actual tower maps for constant coefficient sheaves."
-   },
-   {
-    "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "why": "Proper base-change strict mate normalization is the proper factor explicitly required by the unit route."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic pro-etale module countable-product exactness verifies the hypotheses of the normalized strict-limit comparison."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Generic natural direct-image/limit comparison is needed to compose the proper and open factors on strict towers."
-   },
-   {
-    "node": "prop-weil-pbc-koszul-reconstruction",
-    "why": "Unit-compatible reconstruction converts the assumed intrinsic completeness of j_!K to the quotient-unit hypothesis of proper normalization."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Exactness of finite-coefficient etale/pro-etale comparison pullback justifies the degreewise witness comparison on derived categories."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-flat-ringed-diagram-restriction"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q46-310bbdd27",
-  "group": "Q46",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-310bbdd27 (reviewer sub-agent of L); spot-checked: Re-split against the repair note (at least 3 new nodes, parent at most 3000 characters) and the live 10-step base (11151 characters, quoted verbatim in the report). Every old argument has a carrier. The new N1 lem-cbc-ringed-open-scalar-limit-coherence carries old Steps 1 and 6. The existing lem-cbc-ringed-open-extension-products carries old Step 5 (09BP kernel argument, proetale.tex:5185). The new N2 lem-cbc-completed-open-strict-mate-identification carries old Steps 4 and 7. The new N3 lem-cbc-flat-scalar-direct-image-limit-coherence carries old Step 8 (0A07, sites-cohomology.tex:5150). Old Steps 2, 3, 9 and 10 stay in the parent as short applications of cited statements. The new statements are 2465, 3045 and 2516 characters, all true: I checked the types of each displayed equation and tested identity, empty and zero cases. N1 follows from lambda_{FG}=lambda_F G∘F lambda_G with the products node (j quasi-compact). N3 is the hypothesis set of lem-weil-pbc-flat-ringed-diagram-restriction; it applies at p' through flatness of A-hat (constant-completion-equivalence) and profinite coefficient pullback. N2 combines the strict finite exchange, the finite scalar lemma and the strict calculus. None duplicates a DAG node: I read lem-fix-open-scalar-exchange, lem-sp-slice-restriction-strict-derived-limit, lem-pur-completed-coefficient-pushforward-comparison (advisory overlap only) and others. There is no cycle and no SGA citation, and the item statement is unchanged. FIX, two C1/C3 faults: parent Step 2 used the constant/completed b,d and the direct-image/limit c without citing lem-weil-pbc-constant-completion-equivalence and prop-weil-pbc-direct-image-limits; parent Step 5 dropped def-weil-pbc-completed-base-change-map, which is where the proper lift's finite evaluations v'_n are stated. Both are restored. proof_deps is recomputed, and split_report.tool_uses is pruned to the off-unit nodes actually cited. The parent is now 2844 characters. Maintainer note: the snapshot's sec-proper-base-change symlink is broken, so I read those nodes from clones/live.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.CompleteProetaleStrictTowerRealization",
-  "declaration": "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.cbcRealizationWhiskerLimits",
-   "AlgebraicGeometry.Scheme.cbcRealizationWhiskerColimits",
-   "AlgebraicGeometry.Scheme.cbcRealizationLimitAdj",
-   "AlgebraicGeometry.Scheme.cbcRealizationConst",
-   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap",
-   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationRes",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenAdj",
-   "AlgebraicGeometry.Scheme.cbcRealizationTowerJ",
-   "AlgebraicGeometry.Scheme.cbcRealizationJ",
-   "AlgebraicGeometry.Scheme.cbcRealizationTowerAdj",
-   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv",
-   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv_properties",
-   "AlgebraicGeometry.Scheme.cbcRealizationReduction",
-   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv",
-   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpen",
-   "AlgebraicGeometry.Scheme.cbcRealizationTowerScalarOpen",
-   "AlgebraicGeometry.Scheme.cbcRealizationDerivedScalarOpen",
-   "AlgebraicGeometry.Scheme.cbcRealizationQuotientOpen",
-   "AlgebraicGeometry.Scheme.cbcRealizationProducts",
-   "AlgebraicGeometry.Scheme.cbcRealizationResLimit",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenLimit",
-   "AlgebraicGeometry.Scheme.cbcRealizationPushLimit",
-   "AlgebraicGeometry.Scheme.cbcRealizationResPush",
-   "AlgebraicGeometry.Scheme.cbcRealizationPullLimit",
-   "AlgebraicGeometry.Scheme.cbcRealizationStrict",
-   "AlgebraicGeometry.Scheme.cbcRealizationSource",
-   "AlgebraicGeometry.Scheme.cbcRealizationTarget",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenQC",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
-   "AlgebraicGeometry.Scheme.cbcRealizationSingleSquare",
-   "AlgebraicGeometry.Scheme.cbcRealizationSingleProper",
-   "AlgebraicGeometry.Scheme.cbcRealizationSingleBeta_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationSingleOpen",
-   "AlgebraicGeometry.Scheme.cbcRealizationEvalSource",
-   "AlgebraicGeometry.Scheme.cbcRealizationEvalTarget",
-   "AlgebraicGeometry.Scheme.cbcRealizationFinite",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_evaluation",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_naturality",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenSource",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenTarget",
-   "AlgebraicGeometry.Scheme.cbcRealizationOpenFactor",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_open"
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-proetale-weakly-etale-localization",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
   ],
-  "file": "lean/Sheaf/Paper/CompleteProetaleStrictTowerRealization.lean",
-  "statement": "theorem completeProetaleStrictTowerRealization [QuasiCompact f] (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z) (sp : ChosenCartesianSquare gbar c'.g c.g g) (sj : OpenImmersionSquare g' c'.i c.i gbar) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : (cbcCompleteProperty d X r a ha).FullSubcategory) (_origins : PbcHasCompatibleEtaleOrigins X d K.obj) (_completeOpen : cbcCompleteProperty d c.Z r a ha ((cbcDerivedOpenShriek d c.i c.isOpenImmersion).obj K.obj)) : (cbcRealizationRes d Y').mapDerivedCategory.map (completedCompactSupportExchange d c c' gbar sp sj r a ha K) = (cbcRealizationSource d c c' gbar (g := g) K.obj).hom ≫ (completedRlim Y' (exchangeConstantRing Y' A)).map (cbcRealizationStrict (A := A) c c' gbar sp sj ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K.obj))) ≫ (cbcRealizationTarget d c' g' (qc := cbcRealizationOpenQC c c' gbar sj) K.obj).hom",
-  "branch": "newtargets-dag",
-  "by": "Q128",
-  "date": "2026-10-17",
-  "existing": false
- },
- "statement_change": {
-  "date": "2026-10-17",
-  "by": "Q128 stage 2",
-  "old_statement": "Let $(A,I)$ be the adic datum of [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$, completed coefficient sheaves $A_T$, and strict quotient towers. Let $f:X\\to Y$ be separated of finite type, $g:Y'\\to Y$ any scheme map, and $X'=X\\times_YY'$ with projections $f',g'$ [def-cbc-compact-support-square]. Supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ and its base change $c'=(j',p')$, with ambient map $\\bar g$ [def-weil-pbc-projection-compactification]. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived $I$-complete [def-weil-pbc-intrinsic-completion], with compatible witnesses $\\nu_X^*L_n\\simeq K_n$, $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness]. Assume $j_!K$ is complete and identify its quotient tower with $j_!K_\\bullet$ using the canonical tensor comparisons. Here $j_!$ is the exact ringed-site functor of [lem-pur-site-restriction-module-adjunction-exact].\nPut $\\mathcal T_T=\\operatorname{Tow}(\\underline A_T)$ and let $\\operatorname{Res}_T$ restrict along $\\underline A_T\\to A_T$ [lem-weil-pbc-constant-completion-equivalence]. Use constant-coefficient strict-tower operations $G_u,R_u^{\\mathcal T}$ and $J_j$ [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Restriction of scalars canonically commutes with $j_!$ on sheaves, complexes, and strict towers. For $M_\\bullet=\\operatorname{Res}_X K_\\bullet$ define the actual strict-tower morphism\n$$e^c_M=(R_{p'}^{\\mathcal T}\\beta_{j,g})\\circ E_p^{\\mathcal T}:G_gR_p^{\\mathcal T}J_jM_\\bullet\\longrightarrow R_{p'}^{\\mathcal T}J_{j'}G_{g'}M_\\bullet,$$\nwhere $E_p^{\\mathcal T}$ is the normalized proper mate [lem-weil-pbc-strict-tower-exchange-mate-normalization] and $\\beta$ the open unit-mate [lem-cbc-strict-tower-proper-open-calculus]. The ordered completed exchange $\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)$ of [def-cbc-completed-exchange-map], with its open factor specified by the ordered $R\\lim(\\beta)$ formula, is exactly the image of $R\\lim(e^c_M)$ under the canonical constant/completed, finite-reduction, direct-image/limit, and extension/limit identifications [prop-weil-pbc-direct-image-limits, lem-cbc-exact-product-functor-strict-limit]. This identification is natural in $K$ and identifies evaluation of $e^c_M$ at each $n$ with the specified finite proper/open exchange; it does not characterize a tower map only by evaluations.",
-  "what": "The displayed beta subscript was beta_(j,g), but g has domain Y prime, whereas the open square has ambient map gbar: Xbar prime to Xbar. The composite was ill-typed literally. Replace only that subscript by beta_(j,gbar), as already written in proof Step 4.",
-  "source": {
-   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
-   "place": "The second factor is the completed extension-by-zero comparison for the open square of the compactification; its ambient horizontal map is gbar. The item proof Step 4 already uses beta_(j,gbar)."
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q46-310bbdd27",
+    "group": "Q46",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-310bbdd27 (reviewer sub-agent of L); spot-checked: Re-split against the repair note (at least 3 new nodes, parent at most 3000 characters) and the live 10-step base (11151 characters, quoted verbatim in the report). Every old argument has a carrier. The new N1 lem-cbc-ringed-open-scalar-limit-coherence carries old Steps 1 and 6. The existing lem-cbc-ringed-open-extension-products carries old Step 5 (09BP kernel argument, proetale.tex:5185). The new N2 lem-cbc-completed-open-strict-mate-identification carries old Steps 4 and 7. The new N3 lem-cbc-flat-scalar-direct-image-limit-coherence carries old Step 8 (0A07, sites-cohomology.tex:5150). Old Steps 2, 3, 9 and 10 stay in the parent as short applications of cited statements. The new statements are 2465, 3045 and 2516 characters, all true: I checked the types of each displayed equation and tested identity, empty and zero cases. N1 follows from lambda_{FG}=lambda_F G∘F lambda_G with the products node (j quasi-compact). N3 is the hypothesis set of lem-weil-pbc-flat-ringed-diagram-restriction; it applies at p' through flatness of A-hat (constant-completion-equivalence) and profinite coefficient pullback. N2 combines the strict finite exchange, the finite scalar lemma and the strict calculus. None duplicates a DAG node: I read lem-fix-open-scalar-exchange, lem-sp-slice-restriction-strict-derived-limit, lem-pur-completed-coefficient-pushforward-comparison (advisory overlap only) and others. There is no cycle and no SGA citation, and the item statement is unchanged. FIX, two C1/C3 faults: parent Step 2 used the constant/completed b,d and the direct-image/limit c without citing lem-weil-pbc-constant-completion-equivalence and prop-weil-pbc-direct-image-limits; parent Step 5 dropped def-weil-pbc-completed-base-change-map, which is where the proper lift's finite evaluations v'_n are stated. Both are restored. proof_deps is recomputed, and split_report.tool_uses is pruned to the off-unit nodes actually cited. The parent is now 2844 characters. Maintainer note: the snapshot's sec-proper-base-change symlink is broken, so I read those nodes from clones/live.; 1 file(s) fixed by the reviewer"
   },
-  "citers": [
-   {
-    "id": "thm-cbc-complete-proetale",
-    "holds": true,
-    "note": "The use is the strict-tower realization for the open square with ambient map gbar; correcting the beta subscript changes no morphism or hypothesis."
-   }
-  ]
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-ef110d40a",
-  "group": "Q128",
-  "result": "pass",
-  "note": "Read node, base diff (only statement subscript, lean, statement_change), module (44 decls), report, deps (completedCompactSupportExchange, completedExchange/towerH/towerV', strictTowerExchangeMateNormalization, cbcDatumCompletedExchange, StrictTower.beta, singleBetaInv, PbcHasCompatibleEtaleOrigins) and Stacks 09BP. Main theorem equates Res(Ex^{comp,c}_!) with canonical Source, then Rlim((R_p' beta) after E_p), then Target; open-factor, naturality and evaluation clauses present; hypotheses equal the dependency's binders plus the node's completeness/witness assumptions. Statement correction beta_{j,g} to beta_{j,gbar} is source-based; old_statement verbatim; sole citer thm-cbc-complete-proetale holds. No hollow defs (all sorry in theorems; asIso only from named isIso theorems), docstrings complete, statement verbatim, decl list exact, lines under 100 chars, QC hypothesis as in 09BP. nt_compile: module compiled in 39.3 s with no diagnostics (first try timed out on a side dependency under load). Non-blocking: imports the downstream citer's module CompleteCompactSupportProetale for helpers (acyclic now; stage 3 must move them); cosmetic d rebinding in cbcRealizationOpenLimit.",
-  "statement_corrected": true
- },
- "lean_audit": {},
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "B9",
-  "result": "pass",
-  "landing": "20261021T100831-L-4157034",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationProducts",
-   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv_properties",
-   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationSingleBeta_isIso",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_evaluation",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_naturality",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_open"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.cbcRealizationLimitMap_isIso",
-   "AlgebraicGeometry.Scheme.cbcRealizationProducts",
-   "AlgebraicGeometry.Scheme.cbcRealizationReductionInv_properties",
-   "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv_isIso",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_evaluation",
-   "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_open"
-  ]
- }
+  "lean": {
+    "module": "Sheaf.Paper.CompleteProetaleStrictTowerRealization",
+    "declaration": "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.cbcRealizationWhiskerLimits",
+      "AlgebraicGeometry.Scheme.cbcRealizationWhiskerColimits",
+      "AlgebraicGeometry.Scheme.cbcRealizationLimitAdj",
+      "AlgebraicGeometry.Scheme.cbcRealizationConst",
+      "AlgebraicGeometry.Scheme.cbcRealizationLimitMap",
+      "AlgebraicGeometry.Scheme.cbcRealizationLimitMap_isIso",
+      "AlgebraicGeometry.Scheme.cbcRealizationRes",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenAdj",
+      "AlgebraicGeometry.Scheme.cbcRealizationTowerJ",
+      "AlgebraicGeometry.Scheme.cbcRealizationJ",
+      "AlgebraicGeometry.Scheme.cbcRealizationTowerAdj",
+      "AlgebraicGeometry.Scheme.cbcRealizationReductionInv",
+      "AlgebraicGeometry.Scheme.cbcRealizationReductionInv_properties",
+      "AlgebraicGeometry.Scheme.cbcRealizationReduction",
+      "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv",
+      "AlgebraicGeometry.Scheme.cbcRealizationScalarOpenInv_isIso",
+      "AlgebraicGeometry.Scheme.cbcRealizationScalarOpen",
+      "AlgebraicGeometry.Scheme.cbcRealizationTowerScalarOpen",
+      "AlgebraicGeometry.Scheme.cbcRealizationDerivedScalarOpen",
+      "AlgebraicGeometry.Scheme.cbcRealizationQuotientOpen",
+      "AlgebraicGeometry.Scheme.cbcRealizationProducts",
+      "AlgebraicGeometry.Scheme.cbcRealizationResLimit",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenLimit",
+      "AlgebraicGeometry.Scheme.cbcRealizationPushLimit",
+      "AlgebraicGeometry.Scheme.cbcRealizationResPush",
+      "AlgebraicGeometry.Scheme.cbcRealizationPullLimit",
+      "AlgebraicGeometry.Scheme.cbcRealizationStrict",
+      "AlgebraicGeometry.Scheme.cbcRealizationSource",
+      "AlgebraicGeometry.Scheme.cbcRealizationTarget",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenQC",
+      "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization",
+      "AlgebraicGeometry.Scheme.cbcRealizationSingleSquare",
+      "AlgebraicGeometry.Scheme.cbcRealizationSingleProper",
+      "AlgebraicGeometry.Scheme.cbcRealizationSingleBeta_isIso",
+      "AlgebraicGeometry.Scheme.cbcRealizationSingleOpen",
+      "AlgebraicGeometry.Scheme.cbcRealizationEvalSource",
+      "AlgebraicGeometry.Scheme.cbcRealizationEvalTarget",
+      "AlgebraicGeometry.Scheme.cbcRealizationFinite",
+      "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_evaluation",
+      "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_naturality",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenSource",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenTarget",
+      "AlgebraicGeometry.Scheme.cbcRealizationOpenFactor",
+      "AlgebraicGeometry.Scheme.completeProetaleStrictTowerRealization_open"
+    ],
+    "file": "lean/Sheaf/Paper/CompleteProetaleStrictTowerRealization.lean",
+    "statement": "theorem completeProetaleStrictTowerRealization [QuasiCompact f] (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z) (sp : ChosenCartesianSquare gbar c'.g c.g g) (sj : OpenImmersionSquare g' c'.i c.i gbar) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : (cbcCompleteProperty d X r a ha).FullSubcategory) (_origins : PbcHasCompatibleEtaleOrigins X d K.obj) (_completeOpen : cbcCompleteProperty d c.Z r a ha ((cbcDerivedOpenShriek d c.i c.isOpenImmersion).obj K.obj)) : (cbcRealizationRes d Y').mapDerivedCategory.map (completedCompactSupportExchange d c c' gbar sp sj r a ha K) = (cbcRealizationSource d c c' gbar (g := g) K.obj).hom ≫ (completedRlim Y' (exchangeConstantRing Y' A)).map (cbcRealizationStrict (A := A) c c' gbar sp sj ((exchangeTowerRes d X).obj ((completedReductionTower X d).obj K.obj))) ≫ (cbcRealizationTarget d c' g' (qc := cbcRealizationOpenQC c c' gbar sj) K.obj).hom",
+    "branch": "newtargets-dag",
+    "by": "Q128",
+    "date": "2026-10-17",
+    "existing": false
+  },
+  "statement_change": {
+    "date": "2026-10-17",
+    "by": "Q128 stage 2",
+    "old_statement": "Let $(A,I)$ be the adic datum of [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$, completed coefficient sheaves $A_T$, and strict quotient towers. Let $f:X\\to Y$ be separated of finite type, $g:Y'\\to Y$ any scheme map, and $X'=X\\times_YY'$ with projections $f',g'$ [def-cbc-compact-support-square]. Supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ and its base change $c'=(j',p')$, with ambient map $\\bar g$ [def-weil-pbc-projection-compactification]. Let $K\\in D(\\operatorname{Mod}(A_X))$ be derived $I$-complete [def-weil-pbc-intrinsic-completion], with compatible witnesses $\\nu_X^*L_n\\simeq K_n$, $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness]. Assume $j_!K$ is complete and identify its quotient tower with $j_!K_\\bullet$ using the canonical tensor comparisons. Here $j_!$ is the exact ringed-site functor of [lem-pur-site-restriction-module-adjunction-exact].\nPut $\\mathcal T_T=\\operatorname{Tow}(\\underline A_T)$ and let $\\operatorname{Res}_T$ restrict along $\\underline A_T\\to A_T$ [lem-weil-pbc-constant-completion-equivalence]. Use constant-coefficient strict-tower operations $G_u,R_u^{\\mathcal T}$ and $J_j$ [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Restriction of scalars canonically commutes with $j_!$ on sheaves, complexes, and strict towers. For $M_\\bullet=\\operatorname{Res}_X K_\\bullet$ define the actual strict-tower morphism\n$$e^c_M=(R_{p'}^{\\mathcal T}\\beta_{j,g})\\circ E_p^{\\mathcal T}:G_gR_p^{\\mathcal T}J_jM_\\bullet\\longrightarrow R_{p'}^{\\mathcal T}J_{j'}G_{g'}M_\\bullet,$$\nwhere $E_p^{\\mathcal T}$ is the normalized proper mate [lem-weil-pbc-strict-tower-exchange-mate-normalization] and $\\beta$ the open unit-mate [lem-cbc-strict-tower-proper-open-calculus]. The ordered completed exchange $\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)$ of [def-cbc-completed-exchange-map], with its open factor specified by the ordered $R\\lim(\\beta)$ formula, is exactly the image of $R\\lim(e^c_M)$ under the canonical constant/completed, finite-reduction, direct-image/limit, and extension/limit identifications [prop-weil-pbc-direct-image-limits, lem-cbc-exact-product-functor-strict-limit]. This identification is natural in $K$ and identifies evaluation of $e^c_M$ at each $n$ with the specified finite proper/open exchange; it does not characterize a tower map only by evaluations.",
+    "what": "The displayed beta subscript was beta_(j,g), but g has domain Y prime, whereas the open square has ambient map gbar: Xbar prime to Xbar. The composite was ill-typed literally. Replace only that subscript by beta_(j,gbar), as already written in proof Step 4.",
+    "source": {
+      "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/def-cbc-completed-exchange-map.md",
+      "place": "The second factor is the completed extension-by-zero comparison for the open square of the compactification; its ambient horizontal map is gbar. The item proof Step 4 already uses beta_(j,gbar)."
+    },
+    "citers": [
+      {
+        "id": "thm-cbc-complete-proetale",
+        "holds": true,
+        "note": "The use is the strict-tower realization for the open square with ambient map gbar; correcting the beta subscript changes no morphism or hypothesis."
+      }
+    ]
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-ef110d40a",
+    "group": "Q128",
+    "result": "pass",
+    "note": "Read node, base diff (only statement subscript, lean, statement_change), module (44 decls), report, deps (completedCompactSupportExchange, completedExchange/towerH/towerV', strictTowerExchangeMateNormalization, cbcDatumCompletedExchange, StrictTower.beta, singleBetaInv, PbcHasCompatibleEtaleOrigins) and Stacks 09BP. Main theorem equates Res(Ex^{comp,c}_!) with canonical Source, then Rlim((R_p' beta) after E_p), then Target; open-factor, naturality and evaluation clauses present; hypotheses equal the dependency's binders plus the node's completeness/witness assumptions. Statement correction beta_{j,g} to beta_{j,gbar} is source-based; old_statement verbatim; sole citer thm-cbc-complete-proetale holds. No hollow defs (all sorry in theorems; asIso only from named isIso theorems), docstrings complete, statement verbatim, decl list exact, lines under 100 chars, QC hypothesis as in 09BP. nt_compile: module compiled in 39.3 s with no diagnostics (first try timed out on a side dependency under load). Non-blocking: imports the downstream citer's module CompleteCompactSupportProetale for helpers (acyclic now; stage 3 must move them); cosmetic d rebinding in cbcRealizationOpenLimit.",
+    "statement_corrected": true
+  },
+  "lean_audit": {}
 }

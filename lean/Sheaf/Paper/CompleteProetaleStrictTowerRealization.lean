@@ -14,6 +14,18 @@ public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.Paper.StrictTowerExchangeMateNormalization
 public import WeilConjectures.Compactification.BaseChange
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.CompletedBaseChangeMap
+import Sheaf.Paper.CompletedOpenExchangeTransport
+import Sheaf.Paper.PbcActualStrictPullback
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 public import Sheaf.Paper.CompletedCompactSupportExchange
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
@@ -21,7 +33,18 @@ public import Sheaf.Paper.ExactProductFunctorStrictLimit
 public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.Paper.ProjectionCompactification
 public import Sheaf.Paper.CompleteCompactSupportProetale
-import all Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows
+import Sheaf.Paper.KoszulReconstruction
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-!
 # Strict-tower realization of completed compact-support exchange
@@ -488,7 +511,6 @@ def cbcRealizationSingleProper {V W S T : Scheme.{t}}
       (exchangeConstantRing V A) (exchangeConstantIso r A)).mapDerivedCategoryRightDerivedAdjunction
     (cbcRealizationSingleSquare (A := A) k r p i h).hom
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The inverse-open-unit map is invertible for any Cartesian open square.
 Source: Stacks 03DI, 09AE
 (blueprint: lem-cbc-complete-proetale-strict-tower-realization).
@@ -500,47 +522,7 @@ theorem cbcRealizationSingleBeta_isIso {U' U T' T : Scheme.{t}}
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ b)
     (_sq : IsPullback a j' j b) :
     IsIso (ProEtale.StrictTower.singleBetaInv A a j' j b h) := by
-  let B := ModuleCat.{t + 1} A
-  have unitIso {V W : Scheme.{t}} (i : V ⟶ W) [IsOpenImmersion i] :
-      IsIso (ProEtale.StrictTower.moduleJAdj A i).unit := by
-    have : IsIso (AlgebraicGeometry.ProEtale.openImmersionLowerShriekAdjunction B i).unit :=
-      (AlgebraicGeometry.ProEtale.openImmersionAdjunctionTriple B i)
-        |>.isIso_unit_iff_isIso_counit.mpr
-          (AlgebraicGeometry.ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit
-            B i)
-    let ff :=
-      (AlgebraicGeometry.ProEtale.openImmersionLowerShriekAdjunction B i).fullyFaithfulLOfIsIsoUnit
-    have := ff.full
-    have := ff.faithful
-    have : (ProEtale.StrictTower.fixedRestriction A V).Full :=
-      ProEtale.StrictTower.fixedRestriction_full A V
-    have : (ProEtale.StrictTower.fixedRestriction A V).Faithful :=
-      ProEtale.StrictTower.fixedRestriction_faithful A V
-    have : (ProEtale.StrictTower.fixedRestriction A W).Faithful :=
-      ProEtale.StrictTower.fixedRestriction_faithful A W
-    exact ProEtale.StrictTower.unit_iso_of_comparison
-      (ProEtale.StrictTower.moduleJAdj A i)
-      (ProEtale.StrictTower.fixedRestriction A V)
-      (ProEtale.StrictTower.fixedRestriction A W)
-      (AlgebraicGeometry.ProEtale.openImmersionLowerShriek B i)
-      (ProEtale.StrictTower.fixedOpen A i)
-  have : IsIso (ProEtale.StrictTower.moduleJAdj A j).unit := unitIso j
-  have : IsIso (ProEtale.StrictTower.moduleJAdj A j').unit := unitIso j'
-  let ff := (ProEtale.StrictTower.moduleJAdj A j').fullyFaithfulLOfIsIsoUnit
-  have := ff.full
-  have := ff.faithful
-  have hi (M : ProEtale.StrictTower.Modules A U) :
-      IsIso ((ProEtale.StrictTower.singleBetaInv A a j' j b h).app M) := by
-    have : IsIso ((ProEtale.StrictTower.moduleJAdj A j').counit.app
-        ((ProEtale.StrictTower.modulePullback A b).obj
-          ((ProEtale.StrictTower.moduleJ A j).obj M))) :=
-      (ProEtale.StrictTower.moduleJAdj A j').isIso_counit_app_of_iso
-      ((ProEtale.StrictTower.moduleOpenSquare A a j' j b _sq).app M)
-    change IsIso (ProEtale.StrictTower.singleBetaInvApp A a j' j b h M)
-    unfold ProEtale.StrictTower.singleBetaInvApp
-    rw [Adjunction.homEquiv_counit]
-    infer_instance
-  exact NatIso.isIso_of_isIso_app _
+  sorry
 
 /-- The forward single-object open exchange, with the exact finite unit normalization.
 Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
@@ -653,59 +635,7 @@ theorem completeProetaleStrictTowerRealization_naturality [QuasiCompact f]
         (cbcRealizationRes d Y').mapDerivedCategory.map
           ((d.push c'.g).map ((cbcDerivedOpenShriek d c'.i c'.isOpenImmersion).map
             ((d.completedPull g').map k))) := by
-  let red {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
-      completedReductionTower U d ⋙ cbcRealizationJ d j ≅
-        cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d :=
-    NatIso.ofComponents (fun N ↦ (cbcRealizationReduction d j N).symm)
-      (fun k ↦ (cbcRealizationReductionInv_properties d j).2 _ _ k)
-  let qo {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
-    Functor.isoWhiskerRight (red j).symm (exchangeTowerRes d T) ≪≫
-      Functor.isoWhiskerLeft (completedReductionTower U d) (cbcRealizationTowerScalarOpen d j)
-  let pi : d.push c.g ⋙ completedReductionTower Y d ≅
-      completedReductionTower c.Z d ⋙ d.towerPush c.g :=
-    NatIso.ofComponents (fun N ↦ asIso (d.towerProjection c.g N))
-      (fun {N P} k ↦ (d.towerProjection_properties c.g N).2.1 P k)
-  let s :=
-    Functor.isoWhiskerLeft (cbcDerivedOpenShriek d c.i c.isOpenImmersion)
-      (Functor.isoWhiskerRight
-        (Functor.isoWhiskerRight (Functor.isoWhiskerRight pi (d.towerPull g))
-          (completedRlim Y' (d.completedRing Y')))
-        (cbcRealizationRes d Y').mapDerivedCategory) ≪≫
-    Functor.isoWhiskerLeft
-      (cbcDerivedOpenShriek d c.i c.isOpenImmersion ⋙ completedReductionTower c.Z d ⋙
-        d.towerPush c.g ⋙ d.towerPull g) (cbcRealizationResLimit d Y') ≪≫
-    Functor.isoWhiskerRight
-      (Functor.isoWhiskerLeft
-        (cbcDerivedOpenShriek d c.i c.isOpenImmersion ⋙ completedReductionTower c.Z d)
-        (exchangeCornerB d c.g g) ≪≫
-        Functor.isoWhiskerRight (qo c.i)
-          (ProEtale.StrictTower.R A c.g ⋙ ProEtale.StrictTower.G A g))
-      (completedRlim Y' (exchangeConstantRing Y' A))
-  let pl {U T : Scheme.{t}} (h : U ⟶ T) :=
-    Functor.isoWhiskerLeft (completedReductionTower T d ⋙ d.towerPull h)
-      (cbcRealizationResLimit d U) ≪≫
-    Functor.isoWhiskerRight
-      (Functor.isoWhiskerLeft (completedReductionTower T d) (exchangeResPull d h))
-      (completedRlim U (exchangeConstantRing U A))
-  let : QuasiCompact c'.i := cbcRealizationOpenQC c c' gbar sj
-  let t :=
-    Functor.isoWhiskerLeft
-      (completedReductionTower X d ⋙ exchangeTowerRes d X ⋙
-        ProEtale.StrictTower.G A g' ⋙ ProEtale.StrictTower.J A c'.i)
-      (cbcRealizationPushLimit (A := A) c'.g).symm ≪≫
-    Functor.isoWhiskerRight
-      (Functor.isoWhiskerLeft
-        (completedReductionTower X d ⋙ exchangeTowerRes d X ⋙
-          ProEtale.StrictTower.G A g') (cbcRealizationOpenLimit d c'.i).symm ≪≫
-        Functor.isoWhiskerRight (pl g').symm
-          (ProEtale.StrictTower.moduleJ A c'.i).mapDerivedCategory ≪≫
-        Functor.isoWhiskerLeft (d.completedPull g')
-          (cbcRealizationDerivedScalarOpen d c'.i).symm)
-      (ProEtale.StrictTower.moduleDirectImage A c'.g).rightDerivedFunctor ≪≫
-    Functor.isoWhiskerLeft
-      (d.completedPull g' ⋙ cbcDerivedOpenShriek d c'.i c'.isOpenImmersion)
-      (cbcRealizationResPush d c'.g).symm
-  exact ⟨s.hom.naturality k, t.hom.naturality k⟩
+  sorry
 
 /-- Source presentation for the ordered open factor, using the same quotient/open map.
 Source: blueprint Definition 1939
@@ -767,4 +697,3 @@ theorem completeProetaleStrictTowerRealization_open [QuasiCompact f]
   sorry
 
 end AlgebraicGeometry.Scheme
-

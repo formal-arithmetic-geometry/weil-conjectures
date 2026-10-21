@@ -1,432 +1,303 @@
 {
- "id": "lem-pur-finite-clopen-derived-decomposition",
- "kind": "statement",
- "title": "Finite clopen decomposition of pro-etale derived coefficient categories",
- "statement": "Fix the global field $k=\\overline{\\mathbf F}_q$ and coefficient datum $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite, $\\mathcal O_E$, $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$, as in [def-pur-conventions]. Let $X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], and let $(X_i)_{i\\in I}$ be a finite family of pairwise disjoint open and closed subschemes covering $X$, with inclusions $j_i:X_i\\hookrightarrow X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on the small pro-etale sites [def-weil-pbc-proetale-site], with derived operations [def-weil-derived-pullback-tensor-hom], finite constructibility [def-weil-finite-torsion-constructibility], integral categories [def-weil-derived-complete-integral-detailed], and finite Tor amplitude [def-weil-finite-tor-amplitude].\n\nFor $R=(A_{E,n})_X$ or $R=\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients], restriction gives an exact equivalence of module-sheaf categories\n$$\n \\operatorname{Mod}(R)\\simeq\\prod_{i\\in I}\\operatorname{Mod}(R|_{X_i}).\n$$\nIts quasi-inverse sends $(F_i)_i$ to the sheaf $U\\mapsto\\prod_i F_i(U\\times_X X_i)$, with componentwise restriction maps and module operations. Applying these functors to complexes induces the equivalence of their unbounded derived categories [def-weil-abstract-derived-category], with cohomology and derived tensor computed componentwise. Restriction preserves the coefficient tensor unit, finite coefficient reduction, strict towers of coefficient modules and their derived inverse limits [def-weil-derived-limit].\n\nFor every $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, these equivalences, followed at field stages by the rationalized and common-stage constructions of [def-weil-derived-pullback-tensor-hom], restrict to equivalences\n$$\n D^b_c(X,\\Lambda)\\simeq\\prod_{i\\in I}D^b_c(X_i,\\Lambda),\\qquad\n D^b_{ctf}(X,\\Lambda)\\simeq\\prod_{i\\in I}D^b_{ctf}(X_i,\\Lambda).\n$$\nThe latter respects tensor products and tensor units. At finite level the cohomological and Tor bounds may be chosen to be any common bounds for the finitely many components; at integral level the same holds for the bounds uniform in all reductions. The equivalences respect coefficient reduction and scalar extension. The empty family is allowed: then $X=\\varnothing$ and the product category has its unique object and morphism.",
- "source": {
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 04TS, sites-lemma-mapping-property-glue (lines 5909-5926), for the sheaf equivalence; its module, derived, constructible and coefficient-stage extensions are the explicit finite-clopen argument extracted from the section-invariant well-definedness proof"
- },
- "stmt_deps": [
-  "def-pur-conventions",
-  "def-weil-finite-type-morphism",
-  "def-weil-open-immersion",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-proetale-site",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "def-pur-integral-derived-operations",
-  "def-weil-integral-scalar-extension",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "lem-sfb-ringed-site-duality-maps",
-  "lem-coef-derived-system-evaluation-calculus"
- ],
- "proof": [
-  {
-   "text": "Work in the small skeleta and universe of [def-weil-pbc-proetale-site]. The empty scheme has only the empty object in its site, and the empty covering forces every module sheaf there to be zero. If $I$ is empty, the covering hypothesis forces $X=\\varnothing$, so every category asserted in the statement is equivalent to the category with one object and one arrow. Empty components in a nonempty family likewise contribute zero factors. Henceforth take $I$ nonempty. For each $i$, [lem-weil-proetale-weakly-etale-localization] identifies $(X_i)_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/X_i$, including constant coefficient rings. The family $X_i\\to X$ is a cover by the covering definition: pull back any affine open and cover its finitely many clopen pieces by affines. The double overlaps for distinct indices are empty, while the diagonal overlaps are $X_i$. In the Lean empty-family clause, membership of a point in the covering union would supply an index in the empty type, a contradiction. Functions and coordinatewise arrows on that type are unique. Invertibility of the coefficient prime in residue fields is the image of coefficientPrime_isUnit_stalk from [def-pur-conventions] under the residue homomorphism.",
-   "uses": [
+  "id": "lem-pur-finite-clopen-derived-decomposition",
+  "kind": "statement",
+  "title": "Finite clopen decomposition of pro-etale derived coefficient categories",
+  "statement": "Fix the global field $k=\\overline{\\mathbf F}_q$ and coefficient datum $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite, $\\mathcal O_E$, $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$, as in [def-pur-conventions]. Let $X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], and let $(X_i)_{i\\in I}$ be a finite family of pairwise disjoint open and closed subschemes covering $X$, with inclusions $j_i:X_i\\hookrightarrow X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on the small pro-etale sites [def-weil-pbc-proetale-site], with derived operations [def-weil-derived-pullback-tensor-hom], finite constructibility [def-weil-finite-torsion-constructibility], integral categories [def-weil-derived-complete-integral-detailed], and finite Tor amplitude [def-weil-finite-tor-amplitude].\n\nFor $R=(A_{E,n})_X$ or $R=\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients], restriction gives an exact equivalence of module-sheaf categories\n$$\n \\operatorname{Mod}(R)\\simeq\\prod_{i\\in I}\\operatorname{Mod}(R|_{X_i}).\n$$\nIts quasi-inverse sends $(F_i)_i$ to the sheaf $U\\mapsto\\prod_i F_i(U\\times_X X_i)$, with componentwise restriction maps and module operations. Applying these functors to complexes induces the equivalence of their unbounded derived categories [def-weil-abstract-derived-category], with cohomology and derived tensor computed componentwise. Restriction preserves the coefficient tensor unit, finite coefficient reduction, strict towers of coefficient modules and their derived inverse limits [def-weil-derived-limit].\n\nFor every $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, these equivalences, followed at field stages by the rationalized and common-stage constructions of [def-weil-derived-pullback-tensor-hom], restrict to equivalences\n$$\n D^b_c(X,\\Lambda)\\simeq\\prod_{i\\in I}D^b_c(X_i,\\Lambda),\\qquad\n D^b_{ctf}(X,\\Lambda)\\simeq\\prod_{i\\in I}D^b_{ctf}(X_i,\\Lambda).\n$$\nThe latter respects tensor products and tensor units. At finite level the cohomological and Tor bounds may be chosen to be any common bounds for the finitely many components; at integral level the same holds for the bounds uniform in all reductions. The equivalences respect coefficient reduction and scalar extension. The empty family is allowed: then $X=\\varnothing$ and the product category has its unique object and morphism.",
+  "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS, sites-lemma-mapping-property-glue (lines 5909-5926), for the sheaf equivalence; its module, derived, constructible and coefficient-stage extensions are the explicit finite-clopen argument extracted from the section-invariant well-definedness proof"
+  },
+  "stmt_deps": [
+    "def-pur-conventions",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
     "def-weil-pbc-proetale-site",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00XZ (sites-section-localize), 04TS (sites-lemma-mapping-property-glue); empty-cover sheaf axiom"
-   }
-  },
-  {
-   "text": "For any sheaf of commutative rings $R$ on this site, write $F_i$ for a module over its restriction to $X_i$. Use identity descent maps on diagonal overlaps and the unique maps on empty overlaps. They satisfy the cocycle identity. The module gluing statement gives a module sheaf restricting to the $F_i$. Morphism descent for underlying sets gives a unique glued map for any family of component maps; it is additive and $R$-linear because these equations can be checked after restriction to the cover. Thus restriction is fully faithful and essentially surjective. Explicitly, set $G((F_i))(U)=\\prod_iF_i(U\\times_X X_i)$, with $R(U)$ acting by its restriction in each factor. Matching sections for a cover of $U$ glue uniquely in each factor, so $G$ is a sheaf. The sheaf axiom on $\\{U\\times_X X_i\\to U\\}$ gives $F(U)\\cong\\prod_iF(U\\times_X X_i)$, naturally in $U$ and $F$. Also $(G(F_i))|_{X_j}=F_j$, since all other factors are zero. These are the unit and counit of the required explicit equivalence.",
-   "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing",
-    "lem-pe-set-sheaf-cover-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 04TQ (sites-lemma-glue-maps), 04TR (sites-lemma-glue-sheaves), 04TS (sites-lemma-mapping-property-glue)"
-   }
-  },
-  {
-   "text": "Both functors in step 2 are additive by their formulas. An equivalence preserves kernels and cokernels by [lem-galois-equivalence-preserves-limits]; in the product category these are formed in each coordinate, directly by their universal properties. The module categories are abelian by [def-weil-sheaf-of-modules-category], so the equivalence and its inverse are exact. This argument concerns sheaf exactness and requires no claim that every sheaf epimorphism is sectionwise surjective. Restriction of the completed ring is the completed ring on the component: limits of sheaves of rings are computed on sections by [def-pur-sheaf-inverse-limit], and the localization in step 1 identifies every constant $A_{E,n}$ with its component constant sheaf. Therefore both coefficient rings in the statement are covered by step 2. The standalone exactness clause has a shorter proof independent of gluing: the site inclusion is continuous, cocontinuous, and a left adjoint, so module precomposition is a left adjoint. It is additive by its sectionwise formula. The forgetful functor to abelian-group sheaves reflects finite limits, and underlying sheaf restriction preserves them; finite colimits follow from the left adjoint. This proves clopenRestriction_exact without first constructing the finite-clopen equivalence.",
-   "uses": [
-    "lem-galois-equivalence-preserves-limits",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TS; additive equivalence and the universal properties of kernels and cokernels"
-   }
-  },
-  {
-   "text": "Let $r_i$ be component restriction and $e_i$ the exact functor inserting a module into coordinate $i$ and zero into every other coordinate, followed by $G$. The identities $r_ie_j=0$ for $i\\ne j$, $r_ie_i\\cong\\mathrm{id}$, and $\\bigoplus_i e_ir_i\\cong\\mathrm{id}$ hold on modules and degreewise on complexes. Each $r_i,e_i$ induces a triangulated functor on unbounded derived categories by [lem-sf-exact-functor-derived-triangulated]. The same identities descend through the localization defining the derived category. Consequently $K\\mapsto(r_iK)_i$ and $(K_i)_i\\mapsto\\bigoplus_ie_iK_i$ are inverse equivalences between $D(R)$ and $\\prod_iD(R|_{X_i})$. This explicitly establishes the product of derived categories, rather than merely $D(\\prod_i\\operatorname{Mod}(R_i))$. Since $r_i$ preserves kernels and cokernels, $H^m(r_iK)=r_iH^m(K)$; vanishing is detected by all the $r_i$.",
-   "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (derived-lemma-right-derived-exact-functor); Tag 05RU (derived-definition-unbounded-derived-category)"
-   }
-  },
-  {
-   "text": "The universal property of sheaf tensor in [lem-pc-sites-sheaf-tensor-bilinear-universal] identifies tensor under step 2: an $R$-bilinear map $F\\times H\\to N$ is precisely a family of $R_i$-bilinear maps $F_i\\times H_i\\to N_i$. The equations defining bilinearity are local on the cover, so morphism descent in step 2 proves this correspondence. Applying the representing universal property in both directions gives $r_i(F\\otimes_R H)\\cong r_iF\\otimes_{R_i}r_iH$. On pure tensors it sends $f\\otimes h$ to $r_if\\otimes r_ih$, which also proves naturality and compatibility with associativity, symmetry and unit maps. The coefficient unit $R$ goes to $(R_i)_i$. The equivalence preserves all sums by [lem-galois-equivalence-preserves-limits], so tensor total complexes, with their usual differentials and signs, are componentwise as well.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-galois-equivalence-preserves-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW (sites-modules-lemma-sheafification-tensor) and the bilinear universal property immediately following it"
-   }
-  },
-  {
-   "text": "A complex $P$ is K-flat exactly when all $r_iP$ are K-flat. Indeed an acyclic complex is acyclic in every coordinate by step 4, and its total tensor with $P$ is the componentwise tensor by step 5. For the forward implication test against $e_iC$ for any acyclic complex $C$ on the $i$th component; for the reverse implication test against an arbitrary acyclic complex and detect zero cohomology with all $r_i$. Flat terms are also componentwise, since flatness asks that tensor preserve exact sequences, which steps 3 and 5 detect componentwise. K-flat resolutions with flat terms exist by [lem-pc-kflat-resolution]. The tensor computation and morphism descent of [lem-weil-pbc-site-derived-tensor-descent] therefore give $r_i(K\\otimes_R^L L)\\cong r_iK\\otimes_{R_i}^Lr_iL$ naturally on the unbounded derived categories. For a coefficient ring map, the same calculation applies to tensor with the target coefficient sheaf; [lem-pur-derived-change-of-rings] makes it the derived extension-of-scalars functor. Its pure-tensor formula commutes with every coefficient ring map and with their composites.",
-   "uses": [
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YU (definition-derived-tor)"
-   }
-  },
-  {
-   "text": "Restriction sends a strict tower of coefficient-module complexes to the tower obtained by applying $r_i$ to each term and each transition; gluing is its inverse, including all transition equations. Countable products of module sheaves on these pro-etale sites are sectionwise and exact by [lem-weil-proetale-countable-products-exact]. Their derived products are represented by those termwise products by clause 2 of [lem-weil-derived-limit-existence]. Sectionwise evaluation gives $r_i(\\prod_nC_n)=\\prod_nr_iC_n$, including the transition endomorphism with $n$th coordinate $c_n-t_n(c_{n+1})$. Thus restriction commutes with the functorial complex $\\operatorname{Cone}(1-s)[-1]$, on objects and on strict tower maps, and hence with the chosen integral derived-limit construction. For a derived limit specified only by a Roos triangle, apply the exact functors of step 4 and this product comparison to that triangle; the result is a Roos triangle in each coordinate. The inverse uses $G$ and the same componentwise construction. No uniqueness of a cone in a bare triangulated category is asserted. For the Lean strict-complex clause only countable-product preservation is needed, without exactness of those products. First obtain it for module restriction through the forgetful functor to abelian-group sheaves: preservation follows by composition with the sheaf-to-presheaf functor and reflection follows from conservativity and preserved limits. Apply [lem-pur-roos-additive-comparison]. Convert a tower of complexes to a complex of towers. Its Roos object is definitionally the recorded integralOperationsRoos object. The two coordinate formulas uniquely determine each strict Roos map, by cancelling the coordinate isomorphism in each degree. Thus the comparison naturality is exactly naturality for integralOperationsRoosFunctor.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-existence",
-    "def-weil-derived-limit",
-    "def-pur-integral-derived-operations",
-    "lem-pur-roos-additive-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC (derived-definition-derived-limit); integral strict cone construction in def-pur-integral-derived-operations"
-   }
-  },
-  {
-   "text": "At finite coefficients, a constructible sheaf has a finite stratification into locally closed constructible subschemes on which it is locally constant with finite module stalks. Intersect those strata with each clopen component; the local constancy and stalks are the same restrictions. Conversely, the union of the finitely many component stratifications is a finite stratification of $X$, because a locally closed constructible subscheme of a clopen component is locally closed and constructible in $X$. Local constant models on these strata are exactly the original models. Thus constructibility is equivalent to componentwise constructibility. Step 4 gives boundedness using any interval containing all the finitely many component cohomological supports. For Tor amplitude, step 6 gives $r_i(K\\otimes^L M)=r_iK\\otimes^Lr_iM$. Every module on a component is $r_i(e_iM_i)$, and vanishing is detected by all $r_i$. Hence a fixed interval $[a,b]$ is a Tor interval for $K$ if and only if it is one for every component. This proves both finite-coefficient full-subcategory equivalences and the asserted choice of common bounds. Given the fixed-interval finite bounds clause, finiteClopen_finiteTor_iff is proved separately: the forward direction retains a global interval on every component. For the converse choose the finitely many component intervals, take a lower bound of their left endpoints and an upper bound of their right endpoints, and enlarge them to the ordered interval [min(c,d),max(c,d)]. Tor amplitude is monotone under enlargement directly from its outside-degree vanishing definition. This argument includes the empty index type. The finite full-subcategory equivalences are now proved in Lean from the unbounded clopen restriction equivalence and finiteClopen_finite_restriction_identification. The product of the component coefficient equivalences transports the ambient equivalence to the published finiteDerivedPullback functors. A fully faithful ambient functor restricts fully faithfully to the component full subcategories. For essential surjectivity, choose an ambient preimage of a family of objects, transport their properties across its component isomorphisms, and use finiteClopen_finite_bounds or finiteClopen_finiteTor_iff to recover the global predicate. Isomorphism closure of bounded constructibility is supplied by [lem-weil-proetale-dbc-triangulated]; Tor amplitude is invariant under isomorphism by composing the representative-to-object isomorphism in its definition.",
-   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
     "def-weil-finite-torsion-constructibility",
-    "def-weil-finite-tor-amplitude",
-    "lem-weil-proetale-dbc-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, final invertibility assertion: finite-clopen well-definedness argument (agent expansion)"
-   }
-  },
-  {
-   "text": "For the completed integral ring, step 6 identifies every finite derived reduction, its transition map, and the map from $K$ with their component restrictions. By [def-weil-derived-complete], completeness asks that the specified maps $K\\to\\prod_nK_n$ begin a Roos triangle. Step 7 preserves exactly these maps and triangles; conversely the component triangles glue to one such triangle by the derived equivalence and its finite-sum inverse of step 4. Thus completeness is componentwise. The definition of $D^b_c(X,\\mathcal O_E)$ further asks for constructible reductions and one cohomological interval uniform in $n$; step 8 checks the former, and a common interval for the finite list of component intervals checks the latter. The integral finite-Tor definition is checked in exactly the same way, taking one common interval for all component intervals which already hold uniformly in $n$. This gives the two integral equivalences. The completed tensor construction is the strict derived limit of the tensors of reductions, so steps 6 and 7 give its componentwise tensor comparison and unit. Likewise [def-weil-integral-scalar-extension] is the strict derived limit of scalar changes to $A_{L,m}$, and the same formulas commute with this extension and its maps. For finiteClopen_integral_bounds on an already constructible integral object, use the reduction comparison from finiteClopen_tensor_and_reduction. In every positive degree reduction, transport cohomological support and Tor amplitude across that comparison isomorphism and apply finiteClopen_finite_bounds. Retain the same interval uniformly in the reduction index. The converse finite-Tor condition takes bounds over the finite component index only, so it also remains uniform in every reduction. In the separate scalar-extension clause use [lem-pur-integral-operations-scalar-extension]: scalarCompletionIso is natural on complete constructible objects because its hom is scalarCompletion. Whisker this isomorphism at the source and component, and conjugate scalarPullbackOrdinary. For the rational comparison the defining object equalities and the pure-tensor morphism formula of [def-weil-derived-pullback-tensor-hom] give a natural eqToIso comparison.",
-   "uses": [
-    "def-weil-derived-complete",
     "def-weil-derived-complete-integral-detailed",
     "def-weil-finite-tor-amplitude",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit",
     "def-pur-integral-derived-operations",
     "def-weil-integral-scalar-extension",
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, final invertibility assertion: integral-category well-definedness (agent expansion)"
-   }
-  },
-  {
-   "text": "For $E$ coefficients the rationalized category has the same objects as the integral constructible category and Hom groups $\\operatorname{Hom}(-,-)\\otimes_{\\mathcal O_E}E$, with no additional Karoubi completion. For finite $I$ the coordinate map $(\\prod_iH_i)\\otimes E\\to\\prod_i(H_i\\otimes E)$ has inverse obtained by inserting each coordinate with zeros elsewhere and summing over $I$. These maps are inverse on pure tensors. Thus the integral equivalence induces bijections on all rationalized Hom groups, respecting composition, and the same objectwise quasi-inverse proves essential surjectivity. The rational tensor and coefficient scalar-extension formulas apply the integral operations and extend morphisms linearly; the pure-tensor comparison in step 6 and the integral strict-limit comparison in step 9 consequently commute with these formulas. The field finite-Tor categories are defined to equal the bounded constructible categories, so this proves both $E$ assertions.",
-   "uses": [
     "def-weil-rationalization-karoubi",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, final invertibility assertion: rationalized coefficient transport (agent expansion)"
-   }
-  },
-  {
-   "text": "In the common-stage category a component object is $(E_i,K_i)$. Choose the compositum $L$ of the finitely many $E_i$ in the fixed algebraic closure, extend all $K_i$ to $L$, and apply the $L$-coefficient gluing equivalence from step 10. This constructs a preimage of every product object. For fullness, represent the finitely many component arrows over finite fields and extend all representatives to their finite compositum; step 10 glues them to one arrow there. For faithfulness, if two arrows have equal component classes, for each of the finitely many coordinates choose a field where their representatives agree; over the compositum of these fields all coordinates agree, so step 10 makes the global representatives equal. These constructions respect identities and composition because each finite diagram can be represented over a common finite compositum. Tensor is formed over the compositum of the two object fields, where step 10 already supplies the tensor and unit comparisons. The scalar-extension and reduction comparisons were obtained on the same representatives in steps 6-10. This proves the stated $\\overline{\\mathbf Q}_\\ell$ equivalences and their compatibilities. The finite-Tor categories at this stage again equal the bounded constructible ones by definition.",
-   "uses": [
     "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, final invertibility assertion: finite common-stage transport (agent expansion)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pur-conventions",
-  "def-pur-integral-derived-operations",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-abstract-derived-category",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-derived-complete",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-limit",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-integral-scalar-extension",
-  "def-weil-pbc-proetale-site",
-  "def-weil-rationalization-karoubi",
-  "def-weil-sheaf-of-modules-category",
-  "lem-galois-equivalence-preserves-limits",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pe-set-sheaf-cover-descent",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-roos-additive-comparison",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-dbc-triangulated",
-  "lem-weil-proetale-weakly-etale-localization"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Stacks Tags 04TQ, 04TR, 04TS for sheaf descent; explicit component-functor, K-flat, strict-limit and coefficient-stage arguments expanding the main-20261015 section-invariant well-definedness route; D9 stage-3 proofs of restriction exactness, residue units, strict Roos naturality, finite/integral interval detection and scalar compatibility use the shorter routes appended to steps 1, 3, 7, 8 and 9. The other clauses retain the original proof plan.; finite coefficient full-subcategory equivalences use the ambient equivalence, coefficient identifications and predicate detection as in the appended step 8."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Finite clopen decomposition of a scheme induces a tensor equivalence of its constructible derived category of pro-etale coefficient sheaves with the finite product of the component derived categories",
-   "results": "Hits read: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition'. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"equiv\"",
-   "results": "Hits read: CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst, CategoryTheory.overEquivPresheafCostructuredArrow, CategoryTheory.OverPresheafAux.YonedaCollection.map₂_yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.map₁_yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst_eq, CategoryTheory.CostructuredArrow.toOverCompOverEquivPresheafCostructuredArrow, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_inverse_map_toOverCompYoneda. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "clopen.*(derived|sheaf)|Sheaf.*(coproduct|disjoint)|derived.*(clopen|disjoint)",
-   "results": "Hits read: Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived categories of sheaves of modules on a finite disjoint union of schemes decompose as the product of the component derived categories",
-   "results": "Hits read: AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instFinitaryExtensiveScheme, CategoryTheory.Sheaf.instHasFiniteCoproducts, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, SheafOfModules.instPreadditive. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a finite disjoint union of schemes restriction is an exact equivalence from pro-etale module sheaves to the product of module sheaf categories and induces an equivalence on bounded constructible complexes with finite Tor amplitude",
-   "results": "Hits read: Profinite.NobelingProof.succ_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, Condensed.hasExactColimitsOfShape, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition'. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"disjoint\"",
-   "results": "Hits read: TopCat.Sheaf.isProductOfDisjoint. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "clopen|disjoint",
-   "results": "Hits read: Mathlib/CategoryTheory/Sites/Preserves.lean, Mathlib/CategoryTheory/Sites/Preserves.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Coherent/Basic.lean. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restriction to a finite clopen partition is an exact equivalence of pro-etale module sheaves and their constructible derived coefficient categories",
-   "results": "Returned Profinite.NobelingProof.succ_exact, CompHausLike.LocallyConstantModule.functor, Condensed.profiniteSolid, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.ofSheafLightProfinite, CondensedMod.isDiscrete_tfae; condensed-module and exact-derived-functor hits do not state the geometric constructible/coefficient decomposition.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "clopen.*(derived|sheaf)|Sheaf.*disjoint|derived.*clopen",
-   "results": "Returned Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "equivalence|product|pi",
-   "results": "No hits; subsequent filesystem read showed this requested subdirectory does not exist. This query gives no evidence of absence.",
-   "date": "2026-10-17",
-   "verdict": "invalid path; no conclusion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\", \"equivalence\"",
-   "results": "No hits returned.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An exact equivalence between module sheaves on a disjoint union and the product of module categories induces an equivalence on unbounded derived categories compatible with tensor and coefficient reduction",
-   "results": "Returned CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor, CategoryTheory.Tor', DerivedCategory.instLinear, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj; condensed-module and exact-derived-functor hits do not state the geometric constructible/coefficient decomposition.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "mapDerivedCategory|equivalence",
-   "results": "msearch single-file output parses line numbers as file keys: 16,36,39,41,42. Read Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean lines 25-105: CategoryTheory.Functor.mapDerivedCategory at 36 and its triangulated instance at 104 give only the exact-functor step, not this full geometric/coefficient statement.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "def-pur-section-invariant",
-  "date": "2026-10-17",
-  "group": "Q40"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv",
- "blueprint": {
-  "from": {
-   "node": "def-pur-section-invariant",
-   "place": "Definition def-pur-section-invariant: the finite-clopen category decomposition and its extension to derived, integral, and common-stage coefficient categories",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-pur-finite-clopen-derived-decomposition",
-  "worker": "stage1",
-  "summary": "Human-requested re-split of the existing 11245-character proof into five statement-only tasks: module gluing, unbounded K-flat tensor calculus, finite constructibility/bounds, integral Roos/completeness, and rational/common-stage descent. Statement unchanged; all eleven original argument texts and their cited sources preserved verbatim in report.md.",
-  "blueprint": "def-pur-section-invariant, main-20261015 final invertibility assertion. New tasks inherit the exact five portions of the existing finite-clopen well-definedness expansion; no change to chapter or unit route.",
-  "tool_uses": []
- },
- "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-pe-set-sheaf-cover-descent",
-  "lem-galois-equivalence-preserves-limits",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q37-7bde813e8",
-  "group": "Q37",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-7bde813e8 (reviewer sub-agent of L); spot-checked: This is a re-split under the human's note of 2026-10-21 (coord/repair-notes, at least 3 new nodes, assembly of at most 3000 characters). I compared the base proof, the 11-step split reviewed in Q109, step by step with the delivery. Nothing was dropped or blurred. Old steps 1-3 (localization, cover, explicit product quasi-inverse, exactness, completed-ring identification, empty case) are now lem-pur-clopen-ringed-module-gluing. Steps 4-6 (insertion identities, D(R)≃∏D(R_i), H^m, bilinear tensor, K-flat iff componentwise, derived tensor, change of rings for every R→S) are lem-pur-finite-product-derived-tensor-calculus. Step 8 (stratifications in both directions, common intervals, fixed-interval Tor via zero insertion) is lem-pur-clopen-finite-constructibility-bounds. Steps 7 and 9 (strict Cone(1-s)[-1], Roos triangle with the specified c, completeness, D^b_c and D^b_ctf over O_E, uniform bounds, completed tensor, integral scalar extension) are lem-pur-clopen-roos-integral-descent. Steps 10-11 ((∏H_i)⊗E≅∏(H_i⊗E) with raw localization, compositum, fullness and faithfulness via filtered colimits) are lem-pur-finite-product-field-coefficient-descent. The five nodes are of comparable size, each is statement-only and unsplit with 5 recorded searches, none restates the item, and there is no cycle. The item statement is byte-identical to the base, and its 5-step assembly (1906 characters) covers every clause. Step 5's hypothesis is exactly what step 4 gives for each finite E. I checked the new statements against def-weil-finite-torsion-constructibility (finite partition into locally closed constructible subschemes), def-weil-proetale-tor-amplitude and def-weil-finite-tor-amplitude, def-weil-derived-complete (specified first map c, no canonical cone), def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi (no Karoubi completion) and def-weil-algebraically-closed-coefficients. Small cases checked: I=∅ (X=∅, zero categories), |I|=1, components with different bounds, empty components, ramified E⊂L. Stacks labels checked in tags/tags: 04TQ/04TR/04TS, 015F, 05RU, 08TC, 0GMW, 06YS/0G7D/06YU. No SGA. Duplicate search over all chapters: lem-weil-pbc-etale-sheaf-clopen-product and the related nodes are on the étale site or concern sets or curves, so none is a duplicate. One repairable fault, B3: the new nodes' stmt_deps omit definition nodes cited inline. All five lack def-weil-open-immersion and def-weil-closed-immersion. constructibility-bounds also lacks def-weil-abstract-derived-category and def-weil-derived-tensor. roos-integral-descent also lacks def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-integral-derived-reduction and def-weil-integral-reduction-tower. field-coefficient-descent also lacks def-pur-integral-derived-operations and def-weil-integral-scalar-extension. I added them in fixes/dag/nodes/sec-smooth-purity/*.json and changed nothing else. Advisory: the item's maintainer field tool_uses still lists the ten base tools, which are no longer in proof_deps; the new nodes' future proofs will need them. Three uncited base-era lemma stmt_deps on the item are unchanged from the base.; 5 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-f3236e80b",
-  "group": "Q80",
-  "result": "pass",
-  "note": "Statement, dependencies, source mapping, definitions, edge cases, docstrings, and compiler reproducibility all checked; no findings."
- },
- "lean": {
-  "module": "Sheaf.Paper.FiniteClopenDerivedDecomposition",
-  "declaration": "WeilConjectures.PurityFiniteSetting.finiteClopen_constructible_equivalences",
-  "declarations": [
-   "WeilConjectures.PurityFiniteSetting.clopenRing",
-   "WeilConjectures.PurityFiniteSetting.clopenSiteInclusion",
-   "WeilConjectures.PurityFiniteSetting.clopenSiteInclusionContinuous",
-   "WeilConjectures.PurityFiniteSetting.clopenRingRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenModules",
-   "WeilConjectures.PurityFiniteSetting.clopenRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenRestriction_exact",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionAdditive",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionLimits",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionColimits",
-   "WeilConjectures.PurityFiniteSetting.clopenHasDerived",
-   "WeilConjectures.PurityFiniteSetting.clopenDerivedRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenResidue_isUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralPullback",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalPullback",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStagePullback",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStageTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStageUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralScalarComparison",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalScalarComparison",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_module_equivalence",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_unbounded_decomposition",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_roos",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_bounds",
-   "WeilConjectures.PurityFiniteSetting.clopenFiniteConstructiblePullback",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_finiteTor_iff",
-   "WeilConjectures.PurityFiniteSetting.clopenFiniteTorPullback",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_equivalences",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_bounds",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralTorPullback",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_constructible_equivalences",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_tensor_and_reduction",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_scalar_extension",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_coefficient_units",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_empty",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_restriction_identification",
-   "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_restriction_identification"
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-coef-derived-system-evaluation-calculus"
   ],
-  "file": "lean/Sheaf/Paper/FiniteClopenDerivedDecomposition.lean",
-  "statement": "theorem finiteClopen_constructible_equivalences : (Functor.pi' (fun i ↦ P.clopenIntegralPullback (j i))).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenIntegralTorPullback X Xi j hdisjoint hcover i)).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenRationalPullback (j i))).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenCommonStagePullback (j i))).IsEquivalence",
-  "branch": "newtargets-dag",
-  "by": "Q80",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The module states all clauses through named theorem declarations: explicit sectionwise exact module gluing; unbounded derived, cohomology, tensor and strict Roos comparisons; finite and integral constructible/finite-Tor equivalences and common bounds; rational/common-stage equivalences, units and scalar transport. Helpers are actual canonical functors or full-subcategory lifts, not arbitrary data. Positive level n is represented by n+1. All theorem proofs are sorry."
- },
- "lean_audit": {},
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D9",
-  "result": "pass",
-  "landing": "20261021T100920-L-4171059",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "Apply [lem-pur-clopen-ringed-module-gluing] to each ring $R$ in the statement. Its coefficient identifications identify $R|_{X_i}$ with the corresponding component coefficient ring and preserve quotient projections. Its unit and counit give precisely the stated sectionwise product quasi-inverse and exact module equivalence, including the empty case.",
+      "uses": [
+        "lem-pur-clopen-ringed-module-gluing"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Tag 04TS, sites-lemma-mapping-property-glue; Tags 04TQ/04TR, sites-lemma-glue-maps/sites-lemma-glue-sheaves. Agent finite-clopen module expansion of the section-invariant argument, old item steps 1-3."
+      }
+    },
+    {
+      "text": "Apply [lem-pur-finite-product-derived-tensor-calculus] to these restriction and zero-insertion functors. The inverse is the finite sum of insertions, so the result is the product of the component derived categories. Its cohomology and tensor comparisons give the unbounded, unit and reduction assertions with naturality on derived morphisms.",
+      "uses": [
+        "lem-pur-finite-product-derived-tensor-calculus"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F, derived-lemma-right-derived-exact-functor; Tag 05RU, derived-definition-unbounded-derived-category; sites-modules.tex Tag 0GMW, sites-modules-lemma-sheafification-tensor; sites-cohomology.tex Tags 06YS/0G7D/06YU, lemma-K-flat-resolution/lemma-factor-through-K-flat/definition-derived-tor. Agent finite-product application, old item steps 4-6."
+      }
+    },
+    {
+      "text": "For $A_{E,n}$, [lem-pur-clopen-finite-constructibility-bounds] detects membership in both finite full subcategories. Thus the unbounded equivalence restricts to the two required finite equivalences. Any common interval contains every component support; the fixed-interval Tor equivalence gives the same conclusion for Tor bounds.",
+      "uses": [
+        "lem-pur-clopen-finite-constructibility-bounds"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+        "place": "def-pur-section-invariant, final invertibility assertion: agent finite-clopen constructibility and fixed-interval Tor argument, old item step 8; definitions def-weil-finite-torsion-constructibility and def-weil-finite-tor-amplitude."
+      }
+    },
+    {
+      "text": "Use [lem-pur-clopen-roos-integral-descent] for strict towers and their maps. It identifies the actual reduction towers, their shifted Roos cones and specified first maps; hence it detects completeness and membership in the two integral full subcategories. It supplies the uniform bounds, completed tensor, units and integral scalar-extension comparisons, so restriction and gluing induce the asserted integral equivalences.",
+      "uses": [
+        "lem-pur-clopen-roos-integral-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 08TC, derived-definition-derived-limit, and derived-lemma-products immediately following it. Agent finite-clopen strict-cone and integral completeness application, old item steps 7 and 9; strict models of def-pur-integral-derived-operations and def-weil-integral-scalar-extension."
+      }
+    },
+    {
+      "text": "Step 4 holds for every finite coefficient field and is linear by the sectionwise module formulas. It satisfies the hypotheses of [lem-pur-finite-product-field-coefficient-descent]; that lemma gives the rationalized and common-stage equivalences and their tensor, unit and coefficient-extension comparisons. At the two field stages $D^b_{ctf}=D^b_c$ as stated there. Together the five steps cover all coefficient stages; all five lemmas allow the empty partition.",
+      "uses": [
+        "lem-pur-finite-product-field-coefficient-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+        "place": "def-pur-section-invariant, final invertibility assertion: agent rationalization and common-stage finite-product transport, old item steps 10-11; the explicit category models of def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-clopen-finite-constructibility-bounds",
+    "lem-pur-clopen-roos-integral-descent",
+    "lem-pur-finite-product-field-coefficient-descent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion, finite-clopen well-definedness: assembly of five separately queued lemmas; full original eleven-argument expansion preserved in the Q37 report."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Finite clopen decomposition of a scheme induces a tensor equivalence of its constructible derived category of pro-etale coefficient sheaves with the finite product of the component derived categories",
+      "results": "Hits read: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition'. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Sheaf\", \"equiv\"",
+      "results": "Hits read: CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst, CategoryTheory.overEquivPresheafCostructuredArrow, CategoryTheory.OverPresheafAux.YonedaCollection.map₂_yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.map₁_yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst_eq, CategoryTheory.CostructuredArrow.toOverCompOverEquivPresheafCostructuredArrow, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_inverse_map_toOverCompYoneda. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "clopen.*(derived|sheaf)|Sheaf.*(coproduct|disjoint)|derived.*(clopen|disjoint)",
+      "results": "Hits read: Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived categories of sheaves of modules on a finite disjoint union of schemes decompose as the product of the component derived categories",
+      "results": "Hits read: AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instFinitaryExtensiveScheme, CategoryTheory.Sheaf.instHasFiniteCoproducts, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, SheafOfModules.instPreadditive. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For a finite disjoint union of schemes restriction is an exact equivalence from pro-etale module sheaves to the product of module sheaf categories and induces an equivalence on bounded constructible complexes with finite Tor amplitude",
+      "results": "Hits read: Profinite.NobelingProof.succ_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, Condensed.hasExactColimitsOfShape, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition'. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Sheaf\", \"disjoint\"",
+      "results": "Hits read: TopCat.Sheaf.isProductOfDisjoint. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "clopen|disjoint",
+      "results": "Hits read: Mathlib/CategoryTheory/Sites/Preserves.lean, Mathlib/CategoryTheory/Sites/Preserves.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Coherent/Basic.lean. These are structure-sheaf sections, sheaf conditions or condensed-module constructions, not the pro-etale derived equivalence with constructibility, uniform Tor bounds and coefficient transports.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Restriction to a finite clopen partition is an exact equivalence of pro-etale module sheaves and their constructible derived coefficient categories",
+      "results": "Returned Profinite.NobelingProof.succ_exact, CompHausLike.LocallyConstantModule.functor, Condensed.profiniteSolid, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.ofSheafLightProfinite, CondensedMod.isDiscrete_tfae; condensed-module and exact-derived-functor hits do not state the geometric constructible/coefficient decomposition.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "clopen.*(derived|sheaf)|Sheaf.*disjoint|derived.*clopen",
+      "results": "Returned Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "equivalence|product|pi",
+      "results": "No hits; subsequent filesystem read showed this requested subdirectory does not exist. This query gives no evidence of absence.",
+      "date": "2026-10-17",
+      "verdict": "invalid path; no conclusion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"DerivedCategory\", \"equivalence\"",
+      "results": "No hits returned.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An exact equivalence between module sheaves on a disjoint union and the product of module categories induces an equivalence on unbounded derived categories compatible with tensor and coefficient reduction",
+      "results": "Returned CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor, CategoryTheory.Tor', DerivedCategory.instLinear, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj; condensed-module and exact-derived-functor hits do not state the geometric constructible/coefficient decomposition.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "mapDerivedCategory|equivalence",
+      "results": "msearch single-file output parses line numbers as file keys: 16,36,39,41,42. Read Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean lines 25-105: CategoryTheory.Functor.mapDerivedCategory at 36 and its triangulated instance at 104 give only the exact-functor step, not this full geometric/coefficient statement.",
+      "date": "2026-10-17",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "def-pur-section-invariant",
+    "date": "2026-10-17",
+    "group": "Q40"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-purity-conv",
+  "blueprint": {
+    "from": {
+      "node": "def-pur-section-invariant",
+      "place": "Definition def-pur-section-invariant: the finite-clopen category decomposition and its extension to derived, integral, and common-stage coefficient categories",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-pur-finite-clopen-derived-decomposition",
+    "worker": "stage1",
+    "summary": "Human-requested re-split of the existing 11245-character proof into five statement-only tasks: module gluing, unbounded K-flat tensor calculus, finite constructibility/bounds, integral Roos/completeness, and rational/common-stage descent. Statement unchanged; all eleven original argument texts and their cited sources preserved verbatim in report.md.",
+    "blueprint": "def-pur-section-invariant, main-20261015 final invertibility assertion. New tasks inherit the exact five portions of the existing finite-clopen well-definedness expansion; no change to chapter or unit route.",
+    "tool_uses": []
+  },
+  "tool_uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-galois-equivalence-preserves-limits",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q37-7bde813e8",
+    "group": "Q37",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-7bde813e8 (reviewer sub-agent of L); spot-checked: This is a re-split under the human's note of 2026-10-21 (coord/repair-notes, at least 3 new nodes, assembly of at most 3000 characters). I compared the base proof, the 11-step split reviewed in Q109, step by step with the delivery. Nothing was dropped or blurred. Old steps 1-3 (localization, cover, explicit product quasi-inverse, exactness, completed-ring identification, empty case) are now lem-pur-clopen-ringed-module-gluing. Steps 4-6 (insertion identities, D(R)≃∏D(R_i), H^m, bilinear tensor, K-flat iff componentwise, derived tensor, change of rings for every R→S) are lem-pur-finite-product-derived-tensor-calculus. Step 8 (stratifications in both directions, common intervals, fixed-interval Tor via zero insertion) is lem-pur-clopen-finite-constructibility-bounds. Steps 7 and 9 (strict Cone(1-s)[-1], Roos triangle with the specified c, completeness, D^b_c and D^b_ctf over O_E, uniform bounds, completed tensor, integral scalar extension) are lem-pur-clopen-roos-integral-descent. Steps 10-11 ((∏H_i)⊗E≅∏(H_i⊗E) with raw localization, compositum, fullness and faithfulness via filtered colimits) are lem-pur-finite-product-field-coefficient-descent. The five nodes are of comparable size, each is statement-only and unsplit with 5 recorded searches, none restates the item, and there is no cycle. The item statement is byte-identical to the base, and its 5-step assembly (1906 characters) covers every clause. Step 5's hypothesis is exactly what step 4 gives for each finite E. I checked the new statements against def-weil-finite-torsion-constructibility (finite partition into locally closed constructible subschemes), def-weil-proetale-tor-amplitude and def-weil-finite-tor-amplitude, def-weil-derived-complete (specified first map c, no canonical cone), def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi (no Karoubi completion) and def-weil-algebraically-closed-coefficients. Small cases checked: I=∅ (X=∅, zero categories), |I|=1, components with different bounds, empty components, ramified E⊂L. Stacks labels checked in tags/tags: 04TQ/04TR/04TS, 015F, 05RU, 08TC, 0GMW, 06YS/0G7D/06YU. No SGA. Duplicate search over all chapters: lem-weil-pbc-etale-sheaf-clopen-product and the related nodes are on the étale site or concern sets or curves, so none is a duplicate. One repairable fault, B3: the new nodes' stmt_deps omit definition nodes cited inline. All five lack def-weil-open-immersion and def-weil-closed-immersion. constructibility-bounds also lacks def-weil-abstract-derived-category and def-weil-derived-tensor. roos-integral-descent also lacks def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-integral-derived-reduction and def-weil-integral-reduction-tower. field-coefficient-descent also lacks def-pur-integral-derived-operations and def-weil-integral-scalar-extension. I added them in fixes/dag/nodes/sec-smooth-purity/*.json and changed nothing else. Advisory: the item's maintainer field tool_uses still lists the ten base tools, which are no longer in proof_deps; the new nodes' future proofs will need them. Three uncited base-era lemma stmt_deps on the item are unchanged from the base.; 5 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-f3236e80b",
+    "group": "Q80",
+    "result": "pass",
+    "note": "Statement, dependencies, source mapping, definitions, edge cases, docstrings, and compiler reproducibility all checked; no findings."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.FiniteClopenDerivedDecomposition",
+    "declaration": "WeilConjectures.PurityFiniteSetting.finiteClopen_constructible_equivalences",
+    "declarations": [
+      "WeilConjectures.PurityFiniteSetting.clopenRing",
+      "WeilConjectures.PurityFiniteSetting.clopenSiteInclusion",
+      "WeilConjectures.PurityFiniteSetting.clopenSiteInclusionContinuous",
+      "WeilConjectures.PurityFiniteSetting.clopenRingRestriction",
+      "WeilConjectures.PurityFiniteSetting.clopenModules",
+      "WeilConjectures.PurityFiniteSetting.clopenRestriction",
+      "WeilConjectures.PurityFiniteSetting.clopenRestriction_exact",
+      "WeilConjectures.PurityFiniteSetting.clopenRestrictionAdditive",
+      "WeilConjectures.PurityFiniteSetting.clopenRestrictionLimits",
+      "WeilConjectures.PurityFiniteSetting.clopenRestrictionColimits",
+      "WeilConjectures.PurityFiniteSetting.clopenHasDerived",
+      "WeilConjectures.PurityFiniteSetting.clopenDerivedRestriction",
+      "WeilConjectures.PurityFiniteSetting.clopenResidue_isUnit",
+      "WeilConjectures.PurityFiniteSetting.clopenIntegralPullback",
+      "WeilConjectures.PurityFiniteSetting.clopenRationalPullback",
+      "WeilConjectures.PurityFiniteSetting.clopenCommonStagePullback",
+      "WeilConjectures.PurityFiniteSetting.clopenIntegralTensor",
+      "WeilConjectures.PurityFiniteSetting.clopenRationalTensor",
+      "WeilConjectures.PurityFiniteSetting.clopenCommonStageTensor",
+      "WeilConjectures.PurityFiniteSetting.clopenIntegralUnit",
+      "WeilConjectures.PurityFiniteSetting.clopenRationalUnit",
+      "WeilConjectures.PurityFiniteSetting.clopenCommonStageUnit",
+      "WeilConjectures.PurityFiniteSetting.clopenIntegralScalarComparison",
+      "WeilConjectures.PurityFiniteSetting.clopenRationalScalarComparison",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_module_equivalence",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_unbounded_decomposition",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_roos",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_bounds",
+      "WeilConjectures.PurityFiniteSetting.clopenFiniteConstructiblePullback",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_finiteTor_iff",
+      "WeilConjectures.PurityFiniteSetting.clopenFiniteTorPullback",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_equivalences",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_bounds",
+      "WeilConjectures.PurityFiniteSetting.clopenIntegralTorPullback",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_constructible_equivalences",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_tensor_and_reduction",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_scalar_extension",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_coefficient_units",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_empty",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_finite_restriction_identification",
+      "WeilConjectures.PurityFiniteSetting.finiteClopen_integral_restriction_identification"
+    ],
+    "file": "lean/Sheaf/Paper/FiniteClopenDerivedDecomposition.lean",
+    "statement": "theorem finiteClopen_constructible_equivalences : (Functor.pi' (fun i ↦ P.clopenIntegralPullback (j i))).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenIntegralTorPullback X Xi j hdisjoint hcover i)).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenRationalPullback (j i))).IsEquivalence ∧ (Functor.pi' (fun i ↦ P.clopenCommonStagePullback (j i))).IsEquivalence",
+    "branch": "newtargets-dag",
+    "by": "Q80",
+    "date": "2026-10-17",
+    "existing": false,
+    "note": "The module states all clauses through named theorem declarations: explicit sectionwise exact module gluing; unbounded derived, cohomology, tensor and strict Roos comparisons; finite and integral constructible/finite-Tor equivalences and common bounds; rational/common-stage equivalences, units and scalar transport. Helpers are actual canonical functors or full-subcategory lifts, not arbitrary data. Positive level n is represented by n+1. All theorem proofs are sorry."
+  },
+  "lean_audit": {}
 }
