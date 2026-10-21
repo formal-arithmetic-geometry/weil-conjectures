@@ -227,5 +227,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-a224aeacf (reviewer sub-agent of L); spot-checked: The item matches Stacks 0CBF (algebra.tex l.40749) specialized to ind-étale, with no hypothesis added. The new leaf matches 03GE (l.40631) and specializes Mathlib TensorProduct.toIntegralClosure_bijective_of_smooth (Smooth/IntegralClosure.lean:380, map at :39-48). Steps 1-3 and 5 are correct: f_i injective from the stage isomorphisms; the monic equation pushed along a_i⊗1; eventual zero for N=B then injectivity of f_j; preimage under q_j. Edge cases S=0, B=0, R→B non-injective and non-injective transitions all hold. Two repairable faults, both fixed in fixes/. (1) C4/B3, step 1: the leaf defined étale inline as finite presentation plus unique square-zero lifting, but the S_i are étale in the DAG's sense (def-weil-pbc-scheme-conventions → def-weil-etale-morphism: lfp, flat, unramified). Identifying the two is Stacks 08WD and no node carries it. The leaf now states étale as Spec T→Spec R étale [def-weil-etale-morphism, def-weil-affine-spectrum], and its how names Spec_iff (RingHomProperties.lean:360) with the HasRingHomProperty instance (Morphisms/Etale.lean:56), RingHom.etale_algebraMap (RingHom/Etale.lean:37) and Etale→Smooth (Etale/Basic.lean:223). (2) E1-type gap, step 4: lem-weil-pbc-integral-tensor-generators-colimit-descent (Lean: F : I ⥤ CommRingCat) needs a colimit in commutative rings, while S is the colimit in R-algebras. I added the elementary connected-diagram argument. The descent application is checked: B_0=S_i, C_0=D_i, φ_0 the structure map, s={x_i}; the hypothesis is x∈C_S under the tensor-cancellation identifications. No duplicates among the 03GE/03GG/0CBF/integral-closure hits: trait normalization charts, weakly-étale Noetherian normalization, localization, integral base change. The three tool_uses are generic algebra and accepted. No SGA source is cited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralClosureIndEtaleBaseChange",
+  "declaration": "TensorProduct.toIntegralClosure_bijective_of_indEtale",
+  "file": "lean/Sheaf/RingTheory/IntegralClosureIndEtaleBaseChange.lean",
+  "statement": "theorem toIntegralClosure_bijective_of_indEtale (R : Type u) (S : Type v) (B : Type w) [CommRing R] [CommRing S] [CommRing B] [Algebra R S] [Algebra R B] (hS : RingHom.IndEtaleAcrossUniverses (algebraMap R S)) : Function.Bijective (TensorProduct.toIntegralClosure R S B)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f1606a3b",
+  "group": "NR",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0CBF (algebra.tex l.40748), specialised from smooth to etale stages. Independent universes u v w; only hypothesis is the recorded RingHom.IndEtaleAcrossUniverses (ULift transport of RingHom.IndEtale/Algebra.IndEtale); conclusion is Function.Bijective of Mathlib's canonical TensorProduct.toIntegralClosure R S B (s⊗c↦s⊗c, codRestrict of Algebra.TensorProduct.map), equivalent to the isomorphism via AlgEquiv.ofBijective. No extra hypotheses; zero rings, non-injective maps, R=S all covered. Node copy differs from live only in lean; lean.statement verbatim. Mathlib has only smooth/localization/tower/mvPolynomial versions, so the new module is correct. Docstrings carry source, blueprint id and proof steps 1-5; no definitions, only sorry. Report has Worker report and Second reading by NR sections. Advisory: three proof-dependency imports (recorded modules, present in side-live) unused while the proof is sorry. No compile run (no file changed); worker reports clean server compile and deliver2 --no-push OK."
  }
 }
