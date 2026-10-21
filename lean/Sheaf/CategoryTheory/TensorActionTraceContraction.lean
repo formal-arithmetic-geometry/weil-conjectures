@@ -1,7 +1,6 @@
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
-import Mathlib.CategoryTheory.Monoidal.Free.Coherence
 
 /-!
 # Contraction of two traces through tensor actions
@@ -97,6 +96,46 @@ theorem tensorAction_trace_contraction
           (PFg (Ff.obj (Lf ⊗ Pf.obj Lg)) K hgc).inv ≫
             ((Fg.map (tensorTraceContraction (PFf Lf Lg hfl).inv tf) ≫ tg) ⊗ₘ 𝟙 K) ≫
               (λ_ K).hom := by
-  sorry
+  let σ := whiskerLeftIso Lf (PfMonoidal.μIso Lg (Pg.obj K)).symm ≪≫
+    (α_ Lf (Pf.obj Lg) (Pf.obj (Pg.obj K))).symm
+  have h_action : PFf Lf (Lg ⊗ Pg.obj K) hft =
+      (α_ (Ff.obj Lf) Lg (Pg.obj K)).symm ≪≫
+        tensorIso (PFf Lf Lg hfl) (Iso.refl (Pg.obj K)) ≪≫
+          PFf (Lf ⊗ Pf.obj Lg) (Pg.obj K) hfs ≪≫ Ff.mapIso σ.symm := by
+    apply Iso.ext
+    exact _hf_action Lf Lg (Pg.obj K) hfl hfs hft
+  have h_inv : (PFf Lf (Lg ⊗ Pg.obj K) hft).inv =
+    Ff.map σ.hom ≫ (PFf (Lf ⊗ Pf.obj Lg) (Pg.obj K) hfs).inv ≫
+      ((PFf Lf Lg hfl).inv ⊗ₘ 𝟙 (Pg.obj K)) ≫
+        (α_ (Ff.obj Lf) Lg (Pg.obj K)).hom := by
+    simpa only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv, tensorIso_inv,
+      Iso.refl_inv, Category.assoc] using congrArg (fun e ↦ e.inv) h_action
+  have h_contract : tensorTraceContraction (PFf Lf (Lg ⊗ Pg.obj K) hft).inv tf =
+      Ff.map σ.hom ≫ (PFf (Lf ⊗ Pf.obj Lg) (Pg.obj K) hfs).inv ≫
+        (tensorTraceContraction (PFf Lf Lg hfl).inv tf ⊗ₘ 𝟙 (Pg.obj K)) := by
+    unfold tensorTraceContraction
+    rw [h_inv]
+    simp only [tensorHom_id, Category.assoc]
+    rw [← associator_naturality_left_assoc]
+    rw [leftUnitor_tensor_hom]
+    simp only [Iso.hom_inv_id_assoc, ← comp_whiskerRight]
+  have h_nat :
+      Fg.map (tensorTraceContraction (PFf Lf Lg hfl).inv tf ⊗ₘ 𝟙 (Pg.obj K)) ≫
+          (PFg Lg K hgl).inv =
+        (PFg (Ff.obj (Lf ⊗ Pf.obj Lg)) K hgc).inv ≫
+          (Fg.map (tensorTraceContraction (PFf Lf Lg hfl).inv tf) ⊗ₘ 𝟙 K) := by
+    apply (cancel_epi (PFg (Ff.obj (Lf ⊗ Pf.obj Lg)) K hgc).hom).1
+    apply (cancel_mono (PFg Lg K hgl).hom).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+      Iso.hom_inv_id_assoc, Pg.map_id] using
+      (_hg_natural _ _ K K hgc hgl
+        (tensorTraceContraction (PFf Lf Lg hfl).inv tf) (𝟙 K)).symm
+  have h_nat_assoc := congrArg (fun t ↦ t ≫ (tg ⊗ₘ 𝟙 K) ≫ (λ_ K).hom) h_nat
+  simp only [Category.assoc] at h_nat_assoc
+  rw [h_contract]
+  simp only [Functor.map_comp, tensorTraceContraction, Category.assoc] at h_nat_assoc ⊢
+  rw [h_nat_assoc]
+  simp only [σ, Iso.trans_hom, whiskerLeftIso_hom, Iso.symm_hom,
+    Functor.map_comp, tensorHom_id, comp_whiskerRight, Category.assoc]
 
 end CategoryTheory
