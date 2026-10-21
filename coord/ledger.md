@@ -22061,3 +22061,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:07 L: merged deliver/Q39/lem-sf-locally-closed-closure-adjoint-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 10:07 L: merged deliver/A5/Sheaf.CategoryTheory.SectionwiseFlatPresheafTensor (stage 3; reviewer PASS; first push; landing 20261021T100712-L-4113076 (proof); batch 20261021T100250; modules 1; new nodes 0)
 - 10:07 L: merged deliver/A5/Sheaf.Paper.CompleteCompactSupportProetale (stage 3; reviewer PASS; first push; landing 20261021T100716-L-4115285 (proof); batch 20261021T100250; modules 1; new nodes 0)
+- 10:07 L: merged deliver/A5/Sheaf.Paper.LatticePullback (stage 3; reviewer PASS; first push; landing 20261021T100720-L-4118107 (interface); batch 20261021T100250; modules 3; new nodes 2)
