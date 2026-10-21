@@ -22689,3 +22689,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:47 L: returned deliver/N5/lem-sfb-qcqs-proper-constructible-closed-base-change (reviewer RETURN: L: independent stage-2 immutable head 1ea465a1fe70: H13/H4: the delivery replaces the landed lean record of the dependen)
 - 13:47 L: returned deliver/Q06/lem-sp-proetale-scalar-tensor-normalization (reviewer RETURN: L: independent stage-2 immutable head 686a88fde356: H2: delivery added theorem node lem-fix-proetale-scalar-mate-normali)
 - 13:47 L: returned deliver/NR/lem-sfb-identity-open-underived-square-normalization (reviewer RETURN: L: independent stage-2 immutable head 89f8904b3961: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
+- 13:47 L: returned deliver/NN/lem-sf-tensor-comparison-localization-descent (reviewer RETURN: L: independent stage-2 immutable head be3019173662: H13: the delivered record of lem-sf-perfect-scalar-tensor-coherence )
