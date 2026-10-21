@@ -3,24 +3,325 @@
  "blueprint": {
   "is": "sk-def-perfect",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-pod-perfect-point-complex",
+   "def-pod-perfect-complex-on-x"
+  ]
  },
  "kind": "definition",
  "title": "Perfectness at the point and on $X$",
- "statement": "In the setting of [sk-def-ops], an object $K$ of a symmetric monoidal\ncategory $(\\mathcal C,\\otimes,\\mathbf 1)$ is *dualizable* if it has a\nright dual: an object $K^\\vee$ with an evaluation\n$K^\\vee\\otimes K\\to\\mathbf 1$ and a coevaluation\n$\\mathbf 1\\to K\\otimes K^\\vee$ satisfying the two triangle identities.\nA *perfect point complex* is a dualizable object of the derived category\nof $\\Lambda$-modules for $\\otimes^L_\\Lambda$, and an object\n$K\\in D(X_{\\mathrm{proet}},\\Lambda)$ is *perfect over $\\Lambda_X$* if\nit is dualizable in $D(X_{\\mathrm{proet}},\\Lambda)$ for\n$\\otimes^L_{\\Lambda_X}$, with unit $\\Lambda_X$.\n\nEquivalently, a perfect point complex is a complex of $\\Lambda$-modules\nquasi-isomorphic to a bounded complex of finite projective\n$\\Lambda$-modules (over a field: a bounded complex with\nfinite-dimensional cohomology), and $K$ is perfect over $\\Lambda_X$ if\nand only if it is locally quasi-isomorphic to a bounded complex of\nfinite projective $\\Lambda_X$-modules.",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, put $q=p^a$, let $k_0=\\mathbf F_q$ and $k=\\overline{\\mathbf F}_q$, and fix a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Let $X_0/k_0$ be smooth of relative dimension an integer $d\\geq0$, separated of finite type and geometrically connected, and put $X=X_0\\times_{k_0}k$. Use the coefficient units and derived tensor products of [sk-def-ops]; properness of $X_0$ is not assumed.\n\nAn object $K$ of a symmetric monoidal category $(\\mathcal C,\\otimes,\\mathbf1)$, with monoidal structure as in [def-sfb-monoidal-category] and a natural symmetry $\\sigma_{A,B}:A\\otimes B\\xrightarrow{\\sim}B\\otimes A$ satisfying the involution and hexagon identities, is *dualizable* if there are an object $D$ and maps $e:D\\otimes K\\to\\mathbf1$ and $c:\\mathbf1\\to K\\otimes D$ such that\n$$\n\\rho_K\\circ(1_K\\otimes e)\\circ\\alpha_{K,D,K}\\circ(c\\otimes1_K)\\circ\\lambda_K^{-1}=1_K,\n$$\n$$\n\\lambda_D\\circ(e\\otimes1_D)\\circ\\alpha_{D,K,D}^{-1}\\circ(1_D\\otimes c)\\circ\\rho_D^{-1}=1_D.\n$$\nHere $\\alpha,\\lambda,\\rho$ are the associator and the left and right unitors. The object $D$ is called a right dual and is also written $K^\\vee$; dualizability asserts existence of these data, not a chosen dual.\n\nA *perfect point complex* is a dualizable object of the ordinary module derived category $D(\\Lambda)$ [def-weil-abstract-derived-category], with derived tensor $\\otimes^L_\\Lambda$ and unit $\\Lambda[0]$. Equivalently, it is isomorphic to a bounded complex of finitely generated projective $\\Lambda$-modules [def-pc-perfect-ring-complex]. When $\\Lambda$ is a field this is equivalent to bounded finite-dimensional cohomology.\n\nFor complexes on $X$, use the actual categories and tensors of [def-weil-derived-pullback-tensor-hom]: at finite coefficients the ordinary $D(X_{\\mathrm{proet}},A_{E,n})$; at integral coefficients the full derived-complete constructible category $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] with its completed tensor and completed coefficient unit; at $E$ its raw scalar localization [def-weil-rationalization-karoubi]; and at $\\Omega=\\overline{\\mathbf Q}_\\ell$ the common-stage category [def-weil-algebraically-closed-coefficients]. Write $D(X_{\\mathrm{proet}},\\Lambda)$ for these stage-specific categories in this definition. The definition also restricts to the finite-Tor subcategories of [def-weil-finite-tor-amplitude] used in [sk-def-ops]. An object $K$ is *perfect over $\\Lambda_X$* if it is dualizable in the indicated category for that tensor and unit. Equivalently, $K$ is site-perfect [def-weil-site-perfect-complex]: pro-etale locally it is represented by a bounded complex of finite projective coefficient modules, where finite projective means a direct summand of a finite sum of the coefficient unit. At the integral stage use the completed unit, at the rational stage take the summands and local isomorphisms in the scalar-localized category, and at $\\Omega$ require such a representative over some finite coefficient field after extension if necessary. No equivalence with ordinary discrete $E$-sheaves is intended.\n\nTo apply the point terminology to the outputs of $\\operatorname{R\\Gamma}$ and $\\operatorname{R\\Gamma}_c$ in [sk-def-ops], use the specified point functor $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point], where $s=\\operatorname{Spec}k$. At finite, integral and finite-field coefficients its values are ordinary module complexes. At $\\Omega$ its target is the common-stage point category $\\mathcal P_\\Omega$ of [def-weil-point-fd-qlbar-category]. Equip $\\mathcal P_\\Omega$ with the common-stage derived tensor: for $(E,C),(F,D)$ choose $L\\supset E,F$ and take $(L,(C\\otimes_E L)\\otimes_L^L(D\\otimes_F L))$, with unit $(\\mathbf Q_\\ell,\\mathbf Q_\\ell[0])$ and the ordinary derived constraints transported at common stages. Use the scalar-realization functor\n$$\n\\mathcal R_\\Omega:\\mathcal P_\\Omega\\longrightarrow D(\\Omega),\\qquad\n(E,C)\\longmapsto C\\otimes_E\\Omega,\n$$\nwith a morphism represented over $L$ sent to its derived extension to $\\Omega$ using the canonical tower identifications [def-weil-finite-dimensional-complex-scalar-extension, lem-weil-derived-field-scalar-extension-tower]. A point object in this common-stage category is called perfect when $\\mathcal R_\\Omega$ of it is a perfect ordinary $\\Omega$-complex. Thus in every use of global sections the point predicate has a specified category and realization. This realization is an exact symmetric monoidal equivalence onto the full subcategory of $D(\\Omega)$ with bounded finite-dimensional cohomology [def-weil-point-fd-complexes]; in particular it agrees with dualizability at the common-stage point. The arguments for the stated equivalences and coefficient comparisons are recorded below.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-perfect/_section.md",
   "place": "node sk-def-perfect, order 2756"
  },
  "stmt_deps": [
-  "sk-def-ops"
+  "sk-def-ops",
+  "def-sfb-monoidal-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-site-perfect-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "def-weil-point-fd-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "In the ordinary module category at the point, apply [lem-zl-ring-derived-dualizable-perfect] with $A=\\Lambda$. Its statement is exactly dualizable if and only if isomorphic to a bounded complex of finitely generated projective modules, and has no regularity assumption on $A$. The derived monoidal constraints and unit are supplied by [lem-sf-ringed-derived-closed-symmetric-monoidal] on the one-object site. This proves the point equivalence for all four scalar rings.",
+   "uses": [
+    "lem-zl-ring-derived-dualizable-perfect",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNS, lemma-have-dual-derived"
+   }
+  },
+  {
+   "text": "For a field $F$, [lem-trf-field-complex-cohomology-splitting] identifies any complex with its zero-differential cohomology complex. If cohomology is bounded and finite-dimensional this is a bounded finite-free complex, so Step 1 applies. Conversely the cohomology of a bounded complex of finite-dimensional spaces is bounded and finite-dimensional, since kernels and quotients of finite-dimensional spaces are finite-dimensional. This uses no geometric convention or exceptional-adjoint assumption.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Field splitting used in the local scalar-perfect models of Theorem 4.13; explicit argument for the field parenthesis."
+   }
+  },
+  {
+   "text": "At finite coefficients set $A=A_{E,n}$, viewed as a discrete condensed ring. Since $X$ is finite type over a field it is Noetherian, hence has locally finitely many irreducible components. By [lem-zl-condensed-dualizable-local-perfect-models], a dualizable ambient $K$ is pro-etale locally the scalar realization of a perfect $A$-complex, hence is site-perfect. Conversely site-perfect $K$ has perfect dual and invertible canonical tensor--Hom evaluation comparisons by [lem-sfb-ringed-site-perfect-duality]. Apply [lem-fix-closed-evaluation-dual-criterion] in the closed ringed derived category of [lem-sf-ringed-derived-closed-symmetric-monoidal], exchanging tensor order by symmetry, to obtain both triangle identities. This proves the converse for arbitrary finite-coefficient ambient complexes, without imposing a finite Tor hypothesis on $K$ in advance.",
+   "uses": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-fix-closed-evaluation-dual-criterion",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3, Theorem 4.13; Stacks Tags 08JJ and 0FPU for the reverse implication."
+   }
+  },
+  {
+   "text": "At $R=\\mathcal O_E$, identify $B_X=\\widehat R_X$ with the pulled-back condensed ring by [det-prop-sfb-qlbar-colimit-x-integral-limit]. The natural comparison $M\\otimes^L_{B_X}N\\to M\\widehat\\otimes^L_RN$ is invertible for integral constructible $M,N$ by [lem-fix-constructible-tensor-completion]. It respects the monoidal constraints: at every reduction level both composites in the associativity square send a homogeneous tensor $(x\\otimes y)\\otimes z$ to the same $x\\otimes(y\\otimes z)$, both unit composites are multiplication, and the symmetry square has the same sign $(-1)^{ij}$; the compatible level maps induce the same map of the specified product mapping-fiber complexes. Thus the full integral inclusion is strong symmetric monoidal. An integral dual therefore gives an ambient dual, so [lem-zl-condensed-dualizable-local-perfect-models] implies site-perfectness. Conversely [lem-sfb-ringed-site-perfect-duality] and [lem-fix-closed-evaluation-dual-criterion] give an ambient dual pair for a site-perfect $K$. Its dual is itself dualizable by symmetry, hence has local scalar perfect $R$-models by the same condensed lemma. By [lem-weil-pbc-integral-stratified-perfect-characterization] it belongs to the full integral constructible category. For the finite-Tor restriction, a finite subcover gives bounded projective scalar models for the dual, whose reductions have the same uniform Tor bounds. The comparison and fullness carry its evaluation, coevaluation and triangles back to the completed tensor category. This proves the integral equivalence without identifying the two tensor constructions by notation.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-fix-constructible-tensor-completion",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-fix-closed-evaluation-dual-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 7.6 and Theorem 7.7 (integral comparison); Bhatt--Scholze Lemma 6.5.5. Constraint compatibility is the displayed quotient-tower calculation."
+   }
+  },
+  {
+   "text": "For $E$, use exactly $J_{X,E}$ of [lem-zl-rational-realization-tensor-comparison]. Its underlying equivalence onto bounded continuous $E_X$-module complexes with stratified finite locally free cohomology is [lem-per-continuous-rational-derived-realization], composed with [lem-fd-rational-coefficient-category-comparison]. These statements apply since $X$ is Noetherian and finite-dimensional and $\\ell$ is invertible on $X$. The tensor comparison is symmetric strong monoidal for the completed-integral rational operations, so it preserves dual pairs. It also reflects them for its objects: if $J(K)$ is ambient-dualizable, its ambient dual is locally a scalar perfect $E$-complex by [lem-zl-condensed-dualizable-local-perfect-models]. By Step 2 those local models have finite locally free cohomology. Quasi-compactness gives a finite subcover and uniform cohomological bounds, so the ambient dual is in the stated essential image. Lift it and the evaluation and coevaluation by essential surjectivity and full faithfulness; faithfulness reflects the two triangle equations. Thus rational dualizability is equivalent to ambient dualizability of $J(K)$.",
+   "uses": [
+    "lem-zl-rational-realization-tensor-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-zl-condensed-dualizable-local-perfect-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 7.7 and Proposition 5.5; Bhatt--Scholze Proposition 6.8.14(2), with the explicit monoidal realization from the cited DAG statements."
+   }
+  },
+  {
+   "text": "The remaining rational local-model comparison must hold on covering domains, not just Noetherian schemes. Refine a covering by qcqs pro-etale domains $U$. By [lem-weil-pbc-integral-stratified-perfect-characterization] integral constructibles are stratified locally scalar-perfect; their restrictions remain stratified dualizable by [lem-zl-condensed-lisse-proetale-locality]. Apply [lem-pod-condensed-localization-hom] on each $U$ to the condensed ring $\\mathcal O_E$ and $t=\\varpi_E$: scalar extension on the raw localized Hom groups is fully faithful, including all shifted Hom groups. If $J(K)$ is dualizable, [lem-zl-condensed-dualizable-local-perfect-models] gives local scalar perfect $E$-models. By Step 2 replace each model by a finite sum of shifts of $E$; it lifts to the corresponding sum of shifts of $\\widehat{\\mathcal O}_{E,U}$ in the localized category. Fullness lifts the local isomorphism and its inverse; faithfulness reflects their inverse equations. Hence $K$ is site-perfect in the localized sense. Conversely extension of scalars sends a localized summand of a finite sum of units to an actual summand of $E_U^m$, and sends a bounded projective model to its ordinary derived realization. Thus local site-perfectness makes $J(K)$ locally perfect. Ringed-site perfect duality [lem-sfb-ringed-site-perfect-duality] and [lem-fix-closed-evaluation-dual-criterion] give ambient dualizability, which Step 5 reflects. No Noetherian assumption is imposed on $U$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-pod-condensed-localization-hom",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-fix-closed-evaluation-dual-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.5 on qcqs covering domains, Theorem 4.13 on X; the local bounded-complex lifting argument is written out."
+   }
+  },
+  {
+   "text": "At $\\Omega$, use the common-stage objects and Hom colimits of [def-weil-algebraically-closed-coefficients] and the tensor comparisons of [def-weil-derived-pullback-tensor-hom]. If $K$ has a dual in this category, choose a common finite field for $K$, its proposed dual, evaluation and coevaluation. Each triangle equality is equality in a directed Hom colimit, so it holds after a further finite extension. Choose one extension containing the two fields witnessing these equalities. Over it the same maps form an actual dual pair, with the given associators and unitors since the scalar tensor comparisons are coherent. By Steps 5--6 this representative is site-perfect. Conversely any site-perfect finite representative is dualizable by those steps, and its dual pair maps to the common-stage category. This proves exactly the existential finite-representative clause of [def-weil-site-perfect-complex], without supposing that a dual at the colimit already descends over the original field.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-perfect/_section.md",
+    "place": "Common-stage tensor construction of sk-def-perfect via sk-def-ops; finite-data/equality argument in the explicit Hom colimits."
+   }
+  },
+  {
+   "text": "For the common-stage point category [def-weil-point-fd-qlbar-category], the displayed $\\mathcal R_\\Omega$ is well-defined by [def-weil-finite-dimensional-complex-scalar-extension] and the unit and tower equations of [lem-weil-derived-field-scalar-extension-tower]. It is fully faithful: fullness is [lem-weil-point-fd-morphism-descent]; for faithfulness, [lem-trf-field-complex-cohomology-splitting] identifies a derived map over any common field with its finitely many degreewise linear maps on cohomology, and extension of a matrix to $\\Omega$ is injective on its entries. Equal images therefore give equal maps already at that common stage. Every ordinary bounded finite-dimensional $\\Omega$-complex is, by the same splitting, isomorphic to a finite sum of shifts of $\\Omega$, so it is in the image of the corresponding $\\mathbf Q_\\ell$-complex. The tensor/unit comparisons are the termwise balanced maps $(C\\otimes_E\\Omega)\\otimes_\\Omega(D\\otimes_F\\Omega)\\cong(C_L\\otimes_LD_L)\\otimes_L\\Omega$, with $L\\supset E,F$. Both associativity composites send pure tensors to the same tensor, and both symmetry composites have the same Koszul sign; the tower equations make them independent of $L$. This proves the asserted exact symmetric monoidal equivalence onto bounded finite-dimensional ordinary complexes, without applying a predicate of $D(\\Omega)$ to an un-realized pair.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-finite-dimensional-complex-scalar-extension",
+    "lem-weil-derived-field-scalar-extension-tower",
+    "lem-weil-point-fd-morphism-descent",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "The point common-stage construction, with the explicit finite-dimensional morphism descent and cohomology splitting cited here."
+   }
+  },
+  {
+   "text": "Finally, [lem-weil-point-fibre-equivalence] gives the four specified exact point equivalences and [lem-sf-point-fibre-derived-tensor] identifies their tensors, units, symmetry and associators on the finite-Tor categories in use. At $\\Omega$ compose with Step 8; at the other stages take the ordinary module target directly. Consequently the point predicate used for global sections is the perfect-module predicate of Step 1 in every case; at the common-stage field point Step 8 also identifies it with dualizability. Over fields it is exactly bounded finite-dimensional cohomology by Step 2. No exceptional-adjoint admissibility assumption is used for this algebraic point criterion.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-point-fibre-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Point equivalences and monoidal normalization in the coefficient-point constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-site-perfect-complex",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-fix-closed-evaluation-dual-criterion",
+  "lem-fix-constructible-tensor-completion",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pod-condensed-localization-hom",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-point-fd-morphism-descent",
+  "lem-weil-point-fibre-equivalence",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-rational-realization-tensor-comparison",
+  "lem-zl-ring-derived-dualizable-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-perfect/_section.md",
+  "place": "Coefficient-stage justification of the two equivalent descriptions, using the explicit comparison statements cited in each step; the categorical definition is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes of modules are the dualizable objects for derived tensor, and on a ringed site dualizable complexes are locally bounded complexes of finite projective sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits give underived condensed modules, projective dual modules, derived categories or K-projective complexes, not the asserted point and pro-etale characterizations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDualizable|[Pp]erfect[Cc]omplex|isPerfect_iff|HasLeftDual",
+   "results": {
+    "ok": true,
+    "n_hits": 18,
+    "top": [
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: source hits give categorical duals, perfect groups or incidental dualization, not perfect derived complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing, DerivedCategory",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits give underived condensed modules, projective dual modules, derived categories or K-projective complexes, not the asserted point and pro-etale characterizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizable objects of the derived category of sheaves are locally bounded complexes of finite projective modules",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "HasDerivedCategory.standard",
+     "HasDerivedCategory",
+     "Module.dual_projective",
+     "Module.dual_finite",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory",
+     "CategoryTheory.hasExt_of_enoughProjectives",
+     "HomologicalComplexUpToQuasiIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits give underived condensed modules, projective dual modules, derived categories or K-projective complexes, not the asserted point and pro-etale characterizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of modules is perfect if and only if it is dualizable in the symmetric monoidal derived category",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CochainComplex.isKProjective_iff_leftOrthogonal",
+     "CochainComplex.IsKProjective",
+     "CochainComplex.IsKProjective.leftOrthogonal",
+     "CategoryTheory.hasExt_of_hasDerivedCategory",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "CategoryTheory.hasExt_iff",
+     "CochainComplex.isKProjective_of_op",
+     "DerivedCategory"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits give underived condensed modules, projective dual modules, derived categories or K-projective complexes, not the asserted point and pro-etale characterizations."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|dualiz|ExactPairing|HasRightDual",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: source hits give categorical duals, perfect groups or incidental dualization, not perfect derived complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.HasRightDual",
+     "CategoryTheory.HasRightDual.rightDual",
+     "CategoryTheory.RightRigidCategory.mk",
+     "CategoryTheory.RightRigidCategory.rightDual",
+     "CategoryTheory.hasRightDualUnit",
+     "CategoryTheory.HasRightDual.mk",
+     "CategoryTheory.hasLeftDualRightDual",
+     "CategoryTheory.hasRightDualLeftDual"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: HasRightDual and ExactPairing give only the categorical primitive, not either perfect-complex characterization."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -44,5 +345,109 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-poincare-duality",
  "unit": "sk-def-perfect",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-perfect",
+  "worker": "stage1",
+  "summary": "Repair of both returned faults. Preserve the exact-pairing definition and all equivalence clauses, make the actual coefficient-stage categories explicit, and supply nine justification steps. Reuse current integral tensor-completion, rational realization and point comparison nodes; add one strictly smaller qcqs Hom-localization lemma for possibly non-Noetherian covering domains. Explicitly realize common-stage point complexes in ordinary D(Qbar). Replace the field citation by ordinary ring dualizability and field cohomology splitting.",
+  "blueprint": "All defining paragraphs of main-20261015 sk-def-perfect: dualizability, ordinary point perfectness, coefficient-site perfectness and both equivalent descriptions. Steps 1--2 justify the scalar point clause, 3--7 the finite/integral/raw-rational/common-stage local clause, and 8--9 make the point terminology applicable to the global sections of sk-def-ops. The unit remains a definition with no unit-level proof steps.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-fix-closed-evaluation-dual-criterion",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-weil-derived-field-scalar-extension-tower",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-weil-point-fd-morphism-descent",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-zl-condensed-dualizable-local-perfect-models",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-zl-condensed-lisse-proetale-locality",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-zl-rational-realization-tensor-comparison",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   },
+   {
+    "node": "lem-zl-ring-derived-dualizable-perfect",
+    "why": "Generic coefficient, ringed-site, field-complex or categorical comparison used in the stated justification; this definition unit has no internal theorem supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-fix-closed-evaluation-dual-criterion",
+  "lem-fix-constructible-tensor-completion",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-point-fd-morphism-descent",
+  "lem-weil-point-fibre-equivalence",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-rational-realization-tensor-comparison",
+  "lem-zl-ring-derived-dualizable-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-ef665a5c4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-ef665a5c4 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 23 proof dependencies, the HRS source (Def 3.3, Lemma 5.3, Prop 5.5, Lemma 5.6, Remark 5.7, Thm 4.13) and the main-20261015 blueprint text. Live sk-def-perfect is still imported and there is no repair note, so this is not superseded. Both faults of the Q01 4118947 return are repaired. Fault 1: Step 4 makes the integral inclusion strong monoidal through lem-fix-constructible-tensor-completion (BS 6.5.5), and checks that the dual lies in D^b_c by the stratified-perfect characterization (ii)⇒(i) before lifting. Step 5 uses the symmetric strong monoidal J, reflecting duals through the condensed local-model lemma (HRS 4.13, X Noetherian), field splitting and a finite subcover. Step 6 handles non-Noetherian qcqs covering domains with the new node, Λ=O_E, t=ϖ; fullness and faithfulness lift the local sum-of-shifts iso, and localized idempotents split as matrices on E_U^m. Step 7 descends the dual data and the two triangle equations to one finite stage of the directed Hom colimits. Steps 8-9 give R_Ω as a fully faithful, essentially surjective monoidal equivalence: fullness from the descent node, faithfulness from field splitting plus injectivity of ⊗Ω. Fault 2: the pod-conventions field node is gone; Steps 1-2 use Stacks 0FNS for any commutative ring and the field splitting. The new node lem-pod-condensed-localization-hom is HRS Prop 5.5 at the level of Hom groups (localization is flat). It needs only qcqs, claims no essential surjectivity, and is true; I tested Y=∅, Λ=0, t=1, t nilpotent, M=Z/ℓ and profinite π0. It is statement-only, has complete deps and six searches, and blueprint.from is correct. It is not a duplicate: the rational realization and tensor-comparison nodes are Noetherian-only, and the other candidates are a degree-0 term comparison and a thick evaluation lemma. It does not restate a clause of the item. Batch-5: I recomputed every flagged closure. The trf/pod nodes reached are generic (geometric-morphism definition and inverse-image exactness, a localization Mathlib leaf, Henselian smooth lifting, field linear algebra, abstract derived squares, j_! base change, integral pullback-comparison coherence, constructible truncations). None is a step of the trace formula or of PD, and perfectness is a general definition, so all are accepted. No cycle; the in_cycle import flag is stale. No SGA. The unit realized fields are correct. I accept all 17 generic tool_uses. Advisories: the 'restricts to finite-Tor subcategories' sentence is ambiguous; the common-stage constraints are transported stage constraints. Downstream sk-lem-finite and sk-thm-sf-dual-perfect remain applicable. Details are in review.md; no fixes were written."
+ }
 }
