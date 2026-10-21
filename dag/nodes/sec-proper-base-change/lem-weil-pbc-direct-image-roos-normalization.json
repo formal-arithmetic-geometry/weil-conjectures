@@ -20,65 +20,134 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-exact-adjoint-tower-models] to $F\\dashv G$. Represent $M$ by an injective-term K-injective tower $I$ and put $J=G^{\\rm Tow}I$. Use its notation $L_I,L_J,P_I,P_J,c,\\beta$. That lemma identifies $Q(c)$ with $\\alpha_M$, proves it invertible, and gives both the $s$ and $1-s$ squares; all derived composites are computed on these same models.",
+   "text": "Construct Grothendieck strict tower categories by the separator/evaluation-left-adjoint argument, and use functorial K-injective resolutions. Equality of natural transformations out of the derived tower category is checked on these resolutions using localization and invertibility of their resolution maps.",
    "uses": [
-    "lem-weil-pbc-exact-adjoint-tower-models"
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
    }
   },
   {
-   "text": "Put $u_I=1-s_I$, $u_J=1-s_J$ and $H_T=\\operatorname{Cone}(u_T)[-1]$ for $T=I,J$. Apply [lem-weil-pbc-kinjective-fiber-triangle-comparison] with $P_I,P_J,c$: its hypotheses hold by Step 1, and $G$ preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. It gives the K-injective cones, diagonal chain isomorphism $\\theta:G(H_I)\\cong H_J$, all three cone-triangle squares and the unique shift $\\sigma$ with the stated unit normalization.",
+   "text": "Use the exact-products fibre comparison on every complex. The arrow isomorphism with identity on the source and negative identity on the target gives the natural sign isomorphism from the negative-difference fibre to the positive-difference Roos cone. Its composite with the ordinary-limit inclusion has the same zero first coordinate and limit-leg second coordinate. This gives the unit-normalized cone comparison on every complex.",
    "uses": [
-    "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
+   }
+  },
+  {
+   "text": "Exact countable products make the image under Q of each termwise product cone limiting. Compose its canonical product isomorphism with the supplied evaluation isomorphism. Descend the strict projection and boundary maps through localization. Transport the mapping-cocone distinguished triangle along these two isomorphisms on QX, and then along essential surjectivity of Q. This constructs the required normalized RoosTriangleData.",
+   "uses": [
+    "lem-weil-derived-limit-products-core",
+    "def-weil-category-product",
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
+   }
+  },
+  {
+   "text": "Construct the canonical cochain-level unit of the existing right derived functor and use total-derived uniqueness to identify it with the supplied direct functor. Transport the derived adjunction of the exact left adjoint across that isomorphism; its right adjoint preserves products, so alpha is invertible. The canonical derived-adjunction shift structure and uniqueness give a CommShift structure on the supplied direct functor whose unit commutes with shifts.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
+   }
+  },
+  {
+   "text": "Project to each product factor and use naturality of the supplied evaluation comparison to prove commutation with transition shift, then use additivity to deduce commutation with one minus shift. On a K-injective tower the evaluation-unit equation identifies the product comparison under the units with the ordinary product comparison. The underived limit-leg normalization and the comparison-unit equation prove the first outer square after cancellation of the source units. Naturality extends this square to every derived tower.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-category-product",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
     "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
    }
   },
   {
-   "text": "By the exact-products clause of [lem-weil-pbc-exact-adjoint-tower-models], the inclusions $j_T:L_T\\to H_T$, $z\\mapsto(0,(\\lambda_nz)_n)$, for $T=I,J$ are quasi-isomorphisms, and $\\kappa_TQ(j_T)=\\eta^{\\lim}_T$ for precisely the sign-corrected, unit-normalized comparison in the statement. Thus the canonical Roos triangles are Step 2's cone triangles transported along $Q(j_I),Q(j_J)$.",
+   "text": "Evaluation makes the levels of a K-injective tower K-injective. Their termwise product is K-injective, and closure of the right orthogonal of acyclic objects under cones and shifts makes its Roos cone K-injective. The source unit and cone normalization make the ordinary-limit inclusion invertible under Q. Naturality of the direct-image unit makes its termwise direct image invertible under Q as well.",
    "uses": [
-    "lem-weil-pbc-exact-adjoint-tower-models"
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
    }
   },
   {
-   "text": "The diagonal coordinates and $\\lambda_n\\beta=G(\\lambda_n)$ give the chain equality $\\theta G(j_I)=j_J\\beta$: both first coordinates are zero, and every second-coordinate leg is $G(\\lambda_n)$. Both derived composites are computed on $I$ without another resolution (Step 1). Hence the common-underived-composite normalization in [lem-weil-ringed-tower-pushforward-limit-comparison] identifies $a_M=Q(\\beta)$. Conjugating gives $Q(j_J)^{-1}Q(\\theta)\\mathcal G(Q(j_I))=a_M$. Transport Step 2's three squares along these inclusions. The components are $(a_M,\\alpha_M,\\alpha_M)$, and the last square is $a_M[1]\\sigma_{R\\lim_X M}\\mathcal G(\\delta_M)=\\delta_{\\mathcal G^{\\rm Tow}M}\\alpha_M$. Naturality and localization extend the equations from the K-injective models to all derived strict towers [def-weil-abstract-derived-category, lem-weil-pbc-kinjective-total-derived].",
+   "text": "Apply the existing additive Roos comparison. Its explicit diagonal coordinates give the projection equation, preserve the ordinary-limit inclusion, and give the boundary equation with boundary coordinates (z,0). Cancel the mapped inclusion and use the supplied common-underived-composite unit equation to identify the resulting cone-vertex comparison with precisely d.comparison.",
    "uses": [
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-pur-roos-additive-comparison",
+    "def-weil-strict-roos-model",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
+   }
+  },
+  {
+   "text": "Precompose the desired connecting square on a K-injective tower with the invertible direct-image unit on its product and the normalized product isomorphism. The boundary-model equations, naturality of the unit, its shift equation, and the identified cone-vertex comparison reduce the square to the strict additive boundary equation. The target boundary naturality and product-unit comparison finish the calculation. Descend this natural-transformation equality from K-injective towers to all derived towers and assemble the five required equations.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
    }
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-exact-adjoint-tower-models",
-  "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+  "def-weil-category-product",
+  "def-weil-strict-roos-model",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-triangulated-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-roos-additive-comparison",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-kinjective-functorial-existence",
   "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-evaluation-kinjective"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J4",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
+  "place": "Tags 0A07 and 0941, with the explicit strict-cone normalization and localization argument"
  },
  "mathlib_searches": [
   {
@@ -233,5 +302,15 @@
   "result": "pass",
   "note": "Statement matches node clause by clause: small-site ringed morphism, IsIso f.ringMap, exact F ⊣ f.modules, exact countable products both sides, α=piComparison invertible, s and 1−s squares, first square with first component d.comparison (a_M), connecting square with σ pinned by σ_{QL}η_{L[1]}=η_L[1] on all complexes. ∃ T U σ is fully pinned: coneComparison fixed by Q(ordinaryInclusion)≫cc=unit (K-injective replacement plus quasi-iso-preserving roosF under exact products; agrees with the node's sign-iso convention); projection/boundary are Q of mappingCocone.triangle(roosU) transported, so consistent with IsDerivedLimitTriangle (𝟙−s) and inhabited; DirectImageData packages exactly ringedTowerPushforwardLimitComparison's normalizations. No hollow defs, docstrings present, statement verbatim, declarations present. nt_compile --json: 12.6 s, clean. Advisories: ordinaryInclusion near-dup of roosι (different domain, justified); no commutativity assumed vs commutative dependencies (inherited); plain proof imports."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T101146-L-18525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
