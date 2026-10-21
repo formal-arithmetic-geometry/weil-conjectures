@@ -21847,3 +21847,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:17 L: merged deliver/Q105/lem-pc-tate-abstract-residue-calculus (reviewer FIX; first push; new nodes: 0)
 - 09:17 L: merged deliver/Q144/lem-weil-isomorphism-scalar-augmentation-cone (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T09:18:00Z L: superseded stage-1 delivery Q107/lem-per-adic-normalized-fibre-exactness at 1d9fe226f69c4caa4c9772dc84c39e851be75066; current completion retained; packet archived at refs/superseded/Q107/lem-per-adic-normalized-fibre-exactness/1d9fe226f69c4caa4c9772dc84c39e851be75066; stale return retired.
+- 09:18 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A7/B10: superseded by the live Lean closure. This is the 4th push. History: 34c7d1f PASS was refused at landing, then 0c)
