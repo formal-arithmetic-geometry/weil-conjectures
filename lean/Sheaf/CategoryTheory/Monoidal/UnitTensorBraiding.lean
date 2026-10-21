@@ -42,7 +42,8 @@ theorem Functor.LaxBraided.tensorHom_μ_braiding
     (u : X ⟶ R.obj P) (v : Y ⟶ R.obj Q) :
     ((u ⊗ₘ v) ≫ Functor.LaxMonoidal.μ R P Q) ≫ R.map (β_ P Q).hom =
       (β_ X Y).hom ≫ ((v ⊗ₘ u) ≫ Functor.LaxMonoidal.μ R Q P) := by
-  sorry
+  rw [Category.assoc, Functor.LaxBraided.braided,
+    ← Category.assoc, BraidedCategory.braiding_naturality, Category.assoc]
 
 /-- The tensor of adjunction units followed by the right adjoint's lax tensor map
 intertwines braidings.
@@ -66,6 +67,6 @@ theorem Adjunction.unit_tensor_μ_braiding
         R.map (β_ (L.obj X) (L.obj Y)).hom =
       (β_ X Y).hom ≫ ((adj.unit.app Y ⊗ₘ adj.unit.app X) ≫
         Functor.LaxMonoidal.μ R (L.obj Y) (L.obj X)) := by
-  sorry
+  exact Functor.LaxBraided.tensorHom_μ_braiding R (adj.unit.app X) (adj.unit.app Y)
 
 end CategoryTheory
