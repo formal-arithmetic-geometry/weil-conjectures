@@ -21164,3 +21164,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q88/lem-coef-direct-image-hom-evaluation-square (reviewer FIX; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q96/lem-pur-completed-coefficient-tensor-normalization (reviewer FIX; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q29/lem-sfb-split-perfect-dual-tor-window (reviewer PASS; first push; new nodes: 0)
+- 08:34 L: merged deliver/Q89/lemma-nagata-immersion-open-in-scheme-image (reviewer PASS; after a return; new nodes: 0)

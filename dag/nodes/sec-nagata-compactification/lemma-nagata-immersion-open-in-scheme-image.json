@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-immersion-open-in-scheme-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "[stacks-project]",
@@ -14,23 +14,18 @@
  },
  "stmt_deps": [
   "def-nagata-scheme-image-factor",
-  "def-nagata-scheme-theoretic-closure",
-  "def-nagata-scheme-theoretic-image"
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
  ],
- "proof": [
-  {
-   "text": "Apply the verified instance\n`AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact`\nto $g$. It gives that\n$g^{\\mathrm{im}}=\\texttt{Scheme.Hom.toImage g}$ is an open immersion.\nThe verified instance\n`AlgebraicGeometry.Scheme.instQuasiCompactToImage` gives\nquasi-compactness of the same factor map.\nThe verified instance\n`AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact` says\nthat its topological range is\ndense. For every affine open $V$ of $Y$, the theorem\n`Scheme.Hom.toImage_app_injective` gives injectivity on the\ncorresponding affine open of $\\operatorname{SIm}(g)$ obtained by pulling\n$V$ back along the image inclusion. These opens form an affine basis of\n$\\operatorname{SIm}(g)$, so the sheaf morphism\n$\\mathcal O_{\\operatorname{SIm}(g)}\\to (g^{\\mathrm{im}})_*\\mathcal O_T$ is injective on a basis and hence globally.\nThus the factor map is scheme-theoretically dense, including at boundary\npoints.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "lemma-nagata-scheme-image-ideal-qc"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-immersion-open-in-scheme-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-immersion-open-in-scheme-image.proof.md",
+  "place": "Entire proof, its Mathlib instance applications and final injectivity argument; verified against local Mathlib source"
  },
  "mathlib_searches": [
   {
@@ -38,10 +33,186 @@
    "query": "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact immersion induces a quasi-compact open immersion into its scheme theoretic image with dense image and injective structure sheaf map",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+     "AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: the listed declarations supply the item clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsOpenImmersionToImageOfQuasiCompact|instQuasiCompactToImage|instIsDominantToImageOfQuasiCompact|toImage_app_injective|[Ss]chematically[Dd]ominant|[Ss]chematically[Dd]ense",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-21",
+   "verdict": "source locations read and verified"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The factorization of a quasi compact immersion through its scheme theoretic image is an open immersion and schematically dominant",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.specTargetImageFactorization",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact",
+     "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.IsDominant.of_comp_of_isOpenImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: the listed declarations supply the item clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.toImage, IsImmersion",
+   "results": {
+    "hits": [],
+    "note": "loogle: unknown identifier 'Scheme.Hom.toImage'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for this query; loogle: unknown identifier 'Scheme.Hom.toImage'"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage|SchemeTheoreticallyDominant",
+   "results": {
+    "hits": [
+     "236",
+     "237",
+     "238",
+     "246",
+     "247"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Morphisms/Immersion.lean"
+   },
+   "date": "2026-10-21",
+   "verdict": "source locations read and verified"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage|SchemeTheoreticallyDominant|app_injective",
+   "results": {
+    "hits": [
+     "18",
+     "20",
+     "23",
+     "38",
+     "41"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean"
+   },
+   "date": "2026-10-21",
+   "verdict": "source locations read and verified"
+  },
+  {
+   "tool": "grep",
+   "query": "mono.*stalk|stalk.*mono|injective.*stalk|stalk.*injective",
+   "results": {
+    "hits": [
+     "Mathlib/Topology/Sheaves/Abelian.lean",
+     "Mathlib/Topology/Sheaves/LocalPredicate.lean",
+     "Mathlib/Topology/Sheaves/LocalPredicate.lean",
+     "Mathlib/Topology/Sheaves/LocalPredicate.lean",
+     "Mathlib/Topology/Sheaves/Sheafify.lean",
+     "Mathlib/Topology/Sheaves/Sheafify.lean",
+     "Mathlib/Topology/Sheaves/Sheafify.lean",
+     "Mathlib/Topology/Sheaves/CommRingCat.lean"
+    ],
+    "note": "",
+    "subdirectory": "Topology/Sheaves"
+   },
+   "date": "2026-10-21",
+   "verdict": "source locations read and verified"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkFunctor\", \"mono\"",
+   "results": {
+    "hits": [
+     "TopCat.Presheaf.stalkFunctor_preserves_mono"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for this query; the returned stalk preservation theorem has the opposite direction to the needed criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsOpenImmersion f.toImage|QuasiCompact f.toImage|IsDominant f.toImage|stalkFunctor_toImage_injective|app_injective_iff_stalkFunctor_map_injective",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "source locations read and verified"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf map to the direct image under the canonical morphism to the scheme theoretic image is injective on every stalk and hence every open set",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective",
+     "AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+     "AlgebraicGeometry.specTargetImageFactorization_app_injective",
+     "AlgebraicGeometry.Scheme.IsGermInjective",
+     "AlgebraicGeometry.Scheme.Hom.image_injective",
+     "AlgebraicGeometry.Scheme.IsGermInjectiveAt",
+     "AlgebraicGeometry.stalkMap_injective_of_isAffine",
+     "AlgebraicGeometry.IsAffineOpen.stalkMap_injective"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "match: the listed declarations supply the item clauses"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+  "line": 259,
+  "how": "One declaration per clause, with a one-line specialization for sheaf injectivity. Openness: AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:259. Quasi-compactness: AlgebraicGeometry.Scheme.instQuasiCompactToImage, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:727. Topological density: AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, the same file:720. Scheme-theoretic density: AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, the same file:760, specializes TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, Mathlib/Topology/Sheaves/Stalks.lean:546, at the structure sheaf of g.image and the presheaf morphism g.toImage.c; its forward implication applied to fun x => g.stalkFunctor_toImage_injective x gives injectivity on every open. These are the stalks of O_{g.image} -> (g.toImage)_* O_T at all points of g.image, including boundary points, not just the local-ring maps at points of T. The first instance needs IsImmersion g and QuasiCompact g; the others need only QuasiCompact g. No reducedness, Noetherian or quasi-separated target hypothesis is used. Revalidated after return of head 73fa1f9c97 against the current statement of def-nagata-scheme-theoretic-image: its kernel ideal is the largest quasi-coherent ideal contained in the sheaf kernel, exactly Scheme.Hom.ker (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:692), and its image is Scheme.Hom.image (Subscheme.lean:662). For the quasi-compact g in this item, Hom.ker_apply (Basic.lean:702) identifies that ideal with the ordinary kernel on affine opens. The factor g.toImage is itself quasi-compact by Subscheme.lean:727, so the density convention ker(g.toImage)=0 agrees with the injectivity established above and with def-nagata-scheme-theoretically-dense-open. The revised definition therefore changes neither the constructed object nor any clause or hypothesis of this item. Revalidated again for the landing return naming def-nagata-scheme-image-factor: its current statement explicitly defines the target using the largest quasi-coherent kernel subideal and the factor as AlgebraicGeometry.Scheme.Hom.toImage g. Basic.lean:104 defines ofIdeals as the supremum of the quasi-coherent subideals, :125 gives le_ofIdeals_iff, and :692 defines Hom.ker using that operation. Subscheme.lean:662 and :665 define precisely this image and its inclusion, :710 defines Hom.toImage, and :715 gives Hom.toImage_imageι with no extra hypotheses. Thus the changed cited definition names exactly the same map as every declaration above; in particular none of the clauses concerns an arbitrary map into a merely topological closure. The statement dependencies remain valid on the current DAG."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -80,5 +251,21 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-immersion-open-in-scheme-image",
+  "worker": "stage1",
+  "summary": "Checked every clause against local Mathlib declarations and Stacks Tag 01RG. The item is a Mathlib leaf: the three image-factor instances give openness, quasi-compactness and topological density, and the stalk injectivity theorem with the general stalk-to-sections criterion gives scheme-theoretic density in one line. No new nodes, proof steps or Lean files. Removed the unused closure definition dependency and added the existing definitions of the morphism properties and schematic density. Preserved the statement and maintainer metadata. Repair of returned head 73fa1f9c97: re-read all six current statement dependencies, in particular the now-landed corrected image definition, and extended the Mathlib match to identify its largest quasi-coherent kernel and its quasi-compact specialization explicitly. The report replaces its obsolete description of that definition and records the citation revalidation against current DAG; all searches and the previously approved match are retained. Subsequent repair of the landing refusal naming def-nagata-scheme-image-factor: re-read its revised statement and all retained dependencies on the current DAG, explicitly matched its largest-kernel construction and canonical map to Basic.lean:104, :125, :692 and Subscheme.lean:662, :665, :710, :715, and recorded that revalidation in mathlib_match.how and the report. The retained sandbox was compared field by field with the current item; no current metadata is overwritten beyond the intended stage-1 split fields.",
+  "blueprint": "Realizes the entire main-20261015 node proof: its first three instance applications and its last affine-basis-to-sheaf-injectivity argument; the last is already packaged by stalkFunctor_toImage_injective followed by app_injective_iff_stalkFunctor_map_injective. The unit step that an immersion is open in its scheme-theoretic image is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-803f32eea",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-803f32eea (reviewer sub-agent of L); spot-checked: Q89 lemma-nagata-immersion-open-in-scheme-image, head 803f32eea638. This is a Mathlib leaf with no new nodes, no proof steps and no tool_uses. It repairs the landing refusal that named the changed definition def-nagata-scheme-image-factor. Compared field by field with the previously reviewed head abb9e2e2966c, the only changes are the revalidation paragraph added to mathlib_match.how and a longer split_report summary. The statement, source, stmt_deps and Lean metadata are identical. All six stmt_deps have the same statement in the snapshot, clones/live and clones/side-live. The image-factor definition now defines SIm by the largest quasi-coherent kernel subideal and sets g^im := Scheme.Hom.toImage g. I read the Mathlib source myself. Openness: Immersion.lean:259 (IsImmersion + QuasiCompact). Quasi-compactness of the factor: Subscheme.lean:727. Topological density (IsDominant): :720. Stalk injectivity of toImage.c at every point of the image, boundary points included: :760. Stalks.lean:546 turns that into injectivity on every open, which is def-nagata-scheme-theoretically-dense-open. Basic.lean:692/702 shows that kernel = 0 agrees with this because the factor is quasi-compact. Basic.lean:104/125 and Subscheme.lean:662/665/710/715 match the revised definition wording. Stacks morphisms.tex lemma-quasi-compact-immersion (01RG) takes the quasi-compact branch with the same hypotheses, so the target is not weakened. Edge cases checked: empty T, the identity, Spec k → Spec k[ε]/(ε²) (image Spec k), G_m → A^1, and the embedded point Y=Spec k[x,y]/(x²,xy) with T=D(y). The item is still unsplit in live, has no repair note, is not dropped and has no SGA citation. No fixes."
  }
 }
