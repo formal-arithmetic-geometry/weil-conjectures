@@ -23847,3 +23847,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:49 L: merged deliver/Y9/Sheaf.Paper.FiniteStageRationalExchangeCoherence (stage 3; reviewer FIX; first push; landing 20261021T214924-L-1893365 (interface); batch 20261021T214727; modules 8; new nodes 7; change records: coord/changes/Y9-finite-stage-coherence-data.md)
 - 21:50 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:50 L: merged deliver/NJ/det-sp-orientation-vector-bundle (stage 2; reviewer PASS; parallel immutable checks)
+- 21:52 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
