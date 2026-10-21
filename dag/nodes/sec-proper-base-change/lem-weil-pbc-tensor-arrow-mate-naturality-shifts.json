@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-tensor-arrow-mate-naturality-shifts",
+ "kind": "statement",
+ "title": "Naturality and shifts of the tensor mate of an arbitrary arrow",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories, with bifunctors $\\otimes_{\\mathcal C}:\\mathcal C\\times\\mathcal C\\to\\mathcal C$ and $\\otimes_{\\mathcal D}:\\mathcal D\\times\\mathcal D\\to\\mathcal D$, both denoted $\\otimes$. Let $L:\\mathcal C\\to\\mathcal D$, $R:\\mathcal D\\to\\mathcal C$ have a specified adjunction $L\\dashv R$ with natural unit $\\eta:\\mathrm{id}\\to RL$ and counit $\\varepsilon:LR\\to\\mathrm{id}$ satisfying the triangle identities [lem-weil-pbc-adjunction-of-natural-bijection]. Fix a natural isomorphism $\\mu_{M,P}:L(M\\otimes P)\\xrightarrow{\\sim}LM\\otimes LP$. For each $K\\in\\mathcal C$, $E\\in\\mathcal D$, and morphism $c:LK\\to E$, put\n$$F_K(P)=K\\otimes P,\\quad H_E(P)=E\\otimes LP,\\quad G_E=RH_E,\\quad \\beta^c_P=(c\\otimes1_{LP})\\mu_{K,P},\\quad \\alpha^c_P=R(\\beta^c_P)\\eta_{K\\otimes P}.$$\nSuppose the categories have coherent shifts $[n]$ for $n\\in\\mathbf Z$, each an auto-equivalence, and $L,R$ and every functor $T_M=M\\otimes-$ have coherent natural shift comparisons, as in [lem-weil-pbc-commshift-nattrans-comp-whisker]. Write $l,r,t^M$ for these comparisons. Require the tensor comparisons to be natural in the fixed input $M$, require $\\eta$ to commute with every shift for the induced comparison of $RL$, and require $\\mu_{K,-}:LF_K\\to T_{LK}L$ to commute with the composite comparisons for every $K,n$. In detail put\n$$a_{n,P}=l_{n,F_KP}L(t^K_{n,P}),\\quad b_{n,P}=t^{LK}_{n,LP}T_{LK}(l_{n,P}),\\quad h_{n,P}=t^E_{n,LP}T_E(l_{n,P}),\\quad g_{n,P}=r_{n,H_EP}R(h_{n,P}),$$\nand assume $b_{n,P}\\mu_{K,P[n]}=\\mu_{K,P}[n]a_{n,P}$ and $r_{n,LX}R(l_{n,X})\\eta_{X[n]}=\\eta_X[n]$.\nThen for all $K,E,c,P,n$,\n$$h_{n,P}\\beta^c_{P[n]}=\\beta^c_P[n]a_{n,P},\\qquad g_{n,P}\\alpha^c_{P[n]}=\\alpha^c_P[n]t^K_{n,P}.$$\nMoreover, for $K'\\in\\mathcal C$, $E'\\in\\mathcal D$, $c':LK'\\to E'$, $a:K\\to K'$, $b:E\\to E'$ with $bc=c'L(a)$, and every $p:P\\to P'$, one has\n$$(b\\otimes Lp)\\beta^c_P=\\beta^{c'}_{P'}L(a\\otimes p),\\qquad R(b\\otimes Lp)\\alpha^c_P=\\alpha^{c'}_{P'}(a\\otimes p).$$\nNo exactness, tensor associator, unit object, or invertibility of $c$ or $\\alpha^c$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 (equation-projection-formula-map), arbitrary-arrow categorical expansion of the displayed adjunct construction; agent-written lemma extracted from the formal exact projection mate calculation."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Pp]rojection|projection.*[Mm]ate|tensor.*[Cc]ommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"whisker\"",
+   "results": "2 hits: CategoryTheory.NatTrans.CommShift.whiskerLeft, CategoryTheory.NatTrans.CommShift.whiskerRight",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given tensor bifunctors and a shift compatible adjunction, for any morphism c from L K to E, the adjunct of c tensor identity after a natural shift compatible tensor comparison is natural in commuting squares and commutes with integer shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.RightAdjointCommShift.iso', CategoryTheory.Adjunction.LeftAdjointCommShift.iso', CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app_assoc, CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app_assoc, CategoryTheory.Adjunction.shift_unit_app_assoc, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and shift compatibility of the adjunct of a tensor comparison followed by an arbitrary arrow from L K to E",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.NatTrans.shift_comm, CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.Adjunction.shift_unit_app, CategoryTheory.NatTrans.app_shift, CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor comparison followed by a morphism c from L K to E gives an adjunct transformation K tensor P to R of E tensor L P natural under commuting squares and compatible with every shift",
+   "results": "8 hits: CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.frobeniusMorphism, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.tensorRightHomEquiv, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorLeftHomEquiv_tensor",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-exact-projection-mate",
+  "date": "2026-10-21",
+  "group": "NH"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed proof, first paragraph: closure under shifts and cones; arbitrary-arrow form of the naturality and two shift calculations (old steps 2–4) of lem-weil-pbc-formal-exact-projection-mate.",
+   "via": [
+    "lem-weil-pbc-formal-exact-projection-mate",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

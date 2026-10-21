@@ -20667,3 +20667,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:26 L: returned deliver/N7/sk-def-perfect (reviewer RETURN: I read the full item, the new node lem-pod-ringed-site-dualizable-perfect, the unit, the report, the main-20261015 sk-de)
 - 07:29 L: merged deliver/Q56/lem-sfb-rhom-continuity-triangle-closure (reviewer FIX; after a return; new nodes: 2)
 - 07:29 L: merged deliver/Q53/lem-sfb-hom-flat-evaluation-roof (reviewer FIX; after a return; new nodes: 2)
+- 07:29 L: merged deliver/NH/lem-weil-pbc-formal-exact-projection-mate (reviewer PASS; after a return; new nodes: 2)
