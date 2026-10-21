@@ -21602,3 +21602,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:02 L: merged deliver/Q18/lem-sf-ringed-kflat-single-tensor-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 09:02 L: merged deliver/Q31/lem-pur-etale-direct-image-scalar-exchange (stage 2; reviewer FIX; parallel immutable checks)
 - 09:02 L: merged deliver/NW/lem-coef-derived-tower-counit-projections (stage 2; reviewer PASS; parallel immutable checks)
+- 09:02 L: returned deliver/Q107/lem-sfb-finite-integral-condensed-resolution (reviewer RETURN: L: independent stage-2 immutable head 10dcaeb5956f: H2/H13: delivery adds theorem stmt_deps lem-sfb-integers-profinite-t)
