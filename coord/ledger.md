@@ -21366,3 +21366,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q62/lem-a1-normalized-roos-shift-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q06/lem-sfb-continuous-qbar-constructible-generators (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q34/lem-sfb-qlbar-internal-hom-coefficient-comparison (reviewer FIX; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q79/lem-coef-compact-support-normalized-realization (reviewer PASS; first push; new nodes: 0); claim not held by Q79: not your claim

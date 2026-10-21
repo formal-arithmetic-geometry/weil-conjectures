@@ -22,11 +22,111 @@
   "def-pc-kflat-complex",
   "def-weil-integral-rational-qbar-compact-support",
   "def-coef-normalized-dvr-tower",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-coef-compact-support-tensor-comparison",
+  "def-weil-pbc-adic-coefficient-datum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat flat-term representative $P$ using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings] its tensor reductions compute every $K_n$ independently of this choice. Apply [lem-sfb-successive-derived-quotient-normalization] to $\\widehat R_X\\to B_{X,m}\\to B_{X,n}$: its balancing isomorphism is $\\beta_{m,n}$, represented by $(x\\otimes u)\\otimes v\\mapsto x\\otimes q_{m,n}(u)v$. The representative-normalized adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] identifies the quotient map with $\\rho_{m,n}=\\operatorname{Res}_{m,n}(\\beta_{m,n})\\eta_{m,n,K_m}$. Indeed both send $x\\otimes u$ to $x\\otimes q_{m,n}(u)$. Naturality of the balancing isomorphism and the adjunction makes this independent of $P$. Identity quotients act identically; the two composites for $r\\ge m\\ge n$ both send $x\\otimes u$ to $x\\otimes q_{r,n}(u)$, proving the input cocycle.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); input normalization for blueprint Proof paragraph 2"
+   }
+  },
+  {
+   "text": "Write $\\sigma_{m,n}:F_m\\operatorname{Res}_{m,n}\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}F_n$ for [lem-sf-compact-support-restriction-of-scalars], with the fixed compactification $c_0$ throughout. Define $\\tau_{m,n}=\\sigma_{m,n,K_n}F_m(\\rho_{m,n})$, as in the statement. Expand $\\operatorname{Res}_{r,m}(\\tau_{m,n})\\tau_{r,m}$. Naturality of $\\sigma_{r,m}$ moves $F_m(\\rho_{m,n})$ past $\\sigma_{r,m,K_m}$; the resulting expression is $(\\operatorname{Res}_{r,m}\\sigma_{m,n,K_n})\\sigma_{r,m,\\operatorname{Res}_{m,n}K_n}F_r(\\operatorname{Res}_{r,m}\\rho_{m,n}\\circ\\rho_{r,m})$. The comparison-composition clause of the cited lemma and Step 1 identify this with $\\sigma_{r,n,K_n}F_r(\\rho_{r,n})=\\tau_{r,n}$. For identity coefficients its open comparison is the identity on underlying extension-by-zero sheaves, and its proper comparison is the inverse of the identity resolution map, so $\\sigma_{n,n}=1$ and $\\tau_{n,n}=1$.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Proof paragraph 2, the coefficient maps make a normalized tower; explicit quotient cocycle"
+   }
+  },
+  {
+   "text": "Put $L_T=-\\otimes^L_{B_{T,m}}B_{T,n}$ and let $\\eta_T$ be its scalar unit. Let $\\gamma:L_YF_m\\to F_nL_X$ be the canonical tensor comparison of [def-coef-compact-support-tensor-comparison]. Its defining equation is $\\operatorname{Res}_{m,n}(\\gamma_{K_m})\\eta_{Y,F_mK_m}=\\sigma_{m,n,L_XK_m}F_m(\\eta_{X,K_m})$. Naturality of $\\sigma$ at $\\beta_{m,n}:L_XK_m\\to K_n$ therefore gives\n$$\\operatorname{Res}_{m,n}(F_n\\beta_{m,n}\\circ\\gamma_{K_m})\\eta_{Y,M_m}=\\sigma_{m,n,K_n}F_m(\\operatorname{Res}_{m,n}(\\beta_{m,n})\\eta_{X,K_m})=\\tau_{m,n}.$$\nBy the bijection of [lem-pur-sheaf-ring-derived-coefficient-adjunction], the displayed composite is precisely the adjoint of the specified transition, not merely an isomorphism with the same endpoints.",
+   "uses": [
+    "def-coef-compact-support-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Proof paragraph 2, identify the actual coefficient maps with the specified tensor/restriction adjoints"
+   }
+  },
+  {
+   "text": "Every $K_m$ and $K_n$ is intrinsically bounded constructible by [def-weil-derived-complete-integral-detailed]. The ordinary derived $n$-reduction of $K_m$ is $K_n$ by Step 1, hence is bounded constructible too. Apply [lem-finite-compact-support-scalar-comparison] with its upper level equal to our $m$, its lower level equal to our $n$, ground field $k$, and compactification $c_0$. Its conclusion is invertibility of exactly the scalar-unit/restriction adjunct defining $\\gamma$, so $\\gamma_{K_m}$ is an isomorphism. Also $F_n(\\beta_{m,n})$ is an isomorphism because $\\beta_{m,n}$ is one. Thus the adjoints in Step 3 are isomorphisms. All hypotheses hold: $\\ell\\ne p$ makes $\\ell$ invertible in $k$, the schemes are finite type, and $f$ is separated finite type. The assumed Tor interval also gives the finite-Tor input required in the blueprint's coefficient-change formulation; no flatness of $A_n$ over $A_m$ is used.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-finite-compact-support-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Proof paragraph 2, finite coefficient comparison; current lower-level proof: sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md Steps 7--10"
+   }
+  },
+  {
+   "text": "Construct representatives inductively, using [lem-pc-quasi-isomorphisms-multiplicative-system]. Choose a complex $C_1$ representing $M_1$. Suppose $i_n:[C_n]\\xrightarrow{\\sim}M_n$ has been chosen. Choose any $B_{Y,n+1}$-complex $D$ representing $M_{n+1}$, with $d:[D]\\xrightarrow{\\sim}M_{n+1}$. In $D(B_{Y,n+1})$ consider $(\\operatorname{Res}_{n+1,n}i_n)^{-1}\\tau_{n+1,n}d:[D]\\to[\\operatorname{Res}_{n+1,n}C_n]$. The cited calculus represents it by a roof $D\\xleftarrow{s}C_{n+1}\\xrightarrow{t_n}\\operatorname{Res}_{n+1,n}C_n$ in the homotopy category, with $s$ a quasi-isomorphism. Choose chain-map representatives of $s,t_n$ and put $i_{n+1}=d[s]$. Then $(\\operatorname{Res}_{n+1,n}i_n)[t_n]=\\tau_{n+1,n}i_{n+1}$. This induction never changes an earlier $C_n$, and every $C_{n+1}$ remains a complex over $B_{Y,n+1}$. The maps $t_n$ give the required adjacent transitions; induction on $m-n$ using Step 2 shows their composites represent every $\\tau_{m,n}$.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), both calculi of fractions; explicit sequential roof induction supplying the coherent-realization requirement"
+   }
+  },
+  {
+   "text": "Restrict $C_n$ to $\\widehat R_Y$ and restrict $t_n$ along $\\widehat R_Y\\to B_{Y,n+1}$. Scalar restriction is termwise and leaves underlying abelian sheaves unchanged [def-pc-sheaf-restrict-scalars], and $q_{n+1,n}\\pi_{n+1}=\\pi_n$, so the targets are exactly $\\operatorname{Res}_n C_n$. Define the map from level $m$ to $n$ as the finite composite of the adjacent maps; associativity gives a strict inverse sequence. In cochain degree $r$ take the tower $(\\operatorname{Res}_n C_n^r)_n$, with differential $(d_{C_n}^r)_n$. Each $t_n$ is a chain map, so this differential is a tower morphism, and its square is zero levelwise. Localizing this complex of towers gives $\\mathcal M_\\bullet\\in D(\\operatorname{Tow}_{\\widehat R_Y}(Y))$ [def-weil-pbc-adic-coefficient-datum, def-weil-abstract-derived-category]. Its evaluations and transitions are precisely those proved in Step 5. Together with Steps 2--4 this is every datum of [def-coef-normalized-dvr-tower]. Finally, the adjacent maps coincide term for term with the transition formula of [def-weil-integral-rational-qbar-compact-support], since both use $F_{n+1}(\\rho_{n+1,n})$ followed by the same $\\sigma_{n+1,n}$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-abstract-derived-category",
+    "def-coef-normalized-dvr-tower",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Proof paragraph 2, coherent realization and identification with the defining compact-support tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-coef-compact-support-tensor-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-finite-compact-support-scalar-comparison",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Proof paragraph 2, coefficient-map normalization; supplemented by the explicit sequential roof construction from Stacks Tag 05RT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +176,66 @@
    "results": "No hits; directory Mathlib/Algebra/Homology",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|normalized.*[Tt]ower",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support commutes with quotient coefficients and the reduction tower can be represented by complexes",
+   "results": "DerivedCategory.quotientCompQhIso; ComplexShape.quotient_isLocalization; CochainComplex.isGE_of_ge; DerivedCategory.isGE_Q_obj_iff; HomologicalComplex.isSupported_iff_of_quasiIso; HomologicalComplexUpToQuasiIso.quotientCompQhIso; instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences; DerivedCategory.singleFunctorsPostcompQIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tower\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient reduction tower of compactly supported direct images is normalized and admits compatible chain complex models",
+   "results": "AlgebraicTopology.singularHomologyFunctor; CategoryTheory.Idempotents.DoldKan.N; AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty; AlgebraicTopology.normalizedMooreComplex; CategoryTheory.Abelian.DoldKan.N; AlgebraicTopology.NormalizedMooreComplex.obj; AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*(inverse|sequence)|realiz.*tower|tower.*realiz",
+   "results": "No hits; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"map\"",
+   "results": "DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; DerivedCategory.mappingCocone_triangle_distinguished; DerivedCategory.mappingCone_triangle_distinguished; DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso; DerivedCategory.isIso_Q_map_iff_quasiIso; DerivedCategory.Q_map_eq_of_homotopy; DerivedCategory.Q_map_single_map; DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible coefficient restriction maps of derived pushforwards are adjoint to the tensor coefficient change maps",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; PresheafOfModules.pushforward_obj_map_apply'; ModuleCat.restrictCoextendScalarsAdj; Algebra.TensorProduct.map_restrictScalars_comp_includeRight",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLeftCalculusOfFractions|HasRightCalculusOfFractions|instEssSurjArrow|EssSurj",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; directory Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; general localization facts and ordinary scalar adjunctions do not state the compact-support coefficient tower theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-integral-compact-support",
@@ -96,5 +252,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-compact-support-normalized-realization",
+  "worker": "stage1",
+  "summary": "The unchanged statement is proved in six explicit steps. Reused existing derived quotient normalization, scalar adjunction, canonical compact-support tensor comparison, finite coefficient comparison, and the Mathlib fraction-calculus leaf. The roof induction retains each finite coefficient-ring action and supplies an actual complex of completed-coefficient towers. No new node or Lean file is needed. Searches were run with msearch.py and preserved in searches.jsonl.",
+  "blueprint": "Steps 1--4 realize the coefficient-map sentence in paragraph 2 of lem-coef-integral-compact-support; Steps 5--6 supply its implicit coherent-realization premise and identify the transitions in def-weil-integral-rational-qbar-compact-support. This is the same proof paragraph in the master snapshot and current main-20261015 snapshot (moved to sec-smooth-purity/sk-lem-sp-tower).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a K-flat flat-term input representative, needed to interpret all quotient maps on one model; no unit-local lemma replaces general resolution existence."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Canonical, representative-independent derived scalar extension; this is the coefficient construction used by the unit, not a replacement route."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Balanced scalar reassociation and scalar-unit normalization for the input reduction cocycle; this is the general coefficient tool explicitly recommended in the parent review."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The actual derived scalar-unit adjunction identifies the specified transition with its tensor adjunct; no assertion about compact support is taken from this tool."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "The fixed-compactification restriction comparison and its composition law define the very transitions under consideration."
+   },
+   {
+    "node": "lem-finite-compact-support-scalar-comparison",
+    "why": "Invertibility of the canonical fixed-compactification finite coefficient map on intrinsically bounded constructible inputs with constructible reduction. This is the current lower-level finite-comparison theorem implementing the blueprint coefficient-map route, with its hypotheses verified in Step 4."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-finite-compact-support-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-448fa36d0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-448fa36d0 (reviewer sub-agent of L); spot-checked: Q79 448fa36d is a first split of a statement-only node that Q61 created in the 10-21 re-split of its parent. The re-split note is on the parent; this item has none, it is not on the dropped list, no other group has split it on live or side-live, and it cites no SGA source. The statement is unchanged. stmt_deps gains def-coef-compact-support-tensor-comparison and def-weil-pbc-adic-coefficient-datum; the statement uses both. A closure check finds no cycle. I read the master and main lem-coef-integral-compact-support; paragraph 2 is identical in both. The coefficient category and transitions are those of def-weil-integral-rational-qbar-compact-support. Step 1: the representative formulas of lem-sfb-successive-derived-quotient-normalization and the unit normalization of lem-pur-sheaf-ring-derived-coefficient-adjunction give rho = Res(beta) eta and the input cocycle. Step 2: naturality plus the composition clause of lem-sf-compact-support-restriction-of-scalars give the tau cocycle; sigma_nn = 1 follows from the cited statements or formally from the composition clause, so no proof is used. Step 3: I checked the equation for the adjoint, F_n(beta) gamma, against the defining equation of def-coef-compact-support-tensor-comparison and naturality of sigma. Step 4: every hypothesis of lem-finite-compact-support-scalar-comparison holds (upper level m, lower level n; the Lean signature confirms it is the same transpose), and K_m, K_n are constructible by def-weil-derived-complete-integral-detailed. Step 5: the roof induction is correct, with (Res i_n)[t] = tau d[s]. Step 6: the strict complex of towers gives the coherent realization required by def-coef-normalized-dvr-tower. Small cases m=n, K=0, f=id and the point all check. The route uses lem-finite-compact-support-scalar-comparison instead of the blueprint's lem-fix-compact-support-coefficient-change; both are cross-unit tools and the chosen one states exactly this map, so I accept the tool_uses. Advisory: lem-weil-compact-support-reduction-tower-functor already provides the realization and could replace Steps 5-6. Maintainer note: the source.place 'Steps 7--10' of lem-finite-compact-support-scalar-comparison is stale. No fixes."
  }
 }
