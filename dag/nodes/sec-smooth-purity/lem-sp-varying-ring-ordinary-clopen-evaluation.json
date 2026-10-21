@@ -1,0 +1,178 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-clopen-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: the proper/open interchange is constructed as a map of coefficient systems before evaluation; single-square coefficient compatibility needed for its composition identities.",
+   "via": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary coefficient evaluation preserves the single-square clopen arrow",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $R_n$ be arbitrary commutative rings with transition homomorphisms $\\varphi_n:R_{n+1}\\to R_n$. For a scheme $X$, let $\\mathcal M_X$ be the actual semilinear module-system category of [def-sp-varying-ring-operations], and let $\\mathcal T_X$ be the strict tower category with constant coefficient ring $R_n$ of [lem-cbc-strict-tower-proper-open-calculus]. Define $E_X:\\mathcal M_X\\to D(\\mathcal T_X)$ by ordinary evaluation at $n$, constant strict-tower embedding, and the degree-zero embedding. There exist natural isomorphisms $g_f:f^*E_X\\simeq E_YG_f$ for every $f:X\\to Y$ and $j_i:i_!E_X\\simeq E_UJ_i$ for every open immersion $i:U\\to X$. They preserve the specified pullback and open-extension compositors. They also preserve the intrinsic single-square arrow of [def-sp-varying-ring-proper-open-arrows]: for every commutative square $k:V\\to W$, $r:V\\to S$, $p:W\\to T$, $i:S\\to T$ with $k,i$ quasi-compact open immersions, $r,p$ proper, and $kp=ri$, and every $N\\in\\mathcal M_S$, one has $E_W(a_{Q,N});j_{k,r^*N};J_k(g_{r,N})=g_{p,i_!N};G_p(j_{i,N});\\alpha_{Q,E_SN}$, where $\\alpha_Q$ is the arbitrary constant-$R_n$ strict-tower clopen arrow. Composition is written in order of application. No finiteness of $R_n$, cartesianness of the square, or faithfulness of evaluations on arbitrary derived morphisms is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10, together with the open-immersion construction of Stacks Tags 09AE and 0F7B; the arbitrary-sequence single-square compatibility below is an agent-formulated consequence, not quoted verbatim from Zheng."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual ordinary component functor ev_n on systems. Define E_X to be ev_n followed by the constant strict-tower functor and the degree-zero embedding. Its defining equation uniquely fixes E_X, so no object is selected from a mere existence assertion. Whisker the specified moduleEvalG with the constant and single embeddings and their exact-functor comparisons to obtain g_f. Recover the ordinary open comparison from the inverse of the specified open-adjunction mate evalJInv using the fully faithful degree-zero embedding, and whisker it in the same way to obtain j_i.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; exact-functor localization and the fully faithful degree-zero embedding."
+   }
+  },
+  {
+   "text": "For two inverse images, take adjunction mates of their proposed composition equation. The unit normalization of moduleEvalG identifies its mate with moduleEvalP, which is identity on section carriers. The system pushforward compositor and the constant-ring module compositor are restriction along the same canonical pullback-pasting map. Their equality on sections gives the composition equation by injectivity of the mate equivalence. Applying constant embedding and exact localization, with the single-functor composition comparisons, gives the displayed OrdinaryPullComposition equation. Transpose under the open adjunctions: moduleJComp and strict jComp are the canonical left-adjoint comparisons to these pullback compositors. The same mate calculation gives OrdinaryOpenComposition.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; adjunction normalization and functor composition."
+   }
+  },
+  {
+   "text": "For one proper/open square, form the chosen fibre product W times_T S. The inverse cartesian open comparison is the transpose of the open unit and the pullback-square compositor. Evaluation and constant/single embedding preserve this word by the preceding composition equations and the unit normalization of the open comparison. Hence beta, the inverse of this invertible map, has the same comparison. The induced lift s is clopen. On its image the projection pi_s is the inverse/open unit identification and on the complementary open it is zero. Evaluation and the two exact embeddings preserve these maps and their zero complements. Sheaf uniqueness on this two-open decomposition therefore identifies the two projections.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-sheaf-of-modules-category",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proof in the open-immersion case: the induced lift is clopen and its projection is identity on the image and zero on the complement. Exact extension by zero is proetale.tex, Tag 09AE."
+   }
+  },
+  {
+   "text": "Substitute the beta and pi comparisons into the definition of moduleAlpha, followed by the two compositor comparisons and the equality transports for bs=k and qs=r. Naturality moves the four comparison isomorphisms past these factors and cancels their inverse pairs. This is exactly the equation in OrdinarySquareComparison. It is a calculation for a single square; it assumes no vertical or horizontal pasting identity and uses faithfulness only for ordinary morphisms through the degree-zero embedding.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Stacks 0F7B open case; substitution into the actual clopen arrow."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-mate-pasting",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10, together with the open-immersion construction of Stacks Tags 09AE and 0F7B; the arbitrary-sequence single-square compatibility below is an agent-formulated consequence, not quoted verbatim from Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary evaluation of sheaves of modules in a semilinear system preserves clopen proper open comparison and pullback composition",
+   "results": "Eight generic sheaf-of-modules evaluation/pullback comparison results, not the varying-ring single-square clopen statement. Inspected the ordinary and derived comparison interfaces in the library.",
+   "date": "2026-10-21",
+   "verdict": "no match; generic categorical comparison tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategorySingleFunctor\"",
+   "results": "Eleven generic exact-functor/single comparison hits; the proved composition normalization was inspected in WeilConjectures/CategoryTheory/DerivedCategory/LeftDerivedFunctor/SingleFunctor.lean. None states semilinear coefficient evaluation of the clopen arrow.",
+   "date": "2026-10-21",
+   "verdict": "no match; use the generic exact-single coherence as a proof tool"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleAlpha.*eval|eval.*moduleAlpha|clopen.*evaluation",
+   "results": "No Mathlib hits. Separately, whole-blueprint searches found twelve clopen nodes and two coefficient-evaluation nodes, concerning finite coefficients, clopen geometry, or duality. No node states this arbitrary-sequence ordinary single-square compatibility. The finite normalization and ambient pasting candidates require finite coefficient data and do not apply.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting",
+  "date": "2026-10-21",
+  "group": "C8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryClopenEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryClopenEvaluation",
+  "statement": "theorem ordinaryClopenEvaluation (n : ℕ) :\n    ∃ (gIso : OrdinaryPullComparison R φ n) (jIso : OrdinaryOpenComparison R φ n),\n      OrdinaryPullComposition R φ n gIso ∧ OrdinaryOpenComposition R φ n jIso ∧\n        OrdinaryClopenComparison R φ n gIso jIso",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRealization_eq",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinarySquareComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryPullComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryOpenComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryPullComposition",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryOpenComposition",
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinaryClopenComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryConstantSingleComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryPullComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryRecoverSingleIso",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryOpenEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryOpenComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryModuleEvalG_comp",
+   "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryClopenEvaluation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261021T022432-L-2846658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261021T022432-L-2846658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

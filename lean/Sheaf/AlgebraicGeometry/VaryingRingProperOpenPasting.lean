@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
+import Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation
 
 /-!
 # Proper/open projection and pasting for varying coefficient rings
@@ -451,13 +452,181 @@ theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
       exact disjoint_compl_right
     exact (module_disjoint_extension R φ s c hd ((pull R φ s).obj M)).eq_of_tgt _ _
 
+section OrdinaryPastingProofs
+attribute [local irreducible] ordinaryRealization ordinaryPullComparison ordinaryOpenComparison
+  Functor.leftAdjoint
+  StrictTower.G StrictTower.J
+  StrictTower.alpha StrictTower.gComp StrictTower.jComp
+
+section OrdinaryVerticalTransport
+
+variable {A₀ B₀ C₀ D₀ E₀ F₀ A₁ B₁ C₁ D₁ E₁ F₁ : Type*}
+  [Category A₀] [Category B₀] [Category C₀] [Category D₀] [Category E₀] [Category F₀]
+  [Category A₁] [Category B₁] [Category C₁] [Category D₁] [Category E₁] [Category F₁]
+  {EA : A₀ ⥤ A₁} {EB : B₀ ⥤ B₁} {EC : C₀ ⥤ C₁}
+  {ED : D₀ ⥤ D₁} {EE : E₀ ⥤ E₁} {EF : F₀ ⥤ F₁}
+  {P₁ : D₀ ⥤ B₀} {P₂ : F₀ ⥤ D₀} {P₁₂ : F₀ ⥤ B₀}
+  {R₁ : C₀ ⥤ A₀} {R₂ : E₀ ⥤ C₀} {R₁₂ : E₀ ⥤ A₀}
+  {p₁ : D₁ ⥤ B₁} {p₂ : F₁ ⥤ D₁} {p₁₂ : F₁ ⥤ B₁}
+  {r₁ : C₁ ⥤ A₁} {r₂ : E₁ ⥤ C₁} {r₁₂ : E₁ ⥤ A₁}
+  {K : A₀ ⥤ B₀} {I : C₀ ⥤ D₀} {J : E₀ ⥤ F₀}
+  {k : A₁ ⥤ B₁} {i : C₁ ⥤ D₁} {j : E₁ ⥤ F₁}
+  {cp : P₁₂ ≅ P₂ ⋙ P₁} {cr : R₁₂ ≅ R₂ ⋙ R₁}
+  {cp' : p₁₂ ≅ p₂ ⋙ p₁} {cr' : r₁₂ ≅ r₂ ⋙ r₁}
+  {a : I ⋙ P₁ ⟶ R₁ ⋙ K} {b : J ⋙ P₂ ⟶ R₂ ⋙ I}
+  {c : J ⋙ P₁₂ ⟶ R₁₂ ⋙ K}
+  {a' : i ⋙ p₁ ⟶ r₁ ⋙ k} {b' : j ⋙ p₂ ⟶ r₂ ⋙ i}
+  {c' : j ⋙ p₁₂ ⟶ r₁₂ ⋙ k}
+
+private theorem ordinary_vertical_transport
+    (eP₁ : P₁ ⋙ EB ≅ ED ⋙ p₁) (eP₂ : P₂ ⋙ ED ≅ EF ⋙ p₂)
+    (eP₁₂ : P₁₂ ⋙ EB ≅ EF ⋙ p₁₂)
+    (eR₁ : R₁ ⋙ EA ≅ EC ⋙ r₁) (eR₂ : R₂ ⋙ EC ≅ EE ⋙ r₂)
+    (eR₁₂ : R₁₂ ⋙ EA ≅ EE ⋙ r₁₂)
+    (eK : K ⋙ EB ≅ EA ⋙ k) (eI : I ⋙ ED ≅ EC ⋙ i)
+    (eJ : J ⋙ EF ≅ EE ⋙ j)
+    (hp : ∀ N : F₀, EB.map (cp.hom.app N) ≫ eP₁.hom.app (P₂.obj N) ≫
+      p₁.map (eP₂.hom.app N) = eP₁₂.hom.app N ≫ cp'.hom.app (EF.obj N))
+    (hr : ∀ N : E₀, EA.map (cr.hom.app N) ≫ eR₁.hom.app (R₂.obj N) ≫
+      r₁.map (eR₂.hom.app N) = eR₁₂.hom.app N ≫ cr'.hom.app (EE.obj N))
+    (ha : OrdinarySquareComparison
+      (EA := EA) (EB := EB) (EC := EC) (ED := ED)
+      (R₀ := R₁) (P₀ := P₁) (K := K) (I := I)
+      (r := r₁) (p := p₁) (k := k) (i := i) eR₁ eP₁ eK eI a a')
+    (hb : OrdinarySquareComparison
+      (EA := EC) (EB := ED) (EC := EE) (ED := EF)
+      (R₀ := R₂) (P₀ := P₂) (K := I) (I := J)
+      (r := r₂) (p := p₂) (k := i) (i := j) eR₂ eP₂ eI eJ b b')
+    (hc : OrdinarySquareComparison
+      (EA := EA) (EB := EB) (EC := EE) (ED := EF)
+      (R₀ := R₁₂) (P₀ := P₁₂) (K := K) (I := J)
+      (r := r₁₂) (p := p₁₂) (k := k) (i := j) eR₁₂ eP₁₂ eK eJ c c')
+    (hstrict : ∀ N : E₁, cp'.hom.app (j.obj N) ≫ p₁.map (b'.app N) ≫
+      a'.app (r₂.obj N) = c'.app N ≫ k.map (cr'.hom.app N)) (N : E₀) :
+    EB.map (cp.hom.app (J.obj N) ≫ P₁.map (b.app N) ≫ a.app (R₂.obj N)) =
+      EB.map (c.app N ≫ K.map (cr.hom.app N)) := by
+  apply (cancel_mono (eK.hom.app (R₁.obj (R₂.obj N)) ≫
+    k.map (eR₁.hom.app (R₂.obj N)) ≫ k.map (r₁.map (eR₂.hom.app N)))).1
+  simp only [Functor.map_comp, Category.assoc]
+  have hn₄ := eK.hom.naturality (cr.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₄
+  rw [reassoc_of% hn₄]
+  have hr' := congrArg k.map (hr N)
+  simp only [Functor.map_comp] at hr'
+  rw [hr', reassoc_of% (hc.equation N), reassoc_of% (ha.equation (R₂.obj N))]
+  have hn₁ := a'.naturality (eR₂.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₁
+  rw [← hn₁]
+  have hn₂ := eP₁.hom.naturality (b.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₂
+  rw [reassoc_of% hn₂]
+  have hp' := congrArg p₁.map (hb.equation N)
+  simp only [Functor.map_comp] at hp'
+  rw [reassoc_of% hp', reassoc_of% (hp (J.obj N))]
+  have hn₃ := cp'.hom.naturality (eJ.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₃
+  rw [← reassoc_of% hn₃, hstrict]
+
+end OrdinaryVerticalTransport
+
+section OrdinaryHorizontalTransport
+
+variable {A₀ B₀ C₀ D₀ E₀ F₀ A₁ B₁ C₁ D₁ E₁ F₁ : Type*}
+  [Category A₀] [Category B₀] [Category C₀] [Category D₀] [Category E₀] [Category F₀]
+  [Category A₁] [Category B₁] [Category C₁] [Category D₁] [Category E₁] [Category F₁]
+  {EA : A₀ ⥤ A₁} {EB : B₀ ⥤ B₁} {EC : C₀ ⥤ C₁}
+  {ED : D₀ ⥤ D₁} {EE : E₀ ⥤ E₁} {EF : F₀ ⥤ F₁}
+  {R₀ : C₀ ⥤ A₀} {P : D₀ ⥤ B₀} {Q : F₀ ⥤ E₀}
+  {r : C₁ ⥤ A₁} {p : D₁ ⥤ B₁} {q : F₁ ⥤ E₁}
+  {K : A₀ ⥤ B₀} {L : B₀ ⥤ E₀} {I : C₀ ⥤ D₀} {J : D₀ ⥤ F₀}
+  {K₁₂ : A₀ ⥤ E₀} {I₁₂ : C₀ ⥤ F₀}
+  {k : A₁ ⥤ B₁} {l : B₁ ⥤ E₁} {i : C₁ ⥤ D₁} {j : D₁ ⥤ F₁}
+  {k₁₂ : A₁ ⥤ E₁} {i₁₂ : C₁ ⥤ F₁}
+  {ck : K ⋙ L ≅ K₁₂} {ci : I ⋙ J ≅ I₁₂}
+  {ck' : k ⋙ l ≅ k₁₂} {ci' : i ⋙ j ≅ i₁₂}
+  {a : I ⋙ P ⟶ R₀ ⋙ K} {b : J ⋙ Q ⟶ P ⋙ L} {c : I₁₂ ⋙ Q ⟶ R₀ ⋙ K₁₂}
+  {a' : i ⋙ p ⟶ r ⋙ k} {b' : j ⋙ q ⟶ p ⋙ l} {c' : i₁₂ ⋙ q ⟶ r ⋙ k₁₂}
+
+private theorem ordinary_horizontal_transport
+    (eR : R₀ ⋙ EA ≅ EC ⋙ r) (eP : P ⋙ EB ≅ ED ⋙ p) (eQ : Q ⋙ EE ≅ EF ⋙ q)
+    (eK : K ⋙ EB ≅ EA ⋙ k) (eL : L ⋙ EE ≅ EB ⋙ l)
+    (eI : I ⋙ ED ≅ EC ⋙ i) (eJ : J ⋙ EF ≅ ED ⋙ j)
+    (eK₁₂ : K₁₂ ⋙ EE ≅ EA ⋙ k₁₂) (eI₁₂ : I₁₂ ⋙ EF ≅ EC ⋙ i₁₂)
+    (hi : ∀ N : C₀, EF.map (ci.hom.app N) ≫ eI₁₂.hom.app N =
+      eJ.hom.app (I.obj N) ≫ j.map (eI.hom.app N) ≫ ci'.hom.app (EC.obj N))
+    (hk : ∀ N : A₀, EE.map (ck.hom.app N) ≫ eK₁₂.hom.app N =
+      eL.hom.app (K.obj N) ≫ l.map (eK.hom.app N) ≫ ck'.hom.app (EA.obj N))
+    (ha : OrdinarySquareComparison
+      (EA := EA) (EB := EB) (EC := EC) (ED := ED)
+      (R₀ := R₀) (P₀ := P) (K := K) (I := I)
+      (r := r) (p := p) (k := k) (i := i) eR eP eK eI a a')
+    (hb : OrdinarySquareComparison
+      (EA := EB) (EB := EE) (EC := ED) (ED := EF)
+      (R₀ := P) (P₀ := Q) (K := L) (I := J)
+      (r := p) (p := q) (k := l) (i := j) eP eQ eL eJ b b')
+    (hc : OrdinarySquareComparison
+      (EA := EA) (EB := EE) (EC := EC) (ED := EF)
+      (R₀ := R₀) (P₀ := Q) (K := K₁₂) (I := I₁₂)
+      (r := r) (p := q) (k := k₁₂) (i := i₁₂) eR eQ eK₁₂ eI₁₂ c c')
+    (hstrict : ∀ N : C₁, q.map (ci'.hom.app N) ≫ c'.app N =
+      b'.app (i.obj N) ≫ l.map (a'.app N) ≫ ck'.hom.app (r.obj N)) (N : C₀) :
+    EE.map (Q.map (ci.hom.app N) ≫ c.app N) =
+      EE.map (b.app (I.obj N) ≫ L.map (a.app N) ≫ ck.hom.app (R₀.obj N)) := by
+  apply (cancel_mono (eK₁₂.hom.app (R₀.obj N) ≫ k₁₂.map (eR.hom.app N))).1
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hc.equation]
+  have hn₁ := eQ.hom.naturality (ci.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₁
+  rw [reassoc_of% hn₁]
+  have hb' := congrArg q.map (hi N)
+  simp only [Functor.map_comp] at hb'
+  rw [reassoc_of% hb', reassoc_of% (hk (R₀.obj N))]
+  have hn₂ := ck'.hom.naturality (eR.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₂
+  rw [← hn₂]
+  have hn₃ := eL.hom.naturality (a.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₃
+  rw [reassoc_of% hn₃]
+  have ht := congrArg l.map (ha.equation N)
+  simp only [Functor.map_comp] at ht
+  rw [reassoc_of% ht, reassoc_of% (hb.equation (I.obj N))]
+  have hn₄ := b'.naturality (eI.hom.app N)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn₄
+  rw [← reassoc_of% hn₄, hstrict]
+
+end OrdinaryHorizontalTransport
+
+private theorem faithful_postcompose {C D H : Type*}
+    [Category C] [Category D] [Category H]
+    (E : C ⥤ H) (F : C ⥤ D) (G : D ⥤ H) [G.Faithful]
+    (h : E = F ⋙ G) {X Y : C} (f g : X ⟶ Y) (he : E.map f = E.map g) :
+    F.map f = F.map g := by
+  subst E
+  exact G.map_injective he
+
+private theorem ordinaryRealization_jointlyFaithful {X : Scheme.{u}}
+    {M N : Modules R φ X} (f g : M ⟶ N)
+    (h : ∀ n, (ordinaryRealization R φ n X).map f =
+      (ordinaryRealization R φ n X).map g) : f = g := by
+  have he (n : ℕ) : (eval R φ X n).map f = (eval R φ X n).map g := by
+    exact faithful_postcompose (ordinaryRealization R φ n X) (eval R φ X n)
+      (Functor.const ℕᵒᵖ ⋙ DerivedCategory.singleFunctor (StrictTower.Towers (R n) X) 0)
+      (ordinaryRealization_eq R φ n X) f g (h n)
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact congrArg (fun a ↦ a.val.app (op U.unop.2) x) (he U.unop.1)
+
+
 /-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
 (blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: after beta, the two clopen projections select nested open components.
-On every test object's intersections of the two clopen decompositions the two
-composites are both identity or both zero. Sheaf uniqueness proves equality,
-each map already commutes with the semilinear transitions, so this is an equality of system maps. -/
+Proof: ordinary coefficient evaluation followed by the constant tower and degree-zero
+embeddings preserves the single-square comparison and the pullback compositors.
+The finite categorical transport calculation below therefore turns strict-tower vertical
+pasting into the evaluated equation. The degree-zero and constant embeddings are
+faithful, and ordinary system maps are determined componentwise, giving the equality. -/
 theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -471,14 +640,43 @@ theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
         (moduleAlpha R φ k r₁ p₁ i h₁).app ((pull R φ r₂).obj N) =
       (moduleAlpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app N ≫
         (extension R φ k).map ((moduleGComp R φ r₁ r₂).hom.app N) := by
-  sorry
+  apply ordinaryRealization_jointlyFaithful R φ
+  intro n
+  obtain ⟨gIso, jIso, hg, hj, ha⟩ := ordinaryClopenEvaluation R φ n
+  exact ordinary_vertical_transport
+    (EA := ordinaryRealization R φ n A) (EB := ordinaryRealization R φ n B₀)
+    (EC := ordinaryRealization R φ n C) (ED := ordinaryRealization R φ n D)
+    (EE := ordinaryRealization R φ n E) (EF := ordinaryRealization R φ n F)
+    (P₁ := pull R φ p₁) (P₂ := pull R φ p₂) (P₁₂ := pull R φ (p₁ ≫ p₂))
+    (R₁ := pull R φ r₁) (R₂ := pull R φ r₂) (R₁₂ := pull R φ (r₁ ≫ r₂))
+    (p₁ := StrictTower.G (R n) p₁) (p₂ := StrictTower.G (R n) p₂)
+    (p₁₂ := StrictTower.G (R n) (p₁ ≫ p₂))
+    (r₁ := StrictTower.G (R n) r₁) (r₂ := StrictTower.G (R n) r₂)
+    (r₁₂ := StrictTower.G (R n) (r₁ ≫ r₂))
+    (K := extension R φ k) (I := extension R φ i) (J := extension R φ j)
+    (k := StrictTower.J (R n) k) (i := StrictTower.J (R n) i) (j := StrictTower.J (R n) j)
+    (cp := moduleGComp R φ p₁ p₂) (cr := moduleGComp R φ r₁ r₂)
+    (cp' := StrictTower.gComp (R n) p₁ p₂) (cr' := StrictTower.gComp (R n) r₁ r₂)
+    (a := moduleAlpha R φ k r₁ p₁ i h₁) (b := moduleAlpha R φ i r₂ p₂ j h₂)
+    (c := moduleAlpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
+    (a' := StrictTower.alpha (R n) k r₁ p₁ i h₁)
+    (b' := StrictTower.alpha (R n) i r₂ p₂ j h₂)
+    (c' := StrictTower.alpha (R n) k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
+    (gIso _ _ p₁) (gIso _ _ p₂) (gIso _ _ (p₁ ≫ p₂))
+    (gIso _ _ r₁) (gIso _ _ r₂) (gIso _ _ (r₁ ≫ r₂))
+    (jIso _ _ k) (jIso _ _ i) (jIso _ _ j) (hg p₁ p₂) (hg r₁ r₂)
+    (ha k r₁ p₁ i h₁) (ha i r₂ p₂ j h₂) (ha k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
+    (StrictTower.alpha_vertical (R n) k i j r₁ r₂ p₁ p₂ h₁ h₂ h) N
+
 
 /-- Intrinsic moduleAlpha agrees with horizontal pasting on every input.
 Source: Stacks, Tag 0F7D and blueprint, fifth proof step
 (blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: the first clopen projection selects l(W), and the second selects lk(V)
-inside it. Their composite selects lk(V) and vanishes on its complement. Use the
-open-composition beta equation and exact localization to identify the displayed maps. -/
+Proof: ordinary coefficient evaluation followed by the constant tower and degree-zero
+embeddings preserves the single-square comparison and the open-extension compositors.
+The finite categorical transport calculation below turns strict-tower horizontal
+pasting into the evaluated equation. Faithfulness of the two embeddings and
+componentwise extensionality of ordinary system maps then give the equality. -/
 theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -492,7 +690,36 @@ theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (moduleAlpha R φ l p q j h₂).app ((extension R φ i).obj N) ≫
         (extension R φ l).map ((moduleAlpha R φ k r p i h₁).app N) ≫
         (moduleJComp R φ k l).hom.app ((pull R φ r).obj N) := by
-  sorry
+  apply ordinaryRealization_jointlyFaithful R φ
+  intro n
+  obtain ⟨gIso, jIso, hg, hj, ha⟩ := ordinaryClopenEvaluation R φ n
+  exact ordinary_horizontal_transport
+    (EA := ordinaryRealization R φ n A) (EB := ordinaryRealization R φ n B₀)
+    (EC := ordinaryRealization R φ n C) (ED := ordinaryRealization R φ n D)
+    (EE := ordinaryRealization R φ n E) (EF := ordinaryRealization R φ n F)
+    (R₀ := pull R φ r) (P := pull R φ p) (Q := pull R φ q)
+    (r := StrictTower.G (R n) r) (p := StrictTower.G (R n) p) (q := StrictTower.G (R n) q)
+    (K := extension R φ k) (L := extension R φ l)
+    (I := extension R φ i) (J := extension R φ j)
+    (K₁₂ := extension R φ (k ≫ l)) (I₁₂ := extension R φ (i ≫ j))
+    (k := StrictTower.J (R n) k) (l := StrictTower.J (R n) l)
+    (i := StrictTower.J (R n) i) (j := StrictTower.J (R n) j)
+    (k₁₂ := StrictTower.J (R n) (k ≫ l)) (i₁₂ := StrictTower.J (R n) (i ≫ j))
+    (ck := moduleJComp R φ k l) (ci := moduleJComp R φ i j)
+    (ck' := StrictTower.jComp (R n) k l) (ci' := StrictTower.jComp (R n) i j)
+    (a := moduleAlpha R φ k r p i h₁) (b := moduleAlpha R φ l p q j h₂)
+    (c := moduleAlpha R φ (k ≫ l) r q (i ≫ j) h)
+    (a' := StrictTower.alpha (R n) k r p i h₁)
+    (b' := StrictTower.alpha (R n) l p q j h₂)
+    (c' := StrictTower.alpha (R n) (k ≫ l) r q (i ≫ j) h)
+    (gIso _ _ r) (gIso _ _ p) (gIso _ _ q)
+    (jIso _ _ k) (jIso _ _ l) (jIso _ _ i) (jIso _ _ j)
+    (jIso _ _ (k ≫ l)) (jIso _ _ (i ≫ j)) (hj i j) (hj k l)
+    (ha k r p i h₁) (ha l p q j h₂) (ha (k ≫ l) r q (i ≫ j) h)
+    (StrictTower.alpha_horizontal (R n) k l i j r p q h₁ h₂ h) N
+
+
+end OrdinaryPastingProofs
 
 /-- Intrinsic alpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
