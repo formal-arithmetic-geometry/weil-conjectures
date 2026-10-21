@@ -18,9 +18,104 @@
   "def-sfb-strong-monoidal-functor",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $m_{F,N}=\\mu_{F,N}^{-1}:QF\\otimes QN\\to Q(F\\otimes N)$. Thus $m$ is the forward tensorator of $Q$ in [def-sfb-strong-monoidal-functor]. Write $T_{X,Y}$ for the specified Hom bijection of $J\\dashv Q$. By [lem-weil-pbc-adjunction-of-natural-bijection], $T(a)=Q(a)\\circ v_X$, $T^{-1}(b)=e_Y\\circ J(b)$, and $T$ is injective and natural in both variables. In particular the specified map exists uniquely and satisfies\n$$Q(\\kappa_{M,N})\\circ v_{M\\otimes QN}=m_{JM,N}\\circ(v_M\\otimes1_{QN}).$$\nThese are direct substitutions into the cited bijection; no invertibility of $\\kappa$ is used.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "For morphisms $a:M\\to M'$ and $h:N\\to N'$, transpose the proposed naturality equation. Naturality of $m$ and of $v$ gives\n$$T\\bigl((J(a)\\otimes h)\\circ\\kappa_{M,N}\\bigr)\n=Q(J(a)\\otimes h)\\circ m_{JM,N}\\circ(v_M\\otimes1)\n=m_{JM',N'}\\circ(v_{M'}\\otimes1)\\circ(a\\otimes Q(h))\n=T\\bigl(\\kappa_{M',N'}\\circ J(a\\otimes Q(h))\\bigr).$$\nInjectivity of $T$ proves naturality in both arguments. The middle equality uses exactly the tensorator naturality in [def-sfb-strong-monoidal-functor] and $QJ(a)\\circ v_M=v_{M'}\\circ a$ from [lem-weil-pbc-adjunction-of-natural-bijection]; tensor bifunctoriality is [def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "For the tensor-action equation put $X=(M\\otimes QN_1)\\otimes QN_2$ and $Y=(JM\\otimes N_1)\\otimes N_2$, and call its left side $L$. Postcomposition naturality of $T$, the defining transpose in Step 1, and tensorator naturality give\n$$\\begin{aligned}\nT_{X,Y}(L)&=Q(\\kappa_{M,N_1}\\otimes1)\\circ m_{J(M\\otimes QN_1),N_2}\\circ(v_{M\\otimes QN_1}\\otimes1)\\\\\n&=m_{JM\\otimes N_1,N_2}\\circ((Q(\\kappa_{M,N_1})\\circ v_{M\\otimes QN_1})\\otimes1)\\\\\n&=m_{JM\\otimes N_1,N_2}\\circ(m_{JM,N_1}\\otimes1)\\circ((v_M\\otimes1)\\otimes1).\n\\end{aligned}$$\nOnly the two indicated naturality substitutions and tensor bifunctoriality are involved.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "Call the right side of the tensor-action equation $R$, with the same $X,Y$ as in Step 3. Put $c=(1_M\\otimes m_{N_1,N_2})\\circ\\alpha^{\\mathcal C}_{M,QN_1,QN_2}:X\\to M\\otimes Q(N_1\\otimes N_2)$. Pre- and postcomposition naturality of $T$ and Step 1 give\n$$T_{X,Y}(R)=Q((\\alpha^{\\mathcal D}_{JM,N_1,N_2})^{-1})\\circ m_{JM,N_1\\otimes N_2}\\circ(v_M\\otimes1)\\circ c.$$\nBy tensor bifunctoriality and naturality of the associator, the final two factors expand as\n$$(v_M\\otimes1)\\circ c\n=(1_{QJM}\\otimes m_{N_1,N_2})\\circ\\alpha^{\\mathcal C}_{QJM,QN_1,QN_2}\\circ((v_M\\otimes1)\\otimes1).$$\nAll identities here are naturality in [lem-weil-pbc-adjunction-of-natural-bijection] or the defining bifunctor/associator naturality in [def-sfb-monoidal-category].",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "The associativity axiom for the strong monoidal functor $Q$ in [def-sfb-strong-monoidal-functor], applied to $(JM,N_1,N_2)$, is exactly\n$$Q(\\alpha^{\\mathcal D}_{JM,N_1,N_2})\\circ m_{JM\\otimes N_1,N_2}\\circ(m_{JM,N_1}\\otimes1)\n=m_{JM,N_1\\otimes N_2}\\circ(1\\otimes m_{N_1,N_2})\\circ\\alpha^{\\mathcal C}_{QJM,QN_1,QN_2}.$$\nPostcompose with $Q((\\alpha^{\\mathcal D}_{JM,N_1,N_2})^{-1})$ and precompose with $((v_M\\otimes1)\\otimes1)$. Functoriality cancels the inverse associators, giving equality of the expressions for $T(L)$ and $T(R)$ in Steps 3 and 4. Injectivity of the Hom bijection in [lem-weil-pbc-adjunction-of-natural-bijection] proves the first displayed equation of the item, with precisely its specified source and target.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "For the counit equation write $Z=QF\\otimes QN$ and transpose into $\\operatorname{Hom}_{\\mathcal C}(Z,Q(F\\otimes N))$. Precomposition naturality of $T$ and its unit formula give\n$$T\\bigl(e_{F\\otimes N}\\circ J(m_{F,N})\\bigr)\n=Q(e_{F\\otimes N})\\circ v_{Q(F\\otimes N)}\\circ m_{F,N}=m_{F,N}.$$\nThe last equality is the right triangle identity $Q(e_H)\\circ v_{QH}=1_{QH}$ at $H=F\\otimes N$, supplied by [lem-weil-pbc-adjunction-of-natural-bijection].",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  },
+  {
+   "text": "For the other side, postcomposition naturality, the defining transpose of $\\kappa_{QF,N}$, and tensorator naturality give\n$$\\begin{aligned}\nT\\bigl((e_F\\otimes1_N)\\circ\\kappa_{QF,N}\\bigr)\n&=Q(e_F\\otimes1_N)\\circ m_{JQF,N}\\circ(v_{QF}\\otimes1)\\\\\n&=m_{F,N}\\circ((Q(e_F)\\circ v_{QF})\\otimes1)=m_{F,N}.\n\\end{aligned}$$\nHere the naturality is exactly that of [def-sfb-strong-monoidal-functor], tensor composition is [def-sfb-monoidal-category], and the final cancellation is the right triangle identity of [lem-weil-pbc-adjunction-of-natural-bijection]. Comparing with Step 6 and using injectivity proves the counit equation. These substitutions require neither symmetry nor full faithfulness nor invertibility of $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract transpose calculation (not an assertion stated by this tag)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-strong-monoidal-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, and Tag 0E8I in sites-modules.tex motivate the open tensor map; the seven-step abstract coherence proof is written here from the monoidal axioms and natural Hom bijections."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +151,45 @@
    "results": "OK 8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_left, CategoryTheory.ComonObj.comul_counit_assoc, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
    "date": "2026-10-21",
    "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|unit_app_tensor_comp_map_δ|map_μ_comp_counit_app_tensor",
+   "results": "OK 17 hits: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean (grep restricted to CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024 and 1036 are unit/counit identities for an oplax left adjoint with its mate lax structure, not the mixed action maps of this item; Closed/Functor.lean 61 and frobeniusMorphism_mate assume Cartesian monoidal categories. The full statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "OK 10 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, AlgCat.tensorAlgebraAdj, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.Types.tensorProductAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024 and 1036 are unit/counit identities for an oplax left adjoint with its mate lax structure, not the mixed action maps of this item; Closed/Functor.lean 61 and frobeniusMorphism_mate assume Cartesian monoidal categories. The full statement is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left adjoint to a strong monoidal functor is a colax module functor: associativity of the projection morphism and module compatibility of the counit",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Functor.Monoidal.ofLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.LaxMonoidalFunctor.noConfusion, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Functor.LaxMonoidal.left_unitality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024 and 1036 are unit/counit identities for an oplax left adjoint with its mate lax structure, not the mixed action maps of this item; Closed/Functor.lean 61 and frobeniusMorphism_mate assume Cartesian monoidal categories. The full statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal categories a strong monoidal right adjoint has a canonical projection morphism defined by the unit, associative with tensor and compatible with the adjunction counit",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024 and 1036 are unit/counit identities for an oplax left adjoint with its mate lax structure, not the mixed action maps of this item; Closed/Functor.lean 61 and frobeniusMorphism_mate assume Cartesian monoidal categories. The full statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Frobenius reciprocity natural transformation J(M tensor Q(N)) to J(M) tensor N, adjoint to unit tensor identity, obeys its associator and counit identities",
+   "results": "OK 8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.tensorLeftAdjunction, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.tensorRightAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024 and 1036 are unit/counit identities for an oplax left adjoint with its mate lax structure, not the mixed action maps of this item; Closed/Functor.lean 61 and frobeniusMorphism_mate assume Cartesian monoidal categories. The full statement is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-projection-action-laws",
@@ -78,5 +208,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-unit-adjunct-tensor-action",
+  "worker": "stage1",
+  "summary": "Q90: retained the exact statement and gave seven explicit elementary transpose calculations using the existing Mathlib-leaf adjunction and monoidal nodes. Checked all types and both action and counit equations without invertibility or symmetry; no new nodes. Repeated Mathlib searches through msearch.py and recorded the actual results.",
+  "blueprint": "Realizes the canonical reassociations of the package in the current main-20261015 lem-pur-projection-purity-agreement.proof.md, last paragraph, via lem-pur-finite-projection-action-laws open-action and open-counit clauses (its extracted old Steps 6 and 7).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-b7e860f02",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-b7e860f02 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full and recomputed each one by hand. There are no new nodes. The statement is byte-identical to base/side-live. The item is still unsplit in live and side-live, is not in route-pivot-dropped, and has no SGA. The cited nodes are def-sfb-monoidal-category (associator naturality, bifunctor), def-sfb-strong-monoidal-functor (forward tensorator naturality, associativity axiom with F=Q giving Q(α^D)m(m⊗1)=m(1⊗m)α^C) and lem-weil-pbc-adjunction-of-natural-bijection (Ψ naturality, Ψ(a)=G(a)η, Ψ^{-1}(b)=εF(b), triangle identities); these supply every fact used. Typing checks: κ: J(M⊗QN)→JM⊗N, and both sides of equation 1 go J((M⊗QN1)⊗QN2)→(JM⊗N1)⊗N2. Steps 3-5: T(L)=m(m⊗1)((v⊗1)⊗1), and T(R)=Q(α^{-1})m(1⊗m)α^C((v⊗1)⊗1) with the associator kept explicit; the Q-associativity axiom equates them. Steps 6-7: both transposes equal m by the right triangle identity. No step uses invertibility of κ, full faithfulness, symmetry or exactness, and the elementary flags are justified. Edge cases checked: the identity adjunction and terminal monoidal categories. Not a duplicate: lem-pur-open-left-projection-action and lem-pur-adjoint-left-projection-action need symmetry or other hypotheses, and def-sfb-adjunction-projection-formula is the invertible package. Mathlib searches cover all three kinds, and the Monoidal/Functor.lean adjunction lemmas are not one-line specializations. Stacks 0GL1 (sites-cohomology l.4578) and 0E8I (sites-modules l.4051) are cited only as motivation, and the proof is correctly marked agent-written. The blueprint place is the last sentence of the main-20261015 lem-pur-projection-purity-agreement proof. No fixes, no tool_uses."
  }
 }
