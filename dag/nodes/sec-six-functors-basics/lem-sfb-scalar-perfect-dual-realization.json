@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-scalar-perfect-dual-realization",
+ "kind": "statement",
+ "title": "Scalar finite-projective dual realization on a ringed site",
+ "statement": "Let $R$ be a commutative ring and let $\\mathcal C$ be a site small in the chosen module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $B$ be a sheaf of commutative rings equipped with a morphism $\\underline R\\to B$, where underlines denote constant sheaves [def-weil-pbc-constant-sheaf]. Use module sheaves and their unbounded derived category $D(B)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Set $C_B(M)=B\\otimes_{\\underline R}\\underline M$ for ordinary $R$-modules, using ordinary sheaf tensor [def-pur-sheaf-tensor-product]. Let $F^\\bullet$ be a bounded cochain complex of finite projective $R$-modules, with degreewise finite-free retract data [def-weil-pbc-strict-perfect-coefficient-package], and put $E^\\bullet=C_B(F^\\bullet)$ termwise. Define $F^{\\vee,\\bullet}=\\operatorname{Hom}_R^\\bullet(F^\\bullet,R[0])$ with\n$$(F^{\\vee,\\bullet})^q=\\operatorname{Hom}_R(F^{-q},R),\\qquad d^q(\\phi)=-(-1)^q\\phi\\,d_F^{-q-1}$$\n[def-pur-hom-complex]. Each $E^q$ is a direct summand of a finite free $B$-module sheaf, and $\\mathcal Hom_B(E^q,-)$ is exact. For every K-injective resolution $B[0]\\to I^\\bullet$, the comparison\n$$\\mathcal Hom_B^\\bullet(E^\\bullet,B[0])\\longrightarrow\\mathcal Hom_B^\\bullet(E^\\bullet,I^\\bullet)$$\nis a quasi-isomorphism, so its source represents $R\\mathcal Hom_B(E^\\bullet,B)$ [def-pur-derived-internal-hom]. For every finite projective $R$-module $V$, the canonical sheaf morphism\n$$\\beta_V:C_B(\\operatorname{Hom}_R(V,R))\\longrightarrow\\mathcal Hom_B(C_B(V),B),\\qquad \\beta_V(b\\otimes\\phi)(b'\\otimes v)=bb'\\phi(v)$$\nis an isomorphism natural in $V$. Applied to $V=F^{-q}$, these maps form an isomorphism of cochain complexes\n$$C_B(F^{\\vee,\\bullet})\\xrightarrow{\\sim}\\mathcal Hom_B^\\bullet(E^\\bullet,B[0]),$$\nwith the displayed signed differentials, hence give a natural isomorphism $C_B(F^{\\vee,\\bullet})\\simeq R\\mathcal Hom_B(E^\\bullet,B)$ in $D(B)$. If $F^\\bullet$ is zero outside $[a,b]$, both dual complexes are zero outside $[-b,-a]$. No flatness of $B$ over $\\underline R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH (lemma-Rhom-strictly-perfect) and 08JJ (lemma-dual-perfect-complex), final finite-free-retract calculation; explicit scalar constant-sheaf/base-extension comparison extracted from old steps 5--7 of the item."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dual.*(baseChange|base_change|tensor)|(?:baseChange|base_change|tensor).*dual",
+   "results": [
+    "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+    "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+    "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+    "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+    "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+    "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+    "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+    "Mathlib/LinearAlgebra/Dual/BaseChange.lean"
+   ],
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.dual_projective",
+   "results": [
+    "Module.dual_projective"
+   ],
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative ring R and a sheaf B of algebras over the constant ring, scalar realization of the signed dual of a bounded finite projective complex equals its derived internal sheaf Hom into B",
+   "results": [
+    "Module.dual_finite",
+    "Module.dual_projective",
+    "SheafOfModules.restrictScalars_obj_val",
+    "Module.Dual.instLieModule",
+    "Module.Basis.dualBasis",
+    "LinearMap.BilinForm.dualSubmodule",
+    "Module.Dual.congr",
+    "Module.Dual.instIsReflecive"
+   ],
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf scalar extension of a bounded finite projective complex commutes with ordinary dual and computes derived internal Hom by the evaluation formula",
+   "results": [
+    "LightCondensed.ihom_map_val_app",
+    "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+    "LightCondensed.ihomPoints_apply",
+    "LightCondensed.ihomPoints",
+    "Ext",
+    "LightCondensed.instMonoidalClosedLightCondMod",
+    "LightCondensed.ihomPoints_symm_comp",
+    "LightCondensed.free_internallyProjective_iff_tensor_condition"
+   ],
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|internal.hom",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective scalar module dual base change to sheaves is an isomorphism of signed cochain complexes representing derived sheaf Hom",
+   "results": [
+    "CategoryTheory.Sheaf.H",
+    "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+    "CategoryTheory.ProjectiveResolution.isoExt",
+    "groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+    "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+    "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective",
+    "CategoryTheory.ProjectiveResolution.cochainComplexXIso",
+    "CochainComplex.isKProjective_of_iso"
+   ],
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-hom-dual-constructible-models",
+  "date": "2026-10-21",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2 final sentence: the coefficient dual of a locally constant perfect complex, specifically the finite-free-retract Hom calculation and the signed scalar-dual comparison.",
+   "via": [
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

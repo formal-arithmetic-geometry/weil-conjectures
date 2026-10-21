@@ -20865,3 +20865,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q36/lem-sfb-periodic-tensor-normal-form (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q126/lem-zl-curve-testing-irreducibility (reviewer FIX; after a return; new nodes: 1)
 - 08:07 L: merged deliver/Q82/prop-every-iterate-trace (reviewer FIX; after a return; new nodes: 2)
+- 08:07 L: merged deliver/Q94/lem-sfb-internal-hom-dual-constructible-models (reviewer PASS; after a return; new nodes: 2)
