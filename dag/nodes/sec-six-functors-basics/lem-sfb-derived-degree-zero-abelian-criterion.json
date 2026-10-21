@@ -10,11 +10,114 @@
  "stmt_deps": [
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-subcategory"
+  "def-weil-triangulated-subcategory",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The subcategory $\\mathcal B$ is strictly full: if $M\\cong N$ in $\\mathcal A$, functoriality gives $S(M)\\cong S(N)$, so membership is preserved by strict fullness of $\\mathcal T$. The complex $S(0)$ is the zero complex. Since $\\mathcal T$ contains the ambient zero object, $0\\in\\mathcal B$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), degree-zero subcategory; zero and isomorphism closure"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-derived-single-fully-faithful], the Hom map for $S$ is bijective. Both subcategories are full, so the same holds for $S:\\mathcal B\\to\\mathcal T$. The single complex has $H^0(S(M))=M$ and $H^q(S(M))=0$ for $q\\ne0$. Conversely, if $K\\in\\mathcal T$ has cohomology only in degree zero, [lem-sf-derived-concentrated-single] gives $K\\cong S(H^0(K))$. The cohomology-closure hypothesis gives $H^0(K)\\in\\mathcal B$. These two implications identify the essential image, including on morphisms by full faithfulness.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-derived-concentrated-single",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), identification of the degree-zero objects; Stacks Tags 06XS and 08J5"
+   }
+  },
+  {
+   "text": "Fix $f:M\\to N$ in $\\mathcal B$ and any distinguished cone triangle $S(M)\\to S(N)\\to D\\to S(M)[1]$. Rotate it once by (TR2) of [def-weil-triangulated-category] to $S(N)\\to D\\to S(M)[1]\\to S(N)[1]$. Its outer objects belong to $\\mathcal T$ by shift closure. The extension closure in [def-weil-triangulated-subcategory] and strict fullness therefore give $D\\in\\mathcal T$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), the cone belongs to the triangulated subcategory; Stacks Tag 05QM"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-homology-long-exact] to this triangle. The single-complex cohomology calculation reduces the relevant part to $0\\to H^{-1}(D)\\to M\\xrightarrow{f}N\\to H^0(D)\\to0$. Thus $H^{-1}(D)\\to M$ is a kernel of $f$ and $N\\to H^0(D)$ is a cokernel: exactness identifies the first monomorphism with $\\ker f$ and the last epimorphism with $\\operatorname{coker}f$. Their universal properties give the canonical isomorphisms claimed, relative to the chosen triangle. Since $D\\in\\mathcal T$, the hypothesis puts $S(H^{-1}(D))$ and $S(H^0(D))$ in $\\mathcal T$. Strict fullness transfers this membership to every ambient kernel and cokernel of $f$, proving that they belong to $\\mathcal B$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), kernel and cokernel calculation; Stacks Tags 05RS and 05RT"
+   }
+  },
+  {
+   "text": "Given any ambient short exact sequence $0\\to M\\to L\\to N\\to0$ with $M,N\\in\\mathcal B$, placing it in degree zero gives a degreewise short exact sequence of complexes (the other degrees are zero). By [lem-weil-pbc-complex-ses-triangle] this yields a distinguished triangle $S(M)\\to S(L)\\to S(N)\\to S(M)[1]$. Both outer objects lie in $\\mathcal T$, so its extension closure and strict fullness give $S(L)\\in\\mathcal T$. Hence $L\\in\\mathcal B$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), extension triangle; Stacks Tag 0152"
+   }
+  },
+  {
+   "text": "For $M,N\\in\\mathcal B$, use the ambient biproduct in the abelian category $\\mathcal A$. The sequence $0\\to M\\xrightarrow{\\iota_M}M\\oplus N\\xrightarrow{\\pi_N}N\\to0$ is short exact: $\\pi_M\\iota_M=1$, $\\pi_N\\iota_N=1$, and $\\iota_M\\pi_M+\\iota_N\\pi_N=1$ show that $\\iota_M$ is the kernel of $\\pi_N$ and that $\\pi_N$ is its cokernel. Step 5 gives $M\\oplus N\\in\\mathcal B$. Together with step 1 and induction, this gives all finite ambient biproducts. Their universal properties restrict to the full subcategory.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), the finite biproducts needed for the abelian-subcategory criterion"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-abelian-full-subcategory-exact] to $\\mathcal B\\subseteq\\mathcal A$. Step 1 supplies an ambient zero object, step 4 supplies every ambient kernel and cokernel of a morphism between its objects, and step 6 supplies every ambient binary product (a biproduct), with all choices included by strict fullness. The lemma gives an abelian category with the inherited addition and ambient kernels and cokernels. Extension closure was proved in step 5. Only ambient derived-category facts and the stated cohomology closure were used; no boundedness or t-structure on $\\mathcal T$ is required.",
+   "uses": [
+    "lem-weil-pbc-abelian-full-subcategory-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), abelianness; Stacks Tag 0754 and the existing Mathlib full-subcategory criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-derived-concentrated-single",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sp-abelian",
+  "lem-weil-pbc-abelian-full-subcategory-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), first two sentences, expanded using Stacks Tags 06XS, 08J5, 05QM, 05RS/05RT, 0152 and 0754 and existing Mathlib leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +167,59 @@
    "results": "4 hits: Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean. Subdirectory: Mathlib/CategoryTheory/Abelian",
    "date": "2026-10-21",
    "verdict": "no match: the abelian-full-subcategory instance requires kernel, cokernel and finite-product closure as input; deriving those from triangulation and cohomology closure, and identifying the degree-zero essential image, are still required"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated.*(homology|singleFunctor)|(homology|singleFunctor).*IsTriangulated",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full triangulated subcategory of a derived category closed under cohomology has an abelian extension closed degree zero category",
+   "results": "8 hits: HasDerivedCategory.standard, CategoryTheory.Triangulated.Subcategory, DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero, CategoryTheory.ObjectProperty.IsTriangulated.mk, CategoryTheory.Triangulated.TStructure.mk, DerivedCategory.isLE_iff, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"Abelian\"",
+   "results": "2 hits: CategoryTheory.ObjectProperty.SerreClassLocalization.abelian, CategoryTheory.ObjectProperty.instAbelianFullSubcategoryOfContainsZeroOfIsClosedUnderKernelsOfIsClosedUnderCokernelsOfIsClosedUnderFiniteProducts",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology stable strictly full triangulated subcategory of an abelian derived category has an abelian degree zero subcategory closed under kernels cokernels and extensions",
+   "results": "8 hits: DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, CategoryTheory.hasExt_of_hasDerivedCategory, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsTriangulated, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderKernels|IsClosedUnderCokernels|instance.*Abelian",
+   "results": "5 hits: 30, 34, 46, 50, 60; subdirectory CategoryTheory/Abelian/Subcategory.lean; rg on a single file printed line prefixes rather than file paths; the subsequent directory search supplies file paths",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an abelian category and a triangulated subcategory of its derived category stable under cohomology objects the full subcategory of modules whose single complexes lie in it is abelian and extension closed",
+   "results": "8 hits: CategoryTheory.hasExt_of_hasDerivedCategory, DerivedCategory.TStructure.t, CategoryTheory.hasExt_iff, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.HasExt.standard",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderKernels|IsClosedUnderCokernels|instance.*Abelian",
+   "results": "25 hits: Mathlib/CategoryTheory/Abelian/Subobject.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/NonPreadditive.lean, Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; subdirectory CategoryTheory/Abelian",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole criterion; the abelian full-subcategory instance is already represented by lem-weil-pbc-abelian-full-subcategory-exact and is used only after proving its closure hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-integral-heart-triangulated",
@@ -84,5 +236,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-derived-degree-zero-abelian-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the abstract degree-zero criterion into seven steps, reusing the existing single-functor, concentration, homology-sequence, short-exact-triangle and abelian-full-subcategory nodes. No new nodes and no statement correction. Explicit rotation, strict fullness, split short exact sequence and all ambient-kernel/cokernel choices are checked.",
+  "blueprint": "det-lem-int-integral-heart-triangulated proof paragraph (2): first sentence is realized by steps 1–4, the abelian conclusion by steps 6–7, and the extension-triangle sentence by step 5. Essential-image details expand the paragraph’s degree-zero identification."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NX-a7c5dfa5d",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-a7c5dfa5d (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery has no new nodes, the statement is unchanged, and the added stmt_dep def-weil-pbc-exact-sequence is justified. All 10 cited nodes are Mathlib leaves (generic tools), so there is no cycle and no tool_uses is needed. The item is not on the dropped list, has no repair note, and is still unsplit live. Source: main-20261015 sk-lem-int-integral-heart-triangulated.proof.md, paragraph (2). Old parent steps 4-6 (Q15 snapshot) are all carried. Step 2: concentrated-single at r=0 plus full faithfulness give the essential image. Step 3: (TR2) rotation, shift and extension closure, strict fullness. Step 4: the long exact sequence gives 0->H^{-1}D->M->N->H^0D->0, so kernel and cokernel are H^{-1}D and H^0D, indices checked. Step 5: triangleOfSES in degree 0. Step 6: split-sequence biproducts. Step 7: the abelian full-subcategory leaf, with hypotheses (i)-(iii) checked, including every isomorphic product via strict fullness. Tested on T=0, T=D(A), finitely generated Ab, cones of ×2, 0 and id, and Z/2->Z/4->Z/2. A DAG search found no abstract duplicate, only constructible-specific nodes."
  }
 }
