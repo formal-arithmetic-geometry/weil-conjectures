@@ -19,9 +19,116 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the hypothesis for the scheme-image construction. The map $f=p_0j_0$ is quasi-compact since it is finite type [def-weil-finite-type-morphism]. The map $p_0$ is proper, hence separated [def-weil-proper-morphism], and therefore quasi-separated: its diagonal is a closed immersion, whose inverse image of an affine open is a closed affine subscheme and hence quasi-compact [def-weil-quasi-separated-morphism]. Apply [lemma-nagata-open-immersion-qc-over-separated-target] to $X\\xrightarrow{j_0}\\overline X_0\\xrightarrow{p_0}Y$. It gives quasi-compactness of the open immersion $j_0$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "def-weil-quasi-separated-morphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: hypotheses for replacing the compactifying scheme by the scheme-theoretic closure; Stacks Tag 03GI, schemes.tex, lemma-quasi-compact-permanence."
+   }
+  },
+  {
+   "text": "Apply [def-nagata-dense-refinement] and [prop-nagata-dense-refinement] to $c_0$. They give a compactification $c=(j,p)$ of the same morphism $f$ with ambient scheme $\\overline X=\\operatorname{SIm}(j_0)$. Since $j_0$ is a quasi-compact immersion by step 1, [lemma-nagata-immersion-open-in-scheme-image] identifies its factor $j:X\\hookrightarrow\\overline X$ as a quasi-compact open immersion with topologically dense image. This proves the compactification and density assertions for the specified construction, rather than choosing a different compactification.",
+   "uses": [
+    "def-nagata-dense-refinement",
+    "prop-nagata-dense-refinement",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: \"replace the compactifying scheme by the scheme-theoretic closure of X\"."
+   }
+  },
+  {
+   "text": "The scheme $\\overline X$ is finite type over $k$. Indeed $p$ is proper, hence finite type [def-weil-proper-morphism], and $Y$ is finite type over $k$. In the affine-cover definition [def-weil-finite-type-morphism], refine a finite affine cover $\\operatorname{Spec}B_i$ of $Y$ by the finite affine covers $\\operatorname{Spec}C_{it}$ of their inverse images under $p$. Each $B_i$ has finitely many $k$-algebra generators and each $C_{it}$ has finitely many $B_i$-algebra generators; their combined lists generate $C_{it}$ over $k$. There are finitely many such affine charts, proving the assertion.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: finite type of the refined compactifying scheme; affine-generator expansion of composition of finite-type morphisms."
+   }
+  },
+  {
+   "text": "Apply the dense-open clause of [lem-kun-dimension-extension] to $j:X\\hookrightarrow\\overline X$. Its ambient scheme is finite type over the field $k$ by step 3 and its image is dense by step 2. Therefore $\\dim\\overline X=\\dim X\\leq d$. In particular the dimension bound is obtained from the dense refinement and does not require the original $\\overline X_0$ to have dimension at most $d$.",
+   "uses": [
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: \"Its dimension is at most d\"; dense-open dimension equality (Stacks Tag 0A21, varieties.tex, lemma-dimension-locally-algebraic)."
+   }
+  },
+  {
+   "text": "Fix any $n\\geq1$ and any input $L$ as in the statement. Apply [lem-trf-open-ctf] to $j:X\\hookrightarrow\\overline X$ and $A=A_n$. Both schemes are finite type over $k$. The hypotheses give intrinsic bounded constructibility and Tor interval $[a,b]$ for $L$, so the lemma gives $j_!L\\in D^b_{ctf}(\\overline X_{\\mathrm{proet}},A_n)$ with exactly the same Tor interval. Apply [cor-sf-direct-image-ctf-proetale] to $p:\\overline X\\to Y$ and $j_!L$. Properness of $p$ gives separatedness and finite type [def-weil-proper-morphism], and step 4 supplies $\\dim\\overline X\\leq d$. The corollary applies to the intrinsic pro-étale categories and returns intrinsic bounded constructibility and Tor interval $[a,b+2d]$ for $Rp_{*,n}j_!L$.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: extension by zero preserves constructibility and Tor interval; apply the finite direct-image Tor bound, using its intrinsic pro-étale corollary."
+   }
+  },
+  {
+   "text": "Use [lem-sf-proetale-constructible-origin](ii) on $L$: it supplies a bounded constructible étale complex and an étale-origin isomorphism for $L$. Thus $L$ belongs to the precise domain of [prop-compactification-coherence-detailed]. Apply that proposition to $c$ and the originally fixed $c_0$. Its canonical compactification comparison gives $\\alpha:Rp_{*,n}j_!L\\xrightarrow{\\sim}Rf^{c_0}_{!,n}L=F_nL$. All its scheme hypotheses hold for the given $X,Y,f$, and $\\ell$ is invertible in the characteristic-$p$ field $k$ because $\\ell\\ne p$. This comparison uses the originally prescribed functor $F_n$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: finite compact-support site comparison, followed by canonical compactification independence; Stacks Tags 09AK and 09AL, proetale.tex, lemma-compare-constructible and lemma-compare-constructible-derived, for the witness domain."
+   }
+  },
+  {
+   "text": "For the isomorphism $\\alpha$ of step 6, each cohomology sheaf is isomorphic on the two sides. A finite constructible stratification for the left side therefore also witnesses constructibility on the right, and the same finite cohomological support interval works [def-weil-finite-torsion-constructibility]. For every degree-zero $A_n$-module sheaf $M$, applying the derived tensor functor to $\\alpha$ gives an isomorphism $(Rp_{*,n}j_!L)\\otimes^L_{A_n}M\\cong F_nL\\otimes^L_{A_n}M$. Taking cohomology proves the same vanishing outside $[a,b+2d]$ on the right, which is exactly [def-weil-finite-tor-amplitude]. The construction of $c$ did not involve $n$, and the two finite-level estimates use the same dimension bound $d$ for every $n$. Since $c_0$ was arbitrary, the numerical interval is independent of both $n$ and $c_0$.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+    "place": "Proof paragraph 1: pass the uniform finite-level interval through the canonical compactification comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-nagata-dense-refinement",
+  "prop-nagata-dense-refinement",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-kun-dimension-extension",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
+  "place": "Proof paragraph 1, from dense compactification through the finite compact-support site comparison. Expands the preserved old Steps 3–5 in coord/reports/Q61/lem-coef-integral-compact-support.md using existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +171,52 @@
    "results": "No hits; directory Mathlib/CategoryTheory/Sites",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*support|lowerShriek|torAmplitude",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image after extension by zero preserves constructible finite Tor complexes with uniform bound twice the source dimension",
+   "results": "CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.ShortComplex.hasRightHomology_of_preserves; CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf; CategoryTheory.ShortComplex.Exact.map; CategoryTheory.ShortComplex.hasRightHomology_of_preserves'; CategoryTheory.ShortComplex.RightHomologyData.map; CategoryTheory.ShortComplex.ShortExact.map_of_exact; CategoryTheory.ShortComplex.hasHomology_of_preserves'",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient compact support pushforward preserves constructibility and sends Tor amplitude [a,b] to [a,b+2d] after a dense compactification of a scheme of dimension at most d",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; ChevalleyThm.chevalley_mvPolynomialC; chevalley_mvPolynomial_mvPolynomial; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; ChevalleyThm.chevalley_polynomialC; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|TorAmplitude|lowerShriek",
+   "results": "No hits; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward composed with extension by zero of constructible pro etale sheaves has finite Tor amplitude bounded by the dimension of a dense compactification",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not assert finite-coefficient compact supports, the dense refinement and the uniform Tor interval"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-integral-compact-support",
@@ -84,5 +233,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-coef-finite-compact-support-uniform-tor",
+  "worker": "stage1",
+  "summary": "Seven-step split, unchanged statement, no new nodes: quasi-compactness and dense scheme image; finite type; dimension equality; open-extension and intrinsic pro-étale direct-image Tor estimates; étale-origin domain for canonical compactification comparison; explicit invariance under isomorphism and uniformity. All step citations were checked against their node statements. Original Mathlib search records retained; six actual searches logged for Q159 added.",
+  "blueprint": "Realizes lem-coef-integral-compact-support, Proof paragraph 1, exactly the old Steps 3–5 preserved in the Q61 report: dense scheme-theoretic closure (Steps 1–4), finite open/proper Tor bounds (Step 5), finite compact-support site domain and arbitrary-compactification comparison (Steps 6–7). No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-dense-refinement",
+    "why": "Step 2 uses the named dense-image compactification construction as a generic geometry tool; this unit does not reprove Nagata refinement."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "Step 2 needs the explicit topological density of the scheme-image factor of a quasi-compact immersion, beyond the definition of dense refinement."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Step 4 uses dense-open dimension equality for finite-type schemes over a field to carry out the source prescribed dimension-control step."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Step 5 uses the generic extension-by-zero preservation theorem for intrinsic finite-coefficient constructibility and the unchanged Tor interval."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Step 5 uses the existing intrinsic pro-étale form of the source prescribed finite direct-image Tor estimate; this avoids applying an étale theorem to a pro-étale object."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Step 6 uses the generic bounded-constructible origin equivalence only to verify the domain of the canonical compactification comparison."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Step 6 uses the canonical comparison between two compactifications to return the bound to the original functor; the unit does not reconstruct compactification coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-dense-refinement",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-kun-dimension-extension",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-19548fdb7",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-19548fdb7 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement in full. This is an ordinary one-level split of a fresh Q61 child; there is no repair note for this item. The statement, stmt_deps and blueprint fields are byte-identical to live. There are no new nodes, and the item and its cites are not in route-pivot-dropped. The 7 steps carry the parent's preserved Original Steps 3–5 (Q61 report lines 89–112) completely: old 3 → new 1–4, old 4 → new 5, old 5 → new 6–7. Checks: (1) lemma-nagata-open-immersion-qc-over-separated-target on X→X̄_0→Y, with p_0 proper ⇒ separated ⇒ quasi-separated, gives j_0 quasi-compact. (2) Dense(c_0) via def-/prop-nagata-dense-refinement is a compactification of f; it lies in the Weil Comp(f) trivially (open immersion plus proper Y-morphism). lemma-nagata-immersion-open-in-scheme-image gives topological density. (3) X̄ finite type over k, elementary on affine charts. (4) lem-kun-dimension-extension, dense-open clause: dim X̄ = dim X ≤ d. def-kun-dimension equals the def-kun-topological-krull-dimension used by the corollary. (5) lem-trf-open-ctf is in the right setting (F̄_q, pro-étale, A_{E,n}). cor-sf-direct-image-ctf-proetale applies to intrinsic input with no origin needed and gives [a,b+2d]. (6) lem-sf-proetale-constructible-origin(ii) gives an étale-origin witness; prop-compactification-coherence-detailed then gives an iso Rp_*j_! ≅ Rf^{c_0}_! on that domain (K_0 = k, ℓ ≠ p). (7) Transport across the iso, using the all-module test of def-weil-finite-tor-amplitude; uniform in n and c_0. Edge cases checked: X empty; A¹→pt gives A_n[−2] in [0,2]; f = id; X̄_0 with extra high-dimensional components; nonreduced X. Separatedness of X and Y is never used. No duplicate: thm-sf-ctf-stability(iv) gives no interval and assumes separated schemes; the cor-sf-*, prop-finite-compact-support-constructibility and lem-fd-* nodes are étale, cohomological-range or unspecified-N results. split_report.tool_uses are accepted as generic tools; prop-compactification-coherence-detailed is on the route (sk-def-sf-operations). proof_deps equals the union of the step uses, and 6 dated searches were added. No SGA is cited and no fixes were made."
  }
 }
