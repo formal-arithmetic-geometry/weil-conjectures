@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Use the canonical small-to-full colimit comparison and its structural-map identity to apply the retained upstream regular divisor quotient theorem with divisor 0. Transport regularity back with the induced principal-quotient ring equivalence. The small-colimit quotient is the original strict henselization ring by the zero-ideal quotient equivalence; transfer Noetherianity across this equivalence. Obtain nontriviality from strictHenselizationLocalStructure, since IsLocalRing extends Nontrivial.",
+   "text": "Use the retained upstream proof for the full affine-neighbourhood colimit. The quotient R/(0) is isomorphic to R and hence regular. The canonical strict henselization is local and nontrivial; its zero element is a nonunit. Apply the regular-divisor quotient theorem with f = 0, obtain Noetherianity from regularity of the quotient, and transfer it across the zero-ideal quotient equivalence. For the small-colimit formulation in the sole consumer, comparison_base identifies the structural maps under smallStrictHenselizationColimitIso. Apply the retained theorem to b composed with this comparison and transfer Noetherianity along the inverse comparison by isNoetherianRing_of_ringEquiv.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient-regular",
     "lem-weil-pbc-strict-henselization-local-structure"
@@ -30,10 +30,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M1",
+  "group": "R4",
   "document": "Stacks Project",
-  "place": "Tags 04HX, 05WS, 06LJ, 06LN and 00NP; retirement of the duplicate Sheaf regular-divisor quotient theorem in favor of its proved upstream owner",
-  "note": "Preserve all upstream declarations and consumer signatures. The mathematical regularity node stays attached to its upstream theorem; both consumers perform the canonical quotient transport explicitly."
+  "place": "Tags 04HX, 06LJ and 06LN; canonical colimit comparison and Noetherianity transport",
+  "note": "Retire the proved duplicate in favor of the proved upstream owner. Preserve the mathematical node, its dependencies and the consumer signature; the consumer performs the canonical transport explicitly. No source-library file changes."
  },
  "mathlib_searches": [
   {
@@ -99,14 +99,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientNoetherian.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientNoetherian.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_noetherian_of_regular",
-  "statement": "theorem strictHenselizationRing_noetherian_of_regular\n    (R : CommRingCat.{u}) [IsRegularRing R]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    IsNoetherianRing (strictHenselizationRing barY)",
+  "statement": "theorem strictHenselizationRing_noetherian_of_regular\n    (R : CommRingCat.{u}) [IsRegularRing R]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    IsNoetherianRing (strictHenselization barY)",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-13"
+  "by": "R4",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module under coord/retire-items.tsv. The retained upstream theorem concerns the full affine-neighbourhood colimit. Its sole small-colimit consumer keeps its exact public signature: compose b with smallStrictHenselizationColimitIso, verify the structural-map equation by comparison_base, apply this upstream theorem, and transfer Noetherianity along the inverse ring equivalence."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -121,12 +122,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-d477a",
-  "group": "M1",
-  "result": "fix",
-  "landing": "20261021T061520-L-1784928",
+  "reviewer": "C-40f56",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T120516-L-3904630",
   "kind": "interface",
-  "note": "independent cc review: delivered Quotient/Noetherian/empty item vs live Sheaf modules and the upstream WeilConjectures twin; regular node lean record vs upstream theorem (verbatim); 4 importers of Quotient compiled; axioms clean"
+  "note": "independent cc review: delivered empty item + adapted StrictHenselRegularDivisorQuotient vs live clone and retire-items.tsv line 1891; node lean record vs upstream WeilConjectures theorem (verbatim); compile --all exit 0; axioms of consumer theorem clean"
  },
  "lean_audit": {}
 }

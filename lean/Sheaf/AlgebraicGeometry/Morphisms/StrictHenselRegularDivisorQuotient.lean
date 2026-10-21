@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
 
 /-! # The regular divisor quotient of the canonical strict henselization
@@ -84,15 +84,18 @@ theorem strictHenselization_regular_divisor_quotient
     IsNoetherianRing (strictHenselizationRing barY) ∧
       IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
       IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-  have hN := strictHenselizationRing_noetherian_of_regular R barY b hb
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb]
+    exact comparison_base barY
+  let : IsNoetherianRing (strictHenselization barY) :=
+    strictHenselizationRing_noetherian_of_regular R barY (b ≫ e.hom) hbe
+  have hN : IsNoetherianRing (strictHenselizationRing barY) :=
+    isNoetherianRing_of_ringEquiv _ e.symm.commRingCatIsoToRingEquiv
   have hQ :
       IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
         IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-    let e : strictHenselizationRing barY ≅ strictHenselization barY :=
-      smallStrictHenselizationColimitIso barY
-    have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
-      rw [Spec.map_comp, hb]
-      exact comparison_base barY
     have hg' : ¬ IsUnit ((b ≫ e.hom).hom f) := by
       intro h
       apply hg
