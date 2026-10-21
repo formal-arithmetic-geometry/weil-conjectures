@@ -14,9 +14,169 @@
   "def-weil-l-adic-numbers",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, use the empty family. If $n=1$, then $db=d^0b=0$; the embedding $\\iota$ is injective, so $z=0$, and the zero degree-zero cochain is already a primitive. Henceforth $S\\ne\\varnothing$ and $n\\geq2$. We construct a primitive on $S$ itself; the required cover will be the single identity map. Identify $\\Omega$ with its isometric image in $B=\\widehat\\Omega$ using [lem-sfb-normed-field-completion]. The strong triangle inequality holds in $\\Omega$: any two algebraic elements lie in one finite extension, where [lem-weil-l-adic-extension-absolute-value] applies. It holds in $B$ by passage to limits, as does scalar norm homogeneity over $\\mathbf Q_\\ell$.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Boundary cases and norm topologies."
+   }
+  },
+  {
+   "text": "Read the profinite set $S$ as a compact Hausdorff totally disconnected space; it has a basis of clopen sets by [lem-weil-pbc-profinite-clopen-basis]. By [lem-sfb-profinite-group-open-normal-subgroup-basis], the original compact Hausdorff totally disconnected group $G$ has a neighbourhood basis of open normal subgroups. Thus $S$ and $G$ satisfy the hypotheses of the next input. Apply [lem-sfb-profinite-metric-function-quotients], with $r=n$ and the product metric target $\\Omega\\times B$, to\n$$F(s;g_1,\\ldots,g_n)=(z(s;g_1,\\ldots,g_n),b(s;g_1,\\ldots,g_{n-1})).$$\nIt gives continuous surjections $p:S\\to S_0$, $q:G\\to G_0$, the latter a homomorphism, with $S_0,G_0$ metrizable profinite. The first component descends $z$; evaluating the last group argument at $1$ in the second component descends $b$. Its independence of that argument follows by surjectivity of $p,q$. Surjectivity on all powers shows $dz_0=0$ and $db_0=\\iota z_0$. A primitive on these quotients pulls back to the original spaces. Rename them $S,G,z,b$ in the rest of the proof.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-sfb-profinite-group-open-normal-subgroup-basis",
+    "lem-sfb-profinite-metric-function-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Simultaneous metrizable reduction of the cocycle and its given primitive."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] with $E=\\mathbf Q_\\ell$ and choose increasing closed finite fields $F_N$ covering $\\Omega$. Set\n$$f(s;g_0,\\ldots,g_n)=z(s;g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n).$$\nFor each $s$, the closed sets $f(s,-)^{-1}(F_N)$ cover the nonempty compact Hausdorff $G^{n+1}$. By [lem-sfb-baire-closed-cover-interior] one has nonempty interior. A product neighbourhood in that interior contains $Ha_0\\times\\cdots\\times Ha_n$ for some open normal subgroup $H$: intersect finitely many translated neighbourhoods of $1$ and apply [lem-sfb-profinite-group-open-normal-subgroup-basis]. Thus every $s$ has a certificate consisting of such a rectangle and a field $F_N$. No neighbourhood of $s$ is asserted to have that certificate.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-baire-closed-cover-interior",
+    "lem-sfb-profinite-group-open-normal-subgroup-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Countably many closed certificate sets; Stacks Tag 0CQN, lemma-baire-category-locally-compact."
+   }
+  },
+  {
+   "text": "A compact metric profinite space has a countable clopen basis: for each positive integer $t$, choose clopen neighbourhoods of diameter $<2^{-t}$ and take a finite subcover. The union of these finite covers is a basis. Every clopen subset is a finite union of basis members, by compactness. Apply this to $G$: there are countably many open subgroups and their cosets, hence countably many coset rectangles. Enumerate all rectangle/field pairs with nonempty certificate sets as $(B_j,N_j)$, $j\\geq1$, repeating entries if the list is finite, and put\n$$A_j=\\{s:f(s,B_j)\\subseteq F_{N_j}\\}.$$\nEach $A_j$ is closed, as an intersection of inverse images of the closed field $F_{N_j}$ under continuous evaluation maps. The preceding step gives $S=\\bigcup_{j\\geq1}A_j$, with every $A_j$ nonempty. Write $B_j=H_ja_{j,0}\\times\\cdots\\times H_ja_{j,n}$. Each $H_j$ has finite index: its disjoint open cosets cover compact $G$, hence admit a finite subcover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Countability from compactness and clopen bases."
+   }
+  },
+  {
+   "text": "Choose finite clopen partitions $\\mathcal P_t$ of $S$ refining each other, with all atom diameters $<2^{-t}$. Obtain them from finite clopen covers at each scale by taking their finite Boolean refinements and then common refinements. Map $S$ to $D=\\prod_t\\mathcal P_t$ by its atom at each level. This map $e$ is continuous. It is injective because the mesh tends to zero; its inverse on its image is continuous because fixing the $t$th coordinate confines the inverse to one atom of diameter $<2^{-t}$. For each $j$, $e(A_j)$ is compact and closed in the Hausdorff space $D$: a point outside this compact set has neighbourhoods separating it from each of its points, and finitely many of the latter neighbourhoods cover the set. Apply [lem-sfb-countable-discrete-product-closed-retraction] to the nonempty closed subset $e(A_j)\\subseteq D$. Restrict the resulting map to $e(S)$ and compose with $e^{-1}$. This gives a continuous $\\rho_j:S\\to A_j$ fixing $A_j$ pointwise.",
+   "uses": [
+    "lem-sfb-countable-discrete-product-closed-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Closed-parameter retractions using the exact Mathlib product theorem."
+   }
+  },
+  {
+   "text": "For $i\\geq1$ let $U_{j,i}$ be the union of the atoms of $\\mathcal P_i$ meeting $A_j$. These are clopen, decrease with $i$, and have intersection $A_j$: a point outside the closed $A_j$ has positive distance from it and is eventually in an atom disjoint from it. Let $k_i(s)$ be the least $j\\leq i$ with $s\\in U_{j,i}$, or $1$ when none exists. This is locally constant with finite range. For each $s$, let $j(s)$ be the least $j$ with $s\\in A_j$. Eventually all $j<j(s)$ are excluded from $U_{j,i}$, while $s\\in U_{j(s),i}$ always. Thus $k_i(s)=j(s)$ for all sufficiently large $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. A continuous finite-choice approximation with pointwise eventual stabilization."
+   }
+  },
+  {
+   "text": "For each rectangle $B_j$ choose the operator $T_j$ of [lem-sfb-finite-index-rectangle-primitive-operator], with $C_j=|[G:H_j]|_\\ell^{-1}$. It works for every coefficient field used below and for profinite parameter families. In particular, for every cocycle $c$ with homogeneous function zero on $B_j$, one has $dT_jc=c$. All $C_j$ are finite, even when the subgroup index is divisible by $\\ell$. Put $D_t=\\max(1,C_1,\\ldots,C_t)$ for $t\\geq1$ and $\\delta_i=2^{-i}/D_{i+1}$ for $i\\geq0$.",
+   "uses": [
+    "lem-sfb-finite-index-rectangle-primitive-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Rectangle primitives with arbitrary finite-index norm loss."
+   }
+  },
+  {
+   "text": "For every $N$, [lem-sfb-norm-one-finite-subfield-projection] gives a $\\mathbf Q_\\ell$-linear contraction $p_N:\\Omega\\to F_N$ fixing $F_N$. The finite field $F_N$ is complete by [lem-weil-l-adic-extension-complete]. Apply [lem-sfb-dense-subspace-contractive-extension] to the dense normed $\\mathbf Q_\\ell$-subspace $\\Omega\\subseteq B$, with target $F_N$. It extends $p_N$ to a linear contraction $P_N:B\\to F_N$, still fixing $F_N$. Density here is the defining density of the canonical inclusion in the metric completion; no continuous retraction $B\\to\\Omega$ is used.",
+   "uses": [
+    "lem-sfb-norm-one-finite-subfield-projection",
+    "lem-weil-l-adic-extension-complete",
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Extend only the finite-field projections, whose targets are complete."
+   }
+  },
+  {
+   "text": "For each $i\\geq0$, compactness of the images of $z$ and $b$ gives finite $\\delta_i$-nets with centres in $\\Omega$ (use its density in $B$ for the image of $b$). Choose strictly increasing $L_i\\geq i$ so that $F_{L_i}$ contains all these centres and $L_i\\geq N_j$ for $j\\leq i+1$. This is possible since the increasing $F_N$ cover $\\Omega$. Put $P_i=P_{L_i}$. If $a\\in F_{L_i}$ is a chosen centre within $\\delta_i$ of $x$, contractivity and $P_ia=a$ give\n$$|P_ix-x|\\leq\\max(|P_i(x-a)|,|a-x|)\\leq\\delta_i.$$\nConsequently $\\|P_iz-z\\|_\\infty\\leq\\delta_i$ and $\\|P_ib-b\\|_\\infty\\leq\\delta_i$. The same choice controls both maps and all the first $i+1$ rectangle constants.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Accelerate the field filtration to absorb unbounded subgroup indices."
+   }
+  },
+  {
+   "text": "Set $P_{-1}=0$, $e_i=(P_i-P_{i-1})z$ and $c_i=(P_i-P_{i-1})b$ for $i\\geq0$. All are continuous $F_{L_i}$-valued cochains; the linear coefficient maps commute with every finite sum in $d$, so $dc_i=e_i$ and $de_i=0$. Their telescoping sums are $\\sum_{h=0}^ie_h=P_iz\\to z$. For $i\\geq1$, both supremum norms are at most $\\max(\\delta_i,\\delta_{i-1})$. At any fixed input $(s,y)$ of $z$, $e_i(s,y)$ is eventually zero: the algebraic value $z(s,y)$ lies in one $F_N$ and both projections eventually fix it. This last assertion is made only for $z$, not for the completed primitive $b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Finite-field cochains with small norms and pointwise finite cocycle differences."
+   }
+  },
+  {
+   "text": "For $i\\geq1$ and $j\\leq i$ put $v_{i,j}=c_i-T_je_i$ and define\n$$B_{i,j}(s,x)=(T_je_i)(s,x)+v_{i,j}(s,x)-v_{i,j}(\\rho_j(s),x).$$\nThese are continuous $F_{L_i}$-valued cochains. At $a\\in A_j$, the homogeneous values of $z(a,-)$ on $B_j$ lie in $F_{N_j}$, which both $P_i$ and $P_{i-1}$ fix since $L_{i-1}\\geq N_j$. Thus the homogeneous function of $e_i(a,-)$ vanishes there. The rectangle operator gives $dT_je_i(a,-)=e_i(a,-)$, so $dv_{i,j}(a,-)=0$. Therefore\n$$dB_{i,j}=dT_je_i+(e_i-dT_je_i)-0=e_i.$$\nAlso $B_{i,j}(s,-)=T_je_i(s,-)$ for $s\\in A_j$, because $\\rho_j(s)=s$. Its supremum norm is at most $\\max(\\|c_i\\|_\\infty,C_j\\|e_i\\|_\\infty)$, by the ultrametric inequality and the operator bound.",
+   "uses": [
+    "lem-sfb-finite-index-rectangle-primitive-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Subtract a retracted cocycle to force agreement on the closed certificate set."
+   }
+  },
+  {
+   "text": "Let $b_0=c_0$. For $i\\geq1$ define $b_i(s,x)=B_{i,k_i(s)}(s,x)$. The finitely many clopen pieces of $k_i$ make this a continuous $F_{L_i}$-valued cochain with $db_i=e_i$. Since $k_i(s)\\leq i$, the preceding bound and $D_i\\max(\\delta_i,\\delta_{i-1})\\leq2^{-(i-1)}$ give $\\|b_i\\|_\\infty\\leq2^{-(i-1)}$. Here $D_i\\delta_{i-1}=2^{-(i-1)}$ and $D_i\\delta_i\\leq2^{-i}$. Fix $(s,x)$. Eventually $k_i(s)=j(s)$ and $s\\in A_{j(s)}$, so\n$$b_i(s,x)=T_{j(s)}e_i(s,x)=\\sum_{a=1}^{u_{j(s)}}\\alpha_{j(s),a}e_i(s,\\psi_{j(s),a}(x)).$$\nThis is one fixed finite list of evaluations. Each term is eventually zero by step 10. Hence $b_i(s,x)=0$ for all sufficiently large $i$.",
+   "uses": [
+    "lem-sfb-finite-index-rectangle-primitive-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Clopen assembly, uniform smallness and the separate pointwise-finiteness argument."
+   }
+  },
+  {
+   "text": "The partial sums $\\sum_{i=0}^Nb_i$ are uniformly Cauchy into the complete field $B$: by the ultrametric inequality every tail has norm at most the largest norm of its terms, and those norms tend to zero. Their pointwise limits therefore give a uniform limit $b_*:S\\times G^{n-1}\\to B$. For continuity, approximate $b_*$ uniformly within any prescribed positive error by one continuous partial sum and use the strong triangle inequality near the point in question. Step 12 makes every value a finite sum in $\\Omega$; the isometric subspace topology then makes $b_*$ continuous into $\\Omega$ itself. At a fixed input $d$ is a finite sum of evaluations, so\n$$db_*=\\lim_Nd\\Big(\\sum_{i=0}^Nb_i\\Big)=\\lim_NP_Nz=z.$$\nPull back this cochain by $p\\times q^{n-1}$ from step 2. It is a genuine $\\Omega$-valued continuous primitive on the original $S$. Choose $S_1=S$, $u_1=\\mathrm{id}_S$. This proves the requested assertion with actual equality of cochains.",
+   "uses": [
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of coefficient-completion boundary descent. Uniform convergence is used only in the completion; pointwise finiteness restores the original field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-sfb-profinite-group-open-normal-subgroup-basis",
+  "lem-sfb-profinite-metric-function-quotients",
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-baire-closed-cover-interior",
+  "lem-sfb-countable-discrete-product-closed-retraction",
+  "lem-sfb-finite-index-rectangle-primitive-operator",
+  "lem-sfb-norm-one-finite-subfield-projection",
+  "lem-weil-l-adic-extension-complete",
+  "lem-sfb-dense-subspace-contractive-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), original analytical expansion; the blueprint supplies only the open-direct-image application. Closed-parameter retractions, accelerated finite-field projections and finite-index rectangle operators give the argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -138,10 +298,88 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: continuousCohomology supplies definitions and functoriality, Hilbert 90 concerns multiplicative finite Galois degree one, and completion hits only construct Cp and its isometric inclusion; none gives local parameterwise boundary descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicAlgCl\"",
+   "results": {
+    "t": "2026-10-21T20:21:04Z",
+    "tool": "loogle",
+    "query": "\"PadicAlgCl\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PadicAlgCl",
+     "PadicAlgCl.nontriviallyNormedField",
+     "PadicAlgCl.normedField",
+     "PadicAlgCl.instCoePadic",
+     "PadicAlgCl.valued",
+     "PadicAlgCl.normedAlgebra",
+     "PadicAlgCl.charZero",
+     "PadicAlgCl.isUltrametricDist"
+    ],
+    "digest": "b882c56fb5cc7da2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: normed algebraic-closure declarations, continuous cohomology definitions and abstract coboundary criteria do not give this parameterwise boundary descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous algebraic p adic valued cocycle that is a boundary in Cp admits a continuous algebraic valued primitive",
+   "results": {
+    "t": "2026-10-21T20:21:05Z",
+    "tool": "leansearch",
+    "query": "A continuous algebraic p adic valued cocycle that is a boundary in Cp admits a continuous algebraic valued primitive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff",
+     "Padic.adicCompletionEquiv",
+     "CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff",
+     "groupCohomology.coboundaries₁_le_cocycles₁",
+     "PadicAlgCl.isAlgebraic",
+     "mahler",
+     "PadicAlgCl"
+    ],
+    "digest": "048e90e2ffa0d575"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: normed algebraic-closure declarations, continuous cohomology definitions and abstract coboundary criteria do not give this parameterwise boundary descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cohomology of a profinite group with algebraic closure Qp norm coefficients injects into its completion for continuous profinite parameter families",
+   "results": {
+    "t": "2026-10-21T20:21:06Z",
+    "tool": "leanfinder",
+    "query": "Continuous cohomology of a profinite group with algebraic closure Qp norm coefficients injects into its completion for continuous profinite parameter families",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_injective",
+     "InfiniteGalois.algEquivToLimit_continuous",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul",
+     "cyclotomicCharacter.continuous",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply",
+     "PadicInt.mahlerEquiv",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul_apply",
+     "PadicInt.continuousAddCharEquiv"
+    ],
+    "digest": "dab1b3acebe4b5e5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: normed algebraic-closure declarations, continuous cohomology definitions and abstract coboundary criteria do not give this parameterwise boundary descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-procyclic-scalar-cochain-evaluation",
@@ -170,5 +408,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
+  "worker": "stage1",
+  "summary": "Proves the unchanged boundary-descent assertion, in fact globally on S, from countable closed finite-field certificates, finite-index finite-evaluation rectangle primitives, closed-parameter retractions and rapidly convergent projected completed primitives. Separately proves uniform convergence and pointwise finiteness. Adds one generic unsplit cochain operator and one exact Mathlib product-retraction leaf. No Lean writing or compilation. Repair of returned head 4625203a82e: supply the previously reviewer-added open-normal-subgroup basis as a searched worker-delivered Mathlib leaf; cite it before checking the quotient lemma hypotheses and when selecting rectangles. All existing cited nodes are unchanged on the current DAG.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3): scalar analytic base below the procyclic open-direct-image comparison. The imported created-node ancestry has from.node=null; the source paragraph does not itself assert this analytic input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O4-cf17b6091",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-cf17b6091 (reviewer sub-agent of L); spot-checked: I read the item's 13 steps, all three new nodes, every cited statement and the source paragraph in full: main-20261015 direct-images paragraph (3), where the analytic lemma is agent-formulated with a WANTED reference. The mathematics holds. Step 1 handles empty S and n=1 (d^0=0 and ι is injective, so z=0). Step 3 obtains a coset rectangle by Baire plus the open-normal basis. Step 4 shows A_j is closed, the A_j cover S, and [G:H_j] is finite. Step 5 gives the retraction rho_j by PiNat.exists_retraction_subtype_of_isClosed (PiNat.lean 680-687, discrete factors at 342, exact). Step 6 shows k_i(s)=j(s) eventually. Steps 8-10 extend the projections because the targets F_N are complete, and give |P_i x - x| <= delta_i, dc_i=e_i, and e_i eventually 0 pointwise. Step 11 gives dB_{i,j}=e_i at every s, also off A_j, using L_{i-1}>=N_j. Step 12 gives D_i delta_{i-1}=2^{-(i-1)} and stabilisation of the finite evaluation sums. Step 13 takes the uniform limit in B, recovers values in Omega from the pointwise finite sums, and gets db_*=z. New nodes: (a) lem-sfb-finite-index-rectangle-primitive-operator is true. For G finite, H=1 the classical 1/|G| contraction works, and for n=1 T=0 works. It is not lem-sfb-bounded-finite-evaluation-rectangle-replacement, which needs m prime to ell, and it is not a clause of the item. (b) The PiNat retraction leaf is exact. (c) lem-sfb-profinite-group-open-normal-subgroup-basis is exact: ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one, ClopenNhdofOne.lean 48-54. No DAG duplicates. Batch-5: lem-sfb-algcl-countable-closed-finite-cover reaches only lem-trf-irreducible-separable-derivative (Polynomial.separable_iff_derivative_ne_zero). That is generic field theory, not part of the trace formula or Poincare duality, so accepted. FIX (C1/E1): the quotient lemma in step 2 assumes S has a clopen basis, but the item only says S is a profinite set. The prior FIX on 4625203a cited lem-weil-pbc-profinite-clopen-basis here, and this re-delivery dropped it. I restored that citation in step 2's text and uses and in proof_deps; nothing else changed. Maintainer note: the prime-to-ell bounded-replacement node could later be derived from the new operator node.; 1 file(s) fixed by the reviewer"
  }
 }
