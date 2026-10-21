@@ -20014,3 +20014,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:51 L: returned deliver/Q11/lem-sfb-scalar-model-finite-flat-resolution (reviewer RETURN: L: independent stage-2 immutable head 3881ef0399cf: H13: the delivered record for def-sf-site-constant-module-functor re)
 - 03:51 L: returned deliver/Q56/lem-sp-finite-ring-action-local-constancy (reviewer RETURN: L: independent stage-2 immutable head a05421e5cef3: H3 (special case, universe too small): the statement requires [Small)
 - 03:51 L: merged deliver/NK/lem-weil-pbc-formal-exact-projection-mate (reviewer PASS; first push; new nodes: 0)
+- 03:51 L: merged deliver/Q14/lem-sfb-projection-comparison-etale-proetale (reviewer PASS; first push; new nodes: 0)
