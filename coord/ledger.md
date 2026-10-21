@@ -23802,3 +23802,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:37 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 21:37 L: merged deliver/NQ/lem-pur-vector-integration-site-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 21:39 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 21:40 L: merged deliver/NH/lem-sfb-countable-split-profinite-cover (reviewer FIX; first push; new nodes: 0)
