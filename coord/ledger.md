@@ -23236,3 +23236,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T17:48:05Z L: superseded stage-1 delivery NZ/sk-thm-pe-indetale-refinement at 1382904a666060c0ea34baa79e95259103c138cd; current completion retained; packet archived at refs/superseded/NZ/sk-thm-pe-indetale-refinement/1382904a666060c0ea34baa79e95259103c138cd; stale return retired.
 - 17:49 L: merged deliver/N5/lem-sfb-prime-to-ell-condensed-acyclicity (reviewer PASS; first push; new nodes: 2)
 - 17:49 L: merged deliver/Q18/lem-coef-residue-controlled-finite-homs (stage 2; reviewer PASS; parallel immutable checks)
+- 17:50 L: merged deliver/S4/Sheaf.Paper.DerivedPullbackTensorHom (stage 3; reviewer PASS; first push; landing 20261021T175009-L-3961883 (interface); batch 20261021T175005; modules 1; new nodes 0; change records: coord/changes/S4-derived-operations-private-proof-context.md)
