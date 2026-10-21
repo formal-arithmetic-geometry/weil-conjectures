@@ -3,30 +3,83 @@
  "blueprint": {
   "is": "def-weil-punctual-weights",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Punctual weights",
- "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, $k_0=\\Fq$,\nand let $k=\\Fbar$ be the fixed algebraic closure of $k_0$. Fix a prime\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$\nof $\\Ql$, and fix an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let\n$Y_0$ be a finite-type $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and let\n$\\mathcal F$ be a constructible $\\Qlb$-sheaf in the constructible heart,\ncarrying the Weil-sheaf structure. For each closed point $y\\in|Y_0|$, use the\nclosed-point notation [def-weil-point-counts-zeta], set $q_y=\\#\\kappa(y)$,\nchoose an embedding $\\kappa(y)\\hookrightarrow k$, and choose a geometric\npoint $\\bar y\\to Y$ above $y$ (the eigenvalues of $F_y$ do not depend on these choices, by [lem-weil-local-frobenius-conjugacy-class]). Let $F_y$ be the local geometric-Frobenius\noperator [def-weil-local-frobenius-trace] on $\\mathcal F_{\\bar y}$. For\n$w\\in\\mathbf R$, call $\\mathcal F$ punctually $\\iota$-pure of weight $w$ if\nevery eigenvalue $\\alpha$ of every $F_y$ satisfies\n\n$$\n |\\iota(\\alpha)|=q_y^{w/2}.\n$$\n\nCall $\\mathcal F$ $\\iota$-mixed of weights at most $w$ if there are an\ninteger $m\\geq0$, constructible $\\Qlb$-Weil subsheaves\n\n$$\n 0=\\mathcal F_0\\subset\\mathcal F_1\\subset\\cdots\\subset\\mathcal F_m=\\mathcal F,\n \\qquad w_1,\\ldots,w_m\\in\\mathbf R,\\quad w_r\\leq w,\n$$\n\nsuch that each quotient $\\mathcal F_r/\\mathcal F_{r-1}$ is punctually\n$\\iota$-pure of weight $w_r$.",
+ "statement": "Use the finite-field datum [def-weil-finite-field-fiber]. Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, $k_0=\\Fq$,\nand let $k=\\Fbar$ be the fixed algebraic closure of $k_0$. Fix a prime\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], choose an algebraic closure $\\Qlb$\nof $\\Ql$ [def-weil-algebraic-closure], and fix an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let\n$Y_0$ be a finite-type [def-weil-finite-type-morphism] $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and let\n$\\mathcal F$ be a constructible $\\Qlb$-sheaf in the constructible heart [def-weil-constructible-heart],\ncarrying the Weil-sheaf structure [def-weil-weil-sheaf-complex]. For each closed point $y\\in|Y_0|$, use the\nclosed-point notation [def-weil-point-counts-zeta], set $q_y=\\#\\kappa(y)$,\nchoose a $k_0$-embedding $\\kappa(y)\\hookrightarrow k$, and let\n$\\bar y:\\operatorname{Spec}k\\to Y$ be the associated geometric point over $k$. Let $F_y$ be the local geometric-Frobenius\noperator [def-weil-local-frobenius-trace] on $\\mathcal F_{\\bar y}$. At $\\Qlb$, use the same local-operator composite with derived pullbacks and the iterated point transport of [def-weil-frobenius-point-transport], formed in the common-stage categories [def-weil-algebraically-closed-coefficients]. Apply the point-fiber functor [def-weil-finite-coefficient-point] and degree-zero cohomology [def-weil-coefficient-cohomology-modules]; thus a point complex represented by $C_E$ over a finite extension $E/\\Ql$ contained in $\\Qlb$ has actual stalk $\\mathrm H^0(C_E)\\otimes_E\\Qlb$. The point transports are natural and compatible with finite coefficient extension [lem-weil-frobenius-point-transport-natural]. The spectrum is taken for this $\\Qlb$-linear local operator. A scalar $\\alpha\\in\\Qlb$ is an eigenvalue when $F_y(v)=\\alpha v$ for some nonzero stalk vector $v$. For\n$w\\in\\mathbf R$, call $\\mathcal F$ punctually $\\iota$-pure of weight $w$ if\nevery eigenvalue $\\alpha$ of every $F_y$ satisfies\n\n$$\n |\\iota(\\alpha)|=q_y^{w/2}.\n$$\n\nHere the absolute value is the complex absolute value [def-weil-complex-absolute-value], and the exponent uses the positive real power [def-weil-real-power].\n\nCall $\\mathcal F$ $\\iota$-mixed of weights at most $w$ if there are an\ninteger $m\\geq0$, constructible $\\Qlb$-Weil subsheaves\n\n$$\n 0=\\mathcal F_0\\subset\\mathcal F_1\\subset\\cdots\\subset\\mathcal F_m=\\mathcal F,\n \\qquad w_1,\\ldots,w_m\\in\\mathbf R,\\quad w_r\\leq w,\n$$\n\nsuch that each quotient $\\mathcal F_r/\\mathcal F_{r-1}$ is punctually\n$\\iota$-pure of weight $w_r$.\n\nThe inclusions in the filtration mean monomorphisms of the underlying constructible heart that commute with the Weil structures. The quotient is the cokernel in that heart with its induced Weil structure: geometric-Frobenius pullback is exact on the heart [lem-a1-constructible-pullback-t-exact]. In particular the inclusions need not be strict. The eigenvalues are independent of the chosen embedding and associated geometric point, by [lem-weil-local-frobenius-conjugacy-class] at a common finite stage, followed by the point-transport compatibility with finite coefficient extension stated above. Conjugacy preserves eigenvalues: an intertwining isomorphism takes a nonzero eigenvector to a nonzero eigenvector with the same eigenvalue, and its inverse gives the converse.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-readout/def-weil-punctual-weights.md",
   "place": "node def-weil-punctual-weights, order 2554"
  },
  "stmt_deps": [
-  "def-weil-point-counts-zeta",
-  "lem-weil-local-frobenius-conjugacy-class",
-  "def-weil-local-frobenius-trace",
-  "def-weil-constructible-heart",
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-point-counts-zeta",
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-point-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-coefficient-point",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-weil-local-frobenius-conjugacy-class"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPunctuallyPureOfWeight|IsMixedOfWeightsAtMost|WeilSheaf",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "punctual purity and mixed weight bounds of constructible l-adic Weil sheaves",
+   "results": "Hits: PrimeSpectrum.ConstructibleSetData.degBound, CategoryTheory.SheafOfTypes.adhesive, LightCondensed, BoundingSieve.weights_nonneg, CategoryTheory.instAdhesiveSheafOfHasPullbacksOfHasPushoutsOfHasSheafify, BoundingSieve.weights, NumberField.mixedEmbedding.minkowskiBound_lt_top, LieModule.Weight.instFinite. No hit defines punctual purity or mixedness of constructible Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue, CategoryTheory.Subobject",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "punctually pure constructible Weil sheaf local Frobenius eigenvalues and mixed weights finite filtration",
+   "results": "Hits: IsArithFrobAt.arithFrobAt, WittVector.isocrystal_classification, IsArithFrobAt.exists_of_isInvariant, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.instModuleFractionRingStandardOneDimIsocrystal, LieModule.finite_genWeightSpace_ne_bot, WittVector.Isocrystal.toModule, LieModule.finite_genWeightSpaceOf_ne_bot. No hit defines punctual purity or mixedness of constructible Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|mixed.*weight|Weil.*sheaf",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil sheaf pure weight absolute value Frobenius eigenvalues residue cardinality",
+   "results": "Hits: Height.totalWeight, AlgHom.IsArithFrobAt.card_pos, IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.isocrystal_classification. No hit defines punctual purity or mixedness of constructible Weil sheaves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -79,5 +132,20 @@
   "group": "NX",
   "result": "fix",
   "note": "Head 890dc936 = returned 4d595ece + report text only (item .lean, delivered AdicPunctualWeights.lean, node records byte/JSON-identical). 4d59 FIX was lost to a landing 60 s timeout on unrelated base side module DerivedPullbackTensorHom (batch 20261018-213717). Item sfQuasiFiniteCompactSupport re-checked against node/source order 3161: relative IsSeparated, Stacks IsQuasiFinite, Y0 finite type + QuasiSeparated, arbitrary Compactification, vanishing for i>0 outside iota, mixed and punctual-upper clauses for any iota : Omega ->+* C with the same iota on both sides; statement verbatim, single sorry, docstrings with source and 10 steps, universes independent; added stmt_deps are used definitions. FIX: withdraw the unneeded 1(B) edit of AdicPunctualWeights (stale galoisFiniteUnit reason; WeilMixedUpperBounds now imports AdicHeartIntrinsicFibres and DerivedPullbackTensorHom itself; delivered text would delete ~35 public imports added to live at 2026-10-19 00:09 and inline the canonical sfAdicCoefficientEmbedding). fixes/AdicPunctualWeights.lean = current live text (cmp identical); report fix adds a maintainer section. nt_compile --json: fixed set 5.1/5.5 s clean; delivered set 3.9/4.7 s clean; delivered dep + ConstantExtensionWeilHeartEquivalence/ExtensionByZeroPunctual/WeilMixedUpperBounds clean (the earlier importer break no longer reproduces). Maintainer: --revert-nodes def-weil-punctual-weights keeps Q52's record; retry at lower load if a base side module times out again rather than returning to NX."
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-weil-punctual-weights",
+  "worker": "stage1",
+  "summary": "Audited the two weight predicates as a definition. Retained real weights, all closed points, geometric Frobenius and the finite Weil filtration. Made the common-stage Qbar stalk/operator and scalar-extension convention explicit, named the underlying heart/Weil categories and the absolute-value/real-power notions, and explained the monomorphism/quotient convention. Reused existing nodes throughout; no new nodes. Upstream pro-etale predicates are not attached to the different common-stage coefficient model.",
+  "blueprint": "main-20261015, def-weil-punctual-weights, order 2898: initial datum, local Frobenius and purity display, mixed-filtration display, and final choice-independence sentence. This is a definition, not the key proposition of sk-p-readout; no unit realization fields are changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-ff3dae9e0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-ff3dae9e0 (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read the item and the full statements of all 17 stmt_deps against main-20261015 order 2898 (diffed with master 2554). There are no new nodes. The item is still imported and unreviewed live; it is not in route-pivot-dropped.txt and has no repair note. The statement keeps every hypothesis and both predicates of the source. It makes four things precise. (1) ybar is the point associated to a k0-embedding, the only case def-weil-local-frobenius-trace defines; eigenvalues do not depend on the choice. (2) F_y at Qbar is the same composite formed stagewise in C_Y, through the Qbar clauses of point-transport, derived-pullback, Fib_s and coefficient cohomology, on H^0(C_E) tensor_E Qbar; degree 0 holds by lem-a1. (3) An eigenvalue is defined by a nonzero eigenvector. (4) Quotients are heart cokernels with the induced Weil structure. Citation checks: lem-weil-frobenius-point-transport-natural (2) supplies the scalar-extension compatibility of iota^{E'}, which identifies the Qbar operator with F_y^{(L)} tensor Qbar. lem-weil-local-frobenius-conjugacy-class is applied at a stage L where theta^{-1} exists, then tensored to Qbar; an intertwiner preserves eigenvalues. lem-a1-constructible-pullback-t-exact applies to g_Y as a k-morphism from (Y, Spec gamma o a_Y) to (Y, a_Y); the t-structure depends only on the scheme and the lemma's proof never uses k-linearity. It gives canonical Weil structures on cokernels. No cycle in any stmt_dep closure. Duplicates: def-weil-frobenius-module-weights, sk-d-real-weights and sk-d-dl-general-weights are not duplicates; the last cites the item. Batch-5: both flagged nodes, lem-weil-isomorphism-derived-pullback-comparison-normalization (generic normalization of pullback along scheme isomorphisms) and lem-pod-texact-truncation-comparison (an abstract statement about t-exact functors and truncations), were already in the base closure through def-weil-weil-sheaf-complex and def-weil-constructible-heart. Neither is part of the proof of the trace formula or Poincare duality. The 7 nodes the delivery adds to the closure contain no trace-formula or Poincare-duality node. Accepted. Edge cases checked: empty Y_0 or zero sheaf (pure of every weight, m=0 filtration), rank-one sheaf on Spec k0, a direct sum of two weights (mixed but not pure), E-irreducible characteristic polynomials (all Qbar roots counted), zero quotients. Advisories, not faults: source still names master order 2554; same_as could list sk-d-dl-general-weights as a partial restatement."
  }
 }

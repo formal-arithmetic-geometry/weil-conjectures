@@ -20695,3 +20695,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:31 L: merged deliver/NG/lem-weil-pbc-flat-common-quotient-reduction-tower (reviewer PASS; after a return; new nodes: 1)
 - 07:31 L: merged deliver/Q79/lem-weil-pbc-lisse-lattice-reduced-open (reviewer FIX; first push; new nodes: 0)
 - 07:31 L: merged deliver/NM/lem-weil-pbc-tower-derived-evaluation-normalization (reviewer PASS; after a return; new nodes: 2)
+- 07:32 L: merged deliver/Q67/def-weil-punctual-weights (reviewer PASS; first push; new nodes: 0); claim not held by Q67: not your claim
