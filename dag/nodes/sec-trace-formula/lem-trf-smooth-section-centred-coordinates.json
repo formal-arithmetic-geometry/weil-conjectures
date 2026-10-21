@@ -2,7 +2,7 @@
  "id": "lem-trf-smooth-section-centred-coordinates",
  "kind": "statement",
  "title": "Centred smooth-section coordinates and their conormal monomials",
- "statement": "Let $S$ be a Noetherian scheme (one admitting a finite affine cover by spectra of Noetherian rings), let $d\\geq0$, and let $g:V\\to S$ be smooth, separated and of finite type of pure relative dimension $d$, with a closed section $s:S\\hookrightarrow V$, $g s=1_S$.\nThere is a Zariski open cover by affine $S_i=\\operatorname{Spec}R_i\\subseteq S$ and affine open neighbourhoods $U_i=\\operatorname{Spec}B_i\\subseteq V\\times_SS_i$ containing $s(S_i)$, with separated etale $S_i$-maps $e_i:U_i\\to\\mathbf A^d_{S_i}$ carrying $s$ to zero, such that $e_i^{-1}(0)=s(S_i)$ scheme-theoretically. Writing $P_i=R_i[x_1,\\ldots,x_d]$ and $J_i=(x_1,\\ldots,x_d)$, the induced $P_i\\to B_i$ is etale and flat, $I_i=J_iB_i$ is the section ideal, and $B_i/I_i=R_i$ by the section augmentation. The sequence of images of $x_1,\\ldots,x_d$ is regular: multiplication by $x_j$ is injective modulo its predecessors. The empty sequence is allowed for $d=0$. Moreover, with $\\mathcal I$ the ideal sheaf of $s(S)$ and $\\mathcal E=\\mathcal I/\\mathcal I^2$ regarded on $S$, $s$ is a regular immersion of codimension $d$, $\\mathcal E$ is locally free of rank $d$, and the canonical multiplication map\n$$\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)\\xrightarrow{\\sim}\\bigoplus_{m\\geq0}\\mathcal I^m/\\mathcal I^{m+1}$$\nis an isomorphism. On each chart its degree-$m$ map sends a basis monomial in $[x_j]$ to the class of the same monomial in $I_i^m/I_i^{m+1}$; these identifications commute with restriction.\nThe scheme, morphism, algebra and coefficient notation and the specified comparison maps are those of [def-pc-scheme], [def-weil-pbc-noetherian-ring], [def-sbc-smooth-morphisms], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-closed-immersion], [def-weil-etale-morphism], [def-sbc-affine-space], [def-sbc-closed-immersion-ideal-sheaf], [lem-pur-conormal-graded-algebra], [def-weil-pbc-regular-sequence].",
+ "statement": "Let $S$ be a Noetherian scheme (one admitting a finite affine cover by spectra of Noetherian rings), let $d\\geq0$, and let $g:V\\to S$ be smooth, separated and of finite type of pure relative dimension $d$, with a closed section $s:S\\hookrightarrow V$, $g s=1_S$.\nThere is a Zariski open cover by affine $S_i=\\operatorname{Spec}R_i\\subseteq S$ and affine open neighbourhoods $U_i=\\operatorname{Spec}B_i\\subseteq V\\times_SS_i$ containing $s(S_i)$, with separated etale $S_i$-maps $e_i:U_i\\to\\mathbf A^d_{S_i}$ carrying $s$ to zero, such that $e_i^{-1}(0)=s(S_i)$ scheme-theoretically. Writing $P_i=R_i[x_1,\\ldots,x_d]$ and $J_i=(x_1,\\ldots,x_d)$, the induced $P_i\\to B_i$ is etale and flat, $I_i=J_iB_i$ is the section ideal, and $B_i/I_i=R_i$ by the section augmentation. The sequence of images of $x_1,\\ldots,x_d$ is regular: multiplication by $x_j$ is injective modulo its predecessors. The empty sequence is allowed for $d=0$. Moreover, with $\\mathcal I$ the ideal sheaf of $s(S)$ and $\\mathcal E=\\mathcal I/\\mathcal I^2$ regarded on $S$, $s$ is a regular immersion of codimension $d$, $\\mathcal E$ is locally free of rank $d$, and the canonical multiplication map\n$$\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)\\xrightarrow{\\sim}\\bigoplus_{m\\geq0}\\mathcal I^m/\\mathcal I^{m+1}$$\nis an isomorphism. On each chart its degree-$m$ map sends a basis monomial in $[x_j]$ to the class of the same monomial in $I_i^m/I_i^{m+1}$; these identifications commute with restriction.\nThe scheme, morphism, algebra and coefficient notation and the specified comparison maps are those of [def-pc-scheme], [def-weil-pbc-noetherian-ring], [def-sbc-smooth-morphisms], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-closed-immersion], [def-weil-etale-morphism], [def-sbc-affine-space], [def-sbc-closed-immersion-ideal-sheaf], [lem-pur-conormal-graded-algebra], [def-weil-pbc-regular-sequence].\nRegular closed immersions of a specified codimension are as in [def-per-regular-closed-immersion-codimension], and base change is [def-pc-base-change].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
   "place": "Local construction, centred coordinates and regular-coordinate algebra; old item Steps 1–2. Stacks 054L/lemma-smooth-etale-over-affine-space, 024T/proposition-properties-sections, 067U/lemma-immersion-smooth-into-smooth-regular-immersion."
@@ -20,11 +20,174 @@
   "def-sbc-affine-space",
   "def-sbc-closed-immersion-ideal-sheaf",
   "lem-pur-conormal-graded-algebra",
-  "def-weil-pbc-regular-sequence"
+  "def-weil-pbc-regular-sequence",
+  "def-per-regular-closed-immersion-codimension",
+  "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $t\\in S$. Apply [lem-sc-standard-smooth-local-relative-dimension] to $g$ at $s(t)$, using the given pure relative dimension $d$. Obtain affine opens $U_0\\subseteq V$ and $T\\subseteq S$ containing $s(t)$ and $t$, with $g(U_0)\\subseteq T$, and a standard-smooth ring map of relative dimension $d$. Apply [lem-sc-standard-smooth-etale-polynomial-chart] to get an etale $T$-map $e_0:U_0\\to\\mathbf A^d_T$. The composite with projection is $g|_{U_0}$. This fixes the number of coordinates as the given $d$, rather than an unspecified local dimension.",
+   "uses": [
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space; Tag 02G2, definition-smooth-relative-dimension"
+   }
+  },
+  {
+   "text": "The open $s^{-1}(U_0)\\subseteq T$ contains $t$. By [lem-weil-pbc-affine-opens-basis], choose an affine open $T_1$ containing $t$ inside it. Replace $U_0$ by $U_1=U_0\\times_TT_1$, which is affine by [lem-weil-pbc-fibre-product-affine-spectra]. The section now lands in $U_1$ on all of $T_1$. The base-changed chart is etale by [lem-weil-pbc-etale-base-change-finite-limits]. Write $a_j=s^*e_0^*x_j\\in\\Gamma(T_1,\\mathcal O_{T_1})$. Compose the chart with the translation $x_j\\mapsto x_j-a_j$ of affine space, whose inverse is $x_j\\mapsto x_j+a_j$. Isomorphisms are open immersions, hence etale, and etale maps compose by [lem-weil-pbc-etale-composition-cancellation]. We obtain an etale map $e:U_1\\to\\mathbf A^d_{T_1}$ with $es=0$. Since $U_1$ is affine, [lem-weil-pbc-affine-source-morphism-separated] says that $e$ is separated.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, first sentence; affine refinements use Stacks 01IT/lemma-basis-affine-opens and 01I4/lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "Put $F=U_1\\times_{\\mathbf A^d_{T_1}}T_1$, where $T_1\\to\\mathbf A^d_{T_1}$ is zero. The map $F\\to T_1$ is etale by [lem-weil-pbc-etale-base-change-finite-limits] and separated by [lem-weil-pbc-separated-base-change]. The equation $es=0$ gives a section $T_1\\to F$. Apply [lem-weil-pbc-etale-section-clopen-immersion]: this section identifies $T_1$ with an open and closed subscheme of $F$. Since $F\\subseteq U_1$ is the closed subscheme cut out by the coordinate functions, the complementary subset $F\\setminus s(T_1)$ is closed in $U_1$. Remove it, obtaining an open $W$ containing the section. Then $F\\times_{U_1}W=s(T_1)$ as schemes, not just as sets: on the clopen section component the map to $T_1$ is the inverse isomorphism supplied by the cited section lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, inverse image of zero, clopen section and removal of its complement; Stacks 024T/proposition-properties-sections"
+   }
+  },
+  {
+   "text": "Choose an affine open $W_0\\subseteq W$ containing $s(t)$ by [lem-weil-pbc-affine-opens-basis]. Choose an affine open $S_i\\subseteq s^{-1}(W_0)\\subseteq T_1$ containing $t$, by the same lemma. Set $U_i=W_0\\times_{T_1}S_i$. This is affine by [lem-weil-pbc-fibre-product-affine-spectra], is open in $V\\times_SS_i$, and contains $s(S_i)$. The restricted map $e_i:U_i\\to\\mathbf A^d_{S_i}$ is etale by open-immersion composition and base change, using [lem-weil-pbc-etale-composition-cancellation] and [lem-weil-pbc-etale-base-change-finite-limits]; it is separated by [lem-weil-pbc-affine-source-morphism-separated]. The zero fibre remains exactly $s(S_i)$ by the fibre-product universal property [def-pc-fibre-product]. Doing this for every $t$ gives the required Zariski cover. Each selected $S_i$ is nonempty. If $S$ is empty, take the empty cover. No intersection of two arbitrary affine opens has been assumed affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT/lemma-basis-affine-opens and 01I4/lemma-fibre-product-affine-schemes; affine refinement of the blueprint Local construction"
+   }
+  },
+  {
+   "text": "Write $S_i=\\operatorname{Spec}R_i$, $U_i=\\operatorname{Spec}B_i$ and $P_i=R_i[x_1,\\ldots,x_d]$, $J_i=(x_1,\\ldots,x_d)$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the chart ring map $P_i\\to B_i$ is etale; it is flat by [lem-weil-pbc-etale-algebra-flat]. By [lem-weil-pbc-fibre-product-affine-spectra] the zero fibre has ring $B_i\\otimes_{P_i}(P_i/J_i)=B_i/J_iB_i$: the explicit mutually inverse maps are $b\\otimes\\bar p\\mapsto bp\\bmod J_iB_i$ and $\\bar b\\mapsto b\\otimes1$. Its identification with the section says exactly that the section augmentation $B_i\\to R_i$ induces $B_i/J_iB_i\\simeq R_i$. Consequently the section ideal is $I_i=J_iB_i$, also the affine ideal of [def-sbc-closed-immersion-ideal-sheaf].",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GJ/lemma-etale-characterize; algebra.tex Tag 00U2/lemma-etale; schemes.tex Tag 01I4/lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "For $1\\leq j\\leq d$, the ring $Q_j=P_i/(x_1,\\ldots,x_{j-1})$ is the polynomial ring $R_i[x_j,\\ldots,x_d]$. Multiplication by $x_j$ on $Q_j$ is injective: it shifts the exponent of $x_j$ in each coefficient, so a product with zero coefficients has zero coefficients before shifting. Apply [lem-trf-flat-tensor-preserves-injection] over $P_i$, with flat module $B_i$, to this $P_i$-linear injection. Identify $B_i\\otimes_{P_i}Q_j$ with $B_i/(x_1,\\ldots,x_{j-1})B_i$ by $b\\otimes\\bar p\\mapsto bp$ and $\\bar b\\mapsto b\\otimes1$. Under these inverse maps the tensor injection is precisely multiplication by the image of $x_j$. Thus the coordinate list is weakly regular. Its final quotient is $R_i\\ne0$, since $S_i$ contains $t$, so it is a regular sequence in the full convention [def-weil-pbc-regular-sequence]. For $d=0$ the list is empty and the same final quotient argument applies.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LF/definition-regular-sequence; flat preservation of injections, then the coordinate polynomial calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-regular-sequence-graded-polynomial] to $B_i$ and the coordinate sequence of Step 6. Since $B_i/I_i=R_i$, it gives a graded isomorphism $R_i[T_1,\\ldots,T_d]\\simeq\\operatorname{gr}_{I_i}(B_i)$ with $T_j\\mapsto[x_j]_1$. Its degree-one clause says that $[x_1],\\ldots,[x_d]$ is an $R_i$-basis of $I_i/I_i^2$; its degree-$m$ formula sends each monomial $T^\\alpha$ to $[x^\\alpha]_m$, and says these classes are an $R_i$-basis. The statement includes $m=0$ and the empty sequence.",
+   "uses": [
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN/lemma-regular-quasi-regular, part (1), and 061N/equation-quasi-regular"
+   }
+  },
+  {
+   "text": "Regard $U_i$ as an affine open of $V$ (the base $S_i\\subseteq S$ is open). Its section kernel is generated by the length-$d$ regular list from Step 6. At every point of the section these are precisely the affine local equations required by [def-per-regular-closed-immersion-codimension]. Thus $s$ is a regular closed immersion of codimension $d$. The affine degree-one identification of [lem-pur-conormal-graded-algebra] identifies $\\mathcal E|_{S_i}$ with the sheaf associated to $I_i/I_i^2$; applying [lem-sc-affine-conormal-frame] to the basis of Step 7 gives a free frame of length $d$. Hence $\\mathcal E$ is locally free of rank $d$. For the empty source the local assertions are vacuous.",
+   "uses": [
+    "def-per-regular-closed-immersion-codimension",
+    "lem-pur-conormal-graded-algebra",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 063J/definition-regular-immersion and 0633/lemma-affine-conormal-sheaf; morphisms.tex Tag 01R3/lemma-affine-conormal"
+   }
+  },
+  {
+   "text": "Use the canonical multiplication map $\\psi:\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)\\to\\mathcal G$ specified by [lem-pur-conormal-graded-algebra]; both its affine identifications and its degree-one generator formula are part of that statement. The same node gives quasi-coherence of $\\mathcal E=\\mathcal G_1$, so [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine] identifies the source on $S_i$ with $\\operatorname{Sym}_{R_i}(I_i/I_i^2)$. Use the basis of Step 7 and [lem-weil-pbc-symmetric-algebra-free-module-polynomial] to identify this with $R_i[T_1,\\ldots,T_d]$. The resulting map agrees with Step 7 on every $T_j$, hence agrees on all polynomials by addition and multiplication; it is therefore bijective on sections over $S_i$. Its formula on a degree-$m$ basis monomial is the asserted $[x^\\alpha]_m$.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0631/equation-conormal-in-degree-n, 0632/equation-conormal-algebra-quotient, 0633/lemma-affine-conormal-sheaf; algebra.tex Tag 00LN and symmetric algebra Section 00DM"
+   }
+  },
+  {
+   "text": "The chartwise bijections of Step 9 are restrictions of the single map $\\psi$. Explicitly restriction sends $[a_1]\\cdots[a_m]$ to $[a_1|]\\cdots[a_m|]=[(a_1\\cdots a_m)|]$, since restriction is a ring homomorphism and preserves ideal powers. Thus the monomial descriptions commute with restriction, including on overlaps where the chosen coordinate bases differ. Both $\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)$ (by [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine]) and $\\mathcal G$ (by [lem-pur-conormal-graded-algebra]) are quasi-coherent, $\\psi$ is a morphism of $\\mathcal O_S$-modules, and the affine opens $S_i$ cover $S$. Since $\\psi$ is bijective on sections over every $S_i$ by Step 9, [lem-weil-pbc-quasi-coherent-iso-on-affine-cover] shows that $\\psi$ is an isomorphism of $\\mathcal O_S$-modules, hence of graded algebras, and so in every degree $m$. For $d=0$ one has $I_i=0$, so the graded algebra and symmetric algebra are both $R_i$ in degree zero and zero in positive degrees, with the displayed map the identity.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0631 and 0632, multiplication and restriction in the conormal algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-algebra-flat",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "def-per-regular-closed-immersion-codimension",
+  "lem-pur-conormal-graded-algebra",
+  "lem-sc-affine-conormal-frame",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, centred etale coordinates; detailed affine refinements and regular-coordinate algebra using Stacks 054L, 024T, 01IT, 01I4, 00LN and 0633."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +230,59 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'; 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: identifier rejected; retried with SmoothOfRelativeDimension and Etale"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth separated morphism with a section has centred etale coordinates and polynomial associated graded section ideal",
+   "results": "; 8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.instEtaleRing, StandardEtalePresentation, StandardEtalePair.instFormallyEtaleRing, Algebra.instEtaleOfIsStandardEtale, Algebra.instIsStandardEtaleRing. Standard-smooth chart hits cover only a preliminary step, already represented in the DAG.",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*(conormal|regular)|conormal.*section|centred|centered",
+   "results": "; 25 hits: Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Pi.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/Algebra/Regular/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/Topology/Algebra/InfiniteSum/Constructions.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth section centred etale coordinates regular ideal symmetric conormal algebra",
+   "results": "; 8 hits: Trivialization.contMDiffOn_section_iff, Trivialization.contMDiffWithinAt_section, ContMDiffSection.ctorIdx, Algebra.FormallyEtale.of_unramified_and_smooth, ContMDiffSection, Algebra.smoothLocus, Algebra.etaleLocus, ContMDiffSection.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension, AlgebraicGeometry.Etale",
+   "results": "; 3 hits: AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero, AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale charts along a section of a smooth scheme, with the section equal to the inverse image of zero",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instIsSmooth, StandardEtalePair.hasMap_X, Algebra.isOpen_etaleLocus. Standard-smooth chart hits cover only a preliminary step, already represented in the DAG.",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_mvPolynomial|exists_isStandardSmoothOfRelativeDimension|iff_smoothOfRelativeDimension_zero",
+   "results": "; 14 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration states the centred-section chart, regular ideal and graded-algebra package"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -92,5 +304,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-smooth-section-centred-coordinates",
+  "worker": "stage1",
+  "summary": "Reused existing DAG tools throughout: constructed centred affine charts by base restriction, coordinate translation, clopen zero-fibre excision and a second affine refinement; proved coordinate regularity by flat tensoring the polynomial multiplication injections, then used the existing regular-sequence graded polynomial theorem and conormal/symmetric-algebra comparisons. No new nodes. Checked full regular-sequence nonzero quotient, empty base and d=0. Preserved the mathematical statement, adding only explicit definition references.",
+  "blueprint": "Realizes lem-trf-local-term-locality proof (2), normal-cone specialization, via the section-deformation chain in blueprint.from: the Local construction in sk-thm-dnc needed by the ambient diagonal purity input. Steps 1-5 supply the centred Cartesian pairs; Steps 6-10 supply regular-coordinate/conormal algebra. No change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-standard-smooth-local-relative-dimension",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-sc-standard-smooth-etale-polynomial-chart",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-sc-affine-conormal-frame",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Generic scheme or commutative-algebra tool for centred charts and their conormal algebra; this auxiliary geometric construction is not replaced by another trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+    "why": "Generic quasi-coherent-module tool: a morphism of quasi-coherent modules bijective on an affine cover is an isomorphism; used to pass from the chartwise bijection of the conormal symmetric-algebra map to the sheaf isomorphism. No trace-formula unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-conormal-graded-algebra",
+  "lem-sc-affine-conormal-frame",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-b2c02eb10",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-b2c02eb10 (reviewer sub-agent of L); spot-checked: Read the item, the inherited statement against the base (only a definition-reference sentence was added, with def-per-regular-closed-immersion-codimension and def-pc-base-change in stmt_deps; nothing weakened), all 21 cited statements, and the main-20261015 sk-thm-dnc Local construction. The item is still unsplit on live and side-live, has no repair note and is not on the dropped list. There are no new nodes. Steps 1-4 realize the blueprint Local construction with a Zariski cover: standard-smooth chart of exact relative dimension d; affine refinement U_0 x_T T_1; translation to centre the section; zero fibre etale and separated, so the section is clopen by etale-section-clopen and the complement is removed; second affine refinement through a fibre product over an affine base, so E1 is respected. I checked that gs=1 gives s^{-1}(U_i)=S_i and that the zero fibre is exactly s(S_i). Steps 5-8 are correct: etale implies flat; B_i/J_iB_i=R_i via s^#; regularity from flat tensoring of the polynomial injections with nonzero final quotient R_i; graded-polynomial theorem; regular immersion of codimension d; free conormal frame of rank d. FIX, C1/C4 at Steps 9-10: Step 9 proves psi bijective only on sections over each affine S_i, but Step 10 glued 'inverses' as if psi|S_i were already a sheaf isomorphism. Repaired by citing the existing lem-weil-pbc-quasi-coherent-iso-on-affine-cover (Sym(E) and G are both quasi-coherent by the cited symmetric-affine and conormal nodes). Step 10 is now non-elementary; proof_deps and tool_uses are updated. Edge cases checked: S empty, d=0, non-reduced base, several zero-fibre components. No duplicate: lem-pur-smooth-pair-local-coordinates and lem-pur-smooth-pair-regular-immersion are general, with no centring and no Sym iso. The declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
