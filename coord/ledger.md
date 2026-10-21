@@ -19856,3 +19856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:36 L: merged deliver/Q75/lem-sfb-etale-proetale-scalar-counit-transposes (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T03:37:05Z L: superseded stage-1 delivery Q60/det-ctf-finite-proper-localizing at 3bf827d5d10ad68e5d7fcd25f48c8d397df26266; current completion retained; packet archived at refs/superseded/Q60/det-ctf-finite-proper-localizing/3bf827d5d10ad68e5d7fcd25f48c8d397df26266; stale return retired.
 - 03:37 L: returned deliver/NR/lem-weil-integral-scalar-extension-well-defined (reviewer RETURN: G1/D (re-split note of the human, 2026-10-21, strengthened wording 'every argument the old proof carries must reappear a)
+- 03:37 L: merged deliver/Q49/lem-sf-semilinear-proper-open-mate-pasting (reviewer FIX; after a return; new nodes: 6)
