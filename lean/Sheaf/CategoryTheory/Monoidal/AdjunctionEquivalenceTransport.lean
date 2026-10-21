@@ -2,6 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
 # Transport of lax structures and adjunction mates along monoidal equivalences
@@ -20,6 +21,52 @@ universe u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄
 namespace CategoryTheory
 
 open MonoidalCategory
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal Functor.Monoidal
+
+/-- Lift the unit and tensorator through a fully faithful strong monoidal functor.
+Faithfulness reduces coherence to the given composite lax structure. -/
+@[instance_reducible]
+private noncomputable def liftLax
+    {A : Type u₁} [Category.{v₁} A] [MonoidalCategory A]
+    {B : Type u₂} [Category.{v₂} B] [MonoidalCategory B]
+    {A' : Type u₃} [Category.{v₃} A'] [MonoidalCategory A']
+    (E : A ⥤ A') [E.Full] [E.Faithful] [E.Monoidal]
+    (R : B ⥤ A) [(R ⋙ E).LaxMonoidal] : R.LaxMonoidal where
+  ε := E.preimage (η E ≫ ε (R ⋙ E))
+  μ X Y := E.preimage (δ E (R.obj X) (R.obj Y) ≫ μ (R ⋙ E) X Y)
+  μ_natural_left {X Y} g Z := by
+    apply E.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, map_whiskerRight,
+      Category.assoc, μ_δ_assoc]
+    exact congrArg (δ E (R.obj X) (R.obj Z) ≫ ·) (μ_natural_left (R ⋙ E) g Z)
+  μ_natural_right {X Y} Z g := by
+    apply E.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, map_whiskerLeft,
+      Category.assoc, μ_δ_assoc]
+    exact congrArg (δ E (R.obj Z) (R.obj X) ≫ ·) (μ_natural_right (R ⋙ E) Z g)
+  associativity X Y Z := by
+    apply E.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, map_whiskerLeft,
+      map_whiskerRight, Category.assoc, comp_whiskerRight,
+      MonoidalCategory.whiskerLeft_comp, μ_δ_assoc]
+    rw [← Functor.OplaxMonoidal.associativity_assoc]
+    exact congrArg
+      (δ E (R.obj X ⊗ R.obj Y) (R.obj Z) ≫
+        δ E (R.obj X) (R.obj Y) ▷ E.obj (R.obj Z) ≫ ·)
+      (Functor.LaxMonoidal.associativity (R ⋙ E) X Y Z)
+  left_unitality X := by
+    apply E.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, map_whiskerRight,
+      map_leftUnitor, Category.assoc, comp_whiskerRight, μ_δ_assoc]
+    exact congrArg (δ E (𝟙_ A) (R.obj X) ≫ η E ▷ E.obj (R.obj X) ≫ ·)
+      (Functor.LaxMonoidal.left_unitality (R ⋙ E) X)
+  right_unitality X := by
+    apply E.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, map_whiskerLeft,
+      map_rightUnitor, Category.assoc, MonoidalCategory.whiskerLeft_comp, μ_δ_assoc]
+    exact congrArg (δ E (R.obj X) (𝟙_ A) ≫ E.obj (R.obj X) ◁ η E ≫ ·)
+      (Functor.LaxMonoidal.right_unitality (R ⋙ E) X)
 
 /-- Transport of a lax right-adjoint structure, including uniqueness and the exact tensor
 and unit identities for its left-adjoint oplax mate.
@@ -105,6 +152,84 @@ theorem exists_unique_laxMonoidal_adjunction_equivalence_transport
         (∀ X Y : A,
           IsIso ((@Adjunction.leftAdjointOplaxMonoidal A _ _ B _ _ L R adj r).δ X Y)) ∧
         IsIso (@Adjunction.leftAdjointOplaxMonoidal A _ _ B _ _ L R adj r).η) := by
-  sorry
+  let := e.toMonoidal
+  let := f.toMonoidal
+  let h : (R ⋙ E).LaxMonoidal := Functor.LaxMonoidal.transport β.symm
+  let r : R.LaxMonoidal := liftLax E R
+  have hε : e.εIso.hom ≫ E.map (ε R) ≫ β.hom.app (𝟙_ B) =
+      ε R' ≫ R'.map f.εIso.hom := by
+    change ε E ≫ E.map (E.preimage (η E ≫ ε (R ⋙ E))) ≫ _ = _
+    simp [h, Functor.LaxMonoidal.transport_ε, comp_ε]
+    rfl
+  have hμ (Y Z : B) : (e.μIso (R.obj Y) (R.obj Z)).hom ≫ E.map (μ R Y Z) ≫
+      β.hom.app (Y ⊗ Z) = (β.hom.app Y ⊗ₘ β.hom.app Z) ≫
+        μ R' (F.obj Y) (F.obj Z) ≫ R'.map (f.μIso Y Z).hom := by
+    change μ E _ _ ≫ E.map (E.preimage (δ E _ _ ≫ μ (R ⋙ E) Y Z)) ≫ _ = _
+    simp [h, Functor.LaxMonoidal.transport_μ, comp_μ]
+    rfl
+  have hu (X : A) : E.map (adj.unit.app X) ≫ β.hom.app (L.obj X) =
+      adj'.unit.app (E.obj X) ≫ R'.map (γ.inv.app X) := by
+    simpa [Adjunction.homEquiv_unit] using hcompat X (L.obj X) (𝟙 _)
+  have ht (X Y : A) : F.map (adj.leftAdjointOplaxMonoidal.δ X Y) =
+      γ.hom.app (X ⊗ Y) ≫ L'.map (e.μIso X Y).inv ≫
+        adj'.leftAdjointOplaxMonoidal.δ (E.obj X) (E.obj Y) ≫
+          (γ.inv.app X ⊗ₘ γ.inv.app Y) ≫ (f.μIso (L.obj X) (L.obj Y)).hom := by
+    apply (cancel_epi (γ.inv.app (X ⊗ Y))).mp
+    simp only [Iso.inv_hom_id_app_assoc]
+    apply (adj'.homEquiv _ _).injective
+    rw [← hcompat]
+    simp only [Adjunction.leftAdjointOplaxMonoidal_δ, Equiv.apply_symm_apply]
+    rw [adj'.homEquiv_naturality_left, adj'.homEquiv_naturality_right,
+      Equiv.apply_symm_apply]
+    rw [Functor.map_comp, map_tensor]
+    simp only [Functor.map_comp, Category.assoc]
+    change δ E X Y ≫ (E.map (adj.unit.app X) ⊗ₘ E.map (adj.unit.app Y)) ≫
+      (e.μIso _ _).hom ≫ E.map (μ R _ _) ≫ _ = _
+    dsimp only [Functor.comp_obj]
+    rw [hμ (L.obj X) (L.obj Y), tensorHom_comp_tensorHom_assoc, hu, hu]
+    rw [← tensorHom_comp_tensorHom_assoc]
+    have hn := μ_natural R' (γ.inv.app X) (γ.inv.app Y)
+    dsimp only [Functor.comp_obj] at hn
+    rw [reassoc_of% hn]
+    rfl
+  have hη : F.map adj.leftAdjointOplaxMonoidal.η =
+      γ.hom.app (𝟙_ A) ≫ L'.map e.εIso.inv ≫
+        adj'.leftAdjointOplaxMonoidal.η ≫ f.εIso.hom := by
+    apply (cancel_epi (γ.inv.app (𝟙_ A))).mp
+    simp only [Iso.inv_hom_id_app_assoc]
+    apply (adj'.homEquiv _ _).injective
+    rw [← hcompat]
+    simp only [Adjunction.leftAdjointOplaxMonoidal_η, Equiv.apply_symm_apply]
+    rw [adj'.homEquiv_naturality_left, adj'.homEquiv_naturality_right,
+      Equiv.apply_symm_apply]
+    rw [← cancel_epi e.εIso.hom]
+    simpa only [Category.assoc, Iso.hom_inv_id_assoc] using hε
+  refine ⟨r, hε, hμ, ?_, ?_, ?_, ?_⟩
+  · intro s hsε hsμ
+    apply Functor.LaxMonoidal.ext
+    · apply E.map_injective
+      apply (cancel_epi e.εIso.hom).mp
+      apply (cancel_mono (β.hom.app (𝟙_ B))).mp
+      simpa only [Category.assoc] using hsε.trans hε.symm
+    · funext Y Z
+      apply E.map_injective
+      apply (cancel_epi (e.μIso (R.obj Y) (R.obj Z)).hom).mp
+      apply (cancel_mono (β.hom.app (Y ⊗ Z))).mp
+      simpa only [Category.assoc] using (hsμ Y Z).trans (hμ Y Z).symm
+  · exact ht
+  · exact hη
+  · rintro ⟨hδ, hη'⟩
+    constructor
+    · intro X Y
+      have := hδ (E.obj X) (E.obj Y)
+      have : IsIso (F.map (adj.leftAdjointOplaxMonoidal.δ X Y)) := by
+        rw [ht]
+        infer_instance
+      exact isIso_of_fully_faithful F _
+    · have := hη'
+      have : IsIso (F.map adj.leftAdjointOplaxMonoidal.η) := by
+        rw [hη]
+        infer_instance
+      exact isIso_of_fully_faithful F _
 
 end CategoryTheory
