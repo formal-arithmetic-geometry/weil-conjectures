@@ -115,25 +115,32 @@
  ],
  "proof": [
   {
-   "text": "Use the transported small-model leg and its two projection identities from [def-weil-pbc-small-strict-local-section-maps] in place of unfolding the retired duplicate definition. The representative restriction formula and all existing mathematical hypotheses remain unchanged.",
+   "text": "Compose global-to-terminal sections, inverse coefficient comparison, inverse composition comparison, restriction along pullback symmetry and terminal-object transport, using the adopted source construction on strictLocalizationToBase.",
    "uses": [
-    "def-weil-pbc-small-strict-local-section-maps"
+    "lem-sc-etale-module-set-pullback-comparison",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-small-strict-local-section-maps"
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "def-pc-fibre-product"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalModuleSectionsSetTransport.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalModuleSectionsSetTransport.lean",
   "declaration": "AlgebraicGeometry.Etale.strictLocalModuleSectionsSetEquiv",
-  "statement": "def strictLocalModuleSectionsSetEquiv (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let H := (sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ))).obj F ((Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) ≃ ((Scheme.etaleSetPullback (pullback.snd (Scheme.strictHenselizationStructuralMap s) f)).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 _)))",
+  "statement": "def strictLocalModuleSectionsSetEquiv (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let H := (sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ))).obj F ((Sheaf.Γ (pullback f (Scheme.strictLocalizationToBase s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictLocalizationToBase s))).obj F)) ≃ ((Scheme.etaleSetPullback (pullback.snd (Scheme.strictLocalizationToBase s) f)).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 _)))",
   "branch": "sheaf-dag",
-  "by": "T1",
-  "date": "2026-10-13"
+  "by": "R2",
+  "date": "2026-10-22",
+  "note": "Retire the Sheaf twin in favour of the adopted source declaration on strictLocalizationToBase. The small-model consumer preserves its unchanged type using the general isomorphism-transport lemma, rather than assuming the two schemes are definitionally equal."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -148,12 +155,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-59f3f",
-  "group": "E3",
+  "reviewer": "C-0633c",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261021T183343-L-1605786",
+  "landing": "20261021T203817-L-3875636",
   "kind": "interface",
-  "note": "independent cc review: Retirement of the Sheaf twin of SetsPushforwardStalkStrictHenselization against the WeilConjectures twin; the new small-model transport map's _fst/_snd lemmas match the old pullback.lift components, so the 4 changed consumer statements are unchanged in meaning; change record lists all edited unclaimed modules; 8 delivered modules plus 5 external direct importers compiled in sandbox; axioms clean"
+  "note": "independent cc review: existing:true lean records of both item nodes vs the adopted WeilConjectures StrictLocalModuleSectionsSetTransport declarations (verbatim); new node lean.statement vs exists_moduleSectionsIsoTransport; adapted QcqsStrictLocalRestrictionBijective signature vs clone; sandbox set compile of all three delivered modules with #print axioms (clean)"
  },
  "lean_audit": {}
 }

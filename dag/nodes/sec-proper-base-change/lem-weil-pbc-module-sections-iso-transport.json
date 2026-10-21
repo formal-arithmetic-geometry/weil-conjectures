@@ -1,0 +1,153 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient forgetting and inverse-image units"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient forgetting and inverse-image units"
+ },
+ "id": "lem-weil-pbc-module-sections-iso-transport",
+ "kind": "statement",
+ "title": "Coefficient and terminal section transport along any scheme isomorphism",
+ "statement": "Let Λ be a commutative ring, X,A,B schemes, σ:A≅B, h:B→X and g:A→X with σ≫h=g, and F a sheaf of Λ-modules on X [def-weil-pbc-etale-sheaves]. Let H be its underlying set sheaf. There exists an equivalence Γ(A,g*F)≃(h⁻¹H)(B→B). For every etale object U→X, morphism v:B→U over X and section z∈F(U), it carries the module inverse-image unit of z restricted along the graph of σ≫v and then identified with global sections to the set inverse-image unit of z restricted along the graph of v. No geometric point, strict localization or qcqs assumption is needed. Inverse images are those of [def-weil-pbc-inverse-image], and graphs are pullback lifts [def-pc-fibre-product].",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the equivalence from global-to-terminal sections, coefficient comparison, inverse-image composition, restriction along σ, and transport of the terminal object. These are concrete isomorphisms for any σ over X.",
+   "uses": [
+    "lem-sc-etale-module-set-pullback-comparison",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient comparison is the adjoint transpose of the forgotten module unit. Apply the homEquiv unit identity and the inverse comparison to identify the forgotten module unit with the set unit. Naturality of this inverse comparison moves it past restriction to the terminal object.",
+   "uses": [
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the composition-unit equation for h and σ together with σ≫h=g. Naturality carries restriction to the terminal object through the inverse comparison. The pullback pasting isomorphism has the required projections.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the restriction comparison unit equation and naturality. After terminal-object transport, both projections of the composite restriction agree with the graph of v. Pullback extensionality identifies them. Cancel the coefficient and terminal section comparisons and evaluate at z.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport",
+  "date": "2026-10-22",
+  "group": "R2"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "proof_deps": [
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "def-pc-fibre-product"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Underived exchange proof: canonical coefficient and pullback-symmetry transport in the strict-local degree-zero comparison",
+   "via": [
+    "lem-weil-pbc-strict-local-module-sections-set-transport",
+    "lem-weil-pbc-strict-local-module-restriction-bijective",
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "lem-weil-pbc-qcqs-geometric-exchange-factorization",
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image unit naturality and forgetting module coefficients for terminal sheaf sections along pullback symmetry",
+   "results": "Eight hits about SheafOfModules units and free objects and global sections; none states transport for constant-coefficient etale sheaves along arbitrary scheme isomorphisms.",
+   "date": "2026-10-22",
+   "verdict": "Use existing coefficient, composition and restriction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "Found in Mathlib.CategoryTheory.Adjunction.Basic; supplies the coefficient-unit identity.",
+   "date": "2026-10-22",
+   "verdict": "Use the adjunction hom equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocalModuleSectionsSetEquiv|strictLocalModuleSections_set_transport",
+   "results": "msearch returned zero hits. Local rg finds two fixed strict-local presentations and one consumer, with no generic isomorphism section-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "General theorem needed to preserve the small-model consumer while retiring duplicate public names."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of schemes over X identifies global sections of inverse image of module sheaves with terminal sections of the underlying set sheaf, compatibly with inverse image units",
+   "results": "Eight hits about scheme structure-sheaf sections and Zariski sheaves of modules, including Hom.appIso and Modules.instIsIsoAbApp; none gives constant-coefficient etale transport with its unit equation.",
+   "date": "2026-10-22",
+   "verdict": "No replacement; prove the general comparison from the existing etale APIs."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSectionsIsoTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSectionsIsoTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_moduleSectionsIsoTransport",
+  "statement": "theorem exists_moduleSectionsIsoTransport (Λ : Type (u + 1)) [CommRing Λ] {X A B : Scheme.{u}} (σ : A ≅ B) (h : B ⟶ X) (g : A ⟶ X) (hg : σ.hom ≫ h = g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let H := (sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ))).obj F ∃ e : ((Sheaf.Γ A.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F)) ≃ ((Scheme.etaleSetPullback h).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 B))), ∀ (U : X.Etale) (v : B ⟶ U.left) (hv : v ≫ U.hom = h) (z : F.obj.obj (op U)), let dA : Scheme.Etale.mk (𝟙 A) ⟶ (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U := MorphismProperty.Over.homMk (pullback.lift (σ.hom ≫ v) (𝟙 A) (by exact (Category.assoc σ.hom v U.hom).trans ((congrArg (fun k ↦ σ.hom ≫ k) hv).trans (hg.trans (Category.id_comp g).symm)))) (pullback.lift_snd _ _ _) let dB : Scheme.Etale.mk (𝟙 B) ⟶ (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).obj U := MorphismProperty.Over.homMk (pullback.lift v (𝟙 B) (by exact hv.trans (Category.id_comp h).symm)) (pullback.lift_snd _ _ _) e (ConcreteCategory.hom (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F).hom.app (op U) ≫ ((upperStar (ModuleCat.{u + 1} Λ) g).obj F).obj.map dA.op ≫ (Sheaf.ΓNatIsoSheafSections A.smallEtaleTopology (ModuleCat.{u + 1} Λ) (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ A) (Scheme.Etale.mk (𝟙 A)) Over.mkIdTerminal)).inv.app _) z) = ((Scheme.etaleSetPullback h).obj H).obj.map dB.op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h) (Type (u + 1)) (X.smallGrothendieckTopology @AlgebraicGeometry.Etale) (B.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app H).hom.app (op U) z)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0633c",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261021T203817-L-3875636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0633c",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261021T203817-L-3875636",
+  "kind": "interface",
+  "note": "independent cc review: existing:true lean records of both item nodes vs the adopted WeilConjectures StrictLocalModuleSectionsSetTransport declarations (verbatim); new node lean.statement vs exists_moduleSectionsIsoTransport; adapted QcqsStrictLocalRestrictionBijective signature vs clone; sandbox set compile of all three delivered modules with #print axioms (clean)"
+ }
+}

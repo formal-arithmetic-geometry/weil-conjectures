@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
-import Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport
+import Sheaf.AlgebraicGeometry.ModuleSectionsIsoTransport
 import WeilConjectures.AlgebraicGeometry.CofilteredEtaleLimitSections
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
 
@@ -92,8 +92,11 @@ theorem bijective_qcqsStrictLocalRestriction_of_formula
   let : PreservesFilteredColimitsOfSize.{u, u} U :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} U
   let γ := (Scheme.pointSmallEtale s).sheafFiberCompIso U
-  let e := strictLocalModuleSectionsSetEquiv Λ f s F
-  have he := strictLocalModuleSections_set_transport Λ f s F
+  obtain ⟨e, he⟩ := exists_moduleSectionsIsoTransport Λ
+    (pullbackSymmetry f (strictHenselizationStructuralMap s))
+    (pullback.snd (strictHenselizationStructuralMap s) f)
+    (pullback.fst f (strictHenselizationStructuralMap s))
+    (pullbackSymmetry_hom_comp_snd f (strictHenselizationStructuralMap s)) F
   let Pset := (((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
     (Type (u + 1)) (Y.smallGrothendieckTopology @Etale)
     (X.smallGrothendieckTopology @Etale)).obj H).obj
@@ -200,7 +203,10 @@ theorem bijective_qcqsStrictLocalRestriction_of_formula
       have h := ConcreteCategory.congr_hom (ha j) z
       change ConcreteCategory.hom a _ = _ at h
       erw [h]
-      exact he j z
+      exact he (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1))
+        (smallStrictHenselizationBaseChangeMap f s j)
+        (smallStrictHenselizationBaseChangeMap_snd f s j) z
     funext z
     obtain ⟨j, z, rfl⟩ := Types.jointly_surjective_of_isColimit hcStalk' z
     exact hcomponents j.unop z
