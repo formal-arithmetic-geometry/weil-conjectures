@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-def-av",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sc-abelian-variety"
+  ]
  },
  "kind": "definition",
  "title": "Abelian varieties",
@@ -12,13 +14,73 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av/_section.md",
   "place": "node sk-def-av, order 530"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sc-abelian-variety",
+  "def-pc-dimension"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety is a proper smooth connected group scheme over a field and its dimension is its Krull dimension",
+   "results": "WeierstrassCurve.instInhabitedSubtypeIsElliptic; WeierstrassCurve; WeierstrassCurve.Affine.Point.instAddCommGroup; WeierstrassCurve.Affine; Algebra.IsStandardSmoothOfRelativeDimension.out; WeierstrassCurve.instInhabited; Algebra.IsStandardSmoothOfRelativeDimension.id; AlgebraicGeometry.IsAffine",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|IsAbelianScheme|complete group variety",
+   "results": "none (0 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian variety over a field is a proper smooth connected group scheme",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.isProper_iff; LibraryNote.Design_choices_about_smooth_algebraic_structures; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsProper; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsEtale; Ab",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\"",
+   "results": "none (0 hits)",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "grep",
+   "query": "class GrpObj|class IsProper|class Smooth|class ConnectedSpace|def topologicalKrullDim",
+   "results": "Mathlib/CategoryTheory/Monoidal/Grp.lean:43 CategoryTheory.GrpObj; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:42 AlgebraicGeometry.IsProper; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:62 AlgebraicGeometry.Smooth; Mathlib/Topology/Connected/Basic.lean:705 ConnectedSpace; Mathlib/Topology/KrullDimension.lean:39 topologicalKrullDim; also unrelated IsProper and Smooth classes. These component definitions were read.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group objects in the category of schemes over a field proper smooth connected abelian varieties dimension",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.Scheme; AlgebraicGeometry.Scheme.GrpObjAsOverPullback; AlgebraicGeometry.instIsAffineTerminalScheme; AlgebraicGeometry.instCategoryAffineScheme; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group object in schemes over Spec of a field whose structure map is proper and smooth and whose underlying topological space is connected, with dimension",
+   "results": "AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf; AlgebraicGeometry.Scheme; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.IsAffine; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.isField_of_universallyClosed",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\"",
+   "results": "CategoryTheory.AddGrpObj; CategoryTheory.GrpObj; CategoryTheory.AddGrpObj.neg; CategoryTheory.GrpObj.inv; CategoryTheory.AddGrpObj.instIsIsoNeg; CategoryTheory.AddGrpObj.instTensorAddUnit; CategoryTheory.AddGrpObj.ofIso; CategoryTheory.AddGrpObj.toAddMonObj",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole definition; component notions only"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -39,5 +101,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-def-av",
+  "worker": "stage1",
+  "summary": "Definition split using the existing definition of an abelian variety, including its group-scheme structure (def-sc-abelian-variety), and existing scheme dimension (def-pc-dimension). The statement is unchanged. No new nodes or proof steps. Read the source and repeated the Mathlib search in two phrasings; no exact Mathlib leaf for the entire terminology bundle. The project predicate IsAbelianVariety alone omits group structure, so the rejected attachment is not repeated.",
+  "blueprint": "The entire defining paragraph of main-20261015 sk-def-av: the group-scheme/proper/smooth/connected predicate and complete-group-variety terminology are def-sc-abelian-variety; g := dim A uses def-pc-dimension. This definition has no unit proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-982b3e5c0",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-982b3e5c0 (reviewer sub-agent of L); spot-checked: Pass, no repairs. sk-def-av is a definition split with no proof steps; I diffed the item and unit against the side-live versions. The statement is verbatim the sk-def-av node in main-20261015 sec-abelian-varieties/sk-def-av/_section.md (order 530); only status, stmt_deps, same_as, mathlib_searches, split_report and the unit's realized and realized_by fields changed. stmt_deps [def-sc-abelian-variety, def-pc-dimension] are right. def-sc-abelian-variety, in the same unit, states the whole group-scheme/proper/smooth/connected predicate and the complete-group-variety synonym. def-pc-dimension gives dim of a nonempty scheme; A is nonempty because of its identity section. A definition from another unit is a notion, not route. The item nearly duplicates def-sc-abelian-variety but adds g := dim A, which its only citer sk-def-av-jacobian uses, so recording same_as is enough and no merge is needed. Edge cases check out: Spec k gives g=0, μ_p is excluded by smoothness, a disconnected constant group by connectedness, G_a by properness, and the empty scheme has no identity section. Mathlib has no AbelianVariety; I confirmed the cited component lines (Grp.lean:43, Proper.lean:42, Smooth.lean:62, Connected/Basic.lean:705, KrullDimension.lean:39), so no leaf. Project IsAbelianVariety (AbelianVariety/Defs.lean) has no GrpObj, so refusing the bare attachment is right. No cycle: sk-def-av is not among the 61 nodes reachable from its two dependencies. Not superseded: live and side-live still have the item unsplit, and there is no repair note. Advisory: the item says 'over $k$' without 'Let $k$ be a field'. That wording is verbatim from the source, and k being a field comes in through def-sc-abelian-variety."
+ }
 }
