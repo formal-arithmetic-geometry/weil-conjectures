@@ -26,11 +26,10 @@
    }
   },
   {
-   "text": "Work on the small site fixed by [def-weil-pbc-proetale-site]. Let $C$ be the constant module functor of [def-sf-site-constant-module-functor]. Its prescribed constant scalar action identifies $C(R)$ with $R_V$, $C(F)$ with $F_V$, $C(\\mu)$ with multiplication by the constant $t$, and $C(q)$ with $\\pi_V$. Apply [lem-weil-pbc-finite-type-constant-exact] with the commutative ring $R$: it preserves kernels and cokernels. It also preserves images, since $\\operatorname{im} f=\\ker(\\operatorname{coker} f)$. Applying this to step 1 gives $\\ker(\\mu_t)=\\operatorname{im}(\\mu_t)$ and the canonical identification $\\operatorname{coker}(\\mu_t)\\cong F_V$, with quotient map $\\pi_V$. The same constant scalar construction sends the zero scalar endomorphism of $F$ to zero on $F_V$, so $tF_V=0$; it sends $t^2=0$ to $\\mu_t^2=0$.",
+   "text": "Work in the fixed pro-etale site and lift coefficients to the prescribed common universe. Constant module presheaves preserve limits and colimits objectwise, by joint reflection through the evaluation functors. Module sheafification preserves finite limits and colimits, as does coefficient transport along the canonical isomorphism from the constant ring sheafification to the underlying constant commutative ring sheaf. Thus the sized constant module functor is exact and additive. Its rank-one object is isomorphic to the unit module: extend the ring sheafification unit using the module sheafification universal property, and prove this extension is an isomorphism from local bijectivity of both additive and ring sheafification units. Transport the algebraic exact sequences from step 1. Exactness and surjectivity identify the cokernel canonically with the constant quotient. The scalar endomorphism acts by a restriction-compatible global section of the constant ring sheaf, via the unit-module Hom equivalence. Its square is zero by the algebraic calculation and functoriality. Multiplication by t on the quotient maps to zero by additivity.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "def-sf-site-constant-module-functor",
-    "lem-weil-pbc-finite-type-constant-exact"
+    "def-sf-site-constant-module-functor"
    ],
    "elementary": false,
    "source": {
@@ -39,7 +38,7 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-exact-scalar-periodic-resolution] on this small site with $\\mathcal O=R_V$ and $t_U$ the constant section $t$ on each object $U$. These sections are restriction-compatible and square to zero; step 2 verifies its kernel-equals-image hypothesis. Under its canonical cokernel identification $E\\cong F_V$, its complex is precisely $P_V$ and its augmentation has degree-zero component $\\pi_V$. The cited statement therefore gives exactness of the entire augmented sequence, flatness of every term, and that this augmentation is a K-flat resolution. In particular the zero cutoff is in degree $0$, not a lower bound on the complex.",
+   "text": "Conjugate the transported scalar map C(mu) by the canonical rank-one isomorphism to obtain an endomorphism f of the unit module over the constant commutative ring sheaf. The unit-module Hom equivalence gives a restriction-compatible section s with multiplication map f. Linearity and f squared equal to zero give s_U squared equal to zero on every object U. Transported algebraic exactness gives kernel(f) equal to image(f). Apply [lem-sfb-exact-scalar-periodic-resolution] to s. Compose each nonpositive term identification with the inverse rank-one isomorphism: the differential equation follows by conjugation and the periodic-complex term equations; all positive terms are zero and all terms are flat. The cokernel isomorphism induced by rank-one conjugation, followed by step 2's cokernel isomorphism, identifies the augmentation target with the prescribed constant quotient. Postcompose the augmentation by the induced isomorphism of single complexes. Its degree-zero component is the constant quotient map by the cokernel equations, all other components are zero, and this postcomposition preserves quasi-isomorphism and the K-flat source.",
    "uses": [
     "lem-sfb-exact-scalar-periodic-resolution"
    ],
@@ -50,9 +49,8 @@
    }
   },
   {
-   "text": "Assume $V$ is nonempty and let $a,b\\in F$ have the same constant section in $F_V(V)$. Apply local injectivity of the unit in [lem-sf-constant-module-unit-locally-bijective] to $M=F$ over $R$: there is a covering family $\\{U_i\\to V\\}$ on which $a$ and $b$ have equal restrictions in the constant presheaf itself. By the covering condition in [def-weil-pbc-proetale-site], this family has a nonempty member: choose a point of $V$ and an affine neighborhood of it, and one of the finitely many covering affine opens whose image contains that point. On its containing $U_i$, restriction in the constant presheaf is the identity of $F$, so the equality is $a=b$. Thus $F\\to F_V(V)$ is injective.",
+   "text": "Assume V is nonempty and two elements of F give equal constant sections. Apply Mathlib's local injectivity of the additive sheafification unit to obtain a covering equalizer sieve. The bottom sieve cannot cover the terminal pro-etale object V: a covering family is jointly surjective and a chosen point of V must lift to some member. Restrictions in the constant module presheaf are identities, so if the original constants differed their equalizer sieve would be bottom. This contradiction proves their equality, after removing the injective coefficient-universe lift.",
    "uses": [
-    "lem-sf-constant-module-unit-locally-bijective",
     "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
@@ -74,14 +72,12 @@
  "proof_deps": [
   "def-weil-pbc-proetale-site",
   "def-sf-site-constant-module-functor",
-  "lem-weil-pbc-finite-type-constant-exact",
-  "lem-sfb-exact-scalar-periodic-resolution",
-  "lem-sf-constant-module-unit-locally-bijective"
+  "lem-sfb-exact-scalar-periodic-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "The examples: generalized exact square-zero-divisor resolution, constant sheaf exactness, and local-unit detection on a nonempty scheme"
+  "place": "The examples: algebraic exactness transported by the sized constant-module functor; scalar periodic resolution; local injectivity of additive sheafification on a nonempty pro-etale site. Mathlib supplies the sized sheafification API directly; private proved helpers replace the two generic same-universe tool lemmas."
  },
  "mathlib_searches": [
   {
@@ -193,10 +189,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-type-constant-exact",
-  "lem-sf-constant-module-unit-locally-bijective"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -241,5 +234,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Re-delivery after the H13 RETURN of bff0fb0f takes repair option 2: the def-sf-site-constant-module-functor record is byte-identical (cmp) to live and side-live, the General module is untouched, and the 10 sized helpers are moved verbatim into Sheaf.Paper.ConstantPeriodicResolutionNonzero with item-id docstrings and listed in lean.declarations. The diff against the prior head changes only imports and docstrings; definition bodies and the theorem signature are unchanged. lean.statement is verbatim in the file, the 16 declarations equal the record list, there is one sorry, and no line exceeds 100 characters. No name collisions live or side-live; the global instances are Prop-valued; the imports exist. The math was accepted clause by clause in the prior review and re-confirmed: ker=im, normalized cokernel, P pinned by term isos and differentials, IsFlatOnSite and IsKFlatResolutionIndependentCoefficients universes match ProEt and the ULift constant ring, the augmentation is fixed in every degree, tF_V=0, injective unit at ProEt.mk (𝟙 V) for nonempty V, conditional nonvanishing; edge cases R=0, t=0, Z/4, k[e], Z/8 excluded, empty V. No compile run (worker reports 23.0 s and 18.1 s clean); no file changed. Advisory: the KFlatCoefficientUniverse import may be redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261021T130242-L-2658805",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
