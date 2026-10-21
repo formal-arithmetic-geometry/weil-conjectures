@@ -21,138 +21,83 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex representing C. The standard upper-bound description gives an isomorphic representative K with K^i=0 for i>n. Apply the bounded-above flat replacement theorem on the site of opens of S, with N=n, to obtain a quasi-isomorphism P→K with flat terms and P^i=0 for i>n. This P is K-flat by the bounded-above-flat criterion. Hence Lg^*C is canonically represented by the termwise pullback g^*P. Write ε_{g,P}:Lg^*Q(P)→Q(g^*P) for this comparison. In all uses of ε choose the counit pinned to the derived adjunction in the statement; its evaluation on M[0] is c_{g,M}. The definition of derived pullback computes that counit invertibly on K-flat representatives.",
+   "text": "Choose a strictly upper-bounded representative of C by the standard t-structure. Resolve it by the existing functorial flat replacement with the same upper bound. The bounded-above flat complex is K-flat, so the selected counit is invertible there. Tensor pullback preserves the strict bound. Transport this bound along the resolution and the representative isomorphism to obtain Lg*C in D≤n.",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
     "lem-pc-kflat-bounded-flat-replacement",
     "lem-pc-bounded-above-flat-kflat",
-    "def-pc-derived-pullback",
-    "def-pc-derived-module-base-change-map"
+    "lem-pc-perfect-hom-cochain-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution (upper bound preserved); Cohomology Tags 06YD, 06YJ"
-   }
+   "elementary": false
   },
   {
-   "text": "Ordinary module pullback preserves cokernels: for A→B with cokernel E and any target module N, its adjunction gives Hom(g^*E,N)=Hom(E,g_*N), the equalizer of Hom(B,g_*N)⇉Hom(A,g_*N), and hence the equalizer of Hom(g^*B,N)⇉Hom(g^*A,N). This is precisely the universal property of the cokernel of g^*A→g^*B. In particular the induced map coker(g^*d_P^{n-1})→g^*coker(d_P^{n-1}) is an isomorphism, characterized by its composite with the quotient out of g^*P^n.",
+   "text": "An additive left adjoint preserves finite colimits. On a complex strictly zero above n its nth short complex has zero outgoing differential; the homology comparison for a right-exact functor is therefore invertible. Resolve any such complex K by the flat replacement and apply naturality of the selected counit along the quasi-isomorphism. Both outer maps on Hn are invertible, so Hn of the counit at K is invertible. Apply this to the single module complex; its termwise single comparison is invertible. This gives the specified comparison on Hn for every module, in particular the asserted H0 comparison.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-perfect-hom-cochain-counit",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules; cokernel universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "Since (g^*P)^i=0 for i>n, its cohomology is zero above n, and H^n(g^*P)=coker(g^*d_P^{n-1}). Also H^n(P)=coker(d_P^{n-1}). Step 2 therefore gives an isomorphism θ_{g,P}:H^n(Lg^*Q(P))→g^*H^n(P): first apply H^n(ε_{g,P}), then the cokernel isomorphism. Explicitly, if π:P^n→H^n(P) is the quotient, θ_{g,P} is the map induced by g^*π after the representative comparison. This proves the required upper vanishing for C. It uses no lower bound on P.",
+   "text": "The Hom-set bijection defining the top projection gives its prescribed homology and naturality. Factor it through the standard truncation C→τ≥n C. The resulting map between objects concentrated in degree n is an isomorphism, since it is invertible on Hn and all other homology objects vanish. Derived pullback preserves every upper bound by the first step. Apply it to the truncation triangle; its first term is still in D≤n−1, so the long exact sequence makes Hn of the pulled-back truncation projection invertible. Compose this with the single comparison from the previous step and the canonical single/homology isomorphism to prove invertibility of κ.",
    "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-abstract-derived-category",
     "def-pc-derived-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC, lemma-negative-vanishing, dual upper-bound argument, computed on the flat representative"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply step 1 with n=0 and C=M[0], using a resolution q:P→M[0] with P^i=0 for i>0. Naturality of the left-derived counit gives c_{g,M}∘Lg^*Q(q)=Q(g^*q)∘ε_{g,P}, with the single-complex identifications understood. On H^0 the map on the right is induced by g^*(q^0):g^*P^0→g^*M. Since q is a quasi-isomorphism, H^0(q):coker(d_P^{-1})→M is an isomorphism. By step 2, H^0(Q(g^*q)) is g^*H^0(q) after the cokernel identification and is an isomorphism. Thus H^0(c_{g,M}) is an isomorphism. This verifies the particular normalized map, rather than merely constructing an isomorphism between its source and target.",
-   "uses": [
-    "def-pc-derived-module-base-change-map",
-    "def-pc-derived-pullback",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 06YJ, lemma-derived-base-change, derived counit on a flat resolution; right-exact cokernel calculation"
-   }
-  },
-  {
-   "text": "On the model P of step 1, the top truncation projection is the complex map p:P→H^n(P)[-n], whose degree-n component is π and whose other components are zero. Evaluate naturality of ε_g on p. The pinned shift compatibility identifies its value on H^n(P)[-n] with c_{g,H^n(P)}[-n]. Consequently the composite defining κ_{g,Q(P)} is exactly θ_{g,P}: on cokernels it is induced by g^*π. This is an isomorphism by step 3. Transporting along Q(P)≅C gives exactly the stated κ_{g,C}, because both the truncation projection and the counit are natural under this isomorphism. In particular H^n(Lg^*τ_C) is invertible as well, since its composite with the isomorphism of step 4 is invertible.",
+   "text": "Naturality of the top projection, the selected counit, the termwise single comparison, and the single/homology isomorphism gives the displayed naturality equation for every derived morphism between objects in D≤n. All equalities are proved using the Hom-set bijection, functoriality and associativity.",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
     "def-weil-abstract-derived-category",
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-pinned-pullback-counit-shifts"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; dual truncation argument of 05TC; pinned counit shift square"
-   }
-  },
-  {
-   "text": "The truncation projection is natural for all derived morphisms between objects bounded above by n. Indeed smart truncation on complexes is functorial, carries quasi-isomorphisms to quasi-isomorphisms, and hence descends through the derived localization. On an upper-bounded representative its top quotient is H^n[-n]. Thus τ_D∘u=H^n(u)[-n]∘τ_C, also when u is only a derived morphism. Naturality of c_g is the naturality of the one fixed counit at maps of single complexes. Applying H^nLg^* to the first equation and then counit naturality yields κ_{g,D}H^n(Lg^*u)=g^*H^n(u)κ_{g,C}. The shift comparisons are compatible with that counit. On a shifted single module N[-n], κ is H^0(c_{g,N}), since its top truncation projection is the identity.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category",
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-pinned-pullback-counit-shifts"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle; descent of functorial smart truncation through localization"
-   }
-  },
-  {
-   "text": "First record composition on a single module M. Apply the composition theorem for canonical single pullback comparisons with f=h:T′→T, g=g:T→S and N=M. In Lean order it gives γ_{M[0]}.hom ≫ p_{gh}(M) = Lh^*(p_g(M)) ≫ p_h(g^*M) ≫ (pullbackComp(h,g)_M.hom)[0], where γ:Lh^*Lg^*→L(gh)^* is the chosen derived composition isomorphism of the statement and pullbackComp(h,g):h^*g^*≅(gh)^* is the ordinary composition isomorphism c^{ord}_{g,h}. These p's are the c's of the statement. By the single-comparison node, p_a(N) is the selected left-derived counit at N[0] followed by the single-complex identification and the adjunction-preserving tensor-to-ordinary identification. The adjunction-transpose theorem with M=a^*N and the map id_{a^*N} says that the transpose of p_a(N) under the selected adjunction La^*⊣Ra_* is the ordinary unit N→a_*a^*N in degree zero followed by (a_*a^*N)[0]→Ra_*((a^*N)[0]). That is exactly the normalization of c_{a,N}. Since transposition is a bijection, p_a(N)=c_{a,N}. Hence\nc_{gh,M}∘γ_{M[0]}=(c^{ord}_{g,h,M})[0]∘c_{h,g^*M}∘Lh^*(c_{g,M}).\nBy the counit shift and composition shift compatibilities, the same equation holds with M[-n] in place of M[0] and c[-n] in place of c.",
-   "uses": [
-    "lem-pc-canonical-single-pullback-composition",
-    "lem-pc-canonical-single-pullback-comparison",
-    "lem-pc-canonical-single-adjunction-transpose",
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-pinned-pullback-counit-shifts",
-    "lem-pc-pinned-pullback-composition-shifts"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5S, lemma-derived-pullback-composition; existing canonical single comparison composition and adjunction transpose"
-   }
-  },
-  {
-   "text": "Put M=H^n(C), B=M[-n], and B′=(g^*M)[-n]. Let v:Lg^*C→B′ be Lg^*(τ_C) followed by c_{g,M}[-n], using the shift comparison. By definition H^n(v)=κ_{g,C}. Its source and target are bounded above by n by step 3. Apply step 6 for h to this particular v. Since κ_{h,B′}=H^0(c_{h,g^*M}), it gives\nh^*(κ_{g,C})κ_{h,Lg^*C}=H^0(c_{h,g^*M})H^n(Lh^*v).\nPostcompose by c^{ord}_{g,h,M}. Substitute v and the shifted single equation of step 7. Naturality of γ at τ_C moves γ past Lh^*Lg^*(τ_C). The resulting expression is H^n(c_{gh,M}[-n])H^n(L(gh)^*τ_C)H^n(γ_C)=κ_{gh,C}H^n(γ_C). This is exactly the requested composition formula under the specified canonical composition isomorphism. No inverse to c_{g,M} in the derived category has been used; such an inverse generally does not exist.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-pinned-pullback-composition-shifts",
     "def-pc-derived-module-base-change-map"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5S, lemma-derived-pullback-composition; naturality at the top truncation projection"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The section-normalized tensor adjunction equals the adjunction already selected by exists_tensorPullbackAdjunction, by uniqueness of its unit on sections. The inverse section-composition comparison is therefore exactly the underived composition mate used by the pinned derived composition. Evaluate the existing selected-counit composition equation on the single complex in degree n. Compatibility of termwise mapping with single complexes is checked in degree n by the single degree identification; the remaining components factor through zero objects. Naturality of the selected counit then gives composition of the pinned single comparisons directly in degree n, without using shifts.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-perfect-hom-cochain-counit",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every v:C→M[-n] with C in D≤n, the Hom-set bijection gives τ_C followed by the single embedding of Hn(v) and the single/homology identification equal to v. Apply this to v=Lg*(τ_C) followed by the pinned g single comparison. Thus v factors as τ_(Lg*C) followed by the single embedding of κ_g,C. Combine the preceding single-composition equation with naturality of the pinned composition at τ_C and naturality of the h single comparison at κ_g,C. Apply Hn and the natural single/homology isomorphism. This is precisely the displayed composition equation, with the specified proof hbound.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-standard-tstructure-derived-category",
   "lem-pc-kflat-bounded-flat-replacement",
   "lem-pc-bounded-above-flat-kflat",
-  "def-pc-derived-pullback",
-  "def-pc-derived-module-base-change-map",
+  "lem-pc-perfect-hom-cochain-counit",
   "lem-pc-module-pullback-adjunction",
   "def-weil-abstract-derived-category",
-  "lem-pc-pinned-pullback-counit-shifts",
-  "lem-pc-canonical-single-pullback-composition",
-  "lem-pc-canonical-single-pullback-comparison",
-  "lem-pc-canonical-single-adjunction-transpose",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-pullback",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-module-pullback",
   "lem-pc-module-pullback-identity-composition",
-  "lem-pc-pinned-pullback-composition-shifts"
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 05TC dual upper-bound/truncation argument implemented with existing 05T7/06YD/06YJ flat models; normalization and composition assembled from the existing canonical single comparison square (0D5S)."
+  "place": "Tags 05TC and 08J5: dual upper-bound argument and the truncation triangle. The degree-n counit composition assembly uses the existing fixed-counit equation (Cohomology 0D5S), the right-exact cokernel calculation (06YJ), and section-normalized adjunction uniqueness. Lean proof assembled by G7; existing private degree-comparison argument read in ModulePullbackComparisonDegreeAutomorphism and specialized to the selected counit."
  },
  "mathlib_searches": [
   {
@@ -320,13 +265,8 @@
   "lem-pc-kflat-bounded-flat-replacement",
   "lem-pc-bounded-above-flat-kflat",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-pinned-pullback-counit-shifts",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-pc-pinned-pullback-composition-shifts",
-  "lem-pc-canonical-single-pullback-composition",
-  "lem-pc-canonical-single-pullback-comparison",
-  "lem-pc-canonical-single-adjunction-transpose"
+  "lem-pc-module-pullback-identity-composition"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -360,5 +300,15 @@
   "group": "N9",
   "result": "pass",
   "note": "Item node gains only its lean record (statement and 8 dep records identical to live); one new module, compiles clean via nt_compile --json in 33.2 s. tau = unique map with identity H^n via proved homologyFunctor_map_bijective_of_isLE_of_isGE (not arbitrary); c_{g,M} = selected ε of exists_derivedPullbackComposition at single_0 M composed with the single iso = IsDerivedModulePullbackComparison composite, transpose-normalized via the same ε; degree-n evaluation of the same ε = c[-n] by pinned counit shifts; kappa composite in node order; all 5 clauses match (bound as conclusion, only H^0(c) iso, naturality over all D/hD/a, composition with pinnedPullbackComposition h g and tensorPullbackSectionComp.inv, which is the unique mate of pushforwardComp under the 1⊗m-normalized adjunctions, consistent with the derived composition and honouring the S1 pinning advisory); no extra hypotheses or universe restrictions; edge cases C=0, M[-n], non-flat g, unbounded below, n<0 checked; no duplicate helpers. Advisory only: pinned* and canonicalTensorPullbackAdditive are .choose abbrevs of the stmt_dep theorem exists_derivedPullbackComposition."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261021T162730-L-691398",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

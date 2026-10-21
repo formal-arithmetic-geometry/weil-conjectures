@@ -23041,3 +23041,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:27 L: returned deliver/E2/Sheaf.Paper.CartesianCoefficientsFiniteFree (reviewer RETURN: (the landing tools, head 1a820ada8) the delivery did not land: (d) user Sheaf.Paper.ProperIntegralRationalScalarComparis)
 - 16:27 L: returned deliver/S1/Sheaf.Algebra.Homology.KFlatResolution (reviewer RETURN: (the landing tools, head 4f1871883) the delivery did not land: (d) user Sheaf.Paper.SheafSliceDerivedComparison (mention)
 - 16:27 L: merged deliver/A7/Sheaf.SixFunctors.IntegralExtHomContinuity (stage 3; reviewer PASS; first push; landing 20261021T162726-L-686391 (proof); batch 20261021T162723; modules 1; new nodes 0)
+- 16:27 L: merged deliver/G7/Sheaf.AlgebraicGeometry.DerivedPullbackTopCohomology (stage 3; reviewer PASS; first push; landing 20261021T162730-L-691398 (proof); batch 20261021T162723; modules 1; new nodes 0)
