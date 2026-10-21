@@ -23232,3 +23232,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:46 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 17:47 L: merged deliver/NM/lem-sfb-root-tower-coordinate-face (stage 2; reviewer PASS; parallel immutable checks)
 - 17:47 L: merged deliver/NC/lem-fd-whole-tower-integral-pullback-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 17:47 L: returned deliver/Q10/lem-sfb-lattice-supported-hom-reduction-tower (reviewer RETURN: L: independent stage-2 immutable head d5b286bb7b51: H2: delivery adds theorem node det-lem-formal-closed-support-stratum)
