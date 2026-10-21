@@ -22918,3 +22918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:23 L: merged deliver/J7/Sheaf.Paper.DerivedNakayama (stage 3; reviewer PASS; first push; landing 20261021T152315-L-1863299 (proof); batch 20261021T152302; modules 1; new nodes 0)
 - 15:23 L: merged deliver/J8/Sheaf.Paper.IntegralLineReductionRestriction (stage 3; reviewer PASS; first push; landing 20261021T152321-L-1870640 (interface); batch 20261021T152302; modules 5; new nodes 4; change records: coord/changes/J8-integral-line-reduction-data.md)
 - 15:23 L: merged deliver/K4/Sheaf.Paper.PbcActualScalarPullback (stage 3; reviewer PASS; first push; landing 20261021T152325-L-1876825 (proof); batch 20261021T152302; modules 1; new nodes 0)
+- 15:23 L: returned deliver/ND/def-per-support-condition (reviewer RETURN: I read the definition in full. The support inequality dim Supp H^{-i}(K) ≤ i, with dim ∅ = −∞, matches BBD (4.0.1') afte)
