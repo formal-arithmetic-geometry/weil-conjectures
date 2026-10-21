@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-integral-stratified-perfect-closure-homology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+   "place": "Proof step 11: closure under standard truncations and cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral stratified perfect closure under degree zero cohomology",
+ "statement": "theorem integralStratifiedPerfectClosure_homology (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hl : IsUnit (l : Γ(T, ⊤))) (K : PbcCompletedDerived T (pbcIntegralDatum l E)) (hK : PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) K) (q : ℤ) : PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) ((DerivedCategory.singleFunctor _ 0).obj ((DerivedCategory.homologyFunctor _ q).obj K))",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), bounded Postnikov induction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The retained closure argument is proved by the parent theorem from the explicit uniform-complete triangulated interface; this strict sub-result records the truncation/cohomology clause separately for parallel proof.",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-uniform-complete-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived truncation preserves bounded constructible complete objects",
+   "results": "no match",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PbcIsBoundedConstructibleComplete truncLE truncGE",
+   "results": "no match in Mathlib",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsBoundedConstructibleComplete.*trunc",
+   "results": "only parent theorem",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralStratifiedPerfectClosureHomology",
+  "declaration": "AlgebraicGeometry.Scheme.integralStratifiedPerfectClosure_homology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralStratifiedPerfectClosure_homology"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralStratifiedPerfectClosureHomology.lean",
+  "statement": "theorem integralStratifiedPerfectClosure_homology (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hl : IsUnit (l : Γ(T, ⊤))) (K : PbcCompletedDerived T (pbcIntegralDatum l E)) (hK : PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) K) (q : ℤ) : PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) ((DerivedCategory.singleFunctor _ 0).obj ((DerivedCategory.homologyFunctor _ q).obj K))",
+  "branch": "newtargets-dag",
+  "by": "A3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratifiedPerfectCharacterization",
+  "date": "2026-10-21",
+  "group": "A3"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261021T011009-L-2026612",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261021T011009-L-2026612",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
