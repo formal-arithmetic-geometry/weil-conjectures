@@ -3,21 +3,19 @@
  "blueprint": {
   "is": "def-nagata-scheme-image-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Comparison map for a closed factorization",
- "statement": "Suppose $g$ is supplied with a factorization\n$T\\xrightarrow{h}Z\\xrightarrow{z}Y$, where $z$ is a closed immersion.\nDefine\n\n$$\nc_{g,Z}\\colon\\operatorname{SIm}(g)\\longrightarrow Z\n$$\n\nfrom the containment of the ideal defining $Z$ in the kernel ideal defining\n$\\operatorname{SIm}(g)$.",
+ "statement": "Let $T,Z,Y$ be schemes [def-pc-scheme], let $g\\colon T\\to Y$, and suppose a factorization $g=z\\circ h$ is supplied, where $h\\colon T\\to Z$ and $z\\colon Z\\hookrightarrow Y$ is a closed immersion [def-weil-closed-immersion]. Write $g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ for the scheme-theoretic image inclusion [def-nagata-scheme-theoretic-image]. Define the comparison morphism\n$$\nc_{g,Z}\\colon\\operatorname{SIm}(g)\\longrightarrow Z\n$$\nto be the closed-immersion lift of $g_{\\mathrm{im}}$ through $z$, induced by the containment $\\ker(z)\\subseteq\\ker(g)=\\ker(g_{\\mathrm{im}})$ of quasi-coherent kernel ideals. Thus the defining Mathlib expression is `IsClosedImmersion.lift z g.imageι H`, where $H$ is this containment. Here $\\ker(g)$ is the largest quasi-coherent ideal contained in $\\ker(\\mathcal O_Y\\to g_*\\mathcal O_T)$, precisely as stated in the current [def-nagata-scheme-theoretic-image]. The image inclusion is the closed subscheme inclusion defined by that ideal; no quasi-compactness assumption on $g$ is imposed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-scheme-image-comparison.md",
   "place": "node def-nagata-scheme-image-comparison, order 70"
  },
  "stmt_deps": [
-  "def-nagata-scheme-image-factor",
-  "def-nagata-scheme-theoretic-closure",
-  "def-nagata-scheme-theoretic-image",
-  "lemma-nagata-scheme-image-ideal-qc",
-  "lemma-nagata-scheme-image-of-closed-immersion"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-scheme-theoretic-image"
  ],
  "proof": [],
  "proof_deps": [],
@@ -30,10 +28,50 @@
     "Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion:210 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a scheme morphism g factoring through a closed immersion Z into Y, construct the comparison morphism from the scheme theoretic image of g to Z using containment of kernel ideal sheaves.",
+   "results": "AlgebraicGeometry.IsClosedImmersion.lift; AlgebraicGeometry.IsClosedImmersion.lift_fac; AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap; AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc; AlgebraicGeometry.Scheme.Hom.toImage; AlgebraicGeometry.Scheme.Hom.toImage_app; AlgebraicGeometry.Scheme.Hom.imageι; AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι",
+   "date": "2026-10-21",
+   "verdict": "match: IsClosedImmersion.lift, specialized to the image inclusion; supporting kernel identities read in source"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|lemma lift|theorem lift|image_le|ker_le",
+   "results": "210; 215 (grep restricted to AlgebraicGeometry/Morphisms/ClosedImmersion.lean)",
+   "date": "2026-10-21",
+   "verdict": "match: IsClosedImmersion.lift, specialized to the image inclusion; supporting kernel identities read in source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion of schemes admits a lift of any morphism whose kernel ideal contains its ideal.",
+   "results": "AlgebraicGeometry.IsClosedImmersion.lift; AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc; AlgebraicGeometry.IsClosedImmersion.lift_fac; AlgebraicGeometry.Scheme.Hom.liftQuotient; AlgebraicGeometry.IsOpenImmersion.lift; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.mk; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+   "date": "2026-10-21",
+   "verdict": "match: IsClosedImmersion.lift, specialized to the image inclusion; supporting kernel identities read in source"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "AlgebraicGeometry.IsClosedImmersion.lift; AlgebraicGeometry.IsClosedImmersion.isIso_lift; AlgebraicGeometry.IsClosedImmersion.lift_fac; AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc",
+   "date": "2026-10-21",
+   "verdict": "match: IsClosedImmersion.lift, specialized to the image inclusion; supporting kernel identities read in source"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|lemma lift_fac|le_ker_comp|ker_subschemeι|def inclusion",
+   "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean (grep restricted to AlgebraicGeometry)",
+   "date": "2026-10-21",
+   "verdict": "match: IsClosedImmersion.lift, specialized to the image inclusion; supporting kernel identities read in source"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.lift",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+  "line": 210,
+  "how": "specializes in one line: IsClosedImmersion.lift z g.imageι (by simpa only [Scheme.Hom.imageι, Scheme.IdealSheafData.ker_subschemeι, w] using Scheme.Hom.le_ker_comp h z), where w : h ≫ z = g. The definition lift at ClosedImmersion.lean:210 takes a closed immersion z and an arbitrary morphism g.imageι with z.ker ≤ g.imageι.ker; its body is the ideal-containment construction g.imageι.toImage ≫ IdealSheafData.inclusion H ≫ inv z.toImage. Hom.le_ker_comp at IdealSheaf/Basic.lean:732 supplies z.ker ≤ (h ≫ z).ker; IdealSheafData.ker_subschemeι at IdealSheaf/Subscheme.lean:576 and the imageι abbreviation at line 665 identify g.imageι.ker with g.ker. No quasi-compactness or quasi-separatedness hypothesis is used. The construction's factorization, if needed downstream, is lift_fac at ClosedImmersion.lean:215. All sources read 2026-10-21."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -74,5 +112,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-scheme-image-comparison",
+  "worker": "stage1",
+  "summary": "Confirmed the imported definition as a specialization of Mathlib IsClosedImmersion.lift, with its containment supplied by Hom.le_ker_comp and ker_subschemeι. Made the factorization and the quasi-coherent meaning of the kernel explicit, using the main-20261015 correction of the image definition. Removed unused closure/factorization/theorem dependencies and retained precisely the notions used in the statement. No new nodes or project attachments. Repair of the returned delivery: re-read all three current statement dependencies, in particular the now-reviewed def-nagata-scheme-theoretic-image statement, and explicitly identified its kernel and image inclusion in this definition. The same Mathlib specialization applies without extra hypotheses; retained all recorded searches.",
+  "blueprint": "Realizes the complete defining paragraph of def-nagata-scheme-image-comparison (main-20261015 order 78), hence the closed-factorization comparison needed for minimality in sk-lem-nagata-sketch-closure. This definition is not the unit key node; unit realized fields unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-5e15fecce",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-5e15fecce (reviewer sub-agent of L); spot-checked: Rebase of the earlier PASS head a7ef8f18. That head's landing was refused because the image node def-nagata-scheme-theoretic-image changed its statement. Compared with a7ef8f18, only the last sentences of the item changed: ker(g) is now 'the largest quasi-coherent ideal contained in ker(O_Y→g_*O_T)' and the image inclusion is 'the closed subscheme inclusion defined by that ideal'. This matches the image node's current statement, which is the same in the snapshot and in clones/live. There are no new nodes. The item is still imported in live, has no repair note and is not on a dropped list. Checked against the blueprint main-20261015 (order 78): same datum, the map goes SIm(g)→Z, and no hypothesis is added or weakened. Mathlib source checked: ClosedImmersion.lean:210 lift needs only f.ker ≤ g.ker. IdealSheaf/Basic.lean:692 defines Hom.ker as ofIdeals of the kernels on affine opens, the largest quasi-coherent ideal, as the node says. Basic.lean:732 le_ker_comp has no hypotheses, and Subscheme.lean:576/665 give ker_subschemeι and imageι = ker.subschemeι, so the containment the item states is exactly what lift needs. Edge cases checked: z = id, T empty, an affine quotient, and non-quasi-compact g. The three stmt_deps are all used. def-pc-scheme is missing from the snapshot dagsnap, so I read it in clones/live. Dropping the closure, factor and theorem deps is fine at stage 1. The only other node using IsClosedImmersion.lift is lemma-nagata-scheme-image-universal, which states properties of this map, so there is no duplicate. No SGA source. Read files only; nothing compiled."
  }
 }
