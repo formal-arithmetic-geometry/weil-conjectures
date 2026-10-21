@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-ordered-join-partial-contraction",
+ "kind": "statement",
+ "title": "Explicit partial contraction for ordered join chains",
+ "statement": "Let $r\\geq1$ and let $X_0,\\ldots,X_{r-1}$ be sets with specified elements $v_i\\in X_i$. Let $J_{-1}=\\mathbf Z[\\varnothing]\\cong\\mathbf Z$, let $J_q$ for $0\\leq q<r$ be the abelian group of finite formal integer sums of symbols $[(i_0,x_0),\\ldots,(i_q,x_q)]$ with $0\\leq i_0<\\cdots<i_q<r$ and $x_j\\in X_{i_j}$, and put $J_q=0$ otherwise. The indicated symbol families are specified $\\mathbf Z$-bases in the sense of [def-weil-pbc-free-module]. Define $d$ by alternating deletion of vertices, including $d[(i,x)]=[\\varnothing]$ and $d[\\varnothing]=0$. Define the degree-one homomorphism $c_i$ to be zero on symbols containing color $i$; on a symbol missing color $i$, insert $(i,v_i)$ in its increasing-color position $k$ with coefficient $(-1)^k$. In particular $c_i[\\varnothing]=[(i,v_i)]$. Define $R_i$ on symbols missing color $i$ to be zero, and on a symbol containing color $i$ to be that symbol minus the symbol obtained by replacing its color-$i$ vertex by $(i,v_i)$. Put\n$$S=\\sum_{i=0}^{r-1}(R_0\\circ\\cdots\\circ R_{i-1})\\circ c_i,$$\nwhere the empty composite is the identity and the rightmost map is applied first. Then $d^2=0$ and\n$$dS_q+S_{q-1}d=\\mathrm{id}_{J_q}\\qquad(-1\\leq q\\leq r-2),$$\nwith $S_{-2}=0$. For every family of maps $u_i:X_i\\to Y_i$, with chosen elements $w_i=u_i(v_i)$ in $Y_i$, the induced homomorphisms $J_q(u)$, defined by applying $u_i$ to vertices, satisfy $J_{q+1}(u)S_q^v=S_q^wJ_q(u)$. The displayed formula for $S$ expands on each basis symbol into a finite integer sum of basis symbols obtained only by inserting chosen vertices or replacing vertices by chosen vertices; the coefficient list and the choices of insertions and replacements depend only on $r$ and the list of colors, not on any equality tests among the $x_j$ and $v_i$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent expansion below local continuous-cocycle descent: explicit ordered-join chain calculation; not asserted in the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(join|colored|coloured).*(chain|homotop)|(chain|homotop).*(join|colored|coloured)",
+   "results": {
+    "t": "2026-10-21T19:23:43Z",
+    "tool": "grep",
+    "query": "(join|colored|coloured).*(chain|homotop)|(chain|homotop).*(join|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean"
+    ],
+    "digest": "622419d40e1ca80a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are ordinary extra-degeneracy contractions, unrelated augmented constructions, matroid contractions or path-connectedness; none states this finite-color partial contraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced chain complex of a join of nonempty sets is exact below its top dimension",
+   "results": {
+    "t": "2026-10-21T19:23:43Z",
+    "tool": "leansearch",
+    "query": "The reduced chain complex of a join of nonempty sets is exact below its top dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "HomologicalComplex.ExactAt",
+     "HomologicalComplex.exactAt_iff_isZero_homology",
+     "CochainComplex.isGE_iff",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_homology",
+     "HomologicalComplex.acyclic_iff",
+     "HomologicalComplex.exactAt_iff",
+     "HomologicalComplex.Acyclic"
+    ],
+    "digest": "78261995be0982d3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: singular chains of totally disconnected spaces and abstract ExactAt predicates are different complexes and give no ordered-join contraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-21T19:23:44Z",
+    "tool": "loogle",
+    "query": "\"ChainComplex\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Homotopy.dNext_cochainComplex",
+     "Homotopy.prevD_chainComplex",
+     "Homotopy.dNext_zero_chainComplex",
+     "Homotopy.prevD_zero_cochainComplex",
+     "Homotopy.dNext_succ_chainComplex",
+     "Homotopy.prevD_succ_cochainComplex",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy_refl"
+    ],
+    "digest": "d275ca59202a37d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general formulas and constructors for homotopies do not give the ordered-join operators or their finite natural formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented integral chains of a join of r nonempty sets have a natural partial contracting homotopy through degree r minus two using chosen basepoints",
+   "results": {
+    "t": "2026-10-21T19:23:44Z",
+    "tool": "leanfinder",
+    "query": "The augmented integral chains of a join of r nonempty sets have a natural partial contracting homotopy through degree r minus two using chosen basepoints",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.homotopyQToZero",
+     "AlgebraicTopology.DoldKan.homotopyHσToZero",
+     "Homotopy.mkInductiveAux₃",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom"
+    ],
+    "digest": "3922ffc92284480c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: extra degeneracies contract entire augmented simplicial objects, while the ordered distinct-color chains have possible nonzero top homology; Dold-Kan and tensor right exactness do not supply the specified partial contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting the augmented tensor product of free abelian groups on pointed sets gives exactness below the number of factors",
+   "results": {
+    "t": "2026-10-21T19:23:46Z",
+    "tool": "leanfinder",
+    "query": "Contracting the augmented tensor product of free abelian groups on pointed sets gives exactness below the number of factors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "ChainComplex.alternatingConst_exactAt",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "rTensor_exact",
+     "Profinite.NobelingProof.CC_exact",
+     "lTensor_exact",
+     "Algebra.Generators.H1Cotangent.exact_map_δ",
+     "lTensor_injective_of_exact_of_exact_of_rTensor_injective"
+    ],
+    "digest": "44af6e0e3bfe9457"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: extra degeneracies contract entire augmented simplicial objects, while the ordered distinct-color chains have possible nonzero top homology; Dold-Kan and tensor right exactness do not supply the specified partial contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "(def|theorem|lemma).*homotopyEquiv",
+   "results": {
+    "t": "2026-10-21T19:24:22Z",
+    "tool": "grep",
+    "query": "(def|theorem|lemma).*homotopyEquiv",
+    "sub": "AlgebraicTopology/ExtraDegeneracy.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "415"
+    ],
+    "digest": "88df4d99e88a4ee6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are ordinary extra-degeneracy contractions, unrelated augmented constructions, matroid contractions or path-connectedness; none states this finite-color partial contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "(join|colored|coloured).*(contract|augment)|(contract|augment).*(join|colored|coloured)",
+   "results": {
+    "t": "2026-10-21T19:24:22Z",
+    "tool": "grep",
+    "query": "(join|colored|coloured).*(contract|augment)|(contract|augment).*(join|colored|coloured)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean",
+     "Mathlib/AlgebraicTopology/CechNerve.lean",
+     "Mathlib/AlgebraicTopology/CechNerve.lean",
+     "Mathlib/Combinatorics/Matroid/Minor/Order.lean",
+     "Mathlib/Combinatorics/Matroid/Minor/Order.lean",
+     "Mathlib/Combinatorics/Matroid/Minor/Order.lean",
+     "Mathlib/Combinatorics/Matroid/Minor/Contract.lean",
+     "Mathlib/Combinatorics/Matroid/Minor/Contract.lean"
+    ],
+    "digest": "10980048e9c7269a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are ordinary extra-degeneracy contractions, unrelated augmented constructions, matroid contractions or path-connectedness; none states this finite-color partial contraction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-cocycle-rectangle-detection",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic continuous-cocycle descent expansion: filling cycles below the top degree in the ordered join of the cosets H a_i. This integral chain lemma supplies only the filling operator.",
+   "via": [
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
