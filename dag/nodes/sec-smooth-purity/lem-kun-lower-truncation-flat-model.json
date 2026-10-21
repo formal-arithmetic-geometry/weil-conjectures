@@ -18,9 +18,84 @@
   "def-pc-quasi-iso-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:K^a\\twoheadrightarrow N$ for the cokernel projection and $I=\\operatorname{im}d^{a-1}$. Since $d^ad^{a-1}=0$, the cokernel universal property gives a unique $\\bar d:N\\to K^{a+1}$ with $\\bar d p=d^a$. Moreover $d^{a+1}\\bar d=0$, since its composite with the epimorphism $p$ is zero. Together with the retained differentials this defines $P=\\tau_{\\ge a}K$ as in [def-kun-truncations]. The components $q^i=0$ for $i<a$, $q^a=p$, and $q^i=1$ for $i>a$ obey the chain-map equations of [def-pc-cochain-complex-modules]: at $a-1$ this is $pd^{a-1}=0$, at $a$ it is $\\bar d p=d^a$, and elsewhere it is immediate.",
+   "uses": [
+    "def-kun-truncations",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), proof: lower truncation and its kernel"
+   }
+  },
+  {
+   "text": "Compute the maps on cohomology using [def-pc-acyclic-complex-modules]. For $i<a$, both cohomology sheaves are zero by the hypothesis and the zero terms of $P$. At $a$, because $I\\subseteq\\ker d^a$, the kernel of $\\bar d:K^a/I\\to K^{a+1}$ is $(\\ker d^a)/I$; this is $H^a(K)$ and $H^a(q)$ is the resulting identification. At $a+1$, the cycles are unchanged and the boundaries are unchanged because $\\operatorname{im}\\bar d=\\operatorname{im}d^a$ (the map $p$ is epic). In all higher degrees the adjacent terms and differentials are unchanged. Thus $H^i(q)$ is an isomorphism in every degree, which is precisely the quasi-isomorphism assertion of [def-pc-quasi-iso-modules].",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), proof: lower truncation and its kernel"
+   }
+  },
+  {
+   "text": "The kernels of the components of $q$ are $K^i$ for $i<a$, $I=\\ker p$ for $i=a$, and zero for $i>a$. The induced differential from degree $a-1$ to $a$ is the image factorization $K^{a-1}\\twoheadrightarrow I$ of $d^{a-1}$; all earlier differentials are retained and the differential out of $I$ is zero. These differentials square to zero, by the equations for $K$ and the monomorphism $I\\hookrightarrow K^a$, so they define the kernel complex $L$ [def-pc-cochain-complex-modules]. Every $q^i$ is epic, and the degreewise sequences are $0\\to K^i\\xrightarrow{1}K^i\\to0\\to0$ for $i<a$, $0\\to I\\to K^a\\xrightarrow{p}N\\to0$ for $i=a$, and $0\\to0\\to K^i\\xrightarrow{1}K^i\\to0$ for $i>a$. This proves the claimed degreewise short exact sequence.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), proof: lower truncation and its kernel"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-flat-quotient-tensor-ses] to $0\\to I\\to K^a\\to N\\to0$ on the chosen small site with ring sheaf $\\Lambda_T$. Its middle term $K^a$ is flat by the termwise-flat hypothesis and its quotient $N$ is flat by assumption, so its kernel-flatness clause gives that $I$ is flat. The zero sheaf is flat because tensoring with it is the zero exact functor [def-pc-flat-sheaf-modules]. Consequently every term of $P$ is flat: its terms are zero, $N$, or retained terms of $K$. Likewise every term of $L$ is flat: its terms are retained terms of $K$, $I$, or zero.",
+   "uses": [
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EY (lemma-flat-ses), part (2), sheaf case; applied in Tag 0F1M"
+   }
+  },
+  {
+   "text": "The explicit terms give $L^i=0$ for all $i>a$, so $a$ is an upper bound for $L$. Apply clause (1) of [lem-kun-kflat-criteria] to this bounded-above complex of flat $\\Lambda_T$-module sheaves. It gives that $L$ is K-flat in the convention of [def-kun-derived-tensor] used by that node; by the sign symmetry recorded in [def-kun-derived-tensor] this is the ringed-site K-flatness of [def-pc-kflat-complex] asserted in the statement. This completes all the assertions.",
+   "uses": [
+    "lem-kun-kflat-criteria",
+    "def-kun-derived-tensor",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), applied to the kernel in Tag 0F1M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "def-pc-flat-sheaf-modules",
+  "lem-kun-kflat-criteria",
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), proof: lower truncation and its kernel"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -84,10 +159,52 @@
    "results": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285: ordinary truncation quasi-isomorphism only; no flatness or K-flat kernel conclusion.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good lower truncation of a flat sheaf complex with flat boundary cokernel is quasi-isomorphic when cohomology below the cutoff vanishes, with bounded above flat K-flat kernel",
+   "results": "{\"t\": \"2026-10-21T08:10:20Z\", \"tool\": \"leanfinder\", \"query\": \"A good lower truncation of a flat sheaf complex with flat boundary cokernel is quasi-isomorphic when cohomology below the cutoff vanishes, with bounded above flat K-flat kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIsoAt_ιTruncLE\", \"HomologicalComplex.quasiIsoAt_πTruncGE\", \"CochainComplex.quasiIso_ιTruncLE_iff\", \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"HomologicalComplex.instQuasiIsoAtπTruncGEF\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\"], \"digest\": \"dd1305207cc78be5\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*[Ff]lat|[Ff]lat.*truncGE|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-21T08:10:36Z\", \"tool\": \"grep\", \"query\": \"truncGE.*[Ff]lat|[Ff]lat.*truncGE|KFlat|kFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good lower truncation of a flat complex with flat cokernel has a bounded above flat K-flat kernel",
+   "results": "{\"t\": \"2026-10-21T08:10:36Z\", \"tool\": \"leansearch\", \"query\": \"Good lower truncation of a flat complex with flat cokernel has a bounded above flat K-flat kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.quasiIso_ιTruncLE_iff\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"HomologicalComplex.instMonoιTruncLE\", \"HomologicalComplex.instMonoFιTruncLE\", \"HomologicalComplex.shortComplexTruncLE_shortExact\", \"HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc\", \"CochainComplex.shortComplexTruncLE\", \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\"], \"digest\": \"8e5021b816c0c90e\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncGE, \"quasiIso\"",
+   "results": "{\"t\": \"2026-10-21T08:10:36Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.truncGE, \\\"quasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CochainComplex.instQuasiIsoAtIntπTruncGE\", \"CochainComplex.quasiIsoAt_πTruncGE\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"CochainComplex.quasiIso_truncGEMap_iff\"], \"digest\": \"1bd2063b1cd977ae\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_πTruncGE_iff|shortComplexTruncLE_shortExact",
+   "results": "{\"t\": \"2026-10-21T08:10:54Z\", \"tool\": \"grep\", \"query\": \"quasiIso_πTruncGE_iff|shortComplexTruncLE_shortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean\"], \"digest\": \"50f3dca374efff09\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncating an exact left tail of a complex of tensor flat module sheaves at a flat opcycles object gives a quasi-isomorphism and a bounded above K-flat kernel",
+   "results": "{\"t\": \"2026-10-21T08:11:01Z\", \"tool\": \"leanfinder\", \"query\": \"Truncating an exact left tail of a complex of tensor flat module sheaves at a flat opcycles object gives a quasi-isomorphism and a bounded above K-flat kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\"], \"digest\": \"05bb13f0653ec58d\"} Read Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:277-285; this supplies only the ordinary truncation quasi-isomorphism, not the flat-sheaf and K-flat kernel clauses. The second LeanFinder phrasing returned Module.Flat tensor-exactness criteria for ordinary modules, not the stated sheaf-complex result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1m",
@@ -104,5 +221,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-kun-lower-truncation-flat-model",
+  "worker": "stage1",
+  "summary": "Expanded the canonical lower truncation construction, checked the quotient chain map and cohomology in every boundary degree, identified the kernel and degreewise exact sequence, and applied existing flat-quotient kernel flatness and bounded-above K-flatness. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes lem-kun-0f1m, blueprint_update proof, the paragraph beginning Set E = tau_ge_a K through Hence L is K-flat by lem-kun-kflat-criteria(1). The quotient direction K -> P agrees with Stacks 0F1M and the already corrected item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Generic kernel-flatness theorem for a short exact sequence of sheaves with flat middle and quotient; it supplies I flat and the Kunneth unit has no same-unit sheaf kernel-flatness lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-quotient-tensor-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-c42a44ea2",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-c42a44ea2 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The item is a new statement-only node from Q105's re-split of lem-kun-0f1m. Its statement is identical to the live side node, so it was not weakened. It is not in the dropped list, cites no SGA, adds no new nodes, and no other group has split it. It matches the Stacks proof of 0F1M: E=tau_{>=a}K, kernel L=(...->K^{a-1}->I->0), I flat from 0->I->K^a->N->0, and L bounded above with flat terms is K-flat (06YQ). The direction K->P is correct; the parent's main-20261015 text writes the arrow the other way in one sentence. Step 1: the cokernel universal property gives the induced differential, and the chain-map equations check out against def-kun-truncations. Step 2: H^a(P)=ker d^a/I, im of the induced differential = im d^a because p is epi, and the vanishing for i<a (including a-1) is used. Step 3: the kernel complex and the three degreewise exact sequences are elementary and correct. Step 4: lem-weil-pbc-site-flat-quotient-tensor-ses applies (small skeleton, Lambda_T commutative, N and K^a flat). This off-unit generic tool is declared in split_report.tool_uses and I accept it; the Kunneth unit has no such node, and no duplicate exists (lem-sc-affine-truncation-kernel-flat and lem-pc-derived-lower-truncation-step-ses are different statements). Step 5: lem-kun-kflat-criteria(1) holds under the same hypotheses. Small cases checked: the contractible [F->F] gives P=0 and L=K; a nonzero term in degree a-1 or Z--2-->Z would break the conclusion, and the hypotheses exclude both. FIX: Step 5 claimed 'the same convention as in the statement', but the criteria node's K-flatness is that of def-kun-derived-tensor (E⊗F), while the item asserts def-pc-kflat-complex (Tot(F⊗K)). I added def-kun-derived-tensor and def-pc-kflat-complex to Step 5's uses and to proof_deps, and replaced the sentence with the explicit sign-symmetry identification. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
