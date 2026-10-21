@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-etale-stalk-constant-complex-exactness",
+ "kind": "statement",
+ "title": "Exact geometric stalks and the constant-complex retraction",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a commutative ring, and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ a geometric point [def-weil-geometric-point]. On the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site] let $A_T$ be the constant ring sheaf and $c(M)=\\underline M$ the constant $A_T$-module sheaf of an ordinary $A$-module $M$ [def-kun-constant-sheaf]. Write $S(F)=F_{\\bar t}$ for the geometric stalk with its induced $A$-module action [def-weil-pbc-geometric-stalks]. Use sheaves of modules over $A_T$ [def-weil-sheaf-of-modules-category], and apply $S$ and $c$ termwise to unbounded cochain complexes [def-weil-abstract-derived-category]. Let $C$ be any such complex of $A_T$-module sheaves and $E$ any such complex of ordinary $A$-modules. Both are exact additive functors on their respective abelian categories, and there are natural $A$-linear cohomology isomorphisms\n$$H^n(SC)\\cong S(H^n(C)),\\qquad H^n(cE)\\cong c(H^n(E))\\quad(n\\in\\mathbf Z).$$\nConsequently each termwise functor preserves acyclic complexes and quasi-isomorphisms. There is a natural chain isomorphism $\\eta_E:E\\xrightarrow{\\sim}S(cE)$ whose degree-$n$ component sends $e\\in E^n$ to the germ at $(T,\\bar t)$ of its constant section. In particular $S(A_T)\\cong A$ has the ordinary scalar action. All assertions hold for arbitrary unbounded complexes, without any finiteness hypothesis on $A$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EI, label lemma-sheafification-exact; Tag 04EQ, label lemma-stalk-exact-modules, clauses (1) and (3). Constant-germ normalization: etale-cohomology.tex Tag 03PT, label lemma-stalk-exact, clause (2). Applied termwise to unbounded complexes, expanding parent proof step 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheaf|constantSheaf.*(Exact|exact|Homology)|sheafFiber.*(Exact|exact|Homology)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact constant module sheaf and geometric stalk functors on cochain complexes have natural stalk constant identity and preserve quasi isomorphisms",
+   "results": "8 hits: TopCat.Presheaf.stalkFunctor_preserves_mono, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.rec, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"constantSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme and any commutative ring the module valued geometric stalk functor and constant sheaf functor preserve acyclic unbounded complexes and stalk of the constant complex is naturally the original module complex",
+   "results": "8 hits: ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.localizationToStalk_mk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafToSheaf.*[Ee]xact|homologyFunctorIso|preservesHomologyOfExact",
+   "results": "15 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean (subdirectory Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of termwise constant sheafification and geometric stalk on module complexes is naturally the identity and both exact functors commute with homology",
+   "results": "8 hits: PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, CategoryTheory.constantCommuteCompose, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, TopCat.Presheaf.sheafifyStalkIso, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, PresheafOfModules.toPresheaf_map_toSheafify",
+   "date": "2026-10-21",
+   "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-derived-tensor-stalk",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "blueprint": {
+  "from": {
+   "node": "det-ctf-finite-proper-tor",
+   "place": "From constant modules to all sheaves paragraph: the flat-resolution restriction argument; parent proof step 1, exact module stalks and the acyclic constant-complex test",
+   "via": [
+    "lem-sfb-etale-derived-tensor-stalk"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

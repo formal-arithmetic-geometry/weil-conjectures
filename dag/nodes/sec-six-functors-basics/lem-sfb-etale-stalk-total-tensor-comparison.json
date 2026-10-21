@@ -1,0 +1,102 @@
+{
+ "id": "lem-sfb-etale-stalk-total-tensor-comparison",
+ "kind": "statement",
+ "title": "Canonical signed total tensor stalk comparison and chain naturality",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a commutative ring, and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ a geometric point [def-weil-geometric-point]. Use the small etale site [def-weil-pbc-etale-site], the constant ring sheaf $A_T$ [def-kun-constant-sheaf], and the module-valued stalk $S(F)=F_{\\bar t}$ [def-weil-pbc-geometric-stalks]. For unbounded cochain complexes $C,D$ of $A_T$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], tensor means the direct-sum total tensor [def-pc-tensor-complex-sheaves], also for ordinary $A$-module complexes: degree $n$ is $\\bigoplus_{p+q=n}C^p\\otimes D^q$ and the differential on bidegree $(p,q)$ is $d_C\\otimes1+(-1)^p1\\otimes d_D$. There is a unique natural chain isomorphism\n$$\\theta_{C,D}:S(C\\otimes_{A_T}D)\\xrightarrow{\\sim}SC\\otimes_A SD$$\nwith the following normalization. If $p+q=n$, $\\iota_{p,q}$ is the source total-complex coprojection, $\\iota'_{p,q}$ the target coprojection, and $\\gamma_{M,N}:S(M\\otimes_{A_T}N)\\to SM\\otimes_A SN$ the ordinary tensor comparison for $A_T$-module sheaves $M,N$, characterized by $\\gamma((s\\otimes t)_{\\bar t})=s_{\\bar t}\\otimes t_{\\bar t}$ for sections on a common pointed etale neighbourhood, then\n$$\\theta_{C,D}^n\\circ S(\\iota_{p,q})=\\iota'_{p,q}\\circ\\gamma_{C^p,D^q}.$$\nFor every pair of chain maps $f:C\\to C'$, $g:D\\to D'$ one has\n$$\\theta_{C',D'}\\circ S(f\\otimes g)=(Sf\\otimes Sg)\\circ\\theta_{C,D}.$$\nNo boundedness or termwise flatness is required; totalization uses the countable coproducts indexed by $p+q=n$, not products.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, proof: direct-sum totalization of the ordinary tensor comparison. Ordinary module comparison: sites-modules.tex Tag 03EL, label lemma-tensor-product-pullback. Geometric stalk specialization and explicit chain-map normalization expand parent proof step 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving coproducts and tensor products induces a natural isomorphism on signed total tensor cochain complexes",
+   "results": "8 hits: CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_hom_f_f, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_inv_f_f, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|mapHomologicalComplexδNatTrans|sheafFiber.*[Mm]onoidal",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical geometric stalk functor on etale sheaves commutes naturally with direct sum total tensor complexes including the signed differential",
+   "results": "8 hits: TopCat.Presheaf.stalkFunctor_map_germ, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalkFunctor_map_germ_apply, TopCat.Presheaf.stalkFunctor_map_germ_apply', TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_assoc, stalkSkyscraperSheafAdjunction, TopCat.Presheaf.stalkFunctor_preserves_mono",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"tensor\"",
+   "results": "2 hits: CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ, CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary etale module complexes the canonical geometric stalk total tensor comparison is a natural chain isomorphism with the signed differential and the germ formula on each coproduct summand",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso_hom, tensorKaehlerQuotKerSqEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor|map₂CochainComplex",
+   "results": "25 hits: Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean (subdirectory Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map₂CochainComplex\"",
+   "results": "10 hits: CategoryTheory.Functor.map₂CochainComplex, CategoryTheory.Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntObjMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntObjFlipMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntMapMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntMapFlipMap₂CochainComplex, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of bifunctors comparing the geometric stalk of the tensor product of unbounded etale cochain complexes with the tensor product of their stalk complexes",
+   "results": "8 hits: smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, smoothSheafCommRing.ι_forgetStalk_inv_assoc, smoothSheafCommRing.ι_forgetStalk_hom_assoc, smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.ι_forgetStalk_hom_apply, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-derived-tensor-stalk",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "blueprint": {
+  "from": {
+   "node": "det-ctf-finite-proper-tor",
+   "place": "From constant modules to all sheaves paragraph: tensor products are computed stalkwise; parent proof step 2, direct-sum summands, signed differential and chain-map naturality",
+   "via": [
+    "lem-sfb-etale-derived-tensor-stalk"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

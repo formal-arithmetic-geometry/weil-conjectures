@@ -20,116 +20,80 @@
  ],
  "proof": [
   {
-   "text": "Write $S$ for the geometric-stalk functor. By [prop-weil-pbc-geometric-stalks-exact], $S$ is exact on abelian sheaves. The same holds on $A_T$-modules: kernels, images and cokernels have their induced scalar actions, and the abelian stalk comparisons are $A$-linear. Thus $H^n(SC)=S H^n(C)$ for every complex, and $S$ preserves acyclicity and quasi-isomorphisms. For any $A$-module $M$, [def-kun-constant-sheaf] and [lem-weil-pbc-sheafification-geometric-stalk] give $S(\\underline M)=M$: in the constant presheaf all transition maps are identities, and every pointed neighbourhood maps to $(T,\\bar t)$, so the constant-diagram colimit is $M$. This is the canonical constant-germ map, hence is natural and $A$-linear; in particular $S(A_T)=A$. Finally, the constant presheaf of an acyclic module complex is sectionwise acyclic, and its sheafification is acyclic by both clauses of [lem-weil-pbc-site-r-module-presheaf-sheafification-exact]. Therefore termwise constant sheaves carry acyclic module complexes to acyclic sheaf complexes.",
+   "text": "Write $S$ for the module-valued geometric stalk. By [lem-sfb-etale-stalk-constant-complex-exactness], $S$ preserves acyclic complexes and quasi-isomorphisms, and for every acyclic ordinary $A$-module complex $E$, the constant complex $cE$ is acyclic with a natural chain isomorphism $E\\cong S(cE)$. By [lem-sfb-etale-stalk-total-tensor-comparison] write $\\theta_{C,D}:S(C\\otimes D)\\cong SC\\otimes SD$ for the normalized natural chain comparison.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-kun-constant-sheaf",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+    "lem-sfb-etale-stalk-constant-complex-exactness",
+    "lem-sfb-etale-stalk-total-tensor-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EI (lemma-sheafification-exact), 04EQ (lemma-stalk-exact-modules); geometric specialization also etale-cohomology.tex Tag 03PT"
+    "place": "Tag 03EI, label lemma-sheafification-exact; Tag 04EQ, label lemma-stalk-exact-modules, clauses (1) and (3). Constant-germ normalization: etale-cohomology.tex Tag 03PT, label lemma-stalk-exact, clause (2). Applied termwise to unbounded complexes, expanding parent proof step 1."
    }
   },
   {
-   "text": "For any two complexes $C,D$ of $A_T$-modules, form the canonical comparison $S(C\\otimes_{A_T}D)\\cong SC\\otimes_A SD$ of ordinary total tensor complexes. In degree $n$, [lem-kun-stalks-commute-colimits] moves $S$ through $\\bigoplus_{p+q=n}$, and clause (1) of [lem-pod-etale-stalk-tensor-scalar] identifies each summand $S(C^p\\otimes_{A_T}D^q)$ with $S(C^p)\\otimes_A S(D^q)$. The colimit statement applies to module sheaves as well: its abelian comparison is $A$-linear, since each coprojection commutes with scalar multiplication; the colimit inherits the action from these coprojections. The differential convention of [def-pc-tensor-complex-sheaves] is $d_C\\otimes1+(-1)^p1\\otimes d_D$ on a $(p,q)$ summand. Naturality of the ordinary tensor comparison identifies these two summand maps with $d_{SC}\\otimes1+(-1)^p1\\otimes d_{SD}$. The degreewise isomorphisms therefore form an isomorphism of complexes, natural in both chain maps. All sums are the small countable sums indexed by $p+q=n$; no total product or convergence assertion occurs.",
+   "text": "If $P$ is K-flat, then for every acyclic $E$, $cE\\otimes_{A_T}P$ is acyclic by [def-pc-kflat-complex]. Its stalk is acyclic by Step 1 and is $E\\otimes_A SP$ via $\\theta_{cE,P}$ and the constant-germ isomorphism. Thus $SP$ is K-flat by [def-pc-module-kflat-complex]. This tests every acyclic unbounded $E$ and needs no termwise flatness.",
    "uses": [
-    "lem-kun-stalks-commute-colimits",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN (lemma-check-K-flat-stalks), proof (2), commutation of tensor and direct sums with stalks; comparison of total complexes also Tag 07A4 (lemma-pullback-tensor-product)"
-   }
-  },
-  {
-   "text": "Let $P$ be any K-flat $A_T$-module complex, with K-flatness as in [def-pc-kflat-complex]. To test $SP$ against an arbitrary acyclic complex $E$ of ordinary $A$-modules, use Step 1 to see that $\\underline E$ is acyclic. Then $P\\otimes_{A_T}\\underline E$ is acyclic by K-flatness (interchanging tensor factors by the signed symmetry if necessary). Its stalk is acyclic by Step 1 and is $SP\\otimes_A E$ by Step 2 and $S\\underline E=E$. This is precisely the test in [def-pc-module-kflat-complex], so $SP$ is K-flat. This constant-coefficient argument works for every acyclic $E$, without requiring boundedness or termwise flatness of $P$.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-kun-constant-sheaf",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "lem-kun-stalks-commute-colimits",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-etale-stalk-constant-complex-exactness",
+    "lem-sfb-etale-stalk-total-tensor-comparison",
     "def-pc-kflat-complex",
     "def-pc-module-kflat-complex"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0DEN (lemma-check-K-flat-stalks), clause (1); elementary constant-coefficient proof using Steps 1 and 2"
+    "place": "Tag 0DEN, label lemma-check-K-flat-stalks, clause (1); constant-coefficient acyclic test"
    }
   },
   {
-   "text": "Choose complexes $C,D$ representing $K,L$, and K-flat resolutions $P\\to C$, $Q\\to D$ supplied by [lem-kun-flat-resolution-existence]. We may use $P,Q$ as the representing complexes themselves, so [def-kun-derived-tensor] computes $K\\otimes_{A_T}^{\\mathbf L}L$ by $P\\otimes_{A_T}Q$ (the identity of $P$ is a K-flat resolution). Step 1 shows that $SP\\to SC$ and $SQ\\to SD$ are quasi-isomorphisms, and Step 3 makes $SP,SQ$ K-flat. Thus these are K-flat representatives of $K_{\\bar t},L_{\\bar t}$ in the sense of [def-pc-module-kflat-complex], and their total tensor $SP\\otimes_A SQ$ computes the right side. Localizing the chain isomorphism of Step 2 for $(P,Q)$ gives the asserted isomorphism. The left side is computed by $S(P\\otimes_{A_T}Q)$ because the derived stalk is termwise exact.",
+   "text": "Choose K-flat resolutions with flat terms $P\\to C$, $Q\\to D$ of representatives of $K,L$ using [lem-kun-flat-resolution-existence]. Their stalk maps are quasi-isomorphisms by Step 1 and their stalks are K-flat by Step 2. By [def-kun-derived-tensor] and [def-pc-module-kflat-complex], the two desired objects are represented by $S(P\\otimes Q)$ and $SP\\otimes SQ$. Localizing $\\theta_{P,Q}$ identifies them.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-kun-constant-sheaf",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
     "lem-kun-flat-resolution-existence",
-    "def-kun-derived-tensor",
+    "lem-sfb-etale-stalk-constant-complex-exactness",
+    "lem-sfb-etale-stalk-total-tensor-comparison",
+    "def-pc-kflat-complex",
     "def-pc-module-kflat-complex",
-    "def-weil-abstract-derived-category",
-    "lem-kun-stalks-commute-colimits",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex"
+    "def-kun-derived-tensor",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor), 0DEN (lemma-check-K-flat-stalks)"
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor) and 07A4 (lemma-pullback-tensor-product)"
    }
   },
   {
-   "text": "The isomorphism is canonical and natural after localization. On K-flat representatives its comparison is exactly the chain isomorphism of Step 2, which commutes with both chain maps. Changing the first K-flat model along a quasi-isomorphism gives an isomorphism of tensor complexes in the derived category by [lem-kun-derived-tensor-well-defined]; its stalk is again a quasi-isomorphism by Step 1. Use the two K-flat representatives from Step 4. On the module side the other fixed factor is then K-flat by Step 3, so its tensor functor preserves quasi-isomorphisms by [def-pc-module-kflat-complex]; the same applies when changing the second representative. On the site side the assertion for the second factor is again [lem-kun-derived-tensor-well-defined], with the factors interchanged. The computation of both bifunctors is [def-kun-derived-tensor]. The naturality squares of Step 2 therefore remain commuting squares when any such quasi-isomorphism is inverted. The canonical independence of the K-flat construction in [lem-kun-derived-tensor-well-defined], together with the localization description [def-weil-abstract-derived-category], identifies the comparisons from different resolutions: chain-map naturality extends to inverses and composites, which generate the localized morphisms. Hence the comparison is a natural isomorphism of the stated bifunctors. No step used a bound on the complexes, a finiteness assumption on $A$, or a Tor-amplitude assumption.",
+   "text": "This comparison is canonical and natural. Changing either K-flat sheaf model along a quasi-isomorphism preserves its tensor with any complex by [lem-kun-derived-tensor-well-defined], using signed symmetry for the other factor; its stalk remains a quasi-isomorphism by Step 1. On modules the fixed stalk factor is K-flat, so its tensor preserves quasi-isomorphisms by [def-pc-module-kflat-complex]. The naturality equation for $\\theta$ remains true on inverting these maps, and on composites. More formally, apply [lem-weil-pbc-site-derived-tensor-descent] on a small skeleton of the etale site with $R=A_T$: our chosen resolutions have flat terms, so its resolving-subcategory equivalence and unique-extension clause apply to the two bifunctors with values in $D(A)$. They extend $\\theta$ and its inverse uniquely, giving a natural isomorphism independent of the resolutions. No boundedness, constructibility, finiteness or Tor-amplitude assumption occurred.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-kun-constant-sheaf",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "lem-kun-stalks-commute-colimits",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-etale-stalk-constant-complex-exactness",
+    "lem-sfb-etale-stalk-total-tensor-comparison",
     "lem-kun-derived-tensor-well-defined",
     "def-pc-module-kflat-complex",
-    "def-kun-derived-tensor",
-    "def-weil-abstract-derived-category",
-    "lem-kun-flat-resolution-existence",
-    "def-pc-kflat-complex"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and the construction before Tag 06YU (definition-derived-tor); naturality of Tag 07A4"
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor), and the resolving-class localization in lem-weil-pbc-site-derived-tensor-descent"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-geometric-stalks-exact",
-  "def-kun-constant-sheaf",
-  "lem-weil-pbc-sheafification-geometric-stalk",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-kun-stalks-commute-colimits",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-etale-stalk-constant-complex-exactness",
+  "lem-sfb-etale-stalk-total-tensor-comparison",
   "def-pc-kflat-complex",
   "def-pc-module-kflat-complex",
   "lem-kun-flat-resolution-existence",
   "def-kun-derived-tensor",
   "def-weil-abstract-derived-category",
-  "lem-kun-derived-tensor-well-defined"
+  "lem-kun-derived-tensor-well-defined",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0DEN (lemma-check-K-flat-stalks), specialized to constant coefficients, with the elementary constant-complex argument of Step 3; Tags 06YS, 06YT, 06YU and 07A4 for the K-flat construction and natural comparison"
+  "place": "Constant-coefficient test for Tag 0DEN; K-flat resolution construction Tags 06YS, 06YT, 06YU and canonical totalization of Tag 07A4. Parent steps 1 and 2 extracted as statement-only nodes."
  },
  "mathlib_searches": [
   {
@@ -272,31 +236,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-etale-derived-tensor-stalk",
   "worker": "stage1",
-  "summary": "Proved exactness and the constant-germ comparison, computed direct-sum total tensor stalks including the signed differential, tested K-flat stalks with acyclic constant complexes, and applied K-flat resolutions with explicit localization naturality. Reused existing nodes throughout; no new nodes and no statement change.",
-  "blueprint": "Realizes det-ctf-finite-proper-tor and its unit sk-prop-ctf-finite-proper, first step: the stalkwise tensor identification in the sentence that tensoring with an arbitrary sheaf is computed stalkwise.",
+  "summary": "Repair of human re-split return. Statement unchanged. Extracted exact constant/stalk complex comparison and normalized signed total tensor comparison as two independent statement-only nodes, each with actual Mathlib searches. Parent retains the constant-acyclic K-flat test and short resolution/localization assembly; the report preserves all original argument text and its destinations.",
+  "blueprint": "Realizes det-ctf-finite-proper-tor, From constant modules to all sheaves paragraph, and sk-prop-ctf-finite-proper step 1: stalks of unbounded derived tensors, using exactly the original constant-coefficient K-flat route.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-sheafification-geometric-stalk",
-    "why": "Generic geometric-stalk invariance under sheafification, needed to identify stalks of constant complexes; the proper-direct-image unit does not prove it."
-   },
-   {
-    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "why": "Generic exactness and sectionwise presheaf homology, used to prove constant acyclic complexes are acyclic sheaf complexes."
-   },
-   {
-    "node": "lem-pod-etale-stalk-tensor-scalar",
-    "why": "Generic ordinary tensor/stalk comparison for arbitrary commutative coefficients, used summandwise in total complexes."
-   },
-   {
     "node": "lem-kun-flat-resolution-existence",
-    "why": "Generic existence of unbounded K-flat resolutions on the small etale site, required for the derived tensor computation."
+    "why": "General unbounded K-flat resolutions with flat terms on the small etale site; the proper-direct-image unit does not supply this homological tool."
    },
    {
     "node": "lem-kun-derived-tensor-well-defined",
-    "why": "Generic canonical independence of the K-flat model, used to descend the natural stalk comparison."
+    "why": "Generic invariance of total tensor under changes between K-flat models, used in either factor."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-subcategory localization and unique extension of natural transformations; supplies the complete formal descent argument, without replacing the unit route."
    }
   ]
  },
@@ -305,15 +261,16 @@
   "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
   "lem-pod-etale-stalk-tensor-scalar",
   "lem-kun-flat-resolution-existence",
-  "lem-kun-derived-tensor-well-defined"
+  "lem-kun-derived-tensor-well-defined",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q58-b74644881",
-  "group": "Q58",
+  "reviewer": "NT-cc-N9-f35dc7d88",
+  "group": "N9",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-b74644881 (reviewer sub-agent of L); spot-checked: The statement and mathematics pass all source and edge-case checks. Repair the omitted dependencies in Steps 3–5 and mark Step 3 non-elementary; corrected JSON is under fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-derived-tensor-stalk.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-f35dc7d88 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Re-split note (repair-notes, human 2026-10-21; at least 1 new node, parent at most 3000 characters) is met. The item statement and stmt_deps are identical to the previous version, and the proof is now 2144 characters in 4 steps. Old step 1 (exact module stalk and constant functors, H^n commuting, constant-germ map M ≅ S(M), constant complexes of acyclic complexes acyclic) became lem-sfb-etale-stalk-constant-complex-exactness in full. Old step 2 (direct-sum totalization, summand tensor comparison, (−1)^p differential, naturality in both chain maps) became lem-sfb-etale-stalk-total-tensor-comparison, with θ normalized on coprojections by the inverse of lem-pod-etale-stalk-tensor-scalar(1). Old step 3 (S of a K-flat complex is K-flat, tested against cE) is kept intact. The cE⊗P order matches def-pc-kflat-complex, which tests Tot(F⊗K) with F acyclic, so no symmetry is needed. Old step 4 is kept: def-kun-derived-tensor gives Q(P⊗Q) with P, Q taken as representatives. Old step 5's loose 'inverses and composites generate' argument is now carried by the existing split node lem-weil-pbc-site-derived-tensor-descent (equivalence for K-flat flat-term complexes, unique extension of bifunctor transformations). I checked that localized θ is natural on P_R×P_R and that θ and θ⁻¹ extend to mutually inverse transformations. Both new nodes are self-contained and true. Edge cases checked: A=0, the acyclic complex A→A, odd and negative p, C=A_T[0], empty T. Neither restates the parent. No duplicates found: lem-sfb-ringed-site-point-tensor gives only an unnormalized iso with no naturality, and lem-pc-stalk-tensor-complex is about Zariski ringed spaces. Each new node records all three kinds of Mathlib search, with no match. Stacks tags 0DEN, 03EI, 04EQ, 03PT, 07A4, 03EL, 06YS, 06YT and 06YU all carry the cited labels. The route matches blueprint sk-prop-ctf-finite-proper-tor.proof.md lines 19–24, and no SGA source is cited. Accepted tool use: lem-weil-pbc-site-derived-tensor-descent, a generic localization tool. Advisory: parent step 2 could instead cite lem-sfb-ringed-site-kflat-stalk-criterion."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk",
