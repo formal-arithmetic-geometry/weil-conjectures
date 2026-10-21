@@ -20063,3 +20063,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:55 L: merged deliver/Q41/lem-sf-semilinear-scalar-derived-comparison (reviewer FIX; first push; new nodes: 0)
 - 03:55 L: merged deliver/Q23/lem-sfb-lattice-pullback (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T03:56:01Z L: superseded stage-1 delivery Q54/lem-sfb-scalar-model-immersion-extension at 94d829e8cf5237b9d114701ee1e1cb4547ae854b; current completion retained; packet archived at refs/superseded/Q54/lem-sfb-scalar-model-immersion-extension/94d829e8cf5237b9d114701ee1e1cb4547ae854b; stale return retired.
+- 03:56 L: merged deliver/NN/lem-weil-pbc-finite-etale-cover-cech-stage-comparison (reviewer FIX; first push; new nodes: 0)

@@ -15,9 +15,129 @@
   "def-pc-fibre-product",
   "def-weil-pbc-cover-cech"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J=\\{i\\in L:i\\ge i_0\\}$. It is small, nonempty (it contains $i_0$), and directed: an upper bound in $L$ of two members is again in $J$. The restricted cone with point $U$ is still limiting. Indeed a compatible cone over $J$ extends to $L$ by defining its component at $k$ using any $j\\ge k,i_0$ followed by $U_j\\to U_k$; two such choices agree after passing to a common upper bound. The extension is unique by the same argument. If $m=0$, all degree-$p$ terms for $p\\ge0$ are empty products in abelian groups, hence zero, so both comparisons hold. In the remaining steps allow repeated covering indices and put $A=\\{1,\\ldots,m\\}$.",
+   "uses": [
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, restriction to stages after the descended covering; empty-family case"
+   }
+  },
+  {
+   "text": "The affine-limit theorem first shows that $U$ is affine. For each $p\\ge0$ and $\\alpha=(a_0,\\ldots,a_p)\\in A^{p+1}$, put $T_{\\alpha,0}=W_{a_0,i_0}\\times_{U_{i_0}}\\cdots\\times_{U_{i_0}}W_{a_p,i_0}$. By the finite-limit property of étale base change, its base change to $U_i$ identifies with $T_{\\alpha,i}=W_{a_0,i}\\times_{U_i}\\cdots\\times_{U_i}W_{a_p,i}$, and its base change to $U$ with $T_\\alpha=W_{a_0}\\times_U\\cdots\\times_UW_{a_p}$. Each is affine: maps between affine schemes are affine, affine morphisms are stable under base change, and their sources over affine targets are affine. Every stage family covers by covering base change. Composition of étale maps shows that $T_{\\alpha,i}\\to X$ is étale. It is of finite presentation because it is locally of finite presentation by étaleness, and is quasi-compact and quasi-separated by affineness. All transitions between these affine schemes are affine.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "The natural cone gives $T_\\alpha\\cong\\varprojlim_{i\\in J}T_{\\alpha,i}$. To verify its universal property, for any scheme $Z$ a compatible family $Z\\to T_{\\alpha,0}\\times_{U_{i_0}}U_i$ is precisely a map $Z\\to T_{\\alpha,0}$ together with compatible maps $Z\\to U_i$ having the required common image in $U_{i_0}$. The first components agree since $J$ is directed and nonempty; the second components give a unique map $Z\\to U$ by step 1. This is exactly a map $Z\\to T_{\\alpha,0}\\times_{U_{i_0}}U$. These identifications commute with projections deleting factors: both composites to each remaining $W_{a_r,i_0}$ and to the base agree, so the uniqueness clause of the fibre-product universal property makes the composites equal. The argument treats repeated indices as separate factors.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "The affine-limit theorem identifies the coordinate ring of each limit in step 3 with the filtered colimit of its stage coordinate rings. Thus the presentations by affine étale finite-presentation $X$-schemes exhibit $T_\\alpha$ as affine ind-étale over $X$, by the presentation convention for ind-étale algebras. Apply the natural section formula to this presentation. It gives an isomorphism of abelian groups $c_\\alpha:\\varinjlim_{i\\in J}F(T_{\\alpha,i})\\xrightarrow{\\sim}M(T_\\alpha)$. Its leg at $i$ is $\\ell_{\\alpha,i}:F(T_{\\alpha,i})\\to M(T_\\alpha)$ obtained by the comparison unit at the étale object $T_{\\alpha,i}$ followed by restriction along $T_\\alpha\\to T_{\\alpha,i}$. These are exactly the section restriction maps specified in the item. The section formula applies to module sheaves, so additivity is part of this comparison; no passage through injectivity of underlying abelian sheaves is involved. By [def-weil-pbc-ind-etale-basis] each $T_\\alpha$, in particular each $W_a$ (the case $p=0$), and also $U$, whose coordinate ring is $\\varinjlim_{i}\\Gamma(U_i,\\mathcal O_{U_i})$ by the affine-limit theorem, is an object of $\\mathcal B_X$; ind-étale maps are weakly étale [lem-weil-pbc-ind-etale-stability], so all of them are objects of $X_{\\Proet}$ and $M(T_\\alpha)$ is defined. Each $W_a\\to U$ comes from an $\\mathcal O(X)$-algebra map between ind-étale $\\mathcal O(X)$-algebras, hence is ind-étale and weakly étale by the same node. The family is jointly surjective (step 2) and every $W_a\\to U$ is a morphism of affine schemes, hence affine, so for an affine open $V\\subseteq U$ the finitely many affine opens $W_a\\times_UV$ have images covering $V$. Thus $\\{W_a\\to U\\}$ is a finite pro-étale covering [def-weil-pbc-proetale-covering], and the right-hand complex of [def-weil-pbc-cover-cech] is defined.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-comparison-sections",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "For a fixed $p$, the tuple set $A^{p+1}$ is finite. Apply commutation of filtered colimits of abelian groups with finite products, and then the maps $c_\\alpha$ of step 4, to obtain $\\Phi^p:\\varinjlim_{i\\in J}\\prod_{\\alpha\\in A^{p+1}}F(T_{\\alpha,i})\\xrightarrow{\\sim}\\prod_{\\alpha\\in A^{p+1}}M(T_\\alpha)$. The component of the leg of $\\Phi^p$ at $i$ and $\\alpha$ is $\\ell_{\\alpha,i}$. The displayed products are precisely the degree-$p$ terms of the two ordered Čech complexes, including every repeated-index tuple.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Write $r_{j,i}:T_{\\beta,i}\\to T_{\\beta\\setminus j,i}$ and $r_j:T_\\beta\\to T_{\\beta\\setminus j}$ for deletion of the $j$-th factor of a tuple $\\beta\\in A^{p+2}$. The projection identities of step 3 and naturality of the section comparison give $M(r_j)\\ell_{\\beta\\setminus j,i}=\\ell_{\\beta,i}F(r_{j,i})$. Hence for $s\\in\\check C^p(\\{W_{a,i}\\},F)$, the $\\beta$-component of $\\delta\\Phi^p([i,s])$ is $\\sum_{j=0}^{p+1}(-1)^jM(r_j)\\ell_{\\beta\\setminus j,i}(s_{\\beta\\setminus j})=\\ell_{\\beta,i}(\\sum_{j=0}^{p+1}(-1)^jF(r_{j,i})(s_{\\beta\\setminus j}))$, the $\\beta$-component of $\\Phi^{p+1}([i,\\delta s])$. The same projection identity at two stages proves the transition maps commute with differentials. Colimits of these complexes are computed degreewise: define the differential by its composites with the colimit legs; its square is zero since it is zero on every leg. A compatible family of cochain maps out of the stages factors degreewise, and the resulting maps commute with differentials since their composites with all legs do. This verifies the colimit universal property in complexes. Thus the $\\Phi^p$ form the asserted complex isomorphism, since the inverse of a degreewise isomorphism commuting with the differential also commutes with it.",
+   "uses": [
+    "lem-weil-pbc-comparison-sections",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Fix $q\\ge0$. Put $C_i^\\bullet=\\check C^\\bullet(\\{W_{a,i}\\},F)$, $Z_i^q=\\ker(C_i^q\\xrightarrow{\\delta_i^q}C_i^{q+1})$, and $H_i^q=Z_i^q/\\operatorname{im}\\delta_i^{q-1}$, with $C_i^{-1}=0$. Kernel formation is a finite limit, so commutation with finite limits identifies $\\varinjlim_i Z_i^q$ with $\\ker(\\varinjlim_i C_i^q\\to\\varinjlim_i C_i^{q+1})$. Apply exactness of filtered colimits to $C_i^{q-1}\\to Z_i^q\\to H_i^q\\to0$. It identifies $\\varinjlim_i H_i^q$ with the quotient of that kernel by the image of $\\varinjlim_i C_i^{q-1}$. This is $H^q(\\varinjlim_i C_i^\\bullet)$ by the definition of cohomology. Composing with the complex isomorphism of step 6 gives $\\varinjlim_i\\check H^q(\\{W_{a,i}\\},F)\\cong\\check H^q(\\{W_a\\},M)$. Its maps are induced by the same restriction legs, since every map used was the canonical map on kernels or quotients. For $q=0$ the incoming term is zero, so the argument also proves the degree-zero assertion without an augmentation or vanishing assumption.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-cover-cech",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U (lemma-affine-vanishing), second Čech-colimit calculation; Tag 099S (lemma-limit-pullback)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +173,45 @@
    "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.Extension.cotangentComplex_injective_iff; Algebra.Etale.formallyEtale; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.instForallOfFinite; Algebra.FormallySmooth.kerCotangentToTensor_injective_iff; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
    "date": "2026-10-21",
    "verdict": "no match: the listed declarations do not assert this finite-cover comparison or descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*colimit|colimit.*cech|comparisonUpperStar",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the full affine étale/pro-étale Čech comparison; general infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Cech cochain complexes of etale module sheaves commute with affine inverse limits after pro etale pullback",
+   "results": "SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.sheafificationCompPullback; CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc; SheafOfModules.hasLimit; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi; Condensed.instPreservesFiniteProductsOppositeProfiniteVal; AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf",
+   "date": "2026-10-21",
+   "verdict": "no match for the full affine étale/pro-étale Čech comparison; general infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match for the full affine étale/pro-étale Čech comparison; general infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech complex of an etale sheaf pulled back to the pro etale site along an affine inverse limit is the filtered colimit of the finite etale stage Cech complexes",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; Condensed.isColimitLocallyConstantPresheaf_desc_apply; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-21",
+   "verdict": "no match for the full affine étale/pro-étale Čech comparison; general infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits commute with finite products and homology of cochain complexes of abelian groups",
+   "results": "instPreservesHomologyFunctorAddCommGrpCatColim; HomologicalComplex.ab5OfSize; HomologicalComplex.isColimitOfEval; DerivedCategory.homologyFunctorFactors; HomologicalComplex.instPreservesColimitEval; HomologicalComplex.isColimitCoconeOfHasColimitEval; DerivedCategory.homologyFunctorFactorsh; DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the full affine étale/pro-étale Čech comparison; general infrastructure only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-comparison-injective-acyclicity",
@@ -73,5 +228,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-finite-etale-cover-cech-stage-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the second-limit Čech comparison using the existing natural module section formula, fibre-product universal properties, and existing finite-limit/exactness Mathlib leaves. Seven steps cover tail indexing, nerve geometry, face-compatible limits, section maps, finite products, chain compatibility, and cohomology. No new nodes and no statement change.",
+  "blueprint": "The nearest blueprint ancestor lem-weil-pbc-comparison-injective-acyclicity, proof second-limit paragraph from the descended finite étale covering through the displayed Čech-colimit identity, before injectivity is used."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-229789f04",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-229789f04 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, 0 new nodes, statement unchanged. I checked it against Stacks proetale.tex Tag 099U (lemma-affine-vanishing, second Čech-colimit paragraph, l.3866ff) and Tag 099S (lemma-limit-pullback). The statement is true. The m=0 case, a constant system, repeated indices, q=0 and noncommutative finite Λ all hold. It is not dropped, not superseded (still unsplit in live and side-live), has no repair note, and no SGA is cited. Route: sk-thm-properbasechange uses sk-thm-p1, which covers limit-affine-transition; the other off-unit citations are leaves or definitions. review_split passes on the snapshot and on the patched copy, and check_dag shows no cycle through the item. Step checks: step 1 (tail cofinality, m=0) is elementary. Step 2: base-change finite limits clauses 2–3, affine permanence (1)-(3), covering base change, étale composition, and 01TP finite presentation are all correctly cited. Step 3: fibre-product universal property, faces by uniqueness. Step 4: comparison-sections on T_α, which is affine ind-étale over X by limit-affine-transition; I accept 'naturally' as the unit-and-restriction cocone. Step 5: finite products commute with filtered colimits in Ab. Step 6: face identity verified via naturality of the unit plus the step-3 square, colimits of complexes degreewise. Step 7: kernels as finite limits, and exactness of filtered colimits applied at Z^q and at H^q. No duplicates: etale-limit-finite-cech-(complex-)colimit varies coefficients on étale sites, finite-basis-cech-first-limit is the first limit, finite-etale-cech-filtered-colimit uses a fixed cover. One fault fixed: the proof never showed that the right-hand Čech complex is defined, i.e. that U and the T_α are objects of X_proet and {W_a→U} is a pro-étale covering, as def-weil-pbc-cover-cech requires. Step 4 now cites def-weil-pbc-ind-etale-basis, lem-weil-pbc-ind-etale-stability (ind-étale is weakly étale; maps between ind-étale algebras are ind-étale), morphism-affine-schemes-affine and def-weil-pbc-proetale-covering; proof_deps were recomputed. The fixed item is at fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-etale-cover-cech-stage-comparison.json.; 1 file(s) fixed by the reviewer"
  }
 }
