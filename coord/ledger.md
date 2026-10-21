@@ -19780,3 +19780,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: returned deliver/N9/lem-weil-pbc-condensed-e-realization (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/NE/lem-weil-pbc-constant-completion-equivalence (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/NF/lem-weil-pbc-integral-stratified-perfect-characterization (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
+- 03:22 L: returned deliver/Q01/lem-weil-pbc-lisse-e-constructible-integral-lattice (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
