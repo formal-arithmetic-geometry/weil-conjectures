@@ -24,16 +24,15 @@
    "elementary": true
   },
   {
-   "text": "For s:Spec L -> Spec K, apply the already proved upstream theorem AlgebraicGeometry.Scheme.isUniversalHomeomorphism_spec_strictHenselizationEval from StrictHenselizationField. Its field-specific argument proves injectivity of evaluation using reduced Artinian etale K-algebras, hence that the strict henselization is a field by its local structure; separable elements of L occur in pointed etale neighbourhoods, so L is purely inseparable over this field. The local-structure and purely-inseparable nodes below record the inputs of that upstream theorem, rather than asserting that local structure alone implies the field case. Transport Spec of evaluation through smallStrictHenselizationColimitIso. The private lemma strictHenselizationComparison_over proves that this isomorphism respects the project structural map: use its neighbourhood-leg characterization, Functor.Final.ι_colimitIso_hom, and strictLocalizationCone_π_app_hom. Thus the resulting h satisfies h followed by the project structural map equals s.",
+   "text": "For s:Spec L -> Spec K, apply the proved upstream theorem AlgebraicGeometry.Scheme.isUniversalHomeomorphism_spec_strictHenselizationEval from StrictHenselizationField. Its field-specific argument makes evaluation injective using reduced Artinian etale K-algebras, identifies the strict henselization as a field, and proves L purely inseparable over it. Work directly over strictLocalizationToBase s with h = Spec.map (strictHenselizationEval s). The upstream theorem spec_map_strictHenselizationEval_comp_strictLocalizationToBase proves h followed by this structural map equals s. The small-colimit comparison is not needed for this field argument.",
    "uses": [
     "lem-weil-pbc-strict-henselization-local-structure",
-    "def-weil-pbc-strict-henselization-structural-map",
     "lem-pc-spec-pure-insep-integral-radicial-surjective"
    ],
    "elementary": false
   },
   {
-   "text": "Apply strictHenselizationStalkFormula to a, s, F and q. Compose its stalk-to-global-sections isomorphism with the right-derived/homology comparison, the global-sections/cohomology comparison, and the derived-sections identification to obtain an additive equivalence with cohomology over the strict henselization.",
+   "text": "Apply the official strictHenselizationStalkFormula to a, s, F and q in its strictLocalization presentation. The existing private helper nonempty_addEquiv_strictLocalization_toBase composes its stalk-to-global-sections isomorphism with the right-derived/homology comparison, the global-sections/cohomology comparison, and the derived-sections identification.",
    "uses": [
     "prop-weil-pbc-strict-henselization-stalk-formula",
     "def-weil-pbc-etale-cohomology"
@@ -43,6 +42,16 @@
   {
    "text": "Pull back the universal-homeomorphism h along a to obtain g by pullback.lift. The pullback square proves g is a universal homeomorphism. Topological invariance gives cohomologyEquiv g, and upperStarComp identifies the iterated pullback with the base change to Spec L; composing these additive equivalences proves the displayed result.",
    "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the current small-model private compatibility helpers for the import-all consumers. strictHenselizationComparison_over follows from smallStrictHenselizationColimitIso_toBase by inverse cancellation. For nonempty_addEquiv_strictLocalization, form the induced pullback isomorphism and its explicit inverse; transport the upstream stalk formula by cohomologyEquiv and upperStarComp. These helpers and their signatures are unchanged from the current source.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
     "thm-weil-pbc-universal-homeomorphism-invariance",
     "def-weil-pbc-inverse-image"
    ],
@@ -61,10 +70,10 @@
   "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
-  "by": "worker K4",
+  "by": "worker K1",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03Q9 (theorem-higher-direct-images), Tag 03SI (proposition-topological-invariance), and strict-henselization local structure Tags 04HX and 04GP",
-  "note": "Second reading by K4: checked the exact upstream field theorem and the small-colimit structure-map comparison; clarified the role of the retained transitive field-theorem dependencies. No Lean statement or proof body changed during the second reading."
+  "note": "Repair of returned delivery against the current restored module: preserve all current imports, signatures and small-model compatibility proofs; reapply the direct strictLocalization field argument using the existing _toBase helper. No new declaration, sorry, statement change or unit-route change."
  },
  "mathlib_searches": [
   {
@@ -136,12 +145,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261017T013735-L-114601",
+  "landing": "20261021T203634-L-3847323",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

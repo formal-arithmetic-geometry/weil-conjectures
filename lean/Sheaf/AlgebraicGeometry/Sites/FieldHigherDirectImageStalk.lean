@@ -144,17 +144,12 @@ theorem nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure
           (pullback.fst a (Spec.map (CommRingCat.ofHom (algebraMap K L))))).obj F) q) := by
   let A := AddCommGrpCat.{u + 1}
   let s := Spec.map (CommRingCat.ofHom (algebraMap K L))
-  let σ := strictHenselizationStructuralMap s
-  let h : Spec (.of L) ⟶ strictHenselizationScheme s :=
-    Spec.map (strictHenselizationEval s) ≫
-      Spec.map (smallStrictHenselizationColimitIso s).hom
+  let σ := strictLocalizationToBase s
+  let h := Spec.map (strictHenselizationEval s)
   have hh : h ≫ σ = s := by
-    dsimp only [h, σ]
-    rw [Category.assoc, strictHenselizationComparison_over]
     exact spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
-  have : IsUniversalHomeomorphism (Spec.map (strictHenselizationEval s)) :=
+  have : IsUniversalHomeomorphism h :=
     isUniversalHomeomorphism_field_strictHenselizationEval (K := K) L
-  have : IsUniversalHomeomorphism h := by dsimp only [h]; infer_instance
   let g : pullback a s ⟶ pullback a σ :=
     pullback.lift (pullback.fst a s) (pullback.snd a s ≫ h) (by
       rw [Category.assoc, hh, pullback.condition])
@@ -165,7 +160,7 @@ theorem nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure
   have : IsUniversalHomeomorphism g := MorphismProperty.of_isPullback hg.flip inferInstance
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
   have : QuasiSeparated a := inferInstance
-  obtain ⟨e₁⟩ := nonempty_addEquiv_strictLocalization a L s F hF q
+  obtain ⟨e₁⟩ := nonempty_addEquiv_strictLocalization_toBase a L s F hF q
   let e₂ := cohomologyEquiv g ((upperStar A (pullback.fst a σ)).obj F) q
   let e₃ := (Sheaf.functorH (pullback a s).smallEtaleTopology q).mapIso
     ((upperStarComp A g (pullback.fst a σ) (pullback.fst a s)
