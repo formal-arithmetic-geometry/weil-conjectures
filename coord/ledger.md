@@ -23402,3 +23402,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:56 L: returned deliver/NL/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9: this delivery again works around the 2026-10-19 drop (the drop list is unchanged since 10-19 21:37, and no)
 - 18:56 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 18:56 L: merged deliver/NY/lem-sfb-normed-scalar-profinite-hom-acyclic (reviewer PASS; after a return; new nodes: 1)
+- 18:56 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
