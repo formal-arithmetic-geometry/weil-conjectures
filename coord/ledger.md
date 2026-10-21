@@ -23453,3 +23453,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:17 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 19:18 L: merged deliver/Q07/lem-sfb-profinite-derived-functions-filtered-colimit (reviewer FIX; first push; new nodes: 1)
 - 19:19 L: merged deliver/NF/lem-sfb-topological-homogeneous-cochain-coordinates (reviewer PASS; first push; new nodes: 0)
+- 19:20 L: merged deliver/Q06/lem-sfb-local-norm-algcl-cocycle-descent (reviewer FIX; first push; new nodes: 3)
