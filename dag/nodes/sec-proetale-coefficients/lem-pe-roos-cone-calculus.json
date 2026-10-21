@@ -18,112 +18,82 @@
  ],
  "proof": [
   {
-   "text": "All coordinates below denote biproduct components, so the calculations are identities of morphisms of module sheaves. Termwise products exist by [det-pe-products-derived]. The product universal property [def-weil-category-product] defines $T_N$ and gives $dT_N=T_Nd$, since each $t_n$ is a chain map. Hence $s_N=1-T_N$ is a chain map. The cone and shift definitions [def-weil-abstract-derived-category] give the stated reordered differential; its square is $(0,(ds_N-s_Nd)v)=0$. For a strict map $f:N\\to N'$, put $F=P(f)$. The compatibility in [def-weil-inverse-system], checked after each projection, gives $Fs_N=s_{N'}F$. Consequently $\\operatorname{diag}(F,F)$ commutes with the displayed differential. Products preserve identities, composition and addition of maps because these equations hold after every projection. The diagonal formula therefore defines the asserted additive functor $H$.",
+   "text": "By [det-pe-products-derived], termwise products exist. The product universal property [def-weil-category-product] and the chain-map and strict-map equations [def-weil-inverse-system] give $dT_N=T_Nd$ and $P(f)s_N=s_{N'}P(f)$ after each projection. Products preserve identities, composition and addition by the same test. Apply [lem-pe-endomorphism-fibre-coordinate-calculus] to $(P(N),s_N)$. This gives exactly the displayed differential, additive diagonal functor and coherent shift comparison of the item, under the projection-preserving identifications $P(N[r])=P(N)[r]$.",
    "uses": [
     "det-pe-products-derived",
     "def-weil-category-product",
-    "def-weil-abstract-derived-category",
-    "def-weil-inverse-system"
+    "def-weil-inverse-system",
+    "lem-pe-endomorphism-fibre-coordinate-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones paragraph, functorial termwise fibre construction; expanded coordinate verification"
+    "place": "Cones paragraph; assembly step 1 from the extracted endomorphism-fibre lemmas and the existing product and coordinate lemmas."
    }
   },
   {
-   "text": "Suppose $f_n$ is a quasi-isomorphism for every $n$. The last clause of [det-pe-products-derived] makes $F=\\prod_nf_n$ a quasi-isomorphism. Apply [lem-pe-roos-coordinates-quasi-iso] with $V=P(N)$, $V'=P(N')$, $L=H(N)$, $L'=H(N')$, and its endomorphisms chosen to be $-s_N$ and $-s_{N'}$. Its required differential $(dx,sx-dy)$ is exactly $(dv,-du-s_Nv)$, and its required diagonal map is exactly $H(f)$ by step 1. Thus $H(f)$ is a quasi-isomorphism. The auxiliary lemma allows arbitrary chain endomorphisms; it imposes no surjectivity, boundedness or convergence condition on this tower.",
+   "text": "For a levelwise quasi-isomorphism $f$, [det-pe-products-derived] makes $P(f)$ a quasi-isomorphism. Apply [lem-pe-roos-coordinates-quasi-iso] with $V=P(N)$, $V'=P(N')$, $L=H(N)$, $L'=H(N')$ and endomorphisms $-s_N,-s_{N'}$. Its differential $(dx,sx-dy)$ and diagonal map are precisely those given by step 1. Hence $H(f)$ is a quasi-isomorphism, without boundedness assumptions.",
    "uses": [
     "det-pe-products-derived",
     "lem-pe-roos-coordinates-quasi-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07KC, lemma-products; mapping-fibre comparison through the cited coordinate lemma"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph; assembly step 2 from the extracted endomorphism-fibre lemmas and the existing product and coordinate lemmas."
    }
   },
   {
-   "text": "The first clause of [det-pe-products-derived] identifies $QP(N)$, with its actual localized projections, as the product of $(QN_n)_n$. Thus $Q(s_N)$ is the one-minus-transition map of [def-weil-derived-limit]. By [def-weil-abstract-derived-category], the cone triangle $QP(N)\\xrightarrow{Q(s_N)}QP(N)\\to Q\\operatorname{Cone}(s_N)\\xrightarrow{-Qp}QP(N)[1]$ is distinguished. Inverse rotation using (TR2) of [def-weil-triangulated-category] gives $QH(N)\\to QP(N)\\xrightarrow{Q(s_N)}QP(N)\\to QH(N)[1]$. Its first map is the projection $(v,u)\\mapsto v$: inverse rotation negates the shifted boundary $-p$. Its last map is induced by $w\\mapsto(0,w)$ into $H(N)[1]$. This is the required Roos triangle, hence $QH(N)$ is a derived limit by the cited definition.",
+   "text": "By [det-pe-products-derived], $QP(N)$ with its localized projections is the product of the $QN_n$. Consequently $Q(s_N)$ is their one-minus-transition map. The distinguished cone triangle of [def-weil-abstract-derived-category], inverse-rotated by TR2 of [def-weil-triangulated-category], is $QH(N)\\to QP(N)\\xrightarrow{Q(s_N)}QP(N)\\to QH(N)[1]$. Its maps are $(v,u)\\mapsto v$ and $w\\mapsto(0,w)$: inverse rotation cancels the minus sign in the cone boundary $-p$. This is a Roos triangle, so $QH(N)$ is a derived limit by [def-weil-derived-limit].",
    "uses": [
     "det-pe-products-derived",
-    "def-weil-derived-limit",
     "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit; Tag 07KC, lemma-products; cone triangle and rotation"
-   }
-  },
-  {
-   "text": "Fix $r\\in\\mathbf Z$ and write $\\epsilon=(-1)^r$. Under the termwise product identification $P(N[r])=P(N)[r]$, the differential of $H(N[r])$ is $(\\epsilon dv,-\\epsilon du-s_Nv)$ and that of $H(N)[r]$ is $(\\epsilon dv,-\\epsilon du-\\epsilon s_Nv)$, using [def-weil-abstract-derived-category]. The map $\\sigma_{N,r}(v,u)=(v,\\epsilon u)$ has inverse with the same formula. Both $\\sigma d$ and $d\\sigma$ equal $(\\epsilon dv,-du-\\epsilon s_Nv)$, so it is a chain isomorphism. It commutes with diagonal product maps, proving naturality. For $r=0$ it is the identity, and applying the comparisons for $r$ and $s$ successively multiplies the second coordinate by $(-1)^r(-1)^s=(-1)^{r+s}$. This proves coherence under the usual reindexing of iterated shifts. The product identifications here are the unique projection-preserving ones of [def-weil-category-product].",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G, definition-shift-cochain; explicit Roos calculation required by the blueprint Cones paragraph"
-   }
-  },
-  {
-   "text": "For a strict tower map $f:N\\to N'$, write $A=P(N)$, $B=P(N')$, $F=P(f)$, $S_A=s_N$ and $S_B=s_{N'}$. Products of the two summands in $\\operatorname{Cone}(f_n)^q$ identify $P(\\operatorname{Cone}(f))^q=B^q\\oplus A^{q+1}$: the map takes the two component projections, and its inverse pairs them at each $n$; their composites are identities after each product projection [def-weil-category-product]. The cone differential is $(b,a)\\mapsto(db+Fa,-da)$ and its transition endomorphism is $\\operatorname{diag}(S_B,S_A)$. Consequently the differential on $H(\\operatorname{Cone}(f))$ is\n$$D(b,a,b',a')=(db+Fa,-da,-db'-Fa'-S_Bb,da'-S_Aa).$$\nThe cone formula [def-weil-abstract-derived-category] gives\n$$D'(b,b',a,c)=(db+Fa,-db'-S_Bb+Fc,-da,dc+S_Aa)$$\non $\\operatorname{Cone}(H(f))$. Hence $\\Phi(b,a,b',a')=(b,b',a,-a')$ satisfies $\\Phi D=D'\\Phi$, both sides being $(db+Fa,-db'-Fa'-S_Bb,-da,-da'+S_Aa)$. Its inverse is $(b,b',a,c)\\mapsto(b,a,b',-c)$. This proves the asserted chain isomorphism without invoking an unstated commutation-of-cones lemma.",
-   "uses": [
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone; explicit double-cone calculation for the blueprint Cones paragraph"
-   }
-  },
-  {
-   "text": "A strict commutative square between $f$ and $g$, with maps $\\alpha$ on the sources and $\\beta$ on the targets, acts on the four source coordinates as $(P\\beta,P\\alpha,P\\beta,P\\alpha)$. On the reordered target coordinates it acts as $(P\\beta,P\\beta,P\\alpha,P\\alpha)$. Permutation and multiplication by $-1$ commute with these maps; thus $\\Phi$ is natural. The cone inclusion sends $(b,b')$ to $(b,0,b',0)$ before $\\Phi$, and to $(b,b',0,0)$ afterwards, exactly the cone inclusion for $H(f)$. For the cone boundary convention $-p$ in [def-weil-abstract-derived-category], $H(-p)$ sends $(b,a,b',a')$ to $(-a,-a')$ in $H(N[1])$. The shift comparison of step 4 sends this to $(-a,a')$ in $H(N)[1]$, exactly $-p\\Phi$. This proves preservation of the boundary after the shift comparison, including its sign.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone, and Tag 014Q, definition-distinguished-triangle (cone boundary -p)"
-   }
-  },
-  {
-   "text": "Given compatible $j_n:M\\to N_n$, define $J:M\\to P(N)$ by the product universal property [def-weil-category-product]. Since $t_nj_{n+1}=j_n$, every projection of $s_NJ$ is zero, so $s_NJ=0$. Hence $d(Jm,0)=(Jdm,0)$, proving that $\\eta_j:m\\mapsto(Jm,0)$ is a chain map by [def-weil-abstract-derived-category]. If $g:M\\to M'$ and a strict $f:N\\to N'$ satisfy $f_nj_n=j'_ng$, then $P(f)J=J'g$ after every projection. The diagonal formula for $H(f)$ now gives $H(f)\\eta_j=\\eta_{j'}g$. This is the asserted naturality of the augmentation.",
-   "uses": [
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones paragraph, canonical maps to the strict Roos model; explicit zero-second-coordinate lift"
+    "place": "Cones paragraph; assembly step 3 from the extracted endomorphism-fibre lemmas and the existing product and coordinate lemmas."
    }
   },
   {
-   "text": "For shifted augmentations, $\\sigma_{N,r}\\eta_{j[r]}$ and $\\eta_j[r]$ both send $m$ to $(Jm,0)$ after reindexing, because $(-1)^r0=0$. For cone augmentations, let $g:M\\to M'$ and $f:N\\to N'$ satisfy $f_nj_n=j'_ng$. The induced levelwise cone map sends $(m',m)$ to $(j'_nm',j_nm)$ by the cone formula [def-weil-abstract-derived-category]. Its zero-second-coordinate augmentation to $H(\\operatorname{Cone}(f))$ is $((J'm',Jm),(0,0))$. Step 5 sends this to $((J'm',0),(Jm,0))$, exactly the cone map induced by $\\eta_{j'}$ and $\\eta_j$. Together with the inclusion and boundary identities of step 6, this proves the final augmentation compatibility for cones and shifts. All calculations are identities of the specified maps, rather than choices of morphisms completing triangulated diagrams.",
+   "text": "For $f:N\\to N'$, the product projections identify $P(\\operatorname{Cone}(f))$ with $\\operatorname{Cone}(P(f))$: the inverse pairs the two coordinates at each level [def-weil-category-product]. Under this identification the endomorphism is $\\operatorname{diag}(s_{N'},s_N)$. Apply [lem-pe-endomorphism-fibre-double-cone] with $A=P(N)$, $B=P(N')$, $s=s_N$, $t=s_{N'}$. It gives exactly the asserted four-coordinate isomorphism, its naturality, cone inclusion and boundary compatibility. Its $\\sigma_1$ is the comparison of step 1.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-category-product",
+    "lem-pe-endomorphism-fibre-double-cone"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-    "place": "Cones paragraph, compatibility of the canonical maps with the cone and shift comparisons"
+    "place": "Cones paragraph; assembly step 4 from the extracted endomorphism-fibre lemmas and the existing product and coordinate lemmas."
+   }
+  },
+  {
+   "text": "For compatible $j_n$ let $J=(j_n)_n:M\\to P(N)$. Projectionwise $s_NJ=0$, and a compatible augmented square gives $P(f)J=J'g$ [def-weil-category-product, def-weil-inverse-system]. The augmentation and shift identities of [lem-pe-endomorphism-fibre-coordinate-calculus] give the asserted natural map $(J,0)$ and shifted compatibility. The cone augmentation identity of [lem-pe-endomorphism-fibre-double-cone], using the product/cone identification of step 4, gives the final cone compatibility.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-inverse-system",
+    "lem-pe-endomorphism-fibre-coordinate-calculus",
+    "lem-pe-endomorphism-fibre-double-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph; assembly step 5 from the extracted endomorphism-fibre lemmas and the existing product and coordinate lemmas."
    }
   }
  ],
  "proof_deps": [
   "det-pe-products-derived",
   "def-weil-category-product",
-  "def-weil-abstract-derived-category",
   "def-weil-inverse-system",
+  "lem-pe-endomorphism-fibre-coordinate-calculus",
   "lem-pe-roos-coordinates-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
   "def-weil-derived-limit",
-  "def-weil-triangulated-category"
+  "lem-pe-endomorphism-fibre-double-cone"
  ],
  "proof_origin": {
   "by": "agent",
@@ -225,8 +195,8 @@
   "date": "2026-10-21",
   "item": "lem-pe-roos-cone-calculus",
   "worker": "stage1",
-  "summary": "Eight proof steps verify the full original statement without changes. Reused the existing pro-etale derived-products theorem and arbitrary-endomorphism Roos-coordinate quasi-isomorphism lemma. The remaining steps give explicit differential, inverse, naturality, boundary-sign, shift-coherence and augmentation calculations. No new nodes, no Lean changes and no compilation.",
-  "blueprint": "Realizes the Cones paragraph of det-pe-derived-nakayama-first-reduction.proof.md: functorial termwise Roos fibre computes derived limits (steps 1-3), commutation with shifts (4) and cones (5-6), and compatibility of the canonical comparison maps (7-8).",
+  "summary": "Human-requested repair: retain the full item statement and all existing Lean/maintainer metadata; extract two independent, statement-only endomorphism-fibre arguments, one for coordinates/coherent shifts/augmentations and one for the signed double-cone/naturality/boundary/augmentation calculation. The five assembly steps retain the existing product and quasi-isomorphism route. Full old arguments and their allocation are preserved verbatim in the report.",
+  "blueprint": "The Cones paragraph of det-pe-derived-nakayama-first-reduction: functorial termwise Roos fibres and coherent shifts are realized by the coordinate-calculus child, mapping-cone and canonical triangle compatibility by the double-cone child; existing products and coordinate quasi-isomorphism nodes supply derived invariance and realization.",
   "tool_uses": [
    {
     "node": "det-pe-products-derived",
@@ -240,10 +210,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q34-dd5acf449",
-  "group": "Q34",
+  "reviewer": "NT-cc-N5-154803b01",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-dd5acf449 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, all 9 cited statements, the blueprint main-20261015 Cones paragraph of det-pe-derived-nakayama-first-reduction, the unit sk-lem-pe-derived-nakayama, and Stacks 014E (cone) and 011G (shift sign). The delivery creates no new nodes. The statement and stmt_deps are identical to every earlier snapshot, and this is not a re-split. I recomputed every step myself. Step 1: Cone(s)[-1] reordered gives d(v,u)=(dv,-du-s v), and d^2=0. Step 2: lem-pe-roos-coordinates-quasi-iso applies with endomorphism -s_N, and the product of quasi-isomorphisms comes from the last clause of det-pe-products-derived. Step 3: inverse rotation by TR2 gives first map p[-1] with positive projection and last map w↦(0,w), and Q(s_N) is the transition endomorphism of def-weil-derived-limit on the product QP(N). Step 4: σ(v,u)=(v,(-1)^r u) satisfies σd=dσ and composes to (-1)^{r+s}. Step 5: ΦD=D'Φ=(db+Fa, -db'-Fa'-S_Bb, -da, -da'+S_Aa); the sign -a' is forced. Step 6: the cone inclusion is preserved, and σ_{N,1}H(-p)=(-a,a')=-pΦ. Steps 7-8: s_N J=0, and the cone augmentation goes to (J'm',0,Jm,0)=Cone(η_{j'},η_j). Edge cases tried: zero tower, constant tower, f=0 and f=id, r=0, r=-1 and odd r. I accept the tool use of det-pe-products-derived (unit sk-prop-pe-products, off the item's unit route) because the blueprint paragraph itself cites sk-prop-pe-products for exactly this fact. No existing node duplicates the item: lem-weil-roos-comm-shift covers only the shift clause; lem-weil-derived-limit-tower-roos-triangle, lem-pur-roos-additive-comparison and the Milnor and kflat Roos nodes state other things. Maintainer notes: (1) def-weil-strict-roos-model (Lean CategoryTheory.roosF) defines the same object Cone(u)[-1] in matching coordinates, together with the (0,γ) augmentation. Stage 2 must reuse it and lem-weil-roos-comm-shift and not define a second Roos functor. (2) lem-pe-kflat-roos-representative-invariance uses the opposite coupling sign (dx,(1-s)x-dy). It is isomorphic to this H by (x,y)↦(x,-y), and the downstream lem-pe-completion-triangle-comparison must insert that sign when it mixes the two. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-154803b01 (reviewer sub-agent of L); spot-checked: This re-split answers the human's repair note of 2026-10-21 (released 13:04, after Q34's PASS landed at 11:35 and N7's S2 FIX at 11:52), so it is not superseded. No other group has landed this item since. The live statement and stmt_deps match the delivered item exactly. Every step of the old proof (8 steps, 6249 characters) has a home. Old steps 1/4/7 and the shift part of 8 go to the new node lem-pe-endomorphism-fibre-coordinate-calculus. Old steps 5/6 and the cone part of 8 go to the new node lem-pe-endomorphism-fibre-double-cone. Old steps 2/3 stay, unshortened, as parent steps 2/3, which are applications of the existing nodes lem-pe-roos-coordinates-quasi-iso, det-pe-products-derived, TR2 and def-weil-derived-limit. The parent proof is now a 5-step assembly of 2518 characters. The two new nodes are of comparable size (1478 and 1821 characters), and neither restates the item: both are generic statements about Cone(s)[-1] in any abelian category, with no products, derived limits or quasi-isomorphisms. I recomputed both nodes with the conventions of def-weil-abstract-derived-category (Stacks 014E/011G), which match the blueprint main-20261015 Cones paragraph (first-reduction proof.md, lines 10-22). Coordinate node: d(v,u)=(dv,-du-sv); σd=dσ=(εdv,-du-εsv); coherence via ε(r)ε(r'); η_J is a chain map because sJ=0; σ η_{J[r]}=η_J[r]. Double-cone node: c=diag(t,s) is a chain map because fs=tf; ΦD=D'Φ=(db+fa,-db'-fa'-tb,-da,-da'+sa); inclusion and boundary checks give (b,b',0,0) and (-a,a'); Φη_{J_C}=(J'm',0,Jm,0)=Cone(η_J,η_{J'}). Edge cases tried: s=0, s=id, f=0, f=id, r=0/±1, characteristic 2. Duplicate candidates: lem-amb-signed-fibre-cone is Ab-valued over a natural transformation of two functors C→Ab, so not a duplicate. lem-weil-signed-mapping-cocone-shift covers only the shift-coherence clause of the coordinate node (advisory: its prover should cite it). The tool use of det-pe-products-derived is the one accepted in Q34 and I accept it. Mathlib searches are recorded for both nodes, and status unsplit is appropriate. No fixes written. Maintainer note: stage 2 should keep reusing def-weil-strict-roos-model/roosF and not define a second Roos functor."
  },
  "lean": {
   "existing": false,
