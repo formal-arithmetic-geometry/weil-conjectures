@@ -22074,3 +22074,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:08 L: merged deliver/Q17/lem-sf-exact-pullback-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 10:08 L: merged deliver/NN/lem-weil-pbc-affine-cohomology-etale-module-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 10:08 L: returned deliver/Q28/lem-sf-clopen-lisse-complete-localization (reviewer RETURN: L: independent stage-2 immutable head d79b432d21c4: Substance is correct: every clause matches the node; the coefficient)
+- 10:08 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: A6/A7/B10, superseded, same content re-pushed. The item's stage-3 Lean landed after the human re-split note: svc.log l.7)
