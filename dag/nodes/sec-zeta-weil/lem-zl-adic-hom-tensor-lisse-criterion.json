@@ -11,7 +11,13 @@
   "def-weil-rationalization-karoubi",
   "def-weil-pbc-qbar-category",
   "def-weil-derived-pullback-tensor-hom",
-  "lem-tw-lisse-rational-realization"
+  "lem-tw-lisse-rational-realization",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-zl-constructible-cohomology-functor",
+  "def-real-rational-lisse-heart",
+  "def-real-common-stage-lisse",
+  "def-weil-constructible-heart"
  ],
  "proof": [
   {
@@ -236,5 +242,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-4792df350 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but all three nodes incorrectly cite blueprint Proof Step 1; the ancestor actually uses this criterion and supporting lemmas in Proof Step 3. Corrected whole JSON files are in fixes/dag/nodes/sec-zeta-weil/, and review.md records the checks.; 3 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AdicHomTensorLisseCriterion",
+  "declaration": "WeilConjectures.rationalAdicHomTensor_lisse_cohomology",
+  "declarations": [
+   "WeilConjectures.rationalAdicHomTensorComparison",
+   "WeilConjectures.commonAdicHomTensorComparison",
+   "WeilConjectures.rationalAdicHomTensor_lisse_cohomology",
+   "WeilConjectures.commonAdicHomTensor_lisse_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/AdicHomTensorLisseCriterion.lean",
+  "statement": "theorem rationalAdicHomTensor_lisse_cohomology (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (K : sfRationalConstructibleCategory l E X.scheme) (hdual : constructibleRationalHomPairs l E X.scheme (op K, pullbackTensorRationalUnit l E X.scheme)) (hcomparison : ∀ N : sfRationalConstructibleCategory l E X.scheme, ∃ hN : constructibleRationalHomPairs l E X.scheme (op K, N), IsIso (rationalAdicHomTensorComparison l E X.scheme K N hdual hN)) : ∀ j : ℤ, IsRationalLisse l E X.scheme ((constructibleTruncationCohomology (sfRationalStandardTStructure l E X.scheme D hl) j).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Finite raw-rational and common-finite-stage criteria. Canonical comparison helpers are explicit composites of the recorded associator, symmetry, evaluation and unitor, followed by the uniquely normalized transpose. The permitted-pair proofs type exactly the internal Homs used in the premise; no comparison arrow or global integral lisse lattice is assumed. Existing landed statement dependencies for the closed calculus, coherence maps, cohomology and lisse predicates are cited explicitly. H2 repair: the plain cohomology composite is cited through def-zl-constructible-cohomology-functor; prop-constructible-truncations is used only in the proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97b93b2d1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the ac3123 H2 RETURN. The Lean file is byte-identical to the one judged correct there. The item changes only in stmt_deps (prop-constructible-truncations replaced by new def node def-zl-constructible-cohomology-functor) and lean.note; the statement is identical to the base. The new node has the §5 fields and is existing:true on WeilConjectures.constructibleTruncationCohomology (plain def (truncLE⋙truncGE)⋙shift; signature verbatim in live ConstructibleTruncations.lean); it cites def-weil-t-structure; no duplicate in Mathlib or the dag. Mechanical finding judged genuine: podRationalClosed/podCommonClosed and the rational/common associator/braiding/left unitor are .exists.choose of _existsUnique theorems, objects the statement uses. Clause table and edge cases from ac3123 reconfirmed. No compile, since no file was changed; worker reports clean scompile and dry run. Advisory: could also cite def-a1-common-stage-coefficient-unit."
+ }
 }

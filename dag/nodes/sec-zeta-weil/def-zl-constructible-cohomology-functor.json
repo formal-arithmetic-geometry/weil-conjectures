@@ -1,0 +1,122 @@
+{
+ "id": "def-zl-constructible-cohomology-functor",
+ "kind": "definition",
+ "title": "Constructible cohomology endofunctor",
+ "status": "split",
+ "statement": "Let $C$ be a preadditive category with a zero object, integer shift functors whose functors are additive, and a pretriangulated structure. Let $t$ be a t-structure on $C$ [def-weil-t-structure], with truncation functors $\\tau_t^{\\le i}$ and $\\tau_t^{\\ge i}$, and let $i\\in\\mathbf Z$. Define the cohomology endofunctor $\\mathcal H_t^i:C\\to C$ by $\\mathcal H_t^i=(\\tau_t^{\\ge i}\\circ\\tau_t^{\\le i})[i]$: on objects $K$ it sends $K$ to $(\\tau_t^{\\ge i}\\tau_t^{\\le i}K)[i]$, and on arrows it applies these same two truncation functors followed by the shift functor. For a standard constructible t-structure this is the standard constructible cohomology object placed in degree zero.",
+ "stmt_deps": [
+  "def-weil-t-structure"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+  "place": "Cohomology display: H^i(K) = (tau^{>=i} tau^{<=i} K)[i]; existing generic implementation in Sheaf.Paper.ConstructibleTruncations."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleTruncationCohomology|truncLE.*truncGE.*shiftFunctor [Mathlib/Algebra/Homology]",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "No exact composite definition; reuse the existing project declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology endofunctor of a t-structure is truncation below i followed by truncation above i and shift by i",
+   "results": "CategoryTheory.Triangulated.TStructure.triangleLTGE; CategoryTheory.Triangulated.TStructure.truncLT; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.truncGE; ChainComplex.truncate; CochainComplex.truncate; CategoryTheory.Triangulated.TStructure.shift_ge; CategoryTheory.CosimplicialObject.truncationCompTrunc",
+   "date": "2026-10-21",
+   "verdict": "No exact composite definition; reuse the existing project declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the degree i cohomology endofunctor of a t-structure by composing truncLE i truncGE i and shiftFunctor i",
+   "results": "CategoryTheory.Triangulated.TStructure.truncLT; CategoryTheory.Triangulated.TStructure.triangleLTGE; CategoryTheory.Triangulated.TStructure.truncGE; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.ge; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.IsGE",
+   "date": "2026-10-21",
+   "verdict": "No exact composite definition; reuse the existing project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleTruncationCohomology|truncLE.*truncGE.*shiftFunctor [Mathlib/CategoryTheory/Triangulated]",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "No exact composite definition; reuse the existing project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constructibleTruncationCohomology lean/WeilConjectures lean/Sheaf",
+   "results": "No upstream WeilConjectures match. Sheaf/Paper/ConstructibleTruncations.lean:56 defines the exact composite; other Sheaf matches are consumers.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing project definition; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l constructibleTruncationCohomology|def-zl-constructible-cohomology-functor dag/nodes",
+   "results": "prop-constructible-truncations; lem-zl-field-shriek-lower-bound; lem-a1-point-realization-standard-cohomology",
+   "date": "2026-10-21",
+   "verdict": "The theorem node lists the helper in lean.declarations; the other two are theorem consumers. No definition node owns this endofunctor."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search constructibleTruncationCohomology; search cohomology functor",
+   "results": "0 exact-name blueprint matches; 11 cohomology-functor matches, including prop-constructible-truncations and unrelated ordinary/derived sheaf cohomology.",
+   "date": "2026-10-21",
+   "verdict": "The cohomology display of prop-constructible-truncations is the source of this generic composite; there is no existing independent definition node for it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-adic-hom-tensor-lisse-criterion",
+  "date": "2026-10-21",
+  "group": "Q30"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3: the adic lissity criterion concludes that every standard constructible cohomology object is lisse.",
+   "via": [
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleTruncations",
+  "declaration": "WeilConjectures.constructibleTruncationCohomology",
+  "statement": "def constructibleTruncationCohomology\n    {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    (t : TStructure C) (i : ℤ) : C ⥤ C",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing plain definition at line 56: (t.truncLE i ⋙ t.truncGE i) ⋙ shiftFunctor C i. Its data does not use constructibleTruncations_exists. This node owns the definition interface used by the criterion; the truncation existence/compatibility theorem remains a proof dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97b93b2d1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97b93b2d1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the ac3123 H2 RETURN. The Lean file is byte-identical to the one judged correct there. The item changes only in stmt_deps (prop-constructible-truncations replaced by new def node def-zl-constructible-cohomology-functor) and lean.note; the statement is identical to the base. The new node has the §5 fields and is existing:true on WeilConjectures.constructibleTruncationCohomology (plain def (truncLE⋙truncGE)⋙shift; signature verbatim in live ConstructibleTruncations.lean); it cites def-weil-t-structure; no duplicate in Mathlib or the dag. Mechanical finding judged genuine: podRationalClosed/podCommonClosed and the rational/common associator/braiding/left unitor are .exists.choose of _existsUnique theorems, objects the statement uses. Clause table and edge cases from ac3123 reconfirmed. No compile, since no file was changed; worker reports clean scompile and dry run. Advisory: could also cite def-a1-common-stage-coefficient-unit."
+ }
+}
