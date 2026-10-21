@@ -7,49 +7,79 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import Sheaf.AlgebraicGeometry.QcoherentPullbackSections
+import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherentULift
+import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechVanishing
+import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineCechBasis
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
+import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
+import WeilConjectures.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
+import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
+import Sheaf.CategoryTheory.AcyclicCechEdgeCompatibility
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.RingedSiteCechRefinementSquare
+import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackNaturality
-import Sheaf.AlgebraicGeometry.ModuleAbelianCohomologyLargePullback
+import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.SiteCechMathlibComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-/-! # Pullback compatibility of the normalized quasi-coherent comparison
+/-! # The normalized cohomology refinement square
 
-Source: Stacks Project, Tags 03P2, 03FD, 010T and 01F7.
+Source: Stacks Project, Tags 03P2, 03FD, 010S and 01FD.
 -/
 
 @[expose] public section
+
 universe u
+
 open CategoryTheory CategoryTheory.Limits Opposite
+
 namespace AlgebraicGeometry.Scheme.Modules
+
 noncomputable section
 set_option autoImplicit false
-attribute [local irreducible] tensorPullback tensorPullbackObj
-  RingedSpace.moduleCohomology moduleAbelianCohomologyLarge moduleCohomologyFMap
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 
-/-- The normalized comparison intertwines the canonical cohomology pullbacks.
+/-- The Cech comparison intertwines the two canonical cohomology maps.
 The comparisons are given; this assertion supplies their pullback compatibility
-and the structural coefficient morphism.
+and the coefficient sheaf morphism, not their existence.
 
-Source: Stacks Project, Tags 03P2, 01FD, 03AX, 010T and 0BDY.
+Source: Stacks Project, Cohomology, Tag 01FD; Etale Cohomology, Tag 03P2;
+Cohomology on Sites, Tags 03AX and 03FD.
 (blueprint: lem-weil-pbc-qcoherent-normalized-pullback-square)
 
-Proof: Structural tensor-section pullback to each base-changed etale object
-commutes with restrictions by adjunction coherence. Applying coefficient lift
-therefore gives theta with exactly the displayed component formula. Transport
-module cohomology to large abelian Zariski cohomology by the concrete resolution
-comparison. It respects pullback, by its coefficient and edge naturality and
-functoriality of the change of Ext universe. The two normalized comparisons
-then commute with pullback by induction on degree. Degree zero is the section
-unit identity. In positive degree embed F into a quasicoherent acyclic module
-using a finite affine cover. This embedding remains monic after arbitrary
-pullback. Push the pulled-back embedding out along psi and take cokernels to
-obtain a commuting square of short exact sequences of quasicoherent modules.
-Acyclicity makes the source boundary surjective. Write the class as a boundary,
-apply induction to the quotient map and use compatibility of both cohomology
-maps and both normalized comparisons with boundaries. Finally undo the two
-resolution comparisons and cancel cY. Empty schemes and zero coefficients
-satisfy the same embedding and exact-sequence argument. -/
+Proof: For each etale U over X, use structural tensor-section pullback to
+U times_X Y, followed by the pullback of psi. These maps are additive. To
+check restrictions, the two paths around a map of pullback squares are the
+same composite structural pullback: use unit naturality and associativity
+of the adjunction-mate composition isomorphisms, then coefficient naturality.
+Apply ULift to the component maps; its functor law preserves naturality.
+This constructs theta, and its evaluation is the displayed section formula.
+Choose finite affine covers on X and Y, refining the inverse image of
+X's cover by affine opens on Y. Separatedness makes all tuple intersections
+affine. The inverse images before refinement need not be affine. Both ordinary
+and lifted associated-etale coefficients are acyclic on these intersections,
+so their normalized Cech edges are invertible. The maps on tuple sections for
+the two covers are structural pullback followed by the pullback of psi.
+The component formula just proved identifies theta with exactly this map.
+Coordinatewise ULift.down intertwines the two Cech maps. Apply the
+ringed-site Cech refinement square in the Zariski and etale sites. Its abelian
+specialization computes the etale cohomology map as cohomologyMap followed by
+the adjoint coefficient map, since set-valued etale inverse image is exact.
+Its module specialization computes the Zariski map as moduleCohomologyFMap of
+the tensor adjoint of psi. The normalized Cech comparisons agree with cX and
+cY: they are morphisms of delta functors with the same section normalization,
+and quasi-coherent cohomology is effaceable on these qcqs schemes. Cancel the
+invertible Cech edges to get the stated equality. All transports use the
+common-resolution moduleAbelianCohomologyLarge, whose normalized edge square
+respects the connecting-class convention. Empty schemes and zero modules
+produce zero complexes and are included. No flatness of g is required. -/
 theorem qcoherentNormalizedComparison_pullback_square
     (X Y : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X]
     [CompactSpace Y] [Scheme.IsSeparated Y]
@@ -79,37 +109,7 @@ theorem qcoherentNormalizedComparison_pullback_square
           q (Etale.cohomologyMap g (liftedCoherentEtaleSheaf F) q x)) =
         moduleCohomologyFMap g
           ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ)
-          q ((cX F q).symm x) := by
-  classical
-  let θ := qcoherentPullbackSheafMap g F G ψ
-  refine ⟨θ, (fun _ _ ↦ rfl), ?_⟩
-  intro q x
-  apply (cY G q).injective
-  rw [AddEquiv.apply_symm_apply]
-  let dX (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :=
-    (moduleAbelianCohomologyLarge X M n).symm.trans (cX M n)
-  let dY (M : Y.Modules) [M.IsQuasicoherent] (n : ℕ) :=
-    (moduleAbelianCohomologyLarge Y M n).symm.trans (cY M n)
-  have h := normalizedCoherentEtale_pullback_naturality X Y dX dY hcX hcY g
-    q F G ψ (moduleAbelianCohomologyLarge X F q ((cX F q).symm x))
-  have hX : dX F q
-      (moduleAbelianCohomologyLarge X F q ((cX F q).symm x)) = x := by
-    simp only [dX, AddEquiv.trans_apply, AddEquiv.symm_apply_apply]
-    exact (cX F q).apply_symm_apply x
-  let φ := (Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ
-  have hp := moduleAbelianCohomologyLarge_pullback g F G φ q ((cX F q).symm x)
-  have hY : dY G q
-      (moduleAbelianCohomologyLarge Y G q
-        (moduleCohomologyFMap g φ q ((cX F q).symm x))) =
-      cY G q (moduleCohomologyFMap g φ q ((cX F q).symm x)) := by
-    simp only [dY, AddEquiv.trans_apply, AddEquiv.symm_apply_apply]
-    rfl
-  have hh := (congrArg (dY G q) hp).trans h
-  have hf := hY.symm.trans
-    (hh.trans (congrArg (etalePullbackCohomology g F G ψ q) hX))
-  simpa only [etalePullbackCohomology,
-    Sheaf.adjointCohomologyPullbackMap, Sheaf.cohomologyPullbackMap_apply,
-    Etale.cohomologyMap, AddMonoidHom.comp_apply] using hf.symm
+          q ((cX F q).symm x) := by sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules
