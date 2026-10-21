@@ -9,7 +9,6 @@ public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-! # Schematic closure inside a Noetherian compactification
 
@@ -63,6 +62,35 @@ theorem nagataDensityNormalizationSetup {X S : Scheme.{u}} (f : X ⟶ S)
     IsIso (pullback.fst c.i c.i.imageι) ∧
     pullback.snd c.i c.i.imageι = pullback.fst c.i c.i.imageι ≫ c.i.toImage ∧
     IsProper (c.i.imageι ≫ c.g) := by
-  sorry
+  have : TopologicalSpace.NoetherianSpace c.i.image :=
+    c.i.imageι.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace
+      (Scheme.openComplementOfIsClosedImmersion c.i.imageι).toScheme :=
+    (Scheme.openComplementOfIsClosedImmersion c.i.imageι).ι.isEmbedding.isInducing.noetherianSpace
+  have hdisj : Disjoint (Set.range c.i) (Set.range
+      (Scheme.openComplementOfIsClosedImmersion c.i.imageι).ι) := by
+    rw [Scheme.Opens.range_ι]
+    change Disjoint (Set.range c.i) (Set.range c.i.imageι)ᶜ
+    apply Set.disjoint_compl_right_iff_subset.mpr
+    intro y hy
+    obtain ⟨x, rfl⟩ := hy
+    exact ⟨c.i.toImage x, congr($(c.i.toImage_imageι) x)⟩
+  have hsnd : pullback.snd c.i c.i.imageι =
+      pullback.fst c.i c.i.imageι ≫ c.i.toImage := by
+    rw [← cancel_mono c.i.imageι, Category.assoc, c.i.toImage_imageι,
+      pullback.condition]
+  have hfst : IsIso (pullback.fst c.i c.i.imageι) := by
+    refine ⟨⟨pullback.lift (𝟙 X) c.i.toImage (by simp), ?_, ?_⟩⟩
+    · apply pullback.hom_ext
+      · simp
+      · simpa only [Category.assoc, pullback.lift_snd, Category.id_comp] using hsnd.symm
+    · simp
+  refine ⟨inferInstance, inferInstance, inferInstance, c.i.toImage_imageι,
+    inferInstance, inferInstance, inferInstance, ?_, inferInstance, inferInstance,
+    inferInstance, inferInstance, ?_, Scheme.isEmpty_pullback _ _ hdisj, hfst, ?_,
+    inferInstance⟩
+  · exact ⟨fun _ _ _ _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  · exact Set.disjoint_iff_inter_eq_empty.mp hdisj
+  · exact hsnd
 
 end AlgebraicGeometry
