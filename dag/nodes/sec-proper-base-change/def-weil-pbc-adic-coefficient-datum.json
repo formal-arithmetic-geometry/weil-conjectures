@@ -95,13 +95,29 @@
    "elementary": false
   },
   {
-   "text": "In AdicCoefficientDatumCompleted, extend finiteCoefficientScalarMap uniquely across the locally bijective constant-ring unit by its W hom-equivalence. The extended sheaf map is locally bijective since its composite with the unit is, hence is an isomorphism; the same hom-equivalence proves its normalized uniqueness. Precompose the finite-coefficient naturality square by the unit. The normalized equations, naturality of sheafification, and the specified postcomposition formula for q identify both composites. The explicit completedConstant_quotients functor constructs the actual quotient tower from completedConstantQuotient and CompletedConstantQuotientTower of [def-weil-pbc-completed-constant-realization-data], with its level and transition equations. This is the elementary quotient-map construction, not an application of the downstream finite-complex realization theorem. Finally exact, faithful restriction of scalars preserves the sums computing total complexes. The independent-coefficient tensor-cancellation isomorphism gives a bicomplex isomorphism between the restricted tensor with the extended complex and the tensor of the restricted input with the original complex. The input remains acyclic by exact restriction, so original K-flatness gives acyclicity; faithful exact restriction reflects it. This proves preservation of K-flatness, without needing the separate flat-term conclusion of the existing change-of-rings theorem.",
+   "text": "In AdicCoefficientDatumCompleted, extend finiteCoefficientScalarMap uniquely across the locally bijective constant-ring unit by its W hom-equivalence. The extended sheaf map is locally bijective since its composite with the unit is, hence is an isomorphism; the same hom-equivalence proves its normalized uniqueness. Precompose the finite-coefficient naturality square by the unit. The normalized equations, naturality of sheafification, and the specified postcomposition formula for q identify both composites. The explicit completedConstant_quotients functor constructs the actual quotient tower from completedConstantQuotient and CompletedConstantQuotientTower of [def-weil-pbc-completed-constant-realization-data], with its level and transition equations. This is the elementary quotient-map construction, not an application of the downstream finite-complex realization theorem. Finally identify the ordinary scalar functor with the extension of an existing normalized scalar derived pair, using their object and map formulas and functor extensionality. Apply the proved preservation theorem for arbitrary K-flat complexes; no flat-term assumption is required.",
    "uses": [
     "def-weil-pbc-proetale-modules",
     "def-weil-pbc-completed-constant-realization-data",
-    "lem-pur-kflat-change-of-rings-independent"
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-sfb-scalar-extension-kflat",
+    "lem-sfb-dc-hom-scalar-adjunction"
    ],
    "elementary": true
+  },
+  {
+   "text": "S7 completes the six remaining interfaces of AdicCoefficientDatumCompleted. Use the existing normalized ordinary adjunction, scalar-transition existence, natural balancing maps and cocycle from the other realization of this same coefficient-datum node. The completedConstantExtension and reductionChange presentations are definitionally equal; use the latter consistently, and identify pure tensor sections by the same sheafification unit. Package the selected universal scalar derived pair with its counit, universal property and K-flat computation, retaining the standard localization. Apply the homotopy Hom compatibility theorem to obtain the normalized scalar adjunction. Its K-flat counit computation transports through the quotient-factorization isomorphisms to complexes. For the tower, choose K-flat resolutions, apply scalar-extension quasi-isomorphism invariance and exact restriction at each level, and use levelwise detection of tower quasi-isomorphisms. Derive this additive functor by the resolving-class theorem and transport the counit to complexes by the quotient universal property. Assemble scalar balancing maps into a natural isomorphism using their naturality; tensor-section uniqueness proves uniqueness, and the existing cocycle gives the reassociated equality. Keep the completed ring as the same actual inverse limit behind a locally irreducible definition and expose its projection naturality equation, preventing accidental unfolding of the chosen limit cone. For K-flat preservation, use scalarDerivedPair_exists from the normalized scalar adjunction realization. Its ordinary object and map formulas identify its extension with reductionChange by functor extensionality; transport scalarExtension_preservesKFlat along that equality. This avoids repeating the tensor-cancellation and total-complex construction.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-hom-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-sfb-scalar-extension-kflat",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -118,12 +134,15 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-sf-exact-functor-derived-triangulated",
   "def-weil-pbc-completed-constant-realization-data",
-  "lem-pur-kflat-change-of-rings-independent"
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-sfb-scalar-extension-kflat",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pur-sheaf-ring-derived-hom-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-adic-coefficient-datum.md",
-  "place": "order 1239; tensor-generator, quotient-normalization and evaluation calculations; Stacks Tags 03EK, 06YY and 015F; K2: the finite-presentation comparisons and actual quotient and K-flat extension interfaces in AdicCoefficientDatumCompleted, using the same sheafification and derived-change universal properties."
+  "place": "order 1239; tensor-generator, quotient-normalization and evaluation calculations; Stacks Tags 03EK, 06YY and 015F; K2: the finite-presentation comparisons and actual quotient and K-flat extension interfaces in AdicCoefficientDatumCompleted, using the same sheafification and derived-change universal properties.; S7: completed scalar Hom compatibility, K-flat counits, strict tower derivation, natural balancing and cocycle via the existing coefficient-datum APIs; the inverse-limit interface and transport of the existing general K-flat preservation theorem prevent large definitional expansions."
  },
  "mathlib_searches": [
   {
@@ -335,11 +354,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-0ced5",
-  "group": "K2",
+  "reviewer": "C-cee69",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261021T061432-L-1774768",
+  "landing": "20261021T143948-L-29513",
   "kind": "interface",
-  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
+  "note": "independent cc review: delivered AdicCoefficientDatumCompleted + 2 adapted unclaimed consumers and node def-weil-pbc-adic-coefficient-datum vs live clone; item + 3 direct importers compiled in sandbox; axioms clean; original IntrinsicCompletionCompleted fails against new item as reported"
  }
 }

@@ -36,7 +36,7 @@ private theorem ordinaryReductionTensor (n : ℕ) :
       MonoidalCategory.tensorLeft (CompletedConstantReduction.residue T d.ideal n)) := by
   let φ := adicDatumProjection T d n
   let U := SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ)
-  let E := completedConstantExtension T φ
+  let E := reductionChange T φ
   let := HasDerivedCategory.standard (adicDatumModules T d)
   let := HasDerivedCategory.standard (completedConstantModules T
     ((adicLisseRingSystem T d.ideal).obj (Opposite.op n)))
@@ -124,7 +124,7 @@ theorem completedFiniteReductionTensorComparison (n : ℕ)
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
   let := SheafOfModules.tensorPreadditive.{t + 1, t, t + 1} R
-  let E := completedConstantExtension T φ
+  let E := reductionChange T φ
   let U := SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ)
   let := (adicDatumRestriction_exact T φ).1
   let := (adicDatumRestriction_exact T φ).2
@@ -140,7 +140,7 @@ theorem completedFiniteReductionTensorComparison (n : ℕ)
   let εV : DerivedCategory.Qh ⋙ (L ⋙ V) ⟶ (EH ⋙ DerivedCategory.Qh) ⋙ V :=
     (Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε V
   obtain ⟨o⟩ := ordinaryReductionTensor T d n
-  let o' := o ≪≫ BraidedCategory.tensorLeftIsoTensorRight
+  let o' := o ≪≫ BraidedCategory.tensorLeftIsoTensorRight (C := B)
     (CompletedConstantReduction.residue T d.ideal n)
   let τ := completedConstantTensor T R
   let b : finiteProjectiveTensorComplexRight T d P ⟶ (EC ⋙ UC) ⋙ Q :=

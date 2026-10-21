@@ -592,8 +592,7 @@ private theorem completedKoszulPowerSheaf_kflat (r : ℕ) (f : Fin r → A) (m :
         (.up ℤ)).obj (((adicLisseConstantModules X A).mapHomologicalComplex (.up ℤ)).obj P)) =
       completedKoszulPowerSheaf X d r f m := by
     rfl
-  rw [heq] at h
-  exact h
+  simpa only [← adicDatumOrdinaryExtension_eq, heq] using h
 
 private def completedTensorMap (r : ℕ) (f : Fin r → A)
     {C D : CochainComplex (adicDatumModules X d) ℤ} (α : C ⟶ D) (m : ℕ) :
