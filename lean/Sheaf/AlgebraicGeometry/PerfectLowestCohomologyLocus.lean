@@ -7,11 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectLowestRankBoundOpen
 import Sheaf.AlgebraicGeometry.PerfectLowestMatrixClosedLocus
 import Sheaf.AlgebraicGeometry.PerfectUniversalLowestCohomologyPullback

@@ -6,14 +6,8 @@ Authors: SHEAF group V3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Mathlib.LinearAlgebra.TensorProduct.Tower
-public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Sheaf.AlgebraicGeometry.AffineFreeResidueSectionsCohomology
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Minimality of affine models at a residue point
 Source: Stacks Project, Tags 0BCD and 0BF2.

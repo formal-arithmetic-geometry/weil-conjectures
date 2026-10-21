@@ -6,9 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.RingTheory.FiniteProjectiveComplexFreeModel
-public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
@@ -17,16 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 public import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 public import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-public import Mathlib.RingTheory.Flat.Stability
-public import WeilConjectures.AlgebraicGeometry.AffineSheafResolutionOfRingModel
 public import WeilConjectures.AlgebraicGeometry.AffineSheafResolutionOfRingModelExtension
 public import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCohomologyData
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 public import WeilConjectures.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import WeilConjectures.AlgebraicGeometry.ProperFlatSingleNoetherianDescent
 
 /-! # Descent-first bounded flat Čech models

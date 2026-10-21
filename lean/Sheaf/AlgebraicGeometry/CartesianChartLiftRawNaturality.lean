@@ -4,16 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all WeilConjectures.AlgebraicGeometry.CartesianChartExchangeComparison
-import all WeilConjectures.AlgebraicGeometry.AbelianRawPullbackComposition
-import all WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
-import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeMapNaturality
-import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeConclusion
-import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeFinal
-import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeObjects
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 public import Sheaf.AlgebraicGeometry.CartesianChartLiftCoherence
 import Sheaf.AlgebraicGeometry.CartesianChartDiagramMap

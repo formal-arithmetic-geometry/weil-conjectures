@@ -6,11 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.AffineFreeResidueSectionsCohomology
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Residue vanishing of the differential in a Betti-rank model
 

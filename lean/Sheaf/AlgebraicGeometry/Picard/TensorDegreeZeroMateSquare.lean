@@ -11,7 +11,6 @@ public import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 import Sheaf.AlgebraicGeometry.Picard.TensorSingleBaseChangeSquare
 import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
-import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Degree-zero mates with the specified tensor pullback
 

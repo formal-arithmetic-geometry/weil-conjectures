@@ -8,27 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Ulift
-public import Mathlib.Data.ZMod.Basic
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.CategoryTheory.Sites.Sheaf
 
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.ConstructibleSheaf.Pullback
 import all WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.EpiMono
 import Sheaf.AlgebraicGeometry.FrobeniusVectorBundleLocalLifts
 import Sheaf.AlgebraicGeometry.FrobeniusVectorBundleAffineKernelModels
 

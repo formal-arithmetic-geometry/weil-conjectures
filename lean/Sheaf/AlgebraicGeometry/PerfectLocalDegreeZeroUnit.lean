@@ -6,8 +6,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
-public import Mathlib.AlgebraicGeometry.ResidueField
-public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.DerivedResidueUnitBetti
 import Sheaf.AlgebraicGeometry.ConnectiveRankOneModelStalk

@@ -1,10 +1,8 @@
 module
 
-public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 import Sheaf.Algebra.Homology.FilteredTensorLocalization
 public import Sheaf.Algebra.Homology.CanonicalTruncationFiltration
 public import Sheaf.Algebra.Homology.BoundedDerivedRoofs
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-!
 # Canonical truncations lift bounded derived modules to finite filtered localization

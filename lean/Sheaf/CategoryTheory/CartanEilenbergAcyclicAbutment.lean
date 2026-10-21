@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckComposablePair
 public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
-public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.CartanEilenbergAugmentationComparison
 import Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation
 import Sheaf.CategoryTheory.GrothendieckCanonicalImageFiltration

@@ -6,17 +6,11 @@ Authors: SHEAF group U2
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.RingTheory.FiniteType
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 import Sheaf.AlgebraicGeometry.AffineLineDenseOpenFiniteComplement
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
-import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! A lisse open with finite complement after shrinking an affine-line base. -/
 

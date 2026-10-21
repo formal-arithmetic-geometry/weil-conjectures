@@ -11,16 +11,13 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
-import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import all Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage
 import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
-import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
 import Sheaf.CategoryTheory.FilteredHomotopySpectralSequence
 import Sheaf.Paper.CartanEilenbergLeftExactCohomology
