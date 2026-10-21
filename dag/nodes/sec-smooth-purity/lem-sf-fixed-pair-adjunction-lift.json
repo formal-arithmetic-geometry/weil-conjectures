@@ -13,79 +13,249 @@
   "def-weil-endofunctor-fixed-pair-category",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use ordinary right-to-left composition throughout this proof, so $e_K:GLK\\to LFK$ and $b_M:FRM\\to RGM$. Put $t_K=L(\\theta)\\circ e_K$ and $s_M=R(\\psi)\\circ b_M$. These are isomorphisms, since functors carry an inverse to an inverse. For a fixed-pair map $u:(K,\\theta)\\to(K',\\theta')$, the defining equation in [def-weil-endofunctor-fixed-pair-category] and naturality of $e$ give\n$$L(u)\\circ t_K=L(u\\circ\\theta)\\circ e_K=L(\\theta')\\circ L(Fu)\\circ e_K=t_{K'}\\circ G(Lu).$$\nFor $v:(M,\\psi)\\to(M',\\psi')$, naturality of $b$ similarly gives\n$$R(v)\\circ s_M=R(v\\circ\\psi)\\circ b_M=R(\\psi')\\circ R(Gv)\\circ b_M=s_{M'}\\circ F(Rv).$$\nThus both prescribed object maps and carrier maps define functors; their identity and composition laws are those of $L$ and $R$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "transport on objects and morphisms, lines 13–20; mapOfNatIso in IsoAlgebra.lean, lines 44–58"
+   }
+  },
+  {
+   "text": "Write $a=e^{-1}:LF\\to GL$. The component formula in [def-weil-pbc-adjunction-mate] gives the unit-mate identity by the following direct calculation:\n$$\\begin{aligned}\nb_{LK}\\circ F(\\eta_K)\n&=R(G\\varepsilon_{LK})\\circ R(a_{RLK})\\circ\\eta_{FRLK}\\circ F(\\eta_K)\\\\\n&=R(G\\varepsilon_{LK}\\circ a_{RLK}\\circ L(F\\eta_K))\\circ\\eta_{FK}\\\\\n&=R(G\\varepsilon_{LK}\\circ G(L\\eta_K)\\circ a_K)\\circ\\eta_{FK}\n=R(a_K)\\circ\\eta_{FK}.\n\\end{aligned}$$\nThe second line is naturality of $\\eta$ for $F(\\eta_K)$, the third is naturality of $a$ for $\\eta_K$, and the last uses $\\varepsilon_{LK}\\circ L(\\eta_K)=1_{LK}$. This uses only the given adjunction and the cited component formula, rather than assuming an additional mate-compatibility lemma.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "map_unit_app_comp_str, lines 46–61, with the mate formula expanded"
+   }
+  },
+  {
+   "text": "For $(K,\\theta)$, the structure of $\\widetilde R\\widetilde L(K,\\theta)$ is $R(t_K)\\circ b_{LK}$ by step 1. Step 2, cancellation of $e_K\\circ a_K=1_{LFK}$, and naturality of $\\eta$ for $\\theta:FK\\to K$ give\n$$R(t_K)\\circ b_{LK}\\circ F(\\eta_K)=R(L\\theta)\\circ R(e_K)\\circ R(a_K)\\circ\\eta_{FK}=RL(\\theta)\\circ\\eta_{FK}=\\eta_K\\circ\\theta.$$\nThis is exactly the fixed-pair morphism condition in [def-weil-endofunctor-fixed-pair-category]. Hence $\\eta_K$ is a morphism $(K,\\theta)\\to\\widetilde R\\widetilde L(K,\\theta)$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "map_unit_app_comp_str, lines 46–61"
+   }
+  },
+  {
+   "text": "The equivalent transpose characterization in [def-weil-pbc-adjunction-mate], applied to $a=e^{-1}$ and the same adjunction on both sides, says\n$$\\varepsilon_{GM}\\circ L(b_M)=G(\\varepsilon_M)\\circ a_{RM}.$$\nFor $(M,\\psi)$, naturality of $\\varepsilon$ for $\\psi:GM\\to M$ and cancellation of $a_{RM}\\circ e_{RM}=1_{GLRM}$ now give\n$$\\begin{aligned}\n\\varepsilon_M\\circ L(s_M)\\circ e_{RM}\n&=\\varepsilon_M\\circ LR(\\psi)\\circ L(b_M)\\circ e_{RM}\\\\\n&=\\psi\\circ\\varepsilon_{GM}\\circ L(b_M)\\circ e_{RM}\n=\\psi\\circ G(\\varepsilon_M).\n\\end{aligned}$$\nBy [def-weil-endofunctor-fixed-pair-category], this proves that $\\varepsilon_M$ is a morphism $\\widetilde L\\widetilde R(M,\\psi)\\to(M,\\psi)$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "map_counit_app_comp_str, lines 66–80"
+   }
+  },
+  {
+   "text": "The components in steps 3 and 4 form natural transformations $\\widetilde\\eta$ and $\\widetilde\\varepsilon$. Indeed, for a fixed-pair map $u$ the carrier naturality equation is $RL(u)\\circ\\eta_K=\\eta_{K'}\\circ u$, and for $v$ it is $v\\circ\\varepsilon_M=\\varepsilon_{M'}\\circ LR(v)$; these are the naturality equations of the original unit and counit. Equality of carrier maps implies equality of fixed-pair maps because the forgetful functor is faithful [def-weil-endofunctor-fixed-pair-category]. The same faithfulness proves the two lifted triangle identities: their carriers are exactly $\\varepsilon_{LK}\\circ L(\\eta_K)=1_{LK}$ and $R(\\varepsilon_M)\\circ\\eta_{RM}=1_{RM}$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "mapOfNatIsoAdjunction, lines 86–105"
+   }
+  },
+  {
+   "text": "For fixed pairs $A=(K,\\theta)$ and $B=(M,\\psi)$ define\n$$\\widetilde\\Phi(f)=\\widetilde R(f)\\circ\\widetilde\\eta_A,\\qquad \\widetilde\\Phi^{-1}(g)=\\widetilde\\varepsilon_B\\circ\\widetilde L(g).$$\nThese are morphisms of fixed pairs by steps 1, 3 and 4. On carriers, naturality and the triangle identities from step 5 give\n$$\\varepsilon_M\\circ LR(f)\\circ L(\\eta_K)=f\\circ\\varepsilon_{LK}\\circ L(\\eta_K)=f,$$\n$$R(\\varepsilon_M)\\circ RL(g)\\circ\\eta_K=R(\\varepsilon_M)\\circ\\eta_{RM}\\circ g=g.$$\nFaithfulness in [def-weil-endofunctor-fixed-pair-category] makes them inverse on fixed-pair Hom sets. For $u:A'\\to A$, $v:B\\to B'$, naturality of $\\widetilde\\eta$ and functoriality give $\\widetilde\\Phi(f\\circ\\widetilde L(u))=\\widetilde\\Phi(f)\\circ u$ and $\\widetilde\\Phi(v\\circ f)=\\widetilde R(v)\\circ\\widetilde\\Phi(f)$. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to these natural bijections. Its specified unit is $\\widetilde\\Phi(1)=\\widetilde\\eta$ and its counit is $\\widetilde\\Phi^{-1}(1)=\\widetilde\\varepsilon$, so their carriers are precisely the original $\\eta$ and $\\varepsilon$. Invertibility of $F$ and $G$ was never used; only the supplied isomorphisms $e,b,\\theta,\\psi$ were inverted.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+    "place": "mapOfNatIsoAdjunction, lines 86–115; Stacks Tag 0037 (definition-adjoint), via lem-weil-pbc-adjunction-of-natural-bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebraAdjunction.lean",
+  "place": "Expanded proof of mapOfNatIsoAdjunction, lines 46–115; natural Hom-bijection presentation from Stacks Tag 0037, definition-adjoint."
+ },
  "mathlib_searches": [
   {
+   "tool": "grep",
+   "query": "IsoAlgebra|mapOfNatIsoAdjunction|adjunction.*[Aa]lgebra|[Aa]lgebra.*adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 22,
+    "top": [
+     "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+     "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+     "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+     "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+     "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+     "Mathlib/CategoryTheory/Category/Cat/Colimit.lean",
+     "Mathlib/CategoryTheory/Category/Cat/Colimit.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Pullback.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match: the Endofunctor file treats an algebra/coalgebra equivalence, not two fixed-pair categories with invertible mate exchange; the second pattern gives no hits."
+  },
+  {
    "tool": "leansearch",
-   "query": "Adjunction between categories of invertible endofunctor algebras induced by an adjunction and a commuting isomorphism of equivalences",
+   "query": "An adjunction between categories with endofunctors and invertible mate comparison induces an adjunction between their fixed point categories",
    "results": {
     "ok": true,
     "n_hits": 8,
     "top": [
-     "CategoryTheory.Monad.algebraEquivOfIsoMonads",
+     "CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
      "CategoryTheory.Functor.adjunction",
-     "CategoryTheory.conjugateIsoEquiv",
-     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
-     "CategoryTheory.Endofunctor.Algebra.isoMk_inv_f",
-     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction",
+     "CategoryTheory.Monad.comparison",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso",
      "CategoryTheory.Equivalence.toAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.unitIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match: the returned monadic/comonadic comparison, equivalence and adjoint-change declarations do not supply this adjunction of invertible endofunctor algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.toCoalgebraOf",
+     "CategoryTheory.Endofunctor.Adjunction.Coalgebra.toAlgebraOf",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.toCoalgebraOf_obj_V",
+     "CategoryTheory.Endofunctor.Adjunction.Coalgebra.toAlgebraOf_obj_a",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv_functor_obj_V",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv_inverse_obj_a",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Related results only: algebraCoalgebraEquiv concerns an adjunction between the endofunctors themselves; mateEquiv and its unit/counit identities are already represented by def-weil-pbc-adjunction-mate. None is the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction lifts to categories of endofunctor algebras with invertible structure maps when the two exchange isomorphisms are mates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv_functor_obj_str",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.homEquiv_naturality_str",
+     "CategoryTheory.Endofunctor.Adjunction.Coalgebra.toAlgebraOf_obj_str",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.unitIso",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.toCoalgebraOf_obj_str",
+     "CategoryTheory.Monad.comparison",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match: algebraCoalgebraEquiv compares algebras and coalgebras on one category; LiftLeftAdjoint and LiftRightAdjoint require further adjoint-lifting hypotheses and do not specialize in one line to the stated functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIso|lift.*[Aa]djunction|[Aa]djunction.*lift|def map.*[Aa]lgebra",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match: the Endofunctor file treats an algebra/coalgebra equivalence, not two fixed-pair categories with invertible mate exchange; the second pattern gives no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift an adjunction to objects X equipped with an isomorphism F X to X using an invertible mate of a natural isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso",
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.Adjunction.compUliftCoyonedaIso_inv_app_app_down",
+     "CategoryTheory.Adjunction.ofNatIsoRight",
+     "CategoryTheory.CommSq.instHasLift_1",
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Adjunction.compUliftCoyonedaIso",
      "CategoryTheory.Adjunction.ofNatIsoLeft"
     ],
     "note": ""
    },
    "date": "2026-10-21",
-   "verdict": "No exact Mathlib match. Semantic hits concern monad equivalences, generic adjunction construction, or lifting along forgetful functors with extra hypotheses; none gives the specified fixed-pair adjunction. The project has mapOfNatIsoAdjunction, read at lines 86–125."
+   "verdict": "No exact match: the returned monadic/comonadic comparison, equivalence and adjoint-change declarations do not supply this adjunction of invertible endofunctor algebras."
   },
   {
-   "tool": "leanfinder",
-   "query": "If L is left adjoint to R and commutes with equivalences F and G, then this adjunction lifts to categories of objects equipped with an isomorphism F X to X",
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
    "results": {
     "ok": true,
-    "n_hits": 8,
+    "n_hits": 12,
     "top": [
-     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv",
-     "CategoryTheory.CommSq.leftAdjointLiftStructEquiv",
-     "CategoryTheory.Adjunction.leftAdjointOfEquiv",
-     "CategoryTheory.Adjunction.adjunctionOfEquivLeft",
-     "CategoryTheory.Adjunction.leftAdjointCompIso",
-     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_symm_apply",
-     "CategoryTheory.Adjunction.adjunctionOfEquivRight",
-     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv"
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
     ],
     "note": ""
    },
    "date": "2026-10-21",
-   "verdict": "No exact Mathlib match. Semantic hits concern monad equivalences, generic adjunction construction, or lifting along forgetful functors with extra hypotheses; none gives the specified fixed-pair adjunction. The project has mapOfNatIsoAdjunction, read at lines 86–125."
+   "verdict": "Related results only: algebraCoalgebraEquiv concerns an adjunction between the endofunctors themselves; mateEquiv and its unit/counit identities are already represented by def-weil-pbc-adjunction-mate. None is the whole item."
   },
   {
-   "tool": "grep",
-   "query": "mapOfNatIsoAdjunction|mateIso|IsoAlgebra",
+   "tool": "leanfinder",
+   "query": "Lift left and right adjoint functors commuting with endofunctors to invertible algebras using the same unit and counit",
    "results": {
     "ok": true,
-    "n_hits": 0,
-    "top": [],
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.unitIso",
+     "CategoryTheory.LiftLeftAdjoint.otherMap",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_symm_apply",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv_functor_obj_str",
+     "CategoryTheory.LiftRightAdjoint.otherMap",
+     "CategoryTheory.Monad.comparison",
+     "CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction"
+    ],
     "note": ""
    },
    "date": "2026-10-21",
-   "verdict": "No exact Mathlib match. Semantic hits concern monad equivalences, generic adjunction construction, or lifting along forgetful functors with extra hypotheses; none gives the specified fixed-pair adjunction. The project has mapOfNatIsoAdjunction, read at lines 86–125."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"mapOfNatIsoAdjunction\"",
-   "results": {
-    "ok": true,
-    "n_hits": 0,
-    "top": [],
-    "note": ""
-   },
-   "date": "2026-10-21",
-   "verdict": "No exact Mathlib match. Semantic hits concern monad equivalences, generic adjunction construction, or lifting along forgetful functors with extra hypotheses; none gives the specified fixed-pair adjunction. The project has mapOfNatIsoAdjunction, read at lines 86–125."
+   "verdict": "No exact match: algebraCoalgebraEquiv compares algebras and coalgebras on one category; LiftLeftAdjoint and LiftRightAdjoint require further adjoint-lifting hypotheses and do not specialize in one line to the stated functors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-weil-common-stage-derived-direct-image",
@@ -129,5 +299,20 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-fixed-pair-adjunction-lift",
+  "worker": "stage1",
+  "summary": "Expanded the fixed-pair adjunction into explicit transport, mate/unit, mate/counit, naturality, triangle, and Hom-bijection calculations. Reused the two existing definition leaves and the existing natural-Hom-bijection adjunction leaf; no new nodes, no extra equivalence hypothesis, and no statement change. Ran and read two phrasings in each Mathlib search mode. The current shared source contains the previously rejected attachment candidates, but this delivery makes no attachment claim, as the brief requires.",
+  "blueprint": "Serves def-weil-derived-direct-image, final rational/common-stage convention, through def-weil-common-stage-derived-direct-image proof steps 9–10: lifting the prescribed geometric adjunction to Weil fixed pairs with its carrier unit and counit. The current main-20261015 definition ends with the common-stage coefficient convention and has no proof paragraphs to replace."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-136e2690e",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-136e2690e (reviewer sub-agent of L); spot-checked: Zero-new-node split of the still-unsplit live item, which is not dropped, has no repair note and is not superseded. The statement and stmt_deps are byte-identical to live. I recomputed all 6 steps. (1) The transports satisfy the fixed-pair condition by naturality of e and b. (2) The unit-mate identity b_{LK}F(η_K)=R(a_K)η_{FK} follows from naturality of η and a plus the triangle identity, using the component formula of def-weil-pbc-adjunction-mate with L1=L2=L, horizontal F,G and α=e⁻¹; this matches the displayed b_M under the stated diagrammatic notation. (3) η_K is a fixed-pair map. (4) The transpose characterization ε_{GM}L(b_M)=G(ε_M)a_{RM} gives that ε_M is a fixed-pair map. (5) Naturality and triangles follow by faithfulness of the forgetful functor. (6) The natural Hom bijection is fed into the existing leaf lem-weil-pbc-adjunction-of-natural-bijection, giving carrier unit η and counit ε. All three cited nodes are Mathlib leaves and are in proof_deps. The proof agrees with the project's IsoAlgebraAdjunction.lean mapOfNatIsoAdjunction (lines 80-126). Edge cases checked: constant-singleton F,G that are not equivalences, Δ⊣× with non-invertible unit and counit, identity and empty categories. No SGA. No duplicates: the earlier Q37 and Q27 duplicate nodes are absent, and other grep hits are only Mathlib search strings. No fixes."
+ }
 }
