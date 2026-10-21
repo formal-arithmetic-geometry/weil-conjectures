@@ -20,126 +20,50 @@
  ],
  "proof": [
   {
-   "text": "Put $R_T=\\underline A_T$, $B_T=A_T$, $S_{T,n}=\\underline{P_n}_T$, and $J_{T,n}=I^nR_T$. The constant-module functor preserves cokernels and finite sums [lem-weil-pbc-finite-type-constant-exact]. Apply it to a finite-generator presentation $A^e\\to A\\to A/I^n\\to0$; the image is precisely $I^nR_T$, so $R_T/J_{T,n}=S_{T,n}$. By [lem-weil-pbc-constant-completion-equivalence], $B_T$ is flat over $R_T$ and its specified projection induces $B_T/J_{T,n}B_T\\cong S_{T,n}$. These are the common-quotient hypotheses of [lem-weil-pbc-flat-common-quotient-reduction-tower]. Their compatibility for $b\\geq a$ follows by composing the projections: both quotient maps take the class of $z$ to its class modulo $I^a$. The finiteness hypothesis identifies these constant quotient sheaves with the coefficient sheaves of the item. No completeness condition on the input complex is used.",
+   "text": "Use derivedReductionTowerComparison of [lem-weil-pbc-constant-completion-equivalence] and invert its comparison. Its representative formula is exactly BalancingComputes. All data and predicates are those of [def-weil-pbc-strict-quotient-scalar-balancing-data].",
    "uses": [
-    "lem-weil-pbc-finite-type-constant-exact",
     "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-flat-common-quotient-reduction-tower"
+    "def-weil-pbc-strict-quotient-scalar-balancing-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), applied to ideal powers; constant-sheaf cokernels"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose one flat-term K-flat $B_T$-complex $P$ representing $L$ [lem-pc-kflat-resolution]. Flat restriction makes $r_TP$ K-flat with flat $R_T$-terms [lem-weil-pbc-flat-scalar-restriction-kflat]. On the small diagram site [lem-weil-pbc-diagram-site-realization], $\\Delta P$ is K-flat: if a diagram complex $E$ is acyclic, $(E\\otimes\\Delta P)(n)=E(n)\\otimes P$ is acyclic for every $n$, by [def-pc-kflat-complex]; here evaluation at $n$ is the module inverse image along $e_n$ [lem-weil-pbc-diagram-site-realization], so it carries the diagram-site tensor to the tensor of the evaluations [lem-weil-pbc-algebraic-inverse-image-tensor-comparison], and cohomology is computed levelwise [lem-weil-tower-category-levelwise-abelian]. The same argument applies to $\\Delta r_TP$. Tensor and its total complex have the componentwise formulas of [def-pc-tensor-complex-sheaves]. Apply [lem-pur-derived-change-of-rings] on that small site to the ring maps $\\Delta B_T\\to Q_T$ and $\\Delta R_T\\to Q_T$, then restrict the resulting $Q_T$-modules along the same maps. Thus the two reductions in the item are computed by the actual complexes of strict towers $(P\\otimes_{B_T}S_{T,n})_n$ and $(r_TP\\otimes_{R_T}S_{T,n})_n$.",
+   "text": "Lift the exact constant-diagram restriction square through the localization of complexes. Define the quotient augmentation by the universal left-derived lift of the ordinary reductionUnit; the Kan factorization equation proves AugmentationComputes on every complex. These use the exact restriction and universal quotient presentations of [lem-weil-pbc-constant-completion-equivalence].",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Before localization, both reduction units send m to 1 tensor m. The finiteComparison and reductionTowerComparison section specifications therefore give equality of the ordinary augmented strict towers. Choose a flat-term K-flat completed-coefficient resolution by [lem-pc-kflat-resolution]. Flatness of the coefficient map from [lem-weil-pbc-constant-completion-equivalence] and [lem-weil-pbc-flat-scalar-restriction-kflat] keep its restriction K-flat with flat terms. The monoidal/site flatness bridge comes from [lem-weil-pbc-independent-sheaf-tensor-colimits]. Substitute the two augmentation computations, scalar-balancing computation and constant-diagram computation into this ordinary equality; cancel their invertible computation maps. Naturality along the resolution and localization extensionality extend the augmentation equation to every derived object.",
    "uses": [
     "lem-pc-kflat-resolution",
+    "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "lem-weil-pbc-diagram-site-realization",
-    "def-pc-kflat-complex",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change); the same constructions on the small diagram site"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-common-quotient-reduction-tower] using step 1 and $P$. Take the inverse of its comparison, so the direction is $\\rho_P:(r_T(P\\otimes_{B_T}S_{T,n}))_n\\to(r_TP\\otimes_{R_T}S_{T,n})_n$. It and its inverse send $p\\otimes s$ to $p\\otimes s$, interpreted as pure sections of sheaf tensors [def-weil-pbc-ringed-tensor-section-calculus]. The cited theorem supplies naturality in $P$, the chain-map property, all quotient transitions, and the strict quotient cone. In particular $\\rho_P(p\\otimes1)=p\\otimes1$ in every degree and level. Restriction of scalars leaves the underlying sheaves and maps unchanged [def-pc-sheaf-restrict-scalars], so $r_T\\Delta P=\\Delta r_TP$ with their identical transition maps. Consequently $\\rho_P r_T(\\Delta P\\to\\mathcal R_T^aP)=(\\Delta r_TP\\to\\mathcal R_T^0r_TP)$ is already an equality of chain maps of strict towers.",
+   "text": "Apply [lem-weil-pbc-strict-quotient-pullback-compatibility] to the chosen normalized balancing on U and V. Assemble this pullback record with the scalar balancing, augmented units and constant-restriction comparison already constructed. The root conclusion has its original statement.",
    "uses": [
-    "lem-weil-pbc-flat-common-quotient-reduction-tower",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "def-pc-sheaf-restrict-scalars"
+    "lem-weil-pbc-strict-quotient-pullback-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); common-quotient balancing, transitions and quotient cones as stated in lem-weil-pbc-flat-common-quotient-reduction-tower"
-   }
-  },
-  {
-   "text": "For $u:U\\to V$, the specified coefficient isomorphisms identify $u^{-1}B_V=B_U$ and $u^{-1}S_{V,n}=S_{U,n}$ and commute with both projections and all quotient maps [lem-weil-pbc-profinite-coefficient-inverse-image]. The constant-ring identification $u^{-1}R_V\\cong R_U$ carries each constant scalar to the same scalar [lem-pe-constant-left-module-inverse-image]. It also commutes with $R_T\\to B_T$: after every finite projection it sends each constant $a$ to its same residue class; the limit projections determine the ring map. Thus the flat scalar comparison hypotheses hold by step 1. By [lem-weil-pbc-flat-ringed-diagram-restriction], ordinary and diagram pullbacks are exact inverse image on the underlying module sheaves, and $a_u,p_u$ are the normalized identifications of these inverse images. Set $P_u=u^*P$, with the transported $B_U$-action. It represents $L_u^aL$ and is K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its restriction represents $G_ur_VL$ by step 2 and $a_u$. This uses coefficient-ring isomorphisms, not a flatness assertion for the morphism of schemes.",
-   "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pe-constant-left-module-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); exact inverse image for the coefficient-ring identifications"
-   }
-  },
-  {
-   "text": "The ordinary inverse-image tensor comparison sends the inverse image of a pure tensor to the pure tensor of the inverse images [lem-weil-pbc-algebraic-inverse-image-tensor-comparison]. With the ring identifications of step 4 it gives, in each degree, $u^*(P\\otimes_{B_V}S_{V,n})\\cong P_u\\otimes_{B_U}S_{U,n}$, and the identical formula over $R$. These are maps of strict diagrams: their naturality in the second factor includes every $S_{V,b}\\to S_{V,a}$. They compute the canonical derived comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], although $Q_V$ need not be flat. Indeed resolve $Q_V$ on the small diagram site by a flat-term K-flat complex [lem-pc-kflat-resolution]. Tensoring this resolution with $\\Delta P$ is a quasi-isomorphism by its K-flatness, and exact inverse image preserves it. On the two K-flat factors the derived comparison is the ordinary total tensor comparison; its naturality gives the same comparison after inverting this quasi-isomorphism [lem-weil-pbc-site-derived-tensor-descent]. Thus $\\tau_{u,L}$ is represented by the inverse of this ordinary tensor comparison; the canonical $\\mathcal R_U^0G_u\\cong G_u\\mathcal R_V^0$ is represented by its constant-ring counterpart.",
-   "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), proof by K-flat representatives; sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
-   }
-  },
-  {
-   "text": "Compare the two asserted composites on the representative with level $P_u\\otimes_{B_U}S_{U,n}$. Under step 5 write the inverse image of a tensor as $x\\otimes s$, using the generalized pure pairing. On the left, $\\tau$ gives that inverse-image tensor, $p_u$ keeps its underlying tensor, and $G_u\\rho_P$ changes its balancing ring from $B$ to $R$, giving $x\\otimes s$. On the right, $\\rho_{P_u}$ first changes the balancing ring to $R_U$, $\\mathcal R_U^0(a_u)$ keeps $x\\otimes s$, and the constant-ring comparison gives the same inverse-image tensor. Pure sections determine linear maps out of the sheaf tensor [def-weil-pbc-ringed-tensor-section-calculus], so these maps are equal in every degree as sheaf maps. For the differential both formulas give $d(x)\\otimes s$, and for a transition $b\\to a$ both give $x\\otimes q_{b,a}(s)$; the coefficient comparison commutes with $q_{b,a}$ by [lem-weil-pbc-profinite-coefficient-inverse-image]. Therefore this is an equality of maps of strict diagram complexes, not merely an equality of maps after evaluation in separate derived categories. This proves the required formula on the representative, with the stated direction of $q_{u,L}$.",
-   "uses": [
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), determination by pure tensors; explicit representative calculation"
-   }
-  },
-  {
-   "text": "The flat-term K-flat homotopy category localized at its quasi-isomorphisms is equivalent to $D(B_T)$ [lem-weil-pbc-site-derived-tensor-descent]. Both strict reduction functors invert quasi-isomorphisms on this class: use the two diagram-site scalar extensions of step 2 and [lem-pur-derived-change-of-rings], with flat restriction for the second. Pullback in step 4 is exact, hence also inverts these maps. The comparisons of steps 3 and 5 and their inverses are natural in chain maps; their degreewise tensor formulas respect chain homotopies. They therefore descend along that localization equivalence to natural isomorphisms in the actual derived strict-tower category. The strict augmentation equality of step 3 and the strict equality of step 6 descend as equalities under the same functor. This defines $\\rho_L$ independently of the chosen representative and proves the augmentation and pullback equations on every ambient input. The localization takes place with the strict-tower category as target throughout; no faithfulness assertion for level evaluations in a derived category is used.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7D (lemma-factor-through-K-flat), 06YY (lemma-derived-base-change), 06YU (definition-derived-tor); localization of the K-flat representative class"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-constant-exact",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "def-weil-pbc-strict-quotient-scalar-balancing-data",
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-flat-scalar-restriction-kflat",
-  "lem-weil-pbc-diagram-site-realization",
-  "def-pc-kflat-complex",
-  "lem-weil-tower-category-levelwise-abelian",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-strict-quotient-pullback-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second paragraph, naturality of coefficient reduction; strict diagram scalar-balancing supplement. Uses Stacks 093M, 06YS, 06YY, 07A4 and 03EL through the cited existing nodes."
+  "place": "Q6 Lean reduction: augmentation proved by ordinary unit formulas and universal localization; pullback-only steps 4--7 isolated as a separate result."
  },
  "mathlib_searches": [
   {
@@ -256,9 +180,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pe-constant-left-module-inverse-image"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -272,32 +194,6 @@
   "module": "Sheaf.Paper.StrictQuotientScalarBalancing",
   "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientScalarBalancing",
   "declarations": [
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.topology",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.ring",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.scalar",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.reduction",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.delta",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.deltaFactors",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverse",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modelBaseChangeLimits",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modelBaseChangeFlat",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverseLimits",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.inverseData",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.coefficient",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.modulePull",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.towerPull",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullModel",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.complexSquare",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.balanceComplex",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.constantRestrictionComplex",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullReductionNormalized",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullReductionComputes",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.towerSquare",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.PullCompatibility",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.BalancingComputes",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.AugmentationComputes",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.DeltaRestrictionComputes",
-   "AlgebraicGeometry.Scheme.StrictScalarBalancing.Balancing",
    "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientScalarBalancing"
   ],
   "file": "lean/Sheaf/Paper/StrictQuotientScalarBalancing.lean",
@@ -314,5 +210,15 @@
   "group": "NU",
   "result": "pass",
   "note": "Clause-by-clause match with node: ρ (inverse of common-quotient comparison) pinned by BalancingComputes on flat-term K-flat reps via reductionTowerComparisonComplex; augmentation pinned to reductionUnit, δ to Iso.refl square, augmentation_equation as node; a/p pinned through ordinaryPullComparison (insertion ∃!), τ and constant reassociation via PullReductionNormalized + K-flat formula; final equation arrow types/order traced = q r(τ) = R0(a) ρ. PullModel existential harmless (unique up to derived-functor iso). No extra hypotheses; A:Type(u+1) is the datum's convention; AsSmall model site; edge cases I=0, I=A, A=0, empty T, n+1 indexing, identity f covered. Statement verbatim; dep records byte-identical to side-live; stmt_deps = base; not dropped; only sorry is the theorem; docstrings OK. No file changed, no compile. Advisories: A1 ~25 ConstantCompletion plain decls owned by theorem lem-weil-pbc-constant-completion-equivalence used without stmt_dep (base stmt_deps unchanged, theorem not added → advisory, add the NL-20711db3 def node later); A2 Classical.choice InverseImageData pinned up to transport (Q32 precedent); A3 ConstantCompletion parallels of profinite/flat-restriction/tensor-pullback dep decls need stage-3 bridge; A4 ρ formula = derivedReductionTowerComparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8a69f",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261021T154751-L-3171030",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's item module (verbatim apart from blueprint tags); new sorry pullback lemma vs the old Balancing.pullback field (same content, ρ pinned uniquely by BalancingComputes); importers compiled against the delivered modules"
  }
 }

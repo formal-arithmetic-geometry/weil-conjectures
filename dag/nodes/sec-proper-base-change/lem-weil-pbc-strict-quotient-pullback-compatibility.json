@@ -1,0 +1,175 @@
+{
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph: same reconstruction and projection-formula conjugations, strict coefficient supplement old Step 4. Agent strict-diagram argument; Stacks 099M (proetale.tex, lemma-naive-completion) supplies completion context, not the strict balancing or augmentation/pullback equations."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictQuotientScalarBalancing",
+  "date": "2026-10-21",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Second paragraph: strict coefficient supplement, steps 4--7, canonical pullback reassociation and its scalar-balancing cube",
+   "via": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image commutes with completed coefficient quotient tensor towers and scalar restriction in the derived category of strict towers",
+   "results": "8 hits, including Algebra.TensorProduct.liftEquiv_symm_apply_coe, lTensor.inverse_comp_lTensor, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, TensorProduct.directLimitRight_symm_of_tmul, and Submodule.Quotient.restrictScalarsEquiv_symm_mk.",
+   "date": "2026-10-21",
+   "verdict": "No match: ordinary algebra tensor/quotient formulas do not state the normalized ringed-site derived strict-tower cube."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: Localization.liftNatIso, liftNatIso_hom and liftNatIso_inv in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-21",
+   "verdict": "The generic localization lift is used in the augmentation proof. It does not supply the normalized coefficient inverse image, quotient reassociation or pullback cube."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTowerComparison|reductionTowerComparison",
+   "results": "msearch grep returned 0 Mathlib hits. Repository rg found the existing ordinary restricted comparison and derived scalar balancing in Sheaf.Paper.ConstantCompletionEquivalence, and the constant-only strict pullback comparison in Sheaf.Paper.CompletionMateComparison.",
+   "date": "2026-10-21",
+   "verdict": "The existing normalized scalar balancing is reused. The full completed-action pullback record is not a specialization of any found declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image of completed coefficient modules commutes with strict derived quotient towers and scalar restriction",
+   "results": "8 hits, mostly IsAdicComplete.StrictMono.of_comp_lift, mkQ_comp_lift, of_lift and extend, plus AdicCompletion.eval_comp_of.",
+   "date": "2026-10-21",
+   "verdict": "These are ordinary module adic-completion constructions, not derived strict-tower comparisons on ringed sites."
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-strict-quotient-pullback-compatibility",
+ "kind": "statement",
+ "title": "Pullback coherence of normalized strict scalar balancing",
+ "statement": "Let f : U → V be any morphism of schemes and d an adic coefficient datum. In the notation and definitions of [def-weil-pbc-strict-quotient-scalar-balancing-data], let rhoV and rhoU be strict derived quotient scalar-balancing isomorphisms on V and U, respectively, each satisfying BalancingComputes on every flat-term K-flat completed-coefficient complex. Then PullCompatibility f d rhoV rhoU is inhabited: the exact module and strict-diagram pullbacks, normalized scalar comparisons, ordinary tensor reassociations, and their derived counterparts exist, and their strict derived-tower cube commutes on every ambient derived object. This statement concerns pullback and contains no augmentation assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-strict-quotient-scalar-balancing-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport finite-tower limit preservation of [lem-weil-pbc-proetale-finite-tower-limit] through the AsSmall sheaf equivalences. Uniqueness of left adjoints identifies the transported inverse image with the specified site pullback. The ringUnderlying isomorphisms and ring_naturality of inverseData identify rings followed by forgetting with forgetting followed by inverse. Ring-sheaf forgetting preserves and reflects limits, so the chosen rings functor preserves finiteSystem. Its natural constant isomorphisms identify the image tower with the target tower. Their invertible limit comparison is the prescribed completedMap, by its projection formula and [lem-weil-pbc-profinite-coefficient-inverse-image]. The constant coefficient map is already invertible. Naturality of constants, followed by limit.hom_ext, proves the scalar square commutes. Algebraic inverse image is exact, and scalar extension along either coefficient isomorphism is an equivalence. Exact termwise pullback and its termwise diagram functor therefore descend to the two PullModels of [def-weil-pbc-strict-quotient-scalar-balancing-data], with the standard exact-localization factor isomorphisms and universal left-derived properties.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-tower-limit",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-strict-quotient-scalar-balancing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized ordinaryPullComparison of [lem-weil-pbc-constant-completion-equivalence] is invertible: its insertion equation identifies its underlying map with a composite of the two invertible insertion maps, and module forgetting reflects isomorphisms. Take its inverse as ordinaryScalar. This is the underlying-inverse-image scalar comparison of [lem-weil-pbc-flat-ringed-diagram-restriction]. Apply exact localization to this ordinary square and its termwise diagram square to construct a and p. The localization factor equations give a_computes and p_computes, with precisely the inverses prescribed in [def-weil-pbc-strict-quotient-scalar-balancing-data].",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-weil-pbc-strict-quotient-scalar-balancing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to each quotient coefficient, using the projection-preserving coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image]. It sends the inverse image of a pure tensor to the tensor of its inverse images. Its inverse gives ordinaryCompleted and ordinaryConstant. Naturality in the quotient factor includes every tower transition, so these are isomorphisms of strict diagrams. Inserting the quotient unit gives exactly the two PullReductionNormalized equations; equality on the generating sheaf tensor pairings follows from [def-weil-pbc-ringed-tensor-section-calculus].",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat completed-coefficient complex by [lem-pc-kflat-resolution]. Pullback preserves this resolving class by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Flatness from [lem-weil-pbc-constant-completion-equivalence] and [lem-weil-pbc-flat-scalar-restriction-kflat] gives the same assertion for scalar restriction; the monoidal/site flatness conventions are identified by [lem-weil-pbc-independent-sheaf-tensor-colimits]. A constant diagram of a K-flat complex is K-flat on the diagram site [lem-weil-pbc-diagram-site-realization]: tensor [def-pc-tensor-complex-sheaves] and cohomology [lem-weil-tower-category-levelwise-abelian] evaluate levelwise, so the assertion follows from [def-pc-kflat-complex]. Resolve the quotient diagram as an auxiliary K-flat factor as in [lem-pur-derived-change-of-rings]. Tensoring that resolution with the constant K-flat model, then applying exact inverse image, gives quasi-isomorphisms. Thus the ordinary reassociations of the preceding step compute the two canonical derived reassociations. [lem-weil-pbc-site-derived-tensor-descent] localizes them to tau and constantReassociation, with the DerivedTowerComparisonFormula equations required by PullReductionComputes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-diagram-site-realization",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the same flat-term K-flat model, compare the two composites in equation. The hypotheses hV and hU compute rhoV and rhoU as the specified balancing maps. Each composite pulls back the same sections and changes the balancing ring from completed to constant, so each sends the same generalized pure tensor to the same tensor. These pairings determine maps out of sheaf tensors by [def-weil-pbc-ringed-tensor-section-calculus]. Naturality in quotient maps and chain maps includes every transition and differential. Substitute the representative formulas for a, p and both reassociations and cancel the invertible computation maps from [lem-weil-pbc-constant-completion-equivalence]. This gives equality as maps of strict complexes. [lem-weil-pbc-site-derived-tensor-descent] and naturality along flat K-flat resolutions extend it to every ambient derived object. Assemble these constructions into PullCompatibility. There is no augmentation assertion and no appeal to faithfulness of derived evaluation.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-finite-tower-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-strict-quotient-scalar-balancing-data",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Original strict coefficient supplement, steps 4--7, isolated from augmentation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientPullbackCompatibility",
+  "file": "lean/Sheaf/Paper/StrictQuotientPullbackCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientPullbackCompatibility",
+  "statement": "theorem strictQuotientPullbackCompatibility {U V : Scheme.{u}} (f : U ⟶ V)\n    (d : AdicCoefficientDatum A)\n    (ρV : reduction V d true ⋙ tdres (scalar V d) ≅\n      dres (scalar V d) ⋙ reduction V d false)\n    (ρU : reduction U d true ⋙ tdres (scalar U d) ≅\n      dres (scalar U d) ⋙ reduction U d false)\n    (hV : BalancingComputes V d ρV) (hU : BalancingComputes U d ρU) :\n    Nonempty (PullCompatibility f d ρV ρU)",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8a69f",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261021T154751-L-3171030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8a69f",
+  "group": "Q6",
+  "result": "fix",
+  "landing": "20261021T154751-L-3171030",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's item module (verbatim apart from blueprint tags); new sorry pullback lemma vs the old Balancing.pullback field (same content, ρ pinned uniquely by BalancingComputes); importers compiled against the delivered modules"
+ }
+}
