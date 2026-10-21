@@ -10,7 +10,7 @@ public import Mathlib.Topology.Instances.ZMod
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.ConstantModelTorAmplitude
-public import Sheaf.RingTheory.GlobalDimension
+public import WeilConjectures.RingTheory.GlobalDimension
 import Sheaf.Paper.LocalizingClosureExistence
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic

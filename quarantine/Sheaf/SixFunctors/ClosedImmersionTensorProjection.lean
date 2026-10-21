@@ -95,6 +95,7 @@ theorem closedImmersionTensorProjection
   have : QuasiCompact j := inferInstance
   have hij : Set.range f.base = (Set.range j.base)ᶜ := by
     simp [j, V]
+  let := closedSupport_lowerStarExact Λ f j hij
   obtain ⟨p, _, _, hp, _⟩ := openClosedInternalHomFormulas Λ f j hij
   let adj := closedPullbackDerivedAdjunction Λ f
   let π := adj.rightAdjointProjectionMap (supportTensorNatIso Λ f).hom

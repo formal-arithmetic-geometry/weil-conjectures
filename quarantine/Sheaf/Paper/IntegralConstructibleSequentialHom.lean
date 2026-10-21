@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 import Sheaf.Paper.IntegralConstructibleSheafHom
-import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import all Sheaf.CategoryTheory.HomColimitExtension
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Category.Grp.Zero
