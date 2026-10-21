@@ -15,9 +15,77 @@
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-module-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-l-adic-extension-absolute-value] the topology on $E$ comes from a nonarchimedean absolute value. Its balls are clopen: if $y\\notin B(a,r)$, the ball $B(y,|y-a|_E)$ misses $B(a,r)$ by the ultrametric inequality. For distinct $a,b$, a ball of radius $0<r\\leq|a-b|_E$ separates them, so every connected subset of $E$ is a singleton. Apply [lem-sfb-continuous-ring-universe-realization] with $T=E$, $X=W$. It gives a ring-sheaf isomorphism $E_W\\simeq R$, where $R(U)=C(|U|,E)$, including multiplication and unit. Transport the given module isomorphism and its inverse along this ring-sheaf isomorphism; their composite identities are retained by conjugation. It suffices to consider $f:R^{\\oplus m}\\to R^{\\oplus n}$ and $g:R^{\\oplus n}\\to R^{\\oplus m}$ with $gf=1$, $fg=1$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-sfb-continuous-ring-universe-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6: pulled-back condensed coefficients are continuous-function sheaves; specialization using nonarchimedean clopen balls"
+   }
+  },
+  {
+   "text": "For $F_r=R^{\\oplus r}$ denote the coproduct inclusions by $i_j:R\\to F_r$. Define $p_j:F_r\\to R$ by $p_ji_k=\\delta_{jk}1_R$ using the coproduct universal property. Module morphisms, as defined in [sk-def-sfb-module-objects], add pointwise; the map $\\sum_j i_jp_j$ becomes $i_k$ after precomposition with every $i_k$, hence equals $1_{F_r}$. Thus these are biproduct coordinates, as in [def-weil-additive-category]. When $r=0$, the empty sum is the zero object and its identity is zero. All sums here are finite; no preservation of infinite coproducts by sections is used.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-additive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+   }
+  },
+  {
+   "text": "For a regular-module endomorphism $h:R\\to R$, its map on sections over $W$ is $R(W)$-linear: evaluating the module-morphism action equation of [sk-def-sfb-module-objects] on $a\\otimes b$ gives $h_W(ab)=a h_W(b)$. Hence $h_W(a)=a h_W(1)$. Put $A_{ij}=(p_i f i_j)_W(1)\\in C(|W|,E)$ for $i<n,j<m$, and $B_{ji}=(p_j g i_i)_W(1)$ for $j<m,i<n$. Insert the finite identity resolutions from step 2 into $gf=1$ and $fg=1$. For example, the $(j,k)$ component of $gf$ evaluated at $1$ is $\\sum_{i<n}h_{ji,W}(a_{ik,W}(1))=\\sum_{i<n}A_{ik}B_{ji}$, where $h_{ji}=p_j g i_i$ and $a_{ik}=p_i f i_k$. Since $E$ is commutative, this says $BA=I_m$. The same calculation with $f,g$ interchanged gives $AB=I_n$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+   }
+  },
+  {
+   "text": "Choose $w\\in|W|$, using the nonemptiness hypothesis. The map $C(|W|,E)\\to E$, $a\\mapsto a(w)$, preserves $0,1,+,\\cdot$ because these operations are pointwise. Evaluating every entry of $BA=I_m$ and $AB=I_n$ therefore gives $B(w)A(w)=I_m$ and $A(w)B(w)=I_n$. The formulas $v\\mapsto A(w)v$ and $u\\mapsto B(w)u$ consequently define mutually inverse $E$-linear maps $E^m\\rightleftarrows E^n$. Empty-index matrices and empty sums obey the same formulas when $m$ or $n$ is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+   }
+  },
+  {
+   "text": "The standard coordinate vectors form a basis of $E^n$: $v=\\sum_{i<n}v_i e_i$, and $\\sum_i c_i e_i=0$ implies $c_i=0$ by taking the $i$th coordinate. Therefore $\\dim_E E^n=n$ by [def-weil-vector-space-dimension]. The $m$ images under $A(w)$ of the coordinate vectors of $E^m$ are linearly independent: applying $B(w)$ to a zero linear combination recovers the original coordinate coefficients. Apply [lem-weil-independent-family-card-le-dimension] to get $m\\leq n$. Interchanging $A(w)$ and $B(w)$ gives $n\\leq m$, and antisymmetry gives $m=n$. Both inequalities remain valid for zero-dimensional spaces.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "lem-weil-independent-family-card-le-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-sfb-continuous-ring-universe-realization",
+  "sk-def-sfb-module-objects",
+  "def-weil-additive-category",
+  "def-weil-vector-space-dimension",
+  "lem-weil-independent-family-card-le-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+  "place": "First paragraph, assertion that transition isomorphisms preserve rank; explicit finite-matrix argument using Hemo–Richarz–Scholbach Example 3.1 for the coefficient realization."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +135,52 @@
    "results": "{\"t\": \"2026-10-21T06:18:29Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant basis number for finite free modules over a sheaf of continuous functions from a scheme to a nonarchimedean field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq_finrank_of_free\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"invariantBasisNumber_of_nontrivial_of_commRing\", \"Module.rankAtStalk\", \"invariantBasisNumber_of_rankCondition\", \"Module.rankAtStalk_self\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.rankAtStalk_eq\"], \"digest\": \"7f53310df3a4605e\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give ordinary-module invariant basis number or free-sheaf pullback; constructing and evaluating the matrix of a coefficient-sheaf isomorphism is still required (Free.lean lines 62-68; Dimension/Free.lean lines 231-247; InvariantBasisNumber.lean lines 313-317)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between finite free sheaves over pulled back condensed p-adic field coefficients on a nonempty scheme forces equal ranks",
+   "results": "{\"t\": \"2026-10-21T08:29:49Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between finite free sheaves over pulled back condensed p-adic field coefficients on a nonempty scheme forces equal ranks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.finFree\", \"SheafOfModules.pullbackObjFreeIso\", \"Condensed.profiniteFree\", \"CondensedMod\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\", \"CondensedMod.isDiscrete_tfae\"], \"digest\": \"a9c2490563186db8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: "
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(rank|card)|rank.*free",
+   "results": "{\"t\": \"2026-10-21T08:30:16Z\", \"tool\": \"grep\", \"query\": \"free.*(rank|card)|rank.*free\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of finite free sheaves with continuous field coefficients on a nonempty scheme implies equal ranks",
+   "results": "{\"t\": \"2026-10-21T08:30:17Z\", \"tool\": \"leansearch\", \"query\": \"An isomorphism of finite free sheaves with continuous field coefficients on a nonempty scheme implies equal ranks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.nonempty_equiv_iff_rank_eq\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"ContinuousLinearEquiv.ofFinrankEq.congr_simp\", \"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"FiniteDimensional.nonempty_linearEquiv_of_finrank_eq\", \"nonempty_linearEquiv_of_rank_eq\", \"LinearEquiv.ofRankEq\"], \"digest\": \"1a02b03697f13357\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: "
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free, InvariantBasisNumber",
+   "results": "{\"t\": \"2026-10-21T08:30:17Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.free, InvariantBasisNumber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: "
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_equiv_iff_rank_eq|nonempty_linearEquiv_iff_finrank_eq|finrank_eq",
+   "results": "{\"t\": \"2026-10-21T08:30:44Z\", \"tool\": \"grep\", \"query\": \"nonempty_equiv_iff_rank_eq|nonempty_linearEquiv_iff_finrank_eq|finrank_eq\", \"sub\": \"LinearAlgebra/Dimension/Free.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"153\", \"189\", \"236\", \"239\", \"242\"], \"digest\": \"a962c433fa0a855b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: LinearAlgebra/Dimension/Free.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant basis number for finite free modules over a sheaf of continuous functions to a nonarchimedean field",
+   "results": "{\"t\": \"2026-10-21T08:30:47Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant basis number for finite free modules over a sheaf of continuous functions to a nonarchimedean field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq_finrank_of_free\", \"invariantBasisNumber_of_nontrivial_of_commRing\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"invariantBasisNumber_of_rankCondition\", \"rank_fun\", \"Module.rankAtStalk_self\", \"Module.isLocallyConstant_rankAtStalk\", \"cardinalMk_eq_cardinalMk_field_pow_rank\"], \"digest\": \"0a697c80dce615af\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic module dimension/IBN and free-sheaf pullback hits do not identify pulled-back continuous coefficients or produce the evaluated inverse matrices. Read Free.lean:62-68, PullbackFree.lean, Dimension/Free.lean:231-247, InvariantBasisNumber.lean:313-317. Subdirectory for grep: "
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-stratified-lattice-rank",
@@ -87,5 +197,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-coefficient-free-rank",
+  "worker": "stage1",
+  "summary": "Q153: preserve the full arbitrary-nonempty-scheme statement. Reuse the universe-polymorphic ring-sheaf realization and existing finite-dimensional linear-independence bound. Write out finite biproduct coordinates, regular-module linearity, the two inverse-matrix identities, evaluation at a chosen point, and both dimension inequalities. No new nodes, no Lean edits or builds.",
+  "blueprint": "Realizes det-lem-stratified-lattice-rank.proof.md, first paragraph: transition isomorphisms preserve finite free rank on a nonempty overlap.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-continuous-ring-universe-realization",
+    "why": "Generic coefficient-ring realization, used only as the bridge from pulled-back condensed E to continuous functions; no result of sk-lem-stratified-lattice or its cited units supplies this ring-sheaf comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-continuous-ring-universe-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-6f4345455",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-6f4345455 (reviewer sub-agent of L); spot-checked: I read the item in full and wrote no fixes. The delivery adds 0 new nodes; the statement, stmt_deps, source and unit are unchanged, there is no repair note for the item, and no SGA source is cited. Source check: HRS arXiv 2305.18131, Example 3.1, p. 6, says Λ_X = U ↦ Maps_cont(U,Λ) for any scheme X. Blueprint main-20261015 sk-lem-stratified-lattice-rank.proof.md, paragraph 1, says transition isomorphisms preserve rank because E_X(W)≠0. The item states exactly this comparison, with rank 0 included and no hypothesis weakened. Parent det-lem-stratified-lattice-rank steps 1–2 apply it on W = U_i×_X U_j, and the hypotheses match. Step 1: lem-weil-l-adic-extension-absolute-value makes |·|_E ultrametric, so balls are clopen and E is totally disconnected. lem-sfb-continuous-ring-universe-realization then gives an isomorphism of ring sheaves E_W ≅ C(|−|,E), and both inverse identities transport along it. That node is an accepted tool_use from unit sk-def-sfb-dc-restricted-functors: it is only the coefficient bridge and is not supplied in this unit. The closure of the six proof_deps has 350 nodes and contains neither the item nor its parent, so there is no cycle. Step 2: the biproduct coordinates p_j i_k = δ and Σ i_j p_j = 1 are correct; adding module morphisms uses the module-morphism equation of sk-def-sfb-module-objects. Step 3: h_W(a) = a·h_W(1). I checked the indices (A is n×m, B is m×n); the (j,k) entry of gf at 1 is (BA)_jk, so BA = I_m and AB = I_n. Step 4: evaluation at w ∈ |W| is a ring homomorphism, so A(w) and B(w) are mutually inverse; no claim about field stalks is used. Step 5: the coordinate basis gives dim E^n = n, the images of the basis under A(w) are independent, and the card-le-dimension node gives m ≤ n and, by symmetry, n ≤ m. Edge cases: m=0<n forces I_n = 0, which is impossible; W = ∅ shows the nonemptiness hypothesis is necessary; non-qc, disconnected and nonreduced W need no extra hypotheses. Duplicates: rg -L for invariant-basis and rank phrasings found only ordinary field, ring or scheme statements, none for continuous or condensed coefficient sheaves."
  }
 }
