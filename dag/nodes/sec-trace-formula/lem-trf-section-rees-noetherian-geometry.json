@@ -39,11 +39,12 @@
    }
   },
   {
-   "text": "For an ambient affine $\\operatorname{Spec}B$ write $E=B[t,I/t]$. Restriction to a principal open $D(f)$ gives $E_f=B_f[t,I_f/t]$: its generators are $t$ and $(b/f^r)/t=(b/t)/f^r$, and both sides inject into $B_f[t,t^{-1}]$ (a Laurent polynomial localizes coefficientwise). Thus these are the associated module sheaves on the affine pieces, hence glue as a quasi-coherent algebra by the affine-local definition. The relative-spectrum theorem realizes their spectra as the corresponding opens of $D_sV$. The maps $B[t]\\to E$ similarly give the associated algebra sheaves on $\\operatorname{Spec}B[t]$, agreeing on overlaps; their relative spectra give the same affine pieces. Thus $D_sV\\to\\mathbf A^1_V$ is affine: over an ambient affine it is $\\operatorname{Spec}E\\to\\operatorname{Spec}B[t]$, and over a principal open in the latter its source is the spectrum of the same localization of $E$. Its composite with $\\mathbf A^1_V\\to\\mathbf A^1_S$ is $q$.",
+   "text": "Reuse the completed source-library relative affine gluing construction of the extended-Rees deformation. Its affine chart inclusion has opensRange equal to the preimage of the ambient affine open (toBase_preimage). The isoOfRangeEq comparison identifies this open with the spectrum of the actual Rees algebra. The cocone equation ι_toBase gives the required compatibility with the projection. The source-library affine factorization through A¹_V gives separatedness and quasi-compactness by base change and composition.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "def-sbc-affine-space",
-    "pqf-def-coherent"
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": true,
    "source": {
@@ -52,7 +53,7 @@
    }
   },
   {
-   "text": "Coefficient reduction $B\\to B/I$ on Laurent polynomials restricts to a surjection $E\\to(B/I)[t]$: a negative coefficient in degree $-m$ belongs to $I^m$, so vanishes modulo $I$, while the constants and $t$ generate the target. This gives the stated augmentation section over the closed centre, and $q\\sigma=1$ because $t$ is fixed and $gs=1$. After inverting $t$, one has $E[1/t]=B[t,t^{-1}]$, by the two inclusions of generators. Modulo $t-1$, every $b/t$ equals $b$, so evaluation gives $E/(t-1)\\cong B$, inverse to the constants. All these formulas commute with localization in $B$. They therefore identify the punctured pair with $(V,s)\\times_S\\mathbf G_{m,S}$ and the pair at $1$ with $(g,s)$.",
+   "text": "Use the proved source-library equations deformationSpaceSection_deformationSpaceProj, isPullback_deformationSpaceOneFibre, comp_deformationSpaceOneFibre, and isPullback_deformationSpaceGeneric. They express the canonical augmentation and the actual one and punctured fibres. For the punctured section apply the pullback lift to the punctured inclusion followed by deformationSpaceSection and the identity. The lift equations give its projection to the punctured line and its composite into the deformation. The equation deformationSpaceGeneric_toBase, followed by deformationSpaceSection_toBase, gives its V-projection.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -61,11 +62,13 @@
    }
   },
   {
-   "text": "For each ambient affine apply the general extended-Rees associated-graded chart: $\\operatorname{gr}_I B\\xrightarrow{\\sim}E/(t)$ sends $[b]_m$ to $[bt^{-m}]$. Combine it with the symmetric-to-graded isomorphism from Step 1 and the conormal algebra's normalized affine descriptions. The formulas commute with restrictions: localizing sends both representatives to $b/f^r$ in the same degree, and multiplication is multiplication of representatives. Relative-Spec base change identifies quotienting by $t$ with the scheme fibre. These affine comparisons consequently glue to the canonical $t=0$ identification with $N_s$. The augmentation sends positive homogeneous degrees to zero and degree zero to itself, so the section becomes precisely $z$ and the structural map becomes $\\pi$.",
+   "text": "Use the normalized reesConeComparison of def-pur-finite-smooth-canonical-interfaces. Compose it with relative Spec of the canonical symmetricComparison, which Step 1 makes invertible. The mapped algebra isomorphism gives precisely coneToBundle. Its over-category equation and purityNormalProjection_eq identify the structural maps. For the zero sections, apply the tensor-pullback adjunction to the conormal homogeneous augmentation equation to prove that augmentation kills the degree-one inclusion. The symmetric-algebra universal property then identifies the composite augmentation with the symmetric augmentation. Counit naturality transports this equation to the exact specified sections. Thus this is the canonical normalized comparison, not an arbitrary bundle isomorphism.",
    "uses": [
-    "lem-pur-rees-associated-graded-chart",
+    "def-pur-finite-smooth-canonical-interfaces",
+    "def-pur-normal-bundle",
     "lem-pur-conormal-graded-algebra",
-    "lem-weil-pbc-relative-spec-base-change"
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
    ],
    "elementary": false,
    "source": {
@@ -74,7 +77,7 @@
    }
   },
   {
-   "text": "For every centred affine etale chart in the statement, apply the existing etale-Rees-chart lemma with its $A=R$, $C=P$ and $R=B$. It gives $B[t,I/t]\\cong B\\otimes_P R[t,u_1,\\ldots,u_d]$ with $x_j\\mapsto tu_j$, and says the induced map to $\\operatorname{Spec}R[t,u]$ is etale and its projection to $\\operatorname{Spec}R[t]$ smooth of dimension $d$. This applies to every such chart, not just the chosen cover from Step 1.",
+   "text": "For every centred affine etale chart in the statement, apply the existing etale-Rees-chart lemma with its $A=R$, $C=P$ and $R=B$. It gives $B[t,I/t]\\cong B\\otimes_P R[t,u_1,\\ldots,u_d]$ with $x_j\\mapsto tu_j$, and says the induced map to $\\operatorname{Spec}R[t,u]$ is etale and its projection to $\\operatorname{Spec}R[t]$ smooth of dimension $d$. This applies to every such chart, not just the chosen cover from Step 1. For the unlifted affine map used here, etale base change makes the map of origin Rees algebras etale, and the polynomial origin-Rees equivalence preserves this property. This gives exactly the unlifted etaleReesChartMap of the statement. Apply etale_rees_chart for its tensor bijection and inverse-coordinate identities.",
    "uses": [
     "lem-pur-dnc-etale-rees-chart"
    ],
@@ -85,8 +88,12 @@
    }
   },
   {
-   "text": "The chosen neighbourhoods from Step 1 cover $s(S)$. Outside that closed centre the ideal sheaf is the unit ideal. On any affine inside this complement, $1/t$ is then a generator of $B[t,I/t]$, hence $t$ is invertible there. Thus every point outside the punctured deformation lies over the centre and is in one of the centred deformation opens. These opens and the punctured deformation cover all of $D_sV$.",
-   "uses": [],
+   "text": "For a point outside the punctured open, coe_puncturedLine puts its image in the range of the zero section. Scheme.exists_preimage_of_isPullback for isPullback_normalConeToDeformationSpace lifts it to a normal-cone point. The cone map to V factors through the section via purityNormalProjection. Choose a centred-coordinate chart containing the projection of this point to S; sectionPreimage then puts its image in V in the ambient chart open. Its polynomial evaluation map, algebraEtale and sectionIdeal give exactly the stated coefficient and origin-ideal equations.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "def-pur-normal-bundle",
+    "def-sbc-affine-space"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
@@ -94,12 +101,12 @@
    }
   },
   {
-   "text": "On the centred opens smoothness and pure dimension $d$ were proved in Step 5. On the punctured open the projection is the base change of $g$ by $\\mathbf G_{m,S}\\to S$, so it is smooth of dimension $d$ by smooth relative-dimension permanence. Smoothness is local on these affine neighbourhoods, as in the affine-local smoothness definition, and fibre dimension at a point is unchanged on an open neighbourhood. The cover of Step 6 therefore proves that $q$ is smooth of pure relative dimension $d$.",
+   "text": "Reuse the already complete source-library theorem Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj, in WeilConjectures.AlgebraicGeometry.DeformationToNormalCone. It proves smoothness of pure relative dimension d for the actual deformation of any smooth closed section over an arbitrary base, by centred etale charts and punctured charts. No new smoothness hypothesis is imposed. The existing one-, zero- and punctured-fibre pullbacks and their section equations are also reused from this source module.",
    "uses": [
     "lem-sbc-smooth-relative-dimension-permanence",
     "def-sbc-smooth-morphisms"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
     "place": "Local construction and punctured trivialization; Stacks 01VB and 02NK for the punctured projection."
@@ -129,7 +136,8 @@
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-qcqs-morphism-permanence",
     "def-sbc-locally-finite-presentation",
-    "def-weil-finite-type-morphism"
+    "def-weil-finite-type-morphism",
+    "sbc-lem-affine-space-smooth"
    ],
    "elementary": false,
    "source": {
@@ -138,11 +146,11 @@
    }
   },
   {
-   "text": "Use the vector-bundle construction on the locally free $\\mathcal E$ of Step 1. It supplies affine $\\pi$ and trivializations $N_s|_U\\cong\\mathbf A^d_U$ with $z$ the zero section. The affine-space projections are smooth of dimension $d$; the same affine-local criterion as in Step 7 proves this for $\\pi$. The polynomial coordinate rings show that $\\pi$ is locally finite type, and affineness makes it quasi-compact and separated. Thus $\\pi$ is separated finite type. Finite-type-over-Noetherian makes $N_s$ Noetherian. These facts include $d=0$, when the bundle is $S$.",
+   "text": "Apply the existing zero-fibre pullback to transport separatedness, locally finite type and quasi-compactness of q to normalConeProj. If e is the canonical bundle comparison from Step 4, its equation over S gives π=e.inv followed by normalConeProj. Composition with this isomorphism transports all three properties to π. Finite-type-over-Noetherian makes the bundle Noetherian. This avoids a second local polynomial-chart proof of the same properties and includes d=0 and empty S.",
    "uses": [
     "def-asd-vector-bundle-zero-section",
-    "sbc-lem-affine-space-smooth",
-    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
@@ -184,25 +192,26 @@
  ],
  "proof_deps": [
   "lem-trf-smooth-section-centred-coordinates",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "def-sbc-affine-space",
-  "pqf-def-coherent",
-  "lem-pur-rees-associated-graded-chart",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-normal-bundle",
   "lem-pur-conormal-graded-algebra",
-  "lem-weil-pbc-relative-spec-base-change",
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
   "lem-pur-dnc-etale-rees-chart",
+  "def-sbc-affine-space",
   "lem-sbc-smooth-relative-dimension-permanence",
   "def-sbc-smooth-morphisms",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "def-sbc-locally-finite-presentation",
   "def-weil-finite-type-morphism",
-  "def-asd-vector-bundle-zero-section",
   "sbc-lem-affine-space-smooth",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-open-immersion-etale",
@@ -212,7 +221,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Local construction; affine Rees calculations and Noetherian/Nagata bookkeeping supplied explicitly using the cited Stacks tools."
+  "place": "Local construction; A6 formal proof reusing the completed source-library scheme deformation API, canonical relative-Spec transport, affine gluing and Nagata."
  },
  "mathlib_searches": [
   {
@@ -396,9 +405,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-pur-rees-associated-graded-chart",
   "lem-pur-conormal-graded-algebra",
-  "lem-weil-pbc-relative-spec-base-change",
   "lem-pur-dnc-etale-rees-chart",
   "lem-sbc-smooth-relative-dimension-permanence",
   "lem-pod-separated-finite-type-base-change",
@@ -446,5 +453,15 @@
   "group": "Q74",
   "result": "fix",
   "note": "Re-delivery of the be2267 H2 RETURN. Lean byte-identical (sha b8312a92). Item stmt_deps swap lem-pur-dnc-etale-rees-chart for the new def-trf-rees-chart-canonical-maps (existing:true on the unchanged EtaleReesChart; declarations are exactly etaleReesChartMap/BaseMap/TensorMap, plain defs with no .choose, the only owner-module decls the item uses). The new node's statement matches the Lean and sk-lem-geometry (2) (arbitrary A,R universes, any P-algebra, u_j↦x_j/t, β=C, θ=tensor lift, no extra hypotheses); its stmt_deps exist live; no cycle. Item and new node are not on the dropped lists; the item is unlanded live. check_new_node clean; check_existing gave only the noncomputable note. FIX: fixes/def-trf-rees-chart-canonical-maps.json trims `noncomputable` from lean.statement; both checks clean afterwards. Item mathematics re-checked against the prior full reading, no substance fault. Advisory: Ideal.extendedReesAlgebra has no DAG owner (inherited); later citers of the three maps should cite the new def node. No compile run (JSON-only fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T125941-L-2466839",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
