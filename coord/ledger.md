@@ -20421,3 +20421,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: returned deliver/Q55/lem-sfb-rationalization-localization-hom-criterion (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-rationalization-localization-hom-criterion: le)
 - 06:29 L: returned deliver/Q20/def-wf-tensor-product (reviewer RETURN: Re-split note of the human (2026-10-21), D/E5/G2: arguments of the base proof were dropped. The base ad2c66a already con)
 - 06:29 L: returned deliver/Q34/lem-sfb-cohomology-tor-interval (reviewer RETURN: Superseded by live (A7, B10, C5); the maths itself is sound. Delivery: one new statement-only node, lem-sfb-bounded-post)
+- 06:29 L: returned deliver/NP/lem-weil-proetale-constructible-exact-closure (reviewer RETURN: Superseded by a live stage-3 Lean landing (A7, B10, C5). This S1 re-split was committed 2026-10-21 05:54 UTC on base ecf)
