@@ -23976,3 +23976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: returned deliver/NA/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: 17th push of the live item lem-sfb-gabber-global-snc-alteration (the 16 earlier pushes were all RETURNed for the same pa)
 - 23:15 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 23:16 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 23:17 L: returned deliver/NB/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: D1/D2/G2 and E7/C4. The item is still unsplit on live and its statement is unchanged, so nothing supersedes this deliver)
