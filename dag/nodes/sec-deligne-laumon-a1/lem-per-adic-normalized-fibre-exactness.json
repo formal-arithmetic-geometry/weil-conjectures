@@ -371,5 +371,49 @@
   "group": "Q156",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-3a97da4b4 (reviewer sub-agent of L); spot-checked: FIX for one E1 gap in step 6. I read the whole item (7 steps), the statements of all 20 cited nodes and Bhatt–Scholze §6.8 (Lemma 6.8.2, Def 6.8.3/6.8.6, Prop 6.8.4 with its proof, Cor 6.8.5 with its proof, Lemma 6.8.7). The delivery is the item's own first split: it was created by the Q119 re-split of the parent and is still unsplit on live and side-live. The statement is unchanged and there are no new nodes. Step 1: the intrinsic fibre ω(F)=Γ(s, E_s⊗x⁻¹F^c) is valid because X is Noetherian and finite-dimensional by the finite-type and fibre-dimension nodes, and Spec Ω meets the realization's hypotheses. Step 2: the normalized system is pulled back before the limit is taken, using lisse-completed-system-comparison's pullback compatibility on affine, hence separated, charts. Step 3: I checked the torsion-freeness argument (ϖm=0 forces m_{n+1}∈ϖ^nM_{n+1}, so m_n=0); DVR fg torsion-free gives free. Step 4: fractions follow the raw-localization equation, and the cocycle holds through the single intrinsic functor. Step 5: local splitting, pullback of the cover to s, and exactness of Γ(s,−) at an algebraically closed point. Step 7: closure under kernels, cokernels and images, with exact ω. The fault: step 6 reused the step 2–3 calculation on the monodromy-realization charts T, which are only qcqs and topologically Noetherian, while lisse-completed-system-comparison needs a Noetherian separated scheme. The fix passes to an affine open neighbourhood U of the base point and writes out the restricted normalization; corrected item in fixes/dag/nodes/sec-deligne-laumon-a1/. I accept all 16 declared tool uses as generic foundations. Batch-5 flags: lisse-completed-system-comparison reaches only def-pod-lisse-l-adic-sheaves, already a stmt_dep, plus scalar-extension and stalk-tensor algebra. lem-pod-adic-limit-finite-modules is pure O_E-module algebra. etale-local-monodromy-realization reaches cor-galois-lisse-representations and the lisse/π₁ foundations. None of these is the trace formula, Poincaré duality or a step of either proof, so all are accepted. The split is acyclic and no duplicate was found; lem-dl-a1-constructible-fibres-exact is restricted to the finite-field/Q̄_ℓ setup.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicNormalizedFibreExactness",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.adic_normalized_fibre_exactness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.coefficient",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.pointConstants",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.ambient",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Heart",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.realize",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.realizeAdditive",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.omega",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.integerScalar",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.forgetIntegral",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.proSystem",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.rational",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.fiber",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Lattice.rationalFiber",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.map",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.Adapted",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Chart.restrict",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.rationalLimitMap",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Represents",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Point",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.Assertions",
+   "AlgebraicGeometry.Scheme.ContinuousRational.NormalizedFibre.adic_normalized_fibre_exactness"
+  ],
+  "file": "lean/Sheaf/Paper/AdicNormalizedFibreExactness.lean",
+  "statement": "theorem adic_normalized_fibre_exactness (X : Base.{u} l) (k : Type u) [Field k] [X.scheme.Over (Spec (.of k))] [LocallyOfFiniteType (X.scheme ↘ Spec (.of k))] [QuasiCompact (X.scheme ↘ Spec (.of k))] [IsSeparated (X.scheme ↘ Spec (.of k))] (_hl : IsUnit (l : k)) (R : Family.{u} l) : Nonempty (Assertions l E X (R.realization E X))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helpers unpack this node’s intrinsic fibre, local normalized lattice chart and assertion package. The source heart and its field action are the recorded raw localization and localized t-structure; realization is H⁰ of the recorded J. Finite-dimensional vector spaces are encoded by ModuleCat E together with Point.finite. The background algebraic closure, L and pair category impose no additional conclusion in this finite-E statement; arbitrary finite E/ℚ_l is quantified. No global lisse lattice is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66bf82860",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Item node changed only by its lean record; 13 stmt_dep copies match side-live; lean.statement matches the file signature. Heart = localizedT heart, realize = ι⋙At.J⋙H⁰ with J pinned by the realization dependency. Point.functor is pinned to the intrinsic Γ(s,E_s⊗x⁻¹F) fibre built with the continuous coefficient pullback; Lattice is tied to the actual integral lattice via ν*-limit cone, ϖ^{n+1} cokernels and scalar equations. Normalization, finite-free limit, fractions (all u/ϖ^b), Point.exact (ambient short exact) and all detection clauses (zero, iso, zero map, exact iff, short exact iff) match the node. Base hypotheses follow from finite type plus ℓ invertible; edge cases (empty X, rank 0, level n ↦ ϖ^{n+1}, b=0, universes) checked. Plain imports equal the stated proof_dep modules; docstrings carry source, blueprint tag and 7-step plan; no line over 100 characters, only the theorem is sorry, no hollow definitions. Advisories: owner decls outside stmt_deps (continuousCoefficientPullback, supportSiteComparisonCoefficientPullback, pbcModules etc.); parent AdicHeartPullbackFibres.heartFiber is a cycle-blocked second fibre functor on the same heart; normalization isos pinned by naturality only. No compile run (no file changed; worker clean 14.9 s)."
  }
 }

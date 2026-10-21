@@ -386,5 +386,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-83cca4ab1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full; there are no new nodes. The statement is unchanged and matches HRS Cor. 4.11 under Def. 3.3 (qcqs scheme, arbitrary commutative condensed Λ, a finite constructible locally closed stratification with dualizable restrictions); the representative clause follows by good truncation (def-kun-truncations, Step 7). Step 1: lem-fix-constructible-open-closed-refinement gives the binary tree with qc open and closed children, qcqs vertices and actual leaf→stratum maps; lisse-proetale-locality preserves dual pairs under any pullback. Step 2: det-pe-hypercover-single-cover gives one w-contractible Spec D cover of the qc leaf; wcontractible-lisse-evaluation gives Perf(A)≃D_lis via the exact F_W. Steps 3–4 bound the amplitude through finite projective retracts and brutal-tail triangles (complex-ses-triangle, derived-homology-long-exact), with the correct orientation. This avoids the non-t-exactness of HRS Ex. 4.2. Step 5: the coefficient iso α plus exactness of the inverse image (trf-geometric-inverse-image-exact) commute restriction with H^q; cover-restriction-conservative is applied to H^q[0], and its hypotheses hold. Step 6: finite upward tree induction with lem-exc-open-closed-detection, whose hypotheses all hold; it silently uses the composite-pullback isomorphism, which I accept as elementary pseudo-functoriality. Other checks: no cycle (closure of 1191 nodes); no SGA; not superseded (unsplit on live and side-live); no repair note; not in the dropped list; no duplicate found by rg -L for HRS 4.10/4.11 or dualizable+bounded. The 7 declared tool_uses are generic and accepted. Edge cases checked: Y empty, zero ring, K=0, one stratum, single-term models."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedDualizableBounded",
+  "declaration": "AlgebraicGeometry.ProEtale.stratified_dualizable_bounded",
+  "file": "lean/Sheaf/Paper/StratifiedDualizableBounded.lean",
+  "statement": "theorem stratified_dualizable_bounded (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y))) (S : Scheme.FiniteLocallyClosedStratification Y) (hconstructible : ∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) (hdual : ∀ i : Fin S.n, ∃ D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (S.domain i)) Ab.{u + 1}) (condensedRingObj Λ.X (S.domain i))), Nonempty (ExactPairing ((CondensedRing.upperStar Λ.X (S.immersion i)).mapDerivedCategory.obj K) D)) : ∃ a b : ℤ, a ≤ b ∧ (∀ j : ℤ, j < a ∨ b < j → IsZero ((DerivedCategory.homologyFunctor _ j).obj K)) ∧ ∃ C : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)) ℤ, Nonempty (DerivedCategory.Q.obj C ≅ K) ∧ ∀ j : ℤ, j < a → IsZero (C.X j)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04b16af5b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records, the module and the dependency Lean (FiniteLocallyClosedStratification, Profinite.CondensedRing, condensedRingObj, CondensedRing.upperStar = exact extension of scalars along the iso alpha_f with leftDerivedUpperStarIsoMapDerivedCategory, Mod.derivedMonoidalCategory, Mathlib ExactPairing). Every clause matches: qcqs Y; arbitrary commutative condensed Lambda; B = p_Y^*Lambda on ProEt.topology; unbounded D(Mod B); finite locally closed scheme stratification plus an explicit IsConstructible hypothesis; derived restriction through the exact pullback; ExactPairing(K_i, D) with coev 1 -> K (x) D and ev D (x) K -> 1 and both triangle identities; exists a <= b with both cohomology tails zero; a representative zero below the same a. No extra hypotheses or universe restriction. Statement field verbatim; node differs from live only in lean; all imports exist; the docstrings carry the HRS source place, the blueprint id and the 7 proof steps; no definitions; proof is sorry only. Edge cases checked: empty Y / n=0, empty strata, zero ring, K=0, one stratum, a=b. No duplicate found by rg in side-live Sheaf/WeilConjectures. Not recompiled (no file changed); the worker reports a clean compile."
  }
 }
