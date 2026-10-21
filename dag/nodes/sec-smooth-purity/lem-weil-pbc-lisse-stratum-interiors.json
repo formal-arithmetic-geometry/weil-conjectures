@@ -15,9 +15,10 @@
  ],
  "proof": [
   {
-   "text": "Transport each given set restriction through etaleInverseImageAlgebraicStructures to the underlying set sheaf of the abelian inverse image. Finite local constancy is invariant under isomorphism: use the same trivializing cover, apply overPullback.mapIso on its members, and apply sheafFiber.mapIso on geometric stalks.",
+   "text": "Transport each given set restriction through etaleInverseImageAlgebraicStructures to the underlying set sheaf of the abelian inverse image. Finite local constancy is invariant under isomorphism: use the same trivializing cover, apply overPullback.mapIso on its members, and apply sheafFiber.mapIso on geometric stalks. The upstream isomorphism helper uses isFiniteSheaf_of_finite_algClosed_stalks to recover finiteness at all separably closed geometric stalks from algebraically closed ones.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-galois-finite-stalks-comparison"
    ],
    "elementary": true
   },
@@ -59,12 +60,13 @@
   "lem-weil-pbc-finite-local-abelian-forget",
   "lemma-constructible-universal-homeomorphism-invariance",
   "lemma-openclosed-stalk-upperstar",
-  "prop-constructible-generic-constancy"
+  "prop-constructible-generic-constancy",
+  "lem-galois-finite-stalks-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "Proof paragraphs 1--3; C2 formalization follows the same fibre-product and interior-open-cover route, using the existing finite abelian/set comparison and proved abelian local-constancy descent; finite stalks are carried separately and never replaced by finite generation."
+  "place": "Proof paragraphs 1--3; C2 formalization follows the same fibre-product and interior-open-cover route, using the existing finite abelian/set comparison and proved abelian local-constancy descent; finite stalks are carried separately and never replaced by finite generation. S1 retirement 2026-10-21 reuses WeilConjectures.AlgebraicGeometry.LisseStratumInteriors with the same argument, including its proved algebraically-closed/separably-closed stalk comparison."
  },
  "mathlib_searches": [
   {
@@ -118,14 +120,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.LisseStratumInteriors",
-  "file": "lean/Sheaf/AlgebraicGeometry/LisseStratumInteriors.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.LisseStratumInteriors",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/LisseStratumInteriors.lean",
   "declaration": "AlgebraicGeometry.Scheme.lisse_on_stratum_interiors",
-  "statement": "theorem lisse_on_stratum_interiors\n    {Z : Scheme.{u}} (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (T : Stratification Z)\n    (hT : ∀ i : Fin T.n, IsFiniteLocallyConstantEtaleSheafOfSets\n      ((etaleSetPullback (T.immersion i)).obj\n        ((sheafCompose Z.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :\n    IsLisseEtaleSheafOfSets\n      ((sheafCompose T.interiorUnion.toScheme.smallEtaleTopology\n        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n          ((Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E))",
+  "statement": "theorem lisse_on_stratum_interiors\n    {Z : Scheme.{u}} (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (T : Stratification Z)\n    (hT : ∀ i : Fin T.n, IsFiniteLocallyConstantSheafOfTypes\n      ((etaleSetPullback (T.immersion i)).obj\n        ((sheafCompose Z.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :\n    IsLisseEtaleSheafOfSets\n      ((sheafCompose T.interiorUnion.toScheme.smallEtaleTopology\n        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n          ((Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E))",
   "branch": "sheaf-dag",
-  "by": "J2",
-  "date": "2026-10-12"
+  "by": "S1",
+  "date": "2026-10-21",
+  "note": "S1 retirement: reuse the existing proved upstream twin. IsLisseEtaleSheafOfSets abbreviates IsFiniteLocallyConstantSheafOfTypes, so the old signature is definitionally equal to the upstream signature. Parent dependencies and the mathematical statement are preserved; only the duplicate Sheaf module is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -138,14 +141,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "C-4f4d6",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T085219-L-5791",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T011034-L-2031050",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf stub + node lean record vs upstream WeilConjectures.AlgebraicGeometry.LisseStratumInteriors (signature byte-equal, old signature closed by upstream theorem, axioms clean, 0 importers)"
  },
  "lean_audit": {
   "master": {
