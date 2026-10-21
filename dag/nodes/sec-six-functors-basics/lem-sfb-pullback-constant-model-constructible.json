@@ -54,30 +54,27 @@
    }
   },
   {
-   "text": "Fix $(a,i)$, abbreviate $U=U_{a,i}$, $V=V_{a,i}$, $h:V\\to U$ and $P=P_{a,i}$, and choose a finite scalar presentation $\\Lambda(*)^m\\xrightarrow{A}\\Lambda(*)^n\\to P\\to0$. Then $M|_U\\simeq\\Lambda_U\\otimes_{\\Lambda(*)}P\\simeq\\operatorname{coker}(\\Lambda_U^m\\xrightarrow{A}\\Lambda_U^n)$, with $A$ acting through $\\Lambda(*)\\to\\Lambda_U$ as in form 2 of [det-def-sfb-constructible-local-model]: the constant-sheaf functor $Q\\mapsto Q_U$ is exact and $\\Lambda_U\\otimes_{\\Lambda(*)_U}-$ is right exact and sends $\\Lambda(*)_U^n$ to $\\Lambda_U^n$, so it carries the presentation of $P$ to this cokernel. This is the specific matrix of the chosen presentation of the given $P$, not merely some matrix supplied by the existential equivalence of that lemma. For this admissible $\\Lambda$, [sk-prop-sfb-cartesian-coefficients] identifies module pullback $h^*$ with exact inverse image along the canonical ring isomorphism $\\alpha_h:h^{-1}\\Lambda_U\\cong\\Lambda_V$. Therefore it takes $\\Lambda_U$ to $\\Lambda_V$, finite sums to finite sums, and cokernels to cokernels. For finite sums this also follows directly from the pullback adjunction in [sk-def-sfb-module-pushforward-pullback]: maps from the pullback of a finite sum correspond to tuples of maps from the summands. We obtain $h^*(M|_U)\\simeq\\operatorname{coker}(\\Lambda_V^m\\xrightarrow{h^*A}\\Lambda_V^n)$.",
+   "text": "For each $(a,i)$ write $U=U_{a,i}$, $V=U\\times_{Y_a}Y\\prime_a$, $h:V\\to U$, and $P=P_{a,i}$. Choose a finite scalar presentation $R^m\\xrightarrow{A}R^n\\to P\\to0$, where $R=\\Lambda(*)$ [def-sfb-finitely-presented-module]. Apply [lem-sfb-scalar-presentation-cokernel] to this specified presentation on $U$ and on $V$. It identifies the given $M|_U$ with $\\operatorname{coker}(A_U)$ and identifies $\\Lambda_V\\otimes_R P$ with $\\operatorname{coker}(A_V)$, using the same $P$ and the same matrix $A$.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-pushforward-pullback"
+    "def-sfb-finitely-presented-module",
+    "lem-sfb-scalar-presentation-cokernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "paragraph 'Constructible complexes', finite scalar matrix calculation for the local coefficient models"
+    "place": "paragraph 'Constructible complexes', specified scalar presentations of local models"
    }
   },
   {
-   "text": "The matrix $h^*A$ is the same scalar matrix $A$. Indeed, a scalar $a\\in\\Lambda(*)$ determines a morphism from the condensed tensor unit $\\mathbf Z$ to $\\Lambda$; its image under $p_U^*$ is the scalar section acting on $\\Lambda_U$ ([sk-def-sfb-pulled-back-coefficients]). The coefficient comparison $\\alpha_h$ is the component of the natural point-pullback comparison ([sk-def-sfb-coefficient-morphisms]); naturality on that morphism takes this section to the section of $\\Lambda_V$ defined by the same $a$. Since $\\alpha_h$ is a ring morphism, multiplication by each matrix entry is respected. The same right-exactness computation as in Step 3, now over $V$ (exactness of $Q\\mapsto Q_V$, right exactness of $\\Lambda_V\\otimes_{\\Lambda(*)_V}-$, with $\\Lambda_V\\otimes_{\\Lambda(*)}P$ as defined in [det-def-sfb-constructible-local-model]), identifies the cokernel in Step 3 with $\\Lambda_V\\otimes_{\\Lambda(*)}P$ for the same $P$. Finally the module pullback composition isomorphism in [sk-def-sfb-module-pushforward-pullback], applied to the equal composites $V\\to U\\to Y$ and $V\\to Y'\\to Y$, identifies $h^*(M|_U)$ with $(g^*M)|_V$. Thus each base-changed cover member has the required local model with the original finitely presented $P$.",
+   "text": "Apply [lem-sfb-scalar-matrix-inverse-image] to $h$ and $A$ to obtain $h^*(M|_U)\\cong\\operatorname{coker}(A_V)\\cong\\Lambda_V\\otimes_R P$. The two composites $V\\to U\\to Y$ and $V\\to Y\\prime\\to Y$ are equal by the defining fibre-product square. The composition isomorphisms in [sk-def-sfb-module-pushforward-pullback] therefore identify $h^*(M|_U)$ with $(g^*M)|_V$. This provides the required local isomorphism on every specified base-changed cover member.",
    "uses": [
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-coefficient-morphisms",
-    "det-def-sfb-constructible-local-model",
+    "lem-sfb-scalar-matrix-inverse-image",
     "sk-def-sfb-module-pushforward-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "paragraph 'Constructible complexes', 'via the local coefficient models on strata'; explicit scalar naturality and pullback composition"
+    "place": "paragraph 'Constructible complexes', local-model pullback and composition"
    }
   },
   {
@@ -93,15 +90,14 @@
   }
  ],
  "proof_deps": [
-  "det-def-sfb-constructible-local-model",
+  "def-sfb-finitely-presented-module",
   "det-pe-topos-functoriality-inverse-image",
   "lem-pur-scheme-constructible-preimage",
+  "lem-sfb-scalar-matrix-inverse-image",
+  "lem-sfb-scalar-presentation-cokernel",
   "lemma-constructible-pullback-stratification",
-  "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-constructible",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
@@ -190,11 +186,11 @@
   }
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-pullback-constant-model-constructible",
-  "worker": "stage1",
-  "summary": "Retained the item statement, blueprint ancestry and logged searches. Repaired the retained split: constructibility of inverse-image strata is cited separately from locally closed stratification; arbitrary-scheme cover base change uses det-pe-topos-functoriality-inverse-image; the local model is proved through finite scalar matrices, exact module inverse image and naturality of coefficient comparison, with the same finitely presented scalar module. No new nodes or Mathlib leaves.",
-  "blueprint": "Step 1 realizes 'constructibility (pull back the stratification)'. Steps 2-4 realize 'via the local coefficient models on strata' by arbitrary base change of covers and a finite scalar matrix calculation. Step 5 applies the constructibility definition. The unit route is unchanged.",
+  "worker": "stage1 Q56",
+  "summary": "Human-requested finer split, with the mathematical statement and recorded Lean signature unchanged. Extracted the specified scalar-presentation cokernel calculation and inverse-image scalar-matrix comparison into two new statement-only unsplit nodes, as the current route note explicitly requires. The parent now assembles the existing stratification and cover statements with these two smaller algebraic lemmas and the pullback composition isomorphism.",
+  "blueprint": "Step 1 realizes 'pull back the stratification'; Steps 2-4 realize 'via the local coefficient models on strata'. The two new unsplit statements isolate the chosen scalar-presentation cokernel and preservation of scalar entries and cokernels; Step 5 packages the witnesses.",
   "tool_uses": [
    {
     "node": "det-pe-topos-functoriality-inverse-image",
@@ -206,12 +202,12 @@
   "det-pe-topos-functoriality-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q159-43ad1d3c9",
-  "group": "Q159",
+  "reviewer": "NT-cc-Q56-52ba6bc86",
+  "group": "Q56",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-43ad1d3c9 (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement: lemma-constructible-pullback-stratification, lem-pur-scheme-constructible-preimage, det-pe-topos-functoriality-inverse-image clause 1, sk-prop-sfb-cartesian-coefficients, sk-def-sfb-module-pushforward-pullback, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-coefficient-morphisms, det-def-sfb-constructible-local-model, sk-def-sfb-constructible, and def-constructible-stratification with its blueprint_update. Sources checked: Stacks 054I (morphisms.tex l.4340); Mathlib Scheme.Hom.isConstructible_preimage at FinitePresentation.lean:171-179, for arbitrary schemes; Bhatt–Scholze Lemma 6.3.8 proof; and the main-20261015 pullback proof paragraph 'Constructible complexes'. Step 1: the strata are locally closed by the stratification lemma and constructible by the Mathlib leaf; no finite-type hypothesis is needed. Step 2: covers base-change along an arbitrary g. Step 4: naturality of alpha_h plus the ring-map property keeps the scalar matrix the same, and the composition isomorphism gives (g^*M)|_V. Step 5: the qcqs definition applies. Hypotheses and the coefficient category match the parent det-proper-base-change-unbounded-pullback, which applies the item to qcqs finite-type schemes and to H^i. Edge cases checked: Y' empty, empty strata, P=0, g=id, field coefficients. No false statement. There are no new nodes, and the item duplicates no existing node (checked lem-sfb-adic-finite-stratification-pullback, lem-sfb-dc-upper-star-preserves and the constructible-preimage nodes). Route is fine: sk-thm-p1 and sk-def-sfb-finite-pushforward-pullback are both on the unit's transitive route. The tool_use for det-pe-topos-functoriality-inverse-image is accepted but not needed. One repair (C3): Steps 3 and 4 got 'M|_U ≅ coker(A) for the chosen presentation of the given P' from the existential (1)<=>(2) lemma of det-def-sfb-constructible-local-model, whose statement only gives some matrix. I replaced this with the elementary argument: constant sheaves are exact and Λ_U⊗- is right exact. Only those two step texts are changed; statement, uses and proof_deps are unchanged. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-pullback-constant-model-constructible.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-52ba6bc86 (reviewer sub-agent of L); spot-checked: Read the 2026-10-21 human re-split note, the report, the item (only proof, proof_deps and split_report differ from live; the statement and Lean fields are identical) and both new nodes. Source checked: main-20261015 sk-prop-proper-base-change-unbounded-pullback.proof.md l.9-13, 'Constructible complexes' paragraph. The proof is now 2305 chars, longest step 517, and adds two new statement-only unsplit nodes, so the note is answered. Steps 1, 2 and 5 are unchanged: the stratification lemma plus the constructible-preimage Mathlib leaf; clause 1 of det-pe-topos-functoriality (tool_use accepted); and the sk-def-sfb-constructible packaging. Step 3 uses the presentation lemma on U and on V with the same specified A and P, which fixes the earlier C4 point about an existential matrix. Step 4 uses the matrix lemma plus the composition isomorphisms; restriction is pullback by sk-def-sfb-constructible. lem-sfb-scalar-presentation-cokernel is true: the constant sheaf functor is exact and Λ_U⊗_{R_U}- is right exact, with entries going to their constant sections. Tested m=0, n=0, A=0, the zero ring and empty U. lem-sfb-scalar-matrix-inverse-image is true for any commutative Λ: h^* is a left adjoint, and α_h is an isomorphism for every condensed ring by sk-def-sfb-coefficient-morphisms, with naturality on scalar sections. Tested m,n=0, h=id and empty V. Both nodes are self-contained, cite their definitions, record the three search kinds, are not leaves, are strictly below the item and create no cycle. Duplicate scan found no duplicate. Advisory: partial overlap with lem-sfb-internal-scalar-extension-finite-presentation (snapshot) and the live Q26 lem-sfb-internal-extension-finite-presentation (Ext_φ preserves cokernels); the next workers should cite one of these. Cosmetic: Y\\prime_a in steps 3-4."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible",
