@@ -20404,3 +20404,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:22 L: merged deliver/Q24/lem-pur-additive-localization-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 06:22 L: merged deliver/Q19/def-sfb-extend-scalars-iso-of-eq (stage 2; reviewer PASS; parallel immutable checks)
 - 06:22 L: merged deliver/Q31/def-sfb-modobj-linearization-right-adjoint (stage 2; reviewer PASS; parallel immutable checks)
+- 06:22 L: returned deliver/Q45/def-sfb-modobj-transport-adjunction (reviewer RETURN: L: independent stage-2 immutable head fb0a10157ad7: --apply-fixes: def-sfb-modobj-transport-adjunction.json: a stage-2 f)
