@@ -20863,3 +20863,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/NO/lem-sf-open-reduction-adjunction-transport (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q129/def-fd-kernel (reviewer FIX; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q36/lem-sfb-periodic-tensor-normal-form (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q126/lem-zl-curve-testing-irreducibility (reviewer FIX; after a return; new nodes: 1)
