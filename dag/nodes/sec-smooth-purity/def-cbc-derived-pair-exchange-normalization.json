@@ -1,0 +1,94 @@
+{
+ "id": "def-cbc-derived-pair-exchange-normalization",
+ "kind": "definition",
+ "title": "Representative normalization for abstract derived functor pairs",
+ "status": "split",
+ "statement": "Let B,C,T,V be abelian categories with derived categories, F:B→T and G:C→V additive, P:B→C and H:T→V exact additive, LF and LG functors on derived categories, and εF and εG their supplied homotopy-level counits. Let e:F⋙H→P⋙G be an ordinary natural transformation, M a predicate on complexes of B, and b:P_D⋙LG≅LF⋙H_D. Define normalization to mean that for every K with M(K), b⁻¹ on QK followed by LG of the exact P comparison and the actual complex counit for G equals, as a heterogeneous equality, H_D of the complex counit for F followed by the exact H comparison and Q of the complex map induced by e. The complex counits are the explicit four-factor comparisons of [def-weil-pbc-completed-pullback]. This definition chooses no derived functor, replacement or ordinary exchange.",
+ "stmt_deps": [
+  "def-weil-pbc-completed-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange representative equation before Rlim; Stacks Tag 06YY; generic form of the displayed equation in def-cbc-completed-strict-open-exchange."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Name the literal generic representative equation; specialization is definitionally the original equation.",
+  "group": "H4",
+  "date": "2026-10-22"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a natural isomorphism between total left derived functors by universal counits in an exact square",
+   "results": "8 hits, including Functor.leftDerivedNatIso, isLeftDerivedFunctor_iff_isIso_leftDerivedLift and totalLeftDerivedCounit.",
+   "verdict": "Generic derived universal-property results exist; none defines this four-functor representative normalization. Reuse the existing counit construction.",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "12 hits for the generic derived-functor structure and its universal-property lemmas.",
+   "verdict": "No representative normalization predicate for the exact square.",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "grep",
+   "query": "ModelPullNormalized|leftDerivedCounitOnComplex",
+   "results": "0 Mathlib hits. The project already supplies the explicit complex counits and model-pair normalization.",
+   "verdict": "Factor the existing literal equation without introducing data or assumptions.",
+   "date": "2026-10-22"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedStrictOpenExchange",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-cbc-completed-strict-open-exchange",
+   "place": "Displayed representative normalization; abstract its equation to avoid concrete kernel expansion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedPairExchangeNormalization",
+  "file": "lean/Sheaf/Paper/DerivedPairExchangeNormalization.lean",
+  "declaration": "CategoryTheory.DerivedPairExchangeNormalization",
+  "statement": "def DerivedPairExchangeNormalization\n    {B C T V : Type*} [Category B] [Abelian B] [Category C] [Abelian C]\n    [Category T] [Abelian T] [Category V] [Abelian V]\n    [HasDerivedCategory B] [HasDerivedCategory C]\n    [HasDerivedCategory T] [HasDerivedCategory V]\n    (F : B ⥤ T) [F.Additive] (G : C ⥤ V) [G.Additive]\n    (P : B ⥤ C) [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]\n    (H : T ⥤ V) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (LF : DerivedCategory B ⥤ DerivedCategory T)\n    (LG : DerivedCategory C ⥤ DerivedCategory V)\n    (εF : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (εG : DerivedCategory.Qh ⋙ LG ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (e : F ⋙ H ⟶ P ⋙ G) (M : CochainComplex B ℤ → Prop)\n    (b : P.mapDerivedCategory ⋙ LG ≅ LF ⋙ H.mapDerivedCategory) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T233724-L-853970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T233724-L-853970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

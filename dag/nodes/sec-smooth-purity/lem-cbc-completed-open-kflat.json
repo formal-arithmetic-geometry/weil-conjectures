@@ -1,0 +1,137 @@
+{
+ "id": "lem-cbc-completed-open-kflat",
+ "kind": "statement",
+ "title": "Completed-coefficient open extension preserves flat-term K-flat models",
+ "status": "split",
+ "statement": "For an adic coefficient datum d on A [def-weil-pbc-adic-coefficient-datum], an open immersion j:U→X and an unbounded K-flat complex P of modules over the actual completed coefficient sheaf A_U, assume tensoring with every term of P is exact. Then the termwise sheafified open extension cbcOpenShriek(d,j)(P), with its normalized completed coefficient slice transport, is K-flat over A_X. The module sheaves, tensor complex and K-flat predicate are those of [def-weil-sheaf-of-modules-category], [def-pc-tensor-complex-sheaves] and [def-pc-kflat-complex]. No quasi-compactness, boundedness or invertibility of a general completed pullback coefficient map is required.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-cbc-completed-extension-zero-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "K-flat preservation under extension by zero in the finite-exchange argument; Stacks Tags 00XZ, 0E8I, 06YN, 0G7E."
+ },
+ "proof": [
+  {
+   "text": "Use the concrete equivalence from the ambient pro-etale slice to the open pro-etale site. The completed slice coefficient map, fixed by its finite projections, is invertible. Reindexing module sheaves and restricting scalars by this map presents algebraic inverse image: the underlying set sheaves are literal reindexings, and ring and module operation compatibility follows from the ring-map inverse identities.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-cbc-ringed-open-strict-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ringed-topos pullback preservation of K-flat complexes with flat terms to this algebraic inverse image followed by scalar extension along the identity ring map. The scalar-extension ring-isomorphism comparison identifies that composite with the reindexing functor itself. Transport K-flatness and flat terms along this natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original sheafified open extension is the composite of this module-to-slice transport and the existing ringed slice extension. Apply the ringed slice K-flat-preservation theorem to its image representative.",
+   "uses": [
+    "lem-cbc-ringed-open-flat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-cbc-ringed-open-strict-reduction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-pur-derived-change-of-rings",
+  "lem-cbc-ringed-open-flat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite exchange before Rlim, K-flat preservation and universal descent; H4 stage-3 implementation.",
+  "group": "H4",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes of modules with flat terms",
+   "results": "8 hits, including AlgebraicGeometry.Flat.instOfIsOpenImmersion, ModuleCat.preservesFiniteLimits_extendScalars_of_flat and Module.Flat.rTensor_shortComplex_exact.",
+   "date": "2026-10-21",
+   "verdict": "No completed-coefficient sheaf-complex preservation theorem; use the recorded ringed-topos and ringed-slice results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"SheafOfModules\"",
+   "results": "No exact match in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "No match for the completed open extension."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcOpenShriek.*[Kk][Ff]lat|cbcModuleToSlice.*[Kk][Ff]lat",
+   "results": "0 hits. Local rg additionally found the ringed slice and ringed-topos preservation results, but no completed open specialization.",
+   "date": "2026-10-21",
+   "verdict": "Specialize those existing declarations through the concrete slice equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes of sheaves of modules with flat terms",
+   "results": "8 hits, including AlgebraicGeometry.Flat.instOfIsOpenImmersion and HomologicalComplex.extend; none states preservation of K-flat sheaf complexes.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing ringed-open preservation theorem and transport along the completed coefficient comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedStrictOpenExchange",
+  "date": "2026-10-21",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-cbc-completed-strict-open-exchange",
+   "place": "Proof step 6: open extension preserves the flat-term K-flat resolving class.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenKFlat",
+  "file": "lean/Sheaf/Paper/CompletedOpenKFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcOpenShriek_kFlat_of_flatTerms",
+  "statement": "theorem cbcOpenShriek_kFlat_of_flatTerms\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {U X : Scheme.{u}} (j : U ⟶ X) (hj : IsOpenImmersion j)\n    (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P)\n    (hflat : ∀ q : ℤ, exactFunctor _ _\n      (@MonoidalCategory.tensorRight _ _\n        (SheafOfModules.monoidalCategory (pbcAdicCompletion U d)) (P.X q))) :\n    CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion X d)\n      (((cbcOpenShriek d j hj).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T233724-L-853970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T233724-L-853970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

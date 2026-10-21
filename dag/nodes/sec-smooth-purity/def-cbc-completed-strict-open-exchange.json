@@ -15,9 +15,62 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
   "place": "Finite-exchange/reduction identification before Rlim; Stacks 03DI, sites-modules.tex, lemma-extension-by-zero; completed-ring strict exchange is an agent-written refinement."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Whiskering the existing additive exact open extension with the tower index preserves additivity, finite limits and finite colimits, since diagram limits and colimits are computed at every index.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of the fixed ordinary inverse exchange to each tower transition and to each component of a tower morphism. These assemble its simultaneous strict lift. Its components are isomorphisms, so the strict natural transformation is invertible.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply a single functorial reduced flat resolution to the strict diagram of cochain complexes, and transpose back to a cochain complex of towers. Prove the flatness and K-flatness of the resolution with the monoidal category and its reduced resolution abstract. Each evaluated tower complex is explicitly isomorphic to its resolved component, so K-flatness transports without unfolding the total tensor. Functoriality preserves all transitions, and evaluation detects the augmentation quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the recorded completed pullback functors with their actual universal counits as the derived models. Completed open extension preserves the smaller flat-term K-flat resolving class by the completed open K-flat lemma. Apply the existing normalized model-pull descent theorem through a private generic helper accepting the derived pairs directly. Invert the resulting isomorphism; its complex-counit equation is exactly the stated HEq normalization, and uniqueness follows by inversion. The normalization definition specializes a generic representative predicate with exactly the original displayed equation. Matching this named predicate avoids expansion of the concrete completed pullbacks during kernel checking. The ordinary-model descent proof remains in this module.",
+   "uses": [
+    "lem-cbc-completed-open-kflat",
+    "lem-sp-completion-mate-comparison",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-derived-reduction-model-data",
+    "lem-cbc-adic-pullback-presentation-transport",
+    "def-cbc-derived-pair-exchange-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-cbc-completed-open-kflat",
+  "lem-sp-completion-mate-comparison",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-derived-reduction-model-data",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "def-cbc-derived-pair-exchange-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite exchange before Rlim, K-flat preservation and universal descent; H4 stage-3 implementation.",
+  "group": "H4",
+  "date": "2026-10-22"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -124,5 +177,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery after H13 RETURN of e75eae498358: def-weil-pbc-completed-pullback record now byte-identical to live (Q99 PbcQbarCompletedPullback, 4 pbcQbar* decls kept); 3 Lean modules and 2 new def-node records byte-identical to the previously substance-checked delivery; item differs from live only in lean + 2 new def-node stmt_deps; not dropped, not landed elsewhere. Independently re-read: J_j = whiskered cbcOpenShriek (extensionByZeroPresheaf+sheafification), G = completedTowerPullback, b_K on all of D(Mod A_U) via reduction with no Rlim/completeness/qc; strict exchange ∃!-pinned on levelwise K-flat towers against levelwise cbcUnderivedInverseExchange (conjugate of the sectionwise cartesian cbcRightExchange), with types of both sides checked; finite comparisons ∃!-pinned via identity-on-sections and generator-normalized mates; cbcFiniteExchange = inverse of singleBetaInv (j'_! adjunct of gU^* unit then moduleSquareG.inv) restricted through the finite projection; HEq endpoints agree by unfolding; edge cases U empty, g = id, I = A, K = 0, unbounded K, non-qc j, n = 0 not excluded; statements verbatim, declarations present, no hollow def, sorry only. Advisory: redundant first conjunct, cbcStrictOpenModule defeq to cbcCompletedTowerExtension, singleBetaInv module owner outside stmt_deps, parent-module import (listed import-cycle note), unused plain proof-plan imports (H9). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261021T233724-L-853970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

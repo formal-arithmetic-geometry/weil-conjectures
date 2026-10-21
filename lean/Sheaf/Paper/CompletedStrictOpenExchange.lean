@@ -6,11 +6,14 @@ Authors: SHEAF group NA
 module
 
 public import Sheaf.Paper.CompletedExtensionZeroComparison
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import Sheaf.SixFunctors.OpenTensorNormalization
+public import Sheaf.Paper.DerivedPairExchangeNormalization
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import all Sheaf.Paper.ProEtaleConstantReductionModels
+import all Sheaf.Algebra.Homology.DiagramKFlatReplacements
+import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.CompletedOpenKFlat
+import Sheaf.Paper.AdicPullbackPresentationTransport
+import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Strict open exchange over completed coefficient rings
@@ -37,14 +40,130 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory.MonoidalCategory
+open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  Functor.leftAdjoint
+  Functor.leftAdjoint limit SheafOfModules.pushforward
+  SheafOfModules.extensionByZeroPresheaf PresheafOfModules.sheafification
+  Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
+  DerivedCategory.Q DerivedCategory.Qh
 
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+
+private def cbcTowerKFlat (T : Scheme.{u})
+    (P : CochainComplex (pbcTowers T (pbcAdicCompletion T d)) ℤ) : Prop :=
+  ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+    (R := pbcAdicCompletion T d)
+    ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules T (pbcAdicCompletion T d))).obj
+      (op n)).mapHomologicalComplex (.up ℤ)).obj P)
+
+private theorem cbcTowerPullback_universal {T S : Scheme.{u}} (g : T ⟶ S) :
+    (completedTowerPullback g d).IsLeftDerivedFunctor (completedTowerPullbackCounit g d)
+      (HomotopyCategory.quasiIso (pbcTowers S (pbcAdicCompletion S d)) (.up ℤ)) := by
+  exact adicPresentationTowerUniversal_proof g d
+
+private theorem cbcTowerPullback_computes {T S : Scheme.{u}} (g : T ⟶ S)
+    (P : CochainComplex (pbcTowers S (pbcAdicCompletion S d)) ℤ)
+    (hP : cbcTowerKFlat d S P) :
+    IsIso ((completedTowerPullbackCounit g d).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+  unfold completedTowerPullbackCounit completedTowerPullback
+  exact (completedTowerPullback_exists g d).choose_spec.choose_spec.2.2 P hP
+
+private theorem functorialFlatResolution
+    {B : Type*} [Category B] [Abelian B]
+    [MonoidalCategory B] [MonoidalPreadditive B]
+    [∀ (j : ℤ), HasColimitsOfShape
+      (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) B]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ B), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ B), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ B), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    [HasColimitsOfShape ℤ B] [HasExactColimitsOfShape ℤ B]
+    [∀ X : B, PreservesColimitsOfShape ℤ ((curriedTensor B).flip.obj X)]
+    [∀ X : B, PreservesColimitsOfShape ℤ ((curriedTensor B).obj X)]
+    (Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ B))
+    [Λ.F.PreservesZeroMorphisms] :
+    ∃ (F : CochainComplex B ℤ ⥤ CochainComplex B ℤ) (ε : F ⟶ 𝟭 _),
+      (∀ K, (HomologicalComplex.quasiIso B (.up ℤ)).kFlat (F.obj K)) ∧
+      (∀ K q, ObjectProperty.flat ((F.obj K).X q)) ∧ ∀ K, QuasiIso (ε.app K) := by
+  have hι : (ObjectProperty.flat.ι : _ ⥤ B).essImage ≤ ObjectProperty.flat := by
+    rintro X ⟨Y, ⟨e⟩⟩
+    exact ObjectProperty.prop_of_iso _ e Y.property
+  refine ⟨Λ.resolutionFunctor, Λ.resolutionNatTrans,
+    Λ.kFlat_resolutionFunctor_obj hι, ?_, fun _ ↦ inferInstance⟩
+  intro K q
+  have := CochainComplex.closedUnderColimitsOfShape_flat B ℤ
+  let c := Λ.colimitOfShapeResolutionFunctorObj K
+  exact ObjectProperty.prop_of_isColimit _
+    (isColimitOfPreserves (HomologicalComplex.eval B (.up ℤ) q) c.isColimit)
+    (fun i ↦ hι _ ((c.prop_diag_obj i).1 q))
+
+private def evaluationWhiskerIso
+    {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
+    (F : B ⥤ C) [F.Additive] (P : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) (n : ℕᵒᵖ) :
+    (((CategoryTheory.evaluation ℕᵒᵖ C).obj n).mapHomologicalComplex (.up ℤ)).obj
+        ((((Functor.whiskeringRight ℕᵒᵖ B C).obj F).mapHomologicalComplex (.up ℤ)).obj P) ≅
+      (F.mapHomologicalComplex (.up ℤ)).obj
+        ((((CategoryTheory.evaluation ℕᵒᵖ B).obj n).mapHomologicalComplex (.up ℤ)).obj P) :=
+  HomologicalComplex.Hom.isoOfComponents (fun q ↦ Iso.refl (F.obj ((P.X q).obj n)))
+    (by intros; exact (Category.id_comp _).trans (Category.comp_id _).symm)
+
+private theorem cbcTowerKFlat_resolution (T : Scheme.{u})
+    (P : CochainComplex (pbcTowers T (pbcAdicCompletion T d)) ℤ) :
+    ∃ (L : CochainComplex (pbcTowers T (pbcAdicCompletion T d)) ℤ) (s : L ⟶ P),
+      (cbcTowerKFlat d T L ∧ ∀ (n : ℕ) (q : ℤ), exactFunctor _ _
+        (@tensorRight _ _ (SheafOfModules.monoidalCategory (pbcAdicCompletion T d))
+          ((L.X q).obj (op n)))) ∧ QuasiIso s := by
+  let R := pbcAdicCompletion T d
+  let B := pbcModules T R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.monoidalClosed_kfi (R := R)
+  let := SheafOfModules.monoidalPreadditive_kfi R
+  have := SheafOfModules.hasExactColimits_int_kfi R
+  let := SheafOfModules.hasFunctorialFlatResolution_kfi R
+  have (X : B) : PreservesColimitsOfShape ℤ ((curriedTensor B).flip.obj X) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
+  classical
+  obtain ⟨Λ, hΛ⟩ : ∃ (Λ : Abelian.LeftResolution
+      (ObjectProperty.flat.ι : _ ⥤ B)), Λ.F.PreservesZeroMorphisms :=
+    ⟨(Classical.arbitrary (Abelian.LeftResolution
+      (ObjectProperty.flat.ι : _ ⥤ B))).reduced, inferInstance⟩
+  obtain ⟨F, ε, hk, hf, hε⟩ := functorialFlatResolution Λ
+  let L := CochainComplex.diagramComplex (P.asFunctor ⋙ F)
+  let s : L ⟶ P := CochainComplex.diagramComplexMap (Functor.whiskerLeft P.asFunctor ε)
+  refine ⟨L, s, ⟨?_, fun n q ↦ (hf (P.asFunctor.obj (op n)) q).2⟩, ?_⟩
+  · intro n
+    have hK : CochainComplex.IsKFlatIndependentCoefficients (R := R)
+        (F.obj (P.asFunctor.obj (op n))) := by
+      intro Z hZ
+      let V := tensorRight (F.obj (P.asFunctor.obj (op n)))
+      have hz : QuasiIso (0 : (0 : CochainComplex B ℤ) ⟶ Z) := by
+        rw [quasiIso_iff]
+        intro i
+        exact (quasiIsoAt_iff_exactAt _ i
+          ((HomologicalComplex.acyclic_of_isZero _ (isZero_zero _)) i)).2 (hZ i)
+      have hmap : QuasiIso (V.map (0 : (0 : CochainComplex B ℤ) ⟶ Z)) :=
+        (hk (P.asFunctor.obj (op n))).2 _ hz
+      have hzero : (V.obj (0 : CochainComplex B ℤ)).Acyclic :=
+        HomologicalComplex.acyclic_of_isZero _ (V.map_isZero (isZero_zero _))
+      exact fun i ↦ (exactAt_iff_of_quasiIsoAt
+        (V.map (0 : (0 : CochainComplex B ℤ) ⟶ Z)) i).1 (hzero i)
+    let e : (((CategoryTheory.evaluation ℕᵒᵖ B).obj (op n)).mapHomologicalComplex (.up ℤ)).obj L ≅
+        F.obj (P.asFunctor.obj (op n)) :=
+      HomologicalComplex.Hom.isoOfComponents (fun q ↦ Iso.refl _) (by
+        intros
+        exact (Category.id_comp _).trans (Category.comp_id _).symm)
+    exact SheafOfModules.kFlat_iso_independent R e.symm hK
+  · rw [HomologicalComplex.quasiIso_iff_evaluation]
+    intro n
+    exact hε (P.asFunctor.obj n)
 
 /-- Termwise sheafified open extension on actual completed-ring towers.
 Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange). -/
@@ -58,7 +177,8 @@ Proof: extension presheaves, sheafification and slice transport are additive;
 apply their sum equation to each component of a tower morphism. -/
 @[instance] theorem cbcStrictOpenModule_additive {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) : (cbcStrictOpenModule d j hj).Additive := by
-  sorry
+  dsimp only [cbcStrictOpenModule]
+  infer_instance
 
 /-- Exactness of extension on towers is levelwise, with no condition on the open.
 Source: Stacks 03DJ (blueprint: def-cbc-completed-strict-open-exchange).
@@ -67,7 +187,8 @@ sheafified slice extension therefore preserves both finite limits and colimits. 
 @[instance] theorem cbcStrictOpenModule_limits {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) :
     PreservesFiniteLimits (cbcStrictOpenModule d j hj) := by
-  sorry
+  dsimp only [cbcStrictOpenModule]
+  exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- Finite colimits are preserved at each tower index.
 Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
@@ -76,7 +197,8 @@ colimits. Colimits of strict diagrams are computed at each index. -/
 @[instance] theorem cbcStrictOpenModule_colimits {U X : Scheme.{u}}
     (j : U ⟶ X) (hj : IsOpenImmersion j) :
     PreservesFiniteColimits (cbcStrictOpenModule d j hj) := by
-  sorry
+  dsimp only [cbcStrictOpenModule]
+  exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- Exact open extension on the derived category of strict towers.
 Source: Stacks 03DJ (blueprint: def-cbc-completed-strict-open-exchange). -/
@@ -97,7 +219,7 @@ theorem cbcStrictInverseLevel_naturality
     (cbcUnderivedInverseExchange d sq).app (M.obj a) ≫
       ((cbcStrictOpenModule d j sq.isOpenImmersion ⋙
         completedTowerModulePullback g d).obj M).map f := by
-  sorry
+  exact (cbcUnderivedInverseExchange d sq).naturality (M.map f)
 
 /-- The inverse exchange as an actual map of strict towers.
 Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange). -/
@@ -121,7 +243,9 @@ theorem cbcStrictInverseComponent_naturality
     cbcStrictInverseComponent d sq M ≫
       (cbcStrictOpenModule d j sq.isOpenImmersion ⋙
         completedTowerModulePullback g d).map f := by
-  sorry
+  apply NatTrans.ext
+  funext n
+  exact (cbcUnderivedInverseExchange d sq).naturality (f.app n)
 
 /-- Simultaneous inverse diagram map. Its component at every index is the fixed
 ordinary inverse exchange, the conjugate of restriction along the cartesian map.
@@ -138,7 +262,13 @@ Source: Stacks 03DI (blueprint: def-cbc-completed-strict-open-exchange).
 Proof: the inverse at each index is the forward ordinary exchange. Naturality
 makes both maps strict; their composites are identities at each index. -/
 @[instance] theorem cbcStrictInverseModule_isIso : IsIso (cbcStrictInverseModule d sq) := by
-  sorry
+  have (M : pbcTowers U (pbcAdicCompletion U d)) :
+      IsIso ((cbcStrictInverseModule d sq).app M) := by
+    have (n : ℕᵒᵖ) : IsIso (((cbcStrictInverseModule d sq).app M).app n) := by
+      change IsIso ((cbcUnderivedInverseExchange d sq).app (M.obj n))
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The strict representative equation, using the actual universal pullback counits.
 It specifies the inverse map, so also specifies its forward inverse uniquely.
@@ -146,23 +276,58 @@ Source: Stacks 06XN (blueprint: def-cbc-completed-strict-open-exchange). -/
 def CbcStrictExchangeNormalization
     (b : cbcStrictOpen d j sq.isOpenImmersion ⋙ completedTowerPullback g d ≅
       completedTowerPullback gU d ⋙ cbcStrictOpen d j' sq.isOpenImmersion') : Prop :=
-  ∀ P : CochainComplex (pbcTowers U (pbcAdicCompletion U d)) ℤ,
-    (∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+  DerivedPairExchangeNormalization
+    (completedTowerModulePullback gU d) (completedTowerModulePullback g d)
+    (cbcStrictOpenModule d j sq.isOpenImmersion)
+    (cbcStrictOpenModule d j' sq.isOpenImmersion')
+    (completedTowerPullback gU d) (completedTowerPullback g d)
+    (completedTowerPullbackCounit gU d) (completedTowerPullbackCounit g d)
+    (cbcStrictInverseModule d sq)
+    (fun P ↦ ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
       (R := pbcAdicCompletion U d)
       ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules U (pbcAdicCompletion U d))).obj
-        (op n)).mapHomologicalComplex (.up ℤ)).obj P)) →
-    HEq
-      (b.inv.app (DerivedCategory.Q.obj P) ≫
-      (completedTowerPullback g d).map
-        ((cbcStrictOpenModule d j sq.isOpenImmersion).mapDerivedCategoryFactors.hom.app P) ≫
-      completedTowerPullbackComplexCounit g d
-        (((cbcStrictOpenModule d j sq.isOpenImmersion).mapHomologicalComplex (.up ℤ)).obj P))
-      ((cbcStrictOpen d j' sq.isOpenImmersion').map
-      (completedTowerPullbackComplexCounit gU d P) ≫
-      (cbcStrictOpenModule d j' sq.isOpenImmersion').mapDerivedCategoryFactors.hom.app
-        (((completedTowerModulePullback gU d).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        (((cbcStrictInverseModule d sq).mapHomologicalComplex (.up ℤ)).app P))
+        (op n)).mapHomologicalComplex (.up ℤ)).obj P)) b
+
+
+private theorem modelPullPair_existsUnique
+    {B C T V : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
+    [Category T] [Abelian T] [Category V] [Abelian V]
+    [HasDerivedCategory B] [HasDerivedCategory C]
+    [HasDerivedCategory T] [HasDerivedCategory V]
+    (F : B ⥤ T) [F.Additive] (G : C ⥤ V) [G.Additive]
+    (P : B ⥤ C) [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+    (H : T ⥤ V) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    {M : CochainComplex B ℤ → Prop} {N : CochainComplex C ℤ → Prop}
+    (LF : DerivedCategory B ⥤ DerivedCategory T)
+    (LG : DerivedCategory C ⥤ DerivedCategory V)
+    (εF : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (εG : DerivedCategory.Qh ⋙ LG ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (hLF : LF.IsLeftDerivedFunctor εF (HomotopyCategory.quasiIso B (.up ℤ)))
+    (hLG : LG.IsLeftDerivedFunctor εG (HomotopyCategory.quasiIso C (.up ℤ)))
+    (hF : ∀ K : CochainComplex B ℤ, M K →
+      IsIso (εF.app ((HomotopyCategory.quotient B (.up ℤ)).obj K)))
+    (hG : ∀ K : CochainComplex C ℤ, N K →
+      IsIso (εG.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)))
+    (e : F ⋙ H ⟶ P ⋙ G) [IsIso e]
+    (M₀ : CochainComplex B ℤ → Prop) (h₀ : ∀ K, M₀ K → M K)
+    (res : ∀ K : CochainComplex B ℤ, ∃ (L : CochainComplex B ℤ) (s : L ⟶ K),
+      M₀ L ∧ QuasiIso s)
+    (hmap : ∀ K, M₀ K → N ((P.mapHomologicalComplex (.up ℤ)).obj K)) :
+    ∃! b : P.mapDerivedCategory ⋙ LG ≅ LF ⋙ H.mapDerivedCategory,
+      DerivedPairExchangeNormalization F G P H LF LG εF εG e M b := by
+  let DF : DerivedReductionModelData F M := ⟨LF, εF, hLF, hF⟩
+  let DG : DerivedReductionModelData G N := ⟨LG, εG, hLG, hG⟩
+  obtain ⟨η, hη, hu⟩ :=
+    OrderedExchange.modelPull_existsUnique F G P H DF DG (asIso e) M₀ h₀ res hmap
+  refine ⟨η.symm, ?_, ?_⟩
+  · intro K hK
+    exact heq_of_eq (hη K hK)
+  · intro b hb
+    have h := hu b.symm (fun K hK ↦ eq_of_heq (hb K hK))
+    exact congrArg Iso.symm h
+
+attribute [local irreducible] cbcStrictOpenModule completedTowerModulePullback
+  completedTowerPullbackCounit cbcStrictInverseModule cbcUnderivedInverseExchange
 
 /-- The normalized strict exchange exists uniquely.
 Source: Stacks 03DI, 03DJ, 04J0, 06XN and the blueprint finite-exchange refinement
@@ -181,7 +346,39 @@ theorem cbcStrictExchange_existsUnique :
     ∃! b : cbcStrictOpen d j sq.isOpenImmersion ⋙ completedTowerPullback g d ≅
         completedTowerPullback gU d ⋙ cbcStrictOpen d j' sq.isOpenImmersion',
       CbcStrictExchangeNormalization d sq b := by
-  sorry
+  let M₀ : CochainComplex (pbcTowers U (pbcAdicCompletion U d)) ℤ → Prop :=
+    fun P ↦ cbcTowerKFlat d U P ∧ ∀ (n : ℕ) (q : ℤ), exactFunctor _ _
+      (@tensorRight _ _ (SheafOfModules.monoidalCategory (pbcAdicCompletion U d))
+        ((P.X q).obj (op n)))
+  have hmap (P) (hP : M₀ P) : cbcTowerKFlat d X
+      (((cbcStrictOpenModule d j sq.isOpenImmersion).mapHomologicalComplex (.up ℤ)).obj
+        P) := by
+    unfold cbcTowerKFlat
+    intro n
+    let Q := (((CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules U (pbcAdicCompletion U d))).obj (op n)).mapHomologicalComplex
+        (.up ℤ)).obj P
+    have hQ := cbcOpenShriek_kFlat_of_flatTerms d j sq.isOpenImmersion
+      Q (hP.1 n) (hP.2 n)
+    let e := evaluationWhiskerIso (cbcOpenShriek d j sq.isOpenImmersion) P (op n)
+    simpa only [cbcStrictOpenModule] using
+      (SheafOfModules.kFlat_iso_independent (pbcAdicCompletion X d) e.symm hQ)
+  exact modelPullPair_existsUnique
+    (B := pbcTowers U (pbcAdicCompletion U d))
+    (C := pbcTowers X (pbcAdicCompletion X d))
+    (T := pbcTowers U' (pbcAdicCompletion U' d))
+    (V := pbcTowers X' (pbcAdicCompletion X' d))
+    (M := cbcTowerKFlat d U) (N := cbcTowerKFlat d X)
+    (completedTowerModulePullback gU d) (completedTowerModulePullback g d)
+    (cbcStrictOpenModule d j sq.isOpenImmersion)
+    (cbcStrictOpenModule d j' sq.isOpenImmersion')
+    (completedTowerPullback gU d) (completedTowerPullback g d)
+    (completedTowerPullbackCounit gU d) (completedTowerPullbackCounit g d)
+    (cbcTowerPullback_universal d gU) (cbcTowerPullback_universal d g)
+    (cbcTowerPullback_computes d gU) (cbcTowerPullback_computes d g)
+    (cbcStrictInverseModule d sq) M₀ (fun _ h ↦ h.1)
+    (cbcTowerKFlat_resolution d U) hmap
+
 
 /-- The canonical strict exchange, selected by its unique representative equation.
 Source: Stacks 03DI, 06XN (blueprint: def-cbc-completed-strict-open-exchange). -/
