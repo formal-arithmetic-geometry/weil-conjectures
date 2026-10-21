@@ -21060,3 +21060,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q38/lem-sfb-scalar-matrix-inverse-image (reviewer PASS; after a return; new nodes: 2)
 - 08:16 L: merged deliver/Q21/lem-weil-constant-coefficient-objects-constructible (reviewer FIX; after a return; new nodes: 2)
 - 08:16 L: merged deliver/Q54/lem-pur-support-comparison-boundary (reviewer FIX; after a return; new nodes: 2)
+- 08:16 L: merged deliver/NY/lem-sbc-ringed-topos-sheaf-slice-derived-comparison (reviewer PASS; first push; new nodes: 0)
