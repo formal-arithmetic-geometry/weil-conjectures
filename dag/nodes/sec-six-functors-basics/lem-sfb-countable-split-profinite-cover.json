@@ -195,5 +195,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-28fe4aa38 (reviewer sub-agent of L); spot-checked: There are no new nodes, and the statement is unchanged from the unsplit base on side-live. It is an agent auxiliary, not in the blueprint: grep finds no Cantor/WANTED text in the sk-thm-sf-ctf-stability files. The item's statement gives everything clause (1) of the citer lem-sfb-norm-algcl-profinite-cech-exact uses. A duplicate search over the DAG found no duplicate. Fixes, in proof text only (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-countable-split-profinite-cover.json): (E3, step 1) the step asks for 'non-endpoint' points but builds them from eventually-zero sequences. Such a point w10^inf has the immediate predecessor w01^inf and is approached from the right only, so its fibre would be a singleton and step 3 fails. Replaced by D = the sequences eventually equal to (01)^inf, with each cylinder containing w0^r(01)^inf for all r, and the two-sided approximation by points of V minus D written out. Also corrected the sum of a_k to exactly 1/4. (step 2) h_k is now defined on V minus {v_k}, so that g_k = sum over j≠k of h_j(v_k) makes sense. (E3, step 5) the claim that g_j tends to g_k is false: g_j contains the term ±a_k, so it tends to g_k ± a_k. Replaced by an exact argument: the intervals I∓ = (g_k ∓ 3a_k/2, g_k ∓ a_k/2), and a fibre over v_j has height gap exactly 2a_j, which lies in (a_k, 3a_k) only when j = k. So W ∩ R is the singleton (t_k^-, t_k^+). Steps 3, 4 and 6 were checked and are correct. Three local faults, within the FIX ceiling. The report wrongly says it wrote citations.json; this was not changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CountableSplitProfiniteCover",
+  "declaration": "Profinite.exists_countable_split_profinite_cover",
+  "file": "lean/Sheaf/Topology/CountableSplitProfiniteCover.lean",
+  "statement": "theorem exists_countable_split_profinite_cover : ∃ (T V : Profinite.{u}), Nonempty T ∧ Nonempty V ∧ TopologicalSpace.MetrizableSpace T ∧ TopologicalSpace.MetrizableSpace V ∧ ∃ (q : C(T, V)), Function.Surjective q ∧ ∃ (v : ℕ → V) (tMinus tPlus : ℕ → T), Function.Injective v ∧ (∀ k : ℕ, tMinus k ≠ tPlus k ∧ q ⁻¹' {v k} = {tMinus k, tPlus k}) ∧ (∀ y : V, y ∉ Set.range v → ∃! x : T, q x = y) ∧ (∀ k : ℕ, IsClopen {r : {p : T × T // q p.1 = q p.2} | r.val = (tMinus k, tPlus k)} ∧ IsClopen {r : {p : T × T // q p.1 = q p.2} | r.val = (tPlus k, tMinus k)}) ∧ (∀ U : Set T, IsOpen U → U.Nonempty → ∀ N : ℕ, ∃ k : ℕ, N ≤ k ∧ tMinus k ∈ U ∧ tPlus k ∈ U)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24daff19b",
+  "group": "NL",
+  "result": "pass",
+  "note": "Clause-by-clause match of Profinite.exists_countable_split_profinite_cover to the node: nonempty metrizable Profinite.{u} T,V; continuous surjection q : C(T,V); injective v : ℕ → V; fibre over v k exactly {tMinus k, tPlus k} with tMinus k ≠ tPlus k; ∃! fibres off range v; both ordered pairs clopen in the subtype R = {p : T × T // q p.1 = q p.2}; tail-density with N ≥ 0. No extra hypotheses, arbitrary universe, quantifier order matches. Node diff vs side-live: only the lean field. lean.statement is verbatim the file signature. Only the two used Mathlib imports, convention stmt_dep has no module. Docstrings carry the source place, the blueprint tag and the six-step corrected proof. Proof is sorry only, no definitions, no duplicate found, no competing S2 delivery. Advisory: no copyright header (also absent in 15 landed Topology modules). No compile run because no file was changed."
  }
 }
