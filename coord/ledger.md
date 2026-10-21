@@ -20199,3 +20199,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:06 L: returned deliver/NB/lem-cbc-finite-constant-map-naturality (reviewer RETURN: L: independent stage-2 immutable head 15d7dc1c1918: H2/stmt_deps (mechanical finding upheld): the item cites theorem nod)
 - 04:06 L: returned deliver/NY/lem-sfb-adic-perfect-model-complete-reduction (reviewer RETURN: L: independent stage-2 immutable head 83b51364a1e0: H2 (mechanical finding upheld): stmt_dep lem-weil-pbc-constant-compl)
 - 04:06 L: returned deliver/Q14/lem-sfb-finite-classical-localizing (reviewer RETURN: L: independent stage-2 immutable head 98070c178d44: H2: stmt_dep det-lem-integral-models-generators (theorem) is used on)
+- 04:06 L: returned deliver/Q37/det-sp-scalar-extension-functor (reviewer RETURN: C5/D1. The item's statement, stmt_deps and Lean record are unchanged. Steps 1-4 and 7 are byte-identical to the landed 7)
