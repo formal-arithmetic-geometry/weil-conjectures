@@ -16,11 +16,117 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-strict-perfect-coefficient-package",
   "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "For any finite projective scalar module $V$, finite generators give a surjection $p:R^N\\to V$, and the projective lifting property lifts $1_V$ to $i:V\\to R^N$, with $pi=1_V$. Put $v_j=p(e_j)$ and $\\lambda_j=e_j^*i\\in V^*=\\operatorname{Hom}_R(V,R)$. Then $v=\\sum_j\\lambda_j(v)v_j$ and, by applying $\\phi\\in V^*$, $\\phi=\\sum_j\\phi(v_j)\\lambda_j$. For the terms of $F^\\bullet$ use the supplied splittings. These identities also cover $V=0$ with $N=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CE/05CF, definition-projective and lemma-characterize-projective, lifting the identity through a finite free surjection"
+   }
+  },
+  {
+   "text": "Constant sheafification takes the supplied scalar splitting to the constant splitting, with $\\underline{R^N}\\cong\\underline R^N$, exactly as specified in the coefficient-package definition. The sheaf tensor definition gives the coordinate isomorphism $C_B(R^N)\\cong B^N$: $b\\otimes(r_j)_j\\mapsto(br_j)_j$, with inverse $(b_j)_j\\mapsto\\sum_j b_j\\otimes e_j$. These maps are balanced and commute with restriction, so extend to sheafifications. Additivity and functoriality give $C_B(p)C_B(i)=1$ and $C_B(0)=0$. Thus $C_B(V)$ is a retract of $B^N$, and in particular each $E^q$ has the required finite-free retract. No tensor-exactness assertion is used.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand reduction; explicit scalar coordinate calculation"
+   }
+  },
+  {
+   "text": "Apply the finite-retract internal-dual lemma with coefficient sheaf $B$, $T=E^q$, and the splitting just constructed. Its exactness clause states that $\\mathcal Hom_B(E^q,-)$ carries every short exact sequence of module sheaves to a short exact sequence. This is exactness of internal sheaf Hom, not exactness of global Hom or of sections.",
+   "uses": [
+    "lem-sfb-ringed-site-finite-retract-dual-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand calculation"
+   }
+  },
+  {
+   "text": "For a scalar $V$, the evaluation formula $\\beta_V(b\\otimes\\phi)(b'\\otimes v)=bb'\\phi(v)$ is additive and balanced in both tensor expressions, is $B$-linear, and commutes with restriction. Finite-product preservation of sheafification extends the bilinear evaluation, so the tensor universal property gives a map into the sheaf Hom. Explicitly, first define evaluation on constant local sections and extend along the two sheafifications; the formula is unchanged after restriction. For $f:V\\to W$, the two composites from $C_B(W^*)$ to $\\mathcal Hom_B(C_B(V),B)$ both send $b\\otimes\\psi$ and $b'\\otimes v$ to $bb'\\psi(f(v))$. The uniqueness part of sheafification extends this equality to all sections. Thus $\\beta$ is contravariantly natural in $V$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final evaluation map; explicit scalar/sheafification formula"
+   }
+  },
+  {
+   "text": "Use the dual generators from step 1. On every localized site, for $h:C_B(V)|_U\\to B|_U$, set $\\gamma_V(h)=\\sum_j h(1\\otimes v_j)\\otimes\\lambda_j\\in C_B(V^*)(U)$. The finite sum commutes with restriction, hence defines a sheaf morphism. On tensor generators,\n$$\\beta_V\\gamma_V(h)(b'\\otimes v)=b'\\sum_jh(1\\otimes v_j)\\lambda_j(v)=h(b'\\otimes v),$$\nwhile\n$$\\gamma_V\\beta_V(b\\otimes\\phi)=\\sum_jb\\phi(v_j)\\otimes\\lambda_j=b\\otimes\\phi.$$\nThe dual-generator identities and sheafification uniqueness make these identities hold on all sections. Therefore $\\gamma_V$ is the inverse of $\\beta_V$. The comparison is independent of the chosen splitting because its defining evaluation formula is; its inverse is then uniquely determined.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand calculation; explicit inverse to scalar evaluation"
+   }
+  },
+  {
+   "text": "In degree $q$, the only possibly nonzero factor of $\\mathcal Hom_B^\\bullet(E^\\bullet,B[0])$ is $\\mathcal Hom_B(E^{-q},B)$, and the Hom-complex differential is $h\\mapsto-(-1)^q h\\,d_E^{-q-1}$. Use $\\beta_{F^{-q}}$ for its degree-$q$ comparison. Naturality from step 4 applied to $d_F^{-q-1}:F^{-q-1}\\to F^{-q}$ gives, on generators,\n$$d_{\\mathcal Hom}\\beta(b\\otimes\\phi)(b'\\otimes v)=-(-1)^qbb'\\phi(d_F^{-q-1}v)=\\beta C_B(d_{F^\\vee})(b\\otimes\\phi)(b'\\otimes v).$$\nHence the degreewise isomorphisms form the claimed cochain isomorphism. They are natural in cochain maps by the same precomposition identity. If $F^r=0$ outside $[a,b]$, $F^{-q}=0$ outside $[-b,-a]$; $C_B(0)=0$ and the displayed unique-factor formula give the stated vanishing for both dual complexes, including the zero complex.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section section-hom-complexes (Tag 0A8X), signed differential; Tag 08JH, lemma-Rhom-strictly-perfect, finite Hom terms"
+   }
+  },
+  {
+   "text": "The complex $E^\\bullet$ is bounded since its zero terms remain zero, and each term has exact internal Hom by step 3. Apply the bounded-exact-term Hom lemma to $P=E^\\bullet$ and the quasi-isomorphism $B[0]\\to I^\\bullet$ of any K-injective resolution. Its hypotheses allow arbitrary unbounded source and target complexes of this map, so it gives precisely the asserted quasi-isomorphism of Hom complexes for every such resolution. By the definition of derived internal Hom the target represents $R\\mathcal Hom_B(E^\\bullet,B)$, with the canonical identification for any K-injective resolution. Composing its inverse in $D(B)$ with the cochain isomorphism of step 6 gives the required derived isomorphism. Taking the fixed functorial resolution makes the comparison natural; the definition's canonical independence of resolution identifies the other choices with it. All constructions used only finite splittings and internal-Hom exactness, so no flatness of $B$ over $\\underline R$ was used.",
+   "uses": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; section-internal-hom, K-injective definition; bounded exact-term argument spelled out by the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-pur-hom-complex",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ, with explicit scalar realization, inverse and sign calculation expanding current blueprint paragraph 2 final sentence; uses the existing bounded-exact-term Hom lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -101,10 +207,145 @@
    ],
    "date": "2026-10-21",
    "verdict": "no match: ordinary module duality/base change and generic internal Hom or K-projectivity do not give the constant-sheaf realization comparison, signed complex isomorphism and derived sheaf Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|internal.hom",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf scalar extension carries finite projective module duals to internal sheaf duals and the bounded signed dual complex represents derived internal Hom",
+   "results": {
+    "top": [
+     "Module.dual_finite",
+     "Module.dual_projective",
+     "Module.instIsReflexiveOfFiniteOfProjective",
+     "FGModuleCat.FGModuleCatDual",
+     "dualTensorHomEquiv",
+     "ModuleCat.restrictCoextendScalarsAdj",
+     "CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+     "CategoryTheory.constantSheafAdj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": {
+    "top": [
+     "TensorProduct.dualDistrib",
+     "TensorProduct.AlgebraTensorModule.dualDistrib",
+     "TensorProduct.dualDistrib_apply",
+     "TensorProduct.AlgebraTensorModule.dualDistrib_apply",
+     "TensorProduct.dualDistrib_apply_comm",
+     "contractLeft",
+     "contractRight",
+     "dualTensorHom"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site and a sheaf B of algebras over a constant ring R, scalar extension of a bounded finite projective R complex dual computes derived internal sheaf Hom into B",
+   "results": {
+    "top": [
+     "Ext",
+     "CategoryTheory.Sheaf.H",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dualBaseChange|dual_base|dual.*[Bb]ase|[Bb]ase.*dual",
+   "results": {
+    "top": [
+     "Mathlib/LinearAlgebra/Dual/Basis.lean",
+     "Mathlib/LinearAlgebra/Dual/Basis.lean",
+     "Mathlib/LinearAlgebra/Dual/Basis.lean",
+     "Mathlib/LinearAlgebra/Dual/Basis.lean",
+     "Mathlib/LinearAlgebra/Dual/Basis.lean",
+     "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+     "Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+     "Mathlib/LinearAlgebra/Dual/BaseChange.lean"
+    ],
+    "n_hits": 10,
+    "note": "",
+    "subdirectory": "LinearAlgebra/Dual"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with duals of finite projective modules and bounded complexes of such sheaves preserve quasi-isomorphisms under internal Hom",
+   "results": {
+    "top": [
+     "Ext",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "CategoryTheory.ProjectiveResolution.isoExt",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "^(noncomputable )?(def|theorem|lemma)|Finite|Projective",
+   "results": {
+    "top": [
+     "9",
+     "25",
+     "45",
+     "49",
+     "56"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "LinearAlgebra/Dual/BaseChange.lean"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary scalar module duality, global categorical Ext/K-projectivity, or specialized condensed sheaves; none states this arbitrary-ringed-site scalar-dual cochain comparison and derived internal-Hom assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-hom-dual-constructible-models",
@@ -123,5 +364,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-perfect-dual-realization",
+  "worker": "stage1",
+  "summary": "Reused existing finite-retract internal-Hom exactness and bounded-exact-term quasi-isomorphism lemmas; wrote scalar free realization, dual-generator inverse, naturality, signed cochain comparison and bounds explicitly. Statement preserved; no new nodes or Mathlib leaves.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-internal-hom, paragraph 2 final sentence: coefficient dual of locally constant perfect complexes; realizes its scalar finite-projective calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "General bounded-complex exact-internal-Hom criterion on any small ringed site; used only to pass from ordinary Hom to the K-injective model, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-exact-term-hom-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-84952a657",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-84952a657 (reviewer sub-agent of L); spot-checked: Statement is byte-identical to the live base. The only stmt_dep added is def-pur-sheaf-hom, which the statement uses as Hom_B. 0 new nodes, no repair note, item not dropped. The only citer (lem-sfb-internal-hom-dual-constructible-models) uses the unchanged statement. Step 1: the projective lifting clause gives a section i of p:R^N→V, and the dual-generator identities v=Σλ_j(v)v_j and φ=Σφ(v_j)λ_j check. Step 2: C_B(R^N)=B^N holds already at presheaf level, so C_B(V) is a retract of B^N with no flatness used. Step 3: lem-sfb-ringed-site-finite-retract-dual-exact (same unit) gives exact internal Hom on every short exact sequence. Steps 4–5: β is extended via product-preserving sheafification, and I recomputed βγ(h)=h and γβ(b⊗φ)=b⊗φ. Step 6: with B[0], d(f)^{-q-1}=-(-1)^q f^{-q}d^{-q-1} matches the stated signed differential, and the [-b,-a] bounds hold. Step 7: lem-pc-bounded-exact-term-hom-quasi-iso allows arbitrary targets, so it covers every K-injective resolution. This tool use is accepted: it is a generic black box, already recorded in tool_uses of lem-sfb-ringed-site-strict-perfect-hom in this unit, and that node gives only the fixed augmentation. The route matches Stacks 08JH/08JJ and main-20261015 det-thm-sf-ctf-stability-internal-hom paragraph 2; no SGA. Candidates checked and not duplicates: strict-perfect-hom, lem-pc-finite-projective-internal-hom-evaluation (B⊗E^∨ over one ring sheaf, not the change of rings), lem-pod-coefficient-dual-perfect, lem-sf-etale-finite-projective-pullback-hom. Edge cases checked: V=0, R=0, Z→2→Z sign, non-flat B=Z/2, non-free projective V, unbounded I. review_split's 'no such node' lines are a symlink-loader artefact: all cited nodes resolve with find -L."
  }
 }
