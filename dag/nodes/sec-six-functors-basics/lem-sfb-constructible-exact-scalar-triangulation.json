@@ -22,128 +22,74 @@
  ],
  "proof": [
   {
-   "text": "Work in the fixed coefficient universe and the small skeleton of $X_{\\mathrm{proét}}$ from [def-weil-pbc-proetale-site]. Apply [lem-weil-pbc-sheaf-tensor-closed] with $\\mathcal A=\\mathrm{Ab}$: the ambient category $\\mathcal S=\\operatorname{Sh}(X_{\\mathrm{proét}},\\mathrm{Ab})$ is abelian, symmetric monoidal closed, and has additive tensor product preserving colimits separately. In particular both $E_X\\otimes-$ and $\\Omega_X\\otimes-$ preserve finite colimits. Apply [lem-sfb-modobj-abelian] to each of the two commutative coefficient ring objects to obtain the abelian categories $\\mathcal A_E=\\operatorname{Mod}_{E_X}$ and $\\mathcal A_\\Omega=\\operatorname{Mod}_{\\Omega_X}$. The hypotheses of clause 2 of [sk-def-sfb-change-of-scalars] hold in $\\mathcal S$: coequalizers exist, the tensor product preserves colimits in both variables, and $E_X$ is commutative. Thus its extension along $E_X\\to\\Omega_X$ is precisely $F_E$ and preserves finite colimits, including the initial object.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-sheaf-tensor-closed",
-    "lem-sfb-modobj-abelian",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph, ambient module categories and ordinary scalar extension; sheaf and module-category hypotheses expanded"
-   }
-  },
-  {
-   "text": "Let $\\mathcal B_E$ be the strictly full class of constructible objects in $\\mathcal A_E$. The finite-field case of [lem-weil-pbc-condensed-constructible-serre] applies with $T=X$: it assumes only that the underlying space is Noetherian. Its coefficient ring $E_X^c$ and its stratified local finite-presentation predicate are those of the archived construction of [lem-weil-pbc-condensed-constructible-serre]; [lem-sfb-condensed-coefficient-presentation-identification] identifies $E_X^c$ with our $E_X$, compatibly with units and multiplication (hence the internal module categories), and identifies that predicate with the constructibility of [def-sfb-constructible-module] used in [sk-def-sfb-bounded-constructible], with the same strata and presentations. Transported through this identification, it gives closure under kernels and cokernels of maps between members and under extensions. The zero module belongs to $\\mathcal B_E$: on the single stratum $X$ it has the presentation $E_X^0\\to E_X^0\\to0$, using the identity cover. This remains valid for empty $X$. An isomorphism transports the same local presentations, so $\\mathcal B_E$ is strictly full. Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to $\\mathcal A_E$ and $\\mathcal B_E$, using its bounded version. It makes the full subcategory of objects with bounded constructible cohomology a triangulated subcategory of $D(\\mathcal A_E)$. By [sk-def-sfb-bounded-constructible] and [def-sfb-dcons-subfield], this is exactly $\\mathcal C_E$, with no completeness or étale-origin restriction.",
+   "text": "Apply the finite-field theorem isConstructibleModuleObject_serre_padicSubfield of [lem-weil-pbc-condensed-constructible-serre] at X and E. Its coefficient object and constructibility predicate are already exactly padicSubfieldRingObj X ℓ E and IsConstructibleModuleObject; no separate presentation-identification transport is needed. Transport the kernel and cokernel conclusions along limit.isoLimitCone and colimit.isoColimitCocone, using IsConstructibleModuleObject.of_iso, to obtain the ObjectProperty kernel and cokernel closure classes. Its extension clause gives the extension closure class directly. Apply isTriangulated_boundedConstructible_of_serre of [prop-weil-pbc-module-bounded-constructible-triangulated], which proves zero and isomorphism closure from presentations and invokes the generic weak Serre homology-property argument. This proves the first assertion without using the disputed arbitrary-ring noetherian-only instance.",
    "uses": [
     "lem-weil-pbc-condensed-constructible-serre",
-    "lem-sfb-condensed-coefficient-presentation-identification",
-    "def-sfb-constructible-module",
-    "lem-sbc-cohomology-in-weak-serre-subcategory",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-dcons-subfield"
+    "prop-weil-pbc-module-bounded-constructible-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; coefficient-specific closure is the cited condensed-field node"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-weil-triangulated-subcategory], the subcategory just obtained carries the inherited pretriangulated structure and its inclusion $\\iota_E$ is triangulated. Here a triangle is distinguished precisely when its image under $\\iota_E$ is distinguished. Integer shifts are the restrictions of the ambient shifts of [def-weil-abstract-derived-category]. Hom groups and their addition are unchanged by the full inclusion. Thus for morphisms $f,g$ in $\\mathcal C_E$ the equality $(f+g)[n]=f[n]+g[n]$ is the corresponding ambient equality; the ambient shifts are additive by [def-weil-triangulated-category] (integer shifts are powers of the additive shift equivalence). Hence every integer shift on $\\mathcal C_E$ is additive.",
+   "text": "The full triangulated subcategory construction [def-weil-triangulated-subcategory] now supplies additive integer shifts and its triangulated inclusion for the same boundedConstructible predicate. These structures are inherited from the ordinary derived category [def-weil-abstract-derived-category].",
    "uses": [
     "def-weil-triangulated-subcategory",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: bounded constructible complexes form a triangulated subcategory; inherited shifts and full inclusion made explicit"
-   }
+   "elementary": true
   },
   {
-   "text": "The flatness statement [lem-sfb-qlbar-flat] applies to the same inclusion $E_X\\to\\Omega_X$, for this finite field $E$ and arbitrary scheme $X$, and gives preservation of finite limits by $F_E$. Together with step 1 this gives preservation of finite limits and finite colimits. For additivity, identify $F_E(M\\oplus N)$ with $F_E(M)\\oplus F_E(N)$ by its preserved binary product and coproduct diagrams. This comparison takes the two projections and the two inclusions to the corresponding projections and inclusions, since $F_E$ preserves zero objects and hence zero morphisms. It therefore takes the diagonal $\\Delta_M$, the codiagonal $\\nabla_N$, and $f\\oplus g$ to their counterparts. Applying $F_E$ to $f+g=\\nabla_N\\circ(f\\oplus g)\\circ\\Delta_M$ gives $F_E(f+g)=F_E(f)+F_E(g)$. Also $F_E(0)=0$. Thus $F_E$ is an exact additive functor between the two abelian categories.",
+   "text": "Use the existing additive extension-of-scalars instance and its left-adjoint finite-colimit preservation [sk-def-sfb-change-of-scalars]; apply the exact coefficient inclusion instance [lem-sfb-qlbar-flat] for finite limits. The abelian sheaf and module structures are the recorded instances [lem-weil-pbc-sheaf-tensor-closed, lem-sfb-modobj-abelian]. This is precisely the recorded coefficient map, with no changed scalar-extension construction.",
    "uses": [
-    "lem-sfb-qlbar-flat"
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-qlbar-flat",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: exactness from lem-sfb-qlbar-flat; finite-colimit and additivity clauses expanded"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $F_E$, with exactness and additivity established in step 4. It supplies a triangulated functor $G=D(F_E):D(\\mathcal A_E)\\to D(\\mathcal A_\\Omega)$ and a natural factorization isomorphism $\\varphi_K:G(Q_EK)\\xrightarrow{\\sim}Q_\\Omega(C(F_E)K)$ compatible with every integer shift. In particular any representing complex is sent termwise, with no resolution required. On complexes the shift comparison is the identity in each degree: the two differentials agree because $F_E((-1)^n d)=(-1)^nF_E(d)$. The cited theorem includes the descent of this comparison and its compatibility with $\\varphi$, so no assertion of shift compatibility is being inferred merely from the existence of an unstructured factorization isomorphism.",
+   "text": "Keep constructibleScalarExactComparison unchanged: its body is the existing counit-normalized leftDerivedFunctorIsoMapDerivedCategory for this exact ordinary scalar extension, identifying [def-sfb-derived-extend-to-qlbar] with its termwise mapDerivedCategory. The latter functor is triangulated by the Mathlib exact-derived-functor instance [lem-weil-pbc-exact-functor-derived-factorization]. This existing comparison avoids reconstructing a universal-property argument between complexes and homotopy categories.",
    "uses": [
+    "def-sfb-derived-extend-to-qlbar",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; exact termwise factorization with shifts as in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, lines 35–105"
-   }
+   "elementary": false
   },
   {
-   "text": "By clause (1) of [lem-weil-pbc-exact-functor-derived-functor], the pair $(G,\\varphi)$ of step 5 is itself a total left derived functor. By [def-sfb-derived-extend-to-qlbar], $T=T_{E,\\Omega}$ is the total left derived extension of this same ordinary $F_E$. The total left derived functor of [def-sfb-derived-extend-to-qlbar] is taken along $K(\\mathcal A_E)\\to D(\\mathcal A_E)$, the cited one along $Q_E:\\mathrm{CoCh}(\\mathcal A_E)\\to D(\\mathcal A_E)$; since $Q_E$ is the composite with the quotient $\\mathrm{CoCh}(\\mathcal A_E)\\to K(\\mathcal A_E)$, which is a localization (bijective on objects and full), precomposition with it is fully faithful on functor categories, and the termwise functor $Q_\\Omega C(F_E)$ factors through it because the additive $F_E$ preserves homotopies; so the two right Kan extension properties are the same. Consequently their universal properties give canonical comparison maps $a:T\\to G$ and $b:G\\to T$ respecting their counits. The composites $ba$ and $ab$ respect the respective counits too; uniqueness in each universal property identifies them with the identities. Thus $a:T\\xrightarrow{\\sim}G$ is the canonical derived comparison. This proves the comparison with termwise extension without using extra existence hypotheses on K-flat resolutions. It is the canonical exact-functor comparison described in the statement.",
+   "text": "The recorded condensedAlgClCoefficientCommShift [def-weil-pbc-condensed-coefficient-comparisons] is definitionally CommShift.ofIso of the inverse of that same canonical comparison. Apply Mathlib Functor.CommShift.ofIso_compatibility to that inverse, then NatTrans.CommShift.of_iso_inv to obtain compatibility of the forward comparison. Functor.isTriangulated_of_iso applied to the inverse comparison transfers triangulatedness from the exact termwise functor to derivedExtendScalarsToPadicAlgCl. Its proof uses the canonical image-triangle isomorphism and invariance of distinguished triangles [def-weil-triangulated-category].",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "def-sfb-derived-extend-to-qlbar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor, and its left-derived dual; uniqueness of the universal comparison written out"
-   }
-  },
-  {
-   "text": "Write $\\sigma^G_{K,n}:G(K[n])\\xrightarrow{\\sim}G(K)[n]$ for the comparisons of step 5. Give $T$ the transported comparisons\n$$\\sigma^T_{K,n}=(a_K[n])^{-1}\\circ\\sigma^G_{K,n}\\circ a_{K[n]}.$$\nNaturality follows by substituting the naturality identities for $a$ and $\\sigma^G$; the shift-unit and shift-composition identities follow from those for $G$ by cancellation of adjacent $a$ and $a^{-1}$. For a distinguished triangle $K\\to L\\to M\\xrightarrow{w}K[1]$, its images under $T$ and $G$ are isomorphic by $(a_K,a_L,a_M)$. Naturality gives the first two triangle squares. For the last square the formula gives\n$$a_K[1]\\circ\\sigma^T_{K,1}\\circ T(w)=\\sigma^G_{K,1}\\circ G(w)\\circ a_M.$$\nThe $G$-image is distinguished, so the $T$-image is distinguished by isomorphism invariance in [def-weil-triangulated-category]. Additivity transfers through $a$ by the same naturality equations on Hom groups. Thus $T$ is triangulated with precisely the comparison specified in the item.",
-   "uses": [
+    "def-weil-pbc-condensed-coefficient-comparisons",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: exact scalar extension carries the cone triangle to the ambient distinguished triangle; transported integer-shift comparison expanded"
-   }
+   "elementary": true
   },
   {
-   "text": "The composite $T\\circ\\iota_E$ is additive. Its shift comparison is the composite $T(\\iota_E(K[n]))\\cong T((\\iota_EK)[n])\\xrightarrow{\\sigma^T}T(\\iota_EK)[n]$. A distinguished triangle of $\\mathcal C_E$ first becomes distinguished under $\\iota_E$ by step 3 and then under $T$ by step 7. Thus the composite is triangulated by [def-weil-triangulated-category]. Whiskering $a$ by $\\iota_E$ identifies it with $G\\circ\\iota_E$; the formula in step 7 says exactly that this identification respects all shifts. By step 5 the latter functor is the restriction of exact termwise scalar extension. All image triangles lie in $D(\\mathcal A_\\Omega)$, which completes every assertion without requiring any triangle structure on a constructible subcategory over $\\Omega$.",
+   "text": "Compose the inherited triangulated inclusion with the derived extension to obtain triangulatedness of the restriction. The instance for whiskering a shift-compatible natural transformation on the left gives compatibility of isoWhiskerLeft of the same comparison with every integer shift. Assemble the ten conclusions. All image triangles remain in the ambient closure-coefficient derived category.",
    "uses": [
+    "def-weil-triangulated-subcategory",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: restriction of exact scalar extension from the inherited finite-coefficient category into the ambient closure-coefficient derived category"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-sfb-modobj-abelian",
-  "sk-def-sfb-change-of-scalars",
   "lem-weil-pbc-condensed-constructible-serre",
-  "lem-sfb-condensed-coefficient-presentation-identification",
-  "def-sfb-constructible-module",
-  "lem-sbc-cohomology-in-weak-serre-subcategory",
-  "sk-def-sfb-bounded-constructible",
-  "def-sfb-dcons-subfield",
+  "prop-weil-pbc-module-bounded-constructible-triangulated",
   "def-weil-triangulated-subcategory",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
+  "sk-def-sfb-change-of-scalars",
   "lem-sfb-qlbar-flat",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "def-sfb-derived-extend-to-qlbar",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "def-sfb-derived-extend-to-qlbar"
+  "def-weil-pbc-condensed-coefficient-comparisons",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-  "place": "Complexes paragraph, expanded using Stacks Tag 06UQ, exact coefficient flatness and the shift-compatible exact derived functor"
+  "place": "Complexes paragraph; Lean assembly from coefficient-specific Serre closure, conditional constructible triangulation, the existing counit-normalized exact comparison and Mathlib shift transport (U3, 2026-10-21)."
  },
  "mathlib_searches": [
   {
@@ -290,10 +236,8 @@
  },
  "tool_uses": [
   "lem-weil-pbc-condensed-constructible-serre",
-  "lem-sbc-cohomology-in-weak-serre-subcategory",
   "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-sfb-modobj-abelian",
-  "lem-weil-pbc-exact-functor-derived-functor"
+  "lem-sfb-modobj-abelian"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -326,5 +270,15 @@
   "group": "Q48",
   "result": "fix",
   "note": "Statement matches the node clause by clause: Noetherian underlying space only, recorded E_X/Omega_X rings, boundedConstructible = PadicSubfieldConstructible predicate, inherited triangulation, additive shifts for all n, iota triangulated, extendScalars additive/finite-limit/finite-colimit preserving, canonical counit-normalized leftDerivedFunctorIsoMapDerivedCategory, T and T∘iota triangulated, shift-compatible comparisons. Edge cases covered (X empty, E=Q_l, l=2, n<=0). H4 fixed: the delivered global instance constructibleScalarExactCommShift duplicated the public condensedAlgClCoefficientCommShift (Sheaf.Paper.CondensedCoefficientComparisons, def-weil-pbc-condensed-coefficient-comparisons), the same ofIso term. Fix drops it, publicly imports that module, updates the docstrings and lean-record declarations; statement text unchanged; nt_compile clean in 46.1 s; refit/check_record/check_lean_text clean. Advisories: that def node is not in stmt_deps (an S2 fix cannot add it); def-sfb-left-derived-exact records the FromTotalTensor iso, which does not fit leftDerivedFunctor, so the upstream canonical iso is used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261021T155800-L-3449027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

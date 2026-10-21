@@ -6,13 +6,10 @@ Authors: SHEAF group Q48
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import Sheaf.AlgebraicGeometry.ProEtalePointPullback
-public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-public import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedTotalTensorExact
 public import Sheaf.Paper.CondensedCoefficientComparisons
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.Paper.CohomologyInWeakSerreSubcategory
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
+import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-!
 # Constructible triangles and exact scalar extension to the condensed algebraic closure
@@ -108,6 +105,33 @@ theorem constructible_exact_scalar_triangulation
     NatTrans.CommShift
       (Functor.isoWhiskerLeft (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι
         (constructibleScalarExactComparison X ℓ E)).hom ℤ := by
-  sorry
+  have hserre := isConstructibleModuleObject_serre_padicSubfield X ℓ E
+  rcases hserre with ⟨hk, he⟩
+  let : ObjectProperty.IsClosedUnderKernels
+      (IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E)) :=
+    ⟨by
+      rintro _ ⟨f, s, hs, hf⟩
+      exact ((hk _ _ f hf.1 hf.2).1).of_iso (limit.isoLimitCone ⟨s, hs⟩)⟩
+  let : ObjectProperty.IsClosedUnderCokernels
+      (IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E)) :=
+    ⟨by
+      rintro _ ⟨f, s, hs, hf⟩
+      exact ((hk _ _ f hf.1 hf.2).2).of_iso (colimit.isoColimitCocone ⟨s, hs⟩)⟩
+  let : ObjectProperty.IsClosedUnderExtensions
+      (IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E)) := ⟨he _⟩
+  let := isTriangulated_boundedConstructible_of_serre (padicSubfieldRingObj X ℓ E)
+  let : NatTrans.CommShift (constructibleScalarExactComparison X ℓ E).symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility
+      (constructibleScalarExactComparison X ℓ E).symm ℤ
+  let : NatTrans.CommShift (constructibleScalarExactComparison X ℓ E).hom ℤ := by
+    change NatTrans.CommShift (constructibleScalarExactComparison X ℓ E).symm.inv ℤ
+    exact NatTrans.CommShift.of_iso_inv (constructibleScalarExactComparison X ℓ E).symm ℤ
+  let : (derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated :=
+    Functor.isTriangulated_of_iso (constructibleScalarExactComparison X ℓ E).symm
+  refine ⟨inferInstance, fun _ ↦ inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  change NatTrans.CommShift (Functor.whiskerLeft _
+    (constructibleScalarExactComparison X ℓ E).hom) ℤ
+  infer_instance
 
 end AlgebraicGeometry.ProEtale
