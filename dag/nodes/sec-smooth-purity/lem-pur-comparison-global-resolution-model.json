@@ -21,18 +21,18 @@
  ],
  "proof": [
   {
-   "text": "Work in the common larger universe in the statement. The ring-sheaves theorem applies to each of the two small sites and its constant ring sheaf, making both module categories Grothendieck abelian; hence both have enough injectives. Apply the lower-bound-preserving injective-resolution lemma with $a=0$ to $F[0]$ to obtain $i:F[0]\\to I$, with $I^n=0$ for $n<0$ and all $I^n$ injective. Exactness of $A_U$ implies that $A_UI$ is nonnegative and that $A_U(i)$ is a quasi-isomorphism. Apply the same resolution lemma in the pro-etale module category to $A_UI$, again with $a=0$, obtaining $t:A_UI\\to J$ with $J$ nonnegative and termwise injective. Both $I$ and $J$ are K-injective by the bounded-below-injectives theorem.",
+   "text": "Use the existing Grothendieck-abelian instances for ModuleCat-valued sheaves on the small etale and pro-etale sites and the enough-injectives instance. Resolve F[0] by the lower-bound-preserving injective-resolution lemma at bound zero, obtaining i:F[0] to I with injective terms and zero negative terms. The additive comparison pullback preserves zero objects, so A(I) is nonnegative. Apply the same lemma again to obtain t:A(I) to J, with J nonnegative and termwise injective. The bounded-below injectivity theorem makes both complexes K-injective. Package the actual complexes and maps; no resolution data is selected from an unproved arbitrary existence statement in a definition.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-proetale-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives",
     "lem-weil-pbc-complex-injective-resolution-mono",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-bounded-below-injectives-kinjective"
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013K (lemma-injective-resolutions-exist), part (3), with a=0; Tag 070J (lemma-bounded-below-injectives-K-injective). Enough injectives: injectives.tex Tags 079Q (remark-existence-D) and 079H (theorem-injective-embedding-grothendieck)."
+    "place": "Tag 013K (lemma-injective-resolutions-exist), part (3), with a=0; Tag 070J (lemma-bounded-below-injectives-K-injective). Enough injectives: injectives.tex Tags 079Q (remark-existence-D) and 079H (theorem-injective-embedding-grothendieck). Existing fixed-ring sheaf instances: WeilConjectures/CategoryTheory/GrothendieckAbelian/Sheaf.lean, isGrothendieckAbelian_sheaf_smallEtaleTopology and isGrothendieckAbelian_sheaf_proEtTopology."
    }
   },
   {
@@ -59,49 +59,48 @@
    }
   },
   {
-   "text": "Since $A_U$ is exact and left adjoint to $N_U$, the right-adjoint-preserves-injectives lemma shows that every term of $N_UJ$ is injective in the etale module category. Also $N_UJ$ is nonnegative: restriction of the zero sheaf is zero. The right-derived computation theorem therefore applies to the three termwise section complexes $\\Gamma_{\\mathrm{et}}I$, $\\Gamma_{\\mathrm{et}}N_UJ$, $\\Gamma_{\\mathrm{proet}}J$, and to $N_UJ$ computing $RN_U(QJ)$. Indeed $N_U$ is additive and left exact by its restriction formula, and sections are additive and preserve kernels since a section lies in a kernel exactly when its image vanishes. All these are the ordinary bounded-below right-derived functors in the statement. Write $\\alpha_J:Q(N_UJ)\\xrightarrow{\\sim}RN_U(QJ)$ for the right-derived comparison.",
+   "text": "Let G and Gprime denote the two terminal evaluation functors, rho=Qi, beta the target identification, alphaI and alphaJ their actual right-derived units at I and J. The units are invertible on these termwise injective complexes. Define eI=alphaI followed by the inverse of RG(rho), and eJ=alphaJ followed by the inverse of RGprime(beta). Cancellation immediately gives the two required normalizations. Only the injectivity of I and J is needed; no injectivity assertion about the direct image of J is used.",
    "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sp-right-adjoint-preserves-injectives",
     "lem-weil-pbc-right-derived-plus-injective"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 015Z (lemma-adjoint-preserve-injectives); derived.tex Tag 070Y (lemma-K-injective-defined), applied to the bounded-below injective computing complexes."
-   }
-  },
-  {
-   "text": "Apply the existing normalized comparison-unit model to $M=I$ and $j=t$. Its hypotheses hold for this arbitrary pair, and its formula, with $h$ as above, is\n$$RN_U(Qt)\\circ\\eta^D_{QI}=\\alpha_J\\circ Qh.$$\nNaturality of the derived unit at $\\rho:F[0]\\xrightarrow{\\sim}QI$ gives $RN_U(A_U\\rho)\\circ\\eta^D_{F[0]}=\\eta^D_{QI}\\circ\\rho$. Postcomposing with $RN_U(Qt)$ and substituting the first equality yields\n$$RN_U(\\beta)\\circ\\eta^D_{F[0]}=\\alpha_J\\circ Qh\\circ\\rho.$$\nThis pins the representative to the given augmentation $i$ and to the target identification $\\beta$ of step 2, rather than to an arbitrary isomorphism with $QJ$.",
-   "uses": [
-    "lem-pur-comparison-unit-injective-model"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors); the normalized formula is the statement of lem-pur-comparison-unit-injective-model. The rest is naturality and reassociation."
+    "place": "Tag 070Y, computation on bounded-below injective complexes; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, invertibility of the right-derived unit on injective terms."
    }
   },
   {
-   "text": "Apply $R\\Gamma_{\\mathrm{et}}$ to the equality of step 5. Naturality of its right-derived comparison at $h:I\\to N_UJ$ identifies $R\\Gamma_{\\mathrm{et}}(Qh)$ with $Q\\Gamma_{\\mathrm{et}}(h)$ under the computing isomorphisms of step 4. The final-object comparison $R\\Gamma_{\\mathrm{et}}RN_U(QJ)\\cong R\\Gamma_{\\mathrm{proet}}(QJ)$ is induced by evaluation on the final object. On this injective representative its complex map is the degreewise identity $(N_UJ^n)(U)=J^n(U)$, so its composite with $Q\\Gamma_{\\mathrm{et}}(h)$ is $Qw$. The definition of the global comparison is precisely $R\\Gamma_{\\mathrm{et}}(\\eta^D)$ followed by that final-object comparison. Consequently, using the resolution of $F[0]$ by $i$ and of $A_UF[0]$ by $t\\circ A_U(i)$, the specified global comparison is $Qw$. The same calculation works for every allowed pair.",
+   "text": "Use the recorded definition of finiteComparisonGlobalSections as rightDerivedFunctorPlusBaseChange of the terminal evaluation of the ordinary comparison unit. Evaluate its defining unit compatibility at I. Naturality of the identity-derived isomorphism removes the derived identity, and its localization-factor equation cancels the extra identity factor. Postcompose with RGprime of the exact-pullback factor followed by Qt. The inverse and forward localization factors cancel. Naturality of alpha at t then identifies the result as Qw followed by alphaJ, because the termwise adjoint is N(t) composed with the unit, evaluated at the terminal object. This is a direct proof from the specified global comparison, without transporting through the coefficient-category encoding or the separate derived-unit model.",
    "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-weil-pbc-derived-sections-pushforward",
     "lem-weil-pbc-comparison-global-cohomology",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099W (lemma-compare-cohomology), with Tag 099R (section-comparison) for terminal evaluation and derived.tex Tag 070Y (lemma-K-injective-defined) for computing on the injective representatives. Agent refinement specifying the complex map."
+    "place": "Tags 099R and 099W. Formal unit compatibility: WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChange.lean, rightDerivedFunctorPlusBaseChange_fac. Identity factor: WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, mapDerivedCategoryPlusIdIso_hom_app_factorsh. The global map is exactly the existing finiteComparisonGlobalSections definition."
    }
   },
   {
-   "text": "For a global cocycle $z\\in\\Gamma_{\\mathrm{et}}(I^q)$, the equation $d_Jh=hd_I$ gives $d_Jh(z)=0$. If $z$ is changed by a boundary $d_Iy$, then $h(z)$ changes by $d_Jh(y)$. Thus $H^q(w)$ sends $[z]$ to $[h(z)]$; by step 6 this is $c^q_{U,F}$. Finally $h=N_U(t)\\circ\\eta^0_I$, so $h(z)=t(\\eta^0_I(z))$. In the comparison pullback's colimit-and-sheafification construction, the unit at the terminal object sends $z$ to its class indexed by $(U,\\mathrm{id}_U)$ and then to its sheafification image. This is the pullback terminal section $A_U(z)$; the canonical constant-ring comparison identifies its scalar $1$ with $1$. Therefore $h(z)=t(A_U(z))$. This calculation also covers $q=0$, when the incoming group in the nonnegative section complex is zero. Only exactness of $A_U$, never preservation of injectives by $A_U$, has been used.",
+   "text": "Naturality of the exact-pullback localization factor at i expresses beta as A(rho), then the factor at I, then Qt. Naturality of the normalized global-comparison natural transformation at rho gives its transport to F[0]. Cancel RGprime(beta), use the preceding computation and the definitions of eI and eJ, and cancel RG(rho). The resulting equality is Qw followed by eJ equals eI followed by the specified global comparison. Both computing identifications are pinned to the supplied augmentations, and the calculation applies to every pair.",
+   "uses": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W, with derived-unit compatibility from the preceding step; the remaining argument is naturality and cancellation of isomorphisms."
+   }
+  },
+  {
+   "text": "The naturality of the homology-factor isomorphisms and of homology projection proves that the localized homology map of any chain map carries the defined cycle class to the class of its cyclesMap image. Apply homology to the comparison equality from the preceding step and evaluate it on the cycle class of z. This gives the stated cocycle formula, including q=0. The last displayed equality is definitional: the hom-equivalence sends t to the comparison unit followed by N(t), and restriction evaluates at the same terminal object. No preservation of injectives by A is required.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-comparison-pullback-exact"
+    "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
    "elementary": true,
    "source": {
@@ -111,23 +110,20 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-complex-injective-resolution-mono",
-  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-bounded-below-injectives-kinjective",
   "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-sp-right-adjoint-preserves-injectives",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-pur-comparison-unit-injective-model",
-  "lem-weil-pbc-derived-sections-pushforward",
   "lem-weil-pbc-comparison-global-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-  "place": "Opening paragraph, transport of classes; explicit chain-level refinement using Stacks Tags 013K, 070J, 070Y, 015Z, 099R, 099W and the existing normalized comparison-unit node."
+  "place": "Opening paragraph, transport of classes; G4 stage-3 proof uses the existing global comparison definition and rightDerivedFunctorPlusBaseChange_fac directly, followed by normalized augmentation transport and homology naturality."
  },
  "mathlib_searches": [
   {
@@ -254,11 +250,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-complex-injective-resolution-mono",
   "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-derived-sections-pushforward",
   "lem-weil-pbc-comparison-global-cohomology"
  ],
  "reviewed": {
@@ -299,5 +293,15 @@
   "group": "Q28",
   "result": "pass",
   "note": "Clause-by-clause match. Λ:Type(u+1) CommRing Finite, as in all recorded deps. Etale side is the DerivedCategoryModule encoding. The pro-etale Sheaf ProEt (ModuleCat Λ) presentation is the one the stmt_deps global comparison and derived-sections pushforward use, canonically equivalent to FiniteCoefficientModules via finiteCoefficientRealization. Nonempty structure: strictly-GE-0, termwise injective, IsKInjective I and J; i,t quasi-isos; ∀ pairs IsIso of Q(A i≫t) with the exact factor. h = termwise homEquiv of comparisonAdjunction; w = evaluation at the terminal object. eI and eJ are uniquely pinned by the actual rightDerivedFunctorPlusUnit; Qw≫eJ = eI≫(recorded finiteComparisonGlobalSections, derived id removed), rechecked by hand via base-change naturality. Cocycle formula for q:ℕ. h(z)=t(unit z) is definitional, as in the node (advisory). One sorry, helpers non-hollow. Docstrings with source/blueprint and 7 proof steps. Plain imports = proof_deps modules. Lines ≤100, statement verbatim, non-lean fields = live, no name collisions, first delivery. No compile run (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261021T111133-L-4174620",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
