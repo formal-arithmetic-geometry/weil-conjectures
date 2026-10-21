@@ -20022,3 +20022,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:52:05Z L: superseded stage-1 delivery Q52/lem-sp-supported-etale-tensor-origin at 3b273f535475265af521638115f015774dd9f6f3; current completion retained; packet archived at refs/superseded/Q52/lem-sp-supported-etale-tensor-origin/3b273f535475265af521638115f015774dd9f6f3; stale return retired.
 - 03:52 L: merged deliver/NI/lem-weil-pbc-finite-basis-cech-first-limit (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q28/lem-cbc-constant-derived-limit-resolution-unit (reviewer PASS; first push; new nodes: 0); claim not held by Q28: not your claim
+- 03:52 L: merged deliver/Q37/lem-sf-adjunct-conjugate-open-factor (reviewer PASS; first push; new nodes: 0)

@@ -10,11 +10,71 @@
  "stmt_deps": [
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=R_rM$, $Y=J_kM$, and $a=J_k(\\varepsilon_{r,M})\\circ\\alpha_X:L_pJ_iX\\to Y$. Denote the composite adjunctions $L_pJ_i\\dashv P_iR_p$ and $J_bL_q\\dashv R_qP_b$ by $A_1,A_2$. By [def-weil-pbc-adjunction-mate], $\\gamma_M=\\operatorname{adj}_{L_p\\dashv R_p}(a)$. The composite Hom-bijection in [def-weil-pbc-composite-adjunction] therefore gives\n$$h:=\\operatorname{adj}_{J_i\\dashv P_i}(\\gamma_M)=\\operatorname{adj}_{A_1}(a):X\\to P_iR_pY.$$",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), counit-transpose description; Tag 0DV0 (categories, lemma-compose-counits), composite Hom-bijection"
+   }
+  },
+  {
+   "text": "Regard $\\alpha$ as a square with first adjunction $L_r\\dashv R_r$, second adjunction $A_1$, and intervening functors $\\mathrm{id}_{\\mathcal D}$ and $J_k$. Its mate has component $h$ by step 1 and [def-weil-pbc-adjunction-mate]. Apply clause 3(a) of [lem-weil-pbc-mate-pasting] with the new second adjunction $A_2$ and $\\tau=\\beta^{-1}:J_bL_q\\to L_pJ_i$. The conjugate $\\tau^c$ is exactly $c$ by [def-weil-pbc-adjunction-conjugate], with direction $P_iR_p\\to R_qP_b$. The clause identifies the mate of $\\alpha\\circ\\beta^{-1}$ with $(cJ_k)\\circ\\alpha^\\flat$. Taking its component at $M$ and writing its counit transpose yields\n$$c_Y\\circ h=\\operatorname{adj}_{A_2}(a\\circ\\beta_X^{-1}).$$",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_conjugateEquiv_vcomp, lines 485-502; abstract categorical normalization of Stacks Tag 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "Write $T=J_sM$ and $u_b$ for the unit of $J_b\\dashv P_b$, and $\\eta_q$ for that of $L_q\\dashv R_q$. The assumed factorization says $a\\circ\\beta_X^{-1}=d_M\\circ J_b(f)$. Substitute it in step 2, and expand the unit of $A_2$ using [def-weil-pbc-composite-adjunction] and the Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection]. Functoriality gives\n$$c_Y\\circ h=R_q\\bigl(P_b(d_M)\\circ P_bJ_b(f)\\circ u_{b,L_qX}\\bigr)\\circ\\eta_{q,X}.$$\nHere $f:L_qX\\to T$, so the composite inside $R_q$ has type $L_qX\\to P_bY$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0 (lemma-compose-counits), composite adjunction; Tag 0037 (definition-adjoint) and following paragraph, Hom-bijection formula"
+   }
+  },
+  {
+   "text": "Compose the equation of step 3 with $R_q(z_M)$. By the definition $z_M=u_{b,T}^{-1}\\circ P_b(d_M^{-1})$ and $d_M^{-1}\\circ d_M=1$, its right side becomes\n$$R_q\\bigl(u_{b,T}^{-1}\\circ P_bJ_b(f)\\circ u_{b,L_qX}\\bigr)\\circ\\eta_{q,X}.$$\nNaturality of the unit, supplied by [lem-weil-pbc-adjunction-of-natural-bijection], says $P_bJ_b(f)\\circ u_{b,L_qX}=u_{b,T}\\circ f$. Cancelling the invertible $u_{b,T}$ reduces the display to $R_q(f)\\circ\\eta_{q,X}=\\operatorname{adj}_{L_q\\dashv R_q}(f)$ by the same node's Hom formula. Since $h=\\operatorname{adj}_{J_i\\dashv P_i}(\\gamma_M)$ and $Y=J_kM$, this is the claimed equation.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint) and following paragraph, natural unit and Hom-bijection formula; direct cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Sentence: exceptional comparisons preserve units and counits, so their mates satisfy the same equations; categorical calculation using the cited Mathlib mate-pasting leaf and Stacks Tags 0037, 0DV0, 07A7."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +110,52 @@
    "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.conjugateEquiv_comm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.conjugateEquiv_apply_app",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*conjugate|conjugate.*homEquiv|homEquiv.*unit|unit.*naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction hom equivalence commutes with the conjugate isomorphism between right adjoints",
+   "results": "8 hits: CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.Adjunction.adjunctionOfEquivRight, CategoryTheory.Adjunction.homEquiv, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_iso, CategoryTheory.Bicategory.conjugateEquiv_iso",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.homEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction mate through the conjugate isomorphism of composite adjoints and cancel a left adjoint with invertible unit",
+   "results": "8 hits: CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.conjugateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_comm|unit_conjugateEquiv|homEquiv_naturality_right|homEquiv_unit|comp_homEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hom adjunction bijection commutes with conjugate isomorphisms and cancellation of a fully faithful left adjoint in a factorization",
+   "results": "8 hits: CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_comm, CategoryTheory.conjugateEquiv_symm_comm, CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item; related mate/conjugation and adjunction formulae are already represented by existing Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-semilinear-proper-open-mate-pasting",
@@ -73,5 +175,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-adjunct-conjugate-open-factor",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved the iterated-adjunct formula, used existing mate-pasting clause 3(a) to pass through the specified conjugate, substituted the factorization, and explicitly cancelled the invertible open unit by naturality. All five dependencies already exist as Mathlib leaves; no new nodes. No qualifying declaration was found under WeilConjectures/.",
+  "blueprint": "Realizes the fix-prop-coherence proof sentence that exceptional comparisons preserve units and counits and therefore their mates satisfy the same equations, in the open-factor normalization used by lem-sf-semilinear-proper-open-mate-pasting."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-5e66410fd",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-5e66410fd (reviewer sub-agent of L); spot-checked: Read the full delivery (item only, no new nodes, statement byte-identical to live; still unsplit on live and side-live, so not superseded; not a re-split; created 2026-10-21, so not in the 10-19 dropped list). I checked all four steps against the cited statements with explicit typing. Step 1: the mate is the L_p-transpose of J_k(eps_r) after alpha (def-weil-pbc-adjunction-mate), and the composite Hom-bijection (Adjunction.comp) gives h = adj_{A1}(a). Step 2: clause 3(a) of lem-weil-pbc-mate-pasting (checked against Mathlib Mates.lean 485-502, mateEquiv_conjugateEquiv_vcomp) with G=id, H=J_k, A2=J_bL_q⊣R_qP_b and tau=beta^{-1}:L3->L2. Then tau^c:P_iR_p->R_qP_b is exactly c, with the right direction, so c_Y∘h = adj_{A2}(a∘beta^{-1}). Step 3: substituting the hypothesis and using the composite unit gives R_q(P_b d ∘ P_bJ_b f ∘ u_b)∘eta_q, well typed. Step 4: z_M cancels P_b(d), unit naturality and the assumed invertibility of u_b at J_sM leave R_q(f)∘eta_q = adj(f). This is correct, and only the stated invertibility is used. Edge cases (identity beta/d, terminal categories, vacuous case) checked. No duplicate in the DAG: lem-weil-pbc-conjugate-iso-unit-equation, lem-sfb-open-scalar-conjugate-normalization and lem-sc-global-sections-base-change-mate all differ. Mathlib searches are real; none states the whole item. All deps are Mathlib leaves: no route issue, no tool_uses, no SGA. The citer's step 2 use matches the statement. Advisory only: the stmt_dep lem-weil-pbc-adjunction-of-natural-bijection was added for the adj notation but is not cited in the statement text. No fixes."
  }
 }
