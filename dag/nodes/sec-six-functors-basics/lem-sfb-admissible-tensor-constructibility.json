@@ -16,24 +16,36 @@
  ],
  "proof": [
   {
-   "text": "For finite $A$, descend $K,L\\in\\Dctf(X,A)$ to the étale site by [det-pe-finite-tor-comparison-noetherian]; $A$ is Noetherian because every ideal is a finite set. Choose ordered Tor intervals $[a,b]$, $[c,d]$. By [lem-sf-etale-flat-constructible], represent the descended objects by bounded complexes $P,Q$ of flat constructible sheaves, zero outside these intervals. Refine the finitely many stratifications of their terms by [lem-weil-pbc-constructible-stratification-intersection]. On each stratum, [lem-weil-pbc-locally-constant-tensor], applied to the flat terms in degree zero, shows that $P^i\\otimes_AQ^j$ is locally constant of finite type. Finite sums and the kernels and cokernels computing cohomology are constructible by [thm-constructible-serre]. Each tensor term is flat: tensoring with $P^i\\otimes_AQ^j$ is the composite of two exact tensor functors; finite sums remain exact. Thus $\\operatorname{Tot}(P\\otimes_AQ)$ is a bounded flat complex, supported in $[a+c,b+d]$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site], so it computes the derived tensor and has this Tor interval against every module sheaf. The monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies its exact pro-étale pullback with $K\\otimes_A^{\\mathbf L}L$. The Tor comparison equivalence gives the finite-coefficient tensor assertion of (1).",
+   "text": "Since $X$ is finite type over a field, it is Noetherian and qcqs (apply the locally-Noetherian finite-type lemma; separatedness supplies quasi-separatedness). Unpack the seven alternatives in $h\\Lambda$ and transport both factors along $e:\\Lambda\\cong\\Lambda'$ to the indicated canonical coefficient by the coefficient-isomorphism lemma. The ring-isomorphism tensor comparison identifies the transported specified tensor with the tensor of the transported factors, so it suffices to prove constructibility at $\\Lambda'$. Transport back (no Tor bound needed): restriction along $p_X^*e$ is an exact equivalence [sk-def-sfb-change-of-scalars](4),(5), so it commutes with cohomology and boundedness; it commutes with restriction to strata and covers [def-sfb-comap-upper-star-iso] and sends a model $\\Lambda'_U\\otimes_{\\Lambda'(*)}P$ to $\\Lambda_U\\otimes_{\\Lambda(*)}P$, $P$ finitely presented via $e(*)$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-comap-upper-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Coefficient normalization, original Lean proof paragraph 1."
+   }
+  },
+  {
+   "text": "For finite $A$, every ideal is finite, so $A$ is Noetherian. The finite-Tor comparison descends both factors to bounded constructible etale complexes with ordered Tor intervals $[a,b]$ and $[c,d]$. The flat-constructible-model theorem gives representatives $P,Q$ in those intervals. Apply the new total-tensor lemma: it gives the bounded flat constructible total complex, its constructible cohomology, its K-flat derived identification and summed Tor interval. The monoidal comparison for $\\nu_X^*$ identifies its pullback with the specified pro-etale tensor; the finite-Tor comparison places this pullback in $\\Dctf$, hence in the required constant-model bounded constructible category.",
    "uses": [
     "det-pe-finite-tor-comparison-noetherian",
     "lem-sf-etale-flat-constructible",
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "lem-weil-pbc-locally-constant-tensor",
-    "thm-constructible-serre",
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sfb-finite-flat-constructible-total-tensor",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, bounded flat models and total tensor; Stacks Tags 03TT (lemma-when-ctf), 094H (lemma-locally-constant-tensor-product), 03RZ (lemma-constructible-abelian), 06YQ (lemma-bounded-flat-K-flat), 07A4 (lemma-pullback-tensor-product)"
+    "place": "Proof (1),(2), finite A; original proof step 1 and Lean paragraph 2."
    }
   },
   {
-   "text": "For $\\mathcal O_E$, [det-lem-integral-models-operations](2) gives tensor closure of $\\Dbc$. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [det-thm-sf-pf-field-tensor](1) gives tensor closure of $\\Dbc$. Step 1 identifies these categories with $\\Dctf$, proving the remaining tensor assertions of (1). Taking $E=\\mathbf Q_\\ell$ includes $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$.",
+   "text": "For $\\mathcal O_E$ use clause (2) of integral-model operations. For $E$ and the finite-subextension-valued algebraic closure use clause (1) of rational tensor closure. These assert closure of $\\Dbc$ itself, so the input Tor hypotheses need no further identification of categories. The cases $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are $E=\\mathbf Q_\\ell$.",
    "uses": [
     "det-lem-integral-models-operations",
     "det-thm-sf-pf-field-tensor"
@@ -41,33 +53,47 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "paragraph 1, integral and rational tensor products"
+    "place": "Proof (1),(2), integral and rational coefficients; original proof step 2."
    }
   },
   {
-   "text": "1. Finite type over the field makes X Noetherian and qcqs. Transport along the ring-object\nisomorphism in hΛ; scalar restriction along an isomorphism is an exact monoidal equivalence,\npreserves finite constant presentations, and hence preserves the two constructibility\npredicates and Tor intervals.\n2. For a finite ring A, use finiteTorComparisonNoetherian to descend both complexes with\nunchanged Tor intervals to the etale site. The finite-value flat-constructible-model theorem\nrepresents them by bounded flat constructible complexes in those intervals. Refine the\nfinitely many termwise stratifications. Tensor terms are constructible on the refinement:\nlocally they are tensors of finite A-modules, and these are finite. Finite direct sums,\nkernels and cokernels remain constructible. The total tensor is bounded, has these\nconstructible cohomology sheaves, and is K-flat since it is bounded with flat terms. The\nmonoidal comparison pullback identifies it with the specified pro-etale derived tensor.\n3. For O_E apply integralModelsOperations(2); for E and the finite-subextension-valued\nalgebraic closure apply tensorClosureRational(1). The base-field cases Z_l and Q_l are\nO_E and E at E = Q_l. For the retained all-continuous algebraic-closure coefficient,\napply the lisse-generator argument directly: finite presented scalar modules over the\nfield are finite free; after refining the stratifications the tensor of the two lisse\nfactors is lisse finite free. The locally closed projection formula and finite-cone\ninduction give constructibility, as in the proof of tensorClosureRational. This keeps the all-continuous coefficient distinct\nfrom the finite-subextension-valued one. Transport back through the isomorphism of step 1.\nThe zero ring, zero complexes and empty strata are included by the same constructions.",
+   "text": "For the all-continuous algebraic closure use the new finite-cone generation theorem, with its exact constant-model convention and triangulated target. On two generators $a_!L,b_!M$, the new intersection comparison identifies their tensor with $c_!(r^*L\\otimes s^*M)$ on $W=S\\times_XT$. Its rank-product finite free local model and zero model off $W$ put it in that target. Derived tensor is exact in each variable: choose a K-flat representative and apply the tensor-triangulated lemma (and symmetry for the other variable). Induct first through a finite cone construction of the second factor for each first generator, then through that of the first factor. Shifts, zero and each triangle remain in the triangulated target. This proves this last coefficient case without identifying it with finite-subextension-valued sections. Step 1 finishes the original statement. All three new lemmas include the zero and empty cases.",
    "uses": [
-    "lem-sfb-condensed-coefficient-iso-constructible"
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "lem-sfb-locally-closed-generator-tensor-intersection",
+    "lem-pc-kflat-resolution",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "sk-def-sfb-derived-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Original Lean proof paragraph 3; lisse-generator argument of rational tensor closure, proof (1)."
+   }
   }
  ],
  "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-comap-upper-star-iso",
   "det-pe-finite-tor-comparison-noetherian",
   "lem-sf-etale-flat-constructible",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lem-weil-pbc-locally-constant-tensor",
-  "thm-constructible-serre",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-finite-flat-constructible-total-tensor",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "det-lem-integral-models-operations",
   "det-thm-sf-pf-field-tensor",
-  "lem-sfb-condensed-coefficient-iso-constructible"
+  "lem-sfb-continuous-qbar-constructible-generators",
+  "lem-sfb-locally-closed-generator-tensor-intersection",
+  "lem-pc-kflat-resolution",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "sk-def-sfb-derived-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.md",
-  "place": "J6: isolate the indicated strictly separate argument of the original proof; coefficient equivalence is explicit, and continuous Qbar is kept distinct."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Finite flat models and integral/rational cases as in proof (1),(2); all-continuous case uses the original Lean docstring and the separate rational lisse-generator argument, without identifying the two algebraic-closure coefficients."
  },
  "mathlib_searches": [
   {
@@ -128,14 +154,12 @@
   "date": "2026-10-20"
  },
  "reviewed": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J6",
+  "reviewer": "NT-cc-Q60-a70c54543",
+  "group": "Q60",
   "result": "pass",
-  "landing": "20261020T051421-L-1674693",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-a70c54543 (reviewer sub-agent of L); spot-checked: FIX: the re-split is faithful. I compared the base proof with the new one step by step. The old finite total-tensor calculation (common refinement, 094H, flat terms, 03RZ Serre closure, 06YQ K-flatness, summed Tor interval) is now the new node lem-sfb-finite-flat-constructible-total-tensor. The old all-continuous Q̄ℓ paragraph is now lem-sfb-continuous-qbar-constructible-generators (finite-cone generation equality plus triangulated target) and lem-sfb-locally-closed-generator-tensor-intersection (a_!L⊗b_!M ≅ c_!(r^*L⊗s^*M) on W=S×_X T, free of rank mn). The parent keeps the descent, the ν^* monoidal comparison, the integral and rational citations and the two-variable induction. The assembly is 2864 characters after my fix. The statement is byte-identical to live, and the item is not dropped or superseded. Source checks: the generator and intersection nodes follow sk-thm-sf-pf-field-tensor.proof.md (1) step for step, and the finite node follows sk-thm-sf-ctf-stability-direct-images.proof.md (1),(2). There is no SGA. All three new nodes are true. C(S,Ω) with the ℓ-adic topology is strictly larger than the finite-subextension ring, so the existing generation and heart nodes (det-cor-coefficient-heart-ii-generation, det-lem-coefficient-heart-closure, lem-weil-pbc-condensed-constructible-serre) and IsEllAdicFinitenessCoefficient do not cover it, and the generator node is not a duplicate. Its truth rests on the field scalar ring (lisse = finite free), on lisse modules being representations of π1^proet (BS 7.4.7), and on extensions splitting on w-contractible covers. The intersection node uses the open/closed projection formulas plus base change and holds for any condensed Λ. None of the new nodes restates the item. Step 3 correctly drops the old unsupported claim that Step 1 identifies these categories with Dctf. Repaired fault (C-type missing citation): step 1 transported the tensor back with lem-sfb-condensed-coefficient-iso-constructible, whose statement covers only Dctf, but the tensor is known only to lie in Dbc (the item asserts no Tor bound). I added the justification: restriction along p_X^*e is an exact equivalence by sk-def-sfb-change-of-scalars (4),(5), it commutes with pullback to strata and covers by def-sfb-comap-upper-star-iso, and it carries finite constant models to finite constant models through e(*). I updated uses, proof_deps and tool_uses to match. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-admissible-tensor-constructibility.json. Maintainer note: blueprint.from.node is null on the new nodes because the item's created.item names a Lean module, which breaks the ancestry chain.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -147,5 +171,82 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-admissible-tensor-constructibility",
+  "worker": "stage1",
+  "group": "Q60",
+  "summary": "Deliberate human-requested re-split: retain the statement and coefficient conventions; distribute the bounded total-tensor calculation, all-continuous finite-cone generation, and locally closed generator intersection comparison into three independent statement-only nodes. Reuse coefficient-isomorphism, finite-site comparison, flat-model, integral and rational closure nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (1),(2), finite A totalization and integral/rational tensor; original AdmissibleTensorConstructibility proof paragraphs 1--3, including the distinct all-continuous compatibility branch.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-sfb-condensed-coefficient-iso-constructible",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-sfb-ring-isomorphism-tensor-transport",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "det-lem-integral-models-operations",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "det-thm-sf-pf-field-tensor",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "Generic coefficient transport, scheme finiteness, finite-site comparison or derived tensor tool used as stated; this does not replace the unit tensor route."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "Generic coefficient-transport definition used as stated (reviewer FIX: transport of the Dbc-only conclusion back along the coefficient isomorphism); does not replace the unit tensor route."
+   },
+   {
+    "node": "def-sfb-comap-upper-star-iso",
+    "why": "Generic coefficient-transport definition used as stated (reviewer FIX: transport of the Dbc-only conclusion back along the coefficient isomorphism); does not replace the unit tensor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sf-etale-flat-constructible",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-lem-integral-models-operations",
+  "det-thm-sf-pf-field-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-comap-upper-star-iso"
+ ]
 }
