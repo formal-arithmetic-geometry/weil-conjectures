@@ -20,9 +20,87 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small-site skeleton in the common coefficient universe of [def-weil-size-convention]. For any ordinary $A_X$-module sheaf $F$, apply [lem-exc-constant-field-module-flat] with $\\kappa=A$ and $J=X_{\\mathrm{proet}}$. Its smallness hypothesis holds by this skeleton convention; use the ordinary commutative-ring and abelian-group sheafifications on the small site. Abelian sheafification exists by [lem-sfb-grothendieck-sheafification], and its locally-bijective criterion is [lem-weil-pbc-site-sheafification-iso-locally-bijective]. The associated constant ring is exactly the coefficient ring $A_X$ in the item. Hence $F$ is flat in the tensor-exactness sense. In particular this applies to each constructible cohomology sheaf of $P$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-exc-constant-field-module-flat",
+    "lem-sfb-grothendieck-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ER (definition-flat) and 08FC (lemma-flat-eq); Fields Tag 09FN (lemma-vector-space-is-free); application of the existing constant-field flatness theorem"
+   }
+  },
+  {
+   "text": "Let $F$ be any constructible $A_X$-module sheaf. Apply clauses (1) and (2) of [det-sf-flat-model-generation], using Step 1 for flatness. Its hypotheses are precisely a finite commutative ring and a Noetherian scheme on the ordinary pro-étale site; no finite-type or invertibility hypothesis is needed. Obtain finitely many locally closed strata $a_k:S_k\\hookrightarrow X$, constructible because the underlying space of the Noetherian scheme $X$ is Noetherian, so every locally closed subset is constructible [def-weil-constructible-subset]; locally constant $L_k=F|_{S_k}$ with finite projective $A$-values, and a finite sheaf filtration $0=F_0\\subset F_1\\subset\\cdots\\subset F_m=F$ whose quotients are $a_{k!}L_k$. By that node's convention, $a_{k!}L_k=g_{k*}j_{k!}L_k$ for the open immersion into the scheme-theoretic closure followed by its closed immersion. A finitely generated module over the field $A$ is a finite-dimensional vector space, so these are generators of exactly the kind allowed here. We use the finite sheaf filtration in clause (2).",
+   "uses": [
+    "det-sf-flat-model-generation",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clauses (1) and (2), with the ordinary pro-étale coefficient and locally closed extension conventions in the DAG statement"
+   }
+  },
+  {
+   "text": "For the filtration in Step 2, each short exact sequence $0\\to F_{k-1}\\to F_k\\to g_{k*}j_{k!}L_k\\to0$ gives the distinguished triangle $F_{k-1}[0]\\to F_k[0]\\to(g_{k*}j_{k!}L_k)[0]\\to F_{k-1}[1]$ by [lem-sf-derived-ses-triangle]. Induct on $k=0,\\ldots,m$: the initial object is zero, and at each successor the first and third terms have already been constructed, so the allowed middle-term extension constructs $F_k[0]$. The last object is $F[0]$. Thus every constructible sheaf in degree zero has a finite construction of the required form.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), applied to sheaves placed in degree zero"
+   }
+  },
+  {
+   "text": "Choose integers $a\\le b$ with $H^q(P)=0$ for $q<a$ or $q>b$. Use the canonical truncations of [def-kun-truncations] and choose a complex representing $P$ in [def-weil-abstract-derived-category]. The cohomology formulas for good truncations show that $\\tau_{\\le a-1}P$ is acyclic, hence isomorphic to zero, and that the inclusion $\\tau_{\\le b}P\\to P$ is a quasi-isomorphism, hence an isomorphism in the derived category. These statements also cover an acyclic $P$, for which any interval can be chosen.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), with the cohomology formulas in Homology section-truncations"
+   }
+  },
+  {
+   "text": "For each integer $q=a,\\ldots,b$, [lem-weil-pbc-truncation-triangle] gives $\\tau_{\\le q-1}P\\to\\tau_{\\le q}P\\to H^q(P)[-q]\\to(\\tau_{\\le q-1}P)[1]$. Step 3 constructs $H^q(P)[0]$, and one further allowed shift operation, the automorphism $[-q]$ of the triangulated category [def-weil-triangulated-category], constructs $H^q(P)[-q]$ (the complex with $H^q(P)$ in degree $q$ under the convention $(M[1])^r=M^{r+1}$). Starting at $\\tau_{\\le a-1}P\\cong0$, induction over these $b-a+1$ triangles constructs the middle term $\\tau_{\\le q}P$ from the already constructed first and third terms. At $q=b$ this is $P$ up to the isomorphism of Step 4. Only finitely many $q$ occur, and each contributes finitely many strata and triangle steps. This gives one finite collection of the required generators and finitely many shifts and extensions. For the empty scheme or the zero object the construction may start and end at zero.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), second displayed triangle and finite induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-constructible-subset",
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "det-sf-flat-model-generation",
+  "lem-exc-constant-field-module-flat",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.3.3 and 6.3.9 and the finite dévissage in Lemma 6.7.13; explicit ordinary finite-field argument through the existing sheaf-filtration node and Stacks Tags 0152 and 08J5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +129,52 @@
    "results": "{\"t\": \"2026-10-21T03:03:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"filtration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits give bounded representatives, categorical finite limits/colimits, condensed constant sheaves, or constructible topologies, not finite stratified generation of pro-etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onstructible|[Ss]tratifi).*(filtration|[Gg]enerat)|(filtration|[Gg]enerat).*([Cc]onstructible|[Ss]tratifi)",
+   "results": "{\"t\": \"2026-10-21T03:30:05Z\", \"tool\": \"grep\", \"query\": \"([Cc]onstructible|[Ss]tratifi).*(filtration|[Gg]enerat)|(filtration|[Gg]enerat).*([Cc]onstructible|[Ss]tratifi)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\"], \"digest\": \"84d58043baf15d0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only topological constructible-set hits, or no hits; no sheaf stratified-generation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible derived sheaf has a finite filtration by extensions by zero of lisse sheaves on locally closed strata",
+   "results": "{\"t\": \"2026-10-21T03:30:06Z\", \"tool\": \"leansearch\", \"query\": \"A bounded constructible derived sheaf has a finite filtration by extensions by zero of lisse sheaves on locally closed strata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.lanLightCondSet\", \"CategoryTheory.sheafIsAbelian\", \"DerivedCategory.TStructure.t\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"LightCondensed.IsDiscrete\", \"SheafOfModules.Finite.hasFiniteLimits\"], \"digest\": \"9ea893c1f53d7020\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give sheafification, abelian sheaf categories and general t-structures, not the asserted stratified generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "{\"t\": \"2026-10-21T03:30:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex of sheaves over a finite field on a Noetherian scheme is built from locally constant sheaves on strata by finite shifts and extensions",
+   "results": "{\"t\": \"2026-10-21T03:30:16Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded constructible complex of sheaves over a finite field on a Noetherian scheme is built from locally constant sheaves on strata by finite shifts and extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafStonean\", \"CondensedMod.ofSheafCompHaus\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"Condensed.lanSheafProfinite\"], \"digest\": \"e99659b4adb7c7ee\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed constant sheaves or bounded representatives, not finite stratified generation on the pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "stratifiedGeneration|constructible.*[Tt]riang|[Tt]riang.*constructible|[Ss]trat.*[Dd]evissage",
+   "results": "{\"t\": \"2026-10-21T03:30:32Z\", \"tool\": \"grep\", \"query\": \"stratifiedGeneration|constructible.*[Tt]riang|[Tt]riang.*constructible|[Ss]trat.*[Dd]evissage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only topological constructible-set hits, or no hits; no sheaf stratified-generation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite devissage of bounded constructible derived objects using a stratification and the cohomology truncation triangles",
+   "results": "{\"t\": \"2026-10-21T03:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finite devissage of bounded constructible derived objects using a stratification and the cohomology truncation triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\"], \"digest\": \"416d0490195c548a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern condensed constant sheaves or bounded representatives, not finite stratified generation on the pro-etale site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-field-internal-hom-finiteness",
@@ -73,5 +193,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-field-stratified-generation",
+  "worker": "stage1",
+  "summary": "Retained the exact statement. Reused constant-field module flatness and clauses (1)-(2) of the existing flat-model generation node for a finite sheaf filtration, then used short-exact-sequence triangles and a finite canonical truncation tower. No new nodes and no direct summands are needed. Checked each cited statement and the small-site, finite-ring and Noetherian hypotheses. All Mathlib searches are retained and the six Q119 searches are appended verbatim from their log.",
+  "blueprint": "Nearest ancestor lem-sfb-dc-hom-preserves: finite-coefficient internal-Hom finiteness reduction after the reduction-modulo-varpi display; realizes its finite stratified devissage input via the existing det-sf-flat-model-generation clauses (1)-(2) and the finite cohomological truncation tower.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-constant-field-module-flat",
+    "why": "Generic flatness of ordinary modules over a constant field sheaf; supplies exactly the hypothesis of the existing stratified sheaf-filtration theorem."
+   },
+   {
+    "node": "lem-sfb-grothendieck-sheafification",
+    "why": "Generic existence of abelian sheafification on the small skeleton, needed for the constant-field flatness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic local-bijectivity criterion for ordinary abelian sheafification, needed for the same flatness theorem."
+   },
+   {
+    "node": "det-sf-flat-model-generation",
+    "why": "Generic finite sheaf filtration on a Noetherian scheme, used only in clauses (1)-(2); supplies the stated generators without using thick generation or retract closure."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic passage from a short exact sequence of sheaves to a distinguished triangle in the ordinary derived category."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive cohomological truncation triangle in any abelian derived category; supplies the finite Postnikov induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-constant-field-module-flat",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "det-sf-flat-model-generation",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-c91bb89b4",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-c91bb89b4 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and true: it is the field-coefficient case of Bhatt-Scholze Lemmas 6.3.3 and 6.3.9 (pp. 45-46; perfect values equal finite-dimensional values over a field). It also holds in the small cases: zero, acyclic, empty X, one stratum, one cohomology degree. Step 1 meets every hypothesis of lem-exc-constant-field-module-flat: the V-small skeleton, lem-sfb-grothendieck-sheafification, and the local-bijectivity leaf. Step 2 meets the hypotheses of det-sf-flat-model-generation clauses (1)-(2): finite ring, Noetherian X, pro-etale site with ordinary constant-ring modules. That node's tower proof shows the 'iterated extension' is a finite filtration with quotients a_{k!}L_k = g_*j_!L_k. Step 3 is lem-sf-derived-ses-triangle (Stacks 0152) in the abelian category Mod(A_X). Step 4 follows from the good-truncation cohomology formulas of def-kun-truncations. Step 5 is lem-weil-pbc-truncation-triangle (Stacks 08J5), with the third term H^q[-q] and a correctly set-up induction from q=a to b. I accept all six declared tool_uses as generic tools. No duplicate exists: lem-sfb-stratified-tor-interval-devissage, lem-per-noetherian-ctf-flat-model, lem-per-constructible-extension-finite-stage and det-def-localizing-closure-ctf-equals-bc all state something different. There are no new nodes and no SGA citations. FIX, two repairs: (C1/C4) clause (1) of the flat-model node gives only locally closed strata, while the item requires constructible ones. Step 2 now says X is a Noetherian space, so they are constructible, and cites def-weil-constructible-subset (Stacks 005L); it is added to uses and proof_deps. (C4) Step 5 said shifts of distinguished triangles are distinguished 'by def-weil-triangulated-category', which that definition does not state. I replaced this with one allowed shift [-q] applied to the constructed H^q(P)[0].; 1 file(s) fixed by the reviewer"
  }
 }

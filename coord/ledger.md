@@ -20004,3 +20004,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: returned deliver/Q63/lem-sp-etale-ctf-chart-domain (reviewer RETURN: C5/D1. The existing node lem-sp-finite-compact-support-domains already states the item's main clauses: for the same stan)
 - 03:50 L: merged deliver/Q136/lem-sfb-ringed-complete-triangulated (reviewer FIX; first push; new nodes: 0)
 - 03:50 L: merged deliver/Q18/lem-sfb-subobject-inclusion-cokernel (reviewer PASS; first push; new nodes: 0)
+- 03:50 L: merged deliver/Q119/lem-sfb-finite-field-stratified-generation (reviewer FIX; first push; new nodes: 0)
