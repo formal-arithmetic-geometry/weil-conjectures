@@ -198,5 +198,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b0a1a83a9 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged. It is used by its only citer, det-lem-coefficient-heart-filtration, with f=eps_{k-1}, g=eps_k, alpha=1, phi=d_k; the counit identity supplies f=g phi alpha, so it fits. Step-by-step checks: (1) a representative of [f] is isomorphic over M to f, giving e_f and e_g; p=alpha e_f and q=e_g type-check; cokernels exist by def-sp-abelian. (2) g q i = j_g i = j_f = f e_f = g phi p, and cancelling the monomorphism g gives q i = phi p. (3) The pushout is verified directly against def-weil-pbc-category-colimit (Stacks 002F, categories.tex:1310): u=s q^{-1}, u phi = s i p^{-1} = t, uniqueness from u'q=s; the finite span is small. (4) This applies the Mathlib leaf lem-weil-pbc-pushout-cokernel-iso. I checked it against Stacks 08N3(2) (homology.tex:852), including the orientation, with (w,y,x,z)=(U,V,A',B) and (f,g,h,k)=(i,p,q,phi); its theta pi_i = pi_phi q is the conclusion. Edge cases checked: [f]=[g], A=0, g=id. There are no new nodes. My grep of dag/nodes found no duplicate. All cited off-unit nodes are Mathlib leaves, so no tool_uses are needed. There is no SGA citation and no repair note. proof_deps equals the union of the steps' uses, and the blueprint fields are filled. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.Devissage",
+  "declaration": "CategoryTheory.Subobject.cokernelOfLEMkIso",
+  "statement": "def Subobject.cokernelOfLEMkIso {C : Type*} [Category C] [HasZeroMorphisms C] [HasCokernels C]\n    {B A₁ A₁' A₂ : C} (f₁ : A₁ ⟶ B) (f₂ : A₂ ⟶ B) [Mono f₁] [Mono f₂] (α : A₁ ≅ A₁')\n    (φ : A₁' ⟶ A₂) (hφ : f₁ = α.hom ≫ φ ≫ f₂) (h : mk f₁ ≤ mk f₂) :\n    cokernel (ofLE _ _ h) ≅ cokernel φ :=",
+  "branch": "slopmaster2",
+  "by": "Q08",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact represented-subobject cokernel comparison, specialized to an abelian category. Mathlib Abelian supplies HasZeroMorphisms and HasCokernels. The live server source was read using scompile.py --source; the arbitrary proof h and the chosen-representative map ofLE are retained. No new module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23bb27666",
+  "group": "Q08",
+  "result": "pass",
+  "note": "existing:true record for CategoryTheory.Subobject.cokernelOfLEMkIso (WeilConjectures.ConstructibleSheaf.Devissage:56). Every clause matches the node: Mono f₁ f₂, α iso, hφ : f₁ = α.hom ≫ φ ≫ f₂, arbitrary h : mk f₁ ≤ mk f₂, ι_h = Subobject.ofLE (ofLE_arrow), conclusion cokernel (ofLE _ _ h) ≅ cokernel φ. Hypotheses HasZeroMorphisms+HasCokernels are weaker than Abelian; universes free. Statement field verbatim; branch slopmaster2 follows the convention of the other ConstructibleSheaf existing records; olean published; no other node owns the declaration; node otherwise identical to live; item not dropped. Scratch consumer with the node's abelian signature compiled clean through nt_compile --json (5.7 s); axioms propext/choice/Quot.sound. Report has both sections. No findings, no fixes."
  }
 }

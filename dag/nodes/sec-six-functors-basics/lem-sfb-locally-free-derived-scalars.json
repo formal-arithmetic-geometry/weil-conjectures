@@ -16,7 +16,8 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
   "sk-def-sfb-derived-categories",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-derived-change-of-rings-cochain-model"
  ],
  "proof": [
   {
@@ -252,5 +253,27 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-5bc8526a9 (reviewer sub-agent of L); spot-checked: Not dropped, no re-split note, item still unsplit live, no new nodes, statement and stmt_deps unchanged. Steps 1, 2, 3 and 5 hold. Step 1: the local-basis coordinates give exactly the factorizations of lem-weil-pbc-site-flat-equational-criterion (Stacks 08FC (1)<=>(2) read); r=0 also works. Step 2: lem-pc-bounded-above-flat-kflat-site applies with bound 0; the tag index confirms Stacks 06YQ = lemma-bounded-flat-K-flat, so that node's '06YS' source is a bibliographic slip for the maintainer. Step 3: clause (2) of lem-pur-derived-change-of-rings with the identity K-flat resolution gives the comparison for any ring map. Step 5 (old 4): lem-sfb-localized-site-tensor-restriction plus the inverse finite-basis maps give local freeness with the same ranks. Fault (E6/C4), repaired: the statement's ordinary scalar extension is the coequalizer of sk-def-sfb-change-of-scalars, and its derived extension, per sk-def-sfb-derived-categories, uses the two-sided K-flatness of def-sfb-preserves-kflat-quasi-iso. The proof used only the ringed-site change of rings and def-pc K-flatness, and nothing identified the two. FIX inserts a new Step 4: in Mod(R) the coequalizer collapses by the unitor and balancing to B⊗_R M. M[0] is also K-flat in that two-sided sense, because -⊗M and M⊗- are exact (Step 1, lem-weil-pbc-exact-functor-complex-cohomology). So the blueprint derived extension can be computed on the identity resolution with the same comparison. proof_deps recomputed. Edge cases: rank 0, varying ranks, zero ring, phi=id, Z->Z/2 with M=Z (B not flat), sites without enough points. The four declared off-unit tool uses are generic black boxes and are accepted. Duplicate search found no node stating the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocallyFreeDerivedScalars",
+  "declaration": "SheafOfModules.locallyFree_derived_scalars",
+  "declarations": [
+   "SheafOfModules.locallyFreeScalarComparison",
+   "SheafOfModules.locallyFree_derived_scalars"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocallyFreeDerivedScalars.lean",
+  "statement": "theorem locallyFree_derived_scalars (M : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (hM : ∀ X : C, ∃ S : Sieve X, S ∈ J X ∧ ∀ (U : C) (f : U ⟶ X), S f → ∃ n : ℕ, Nonempty (M.over U ≅ ∏ᶜ (fun _ : Fin n ↦ unit ((derivedChangeRingIndependentCoefficients J R).over U)))) : IsFlatOnSite (R := R) M ∧ CochainComplex.IsKFlatIndependentCoefficients (R := R) ((HomologicalComplex.single _ (.up ℤ) 0).obj M) ∧ ∀ (B : Sheaf J CommRingCat.{r}) (φ : R ⟶ B) [HasDerivedCategory.{wR} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R))] [HasDerivedCategory.{wB} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B))] (D : DerivedChangeOfRingsCochainModel φ), IsIso (locallyFreeScalarComparison D M) ∧ (∀ (U : C) (n : ℕ), Nonempty (M.over U ≅ ∏ᶜ (fun _ : Fin n ↦ unit ((derivedChangeRingIndependentCoefficients J R).over U))) → Nonempty ((D.E.obj M).over U ≅ ∏ᶜ (fun _ : Fin n ↦ unit ((derivedChangeRingIndependentCoefficients J B).over U)))) ∧ (∀ (N : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (a : M ⟶ N), D.T.map (DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map a)) ≫ locallyFreeScalarComparison D N = locallyFreeScalarComparison D M ≫ DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map (D.E.map a)))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-907633512",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of b79577c2: the Lean module is byte-identical (sha256 9d081230). Item stmt_deps now cite the new def-sfb-derived-change-of-rings-cochain-model instead of the theorem lem-pur-derived-change-of-rings and def-pur-sheaf-tensor-product; the theorem stays in proof_deps; the only stmt_deps change against live is this new def node. The new node is existing:true on the unchanged DerivedChangeOfRingsCochainModel module, declaring the structure plus the abbrev derivedChangeRingIndependentCoefficients (from the public import; advisory). Its clauses (i)-(vii) match fields E/obj_eq/map_eq/additive, preserves, T, pointwise, ε/universal, triangulated and computes; no inhabitance is asserted; universes are independent; its stmt_deps cover the declaration owners. No live owner or parallel duplicate exists; check_existing and check_new_node report no failures. Clause table re-confirmed: hM covering sieve with per-arrow n including 0; IsFlatOnSite; K-flatness of the single integer complex; canonical D.ε ≫ Q.map singleMapHomologicalComplex comparison; rank preservation; naturality; no B-flatness. nt_compile --json: item 5.4 s and #check probe of both declarations 3.5 s, EXIT 0, clean."
  }
 }

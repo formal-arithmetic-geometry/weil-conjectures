@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-derived-change-of-rings-cochain-model",
+ "kind": "definition",
+ "title": "Derived change-of-rings cochain presentation",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site small in the chosen module universe [def-weil-pbc-sites-and-cohomology], [def-weil-size-convention], and let $\\varphi:\\mathcal O\\to\\mathcal S$ be a morphism of sheaves of commutative rings. Write $\\mathcal O_{\\rm ring}$ and $\\mathcal S_{\\rm ring}$ for the same sheaves with commutativity forgotten; this is the abbreviation derivedChangeRingIndependentCoefficients. Use their categories of module sheaves [def-weil-sheaf-of-modules-category] and independently chosen ordinary unbounded derived categories with localization functors $Q_{\\mathcal O},Q_{\\mathcal S}$ [def-weil-abstract-derived-category]. Define a derived change-of-rings cochain model for $\\varphi$ to be the following data, with the listed properties: (i) an additive functor $E:\\operatorname{Mod}(\\mathcal O)\\to\\operatorname{Mod}(\\mathcal S)$, whose objects are the sheafified sectionwise scalar extensions $\\mathcal S\\otimes_{\\mathcal O}M$ [def-pur-sheaf-tensor-product], and whose maps are the sheafifications of $1\\otimes a$ (with transport along the specified object equalities); (ii) a proof that termwise $E$ carries every quasi-isomorphism [def-pc-quasi-iso-modules] between K-flat integer cochain complexes [def-pc-kflat-complex] to a quasi-isomorphism; (iii) a functor $T:D(\\mathcal O)\\to D(\\mathcal S)$; (iv) pointwise existence of the total left derived functor of $E^{\\rm Ch}$ followed by $Q_{\\mathcal S}$, at the quasi-isomorphisms; (v) a natural transformation $\\varepsilon:Q_{\\mathcal O}\\mathbin{\\circ}T\\to E^{\\rm Ch}\\mathbin{\\circ}Q_{\\mathcal S}$, where compositions here are written in diagrammatic order, making $T$ the total left derived functor in the universal sense [sk-def-sfb-derived-categories]; (vi) existence of a shift-commutation structure on $T$ for which it is triangulated; and (vii) invertibility of $\\varepsilon_P$ for every K-flat complex $P$. Here $E^{\\rm Ch}$ applies $E$ termwise to unbounded integer cochain complexes. This defines the type of presentations with their properties; it does not assert that this type is inhabited.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "sk-def-sfb-derived-categories"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT and 06YY (lemma-derived-base-change), the universal derived extension and its K-flat computation; universal property in derived.tex Tag 06XN"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain model for derived extension of scalars of sheaves of modules with its universal counit and K-flat computations",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.counit_app; CategoryTheory.Functor.totalLeftDerivedCounit; ModuleCat.ExtendRestrictScalarsAdj.counit; comonadicExtendScalars; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; CompHausLike.LocallyConstant.counit.",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib presentation structure; reuse the existing project structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.DerivedChangeOfRingsCochainModel",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'SheafOfModules.DerivedChangeOfRingsCochainModel'",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration; reuse the existing project structure."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedChangeOfRingsCochainModel|derivedChangeRingIndependentCoefficients",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg DerivedChangeOfRingsCochainModel|derivedChangeRingIndependentCoefficients lean/WeilConjectures lean/Sheaf; corresponding DAG search; tools/blueprint_refs.py search derived change of rings",
+   "results": "No occurrence in lean/WeilConjectures. Existing structure at lean/Sheaf/Algebra/Homology/DerivedChangeOfRingsCochainModel.lean:106; existing abbreviation at lean/Sheaf/Algebra/Homology/DerivedChangeOfRingsIndependentCoefficients.lean:55. DAG definition search finds def-zl-derived-change-of-rings-model, which instead defines canonicalDerivedChangeOfRingsModel, a chosen inhabitant, and other application-specific models. No definition node owns the presentation structure. Blueprint search returns 8 application nodes, none defining this structure.",
+   "date": "2026-10-21",
+   "verdict": "Existing project declarations reused with existing:true; new DAG definition node needed as required by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-free-derived-scalars",
+  "date": "2026-10-21",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-generators",
+   "place": "Proof (3), canonical derived reduction of a locally finite free lattice, and proof (1), degree-zero rationalization: the presentation type used to state the canonical scalar comparison.",
+   "via": [
+    "lem-sfb-locally-free-derived-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel",
+  "declaration": "SheafOfModules.DerivedChangeOfRingsCochainModel",
+  "declarations": [
+   "SheafOfModules.DerivedChangeOfRingsCochainModel",
+   "SheafOfModules.derivedChangeRingIndependentCoefficients"
+  ],
+  "statement": "structure DerivedChangeOfRingsCochainModel",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Returned-delivery repair: records the existing presentation structure and its publicly imported coefficient abbreviation as definitions, without changing either module. Its E, T and ε projections are the ordinary extension, derived functor and canonical comparison used by the item. The distinct existence theorem nonempty_derivedChangeOfRingsCochainModel remains lem-pur-derived-change-of-rings and is used only as a proof dependency. The abbreviation is defined in the public import DerivedChangeOfRingsIndependentCoefficients."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-907633512",
+  "group": "Q60",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-907633512",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of b79577c2: the Lean module is byte-identical (sha256 9d081230). Item stmt_deps now cite the new def-sfb-derived-change-of-rings-cochain-model instead of the theorem lem-pur-derived-change-of-rings and def-pur-sheaf-tensor-product; the theorem stays in proof_deps; the only stmt_deps change against live is this new def node. The new node is existing:true on the unchanged DerivedChangeOfRingsCochainModel module, declaring the structure plus the abbrev derivedChangeRingIndependentCoefficients (from the public import; advisory). Its clauses (i)-(vii) match fields E/obj_eq/map_eq/additive, preserves, T, pointwise, ε/universal, triangulated and computes; no inhabitance is asserted; universes are independent; its stmt_deps cover the declaration owners. No live owner or parallel duplicate exists; check_existing and check_new_node report no failures. Clause table re-confirmed: hM covering sieve with per-arrow n including 0; IsFlatOnSite; K-flatness of the single integer complex; canonical D.ε ≫ Q.map singleMapHomologicalComplex comparison; rank preservation; naturality; no B-flatness. nt_compile --json: item 5.4 s and #check probe of both declarations 3.5 s, EXIT 0, clean."
+ }
+}

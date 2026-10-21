@@ -257,5 +257,29 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-e0aea6a2d (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. The statement is unchanged and correctly generalizes the 'On the point' paragraph of sk-lem-pe-derived-nakayama-resolution.proof.md (lines 5-13), which 'Triangles' (lines 24-31) reuses: injectivity, continuous division through the topological kernel, and lifting the values of the finite discrete quotient. Steps 1-4 are elementary and correct. The homeomorphism onto ker g is used only in step 3, and it is necessary: discrete Z_p mapping to p-adic Z_p with T2=0 fails without it. Discreteness of T2 is used in step 4. I read the statements of all six cited nodes. Step 5 matches them: sheaves of continuous functions; lem-weil-pbc-sheaf-tensor-closed supplies the hypothesis of def-weil-pbc-internal-abelian-sheaf-module-equivalence, which preserves sections and restrictions; and with a larger coefficient universe the site is essentially small. Step 6 uses the sectionwise kernel and the sheafified cokernel from def-weil-sheaf-of-modules-category, then transports across the equivalence. Both citations in the parent det-pe-derived-nakayama-resolution meet every hypothesis: T2 is O_E/a^r with a^rA open, or the finite quotients B_m, B_{n+m}, B_n. Edge cases checked: S empty, S a point, T2=0. I found no duplicate in the DAG and no cycle. Mathlib was searched with all four tools. The six declared tool_uses are definitions or generic sheaf foundations, so I accept them. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteSectionsFiniteQuotient",
+  "declaration": "Profinite.continuousSections_finiteDiscrete_shortExact",
+  "declarations": [
+   "Profinite.continuousSectionsModule",
+   "Profinite.continuousSections_finiteDiscrete_shortExact"
+  ],
+  "file": "lean/Sheaf/Topology/ProfiniteSectionsFiniteQuotient.lean",
+  "statement": "theorem continuousSections_finiteDiscrete_shortExact (A T₀ T₁ T₂ : Type u) [CommRing A] [CommRing T₀] [CommRing T₁] [CommRing T₂] [TopologicalSpace A] [TopologicalSpace T₀] [TopologicalSpace T₁] [TopologicalSpace T₂] [IsTopologicalRing A] [IsTopologicalRing T₀] [IsTopologicalRing T₁] [IsTopologicalRing T₂] [Algebra A T₀] [Algebra A T₁] [Algebra A T₂] [ContinuousSMul A T₀] [ContinuousSMul A T₁] [ContinuousSMul A T₂] (f : T₀ →L[A] T₁) (g : T₁ →L[A] T₂) (hf : Function.Injective f) (hg : Function.Surjective g) (hex : LinearMap.range f.toLinearMap = LinearMap.ker g.toLinearMap) [Finite T₂] [DiscreteTopology T₂] (hker : ∃ e : T₀ ≃ₜ LinearMap.ker g.toLinearMap, ∀ t : T₀, (e t).val = f t) : (∀ S : Profinite.{u}, ∃ (F : C(S, T₀) →ₗ[C(S, A)] C(S, T₁)) (G : C(S, T₁) →ₗ[C(S, A)] C(S, T₂)), (∀ a : C(S, T₀), ∀ s : S, F a s = f (a s)) ∧ (∀ a : C(S, T₁), ∀ s : S, G a s = g (a s)) ∧ Function.Injective F ∧ Function.Exact F G ∧ Function.Surjective G) ∧ (∃ (F : continuousSectionsModule A T₀ ⟶ continuousSectionsModule A T₁) (G : continuousSectionsModule A T₁ ⟶ continuousSectionsModule A T₂) (h : F ≫ G = 0), (∀ (S : Profinite.{u}) (a : ULift.{u + 1} C(S, T₀)) (s : S), ((F.hom.hom.app (op S)) a).down s = f (a.down s)) ∧ (∀ (S : Profinite.{u}) (a : ULift.{u + 1} C(S, T₁)) (s : S), ((G.hom.hom.app (op S)) a).down s = g (a.down s)) ∧ (ShortComplex.mk F G h).ShortExact)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The real-data helper continuousSectionsModule restricts the regular continuous-function module along the recorded postcomposition Profinite.continuousMapRingSheafMapOfUniverse (def-sfb-continuous-map-condensed-ring-map); continuousCoefficientRingSheaf T is definitionally continuousMapRingSheafOfUniverse.{u, u} T, with the same MonObj. The theorem includes sectionwise C(S,A)-linearity and short exactness and condensed internal-module short exactness. All existential arrows are uniquely prescribed by their pointwise section formulas. ContinuousSMul is equivalent to continuity of the unital scalar ring map by continuous_algebraMap_iff_smul. The existing continuousCoefficientRingSheaf/Obj constructions retain arbitrary coefficient universes, avoiding the older continuousMapRingSheaf Type-0 restriction.",
+  "fixed_by": "NT-stage2-cc-464af2f74"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-464af2f74",
+  "group": "NG",
+  "result": "fix",
+  "note": "Read node, both stmt_dep records, source place, delivered module/report and the used declarations (continuousCoefficientRingSheaf/Obj, ContinuousMapCondensedRing(+Map), sfbSheafTensorStructure, ContinuousMap.module', Mod.comap/regular). All hypotheses (comm. top. rings, Algebra+ContinuousSMul = continuous unital scalar map, continuous A-linear f,g, injective/surjective/range=ker, finite discrete T2, homeomorphism onto ker g with underlying map f) and both conclusions (sectionwise C(S,A)-linear short exactness with pointwise-pinned arrows; ShortExact in Mod over continuousCoefficientRingObj A with section-pinned arrows) match the node. Probe: monoidal = Sheaf.monoidalCategory; MonObj rfl-equal to recorded continuousMapRingObjOfUniverseMonObj.{u,u} for sfbSheafTensorStructure; universe convention = Profinite.CondensedRing. Edge cases ok; one sorry; docstrings ok; statement verbatim. F1 (H4): helper continuousSectionsScalarSheafMap duplicates recorded Profinite.continuousMapRingSheafMapOfUniverse (def-sfb-continuous-map-condensed-ring-map), rfl-equal. Fix: removed helper, continuousSectionsModule uses continuousMapRingSheafMapOfUniverse.{u,u} (rfl-equal to delivered), public import ContinuousMapCondensedRingMap; lean-record.json (declarations, note) and report.md with maintainer section. Delivered and fixed files compile with nt_compile rc 0, no warnings; statement unchanged."
  }
 }

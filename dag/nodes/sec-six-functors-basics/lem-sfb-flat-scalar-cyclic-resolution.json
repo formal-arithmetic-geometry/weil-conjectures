@@ -11,7 +11,8 @@
   "def-weil-pbc-constant-sheaf",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof": [
   {
@@ -224,5 +225,33 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-96ab709aa (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement in full. The delivery creates no new nodes. The item was created by Q19's re-split of det-lem-integral-models-operations (its old steps 5-7). Its statement and stmt_deps are byte-identical to the Q19 base, so nothing was weakened. In the live and side-live clones the node is still unsplit, it is not on any dropped list, and no SGA source is cited. The statement is true. Small cases checked: a a unit, R=0, R=A on the point site, a=0 excluded, and A=Z with R=(Z/2)_C and a=2, which shows the flatness hypothesis is needed. Step 1: exact sheafification (Stacks 03EI, read at sites-modules.tex:874) of the injective map a on the constant presheaf. Step 2: the flatness definition 03ER and the tensor unit at presheaf level (03EK), with kernels sectionwise (03DA). Step 3: the two-term cohomology calculation and the quasi-isomorphism (0115). Step 4: R-flatness from the unit isomorphism, kept separate from flatness over A_C. Step 5: lem-pc-bounded-above-flat-kflat-site with b=0, which is Stacks 06YQ lemma-bounded-flat-K-flat, read at sites-cohomology.tex:3120. Step 6: the 'one K-flat factor' sentence of lem-weil-pbc-ringed-projection-mate-exact at f=id (Stacks 06YU, line 3300). proof_deps equals the union of uses, and all step tags check out against tags/tags. I accept both declared tool uses (bounded-flat K-flat criterion, generic derived-tensor computation). None of these is a duplicate: lem-pur-constant-two-term-resolution (Z_l only), lem-sfb-scalar-model-finite-flat-resolution (DVR, existence of some resolution only), lem-sfb-locally-free-derived-scalars. Maintainer note: the existing node lem-pc-bounded-above-flat-kflat-site has source 'Lemma 06YS', which should be 06YQ; 06YS is lemma-K-flat-resolution. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatScalarCyclicResolution",
+  "declaration": "SheafOfModules.flat_scalar_cyclic_resolution",
+  "declarations": [
+   "SheafOfModules.scalarCyclicBase",
+   "SheafOfModules.scalarCyclicRing",
+   "SheafOfModules.scalarCyclicPresheafMap",
+   "SheafOfModules.scalarCyclicMultiplication",
+   "SheafOfModules.scalarCyclicComplex",
+   "SheafOfModules.scalarCyclicQuotient",
+   "SheafOfModules.flat_scalar_cyclic_resolution"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatScalarCyclicResolution.lean",
+  "statement": "theorem flat_scalar_cyclic_resolution [IsDomain A] [HasDerivedCategory.{w} (SheafOfModules.{r} (scalarCyclicRing R))] (hflat : IsFlatOnSite (J := J) (R := scalarCyclicBase J A) ((restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map α)).obj (unit (scalarCyclicRing R)))) (a : A) (ha : a ≠ 0) : Mono (scalarCyclicMultiplication R α a) ∧ ∃ ε : scalarCyclicComplex R α a ⟶ (CochainComplex.singleFunctor _ 0).obj (scalarCyclicQuotient R α a), CochainComplex.mappingCone.inr ((CochainComplex.singleFunctor _ 0).map (scalarCyclicMultiplication R α a)) ≫ ε = (CochainComplex.singleFunctor _ 0).map (cokernel.π (scalarCyclicMultiplication R α a)) ∧ CochainComplex.IsKFlatResolutionIndependentCoefficients ε ∧ CochainComplex.IsKFlatIndependentCoefficients ((CochainComplex.singleFunctor _ 0).obj (unit (scalarCyclicRing R))) ∧ ∀ M : CochainComplex (SheafOfModules.{r} (scalarCyclicRing R)) ℤ, Nonempty ((siteDerivedTensorIndependentCoefficients J R).obj (DerivedCategory.Q.obj M, DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj (scalarCyclicQuotient R α a))) ≅ DerivedCategory.Q.obj (CochainComplex.mapBifunctor M (scalarCyclicComplex R α a) (curriedTensor _)))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary abbreviations reuse the recorded constant sheaf and module category. The scalar map is constructed from the sheafification adjunction, the displayed complex is its degree-zero mapping cone, and the quotient is its sheaf cokernel. The augmentation is specified by the cokernel projection, and the final clause uses the existing independent-coefficient derived tensor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d62099460",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsFlatOnSite over constantSheaf A via restrictScalars α (03ER(3)), Mono of the real scalar map (unitHomEquiv.symm of the α(a) section), cone of a on R[0] = displayed complex (deg −1,0, d=+a), augmentation pinned by inr≫ε=π (unique since the cone's homotopy part is 0), IsKFlatResolutionIndependentCoefficients ε, R[0] K-flat, ∀ unbounded M Nonempty(M⊗^L Q(R/aR) ≅ Q(Tot(M⊗C))) with the recorded siteDerivedTensorIndependentCoefficients; monoidal instances agree (IsMonoidal is Prop). Mechanical theorem-stmt_dep finding: the tensor is .choose of site_derived_tensor_descent_independentCoefficients, a theorem-constructed object → PASS on that point. Edge cases a unit, R=0, point site, empty site, A=ℤ R=(ℤ/2) a=2 checked. No duplicate found; docstrings carry source, blueprint and 6 steps; one sorry; statement verbatim. nt_compile --json clean in 12.1 s. Advisories: projection-mate-exact module imported but not usable (single-universe abstract tensor field); object-level Nonempty suffices for the citer det-lem-integral-models-operations; explicit HasWeakSheafify harmless."
  }
 }

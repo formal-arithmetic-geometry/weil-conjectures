@@ -249,5 +249,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d9bc77301 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, the blueprint source (def-sfb-module-open-lower-shriek.proof.md, first sentence) and the project's Mod/Limits.lean lines 1-247 (sorry-free). New node lem-sfb-modobj-forget-creates: true, and not a restatement of its parent. It lifts underlying limits, and underlying colimits when A⊗- preserves J-colimits, to internal A-modules. Uniqueness of the action follows from joint mono/epi. No extra hypothesis is needed, since T² preserves J-colimits when T does (Lean isColimitTensorLeftTensorLeft). It holds in all the small cases tested: J empty, J a single object, M-sets in Set, and Ab, where it specializes the existing lem-sfb-modobj-kernels/cokernels. It is strictly smaller than the item, which still proves preservation by Res_φ through uniqueness of the restricted action (steps 3 and 4, using clause 2 for both S and R). The arbitrary-cone transfer is written out. Steps 2 and 5 really are elementary from def-sfb-modobj-restriction and def-galois-exact-functor. Duplicate scan of all module, ring and monoid-object nodes found nothing that states the new node; Mathlib has no internal-module (co)limit creation. The project's Mod.preservesFinite(Co)Limits_comap (DerivedExtendScalars.lean:63-94) needs an abelian C, so B10 does not apply to the item. First delivery: live item still unsplit, no repair note, not dropped, no SGA, nothing off-unit beyond mathlib definitions. Maintainer note: Mod.createsLimit and Mod.createsColimit (Limits.lean:109 and 215) are attachment candidates for the new node, whose lean_audit is absent and left to tooling."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Monoidal.ModuleRestrictionFiniteExact",
+  "declaration": "CategoryTheory.Mod.finite_limits_colimits_exact_comap",
+  "file": "lean/Sheaf/CategoryTheory/Monoidal/ModuleRestrictionFiniteExact.lean",
+  "statement": "theorem finite_limits_colimits_exact_comap {C : Type u} [Category.{v} C] [MonoidalCategory C] [HasFiniteLimits C] [HasFiniteColimits C] {R S : C} [MonObj R] [MonObj S] (φ : R ⟶ S) [IsMonHom φ] [PreservesFiniteColimits (tensorLeft R)] [PreservesFiniteColimits (tensorLeft S)] : HasFiniteLimits (Mod C R) ∧ HasFiniteColimits (Mod C R) ∧ HasFiniteLimits (Mod C S) ∧ HasFiniteColimits (Mod C S) ∧ exactFunctor (Mod C S) (Mod C R) (comap (D := C) φ)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48a717822",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match: finite (co)limits in C, MonObj R S, IsMonHom φ (non-invertible allowed), PreservesFiniteColimits tensorLeft R and S; conclusion has the four HasFinite(Co)Limits (Mod C _) clauses plus exactFunctor (comap φ), which a probe confirmed by Iff.rfl to be PreservesFiniteLimits ∧ PreservesFiniteColimits; comap is the dependency's Mathlib match (probe: obj X = M.X by rfl). No braiding, closed, commutative, Abelian or additivity assumption; u and v independent; empty diagram covered via R⊗0≅0. Statement true: the existence clauses follow directly from the project's Mod/Limits.lean instances (probe compiled); restriction commutes with the forgetful functors that create them. Not a duplicate: the project's Mod.preservesFinite(Co)Limits_comap need Abelian and MonoidalPreadditive. Docstrings give the source place (blueprint read) and steps 1-5; sorry only; lean.statement verbatim; item node otherwise identical to live; first delivery, not dropped. nt_compile --json clean in 2.3 s with no warnings. Advisory: the plain Mod.Limits import is unused by the statement and kept for the proof."
  }
 }

@@ -193,5 +193,23 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-8602dd7c3 (reviewer sub-agent of L); spot-checked: Read in full. No new nodes; the statement, stmt_deps and blueprint are unchanged, and the delivery only adds a 5-step proof to a node that had none. No re-split note applies, the item is not in a dropped list, and there is no SGA. The statement is true, including r=0, |J|=1 and rank 1; nonemptiness and finiteness of J are needed. It matches the blueprint main-20261015 sk-lem-stratified-lattice-trace.proof.md, Local computation para 2. Stacks 0AUW(3) (more-algebra.tex:4954) is cited for freeness only. S1: lem-weil-l-adic-extension-integers-dvr clauses 1-2 give the fraction field and the DVR; generation by the finite union of bases, torsion-freeness in E^r and span via Λ_{j0} are correct. S2: lem-sc-dvr-fg-torsionfree-free; its hypotheses match def-sc-discrete-valuation-ring. S3: denominator clearing with s=∏s_i gives E-independence; n=r from the basis-cardinality clause of def-weil-vector-space-dimension. S4: E is complete by clause 1 of def-weil-l-adic-coefficient-extension and nontrivially normed since |ℓ|<1; lem-weil-pbc-finite-dimensional-linear-homeomorphism is applied to B:E^r→E^r. S5: elementary restriction; subspace of a product = product of subspaces, and B(A^r)=N. The tool use of the local-field DVR node is accepted. Duplicate search: lem-sfb-local-field-integral-basis, lem-weil-pbc-fg-fraction-submodule-lattice-presentation, the lattice-sheaf and matrix-neighborhood nodes, and lem-sfb-continuous-lattice-sum (the sheaf sibling) do not state this. Cosmetic: the report names citations.json and searches.jsonl, which are not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.FiniteSumLattice",
+  "declaration": "Padic.finite_sum_lattice",
+  "file": "lean/Sheaf/NumberTheory/Padics/FiniteSumLattice.lean",
+  "statement": "theorem finite_sum_lattice (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (r : ℕ) (J : Type v) [Finite J] [Nonempty J] (Λ : J → Submodule (coefficientExtensionIntegers l E) (Fin r → E)) (hΛ : ∀ j : J, ∃ b : Module.Basis (Fin r) (coefficientExtensionIntegers l E) (Λ j), ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i : Fin r, (b i : Fin r → E) = c i) : (∃ b : Module.Basis (Fin r) (coefficientExtensionIntegers l E) ↥(⨆ j : J, Λ j), ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i : Fin r, (b i : Fin r → E) = c i) ∧ ∀ N : Submodule (coefficientExtensionIntegers l E) (Fin r → E), (N = (⨆ j : J, Λ j) ∨ ∃ j : J, N = Λ j) → ∀ b : Module.Basis (Fin r) (coefficientExtensionIntegers l E) N, (∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i : Fin r, (b i : Fin r → E) = c i) → @IsHomeomorph (Fin r → coefficientExtensionIntegers l E) N (@Pi.topologicalSpace (Fin r) (fun _ ↦ coefficientExtensionIntegers l E) (fun _ ↦ TopologicalSpace.induced (fun a : coefficientExtensionIntegers l E ↦ (a : E)) (@UniformSpace.toTopologicalSpace E (coefficientExtensionAbsoluteValue l E).toNormedField.toUniformSpace))) (TopologicalSpace.induced (fun x : N ↦ (x : Fin r → E)) (@Pi.topologicalSpace (Fin r) (fun _ ↦ E) (fun _ ↦ @UniformSpace.toTopologicalSpace E (coefficientExtensionAbsoluteValue l E).toNormedField.toUniformSpace))) b.equivFun.symm",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01a3f4321",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: ℓ prime, E finite over ℚ_ℓ with the recorded spectral absolute-value topology, valuation ring with the induced topology, finite nonempty J, lattices given by an A-basis that is also an E-basis, sum = ⨆, and IsHomeomorph of b.equivFun.symm from the product topology to the topology induced from E^r for every such basis of the sum and of each Λ_j. No extra hypotheses; universes u and v bound. Edge cases r=0, |J|=1 and excluded empty J checked. lean.statement verbatim; the only node change is the lean record; imports = stmt_dep module + recorded proof_dep modules. Similar project topology helpers are theorem-module helpers, not def nodes, and the same Mathlib composition is used. No duplicate declaration; target path free. Docstrings carry the source, blueprint id and all 5 proof steps; sorry only. nt_compile --json clean in 2.3 s; the control copy with an error fails as expected. No findings."
  }
 }
