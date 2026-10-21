@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-open-restriction-completeness",
+ "kind": "statement",
+ "title": "Completeness and the actual completion unit after ordinary open restriction",
+ "statement": "Fix independent site and coefficient universes, a prime ell, a finite extension E of Q_ell, an open immersion j:U→X with ell invertible on residue fields of both schemes, and the section-normalized completed-coefficient open operations o. For every quotient-tower complete unbounded derived object H on X [def-weil-derived-complete], the ordinary exact open restriction j*H is quotient-tower complete on U and the actual normalized completion unit [def-pur-integral-derived-operations] at j*H is invertible. This concerns the given ordinary restriction functor, without choosing a reconstruction equivalence or an arbitrary comparison isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08TC, 0941, 07A4 and 0G7E; open case of immersion completed-pullback comparison, expanded to the fixed coefficient transports."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-open-tensor-normalization",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "View the open immersion as an immersion. The fixed coefficient maps, normalized by their finite quotient projections, identify ordinary localized restriction with the actual ringed-site inverse image. On one good representative these identifications are the pure-tensor identifications and carry its quotient transitions and augmentation to the corresponding target data.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08TC, 0941, 07A4 and 0G7E; open case of immersion completed-pullback comparison, expanded to the fixed coefficient transports."
+   }
+  },
+  {
+   "text": "Exact open restriction preserves countable products, so applying it to the source augmented Roos triangle gives the target quotient triangle and proves completeness. The actual completion comparison identifies its unit on the same representative with the quotient augmentation. The immersion comparison identifies this very map with the completion of the restricted source. Its invertibility transports along representative isomorphisms by naturality. This establishes invertibility of the actual target completion unit, rather than merely existence of an isomorphism.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08TC, 0941, 07A4 and 0G7E; open case of immersion completed-pullback comparison, expanded to the fixed coefficient transports."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08TC, 0941, 07A4 and 0G7E; open case of immersion completed-pullback comparison, expanded to the fixed coefficient transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction preserves derived completeness of the augmented quotient tower and makes the completion unit invertible",
+   "results": "8 hits on uniform-space or ordinary adic completion, including AdicCompletion and SeparationQuotient.completeSpace_iff; no derived sheaf result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to an open ringed site preserves quotient tower derived completeness and the completion unit",
+   "results": "8 hits including AdicCompletion.map_exact, ModuleCat.Tilde.toOpen_res and IsAdicComplete.of_comp_lift; none addresses unbounded derived quotient towers.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*(complete|tensor)|completionUnit",
+   "results": "msearch Mathlib grep: 0 hits. Local source read of CategoryTheory/Adjunction/Mates.lean gives only formal mate identities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenReductionAdjunctionTransport",
+  "date": "2026-10-21",
+  "group": "Q6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open-factor restriction and completion, original transport steps 2–4.",
+   "via": [
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenRestrictionCompleteness",
+  "file": "lean/Sheaf/Paper/OpenRestrictionCompleteness.lean",
+  "declaration": "WeilConjectures.OpenRestrictionCompleteness.openRestrictionComplete",
+  "statement": "theorem openRestrictionComplete\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ x : U, Invertible (l : U.residueField x)] :\n    ∀ H, complete l E X H →\n      complete l E U ((star l E j o).obj H) ∧\n      IsIso ((IntegralOnSlice.completionUnit l E U none).app\n        ((star l E j o).obj H))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-restriction-completeness",
+  "worker": "stage3",
+  "summary": "Isolate the geometric representative/completeness construction from the formal adjunction identities, retaining fixed operations and independent coefficient universes.",
+  "blueprint": "Integral open-factor adjunction compatibility in the proof sentence of fix-prop-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Generic actual completed immersion pullback and unit normalization; supplies foundations without replacing the compatibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat tensor pullback and strict representative transport; supplies foundations without replacing the compatibility unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T154747-L-3170239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T154747-L-3170239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -22970,3 +22970,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:46 L: returned deliver/P2/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison (reviewer RETURN: (reviewer C-7973c, head 7973c84dc) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ra)
 - 15:47 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 15:47 L: merged deliver/J2/Sheaf.NumberTheory.Padics.BaseCoefficientCondensedIdentification (stage 3; reviewer PASS; first push; landing 20261021T154744-L-3169493 (proof); batch 20261021T154743; modules 1; new nodes 0)
+- 15:47 L: merged deliver/Q6/Sheaf.Paper.SfOpenReductionAdjunctionTransport (stage 3; reviewer PASS; first push; landing 20261021T154747-L-3170239 (interface); batch 20261021T154743; modules 3; new nodes 2)

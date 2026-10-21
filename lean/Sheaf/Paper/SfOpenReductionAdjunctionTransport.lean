@@ -9,8 +9,8 @@ public import Sheaf.SixFunctors.IntegralOpenReductionComparison
 public import Sheaf.Paper.IntegralLineTensorComparisonDefinitions
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Sheaf.Paper.SfImmersionCompletedPullbackComparison
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.CanonicalOpenRestrictionModel
+import Sheaf.Paper.OpenRestrictionCompleteness
 
 /-! # Open reduction and the actual adjunctions
 
@@ -233,33 +233,172 @@ def b (s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o)
   (coefficientSequenceLimit l E U).map (s.inv.app H.obj) ≫
     @inv _ _ _ _ (SU.adjunction.unit.app ((star l E j o).obj H.obj)) h
 
+private def inverseUnitIso
+    {I C D : Type*} [Category* I] [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    (A : I ⥤ C) (B : I ⥤ D) (r : A ⋙ R ≅ B)
+    (h : ∀ i, IsIso (adj.unit.app (A.obj i))) : B ⋙ L ≅ A := by
+  letI (i : I) := h i
+  refine NatIso.ofComponents
+    (fun i ↦ L.mapIso (r.symm.app i) ≪≫ (asIso (adj.unit.app (A.obj i))).symm) ?_
+  intro i k f
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom,
+    NatTrans.comp_app, Functor.comp_map, asIso_inv]
+  apply (cancel_mono (adj.unit.app (A.obj k))).1
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  have hn := adj.unit.naturality (A.map f)
+  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hn
+  rw [hn, IsIso.inv_hom_id_assoc]
+  rw [← L.map_comp, ← L.map_comp]
+  exact congrArg L.map (r.inv.naturality f)
+
+private theorem inverseUnitIso_normalization
+    {I C D : Type*} [Category* I] [Category* C] [Category* D]
+    {R : C ⥤ D} {L : D ⥤ C} (adj : R ⊣ L)
+    (A : I ⥤ C) (B : I ⥤ D) (r : A ⋙ R ≅ B)
+    (h : ∀ i, IsIso (adj.unit.app (A.obj i))) (i : I) :
+    R.map ((inverseUnitIso adj A B r h).hom.app i) ≫ r.hom.app i =
+      adj.counit.app (B.obj i) := by
+  let := h i
+  change R.map (L.map (r.inv.app i) ≫ inv (adj.unit.app (A.obj i))) ≫ _ = _
+  rw [R.map_comp, Functor.map_inv, adj.inv_map_unit]
+  have hn := adj.counit.naturality (r.inv.app i)
+  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hn
+  have hn' := congrArg (fun f ↦ f ≫ r.hom.app i) hn
+  simp only [Category.assoc, Iso.inv_hom_id_app] at hn'
+  exact (Category.assoc _ _ _).trans
+    (hn'.trans (Category.comp_id (adj.counit.app (B.obj i))))
+
+private theorem realize_unit
+    (h : Reconstruction l E j o SU SX)
+    (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
+    (s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o)
+    (hc : ∀ H, complete l E X H → complete l E U ((star l E j o).obj H))
+    (hs : ∀ K, SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
+      s.hom.app ((shriek l E j o).obj K) ≫ (P l E j o).map (r.hom.app K) =
+        (systemAdjunction l E j o).unit.app (SU.reduction.obj K))
+    (K : (complete l E U).FullSubcategory) :
+    SU.adjunction.unit.app K.obj ≫
+      (coefficientSequenceLimit l E U).map
+        ((systemAdjunction l E j o).unit.app (SU.reduction.obj K.obj)) ≫
+      (coefficientSequenceLimit l E U).map ((P l E j o).map (r.inv.app K.obj)) ≫
+      b l E j o SU SX s
+        ⟨(shriek l E j o).obj K.obj, h.extension_complete _ K.property⟩
+        (h.unit_U _ (hc _ (h.extension_complete _ K.property))) =
+      (openAdjunction l E j o).unit.app K.obj := by
+  let L := coefficientSequenceLimit l E U
+  have ht : (systemAdjunction l E j o).unit.app (SU.reduction.obj K.obj) ≫
+      (P l E j o).map (r.inv.app K.obj) ≫
+      s.inv.app ((shriek l E j o).obj K.obj) =
+      SU.reduction.map ((openAdjunction l E j o).unit.app K.obj) := by
+    rw [← hs K.obj]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [(P l E j o).map_id]
+    simp only [Category.id_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Category.comp_id]
+  let := h.unit_U _ (hc _ (h.extension_complete _ K.property))
+  change _ ≫ L.map _ ≫ L.map _ ≫ (L.map _ ≫ inv _) = _
+  simp only [← L.map_comp_assoc]
+  rw [ht]
+  apply (cancel_mono
+    (SU.adjunction.unit.app ((star l E j o).obj ((shriek l E j o).obj K.obj)))).1
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  exact (SU.adjunction.unit.naturality ((openAdjunction l E j o).unit.app K.obj)).symm
+
+private theorem completion_model : CompletionModel l E j o := by
+  intro Q _hQ _hc hRes
+  let F := restriction l E j o
+  let a : (star l E j o).obj (DerivedCategory.Q.obj Q) ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj Q) :=
+    F.mapDerivedCategoryFactors.app Q
+  have hn := (IntegralOnSlice.completionUnit l E U none).naturality a.hom
+  dsimp only [Functor.id_map, Functor.id_obj, Functor.comp_obj] at hn
+  have hu := (IntegralOnSlice.completionUnit_existsUnique l E U none).exists.choose_spec
+    ⟨(F.mapHomologicalComplex (.up ℤ)).obj Q, hRes⟩
+  have he : (IntegralOnSlice.completionUnit l E U none).app
+      ((star l E j o).obj (DerivedCategory.Q.obj Q)) ≫
+      (IntegralOnSlice.completion l E U none).map a.hom ≫
+      (IntegralOnSlice.completionComparison l E U none).hom.app
+        ⟨(F.mapHomologicalComplex (.up ℤ)).obj Q, hRes⟩ =
+      a.hom ≫ DerivedCategory.Q.map
+        (IntegralOnSlice.roosUnit l E U none ((F.mapHomologicalComplex (.up ℤ)).obj Q)) := by
+    erw [← Category.assoc, ← hn]
+    simpa only [Functor.id_map, Functor.id_obj, Functor.comp_obj, Category.assoc] using
+      congrArg (fun f ↦ a.hom ≫ f) (show
+      (IntegralOnSlice.completionUnit l E U none).app
+          (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj Q)) ≫
+        (IntegralOnSlice.completionComparison l E U none).hom.app
+          ⟨(F.mapHomologicalComplex (.up ℤ)).obj Q, hRes⟩ = _ from hu)
+  refine ⟨he, ?_⟩
+  intro n
+  have hp := congrArg (fun f ↦ f ≫ DerivedCategory.Q.map
+    (integralLineRoosProjection l E U ((F.mapHomologicalComplex (.up ℤ)).obj Q) n)) he
+  simp only [Category.assoc] at hp
+  have hproj : IntegralOnSlice.roosUnit l E U none
+      ((F.mapHomologicalComplex (.up ℤ)).obj Q) ≫
+      integralLineRoosProjection l E U ((F.mapHomologicalComplex (.up ℤ)).obj Q) n =
+      ((IntegralOnSlice.augmentation l E U none).app
+        ((F.mapHomologicalComplex (.up ℤ)).obj Q)).app (op n) := by
+    unfold IntegralOnSlice.roosUnit integralLineRoosProjection
+    rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst]
+    simp [IntegralOnSlice.productAugmentation]
+  exact hp.trans (by
+    rw [← Functor.map_comp]
+    exact congrArg (fun f ↦ a.hom ≫ DerivedCategory.Q.map f) hproj)
+
+private def restrictionMate
+    (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o) :
+    star l E j o ⋙ SU.reduction ⟶ SX.reduction ⋙ P l E j o :=
+  (mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+    (TwoSquare.mk _ _ _ _ r.inv)).natTrans
+
+private theorem restrictionMate_unit
+    (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
+    (K : DerivedCategory (scalarReductionSource l E U)) :
+    SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
+      (restrictionMate l E j o SU SX r).app ((shriek l E j o).obj K) ≫
+      (P l E j o).map (r.hom.app K) =
+        (systemAdjunction l E j o).unit.app (SU.reduction.obj K) := by
+  rw [← Category.assoc]
+  rw [show SU.reduction.map ((openAdjunction l E j o).unit.app K) ≫
+      (restrictionMate l E j o SU SX r).app ((shriek l E j o).obj K) =
+      (systemAdjunction l E j o).unit.app (SU.reduction.obj K) ≫
+        (P l E j o).map (r.inv.app K) from
+    unit_mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+      (TwoSquare.mk _ _ _ _ r.inv) K]
+  simp [← Functor.map_comp]
+
+private theorem restrictionMate_counit
+    (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
+    (H : DerivedCategory (scalarReductionSource l E X)) :
+    SX.reduction.map ((openAdjunction l E j o).counit.app H) =
+      r.hom.app ((star l E j o).obj H) ≫
+        (J l E j o).map ((restrictionMate l E j o SU SX r).app H) ≫
+        (systemAdjunction l E j o).counit.app (SX.reduction.obj H) := by
+  rw [show (J l E j o).map ((restrictionMate l E j o SU SX r).app H) ≫
+      (systemAdjunction l E j o).counit.app (SX.reduction.obj H) =
+      r.inv.app ((star l E j o).obj H) ≫
+        SX.reduction.map ((openAdjunction l E j o).counit.app H) from
+    mateEquiv_counit (openAdjunction l E j o) (systemAdjunction l E j o)
+      (TwoSquare.mk _ _ _ _ r.inv) H]
+  simp
+
 /-- Restriction, normalization and realization of the supplied canonical open comparison.
 Source: Stacks 0GL1, 0E8I, 0941; agent adjunction-normalized realization refinement
 (blueprint: lem-sf-open-reduction-adjunction-transport).
 
-Proof, following the eight steps of the node:
-1. Use lem-sf-open-semilinear-tensor-model on one flat-term K-flat representative
-for the supplied r. Its generator and quotient squares are ExtensionModel.
-2. Apply lem-sf-immersion-completed-pullback-comparison to the open immersion.
-Restriction preserves completeness and the actual completion unit is invertible.
-The ringed-topoi-derived-tensor-pullback lemma preserves good representatives.
-Restrict each quotient tensor on that same representative; its identity-on-sections
-maps commute with quotients and scalar units. Descend the resulting strict system
-isomorphism to obtain s with RestrictionModel, retaining all finite projections.
-3. The reduced unit composite sends x tensor a to that same section on the open.
-The system open unit does the same. Their strict chain maps agree before localization.
-4. For the counit both composites send [x] tensor a to x tensor a. The simultaneous
-system adjunction of lem-coef-semilinear-derived-sections descends this equality.
-5. Completeness makes the actual units invertible. Define d and b by the displayed
-inverse-unit composites. Naturality of r, s and the unit gives naturality of d,b;
-each factor is invertible, so the resulting natural transformations are isomorphisms.
-6. The triangle identity gives R(u_A inverse)=e_(R A). Naturality of e with respect
-to r then gives R(d_K) followed by r_K equal to e_(J R K).
-7. Substitute b into the realized unit equation. Step 3 and functoriality reduce
-it to naturality of the actual unit for the open unit eta_K.
-8. Substitute d inverse into the realized counit equation. Step 4 reduces it to
-naturality of that same unit for epsilon_H. All equations are in the strict-system
-derived categories. No inference that evaluation detects equality is used. -/
+Proof: the canonical restriction model identifies s with the mate of r inverse.
+The mate unit and counit equations give the two reduced adjunction equations.
+Open restriction preserves completeness and makes its actual completion unit invertible.
+Independently, naturality and the normalized representative completion comparison give
+CompletionModel, including each Roos projection. Define di and bi pointwise by the inverse
+actual units and r inverse or s inverse. Unit naturality proves naturality of these
+isomorphisms. The adjunction triangle identity and counit naturality give reductionD.
+For the realized unit, substitute bi and use the reduced unit equation; functoriality
+and unit naturality cancel the final inverse unit. For the realized counit, substitute
+di inverse, use the reduced counit equation and apply the same naturality argument.
+All identities live in the derived categories of strict systems; no step infers
+equality from the finite evaluations. -/
 theorem openReductionAdjunctionTransport
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ x : U, Invertible (l : U.residueField x)]
@@ -306,6 +445,57 @@ theorem openReductionAdjunctionTransport
               ((systemAdjunction l E j o).counit.app (SX.reduction.obj H.obj)) ≫
             @inv _ _ _ _ (SX.adjunction.unit.app H.obj) (h.unit_X _ H.property) =
           (openAdjunction l E j o).counit.app H.obj) := by
-  sorry
+  classical
+  obtain ⟨s, hmate, hmodel⟩ :
+      ∃ s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o,
+        s.hom = restrictionMate l E j o SU SX r ∧
+          RestrictionModel l E j o SU SX tensor s := by
+    exact CanonicalOpenRestriction.canonicalOpenRestrictionModel l E j o SU SX r tensor hr
+  obtain ⟨hc, hcompletion⟩ :
+      ∃ hc : ∀ H, complete l E X H → complete l E U ((star l E j o).obj H),
+        ∀ H, complete l E X H →
+          IsIso ((IntegralOnSlice.completionUnit l E U none).app
+            ((star l E j o).obj H)) := by
+    have ht := OpenRestrictionCompleteness.openRestrictionComplete l E j o
+    exact ⟨fun H hH ↦ (ht H hH).1, fun H hH ↦ (ht H hH).2⟩
+  let di := inverseUnitIso SX.adjunction
+    ((complete l E U).ι ⋙ shriek l E j o)
+    ((complete l E U).ι ⋙ SU.reduction ⋙ J l E j o)
+    (Functor.isoWhiskerLeft (complete l E U).ι r)
+    (fun K ↦ h.unit_X _ (h.extension_complete _ K.property))
+  let bi := inverseUnitIso SU.adjunction
+    ((complete l E X).ι ⋙ star l E j o)
+    ((complete l E X).ι ⋙ SX.reduction ⋙ P l E j o)
+    (Functor.isoWhiskerLeft (complete l E X).ι s)
+    (fun H ↦ h.unit_U _ (hc _ H.property))
+  have hsu := restrictionMate_unit l E j o SU SX r
+  have hsc := restrictionMate_counit l E j o SU SX r
+  rw [← hmate] at hsu hsc
+  refine ⟨s, hc, hmodel, completion_model l E j o, hcompletion,
+    (fun K _ ↦ hsu K), (fun H _ ↦ hsc H), di, bi, ?_, ?_, ?_, ?_, ?_⟩
+  · intro K
+    rfl
+  · intro H
+    rfl
+  · intro K
+    exact inverseUnitIso_normalization SX.adjunction _ _ _ _ K
+  · intro K
+    exact realize_unit l E j o SU SX h r s hc hsu K
+  · intro H
+    let := h.unit_X H.obj H.property
+    dsimp only [di, inverseUnitIso, NatIso.ofComponents_inv_app, Iso.trans_inv,
+      Iso.symm_inv, Functor.mapIso_inv, asIso_hom, Iso.app_inv]
+    change (SX.adjunction.unit.app _ ≫
+      (coefficientSequenceLimit l E X).map (r.hom.app _)) ≫
+      (coefficientSequenceLimit l E X).map ((J l E j o).map (s.hom.app H.obj)) ≫
+      (coefficientSequenceLimit l E X).map
+        ((systemAdjunction l E j o).counit.app (SX.reduction.obj H.obj)) ≫
+      inv (SX.adjunction.unit.app H.obj) = _
+    simp only [Category.assoc, ← CategoryTheory.Functor.map_comp_assoc]
+    rw [← hsc H.obj]
+    apply (cancel_mono (SX.adjunction.unit.app H.obj)).1
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    exact (SX.adjunction.unit.naturality
+      ((openAdjunction l E j o).counit.app H.obj)).symm
 
 end WeilConjectures.OpenReductionAdjunctionTransport

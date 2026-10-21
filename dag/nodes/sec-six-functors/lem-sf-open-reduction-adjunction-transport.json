@@ -20,112 +20,40 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sf-open-semilinear-tensor-model] with the given open immersion and coefficient rings. It supplies, for a flat-term K-flat representative $Q\\to K$, the flat-term K-flat representative $j_!Q\\to j_!K$ and the chain isomorphism $r_Q$ of strict semilinear systems. Its formula is $[x]\\otimes a\\mapsto[x\\otimes a|_U]$; its quotient-transition and scalar-unit squares commute before localization. Its localization is the specified natural $r_K$ and is independent of $Q$. No completeness or quasi-compactness is needed for this step.",
+   "text": "Apply lem-sf-canonical-open-restriction-model to the supplied tensor comparison and its ExtensionModel to obtain s, its restriction representatives, and its equality with the mate of r inverse. The unit_mateEquiv and mateEquiv_counit equations, composed with r, give the two reduced adjunction equations for all ambient objects.",
    "uses": [
-    "lem-sf-open-semilinear-tensor-model"
+    "lem-sf-canonical-open-restriction-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I; simultaneous strict representative comparison supplied by the cited node."
-   }
+   "elementary": false
   },
   {
-   "text": "An open immersion is a locally closed immersion with identity closed factor. Apply [lem-sf-immersion-completed-pullback-comparison] to $j$. Its coefficient isomorphisms are those fixed in the statement. It gives exact ordinary restriction, preservation of quotient completeness, and invertibility of the specified ordinary-to-completed comparison, with its completion-unit and finite-projection compatibilities. To realize the finite comparisons simultaneously, choose a flat-term K-flat representative $F$ of $H$ in the reduction calculus. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $j^*F$ is again flat-term K-flat. Restriction of tensor sections gives\n$$ (j^*F)\\otimes_{\\widehat R_U}B_{n,U}\\ \\cong\\ j^*(F\\otimes_{\\widehat R_X}B_{n,X}). $$\nOn an object of the localized site both sides send $x\\otimes a$ to the same $x\\otimes a$. Therefore the squares for $B_m\\to B_n$ and $x\\mapsto x\\otimes1$ commute on complexes. These assemble to an isomorphism of strict systems, not merely separate evaluated arrows. The simultaneous scalar-extension and localization construction of [lem-coef-semilinear-derived-sections] gives its natural localization $s_H:\\mathcal R_Uj^*H\\cong P_j\\mathcal R_XH$. These are exactly the inverses of the finite comparisons in the immersion lemma, so they retain its finite-projection and completion compatibilities.",
+   "text": "Apply lem-sf-open-restriction-completeness to obtain hc and invertibility of the actual completion unit. CompletionModel follows separately from completionUnit_existsUnique, naturality along the exact-functor representative isomorphism and mappingCocone.lift_fst; composing with the first Roos projection gives every quotient augmentation.",
    "uses": [
-    "lem-sf-immersion-completed-pullback-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-semilinear-derived-sections"
+    "lem-sf-open-restriction-completeness",
+    "def-pur-integral-derived-operations",
+    "def-sf-integral-line-tensor-comparison-constructors"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 and Tag 07A4 (lemma-pullback-tensor-product), Tag 0G7E (lemma-pullback-K-flat); the cited immersion lemma supplies the completed comparison, not Tag 0GL1 alone."
-   }
+   "elementary": false
   },
   {
-   "text": "For the reduced unit equation use the same representative $Q$ as in Step 1 and its extension $j_!Q$. The open unit is normalized by the identity on sections on the open [lem-sf-open-tensor-normalization]. Thus on the localized site the composite\n$$P_j(r_Q)\\circ s_{j_!Q}\\circ\\mathcal R_U(\\eta^o_Q)$$\nsends $x\\otimes a$ to the same section $x\\otimes a$ of $P_jJ_j\\mathcal R_UQ$. This is precisely the termwise-system unit $\\eta^S_{\\mathcal R_UQ}$. The comparison of Step 1 and the restriction comparison of Step 2 commute with all quotient transitions, so this is an equality of chain maps of strict systems. By [lem-coef-semilinear-derived-sections], the open-system adjunction is the termwise open adjunction and its simultaneous derived units and transposes are induced by these maps. Localizing the chain-map equality proves\n$$P_j(r_K)\\circ s_{j_!K}\\circ\\mathcal R_U(\\eta^o_K)=\\eta^S_{\\mathcal R_UK}$$\nin the derived system category; it does not use faithfulness of evaluation.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 and sites-modules.tex Tag 0E8I, using the specified open-unit normalization and simultaneous system adjunction of the cited nodes; explicit generator calculation."
-   }
-  },
-  {
-   "text": "For the counit use the flat-term K-flat $F$ of Step 2. Its restriction and then extension are flat-term K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-sf-open-semilinear-tensor-model]. On the extension-presheaf summand indexed by a map into $U$, the localized ringed-site counit sends $[x]$ to its ambient section $x$. Hence reduction of this counit sends $[x]\\otimes a$ to $x\\otimes a$. The other composite sends $[x]\\otimes a$ first by $r_{j^*F}$ to $[x\\otimes a|_U]$, then by $J_j(s_F)$ to that same restricted tensor section, and finally by the termwise counit to $x\\otimes a$. These are equal additive, scalar-compatible maps on every presheaf summand, hence after sheafification and in each complex degree. The maps commute with every quotient transition. The termwise adjunction and its derived localization in [lem-coef-semilinear-derived-sections] therefore give the equality of system transformations\n$$\\mathcal R_X(\\epsilon^o_H)=\\epsilon^S_{\\mathcal R_XH}\\circ J_j(s_H)\\circ r_{j^*H}.$$\nThe equality is induced before localization, not inferred from equal evaluations.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-open-semilinear-tensor-model",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 and sites-modules.tex Tag 0E8I; explicit counit calculation on the extension-presheaf summands and the cited simultaneous localization construction."
-   }
-  },
-  {
-   "text": "For complete $K,H$, the assumed preservation of completeness by $j_!$ and Step 2 give completeness of $j_!K$ and $j^*H$. Thus the actual units $u_{j_!K}$ and $u_{j^*H}$ are invertible by the hypotheses. Define $d_K=u_{j_!K}^{-1}\\circ\\mathcal L_X(r_K^{-1})$ and $b_H=u_{j^*H}^{-1}\\circ\\mathcal L_U(s_H^{-1})$. Each factor is an isomorphism. The naturality of $u$ in [lem-coef-derived-system-evaluation-calculus], together with that of $r,s$, gives naturality of their inverses and these composites. All the units used here are the specified units of $\\mathcal R_T\\dashv\\mathcal L_T$.",
+   "text": "Define di and bi by the displayed inverse-unit formulas. Build their natural isomorphisms pointwise; naturality is unit naturality followed by the naturality of r or s. For normalization use inv(R.map unit)=counit and counit naturality. Substitute bi into the realized unit equation and use the reduced unit equation to cancel the comparison maps. Unit naturality gives the result. For the counit, the inverse of di is unit followed by the limit image of r; combine consecutive limit images and use the reduced counit equation, then unit naturality and cancellation of its inverse.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent formal calculation using the actual adjunction supplied by the cited node (resolution/limit foundations: Tags 06YS and 0941)."
-   }
-  },
-  {
-   "text": "Write $A=j_!K$ and $N=J_j\\mathcal R_UK$. The triangle identity in [lem-coef-derived-system-evaluation-calculus] reads $e_{\\mathcal R_XA}\\circ\\mathcal R_X(u_A)=1$, so invertibility of $u_A$ gives $\\mathcal R_X(u_A^{-1})=e_{\\mathcal R_XA}$. Naturality of $e$ for $r_K:\\mathcal R_XA\\to N$ now gives\n$$\\begin{aligned}\nr_K\\circ\\mathcal R_X(d_K)\n&=r_K\\circ e_{\\mathcal R_XA}\\circ\\mathcal R_X\\mathcal L_X(r_K^{-1})\\\\\n&=e_N\\circ\\mathcal R_X\\mathcal L_X(r_K)\\circ\\mathcal R_X\\mathcal L_X(r_K^{-1})=e_N.\n\\end{aligned}$$\nThis proves the normalization equation directly in $D(\\mathscr S_X)$.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent formal calculation: naturality of the actual counit and the adjunction triangle identity; cited node, system-adjunction paragraph."
-   }
-  },
-  {
-   "text": "For the realized unit, Step 3 rearranges to\n$$s_{j_!K}^{-1}\\circ P_j(r_K^{-1})\\circ\\eta^S_{\\mathcal R_UK}=\\mathcal R_U(\\eta^o_K).$$\nSubstitute the definition of $b_{j_!K}$ in the proposed equation and use functoriality of $\\mathcal L_U$. Its left side becomes\n$$u_{j^*j_!K}^{-1}\\circ\\mathcal L_U\\mathcal R_U(\\eta^o_K)\\circ u_K=\\eta^o_K.$$\nThe equality is the naturality square of the actual unit $u$ for $\\eta^o_K$, as supplied by [lem-coef-derived-system-evaluation-calculus]. Both $K$ and $j^*j_!K$ are complete, so the displayed inverses are defined.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent formal calculation: Step 3 and naturality of the actual reduction/limit unit; cited node, system-adjunction paragraph."
-   }
-  },
-  {
-   "text": "For the realized counit, the definition of $d$ gives $d_{j^*H}^{-1}=\\mathcal L_X(r_{j^*H})\\circ u_{j_!j^*H}$. Substitute this into the proposed equation and combine the three consecutive $\\mathcal L_X$-images. By Step 4 the left side is\n$$u_H^{-1}\\circ\\mathcal L_X\\bigl(\\epsilon^S_{\\mathcal R_XH}\\circ J_j(s_H)\\circ r_{j^*H}\\bigr)\\circ u_{j_!j^*H}\n=u_H^{-1}\\circ\\mathcal L_X\\mathcal R_X(\\epsilon^o_H)\\circ u_{j_!j^*H}\n=\\epsilon^o_H.$$\nThe last equality is naturality of the same actual unit [lem-coef-derived-system-evaluation-calculus]. Completeness of $H,j^*H,j_!j^*H$ follows from the hypotheses and Step 2. The unit and counit equations therefore identify the realized adjunction with $j_!\\dashv j^*$ through $d,b$. Every reduction comparison and equation was constructed in the strict system category and then localized; no arbitrary reconstruction isomorphism or equality-detection by evaluation was used.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent formal calculation: Step 4 and naturality of the actual reduction/limit unit; cited node, system-adjunction paragraph."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-open-semilinear-tensor-model",
-  "lem-sf-immersion-completed-pullback-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-sf-open-tensor-normalization"
+  "lem-sf-canonical-open-restriction-model",
+  "lem-sf-open-restriction-completeness",
+  "def-pur-integral-derived-operations",
+  "def-sf-integral-line-tensor-comparison-constructors",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0GL1 and 0941, together with sites-modules.tex Tag 0E8I: open tensor and total-limit foundations. The simultaneous-system identities and the explicit naturality/triangle calculations are agent-written, using the cited DAG tools, not asserted by these tags alone."
+  "place": "Formal mate correspondence and inverse-unit adjunction calculations, with the canonical restriction and completeness constructions isolated as two geometric results; Tags 0GL1, 0E8I and 0941."
  },
  "mathlib_searches": [
   {
@@ -219,10 +147,7 @@
   ]
  },
  "tool_uses": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-sf-immersion-completed-pullback-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -262,5 +187,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Read item node (8 steps), report, module (10 decls), and the reused IntegralOpenReduction, OpenSystems, CoefDerivedSystemEvaluationCalculus, DerivedCompleteOnSlices and IntegralDerivedOperationsOnSlices declarations, plus the parent node and the landed sibling OpenSemilinearTensorModel. Every hypothesis matches (Reconstruction = the 7 node assumptions; r is a pinned input via ExtensionModel: strict chain iso, augmented presentations, generator-pinned tensor components; parent Step 4 confirms r is a hypothesis). Every conclusion matches (hc, IsIso completion unit, s with RestrictionModel via the actual finite-adjunction mate, both system equations, di/bi pinned to d/b, normalization, realized unit and counit; types and directions checked). OpenSystems level twist makes hr unsatisfiable (vacuous, not false); compatible twists cancel. Edge cases fine, universes independent, no extra hypotheses. Node differs from live only in lean; statement verbatim; docstrings and H9 OK; only the main proof is sorry. No compile needed (no change). Advisories: plain defs owned by the parent theorem, which is not a stmt_dep (parent proof will need its defs factored out to avoid an import cycle); CompletionModel is generically true; Invertible-residue-field vs IsUnit convention; sibling proof_dep import missing because it landed after the base; parent must use the sibling's untwisted o."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T154747-L-3170239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
