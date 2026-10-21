@@ -19,9 +19,122 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-scalar-localization-sheaf-exact] to the given small ringed site and global section $s$: the actual sheafified scalar-extension functor $E$ is additive and exact. Apply [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] to $R\\to S$: $U_0$ preserves finite limits and finite colimits and $E\\dashv U_0$ has Hom correspondence $f\\mapsto(x\\mapsto f(1\\otimes x))$. Taking $f=1_{EM}$ gives the ordinary unit $x\\mapsto1\\otimes x$; the inverse correspondence sends $g$ to $b\\otimes x\\mapsto b g(x)$, by the balancing relation and the universal property of the sheaf tensor product [def-pur-sheaf-tensor-product]. Taking $g=1_{U_0N}$ gives the ordinary counit $\\mu_N(b\\otimes x)=bx$.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ET (lemma-flatness-sheafification), 03CU (lemma-adjointness-tensor-restrict-presheaves), 03CZ (lemma-adjointness-tensor-restrict)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], termwise $E$ and $U_0$ preserve quasi-isomorphisms and induce functors $D(E),D(U_0)$ with natural factorizations $D(E)Q_R\\cong Q_SE$ and $D(U_0)Q_S\\cong Q_RU_0$. By [lem-weil-pbc-exact-functor-derived-functor] the first factorization is a left derived functor and the second is a right derived functor, on the entire unbounded derived categories. The universal property defining the left derived functor identifies $D(E)$ canonically with $F$ of [lem-pur-derived-change-of-rings]: the universal comparison maps in the two directions compose to the identity by uniqueness. The same argument identifies $D(U_0)$ with $U$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. These are the required natural identifications for every complex, without any boundedness restriction.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), with the dual left-derived assertion; canonical uniqueness of the derived pair."
+   }
+  },
+  {
+   "text": "Apply the functors of step 1 degreewise. The displayed unit and multiplication counit are chain maps, since the differentials are linear. Localize these natural transformations using clauses (2) and (3) of [lem-weil-pbc-localization-universal-property] and the factorizations of step 2. The two triangle identities hold after precomposition with $Q_R$ or $Q_S$, because they are the ordinary identities in each degree; clause (3) therefore proves the triangle identities on the derived categories. This constructs an adjunction whose unit and counit on every complex are exactly the classes of those chain maps.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), exact-functor case; explicit descent of unit, counit and triangle identities."
+   }
+  },
+  {
+   "text": "Compare the descended adjunction with the specified evaluation-normalized one. The coefficient nodes write $P\\otimes_R S$, whereas $E(P)=S\\otimes_R P$. The maps $x\\otimes b\\mapsto b\\otimes x$ and $b\\otimes x\\mapsto x\\otimes b$ respect the balancing relations, restrictions and differentials, and are inverse; sheafification gives the natural comparison [def-pur-sheaf-tensor-product]. For a flat-term K-flat complex $P$, the comparison of step 2 agrees, through this switch, with the canonical K-flat comparison of [lem-pur-derived-change-of-rings], since both are the comparison of the same universal derived pair. Clause (1) of [lem-pur-sheaf-ring-derived-coefficient-adjunction] therefore identifies its unit with the descended unit. For any complex $M$, choose $r:P\\to M$ as in [lem-pc-kflat-resolution]. For either unit $\\alpha$, naturality gives $\\alpha_{Q_RM}=UF(Q_Rr)\\circ\\alpha_{Q_RP}\\circ(Q_Rr)^{-1}$; hence the units agree at $Q_RM$. Essential surjectivity in [lem-sfb-derived-localization-additive] gives agreement everywhere. With fixed functors and unit, the Hom correspondence is $f\\mapsto U(f)\\circ\\eta$, so the counit, its inverse image of the identity, also agrees. This proves both normalization formulas for arbitrary complexes.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pc-kflat-resolution",
+    "lem-sfb-derived-localization-additive",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A6 (lemma-adjoint); derived.tex Tags 015F and 0FND. Comparison through the common K-flat normalization."
+   }
+  },
+  {
+   "text": "We check the ordinary multiplication counit is invertible, retaining the sheafification in $S$. Let $T$ be any $S$-module sheaf and put $j:T\\to U_0E(U_0T)$, $x\\mapsto1\\otimes x$. This is an $R$-linear sheaf map. On both its source and target multiplication by $s$ is invertible, since they are $S$-modules. Consequently $j(s^{-1}x)=s^{-1}j(x)$, by applying the inverse of multiplication by $s$ to $j(sx)=s j(x)$. Hence $j$ is linear over the presheaf $B(V)=R(V)[1/s|_V]$. By [lem-pc-sites-module-sheafification-interface], applied to $B\\to B^\\#=S$ of [def-weil-pbc-ringed-section-localization], this map between sheaves is $S$-linear: both sheaves are their own underlying abelian sheafifications and the interface gives unique extension of $B$-linear maps to $S$-linear maps. Now $\\mu_Tj(x)=x$, while $j\\mu_T(b\\otimes x)=j(bx)=b j(x)=b\\otimes x$. The latter equality determines a sheaf tensor map by its defining universal property [def-pur-sheaf-tensor-product]. Thus $j$ is the inverse of $\\mu_T$. This argument is natural in $T$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-ringed-section-localization",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules) and Section 03EK (section-tensor-product); explicit inverse using the principal fractions."
+   }
+  },
+  {
+   "text": "For a complex $N$, naturality of the inverse maps $j_{N^r}$ of step 5 makes them commute with the differentials. Thus multiplication $E(U_0N)\\to N$ is an isomorphism of complexes, and steps 3–4 identify its class with $\\varepsilon_{Q_SN}$. For any $H\\in D(S)$ choose an isomorphism $a:Q_SN\\to H$ using [lem-sfb-derived-localization-additive]. Naturality gives $\\varepsilon_H=a\\circ\\varepsilon_{Q_SN}\\circ(FU(a))^{-1}$, a composite of isomorphisms. Thus $\\varepsilon$ is invertible on every derived object.",
+   "uses": [
+    "lem-sfb-derived-localization-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); termwise invertible counit, transported to every derived object."
+   }
+  },
+  {
+   "text": "The left triangle identity is $\\varepsilon_{FA}\\circ F(\\eta_A)=1_{FA}$. By step 6 it gives $F(\\eta_A)=\\varepsilon_{FA}^{-1}$. The right triangle identity at $FA$ gives $U(\\varepsilon_{FA})\\circ\\eta_{UFA}=1_{UFA}$, hence $\\eta_{UFA}=(U\\varepsilon_{FA})^{-1}=UF(\\eta_A)$. This proves the stated unit identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors); elementary triangle-identity calculation for the adjunction constructed above."
+   }
+  },
+  {
+   "text": "For $h:A\\to UN$ define $\\Psi(h)=U\\varepsilon_N\\circ UF(h)$. Naturality of $\\eta$ and the right triangle identity give $\\Psi(h)\\circ\\eta_A=U\\varepsilon_N\\circ\\eta_{UN}\\circ h=h$. Conversely, for $q:UFA\\to UN$, step 7 and naturality give $\\Psi(q\\circ\\eta_A)=U\\varepsilon_N\\circ UF(q)\\circ UF(\\eta_A)=U\\varepsilon_N\\circ UF(q)\\circ\\eta_{UFA}=U\\varepsilon_N\\circ\\eta_{UN}\\circ q=q$. These two equations prove the claimed bijection with precisely its displayed inverse. All preceding constructions are unbounded; if $s$ is zero or nilpotent then $S$ is the zero sheaf and the same equations still hold. No nonzero assumption was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors); explicit inverse computations from naturality and the right triangle identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-derived-localization-additive",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Derived reflection argument from the exact scalar adjunction, using Tags 03CY, 03CZ, 03ET; derived.tex Tags 015F, 0FND, 09T5 and sites-cohomology.tex Tags 06YS, 07A6."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -133,10 +246,123 @@
    },
    "date": "2026-10-21",
    "verdict": "No match: ordinary module localization, sheafification adjunctions, and localization of adjunctions do not state derived reflection for a localized ring sheaf with its normalized unit and counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived extension restriction of scalars adjunction for localization of a sheaf of rings has isomorphic counit and unit induces bijective precomposition on maps to restricted complexes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.Localization.ε",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "ModuleCat.ExtendRestrictScalarsAdj.Unit.map"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for this ring-sheaf derived assertion: hits give ordinary localized-module linearity, sheafification, or abstract derived adjunction/factorizations. They do not supply all clauses by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars to the sheafified localization of a ring sheaf at a global section is exact termwise and its adjunction counit with restriction of scalars is an isomorphism",
+   "results": {
+    "hits": 8,
+    "top": [
+     "PresheafOfModules.sheafificationAdjunction",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for this ring-sheaf derived assertion: hits give ordinary localized-module linearity, sheafification, or abstract derived adjunction/factorizations. They do not supply all clauses by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsOfIsLocalizationEquiv|localization_unit_app|localization_counit_app|mapDerivedCategoryFactors",
+   "results": {
+    "hits": 16,
+    "top": [
+     "Mathlib/CategoryTheory/Localization/FiniteProducts.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for this ring-sheaf derived assertion: hits give ordinary localized-module linearity, sheafification, or abstract derived adjunction/factorizations. They do not supply all clauses by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a localization of a sheaf of commutative rings restriction of scalars on unbounded derived categories is fully faithful and the scalar extension unit is idempotent",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.fullyFaithfulForget",
+     "LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+     "SheafOfModules.instFullPresheafOfModulesValRingCatForget",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat",
+     "CondensedMod.LocallyConstant.instFullModuleCatFunctor"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for this ring-sheaf derived assertion: hits give ordinary localized-module linearity, sheafification, or abstract derived adjunction/factorizations. They do not supply all clauses by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(localiz|Localization).*(counit|fullyFaithful)|(counit|fullyFaithful).*(localiz|Localization)",
+   "results": {
+    "hits": 18,
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/FiniteProducts.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean"
+    ],
+    "note": "",
+    "search_digest": "58263baa70d6f18a"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete ring-sheaf derived assertion; this rerun records the present Mathlib result in addition to the retained inherited search."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"counit\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "search_digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "No match for the complete ring-sheaf derived assertion; this rerun records the present Mathlib result in addition to the retained inherited search."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-hom-localization-comparison",
@@ -154,5 +380,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-derived-scalar-localization-reflection",
+  "worker": "stage1",
+  "summary": "Repair of returned head cc37660e338 after the live-DAG promotion refusal. Re-read all current statement and proof dependencies and retained the unchanged item statement and search evidence. Made the tensor-order comparison in step 4 and the naturality formulas in steps 4 and 6 explicit. Reused the current exact localization, normalized scalar adjunction, derived factorization and sheafification interfaces; no new nodes.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). Realizes returned parent lem-sfb-internal-hom-localization-comparison steps 2–3, serving the rational coefficient passage of lem-sfb-dc-hom-small-coefficients in sk-def-sfb-dc-restricted-functors; existing from.place and via retained. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "why": "Exactness of actual sheafified scalar extension at a global section; a generic ringed-site input not supplied by the constructible restricted-functor unit."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Exact scalar restriction and the normalized ordinary scalar adjunction for arbitrary ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identification of an exact termwise localization with its universal left and right derived functors."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The universal K-flat derived scalar-extension functor, needed to identify the exact factorization with the specified F."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The specified evaluation-normalized unbounded scalar adjunction, whose normalization is compared to termwise descent."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "A flat-term K-flat resolution of every unbounded complex, needed to compare the prescribed units on all objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-40dcdd51c",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-40dcdd51c (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, with every cited node statement. No new nodes and no repair note, so this is not a re-split. The statement, deps and blueprint are unchanged from cc37660e3385; only steps 4 and 6 were made explicit. Step 1: exactness of E comes from lem-weil-pbc-scalar-localization-sheaf-exact, and the ordinary unit and multiplication counit come from the ordinary-adjunction Hom formula plus balancing. Step 2: uniqueness of right Kan extensions identifies D(E) with Lφ*, and U is literally termwise Res. Step 3: the transformations are lifted and the triangle identities checked through localization-universal-property clauses (2) and (3). Step 4: the unit is matched with the normalized one on flat-term K-flat P via c_P and the tensor switch, then on every Q_R M through a K-flat resolution and naturality, then on every object by essential surjectivity; the counit follows from unit uniqueness. Step 5: j(x)=1⊗x commutes with s^{-1}, so it is B=R[1/s]-linear, and the 03CY interface makes it S-linear; μj=1 and jμ=1 are checked on pure tensors and extended through sheafification. This correctly avoids assuming S(V)=R(V)[1/s]. Step 6: invertibility extends to all of D(S) by conjugation. Steps 7–8: the triangle-identity and naturality algebra is verified, and it gives exactly the displayed inverse. Edge cases: s a unit, s zero or nilpotent (S=0), unbounded complexes. Sources checked: 03ET at l.4293, 03CZ at l.933, 03CY at l.815, 0FND at derived l.9517; the tag table agrees. No duplicate of a general node exists (only scheme-specific integral→rational special cases), there is no cycle, and both citers use exactly the stated clauses. All six tool_uses are accepted as generic."
  }
 }
