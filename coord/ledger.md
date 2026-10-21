@@ -22935,3 +22935,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:32 L: returned deliver/NN/lem-sf-cbc-localized-strict-tensor-descent (reviewer RETURN: L: independent stage-2 immutable head 15083fd32d87: H2 (and H12 for def-sf-localized-strict-tensor-comparison-data): stm)
 - 15:33 L: returned deliver/N0/def-per-support-condition (reviewer RETURN: C1/F. The item is live: it is not on the drop list, and the live lem-per-artin-gabber-affine-curve and def-per-perverse-)
 - 15:33 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 15:33 L: returned deliver/NY/def-per-support-condition (reviewer RETURN: I read the master order-2738 source, the delivered item, the report and the statements of every cited node. The STATEMEN)
