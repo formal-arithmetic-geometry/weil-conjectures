@@ -16,85 +16,45 @@
  ],
  "proof": [
   {
-   "text": "For $R=A,B,C$, take $\\mathcal A_R=\\operatorname{Mod}(R_Z)$ and $\\mathcal B_R=\\operatorname{Mod}(R_Y)$ on the small sites of [def-weil-pbc-proetale-site], and $F_R=p_*^R$ from [def-weil-pbc-proetale-operations]. These are abelian categories, and $F_R$ is additive: its maps and addition are computed on sections. The small-site hypothesis of [prop-pur-kinjective-resolutions-exist] holds by the chosen small skeleton, so every complex of $\\mathcal A_R$ has a K-injective resolution. Scalar restriction on both sites is exact and has the stated termwise derived functor by [lem-weil-proetale-direct-image-restriction-of-scalars]. Its definition [def-pc-sheaf-restrict-scalars] and the formula $(p_*M)(U)=M(Z\\times_YU)$ give $F_Rr_{\\theta,Z}=r_{\\theta,Y}F_S$ on sections and on maps: both give $M(Z\\times_YU)$ with $a\\cdot m=\\theta(a)m$.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-proetale-operations",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
-   }
-  },
-  {
-   "text": "First prove uniqueness for any one map $\\theta:R\\to S$. Suppose $\\gamma$ is another natural isomorphism satisfying the prescribed normalization. For each K-injective $S_Z$-complex $H$, choose a resolution of $r_{\\theta,Z}H$ by [prop-pur-kinjective-resolutions-exist]. The normalization in [lem-weil-proetale-direct-image-restriction-of-scalars] makes both $\\gamma_{QH}$ and $\\beta_{\\theta,QH}$ the inverse of the same localized direct-image map, under the same canonical evaluations. Thus they agree. For arbitrary $L$, choose a representing complex $N$ in [def-weil-abstract-derived-category] and a K-injective resolution $N\\to H$. It gives an isomorphism $q:L\\xrightarrow{\\sim}QH$. Put $U=P_Rr_{\\theta,Z}$ and $V=r_{\\theta,Y}P_S$. Naturality gives $V(q)\\gamma_L=\\gamma_{QH}U(q)=\\beta_{\\theta,QH}U(q)=V(q)\\beta_{\\theta,L}$. Cancel the isomorphism $V(q)$ to obtain $\\gamma_L=\\beta_{\\theta,L}$.",
+   "text": "For a K-injective B-complex H choose a K-injective resolution j of its scalar restriction, using the existing HasKInjectiveResolutions instance for module-valued sheaves. The supplied normalization theorem [lem-weil-proetale-direct-image-restriction-of-scalars] and the normalization hypothesis for gamma have the same right side. The image of j under direct image is a quasi-isomorphism by the supplied theorem, so its localization is invertible. Cancel this map and the two canonical evaluation isomorphisms to identify the components at Q(H).",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
-   }
-  },
-  {
-   "text": "To apply the generic composition theorem with strict composite restriction functors, put $r_{01}=r_{\\varphi,Z}$, $r_{12}=r_{\\psi,Z}$, $r_{02}=r_{01}r_{12}$, and similarly $s_{01},s_{12},s_{02}$ on $Y$. Define\n$$\\widetilde\\beta_{02}=\\rho_Y^{-1}P_C\\circ\\beta_\\chi\\circ P_A(\\rho_Z).$$\nThe associators $\\rho_T$ are the sectionwise identity: the action of $a\\in A$ is $\\psi(\\varphi(a))$. Hence they commute with $p_*$ and with every complex map, including resolution maps. Their localization is the canonical exact-functor identification of [lem-weil-pbc-exact-functor-derived-factorization]. For a K-injective $C_Z$-complex $H$ and any K-injective resolution $a:r_{02}H\\to I$, set $d=a\\rho_{Z,H}^{-1}:r_{\\chi,Z}H\\to I$. This is a K-injective resolution. The normalization of $\\beta_\\chi$ says its component in the evaluation using $d$ is $[p_*d]^{-1}$. Changing to $a$ in the source and $s_{02}$ in the target conjugates this map by the sectionwise-identity associators; since $d\\rho_{Z,H}=a$, the resulting component is exactly $[p_*a]^{-1}$. Explicitly, write $c_a,c_d$ for the canonical resolution identifications. In [lem-sf-kinjective-derived-map-computation] take $h=Q(\\rho_{Z,H})$, source resolution $a$ and target resolution $d$. Its transported map is $(Qd)h(Qa)^{-1}=1_{QI}$, so its unique homotopy representative is $1_I$ and\n$$c_d\\circ P_A(Q\\rho_{Z,H})\\circ c_a^{-1}=[p_*1_I]=1_{Q(p_*I)}.$$\nOn the target the identity $p_*\\rho_{Z,H}=\\rho_{Y,p_*H}$ identifies the two coefficient presentations. Thus $\\widetilde\\beta_{02}$ has precisely the generic normalization, not just the correct endpoints.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-sf-kinjective-derived-map-computation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
-   }
-  },
-  {
-   "text": "Apply [lem-sf-normalized-derived-comparison-composition] with indices $0,1,2$ corresponding to $A,B,C$, the six abelian categories and the three additive direct-image functors of step 1, and the exact restriction functors of step 3. Its equalities $r_{02}=r_{01}r_{12}$ and $s_{02}=s_{01}s_{12}$ hold by their definitions. All three underived direct-image squares are the sectionwise equalities checked in step 1. The total right derived functors are exactly the K-injective-defined $P_R$; their canonical resolution identifications are those of [lem-sf-kinjective-derived-map-computation]. The supplied $\\beta_{01}=\\beta_\\varphi$, $\\beta_{12}=\\beta_\\psi$ have the required inverse-resolution-map normalization by [lem-weil-proetale-direct-image-restriction-of-scalars], and $\\beta_{02}=\\widetilde\\beta_{02}$ has it by step 3. Existence of all required resolutions was checked in step 1. The theorem therefore gives, for every $L$,\n$$\\widetilde\\beta_{02,L}=r_{\\varphi,Y}(\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_{\\psi,Z}L}.$$\nIn particular the generic theorem does not require any restriction functor to preserve K-injectives.",
-   "uses": [
-    "lem-sf-normalized-derived-comparison-composition",
-    "lem-sf-kinjective-derived-map-computation",
     "lem-weil-proetale-direct-image-restriction-of-scalars"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
-   }
+   "elementary": false
   },
   {
-   "text": "Substitute the definition of $\\widetilde\\beta_{02,L}$ into the last equation and compose on the left with $\\rho_{Y,P_CL}$. Cancellation of $\\rho_Y\\rho_Y^{-1}$ yields\n$$\\beta_{\\chi,L}\\circ P_A(\\rho_{Z,L})=\\rho_{Y,P_CL}\\circ r_{\\varphi,Y}(\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_{\\psi,Z}L},$$\nwhich is the asserted cocycle with its specified associators. All categories used were the unbounded categories of all module sheaves; the only coefficient hypotheses used to invoke the supplied comparisons were that the rings are finite and commutative.",
+   "text": "For arbitrary L choose an isomorphism e:L -> Q(H) with H K-injective, using DerivedCategory.exists_iso_Q_obj_of_isKInjective and [def-weil-abstract-derived-category]. Naturality transports the equality of components at Q(H) to L; cancel the functorial image of e. Extensionality gives equality of natural isomorphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the coefficient-pasting calculation by private helpers in the item module, retaining the argument previously read in the quarantined Sheaf.Paper.FiniteCoefficientDirectImage without importing that unavailable module. The supplied underived mate identity [lem-weil-proetale-direct-image-restriction-of-scalars] gives the scalar/pullback unit identity. Transpose along the ordinary pullback/direct-image adjunction to prove the two-coefficient chain with the sectionwise identity associators. Pass this identity through exact localization [lem-weil-pbc-exact-functor-derived-factorization], using mapDerivedCategorySquareIso_hom_app_comp, and transport along the canonical leftDerivedUpperStarIsoMapDerivedCategory isomorphisms. A generic mate-pasting calculation follows by transposing along the last adjunction, its counit identity and naturality. Apply it to the C-, B-, and A-coefficient derived adjunctions. The actual definition in [lem-weil-proetale-direct-image-restriction-of-scalars] identifies these mates with the inverses of the specified beta comparisons. Thus beta_chi inverse is rho_Y inverse followed by r_phi,Y(beta_psi inverse), beta_phi inverse at r_psi,X(L), and P_A(rho_X). All calculations use arbitrary schemes and commutative rings.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the four factors from the preceding equality as an isomorphism z. Equality of their hom maps gives beta_chi inverse = z. Apply congrArg Iso.inv, obtaining beta_chi = P_A(rho_X inverse), followed by beta_phi, r_phi,Y(beta_psi), and rho_Y. Precompose with P_A(rho_X), use functoriality and the isomorphism cancellation law, and obtain the asserted cocycle. No coefficient restriction is assumed to preserve K-injective complexes.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-proetale-operations",
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "def-pc-sheaf-restrict-scalars",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-sf-kinjective-derived-map-computation",
-  "lem-sf-normalized-derived-comparison-composition"
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+  "place": "Tag 070Y (lemma-K-injective-defined) for uniqueness on K-injective representatives. Agent-written coefficient-pasting argument: ordinary adjunction units, exact localization and mate counits. Private proved calculations adapted by Q8 from the archived FiniteCoefficientDirectImage on 2026-10-21; no import of that quarantined module."
  },
  "mathlib_searches": [
   {
@@ -248,5 +208,15 @@
   "group": "NH",
   "result": "pass",
   "note": "The snapshot node differs from live only in lean, the 5 stmt_dep files are identical to live, and lean.statement is verbatim. _unique: γ has the type of fixedScalarRestrictionDirectImage φ f, and hγ is the dependency's _kInjective normalization verbatim (every K-injective H, I and quasi-iso j), so it is not vacuous. _cocycle: P_A(ρ_X) ≫ β_χ = β_φ(r_ψ L) ≫ r_φ(β_ψ L) ≫ ρ_Y(P_C L), where ρ = derivedRestrictScalarsCompIso rfl (r_ψ⋙r_φ ≅ r_{ψ∘φ}, termwise restrictScalarsComp'); orientation and endpoints checked. Arbitrary f, unbounded L, no K-injective preservation, universes as in the dependency. Edge cases: identity maps, empty scheme, zero ring, ℤ/4→ℤ/2. No duplicate: the Rf_! cocycle (parent) and pullback chain differ. Both theorems sorry, no defs, docstrings carry 070Y and the blueprint id with steps, longest line 100 chars, plain imports are the proof-dep modules mandated by brief-stage2 l.104. nt_compile --json: 33.1 s clean. Advisory: the Second reading section is a self-check (no other worker allowed), as in earlier PASSes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261021T120456-L-3899692",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

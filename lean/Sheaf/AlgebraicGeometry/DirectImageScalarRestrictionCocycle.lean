@@ -1,15 +1,12 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NH
+Authors: SHEAF groups NH and Q8
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
-import Sheaf.CategoryTheory.NormalizedDerivedComparisonComposition
+import all Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
 
 /-!
 # Coefficient cocycle of the normalized pro-etale derived direct image
@@ -32,7 +29,261 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 
+-- The coefficient-chain calculation uses only exact localization and adjunctions.
+/-- Mates preserve a pasted coefficient square: transpose along the final adjunction and use
+its counit, naturality, and the two individual mate identities.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem mate_chain
+    {A B C D E F : Type*}
+    [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]
+    {P : A ⥤ B} {Q : B ⥤ A} (adj : Q ⊣ P)
+    {P' : C ⥤ D} {Q' : D ⥤ C} (adj' : Q' ⊣ P')
+    {P'' : E ⥤ F} {Q'' : F ⥤ E} (adj'' : Q'' ⊣ P'')
+    {S : B ⥤ D} {S' : A ⥤ C} {T : D ⥤ F} {T' : C ⥤ E}
+    {U : B ⥤ F} {U' : A ⥤ E}
+    (α : S ⋙ Q' ⟶ Q ⋙ S') (β : T ⋙ Q'' ⟶ Q' ⋙ T')
+    (γ : U ⋙ Q'' ⟶ Q ⋙ U') (c : S ⋙ T ≅ U) (c' : S' ⋙ T' ≅ U')
+    (hγ : ∀ M : B, γ.app M = Q''.map (c.inv.app M) ≫ β.app (S.obj M) ≫
+      T'.map (α.app M) ≫ c'.hom.app (Q.obj M)) (K : A) :
+    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ γ)).natTrans.app K =
+      c.inv.app (P.obj K) ≫ T.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α)).natTrans.app K) ≫
+        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ β)).natTrans.app (S'.obj K) ≫
+        P''.map (c'.hom.app K) := by
+  apply (adj''.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  erw [adj''.counit_naturality]
+  rw [mateEquiv_counit]
+  rw [reassoc_of% (mateEquiv_counit adj' adj'' (TwoSquare.mk _ _ _ _ β) (S'.obj K)), hγ]
+  simp only [Category.assoc]
+  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  erw [β.naturality_assoc]
+  simp only [Functor.comp_map]
+  slice_rhs 3 4 => rw [← T'.map_comp, mateEquiv_counit, T'.map_comp]
+  simp only [Category.assoc]
+  rw [← c'.hom.naturality]
+  rfl
+
+/-- Exact localization preserves coefficient pasting. Apply the square-composition API to
+the inverse squares and cancel the comparison isomorphisms.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem derive_chain
+    {A₀ A₁ A₂ B₀ B₁ B₂ : Type (u + 1)}
+    [Category.{u} A₀] [Category.{u} A₁] [Category.{u} A₂]
+    [Category.{u} B₀] [Category.{u} B₁] [Category.{u} B₂]
+    [Abelian A₀] [Abelian A₁] [Abelian A₂]
+    [Abelian B₀] [Abelian B₁] [Abelian B₂]
+    [HasDerivedCategory.{u} A₀] [HasDerivedCategory.{u} A₁] [HasDerivedCategory.{u} A₂]
+    [HasDerivedCategory.{u} B₀] [HasDerivedCategory.{u} B₁] [HasDerivedCategory.{u} B₂]
+    (R₁₀ : A₁ ⥤ A₀) (R₂₁ : A₂ ⥤ A₁) (R₂₀ : A₂ ⥤ A₀)
+    (U₁₀ : B₁ ⥤ B₀) (U₂₁ : B₂ ⥤ B₁) (U₂₀ : B₂ ⥤ B₀)
+    (Q₀ : A₀ ⥤ B₀) (Q₁ : A₁ ⥤ B₁) (Q₂ : A₂ ⥤ B₂)
+    [R₁₀.Additive] [R₂₁.Additive] [R₂₀.Additive]
+    [U₁₀.Additive] [U₂₁.Additive] [U₂₀.Additive]
+    [Q₀.Additive] [Q₁.Additive] [Q₂.Additive]
+    [PreservesFiniteLimits R₁₀] [PreservesFiniteColimits R₁₀]
+    [PreservesFiniteLimits R₂₁] [PreservesFiniteColimits R₂₁]
+    [PreservesFiniteLimits R₂₀] [PreservesFiniteColimits R₂₀]
+    [PreservesFiniteLimits U₁₀] [PreservesFiniteColimits U₁₀]
+    [PreservesFiniteLimits U₂₁] [PreservesFiniteColimits U₂₁]
+    [PreservesFiniteLimits U₂₀] [PreservesFiniteColimits U₂₀]
+    [PreservesFiniteLimits Q₀] [PreservesFiniteColimits Q₀]
+    [PreservesFiniteLimits Q₁] [PreservesFiniteColimits Q₁]
+    [PreservesFiniteLimits Q₂] [PreservesFiniteColimits Q₂]
+    (e₀₁ : R₁₀ ⋙ Q₀ ≅ Q₁ ⋙ U₁₀) (e₁₂ : R₂₁ ⋙ Q₁ ≅ Q₂ ⋙ U₂₁)
+    (e₀₂ : R₂₀ ⋙ Q₀ ≅ Q₂ ⋙ U₂₀)
+    (r : R₂₁ ⋙ R₁₀ ≅ R₂₀) (t : U₂₁ ⋙ U₁₀ ≅ U₂₀)
+    (he : ∀ M, e₀₂.hom.app M = Q₀.map (r.inv.app M) ≫
+      e₀₁.hom.app (R₂₁.obj M) ≫ U₁₀.map (e₁₂.hom.app M) ≫ t.hom.app (Q₂.obj M))
+    (M : DerivedCategory A₂) :
+    (Functor.mapDerivedCategorySquareIso e₀₂).hom.app M =
+      Q₀.mapDerivedCategory.map
+        (((Functor.mapDerivedCategoryCompIso R₂₁ R₁₀).symm ≪≫
+          Functor.mapDerivedCategoryNatIso r).inv.app M) ≫
+      (Functor.mapDerivedCategorySquareIso e₀₁).hom.app (R₂₁.mapDerivedCategory.obj M) ≫
+      U₁₀.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso e₁₂).hom.app M) ≫
+      ((Functor.mapDerivedCategoryCompIso U₂₁ U₁₀).symm ≪≫
+        Functor.mapDerivedCategoryNatIso t).hom.app (Q₂.mapDerivedCategory.obj M) := by
+  have hi (N : A₂) : e₀₂.inv.app N ≫ Q₀.map (r.inv.app N) =
+      t.inv.app (Q₂.obj N) ≫ U₁₀.map (e₁₂.inv.app N) ≫ e₀₁.inv.app (R₂₁.obj N) := by
+    let z := Q₀.mapIso (r.symm.app N) ≪≫ e₀₁.app (R₂₁.obj N) ≪≫
+      U₁₀.mapIso (e₁₂.app N) ≪≫ t.app (Q₂.obj N)
+    have hz : e₀₂.app N = z := Iso.ext (he N)
+    have hh := congrArg Iso.inv hz
+    dsimp only [z, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Iso.symm_inv] at hh
+    rw [hh]
+    simp only [Category.assoc, ← Q₀.map_comp, Iso.hom_inv_id_app, Q₀.map_id,
+      Category.comp_id]
+  have h := Functor.mapDerivedCategorySquareIso_hom_app_comp
+    e₁₂.symm e₀₁.symm e₀₂.symm t.symm r.symm hi M
+  apply (cancel_epi ((Functor.mapDerivedCategorySquareIso e₀₂).inv.app M)).1
+  simp only [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryTriangleIso,
+    Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom,
+    Iso.trans_inv, NatTrans.comp_app, Category.assoc, Iso.symm_inv] at h ⊢
+  rw [reassoc_of% h]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
+    Iso.inv_hom_id_app, Iso.inv_hom_id_app]
+  rw [← Functor.map_comp_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
+    Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app]
+  rfl
+
+/-- Transport coefficient pasting along three natural isomorphisms. Naturality moves
+the source associator past the first comparison; the intermediate inverses cancel.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem transport_chain
+    {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
+    [Category A₀] [Category A₁] [Category A₂]
+    [Category B₀] [Category B₁] [Category B₂]
+    (R₁₀ : A₁ ⥤ A₀) (R₂₁ : A₂ ⥤ A₁) (R₂₀ : A₂ ⥤ A₀)
+    (U₁₀ : B₁ ⥤ B₀) (U₂₁ : B₂ ⥤ B₁) (U₂₀ : B₂ ⥤ B₀)
+    {Q₀ q₀ : A₀ ⥤ B₀} {Q₁ q₁ : A₁ ⥤ B₁} {Q₂ q₂ : A₂ ⥤ B₂}
+    (a₀ : Q₀ ≅ q₀) (a₁ : Q₁ ≅ q₁) (a₂ : Q₂ ≅ q₂)
+    (e₀₁ : R₁₀ ⋙ q₀ ≅ q₁ ⋙ U₁₀) (e₁₂ : R₂₁ ⋙ q₁ ≅ q₂ ⋙ U₂₁)
+    (e₀₂ : R₂₀ ⋙ q₀ ≅ q₂ ⋙ U₂₀)
+    (r : R₂₁ ⋙ R₁₀ ≅ R₂₀) (t : U₂₁ ⋙ U₁₀ ≅ U₂₀)
+    (he : ∀ M, e₀₂.hom.app M = q₀.map (r.inv.app M) ≫
+      e₀₁.hom.app (R₂₁.obj M) ≫ U₁₀.map (e₁₂.hom.app M) ≫ t.hom.app (q₂.obj M))
+    (M : A₂) :
+    (Functor.isoWhiskerLeft R₂₀ a₀ ≪≫ e₀₂ ≪≫
+      Functor.isoWhiskerRight a₂.symm U₂₀).hom.app M = Q₀.map (r.inv.app M) ≫
+    (Functor.isoWhiskerLeft R₁₀ a₀ ≪≫ e₀₁ ≪≫
+      Functor.isoWhiskerRight a₁.symm U₁₀).hom.app (R₂₁.obj M) ≫
+    U₁₀.map ((Functor.isoWhiskerLeft R₂₁ a₁ ≪≫ e₁₂ ≪≫
+      Functor.isoWhiskerRight a₂.symm U₂₁).hom.app M) ≫ t.hom.app (Q₂.obj M) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.symm_hom, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (a₀.hom.naturality (r.inv.app M)), he]
+  slice_rhs 4 5 => rw [← U₁₀.map_comp, Iso.inv_hom_id_app, U₁₀.map_id]
+  simp only [Category.assoc]
+  rw [← t.hom.naturality]
+  simp only [Functor.comp_map]
+  erw [Category.id_comp]
+
 namespace AlgebraicGeometry.ProEtale
+
+/-- The ordinary pullback/scalar comparison satisfies the adjunction unit identity,
+since its supplied ordinary mate is the identity on direct images.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {T X : Scheme.{u}} (f : T ⟶ X)
+    (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) :
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).unit.app
+      ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).obj M) ≫
+      (lowerStar (ModuleCat.{u + 1} A) f).map ((upperStarRestrictScalarsIso φ f).hom.app M) =
+    (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).map
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).unit.app M) := by
+  have h := unit_mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom) M
+  have hm := restriction_underived_mate φ f
+  dsimp only [TwoSquare.natTrans] at hm
+  rw [hm] at h
+  simpa using h.symm
+
+/-- Ordinary scalar-pullback comparisons compose. Transpose along the pullback
+adjunction, use the unit identity twice, and compare sectionwise identity associators.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem e_chain {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    (φ : A →+* B) (ψ : B →+* C) {T X : Scheme.{u}} (f : T ⟶ X)
+    (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C)) :
+    (upperStarRestrictScalarsIso (ψ.comp φ) f).hom.app M =
+      (upperStar (ModuleCat.{u + 1} A) f).map
+        ((Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology X) φ ψ (ψ.comp φ) rfl).inv.app M) ≫
+      (upperStarRestrictScalarsIso φ f).hom.app
+        ((Sheaf.restrictScalars (Scheme.ProEt.topology X) ψ).obj M) ≫
+      (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).map
+        ((upperStarRestrictScalarsIso ψ f).hom.app M) ≫
+      (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology T) φ ψ (ψ.comp φ) rfl).hom.app
+        ((upperStar (ModuleCat.{u + 1} C) f).obj M) := by
+  apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [e_unit]
+  erw [← (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).unit.naturality_assoc]
+  erw [reassoc_of% (e_unit φ f ((Sheaf.restrictScalars (Scheme.ProEt.topology X) ψ).obj M))]
+  change _ = _ ≫ (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).map
+    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).unit.app
+      ((Sheaf.restrictScalars (Scheme.ProEt.topology X) ψ).obj M)) ≫
+    (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).map
+      ((lowerStar (ModuleCat.{u + 1} B) f).map
+        ((upperStarRestrictScalarsIso ψ f).hom.app M)) ≫ _
+  rw [← Functor.map_comp_assoc, e_unit]
+  ext U x
+  rfl
+
+/-- Localize the ordinary coefficient chain termwise and transport to the specified
+derived pullbacks; no preservation of K-injectives is used.
+Source: the coefficient-pasting argument of
+(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+private theorem scalarRestriction_chain
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    (φ : A →+* B) (ψ : B →+* C) {T X : Scheme.{u}} (f : T ⟶ X)
+    (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))) :
+    (leftDerivedUpperStarRestrictScalarsIso.{u} (ψ.comp φ) f).hom.app M =
+      ((Functor.leftDerivedFunctor.{u + 2, u + 2, u + 1, u + 1, u + 1, u + 1}
+        (upperStar.{u + 2, u} (ModuleCat.{u + 1} A) f))).map
+        ((Sheaf.derivedRestrictScalarsCompIso.{u} (Scheme.ProEt.topology X) rfl
+          (f := φ) (g := ψ)).inv.app M) ≫
+      (leftDerivedUpperStarRestrictScalarsIso.{u} φ f).hom.app
+        ((Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) ψ).obj M) ≫
+      (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) φ).map
+        ((leftDerivedUpperStarRestrictScalarsIso.{u} ψ f).hom.app M) ≫
+      (Sheaf.derivedRestrictScalarsCompIso.{u} (Scheme.ProEt.topology T) rfl
+        (f := φ) (g := ψ)).hom.app (((Functor.leftDerivedFunctor.{u + 2, u + 2, u + 1, u + 1, u + 1,
+          u + 1}
+        (upperStar.{u + 2, u} (ModuleCat.{u + 1} C) f))).obj M) := by
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  exact @transport_chain.{u + 2, u + 2, u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1, u + 1, u + 1}
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} B)))
+    (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} C)))
+    inferInstance inferInstance inferInstance inferInstance inferInstance inferInstance
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) φ)
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) ψ)
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology X) (ψ.comp φ))
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) φ)
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) ψ)
+    (Sheaf.derivedRestrictScalars.{u} (Scheme.ProEt.topology T) (ψ.comp φ))
+    _ _ _ _ _ _
+    (leftDerivedUpperStarIsoMapDerivedCategory.{u + 2, u} (ModuleCat.{u + 1} A) f)
+    (leftDerivedUpperStarIsoMapDerivedCategory.{u + 2, u} (ModuleCat.{u + 1} B) f)
+    (leftDerivedUpperStarIsoMapDerivedCategory.{u + 2, u} (ModuleCat.{u + 1} C) f)
+    (Functor.mapDerivedCategorySquareIso.{u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1} (upperStarRestrictScalarsIso φ f))
+    (Functor.mapDerivedCategorySquareIso.{u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1} (upperStarRestrictScalarsIso ψ f))
+    (Functor.mapDerivedCategorySquareIso.{u + 2, u + 2, u + 2, u + 2,
+      u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1, u + 1} (upperStarRestrictScalarsIso (ψ.comp
+        φ) f))
+    (Sheaf.derivedRestrictScalarsCompIso.{u} (Scheme.ProEt.topology X) rfl)
+    (Sheaf.derivedRestrictScalarsCompIso.{u} (Scheme.ProEt.topology T) rfl)
+    (derive_chain.{u + 1}
+      (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
+      (Sheaf.restrictScalars (Scheme.ProEt.topology X) ψ)
+      (Sheaf.restrictScalars (Scheme.ProEt.topology X) (ψ.comp φ))
+      (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ)
+      (Sheaf.restrictScalars (Scheme.ProEt.topology T) ψ)
+      (Sheaf.restrictScalars (Scheme.ProEt.topology T) (ψ.comp φ))
+      (upperStar.{u + 2, u} (ModuleCat.{u + 1} A) f)
+      (upperStar.{u + 2, u} (ModuleCat.{u + 1} B) f)
+      (upperStar.{u + 2, u} (ModuleCat.{u + 1} C) f)
+      (upperStarRestrictScalarsIso φ f) (upperStarRestrictScalarsIso ψ f)
+      (upperStarRestrictScalarsIso (ψ.comp φ) f)
+      (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology X) φ ψ (ψ.comp φ) rfl)
+      (Sheaf.restrictScalarsCompIso (Scheme.ProEt.topology T) φ ψ (ψ.comp φ) rfl)
+      (e_chain φ ψ f)) M
 
 /-- The inverse-resolution-map normalization determines the direct-image comparison uniquely.
 Source: Stacks Tag 070Y and step 2 of the coefficient cocycle argument
@@ -81,33 +332,49 @@ theorem fixedScalarRestrictionDirectImage_unique
             (R((f)_*[ModuleCat.{u + 1} A])).map (_root_.DerivedCategory.Q.map j) ≫
             ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorObjQIso I).hom) :
     γ = fixedScalarRestrictionDirectImage φ f := by
-  sorry
+  have hH (H : CochainComplex
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) ℤ) [H.IsKInjective] :
+      γ.hom.app (_root_.DerivedCategory.Q.obj H) =
+        (fixedScalarRestrictionDirectImage φ f).hom.app (_root_.DerivedCategory.Q.obj H) := by
+    obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective
+      (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapHomologicalComplex
+        (.up ℤ)).obj H)
+    have : I.IsKInjective := hI
+    have : QuasiIso j := hj
+    obtain ⟨hq, hβ⟩ := fixedScalarRestrictionDirectImage_kInjective φ f H I j
+    have : QuasiIso
+        (((lowerStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).map j) := hq
+    have h := (hγ H I j).2.trans hβ.symm
+    apply (cancel_mono ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).map
+      ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorObjQIso H).hom)).1
+    apply (cancel_mono
+      ((Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryFactors.hom.app
+        (((lowerStar (ModuleCat.{u + 1} B) f).mapHomologicalComplex (.up ℤ)).obj H))).1
+    apply (cancel_mono (_root_.DerivedCategory.Q.map
+      (((lowerStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).map j))).1
+    simpa only [Category.assoc] using h
+  apply Iso.ext
+  apply NatTrans.ext
+  funext L
+  obtain ⟨H, hHinj, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_of_isKInjective L
+  have : H.IsKInjective := hHinj
+  apply (cancel_mono ((R((f)_*[ModuleCat.{u + 1} B]) ⋙
+    Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).map e.hom)).1
+  rw [← γ.hom.naturality, ← (fixedScalarRestrictionDirectImage φ f).hom.naturality, hH H]
 
 /-- Successive finite coefficient comparisons satisfy the cocycle with the canonical
-restriction associators. Source: Stacks Tag 070Y and steps 1, 3--5 of the DAG argument
+restriction associators. Source: Stacks Tag 070Y and the coefficient-pasting DAG argument
 (blueprint: lem-sf-direct-image-scalar-restriction-cocycle).
 
-Proof: (1) The three source and target module-sheaf categories are abelian and have
-K-injective resolutions by `prop-pur-kinjective-resolutions-exist`. Direct image is
-additive and commutes with scalar restriction on sections; restriction is exact by
-`lem-weil-proetale-direct-image-restriction-of-scalars` and
-`def-pc-sheaf-restrict-scalars`.
-(2) Use strict composite restriction functors in the generic theorem. Conjugate beta_chi
-by rho_X and rho_Y inverse. For a K-injective H and a resolution a of its doubly
-restricted complex, put d = rho_X inverse followed by a. The associators are the
-identity on underlying abelian sheaves and commute with direct image. Their derived
-identifications are the termwise localizations supplied by
-`lem-weil-pbc-exact-functor-derived-factorization`.
-(3) Apply `lem-sf-kinjective-derived-map-computation` to the map Q(rho_X) with
-resolutions a and d. Its transported map is the identity, so its unique homotopy
-representative is the identity. Thus the conjugated beta_chi has exactly the same
-inverse-resolution-map normalization as the strict composite comparison.
-(4) Apply `lem-sf-normalized-derived-comparison-composition` to the three additive
-direct-image functors and the exact restrictions, using the normalizations from
-`lem-weil-proetale-direct-image-restriction-of-scalars` and step 3. This gives equality
-of the strict composite comparisons on every L, without preservation of K-injectives.
-(5) Substitute the conjugated beta_chi and cancel rho_Y inverse followed by rho_Y.
-This is the displayed equation, in Lean's left-to-right composition order. -/
+Proof: the private scalar-pullback coherence calculation above uses arbitrary coefficient
+maps and schemes, with the specified restriction associators. Apply the general
+mate-composition lemma to the three derived pullback/direct-image adjunctions.
+The inverse of each specified direct-image comparison is exactly this mate.
+This gives the composition law for the inverse comparisons, with the target
+associator inverse first and the source associator last. Invert the resulting
+component isomorphism and cancel the image of the source associator with its
+inverse. The result is the displayed equation. This uses neither a preservation
+of K-injectives hypothesis nor any geometric finiteness hypothesis. -/
 theorem fixedScalarRestrictionDirectImage_cocycle
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     [Finite A] [Finite B] [Finite C] (φ : A →+* B) (ψ : B →+* C)
@@ -124,6 +391,38 @@ theorem fixedScalarRestrictionDirectImage_cocycle
         ((fixedScalarRestrictionDirectImage ψ f).hom.app L) ≫
       (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology Y)
         (f := φ) (g := ψ) rfl).hom.app ((R((f)_*[ModuleCat.{u + 1} C])).obj L) := by
-  sorry
+  have h := mate_chain
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} C) f)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (leftDerivedUpperStarRestrictScalarsIso ψ f).hom
+    (leftDerivedUpperStarRestrictScalarsIso φ f).hom
+    (leftDerivedUpperStarRestrictScalarsIso (ψ.comp φ) f).hom
+    (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology Y) (f := φ) (g := ψ) rfl)
+    (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology X) (f := φ) (g := ψ) rfl)
+    (scalarRestriction_chain φ ψ f) L
+  change (fixedScalarRestrictionDirectImageMap (ψ.comp φ) f).app L = _ at h
+  let z :=
+    (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology Y)
+      (f := φ) (g := ψ) rfl).symm.app
+        ((R((f)_*[ModuleCat.{u + 1} C])).obj L) ≪≫
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).mapIso
+      ((fixedScalarRestrictionDirectImage ψ f).symm.app L) ≪≫
+    (fixedScalarRestrictionDirectImage φ f).symm.app
+      ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ψ).obj L) ≪≫
+    (R((f)_*[ModuleCat.{u + 1} A])).mapIso
+      ((Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology X)
+        (f := φ) (g := ψ) rfl).app L)
+  have hz : (fixedScalarRestrictionDirectImage (ψ.comp φ) f).symm.app L = z := by
+    apply Iso.ext
+    simpa only [z, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_hom, fixedScalarRestrictionDirectImage_inv,
+      fixedScalarRestrictionDirectImageMap, fixedScalarRestrictionPullback] using h
+  have hh := congrArg Iso.inv hz
+  dsimp only [z, Iso.trans_inv, Iso.symm_inv, Iso.app_inv, Functor.mapIso_inv] at hh
+  rw [hh]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
 
 end AlgebraicGeometry.ProEtale
