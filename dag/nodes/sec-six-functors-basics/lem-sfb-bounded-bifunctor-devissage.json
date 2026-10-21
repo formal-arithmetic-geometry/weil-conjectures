@@ -9,18 +9,93 @@
  },
  "stmt_deps": [
   "def-sbc-standard-tstructure-derived-category",
-  "def-weil-triangulated-subcategory"
+  "def-weil-triangulated-subcategory",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An exact functor is additive [def-weil-triangulated-category]. For either fixed variable, its value on zero is zero: $1_{F(0)}=F(1_0)=F(0)=0$, which characterizes a zero object in an additive category. Thus $B(0,M)$ and $B(K,0)$ lie in $\\mathcal S$. By [def-weil-triangulated-subcategory] and strict fullness, membership in $\\mathcal S$ is preserved by isomorphisms and all integer shifts, and the middle vertex of a distinguished triangle belongs to $\\mathcal S$ whenever its outer vertices do.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories; Tag 05QM, definition-triangulated-subcategory"
+   }
+  },
+  {
+   "text": "For any $L\\in D(\\mathcal C)$, where $\\mathcal C$ is either given abelian category, [lem-weil-pbc-truncation-descends] gives $H^r(\\tau_{\\le q}L)=H^r(L)$ for $r\\le q$ and zero otherwise. If the cohomology of $L$ vanishes outside $[a,b]$, then $\\tau_{\\le a-1}L\\simeq0$ and the canonical map $\\tau_{\\le b}L\\to L$ is an isomorphism: on representatives the map $0\\to\\tau_{\\le a-1}L$ and the latter inclusion are quasi-isomorphisms, hence are inverted in the localization [def-weil-abstract-derived-category]. The same argument shows that an acyclic $L$ is zero in its derived category.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; Tag 05RU, definition-unbounded-derived-category; canonical-truncation cohomology calculation"
+   }
+  },
+  {
+   "text": "For every integer $q$, [lem-weil-pbc-truncation-triangle] supplies the distinguished triangle $$\\tau_{\\le q-1}L\\longrightarrow\\tau_{\\le q}L\\longrightarrow H^q(L)[-q]\\longrightarrow(\\tau_{\\le q-1}L)[1].$$ Applying $B$ with the other variable fixed gives a distinguished triangle in $\\mathcal T$, with the final shift identified by exactness [def-weil-triangulated-category]. We use these triangles twice; no infinite tower or coproduct is taken.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, second displayed triangle with a=q-1; Tag 014V, definition-exact-functor-triangulated-categories"
+   }
+  },
+  {
+   "text": "Fix $F\\in\\mathcal A_0$ and bounded $M$ as in the statement. Choose $c\\le d$ containing its cohomological support. Induct on $j=0,\\ldots,d-c+1$ to prove $B(F[0],\\tau_{\\le c-1+j}M)\\in\\mathcal S$. At $j=0$ this follows from steps 1 and 2. For a successor put $q=c+j$, with $0\\le j\\le d-c$, and apply $B(F[0],-)$ to the triangle of step 3. Its first vertex is in $\\mathcal S$ by induction. If $H^q(M)=0$, its third vertex is zero. Otherwise $H^q(M)\\in\\mathcal B_0$, and $$B(F[0],H^q(M)[-q])\\simeq B(F[0],H^q(M)[0])[-q]\\in\\mathcal S$$ by the hypothesis and shift closure. Thus its middle vertex is in $\\mathcal S$ by [def-weil-triangulated-subcategory]. At the last index $\\tau_{\\le d}M\\simeq M$ by step 2. This proves $B(F[0],M)\\in\\mathcal S$ for every $F\\in\\mathcal A_0$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, finite induction in the second variable; Tag 05QM, definition-triangulated-subcategory"
+   }
+  },
+  {
+   "text": "Fix such an $M$ and bounded $K$ with cohomological support in $[a,b]$, $a\\le b$. Induct on $j=0,\\ldots,b-a+1$ to prove $B(\\tau_{\\le a-1+j}K,M)\\in\\mathcal S$. The initial term is zero by steps 1 and 2. For a successor set $q=a+j$, with $0\\le j\\le b-a$, and apply $B(-,M)$ to the triangle of step 3. Its first vertex is in $\\mathcal S$ by induction. Its third vertex is zero if $H^q(K)=0$; otherwise $H^q(K)\\in\\mathcal A_0$ and step 4 followed by a shift gives $$B(H^q(K)[-q],M)\\simeq B(H^q(K)[0],M)[-q]\\in\\mathcal S.$$ Extension closure [def-weil-triangulated-subcategory] gives the middle vertex. The final term is isomorphic to $B(K,M)$ by step 2. Both intervals may start at any integer; gaps use the zero cases, without requiring zero to belong to either class. In particular this covers acyclic $K$ or $M$ and even empty classes.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, finite induction in the first variable; Tag 05QM, definition-triangulated-subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "lem-weil-pbc-truncation-descends",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Two explicit finite inductions using Tag 08J5 (remark-truncation-distinguished-triangle) and closure from Tag 05QM; the two-variable induction is written here, not stated verbatim by the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "An exact bifunctor sends bounded complexes with cohomology in two specified subcategories into a triangulated subcategory if it does so on all pairs of degree zero objects",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.mk'\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"A functor $ F : C \\to A $ between a pretriangulated category $ C $ (with integer shifts, zero object, and preadditive structure) and an abelian category $ A $ is homological if it preserves zero morphi\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"{C : Type u_1} →\\n  {A : Type u_3} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.HasShift C ℤ] →\\n        [inst_2 : CategoryTheory.Category.{v_3, u_3} A] →\\n          CategoryTheory.Functor C A →\\n            [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n     \", \"doc\": \"A functor $ F : C \\\\to A $ is homological if it satisfies the conditions required for homological functors between a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadd\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For any homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian cate\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an abelian category $\\\\mathcal{A}$, a triangulated functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that commutes with integer-indexed shifts,\"}\n  {\"name\": \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"A morphism $ f $ belongs to the $ \\\\text{trW} $ property of the homological kernel of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ if and only if for every integer $ n $, the image of $ f $ under the \"}",
    "date": "2026-10-21",
-   "verdict": "no match: the returned declarations do not state this ringed-site/scalar-model assertion"
+   "verdict": "no match: the returned declarations do not state the bounded two-variable cohomological induction assertion"
   },
   {
    "tool": "leansearch",
@@ -41,7 +116,7 @@
    "query": "(bifunctor|Bifunctor).*(bounded|trunc)|(bounded|trunc).*(bifunctor|Bifunctor)",
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
-   "verdict": "no match: the returned declarations do not state this ringed-site/scalar-model assertion"
+   "verdict": "no match: the returned declarations do not state the bounded two-variable cohomological induction assertion"
   },
   {
    "tool": "leanfinder",
@@ -63,10 +138,52 @@
    "results": "CategoryTheory.ObjectProperty.IsTriangulated and IsTriangulatedClosed₁/₂/₃, their projections and finite-product instances, all in Mathlib.CategoryTheory.Triangulated.Subcategory. None states generation of bounded objects from two classes of heart objects.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact bifunctor on two derived categories sends bounded pairs to a triangulated subcategory if it sends every pair of their nonzero cohomology objects there",
+   "results": "Hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsHomological.exact, DerivedCategory.instIsTriangulated, DerivedCategory.TStructure.t, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
+  },
+  {
+   "tool": "grep",
+   "query": "(bifunctor|Bifunctor).*(bounded|trunc)|(bounded|trunc).*(bifunctor|Bifunctor)",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"Bounded\"",
+   "results": "Hits: CategoryTheory.Triangulated.TStructure.instIsTriangulatedBounded Read Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean:652-654: the bounded subcategory is triangulated, not a bifunctor or heart-generation assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated bifunctor lands in a triangulated subcategory on bounded complexes if it does so for all pairs of cohomology objects",
+   "results": "Hits: CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.mapBifunctorHomologicalComplexObj, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsTriangulated.casesOn, CategoryTheory.Functor.IsTriangulated.instAdditive, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsHomological.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
+  },
+  {
+   "tool": "grep",
+   "query": "induction|generation|generated|[Bb]ounded",
+   "results": "Hits: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean Subdirectory: CategoryTheory/Triangulated/TStructure.",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded objects of a derived category are generated under shifts and extensions by their cohomology objects; use this to prove closure for an exact functor in two variables",
+   "results": "Hits: DerivedCategory.IsGE, DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.hasExt_of_hasDerivedCategory, DerivedCategory.IsLE, CategoryTheory.hasExt_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: triangulated/t-structure infrastructure, not the bounded two-variable cohomological induction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-integral-models-operations",
@@ -83,5 +200,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-bounded-bifunctor-devissage",
+  "worker": "stage1",
+  "summary": "Wrote both finite truncation inductions directly using existing nodes. Checked endpoint quasi-isomorphisms, zero base cases and gaps in the support without requiring zero in either class. No statement change, new nodes, Lean writing or compilation. No exact project attachment or Mathlib leaf found.",
+  "blueprint": "Realizes the bounded-complex passage in reviewed DAG proof step 5 of det-lem-integral-models-operations, serving paragraph (2) of its blueprint proof: extension of the sheaf tensor calculation to bounded complexes by finite truncations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive-cohomology triangle for arbitrary abelian categories, used in both finite inductions; the integral-model unit does not separately state it."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-descends",
+    "why": "Generic canonical-truncation cohomology formula and descent, used to identify finite-tower endpoints; no integral-model route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-truncation-descends"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-58701bbdc",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-58701bbdc (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement and the parent. The statement is true and unchanged, and it is exactly what step 5 of det-lem-integral-models-operations needs (derived tensor, integral scalar-model classes, D^b_c). Step 1 (zero object, shift and extension closure) follows from def-weil-triangulated-category and def-weil-triangulated-subcategory; strict fullness absorbs H^q being defined only up to isomorphism, so the classes need not be closed under isomorphism. Step 2's endpoints follow from the H^r formula in lem-weil-pbc-truncation-descends (a) and the localization; it is correctly marked elementary. Step 3's triangle is lem-weil-pbc-truncation-triangle; I checked it against Stacks 08J5 (derived.tex:4099-4103, a=q-1), and the tag-label mapping is correct. Step 4 (j=0..d-c+1) and step 5 (j=0..b-a+1) are both set up correctly. H^q[-q]=(H^q[0])[-q] holds, and gaps and empty classes go through the zero cases. Edge cases tested: one-degree inputs, acyclic inputs, empty classes, gaps, negative intervals. No duplicate found: lem-sbc-cohomology-in-weak-serre-subcategory and the trf thick-closure and devissage nodes state different things. There are no new nodes, no SGA citations and no repair note for this item. I accept the two declared tool uses (generic truncation-triangle and truncation-descends nodes of sk-thm-properbasechange). Mathlib searches are recorded with unavailable services marked as such. No changes."
  }
 }
