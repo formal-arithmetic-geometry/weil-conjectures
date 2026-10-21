@@ -18,9 +18,10 @@ import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import all Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
 import Sheaf.Paper.ProjectionFormulaTotalization
+import Sheaf.Paper.ProEtaleMixedProjectionMate
 import Sheaf.Paper.RingedProjectionRestriction
 public import Sheaf.Paper.CompletedConstantSheafReduction
 import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
@@ -764,6 +765,14 @@ def mixed (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (hF : proEtaleFlatRepresentatives T R F) :=
   (mixed_existsUnique T R a I F hF).exists.choose
 
+private theorem mixed_eq (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (a : ProEtaleTensorModel T R)
+    (I F : CochainComplex (proEtaleRingModules T R) ℤ)
+    (hF : proEtaleFlatRepresentatives T R F) :
+    mixed T R a I F hF = proEtaleMixedTensor R a I F hF := rfl
+
+attribute [local irreducible] mixed proEtaleMixedTensor
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary unit comparison is fixed by the ring map adjoint to the coefficients.
@@ -881,34 +890,14 @@ private theorem rightUnit_pair (M : proEtaleRingModules T R) (U : T.ProEtᵒᵖ)
     (ordinaryRightUnit T R M).hom.val.app U
       (proEtaleTensorPair T R M (SheafOfModules.unit ((adicLisseForget T).obj R)) U m r) =
         r • m := by
-  let := SheafOfModules.monoidalCategory R
-  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
-    (𝟙 ((adicLisseForget T).obj R).obj)
-  have he : adj.homEquiv _ M
-      ((SheafOfModules.tensorObjIsoSheafification M
-        (SheafOfModules.unit ((adicLisseForget T).obj R))).inv ≫ (ordinaryRightUnit T R M).hom) =
-      (ρ_ M.val).hom := by
-    rw [unit_test]
-    have h := (adj.homEquiv (M.val ⊗ (SheafOfModules.unit
-      ((adicLisseForget T).obj R)).val) M).apply_symm_apply ((ρ_ M.val).hom)
-    rw [Adjunction.homEquiv_counit] at h
-    exact h
-  exact congrArg (fun z ↦ z.app U (m ⊗ₜ[R.obj.obj U] r)) he
+  rw [ordinaryRightUnit_eq]
+  exact proEtaleTensorPair_rightUnitor T R M U m r
 
 private theorem tensor_hom_ext (M N P : proEtaleRingModules T R)
     (v w : ((proEtaleOrdinaryTensor T R).obj M).obj N ⟶ P)
     (h : ∀ U m n, v.val.app U (proEtaleTensorPair T R M N U m n) =
       w.val.app U (proEtaleTensorPair T R M N U m n)) : v = w := by
-  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
-    (𝟙 ((adicLisseForget T).obj R).obj)
-  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification M N).inv).mp
-  apply (adj.homEquiv (M.val ⊗ N.val) P).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  intro m n
-  exact h U m n
+  exact proEtaleTensorPair_hom_ext T R M N P v w h
 
 private theorem pair_natural {M N N' : proEtaleRingModules T R}
     (w : N ⟶ N') (U : T.ProEtᵒᵖ) (m : M.val.obj U) (n : N.val.obj U) :
@@ -916,20 +905,9 @@ private theorem pair_natural {M N N' : proEtaleRingModules T R}
     (M ◁ w).val.app U (proEtaleTensorPair T R M N U m n) =
       proEtaleTensorPair T R M N' U m (w.val.app U n) := by
   let := SheafOfModules.monoidalCategory R
-  let S := PresheafOfModules.sheafification.{u + 1}
-    (𝟙 ((adicLisseForget T).obj R).obj)
-  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
-    (𝟙 ((adicLisseForget T).obj R).obj)
-  have hn := SheafOfModules.whiskerLeft_tensorObjIsoSheafification_hom_kfg
-    (R := R) M w
-  have hi : (SheafOfModules.tensorObjIsoSheafification (R := R) M N).inv ≫ (M ◁ w) =
-      S.map (M.val ◁ w.val) ≫
-        (SheafOfModules.tensorObjIsoSheafification (R := R) M N').inv := by
-    rw [Iso.inv_comp_eq, ← Category.assoc, ← hn, Category.assoc,
-      Iso.hom_inv_id, Category.comp_id]
-  have he := congrArg (fun z ↦ adj.homEquiv _ _ z) hi
-  rw [Adjunction.homEquiv_naturality_left] at he
-  exact congrArg (fun z ↦ z.app U (m ⊗ₜ[R.obj.obj U] n)) he
+  simpa only [id_tensorHom, SheafOfModules.id_val, NatTrans.id_app,
+    PresheafOfModules.id_app, ModuleCat.id_apply] using
+      proEtaleTensorPair_tensorHom T R (𝟙 M) w U m n
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
@@ -1155,6 +1133,54 @@ def Resolution.targetModel :
       (proEtaleRingDerivedDirectImage_kInjective f (ring d Y) (ring d X)
         (coefficients d f) (r.targetComplex d f K))).symm
 
+attribute [local irreducible] CategoryTheory.tensorAdjunctionTotal
+
+universe v u' v'
+
+private theorem transport_projection
+    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+    (L : C ⥤ D) (V : D ⥤ C) (T : C × C ⥤ C) (U : D × D ⥤ D)
+    (pi : ∀ (K : D) (Q : C), T.obj (V.obj K, Q) ⟶ V.obj (U.obj (K, L.obj Q)))
+    (hn₁ : ∀ {K I : D} (k : K ⟶ I) (Q : C),
+      pi K Q ≫ V.map (U.map (Prod.mkHom k (𝟙 _))) =
+        T.map (Prod.mkHom (V.map k) (𝟙 Q)) ≫ pi I Q)
+    (hn₂ : ∀ (K : D) {P Q : C} (e : P ⟶ Q),
+      T.map (Prod.mkHom (𝟙 _) e) ≫ pi K Q =
+        pi K P ≫ V.map (U.map (Prod.mkHom (𝟙 K) (L.map e))))
+    {K I Z : D} {A F Q : C} (k : K ≅ I) (e : F ≅ Q)
+    (s : A ≅ V.obj I) (q : L.obj Q ≅ Z)
+    {B : C} (t : V.obj (U.obj (I, L.obj F)) ⟶ B)
+    {M : C} (m : T.obj (A, F) ⟶ M) (z : M ⟶ B)
+    (h : T.map (Prod.mkHom s.hom (𝟙 F)) ≫ pi I F ≫ t = m ≫ z) :
+    pi K Q ≫ V.map (U.map (Prod.mkHom (𝟙 K) q.hom)) ≫
+        V.map (U.map (Prod.mkHom k.hom (q.inv ≫ L.map e.inv))) ≫ t =
+      T.map (Prod.mkHom (V.map k.hom ≫ s.inv) e.inv) ≫ m ≫ z := by
+  have hs := congrArg (fun v ↦
+    T.map (Prod.mkHom s.inv (𝟙 F)) ≫ v) h
+  simp only [← Category.assoc, ← T.map_comp, prod_comp, Iso.inv_hom_id,
+    Category.id_comp] at hs
+  change (T.map (𝟙 (V.obj I, F)) ≫ pi I F) ≫ t = _ at hs
+  rw [T.map_id, Category.id_comp, Category.assoc] at hs
+  calc
+    _ = pi K Q ≫ V.map (U.map (Prod.mkHom k.hom (L.map e.inv))) ≫ t := by
+      simp only [← Category.assoc, ← V.map_comp, ← U.map_comp, prod_comp,
+        Category.id_comp]
+      simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    _ = T.map (Prod.mkHom (𝟙 _) e.inv) ≫ pi K F ≫
+        V.map (U.map (Prod.mkHom k.hom (𝟙 _))) ≫ t := by
+      rw [← Category.assoc (T.map _) (pi K F), hn₂ K e.inv, Category.assoc]
+      simp only [← Category.assoc, ← V.map_comp, ← U.map_comp, prod_comp,
+        Category.comp_id, Category.id_comp]
+    _ = T.map (Prod.mkHom (V.map k.hom) e.inv) ≫ pi I F ≫ t := by
+      rw [← Category.assoc (pi K F), hn₁ k.hom F, ← Category.assoc,
+        ← Category.assoc, ← T.map_comp, Category.assoc]
+      simp only [prod_comp, Category.comp_id, Category.id_comp]
+    _ = _ := by
+      have hh := congrArg (fun v ↦ T.map (Prod.mkHom (V.map k.hom) e.inv) ≫ v) hs
+      simpa only [← Category.assoc, ← T.map_comp, prod_comp, Category.comp_id] using hh
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Agreement with signed totalization, for every chosen resolution, fixes both arrows
 and proves resolution independence of the inverse.
 Source: blueprint order 1275, first proof and proof step 6; Stacks 0944
@@ -1173,8 +1199,107 @@ theorem totalization_compatibility :
         (r.targetModel d f aX K).inv ∧
     inverse d f aY aX K n =
       (r.targetModel d f aX K).hom ≫ DerivedCategory.Q.map (r.totalInverse d f K) ≫
-        (r.sourceModel d f aY K).inv := sorry
-
+        (r.sourceModel d f aY K).inv := by
+  have hf := r.flat d f K
+  have : r.injective.IsKInjective := r.isKInjective
+  have : (r.targetComplex d f K).IsKInjective := r.targetComplex_isKInjective d f K
+  let etaI := (ordinaryPush d f).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ _).obj r.injective)
+  let etaJ := (ordinaryPush d f).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ _).obj (r.targetComplex d f K))
+  have : IsIso etaI := proEtaleRingDerivedDirectImage_kInjective f
+    (ring d Y) (ring d X) (coefficients d f) r.injective
+  have : IsIso etaJ := proEtaleRingDerivedDirectImage_kInjective f
+    (ring d Y) (ring d X) (coefficients d f) (r.targetComplex d f K)
+  let si := asIso etaI
+  let ti := (directImage d f).mapIso
+    (aX.tensor.mapIso (Iso.prod (Iso.refl (DerivedCategory.Q.obj r.injective))
+      ((proEtaleRingDerivedPullbackFactors f (ring d Y) (ring d X)
+        (coefficients d f)).app r.coefficient)) ≪≫
+      mixed X (ring d X) aX _ _ hf.2) ≪≫ (asIso etaJ).symm
+  have h := proEtaleMixedProjectionMate f (ring d Y) (ring d X) (coefficients d f)
+    aY aX r.injective r.isKInjective r.coefficient hf.1
+  have hnorm : aY.tensor.map (Prod.mkHom si.hom
+        (𝟙 (DerivedCategory.Q.obj r.coefficient))) ≫
+      projection d f aY aX (DerivedCategory.Q.obj r.injective)
+        (DerivedCategory.Q.obj r.coefficient) ≫ ti.hom =
+      (mixed Y (ring d Y) aY _ r.coefficient hf.1).hom ≫
+        DerivedCategory.Q.map (r.total d f K) := by
+    simp only [← mixed_eq] at h
+    change aY.tensor.map (Prod.mkHom etaI (𝟙 _)) ≫
+      projection d f aY aX (DerivedCategory.Q.obj r.injective)
+        (DerivedCategory.Q.obj r.coefficient) ≫
+      (directImage d f).map
+        (aX.tensor.map (Prod.mkHom (𝟙 _) ((proEtaleRingDerivedPullbackFactors f
+          (ring d Y) (ring d X) (coefficients d f)).hom.app r.coefficient)) ≫
+          (mixed X (ring d X) aX _ _ hf.2).hom) =
+      (mixed Y (ring d Y) aY _ r.coefficient hf.1).hom ≫
+        DerivedCategory.Q.map (r.total d f K) ≫ etaJ at h
+    have hh := congrArg (fun z ↦ z ≫ inv etaJ) h
+    simpa only [ti, si, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
+      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, Iso.app_hom,
+      Category.assoc, IsIso.hom_inv_id, Category.comp_id] using hh
+  have ht := transport_projection (pullback d f) (directImage d f)
+    aY.tensor aX.tensor (fun E P ↦ projection d f aY aX E P)
+    (fun {E E'} q P ↦ derivedProjectionFormulaMate_naturality
+      (pullback d f) (directImage d f)
+      (proEtaleRingDerivedAdjunction f (ring d Y) (ring d X) (coefficients d f))
+      aY.tensor aX.tensor
+      (proEtaleCanonicalTensorComparison f (ring d Y) (ring d X)
+        (coefficients d f) aY aX) E E' P q)
+    (fun E {_ _} q ↦ projection_naturality d f aY aX E q)
+    r.representsK r.representsQuotient si (quotientDerivedPullback d f n)
+    ti.hom (mixed Y (ring d Y) aY _ r.coefficient hf.1).hom
+    (DerivedCategory.Q.map (r.total d f K)) hnorm
+  have hsource : (r.sourceModel d f aY K).hom =
+      aY.tensor.map (Prod.mkHom ((directImage d f).map r.representsK.hom ≫ si.inv)
+        r.representsQuotient.inv) ≫
+      (mixed Y (ring d Y) aY _ r.coefficient hf.1).hom := rfl
+  have htarget : (r.targetModel d f aX K).hom =
+      (directImage d f).map (aX.tensor.map (Prod.mkHom r.representsK.hom
+        ((quotientDerivedPullback d f n).inv ≫
+          (pullback d f).map r.representsQuotient.inv))) ≫ ti.hom := by
+    simp only [Resolution.targetModel, ti, Iso.trans_hom, Iso.symm_hom,
+      Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom, Iso.refl_hom, asIso_inv,
+      Functor.map_comp, Category.assoc]
+    conv_rhs => rw [← (directImage d f).map_comp_assoc, ← aX.tensor.map_comp]
+    simp only [prod_comp, Category.comp_id, Category.assoc]
+    rfl
+  have forward : reductionMap d f aY aX K n =
+      (r.sourceModel d f aY K).hom ≫ DerivedCategory.Q.map (r.total d f K) ≫
+        (r.targetModel d f aX K).inv := by
+    apply (cancel_mono (r.targetModel d f aX K).hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [htarget, hsource]
+    simpa only [reductionMap, Category.assoc] using ht
+  refine ⟨forward, ?_⟩
+  let := SheafOfModules.monoidalCategory (ring d Y)
+  let := SheafOfModules.monoidalCategory (ring d X)
+  have ht : IsIso (r.total d f K) := by
+    apply tensorAdjunctionTotal_isIso (ordinaryPull d f) (ordinaryPush d f)
+      (proEtaleRingModuleAdjunction f (ring d Y) (ring d X) (coefficients d f))
+      (proEtaleOrdinaryTensorPullback f (ring d Y) (ring d X) (coefficients d f))
+      (fun {_ _ _ _} v z ↦ by
+        simpa only [proEtaleOrdinaryTensor, curriedTensor, tensorHom_def, Category.assoc] using
+          proEtaleOrdinaryTensorPullback_naturality
+            f (ring d Y) (ring d X) (coefficients d f) _ _ _ _ v z)
+      (ordinaryUnit d f) (fun M ↦ ?_)
+      r.injective r.coefficient r.bounded r.package.N r.package.i r.package.p
+      r.package.splitting
+    have hc := ordinaryUnit_coherence d f M
+    rw [ordinaryRightUnit_eq, ordinaryRightUnit_eq] at hc
+    exact hc
+  have hinv : r.totalInverse d f K = inv (r.total d f K) := rfl
+  let : IsIso (reductionMap d f aY aX K n) :=
+    (reductionMap_isIso d f aY aX K n).2
+  apply (cancel_epi (reductionMap d f aY aX K n)).mp
+  change (reductionIso d f aY aX K n).hom ≫
+    (reductionIso d f aY aX K n).inv = _
+  rw [Iso.hom_inv_id]
+  rw [forward, hinv]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← DerivedCategory.Q.map_comp_assoc, IsIso.hom_inv_id,
+    DerivedCategory.Q.map_id, Category.id_comp, Iso.hom_inv_id]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

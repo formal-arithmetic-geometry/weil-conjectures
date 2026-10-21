@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-proetale-mixed-projection-mate",
+ "kind": "statement",
+ "title": "Mixed representative normalization of the pro-etale projection mate",
+ "statement": "For a scheme morphism f:X→Y and an identified pullback of coefficient ring sheaves, use the ordinary and derived operations of [def-weil-pbc-proetale-operations], the normalized tensor comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the mixed representative isomorphisms of [def-weil-pbc-projection-formula-arrows]. For a K-injective complex I on X and a flat-term K-flat coefficient complex F on Y, the derived projection mate, precomposed with tensor of the right-derived unit at I and postcomposed with direct image of the mixed tensor comparison on X, equals the mixed comparison on Y followed by localization of the ordinary signed total counit mate and the right-derived unit at Tot(I⊗f*F). No boundedness or degreewise splitting of F is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "equation-projection-formula-map; lemma-pullback-tensor-product; lemma-adjoint. Blueprint order 1267, representative calculation in proof step 5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat K-flat resolution P of the ordinary direct image of I. The unique mixed-tensor representative square computes its localized source comparison. Its naturality follows by applying a functorial flat resolution to a chain map and using representative naturality.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical tensor-pullback representative square on P and F. Naturality of the mixed comparison on X identifies the composite with the tensor of pullback of P-to-VI followed by the ordinary counit, and the identity of the pulled-back F. The derived counit representative normalization is Adjunction.derivedε_fac_app.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose under the derived adjunction. Naturality of the total tensor pullback and the ordinary adjunction identify this transpose with localization of tensorAdjunctionTotal followed by the right-derived unit. Cancel tensor of the localized resolution, which is invertible. This proves the equation without boundedness, splitting, or inverse projection maps.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-projection-formula-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The definition of the projection formula as the adjoint of counit tensor identity, calculated on K-flat representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived projection counit mate agrees with the localization of the tensor total complex for a K-flat coefficient",
+   "results": "8 hits, including Adjunction.derivedε_fac_app and derived_counit.",
+   "date": "2026-10-21",
+   "verdict": "Counit normalization is used, but no result gives the mixed tensor totalization equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_counit\"",
+   "results": "3 hits: Adjunction.homEquiv_counit and two related definitions.",
+   "date": "2026-10-21",
+   "verdict": "Used to transpose the equality; no complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorAdjunctionTotal|derivedProjectionFormulaMate",
+   "results": "0 Mathlib hits; repository search finds their project definitions and fixed-site-universe totalization statements.",
+   "date": "2026-10-21",
+   "verdict": "No matching normalization on the original pro-etale sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula mate agrees on K-flat representatives with localization of the ordinary total tensor counit mate",
+   "results": "8 hits, including Adjunction.derivedε_fac_app and Functor.mapDerivedCategoryFactors.",
+   "date": "2026-10-21",
+   "verdict": "These supply the derived-counit and exact-pullback equations used in the proof, not the tensor mate normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectProjectionFormula",
+  "date": "2026-10-21",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof step 5: the arrows and projection-map definitions give the same adjunct on mixed K-flat representatives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleMixedProjectionMate",
+  "file": "lean/Sheaf/Paper/ProEtaleMixedProjectionMate.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleMixedProjectionMate",
+  "statement": "theorem proEtaleMixedProjectionMate\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)\n    (I : CochainComplex (proEtaleRingModules X S) ℤ) (_hI : I.IsKInjective)\n    (F : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (hF : proEtaleFlatRepresentatives Y R F) :\n    let L := proEtaleRingModulePullback f R S c\n    let V := proEtaleRingModuleDirectImage f R S c\n    let G := (L.mapHomologicalComplex (.up ℤ)).obj F\n    let J := CochainComplex.mapBifunctor I G (proEtaleOrdinaryTensor X S)\n    let hG := (proEtaleCanonicalTensorPullback f R S c a b).1 F hF\n    let eta (C : CochainComplex (proEtaleRingModules X S) ℤ) :\n        DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj C) ⟶\n          (proEtaleRingDerivedDirectImage f R S c).obj (DerivedCategory.Q.obj C) :=\n      V.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj C)\n    a.tensor.map (Prod.mkHom (eta I) (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) ≫\n        proEtaleProjectionFormulaMate f R S c a b\n          (DerivedCategory.Q.{u + 2}.obj I) (DerivedCategory.Q.{u + 2}.obj F) ≫\n        (proEtaleRingDerivedDirectImage f R S c).map\n          (b.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.{u + 2}.obj I))\n            ((proEtaleRingDerivedPullbackFactors f R S c).hom.app F)) ≫\n              (proEtaleMixedTensor S b I G hG).hom) =\n      (proEtaleMixedTensor R a\n        ((V.mapHomologicalComplex (.up ℤ)).obj I) F hF).hom ≫\n        DerivedCategory.Q.{u + 2}.map (proEtaleProjectionTotal f R S c I F) ≫ eta J",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleProjectionTotal",
+   "AlgebraicGeometry.Scheme.proEtaleMixedProjectionMate"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261021T233739-L-856534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261021T233739-L-856534",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
