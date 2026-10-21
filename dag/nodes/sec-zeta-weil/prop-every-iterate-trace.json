@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "Fix $n\\geq1$. By [lem-weil-point-counts-finite](1), $P=Y_0(\\mathbf F_{q^n})$ is finite. By [prop-cohomological-finiteness], the $E$-spaces $H_c^i(Y,K)$ are finite-dimensional and vanish outside a finite interval, and their geometric Frobenius is an automorphism. By [def-weil-local-frobenius-trace], the stalk cohomology spaces are the bounded finite-dimensional cohomology of $C_{\\bar x}=\\operatorname{Fib}_s(L\\bar x^*\\operatorname{For}K)$, and the local alternating trace is precisely the displayed sum over $j$. Thus every trace exists; the global sum is finite, and the local sums, over finitely many points each with bounded stalk cohomology, are finite.",
+   "text": "Fix $n\\ge1$ and $P=Y_0(\\mathbf F_{q^n})$. By [lem-weil-point-counts-finite], $P$ is finite. By [prop-cohomological-finiteness], $H_c^i(Y,K)$ are finite-dimensional and zero outside a finite interval. By [def-weil-local-frobenius-trace], $H^j(C_{\\bar x})$ are finite-dimensional, bounded stalk cohomology. Hence both displayed sums are finite and every trace is defined.",
    "uses": [
     "lem-weil-point-counts-finite",
     "prop-cohomological-finiteness",
@@ -38,103 +38,86 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   },
   {
-   "text": "Use [lem-zl-general-condensed-weil-realization] to realize the finite-stage E-Weil datum K as a model-Frobenius Weil object in the bounded constructible condensed Qbar_l coefficient category. The node supplies the compact-support and fixed-stalk comparison isomorphisms, intertwines the model globalOperator and stalkFrobenius with the scalar extensions of F^n and F_x^(n), and identifies the model-Frobenius fixed points with Y_0(F_{q^n}). By step 1 and the final clause of that comparison, the fixed-point set is finite and the condensed global and stalk objects have right duals. Therefore all hypotheses of [nt-assume-trace-formula] hold, and it gives equality of the categorical global trace with the finite sum of categorical stalk traces in D^b_c(s)[[Qbar_l]]. We use the assumption only for this categorical identity; it does not itself identify categorical traces with alternating cohomology traces.",
+   "text": "[lem-zl-finite-stage-categorical-trace] gives the categorical equality and comparisons $w_cG_n=\\rho(F^n)w_c$, $w_xv_{x,n}=\\rho(F_x^{(n)})w_x$ for every chosen geometric point. Apply [lem-zl-condensed-point-supertrace] to these comparisons, using step 1: the two sides become the images of the global alternating trace and the sum of local alternating traces under the same injective ring map $\\epsilon_E:E\\to\\operatorname{End}(U_s)$. This map preserves finite sums and signs. Its zero kernel gives the asserted equality in $E$.",
    "uses": [
-    "lem-zl-general-condensed-weil-realization",
-    "nt-assume-trace-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
-  },
-  {
-   "text": "Transport the categorical equality of step 2 through the comparison isomorphisms of [lem-zl-general-condensed-weil-realization]. Clause 3 of [lem-zl-condensed-point-supertrace] says that the categorical trace of each realized global or stalk operator is the image under the injective coefficient map $E\\to\\operatorname{End}(\\Qlb_s)$ of the corresponding alternating E-valued cohomological trace; its finite-dimensional hypotheses are exactly those established in step 1. The comparison node intertwines powers of the actual operators, so the categorical equality is the image under the same coefficient map of the two finite E-valued sums displayed in the statement. Injectivity gives the asserted E-valued identity after identifying End(Qbar_l_s) with Qbar_l. No representative-independence or trace-formula theorem is used in this transport.",
-   "uses": [
-    "lem-zl-general-condensed-weil-realization",
+    "lem-zl-finite-stage-categorical-trace",
     "lem-zl-condensed-point-supertrace"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   },
   {
-   "text": "Steps 2 and 3 give equality of the images of the two finite $E$-valued sums under the injective coefficient map $\\epsilon_E$ of [lem-zl-condensed-point-supertrace] (cited in step 3). Its kernel is zero, so their difference is zero already in $E$. This proves the first identity. Steps 2 and 3 hold for every selection of geometric points $\\bar x$ over the $x\\in P$, since the stalk comparison of [lem-zl-general-condensed-weil-realization] is stated for every geometric point over $x$. This proves independence of the local alternating traces from the choices: compare two selections differing only at a fixed $x\\in P$; both total sums equal the same global trace, and cancelling the other finitely many summands gives equality of the traces at $x$. Any two choices at $x$ can be compared this way. If $P$ is empty there are no local choices and the formula says that the global alternating trace is zero.",
+   "text": "The preceding equality holds for every selection of points by [lem-zl-finite-stage-categorical-trace]. Two selections differing only at $x\\in P$ have the same global trace; cancelling the other finite summands proves independence of the local alternating trace at $x$. This compares any two choices. If $P$ is empty the same equality says that the global alternating trace is zero.",
    "uses": [
-    "lem-zl-condensed-point-supertrace",
-    "lem-zl-general-condensed-weil-realization"
+    "lem-zl-finite-stage-categorical-trace"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   },
   {
-   "text": "For the canonical constant Weil sheaf $E_Y$, the local complex is $E[0]$. The construction in [def-weil-constant-weil-structure] sends every constant section $a$ to that same section; the restrictions and insertions defining [def-weil-frobenius-point-transport] also retain $a$. In the composite of [def-weil-local-frobenius-trace], each point transport followed by the constant Weil comparison therefore acts as $a\\mapsto a$; repeating this $n$ times still gives the identity. These computations hold for the constant reductions, their completed integral unit, and its rationalization defining $E_Y$. Thus the only nonzero stalk cohomology is $E$ in degree zero and $F_x^{(n)}=1$. Its matrix is $(1)$, whose trace is $1$ by [def-weil-endomorphism-trace]. Substituting in step 4 makes the left side $\\sum_{x\\in P}1=\\#P=N_n(Y_0)$ by [def-weil-point-counts-zeta], giving the second identity.",
+   "text": "For the canonical $E_Y$, [lem-zl-constant-geometric-stalk-unit] identifies every stalk with $E[0]$ and its local operator with the identity. Its trace is $1$ by [def-weil-endomorphism-trace]. Thus the local sum is $\\sum_{x\\in P}1=\\#P=N_n(Y_0)$ by [def-weil-point-counts-zeta], giving the constant-sheaf formula.",
    "uses": [
-    "def-weil-constant-weil-structure",
-    "def-weil-frobenius-point-transport",
-    "def-weil-local-frobenius-trace",
+    "lem-zl-constant-geometric-stalk-unit",
     "def-weil-endomorphism-trace",
     "def-weil-point-counts-zeta"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   },
   {
-   "text": "If $Y_0$ is proper, [prop-cohomological-finiteness] gives a Frobenius-equivariant canonical isomorphism $u_i:H_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$. From $u_iF_c=Fu_i$, induction on $n$ gives $u_iF_c^n=F^nu_i$. These are conjugate finite-dimensional operators, so their traces agree by the basis-independent matrix trace of [def-weil-endomorphism-trace]. Replacing each summand in step 4 (and in its constant-sheaf specialization) gives the asserted ordinary-cohomology version.",
+   "text": "For proper $Y_0$, [prop-cohomological-finiteness] supplies $u_i:H_c^i(Y,K)\\simeq H^i(Y,K)$ with $u_iF_c=Fu_i$. Induction gives $u_iF_c^n=F^nu_i$. Conjugate matrices have the same trace by [def-weil-endomorphism-trace]; replace each summand, for general $K$ and for $E_Y$.",
    "uses": [
     "prop-cohomological-finiteness",
     "def-weil-endomorphism-trace"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   },
   {
-   "text": "Finally take $Y_0=X_0$, $E=\\Ql$ and the canonical constant sheaf. Step 6 applies because $X_0$ is proper. Under exactly the smooth, proper, geometrically connected, pure-dimension-$d$ hypotheses in the statement, [prop-cohomological-finiteness] gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. The trace on the zero space is zero (the empty sum of diagonal coefficients in [def-weil-endomorphism-trace]); discard these terms. [def-weil-smooth-proper-cohomological-family] defines $V_{i,\\ell}=H^i(X,\\Ql)$ and $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, so the remaining sum is exactly $\\sum_{i=0}^{2d}(-1)^i\\operatorname{Tr}(F_{i,\\ell}^n\\mid V_{i,\\ell})$. This proves the last formula, including $d=0$.",
+   "text": "Take $Y_0=X_0$, $E=\\mathbf Q_\\ell$. Properness permits step 5. Under the stated smooth-proper pure-dimension-$d$ hypotheses, [prop-cohomological-finiteness] gives $H^i(X,E)=0$ outside $[0,2d]$. The zero-space trace is the empty diagonal sum [def-weil-endomorphism-trace], so discard those terms. Substituting $V_{i,\\ell}$ and $F_{i,\\ell}$ from [def-weil-smooth-proper-cohomological-family] gives the last formula, also for $d=0$.",
    "uses": [
     "prop-cohomological-finiteness",
     "def-weil-endomorphism-trace",
     "def-weil-smooth-proper-cohomological-family"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+    "place": "Proof, trace-identity sentence; agent-formulated extraction of the reviewed seven-step expansion"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-constant-weil-structure",
   "def-weil-endomorphism-trace",
-  "def-weil-frobenius-point-transport",
   "def-weil-local-frobenius-trace",
   "def-weil-point-counts-zeta",
   "def-weil-smooth-proper-cohomological-family",
   "lem-weil-point-counts-finite",
   "lem-zl-condensed-point-supertrace",
-  "lem-zl-general-condensed-weil-realization",
-  "nt-assume-trace-formula",
+  "lem-zl-constant-geometric-stalk-unit",
+  "lem-zl-finite-stage-categorical-trace",
   "prop-cohomological-finiteness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-  "place": "Complete expansion of the blueprint proof, using the existing trace interface and explicit finite-stage descent"
+  "place": "Agent expansion of the trace, constant-sheaf and proper-specialization sentences; two statement-only subarguments extracted by Q82 on the human re-split instruction"
  },
  "mathlib_searches": [
   {
@@ -228,11 +211,11 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "prop-every-iterate-trace",
   "worker": "stage1",
-  "summary": "Repair: replaced the circular imported Qbar trace theorem and the trace-transport citation with the batch-5 categorical trace assumption plus an explicit new coefficient/operator comparison node. The new node realizes finite-stage E-Weil complexes in the condensed Qbar_l category, identifies fixed points, and intertwines global and stalk Frobenius powers; the existing condensed point-supertrace node then performs the categorical-to-alternating trace conversion. The statement and the remaining five steps are preserved.",
-  "blueprint": "Steps 1 and 7 realize the finiteness sentence; repaired steps 2--3 apply the batch-5 condensed trace assumption through lem-zl-general-condensed-weil-realization and convert its categorical traces via lem-zl-condensed-point-supertrace; step 4 is injective descent and choice independence; step 5 realizes the constant-sheaf clause; step 6 gives proper specialization and step 7 gives degree truncation.",
+  "summary": "Q82 repair of the human re-split request: two independent statement-only obligations extract the finite-stage categorical formula with its comparison/duality hypotheses and the full finite/integral/rational constant-stalk normalization. The statement is unchanged. The assembly retains supertrace descent, the arbitrary-choice cancellation, point counting, proper conjugacy and degree truncation. Original arguments and their allocation are preserved in report.md.",
+  "blueprint": "The trace-identity sentence is realized by step 1, new lem-zl-finite-stage-categorical-trace and steps 2–3. The constant-sheaf sentence is realized by new lem-zl-constant-geometric-stalk-unit and step 4. The proper specialization and finiteness sentences are realized by steps 5–6.",
   "tool_uses": [
    {
     "node": "lem-weil-point-counts-finite",
@@ -244,7 +227,7 @@
    },
    {
     "node": "lem-zl-condensed-point-supertrace",
-    "why": "Statement of unit sk-thm-rationality used as a black box in step 3: the right dual of an object isomorphic to a finite-matrix realization and its categorical trace as the image of the alternating E-trace under the injective map E -> End(U_s). nt-assume-trace-formula excludes this conversion and no node of sk-thm-tracetodeterminant gives it."
+    "why": "Statement of unit sk-thm-rationality used as a black box in step 2: the right dual of an object isomorphic to a finite-matrix realization and its categorical trace as the image of the alternating E-trace under the injective map E -> End(U_s). nt-assume-trace-formula excludes this conversion and no node of sk-thm-tracetodeterminant gives it."
    }
   ]
  },
@@ -254,12 +237,12 @@
   "lem-zl-condensed-point-supertrace"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q42-cd1a6f8dd",
-  "group": "Q42",
+  "reviewer": "NT-cc-Q82-16c9c14bd",
+  "group": "Q82",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-cd1a6f8dd (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the new node lem-zl-general-condensed-weil-realization, every cited statement, the blueprint proof main-20261015/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md and the unit route. Batch-5 check: I accept all three listed citations. lem-zl-condensed-point-supertrace is point-level linear algebra: right duals of objects isomorphic to finite-matrix realizations, and the categorical trace equals the injective image of the alternating E-trace. nt-assume-trace-formula explicitly excludes this conversion and treats dualizability as a hypothesis. The flagged closure node lem-trf-exact-pairing-iso-transport is the generic Mathlib leaf CategoryTheory.exactPairingCongr, not a step of the trace formula. lem-zl-point-realization-coefficient-comparison is a pure coefficient comparison over a point. thm-trf-frobenius-fixed-points (sec-six-functors) is scheme-theoretic. The categorical identity comes only from nt-assume-trace-formula, whose hypotheses I checked in step 2: separated, quasi-compact, model Frobenius, finite fixed points, right duals. Steps 1, 3, 5, 6 and 7 are verified against prop-cohomological-finiteness, def-weil-local-frobenius-trace, def-weil-constant-weil-structure and def-weil-smooth-proper-cohomological-family, with d=0 and the empty case covered. The new node is true as an unsplit obligation. It generalizes the constant-case pair lem-zl-assumed-trace-determinant-bridge and lem-zl-condensed-global-frobenius-comparison to arbitrary K, which the item needs; it states no trace identity, so it is neither a duplicate nor a restatement. Three repairs, written as whole files in fixes/dag/nodes/sec-zeta-weil/: (1) E5 gap in step 4. The item allows any geometric point over x, but the new node only compared stalks at the points from the fixed inclusion, so the cancellation argument for choice independence was unsupported. The node's stalk comparison now covers every geometric point over x (formed by def-weil-local-frobenius-trace, which applies since g^n x̄ = x̄ g_s^n). Step 4 now says why steps 2-3 hold for every selection, names ε_E, and lists its uses. (2) C8: added a split_report.tool_uses entry for the off-route lem-zl-condensed-point-supertrace (unit sk-thm-rationality). (3) Citations in the new node: F now cites def-weil-global-geometric-frobenius, def-weil-local-frobenius-trace is added to stmt_deps, a proof hint is removed, and the source is repointed from sk-thm-rationality.proof.md (which is about Hankel rationality) to the item's blueprint proof sentence, marked agent-formulated. Accepted tool uses: lem-weil-point-counts-finite, prop-cohomological-finiteness, lem-zl-condensed-point-supertrace.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-16c9c14bd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement (from live, since the snapshot dagsnap symlinks are broken; live equals the base for these nodes) and the main-20261015 proof.md, which is a three-sentence pointer to the circular trace theorem. No SGA is used. The item is not in the dropped list and has no live supersession. The re-split note is met: 2 statement-only new nodes of comparable size (about 1.9k and 2.0k characters), and a six-step assembly of about 2.3k characters. Old step 2 (realization, fixed points, right duals, application of nt-assume-trace-formula) became lem-zl-finite-stage-categorical-trace. Old step 5 (constant unit through point transport at finite, integral and rational levels) became lem-zl-constant-geometric-stalk-unit. Old steps 1, 3, 4, 6 and 7 stay as elementary or one-citation steps with the same content; nothing was blurred. Step checks: step 2 applies the supertrace clause to (P_c,G_n,F^n,w_c) and (P_x,v,F_x^(n),w_x), and injectivity of the additive ring map eps_E gives the identity in E. Step 3 is cancellation using the node's every-choice clause; the empty P case is OK. Step 4: E[0] with operator 1 gives trace 1 and #P = N_n. Step 5: the proper comparison H_c^i -> H^i is Frobenius-equivariant and conjugate operators have equal traces. Step 6: vanishing outside [0,2d], and d=0 is covered. The categorical node's hypotheses match the assumption (separated, quasi-compact, locally of finite type, model Frobenius, finite fixed points, right duals). Its every-choice clause is true, but the worker who proves it needs Phi-orbit invariance of stalk traces, because a selection can hit the same fixed point twice; the review notes this. The unit node is true: L xbar^* of the completed integral unit is R lim (A_m)_s, so Fib_s = O_E[0], and a constant section is sent to itself. It generalizes the closed-point E=Q_l clause of lem-zl-constant-sheaf-lseries and is not a duplicate. Batch-5 flags, all accepted: def-weil-local-frobenius-trace (twice) is a definition. lem-zl-general-condensed-weil-realization is an operator comparison with no trace identity, reaching the flagged chapter only through that definition. lem-zl-condensed-point-supertrace reaches only lem-trf-exact-pairing-iso-transport = Mathlib exactPairingCongr. The categorical identity comes only from the leaf nt-assume-trace-formula. Fixes: (1) B2/B3: the unit node's finite-level Weil map is now explicit, theta_m = c_m o lambda_m, with stmt_dep lem-weil-isomorphism-derived-pullback added. (2) The item's split_report tool_uses text said supertrace was used in step 3; corrected to step 2. Accepted tool_uses: lem-weil-point-counts-finite, prop-cohomological-finiteness, lem-zl-condensed-point-supertrace. Advisory: the mathlib_searches verdict strings are copy-pasted across tools.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "branch": "master",
