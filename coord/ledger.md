@@ -23158,3 +23158,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:17 L: merged deliver/N9/lem-sfb-prime-to-ell-derived-invariants-reduction (reviewer PASS; after a return; new nodes: 2)
 - 17:17 L: merged deliver/A9/Sheaf.Paper.IntegralCompactSupportCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261021T171734-L-3120649 (proof); batch 20261021T171733; modules 1; new nodes 0; change records: coord/changes/A9-integral-compact-support-tensor-universes.md)
 - 17:17 L: merged deliver/E3/Sheaf.RingTheory.IntegralFiniteResidueModel (stage 3; reviewer PASS; first push; landing 20261021T171737-L-3121882 (proof); batch 20261021T171733; modules 1; new nodes 0)
+- 17:17 L: merged deliver/E7/Sheaf.Paper.CompletedTensorScalarLinearity (stage 3; reviewer PASS; first push; landing 20261021T171739-L-3123262 (interface); batch 20261021T171733; modules 1; new nodes 0; change records: coord/changes/E7-completed-tensor-proof-scopes.md)

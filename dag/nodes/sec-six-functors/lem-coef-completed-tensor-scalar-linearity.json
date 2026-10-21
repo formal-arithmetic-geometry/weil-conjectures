@@ -13,24 +13,61 @@
  },
  "proof": [
   {
-   "text": "On flat-term K-flat representatives the completed tensor is the normalized total tensor. The constant coefficient action commutes with the sectionwise tensor map, hence the identity holds at every finite quotient and after Roos descent and localization.",
+   "text": "Construct the ring map from O_E to compatible global sections of the completed coefficient sheaf using all finite projections. Restrict the existing global-section action on sheaf-module Hom groups along this map and along each finite projection. The uniqueness formulas for the constant chain action and its localized derived action identify localization with the published scalar action.",
    "uses": [
+    "def-pur-sheaf-modules-hom-module",
+    "def-sf-completed-integral-scalar-action",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove ordinary finite reduction is linear from its explicit change-of-rings morphism formula. Apply the sheafification adjunction and its unit naturality, and check the equality on tensors 1 tensor x. The same sheafification calculation on pure tensors proves finite sheaf tensor is linear in its first variable. The induced bifunctor on cochain complexes is linear, and restriction of scalars preserves this action, so every finite total tensor map satisfies the desired scalar identity.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A tower product map commutes with scalars by product extensionality. The homotopy-cofiber map commutes with scalars on its two summands, and the shift preserves scalars. Thus the strict Roos tensor functor preserves the scalar identity, and localization preserves it for the specified constant-section action.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-sf-completed-integral-scalar-action",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object is isomorphic to the localization of a K-flat complex with flat terms. Transfer flatness from the monoidal tensor to the site tensor using their comparison isomorphism. Naturality of the completed-tensor descent comparison proves the scalar-on-identity formula on these good representatives. Transport by representative isomorphisms gives it on arbitrary derived objects. Factor (c f,g) as (c id,id) followed by (f,g), apply functoriality, and restrict the resulting equality to the constructible full subcategory.",
+   "uses": [
+    "lem-pc-kflat-resolution",
     "def-pur-integral-derived-operations",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-integral-constructible-linear"
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pur-sheaf-modules-hom-module",
+  "def-sf-completed-integral-scalar-action",
+  "lem-weil-integral-constructible-linear",
+  "def-weil-integral-reduction-tower",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-kflat-resolution",
   "def-pur-integral-derived-operations",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-integral-constructible-linear"
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Tensor-Hom normalization and bilinear extension."
+  "place": "E7: explicit constant-section actions, finite tensor, Roos maps, localization, and normalized descent; the original tensor-Hom normalization route is retained."
  },
  "mathlib_searches": [
   {
@@ -104,12 +141,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261020T051118-L-1564430",
+  "landing": "20261021T171739-L-3123262",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
