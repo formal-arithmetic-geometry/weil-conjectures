@@ -20,7 +20,9 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-point-proetale-sections-exact",
   "def-weil-derived-pullback-tensor-hom",
-  "def-pur-integral-derived-operations"
+  "def-pur-integral-derived-operations",
+  "lem-trf-completed-stalk-reparametrization-coherence",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -276,5 +278,45 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-4b91099d9 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement in full: comparison (b) and (a), point-transport def, point-transport-natural (1), integral-operations-well-defined (1),(2), def-pur-integral-derived-operations, def-weil-derived-pullback-tensor-hom, sections-exact, countable-products-exact, site-derived-tensor-descent, localization universal property (Mathlib leaf). Also read the parent realization node with its re-split note, both siblings, and blueprint prop-trf-rational-frobenius-integral-model clause (3). The statement change is only a reference repair. Lg*N for arbitrary N is now typed by the ambient def-pur-integral-derived-operations, which is what comparison (b) itself already names; def-weil-derived-pullback-tensor-hom is kept as its restriction. No hypothesis was added or conclusion dropped, and stmt_deps match the references. Checked by hand: t_n r_{n+1}=r_n and v_nθ_{n+1}=θ_n make both zero-first-component lifts chain maps. c_C is the identity on sectionwise products and is natural. c_CΓ(θ̃_P)σ_P(z)=(0,(u_nΓ(r_n)z))=H(u)a_P(z), including the shifted component. σ_NΓ(q)=Γ(g⁻¹q)σ_P uses clause (1) only, which holds for all complexes. Γ(q) and Γ(g⁻¹q) are quasi-isomorphisms: k is algebraically closed and the transported inverse image is exact. Descent works because P_R→D(R) is a localization (site-descent equivalence) and both functors invert W_R (well-defined (1) plus exact Γ); then liftNatTrans and natTrans_ext apply. Roof algebra checked. Edge cases: R in degree 0 gives lim A_n=O_E with lim¹=0; R[1/ϖ] gives P_n=0 and a zero map, so the statement correctly claims no invertibility. No cycle (closure of 11870 nodes), no SGA, no duplicate found by grep. All five off-unit tool_uses accepted as generic. Advisory 1: step 5's formula for a non-chosen representative P relies on step 6's naturality of θ̃; step 8 supplies it, so the argument is complete but out of order. Advisory 2: step 2 re-proves the two-line c_X clause of the unsplit sibling lem-trf-point-sections-completion-cone; no duplicate node is created. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportConeComparisonDescent",
+  "declaration": "WeilConjectures.PointTransportCone.pointTransportConeComparisonDescent",
+  "declarations": [
+   "WeilConjectures.PointTransportCone.sections",
+   "WeilConjectures.PointTransportCone.moduleQ",
+   "WeilConjectures.PointTransportCone.sectionsFactors",
+   "WeilConjectures.PointTransportCone.reductionTowers",
+   "WeilConjectures.PointTransportCone.pullbackTowers",
+   "WeilConjectures.PointTransportCone.reductionSectionModel_eq",
+   "WeilConjectures.PointTransportCone.reductionUnit",
+   "WeilConjectures.PointTransportCone.reductionProduct",
+   "WeilConjectures.PointTransportCone.reductionEnd",
+   "WeilConjectures.PointTransportCone.augmentation_condition",
+   "WeilConjectures.PointTransportCone.augmentation",
+   "WeilConjectures.PointTransportCone.coneSections",
+   "WeilConjectures.PointTransportCone.representativeComparison",
+   "WeilConjectures.PointTransportCone.coneArrow",
+   "WeilConjectures.PointTransportCone.resolvedArrow",
+   "WeilConjectures.PointTransportCone.pointTransportConeComparison",
+   "WeilConjectures.PointTransportCone.pullbackRoof_isIso",
+   "WeilConjectures.PointTransportCone.pullbackRoofIso",
+   "WeilConjectures.PointTransportCone.pointTransportConeComparisonDescent"
+  ],
+  "file": "lean/Sheaf/Paper/PointTransportConeComparisonDescent.lean",
+  "statement": "theorem pointTransportConeComparisonDescent (hl : l ≠ D.p) (v : (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ reductionTowers D l E ⟶ (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ pullbackTowers D l E) (hv : ∀ (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (n : ℕ), frobeniusPointIntegralSigma D l E P.obj ≫ (sections D l E).map (inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj) = reductionUnit D l E P.obj n ≫ (v.app P).app (op n)) : (∃! η : pointFibreIntegralAmbient D l E ⟶ integralDerivedPullback l E (frobeniusPointIso D).hom ⋙ pointFibreIntegralAmbient D l E, (∀ N : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), η.app N = frobeniusPointTransportIntegral D l hl E N) ∧ (∀ (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) [QuasiIso q], η.app (DerivedCategory.Q.obj N) ≫ (representativeComparison D l E N P q).hom = inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q)) ≫ resolvedArrow D l E P.obj (v.app P))) ∧ (∀ (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) (q' : P'.obj ⟶ N) [QuasiIso q] [QuasiIso q'], inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q)) ≫ resolvedArrow D l E P.obj (v.app P) ≫ (representativeComparison D l E N P q).inv = inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q')) ≫ resolvedArrow D l E P'.obj (v.app P') ≫ (representativeComparison D l E N P' q').inv) ∧ (∀ (P Q P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : Q ⟶ P) (b : Q ⟶ P') [QuasiIso a.hom], IsIso ((moduleQ l E).map (integralOperationsRoosMap ((pullbackTowers D l E).map a.hom))) ∧ (coneArrow D l E P.obj (v.app P) ≫ (pullbackRoofIso D l E P Q a).inv ≫ (moduleQ l E).map (integralOperationsRoosMap ((pullbackTowers D l E).map b.hom)) = inv ((moduleQ l E).map ((sections D l E).map a.hom)) ≫ (moduleQ l E).map ((sections D l E).map b.hom) ≫ coneArrow D l E P'.obj (v.app P')))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Both the unconditional fixed-representative chain and derived identities and the conditional family descent are stated, in pointTransportConeComparison and pointTransportConeComparisonDescent respectively. The existing two-coordinate CompletedStalk.sectionsRoos comparison and unrestrictedTowerUnit reduction are reused. Helper proof obligations are clauses of this same DAG statement; all data definitions are concrete constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8662dce0c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q14 present), module, and the exact declarations: sectionsRoos(_existsUnique), moduleQ, unrestrictedTowerUnit/Complex, unrestrictedIntegralComplexFunctor/Transition, scalarReductionExtension, inverseImageReductionTheta/RoosComparisonComplex/PullbackComparison, frobeniusPointIntegralSigma/TransportIntegral(_existsUnique), pointFibreIntegralAmbient. Every clause matches with directions checked, including the strict two-coordinate chain equality with zero shifted component, b_q via the specified pullback comparison, both derived identities, NatTrans chain naturality, unique descent equal to the actual iota, resolution independence and the explicit roof square; no completeness, no a_P inverse, no extra universe constraints. Mechanical theorem stmt_dep finding: c_C = CompletedStalk.sectionsRoos is the .choose of the postponed ∃! sectionsRoos_existsUnique of lem-trf-completed-stalk-reparametrization-coherence, a theorem-constructed object, so PASS on that point; moduleQ is only a Mathlib DerivedCategory.Q alias (advisory). def-weil-integral-reduction-tower existing:true record lists unrestrictedTowerUnit. No cycle; delta = lean + 2 stmt_deps; statement verbatim; all declarations present. reductionSectionModel_eq is definitional (both sides .choose of an identical change-of-rings term). Docstrings, source places, sorry-only proofs: ok. No compile (no change); worker reports 28.7 s and 56.1 s. Advisories: inline moduleQ, rfl for the model equation, 56 s close to the limit, redundant imports."
  }
 }

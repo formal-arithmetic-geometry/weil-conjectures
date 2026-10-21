@@ -13,7 +13,11 @@
   "sk-def-sfb-module-objects",
   "def-sfb-condensed-action-module",
   "def-sp-injective-resolutions",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-free-module-generators"
  ],
  "proof": [
   {
@@ -280,5 +284,30 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-11411aeaa (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The item is a first split with no new nodes and an unchanged statement. The statement is true: classically the module is the coinduction of Hom(A[G^n],UJ), which is injective because UJ is injective and A[G^n] is flat. It matches the parent's step 3, which applies it to UI^q with the action on arguments and values. Step 2: A[G^n] is the sheafification of the direct sum over C(V,G^n), which is exactly j_{X!}A_X of lem-pc-sites-modules-j-shriek-flat. I checked this against Stacks 03EV clause (2) at sites-modules.tex:4389. Step 3: the proof that U preserves monomorphisms is correct; the sectionwise kernel is a subobject stable under the action. Steps 4-5: alpha is the tensor-Hom transpose of Uh followed by evaluation at (1,t), and beta is a single internal extension, matching Stacks 015Z (a)=>(c) at homology.tex:7287. I recomputed steps 7-8 by hand: the relative coordinates are unchanged by left translation, the order of factors is correct for non-abelian G, and b∘i=h. Edge cases checked: n=0, G=1, A=0 or J=0, and infinite G (only representability of G^n and flatness are used). No duplicate found among the sfb/proetale injective-resolution, bar and restriction-calculus nodes or the curve-estimate coinduced nodes, which have discrete coefficients. I accept the two declared tool uses: j-shriek flatness and the closed monoidal structure of sheaf modules. The split uses no SGA source and changes nothing."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedHomogeneousFunctionsInjective",
+  "declaration": "Profinite.CondensedAction.homogeneous_functions_injective",
+  "declarations": [
+   "Profinite.CondensedAction.homogeneousHom",
+   "Profinite.CondensedAction.homogeneousEvaluate",
+   "Profinite.CondensedAction.HomogeneousFunctions",
+   "Profinite.CondensedAction.homogeneous_functions_injective"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedHomogeneousFunctionsInjective.lean",
+  "statement": "theorem homogeneous_functions_injective (J : ActionModule R G) [Injective J.module] (n : ℕ) : ∃ H : HomogeneousFunctions R G J n, Injective H.object",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of returned immutable head 7f48924c142b, H2/H4: cite def-sfb-condensed-equivariant-bar-data for its actual freeParameter, used directly by homogeneousHom, and def-sfb-condensed-free-module-generators for the existing unit generators and their supporting free adjunction. The latter records existing definitions in the unchanged bar-resolution module; exists_resolution is neither used nor a statement dependency. The freeParameter and freePower bodies are definitionally identical. The normalized model, its action on every profinite slice, and the theorem signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b827200",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of 7f48924c H2/H4 RETURN. Lean delta: Hom source is now CondensedBar.freeParameter ⟨R.X⟩ (power G (n+1)) from def-sfb-condensed-equivariant-bar-data, body-identical to InternalBar.freePower; the generator typechecks definitionally. The theorem stmt_dep lem-sfb-condensed-internal-bar-resolution is removed. New def-sfb-condensed-free-module-generators is existing:true on unchanged CondensedInternalBarResolution (free/freeAdjunction/tuples/freePower/generator, plain defs at lines 53-90, no .choose); statement verbatim; check_existing clean; no competing owner in side-live. Item node differs from live only in stmt_deps (4 added def nodes) and lean. Clauses rechecked: arbitrary commutative R, profinite G, sole [Injective J.module], every n : ℕ, action pinned on all slices with correct inverse and order, ∃ over a normalized model unique up to iso. Edge cases n=0, G=1, zero ring, J=0, empty test, infinite G. Gates H5/H6/H8 OK. Advisory: base-era tensor-closed public import used only by the proof plan. No file changed, no compile."
  }
 }

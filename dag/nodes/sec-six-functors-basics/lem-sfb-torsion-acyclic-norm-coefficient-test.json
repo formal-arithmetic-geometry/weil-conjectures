@@ -372,5 +372,28 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-e7eb4354c (reviewer sub-agent of L); spot-checked: I read the item, the new node and the statement of every cited node in full, plus blueprint main-20261015 direct-images paragraph (3). The item statement is unchanged. Step 1 is correct: the unit-compatible slice localization turns the open unit into restriction RΓ(V,Z/ℓ^s)→RΓ(T,Z/ℓ^s) with T=V[1/f_V], and the bounded-below module/abelian comparison is cited correctly. Step 2 is correct: torsion-extension induction needs only the prime ℓ, and the restriction transformation is shift-compatible. Step 3 is correct: det-lem-bounded-continuity(3) applies with hypercovers from det-pe-hypercover-existence and lower bound 0. Step 4 is correct: O=lim O_n, constant O_n = locally constant functions, and C_B=colim along ℓ. Step 5 is correct: Milnor-epimorphic gives L=R lim and RΓ commutes with it, so H^q(T,C_B)=0. Step 6 is correct: the clopen bijection from H^0(Z/ℓ) and the spectral component homeomorphism give π_0(T)≅π_0(V). Step 7 applies the new node with exactly its hypotheses. One fault (C4) is repaired. Step 8 evaluated only on weakly contractible refinements of the trivializing cover, but det-pe-sections-conservative needs every affine weakly contractible object. I rewrote step 8: localize to each trivializing U_i, note that weakly contractible objects of (U_i)_proet are weakly contractible for X_proet, apply conservativity (2) on (U_i)_proet, and use that vanishing on a covering gives vanishing. I removed lem-weil-pbc-proetale-affine-wcontractible-covering-family from the step, from proof_deps and from tool_uses. New node lem-sfb-norm-completion-positive-cohomology-mono: its form is correct (statement only, unsplit, 5 searches that ran, blueprint fields filled), and grep found no duplicate. It is not a relabel (D1/D2). In the item's setting it is equivalent to H^q(T,C_Ω)=0, because ℓ is bijective on H^q(T,C_{O_Ω}) and H^q(T,C_Ω̂)=0. That is the Ω-analytic core NV already accepted as WANTED, and the E case, dévissage, degree zero and lisse descent are proved in the steps. I tested the general form, which has no torsion hypothesis, on continuous group cochains: H^1 is injective, and digit cochains in H^2 for Z_ℓ and ∏Z/ℓ fail as counterexamples by a Baire argument. No counterexample found. No SGA is used and I found no cycle. The fix is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-torsion-acyclic-norm-coefficient-test.json; the full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TorsionAcyclicNormCoefficientTest",
+  "declaration": "AlgebraicGeometry.ProEtale.torsionAcyclic_normCoefficient_test",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normTestLimitSection",
+   "AlgebraicGeometry.ProEtale.NormTestLisseOpenUnit",
+   "AlgebraicGeometry.ProEtale.torsionAcyclic_normCoefficient_test"
+  ],
+  "file": "lean/Sheaf/Paper/TorsionAcyclicNormCoefficientTest.lean",
+  "statement": "theorem torsionAcyclic_normCoefficient_test (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E Ω : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (I : Type u) [PartialOrder I] [OrderBot I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [HasColimit R] (κ : (Functor.const I).obj (CommRingCat.of k) ⟶ R) (hregular : ∀ i : I, IsRegularScheme (Spec (R.obj i))) (hfiniteType : ∀ i : I, LocallyOfFiniteType (Spec.map (κ.app i)) ∧ QuasiCompact (Spec.map (κ.app i))) (hfiniteFlat : ∀ (i j : I) (h : i ≤ j), IsFinite (Spec.map (R.map (homOfLE h))) ∧ Flat (Spec.map (R.map (homOfLE h)))) (f₀ : R.obj ⊥) (hregularElement : ∀ i : I, (R.map (homOfLE (bot_le : ⊥ ≤ i))).hom f₀ ∈ nonZeroDivisors (R.obj i)) (htorsion : ∀ (s : ℕ), 1 ≤ s → IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ s)))) ((Spec (colimit R)).basicOpen (normTestLimitSection R f₀)).ι).unit.app ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf (Scheme.ProEt.topology (Spec (colimit R))) (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ s))))).obj (ModuleCat.of (ULift.{u + 1} (ZMod (ℓ ^ s))) (ULift.{u + 1} (ZMod (ℓ ^ s)))))))) : NormTestLisseOpenUnit (Profinite.continuousCoefficientRingObj E) (Spec (colimit R)) (normTestLimitSection R f₀) ∧ NormTestLisseOpenUnit (Profinite.continuousCoefficientRingObj Ω) (Spec (colimit R)) (normTestLimitSection R f₀)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b940d218c",
+  "group": "NA",
+  "result": "pass",
+  "note": "All hypothesis/conclusion clauses match the node: Spec of a ring diagram for the tower, IsFinite∧Flat equivalent to finite locally free (Noetherian stages), norm-extension NormedAlgebra binders with no completeness on Ω, actual derived units (FiniteCoefficient adjunction for ZMod ℓ^s; CondensedRing adjunction for lisse N over the pulled-back C(-,F)), j' the basic open of the pulled-back section, conclusion for both E and Ω. lean.statement verbatim; node differs from live only by lean; helpers are real data with docstrings; 8 proof steps in the docstring; sorry only; all imports exist. Advisory: continuousCoefficientRingObj (owned by def-weil-pbc-condensed-e-module-category) used instead of continuousMapRingObjOfUniverse, as in already-reviewed citers; E and Ω in scheme universe u; finite-coefficient adjunction is from a def node not in stmt_deps."
  }
 }

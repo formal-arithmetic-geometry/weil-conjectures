@@ -17,7 +17,11 @@
   "def-pc-geometrically-irreducible",
   "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-real-common-stage-lisse",
+  "def-zl-weil-ind-sheaf-category",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data"
  ],
  "proof": [
   {
@@ -300,5 +304,35 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-3a1230f79 (reviewer sub-agent of L); spot-checked: This is the first delivery of the item: live and side-live are unsplit, and there is no re-split note. It adds 0 new nodes and leaves the statement unchanged (checked by JSON diff); the two added stmt_deps (closed immersion, base change) are used by the statement. I read the item, every cited statement, the full proof of thm-rp, and the unit record and parent proof (main-20261015 thm-zl-real-mixed-by-curves, paragraphs 2-4). The route matches unit step 2/3 and the realized record. Off-unit tools are generic and declared. No SGA. Step checks: (1) curve testing hypotheses hold exactly, including r=0 and x=x_*. (2) Bertini descent: B to k⊗B is free and nonzero, so faithfully flat, and the surjective-spectrum lemma applies. (3) Smoothness descent (02UQ), dimension at a point (00P4) and geometric connectedness (0387) give a d-real-setup curve; dimension 1 at every point implies pure dimension one. (4) Constant restriction (a) gives F_x^f with q_z=q_x^f; the immersion lemma (1) applied over k_m keeps the residue field and the operator; closed points via lem-kun (a). (5) Reality: f-th powers of a conjugation-stable multiset are conjugation-stable. (7-8) The log and root computations need e,f>=1 and q>1, and are correct. Edge cases tested: r=0, x=x_*, d=1, rank one, a nonsplit unipotent extension, and colliding powers. Repairs (2 faults): F1 (E, Step 4): the step silently identified the heart restriction (constant-extension and immersion lemmas) with the classical def-pod-lisse restriction used for lissity, irreducibility and thm-rp. Fixed by citing lem-per-lisse-completed-system-comparison and lem-tw-lisse-rational-realization, which are compatible with pullback (including non-k-linear Frobenius), composites and point transports. F2 (C, Step 6): passing from the sheaf filtration to a composition series of Weil representations, and from geometric to Weil irreducibility, needed prop-wf-weil-sheaf-representation-equivalence and def-wf-fundamental-representation. Both are now cited. proof_deps were updated and one tool_use added; Step 4 is 1926 characters. Batch-5: def-real-weil-representation-operations, lem-fd-weil-pullback-local-frobenius, constant-extension, immersion and curve-testing reach only definitions (def-pod-lisse, def-weil-local-frobenius-trace) or the generic Galois correspondence (cor-galois). For these and the added nodes, the trf/PD part of their closures adds nothing beyond what the parent already reaches without this item: accepted. thm-rp-real-lisse-purity-affine does add trf/pod nodes, via cor-rp-euler-product -> thm-trf-grothendieck-lefschetz-qbar/trace-formula-e/l-function-euler-product and via lem-wf-curve-finite-level-pd -> thm-pod-proper-poincare-duality. Purity on curves is neither assumption nor a step of their proofs, and it is mandated by the unit (sk-p-real-purity) and by the parent: accepted. Maintainer note: cor-rp-euler-product and lem-wf-curve-finite-level-pd should cite nt-assume-trace-formula / nt-assume-poincare-duality. The lem-fd citation in Step 4 is redundant but harmless.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.TwoPointCurveConstituentPurity",
+  "declaration": "WeilConjectures.twoPointCurveConstituentPurity",
+  "declarations": [
+   "WeilConjectures.TwoPointGeometricallyIrreducible",
+   "WeilConjectures.TwoPointCurve",
+   "WeilConjectures.TwoPointCurve.pull",
+   "WeilConjectures.TwoPointCurve.geometricMap",
+   "WeilConjectures.TwoPointCurve.arithmeticMap",
+   "WeilConjectures.TwoPointCurve.residueDegree",
+   "WeilConjectures.twoPointSpectrum",
+   "WeilConjectures.TwoPointCurve.Tests",
+   "WeilConjectures.twoPointCurveConstituentPurity"
+  ],
+  "file": "lean/Sheaf/DeligneLaumon/TwoPointCurveConstituentPurity.lean",
+  "statement": "theorem twoPointCurveConstituentPurity [IsAffine X₀.left] [IsSeparated X₀.hom] [Nonempty X₀.left] [GeometricallyConnected X₀.hom] (d : ℕ) (hd : 1 ≤ d) [SmoothOfRelativeDimension d X₀.hom] (iota : Ω ≃+* ℂ) (F : sfCommonStageWeilSheaf D l hl X₀ Ω) (hF : @IsCommonStageLisse l _ Ω _ _ _ (D.geometricFiber X₀).left (sfWeilPrimeInvertible D l hl X₀) F.obj.carrier) (hreal : SfIsReal D l hl Ω X₀ iota F) (r : ℕ) (G : Fin (r + 1) → sfCommonStageWeilSheaf D l hl X₀ Ω) (φ : ∀ j : Fin r, G j.castSucc ⟶ G j.succ) (hzero : IsZero (G 0)) (hlast : Nonempty (G (Fin.last r) ≅ F)) (hmono : ∀ j : Fin r, Mono (φ j)) (hlisse : ∀ j : Fin (r + 1), @IsCommonStageLisse l _ Ω _ _ _ (D.geometricFiber X₀).left (sfWeilPrimeInvertible D l hl X₀) (G j).obj.carrier) (hirr : ∀ j : Fin r, TwoPointGeometricallyIrreducible D l hl Ω X₀ (cokernel (φ j))) : ∃ w : Fin r → ℝ, (∀ j : Fin r, SfIsPunctuallyPureOfWeight D l hl Ω X₀ iota (cokernel (φ j)) (w j)) ∧ (∀ (anchor : {x : X₀.left // x ∈ closedPoints X₀.left}) (j : Fin r) (α : Ω), α ≠ 0 → SfPunctualEigenvalue D l hl Ω X₀ (cokernel (φ j)) anchor α → w j = 2 * Real.logb (Nat.card (X₀.left.residueField anchor.val) : ℝ) ‖iota α‖) ∧ (∀ (m : ℕ) (hm : 1 ≤ m) (C : TwoPointCurve D l hl Ω X₀ m hm) (anchor : {x : X₀.left // x ∈ closedPoints X₀.left}) (ιa : X₀.left.residueField anchor.val →+* D.k) (ha : ιa.comp (X₀.hom.residueFieldAlgebraMap anchor.val) = algebraMap D.k₀ D.k), (∃ a : Spec (.of D.k) ⟶ ((constantExtensionDatum D m hm).geometricFiber C.curve).left, a ≫ C.geometricMap D l hl Ω X₀ = localClosedPoint D X₀ anchor ιa ha) → ∀ (j : Fin r) (v : ℝ), SfIsPunctuallyPureOfWeight (constantExtensionDatum D m hm) l hl Ω C.curve iota ((C.pull D l hl Ω X₀).obj (cokernel (φ j))) v → v = w j) ∧ ∀ (anchor x : {x : X₀.left // x ∈ closedPoints X₀.left}) (ιa : X₀.left.residueField anchor.val →+* D.k) (ha : ιa.comp (X₀.hom.residueFieldAlgebraMap anchor.val) = algebraMap D.k₀ D.k) (ιx : X₀.left.residueField x.val →+* D.k) (hx : ιx.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k), ∃ (m : ℕ) (hm : 1 ≤ m) (C : TwoPointCurve D l hl Ω X₀ m hm), C.Tests D l hl Ω X₀ F (fun j ↦ cokernel (φ j)) iota w ∧ (∃ a : Spec (.of D.k) ⟶ ((constantExtensionDatum D m hm).geometricFiber C.curve).left, a ≫ C.geometricMap D l hl Ω X₀ = localClosedPoint D X₀ anchor ιa ha) ∧ (∃ b : Spec (.of D.k) ⟶ ((constantExtensionDatum D m hm).geometricFiber C.curve).left, b ≫ C.geometricMap D l hl Ω X₀ = localClosedPoint D X₀ x ιx hx)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the actual common-stage Weil heart and its punctual weights and real characteristic factors. Auxiliary definitions only expand this node's geometric-irreducibility, simultaneous curve, normalized restriction and residue-power clauses. Independent scheme and coefficient universes are retained. Three already-landed dependencies are added for the chart-local lisse predicate, canonical Weil inverse image, and normalized finite constant restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-445d0d244",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of ad402953: Lean byte-identical (sha a9cf06ff…), only stmt_deps changed — theorem lem-zl-constant-extension-weil-heart-equivalence replaced by existing:true def nodes def-dl-a1-constant-extension-data and def-zl-constant-extension-restriction-local-data (identical to side-live; own constantExtensionDatum/Model/Projection/FiberIso and ConstantExtensionRestrictionSpec, plain defs l.59-454, no .choose); theorem kept in proof_deps; item not yet landed in side-live, statement/proof unchanged. Re-checked math vs main-20261015 thm-zl-real-mixed-by-curves.proof.md ¶2-4: hypotheses (affine, nonempty, geom. connected, smooth rel dim d≥1, lisse real F, Fin filtration with actual cokernels, lisse-subobject geometric irreducibility), four conclusion clauses, spec satisfiable via the equivalence theorem, spectrum = charpoly roots, edge cases r=0/x=anchor/collisions/zero stalks. Docstrings, sorry-only, verbatim statement OK. Advisory: lean.note says 'three' added deps (now four). No compile (no file changed)."
  }
 }

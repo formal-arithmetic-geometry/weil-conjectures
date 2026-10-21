@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-point-sections-roos-comparison",
+ "kind": "definition",
+ "title": "Normalized point-sections comparison for the concrete Roos complex",
+ "status": "split",
+ "statement": "Fix a finite-field datum $p,a,q,k_0,k$ with $k$ algebraically closed, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$, use its small pro-etale site [def-weil-pbc-proetale-site], and put $R=\\varprojlim_n(A_n)_s$ [def-weil-completed-integral-coefficients]. Write $\\Gamma$ for final-object sections with its canonical $\\mathcal O_E$-action [lem-weil-point-proetale-sections-exact] [def-weil-point-section-scalar-functors], and $\\Gamma^\\bullet$ for its termwise functor on cochain complexes. Let $Q_{\\mathcal O_E}$ be localization of ordinary $\\mathcal O_E$-module complexes at quasi-isomorphisms [def-weil-abstract-derived-category], with the same coefficient-size lift as the point fibre [def-weil-finite-coefficient-point]. For a strict tower $T$ of complexes in an abelian category with countable products, use $H(T)=\\operatorname{Cone}(1-s_T)[-1]$ of [lem-pur-integral-operations-well-defined], with $1-s_T$ the transition endomorphism of the product [def-weil-tower-transition-endomorphism], whose degree $i$ has coordinates $(b,a)\\in\\prod_nT_n^{i-1}\\oplus\\prod_nT_n^i$. Define $\\operatorname{roosFirst}(T,n,i)$ to be the unshifted projection $(b,a)\\mapsto a_n$, and $\\operatorname{roosSecond}(T,n,i)$ to be the shifted projection $(b,a)\\mapsto b_n$. For each strict tower $T$ of $R$-module complexes on $s$, define $c_T:\\Gamma^\\bullet H(T)\\xrightarrow{\\sim}H(T\\mathbin{;}\\Gamma^\\bullet)$ to be the unique chain isomorphism satisfying, for every $n,i$,\n$$\\operatorname{roosFirst}(T\\mathbin{;}\\Gamma^\\bullet,n,i)\\circ c_T^i=\\Gamma(\\operatorname{roosFirst}(T,n,i)),\\qquad\n\\operatorname{roosSecond}(T\\mathbin{;}\\Gamma^\\bullet,n,i)\\circ c_T^i=\\Gamma(\\operatorname{roosSecond}(T,n,i)).$$\nHere existence and uniqueness are the product-and-biproduct comparison: sections preserve products, the additive functor preserves the signed cone differential, the inverse is given by the inverse product identifications, and both sets of projections jointly determine each degree map. The Lean declarations are respectively sectionsComplex, moduleQ, roosFirst, roosSecond, sectionsRoos_existsUnique and sectionsRoos; the last chooses the uniquely normalized comparison, without invoking any reparametrization-coherence theorem.",
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-coefficient-point",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-point-section-scalar-functors",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), sectionwise shifted cone and canonical completion identifications: original realization proof steps 3-4 and comparison descent in step 6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections identify both coordinates of the shifted mapping cone of one minus shift on a tower of module sheaves",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Sheaf.coneΓ, CategoryTheory.Sheaf.isLimitConeΓ, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone, CochainComplex.mappingCone.shiftIso, CategoryTheory.Sheaf.Γ, SheafOfModules.sectionsFunctor_obj, CategoryTheory.Sheaf.coneΓ_π_app. General sections, cones and product extensionality do not define this completed-coefficient comparison. Reuse the exact existing CompletedStalk declarations instead of writing a new module.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical global sections comparison for Roos complexes uniquely determined by both product coordinate projections",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Equalizer.Presieve.Arrows.FirstObj.ext, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.hom_ext_iff, CategoryTheory.Equalizer.Presieve.Arrows.FirstObj.ext_iff, CategoryTheory.Equalizer.Sieve.SecondObj.ext_iff, TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens.hom_ext_iff, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.hom_ext, CategoryTheory.Equalizer.FirstObj.ext, CategoryTheory.Equalizer.Sieve.SecondObj.ext. General sections, cones and product extensionality do not define this completed-coefficient comparison. Reuse the exact existing CompletedStalk declarations instead of writing a new module.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsRoos|roosFirst|roosSecond|sectionsComplex",
+   "results": "[grep] OK 0 hit(s); . Direct rg in lean/WeilConjectures and lean/Sheaf found the exact six declarations in Sheaf.Paper.CompletedStalkReparametrizationCoherence; other similarly named declarations are private, unrelated, or the downstream LocalFrobeniusTransport specialization. DAG search found no definition node owning these notions; the coherence theorem node merely lists the helper declarations. blueprint_refs.py search sections.*Roos|Roos.*sections returned 0 blueprint nodes.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-sections-completion-cone",
+  "date": "2026-10-21",
+  "group": "Q13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), the sectionwise product identification on both coordinates of the strict shifted cone, used in the point completion and pullback comparisons",
+   "via": [
+    "lem-trf-point-sections-completion-cone",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedStalkReparametrizationCoherence",
+  "declaration": "WeilConjectures.CompletedStalk.sectionsRoos",
+  "declarations": [
+   "WeilConjectures.CompletedStalk.sectionsComplex",
+   "WeilConjectures.CompletedStalk.moduleQ",
+   "WeilConjectures.CompletedStalk.roosFirst",
+   "WeilConjectures.CompletedStalk.roosSecond",
+   "WeilConjectures.CompletedStalk.sectionsRoos_existsUnique",
+   "WeilConjectures.CompletedStalk.sectionsRoos"
+  ],
+  "statement": "def sectionsRoos\n    (T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "H2 repair: owns the existing section-complex, module-localization and two-coordinate Roos-comparison helpers in the unchanged module. sectionsRoos is selected by sectionsRoos_existsUnique; it does not use the node theorem coherence. No declaration is duplicated or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319157315",
+  "group": "Q13",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319157315",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Re-delivery of f33cf8e1 H2 RETURN. Lean byte-identical; item differs from live only by stmt_deps (+def-trf-point-sections-roos-comparison) and lean. New def node is existing:true on unchanged CompletedStalkReparametrizationCoherence, owns sectionsComplex/moduleQ/roosFirst/roosSecond/sectionsRoos_existsUnique/sectionsRoos; sectionsRoos is the .choose of a local helper, not of coherence; roosFirst/roosSecond match the TeX coordinates. check_existing and check_new_node clean; no cycle. FIX (fixes/def-trf-point-sections-roos-comparison.json): added body owners def-weil-point-section-scalar-functors (pointIntegralSections) and def-weil-tower-transition-endomorphism to the new node's stmt_deps and TeX citations. Advisory: item Lean uses pointFibreIntegralAmbient/integralScalarTowerFunctor/pointIntegralSections whose owners are not in item stmt_deps. No compile: no Lean changed."
+ }
+}

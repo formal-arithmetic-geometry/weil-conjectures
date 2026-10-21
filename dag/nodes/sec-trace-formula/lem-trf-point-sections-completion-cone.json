@@ -21,7 +21,8 @@
   "def-weil-completed-integral-coefficients",
   "def-weil-pbc-proetale-site",
   "lem-weil-point-proetale-sections-exact",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-trf-point-sections-roos-comparison"
  ],
  "proof": [
   {
@@ -301,5 +302,47 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-04a7ea47e (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement in full. Shape: one commit with the item and report only, no new nodes, statement byte-identical to base, live item still unsplit (parallel Q129 delivery noted), no repair note, not dropped, no SGA. Union of step uses = proof_deps, no cycle; the only citer, transport-tower-realization step 2, takes exactly c, alpha_N, a_P, beta_N. Step 1: proetale-countable-products-exact gives sectionwise products for the completed sheaf; exact point sections are additive. Step 2: C(f)[-1] differential from def-weil-abstract-derived-category, with f=1-s, equals the item's (-db-(1-s)a,da) and strict-roos-model (y,z)->(-dy-u(z),dz); strictness gives W(1-s_X)=(1-s_Y)W. Step 3: derived-limit-products-core holds in sheaf modules and in ordinary Gamma(R)-modules; the rotated cone triangle is the Roos triangle of 08TC, with its sign remark. Step 4: strict-roos-comparison applies on s_proet and on the one-object trivial site; levelwise qis are inverted; naturality passes to roofs. Step 5: change-of-rings (2) gives P_n = N_n; finite Lg_n^* is termwise inverse image; g is an automorphism. Step 6: the completion comparison at L=E is stated as the derived-completeness map with augmentation (0,(r_n)); its completeness hypothesis matches D^b_c; I checked a_P is a chain map. Step 7: integral-operations-well-defined (2) at f=g with a flat-term K-flat P gives iota onto H(C), matching the integral pullback definition. Step 8: naturality and independence come from the two statements plus Step 4; roofs of K-flat flat-term complexes reduce levelwise to qis. Advisory: D(f) could cite integral-operations-well-defined at f=id. Edge cases zero, zero transitions, constant towers, torsion Tor term and unbounded towers are fine. Neighbours lem-pod-point-sections-derived-reduction and lem-weil-point-sections-scalar-extension are not duplicates. Tool uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsCompletionCone",
+  "declaration": "WeilConjectures.PointSectionsCompletionCone.pointSectionsCompletionCone",
+  "declarations": [
+   "WeilConjectures.PointSectionsCompletionCone.frobenius",
+   "WeilConjectures.PointSectionsCompletionCone.sections",
+   "WeilConjectures.PointSectionsCompletionCone.moduleQ",
+   "WeilConjectures.PointSectionsCompletionCone.factors",
+   "WeilConjectures.PointSectionsCompletionCone.reductions",
+   "WeilConjectures.PointSectionsCompletionCone.completion",
+   "WeilConjectures.PointSectionsCompletionCone.completedSections",
+   "WeilConjectures.PointSectionsCompletionCone.completionModel",
+   "WeilConjectures.PointSectionsCompletionCone.completionModelAt",
+   "WeilConjectures.PointSectionsCompletionCone.pullbackModel",
+   "WeilConjectures.PointSectionsCompletionCone.beta",
+   "WeilConjectures.PointSectionsCompletionCone.augmentation",
+   "WeilConjectures.PointSectionsCompletionCone.CompletionNormalization",
+   "WeilConjectures.PointSectionsCompletionCone.completionComparison_existsUnique",
+   "WeilConjectures.PointSectionsCompletionCone.completionComparison",
+   "WeilConjectures.PointSectionsCompletionCone.alpha",
+   "WeilConjectures.PointSectionsCompletionCone.ModuleDerivedLimit",
+   "WeilConjectures.PointSectionsCompletionCone.reductionMap",
+   "WeilConjectures.PointSectionsCompletionCone.pullbackMap",
+   "WeilConjectures.PointSectionsCompletionCone.DerivedNaturality",
+   "WeilConjectures.PointSectionsCompletionCone.pointSectionsCompletionCone"
+  ],
+  "file": "lean/Sheaf/Paper/PointSectionsCompletionCone.lean",
+  "statement": "theorem pointSectionsCompletionCone [Fact (l ≠ D.p)] : (∀ T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ, (∀ (n : ℕ) (i : ℤ), (CompletedStalk.sectionsRoos D l E T).hom.f i ≫ CompletedStalk.roosFirst (T ⋙ sections D l E) n i = (pointIntegralSections l E D.k).map (CompletedStalk.roosFirst T n i)) ∧ (∀ (n : ℕ) (i : ℤ), (CompletedStalk.sectionsRoos D l E T).hom.f i ≫ CompletedStalk.roosSecond (T ⋙ sections D l E) n i = (pointIntegralSections l E D.k).map (CompletedStalk.roosSecond T n i)) ∧ integralOperationsDerivedLimitProperty l E (Spec (.of D.k)) T (DerivedCategory.Q.obj (integralOperationsRoos T)) ∧ ModuleDerivedLimit l E (T ⋙ sections D l E)) ∧ (∀ (T U : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (w : T ⟶ U), (sections D l E).map (integralOperationsRoosMap w) ≫ (CompletedStalk.sectionsRoos D l E U).hom = (CompletedStalk.sectionsRoos D l E T).hom ≫ integralOperationsRoosMap (Functor.whiskerRight w (sections D l E))) ∧ (∀ (T U : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (w : T ⟶ U) (n : ℕ) (i : ℤ), (integralOperationsRoosMap w).f i ≫ CompletedStalk.roosFirst U n i = CompletedStalk.roosFirst T n i ≫ (w.app (op n)).f i ∧ (integralOperationsRoosMap w).f i ≫ CompletedStalk.roosSecond U n i = CompletedStalk.roosSecond T n i ≫ (w.app (op n)).f (i + -1)) ∧ (∀ (T U : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (w : T ⟶ U), (∀ n : ℕ, QuasiIso (w.app (op n))) → QuasiIso (integralOperationsRoosMap w) ∧ QuasiIso (integralOperationsRoosMap (Functor.whiskerRight w (sections D l E)))) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ), (∀ (n : ℕ) (z : ((sections D l E).obj P).X i), (((augmentation D l E P).f i ≫ CompletedStalk.roosFirst ((reductions D l E).obj P ⋙ sections D l E) n i).hom z) = integralScalarTensorSection l E E (AlgHom.id ℚ_[l] E) (Spec (.of D.k)) n (P.X i) (op (ProEt.mk (𝟙 (Spec (.of D.k))))) 1 z) ∧ (∀ n : ℕ, (augmentation D l E P).f i ≫ CompletedStalk.roosSecond ((reductions D l E).obj P ⋙ sections D l E) n i = 0)) ∧ (∀ (N : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ N.obj), (pointFibreIntegralAmbient D l E).map q.hom ≫ (alpha D l E N P q).hom = (factors D l E).hom.app P.obj ≫ (moduleQ l E).map (augmentation D l E P.obj)) ∧ (∀ (N N' : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (f : N ⟶ N') (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ N.obj) (q' : DerivedCategory.Q.obj P'.obj ≅ N'.obj) (w : P ⟶ P'), q.hom ≫ f.hom = DerivedCategory.Q.map w.hom ≫ q'.hom → reductionMap D l E f P P' q q' = (moduleQ l E).map (integralOperationsRoosMap (Functor.whiskerRight ((reductions D l E).map w.hom) (sections D l E))) ∧ pullbackMap D l E f P P' q q' = (moduleQ l E).map (integralOperationsRoosMap (Functor.whiskerRight ((integralOperationsPullbackTowerFunctor l E (frobenius D)).map w.hom) (sections D l E)))) ∧ DerivedNaturality D l E",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses the existing two-coordinate CompletedStalk.sectionsRoos; alpha is fixed on every good representative by the identity-extension completion augmentation, and beta uses the defining integral pullback comparison. Whole derived isomorphisms, strict-map computation and all-derived-morphism naturality are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319157315",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Re-delivery of f33cf8e1 H2 RETURN. Lean byte-identical; item differs from live only by stmt_deps (+def-trf-point-sections-roos-comparison) and lean. New def node is existing:true on unchanged CompletedStalkReparametrizationCoherence, owns sectionsComplex/moduleQ/roosFirst/roosSecond/sectionsRoos_existsUnique/sectionsRoos; sectionsRoos is the .choose of a local helper, not of coherence; roosFirst/roosSecond match the TeX coordinates. check_existing and check_new_node clean; no cycle. FIX (fixes/def-trf-point-sections-roos-comparison.json): added body owners def-weil-point-section-scalar-functors (pointIntegralSections) and def-weil-tower-transition-endomorphism to the new node's stmt_deps and TeX citations. Advisory: item Lean uses pointFibreIntegralAmbient/integralScalarTowerFunctor/pointIntegralSections whose owners are not in item stmt_deps. No compile: no Lean changed."
  }
 }

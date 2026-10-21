@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-condensed-free-module-generators",
+ "kind": "definition",
+ "title": "Canonical free internal-module adjunction and local profinite tuple generators",
+ "status": "split",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the coherent profinite site with the sizes of [def-weil-size-convention], and use its internal module category and section modules [sk-def-sfb-module-objects] and [def-sfb-condensed-action-module]. The free module on a representable profinite parameter is the existing $A[P]$ of [def-sfb-condensed-equivariant-bar-data]. Write $F_A$ for the composite of the free abelian sheaf functor and the free internal $A$-module functor $A\\otimes-$, so that $F_A\\dashv U$, where $U$ forgets an internal module to a condensed set. This is the same composite defining $A[P]$, not an alternative free object. For a profinite group $G$ and $n\\geq0$, put $P_n=G^n$ (the terminal profinite object when $n=0$), and write $A[\\underline G^n]=F_A(\\underline{P_n})$. For a profinite $S$ and a tuple $x=(x_i)_{i\\in\\operatorname{Fin}(n)}$ of continuous maps $S\\to G$, define its canonical local generator $[x]\\in A[\\underline G^n](S)$ to be the component at $S$ of the unit of $F_A\\dashv U$ on $\\underline{P_n}$, applied to the generalized point $s\\mapsto(x_i(s))_i$. These are definitions, with no resolution or exactness assertion.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated free internal-module construction and generalized generators in the homogeneous-function helper; existing construction in CondensedInternalBarResolution.lean:53-90. The free object is the freeParameter of def-sfb-condensed-equivariant-bar-data."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Generators from the unit of the free abelian sheaf and internal module adjunction",
+   "results": "{\"t\": \"2026-10-21T19:15:52Z\", \"tool\": \"leansearch\", \"query\": \"Generators from the unit of the free abelian sheaf and internal module adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunction\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"SheafOfModules.freeSection\", \"PresheafOfModules.freeAdjunctionUnit\", \"AddCommGrpCat.adj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.LocalGeneratorsData.I\"], \"digest\": \"e904ce86485b3959\"}",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing project definitions: Mathlib has the component adjunctions and constant-ring free modules but no exact arbitrary-condensed-ring local tuple generator interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical generators of the free internal module on a profinite representable over a condensed ring",
+   "results": "{\"t\": \"2026-10-21T19:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical generators of the free internal module on a profinite representable over a condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteFree\", \"Condensed.free\", \"Condensed.finFree\", \"LightCondensed.free\", \"LocallyConstant.freeOfProfinite\", \"Condensed.profiniteSolid\", \"PresheafOfModules.freeYoneda\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"9a4173de0f13f76d\"}",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing project definitions: Mathlib has the component adjunctions and constant-ring free modules but no exact arbitrary-condensed-ring local tuple generator interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.adjunction, Mod.freeForgetAdjunction",
+   "results": "{\"t\": \"2026-10-21T19:15:42Z\", \"tool\": \"loogle\", \"query\": \"Sheaf.adjunction, Mod.freeForgetAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf.adjunction'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing project definitions: Mathlib has the component adjunctions and constant-ring free modules but no exact arbitrary-condensed-ring local tuple generator interface."
+  },
+  {
+   "tool": "grep",
+   "query": "freeParameter|freeAdjunction|generator",
+   "results": "{\"t\": \"2026-10-21T19:15:42Z\", \"tool\": \"grep\", \"query\": \"freeParameter|freeAdjunction|generator\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Reuse existing project definitions: Mathlib has the component adjunctions and constant-ring free modules but no exact arbitrary-condensed-ring local tuple generator interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n freeParameter|freeAdjunction|generator|InternalBar in lean/WeilConjectures and lean/Sheaf; rg -n InternalBar\\.(free|freeAdjunction|tuples|freePower|generator) in dag/nodes/*/def-*.json",
+   "results": "CondensedInternalBarResolution.lean:53-90 already defines free, freeAdjunction, tuples, freePower, generator. CondensedEquivariantBarData.lean:145 owns freeParameter with the identical free module body; its InternalFunctions is a specification and has no canonical adjunction-unit generator. No definition node records InternalBar.generator or freeAdjunction. No matching upstream declaration.",
+   "date": "2026-10-21",
+   "verdict": "Bind the existing generator and its existing supporting declarations; do not duplicate any Lean definition. The generic freeParameter owner is cited and used by the consumer."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search free internal module",
+   "results": "0 blueprint nodes match 'free internal module'",
+   "date": "2026-10-21",
+   "verdict": "No blueprint definition of these adjunction-unit generator helpers; inherit the item source and route."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-homogeneous-functions-injective",
+  "date": "2026-10-21",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: injectivity of the auxiliary homogeneous-function double-complex terms used to compare an augmentation-preserving evaluation with the normalized derived bar arrow. Canonical free-module unit generator used in evaluation on every profinite slice.",
+   "via": [
+    "lem-sfb-internal-homogeneous-functions-injective",
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedInternalBarResolution",
+  "declaration": "Profinite.CondensedAction.InternalBar.generator",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBar.free",
+   "Profinite.CondensedAction.InternalBar.freeAdjunction",
+   "Profinite.CondensedAction.InternalBar.tuples",
+   "Profinite.CondensedAction.InternalBar.freePower",
+   "Profinite.CondensedAction.InternalBar.generator"
+  ],
+  "statement": "def generator (n : ℕ) (S : Profinite.{u}) (x : Fin n → C(S, G)) :\n    sectionModule R (freePower R G n) S",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership repair H2/H4, using the existing declarations, with no new module and no second copy. The unchanged module constructs free/freeAdjunction/tuples/freePower/generator at lines 53-90 before exists_resolution; none uses or chooses from that theorem. def-sfb-condensed-equivariant-bar-data is usable and is cited for the same freeParameter body, which the consumer now uses directly. Its InternalFunctions is a specification and does not supply the canonical unit generator. This node records precisely that missing definition ownership and its supporting existing declarations; the resolution theorem remains owned by its original theorem node."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b827200",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b827200",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of 7f48924c H2/H4 RETURN. Lean delta: Hom source is now CondensedBar.freeParameter ⟨R.X⟩ (power G (n+1)) from def-sfb-condensed-equivariant-bar-data, body-identical to InternalBar.freePower; the generator typechecks definitionally. The theorem stmt_dep lem-sfb-condensed-internal-bar-resolution is removed. New def-sfb-condensed-free-module-generators is existing:true on unchanged CondensedInternalBarResolution (free/freeAdjunction/tuples/freePower/generator, plain defs at lines 53-90, no .choose); statement verbatim; check_existing clean; no competing owner in side-live. Item node differs from live only in stmt_deps (4 added def nodes) and lean. Clauses rechecked: arbitrary commutative R, profinite G, sole [Injective J.module], every n : ℕ, action pinned on all slices with correct inverse and order, ∃ over a normalized model unique up to iso. Edge cases n=0, G=1, zero ring, J=0, empty test, infinite G. Gates H5/H6/H8 OK. Advisory: base-era tensor-closed public import used only by the proof plan. No file changed, no compile."
+ }
+}

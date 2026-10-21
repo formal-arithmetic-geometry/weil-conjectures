@@ -449,5 +449,39 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-16f6ca3eb (reviewer sub-agent of L); spot-checked: Read the item and all 16 cited statements in full. The statement is unchanged from base and live, live is still unsplit, there are no new nodes, no cycle (closure of 12487 nodes), nothing on the drop/retire lists, and no SGA source. Sources checked: Stacks 09BP lemma-j-shriek-limits (proetale.tex l.5185, needs j quasi-compact), Stacks 0GL1 (sites-cohomology l.4578), and Bhatt–Scholze 6.5.5/6.5.8 (pp.49–51). Step by step: step 1 gets qcqs and j quasi-compact from the Noetherian and Nagata leaves; step 2 meets every hypothesis of lem-cbc-exact-product-functor-strict-limit (exact j_!, ringed product comparison for any ring sheaf, exact countable products); step 4 re-derived R lim(γ•)a_T = λ j_!(a_S) γ^B from the strict-Roos augmentation naturality plus the lem-cbc augmentation clause, and the sign check (cz,0) chain map ⇔ (1−s)c = 0 holds; step 5 identifies a_T, a_S with χ by the levelwise quotient-map description in lem-fix and def-sf-tensor-completion-comparison; step 6 χ is invertible from qcqs, ℓ invertible and D^b_c via quotient-augmentation, with no Tor assumption; step 8 gets j^*Γ = 1 from pr_n-equations giving ∏u plus lem-sf-open-tensor-normalization's j^*γ = id; step 9 shows Γ supplies the integral open tensor datum of def-exchange-projection and nothing more. Edge cases U = ∅, j = id, K or P = 0, n = 1 and nonseparated X all pass. Cross-unit tool uses are listed in split_report.tool_uses for the maintainer and accepted as generic. FIX: step 1 now proves that X→Spec k is quasi-separated (affine base, diagonal argument) instead of stopping at X being a quasi-separated scheme; step 2 now identifies the termwise j_! target of lem-cbc with J S• through the restriction-of-scalars clause of lem-sf-open-tensor-quotient-augmentation, which is added to that step's uses. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenProjectionRoosCompletion",
+  "declaration": "WeilConjectures.OpenProjectionRoos.openProjectionRoosCompletion",
+  "declarations": [
+   "WeilConjectures.OpenProjectionRoos.boundary",
+   "WeilConjectures.OpenProjectionRoos.onTowers",
+   "WeilConjectures.OpenProjectionRoos.RoosComparison",
+   "WeilConjectures.OpenProjectionRoos.RoosComparison.derived",
+   "WeilConjectures.OpenProjectionRoos.leftInputs",
+   "WeilConjectures.OpenProjectionRoos.rightInputs",
+   "WeilConjectures.OpenProjectionRoos.pairs",
+   "WeilConjectures.OpenProjectionRoos.completedLeft",
+   "WeilConjectures.OpenProjectionRoos.completedInside",
+   "WeilConjectures.OpenProjectionRoos.completedRight",
+   "WeilConjectures.OpenProjectionRoos.CompletionData",
+   "WeilConjectures.OpenProjectionRoos.Completion",
+   "WeilConjectures.OpenProjectionRoos.openProjectionRoosCompletion"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenProjectionRoosCompletion.lean",
+  "statement": "theorem openProjectionRoosCompletion (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [j.IsOver (Spec (.of D.k))] : Completion l E j o SX SU AX AU st m c q",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Specified natural open projection comparison on the recorded constructible domains, with actual chi equality, normalized signed-Roos lambda preserving every strict augmentation, and restriction through the same strict quotient towers and canonical open units. CompletionData is a proposition retaining the simultaneously normalized data; Completion existentially supplies restriction exactness. No construction is chosen from an unproved existence statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fe7e53ce",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the node, the 20 stmt_deps, the module, report.md and the dependency sources in side-live (OpenTensorQuotientAugmentation, OpenSemilinearTensorModel, OpenFactorTensorModel, IntegralOperationsWellDefined, TowerTransitionEndomorphism, IntegralDerivedOperations, ExchangeProjectionSuppliedDomains). Only the lean field changed vs live; lean.statement is verbatim. Hypotheses match the node: finite type = LOFT+QC, open immersion, l != p, no separatedness or Tor hypothesis, domains sfIntegralConstructible U x X. All data are pinned. RoosComparison: products by projections, iso by both mapping-cocone coordinates, augmentations with (lift a, 0), satisfiable since lift a composed with 1-s is 0. gamma^B is HEq-pinned to m.totalComparison.chain on good representatives. Gamma = lambda^-1 Rlim z.gamma via _representative; z.gamma is unique by Balanced/reduction. The chi square orientation is correct, both chi maps invertible, units equal to the adjunction units, tensorRestriction pinned via restriction.derived and Roos(delta). HEq probe: '=' fails at default transparency (unexposed getColimitCocone), but with_unfolding_all rfl proves constructibleTensorTotal = OpenSemilinearTensor.total (47.7 s) and uncurried proEtaleOrdinaryTensor map2 = total (34.6 s); a swapped control fails. So the HEq is between defeq types and is a genuine pin. Edge cases: empty U, j = id, zero objects, index n <-> A_(n+1), unbounded representatives. Gates: only sorry, real defs, docstrings with source and blueprint, 9-step proof, no line over 100 characters, side pro-etale declarations. Advisories: (1) delta is built from z.gamma, so the restriction-identity clause carries only the lambda/unit compatibility (as in node step 8; Gamma is pinned anyway); (2) the def-exchange-projection 'in particular' clause is not rendered, so the ExchangeProjectionSuppliedDomains import is unused in the statement; (3) decls from def-sf-integral-open-operations, def-sf-open-semilinear-tensor-model-data, def-sf-integral-open-reduction-comparison-data, def-coef-derived-system-calculus-data and def-sf-tensor-completion-comparison are used while these nodes are outside stmt_deps (base-era, advisory); (4) RoosComparison restates the existential exactProductFunctorStrictLimit locally, with every field pinned."
  }
 }
