@@ -502,5 +502,33 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-25e50ca38 (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sfb-topological-homogeneous-cochain-coordinates in full, along with the sources: Stacks 0DVG (etale-cohomology.tex 9007-9040), Stacks 019S (simplicial.tex 4739ff) and blueprint main-20261015 direct-images paragraph (3). This is not a re-split delivery: the item had no proof on base. Item steps: (2) the coset retraction r is continuous and r(hx)=h r(x). (3) T is G-equivariant via sa=hu, s^{-1}h=a u^{-1}, and s->u permutes S; the order of multiplication is right for non-normal H. (4) a_s(ax)=a a_u(x). (5) K has the right arity and is equivariant. (6)-(7) I redid the prism cancellation: the j<i and j>i+1 terms pair bijectively with the delta K terms with opposite signs, and the j=i, i+1 terms telescope to TR-|S| id. Degree 0 gives K_1 delta F=sum_s (F(a_s x)-F(x)). (8) cor=Phi_G T Psi_H and cor res=Phi_G T R Psi_G by the restriction clause. (9) Coefficient naturality and subspace preservation hold as stated and match the parent's use with V_F into V_Omega. New node: I checked continuity of Phi and Psi (joint continuity of the action is needed), both inverse identities, compatibility with the differentials including degree 0, and naturality in coefficients and group homomorphisms. It is true, stated in derived form, statement-only, self-contained, and not a restatement of the item (it knows nothing about subgroups or transfer). Duplicate search over the DAG found nothing that states it: the sc-homogeneous nodes use discrete integer coefficients, the sfb bar/condensed nodes use internal Hom, and the sc h2-transfer nodes are finite discrete H^2 only. Mathlib searches of all three kinds are recorded. Route: only a same-unit new node is cited; there are no tool_uses and no SGA. Advisory: def-weil-field defines only a field, while 'topological field/vector space' is left uncited, following the DAG-wide convention. The null blueprint.from.node is inherited from base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainFiniteIndexTransfer",
+  "declaration": "ContinuousCohomology.exists_continuousCochainFiniteIndexTransfer",
+  "declarations": [
+   "ContinuousCohomology.continuousInhomogeneousD",
+   "ContinuousCohomology.continuousInhomogeneousD_comp",
+   "ContinuousCohomology.continuousInhomogeneousComplex",
+   "ContinuousCohomology.subgroupContinuousInhomogeneousComplex",
+   "ContinuousCohomology.continuousInhomogeneousRestriction_comm",
+   "ContinuousCohomology.continuousInhomogeneousRestriction",
+   "ContinuousCohomology.exists_continuousCochainFiniteIndexTransfer"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainFiniteIndexTransfer.lean",
+  "statement": "theorem exists_continuousCochainFiniteIndexTransfer [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (H : OpenSubgroup G) : ∃ cor : ∀ (A : TopRep.{w} E G) (hA : Continuous (fun p : G × A ↦ A.ρ p.1 p.2)), subgroupContinuousInhomogeneousComplex H.toSubgroup A hA ⟶ continuousInhomogeneousComplex A hA, ∃ homotopy : ∀ (A : TopRep.{w} E G) (hA : Continuous (fun p : G × A ↦ A.ρ p.1 p.2)), Homotopy (continuousInhomogeneousRestriction H.toSubgroup A hA ≫ cor A hA) (H.toSubgroup.index • 𝟙 (continuousInhomogeneousComplex A hA)), ∀ (A B : TopRep.{w} E G) (hA : Continuous (fun p : G × A ↦ A.ρ p.1 p.2)) (hB : Continuous (fun p : G × B ↦ B.ρ p.1 p.2)) (b : A ⟶ B), (∀ (n : ℕ) (f : C(Fin n → H, A)) (g : Fin n → G), b ((cor A hA).f n f g) = (cor B hB).f n (ContinuousLinearMap.compLeftContinuous E (Fin n → H) b.hom.toContinuousLinearMap f) g) ∧ (∀ (i j : ℕ) (f : C(Fin i → G, A)) (g : Fin j → G), b ((homotopy A hA).hom i j f g) = (homotopy B hB).hom i j (ContinuousLinearMap.compLeftContinuous E (Fin i → G) b.hom.toContinuousLinearMap f) g)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper declarations construct the continuous inhomogeneous complexes and canonical restriction explicitly introduced by this node. The only postponed helper properties are square-zero and restriction compatibility, both clauses implicit in its specified complexes and cochain map. The existential transfer and homotopy are simultaneously natural over all jointly continuous coefficient representations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64f3f6f2f",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item lean-only change (stmt_deps unchanged); statement verbatim. Checked every clause: Field+IsTopologicalDivisionRing, profinite G as compact T2 totally disconnected topological group, OpenSubgroup H, TopRep plus explicit joint-continuity hA (TopRep alone only makes each ρ g continuous). Inhomogeneous d via Fin.contractNth has the node's signs including the last face and n=0 (gv−v). Abstract CochainComplex (ModuleCat.{max v w} E) ℕ, so no closure. Canonical restriction via compCLM. ∃cor ∃homotopy (res≫cor ≃ index•𝟙, f−g=dh+hd direction) ∀A B b, naturality of every cor.f n and homotopy.hom i j, so one choice for all coefficients; closed-subspace preservation follows from the inclusion. Edge cases (n=0, H=G, non-normal H, char | index, zero/indiscrete coefficients, independent universes) covered. Not hollow: real defs, three named sorry theorems with proof docstrings; statement true by the fixed-transversal construction. H4: Mathlib ContCohomology is iterated homogeneous (n-ary form a TODO); side-live ccD is private and discrete-only; no name clashes. Docstrings, lines, imports ok. No compile (no change). Advisory: the NF coordinates node should reuse continuousInhomogeneousComplex at stage 2."
  }
 }
