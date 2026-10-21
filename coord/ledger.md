@@ -23466,3 +23466,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:23 L: returned deliver/Q25/lem-pur-dualizing-unit-composite (reviewer RETURN: L: independent stage-2 immutable head 6b1f7aecc278: S2 re-delivery after Q27's S2 landing (ledger 23406, 02:57; this run)
 - 19:23 L: returned deliver/NA/lem-sfb-normed-scalar-profinite-hom-acyclic (reviewer RETURN: L: independent stage-2 immutable head e8abced2b64d: H2: delivery adds theorem nodes lem-sfb-condensed-internal-bar-resol)
 - 19:23 L: returned deliver/Q13/lem-trf-point-sections-completion-cone (reviewer RETURN: L: independent stage-2 immutable head f33cf8e17229: H2: delivery added theorem node lem-trf-completed-stalk-reparametriz)
+- 19:23 L: returned deliver/NO/lem-sfb-root-tower-boundary-acyclicity (reviewer RETURN: L: independent stage-2 immutable head fc3955febca9: H3: ScalarCompatibility (def-sfb-root-boundary-scalar-comparison) do)
