@@ -23287,3 +23287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:10:28Z L: superseded stage-1 delivery Q36/lem-pur-closed-etale-transport-bounds at 25b49b6447e510db6a3f13676a4c8eab901ade93; current completion retained; packet archived at refs/superseded/Q36/lem-pur-closed-etale-transport-bounds/25b49b6447e510db6a3f13676a4c8eab901ade93; stale return retired.
 - 18:11 L: merged deliver/O3/lem-sfb-discrete-lattice-koszul-resolution (stage 2; reviewer PASS; parallel immutable checks)
 - 18:12 L: merged deliver/Q03/lem-sfb-wstrict-lisse-component-cohomology (stage 2; reviewer FIX; parallel immutable checks)
+- 18:13 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
