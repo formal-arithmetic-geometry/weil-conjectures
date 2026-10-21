@@ -23251,3 +23251,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:55 L: merged deliver/O4/lem-sfb-tame-root-tower-extension (stage 2; reviewer FIX; parallel immutable checks)
 - 2026-10-21T17:56:16Z L: superseded stage-1 delivery Q01/lem-sfb-root-tower-puncture-invariance at 049e947c858916755977d4df208a8b2eda2711fb; current completion retained; packet archived at refs/superseded/Q01/lem-sfb-root-tower-puncture-invariance/049e947c858916755977d4df208a8b2eda2711fb; stale return retired.
 - 17:56 L: merged deliver/Q13/lem-wf-tate-twist-frobenius (stage 2; reviewer PASS; parallel immutable checks)
+- 17:57 L: returned deliver/N6/lem-sfb-cech-localization-unit-totalization (reviewer RETURN: L: independent stage-2 immutable head 0c4ba238c411: H4/H3: the item writes a private Čech slice model (own nerve, sliceS)
