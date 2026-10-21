@@ -20973,3 +20973,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/O3/lem-pe-restricted-kflat-tensor-identification (reviewer PASS; first push; new nodes: 0)
 - 08:10 L: merged deliver/Q10/lem-sfb-module-direct-image-open-pasting (reviewer PASS; first push; new nodes: 0)
 - 08:10 L: merged deliver/Q16/lem-sbc-finite-stage-rational-exchange-coherence (reviewer FIX; first push; new nodes: 0)
+- 08:10 L: merged deliver/Q57/lem-tw-ordinary-completed-integral-pullback (reviewer PASS; after a return; new nodes: 1)
