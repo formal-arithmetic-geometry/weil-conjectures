@@ -13,96 +13,52 @@
  ],
  "proof": [
   {
-   "text": "Fix any object $X\\in D(\\mathcal A)$ and represent it by a complex $K^\\bullet$, so $X\\cong QK^\\bullet$. For $r\\in\\mathbf N$ put $E_r^\\bullet=\\sigma_{\\ge-r}K^\\bullet$: its term in degree $i$ is zero for $i<-r$ and $K^i$ otherwise, with the retained differentials. These are subcomplexes, with inclusions $E_r^\\bullet\\to E_{r+1}^\\bullet$. Each $QE_r^\\bullet$ has zero cohomology in degrees below $-r$, hence is an allowed bounded-below test object. In each fixed degree $i$ the sequence is eventually the constant diagram $K^i$ with identity transitions. Its colimit is $K^i$: a cocone factors uniquely by its stable value. These factorizations commute with the differentials because the original cocone maps do. Thus the degreewise colimit of the $E_r^\\bullet$ is $K^\\bullet$.",
+   "text": "Complete $\\alpha:B\\to G$ to a distinguished triangle $B\\xrightarrow{\\alpha}G\\xrightarrow{g}Z\\xrightarrow{d}B[1]$. For any bounded-below $H$, transport the injectivity hypothesis at shift $-1$ through the adjunction $[-1]\\dashv[1]$ to get injectivity of $\\operatorname{Hom}(H,B[1])\\to\\operatorname{Hom}(H,G[1])$. Consecutive composites vanish, so for $f:H\\to Z$ the composite $df$ has zero image in $\\operatorname{Hom}(H,G[1])$, hence $df=0$. Exactness of $\\operatorname{Hom}(H,-)$ at $Z$, obtained by rotating the triangle once and using the cited Hom-exactness lemma, gives $f=gk$. The hypothesis at shift $0$ (transported along $H[0]\\cong H$) lifts $k:H\\to G$ to $l:H\\to B$. Thus $f=g\\alpha l=0$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0146 (lemma-composition-zero), 0149 (lemma-representable-homological); elementary shift-adjunction transport and Hom chase"
+   }
+  },
+  {
+   "text": "Represent $Z$ by a complex $K$ with $QK\\cong Z$. For each integer $q$ use the stupid lower truncation $L=\\sigma_{\\ge q-1}K$ and its actual inclusion $i:L\\to K$. The object $QL$ is bounded below, so step 1 makes $Q(i):QL\\to QK\\cong Z$ zero. At degrees $q-1,q,q+1$ all terms are retained and the components of $i$ are isomorphisms. Consequently the induced map of the short complexes defining degree-$q$ cohomology is an isomorphism, hence $H^q(Q(i))$ is an isomorphism. This zero isomorphism has target $H^q(Z)$, which is therefore zero. This works for every $q$ and uses neither coproducts nor sequential colimits.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-kun-truncations",
-    "def-weil-pbc-category-colimit"
+    "def-kun-truncations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (homology-section-truncations), cochain stupid lower truncation; degreewise eventual-constant cocone argument"
+    "place": "Tag 0118 (section-truncations), cochain stupid lower truncation; elementary comparison of the three retained terms defining cohomology"
    }
   },
   {
-   "text": "Apply [lem-kun-complex-colimit-hocolim] to this sequence in $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. It applies to a sheaf of commutative rings on any small site and has no boundedness hypothesis. It identifies $P=Q(\\bigoplus_{r\\ge0}E_r^\\bullet)$ with the coproduct $\\bigoplus_{r\\ge0}QE_r^\\bullet$ in the ordinary unbounded derived category. Its last assertion, transported along $QK^\\bullet\\cong X$, supplies a distinguished triangle $P\\xrightarrow{u}P\\xrightarrow{j}X\\xrightarrow{d}P[1]$, where $u=1-s$ and $s$ is induced by the consecutive inclusions. This provides an actual coproduct and triangle, rather than an assertion that ordinary colimits in the derived category compute $X$.",
+   "text": "Since every $H^q(Z)$ is zero, the zero endomorphism $0:Z\\to Z$ induces an isomorphism on every cohomology object. The cohomology criterion for isomorphisms in the derived category implies that this zero endomorphism is invertible, whence $Z$ is zero. In a distinguished triangle the first arrow is an isomorphism exactly when the third object is zero, so $\\alpha$ is an isomorphism. The latter elementary triangulated assertion is Mathlib Triangle.isZero₃_iff_isIso₁, proved using Hom exactness. Neither $B$ nor $G$ is assumed bounded.",
    "uses": [
-    "lem-kun-complex-colimit-hocolim"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0949 (derived-lemma-colim-hocolim), 090Z (derived-definition-derived-colimit); module-sheaf telescope statement of the cited node"
-   }
-  },
-  {
-   "text": "The composites of consecutive arrows of this triangle and its rotations vanish. Here is the elementary TR3 argument: for any distinguished $A\\xrightarrow{a}B\\xrightarrow{b}C\\to A[1]$, map the distinguished identity triangle $A\\xrightarrow{1}A\\to0\\to A[1]$ into it using $1_A,a$ on the first two vertices. TR3 supplies the third map, necessarily zero, so its second square gives $ba=0$. Rotate to get the other zero composites. In particular $ju=0$, $dj=0$, and $vd=0$ for $v=-u[1]:P[1]\\to P[1]$, the third arrow of the rotated triangle $P\\xrightarrow{j}X\\xrightarrow{d}P[1]\\xrightarrow{v}P[1]$.",
-   "uses": [
+    "def-weil-abstract-derived-category",
     "def-weil-triangulated-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0146 (derived-lemma-composition-zero), proof using TR3 and rotation"
-   }
-  },
-  {
-   "text": "For $W=B,G$, the coproduct universal property identifies $\\operatorname{Hom}(P,W)$ with $\\prod_r\\operatorname{Hom}(QE_r^\\bullet,W)$. Under these identifications postcomposition by $\\alpha$ is the product of the assumed bijections (use shift $n=0$), and so is bijective: invert each coordinate. The shift is an automorphism, hence $\\operatorname{Hom}(P[1],W)\\cong\\operatorname{Hom}(P,W[-1])\\cong\\prod_r\\operatorname{Hom}(QE_r^\\bullet[1],W)$. Thus postcomposition by $\\alpha$ is also bijective on $\\operatorname{Hom}(P[1],-)\\,$, using the hypothesis at shift $n=1$. Only the universal property of a coproduct is used; there is no compactness or commutation of Hom with a filtered colimit assumption.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 090Z (derived-definition-derived-colimit); coproduct universal property and shift equivalence"
-   }
-  },
-  {
-   "text": "To prove surjectivity on $\\operatorname{Hom}(X,-)$, take $g:X\\to G$. By step 4 lift $gj:P\\to G$ to $b:P\\to B$. Then $\\alpha bu=gju=0$, so injectivity on $\\operatorname{Hom}(P,-)$ gives $bu=0$. Clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] for $P\\xrightarrow{u}P\\xrightarrow{j}X$ gives $c:X\\to B$ with $cj=b$. The residual $g-\\alpha c$ vanishes after precomposition with $j$. Clause (ii) gives $k:P[1]\\to G$ with $g-\\alpha c=kd$. Lift $k$ to $l:P[1]\\to B$ by step 4. Now $\\alpha(c+ld)=g$, which proves surjectivity.",
-   "uses": [
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0149 (derived-lemma-representable-homological), clauses (i) and (ii) of cited node; explicit surjectivity chase"
-   }
-  },
-  {
-   "text": "For injectivity take $f:X\\to B$ with $\\alpha f=0$. Injectivity on $\\operatorname{Hom}(P,-)$ gives $fj=0$. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] gives $k:P[1]\\to B$ with $f=kd$. Since $(\\alpha k)d=0$, clause (ii) applied to the rotated triangle $P\\xrightarrow{j}X\\xrightarrow{d}P[1]\\xrightarrow{v}P[1]$ gives $r:P[1]\\to G$ with $\\alpha k=rv$. Lift $r$ to $t:P[1]\\to B$ by step 4. Then $\\alpha(k-tv)=0$, so injectivity on $\\operatorname{Hom}(P[1],-)$ gives $k=tv$. Consequently $f=tvd=0$ by step 3. Taking the difference of two maps proves injectivity. Together with step 5 this proves the Hom bijection for every $X$, with no boundedness imposed on $B,G$, or $X$.",
-   "uses": [
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0149 (derived-lemma-representable-homological), clause (ii) before and after rotation; explicit injectivity chase"
-   }
-  },
-  {
-   "text": "Take $X=G$ in the surjectivity just proved to obtain $\\beta:G\\to B$ with $\\alpha\\beta=1_G$. Then $\\alpha(\\beta\\alpha)=\\alpha=\\alpha1_B$. Injectivity for $X=B$ implies $\\beta\\alpha=1_B$. Hence $\\beta$ is an inverse of $\\alpha$, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Conclusion: elementary two-sided inverse construction from the Hom bijections"
+    "place": "Derived localization at quasi-isomorphisms and elementary distinguished-triangle zero-cone criterion (Mathlib DerivedCategory.isIso_iff and Triangle.isZero₃_iff_isIso₁)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-kun-truncations",
-  "def-weil-pbc-category-colimit",
-  "lem-kun-complex-colimit-hocolim",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-hom-out-of-triangle-exact"
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0949 (lemma-colim-hocolim), 090Z (definition-derived-colimit), 0146 (lemma-composition-zero), 0149 (lemma-representable-homological); explicit Hom chase using the telescope of stupid lower truncations (homology.tex, Tag 0118)"
+  "place": "Tags 0146 and 0149, and Homology Tag 0118: shorter cone-and-brutal-truncation proof, formalized by U1 on 2026-10-21. No telescope or coproduct argument."
  },
  "mathlib_searches": [
   {
@@ -215,9 +171,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-kun-complex-colimit-hocolim"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -244,5 +198,15 @@
   "group": "Q22",
   "result": "pass",
   "note": "Snapshot module compiles clean via nt_compile --json (27.4 s, no warnings). Node identical to live apart from lean; not dropped; no repair note. Clause-by-clause match: small site, Sheaf J CommRingCat.{u} with ringedSiteModules (recorded dep), ordinary DerivedCategory with HasDerivedCategory.{w} (recorded dep), B/G unbounded, H bounded below as eventual vanishing of homologyFunctor q for q<a, bijective postcomposition Hom(H⟦n⟧,B)->Hom(H⟦n⟧,G) for every n:ℤ, conclusion IsIso α. pp.universes probe: module universe = u, only u and w, no hidden restriction. Edge cases (empty site, zero ring, zero H, unbounded B/G) allowed. Import control: removing Grp.FilteredColimits breaks the Abelian instance, so it is needed; proof-plan imports are non-public and acceptable. Single sorry; docstrings carry source place, blueprint id and all 7 proof steps; no duplicate in Mathlib or project; lean.statement verbatim; Worker report and Second reading sections present. Advisory only: report does not explain the FilteredColimits import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120710-L-3934436",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

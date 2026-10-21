@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q22
+Authors: SHEAF groups Q22, U1
 -/
 module
 
@@ -9,10 +9,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Bounded-below objects detect derived isomorphisms
@@ -33,6 +31,57 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
+/-- Brutal lower truncations detect zero objects: the inclusion of the truncation
+starting in degree `q - 1` induces an isomorphism on degree-`q` cohomology.
+Source: Stacks Project, Homology, Tag 0118 (cochain version), and the cohomology
+criterion for derived isomorphisms (blueprint: lem-sf-bounded-below-hom-test). -/
+private theorem isZero_of_boundedBelow_hom_zero
+    {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory.{w} A]
+    (X : DerivedCategory A)
+    (hX : ∀ H : DerivedCategory A,
+      (∃ a : ℤ, ∀ q : ℤ, q < a → IsZero ((homologyFunctor A q).obj H)) →
+      ∀ f : H ⟶ X, f = 0) : IsZero X := by
+  have hhom (q : ℤ) : IsZero ((homologyFunctor A q).obj X) := by
+    let K := Q.objPreimage X
+    let e : Q.obj K ≅ X := Q.objObjPreimageIso X
+    let L := K.stupidTrunc (ComplexShape.embeddingUpIntGE (q - 1))
+    let i : L ⟶ K := K.ιStupidTrunc (ComplexShape.embeddingUpIntGE (q - 1))
+    have hL : ∃ a : ℤ, ∀ n : ℤ, n < a →
+        IsZero ((homologyFunctor A n).obj (Q.obj L)) := by
+      refine ⟨q - 1, fun n hn ↦ ?_⟩
+      exact isZero_of_isGE (Q.obj L) (q - 1) n hn
+    have hi (n : ℤ) (hn : q - 1 ≤ n) : IsIso (i.f n) :=
+      K.isIso_ιStupidTrunc_f _ (i := (n - (q - 1)).toNat) (by
+        simp only [ComplexShape.embeddingUpIntGE_f]
+        omega)
+    have hprev : IsIso (i.f ((ComplexShape.up ℤ).prev q)) := hi _ (by simp)
+    have hmid : IsIso (i.f q) := hi q (by omega)
+    have hnext : IsIso (i.f ((ComplexShape.up ℤ).next q)) := hi _ (by simp; omega)
+    have hqi : QuasiIsoAt i q := by
+      rw [quasiIsoAt_iff]
+      have : IsIso ((HomologicalComplex.shortComplexFunctor A (.up ℤ) q).map i).τ₁ :=
+        hprev
+      have : IsIso ((HomologicalComplex.shortComplexFunctor A (.up ℤ) q).map i).τ₂ :=
+        hmid
+      have : IsIso ((HomologicalComplex.shortComplexFunctor A (.up ℤ) q).map i).τ₃ :=
+        hnext
+      have : IsIso ((HomologicalComplex.shortComplexFunctor A (.up ℤ) q).map i) :=
+        ShortComplex.isIso_of_isIso _
+      infer_instance
+    have hmap : IsIso ((homologyFunctor A q).map (Q.map i)) := by
+      exact (NatIso.isIso_map_iff (homologyFunctorFactors A q) i).2
+        (show IsIso (HomologicalComplex.homologyMap i q) from inferInstance)
+    have hz := hX (Q.obj L) hL (Q.map i ≫ e.hom)
+    have : IsIso ((homologyFunctor A q).map (Q.map i ≫ e.hom)) := by
+      rw [Functor.map_comp]
+      infer_instance
+    exact IsZero.of_epi_eq_zero ((homologyFunctor A q).map (Q.map i ≫ e.hom))
+      (by rw [hz, Functor.map_zero])
+  have : IsIso (0 : X ⟶ X) := (isIso_iff A _).2 fun q ↦ by
+    rw [Functor.map_zero]
+    exact ⟨⟨0, (hhom q).eq_of_src _ _, (hhom q).eq_of_src _ _⟩⟩
+  exact IsZero.of_mono_eq_zero (0 : X ⟶ X) rfl
+
 /-- Postcomposition tested on every shift of every bounded-below object detects
 isomorphisms in the ordinary unbounded derived category of module sheaves.
 
@@ -41,31 +90,19 @@ sk-prop-sf-rf-shriek-preservation, final composition/open-locality paragraph
 (blueprint: lem-sf-bounded-below-hom-test).
 
 Proof:
-1. Represent an arbitrary derived object X by a complex K. Its stupid lower
-   truncations E_r = sigma_{ge -r} K are bounded below, form an increasing sequence,
-   and have degreewise colimit K: in each degree the diagram is eventually constant.
-   Use def-weil-abstract-derived-category, def-kun-truncations and
-   def-weil-pbc-category-colimit.
-2. By lem-kun-complex-colimit-hocolim, P = Q(direct sum E_r) is the derived coproduct
-   of Q(E_r), and the telescope supplies a distinguished triangle
-   P --u--> P --j--> X --d--> P[1], with u = 1 - s.
-3. Consecutive composites vanish by TR3 applied to an identity triangle and by
-   rotation (def-weil-triangulated-category). In particular j u = d j = v d = 0,
-   where v = -u[1] is the last arrow of the rotated triangle.
-4. The coproduct universal property identifies Hom(P,W) with the product of
-   Hom(Q(E_r),W). The hypotheses at shifts 0 and 1 therefore give bijections for
-   Hom(P,-) and Hom(P[1],-). Use def-weil-pbc-category-colimit and the shift
-   equivalence of def-weil-triangulated-category; no compactness is needed.
-5. For g : X -> G, lift g j to b : P -> B. Injectivity gives b u = 0.
-   Clause (i) of lem-weil-pbc-hom-out-of-triangle-exact supplies c : X -> B
-   with c j = b. Clause (ii) factors g - alpha c through d. Lift its factor
-   from P[1] to B to obtain a lift of g. This proves surjectivity on Hom(X,-).
-6. If alpha f = 0, injectivity on Hom(P,-) gives f j = 0. Clause (ii) writes
-   f = k d. Applied to the rotated triangle, the same clause writes alpha k = r v.
-   Lift r to t : P[1] -> B. Injectivity gives k = t v, hence f = t v d = 0.
-   Taking differences proves injectivity on Hom(X,-).
-7. Surjectivity at X = G gives beta with alpha beta = 1. Injectivity at X = B
-   gives beta alpha = 1, so alpha is an isomorphism. Neither B nor G is bounded. -/
+1. Complete alpha to a distinguished triangle B -> G -> Z -> B[1]. For every
+   bounded-below H, the hypothesis at shift -1, transported by the shift
+   adjunction, makes Hom(H,B[1]) -> Hom(H,G[1]) injective. Thus every f : H -> Z
+   has zero composite to B[1]. Exactness factors f through G; the hypothesis at
+   shift 0 lifts that factor through alpha. Consecutive triangle arrows compose
+   to zero, hence f = 0.
+2. Represent Z by a complex K. For every q, its brutal truncation starting at
+   q - 1 is bounded below. Its inclusion into K, followed by QK = Z, is zero
+   by step 1, but induces an isomorphism on degree-q cohomology: all three
+   terms in the defining short complex are retained. Hence H^q(Z) = 0.
+3. The cohomology criterion makes the zero endomorphism of Z invertible, so Z
+   is zero. The distinguished triangle then makes alpha invertible.
+No coproduct, telescope, or boundedness of B and G is required. -/
 theorem isIso_of_boundedBelow_hom_bijective
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
@@ -79,6 +116,41 @@ theorem isIso_of_boundedBelow_hom_bijective
       (∃ a : ℤ, ∀ q : ℤ, q < a → IsZero ((homologyFunctor _ q).obj H)) →
       ∀ n : ℤ, Function.Bijective (fun f : H⟦n⟧ ⟶ B ↦ f ≫ α)) :
     IsIso α := by
-  sorry
+  classical
+  let A := ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+  obtain ⟨Z, g, d, hT⟩ := Pretriangulated.distinguished_cocone_triangle α
+  let T := Pretriangulated.Triangle.mk α g d
+  have hZ : IsZero Z := by
+    apply isZero_of_boundedBelow_hom_zero Z
+    intro H hH f
+    have hshift : Function.Injective (fun k : H ⟶ B⟦(1 : ℤ)⟧ ↦ k ≫ α⟦1⟧') := by
+      let adj : shiftFunctor (DerivedCategory A) (-1 : ℤ) ⊣
+          shiftFunctor (DerivedCategory A) (1 : ℤ) :=
+        (shiftEquiv' (DerivedCategory A) (-1 : ℤ) 1 (by decide)).toAdjunction
+      intro k l hkl
+      apply (adj.homEquiv H B).symm.injective
+      apply (hα H hH (-1)).1
+      exact (adj.homEquiv_naturality_right_symm k α).symm.trans
+        ((congrArg (adj.homEquiv H G).symm hkl).trans
+          (adj.homEquiv_naturality_right_symm l α))
+    have hfd : f ≫ d = 0 := hshift (by
+      change (f ≫ d) ≫ α⟦1⟧' = 0 ≫ α⟦1⟧'
+      have hd : d ≫ α⟦1⟧' = 0 := Pretriangulated.comp_distTriang_mor_zero₃₁ T hT
+      rw [Category.assoc, hd, comp_zero, zero_comp])
+    obtain ⟨k, hk⟩ := Pretriangulated.Triangle.coyoneda_exact₃ T hT f hfd
+    have hzero : Function.Surjective (fun k : H ⟶ B ↦ k ≫ α) := by
+      intro k
+      obtain ⟨l, hl⟩ := (hα H hH 0).2 ((shiftFunctorZero _ ℤ).hom.app H ≫ k)
+      refine ⟨(shiftFunctorZero _ ℤ).inv.app H ≫ l, ?_⟩
+      change ((shiftFunctorZero _ ℤ).inv.app H ≫ l) ≫ α = k
+      change l ≫ α = _ at hl
+      rw [Category.assoc, hl]
+      simp
+    obtain ⟨l, hl⟩ := hzero k
+    change f = k ≫ g at hk
+    change l ≫ α = k at hl
+    have hg : α ≫ g = 0 := Pretriangulated.comp_distTriang_mor_zero₁₂ T hT
+    rw [hk, ← hl, Category.assoc, hg, comp_zero]
+  exact (Pretriangulated.Triangle.isZero₃_iff_isIso₁ T hT).1 hZ
 
 end DerivedCategory
