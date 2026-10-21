@@ -20687,3 +20687,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:31 L: merged deliver/Q19/lem-trf-site-derived-tensor-restriction (reviewer PASS; after a return; new nodes: 2)
 - 07:31 L: merged deliver/Q29/lem-sfb-internal-extension-inverse-image (reviewer PASS; after a return; new nodes: 2)
 - 07:31 L: merged deliver/Q01/lem-sfb-etale-proetale-scalar-counit-transposes (reviewer PASS; after a return; new nodes: 1)
+- 07:31 L: merged deliver/NC/lem-weil-pbc-direct-image-roos-normalization (reviewer PASS; after a return; new nodes: 2)

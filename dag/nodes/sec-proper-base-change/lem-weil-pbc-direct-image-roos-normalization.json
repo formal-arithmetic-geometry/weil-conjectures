@@ -20,11 +20,9 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(R_X)$ and $\\mathcal B=\\operatorname{Mod}(R_Y)$. Their strict tower categories are Grothendieck by [lem-weil-pbc-small-module-diagrams-grothendieck], with small index $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. Apply [lem-pur-kinjective-degreewise-existence] in $\\operatorname{Tow}(\\mathcal A)$ to choose a representative $q:X\\to I$ of $M$, where $I$ is K-injective and every tower $I^r$ is injective. Write $I_n=\\operatorname{ev}_n I$, $J=G^{\\rm Tow}I$, $P_I=\\prod_n I_n$ termwise, $P_J=\\prod_n GI_n$, and $L_I=\\lim_n I_n$, $L_J=\\lim_n GI_n$ termwise. The evaluations $I_n$ are K-injective by [lem-weil-tower-evaluation-kinjective].",
+   "text": "Apply [lem-weil-pbc-exact-adjoint-tower-models] to $F\\dashv G$. Represent $M$ by an injective-term K-injective tower $I$ and put $J=G^{\\rm Tow}I$. Use its notation $L_I,L_J,P_I,P_J,c,\\beta$. That lemma identifies $Q(c)$ with $\\alpha_M$, proves it invertible, and gives both the $s$ and $1-s$ squares; all derived composites are computed on these same models.",
    "uses": [
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-tower-evaluation-kinjective"
+    "lem-weil-pbc-exact-adjoint-tower-models"
    ],
    "elementary": false,
    "source": {
@@ -33,12 +31,10 @@
    }
   },
   {
-   "text": "The adjunction $F\\dashv G$ extends levelwise to $F^{\\rm Tow}\\dashv G^{\\rm Tow}$: the componentwise adjunct of a natural transformation is natural by naturality of the adjunction bijection. Since exactness of towers is levelwise [lem-weil-tower-category-levelwise-abelian], $F^{\\rm Tow}$ is exact. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $J$ K-injective and makes each $GI_n$ K-injective. The same lemma applied to the exact constant-tower functor $\\Delta$ left adjoint to $\\lim$ makes $L_I$ and $L_J$ K-injective. Moreover $G^{\\rm Tow}$ preserves the injective degree terms: a map $U\\to G^{\\rm Tow}I^r$ across a monomorphism $U\\hookrightarrow V$ is adjoint to $F^{\\rm Tow}U\\to I^r$, which extends across the monomorphism $F^{\\rm Tow}U\\hookrightarrow F^{\\rm Tow}V$ by injectivity [def-sp-injective-resolutions]. Hence $J$ has injective degree terms too. The K-injective total-derived-functor computation [lem-weil-pbc-kinjective-total-derived] now represents $\\mathcal G^{\\rm Tow}M$ by $J$, $R\\lim_X M$ by $L_I$, and $R\\lim_Y(\\mathcal G^{\\rm Tow}M)$ by $L_J$.",
+   "text": "Put $u_I=1-s_I$, $u_J=1-s_J$ and $H_T=\\operatorname{Cone}(u_T)[-1]$ for $T=I,J$. Apply [lem-weil-pbc-kinjective-fiber-triangle-comparison] with $P_I,P_J,c$: its hypotheses hold by Step 1, and $G$ preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. It gives the K-injective cones, diagonal chain isomorphism $\\theta:G(H_I)\\cong H_J$, all three cone-triangle squares and the unique shift $\\sigma$ with the stated unit normalization.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-weil-pbc-kinjective-fiber-triangle-comparison",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
@@ -47,24 +43,9 @@
    }
   },
   {
-   "text": "There are canonical chain isomorphisms $c:G(P_I)\\xrightarrow{\\sim}P_J$ and $\\beta:G(L_I)\\xrightarrow{\\sim}L_J$. For example, for any $B\\in\\mathcal B$, the adjunction and the product universal property [def-weil-category-product] identify $\\operatorname{Hom}(B,G(\\prod I_n^r))$ with $\\operatorname{Hom}(FB,\\prod I_n^r)=\\prod\\operatorname{Hom}(FB,I_n^r)=\\prod\\operatorname{Hom}(B,GI_n^r)$; thus $G(\\prod I_n^r)$, with legs $G(\\pi_n)$, is a product. With compatible families in place of all families, the same bijections show $G(\\lim I_n^r)$ is a limit of $GI_n^r$. Uniqueness of maps with these legs makes the degreewise comparisons commute with differentials, and supplies their inverses. In particular $\\pi_n c=G(\\pi_n)$ and $\\lambda_n\\beta=G(\\lambda_n)$, with $\\lambda_n$ the limit legs.",
+   "text": "By the exact-products clause of [lem-weil-pbc-exact-adjoint-tower-models], the inclusions $j_T:L_T\\to H_T$, $z\\mapsto(0,(\\lambda_nz)_n)$, for $T=I,J$ are quasi-isomorphisms, and $\\kappa_TQ(j_T)=\\eta^{\\lim}_T$ for precisely the sign-corrected, unit-normalized comparison in the statement. Thus the canonical Roos triangles are Step 2's cone triangles transported along $Q(j_I),Q(j_J)$.",
    "uses": [
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
-   }
-  },
-  {
-   "text": "By [lem-pc-ringed-space-product-kinjective], $P_I$ and $P_J$ are K-injective and represent the respective products in the derived categories. Also $G(P_I)$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective]. The identity-resolution identifications of [lem-weil-pbc-kinjective-total-derived] therefore identify $Q(c)$ with the statement's $\\alpha_M$: its $n$th component is exactly $\\mathcal G(p_n)$. Let $u_I=1-s_I$ and $u_J=1-s_J$. Projection to the $n$th factor gives\n$\\pi_n cG(u_I)=G(\\pi_n)-G(t_n)G(\\pi_{n+1})=\\pi_n u_Jc$,\nwhere $t_n:I_{n+1}\\to I_n$. Product uniqueness proves $cG(u_I)=u_Jc$, and hence the claimed transition-endomorphism square as well.",
-   "uses": [
-    "lem-pc-ringed-space-product-kinjective",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-tower-transition-endomorphism",
-    "def-weil-category-product"
+    "lem-weil-pbc-exact-adjoint-tower-models"
    ],
    "elementary": false,
    "source": {
@@ -73,51 +54,11 @@
    }
   },
   {
-   "text": "Use the explicit model [def-weil-strict-roos-model]: $H_I=\\operatorname{Cone}(u_I)[-1]$, with $H_I^r=P_I^{r-1}\\oplus P_I^r$ and differential $(y,x)\\mapsto(-dy-u_Ix,dx)$, and similarly $H_J$. These are K-injective. Indeed the cone triangle and its rotations in the homotopy category, with [lem-weil-pbc-hom-into-triangle-exact], imply $\\operatorname{Hom}_{K}(A,H_I[k])=0$ for every acyclic $A$ and integer $k$: the adjacent terms are Hom groups into shifts of $P_I$ and are zero by K-injectivity. This proves the defining null-homotopy condition; it also proves the assertion for $H_J$. Apply [lem-weil-pbc-exact-products-roos-comparison] in each module category: their tower categories are Grothendieck by Step 1 and countable products are exact by hypothesis. This gives the unit-normalized cone comparison with total derived limit. Its convention uses $-u$; the chain isomorphism $(y,x)\\mapsto(-y,x)$ to our $u$-cone preserves the zero-first-coordinate inclusion. On the K-injective towers $I,J$, the derived units are invertible, so the inclusions $j_I:L_I\\to H_I$, $z\\mapsto(0,(\\lambda_nz)_n)$, and $j_J:L_J\\to H_J$ are quasi-isomorphisms. Hence, by the statement's convention, the canonical Roos triangles of $M$ and of $\\mathcal G^{\\rm Tow}M$ are the rotated cone triangles of $u_I$ and $u_J$, transported along $Q(j_I)$ and $Q(j_J)$. Indeed, the normalized comparison composed with the sign isomorphism sends $Q(j_I)$ to the unit $\\eta_I$. That unit is the identification of $R\\lim_XM$ with $Q(L_I)$ from Step 2, and likewise for $J$.",
-   "uses": [
-    "def-weil-strict-roos-model",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-products-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
-   }
-  },
-  {
-   "text": "Apply [lem-pur-roos-additive-comparison] with the additive functor $G$; its product-comparison hypothesis holds for every tower complex by the adjunction calculation in Step 3. It gives the natural chain isomorphism $\\theta:G(H_I)\\xrightarrow{\\sim}H_J$, whose two coordinates are $c^{r-1}$ and $c^r$ after the canonical biproduct comparison. Directly,\n$\\theta d(y,x)=(-c\\,dy-c\\,u_Ix,c\\,dx)=(-d\\,cy-u_Jcx,d\\,cx)=d\\theta(y,x)$.\nIts inverse uses $c^{-1}$ on both coordinates. In particular, the limit-leg equalities of Step 3 give the equality of actual chain maps\n$\\theta\\,G(j_I)=j_J\\beta$:\nboth have zero first coordinate and second coordinate with $n$th leg $G(\\lambda_n)$. This verifies the augmentation normalization as well as the cone comparison.",
-   "uses": [
-    "lem-pur-roos-additive-comparison",
-    "def-weil-strict-roos-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
-   }
-  },
-  {
-   "text": "The rotated cone triangle has first map $r_I:H_I\\to P_I$, $(y,x)\\mapsto x$, second map $u_I$, and last map $b_I:P_I\\to H_I[1]$, $z\\mapsto(z,0)$, with the cone/rotation signs of [def-weil-abstract-derived-category, def-weil-triangulated-category]; likewise for $J$. The diagonal coordinates in Step 6 give $cG(r_I)=r_J\\theta$ and $\\theta[1]G(b_I)=b_Jc$ after the termwise shift identification; the second equality has coordinates $(cz,0)=(cz,0)$. Since $L_I,P_I,H_I$ are K-injective, their identity-resolution comparisons compute the derived functor, including these maps [lem-weil-pbc-kinjective-total-derived]. The shift $[1]$ is an automorphism of complexes that commutes with $Q$ and preserves quasi-isomorphisms. So $(\\mathcal G\\circ[1],\\eta_{-[1]})$ is a total derived functor of $G\\circ[1]=[1]\\circ G$, and the universal property in [lem-weil-pbc-kinjective-total-derived] yields the unique shift comparison $\\sigma$ with $\\sigma_{QK}\\eta_{K[1]}=\\eta_K[1]$. This is the shift commutation of [lem-pc-right-derived-functor-triangulated], with the normalization fixed in the statement. On the K-injectives $L_I,P_I,H_I$, and on their shifts, both units are the identity-resolution identifications. Hence $\\sigma$ is induced there by the termwise equality $G(K[1])=G(K)[1]$, using additivity, $G(-d)=-G(d)$. Consequently the displayed boundary equation is precisely the connecting square after applying $\\mathcal G$, with its canonical shift comparison, and not just a commutative square on the first two arrows.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-right-derived-functor-triangulated"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof via the tower-topos square; Tag 0941 (lemma-derived-limit-is-ok), K-injective tower computation. Explicit cone-normalization refinement."
-   }
-  },
-  {
-   "text": "It remains to identify the first vertex after transporting the cone triangles to $R\\lim$. In the chosen model, both derived composites in [lem-weil-ringed-tower-pushforward-limit-comparison] are computed without another resolution: $L_I$ is K-injective for $G$, and $J$ is K-injective for inverse limit. That node normalizes $a_M$ by the underived equality $G\\lim=\\lim G^{\\rm Tow}$; hence $a_M$ is represented exactly by $\\beta:G(L_I)\\to L_J$. Step 6 yields\n$Q(j_J)^{-1}\\,Q(\\theta)\\,\\mathcal G(Q(j_I))=Q(\\beta)=a_M$.\nTransport the three squares of Steps 4 and 7 along $Q(j_I)$ and $Q(j_J)$. Their components become $(a_M,\\alpha_M,\\alpha_M)$, and the last square reads\n$a_M[1]\\,\\sigma_{R\\lim_X M}\\,\\mathcal G(\\delta_M)=\\delta_{\\mathcal G^{\\rm Tow}M}\\,\\alpha_M$,\nwhere $\\sigma$ is the canonical shift comparison. All maps used are natural for strict tower maps. Their computed equations therefore hold for every derived tower, by the localization and K-injective computation [def-weil-abstract-derived-category, lem-weil-pbc-kinjective-total-derived]. This gives the specified morphism of canonical Roos triangles.",
+   "text": "The diagonal coordinates and $\\lambda_n\\beta=G(\\lambda_n)$ give the chain equality $\\theta G(j_I)=j_J\\beta$: both first coordinates are zero, and every second-coordinate leg is $G(\\lambda_n)$. Both derived composites are computed on $I$ without another resolution (Step 1). Hence the common-underived-composite normalization in [lem-weil-ringed-tower-pushforward-limit-comparison] identifies $a_M=Q(\\beta)$. Conjugating gives $Q(j_J)^{-1}Q(\\theta)\\mathcal G(Q(j_I))=a_M$. Transport Step 2's three squares along these inclusions. The components are $(a_M,\\alpha_M,\\alpha_M)$, and the last square is $a_M[1]\\sigma_{R\\lim_X M}\\mathcal G(\\delta_M)=\\delta_{\\mathcal G^{\\rm Tow}M}\\alpha_M$. Naturality and localization extend the equations from the K-injective models to all derived strict towers [def-weil-abstract-derived-category, lem-weil-pbc-kinjective-total-derived].",
    "uses": [
     "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
@@ -127,24 +68,12 @@
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
   "def-weil-abstract-derived-category",
-  "def-weil-category-product",
-  "def-weil-strict-roos-model",
-  "def-weil-tower-transition-endomorphism",
-  "def-weil-triangulated-category",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-pur-roos-additive-comparison",
-  "lem-weil-pbc-exact-products-roos-comparison",
-  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "lem-weil-pbc-kinjective-fiber-triangle-comparison",
   "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective"
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -253,28 +182,12 @@
   "date": "2026-10-21",
   "item": "lem-weil-pbc-direct-image-roos-normalization",
   "worker": "stage1",
-  "summary": "Eight steps use an injective-term K-injective strict tower, explicit underived product/limit comparisons, diagonal cone coordinates and the common underived composite to prove every Roos square, including the connecting square with the specified first component. All inputs are existing nodes; no new nodes. Statement unchanged.",
-  "blueprint": "Realizes prop-weil-pbc-direct-image-limits, proof's product/Roos/(1-s) sentence, making its connecting-square and normalized-first-map compatibility explicit.",
+  "summary": "Human-requested re-split of the existing eight-step proof into two independent statement-only nodes: simultaneous exact-adjoint tower and normalized Roos models, and the unit-normalized derived comparison of general K-injective fibre triangles. The four-step assembly preserves the statement and every cone, shift, augmentation and first-component normalization. The complete former proof and its allocation are retained in report.md.",
+  "blueprint": "Realizes prop-weil-pbc-direct-image-limits, proof paragraph applying Rf_* to the canonical Roos triangle and comparing derived products and (1-s). New nodes carry the old normalization proof steps 1-4 and the unit-normalized Roos identification of step 5 in the first node, and the K-injective cone/shift arguments of steps 5-7 in the second; the parent retains only the augmentation equality and normalized-limit transport of steps 6 and 8.",
   "tool_uses": [
    {
-    "node": "lem-pur-kinjective-degreewise-existence",
-    "why": "Functorial K-injective resolution with injective degree terms in the Grothendieck tower category; a generic resolution theorem, not a replacement of the proper-base-change route."
-   },
-   {
-    "node": "lem-pc-ringed-space-product-kinjective",
-    "why": "The statement is for arbitrary abelian categories and supplies the derived product represented by termwise products of K-injectives."
-   },
-   {
-    "node": "lem-pur-roos-additive-comparison",
-    "why": "Its general additive-functor cone comparison supplies explicit diagonal product coordinates; no proper-base-change-unit statement supplies that generic comparison."
-   },
-   {
-    "node": "lem-pc-right-derived-functor-triangulated",
-    "why": "The generic unbounded derived-functor triangulated structure supplies its canonical shift comparison."
-   },
-   {
     "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "The already specified comparison of the two ringed tower direct-image composites supplies exactly the normalization whose compatibility is being proved."
+    "why": "The given comparison is normalized by the common underived direct image; no proper-base-change-unit statement provides this normalization."
    }
   ]
  },
@@ -288,10 +201,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NX-7f0386db0",
-  "group": "NX",
+  "reviewer": "NT-cc-NC-bfa05abe0",
+  "group": "NC",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-7f0386db0 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, every cited statement, Stacks 0A07 (both proofs), and tags 0BK6, 079P and 0941. Steps 1-4, 6 and 8 hold as written: G^Tow, G and lim preserve K-injectives as right adjoints of exact functors; c and beta are the adjoint product and limit comparisons; pi_n c G(u_I)=pi_n u_J c; theta G(j_I)=j_J beta; a_M=Q(beta) because both composites are computed on K-injective representatives. Also checked: the sign isomorphism (y,x)->(-y,x) between Fib(-u) and Fib(u), the rotated triangle (r,u,b) by TR2, and K-injectivity of H_I. Edge cases f=id, zero towers, constant towers and zero transitions all hold. Two faults. C3/E5 in Step 5: it identified 'the canonical Roos triangle' with the cone triangle transported along j, but no cited statement fixes that triangle. lem-weil-pbc-ringed-strict-tower-homotopy-limit states only 'a natural triangle', its Lean has no triangle, and swapping (p,delta) for (-p,-delta) on one side breaks the clause. C4 in Step 7: it credited lem-pc-right-derived-functor-triangulated with the termwise shift comparison, which that statement does not give. Fixed item file: the statement now fixes the canonical Roos triangle as the rotated cone triangle of 1-s on def-weil-strict-roos-model, transported along the unit-normalized comparison of lem-weil-pbc-exact-products-roos-comparison composed with the sign isomorphism. This is the convention of the lem-cbc-*-roos nodes. The shift comparison sigma is fixed by sigma eta_{K[1]}=eta_K[1], via the universal property in lem-weil-pbc-kinjective-total-derived. Three stmt_deps added (no cycle). Steps 5 and 7 now derive these. review_split passes on the fixed item. All five declared tool_uses accepted. Advisory: the statement allows noncommutative rings, but its R lim comes from the commutative-only homotopy-limit node. This is inherited from NI; the parent needs only commutative A_T.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-bfa05abe0 (reviewer sub-agent of L); spot-checked: PASS: the re-split delivery meets the human's 2026-10-21 note and its mathematics holds. The live item has not been superseded (it still has the base 8-step proof). The statement is unchanged. The parent proof is now 2064 characters in 4 steps that assemble two new nodes of comparable size: node A has 3179 characters (old steps 1-4 plus half of 5), node B has 2335 (the other half of 5 plus 6-7). Mapping each old step to its new place showed nothing dropped or blurred; only the two-coordinate equality θG(j_I)=j_Jβ and the step-8 conjugation stay in the parent. Node A (exact-adjoint-tower-models): checked K-injective resolutions with injective terms in the Grothendieck tower category, preservation by G^Tow, ev_n (via the exact i_{n,!}, Stacks 0941) and lim, product K-injectivity (0BK6, derived.tex l.9700), c and β by right-adjoint limit preservation, and the s and 1-s squares. Checked its exact-products clause against the statement of lem-weil-pbc-exact-products-roos-comparison, including the sign map (y,x)↦(−y,x) and the coordinate order. Node B (kinjective-fiber-triangle-comparison): checked with Stacks cone conventions that (H,P,P;r,u,b) is the backward rotation of the standard cone triangle and hence distinguished. Checked that σ exists and is unique by the Kan-extension property of lem-weil-pbc-kinjective-total-derived, that θ=(c,c) is a chain isomorphism, and the three squares. The derived connecting square follows by precomposing with η_P. Cone K-injectivity is Stacks 090X (derived.tex l.9674). Parent assembly: a_M=Q(β) follows from the common-underived-composite normalization of lem-weil-ringed-tower-pushforward-limit-comparison, since no further resolution is needed on I. Edge cases checked: zero, constant and zero-transition towers, and u=0 or id. No duplicate in side-live (checked lem-weil-strict-roos-comparison, the lem-cbc exact-functor Roos nodes, lem-pur-roos-additive-comparison, lem-pc-right-derived-functor-triangulated, lem-pe-roos-cone-calculus, lem-weil-derived-limit-tower-roos-triangle and others). No SGA anywhere. The one tool_use is accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DirectImageRoosNormalization",
