@@ -23752,3 +23752,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/NC/lem-sfb-discrete-lattice-cup-exterior (stage 2; reviewer PASS; parallel immutable checks)
 - 21:01 L: merged deliver/O1/lem-sfb-internal-bar-ordered-cup (stage 2; reviewer PASS; parallel immutable checks)
 - 21:02 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 21:02 L: returned deliver/NR/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4 circular split / D1+C5 restatement / C6 hidden cycle. The only new node, lem-sfb-norm-algcl-closed-costalk-projection)
