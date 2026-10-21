@@ -23588,3 +23588,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:53 L: merged deliver/NK/lem-sfb-homogeneous-cocycle-rectangle-detection (stage 2; reviewer PASS; parallel immutable checks)
 - 19:55 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 19:55 L: merged deliver/NF/lem-sfb-ind-unipotent-procyclic-difference (reviewer PASS; first push; new nodes: 4)
+- 19:56 L: merged deliver/NH/lem-a1-finite-pullback-strict-tower-comparison (stage 2; reviewer PASS; parallel immutable checks)

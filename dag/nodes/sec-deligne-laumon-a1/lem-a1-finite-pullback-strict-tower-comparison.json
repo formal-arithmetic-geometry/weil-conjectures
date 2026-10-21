@@ -19,7 +19,15 @@
   "def-weil-pbc-completed-pullback",
   "prop-weil-pbc-proetale-constant-exact",
   "def-a1-integral-completed-pullback-interfaces",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pur-principal-quotient-completion-model",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-reduction-tower",
+  "def-a1-flat-term-kflat-complex",
+  "def-pur-integral-finite-pullback",
+  "def-a1-principal-completed-koszul-towers",
+  "def-a1-integral-finite-pullback-tower",
+  "def-a1-integral-completed-tower-pullback-universes"
  ],
  "proof": [
   {
@@ -337,5 +345,52 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-eab6cbf37 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has 9 steps and no new nodes. The statement is unchanged and the base proof was empty, so no re-split note applies. proof_deps equals the union of the step uses, and there is no cycle (the only citer is the parent lem-a1-integral-pullback-completed-comparison). Coefficient category and base change: R_W is the completed sheaf, kept distinct from the constant S_{W,n}. c_g is the projection-induced map of def-weil-pbc-completed-pullback and is not assumed invertible. G is module pullback along c_g, V_g is Lg^*_Tow, and g_n^* is the exact finite pullback; all of this matches the definitions. Steps: S1 checks both hypotheses of the resolving class (kflat-resolution, change-of-rings (1), constant-exact, levelwise towers). S2 uses the principal-Koszul strict replacement with the objectwise diagram K-flat class. S3 uses the ringed-topoi node's sentence that u^* preserves flat-term K-flat complexes. S4 uses the cochain coherence c_{u;P,Q}, its unitors, and c_g(t)=t. S5 applies Koszul on T' to GP. S6 uses the κ scalar-association map and the constant ring-map isomorphism; I checked the balanced formulas and inverses. S7 checks quotient compatibility and zigzag = C_n G(a_{P,n}). I checked that against the fixed interface in lean/Sheaf/Paper/CompletedPullbackReduction.lean lines 210-334 (HasCompletedReductionFiniteEvaluationNormalization and the ordinary-comparison generator normalization π_n(b)), and it matches. S8 extends naturality through the localization equivalence of site-derived-tensor-descent. S9: I recomputed the shift sign; the first-variable comparison is unsigned, as total-tensor-integer-shifts states. Source: Stacks proetale.tex 099N(5) (lines 4351-4353, proof at 4376) as motivation, with proof_origin agent; no SGA. Duplicates: lem-weil-pbc-pulled-reduction-strict-tower-comparison only compares after restriction to the constant ring R_{T'}, with no interface normalization and no shifts, so it is not a duplicate. Edge cases checked: g=id, T'=∅, n=1, r=0,±1, non-invertible c_g. I accept the nine declared generic tool_uses. Advisory: step 4 could also cite prop-weil-pbc-proetale-constant-ring-map for c_g(t)=t, a one-line consequence of the definition that is already in proof_deps."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePullbackStrictTowerComparison",
+  "declaration": "WeilConjectures.FinitePullbackStrictTower.finite_pullback_strict_tower_comparison",
+  "declarations": [
+   "WeilConjectures.FinitePullbackStrictTower.tensorGenerator",
+   "WeilConjectures.FinitePullbackStrictTower.residueGenerator",
+   "WeilConjectures.FinitePullbackStrictTower.koszulZero",
+   "WeilConjectures.FinitePullbackStrictTower.koszulMinusOne",
+   "WeilConjectures.FinitePullbackStrictTower.koszulDegree",
+   "WeilConjectures.FinitePullbackStrictTower.koszulBasis",
+   "WeilConjectures.FinitePullbackStrictTower.tensorReduction",
+   "WeilConjectures.FinitePullbackStrictTower.G",
+   "WeilConjectures.FinitePullbackStrictTower.generator",
+   "WeilConjectures.FinitePullbackStrictTower.finiteComplex",
+   "WeilConjectures.FinitePullbackStrictTower.pulledReduction",
+   "WeilConjectures.FinitePullbackStrictTower.H",
+   "WeilConjectures.FinitePullbackStrictTower.augmentation",
+   "WeilConjectures.FinitePullbackStrictTower.diagramPull",
+   "WeilConjectures.FinitePullbackStrictTower.ReductionNormalization",
+   "WeilConjectures.FinitePullbackStrictTower.KoszulNormalization",
+   "WeilConjectures.FinitePullbackStrictTower.BalancedNormalization",
+   "WeilConjectures.FinitePullbackStrictTower.reductionLevelModules",
+   "WeilConjectures.FinitePullbackStrictTower.reductionLevelModules_additive",
+   "WeilConjectures.FinitePullbackStrictTower.finiteLevelModules",
+   "WeilConjectures.FinitePullbackStrictTower.finiteLevelModules_additive",
+   "WeilConjectures.FinitePullbackStrictTower.ReductionShiftNormalization",
+   "WeilConjectures.FinitePullbackStrictTower.FiniteShiftNormalization",
+   "WeilConjectures.FinitePullbackStrictTower.ShiftDescent",
+   "WeilConjectures.FinitePullbackStrictTower.pulledShift",
+   "WeilConjectures.FinitePullbackStrictTower.Comparison",
+   "WeilConjectures.FinitePullbackStrictTower.finite_pullback_strict_tower_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePullbackStrictTowerComparison.lean",
+  "statement": "theorem finite_pullback_strict_tower_comparison (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (Comparison l E g)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dddf992e",
+  "group": "NH",
+  "result": "pass",
+  "note": "5dddf992 fixes the da39d42e H13 return. Both dependency records (def-weil-pbc-adic-coefficient-datum, def-weil-pbc-completed-pullback) are cmp-identical to live. The CompletedTowerIndependent helpers moved unchanged (diffed with comments stripped) into the new def node def-a1-integral-completed-tower-pullback-universes with its own module, which the item cites; a specialisation is needed because the general interfaces fix the coefficient ring at universe t+1. The new node follows H12: no hollow data (limit lift, leftAdjoint, universal left-derived choices), sorry'd results are named theorems with proof docstrings, statement citations equal stmt_deps, statement verbatim, no live collision. Item Lean changes are cosmetic (abbrev to def with explicit types, same bodies). I re-read the Comparison structure: b on all of D(R_T), Koszul and balanced isomorphisms pinned on generators, actual augmentation, K-flat and quasi-isomorphism clauses, counit-descended shifts; only hX/hY assumed; universes u and t independent. Edge cases g=id, empty schemes, n=0 meaning exponent 1, all r, non-invertible c_g are covered. stmt_deps: 12 base kept, plus landed def nodes and the 2 new ones, no theorem. Report sections present, lines at most 100 chars. Advisories: new node does not cite def-weil-proetale-inverse-image (proEtaleBaseChange, coefficientProEtaleDirectRingMap) or def-pc-kflat-complex; helper module has two unused public imports (AdicCoefficientDatum, PbcQbarCompletedPullback); second reading by the same worker. No compile (no file changed)."
  }
 }

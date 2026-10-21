@@ -1,0 +1,110 @@
+{
+ "id": "def-a1-integral-finite-pullback-tower",
+ "kind": "definition",
+ "title": "Strict integral finite-coefficient pullback tower",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$ and its fixed uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be any morphism of schemes [def-weil-scheme-morphism-properties]. On the small pro-etale site of $W$ use the completed coefficient sheaf $R_W=\\varprojlim_{n\\geq0}S_{W,n}$, with $S_{W,n}=(A/\\varpi^{n+1})_W$ and its specified limit projections [def-weil-completed-integral-coefficients]. For every unbounded cochain complex $P$ of $R_Y$-modules [def-weil-abstract-derived-category], let $P_n=P\\otimes_{R_Y}S_{Y,n}$ with its actual quotient transition $r_n:P_{n+1}\\to P_n$ [def-weil-integral-reduction-tower]. Use the ordinary finite module pullback $g_n^*$ and its adjunction-unit generators $\\eta_n$ [def-pur-integral-finite-pullback]. Define $\\operatorname{Res}_n$ termwise by restriction along $R_X\\to S_{X,n}$ [def-pc-sheaf-restrict-scalars], and define $B_g^0(P)_n=\\operatorname{Res}_n g_n^*(P_n)$. Its transition $\\tau_n$ is the canonical natural chain map, linear over $R_X$, characterized in every degree and on every base-changed site object by $\\tau_n(\\eta_{n+1}(x))=\\eta_n(r_n(x))$. In tensor notation it sends $g^{-1}(x)\\otimes a$ to $g^{-1}(r_n)(g^{-1}(x))\\otimes\\rho_n(a)$, where $\\rho_n:S_{X,n+1}\\to S_{X,n}$ is coefficient reduction. Define $B_g^0$ on chain maps by finite reduction, finite pullback and restriction in every level, retaining these transitions. Thus $B_g^0$ is a functor from cochain complexes of $R_Y$-modules to strict inverse sequences of cochain complexes of $R_X$-modules. There is no flatness, K-flatness, boundedness, constructibility or invertibility hypothesis; the coefficient and scheme universes are independent.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-reduction-tower",
+  "def-pur-integral-finite-pullback",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 (lemma-pullback-module), 03D3 (lemma-adjoint-push-pull-modules); derived.tex Tag 06YT for coefficient reduction; item strict finite pullback construction B_g(P)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict inverse tower of finite coefficient module pullback complexes with quotient transitions",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso and AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; no strict finite-coefficient pullback tower.",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict inverse tower of finite coefficient module pullback complexes with quotient transitions",
+   "results": "8 hits, including AdicCompletion.transitionMap and AdicCompletion.transitionMap_comp_reduceModIdeal; no strict finite-coefficient pullback tower.",
+   "date": "2026-10-21",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralOperationsPullbackTowerFunctor|integralOperationsPullbackTransition|integralOperationsPullbackLevel|integralOperationsRestrict",
+   "results": "msearch.py: 0 Mathlib hits. rg in lean/WeilConjectures and lean/Sheaf: definitions are in Sheaf/Paper/IntegralOperationsWellDefined.lean (148, 183, 229, 451); other modules consume them. DAG declaration ownership search: only theorem node lem-pur-integral-operations-well-defined lists them; no definition node owns them. tools/blueprint_refs.py search integralOperationsPullbackTowerFunctor and search finite pullback tower: 0 blueprint matches.",
+   "date": "2026-10-21",
+   "verdict": "reuse existing project definitions; new definition owner only"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-pullback-strict-tower-comparison",
+  "date": "2026-10-21",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Finite pullback strict-tower comparison: B_g(P) with the actual finite quotient transitions, before any localization or derived-limit operation.",
+   "via": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsWellDefined",
+  "declaration": "WeilConjectures.integralOperationsPullbackTowerFunctor",
+  "declarations": [
+   "WeilConjectures.integralOperationsRestrict",
+   "WeilConjectures.integralOperationsPullbackLevel",
+   "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
+   "WeilConjectures.integralOperationsPullbackTransition",
+   "WeilConjectures.integralOperationsPullbackTowerFunctor"
+  ],
+  "statement": "def integralOperationsPullbackTowerFunctor\n    {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership only: reuse the published strict tower, its levels, restriction and canonical transitions. The transition uses the unique map characterized by integralOperationsPullbackTransition_existsUnique (lines 213-224), not the well-definedness theorem or an arbitrary choice. The definitions are at lines 148, 183, 229 and 451. No source or theorem is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dddf992e",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dddf992e",
+  "group": "NH",
+  "result": "pass",
+  "note": "5dddf992 fixes the da39d42e H13 return. Both dependency records (def-weil-pbc-adic-coefficient-datum, def-weil-pbc-completed-pullback) are cmp-identical to live. The CompletedTowerIndependent helpers moved unchanged (diffed with comments stripped) into the new def node def-a1-integral-completed-tower-pullback-universes with its own module, which the item cites; a specialisation is needed because the general interfaces fix the coefficient ring at universe t+1. The new node follows H12: no hollow data (limit lift, leftAdjoint, universal left-derived choices), sorry'd results are named theorems with proof docstrings, statement citations equal stmt_deps, statement verbatim, no live collision. Item Lean changes are cosmetic (abbrev to def with explicit types, same bodies). I re-read the Comparison structure: b on all of D(R_T), Koszul and balanced isomorphisms pinned on generators, actual augmentation, K-flat and quasi-isomorphism clauses, counit-descended shifts; only hX/hY assumed; universes u and t independent. Edge cases g=id, empty schemes, n=0 meaning exponent 1, all r, non-invertible c_g are covered. stmt_deps: 12 base kept, plus landed def nodes and the 2 new ones, no theorem. Report sections present, lines at most 100 chars. Advisories: new node does not cite def-weil-proetale-inverse-image (proEtaleBaseChange, coefficientProEtaleDirectRingMap) or def-pc-kflat-complex; helper module has two unused public imports (AdicCoefficientDatum, PbcQbarCompletedPullback); second reading by the same worker. No compile (no file changed)."
+ }
+}
