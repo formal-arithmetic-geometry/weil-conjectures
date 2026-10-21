@@ -18,7 +18,10 @@
   "sk-def-sfb-change-of-scalars",
   "def-pc-fibre-product",
   "def-sfb-profinite-test-objects",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-continuous-ring-canonical-comparison",
+  "def-weil-pbc-condensed-e-module-category"
  ],
  "proof": [
   {
@@ -352,5 +355,43 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d77ff413b (reviewer sub-agent of L); spot-checked: I read the item, all 25 cited statements, Bhatt–Scholze Example 4.1.4 and Lemma 4.2.12, and Hemo–Richarz–Scholbach Example 3.1 (p. 6). The statement is correct. I tested it with k separably closed (G=1), q=0,1,2, m=0 or n=0, A with the trivial norm, and incomplete A such as Q̄_ℓ. I checked the cocycle c(gh)=c(g)c(h) on W_2: the edge (xg,xgh) carries a g-twist, and that twist is trivial on A. The pure-tensor increment formula and the d_0 base move also check out. There are no new nodes, I found no duplicate in the DAG, no SGA is cited, and the declared tool uses are accepted. Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-separable-cech-coordinates.json. (1) C1, step 3: identifying the affine fibre product with Spec of the tensor product had no node; I added lem-weil-pbc-fibre-product-affine-spectra (a Mathlib leaf). (2) C3/C4, step 5: it computed Γ(W_q,R_{A,k}) through point evaluation on Spec Ω plus v^*p_k^*≅p_Ω^*, which needs an uncited identification of slice restriction with pullback. I rewrote it to apply lem-weil-pbc-condensed-field-continuous-realization directly on Spec k (A is totally disconnected via clopen balls), with |W_q|=G^q from the LC prime-spectrum node; faces act by naturality. (3) C4, step 7: it trivialised the scheme pullback u^*L, but def-sfb-lisse-coefficient-module trivialises the slice restriction L|_U. I rewrote it to restrict along the section s using the relocalization clause of def-pur-localized-ringed-site and the internal/sectionwise module equivalence. Step 9 now derives coefficient naturality from the realization node's adjoint equations. proof_deps is recomputed; statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldSeparableCechCoordinates",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldSeparableCech.coordinates",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.weaklyEtale",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.closureObject",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.closureArrow",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.object",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.power",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.cumulative",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.testPoint",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.sections",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.AreCoordinates",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.coordinates",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.coefficientMap",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.reindex",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.face_coordinates",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.section_coordinates",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.IsConstantEntry",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.HasMatrix",
+   "AlgebraicGeometry.ProEtale.FieldSeparableCech.module_coordinates"
+  ],
+  "file": "lean/Sheaf/Paper/FieldSeparableCechCoordinates.lean",
+  "statement": "theorem coordinates : Presieve.singleton (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ∈ Scheme.proetalePrecoverage (Spec (.of k)) ∧ ∃ e : ∀ q : ℕ, (object k Ω q).left ≅ ((profiniteToProEtOf (Spec (.of Ω))).obj (power k Ω q)).left, AreCoordinates k Ω e",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the landed IsLisseCoefficientModule predicate unchanged. The adjoint-normalized continuous comparison is owned by def-sfb-continuous-ring-canonical-comparison, bound to its exact existing definitions; no comparison_isIso theorem is a statement dependency. Section and matrix normalizations, all simplex maps, zero ranks and ordinary scalar extension are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f6117dac",
+  "group": "O3",
+  "result": "fix",
+  "note": "Re-delivery of the fa762ddb RETURN. (1) H13 repaired: def-sfb-lisse-coefficient-module record byte-identical to live; LisseCoefficientModuleSlices dropped; module_coordinates.1 uses the recorded IsLisseCoefficientModule. (2) Theorem stmt_dep repaired: new def-sfb-continuous-ring-canonical-comparison existing:true on the unchanged ContinuousRingUniverseRealization (comparisonAdjoint = precomposition with profiniteTestProjection, comparison = adjunction transpose, comparison_isMonHom; no IsIso, no total disconnectedness) replaces lem-sfb-continuous-ring-universe-realization in stmt_deps. Item Lean differs from the returned head only by the predicate swap and imports; statement/proof unchanged; clauses and edge cases (q=0, n=0/m=0, G=1, trivial norm, incomplete A) re-checked. FIX in fixes/def-sfb-continuous-ring-canonical-comparison.json: added body owner def-weil-pbc-condensed-e-module-category (continuousCoefficientRingSheaf X E, the comparison target) to stmt_deps and TeX, and trimmed `noncomputable` from lean.statement; check_new_node and check_existing clean. No Lean changed, no compile. Advisory: profiniteTestProjection owned by the theorem lem-weil-pbc-condensed-field-continuous-realization (not cited, to avoid a theorem stmt_dep)."
  }
 }

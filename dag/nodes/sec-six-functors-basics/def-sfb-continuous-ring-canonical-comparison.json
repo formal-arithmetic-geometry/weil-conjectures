@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-continuous-ring-canonical-comparison",
+ "kind": "definition",
+ "title": "Canonical adjoint continuous-ring comparison",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] in universe $u$ and $T$ a topological ring in universe $u$. Write $\\underline T(S)=C(S,T)$ for its condensed ring [def-sfb-continuous-map-condensed-ring] and $R_{T,X}=p_X^*\\underline T$ for its pulled-back ring object [sk-def-sfb-pulled-back-coefficients]. Let $F_{T,X}$ be the ring sheaf $U\\mapsto C(|U|,T)$, with pointwise operations and precomposition on the small pro-etale site [def-weil-pbc-proetale-site] [def-weil-pbc-condensed-e-module-category]; sections are lifted to universe $u+1$. For a profinite set $S$, the test scheme $X[S]$ of [def-sfb-profinite-test-objects] has the canonical projection $\\pi_S:|X[S]|\\to S$ induced by the evaluation of locally constant integer functions. Define the adjoint comparison $\\underline T\\to p_{X*}F_{T,X}$ by $f\\mapsto f\\circ\\pi_S$ on each $S$. Define $\\operatorname{comparison}_{X,T}:R_{T,X}\\to F_{T,X}$ to be its transpose under the point inverse-image adjunction. This is a morphism of ring objects: it preserves multiplication and unit. The construction assumes neither total disconnectedness nor a field structure, and does not assert invertibility.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1, p. 6; canonical map in the continuous-function realization; the adjoint construction in the existing ContinuousRingUniverseRealization module."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-profinite-test-objects",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comparisonAdjoint|continuousCoefficientRingSheaf|profiniteTestProjection",
+   "results": "{\"t\": \"2026-10-21T15:20:46Z\", \"tool\": \"grep\", \"query\": \"comparisonAdjoint|continuousCoefficientRingSheaf|profiniteTestProjection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching Mathlib declaration. Exact existing project comparison definitions found and reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison from pulled back condensed continuous functions to continuous functions on a scheme defined by the profinite test projection and inverse image adjunction",
+   "results": "{\"t\": \"2026-10-21T15:20:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical comparison from pulled back condensed continuous functions to continuous functions on a scheme defined by the profinite test projection and inverse image adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pullback\", \"profiniteToCondensed\"], \"digest\": \"cfcc93dd79cd6d7e\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching Mathlib declaration. Exact existing project comparison definitions found and reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"sheafPullback\"",
+   "results": "{\"t\": \"2026-10-21T15:20:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"ContinuousMap\\\", \\\"sheafPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No matching Mathlib declaration. Exact existing project comparison definitions found and reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l comparisonAdjoint|ContinuousRingUniverse.comparison dag/nodes; tools/blueprint_refs.py search comparisonAdjoint; tools/blueprint_refs.py search continuous-ring; rg -n comparisonAdjoint|ContinuousRingUniverse lean/WeilConjectures lean/Sheaf",
+   "results": "No definition node owns this canonical comparison. The existing theorem node lem-sfb-continuous-ring-universe-realization includes the three helpers in lean.declarations but its main declaration is comparison_isIso. The only other DAG hit is a use in lem-coef-pinched-rigidification-resolution. Blueprint search comparisonAdjoint has zero matches; continuous-ring has only three specialized coefficient nodes. Exact public comparisonAdjoint, comparison and comparison_isMonHom exist in Sheaf.Paper.ContinuousRingUniverseRealization, lines 48, 73 and 138; reuse them without creating duplicate definitions. No WeilConjectures match.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions, with no definition-node owner; bind existing: true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-separable-cech-coordinates",
+  "date": "2026-10-21",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Field Cech coefficient calculation: the canonical comparison used to normalize section coordinates and constant matrix entries, before its isomorphism property is proved.",
+   "via": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ContinuousRingUniverseRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparisonAdjoint",
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison",
+   "AlgebraicGeometry.ProEtale.ContinuousRingUniverse.comparison_isMonHom"
+  ],
+  "statement": "def comparison (X : Scheme.{u}) (E : Type u)\n    [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :\n    condensedRingObj (Profinite.continuousMapRingObjOfUniverse E) X ⟶\n      ((sheafCompose (Scheme.ProEt.topology X)\n        (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj\n          (continuousCoefficientRingSheaf X E))",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "note": "Owns the exact existing canonical comparison definitions and their already proved ring-morphism instance in this module. comparisonAdjoint is precomposition with profiniteTestProjection; comparison is its adjunction transpose, with no isomorphism choice. The theorem comparison_isIso is deliberately not among this definition node's declarations. Existing definitions are reused without copying or changing the module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f6117dac",
+  "group": "O3",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f6117dac",
+  "group": "O3",
+  "result": "fix",
+  "note": "Re-delivery of the fa762ddb RETURN. (1) H13 repaired: def-sfb-lisse-coefficient-module record byte-identical to live; LisseCoefficientModuleSlices dropped; module_coordinates.1 uses the recorded IsLisseCoefficientModule. (2) Theorem stmt_dep repaired: new def-sfb-continuous-ring-canonical-comparison existing:true on the unchanged ContinuousRingUniverseRealization (comparisonAdjoint = precomposition with profiniteTestProjection, comparison = adjunction transpose, comparison_isMonHom; no IsIso, no total disconnectedness) replaces lem-sfb-continuous-ring-universe-realization in stmt_deps. Item Lean differs from the returned head only by the predicate swap and imports; statement/proof unchanged; clauses and edge cases (q=0, n=0/m=0, G=1, trivial norm, incomplete A) re-checked. FIX in fixes/def-sfb-continuous-ring-canonical-comparison.json: added body owner def-weil-pbc-condensed-e-module-category (continuousCoefficientRingSheaf X E, the comparison target) to stmt_deps and TeX, and trimmed `noncomputable` from lean.statement; check_new_node and check_existing clean. No Lean changed, no compile. Advisory: profiniteTestProjection owned by the theorem lem-weil-pbc-condensed-field-continuous-realization (not cited, to avoid a theorem stmt_dep)."
+ }
+}
