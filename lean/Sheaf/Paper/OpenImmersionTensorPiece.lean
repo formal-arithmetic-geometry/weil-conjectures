@@ -25,6 +25,8 @@ Stacks Project, Tags 03DI, 03DJ, 03EL, 06YQ and 07A4
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option linter.style.haveILetI false
 
 universe u
 
@@ -133,7 +135,8 @@ Proof:
    Naturality also holds for homotopies (with sign (-1)^a in the second variable),
    then descends through inversion of quasi-isomorphisms to both derived variables.
    The unit definition identifies the inverse with the stated projection map.
-   Adjunction bijectivity determines that inverse, hence the natural isomorphism uniquely. -/
+   Adjunction bijectivity determines that inverse, hence the natural isomorphism uniquely.
+   (blueprint: lemma-weil-pbc-projection-formula-open-piece-projection-existence). -/
 /-
 Existence of the normalized open tensor isomorphism. The construction follows
 the finite-free retract argument in the proof of blueprint lemma 1269: first
@@ -145,6 +148,52 @@ main theorem below supplies the formal uniqueness argument.
 Source: Stacks 03DI, 03DJ, 03EL, 06YQ and 07A4
 (blueprint: lemma-weil-pbc-projection-formula-open-piece).
 -/
+/- The component of the normalized open projection, written as the adjunction transpose.
+This is the local morphism whose natural assembly and invertibility are the two separate
+non-formal parts of the existence construction.
+Source: Stacks 03DI, 03EL and 07A4
+(blueprint: lemma-weil-pbc-projection-formula-open-piece-existence). -/
+noncomputable def openTensorProjectionComponent {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) [QuasiCompact c.i]
+    (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1})
+    (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i)))
+    (r : Restriction R (ProEt.mk c.i))
+    (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r)
+    (E : Der (R.over (ProEt.mk c.i)))
+    (F : (openTensorCoefficients R).FullSubcategory) :
+    (openTensorTarget R (ProEt.mk c.i) b).obj (E, F) ⟶
+      (openTensorSource R (ProEt.mk c.i) a).obj (E, F) := by
+  letI : (localizedModuleRestriction R (ProEt.mk c.i)).Additive :=
+    localizedModuleRestriction_additive R (ProEt.mk c.i)
+  exact (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv
+      (b.functor.obj
+        (E, (localizedModuleRestriction R (ProEt.mk c.i)).mapDerivedCategory.obj F.obj))
+      ((openTensorSource R (ProEt.mk c.i) a).obj (E, F)) |>.symm
+    (b.functor.map (CategoryTheory.Prod.mkHom
+      ((localizedModuleDerivedAdjunction R (ProEt.mk c.i)).unit.app E) (𝟙 _)) ≫
+      t.comparison.inv.app
+        ((localizedModuleExtension R (ProEt.mk c.i)).mapDerivedCategory.obj E, F.obj))
+
+/- The component maps assemble naturally in both variables.
+The proof is the naturality calculation for the adjunction transpose and the canonical
+restriction-tensor comparison; it is isolated so the main theorem only performs the
+formal assembly and transport of isomorphisms.
+Source: Stacks 03DI, 03EL and 07A4
+(blueprint: lemma-weil-pbc-projection-formula-open-piece-existence). -/
+theorem openTensorProjection_exists {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) [QuasiCompact c.i]
+    (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1})
+    (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i)))
+    (r : Restriction R (ProEt.mk c.i))
+    (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r) :
+    ∃ p : openTensorTarget R (ProEt.mk c.i) b ⟶ openTensorSource R (ProEt.mk c.i) a,
+      (∀ (E : Der (R.over (ProEt.mk c.i)))
+        (F : (openTensorCoefficients R).FullSubcategory), IsIso (p.app (E, F))) ∧
+      ∀ (E : Der (R.over (ProEt.mk c.i)))
+        (F : (openTensorCoefficients R).FullSubcategory),
+        p.app (E, F) = openTensorProjectionComponent c R a b r t E F  := by
+  sorry
+
 theorem openImmersionTensor_exists {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) [QuasiCompact c.i]
     (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1})
@@ -164,7 +213,16 @@ theorem openImmersionTensor_exists {X Y : Scheme.{u}} {f : X ⟶ Y}
             (𝟙 ((localizedModuleRestriction R (ProEt.mk c.i)).mapDerivedCategory.obj F.obj))) ≫
               t.comparison.inv.app
                 ((localizedModuleExtension R (ProEt.mk c.i)).mapDerivedCategory.obj E, F.obj) := by
-  sorry
+  obtain ⟨p, hcomp, hp⟩ := openTensorProjection_exists c R a b r t
+  haveI : IsIso p := NatIso.isIso_of_isIso_app p
+  let beta : openTensorSource R (ProEt.mk c.i) a ≅
+      openTensorTarget R (ProEt.mk c.i) b := (asIso p).symm
+  refine ⟨beta, ?_⟩
+  intro E F
+  change (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _
+      (p.app (E, F)) = _
+  rw [hp E F]
+  simp [openTensorProjectionComponent]
 
 theorem openImmersionTensor_iso {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) [QuasiCompact c.i]
@@ -179,7 +237,7 @@ theorem openImmersionTensor_iso {X Y : Scheme.{u}} {f : X ⟶ Y}
   intro beta' hbeta'
   apply Iso.ext_inv
   ext obj
-  exact (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _ |>.injective
-    ((hbeta' obj.1 obj.2).trans (hbeta obj.1 obj.2).symm)
+  apply (localizedModuleDerivedAdjunction R (ProEt.mk c.i)).homEquiv _ _ |>.injective
+  exact (hbeta' obj.1 obj.2).trans (hbeta obj.1 obj.2).symm
 
 end SheafOfModules
