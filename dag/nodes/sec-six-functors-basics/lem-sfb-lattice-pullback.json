@@ -18,48 +18,123 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=g^{-1}$, $R=F(A_X)$ and $S=F(E_X)$. For $T\\in\\{A,E\\}$ the canonical coefficient map $\\alpha_T:F(T_X)\\to T_Y$ is the adjunct of the map $T_X\\to g_*T_Y$ given on $U$ by precomposition $C(|U|,T)\\to C(|Y\\times_XU|,T)$ with the projection. Both $A$ and $E$ are totally disconnected (disjoint clopen ultrametric balls separate points), so [lem-weil-pbc-continuous-coefficient-realizations] gives, for every scheme $Z$, a ring isomorphism $\\rho^T_Z:p_Z^*\\underline T\\xrightarrow{\\sim}T_Z$, the adjunct of precomposition with the profinite test projection $Z[K]\\to K$, and $\\rho^E_Z\\circ p_Z^*(a)=a_Z\\circ\\rho^A_Z$ for the inclusion $a:A\\hookrightarrow E$ and postcomposition $a_Z:A_Z\\to E_Z$. By [lem-sfb-alpha-iso], $\\alpha^{\\mathrm{cond}}_T:F(p_X^*\\underline T)\\to p_Y^*\\underline T$ is a ring isomorphism; by its definition it is the composition isomorphism $Fp_X^*\\cong p_Y^*$. Under the composite adjunction $Fp_X^*\\dashv p_{X*}g_*=p_{Y*}$, both $\\alpha_T\\circ F(\\rho^T_X)$ and $\\rho^T_Y\\circ\\alpha^{\\mathrm{cond}}_T$ correspond to the map $C(K,T)\\to C(|Y[K]|,T)$ (for profinite $K$) precomposing with $Y[K]\\to X[K]\\to K$; hence they are equal, and $\\alpha_A:R\\xrightarrow{\\sim}A_Y$, $\\alpha_E:S\\xrightarrow{\\sim}E_Y$ are ring isomorphisms. [lem-sfb-coefficient-pullback-square] for $\\underline A\\to\\underline E$, transported along these $\\rho$'s, gives $\\alpha_E F(a_X)=a_Y\\alpha_A$. Consequently the canonical pullbacks $P=g_A^*M=A_Y\\otimes_R F(M)$ and $Q=g_E^*L=E_Y\\otimes_S F(L)$ identify with $F(M)$ and $F(L)$, with their actions transported by these ring isomorphisms. Explicitly $b\\otimes m\\mapsto\\alpha_A^{-1}(b)m$, with inverse $m\\mapsto1\\otimes m$, and the same formulas with $E,L$ give the two identifications. The displayed commuting square ensures that the map $j:P\\to Q$ induced by $i$ becomes exactly $F(i)$; thus these are identifications of the specified maps, not choices of unrelated isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sfb-alpha-iso",
+    "lem-sfb-coefficient-pullback-square",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: restriction of the universal lattice to a stratum"
+   }
+  },
+  {
+   "text": "The monomorphism $i$ is injective as a map of underlying abelian sheaves: its kernel is the sectionwise kernel with its inherited module action, so forgetting the action detects a zero kernel. By [det-pe-topos-functoriality-inverse-image](4), $F$ is exact on abelian sheaves. Therefore $F(i)$ has zero kernel. The identifications in step 1 give zero kernel for $j$ as well, proving that the actual pulled-back inclusion is monic.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: restriction of the universal lattice to a stratum"
+   }
+  },
+  {
+   "text": "For either $B=A$ or $B=E$, let $N=M$ or $N=L$ respectively and choose a trivializing pro-étale cover $u_t:U_t\\to X$, with $N|_{U_t}\\cong(B_X|_{U_t})^{r_t}$ for finite $r_t\\geq0$. Put $V_t=Y\\times_X U_t$, with projections $v_t:V_t\\to Y$ and $h_t:V_t\\to U_t$. By [det-pe-topos-functoriality-inverse-image](1) the $V_t$ form a pro-étale cover. Clause (1) of [lem-sfb-proetale-object-inverse-image-restriction] identifies inverse image along the site objects $u_t,v_t$ with restriction, including for the ring sheaves $B_X,B_Y$; no assertion about constant discrete coefficients is being used. Composition in [det-pe-topos-functoriality-inverse-image](5) gives $v_t^{-1}F(N)\\cong h_t^{-1}u_t^{-1}N$. Inverse image preserves finite products, hence takes the displayed free module to $(h_t^{-1}u_t^{-1}B_X)^{r_t}$, with componentwise action. Applying the same composition comparison to the ring and restricting $\\alpha_B$ identifies this with $(B_Y|_{V_t})^{r_t}$. By step 1 these are local bases for $g_B^*N$. Thus both pulled-back modules are locally finite free. This argument allows varying ranks, rank zero, and empty schemes.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: restriction of the universal lattice to a stratum"
+   }
+  },
+  {
+   "text": "Let $\\varphi:E_X\\otimes_{A_X}M\\xrightarrow{\\sim}L$ be the scalar-extension map in the hypothesis, so $\\varphi(e\\otimes m)=e\\,i(m)$. Apply clause (1) of [lem-pur-proetale-inverse-image-tensor-comparison] to $\\mathcal O=A_X$, $\\mathcal F=E_X$ (restricted to $A_X$) and $\\mathcal G=M$. It gives the canonical pure-tensor isomorphism $\\sigma:F(E_X\\otimes_{A_X}M)\\xrightarrow{\\sim}S\\otimes_R F(M)$. Using $\\alpha_A,\\alpha_E$ and their commuting square from step 1, the latter module is canonically $E_Y\\otimes_{A_Y}P$: on elementary tensors the change is $s\\otimes m\\mapsto\\alpha_E(s)\\otimes(1\\otimes m)$; its inverse is $b\\otimes(c\\otimes m)\\mapsto\\alpha_E^{-1}(b)F(a_X)(\\alpha_A^{-1}(c))\\otimes m$. The balance relations make these inverse maps. Composing the inverse of this identification, $\\sigma^{-1}$, $F(\\varphi)$ and the identification $F(L)\\cong Q$ gives an $E_Y$-linear isomorphism $\\beta:E_Y\\otimes_{A_Y}P\\xrightarrow{\\sim}Q$.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; Section 03EK, section-tensor-product"
+   }
+  },
+  {
+   "text": "It remains to identify $\\beta$ with the required adjoint. In the inverse-image coordinates of step 1, insertion $P\\to E_Y\\otimes_{A_Y}P$, $m\\mapsto1\\otimes m$, followed by the inverse ring identification in step 4, is $m\\mapsto1\\otimes m$ in $S\\otimes_R F(M)$. The pure-tensor normalization of $\\sigma$ identifies this with $F$ applied to the insertion $M\\to E_X\\otimes_{A_X}M$. Since $\\varphi(1\\otimes m)=i(m)$, the composite with $F(\\varphi)$ is $F(i)$, which is $j$ in these coordinates. Thus $\\beta(1\\otimes p)=j(p)$. By linearity $\\beta(b\\otimes p)=b\\,j(p)$; sheafified pure tensors locally generate the tensor product, so this determines the morphism. It is exactly the scalar-extension adjoint of $j$. Hence that adjoint is an isomorphism induced by the pulled-back inclusion itself.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Pushing down by the trace: restriction of the universal lattice to a stratum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-coefficient-pullback-square",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Pushing down by the trace: the hidden assertion that the universal lattice restricts to a lattice on each stratum; expanded using canonical inverse-image and tensor comparisons."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "An integral lisse lattice inclusion and its scalar extension isomorphism remain a lattice under arbitrary scheme pullback",
-   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.IsIntegralHom.instFstScheme, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, RingHom.isIntegral_isStableUnderBaseChange The hits concern unrelated notions or only algebraic building blocks; no statement gives this pro-etale coefficient assertion.",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"extendScalars\"",
-   "results": "[loogle] OK 0 hit(s);  The hits concern unrelated notions or only algebraic building blocks; no statement gives this pro-etale coefficient assertion.",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
-  {
    "tool": "grep",
-   "query": "extendScalars.*(pullback|inverseImage)|pullback.*extendScalars",
-   "results": "[grep] OK 0 hit(s);  The hits concern unrelated notions or only algebraic building blocks; no statement gives this pro-etale coefficient assertion.",
+   "query": "lattice.*pullback|pullback.*lattice|inverseImage.*extendScalars|extendScalars.*inverseImage",
+   "results": "OK 10 hits: Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Limits/Lattice.lean, Mathlib/CategoryTheory/Limits/Lattice.lean, Mathlib/Order/CompleteLattice/Basic.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean. Read the returned signatures: integral scheme morphisms, Z-lattices, presheaf pullback and ordinary localization do not state this continuous-coefficient pro-étale lattice assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Inverse image of a locally free integral lattice commutes with extension of scalars",
-   "results": "[leansearch] OK 8 hit(s); ZLattice.comap, ZLattice.coe_comap, LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfIsLocalization_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply, IsLocalizedModule.mapExtendScalars_apply_apply, LinearMap.extendScalarsOfIsLocalization_apply' The hits concern unrelated notions or only algebraic building blocks; no statement gives this pro-etale coefficient assertion.",
+   "results": "OK 8 hits: ZLattice.comap, ZLattice.coe_comap, LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfIsLocalization_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply, IsLocalizedModule.mapExtendScalars_apply_apply, LinearMap.extendScalarsOfIsLocalization_apply'. Read the returned signatures: integral scheme morphisms, Z-lattices, presheaf pullback and ordinary localization do not state this continuous-coefficient pro-étale lattice assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "OK 12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id. Read the returned signatures: integral scheme morphisms, Z-lattices, presheaf pullback and ordinary localization do not state this continuous-coefficient pro-étale lattice assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral lisse lattice inclusion and its scalar extension isomorphism remain a lattice under arbitrary scheme pullback",
+   "results": "OK 8 hits: AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.IsIntegralHom.instFstScheme, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, RingHom.isIntegral_isStableUnderBaseChange. Read the returned signatures: integral scheme morphisms, Z-lattices, presheaf pullback and ordinary localization do not state this continuous-coefficient pro-étale lattice assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Pullback of a monomorphism from a finite locally free module inducing an isomorphism after localization of coefficients",
-   "results": "[leanfinder] OK 8 hit(s); Module.FinitePresentation.exists_notMem_bijective, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, RingHom.finitePresentation_ofLocalizationSpanTarget, RingHom.finitePresentation_isLocal, RingHom.finitePresentation_localizationPreserves, RingHom.finitePresentation_holdsForLocalizationAway, RingHom.OfLocalizationFiniteSpanTarget The hits concern unrelated notions or only algebraic building blocks; no statement gives this pro-etale coefficient assertion.",
+   "results": "OK 8 hits: Module.FinitePresentation.exists_notMem_bijective, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, RingHom.finitePresentation_ofLocalizationSpanTarget, RingHom.finitePresentation_isLocal, RingHom.finitePresentation_localizationPreserves, RingHom.finitePresentation_holdsForLocalizationAway, RingHom.OfLocalizationFiniteSpanTarget. Read the returned signatures: integral scheme morphisms, Z-lattices, presheaf pullback and ordinary localization do not state this continuous-coefficient pro-étale lattice assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-stratified-lattice",
@@ -74,5 +149,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-lattice-pullback",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps identify canonical coefficient pullback with inverse image, preserve the actual inclusion by exactness, pull local finite bases to the base-changed cover, construct the rationalization isomorphism and identify it as the adjoint of the actual inclusion. All tools already exist; no new nodes.",
+  "blueprint": "sk-lem-stratified-lattice proof, Pushing down by the trace: passage from the universal lattice on V to the restricted lattice over each finite étale stratum S. The split establishes precisely this restriction operation without changing the trace or stratification route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Canonical coefficient ring identifications with inverse image, for continuous A and E; a generic coefficient tool, not a replacement of the stratified-lattice route."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Cover preservation, finite-limit preservation, exactness on underlying abelian sheaves and composition of inverse images; these site-theoretic tools are not stated in the lattice unit."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Only clause (1), for arbitrary sheaves including rings, identifies restriction of the local bases with inverse image along cover members. The constant-coefficient module clause (3) is not used."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Only clause (1) supplies inverse-image compatibility with ordinary sheaf tensor, normalized on pure tensors. This is a generic ringed-site tool; the lattice argument itself remains in the item."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Reviewer FIX: identifies the condensed pullbacks p_Z^*A, p_Z^*E (for which lem-sfb-alpha-iso and lem-sfb-coefficient-pullback-square are stated) with the continuous-function sheaves C(|U|,A), C(|U|,E) of the statement, compatibly with A->E; the parent sk-lem-stratified-lattice cites it for the same purpose."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-b731a7044",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-b731a7044 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full, plus every cited statement: lem-sfb-alpha-iso, def-sfb-alpha/comp-iso, lem-sfb-coefficient-pullback-square, det-pe-topos-functoriality-inverse-image (1)(3)(4)(5), lem-sfb-proetale-object-inverse-image-restriction (1), lem-pur-proetale-inverse-image-tensor-comparison (1), def-pur-sheaf-tensor-product and def-weil-proetale-inverse-image. Sources checked at the cited places: Stacks sites-modules.tex Tag 03EL (line 3649) and §03EK, and the main-20261015 sk-lem-stratified-lattice proof, 'Pushing down by the trace' (lines 38-56). There is no SGA. The item is not in the side-live drop list, has no repair note (the 2026-10-21 re-split note is on the parent), and is still unsplit live. No new nodes; the statement is unchanged and true for any g (checked rank 0, empty schemes, g=id, rank 1 with multiplication by a power of the uniformiser, and varying ranks). Grep found no duplicate: the étale-only slice-transport and the continuous-lattice-intersection nodes state other things. One fault, C4/E4 in step 1: alpha-iso and the coefficient-pullback square are stated for the condensed pullbacks p_X^*Λ, but the step applies them to the statement's continuous sheaves C(|U|,A) and C(|U|,E) and to the canonical adjunct-of-precomposition coefficient map, with no bridge. FIX: step 1 now cites lem-weil-pbc-continuous-coefficient-realizations (as the parent's step 2 does; A and E are totally disconnected). It shows c_T∘F(ρ_X)=ρ_Y∘α^cond, because both are adjuncts of precomposition with Y[K]→X[K]→K and α is the composition isomorphism. So the continuous coefficient maps are ring isomorphisms and the square transports. proof_deps and split_report.tool_uses are extended; the realizations node's closure contains neither the item nor its parent, so there is no cycle. Steps 2-5 are correct: exactness on abelian sheaves, the cover by base change, restriction to site objects via clause (1) only, the finite-product calculation, σ from 03EL, and the adjoint identified via the pure-tensor normalisation. I accept the declared generic tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
