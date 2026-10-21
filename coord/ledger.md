@@ -23742,3 +23742,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:56 L: returned deliver/NH/lem-sfb-profinite-action-coherent-presentation (reviewer RETURN: L: independent stage-2 immutable head 9e1c74ace308: H2: delivery adds theorem stmt_dep lem-sfb-field-profinite-galois-si)
 - 20:57 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 20:58 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 20:59 L: merged deliver/NL/lem-sfb-finite-index-rectangle-primitive-operator (reviewer PASS; first push; new nodes: 0)

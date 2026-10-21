@@ -11,9 +11,161 @@
   "def-weil-l-adic-numbers",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-topological-homogeneous-cochain-coordinates] with $E=\\mathbf Q_\\ell$, $J=G$, and trivial action on $V$. The norm assumptions make addition, negation and scalar multiplication continuous: addition obeys the maximum estimate, and near $(a_0,v_0)$ the difference $av-a_0v_0=a(v-v_0)+(a-a_0)v_0$ has norm at most $\\max(|a|_\\ell\\|v-v_0\\|,|a-a_0|_\\ell\\|v_0\\|)$, with $|a|_\\ell$ locally bounded. Write $\\Psi c=f_c$ and $\\Phi F(g_1,\\ldots,g_q)=F(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_q)$. The cited statement gives inverse linear cochain maps, $\\delta\\Psi=\\Psi d$ and $\\Phi\\delta=d\\Phi$, including degree zero. Consequently $dc=0$ implies $\\delta f_c=0$. No completeness of $V$ is used.",
+   "uses": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 1; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Choose a transversal $D\\subset G$ for the finitely many right cosets $H\\backslash G$, including $1$. Write $x=\\rho(x)s(x)$ uniquely with $\\rho(x)\\in H$ and $s(x)\\in D$. Each coset $Hs$ is clopen: it is open by translation, and its complement is a union of other open cosets. On $Hs$, $\\rho(x)=xs^{-1}$ is continuous into $H$ with its subspace topology; these open pieces show that $\\rho:G\\to H$ is continuous. Uniqueness gives $\\rho(hx)=h\\rho(x)$ for $h\\in H$. The transversal is fixed once, independently of $V$. No normality of $H$ is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 2; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "For a set $Y$ let $B_q(Y)$ be the free abelian group with specified basis $[y_0,\\ldots,y_q]$ (repetitions allowed), and put $B_{-1}(Y)=\\mathbf Z[\\varnothing]$. This is the basis convention of [def-weil-pbc-free-module]. Define $\\partial$ by alternating deletion, including $\\partial[y]=[\\varnothing]$ and $\\partial[\\varnothing]=0$. Deleting two distinct positions in opposite orders gives opposite signs, hence $\\partial^2=0$. A homogeneous function $F$ extends uniquely by finite sums to $\\widehat F:B_n(G)\\to V$; then $\\delta F=0$ means $\\widehat F\\partial=0$ on $B_{n+1}(G)$. Left translation acts coordinatewise on all these chains.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 3; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ordered-join-partial-contraction] with $r=n+1$ and the separately labelled sets $X_i=Ha_i$. Write $J_q$ for its ordered-color chains and $e_q:J_q\\to B_q(G)$ for erasing colors; $\\partial e=e\\partial$ follows from deletion. For $h\\in H$, choose anchors $v_i=ha_i$ and denote the cited operator by $S^h$. Its statement gives $\\partial S^h_q+S^h_{q-1}\\partial=1$ for $-1\\leq q\\leq n-1$, its naturality under simultaneous left translation, and a fixed finite integer expansion using only vertex insertions and replacements. In degree $n$, every basis of $J_n$ has exactly one vertex in each color, in order $0,\\ldots,n$; thus every tuple in $e_n(J_n)$ is an integer combination of tuples in the specified rectangle.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 4; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Construct $P_q:B_q(G)\\to J_q$ through degree $n$. Put $P_{-1}=1$ and $P_0[x]=[(0,\\rho(x)a_0)]$, so $\\partial P_0=P_{-1}\\partial$. For $1\\leq q\\leq n$, assuming the chain identities below degree $q$, define on each basis tuple $x=[x_0,\\ldots,x_q]$\n$$z=P_{q-1}(\\partial x),\\qquad P_q(x)=S^{\\rho(x_0)}_{q-1}(z),$$\nand extend linearly. The induction hypothesis gives $\\partial z=P_{q-2}\\partial^2x=0$, using the augmentation identity when $q=1$. Since $q-1\\leq n-1$, [lem-sfb-ordered-join-partial-contraction] gives $\\partial P_q(x)=z$. Hence $\\partial P_q=P_{q-1}\\partial$ in all required degrees. The input-dependent anchor is chosen on basis tuples before linear extension; it is not asserted to be a linear function of a general chain.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 5; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Naturality in [lem-sfb-ordered-join-partial-contraction], applied to left translation by $h\\in H$, gives $hS^{\\rho(x_0)}z=S^{h\\rho(x_0)}(hz)$. Together with $\\rho(hx_0)=h\\rho(x_0)$ this proves inductively $P_q(hx)=hP_q(x)$; the base case is the displayed $P_0$. The finite-expansion clause of that node also proves inductively that $P_q[x_0,\\ldots,x_q]$ is a fixed finite integer sum of colored tuples with vertices of the form $\\rho(x_j)a_i$. Boundary merely selects subtuples, and the next $S$ inserts or replaces by $\\rho(x_0)a_i$. Coefficient lists and coordinate selections depend on the degree and color lists alone. Keep repeated terms rather than combining them, so no equality test on input values enters this expansion.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 6; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Set $A_q=e_qP_q$ for $-1\\leq q\\leq n$. These are $H$-equivariant augmented chain maps and $A_{-1}=1$. For $b\\in G$, let $C_b$ prefix $b$ to a tuple, with $C_b[\\varnothing]=[b]$. Direct deletion gives\n$$\\partial[b,y_0,\\ldots,y_q]=[y_0,\\ldots,y_q]-C_b\\partial[y_0,\\ldots,y_q],$$\nso $\\partial C_b+C_b\\partial=1$, also in degree $-1$ since $\\partial[b]=[\\varnothing]$. Coordinatewise translation gives $hC_bz=C_{hb}(hz)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 7; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Define $Q_{-1}=0$ and, on basis tuples $x=[x_0,\\ldots,x_q]$, recursively for $0\\leq q\\leq n$ put\n$$Z_q(x)=x-A_qx-Q_{q-1}\\partial x,\\qquad Q_q(x)=C_{x_0}Z_q(x),$$\nextending linearly. The augmentation of $Z_0$ is $1-1=0$. For $q\\geq1$, the previous-degree identity and the chain identity for $A$ give\n$$\\partial Z_q=(1-A_{q-1})\\partial x-(1-A_{q-1}-Q_{q-2}\\partial)\\partial x=0.$$\nThe prefix identity therefore gives $\\partial Q_q(x)=Z_q(x)$. This proves by induction\n$$1-A_q=\\partial Q_q+Q_{q-1}\\partial\\qquad(0\\leq q\\leq n).$$\nBoth the base and the step have been verified, rather than invoking an unspecified resolution-comparison theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 8; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Induction in this same recursion proves $H$-equivariance of $Q$: $Z_q(hx)=hZ_q(x)$ and $C_{hx_0}(hZ_q(x))=hQ_q(x)$. Its base is $Q_{-1}=0$. Likewise the finite expansion for $A$, together with deletion, subtraction and prefixing, proves that each $Q_q[x_0,\\ldots,x_q]$ has a fixed finite integer expansion with every vertex either $x_j$ or $\\rho(x_j)a_i$. These vertex maps are continuous by step 2 and multiplication in $G$. Thus evaluation of any continuous $F$ on $Q_q$ or $A_q$ is continuous. All the recursions are integral and independent of coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 9; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "For a continuous diagonally $G$-invariant homogeneous function $F:G^{n+1}\\to V$, define a function on $G^n$ by\n$$(UF)(x_0,\\ldots,x_{n-1})=\\widehat F(Q_{n-1}[x_0,\\ldots,x_{n-1}]).$$\nThe finite formulas in step 9 show that $UF$ is continuous and linear in $F$, and $H$-equivariance of $Q$ and invariance of $F$ show $UF(hx)=UF(x)$ for $h\\in H$. If $\\delta F=0$ and $F$ vanishes on $Ha_0\\times\\cdots\\times Ha_n$, then $\\widehat F A_n=0$, since every term of $A_n$ is an ordered rectangle tuple by step 4. Apply $\\widehat F$ to $1-A_n=\\partial Q_n+Q_{n-1}\\partial$ from step 8. The term $\\widehat F\\partial Q_n$ is zero by the cocycle identity, and the other term is precisely $\\delta(UF)$. Thus $F=\\delta(UF)$ as functions on all of $G^{n+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 10; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "For an $H$-invariant homogeneous function $L:G^{q+1}\\to V$, put\n$$(\\mathcal M_qL)(x_0,\\ldots,x_q)=m^{-1}\\sum_{s\\in D}L(sx_0,\\ldots,sx_q).$$\nHere $m\\geq1$, and it is invertible in $\\mathbf Q_\\ell$ since that field has characteristic zero [def-weil-l-adic-numbers]. For $g\\in G$, write $sg=hu$ with $h\\in H$, $u\\in D$. Right multiplication by $g$ permutes the right cosets $H\\backslash G$, so $s\\mapsto u$ is a permutation and $L(sgx)=L(hux)=L(ux)$. It follows that $\\mathcal M_qL$ is $G$-invariant. Deleting a coordinate commutes with simultaneous left translation, hence $\\delta\\mathcal M_q=\\mathcal M_{q+1}\\delta$. If $F$ is $G$-invariant, each summand equals $F$ and $\\mathcal M_qF=m^{-1}mF=F$. Therefore step 10 implies $F=\\delta(\\mathcal M_{n-1}UF)$ for the specified rectangle-vanishing cocycles. Finite addition preserves continuity and linearity. This argument requires neither normality of $H$ nor a prime-to-$\\ell$ index.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 11; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Define on every continuous inhomogeneous $n$-cochain, without any cocycle or vanishing assumption,\n$$T=\\Phi_{n-1}\\mathcal M_{n-1}U\\Psi_n.$$\nIts output is a continuous $(n-1)$-cochain because $\\mathcal M U\\Psi c$ is a continuous $G$-invariant homogeneous function. It is $\\mathbf Q_\\ell$-linear. For a cocycle $c$ vanishing homogeneously on the rectangle, step 11 and [lem-sfb-topological-homogeneous-cochain-coordinates] give\n$$dTc=\\Phi_n\\delta\\mathcal M_{n-1}U\\Psi_nc=\\Phi_n\\Psi_nc=c.$$\nTo obtain its finite evaluation formula, expand $Q_{n-1}$ by step 9, translate each resulting tuple by each $s\\in D$, and substitute the cumulative-product tuple $(1,x_1,x_1x_2,\\ldots,x_1\\cdots x_{n-1})$ from $\\Phi$. Finally replace every homogeneous tuple $(b_0,\\ldots,b_n)$ by $(b_0^{-1}b_1,\\ldots,b_{n-1}^{-1}b_n)$ from $\\Psi$. All these coordinate maps are continuous, so their composites are maps $\\psi_k:G^{n-1}\\to G^n$. All coefficients are integers divided by $m$. The formulas were fixed by the transversal and integral chain recursions, independently of $V$; repeated terms may be left uncollected.",
+   "uses": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 12; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "For each integer $k$, the definition of the $\\ell$-adic valuation in [def-weil-l-adic-numbers] gives $|k|_\\ell\\leq1$, and multiplicativity gives $|k/m|_\\ell\\leq |m|_\\ell^{-1}$. This proves the requested coefficient bound even when $\\ell$ divides $m$. If $\\|c(z)\\|\\leq B$ for every $z\\in G^n$, the finite-sum ultrametric inequality gives $\\|(Tc)(x)\\|\\leq |m|_\\ell^{-1}B$ for every $x$. Taking supremum norms yields $\\|Tc\\|_\\infty\\leq |m|_\\ell^{-1}\\|c\\|_\\infty$. A continuous cochain on the compact domain $G^n$ has bounded norm, so these are finite suprema. Every output value is a finite $\\mathbf Q_\\ell$-linear combination of input values. Thus the operator preserves any linear coefficient subspace, with no closedness requirement and no passage to a limit in $V$.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 13; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  },
+  {
+   "text": "Let $S$ be profinite. For $c\\in C(S\\times G^n,V)$ set\n$$(Tc)(s,x)=\\sum_k\\alpha_k c(s,\\psi_k(x)).$$\nThe maps $(s,x)\\mapsto(s,\\psi_k(x))$ are continuous, and finite addition and fixed scalar multiplication in $V$ are continuous, so the resulting family is continuous. The estimate of step 13 applies uniformly in both variables and proves the same supremum bound on the parameter family. Cochain identities and rectangle vanishing are evaluated at each fixed $s$, and the subspace assertion again follows from the finite linear formula. If $S$ is empty the assertion holds for the unique family. For $n=1$, $Q_0[x]=[x,x]-[x,\\rho(x)a_0]$, and after averaging $\\mathcal M_0UF$ is a $G$-invariant function on $G$, hence constant. Its homogeneous differential is zero, agreeing with $d^0=0$. The degree-$1$ identity in step 10 therefore also shows that any such rectangle-vanishing $1$-cocycle is zero. Zero coefficient spaces and incomplete normed spaces are covered by the same finite formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written finite-index rectangle primitive construction, step 14; this cochain argument is not asserted in the blueprint. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) fixes the cochain convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-topological-homogeneous-cochain-coordinates",
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-partial-contraction",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary finite-index rectangle primitive: integral ordered-join comparison and prefix homotopy followed by coset averaging. The blueprint provides only the application context; this proof is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -152,10 +304,148 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: the hits define continuous cohomology or algebraic cocycles; none supplies a continuous finite-evaluation rectangle primitive with arbitrary finite-index denominator."
+  },
+  {
+   "tool": "grep",
+   "query": "(rectang|coset).*(cochain|cocycle|homotop)|(cochain|cocycle|homotop).*(rectang|coset)",
+   "results": {
+    "t": "2026-10-21T20:52:01Z",
+    "tool": "grep",
+    "query": "(rectang|coset).*(cochain|cocycle|homotop)|(cochain|cocycle|homotop).*(rectang|coset)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous group cocycles vanishing on a product of subgroup cosets have bounded finite evaluation primitives",
+   "results": {
+    "t": "2026-10-21T20:52:02Z",
+    "tool": "leansearch",
+    "query": "Continuous group cocycles vanishing on a product of subgroup cosets have bounded finite evaluation primitives",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles₁",
+     "groupCohomology.mem_cocycles₁_def",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.cocyclesOfIsCocycle₁",
+     "groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂",
+     "groupCohomology.instFunLikeSubtypeForallCarrierVModuleCatMemSubmoduleCocycles₁",
+     "groupCohomology.coboundaries₂_le_cocycles₂",
+     "groupCohomology.cocycles"
+    ],
+    "digest": "bd9d8b4f3203e144"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homogeneousCochains\"",
+   "results": {
+    "t": "2026-10-21T20:52:02Z",
+    "tool": "loogle",
+    "query": "\"homogeneousCochains\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TopRep.homogeneousCochains",
+     "TopRep.homogeneousCochains.d_eq",
+     "TopRep.homogeneousCochains.d_apply",
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "groupCohomology.inhomogeneousCochains.ext",
+     "groupCohomology.inhomogeneousCochains.ext_iff",
+     "groupCohomology.inhomogeneousCochains.d_def"
+    ],
+    "digest": "882b1453851290bc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous profinite group cocycle zero on an open subgroup coset rectangle has a primitive given by fixed finite evaluations with denominator the subgroup index",
+   "results": {
+    "t": "2026-10-21T20:52:03Z",
+    "tool": "leanfinder",
+    "query": "A continuous profinite group cocycle zero on an open subgroup coset rectangle has a primitive given by fixed finite evaluations with denominator the subgroup index",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.IsMulCoboundary₁",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.isCocycle₁_of_mem_cocycles₁",
+     "groupCohomology.IsMulCoboundary₂",
+     "groupCohomology.map_one_of_isCocycle₁",
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "groupCohomology.cocycles₂_map_one_fst",
+     "groupCohomology.mem_cocycles₁_def"
+    ],
+    "digest": "01c909f18962eb2f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
+  },
+  {
+   "tool": "grep",
+   "query": "(transfer|corestriction).*(continuous|homotop)|(continuous|homotop).*(transfer|corestriction)",
+   "results": {
+    "t": "2026-10-21T20:52:12Z",
+    "tool": "grep",
+    "query": "(transfer|corestriction).*(continuous|homotop)|(continuous|homotop).*(transfer|corestriction)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral ordered join comparison of the homogeneous bar complex followed by averaging over finitely many cosets gives bounded continuous primitives of cocycles",
+   "results": {
+    "t": "2026-10-21T20:52:14Z",
+    "tool": "leanfinder",
+    "query": "An integral ordered join comparison of the homogeneous bar complex followed by averaging over finitely many cosets gives bounded continuous primitives of cocycles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.π",
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.toCocycles",
+     "groupCohomology.cocycles",
+     "groupCohomology_induction_on",
+     "groupCohomology.cocycles₁"
+    ],
+    "digest": "8c6a8246897d0cc5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern definitions of continuous cohomology, ordinary low-degree cocycles or algebraic coboundaries; none gives a finite-evaluation primitive with this rectangle condition and arbitrary finite-index bound."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
@@ -167,7 +457,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), open direct image: coefficient-completion boundary descent; Finite-evaluation primitive operator for any finite-index coset rectangle",
+   "place": "Paragraph (3), open direct image: finite-index rectangle primitive below coefficient-completion boundary descent, using integral ordered-join chains and a single average over H\\G. The blueprint supplies the application context, not this auxiliary cochain theorem.",
    "via": [
     "lem-sfb-parameter-cochain-completion-boundary-descent",
     "lem-sfb-procyclic-scalar-cochain-evaluation",
@@ -185,5 +475,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-index-rectangle-primitive-operator",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved it using the existing ordered-join partial contraction and homogeneous cochain coordinate isomorphism. Wrote both chain recursions and their induction checks, finite uniform expansions, nonnormal coset averaging, and the |m|_ell^(-1) estimate. No new nodes and no attachment; no prime-to-ell or completeness assumption introduced.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, open-direct-image stability through coefficient-completion boundary descent. The cochain input is agent-written and not asserted in the blueprint. blueprint_refs.py ancestor reports None for this inherited created.item chain; retained the existing null ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-a38809344",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-a38809344 (reviewer sub-agent of L); spot-checked: I read the item and all 14 steps in full; I re-derived each step and found no faults, so there are no fixes. Shape: one commit touching only the item and its report, with no new nodes; the statement and stmt_deps are byte-identical to live and side-live, where the item is still unsplit; there is no repair note and no SGA citation; the null blueprint.from.node is inherited from the created.item chain. Source: blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) gives only the application context, and Stacks 0DVG defines the cochain complex but not this lemma, so proof_origin=agent is honest. Every citation lies in unit sk-thm-sf-ctf-stability (cochain-coordinates and ordered-join contraction, both split and reviewed) or is a Mathlib-leaf definition (pbc-free-module, l-adic-numbers), so there is no route issue and no tool_uses. Steps: step 1 meets the coordinates node's hypotheses, its Ψ equals f_c and d^0=0 under the trivial action; step 2 gives a continuous, H-equivariant ρ for any open subgroup H, normal or not; step 5 uses the contraction only on J_{q-1} with q-1≤r-2=n-1, inside its stated range; step 6 gets equivariance from naturality with u_i=h·; steps 7-8 prove the prefix homotopy recursion 1-A_q=∂Q_q+Q_{q-1}∂ by an explicit induction; step 10 kills F̂A_n by rectangle vanishing and F̂∂Q_n by the cocycle identity; step 11 averages over a right transversal, with m invertible because Q_ℓ has characteristic 0; step 12 gives dTc=c; step 13 gives |k/m|≤|m|^{-1}. Independent check: a brute-force script on G=S_3 with a non-normal H of order 2, n=1,2 and random a_i confirmed the homotopy identity, that A_n lands in the rectangle, and that Q is H-equivariant. Edge cases: n=1, where a rectangle-vanishing homomorphism into a Q_ℓ-space is 0; H=G; ℓ|m; coincident a_i; V=0; empty S. Not duplicates: bounded-finite-evaluation-rectangle-replacement needs an index prime to ℓ, and homogeneous-cocycle-rectangle-detection gives only existence of a primitive on H. The parent parameter-cochain-completion-boundary-descent uses exactly the stated clauses in its steps 7, 11 and 12."
  }
 }
