@@ -20,7 +20,10 @@
   "def-weil-pbc-cartesian-square",
   "def-sfb-module-lower-star-comp",
   "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-pbc-adjunction-conjugate",
+  "def-sfb-identity-open-pullback-comparison",
+  "def-sfb-identity-open-restriction-arrows",
+  "def-sfb-open-square-restriction-mates"
  ],
  "proof": [
   {
@@ -369,5 +372,30 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-963317f61 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of the Q12-created unsplit node. Live and side-live still have it unsplit; it is not in route-pivot-dropped.txt and has no repair note of its own. The statement and stmt_deps are unchanged from base. 0 new nodes; no cycle (closure of 3423 nodes); proof_deps equals the union of uses; no SGA. Sources read: Stacks 04J0 (sites-modules line 2369, localized ring map and f'_*j_U^*=j_V^*f_*), 03D8 and 07A7, plus blueprint det-sf-comp-composition-base-change proof (3) parenthesis. Steps 1-3: the localization-lemma hypotheses (continuous, finite-limit-preserving base change; slice equals identity via h^{-1}(U)=U) hold. eta-comp and cartesian-coefficients make the localized ring map the identity, so c_h is the identity with the restricted action. lem-pur gives d=c∘j^*η invertible, with identity-site unit m↦1⊗m. Step 4: the conjugate-unit equation j_*(b)η_j=C∘h_*η_i∘η_h, evaluated at T→U, gives b=d, so a_h^{-1}=c∘j^*η; the conjugation directions are correct. Step 5 is naturality. Step 6: D'×_{Z'}U'=U'. Step 7: pullback associativity, obtained by conjugating the fibre-product associativity of direct images; lem-sc-left-adjoint-composition-iso-associativity is not directly citable because it needs strict R-equalities. Step 8: I recomputed the reassociation independently through triples (i',h',v), (i',w,h) and (v_U,i,h), with hw=vh' and wi'=iv_U, and it is correct. Step 9: exact pullbacks plus termwise chain-map equality, then localization. Edge cases checked: U empty, h=id, U=Z, v=id, nonproper h. The tool_uses are generic site, module and adjunction tools, and I accept them. No duplicate found (module-direct-image-open-pasting and the sibling derived-adjunction-normalization are different claims). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IdentityOpenUnderivedSquareNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_underived_square_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenUnderivedNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenSquareLeft",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenSquareRight",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_underived_square_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/IdentityOpenUnderivedSquareNormalization.lean",
+  "statement": "theorem identity_open_underived_square_normalization (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) {D Z U D' Z' U' : Scheme.{u}} [D.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [U.Over (Spec (.of k))] [D'.Over (Spec (.of k))] [Z'.Over (Spec (.of k))] [U'.Over (Spec (.of k))] [LocallyOfFiniteType (D ↘ Spec (.of k))] [QuasiCompact (D ↘ Spec (.of k))] [IsSeparated (D ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (D' ↘ Spec (.of k))] [QuasiCompact (D' ↘ Spec (.of k))] [IsSeparated (D' ↘ Spec (.of k))] [LocallyOfFiniteType (Z' ↘ Spec (.of k))] [QuasiCompact (Z' ↘ Spec (.of k))] [IsSeparated (Z' ↘ Spec (.of k))] [LocallyOfFiniteType (U' ↘ Spec (.of k))] [QuasiCompact (U' ↘ Spec (.of k))] [IsSeparated (U' ↘ Spec (.of k))] (h : D ⟶ Z) (j : U ⟶ Z) (i : U ⟶ D) [h.IsOver (Spec (.of k))] [j.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion i] (hi : i ≫ h = j) (hU : IsPullback i (𝟙 U) h j) (v : Z' ⟶ Z) (h' : D' ⟶ Z') (w : D' ⟶ D) [v.IsOver (Spec (.of k))] [h'.IsOver (Spec (.of k))] [w.IsOver (Spec (.of k))] (sq : ChosenCartesianSquare w h' h v) (vU : U' ⟶ U) (j' : U' ⟶ Z') (i' : U' ⟶ D') [vU.IsOver (Spec (.of k))] [j'.IsOver (Spec (.of k))] [i'.IsOver (Spec (.of k))] [IsOpenImmersion j'] [IsOpenImmersion i'] (hi' : i' ≫ h' = j') (sqU : ChosenCartesianSquare vU j' j v) (hw : vU ≫ i = i' ≫ w) : IsPullback i' (𝟙 U') h' j' ∧ IdentityOpenUnderivedNormalization Λ j i h hi ∧ IdentityOpenUnderivedNormalization Λ j' i' h' hi' ∧ (∀ A : Mod (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) (condensedRingObj Λ Z), (identityOpenSquareLeft Λ h i v h' w vU j' i' hi' sq.toCommSq hw).hom.app A = (identityOpenSquareRight Λ h j i hi v vU j' sqU.toCommSq).hom.app A) ∧ (∀ P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) (condensedRingObj Λ Z)) ℤ, (NatIso.mapHomologicalComplex (identityOpenSquareLeft Λ h i v h' w vU j' i' hi' sq.toCommSq hw) (.up ℤ)).hom.app P = (NatIso.mapHomologicalComplex (identityOpenSquareRight Λ h j i hi v vU j' sqU.toCommSq) (.up ℤ)).hom.app P) ∧ (∀ A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) (condensedRingObj Λ Z)), (Functor.mapDerivedCategoryNatIso (identityOpenSquareLeft Λ h i v h' w vU j' i' hi' sq.toCommSq hw)).hom.app A = (Functor.mapDerivedCategoryNatIso (identityOpenSquareRight Λ h j i hi v vU j' sqU.toCommSq)).hom.app A)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses identityOpenRestriction and identityOpenSectionArrow through def-sfb-identity-open-restriction-arrows, and identityOpenPullbackComparison through def-sfb-identity-open-pullback-comparison. Both new definition nodes have existing:true records on the unchanged published modules. def-sfb-open-square-restriction-mates supplies the open-square comparisons and section coprojection. No theorem assertion or theorem choice supplies these maps. The two path definitions insert only canonical functor associators; complex and derived clauses apply those same paths. The Lean module and mathematical statement are unchanged from the returned delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9699a3d12",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 89f8904b. Item Lean module byte-identical (math previously verified in full: identity-open IsPullback hyp, primed config, unit/adjunct/tensor-unit clauses, square paths t0∘i'^*θ∘a_{h'}^{-1} = v_U^*(a_h^{-1})∘s with only associators, termwise complex/derived clauses, universes u/u+1, edge cases). Only stmt_deps changed: the two theorem nodes are replaced by new def nodes def-sfb-identity-open-pullback-comparison (existing:true identityOpenPullbackComparison = (upperStarComp i h).symm ≪≫ upperStarCongr, direction i^*h^*≅j^* correct) and def-sfb-identity-open-restriction-arrows (existing:true identityOpenRestriction = directImageOpenRestriction of CommSq j' 𝟙 h j + lowerStarId + unitor; identityOpenSectionArrow = pullback.lift (𝟙 V) (v≫j') under open immersions). Signatures verbatim vs side-live source, plain defs (not .choose), no competing owner, deps acyclic, statement/proof unchanged. Advisory: lowerStarId/upperStarCongr unowned framework decls; H9 import recheck at stage 3; second reading is a self-audit. No compile (no files changed)."
  }
 }

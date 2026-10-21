@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-identity-open-restriction-arrows",
+ "kind": "definition",
+ "title": "Canonical identity-open underived restriction and section arrow",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $T$, use its pulled-back coefficient ring $\\Lambda_T$ [sk-def-sfb-pulled-back-coefficients] and internal module category $\\operatorname{Mod}_{\\Lambda_T}$ [sk-def-sfb-module-objects], with the universe convention [def-weil-size-convention]. Use the module inverse and direct images and their specified adjunctions [sk-def-sfb-module-pushforward-pullback]. For arbitrary schemes $U,D,Z$, arrows $j:U\\to Z$, $i:U\\to D$ and $h:D\\to Z$, and an equality $h\\circ i=j$, define $c_h:j^*h_*\\to i^*$ to be the canonical underived commutative-square restriction mate [def-sfb-open-square-restriction-mates] for the square with top arrow $i$, left arrow $\\operatorname{id}_U$, right arrow $h$ and bottom arrow $j$, followed by the canonical identification $(\\operatorname{id}_U)_*i^*\\cong i^*$. This identity direct-image identification is the sectionwise identity comparison of the published module direct images. If $j$ and $i$ are open immersions [def-weil-open-immersion], then for each object $V\\xrightarrow{v}U$ of the small pro-etale site define $e_{h,V}:(V\\xrightarrow{i\\circ v}D)\\to h^{-1}(V\\xrightarrow{j\\circ v}Z)$ to be the site morphism whose underlying scheme map is the pullback lift $V\\to V\\times_ZD$ with projections $\\operatorname{id}_V$ and $i\\circ v$. These are specified constructions with the canonical coefficient actions; no Cartesian, identity-locus, quasi-compactness, finite-type, admissibility or invertibility hypothesis is imposed on $c_h$, and no invertibility assertion for either map is made.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-open-square-restriction-mates",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Tag 0D6G, lemma-restrict-direct-image-open: common-open restriction mate and the fibre-product section arrow; blueprint proof (3), identity-open restriction parenthesis"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical restriction map for condensed module sheaves over a common open identity locus",
+   "results": "8 hits: ModuleCat.Tilde.toOpen, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrict_obj, TopCat.Presheaf.restrictOpen, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor.",
+   "date": "2026-10-21",
+   "verdict": "These concern other module categories or generic section restriction; none is the specified condensed internal-module identity-open mate or its site arrow."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical restriction transformation j star h pushforward to i star from the base change mate over a common identity open",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.morphismRestrict_appLE, AlgebraicGeometry.morphismRestrict_app', AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.morphismRestrict_appTop, AlgebraicGeometry.Scheme.ofRestrict_app.",
+   "date": "2026-10-21",
+   "verdict": "Scheme restriction constructions, not the canonical restriction mate on condensed internal modules. Reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "identityOpenRestriction|identityOpenSectionArrow|identityOpenPullbackComparison",
+   "results": "0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib definition with these names. The exact pro-etale constructions are already published in the two Sheaf modules; reuse them with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"identityOpenRestriction|identityOpenSectionArrow|identityOpenPullbackComparison\" lean/WeilConjectures lean/Sheaf; rg -l \"identityOpenRestriction|identityOpenSectionArrow|identityOpenPullbackComparison\" dag/nodes; python3 tools/blueprint_refs.py search \"identity-open\"; python3 tools/blueprint_refs.py search \"inverse composition comparison\"",
+   "results": "No WeilConjectures or Mathlib hits. Sheaf.Paper.IdentityOpenDerivedRestriction defines identityOpenRestriction at line 53 and identityOpenSectionArrow at line 77; Sheaf.Paper.IdentityOpenDerivedAdjunctionNormalization defines identityOpenPullbackComparison at line 50. The DAG declarations occur in theorem nodes and consumers; a scan of all definition-node lean records found no owner for any of the three. Blueprint searches returned one unrelated node cor-cbc-proper-coincidence for identity-open and zero nodes for inverse composition comparison.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact plain definitions, without changing their source modules; the theorem owners cannot be statement dependencies for these definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-identity-open-underived-square-normalization",
+  "date": "2026-10-21",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (3), parenthesis: restriction to the open X′ on which h′ is the identity; the canonical underived restriction and inverse pullback composition maps used in its normalization.",
+   "via": [
+    "lem-sfb-identity-open-underived-square-normalization",
+    "lem-sfb-base-change-identity-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean": {
+  "module": "Sheaf.Paper.IdentityOpenDerivedRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenRestriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenSectionArrow"
+  ],
+  "statement": "noncomputable def identityOpenRestriction {U Z Z' : Scheme.{u}}\n    (j : U ⟶ Z) (j' : U ⟶ Z') (h : Z' ⟶ Z) (w : j' ≫ h = j) :\n    lowerStar Λ h ⋙ upperStar Λ j ⟶ upperStar Λ j'",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing plain definitions in the unchanged published module, lines 53-60 and 77-91. identityOpenRestriction is directImageOpenRestriction followed by lowerStarId and the right unitor; identityOpenSectionArrow is a pullback.lift packaged as a site morphism. Neither definition chooses data from a theorem. This definition node supplies their ownership without using the stronger identity_open_derived_restriction theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9699a3d12",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9699a3d12",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 89f8904b. Item Lean module byte-identical (math previously verified in full: identity-open IsPullback hyp, primed config, unit/adjunct/tensor-unit clauses, square paths t0∘i'^*θ∘a_{h'}^{-1} = v_U^*(a_h^{-1})∘s with only associators, termwise complex/derived clauses, universes u/u+1, edge cases). Only stmt_deps changed: the two theorem nodes are replaced by new def nodes def-sfb-identity-open-pullback-comparison (existing:true identityOpenPullbackComparison = (upperStarComp i h).symm ≪≫ upperStarCongr, direction i^*h^*≅j^* correct) and def-sfb-identity-open-restriction-arrows (existing:true identityOpenRestriction = directImageOpenRestriction of CommSq j' 𝟙 h j + lowerStarId + unitor; identityOpenSectionArrow = pullback.lift (𝟙 V) (v≫j') under open immersions). Signatures verbatim vs side-live source, plain defs (not .choose), no competing owner, deps acyclic, statement/proof unchanged. Advisory: lowerStarId/upperStarCongr unowned framework decls; H9 import recheck at stage 3; second reading is a self-audit. No compile (no files changed)."
+ }
+}
