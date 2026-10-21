@@ -1,564 +1,377 @@
 {
-  "id": "lem-fix-compact-support-coefficient-change",
-  "blueprint": {
-    "is": "lem-fix-compact-support-coefficient-change",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Change of finite coefficients for compact support",
-  "statement": "Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism in the finite-field datum.\nPut $A=A_{E,n}$, $B=A_{E,m}$, where $1\\leq m\\leq n$.\nFor a bounded constructible complex $K$ of\nfinite Tor amplitude, the\ncanonical coefficient comparison is an isomorphism\n\n$$\n(Rf_!K)\\otimes_A^L B\\ \\xrightarrow{\\sim}\\\nRf_!(K\\otimes_A^L B).\n$$\n\nHere the right side uses $B$-coefficients and\ncompact support; the map\ncomes from the tensor\ncomparison. It is compatible with successive reductions, pullback,\nand the counits defining the projection transformation.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-fix-compact-support-coefficient-change.md",
-    "place": "node lem-fix-compact-support-coefficient-change, order 1824"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-type-morphism",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-proper-morphism",
+ "id": "lem-fix-compact-support-coefficient-change",
+ "blueprint": {
+  "is": "lem-fix-compact-support-coefficient-change",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Change of finite coefficients for compact support",
+ "statement": "Let $f:X\\to Y$ be a\nseparated finite-type\nmorphism in the finite-field datum.\nPut $A=A_{E,n}$, $B=A_{E,m}$, where $1\\leq m\\leq n$.\nFor a bounded constructible complex $K$ of\nfinite Tor amplitude, the\ncanonical coefficient comparison is an isomorphism\n\n$$\n(Rf_!K)\\otimes_A^L B\\ \\xrightarrow{\\sim}\\\nRf_!(K\\otimes_A^L B).\n$$\n\nHere the right side uses $B$-coefficients and\ncompact support; the map\ncomes from the tensor\ncomparison. It is compatible with successive reductions, pullback,\nand the counits defining the projection transformation.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-fix-compact-support-coefficient-change.md",
+  "place": "node lem-fix-compact-support-coefficient-change, order 1824"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-type-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proper-morphism",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exchange-projection",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Fix $c=(j,p)$, so $Rf_!^R=Rp_*^Rj_!^R$ for $R=A,B$. Put $S_T=-\\otimes_A^LB$. Lemma [lem-fix-reduction-open-etale-origin] gives bounded etale witnesses for $K,j_!^AK,S_XK,j_!^BS_XK$ and for the underlying tensor of $j_!^AK$ with B.",
+   "uses": [
     "def-compact-support-direct-image-detailed",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-exchange-projection",
-    "lem-pur-derived-change-of-rings"
-  ],
-  "proof": [
-    {
-      "text": "Write $S_T^{A,B}=-\\otimes^L_{A_T}B_T:D(T_{\\mathrm{proet}},A)\\to D(T_{\\mathrm{proet}},B)$ and $U_T^{A,B}$ for scalar restriction. These are different coefficient categories. By [lem-pur-derived-change-of-rings], $S_T^{A,B}$ is computed by $P\\otimes_A B$ for a K-flat resolution $P$ with flat terms, which exists by [lem-pc-kflat-resolution]. By [lem-pur-change-of-rings-tensor-comparison], forgetting this representative is the same total tensor complex that computes $M\\otimes_A^L B_T$ in $D(A_T)$. The canonical derived adjunction at the identity ringed-topos map $h_T:(T,B_T)\\to(T,A_T)$ in [lem-weil-pbc-ringed-projection-mate-exact] gives $S_T^{A,B}\\dashv U_T^{A,B}$. Scalar restriction is exact and reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. For a scheme map $u:T\\to V$, the identified constant-coefficient inverse images give a canonical comparison $\\lambda_u:u_B^{-1}S_V^{A,B}\\xrightarrow{\\sim}S_T^{A,B}u_A^{-1}$. On a K-flat representative it sends the inverse image of $x\\otimes b$ to $u^{-1}x\\otimes b$. Pullback preserves these K-flat models by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus this is a comparison in the B-module category and is compatible with coefficient multiplication, not just an underlying-A identification.",
-      "uses": [
-        "lem-pur-derived-change-of-rings",
-        "lem-pc-kflat-resolution",
-        "lem-pur-change-of-rings-tensor-comparison",
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "lem-weil-pbc-ring-sheaf-change-adjunction",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); coefficient identity-topos specialization"
-      }
-    },
-    {
-      "text": "Choose the compactification $c=(j,p)$ used in [def-compact-support-direct-image-detailed], so $Rf_!^A=Rp_*^A j_!^A$. By [lem-sf-proetale-constructible-origin], choose $K_e\\in D^b_c(X_{\\mathrm{et}},A)$ and $\\nu_X^*K_e\\cong K$. Extension by zero is exact and left adjoint to restriction by [lem-cbc-proetale-extension-zero]; etale extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact]. Its comparison with the etale functor is [lem-cbc-proetale-extension-zero-comparison], extended termwise to complexes. In particular $E=j_!^A K$ is the bounded etale-origin object $\\nu_{\\bar X}^*E_e$, $E_e=j_!^{\\mathrm{et}}K_e$. If K has Tor interval $[a,b]$, its tensor with the degree-zero sheaf $B_X$ has cohomology only in $[a,b]$, directly by [def-weil-finite-tor-amplitude]. The open tensor isomorphism [lem-cbc-extension-zero-projection-formula] gives $E\\otimes_A^L B_{\\bar X}\\cong j_!^A(K\\otimes_A^L B_X)$, so this object too is bounded. By the monoidal comparison in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], it equals $\\nu_{\\bar X}^*(E_e\\otimes_A^L B_{\\bar X,\\mathrm{et}})$. The exact comparison on sheaves has an isomorphic unit by [prop-weil-pbc-site-comparison-finite-level], hence reflects zero sheaves. It follows that $E_e\\otimes_A^L B_{\\bar X,\\mathrm{et}}$ is bounded as well. These checks supply the bounded-below inputs needed for the site comparisons below; no assertion that B is perfect over A is used. The same K-flat calculation, with the comparison morphism $\\nu_T$ in place of a scheme morphism, gives an isomorphism $\\nu_{T,B}^*(K_e\\otimes_A^L B)\\cong S_T^{A,B}(\\nu_{T,A}^*K_e)$ in D(B). The comparison is exact and reflects zero cohomology sheaves also for the finite ring B. Thus $K_e\\otimes_A^L B$ is bounded, and this displayed B-linear isomorphism supplies an etale-origin witness for $S_X^{A,B}K$, not merely for its restriction to A. Applying the exact open functors supplies the witness for $j_!^B S_X^{A,B}K$ as well.",
-      "uses": [
-        "def-compact-support-direct-image-detailed",
-        "lem-sf-proetale-constructible-origin",
-        "lem-cbc-proetale-extension-zero",
-        "lem-cbc-proetale-extension-zero-comparison",
-        "lem-weil-pbc-extension-by-zero-exact",
-        "def-weil-finite-tor-amplitude",
-        "lem-cbc-extension-zero-projection-formula",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); finite-coefficient etale-origin and comparison statements as cited"
-      }
-    },
-    {
-      "text": "For every scheme map $u:T\\to V$ define the B-linear comparison $\\chi_{u,M}:S_V^{A,B}Ru_*^A M\\to Ru_*^B S_T^{A,B}M$ to be the mate of $\\lambda_u$ under the canonical derived adjunctions. Explicitly its transpose is\n$$u_B^{-1}S_V^{A,B}Ru_*^A M\\xrightarrow{\\lambda_u}S_T^{A,B}u_A^{-1}Ru_*^A M\\xrightarrow{S_T^{A,B}\\varepsilon^A_{u,M}}S_T^{A,B}M.$$\nThis is exactly the mate construction of [def-weil-pbc-adjunction-mate]. Under the canonical scalar-restriction/direct-image identification of [lem-weil-pbc-ring-sheaf-change-adjunction], its restriction is the A-linear projection arrow $\\pi_{u,M,B_V}:Ru_*^AM\\otimes_A^LB_V\\to Ru_*^A(M\\otimes_A^LB_T)$. Indeed, transpose after scalar restriction using that node's adjunct formula: the transpose is $(\\varepsilon^A_{u,M}\\otimes1)t_u$, precisely the definition in [lem-weil-pbc-ringed-projection-mate-exact]. The comparison of step 1 identifies the tensor representatives, so the two transposes, and hence their adjuncts in D(A), coincide. This identifies the underlying map of an already constructed B-arrow; it does not try to lift an arbitrary A-arrow to D(B).",
-      "uses": [
-        "def-weil-pbc-adjunction-mate",
-        "lem-weil-pbc-ring-sheaf-change-adjunction",
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); explicit transpose calculation"
-      }
-    },
-    {
-      "text": "The proper map p is quasi-compact and quasi-separated, as required by the comparison theorem. In fact proper includes finite type and a closed diagonal by [def-weil-proper-morphism]; finite type includes quasi-compactness by [def-weil-finite-type-morphism]. By [def-weil-closed-immersion], the preimage of any affine under its diagonal is an affine spectrum of a quotient ring, which is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Thus the diagonal is quasi-compact, which is quasi-separatedness by [def-weil-quasi-separated-morphism].",
-      "uses": [
-        "def-weil-proper-morphism",
-        "def-weil-finite-type-morphism",
-        "def-weil-closed-immersion",
-        "lem-weil-pbc-affine-scheme-qcqs",
-        "def-weil-quasi-separated-morphism"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-fix-compact-support-coefficient-change.md",
-        "place": "Proof, compactification; elementary verification of the qcqs hypotheses for its proper factor"
-      }
-    },
-    {
-      "text": "Apply [lem-etale-proper-projection-formula-finite] to p, the finite commutative ring A, $M=E_e$, and $N=B_{Y,\\mathrm{et}}$. It makes the actual etale projection arrow an isomorphism; that theorem allows arbitrary unbounded N and does not require N to be perfect. The comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] applies to both $E_e$ and $E_e\\otimes_A^L B_{\\bar X,\\mathrm{et}}$ by steps 2 and 4, and says that the named direct-image comparison is an invertible counit mate. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the ringed square with vertical maps $p_{\\mathrm{et}},p_{\\mathrm{proet}}$ and horizontal maps $\\nu_Y,\\nu_{\\bar X}$, taking $Q=B_{Y,\\mathrm{et}}$. Together with the canonical monoidal comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], its equality identifies the pullback of that etale projection arrow with $\\pi_{p,E,B_Y}$, through these two invertible direct-image comparisons. Thus $\\pi_{p,E,B_Y}$ is an isomorphism on the pro-etale site. Step 3 identifies it with the restriction of $\\chi_{p,E}$, and [lem-weil-pbc-ring-sheaf-change-adjunction] reflects isomorphisms, so $\\chi_{p,E}$ is an isomorphism in D(B). No conservativity assertion for geometric stalks of arbitrary pro-etale complexes is needed.",
-      "uses": [
-        "lem-etale-proper-projection-formula-finite",
-        "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-ring-sheaf-change-adjunction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F0G (lemma-projection-formula-proper-mod-n); site transport uses proetale.tex Tag 099R and sites-cohomology.tex Tag 0E48 (remark-compatible-with-diagram)"
-      }
-    },
-    {
-      "text": "There is a canonical B-linear isomorphism $\\beta_j:S_{\\bar X}^{A,B}j_!^A\\xrightarrow{\\sim}j_!^B S_X^{A,B}$. To fix its normalization, use the two adjunctions $S\\dashv U$ of step 1 and $j_!\\dashv j^{-1}$ of [lem-cbc-proetale-extension-zero]. The right adjoints of the two displayed left adjoints are respectively $j_A^{-1}U_{\\bar X}^{A,B}$ and $U_X^{A,B}j_B^{-1}$, identified by restriction of the same underlying module sheaf. Transposing this identity defines beta; the inverse is obtained by transposing the inverse identity, and the triangle identities show their products are identities. For an explicit normalization put $\\delta_j=\\beta_j^{-1}:j_!^B S_X^{A,B}\\to S_{\\bar X}^{A,B}j_!^A$. Its transpose under $j_!^B\\dashv j_B^{-1}$ is\n$$S_X^{A,B}K\\xrightarrow{S_X^{A,B}(\\eta^A_{j,K})}S_X^{A,B}j_A^{-1}j_!^AK\\xrightarrow{\\lambda_{j,j_!^AK}^{-1}}j_B^{-1}S_{\\bar X}^{A,B}j_!^AK.$$\nAfter restriction to A this is the unit tensored with B. It is consequently the transpose of the inverse of the open tensor comparison of [lem-cbc-extension-zero-projection-formula]. Hence the restriction of beta, in the displayed forward direction, is that open tensor comparison. Form\n$$\\chi_f^c(K)=(Rp_*^B\\beta_{j,K})\\circ\\chi_{p,j_!^AK}:S_Y^{A,B}Rf_!^AK\\longrightarrow Rf_!^BS_X^{A,B}K.$$\nBoth factors are isomorphisms. After restriction of scalars, identify its target by [lem-sf-compact-support-restriction-of-scalars]. Step 3 and the normalization of beta identify this arrow with the compactified tensor comparison of [def-exchange-projection], in the compactification fixed by [def-compact-support-direct-image-detailed]. Hence it is the stated coefficient comparison, with its actual B-module structure.",
-      "uses": [
-        "lem-cbc-proetale-extension-zero",
-        "lem-cbc-extension-zero-projection-formula",
-        "lem-sf-compact-support-restriction-of-scalars",
-        "def-exchange-projection",
-        "def-compact-support-direct-image-detailed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tags 0GL5 (lemma-projection-formula-Rf-lower-shriek), 0GL6 (remark-Rf-lower-shriek-change-of-rings); explicit B-linear construction"
-      }
-    },
-    {
-      "text": "For a further quotient $B\\to C=A_{E,r}$, $1\\le r\\le m$, use a K-flat A-model P for each input. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $P\\otimes_A B$ is K-flat over B, so successive scalar extension is computed by $(P\\otimes_A B)\\otimes_B C\\cong P\\otimes_A C$. The identification sends $(x\\otimes b)\\otimes c$ to $x\\otimes\\bar b c$ and is associative for a third quotient. The comparisons lambda of step 1 agree under it. Apply the pasting-along-G,H formula of [lem-weil-pbc-mate-pasting] with $G=S_V^{A,B}$ and then $S_V^{B,C}$ and corresponding H on the source site. The mate of the composite lambda is consequently\n$$\\chi_u^{A,C}=\\chi_u^{B,C}\\circ S_V^{B,C}(\\chi_u^{A,B}),$$\nwith the first factor evaluated at $S_T^{A,B}M$ and the canonical scalar-associativity identifications understood. For beta_j the same assertion follows by transposing the composite identity $j^{-1}U^{A,B}U^{B,C}=U^{A,B}U^{B,C}j^{-1}$; uniqueness of adjoints makes this the beta for A to C. Substituting these two equations in the formula of step 6 proves the successive-reduction identity for chi_f, including the identity for m=n. The restriction comparisons used at the endpoints are transitive by [lem-sf-compact-support-restriction-of-scalars]. These are identities in D(C), not conclusions inferred from faithfulness of derived scalar restriction.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-mate-pasting",
-        "lem-sf-compact-support-restriction-of-scalars"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 0D6D (lemma-derived-pullback-composition), 0E46 and 0E47 (composition of base-change mates); scalar tensor calculation and mate pasting"
-      }
-    },
-    {
-      "text": "For a cartesian base-change square $(f,f',g,g')$ with arbitrary $g$ in the datum, use $c=(j,p)$ and its base change $c'=(j',p')$. Write $\\bar g':\\bar X'\\to\\bar X$ for the proper-square projection. Define $\\operatorname{Ex}_!^D$ for $D=A,B$ by the proper exchange of [def-weil-pbc-ambient-ringed-exchange] on $j_!^D K$, followed by $Rp'_*{}^D$ of the open isomorphism of [lem-cbc-proetale-extension-zero-base-change]. These factors allow arbitrary $g$. On the separated finite-type $g$ domain of [def-exchange-projection], substitution gives exactly its proper/open formula; no separatedness condition on $g$ is imposed here.",
-      "uses": [
-        "def-weil-pbc-ambient-ringed-exchange",
-        "lem-cbc-proetale-extension-zero-base-change",
-        "def-exchange-projection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0E46/0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); pro-etale open base change and its unit transpose as in the cited blueprint node lem-cbc-proetale-extension-zero-base-change, proof"
-      }
-    },
-    {
-      "text": "Apply [lem-fix-direct-image-scalar-exchange] to the proper square $(p,p',g,\\bar g')$ with $M=j_!^AK$. Its $\\lambda$ and $\\chi$ are precisely those fixed in steps 1 and 3. It identifies the two routes obtained by applying scalar extension before or after the proper geometric exchange, with target identified by $Rp'_*{}^B\\lambda_{\\bar g',M}$. This equality holds in $D(B)$ for arbitrary $g$ and does not require the coefficient quotient to be flat.",
-      "uses": [
-        "lem-fix-direct-image-scalar-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0E46/0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); pro-etale open base change and its unit transpose as in the cited blueprint node lem-cbc-proetale-extension-zero-base-change, proof"
-      }
-    },
-    {
-      "text": "Apply [lem-fix-open-scalar-exchange] to $(j,j',\\bar g',g')$ and K. Its inverse-adjunct normalization of $\\beta_j$ is the displayed $\\delta_j$ formula of step 6. Consequently the two open routes commute with exactly the $\\beta_j,\\beta_{j'}$ and pro-etale open exchanges used here, after inserting $\\lambda_{g'}$ and $\\lambda_{\\bar g'}$. This is the equality of B-linear maps, with the inverse of the open exchange normalized by its unit; it is not an equality inferred after scalar restriction.",
-      "uses": [
-        "lem-fix-open-scalar-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0E46/0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); pro-etale open base change and its unit transpose as in the cited blueprint node lem-cbc-proetale-extension-zero-base-change, proof"
-      }
-    },
-    {
-      "text": "Substitute the formula $\\chi_f^c=(Rp_*^B\\beta_j)\\circ\\chi_{p,j_!^A(-)}$ of step 6 into the two compact-support routes. Apply the proper equality of the preceding steps; naturality of that exchange moves $\\beta_j$ through it. Apply the open equality inside $Rp'_*{}^B$ and regroup compositions. With $g_B^{-1}S_Y\\cong S_{Y'}g_A^{-1}$ and $g_B'{}^{-1}S_X\\cong S_{X'}g_A'{}^{-1}$ inserted, this gives\n$$\\operatorname{Ex}_!^B\\,g^{-1}(\\chi_f^{A,B})=\\chi_{f'}^{A,B}\\,S_{Y'}^{A,B}(\\operatorname{Ex}_!^A).$$\nOnly functoriality and naturality are used in this concatenation of the two established squares.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0E46/0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); pro-etale open base change and its unit transpose as in the cited blueprint node lem-cbc-proetale-extension-zero-base-change, proof"
-      }
-    },
-    {
-      "text": "It remains to identify these ambient exchanges with the geometric exchanges on the witnessed domain. For the proper square use [lem-weil-pbc-transport-identifies-exchange], which identifies the actual ambient pro-etale exchange with the transported etale unit--square--counit mate through the specified counit-mate comparisons. Its vertical qcqs hypotheses hold for $p,p'$: they are the proper factors of $c,c'$, so the argument of step 4 applies to both. Its etale input is $j_!^{\\mathrm{et}}K_e$, bounded by step 2. For the B-coefficient route use the bounded etale witness for $j_!^BS_XK$ supplied there. For the open square [lem-fix-site-open-exchange] identifies the actual open pro-etale map with the transported etale map, including the unit normalization. These are precisely the proper and open factors defining [def-cbc-exchange-map]; composing the two commuting comparison squares identifies their compact-support composite with the ambient composite above. Thus [thm-cbc-finite-level-proetale] applies on both witnessed inputs and supplies the geometric-exchange isomorphisms. The preceding equality is therefore compatibility with the geometric pullback exchange specified in the item.",
-      "uses": [
-        "lem-weil-pbc-transport-identifies-exchange",
-        "lem-fix-site-open-exchange",
-        "def-cbc-exchange-map",
-        "thm-cbc-finite-level-proetale"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A7 (remark-base-change), 0E46/0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); pro-etale open base change and its unit transpose as in the cited blueprint node lem-cbc-proetale-extension-zero-base-change, proof"
-      }
-    },
-    {
-      "text": "Finally, the defining transpose of chi_p in step 3 gives the counit equation\n$$\\varepsilon^B_{p,S_{\\bar X}M}\\circ p_B^{-1}(\\chi_{p,M})=S_{\\bar X}(\\varepsilon^A_{p,M})\\circ\\lambda_{p,Rp_*^AM}.$$\nFor arbitrary $Q\\in D(Y_{\\mathrm{proet}},A)$, as allowed by the current finite-level ambient definition [def-exchange-projection], apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square whose vertical maps are $p_A,p_B$ and whose horizontal maps are the coefficient ringed-topos maps $h_Y,h_{\\bar X}$ of step 1. Inserting its canonical tensor identifications gives the equality in D(B)\n$$\\chi_{p,M\\otimes_A^Lp_A^{-1}Q}\\circ S_Y(\\pi^A_{p,M,Q})=\\pi^B_{p,S_{\\bar X}M,S_YQ}\\circ(\\chi_{p,M}\\otimes_B^L1).$$\nThis is precisely coefficient compatibility of the proper projection transformation, and identifies its defining counit rather than merely its endpoints. For the open piece, beta_j is normalized by the identity of right adjoints. Its transpose carries the unit of $j_!\\dashv j^{-1}$ to that same unit after S, and tensoring this unit with Q gives the open projection comparison on either route; the equality is just $(x\\otimes q)\\otimes b\\mapsto(x\\otimes b)\\otimes(q\\otimes1)$ with the balanced tensor identifications, computed on the K-flat models of step 1. Composing the proper equation with this open equation and using the definition of the compactified projection transformation in [def-exchange-projection] proves the asserted compatibility for compact support. Thus every compatibility is established for the B-linear arrow constructed in step 6; no flatness of A to B, finite projective resolution of B, or faithfulness of the derived restriction functor has been assumed.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "def-exchange-projection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram), 0GL1 (lemma-j-shriek-and-tensor); counit equation and open-unit calculation"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-compact-support-direct-image-detailed",
-    "lem-sf-proetale-constructible-origin",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "def-weil-finite-tor-amplitude",
-    "lem-cbc-extension-zero-projection-formula",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-adjunction-mate",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-weil-quasi-separated-morphism",
-    "lem-etale-proper-projection-formula-finite",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-fix-reduction-open-etale-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
+  },
+  {
+   "text": "Use the B-linear mates chi and beta of [lem-fix-proetale-scalar-mate-normalization] and [lem-fix-open-scalar-tensor-normalization]. By [lem-fix-proper-etale-origin-scalar-isomorphism], $\\chi_{p,j_!^AK}$ is invertible. Hence $q_f=(Rp_*^B\\beta_j)\\chi_{p,j_!^AK}$ is invertible. Their normalization and [lem-sf-compact-support-restriction-of-scalars] identify its restriction with exactly the compactified tensor map of [def-exchange-projection].",
+   "uses": [
+    "lem-fix-proetale-scalar-mate-normalization",
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-fix-proper-etale-origin-scalar-isomorphism",
     "lem-sf-compact-support-restriction-of-scalars",
-    "def-exchange-projection",
-    "lem-weil-pbc-mate-pasting",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
+  },
+  {
+   "text": "For $A\\to B\\to C$, substitute the proper-mate cocycle [lem-pur-ringed-coefficient-projection-cocycle] and the beta cocycle [lem-fix-open-scalar-tensor-normalization] in this formula for $q_f$. Naturality moves beta past chi; the resulting composite is $q_f^{A,C}$ under balanced associativity. Both cited cocycles include identity reductions.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-fix-open-scalar-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
+  },
+  {
+   "text": "For arbitrary base change g, with $c'=(j',p')$ the base change of $c$, define $\\operatorname{Ex}_!^R$ ($R=A,B$) as the ambient proper exchange [def-weil-pbc-ambient-ringed-exchange] on $j_!^RK$ followed by $Rp'_*{}^R$ of the open base-change isomorphism [lem-cbc-proetale-extension-zero-base-change]; for separated finite-type g this is the formula of [def-exchange-projection]. The proper square [lem-fix-direct-image-scalar-exchange] and open square [lem-fix-open-scalar-exchange] apply to these same chi and beta. Substitute $q_f=Rp_*^B(\\beta_j)\\chi_p$; naturality moves beta through the proper exchange, then the open square inside $Rp'_*{}^B$ gives $\\operatorname{Ex}_!^B g^{-1}q_f=q_{f'}S(\\operatorname{Ex}_!^A)$, with the canonical lambda identifications.",
+   "uses": [
     "def-weil-pbc-ambient-ringed-exchange",
     "lem-cbc-proetale-extension-zero-base-change",
+    "def-exchange-projection",
     "lem-fix-direct-image-scalar-exchange",
-    "lem-fix-open-scalar-exchange",
+    "lem-fix-open-scalar-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
+  },
+  {
+   "text": "These are the geometric exchanges: proper factors are qcqs by [pqf-lem-proper-basic]. On the bounded witnesses of step 1, [lem-weil-pbc-transport-identifies-exchange] identifies the proper factor, and [lem-fix-site-open-exchange] the open factor, with their transported etale maps. Composing their squares gives exactly [def-cbc-exchange-map]; [thm-cbc-finite-level-proetale] identifies this composite with the geometric pullback exchange for both A and B.",
+   "uses": [
+    "pqf-lem-proper-basic",
     "lem-weil-pbc-transport-identifies-exchange",
     "lem-fix-site-open-exchange",
     "def-cbc-exchange-map",
     "thm-cbc-finite-level-proetale"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0GL5 and 0GL6; expanded B-linear mates and coherence from sites-cohomology.tex Tags 0B56, 0E48, 0D6D and the cited DAG statements"
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "lowerShriek|compactSupport.*[Cc]oefficient|[Cc]oefficient.*compactSupport",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\", \"tensor\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived compact support pushforward commutes with extension of finite coefficient rings for constructible complexes of finite Tor amplitude",
-      "results": "8 hits: HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.quasiIsoAt_extendMap_iff, HasCompactSupport.tsupport_extend_zero, HomologicalComplex.instQuasiIsoExtendMap, HomologicalComplex.map_isStrictlySupported, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, DerivedCategory.isGE_Q_obj_iff",
-      "date": "2026-10-16",
-      "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
-    },
-    {
-      "tool": "leansearch",
-      "query": "etale cohomology with compact support commutes with derived change of coefficient rings",
-      "results": "8 hits: RingHom.Etale.propertyIsLocal, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.respectsIso, RingHom.Etale, RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange",
-      "date": "2026-10-16",
-      "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Projection formula for proper morphisms of etale topoi with torsion coefficients and arbitrary derived tensor coefficient module",
-      "results": "8 hits: SheafOfModules.Presentation.map_π_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition",
-      "date": "2026-10-16",
-      "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
-    },
-    {
-      "tool": "grep",
-      "query": "projectionFormula|projectionMap|changeOfRings",
-      "results": "0 hits under Mathlib/CategoryTheory: ",
-      "date": "2026-10-16",
-      "verdict": "No match in Mathlib/CategoryTheory; no declaration returned."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived direct image with proper support commutes with scalar extension along a ring homomorphism",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardComp, PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforward_map_val, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_assoc",
-      "date": "2026-10-16",
-      "verdict": "No match. Returned declarations concern underived module-sheaf pushforward and its composition or adjunction; none states derived compact-support scalar extension or its three coherences."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"pushforward\", \"tensor\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "No match; Loogle returned no declaration for this pair of names."
-    },
-    {
-      "tool": "grep",
-      "query": "lower.?[Ss]hriek|[Pp]rojection.?[Ff]ormula|[Dd]erived.*[Cc]hange.?[Oo]f.?[Rr]ings",
-      "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "No match. The three grep hits are two Witt-vector projection-formula comments and a manifold-connection comment, with no sheaf-theoretic compact-support statement."
-    },
-    {
-      "tool": "grep",
-      "query": "lower.?[Ss]hriek|[Pp]rojection.?[Ff]ormula|[Dd]erived.*[Cc]hange.?[Oo]f.?[Rr]ings",
-      "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
-      "date": "2026-10-17",
-      "verdict": "No match: the three hits are Witt-vector projection-formula comments and a manifold covariant-derivative comment."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived scalar extension commutes with compact support direct image for torsion etale sheaves",
-      "results": "8 hits: ModuleCat.ExtendScalars.obj', LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.extendRestrictScalarsAdj, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, IsLocalizedModule.mapExtendScalars_apply_apply, AlgHom.extendScalars, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
-      "date": "2026-10-17",
-      "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"pushforward\", \"tensor\"",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "No match: zero hits for the two name fragments."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived extension of scalars along a finite coefficient ring quotient commutes with compactly supported direct image of constructible sheaves",
-      "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CompHausLike.LocallyConstantModule.functor, PresheafOfModules.pushforward₀CompToPresheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardNatIso, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
-      "date": "2026-10-17",
-      "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Projection formula for proper direct image and extension by zero on derived categories of sheaves of modules over torsion rings",
-      "results": "8 hits: SheafOfModules.Presentation.map_π_eq, localCohomology.diagram, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections, SheafOfModules.pushforwardSections_unitHomEquiv, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod",
-      "date": "2026-10-17",
-      "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1824,
-  "blueprint_uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-exchange-projection",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "thm-cbc-finite-level-proetale",
-    "thm-cbc-finite-torsion",
-    "thm-sc-finite-type-torsion-cd"
-  ],
-  "uses_not_cited": [
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-trace-perfectness",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-fix-compact-support-coefficient-change",
-    "worker": "stage1",
-    "summary": "Repair of returned long step 8: statement and Lean record unchanged; retain original route and steps 1-7 and former step 9 verbatim. Replace step 8 by five short steps, extracting three statement-only lemmas for direct-image scalar exchange, open scalar exchange, and open site-comparison exchange. Cite the existing exact transport-identifies-exchange lemma for the fourth hidden argument. Assemble proper and open equalities explicitly, then identify the actual geometric exchange on bounded etale-origin inputs.",
-    "blueprint": "Current main-20261015 coefficient-comparisons proof: compactification and finite-ring proper projection formula realize the isomorphism argument; successive reductions and counits retain original steps; final-paragraph pullback and transport identities are now original step 8 split into five steps, with three extracted lemma obligations and the existing direct-image transport theorem.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-derived-change-of-rings",
-        "why": "Generic derived change of rings along a morphism of sheaves of rings, computed by k-flat resolutions used in steps 1; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic existence of k-flat resolutions on a ringed site used in steps 1; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-pur-change-of-rings-tensor-comparison",
-        "why": "Generic natural comparison of restricted scalar extension and sheaf tensor used in steps 1; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-projection-mate-exact",
-        "why": "Generic exactness data for the ringed-topos projection mate used in steps 1, 3; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-        "why": "Generic derived adjunctions under compatible changes of ring sheaves used in steps 1, 3, 5; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic derived tensor comparison for arbitrary ringed topoi used in steps 1, 2, 5, 7; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-sf-proetale-constructible-origin",
-        "why": "Generic constructible pro-étale coefficients are of étale origin used in steps 2; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero",
-        "why": "Generic extension by zero on the pro-etale site used in steps 2, 6; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero-comparison",
-        "why": "Generic comparison of extension by zero with the site morphism used in steps 2; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-cbc-extension-zero-projection-formula",
-        "why": "Generic projection formula for extension by zero used in steps 2, 6; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "prop-weil-pbc-site-comparison-finite-level",
-        "why": "Generic exactness and full faithfulness at finite level used in steps 2; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-affine-scheme-qcqs",
-        "why": "Generic affine schemes are quasi-compact and quasi-separated used in steps 4; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-etale-proper-projection-formula-finite",
-        "why": "Generic unbounded proper projection formula with finite coefficients used in steps 5; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "why": "Generic canonical derived direct-image comparison is the invertible counit mate used in steps 5; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "why": "Generic projection-formula coherence for a square of ringed topoi used in steps 5, 13; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-sf-compact-support-restriction-of-scalars",
-        "why": "Generic finite-level compact-support direct image commutes with restriction of scalars used in steps 6, 7; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-weil-pbc-mate-pasting",
-        "why": "Generic mates of pasted squares and of conjugate-whiskered squares used in step 7; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "thm-cbc-finite-level-proetale",
-        "why": "Generic finite-level pro-etale compact-support base change used in step 12; the trace-perfectness unit has no lemma giving this categorical/site tool, and no step of its perfectness argument is replaced."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero-base-change",
-        "why": "The actual pro-etale extension-by-zero base-change isomorphism for arbitrary complexes, used in step 8. The trace-perfectness unit provides no open base-change tool; this replaces an etale-only citation without changing the unit route."
-      },
-      {
-        "node": "lem-weil-pbc-extension-by-zero-exact",
-        "why": "Etale extension by zero is exact, used in step 2 to transport bounded etale-origin complexes; the trace-perfectness unit has no such site-exactness tool."
-      },
-      {
-        "node": "cor-cbc-derived-extension-zero-base-change",
-        "why": "Etale extension-by-zero base change used in step 8 to identify the etale-origin realization of the open square; the trace-perfectness unit has no open base-change tool."
-      },
-      {
-        "node": "lem-weil-pbc-transport-identifies-exchange",
-        "why": "Exact named direct-image exchange transport through etale/pro-etale comparisons, used for proper factors only; the item unit supplies no site-comparison exchange theorem."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-proetale-constructible-origin",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-extension-zero-projection-formula",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-etale-proper-projection-formula-finite",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  {
+   "text": "The counit identity is the one in [lem-fix-proetale-scalar-mate-normalization]. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the coefficient-ring square for p and arbitrary Q. It makes chi preserve the proper projection map. The mixed square [lem-fix-open-scalar-tensor-normalization] does the same for beta and the open projection. Compose these squares in [def-exchange-projection]'s formula to obtain the asserted compact-support projection and counit compatibility.",
+   "uses": [
+    "lem-fix-proetale-scalar-mate-normalization",
     "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "lem-weil-pbc-mate-pasting",
-    "thm-cbc-finite-level-proetale",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-transport-identifies-exchange"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q130-0390245aa",
-    "group": "Q130",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-0390245aa (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item statement still matches the blueprint text verbatim in both master (order 1824) and main-20261015 (order 2170), and this delivery leaves it unchanged. Steps 1-7 and 13 are unchanged and were re-read. The returned step 8 is now steps 8-12. Step 8 defines Ex_! from the ambient ringed exchange plus the pro-etale open isomorphism; for separated g this is def-exchange-projection's formula. The three new unsplit nodes are true and smaller than the item. (1) lem-fix-direct-image-scalar-exchange: scalar extension is pullback along (T,B)->(T,A), so both sides are the base-change map of one composite square (Stacks 0E47, sites-cohomology l.4094). (2) lem-fix-open-scalar-exchange: proved by comparing right adjoints (03S6, etale-cohomology l.11493); its normalization agrees with lem-cbc-finite-open-exchange-scalars. (3) lem-fix-site-open-exchange: its normalization agrees with lem-sf-open-comparison-unit-normalization. For each I checked the endpoints and the cases A=B, identity maps and empty U, with no flatness assumed. I carried out the step 11 concatenation myself; it needs only naturality, so it is rightly elementary. In step 12 the hypotheses of lem-weil-pbc-transport-identifies-exchange hold (p, p' proper hence qcqs; bounded etale witnesses from step 2). Its conjugating maps are those of lem-cbc-global-transport-chart-normalization, so thm-cbc-finite-level-proetale applies. Duplicate search found nothing: the candidates have fixed coefficients, exact scalar restriction or towers, and det-sp-mixed-base-change proves the same identities only inline and only for smooth f. I accept the tool use lem-weil-pbc-transport-identifies-exchange. Minor and harmless: cor-cbc-derived-extension-zero-base-change is a stale tool-use entry, and two new nodes list definitions in stmt_deps they do not cite. Note for the maintainer: the existing det-sp-reduction-direct-image states the item's core isomorphism for any l-primary A->B and could be recorded as a merge candidate. No fixes were needed."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-e6d193a91",
-    "group": "Q31",
-    "result": "fix",
-    "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.EtaleCompactSupportCoefficientChange",
-    "declaration": "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus",
-    "statement": "def compactSupportCoefficientComparisonPlus {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B} {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))} (M : CoefficientTensorModel φ X K) (N : CoefficientTensorModel φ Y ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).obj K)) : N.obj ⟶ (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} B) c).obj M.obj",
-    "file": "lean/Sheaf/Paper/EtaleCompactSupportCoefficientChange.lean",
-    "branch": "newtargets-dag",
-    "by": "Q31",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "The published pro-etale universal tensor interface remains imported unchanged. It did not supply ordinary-etale coefficient maps needed by this item. This module supplies their exact universal B-linear adjuncts, normalized by open-unit and proper direct-image comparisons, plus the bounded tensor and site-origin domain interfaces. The model universal property is the existing Sheaf.IsDerivedBaseChange; no arbitrary comparison maps or hollow choices are introduced.",
-    "declarations": [
-      "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap",
-      "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap_isIso",
-      "AlgebraicGeometry.Etale.coefficientRestrictionOpenPlus",
-      "AlgebraicGeometry.Etale.compactSupportCoefficientRestrictionPlus",
-      "AlgebraicGeometry.Etale.CoefficientTensorModel",
-      "AlgebraicGeometry.Etale.CoefficientTensorModel.map",
-      "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus",
-      "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
-      "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
-      "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
-    ]
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "C-9ce3a",
-    "group": "F8",
-    "result": "pass",
-    "landing": "20261019T002604-L-2156863",
-    "kind": "proof",
-    "note": "independent cc review: delivered EtaleCompactSupportCoefficientChange.lean vs clones/live (only 26 plain imports removed + coefficientRestrictionOpenMap_isIso proved); flagged module ProEtaleSiteComparisonFiniteLevel vs dag/units (realizes a step of sk-prop-pe-comparison-morphism, not the item's unit sk-prop-sf-trace-perfectness whose realized is empty); axioms clean; item + 7 direct importers compiled",
-    "sorry_before": [
-      "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap_isIso",
-      "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
-      "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
-      "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
-      "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
-      "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
-    ]
+    "lem-fix-open-scalar-tensor-normalization",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL5, lemma-projection-formula-Rf-lower-shriek, and 0GL6, remark-Rf-lower-shriek-change-of-rings; assembly through the fixed compactification"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "lem-fix-reduction-open-etale-origin",
+  "lem-fix-proetale-scalar-mate-normalization",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-fix-proper-etale-origin-scalar-isomorphism",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-exchange-projection",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-fix-direct-image-scalar-exchange",
+  "lem-fix-open-scalar-exchange",
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-fix-site-open-exchange",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Repair of original compactification proof using Stacks Tags 0GL1, 0GL5, 0GL6, 0F0G, 0E48 and the existing scalar-mate and site-transport statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport.*[Cc]oefficient|[Cc]oefficient.*compactSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support pushforward commutes with extension of finite coefficient rings for constructible complexes of finite Tor amplitude",
+   "results": "8 hits: HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.quasiIsoAt_extendMap_iff, HasCompactSupport.tsupport_extend_zero, HomologicalComplex.instQuasiIsoExtendMap, HomologicalComplex.map_isStrictlySupported, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-16",
+   "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology with compact support commutes with derived change of coefficient rings",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.respectsIso, RingHom.Etale, RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange",
+   "date": "2026-10-16",
+   "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for proper morphisms of etale topoi with torsion coefficients and arbitrary derived tensor coefficient module",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "No match: the results concern algebraic etaleness, support of extended homological complexes, or condensed-module projectivity; none gives the canonical B-linear derived compact-support coefficient comparison with all its coherences."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|changeOfRings",
+   "results": "0 hits under Mathlib/CategoryTheory: ",
+   "date": "2026-10-16",
+   "verdict": "No match in Mathlib/CategoryTheory; no declaration returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image with proper support commutes with scalar extension along a ring homomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardComp, PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforward_map_val, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_assoc",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned declarations concern underived module-sheaf pushforward and its composition or adjunction; none states derived compact-support scalar extension or its three coherences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match; Loogle returned no declaration for this pair of names."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.?[Ss]hriek|[Pp]rojection.?[Ff]ormula|[Dd]erived.*[Cc]hange.?[Oo]f.?[Rr]ings",
+   "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No match. The three grep hits are two Witt-vector projection-formula comments and a manifold-connection comment, with no sheaf-theoretic compact-support statement."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.?[Ss]hriek|[Pp]rojection.?[Ff]ormula|[Dd]erived.*[Cc]hange.?[Oo]f.?[Rr]ings",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
+   "date": "2026-10-17",
+   "verdict": "No match: the three hits are Witt-vector projection-formula comments and a manifold covariant-derivative comment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with compact support direct image for torsion etale sheaves",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.extendRestrictScalarsAdj, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, IsLocalizedModule.mapExtendScalars_apply_apply, AlgHom.extendScalars, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the two name fragments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a finite coefficient ring quotient commutes with compactly supported direct image of constructible sheaves",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CompHausLike.LocallyConstantModule.functor, PresheafOfModules.pushforward₀CompToPresheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardNatIso, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for proper direct image and extension by zero on derived categories of sheaves of modules over torsion rings",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, localCohomology.diagram, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections, SheafOfModules.pushforwardSections_unitHomEquiv, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "No match: hits concern underived scalar extension or sheaf pushforward, condensed module categories, or unrelated algebra; none states the compact-support derived coefficient comparison with these compatibility clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1824,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-cbc-finite-level-proetale",
+  "thm-cbc-finite-torsion",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-compact-support-coefficient-change",
+  "worker": "stage1",
+  "summary": "Repair of the human 2026-10-21 return and its explicit route note: preserve the item statement and Lean metadata, retain the six-step compactification assembly, and deliver four strictly smaller new statement-only unsplit nodes for scalar-mate normalization, bounded etale-origin reductions, proper scalar invertibility, and open scalar/tensor coherence. Previously supplied helper proofs are retained only in the sandbox handoff archive; their later splitting is separate stage-1 work.",
+  "blueprint": "Current main-20261015 proof paragraphs 1-2: fixed compactification and tensor comparison; finite-Tor boundedness and final etale/pro-etale transport; final associativity and counit compatibility sentence. Returned steps 1-7 and 13 are factored; old 8-12 use existing exchange nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic tool used for Coefficient projection cocycle for ordinary derived ringed diagrams. It supplies the explicitly cited assertion; the trace-perfectness unit contains no substitute for this site/category-theoretic or proper-morphism tool, and its proof route is unchanged."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic tool used for Basic consequences of properness. It supplies the explicitly cited assertion; the trace-perfectness unit contains no substitute for this site/category-theoretic or proper-morphism tool, and its proof route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-proetale-constructible-origin",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-projection-formula",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-pbc-mate-pasting",
+  "thm-cbc-finite-level-proetale",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "pqf-lem-proper-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N0-7320f8ba5",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-7320f8ba5 (reviewer sub-agent of L); spot-checked: Read the 2026-10-21 re-split note (≥4 statement-only nodes, ≤3000 chars). Compared every base (live Q130) step with the delivery; the statement, stmt_deps and Lean record are unchanged. The old arguments map as follows. Steps 1+3: node proetale-scalar-mate-normalization. Step 2: node reduction-open-etale-origin. Steps 4+5: node proper-etale-origin-scalar-isomorphism (Stacks 0F0G holds for any E,K over a torsion ring) plus pqf-lem-proper-basic. Step 6 and the open parts of 7 and 13: node open-scalar-tensor-normalization (0GL1; its β agrees with lem-fix-open-scalar-exchange and lem-sf-open-tensor-normalization). Step 7 χ: lem-pur-ringed-coefficient-projection-cocycle, whose χ is defined identically. Steps 8-12: the existing lem-fix-* exchange nodes, transport-identifies-exchange and thm-cbc-finite-level-proetale. Step 13: ringed-exchange-tensor-coherence, which applies to the coefficient square with no cartesianness needed. All four nodes are true, not duplicates and of comparable size; I tested A=B, j=id, p=id and the nonflat case Z/ℓ²→Z/ℓ. The item is a 2.4k-char assembly. No new node reaches the item, nothing is orphaned and the item is not on the dropped list. FIX 1 (C3): step 4 had dropped base step 8's definition of Ex_! (def-weil-pbc-ambient-ringed-exchange, lem-cbc-proetale-extension-zero-base-change, and agreement with def-exchange-projection for separated g); I restored it. FIX 2 (B3): added the notions the new statements used without citing them: lem-weil-pbc-ring-sheaf-change-adjunction (U Ru_*^B ≅ Ru_*^A U) in nodes 1 and 3; the D^b_c defs and def-weil-pbc-etale-origin-witness in node 2; def-kun-projection-formula-map, the tensor-pullback node and lem-weil-pbc-comparison-direct-image-canonical-mate in node 3. Accepted tool uses: lem-pur-ringed-coefficient-projection-cocycle and pqf-lem-proper-basic. Maintainer notes: det-sp-reduction-direct-image is a merge candidate; the node-level tool_uses list is stale.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6d193a91",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCompactSupportCoefficientChange",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus",
+  "statement": "def compactSupportCoefficientComparisonPlus {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B} {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))} (M : CoefficientTensorModel φ X K) (N : CoefficientTensorModel φ Y ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).obj K)) : N.obj ⟶ (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} B) c).obj M.obj",
+  "file": "lean/Sheaf/Paper/EtaleCompactSupportCoefficientChange.lean",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The published pro-etale universal tensor interface remains imported unchanged. It did not supply ordinary-etale coefficient maps needed by this item. This module supplies their exact universal B-linear adjuncts, normalized by open-unit and proper direct-image comparisons, plus the bounded tensor and site-origin domain interfaces. The model universal property is the existing Sheaf.IsDerivedBaseChange; no arbitrary comparison maps or hollow choices are introduced.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap",
+   "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap_isIso",
+   "AlgebraicGeometry.Etale.coefficientRestrictionOpenPlus",
+   "AlgebraicGeometry.Etale.compactSupportCoefficientRestrictionPlus",
+   "AlgebraicGeometry.Etale.CoefficientTensorModel",
+   "AlgebraicGeometry.Etale.CoefficientTensorModel.map",
+   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus",
+   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
+   "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-9ce3a",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261019T002604-L-2156863",
+  "kind": "proof",
+  "note": "independent cc review: delivered EtaleCompactSupportCoefficientChange.lean vs clones/live (only 26 plain imports removed + coefficientRestrictionOpenMap_isIso proved); flagged module ProEtaleSiteComparisonFiniteLevel vs dag/units (realizes a step of sk-prop-pe-comparison-morphism, not the item's unit sk-prop-sf-trace-perfectness whose realized is empty); axioms clean; item + 7 direct importers compiled",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.coefficientRestrictionOpenMap_isIso",
+   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
+   "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Etale.compactSupportCoefficientComparisonPlus_isIso",
+   "AlgebraicGeometry.Etale.nonempty_coefficientTensorModel_of_finiteTor",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.origin_of_etale_finiteTor"
+  ]
+ }
 }
