@@ -24,136 +24,71 @@
  ],
  "proof": [
   {
-   "text": "Write $\\alpha:B\\xrightarrow{\\sim}\\widehat B$ for the canonical ring-sheaf identification of [det-prop-sfb-qlbar-colimit-x-integral-limit]. If $b_n:B\\to R_n$ is the coefficient reduction and $\\pi_n:\\widehat B\\to R_n$ the limit projection, then $b_n=\\pi_n\\alpha$: the canonical comparison to the inverse limit is precisely the map with these reduction components. Relabel a $B$-module $M$ as a $\\widehat B$-module $\\widehat M$ by $a\\cdot m=\\alpha^{-1}(a)m$. Relabelling back uses $\\alpha$; both composites are the identity on actions, underlying sheaves, and morphisms. Kernels and cokernels therefore have the same underlying sheaves and induced actions. Applied termwise this exact equivalence preserves cohomology, quasi-isomorphisms, shifts and cone matrices, hence induces the coefficient identification on the derived categories of [def-weil-abstract-derived-category]. For the finite coefficient presentations used in this comparison, [lem-sf-finite-discrete-normalized-encoding] supplies the normalized section-action encodings: its conclusion is that Encoding A T is nonempty. This existence theorem is used in the proof; the statement takes the encoding data as supplied.",
+   "text": "Obtain normalized ordinary integral and finite restriction squares from lem-pe-integral-normalized-restriction-squares. This is coefficient data only; no completeness is used.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "def-weil-abstract-derived-category",
-    "lem-sf-finite-discrete-normalized-encoding"
+    "lem-pe-integral-normalized-restriction-squares"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), isomorphism-of-ring-sheaves specialization; elementary relabelling argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a complex representing $K$ and a quasi-isomorphism $q:P\\to K$ with $P$ K-flat and termwise flat, by [lem-pc-kflat-resolution]. The relabelled complex $\\widehat P$ is K-flat over $\\widehat B$. Indeed, if $F$ is an acyclic $\\widehat B$-complex, relabel it back to $F_B$; this remains acyclic, and the identity on local pure tensors identifies $F\\otimes_{\\widehat B}\\widehat P$ with the relabelling of $F_B\\otimes_BP$, including every direct-sum total degree and differential. The latter is acyclic by the test in [def-pc-kflat-complex]. This tensor identification follows from the balancing relations of [def-pur-sheaf-tensor-product], since $a=\\alpha(b)$ ranges over all local sections of $\\widehat B$. Thus $\\widehat q:\\widehat P\\to\\widehat K$ is a K-flat resolution over the completed coefficients.",
+   "text": "Localize the restriction squares. The inverse mate between the actual internal and completed scalar adjunctions is invertible because both encoding functors are equivalences. Postcompose its unit equation by the inverse restriction square to obtain UnitCompatible. To prove uniqueness, transpose any other component under the completed scalar adjunction and cancel that restriction square. This is the private generic mateComparison_existsUnique, specialized by finiteComparison_existsUnique.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "def-pur-sheaf-tensor-product"
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YN (definition-K-flat); identification along a ring isomorphism written out"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-pur-derived-change-of-rings], $P\\otimes_BR_n$ computes $K\\otimes_B^{\\mathbf L}R_n$. By [def-weil-integral-derived-reduction], the completed-coefficient reduction is computed by $\\widehat P\\otimes_{\\widehat B}R_n$. Define $\\theta_n:\\widehat P\\otimes_{\\widehat B}R_n\\to P\\otimes_BR_n$ by $p\\otimes r\\mapsto p\\otimes r$. It is balanced because the relation $\\alpha(b)p\\otimes r=p\\otimes\\pi_n(\\alpha(b))r$ on the left is exactly $bp\\otimes r=p\\otimes b_n(b)r$ on the right, using step 1. The reverse formula is its inverse. Both commute with restrictions and differentials, so they sheafify and define inverse chain maps of $R_n$-complexes [def-pur-sheaf-tensor-product]. These give the claimed derived isomorphisms. They are canonical: the same formula is defined for every complex of $B$-modules and is natural in all chain maps, so it is a natural isomorphism between termwise change of rings along $b_n$ and relabelling followed by termwise change of rings along $\\pi_n$; by the universal property of the left derived functors of clause (2) of [lem-pur-derived-change-of-rings] (relabelling being an exact equivalence by step 1) it induces the unique isomorphism of derived reductions restricting to $\\theta_n$ on every K-flat resolution, so the canonical comparisons between two resolutions commute with $\\theta_n$. Here the construction formula of the integral-reduction definition is used for arbitrary $\\ell$; its additional global convention $\\ell\\ne p$ is required only to invoke that global terminology in step 8.",
+   "text": "Apply lem-pe-integral-reduction-transition-comparison to these unit-normalized comparisons. It supplies the quotient transition equation, completing integral_completion_reduction_comparisons.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-integral-derived-reduction",
-    "def-pur-sheaf-tensor-product"
+    "lem-pe-integral-reduction-transition-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change); explicit balanced-tensor maps"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\rho_n:R_{n+1}\\to R_n$ be reduction. On the common representatives define $\\tau_n=\\mathrm{id}_P\\otimes\\rho_n$ and $\\gamma_n(p)=p\\otimes1$, and use the same formulas for $\\widehat P$. Then $\\theta_n\\widehat\\tau_n(p\\otimes r)=p\\otimes\\rho_n(r)=\\tau_n\\theta_{n+1}(p\\otimes r)$, and $\\theta_n\\widehat\\gamma_n(p)=p\\otimes1=\\gamma_n(p)$. These identities hold as sheaf morphisms by [def-pur-sheaf-tensor-product]. Also $\\tau_n\\gamma_{n+1}=\\gamma_n$ strictly. After localization and composition with $[q]^{-1}$ they identify all quotient transitions and maps from $K$, not just the individual reduction objects. Restrict all $R_n$-actions along $b_n$ (or $\\pi_n$ after relabelling), so the entire tower lies in the one ambient derived category. This restriction keeps the underlying complexes and maps; its kernels and cokernels are the underlying ones with restricted action.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 06YY, naturality of the tensor calculation; explicit transition and unit formulas"
-   }
-  },
-  {
-   "text": "Put $V=\\prod_{n\\ge1}(P\\otimes_BR_n)$ termwise and $s$ with $\\mathrm{pr}_ns=\\tau_n\\mathrm{pr}_{n+1}$. Countable products of $B$-module sheaves are exact by [lem-weil-proetale-countable-products-exact], for every scheme $X$ and this ring sheaf $B$. Clause (2) of [lem-weil-derived-limit-existence] therefore identifies $[V]$ with the product of the derived reductions. Form $L=\\operatorname{Cone}(1-s)[-1]$. The cone triangulated structure of [def-weil-abstract-derived-category] and rotation give a distinguished triangle $[L]\\xrightarrow{j}[V]\\xrightarrow{1-s}[V]\\xrightarrow{\\delta}[L][1]$, a Roos triangle in [def-weil-derived-limit]. In fiber coordinates one may take $L^i=V^i\\oplus V^{i-1}$ and $d_L(x,y)=(d_Vx,(1-s)x-d_Vy)$, with $j(x,y)=x$. Let $\\gamma=(\\gamma_n)_n:P\\to V$. Since $(1-s)\\gamma=0$, the formula $\\eta(p)=(\\gamma(p),0)$ is a chain map: $d_L\\eta(p)=(\\gamma(d_Pp),0)$. These are strict tower and cone representatives, not a choice of a lift specified only in the triangulated category.",
+   "text": "Exact countable products of module sheaves give CountableAB4Star, using componentwise epimorphisms and the product comparison for a discrete diagram. The derived countable-product theorem then gives products in the completed scalar derived category. Transport their existence back through A.derived. Unpack canonical completeness into a K-flat representative P, a representative isomorphism e and invertibility of the localized strict augmentation. The declared AdicCompletion.roos_isDerivedLimit supplies its distinguished triangle and the exact equation saying completionMap followed by the first arrow is the product of tensor units.",
    "uses": [
     "lem-weil-proetale-countable-products-exact",
     "lem-weil-derived-limit-existence",
-    "def-weil-abstract-derived-category",
-    "def-weil-derived-limit"
+    "sk-def-pe-derived-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08TC (definition-derived-limit); Tag 0941 (lemma-derived-limit-is-ok); cone and exact-product model"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-strict-roos-comparison] to the strict tower $P\\otimes_BR_n$ and its strictly compatible maps $\\gamma_n$. Its hypotheses hold: use a small site skeleton in the module universe, the ring sheaf $B$, and the exact countable products established in step 5. Its strict-augmentation clause identifies $[\\eta]:[P]\\to[L]$, followed by the specified comparison $[L]\\cong R\\lim_n(P\\otimes_BR_n)$, with the canonical derived map induced by these reductions. Thus $u=[\\eta][q]^{-1}:K\\to[L]$ is the canonical completion map expressed in the Roos model. The ambient category of [sk-def-pe-derived-completion] is that of internal $B$-module objects with the coequalizer relative tensor; the sheaf tensor is sheafified objectwise tensor [det-def-sfb-sheaf-tensor-structure, sk-def-sfb-sheaf-tensor], so [lem-pe-internal-section-tensor-comparison] applies: its equivalence keeps underlying sheaves and maps, identifies the relative tensor with the balanced tensor on local pure tensors and preserves K-flatness, hence carries $P\\otimes_BR_n$, $\\gamma_n$, $\\tau_n$ and $u$ to that node's reductions, units, transitions and canonical map. Its completeness hypothesis therefore makes $u$ an isomorphism. Moreover $ju=[\\gamma][q]^{-1}$ has precisely the components $c_n=[\\gamma_n][q]^{-1}$ from step 4. This uses the stated augmentation compatibility, rather than mere uniqueness of a derived-limit object.",
-   "uses": [
-    "lem-weil-strict-roos-comparison",
-    "sk-def-pe-derived-completion",
-    "det-def-sfb-sheaf-tensor-structure",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-pe-internal-section-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), strict-augmentation refinement; blueprint sk-def-pe-derived-completion, completeness display"
-   }
-  },
-  {
-   "text": "Set $c=ju:K\\to[V]$ and $\\delta_K=(u[1])^{-1}\\delta:[V]\\to K[1]$. The triple $(u,\\mathrm{id}_{[V]},\\mathrm{id}_{[V]})$ is an isomorphism from $(K,[V],[V],c,1-s,\\delta_K)$ to the Roos triangle in step 5: the first square says $ju=c$, the second is the identity, and the last says $u[1]\\delta_K=\\delta$. By (TR1) in [def-weil-triangulated-category], this triangle is distinguished. Relabel its coefficients using step 1; since the underlying shifts and cone triangles are unchanged, it is distinguished over $\\widehat B$ as well. Step 4 identifies its first map with the product of the actual completed-coefficient reduction maps from $\\widehat K$. This is the asserted Roos triangle [def-weil-derived-limit].",
+   "text": "Use e inverse followed by the invertible strict augmentation as the vertex isomorphism K ≅ Q(roos P). Transport the triangle along this vertex isomorphism and identity product isomorphisms. Its first map is exactly the product of the internal units by the equation in the preceding step, and its third map is delta followed by the shifted inverse vertex isomorphism.",
    "uses": [
     "def-weil-triangulated-category",
     "def-weil-derived-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 0145, TR1 closure under isomorphisms of triangles; Tag 08TC, defining Roos triangle"
-   }
+   "elementary": true
   },
   {
-   "text": "In the global coefficient setting $\\ell\\ne p$, [def-weil-integral-reduction-tower] defines the maps $c_n$ and $t_n$ by exactly $[\\gamma_n][q]^{-1}$ and $[\\tau_n]$, after restriction of scalars. The resolution-comparison assertions of [lem-weil-integral-reduction-tower-well-defined] ensure that these agree with that definition for any chosen K-flat resolution. Finally [def-weil-derived-complete] requires a distinguished triangle with first map $c=(c_n)_n$ and middle map $1-s$ for precisely this tower. The triangle in step 7 supplies it. No step has used Noetherianity, a finite stratification, a bound on $P$, or a bound on the cohomology of $K$.",
+   "text": "The exact equivalence A.derived preserves countable products, shifts and distinguished triangles. The product comparison followed by the product of the inverse restricted finite comparisons identifies the two product objects. Projectionwise the unit comparison identifies the first arrow, and the transition comparison identifies 1 minus shift. The transported triangle therefore has exactly the first and middle maps of IsSfDerivedComplete. Finally sfDerivedComplete_iff_legacy gives each requested global legacy completeness assertion for l != D.p.",
    "uses": [
-    "def-weil-integral-reduction-tower",
-    "lem-weil-integral-reduction-tower-well-defined",
-    "def-weil-derived-complete"
+    "lem-pe-integral-reduction-transition-comparison",
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-    "place": "Tag 08TC; Bhatt–Scholze, Definition 3.5.2, as realized by the cited fixed-map completed-coefficient definition"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-integral-derived-reduction",
+  "lem-pe-integral-normalized-restriction-squares",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pe-integral-reduction-transition-comparison",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
-  "def-weil-derived-limit",
-  "lem-weil-strict-roos-comparison",
   "sk-def-pe-derived-completion",
   "def-weil-triangulated-category",
-  "def-weil-integral-reduction-tower",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "def-weil-derived-complete",
-  "det-def-sfb-sheaf-tensor-structure",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-sf-finite-discrete-normalized-encoding"
+  "def-weil-derived-limit",
+  "lem-sf-derived-complete-legacy-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-  "place": "Tags 06YS, 06YN, 06YT, 06YY, 0941, 08TC and 0145; explicit coefficient relabelling and augmented Roos triangle comparison, supplied by Q16"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Coefficient steps 1 and 4 are isolated as separate lemmas; normalized inverse mates, exact product transport and fixed-first-map Roos triangle transport are proved directly in Lean, reusing the declared internal Roos comparison and the proved legacy comparison."
  },
  "mathlib_searches": [
   {
@@ -298,13 +233,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-pe-internal-section-tensor-comparison"
+  "lem-weil-derived-limit-existence"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -344,5 +274,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Re-delivery of 2a6d22f2 H2 RETURN. Lean byte-identical (sha 6890d3f5/9c7ecd3a); item statement/proof/proof_deps equal live; stmt_deps now cites new def node def-pe-finite-discrete-presentation-encoding (existing:true on unchanged Sheaf.Paper.FiniteDiscreteOrdinaryEncoding, 11 decls covering Encoding/.ordinary/.ordinary_functor/.ordinaryDerived used by the item; statement verbatim; check_existing clean) instead of theorem lem-sf-finite-discrete-normalized-encoding, which is now proof_deps only. New node statement matches the structure fields; its stmt_deps are existing def nodes; no cycle. Clauses re-read: ringIso pinned by SquareNormalized, unit-unique FiniteComparison, transition equation, IsDerivedComplete => IsSfDerivedComplete with fixed first map, global l != p form; edge cases n>=1, K=0, empty X, unbounded K. Not dropped, not landed elsewhere. No recompile (unchanged Lean; prior clean compile and delivery dry run OK). Advisory: upperStarFromPoint and continuousCoefficientRingObj owners not in the new node's stmt_deps, cited via sk-def-sfb nodes as in the landed owner theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T171836-L-3157810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

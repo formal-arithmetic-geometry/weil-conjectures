@@ -1,0 +1,140 @@
+{
+ "id": "lem-pe-integral-normalized-restriction-squares",
+ "kind": "statement",
+ "title": "Normalized finite restriction squares for the integral coefficient presentation",
+ "statement": "Let l be prime, E/Q_l finite and X any scheme. Use the integral Encoding of [def-pe-integral-presentation-encoding] and normalized finite continuous-to-constant encodings of [def-pe-finite-discrete-presentation-encoding]. At each index n the exponent is n+1, and internal quotient and scalar restriction functors are those of [def-weil-integral-derived-reduction] and [def-weil-integral-reduction-tower]. There exist an integral encoding A, encodings e_n for every positive finite quotient, and natural isomorphisms comap(q_n) followed by A.modules.functor ≅ e_n.ordinary.functor followed by completed scalar restriction. On each internal finite-coefficient module their underlying abelian sheaf maps are the identity section-action maps, expressed by the recorded equalities A.functor_eq and e_n.ordinary_functor. This is an ordinary coefficient result, with no derived comparison, transition equation, completeness, boundedness, constructibility or Noetherian hypothesis. The prime, coefficient extension and small site use [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-proetale-site]; module sheaves and their derived categories use [def-weil-sheaf-of-modules-category] and [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, isomorphism-of-coefficients specialization; parent proof steps 1 and 2."
+ },
+ "stmt_deps": [
+  "def-pe-integral-presentation-encoding",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "The integral-limit theorem gives the projection-normalized monoidal isomorphism from the pulled-back continuous integer ring to the inverse limit of constant positive quotient rings. Reconstruct commutative section rings, preserving its additive maps, units and products. Its nth projection is the original continuous quotient q_n.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized finite-discrete encoding at each quotient: the quotient is finite and discrete. Its canonical map from constant sections is the finite component of the integral comparison. Thus, if alpha is the integral ring comparison and c_n the finite ring comparison, section(q_n) equals alpha followed by the completion projection followed by c_n. This equality can be tested after the monoidal point adjunction on every continuous function, where it is the same quotient function.",
+   "uses": [
+    "lem-sf-finite-discrete-normalized-encoding",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the concrete section-module equivalence with restriction along alpha inverse. Restriction along alpha is its inverse; addition is unchanged. The ring square of the preceding step says that the two restricted scalar actions on every finite module agree. Identity on the underlying abelian sheaf therefore gives a module isomorphism natural in the module, whose underlying map is exactly the displayed equation. At n=0 the quotient exponent is 1, and for the zero ring or empty site the same identity maps satisfy all axioms.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pe-integral-presentation-encoding",
+    "def-pe-finite-discrete-presentation-encoding"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-pe-integral-presentation-encoding",
+  "def-pe-finite-discrete-presentation-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "The final coefficient-presentation comparison is expanded by the parent plan; the normalized component calculations here are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring sheaf isomorphism from an integral coefficient inverse limit commutes with scalar restriction to each finite quotient",
+   "results": "{\"t\": \"2026-10-21T15:12:33Z\", \"tool\": \"leansearch\", \"query\": \"A ring sheaf isomorphism from an integral coefficient inverse limit commutes with scalar restriction to each finite quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.limitPresheafOfModules_map\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"RestrictScalars\", \"PresheafOfModules.restrictScalars\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"RestrictScalars.ringEquiv\"], \"digest\": \"3ad3d0f841a443ea\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact result: the returned ordinary restriction, scalar extension and quotient linear equivalences omit the normalized pro-etale coefficient squares and their unbounded derived transition equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized isomorphism of ring sheaves commutes with restriction of scalars along finite quotient projections",
+   "results": "8 hits: Scheme.Hom normalization diagrams and their component identities; no sheaf coefficient scalar reconstruction result.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; algebraic normalization of schemes is unrelated to normalized coefficient isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Iso\"",
+   "results": "12 hits, including ModuleCat.restrictScalarsIsoOfEquiv, restrictScalarsEquivalenceOfRingEquiv_unitIso/counitIso, and instReflectsIsomorphismsRestrictScalars.",
+   "date": "2026-10-21",
+   "verdict": "Useful ordinary-module fragments; none identifies the pro-etale integral-limit projections or the specified unbounded derived quotient transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|mapDerivedCategoryNatIso|restrictScalars",
+   "results": "Mathlib hits include ordinary restriction of scalars and algebra restriction lemmas. Local focused reads: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean. Library search found sectionModuleComapIso and normalized adjunction compositor tools, but no theorem of normalized integral squares or their quotient transition equation. blueprint_refs searches integral completion, restriction scalars, integral reduction: zero imported blueprint matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem. The two results are the separate coefficient steps 1 and 4 of the existing proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralCompletionPresentation",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final comparison of integral coefficient presentations; Tag 06YY, isomorphism-of-coefficients specialization; parent proof steps 1 and 2.",
+   "via": [
+    "lem-pe-integral-completion-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralNormalizedRestrictionSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_completion_normalized_squares",
+  "statement": "theorem integral_completion_normalized_squares :\n    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n    ∃ (A : Encoding l E X) (e : ∀ n : ℕ,\n      FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing l E (n + 1)) X)\n      (a : ∀ n : ℕ,\n      Mod.comap (AdicCompletion.quotient l E X n) ⋙ A.modules.functor ≅\n        (e n).ordinary.functor ⋙ scalarReductionRestriction.{u, u} l E X n),\n      ∀ (n : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (AdicCompletion.finiteRing l E X n)),\n      (SheafOfModules.toSheaf (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).map\n          ((a n).hom.app M) =\n        (SheafOfModules.toSheaf\n          (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).map\n            (eqToIso (congrArg (fun F ↦ F.obj\n              ((Mod.comap (AdicCompletion.quotient l E X n)).obj M)) A.functor_eq)).hom ≫\n          (SheafOfModules.toSheaf (integralCoefficientSheaf.{u, u} l E X n)).map\n            (eqToIso (congrArg (fun F ↦ F.obj M) (e n).ordinary_functor)).inv",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T171836-L-3157810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T171836-L-3157810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

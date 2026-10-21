@@ -1,0 +1,155 @@
+{
+ "id": "lem-pe-integral-reduction-transition-comparison",
+ "kind": "statement",
+ "title": "Quotient transitions under normalized integral coefficient comparison",
+ "statement": "Let l be prime, E/Q_l finite and X any scheme, with integral encoding A [def-pe-integral-presentation-encoding], finite encodings e_n [def-pe-finite-discrete-presentation-encoding], and identity-on-abelian-sections ordinary restriction squares a_n. Let b_n be finite derived comparison isomorphisms between A.derived followed by completed scalar extension and the internal derived reduction followed by e_n.ordinaryDerived [def-weil-integral-derived-reduction]. Assume their restricted comparisons c_n carry the specified completed tensor units to the images under A.derived of the internal derived adjunction units. Then sfDerivedReductionTransition_n followed by c_n equals c_(n+1) followed by A.derived of integralStep_n. The transitions and units are exactly those of [def-weil-integral-reduction-tower] and [sk-def-pe-derived-completion]. The statement asserts only this transition equation, for arbitrary derived K, including unbounded and zero complexes. The prime, coefficient extension and small site use [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-proetale-site]; module sheaves and their derived categories use [def-weil-sheaf-of-modules-category] and [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and tensor balancing; parent proof step 4, with the representative normalization of step 3."
+ },
+ "stmt_deps": [
+  "def-pe-integral-presentation-encoding",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-reduction-tower",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "The inverse mate of each localized restriction square is an isomorphism because the horizontal functors are equivalences. Injectivity of the derived tensor/restriction Hom bijection shows that the unit equation uniquely fixes its components. Hence the supplied b_n is this normalized inverse mate.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take an internal K-flat representative. The section reconstruction and relabelling along a ring isomorphism preserve K-flatness: apply the tensor comparison to every acyclic test complex and its image under the inverse equivalence. The normalized restriction square makes the balancing relation on the two finite tensor constructions identical, so the localized inverse mate is the comparison sending s tensor x to s tensor x.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The consecutive quotient chain map on both representatives sends s tensor x to rho(s) tensor x. This is finite-linear since the quotient projections compose. Its transpose is the smaller tensor unit, since rho(1)=1. The defining internal scalar adjunction, its canonical compositor, and the representative characterization of sfDerivedReductionTransition identify these chain maps with precisely the displayed transitions. Tensor generation and sheafification give equality before localization. Counit invertibility on K-flat representatives and naturality transport the equality to every derived K. The calculation also applies at n=0 and on the empty site.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product",
+  "sk-def-pe-derived-completion",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "The final coefficient-presentation comparison is expanded by the parent plan; the normalized component calculations here are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars comparisons under an equivalence commute with consecutive quotient transition maps",
+   "results": "{\"t\": \"2026-10-21T15:12:33Z\", \"tool\": \"leansearch\", \"query\": \"Derived extension of scalars comparisons under an equivalence commute with consecutive quotient transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"Equiv.smul\", \"Ideal.Quotient.algEquivOfEqMap\", \"AlgEquiv.restrictScalars\", \"QuotSMulTop.congr\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\"], \"digest\": \"9c86677ef9edf9bc\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact result: the returned ordinary restriction, scalar extension and quotient linear equivalences omit the normalized pro-etale coefficient squares and their unbounded derived transition equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence identifies the quotient reduction tensor products, their units and their consecutive quotient transition maps",
+   "results": "{\"t\": \"2026-10-21T14:42:58Z\", \"tool\": \"leanfinder\", \"query\": \"An exact equivalence identifies the quotient reduction tensor products, their units and their consecutive quotient transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mk\", \"QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"rTensor.inverse_apply\", \"Ideal.pi_mkQ_rTensor\", \"TensorProduct.quotTensorEquivQuotSMul\"], \"digest\": \"04a130f562391f6c\"}",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module quotient-tensor identities only; none compares the two specified sheaf-derived reduction transitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized isomorphism of ring sheaves commutes with restriction of scalars along finite quotient projections",
+   "results": "8 hits: Scheme.Hom normalization diagrams and their component identities; no sheaf coefficient scalar reconstruction result.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; algebraic normalization of schemes is unrelated to normalized coefficient isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Iso\"",
+   "results": "12 hits, including ModuleCat.restrictScalarsIsoOfEquiv, restrictScalarsEquivalenceOfRingEquiv_unitIso/counitIso, and instReflectsIsomorphismsRestrictScalars.",
+   "date": "2026-10-21",
+   "verdict": "Useful ordinary-module fragments; none identifies the pro-etale integral-limit projections or the specified unbounded derived quotient transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|mapDerivedCategoryNatIso|restrictScalars",
+   "results": "Mathlib hits include ordinary restriction of scalars and algebra restriction lemmas. Local focused reads: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean. Library search found sectionModuleComapIso and normalized adjunction compositor tools, but no theorem of normalized integral squares or their quotient transition equation. blueprint_refs searches integral completion, restriction scalars, integral reduction: zero imported blueprint matches.",
+   "date": "2026-10-21",
+   "verdict": "No exact theorem. The two results are the separate coefficient steps 1 and 4 of the existing proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralCompletionPresentation",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final comparison of integral coefficient presentations; Tag 06YY and tensor balancing; parent proof step 4, with the representative normalization of step 3.",
+   "via": [
+    "lem-pe-integral-completion-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralReductionTransitionComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralReductionTransitionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_completion_transition_comparison",
+  "statement": "theorem integral_completion_transition_comparison (A : Encoding l E X) :\n    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n    ∀ (e : ∀ n : ℕ,\n      FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing l E (n + 1)) X)\n      (a : ∀ n : ℕ,\n      Mod.comap (AdicCompletion.quotient l E X n) ⋙ A.modules.functor ≅\n        (e n).ordinary.functor ⋙ scalarReductionRestriction.{u, u} l E X n),\n    let r (n : ℕ) :\n        AdicCompletion.restrict l E X n ⋙ A.derived.functor ≅\n          (e n).ordinaryDerived.functor ⋙ scalarReductionDerivedRestriction.{u, u} l E X n :=\n      letI := HasDerivedCategory.standard\n        (FiniteDiscreteOrdinary.Ordinary (Padic.coefficientExtensionRing l E (n + 1)) X)\n      letI := scalarReductionRestrictionLimits.{u, u} l E X n\n      letI := scalarReductionRestrictionColimits.{u, u} l E X n\n      (Functor.mapDerivedCategoryCompIso\n        (Mod.comap (AdicCompletion.quotient l E X n)) A.modules.functor).symm ≪≫\n        Functor.mapDerivedCategoryNatIso (a n) ≪≫\n        Functor.mapDerivedCategoryCompIso (e n).ordinary.functor\n          (scalarReductionRestriction.{u, u} l E X n)\n    let c (b : ∀ n : ℕ,\n      A.derived.functor ⋙ scalarReductionDerivedExtension.{u, u} l E X n ≅\n        AdicCompletion.derivedReduction l E X n ⋙ (e n).ordinaryDerived.functor)\n        (n : ℕ) (K : DerivedCategory (AdicCompletion.Modules l E X)) :\n        (sfDerivedReductionRestricted l E X n).obj (A.derived.functor.obj K) ≅\n          A.derived.functor.obj (AdicCompletion.integralLevel l E X K n) :=\n      (scalarReductionDerivedRestriction.{u, u} l E X n).mapIso ((b n).app K) ≪≫\n        ((r n).app ((AdicCompletion.derivedReduction l E X n).obj K)).symm\n    (∀ (n : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (AdicCompletion.finiteRing l E X n)),\n      (SheafOfModules.toSheaf (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).map\n          ((a n).hom.app M) =\n        (SheafOfModules.toSheaf\n          (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)).map\n            (eqToIso (congrArg (fun F ↦ F.obj\n              ((Mod.comap (AdicCompletion.quotient l E X n)).obj M)) A.functor_eq)).hom ≫\n          (SheafOfModules.toSheaf (integralCoefficientSheaf.{u, u} l E X n)).map\n            (eqToIso (congrArg (fun F ↦ F.obj M) (e n).ordinary_functor)).inv) →\n    ∀ (b : ∀ n : ℕ,\n      A.derived.functor ⋙ scalarReductionDerivedExtension.{u, u} l E X n ≅\n        AdicCompletion.derivedReduction l E X n ⋙ (e n).ordinaryDerived.functor),\n      (∀ (n : ℕ) (K : DerivedCategory (AdicCompletion.Modules l E X)),\n        (sfDerivedReductionUnit l E X n).app (A.derived.functor.obj K) ≫\n          (c b n K).hom = A.derived.functor.map\n            ((Mod.derivedExtendMapDerivedCategoryAdjunction\n              (AdicCompletion.quotient l E X n)).unit.app K)) →\n      ∀ (K : DerivedCategory (AdicCompletion.Modules l E X)) (n : ℕ),\n        (sfDerivedReductionTransition l E X n).app (A.derived.functor.obj K) ≫\n            (c b n K).hom = (c b (n + 1) K).hom ≫\n          A.derived.functor.map (AdicCompletion.integralStep l E X K n)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T171836-L-3157810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T171836-L-3157810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
