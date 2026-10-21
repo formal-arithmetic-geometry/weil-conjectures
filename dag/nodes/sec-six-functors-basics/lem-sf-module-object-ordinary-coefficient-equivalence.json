@@ -25,14 +25,15 @@
  ],
  "proof": [
   {
-   "text": "The finite-discrete point and scheme comparisons give canonical $c_T:A_T\\cong p_T^*\\underline A$. Compose section-action with restriction along $c_T$ to obtain $E_T$. The internal tensor and ring-isomorphism transport lemmas make both factors additive exact. The arbitrary-site constant-ring equivalence identifies ordinary ring-module sheaves with fixed-$A$ module-valued sheaves.",
+   "text": "The finite-discrete point and scheme comparisons give the canonical scalar-normalized ring isomorphism $c_T:A_T\\cong p_T^*\\underline A$. Compose section-action with restriction along $c_T$ to obtain $E_T$; the internal tensor and ring-isomorphism transport statements make it additive exact. The constant-ring equivalence gives $C_TE_T$ with fixed-$A$ coefficients.",
    "uses": [
     "lem-weil-pbc-finite-discrete-condensed-ring-constant",
     "lem-weil-pbc-finite-discrete-scheme-ring-constant",
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "lem-pe-internal-section-tensor-comparison",
     "lem-sfb-ring-isomorphism-tensor-transport",
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+    "lem-cbc-constant-ring-module-sheaves"
    ],
    "elementary": false,
    "source": {
@@ -41,11 +42,12 @@
    }
   },
   {
-   "text": "Descend $E_T$ and its inverse termwise using the exact-functor theorem; their termwise units and counits descend too. The internal tensor comparison followed by ring-isomorphism tensor transport identifies K-flat resolutions and their total tensors, hence gives the coherent relative derived tensor comparison. Exactness gives $H^nD(E_T)=E_TH^n$. Every degree-zero tensor test corresponds under the equivalence, so each Tor-interval vanishing test agrees.",
+   "text": "Descend $E_T$ and its inverse termwise; their units and counits descend. Compose the internal tensor and ring-isomorphism comparisons, and then the constant-scalar tensor comparison, on corresponding K-flat resolutions. This gives both coherent unbounded derived tensor comparisons. Exactness identifies cohomology; essential surjectivity on degree-zero sheaves matches every tensor test, preserving and reflecting each Tor interval.",
    "uses": [
     "lem-sf-exact-functor-derived-triangulated",
     "lem-pe-internal-section-tensor-comparison",
     "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-sfb-constant-scalar-restriction-tensor",
     "def-weil-proetale-tor-amplitude",
     "sk-def-sfb-derived-tensor-hom"
    ],
@@ -56,16 +58,16 @@
    }
   },
   {
-   "text": "For $h:U\\to T$, transpose the coefficient-sections equation to $c_Ub_h=\\alpha_hh^{-1}c_T$, where $b_h:h^{-1}A_T\\cong A_U$. In the flat ringed diagram take $R_T=A_T$, $S_T=(p_T^*\\underline A)_{sec}$, $a_T=c_T$, and the terminal diagram index; ring isomorphisms give flatness. Its ordinary comparisons, composed with the internal operation comparison, give the pullback and pushforward squares for $E$. The open comparison in the internal-operation theorem then identifies the supplied $j_!$ by adjunction uniqueness. Finally pass to fixed-$A$ coefficients by the constant-ring equivalence $e$ of step 1: $e$ keeps underlying additive sheaves, and the pushforward of [def-sfb-finite-lower-star] and the restriction $j^*$ of [def-sfb-finite-extension-by-zero-adjunction] are computed on underlying sheaves, with $A$ acting through the constant unit, which commutes with the adjoint ring maps $A_T\\to h_*A_U$. So the same squares hold for the fixed-$A$ $h_*$ and $j^*$, and adjunction uniqueness identifies the fixed-$A$ $j_!$ of [def-sfb-finite-extension-by-zero].",
+   "text": "Transpose coefficient-sections compatibility to $c_Ub_h=\\alpha_hh^{-1}c_T$. Apply the flat-ringed ordinary comparison with $R=A_T$, $S=(p_T^*\\underline A)_{sec}$, $a=c$ and terminal index; ring isomorphisms give flatness. Compose with internal operation transport; restriction along $c$ carries its $j_{!,\\rm sec}$ to a left adjoint $j_{!,R}$ of $j^*_R$. The constant-scalar geometric-adjunction lemma, with $b=b_h$, then gives the fixed-$A$ pullback/direct-image squares and the open-extension comparison, retaining units and counits. Its fixed-$A$ direct image is the pushforward of [def-sfb-finite-lower-star] (both are $G\\mapsto G(-\\times_TU)$ on underlying sheaves), and its supplied $j_{!,B}$ is the extension by zero of [def-sfb-finite-extension-by-zero], left adjoint to the restriction $j^*$ by [def-sfb-finite-extension-by-zero-adjunction].",
    "uses": [
     "lem-weil-pbc-finite-discrete-coefficient-sections",
-    "lem-sfb-internal-module-operations-transport",
     "def-weil-pbc-flat-ringed-diagram-input",
     "lem-weil-pbc-flat-restriction-ordinary-comparisons",
-    "def-sfb-finite-extension-by-zero-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-constant-scalar-geometric-adjunctions",
+    "def-sfb-finite-lower-star",
     "def-sfb-finite-extension-by-zero",
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
-    "def-sfb-finite-lower-star"
+    "def-sfb-finite-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -74,13 +76,12 @@
    }
   },
   {
-   "text": "Finite local models are cokernels of finite scalar matrices. $E_U$ preserves the regular module, scalar entries and cokernels; it therefore sends the model of $P$ to $P_U$ (constant presheaves compute this cokernel objectwise, and sheafification is left adjoint). The inverse does the same. Steps 2-3 give the same covers, strata and bounds. Finite $A$ makes finitely presented modules finite; a finite module has a finite free presentation because its kernel is finite.",
+   "text": "Apply the scalar-normalized constant-model lemma to $C_TE_T$: its regular-module comparison fixes each scalar, and step 3 supplies its localized comparisons. Thus the same covers and constructible strata give the same local models, also affine-locally on arbitrary schemes. Over finite $A$, a finite module has a finite free surjection with finite kernel, and a finitely presented module is finite. Cohomology and Tor comparison from step 2 now identify the bounded constructible finite-Tor classes.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "def-sfb-finitely-presented-module",
-    "def-weil-pbc-sheafification"
+    "lem-sfb-scalar-normalized-constant-models",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
     "place": "Step 8, coefficient identification and exact derived equivalence between internal module objects and ordinary constant-ring sheaves."
@@ -98,7 +99,7 @@
    }
   },
   {
-   "text": "Apply the exact-equivalence derived-squares theorem to the fixed-$A$ squares of step 3 and the module pullback/pushforward derived pairs (internal [sk-def-sfb-module-derived-pushpull], fixed-$A$ [sk-def-sfb-derived-categories]); its right square gives $D(E_Y)Rp_*\\cong Rp_*D(E_{\\bar X})$. Compose with the termwise exact open-extension comparison to get $D(E_Y)Rp_*D(j_!)\\cong Rp_*j_!D(E_X)$. These are the specified composites for the same fixed compactification.",
+   "text": "Apply the exact-equivalence derived-squares theorem to step 3 and the supplied unbounded pullback/pushforward derived pairs. Its right square gives $D(C_YE_Y)Rp_*\\cong Rp_*D(C_{\\bar X}E_{\\bar X})$. Compose with the exact termwise open-extension comparison. The two specified compactification definitions identify the resulting functors with $Rp_*D(j_!)$ and $Rp_*j_!$ for the same $(j,p)$.",
    "uses": [
     "lem-derived-exact-equivalence-squares",
     "sk-def-sfb-module-derived-pushpull",
@@ -122,19 +123,21 @@
   "lem-pe-internal-section-tensor-comparison",
   "lem-sfb-ring-isomorphism-tensor-transport",
   "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-cbc-constant-ring-module-sheaves",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-constant-scalar-restriction-tensor",
   "def-weil-proetale-tor-amplitude",
   "sk-def-sfb-derived-tensor-hom",
   "lem-weil-pbc-finite-discrete-coefficient-sections",
-  "lem-sfb-internal-module-operations-transport",
   "def-weil-pbc-flat-ringed-diagram-input",
   "lem-weil-pbc-flat-restriction-ordinary-comparisons",
-  "def-sfb-finite-extension-by-zero-adjunction",
-  "def-sfb-finite-extension-by-zero",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
   "def-sfb-finite-lower-star",
+  "def-sfb-finite-extension-by-zero",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "lem-sfb-scalar-normalized-constant-models",
   "sk-def-sfb-constructible",
-  "def-sfb-finitely-presented-module",
-  "def-weil-pbc-sheafification",
   "sk-def-localizing-closure",
   "lem-derived-exact-equivalence-squares",
   "sk-def-sfb-module-derived-pushpull",
@@ -147,7 +150,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-  "place": "Finer assembly of coefficient identification used in parent DAG step 8: existing internal tensor/operation, flat ringed diagram and exact-equivalence derived-square lemmas, plus a ring-isomorphism tensor-transport lemma. Its complete proof in words is supplied in the delivery report.",
+  "place": "Agent-written short assembly of the unchanged coefficient bridge, re-split by Q74; the three new statement-only tasks and their complete retained arguments are identified in report.md. Existing internal/ring-isomorphism and derived-square tasks are reused.",
   "note": "The literal blueprint proof has four paragraphs, not a numbered step 8. This is the unchanged auxiliary coefficient route of the parent DAG split. No statement or Lean change."
  },
  "mathlib_searches": [
@@ -245,8 +248,8 @@
   "date": "2026-10-21",
   "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
   "worker": "stage1",
-  "summary": "Human-requested finer split: unchanged statement; six short assembly steps and one new generic ring-isomorphism tensor/K-flat transport lemma. Reused existing internal tensor/operation comparisons, flat ringed diagram comparisons and compatible derived squares under exact equivalences instead of creating duplicates. The new node follows the required unsplit schema; its complete separate proof in words, under 3000 characters, is in report.md. No Lean writes or compiles.",
-  "blueprint": "Same coefficient-identification auxiliary argument in parent DAG step 8; the blueprint unit and chapter routes are unchanged. Original steps 5-6, 8, 11-12 are factored through smaller generic lemmas; original steps 9-10 are the elementary presentation/intersection assembly.",
+  "summary": "Human-requested re-split into three independent statement-only tasks: coherent fixed-scalar tensor/K-flat descent, fixed-scalar geometric adjunction comparisons, and natural finite-scalar model comparisons. Retained all existing generic lemmas and the statement/Lean record. Six assembly steps under 3000 characters; detailed allocation and preserved arguments in Q74 report.",
+  "blueprint": "Auxiliary coefficient comparison in parent DAG step 8 (the literal preservation proof has four paragraphs). Original steps 1-2 use existing ring/section comparisons; 3,5-6 go into the new constant-scalar tensor task plus existing internal/ring-coordinate tasks; 4,7 are exact descent and all-degree-zero tests; 8,11 use existing internal/flat diagrams and the new geometric-adjunction task; 9 goes into the new natural scalar-model task; 10 and 12 remain short intersection and derived-square assembly.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
@@ -287,6 +290,10 @@
    {
     "node": "lem-derived-exact-equivalence-squares",
     "why": "Generic tool: derived comparison squares from ordinary squares of exact equivalences; step 6 uses its right square for Rp_*."
+   },
+   {
+    "node": "lem-cbc-constant-ring-module-sheaves",
+    "why": "Arbitrary-site tool giving the actual constant-scalar restriction equivalence and its unique locally extended action; fixes the forward functor in the coefficient encoding rather than choosing an unrelated equivalence."
    }
   ]
  },
@@ -301,15 +308,16 @@
   "lem-sfb-internal-module-operations-transport",
   "def-weil-pbc-flat-ringed-diagram-input",
   "lem-weil-pbc-flat-restriction-ordinary-comparisons",
-  "lem-derived-exact-equivalence-squares"
+  "lem-derived-exact-equivalence-squares",
+  "lem-cbc-constant-ring-module-sheaves"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q12-8ea096f06",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q74-bb1360bb6",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-8ea096f06 (reviewer sub-agent of L); spot-checked: This delivery is the re-split the human ordered on 2026-10-21 (live coord/repair-notes/<item>.json). The item is not on route-pivot-dropped.txt. Its statement, stmt_deps and lean record are unchanged. The 6 new steps total about 2.5k characters. I read every cited statement. Step 1 (c_T, from the condensed-ring and scheme-ring lemmas, then E_T and the constant-ring equivalence e) is OK. Step 2 is OK: exact-functor descent; internal tensor comparison followed by the new node; degree-zero Tor tests. Step 4 is OK: the local model is the cokernel of a scalar matrix, so it maps to P_U, and finitely presented = finite over finite A. Step 5 (localizing closures by intersection) is OK. In step 3, the transpose c_U b_h=α_h h^{-1}c_T is exactly the flat-ringed-diagram equation a_U c_R=c_S u^{-1}a_V (S flat because a is an isomorphism, J terminal), and lem-sfb-internal-module-operations-transport gives the internal/sectionwise squares and the j_! comparison. Step 6 uses the right square of lem-derived-exact-equivalence-squares with universal derived pairs: internal Rp_* from sk-def-sfb-module-derived-pushpull and fixed-A R(p_*) from sk-def-sfb-derived-categories. Each factor is derived separately, as both definitions require. FIX 1 (C4): the target def-sfb-finite-derived-lower-shriek-compactification lives on Sh(−,Mod_A), with def-sfb-finite-lower-star and def-sfb-finite-extension-by-zero. Steps 3 and 6 only built squares on Mod(A_T) and never passed through e. This bridge was the earlier Q11 C4 fix and the re-split lost it. I added it: e keeps underlying sheaves, h_* and j^* are computed on underlying sheaves, the constant unit commutes with A_T→h_*A_U, and adjunction uniqueness identifies the fixed-A j_!. The constant-ring equivalence and def-sfb-finite-lower-star are now cited, and proof_deps is recomputed. FIX 2: tool_uses still listed the uncited lem-weil-pbc-right-adjoint-preserves-kinjective and omitted the new generic tools. I accepted lem-weil-pbc-site-module-sheaf-constant-ring-equivalence, lem-sfb-internal-module-operations-transport, def-weil-pbc-flat-ringed-diagram-input, lem-weil-pbc-flat-restriction-ordinary-comparisons and lem-derived-exact-equivalence-squares, and removed the stale one. The new node lem-sfb-ring-isomorphism-tensor-transport is true: C_{c^{-1}} is the inverse, balancing over R(U) equals balancing over S(U), the unit is c^{-1}, and the K-flat tests are equivalent by Stacks 06YP (sites-cohomology.tex l.3011) plus 0→Z. I checked c=id, a nontrivial automorphism, the zero ring, the empty site and unbounded complexes. It is not a duplicate of scalar-extension-ring-iso, scalar-ordinary-tensor-comparison, kun-exact-monoidal-equivalence-derived, kflat-tensor-quasiiso-independent or flat-ringed-diagram-restriction. There is no cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-bb1360bb6 (reviewer sub-agent of L); spot-checked: Re-split under the reopened human note of 2026-10-21. The live Q12 split had only 1 new node; this delivery adds 3 general statement-only nodes of comparable size, and the proof is 2470 characters (2890 after my fix). Statement, stmt_deps and lean record are unchanged. The item is not dropped and no live ids collide. I mapped all 12 old steps (10810 characters) and none is lost. Old steps 1-4 and 12 go to existing nodes, including lem-cbc-constant-ring-module-sheaves, a declared generic tool that I accept. Old steps 5-6 go to the internal/section tensor node, the ring-isomorphism node and the new lem-sfb-constant-scalar-restriction-tensor. Old step 7 is the degree-0 Tor test in step 2. Old steps 8 and 11 go to the flat-ringed diagram, internal-operation transport and the new lem-sfb-constant-scalar-geometric-adjunctions. Old step 9 goes to the new lem-sfb-scalar-normalized-constant-models plus the finite=fp argument in step 4. Old step 10 is the elementary intersection argument in step 5. All three new nodes are true and are not restatements of the item. Node 1 is Stacks 0GMW (sites-modules l.3606) with O=B^pre. Node 2: the direct-image action through gamma∘iota_C equals the fixed-B action; the pullback mate comes via b; j_! via Hom chains (Stacks 00YV, sites l.10473). Node 3: an additive equivalence preserves biproducts and cokernels, t conjugates sigma(q) to q, naturality and uniqueness come from matrix lifts and right exactness (Stacks 03CY). I tested B=0, the empty site, P=0, m=0 or n=0 and a nontrivial sigma. Node 3's local model M_R(P) matches the local model of sk-def-sfb-constructible (1). Overlaps are advisory only: lem-sfb-proetale-intrinsic-tensor-comparison (plain tensor iso on T_proet) and lem-weil-pbc-proetale-constant-module-pullback-encoding (pullback clause only). FIX 1 (C4/C1): step 3 again dropped Q12's FIX-1 bridge citations def-sfb-finite-lower-star, def-sfb-finite-extension-by-zero and def-sfb-finite-extension-by-zero-adjunction. Without them, the geometric-adjunction node's fixed-B u_* and its supplied j_{!,B} are not identified with the operations of def-sfb-finite-derived-lower-shriek-compactification. I re-added the three citations and one sentence: b=b_h, and restriction along c gives j_{!,R}. proof_deps were recomputed. FIX 2 (B3): lem-sfb-constant-scalar-restriction-tensor uses 'site' and 'coefficient universe' without def-weil-pbc-sites-and-cohomology and def-weil-size-convention; I added both. Maintainer note: the top-level tool_uses (live too) still lists the unused lem-weil-pbc-right-adjoint-preserves-kinjective.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
