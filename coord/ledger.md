@@ -23032,3 +23032,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:21 L: merged deliver/X3/Sheaf.Paper.ConstantScalarUnitQuasiIsomorphism (stage 3; reviewer PASS; first push; landing 20261021T162134-L-296773 (interface); batch 20261021T162105; modules 1; new nodes 0; change records: coord/changes/constant-scalar-unit-proof-elaboration.md)
 - 16:22 L: merged deliver/Q12/lem-tw-lisse-rational-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 16:24 L: merged deliver/NE/lem-sfb-root-tower-lisse-morphism-extension (stage 2; reviewer PASS; parallel immutable checks)
+- 16:25 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
