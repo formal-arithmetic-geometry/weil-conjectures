@@ -38,3 +38,11 @@ L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+
+
+## def-pur-support-triangle (dedicated repair handoff; head 243a4db5baf30b4808800b65ed891c019aabd40c)
+
+The previous worker ended with: The literature re-review (2026-10-16) returned this split. Keep the route; fix exactly the finding below and re-deliver.
+
+Compiler messages and attribution:
+E1/C4: def-pur-flasque-support identifies the supported kernel with s_*s^! only when the complementary open j is quasi-compact, but this definition assumes an arbitrary pair and calls u:s_*s^!I(K)→I(K) an inclusion. The cited definition supplies no such inclusion in that scope and explicitly warns that the support comparison can fail. Injectivity of the terms does not justify the identification: an isomorphism on all injectives between these left-exact support functors would imply it on all sheaves via injective presentations. Add the required quasi-compactness hypothesis and cite its comparison, or define A(K) as the actual supported kernel and adjust the construction and downstream identifications.
