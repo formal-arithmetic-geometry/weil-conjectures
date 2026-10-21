@@ -21667,3 +21667,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:09 L: merged deliver/Q94/lem-weil-boundary-etale-adjunction-restriction (stage 2; reviewer PASS; parallel immutable checks)
 - 09:09 L: returned deliver/Q20/lem-sfb-split-perfect-dual-tor-window (reviewer RETURN: L: independent stage-2 immutable head d17c0eceb3b5: H2 / mechanical theorem-stmt_dep finding. Of the three theorem nodes)
 - 09:10 L: returned deliver/Q125/lem-pur-line-zero-class-exchange (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pur-line-zero-class-exchange: cited node lem-pur-l)
+- 09:12 L: merged deliver/Q83/det-sp-composition-comparisons (reviewer PASS; first push; new nodes: 0); claim not held by Q83: not your claim
