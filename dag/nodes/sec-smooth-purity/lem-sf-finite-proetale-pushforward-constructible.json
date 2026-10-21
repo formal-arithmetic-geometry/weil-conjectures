@@ -34,9 +34,9 @@
    }
   },
   {
-   "text": "Choose integers $a\\leq b$ outside which the cohomology of $C$ vanishes (choose $a=b=0$ if every cohomology sheaf vanishes). The intrinsic constructibility hypothesis and finiteness of $B$ meet [lem-weil-pbc-finite-ring-constructible-derived-origin] exactly. Its essential-image assertion gives $L\\in D^b_c(X_{\\mathrm{et}},B)$ and an isomorphism $\\alpha:\\nu_X^*L\\xrightarrow{\\sim}C$. Its interval reflection shows that $L$ has cohomology in $[a,b]$, so in particular it is bounded below. This proves the origin clause for arbitrary finite commutative $B$, with no quotient-of-a-DVR or finite-Tor-amplitude hypothesis.",
+   "text": "Choose a finite vanishing interval for C and convert it into boundedness for the canonical t-structure. Apply [new-etale-proetale-exceptional-object-comparison] to X, which is Noetherian by step 1. Its fixed-module intrinsic constructibility criterion yields an etale object L, bounded constructible in the existing explicit-interval predicate, and an isomorphism alpha : nu_X^* L ≅ C. Extract a lower cohomological bound from the bounded-constructible property of L. This avoids the small-ring/ULift encoding of lem-weil-pbc-finite-ring-constructible-derived-origin.",
    "uses": [
-    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+    "new-etale-proetale-exceptional-object-comparison"
    ],
    "elementary": false,
    "source": {
@@ -56,9 +56,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-comparison-direct-image-canonical-mate] with $u=f$, $\\Lambda=B$ and $K=L$: step 1 supplies qcqs and step 2 supplies bounded-below membership. It proves that the specified mate $b_{f,L}:\\nu_Y^*Rf_{\\mathrm{et},*}L\\to Rf_{\\mathrm{proet},*}\\nu_X^*L$ is an isomorphism. More explicitly, writing $a_f:\\nu_X^*f_{\\mathrm{et}}^*\\xrightarrow{\\sim}f_{\\mathrm{proet}}^*\\nu_Y^*$, this is the adjoint transpose of $\\nu_X^*(\\varepsilon^e_{f,L})\\circ a_{f,Rf_{\\mathrm{et},*}L}^{-1}$; its counit normalization is part of that cited statement. Compose it with $Rf_{\\mathrm{proet},*}(\\alpha)$. The resulting isomorphism $\\beta=Rf_{\\mathrm{proet},*}(\\alpha)\\circ b_{f,L}:\\nu_Y^*N\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}C$ is precisely the canonical comparison after identifying $C$ with the chosen etale realization by $\\alpha$. A functor carries $\\alpha$ and its inverse to mutually inverse maps, so this last composition remains an isomorphism.",
+   "text": "Apply [lem-sfb-unbounded-direct-image-bounded-below] to f and L, using qcqs from step 1 and the lower bound from step 2. Its pullback comparison is definitionally the specified termwise comparison. Its derived adjunctions use exact left adjoints; the item uses the K-flat derived adjunctions transported to the same exact functors. Changing between adjunction structures conjugates a mate by the conjugate isomorphisms of identity transformations of the left adjoints, by mateEquiv_whiskerTop_conjugateEquiv. Consequently invertibility transfers to the exact specified component finitePushforwardDerivedComparison.app L, without altering its definition. Compose it with the direct image of alpha.hom; functors and composition preserve invertibility.",
    "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "lem-sfb-unbounded-direct-image-bounded-below"
    ],
    "elementary": false,
    "source": {
@@ -67,10 +67,9 @@
    }
   },
   {
-   "text": "By step 3, $N$ has constructible etale cohomology and is bounded. Apply the forward direction of [lem-weil-pbc-finite-ring-constructible-derived-origin] at $Y$. It says that $\\nu_Y^*N$ has intrinsically constructible pro-etale cohomology, and its interval-preservation clause retains a finite cohomological interval for $N$. The isomorphism $\\beta$ of step 4 identifies each cohomology sheaf of $Rf_{\\mathrm{proet},*}C$ with that of $\\nu_Y^*N$. Vanishing and the local constant finite models on each constructible stratum are invariant under this isomorphism: restrict it to the strata and compose the local trivializations with it. Thus the direct image is bounded and intrinsically constructible, as asserted.",
+   "text": "Set N = Rf_et,* L, bounded constructible by step 3. The image of N under exact comparison belongs to the mapped bounded-constructible object property. Transport this membership through the isomorphism beta constructed from the specified composite of step 4. Apply [new-etale-proetale-exceptional-object-comparison] at the Noetherian scheme Y in the reverse direction to obtain intrinsic fixed-module constructibility of every output cohomology sheaf and t-structure boundedness. For lower and upper bounds c,d, choose the explicit interval [min(c,d),max(c,d)], whose endpoints are ordered even for the zero object.",
    "uses": [
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "def-weil-proetale-constructible-sheaf"
+    "new-etale-proetale-exceptional-object-comparison"
    ],
    "elementary": false,
    "source": {
@@ -85,15 +84,14 @@
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "def-weil-finite-type-morphism",
   "def-weil-quasi-separated-morphism",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "new-etale-proetale-exceptional-object-comparison",
   "thm-dg-finite-type-constructibility",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "def-weil-proetale-constructible-sheaf"
+  "lem-sfb-unbounded-direct-image-bounded-below"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Finite-coefficient etale-origin / direct-image comparison argument of Lemma 6.7.2, with Theorem 6.7.1 supplied by thm-dg-finite-type-constructibility and the general finite-ring comparisons of Stacks 09AK, 09AL and 09A6; written assembly of existing nodes"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09A6: assemble the already proved fixed-module Noetherian object comparison, nonseparated finite-type etale constructibility, and bounded-below unbounded comparison; the adjunction-change calculation is proved privately in Lean."
  },
  "mathlib_searches": [
   {
@@ -222,8 +220,6 @@
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "thm-dg-finite-type-constructibility"
  ],
  "reviewed": {
@@ -257,5 +253,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Clause-by-clause match of the Lean to the node: field k; X,Y finite type over k via LocallyOfFiniteType+QuasiCompact on the structure maps; k-morphism hf; no separatedness; finite comm B in Type(u+1) (forced by the stmt_dep records IsConstructibleProEtaleFixedModuleSheaf and Etale.DerivedCategory.isBoundedConstructible, not a mathematical restriction); m>0, (m:B)=0, IsUnit (m:k); bounded C with intrinsically constructible H^i; conclusions ∃L ∈ D^b_c, ∃α: ν_X^*L≅C, IsIso(canonical mate ≫ Rf_proet(α)), Rf_proet C intrinsically constructible and bounded. The two helpers are the canonical mateEquiv of comparisonUpperStarCompUpperStarIso under the derived adjunctions (direction checked), with no arbitrary choice. Node differs from live only in lean; statement verbatim; plain imports = recorded proof-dep modules; docstrings carry sources and the 5 steps; sorry-only proof; both report sections present. nt_compile --json: 42.2 s, clean. Edge cases (empty schemes, C=0, zero ring with m=1, Z/4, nonseparated f) covered. Advisory: geoP1PushComparison (sk-lem-geo-p1 local helper) is the same unbounded mate; stage 3 must transport the Type-u/ULift finite-ring origin theorem to the fixed-module Type(u+1) presentation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T120725-L-3937832",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

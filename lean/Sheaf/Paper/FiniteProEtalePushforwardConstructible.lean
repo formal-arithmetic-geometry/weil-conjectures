@@ -17,9 +17,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
+import Sheaf.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 
 /-!
 # Constructibility of ordinary finite-coefficient pro-etale direct images
@@ -77,6 +77,27 @@ def finitePushforwardDerivedComparison (B : Type (u + 1)) [CommRing B]
       (upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctorIsoMapDerivedCategory)
     (finitePushforwardDerivedPullbackComparison B f).hom).natTrans
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_mate_change_adjunction
+    {A D E F : Type*} [Category A] [Category D] [Category E] [Category F]
+    {l : A ⥤ D} {r : D ⥤ A} {p : E ⥤ F} {t : F ⥤ E}
+    {a : A ⥤ E} {b : D ⥤ F}
+    (e e' : l ⊣ r) (d d' : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) (K : D)
+    (h : IsIso ((mateEquiv e' d' σ.hom).natTrans.app K)) :
+    IsIso ((mateEquiv e d σ.hom).natTrans.app K) := by
+  let c := conjugateIsoEquiv e e' (Iso.refl l)
+  let q := conjugateIsoEquiv d d' (Iso.refl p)
+  have hh := mateEquiv_whiskerTop_conjugateEquiv e e' d d'
+    (𝟙 l) (𝟙 p) σ.hom σ.hom (by ext; simp)
+  have ht := congrArg (fun w : TwoSquare r b a t ↦ w.natTrans.app K) hh
+  change a.map (c.hom.app K) ≫ (mateEquiv e' d' σ.hom).natTrans.app K =
+    (mateEquiv e d σ.hom).natTrans.app K ≫ q.hom.app (b.obj K) at ht
+  have : IsIso ((mateEquiv e d σ.hom).natTrans.app K ≫ q.hom.app (b.obj K)) := by
+    rw [← ht]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ (q.hom.app (b.obj K))
+
 /-- A bounded complex with intrinsically constructible finite-coefficient cohomology
 has bounded constructible etale origin, and ordinary direct image along a morphism
 of finite-type schemes over a field is bounded and intrinsically constructible.
@@ -133,6 +154,62 @@ theorem finite_proetale_pushforward_constructible
           IsZero ((DerivedCategory.homologyFunctor
             (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} B)) i).obj
               ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.obj C)) := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := ⟨⟩
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := ⟨⟩
+  have : QuasiCompact f := inferInstance
+  have : QuasiSeparated f := ⟨inferInstance⟩
+  have hb : _root_.DerivedCategory.TStructure.t.bounded C := by
+    obtain ⟨a, b, _, hv⟩ := hCb
+    exact ⟨⟨a, (_root_.DerivedCategory.isGE_iff C a).2
+      (fun i hi ↦ hv i (Or.inl hi))⟩,
+      ⟨b, (_root_.DerivedCategory.isLE_iff C b).2 (fun i hi ↦ hv i (Or.inr hi))⟩⟩
+  have hinput : (Etale.DerivedCategory.isBoundedConstructible B X).map
+      (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory C := by
+    rw [← exceptionalTransport_constructible_comparison B X]
+    exact ⟨hb, hC⟩
+  obtain ⟨L, hL, ⟨α⟩⟩ := hinput
+  have hcoeff : Etale.IsSmoothBaseChangeCoefficients m B (Spec (.of k)) :=
+    ⟨hm, inferInstance, hB, by simpa using hk.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+  have hN := Etale.isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
+    k B m hcoeff aX aY f hf L hL
+  obtain ⟨a, b, _, hv⟩ := hL.2
+  have : L.IsGE a := (_root_.DerivedCategory.isGE_iff L a).2
+    (fun i hi ↦ hv i (Or.inl hi))
+  have hmate : IsIso ((finitePushforwardDerivedComparison B f).app L) := by
+    apply isIso_mate_change_adjunction _
+      ((Etale.upperStarLowerStarAdjunction
+        (ModuleCat.{u + 1} B) f).mapDerivedCategoryRightDerivedAdjunction) _
+      ((upperStarLowerStarAdjunction
+        (ModuleCat.{u + 1} B) f).mapDerivedCategoryRightDerivedAdjunction)
+    have hh := unboundedDirectImageComparison_boundedBelow B f L a
+    simpa only [unboundedDirectImageComparisonMap, Adjunction.homEquiv_unit,
+      mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+      Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.map_id,
+      Functor.id_obj, Functor.id_map, Category.id_comp, Category.comp_id, Category.assoc,
+      finitePushforwardDerivedPullbackComparison, unboundedDirectImagePullbackIso] using hh
+  have hiso : IsIso ((finitePushforwardDerivedComparison B f).app L ≫
+      (lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.map α.hom) := inferInstance
+  let β := asIso ((finitePushforwardDerivedComparison B f).app L ≫
+    (lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.map α.hom)
+  have houtput := (ObjectProperty.prop_map_obj
+    (Etale.DerivedCategory.isBoundedConstructible B Y)
+    (comparisonUpperStar (ModuleCat.{u + 1} B) Y).mapDerivedCategory hN)
+  have houtput' := ((Etale.DerivedCategory.isBoundedConstructible B Y).map
+    (comparisonUpperStar (ModuleCat.{u + 1} B) Y).mapDerivedCategory).prop_of_iso β houtput
+  rw [← exceptionalTransport_constructible_comparison B Y] at houtput'
+  refine ⟨L, hL, α, hiso, houtput'.2, ?_⟩
+  obtain ⟨⟨c, hc⟩, ⟨d, hd⟩⟩ := houtput'.1
+  refine ⟨min c d, max c d, min_le_max, fun i hi ↦ ?_⟩
+  rcases hi with hi | hi
+  · exact (_root_.DerivedCategory.isGE_iff _ c).1 hc i
+      (lt_of_lt_of_le hi (min_le_left _ _))
+  · exact (_root_.DerivedCategory.isLE_iff _ d).1 hd i
+      (lt_of_le_of_lt (le_max_right _ _) hi)
 
 end AlgebraicGeometry.ProEtale

@@ -22405,3 +22405,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:07 L: merged deliver/U1/Sheaf.CategoryTheory.TensorArrowMateNaturalityShifts (stage 3; reviewer PASS; first push; landing 20261021T120713-L-3935524 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:07 L: merged deliver/U1/Sheaf.Paper.InternalScalarTensorComparison (stage 3; reviewer PASS; first push; landing 20261021T120717-L-3936328 (interface); batch 20261021T120309; modules 3; new nodes 2)
 - 12:07 L: merged deliver/U2/Sheaf.Algebra.Homology.LocallyFreeDerivedScalars (stage 3; reviewer PASS; first push; landing 20261021T120721-L-3937160 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:07 L: merged deliver/U2/Sheaf.Paper.FiniteProEtalePushforwardConstructible (stage 3; reviewer PASS; first push; landing 20261021T120725-L-3937832 (proof); batch 20261021T120309; modules 1; new nodes 0)
