@@ -11,9 +11,102 @@
   "def-weil-finite-dimensional-subspace",
   "def-weil-endomorphism-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a finite-potent $T$ and choose $n\\ge1$ with $U_0=T^n(V)$ finite-dimensional [def-weil-finite-dimensional-subspace]. The identity $T(T^nx)=T^n(Tx)$ shows that $U_0$ is $T$-stable. Define a candidate scalar $t=\\operatorname{tr}(T|_{U_0})$ using [def-weil-endomorphism-trace]. No stabilization of the descending images is needed for this construction.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 149–150, definition and paragraph following (T3)"
+   }
+  },
+  {
+   "text": "Let $U$ be any finite-dimensional $T$-stable subspace containing $T^N(V)$, where $N\\ge1$. Set $m=\\max(n,N)$ and $R=T^m(V)$. The identity $T^m=T^nT^{m-n}=T^NT^{m-N}$ puts $R$ in both $U_0$ and $U$; also $T(R)\\subset R$. For each $X\\in\\{U_0,U\\}$, the inclusion and quotient give the exact sequence $0\\to R\\to X\\to X/R\\to0$ of finite-dimensional spaces. The restriction of $T$ preserves this sequence, and the induced endomorphism $T_{X/R}$ satisfies $T_{X/R}^m(x+R)=T^mx+R=0$. Apply [lem-pc-finite-dimensional-trace-exact] and [lem-pc-finite-dimensional-nilpotent-trace] to obtain $\\operatorname{tr}(T|_X)=\\operatorname{tr}(T|_R)+0$. Thus the two choices have the same trace. In particular $t$ is independent of $n,U_0$ and equals the trace on every permitted $U$, and this property uniquely determines $t$. Write it $\\operatorname{Tr}_{\\mathrm{fp},V}(T)$.",
+   "uses": [
+    "lem-pc-finite-dimensional-trace-exact",
+    "lem-pc-finite-dimensional-nilpotent-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 149–150, (T1)–(T3) and characterization following (T3)"
+   }
+  },
+  {
+   "text": "When $V$ is finite-dimensional, $U=V$ is a permitted subspace, giving ordinary trace. If $T^e=0$ for some $e\\ge1$, then $U=0$ is permitted and its trace is the empty diagonal sum, namely zero, by [def-weil-endomorphism-trace]. These arguments also cover the zero vector space and the zero endomorphism.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 149–150, (T1) and (T3)"
+   }
+  },
+  {
+   "text": "Let $L\\subset V$ be $T$-stable and let $q:V\\to V/L$ be the quotient. Put $A=U_0\\cap L$ and $B=q(U_0)$. These are finite-dimensional: $A$ is a subspace of $U_0$ and $B$ is spanned by the images of any finite spanning set of $U_0$. They are stable under $T|_L$ and $\\overline T$ respectively. Indeed stability follows by applying $T$ or $qT=\\overline Tq$. Moreover $(T|_L)^n(L)=T^n(L)\\subset A$, and $\\overline T^n(V/L)=q(T^nV)=B$. These inclusions prove finite potency of both induced operators. The sequence $0\\to A\\to U_0\\xrightarrow{q}B\\to0$ is exact: inclusion is injective, the last map is surjective by the definition of $B$, and its kernel is exactly $U_0\\cap L$. Apply [lem-pc-finite-dimensional-trace-exact] to its compatible restrictions of $T$. The comparison established in step 2 identifies the three ordinary traces with their finite-potent traces, giving the asserted additivity.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-pc-finite-dimensional-trace-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T2)"
+   }
+  },
+  {
+   "text": "For $c\\in k$, the same subspace $U_0$ is stable under $cT$, and $(cT)^n(V)\\subset U_0$ since $(cT)^nx=c^nT^nx$. Hence $cT$ is finite-potent. On a basis of $U_0$, the diagonal entries of $(cT)|_{U_0}$ are $c$ times those of $T|_{U_0}$. The definition [def-weil-endomorphism-trace] and step 2 give $\\operatorname{Tr}_{\\mathrm{fp}}(cT)=c\\operatorname{Tr}_{\\mathrm{fp}}(T)$. This works also for $c=0$.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, scalar case of (T4)"
+   }
+  },
+  {
+   "text": "Let $a:V\\to W$ and $b:W\\to V$ be linear with $ba$ finite-potent. Choose $n\\ge1$ and $A=(ba)^n(V)$ finite-dimensional, and set $B=a(A)$. Then $ba(A)\\subset A$, $a(A)\\subset B$ and $b(B)=ba(A)\\subset A$, so $ab(B)\\subset B$. Also $(ab)^{n+1}=a(ba)^nb$ gives $(ab)^{n+1}(W)\\subset B$, proving that $ab$ is finite-potent because the image $B$ of finite-dimensional $A$ is finite-dimensional. The restricted maps $a_0:A\\to B$ and $b_0:B\\to A$ satisfy $b_0a_0=(ba)|_A$ and $a_0b_0=(ab)|_B$ by evaluation on vectors. Apply [lem-pc-finite-dimensional-trace-cyclic], then step 2 on $A$ and $B$, to obtain the required equality of finite-potent traces.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-pc-finite-dimensional-trace-cyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, (T5)"
+   }
+  },
+  {
+   "text": "For the finite family in the statement set $S=\\sum_iT_i$ and $U=\\sum_{i,j}\\operatorname{im}(T_iT_j)$. A finite union of finite spanning sets for these images spans $U$, so $U$ is finite-dimensional. For each $\\ell$, a generator $T_iT_jx$ of $U$ is sent by $T_\\ell$ to $(T_\\ell T_i)(T_jx)$, which lies in $\\operatorname{im}(T_\\ell T_i)\\subset U$; linearity therefore gives $T_\\ell(U)\\subset U$ and $S(U)\\subset U$. We have $T_i^2(V)\\subset U$ and $S^2x=\\sum_{i,j}T_iT_jx\\in U$. Thus each $T_i$ and $S$ is finite-potent. By step 2 all their traces are computed on $U$. Restriction commutes with the finite sum, and summing diagonal entries on a single basis of $U$ gives $\\operatorname{tr}(S|_U)=\\sum_i\\operatorname{tr}(T_i|_U)$ by [def-weil-endomorphism-trace]. This is the asserted sum formula. If $r=0$, then $U=0$ and both sides are zero.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 150, proof of (T4), specialized to products of length two"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-endomorphism-trace",
+  "lem-pc-finite-dimensional-trace-exact",
+  "lem-pc-finite-dimensional-nilpotent-trace",
+  "lem-pc-finite-dimensional-trace-cyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1, pp. 149–150, (T1)–(T5), expanded finite-dimensional subspace construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +142,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.isNilpotent_trace_of_isNilpotent\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {f : M →ₗ[R] M},\\n  IsNilpotent f → IsNilpotent ((LinearMap.trace R M) f)\", \"doc\": \"If $ f : M \\\\to M $ is a nilpotent linear map on a finite-dimensional module $ M $ over a commutative semiring $ R $, then the trace of $ f $ is a nilpotent element in $ R $. In symbols, $ \\\\operatornam\"}\n  {\"name\": \"Algebra.trace_isNilpotent_of_isNilpotent\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {R : Type u_7} {S : Type u_8} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S},\\n  IsNilpotent x → IsNilpotent ((Algebra.trace R S) x)\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ as an $ R $-algebra, if an element $ x \\\\in S $ is nilpotent, then its trace $ \\\\operatorname{Tr}_{S/R}(x) $ in $ R $ is also nilpotent.\"}\n  {\"name\": \"Algebra.isNilpotent_trace_of_isNilpotent\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {R : Type u_7} {S : Type u_8} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S},\\n  IsNilpotent x → IsNilpotent ((Algebra.trace R S) x)\", \"doc\": \"If $ x $ is a nilpotent element in a commutative ring $ S $ that is an algebra over a commutative ring $ R $, then the trace of $ x $ from $ S $ to $ R $ is also nilpotent.\"}\n  {\"name\": \"LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsReduced R]\\n  {f g : Module.End R M} (μ : R),\\n  Commute f g →\\n    IsNilpotent (g - (algebraMap R (Module.End R M)) μ) → (LinearMap.trace R M) (f ∘ₗ g) = μ * (LinearMap.trace R M) f\", \"doc\": \"Let $ R $ be a reduced ring and $ M $ an $ R $-module. For commuting linear operators $ f, g : \\\\mathrm{End}_R(M) $ and a scalar $ \\\\mu \\\\in R $, if $ g - \\\\mu $ is nilpotent, then the trace of the compos\"}\n  {\"name\": \"Matrix.isNilpotent_trace_of_isNilpotent\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {n : Type v} [inst_1 : DecidableEq n] [inst_2 : Fintype n] {M : Matrix n n R},\\n  IsNilpotent M → IsNilpotent M.trace\", \"doc\": \"If a square matrix $ M $ is nilpotent (i.e., there exists a natural number $ k $ such that $ M^k = 0 $), then its trace $ \\\\operatorname{tr}(M) $ is also nilpotent (i.e., there exists a natural number \"}\n  {\"name\": \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"module\": \"Mathlib/Algebra/DirectSum/LinearMap\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] {f g : Module.End R M} (h_comm : Commute f g),\\n  ⨆ μ, f.maxGenEigenspace μ = ⊤ →\\n    (∀ (μ : R), (LinearMap.trace R ↥(f.ma\", \"doc\": \"Let $ R $ be an integral domain that is also a principal ideal ring, and let $ M $ be a finite free $ R $-module. Suppose $ f $ and $ g $ are commuting endomorphisms of $ M $, and the union of the max\"}\n  {\"name\": \"LinearMap.trace\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (M : Type v) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → (M →ₗ[R] M) →ₗ[R] R\", \"doc\": \"The linear map from the space of endomorphisms of a finite-dimensional module $ M $ over a commutative semiring $ R $ to $ R $, defined by taking the trace of the matrix representation of each endomor\"}\n  {\"name\": \"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For any element $ x $ in the Lie algebra $ \\\\mathfrak{b} $, the trace of the endomorphism obtained by applying the canonical map $ \\\\text{toEnd} $ to $ x $ (viewed as a linear operator on the direct sum\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate trace of finite potent endomorphisms of arbitrary dimensional vector spaces is well defined and additive on stable subspaces",
+   "results": "8 hits; LinearMap.trace_restrict_eq_of_forall_mem, LinearMap.IsProj.trace, LinearMap.trace, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, LinearMap.isNilpotent_trace_of_isNilpotent, LinearMap.trace_comp_comm, LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent, Algebra.normalizedTrace",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary finite-dimensional trace hits do not define Tate trace for arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace on an infinite dimensional space for an operator with a finite rank power",
+   "results": "8 hits; LinearMap.trace, LinearMap.trace_id, LinearMap.traceAux, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_transpose', Matrix.trace_toLin'_eq, Matrix.trace, Matrix.traceLinearMap",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary finite-dimensional trace hits do not define Tate trace for arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTrace\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary finite-dimensional trace hits do not define Tate trace for arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.?potent|tateTrace|TateResidue",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary finite-dimensional trace hits do not define Tate trace for arbitrary-dimensional spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-tate-dvr-residue-calculus",
@@ -71,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-finite-potent-trace-calculus",
+  "worker": "stage1",
+  "summary": "Expanded Tate §1 via explicit finite-dimensional stable subspaces. The exact-sequence and nilpotent ordinary trace laws justify independence; restriction/quotient, scalars, cyclicity and pairwise finite-rank sums are proved with explicit witnesses. Three support nodes: ordinary exact-sequence trace (existing sorry-free project declaration requested as attachment), nilpotent trace and cyclic trace (Mathlib leaves). Statement unchanged.",
+  "blueprint": "Realizes the sentence in sk-thm-picard-duality defining the trace using Tate's k-linear residues: this is the trace calculus supporting the commutator definition and its independence/linearity, through lem-pc-tate-dvr-residue-calculus.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-c974a8a0d",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-c974a8a0d (reviewer sub-agent of L); spot-checked: Read Tate ASENS 1968 §1 pp.149–150 ((T1)–(T5) and the characterization paragraph), the item, all three new nodes, both cited definitions and the three citers of the item. Step 2 proves that the trace does not depend on the chosen subspace: it applies the exact-sequence trace node and the nilpotent trace node to 0→R→X→X/R→0 with R=T^m V, and T^m(X)⊂R makes the quotient map nilpotent. Step 4 proves additivity on a stable L with A=U₀∩L and B=q(U₀): (T|_L)^n L⊂A, T̄^n(V/L)=q(T^nV)=B, and the kernel of q on U₀ is U₀∩L. Step 6 proves cyclicity with A=(ba)^nV and B=a(A): (ab)^{n+1}W⊂B, and the restricted maps compose to ba|_A and ab|_B, so no inverse maps are needed. Step 7 proves the sum clause on U=Σim(T_iT_j), which is stable because T_ℓT_iT_jx∈im(T_ℓT_i); the case r=0 also holds. Steps 3 and 5 are elementary, and edge cases c=0, L=0, L=V, nilpotent T, the zero space and unequal dimensions were checked. Statement unchanged; the sum clause is Tate's (T4) with n=2. The Mathlib leaves are correct: LinearMap.trace_comp_comm' at Trace.lean l.265 (finite free modules, automatic over a field) and isNilpotent_trace_of_isNilpotent at l.351 followed by .eq_zero. lem-pc-finite-dimensional-trace-exact is correctly unsplit: Mathlib has only direct-sum trace formulas. It is stated exactly by the sorry-free project theorem LinearMap.trace_eq_add_of_exact (FinitePotent.lean l.39–66), which is recorded as a lean_candidate for attachment. No duplicate: prop-trf-trace-formal-laws is about derived perfect complexes, and a DAG-wide statement scan found nothing else. No new node restates a clause of the item. Same unit, no tool uses, no SGA. This is a first split, not a re-split, and no dropped-list entry applies. Advisory: the lean_candidates branch label says 'slopmaster2' but the declaration is in the live sheaf lean tree; check the label when attaching."
  }
 }

@@ -21857,3 +21857,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:18 L: returned deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer RETURN: Superseded again (A6/A7/B10/G4). This is the 4th NN push, after c27a08bf, 53cc9686 and ea00ef15, each RETURNed as supers)
 - 09:18 L: returned deliver/Q27/lem-sfb-internal-extension-finite-presentation (reviewer RETURN: Superseded, A7/B10, third push. Both new nodes are byte-identical to the returned pushes fbd206ba and 054257bd: lem-sfb-)
 - 09:19 L: returned deliver/O2/lem-sfb-finite-free-scalar-coordinates (reviewer RETURN: A6/A7/B10, G4: superseded, fourth push. The re-split note coord/repair-notes/lem-sfb-finite-free-scalar-coordinates.json)
+- 09:21 L: merged deliver/Q136/lem-pc-finite-potent-trace-calculus (reviewer PASS; first push; new nodes: 3)
