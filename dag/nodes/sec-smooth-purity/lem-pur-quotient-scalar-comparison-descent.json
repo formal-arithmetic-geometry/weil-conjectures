@@ -20,6 +20,18 @@
  ],
  "proof": [
   {
+   "text": "Use the ordinary extension functor in the cochain derived-change-of-rings model for R to S. Apply the compatible coefficient-tower theorem to r_n = phi followed by c_n and p_n = c_n. Its level presentations, additive structure, map formulas and transition formulas give the required ScalarTowerTensorModel. The scalar commutativity hypothesis follows by associativity from c_(n+1) followed by b_n = c_n.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-compatible-coefficient-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 03EK; the existing cochain model and compatible coefficient tower"
+   }
+  },
+  {
    "text": "Write $c_n:S\\to B_n$ and $t_n:B_{n+1}\\to B_n$ for the structure and transition maps of the strict tower of $S$-algebras; thus $t_nc_{n+1}=c_n$. For every degree of $P$, the balanced map $p\\otimes s\\mapsto p\\otimes c_n(s)$ defines an $S$-linear map $\\alpha_{n,P}:P\\otimes_RS\\to\\operatorname{Res}^S_{B_n}(P\\otimes_RB_n)$. Indeed, $rp\\otimes c_n(s)=p\\otimes c_n(\\varphi(r)s)$ for a local section $r$ of $R$. These presheaf maps commute with restriction and therefore induce maps on the sheafified tensor products. The identity $t_nc_{n+1}=c_n$ implies $(1\\otimes t_n)\\alpha_{n+1,P}=\\alpha_{n,P}$. The product universal property gives a unique $\\alpha_P:F(P)\\to V(P)=\\prod_n\\operatorname{Res}^S_{B_n}(P\\otimes_RB_n)$ with these components, and $(1-s_P)\\alpha_P=0$.",
    "uses": [
     "def-pur-sheaf-tensor-product",
@@ -70,9 +82,10 @@
    }
   },
   {
-   "text": "For a quasi-isomorphism $f:P\\to P'$ between objects of $\\mathcal P$, apply the change-of-rings K-flat quasi-isomorphism lemma first to $R\\to S$ and then to every composite $R\\to S\\to B_n$. It gives quasi-isomorphisms $F(f)$ and $f\\otimes_RB_n$. Restricting the latter to $S$ still gives a quasi-isomorphism: restriction changes only the scalar action; kernels are the same underlying subsheaves and cokernels are the same sheafified abelian quotients. Thus restriction commutes with cohomology and reflects its isomorphisms. This uses no flatness of $S$ or $B_n$ over $R$ and no surjectivity of $S\\to B_n$.",
+   "text": "Apply the preservation clause of the cochain derived-change-of-rings model to each composite R to B_n. The level presentations form a natural isomorphism: their naturality follows by sheafification extensionality and the generator formula for V.map. The compatible coefficient-tower theorem states that restriction of scalars preserves and reflects quasi-isomorphisms. Transporting through the natural level isomorphisms therefore proves that V sends quasi-isomorphisms between K-flat complexes to levelwise quasi-isomorphisms. The ordinary R to S functor is already the one from its derived model.",
    "uses": [
-    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-compatible-coefficient-tower",
     "def-pc-sheaf-restrict-scalars",
     "def-weil-sheaf-of-modules-category"
    ],
@@ -94,10 +107,10 @@
    }
   },
   {
-   "text": "Reorder the strict Roos coordinates as $(x,y)\\in V(P)^i\\oplus V(P)^{i-1}$. The differential becomes $(dx,-(1-s_P)x-dy)$. Apply the Roos-coordinate quasi-isomorphism lemma with its endomorphism equal to $-(1-s_P)$, its primed endomorphism equal to $-(1-s_{P'})$, and its map $a=V(f)$. The map $G(f)$ is diagonal with both coordinates $V(f)$, so that lemma shows $G(f)$ is a quasi-isomorphism. Hence $\\overline F$ and $\\overline G$ invert every quasi-isomorphism between objects of $\\mathcal P$.",
+   "text": "Exact products make the product map a quasi-isomorphism, by HomologicalComplex.quasiIso_limMap. The strict tower map yields a morphism of the two mapping-cone triangles. Localize those triangles; the first two vertical arrows are isomorphisms, hence the third is an isomorphism by the triangulated two-out-of-three lemma. Thus the cone map is a quasi-isomorphism, and shifting by minus one proves the assertion for the actual roosF map. This uses the fixed cone directly, without changing coordinates.",
    "uses": [
     "def-weil-strict-roos-model",
-    "lem-pe-roos-coordinates-quasi-iso"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -130,10 +143,11 @@
    }
   },
   {
-   "text": "The normalization alone determines $\\chi$. For any complex $X$ choose the quasi-isomorphism $q:P\\to X$ of the K-flat resolution theorem. Since $Q_Rq$ is invertible, naturality forces $\\chi_{Q_RX}=LG(Q_Rq)\\chi_{Q_RP}LF(Q_Rq)^{-1}$. Thus two normalized natural transformations coincide on every localized complex, and hence on every derived object. The transformation already constructed satisfies this formula for every resolution, so changing the resolution gives the same map under the canonical comparisons. Changing models of $LF$ or $LG$ also gives the same transformation after their comparison-preserving universal isomorphisms, by uniqueness of universal objects.",
+   "text": "The normalization alone determines $\\chi$. For any complex $X$ choose the quasi-isomorphism $q:P\\to X$ of the K-flat resolution theorem. Since $Q_Rq$ is invertible, naturality forces $\\chi_{Q_RX}=LG(Q_Rq)\\chi_{Q_RP}LF(Q_Rq)^{-1}$. Thus two normalized natural transformations coincide on every localized complex, and hence on every derived object. The transformation already constructed satisfies this formula for every resolution, so changing the resolution gives the same map under the canonical comparisons. Changing models of $LF$ or $LG$ also gives the same transformation after their comparison-preserving universal isomorphisms, by uniqueness of universal objects. The K-flat resolution theorem presents flatness using the monoidal tensor functor; siteSheafTensorRightIso from the independent-coefficient tensor-colimits theorem transports that exactness to IsFlatOnSite.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
@@ -155,6 +169,8 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-compatible-coefficient-tower",
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars",
   "def-weil-inverse-system",
@@ -164,16 +180,15 @@
   "lem-pc-kflat-resolution",
   "def-weil-sheaf-of-modules-category",
   "lem-pur-quasi-isos-saturated-triangulated",
-  "lem-pur-change-of-rings-kflat-quasi-iso",
-  "lem-pe-roos-coordinates-quasi-iso",
   "lem-pur-resolving-class-essential-constancy",
   "lem-pur-left-derived-defined-pointwise-kan-bridge",
-  "lem-pur-total-left-derived-localization"
+  "lem-pur-total-left-derived-localization",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10 and Proposition 3.5.1 provide completion context only; explicit augmentation and generic ring-sheaf descent expanded using Stacks Tags 03EK, 014E, 08TC, 06YS, 06YT, 06XN and 05S9 and the existing pointwise Kan bridge."
+  "place": "Definition 3.4.10 and Proposition 3.5.1 give the completion context. The Lean proof constructs the model with the existing cochain scalar-extension model and compatible coefficient tower, constructs the scalar maps by sheafification of sectionwise balanced maps, and uses the strict Roos homotopy factorization. Exact-product cone invariance and resolving-class pointwise Kan extension give descent; the quotient-unit formula follows from the explicit identity-scalar multiplication isomorphism. Source: Stacks 03EK, 014E, 08TC, 06YS, 06YT, 06XN and 05S9."
  },
  "mathlib_searches": [
   {
@@ -287,8 +302,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pe-roos-coordinates-quasi-iso"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -316,7 +330,7 @@
   "by": "NE",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The ordinary tensor presentations fix objects by canonical isomorphisms and maps by the existing sheafified tensor generators, inlined through changeOfRings, changeOfRingsPresheaf, toSheafify and restrictScalars. The main theorem asserts their existence; no arbitrary functor or augmentation is assumed. The second theorem states the principal-power quotient-unit normalization using the existing roosAugment. The sole added statement dependency is the already-landed principal-power quotient definition. The returned theorem statement dependency is removed, and no declaration of CompatibleCoefficientTower is used."
+  "note": "Both original theorem statements and all public definitions are unchanged. The proofs construct the scalar-tower model using nonempty_derivedChangeOfRingsCochainModel and exists_compatibleCoefficientTower. All added helpers are private and proved. The unit theorem uses an explicit multiplication isomorphism for identity scalar extension; no presentation is chosen from an unconstrained existence assertion."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -325,5 +339,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Re-delivery of the H2-RETURNed ea19ee12. It drops the theorem stmt_dep lem-pur-compatible-coefficient-tower and inlines coefficientTensorRing/coefficientTensorLevel/coefficientTowerGenerator by their literal bodies: sheafCompose forget₂; restrictScalars∘changeOfRings; toSheafify of z⊗x in changeOfRingsPresheaf. Checked against live CompatibleCoefficientTower.lean; argument order and ring maps are preserved in V_map, transition, AugmentationCoordinates and the unit m/γ formulas. Only lean and stmt_deps differ from the live node (adds the landed def-pe-principal-power-ring-quotients, used by the unit theorem). Every clause still matches: strict tower hc; Pi.functor ℕ exactness; ∃! β with zero roosχ fst component and roosEval generator formula; IsLeftDerivedFunctor plus pointwise Kan; IsIso on flat-term K-flat P; χ normalized on all P and unique from the resolving class; unit specialization = roosAugment. The model pins mean no hollow defs; edge cases covered. lean.statement verbatim; all 7 declarations present; not dropped, no repair note, no live module. nt_compile --json 38.2 s, EXIT 0, clean. Advisory: ∃ M rather than ∀ M (equivalent)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261021T111015-L-3893409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
