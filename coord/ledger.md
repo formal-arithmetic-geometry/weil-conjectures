@@ -23792,3 +23792,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:31 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 21:32 L: returned deliver/Q05/lem-sfb-tame-stratum-kummer-descent (reviewer RETURN: L: independent stage-2 immutable head a0510f1c0303: Read all 26 delivered modules and 25 new def nodes against the node )
 - 21:33 L: returned deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (reviewer RETURN: L: independent stage-2 immutable head ee367ee8a09a: H1: no Lean module and no lean record (find snapshot -name '*.lean' )
+- 21:34 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
