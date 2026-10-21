@@ -19,9 +19,80 @@
   "lem-pur-support-localization-triangle",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First obtain full faithfulness of the termwise derived $i_*$. The inverse-image/direct-image adjunction and exactness of $i^*$ are supplied by [def-weil-pbc-proetale-operations]; $i_*$ is exact under the hypotheses of the statement. The sheaf counit $i^*i_*\\to1$ is invertible by [lem-exc-proetale-closed-fully-faithful], for the finite constant ring $A$ and without constructibility. Apply [def-weil-exact-derived-adjunction] to these two exact additive functors. Its derived counit is the localized degreewise counit, hence invertible: its inverse is obtained by applying localization to the degreewise inverse. The functors preserve bounded below complexes termwise, so restrict to $D^+$. In the resulting adjunction $i^*\\dashv i_*$ the Hom bijection followed by precomposition with the invertible counit gives a bijection $\\operatorname{Hom}_X(i_*L,i_*M)\\cong\\operatorname{Hom}_Z(L,M)$, inverse to applying $i_*$. Thus $i_*$ is fully faithful on $D^+$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-exc-proetale-closed-fully-faithful",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion) and 09BM (lemma-closed-immersion-complement-retrocompact-exact); exact adjunction localized as specified by def-weil-exact-derived-adjunction"
+   }
+  },
+  {
+   "text": "Write $C=Rj_*j^*K$ and let $\\delta:C\\to(i_*SK)[1]$ be the boundary in the specified support triangle. By [lem-pur-support-localization-triangle] that triangle is distinguished and its first arrow is the support counit of $i_*\\dashv S$. Combining the full faithfulness proved in step 1 with this adjunction gives the bijection\n$$\\operatorname{Hom}_X(i_*L,i_*SK)\\xrightarrow{\\ \\epsilon_K\\circ-\\ }\\operatorname{Hom}_X(i_*L,K).$$\nIndeed the first Hom set is identified with $\\operatorname{Hom}_Z(L,SK)$ by $i_*$, and the inverse-transpose formula is $u\\mapsto\\epsilon_K\\circ i_*u$. Consequently any $c:i_*L\\to i_*SK$ with $\\epsilon_Kc=a$ must equal $i_*\\theta$.",
+   "uses": [
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent argument using the support adjunction; compare Tag 0145, TR3, for the next step"
+   }
+  },
+  {
+   "text": "Rotate both distinguished triangles once, using TR2 of [def-weil-triangulated-category]. Their first arrows are the same $\\eta_j:K\\to C$. Apply TR3 to the identity maps of $K$ and $C$; obtain $t:(i_*L)[1]\\to(i_*SK)[1]$ such that\n$$t\\circ b=\\delta,\\qquad (-\\epsilon_K[1])\\circ t=-a[1].$$\nSince shift is an additive autoequivalence, there is a unique $c:i_*L\\to i_*SK$ with $c[1]=t$ (under its canonical inverse-shift identifications). Cancelling the minus signs and using faithfulness of shift gives $\\epsilon_Kc=a$. The other equation gives $c[1]b=\\delta$. Thus $(c,1_K,1_C)$ is a morphism of the unrotated triangles, including the boundary square. By step 2, $c=i_*\\theta$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR2 and TR3, with the signed rotation"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-triangle-morphism-iso] to the morphism of distinguished triangles of step 3: its middle and third components are identities, so $i_*\\theta$ is invertible. Full faithfulness from step 1 reflects this isomorphism explicitly: lift $(i_*\\theta)^{-1}$ to $v:SK\\to L$; faithfulness applied to the two inverse equations gives $v\\theta=1_L$ and $\\theta v=1_{SK}$. Thus $\\theta$ is invertible. By [def-weil-pbc-triangles-with-shift], componentwise invertibility of $(i_*\\theta,1_K,1_C)$ makes it an isomorphism in the category of triangles. Its last square is the equation $(i_*\\theta)[1]b=\\delta$ already proved, so the prescribed third arrow is respected.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle), and Tag 0144 (definition-triangle)"
+   }
+  },
+  {
+   "text": "Every completion in step 3 has first component $c$ satisfying $\\epsilon_Kc=a$, so step 2 forces the same $i_*\\theta$. The other components are fixed identities. Hence the isomorphism is independent of the completion. For natural families on this fixed closed-open pair, let $u:L\\to L'$ and $v:K\\to K'$ satisfy $v a=a'i_*u$. The support adjunction and natural counit in [lem-pur-support-localization-triangle] give\n$$\\epsilon_{K'}\\,i_*(S(v)\\theta)=v\\epsilon_K i_*\\theta=va=a'i_*u=\\epsilon_{K'}\\,i_*(\\theta'u).$$\nThe bijection of step 2, now with target $K'$, and faithfulness of $i_*$ give $S(v)\\theta=\\theta'u$. This proves the asserted naturality. All arguments used all ordinary finite constant-$A$ module sheaves and $D^+$; no etale-origin or constructibility restriction was introduced.",
+   "uses": [
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "Agent adjunction calculation; the support triangle is the first displayed triangle of the sk-prop-a1 proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-closed-fully-faithful",
+  "def-weil-exact-derived-adjunction",
+  "lem-pur-support-localization-triangle",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First localization triangle; explicit counit-normalized comparison using Stacks 0145 (TR2/TR3) and 014A, with exact derived closed full faithfulness."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +128,45 @@
    "results": "DerivedCategory.mem_distTriang_iff; CategoryTheory.Triangulated.TStructure.triangle_map_exists; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished; CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃; CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished triangle with a supported first term is canonically isomorphic to the support localization triangle via the counit transpose",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Triangulated.TStructure.triangle_iso_exists; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; CategoryTheory.Triangulated.TStructure.triangle_map_exists; DerivedCategory.triangleOfSESIso; DerivedCategory.mem_distTriang_iff; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁",
+   "date": "2026-10-21",
+   "verdict": "no match: no support-localization counit-transpose assertion for ordinary pro-etale module derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangle\", \"isIso\"",
+   "results": "CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₁; CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₂; CategoryTheory.Pretriangulated.Triangle.instIsIsoHom₃; CategoryTheory.Pretriangulated.Triangle.isIso_of_isIsos; CategoryTheory.Pretriangulated.Triangle.isZero₁_of_isIso₂; CategoryTheory.Pretriangulated.Triangle.isZero₃_of_isIso₁; CategoryTheory.Pretriangulated.Triangle.isZero₁_iff_isIso₂; CategoryTheory.Pretriangulated.Triangle.isZero₃_iff_isIso₁",
+   "date": "2026-10-21",
+   "verdict": "no exact match: componentwise triangle isomorphism facts only; existing DAG triangle leaves are used"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(counit|transpose)|counit.*support",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no support-localization counit-transpose assertion for ordinary pro-etale module derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique transpose of a closed support counit gives a natural isomorphism of localization triangles",
+   "results": "CategoryTheory.Localization.isoUniqFunctor; CategoryTheory.Localization.natTrans_ext; CategoryTheory.Localization.liftNatIso; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Functor.mapTriangleOpCompTriangleOpEquivalenceFunctorApp; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Localization.Monoidal.ε'; CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.counitIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: no support-localization counit-transpose assertion for ordinary pro-etale module derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction with fully faithful left adjoint identifies the first vertex of a distinguished triangle from its counit",
+   "results": "CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Adjunction.IsTriangulated; CategoryTheory.Pretriangulated.shortComplexOfDistTriangle_X₁",
+   "date": "2026-10-21",
+   "verdict": "no exact match: triangulated adjunction facts do not state the support-counit identification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-retracted-support-localization-comparison",
@@ -72,12 +178,36 @@
  "blueprint": {
   "from": {
    "node": "prop-pur-affine-line-orientation-uniqueness",
-   "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Canonical identification of the supported first term and boundary (old item Steps 4--5)",
+   "place": "sk-prop-a1 proof, first closed-open localization triangle and subsequent identification of its connecting map with the support boundary; prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, via lem-pur-retracted-support-localization-comparison, canonical identification of the supported term and boundary.",
    "via": [
     "lem-pur-retracted-support-localization-comparison"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-classical-support-counit-identification",
+  "worker": "stage1",
+  "summary": "Q83 gives a complete five-step argument without new nodes: localize the exact closed adjunction to prove derived full faithfulness, use the support adjunction to make postcomposition with the counit bijective on supported sources, apply TR3 after rotation, identify the completion with the prescribed transpose, and prove invertibility, boundary compatibility, independence and naturality. The statement is unchanged.",
+  "blueprint": "Realizes the sk-prop-a1 first localization triangle with its actual support boundary, as needed by the nearest blueprint ancestor prop-pur-affine-line-orientation-uniqueness and its retracted-support comparison. The proof expands the canonical identification rather than selecting an arbitrary cone identification.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Generic closed direct-image sheaf counit isomorphism for all finite constant-coefficient pro-etale modules; needed to localize the exact adjunction, and not an orientation theorem supplied by sk-prop-a1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-proetale-closed-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-b49de17a4",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-b49de17a4 (reviewer sub-agent of L); spot-checked: Read the item's five-step split in full (no new nodes; statement and stmt_deps unchanged against live; first split of a Q40-created child; no re-split note; not dropped; still unsplit in live and side-live). Step 1: derived full faithfulness of i_* from def-weil-exact-derived-adjunction plus the invertible sheaf counit of lem-exc-proetale-closed-fully-faithful (Stacks proetale 09AA, l.4945); the localized counit is invertible and Hom sets are unchanged on the full subcategory D^+. Step 2: postcomposition with the counit is a bijection, using full faithfulness and the support adjunction of lem-pur-support-localization-triangle. That node's Lean statement record pins first arrow = adj.counit and second = derived open unit, and the item's unchanged statement defines eps from that node, so the use is accepted. Step 3: TR2/TR3 sign check verified: rotated last arrows are -a[1] and -eps[1], giving eps c = a and c[1]b = delta. Step 4: the Mathlib leaf isIso_of_isIso23 plus reflection by full faithfulness and def-weil-pbc-triangles-with-shift give the isomorphism including the boundary square. Step 5: independence and naturality follow from the step-2 injectivity and counit naturality. Edge cases checked: Z empty, U empty, K=0, L=0. No noetherian, constructibility or etale-origin hypothesis is used. No duplicates among lem-pur-supported-triangle-mate-identification, lem-exc-proetale-support-triangle, lem-pur-support-comparison-boundary and the sibling transport node. No SGA. tool_use lem-exc-proetale-closed-fully-faithful accepted: generic, and already in the support node's closure. Advisory, no fix needed: exactness of i_* in step 1 comes from the item's setup and is stated in lem-pur-support-localization-triangle (cited in step 2), so citing it in step 1 too would read better."
  }
 }
