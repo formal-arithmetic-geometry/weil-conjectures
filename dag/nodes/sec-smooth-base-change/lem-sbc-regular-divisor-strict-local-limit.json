@@ -13,56 +13,50 @@
  ],
  "proof": [
   {
-   "text": "Take Ω to be the algebraic closure of κ(y), and barY its canonical geometric point. Let H be the small pointed-neighbourhood colimit strictHenselizationRing barY. Apply the retained upstream strictHenselizationResidue theorem to the full affine-neighbourhood colimit for its closed-point image. The existing strictHenselizationLocalStructure compatibility theorem transfers strict henselianity to H. The inverse canonical colimit comparison identifies the structural maps, and Spec_closedPoint identifies the closed points, so H has the required closed-point image. Take b to be the ring map recovered by full faithfulness of Spec from the small structural morphism.",
+   "text": "Take Ω to be the algebraic closure of κ(y), and barY its canonical geometric point. Apply the retained upstream strictHenselizationResidue theorem to the full affine-neighbourhood colimit H = strictHenselization barY. This provides locality, strict henselianity, and the closed-point image. Recover b : R → H by full faithfulness of Spec from strictLocalizationToBase barY.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-strict-henselization-local-structure",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-weil-pbc-strict-henselization-functoriality"
    ],
    "elementary": false
   },
   {
-   "text": "Apply smallStrictHenselization_indEtale_of_affine_chart to the identity affine chart and identity presentation of Spec H. This proves b is ind-etale over R. The closed-point image is y; taking the asIdeal of this equality identifies contraction of the maximal ideal with y. Thus b(g) belongs to the maximal ideal, hence is not a unit.",
+   "text": "Apply the upstream strictHenselization_indEtale_of_affine_chart theorem to the identity affine chart and the identity presentation of Spec H. It proves b is ind-etale. The residue theorem identifies the structural image of the closed point with y. Apply PrimeSpectrum.asIdeal to identify the contraction of the maximal ideal with y; thus b(g) lies in the maximal ideal and is not a unit.",
    "uses": [
-    "lem-weil-pbc-small-strict-henselization-ind-etale"
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
    ],
    "elementary": false
   },
   {
-   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. Apply strictHenselization_regular_divisor_quotient to g. It supplies regularity and a domain structure for H/(b(g)). A nonzero quotient of a local ring is local, so Mathlib IsLocalRing.of_surjective' and IsRegularLocalRing.of_isRegularRing_of_isLocalRing make this quotient regular local.",
+   "text": "Apply the retained upstream strictHenselization_regular_divisor_quotient directly to R, g, barY and b. Its regular-ring and domain conclusions give a nonzero regular quotient H/(b(g)). IsLocalRing.of_surjective' makes that quotient local, and IsRegularLocalRing.of_isRegularRing_of_isLocalRing makes it regular local.",
    "uses": [
-    "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-sbc-strict-hensel-regular-divisor-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. Apply that same comparison to 0: its hypotheses do not require a nonzerodivisor. Transport regularity of R to R/(0) using RingEquiv.quotientBot and Ideal.quotEquivOfEq. The image of zero is not a unit because H is nonzero. The comparison yields regularity of H/(0), which transports back to H. Since H is local, IsRegularLocalRing.of_isRegularRing_of_isLocalRing gives ambient regular locality.",
+   "text": "Apply the same upstream quotient theorem to 0; its hypotheses do not require a nonzerodivisor. Transport regularity of R to R/(0) using RingEquiv.quotientBot and Ideal.quotEquivOfEq. Zero is not a unit in the nonzero local ring H. The theorem gives regularity of H/(0), which transports back to H, and IsRegularLocalRing.of_isRegularRing_of_isLocalRing gives ambient regular locality.",
    "uses": [
-    "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-sbc-strict-hensel-regular-divisor-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "Give H the algebra structure induced by b. Ind-etaleness implies weak etaleness, hence flatness, by the upstream proved instance Algebra.IndEtale.weaklyEtale. Mathlib IsSMulRegular.of_flat transports the supplied injective multiplication by g. Assemble the preceding properties with the closed point of H. These are direct applications of existing instances and the flat base-change lemma.",
+   "text": "Give H the algebra structure induced by b. The proved upstream instance Algebra.IndEtale.weaklyEtale supplies flatness. IsSMulRegular.of_flat transports injective multiplication by g. Assemble these properties with the closed point of H.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-strict-hensel-regular-divisor-quotient",
-  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
-  "lem-weil-pbc-strict-henselization-local-structure"
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-sbc-strict-hensel-regular-divisor-quotient"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A3",
+  "group": "A2",
   "document": "Stacks Project",
   "place": "Tags 0EYG, 04HX, 05WS and 06LN",
-  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
+  "note": "Retirement onto the already proved upstream theorem. The proof uses the full affine-neighbourhood colimit directly; no small/full transport or small-model compatibility theorem is needed. All existential conclusions, the mathematical parent dependency, and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -112,14 +106,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularDivisorStrictLocalLimit.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RegularDivisorStrictLocalLimit.lean",
   "declaration": "AlgebraicGeometry.Scheme.regular_divisor_strict_local_limit",
-  "statement": "theorem regular_divisor_strict_local_limit\n    (R : CommRingCat.{u}) (g : R) [IsRegularRing R]\n    (hg : IsSMulRegular R g) [IsRegularRing (R ⧸ Ideal.span {g})]\n    (y : Spec R) (hy : g ∈ y.asIdeal) :\n    ∃ (H : CommRingCat.{u}) (ι : R →+* H),\n      ι.IndEtale ∧\n      ∃ (hH : IsStrictlyHenselianLocalRing H),\n        IsRegularLocalRing H ∧ IsRegularLocalRing (H ⧸ Ideal.span {ι g}) ∧\n        IsSMulRegular H (ι g) ∧\n        ι g ∈ IsLocalRing.maximalIdeal H ∧\n        ∃ x : Spec H, (Spec.map (CommRingCat.ofHom ι)) x = y",
+  "statement": "theorem regular_divisor_strict_local_limit\n    (R : CommRingCat.{u}) (g : R) [IsRegularRing R]\n    (hg : IsSMulRegular R g) [IsRegularRing (R ⧸ Ideal.span {g})]\n    (y : Spec R) (hy : g ∈ y.asIdeal) :\n    ∃ (H : CommRingCat.{u}) (ι : R →+* H),\n      ι.IndEtale ∧\n      ∃ (_ : IsStrictlyHenselianLocalRing H),\n        IsRegularLocalRing H ∧ IsRegularLocalRing (H ⧸ Ideal.span {ι g}) ∧\n        IsSMulRegular H (ι g) ∧\n        ι g ∈ IsLocalRing.maximalIdeal H ∧\n        ∃ x : Spec H, (Spec.map (CommRingCat.ofHom ι)) x = y",
   "branch": "sheaf-dag",
-  "by": "S3",
-  "date": "2026-10-13"
+  "by": "A2",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module under coord/retire-items.tsv. The retained proved upstream theorem has exactly the same statement (the existential instance binder is anonymous upstream). Its witness is the full affine-neighbourhood colimit; the existential conclusion does not prescribe a representative. The canonical smallStrictHenselizationColimitIso identifies this with the former small colimit. RootSplitCoverIndEtaleCharts already imports and applies this upstream theorem directly."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -134,12 +129,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b3bec",
-  "group": "A3",
+  "reviewer": "C-9f1d5",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261021T140748-L-2740975",
+  "landing": "20261021T161021-L-3955733",
   "kind": "interface",
-  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
+  "note": "independent cc review: retired Sheaf stub vs live sibling stubs; node lean.statement vs upstream WeilConjectures source (verbatim); node proof/proof_deps vs upstream proof; importers of Sheaf module (none); axioms of upstream theorem (clean)"
  },
  "lean_audit": {}
 }
