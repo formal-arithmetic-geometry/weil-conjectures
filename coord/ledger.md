@@ -22321,3 +22321,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:45 L: returned deliver/Q158/lem-weil-pbc-raw-restricted-class-normalization (reviewer RETURN: L: independent stage-2 immutable head bc0785c3579e: H2: delivery adds theorem stmt_dep sbc-lem-higher-direct-image-presh)
 - 11:47 L: merged deliver/Q59/lem-pur-finite-product-field-coefficient-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 11:49 L: merged deliver/NN/lem-pc-finite-dimensional-trace-exact (stage 2; reviewer PASS; parallel immutable checks)
+- 11:50 L: returned deliver/NS/lem-pur-normalized-operation-system-models (reviewer RETURN: L: independent stage-2 immutable head fc0bf4aba50d: H2 / theorem-stmt_dep rule: the delivery added theorem node lem-pur-)
