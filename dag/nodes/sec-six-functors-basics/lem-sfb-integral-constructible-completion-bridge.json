@@ -20,9 +20,116 @@
   "pqf-def-locnoeth",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the coefficient-limit isomorphism to identify $B_T$ with $\\varprojlim_n(A/\\varpi^n)_T$ for $T=Z$ and for every stratum used below. The Cartesian coefficient isomorphisms identify restriction of $B_Z$ with $B_T$, and give exact restriction on modules. The continuous integral coefficient object in the resolution theorem is this same $p_T^*\\underline A$: the norm on $E$ and $A=\\{x:|x|_E\\le1\\}$ are those fixed in the coefficient convention. Thus all the following applications concern the original coefficient ring and ordinary derived category.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.5 coefficient convention; Definition 6.8.10; coefficient identification supplied by the cited DAG statements"
+   }
+  },
+  {
+   "text": "Every locally closed scheme stratum $S\\hookrightarrow Z$ is again Noetherian, finite-dimensional, and has $\\ell$ invertible. Indeed the minimal-closed-subset property for $Z$ makes its space Noetherian, so every subset is quasi-compact. Factor $S$ as closed in an open $O$; $O$ is Noetherian by the open-subscheme lemma. Intersections with an affine cover of $O$ present $S$ as spectra of quotients of Noetherian rings. Such quotients are Noetherian since ascending chains of their ideals lift to ascending chains of ideals upstairs; quasi-compactness selects finitely many of these affine charts. A strict chain of irreducible closed subsets of $S$ remains strict after closure in $Z$, since intersection back with $S$ recovers it, so the dimension bound persists. Units map to units in every stratum local ring. Also $Z$ is quasi-separated: every intersection of two affine opens is quasi-compact by the same subset property.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Hypothesis checks for Proposition 6.6.11 and Proposition 6.8.11(3); elementary scheme-stratum reductions"
+   }
+  },
+  {
+   "text": "Assume (i). Fix a degree $q$ with $H^q(K)≠0$ and a stratum $S$ on which $P=H^q(K)|_S$ is locally finitely presented. Apply the integral locally-free-resolution theorem to $P$ on $S$. It supplies a short exact sequence $0\\to F_1\\to F_0\\to P\\to0$, where each $F_i$ is pro-étale locally finite free over $B_S$. This theorem allows torsion in $P$ and assumes no completeness of $P$. Its topologically Noetherian hypothesis follows from step 2. The two covers for $F_1,F_0$ need not coincide.",
+   "uses": [
+    "lem-weil-pbc-integral-lfp-locally-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite DVR resolution argument; existing general-ring-object resolution interface"
+   }
+  },
+  {
+   "text": "For each $i$, $F_i[0]$ satisfies condition (ii) of the stratified-perfect characterization on $S$: use the single stratum $S$ and, on a trivializing cover, the perfect scalar complex $A^{r_i}[0]$. Hence $F_i[0]$ belongs to the completed integral category. The short exact sequence in step 3 gives the distinguished triangle $F_1[0]\\to F_0[0]\\to P[0]\\to F_1[1]$. Closure under cones in that same characterization puts $P[0]$ in the completed category. Its condition (iii) now supplies a finite stratification of $S$ on which $P$ has finite constant scalar local models. This argument uses the theorem on the Noetherian finite-dimensional base $S$, never on the possibly non-Noetherian members of its pro-étale covers.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Proposition 6.8.11(3), triangulated-category argument"
+   }
+  },
+  {
+   "text": "There are only finitely many relevant $q$ and finitely many original strata in (i). Compose each finite refinement from step 4 with its original immersion into $Z$. These give finite locally closed constructible scheme partitions of $Z$, one for each $q$. Apply the open-closed refinement theorem to these finitely many partitions: each resulting leaf has actual morphisms to the input scheme strata. Pull back the local scalar-matrix presentations along those morphisms. Exact coefficient pullback preserves their cokernels and finite free terms; their scalar entries remain the same elements of $A$. The finite-constant-model equivalence therefore gives the required models on every leaf. The bound on the cohomology of $K$ is unchanged. This proves (iii), including a common finite stratification if one is required.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomology and stratification refinement; scalar presentations as in Definition 6.8.10"
+   }
+  },
+  {
+   "text": "Conversely assume (iii). The finite-constant-model lemma expresses each $B_V\\otimes_A P$ as the cokernel of a finite matrix with entries in $A$, hence also of a finite matrix over $B_V$. Thus every cohomology sheaf has a locally finite presentation on its given strata. Together with boundedness this is precisely (i). This direction uses no completeness assumption and no assertion that arbitrary coefficient sections are constant.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10; the scalar-presentation implication is the cited finite-constant-model lemma"
+   }
+  },
+  {
+   "text": "Finally apply the stratified-perfect characterization directly on $Z$. Its condition (iii) is exactly the cohomological scalar-model condition (iii) here; its condition (i) is explicitly also the category of the detailed integral definition used in (ii). The theorem retains compatible étale-origin witnesses and a single bound for all derived reductions. Therefore it proves both (ii) implies (iii) and (iii) implies (ii), with precisely these extra clauses, not merely constructibility of each reduction separately. Steps 3–6 identify (i) with (iii), completing all three equivalences.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3); compatible-witness and uniform-bound clauses of the cited characterization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "det-def-sfb-constructible-local-model",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-integral-lfp-locally-free-resolution",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "sk-def-sfb-bounded-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3). Assembly of existing general-ring-object resolution and integral characterization nodes; not an attribution of local finite presentation to the paper definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +165,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R}\\n  {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBiject\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules equipped with local generators data\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations concern scalar adic completion, generic module presentations, condensed discreteness, or normed spaces; none states the pro-etale coefficient/category comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|Constructible).*(complete|Complete)|(complete|Complete).*(constructible|Constructible)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible module objects over condensed valuation rings agree with the derived complete integral category including etale origin witnesses",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, IsAdicComplete.mk, LightCondMod, CondensedMod.IsSolid.mk, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, Condensed.free, Condensed.instAB4CondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Constructible\", \"complete\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral l adic coefficients bounded constructibility defined by stratified locally finite presentation is equivalent to derived completeness and uniformly bounded constructible etale reductions",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.henselianRing, PreTilt.exists_smodEq_untiltAux, ChevalleyThm.chevalley_polynomialC, PreTilt.untiltAux_smodEq_untiltFun, IsAdic.isAdicComplete_iff, IsAdic.isPrecomplete_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented sheaves over the completed l adic coefficient ring on a Noetherian scheme have bounded constructible cohomology and are derived complete",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.QuasicoherentData.IsFinitePresentation, AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
+  },
+  {
+   "tool": "grep",
+   "query": "def isFinitePresentation|class IsFinitePresentation|isDiscrete_tfae|flat_of_isNoetherian",
+   "results": "11 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: scalar adic completion, general sheaf finite presentation, and condensed discreteness do not identify the two integral constructibility categories"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-lower-star-preserves",
@@ -73,10 +222,79 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-dc-lower-star-preserves",
-   "place": "Returned proof steps 2 and 5: both passages between the general lfp cohomological definition, finite constant local models, and the derived-complete integral category",
+   "place": "Integral-coefficient paragraph of the unit proof: input K is integral constructible, and the final inference from derived completeness and bounded constructible reductions; ancestor lem-sfb-dc-lower-star-preserves, integral case (step 2 of its current split)",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-constructible-completion-bridge",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven-step proof using existing nodes only: coefficient and scheme hypothesis checks; resolve lfp modules on the original strata by locally finite free integral modules; use the completed category and cone closure to refine to scalar models; assemble finite refinements; identify the detailed completed category including its witnesses and uniform reduction bounds. No new nodes, no Lean writing or compilation.",
+  "blueprint": "Realizes the integral-coefficient passage in the open-direct-image unit and ancestor lower-star lemma: general lfp constructibility passes to the completed integral category before reduction, and the converse returns to bounded constructibility afterward. Rational and algebraic-closure passages are not used.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-constructible-local-model",
+    "why": "Scalar finite presentations describe finite constant models; generic presentation tool used in the same coefficient route. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Finite common refinement with actual factorization morphisms to scheme strata, required to retain scalar models. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic short-exact-sequence to distinguished-triangle tool, used to apply closure under cones. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Quasi-compactness of strata and affine intersections, to check the existing integral characterization hypotheses. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "why": "Resolution of a locally finitely presented integral module, the missing general-ring-object input to the unit integral constructibility criterion. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Existing completion and cohomological constant-model comparison, explicitly retaining compatible étale-origin representatives and uniform bounds. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Noetherian open neighborhoods in which the locally closed strata are closed. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Topological Noetherianity required by the resolution theorem on the original strata. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Canonical coefficient restriction and its exactness; generic input for restricting presentations, not an alternative finiteness route. The unit supplies no separate general interface for this fact."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Canonical integral coefficient-limit identification on Z and its strata; generic coefficient tool, preserving the integral reduction route. The unit supplies no separate general interface for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-constructible-local-model",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-integral-lfp-locally-free-resolution",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-3096e87b9",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-3096e87b9 (reviewer sub-agent of L); spot-checked: I read the whole item with every cited statement open. The statement and stmt_deps are unchanged from the landed base. There are 0 new nodes, and the split is an assembly of existing nodes. I found no cycle (the closure of the cited nodes does not contain the item) and no re-split note. (ii)<=>(iii) is lem-weil-pbc-integral-stratified-perfect-characterization applied on Z (step 7). Its detailed-category clause supplies completeness, compatible étale witnesses and the uniform [r,s], which matches Bhatt-Scholze Prop. 6.8.11(3) with Def. 6.5.1 and 6.8.10. (i)=>(iii) works as follows. Step 2 shows the strata are Noetherian, finite-dimensional and qcqs with ℓ invertible; these facts are elementary from the three Noetherian leaves. On each stratum, lem-weil-pbc-integral-lfp-locally-free-resolution gives 0->F1->F0->P->0 with F_i locally finite free. F_i[0] is a perfect constant model, the SES triangle and cone closure put P[0] in the category, and the characterization's (iii) gives scalar models. lem-fix-constructible-open-closed-refinement gives actual morphisms to the strata, and constant models pull back. (iii)=>(i) uses det-def-sfb-constructible-local-model (finite constant model => lfp). The coefficients B_Z = lim (A/ϖ^n)_Z are the same ring in all three cited frameworks via sk-prop-sfb-qlbar-colimit-x and the Cartesian clause. Edge cases checked: Z empty and K=0 are trivial; over Spec of a separably closed field an lfp module is constant; B[1/ϖ] is excluded from (ii); (A/ϖ^r)_Z has uniform reduction amplitude [-1,0]. I accept the declared tool_uses because the unit route via sk-lem-integral-models needs finite type over a field. No duplicate exists in the DAG and the item cites no SGA. Advisory only: step 5 could say in one clause that locally closed strata of the Noetherian Z are constructible."
  }
 }
