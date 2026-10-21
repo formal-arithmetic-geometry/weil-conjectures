@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-intrinsic-finite-derived-pullback",
+ "kind": "statement",
+ "title": "Intrinsic finite-coefficient derived pullback preserves bounded constructibility",
+ "statement": "Let $A$ be a finite field, and let $h:S\\to T$ be a morphism of schemes [def-pc-scheme]. Use small pro-étale sites [def-weil-pbc-proetale-site], constant ring sheaves $A_Y$ [def-weil-pbc-constant-sheaf], ordinary module-sheaf categories [def-weil-sheaf-of-modules-category], and their ordinary uncompleted derived categories $D(Y_{\\mathrm{proet}},A)$ [def-weil-abstract-derived-category]. Let $h^*$ be the module inverse image of [def-weil-proetale-inverse-image], using its canonical constant-section map $h^{-1}A_T\\to A_S$.\n\nThe functor $h^*$ is exact. Termwise application therefore induces a functor $D(h^*)$ on these ordinary derived categories, and for every $K\\in D(T_{\\mathrm{proet}},A)$ and $q\\in\\mathbf Z$ there is a natural isomorphism\n$$\\mathcal H^q(D(h^*)K)\\cong h^*\\mathcal H^q(K).$$\nIf an $A_T$-module sheaf $F$ is constructible in the intrinsic sense of [def-weil-proetale-constructible-sheaf], then $h^*F$ is constructible in the same sense. More precisely, given a witnessing finite constructible locally closed stratification $T=\\coprod_a T_a$ with inclusions $i_a$, the fibre products $S_a=S\\times_TT_a$ [def-pc-fibre-product] form a witnessing stratification of $S$; empty strata may be discarded, keeping at least one stratum (so for $S=\\varnothing$ a single empty stratum, on which the zero sheaf is trivially locally constant, witnesses constructibility). Writing $i'_a:S_a\\to S$ and $h_a:S_a\\to T_a$, its restricted module is\n$$i_a'^*h^*F\\cong h_a^*i_a^*F.$$\nWhenever $i_a^*F$ is trivialized on a pro-étale covering $\\{U_{a,b}\\to T_a\\}$ with finite $A$-module models $M_{a,b}$, the covering $\\{S_a\\times_{T_a}U_{a,b}\\to S_a\\}$ trivializes this restricted module with the same $M_{a,b}$; in particular its geometric stalks remain finite-dimensional over $A$.\n\nFor any scheme $Y$, let $\\mathcal B_A(Y)$ consist of the complexes with cohomology zero outside a finite interval and constructible in this intrinsic sense. Then $D(h^*)\\mathcal B_A(T)\\subseteq\\mathcal B_A(S)$, with the same cohomological vanishing interval. No assumption on the characteristic, cohomological dimension, or Noetherianity of the schemes is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(5), finite discrete specialization R=A and m=0; Lemma 6.5.8(2) for the open and closed immersions used in Lemma 6.7.11. The exactness and intrinsic stratification argument is isolated from steps 2–3 of lem-sfb-finite-field-closed-support."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-21T05:49:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"digest\": \"83751ccd8310f3d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible.*(pullback|upperStar|inverseImage))|((pullback|upperStar|inverseImage).*constructible)",
+   "results": "{\"t\": \"2026-10-21T05:49:13Z\", \"tool\": \"grep\", \"query\": \"(constructible.*(pullback|upperStar|inverseImage))|((pullback|upperStar|inverseImage).*constructible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image on small pro etale constant coefficient module sheaves preserves bounded constructible complexes",
+   "results": "{\"t\": \"2026-10-21T05:49:14Z\", \"tool\": \"leansearch\", \"query\": \"Exact inverse image on small pro etale constant coefficient module sheaves preserves bounded constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"LightCondensed.IsDiscrete\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"CategoryTheory.instIsConstantObjSheafSheafCompose\"], \"digest\": \"b826a759fe3c8509\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes, exact pullback of finite constant ring module sheaves on pro etale sites preserves bounded complexes with intrinsically constructible cohomology",
+   "results": "{\"t\": \"2026-10-21T05:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of schemes, exact pullback of finite constant ring module sheaves on pro etale sites preserves bounded complexes with intrinsically constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"AlgebraicGeometry.IsEtale.of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\"], \"digest\": \"b823ad79d9851344\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of finite locally constant modules on a finite constructible stratification is constructible and commutes with cohomology in the ordinary derived category",
+   "results": "{\"t\": \"2026-10-21T05:49:30Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of finite locally constant modules on a finite constructible stratification is constructible and commutes with cohomology in the ordinary derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"CompHausLike.LocallyConstant.incl_comap\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\", \"CondensedMod.LocallyConstant.functorToPresheaves\"], \"digest\": \"cadde2d0d62aab93\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleProEtaleModuleSheaf|boundedConstructible.*(upperStar|pullback)|(upperStar|pullback).*boundedConstructible",
+   "results": "{\"t\": \"2026-10-21T05:49:54Z\", \"tool\": \"grep\", \"query\": \"IsConstructibleProEtaleModuleSheaf|boundedConstructible.*(upperStar|pullback)|(upperStar|pullback).*boundedConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-21T05:49:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern general sheaf pullback, presheaf module adjunctions, or discrete condensed modules; none asserts exact pullback preserving intrinsic finite stratifications and bounded constructible cohomology for ordinary pro-etale constant-ring modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-field-closed-support",
+  "date": "2026-10-21",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Finite-coefficient internal-Hom finiteness sentence after the reduction-modulo-varpi display: Lemma 6.7.11, closed-immersion support-triangle proof, specialized to R=A and m=0. The two pullback applications in the closed-immersion support-triangle argument, expanded as exactness/cohomology and base-changed finite local models.",
+   "via": [
+    "lem-sfb-finite-field-closed-support",
+    "lem-sfb-finite-field-internal-hom-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
