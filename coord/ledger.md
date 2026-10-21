@@ -21054,3 +21054,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q87/lem-pur-external-rhom-cone-pairing (reviewer PASS; after a return; new nodes: 4)
 - 08:15 L: merged deliver/Q08/lem-sfb-compactification-middle-over-base (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q46/lem-ag-uniform-complete-tensor (reviewer FIX; first push; new nodes: 0)
+- 08:15 L: merged deliver/Q31/lem-sfb-locally-free-derived-scalars (reviewer PASS; after a return; new nodes: 1)
