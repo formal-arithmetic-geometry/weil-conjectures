@@ -19321,3 +19321,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:24 L: returned deliver/K2/Sheaf.Paper.LevelwiseAdicTruncations (reviewer RETURN: (reviewer C-a7915, head a7915cea1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.LevelwiseAdicT)
 - 00:25 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData (reviewer RETURN: (reviewer C-b1534, head b15341b5b) H4/C5: the repair adds lean/Sheaf/AlgebraicGeometry/PerfectOverlapNestedPullbackSquar)
 - 00:28 L: returned deliver/C6/Sheaf.SixFunctors.BoundaryAlphaNormalization (reviewer RETURN: (reviewer C-de4c8, head de4c83783) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.Boundary)
+- 00:29 L: returned deliver/T3/Sheaf.AlgebraicGeometry.GeoCartierCycleClass (reviewer RETURN: (the landing tools, head 3420064cc) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.SupportedKummerScalarDer)
