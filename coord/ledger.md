@@ -20240,3 +20240,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/N8/lem-sfb-equivalence-square-inverse-mate-coherence (reviewer PASS; first push; new nodes: 0)
 - 04:08 L: merged deliver/Q39/lem-pd-ringed-tensor-adjunction-mate (reviewer PASS; first push; new nodes: 0)
 - 04:08 L: merged deliver/NW/lem-cbc-completed-extension-zero-comparison (reviewer FIX; after a return; new nodes: 4)
+- 2026-10-21T04:08:37Z L: superseded stage-1 delivery Q15/lem-sp-open-proetale-counit-scalar at a1c47de0b72200fca4435ef563a4b248e2054184; current completion retained; packet archived at refs/superseded/Q15/lem-sp-open-proetale-counit-scalar/a1c47de0b72200fca4435ef563a4b248e2054184; stale return retired.
