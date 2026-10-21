@@ -6,7 +6,6 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.CategoryTheory.SheafificationTensorLocalIso
-import Sheaf.CategoryTheory.PresheafTensorInternalHom
 
 /-! # Sheaf tensor unit comparison identities
 
@@ -210,6 +209,71 @@ theorem sfbSheafTensorUnitComparison
         (ρ_ P).hom ≫ f ∧
       (sfbSheafD J f g) ≫ (sfbSheafBraiding J F G).hom =
         (β_ P Q).hom ≫ sfbSheafD J g f := by
-  sorry
+  have cancelUnit {X Y : Cᵒᵖ ⥤ A} (t : X ⟶ Y)
+      (e : (presheafToSheaf J A).obj X ≅ (presheafToSheaf J A).obj Y)
+      (he : e.hom = (presheafToSheaf J A).map t) :
+      t ≫ toSheafify J Y ≫ e.inv.hom = toSheafify J X := by
+    rw [toSheafify_naturality_assoc]
+    change toSheafify J X ≫ ((presheafToSheaf J A).map t).hom ≫ e.inv.hom = _
+    rw [← he]
+    change toSheafify J X ≫ (sheafToPresheaf J A).map e.hom ≫
+      (sheafToPresheaf J A).map e.inv = _
+    rw [← Functor.map_comp, Iso.hom_inv_id, Functor.map_id]
+    exact Category.comp_id _
+  have cancelLeft (X Y : Cᵒᵖ ⥤ A) :
+      (toSheafify J X ⊗ₘ 𝟙 Y) ≫ toSheafify J (sheafify J X ⊗ Y) ≫
+        (sfbSheafTensorUnitLeftIso J X Y).inv.hom = toSheafify J (X ⊗ Y) :=
+    cancelUnit _ _ rfl
+  have cancelRight (X Y : Cᵒᵖ ⥤ A) :
+      (𝟙 X ⊗ₘ toSheafify J Y) ≫ toSheafify J (X ⊗ sheafify J Y) ≫
+        (sfbSheafTensorUnitRightIso J X Y).inv.hom = toSheafify J (X ⊗ Y) :=
+    cancelUnit _ _ rfl
+  have counitUnit (T : Sheaf J A) :
+      toSheafify J T.obj ≫ (sfbSheafEpsilon J T).hom = 𝟙 T.obj :=
+    (sheafificationAdjunction J A).right_triangle_components T
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · have ht : ((f ⊗ₘ g) ≫ toSheafify J (F.obj ⊗ G.obj)) ⊗ₘ h =
+        ((f ⊗ₘ g) ⊗ₘ h) ≫ (toSheafify J (F.obj ⊗ G.obj) ⊗ₘ 𝟙 H.obj) := by
+      simp only [tensorHom_comp_tensorHom, Category.comp_id]
+    dsimp only [sfbSheafD, sfbSheafAssociator, sfbSheafTensor]
+    rw [ht]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, Category.assoc]
+    rw [reassoc_of% (cancelLeft (F.obj ⊗ G.obj) H.obj)]
+    change ((f ⊗ₘ g) ⊗ₘ h) ≫ toSheafify J _ ≫
+      sheafifyMap J (α_ F.obj G.obj H.obj).hom ≫
+      sheafifyMap J (𝟙 F.obj ⊗ₘ toSheafify J (G.obj ⊗ H.obj)) = _
+    rw [← toSheafify_naturality_assoc, ← toSheafify_naturality]
+    rw [← Category.assoc, associator_naturality, Category.assoc]
+    rw [tensorHom_comp_tensorHom_assoc]
+    simp only [Category.comp_id]
+  · have ht : toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A)) ⊗ₘ f =
+        (𝟙 ((Functor.const Cᵒᵖ).obj (𝟙_ A)) ⊗ₘ f) ≫
+          (toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A)) ⊗ₘ 𝟙 F.obj) := by
+      simp only [tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
+    dsimp only [sfbSheafD, sfbSheafLeftUnitor]
+    rw [ht]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, Category.assoc]
+    rw [reassoc_of% (cancelLeft ((Functor.const Cᵒᵖ).obj (𝟙_ A)) F.obj)]
+    change (𝟙 _ ⊗ₘ f) ≫ toSheafify J _ ≫
+      sheafifyMap J (λ_ F.obj).hom ≫ (sfbSheafEpsilon J F).hom = _
+    rw [← toSheafify_naturality_assoc, counitUnit, Category.comp_id]
+    simpa only [id_tensorHom] using leftUnitor_naturality f
+  · have ht : f ⊗ₘ toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A)) =
+        (f ⊗ₘ 𝟙 ((Functor.const Cᵒᵖ).obj (𝟙_ A))) ≫
+          (𝟙 F.obj ⊗ₘ toSheafify J ((Functor.const Cᵒᵖ).obj (𝟙_ A))) := by
+      simp only [tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
+    dsimp only [sfbSheafD, sfbSheafRightUnitor]
+    rw [ht]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, Category.assoc]
+    rw [reassoc_of% (cancelRight F.obj ((Functor.const Cᵒᵖ).obj (𝟙_ A)))]
+    change (f ⊗ₘ 𝟙 _) ≫ toSheafify J _ ≫
+      sheafifyMap J (ρ_ F.obj).hom ≫ (sfbSheafEpsilon J F).hom = _
+    rw [← toSheafify_naturality_assoc, counitUnit, Category.comp_id]
+    simpa only [tensorHom_id] using rightUnitor_naturality f
+  · change ((f ⊗ₘ g) ≫ toSheafify J (F.obj ⊗ G.obj)) ≫
+      sheafifyMap J (β_ F.obj G.obj).hom =
+        (β_ P Q).hom ≫ (g ⊗ₘ f) ≫ toSheafify J (G.obj ⊗ F.obj)
+    rw [Category.assoc, ← toSheafify_naturality, ← Category.assoc,
+      BraidedCategory.braiding_naturality, Category.assoc]
 
 end CategoryTheory
