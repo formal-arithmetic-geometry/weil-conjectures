@@ -20432,3 +20432,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:32 L: merged deliver/O1/lem-sf-integral-open-reduction-comparison (reviewer FIX; after a return; new nodes: 3)
 - 06:32 L: merged deliver/N0/lem-sfb-identity-open-derived-restriction (reviewer FIX; first push; new nodes: 0)
 - 06:32 L: merged deliver/NS/lem-pur-etale-finite-tor-direct-image-coefficients (reviewer FIX; first push; new nodes: 0)
+- 06:32 L: merged deliver/Q60/lem-sfb-finite-proper-classical-coproducts (reviewer FIX; after a return; new nodes: 3)
