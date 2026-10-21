@@ -17,9 +17,145 @@
   "def-sfb-right-derived-functor",
   "lem-sfb-condensed-derived-invariant-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal E$ for internal $G$-equivariant modules, $\\mathcal M$ for ordinary internal modules, $U$ for forgetting the action, and $F=\\Gamma_G$. By the derived restriction calculus, both categories are Grothendieck abelian, $U$ is exact and detects exactness, and $F$ is additive and right adjoint to exact trivial inflation, hence left exact. Enough injectives gives a nonnegative equivariant injective resolution $s:N[0]\\to I^\\bullet$: embed $N$ in an injective, embed its cokernel in the next injective, and continue. These successive embeddings make the augmented sequence exact. The cited K-injective computation theorem says $I^\\bullet$ is K-injective.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
+   }
+  },
+  {
+   "text": "For a profinite parameter $S$, the free module $A[S]$ is $j_{S!}A_S$: maps from the presheaf $V\\mapsto\\bigoplus_{V\\to S}A(V)$ to a module sheaf are determined by the image of the identity generator at $S$, so its sheafification has exactly the free universal property. The internal/section-module equivalence allows application of the cited flatness theorem; thus $A[G]$ is flat. The functor $L(M)=A[\\underline G]\\otimes_A M$, with translation on the first factor, is left adjoint to $U$: $h:M\\to UJ$ corresponds to $[g]\\otimes m\\mapsto g h(m)$, with inverse evaluation at $[1]$. These formulas hold after every base change. Since $U$ creates exactness and tensor with $A[G]$ is exact, $L$ is exact. The exact-left-adjoint injectivity theorem now implies that $UI^q$ is injective for every $q$. Exactness of $U$ makes $Us$ an ordinary internal-module injective resolution.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV, lemma-j-shriek-flat; homology.tex Tag 015Z, lemma-adjoint-preserve-injectives; explicit free-adjunction specialization"
+   }
+  },
+  {
+   "text": "Form $T^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{p+1}],UI^q)$ for $p,q\\geq0$, with homogeneous deletion differential horizontally and $d_I$ vertically. Give it the diagonal action on arguments AND the action on $I^q$ on values. These differentials are equivariant and commute. Put $T=\\operatorname{Tot}T^{p,q}$ with $d_h+(-1)^p d_v$. The new homogeneous-function injectivity lemma applies to $I^q$, using step 2, so each $T^{p,q}$ is equivariantly injective. Each $T^n$ is a finite sum of these objects, hence injective: extend a map across a monomorphism separately after each of the finitely many projections, and take their sum into the finite biproduct. Thus $T$ is a bounded-below complex of equivariant injectives. There is an equivariant cochain map $\\delta:I\\to T$ placing the constant function with value $x\\in I^q$ in bidegree $(0,q)$: its horizontal differential is zero and its vertical differential is the constant function with value $d_Ix$.",
+   "uses": [
+    "lem-sfb-internal-homogeneous-functions-injective",
+    "def-sp-double-complex-total",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
+   }
+  },
+  {
+   "text": "There is a cochain isomorphism $\\chi:F(T)\\to V$, where\n$$V=\\operatorname{Tot}_{p,q\\geq0}\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q)$$\nhas the inhomogeneous action differential. In bidegree $(p,q)$ take $f$ to $c(g_1,\\ldots,g_p)=f(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p)$; its inverse is\n$$f(h_0,\\ldots,h_p)=h_0\\cdot c(h_0^{-1}h_1,h_1^{-1}h_2,\\ldots,h_{p-1}^{-1}h_p).$$\nCancellation of the common left factor proves equivariance and that the formulas are inverse after every profinite base change. Deleting the first homogeneous coordinate gives $g_1c(g_2,\\ldots)$, deleting an interior one multiplies the adjacent arguments, and deleting the last drops the last argument, with their original alternating signs. Postcomposition with $d_I$ commutes with evaluation because $d_I$ is equivariant. This proves the cochain assertion with the total signs of step 3. Invariants commute with these finite biproducts: a tuple is fixed exactly when each coordinate is fixed. Write $v=\\chi F(\\delta):F(I)\\to V$; it is the bar-degree-zero inclusion of invariants.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
+   }
+  },
+  {
+   "text": "Use $Us$ as the single compatible resolution for every derived internal Hom term. Step 2 makes this legitimate. The bar theorem, with the augmentation normalization specified in the bar-data node, identifies $QV$ with $\\mathscr B_A(G;N)$ and gives\n$$\\epsilon=Q(v)\\circ c_s,\\qquad c_s=u_I^{-1}\\circ R F(Qs):R F(QN)\\longrightarrow QF(I).$$\nHere $u_I$ is invertible since $I$ is K-injective. The formula for $c_s$ is the normalized derived-functor comparison, not a choice of an isomorphism on cohomology. In this model the underived-to-derived bar map $j$ is postcomposition with $s$ into the resolution-degree-zero row of $V$.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
+   }
+  },
+  {
+   "text": "Define $t:R_N\\to T$ in degree $p$ by postcomposing with $s^0:N\\to UI^0$ and putting the result in bidegree $(p,0)$. It is a cochain map since $d_Is^0=0$, and is equivariant because $s$ is equivariant and $N$ is trivial. From the definition of $\\rho$ and the coordinate formulas of step 4 one obtains the equality of cochain maps\n$$\\chi\\circ F(t e)=j_{\\mathrm{chain}}\\circ\\rho.$$\nIndeed both send $x\\in F(K^p)$ to the function $s^0(e^p(x)(1,g_1,g_1g_2,\\ldots))$ in bidegree $(p,0)$ and have zero other bidegree components. Here $j_{\\mathrm{chain}}$ is the model of $j$ fixed in step 5.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
+   }
+  },
+  {
+   "text": "The map $a$ is degreewise monic. In degree zero, since $K^{-1}=0$, its induced isomorphism $N=H^0(N[0])\\to H^0(K)=\\ker d_K^0$ shows that $a^0$ is a monomorphism; in other degrees the source is zero. Apply the cited lifting lemma to the monomorphic quasi-isomorphism $a:N[0]\\to K$, the bounded-below injective complex $I$, and $s:N[0]\\to I$. It gives an equivariant cochain map $b:K\\to I$ with $ba=s$.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P, lemma-morphisms-lift, part (2)"
+   }
+  },
+  {
+   "text": "Both maps $te,\\delta b:K\\to T$ have the same composite with $a$. The first composite sends $n$ to the constant function with value $s^0(n)$ in bidegree $(0,0)$, because $ea$ is the given augmentation. The second is $\\delta s$, the very same map. Since $a$ is a quasi-isomorphism and $T$ is bounded below with injective terms (step 3), the homotopy-uniqueness lemma gives $te\\simeq\\delta b$ equivariantly. Applying additive invariants to $te-\\delta b=dH+Hd$ preserves this equation. Localization therefore gives\n$$Q(\\chi)\\,QF(te)=Q(v)\\,QF(b).$$",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013S, lemma-morphisms-equal-up-to-homotopy"
+   }
+  },
+  {
+   "text": "Naturality of the derived unit in [def-sfb-right-derived-functor] gives\n$$QF(b)=u_I^{-1}\\circ R F(Qb)\\circ u_K.$$\nSince $ba=s$ and $Qa$ is invertible, functoriality gives $R F(Qb)=R F(Qs)\\circ(R F(Qa))^{-1}$. Substitute this in step 8, and then use steps 5 and 6:\n$$j\\circ Q(\\rho)=Q(v)\\circ c_s\\circ(R F(Qa))^{-1}\\circ u_K=\\epsilon\\circ(R F(Qa))^{-1}\\circ u_K.$$\nOnly $I$ and the auxiliary $T$ were required to have injective terms. In particular, this argument imposed no acyclicity condition on the given $K^n$ or $R_N^n$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; naturality of the comparison unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-sp-kinjective-computes",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sfb-internal-homogeneous-functions-injective",
+  "def-sp-double-complex-total",
+  "def-sfb-condensed-equivariant-bar-data",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: formal normalization helper, expanded by Q10 through homogeneous injective function modules and Stacks 013P/013S. Exact independent internal-bar normalization reference remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +191,59 @@
    "results": "{\"t\": \"2026-10-21T17:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the derived invariants unit for a comparison with the homogeneous cochain resolution in an internal module category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁\", \"groupCohomology.infNatTrans\", \"groupCohomology.cochainsMap_f_0_comp_cochainsIso₀_assoc\", \"groupCohomology.cochainsMap_f_0_comp_cochainsIso₀\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply\", \"groupCohomology.cochainsMap_id_comp_assoc\", \"groupCohomology.infNatTrans_app\"], \"digest\": \"4253c8c1506a57bb\"}",
    "date": "2026-10-21",
    "verdict": "no match: abstract Rep resolutions, inflation maps and injective-resolution naturality do not state this equality with the derived INTERNAL bar totalization and an arbitrary equivariant resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "barResolution|homotopy.*injective|rightDerived_map_eq",
+   "results": "{\"t\": \"2026-10-21T18:17:32Z\", \"tool\": \"grep\", \"query\": \"barResolution|homotopy.*injective|rightDerived_map_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"52b72ef0f82bb348\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Homotopy",
+   "results": "{\"t\": \"2026-10-21T18:17:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived, CategoryTheory.Homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Homotopy'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query: Loogle could not resolve CategoryTheory.Homotopy; this query supplies no negative evidence. The subsequent valid exact-adjoint query and semantic searches were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the derived functor unit computed using a bounded below injective complex",
+   "results": "{\"t\": \"2026-10-21T18:17:33Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of the derived functor unit computed using a bounded below injective complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\"], \"digest\": \"24c263ed26867aa2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps into a bounded below complex of injectives that agree on a quasi-isomorphic source are chain homotopic",
+   "results": "{\"t\": \"2026-10-21T18:17:35Z\", \"tool\": \"leanfinder\", \"query\": \"Two maps into a bounded below complex of injectives that agree on a quasi-isomorphic source are chain homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descHomotopy\", \"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CategoryTheory.InjectiveResolution.descHomotopyZero\", \"CategoryTheory.InjectiveResolution.homotopyEquiv\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\"], \"digest\": \"8f95efe504489935\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation preserving map from an equivariant resolution to the homogeneous group bar resolution induces the canonical derived invariants comparison",
+   "results": "{\"t\": \"2026-10-21T18:17:36Z\", \"tool\": \"leanfinder\", \"query\": \"An augmentation preserving map from an equivariant resolution to the homogeneous group bar resolution induces the canonical derived invariants comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.infNatTrans\", \"groupCohomology.infNatTrans_app\", \"Rep.barResolution.extIso\", \"Rep.barResolution\", \"Rep.FiniteCyclicGroup.resolution.π\", \"Rep.barResolution_complex\", \"groupHomology.inhomogeneousChainsIso\", \"groupCohomology.map_id_comp_H0Iso_hom\"], \"digest\": \"a0c795de793c9c5a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"Action\"",
+   "results": "{\"t\": \"2026-10-21T18:21:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Injective.addAction\", \"Function.Injective.mulAction\", \"Function.Injective.subtractionMonoid\", \"Function.Injective.subtractionCommMonoid\", \"Function.Injective.mulActionWithZero\", \"Function.Injective.distribMulAction\", \"AddAction.toPerm_injective\", \"MulAction.toPerm_injective\"], \"digest\": \"a7085b8e65e36384\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+   "results": "{\"t\": \"2026-10-21T18:24:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\"], \"digest\": \"e2b8c5288bc9e1c5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract Rep bar resolutions and ordinary derived-unit comparisons do not state the internal condensed resolution-to-derived-bar equality. Generic tools are reused as existing DAG nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-polynomial-derived-bar-comparison",
@@ -84,5 +269,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-resolution-bar-normalization",
+  "worker": "stage1",
+  "summary": "Compared all citations with their statements; constructed a common homogeneous injective target, used strict extension across the nonnegative augmentation, compared maps by Stacks 013S, and finished by the derived-unit naturality equation. One supporting injectivity lemma is new; the item statement is unchanged.",
+  "blueprint": "The current blueprint direct-images proof paragraph (3), open-immersion direct image, is the originating context. This agent-created chain has blueprint.from.node=null in the live import; its existing via chain is retained. Steps 1-5 supply the compatible normalized bar model; steps 6-9 prove the augmentation-preserving evaluation has that normalized arrow.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-kinjective-computes",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-3c6872baf",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-3c6872baf (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new node and the cited statements in full. On the base the item had an empty proof; it was created by Q06 on 2026-10-22 for the polynomial-bar node, so it is not a 2026-10-21 re-split and is not on the dropped list. No SGA is cited. Step-by-step checks: (1) Grothendieck abelian with enough injectives gives an equivariant injective resolution s:N[0]->I, which is K-injective by lem-sp-kinjective-computes (2). (2) A[S]=j_{S!}A_S by the universal property, so it is flat by 03EV (read). L=A[G](x)- with translation is an exact left adjoint of U, and its transpose formulas are correct. By 015Z (read), U preserves injectives. (3) T^{p,q}=Hom(A[G^{p+1}],UI^q) with diagonal and value action; its terms are injective by the new node, and finite biproducts of injectives are injective. delta is the constant function, and its horizontal differential x-x=0. (4) chi(f)=f(1,g1,g1g2,...) with inverse h0.c(h0^{-1}h1,...); I checked invariance and that the first face equals g1.c(g2,...), the bar-data first face. (5) eps=Q(v)c_s is exactly the bar-data computation datum, which is normalized by the total augmentation and is Assertion(G) of the bar node. j is modeled as postcomposition with s^0; it is a chain map since s^0 is equivariant and N is trivial. (6) t is a chain map since d_I s^0=0. It is equivariant because N is trivial. chi F(te)=j rho holds coordinatewise. (7) a^0 is monic because K^{-1}=0 gives H^0=ker d^0, which satisfies the hypothesis of the 013P(2) lift lemma (read). (8) te.a=delta.s=const s^0 n, so te and delta b are homotopic by 013S (read). (9) Unit naturality and RF(Qb)=RF(Qs)RF(Qa)^{-1} give the stated equality exactly, with no acyclicity of K^n or R_N^n used. New node lem-sfb-internal-homogeneous-functions-injective: it is true, since H_n(J) is isomorphic to the coinduction of Hom(A[G^n],UJ) (I checked the untwisting). Coinduction is right adjoint to the exact U, and Hom(A[G^n],UJ) is injective by flatness. Small cases: G=1 gives UJ (the hypothesis), n=0 gives the twisted coinduced module, and J=0 gives 0. It is statement-only, self-contained, and strictly smaller than the item. The rg -L duplicate search found no duplicate: the lem-exc-coinduced-* nodes are about discrete modules over finite rings, and lem-sfb-condensed-internal-bar-resolution states exactness and the induced-module form, not injectivity. tool_uses (kinjective-computes, j-shriek-flat, tensor-closed, lift-unique-homotopy) are generic black-box homological tools and accepted. No fixes."
  }
 }
