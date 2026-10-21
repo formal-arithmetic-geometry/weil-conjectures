@@ -1,0 +1,124 @@
+{
+ "id": "lem-zl-ladic-invariant-subspace-descent",
+ "kind": "statement",
+ "title": "Invariant subspaces of algebraic l-adic representations descend continuously",
+ "statement": "Let l be prime, K an algebraic closure of Q_l, G a profinite group, and rho an l-adic representation on a K-vector space V in the sense of [def-pod-l-adic-representations]. If U is a K-linear subspace with an action tau satisfying tau(g)(v)=rho(g)(v) in V for all g and v in U, then tau is l-adic in the same sense: it has a finite-dimensional continuous model over a finite subextension of K, with canonical scalar-extension comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "First six sentences; invariant-subspace descent in step 2 of lem-zl-common-irreducibility-detecting-cover, also Deligne Weil II (1.1.6)."
+ },
+ "stmt_deps": [
+  "def-pod-l-adic-representations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a continuous finite coefficient model W over E from IsLAdic and an E-basis c of W. Its scalar extension, followed by the canonical comparison, is a K-basis a of the ambient representation. In this basis the ambient action matrices are scalar extensions of continuous E-valued matrices B(g).",
+   "uses": [
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a K-basis b of the invariant subspace U and a K-linear projection p onto U. Let J and P be the matrices of inclusion U to V and projection V to U in b and a. Since p restricts to the identity on U and U is invariant, the restricted action has matrix P B(g) J over K. This includes the zero subspace and zero-dimensional ambient model.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Adjoin to E all finitely many entries of P and J. They are algebraic over Q_l, so their compositum L with E is a finite extension of Q_l inside K. The displayed formula gives matrices over L. Their multiplication and inverse identities follow by the injectivity of L to K from those of the given restricted action. The inclusion E to L is Q_l-linear between finite-dimensional normed vector spaces, hence continuous for the spectral norms. Therefore the matrix formula has continuous entries and gives a jointly continuous action on the coordinate L-vector space.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Map the coordinate L-vector space into U by the basis b and take its image W_L as an actual submodule. Linear independence of b makes this map an isomorphism onto W_L, and equivariance transports the constructed continuous action to W_L. The finite-basis base-change theorem identifies K tensor_L W_L with U by the canonical pure-tensor map. These data give exactly IsLAdic of the restricted action.",
+   "uses": [
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-l-adic-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "Invariant-subspace argument in the first six sentences; coordinate projection version of the finite-coordinate descent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every invariant subspace of a continuous representation over an algebraic closure of Q_l that descends to a finite extension also descends to a continuous representation over a finite extension",
+   "results": "8 hits: invariant rings, profinite integral extensions, invariant-vector functors and cohomology. None descends the coefficient field of an invariant vector subspace.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, Submodule, IntermediateField",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLAdic|isLAdic|subrepresentation.*descend|descend.*subrepresentation",
+   "results": "0 hits in Mathlib. The project IsLAdic definition states existence of a finite coefficient model, but no subrepresentation closure theorem exists.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every invariant subspace of an l-adic representation over an algebraic closure of Q_l has a continuous model over a finite extension of Q_l",
+   "results": "8 hits: Representation.invariants (Mathlib.RepresentationTheory.Invariants), Representation.mem_invtSubmodule and invariant-submodule lattice declarations (Mathlib.RepresentationTheory.Submodule), PadicAlgCl.instCoePadic (Mathlib.NumberTheory.Padics.Complex). These define invariant spaces or the base-field inclusion; none states continuous finite-coefficient descent for arbitrary invariant subspaces.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.CommonIrreducibilityDetectingCover",
+  "date": "2026-10-21",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-irreducibility-detecting-cover",
+   "place": "Proof step 2: continuous finite-field descent of each invariant subspace",
+   "via": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.LAdicSubrepresentation",
+  "file": "lean/Sheaf/RepresentationTheory/LAdicSubrepresentation.lean",
+  "declaration": "Representation.isLAdic_subrepresentation",
+  "statement": "theorem isLAdic_subrepresentation\n    (l : ℕ) [Fact l.Prime] (K : Type u) [Field K] [Algebra ℚ_[l] K]\n    [IsAlgClosure ℚ_[l] K] (G : ProfiniteGrp.{v})\n    (V : Type w) [AddCommGroup V] [Module K V]\n    (ρ : G →* (V ≃ₗ[K] V)) (hρ : IsLAdic l K G V ρ)\n    (U : Submodule K V) (τ : G →* (U ≃ₗ[K] U))\n    (hτ : ∀ (g : G) (v : U), (τ g v : V) = ρ g (v : V)) :\n    IsLAdic l K G U τ",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T134515-L-1259384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T134515-L-1259384",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

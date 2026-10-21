@@ -22648,3 +22648,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:45 L: merged deliver/M5/Sheaf.Paper.PrincipalReductionConeCalculus (stage 3; reviewer PASS; first push; landing 20261021T134505-L-1220119 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:45 L: merged deliver/M6/Sheaf.SixFunctors.RingedDerivedTwoIsoComparison (stage 3; reviewer PASS; first push; landing 20261021T134508-L-1231567 (proof); batch 20261021T134254; modules 1; new nodes 0)
 - 13:45 L: merged deliver/M7/Sheaf.Paper.ECoefficientSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261021T134511-L-1244743 (interface); batch 20261021T134254; modules 1; new nodes 0; change records: coord/changes/M7-sbc-private-proof-environment.md)
+- 13:45 L: merged deliver/N2/Sheaf.RepresentationTheory.CommonIrreducibilityDetectingCover (stage 3; reviewer PASS; first push; landing 20261021T134515-L-1259384 (interface); batch 20261021T134254; modules 2; new nodes 1)
