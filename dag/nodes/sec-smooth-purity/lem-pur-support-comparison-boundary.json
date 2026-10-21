@@ -23,51 +23,29 @@
  ],
  "proof": [
   {
-   "text": "Work in a common universe in which both sites are small. Their ordinary $A$-module categories are Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-sc-bounded-below-injective-resolution-existence] to choose a bounded-below injective module resolution $F_p\\to J^\\bullet$. The module adjunction is [def-weil-pbc-site-comparison-morphism], and its inverse image is exact by [lem-sf-comparison-pullback-exact]. Consequently [lem-sp-right-adjoint-preserves-injectives] shows that $I^\\bullet=\\nu_{T,*}J^\\bullet$ is bounded below and termwise injective on the etale site. This uses preservation of injectives by direct image, rather than an assertion that inverse image preserves injectives.",
+   "text": "By [lem-pur-support-comparison-common-injectives], choose $h:F_p\\to J^\\bullet$ and the etale resolution $a:F\\to I^\\bullet=\\nu_{T,*}J^\\bullet$. The section complexes on $T,V$ and their support kernels are identified termwise, including differentials, inclusions and restrictions.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-sc-bounded-below-injective-resolution-existence",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sp-right-adjoint-preserves-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 015Z, lemma-adjoint-preserve-injectives; derived.tex Tag 013K, lemma-injective-resolutions-exist; sites-cohomology.tex Section 07A5; injectives.tex Tag 079H."
-   }
-  },
-  {
-   "text": "Let $a:F\\to I^\\bullet$ be the ordinary comparison unit followed by $\\nu_{T,*}(F_p\\to J^\\bullet)$. By the injective computation of right derived functors [lem-weil-pbc-right-derived-plus-injective], $I^\\bullet$ represents $R\\nu_{T,*}F_p$, and by [lem-pur-comparison-unit-injective-model], applied to $M=F$ in degree zero and the resolution $F_p\\to J^\\bullet$, $a$ represents the derived adjunction unit under this identification. That unit is an isomorphism by [thm-weil-pbc-site-comparison], with no constructibility hypothesis. Thus $a$ is a quasi-isomorphism and is a specified etale injective resolution of $F$. The direct-image formula [def-weil-pbc-site-comparison-morphism] gives $I^r(T)=J^r(T)$ and $I^r(V)=J^r(V)$, with identical restriction maps and differentials. Taking kernels gives $\\Gamma_C(T_{\\mathrm{et}},I^\\bullet)=\\Gamma_C(T_{\\mathrm{proet}},J^\\bullet)$, using [def-pur-support-cohomology].",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-pur-comparison-unit-injective-model",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-pur-support-cohomology"
+    "lem-pur-support-comparison-common-injectives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099V, lemma-relative-comparison (2), and 09B1, lemma-compare-derived (2); derived.tex Tag 05TI, lemma-enough-injectives-right-derived."
+    "place": "Tag 099V, label lemma-relative-comparison, clause (2), and Tag 09B1, label lemma-compare-derived, clause (2). Agent-formulated injective-model refinement: resolution existence, preservation of injectives by the right adjoint, and the specified augmentation are extracted from old proof steps 1-2 of lem-pur-support-comparison-boundary."
    }
   },
   {
-   "text": "For completeness the degreewise surjectivity needed for localization also holds for module injectives. For an injective module sheaf $E$, [lem-weil-pbc-ringed-site-injective-module-injective-presheaf] makes its underlying module presheaf injective. For the monomorphism $j:V\\to T$, the map of free presheaves $A[h_V]\\to A[h_T]$ is injective: on each object its basis map is the injection $\\operatorname{Hom}(-,V)\\to\\operatorname{Hom}(-,T)$. By the definition of injectivity [def-sp-injective-resolutions], restriction of Hom into $E$ is surjective. The free-presheaf Yoneda formula [lem-weil-pbc-free-yoneda-presheaf-module] identifies this with $E(T)\\to E(V)$. Therefore in either topology the three complexes $\\ker(E^\\bullet(T)\\to E^\\bullet(V))$, $E^\\bullet(T)$, $E^\\bullet(V)$ form a degreewise short exact sequence when $E^\\bullet$ is $I^\\bullet$ or $J^\\bullet$. The kernel and both arrows respect the $A$-actions.",
+   "text": "Each term $E$ of either resolution is an injective sheaf of modules over the constant ring sheaf $A$ on the small etale, respectively pro-etale, site. The open immersion $j:V\\to T$ is a monomorphism in that site, so [lem-pur-ringed-site-injective-mono-restriction] makes the restriction $E(T)\\to E(V)$ surjective. Thus $0\\to\\ker(E^\\bullet(T)\\to E^\\bullet(V))\\to E^\\bullet(T)\\to E^\\bullet(V)\\to0$ is degreewise short exact, with $A$-linear arrows.",
    "uses": [
-    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-free-yoneda-presheaf-module"
+    "lem-pur-ringed-site-injective-mono-restriction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FB, lemma-injective-module-injective-presheaf; module version of the monomorphism restriction argument of Tag 093X."
+    "place": "Tag 093X, label lemma-restriction-along-monomorphism-surjective (restriction of an injective O-module along a monomorphism is surjective), as used in etale-cohomology.tex Tag 09XP."
    }
   },
   {
-   "text": "The support complex in each row computes the right-derived kernel functor of [def-pur-support-cohomology], with the ordinary module-coefficient interpretation of [lem-pur-support-site-comparison]; the middle complex computes global sections. The restrictions $I^\\bullet|_V$ and $J^\\bullet|_V$ are injective resolutions on their respective sites by [lem-weil-pbc-etale-restriction-injectives] and [lem-weil-pbc-proetale-restriction-injectives]. Thus the last complexes compute cohomology on $V$. These are precisely the injective localization models for the long exact sequences of [thm-pur-with-support-exactness]. The finiteness of $A$ makes every coefficient sheaf torsion, and the hypotheses of the pro-etale clause hold. No finiteness of the modules of sections is needed.",
+   "text": "The kernel and middle complexes compute derived supports [def-pur-support-cohomology, lem-pur-support-site-comparison] and global sections. Open restriction preserves injective module sheaves by [lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-proetale-restriction-injectives], so the last complexes compute cohomology of $V$. The two rows therefore give the localization sequences of [thm-pur-with-support-exactness], with the stipulated snake convention. Finiteness of $A$ makes all coefficient sheaves torsion; no finiteness of section modules is needed.",
    "uses": [
     "def-pur-support-cohomology",
     "lem-pur-support-site-comparison",
@@ -82,17 +60,14 @@
    }
   },
   {
-   "text": "The equalities in Step 2 identify the two short exact sequences of Step 3 term by term, including their inclusions and restriction arrows. They therefore give a morphism of short exact cochain complexes. Its support component represents the canonical supported comparison of [lem-pur-support-site-comparison]: first apply the etale derived support functor to the unit $F\\to R\\nu_{T,*}F_p$, represented by the augmentation $a$, and then use the kernel identity of Step 2. In the specified resolution $a:F\\to I^\\bullet$, the first operation is represented by the identity on the support complex of $I^\\bullet$. The middle component is the global comparison of [lem-weil-pbc-comparison-global-cohomology] by the same unit computation. On $V$ it is the global comparison for $j^{-1}F$: restriction of $a$ is the adjunction unit there, since the direct-image restrictions are the same maps $J(T)\\to J(V)$. The coefficient identification is the canonical $j^{-1}F_p\\cong\\nu_V^*(j^{-1}F)$ of [lem-weil-pbc-comparison-pullback]. Thus the three cohomology maps are exactly the specified $c_C^q,c_T^q,c_V^q$, rather than unspecified isomorphisms of their groups.",
+   "text": "The termwise identities give a morphism of these short exact complexes. By [lem-pur-support-comparison-section-model], its three cohomology components are exactly $c_C^q,c_T^q,c_V^q$, with the specified open coefficient identification and augmentations.",
    "uses": [
-    "lem-pur-support-site-comparison",
-    "lem-weil-pbc-comparison-global-cohomology",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-pur-support-comparison-section-model"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099V, lemma-relative-comparison, 099W, lemma-compare-cohomology, and 09B1, lemma-compare-derived; etale-cohomology.tex Tag 09XP, kernel localization model."
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, label section-cohomology-support, kernel restriction construction. Agent-formulated refinement identifying the three etale/pro-etale comparison components on the common injective model (old proof step 5 of lem-pur-support-comparison-boundary), with open-unit compatibility made explicit; the tag alone does not assert site-comparison normalization."
    }
   },
   {
@@ -111,26 +86,16 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-support-comparison-common-injectives",
+  "lem-pur-ringed-site-injective-mono-restriction",
   "def-pur-support-cohomology",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-pur-comparison-unit-injective-model",
   "lem-pur-support-site-comparison",
-  "lem-sc-bounded-below-injective-resolution-existence",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
   "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-  "prop-pur-kinjective-resolutions-exist",
   "thm-pur-with-support-exactness",
-  "thm-weil-pbc-site-comparison"
+  "lem-pur-support-comparison-section-model",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-comparison-global-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
@@ -229,11 +194,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-support-comparison-boundary",
   "worker": "stage1",
-  "summary": "Expanded the support comparison boundary argument using a pro-etale injective resolution and its injective etale direct image. The derived-unit theorem makes that direct image a resolution of F; identical section complexes and support kernels give the comparison of localization short exact complexes. Wrote out module restriction surjectivity and the boundary sign calculation. No new nodes or statement changes. Maintainer review (Q144 reader, 2026-10-17): Step 2 cited lem-weil-pbc-right-derived-plus-injective for the representation of the derived unit by the injective model, which that statement does not give (it is in the proof of thm-weil-pbc-site-comparison); added the statement-only node lem-pur-comparison-unit-injective-model and cited it there, and declared the three off-unit sk-thm-properbasechange tools.",
-  "blueprint": "Realizes the final sentence of the current main-20261015 proof of thm-pur-rank-one-local-calculation, where the pro-etale form is obtained by site comparison and must preserve the displayed support boundary. The steps also realize the imported Tag 09XP localization construction and its restriction/forgetting-support compatibility.",
+  "summary": "Deliberate human-requested re-split, statement unchanged. Extracted two statement-only arguments: common injective resolutions (old steps 1-2) and identification of the specified comparison maps on that model, including open-unit coherence (old step 5). Retained the explicit module restriction proof, localization computation and snake-boundary sign calculation in the parent. Old arguments and their exact dependency statements are preserved in the report for the independent workers.",
+  "blueprint": "Realizes the final sentence of the current main-20261015 proof of thm-pur-rank-one-local-calculation: site comparison transports the normalized support boundary. New common-injectives realizes construction of the comparison model; new section-model realizes its three specified comparison components; the parent assembles the localization ladder and the no-sign boundary equation.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -310,12 +275,12 @@
   "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q144-0044585db",
-  "group": "Q144",
+  "reviewer": "NT-cc-Q54-eab7c7fbd",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-0044585db (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the statement of every cited node, the parent thm-pur-rank-one-local-calculation (including its main-20261015 text), and the sources: Stacks 09XP, 0117/08N7, 03FB/03FD, 015Z, 099V/099W/09B1 and 0DVC/09T5. The mathematics is correct. Step 1 pushes a pro-etale injective resolution forward with nu_*, which keeps it injective because nu^* is exact; this does not rely on inverse image preserving injectives. Step 2 holds because nu_* is evaluation at the same object, so the two complexes have identical sections and identical support kernels. Step 3 shows restriction to V is surjective for module injectives, via the free-presheaf monomorphism and Yoneda; this is elementary and correctly marked. Step 4: restriction preserves injectives because an open immersion is etale and weakly etale, and the torsion hypothesis holds because n*A=0 for n the characteristic of A. Step 5 identifies the three components with the unit-induced comparisons c_C, c_T and c_V. Step 6: boundary naturality is HomologySequence.delta_naturality, and there is no sign because both rows use the same snake on identical cochains. Edge cases C empty, C=T and F=0 all check out, and no SGA is cited. One C3/C4 fault, repaired: Step 2 took 'a represents the derived adjunction unit' from lem-weil-pbc-right-derived-plus-injective. That node's statement does not say this, and neither does the statement of thm-weil-pbc-site-comparison; it appears only in that theorem's proof. I added the statement-only node lem-pur-comparison-unit-injective-model: R nu_*(Qj) composed with eta^D_{QM} equals alpha_J composed with Q(nu_*(j) eta^0_M). I checked it against the construction in that proof and against Mathlib Adjunction.derivedη_fac_app (Adjunction.lean:103), which is recorded as a candidate, not a match. Step 2 now cites the new node and proof_deps is recomputed. I also added three off-unit tool_uses that were used but not declared: thm-weil-pbc-site-comparison, lem-weil-pbc-comparison-global-cohomology and lem-weil-pbc-comparison-pullback. I accept all 14 tool uses. The item's statement is unchanged. Note for the maintainer: lem-pur-support-site-comparison (unsplit) must define c^C as the unit-induced map R Gamma_C(eta) followed by the kernel identification, as this item and the parent use it.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-eab7c7fbd (reviewer sub-agent of L); spot-checked: Re-split note (human, 2026-10-21 14:08): it asks for a proof of at most 3000 characters, at least 1 new node, and every old argument moved into a node. The delivery meets it. Base: 6 steps, 5470 chars. Delivery: 2 statement-only nodes; the parent's statement and stmt_deps are unchanged and its proof is 2530 chars (2475 after my fix). Old steps 1-2 became the common-injectives node. Its maths is correct for any scheme T and finite ring A: nu_* preserves injectives because nu^* is exact, a = nu_*(h) composed with eta^0 represents the derived unit (iso by Stacks 099V(2)), and I(W)=J(W) holds literally, so the support kernels agree. Old step 5 became the section-model node. Its open-unit equation type-checks and holds for the canonical beta. Qu_C = c^C holds because RGamma_C(eta) is the identity on Gamma_C(I) and b_C is normalized as the identity on kernels. It makes no boundary claim, so it does not restate the item. Old step 4 (citation assembly) is now parent step 3 and old step 6 (ses-naturality, no-sign lift argument, A-linearity) is now parent step 5, kept verbatim. The delivery had compressed old step 3 into parent step 2 and re-derived Stacks 093X inline. FIX 1: step 2 now cites the existing Lean-closed node lem-pur-ringed-site-injective-mono-restriction (093X, read at sites-cohomology.tex l.1962; V->T is a monomorphism in both small sites). The parent is now a pure assembly; proof_deps recomputed. FIX 2 (B3): section-model used j_et^-1 and j_pro^-1 without citing the inverse-image definition; def-weil-pbc-inverse-image added. Sources read: Stacks 09XP, 093X, 03FB, 03F3, 0117, 08N7, 099V, 09B1; route is the final sentence of the main-20261015 proof of thm-pur-rank-one-local-calculation; no SGA. Edge cases C empty, C=T, F=0 and q=0 checked. Batch-5 flag: section-model cites lem-pur-support-site-comparison, which reaches lem-pod-etale-stalk-tensor-scalar via def-pur-supported-exterior-product. That node is already a stmt_dep of the item on the base, so the closure does not grow, and the stalk-tensor lemma is a general construction, not a step of the trace-formula or Poincare-duality proof; accepted. Not duplicates, but overlapping (maintainer advisory): lem-pur-comparison-unit-injective-model and lem-pur-derived-support-comparison-direct-image are the natural proof inputs for the two new nodes. The 14 tool_uses are accepted, though several are now stale.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SupportComparisonBoundary",
