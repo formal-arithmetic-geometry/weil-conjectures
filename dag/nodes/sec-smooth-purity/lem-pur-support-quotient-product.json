@@ -34,118 +34,97 @@
  ],
  "proof": [
   {
-   "text": "Finite-type base change and composition make $P$ finite type over $k$; the product of the two closed immersions makes $S\\hookrightarrow P$ closed. Since a field is Noetherian, $X,Y,P$ are Noetherian. On any affine open $V$ of these schemes, $V\\setminus C$ is Noetherian and quasi-compact. Thus all three open-complement immersions are quasi-compact, so the quotient-flat lemma applies.",
+   "text": "Identify each recorded cokernel Q_a with a_* of the constant coefficient unit, normalized on the quotient generator. Closed restriction kills the open extension term, so it makes the cokernel projection invertible. Open restriction makes the defining counit invertible and hence kills its cokernel; it also kills the closed direct image. The inverse-image/direct-image unit is invertible after closed restriction by the fully faithful counit and the triangle identity. The cokernel descendent to a_* of the constant unit is therefore an isomorphism by open/closed conservativity. For pro-etale sheaves use the fixed-scalar open/closed detection theorem; derive closed restriction of extension by zero vanishing from the two adjunctions and open restriction of closed direct image vanishing. Finite type over the field makes X, Y and P locally Noetherian, giving quasi-compact open complements.",
    "uses": [
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-openclosed-vanishing-lowershriek",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-sfb-proetale-open-disjoint-direct-image",
+    "lem-sfb-proetale-fixed-scalar-zero-detection",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03Q1 (lemma-stalk-pullback) and 03PT (lemma-stalk-exact); quotient stalk input is lem-pur-support-quotient-flat"
-   }
-  },
-  {
-   "text": "Write $F=p_X^*Q^{\\mathrm{et}}_{X,Z}$, $G=p_Y^*Q^{\\mathrm{et}}_{Y,W}$, $H=Q^{\\mathrm{et}}_{P,S}$. Exact pullback gives quotient epis $q,s:A_P\\twoheadrightarrow F,G$ and $r:A_P\\twoheadrightarrow H$. Pullback of quotient-flat gives flat factors in either topology. Flatness makes their degree-zero complexes K-flat: tensor the short exact cycles sequences of an acyclic complex to retain exactness.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pur-support-quotient-flat",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD (lemma-pullback-flat), Tag 03ER (definition-flat); K-flat verification from Definition 06YN"
-   }
-  },
-  {
-   "text": "Normalized quotient stalks and the inverse-image germ comparison give $F_{\\bar p}=A$ on $p_X^{-1}Z$ and zero elsewhere, similarly for $G$, and $H_{\\bar p}=A$ on $S$. Their quotient maps are identities there. The fibre-product property gives $S=p_X^{-1}Z\\cap p_Y^{-1}W$ on geometric points. Apply the quotient-tensor stalk criterion to obtain the unique $e_{\\mathrm{et}}$ and its epic generator $m$ with $e_{\\mathrm{et}}m=r$.",
-   "uses": [
-    "lem-pur-support-quotient-flat",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-pur-etale-quotient-tensor-stalk-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 03PU (theorem-exactness-stalks), with tensor stalks as in Tags 008B and 03EL"
-   }
-  },
-  {
-   "text": "Apply $\\nu_P^*$ to $e_{\\mathrm{et}}$. Normalized quotient comparisons and comparison with projection pullbacks identify its factors and target with the pro-etale quotients. The degree-zero tensor comparison gives $e_{\\mathrm{proet}}$ and sends $q(a)\\otimes s(b)$ to the same generators, so its formula is $r(ab)$. Exactness preserves the epic generator, hence uniqueness. This uses functorial transport of an isomorphism, with no pro-etale stalk test.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "lem-pur-support-quotient-flat",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Final paragraph: tensor and the support product are transported to the pro-etale site; normalized tensor input is Stacks Tags 03EL and 07A4"
+    "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations."
    }
   },
   {
-   "text": "For $f:X'\\to X$, $g:Y'\\to Y$ carrying $Z',W'$ into $Z,W$, put $h=f\\times g$. The pair-pullback lemma supplies the generator-preserving quotient maps, their composition laws and their site-comparison square. Insert the inverse-image composition and tensor comparisons. Both sides of the multiplication square send $a\\otimes b$ to $\\overline{ab}$, so the pulled-back epic generator proves equality on the etale site. Apply $\\nu^*$; the pair-comparison square, the composition compatibility of the comparison-pullback isomorphisms for $p_X h=f p_{X'}$ and $p_Y h=g p_{Y'}$ [lem-weil-pbc-comparison-pullback], and tensor composition coherence give the pro-etale equality.",
+   "text": "Apply the existing uniquely normalized supported-coefficient tensor comparison at the two coefficient units. Compose with the inverse unit isomorphism on coefficients and the three normalized cokernel identifications from step 1. This constructs b: Q_product -> p_X^*Q_i tensor p_Y^*Q_j with r_product followed by b equal to the recorded product generator m. Naturality of the coefficient quotient in a coefficient-module map proves this normalization exactly. Constant exterior tensor is invertible: its presheaf pairing has identity components, sheafification is monoidal, and both inverse-image identifications of constant sheaves are invertible. Each quotient projection, its inverse image and their tensor are epic; hence m and then b are epic.",
    "uses": [
-    "lem-pur-support-quotient-pair-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-comparison-pullback"
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D8 (lemma-push-pull-composition-modules) and 03EL; quotient naturality by cokernel uniqueness"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations."
    }
   },
   {
-   "text": "The K-flat derived-tensor comparison computes both factors using their actual degree-zero complexes. It identifies derived multiplication with $e_\\tau[0]$, an isomorphism. Its naturality identifies the derived naturality squares with the same chain-map equalities just proved; no boundedness or Tor assumption is added.",
+   "text": "The composite of the product-support immersion with each ambient projection factors through the corresponding closed immersion. Inverse-image composition transports the closed-restriction isomorphisms of the two quotient projections to the product support. Strong monoidality of inverse image then makes the restriction of m invertible. Since the restriction of r_product is invertible by step 1, the normalization r_product b = m makes the closed restriction of b invertible. On the complementary open, the source of b is zero by step 1, so epicness makes its target zero too. Open/closed conservativity now makes b invertible in each topology. Take e=b^{-1}; the same normalization gives m e = r_product.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-kun-derived-tensor",
-    "def-weil-derived-tensor"
+    "def-pur-supported-exterior-product",
+    "def-pur-proetale-supported-exterior-product",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-sfb-proetale-fixed-scalar-zero-detection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT and 06YU (definition-derived-tor); computation on K-flat representatives"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations."
+   }
+  },
+  {
+   "text": "Recover ordinary categorical flatness of the etale quotient from its normalized geometric fibers in the quotient-flat lemma, using the source flatness criterion; obtain pro-etale flatness from its normalized comparison with the etale quotient and flatness of comparison inverse image. Projection inverse image preserves flatness, in the finite-coefficient pro-etale case because the ring is Noetherian. A flat object in degree zero is K-flat. The source K-flat localization theorem makes the lax monoidal map of Qh invertible and hence that of Q invertible via quotientCompQhIso. The supported-derived localization comparison is this map followed by Q of an equality isomorphism, so it too is invertible.",
+   "uses": [
+    "lem-pur-support-quotient-flat",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-sfb-proetale-fixed-scalar-pullback-flat",
+    "lem-kun-derived-tensor-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations."
+   }
+  },
+  {
+   "text": "For uniqueness, cancel the epic product generator from the two normalization equations and apply Iso.ext. For the stated naturality predicate, apply h^* to the normalization equation and cancel the still-epic h^*m. The two generator-preserving equations in the predicate then reduce the desired square to the normalization equation on the new base. This proves exactly the quantified predicate, for every h and every compatible pair of generator-preserving maps in either topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations."
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-openclosed-vanishing-lowershriek",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-sfb-proetale-open-disjoint-direct-image",
+  "lem-sfb-proetale-fixed-scalar-zero-detection",
   "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "def-weil-finite-type-morphism",
-  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-supported-exterior-product",
+  "def-pur-proetale-supported-exterior-product",
   "lem-pur-support-quotient-flat",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-pur-etale-quotient-tensor-stalk-criterion",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-support-quotient-pair-pullback",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-kun-derived-tensor",
-  "def-weil-derived-tensor"
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-sfb-proetale-fixed-scalar-pullback-flat",
+  "lem-kun-derived-tensor-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Normalized support-quotient refinement of final paragraph; assembly of the two Q57 statement-only sublemmas and the retained flatness and tensor-comparison inputs."
+  "place": "Normalized coefficient tensor factorization already recorded by def-pur-supported-exterior-product and its pro-etale analogue; open/closed restriction proves invertibility. This replaces the separate geometric-stalk multiplication and transport argument below the unchanged unit route."
  },
  "mathlib_searches": [
   {
@@ -313,20 +292,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-pur-support-quotient-flat",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-constant-module-locally-constant",
-  "lem-weil-pbc-closed-immersion-products"
+  "lem-pur-support-quotient-flat"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -366,5 +332,15 @@
   "result": "pass",
   "note": "Clause-by-clause match: finite CommRing A separate from the algebraically closed k; X, Y separated and finite type (IsSeparated + LocallyOfFiniteType + QuasiCompact); closed immersions i, j; P = pullback f g with fst/snd; S -> P is the recorded supportedProductImmersion. The quotients are the recorded cokernels from lem-pur-support-quotient-flat. The ∃! iso's generator equation (constant 1 -> 1⊗1 -> quotient classes) is exactly ā⊗b̄ ↦ ab̄, and uniqueness holds because the generator is epic (constantExteriorTensor is an iso, upperStar is a left adjoint, the tensor is right exact). The derived clause is IsIso of the lax-monoidal localization μ for the recorded derivedTensor on F[0], G[0], true by flatness/K-flatness. The generator-tested naturality predicate follows from the generator equation and epicness, so it is true and covers the squares from maps of pairs. Edge cases A=0, empty/full supports, empty schemes, non-reduced supports, any characteristic: ok. Universes are the same as the dependency, with no extra restriction. Node changed only in lean and stmt_deps; the three added stmt_deps are landed nodes with lean records and create no cycle. Statement verbatim, no duplicate declaration, no hollow defs, sorry only in the theorem, docstrings with source and blueprint tags, lines <= 100, Worker report and Second reading sections present. nt_compile.py --json on the snapshot module: rc=0, no errors or warnings, 13.2 s / 15.8 s. Observations only: the pro-étale upperStar/derivedTensor are the upstream functors also used by the landed pro-étale exterior-product node; the proof docstring condenses the node's 8 steps into 4."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-aeb2b",
+  "group": "X2",
+  "result": "fix",
+  "landing": "20261021T140949-L-2782083",
+  "kind": "interface",
+  "note": "independent cc review: aeb2bc9 Lean (byte-identical to 13dc6) vs published theorem type hash (1399746229 vs 4191245391) and the 13dc6 reviewer fix; delivered node vs live re-split node (only proof/proof_deps/proof_origin/tool_uses differ); importer SupportSiteComparison compiled against the fixed module"
+ }
 }
