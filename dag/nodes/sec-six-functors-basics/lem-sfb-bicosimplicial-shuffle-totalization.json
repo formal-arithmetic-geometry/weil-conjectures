@@ -12,9 +12,117 @@
   "def-weil-abstract-derived-category",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\Delta\\times\\Delta$, working with small abelian groups in a universe containing this countable category. In $\\mathcal E=\\operatorname{Fun}(I,\\mathrm{Ab})$ define $R_i(j)=\\mathbf Z[\\operatorname{Hom}_I(i,j)]$, with postcomposition on generators. This category is abelian: kernels are pointwise kernel subgroups, cokernels are pointwise quotient groups, their structure maps are induced by the naturality squares, and image equals coimage pointwise. Thus these constructions satisfy exactly [def-sp-abelian]. A natural transformation $R_i\\to F$ is uniquely specified by $x\\in F(i)$: its value on a generator $\\alpha:i\\to j$ must be $F(\\alpha)x$. Hence maps from $R_i$ lift through every pointwise surjection, by lifting $x$. Finite sums of the $R_i$ are projective by lifting each component. Also $\\bigoplus_{(i,x),\\ x\\in F(i)}R_i\\to F$, sending the distinguished generator to $x$, is pointwise surjective and its source projective (choose lifts for all its generators). Thus $\\mathcal E$ has enough projectives. Monomorphisms, epimorphisms and exactness in $\\mathcal E$ are detected pointwise by the displayed kernel and cokernel constructions.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "Define nonnegative chain complexes in $\\mathcal E$ by $P_n=R_{(n,n)}$ and $Q_n=\\bigoplus_{a+b=n}R_{(a,b)}$. On $P$, the boundary precomposes a pair of monotone maps by each diagonal coface, with alternating signs. On the $(a,b)$ summand of $Q$, take alternating precomposition in the first variable and $(-1)^a$ times alternating precomposition in the second; omit a direction in degree zero. Two deletions in one variable cancel in opposite orders, and the two cross terms have coefficients $(-1)^{a-1}$ and $(-1)^a$, so both boundaries square to zero. Both augment to the constant functor $\\mathbf Z$ by sending each vertex generator to $1$. At $(p,q)$ these are exactly $P(p,q)=V(p,q)$ and $Q(p,q)=\\operatorname{Tot}(U(p)\\otimes U(q))$, with the strings, boundaries and augmentations of [lem-sfb-simplex-lattice-shuffle-boundary].",
+   "uses": [
+    "lem-sfb-simplex-lattice-shuffle-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "For $P(p,q)$, prepend the minimum vertex $(0,0)$ to every string, obtaining $h_n:P_n(p,q)\\to P_{n+1}(p,q)$. Let $e:\\mathbf Z\\to P_0(p,q)$ send $1$ to that vertex. Deleting the prepended entry gives the original string; deleting any other entry cancels the corresponding term of $h\\partial$. Consequently $\\partial h+h\\partial=1$ in positive degrees and $\\partial h=1-e\\epsilon$ in degree zero. Thus the augmentation is surjective and the augmented complex is exact. Identical formulas, prepending $0$, give contractions $h_p,h_q$ and projections $E_p=e_p\\epsilon_p,E_q=e_q\\epsilon_q$ of $U(p),U(q)$, with $E$ zero in positive degree. On $Q(p,q)$ put $H(u\\otimes v)=h_pu\\otimes v+(-1)^a E_pu\\otimes h_qv$ for $u$ of degree $a$. Expanding the tensor boundary cancels the cross terms and gives $\\partial H+H\\partial=(1-E_p)\\otimes1+E_p\\otimes(1-E_q)=1-E_p\\otimes E_q$. Its degree-zero augmentation is surjective. Both augmented complexes are therefore pointwise exact. Together with Step 1, $P,Q$ are projective resolutions of the constant functor; these contractions need not be natural in $(p,q)$, since they are used only to prove pointwise exactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08Q3, example-simplex-contractible (minimum-vertex variant); explicit unnormalized integral cone and tensor contraction written here."
+   }
+  },
+  {
+   "text": "The maps $\\sigma_{p,q}:Q(p,q)\\to P(p,q)$ of [lem-sfb-simplex-lattice-shuffle-boundary] commute with boundary, preserve the augmentation and commute with postcomposition. They therefore assemble to an augmented chain map $\\sigma:Q\\to P$ in $\\mathcal E$. On the distinguished generator of $R_{(a,b)}$, its value is the signed sum of pairs $(\\alpha_\\mu,\\alpha_\\nu):(n,n)\\to(a,b)$. This also fixes exactly which coordinate receives each list of shuffle positions; no interchange of $a,b$ or additional sign is introduced.",
+   "uses": [
+    "lem-sfb-simplex-lattice-shuffle-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-injective-resolution-lift-exists] in $\\mathcal E^{\\mathrm{op}}$ on the identity of the constant object, with the two opposite resolutions in the order $Q^{\\mathrm{op}},P^{\\mathrm{op}}$. The hypotheses hold: reversing the pointwise kernels/cokernels in Step 1 gives an abelian opposite category; a projective object becomes injective because its lifting through epis is precisely extension across the opposite monos. Enough projectives gives enough injectives in the opposite, and the exact augmented nonnegative chain resolutions become injective nonnegative cochain resolutions. Reversing the resulting map gives $\\tau:P\\to Q$ with $\\epsilon_Q\\tau_0=\\epsilon_P$. Both $\\sigma\\tau:P\\to P$ and $\\tau\\sigma:Q\\to Q$ have the same augmentation as the respective identities. Apply [new-t4-augmented-resolution-lift-homotopy] to each pair: its source is a projective resolution, its target has all the exactness properties verified in Step 3, and its augmentation vanishes on $d_1$. We obtain $\\sigma\\tau-1=\\partial h_P+h_P\\partial$ and $\\tau\\sigma-1=\\partial h_Q+h_Q\\partial$ in $\\mathcal E$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "new-t4-augmented-resolution-lift-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0649, lemma-morphisms-lift-projective (equivalently Tag 013P in the opposite category); Tag 064A, lemma-morphisms-equal-up-to-homotopy-projective. Apply the stated existing lift and uniqueness nodes."
+   }
+  },
+  {
+   "text": "Here is the explicit evaluation of these universal identities in an arbitrary abelian $\\mathcal C$. A map $R_i\\to R_j$ is determined by a finite integral sum of generators $\\alpha:j\\to i$, by the generator formula in Step 1. For a covariant diagram $Y:I\\to\\mathcal C$, send that map contravariantly to $\\sum c_\\alpha Y(\\alpha):Y(j)\\to Y(i)$. For finite sums of representables take the transposed matrix on the corresponding finite biproducts. Identities, sums and compositions are preserved contravariantly because composition expands as $\\sum_{\\alpha,\\beta}c_\\alpha d_\\beta Y(\\alpha\\beta)$, equal to the product of the two matrices by functoriality and bilinearity. Thus every chain-map or homotopy equation between $P,Q$ evaluates to the corresponding cochain equation. Evaluating $P$ gives the diagonal alternating-coface complex of $Y$, and evaluating $Q$ gives the double alternating-coface total. The evaluation of $\\sigma$ is precisely $S$, since its generator values were computed in Step 4. The evaluation of $\\tau$ is its inverse up to the evaluated cochain homotopies.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "Apply Step 6 with $Y^{a,b}=X^{a,b,r}$ for each internal degree $r$, using the same fixed universal matrices $\\sigma,\\tau,h_P,h_Q$ for all $r$. Every entry is a sum of structure maps of $X$, so it commutes with $d_r$, and is natural in $X$. The evaluated degree-zero maps preserve total cosimplicial degree $n$: hence $(-1)^n d_r S=S(-1)^n d_r$, and the same for the inverse. They therefore give cochain maps between the complexes $D(X),T(X)$ of the statement. For an evaluated homotopy $H$, which lowers total cosimplicial degree from $n$ to $n-1$, the extra terms in the total homotopy equation are $(-1)^{n-1}d_rH+(-1)^nHd_r=0$. The remaining terms are exactly the cochain homotopy equations of Step 6. Thus $S$ is a chain homotopy equivalence of the full total complexes, including their internal differentials. All matrices and all total-degree sums are finite by nonnegativity, as required by [def-sp-double-complex-total]; no countable sum in $\\mathcal C$ is used.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "Passing to the homotopy category, the two homotopy equations say that the classes of $S$ and its evaluated inverse compose to the identity. Their images under the localization defining $D(\\mathcal C)$ in [def-weil-abstract-derived-category] still satisfy these two equations, hence give an isomorphism of derived objects. The original maps commute with every map of bicosimplicial complexes by the finite matrix formulas, so this derived isomorphism is natural.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  },
+  {
+   "text": "For the augmentation clause, write $f_0,f_1$ and $g_0,g_1$ for the two degree-zero cofaces. The hypotheses are $(f_0-f_1)i=0$ and $(g_0-g_1)i=0$. The diagonal alternating coface applied to $i$ is $f_0g_0i-f_1g_1i=(f_0-f_1)g_0i+f_1(g_0-g_1)i=0$, using commutation of the two directions to move $g_0$ past $f_0-f_1$. The two separate coface sums in $T$ also kill $i$. Since $i$ commutes with internal differentials, the inclusions in cosimplicial degree zero are chain maps $j_D,j_T$. In degree $n=0$ there is just the empty shuffle, its sign is $1$, and both surjections are the identity of $[0]$. Therefore $S_{0,0}=1$ and $Sj_D=j_T$ as chain maps, strictly. Vanishing objects give zero matrices. The contractions in Step 3 and the shuffle identity retain repeated vertices, including $p=0$ or $q=0$; the proof never assumes either cosimplicial direction is nonconstant. Thus constant objects and either constant direction are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sfb-simplex-lattice-shuffle-boundary",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker. The blueprint supplies the application, not this universal proof; Weibel section 8.5 is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +165,38 @@
    "results": "{\"t\": \"2026-10-21T15:35:59Z\", \"tool\": \"grep\", \"query\": \"shuffle|Eilenberg.Zilber|Alexander.Whitney|bicosimplicial|bisimplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: Dold–Kan normalization and its homotopy equivalence concern one simplicial object; total and bifunctor homotopy declarations construct totals, not the shuffle map between the diagonal of an arbitrary bicosimplicial object and its double total. No returned declaration specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|Eilenberg.Zilber|Alexander.Whitney|bicosimplicial",
+   "results": "{\"t\": \"2026-10-21T16:11:35Z\", \"tool\": \"grep\", \"query\": \"shuffle|Eilenberg.Zilber|Alexander.Whitney|bicosimplicial\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization and extra-degeneracy homotopy equivalences concern one simplicial object with extra structure; totalization declarations do not compare the diagonal with the two-variable total via this signed map. No one-line specialization gives the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"total\"",
+   "results": "{\"t\": \"2026-10-21T16:11:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"CosimplicialObject\\\", \\\"total\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization and extra-degeneracy homotopy equivalences concern one simplicial object with extra structure; totalization declarations do not compare the diagonal with the two-variable total via this signed map. No one-line specialization gives the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Eilenberg Zilber equivalence identifies diagonal bicosimplicial cochains with the total cochain complex including internal differentials",
+   "results": "{\"t\": \"2026-10-21T16:11:36Z\", \"tool\": \"leansearch\", \"query\": \"The Eilenberg Zilber equivalence identifies diagonal bicosimplicial cochains with the total cochain complex including internal differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.total\", \"CochainComplex.ιMapBifunctor.congr_simp\", \"CochainComplex.mapBifunctor\", \"HomologicalComplex₂.totalAux.d₁_eq'\", \"HomologicalComplex₂.totalAux.d₁_eq\", \"CochainComplex.ιMapBifunctor\", \"HomologicalComplex.mapBifunctor₁₂.d₂_eq\", \"HomologicalComplex.mapBifunctor₂₃.d₂.congr_simp\"], \"digest\": \"725e1362d58d7ca6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization and extra-degeneracy homotopy equivalences concern one simplicial object with extra structure; totalization declarations do not compare the diagonal with the two-variable total via this signed map. No one-line specialization gives the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bicosimplicial nonnegative cochain complex in any abelian category the signed codegeneracy shuffle from diagonal totalization to double totalization is a chain homotopy equivalence preserving augmentations",
+   "results": "{\"t\": \"2026-10-21T16:11:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a bicosimplicial nonnegative cochain complex in any abelian category the signed codegeneracy shuffle from diagonal totalization to double totalization is a chain homotopy equivalence preserving augmentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.hσ'_eq\"], \"digest\": \"fbe3cd631f0367b9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization and extra-degeneracy homotopy equivalences concern one simplicial object with extra structure; totalization declarations do not compare the diagonal with the two-variable total via this signed map. No one-line specialization gives the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-condensed-product-bar-comparison",
@@ -85,5 +221,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-bicosimplicial-shuffle-totalization",
+  "worker": "stage1",
+  "summary": "Constructed a universal free-representable proof, including pointwise cone contractions, resolution comparison via existing lift and homotopy-uniqueness nodes, contravariant finite-matrix evaluation and internal differential signs. One strictly smaller unsplit combinatorial boundary identity is isolated. Checked unnormalized repeated-vertex small cases and the strict augmentation square; no statement correction.",
+  "blueprint": "Paragraph (3) of the current main-20261015 direct-images proof, the formal diagonal versus successive bar augmentation comparison used by condensed-product-bar-comparison. The inherited ancestor command returns None.",
+  "tool_uses": [
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic homotopy uniqueness for augmented maps between projective resolutions, applied in the auxiliary abelian functor category; the direct-image unit has no such homological-algebra comparison result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-3e05719c0",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3e05719c0 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, the blueprint direct-images proof (whose paragraph (3) gives the application only, not this proof) and Stacks 0649/064A/08Q3 at their labels. Item statement, stmt_deps and blueprint fields are byte-identical to the unsplit NP-era version, so nothing was weakened; parent step 8 gets the direction D->T, first-direction-first ordering and strict S j_D=j_T it needs. Steps: (1) Fun(DeltaxDelta,Ab) is abelian, additive Yoneda gives Hom(R_i,R_j)=Z[Hom(j,i)], and enough projectives is shown, which def-sp-injective-resolutions requires for Step 5 in E^op. (2) P(p,q)=V(p,q) and Q(p,q)=Tot(U(p)⊗U(q)) with the Koszul boundary. (3) I redid the cone contraction and H=h⊗1+(-1)^a E⊗h: the cross terms cancel, E∂=0, and ∂H+H∂=1-E⊗E. (4) The generator value is Σε(α_μ,α_ν) with the item's coordinate assignment. (5) The injective lift in E^op with order (Q^op,P^op) gives τ:P->Q; new-t4's hypotheses hold, and its off-unit use is declared in tool_uses and accepted. The lift node is a Mathlib leaf. (6) Evaluation is contravariant and finite; the homotopy equations transfer. (7) The d_r signs cancel under the homotopy because n drops by one, so this is a genuine total-complex homotopy equivalence. (8) Derived-form isomorphism, natural. (9) The degree-0 coface computation and S_{0,0}=id give S j_D=j_T strictly; constant, zero and one-constant-direction cases are covered since the proof is unnormalized. New node: B1, B2, B3, B7 and B9 are fine and it is strictly smaller than the item (D1). My independent script verified the shuffle boundary identity on all 1,801 basis pairs with p,q<=2, a+b<=4, including repeated vertices; the test catches sign errors (wrong signs give 1,009 or 496 failures). My own Mathlib grep found no Eilenberg–Zilber declaration. The DAG sweep found no duplicate: the normalized AW diagonal and the bisimplicial weak-equivalence nodes are different statements. No SGA citations, no fixes."
  }
 }
