@@ -19,9 +19,117 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-weil-pbc-site-comparison-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$\\operatorname{Spec}k$ is Noetherian, since a field has only the ideals $0$ and $k$. The finite-type theorem makes $X$ Noetherian; it is quasi-compact by this conclusion and quasi-separated by the locally Noetherian theorem. The valuation-ring theorem says that $R$ is a DVR with finite residue field $A$. Its characteristic is $\\ell$: $\\ell$ has absolute value less than $1$, so lies in the maximal ideal $(t)$, and the nonzero field $A$ consequently has characteristic $\\ell$. Identify $B$ canonically with $\\varprojlim_n(R/t^n)_X$. The finite-discrete coefficient equivalence identifies $A_X=p_X^*\\underline A$ with the constant residue field sheaf and identifies its ordinary relative derived tensor and constructible local models. These are the coefficient identifications used below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1, Lemma 6.8.2(1), and the finite-extension conventions of §6.8; Noetherian permanence is Stacks Tag 01T6, morphisms.tex, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "For each nonzero cohomology sheaf of $K$ and $L$, apply the integral lfp/constant-model comparison on the Noetherian scheme $X$. Thus the same bounded objects have constructible cohomology in the finite scalar local-model sense, including torsion scalar modules. Apply implication (1)$\\Rightarrow$(2) of the integral cohomological adic criterion separately to $K$ and $L$, using the coefficient identification of step 1. It gives local derived $(t)$-completeness of both inputs and bounded constructible finite-Tor étale $A$-complexes $C_K,C_L$ with $\\nu_X^*C_K\\simeq K_1$ and $\\nu_X^*C_L\\simeq L_1$. No completeness or scalar-model hypothesis has been added to the inputs.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3), forward implication into Definition 6.5.1; the general-lfp/scalar-model bridge is the existing coefficient-specific comparison node."
+   }
+  },
+  {
+   "text": "The module-object/ringed-site derived comparison, applied to $\\Lambda=\\underline R$ and $B=p_X^*\\underline R$, identifies $H=R\\mathcal Hom_B(K,L)$, after the termwise equivalence $D(F)$ (which leaves underlying abelian sheaves unchanged), with the functorial K-injective ringed-site Hom $R\\mathcal Hom_{B_{\\mathrm{sec}}}(D(F)K,D(F)L)$, compatibly with restriction to every slice; by step 1, $B_{\\mathrm{sec}}=\\varprojlim_n(R/t^n)_X$. Apply the ringed-site internal-Hom completeness theorem with $\\mathcal O=B_{\\mathrm{sec}}$, $\\mathcal I=(t)B_{\\mathrm{sec}}$, first argument $K$, and complete second argument $L$ from step 2. Its definition of completeness is precisely the local one in the statement, on every slice and for every local section of the ideal. Therefore $H=R\\mathcal Hom_B(K,L)$ is locally derived $(t)$-complete. The theorem imposes no perfectness condition on $K$.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sf-ringed-rhom-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099A, lemma-derived-complete-internal-hom, with Definition 0999."
+   }
+  },
+  {
+   "text": "Apply the integral Hom reduction theorem at quotient exponent $n=1$ to $K,L$ and the completed coefficient sheaf of step 1. It identifies $H\\otimes_B^LA_X$ with $R\\mathcal Hom_{A_X}(K_1,L_1)$. Its comparison is defined as the transpose of reduced evaluation, exactly the map specified here, and its statement asserts that this map is invertible. Thus the conclusion concerns the canonical map, not merely an unspecified isomorphism of its source and target. This use needs neither site-perfectness of $K$ nor torsion-freeness of its cohomology. The reduction theorem is stated for the ringed-site Hom and K-flat reduction; the module-object/ringed-site derived comparison, applied to $\\underline R$ and to $\\underline A$ (with $p_X^*\\underline A\\cong A_X$ constant by step 1), identifies both $H$ and $R\\mathcal Hom_{A_X}(K_1,L_1)$ with their ringed-site models, the derived relative tensors with the ordinary K-flat tensors, and carries evaluation to evaluation, so the transpose of reduced evaluation in the statement is the reduction theorem's map $c_{1,K,L}$.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, reduction assertion; the existing integral Hom reduction node makes the evaluation-transpose comparison explicit."
+   }
+  },
+  {
+   "text": "The constructible site-comparison equivalence sends the bounded constructible étale complexes $C_K,C_L$ from step 2 to bounded constructible pro-étale complexes. With the finite-discrete coefficient identification of step 1, $K_1,L_1$ therefore satisfy the finite constant local-model hypotheses of the finite-field internal-Hom finiteness theorem. Apply that theorem to the finite field $A$ of characteristic $\\ell$, on the original separated finite-type $k$-scheme $X$. It gives bounded constructible cohomology for $R\\mathcal Hom_{A_X}(K_1,L_1)$, and hence by step 4 for $H\\otimes_B^LA_X$. No separable-closedness, perfection or finiteness of $k$ is required.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "lem-sfb-finite-field-internal-hom-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13 with coefficient ring A and zero ideal; finite-coefficient site comparison is also Stacks Tag 09AL, proetale.tex, lemma-compare-constructible-derived."
+   }
+  },
+  {
+   "text": "Apply essential surjectivity of the bounded constructible site-comparison equivalence to $H\\otimes_B^LA_X$. Its hypotheses hold: $X$ is qcqs by step 1 and the discrete finite field $A$ is Noetherian. Obtain $D\\in D^b_c(X_{\\mathrm{ét}},A)$ and $\\nu_X^*D\\simeq H\\otimes_B^LA_X$. Constructibility here means a finite constructible locally closed stratification with locally constant finite-type $A$-module values; since $A$ is a field these values are finite-dimensional. The bounded representative theorem for the abelian category of étale $A$-module sheaves lets us choose a bounded complex representing $D$.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; bounded complexes representing bounded derived objects use the existing bounded-representative node."
+   }
+  },
+  {
+   "text": "Choose integers $a\\le b$ outside which the cohomology of $H\\otimes_B^LA_X$ vanishes, using step 5 (for the zero object any interval suffices). The constant-field Tor-bounds theorem gives Tor amplitude in $[a,b]$ for this pro-étale $A$-complex. Via the isomorphism of step 6, the same holds for $\\nu_X^*D$. Apply the finite-Tor site-comparison theorem to $D$, again using qcqs $X$ and Noetherian discrete $A$: it reflects this exact Tor interval to the étale site. Consequently $D\\otimes_A^LN$ has cohomology only in $[a,b]$ for every degree-zero étale $A$-module sheaf $N$. Together with steps 3, 4 and 6 this supplies every clause of the required complete residue witness.",
+   "uses": [
+    "lem-sfb-constant-field-tor-bounds",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.proof.md",
+    "place": "Constant-field Tor bounds and reflection of the interval: sk-lem-integral-models.proof.md, first paragraph, and the finite-Tor comparison proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sf-ringed-rhom-derived-complete",
+  "lem-coef-integral-hom-reduction",
+  "sk-thm-pe-constructible-comparison",
+  "lem-sfb-finite-field-internal-hom-finiteness",
+  "lem-sfb-bounded-representative",
+  "lem-sfb-constant-field-tor-bounds",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assembly of Definition 6.5.1, Proposition 6.8.11(3), Lemmas 3.4.11 and 6.7.13, and the existing coefficient and finite-Tor comparison nodes. The complete residue witness stops before the parent applies the reverse adic criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +200,45 @@
    "results": "IsAdicComplete.mk_comp_liftRingHom; IsAdicComplete.of_subsingleton; AdicCompletion; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; IsAdicComplete; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; IsAdicComplete.toIsHausdorff; AdicCompletion.module",
    "date": "2026-10-21",
    "verdict": "No match for the narrowed witness statement: results concern underived module completion, local presentations or ordinary etale algebras, not completeness and etale finite-Tor residue of sheaf derived Hom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of constructible integral adic sheaves is derived complete and reduces to constructible finite Tor residue field complexes",
+   "results": "Hits read: BDeRhamPlus, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, localCohomology.diagram, localCohomology, AdicCompletion.map_exact, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ambient underived closed structures, finite presentations, algebraic adic completion or scheme residue fields; none states the integral sheaf-Hom completeness, reduction and constructible étale residue witness."
+  },
+  {
+   "tool": "grep",
+   "query": "(adic|complete|residue).*(internalHom|derivedHom)|(internalHom|derivedHom).*(adic|complete|residue)",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ambient underived closed structures, finite presentations, algebraic adic completion or scheme residue fields; none states the integral sheaf-Hom completeness, reduction and constructible étale residue witness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of bounded constructible integral adic sheaves has constructible residue field reduction",
+   "results": "Hits read: CategoryTheory.ihom, FGModuleCat.ihom_obj, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.ihomPoints, AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.LocallyRingedSpace.residueFieldMap, instIsAlgebraicResidueFieldOfIsIntegral, AlgebraicGeometry.Scheme.descResidueField.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ambient underived closed structures, finite presentations, algebraic adic completion or scheme residue fields; none states the integral sheaf-Hom completeness, reduction and constructible étale residue witness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsAdicComplete\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ambient underived closed structures, finite presentations, algebraic adic completion or scheme residue fields; none states the integral sheaf-Hom completeness, reduction and constructible étale residue witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a uniformizer of derived internal Hom for integral constructible sheaves with local finite presentations",
+   "results": "Hits read: SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.mapGenerators, ModuleCat.tilde, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.generators, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern ambient underived closed structures, finite presentations, algebraic adic completion or scheme residue fields; none states the integral sheaf-Hom completeness, reduction and constructible étale residue witness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-small-coefficients",
@@ -104,7 +247,7 @@
  },
  "blueprint": {
   "from": {
-   "node": null,
+   "node": "lem-sfb-dc-hom-preserves",
    "place": "lem-sfb-dc-hom-preserves, integral paragraph, baseline steps 2–4 and the finite-Tor witness part of step 5: convert the inputs to scalar models, prove completeness, reduce Hom modulo the uniformizer, and produce its bounded constructible finite-Tor étale residue witness. Stops before criterion (2)⇒(1) and reverse lfp comparison.",
    "via": [
     "lem-sfb-dc-hom-small-coefficients"
@@ -112,5 +255,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-general-lfp-hom-finiteness",
+  "worker": "stage1",
+  "summary": "Split the complete residue witness into coefficient/Noetherian preparation, input scalar-model and forward adic comparison, local completeness of Hom, canonical integral reduction, finite-field Hom finiteness, étale descent and reflection of the field Tor interval. Reused existing nodes throughout; no new nodes. Retained general local presentations and torsion inputs. Repaired the lost blueprint ancestor through the existing parent blueprint reference. Reviewer FIX (maintainer reader, 2026-10-21): steps 3 and 4 now cite lem-sfb-module-object-ringed-site-derived-comparison to pass from the module-object internal Hom of the statement to the ringed-site Hom of the completeness and reduction theorems.",
+  "blueprint": "lem-sfb-dc-hom-preserves.proof.md, integral paragraph: the first sentence supplies input characterization (steps 1–2), the second sentence supplies completeness (step 3), the displayed reduction supplies the canonical map (step 4), and finite-coefficient Hom finiteness supplies the residue object (steps 5–7). Uses Bhatt–Scholze rather than the prohibited SGA citation in the imported proof. Stops before reverse adic lifting in the parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence supplies the domain of the input model comparison and adic criterion. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme theorem supplies quasi-separatedness for the site-comparison hypotheses. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient arithmetic supplies the finite residue field. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic coefficient identification matches the pulled-back condensed ring with completed ordinary coefficients. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic finite-discrete coefficient equivalence identifies A_X with the ordinary constant sheaf and its tensor and constructibility predicates. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-sfb-integral-cohomological-adic-criterion",
+    "why": "Only forward implication on the inputs is used to obtain completeness and residue witnesses; the parent retains the reverse implication on the output. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-sf-ringed-rhom-derived-complete",
+    "why": "Generic ringed-site Hom theorem preserves the exact local completeness notion without site-perfectness. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Generic integral coefficient reduction theorem identifies the actual evaluation-transpose map for arbitrary arguments. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic finite discrete site-comparison equivalence supplies étale descent, independently of Hom finiteness. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-sfb-bounded-representative",
+    "why": "Generic abelian derived-category theorem supplies an actual bounded complex representative. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "lem-sfb-constant-field-tor-bounds",
+    "why": "Generic field-coefficient theorem converts bounded pro-étale cohomology into the same Tor interval. This does not replace the unit’s internal-Hom finiteness route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic finite-Tor comparison reflects this interval to the étale witness. This does not replace the unit’s internal-Hom finiteness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "lem-sf-ringed-rhom-derived-complete",
+  "lem-coef-integral-hom-reduction",
+  "sk-thm-pe-constructible-comparison",
+  "lem-sfb-bounded-representative",
+  "lem-sfb-constant-field-tor-bounds",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-977eeb26a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-977eeb26a (reviewer sub-agent of L); spot-checked: Read the whole split. It has 7 steps, no new nodes, and the statement and stmt_deps are unchanged against side-live. I checked it against the parent's pre-re-split proof (Q40 snapshot, steps 2–5): no argument was dropped. The flatness argument now lives in the existing lem-sfb-constant-field-tor-bounds. Fixing blueprint.from.node to lem-sfb-dc-hom-preserves is correct; I read that node's blueprint proof, integral paragraph. No SGA is cited. Sources checked: Bhatt–Scholze Def 6.5.1, Lemma 3.4.11, Lemma 6.7.13, Def 6.8.10 and Prop 6.8.11(3). Hypotheses checked: step 1 gives X Noetherian/qcqs and char A=ℓ from |ℓ|<1. In step 2 the model comparison needs only Noetherian X, and criterion (1)⇒(2) is used on the inputs only. In step 4 the reduction is for arbitrary K and L, with c_{1,K,L} defined as the transpose of evaluation. In step 5 the finite-field Hom node fits: A is a finite field of characteristic ℓ, and X is separated of finite type over k with char k ≠ ℓ. Steps 6–7 apply the constructible comparison, the ctf comparison and the field Tor bounds; X is qcqs and A is Noetherian. There is no cycle, and the declared tool uses are generic and accepted. Fault (C1/C4, E6): steps 3 and 4 apply theorems stated for the ringed-site K-injective Hom (def-pur-derived-internal-hom) to the item's module-object RHom on D(Mod_B) (sk-def-sfb-derived-tensor-hom) without any bridge. FIX: both steps now cite the unit's own lem-sfb-module-object-ringed-site-derived-comparison, applied to R and to A; it carries evaluation and is compatible with slices. Step 3 now names O=B_sec. proof_deps were updated to match. Edge cases checked: X empty, zero inputs, and K=L=R/(t) at a geometric point (degree dimensions 1,2,1 on both sides).; 1 file(s) fixed by the reviewer"
  }
 }
