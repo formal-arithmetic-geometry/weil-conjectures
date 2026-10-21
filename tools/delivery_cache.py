@@ -160,10 +160,11 @@ def build(root, commit, families, signature, directory):
         raw = response[end+1:end+1+size]; offset = end+size+2
         text = raw.decode(errors='ignore')
         fresh[sha] = {'blob': sha, 'imports': sorted(li.imports_of(text)),
-                      'decls': sorted(li.decls_in_text(text)), 'text': li.strip(text),
+                      'decls': sorted(li.decls_in_text(text)),   # 2026-10-22: no 'text' (166 of 187 MB; 1.6 GB per delivery in memory)
                       'cycle': sorted(cycles.imports(raw.decode(errors='replace')))}
     for sha, mod, library, cycle in entries:
-        modules[mod] = previous.get(sha) or fresh[sha]
+        e = previous.get(sha) or fresh[sha]
+        modules[mod] = {k: v for k, v in e.items() if k != 'text'}   # older indexes carried the text
     return {'version': VERSION, 'commit': commit, 'signature': signature, 'families': families, 'modules': modules}
 
 def working_modules(root, data):

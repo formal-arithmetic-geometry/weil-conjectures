@@ -237,7 +237,8 @@ def downstream_users(changed: dict[str, list[str]]) -> dict[str, list[str]]:
             if not p.is_file():
                 continue
             entry = cached["modules"].get(u) if cached is not None and u not in modified else None
-            t = entry["text"] if entry is not None else li.strip(p.read_text(errors="ignore"))
+            # 2026-10-22: the index no longer carries module texts (memory); read the few files this check touches
+            t = entry["text"] if entry is not None and entry.get("text") is not None else li.strip(p.read_text(errors="ignore"))
             for n in names:
                 seg = n.split(".")[-1]
                 if re.search(r"(?<![\w'])" + re.escape(seg) + r"(?![\w'])", t):
