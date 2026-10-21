@@ -1,0 +1,90 @@
+{
+ "id": "lem-sfb-equivalence-square-inverse-mate-coherence",
+ "kind": "statement",
+ "title": "Normalized adjunction comparisons across equivalences preserve compositors and inverse mates",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal D$ and $\\overline{\\mathcal A},\\overline{\\mathcal B},\\overline{\\mathcal C},\\overline{\\mathcal D}$ be categories, with specified equivalences $E_A,E_B,E_C,E_D$ between corresponding categories. Composition in this statement is functional: $VU=V\\circ U$. Use the mate bijection and its inverse given by unit insertion and counit contraction [def-weil-pbc-adjunction-mate].\n\n(1) For specified adjunctions $J:\\mathcal A\\rightleftarrows\\mathcal B:U$ and $\\bar J:\\overline{\\mathcal A}\\rightleftarrows\\overline{\\mathcal B}:\\bar U$, and a natural isomorphism $u:E_AU\\xrightarrow{\\sim}\\bar U E_B$, there is a unique natural isomorphism $j:E_BJ\\xrightarrow{\\sim}\\bar J E_A$ such that $j^{-1}$ has mate $u$. It identifies the full adjunction Hom bijections and both their units and counits. The analogous assertion holds for $J':\\mathcal C\\rightleftarrows\\mathcal D:U'$, $\\bar J':\\overline{\\mathcal C}\\rightleftarrows\\overline{\\mathcal D}:\\bar U'$ and $u':E_CU'\\cong\\bar U'E_D$, giving $j'$.\n\n(2) These normalized comparisons preserve adjoint compositors. More precisely, let $\\mathcal A_i,\\overline{\\mathcal A}_i$ ($0\\leq i\\leq2$) have equivalences $E_i$, specified adjunctions $L_{ij}:\\mathcal A_i\\rightleftarrows\\mathcal A_j:R_{ji}$ and their barred counterparts for $i<j$, right comparisons $r_{ij}:E_iR_{ji}\\cong\\bar R_{ji}E_j$, and normalized left comparisons $c_{ij}:E_jL_{ij}\\cong\\bar L_{ij}E_i$ from (1). Let $\\delta:R_{10}R_{21}\\cong R_{20}$ and $\\bar\\delta:\\bar R_{10}\\bar R_{21}\\cong\\bar R_{20}$ be specified isomorphisms satisfying\n$$ (\\bar\\delta E_2)\\circ(\\bar R_{10}r_{12})\\circ(r_{01}R_{21})=r_{02}\\circ E_0(\\delta). $$\nLet $a:L_{12}L_{01}\\cong L_{02}$ and $\\bar a:\\bar L_{12}\\bar L_{01}\\cong\\bar L_{02}$ be the adjoint compositors, whose conjugates are $\\delta^{-1}$ and $\\bar\\delta^{-1}$ under the respective composite and direct adjunctions. Then\n$$c_{02}\\circ E_2(a)=(\\bar a E_0)\\circ(\\bar L_{12}c_{01})\\circ(c_{12}L_{01}).$$\n\n(3) In the four-category setting of (1), let $P:\\mathcal A\\to\\mathcal C$, $Q:\\mathcal B\\to\\mathcal D$, $\\bar P:\\overline{\\mathcal A}\\to\\overline{\\mathcal C}$, $\\bar Q:\\overline{\\mathcal B}\\to\\overline{\\mathcal D}$ be functors with isomorphisms $p:E_CP\\cong\\bar P E_A$, $q:E_DQ\\cong\\bar Q E_B$. Let $b:PU\\to U'Q$ and $\\bar b:\\bar P\\bar U\\to\\bar U'\\bar Q$ satisfy\n$$(\\bar b E_B)\\circ(\\bar P u)\\circ(pU)=(\\bar U' q)\\circ(u'Q)\\circ E_C(b).$$\nWrite $\\beta:J'P\\to QJ$ and $\\bar\\beta:\\bar J'\\bar P\\to\\bar Q\\bar J$ for their inverse mates. Then the actual transformations satisfy\n$$(\\bar Q j)\\circ(qJ)\\circ E_D(\\beta)=(\\bar\\beta E_A)\\circ(\\bar J'p)\\circ(j'P).$$\nThus $\\beta$ is invertible if and only if $\\bar\\beta$ is invertible. The statements use the canonical functor associators throughout, without requiring any equivalence, unit, counit or comparison to be an identity.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent-written extension to equivalences, composite adjunctions and four-corner inverse-mate squares. Blueprint det-nagata-density-normalization-sheaves proof Steps 1–2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv|inverseMate|conjugateEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib subdirectory: CategoryTheory/Adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a square of adjunctions through equivalences of categories and identify the inverse mates with units and counits",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.Functor.adjunction; CategoryTheory.Equivalence.toAdjunction_unit; CategoryTheory.Adjunction.toEquivalence_inverse; CategoryTheory.Equivalence.toAdjunction; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.CommSq.right_adjoint",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.TwoSquare",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of right adjoints transported through four equivalences of categories has an inverse mate square transported by the uniquely normalized comparisons of left adjoints",
+   "results": "CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_square|mateEquiv_vcomp|mateEquiv_hcomp|unit_mateEquiv_symm",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib subdirectory: CategoryTheory/Adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "CategoryTheory.mateEquiv_square",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under equivalences of four categories, a commutative comparison diagram of right-adjoint squares implies the corresponding equation for inverse mates using unit normalized left-adjoint comparisons",
+   "results": "CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-module-operations-transport",
+  "date": "2026-10-21",
+  "group": "Q77"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-nagata-density-normalization",
+ "blueprint": {
+  "from": {
+   "node": "det-nagata-density-normalization-sheaves",
+   "place": "Proof Steps 1–2, transporting the specified pullback/open adjunctions and their actual open-extension base-change mate, including composition normalization.",
+   "via": [
+    "lem-sfb-internal-module-operations-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

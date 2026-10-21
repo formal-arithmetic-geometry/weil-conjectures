@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-section-ring-lax-pushforward-coherence",
+ "kind": "statement",
+ "title": "Section-ring reconstruction and lax direct image form a coherent exact comparison",
+ "statement": "Fix a coefficient universe and sites $(C,J),(D,K)$ small relative to it [def-weil-pbc-sites-and-cohomology]. Use tensor abelian sheaves with tensor the sheafification of sectionwise $\\otimes_{\\mathbf Z}$ [det-def-sfb-sheaf-tensor-structure], and assume sheafification exists and its local equivalences are monoidal. Let $F:C\\to D$ be a functor for which precomposition sends $K$-sheaves to $J$-sheaves, and write $P_F H(V)=H(FV)$ for this direct image. Give $P_F$ its canonical lax monoidal structure induced by sheafification, with tensor and unit maps normalized by the actual sheafification units as in [lem-sfb-sheaf-pushforward-generator-comparison]. Let $R_C,R_D$ be commutative monoid objects in these tensor abelian-sheaf categories, and let $\\psi:R_C\\to P_FR_D$ be a morphism of monoid objects. Let $B_C,B_D$ be their reconstructed section-ring sheaves, and $E_C,E_D$ the fixed internal/sectionwise module equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence].\n\nThere is a unique morphism of ring sheaves $\\phi_\\psi:B_C\\to P_FB_D$ whose additive map on sections is $\\psi_V$ for every $V\\in C$. Define $P^{\\rm int}_{F,\\psi}=\\operatorname{Res}_\\psi\\operatorname{mapMod}(P_F)$ using [sk-def-sfb-transport, sk-def-sfb-change-of-scalars], and define $P^{\\rm sec}_{F,\\phi_\\psi}$ on sectionwise module sheaves [def-weil-sheaf-of-modules-category] by $(P^{\\rm sec}N)(V)=N(FV)$ with action $r n=\\phi_{\\psi,V}(r)n$. There is a unique natural comparison\n$$r_{F,\\psi}:E_CP^{\\rm int}_{F,\\psi}\\xrightarrow{\\sim}P^{\\rm sec}_{F,\\phi_\\psi}E_D$$\nwhose underlying sheaf map is the identity; its reconstructed section action is $r n=\\psi_V(r)n$.\n\nThese comparisons are compatible with composition: for a third site $(H,L)$ satisfying the same size and sheafification assumptions, a functor $G:D\\to H$ with the same sheaf-restriction property, a commutative monoid $R_H$, and $\\theta:R_D\\to P_GR_H$, let $K:C\\to H$ be a functor with the same sheaf-restriction property together with a natural isomorphism $\\kappa:K\\xrightarrow{\\sim}GF$ (for instance $K=GF$ and $\\kappa=\\mathrm{id}$), and let $c_\\kappa:P_FP_G\\xrightarrow{\\sim}P_K$ be the induced isomorphism of abelian-sheaf direct images, $(c_\\kappa H')(V)=H'(\\kappa_V)$. Put $\\chi=c_{\\kappa,R_H}\\circ P_F(\\theta)\\circ\\psi:R_C\\to P_KR_H$. Then $\\phi_\\chi=c_{\\kappa,B_H}\\circ P_F(\\phi_\\theta)\\circ\\phi_\\psi$, and the square comparing $r_{K,\\chi}$ with $P^{\\rm sec}_{F,\\phi_\\psi}(r_{G,\\theta})\\circ r_{F,\\psi}$ commutes using the internal and sectionwise direct-image compositors whose underlying sheaf isomorphism is $c_\\kappa$. The identity-functor comparisons agree as well. Each $E_C$ and its quasi-inverse are additive exact equivalences: a sequence of internal module sheaves is exact if and only if its image under $E_C$ is exact, and conversely for the quasi-inverse.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D6, definition-pushforward; agent-written tensor/internal-module refinement, including composition. Blueprint det-nagata-density-normalization-sheaves proof Steps 1–2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-sfb-sheaf-pushforward-generator-comparison",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-transport",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionRing|sectionModule|mapMod|mapMonCompIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib subdirectory: CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Functor.mapMon",
+   "results": "No hits; loogle: unknown identifier 'Functor.mapMon'",
+   "date": "2026-10-21",
+   "verdict": "invalid identifier Functor.mapMon reported by Loogle; no conclusion from this query; corrected with the subsequently run SheafOfModules.pushforwardComp query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstructing internal ring objects and internal modules in abelian sheaves commutes with pushforward of sheaves and composition",
+   "results": "SheafOfModules.pushforward; PresheafOfModules.pushforward₀_obj_obj_isModule; PresheafOfModules.pushforward₀_obj; SheafOfModules.pushforwardComp; SheafOfModules.pushforward_map_val; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; PresheafOfModules.pushforward₀",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous functor between sites and commutative ring objects in tensor abelian sheaves, reconstruction of section rings commutes with the lax monoidal direct image and its composition isomorphisms",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; SheafOfModules.pushforwardSections_unitHomEquiv; CategoryTheory.sheafToPresheaf_μ; CategoryTheory.sheafToPresheaf_δ; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardSections_coe; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon|sectionRing|sectionModule|internal",
+   "results": "No hits; Mathlib subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over tensor ring objects in sheaves: a ring map into a continuous direct image induces the same module restriction action as the reconstructed section ring map, coherently for composition",
+   "results": "SheafOfModules.restrictScalars_map_val; SheafOfModules.restrictScalars_obj_val; ModuleCat.Tilde.res_apply; SheafOfModules.restrictScalars; AlgebraicGeometry.Scheme.Modules.map_smul; ModuleCat.Tilde.toOpen_res; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.pushforward_map_app_apply'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sectionwise pushforwards and their compositors, or monoid transport alone, do not establish reconstruction of the internal ring/module actions and the coherent comparison with both exact equivalences"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-module-operations-transport",
+  "date": "2026-10-21",
+  "group": "Q77"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-nagata-density-normalization",
+ "blueprint": {
+  "from": {
+   "node": "det-nagata-density-normalization-sheaves",
+   "place": "Proof Step 1, internal/module-sheaf identification needed for exact operations and the open–closed exact sequence; Step 2, coherent right-adjoint identifications behind the base-change map.",
+   "via": [
+    "lem-sfb-internal-module-operations-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

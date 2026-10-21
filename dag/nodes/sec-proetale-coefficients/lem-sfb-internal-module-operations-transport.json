@@ -29,125 +29,88 @@
  ],
  "proof": [
   {
-   "text": "The equivalences $E_T$ leave sheaves and maps unchanged, hence preserve sums of morphisms. Their quasi-inverses are additive too: apply the faithful additive $E_T$ to an asserted sum identity and use the natural counit to identify its two sides.",
+   "text": "Apply [lem-sfb-section-ring-lax-pushforward-coherence] to each small pro-étale site and $R_T=\\Lambda_T$. It gives additive exact $E_T$ and inverse, so both preserve and reflect exact sequences. The universe and tensor hypotheses are precisely those fixed in the statement.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-lower-star-lax-monoidal.md",
-    "place": "Canonical lax tensor maps of continuous pro-étale direct image; component evaluation made explicit in WeilConjectures/CategoryTheory/Sites/PushforwardMonoidal.lean, lines 94–123."
-   }
-  },
-  {
-   "text": "By [lem-sfb-pushforward-comp-monoidal] (for the symmetric coefficients $\\mathrm{Ab}$ its maps are the lax structure $\\mu$ used in [def-sfb-module-lower-star]), $\\mu_{F,G}(V)\\circ q_{f_*F,f_*G,V}=q_{F,G,V'}$, where $q$ is the tensor-sheafification unit on sections and $V'=V\\times_TT'$. With naturality of $q$ in its first argument, the action composite of [def-sfb-module-lower-star] sends $q(r\\otimes n)$, $r\\in\\Lambda_T(V)$, $n\\in N(V')$, to $a_{V'}q(\\eta_f(r)\\otimes n)$. The section action reconstructed by $E_T$ is therefore $(r,n)\\mapsto\\eta_f(r)n$. Since $\\eta_f=f_*\\alpha_f\\circ\\eta_f^{\\rm Ab}$ is the prescribed coefficient adjunct, the identity sheaf map is the natural linear comparison $r_f:E_Tf_{*,\\rm int}\\cong f_{*,\\rm sec}E_{T'}$.",
-   "uses": [
-    "lem-sfb-pushforward-comp-monoidal",
-    "def-sfb-module-lower-star",
-    "sk-def-sfb-coefficient-morphisms",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+    "lem-sfb-section-ring-lax-pushforward-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.md",
-    "place": "Characterization of the canonical lax tensor map of a pro-étale pushforward by its composite with the sheafification maps; the pure-tensor action evaluation is agent-written."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 1 from the two extracted coherence statements."
    }
   },
   {
-   "text": "For the specified internal and ringed-topos adjunctions take $c_f^{-1}$ to be the inverse mate of $r_f$. The inverse-mate lemma makes it invertible. The transpose lemma identifies their full Hom bijections; evaluating these bijections on identities identifies their units and counits. Mate bijectivity fixes this comparison uniquely.",
+   "text": "For $f:T\\prime\\to T$, use its continuous site pullback and $\\psi=\\eta_f=f_*\\alpha_f\\circ\\eta_f^{\\rm Ab}$, a ring-object map by [sk-def-sfb-coefficient-morphisms]. By [lem-sfb-pushforward-comp-monoidal] its prescribed lax structure has the sheafification-unit normalization. The pushforward definition is $\\operatorname{Res}_{\\eta_f}\\operatorname{mapMod}(f_*^{\\rm Ab})$. The reconstruction lemma gives the required ring adjunct on sections and the identity-on-sheaves comparison $r_f:E_Tf_{*,\\rm int}\\cong f_{*,\\rm sec}E_{T\\prime}$.",
    "uses": [
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-module-lower-star",
+    "lem-sfb-pushforward-comp-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 2 from the two extracted coherence statements."
+   }
+  },
+  {
+   "text": "The two specified pullback/direct-image adjunctions exist by [def-sfb-module-upper-lower-adjunction] and [lem-weil-pbc-ringed-topoi-module-adjunction]. Apply clause (1) of [lem-sfb-equivalence-square-inverse-mate-coherence] to $r_f$: its normalized comparison $c_f$ identifies the full Hom bijections, unit and counit. Apply that clause again to $j_{!,\\rm int}\\dashv j^*_{\\rm int}$ from [sk-def-sfb-module-lower-shriek], the sectionwise open adjunction and right comparison $c_j$, obtaining $o_j:E_Tj_{!,\\rm int}\\cong j_{!,\\rm sec}E_U$ with the same normalization.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
     "def-sfb-module-upper-lower-adjunction",
     "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-weil-pbc-adjunction-mate",
-    "lem-stage3-inverse-mate-equivalences",
-    "lem-pur-adjunction-mate-transpose",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "sk-def-sfb-module-lower-shriek"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 3 from the two extracted coherence statements."
    }
   },
   {
-   "text": "Apply the same inverse-mate and transpose lemmas to $j_{!,\\rm int}\\dashv j^*_{\\rm int}$, the specified sectionwise open adjunction, and right comparison $c_j$. This gives $o_j:E_Tj_{!,\\rm int}\\cong j_{!,\\rm sec}E_U$, identifying the Hom bijections and therefore both units and counits.",
+   "text": "For composable $f:T''\\to T'$, $g:T'\\to T$, the base-change site functor of $g\\circ f$ is isomorphic to the composite of those of $g$ and $f$ by the rebracketing $V\\times_TT''\\cong(V\\times_TT')\\times_{T'}T''$, which induces $c_{f,g}$. Hence [lem-sfb-eta-comp] gives exactly the composite coefficient map $\\chi$ of the reconstruction lemma with this $\\kappa$. Its composition clause identifies the direct-image comparison square with the specified underlying-sheaf compositor of [def-sfb-module-lower-star-comp]. Clause (2) of the normalized-comparison lemma then identifies the pullback compositors of [def-sfb-module-upper-star-comp], which are their adjoint conjugates.",
    "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "lem-stage3-inverse-mate-equivalences",
-    "lem-pur-adjunction-mate-transpose",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
-   }
-  },
-  {
-   "text": "The direct-image compositor and $r_f,r_g,r_{gf}$ are identity maps on the same rebracketed sections, so their composition square commutes. Apply the adjunction-evaluation composition lemma with evaluation functors $E_T$, right squares $r$, and left comparisons $c$ of Step 3. It identifies the pullback compositors, which are the specified conjugates of these direct-image compositors.",
-   "uses": [
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "lem-sfb-eta-comp",
     "def-sfb-module-lower-star-comp",
-    "def-sfb-module-upper-star-comp",
-    "lem-pur-adjunction-evaluation-composition"
+    "def-sfb-module-upper-star-comp"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 4 from the two extracted coherence statements."
    }
   },
   {
-   "text": "In the open square write $b:g'^*j^*\\cong j'^*g^*$. Its left mate is\n$$\\beta=\\varepsilon_{j'}g^*j_!\\circ j'_!(b j_!)\\circ j'_!g'^*(\\eta_j).$$\nStep 5 identifies $b$ and Step 4 identifies the two adjunction factors. Mate pasting therefore identifies this composite with the sectionwise mate. Conjugation by the comparison isomorphisms and reflection by $E_{T'}$ transfer its invertibility.",
+   "text": "In the open square, Step 4 identifies $b:g\\prime{}^*j^*\\cong j\\prime{}^*g^*$. Apply clause (3) of the normalized-comparison lemma with $J=j_!$, $U=j^*$, $J\\prime=j\\prime_!$, $U\\prime=j\\prime{}^*$, $P=g\\prime{}^*$ and $Q=g^*$. Its displayed equality identifies the actual inverse mates, hence the stated open-extension base-change maps. Its invertibility equivalence gives the required implication. Finally Step 1 and the functor isomorphisms transport exactness of each operation by applying these exact equivalences and their inverses.",
    "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting"
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
-   }
-  },
-  {
-   "text": "Closed sheaf tensor preserves colimits, so internal modules are abelian; sectionwise modules are abelian by the site-size convention. Apply the additive-equivalence lemma to $E_T$ and its additive inverse: both preserve exact sequences. Their unit/counit isomorphisms then reflect exactness. Substituting the functor comparisons above transports exactness of every operation.",
-   "uses": [
-    "sk-def-sfb-sheaf-tensor",
-    "lem-sfb-modobj-abelian",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-equivalence-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 5 from the two extracted coherence statements."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-sfb-pushforward-comp-monoidal",
-  "def-sfb-module-lower-star",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
   "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-module-lower-star",
+  "lem-sfb-pushforward-comp-monoidal",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
   "def-sfb-module-upper-lower-adjunction",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "def-weil-pbc-adjunction-mate",
-  "lem-stage3-inverse-mate-equivalences",
-  "lem-pur-adjunction-mate-transpose",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
   "sk-def-sfb-module-lower-shriek",
+  "lem-sfb-eta-comp",
   "def-sfb-module-lower-star-comp",
-  "def-sfb-module-upper-star-comp",
-  "lem-pur-adjunction-evaluation-composition",
-  "lem-weil-pbc-mate-pasting",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-sfb-modobj-abelian",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-equivalence-injective-resolutions"
+  "def-sfb-module-upper-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-  "place": "Short assembly of the lax-tensor section characterization, existing inverse-mate/transpose and evaluation-composition lemmas, mate pasting and exact additive equivalences. This refines the retained eight-step proof without changing its statement."
+  "place": "Steps 1–2; assembly of the section-ring/right-image coherence and the normalized adjunction/mate coherence statements."
  },
  "mathlib_searches": [
   {
@@ -258,36 +221,20 @@
   "date": "2026-10-21",
   "item": "lem-sfb-internal-module-operations-transport",
   "worker": "stage1",
-  "summary": "Repair of the 8258-character coarse proof as a seven-step assembly. Reuses the existing general inverse-mate, transpose, compositor, pasting and exact-equivalence statements; the section-action evaluation is a two-line step from the existing lem-sfb-pushforward-comp-monoidal characterization of the lax tensor map (reviewer FIX: the delivered new nodes lem-sfb-pushforward-tensor-section-evaluation (duplicate clause of that node), lem-sfb-pushforward-action-section-formula (few-line fact) and the uncited leftover lem-sfb-ringed-site-pushforward-compositor are dropped). Full statement unchanged.",
-  "blueprint": "Realizes det-nagata-density-normalization-sheaves proof Steps 1–2: identification of the exact internal operations and of the canonical open-extension base-change map. No unit route changes.",
+  "summary": "Human-requested re-split into two statement-only, independently provable coherence lemmas: reconstruction with coherent right direct images and exactness; normalized left adjunction comparisons with compositors and arbitrary inverse-mate squares. Keeps the item statement, statement dependencies and Lean record unchanged. All former arguments remain as explicit conclusions of the extracted statements; coefficient composition is supplied by the existing eta-comp lemma. Reviewer FIX (Q77 maintainer reading): the composition clause of the reconstruction node now allows a site functor isomorphic to the composite, as needed for pro-étale base change, and Step 4 names the rebracketing.",
+  "blueprint": "det-nagata-density-normalization-sheaves proof Steps 1–2: exact internal operations and the specified open-extension base-change mate; no unit route change.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "The generic ringed-topos module adjunction identifies the specified sectionwise tensor-formula pullback. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+    "why": "Generic module adjunction supplies the prescribed tensor-formula sectionwise left adjoint; the Nagata unit supplies no such tool."
    },
    {
-    "node": "lem-stage3-inverse-mate-equivalences",
-    "why": "Generic invertibility of an inverse mate with equivalences on the two sides; applies to both the pullback and open-extension comparisons. This is a categorical tool and does not replace a geometric step of the Nagata unit."
-   },
-   {
-    "node": "lem-pur-adjunction-mate-transpose",
-    "why": "Generic formula identifies actual Hom transposes and hence the specified units/counits, not only functor isomorphism classes. This is a categorical tool and does not replace a geometric step of the Nagata unit."
-   },
-   {
-    "node": "lem-pur-adjunction-evaluation-composition",
-    "why": "Generic coherence of unit-normalized adjunction comparisons identifies pullback compositors once their right-adjoint square commutes. This is a categorical tool and does not replace a geometric step of the Nagata unit."
-   },
-   {
-    "node": "lem-sfb-modobj-abelian",
-    "why": "Generic abelianness of module objects when tensoring by the ring preserves finite colimits. This is a categorical tool and does not replace a geometric step of the Nagata unit."
-   },
-   {
-    "node": "sk-def-sfb-sheaf-tensor",
-    "why": "The closed sheaf tensor preserves colimits, as required for the module-object abelianness lemma. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+    "node": "lem-sfb-eta-comp",
+    "why": "Generic coefficient adjunct composition identity supplies the scalar-map compatibility for direct-image reconstruction; it replaces no geometric step."
    },
    {
     "node": "lem-sfb-pushforward-comp-monoidal",
-    "why": "Its statement characterizes the canonical lax tensor map of a pro-etale pushforward on sections via the sheafification maps, which Step 2 needs; no node of the Nagata unit states it. Categorical/sheaf-tensor tool, not a geometric step of the unit."
+    "why": "Identifies the project pushforward lax structure with the normalized sheafification-induced structure required by the general reconstruction statement; no Nagata-unit node states this tensor normalization."
    }
   ]
  },
@@ -298,15 +245,16 @@
   "lem-pur-adjunction-evaluation-composition",
   "lem-sfb-modobj-abelian",
   "sk-def-sfb-sheaf-tensor",
-  "lem-sfb-pushforward-comp-monoidal"
+  "lem-sfb-pushforward-comp-monoidal",
+  "lem-sfb-eta-comp"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q27-57231e6e6",
-  "group": "Q27",
+  "reviewer": "NT-cc-Q77-425c4b895",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-57231e6e6 (reviewer sub-agent of L); spot-checked: I read the item in full (statement unchanged against the Q08-PASSed head; only proof, proof_deps, proof_origin and split_report changed), all 7 steps, every cited statement, and main-20261015 det-nagata-density-normalization-sheaves proof Steps 1–2. The coefficient categories stay internal Mod_{Λ_T} against sectionwise Mod(B_T), joined by E_T; the varying condensed ring is kept and no finite or constant coefficient is used. The base-change map is the inverse-mate formula of def-weil-pbc-adjunction-mate with L1=j_!, L2=j'_!, G=g'^*, H=g^*. Step 3: lem-stage3-inverse-mate-equivalences with beta=r_f is correct, and the transpose lemma gives exactly the hν hypotheses. Step 5: I matched lem-pur-adjunction-evaluation-composition's signature (δe = the module lower-star compositor, γ=r, ν=c); hr holds as an identity on rebracketed sections. Step 7: closed tensor gives the hypotheses of lem-sfb-modobj-abelian, and clause (2) of the equivalence lemma applies. There is no cycle and no SGA source. Edge cases checked: empty U, U=T, zero ring, identity f. Three faults in the new nodes, all repaired. (1) C5/D1: lem-sfb-pushforward-tensor-section-evaluation repeats a clause of the landed lem-sfb-pushforward-comp-monoidal, whose statement characterizes the lax map h_*F⊗h_*G→h_*(F⊗G) by its composite with the sheafification maps at V×_T S. The report's claim that no such node exists is wrong. (2) C1: lem-sfb-pushforward-action-section-formula is true but is two lines from that characterization; I folded it into Step 2. (3) lem-sfb-ringed-site-pushforward-compositor is a leftover from superseded head 6fc7b62c that nothing cites. Fix file: fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-internal-module-operations-transport.json. Step 2 now cites lem-sfb-pushforward-comp-monoidal and writes out the pure-tensor evaluation; the proof is 2755 characters. proof_deps and split_report are updated, and comp-monoidal is added as a sheaf-tensor tool use. Statement and stmt_deps are untouched.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-425c4b895 (reviewer sub-agent of L); spot-checked: Answers the human's reopened re-split note of 2026-10-21 (note at 11:22, commit at 11:34). The 8258-char Q08 proof becomes 2 statement-only nodes of 2527 and 2850 chars plus a 5-step, 2338-char assembly; statement, stmt_deps and lean are byte-identical to live. Old-step map: steps 1, 2 and 8 → lem-sfb-section-ring-lax-pushforward-coherence (φ_ψ, r_{F,ψ} identity comparison, exact equivalences); steps 3, 4 and 5 → clause (1) of lem-sfb-equivalence-square-inverse-mate-coherence; step 6 → the composition clause of A plus clause (2) of B; step 7 → clause (3) of B. Neither node restates the item, and there is no cycle (closures of 296 and 4 nodes). Types checked: mate of j^{-1} is E_AU→ŪE_B; clause 2 hypothesis and conclusion; clause 3 β = ε'QJ∘J'bJ∘J'Pη. Step 5 hypothesis = two instances of clause 2 with p=c_{g'}, u=c_j. Step 2 normalisation = lem-sfb-pushforward-comp-monoidal (unit-composite characterisation at V×_T S). Sources: Stacks 03D6 definition-pushforward (sites-modules.tex:1146), 0B65 (categories.tex:3542), blueprint det-nagata-density-normalization-sheaves.proof Steps 1–2; no SGA. Small cases: F=id, ring automorphism on a one-point site, zero ring, identity equivalences, zero b. One fault fixed: A's composition clause covered only the literal composite GF. Pro-étale base change of g∘f is only isomorphic to it via the rebracketing V×_T T''≅(V×_T T')×_{T'}T'', which is c_{f,g} of eta-comp/lower-star-comp. Old step 6 had carried this; it was lost here (C4, and an argument dropped contrary to the note). Fix files: A now takes K with κ:K≅GF and c_κ; item Step 4 names κ; the proof is 2573 chars. Advisory: top-level tool_uses still lists Q27-era tools; overlap with Q20 lem-sfb-internal-section-scalar-adjunction (same-site Res only); B is assembled from stage3/transpose/evaluation-composition/mate-pasting, so its worker should cite them. Accepted split_report tool_uses: ringed-topoi-module-adjunction, eta-comp, pushforward-comp-monoidal.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
