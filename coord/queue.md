@@ -1,6 +1,6 @@
 # Work queue
 
-586 items; claim with `tools/claim.py next <group> [--stage N]`.
+589 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (24 clusters, 1028 modules)
 
@@ -33,9 +33,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ReductionOpenEtaleOrigin` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 89, stage 3 21 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 21 items.
 
-## Stage 1: nodes to split (18)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -52,19 +52,17 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-pointed-finite-etale-limit-cover` | 4011 | none |
 | `lem-sfb-prime-to-ell-linear-image-finite` | 4011 | none |
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
-| `lem-sfb-spectral-clopen-component-homeomorphism` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
 | `lem-sfb-tame-root-tower-extension` | 4011 | none |
 | `lem-sfb-totally-disconnected-coefficient-realization` | 4011 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (35)
+## Stage 2: nodes to state (31)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `sk-d-real-weights` | 1 | state | 0 |
-| `det-sp-rational-localized-hom` | 1 | state | 6 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 5 |
 | `lem-sfb-integral-quotient-direct-image-comparison` | 1 | state | 2 |
 | `lem-per-adic-stratified-pullback-texact` | 1 | state | 1 |
@@ -75,22 +73,19 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-fd-common-stage-comparison-descent` | 1 | state | 0 |
 | `lem-fd-frobenius-fixed-pair-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
-| `lem-per-rational-realization-finite-cone-models` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
 | `lem-pur-affine-coordinate-support-stalk-continuity` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-pur-signed-line-derived-base-change` | 1 | state | 0 |
 | `lem-sf-cbc-localized-strict-tensor-descent` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
-| `lem-sf-open-roos-unit-adjunction` | 1 | state | 0 |
-| `lem-sf-tensor-comparison-localization-descent` | 1 | state | 0 |
 | `lem-sfb-constructible-algcl-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
-| `lem-sfb-integral-pullback-strict-roos-normalization` | 1 | state | 0 |
 | `lem-sfb-nested-open-regular-alteration` | 1 | state | 0 |
 | `lem-sfb-normal-generic-continuous-sections` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
+| `lem-sfb-spectral-clopen-component-homeomorphism` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-transverse-tame-open-shriek-exchange` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
@@ -98,9 +93,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-pbc-finite-free-strict-tower-transport` | 1 | state | 0 |
 | `lem-zl-weil-generic-lissity` | 1 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 111 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (501)
+## Stage 3: modules to prove (509)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -167,6 +162,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstantCoefficientScalarNormalization` | - | 2 | proof | 2 |
 | `Sheaf.Paper.ConstructiblePullbackTExact` | - | 4 | proof | 2 |
 | `Sheaf.Paper.ConstructibleTruncations` | - | 1 | proof | 2 |
+| `Sheaf.Paper.ContinuousRationalDerivedRealization` | - | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedExchangeExactNormalization` | - | 3 | proof | 2 |
 | `Sheaf.Paper.DerivedNakayamaFirstReduction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedPullbackTensorHom` | - | 12 | proof | 2 |
@@ -313,6 +309,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.OrdinaryCompletedIntegralPullback` | - | 4 | proof | 3 |
 | `Sheaf.Paper.PerAdicCommonStageTruncations` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PerfectStrataUniformReductions` | - | 1 | proof | 3 |
+| `Sheaf.Paper.PointFibreDerivedTensor` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PointTransformationCoefficientDescent` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PrincipalKoszulStrictReplacement` | - | 6 | proof | 3 |
 | `Sheaf.Paper.PrincipalReductionConeCalculus` | - | 1 | proof | 3 |
@@ -323,8 +320,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus` | - | 3 | proof | 3 |
 | `Sheaf.Paper.PurityFiniteKummerLevel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.QuotientSystemMixedCoherence` | - | 3 | proof | 3 |
+| `Sheaf.Paper.RationalLocalizedHom` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RationalModuleRealizationFunctor` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RationalPullbackCompositionCoherence` | - | 2 | proof | 3 |
+| `Sheaf.Paper.RationalRealizationFiniteConeModels` | - | 6 | proof | 3 |
 | `Sheaf.Paper.RationalRealizationPullbackComparison` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RationalRealizationScalarCoherence` | - | 11 | proof | 3 |
 | `Sheaf.Paper.RationalRealizationTensorComparison` | - | 2 | proof | 3 |
@@ -425,6 +424,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FinitePullbackTensorComparison` | - | 5 | proof | 4 |
 | `Sheaf.Paper.IntegralConstructibleHeart` | - | 1 | proof | 4 |
 | `Sheaf.Paper.IntegralInverseImageComparisonComposition` | - | 1 | proof | 4 |
+| `Sheaf.Paper.IntegralTensorPullback` | - | 8 | proof | 4 |
 | `Sheaf.Paper.IntegralTowerInverseImageUnit` | - | 1 | proof | 4 |
 | `Sheaf.Paper.IsomorphismComparisonScalarExtension` | - | 5 | proof | 4 |
 | `Sheaf.Paper.IsomorphismScalarComparisonAgreement` | - | 1 | proof | 4 |
@@ -473,6 +473,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SupportedHomCocycleNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.TateTwistLocallyFree` | - | 1 | proof | 4 |
+| `Sheaf.Paper.TensorComparisonLocalizationDescent` | - | 1 | proof | 4 |
 | `Sheaf.Paper.TraceBaseChangeFirst` | - | 3 | proof | 4 |
 | `Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.CompletedCoefficientFreeResolution` | - | 1 | proof | 4 |
@@ -493,7 +494,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProEtaleInverseImageScalarUnitNormalization` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtaleTensorAdjointTest` | - | 4 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.SupportComparisonSectionModel` | - | 2 | proof | 5 |
-| `Sheaf.CategoryTheory.DerivedCategory.PerfectScalarTensorCoherence` | - | 1 | proof | 5 |
+| `Sheaf.CategoryTheory.DerivedCategory.PerfectScalarTensorCoherence` | - | 2 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerExchange` | - | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.FlatScalarTowerLimitSquare` | - | 1 | proof | 5 |
 | `Sheaf.Paper.CompletedScalarUnitAdjunction` | - | 1 | proof | 5 |
@@ -508,6 +509,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralConstantModelHeart` | - | 1 | proof | 5 |
 | `Sheaf.Paper.IntegralHeartLocalModel` | - | 9 | proof | 5 |
 | `Sheaf.Paper.IntegralLineReductionRestriction` | - | 1 | proof | 5 |
+| `Sheaf.Paper.IntegralPullbackStrictRoosNormalization` | - | 1 | proof | 5 |
 | `Sheaf.Paper.IntegralTwistBaseChange` | - | 1 | proof | 5 |
 | `Sheaf.Paper.IsomorphismScalarAugmentationCone` | - | 1 | proof | 5 |
 | `Sheaf.Paper.ProEtaleCoefficientModulePullbackComposition` | - | 1 | proof | 5 |
@@ -567,6 +569,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.InternalHomDualConstructibleModels` | - | 4 | proof | 7 |
 | `Sheaf.Paper.LocalModelTorBoundDescent` | - | 1 | proof | 7 |
 | `Sheaf.Paper.TAdmissibleDualizableTruncations` | - | 1 | proof | 7 |
+| `Sheaf.SixFunctors.OpenRoosUnitAdjunction` | - | 1 | proof | 7 |
 | `Sheaf.SixFunctors.OrdinaryProEtaleDirectImagePlusComparison` | - | 3 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.CondensedLocalizationExactCohomology` | - | 7 | proof | 8 |
 | `Sheaf.Paper.AdmissibleScalarRealizationExact` | - | 1 | proof | 8 |
@@ -608,7 +611,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TopBaseChangePresheaf` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (28)
+## Stage 3: waiting for statements of dependencies (25)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -622,17 +625,14 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.AdicHeartIntrinsicFibres` | - | 1 | `lem-per-adic-normalized-fibre-comparisons` |
 | `Sheaf.Paper.CartesianCoefficientTwists` | - | 5 | `lem-pur-signed-line-derived-base-change` |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | `lem-coef-enriched-sequence-projection-formula` |
-| `Sheaf.Paper.CondensedERealization` | - | 1 | `det-sp-rational-localized-hom` |
-| `Sheaf.Paper.ContinuousRationalDerivedRealization` | - | 1 | `lem-per-rational-realization-finite-cone-models` |
+| `Sheaf.Paper.CondensedERealization` | - | 1 | `lem-weil-pbc-realization-completed-mate` |
 | `Sheaf.Paper.FiniteTypeCoordinateSupportOrientation` | - | 3 | `lem-pur-closed-finite-adjoint-counit-transport` |
 | `Sheaf.Paper.IntegralPointTransportTowerRealization` | - | 1 | `lem-trf-point-transport-strict-quotient` |
 | `Sheaf.Paper.IntegralPullbackCompletedComparison` | - | 1 | `lem-a1-finite-pullback-strict-tower-comparison` |
-| `Sheaf.Paper.IntegralTensorPullback` | - | 8 | `lem-sfb-integral-pullback-strict-roos-normalization` |
 | `Sheaf.Paper.LocalWeilModelTraceIndependence` | - | 1 | `lem-fd-local-frobenius-coefficient-extension` |
 | `Sheaf.Paper.NormalContinuousAlgClMonodromy` | - | 1 | `lem-sfb-normal-generic-continuous-sections` |
 | `Sheaf.Paper.PbcScalarExtension` | - | 16 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.Paper.PointAutomorphismTransportScalarExtension` | - | 4 | `lem-weil-point-derived-sections-tensor-descent` |
-| `Sheaf.Paper.PointFibreDerivedTensor` | - | 1 | `lem-sf-tensor-comparison-localization-descent` |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-derived-sections-tensor-descent` |
 | `Sheaf.Paper.PurityConventions` | - | 11 | `sk-def-sf-operations` |
 | `Sheaf.Paper.PurityGeneralAdmissibility` | - | 1 | `lem-pur-affine-chart-exceptional-identification` |
