@@ -1,0 +1,82 @@
+{
+ "id": "lem-pur-unit-adjunct-tensor-action",
+ "kind": "statement",
+ "title": "Tensor action and counit equations for a unit-defined left-adjoint projection",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category], with associators $\\alpha^{\\mathcal C},\\alpha^{\\mathcal D}$. Let $J:\\mathcal C\\to\\mathcal D$ be left adjoint to $Q:\\mathcal D\\to\\mathcal C$, with specified natural Hom bijections, unit $v:1\\to QJ$ and counit $e:JQ\\to1$ [lem-weil-pbc-adjunction-of-natural-bijection]. Suppose $Q$ is strong monoidal [def-sfb-strong-monoidal-functor], and write its inverse tensor comparison as $\\mu_{F,N}:Q(F\\otimes N)\\xrightarrow{\\sim}QF\\otimes QN$.\nFor arbitrary $M\\in\\mathcal C$ and $N\\in\\mathcal D$, let $\\kappa_{M,N}:J(M\\otimes QN)\\to JM\\otimes N$ be the unique map whose $J\\dashv Q$ transpose is\n$$b_{M,N}=\\mu_{JM,N}^{-1}\\circ(v_M\\otimes1_{QN}):M\\otimes QN\\longrightarrow Q(JM\\otimes N).$$\nThen $\\kappa$ is natural in both arguments and for all $M,N_1,N_2$,\n$$\n(\\kappa_{M,N_1}\\otimes1_{N_2})\\circ\\kappa_{M\\otimes QN_1,N_2}\n=(\\alpha^{\\mathcal D}_{JM,N_1,N_2})^{-1}\\circ\\kappa_{M,N_1\\otimes N_2}\\circ J\\bigl((1_M\\otimes\\mu_{N_1,N_2}^{-1})\\circ\\alpha^{\\mathcal C}_{M,QN_1,QN_2}\\bigr).\n$$\nBoth sides go from $J((M\\otimes QN_1)\\otimes QN_2)$ to $(JM\\otimes N_1)\\otimes N_2$. For arbitrary $F,N\\in\\mathcal D$ one also has\n$$\ne_{F\\otimes N}\\circ J(\\mu_{F,N}^{-1})=(e_F\\otimes1_N)\\circ\\kappa_{QF,N}:J(QF\\otimes QN)\\longrightarrow F\\otimes N.\n$$\nNo invertibility of $\\kappa$, full faithfulness of $J$, symmetry, closedness, or exactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-written abstract unit-adjunct coherence calculation underlying the open tensor map, extracted from returned proof Steps 6 and 7",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, lemma-j-shriek-and-tensor (open adjunction normalization)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal right adjoint Q to J, the inverse of the adjunct of unit tensor identity satisfies tensor action associativity and counit tensor compatibility",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to a tensor preserving functor has a canonical Frobenius reciprocity map and its iterated tensor mate is associative; the adjunction counit is a module transformation",
+   "results": "OK 8 hits: CategoryTheory.tensorLeftAdjunction, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorRightAdjunction, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.frobeniusMorphism, CategoryTheory.tensorRightHomEquiv, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.leftAdjointMate",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "OK 10 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, AlgCat.tensorAlgebraAdj, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.Types.tensorProductAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|map_μ_comp_counit_app_tensor|unit_app_tensor_comp_map_δ",
+   "results": "OK 12 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor compatibility of the counit and associativity of the projection morphism for a strong monoidal right adjoint",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_left, CategoryTheory.ComonObj.comul_counit_assoc, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+   "date": "2026-10-21",
+   "verdict": "no match: Functor.lean 1024/1036 concerns an oplax structure on the left adjoint and its two-variable monoidal counit; Closed/Functor.lean 61 concerns cartesian Frobenius maps. Neither gives these mixed tensor/unit-adjunct action and counit equations for arbitrary monoidal categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-projection-action-laws",
+  "date": "2026-10-21",
+  "group": "Q79"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model-agreement proof: canonical reassociations of the package; open-extension tensor-action and open-counit calculation in the expanded argument attributed to Step 6. Returned finite-projection-action-laws proof Steps 6 and 7.",
+   "via": [
+    "lem-pur-finite-projection-action-laws"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

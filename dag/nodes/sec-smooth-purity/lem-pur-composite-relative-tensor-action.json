@@ -1,0 +1,75 @@
+{
+ "id": "lem-pur-composite-relative-tensor-action",
+ "kind": "statement",
+ "title": "Composition preserves relative tensor-action identities",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be monoidal categories [def-sfb-monoidal-category]. Let $P:\\mathcal E\\to\\mathcal D$ and $Q:\\mathcal D\\to\\mathcal C$ be strong monoidal functors [def-sfb-strong-monoidal-functor], with inverse tensor comparisons $\\mu^P,\\mu^Q$. Let $J:\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal E$ be functors. Suppose given maps, natural in both arguments,\n$$\\pi_{A,N}:RA\\otimes N\\longrightarrow R(A\\otimes PN),\\qquad\n\\delta_{M,B}:JM\\otimes B\\longrightarrow J(M\\otimes QB),$$\nfor all $A,B\\in\\mathcal D$, $M\\in\\mathcal C$ and $N\\in\\mathcal E$.\nFor a functor $F:\\mathcal A\\to\\mathcal B$, a strong monoidal functor $S:\\mathcal B\\to\\mathcal A$ with inverse tensor comparison $\\mu^S$, and maps $a_{M,N}:FM\\otimes N\\to F(M\\otimes SN)$, the tensor-action identity means\n$$F\\bigl((\\alpha^{\\mathcal A}_{M,SN,ST})^{-1}\\circ(1_M\\otimes\\mu^S_{N,T})\\bigr)\\circ a_{M,N\\otimes T}\\circ\\alpha^{\\mathcal B}_{FM,N,T}\n=a_{M\\otimes SN,T}\\circ(a_{M,N}\\otimes1_T)$$\nfor all $M,N,T$. Assume this identity holds for $(R,P,\\pi)$ and $(J,Q,\\delta)$.\nPut $H=RJ$, $S=QP$, give $S$ the inverse comparison\n$$\\mu^S_{N,T}=\\mu^Q_{PN,PT}\\circ Q(\\mu^P_{N,T}),$$\nand define $\\tau_{M,N}=R(\\delta_{M,PN})\\circ\\pi_{JM,N}:HM\\otimes N\\to H(M\\otimes SN)$. Then $\\tau$ is natural and satisfies the tensor-action identity for $(H,S,\\tau)$.\nMore explicitly, writing $M_1=M\\otimes QPN_1$, the following equality holds after the canonical associators (the displayed targets use left association):\n$$\\tau_{M_1,N_2}\\circ(\\tau_{M,N_1}\\otimes1)\n=R\\bigl(\\delta_{M_1,PN_2}\\circ(\\delta_{M,PN_1}\\otimes1)\\bigr)\\circ\\pi_{JM\\otimes PN_1,N_2}\\circ(\\pi_{JM,N_1}\\otimes1).$$\nNone of $\\pi,\\delta,\\tau$ need be invertible. No adjunctions, symmetry, or unit equation for these transformations are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56, equation-projection-formula-map, and 0GL1, lemma-j-shriek-and-tensor; agent-written abstract composition calculation for the proper/open composite, extracted from returned proof Step 8"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composing natural tensor action maps RJ M tensor N to RJ of M tensor QP N preserves the module functor associativity identity without invertibility",
+   "results": "OK 8 hits: TensorProduct.AlgebraTensorModule.rTensor_comp, TensorProduct.AlgebraTensorModule.rTensor_tensor, TensorProduct.AlgebraTensorModule.assoc, Module.Invertible.rTensorInv, TensorProduct.AlgebraTensorModule.assoc_tmul, TensorProduct.AlgebraTensorModule.assoc_symm_tmul, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.MonoidalCategory.tensorμ_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor projection map of a composite of two functors is associative if the two projection maps are associative, by naturality and strong monoidal pullback comparison",
+   "results": "OK 8 hits: CategoryTheory.Functor.Monoidal.tensorHom_app_fst_assoc, CategoryTheory.Functor.Monoidal.μ_comp_assoc, CategoryTheory.Functor.Monoidal.tensorHom_app_snd_assoc, CategoryTheory.Functor.prod_μ_snd, CategoryTheory.Functor.prod_μ_fst, CategoryTheory.Functor.Monoidal.μ_snd_assoc, CategoryTheory.Functor.Monoidal.tensorObjComp_hom_app, CategoryTheory.Functor.Monoidal.μ_fst_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxRightLinear\"",
+   "results": "OK 12 hits: CategoryTheory.Functor.LaxRightLinear, CategoryTheory.Functor.OplaxRightLinear, CategoryTheory.Functor.RightLinear.toLaxRightLinear, CategoryTheory.Functor.RightLinear.toOplaxRightLinear, CategoryTheory.Functor.LaxRightLinear.μᵣ, CategoryTheory.Functor.OplaxRightLinear.δᵣ, CategoryTheory.Functor.LaxRightLinear.μᵣ_unitality, CategoryTheory.Functor.LaxRightLinear.μᵣ_unitality_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleFunctor|moduleFunctor|LinearFunctor|projection.*comp|tensor.*action",
+   "results": "OK 25 hits: Mathlib/CategoryTheory/Products/Basic.lean, Mathlib/CategoryTheory/Products/Basic.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Limits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of relative tensor action transformations for functors satisfies associativity using strong monoidal base functors",
+   "results": "OK 8 hits: CategoryTheory.Functor.Monoidal.map_tensor_assoc, CategoryTheory.NatTrans.IsMonoidal.tensor_assoc, CategoryTheory.NatTrans.tensor_naturality_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionHom_comp_assoc, CategoryTheory.BasedFunctor.comp_assoc, CategoryTheory.NatTrans.IsMonoidal.comp, CategoryTheory.Functor.Monoidal.μ_comp_assoc, CategoryTheory.NatTrans.whiskerRight_app_tensor_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-projection-action-laws",
+  "date": "2026-10-21",
+  "group": "Q79"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model-agreement proof: canonical reassociations of the package; fixed proper/open compactification tensor-action calculation in the expanded argument attributed to Step 6. Returned finite-projection-action-laws proof Step 8.",
+   "via": [
+    "lem-pur-finite-projection-action-laws"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

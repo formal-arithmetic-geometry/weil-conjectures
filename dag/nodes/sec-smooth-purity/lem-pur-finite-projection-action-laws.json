@@ -32,105 +32,56 @@
  ],
  "proof": [
   {
-   "text": "Fix the canonical associators. On the pro-etale categories, the finite-level clause of [lem-pur-derived-pullback-tensor-iso] gives natural tensor comparisons compatible with associators and with composition of pullbacks. On the ordinary etale categories use [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for the morphism of ringed topoi induced by $u$ with constant ring $A$; its isomorphism is the inverse of the canonical comparison of [lem-kun-inverse-image-monoidal], which is the one entering [def-kun-projection-formula-map] and [lem-kun-derived-pullback-composition-monoidal] (both are the Stacks 07A4 comparison for that morphism of ringed topoi). This canonical comparison has the same associativity normalization: on K-flat representatives with flat terms both iterated comparisons send $s\\otimes((x\\otimes y)\\otimes z)$ to $((s\\otimes x)\\otimes(1\\otimes y))\\otimes(1\\otimes z)$ after reassociation. The associators are induced by reassociation on total tensors by [lem-sf-ringed-derived-closed-symmetric-monoidal]; the two paths preserve the degrees and have no permutation signs. The K-flat localization equivalence in [lem-weil-pbc-site-derived-tensor-descent] makes equality on these representatives equality in the derived category, in three variables by applying the equivalence in each variable. We may therefore write $P(A\\otimes B\\otimes C)=PA\\otimes PB\\otimes PC$ in the following calculations, always using these fixed comparisons.",
+   "text": "On each site use the canonical ringed-topos comparisons and associators of [lem-sfb-ringed-derived-monoidal-comparisons]. They are strong monoidal and their pullback-composition comparisons are monoidal. At finite pro-etale level these are precisely [lem-pur-derived-pullback-tensor-iso]; on the etale site the inverse of [lem-kun-inverse-image-monoidal] is the same canonical ringed comparison. Thus all following reassociations use these specified maps, separately on each site.",
    "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-pur-derived-pullback-tensor-iso",
-    "lem-kun-inverse-image-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-kun-inverse-image-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 and 0FPT (lemma-symmetric-monoidal-derived): representative normalization"
+    "place": "Tag 07A4, lemma-pullback-tensor-product: canonical comparisons"
    }
   },
   {
-   "text": "Write $P=Lu^*$, $R=Ru_*$ and $e:PR\\to1$ for the direct-image adjunction counit. By [def-exchange-projection], $\\pi_{M,N}$ is the transpose of $(e_M\\otimes1)\\mu_{RM,N}$. For the ordinary etale categories this is precisely the definition in [def-kun-projection-formula-map]. The natural adjunction bijection and its inverse formula of [lem-weil-pbc-adjunction-of-natural-bijection] give, under the comparisons of Step 1,\n$$e_{M\\otimes PN}\\,P\\pi_{M,N}=e_M\\otimes1_{PN}.$$\nIndeed, the transpose of $R(a)\\eta$ is $e\\,PR(a)P\\eta=a\\,eP\\eta=a$, by counit naturality and the triangle identity. Equality of the transposes detects equality of the original arrows.",
+   "text": "The proper maps in [def-exchange-projection] and, on the etale site, [def-kun-projection-formula-map] are exactly the counit mates in [lem-sfb-ringed-projection-tensor-composition]. Its tensor identity proves clause 1, and its naturality will apply to $Rp_*$. No projection invertibility is used.",
    "uses": [
     "def-exchange-projection",
     "def-kun-projection-formula-map",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "lem-sfb-ringed-projection-tensor-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56; Tag 07A6 (lemma-adjoint); categories.tex Definition 0037"
+    "place": "Tag 0B56, equation-projection-formula-map"
    }
   },
   {
-   "text": "Put $M_1=M\\otimes PN_1$ and $M_{12}=M_1\\otimes PN_2$. Transpose the iterated projection map under $P\\dashv R$. Naturality of $\\mu$ and Step 2 give\n$$\\begin{aligned}\ne_{M_{12}}P\\bigl(\\pi_{M_1,N_2}(\\pi_{M,N_1}\\otimes1)\\bigr)\n&=(e_{M_1}\\otimes1)(P\\pi_{M,N_1}\\otimes1)\\\\\n&=(e_{M_1}P\\pi_{M,N_1})\\otimes1\\\\\n&=e_M\\otimes1_{PN_1}\\otimes1_{PN_2}.\n\\end{aligned}$$\nThe single map $\\pi_{M,N_1\\otimes N_2}$ has exactly this transpose, after $P(N_1\\otimes N_2)\\cong PN_1\\otimes PN_2$ and reassociation. The bijection in [lem-weil-pbc-adjunction-of-natural-bijection] proves clause 1 on both sites. Properness is permitted but was not needed; in particular no invertibility of $\\pi$ entered.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56: explicit two-factor transpose calculation"
-   }
-  },
-  {
-   "text": "For the open immersion write $J=j_!$, $Q=j^{-1}$ and $v:1\\to QJ$ for the open adjunction unit. On the pro-etale site, [lem-sf-open-tensor-normalization] identifies the inverse $\\kappa_{M,N}=\\delta_{M,N}^{-1}$ of the exact canonical open tensor map of the statement: its transpose is\n$$b_{M,N}=\\mu_{j;JM,N}^{-1}(v_M\\otimes1):M\\otimes QN\\longrightarrow Q(JM\\otimes N).$$\nThis is an assertion about the specified open tensor map, not a choice of some isomorphism between its endpoints. In particular\n$$Q\\kappa_{M,N}\\,v_{M\\otimes QN}=b_{M,N}.$$\nWe use the adjunction bijection of [lem-weil-pbc-adjunction-of-natural-bijection] for $J\\dashv Q$ when comparing open maps below.",
+   "text": "Put $J=j_!$, $Q=j^{-1}$ and $\\kappa=\\delta^{-1}$. Its transpose is $\\mu_{JM,N}^{-1}(v_M\\otimes1)$ by [lem-sf-open-tensor-normalization] on the pro-etale site and [lem-coef-etale-open-tensor] on the etale site (take the coefficient map $A\\to A$). Apply [lem-pur-unit-adjunct-tensor-action]. Inverting its first equation gives the open action identity. In its second equation compose on the right with $\\delta_{QF,N}$; $\\kappa_{QF,N}\\delta_{QF,N}=1$ gives exactly the stated open-counit equation. This proves clause 2 for the actual maps on unbounded categories.",
    "uses": [
     "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "lem-coef-etale-open-tensor",
+    "lem-pur-unit-adjunct-tensor-action"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 and sites-modules.tex Tag 0E8I: open-unit normalization"
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I"
    }
   },
   {
-   "text": "The same normalization holds for the ordinary etale map of [lem-pur-etale-open-derived-tensor]. To check it without identifying the two sites, take its defining sheaf tensor comparison on the localized etale site. Its inverse takes $j_!(m\\otimes qn)$ to $j_!m\\otimes n$ on objects over the open. Under the sheaf adjunction of [lem-weil-pbc-extension-by-zero-adjunction] this is $v_M\\otimes1$ followed by inverse restriction/tensor comparison: the counit there is induced by the identity on sections over the open. These statements are equalities of sheaf maps, determined by the zero-extension presheaf and sheafification, not a test on cohomology stalks. Represent $N$ by a K-flat complex with flat terms. Pullback of that representative is K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the definition of the derived comparison in [lem-pur-etale-open-derived-tensor] is the direct-sum totalization of just these sheaf maps. Consequently the same formula for $b$ and $\\kappa$ holds for arbitrary unbounded $M,N$. Exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and exact inverse image mean their units and counits are the degreewise ones. Thus Steps 4, 6 and 7 apply separately on each site with its own adjunction.",
-   "uses": [
-    "lem-pur-etale-open-derived-tensor",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-extension-by-zero-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 proof (K-flat second variable); sites-modules.tex Tag 0E8I Hom calculation"
-   }
-  },
-  {
-   "text": "Set $M_1=M\\otimes QN_1$ and $M_{12}=M_1\\otimes QN_2$. Compare $\\kappa_{M,N_1\\otimes N_2}$ with\n$$h=(\\kappa_{M,N_1}\\otimes1)\\kappa_{M_1,N_2}:JM_{12}\\longrightarrow JM\\otimes N_1\\otimes N_2.$$\nIts transpose, using the open units and the comparisons of Step 1, is\n$$Qh\\,v_{M_{12}}\n=(Q\\kappa_{M,N_1}\\otimes1)(v_{M_1}\\otimes1)\n=v_M\\otimes1_{QN_1}\\otimes1_{QN_2}.$$\nThis is also the transpose of the single $\\kappa_{M,N_1\\otimes N_2}$. Injectivity of the adjunction bijection [lem-weil-pbc-adjunction-of-natural-bijection] gives equality. Inverting this equality yields exactly the open tensor-action identity for $\\delta$ in clause 2, with its displayed order of factors.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0GL1 and 0E8I: explicit inverse-open-map tensor calculation"
-   }
-  },
-  {
-   "text": "Let $e:JQ\\to1$ now be the open counit and put $D=F\\otimes N$. Cancel the isomorphism $\\delta_{QF,N}$ on the right in the desired counit equation. It is enough to show\n$$e_DJ(\\mu_{j;F,N}^{-1})=(e_F\\otimes1)\\kappa_{QF,N}:\nJ(QF\\otimes QN)\\longrightarrow D.$$\nThe transpose of the left side is $\\mu_{j;F,N}^{-1}$, by naturality of the open unit and $Qe_Dv_{QD}=1$. By Steps 4--5 the transpose of the right side, after the tensor comparison, is\n$$\\mu_{j;F,N}^{-1}(Qe_F\\otimes1)(v_{QF}\\otimes1)\n=\\mu_{j;F,N}^{-1},$$\nusing $Qe_Fv_{QF}=1$. The adjunction bijection and its triangle identities [lem-weil-pbc-adjunction-of-natural-bijection] give equality. Recompose with $\\delta_{QF,N}$ to obtain the exact counit equation of clause 2. This checks the actual counits, including on arbitrary unbounded complexes.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E8I and 0GL1: counit compatibility by the open triangle identity"
-   }
-  },
-  {
-   "text": "Fix $c=(j,p)$ and write $R=Rp_*$, $P=Lp^*$, $J=j_!$, $Q=Lj^*$. The definition [def-exchange-projection] is $\\mathrm{PF}_{M,N}=R(\\delta_{M,PN})\\pi_{JM,N}$, followed by $QP=Lf^*$. To expand two successive factors, put $M_1=M\\otimes QPN_1$ and $A=JM$. Naturality of the counit-defined $\\pi$ in its first variable moves $R(\\delta_{M,PN_1})$ across $\\pi_{JM_1,N_2}$, so that\n$$\\begin{aligned}\n\\mathrm{PF}_{M_1,N_2}(\\mathrm{PF}_{M,N_1}\\otimes1)\n&=R\\bigl(\\delta_{M_1,PN_2}(\\delta_{M,PN_1}\\otimes1)\\bigr)\n\\pi_{A\\otimes PN_1,N_2}(\\pi_{A,N_1}\\otimes1)\\\\\n&=R(\\delta_{M,P(N_1\\otimes N_2)})\\pi_{A,N_1\\otimes N_2}\\\\\n&=\\mathrm{PF}_{M,N_1\\otimes N_2}.\n\\end{aligned}$$\nThe second equality is Step 6 for $PN_1,PN_2$ and Step 3 for $p$; Step 1 supplies the tensor comparisons. For $QP=Lf^*$ the pro-etale composition/tensor normalization is [lem-pur-derived-pullback-tensor-iso], and the ordinary etale one is [lem-kun-derived-pullback-composition-monoidal]. On the ordinary etale categories use exactly the composite $Rp_*j_!$ of [def-amb-etale-compact-support]; the same expansion defines its compactification projection map, using [def-kun-projection-formula-map] and Step 5. No compactification-independent exchange or comparison is used. This proves clause 3 on both sites.",
+   "text": "For $c=(j,p)$ set $R=Rp_*$, $P=Lp^*$, $J=j_!$, $Q=Lj^*$. By [def-exchange-projection], $\\mathrm{PF}^c_{M,N}=R(\\delta_{M,PN})\\pi_{JM,N}$ followed by $QP=Lf^*$. On etale categories use the identical formula with [def-kun-projection-formula-map] and the chosen composite [def-amb-etale-compact-support]. Steps 2 and 3 supply the two action hypotheses of [lem-pur-composite-relative-tensor-action]. Its conclusion proves clause 3; Step 1 identifies its composite tensor comparison with that of $Lf^*$. All calculations stay at the chosen compactification.",
    "uses": [
     "def-exchange-projection",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-kun-derived-pullback-composition-monoidal",
+    "def-kun-projection-formula-map",
     "def-amb-etale-compact-support",
-    "def-kun-projection-formula-map"
+    "lem-pur-composite-relative-tensor-action"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 followed by Tag 0GL1: expansion for a fixed proper/open compactification"
+    "place": "Tags 0B56 and 0GL1: proper/open composition"
    }
   }
  ],
@@ -138,17 +89,14 @@
   "def-amb-etale-compact-support",
   "def-exchange-projection",
   "def-kun-projection-formula-map",
-  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-coef-etale-open-tensor",
   "lem-kun-inverse-image-monoidal",
+  "lem-pur-composite-relative-tensor-action",
   "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-unit-adjunct-tensor-action",
   "lem-sf-open-tensor-normalization",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -247,39 +195,27 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-finite-projection-action-laws",
   "worker": "stage1",
-  "summary": "Proved the proper, open, open-counit and fixed-compactification identities by explicit adjunction transposes, separately on ordinary pro-etale and etale unbounded constant-coefficient derived categories. Reused existing coherent tensor and normalized open-map nodes; no new nodes or statement changes. Checked project source, source tags, every citation and the actual maps without invoking projection-map invertibility.",
+  "summary": "Repair of the human-requested re-split: preserves the statement and all old argument content; adds two independent statement-only generic lemmas for the unit-adjunct action/counit calculation and composition of relative action maps. Reuses existing canonical comparison, proper-projection and etale open-normalization nodes instead of duplicates. Four-step assembly is below 3000 characters. Full old proof and exact assignment of its arguments are retained in report.md.",
   "blueprint": "Realizes the two-base-factor tensor-action and open-counit calculation attributed to the expanded projection-purity-agreement model proof by the creation record. The current snapshot proof is shorter and does not itself contain an Expanded Step 6; the detailed argument is agent-written from the Stacks constructions, without changing the diagonal/DNC unit route.",
   "tool_uses": [
    {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Ambient canonical derived tensor and pullback-composition coherence on either small ringed site; no purity step is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "General counit-mate tensor associativity and naturality supplies the proper-map calculation; it uses no projection invertibility."
+   },
+   {
     "node": "lem-sf-open-tensor-normalization",
-    "why": "The canonical pro-etale open tensor map has inverse the specified open-unit adjunct. This generic open-map normalization is not a replacement for the diagonal/DNC purity route."
+    "why": "Identifies the actual pro-etale open tensor inverse with its unit-defined adjunct."
    },
    {
-    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "why": "Supplies the canonical derived tensor associators on any small ringed site, needed on the two distinct sites. This is ambient tensor structure."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Supplies natural tensor comparisons and pullback preservation of K-flat representatives on small ringed sites, including the ordinary etale site."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Supplies the K-flat localization equivalence, allowing representative normalization of tensor comparisons to be checked without assuming morphisms are detected on cohomology."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-adjunction",
-    "why": "Supplies the explicit ordinary etale sheaf open adjunction and its counit normalization on sections."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-exact",
-    "why": "Supplies exactness of ordinary etale extension by zero for the passage from sheaf maps to unbounded complexes."
-   },
-   {
-    "node": "lem-kun-derived-pullback-composition-monoidal",
-    "why": "Identifies the tensor comparison of the composite ordinary etale pullback j-star p-star with that of f-star; a generic pullback-coherence tool."
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Identifies the actual ordinary etale open tensor inverse with its degreewise open-unit adjunct on arbitrary unbounded complexes."
    }
   ]
  },
@@ -290,15 +226,18 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-kun-derived-pullback-composition-monoidal"
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-coef-etale-open-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q11-a14d02029",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q79-f08d7cf6c",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a14d02029 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item's statement, all 8 steps and every cited statement. Checked the sources at Stacks 07A4 (sites-cohomology l.3683), 0B56 (l.13650), 0GL1 (l.4578) and 0E8I (sites-modules l.4051), plus the main-20261015 parent proof; it has no 'Expanded Step 6', and proof_origin=agent is correct. The statement is unchanged and true. All three clauses are well typed and match the maps of def-exchange-projection (pro-etale, ringed-topoi mu) and of def-kun-projection-formula-map / def-amb-etale-compact-support (etale, Noetherian holds). Small cases checked: U empty, identity maps, unit factors, shifts. I recomputed the transposes in Steps 2, 3, 6 and 7 and the compactification expansion in Step 8; all are correct and use no invertibility and no compactification independence. Step 4 uses exactly the statement of lem-sf-open-tensor-normalization (gamma^{-1} is the adjunct of u⊗1, and for constant A it is the map of lem-cbc-extension-zero-projection-formula). Step 5 matches the 0E8I construction. One fault, fixed (C3/C4): the etale projection map of def-kun-projection-formula-map and the node lem-kun-derived-pullback-composition-monoidal use the comparison of lem-kun-inverse-image-monoidal, but Step 1 normalized the comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback without citing or identifying the def-kun one. I added that citation (the node is Lean-closed, so no tool use is needed) and the identification (both are the 07A4 comparison), and updated proof_deps. Duplicate search: lem-sfb-ringed-projection-tensor-composition states clause 1 alone for general ringed topoi. It is a generalization of one clause, not of the package or the etale normalization, so it is noted, not a fault. No new nodes and no cycle. The unit route is fine, and I accept all seven declared generic tool uses. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f08d7cf6c (reviewer sub-agent of L); spot-checked: Re-split note of the human (2026-10-21) satisfied. I compared the old proof with the new one step by step. Old Steps 1-5 now cite existing reviewed nodes whose statements carry those arguments: lem-sfb-ringed-derived-monoidal-comparisons (associators and monoidal composition); lem-sfb-ringed-projection-tensor-composition, whose first identity is exactly clause 1 for the counit mate; lem-sf-open-tensor-normalization (pro-etale gamma^{-1} = adjunct of u⊗1, and for constant finite A it is the map of lem-cbc-extension-zero-projection-formula); lem-coef-etale-open-tensor (etale gamma = adjunct, degreewise, unbounded). Old Steps 6-7 became the new node lem-pur-unit-adjunct-tensor-action and old Step 8 became lem-pur-composite-relative-tensor-action. The two new nodes are of comparable size and the item proof is a 4-step assembly of about 1.9k characters. I checked both new statements by hand. Unit-adjunct node: eq. 1 transposes to mu^{-1}(mu^{-1}⊗1)(v⊗1⊗1) on both sides by the associativity axiom of Q; eq. 2 transposes to mu^{-1} on both sides by the triangle identities; no invertibility needed. Composite node: naturality of pi along delta_{M,PN}, then the two action identities, then naturality of delta along mu^P give H(alpha^{-1}(1⊗mu^S)) tau alpha. Both are true, with correct types, no unit or invertibility assumption, and identity and zero cases checked. Item Steps 3-4 specialize them correctly (kappa = delta^{-1}; composing with delta gives the stated counit equation; c_{j,p} monoidal transports QP to Lf^* at the fixed compactification). No cycle; neither the item nor any cited node is in route-pivot-dropped; no SGA source. Stacks 0GL1 (sites-cohomology l.4578), 0B56 (l.13666) and 0E8I (sites-modules l.4051) checked. Advisory: def-sfb-adjunction-projection-formula proves the left-handed, invertible-case associativity, so it is not a duplicate, but its Steps 5-6 mirror the proof of new eq. 1. Accepted the four declared tool uses; the merge should replace the item's stale top-level tool_uses with them. Snapshot note: only the sec-smooth-purity chapter resolves in the snapshot, so other-chapter nodes were read from clones/live."
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteProjectionActionLaws",
