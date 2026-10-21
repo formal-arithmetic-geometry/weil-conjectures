@@ -3,24 +3,131 @@
  "blueprint": {
   "is": "sk-d-real-operations",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Operations, constituents and coinvariants",
- "statement": "For Weil representations use the ordinary direct sum,\ndiagonal tensor action, exterior action on $\\bigwedge^r V$, dual action\n$(g\\lambda)(v)=\\lambda(g^{-1}v)$, and determinant\n$\\det V=\\bigwedge^{\\dim V}V$. An irreducible representation is nonzero\nwith no proper nonzero invariant subspace. A constituent of $V$ is an\nirreducible representation isomorphic to a subquotient $M/N$ of $V$,\nfor invariant subspaces $N\\subseteq M\\subseteq V$. For finite-dimensional\n$V$ these are the irreducible successive quotients of a composition\nseries; counted with multiplicity, their direct sum is a\nsemisimplification.\nFor a subgroup $I$, set\n$V^I=\\{v:gv=v\\text{ for all }g\\in I\\}$ and\n$V_I=V/\\langle gv-v:g\\in I,v\\in V\\rangle$.\nFor $b\\in\\Qlb^\\times$, the constant Weil line $B_b$ has action\n$g\\mapsto b^{\\deg g}$. The Tate line is $\\Qlb(n)=B_{q^{-n}}$.",
+ "statement": "For Weil representations of [sk-d-real-weil], use the ordinary direct sum of [sk-d-linear],\ndiagonal tensor action, exterior action on $\\bigwedge^r V$, dual action\n$(g\\lambda)(v)=\\lambda(g^{-1}v)$, and determinant\n$\\det V=\\bigwedge^{\\dim V}V$. An irreducible representation is nonzero\nwith no proper nonzero invariant subspace. A constituent of $V$ is an\nirreducible representation isomorphic to a subquotient $M/N$ of $V$,\nfor invariant subspaces $N\\subseteq M\\subseteq V$. For finite-dimensional\n$V$ these are the irreducible successive quotients of a composition\nseries of [def-mg-weil-composition-series]; counted with multiplicity, their direct sum is a\nsemisimplification in the sense of [def-mg-weil-semisimplification].\nFor a subgroup $I$, set\n$V^I=\\{v:gv=v\\text{ for all }g\\in I\\}$ and\n$V_I=V/\\langle gv-v:g\\in I,v\\in V\\rangle$.\nFor $b\\in\\Qlb^\\times$, the constant Weil line $B_b$ has action\n$g\\mapsto b^{\\deg g}$. The Tate line is $\\Qlb(n)=B_{q^{-n}}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
   "place": "node sk-d-real-operations, order 2929"
  },
  "stmt_deps": [
-  "sk-d-real-weil"
+  "sk-d-real-weil",
+  "sk-d-linear",
+  "def-mg-weil-composition-series",
+  "def-mg-weil-semisimplification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "The direct-sum, tensor, exterior and top-exterior actions are the representation constructions of [sk-d-linear], specialized to the Weil group and coefficient field of [sk-d-real-weil]. For the dual, define gλ by v ↦ λ(g⁻¹v). This is linear, the identity acts trivially, and (g(hλ))(v)=λ(h⁻¹g⁻¹v)=((gh)λ)(v), so it defines the stated dual representation. The condition on irreducibility is precisely simplicity in [sk-d-linear].",
+   "uses": [
+    "sk-d-linear",
+    "sk-d-real-weil"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
+    "place": "Operations, constituents and coinvariants: displayed definitions and finite-dimensional constituent clause"
+   }
+  },
+  {
+   "text": "For finite-dimensional V, [lem-mg-composition-series-exists] supplies a composition series when V is nonzero; for V=0 take the length-zero series, which has no factors or irreducible subquotients. Each successive quotient is an irreducible subquotient by [def-mg-weil-composition-series]. Conversely let N⊆M⊆V have irreducible quotient M/N. Apply [lem-mg-composition-series-exists] to N and V/M, using the empty series when either is zero. Regard the series of N as subspaces of V, append M, and append the inverse images in V of the positive terms of the series of V/M. This is a composition series of V: the appended N⊂M has the given simple quotient, and if A⊂B are adjacent terms of the series of V/M, the map (π⁻¹B)/(π⁻¹A)→B/A sending [v] to [π(v)] is equivariant, onto, and injective since π(v)∈A exactly when v∈π⁻¹A. Here π:V→V/M is the quotient map. Thus every factor in the concatenation is simple. By [lem-mg-jordan-holder], this series and any chosen series of V have isomorphic factors with multiplicity. Hence M/N occurs among the factors of every chosen series. The direct sum retaining all these factors is exactly [def-mg-weil-semisimplification], and by [lem-mg-semisimplification-independent] the sums obtained from different composition series are isomorphic Weil representations.",
+   "uses": [
+    "lem-mg-composition-series-exists",
+    "def-mg-weil-composition-series",
+    "lem-mg-jordan-holder",
+    "def-mg-weil-semisimplification",
+    "lem-mg-semisimplification-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
+    "place": "Operations, constituents and coinvariants: displayed definitions and finite-dimensional constituent clause"
+   }
+  },
+  {
+   "text": "The displayed fixed-vector set V^I is a subspace: each g fixes zero and fixes sums and scalar multiples of fixed vectors because its action is linear. In V_I the brackets mean the linear span over the coefficient field, so the displayed quotient is an ordinary vector-space quotient. No normality of I is required for these two vector spaces, and no action of the whole Weil group on them is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
+    "place": "Operations, constituents and coinvariants: displayed definitions and finite-dimensional constituent clause"
+   }
+  },
+  {
+   "text": "By [sk-d-real-weil], deg(gh)=deg(g)+deg(h) and deg(1)=0. On the underlying one-dimensional space Q̄_ℓ define g·z=b^{deg(g)}z. Since b is nonzero, integer powers are defined and nonzero, and b^{deg(gh)}=b^{deg(g)}b^{deg(h)}; this is a representation. On ker(deg) it is the identity, hence its geometric restriction is continuous. The scalar q is nonzero in the characteristic-zero coefficient field, so the substitution b=q^{-n} defines the Tate line for every integer n, with degree-one geometric Frobenius acting by q^{-n}.",
+   "uses": [
+    "sk-d-real-weil",
+    "sk-d-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
+    "place": "Operations, constituents and coinvariants: displayed definitions and finite-dimensional constituent clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-d-linear",
+  "sk-d-real-weil",
+  "lem-mg-composition-series-exists",
+  "def-mg-weil-composition-series",
+  "lem-mg-jordan-holder",
+  "def-mg-weil-semisimplification",
+  "lem-mg-semisimplification-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-operations/_section.md",
+  "place": "Explicit verification of the definition sketch and its finite-dimensional constituent assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def (directSum|prod|tprod|dual|invariants|Coinvariants)|def IsIrreducible|def IsConstituent|WeilGroup|constLine",
+   "results": "Actual hits read: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean. Read Mathlib RepresentationTheory/Basic.lean:589,606,624,678, Invariants.lean:76, Coinvariants.lean:54,58. These define individual algebraic clauses.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil representation operations constituents coinvariants and Tate character",
+   "results": "Actual hits read: Rep.toCoinvariants, Representation.toCoinvariants, Rep.coinvariantsFunctor, Representation.Coinvariants, Representation.toCoinvariants_mk, Rep.instAdditiveModuleCatCoinvariantsFunctor, Representation.Coinvariants.mk_self_apply, Representation.Coinvariants.hom_ext_iff. These concern individual coinvariant constructions or finite-group characters, not the complete Weil operations/constituent/constant-line package.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation.dual\"",
+   "results": "Actual hits read: Representation.dual, Representation.dualTensorHom_comm, Representation.dual_apply. Read Basic.lean:678-689; this is the stated inverse dual action only.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation.Coinvariants\"",
+   "results": "Actual hits read: Representation.Coinvariants, Representation.Coinvariants.instAddCommGroup, Representation.Coinvariants.ker, Representation.Coinvariants.instModule, Representation.Coinvariants.instFinite, Representation.Coinvariants.mk, Representation.Coinvariants.map, Representation.Coinvariants.mk_surjective. Read Coinvariants.lean:54-58; this is the displayed quotient only.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil representations direct sum tensor exterior powers dual irreducible subquotient constituents composition series semisimplification invariants coinvariants constant Tate line",
+   "results": "Actual hits read: RootPairing.isSimpleModule_weylGroupRootRep, Representation.coinvariantsTprodLeftRegularLEquiv_apply, Representation.coinvariantsTprodLeftRegularLEquiv_symm_apply, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_inv_f_hom_apply, Rep.coinvariantsTensorFreeLEquiv_apply, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply, Rep.coinvariantsTensorFreeToFinsupp, Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single. These concern individual coinvariant constructions or finite-group characters, not the complete Weil operations/constituent/constant-line package.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional group representation has irreducible subquotients exactly its composition factors and the character g maps to b to the degree g",
+   "results": "Actual hits read: FDRep.character, FDRep.simple_iff_char_is_norm_one, FDRep.char_one, FDRep.char_orthonormal, FDRep.average_char_eq_finrank_invariants, FDRep.scalar_product_char_eq_finrank_equivariant, FDRep.char_linHom, FDRep.char_mul_comm. These concern individual coinvariant constructions or finite-group characters, not the complete Weil operations/constituent/constant-line package.",
+   "date": "2026-10-21",
+   "verdict": "no match for complete item; individual algebraic clauses have partial matches"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -54,5 +161,39 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-operations",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-d-real-operations",
+  "worker": "stage1",
+  "summary": "Retained every defining formula and added explicit references to existing underlying representation, composition-series and semisimplification notions. Supplied the finite-dimensional subquotient/composition-factor argument and elementary checks of dual, invariants, coinvariants and constant/Tate actions. Reused existing nodes; no new nodes. The existing project declarations cover clauses only, so no complete attachment is claimed.",
+  "blueprint": "All clauses of main-20261015 sk-d-real-operations order 2929, especially the updated irreducible-subquotient formulation and its composition-series interpretation. The unit has no proof steps; its statement is realized by this node.",
+  "tool_uses": [
+   {
+    "node": "lem-mg-composition-series-exists",
+    "why": "Generic existence of a composition series of a finite-dimensional Weil representation, needed for the constituent interpretation; this definition unit provides no existence theorem."
+   },
+   {
+    "node": "lem-mg-jordan-holder",
+    "why": "Generic uniqueness of composition factors with multiplicity, needed to compare a series containing the given subquotient with an arbitrary series; this unit contains no uniqueness theorem."
+   },
+   {
+    "node": "lem-mg-semisimplification-independent",
+    "why": "Generic independence of the semisimplification from the chosen composition series (same library unit as the Jordan-Hoelder lemma); cited instead of re-deriving it inline in step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-mg-composition-series-exists",
+  "lem-mg-jordan-holder",
+  "lem-mg-semisimplification-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-66570d8de",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-66570d8de (reviewer sub-agent of L); spot-checked: Read in full. The item is not dropped and is not superseded (still imported live), and there is no re-split note. Source: main-20261015 sk-d-real-operations, order 2929. The statement is the main-20261015 text word for word plus bracket citations; nothing is weakened. Step 1: sum, tensor, ∧^r and det come from sk-d-linear. I checked the dual action by hand (g(hλ)(v)=λ(h⁻¹g⁻¹v)), and irreducible = simple. Step 2: existence of a composition series comes from lem-mg-composition-series-exists, with V=0 handled by the empty series. For N⊊M with M/N irreducible, the step concatenates a series of N, then M, then π⁻¹ of a series of V/M; the factor isomorphism (π⁻¹B)/(π⁻¹A)≅B/A is correct and the edge cases N=0 and M=V work. lem-mg-jordan-holder then puts M/N among the factors of every series, and V^ss is def-mg-weil-semisimplification. FIX (C5): the closing sentence re-proved lem-mg-semisimplification-independent inline. The step now cites it, with uses, proof_deps and a tool_uses entry updated. Step 3: V^I is a subspace and V_I is a quotient by a span; no normality or W-action is claimed. Step 4: deg is a homomorphism by the exact degree sequence, B_b is trivial on P so it is lisse, and Q̄ℓ(n)=B_{q^{-n}} makes geometric Frobenius act by q^{-n}, the correct convention. Small cases checked: V=0, rank 1, a unipotent rank-2 representation through deg (two trivial factors, V^ss≇V), I={1}, n=0,1. Batch-5: def-mg-weil-composition-series, def-mg-weil-semisimplification, lem-mg-composition-series-exists and lem-mg-jordan-holder are generic linear algebra. They reach sec-poincare-duality only through the definition def-pod-lisse-l-adic-sheaves, they are not steps of the trace formula or Poincaré duality, and the batch-5 closure diff is 0 for both the delivery and the fix. All four are accepted. Advisory: the mg nodes are written for monodromy data of lisse Weil sheaves; I accept their generic use here because the DAG already uses them that way and the algebra needs no continuity. No cycle. The snapshot's dagsnap symlinks dangled midway, so the closure checks ran on clones/side-live.; 1 file(s) fixed by the reviewer"
+ }
 }
