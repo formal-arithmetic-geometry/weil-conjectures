@@ -7,9 +7,7 @@ module
 
 public import Sheaf.Paper.IdentityOpenDerivedRestriction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
-import Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHomMaps
-import Sheaf.AlgebraicGeometry.CondensedSupportDerivedLocalization
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 
 /-!
 # Normalized open refinement arrows
@@ -52,7 +50,10 @@ unbounded input or the coefficient ring is needed. -/
 theorem normalized_open_refinement_unit_isIso {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] [QuasiCompact j] :
     IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
-  sorry
+  change IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).mapDerivedCategoryAdjunction.unit
+  have : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful _
+  infer_instance
 
 /-- The open unit, with its actual adjunction map as forward morphism.
 Source: blueprint det-sf-comp-coherence-refinement, The restriction to X
@@ -84,6 +85,31 @@ noncomputable def normalizedOpenRefinement (ℓ : ℕ) [Fact ℓ.Prime]
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').unit.app K ≫
       inv ((identityOpenDerivedRestriction Λ j j' h w).app
         ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K)))
+
+private theorem normalizedOpenRefinement_restrict (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U Z Z' : Scheme.{u}}
+    (j : U ⟶ Z) (j' : U ⟶ Z') [IsOpenImmersion j] [QuasiCompact j]
+    [IsOpenImmersion j'] [QuasiCompact j'] (h : Z' ⟶ Z) (w : j' ≫ h = j)
+    (hw : h ⁻¹' Set.range j = Set.range j')
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) AddCommGrpCat.{u + 1})
+      (condensedRingObj Λ U))) :
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app K ≫
+        (upperStar Λ j).mapDerivedCategory.map
+          (normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K) ≫
+        (identityOpenDerivedRestriction Λ j j' h w).app
+          ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K) =
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').unit.app K := by
+  have := (identity_open_derived_restriction Λ ℓ hΛ j j' h w hw).1
+  have he : (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app K ≫
+      (upperStar Λ j).mapDerivedCategory.map
+        (normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K) =
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').unit.app K ≫
+        inv ((identityOpenDerivedRestriction Λ j j' h w).app
+          ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K)) := by
+    exact (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv
+      K _ |>.apply_symm_apply _
+  rw [← Category.assoc, he]
+  simp
 
 /-- Normalization and uniqueness of the specified adjunction transpose.
 Source: blueprint det-sf-comp-coherence-refinement (1), Uniqueness
@@ -118,7 +144,25 @@ theorem normalized_open_refinement_coherence (ℓ : ℕ) [Fact ℓ.Prime]
             ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K) ≫
           (normalizedOpenRefinementUnitIso Λ j').inv.app K = 𝟙 K →
         a = normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K) := by
-  sorry
+  have := (identity_open_derived_restriction Λ ℓ hΛ j j' h w hw).1
+  have he : (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app K ≫
+      (upperStar Λ j).mapDerivedCategory.map
+        (normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K) =
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').unit.app K ≫
+        inv ((identityOpenDerivedRestriction Λ j j' h w).app
+          ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K)) := by
+    exact (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv
+      K _ |>.apply_symm_apply _
+  constructor
+  · rw [← Category.assoc, ← Category.assoc, he]
+    simp [normalizedOpenRefinementUnitIso]
+  · intro a ha
+    apply (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv K _ |>.injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, he]
+    apply (cancel_mono ((identityOpenDerivedRestriction Λ j j' h w).app
+      ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K))).1
+    apply (cancel_mono ((normalizedOpenRefinementUnitIso Λ j').inv.app K)).1
+    simpa [Category.assoc, normalizedOpenRefinementUnitIso] using ha
 
 /-- The normalized refinement arrows are natural in the arbitrary unbounded input.
 Source: blueprint det-sf-comp-coherence-refinement (1), used in (2)
@@ -140,7 +184,26 @@ theorem normalized_open_refinement_naturality (ℓ : ℕ) [Fact ℓ.Prime]
           ((openImmersionLowerShriek Λ j').mapDerivedCategory.map v) =
       (openImmersionLowerShriek Λ j).mapDerivedCategory.map v ≫
         normalizedOpenRefinement Λ ℓ hΛ j j' h w hw L := by
-  sorry
+  have := (identity_open_derived_restriction Λ ℓ hΛ j j' h w hw).1
+  apply (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv K _ |>.injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  apply (cancel_mono ((identityOpenDerivedRestriction Λ j j' h w).app
+    ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj L))).1
+  have hn := (identityOpenDerivedRestriction Λ j j' h w).naturality
+    ((openImmersionLowerShriek Λ j').mapDerivedCategory.map v)
+  dsimp only [Functor.comp_map] at hn
+  simp only [Category.assoc]
+  rw [hn]
+  simp only [← Category.assoc]
+  rw [Category.assoc _ _ ((identityOpenDerivedRestriction Λ j j' h w).app
+    ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K)),
+    normalizedOpenRefinement_restrict]
+  have hu := (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.naturality v
+  dsimp only [Functor.id_map, Functor.comp_map] at hu
+  rw [← hu]
+  simp only [Category.assoc]
+  rw [normalizedOpenRefinement_restrict]
+  exact ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').unit.naturality v).symm
 
 /-- Identity refinement, using exactly the canonical derived direct-image identity.
 Source: blueprint det-sf-comp-coherence-refinement (3), Identity and transitivity
@@ -159,7 +222,12 @@ theorem normalized_open_refinement_id (ℓ : ℕ) [Fact ℓ.Prime]
         (moduleDerivedIdentity Λ Z).hom.app
           ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K) =
       𝟙 ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K) := by
-  sorry
+  apply (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv K _ |>.injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hr := normalizedOpenRefinement_restrict Λ ℓ hΛ j j (𝟙 Z)
+    (Category.comp_id j) rfl K
+  rw [identity_open_derived_restriction_id Λ ℓ hΛ j] at hr
+  simpa using hr
 
 /-- Transitivity, with the canonical derived direct-image compositor in its stated direction.
 Source: blueprint det-sf-comp-coherence-refinement (3), Identity and transitivity
@@ -192,6 +260,28 @@ theorem normalized_open_refinement_comp (ℓ : ℕ) [Fact ℓ.Prime]
       normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K ≫
         (lowerStar Λ h).rightDerivedFunctor.map
           (normalizedOpenRefinement Λ ℓ hΛ j' j'' k w' hw' K) := by
-  sorry
+  have := (identity_open_derived_restriction Λ ℓ hΛ j j' h w hw).1
+  have := (identity_open_derived_restriction Λ ℓ hΛ j' j'' k w' hw').1
+  apply (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv K _ |>.injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  apply (cancel_mono ((identityOpenDerivedRestriction Λ j j' h w).app
+    ((lowerStar Λ k).rightDerivedFunctor.obj
+      ((openImmersionLowerShriek Λ j'').mapDerivedCategory.obj K)))).1
+  apply (cancel_mono ((identityOpenDerivedRestriction Λ j' j'' k w').app
+    ((openImmersionLowerShriek Λ j'').mapDerivedCategory.obj K))).1
+  have hc := congrArg (fun t ↦ t.app
+      ((openImmersionLowerShriek Λ j'').mapDerivedCategory.obj K))
+    (identity_open_derived_restriction_comp Λ ℓ hΛ j j' j'' h w hw k w' hw')
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] at hc
+  simp only [Category.assoc]
+  rw [← hc]
+  rw [normalizedOpenRefinement_restrict]
+  have hn := (identityOpenDerivedRestriction Λ j j' h w).naturality
+    (normalizedOpenRefinement Λ ℓ hΛ j' j'' k w' hw' K)
+  dsimp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+  rw [reassoc_of% (normalizedOpenRefinement_restrict Λ ℓ hΛ j j' h w hw K)]
+  exact (normalizedOpenRefinement_restrict Λ ℓ hΛ j' j'' k w' hw' K).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

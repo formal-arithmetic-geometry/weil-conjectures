@@ -22,21 +22,21 @@
  ],
  "proof": [
   {
-   "text": "Use the actual ordinary unbounded open derived adjunction $j_!\\dashv j^*$ specified in [def-sfb-open-closed-internal-hom-comparisons]. The open unit is invertible by [lem-sfb-condensed-support-derived-localization], applied to $j$ and a closed immersion defining its complementary closed subset. Its hypotheses are a commutative condensed ring and a quasi-compact open immersion, both present here; it imposes no boundedness or constructibility. The same applies to $j'$ and $j''$. These are the coefficient-linear adjunctions and units of the statement, including their canonical alpha transport.",
+   "text": "Use the published derivedOpenImmersionLowerShriekUpperStarAdjunction, obtained by mapDerivedCategoryAdjunction from the open adjunction of [sk-def-sfb-module-lower-shriek]. The existing fullyFaithfulOpenImmersionLowerShriek in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage proves full faithfulness by composing the scalar restriction equivalence with the linear lift of the fully faithful abelian extension of [lem-sfb-finite-extension-by-zero-fully-faithful]. Therefore Adjunction.unit_isIso_of_L_fully_faithful makes the underived unit invertible. Apply the existing Adjunction.isIso_mapDerivedCategoryAdjunction_unit to obtain invertibility of the actual unbounded derived unit. This applies to j, j' and j'' without constructing a complementary closed immersion.",
    "uses": [
-    "def-sfb-open-closed-internal-hom-comparisons",
-    "lem-sfb-condensed-support-derived-localization"
+    "sk-def-sfb-module-lower-shriek",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
-    "place": "The restriction to X: exact open adjunction and invertible open unit"
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/OpenImmersionEssImage.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/Adjunction.lean",
+    "place": "fullyFaithfulOpenImmersionLowerShriek and its Full/Faithful instances; Adjunction.isIso_mapDerivedCategoryAdjunction_unit"
    }
   },
   {
-   "text": "For $K,L\\in D_U$ define\n$$B_h(K,L):\\operatorname{Hom}_{D_Z}(j_!K,Rh_*j'_!L)\\longrightarrow\\operatorname{Hom}_{D_U}(K,L),\\quad a\\longmapsto\\eta_{j',L}^{-1}\\circ(r_h)_{j'_!L}\\circ j^*(a)\\circ\\eta_{j,K}.$$\nThis is a bijection: the specified open adjunction sends $a$ to $j^*(a)\\circ\\eta_{j,K}$, and postcomposition with the isomorphism $\\eta_{j',L}^{-1}(r_h)_{j'_!L}$ is a bijection by [lem-sfb-identity-open-derived-restriction]. Explicitly its inverse sends $v:K\\to L$ to $\\varepsilon_{j,Rh_*j'_!L}\\circ j_!((r_h)_{j'_!L}^{-1}\\circ\\eta_{j',L}\\circ v)$; the two inverse identities are the two adjunction triangle identities followed by cancellation of these isomorphisms.",
+   "text": "For $K,L\\in D_U$ define\n$$B_h(K,L):\\operatorname{Hom}_{D_Z}(j_!K,Rh_*j'_!L)\\longrightarrow\\operatorname{Hom}_{D_U}(K,L),\\quad a\\longmapsto\\eta_{j',L}^{-1}\\circ(r_h)_{j'_!L}\\circ j^*(a)\\circ\\eta_{j,K}.$$\nThis is a bijection: the specified open adjunction sends $a$ to $j^*(a)\\circ\\eta_{j,K}$, and postcomposition with the isomorphism $\\eta_{j',L}^{-1}(r_h)_{j'_!L}$ is a bijection by [lem-sfb-identity-open-derived-restriction]. Explicitly its inverse sends $v:K\\to L$ to $\\varepsilon_{j,Rh_*j'_!L}\\circ j_!((r_h)_{j'_!L}^{-1}\\circ\\eta_{j',L}\\circ v)$; the two inverse identities are the two adjunction triangle identities followed by cancellation of these isomorphisms. In Lean use Adjunction.homEquiv directly; no additional Hom-bijection construction is required.",
    "uses": [
-    "def-sfb-open-closed-internal-hom-comparisons",
+    "sk-def-sfb-module-lower-shriek",
     "lem-sfb-identity-open-derived-restriction"
    ],
    "elementary": false,
@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "For any $u:K\\to L$ apply $B_h(K,L)$ to the two arrows $Rh_*(j'_!u)\\circ e_{h,K}$ and $e_{h,L}\\circ j_!u$. Naturality of $r_h$ from [lem-sfb-identity-open-derived-restriction] and of $\\eta_{j'}$ gives for the first image\n$$\\eta_{j',L}^{-1}\\circ j'^*(j'_!u)\\circ(r_h)_{j'_!K}\\circ j^*(e_{h,K})\\circ\\eta_{j,K}=u.$$\nNaturality of $\\eta_j$ gives for the second image $B_h(L,L)(e_{h,L})\\circ u=u$. Injectivity of $B_h(K,L)$ therefore gives $Rh_*(j'_!u)\\circ e_{h,K}=e_{h,L}\\circ j_!u$, the required naturality.",
+   "text": "For any $u:K\\to L$ apply $B_h(K,L)$ to the two arrows $Rh_*(j'_!u)\\circ e_{h,K}$ and $e_{h,L}\\circ j_!u$. Naturality of $r_h$ from [lem-sfb-identity-open-derived-restriction] and of $\\eta_{j'}$ gives for the first image\n$$\\eta_{j',L}^{-1}\\circ j'^*(j'_!u)\\circ(r_h)_{j'_!K}\\circ j^*(e_{h,K})\\circ\\eta_{j,K}=u.$$\nNaturality of $\\eta_j$ gives for the second image $B_h(L,L)(e_{h,L})\\circ u=u$. Injectivity of $B_h(K,L)$ therefore gives $Rh_*(j'_!u)\\circ e_{h,K}=e_{h,L}\\circ j_!u$, the required naturality. The Lean proof uses injectivity of homEquiv followed by cancellation of r_h alone, using the equivalent restriction equation eta_j followed by j^*(e_h) and r_h equals eta_j'.",
    "uses": [
     "lem-sfb-identity-open-derived-restriction"
    ],
@@ -66,7 +66,7 @@
    }
   },
   {
-   "text": "For $h=1_Z$ and $j'=j$, [lem-sfb-module-derived-compositor-coherence] identifies $R(1_Z)_*$ with the identity, and [lem-sfb-identity-open-derived-restriction] says that $r_{1_Z}$ is the identity under that comparison. Consequently $B_{1_Z}(K,K)(1_{j_!K})=\\eta_{j,K}^{-1}\\circ\\eta_{j,K}=1_K$. Uniqueness from step 3 proves $e_{1,K}=1_{j_!K}$ under precisely these canonical identity constraints.",
+   "text": "For $h=1_Z$ and $j'=j$, [lem-sfb-module-derived-compositor-coherence] identifies $R(1_Z)_*$ with the identity, and [lem-sfb-identity-open-derived-restriction] says that $r_{1_Z}$ is the identity under that comparison. Consequently $B_{1_Z}(K,K)(1_{j_!K})=\\eta_{j,K}^{-1}\\circ\\eta_{j,K}=1_K$. Uniqueness from step 3 proves $e_{1,K}=1_{j_!K}$ under precisely these canonical identity constraints. Equivalently, apply homEquiv injectivity directly to e_1 followed by the identity comparison and the identity, and substitute the restriction equation and identity_open_derived_restriction_id.",
    "uses": [
     "lem-sfb-module-derived-compositor-coherence",
     "lem-sfb-identity-open-derived-restriction"
@@ -78,7 +78,7 @@
    }
   },
   {
-   "text": "Put $A=j''_!K$ and $\\beta=Rh_*(e_{k,K})\\circ e_{h,K}$. On arrows $a:j_!K\\to Rh_*Rk_*A$ the map\n$$T(a)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ(r_h)_{Rk_*A}\\circ j^*(a)\\circ\\eta_{j,K}$$\nis injective: it is the open-adjunction bijection followed by postcomposition with three isomorphisms supplied by the open units and [lem-sfb-identity-open-derived-restriction]. Naturality of $r_h$ at the arrow $e_{k,K}:j'_!K\\to Rk_*A$ yields\n$$(r_h)_{Rk_*A}\\circ j^*Rh_*(e_{k,K})=j'^*(e_{k,K})\\circ(r_h)_{j'_!K}.$$\nSubstitution and the two normalization equations from step 3 give\n$$T(\\beta)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ j'^*(e_{k,K})\\circ\\eta_{j',K}=1_K.$$\nThis computes the actual composite, without assuming either refinement arrow invertible.",
+   "text": "Put $A=j''_!K$ and $\\beta=Rh_*(e_{k,K})\\circ e_{h,K}$. On arrows $a:j_!K\\to Rh_*Rk_*A$ the map\n$$T(a)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ(r_h)_{Rk_*A}\\circ j^*(a)\\circ\\eta_{j,K}$$\nis injective: it is the open-adjunction bijection followed by postcomposition with three isomorphisms supplied by the open units and [lem-sfb-identity-open-derived-restriction]. Naturality of $r_h$ at the arrow $e_{k,K}:j'_!K\\to Rk_*A$ yields\n$$(r_h)_{Rk_*A}\\circ j^*Rh_*(e_{k,K})=j'^*(e_{k,K})\\circ(r_h)_{j'_!K}.$$\nSubstitution and the two normalization equations from step 3 give\n$$T(\\beta)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ j'^*(e_{k,K})\\circ\\eta_{j',K}=1_K.$$\nThis computes the actual composite, without assuming either refinement arrow invertible. The Lean calculation cancels r_h and r_k after the adjunction bijection; the final unit inverse is unnecessary for injectivity.",
    "uses": [
     "lem-sfb-identity-open-derived-restriction"
    ],
@@ -102,15 +102,15 @@
   }
  ],
  "proof_deps": [
-  "def-sfb-open-closed-internal-hom-comparisons",
-  "lem-sfb-condensed-support-derived-localization",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
   "lem-sfb-identity-open-derived-restriction",
   "lem-sfb-module-derived-compositor-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
-  "place": "(1) Uniqueness and (3) Identity and transitivity, with the normalized restriction equations expanded; det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md; lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/OpenImmersionEssImage.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/Adjunction.lean",
+  "place": "B8, 2026-10-21: existing full faithfulness and exact derived adjunction replace complementary-support localization; homEquiv injectivity and naturality implement the normalization, identity and transitivity argument of refinement (1) and (3)."
  },
  "mathlib_searches": [
   {
@@ -224,9 +224,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-condensed-support-derived-localization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -262,5 +260,15 @@
   "group": "O3",
   "result": "pass",
   "note": "Only the item node's lean field and the new module Sheaf/Paper/NormalizedOpenRefinementCoherence.lean differ from side-live; no new nodes, no dependency changes, no repair note, item not dropped. Clauses match the node: admissible Λ binders as in the deps; unbounded D(Mod condensedRingObj) at Scheme.{u}/Ab.{u+1}; qc open immersions j,j',j''; w/hw/w'/hw' with the hk and identity proofs constructed, as in identity_open_derived_restriction_comp/_id; e = (adj_j.homEquiv).symm(η_{j'} ≫ inv r_h), real data; normalization η_j ≫ j^*e ≫ r_h ≫ η_{j'}^{-1} = 𝟙 plus ∀a uniqueness; naturality for all v; e_1 ≫ moduleDerivedIdentity.hom = 𝟙; e_{k≫h} ≫ moduleDerivedCompositor(k,h).hom = e_h ≫ Rh_*(e_k), the node's κ orientation. No properness, density or invertibility of e. Edge cases checked: U empty, Λ=0, h=id, j=id, unbounded K. No duplicate found. lean.statement verbatim; 7 declarations present; sorry-only proofs; docstrings carry source, blueprint id and proof steps; Worker report and Second reading sections present. No compile run, no file changed. Advisory: the unit IsIso theorem is provable by Adjunction.isIso_mapDerivedCategoryAdjunction_unit (framework already uses it); three redundant plain imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261021T155750-L-3441201",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
