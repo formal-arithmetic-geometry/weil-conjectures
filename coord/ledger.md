@@ -23454,3 +23454,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:18 L: merged deliver/Q07/lem-sfb-profinite-derived-functions-filtered-colimit (reviewer FIX; first push; new nodes: 1)
 - 19:19 L: merged deliver/NF/lem-sfb-topological-homogeneous-cochain-coordinates (reviewer PASS; first push; new nodes: 0)
 - 19:20 L: merged deliver/Q06/lem-sfb-local-norm-algcl-cocycle-descent (reviewer FIX; first push; new nodes: 3)
+- 19:20 L: merged deliver/Q11/lem-fd-local-frobenius-coefficient-extension (stage 2; reviewer PASS; parallel immutable checks)
+- 19:20 L: merged deliver/Q21/lem-zl-reduced-frontier-mixed-gluing (stage 2; reviewer PASS; parallel immutable checks)

@@ -223,5 +223,37 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-2ba2b3adc (reviewer sub-agent of L); spot-checked: I read the full statement of the item and of every node its proof cites; there are no new nodes. The statement and stmt_deps are unchanged from the live node. Step 1: b = Q_L(e)·u is natural; u is the inverse of the rationalized φ of lem-weil-point-sections-scalar-extension (rational Fib = Γ⊗E, def-weil-finite-coefficient-point item 3), and e is the specified a_f of lem-trf-integral-pullback-comparison-realization. Step 2: I re-did the induction using the mixed equation with h=g_X^r, k=g_X (c: G_{r+1}→G_rG_1) and naturality of a_r at θ; it is correct and the convention matches def-weil-local-frobenius-trace. Step 3: the final display of lem-trf-local-frobenius-transport-normalization with E=F, M=L, m=n, y=x gives the return equation, using the compositor identification G_1^n≅G_n, the finite-iteration clause (d becomes a_n) and the naturality from step 1; it has no Tor or lattice hypothesis. Step 4 pastes steps 1-3 correctly. Step 5: linear equations extend to the raw rationalized categories, and b=1 when F=L. Edge cases checked: n=1, F=L, a zero complex, a Weil structure with no integral lattice, an empty set of rational points. No duplicate: trf rational-local-frobenius-powers, rp local-frobenius-models-agree, trf frobenius-transports-scalar-extension and the naturality of point transports are different statements. Batch-5 flag on lem-trf-local-frobenius-transport-normalization: I recomputed the batch-5 closure with and without the item's proof deps and it gains 0 nodes. The base already reaches this node via lem-trf-completed-stalk-frobenius-reduction and sk-thm-trace-transport, and several non-trf batch-5 nodes cite it. The clause used is generic point-transport/scalar-extension coherence that neither assumption leaf provides, so I accept it, as with the earlier ruling on lem-trf-integral-pullback-comparison-realization. All four tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalFrobeniusCoefficientExtension",
+  "declaration": "WeilConjectures.localFrobeniusCoefficientExtension",
+  "declarations": [
+   "WeilConjectures.LocalFrobeniusCoefficient.pullback",
+   "WeilConjectures.LocalFrobeniusCoefficient.fibre",
+   "WeilConjectures.LocalFrobeniusCoefficient.scalar",
+   "WeilConjectures.LocalFrobeniusCoefficient.comparison",
+   "WeilConjectures.LocalFrobeniusCoefficient.pointComparison",
+   "WeilConjectures.LocalFrobeniusCoefficient.extend",
+   "WeilConjectures.LocalFrobeniusCoefficient.iterate",
+   "WeilConjectures.LocalFrobeniusCoefficient.returnTransport",
+   "WeilConjectures.LocalFrobeniusCoefficient.operator",
+   "WeilConjectures.LocalFrobeniusCoefficient.Properties",
+   "WeilConjectures.localFrobeniusCoefficientExtension"
+  ],
+  "file": "lean/Sheaf/Paper/LocalFrobeniusCoefficientExtension.lean",
+  "statement": "theorem localFrobeniusCoefficientExtension (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (F L : Padic.FiniteCoefficientFields c.l c.Qbar) (hFL : F ≤ L) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (C : IntegralComparisonSystem.{u} c.l) (_hC : IntegralComparisonRealizationCoherence c.l F.val L.val (IntermediateField.inclusion hFL) C) (r : ℕ) (x : D.extensionPoints X₀ (r + 1) (Nat.succ_pos r)) : LocalFrobeniusCoefficient.Properties D c.l c.different X₀ F.val L.val (IntermediateField.inclusion hFL) C r x",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The Properties predicate expands all four displayed identities and the identity-extension clause. Helpers instantiate the published strict-system-normalized rational comparisons, without an integral Weil-stable lattice or finite-Tor restriction. Positive indices are successors. C and its coherence witness express the stipulated choice of normalized comparisons; they impose no extra geometric or coefficient assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aa23c713",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the node, the 11 stmt_dep records (identical to live) and the delivered module against IntegralPullbackComparisonRealization, LocalFrobeniusTransportNormalization, LocalFrobeniusTrace, FiniteCoefficientPoint and the landed parent. Hypotheses match: LocallyOfFiniteType+QuasiCompact+IsSeparated, l≠p, F≤L, and n=r+1 covers every n≥1. C plus the coherence witness _hC renders the specified trf comparisons. a = LocalFrobeniusTransport.rationalScalar, a pinned .choose of C's lambda/mu-inverse. b = inverse pointRationalFibreScalarIso then Q_L of the point comparison, formula-identical to rationalFibreScalar. theta_L = T(theta)a1^-1, and the iterate follows the localWeilIterate recursion with C's compositor. All five clauses are present in the correct order on the full rational domain; the F=L clause follows from _hC.scalarIdentity. lean.statement is verbatim and only the lean record changed. No hollow definitions, docstrings and proof steps present, proof is sorry. Advisories: (1) the statement uses decls owned by proof_dep-only theorem lem-trf-local-frobenius-transport-normalization, with stmt_deps unchanged since stage 1; (2) the C compositors and scalar comparisons are not the same Lean terms as the recorded localPullbackComposition and the parent's rationalPullbackScalarComparison, so the parent's stage-3 proof needs a bridge the trf node asserts but no Lean statement records; (3) the return clause is the trf normalization lemma's final clause instantiated, as node step 3 says. No file changed, so no compile."
  }
 }
