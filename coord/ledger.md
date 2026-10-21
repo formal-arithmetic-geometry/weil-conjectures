@@ -23751,3 +23751,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T21:01:30Z L: superseded stage-1 delivery NN/lem-sfb-lisse-lattice-potential-kummer-tameness at d5f6d2d9cf33d3224d45d897e0b07cb6e45106fd; current completion retained; packet archived at refs/superseded/NN/lem-sfb-lisse-lattice-potential-kummer-tameness/d5f6d2d9cf33d3224d45d897e0b07cb6e45106fd; stale return retired.
 - 21:01 L: merged deliver/NC/lem-sfb-discrete-lattice-cup-exterior (stage 2; reviewer PASS; parallel immutable checks)
 - 21:01 L: merged deliver/O1/lem-sfb-internal-bar-ordered-cup (stage 2; reviewer PASS; parallel immutable checks)
+- 21:02 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
