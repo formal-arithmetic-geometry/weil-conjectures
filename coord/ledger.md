@@ -20839,3 +20839,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:00 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 08:00 L: returned deliver/V3/Sheaf.SixFunctors.IntegralOpenReductionComparison (reviewer RETURN: (reviewer C-a67d6, head a67d691c9) C5/G1: the delivery replaces the human-ordered, reviewed S1 re-split (proof_deps lem-)
 - 08:06 L: merged deliver/NK/sk-thm-picard-duality (reviewer FIX; first push; new nodes: 3)
+- 08:06 L: merged deliver/Q102/lem-weil-boundary-dualizing-composition (reviewer FIX; after a return; new nodes: 2)
