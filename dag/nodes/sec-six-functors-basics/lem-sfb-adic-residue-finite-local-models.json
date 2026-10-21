@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-adic-residue-finite-local-models",
+ "kind": "statement",
+ "title": "Finite perfect local models before compatible morphism lifting",
+ "statement": "Let X be Noetherian and A a commutative Noetherian J-adically complete ring. Use the coefficient comparison package [def-sfb-adic-residue-lift-comparisons]. Let M in D(B_X) be locally derived complete for ker(B_X -> underline(A/J)). Suppose its residue is the pro-etale comparison of a bounded etale A/J-complex C with locally constant finite-type cohomology and Tor amplitude [a,b], a <= b. Then there is a covering sieve S on the transported final object. For each f:U -> final in S there exist an affine weakly contractible V, a functor R:D(B_X|V) -> D(B_X|U), and a bounded finite-projective A-cochain complex P. Put T=(B_X tensor_A P)|V and L=M|V. There are isomorphisms R(L) = M|U and R(T) = (B_X tensor_A P)|U. Both T and L are locally complete, and for each n their actual derived reductions modulo J^(n+1) are isomorphic. No compatibility of these finite isomorphisms, no morphism T -> L, and no completed-coefficient isomorphism is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-finitely-generated-module",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "lem-pur-site-constant-module-hom",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, first paragraph through perfect algebraic reconstruction, and the affine weakly contractible covering; completeness of the explicit constant model as expanded in the parent steps 4-5. Sieve refinements are handled by exact restriction."
+ },
+ "proof": [
+  {
+   "text": "Choose generators of $J$, possible since $A$ is Noetherian, and put $N=\\operatorname{Res}_{\\underline A}M$. The constant/completed coefficient equivalence applies on $X_{\\mathrm{proét}}$: its completed ring is exactly $B_X$, its completeness notion is the local one in the statement, and it identifies the reductions of $N$ and $M$ compatibly with all quotient maps. The residue complex $C$ is constructible, using the single stratum $X$ for each of its finitely many nonzero locally constant cohomology sheaves. Apply the finite-reduction structure lemma to $N,C,[a,b]$. Write $A_n=A/J^n$, $M_n=M\\otimes^L_{B_X}\\underline{A_n}$, and obtain étale $C_n$ with bounded constructible cohomology and Tor amplitude $[a,b]$, and compatible $\\alpha_n,\\beta_n$. In particular $M$ is the derived limit of this specified quotient tower after restricting scalars. No perfectness of $A_n$ over $A$ was invoked.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-adic-constructible-finite-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L, 099M and 09C2; opening of the proof of Tag 09C6"
+   }
+  },
+  {
+   "text": "Work on a connected clopen component $Y$ of an affine Noetherian chart of $X$. These form an open covering. Indeed the underlying affine space is Noetherian by the cited lemma; Noetherian induction on closed subsets gives finitely many irreducible components (a minimal counterexample would be reducible into two smaller closed subsets). Grouping those finitely many components by chains of nonempty intersections gives finitely many connected components; each group and its complement are finite unions of closed components, hence clopen. Slice restriction is identified with the pro-étale site of $Y$ by the localization lemma. It is sectionwise restriction, so preserves products and kernels, and it preserves epimorphisms because their locally lifting sections lift over the same covering in the slice. It is therefore exact. It preserves constant sheaves and their inverse limits. Countable products are exact and represent derived products; consequently restriction takes the quotient Roos triangle, including its completion unit, to the same triangle on $Y$. Thus $M|_Y$ and $N|_Y$ remain complete and have the restricted compatible quotient tower. Restriction also commutes with the total tensor calculation on K-flat resolutions. Apply the finite-reduction structure lemma on $Y$, choosing these restricted markings, and henceforth replace $X$ by nonempty connected affine $Y$.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-adic-constructible-finite-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, connected-local reduction; Tags 099M and 0947 for restriction of completion"
+   }
+  },
+  {
+   "text": "For each $n$, apply nilpotent-reduction lissity on the étale site with coefficient ring $A_n$, ideal $J/J^n$, and bounded complex $C_n$. The ideal is nilpotent, $A_n$ is Noetherian (ideals correspond to ideals of $A$ containing $J^n$), and the normalized reduction of $C_n$ modulo $J/J^n$ is $C_1=C$. Thus all cohomology sheaves of $C_n$ are étale locally constant of finite type. The connected étale perfect-constancy lemma now applies: the Tor bound and boundedness were provided in step 1. Fix one geometric point $\\bar x$ of $Y$ and put $E_n=(C_n)_{\\bar x}$. It gives a perfect $E_n$ and one étale local constant value $E_n$ for $C_n$. Take the exact stalk of $\\beta_n$. The tensor-pullback comparison gives normalizations $E_{n+1}\\otimes^L_{A_{n+1}}A_n\\simeq E_n$. Define the transition $E_{n+1}\\to E_n$ as the scalar-extension unit followed by this normalization, considered first in $D(A_{n+1})$ and then in $D(A)$. On K-flat representatives the unit is $p\\mapsto p\\otimes1$ and reassociation is $(p\\otimes u)\\otimes v\\mapsto p\\otimes uv$; hence the stalk normalizations have the same quotient cocycles as the $\\beta_n$.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-sfb-connected-etale-perfect-constant",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; Tags 094I and 09BI"
+   }
+  },
+  {
+   "text": "Apply algebraic perfect inverse-limit reconstruction to the tower $E_n$ with those transitions. Its ring hypothesis is the given $A\\simeq\\varprojlim A/J^n$, and $E_1$ is perfect by step 3. Obtain a perfect $P\\in D(A)$ and projection-induced isomorphisms $P\\otimes_A^L A_n\\simeq E_n$ compatible with all transitions. Choose a bounded finite-projective representative $P^\\bullet$. Next take an affine weakly contractible pro-étale covering $\\{W_t\\to Y\\}$. The weakly contractible clause of the connected perfect-constancy lemma gives, for each $n$ and each $W=W_t$, an isomorphism $M_n|_W\\simeq\\underline{E_n}|_W\\simeq\\underline{P^\\bullet\\otimes_A A_n}|_W$. These isomorphisms need not be compatible, and no such compatibility is presumed in the next step. For every such $W$, the localization lemma identifies $Y_{\\mathrm{proét}}/W$ with $W_{\\mathrm{proét}}$. Restriction is exact, preserves sectionwise products and the finite Koszul tensor complexes, and therefore preserves their Roos completion unit, since countable products are exact. Hence $M|_W$ is locally derived complete, and restriction of the completed coefficient ring is $B_Y|_W=\\varprojlim_n\\underline{A_n}|_W$; this justifies the completion calculation on $W$ below.",
+   "uses": [
+    "lem-weil-pbc-rlim-perfect-complete",
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-sfb-connected-etale-perfect-constant",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, algebraic reconstruction by Tag 09AW, and the choice of weakly contractible cover"
+   }
+  },
+  {
+   "text": "For the completed constant model T=B tensor P, take the image of each finite-projective idempotent on a finite power of B. This is the inverse limit of the corresponding power-torsion summands, because images of idempotents are equalizers. Torsion-limit completeness and the constant/completed coefficient equivalence make the bounded complex T complete. M remains complete on each exact slice.",
+   "uses": [
+    "lem-weil-pbc-torsion-limit-sheaf-completeness",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Generate the sieve from the affine weakly contractible covering family. Every member U factors through an original covering object V. Restriction along U -> V is an exact functor R on completed-coefficient derived categories. Composition of sectionwise slice restriction gives R(M|V) isomorphic to M|U and R(T|V) isomorphic to T|U, with their original constant models. It is V, not arbitrary U, that is required to be affine and weakly contractible. Covering transitivity gives the stated covering sieve.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-derived-change-of-rings",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "lem-sfb-connected-etale-perfect-constant",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-nilpotent-reduction-lissity",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, first paragraph through perfect algebraic reconstruction, and the affine weakly contractible covering; completeness of the explicit constant model as expanded in the parent steps 4-5. Sieve refinements are handled by exact restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over a completed Noetherian coefficient sheaf, derived complete objects are homotopy limits of their quotient reductions, residue reduction detects isomorphisms, and perfect constant reductions give Mittag Leffler Hom towers",
+   "results": "8 hits, including AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, IsAdicComplete.mk, DerivedCategory.quotientCompQhIso and condensed-category limits. These are ordinary completion or localization results.",
+   "date": "2026-10-21",
+   "verdict": "No theorem for the displayed ringed pro-etale derived objects. The generic triangulated exactness API is used in the proved Hom-section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex on the pro etale site is a homotopy limit of its finite coefficient reductions, with scalar adjunction units, and residue reduction is conservative on derived complete objects",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.comp.",
+   "date": "2026-10-21",
+   "verdict": "No derived sheaf completeness, finite local model, or normalized quotient-Hom statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsMittagLeffler|adic.*lisse|[Cc]omplete.*[Rr]esidue|quotient.*homotopy",
+   "results": "25 hits in local-field completeness, zeta residues, path quotients and homotopy-category localization. A separate local source search found the eventual-range and cofiltered-system APIs, which prove the stable-image selection directly.",
+   "date": "2026-10-21",
+   "verdict": "No theorem matching the new ringed-site statements or definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueLissePerfectLift",
+  "date": "2026-10-21",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tag 09C6, first paragraph through perfect algebraic reconstruction, and the affine weakly contractible covering; completeness of the explicit constant model as expanded in the parent steps 4-5. Sieve refinements are handled by exact restriction.",
+   "via": [
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueFiniteLocalModels",
+  "file": "lean/Sheaf/Paper/AdicResidueFiniteLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_finite_local_models",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_finite_local_models"
+  ],
+  "statement": "theorem adicResidue_finite_local_models\n    (X : Scheme.{u}) [IsNoetherian X]\n    {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) [IsAdicComplete J A]\n    (M : CategoryTheory.ConstantCompletion.D\n      (CategoryTheory.ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} X) A J))\n    (_hcomplete : CategoryTheory.ConstantCompletion.IsComplete\n      (CategoryTheory.ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} X) A\n        J 0) M)\n    (C : CategoryTheory.ConstantCompletion.D\n      (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0))\n    (_hbounded : ∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →\n      IsZero ((adicResidueCohomology.{max v (u + 1)}\n        (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A\n          J 0)\n          q).obj C))\n    (_hlisse : ∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules\n      (smallModelComparisonEtaleTopology.{u, v} X) (A ⧸ J ^ (0 + 1))\n      ((adicResidueCohomology.{max v (u + 1)}\n        (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A\n          J 0)\n          q).obj C))\n    (a b : ℤ) (_hab : a ≤ b)\n    (_htor : ∀ P : CategoryTheory.ConstantCompletion.Cx\n        (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A\n          J 0),\n      CochainComplex.IsKFlatIndependentCoefficients\n        (J := smallModelComparisonEtaleTopology.{u, v} X)\n        (R := CategoryTheory.ConstantCompletion.finite\n          (smallModelComparisonEtaleTopology.{u, v} X) A J 0) P →\n      Nonempty ((CategoryTheory.ConstantCompletion.Q\n        (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A\n          J 0)).obj P ≅ C) →\n      ∀ (N : CategoryTheory.ConstantCompletion.Mod\n        (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A\n          J 0))\n        (q : ℤ), q < a ∨ b < q →\n        IsZero (adicResidueTensorCohomology.{max v (u + 1)}\n          (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X)\n            A J 0) P N q))\n    (_hres : Nonempty\n      ((CategoryTheory.ConstantCompletion.extend\n        (CategoryTheory.ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} X)\n          A J 0)).obj M ≅\n        (adicResidueComparison.{u, v} X (A ⧸ J ^ (0 + 1))).obj C)) :\n    ∃ S : Sieve ((AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).obj\n        (⊤_ X.ProEt)),\n      S ∈ coefficientProEtaleModelTopology.{u, v} X _ ∧\n      ∀ (U : coefficientProEtaleSiteModel.{u, v} X)\n        (f : U ⟶ (AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).obj\n          (⊤_ X.ProEt)), S f →\n        ∃ (V : coefficientProEtaleSiteModel.{u, v} X)\n          (R : AdicResidueLocalDerived.{u, v} X J V ⥤\n            AdicResidueLocalDerived.{u, v} X J U)\n          (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ) (c d : ℤ),\n          P.IsStrictlyGE c ∧ P.IsStrictlyLE d ∧\n          (∀ q : ℤ, Module.Finite A (P.X q) ∧ Module.Projective A (P.X q)) ∧\n          IsAffine ((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj V).left ∧\n          AdicResidueSliceWeaklyContractible.{u, v} X V ∧\n          let B := CategoryTheory.ConstantCompletion.completed\n            (coefficientProEtaleModelTopology.{u, v} X) A J\n          let T := (adicResidueRestriction B V).obj (adicResidueConstantPerfect X J P)\n          let L := (adicResidueRestriction B V).obj M\n          Nonempty (R.obj L ≅ (adicResidueRestriction B U).obj M) ∧\n          Nonempty (R.obj T ≅ (adicResidueRestriction B U).obj\n            (adicResidueConstantPerfect X J P)) ∧\n          CategoryTheory.ConstantCompletion.IsComplete\n            (adicResidueLocalProjection.{u, v} X J V 0) T ∧\n          CategoryTheory.ConstantCompletion.IsComplete\n            (adicResidueLocalProjection.{u, v} X J V 0) L ∧\n          ∀ n : ℕ, Nonempty\n            ((adicResidueLocalReduction.{u, v} X J V n).obj T ≅\n              (adicResidueLocalReduction.{u, v} X J V n).obj L)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-9a1f0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T022430-L-2846381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-9a1f0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T022430-L-2846381",
+  "kind": "interface",
+  "note": "independent cc review: item theorem and 6 moved defs vs quarantine/Sheaf/Paper/AdicResidueLissePerfectLift.lean (byte-identical); 4 new sorry statements vs Stacks 09C6/09C5/099M/0940; --all compile of 7 modules clean; #print axioms checked"
+ }
+}

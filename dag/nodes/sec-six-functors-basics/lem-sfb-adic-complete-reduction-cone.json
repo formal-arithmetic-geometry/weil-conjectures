@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-adic-complete-reduction-cone",
+ "kind": "statement",
+ "title": "Normalized quotient homotopy-limit cone for a complete object",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, J an ideal, U a coefficient-sized pro-etale object and M in D(B_X|U) locally complete for the residue kernel. Use R_n, q_n, and the normalized Hom transitions of [def-sfb-adic-residue-lift-comparisons]. Then there exist a tower F in D(B_X|U), a homotopy-limit cone c over F, an isomorphism eM:c.pt -> M, isomorphisms e_n:F_n -> Res(q_n)(R_n(M)), and scalar adjunctions adj_n:R_n left adjoint to Res(q_n). Its legs satisfy c_n followed by e_n = eM followed by the unit at M. For every T,n,f:R_(n+1)(T) -> R_(n+1)(M), transport of the adj_(n+1)-transpose along e_(n+1) inverse, F successor, and e_n equals the adj_n-transpose of the normalized Hom successor of f. No perfectness, boundedness or Mittag-Leffler hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-weil-derived-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M, 0940 and 0941; the quotient limit and scalar units used in Tag 09C6, immediately before the inverse-limit morphism."
+ },
+ "proof": [
+  {
+   "text": "On the actual slice identify completed coefficients and their quotient maps with the restricted inverse-limit coefficient diagram. Choose a flat-term K-flat representative of M. Its strict quotient tower has transition given by the quotient ring homomorphisms, not by independently chosen isomorphisms. The universal left derived extension is adjoint to exact restriction by deriving ordinary sheafified scalar extension. Its unit on a representative inserts 1.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict derived-limit theorem and exact countable products give the Roos homotopy-limit cone of the underlying reductions. The quotient-completion reflector identifies the actual unit with the local completeness unit. Completeness makes it invertible, and transporting the cone gives a cone point isomorphic to M with each leg equal to the corresponding scalar adjunction unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize every scalar adjunction by its representative computation. Tensor balancing sends (p tensor s) tensor t to p tensor st, and each scalar unit inserts 1. Thus their successor transposes agree with the two conjugations defining adicResidueHomStep. This is checked on K-flat representatives; the universal derived comparison then gives the displayed equality for every T and f.",
+   "uses": [
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M, 0940 and 0941; the quotient limit and scalar units used in Tag 09C6, immediately before the inverse-limit morphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over a completed Noetherian coefficient sheaf, derived complete objects are homotopy limits of their quotient reductions, residue reduction detects isomorphisms, and perfect constant reductions give Mittag Leffler Hom towers",
+   "results": "8 hits, including AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, IsAdicComplete.mk, DerivedCategory.quotientCompQhIso and condensed-category limits. These are ordinary completion or localization results.",
+   "date": "2026-10-21",
+   "verdict": "No theorem for the displayed ringed pro-etale derived objects. The generic triangulated exactness API is used in the proved Hom-section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex on the pro etale site is a homotopy limit of its finite coefficient reductions, with scalar adjunction units, and residue reduction is conservative on derived complete objects",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.comp.",
+   "date": "2026-10-21",
+   "verdict": "No derived sheaf completeness, finite local model, or normalized quotient-Hom statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsMittagLeffler|adic.*lisse|[Cc]omplete.*[Rr]esidue|quotient.*homotopy",
+   "results": "25 hits in local-field completeness, zeta residues, path quotients and homotopy-category localization. A separate local source search found the eventual-range and cofiltered-system APIs, which prove the stable-image selection directly.",
+   "date": "2026-10-21",
+   "verdict": "No theorem matching the new ringed-site statements or definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueLissePerfectLift",
+  "date": "2026-10-21",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tags 099M, 0940 and 0941; the quotient limit and scalar units used in Tag 09C6, immediately before the inverse-limit morphism.",
+   "via": [
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompleteReductionCone",
+  "file": "lean/Sheaf/Paper/AdicCompleteReductionCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_complete_reduction_cone",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_complete_reduction_cone"
+  ],
+  "statement": "theorem adicResidue_complete_reduction_cone\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (M : AdicResidueLocalDerived.{u, v} X J U)\n    (_hM : CategoryTheory.ConstantCompletion.IsComplete\n      (adicResidueLocalProjection.{u, v} X J U 0) M) :\n    ∃ (F : ℕᵒᵖ ⥤ AdicResidueLocalDerived.{u, v} X J U) (c : Cone F)\n      (eM : c.pt ≅ M)\n      (e : ∀ n : ℕ, F.obj (op n) ≅\n        (CategoryTheory.ConstantCompletion.dres.{max v (u + 1)}\n          (adicResidueLocalProjection.{u, v} X J U n)).obj\n          ((adicResidueLocalReduction.{u, v} X J U n).obj M))\n      (adj : ∀ n : ℕ, adicResidueLocalReduction.{u, v} X J U n ⊣\n        CategoryTheory.ConstantCompletion.dres.{max v (u + 1)}\n          (adicResidueLocalProjection.{u, v} X J U n)),\n      Pretriangulated.IsHomotopyLimit c ∧\n      (∀ n : ℕ, c.π.app (op n) ≫ (e n).hom = eM.hom ≫ (adj n).unit.app M) ∧\n      (∀ (T : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ)\n        (f : (adicResidueLocalReduction.{u, v} X J U (n + 1)).obj T ⟶\n          (adicResidueLocalReduction.{u, v} X J U (n + 1)).obj M),\n        (adj (n + 1)).homEquiv T _ f ≫ (e (n + 1)).inv ≫\n            F.map (homOfLE (Nat.le_succ n)).op ≫ (e n).hom =\n          (adj n).homEquiv T _ (adicResidueHomStep.{u, v} X J U T M n f))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-9a1f0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T022430-L-2846381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-9a1f0",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T022430-L-2846381",
+  "kind": "interface",
+  "note": "independent cc review: item theorem and 6 moved defs vs quarantine/Sheaf/Paper/AdicResidueLissePerfectLift.lean (byte-identical); 4 new sorry statements vs Stacks 09C6/09C5/099M/0940; --all compile of 7 modules clean; #print axioms checked"
+ }
+}
