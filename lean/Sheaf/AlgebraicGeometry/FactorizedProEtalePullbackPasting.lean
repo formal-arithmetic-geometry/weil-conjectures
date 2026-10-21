@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit
+public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Pasting constant-coefficient pro-etale pullback squares

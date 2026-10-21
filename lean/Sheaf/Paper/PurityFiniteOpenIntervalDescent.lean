@@ -8,10 +8,12 @@ module
 public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import Sheaf.Paper.ProEtaleConstantModulePullbackEncoding
 import WeilConjectures.ConstructibleSheaf.OpenCover
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Constructible interval descent on a finite open cover

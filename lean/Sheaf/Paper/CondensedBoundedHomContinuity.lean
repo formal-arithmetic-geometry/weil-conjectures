@@ -5,7 +5,11 @@ Authors: SHEAF group NM
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Sheaf.Paper.ConstructibleHomContinuityDevissage
 import Sheaf.Paper.CondensedSheafExtContinuity
 import Sheaf.CategoryTheory.DerivedCategory.BoundedCohomologyConeWitness

@@ -10,6 +10,7 @@ import Sheaf.Algebra.Homology.RegularQuotientConeQuasiIso
 import Sheaf.Algebra.Homology.CochainDerivedAdjunction
 import Sheaf.Algebra.Homology.CochainAugmentationDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Normalized principal-quotient cone augmentation

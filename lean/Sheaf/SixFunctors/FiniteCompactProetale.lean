@@ -2,10 +2,19 @@ module
 
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.LocalizingClosure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Mathlib.CategoryTheory.EssentiallySmall
 import Sheaf.AlgebraicGeometry.FiniteDiscreteCtfOrigin
+import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.Algebra.CharP.CharAndCard
 import Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
+import Sheaf.CategoryTheory.CompactObject
+import Sheaf.Paper.FiniteComparisonLocalizing
+import Sheaf.Paper.FiniteDiscreteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.Comparison
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 
 /-!
 # Compactness of finite constructible pro-etale complexes

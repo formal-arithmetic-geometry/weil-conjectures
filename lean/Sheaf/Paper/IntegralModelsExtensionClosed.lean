@@ -6,10 +6,17 @@ Authors: SHEAF group O4
 module
 
 public import Sheaf.Paper.ContinuousConstructibleModule
+public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
 import Sheaf.CategoryTheory.ExtOneExtensionClassification
 import Sheaf.Paper.ContinuousIntegralConstructibleComparison
 import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-!
 # Integral models of extensions from an Ext denominator criterion

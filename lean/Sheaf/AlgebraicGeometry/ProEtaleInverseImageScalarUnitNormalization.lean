@@ -6,7 +6,10 @@ Authors: SHEAF group Q73
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
 public import Sheaf.Paper.RingedTopoiTensorComparisonData
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import all Sheaf.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
 import all Sheaf.SecSmoothPurity.CochainInverseComparison
 

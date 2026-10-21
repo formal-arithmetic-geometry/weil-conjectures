@@ -2,6 +2,12 @@ module
 
 public import Sheaf.Paper.ConstantModelTorAmplitude
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.EssentiallySmall
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import Sheaf.Paper.CartesianCoefficients
 import all Sheaf.Paper.CoefficientHeartSmall
 import all Sheaf.Paper.IntegralConstantModelHeartClosure
 import all Sheaf.Paper.ConstructibleCoefficientSerre
@@ -11,6 +17,7 @@ import Sheaf.Paper.CoefficientHeartTriangulated
 import Sheaf.Paper.FiniteDiscreteEncodingConstructibility
 import Sheaf.CategoryTheory.WeakSerreBoundedThick
 import Sheaf.CategoryTheory.BoundedHomologyEssentiallySmall
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-!
 # Thick and essentially small constructible finite-Tor complexes

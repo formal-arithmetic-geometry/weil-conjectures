@@ -5,10 +5,13 @@ Authors: SHEAF group Q19
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 public import Sheaf.AlgebraicGeometry.CartierReductionData
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 
 /-! # Finite root comparison between the etale and pro-etale sites
 

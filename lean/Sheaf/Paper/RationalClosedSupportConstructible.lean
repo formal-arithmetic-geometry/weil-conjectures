@@ -5,9 +5,15 @@ Authors: SHEAF group Q47
 -/
 module
 
+public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.FormalClosedSupport
+public import Sheaf.Topology.ProfiniteCondensedRing
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 import Sheaf.Paper.CoefficientHeartTriangulated
+import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible
 import Sheaf.Paper.RationalOpenDirectImageConstructible
 

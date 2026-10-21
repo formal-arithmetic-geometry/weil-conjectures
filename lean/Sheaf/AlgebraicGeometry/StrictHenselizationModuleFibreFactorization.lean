@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison

@@ -5,16 +5,26 @@ Authors: SHEAF group Q150
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.ProEtaleFixedModuleConstructible
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+public import Sheaf.Paper.WitnessCompatibility
 public import Sheaf.SixFunctors.EtaleOpenTensorDefs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.Paper.ProEtaleLisseFiniteModelsFromLisse
+import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Sheaf.Paper.FiniteReductionRestrictTensor
 import Sheaf.CategoryTheory.ExactRightDerivedAdjointKFlatRepresentative
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
 
 /-!
 # Bounded etale witnesses for finite reduction and open extension

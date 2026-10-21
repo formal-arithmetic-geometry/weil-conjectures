@@ -5,8 +5,23 @@ Authors: SHEAF group P1
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.AffineLineInfinityStrictLocalModel
+import Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField
+import WeilConjectures.SixFunctors.OpenClosed.Supported
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
 /-! # Higher direct image stalks of an affine-line projection
 

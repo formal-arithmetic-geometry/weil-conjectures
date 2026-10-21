@@ -7,9 +7,13 @@ module
 
 public import Sheaf.Paper.ModuleObjects
 public import Sheaf.Paper.CondensedConstantConstructibility
+public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import Sheaf.Paper.FiniteWindowUnbounded
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-!

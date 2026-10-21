@@ -6,6 +6,7 @@ Authors: SHEAF group Q05
 module
 
 public import Sheaf.SixFunctors.ProEtale.IntegralPresentationEncoding
+public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.FiniteDiscreteOrdinaryEncoding
 public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.DerivedCompleteOnSlices
@@ -13,6 +14,8 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import Sheaf.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 import Sheaf.SixFunctors.ProEtale.IntegralReductionTransitionComparison
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # Canonical completeness in the completed integral presentation
 
