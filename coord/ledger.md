@@ -23586,3 +23586,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T19:52:59Z L: superseded stage-1 delivery NX/lem-trf-point-transport-cone-comparison-descent at c7c2ac33a7a51337fddb59620a5a846e654d94e4; current completion retained; packet archived at refs/superseded/NX/lem-trf-point-transport-cone-comparison-descent/c7c2ac33a7a51337fddb59620a5a846e654d94e4; stale return retired.
 - 19:53 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 19:53 L: merged deliver/NK/lem-sfb-homogeneous-cocycle-rectangle-detection (stage 2; reviewer PASS; parallel immutable checks)
+- 19:55 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
