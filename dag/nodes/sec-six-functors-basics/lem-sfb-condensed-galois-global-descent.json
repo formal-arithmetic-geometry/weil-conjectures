@@ -11,14 +11,185 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories",
-  "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-condensed-action-module",
-  "def-pur-ringed-site-zeroth-hypercohomology"
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $s=\\operatorname{Spec}k$ and $a:X\\to s$. Apply [lem-sfb-field-profinite-galois-site] to replace sheaves on $s_{\\mathrm{proet}}$ by sheaves on $\\mathbf{Prof}_G$. The subsite is dense with its induced topology and all sites are small in the chosen larger universe, so [lem-pc-fppf-dense-sheaf-equivalence] applies. Denote a profinite test scheme by $T[P]$. In particular $\\bar s[P]$ corresponds to the free profinite $G$-set $G\\times P$ and $s[P]$ to the trivial $G$-set $P$.",
+   "uses": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9-4.1.10; restriction to the dense qcqs subsite"
+   }
+  },
+  {
+   "text": "The full subcategory of free objects $G\\times P$ is dense in $\\mathbf{Prof}_G$: $G\\times S\\to S$, $(g,x)\\mapsto gx$, is an equivariant surjection for every profinite $G$-set $S$. Every equivariant map $G\\times T\\to G\\times P$ uniquely has the form $(g,t)\\mapsto(gb(t),f(t))$ for continuous $f:T\\to P$ and $b:T\\to G$, by evaluation at $(1,t)$. Composing $(f,b)$ and $(h,c)$ gives $(fh,c\\,h^*b)$. A finite family of these maps is jointly surjective exactly when its family of maps $f$ is jointly surjective. Thus the free subsite is precisely the action site $C_G$ of [lem-sfb-action-topos-geometric-restriction]. Apply [lem-pc-fppf-dense-sheaf-equivalence] again and that node's equivalence with internal actions. This gives an equivalence of topoi $E:\\operatorname{Sh}(s_{\\mathrm{proet}})\\simeq\\operatorname{Cond}^{\\underline G}$ with $(EF)(P)=F(\\bar s[P])$. The action is pullback by right translation on the free $G$-factor. The composition formula above agrees with the action site's stated convention.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10 and §4.3; elementary free-subsite calculation using the cited action-site equivalence"
+   }
+  },
+  {
+   "text": "For a sheaf $F$ on $\\mathbf{Prof}_G$, descent for the covering $G\\times P\\to P$ (with trivial action on $P$) identifies $F(P)$ with the sections of $(EF)(P)$ fixed after all profinite base changes. Indeed its kernel pair is $G\\times G\\times P$; the two restrictions are the identity and the action, so their equalizer is exactly that fixed-section subobject. The same formula is natural in $P$. By [sk-def-sfb-pullback-from-point], $p_{s*}F(P)=F(s[P])=F(P)$, whereas [lem-sfb-condensed-product-action-inflation], applied with $H=1$ to the condensed ring $\\underline{\\mathbf Z}$ (whose internal modules are the condensed abelian groups), identifies the additive right adjoint of trivial inflation with this invariants functor, and [lem-sfb-action-topos-geometric-restriction] identifies trivial inflation with the inverse image $p_G^{-1}$ under the action-site presentation of step 2. Consequently $E p_s^*$ is canonically trivial inflation: both are left adjoint to the just-identified functor, and the unit/counit composites give inverse comparisons by the triangle identities. The descent equalizer above is computed for sheaves of sets, so the same adjoint-uniqueness argument identifies the set-valued inverse images $Ep_s^{-1}$ and $p_G^{-1}$; these are inverse images of geometric morphisms, hence preserve finite products, and the comparison therefore carries the ring operations of $R_s=p_s^{-1}R$ to those of $p_G^{-1}R$, the ring $R_G=p_G^{-1}R$ of [lem-sfb-action-topos-geometric-restriction], which on the action site is $U\\mapsto R(U)$ with restrictions $f^*$ by [lem-sfb-internal-action-site-presentation]. In particular $E(R_s)$ is $R$ with trivial $G$-action, naturally in condensed ring maps.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10; sheaf equalizer on the free cover of a trivial object"
+   }
+  },
+  {
+   "text": "The coefficient identification of step 3 makes $E$ a ringed-topos equivalence. By [lem-weil-pbc-ringed-presentation-transport] it gives an exact additive module equivalence of $\\operatorname{Mod}_{R_s}$ with modules over the trivially acted ring on the action site $C_G$ of step 2 and its termwise derived equivalence, preserving K-injectives. By [lem-sfb-internal-action-site-presentation], for the site of profinite sets (which has finite limits), the group sheaf $\\underline G$ and the ring $R$, these are the $\\underline G$-equivariant $R$-module sheaves, with the same section modules and restriction $m\\mapsto a\\cdot f^*m$ along $(f,a)$. Internal modules may be read as section-ring module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]; this equivalence preserves their sections and restrictions identically, so the equivariant module sheaves are exactly the objects of $\\mathcal A_G(R)$ in [def-sfb-condensed-action-module]. This defines the exact additive equivalence $E_R:\\operatorname{Mod}_{R_s}\\simeq\\mathcal A_G(R)$. We therefore retain the concrete normalization $(E_RN)(P)=N(\\bar s[P])$, including its sectionwise $R$-action. Coefficient restriction commutes with $E_R$ by this formula: it changes only how $R(P)$ acts, via $R(P)\\to R'(P)$, and leaves every section, restriction, and action map unchanged.",
+   "uses": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-sfb-internal-action-site-presentation",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary internal-module transport through the field-site equivalence"
+   }
+  },
+  {
+   "text": "The functor $a_*$ of [sk-def-sfb-module-pushforward-pullback] evaluates by $a_*M(V)=M(X\\times_sV)$ on underlying sections by [def-sfb-finite-lower-star]. Consequently $E_Ra_*M(P)=\\Gamma(X^s[P],M|_{X^s[P]})$, with the action coming from the same right translations. This is the stated equivariant geometric section functor, now denoted $F_R$. Here $X\\times_s\\bar s[P]=X^s[P]$ by the natural test-object construction of [lem-weil-pbc-profinite-test-object-functor], and the equality includes restriction and scalar actions. Apply [lem-sfb-condensed-product-action-inflation] with $H=1$ to obtain that $\\mathcal A_G(R)$ and $\\mathcal M_R=\\mathcal A_1(R)$ are Grothendieck abelian and that trivial inflation is exact, with the specified invariants right adjoint $\\Gamma_G$. The ringed-site Grothendieck theorem applies to $\\operatorname{Mod}_{R_X}$ and $\\operatorname{Mod}_{R_s}$ after the section-ring equivalence in step 4.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), identify the underived geometric section functor and its actual coefficient categories"
+   }
+  },
+  {
+   "text": "Evaluation at $*$ is exact on condensed abelian sheaves. It preserves kernels since kernels are sectionwise. For an epimorphism, [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] supplies local lifts of a section over $*$. A finite jointly surjective cover of $*$ has a nonempty member $P$; choosing $x\\in P$ gives a section $*\\to P$, and restricting the lift along it gives a global lift. Thus evaluation preserves epimorphisms. The section-ring equivalence of step 4 identifies the underlying abelian sheaves of internal modules. Their forgetful functor preserves finite limits and colimits by [lem-sfb-modobj-forget-left-exact, lem-sfb-modobj-forget-right-exact], so evaluation followed by forgetting scalars is exact on internal modules as asserted. The hypotheses on the tensor and on right exactness of $R\\otimes-$ hold by [sk-def-sfb-sheaf-tensor], which states these tensor functors are left adjoints.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-sfb-modobj-forget-left-exact",
+    "lem-sfb-modobj-forget-right-exact",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, exact evaluation on an extremally disconnected profinite set; direct proof for the singleton"
+   }
+  },
+  {
+   "text": "Every complex in the three Grothendieck module categories of step 5 has a K-injective resolution, and ordinary total right derived functors exist by [sk-def-sfb-derived-categories]. In particular this constructs $\\mathcal K_R=\\mathbf RF_R$ and $R\\Gamma_G$ on all unbounded complexes. The left adjoint of $F_R=E_Ra_*$ is $a^*E_R^{-1}$. It is exact: $E_R^{-1}$ is exact, and [det-prop-sfb-module-pullback-exact-main] applies to every commutative condensed $R$, not just admissible coefficient rings. By [lem-weil-pbc-right-adjoint-preserves-kinjective], $F_R$ carries K-injective complexes to K-injective complexes. The same lemma applies to $\\Gamma_G$, whose left adjoint is the exact trivial inflation of step 5. No boundedness or bound on group cohomology occurs here.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; unbounded resolutions as in the cited derived-category node"
+   }
+  },
+  {
+   "text": "For an $R_X$-module $M$, the equalizer of step 3 at $P=*$, applied to $a_*M$, gives the natural underived isomorphism $\\gamma_M:\\Gamma(X,M)\\xrightarrow{\\sim}\\operatorname{ev}_*\\Gamma_G F_RM$. It is the restriction of a section to $X^s$, with codomain the invariant sections; its inverse is the unique sheaf gluing. Choose a K-injective resolution $M\\to I$. By step 7, $F_RI$ is already K-injective, so $R\\Gamma_G(\\mathcal K_RM)$ is represented by $\\Gamma_GF_RI$. By step 6, $\\operatorname{ev}_*$ needs no further derivation. The chain isomorphism $\\gamma_I:\\Gamma(X,I)\\to\\operatorname{ev}_*\\Gamma_GF_RI$ therefore defines $\\delta_{R,M}$. This proves the stated isomorphism in $D(\\mathbf{Ab})$, rather than just a collection of cohomology isomorphisms. Derived naturality follows also from [lem-sfb-derived-composition-adjunction-normalization] applied to $a^*E_R^{-1}$ and trivial inflation: its K-injective formula is precisely this termwise comparison. The remaining exact evaluation preserves that formula.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), derive the actual section/invariants comparison on one common unbounded K-injective representative"
+   }
+  },
+  {
+   "text": "For coefficient compatibility use actual ringed-topos morphisms. The functor $F_R$ is the direct image of the structure morphism $a$ followed by the ringed equivalence $E_R$; $\\Gamma_G$ is the direct image of the action-topos morphism $p_G$ in [lem-sfb-action-topos-geometric-restriction]. Evaluation and forgetting scalars is the direct image from the condensed topos to the one-point topos with structural map $\\mathbf Z\\to R(*)$. For $\\varphi:R\\to R'$, scalar restriction is direct image on the identity underlying topos. The squares involving $a$, $E$, $p_G$, and evaluation commute as ringed morphisms: on sections every path is the original restriction map with scalar action precomposed by $\\varphi$. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to these paths. It supplies canonical isomorphisms $\\mathcal K_R\\operatorname{Res}_X\\cong\\operatorname{Res}_G\\mathcal K_{R'}$, $R\\Gamma_G^R\\operatorname{Res}_G\\cong\\operatorname{Res}\\,R\\Gamma_G^{R'}$, and the corresponding global-section comparison. The normalization in that node ensures these are the derived comparisons of the stated underived maps. This application includes nonflat $\\varphi$; it makes no assertion that scalar restriction preserves K-injectives.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied also to identity underlying topoi for coefficient restriction"
+   }
+  },
+  {
+   "text": "The two coefficient-compatible routes around the desired $\\delta$ square are the two parenthesizations of this same composite ringed direct image: first scalar restriction and then $a,E,p_G,\\operatorname{ev}_*$, or scalar restriction at their successive targets. The associativity and identity equations of [lem-pur-ringed-derived-composition-cocycle] identify these routes, including the normalization of step 8, since both underived section maps are restriction to $X^s$ followed by inclusion of fixed sections. Explicitly, let $c_{\\Gamma}:R\\Gamma_R(X,\\operatorname{Res}M')\\to R\\Gamma_{R'}(X,M')$ be the global coefficient comparison and let $c_{\\mathrm{inv}}$ be the composite of step 9 on the invariant side. The equality is\n$$c_{\\mathrm{inv}}\\circ\\delta_{R,\\operatorname{Res}M'}=\\delta_{R',M'}\\circ c_{\\Gamma}.$$\nFor $f:M\\to\\operatorname{Res}M'$, precompose with $R\\Gamma_R(f)$ and use naturality of step 8. This proves coefficient-and-input naturality for every derived morphism in the statement.",
+   "uses": [
+    "lem-pur-ringed-derived-composition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E; associativity for the commuting coefficient-change paths, with its cocycle supplied by the cited node"
+   }
+  },
+  {
+   "text": "The right derived functors are triangulated by [lem-pc-right-derived-functor-triangulated]. Equip them with their canonical shifts. The comparisons in steps 8-10 are compositions of the canonical derived adjunction comparisons, so [lem-weil-pbc-derived-adjunction-shift] makes their units and counits commute with those shifts. Alternatively the map of step 8 on a shifted K-injective representative is literally $\\gamma_{I[n]}=\\gamma_I[n]$, including the signed differential; the exact evaluation has the same termwise shift. Naturality at the third arrow $C\\to A[1]$ of a distinguished triangle, together with this shift identity, gives the required connecting square, and hence a morphism of distinguished triangles. If $G=1$, fixed sections are all sections; if $X$ is empty or $R=0$, every displayed section module is zero. None of these cases changes the argument. No underived bar or continuous-cochain computation was used.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary derived and triangulated normalization of the geometric descent comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-profinite-galois-site",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-sfb-action-topos-geometric-restriction",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-sfb-internal-action-site-presentation",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-sfb-finite-lower-star",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-derived-categories",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-adjunction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written ordinary Galois descent input; geometric route from Bhatt-Scholze Examples 4.1.9-4.1.10 and §4.3, with Stacks Tags 08BJ and 0D6E for unbounded derived functors. Exact external reference for the assembled arbitrary condensed-coefficient formulation WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -105,10 +276,96 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits construct condensed sheaves or the profinite Galois group; none states ordinary derived Galois descent for internal condensed modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent for arbitrary condensed ring module complexes on the pro etale site using unbounded derived invariants",
+   "results": {
+    "t": "2026-10-21T17:44:15Z",
+    "tool": "leanfinder",
+    "query": "Galois descent for arbitrary condensed ring module complexes on the pro etale site using unbounded derived invariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "CondensedMod",
+     "CondensedMod.ofSheafProfinite",
+     "CondensedMod.IsSolid",
+     "LightCondMod",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "Condensed.profiniteFree",
+     "instAbelianCondensedMod"
+    ],
+    "digest": "6a08ec74dfcd9f28"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern profinite Galois groups, finite etale algebras or condensed sheaf constructions separately; no field pro-etale site equivalence or unbounded internal-module descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Galois\"",
+   "results": {
+    "t": "2026-10-21T17:47:05Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Galois\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern profinite Galois groups, finite etale algebras or condensed sheaf constructions separately; no field pro-etale site equivalence or unbounded internal-module descent."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(Hochschild|[Dd]escent)|(Hochschild|[Dd]escent).*(Condensed|Proetale)",
+   "results": {
+    "t": "2026-10-21T17:47:05Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(Hochschild|[Dd]escent)|(Hochschild|[Dd]escent).*(Condensed|Proetale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern profinite Galois groups, finite etale algebras or condensed sheaf constructions separately; no field pro-etale site equivalence or unbounded internal-module descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hochschild Serre isomorphism on unbounded derived categories of internal condensed modules",
+   "results": {
+    "t": "2026-10-21T17:47:06Z",
+    "tool": "leansearch",
+    "query": "Hochschild Serre isomorphism on unbounded derived categories of internal condensed modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "CondensedMod",
+     "instAbelianCondensedMod",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "CategoryTheory.ShortComplex.moduleCatCyclesIso",
+     "DerivedCategory.triangleOfSESIso",
+     "LightCondensed.ihomPoints",
+     "groupHomology.coinvariantsTensorResProjectiveResolutionIso"
+    ],
+    "digest": "e1ab06b823e7376d"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern profinite Galois groups, finite etale algebras or condensed sheaf constructions separately; no field pro-etale site equivalence or unbounded internal-module descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-norm-algcl-cohomology-topology-comparison",
@@ -133,5 +390,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-galois-global-descent",
+  "worker": "stage1",
+  "summary": "Realize the geometric section functor as structure direct image through the field/action-topos equivalence. Prove the normalized section/invariants identity and derive on a common unbounded K-injective resolution; use ringed-topos composition and its cocycle for arbitrary scalar restriction. Add only the geometric field-site equivalence as a statement-only node; retain the full statement, arbitrary coefficients and infinite cohomological dimension.",
+  "blueprint": "Paragraph (3) of the current direct-images proof, separable-closure descent input to lem-sfb-norm-algcl-cohomology-topology-comparison. This supplies its ordinary descent bridge without changing the compactification route.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Pulling back from the point. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Module and local Hom transport under a ringed-topos equivalence. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Internal abelian module sheaves as sectionwise module sheaves. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Pushforward and pullback of module objects. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Relative profinite test schemes: existence, functoriality and site properties. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Sheaves of modules on a small ringed site are Grothendieck abelian. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-sfb-modobj-forget-left-exact",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies The forgetful functor on module objects is left exact. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-sfb-modobj-forget-right-exact",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies The forgetful functor on module objects is right exact. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Tensor product of pro-étale sheaves. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Derived categories and derived functors. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Exactness of pullback on module objects. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies A right adjoint of an exact functor preserves K-injective complexes. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Derived composition preserves the specified adjunction normalization. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Canonical composition comparison for unbounded ringed-topos direct images. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-pur-ringed-derived-composition-cocycle",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Cocycle and identity laws for normalized ringed-topos derived composition. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies The unbounded right derived functor is triangulated. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic categorical/ringed-site tool used with its stated hypotheses in this proof; it supplies Canonical derived ringed-topos adjunction is shift-compatible. It does not replace a constructibility or six-functor route step of the unit."
+   },
+   {
+    "node": "def-sfb-finite-lower-star",
+    "why": "Definition of the sectionwise structure direct image; used only as the generic geometric direct-image construction, not as another unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-derived-categories",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "def-sfb-finite-lower-star"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5eaf7de5b",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5eaf7de5b (reviewer sub-agent of L); spot-checked: FIX. I read the whole item, the new node, every cited statement, Bhatt–Scholze Examples 4.1.9–4.1.10 (pp. 27–28) and the blueprint direct-images proof. New node lem-sfb-field-profinite-galois-site matches BS 4.1.10: qcqs objects of Spec(k)_proét correspond to profinite continuous G-sets with finite jointly surjective covers. I checked by hand that s[P] gives P with trivial action, s̄[P] gives G×P with left translation (as Hom_k(k^s,k^s)=G), and P=∅ and G=1 behave. It is not a duplicate: lem-exc-etale-field-gsets is for discrete G-sets only, and the geometric-field pbc nodes assume an algebraically closed field. It satisfies B1–B9. Item: the composition (f,b)(h,c)=(fh,c·h*b) matches the action-site convention, the kernel-pair descent at trivial P is right, ev_* is exact via local lifts over a covering of *, the K-injective argument via an exact left adjoint holds for any commutative condensed R, δ is a genuine isomorphism in D(Ab), and coefficient naturality covers non-flat R→R′ through the ringed composition cocycle. Faults repaired: (C4) step 3 cited the action-topos node for 'right adjoint of trivial inflation = invariants', which that node does not state; it now cites lem-sfb-condensed-product-action-inflation (H=1, R=ℤ). (C1/C4) step 4 had no citation identifying modules on the action site with 𝒜_G(R); it now cites lem-sfb-internal-action-site-presentation (same unit, no cycle, added to proof_deps). (E5) the ring-structure sentence in step 3 is now an explicit set-level argument. Only proof steps 3–4 and proof_deps change. Off-unit generic ringed and homological tools in split_report.tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
