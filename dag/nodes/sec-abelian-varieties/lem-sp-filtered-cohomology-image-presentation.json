@@ -92,14 +92,14 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.FilteredCohomologyImagePresentation",
-  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImagePresentation.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.FilteredCohomologyImagePresentation",
+  "file": "lean/WeilConjectures/CategoryTheory/FilteredCohomologyImagePresentation.lean",
   "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_graded_presentation",
   "statement": "theorem cohomologyImage_graded_presentation\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  Nonempty ((L.homologyFiltration n).gradedPiece p ≅\n    cokernel ((Subobject.pullback (A ⊓ Z).arrow).obj\n      ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow)",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-13"
+  "by": "B6",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -114,12 +114,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-0b3f9",
-  "group": "T1",
+  "reviewer": "C-3ce07",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261021T005752-L-1890573",
+  "landing": "20261021T021904-L-2789105",
   "kind": "interface",
-  "note": "independent cc review: removed Sheaf cohomologyImage abbrev vs the homologyFiltration rename in 6 consumers (diff vs clones/live, rename/import only); 4 node lean.statement records vs delivered signatures; lcompile --all 7 modules exit 0; no importers outside the delivered set"
+  "note": "independent cc review: Removed Sheaf cohomologyImage_graded_presentation vs live WeilConjectures.CategoryTheory.FilteredCohomologyImagePresentation (identical signature and proof); sole importer FilteredStableSubquotient import swap; node lean record now existing:true upstream; lcompile --all exit 0"
  },
  "lean_audit": {
   "master": {

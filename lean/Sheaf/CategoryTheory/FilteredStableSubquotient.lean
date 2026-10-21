@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.FilteredCohomologyImage
 import WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
-import Sheaf.CategoryTheory.FilteredCohomologyImagePresentation
+import WeilConjectures.CategoryTheory.FilteredCohomologyImagePresentation
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # The stationary subquotient comparison at explicit filtration bounds
