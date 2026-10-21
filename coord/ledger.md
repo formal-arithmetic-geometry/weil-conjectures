@@ -21455,3 +21455,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: merged deliver/Q110/lem-sfb-local-model-tor-bound-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 08:53 L: merged deliver/Q118/lem-sfb-ringed-site-finite-retract-dual-exact (stage 2; reviewer PASS; parallel immutable checks)
 - 08:53 L: merged deliver/NQ/sk-lem-nagata-sketch-dense-valuative (stage 2; reviewer PASS; parallel immutable checks)
+- 08:53 L: returned deliver/NK/lem-weil-pbc-finite-free-completion-transport (reviewer RETURN: L: independent stage-2 immutable head 34d6bea90465: H2: stmt_deps add theorem nodes lem-pur-system-scalar-model (item us)
