@@ -12,9 +12,83 @@
   "def-sfb-strong-monoidal-functor",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $d_{U,V}=\\delta^F_{U,V}$ and $e=e_F$. By [lem-weil-pbc-adjunction-of-natural-bijection], the transpose of $v:U\\to RV$ is $T(v)=\\varepsilon_V\\circ F(v)$; $T$ is a bijection. For $a:U'\\to U$ and $b:V\\to V'$, naturality gives $T(R(b)\\circ v\\circ a)=b\\circ T(v)\\circ F(a)$. The defining adjunct for $\\rho$ therefore gives\n$$T(t_{B,N})=\\beta_{N,FB}\\circ(\\varepsilon_N\\otimes1)\\circ d_{RN,B}\\circ F(\\beta_{B,RN}).$$\nNaturality of the symmetry rewrites the first two factors as $(1\\otimes\\varepsilon_N)\\circ\\beta_{FRN,FB}$. Preservation of the symmetry by $F$ says $d_{RN,B}\\circ F(\\beta_{B,RN})=\\beta_{FB,FRN}\\circ d_{B,RN}$. The two adjacent swaps cancel by involutivity. Thus\n$$T(t_{B,N})=(1_{FB}\\otimes\\varepsilon_N)\\circ d_{B,RN}.$$\nThis proves the required transpose identity directly from the defined symmetry conjugate, without assuming that $\\rho$ or $t$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation, step 1; Tag 0037 (definition-adjoint and following transpose formulas), Tags 0FFK/0FFL (definition-monoidal-category, definition-functor-monoidal-categories); projection construction Tag 0B56 in sites-cohomology.tex."
+   }
+  },
+  {
+   "text": "For $f:B\\to C$ and $g:N\\to M$, compare $R(F(f)\\otimes g)\\circ t_{B,N}$ and $t_{C,M}\\circ(f\\otimes R(g))$. Step 1 gives the transpose of the first as $(F(f)\\otimes g)\\circ(1\\otimes\\varepsilon_N)\\circ d_{B,RN}$. The transpose of the second is\n$$(1\\otimes\\varepsilon_M)\\circ d_{C,RM}\\circ F(f\\otimes R(g))\n=(F(f)\\otimes(\\varepsilon_M\\circ FR(g)))\\circ d_{B,RN}\n=(F(f)\\otimes(g\\circ\\varepsilon_N))\\circ d_{B,RN}.$$\nThe first equality is tensorator naturality in [def-sfb-strong-monoidal-functor] and tensor bifunctoriality in [def-sfb-monoidal-category]; the second is counit naturality in [lem-weil-pbc-adjunction-of-natural-bijection]. Bifunctoriality identifies this with the first transpose. Injectivity of $T$ proves joint naturality, and setting either $f$ or $g$ equal to the identity gives naturality in each argument.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation, step 2; Tag 0037 (definition-adjoint and following transpose formulas), Tags 0FFK/0FFL (definition-monoidal-category, definition-functor-monoidal-categories); projection construction Tag 0B56 in sites-cohomology.tex."
+   }
+  },
+  {
+   "text": "The left unit axiom in [def-sfb-strong-monoidal-functor], composed with the inverses of its structure isomorphisms, is\n$$F(\\lambda_X)=\\lambda_{FX}\\circ(e\\otimes1_{FX})\\circ d_{\\mathbf1,X}.$$\nPut $X=RN$. By Step 1 and naturality of transposition, the transpose of $R(h^F_N)\\circ t_{\\mathbf1,N}$ is\n$$\\lambda_N\\circ(e\\otimes1_N)\\circ(1_{F\\mathbf1}\\otimes\\varepsilon_N)\\circ d_{\\mathbf1,RN}\n=\\varepsilon_N\\circ\\lambda_{FRN}\\circ(e\\otimes1_{FRN})\\circ d_{\\mathbf1,RN}\n=\\varepsilon_N\\circ F(\\lambda_{RN}).$$\nThe first equality uses tensor bifunctoriality and naturality of the left unitor from [def-sfb-monoidal-category]; the second is the displayed unit axiom. The result is $T(\\lambda_{RN})$ by [lem-weil-pbc-adjunction-of-natural-bijection]. Injectivity of $T$ proves the unit equation.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation, step 3; Tag 0037 (definition-adjoint and following transpose formulas), Tags 0FFK/0FFL (definition-monoidal-category, definition-functor-monoidal-categories); projection construction Tag 0B56 in sites-cohomology.tex."
+   }
+  },
+  {
+   "text": "For associativity put $X=RN$, $M=FB'\\otimes N$, $c=t_{B',N}$ and $A=\\alpha_{B,B',X}$. All maps below have source $F((B\\otimes B')\\otimes X)$ and target $FB\\otimes(FB'\\otimes N)$. Step 1 gives the transpose of the right side of the desired equation as\n$$(1_{FB}\\otimes\\varepsilon_M)\\circ d_{B,RM}\\circ F(1_B\\otimes c)\\circ F(A).$$\nTensorator naturality rewrites this as\n$$(1_{FB}\\otimes(\\varepsilon_M\\circ F(c)))\\circ d_{B,B'\\otimes X}\\circ F(A).$$\nApplying Step 1 to $c=t_{B',N}$ replaces $\\varepsilon_M\\circ F(c)$ by $(1_{FB'}\\otimes\\varepsilon_N)\\circ d_{B',X}$. Hence this transpose equals\n$$Q=(1_{FB}\\otimes(1_{FB'}\\otimes\\varepsilon_N))\\circ(1_{FB}\\otimes d_{B',X})\\circ d_{B,B'\\otimes X}\\circ F(A).$$\nThese are just naturality of the inverse tensorator from [def-sfb-strong-monoidal-functor], tensor bifunctoriality from [def-sfb-monoidal-category], and the natural transpose formula of [lem-weil-pbc-adjunction-of-natural-bijection].",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation, step 4; Tag 0037 (definition-adjoint and following transpose formulas), Tags 0FFK/0FFL (definition-monoidal-category, definition-functor-monoidal-categories); projection construction Tag 0B56 in sites-cohomology.tex."
+   }
+  },
+  {
+   "text": "The transpose of the left side is, by Step 1,\n$$\\alpha_{FB,FB',N}\\circ(d_{B,B'}\\otimes1_N)\\circ(1_{F(B\\otimes B')}\\otimes\\varepsilon_N)\\circ d_{B\\otimes B',X}.$$\nTensor bifunctoriality and naturality of the associator from [def-sfb-monoidal-category] rewrite it as\n$$(1_{FB}\\otimes(1_{FB'}\\otimes\\varepsilon_N))\\circ\\alpha_{FB,FB',FX}\\circ(d_{B,B'}\\otimes1_{FX})\\circ d_{B\\otimes B',X}.$$\nThe associativity axiom in [def-sfb-strong-monoidal-functor], with its invertible tensorators cancelled, says exactly\n$$\\alpha_{FB,FB',FX}\\circ(d_{B,B'}\\otimes1_{FX})\\circ d_{B\\otimes B',X}\n=(1_{FB}\\otimes d_{B',X})\\circ d_{B,B'\\otimes X}\\circ F(\\alpha_{B,B',X}).$$\nSubstitution makes this transpose $Q$ from Step 4. Injectivity of the Hom bijection [lem-weil-pbc-adjunction-of-natural-bijection] proves the associativity equation. Only the given structural isomorphisms of $F$ were cancelled; no cancellation of a projection component occurred.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation, step 5; Tag 0037 (definition-adjoint and following transpose formulas), Tags 0FFK/0FFL (definition-monoidal-category, definition-functor-monoidal-categories); projection construction Tag 0B56 in sites-cohomology.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map: counit adjunct construction; the explicit symmetry, unit and associativity calculations are supplied here using categories.tex Tags 0037, 0FFK, 0FFL."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +131,66 @@
    "results": "8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit",
    "date": "2026-10-21",
    "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionFormulaMap|projection.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-21T08:20:16Z\", \"tool\": \"grep\", \"query\": \"rightAdjointProjectionMap|projectionFormulaMap|projection.*[Uu]nit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"assoc\"",
+   "results": "{\"t\": \"2026-10-21T08:20:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"projection\\\", \\\"assoc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit projection map for the right adjoint of a strong monoidal functor obeys the left tensor coefficient unit and associator identities",
+   "results": "{\"t\": \"2026-10-21T08:20:16Z\", \"tool\": \"leansearch\", \"query\": \"The counit projection map for the right adjoint of a strong monoidal functor obeys the left tensor coefficient unit and associator identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.mapMon_counit\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc\", \"CategoryTheory.Adjunction.unit_app_unit_comp_map_η\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"CategoryTheory.Functor.Monoidal.ofBifunctor\"], \"digest\": \"0027e204a90fc81f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint F with right adjoint R has a left projection map B tensor R N to R of F B tensor N satisfying unit and associativity",
+   "results": "{\"t\": \"2026-10-21T08:20:20Z\", \"tool\": \"leanfinder\", \"query\": \"A strong monoidal left adjoint F with right adjoint R has a left projection map B tensor R N to R of F B tensor N satisfying unit and associativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.frobeniusMorphism\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.tensorLeftAdjunction\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\"], \"digest\": \"2c45375da457ab4c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|Projection",
+   "results": "{\"t\": \"2026-10-21T08:20:59Z\", \"tool\": \"grep\", \"query\": \"projection|Projection\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/End.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"a53d5063659cb3dc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint projection morphism is coherent as a lax module functor over a symmetric monoidal category via counit transposition",
+   "results": "{\"t\": \"2026-10-21T08:21:00Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint projection morphism is coherent as a lax module functor over a symmetric monoidal category via counit transposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.mapMon_counit\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"82f5d55aaa6e38f3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|map_μ_comp_counit_app_tensor|map_ε_comp_counit_app_unit",
+   "results": "{\"t\": \"2026-10-21T08:22:16Z\", \"tool\": \"grep\", \"query\": \"rightAdjointLaxMonoidal|map_μ_comp_counit_app_tensor|map_ε_comp_counit_app_unit\", \"sub\": \"CategoryTheory/Monoidal/Functor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"947\", \"1008\", \"1010\", \"1031\", \"1036\"], \"digest\": \"9578089fa2ed9066\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|map_μ_comp_counit_app_tensor|map_ε_comp_counit_app_unit",
+   "results": "{\"t\": \"2026-10-21T08:22:41Z\", \"tool\": \"grep\", \"query\": \"rightAdjointLaxMonoidal|map_μ_comp_counit_app_tensor|map_ε_comp_counit_app_unit\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\"], \"digest\": \"f05488c0fe459e6a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern the two-counit lax monoidal structure on R or cartesian Frobenius morphisms, not all clauses for the symmetry-conjugated one-counit left-coefficient projection"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-projection-formula-coefficient-coherence",
@@ -79,5 +209,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-adjoint-left-projection-action",
+  "worker": "stage1",
+  "summary": "Five explicit transpose calculations prove the symmetry-conjugate normalization, naturality, unit, and coefficient associativity. All structural identities are written out from the three existing Mathlib leaves; no new nodes, statement changes, or invertibility assumptions. Searches of the live project find only right-coefficient general projection identities, not the full item.",
+  "blueprint": "Current main-20261015 sk-prop-cohsm.proof.md (G13), first projection-formula arrow: the proper/right-adjoint left-coefficient coherence used by lem-pur-projection-formula-coefficient-coherence. This supplies the categorical calculation below that route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6f0e0ef66",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6f0e0ef66 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full and redid each calculation by hand against the three cited Mathlib-leaf statements. Step 1: the transpose of t is (1⊗ε_N)∘δ_{B,RN}, by counit naturality, β-naturality, preservation of the symmetry (read with inverses) and involutivity. Step 2: joint naturality, from δ-naturality and counit naturality. Step 3: the unit law, from the inverted left-unit axiom and λ-naturality. Steps 4–5: associativity; both transposes reduce to the same Q via δ-naturality, α-naturality and the inverted associativity axiom of CoreMonoidal. All are correct, and no invertibility of ρ or t is used. Stacks 0B56 (sites-cohomology.tex l.13657–13675) defines ρ exactly as the item's counit adjunct (E=N, K=B); tags 0B56/0037/0FFK/0FFL match tags/tags. The statement is byte-identical to base and live, so the target is not weakened and the parent's forward use is unaffected. The item is unsplit on both live clones and not superseded; there is no repair note, so the re-split rule does not apply; it is not in the dropped list; no SGA is cited. There are no new nodes and no tool_uses. I found no duplicate: the candidates read were lem-pur-finite-projection-action-laws, lem-pur-composite-tensor-transpose, lem-pd-monoidal-adjunction-equivalence-transport, lem-sfb-ringed-* and the sibling lem-pur-open-left-projection-action. Edge cases checked: identity adjunction (t = 1); B or B' equal to the unit; free ⊣ forgetful from Set to Ab, where t is not invertible."
  }
 }
