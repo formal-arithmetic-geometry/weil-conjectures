@@ -23815,3 +23815,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:45 L: merged deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 21:45 L: returned deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (reviewer RETURN: L: independent stage-2 immutable head 1704e7647b20: H2 + mechanical theorem-stmt_dep finding upheld: the delivery adds t)
 - 21:46 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 21:46 L: returned deliver/NK/lem-pur-affine-translation-trace (reviewer RETURN: L: independent stage-2 immutable head e9f48e9060da: H2: the delivery added theorem stmt_dep lem-trf-ambient-affine-trans)
