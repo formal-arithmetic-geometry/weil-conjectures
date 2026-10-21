@@ -22435,3 +22435,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:09 L: merged deliver/W7/Sheaf.Paper.ConstructibleLocalizingDetermination (stage 3; reviewer PASS; first push; landing 20261021T120906-L-3988794 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:09 L: merged deliver/W9/Sheaf.AlgebraicGeometry.SmoothAdmissibleCoordinateCover (stage 3; reviewer PASS; first push; landing 20261021T120910-L-3991913 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:09 L: merged deliver/W9/Sheaf.CategoryTheory.MonoidalBalancingDiagrams (stage 3; reviewer PASS; first push; landing 20261021T120915-L-3996437 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/W9-monoidal-balancing-import.md)
+- 12:09 L: merged deliver/X2/Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange (stage 3; reviewer PASS; first push; landing 20261021T120920-L-3999971 (proof); batch 20261021T120309; modules 1; new nodes 0)
