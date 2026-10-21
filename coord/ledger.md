@@ -20188,3 +20188,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/Q20/lem-sfb-scalar-normalized-constant-models (reviewer PASS; first push; new nodes: 0)
 - 04:05 L: merged deliver/Q32/lem-sfb-derived-exchange-exact-normalization (reviewer FIX; first push; new nodes: 0)
 - 04:05 L: merged deliver/Q108/lem-sfb-lfp-scalar-isomorphism (reviewer FIX; first push; new nodes: 0)
+- 04:05 L: merged deliver/NR/lem-pur-signed-line-derived-base-change (reviewer FIX; first push; new nodes: 0)
