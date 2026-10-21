@@ -28,7 +28,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all Sheaf.Paper.IntegralLfpLocallyFreeResolution
-import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.Paper.CondensedLocallyClosedExtensionTower
 import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
@@ -129,10 +128,11 @@ theorem integralTensorShriek_preserves
               (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X
                 i).rightDerivedFunctor).obj M)) := by
   let Λ := (integralModelCondensedCoefficients l E).X
-  have hopen (U : Scheme.{u}) (j : U ⟶ X) [IsOpenImmersion j]
+  have hopen (Y : Scheme.{u}) [IsNoetherian Y] (U : Scheme.{u})
+      (j : U ⟶ Y) [IsOpenImmersion j]
       (M : DerivedCategory (pulledBackModuleObjects Λ U))
       (hM : boundedConstructible (condensedRingObj Λ U) M) :
-      boundedConstructible (condensedRingObj Λ X)
+      boundedConstructible (condensedRingObj Λ Y)
         ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj M) := by
     refine ⟨(CondensedRing.openImmersionLowerShriek Λ j).bounded_mapDerivedCategory_obj
       hM.1, fun n ↦ ?_⟩
@@ -156,20 +156,12 @@ theorem integralTensorShriek_preserves
       (_root_.constructible_of_iso
         (((CondensedRing.lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n).app M)
         ((CondensedRing.constructible_open_closed_images Λ U.ι i hij).2 _ (hM.2 n)))
-  refine ⟨hopen, hclosed, ?_⟩
+  refine ⟨hopen X, hclosed, ?_⟩
   intro S Z v i hv hi M hM
   let : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
   let : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace i
   let : IsNoetherian Z := ⟨⟩
-  have hfirst : boundedConstructible (condensedRingObj Λ Z)
-      ((CondensedRing.openImmersionLowerShriek Λ v).mapDerivedCategory.obj M) := by
-    refine ⟨(CondensedRing.openImmersionLowerShriek Λ v).bounded_mapDerivedCategory_obj
-      hM.1, fun n ↦ ?_⟩
-    exact _root_.constructible_of_iso
-      (((CondensedRing.openImmersionLowerShriek Λ v).mapDerivedCategoryHomologyFunctorIso
-        n).app M)
-      (CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek Λ v _ (hM.2 n))
-  exact hclosed Z i _ hfirst
+  exact hclosed Z i _ (hopen Z S v M hM)
 
 
 open MonoidalCategory MonObj CondensedRing
@@ -544,15 +536,8 @@ theorem integralTensorShriek_generated
       (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M) :
       P ((DerivedCategory.singleFunctor _ 0).obj M) := by
     obtain ⟨r, hr⟩ := exists_condensedLocallyClosed_extension_tower X Λ M hM
-    have h : ∀ r : ℕ, (condensedLocallyClosedPiece Λ X).extensionProductIter r ≤ P := by
-      intro r
-      induction r with
-      | zero => exact hpiece
-      | succ r ih =>
-        rw [ObjectProperty.extensionProductIter_succ]
-        rintro L ⟨A, B, f, g, k, hdist, hA, hB⟩
-        exact P.ext_of_isTriangulatedClosed₂ _ hdist (hpiece A hA) (ih B hB)
-    exact h r _ hr
+    exact (condensedLocallyClosedPiece Λ X).extensionProductIter_le_of_isTriangulatedClosed₂
+      hpiece r _ hr
   let : P.ContainsZero := ⟨(DerivedCategory.singleFunctor _ 0).obj 0,
     (DerivedCategory.singleFunctor _ 0).map_isZero (isZero_zero _),
     hheart 0 (constructible_of_isZero _ _ (isZero_zero _))⟩
