@@ -16,6 +16,23 @@ while (REPO / "local" / "PUBLISHING").exists():
     if n >= 30: sys.exit(75)
     time.sleep(2); n += 1
 data = sys.stdin.buffer.read()
+# 2026-10-21 (the human): at most SHEAF_COMPILE_SLOTS (40) calls compile at once; the others wait for a slot (a call
+# never fails for this, it only answers later; after 9 min of waiting it answers 75 and the caller retries). 80
+# concurrent single-file compiles had saturated the 80 cores and starved the global build, the landings and the reviews.
+_SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "40")); _slot_fh = None
+_sd = REPO / "local" / "compile-slots"; _sd.mkdir(parents=True, exist_ok=True)
+_t0 = time.time()
+while _slot_fh is None:
+    for _i in range(_SLOTS):
+        _f = open(_sd / f"{_i}.lock", "a")
+        try:
+            fcntl.flock(_f, fcntl.LOCK_EX | fcntl.LOCK_NB); _slot_fh = _f; break
+        except OSError:
+            _f.close()
+    if _slot_fh is None:
+        if time.time() - _t0 > 540:
+            sys.exit(75)
+        time.sleep(3)
 def watch_caller():
     """2026-10-18 (waste): a Codex worker that gave up (ssh closed) left its call compiling for nobody. A call started by
     sshd whose result pipe has no reader any more (POLLERR on stdout) kills its Lean children, removes its scratch
