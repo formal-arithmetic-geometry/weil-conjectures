@@ -19879,3 +19879,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/NX/lem-sfb-derived-open-square-restriction (reviewer FIX; first push; new nodes: 0)
 - 03:38 L: merged deliver/Q138/lem-weil-pbc-tower-derived-evaluation-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:38 L: merged deliver/NM/lem-weil-pbc-ringed-slice-comparisons-shift (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T03:38:38Z L: superseded stage-1 delivery Q18/lem-pe-completion-triangle-comparison at 0421aa63473fba22b99a448cc093831ca7a0d4a4; current completion retained; packet archived at refs/superseded/Q18/lem-pe-completion-triangle-comparison/0421aa63473fba22b99a448cc093831ca7a0d4a4; stale return retired.
