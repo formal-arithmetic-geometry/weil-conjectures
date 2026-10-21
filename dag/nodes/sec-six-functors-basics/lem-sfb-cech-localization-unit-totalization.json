@@ -14,7 +14,11 @@
   "def-sp-grothendieck-abelian",
   "sk-def-sfb-derived-categories",
   "def-pur-localized-ringed-site",
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sfb-coherent-cech-image-model",
+  "def-sfb-element-site-localization"
  ],
  "proof": [
   {
@@ -231,5 +235,43 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-e19f3f995 (reviewer sub-agent of L); spot-checked: I read the item (6 steps), the new node lem-sfb-nonnegative-derived-totalization, every cited statement, main-20261015 direct-images.proof.md paragraph (3) (it does not prove this comparison, so the agent origin and the WANTED line are correct) and the Stacks places 015J/015F/09T5/03FC/0D6E/0133/03DJ/04IX. There is no repair note, nothing in the closure is in route-pivot-dropped, no SGA is cited, and the live node is still unsplit. Statement change: only the slice sentence changed, now restriction on B's site with the restricted arrow j_U^*t^*Rg_*(eta). The two-point counterexample is valid: h^*(A,B)=A⊕B, h_*M=(M,M); (0,0) and (0,Z) restrict equally but H does not. So the 'localize H' reading is ill-typed, and this is a justified E7 correction with no hypothesis changed. Steps: step 1 applies derived-cech with f=h=id, so the Cartesian hypothesis is trivial. Step 2: f_* is left exact as a right adjoint. The composition node's hypotheses (exact f^*, v_n^* exact via the trf site presentation plus pur exact restriction) are discharged, and its K-injective normalization keeps the cosimplicial maps. Step 3: the termwise unit and the finite-biproduct E give E eta_T = T(e), and the derived equation follows by naturality at alpha; elementary is acceptable. Step 4: g_* is left exact, HB is re-resolved by the new node, naturality in e holds, and t^* is exact on finite diagonals. Steps 5-6: augmentation, naturality and exact slice restriction are correct. New node: true (levelwise injective replacement in Fun(Delta,Ch>=0), first-quadrant filtration, T(J) bounded-below injective). Small cases checked: constant cosimplicial M, and no negative degrees. It is statement-only, has all three search kinds and proper blueprint fields, and no duplicate exists (I checked the monadic bar, cbc holim, trf total-site spectral sequence, alternating Cech, CE mapped total and the derived-cech nodes). It is not a clause of the item and is used twice. Tool uses accepted: derived-composition-adjunction-normalization, trf topos-localization-site-presentation, pur site-restriction (on route). Batch 5: derived-cech-image-totalization and lem-trf-topos-localization-site-presentation are general (descent / topos slice presentation); the trf node's closure adds only def-trf-geometric-morphism, and both are already in the batch-5 closure without the item via the parent. The item adds only the new node to the closure, so I accept both. Maintainer note: parent lem-sfb-partial-kummer-boundary-unit-model step 2 cited the old slice clause to localize the calculation to U_α. That clause never validly gave this for arbitrary h. The parent should cite lem-sbc-ringed-topos-sheaf-slice-derived-comparison / lem-weil-pbc-ringed-slice-derived-comparisons and then apply the item to the localized data. Recommend reopening that step."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechLocalizationUnitTotalization",
+  "declaration": "CategoryTheory.CechLocalizationUnit.cech_localization_unit_totalization",
+  "declarations": [
+   "CategoryTheory.CechLocalizationUnit.total",
+   "CategoryTheory.CechLocalizationUnit.derivedNatTrans",
+   "CategoryTheory.CechLocalizationUnit.QNN",
+   "CategoryTheory.CechLocalizationUnit.AugmentedModel",
+   "CategoryTheory.CechLocalizationUnit.exactUnit",
+   "CategoryTheory.CechLocalizationUnit.Modules",
+   "CategoryTheory.CechLocalizationUnit.power",
+   "CategoryTheory.CechLocalizationUnit.slice",
+   "CategoryTheory.CechLocalizationUnit.image_additive",
+   "CategoryTheory.CechLocalizationUnit.baseColumn",
+   "CategoryTheory.CechLocalizationUnit.columnOperator",
+   "CategoryTheory.CechLocalizationUnit.columnChange",
+   "CategoryTheory.CechLocalizationUnit.columnAugmentation",
+   "CategoryTheory.CechLocalizationUnit.Comparison",
+   "CategoryTheory.CechLocalizationUnit.Comparison.Restricts",
+   "CategoryTheory.CechLocalizationUnit.restrictDerived",
+   "CategoryTheory.CechLocalizationUnit.cech_localization_unit_totalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CechLocalizationUnitTotalization.lean",
+  "statement": "theorem cech_localization_unit_totalization {CX CV CY CZ CB : Type u} [SmallCategory CX] [SmallCategory CV] [SmallCategory CY] [SmallCategory CZ] [SmallCategory CB] {JX : GrothendieckTopology CX} {JV : GrothendieckTopology CV} {JY : GrothendieckTopology CY} {JZ : GrothendieckTopology CZ} {JB : GrothendieckTopology CB} (RX : Sheaf JX CommRingCat.{u}) (RV : Sheaf JV CommRingCat.{u}) (RY : Sheaf JY CommRingCat.{u}) (RZ : Sheaf JZ CommRingCat.{u}) (RB : Sheaf JB CommRingCat.{u}) [IsGrothendieckAbelian.{u} (Modules RX)] [IsGrothendieckAbelian.{u} (Modules RV)] [IsGrothendieckAbelian.{u} (Modules RY)] [IsGrothendieckAbelian.{u} (Modules RZ)] [IsGrothendieckAbelian.{u} (Modules RB)] [HasDerivedCategory.{u + 1} (Modules RX)] [HasDerivedCategory.{u + 1} (Modules RV)] [HasDerivedCategory.{u + 1} (Modules RY)] [HasDerivedCategory.{u + 1} (Modules RZ)] [HasDerivedCategory.{u + 1} (Modules RB)] (f : RingedToposMorphism ((sheafCompose JX (forget₂ CommRingCat RingCat)).obj RX) ((sheafCompose JV (forget₂ CommRingCat RingCat)).obj RV)) (g : RingedToposMorphism ((sheafCompose JV (forget₂ CommRingCat RingCat)).obj RV) ((sheafCompose JY (forget₂ CommRingCat RingCat)).obj RY)) (t : RingedToposMorphism ((sheafCompose JB (forget₂ CommRingCat RingCat)).obj RB) ((sheafCompose JY (forget₂ CommRingCat RingCat)).obj RY)) (fInverse : Modules RV ⥤ Modules RX) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (fAdj : fInverse ⊣ f.modules) (gInverse : Modules RY ⥤ Modules RV) [gInverse.Additive] [PreservesFiniteLimits gInverse] [PreservesFiniteColimits gInverse] (gAdj : gInverse ⊣ g.modules) (tInverse : Modules RY ⥤ Modules RB) [tInverse.Additive] [PreservesFiniteLimits tInverse] [PreservesFiniteColimits tInverse] (tAdj : tInverse ⊣ t.modules) (hInverse : Modules RV ⥤ Modules RZ) (hDirect : Modules RZ ⥤ Modules RV) [hInverse.Additive] [hDirect.Additive] [PreservesFiniteLimits hInverse] [PreservesFiniteColimits hInverse] [PreservesFiniteLimits hDirect] [PreservesFiniteColimits hDirect] (hAdj : hInverse ⊣ hDirect) {P : Type uP} [Category.{vP} P] (V : Pᵒᵖ ⥤ Sheaf JX (Type u)) (N : P ⥤ Modules RX) (cover : ∀ p : P, Epi (terminal.from (V.obj (op p)))) (D : CoherentCechImageModel ((sheafCompose JX (forget₂ CommRingCat RingCat)).obj RX)) : ∃ (c : Comparison RX D f.modules g.modules tInverse (hInverse ⋙ hDirect) hAdj.unit V N), ∀ U : CB, Comparison.Restricts RX D f.modules g.modules tInverse (hInverse ⋙ hDirect) hAdj.unit V N c (restrictDerived RB U)",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of immutable head 0c4ba238c411, H4/H3: uses the recorded CoherentCechImageModel, sheafCoverNerve, D.image and its adjunction-normalized augmentation. D.unit fixes the restriction-of-sections map and D.augmentation_naturality fixes all refinements. The private nerve/free-sheaf/internal-Hom slice model and RestrictionAugmentation are removed. Compatible nonnegative augmented cosimplicial resolutions and comparisons remain conclusions; exact descent uses the specified hAdj.unit. No hypothesis that hInverse preserves injectives is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f84c84a4",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery after the H4/H3 RETURN of 0c4ba238c411, now fully repaired: the theorem takes D : CoherentCechImageModel, with power = sheafCoverNerve, slice = D.image (≅ elementModulePullback ⋙ D.push), operators and refinements via D.image.map (variance checked), and columnAugmentation = derived D.augmentation fixed by D.unit/augmentation_naturality. The private nerve/freeSheaf/sliceSections/generator/RestrictionAugmentation/derivedRestriction are removed; stmt_deps gain def-sfb-coherent-cech-image-model and def-sfb-element-site-localization. image_additive is a genuine transport along D.imageIso. Node diff vs live: only lean and stmt_deps; TeX and the 6 proof steps unchanged. Statement verbatim, 17 declarations match the file, one sorry, docstrings present, imports exist, not on the dropped list. Every clause and edge case (empty P, zero N, identity cover, noninvertible η, n=0, negative degrees, arbitrary U) holds; no stronger hypothesis or universe restriction. Mechanical theorem-stmt_dep finding (lem-pur-site-restriction-module-adjunction-exact): restrictDerived needs the exactness instances, which are projections of the theorem localizedSystemExact, so the statement depends on the theorem's conclusion: PASS on that point. No compile, since no file was changed."
  }
 }

@@ -23325,3 +23325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:26 L: merged deliver/W6/Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison (stage 3; reviewer PASS; first push; landing 20261021T182613-L-1235843 (proof); batch 20261021T182246; modules 1; new nodes 0; change records: coord/changes/W6-affine-tilde-tensor-source-comparison-rework.md)
 - 18:26 L: merged deliver/Q19/lem-pur-affine-chart-exceptional-identification (stage 2; reviewer PASS; parallel immutable checks)
 - 18:26 L: merged deliver/NR/lem-sfb-integral-closure-ind-etale-base-change (stage 2; reviewer PASS; parallel immutable checks)
+- 18:27 L: merged deliver/N6/lem-sfb-cech-localization-unit-totalization (stage 2; reviewer PASS; parallel immutable checks)
