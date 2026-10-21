@@ -1,0 +1,143 @@
+{
+ "id": "lem-zl-generic-fiber-component-section",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "A continuous section of the geometric-fiber component map",
+ "statement": "Let X be a nonempty irreducible affine scheme [def-pc-scheme, def-weil-irreducible-components], Ω a field, and η:Spec Ω→X map its point to the generic point. Let U→X be an affine pro-etale object [def-weil-pbc-proetale-site] whose global ring is w-contractible [sk-def-pe-wlocal]. Put V=U×_X Spec Ω and let r:π₀(V)→π₀(U) be induced by the first projection, with the profinite quotient topologies [lem-pe-spectral-components-profinite]. There is a continuous s:π₀(U)→π₀(V) satisfying r∘s=id. Neither algebraic closedness of Ω nor a separate ind-etale hypothesis is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+ },
+ "proof": [
+  {
+   "text": "The pro-etale structure map f is flat. Represent a component c by x∈U. Mathlib Flat.generalizingMap lifts the specialization from the generic point of X to f(x), giving y specializing to x and mapping to the generic point. The two points have equal component classes. Choose the field point z of Spec Ω. Since f(y)=η(z), Scheme.Pullback.exists_preimage_pullback gives v over y and z. The class of v maps to c, proving surjectivity, also for empty U.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "Identify U with Spec Γ(U,⊤) by its affine isoSpec, then use the induced connected-components homeomorphism. W-contractibility makes the component quotient of this spectrum extremally disconnected; transport this property to π₀(U).",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-pe-spectral-components-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "The two component spaces are compact Hausdorff. Mathlib CompactT2.ExtremallyDisconnected.projective lifts the identity of π₀(U) through the continuous surjection r. The equality of continuous maps gives Function.LeftInverse r s pointwise.",
+   "uses": [
+    "lem-weil-pbc-extremally-disconnected-component-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-fibre-product-points",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "lem-weil-pbc-extremally-disconnected-component-section"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric generic fiber surjectivity on connected components of a weakly contractible affine scheme",
+   "results": "genericPoints.component_surjective [Mathlib.Topology.Sober]; AlgebraicGeometry.Scheme.Hom.fiber [Mathlib.AlgebraicGeometry.Fiber]; AlgebraicGeometry.Scheme.Hom.surjective [Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap]; AlgebraicGeometry.Surjective.surj [Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap]; AlgebraicGeometry.AffineScheme.Spec_essSurj [Mathlib.AlgebraicGeometry.AffineScheme]; AlgebraicGeometry.pointsPi_surjective_of_isAffine [Mathlib.AlgebraicGeometry.PointsPi]; AlgebraicGeometry.surjective_eq_topologically [Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap]; AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective [Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski]",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this theorem; generic sheaf, triangulated, or etale algebra interfaces are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly contractible affine pro etale over an irreducible scheme the geometric generic fiber surjects on connected components and the component map admits a continuous section",
+   "results": "AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass [Mathlib/AlgebraicGeometry/AffineSpace]; AlgebraicGeometry.pointsPi_surjective [Mathlib/AlgebraicGeometry/PointsPi]; AlgebraicGeometry.pointsPi_surjective_of_isAffine [Mathlib/AlgebraicGeometry/PointsPi]; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index [Mathlib/AlgebraicGeometry/AffineTransitionLimit]; AlgebraicGeometry.Scheme.residue_surjective [Mathlib/AlgebraicGeometry/ResidueField]; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType [Mathlib/AlgebraicGeometry/AffineTransitionLimit]; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType [Mathlib/AlgebraicGeometry/AffineTransitionLimit]; AlgebraicGeometry.instSurjectiveDescI₀SchemeF [Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap]",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this theorem; generic sheaf, triangulated, or etale algebra interfaces are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(ConnectedComponents|connected.components)|(ConnectedComponents|connected.components).*generic",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this theorem; generic sheaf, triangulated, or etale algebra interfaces are insufficient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiberComponentsSection",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof of Theorem 4.13, irreducible case, diagram (4.4)",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFiberComponentSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiberComponentSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.generic_fiber_component_section",
+  "statement": "theorem generic_fiber_component_section (X : Scheme.{u}) [IsAffine X] [Nonempty X] [IrreducibleSpace X] (Ω : Type u) [Field Ω] (η : Spec (.of Ω) ⟶ X) (hη : ∀ x, η x = genericPoint X) (U : X.ProEt) [IsAffine U.left] (hw : IsWContractibleRing Γ(U.left, ⊤)) : let : IsAffineHom (show U.left ⟶ X from U.hom) := isAffineHom_of_isAffine (show U.left ⟶ X from U.hom) let : IsAffineHom η := isAffineHom_of_isAffine η let : IsAffine (pullback U.hom η) := instIsAffinePullbackSchemeOfIsAffineHom_1 (show U.left ⟶ X from U.hom) η let S := componentProfinite U.left let Sη := componentProfinite (pullback U.hom η) let r : C(Sη, S) := ⟨(pullback.fst U.hom η).continuous.connectedComponentsMap, (pullback.fst U.hom η).continuous.connectedComponentsMap_continuous⟩ ∃ s : C(S, Sη), Function.LeftInverse r s",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
+}

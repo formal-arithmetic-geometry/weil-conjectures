@@ -48,6 +48,6 @@ theorem spectralSpace_connectedComponents_profinite
     CompactSpace (ConnectedComponents T) ∧
       T2Space (ConnectedComponents T) ∧
         TotallyDisconnectedSpace (ConnectedComponents T) := by
-  sorry
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 end

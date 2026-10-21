@@ -1,0 +1,143 @@
+{
+ "id": "lem-zl-generic-component-derived-scalar-transport",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Ordinary scalar transport implies unbounded scalar transport",
+ "statement": "For ring sheaves A,B on sites J,K, objects c,d, a ring isomorphism e:A(c)≅B(d), and an additive equivalence E:Mod(A)≌Mod(B) [def-weil-sheaf-of-modules-category], consider the ordinary scalar compatibility of [def-zl-generic-component-data]: the ordinary left-adjoint squares from discrete rings and from sheafified constant commutative rings, the latter through an additive equivalence ER on constant-ring module sheaves preserving constant realization [def-sfb-site-derived-constant-module-functor]. A normalized structural ring map and terminal test-object isomorphism, with E left adjoint to its pushforward, supplies the discrete-ring clause from the constant-ring clause. Given ordinary compatibility, E induces an unbounded derived equivalence ED with its canonical Q-factorization, and GenericComponentScalarCompatibility(A,B,c,d,e,ED) of [def-zl-generic-component-data] holds, with all the independent derived-category universes retained.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-generic-component-data"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+ },
+ "proof": [
+  {
+   "text": "For the ordinary discrete-ring clause apply the normalized evaluation-adjoint comparison, preserving the supplied independent constant-ring clause.",
+   "uses": [
+    "lem-zl-module-terminal-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "Use the exact equivalence E to get ED=E.mapDerivedCategory and its Q-factorization. For discrete R-modules, apply the left-derived square lemma with source equivalence the identity; remove its derived identity factor by mapDerivedCategoryIdIso.",
+   "uses": [
+    "lem-zl-left-derived-equivalence-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "For commutative R take ER from ordinary compatibility and apply the same left-derived square lemma to ER and E. Constant realization is exact. Localize its ordinary comparison with ER using mapDerivedCategoryCompIso and mapDerivedCategoryNatIso, and paste this with the scalar-extension derived square using associators. This is precisely the constant-presentation clause of GenericComponentScalarCompatibility.",
+   "uses": [
+    "lem-zl-left-derived-equivalence-square",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-module-terminal-scalar-comparison",
+  "lem-zl-left-derived-equivalence-square",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence transports the square of additive functors to a square of their unbounded left derived functors.",
+   "results": "Functor.leftDerivedNatIso; Abelian.LeftResolution.transport; Functor.mapDerivedCategory.congr_simp; bounded/projective-resolution comparison lemmas.",
+   "verdict": "No match for an arbitrary unbounded left-derived square under independent exact equivalences.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence transports left derived functors and their natural comparison square by uniqueness of right Kan extensions",
+   "results": "Functor.leftDerivedUnique; isLeftDerivedFunctor_iff_of_iso; leftDerivedNatIso; leftDerived_fac; isLeftDerivedFunctor_of_inverts.",
+   "verdict": "The uniqueness lemmas are used after transporting the universal Kan-extension property; none is the full square.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "LeftDerived.*[Ee]quivalence|[Ee]quivalence.*LeftDerived",
+   "results": "0 Mathlib hits. The project has ExactEquivalenceDerivedSquares, but its public result includes additional right-derived data and its left-square helper is private.",
+   "verdict": "Prove the left-only generalization, reusing the existing public cochain comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiberComponentsSection",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof of Theorem 4.13, irreducible case, diagram (4.4)",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericComponentScalarTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericComponentScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.generic_component_derived_scalar_transport",
+  "statement": "theorem generic_component_derived_scalar_transport\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (A : Sheaf J RingCat.{u + 1}) (B : Sheaf K RingCat.{u + 1})\n    (c : C) (d : D) (e : A.obj.obj (op c) ≅ B.obj.obj (op d))\n    (E : ringedSiteModules.{u + 1} A ≌ ringedSiteModules.{u + 1} B)\n    [E.functor.Additive]\n    (h : GenericComponentOrdinaryScalarCompatibility A B c d e E)\n    [HasDerivedCategory.{wS} (ringedSiteModules.{u + 1} A)]\n    [HasDerivedCategory.{wV} (ringedSiteModules.{u + 1} B)] :\n    ∃ ED : DerivedCategory (ringedSiteModules.{u + 1} A) ≌\n        DerivedCategory (ringedSiteModules.{u + 1} B),\n      Nonempty (DerivedCategory.Q ⋙ ED.functor ≅\n        E.functor.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) ∧\n      GenericComponentScalarCompatibility.{u, wR, wS, wV, wCJ, wCK} A B c d e ED",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.generic_component_derived_scalar_transport",
+   "AlgebraicGeometry.Scheme.ProEt.generic_component_ordinary_scalar_transport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
+}

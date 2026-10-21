@@ -26,131 +26,69 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}A$ and $U=\\operatorname{Spec}B$. By [lem-weil-pbc-fibre-product-affine-spectra], $V=\\operatorname{Spec}(B\\otimes_A\\Omega)$ is affine. By [lem-weil-pbc-ind-etale-stability] it is ind-etale over $\\Omega$. Both $U$ and $V$ are quasi-compact quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], hence spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Their component spaces are profinite by [lem-pe-spectral-components-profinite]. The continuous projection $V\\to U$ sends connected subsets into connected subsets, so it induces $r:S_\\eta\\to S$; the quotient-topology definition makes this map continuous.",
+   "text": "Apply the proved generic-fiber section lemma to the original X,Ω,η,U. Its argument needs only flatness of U→X, already supplied by the pro-etale object, and the extremal disconnectedness part of w-contractibility. It returns the continuous left inverse of the actual r. Not one of the original hypotheses is changed.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-pe-spectral-components-profinite"
+    "lem-zl-generic-fiber-component-section"
    ],
    "elementary": false,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
    }
   },
   {
-   "text": "Let $C$ be a connected component of $U$ and choose $u\\in C$, represented by a prime $\\mathfrak q\\subset B$. Its contraction is a prime $\\mathfrak p\\subset A$. The prime $\\mathfrak p_0$ of the generic point of $X$ is contained in $\\mathfrak p$. The ind-etale map $A\\to B$ is weakly etale by [lem-weil-pbc-ind-etale-stability], and thus flat by [def-weil-pbc-ind-etale-algebra]. Apply [lem-sc-flat-going-down] to obtain $\\mathfrak q_0\\subseteq\\mathfrak q$ over $\\mathfrak p_0$. These two points of $U$ are in the same component: the closure of $\\{\\mathfrak q_0\\}$ is irreducible, hence connected, and contains both. Both $\\mathfrak q_0$ and the point of $\\operatorname{Spec}\\Omega$ lie over the generic point $\\mathfrak p_0$. The ring $\\kappa(\\mathfrak q_0)\\otimes_{\\kappa(\\mathfrak p_0)}\\Omega$ is a tensor product of two nonzero vector spaces over the field $\\kappa(\\mathfrak p_0)$, hence nonzero, and so has a prime ideal. By [lem-weil-pbc-fibre-product-points] for the schemes $U$ and $\\operatorname{Spec}\\Omega$ over $X$, this prime gives $v\\in V$ whose projection to $U$ is $\\mathfrak q_0$. The component of $v$ therefore maps to $C$, proving surjectivity of $r$. If $U$ is empty there is no component to choose and surjectivity is vacuous.",
+   "text": "Apply the relative component-site comparison. Construct ρ from Over.map/Over.pullback and their sheaf adjunction, g from the actual pro-etale base-change sheaf adjunction, and pΩ from geometricFieldPointAdjunction. Restrictions preserve finite limits for ρ. For g, finite-limit-preserving base change is representably flat, its opposite left Kan extension on sets is left exact, and sheafification is left exact. The point coherence theorem supplies left exactness for pΩ. Direct-image normalizations are identities. The two canonical comparisons supply the required commuting squares.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-sc-flat-going-down",
-    "lem-weil-pbc-fibre-product-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
-   }
-  },
-  {
-   "text": "By [sk-def-pe-wlocal], w-contractibility of the affine $U$ means in particular that $S$ is extremally disconnected. Step 1 makes $S$ and $S_\\eta$ compact Hausdorff. Apply [lem-weil-pbc-extremally-disconnected-component-section] to the continuous surjection $r$ of Step 2. This supplies a continuous $s:S\\to S_\\eta$ with $rs=\\operatorname{id}_S$, including the empty case.",
-   "uses": [
-    "sk-def-pe-wlocal",
-    "lem-weil-pbc-extremally-disconnected-component-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
-   }
-  },
-  {
-   "text": "Use [lem-zl-affine-component-site-projection] for $T=U,V$ to define $\\pi_U,\\pi_V$. For a profinite map $E\\to S$, the base change of $U_E$ along $g:V\\to U$ is $V_{E\\times_S S_\\eta}$: both have locally ringed space $|V|\\times_S E$ and the inverse-image structure sheaf from $V$. The identifications respect maps in $E$, since both send $(v,e)$ to $(v,a(e))$. Consequently the two functors on site test objects around the square are naturally isomorphic. Their induced geometric morphisms give the claimed commutative square (commutative up to this specified canonical isomorphism). This is a routine associativity identity for the component-pullback construction, not an assertion that $g$ is surjective on points.",
-   "uses": [
-    "lem-zl-affine-component-site-projection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
-   }
-  },
-  {
-   "text": "By [det-pe-condensed-point-basis] and [lem-weil-pbc-locally-constant-prime-spectrum], the affine ind-etale $\\Omega$-scheme $V$ is $\\Omega[S_\\eta]=\\operatorname{Spec}LC(S_\\eta,\\Omega)$, with its component quotient identified with $S_\\eta$. Apply [lem-weil-pbc-ind-etale-basis] over the affine $V$. Every basis object $W\\to V$ is also affine ind-etale over $\\Omega$ by composition in [lem-weil-pbc-ind-etale-stability], so it is $\\Omega[E]$ for a profinite $E$. Its map to $V$ corresponds uniquely to a continuous map $E\\to S_\\eta$. Conversely any such map gives an ind-etale map $\\Omega[E]\\to\\Omega[S_\\eta]$ by the assertion about maps between ind-etale algebras in [lem-weil-pbc-ind-etale-stability]. Thus this basis is equivalent to profinite sets over $S_\\eta$. Its finite covering families correspond precisely to jointly surjective families: the spectra are the profinite sets by the prime-spectrum homeomorphism, the arrows are weakly etale, and for affine sources finite joint surjectivity is exactly the fpqc covering condition of [def-weil-pbc-proetale-site]. Every covering of a basis object refines to such a finite basis covering. By [lem-weil-pbc-site-equivalence-is-morphism-of-sites] the basis equivalence gives an equivalence on sheaves; the basis restriction statement then gives an equivalence with sheaves on all of $V_{\\mathrm{proet}}$.",
-   "uses": [
-    "det-pe-condensed-point-basis",
-    "lem-weil-pbc-locally-constant-prime-spectrum",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
-   }
-  },
-  {
-   "text": "On $W=\\Omega[E]$ in this basis, the inverse image of [lem-zl-affine-component-site-projection] takes $F$ to $F(E\\to S_\\eta)$, including its restriction maps. This is exactly the equivalence of Step 5, so that equivalence is $\\pi_V^{-1}$ itself. For the structure morphism $V\\to\\operatorname{Spec}\\Omega$, its site base-change functor is that of [def-weil-proetale-inverse-image]. It takes the absolute test object $\\Omega[E]$ to $V\\times_\\Omega\\Omega[E]=\\Omega[S_\\eta\\times E]$, as a $V$-object. Under [lem-weil-pbc-geometric-field-proetale-evaluation] and Step 5 this is exactly $E\\mapsto(S_\\eta\\times E\\to S_\\eta)$, the base-change functor for $S_\\eta\\to *$. Thus the corresponding geometric morphisms agree. For $U$, the same identity of component-pullback constructions as in Step 4 gives $p_U=q_S\\pi_U$, where $q_S:S_{\\mathrm{proet}}\\to *_{\\mathrm{proet}}$ is the structure morphism: pulling back a profinite test set $E$ gives $|U|\\times E$ in both constructions [sk-def-sfb-pullback-from-point]. Therefore the coefficient rings of [sk-def-sfb-pulled-back-coefficients] satisfy $\\pi_U^{-1}\\Lambda_S=\\Lambda_U$ and $\\pi_V^{-1}\\Lambda_{S_\\eta}=\\Lambda_V$, naturally for every commutative condensed ring.",
-   "uses": [
-    "lem-zl-affine-component-site-projection",
+    "lem-zl-generic-component-site-comparison",
+    "def-weil-proetale-inverse-image",
     "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "sk-def-sfb-pullback-from-point",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-proetale-inverse-image"
+    "sk-def-sfb-pullback-from-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
    }
   },
   {
-   "text": "Apply the sheaf equivalence and its inverse to an abelian group, a ring, and a module action and their defining equations. As equivalences preserve finite products, this gives inverse additive equivalences on module sheaves for the identified coefficient rings. These are exact by [lem-weil-pbc-equivalence-injective-resolutions](2). Apply the two functors termwise to arbitrary complexes. Exactness identifies their cohomology with the images of the original cohomology; they preserve quasi-isomorphisms, and the termwise unit and counit descend to inverse isomorphisms after localization. This proves the unbounded derived equivalence. Constant discrete sheaves are preserved since inverse image commutes with the constant-sheaf functor (both composites are inverse images from sets); this also holds termwise for the constant realization in [def-sfb-site-derived-constant-module-functor]. The tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] consequently sends $\\Lambda_{S_\\eta}\\otimes^L_{\\underline R}\\underline P$ to $\\Lambda_V\\otimes^L_{\\underline R}\\underline P$, for $R=\\Gamma(*,\\Lambda)$ and any $P\\in D(R)$. The action map $\\underline R\\to\\Lambda$ is preserved because a scalar $a$ is sent to its same constant section. Thus these are the asserted corresponding scalar extensions.",
+   "text": "Construct ring-valued presentations of Λ and its two canonical coefficient rings by [lem-zl-internal-ring-sheaf-presentation]. Apply [lem-zl-generic-component-coefficient-comparison] to these presentations and to the set equivalence from Step 2. This gives the actual ring inverse images, coefficient comparisons, terminal ring comparison, additive module equivalence and ordinary constant-ring scalar square.",
    "uses": [
-    "lem-weil-pbc-equivalence-injective-resolutions",
-    "def-sfb-site-derived-constant-module-functor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-zl-generic-component-coefficient-comparison",
+    "lem-zl-internal-ring-sheaf-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "The normalized terminal evaluation and module adjunction prove ordinary discrete-ring scalar compatibility. Combine it with the constant-ring compatibility from the coefficient data, then apply the proved unbounded derived scalar transport theorem. This constructs ED with the Q-factorization and both scalar-extension clauses for every pair of independent derived-category instances. No derived tensor-pullback comparison is used.",
+   "uses": [
+    "lem-zl-generic-component-derived-scalar-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-pe-spectral-components-profinite",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-sc-flat-going-down",
-  "lem-weil-pbc-fibre-product-points",
-  "sk-def-pe-wlocal",
-  "lem-weil-pbc-extremally-disconnected-component-section",
-  "lem-zl-affine-component-site-projection",
-  "det-pe-condensed-point-basis",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-zl-generic-fiber-component-section",
+  "lem-zl-generic-component-site-comparison",
+  "def-weil-proetale-inverse-image",
   "lem-weil-pbc-geometric-field-proetale-evaluation",
   "sk-def-sfb-pullback-from-point",
-  "sk-def-sfb-pulled-back-coefficients",
-  "lem-weil-pbc-equivalence-injective-resolutions",
-  "def-sfb-site-derived-constant-module-functor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-proetale-inverse-image"
+  "lem-zl-generic-component-coefficient-comparison",
+  "lem-zl-internal-ring-sheaf-presentation",
+  "lem-zl-generic-component-derived-scalar-transport"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Proof of Theorem 4.13, irreducible case and diagram (4.4)"
+  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph",
+  "note": "V1 formalizes the topological and derived portions, reducing the two remaining geometric/ordinary-coefficient portions to their separate named source results."
  },
  "mathlib_searches": [
   {
@@ -322,9 +260,7 @@
   "lem-weil-pbc-locally-constant-prime-spectrum",
   "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "lem-weil-pbc-equivalence-injective-resolutions",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -347,20 +283,24 @@
   "declaration": "AlgebraicGeometry.Scheme.ProEt.generic_fiber_components_section",
   "statement": "theorem generic_fiber_components_section (X : Scheme.{u}) [IsAffine X] [Nonempty X] [IrreducibleSpace X] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (η : AlgebraicGeometry.Scheme.Spec.obj (Opposite.op (CommRingCat.of Ω)) ⟶ X) (hη : ∀ x : (AlgebraicGeometry.Scheme.Spec.obj (Opposite.op (CommRingCat.of Ω))), η x = genericPoint X) (U : X.ProEt) [IsAffine U.left] (hind : RingHom.IndEtaleAcrossUniverses U.hom.appTop.hom) (hw : IsWContractibleRing Γ(U.left, ⊤)) : letI : IsAffineHom (show U.left ⟶ X from U.hom) := isAffineHom_of_isAffine (show U.left ⟶ X from U.hom) letI : IsAffineHom η := isAffineHom_of_isAffine η letI : IsAffine (pullback U.hom η) := instIsAffinePullbackSchemeOfIsAffineHom_1 (show U.left ⟶ X from U.hom) η let V : Scheme := pullback U.hom η let S : Profinite.{u} := Scheme.ProEt.componentProfinite U.left let Sη : Profinite.{u} := Scheme.ProEt.componentProfinite V let r : C(Sη, S) := ⟨(pullback.fst U.hom η).continuous.connectedComponentsMap, (pullback.fst U.hom η).continuous.connectedComponentsMap_continuous⟩ (∃ s : C(S, Sη), Function.LeftInverse r s) ∧ (∃ (ρ : GeometricMorphism (Sheaf ((coherentTopology Profinite.{u}).over Sη) (Type (u + 1))) (Sheaf ((coherentTopology Profinite.{u}).over S) (Type (u + 1)))) (g : GeometricMorphism (Sheaf (Scheme.ProEt.topology V) (Type (u + 1))) (Sheaf (Scheme.ProEt.topology U.left) (Type (u + 1)))), ρ.inverse = (coherentTopology Profinite.{u}).overMapPullback (Type (u + 1)) (ConcreteCategory.ofHom r : Sη ⟶ S) ∧ Nonempty (ρ.direct ≅ (Over.pullback (ConcreteCategory.ofHom r : Sη ⟶ S)).sheafPushforwardContinuous (Type (u + 1)) ((coherentTopology Profinite.{u}).over S) ((coherentTopology Profinite.{u}).over Sη)) ∧ g.inverse = Scheme.proEtaleSheafInverseImage (pullback.fst U.hom η) (Type (u + 1)) ∧ (genericComponentProjection V).inverse.IsEquivalence ∧ Nonempty (ρ.inverse ⋙ (genericComponentProjection V).inverse ≅ (genericComponentProjection U.left).inverse ⋙ g.inverse)) ∧ (∃ pΩ : GeometricMorphism (Sheaf (topology (AlgebraicGeometry.Scheme.Spec.obj (op (CommRingCat.of Ω)))) (Type (u + 1))) (Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))), Nonempty (pΩ.direct ⋙ sheafToPresheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ≅ sheafToPresheaf (topology (AlgebraicGeometry.Scheme.Spec.obj (op (CommRingCat.of Ω)))) (Type (u + 1)) ⋙ (Functor.whiskeringLeft _ _ (Type (u + 1))).obj (AlgebraicGeometry.ProEtale.profiniteToProEtOf (AlgebraicGeometry.Scheme.Spec.obj (op (CommRingCat.of Ω)))).op) ∧ Nonempty ((coherentTopology Profinite.{u}).overPullback (Type (u + 1)) Sη ⋙ (genericComponentProjection V).inverse ≅ pΩ.inverse ⋙ Scheme.proEtaleSheafInverseImage (pullback.snd U.hom η) (Type (u + 1)))) ∧ (∀ Λ : Profinite.CondensedRing.{u}, ∃ (A : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) (AU : Sheaf (topology U.left) RingCat.{u + 1}) (AV : Sheaf (topology V) RingCat.{u + 1}), Nonempty (Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj A) ≅ Λ) ∧ Nonempty (Mon.mk ((sheafCompose (topology U.left) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj AU) ≅ AlgebraicGeometry.ProEtale.coefficientRing U.left Λ) ∧ Nonempty (Mon.mk ((sheafCompose (topology V) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj AV) ≅ AlgebraicGeometry.ProEtale.coefficientRing V Λ) ∧ ∃ (LU : Sheaf ((coherentTopology Profinite.{u}).over S) RingCat.{u + 1} ⥤ Sheaf (topology U.left) RingCat.{u + 1}) (LV : Sheaf ((coherentTopology Profinite.{u}).over Sη) RingCat.{u + 1} ⥤ Sheaf (topology V) RingCat.{u + 1}) (adjU : LU ⊣ genericComponentRingPush U.left) (adjV : LV ⊣ genericComponentRingPush V) (iU : LU.obj (A.over S) ≅ AU) (iV : LV.obj (A.over Sη) ≅ AV) (γ : A.over Sη ⟶ (genericComponentRingPush V).obj AV), γ = adjV.unit.app (A.over Sη) ≫ (genericComponentRingPush V).map iV.hom ∧ Nonempty (LU ⋙ sheafCompose (topology U.left) (CategoryTheory.forget RingCat.{u + 1}) ≅ sheafCompose ((coherentTopology Profinite.{u}).over S) (CategoryTheory.forget RingCat.{u + 1}) ⋙ (genericComponentProjection U.left).inverse) ∧ Nonempty (LV ⋙ sheafCompose (topology V) (CategoryTheory.forget RingCat.{u + 1}) ≅ sheafCompose ((coherentTopology Profinite.{u}).over Sη) (CategoryTheory.forget RingCat.{u + 1}) ⋙ (genericComponentProjection V).inverse) ∧ ∃ (t : (genericComponentFunctor V).obj (Over.mk (𝟙 Sη)) ≅ ProEt.mk (𝟙 V)) (eΓ : (A.over Sη).obj.obj (op (Over.mk (𝟙 Sη))) ≅ AV.obj.obj (op (ProEt.mk (𝟙 V)))), eΓ.hom = γ.hom.app (op (Over.mk (𝟙 Sη))) ≫ AV.obj.map t.inv.op ∧ ∃ eM : ringedSiteModules.{u + 1} (A.over Sη) ≌ ringedSiteModules.{u + 1} AV, Nonempty (eM.functor ⊣ SheafOfModules.pushforward γ) ∧ ∃ (_ : eM.functor.Additive), ∀ [HasDerivedCategory.{wS} (ringedSiteModules.{u + 1} (A.over Sη))] [HasDerivedCategory.{wV} (ringedSiteModules.{u + 1} AV)], ∃ eD : DerivedCategory (ringedSiteModules.{u + 1} (A.over Sη)) ≌ DerivedCategory (ringedSiteModules.{u + 1} AV), Nonempty (DerivedCategory.Q ⋙ eD.functor ≅ eM.functor.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ GenericComponentScalarCompatibility.{u, wR, wS, wV, wCJ, wCK} (A.over Sη) AV (Over.mk (𝟙 Sη)) (ProEt.mk (𝟙 V)) eΓ eD)",
   "branch": "newtargets-dag",
-  "by": "N1",
-  "date": "2026-10-18",
+  "by": "V1",
+  "date": "2026-10-21",
   "existing": false,
   "file": "lean/Sheaf/AlgebraicGeometry/GenericFiberComponentsSection.lean",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ProEt.genericComponentFunctor",
-   "AlgebraicGeometry.Scheme.ProEt.genericComponentCoordinates",
-   "AlgebraicGeometry.Scheme.ProEt.genericComponentContinuous",
-   "AlgebraicGeometry.Scheme.ProEt.genericComponentProjection",
-   "AlgebraicGeometry.Scheme.ProEt.genericComponentRingPush",
-   "AlgebraicGeometry.Scheme.ProEt.GenericComponentScalarCompatibility",
    "AlgebraicGeometry.Scheme.ProEt.generic_fiber_components_section"
   ],
   "fixed_by": "NT-stage2-cc-1ce632561"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
 }

@@ -1,0 +1,116 @@
+{
+ "id": "lem-zl-module-terminal-scalar-comparison",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Normalized module evaluation compares scalar-extension adjoints",
+ "statement": "Let F:C→D be a continuous functor between sites J,K, let A,B be ring sheaves [def-weil-sheaf-of-modules-category], and φ:A→F_*B their structural map. Suppose t:F(c)≅d, e:A(c)≅B(d), and e is exactly φ_c followed by restriction along t inverse. Suppose E:Mod(A)→Mod(B) is left adjoint to module pushforward along φ. For any ring R and map a:R→A(c), let FS and FV be any left adjoints to evaluation at c and d followed by scalar restriction along a and e∘a respectively. Then FS⋙E≅FV. Terminality of c,d is not needed for this abstract statement.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project, sites-modules.tex",
+  "place": "Tags 03D1--03D3; sectionwise module pushforward, and HRS following diagram (4.4)"
+ },
+ "proof": [
+  {
+   "text": "For each B-module M, the map M(t inverse) identifies evaluation of φ-pushforward at c with evaluation at d. Its semilinearity and the normalization of e show it is R-linear. The inverse map is M(t). Their inverse equations are the presheaf functor equations, and naturality follows from naturality of module morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "These evaluation maps give an isomorphism of the composite right adjoint pushforward⋙evaluation_c⋙restrict_a with evaluation_d⋙restrict_(e∘a). Compose the FS adjunction with the E adjunction, transport its right side across this isomorphism, and apply Adjunction.leftAdjointUniq against the FV adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, sites-modules.tex",
+  "place": "Tags 03D1--03D3; sectionwise module pushforward, and HRS following diagram (4.4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of terminal objects under a continuous functor of ringed sites identifies extension of scalars left adjoints using the induced isomorphism on global rings.",
+   "results": "ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal.",
+   "verdict": "No match for the normalized evaluation comparison. Use the sectionwise semilinear maps and uniqueness of adjoints.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous site functor preserving a terminal object and a normalized ring map identifies left adjoints to scalar-restricted module evaluation",
+   "results": "ModuleCat.instIsLeftAdjointRestrictScalars; SheafOfModules.PullbackConstruction.adjunction; CondensedMod.LocallyConstant.adjunction; ModuleCat.instIsRightAdjointRestrictScalars.",
+   "verdict": "No full comparison theorem. The proof can be written from the underlying module-presheaf maps.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.*[Rr]ing|[Rr]ing.*[Ee]quivalence|pushforwardPushforwardEquivalence",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388.",
+   "verdict": "This requires an equivalence of the entire underlying site categories and specified inverse ring maps. The component functor is only a sheaf equivalence, so it does not directly apply.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiberComponentsSection",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof of Theorem 4.13, irreducible case, diagram (4.4)",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModuleTerminalScalarComparison",
+  "file": "lean/Sheaf/CategoryTheory/ModuleTerminalScalarComparison.lean",
+  "declaration": "CategoryTheory.module_terminal_scalar_comparison",
+  "statement": "theorem module_terminal_scalar_comparison\n    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (F : C ⥤ D) [F.IsContinuous J K]\n    (A : Sheaf J RingCat.{u}) (B : Sheaf K RingCat.{u})\n    (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj B)\n    (c : C) (d : D) (t : F.obj c ≅ d)\n    (e : A.obj.obj (op c) ≅ B.obj.obj (op d))\n    (he : e.hom = φ.hom.app (op c) ≫ B.obj.map t.inv.op)\n    (E : SheafOfModules.{v} A ⥤ SheafOfModules.{v} B)\n    (adj : E ⊣ SheafOfModules.pushforward φ)\n    (R : Type u) [Ring R] (a : R →+* A.obj.obj (op c))\n    (FS : ModuleCat.{v} R ⥤ SheafOfModules.{v} A)\n    (FV : ModuleCat.{v} R ⥤ SheafOfModules.{v} B)\n    (aS : FS ⊣ SheafOfModules.evaluation A (op c) ⋙ ModuleCat.restrictScalars a)\n    (aV : FV ⊣ SheafOfModules.evaluation B (op d) ⋙\n      ModuleCat.restrictScalars (e.hom.hom.comp a)) :\n    Nonempty (FS ⋙ E ≅ FV)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
+}

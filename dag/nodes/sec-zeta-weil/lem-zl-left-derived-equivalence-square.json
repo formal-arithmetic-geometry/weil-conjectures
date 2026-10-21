@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-left-derived-equivalence-square",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Left derived squares under exact equivalences",
+ "statement": "Let B,B′,H,H′ be abelian categories with independently chosen unbounded derived categories [def-weil-abstract-derived-category]. Let E:B≌B′ and G:H≌H′ be additive equivalences. Let L:B→H and L′:B′→H′ be additive functors with an isomorphism L⋙G≅E⋙L′. For any left derived functors LF,LF′ specified by universal localization counits on their homotopy categories, there is a natural isomorphism LF⋙D(G)≅D(E)⋙LF′. No right-derived functor or boundedness assumption is required.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project, derived.tex",
+  "place": "Tags 05RR and 0941; uniqueness of derived functors; exact-equivalence specialization"
+ },
+ "proof": [
+  {
+   "text": "An additive equivalence of abelian categories is exact and induces an equivalence of cochain-complex categories and derived categories, with the Q-factorization isomorphism. Use the existing exact-functor localization API.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "Regard each left-derived counit as a universal right Kan-extension counit. Precomposing by the quotient from cochain complexes to the homotopy category preserves universality because precomposition with this quotient is fully faithful. The quotientCompQh isomorphism changes its source to Q. This is exactly the public derivedCochainCounit construction.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "Precomposition and postcomposition by an equivalence induce equivalences of right-extension categories, so preserve their terminal objects. The ordinary square, mapped termwise, and the Q-factorization give two universal right extensions of isomorphic functors along isomorphic localization squares. RightKanExtensionUniqueOfIso gives the desired derived square. This argument does not identify any derived-category universes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-derived-exact-equivalence-squares"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, derived.tex",
+  "place": "Tags 05RR and 0941; uniqueness of derived functors; exact-equivalence specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence transports the square of additive functors to a square of their unbounded left derived functors.",
+   "results": "Functor.leftDerivedNatIso; Abelian.LeftResolution.transport; Functor.mapDerivedCategory.congr_simp; bounded/projective-resolution comparison lemmas.",
+   "verdict": "No match for an arbitrary unbounded left-derived square under independent exact equivalences.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence transports left derived functors and their natural comparison square by uniqueness of right Kan extensions",
+   "results": "Functor.leftDerivedUnique; isLeftDerivedFunctor_iff_of_iso; leftDerivedNatIso; leftDerived_fac; isLeftDerivedFunctor_of_inverts.",
+   "verdict": "The uniqueness lemmas are used after transporting the universal Kan-extension property; none is the full square.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "LeftDerived.*[Ee]quivalence|[Ee]quivalence.*LeftDerived",
+   "results": "0 Mathlib hits. The project has ExactEquivalenceDerivedSquares, but its public result includes additional right-derived data and its left-square helper is private.",
+   "verdict": "Prove the left-only generalization, reusing the existing public cochain comparisons.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiberComponentsSection",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof of Theorem 4.13, irreducible case, diagram (4.4)",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LeftDerivedEquivalenceSquare",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedEquivalenceSquare.lean",
+  "declaration": "CategoryTheory.LeftDerivedEquivalenceSquare.comparison",
+  "statement": "theorem comparison\n    {B B' H H' : Type*} [Category* B] [Category* B']\n    [Category* H] [Category* H'] [Abelian B] [Abelian B']\n    [Abelian H] [Abelian H'] [HasDerivedCategory B] [HasDerivedCategory B']\n    [HasDerivedCategory H] [HasDerivedCategory H']\n    (E : B ≌ B') (G : H ≌ H') [E.functor.Additive] [G.functor.Additive]\n    (L : B ⥤ H) (L' : B' ⥤ H') [L.Additive] [L'.Additive]\n    (LF : DerivedCategory B ⥤ DerivedCategory H)\n    (LF' : DerivedCategory B' ⥤ DerivedCategory H')\n    (ε : DerivedCategory.Qh ⋙ LF ⟶\n      L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε' : DerivedCategory.Qh ⋙ LF' ⟶\n      L'.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    [LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso B (.up ℤ))]\n    [LF'.IsLeftDerivedFunctor ε' (HomotopyCategory.quasiIso B' (.up ℤ))]\n    (e : L ⋙ G.functor ≅ E.functor ⋙ L') :\n    Nonempty (LF ⋙ G.mapDerivedCategory.functor ≅\n      E.mapDerivedCategory.functor ⋙ LF')",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
+}

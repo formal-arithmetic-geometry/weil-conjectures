@@ -1,0 +1,122 @@
+{
+ "id": "lem-zl-internal-ring-sheaf-presentation",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Internal abelian ring sheaves have ring-valued presentations",
+ "statement": "Let C be a category with topology J, whose object and morphism universes are bounded by the coefficient universe, with abelian sheafification and its monoidal localization [def-weil-sheaf-of-modules-category]. For every monoid R in abelian J-sheaves there is a J-sheaf A of rings and an isomorphism Mon.mk(forget_Ring_to_Ab A)≅R. No commutativity of R is assumed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project, sites-modules.tex",
+  "place": "Tag 00YV, sheaves of rings and modules; sectionwise algebraic structures"
+ },
+ "proof": [
+  {
+   "text": "For a monoid in abelian groups, define multiplication by its tensor multiplication on pure tensors and the unit by its unit evaluated on 1. The ring axioms follow from the monoid and bilinearity axioms. Applying the ring-to-monoid construction recovers the original monoid: multiplication is checked on pure tensors; the integer unit is checked using additivity and integer multiples of 1. This gives a natural recovery isomorphism. The sectionwise ring construction is already implemented in InternalAbelianSheafModule.monToRing.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, sites-modules.tex",
+    "place": "Tag 00YV, sheaves of rings and modules; sectionwise algebraic structures"
+   }
+  },
+  {
+   "text": "Apply the recovery construction to the monoid presheaf underlying R. Its abelian presheaf is definitionally the original sheaf, so forgetting along RingCat→Ab detects its sheaf condition. Form the ring-valued sheaf A. Use the equivalence between monoids in a functor category and functors to monoids to lift the sectionwise recovery isomorphism. Sheafify it monoidally; the monoidal sheafification counit gives the final isomorphism to R. This also works for the zero ring and the empty site.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, sites-modules.tex",
+    "place": "Tag 00YV, sheaves of rings and modules; sectionwise algebraic structures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, sites-modules.tex",
+  "place": "Tag 00YV, sheaves of rings and modules; sectionwise algebraic structures"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoid object in abelian sheaves has a presentation as a sheaf of rings without assuming commutativity",
+   "results": "SheafOfModules.Presentation, SheafOfModules, SheafOfModules.unit, SheafOfModules.free and module-category abelian instances.",
+   "verdict": "No match for reconstructing the coefficient ring sheaf. Use the existing sectionwise monToRing construction and the monoidal sheafification counit.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of rings is equivalent to monoid object of abelian sheaves",
+   "results": "Scheme.ringCatSheaf; sheafIsAbelian; LocallyRingedSpace.𝒪; SheafOfModules.Presentation; Sheaf.instIsGrothendieckAbelian.",
+   "verdict": "No full presentation result. The existing project API supplies the necessary ring object reconstruction.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "Mon.*Ab.*RingCat|RingCat.*Mon.*Ab",
+   "results": "0 Mathlib hits. Local source search finds RingCat.toMonAb, InternalAbelianSheafModule.monToRing and presheafRings.",
+   "verdict": "No existing theorem with this sheaf-presentation conclusion.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiberComponentsSection",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof of Theorem 4.13, irreducible case, diagram (4.4)",
+   "via": [
+    "lem-zl-generic-fiber-components-section",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalRingSheafPresentation",
+  "file": "lean/Sheaf/CategoryTheory/InternalRingSheafPresentation.lean",
+  "declaration": "CategoryTheory.internal_ring_sheaf_presentation",
+  "statement": "theorem internal_ring_sheaf_presentation\n    {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)\n    [UnivLE.{max v w, u}] [HasSheafify J Ab.{u}]\n    [(J.W (A := Ab.{u})).IsMonoidal]\n    (R : Mon (Sheaf J Ab.{u})) :\n    ∃ A : Sheaf J RingCat.{u},\n      Nonempty (Mon.mk ((sheafCompose J (forget₂ RingCat.{u} Ab.{u})).obj A) ≅ R)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d5c2c",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261021T061721-L-1819126",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+ }
+}
