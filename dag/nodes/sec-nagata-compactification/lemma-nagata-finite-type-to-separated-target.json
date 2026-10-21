@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lemma-nagata-finite-type-to-separated-target",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite type over a separated target",
- "statement": "In a commutative triangle $T\\to Y\\to B$, if $T\\to B$ is of finite\ntype and $Y\\to B$ is separated, then $T\\to Y$ is of finite type.",
+ "statement": "Let $T,Y,B$ be schemes [def-pc-scheme], and let $f:T\\to Y$ and $p:Y\\to B$ be morphisms, so that $T\\to B$ is the composite $p\\circ f$. Then:\n\n(a) If $p\\circ f$ is locally of finite type [def-weil-finite-type-morphism], then $f$ is locally of finite type.\n\n(b) If $p\\circ f$ is of finite type [def-weil-finite-type-morphism] and $p$ is separated [def-weil-proper-morphism], then $f$ is of finite type; in particular, $f$ is quasi-compact.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-finite-type-to-separated-target.md",
   "place": "order 86, statement: clause (a); clause (b) retains the finite-type conclusion of master order 78, as required by the 2026-10-21 return",
@@ -26,24 +26,17 @@
    }
   ]
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Factor $T\\to Y$ as its graph\n\n$$\nT\\longrightarrow T\\times_BY\\longrightarrow Y.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The graph is a closed immersion because $Y\\to B$ is separated, hence is\nof finite type. The second map is the base change of the finite-type\nmorphism $T\\to B$. Their composite is therefore of finite type.",
-   "uses": [],
-   "elementary": null
-  }
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
  ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-finite-type-to-separated-target.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01T8, lemma-permanence-finite-type, for (a) and the local-finite-type part of (b); schemes.tex Tag 03GI, lemma-quasi-compact-permanence, and Tag 01KK, definition-separated and following paragraph, for the quasi-compact part of (b). Finite type is the conjunction of local finite type and quasi-compactness."
  },
  "mathlib_searches": [
   {
@@ -53,10 +46,70 @@
     "Mathlib.AlgebraicGeometry.Morphisms.FiniteType:72 (theorem)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_of_comp|LocallyOfFiniteType.*comp",
+   "results": "FiniteType.lean:72 theorem locallyOfFiniteType_of_comp; :68 locallyOfFiniteType_comp; QuasiFinite.lean:326 and LocalFlatDescent.lean:35 are unrelated hits. Read FiniteType.lean:39-74.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes is locally of finite type if its composite with another morphism is locally of finite type",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74: AlgebraicGeometry.locallyOfFiniteType_of_comp; other hits: AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.locallyOfFiniteType_of_comp",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74: AlgebraicGeometry.locallyOfFiniteType_of_comp; other hits: ",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms f and g, if the composite f followed by g is locally of finite type then f is locally of finite type",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74: AlgebraicGeometry.locallyOfFiniteType_of_comp; other hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms f and g, if g is separated and the composite f followed by g is of finite type, then f is locally of finite type and quasi-compact",
+   "results": "Eight hits, including AlgebraicGeometry.locallyOfFiniteType_of_comp (Morphisms/FiniteType) and AlgebraicGeometry.QuasiCompact.of_comp (Morphisms/QuasiSeparated), together supplying (b). Other hits: IsFinite.of_comp, IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsProper.of_comp, IsProper.of_comp_of_isSeparated, instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, LocallyQuasiFinite.of_comp. Read FiniteType.lean:72-74, QuasiSeparated.lean:250-252 and Separated.lean:68.",
+   "date": "2026-10-21",
+   "verdict": "match: conjunction, with the separated-to-quasi-separated instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact.of_comp",
+   "results": "One hit: AlgebraicGeometry.QuasiCompact.of_comp, Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated; QuasiCompact (f ≫ g) and QuasiSeparated g imply QuasiCompact f. Read lines 250-252.",
+   "date": "2026-10-21",
+   "verdict": "match: quasi-compact component of (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCompact.of_comp|IsSeparated f.*QuasiSeparated f|class.*FiniteType",
+   "results": "Six hits in AlgebraicGeometry/Morphisms: Separated.lean:68 IsSeparated f implies QuasiSeparated f; QuasiSeparated.lean:250 QuasiCompact.of_comp, :255 quasiCompact_of_compactSpace; FiniteType.lean:43 class LocallyOfFiniteType; Proper.lean:42 class IsProper; QuasiCompact.lean:147 docstring. Read the full cancellation declarations at FiniteType.lean:72-74 and QuasiSeparated.lean:250-252, the instance at Separated.lean:68, and the finite-type convention at FiniteType.lean:21.",
+   "date": "2026-10-21",
+   "verdict": "match: (b) uses the two components and inferred instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is quasi-compact if its composite is quasi-compact and the second morphism is quasi-separated",
+   "results": "Eight hits, first AlgebraicGeometry.QuasiCompact.of_comp (Morphisms.QuasiSeparated), with exactly QuasiCompact (f ≫ g), QuasiSeparated g and conclusion QuasiCompact f. Other hits: QuasiCompact, instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, quasiCompact_isStableUnderComposition, quasiCompact_of_compactSpace, quasiCompact_iff_compactSpace, QuasiCompact.mk, quasiCompact_comp.",
+   "date": "2026-10-21",
+   "verdict": "match: quasi-compact component of (b)"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.QuasiCompact.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "specializes in one line per component: (a) locallyOfFiniteType_of_comp at FiniteType.lean:72-74, with X=T, Y=Y, Z=B, f=f, g=p. (b) finite type means LocallyOfFiniteType and QuasiCompact, as stated at FiniteType.lean:21 and in def-weil-finite-type-morphism. Apply locallyOfFiniteType_of_comp (FiniteType.lean:72-74) to the first input component and QuasiCompact.of_comp (QuasiSeparated.lean:250-252) to the second. The latter needs QuasiSeparated p, inferred from the assumed IsSeparated p by the instance at Separated.lean:68. The output pair is finite type by definition; its second component is the final quasi-compactness conclusion. No assumption on T or Y beyond the stated scheme morphisms is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -97,5 +150,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-finite-type-to-separated-target",
+  "worker": "stage1",
+  "summary": "Repair of returned head ce93cf4790: retained main-20261015 local-finite-type cancellation as (a) and restored the original separated-target finite-type conclusion as (b), preserving all downstream finite-type/quasi-compact applications. The item is a conjunction Mathlib leaf via locallyOfFiniteType_of_comp (FiniteType.lean:72-74), QuasiCompact.of_comp (QuasiSeparated.lean:250-252) and the inferred IsSeparated-to-QuasiSeparated instance (Separated.lean:68). Added def-weil-proper-morphism to stmt_deps, retained all eight executed search records, and acknowledged the exact overlap of (a) with lem-weil-pbc-proper-fp-permanence clause (f). No new nodes. Maintenance commit f90645185726c348b217a22b1dd07c4c2d0ae468 corrected the maintainer-owned source on the live baseline; its source object now equals this sandbox source, so normal delivery preserves the required main-20261015/order-86 attribution and supplementary references. The retained mathematical repair and source correction were rechecked against current sources and callers before delivery.",
+  "blueprint": "Clause (a) realizes the complete main-20261015 statement (order 86) and its affine-generator proof, as recorded in blueprint_update. Clause (b) retains the full master order-78 statement and its graph argument outcome, explicitly required by the 2026-10-21 return to preserve existing citers. The quasi-compact component is Mathlib QuasiCompact.of_comp, i.e. Stacks 03GI. No chapter or unit changed. same_as is empty because no other imported blueprint node is equivalent to the full conjunction; the existing non-blueprint permanence node overlaps (a) only."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-3bd00fbdc",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-3bd00fbdc (reviewer sub-agent of L); spot-checked: This re-delivery answers the ce93cf47 RETURN with the suggested conjunction Mathlib leaf. It adds no new nodes. (a) is LFT cancellation, the main-20261015 order-86 text: Mathlib locallyOfFiniteType_of_comp (FiniteType.lean:72-74) and Stacks 01T8 (morphisms.tex:2794). (b) is the master order-78 statement: if p∘f is of finite type and p is separated, then f is of finite type and hence qc. It follows from the same theorem plus QuasiCompact.of_comp (QuasiSeparated.lean:250-252, Stacks 03GI at schemes.tex:4367), with QuasiSeparated p coming from the IsSeparated instance (Separated.lean:68, and 01KK plus the paragraph at schemes.tex:4081). Finite type = LFT ∧ qc (FiniteType.lean:21, def-weil-finite-type-morphism). def-weil-proper-morphism is now in stmt_deps, and source.document is main-20261015/order 86 with master and Stacks as external sources. Every caller step I read has a finite-type source and a separated target, so (b) restores its finite-type/qc use: fixed-square-cartesian s3, ordinary-kunneth s1, scalar-six-direct-image s4, trace-class-unconditional s2, affine-opens-projective s3, shriek-operator-fibres s1, specialization-comparison s6/s7. Edge cases checked: T empty, p=id, f=id, and the affine generator argument. The infinite disjoint union of Spec k fails the hypothesis of (b), so it is no counterexample. Advisory: (a) is the same as clause (f) of the existing lem-weil-pbc-proper-fp-permanence. Both nodes already exist and the delivery states the overlap, so it is not a fault. Advisory: the maintainer lean.declarations field lists only locallyOfFiniteType_of_comp. The item is not dropped, has no re-split note, and cites no SGA."
  }
 }

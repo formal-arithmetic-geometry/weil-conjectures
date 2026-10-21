@@ -21219,3 +21219,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/Q149/lem-per-rational-realization-pullback-comparison (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q37/det-picard-rr-duality (reviewer FIX; after a return; new nodes: 1)
 - 08:42 L: merged deliver/Q123/lem-trf-finite-ring-bundle-section-orientation (reviewer FIX; first push; new nodes: 0)
+- 08:42 L: merged deliver/Q88/lemma-nagata-finite-type-to-separated-target (reviewer PASS; after a return; new nodes: 0)
