@@ -19,11 +19,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.ExtensionByZero
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
-import Sheaf.SixFunctors.OpenClosedFlatness
+import all Sheaf.SixFunctors.OpenClosedFlatness
 import Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison
 import WeilConjectures.ConstructibleSheaf.Devissage
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
@@ -33,30 +32,24 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import WeilConjectures.ConstructibleSheaf.Monoidal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
-import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import Sheaf.AlgebraicGeometry.GeometricStalkToposPoint
-import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import all Sheaf.Paper.ConstructibleCoefficientSerre
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.ProEtaleFiniteModelStalks
+import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
+import Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk
+import Sheaf.Paper.ProEtaleLisseOrigin
+import all Sheaf.Paper.FiniteCtfTriangulated
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
+import all Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.SixFunctors.OpenClosed.Complex
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Ordered strata, sheaf filtrations, and thick generation over finite rings
@@ -79,7 +72,7 @@ set_option autoImplicit false
 
 universe u v w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
@@ -295,6 +288,26 @@ private theorem flatModel_etale_extension_properties
       ((Etale.lowerStar (ModuleCat.{u + 1} A) a.imageι).obj E)).2.2 E hE
   refine ⟨hG, (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr ?_⟩
   exact IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact a.imageι E
+
+private theorem flatModel_etale_extension_flat_constructible
+    {S X : Scheme.{u}} [IsNoetherian X]
+    (A : Type (u + 1)) [CommRing A] [Finite A] (a : S ⟶ X) (ha : IsImmersion a)
+    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) [IsConstructibleSheaf L]
+    (hf : ObjectProperty.flat L) :
+    ObjectProperty.flat ((flatModelEtaleExtension A a ha).obj L) ∧
+      IsConstructibleSheaf ((flatModelEtaleExtension A a ha).obj L) := by
+  let : IsImmersion a := ha
+  let : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+  let E := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) a.toImage).obj L
+  have hE : ObjectProperty.flat E :=
+    (openClosedFlatness_etale A a.toImage a.toImage.closedComplement
+      a.toImage.range_closedComplement E).2.1 L hf
+  have : IsConstructibleSheaf E :=
+    IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact a.toImage L
+  exact ⟨(openClosedFlatness_etale A (openComplementOfIsClosedImmersion a.imageι).ι a.imageι
+      (by simp [openComplementOfIsClosedImmersion])
+      ((Etale.lowerStar (ModuleCat.{u + 1} A) a.imageι).obj E)).2.2 E hE,
+    IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact a.imageι E⟩
 
 private theorem flatModel_etale_ctf_iff
     (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -579,6 +592,474 @@ theorem etale_flatConstructible_orderedStratification
   have : Module.FinitePresentation A M := Module.finitePresentation_of_finite A M
   exact ⟨inferInstance, Module.Flat.projective_of_finitePresentation⟩
 
+private noncomputable def flatModel_realize_restrict_iso
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A)) :
+    (sfIntrinsicModuleEquivalence X A).functor.obj
+      ((proEtaleModuleRestriction X A).obj F) ≅ F :=
+  asIso ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (ProEtale.finiteCoefficientIntrinsicScalarMap X A)).counit.app F)
+
+private theorem flatModel_fixed_flat
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A))
+    (hF : SheafOfModules.IsFlatOnSite (J := ProEt.topology X)
+      (R := proEtaleConstantRing X A) F) :
+    ObjectProperty.flat ((proEtaleModuleRestriction X A).obj F) := by
+  exact (intrinsic_flat_iff X A _).mpr
+    (site_flat_of_iso A (flatModel_realize_restrict_iso X A F) hF)
+
+private noncomputable def flatModel_stalk_iso
+    {X : Scheme.{u}} (A : Type u) [CommRing A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A))
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
+    proEtaleGeometricFixedModuleStalk x (ULift.{u + 1, u} A)
+      ((proEtaleModuleRestriction X A).obj F) ≅
+      (finiteCoefficientModuleStalkFunctor x A).obj F := by
+  let D := proEtaleGeometricStalkDiagram x ((proEtaleModuleRestriction X A).obj F)
+  let c : Cocone D :=
+    { pt := (finiteCoefficientModuleStalkFunctor x A).obj F
+      ι :=
+        { app N := ModuleCat.ofHom (X := D.obj N)
+            (Y := (finiteCoefficientModuleStalkFunctor x A).obj F)
+            { toFun := proEtaleCoefficientModuleGerm x A F N.unop
+              map_add' := map_add (colimit.ι
+                ((proEtaleGeometricNeighbourhoodForget x).op ⋙ F.val.presheaf) N).hom
+              map_smul' := fun r a ↦ coefficientGerm_smul x A F N.unop r a }
+          naturality N M f := by
+            ext a
+            exact ConcreteCategory.congr_hom
+              (colimit.w ((proEtaleGeometricNeighbourhoodForget x).op ⋙ F.val.presheaf) f) a } }
+  have hc : IsColimit ((forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+      AddCommGrpCat.{u + 1}).mapCocone c) :=
+    colimit.isColimit ((proEtaleGeometricNeighbourhoodForget x).op ⋙ F.val.presheaf)
+  have hc' : IsColimit c := isColimitOfReflects
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) AddCommGrpCat.{u + 1}) hc
+  exact colimit.isoColimitCocone ⟨c, hc'⟩
+
+private theorem flatModel_comparison_reflects_flat
+    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))
+    (hG : ObjectProperty.flat
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).obj G)) :
+    ObjectProperty.flat G := by
+  let N := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft (N.obj G)) := hG.1.1
+  have : PreservesFiniteLimits (N ⋙ MonoidalCategory.tensorLeft (N.obj G)) :=
+    comp_preservesFiniteLimits _ _
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft G ⋙ N) :=
+    preservesFiniteLimits_of_natIso (Functor.Monoidal.commTensorLeft N G)
+  exact (ObjectProperty.flat_iff_preservesFiniteLimits G).mpr
+    (preservesFiniteLimits_of_reflects_of_preserves _ N)
+
+private noncomputable def flatModel_comparison_extension_iso
+    {S X : Scheme.{u}} [IsNoetherian X]
+    (A : Type u) [CommRing A] [Finite A] (a : S ⟶ X) (ha : IsImmersion a)
+    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
+    (sfIntrinsicModuleEquivalence X A).functor.obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj
+          ((flatModelEtaleExtension (ULift.{u + 1, u} A) a ha).obj L)) ≅
+      (flatModelProEtaleExtension A a ha).obj
+        ((sfIntrinsicModuleEquivalence S A).functor.obj
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) S).obj
+            L)) := by
+  letI : IsImmersion a := ha
+  letI : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  let E := (sfIntrinsicModuleEquivalence X A).functor
+  let P := ProEtale.openImmersionLowerShriek B a.toImage ⋙ ProEtale.lowerStar B a.imageι
+  letI := ProEtale.isIso_lowerStarComparisonUpperStarBaseChange a.imageι B
+  exact E.mapIso
+      ((asIso (ProEtale.lowerStarComparisonUpperStarBaseChange a.imageι B)).app
+          ((Etale.openImmersionLowerShriek B a.toImage).obj L) ≪≫
+        (ProEtale.lowerStar B a.imageι).mapIso
+          ((ProEtale.openImmersionLowerShriekComparisonUpperStarIso B a.toImage).app L)) ≪≫
+    (P ⋙ E).mapIso ((sfIntrinsicModuleEquivalence S A).unitIso.app _)
+
+private theorem flatModel_filtration_map
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (T : C ⥤ D) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    {m : ℕ} {G : Fin m → C} {F : C} (h : FlatModelExtensionFiltration G F)
+    {G' : Fin m → D} {F' : D} (e : T.obj F ≅ F')
+    (eG : ∀ k, T.obj (G k) ≅ G' k) : FlatModelExtensionFiltration G' F' := by
+  obtain ⟨M, h0, ⟨eM⟩, hM⟩ := h
+  refine ⟨fun k ↦ T.obj (M k), T.map_isZero h0, ⟨T.mapIso eM ≪≫ e⟩, fun k ↦ ?_⟩
+  obtain ⟨f, g, hfg, hs⟩ := hM k
+  let S := (ShortComplex.mk f g hfg).map T
+  let g' := S.g ≫ (eG k).hom
+  have hfg' : S.f ≫ g' = 0 := by simp [g']
+  refine ⟨S.f, g', hfg', ?_⟩
+  exact ShortComplex.shortExact_of_iso (S₁ := S)
+    (ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (eG k) (by simp) (by simp [g']))
+    (hs.map_of_exact T)
+
+private theorem flatModel_intrinsic_constructible_of_iso
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {F G : proEtaleRingModules X (proEtaleConstantRing X A)} (e : F ≅ G)
+    (hF : IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) F) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) G := by
+  apply (CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) G).mpr
+  exact ProEtale.isConstructible_of_iso ((proEtaleModuleRestriction X A).mapIso e)
+    ((CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) F).mp hF)
+
+private theorem flatModel_realization_constructible
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
+    (hN : ProEtale.IsConstructible (ULift.{u + 1, u} A) N) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A)
+      ((sfIntrinsicModuleEquivalence X A).functor.obj N) := by
+  let E := (sfIntrinsicModuleEquivalence X A).functor
+  let q : (proEtaleModuleRestriction X A).obj (E.obj N) ≅ N :=
+    E.preimageIso (flatModel_realize_restrict_iso X A (E.obj N))
+  exact (CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mpr
+    (ProEtale.isConstructible_of_iso q.symm hN)
+
+private theorem flatModel_realization_constructible_iff
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A)
+        ((sfIntrinsicModuleEquivalence X A).functor.obj N) ↔
+      ProEtale.IsConstructible (ULift.{u + 1, u} A) N := by
+  refine ⟨fun h ↦ ?_, flatModel_realization_constructible X A N⟩
+  let E := (sfIntrinsicModuleEquivalence X A).functor
+  let q : (proEtaleModuleRestriction X A).obj (E.obj N) ≅ N :=
+    E.preimageIso (flatModel_realize_restrict_iso X A (E.obj N))
+  exact ProEtale.isConstructible_of_iso q
+    ((CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mp h)
+
+private theorem flatModel_intrinsic_zero_constructible
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A)) (hz : IsZero F) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) F := by
+  let _ : Zero (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) := HasZeroObject.zero' _
+  let N := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X
+  let Z : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) := 0
+  have hZ : IsConstructibleSheaf Z := IsConstructibleSheaf.of_isZero (isZero_zero _)
+  let R := proEtaleModuleRestriction X A
+  have : R.Additive := ⟨by intros; rfl⟩
+  exact (CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mpr
+    (ProEtale.isConstructible_of_iso
+      ((N.map_isZero (isZero_zero _)).isoZero ≪≫ (R.map_isZero hz).isoZero.symm)
+      (ProEtale.isConstructible_comparisonUpperStar_obj Z))
+
+private theorem flatModel_proEtale_lisse_projective
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A))
+    (hc : ProEtale.IsFiniteLocallyConstant (ULift.{u + 1, u} A)
+      ((proEtaleModuleRestriction X A).obj F))
+    (hf : ObjectProperty.flat ((proEtaleModuleRestriction X A).obj F)) :
+    FlatModelProEtaleLisseProjective X A F := by
+  have hl := (finiteLocal_iff X A F).mp hc
+  refine ⟨hl.1, fun Ω _ _ x ↦ ?_⟩
+  have : Finite ((finiteCoefficientModuleStalkFunctor x A).obj F) := hl.2 Ω x
+  have hM : ObjectProperty.flat ((finiteCoefficientModuleStalkFunctor x A).obj F) :=
+    ObjectProperty.prop_of_iso _
+      ((ProEtale.geometricStalkIsoFiber x (ULift.{u + 1, u} A) _).symm ≪≫
+        flatModel_stalk_iso A F x) ((ProEtale.geometricPoint x).flat_sheafFiber_obj hf)
+  have : Module.Flat (ULift.{u + 1, u} A)
+      ((finiteCoefficientModuleStalkFunctor x A).obj F) := (ModuleCat.flat_iff_flat _).mp hM
+  have : Module.FinitePresentation (ULift.{u + 1, u} A)
+      ((finiteCoefficientModuleStalkFunctor x A).obj F) :=
+    Module.finitePresentation_of_finite _ _
+  exact ⟨inferInstance, Module.Flat.projective_of_finitePresentation⟩
+
+private theorem flatModel_comparison_lisse_projective
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
+    (hG : FlatModelEtaleLisseProjective (ULift.{u + 1, u} A) G) :
+    FlatModelProEtaleLisseProjective X A
+      ((sfIntrinsicModuleEquivalence X A).functor.obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj G)) := by
+  let E := (sfIntrinsicModuleEquivalence X A).functor
+  let N := (ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj G
+  obtain ⟨hc, hf⟩ := flatModel_etale_lisse_flat _ G hG
+  have : IsFiniteLocallyConstantSheaf G := hc
+  let q : (proEtaleModuleRestriction X A).obj (E.obj N) ≅ N :=
+    E.preimageIso (flatModel_realize_restrict_iso X A (E.obj N))
+  exact flatModel_proEtale_lisse_projective X A _
+    (ProEtale.isFiniteLocallyConstant_of_iso q.symm
+      (ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj G))
+    (ObjectProperty.prop_of_iso _ q.symm (ProEtale.flat_comparisonUpperStar_obj hf))
+
+private theorem flatModel_lisse_etale_origin
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A))
+    (hF : FlatModelProEtaleLisseProjective X A F) :
+    ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)),
+      IsFiniteLocallyConstantSheaf G ∧ ObjectProperty.flat G ∧
+      Nonempty ((sfIntrinsicModuleEquivalence X A).functor.obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj G) ≅ F) := by
+  let B := ULift.{u + 1, u} A
+  let H := (proEtaleModuleRestriction X A).obj F
+  have hl : IsLisseProEtaleFixedModuleSheaf X B H :=
+    ⟨(localConstancy_iff X A F).mp hF.1, fun Ω _ _ x ↦ by
+      exact (finite_stalk_iff X A F Ω x).mp (hF.2 Ω x).1⟩
+  obtain ⟨G, hG, ⟨eG⟩⟩ := (proEtale_lisse_origin X B).2 H hl
+  refine ⟨G, hG, ?_, ⟨(sfIntrinsicModuleEquivalence X A).functor.mapIso eG ≪≫
+    flatModel_realize_restrict_iso X A F⟩⟩
+  refine GrothendieckTopology.flat_of_forall_flat_sheafFiber_obj
+    (jointlyReflectIsomorphisms_ulift_pointSmallEtale X (ModuleCat.{u + 1} B)) G ?_
+  rintro ⟨_, ⟨x⟩⟩
+  let y := X.algClosurePoint x
+  obtain ⟨c, _⟩ := (proEtale_comparison_stalk X _ y).2.2 B
+  let S := sheafToPresheaf (ProEt.topology X) (ModuleCat.{u + 1} B) ⋙
+    (Functor.whiskeringLeft (ProEtaleGeometricNeighbourhood y)ᵒᵖ X.ProEtᵒᵖ
+      (ModuleCat.{u + 1} B)).obj (proEtaleGeometricNeighbourhoodForget y).op ⋙ colim
+  let e := ((pointSmallEtale y).uliftSheafFiberIso.{u + 1}
+      (ModuleCat.{u + 1} B)).app G ≪≫ (c.app G).symm ≪≫
+        S.mapIso eG ≪≫ flatModel_stalk_iso A F y
+  have : Module.Projective B ((finiteCoefficientModuleStalkFunctor y A).obj F) :=
+    (hF.2 _ y).2
+  exact ObjectProperty.prop_of_iso _ e.symm
+    ((ModuleCat.flat_iff_flat _).mpr (Module.Flat.of_projective (R := B)))
+
+private theorem flatModel_proEtale_extension_properties
+    {S X : Scheme.{u}} [IsNoetherian X]
+    (A : Type u) [CommRing A] [Finite A] (a : S ⟶ X) (ha : IsImmersion a)
+    (L : proEtaleRingModules S (proEtaleConstantRing S A))
+    (hL : FlatModelProEtaleLisseProjective S A L) :
+    SheafOfModules.IsFlatOnSite (J := ProEt.topology X)
+        (R := proEtaleConstantRing X A) ((flatModelProEtaleExtension A a ha).obj L) ∧
+      IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A)
+        ((flatModelProEtaleExtension A a ha).obj L) := by
+  obtain ⟨G, hG, hf, ⟨eG⟩⟩ := flatModel_lisse_etale_origin S A L hL
+  have : IsConstructibleSheaf G := hG.isConstructibleSheaf
+  obtain ⟨hP, hc⟩ := flatModel_etale_extension_flat_constructible _ a ha G hf
+  have : IsConstructibleSheaf ((flatModelEtaleExtension _ a ha).obj G) := hc
+  let e := flatModel_comparison_extension_iso A a ha G ≪≫
+    (flatModelProEtaleExtension A a ha).mapIso eG
+  exact ⟨site_flat_of_iso A e.symm ((intrinsic_flat_iff X A _).mp
+      (ProEtale.flat_comparisonUpperStar_obj hP)),
+    flatModel_intrinsic_constructible_of_iso X A e
+      (flatModel_realization_constructible X A _
+        (ProEtale.isConstructible_comparisonUpperStar_obj _))⟩
+
+private theorem flatModel_intrinsic_single_properties
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (F : proEtaleRingModules X (proEtaleConstantRing X A))
+    (hc : IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) F)
+    (hf : SheafOfModules.IsFlatOnSite (J := ProEt.topology X)
+      (R := proEtaleConstantRing X A) F) :
+    (∀ q : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A)
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧
+    (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧
+    HasFiniteProEtaleTorAmplitude X A ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
+  let C := proEtaleRingModules X (proEtaleConstantRing X A)
+  let K := (_root_.DerivedCategory.singleFunctor C 0).obj F
+  have hz (q : ℤ) (hq : q < 0 ∨ 0 < q) :
+      IsZero ((_root_.DerivedCategory.homologyFunctor C q).obj K) := by
+    rcases hq with hq | hq
+    · exact (_root_.DerivedCategory.isGE_iff K 0).mp inferInstance q hq
+    · exact (_root_.DerivedCategory.isLE_iff K 0).mp inferInstance q hq
+  refine ⟨fun q ↦ ?_, ⟨0, 0, le_rfl, hz⟩, ?_⟩
+  · by_cases hq : q = 0
+    · subst q
+      exact flatModel_intrinsic_constructible_of_iso X A
+        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).app F).symm hc
+    · exact flatModel_intrinsic_zero_constructible X A _ (hz q (lt_or_gt_of_ne hq))
+  · let E := (sfIntrinsicModuleEquivalence X A).functor
+    let N := (proEtaleModuleRestriction X A).obj F
+    let H := (_root_.DerivedCategory.singleFunctor _ 0).obj N
+    have ht := (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+      A X 0 0 le_rfl H).mpr
+        (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+          (flatModel_fixed_flat X A F hf))
+    let e : E.mapDerivedCategory.obj H ≅ K :=
+      (E.mapDerivedCategorySingleFunctor 0).app N ≪≫
+        (_root_.DerivedCategory.singleFunctor C 0).mapIso
+          (flatModel_realize_restrict_iso X A F)
+    refine ⟨0, 0, ht.1, ?_⟩
+    intro L P he f hfi hP M i hi
+    obtain ⟨eL⟩ := he
+    exact ht.2 L P ⟨eL ≪≫ e.symm⟩ f hfi hP M i hi
+
+private def flatModel_intrinsic_ctf (X : Scheme.{u}) (A : Type u)
+    [CommRing A] [Finite A] : ObjectProperty (proEtaleDerivedCategory X A) := fun K ↦
+  (∀ q : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A)
+    ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) ∧
+  (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) ∧
+  HasFiniteProEtaleTorAmplitude X A K
+
+private theorem flatModel_intrinsic_constructible_retract
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {M N : proEtaleRingModules X (proEtaleConstantRing X A)} (e : Retract M N)
+    (hN : IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) N) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X (ULift.{u + 1, u} A) M := by
+  have h : e.i ≫ (𝟙 N - e.r ≫ e.i) = 0 := by simp
+  have hc := ((constructibleCoefficient_exactClosure X (ULift.{u + 1, u} A)).1
+    N N (𝟙 N - e.r ≫ e.i) hN hN).1
+  apply flatModel_intrinsic_constructible_of_iso X A (F := kernel (𝟙 N - e.r ≫ e.i)) _ hc
+  refine ⟨kernel.ι _ ≫ e.r, kernel.lift _ e.i h,
+    (cancel_mono (kernel.ι _)).1 ?_, by simp⟩
+  have hk := kernel.condition (𝟙 N - e.r ≫ e.i)
+  rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at hk
+  simpa using hk.symm
+
+private theorem flatModel_intrinsic_ctf_thick
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
+    (flatModel_intrinsic_ctf X A).IsClosedUnderIsomorphisms ∧
+    (flatModel_intrinsic_ctf X A).IsTriangulated ∧
+    (flatModel_intrinsic_ctf X A).IsStableUnderRetracts := by
+  let C := proEtaleRingModules X (proEtaleConstantRing X A)
+  let P : ObjectProperty C := IsConstructibleProEtaleCoefficientModuleSheaf X
+    (ULift.{u + 1, u} A)
+  let : Zero C := HasZeroObject.zero' _
+  have : P.IsClosedUnderIsomorphisms :=
+    ⟨fun e h ↦ flatModel_intrinsic_constructible_of_iso X A e h⟩
+  have : P.ContainsZero :=
+    ⟨0, isZero_zero _, flatModel_intrinsic_zero_constructible X A _ (isZero_zero _)⟩
+  obtain ⟨hkc, hext⟩ := constructibleCoefficient_exactClosure X (ULift.{u + 1, u} A)
+  have : P.IsClosedUnderKernels := ⟨by
+    rintro _ ⟨f, k, hk, hFG⟩
+    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
+      (hkc _ _ f hFG.1 hFG.2).1⟩
+  have : P.IsClosedUnderCokernels := ⟨by
+    rintro _ ⟨f, k, hk, hFG⟩
+    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
+      (hkc _ _ f hFG.1 hFG.2).2⟩
+  have : P.IsClosedUnderExtensions := ⟨fun hS h1 h3 ↦ hext _ hS h1 h3⟩
+  let : Zero (proEtaleDerivedCategory X A) := HasZeroObject.zero' _
+  let Q : ObjectProperty (proEtaleDerivedCategory X A) :=
+    HasFiniteProEtaleTorAmplitude X A
+  have : Q.IsClosedUnderIsomorphisms :=
+    ⟨fun e ⟨a, b, h⟩ ↦ ⟨a, b, Scheme.amplitude_iso X A e a b h⟩⟩
+  have hzero : HasProEtaleTorAmplitude X A (0 : proEtaleDerivedCategory X A) 0 0 := by
+    refine ⟨le_rfl, ?_⟩
+    intro L P he f hf hP M i hi
+    obtain ⟨T, c, htri, hcomp⟩ := Scheme.tensor_functor X A M
+    obtain ⟨e⟩ := he
+    obtain ⟨q⟩ := hcomp L P f hf hP
+    have hz := T.map_isZero ((isZero_zero _).of_iso e)
+    exact ((_root_.DerivedCategory.homologyFunctor C i).map_isZero hz).of_iso
+      ((_root_.DerivedCategory.homologyFunctor C i).mapIso q.symm)
+  have hshift (K : proEtaleDerivedCategory X A) (a b m : ℤ)
+      (hK : HasProEtaleTorAmplitude X A K a b) :
+      HasProEtaleTorAmplitude X A (K⟦m⟧) (a - m) (b - m) := by
+    refine ⟨by have hab := hK.1; omega, ?_⟩
+    intro L P he f hf hP M i hi
+    obtain ⟨T, c, htri, hcomp⟩ := Scheme.tensor_functor X A M
+    obtain ⟨e⟩ := he
+    obtain ⟨q⟩ := hcomp L P f hf hP
+    have hz := Scheme.tensor_homology_vanishes X A K a b M T hcomp hK (m + i) (by omega)
+    let hs := ((_root_.DerivedCategory.homologyFunctor C 0).shiftIso
+      m i (m + i) rfl).app (T.obj K)
+    exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor C i).mapIso
+      (q.symm ≪≫ T.mapIso e ≪≫ (T.commShiftIso m).app K) ≪≫ hs)
+  have hext (T : Triangle (proEtaleDerivedCategory X A)) (a b : ℤ)
+      (hT : T ∈ distTriang _) (h1 : HasProEtaleTorAmplitude X A T.obj₁ a b)
+      (h3 : HasProEtaleTorAmplitude X A T.obj₃ a b) :
+      HasProEtaleTorAmplitude X A T.obj₂ a b := by
+    refine ⟨h1.1, ?_⟩
+    intro L P he f hf hP M i hi
+    obtain ⟨R, c, htri, hcomp⟩ := Scheme.tensor_functor X A M
+    obtain ⟨e⟩ := he
+    obtain ⟨q⟩ := hcomp L P f hf hP
+    have hz1 := Scheme.tensor_homology_vanishes X A T.obj₁ a b M R hcomp h1 i hi
+    have hz3 := Scheme.tensor_homology_vanishes X A T.obj₃ a b M R hcomp h3 i hi
+    have hz := (_root_.DerivedCategory.HomologySequence.exact₂
+      (R.mapTriangle.obj T) (R.map_distinguished T hT) i).isZero_of_both_isZero hz1 hz3
+    exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor C i).mapIso
+      (q.symm ≪≫ R.mapIso e))
+  have : Q.ContainsZero := ⟨0, isZero_zero _, 0, 0, hzero⟩
+  have : Q.IsStableUnderShift ℤ :=
+    ⟨fun m ↦ ⟨fun K ⟨a, b, h⟩ ↦ ⟨a - m, b - m, hshift K a b m h⟩⟩⟩
+  have : Q.IsTriangulatedClosed₂ := ObjectProperty.IsTriangulatedClosed₂.mk' (by
+    intro T hT h1 h3
+    obtain ⟨a, b, h1⟩ := h1
+    obtain ⟨c, d, h3⟩ := h3
+    exact ⟨min a c, max b d, hext T _ _ hT
+      (Scheme.amplitude_mono X A h1 (min_le_left _ _) (le_max_left _ _))
+      (Scheme.amplitude_mono X A h3 (min_le_right _ _) (le_max_right _ _))⟩)
+  have : Q.IsTriangulated := {}
+  have heq : flatModel_intrinsic_ctf X A =
+      (_root_.DerivedCategory.homologyProperty P ⊓
+        _root_.DerivedCategory.TStructure.t.bounded) ⊓ Q := by
+    funext K
+    apply propext
+    change (_ ∧ (∃ a b : ℤ, a ≤ b ∧ _) ∧ _) ↔ (_ ∧ _) ∧ _
+    constructor
+    · rintro ⟨hc, ⟨a, b, hab, hz⟩, ht⟩
+      exact ⟨⟨hc, ⟨⟨a, (_root_.DerivedCategory.isGE_iff K a).mpr
+        (fun q hq ↦ hz q (.inl hq))⟩,
+        ⟨b, (_root_.DerivedCategory.isLE_iff K b).mpr (fun q hq ↦ hz q (.inr hq))⟩⟩⟩, ht⟩
+    · rintro ⟨⟨hc, ⟨⟨a, ha⟩, ⟨b, hb⟩⟩⟩, ht⟩
+      exact ⟨hc, ⟨min a b, max a b, min_le_max, fun q hq ↦ by
+        rcases hq with hq | hq
+        · exact (_root_.DerivedCategory.isGE_iff K a).mp ha q
+            (hq.trans_le (min_le_left _ _))
+        · exact (_root_.DerivedCategory.isLE_iff K b).mp hb q
+            ((le_max_right _ _).trans_lt hq)⟩, ht⟩
+  refine ⟨?_, ?_, ?_⟩
+  · rw [heq]
+    infer_instance
+  · rw [heq]
+    infer_instance
+  · constructor
+    intro K L e hL
+    obtain ⟨hc, ⟨a, b, hab, hz⟩, c, d, ht⟩ := hL
+    have hzero {M N : C} (r : Retract M N) (h : IsZero N) : IsZero M :=
+      (IsZero.iff_id_eq_zero _).mpr (by
+        rw [← r.retract, h.eq_of_tgt r.i 0, zero_comp])
+    refine ⟨fun q ↦ flatModel_intrinsic_constructible_retract X A
+      (e.map (_root_.DerivedCategory.homologyFunctor C q)) (hc q),
+      ⟨a, b, hab, fun q hq ↦ hzero
+        (e.map (_root_.DerivedCategory.homologyFunctor C q)) (hz q hq)⟩, c, d, ht.1, ?_⟩
+    intro N P he f hf hP M i hi
+    obtain ⟨T, cs, htri, hcomp⟩ := Scheme.tensor_functor X A M
+    obtain ⟨eN⟩ := he
+    obtain ⟨q⟩ := hcomp N P f hf hP
+    have hzT := Scheme.tensor_homology_vanishes X A L c d M T hcomp ht i hi
+    have r := (e.map T).map (_root_.DerivedCategory.homologyFunctor C i)
+    have hzK : IsZero ((_root_.DerivedCategory.homologyFunctor C i).obj (T.obj K)) :=
+      (IsZero.iff_id_eq_zero _).mpr (by
+        rw [← r.retract, hzT.eq_of_tgt r.i 0, zero_comp])
+    exact hzK.of_iso ((_root_.DerivedCategory.homologyFunctor C i).mapIso
+      (q.symm ≪≫ T.mapIso eN))
+
+private theorem flatModel_intrinsic_ctf_origin
+    (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (K : proEtaleDerivedCategory X A) (hK : flatModel_intrinsic_ctf X A K) :
+    ∃ K' : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X,
+      Etale.DerivedCategory.constructibleFiniteTor
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X K' ∧
+      Nonempty (((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X) ⋙
+          (sfIntrinsicModuleEquivalence X A).functor).mapDerivedCategory.obj K' ≅ K) := by
+  let B := ULift.{u + 1, u} A
+  let E := (sfIntrinsicModuleEquivalence X A).functor
+  let N := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X
+  let K0 := E.mapDerivedCategory.objPreimage K
+  let e0 := E.mapDerivedCategory.objObjPreimageIso K
+  obtain ⟨hc, ⟨a, b, hab, hz⟩, c, d, ht⟩ := hK
+  have hb : _root_.DerivedCategory.TStructure.t.bounded K :=
+    ⟨⟨a, (_root_.DerivedCategory.isGE_iff K a).mpr (fun q hq ↦ hz q (.inl hq))⟩,
+      ⟨b, (_root_.DerivedCategory.isLE_iff K b).mpr (fun q hq ↦ hz q (.inr hq))⟩⟩
+  have hb0 := E.bounded_of_bounded_mapDerivedCategory_obj
+    (_root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e0.symm hb)
+  have hco (q : ℤ) : ProEtale.IsConstructible B
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj K0) := by
+    let e := (E.mapDerivedCategoryHomologyFunctorIso q).app K0 ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ q).mapIso e0
+    exact (flatModel_realization_constructible_iff X A _).mp
+      (flatModel_intrinsic_constructible_of_iso X A e.symm (hc q))
+  have hbc := ProEtale.DerivedCategory.boundedConstructible_of_homology B hb0
+    (fun q ↦ ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj B (hco q))
+  obtain ⟨K', hK', ⟨e1⟩⟩ := hbc
+  have ht0 := (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+    A X c d ht.1 K0).mp (Scheme.amplitude_iso X A e0.symm c d ht)
+  have ht' := (ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff c d K').mp
+    ((ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} B) X c d).prop_of_iso
+      e1.symm ht0)
+  exact ⟨K', ⟨hK', c, d, ht'⟩,
+    ⟨(Functor.mapDerivedCategoryCompIso N E).app K' ≪≫
+      E.mapDerivedCategory.mapIso e1 ≪≫ e0⟩⟩
+
 /-- Clause (1) on the pro-etale site, with intrinsic constructibility.
 Source: blueprint det-sf-flat-model-generation
 (blueprint: det-sf-flat-model-generation).
@@ -625,7 +1106,30 @@ theorem proEtale_flatConstructible_orderedStratification
       FlatModelOrderedStratification str ∧
       ∀ k : Fin str.n, FlatModelProEtaleLisseProjective (str.domain k) A
         (proEtaleConstantModulePullback (str.immersion k) A F) := by
-  sorry
+  let B := ULift.{u + 1, u} A
+  let H := (proEtaleModuleRestriction X A).obj F
+  have hH : ProEtale.IsConstructible B H :=
+    (CoefficientSerre.coefficient_constructible_iff X B F).mp _hc
+  obtain ⟨G, hG, ⟨eG⟩⟩ :=
+    ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj B hH
+  obtain ⟨S, hS⟩ := hG.exists_stratification
+  obtain ⟨T, hT, hTS⟩ := flatModel_exists_ordered_refinement X S
+  have hflat : ObjectProperty.flat H := flatModel_fixed_flat X A F _hf
+  refine ⟨T, hT, fun k ↦ ?_⟩
+  let L := proEtaleConstantModulePullback (T.immersion k) A F
+  let R := proEtaleModuleRestriction (T.domain k) A
+  have hGk := hTS.isFiniteLocallyConstantSheaf_upperStar G hS k
+  have hHk : ProEtale.IsFiniteLocallyConstant B
+      ((ProEtale.upperStar (ModuleCat.{u + 1} B) (T.immersion k)).obj H) := by
+    exact ProEtale.isFiniteLocallyConstant_of_iso
+      (((ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B)
+        (T.immersion k)).app G).symm ≪≫
+        (ProEtale.upperStar (ModuleCat.{u + 1} B) (T.immersion k)).mapIso eG)
+      (ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj _)
+  obtain ⟨eL⟩ := proEtaleModuleRestriction_pullback (T.immersion k) A F
+  exact flatModel_proEtale_lisse_projective (T.domain k) A L
+    (ProEtale.isFiniteLocallyConstant_of_iso eL.symm hHk)
+    (ObjectProperty.prop_of_iso _ eL.symm (Functor.PreservesFlat.flat_obj hflat))
 
 /-- Clause (2) on the etale site: the specified finite sheaf-extension filtration
 and flat constructible degree-zero factors of finite Tor amplitude.
@@ -1047,7 +1551,51 @@ theorem proEtale_flatConstructible_extensionFiltration
             ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) ∧
         (HasFiniteProEtaleTorAmplitude X A
           ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
-  sorry
+  let B := ULift.{u + 1, u} A
+  let N (T : Scheme.{u}) := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T
+  let E (T : Scheme.{u}) := (sfIntrinsicModuleEquivalence T A).functor
+  let H := (proEtaleModuleRestriction X A).obj F
+  have hH : ProEtale.IsConstructible B H :=
+    (CoefficientSerre.coefficient_constructible_iff X B F).mp _hc
+  obtain ⟨G, hG, ⟨eG⟩⟩ :=
+    ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj B hH
+  have hflat : ObjectProperty.flat G := flatModel_comparison_reflects_flat X B G
+    (ObjectProperty.prop_of_iso _ eG.symm (flatModel_fixed_flat X A F _hf))
+  let Q (k : Fin str.n) :=
+    (Etale.upperStar (ModuleCat.{u + 1} B) (str.immersion k)).obj G
+  let L (k : Fin str.n) := proEtaleConstantModulePullback (str.immersion k) A F
+  have eL (k : Fin str.n) : (E (str.domain k)).obj ((N (str.domain k)).obj (Q k)) ≅ L k := by
+    let e := Classical.choice
+      (proEtaleModuleRestriction_pullback (str.immersion k) A F)
+    exact (E (str.domain k)).mapIso
+        (((ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B)
+          (str.immersion k)).app G).symm ≪≫
+            (ProEtale.upperStar (ModuleCat.{u + 1} B) (str.immersion k)).mapIso eG ≪≫
+              e.symm) ≪≫ flatModel_realize_restrict_iso (str.domain k) A (L k)
+  let P (k : Fin str.n) :=
+    (flatModelEtaleExtension B (str.immersion k) (str.isImmersion k)).obj (Q k)
+  let P' (k : Fin str.n) :=
+    (flatModelProEtaleExtension A (str.immersion k) (str.isImmersion k)).obj (L k)
+  have eP (k : Fin str.n) : (E X).obj ((N X).obj (P k)) ≅ P' k :=
+    flatModel_comparison_extension_iso A (str.immersion k) (str.isImmersion k) (Q k) ≪≫
+      (flatModelProEtaleExtension A (str.immersion k) (str.isImmersion k)).mapIso (eL k)
+  refine ⟨flatModel_filtration_map (N X ⋙ E X)
+      (flatModel_etale_ordered_filtration X B G str _ho)
+      ((E X).mapIso eG ≪≫ flatModel_realize_restrict_iso X A F) eP, fun k ↦ ?_⟩
+  have : IsConstructibleSheaf G := hG
+  have : IsConstructibleSheaf (Q k) := IsConstructibleSheaf.upperStar _ G
+  obtain ⟨hpflat, hpconst⟩ := flatModel_etale_extension_flat_constructible B
+    (str.immersion k) (str.isImmersion k) (Q k) (Functor.PreservesFlat.flat_obj hflat)
+  have : IsConstructibleSheaf (P k) := hpconst
+  have hf : SheafOfModules.IsFlatOnSite (J := ProEt.topology X)
+      (R := proEtaleConstantRing X A) (P' k) :=
+    site_flat_of_iso A (eP k).symm ((intrinsic_flat_iff X A _).mp
+      (ProEtale.flat_comparisonUpperStar_obj hpflat))
+  have hc : IsConstructibleProEtaleCoefficientModuleSheaf X B (P' k) :=
+    flatModel_intrinsic_constructible_of_iso X A (eP k)
+      (flatModel_realization_constructible X A _
+        (ProEtale.isConstructible_comparisonUpperStar_obj (P k)))
+  exact ⟨P' k, rfl, hf, hc, flatModel_intrinsic_single_properties X A (P' k) hc hf⟩
 
 /-- Clause (3) on the proEtale site: equality with the smallest replete full
 subcategory closed under shifts, cones and direct summands.
@@ -1134,6 +1682,65 @@ theorem proEtale_flatConstructible_thickGeneration
           FlatModelProEtaleLisseProjective S A L ∧
           Nonempty (K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj
             ((flatModelProEtaleExtension A a ha).obj L))) := by
-  sorry
+  let B := ULift.{u + 1, u} A
+  let N (T : Scheme.{u}) := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T
+  let E (T : Scheme.{u}) := (sfIntrinsicModuleEquivalence T A).functor
+  let T := N X ⋙ E X
+  let G : ObjectProperty (proEtaleDerivedCategory X A) := fun K ↦
+    ∃ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)
+      (L : proEtaleRingModules S (proEtaleConstantRing S A)),
+      FlatModelProEtaleLisseProjective S A L ∧
+      Nonempty (K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((flatModelProEtaleExtension A a ha).obj L))
+  have hnonempty : G.Nonempty := by
+    let _ : Zero (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) := HasZeroObject.zero' _
+    let L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) := 0
+    have hL : FlatModelEtaleLisseProjective B L := by
+      refine ⟨IsLocallyConstantSheaf.of_isZero (isZero_zero _), fun Ω _ _ x ↦ ?_⟩
+      have hz := Functor.map_isZero ((pointSmallEtale x).sheafFiber
+        (A := ModuleCat.{u + 1} B)) (isZero_zero _)
+      have := ModuleCat.subsingleton_of_isZero hz
+      exact ⟨inferInstance, inferInstance⟩
+    exact ⟨_, X, 𝟙 X, inferInstance, T.obj L,
+      flatModel_comparison_lisse_projective X A L hL, ⟨Iso.refl _⟩⟩
+  let : G.Nonempty := hnonempty
+  obtain ⟨hiso, htri, hret⟩ := flatModel_intrinsic_ctf_thick X A
+  have : (flatModel_intrinsic_ctf X A).IsClosedUnderIsomorphisms := hiso
+  have : (flatModel_intrinsic_ctf X A).IsTriangulated := htri
+  have : (flatModel_intrinsic_ctf X A).IsStableUnderRetracts := hret
+  change flatModel_intrinsic_ctf X A = G.triangEnvelope
+  apply le_antisymm
+  · intro K hK
+    obtain ⟨K', hK', ⟨e⟩⟩ := flatModel_intrinsic_ctf_origin X A K hK
+    let Q : ObjectProperty (Etale.DerivedCategoryModule B X) := fun C ↦
+      ∃ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)
+        (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} B)),
+        FlatModelEtaleLisseProjective B L ∧
+        Nonempty (C ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((flatModelEtaleExtension B a ha).obj L))
+    have hm : Q.triangEnvelope K' :=
+      Eq.mp (congrFun (etale_flatConstructible_thickGeneration X B) K')
+        ((flatModel_etale_ctf_iff X B K').mpr hK')
+    have : (G.triangEnvelope.inverseImage T.mapDerivedCategory).IsStableUnderRetracts :=
+      ⟨fun r h ↦ G.triangEnvelope.prop_of_retract (r.map T.mapDerivedCategory) h⟩
+    have hinc : Q ≤ G.triangEnvelope.inverseImage T.mapDerivedCategory := by
+      rintro C ⟨S, a, ha, L, hL, ⟨eL⟩⟩
+      apply G.le_triangEnvelope
+      refine ⟨S, a, ha, (E S).obj ((N S).obj L),
+        flatModel_comparison_lisse_projective S A L hL, ⟨?_⟩⟩
+      exact T.mapDerivedCategory.mapIso eL ≪≫
+        (T.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+          (_root_.DerivedCategory.singleFunctor _ 0).mapIso
+            (flatModel_comparison_extension_iso A a ha L)
+    exact G.triangEnvelope.prop_of_iso e
+      ((ObjectProperty.triangEnvelope_le_iff (P := Q)
+        (Q := G.triangEnvelope.inverseImage T.mapDerivedCategory)).mpr hinc K' hm)
+  · apply (ObjectProperty.triangEnvelope_le_iff (P := G)
+      (Q := flatModel_intrinsic_ctf X A)).mpr
+    rintro K ⟨S, a, ha, L, hL, ⟨e⟩⟩
+    obtain ⟨hf, hc⟩ := flatModel_proEtale_extension_properties A a ha L hL
+    exact (flatModel_intrinsic_ctf X A).prop_of_iso e.symm
+      ⟨(flatModel_intrinsic_single_properties X A _ hc hf).1,
+        (flatModel_intrinsic_single_properties X A _ hc hf).2⟩
 
 end AlgebraicGeometry

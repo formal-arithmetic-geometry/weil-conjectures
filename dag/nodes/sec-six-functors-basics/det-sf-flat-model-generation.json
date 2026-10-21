@@ -32,224 +32,154 @@
  ],
  "proof": [
   {
-   "text": "The Noetherian hypothesis implies that the underlying space has the descending chain condition on closed subsets. Thus every open subset is quasi-compact: a cover with no finite subcover would give a strictly increasing chain of finite unions of its members, hence a strictly decreasing chain of their closed complements. The same argument on every affine open makes every open immersion below quasi-compact. For a closed immersion into X, its inverse image over an affine chart Spec(B) is Spec(B/I) by the affine-quotient clause of the closed-immersion definition. An ideal of B/I is the image of its inverse-image ideal in B, so generators of the latter give generators of the former. Hence B/I is Noetherian, and the closed subscheme is locally Noetherian; its closed underlying subspace is quasi-compact by the same finite-subcover argument. Apply the locally Noetherian quasi-separatedness lemma to X and to these closed subschemes: they are all qcqs. These facts verify the quasi-compact-complement hypotheses of the pro-etale localization results used below.",
+   "text": "Work over a finite commutative ring and a Noetherian scheme. The existing Noetherian-space and immersion instances make the scheme-theoretic-image factorization quasi-compact where required. All canonical extension functors and all theorem signatures are retained, including arbitrary nonreduced stratum domains and the empty scheme.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-noetherian-ring"
+    "lemma-nagata-immersion-open-in-scheme-image"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): hypotheses of the open-closed induction"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Conventions and Noetherian hypotheses"
    }
   },
   {
-   "text": "Étale implementation: choose the constructible stratification using the proved source comparison with IsConstructibleSheaf. Apply Topology.Stratification.exists_chain_opens from the existing source Devissage module and use its successive differences as new strata. These differences refine the old partition; finite local constancy pulls back along the refinement by the existing Refines.isFiniteLocallyConstantSheaf_upperStar theorem. Their tails are exactly the complements of the preceding opens, giving the ordered condition, including the empty scheme. This replaces the finite closed-family construction in the étale proof. For the remaining pro-étale proof retain the following planned refinement argument: By the two constructibility definitions choose a finite locally closed partition adapted to F. Refine it, rather than merely reorder its old strata, as follows. For each old stratum T include the two closed sets \\overline T and \\overline T\\setminus T, and let \\mathcal Z consist of X, the empty set and all intersections of this finite family. Set S_Z=Z\\setminus\\bigcup_{Z'\\in\\mathcal Z,\\ Z'\\subsetneq Z}Z'. Each point belongs to the cell of the smallest member of \\mathcal Z containing it, so these cells partition X; their membership in every old \\overline T and its boundary shows that each cell lies in one old T. Order the nonempty cells by any linear order extending reverse inclusion of their Z. Among the Z with nonempty cells, the unprocessed ones form a downward closed family. If x lies in such a Z, the smallest member Z_x containing x is a subset of Z and has the nonempty cell containing x, so its cell is also unprocessed. Thus the union of the unprocessed cells equals the finite union of their Z, hence is closed; this also handles Z whose own cell was empty. Thus every tail is closed and its first cell is open in it. Give each cell the open subscheme structure inside the reduced induced closed subscheme on Z, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. It maps to its old stratum T: locally where T is closed, its defining ideal is contained in the radical ideal of the reduced cell, since every cell point belongs to T. The affine quotient description therefore factors the cell immersion through T, and these local factorizations agree because immersions are monomorphisms. Pulling the old trivializing covers and constant models back along these actual maps gives finite locally constant restrictions. Each cell is constructible because it is a difference of closed sets in the Noetherian space, by [def-weil-constructible-subset]. This writes out the finite closed-set refinement argument. If X is empty use the empty partition.",
+   "text": "For the etale ordered stratification, use the existing constructible-sheaf comparison, choose an adapted stratification, and apply the source Devissage.exists_chain_opens construction. Successive differences refine the original strata, and their tails are the complements of the preceding opens. Finite local constancy pulls back along the refinement. Flat pullback and flat geometric fibers, followed by finitePresentation_of_finite and Flat.projective_of_finitePresentation, give finite projective stalks.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-proetale-constructible-sheaf",
     "def-constructible-stratification",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (1): ordered refinement of an adapted partition"
-   }
-  },
-  {
-   "text": "Étale implementation: inverse image preserves flatness, and the geometric fibre of a flat sheaf is flat. Finite local constancy gives Module.Finite for each stalk; over the finite ring the stalk is a finite set and Module.finitePresentation_of_finite applies. Module.Flat.projective_of_finitePresentation then supplies projectivity. These are the existing proved source fibre and Mathlib module APIs. For the remaining pro-étale proof retain the following plan: For either site the geometric-stalk adjunction is a morphism of topoi by [lem-fix-geometric-stalk-topos-point]. Apply the ringed-topos flat-pullback theorem to this point with coefficient ring its stalk A: a flat F has flat geometric stalks. No conservativity of pro-etale geometric points is used. Every finite local module model on a nonempty trivializing object is isomorphic to such a stalk. If M is one of these finite A-modules, choose a finite set of generators and a surjection A^n\\to M. Its kernel is a finite set because A^n is finite, hence is generated by finitely many of its elements. This supplies a finite presentation A^r\\to A^n\\to M\\to0. The existing finitely-presented-flat-module theorem makes M finite projective. The same applies directly to every finite geometric stalk. This proves clause (1).",
-   "uses": [
-    "lem-fix-geometric-stalk-topos-point",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
     "lem-weil-pbc-finitely-presented-flat-module-projective"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (1): flat stalks and finite projectivity"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (1), etale site"
    }
   },
   {
-   "text": "Apply [lem-sfb-open-closed-flatness] to the complementary open/closed pairs on either site. Its hypotheses hold by step 1, and it states both the flatness criterion and preservation by $j_!$ and $i_*$. The identities $j^*j_!\\cong1$, $i^*i_*\\cong1$, $i^*j_!=0$ and $j^*i_*=0$ are supplied on the pro-étale site by [lem-weil-pbc-proetale-ringed-open-closed] and on the étale site by the open unit, closed counit and the two vanishing statements cited here. For any surjective closed immersion $h:T\\to Y$, apply [lem-sfb-surjective-closed-module-invariance]: its actual unit gives $H\\cong h_*h^*H$, its counit gives $h^*h_*N\\cong N$, and finite local constancy, including finite projective local models, is preserved and reflected. This application requires neither Noetherianity of $Y$ nor a nilpotence bound. These are ordinary module sheaves; none of these uses a stalk-conservativity assertion on the pro-étale site. The étale identities are module-linear: scalar multiplication commutes with the adjunction maps by naturality, and the vanishing objects have the unique module structure.",
+   "text": "For intrinsic pro-etale coefficients, restrict scalars to ULift(A). The canonical realization counit identifies the realized restricted sheaf with the original one. The proved intrinsic_flat_iff transports flatness; coefficient_constructible_iff transports constructibility. The fixed-module constructible-origin theorem supplies a constructible etale origin. Apply the same ordered open-chain refinement to that origin, then use the pullback comparison and finiteLocal_iff to obtain finite locally constant intrinsic restrictions. The geometric point of ProEtaleFiniteModelStalks preserves flatness. A module-colimit cocone whose scalar equation is coefficientGerm_smul identifies the fixed and intrinsic coefficient stalks. Thus each finite stalk is flat and finitely presented over the finite ring, hence projective. No conservativity of pro-etale geometric stalks is invoked.",
    "uses": [
     "lem-sfb-open-closed-flatness",
-    "lem-sfb-surjective-closed-module-invariance",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-extension-by-zero-unit-iso",
-    "prop-openclosed-lowerstar-fully-faithful",
-    "lemma-openclosed-vanishing-lowershriek",
-    "lemma-openclosed-vanishing-lowerstar"
+    "lem-sfb-proetale-intrinsic-tensor-comparison",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): explicit open/closed flatness calculation"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (1), pro-etale site"
    }
   },
   {
-   "text": "Étale implementation: finite projective stalks give a finite locally constant flat sheaf, by Etale.flat_iff_forall_flat_sheafFiber_obj and the fibre/ulift comparison. OpenClosedFlatness proves flatness after the two canonical extension operations. Existing constructible-sheaf extension-by-zero and closed-pushforward theorems prove constructibility. The already proved source torAmplitudeIn_singleFunctor_obj_of_flat gives Tor interval [0,0], and boundedConstructible_singleFunctor_obj gives the remaining cohomology conditions. For the remaining pro-étale proof retain the following plan: For a locally constant L with finite projective geometric stalks, each constant model on a nonempty trivializing object is isomorphic to a geometric stalk: choose a geometric point of that object and apply [lem-fix-geometric-stalk-topos-point]. Thus its models are finite projective (empty objects can be discarded). Such L is flat: on a trivializing covering, a displayed splitting M\\oplus N=A^r gives L\\oplus\\underline N=A_S^r, so tensoring any short exact sequence with L is a retract of its r-fold direct sum, which is short exact. Exactness can be checked on the covering: kernels and cokernels restrict to zero, hence vanish by the sheaf axiom and local lifting of sections. Factor a:S\\hookrightarrow X as an open j:S\\hookrightarrow\\overline S followed by a closed g:\\overline S\\hookrightarrow X, and put a_!=g_*j_!. Step 4 makes a_!L flat. Its restrictions are L on S and zero on \\overline S\\setminus S and X\\setminus\\overline S, by the same restriction identities. These three pieces are locally closed and hence constructible in the Noetherian space by [def-weil-constructible-subset], so a_!L is constructible on either site by the constructibility definitions. Finally a_!L[0] is a bounded-above complex of flat sheaves, hence K-flat by [lem-weil-pbc-independent-bounded-flat-kflat]. Its derived tensor with every module sheaf N[0] is the degree-zero ordinary tensor a_!L\\otimes_A N. It therefore has Tor amplitude [0,0] and belongs to \\Dctf. This proves the assertion about all generators, not only the strata of one F.",
+   "text": "For an ordered etale partition, put U_r equal to the complement of the tail starting at r, including U_0 empty and U_n=X. The tower M_r=(U_r)! (F restricted to U_r) starts at zero and ends at F. Inside U_(r+1), the given stratum S_r is a closed subscheme complementary to U_r. Apply the open-closed short exact sequence and then exact open extension to X. The counit-composition isomorphism identifies the first term with M_r. The canonical locally closed extension comparison identifies the quotient with a_(r)! (F restricted to S_r). Transport the sequence with ShortComplex.isoMk. This uses the actual stratum schemes without replacing them by reduced subschemes.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-proetale-constructible-sheaf",
-    "lem-weil-pbc-independent-bounded-flat-kflat",
-    "def-kun-derived-tensor",
-    "def-weil-derived-tensor",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lem-fix-geometric-stalk-topos-point",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): flat constructible extension by zero and Tor amplitude zero"
-   }
-  },
-  {
-   "text": "Étale implementation of the filtration replaces the closed-tail induction by its open-complement filtration. For each r from 0 through n, put T_r equal to the union of strata of index at least r and U_r equal to its open complement; T_n is empty. Then U_0 is empty, U_n is X, U_r is increasing, and U_(r+1) minus U_r is the prescribed stratum S_r. Put M_r=(U_r)_!(F restricted to U_r). The first term is zero and the last term is isomorphic to F by the open-closed sequence. The immersion of S_r factors through U_(r+1) by the open-immersion lifting property; it is a closed immersion there because its range is the complement of U_r. Apply the open-closed short exact sequence inside U_(r+1), then exact open extension to X. Adjunction.exists_iso_counit_app and upperStarComp identify its first term with M_r. The factorization isomorphism of lem-sfb-etale-locally-closed-extension-comparison identifies its third term with the canonical a_(r!) of the actual restriction F|S_r. Transport the short exact sequence along these two isomorphisms with ShortComplex.isoMk. This constructs all n prescribed quotient sequences without replacing any stratum by a reduced subscheme. For the remaining pro-étale filtration retain the following induction plan: Induct on the number of ordered strata, allowing the given strata to have arbitrary locally closed subscheme structures. With no strata the open-closed sequence for the empty closed/open pair gives F=0 and the extension tower is empty. Otherwise let U be the actual open subscheme of X with underlying set S_1, and let i:C→X be the reduced induced closed subscheme on its complement, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Write u:U→X for the open immersion. The immersion S_1→X factors as a surjective closed immersion h:S_1→U followed by u: in a closed-then-open factorization, the latter open contains U and the defining ideal restricts to U. By [lem-sfb-surjective-closed-module-invariance] the actual unit gives F|_U≅h_*L_1. The open-closed sequence is therefore 0→u_!h_*L_1→F→i_*i^*F→0. Here u_!h_*L_1≅a_{1!}L_1 by [lem-sfb-etale-locally-closed-extension-comparison] on the étale site and [lem-sfb-locally-closed-extension-coherence] on the pro-étale site.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
-    "lem-sfb-surjective-closed-module-invariance",
-    "lem-sfb-etale-locally-closed-extension-comparison",
-    "lem-sfb-locally-closed-extension-coherence",
     "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-sfb-etale-locally-closed-extension-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): induction on the ordered finite partition, induction part 1"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (2), etale filtration"
    }
   },
   {
-   "text": "For k≥2 use D_k=S_k×_X C with maps b_k:D_k→C and p_k:D_k→S_k. Base change preserves immersions by [lem-weil-pbc-immersion-base-change-lft]; p_k is closed by [lem-weil-pbc-closed-immersion-base-change] and is surjective because C has precisely the closed underlying tail, and a closed immersion has unchanged residue fields, so the fibre over any point of S_k in the tail is that same point ([lem-weil-pbc-fibre-product-points]). The D_k give the remaining ordered partition of C. The sheaf i^*F is flat by flat pullback and constructible: its restriction to D_k is p_k^*L_k, with the pulled-back local trivializations. Apply the induction hypothesis on C, which is Noetherian by step 1. Exact i_* gives a tower with factors i_*b_{k!}p_k^*L_k.",
+   "text": "For the pro-etale filtration, choose the constructible etale origin of the restricted coefficient sheaf. Flatness of that origin follows by reflecting finite limits through the fully faithful strong monoidal comparison functor. Map its etale filtration through exact comparison followed by intrinsic realization. The proved source ordinary quasi-compact quasi-separated direct-image comparison, the canonical open-extension comparison, and the intrinsic pullback encoding identify each mapped quotient with exactly the canonical pro-etale locally closed extension in the theorem. A private general exact-functor filtration lemma transports the endpoint and all quotient isomorphisms. The etale extension of each restricted origin is flat and constructible, so its intrinsic comparison, and therefore the specified quotient, is flat constructible too.",
    "uses": [
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-sfb-open-closed-flatness"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): induction on the ordered finite partition, induction part 2"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (2), pro-etale filtration"
    }
   },
   {
-   "text": "These factors equal a_{k!}L_k as follows. Use [lem-sfb-etale-locally-closed-extension-comparison], or [lem-sfb-locally-closed-extension-coherence] on the pro-étale site, to compute extension in an open neighbourhood W in which the immersion is closed. The intersection D_k→X has the same locally closed underlying image as S_k. In such a W the two immersions are closed and the map D_k→S_k is the surjective closed immersion p_k. [lem-sfb-surjective-closed-module-invariance] identifies L_k≅p_{k*}p_k^*L_k. Closed direct images compose, since their values on V are sections on V×_W D_k. Extending the resulting isomorphism by zero from W proves i_*b_{k!}p_k^*L_k≅a_{k!}L_k; computing the left side inside C first agrees by the closed-composition clause of the same cited comparison. Thus the first sequence and the pushed-forward tower prove clause (2), including nonreduced strata, without assuming that S_1→X itself is open.",
+   "text": "For every intrinsic lisse sheaf with finite projective stalks, the fixed-module lisse-origin theorem gives a finite locally constant etale origin. The canonical comparison on geometric stalks and the intrinsic/fixed stalk isomorphism identify its algebraically closed geometric fibers with the projective intrinsic stalks. The conservative family of algebraic-closure points on the etale site detects flatness of the etale origin. Its canonical locally closed extension is flat constructible by the existing etale open-closed flatness and constructibility APIs. The extension comparison transports this to the intrinsic generator. A flat intrinsic sheaf placed in degree zero has bounded constructible cohomology: degree-zero homology is the sheaf and all other homology vanishes. The fixed-scalar flat-single theorem and intrinsic Tor transport give Tor interval [0,0]. This proves the generator properties as well as the remaining assertions of clause (2).",
    "uses": [
-    "lem-sfb-surjective-closed-module-invariance",
-    "lem-sfb-etale-locally-closed-extension-comparison",
-    "lem-sfb-locally-closed-extension-coherence",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-proetale-operations"
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-sfb-open-closed-flatness",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-weil-constructible-coefficient-serre"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): induction on the ordered finite partition, induction part 3"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clauses (2) and (3), all locally closed generators"
    }
   },
   {
-   "text": "Étale implementation: the already proved source constructibleFiniteTor_isTriangulated and constructibleFiniteTor_isStableUnderRetracts give thickness after a direct equivalence of the expanded cohomology/Tor predicate with constructibleFiniteTor. The equivalence uses DerivedCategory.isGE_iff, isLE_iff, and the two proved Tor-interval conversion lemmas. No source generation theorem is applied. For the remaining pro-étale proof retain the following plan: The category \\Dctf is thick. On the etale site, bounded constructible complexes are triangulated by [prop-constructible-derived-subcategory]. They are also closed under retracts: if e is the idempotent on each constructible cohomology sheaf induced by a retract, its image is the kernel of 1-e and is constructible by [thm-constructible-serre]; the same finite cohomological bounds persist. Tensoring a triangle with any N[0] is triangulated by [lem-kun-derived-tensor-triangulated], so its cohomology long exact sequence shows that an extension of objects with intervals [a,b] and [c,d] has interval [min(a,c),max(b,d)]. A shift by n replaces [a,b] by [a-n,b-n], and a retract retains the interval because its tensor cohomology is a retract of the original tensor cohomology. These arguments prove the etale assertion. For the pro-etale site use the exact comparison and its triangulated derived functor, the equivalence of bounded constructible categories [sk-thm-pe-constructible-comparison], and the interval-preserving equivalence [det-pe-finite-tor-comparison-noetherian]. Here X is qcqs by step 1 and A is Noetherian since its finite set of ideals has no infinite increasing chain. This transfer respects ambient cones: lift the connecting morphism between the two bounded constructible ends by full faithfulness and take its etale cone. It respects ambient retracts too: on each cohomology sheaf lift the associated idempotent by the sheaf equivalence, take its etale image as above, and apply exact comparison. Thus the other cone or retract stays bounded constructible before applying the Tor comparison. All these are ordinary constant-ring module categories.",
+   "text": "The intrinsic constructible coefficient class contains zero and is closed under isomorphisms, kernels, cokernels and extensions by constructibleCoefficient_exactClosure. Its derived homology property, intersected with boundedness, is triangulated by the general weak-Serre-class theorem. Finite Tor amplitude is triangulated: use the proved tensor_functor and tensor_homology_vanishes helpers for the full intrinsic K-flat tensor test. Tensoring preserves zero, shifts move [a,b] to [a-m,b-m], and the homology exact sequence gives middle-term vanishing after widening endpoint intervals. For retracts, each constructible sheaf retract is the kernel of the complementary idempotent; cohomological bounds pass through homology retracts; tensor homology retracts preserve the Tor interval. Hence the expanded intrinsic Dctf property is thick.",
    "uses": [
-    "prop-constructible-derived-subcategory",
-    "thm-constructible-serre",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-sf-derived-homology-long-exact",
-    "sk-thm-pe-constructible-comparison",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-finite-ctf-triangulated",
+    "prop-constructible-derived-subcategory"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (3): the finite-Tor constructible subcategory is thick"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (3), intrinsic thickness"
    }
   },
   {
-   "text": "Étale implementation uses exactly the independently stated hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel from lem-sf-etale-flat-constructible. Its termwise zero conditions give IsStrictlyGE and IsStrictlyLE. For the remaining pro-étale proof retain the following plan: Let C\\in\\Dctf(X,A), with Tor interval [a,b], a\\le b. On the etale site [lem-sf-etale-flat-constructible] gives an isomorphic complex P, zero outside [a,b], whose terms are flat constructible. On the pro-etale site first use [det-pe-finite-tor-comparison-noetherian] to choose C_0\\in D^b_{ctf}(X_{\\mathrm{et}},A) with \\nu_X^*C_0\\cong C and the same interval. Apply the same etale model theorem to C_0 and pull its model back termwise. The comparison functor is exact and commutes with cohomology, so the pulled-back complex represents C and remains zero outside [a,b]. Its terms are constructible by the sheaf equivalence and flat by the ringed-topos flat-pullback theorem. Hence a bounded flat constructible model exists on either site for the general finite ring and general Noetherian X of this item. This cites the independent model theorem, not the parent sk-lem-sf-flat-model which uses this item.",
+   "text": "The etale thick-generation theorem already proved in this module uses its specified filtration, the independent bounded flat constructible model, and induction on a strictly bounded complex via HomotopyCategory.mem_subcategory_of_strictly_bounded. For intrinsic generation, transfer this proved etale result. Realization is an exact equivalence; reflect the intrinsic bounded constructible cohomology and Tor interval to a fixed-module derived object. boundedConstructible_of_homology and the fixed-module sheaf origin theorem supply a bounded constructible etale origin. The source comparison Tor-interval theorem gives that origin finite Tor amplitude. The inverse image of the intrinsic generator envelope under derived comparison-realization is thick and contains every etale generator: finite locally constant flat etale sheaves realize to intrinsic lisse sheaves with finite projective stalks, and single objects commute with exact derived functors and the canonical extension comparison. The etale generation theorem therefore puts the original intrinsic object in that envelope. Conversely every intrinsic generator belongs to intrinsic Dctf by the previous generator calculation, and thickness gives the whole envelope.",
    "uses": [
     "lem-sf-etale-flat-constructible",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sf-comparison-pullback-exact",
-    "sk-thm-pe-constructible-comparison",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-exc-comparison-tor-interval",
+    "lem-sf-exact-functor-derived-triangulated",
+    "thm-constructible-serre"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (3): constructible flat models, without the circular parent citation"
-   }
-  },
-  {
-   "text": "Étale implementation: place each filtration short exact sequence in degree zero; DerivedCategory.triangleOfSES_distinguished and triangulated extension closure imply that the single complex of a flat constructible sheaf lies in the generator envelope. HomotopyCategory.mem_subcategory_of_strictly_bounded applies the finite stupid-tail induction to the independently supplied bounded model, and the quotient and model isomorphisms transport membership to K. Conversely each generator is flat constructible with finite Tor amplitude as above, so triangEnvelope_le_iff and thickness give the reverse inclusion. A zero lisse sheaf supplies a generator also when X is empty. For the remaining pro-étale proof retain the following plan: Let \\mathcal G be the full replete subcategory generated by the a_!L under the three indicated operations. By steps 5 and 9, \\mathcal G\\subseteq\\Dctf. For the reverse inclusion use P from step 10. Write P_{\\ge q} for its brutal tail, with P^r in degrees r\\ge q and zero below. Inclusion of the next tail and projection onto degree q give a degreewise split short exact sequence 0\\to P_{\\ge q+1}\\to P_{\\ge q}\\to P^q[-q]\\to0: in degree q it is 0\\to0\\to P^q\\xrightarrow{1}P^q\\to0, above q it is 0\\to P^r\\xrightarrow{1}P^r\\to0\\to0, and below q every term is zero. The complex maps commute with differentials since the tail differential only points upwards and the target single complex has zero differential. The short-exact-sequence triangle theorem supplies a distinguished triangle with these three terms. By steps 3 and 6–8 each flat constructible P^q is a finite extension of a_!L; placing its short exact sequences in degree zero and applying the same triangle theorem gives P^q[0]\\in\\mathcal G, hence P^q[-q]\\in\\mathcal G. Start with P_{\\ge b+1}=0 (a cone of an identity of a generator) and induct down from b to a along these triangles. This gives P_{\\ge a}=P\\in\\mathcal G, so C\\in\\mathcal G. This proves clause (3).",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (3): explicit stupid-truncation triangles and finite induction"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+    "place": "Clause (3), transfer of etale thick generation"
    }
   }
  ],
  "proof_deps": [
   "def-constructible-stratification",
-  "def-kun-derived-tensor",
-  "def-weil-closed-immersion",
-  "def-weil-constructible-subset",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-proetale-constructible-sheaf",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-cbc-open-closed-recollement",
-  "lem-fix-geometric-stalk-topos-point",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sf-derived-homology-long-exact",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-exc-comparison-tor-interval",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-exc-intrinsic-tor-amplitude-transport",
   "lem-sf-etale-flat-constructible",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-proetale-locally-constant-origin",
   "lem-sfb-etale-locally-closed-extension-comparison",
-  "lem-sfb-locally-closed-extension-coherence",
   "lem-sfb-open-closed-flatness",
-  "lem-sfb-surjective-closed-module-invariance",
-  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-proetale-intrinsic-tensor-comparison",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-finite-ctf-triangulated",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-extension-by-zero-unit-iso",
-  "lem-weil-pbc-fibre-product-points",
   "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-fixed-module-constructible-origin",
   "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-weil-pbc-proetale-finite-model-stalks",
   "lemma-nagata-immersion-open-in-scheme-image",
-  "lemma-openclosed-vanishing-lowershriek",
-  "lemma-openclosed-vanishing-lowerstar",
   "prop-constructible-derived-subcategory",
-  "prop-openclosed-lowerstar-fully-faithful",
-  "sk-thm-pe-constructible-comparison",
   "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-  "place": "Clauses (1)-(3): compiled étale open-chain refinement and open-complement filtration, independent bounded model and proved source thickness APIs; original pro-étale plan retained"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.md",
+  "place": "A2: all six clauses compiled; shared open-chain refinement, exact comparison transport of the prescribed filtration, intrinsic thickness and transfer of the proved etale thick-generation theorem"
  },
  "mathlib_searches": [
   {
@@ -468,17 +398,11 @@
   ]
  },
  "tool_uses": [
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-cbc-open-closed-recollement",
-  "lem-fix-geometric-stalk-topos-point",
   "lem-kun-derived-tensor-triangulated",
-  "lem-sf-comparison-pullback-exact",
   "lem-sf-etale-flat-constructible",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-extension-by-zero-unit-iso",
   "lem-weil-pbc-independent-bounded-flat-kflat",
   "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "lemma-nagata-immersion-open-in-scheme-image",
   "lemma-openclosed-vanishing-lowershriek",
@@ -486,18 +410,11 @@
   "prop-constructible-derived-subcategory",
   "prop-openclosed-lowerstar-fully-faithful",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "sk-thm-pe-constructible-comparison",
   "thm-constructible-serre",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-fibre-product-points",
   "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
   "prop-weil-pbc-universal-homeomorphism-topos",
-  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-  "lem-cbc-extension-zero-base-change",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-sfb-locally-closed-extension-coherence"
+  "lem-cbc-extension-zero-base-change"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -555,11 +472,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-44631",
-  "group": "A4",
-  "result": "fix",
-  "landing": "20261021T012346-L-2179442",
-  "kind": "proof",
-  "note": "independent cc review: delivered FlatModelGeneration.lean vs quarantine archive (6 LocallyClosedStratification→Stratification renames, equivalent on Noetherian X via ofNoetherianSpace); node lean record vs module; compile + #print axioms of étale theorems"
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261021T020049-L-2580122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
