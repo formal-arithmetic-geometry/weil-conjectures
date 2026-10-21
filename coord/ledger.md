@@ -20659,3 +20659,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/Q51/sk-def-sf-categories (reviewer PASS; first push; new nodes: 0)
 - 07:24 L: merged deliver/O1/sk-def-cohfamily (reviewer PASS; first push; new nodes: 0)
 - 07:24 L: merged deliver/Q13/def-trf-supported-class (reviewer PASS; first push; new nodes: 0)
+- 07:24 L: merged deliver/Q143/lemma-nagata-sheaf-ideal-powers-assoc (reviewer PASS; first push; new nodes: 0)
