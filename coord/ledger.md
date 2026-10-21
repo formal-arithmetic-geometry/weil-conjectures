@@ -21325,3 +21325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:45 L: returned deliver/Q30/lem-pur-etale-direct-image-scalar-composition (reviewer RETURN: L: independent stage-2 immutable head 8a9c2e521187: H2: the delivery adds theorem node lem-pur-etale-scalar-mate-project)
 - 08:45 L: returned deliver/Q40/lem-sf-etale-derived-pullback-stalk (reviewer RETURN: L: independent stage-2 immutable head 9182a5b22d8b: H2: delivery adds theorem node lem-sfb-etale-derived-tensor-stalk to)
 - 08:45 L: returned deliver/Q18/lem-sf-ringed-kflat-single-tensor-comparison (reviewer RETURN: L: independent stage-2 immutable head b588d79ca859: H2: delivery adds theorem stmt_dep lem-weil-pbc-kflat-fixed-tensor-t)
+- 08:46 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: l)

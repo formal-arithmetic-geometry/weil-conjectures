@@ -56,7 +56,6 @@ L: independent stage-2 immutable head b3cbc5b38afc: This is a stale duplicate of
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-sf-compact-support-proper-image-tower: local changes on the delivery's files, resolve first: M dag/nodes/sec-smooth-purity/lem-sf-compact-support-proper-image-tower.json Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-
-## lem-weil-pbc-finite-field-stratified-perfect-models (2026-10-21 07:51 UTC, branch head 13556e85f27)
+## lem-weil-pbc-finite-field-stratified-perfect-models (2026-10-21 08:46 UTC, branch head a2f52894c00)
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: lem-weil-pbc-finite-field-stratified-perfect-models: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
