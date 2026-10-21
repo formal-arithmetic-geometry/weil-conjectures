@@ -23432,3 +23432,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:09 L: merged deliver/Q32/lem-sfb-condensed-galois-global-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 19:09 L: merged deliver/NM/lem-sfb-poset-augmented-chain-prism (stage 2; reviewer PASS; parallel immutable checks)
 - 19:10 L: merged deliver/N6/lem-sfb-torsion-acyclic-norm-coefficient-test (reviewer FIX; first push; new nodes: 1)
+- 2026-10-21T19:10:50Z L: superseded stage-1 delivery O2/lem-sfb-internal-bar-ordered-cup at 8a5358159b61f43275bfef27dad64c80e7d8a61d; current completion retained; packet archived at refs/superseded/O2/lem-sfb-internal-bar-ordered-cup/8a5358159b61f43275bfef27dad64c80e7d8a61d; stale return retired.
