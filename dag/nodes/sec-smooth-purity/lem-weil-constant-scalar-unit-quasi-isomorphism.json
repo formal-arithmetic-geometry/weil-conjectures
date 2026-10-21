@@ -20,9 +20,129 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-l-adic-extension-integers-dvr] to the given finite extension $L/\\mathbf Q_\\ell$. Its valuation ring is a DVR with finite residue field, and the chosen $\\varpi_L$ generates its maximal ideal. Therefore [lem-weil-valued-dvr-finite-quotients], clauses 2 and 3, gives that every $A_{L,m}$ is finite and that $A_{L,m+1}\\to A_{L,m}$ is surjective. These statements use the target field $L$ alone and impose no unramifiedness assumption on $E\\subset L$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+    "place": "Finite-extension coefficient datum; its existing DVR and finite-quotient auxiliary statements"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-constant-sheaf] the finite coefficient sheaves are sheafifications of constant ring presheaves. By [lem-pe-ring-sheafification-underlying-sets], their underlying sets are the corresponding set-valued sheafifications. Given a section of $(A_{L,m})_Y$ on a site object, [lem-weil-pbc-site-sheafification-sections-local] makes it, on a covering family, the image of elements $a_i\\in A_{L,m}$. Choose lifts $b_i\\in A_{L,m+1}$ using Step 1. Their constant sections are local preimages of the original section under reduction. This proves local surjectivity. As an $R_L$-module map reduction is linear because $\\pi^L_m$ is reduction composed with $\\pi^L_{m+1}$. Its cokernel is zero: every local section of its sectionwise cokernel becomes zero on this covering. The cokernel formula in [def-weil-sheaf-of-modules-category] therefore proves epimorphy in $\\operatorname{Mod}(R_L)$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-pe-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YR (section-sheaves-algebraic-structures), 00WK (lemma-sections-sheafification); module cokernels: sites-modules.tex Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Use the actual multiplication isomorphisms of [lem-weil-constant-scalar-strict-unit]: $u_m(r\\otimes z)=\\rho_m(r)z$, $u_m^{-1}(z)=1\\otimes z$. They commute with reductions. Thus the tower $T_m$ is, as a strict tower of $R_L$-module complexes, the tower $F_m[0]$ where $F_m=\\operatorname{Res}^L_m(A_{L,m})_Y$. Its product is concentrated in degree zero. By [lem-weil-pbc-module-sheaves-limits-sectionwise], the module limit consists on every $V$ of compatible tuples $(z_m)_m$, with componentwise $R_L(V)$-action. By [def-weil-completed-integral-coefficients] these tuples are exactly $R_L(V)$, with $r\\cdot(z_m)_m=(\\pi^L_m(r)z_m)_m$. This identifies the ordinary module limit with $R_L$, not merely its underlying abelian sheaf. Returning through $u_m^{-1}$ gives the limit projections $u_m^{-1}\\pi^L_m$.",
+   "uses": [
+    "lem-weil-constant-scalar-strict-unit",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; explicit regular-module multiplication and limit-coordinate calculation"
+   }
+  },
+  {
+   "text": "Apply clause 1 of [lem-weil-proetale-surjective-tower-derived-limit] with $\\mathcal R=R_L$ and the module sheaves $F_m$ of Step 3. Its hypotheses are exactly the arbitrary scheme $Y$, the sheaf of commutative rings $R_L$, and the epimorphic transitions established in Step 2. It gives an epimorphism $1-s$ on $\\prod_m F_m$ with kernel the ordinary limit via its prescribed projections. Through the strict tower isomorphisms $u_m$, this says that $f=1-s:B\\to B$ is degreewise epimorphic, and its kernel complex is $R_L[0]$ with inclusion $i=(u_m^{-1}\\pi^L_m)_m$. Outside degree zero both source and target of $f$ are zero, so the degreewise epimorphism condition there is automatic.",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10, p. 17; Proposition 3.2.3(1), p. 18; Proposition 4.2.8, p. 29"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to $f:B\\to B$ in the abelian category of $R_L$-module sheaves, using Step 4. It gives a quasi-isomorphism $\\kappa:R_L[0]\\to\\operatorname{Cone}(f)[-1]$ whose unshifted-product component is $i$ and whose shifted-product component is zero. In the cited cone coordinates this is $(0,i)$; equivalently, $\\mathrm{fst}\\,\\kappa=i$ and $\\mathrm{snd}\\,\\kappa=0$. Its $m$-th degree-zero coordinate sends $s$ to $u_m^{-1}\\pi^L_m(s)=1\\otimes\\pi^L_m(s)$. These are precisely both normalization conditions of [lem-weil-constant-scalar-strict-unit]. The uniqueness in that statement gives equality of chain maps $\\kappa=\\eta_{E,L}$. Hence the specified $\\eta_{E,L}$ is a quasi-isomorphism, including its sign and zero-component normalization.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-weil-constant-scalar-strict-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Cone and shift convention, Tag 014Q; the cited kernel-to-cocone lemma supplies the chain comparison, with the strict normalization checked explicitly"
+   }
+  },
+  {
+   "text": "Clause 2 of [lem-weil-proetale-surjective-tower-derived-limit], applied to the same $F_m$, says that $(\\prod_mF_m)[0]$ with its projections is the product of the $F_m[0]$ in $D(\\operatorname{Mod}(R_L))$, and gives a distinguished triangle with first arrow the ordinary-limit inclusion and middle arrow $1-s$. Transport this triangle and the product cone through $u_m$ and the limit identification of Step 3. The result is exactly $R_L[0]\\xrightarrow{(u_m^{-1}\\pi^L_m)_m}B\\xrightarrow{1-s}B\\xrightarrow{\\delta}R_L[1]$, for the transported connecting map $\\delta$. Thus the actual termwise $B$ represents the derived product, with its given projections. This is a Roos triangle by [def-weil-derived-limit].",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10 and its proof, p. 17; Stacks derived.tex Tag 08TC (definition-derived-limit), with 1-s convention"
+   }
+  },
+  {
+   "text": "Localization inverts the quasi-isomorphism of Step 5 by [def-weil-abstract-derived-category]. By [def-weil-integral-scalar-extension], the complex $C_{E,L}$ is the scalar-extension representative when the regular K-flat complex $P=R_E[0]$ is used, as permitted by [lem-weil-constant-scalar-strict-unit]. Let $j_m:C_{E,L}\\to T_m$ be the first cone projection followed by the $m$-th product projection. The normalization gives the strict identity $j_m\\eta_{E,L}=u_m^{-1}\\pi^L_m$. Composing its localized identity on the right with $Q(\\eta_{E,L})^{-1}$ gives $Q(j_m)=Q(u_m^{-1}\\pi^L_m)Q(\\eta_{E,L})^{-1}$. This is the claimed compatibility of the inverse identification with every quotient projection; no uniqueness of an arbitrary isomorphism of homotopy limits is invoked.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-constant-scalar-strict-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Lemma 6.8.2(1); the projection identity is the agent-written strict-coordinate refinement"
+   }
+  },
+  {
+   "text": "For $E=L$, [lem-weil-constant-scalar-strict-unit] identifies the reduction tower computed with $P=R_E[0]$ and $q=\\mathrm{id}$ with the quotient tower, including the equalities $u_m\\gamma_m=\\pi^E_m$. Consequently the first map of the distinguished triangle in Step 6 has exactly the canonical reduction-unit coordinates required in [def-weil-derived-complete]. That definition proves derived completeness of $R_E[0]$. Every preceding application allowed an arbitrary scheme and a general commutative ring sheaf; none assumed connectedness, finite type, quasi-compactness, or an unramified coefficient extension. In particular it applies to disconnected $Y$ and to $Y=\\varnothing$ (where all module sheaves and maps are zero), as well as to the self-extension.",
+   "uses": [
+    "lem-weil-constant-scalar-strict-unit",
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2, p. 24; Lemma 6.8.2(1), pp. 58-59; edge cases of Propositions 3.1.10 and 4.2.8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-constant-scalar-strict-unit",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.1.10 and its proof, Proposition 3.2.3(1), Proposition 4.2.8, Definition 3.5.2, Lemma 6.8.2(1); the normalized chain comparison is the explicit kernel inclusion, not merely an abstract derived-limit isomorphism."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -72,10 +192,52 @@
    "results": "msearch.py: OK, 8 hits; ModuleCat.directLimitCocone, PresheafOfModules.isLimitLimitCone, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfShape, SheafOfModules.Presentation.isColimit, Profinite.asLimitConeIso, AlgebraicGeometry.Scheme.Modules.instHasLimits, Profinite.asLimit",
    "date": "2026-10-21",
    "verdict": "no match: ordinary limits, light condensed epimorphisms, unrelated resolutions, and general homological infrastructure do not assert this pro-etale regular coefficient scalar-unit quasi-isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "replete|Roos|surjective.*[Tt]ower",
+   "results": "msearch.py: OK, 13 hits; Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean, Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Extension/Generators.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary inverse limit of a surjective tower of module sheaves on the pro-etale site maps quasi-isomorphically to its Roos mapping cocone",
+   "results": "msearch.py: OK, 8 hits; SheafOfModules.hasLimit, PresheafOfModules.isSheaf_of_isLimit, PresheafOfModules.isLimitLimitCone, SheafOfModules.hasLimitsOfShape, ModuleCat.directLimitCocone, CategoryTheory.Sheaf.isColimitSheafifyCocone, PresheafOfModules.colimitCocone, PresheafOfModules.limitPresheafOfModules",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone, QuasiIso",
+   "results": "msearch.py: OK, 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme Y the normalized unit from the completed coefficient ring to the mapping cocone of one minus shift on its finite quotient tower is a quasi-isomorphism",
+   "results": "msearch.py: OK, 8 hits; AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, CochainComplex.cm5b.instQuasiIsoIntP",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|quasiIso",
+   "results": "msearch.py: OK, 25 hits; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; subdirectory Algebra/Homology/DerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic inverse sequence in a replete topos has surjective one minus shift on the product and its limit in degree zero is quasi-isomorphic to the two term mapping fiber",
+   "results": "msearch.py: OK, 8 hits; CategoryTheory.Functor.homologySequence_epi_shift_map_mor₁_iff, CategoryTheory.Functor.homologySequence_epi_shift_map_mor₂_iff, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.cm5b, CochainComplex.mappingCone.quasiIso_descShortComplex, HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, CochainComplex.degreewiseEpiWithInjectiveKernel, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide ordinary module-sheaf limits, cone comparisons for short exact complexes, or unrelated normalization/factorization results; none asserts the normalized coefficient tower statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-constant-coefficient-objects-constructible",
@@ -94,5 +256,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-constant-scalar-unit-quasi-isomorphism",
+  "worker": "stage1",
+  "summary": "Reused existing finite-quotient, underlying-set sheafification, module-limit, surjective-tower and kernel-to-cocone statements. Identified the actual strict unit with the quasi-isomorphic kernel inclusion by both cone coordinates, then verified the prescribed Roos triangle, inverse projection formulas and self-extension reduction-unit completeness. No new nodes or statement changes.",
+  "blueprint": "Realizes def-weil-ordinary-compact-cohomology, coefficient-object paragraph ('the completed coefficient sheaf' and scalar extensions): the integral regular coefficient object is derived complete and its scalar-extension comparison uses the normalized strict unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The valuation-ring DVR and finite-residue theorem verifies the hypotheses for finite quotient rings; no theorem in this unit proves this number-theoretic input."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finiteness and surjectivity of the target coefficient quotients are generic DVR inputs to the reduction tower."
+   },
+   {
+    "node": "lem-pe-ring-sheafification-underlying-sets",
+    "why": "Underlying-set compatibility permits the local lifting argument for constant ring sheaves on this site."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representability of sheafification sections supplies the covering on which coefficient lifts exist."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic module-sheaf limit computation identifies the regular completed module with the ordinary limit including its action."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "Generic homological algebra identifies the specified zero-shifted-component kernel inclusion as a quasi-isomorphism; it does not replace a geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-95e85b527",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-95e85b527 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is the first split of an unsplit node (no repair note, no proof on the base) that Q21's PASSed re-split of lem-weil-constant-coefficient-objects-constructible created. The statement and stmt_deps are byte-identical to side-live. The item is not in the drop list and is still unsplit in live. There are no new nodes. I read all eight steps against the cited statements. S1: the integers-DVR node plus clauses 2 and 3 of the valued-DVR node give finite, surjective A_{L,m}; the nonarchimedean hypothesis comes from clause 1 of def-weil-l-adic-coefficient-extension, though the step does not say so (advisory). S2: sheafification is local (00WK) and the cokernel is the sheafified sectionwise cokernel, so local lifts make the reduction epi in Mod(R_L). S3: the strict-unit u_m, the sectionwise module limit and R_L as the sectionwise ring limit identify lim F_m with R_L as an R_L-module, with projections u_m^{-1}π_m. S4 and S6: clauses 1 and 2 of the surjective-tower node, which holds for any scheme and any commutative ring sheaf, give 1−s epi with kernel R_L, the derived product B and the Roos triangle. S5: the kernel-cocone node gives κ=(0,ι) as a quasi-isomorphism; the cone convention is sign-irrelevant because d_B=0; strict-unit uniqueness then gives κ=η exactly. S7: C_{E,L} is literally Rlim^c of def-weil-integral-scalar-extension with P=R_E[0]; the inverse projection identity is right composition. S8: with q=id, c_n=[γ_n]=u_n^{-1}π_n and t_n=[id⊗ρ_n] match the strict tower, so def-weil-derived-complete holds for E=L. Bhatt–Scholze Prop 3.1.10 (p.17) and Def 3.5.2 (p.24) checked; no SGA. Edge cases Y=∅, disconnected Y, ramified E⊂L and E=L checked, plus the small case Spec F_q with Q_ℓ. I accept the six declared tool_uses (arithmetic, sheafification, module limits, kernel-cocone). lem-fd-etale-integral-line-derived-complete overlaps only the E=L corollary (advisory)."
  }
 }
