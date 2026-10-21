@@ -19928,3 +19928,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:43:05Z L: superseded stage-1 delivery Q54/lem-sp-p1-splitting-scalar at 0d96311c0d71dc97d1a977fad4e0baf57c464d77; current completion retained; packet archived at refs/superseded/Q54/lem-sp-p1-splitting-scalar/0d96311c0d71dc97d1a977fad4e0baf57c464d77; stale return retired.
 - 03:43 L: merged deliver/N9/lem-weil-pbc-realization-completed-pull (reviewer FIX; first push; new nodes: 0); claim not held by N9: not your claim
 - 03:43 L: merged deliver/Q65/lem-sp-varying-ring-proper-open-pasting (reviewer FIX+NODE(1); after a return; new nodes: 8)
+- 03:43 L: merged deliver/Q120/lem-sp-etale-sum-coefficient-computation (reviewer PASS; first push; new nodes: 0)

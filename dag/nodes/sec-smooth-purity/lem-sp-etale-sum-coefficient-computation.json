@@ -22,9 +22,88 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The compactification has $r$ proper, hence finite type, so $W$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For either finite coefficient ring $R=A,B$ and any $R$-module sheaf $M$ on $U$, apply [lem-asd-etale-compact-support-normalization] to $M[0]$. It identifies $Rr_*j_!M[0]$ with $e_{\\Sigma!}M[0]$. Taking cohomology gives $R^ar_*j_!M=0$ for $a>0$ and the canonical degree-zero isomorphism $r_*j_!M\\cong e_{\\Sigma!}M$, with exactly the sheet components specified there. Apply this first to $M=P^n$ over $A$, then to $M=P^n\\otimes_A B$ over $B$. The second application requires no flatness of that sheaf over $A$. This proves both acyclicity assertions and gives natural degreewise sheet identifications.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
+   }
+  },
+  {
+   "text": "By [lem-coef-etale-open-tensor], $j_!$ preserves flat sheaves; thus $C=j_!P$ is bounded with flat terms. By [lem-pur-etale-sum-flat-kflat], $e_{\\Sigma!}P^n$ is flat for every $n$. Transporting this property through the degree-zero isomorphism of step 1 makes every $r_*C^n$ flat. Degreewise direct image and extension by zero retain the finite interval on which $P$ is supported. Apply [lem-pc-bounded-above-flat-kflat-site] to $C$ and to $r_*C$: both are K-flat. The same lemma applies to $P$ itself. These verify all flatness and K-flatness claims without a condition on $B/A$.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "lem-pur-etale-sum-flat-kflat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
+   }
+  },
+  {
+   "text": "Apply [lem-sp-acyclic-flat-proper-coefficient-model] to $r$ and $C=j_!P$. Properness is part of the compactification; $W,V$ are Noetherian by step 1; $A,B$ are finite; boundedness, both termwise flatness assumptions, and the two direct-image acyclicity assumptions were verified in steps 1-2. For the second acyclicity assumption use the ordinary tensor isomorphism $C\\otimes_A B\\cong j_!(P\\otimes_A B)$ of [lem-coef-etale-open-tensor]. The cited model theorem therefore identifies the actual proper $B$-adjoint transpose $q_r(C)$ with the chain map $\\pi_C:(r_*C)\\otimes_A B\\to r_*(C\\otimes_A B)$ whose degree-$n$ adjunct is the ordinary counit tensored with $1$. Compose with $r_*$ of the open tensor isomorphism. This is precisely the coefficient map in the statement, with its specified acyclic-complex identifications.",
+   "uses": [
+    "lem-sp-acyclic-flat-proper-coefficient-model",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
+   }
+  },
+  {
+   "text": "Compute that ordinary map before passing to the derived category. For an etale test scheme $S\\to V$, direct image is evaluation on $W_S=W\\times_VS$ [def-weil-pbc-direct-image]. Thus the adjunct defining $\\pi_C^n$ sends a local pure tensor $z\\otimes b$ to the section $z\\otimes r^{-1}b$ on $W_S$: the ordinary counit evaluates the pulled-back section $z$. Here $b$ is a local section of the constant ring sheaf $B_V$, so the formula also covers locally constant, rather than globally constant, coefficients. The open tensor isomorphism is the identity on $U$ and zero on its complement [lem-coef-etale-open-tensor]. Under the degree-zero normalization of [lem-asd-etale-compact-support-normalization], $z$ is sent to its sheet components $(x_s)_s$. Taking the component of $z\\otimes r^{-1}b$ restricts to the same sheet and hence gives $x_s\\otimes b$; tensor restriction acts on each factor. Consequently the composite of step 3 is $(x_s)_s\\otimes b\\mapsto(x_s\\otimes b)_s$. This is a calculation on local generators: by [def-weil-pbc-etale-sum-extension], sum extension is the sheafification of a presheaf of direct sums, so its sections locally come from finite sums of sheet generators; ordinary sheaf tensor is likewise generated locally by pure tensors. The calculation is additive and balanced, since $(a x_s)\\otimes b=x_s\\otimes\\varphi(a)b$. It therefore proves equality of the sheaf morphisms, without assuming that a test scheme globally splits into sheets.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-coef-etale-open-tensor",
+    "lem-asd-etale-compact-support-normalization",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
+   }
+  },
+  {
+   "text": "The degreewise formula commutes with the cochain differential: both composites on a generator give $(d x_s\\otimes b)_s$. Naturality of the acyclic-model theorem and of the sheet normalization identifies the endpoints with the specified complexes, also after coefficient extension [lem-sp-acyclic-flat-proper-coefficient-model, lem-asd-etale-compact-support-normalization]. Hence the equality of chain maps just computed represents the named derived map. Finite sums remain finite after tensoring; for an empty sheet index the generator calculation is the unique map $0\\to0$. It also covers $P=0$, $A=B$ with the identity map, and the zero coefficient ring. No tensor step used exactness of $-\\otimes_A B$: K-flatness was established on the source models instead.",
+   "uses": [
+    "lem-sp-acyclic-flat-proper-coefficient-model",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-coef-etale-open-tensor",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sp-acyclic-flat-proper-coefficient-model",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), expanded bounded-model calculation; Tag 0GKF (lemma-f-shriek-projection), pure-tensor rule. The diagrammatic derived-map identification uses the existing bounded acyclic-flat model theorem; the blueprint Charts paragraph supplies the application."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +140,46 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary algebra, sheafification, categorical mates or underived sheaves; none states this normalized geometric derived assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Ss]um|[Ss]hriek|[Aa]cyclic.*[Ff]lat",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebra, abstract derived functors, and sheaf adjunction declarations do not identify the compactified etale coefficient map on its specified acyclic-flat models.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic flat proper pushforward scalar comparison is represented by direct sum tensor on etale sheets",
+   "results": "Module.Flat.directSum; TensorProduct.directSumLeft; TensorProduct.finsuppLeft; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; Module.Flat.directSum_iff; Module.FaithfullyFlat.directSum; Module.Flat.dfinsupp; TensorProduct.finsuppScalarRight",
+   "date": "2026-10-21",
+   "verdict": "no match: TensorProduct.directSumLeft (Mathlib/LinearAlgebra/DirectSum/TensorProduct.lean:67, read) gives the algebraic sum/tensor equivalence but none of the geometric acyclicity or specified derived counit-transpose identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, TensorProduct",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebra, abstract derived functors, and sheaf adjunction declarations do not identify the compactified etale coefficient map on its specified acyclic-flat models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded flat etale complexes compactified pushforward counit coefficient change sheetwise tensor",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Condensed.profiniteSolidCounit; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebra, abstract derived functors, and sheaf adjunction declarations do not identify the compactified etale coefficient map on its specified acyclic-flat models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension comparison for proper direct image evaluated on bounded complexes of acyclic flat sheaves",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapExactFunctor_smul; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; SheafOfModules.pushforwardNatIso; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebra, abstract derived functors, and sheaf adjunction declarations do not identify the compactified etale coefficient map on its specified acyclic-flat models."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-et-proet-coefficient-compatibility",
@@ -83,5 +198,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-etale-sum-coefficient-computation",
+  "worker": "stage1",
+  "summary": "Kept the statement. Derived degreewise acyclicity from existing etale compact-support normalization on sheaves in degree zero, verified flatness and bounded K-flatness, applied the existing general proper acyclic-flat coefficient model, and computed the resulting actual counit-transpose map on local finite-support sheet generators. No new node.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: summation over geometric etale fibres is integral and commutes with extension of coefficients; this split supplies the bounded-model computation used by lem-sp-et-proet-coefficient-compatibility step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic canonical identification of compactified etale pushforward with exact sum extension, including degree-zero sheet components; not a different coefficient-compatibility route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ringed-site K-flatness criterion applied to bounded flat complexes; not supplied by the unit geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence needed for the compactification space W."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic open-extension flatness and the ordinary/derived tensor comparison normalized to the identity on U."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-compact-support-normalization",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-coef-etale-open-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-91e779983",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-91e779983 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement in full. The item was unsplit with no proof, and there is no repair note. Statement and stmt_deps are unchanged, and the delivery creates no new nodes. The cited statements and their hypotheses match each use. Step 1: applying lem-asd-etale-compact-support-normalization (finite, hence torsion, A and B; u separated, etale, finite type, Noetherian) to M[0] gives the vanishing of the higher direct images and the degree-0 sheet identification. W is Noetherian by the finite-type lemma, since r is proper. Step 2: flatness comes from lem-coef-etale-open-tensor and lem-pur-etale-sum-flat-kflat through the degree-0 isomorphism. K-flatness comes from lem-pc-bounded-above-flat-kflat-site. Step 3: every hypothesis of lem-sp-acyclic-flat-proper-coefficient-model holds. The B-side acyclicity uses the ordinary projection formula with T=B_W. The model identifies the named transpose q_r itself, not an arbitrary isomorphism. Step 4: the generator computation z⊗b -> z⊗r^{-1}b -> (x_s⊗b)_s is correct, and local generation via sheafification is justified. Step 5: the differential carries no Koszul sign. I checked the cases of empty sheets, P=0, B=0, A=B, and non-flat Z/4->Z/2. Minor unstated point, not a fault: the derived q_{j,P} equals the ordinary isomorphism on K-flat models because j_! is fully faithful and both restrict to the identity on U. Sources: Stacks more-etale 0GL6 and the main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (l.20-28) both match. No SGA. No cycle (the closure DFS does not reach the item), and no duplicate in the DAG. The parent's step 4 uses exactly this formula. Accepted tool_uses: lem-asd-etale-compact-support-normalization, lem-coef-etale-open-tensor, lem-pc-bounded-above-flat-kflat-site, and lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf)."
  }
 }
