@@ -119,14 +119,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonDerivedArrow.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.LocalizedTensorComparisonDerivedArrow",
+  "file": "lean/WeilConjectures/Algebra/Homology/LocalizedTensorComparisonDerivedArrow.lean",
   "declaration": "ModuleCat.exists_localizedTensorComparison_derived_arrow",
-  "statement": "theorem exists_localizedTensorComparison_derived_arrow\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) :\n    ∃ H : DerivedCategory (ModuleCat.{u} A) ⥤ Arrow (ModuleCat.{u} C),\n      ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),\n      (∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n        (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic) →\n      ∀ mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C,\n      let F := (extendScalars.{u, u, u}\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n          (.up ℤ)\n      Nonempty (Arrow.mk (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≅\n          H.obj (DerivedCategory.Q.obj U))",
+  "statement": "theorem exists_localizedTensorComparison_derived_arrow\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) :\n    ∃ H : DerivedCategory (ModuleCat.{u} A) ⥤ Arrow (ModuleCat.{u} C),\n      ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),\n      (∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n        (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic) →\n      ∀ mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C,\n      let F := (extendScalars.{u, u, u}\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n          (.up ℤ)\n      Nonempty (Arrow.mk (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≅\n          H.obj (DerivedCategory.Q.obj U))",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-14"
+  "by": "B6",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module under the listed retirement assignment. The proved upstream theorem has the same conclusion without the unused flatness assumption; it specializes to the node statement."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -139,14 +140,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "C-f9627",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261013T201813-L-3978846",
+  "landing": "20261021T004815-L-1789876",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf item vs the unchanged upstream WeilConjectures theorem (same conclusion, no hC); adapted RetractCore diff vs live (import + call only); node lean record vs upstream signature"
  },
  "lean_audit": {
   "master": {

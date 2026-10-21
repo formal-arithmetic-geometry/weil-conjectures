@@ -3,7 +3,7 @@ module
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Retract
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow
+import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonDerivedArrow
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
@@ -81,7 +81,9 @@ theorem localizedTensorComparisonProperty_retract_core
   obtain ⟨eUX⟩ := hUX
   obtain ⟨V, ⟨eVY⟩, hV⟩ := exists_kFlat_representative Y
   obtain ⟨mV⟩ := nonempty_baseDerivedTensorCohomologyModel R A B (V ⊗ Q) C
-  obtain ⟨H, hH⟩ := exists_localizedTensorComparison_derived_arrow R A B C Q N t hC hQ i
+  obtain ⟨H, hH⟩ :=
+    (fun (_ : Module.Flat (A ⊗[R] B) C) ↦
+      exists_localizedTensorComparison_derived_arrow R A B C Q N t hQ i) hC
   obtain ⟨eU⟩ := hH U hU mU
   obtain ⟨eV⟩ := hH V hV mV
   have hr : Retract (DerivedCategory.Q.obj U) (DerivedCategory.Q.obj V) :=
