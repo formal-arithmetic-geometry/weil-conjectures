@@ -105,8 +105,9 @@
   "declaration": "AlgebraicGeometry.Scheme.picardDirectImageUnitMorphism_pullback",
   "statement": "theorem picardDirectImageUnitMorphism_pullback\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S) :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n        (h : i ≫ t = t')\n        (j : pullback f (t' ≫ k) ⟶ pullback f (t ≫ k)),\n        ∀ (hj₁ : j ≫ pullback.fst f (t ≫ k) = pullback.fst f (t' ≫ k)),\n          j ≫ pullback.snd f (t ≫ k) = pullback.snd f (t' ≫ k) ≫ i →\n          let c := (conjugateIsoEquiv\n            ((Classical.choose (Modules.exists_tensorPullbackAdjunction\n              (pullback.fst f (t ≫ k)))).comp\n                (Classical.choose (Modules.exists_tensorPullbackAdjunction j)))\n            (Classical.choose (Modules.exists_tensorPullbackAdjunction\n              (pullback.fst f (t' ≫ k))))).symm\n            (Modules.pushforwardComp j (pullback.fst f (t ≫ k)) ≪≫\n              Modules.pushforwardCongr hj₁)\n          ∀ ξ : picardDerivedModelSections E t,\n            let U := SheafOfModules.unit\n              (moduleRings (pullback f (t ≫ k)).toRingedSpace)\n            let adj := Classical.choose (Modules.exists_tensorPullbackAdjunction j)\n            (adj.leftAdjointUniq (Modules.pullbackPushforwardAdjunction j)).hom.app U ≫\n                SheafOfModules.pullbackObjUnitToUnit j.toRingCatSheafHom ≫\n                picardDirectImageUnitMorphism f L W k t'\n                  (picardDerivedModelRestriction E i t t' h ξ) =\n              (Modules.tensorPullback j).map\n                (picardDirectImageUnitMorphism f L W k t ξ) ≫ (c.app L).inv",
   "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-13"
+  "by": "E3",
+  "date": "2026-10-21",
+  "note": "Restore the complete quarantined zero-hole module. Qualify AlgebraicGeometry.derivedPullback in the private singlePullback_naturality signature, avoiding the newer Scheme.Modules.derivedPullback that caused a universe mismatch. The public signature, complete proof, imports, dependencies and unit route are retained."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -119,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-3a5f9",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T172658-L-2100781",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the recorded statements and dependencies; all files and the direct importer compiled cleanly."
+  "landing": "20261021T143852-L-14430",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
