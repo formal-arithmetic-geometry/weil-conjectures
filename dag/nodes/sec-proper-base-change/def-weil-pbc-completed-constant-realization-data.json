@@ -1,0 +1,129 @@
+{
+ "id": "def-weil-pbc-completed-constant-realization-data",
+ "kind": "definition",
+ "title": "Completed constant realization interfaces",
+ "statement": "For a scheme X, a commutative ring A and ideal I, let C be its adic completion and H the inverse limit on the pro-etale site of the constant sheaves A/I^(n+1). Define the actual scalar-extension realization, the category of bounded finite complexes and their bounded-above finite-free resolutions, and the actual quotient tensor diagrams. A module-realization record specifies the evaluation scalar map, exactness on finite C-modules, adic lissity, and projection-linear natural identifications with completed quotient-module sheaves. A reduction-comparison record consists of finite-free resolutions and a natural isomorphism of the full derived quotient diagrams, whose counit computes on K-flat complexes. These are precisely the existing interfaces of the parent theorem, relocated without a change of definition.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M and sites-cohomology.tex 06YU; unchanged interfaces of lem-weil-pbc-completed-constant-finite-complex-realization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "proof (c): completed constant local model and finite quotient realization; unchanged Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed constant sheaf realization of finite modules over the adic completion is the tensor extension and is exact",
+   "results": "Algebraic AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and variants; no sheaf realization result.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Module\"",
+   "results": "Module instances for AdicCompletion, with no sheaf or finite-complex realization.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*constant|constant.*completion|tensor.*tower",
+   "results": "25 hits, mainly tensor-product tower modules; no completed constant sheaf realization.",
+   "date": "2026-10-20",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantFiniteComplexRealization",
+  "date": "2026-10-21",
+  "group": "E4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): completed constant local model and finite quotient realization; unchanged Lean interfaces",
+   "via": [
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantRealizationData",
+  "file": "lean/Sheaf/Paper/CompletedConstantRealizationData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedConstantModuleRealization",
+  "statement": "structure CompletedConstantModuleRealization (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedConstantAbSheafify",
+   "AlgebraicGeometry.Scheme.completedConstantAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.completedConstantDerived",
+   "AlgebraicGeometry.Scheme.completedConstantQ",
+   "AlgebraicGeometry.Scheme.completedConstantMapComplex",
+   "AlgebraicGeometry.Scheme.completedConstantModules",
+   "AlgebraicGeometry.Scheme.completedConstantExtension",
+   "AlgebraicGeometry.Scheme.completedConstantExtension_additive",
+   "AlgebraicGeometry.Scheme.completedConstantFiniteComplex",
+   "AlgebraicGeometry.Scheme.completedConstantFiniteModules",
+   "AlgebraicGeometry.Scheme.completedConstantResolutions",
+   "AlgebraicGeometry.Scheme.completedConstantQuotient",
+   "AlgebraicGeometry.Scheme.CompletedConstantQuotientTower",
+   "AlgebraicGeometry.Scheme.completedConstantTensor",
+   "AlgebraicGeometry.Scheme.completedConstantTensorTower",
+   "AlgebraicGeometry.Scheme.CompletedConstantDerivedTower",
+   "AlgebraicGeometry.Scheme.completedConstantRealization",
+   "AlgebraicGeometry.Scheme.completedConstantGenerator",
+   "AlgebraicGeometry.Scheme.completedConstantReductionLevel",
+   "AlgebraicGeometry.Scheme.CompletedConstantReductionTower",
+   "AlgebraicGeometry.Scheme.completedConstantUnderlyingModule",
+   "AlgebraicGeometry.Scheme.completedConstantQuotientMap",
+   "AlgebraicGeometry.Scheme.completedConstantBaseMap",
+   "AlgebraicGeometry.Scheme.CompletedConstantModuleRealization",
+   "AlgebraicGeometry.Scheme.CompletedConstantReductionComparisons"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-445d0",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261021T011016-L-2028359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-445d0",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261021T011016-L-2028359",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/data/tower/2 sorry modules vs live CompletedConstantFiniteComplexRealization (moved decls byte-identical, theorem signature verbatim), item node vs its Lean proof, 3 direct importers compiled against delivered modules"
+ }
+}
