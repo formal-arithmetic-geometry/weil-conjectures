@@ -1,80 +1,170 @@
-# Worker report — NB
+## Worker report
 
-Item: `lem-sfb-gabber-global-snc-alteration`. Stage 1 only, 2026-10-22. The shared repository and launcher were read only. All authored files are in this sandbox. No Lean was written and no compiler, Lake or build command was run. No agents were started.
+The module `Sheaf.AlgebraicGeometry.GabberGlobalSNCAlteration` states
+`AlgebraicGeometry.exists_gabber_global_snc_alteration`, with `sorry` as its only proof.
+There are no definitions, additional theorem obligations, new nodes, dependency repairs,
+or statement corrections. The node changes only `lean` and adds the already landed
+`def-sc-quasi-projective` and `def-trf-strict-normal-crossings-divisor` to `stmt_deps`.
+These supply existing notions that the original statement describes in words.
 
-## Files written
+Source read: ILO, Travaux de Gabber, Expose X, printed pp. 148--152: the definition of an
+ell-prime alteration, Theorem 2.1, its following relative-SNC definition, and proof 2.3
+Steps 1--3. The complete eight-step DAG proof is reproduced in the theorem docstring,
+including the good-component selection, graph argument for projectivity, and return
+to the original open subscheme. The source's geometric conditions agree with the node.
 
-- `dag/nodes/sec-six-functors-basics/lem-sfb-gabber-global-snc-alteration.json`: item split into eight steps; no mathematical change to its statement. The malformed TeX `$k\prime$` was corrected to `$k'$`.
-- `lem-sfb-proper-pair-radicial-preparation`: new statement-only geometric preparation lemma, unsplit; no Mathlib match.
-- `lem-sfb-equivariant-smooth-galois-model`: new statement-only equivariant Gabber–Vidal model, unsplit; no Mathlib match.
-- `lem-sfb-semilinear-sylow-good-components`: new statement-only invariant-field/component-selection lemma, unsplit; no Mathlib match.
-- `lem-sfb-tame-snc-quotient-resolution`: new statement-only relative tame-quotient resolution lemma, unsplit; no Mathlib match.
-- `citations.json`: 15 exact statement quotations, one for each node cited in each proof step.
-- `report.md`: this report. `research/` contains the local PDF text, actual search outputs, and sandbox drafting scripts. The delivery contains only the assigned item, its four new nodes and this report.
+### Each hypothesis and conclusion clause
 
-## Attachments
+| Node clause | Lean rendering |
+| --- | --- |
+| Arbitrary field k | `(k : Type u) [Field k]` |
+| Prime ell different from char(k) | `(ℓ : ℕ) (hℓ : Nat.Prime ℓ) (hchar : ℓ ≠ ringChar k)` |
+| k-scheme X | `(X : Scheme.{u}) (f : X ⟶ Spec (.of k))` |
+| Separated | `[IsSeparated f]` |
+| Finite type | `[LocallyOfFiniteType f] [QuasiCompact f]`, exactly the recorded finite-type convention |
+| Nowhere dense closed subset Z | `(Z : Set X) (hZ : IsClosed Z) (hZnd : interior Z = ∅)`; closedness makes this equivalent to empty interior of the closure |
+| Finite field extension k'/k | `∃ (K : Type u) (_ : Field K) (i : k →+* K), i.Finite ∧ ...`; a field homomorphism is injective, and `i.Finite` is finiteness for its canonical scalar action |
+| Extension degree prime to ell | `Nat.Coprime (@Module.finrank k K _ _ i.toAlgebra.toModule) ℓ` |
+| Scheme P over k' | `∃ (P : Scheme.{u}) (p : P ⟶ Spec (.of K)) ...` |
+| Smooth | `Smooth p` |
+| Quasi-projective, locally closed immersion in finite projective space | `IsQuasiProjective p`; the upstream definition quantifies over a finite coordinate type and an `IsImmersion` over `Spec K` |
+| Proper, projective, surjective alteration a | `(a : P ⟶ X)` and `IsProper a ∧ IsProjectiveBundle a ∧ Surjective a`; projectivity uses the node's projective-bundle convention |
+| Compatibility with Spec(k') to Spec(k) | `a ≫ f = p ≫ Spec.map (CommRingCat.ofHom i)` |
+| Every component generic point maps to a component generic point | `∀ (C : Set P), C ∈ irreducibleComponents P → ∀ η : P, IsGenericPoint η C → (∃ B ∈ irreducibleComponents X, IsGenericPoint (a η) B) ∧ ...` |
+| Finite induced residue extension at each such generic point | `(a.residueFieldMap η).hom.Finite` |
+| Every such degree is prime to ell | `Nat.Coprime (@Module.finrank (X.residueField (a η)) (P.residueField η) _ _ (a.residueFieldMap η).hom.toAlgebra.toModule) ℓ` |
+| Reduced inverse image of Z | `∃ D : P.IdealSheafData, D = ((Scheme.IdealSheafData.vanishingIdeal ⟨Z, hZ⟩).comap a).radical ∧ ...`; D is determined by this equality |
+| Relative strict normal crossings | `D.IsStrictNormalCrossingsDivisor p` |
+| Finitely many distinct irreducible components | That predicate supplies `n : ℕ`, `C : Fin n → P.IdealSheafData`, injective component supports, integral component schemes, and union of supports equal to D's support |
+| Each component smooth of codimension one | The same predicate for singleton finite subsets: `Smooth ((⨆ i ∈ s, C i).subschemeι ≫ p)` and ambient stalk dimension equals intersection stalk dimension plus `s.card = 1` |
+| Every intersection smooth of codimension its number of components | The predicate quantifies over every `s : Finset (Fin n)` and all points of the scheme cut out by the sum of the component ideals, with the same dimension formula |
+| Local equations are distinct regular parameters | At every `x : P`, an affine neighborhood `U`, stalk Noetherianity `hR`, regular system `t`, and a `s.Sublist t` with `s.Nodup`, whose product generates the stalk ideal of D |
+| Local equation is the actual boundary ideal | `(D.ideal U).map (P.presheaf.germ U.1 x hx).hom = Ideal.span {s.prod}` |
+| Regular-scheme SNC boundary | `IsStrictNormalCrossingsBoundary D ∧ IsRegularScheme P` |
+| Empty schemes, boundaries and intersections allowed | No nonempty or connectedness hypothesis. Finite component families and the parameter sublist may be empty. The relative SNC predicate includes the empty subset and vacuous pointwise codimension conditions for empty intersections. |
 
-None. I searched `lean/WeilConjectures` for the item id, Gabber, global alteration and strict normal crossings, then the corresponding upstream slopmaster2 text. The Gabber declarations found concern henselian affine cohomology and Artin–Gabber vanishing, not this alteration theorem. No sorry-free declaration gives this item or any of the four new geometric inputs.
+The local product equation is precisely the component equation assertion, without a new
+local-chart definition: the entries of a regular system are prime parameters, and the
+nodup sublist gives distinct local prime factors. The relative SNC components are integral
+and smooth, hence their stalks through x are domains. Their local prime ideals are exactly
+these parameter ideals. Conversely component parameter equations give this product ideal
+because D is the reduced Cartier union. Thus no etale neighborhood, arbitrary replacement
+map, or weaker set-theoretic boundary equation is substituted for the stated local condition.
 
-## Wanted sources
+### Dependency declarations read and used
 
-None required for this one-level split. ILO X Lemma 2.2 is present and is the primary local source of the new equivariant model. Its further proof references Vidal 2004b, but that is below a new unsplit node and is not being passed off as a proof completed here.
+All original statement-dependency nodes, their Lean/mathlib records, and the recorded
+signatures and docstrings were read. The modules are read from the live read-only checkout.
 
-## What the imported item needed
+- `def-weil-field`: Mathlib `Field`, `Mathlib.Algebra.Field.Defs` (line 180).
+- `def-weil-finite-type-morphism`: `AlgebraicGeometry.LocallyOfFiniteType`,
+  `Mathlib.AlgebraicGeometry.Morphisms.FiniteType` (line 43), and
+  `AlgebraicGeometry.QuasiCompact`, `Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact`
+  (line 43). Both classes express the finite-type hypothesis.
+- `def-weil-proper-morphism`: `AlgebraicGeometry.IsProper`,
+  `Mathlib.AlgebraicGeometry.Morphisms.Proper` (line 42), with the recorded
+  `IsSeparated` and `UniversallyClosed` signatures in their owning Mathlib modules.
+- `def-pc-field-extension`: the ring map `i`, equivalently its `RingHom.toAlgebra`,
+  using Mathlib `Algebra` in `Mathlib.Algebra.Algebra.Defs` (line 95).
+- `def-sbc-smooth-morphisms`: `AlgebraicGeometry.Smooth`,
+  `Mathlib.AlgebraicGeometry.Morphisms.Smooth` (line 62).
+- `def-trf-projective-bundle-morphism`: `AlgebraicGeometry.IsProjectiveBundle`,
+  `Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism`, read in full. It uses an actual
+  quasi-coherent finite-type module and closed immersion into its canonical projective bundle.
+- `def-weil-surjective-morphism`: `AlgebraicGeometry.Surjective`,
+  `Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap` (line 59).
+- `def-weil-irreducible-components`: the recorded Mathlib match `irreducibleComponents`,
+  `Mathlib.Topology.Irreducible` (line 107), maximal irreducible subsets.
+- `def-sc-generic-point`: `IsGenericPoint`, `Mathlib.Topology.Sober` (line 39),
+  equality of singleton closure with the given component.
+- `def-weil-residue-field`: `AlgebraicGeometry.Scheme.residueField` and
+  `AlgebraicGeometry.Scheme.Hom.residueFieldMap`,
+  `Mathlib.AlgebraicGeometry.ResidueField` (lines 48 and 123).
+- `def-weil-pbc-regular-system-of-parameters`:
+  `IsLocalRing.IsRegularSystemOfParameters`,
+  `WeilConjectures.RingTheory.IsRegularSystemOfParameters`, read in full.
+- `def-trf-strict-normal-crossings-boundary`:
+  `AlgebraicGeometry.IsStrictNormalCrossingsBoundary`,
+  `Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary`, read in full.
+- `def-weil-regular-scheme`: `AlgebraicGeometry.IsRegularScheme`,
+  `Sheaf.AlgebraicGeometry.IsRegularScheme`, read in full: local Noetherianity AND
+  stalkwise regularity, not just regularity of individual rings.
+- Added landed `def-sc-quasi-projective`: `AlgebraicGeometry.IsQuasiProjective`,
+  `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective` (line 48).
+- Added landed `def-trf-strict-normal-crossings-divisor`:
+  `AlgebraicGeometry.Scheme.IdealSheafData.IsStrictNormalCrossingsDivisor`,
+  `Sheaf.AlgebraicGeometry.StrictNormalCrossingsDivisor`, read in full.
 
-The statement accurately follows ILO X Theorem 2.1, its preceding alteration definition, and the relative SNC explanation (pp.148–149), with the explicit regular-parameter consequence recorded in the reviewed parent. Its proof was empty. The blueprint ancestor script reports `None`: this input was added under a chain whose original root was not imported, so I retained that truthful null ancestor, the inherited via-chain, and filled each new node's precise ILO proof place. Whole-blueprint searches for alteration, Galois alteration, tame quotient, Sylow quotient, proper normal, log regular/log smooth and strict/relative strict normal crossings found no blueprint node stating these four new inputs. DAG searches also used the ILO places and the concepts, not only the chosen ids.
+Proof-only imports include the recorded projectivity, relative projective space,
+ample-module, finite-projective-bundle, H-projective composition and conversion modules,
+as well as Mathlib closed-immersion base change, etale composition, surjective base change
+and Sylow. The four new geometric proof nodes (proper-pair preparation, equivariant model,
+Sylow good components and tame quotient resolution) have no Lean declarations yet and
+therefore no import. Their absence does not affect this statement's objects; their full
+intended uses are in the proof docstring. No consumer module is changed in the read-only clone.
 
-A degree subtlety was made explicit rather than silently strengthening an intermediate conclusion. For disconnected equivariant models one cannot infer that every component of a Sylow quotient has prime-to-ell residue degree just from the quotient's total generic degree. For example, take a quadratic Galois extension E/F, D=C2 inside G=S3 and the induced G-scheme Y=G×^D Spec E. Its full quotient is Spec F. For an ell=2 Sylow L, Y/L has factors Spec F and Spec E, of degrees 1 and 2, although the total degree is 3. The new Sylow lemma selects good open-and-closed components, at least one above each target component; the item uses only these. Thus its every-generic-point clause is retained, not replaced by a total-degree clause. This is a clarification of the source's compressed Step 2, not a dispute of the existence theorem.
+### Edge cases
 
-The field must also be common to all components. Taking the compositum of separately chosen prime-to-ell field extensions would be invalid (two cubic fields can have a compositum of even degree). The construction instead assembles the equivariant models over one finite normal constant extension before the single Sylow choice. Then the common fixed field F has prime-to-ell degree over e, and e/k is radicial.
+- Empty X: take K=k of degree one and P empty. Generic-point and stalk conditions are
+  vacuous; the empty Cartier divisor is represented by the unit ideal.
+- Empty Z with nonempty X: D is the unit ideal. The relative predicate permits `n=0`.
+  At any stalk choose `s=[]`, with product one, and any regular parameter system t.
+- Dimension-zero components of P: t and s may both be empty; a nowhere dense Z has
+  no such component generically in its preimage.
+- Empty intersections: smoothness of the empty scheme is allowed and the codimension
+  equation has no points at which to be tested.
+- Empty index subset of the components: the ideal sum is bottom and its subscheme is P;
+  the smoothness assertion is `Smooth p` and the dimension equation has increment zero.
+- Characteristic zero: `ringChar k=0` and every prime is allowed. No positive-characteristic
+  or perfectness assumption is added. In positive characteristic only the given prime is excluded.
+- Disconnected or nonreduced X: no integrality or reducedness hypothesis is imposed. Every
+  component of P is tested separately, rather than taking a total generic degree.
+- Finiteness is explicit for i and every generic residue map: the convention that `finrank`
+  is zero for an infinite extension cannot accidentally make the degree assertion vacuous.
+- All ambient fields and schemes are in the explicit universe u, consistent with the recorded
+  geometry APIs. A finite field extension of k has a representative in this same universe.
+  `set_option autoImplicit false` prevents any silently introduced variable or universe.
 
-## New nodes and their scope
+### Searches made
 
-The preparation lemma states only compactification, radicial constants, blowup and normalization data. It gives neither a regular/smooth source nor a prime-to-ell alteration. Its source is X 2.3 Step 1 (p.150). For a finite set of components use one common finite purely inseparable extension, reduce each base change, blow up the nowhere dense boundary, and normalize. The resulting generic extensions are purely inseparable; normalization does not change those function fields. An empty boundary uses the unit ideal. Reduction of a nonreduced input is included in taking reduced integral components.
+- `msearch.py ... leanfinder` query: "Gabber prime to ell projective alteration with smooth
+  quasi-projective source and relative strict normal crossings boundary". Eight results:
+  smooth and standard-smooth morphism definitions/chart results and Proj valuative existence;
+  none states the alteration theorem.
+- `msearch.py ... loogle` query: `"IsSmooth", "IsProper"`. Zero hits.
+- `msearch.py ... grep` query: `Gabber|alteration|normalCrossing|normal_crossing`.
+  Three Mathlib hits, all bibliographic mentions of Beilinson--Bernstein--Deligne--Gabber
+  in triangulated t-structure files. No alteration theorem or SNC predicate.
+- `msearch.py ... leansearch` query: "Prime to ell alterations resolving a variety with relative
+  strict normal crossings boundary". Eight hits on etale loci, normalization, ramification,
+  and base-change stability; none states the theorem.
+- `rg` in `lean/WeilConjectures` and `lean/Sheaf` for
+  `Relative.*[Nn]ormal|[Nn]ormalCrossings|[Qq]uasiProjective|[Qq]uasi[Pp]rojective|[Gg]abber`
+  found existing relative SNC and quasi-projectivity interfaces, reused here. Narrow searches
+  for the item id and theorem name found only proof-plan citations in NestedOpenRegularAlteration,
+  with no existing statement of this item. No new definition is needed.
+- DAG search for `def-trf-strict-normal-crossings-divisor` and quasi-projective locally closed
+  immersions located the two landed definition nodes added to statement dependencies.
 
-The prime-free equivariant model is the finite-family form of X Lemma 2.2 and the induction construction (2.a)–(2.b) in X 2.3 Step 2 (pp.149–151). It has much more equivariant data than an arbitrary alteration, but has no prime-to-ell assertions. Over a Galois field splitting the geometric components, apply Lemma 2.2 to a component and its stabilizer, extend H1→H into G1→G by the graph construction, and induce by finite disjoint copies. For finitely many components use a common finite normal constant extension K; each original constant extension is normal up to its radicial fixed field. The finite group obtained by fibre products of the original groups and Aut_e(K) acts on the base-changed models. Its fixed constant field and its generic quotient remain purely inseparable over the original constants and target. Smoothness and relative SNC persist under that constant base change. The disjoint union is formed before the Sylow step. These arguments explain the finite-family formulation; the lemma itself remains statement-only for a future worker.
+Validation: prescribed `scompile.py NB lem-sfb-gabber-global-snc-alteration <file>` compiled
+both sandbox and library-name modes cleanly, most recently in 3.0 s and 4.3 s. An initial
+style warning about an extra newline before the docstring terminator was repaired; the final
+file has no warnings. The only theorem proof is `sorry`, as required for stage 2.
 
-The Sylow lemma states the semilinear fixed-field and good-component calculus for an already supplied equivariant model, not the existence of that model or its resolution. It follows the arithmetic paragraph in X 2.3 Step 2 (p.151), with the component selection spelled out. In a generic component of Y with decomposition group D, conjugate a Sylow of D into L. Its image in the L-quotient has residue degree equal to a purely inseparable factor times the index of the image of D∩L in the effective decomposition group. This index divides [D:D∩L], which is prime to ell after that choice. The image of L is Sylow in the constant-field action too, so [K^L:e] is prime to ell. Retain one such component over each component of B. Q is normal, so its components are open and closed. The retained map is proper and its image contains every target generic point, hence it is surjective. This node contains scheme and field identifications beyond Sylow conjugacy, so the Mathlib Sylow hits alone are not a leaf.
+## Second reading by NB
 
-The tame quotient lemma concerns birational resolution of a quotient of a pair which is *already smooth* over a finite separable extension. It asserts no alteration of an arbitrary scheme and makes no prime-to-ell choice. Read X Theorem 1.1 (pp.135–136) and X 2.3 Step 3 (pp.151–152), together with VIII 3.4.9 and VIII 4.1–4.2 for strictification and the intersection criterion. For each connected component, replace its stabilizer by its quotient by the kernel on its function field; the resulting action is generically free, and its order remains invertible. Apply the relative log modification theorem and induce over each orbit. Resolve the log regular quotient by projective saturated log blowups and strictification. The trivial-base log chart of X 1.2 makes the resolved scheme and all boundary intersections smooth over F even when F is imperfect. The image of the original invariant divisor is locally Q-Cartier; its total transform is a union of components of the resolved enlarged boundary. It is this sub-boundary, not an arbitrary closed subset of an SNC divisor, that the statement uses. All these construction inputs are internal to the new unsplit lemma; they are not uncited steps hidden in the item's proof.
+This is a dispatcher-started single-worker delivery; no additional agent was started, as the
+brief forbids it. This section records a second pass by the same worker; the maintainer supplies
+the independent review.
 
-Each new lemma has independently introduced objects, hypotheses and conclusions, no proof or proof-dependencies, null proof origin and Mathlib match, explicit notions or inline definitions, its own blueprint place and recorded actual searches. None is a clause of the assigned statement: their intermediate conclusions do not provide the requested arbitrary-pair prime-to-ell smooth alteration by themselves. The item assembles the preparation, equivariant construction, degree selection and quotient repair; its final steps carry the product-degree and open-restriction arguments.
-
-## Mathlib searches
-
-Every new node has five actual searches: LeanFinder with two different phrasings, Loogle, source grep and LeanSearch. The item has new searches in addition to its inherited records. Exact commands and their unedited results are in `searches.jsonl` and `research/search-*.txt`. Normalization and geometrically reduced definitions came up for preparation; smooth charts and Proj properness came up for the equivariant and resolution nodes; Sylow transitivity, prime index and surjective images came up for the component lemma. None gives the corresponding combined statement in one line. Loogle queries that failed to resolve a supplied identifier are explicitly recorded as unavailable, not mathematical evidence of absence. The service did not fail for the other search methods. No invented search was entered.
-
-## Not duplicates
-
-- lem-sfb-proper-pair-radicial-preparation vs lem-sbc-radicial-preparation-construction: the existing affine generic-fibre construction assumes a geometrically irreducible fibre and gives neither proper compactification, normalization, nor a Cartier boundary; the new lemma handles arbitrary separated finite-type pairs and all components.
-- lem-sfb-proper-pair-radicial-preparation vs lem-per-normal-projective-compactification: the existing lemma is over a complete strictly henselian mixed-characteristic trait with a regular flat quasi-projective source; the new input is over an arbitrary field and allows nonreduced and reducible X.
-- lem-sfb-equivariant-smooth-galois-model vs lem-per-projective-galois-alteration-envelope: the existing envelope dominates a supplied separable alteration and is only normal; the new model constructs a smooth source and relative SNC divisor, allows inseparability, and controls the semilinear constant field.
-- lem-sfb-equivariant-smooth-galois-model vs lem-per-trait-semistable-galois-alteration: the existing model is over a mixed-characteristic trait and is semistable there; the new one is smooth over a field and includes the global relative boundary and generic full-quotient properties.
-- lem-sfb-equivariant-smooth-galois-model vs lem-trf-plurinodal-alteration: a marked tower of nodal curves is not a smooth projective alteration with an SNC divisor and the required semilinear full quotient.
-- lem-sfb-semilinear-sylow-good-components vs lem-per-admissible-quotient-generic-degree: the latter assumes an integral source with an admissible generically free action and gives intermediate invariant-field degree; the new node handles disconnected semilinear models, radicial generic full quotient, common constants and selection of the good components.
-- lem-sfb-semilinear-sylow-good-components vs lem-weil-pbc-sylow-subgroup-prime-index: the existing group lemma only supplies a subgroup; it gives none of the scheme quotient or fixed-field conclusions. It is cited separately in the item's Step 4.
-- lem-sfb-tame-snc-quotient-resolution vs lem-per-gabber-log-smooth-equivariant-modification: the existing relative theorem assumes a complete strictly henselian trait; this is the field case and concludes a smooth projective resolution and the original relative SNC sub-boundary.
-- lem-sfb-tame-snc-quotient-resolution vs lem-per-tame-log-quotient-modification: that statement gives a proper log regular model and a containing closed boundary, not projectivity, relative smoothness, strictness, or equality with the transformed original boundary.
-- lem-sfb-tame-snc-quotient-resolution vs lem-per-log-regular-projective-log-resolution: that lemma starts with a log regular model and concludes regularity, not strictness of the global boundary or its relative smoothness over an imperfect field; here the input is the finite quotient of a smooth pair.
-- lem-sfb-tame-snc-quotient-resolution vs lem-trf-normal-crossings-strictification: that lemma assumes an algebraically closed field and supplies a proper map, whereas the new one treats a tame quotient over an arbitrary field with projective relative smooth conclusions.
-- lem-sfb-tame-snc-quotient-resolution vs lem-per-noetherian-log-pair-strict-resolution: the existing excellent log-pair lemma supplies only a proper regular resolution and an encompassing SNC boundary; it does not assert preservation of log smoothness, projectivity, or equality with the original transformed boundary.
-
-## Review by NB
-
-I read the assigned node and its reviewed parent, the chapter and unit records, the stage-1 brief, SETUP's three levels, GOAL, and delivery-errors B–E. For the mathematical source I read ILO X's alteration definition and Theorem 2.1 (pp.148–149), Lemma 2.2, and every paragraph of the three-step proof X 2.3 (pp.150–152); for the quotient input also X 1.1 and the role of the trivial-base chart X 1.2. The new nodes' source places are identified individually above. I did not substitute IX local uniformization for the proper global theorem or use any SGA route.
-
-Step 1 is the direct empty-scheme construction. Step 2 uses exactly the proper-preparation statement, including *all* its outputs, and checks ell differs from the characteristic before reading its radicial degrees as prime to ell. Step 3 uses the new model's smooth projective source, relative divisor, constant fixed field and dense-open full quotient; I checked its input is normal, proper and geometrically reduced, not just reduced. Step 4 uses the existing Sylow existence statement and the new semilinear component statement. I checked the new statement actually gives prime-to-ell degree at every retained generic point and a single F, and that the selected inverse image is open and closed. Step 5 applies the tame quotient resolution with K/F finite separable, the order of L invertible, and the restricted divisor still invariant and relative SNC. Its statement explicitly gives equality of generic fields and the exact original-boundary preimage. The equality q(D)=d^{-1}(C_B) is written as a pointwise surjectivity argument, not inferred from an unsupported containment.
-
-Step 6 cites the *projective-bundle* composition lemma, whose quasi-compact/quasi-separated final-base hypothesis is met by both proper finite-type bases. The two field-tower degree products are written out. Step 7 uses the defining open-restriction identifications of relative Proj and closed-immersion base change to restrict the actual projective-bundle embedding; it uses the surjective base-change and projective-implies-proper node statements for precisely those conclusions. I initially considered `lem-pc-projective-base-change`, read its H-projective definition, and removed that mismatched citation. Step 8 uses open-implies-etale from `lem-weil-pbc-etale-composition-cancellation`, smooth relative-dimension composition locally where the smooth dimension is constant, and the smooth definition's locally-constant clause. Its remaining argument is restriction of unchanged local rings, parameter equations and projective embedding. The boundary definition is used only to identify the already obtained local/intersection data with that notion. Every cited statement was opened; citations.json contains literal substrings rather than paraphrases.
-
-I tested the new statements on empty boundary, dimension zero, disconnected source, nonreduced original X, characteristic zero and imperfect characteristic p, and nonfaithful action on constants and components. The preparation node explicitly excludes only empty X, which is handled by Step 1. The quotient resolution permits nonfaithfulness and disconnectedness because it works orbit by orbit with effective stabilizers. No perfection assumption was used. The S3 induced quadratic example above tests the main arithmetic trap and explains the good-component formulation. In dimension zero the preparation is finite radicial field data and the quotient calculation retains a prime-degree field factor; the boundary is empty. Taking H trivial reduces the quotient lemma to the original smooth pair, so it cannot create a spurious nonempty boundary. Each new node is statement-only, self-contained and a substantive independent input; elementary field-tower multiplication, restriction of parameter equations and the quotient support identity remain in the item's steps. No step exceeds 2000 characters, so no long inline comparison is concealed.
-
-All inherited metadata was retained, and no target or unit record was changed. Off-unit generic tools are declared in split_report.tool_uses with their role. The first server `review_split` check passed. A supplementary read-only inspection found no cycle through the new nodes, but found inherited cycles deeper in existing relative-Proj and Grothendieck-resolution nodes; those are outside the assigned writable files and were not edited. The required server preflight passed despite those pre-existing cycles. The final required delivery dry run and push are recorded below when they finish.
-
-## Unfinished work
-
-The four new nodes are intentionally unsplit, as a one-level stage-1 delivery requires. Nothing else in the assigned split is deferred.
-
-## Validation and delivery
-
-First required dry run exited with one citation-format diagnostic: the Sylow statement used only comma-grouped node references, which the gate did not recognize as single node references. I expanded grouped citations in all four new statements into separate `[node-id]` references and updated the exact quotations. The mathematical statements were unchanged. The repaired dry run exited successfully: `OK (not pushed)` at `e5d4f94e6c6`. I then added the existing field-tower definition as an explicit statement dependency of the four new nodes, to cover finite/separable/purely-inseparable terminology and field degree; a final dry run of that exact tree follows.
+With the final node and Lean file open, I checked every row above against the exact signature.
+The result retains arbitrary separated finite-type X (not only integral X), uses the
+projective-bundle predicate requested by the node, and quantifies at EACH component generic
+point with the actual induced scalar action. The relative-SNC predicate already gives the
+finite component/intersection clauses; its empty finite subset supplies smoothness of P.
+The additional regular-scheme predicate includes local Noetherianity. The local formula uses
+actual stalk ideals and no etale substitution. On this pass I made distinctness of the local
+parameter factors explicit with `s.Nodup`; that is already forced for a sublist of a regular
+parameter system, and directly renders the node's word "distinct". I also ensured every
+available proof-dependency module, including Mathlib leaves, has a proof-only import.
+No mismatch, disputed statement, or dependency-interface defect remains.
