@@ -27,9 +27,182 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scalar ring is $\\Lambda(*)=\\Omega$. A finitely presented vector space has a finite basis, so $R_T\\otimes_\\Omega V\\cong R_T^r$, and conversely $R_T^r=R_T\\otimes_\\Omega\\Omega^r$. Thus finite constant local models are precisely lisse modules, including rank zero [sk-def-sfb-constructible, def-sfb-lisse-coefficient-module]. The underlying space of $X$ is Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Each locally closed subspace is Noetherian (intersect a descending chain of closed sets with the subspace), and has finitely many irreducible components by [lem-sc-noetherian-finite-irreducible-components]. These assertions also apply to every stratum used below.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-sfb-lisse-coefficient-module",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(2): verification of the scheme and scalar-local-model hypotheses"
+   }
+  },
+  {
+   "text": "Verify the two coefficient hypotheses of [lem-zl-t-admissible-dualizable-truncations] for the actual all-continuous ring. Every ideal of the field $\\Omega$ is zero or $\\Omega$, hence is finitely presented; every finitely presented $\\Omega$-module is finite free, hence has a length-zero finite projective resolution. For every extremally disconnected profinite $P$, the section ring $\\Gamma(P,\\Lambda)=C(P,\\Omega)$ is an $\\Omega$-vector space. A choice of basis identifies its tensor functor with a direct sum of copies of the identity, so it is flat over $\\Omega$. This is t-admissibility as explicitly defined in the cited statement; it does not assert that continuous maps factor through a finite subfield. On any stratum $T$, that statement therefore identifies the cohomology of every dualizable object with finite constant local models. Its geometric hypothesis holds by step 1.",
+   "uses": [
+    "lem-zl-t-admissible-dualizable-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 6.1 and Theorem 6.2(2); the field case of the two algebraic hypotheses"
+   }
+  },
+  {
+   "text": "Let $u:L\\to M$ be a morphism of lisse $R_T$-modules on a stratum. By [lem-zl-condensed-dualizable-local-perfect-models], $L[0]$ and $M[0]$ are dualizable: on their respective trivializing covers they are scalar finite free complexes in degree zero. Derived scalar extension gives the same complexes since they are free. The cited statement makes their cone dualizable. The explicit cone convention of [def-weil-abstract-derived-category] represents this cone by $L\\xrightarrow{u}M$ in degrees $-1,0$, so its cohomology is $\\ker u$ in degree $-1$, $\\operatorname{coker}u$ in degree zero, and zero otherwise. Step 2 implies that these two sheaves have finite constant local models; by step 1 they are lisse. Thus kernels and cokernels are closed without any finite-field descent.",
+   "uses": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 4.13 and the stable-subcategory assertion after Definition 3.3, combined with Theorem 6.2(2)"
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to L\\to E\\to M\\to0$ with lisse ends on $T$, first trivialize both ends on a common pro-etale cover. The epimorphism to the finite free $M$ splits after a further cover by [lem-weil-pbc-proetale-free-epi-local-splitting]. On this cover the splitting identifies $E$ with $L\\oplus M$: $(l,m)\\mapsto l+s(m)$ has inverse $e\\mapsto(e-s(\\bar e),\\bar e)$. Hence $E$ is finite free there and is lisse. The assertion includes a zero end.",
+   "uses": [
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Opening lisse reduction; extension closure as expanded in sk-lem-coefficient-heart.proof.md, Extensions paragraph"
+   }
+  },
+  {
+   "text": "Let $\\mathscr A_c$ be the full isomorphism-closed class of constructible $R_X$-modules. It contains zero by the rank-zero model. For a map between two such modules, choose a common finite stratification by [lemma-constructible-common-refinement]; for an extension use a common stratification of its two ends. Pullbacks to the refined strata are exact by [det-prop-sfb-module-pullback-exact-main], and coefficient pullbacks are the same $R_T$ by [lem-sfb-alpha-iso]. A pulled-back finite free model is still finite free (pullback preserves finite sums and the coefficient unit), so the restrictions of the known terms remain lisse. Steps 3 and 4 put the kernel, cokernel, or middle sheaf in the lisse class on every refined stratum. This proves the three closure properties of $\\mathscr A_c$. All strata are topologically Noetherian by step 1, as required in step 3; no claim about a map between arbitrary locally finitely presented modules is used.",
+   "uses": [
+    "lemma-constructible-common-refinement",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "(1), common stratification and exact restriction; kernels/cokernels supplied here by HRS rather than finite-subfield descent"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] with ambient abelian category $\\operatorname{Mod}_{R_X}$ and class $\\mathscr A_c$ of step 5. Its hypotheses are exactly zero, isomorphism closure, kernels, cokernels and extensions proved there. The bounded version of its conclusion identifies $\\mathcal B(X)$ as a full replete triangulated subcategory of the ordinary unbounded derived category. In particular finite shifts and distinguished-triangle extensions of its objects stay in $\\mathcal B(X)$.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, bounded version; homology.tex Tag 0754, lemma-characterize-weak-serre-subcategory"
+   }
+  },
+  {
+   "text": "Every proposed generator belongs to $\\mathcal B(X)$. Indeed write $a=i\\circ j$ with $j:S\\hookrightarrow Z$ open and $i:Z\\hookrightarrow X$ closed. By [lem-weil-pbc-proetale-ringed-open-closed], $j^*j_!L\\cong L$ and the restriction of $j_!L$ to $Z\\setminus S$ is zero; $i^*i_*j_!L\\cong j_!L$, and the restriction to $X\\setminus Z$ is zero. Coefficients agree by [lem-sfb-alpha-iso]. Thus the three locally closed pieces $S$, $Z\\setminus S$, $X\\setminus Z$ give a finite constructible stratification with models $L,0,0$ (empty pieces can be omitted). The required complementary opens are quasi-compact since every subset of the Noetherian space is quasi-compact [lem-sfb-noetherian-space-compact-subsets]. The two exact extension functors put this sheaf in degree zero with no other cohomology. It follows from step 6 that every finite construction from the proposed generators lies in $\\mathcal B(X)$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-alpha-iso",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA, 09BM, 09BN, 09AG and 09AH; sites-modules.tex Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "Conversely let $F$ be a constructible $R_X$-module. Apply [lem-sfb-finite-model-stratum-filtration] to this $\\Lambda$ and the Noetherian space $|X|$. It gives a finite filtration $0=F_0\\subset\\cdots\\subset F_r=F$ with $Q_k=F_k/F_{k-1}\\cong v_{k!}(t_k)_*L_k$, where $v_k:V_k\\hookrightarrow X$ is open, $t_k:S_k\\hookrightarrow V_k$ is reduced closed, and $L_k$ has a finite constant local model. Step 1 makes $L_k$ lisse. These are actual subquotients supplied by the cited statement, including the quasi-compactness hypotheses on its immersions.",
+   "uses": [
+    "lem-sfb-finite-model-stratum-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification; existing module filtration extraction"
+   }
+  },
+  {
+   "text": "Set $a_k=v_k\\circ t_k$. The immersion $a_k$ is quasi-compact, since $t_k$ is a closed immersion and $v_k$ is quasi-compact by the statement of step 8. Hence [lem-pqf-qc-immersion-open-closed-factor] gives a factorization $a_k=i_k\\circ j_k$ with $j_k:S_k\\hookrightarrow Z_k$ open and $i_k:Z_k\\hookrightarrow X$ closed, so $a_k$ is an immersion of the kind used for the generators, and its underlying set $V_k\\setminus V_{k-1}$ is locally closed, hence constructible in the Noetherian space $|X|$ [def-weil-constructible-subset]. By [lem-sfb-locally-closed-extension-coherence], the exact extension $v_{k!}(t_k)_*$ is canonically isomorphic to $i_{k*}j_{k!}$ for this factorization. Hence $Q_k[0]$ is one of the stated generators up to isomorphism. This uses the arbitrary-coefficient comparison, with inverse-image coefficients identified by [lem-sfb-alpha-iso]; it does not replace the chosen $a_!$ by an unproved equality of functors. Since both functors are exact, the sheaf-level comparison applies termwise in degree zero.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-alpha-iso",
+    "lem-pqf-qc-immersion-open-closed-factor",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA, 09BM, 09BN, 09AH with sites-modules.tex Tags 03DI–03DJ and schemes.tex Tag 02V0; the existing locally-closed-extension-coherence node records the composite comparison, not a verbatim single-tag assertion."
+   }
+  },
+  {
+   "text": "Let $\\mathscr C$ be the class of objects obtainable from zero and finitely many proposed generators by finite shifts, triangle extensions, and isomorphisms. For each $k$, [lem-weil-pbc-complex-ses-triangle] applied in degree zero to $0\\to F_{k-1}\\to F_k\\to Q_k\\to0$ supplies the triangle $F_{k-1}[0]\\to F_k[0]\\to Q_k[0]\\to F_{k-1}[1]$. Induct on $k$, starting with $F_0[0]=0$: step 9 puts $Q_k[0]$ in $\\mathscr C$, and the extension operation puts $F_k[0]$ in $\\mathscr C$. Thus $F[0]\\in\\mathscr C$ after finitely many extensions. The argument with $r=0$ simply returns zero.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, applied to a sheaf short exact sequence in degree zero"
+   }
+  },
+  {
+   "text": "For $K\\in\\mathcal B(X)$ choose $a\\le b$ with $H^q(K)=0$ outside $[a,b]$ and put $T_q=\\tau_{\\le q}K$. By [lem-weil-pbc-truncation-cohomology], $T_{a-1}$ is acyclic and $T_b\\to K$ is a quasi-isomorphism. Thus $T_{a-1}\\cong0$ and $T_b\\cong K$ by localization [def-weil-abstract-derived-category]. For each $q=a,\\ldots,b$, [lem-weil-pbc-truncation-triangle] gives $T_{q-1}\\to T_q\\to H^q(K)[-q]\\to T_{q-1}[1]$. Step 10 and shift closure put its third term in $\\mathscr C$. Induction from $T_{a-1}$ puts $T_b$, and hence $K$, in $\\mathscr C$. Only the existence of these finite triangles is used, not any uniqueness assertion or convergence of an infinite tower.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles; homology.tex Tag 0118, canonical truncation cohomology"
+   }
+  },
+  {
+   "text": "Steps 7 and 11 prove $\\mathscr C=\\mathcal B(X)$. Every full replete triangulated subcategory containing the generators contains $\\mathscr C$, by induction on its finite construction expressions [def-weil-triangulated-subcategory]. Conversely step 6 makes $\\mathcal B(X)$ one of those subcategories. Therefore it is the smallest such subcategory, proving both formulations. The procedure uses at most $\\sum_{q=a}^b r_q+(b-a+1)$ triangle extensions, where $r_q$ is a chosen finite filtration length for $H^q(K)$. An acyclic $K$ is already isomorphic to zero. When $X$ is empty all sheaves are zero, so the same conclusion holds with no generators. Throughout the coefficient ring is the original all-continuous ring; no common finite field, infinite coproduct, completion or retract operation is required.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "(1), opening smallest-triangulated-subcategory reduction, with the finite filtration and truncation argument made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-constructible-subset",
+  "def-weil-triangulated-subcategory",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-proetale-free-epi-local-splitting",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-zl-t-admissible-dualizable-truncations",
+  "lemma-constructible-common-refinement",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 6.2(2), Theorem 4.13, and stability after Definition 3.3; coefficient-specific adaptation of blueprint lisse-generator reduction, with Stacks Tags 06UQ, 09Y5, 0152 and 08J5 for finite devissage."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +238,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E],\\n  InverseSystem (Field.Emb.Cardinal.embFunctor F E)\", \"doc\": \"There exists an inverse system of field embeddings between intermediate fields in the algebraic closure of $ F $ within $ E $, indexed by ordinals extended with a top element. This system is construct\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isoModSerre\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      (P : CategoryTheory.ObjectProperty C) → [P.IsSerreClass] → CategoryTheory.MorphismProperty C\", \"doc\": \"A morphism property in an abelian category that holds for a morphism $ f $ if and only if both its kernel and cokernel objects satisfy the Serre class predicate $ P $.\"}\n  {\"name\": \"FirstOrder.Field.finite_ACF_prime_not_realize_of_ACF_zero_realize\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ (φ : FirstOrder.Language.ring.Sentence),\\n  FirstOrder.Language.Theory.ACF 0 ⊨ᵇ φ → {p | ¬FirstOrder.Language.Theory.ACF ↑p ⊨ᵇ φ}.Finite\", \"doc\": \"If a first-order sentence $\\\\varphi$ in the language of rings is true in the theory of algebraically closed fields of characteristic zero (ACF 0), then the set of prime numbers $p$ for which $\\\\varphi$ \"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] (M : Type v) [inst_1 : AddCommGroup M] [inst_2 : Module A M] [IsNoetherianRing A]\\n  [Module.Finite A M], ∃ s, s.head = ⊥ ∧ s.last = ⊤\", \"doc\": \"In a Noetherian ring $ A $, for any $ A $-module $ M $, there exists a relation series of submodules starting from the trivial submodule $ \\\\{0\\\\} $ and ending at the entire module $ M $, such that each\"}\n  {\"name\": \"FirstOrder.Field.ACF_zero_realize_iff_finite_ACF_prime_not_realize\", \"module\": \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed\", \"type\": \"∀ {φ : FirstOrder.Language.ring.Sentence},\\n  FirstOrder.Language.Theory.ACF 0 ⊨ᵇ φ ↔ {p | FirstOrder.Language.Theory.ACF ↑p ⊨ᵇ φ}ᶜ.Finite\", \"doc\": \"For any first-order sentence $\\\\varphi$ in the language of rings, $\\\\varphi$ is realized in the theory of algebraically closed fields of characteristic 0 ($\\\\text{ACF}_0$) if and only if the complement o\"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned infrastructure does not state this site-specific constructibility or support comparison theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves over a pulled back condensed topological field on a Noetherian scheme kernels cokernels and extensions of finite locally free sheaves are finite locally free",
+   "results": "Hits read: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4CondensedMod, instAbelianCondensedMod, instAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lisse\", \"kernel\"",
+   "results": "No hits. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|IsLisse|tAdmissible",
+   "results": "No hits. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The triangulated envelope of stratum extensions of lisse sheaves equals the bounded constructible derived category for continuous topological field coefficients",
+   "results": "Hits read: DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes on a Noetherian scheme with topological field coefficients are generated by finite shifts and extensions of locally closed lisse sheaves",
+   "results": "Hits read: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.empty_union_induction, Topology.IsConstructible.isLocallyConstructible, HomologicalComplex.isGrothendieckAbelian, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.isConstructible_compl, Topology.IsConstructible.compl. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*generat|generat.*constructible|tAdmissible|t_admissible",
+   "results": "Hits read: Mathlib/NumberTheory/Height/NumberField.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean. Generic derived t-structure or ambient sheaf categories do not state generation or lisse kernel closure for this coefficient ring.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-admissible-tensor-constructibility",
@@ -79,13 +294,112 @@
  "unit": "sk-thm-sf-ctf-stability",
  "blueprint": {
   "from": {
-   "node": null,
-   "place": "Source blueprint det-thm-sf-ctf-stability-direct-images (the created.item ancestry chain is broken at the parent module name): Proof (1), opening lisse-generator reduction, as invoked in det-thm-sf-ctf-stability-direct-images proof (1),(2), integral and rational coefficients; all-continuous compatibility variant from the original AdmissibleTensorConstructibility proof, paragraph 3. Agent-stated adaptation, keeping the all-continuous ring separate.",
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (1),(2), Integral and rational coefficients: reduction to lisse sheaves on strata; lisse-generator reduction expanded in det-thm-sf-pf-field-tensor proof (1). This repairs the broken created.item ancestry, retaining the source place.",
    "via": [
     "lem-sfb-admissible-tensor-constructibility"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-qbar-constructible-generators",
+  "worker": "stage1",
+  "summary": "Q06 proves both inclusions and finite construction, retaining the all-continuous norm-topology coefficient ring and the statement unchanged. Existing general HRS nodes handle lisse kernels/cokernels; common stratification, exact restriction, generic open-closed identities, existing finite-stratum filtration, immersion normalization, short-exact-sequence triangles and finite Postnikov tower give the proof. No new nodes. Repairs broken blueprint ancestry from the recorded source.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (1),(2), Integral and rational coefficients; det-thm-sf-pf-field-tensor proof (1), opening lisse-generator reduction. Steps 1-6 establish triangulated closure for the actual coefficient ring; 7 establishes generator membership; 8-11 realize finite devissage; 12 gives minimality.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic tool used only for (1), common stratification and exact restriction; kernels/cokernels supplied here by HRS rather than finite-subfield descent; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic bounded weak-Serre derived-category theorem, after the coefficient-specific heart closure is established."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Generic tool used only for Theorem 6.2(2): verification of the scheme and scalar-local-model hypotheses; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic tool used only for (1), common stratification and exact restriction; kernels/cokernels supplied here by HRS rather than finite-subfield descent; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-sfb-finite-model-stratum-filtration",
+    "why": "Coefficient-general finite-stratum filtration realizes the existing lisse-devissage route."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic arbitrary-ring comparison of the two immersion factorizations is necessary to match the exact generators."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic tool used only for Tags 09AA, 09BM, 09BN, 09AG and 09AH; sites-modules.tex Tags 03DI and 03DJ; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic tool used only for Tag 0152, lemma-derived-canonical-delta-functor, applied to a sheaf short exact sequence in degree zero; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic tool used only for Theorem 6.2(2): verification of the scheme and scalar-local-model hypotheses; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-free-epi-local-splitting",
+    "why": "Generic tool used only for Opening lisse reduction; extension closure as expanded in sk-lem-coefficient-heart.proof.md, Extensions paragraph; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic tool used only for Tags 09AA, 09BM, 09BN, 09AG and 09AH; sites-modules.tex Tags 03DI and 03DJ; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-cohomology",
+    "why": "Generic tool used only for Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles; homology.tex Tag 0118, canonical truncation cohomology; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic tool used only for Tag 08J5, remark-truncation-distinguished-triangle, successive cohomology triangles; homology.tex Tag 0118, canonical truncation cohomology; it does not replace a six-functor stability step."
+   },
+   {
+    "node": "lem-zl-condensed-dualizable-local-perfect-models",
+    "why": "General locally perfect and dualizable criterion and cone closure for the all-continuous ring, not a change of six-functor route."
+   },
+   {
+    "node": "lem-zl-t-admissible-dualizable-truncations",
+    "why": "General t-admissible coefficient theorem used for all-continuous coefficients; the finite-subextension coefficient-heart statements do not cover this ring."
+   },
+   {
+    "node": "lemma-constructible-common-refinement",
+    "why": "Generic tool used only for (1), common stratification and exact restriction; kernels/cokernels supplied here by HRS rather than finite-subfield descent; it does not replace a six-functor stability step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-proetale-free-epi-local-splitting",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-zl-condensed-dualizable-local-perfect-models",
+  "lem-zl-t-admissible-dualizable-truncations",
+  "lemma-constructible-common-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-41426f997",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-41426f997 (reviewer sub-agent of L); spot-checked: Read the item's twelve steps and every cited statement in full, plus HRS Def 6.1, Thm 6.2(2) and Lemma 6.10 (PDF p.15). The statement is unchanged; the base item had no proof and live still has it unsplit. No new nodes, no cycle, proof_deps equal the union of the step uses, no SGA. The coefficient ring is the all-continuous C(-,Qbar_l) ring throughout and is never identified with the finite-subextension ring. Existing generation and heart nodes (det-cor-coefficient-heart-ii-generation, det-lem-coefficient-heart-closure, lem-sfb-finite-field-stratified-generation) are for other rings, so this is not a duplicate. Steps 1-6 check: Lambda(*) is a field, so a finite constant local model is lisse; t-admissibility is trivial for a field; L[0] and M[0] are dualizable and their cone's H^{-1} and H^0 are ker and coker; a local splitting gives extensions; common refinement plus exact pullback make the constructible modules a weak Serre class, and the derived weak-Serre lemma makes B(X) triangulated. Step 7: open/closed identities give a generator with stratum models L, 0, 0. Steps 8, 10 and 11: the filtration node, the SES triangle and truncation triangles give a finite devissage. This re-derives lem-sfb-bounded-finite-model-generation; redundant but correct. Step 12: minimality is fine. Fault C1 in step 9: it used an open-then-closed factorization of a_k = v_k t_k without showing one exists. Fixed: a_k is quasi-compact, so the Mathlib leaf lem-pqf-qc-immersion-open-closed-factor gives a_k = i_k j_k, and its stratum is constructible (def-weil-constructible-subset); both ids added to uses and proof_deps. Batch-5: both zl citations reach only def-trf-geometric-morphism and the generic trf topos/algebra lemmas (slice geometric morphism, inverse-image exactness, abelian presentation, henselian smooth lifting). None is the trace formula, Poincare duality or a step of their proofs, so both are accepted. All 16 declared tool_uses are accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
  }
 }
