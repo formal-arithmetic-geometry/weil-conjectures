@@ -3,25 +3,87 @@
  "blueprint": {
   "is": "def-nagata-immersion-into-fp-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-presentation immersion model",
- "statement": "Let $S$ be qcqs and let $X\\to S$ be locally of finite type with $X$\nquasi-compact and quasi-separated. Choose a finite-stage datum from\n[lemma-nagata-relative-stage-morphism-data-exists], including indices\n$\\lambda_X$ and $\\lambda_S$ and the descended morphism\n$\\varphi_{\\lambda_X,\\lambda_S}$. Define\n\n$$\nY^{\\mathrm{imm}}(X/S)\n=X_{\\lambda_X}\\times_{S_{\\lambda_S}}S\n$$\n\nusing $\\varphi_{\\lambda_X,\\lambda_S}$ and the comparison map\n$S\\to S_{\\lambda_S}$. The compatibility equality in the finite-stage\ndatum induces the map $i^{\\mathrm{imm}}\\colon X\\to Y^{\\mathrm{imm}}(X/S)$\nover $S$.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], with $X$ and $S$ quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism], and with $f$ locally of finite type [def-weil-finite-type-morphism]. Fix a finite-stage datum $D$ of [def-nagata-relative-stage-morphism-data], whose existence under these hypotheses is [lemma-nagata-relative-stage-morphism-data-exists]. Write $\\lambda_X,\\lambda_S$ for its indices, $\\varphi:X_{\\lambda_X}\\to S_{\\lambda_S}$ for its descended morphism, and $p_X:X\\to X_{\\lambda_X}$, $p_S:S\\to S_{\\lambda_S}$ for the comparison projections recorded in this datum. Thus $\\varphi\\circ p_X=p_S\\circ f$.\n\nDefine the finite-presentation immersion model to be the fibre product [def-pc-fibre-product]\n$$\nY^{\\mathrm{imm}}(X/S)=X_{\\lambda_X}\\times_{S_{\\lambda_S}}S,\n$$\nformed using $\\varphi$ and $p_S$, with structure morphism $q:Y^{\\mathrm{imm}}(X/S)\\to S$ its second projection. Define $i^{\\mathrm{imm}}:X\\to Y^{\\mathrm{imm}}(X/S)$ to be the universal morphism induced by the compatible pair $(p_X,f)$: its first projection is $p_X$ and its second projection is $f$. In particular $q\\circ i^{\\mathrm{imm}}=f$, so it is a morphism over $S$. The notation retains the fixed datum $D$ implicitly; no independence of that datum is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-fp-models/def-nagata-immersion-into-fp-model.md",
   "place": "node def-nagata-immersion-into-fp-model, order 382"
  },
  "stmt_deps": [
   "lemma-nagata-relative-stage-morphism-data-exists",
-  "def-nagata-relative-stage-morphism-data"
+  "def-nagata-relative-stage-morphism-data",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "immersionModel|noetherianStageData|def-nagata-immersion-into-fp-model",
+   "results": "Returned 0 hits: ; source scope: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fiber product of schemes has a unique map induced by a pair of compatible morphisms",
+   "results": "Returned 8 hits: CategoryTheory.Limits.pullback.map, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.Scheme.Pullback.Triplet, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.mk', HasFibers.inducedMap, AlgebraicGeometry.Scheme.Pullback.carrierEquiv",
+   "date": "2026-10-21",
+   "verdict": "generalization: generic pullback operations only; no finite-stage datum or named model"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.lift, AlgebraicGeometry.Scheme",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.IdealSheafData.glueData_t', AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq, AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed, AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f, AlgebraicGeometry.Scheme.Cover.LocallyDirected.mk",
+   "date": "2026-10-21",
+   "verdict": "generalization: generic pullback operations only; no finite-stage datum or named model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the fiber product of a descended finite stage morphism of schemes with the base scheme and the induced comparison map from a compatible pair of morphisms",
+   "results": "Returned 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.v, AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap, AlgebraicGeometry.Scheme.Pullback.fV",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev pullback|pullback.lift|lift_snd|HasPullbacks Scheme",
+   "results": "Returned 25 hits: Mathlib/Combinatorics/SimpleGraph/Coloring/EdgeLabeling.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean",
+   "date": "2026-10-21",
+   "verdict": "generalization: generic pullback operations only; no finite-stage datum or named model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chosen Noetherian finite stage datum for a locally finite type morphism defines the scheme obtained by base change of the descended source and its canonical map from the original source",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyQuasiFinite",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev pullback|theorem pullback.lift_snd|theorem pullback.lift_fst",
+   "results": "Returned 10 hits: Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/ChosenPullback.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Square.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean; source scope: Mathlib/CategoryTheory/Limits/Shapes/Pullback; read HasPullback.lean:95 (pullback), 111 (fst), 115 (snd), 128 (lift). These give the generic construction already carried by def-pc-fibre-product.",
+   "date": "2026-10-21",
+   "verdict": "generalization: generic pullback operations only; no finite-stage datum or named model"
+  },
+  {
+   "tool": "grep",
+   "query": "HasPullbacks Scheme|HasPullback f g",
+   "results": "Returned 5 hits: 452, 457, 465, 469, 482; source scope: Mathlib/AlgebraicGeometry/Pullbacks.lean; output parser rendered colon-containing source lines as fields; directly read Pullbacks.lean:482-486, which supplies HasPullback and HasPullbacks Scheme.",
+   "date": "2026-10-21",
+   "verdict": "generalization: generic pullback operations only; no finite-stage datum or named model"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -50,5 +112,21 @@
   "statement": "Let $S$ be qcqs and let $X\\to S$ be locally of finite type with $X$\nquasi-compact and quasi-separated. Choose a finite-stage datum from\n[lemma-nagata-relative-stage-morphism-data-exists], including indices\n$\\lambda_X$ and $\\lambda_S$ and the descended morphism\n$\\varphi_{\\lambda_X,\\lambda_S}$. Define\n\n$$\nY^{\\mathrm{imm}}(X/S)\n=X_{\\lambda_X}\\times_{S_{\\lambda_S}}S\n$$\n\nusing $\\varphi_{\\lambda_X,\\lambda_S}$ and the comparison map\n$S\\to S_{\\lambda_S}$. The compatibility equality in the finite-stage\ndatum induces the map $i^{\\mathrm{imm}}\\colon X\\to Y^{\\mathrm{imm}}(X/S)$\nover $S$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-immersion-into-fp-model",
+  "worker": "stage1",
+  "summary": "Split the definition by exposing its existing notion dependencies, including the chosen fibre product and universal morphism. The supplied finite-stage datum is retained as an explicit parameter; the object is constructed from its morphisms rather than selected as an unspecified model from an existence claim. No new nodes or new geometric assertions are needed. Searches found generic Mathlib pullbacks, not this relative-stage construction. No attachment is proposed, as required by the repair brief.",
+  "blueprint": "Current main-20261015 definition, order 389: the finite-stage choice, displayed fibre product, and final sentence defining the induced map over S. The displayed construction and all hypotheses are preserved; the projection formulas unpack its universal property.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-a2ff778d4",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-a2ff778d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is the item node plus its report and adds no new nodes. The statement matches the blueprint definition (master order 382 and main-20261015 order 389, which have the same text; blueprint_update follows it) hypothesis by hypothesis. Hypotheses: S qcqs, X qcqs, X→S locally of finite type. Construction: fix a finite-stage datum; Y^imm = X_{λ_X} ×_{S_{λ_S}} S, formed from φ and p_S; i^imm = (p_X, f), induced by the datum's equality φ∘p_X = p_S∘f, so q∘i^imm = f and the map is over S. Each of the 7 stmt_deps exists, is unmerged, and defines what it is cited for. def-nagata-relative-stage-morphism-data supplies the indices, φ and the equality. lemma-nagata-relative-stage-morphism-data-exists states existence under exactly these hypotheses, and a BFS over the dependencies finds no cycle. def-pc-fibre-product gives existence, the projections and the unique (a,b), applied with T=X. The notion nodes for scheme, quasi-compact, quasi-separated scheme and locally finite type each define their notion. No other DAG node defines this model: the grep hits for mathrm{imm} and immersionModel are only this item, its datum node and its citer def-nagata-finite-type-fp-model-system, which uses i^imm consistently. Mathlib has only the generic pullback, already carried by def-pc-fibre-product. The project Lean in FinitePresentationModel.lean (lines 189-205) builds the same pullback and lift; no attach is claimed, as the brief requires. Edge cases checked: X empty, the identity datum, and dependence on the choice of datum (none is asserted). No tool_uses. The item is still imported and unreviewed in live and side-live, and there is no repair note. One harmless point: source.document still names the master copy, which has the same text."
  }
 }
