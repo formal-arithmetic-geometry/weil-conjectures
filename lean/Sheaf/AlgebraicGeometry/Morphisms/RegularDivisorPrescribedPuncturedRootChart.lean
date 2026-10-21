@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting
-import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts
 
 /-! # Punctured Kummer charts retaining a prescribed divisor equation
 
@@ -82,6 +82,7 @@ theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C g)) g)
         ∃ γ : pullback (W.π ≫ i) (ψ ≫ φ) ≅ V.toScheme,
           γ.hom ≫ V.ι ≫ q = pullback.snd (W.π ≫ i) (ψ ≫ φ) := by
+  have _ := hy
   obtain ⟨S, a, z, hψ, hz, n, hn, hS, hg, hSg, d, δ, hδ⟩ :=
     W.regular_divisor_root_splitting i G R φ f hG hf β hβ y
   let ψ := Spec.map a
@@ -108,16 +109,11 @@ theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
       Scheme.Opens.toScheme (X := Spec S) (PrimeSpectrum.basicOpen g),
       j ≫ Scheme.Opens.ι (X := Spec S) (PrimeSpectrum.basicOpen g) = p :=
     ⟨IsOpenImmersion.lift _ p hp, IsOpenImmersion.lift_fac _ p hp⟩
-  have hgz : g ∈ z.asIdeal := by
-    change f ∈ (PrimeSpectrum.comap a.hom z).asIdeal
-    change f ∈ ((Spec.map a) z).asIdeal
-    rw [hz]
-    exact hy
   have : IsRegularRing S := hS
   have : IsRegularRing (S ⧸ Ideal.span {g}) := hSg
   obtain ⟨T, θ, w, hθ, hw, m, e, he, hT, hh, hTh, γ, hγ⟩ :=
     root_split_cover_prescribed_cyclic_charts S g n hn hg
-      (pullback.snd (W.π ≫ i) (ψ ≫ φ)) hj d z hgz δ hδ
+      (pullback.snd (W.π ≫ i) (ψ ≫ φ)) hj d z δ hδ
   have : Etale ψ := hψ
   have : Etale θ := hθ
   let ε := pullback.congrHom (rfl : W.π ≫ i = W.π ≫ i) (Category.assoc θ ψ φ)

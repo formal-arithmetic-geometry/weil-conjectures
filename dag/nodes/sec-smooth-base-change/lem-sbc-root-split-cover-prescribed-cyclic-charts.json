@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Apply the existing cyclic chart model, which already keeps the equation equal to the image of g. Its statement permits every point, so the additional divisor-point hypothesis hy is not needed.",
+   "text": "The upstream declaration applies the existing cyclic chart model, which already keeps the equation equal to the image of g. Its statement permits every point, so it also supplies the conclusion at the divisor point of this node.",
    "uses": [
     "lem-sbc-root-split-cover-cyclic-chart-model"
    ],
@@ -34,9 +34,9 @@
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "F1",
+  "by": "W6",
   "document": "Stacks Project",
-  "place": "Existing cyclic chart model (0EYG) and etale regular divisor base change; Spec.preimage_map identifies the equation"
+  "place": "Upstream root_split_cover_prescribed_cyclic_charts, proved from the cyclic chart model (0EYG) and etale regular divisor base change; Spec.preimage_map identifies the equation"
  },
  "mathlib_searches": [
   {
@@ -95,14 +95,14 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitCoverPrescribedCyclicCharts.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootSplitCoverPrescribedCyclicCharts.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_split_cover_prescribed_cyclic_charts",
-  "statement": "theorem root_split_cover_prescribed_cyclic_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    [IsRegularRing R] (hg : IsSMulRegular R g)\n    [IsRegularRing (R ⧸ Ideal.span {g})]\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),\n      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) (y : Spec R) (hy : g ∈ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (ψ : Spec S ⟶ Spec R) (z : Spec S),\n      Etale ψ ∧ ψ z = y ∧\n      let h := (Spec.preimage ψ).hom g\n      ∃ (m : ℕ) (e : Fin m → ℕ),\n        (∀ k, 0 < e k ∧ IsUnit (e k : S)) ∧\n        IsRegularRing S ∧ IsSMulRegular S h ∧\n        IsRegularRing (S ⧸ Ideal.span {h}) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin m,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)) h)\n        ∃ γ : pullback p ψ ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p ψ",
+  "statement": "theorem root_split_cover_prescribed_cyclic_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    [IsRegularRing R] (hg : IsSMulRegular R g)\n    [IsRegularRing (R ⧸ Ideal.span {g})]\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),\n      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) (y : Spec R) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (ψ : Spec S ⟶ Spec R) (z : Spec S),\n      Etale ψ ∧ ψ z = y ∧\n      let h := (Spec.preimage ψ).hom g\n      ∃ (m : ℕ) (e : Fin m → ℕ),\n        (∀ k, 0 < e k ∧ IsUnit (e k : S)) ∧\n        IsRegularRing S ∧ IsSMulRegular S h ∧\n        IsRegularRing (S ⧸ Ideal.span {h}) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin m,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)) h)\n        ∃ γ : pullback p ψ ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p ψ",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-13"
+  "by": "W6",
+  "date": "2026-10-22"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -115,14 +115,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "C-d44b5",
+  "group": "W6",
   "result": "pass",
-  "landing": "20261013T130347-L-3951803",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T183357-L-1612395",
+  "kind": "interface",
+  "note": "independent cc review: Retired Sheaf root_split_cover_prescribed_cyclic_charts against the upstream WeilConjectures theorem (same signature minus unused hy); adapted the sole importer RegularDivisorPrescribedPuncturedRootChart (compiled, axioms clean); checked node lean records against the upstream signature"
  },
  "lean_audit": {}
 }
