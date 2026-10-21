@@ -18,9 +18,112 @@
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-derived-adjunction-shift"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r=j_V^*$ and $t=j_U^*$. On complexes restriction commutes with every integer shift by the identity: on $T\\to V$ both $r(K[n])^a$ and $(rK)[n]^a$ are $K^{a+n}(T)$, and both differentials are $(-1)^n d_K$. The same holds for $t$. Use these comparisons for the exact derived restrictions. For tensor shifts use the chain isomorphisms of [lem-weil-pbc-total-tensor-integer-shifts], with the precise unsigned first-input and $(-1)^{np}$ second-input formulas in the statement. Shifts preserve flat-term K-flat representatives: flatness of the terms is unchanged by reindexing, and for every acyclic $Z$ the signed tensor isomorphism identifies $Z\\otimes P[n]$ with $(Z\\otimes P)[n]$, which is acyclic since its cohomology in degree $a$ is that of $Z\\otimes P$ in degree $a+n$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  },
+  {
+   "text": "Choose a K-injective resolution $E\\to I$ using [prop-pur-kinjective-resolutions-exist]. Restriction $tI$ is K-injective by [lem-pur-kinjective-restrict-localized]. Thus the two sides of $\\beta_E$ are represented by $r f_*I$ and $(f_V)_*tI$. The canonical comparison is the image of the termwise comparison: this is exactly the right-derived-unit normalization in [lem-weil-pbc-ringed-slice-derived-comparisons]. By [lem-weil-pbc-localize-ringed-site-morphism], at $T\\to V$ it is the identity on $I^a(uT)$ with its $R(T)$-action. For $E[n]$ choose $I[n]$; this is a valid resolution by [lem-weil-pbc-kinjective-shift], and its restriction is $tI[n]$. In degree $a$, both routes in the shift square for $\\beta$ are the identity on $I^{a+n}(uT)$; all differentials are $(-1)^n d_I$. Applying localization proves $s_G\\beta_{E[n]}=\\beta_E[n]s_F$. These are the specified resolution shifts by [lem-weil-pbc-derived-adjunction-shift]. Naturality carries the identity along $E\\simeq QI$, so it holds for every unbounded $E$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-slice-derived-comparisons",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  },
+  {
+   "text": "Put $L=Lf^*$, $R=Rf_*$, $L'=Lf_V^*$ and $R'=R(f_V)_*$. Let $\\eta$ and $\\eta'$ denote the two units. Adjunction compatibility in [lem-weil-pbc-ringed-derived-slice-localization] says that $\\theta_P:L'rP\\to tLP$ has adjunct $h_P=\\beta_{LP}\\circ r(\\eta_P):rP\\to R'tLP$, equivalently $\\theta_P=\\varepsilon'_{tLP}\\circ L'(h_P)$. Write $a_P:L(P[n])\\to LP[n]$, $b_E:R(E[n])\\to RE[n]$ and $a',b'$ for the local resolution shifts. The unit equations of [lem-weil-pbc-derived-adjunction-shift], globally and locally, have exactly the normalization specified in [lem-weil-pbc-adjunction-shift-compatibility-unique]. For $B=tLP$ they give, using Step 2 and naturality of $\\beta$ at $a_P$, $$b'_B\\circ R'(t a_P)\\circ h_{P[n]}=h_P[n].$$ Indeed the left side is $b'_B R'(t a_P)\\beta_{L(P[n])}r\\eta_{P[n]}=b'_B\\beta_{LP[n]}rR(a_P)r\\eta_{P[n]}=\\beta_{LP}[n]r(b_{LP}R(a_P)\\eta_{P[n]})=\\beta_{LP}[n]r(\\eta_P[n])$. Restriction-shift identities from Step 1 are suppressed in this formula.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  },
+  {
+   "text": "Take adjuncts under $L'\\dashv R'$ of the two arrows $L'(rP[n])\\to B[n]$ given by $t(a_P)\\circ\\theta_{P[n]}$ and $\\theta_P[n]\\circ a'_{rP}$. The first adjunct is $R'(t a_P)\\circ h_{P[n]}$. The second is $(b'_B)^{-1}\\circ h_P[n]$: expand its adjunct as $R'(\\theta_P[n])R'(a'_{rP})\\eta'_{rP[n]}$, replace $R'(a'_{rP})\\eta'_{rP[n]}$ by $(b'_{L'rP})^{-1}\\eta'_{rP}[n]$ using the local unit equation, and use naturality of $b'$ at $\\theta_P$. Step 3 says these adjuncts agree. The adjunction bijection therefore gives $t(a_P)\\theta_{P[n]}=\\theta_P[n]a'_{rP}$, which is precisely the requested shift equation for $\\theta$ after inserting the restriction comparisons of Step 1. This argument fixes the comparison by its unit equation, so it applies to the specified canonical $\\theta$, including the inverse orientation used when stating the slice-localization isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  },
+  {
+   "text": "Let $j_W^*$ be either restriction ($W=V$ on $\\mathcal D$, or $W=U$ on $\\mathcal C$). Choose flat-term K-flat representatives $A,B$ for its two derived inputs by [lem-pc-kflat-resolution]. The tensor normalization in the statement of [lem-weil-pbc-ringed-slice-evaluation-transpose] applies to this arbitrary small ringed site: $j_W^*A,j_W^*B$ are valid flat-term K-flat representatives, and the canonical derived tensor comparison is represented by the chain isomorphism $j_W^*\\operatorname{Tot}(A\\otimes B)\\to\\operatorname{Tot}(j_W^*A\\otimes j_W^*B)$ whose $(p,q)$ summand is $\\mu_{A^p,B^q}$, the restriction tensor isomorphism sending local $x\\otimes y$ to $x\\otimes y$. Step 1 allows $A[n],B[n]$ as the representatives of the shifted inputs. Thus all four tensor shift squares can be computed on precisely these representatives, with no new choices of tensor or comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  },
+  {
+   "text": "On a summand of first degree $p$ in $A[n]\\otimes B$, the two routes around the first-input square both give $\\mu_{A^{p+n},B^q}$ with coefficient $1$, merely reindexing the total degree by $n$. On a summand $A^p\\otimes B^{q+n}$ in $A\\otimes B[n]$, both routes around the second-input square give $(-1)^{np}\\mu_{A^p,B^{q+n}}$: applying restriction or the module isomorphism $\\mu$ commutes with multiplication by $(-1)^{np}$. These are equal chain maps, since the signed maps of [lem-weil-pbc-total-tensor-integer-shifts] are chain maps for the differential of [def-pc-tensor-complex-sheaves]. Their images in the derived category agree. The representative-model isomorphisms and the uniqueness clause of [lem-weil-pbc-site-derived-tensor-descent] extend this equality from flat-term K-flat pairs to all derived pairs. Applying the calculation once with $W=V$ and once with $W=U$ proves the tensor assertions for every integer $n$, with the other input fixed. Together with Steps 2 and 4 this proves all the stated shift equations.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-pc-kflat-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-slice-derived-comparisons",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +166,52 @@
    "results": "{\"t\": \"2026-10-21T03:04:14Z\", \"tool\": \"leanfinder\", \"query\": \"The derived direct image base change isomorphism for slice restriction and its tensor comparison preserve the signed shift normalization on cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CochainComplex.shiftShortComplexFunctorIso\", \"CochainComplex.shiftShortComplexFunctorIso_add'_hom_app\", \"CochainComplex.shiftShortComplexFunctor'\", \"CategoryTheory.Functor.mapCochainComplexShiftIso\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq\", \"CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_hom_app_f\"], \"digest\": \"0e2803c9eb03d288\"}",
    "date": "2026-10-21",
    "verdict": "no match: generic additive-functor and localization shift infrastructure and ordinary module pullback composition do not state the simultaneous normalization of the specified ringed-slice derived comparisons and signed tensor maps."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*shift|shift.*overFunctor|restrict.*commShift|commShift.*restrict",
+   "results": "{\"t\": \"2026-10-21T03:25:22Z\", \"tool\": \"grep\", \"query\": \"overFunctor.*shift|shift.*overFunctor|restrict.*commShift|commShift.*restrict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift, SheafOfModules",
+   "results": "{\"t\": \"2026-10-21T03:25:23Z\", \"tool\": \"loogle\", \"query\": \"NatTrans.CommShift, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'NatTrans.CommShift'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived slice site restriction base change canonical tensor comparison commutes with shift",
+   "results": "{\"t\": \"2026-10-21T03:25:23Z\", \"tool\": \"leansearch\", \"query\": \"Derived slice site restriction base change canonical tensor comparison commutes with shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShift.shift_comm\", \"CategoryTheory.shiftFunctorComm\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.NatTrans.CommShiftCore.shift_comm\", \"CategoryTheory.NatTrans.CommShift\"], \"digest\": \"19cc88eadc5b97f9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction to a slice site derived pushforward pullback and tensor comparison isomorphisms commute with the signed shift of cochain complexes",
+   "results": "{\"t\": \"2026-10-21T03:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical restriction to a slice site derived pushforward pullback and tensor comparison isomorphisms commute with the signed shift of cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"ac8ceb5d45b5818a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShift\", \"mapDerivedCategory\"",
+   "results": "{\"t\": \"2026-10-21T03:25:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"commShift\\\", \\\"mapDerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpMapDerivedCategoryId\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\"], \"digest\": \"550aa0d85b96a3e9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural base change isomorphism between derived direct image on a site and on its localization over an object is compatible with cochain translation; the pure tensor restriction comparison preserves tensor shift signs",
+   "results": "{\"t\": \"2026-10-21T03:25:47Z\", \"tool\": \"leanfinder\", \"query\": \"The natural base change isomorphism between derived direct image on a site and on its localization over an object is compatible with cochain translation; the pure tensor restriction comparison preserves tensor shift signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.commShiftOfLocalization.iso\", \"CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app\", \"CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.NatTrans.commShift_iso_hom_of_localization\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"271d8ae1324163e0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give generic shift/localization infrastructure or ordinary module pullback composition, not the specified ringed-slice derived comparisons with their signed representative normalizations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-projection-restriction",
@@ -85,5 +230,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-ringed-slice-comparisons-shift",
+  "worker": "stage1",
+  "summary": "Proved the beta shift square on K-injective models, transferred it to the specified theta by the explicit unit/adjunction calculation, and checked both tensor shift squares summandwise on the existing normalized K-flat restriction models. No new nodes; statement and conventions retained.",
+  "blueprint": "lemma-weil-pbc-perfect-projection-formula, first proof paragraph: 'closed under shifts' and 'Hence it contains every perfect complex'; supplies the signed slice-locality comparisons used by the ringed projection-restriction argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic restriction of K-injective module complexes to a slice; used to compute beta, and the unit has no alternate restriction theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective existence for small ringed sites, used to compute beta on unbounded objects."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat existence, used to choose representatives for both tensor inputs."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Only its explicitly stated pure-tensor normalization of the canonical slice tensor comparison is used, as a generic ringed-site tool; none of its evaluation/transposition conclusions is needed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-restrict-localized",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-ff0c74c6e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ff0c74c6e (reviewer sub-agent of L); spot-checked: Read the item, all 16 cited statements, the four declared tool uses and the Stacks source (08FI and 0D6G at sites-cohomology.tex:4374-4399, plus 07A6 and 07A4). The delivery has no new nodes, the statement is kept from the base and the item is not on a re-split note. I found no cycle: the 484-node closure does not contain the item, and its only citer, ringed-projection-restriction step 3, uses exactly the shift normalization the statement gives. Step 2: beta is pinned by the right-derived-unit square from the statement of ringed-slice-derived-comparisons. The Lean statement of ringed-derived-slice-localization has the same square, and since units are isomorphisms on K-injectives this fixes beta uniquely. The termwise identity comes from localize-ringed-site-morphism, and I[n] is a valid resolution by kinjective-shift. Steps 3-4: theta is the adjunct of h = beta_{LP} composed with r(eta_P), which matches RingedSliceAdjunctionSquare.unit. I rechecked each equality using naturality of beta and b' and the global and local unit equations of adjunction-shift-compatibility-unique, and the adjunction bijection then gives the theta square. Steps 5-6: the K-flat models and the summandwise mu come from the normalization clause in the statement of slice-evaluation-transpose, not its proof. The signs are 1 on the first input and (-1)^{np} on the second, which I checked against the total differential; descent uniqueness then extends the result to all pairs. Edge cases n=0, n=+-1, characteristic 2 and zero complexes all hold, nothing is weakened and the DAG search found no duplicate. The four tool uses are accepted. Advisory: the DAG text of ringed-derived-slice-localization should state its unit-square and beta normalization, which today only its Lean statement shows."
  }
 }

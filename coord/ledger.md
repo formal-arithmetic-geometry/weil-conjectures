@@ -19878,3 +19878,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/NV/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer PASS; first push; new nodes: 0)
 - 03:38 L: merged deliver/NX/lem-sfb-derived-open-square-restriction (reviewer FIX; first push; new nodes: 0)
 - 03:38 L: merged deliver/Q138/lem-weil-pbc-tower-derived-evaluation-normalization (reviewer PASS; first push; new nodes: 0)
+- 03:38 L: merged deliver/NM/lem-weil-pbc-ringed-slice-comparisons-shift (reviewer PASS; first push; new nodes: 0)
