@@ -22,115 +22,74 @@
  ],
  "proof": [
   {
-   "text": "Work with the sectionwise module sheaves corresponding to $M$ under [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its forward functor keeps the abelian sheaf, sections and restrictions identically; the action is the section action of the same ring multiplication. A finite sum of the regular module therefore corresponds to the same finite free module, and the cokernel universal property is unchanged under this equivalence. For every stratum immersion or covering map $g:V\\to X$, [sk-prop-sfb-cartesian-coefficients](1) identifies $g^{-1}\\Lambda_X$ with $\\Lambda_V$. Its final paragraph identifies module pullback with inverse image equipped with the transported action. Hence a presentation over $g^*\\Lambda_X$ in the internal definition is precisely a presentation over $\\Lambda_V$ in the sectionwise convention. We use these canonical identifications throughout.",
+   "text": "Both predicates are stated in the same internal module category. Reuse the proved comparison_of_local_models helper from the integral comparison module. For the converse it pulls back a finite scalar presentation, transports it along the canonical coefficient isomorphism, and retains the stratification. For the forward direction it uses local Noetherianity and compactness to make X qcqs, and the embedding of each stratum into the Noetherian underlying space makes the stratum Noetherian. It transports local finite presentation to the canonical condensed coefficient ring before applying a coefficient-specific local-model theorem. Retain the Cartesian-coefficient module prescribed by the unit route; its canonical comparison is the coefficient identification used throughout.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-sfb-constructible-module",
+    "sk-def-sfb-constructible",
     "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
-    "place": "Restriction paragraph; internal/sectionwise conventions and Cartesian coefficients"
-   }
+   "elementary": false
   },
   {
-   "text": "The assumed local Noetherianity gives quasi-separatedness by [lem-weil-pbc-locally-noetherian-quasi-separated]; together with the assumed quasi-compactness this puts $X$ in the qcqs branch of [sk-def-sfb-constructible]. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], descending chains of closed subsets of $X$ stabilize: a minimal member of the set of chain terms equals every later term. Every stratum $S\\subseteq X$ also has this property. Indeed, for a descending closed chain $C_n=S\\cap F_n$, with $F_n$ closed in $X$, replace $F_n$ by $\\bigcap_{j\\le n}F_j$; its intersection with $S$ is still $C_n$, and the resulting ambient chain stabilizes. Thus every stratum has Noetherian underlying topology, as required by both field-coefficient local-triviality lemmas below.",
+   "text": "Apply the integral comparison after identifying its coefficients with the certified embedded integers. Lift the finite field E to ULift E in the scheme universe. The spectral extension absolute value equals its extension norm. The ring equivalence from its WithAbs valuation ring to the embedded integers is therefore an isometry in both directions. Postcomposition gives mutually inverse morphisms of continuous-function condensed rings, compatible with multiplication. Restriction of scalars along the resulting coefficient isomorphism transports both module predicates: it preserves regular modules, finite sums and cokernel presentations, and commutes with restriction to strata and the point. Applying the inverse recovers the original module. Thus integralLfpConstantModelComparison supplies the integral branch, including torsion.",
    "uses": [
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tags 01OY (lemma-locally-Noetherian-quasi-separated) and 01OZ (lemma-Noetherian-topology); elementary subspace descending-chain argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Suppose $M$ has the finite stratification and finite constant local models of [sk-def-sfb-constructible]. On each stratum, the last assertion of [det-def-sfb-constructible-local-model] gives local finite presentation: its scalar matrix description is also a finite presentation over the coefficient ring sheaf. With the identifications of step 1, the very same stratification therefore satisfies [def-sfb-constructible-module]. This proves the reverse implication for all three families, including torsion scalar modules.",
+   "text": "For a finite normed field E use ULift E to match the universe of the field local-triviality theorem. Down and up are continuous inverse ring homomorphisms, hence identify the continuous condensed coefficient rings. On a Noetherian stratum apply exists_finiteFree_cover_of_condensedField_lfp. Transport its free module along the canonical coefficient isomorphism to obtain finite free canonical restrictions. A rank-n free module is the pullback of the rank-n free module over the condensed point ring: mapMod preserves regular modules and finite biproducts. The point module is finitely presented as the cokernel of a zero endomorphism. This gives the required finite constant local models and the stratified predicate; transport across the coefficient isomorphism as above.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "det-def-sfb-constructible-local-model",
-    "def-sfb-constructible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
-    "place": "Parts 1–2; sk-def-sfb-constructible-local-model.md, final implication"
-   }
-  },
-  {
-   "text": "For $\\Lambda=\\underline{\\mathcal O_E}$, apply [lem-sfb-integral-lfp-constant-model-comparison] on $X$ itself, which is quasi-compact and locally Noetherian by assumption. Its conditions (i) and (ii) are exactly the two module predicates here, under step 1. In particular its scalar modules are finitely presented over $\\mathcal O_E$, its presentations allow arbitrary coefficient-sheaf entries, and its conclusion allows a changed finite constructible stratification. The implication (i)$\\Rightarrow$(ii) gives the required forward implication in the integral case, without requiring the scalar modules to be torsion-free.",
-   "uses": [
-    "lem-sfb-integral-lfp-constant-model-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 and Theorem 6.2(2)–(3); the precise local-presentation comparison obligation is the existing integral comparison node"
-   }
-  },
-  {
-   "text": "For $\\Lambda=\\underline E$, choose a finite stratification witnessing [def-sfb-constructible-module]. On a stratum $S$, the restriction is locally finitely presented, hence has finite free cokernel presentations on a pro-étale cover by [def-sfb-locally-finitely-presented]. Step 2 supplies Noetherian underlying topology on $S$, so [lem-weil-pbc-condensed-lfp-local-triviality] gives a pro-étale cover $W_j\\to S$ with $M|_{W_j}\\cong\\Lambda_{W_j}^{r_j}$, $r_j\\ge0$. Put $P_j=E^{r_j}$. It is finitely presented by the scalar presentation $E^0\\to E^{r_j}\\to P_j\\to0$, and coordinatewise multiplication identifies $\\Lambda_{W_j}\\otimes_E P_j$ with $\\Lambda_{W_j}^{r_j}$. Thus each stratum has a finite constant local model and the chosen stratification satisfies [sk-def-sfb-constructible].",
-   "uses": [
-    "def-sfb-constructible-module",
-    "def-sfb-locally-finitely-presented",
     "lem-weil-pbc-condensed-lfp-local-triviality",
-    "sk-def-sfb-constructible"
+    "def-sfb-locally-finitely-presented",
+    "sk-def-sfb-constructible",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 and Theorem 6.2(2)–(3); existing finite-field local-triviality bridge, then the scalar free model"
-   }
+   "elementary": false
   },
   {
-   "text": "For the specified $\\Lambda=\\underline{\\overline{\\mathbf Q}}_\\ell$, start with a stratification witnessing [def-sfb-constructible-module]. On each stratum $S$ its restriction has local finite free cokernel presentations by [def-sfb-locally-finitely-presented]. Apply [lem-weil-pbc-condensed-qbar-lfp-local-triviality], using the Noetherian topology from step 2. That statement uses exactly the finite-subextension-valued condensed ring of [sk-def-sfb-qlbar-condensed]; it gives $M|_{W_j}\\cong\\Lambda_{W_j}^{r_j}$ on a pro-étale cover of $S$. The scalar ring is $\\Lambda(*)=\\overline{\\mathbf Q}_\\ell$: every single algebraic element belongs to a finite subextension. Take $P_j=\\overline{\\mathbf Q}_\\ell^{r_j}$, with presentation from the zero module. The coordinatewise tensor identification of step 5 gives its finite constant model. The original stratification now satisfies [sk-def-sfb-constructible].",
+   "text": "For the certified finite-subextension-valued algebraic-closure ring apply condensedQbar_lfp_locally_free on each Noetherian stratum. Its canonical coefficient restrictions already have the desired free isomorphisms. Use the same rank-n point module and zero-matrix presentation to obtain finite constant local models. This uses the specified coefficient ring without replacing it by all continuous functions into the algebraic closure.",
    "uses": [
-    "def-sfb-constructible-module",
-    "def-sfb-locally-finitely-presented",
     "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
     "sk-def-sfb-qlbar-condensed",
     "sk-def-sfb-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/ConstructibleSheaf/ProEtaleModule/Def.lean",
-    "place": "IsLocallyFinitelyPresented and IsConstructible; existing bounded-image algebraic-closure local-triviality bridge"
-   }
+   "elementary": false
   },
   {
-   "text": "Steps 3–6 prove the module-predicate equivalence for the three specified coefficient families. By [sk-def-sfb-bounded-constructible], an object $K$ of the ordinary $D_X$ belongs to $\\mathcal B_X$ exactly when its cohomology vanishes outside an interval $[a,b]$ and every $H^n(K)$ has the first predicate. By [sk-def-sfb-constructible], membership in $\\Dbc(X,\\Lambda)$ has the identical boundedness requirement and the second predicate for every $H^n(K)$. Substitute the proved equivalence degree by degree, retaining the same interval. The object properties, and hence their full subcategories with ambient morphisms, agree. Neither definition introduces derived completeness, so this argument needs no such condition.",
+   "text": "Eliminate the three constructors of the coefficient certificate and combine the preceding module comparisons. The ordinary derived bounded-constructible predicates have literally the same t-structure boundedness factor. Substitute the module-predicate equivalence in each integer cohomological degree and apply propositional and function extensionality. No completeness condition is introduced.",
    "uses": [
     "sk-def-sfb-bounded-constructible",
     "sk-def-sfb-constructible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
-    "place": "Final paragraph defining Dbc, compared with sk-def-sfb-bounded-constructible/_section.md"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "sk-def-sfb-constructible",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "det-def-sfb-constructible-local-model",
-  "def-sfb-constructible-module",
   "lem-sfb-integral-lfp-constant-model-comparison",
-  "def-sfb-locally-finitely-presented",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-sfb-constructible-module",
+  "sk-def-sfb-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-weil-pbc-module-constructible-pullback",
   "lem-weil-pbc-condensed-lfp-local-triviality",
+  "def-sfb-locally-finitely-presented",
   "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
   "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
-  "place": "Comparison of the two constructibility definitions, using the existing coefficient-specific integral comparison and rational local-triviality nodes; not claimed verbatim from the existence-restriction proof."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "K7 Lean proof: reuse the integral comparison stratification helper, identify the certified coefficient rings by explicit continuous ring isomorphisms, use the stated field and algebraic-closure local-triviality theorems, and substitute degreewise."
  },
  "mathlib_searches": [
   {
@@ -281,7 +240,6 @@
   "sk-prop-sfb-cartesian-coefficients",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "det-def-sfb-constructible-local-model",
   "lem-sfb-integral-lfp-constant-model-comparison",
   "lem-weil-pbc-condensed-lfp-local-triviality",
   "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
@@ -312,5 +270,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Read the item, all 11 stmt_deps and their Lean (IsConstructibleModuleObject, boundedConstructible, IsConstantModelConstructible/HasFiniteConstantLocalModel/constantModelBoundedConstructible, IsEllAdicCoefficient with 3 constructors incl. padicAlgClRingObj = finite-subextension ring). Hypotheses exactly CompactSpace + IsLocallyNoetherian (qcqs branch selected), commutative certified Λ indexed by the same MonObj; conjunct 1 = ∀M iff of the two recorded predicates (independent stratifications, torsion allowed); conjunct 2 = ObjectProperty equality on the same ordinary D(Mod_{Λ_X}), no completeness/Tor condition. lean.statement verbatim; only the item lean field + new module differ from live; imports exist; 7-step docstring, source/blueprint docstrings, sorry only; edge cases (empty X, rank 0, O_E/π^n, char ℓ, non-separated, universes) covered; no duplicate (only the O_E special case exists). No compile (no FIX). Advisory: stage 3 needs integralCondensedRing vs padicIntegersRingObj identification; certificate prose (iii) C(-,Q̄_ℓ) vs finite-subextension Lean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261021T154033-L-2771458",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
