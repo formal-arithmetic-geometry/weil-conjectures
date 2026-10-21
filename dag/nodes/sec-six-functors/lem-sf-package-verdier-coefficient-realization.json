@@ -13,9 +13,109 @@
   "def-fix-six-functor-datum",
   "def-weil-boundary-duality-input"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a scheme $T$ and a finite level $A_n$ from the statement. Its separated finite-type hypothesis and $\\ell\\ne p$ are exactly the hypotheses of [thm-fix-general-biduality]. On the small pro-etale site that theorem makes $D_T=R\\mathcal Hom(-,Ra_T^!A_n)$ an exact anti-equivalence of $D^b_{ctf}(T,A_n)$ and makes $\\delta_M$ a natural isomorphism. The map denoted $\\delta$ here is the transpose of evaluation in [lem-weil-duality-pairing]; exchanging the two tensor factors uses the tensor symmetry. Thus this proves the finite-stage clause for the specified evaluation map, without a boundary-duality hypothesis.",
+   "uses": [
+    "thm-fix-general-biduality",
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
+    "place": "Finite-stage geometric biduality and its evaluation-compatible pro-etale transport"
+   }
+  },
+  {
+   "text": "Apply [cor-weil-boundary-duality-discharge] to the given $Y$ and $A_n$. Its conclusion quantifies over every locally closed piece $T$ and closed immersion $i:Z\\hookrightarrow T$ occurring in [def-weil-boundary-duality-input], so it applies to precisely the $i$ and $L$ in the item. It asserts invertibility of the canonical $\\beta_L$, not just existence of some isomorphism between its source and target. In the cited definition $\\beta_L$ is the transpose of the displayed pairing $i^*D_TL\\otimes^LRi^!L\\to Ri^!(D_TL\\otimes^LL)\\to\\omega_Z$. Hence it is the evaluation-defined boundary comparison required here. The corollary discharges the entire boundary input after geometric biduality; that input was not assumed in step 1.",
+   "uses": [
+    "cor-weil-boundary-duality-discharge",
+    "def-weil-boundary-duality-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "Boundary input discharged after biduality; identification of beta by evaluation"
+   }
+  },
+  {
+   "text": "At $R$, [prop-coef-integral-dualizing] identifies the derived-complete object $\\omega_{T,R}$ used in [thm-coef-integral-verdier] with the value of the constructible exceptional right adjoint at the coefficient unit, so it is the $Ra_T^!R$ of this item. Apply the integral theorem on exactly its completed coefficient-sheaf category. It gives $D^b_c(T,R)=D^b_{ctf}(T,R)$ and an exact anti-equivalence for the actual internal Hom into this $\\omega_{T,R}$. If $\\dim T\\le d$ and the input reductions have common Tor interval $[a,b]$, its output reductions have common interval $[-b-2d,-a]$. Its canonical reduction maps identify $(D_{T,R}M)\\otimes_R^LA_n$ with $D_{T,n}M_n$, preserve evaluation and its transposes, and identify the reduction of the actual $\\delta_M$ with $\\delta_{M_n}$. The same theorem asserts that this natural $\\delta_M$ is invertible. These are exactly the integral preservation, bounds and coefficient-map assertions; no independent choice of double-dual isomorphism is made.",
+   "uses": [
+    "prop-coef-integral-dualizing",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+    "place": "Integral preservation and uniform interval; reduction of actual evaluation and double dual; with prop-coef-integral-dualizing value-at-unit assertion"
+   }
+  },
+  {
+   "text": "Apply [thm-coef-rational-verdier] to $T$ and the given finite extension $E/\\mathbf Q_\\ell$. It gives the exact $E$-linear anti-equivalence on the specified rationalization of $D^b_c(T,R)$, with evaluation and the natural invertible $\\delta$ obtained by rationalizing their integral maps. By [lem-coef-rational-operations], its dual is $R\\mathcal Hom_E(-,\\omega_{T,E})$ and $\\omega_{T,E}=Ra_{T,E}^!E$, with these identifications preserving evaluations. Thus the anti-equivalence is the $D_T$ in the item. For every finite $E\\subset L$, the comparison in the rational theorem preserves evaluation and $\\delta$ and satisfies the scalar-extension unit and associator equations. This supplies the coherent comparisons used at a common field stage in the next step.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Rationalize integral duality and its actual maps; finite coefficient-field comparisons"
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, apply [thm-coef-qbar-verdier] on the common finite coefficient-field category specified in the item. It sends a representative $(E,M)$ to $(E,D_{T,E}M)$ and asserts that the resulting exact anti-equivalence is internal Hom into $Ra_T^!\\overline{\\mathbf Q}_\\ell$. Its descended evaluation and biduality are therefore the common-stage maps required here. Its statement includes compatibility with finite scalar extension and retracts, so the same conclusion holds for objects and maps represented as retracts at a common finite stage. In particular the descended $\\delta$ is a natural isomorphism on the entire stated category, not merely on a separately selected collection of representatives.",
+   "uses": [
+    "thm-coef-qbar-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-coef-qbar-verdier.proof.md",
+    "place": "Common-stage descent of duals, evaluation and biduality, including retracts"
+   }
+  },
+  {
+   "text": "The exchange theorem below has input $M\\in D^b_{ctf}(X,\\Lambda)$. At $A_n$ this is precisely $\\mathcal C_{X,A_n}$. At $R$ step 3 proved that it is all of $\\mathcal C_{X,R}$. At $E$ and $\\overline{\\mathbf Q}_\\ell$, [def-weil-finite-tor-amplitude] defines the finite-Tor categories to equal the rationalized and common-stage bounded constructible categories. Thus every $M$ allowed by this item lies in the stated domain of that theorem. This does not identify arbitrary bounded constructible finite-ring complexes with finite-Tor ones.",
+   "uses": [
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "For (7): coefficient domains for the exchange; field finite-Tor convention"
+   }
+  },
+  {
+   "text": "Use [sk-thm-sf-verdier-exchange] for $f:X\\to Y$ and the $M$ just checked. It uses the constructible exceptional adjoint, has no ambient admissibility hypothesis, and gives the canonical comparison $c:Rf^!\\omega_Y\\xrightarrow{\\sim}\\omega_X$ and the natural isomorphism $\\varepsilon_{f,M}:D_YRf_!M\\xrightarrow{\\sim}Rf_*D_XM$ at all four stages. In the normalization of [def-sf-verdier-exchange-data], this is the arrow obtained from projection and evaluation by the exceptional, tensor--Hom and ordinary adjunctions and then substitution of $c$. Equivalently it is the inverse tensor--Hom exchange followed by $Rf_*R\\mathcal Hom_X(M,c)$. This identifies the canonical map, rather than replacing it by an arbitrary isomorphism. The theorem explicitly supplies finite reduction, scalar extension and shift compatibility on the stated domains, with completed integral and rationalized/common-stage field comparisons. Together with steps 1--5 this proves every clause of the item, using only the constructible exceptional functor.",
+   "uses": [
+    "sk-thm-sf-verdier-exchange",
+    "def-sf-verdier-exchange-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Steps 1--2 and final compatibility sentence, with the canonical evaluation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-weil-boundary-duality-discharge",
+  "def-sf-verdier-exchange-data",
+  "def-weil-boundary-duality-input",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-rational-operations",
+  "lem-weil-duality-pairing",
+  "prop-coef-integral-dualizing",
+  "sk-thm-sf-verdier-exchange",
+  "thm-coef-integral-verdier",
+  "thm-coef-qbar-verdier",
+  "thm-coef-rational-verdier",
+  "thm-fix-general-biduality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "For (7): assembly of finite geometric duality, boundary discharge, integral, rational and common-stage duality; unconditional exchange supplied by sk-thm-sf-verdier-exchange"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +151,45 @@
    "results": "{\"hits\": 8, \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\"], \"note\": \"\", \"raw_results_file\": \"lem-sf-package-verdier-coefficient-realization.search-results.txt\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|biduality",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom into the dualizing complex is an anti equivalence of constructible adic sheaves and commutes with coefficient change",
+   "results": "{\"hits\": 8, \"top\": [\"IsBaseChange.toDualBaseChange\", \"LinearEquiv.dualMap_symm\", \"Module.Dual.congr_symm_apply_apply\", \"LinearEquiv.flip\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"IsBaseChange.toDual_apply\", \"HomologicalComplex.opEquivalence_inverse\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.Equivalence.op\", \"CategoryTheory.Equivalence.op_functor\", \"CategoryTheory.Equivalence.op_inverse\", \"CategoryTheory.Equivalence.op_counitIso\", \"CategoryTheory.Equivalence.op_unitIso\", \"CategoryTheory.Equivalence.leftOp_inverse_map\", \"CategoryTheory.Equivalence.leftOp_functor_map\", \"CategoryTheory.Equivalence.rightOp_functor_map\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality for bounded constructible sheaves over finite rings and adic coefficients with evaluation biduality and compact support direct image",
+   "results": "{\"hits\": 8, \"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Condensed.profiniteSolid\", \"LightCondMod.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondSet.LocallyConstant.adjunction\", \"Condensed.lanSheafProfinite\", \"CondensedMod.ofSheafCompHaus\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom into a dualizing sheaf exchanges proper support pushforward with ordinary pushforward and its double dual evaluation is invertible for constructible sheaf complexes",
+   "results": "{\"hits\": 8, \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-functor-package",
@@ -69,5 +204,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-package-verdier-coefficient-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient domains unchanged. Assembled the existing geometric finite-stage, boundary, integral, rational and qbar theorems; checked actual evaluation/biduality maps and integral uniform bounds. Used the unconditional current sk-thm-sf-verdier-exchange instead of the older fix-cor-verdier-exchange with its additional ambient admissibility hypothesis. No new node was needed.",
+  "blueprint": "prop-functor-package.proof.md, For (7): exchange, general finite-stage biduality and boundary consequence, then the sentence naming integral and field anti-equivalences. Steps 1--5 realize the duality chain; step 6 checks the domains; step 7 realizes the unconditional evaluation-defined exchange."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-ae3414d4f",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-ae3414d4f (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The item is unsplit on live and has no repair note of its own (the re-split note is on the parent prop-functor-package and is resolved). Against live, the statement, stmt_deps, blueprint and source are unchanged. The item and all cited nodes are absent from route-pivot-dropped; there is no cycle (transitive closure over live plus the item), no SGA citation, and every cited node is reviewed and on the sk-thm-sf-package route. Source: main-20261015 prop-functor-package.proof 'For (7)'. Its fix-cor-verdier-exchange is correctly replaced by the unit theorem sk-thm-sf-verdier-exchange: fix-cor assumes exceptional admissibility, which def-fix-six-functor-datum (4) says is not assumed and false in general, so citing it would be E1. Step 1: thm-fix-general-biduality gives the anti-equivalence of D^b_ctf(A_n) with δ an iso, on pro-étale with the same Ra^!; δ is the transpose of evaluation from lem-weil-duality-pairing. Step 2: cor-weil-boundary-duality-discharge covers every Y, A_n, locally closed piece and closed immersion with canonical β_L; the source proof derives it from biduality, so there is no circularity. Step 3: prop-coef-integral-dualizing represents Hom(Ra_!K,R_s), so by Yoneda ω_R is the right-adjoint value at the unit; thm-coef-integral-verdier states D^b_c=D^b_ctf, the anti-equivalence, the [-b-2d,-a] bounds, the reductions of evaluation and δ, and δ iso. Step 4: the rational theorem uses the raw rationalization (checked def-weil-rationalization-karoubi), and lem-coef-rational-operations identifies D_E with RHom into Ra^!E. Step 5: the Q̄ theorem includes the internal-Hom identification, descended δ and retracts. Step 6: correct elementary domain check (D^b_ctf := D^b_c at the field stages by definition). Step 7: the unconditional exchange at all four stages with c: Rf^!ω_Y≅ω_X. Advisory: its statement says only 'canonical'; the match with the def-sf-verdier-exchange-data arrow comes from its construction, the same convention as the Q17-PASSed thm-sf-verdier-exchange. Stage 2 should pin ε to that arrow. Edge cases checked: empty X, f=id, n=1, R/ϖ, d=0. No changes."
  }
 }
