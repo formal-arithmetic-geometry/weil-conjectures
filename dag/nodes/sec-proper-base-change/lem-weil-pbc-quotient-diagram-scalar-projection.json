@@ -16,11 +16,119 @@
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-flat-ringed-diagram-restriction",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "lem-weil-pbc-constant-tower-pushforward-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small diagram sites, not in a category of diagrams in an already localized category. The completed scalar algebra $A_T$ is flat over $\\underline A_T$ by [lem-weil-pbc-completed-constant-algebra-flat-quotients], applied with its presentation $S=A_T$ and canonical scalar map. Reindexing $n+1$ by the positive integers leaves this limit unchanged. The completed and finite coefficient identifications $c_S=c_u:u^{-1}A_V\\cong A_U$ and $c_{u,n}$, including their compatibility with quotient transitions and projections, are those of [lem-weil-pbc-profinite-coefficient-inverse-image]. Since $A$ need not be finite, that statement does not cover the constant ring $\\underline A$: the identification $c_R:u^{-1}\\underline A_V\\cong\\underline A_U$ is the canonical ring-sheaf isomorphism of [lem-pe-constant-left-module-inverse-image] for the geometric morphism of pro-etale topoi, carrying constant scalar sections to the same scalars; the constant-coefficient operations $G_u\\dashv R_u^0$ and $G_u\\dashv R_u^{\\mathcal T}$ use it. Compatibility with the scalar map, $a_Uc_R=c_Su^{-1}a_V$, is checked after each projection $\\pi_{U,n}$, since these jointly determine a map into the limit $A_U$: both $\\pi_{U,n}a_Uc_R$ and $c_{u,n}u^{-1}(\\pi_{V,n}a_V)$ are ring maps $u^{-1}\\underline A_V\\to\\underline{P_n}_U$ whose adjuncts $\\underline A_V\\to u_*\\underline{P_n}_U$ send a constant section $x$ to the constant section $\\bar x$ (by the two constant-section descriptions just cited and $\\pi_{V,n}a_V(x)=\\bar x$); a map out of the sheafified constant sheaf $\\underline A_V$ is determined by the constant sections, so the two adjuncts, hence the two maps, agree. Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with the terminal index category for ordinary modules and with $J=\\mathbf N_{\\geq1}^{op}$ for towers. This gives precisely the normalized comparisons $a,\\chi,p,d$ and their adjunct identities. The exact module-diagram equivalence of [lem-weil-pbc-diagram-site-realization] places these comparisons in the required derived strict-tower categories.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, projection-formula conjugation: flat scalar and strict-diagram setup; Stacks 093M (sites-modules.tex, lemma-completion-flat) and 0FND (derived.tex, lemma-pre-derived-adjoint-functors-general)."
+   }
+  },
+  {
+   "text": "Fix $f,K$ and suppress $f$ in subscripts. Write $B_T^a=\\mathcal R_T^a$, $B_T^0=\\mathcal R_T^0$, $L=L_f^a$, $R=R_f^a$, $F=\\mathscr L_f^a$, $H=\\mathscr R_f^a$, $G=G_f$, and $H_0=R_f^{\\mathcal T}$. Write $R_0=R_f^0$ for the ordinary constant-coefficient direct image. For an argument $M$, put $s_M^a:F B_Y^aM\\to B_X^a(LM)$ and $s_N^0:G B_Y^0N\\to B_X^0(GN)$. Thus $s_M^a=\\tau_{f,M}^{-1}$. These are the normalized comparisons of [lem-weil-pbc-reduction-pullback-derived-tower]. Let $\\varepsilon^a:LRK\\to K$ and $\\varepsilon^0:GR_0r_XK\\to r_XK$ be the ordinary counits. By [lem-weil-pbc-augmented-diagram-projection-mate] and [def-weil-pbc-projection-formula-map], $\\pi^a$ and $\\pi^0$ are respectively adjunct to\n$$t^a=B_X^a(\\varepsilon^a)s_{RK}^a,\\qquad t^0=B_X^0(\\varepsilon^0)s_{R_0r_XK}^0.$$\nHere the diagonal identifications are the canonical ones of [lem-weil-pbc-constant-tower-pushforward-normalization]: its strict counit equation identifies the diagram counit after the constant/direct-image comparison with the diagonal of the ordinary counit. Thus these are the specified projection maps, not maps chosen by their evaluations.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "def-weil-pbc-projection-formula-map",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, the same projection-formula identifications; Stacks 0B56 (sites-cohomology.tex, equation-projection-formula-map), with strict diagonal counit normalization."
+   }
+  },
+  {
+   "text": "The ordinary adjunct identity in [lem-weil-pbc-flat-ringed-diagram-restriction], applied to $\\varepsilon^a$ whose adjunct is $1_{RK}$, says that $r_X(\\varepsilon^a)a_{RK}^{-1}$ has adjunct $\\chi_K:r_YRK\\to R_0r_XK$. Expanding the inverse Hom bijection, its value is also $\\varepsilon^0G(\\chi_K)$. Therefore\n$$r_X(\\varepsilon^a)a_{RK}^{-1}=\\varepsilon^0G(\\chi_K).$$\nThis derives the required counit equation from the stated normalization; no compatibility of arbitrarily chosen comparison isomorphisms is being assumed.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, projection-formula conjugation: ordinary scalar-counit square, obtained from the normalized adjunct identity (Stacks 0FND)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-strict-quotient-scalar-balancing] for the arbitrary ambient argument $M=RK$. With $s^a,s^0$ oriented as in Step 2, its pullback equation reads\n$$G(\\rho_M)p_{B_Y^aM}= (s_{r_YM}^0)^{-1}B_X^0(a_M)\\rho_{LM}r_X(s_M^a).$$\nIndeed this is its displayed equation for $\\tau_{f,M}=(s_M^a)^{-1}$, with the canonical identification $B_X^0G\\cong G B_Y^0$ written as $(s^0)^{-1}$. These two identifications hold because the balancing statement's $\\tau$ is the pullback/tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on the ringed diagram sites, computed by applying module pullback to K-flat resolutions with flat terms, and on such a representative of $\\Delta M$ (and the flat-term tower $Q_Y$) it is the inverse of the termwise map $F(x\\otimes q)\\mapsto F(x)\\otimes F(q)$; [lem-weil-pbc-reduction-pullback-derived-tower] says that $s^a$ (its $\\tau$ for the coefficients $A_T$, $Q=(\\underline{P_n})_n$) is the unique natural isomorphism with exactly this representative component, and likewise $s^0$ for $\\underline A_T$. The pulled-back towers are identified with $Q_X$ by the coefficient isomorphisms of Step 1. Multiplying by the indicated inverses gives\n$$\\rho_{LM}r_X(s_M^a)p_{B_Y^aM}^{-1}=B_X^0(a_M^{-1})s_{r_YM}^0G(\\rho_M).$$\nAll these are morphisms of derived strict towers. The comparison $s^0$ is natural in its argument by [lem-weil-pbc-reduction-pullback-derived-tower].",
+   "uses": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, strict quotient scalar balancing and pullback/tensor reassociation before taking inverse limits."
+   }
+  },
+  {
+   "text": "Set $\\beta=B_Y^0(\\chi_K)\\rho_{RK}$ and $\\gamma=\\rho_K$. Naturality of $\\rho$ for the ordinary counit, followed by Steps 4 and 3, gives the following calculation in the strict-tower category:\n$$\\begin{aligned}\n\\gamma\\,r_X(t^a)p_{B_Y^aRK}^{-1}\n&=B_X^0(r_X\\varepsilon^a)\\rho_{LRK}r_X(s_{RK}^a)p_{B_Y^aRK}^{-1}\\\\\n&=B_X^0(r_X\\varepsilon^a\\,a_{RK}^{-1})s_{r_YRK}^0G(\\rho_{RK})\\\\\n&=B_X^0(\\varepsilon^0)B_X^0(G\\chi_K)s_{r_YRK}^0G(\\rho_{RK})\\\\\n&=B_X^0(\\varepsilon^0)s_{R_0r_XK}^0G(B_Y^0\\chi_K)G(\\rho_{RK})\n=t^0G(\\beta).\n\\end{aligned}$$\nThe first line is the naturality asserted by [lem-weil-pbc-strict-quotient-scalar-balancing]. The last line uses naturality of $s^0$ from [lem-weil-pbc-reduction-pullback-derived-tower] at $\\chi_K$. The intervening substitutions are exactly the equations established in Steps 4 and 3; only composition and functoriality are used.",
+   "uses": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, explicit projection-formula scalar conjugation calculation; agent expansion of the compatibility claimed there."
+   }
+  },
+  {
+   "text": "Apply the strict-diagram adjunct identity of [lem-weil-pbc-flat-ringed-diagram-restriction] to $t^a:F B_Y^aRK\\to B_X^aK$, whose adjunct is $\\pi^a$. It identifies $d_{B_X^aK}r_Y(\\pi^a)$ as adjunct to $r_X(t^a)p_{B_Y^aRK}^{-1}$. Postcomposing by $H_0(\\gamma)$ makes the adjunct equal to $\\gamma r_X(t^a)p_{B_Y^aRK}^{-1}$. By Step 5 this is $t^0G(\\beta)$. By the Hom-bijection definition of adjunct and its naturality in the source, this last morphism is adjunct to $\\pi^0\\beta$; $\\pi^0$ is adjunct to $t^0$ by Step 2. The Hom bijection is injective, so\n$$H_0(\\rho_K)d_{B_X^aK}r_Y(\\pi^a)=\\pi^0 B_Y^0(\\chi_K)\\rho_{RK},$$\nwhich is precisely the required equation. Postcomposition and precomposition of adjuncts here follow directly from their formulas $t\\mapsto H_0(t)\\eta$ and $h\\mapsto\\varepsilon G(h)$, using naturality of $\\eta,\\varepsilon$.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-weil-pbc-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, passage from the counit-tensor calculation to equality of projection maps by the normalized adjunction (Stacks 0B56 and 0FND)."
+   }
+  },
+  {
+   "text": "The isomorphisms $\\rho,q$ and their pullback square are natural on arbitrary ambient objects by [lem-weil-pbc-strict-quotient-scalar-balancing]; the normalized scalar comparisons and adjunct identity are natural derived diagram comparisons by [lem-weil-pbc-flat-ringed-diagram-restriction]. For a map $K\\to K'$, naturality of the counits and of $s^a,s^0$ makes $t^a,t^0$ commute with that map, and the natural Hom bijections carry this to the corresponding squares for $\\pi^a,\\pi^0$. Hence every composite in the equation is natural in $K$. Every equality above was made on the diagram site and then inside its derived category, so it already includes the quotient transitions. The argument used no property of the ambient input beyond being an object of $D(A_X)$, and introduced no properness, completeness, or witness condition.",
+   "uses": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, naturality of coefficient reduction and projection-formula conjugation on strict towers, prior to applying R lim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-map",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-strict-quotient-scalar-balancing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, projection-formula conjugation; explicit strict-diagram scalar-counit calculation, using Stacks Tags 0B56, 093M and 0FND through the cited DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +178,66 @@
    "results": "{\"t\": \"2026-10-21T06:20:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|restrictScalars",
+   "results": "{\"t\": \"2026-10-21T08:20:11Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projection_formula|restrictScalars\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with the projection formula morphism defined as adjoint of counit tensor identity",
+   "results": "{\"t\": \"2026-10-21T08:20:11Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars commutes with the projection formula morphism defined as adjoint of counit tensor identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.restrictScalars\", \"TensorProduct.AlgebraTensorModule.restrictScalars_curry\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"LinearMap.restrictScalars\", \"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\"], \"digest\": \"e2129d18f61a7a97\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-21T08:20:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars carries the derived projection formula map for strict quotient towers to the constant coefficient projection map by the adjunction counit",
+   "results": "{\"t\": \"2026-10-21T08:20:13Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars carries the derived projection formula map for strict quotient towers to the constant coefficient projection map by the adjunction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"Rep.resCoindAdjunction_counit_app_hom_hom\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"Submodule.Quotient.restrictScalarsEquiv_mk\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\"], \"digest\": \"41fbe0d92a4a8b8e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between left adjoints with right mate transports adjuncts and counits",
+   "results": "{\"t\": \"2026-10-21T08:20:14Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between left adjoints with right mate transports adjuncts and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.Adjunction.leftAdjointCompIso\", \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"CategoryTheory.Bicategory.conjugateEquiv_apply\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom_app\"], \"digest\": \"9a8e110dfc4c25e1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|comparisonCompatible|mateEquiv_counit",
+   "results": "{\"t\": \"2026-10-21T08:22:26Z\", \"tool\": \"grep\", \"query\": \"rightAdjointProjectionMap|comparisonCompatible|mateEquiv_counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"3b6040c27b3ffa84\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_apply|homEquiv_naturality",
+   "results": "{\"t\": \"2026-10-21T08:22:26Z\", \"tool\": \"grep\", \"query\": \"homEquiv_symm_apply|homEquiv_naturality\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"db13d6bfa7735270\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract adjunction/mate identities and ordinary scalar restriction do not state the derived strict-quotient-diagram projection compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "{\"t\": \"2026-10-21T08:22:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.rightAdjointProjectionMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap'; no absence conclusion drawn"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
@@ -92,5 +256,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-quotient-diagram-scalar-projection",
+  "worker": "stage1",
+  "summary": "N6: no complete project attachment or Mathlib match. Seven-step strict-diagram proof from existing flat scalar restriction, quotient balancing, diagonal counit normalization and projection-mate nodes. Explicitly computes both adjuncts and proves their equality. No new nodes or changed statement. Added the existing diagonal normalization as a statement dependency. Maintainer reader FIX: Step 1 now supplies the constant-ring identification c_R (lem-pe-constant-left-module-inverse-image, declared tool use) and proves its scalar-map compatibility; Step 4 now justifies identifying the balancing node's tau with the inverse of the reduction-pullback comparison (lem-weil-pbc-ringed-topoi-derived-tensor-pullback).",
+  "blueprint": "Realizes the second paragraph of lemma-weil-pbc-completed-exchange-coherence.proof.md: conjugation by the same projection-formula isomorphisms, making its scalar-restriction compatibility explicit before evaluation or R lim.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Step 1 needs the canonical ring identification u^{-1}\\underline A_V = \\underline A_U for the possibly infinite Noetherian ring A (a hypothesis c_R of flat diagram restriction); the in-unit profinite-coefficient node covers only finite rings and their limit, and no node of the unit's route states it for arbitrary rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-3a59985a5",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-3a59985a5 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement is kept verbatim; the only change to it is the added stmt_dep lem-weil-pbc-constant-tower-pushforward-normalization, which is correct. I type-checked the equation and checked each step. Step 2 identifies the projection maps correctly with the adjuncts of t^a and t^0 of augmented-diagram-projection-mate, through the strict counit equation of the constant-tower node. Steps 3, 5 and 6 (adjunct algebra, line-by-line calculation, Hom-bijection injectivity) are correct. Two faults, both repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-quotient-diagram-scalar-projection.json. (1) C4/E1, Step 1: the profinite-coefficient node covers only finite rings and their limit, so the identification c_R : u^{-1}\\underline A_V ≅ \\underline A_U for a Noetherian, possibly infinite A, needed by flat-ringed-diagram-restriction, was missing, and so was its compatibility with the scalar map. Fixed by citing lem-pe-constant-left-module-inverse-image (generic, declared in tool_uses, no cycle) and writing out the check through constant sections. (2) E5, Step 4: the step did not say why the balancing node's τ and B^0G ≅ GB^0 are the inverses of the reduction-pullback comparisons s^a and s^0. Added the representative-level argument, citing lem-weil-pbc-ringed-topoi-derived-tensor-pullback. No new nodes and no SGA. Advisory: the parent ordered-exchange-coefficient-comparison and the sibling strict-quotient-scalar-balancing make the same implicit c_R use. Process note: an early background search over runs/ was stopped at its time limit; it was not needed for this verdict and was not rerun.; 1 file(s) fixed by the reviewer"
  }
 }

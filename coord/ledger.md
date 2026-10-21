@@ -21521,3 +21521,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:00 L: merged deliver/Q132/lem-sf-package-exceptional-coherence-realization (reviewer PASS; first push; new nodes: 0); claim not held by Q132: not your claim
 - 09:00 L: merged deliver/Q128/lem-sf-package-coefficient-domain-realization (reviewer FIX; first push; new nodes: 0); claim not held by Q128: not your claim
 - 09:00 L: merged deliver/Q70/lem-pur-strict-coefficient-comparison-calculus (reviewer PASS; first push; new nodes: 0)
+- 09:00 L: merged deliver/N6/lem-weil-pbc-quotient-diagram-scalar-projection (reviewer FIX; first push; new nodes: 0)
