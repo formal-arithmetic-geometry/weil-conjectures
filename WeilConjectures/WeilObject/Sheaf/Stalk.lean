@@ -46,7 +46,7 @@ stalk functor `ProEtale.CondensedRing.WeilSheaf.stalkFunctor` is the transport
 
 Let `k` be a finite field and `X₀` a scheme over `k` with structure morphism `f`. The geometric
 fiber `X = X₀ ×_{Spec k} Spec k̄` is a scheme over `Spec k` through the projection to `X₀`
-(`Scheme.Hom.geometricFiberOver`), and the geometric Galois Frobenius `g_X = 𝟙 X₀ × σ` is an
+(`Scheme.Hom.geometricFiberOverBase`), and the geometric Galois Frobenius `g_X = 𝟙 X₀ × σ` is an
 automorphism of it over `Spec k` (`Scheme.Hom.geometricFrobeniusOver`). Weil sheaves for
 `g_X` are the classical Weil sheaves on `X₀`.
 
@@ -215,13 +215,13 @@ variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spe
 
 /-- The geometric fiber `X = X₀ ×_{Spec k} Spec k̄` as a scheme over `Spec k`, through the
 projection `p_X : X ⟶ X₀` followed by `f`. -/
-noncomputable def geometricFiberOver : Over (Spec (.of k)) :=
+noncomputable def geometricFiberOverBase : Over (Spec (.of k)) :=
   Over.mk (f.geometricFiberProj ≫ f)
 
 /-- The geometric Galois Frobenius `g_X = 𝟙 X₀ × σ` as an automorphism of the geometric fiber
 over `Spec k`. -/
-noncomputable def geometricFrobeniusOver : f.geometricFiberOver ≅ f.geometricFiberOver :=
-  Over.isoMk f.geometricFrobenius (by simp [geometricFiberOver])
+noncomputable def geometricFrobeniusOver : f.geometricFiberOverBase ≅ f.geometricFiberOverBase :=
+  Over.isoMk f.geometricFrobenius (by simp [geometricFiberOverBase])
 
 /-- The geometric point `x̄ = (x₀, 𝟙) : Spec k̄ ⟶ X₀ ×_{Spec k} Spec k̄` of the geometric fiber
 lying over a `k`-rational point `x₀` of `X₀`, that is a section of `f`. -/
