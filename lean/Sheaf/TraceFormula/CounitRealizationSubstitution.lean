@@ -11,14 +11,11 @@ public import Sheaf.Paper.QuotientSystemMixedCoherence
 public import Sheaf.Paper.CompletedLineTensorCoherence
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.NormalizedDVRTower
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
+import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.TraceFormula.ScalarModelAssociativity
+import Sheaf.TraceFormula.ScalarModelUnit
 import Sheaf.Paper.EffectiveComparisonRealizationModels
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.QuotientScalarComparisonDescent
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.TraceFormula.IntegralConeCounitRealization
 
 /-! # Whole-counit substitution in integral realization
 
@@ -425,18 +422,293 @@ structure ScalarLaws (M : Models.{u} l) : Prop where
         ((coefficientSequenceLimit l E.carrier X).obj C)
         (CompletedLineTensor.intrinsic_complete l E.carrier X ⟨_, hC⟩)).hom
 
+private theorem normalized_iso (a : Location.{u} l)
+    {C D : coefficientSequenceDerived l a.coefficient.carrier a.scheme} (e : C ≅ D)
+    (hC : IsNormalizedCoefficientSequence l a.coefficient.carrier a.scheme C) :
+    IsNormalizedCoefficientSequence l a.coefficient.carrier a.scheme D := by
+  intro m n h P
+  let V := coefficientSequenceDerivedEvaluation l a.coefficient.carrier a.scheme
+  let R := normalizedDVRRes l a.coefficient.carrier a.scheme h
+  let t := coefficientSequenceDerivedTransition l a.coefficient.carrier a.scheme h
+  have hn : (V m).map e.hom ≫ t.app D = t.app C ≫ R.map ((V n).map e.hom) :=
+    t.naturality e.hom
+  constructor
+  · intro f g hfg
+    apply (cancel_epi ((V n).map e.hom)).1
+    apply (hC h P).1
+    change t.app C ≫ R.map ((V n).map e.hom ≫ f) =
+      t.app C ≫ R.map ((V n).map e.hom ≫ g)
+    rw [R.map_comp, R.map_comp, ← Category.assoc, ← Category.assoc, ← hn]
+    simpa only [Category.assoc] using
+      congrArg (fun k ↦ (V m).map e.hom ≫ k) hfg
+  · intro k
+    obtain ⟨f, hf⟩ := (hC h P).2 ((V m).map e.hom ≫ k)
+    refine ⟨(V n).map e.inv ≫ f, ?_⟩
+    apply (cancel_epi ((V m).map e.hom)).1
+    change (V m).map e.hom ≫ t.app D ≫ R.map ((V n).map e.inv ≫ f) = _
+    rw [← Category.assoc, hn, Category.assoc, ← R.map_comp]
+    simpa using hf
+
+private theorem counit_iso (M : Models.{u} l) (a : Location.{u} l)
+    (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme)
+    (hC : IsNormalizedCoefficientSequence l a.coefficient.carrier a.scheme C) :
+    IsIso ((M.system a).adjunction.counit.app C) := by
+  have hl : IsUnit (l : Γ(a.scheme, ⊤)) := by
+    apply AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ a.scheme.toSheafedSpace ⊤
+    intro x hx
+    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+    simpa only [map_natCast] using
+      (isUnit_of_invertible (l : a.scheme.residueField x)).ne_zero
+  exact ((purNormalizedReconstruction l a.coefficient.carrier a.scheme hl
+    (M.system a)).1 C hC).2
+
+private theorem primitive_normalized (M : Models.{u} l) {a b : Location.{u} l}
+    (O : Primitive l a b) (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme)
+    (hC : IsNormalizedCoefficientSequence l a.coefficient.carrier a.scheme C)
+    (hK : sfIntegralConstructible l a.coefficient.carrier a.scheme
+      ((coefficientSequenceLimit l a.coefficient.carrier a.scheme).obj C)) :
+    IsNormalizedCoefficientSequence l b.coefficient.carrier b.scheme (O.system.obj C) := by
+  let := counit_iso M a C hC
+  obtain ⟨T⟩ := effectiveComparisonRealizationModels.{u} l
+  let K := (coefficientSequenceLimit l a.coefficient.carrier a.scheme).obj C
+  cases O with
+  | @pullback E X Y hX hY f =>
+    let e := (T.system E.carrier Y).adjunction.leftAdjointUniq
+      (M.system ⟨E, Y, hY⟩).adjunction
+    apply normalized_iso ⟨E, X, hX⟩
+      ((integralComparisonDerivedSequencePullback l E.carrier f).mapIso
+        (e.app K ≪≫ asIso ((M.system ⟨E, Y, hY⟩).adjunction.counit.app C)))
+    exact (T.pullback_effective E.carrier f ⟨K, hK⟩).1
+  | @scalar E L ι X hX =>
+    let e := (T.system E.carrier X).adjunction.leftAdjointUniq
+      (M.system ⟨E, X, hX⟩).adjunction
+    apply normalized_iso ⟨L, X, hX⟩
+      ((integralComparisonDerivedSequenceScalar l E.carrier L.carrier ι X).mapIso
+        (e.app K ≪≫ asIso ((M.system ⟨E, X, hX⟩).adjunction.counit.app C)))
+    exact (T.scalar_effective E.carrier L.carrier ι X ⟨K, hK⟩).1
+
+private theorem word_invertible (M : Models.{u} l) {a b : Location.{u} l}
+    (w : Word l a b) (C : coefficientSequenceDerived l a.coefficient.carrier a.scheme)
+    (hC : IsNormalizedCoefficientSequence l a.coefficient.carrier a.scheme C)
+    (hA : w.Allowed C) : IsIso (w.comparison M C) ∧
+      IsNormalizedCoefficientSequence l b.coefficient.carrier b.scheme (w.system.obj C) := by
+  induction w with
+  | nil a => exact ⟨inferInstanceAs (IsIso (𝟙 _)), hC⟩
+  | atom O =>
+    let := counit_iso M _ C hC
+    refine ⟨?_, primitive_normalized M O C hC hA.1⟩
+    dsimp only [Word.comparison, Primitive.comparison]
+    infer_instance
+  | comp w v ihw ihv =>
+    obtain ⟨hw, hn⟩ := ihw C hC hA.1
+    obtain ⟨hv, hn'⟩ := ihv (w.system.obj C) hn hA.2
+    let := hw
+    let := hv
+    exact ⟨inferInstanceAs
+      (IsIso (v.completed.map (w.comparison M C) ≫ v.comparison M (w.system.obj C))), hn'⟩
+
+private theorem word_naturality (M : Models.{u} l) {a b : Location.{u} l}
+    (w : Word l a b) {C D : coefficientSequenceDerived l a.coefficient.carrier a.scheme}
+    (φ : C ⟶ D) :
+    w.completed.map ((coefficientSequenceLimit l a.coefficient.carrier a.scheme).map φ) ≫
+        w.comparison M D = w.comparison M C ≫
+      (coefficientSequenceLimit l b.coefficient.carrier b.scheme).map (w.system.map φ) := by
+  induction w with
+  | nil a => simp [Word.comparison, Word.completed, Word.system]
+  | @atom a b O =>
+    dsimp only [Word.completed, Word.system, Word.comparison, Primitive.comparison]
+    rw [← Category.assoc, (O.model M).hom.naturality]
+    dsimp only [Functor.comp_map]
+    simp only [Category.assoc, ← Functor.map_comp]
+    congr 1
+    exact congrArg
+      (fun f ↦
+        (coefficientSequenceLimit l b.coefficient.carrier b.scheme).map (O.system.map f))
+      ((M.system a).adjunction.counit.naturality φ)
+  | comp w v ihw ihv =>
+    dsimp only [Word.completed, Word.system, Word.comparison, Functor.comp_map]
+    rw [← Category.assoc, ← v.completed.map_comp, ihw, v.completed.map_comp,
+      Category.assoc, ihv]
+    simp only [Category.assoc]
+
+private theorem word_laws (M : Models.{u} l) : WordLaws M := by
+  refine ⟨counit_iso M, word_invertible M, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro a b w C D hC hD hAC hAD φ
+    exact word_naturality M w φ
+  · intro a b c w v C
+    rfl
+  · intro a b c d w v z C
+    simp only [Word.comparison, Word.completed, Word.system, Functor.map_comp,
+      Functor.comp_map, Functor.comp_obj, Category.assoc]
+  · intro a b O C
+    dsimp only [Word.reductionComparison, Word.comparison, Primitive.comparison,
+      Primitive.reductionComparison]
+    have h := (M.system b).adjunction.counit.naturality
+      (O.system.map ((M.system a).adjunction.counit.app C))
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, Functor.id_map] at h ⊢
+    simpa only [Word.system, Word.completed, Functor.comp_obj, Functor.map_comp,
+      Category.assoc] using congrArg
+      (fun f ↦ (M.system b).reduction.map
+        ((O.model M).hom.app
+          ((coefficientSequenceLimit l a.coefficient.carrier a.scheme).obj C)) ≫ f) h
+  · intro a b w v t C hC hw hv
+    let := (word_invertible M w C hC hw).1
+    let := (word_invertible M v C hC hv).1
+    let q := asIso (w.comparison M C) ≪≫
+      (coefficientSequenceLimit l b.coefficient.carrier b.scheme).mapIso (t.system.app C) ≪≫
+        (asIso (v.comparison M C)).symm
+    refine ⟨q, ?_, ?_⟩
+    · simp [q, Category.assoc]
+    · intro q' hq'
+      apply Iso.ext
+      apply (cancel_mono (v.comparison M C)).1
+      exact hq'.trans (by simp [q, Category.assoc])
+  · intro a b w v z t s C hv hz
+    simp only [Word.transport, NatTrans.comp_app, Functor.map_comp, Category.assoc,
+      IsIso.inv_hom_id_assoc]
+  · intro a b w v t C hw hv
+    simp only [Word.transport, Category.assoc, IsIso.inv_hom_id_assoc,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, IsIso.hom_inv_id]
+  · intro a b c w v t z C hv hvz
+    apply (cancel_mono ((Word.comp v z).comparison M C)).1
+    dsimp only [Word.transport]
+    simp only [Category.assoc, IsIso.inv_hom_id]
+    dsimp only [Comparison.system, Word.comparison, Word.system, Word.completed,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+    have hn := word_naturality M z (t.system.hom.app C)
+    simp only [Functor.map_comp, Functor.comp_obj, Category.assoc, Category.comp_id]
+    rw [← hn]
+    simp only [← Functor.map_comp_assoc, IsIso.inv_hom_id, Category.comp_id]
+  · intro a b c z w v t C hv hzv
+    have hi : IsIso (v.completed.map (z.comparison M C) ≫
+        v.comparison M (z.system.obj C)) := hzv
+    apply (cancel_mono (v.comparison M (z.system.obj C))).1
+    dsimp only [Word.transport]
+    simp only [Category.assoc, IsIso.inv_hom_id]
+    dsimp only [Word.comparison, Word.system, Word.completed, Comparison.system,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.comp_obj]
+    have hc := IsIso.inv_hom_id
+      (v.completed.map (z.comparison M C) ≫ v.comparison M (z.system.obj C))
+    simpa only [Category.assoc, Category.comp_id] using congrArg
+      (fun f ↦ w.completed.map (z.comparison M C) ≫
+        w.comparison M (z.system.obj C) ≫
+        (coefficientSequenceLimit l c.coefficient.carrier c.scheme).map
+          (t.system.hom.app (z.system.obj C)) ≫ f) hc
+
+private theorem scalar_laws (M : Models.{u} l) : ScalarLaws M := by
+  constructor
+  · intro E L F ι j X hX C hN hC hA hDirect
+    let K := (coefficientSequenceLimit l E.carrier X).obj C
+    let hK := CompletedLineTensor.intrinsic_complete l E.carrier X ⟨K, hC⟩
+    let S := integralComparisonDerivedSequenceScalar l E.carrier L.carrier ι X
+    let T := integralComparisonDerivedSequenceScalar l L.carrier F.carrier j X
+    let U := integralComparisonDerivedSequenceScalar l E.carrier F.carrier (j.comp ι) X
+    let LE := coefficientSequenceLimit l E.carrier X
+    let LL := coefficientSequenceLimit l L.carrier X
+    let LF := coefficientSequenceLimit l F.carrier X
+    let B := integralScalarExtensionOfUniverses l L.carrier F.carrier j X
+    let D := completedDerivedScalarExtension l L.carrier F.carrier j X
+    let b := M.scalar E L ι X
+    let c := M.scalar L F j X
+    let d := M.scalar E F (j.comp ι) X
+    let e := (M.system ⟨E, X, inferInstance⟩).adjunction.counit.app C
+    let a := integralComparisonSystemScalarComposition l E.carrier L.carrier F.carrier ι j X
+    have hc := c.realization.hom.naturality (LL.map (S.map e))
+    have he := (M.system ⟨L, X, inferInstance⟩).adjunction.counit.naturality (S.map e)
+    have ha := a.hom.naturality e
+    have hs := scalarModelAssociativity l E.carrier L.carrier F.carrier ι j X
+      (M.system ⟨E, X, inferInstance⟩) (M.system ⟨L, X, inferInstance⟩)
+      (M.roos ⟨L, X, inferInstance⟩) (M.roos ⟨F, X, inferInstance⟩) b c d K
+    let χ := CompletedLineTensor.chi l E.carrier X L.carrier ι K hK
+    let ψ := CompletedLineTensor.chi l L.carrier X F.carrier j
+      ((integralScalarExtensionOfUniverses l E.carrier L.carrier ι X).obj K)
+      (CompletedLineTensor.extension_complete l E.carrier X L.carrier ι K hK)
+    change D.map χ.hom ≫ ψ.hom ≫ B.map (b.realization.hom.app K) ≫
+      c.realization.hom.app (LL.obj (S.obj ((M.system ⟨E, X, hX⟩).reduction.obj K))) ≫
+      LF.map (T.map ((M.system ⟨L, X, hX⟩).adjunction.counit.app
+        (S.obj ((M.system ⟨E, X, hX⟩).reduction.obj K)))) ≫
+      LF.map (a.hom.app ((M.system ⟨E, X, hX⟩).reduction.obj K)) = _ at hs
+    apply (cancel_epi (D.map χ.hom ≫ ψ.hom)).1
+    dsimp only [scalarWord, Word.comparison, Word.system, Word.completed,
+      Primitive.comparison, Primitive.model, Primitive.system, Primitive.completed]
+    change (D.map χ.hom ≫ ψ.hom) ≫
+      (B.map (b.realization.hom.app K ≫ LL.map (S.map e)) ≫
+        (c.realization.hom.app (LL.obj (S.obj C)) ≫
+          LF.map (T.map ((M.system ⟨L, X, inferInstance⟩).adjunction.counit.app
+            (S.obj C))))) ≫ LF.map (a.hom.app C) = _
+    rw [B.map_comp]
+    simp only [Category.assoc]
+    dsimp only [Functor.comp_map, Functor.id_map] at hc he ha
+    rw [reassoc_of% hc]
+    have he' := congrArg (fun f ↦ LF.map (T.map f)) he
+    simp only [CategoryTheory.Functor.map_comp] at he'
+    rw [reassoc_of% he']
+    change T.map (S.map e) ≫ a.hom.app C =
+      a.hom.app ((M.system ⟨E, X, hX⟩).reduction.obj K) ≫ U.map e at ha
+    rw [← LF.map_comp (T.map (S.map e)), ha]
+    simp only [Functor.map_comp]
+    have hs' := hs =≫ LF.map (U.map e)
+    simp only [Category.assoc] at hs'
+    rw [hs']
+    dsimp only [CompletedLineTensor.associator, Iso.trans_hom, Iso.symm_hom,
+      Functor.mapIso_hom]
+    simp only [Category.assoc]
+    change _ = D.map χ.hom ≫ ψ.hom ≫ ψ.inv ≫ D.map χ.inv ≫
+      (CompletedLineTensor.associatorData l E.carrier X L.carrier ι F.carrier j).derived.hom.app
+        K ≫ (CompletedLineTensor.chi l E.carrier X F.carrier (j.comp ι) K hK).hom ≫
+      d.realization.hom.app K ≫ LF.map (U.map e)
+    rw [ψ.hom_inv_id_assoc, ← D.map_comp_assoc, χ.hom_inv_id, D.map_id,
+      Category.id_comp]
+    rfl
+  · intro E X hX C hN hC hA
+    let K := (coefficientSequenceLimit l E.carrier X).obj C
+    let hK := CompletedLineTensor.intrinsic_complete l E.carrier X ⟨K, hC⟩
+    let S := M.system ⟨E, X, inferInstance⟩
+    let b := M.scalar E E (AlgHom.id ℚ_[l] E.carrier) X
+    let L := coefficientSequenceLimit l E.carrier X
+    let e := S.adjunction.counit.app C
+    let a := integralComparisonSystemScalarUnit l E.carrier X
+    have ha := a.hom.naturality e
+    have hs := scalarModelUnit l E.carrier X S (M.roos ⟨E, X, inferInstance⟩) b K
+    let χ := CompletedLineTensor.chi l E.carrier X E.carrier
+      (AlgHom.id ℚ_[l] E.carrier) K hK
+    change χ.hom ≫ b.realization.hom.app K ≫
+      L.map (a.hom.app (S.reduction.obj K)) = _ at hs
+    apply (cancel_epi χ.hom).1
+    dsimp only [scalarWord, Word.comparison, Primitive.comparison, Primitive.model,
+      Primitive.system]
+    change χ.hom ≫ (b.realization.hom.app K ≫
+      L.map ((integralComparisonDerivedSequenceScalar l E.carrier E.carrier
+        (AlgHom.id ℚ_[l] E.carrier) X).map e)) ≫ L.map (a.hom.app C) = _
+    simp only [Category.assoc]
+    rw [← L.map_comp]
+    rw [show (integralComparisonDerivedSequenceScalar l E.carrier E.carrier
+      (AlgHom.id ℚ_[l] E.carrier) X).map e ≫ a.hom.app C =
+      a.hom.app (S.reduction.obj K) ≫ e from ha]
+    dsimp only [Functor.comp_map, Functor.id_map] at *
+    rw [L.map_comp]
+    have hs' := hs =≫ L.map e
+    simp only [Category.assoc] at hs'
+    rw [hs']
+    have ht := S.adjunction.right_triangle_components C
+    change S.adjunction.unit.app K ≫ L.map e = 𝟙 K at ht
+    rw [ht]
+    erw [Category.comp_id]
+    dsimp only [CompletedLineTensor.unit, Iso.trans_hom, Iso.symm_hom, Iso.app_hom]
+    change _ = χ.hom ≫ χ.inv ≫ (CompletedLineTensor.ordinaryUnit l E.carrier X).hom.app K
+    rw [χ.hom_inv_id_assoc]
+
 /-- Whole-counit substitution and scalar normalization for realized operations.
 Source: Stacks 0941, lemma-derived-limit-is-ok; Bhatt--Scholze, Definition 3.4.10,
 Proposition 3.5.1 and Lemma 3.5.7; blueprint main-20261015,
 prop-trf-karoubi-independence, final common-stage transport sentence
 (blueprint: lem-trf-counit-realization-substitution).
 
-Proof plan, following the eleven steps of the DAG node:
-1. coefficientDerivedSystemEvaluationCalculus supplies the actual adjunction counit.
-NormalizedDVREffectivity identifies its evaluations with coherent canonical
-isomorphisms. Joint conservativity makes the entire counit invertible, without bounds.
-integralComparisonReductionCounit_formula identifies it with coefficient change of
-the K-injective-normalized ordinary-limit-cone counit.
+Proof, with the scalar representative calculations isolated in their own nodes:
+1. purNormalizedReconstruction gives invertibility of the actual adjunction counit
+on normalized systems, without bounds. The residue-field invertibility hypothesis
+implies the required global invertibility of l by the stalk criterion.
 2. A primitive comparison is its prescribed model followed by L(O(e_C)), hence is
 invertible. effectiveComparisonRealizationModels makes O(R(K)) normalized on the
 constructible-complete domain. Transport normalization along O(e_C); iterate.
@@ -455,27 +727,19 @@ word comparisons. Invertibility gives uniqueness. Composition cancels the middle
 comparison and its inverse; inversion reverses all factors.
 7. Naturality applied to t_C gives left whiskering; evaluating at zC and using the
 word cut formula gives right whiskering. Induct to arbitrary further words.
-8. For scalar normalization use finiteFreeCompletedScalarComparison: chi and the
-ordinary scalar extensions preserve completeness. Resolve K by a flat-term K-flat
-complex using lem-pc-kflat-resolution. lem-pur-kflat-change-of-rings computes both
-successive extensions. lem-pur-quotient-scalar-comparison-descent fixes the quotient
-coordinates of chi and its zero shifted-product component on every representative.
-9. integralConeCounitRealization turns these quotient lifts into the original
-compatible strict families under the adjunction counit. Both scalar associativity
-routes on ((x tensor a) tensor b) tensor c give x tensor (a-bar b-bar c).
-Balancing extends this to all tensors; quotient maps and restrictions preserve
-multiplication, and degree-zero scalars commute with the differential.
-10. Localize that strict equality retaining the normalized cochain comparisons.
-The adjunction Hom bijection identifies the entire-system adjuncts. Naturality
-transports the equation through e_C. Inverting the two chi factors gives exactly
-CompletedLineTensor.associator, whose definition is the displayed chi conjugation.
-11. At identity coefficients the same computation is multiplication s tensor x to sx.
-The identity normalization of chi identifies it with the completeness unit after
-ordinary multiplication, giving exactly CompletedLineTensor.unit. This includes
-all equalities among the coefficient fields. No faithfulness of separate finite
-reductions, finite Tor-amplitude, or additional boundedness is used. -/
+8. scalarModelAssociativity supplies the ambient scalar normalization square,
+including the original middle whole-system counit. Naturality of the second scalar
+model and the middle counit, then naturality of the system associator, transport
+this square through e_C. Cancel the two invertible chi factors. Their conjugation
+is exactly the published CompletedLineTensor.associator.
+9. scalarModelUnit supplies the ambient identity square with the actual adjunction
+unit. Naturality of the system unitor transports it through e_C. The adjunction
+triangle cancels the unit and realized counit. Cancel chi and expand the published
+CompletedLineTensor.unit. The two scalar nodes carry the strict quotient arguments;
+no faithfulness of separate finite reductions, finite Tor-amplitude, or additional
+boundedness is used. -/
 theorem counitRealizationSubstitution (l : ℕ) [Fact l.Prime] (M : Models.{u} l) :
     WordLaws M ∧ ScalarLaws M := by
-  sorry
+  exact ⟨word_laws M, scalar_laws M⟩
 
 end WeilConjectures.CounitRealization

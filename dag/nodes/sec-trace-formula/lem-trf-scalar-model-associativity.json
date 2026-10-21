@@ -1,0 +1,145 @@
+{
+ "id": "lem-trf-scalar-model-associativity",
+ "kind": "statement",
+ "title": "Scalar-model realization preserves ordinary associativity before completion is inverted",
+ "statement": "Fix a prime l, finite extensions E, L, F of Q_l, algebra embeddings iota:E to L and j:L to F, and a scheme X. Let SE and SL be the normalized coherent reduction/total-limit calculi, rhoL and rhoF normalized Roos models, and bEL,bLF,bEF normalized scalar realization models [def-trf-integral-comparison-realization-models]. For every ambient derived E-complex K, first apply ordinary scalar extension L to F to chi_EL(K), then chi_LF at the completed E-to-L extension of K, then the iterated realization bEL and bLF, insert the image of the actual SL whole-system counit, and realize the specified system scalar associator [lem-trf-quotient-system-mixed-coherence]. This equals the specified ordinary derived tensor associator followed by chi_EF(K) and bEF(K) [lem-pur-completed-line-tensor-coherence]. The equation holds before any completion comparison is inverted; its exact composition order is the attached Lean statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; normalization refinement of parent steps 8--10, using Stacks 0941 whole-system cone counit. This square is an agent expansion, not stated verbatim in the source."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat complex P representing K. Use the actual calculus reduction model to obtain a simultaneous strict quotient presentation C, e and kappa, including all quotient transitions. Apply each scalar model normalization to these presentations. Its resulting tower identification is fixed on pure tensors, and its Roos map is the prescribed realization.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute successive completed-ring scalar changes on P by their universal K-flat counits. K-flat change of rings preserves flat terms. The quotient comparison descent identifies each initial completedScalarComparison with the actual quotient augmentation in the unshifted coordinate and zero in the shifted coordinate.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-quotient-scalar-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-tower/limit adjunction counit and coefficient action counit give the actual reduction counit by integralComparisonReductionCounit_formula. Use the strict cone-counit identity to recover the original compatible quotient tensor family when the middle counit is inserted. The system scalar associator is normalized by its universal cochain counits, so both adjuncts send a nested local tensor c tensor (b tensor (a tensor x)) to c*j(b)*j(iota(a)) tensor x. Tensor balancing, exact sheafification and compatibility with differentials prove equality of strict diagram maps, including quotient transitions. This is equality before localization, not detection by separate derived evaluations.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-integral-cone-counit-realization",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the strict equality. The representative equation fixing CompletedLineTensor.associatorData identifies its ordinary factor. The adjunction Hom equivalence identifies the realized composites, with the middle whole-system counit in the displayed position. Naturality and an isomorphism Q(P) to K transport the equation to every ambient K; no inverse completion comparison is used.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-trf-integral-cone-counit-realization",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; normalization refinement of parent steps 8--10, using Stacks 0941 whole-system cone counit. This square is an agent expansion, not stated verbatim in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associativity of scalar extension commutes with the natural map to the inverse limit of quotient tensors",
+   "results": "{\"t\": \"2026-10-21T14:18:51Z\", \"tool\": \"leanfinder\", \"query\": \"associativity of scalar extension commutes with the natural map to the inverse limit of quotient tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalars_assoc'\", \"ModuleCat.extendScalars_assoc_assoc\", \"ModuleCat.extendScalars_assoc\", \"AdicCompletion.ofTensorProduct_naturality\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProduct_tmul\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor\"], \"digest\": \"02e95d61c3aeff29\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the results do not compare normalized whole-system scalar realizations with the specified ordinary derived associator or actual reduction-limit unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized scalar extension realization commutes with the derived tensor associator and the reduction limit adjunction unit",
+   "results": "{\"t\": \"2026-10-21T14:54:20Z\", \"tool\": \"leansearch\", \"query\": \"Normalized scalar extension realization commutes with the derived tensor associator and the reduction limit adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\"], \"digest\": \"5b03728cbc0a56c6\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the results do not compare normalized whole-system scalar realizations with the specified ordinary derived associator or actual reduction-limit unit."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(associator|unit).*completion|completion.*scalar.*(associator|unit)",
+   "results": "{\"t\": \"2026-10-21T15:28:38Z\", \"tool\": \"grep\", \"query\": \"scalar.*(associator|unit).*completion|completion.*scalar.*(associator|unit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match: the results do not compare normalized whole-system scalar realizations with the specified ordinary derived associator or actual reduction-limit unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CounitRealizationSubstitution",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage transport sentence; normalized integral scalar associativity, parent counit-realization-substitution steps 8--10",
+   "via": [
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelAssociativity",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelAssociativity.lean",
+  "declaration": "WeilConjectures.scalarModelAssociativity",
+  "statement": "theorem scalarModelAssociativity\n    (SE : CoefficientDerivedSystemCalculus l E X)\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (bEL : IntegralComparisonScalarModel l E L ι X SE ρL)\n    (bLF : IntegralComparisonScalarModel l L F j X SL ρF)\n    (bEF : IntegralComparisonScalarModel l E F (j.comp ι) X SE ρF)\n    (K : DerivedCategory (scalarReductionSource l E X)) :\n    (completedDerivedScalarExtension l L F j X).map\n        ((completedScalarComparison l E L ι X).app K) ≫\n      (completedScalarComparison l L F j X).app\n        ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫\n      (integralScalarExtensionOfUniverses l L F j X).map (bEL.realization.hom.app K) ≫\n      bLF.realization.hom.app\n        ((coefficientSequenceLimit l L X).obj\n          ((integralComparisonDerivedSequenceScalar l E L ι X).obj (SE.reduction.obj K))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l L F j X).map\n          (SL.adjunction.counit.app\n            ((integralComparisonDerivedSequenceScalar l E L ι X).obj (SE.reduction.obj K)))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSystemScalarComposition l E L F ι j X).hom.app\n          (SE.reduction.obj K)) =\n    (CompletedLineTensor.associatorData l E X L ι F j).derived.hom.app K ≫\n      (completedScalarComparison l E F (j.comp ι) X).app K ≫ bEF.realization.hom.app K",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T174235-L-3769668",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T174235-L-3769668",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -27,162 +27,54 @@
  ],
  "proof": [
   {
-   "text": "First identify the actual counit, rather than choose level isomorphisms. The system adjunction gives a natural map $e_C:\\mathcal R\\mathcal LC\\to C$ whose evaluations are the scalar-extension adjuncts of the total-limit projections. For a normalized $C$, DVR effectivity says precisely that these canonical maps $(\\mathcal LC)\\otimes^L A_{F,n}\\to C_n$ are coherent isomorphisms. Derived evaluations jointly detect isomorphisms in the system category, so $e_C$ itself is an isomorphism there. This argument applies without a cohomological or Tor bound. The model definition fixes its underlying constant-tower counit to the K-injective ordinary limit cone, so it is the $e$ specified in the item.",
+   "text": "Use purNormalizedReconstruction for the actual M.system adjunction: normalized systems have invertible actual counit. The scheme invertibility hypothesis implies l is a unit in global functions by the local-ring germ criterion. Transport normalization across isomorphisms directly through the transition Hom-bijections. Choose effective comparison models; the leftAdjointUniq comparison and the invertible counit carry their normalized primitive outputs to M. Induct on Word to obtain invertibility and normalized outputs.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-trf-effective-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Primitive model naturality followed by counit naturality proves arbitrary-morphism comparison naturality. Induct on words. The cut is definitional; parenthesization is functoriality and associativity. Reduction of a primitive comparison followed by the target counit is the specified reductionComparison followed by O(e_C), by actual counit naturality.",
+   "uses": [
     "def-trf-integral-comparison-realization-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
+   "elementary": false
   },
   {
-   "text": "The supplied primitive model $b_{O,K}$ is a natural isomorphism. Since a functor takes an inverse to an inverse, $\\mathcal L O(e_C)$ is an isomorphism by step 1; their composite is $r_{O,C}$. The word construction stays on normalized systems: write $K=\\mathcal LC$ and use $O(e_C):O\\mathcal RK\\xrightarrow{\\sim}OC$. The effective-model statement gives normalization of $O\\mathcal RK$ for each primitive operation; normalization is invariant under a system isomorphism, by conjugating its transition-adjoint squares. Thus $OC$ is normalized. Repeat this at each intermediate system. The stipulated constructible-complete intermediate realizations are exactly the domain restriction needed to apply the effective-model statement at the next stage.",
-   "uses": [
-    "def-trf-integral-comparison-realization-models",
-    "lem-trf-effective-comparison-realization-models",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
-  },
-  {
-   "text": "For $\\phi:C\\to D$, naturality of $b$ gives $b_{O,\\mathcal LD}\\widehat O(\\mathcal L\\phi)=\\mathcal LO\\mathcal R(\\mathcal L\\phi)b_{O,\\mathcal LC}$. Naturality of the adjunction counit gives $e_D\\mathcal R\\mathcal L\\phi=\\phi e_C$ in the entire derived system category. Apply the functor $\\mathcal LO$ to the latter equality and substitute it in the former. This gives $r_{O,D}\\widehat O(\\mathcal L\\phi)=\\mathcal L(O\\phi)r_{O,C}$. Both naturalities concern arbitrary derived-system morphisms, so the calculation applies to inverses as well.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-trf-integral-comparison-realization-models"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
-  },
-  {
-   "text": "Define $r_{1,C}=1_{\\mathcal LC}$ for the empty word, and recursively $r_{Ow,C}=r_{O,wC}\\widehat O(r_{w,C})$. Step 3 proves its naturality by induction on length; step 2 proves invertibility. To check parentheses, expand three consecutive blocks: both $r_{(uv)w,C}$ and $r_{u(vw),C}$ are $r_{u,vwC}\\widehat u(r_{v,wC})\\widehat u\\widehat v(r_{w,C})$. This uses only associativity of composition and functoriality. Induction on the lengths of the blocks proves $r_{vw,C}=r_{v,wC}\\widehat v(r_{w,C})$ for every cut of a word, including empty blocks.",
+   "text": "Conjugate the system isomorphism by asIso of the two word comparisons. Cancellation proves uniqueness. Middle inverse cancellation proves composition and inverse laws. For left whiskering apply word naturality and functoriality, then cancel the final word comparison; for right whiskering expand the cut and cancel the composite comparison.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
+   "elementary": true
   },
   {
-   "text": "This recursion is the promised whole-counit substitution, with no additional comparison chosen. For two primitive letters $A,B$, expand it as $\\mathcal LA(e_{BC})b_{A,\\mathcal LBC}\\widehat A(\\mathcal LB(e_C))\\widehat A(b_{B,\\mathcal LC})$. Naturality of $b_A$ moves $\\widehat A(\\mathcal LB(e_C))$ across $b_A$; the resulting system maps contain $e_{BC}\\mathcal R\\mathcal LB(e_C)$. Counit naturality identifies this with $B(e_C)e_{B\\mathcal R\\mathcal LC}$. This is exactly substituting the original whole-system counit before the next operation. Iterate the same equality for each additional letter. The unit/counit triangle identities cancel an inserted reduction-realization unit. All equalities used here belong to the system adjunction, prior to realization.",
+   "text": "Apply the pre-completion scalarModelAssociativity square at K=limit(C). Move the original counit through the second realization by its naturality, then through the middle whole-system counit by counit naturality, and through the system scalar associator by its naturality. The resulting prefix is exactly scalarModelAssociativity. Precompose by D_LF(chi_EL) then chi_LF, both isomorphisms on this constructible-complete domain. Expand the published completed associator, cancel inverse chi pairs, and conclude the ScalarLaws associator equation.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-trf-integral-comparison-realization-models"
+    "lem-trf-scalar-model-associativity",
+    "lem-pur-completed-line-tensor-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
+   "elementary": false
   },
   {
-   "text": "For a specified system comparison $t:w\\Rightarrow w'$, identify the completed source and target with $\\mathcal LwC$ and $\\mathcal Lw'C$ by step 5. In these identifications its construction is $\\mathcal L(t_C)$: the finite pullback compositor, scalar/pullback comparison, scalar associator and unit maps are the fixed maps of entire quotient diagrams, and the completed construction substitutes the whole counits at the intervening objects. Undoing the two identifications gives $\\widehat t_{\\mathcal LC}=r_{w',C}^{-1}\\mathcal L(t_C)r_{w,C}$. This also specifies what is meant by its counit-built completed comparison; it does not identify an arbitrary completed isomorphism with that comparison. In a composite $s\\circ t$ the middle factors $r_{w',C}r_{w',C}^{-1}$ cancel; for $t^{-1}$ invert the formula. Thus the claimed formula holds for composites and inverses.",
+   "text": "Apply scalarModelUnit at K=limit(C). Naturality of the system unitor moves the original counit to its right. The adjunction right triangle cancels unit_K followed by limit(counit_C). Precompose by chi_EE and expand the published completed unitor, cancel its inverse chi, and obtain the scalar unit equation.",
    "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "def-trf-integral-comparison-realization-models"
+    "lem-trf-scalar-model-unit",
+    "lem-pur-completed-line-tensor-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
-  },
-  {
-   "text": "For left whiskering by a primitive $A$, use step 3 with the system arrow $t_C:wC\\to w'C$. It gives $r_{A,w'C}\\widehat A(\\mathcal L(t_C))=\\mathcal L(A(t_C))r_{A,wC}$. Combine this with the formula in step 6 and the recursion for $r_{Aw}$: the resulting completed comparison is $\\widehat A(\\widehat t_{\\mathcal LC})$. For right whiskering by a primitive $B$, the same formula evaluated at $BC$, conjugated by $\\widehat w(r_{B,C})$ and $\\widehat w'(r_{B,C})$, is the completed comparison at $\\widehat B\\mathcal LC$; naturality of the completed comparison in the isomorphism $r_{B,C}$ gives precisely this square. Induction gives both assertions for arbitrary further words. No inference from equality of separate evaluations is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015)."
-   }
-  },
-  {
-   "text": "It remains to fix the scalar normalization. Put $K=\\mathcal LC$, $R=R_E$, $S=R_L$, $T=R_M$, and let $\\beta_K$ be the scalar associator obtained in step 6. Set $d_K=\\chi_{M/L,\\widehat S_{L/E}K}\\circ(\\chi_{L/E,K}\\otimes^L1_T)$, from $(K\\otimes_R^LS)\\otimes_S^LT$ to $\\widehat S_{M/L}\\widehat S_{L/E}K$. The finite-free comparison says each $\\chi$ here is an isomorphism and that $K\\otimes_R^LS$ is complete. Choose a flat-term K-flat representative $P\\to K$. Changing rings preserves K-flatness and flat terms, so $P\\otimes_R S$ and $(P\\otimes_R S)\\otimes_S T$ compute successive scalar extensions; the canonical comparisons respect replacement. The prescribed scalar model and the scalar-comparison descent statement identify each initial $\\chi$ with the chain map having the actual quotient maps in its unshifted Roos product and zero in its shifted product. These specify actual chain maps, not only evaluated derived morphisms.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "def-trf-integral-comparison-realization-models",
-    "lem-pur-quotient-scalar-comparison-descent",
-    "lem-pur-kflat-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7, pp. 22,24-26; agent expansion of the normalized scalar comparison, with the whole-counit model of Stacks Tag 0941."
-   }
-  },
-  {
-   "text": "Compute the whole-system adjuncts of $\\beta_Kd_K$ and $\\chi_{M/E,K}\\alpha^\\otimes_K$, after identifying their target $\\widehat S_{M/E}K$ with $\\mathcal LS_{M/E}\\mathcal RK$ by its model. The cone-counit identity $\\epsilon_Q\\Delta(r_\\theta)=\\theta^\\Delta$ turns each zero-shifted-product quotient lift into its original strict compatible quotient family. Extension/restriction counits then act by multiplication. In the nested expression the scalar associator sends $(x\\otimes a)\\otimes b$ to $x\\otimes ab$; in the direct expression ordinary tensor reassociation followed by the quotient map has exactly the same value. More explicitly, the level-$n$ adjunct on a generator $((x\\otimes a)\\otimes b)\\otimes c$, with $a\\in S$, $b\\in T$, $c\\in A_{M,n}$, is $x\\otimes(\\bar a\\bar b c)$ in both expressions. The maps commute with quotient transitions because reduction preserves multiplication, and with site restrictions because multiplication is a sheaf operation. Balancing gives equality on all tensors, degree by degree; scalar coefficients have degree zero, so the maps commute with the cochain differential. This proves equality of the strict whole-diagram maps computing the adjuncts, with their quotient transitions retained.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-trf-integral-cone-counit-realization",
-    "def-trf-integral-comparison-sequence-systems",
-    "def-trf-integral-comparison-realization-models",
-    "lem-pur-quotient-scalar-comparison-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7, pp. 22,24-26; agent expansion of the normalized scalar comparison, with the whole-counit model of Stacks Tag 0941."
-   }
-  },
-  {
-   "text": "Localize the strict equality of step 9, retaining the normalized model comparisons. The descent assertion for $\\chi$ and the supplied natural model normalizations permit every flat-term K-flat representative, so the result is independent of $P$. The adjunction $\\mathcal R_M\\dashv\\mathcal L_M$ is a bijection on Hom sets into $\\mathcal LS_{M/E}\\mathcal R_EK$; equality of its entire-system adjuncts therefore gives $\\beta_Kd_K=\\chi_{M/E,K}\\alpha^\\otimes_K$. For the original system $C$, use the isomorphism $e_C:\\mathcal R_EK\\to C$ of step 1. Naturality of the system scalar associator, of $r$ (step 3), and of $\\chi$ carries the just computed square to $C$; the factors $e_C$ cancel. Invert $d_K$ using step 8. In order, its inverse is $(\\chi_{L/E,K}^{-1}\\otimes^L1)\\chi_{M/L,\\widehat S_{L/E}K}^{-1}$, giving exactly the displayed conjugated tensor-associator formula. This uses faithfulness of a single adjunction Hom bijection, never faithfulness of finite reduction functors.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-quotient-scalar-comparison-descent",
-    "def-trf-integral-comparison-realization-models",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7, pp. 22,24-26; agent expansion of the normalized scalar comparison, with the whole-counit model of Stacks Tag 0941."
-   }
-  },
-  {
-   "text": "When $L=E$, the same computation uses the system unitor $s\\otimes x\\mapsto sx$. The scalar-comparison descent statement identifies its initial lift with the quotient unit of $P$ having zero shifted-product component. The finite-free comparison identifies $\\chi_{E/E,K}$, after $K\\otimes_R^LR\\cong K$, with the natural completeness isomorphism $K\\to\\mathcal L\\mathcal RK$. Hence the counit-built map $\\widehat S_{E/E}K\\to K$ is its inverse followed by multiplication, as asserted. This also covers equalities among $E,L,M$ in the associator formula. Every scalar coefficient extension used in steps 8-11 is the finite-free completed-ring extension; no flatness of a finite quotient-ring map and no finite Tor-amplitude were used.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "lem-pur-quotient-scalar-comparison-descent",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7, pp. 22,24-26; agent expansion of the normalized scalar comparison, with the whole-counit model of Stacks Tag 0941."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
-  "def-trf-integral-comparison-realization-models",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
   "lem-trf-effective-comparison-realization-models",
-  "def-coef-normalized-dvr-tower",
-  "def-trf-integral-comparison-sequence-systems",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-pur-kflat-change-of-rings",
-  "lem-trf-integral-cone-counit-realization"
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-scalar-model-associativity",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-trf-scalar-model-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok; agent expansion of whole-system adjunction naturality and substitution, for the last sentence of blueprint prop-trf-karoubi-independence.proof.md (main-20261015). Scalar normalization also follows the constructions of Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1; it is not stated verbatim in Tag 0941."
+  "place": "Tag 0941 whole-system adjunction, naturality and conjugation, formalized by A8; scalar normalization squares separately isolate parent steps 8--11, from Bhatt--Scholze Definition 3.4.10 and Proposition 3.5.1."
  },
  "mathlib_searches": [
   {
@@ -309,14 +201,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-pur-kflat-change-of-rings"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -366,5 +251,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Clauses r=b;L(O e_C), invertibility+normalization on Allowed (D^b_c at every intermediate) domain, naturality for arbitrary φ, cut/parenthesization, wholeCounit substitution, ∃! t̂ conjugation, composition/inverse/left/right whisker (hand-checked), chi-conjugated scalar associator and E=L unit match the node in composition order. Models are the dependency's normalized pullback/scalar models (no arbitrary maps). Mechanical theorem-stmt_dep finding: integralComparisonSystemScalarComposition/Unit are .choose of ∃! theorems of lem-trf-quotient-system-mixed-coherence; CompletedLineTensor.associator/unit are built from associatorData/ordinaryUnit .choose, and intrinsic_complete is a theorem; the statement depends on theorem-constructed objects → PASS on that point. Only node change: the two stmt_deps added; both landed, acyclic; lean.statement verbatim. Advisory: the WordLaws.counit clause (proof step 1, supported by effectivity) goes beyond the displayed statement; coefficient universe = scheme universe is forced by the sfIntegralConstructible/intrinsic_complete signatures; the normalized predicate is owned by def-coef-ringed-sequence-site, outside stmt_deps. No compile run; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T174235-L-3769668",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
