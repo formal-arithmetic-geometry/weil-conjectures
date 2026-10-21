@@ -12,9 +12,63 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The composite $GF$ is additive and exact: applying $F$ and then $G$ preserves each finite limiting or colimiting cone. Thus [lem-weil-pbc-exact-functor-derived-factorization] applies to $F$, $G$ and $GF$, giving their stated factorizations; moreover $Q_{\\mathcal C}C(GF)$ inverts quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278, 286, 326-362"
+   }
+  },
+  {
+   "text": "Put $T=D(G)D(F)$ and $H=Q_{\\mathcal C}C(GF)$. Compose the whiskerings of the natural isomorphisms supplied by [lem-weil-pbc-exact-functor-derived-factorization] to obtain $\\beta:TQ_{\\mathcal A}\\xrightarrow{\\sim}H$, with $\\beta_K=a_{G,C(F)K}\\circ D(G)(a_{F,K})$. This is well typed because $a_{F,K}$ ends in $Q_{\\mathcal B}C(F)K$. Termwise, both $C(G)C(F)K$ and $C(GF)K$ have object $G(F(K^r))$ and differential $G(F(d_K^r))$, and agree on maps. Hence the final identification is the identity.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278, 286, 326-362"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], $Q_{\\mathcal A}$ is localization at quasi-isomorphisms. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with $F_1=F_2=H$, $F_1\\prime=D(GF)$, $F_2\\prime=T$, $\\phi_1=a_{GF}$, $\\phi_2=\\beta$ and $\\tau=\\mathrm{id}_H$. The identity is an isomorphism, so its lift is a natural isomorphism $\\mu:D(GF)\\xrightarrow{\\sim}T$ satisfying $\\mu_{Q_{\\mathcal A}K}=\\beta_K^{-1}a_{GF,K}$. Multiplying by $\\beta_K$ gives exactly the required equation.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278, 286, 326-362"
+   }
+  },
+  {
+   "text": "If another natural isomorphism $\\nu$ satisfies the equation, cancel the isomorphism $\\beta_K$ to get $\\nu_{Q_{\\mathcal A}K}=\\beta_K^{-1}a_{GF,K}=\\mu_{Q_{\\mathcal A}K}$ for every $K$. Clause (3) of [lem-weil-pbc-localization-universal-property] then gives equality of the natural transformations. Their inverse transformations are equal as well, since inverses are unique, proving uniqueness of the natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean:278, 286, 326-362"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Sentence on the derived functor of a composite of exact functors; expanded using the localization universal property"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +104,45 @@
    "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
    "date": "2026-10-21",
    "verdict": "ingredients only, not a direct match in the pinned Mathlib; the exact comparison exists in the project"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|fullyFaithfulWhiskeringLeft|natTrans_ext",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean. Read Predicate.lean:278-362 and pinned ExactFunctor.lean:1-110; the comparison occurs only in project ExactFunctor.lean:175-216.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a direct match for the complete item in pinned Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of exact functors induces the unique compatible composition isomorphism on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Grothendieck.mapCompIso, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.LeftExactFunctor.whiskeringLeft_obj_obj_obj, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Functor.IsTriangulated.instComp",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a direct match for the complete item in pinned Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "7 hits: CategoryTheory.Functor.mapDerivedCategoryCompIso, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_Q_obj",
+   "date": "2026-10-21",
+   "verdict": "online comparison declaration exists, but is absent from pinned Mathlib; uniqueness also requires localization extensionality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived functor induced by a composite of two exact additive functors is uniquely isomorphic to the composite of the induced derived functors",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "ingredients only; not a direct match for the complete item in pinned Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between functors on a localization is uniquely determined by its values before localization",
+   "results": "8 hits: CategoryTheory.Localization.isoUniqFunctor, CategoryTheory.Localization.natTrans_ext, CategoryTheory.Localization.instLiftingFunctorUniq, CategoryTheory.Localization.instLiftingInverseUniq, CategoryTheory.Localization.Construction.uniq, CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.compUniqFunctor",
+   "date": "2026-10-21",
+   "verdict": "matches the existing localization universal-property dependency, not the composite derived-functor item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-sfb-derived-extend-comp-iso",
@@ -90,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-exact-derived-composition",
+  "worker": "stage1",
+  "summary": "NV: statement unchanged. Constructed the composite factorization by whiskering, lifted the identity on the common complex-level functor through localization, and proved the explicit uniqueness clause by cancellation and localization extensionality. Reused existing Mathlib leaves; no new nodes. Existing project declarations give existence and normalization, but no declaration found states the full uniqueness clause.",
+  "blueprint": "Realizes the exact-composite sentence of def-sfb-derived-extend-comp-iso.proof.md by giving the normalized compositor and its uniqueness. The coefficient-field descent route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-f04b2df7d",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-f04b2df7d (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes and the statement is unchanged. The four steps check out against the cited statements. Step 1: GF is exact, so lem-weil-pbc-exact-functor-derived-factorization applies to it and H=Q_C C(GF) inverts quasi-isomorphisms. Step 2: beta_K = a_{G,C(F)K} o D(G)(a_{F,K}) is well typed, and C(G)C(F)=C(GF) holds termwise; marking this step elementary is right. Step 3: clause (2) of lem-weil-pbc-localization-universal-property with tau=id gives mu_{QK}=beta_K^{-1} a_{GF,K}. I checked the direction, and this is exactly the displayed equation; mu is an isomorphism because isomorphisms lift. Step 4: uniqueness follows by cancelling beta_K and applying clause (3). Sources read: Stacks categories.tex 04VG at l.4406-4428 (it gives only the functor factorization, and the delivery is honestly marked agent-written) and the blueprint sentence at def-sfb-derived-extend-comp-iso.proof.md l.9-10. No SGA source is used. The project Lean in ExactFunctor.lean:175-216 matches the proof: mapDerivedCategoryCompIso is liftNatIso of Iso.refl, and _fac is the displayed equation. Lean does not state uniqueness, so B10 does not strictly apply. Maintainer note: existence and normalization are already closed in Lean, and uniqueness is Localization.natTrans_ext. Edge cases checked: F=id, zero functors, unbounded complexes. The duplicate search found no node stating the compositor. The only problem is cosmetic: source.place says 'see report.md'."
  }
 }
