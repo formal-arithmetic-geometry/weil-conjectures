@@ -1,0 +1,171 @@
+{
+ "id": "lem-zl-condensed-affine-ordinary-scalar-sections",
+ "kind": "statement",
+ "title": "Ordinary condensed scalar extension on a w-contractible affine",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R=\\Lambda(*)$, and let $X$ be a scheme [def-pc-scheme]. Let $A$ be a w-contractible ring [sk-def-pe-wlocal] and $f:\\operatorname{Spec}A\\to X$ a weakly etale object of the small pro-etale site [def-weil-pbc-proetale-site]. Put $S=\\pi_0(\\operatorname{Spec}A)$, $B=\\Lambda(S)$, and $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use the actual section-ring reconstruction and module equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. There exists a ring isomorphism $e:\\Gamma(\\operatorname{Spec}A,\\Lambda_X)\\cong B$ such that the following two functors from ordinary $R$-modules to ordinary $B$-modules are naturally isomorphic: (i) exact constant module realization [def-sfb-site-derived-constant-module-functor], followed by the prescribed ordinary coefficient extension to $\\Lambda$ [def-zl-condensed-scalar-realization], the sectionwise-to-internal equivalence, inverse image $p_X^*$ on modules, the internal-to-sectionwise equivalence, evaluation on $\\operatorname{Spec}A$, and transport along $e$; (ii) $M\\mapsto B\\otimes_R M$ in module categories [def-weil-sheaf-of-modules-category], using the scalar map induced by $S\\to *$. This is an ordinary module statement: no boundedness, derived comparison, t-structure, flatness or t-admissibility is asserted or assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-wlocal",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-zl-condensed-scalar-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof": [
+  {
+   "text": "The geometric w-contractibility of Spec A gives categorical weak contractibility of its pro-etale site object. Apply the condensed point-basis evaluation formula in commutative rings. Identify its actual connected-component quotient with the profinite space of connected components of PrimeSpectrum A. Compatibility of algebraic inverse image and the internal/sectionwise coefficient equivalence makes this the displayed ring isomorphism e. Its restriction of constants is the map induced by the unique continuous map of the component space to the terminal profinite set.",
+   "uses": [
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "lem-weil-pbc-condensed-point-basis-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+   }
+  },
+  {
+   "text": "For an R-module M, let F(M) be the ordinary functor in the statement before coefficient transport. Its value on R is the regular section module, since constant realization sends the regular module to the constant regular module, ordinary extension sends it to the regular Lambda module, both section-module equivalences retain that regular module, and inverse image sends the regular Lambda module to the regular Lambda_X module. Evaluation therefore gives F(R) canonically isomorphic to B=Lambda(pi_0 Spec A), respecting the scalar map R to B of the preceding step.",
+   "uses": [
+    "def-zl-condensed-scalar-realization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+   }
+  },
+  {
+   "text": "Construct the B-linear balanced map theta_M from B tensor_R M to transported F(M) by sending b tensor m to b times the image of the constant section m. The constant-sheaf unit and the structural ring map show the formula is R-balanced. Module morphisms preserve the constant sections and scalar action, so theta is natural in M. Its component at R is the regular-module isomorphism of the preceding step.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-zl-condensed-scalar-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+   }
+  },
+  {
+   "text": "Both functors preserve coproducts and cokernels. Tensor scalar extension does by its restriction adjunction. Constant module realization and sheafified scalar extension are left adjoints, as is inverse image on module objects; the sectionwise/internal transports are equivalences. Affine evaluation preserves all small colimits by weak contractibility; scalar transport is an equivalence. Thus theta is invertible on every free module, being a coproduct of theta_R. Present any M as the cokernel of a map between free modules, with generators indexed by its elements and relations indexed by the kernel of the resulting free surjection. Naturality identifies the presentation maps; cokernel preservation and invertibility on both free modules imply invertibility on M. Invert theta to obtain the orientation in the Lean statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "def-zl-condensed-scalar-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, equation (3.2) and Remark 3.2 in degree zero; Lemma 4.1(1) and Proposition 4.3(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary extension of scalars of a constant module sheaf evaluated on a weakly contractible affine is tensor product with coefficient sections",
+   "results": "ModuleCat.ExtendScalars.obj'; SheafOfModules.restrictScalars; ModuleCat.tildeInModuleCat; SheafOfModules.unitHomEquiv.",
+   "date": "2026-10-21",
+   "verdict": "No match for the condensed inverse-image and ordinary scalar-sections comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived extension of scalars on a weakly contractible affine equals derived tensor with the ring of sections",
+   "results": "PresheafOfModules.DifferentialsConstruction declarations and CategoryTheory.Tor'.",
+   "date": "2026-10-21",
+   "verdict": "No match, including after restriction to modules in degree zero."
+  },
+  {
+   "tool": "grep",
+   "query": "constantModule.*evaluation|evaluation.*constantModule|scalar.*sections|sections.*scalar; condensedScalarRealization in both library roots",
+   "results": "Mathlib search returned two unrelated differential-geometric scalar-section results. Project search found CondensedScalarRealization and this assigned derived theorem, but no ordinary comparison.",
+   "date": "2026-10-21",
+   "verdict": "The ordinary comparison is not already declared; existing basis evaluation and colimit-preservation declarations are retained as its proof dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WContractibleCondensedScalarEvaluation",
+  "date": "2026-10-21",
+  "group": "A8"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. The degree-zero scalar evaluation supplies the unbounded comparison used by dualizable truncations.",
+   "via": [
+    "lem-zl-wcontractible-condensed-scalar-evaluation",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedAffineOrdinaryScalarSections",
+  "file": "lean/Sheaf/Paper/CondensedAffineOrdinaryScalarSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_affine_ordinary_scalar_sections",
+  "statement": "theorem condensed_affine_ordinary_scalar_sections\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (X : Scheme.{u}) (A : Type u) [CommRing A] [IsWContractibleRing A]\n    (f : Spec (CommRingCat.of A) ⟶ X) [WeaklyEtale f] :\n    ∃ e :\n      (InternalAbelianSheafModule.sectionRingSheaf (Scheme.ProEt.topology X)\n        (condensedRingObj Λ X)).obj.obj (op (Scheme.ProEt.mk f)) ≅\n      (condensedSectionRing Λ).obj.obj\n        (op (Profinite.of (ConnectedComponents (PrimeSpectrum A)))),\n      Nonempty\n        ((commutativeSiteConstantModuleFunctor (coherentTopology Profinite.{u})\n            (condensedScalarRing Λ) ⋙ (condensedScalarExtensionModel Λ).E) ⋙\n          (InternalAbelianSheafModule.sectionModuleEquivalence\n            (coherentTopology Profinite.{u}) Λ).inverse ⋙\n          (upperStarFromPoint X).mapMod Λ ⋙\n          (InternalAbelianSheafModule.sectionModuleEquivalence\n            (Scheme.ProEt.topology X) (condensedRingObj Λ X)).functor ⋙\n          SheafOfModules.evaluation _ (op (Scheme.ProEt.mk f)) ⋙\n          ModuleCat.restrictScalars.{u + 1} e.inv.hom ≅\n          ModuleCat.extendScalars.{u + 1, u + 1, u + 1}\n            ((condensedSectionRing Λ).obj.map\n              (terminal.from (Profinite.of\n                (ConnectedComponents (PrimeSpectrum A)))).op).hom)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T023252-L-2942507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261021T023252-L-2942507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
