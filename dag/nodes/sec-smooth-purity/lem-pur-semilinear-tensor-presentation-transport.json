@@ -16,9 +16,9 @@
  ],
  "proof": [
   {
-   "text": "Put $F=f^{-1}$, $V=f_*$ and $D'=FD_Y$. Transport the ring and module operations through the finite-product comparisons of $F$. Apply [lem-weil-pbc-geometric-module-transport] with $R=D_Y$, $A=S=D'$ and structural map the identity. This gives the actual algebraic inverse image $I$ and its module adjunction with underlying adjunction $F\\dashv V$; it satisfies [def-weil-pbc-algebraic-inverse-image]. In particular its actions are the transported actions, rather than independently chosen ones. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to get natural isomorphisms $\\sigma_{P,Q}:F(P\\otimes_{D_Y}Q)\\simeq FP\\otimes_{D'}FQ$. Its normalization is an equality of pairing morphisms: $\\sigma_{P,Q}F(p_{P,Q})=p_{FP,FQ}\\kappa$, where $p$ denotes the pure pairing and $\\kappa:F(P\\times Q)\\simeq FP\\times FQ$. Indeed take the test sheaf $P\\times Q$ and its two projections in the cited generalized-section assertion. Thus this equality applies to the full product sheaf, with no assertion that sections of an inverse image come from sections downstairs.",
+   "text": "Use [lem-weil-pbc-geometric-module-construction] with the given ring isomorphism d and identity structural map to construct an algebraic inverse image I from DY-modules to DX-modules. Its underlying functor is F and its operations satisfy the graph transport equations [def-weil-pbc-algebraic-inverse-image]. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to obtain the natural tensor comparison, normalized on arbitrary generalized pure tensors. Taking the product sheaf and its projections gives the corresponding equality of pairing morphisms.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-geometric-module-construction",
     "def-weil-pbc-algebraic-inverse-image",
     "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
    ],
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "The restriction of $s$ to $D'$ is semilinear over $d$: apply the compatibility of $a$ with the $D$-algebra structure map to its stated $a$-semilinearity. Similarly $b$ is semilinear over $d$. Regard $N_X$ as a $D'$-module via $d$. The pairing $(u,v)\\mapsto s(u)\\otimes b(v)$ is $D'$-bilinear: for $\\delta\\in D'$, $s(\\delta u)\\otimes b(v)=d(\\delta)s(u)\\otimes b(v)=s(u)\\otimes d(\\delta)b(v)=s(u)\\otimes b(\\delta v)$. The universal property gives $U:FM_Y\\otimes_{D'}FB_Y\\to N_X$. The inverse pairing $m\\otimes w\\mapsto s^{-1}(m)\\otimes b^{-1}(w)$ is balanced using $d^{-1}$; its two composites with $U$ are the identity on pure pairs, hence are identities by uniqueness. Define $r=U\\sigma_{M_Y,B_Y}$. Both factors are additive isomorphisms, so $r$ is one as well.",
+   "text": "Restrict s to DY using da_comm, and regard b as DY-semilinear using db_comm and its multiplicativity. The transported addition and scalar equations turn I(MY) and I(BY) into module isomorphisms with MX and BX: lift their underlying set maps using the operation equations, and reflect isomorphisms through the forgetful functor. Tensor these isomorphisms and compose with the normalized inverse-image tensor comparison to construct r. Its additivity and generalized pure formula follow from the same properties of these module maps.",
    "uses": [
     "lem-pc-sites-sheaf-tensor-bilinear-universal",
     "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
@@ -55,22 +55,23 @@
    }
   },
   {
-   "text": "Let $\\eta$ be the actual unit of $F\\dashv V$. Set $\\widetilde s=V(s)\\eta_{M_Y}$ and $\\widetilde b=V(b)\\eta_{B_Y}$. Equip $VN_X$ with its $D_Y$-module structure through the adjunct of $d$, using [lem-weil-pbc-geometric-module-transport] with structural map $d:D'\\to D_X$. Its operation and mate equations say that the pairing $h_0(m,v)=V(p_{M_X,B_X})(\\widetilde s(m),\\widetilde b(v))$ is $D_Y$-bilinear. Hence [lem-pc-sites-sheaf-tensor-bilinear-universal] gives a map $h:N_Y\\to VN_X$. Now the adjunct of $r$, composed with $p_{M_Y,B_Y}$, is\n$$V(r)\\eta_{N_Y}p_{M_Y,B_Y}=V(rF(p_{M_Y,B_Y}))\\eta_{M_Y\\times B_Y}=V(p_{M_X,B_X})(\\widetilde s\\times\\widetilde b).$$\nThe first equality is unit naturality; the second uses step 1's pairing identity and step 3's formula for $U$. For the products, the two projections of $V(\\kappa)\\eta_{M_Y\\times B_Y}$ are precisely $\\eta_{M_Y}$ and $\\eta_{B_Y}$ by unit naturality; this justifies the displayed product notation for arbitrary geometric morphisms. The module adjunction in the cited transport lemma makes this adjunct $D_Y$-linear. The universal property therefore identifies it with $h$, which is the required actual-adjoint formula.",
-   "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": false,
+   "text": "The adjunction hom equivalence identifies the required adjunct formula with the equality of pure-pairing morphisms already proved. Unit naturality and preservation of binary products by the actual right adjoint show that the mate of the product of two maps is their two mates followed by the inverse product comparison. Thus the normalization is for the supplied adjunction, with no additional adjoint chosen.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tags 03D1, 03D2, 03D3 (lemma-adjoint-push-pull-modules), and 03EL (lemma-tensor-product-pullback), adjunction/Bilin calculation"
    }
   },
   {
-   "text": "The adjunct formula also implies uniqueness among additive maps, without assuming their scalar compatibility in advance. If two such maps have the specified adjunct values on $m\\otimes v$, their adjuncts agree after precomposition with the presheaf tensor on every object: every algebraic tensor is a finite sum of pure tensors and both maps are additive. By [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification], $N_Y$ is the abelian-group sheafification of this presheaf tensor. Its abelian-group sheafification universal property makes the two adjuncts equal. Injectivity of the given adjunction hom equivalence makes the original maps equal. This argument uses no claim that every section of the sheafified tensor is a global sum of pure sections.",
+   "text": "Prove that additive morphisms out of a sheaf tensor are determined on pure tensors: compose with its abelian sheafification presentation, use the abelian sheafification adjunction, and induct on ordinary tensors. For morphisms out of F of the tensor, lift additive graphs through I to abelian sheaf maps, then precompose with the inverse-image pure pairing. That pairing factors through an isomorphism from the tensor of the image modules. Apply the preceding additive extensionality result. Consequently two additive isomorphisms with the adjunct formula agree. Use [lem-weil-pbc-algebraic-inverse-image-pure-pairing] for that map and [lem-weil-pbc-algebraic-inverse-image-pairing-isIso] for its invertibility.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-algebraic-inverse-image-pure-pairing",
+    "lem-weil-pbc-algebraic-inverse-image-pairing-isIso"
    ],
    "elementary": true,
    "source": {
@@ -79,11 +80,10 @@
    }
   },
   {
-   "text": "Write $A'=FA_Y$, $B'=FB_Y$, $M'=FM_Y$, $S'=A'\\otimes_{D'}B'$ and $N'=M'\\otimes_{D'}B'$; $S'$ is the ring sheafification of $P'=A'\\otimes_pB'$ and $N'$ the sheafification of the presheaf $P'$-module $M'\\otimes_pB'$, as in step 2. Give $FN_Y$ the $S'$-action transported from $F$ of the $F(A_Y\\otimes_{D_Y}B_Y)$-action through $\\sigma_{A_Y,B_Y}$ and the finite-product comparison; it is additive in each variable. We show that $\\sigma^{-1}=\\sigma_{M_Y,B_Y}^{-1}:N'\\to FN_Y$ is $S'$-linear. Apply $F$ to the four-variable pairing identity of step 2 (action of $p_{A_Y,B_Y}(x,v)$ on $p_{M_Y,B_Y}(u,w)$ equals $p_{M_Y,B_Y}(xu,vw)$), identify its finite products, and substitute the pairing-morphism identities of step 1 twice. The transported $A'$-action on $M'$ and multiplication on $B'$ are exactly $F$ of the original operations by [def-weil-pbc-algebraic-inverse-image]. This yields, as an equality of sheaf maps on $A'\\times B'\\times M'\\times B'$, $(x\\otimes v)\\cdot\\sigma^{-1}(u\\otimes w)=\\sigma^{-1}(xu\\otimes vw)$. Hence the presheaf map $M'\\otimes_pB'\\to FN_Y$, $u\\otimes w\\mapsto\\sigma^{-1}(u\\otimes w)$, well defined and additive by the universal property of each ordinary tensor, is $P'$-linear on finite sums of pure tensors. By the factorization clause of [lem-pc-sites-module-sheafification-interface] it factors through an $S'$-linear map $N'\\to FN_Y$; its underlying additive map agrees with the additive $\\sigma^{-1}$ on the presheaf, so equals it by abelian uniqueness. Thus $\\sigma_{M_Y,B_Y}$ intertwines the two actions. In particular $FN_Y$ has the $FR_Y$-action obtained from this $S'$-action by $F\\beta_Y\\,\\sigma_{A_Y,B_Y}^{-1}$.",
+   "text": "Equip NY with the RY-action constructed in step 2, obtaining an actual RY-module sheaf. Apply [lem-weil-pbc-geometric-module-construction] to the ring isomorphism c to transport this module to RX. The additive graph of r yields an isomorphism of its underlying abelian sheaf with NX. Transport its sectionwise module structures through this additive isomorphism. Naturality of the isomorphism proves restriction compatibility of the resulting action hX; the operation comparison of the geometric module transport proves c-semilinearity of r by construction.",
    "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-weil-pbc-algebraic-inverse-image",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-weil-pbc-geometric-module-construction",
+    "def-weil-pbc-algebraic-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -92,22 +92,23 @@
    }
   },
   {
-   "text": "Set $t=a\\otimes b:S'\\to A_X\\otimes_{D_X}B_X$, a ring map, and regard $N_X$ as an $S'$-module through $t$ and the step-2 action. On pure inputs over any object the definitions and semilinearity of $s$ give $$s(xu)\\otimes b(vw)=a(x)s(u)\\otimes b(v)b(w)=t(x\\otimes v)\\,(s(u)\\otimes b(w)).$$ So the presheaf map $M'\\otimes_pB'\\to N_X$, $u\\otimes w\\mapsto s(u)\\otimes b(w)$, is $P'$-linear on finite sums of pure tensors. By the factorization clause of [lem-pc-sites-module-sheafification-interface] it factors through an $S'$-linear map $N'\\to N_X$, whose underlying additive map agrees with $U$ of step 3 on the presheaf and therefore equals $U$. Hence $U(\\zeta n)=t(\\zeta)U(n)$ for local sections $\\zeta$ of $S'$ and $n$ of $N'$. Step 6 and the hypothesis $cF\\beta_Y=\\beta_Xt\\sigma_{A_Y,B_Y}$ now give $r(zn)=c(z)r(n)$: put $\\zeta=\\sigma_{A_Y,B_Y}(F\\beta_Y)^{-1}(z)$; the ring equation gives $c(z)=\\beta_Xt(\\zeta)$, and step 6 followed by the preceding identity gives $r(zn)=U(\\zeta\\,\\sigma_{M_Y,B_Y}n)=t(\\zeta)r(n)$, which is $\\beta_Xt(\\zeta)r(n)$ in the $R_X$-action. No representation of $z$ by a single pure tensor is required.",
+   "text": "Check the target pure-action formula on the source test sheaf T=(AY times BY) times (MY times BY). Apply the c-semilinearity just established to the source pure-action equation on T. The normalized pairing formula for r identifies its two module terms. The a-semilinearity of s and multiplicativity of b identify the remaining module and coefficient factors. Multiplicativity of c and iA_comm and iB_comm identify the scalar factor. For arbitrary target sections x,v,m,w, invert a,b,s and use the finite-product comparisons to obtain a section of F(T) with precisely these components. Evaluating the transported equation there gives the target pure-action formula. Hence hX is IsTensorAction and r is the required semilinear isomorphism; no global pure-generation claim is needed.",
    "uses": [
-    "lem-pc-sites-module-sheafification-interface"
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03CY (lemma-sheafification-presheaf-modules), factorization through module sheafification; Tag 03EK (section-tensor-product)"
    }
   },
   {
-   "text": "Finally use the primed data of the coefficient-change clause. Naturality of the comparison in [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] gives $\\sigma_{M_Y,B'_Y}Fj_Y=(1\\otimes Fq_Y)\\sigma_{M_Y,B_Y}$. On a pure pair $(u,v)$ the two maps $U'(1\\otimes Fq_Y)$ and $j_XU$ have values $s(u)\\otimes b'Fq_Y(v)$ and $s(u)\\otimes q_Xb(v)$; these are equal by the assumed coefficient square. They are $D'$-linear, so [lem-pc-sites-sheaf-tensor-bilinear-universal] makes them equal. Composing the comparison equation yields $r'Fj_Y=j_Xr$. The equations $i_T\\beta_T=\\beta'_T(1\\otimes q_T)$ show that this is an equation of maps compatible with the scalar structures: the presheaf map $m\\otimes w\\mapsto m\\otimes q_T(w)$ from $M_T\\otimes_pB_T$ to $N'_T$ (an $A_T\\otimes_pB_T$-module through $1\\otimes q_T$) is linear on pure inputs, where both sides of $(x\\otimes v)(m\\otimes w)\\mapsto xm\\otimes q_T(v)q_T(w)$ agree; by the factorization clause of [lem-pc-sites-module-sheafification-interface] $j_T$ is semilinear over $1\\otimes q_T$, hence over $i_T$, and $c'Fi_Y=i_Xc$ identifies the scalar structures on both sides. Only the stated ring and module laws, small-site tensor constructions, and the geometric adjunction have been used.",
+   "text": "Tensor the identity of the restricted module with the D-linear coefficient map q, then forget to abelian sheaves. The pure-map formula gives jY and jX. The two composites in the naturality square are additive. After precomposing with F of the full pure pairing, their formulas agree by the b compatibility equation, functoriality, and the two product projections. Apply the additive extensionality argument of step 5. This proves naturality for every additive primed isomorphism with the given adjunct formula; scalar compatibility assumptions remain available but no additional use of them is needed.",
    "uses": [
+    "def-pur-sheaf-tensor-product",
     "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
    "elementary": false,
    "source": {
@@ -117,18 +118,20 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-geometric-module-construction",
   "def-weil-pbc-algebraic-inverse-image",
   "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-algebraic-inverse-image-pure-pairing",
+  "lem-weil-pbc-algebraic-inverse-image-pairing-isIso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-  "place": "Integral twist paragraph, inverse image and module-action compatibility, expanded by the tensor universal property of Stacks Tags 03EK and 03EL and module transport of Tags 03D1–03D3."
+  "place": "Integral twist paragraph; Stacks Tags 03CY, 03D1–03D3, 03EK and 03EL. T7 proof constructs the source action by presheaf pushout and module sheafification, then transports it across c and the normalized additive comparison to define the target action. Its pure formula is verified on a four-factor product test sheaf."
  },
  "mathlib_searches": [
   {
@@ -246,7 +249,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-geometric-module-transport",
   "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-pc-sites-sheaf-tensor-bilinear-universal"
  ],
@@ -278,5 +280,15 @@
   "group": "Q63",
   "result": "pass",
   "note": "Item statement unchanged (only lean + new def-node stmt_dep vs side-live); lean.statement verbatim, all 17 declarations present; imports = proof-dep modules; no line >100, sorry only. Clause check: IsPushout presentation ≡ β iso; IsRingTransport/IsAdditive/IsSemilinear graph tests on universal test sheaves ≡ ring/additive/semilinear transport (F left exact); iA/iB_comm ≡ cFβ=β(a⊗b)σ; IsTensorAction pins the unique transported R-action; HasAdjunctFormula uses actual homEquiv and inv prodComparison V (directions checked); uniqueness among additive isos without semilinearity; naturality with t'.d=t.d, t'.a=t.a, CoefficientChange ≡ D-alg q and iβ=β'(1⊗q), jY/jX pinned by pure normalization, ∀ r' ≡ the unique primed r'. Edge cases (M=0, zero rings, F=id, B=D, non-injective q, empty site, local generation only) and single universe u OK. H4: no existing equivalent. Advisory: unused public import of RingedToposMorphism; self second-reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261021T140918-L-2773513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
