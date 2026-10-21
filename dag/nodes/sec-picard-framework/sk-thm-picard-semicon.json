@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-picard-semicon",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-pc-semicontinuity-base-change"
+  ]
  },
  "kind": "statement",
  "title": "Semicontinuity and base change",
@@ -13,29 +15,113 @@
   "place": "node sk-thm-picard-semicon, order 723"
  },
  "stmt_deps": [
-  "sk-def-av-jacobian",
-  "sk-def-av-pic"
+  "def-pc-base-change",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-reduced-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-sheaf-cohomology-functor"
  ],
  "proof": [
   {
-   "text": "The standard semicontinuity theorem: the perfect complex $Rf_*\\mathcal F$\nsupplied by [sk-thm-picard-coherence](a) is, locally on $T$, represented by a\nbounded complex of finite free modules whose formation commutes with\nbase change, and the assertions follow from the flatness of the\nfamily together with the base-change comparison; the last clause is\nGrauert's theorem, which needs no Noetherian hypothesis: in the local\nmodel $K^\\bullet$ one has\n$\\dim_{\\kappa(t)}H^q(X_t,\\cF_t)=\\operatorname{rk}K^q-\\rho_q(t)-\\rho_{q-1}(t)$\nwith $\\rho_j(t)$ the rank of $d^j\\otimes\\kappa(t)$; each $\\rho_j$ is\nlower semicontinuous, so if their sum is locally constant both are, and\nover a *reduced* base a map of finite free modules whose fibre\nrank is locally constant has, locally and in suitable bases, the normal\nform $\\begin{pmatrix}I&0\\\\0&0\\end{pmatrix}$ (all larger minors vanish\nat every point, hence are nilpotent, hence zero). Thus\n$\\operatorname{im}d^{q-1}\\subseteq\\ker d^q$ are local direct summands\nof $K^q$, so $R^qf_*\\cF=\\ker d^q/\\operatorname{im}d^{q-1}$ is finite\nlocally free and its formation commutes with $\\otimes\\kappa(t)$, which\nis the isomorphism claim. Reducedness\ncannot be dropped: over $T=\\Spec k[\\varepsilon]/(\\varepsilon^2)$ let\n$\\cL$ be a line bundle on $E\\times_kT$, $E$ an elliptic curve, which\nrestricts to $\\cO_E$ but is a nontrivial first-order deformation of it;\nthen $H^0(\\cL)=\\varepsilon H^0(E,\\cO_E)\\cong k$ is killed by\n$\\varepsilon$, so it is not flat over $T$, although $T$ is a point.",
+   "text": "Fix an integer $q$. Apply [thm-pc-semicontinuity-base-change] to the given $f:X\\to T$, $\\mathcal F=\\cF$, and this $q$: its hypotheses are exactly that $f$ is proper of finite presentation and $\\cF$ is of finite presentation and flat over $T$. Its fibre $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$ and pulled-back sheaf $\\mathcal F_t$ are the fibres in the present statement. Clause (1) supplies the canonical maps $\\varphi^q(t):R^qf_*\\cF\\otimes_{\\mathcal O_T}\\kappa(t)\\to H^q(X_t,\\cF_t)$ for every $t$.",
    "uses": [
-    "sk-thm-picard-coherence"
+    "thm-pc-semicontinuity-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+    "place": "Theorem thm-pc-semicontinuity-base-change, hypotheses and clause (1)"
+   }
+  },
+  {
+   "text": "Clause (2) of [thm-pc-semicontinuity-base-change] states that $\\beta^q(t)=\\dim_{\\kappa(t)}H^q(X_t,\\cF_t)$ is upper semicontinuous on $T$. This is exactly the function in the item, so it proves the asserted semicontinuity.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+    "place": "Theorem thm-pc-semicontinuity-base-change, clause (2)"
+   }
+  },
+  {
+   "text": "Now suppose $T$ is reduced and the displayed fibre-dimension function is locally constant. These are precisely the additional hypotheses of clause (3) of [thm-pc-semicontinuity-base-change]. That clause gives $R^qf_*\\cF$ finite locally free, in particular flat, and states that the same canonical $\\varphi^q(t)$ from clause (1) is an isomorphism at every $t$. The choice of integer $q$ was arbitrary, proving all the assertions without a Noetherian hypothesis or a constant-rank hypothesis across different connected components.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+    "place": "Theorem thm-pc-semicontinuity-base-change, clause (3)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-coherence"
+  "thm-pc-semicontinuity-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-semicon/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Theorem thm-pc-semicontinuity-base-change, clauses (1)-(3)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, UpperSemicontinuous",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; No hits",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper semicontinuity and Grauert base change for cohomology of a finitely presented sheaf flat over a proper finitely presented scheme morphism",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "upperSemicontinuous_hFiber|Grauert|[Ss]emicontinuity.*cohomology|[Cc]ohomology.*[Ss]emicontinu",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology dimensions of fibres of a proper flat family are upper semicontinuous and locally constant dimensions give locally free higher direct images on a reduced base",
+   "results": "Module.isLocallyConstant_rankAtStalk; Module.isLocallyConstant_rankAtStalk_freeLocus; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; RingHom.Flat.propertyIsLocal; AlgebraicGeometry.Flat.mk; Module.free_of_flat_of_finrank_eq; AlgebraicGeometry.Flat.instResLE",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grauert theorem locally constant dimension of fibre cohomology gives finite locally free higher direct image and cohomology commutes with base change",
+   "results": "CompHausLike.LocallyConstantModule.functor; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; Module.isLocallyConstant_rankAtStalk; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.functor; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyConstant_rankAtStalk|free_of_flat_of_finrank_eq",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/LocalRing/Module.lean; read FreeLocus.lean:186,224 and LocalRing/Module.lean:422: the former assumes a flat finitely presented module; the latter assumes module flatness and supplies freeness, not sheaf cohomology base change.",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "UpperSemicontinuous",
+   "results": "UpperSemicontinuous; upperSemicontinuous_const; UpperSemicontinuous.upperSemicontinuousAt; upperSemicontinuousOn_univ_iff; upperSemicontinuous_iff; UpperSemicontinuous.upperSemicontinuousOn; UpperSemicontinuous.upperSemicontinuousWithinAt; UpperSemicontinuous.comp",
+   "date": "2026-10-21",
+   "verdict": "no match for the full semicontinuity and canonical base-change theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -65,5 +151,20 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-picard-semicon",
+  "worker": "stage1",
+  "summary": "Reused the existing same-unit, split-and-reviewed theorem thm-pc-semicontinuity-base-change instead of duplicating its local-model, rank-minor, and reduced-base splitting argument. Checked all hypotheses and each of its three clauses against the current blueprint and the item; the source theorem gives the canonical map, not merely a noncanonical vector-space isomorphism. Replaced the irrelevant Jacobian/Picard statement dependencies by definitions actually used. No statement change or new node.",
+  "blueprint": "The current blueprint proof paragraph is expanded in the existing theorem thm-pc-semicontinuity-base-change and its proof: local perfect model and canonical map, rank-minor semicontinuity, and reduced-base constant-rank normal form. The three steps apply its already-reviewed clauses (1)-(3). The counterexample is explanatory context, not an additional conclusion of this item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-5f9afd5bf",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-5f9afd5bf (reviewer sub-agent of L); spot-checked: I read the item, all 3 steps, the 7 stmt_deps and the cited theorem thm-pc-semicontinuity-base-change in full, against main-20261015 sec-picard-framework/sk-thm-picard-semicon/_section.md (order 723), sk-thm-picard-semicon.proof.md and thm-pc-semicontinuity-base-change.md/.proof.md. Preconditions: there is no repair note (so no re-split rule), the item is not dropped, and it is still imported in live and side-live, so it is not superseded. Route: the blueprint expands this sketch's single proof paragraph in thm-pc-semicontinuity-base-change, which sits in the same unit, is stage-1 reviewed pass (J1), and whose split_report already says it realizes that paragraph. Citing it is therefore the unit's own route: no new nodes, no D1 relabelling, no tool_use. The item is not in the theorem's closure (2465 nodes), so there is no cycle. Steps: the hypotheses are identical (f proper of finite presentation, F of finite presentation and flat over T, integer q), and so are the fibres (X_t = X ×_T Spec κ(t)). Clause 1 gives the canonical φ^q(t), defined as g_t^*R^q f_* → R^q f_{t,*}. Clause 2 is the same β^q upper semicontinuous. Clause 3 assumes T reduced and β locally constant and gives R^q f_*F finite locally free (hence flat) with φ^q(t) an isomorphism at every t. No hypothesis is dropped, and the coefficients are Zariski O_T-modules throughout. Small cases agree: empty T, F = 0, q < 0, T = Spec k, a disconnected reduced T (rank may vary, as def-sc-finite-locally-free-sheaf allows), and k[ε]/ε² (excluded by reducedness). The replacement stmt_deps (base-change fibre, morphism conventions, R^q, flat-over, reduced, variable-rank finite locally free sheaf, H^q) each define what they are cited for. FIX (B3): the notion 'O_X-module of finite presentation' had no definition node, so I added def-weil-pbc-module-finite-type-presentation (clause 2) to the item's stmt_deps in fixes/dag/nodes/sec-picard-framework/sk-thm-picard-semicon.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }
