@@ -20436,3 +20436,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:32 L: merged deliver/Q61/lem-sfb-derived-direct-image-open-coherence (reviewer PASS; after a return; new nodes: 2)
 - 06:32 L: merged deliver/Q22/lem-sfb-finite-upper-star-braided (reviewer PASS; after a return; new nodes: 2)
 - 06:32 L: merged deliver/Q09/lem-fix-scalar-completion-associator (reviewer PASS; first push; new nodes: 1)
+- 06:32 L: merged deliver/Q45/lem-sfb-constructible-cocone-ambient-realization (reviewer PASS; after a return; new nodes: 2)

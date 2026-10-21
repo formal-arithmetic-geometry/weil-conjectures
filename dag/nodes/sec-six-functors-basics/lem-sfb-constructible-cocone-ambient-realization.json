@@ -21,59 +21,20 @@
  ],
  "proof": [
   {
-   "text": "Compare the coefficient constructions before comparing the categories. By [def-sfb-padic-subfield-condensed-ring], the finite-field condensed ring has sections $C(S,E)$ with the restricted norm topology. By [sk-def-sfb-qlbar-condensed], the closure ring has exactly the continuous functions taking values in one finite subextension. By [sk-def-sfb-pullback-from-point], $p_X^*$ is structure-morphism inverse image composed with sheafification of left Kan extension along $S\\mapsto\\operatorname{Spec}LC(S,\\mathbf Z)$. This is the very construction of $p_X^*$ and $E_X^c$ in [def-weil-pbc-condensed-e-module-category]. Thus the identity on the condensed input, followed by the same pullback, gives the canonical ring identifications $E_X=E_X^c$; the identical argument for the specified finite-subfield-valued closure ring gives $\\Omega_X=\\Omega_X^c$. The units, multiplication and coefficient inclusions agree because all are obtained from the same pointwise operations and postcomposition inclusions.",
+   "text": "Apply [lem-sfb-condensed-coefficient-presentation-identification] to the specified $X,\\ell,\\Omega$. It gives the coefficient-ring identifications, including coefficient maps, and the equality of the stratified local-presentation predicates and bounded constructible full subcategories, with precisely the coefficients and bounds in the statement.",
    "uses": [
-    "def-sfb-padic-subfield-condensed-ring",
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-pullback-from-point",
-    "def-weil-pbc-condensed-e-module-category"
+    "lem-sfb-condensed-coefficient-presentation-identification"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
     "place": "Modules paragraph: coefficient rings and their pullback conventions"
    }
   },
   {
-   "text": "Unfold constructibility in [def-sfb-constructible-module]: on a finite locally closed stratification, pull back the module and its coefficient ring to each stratum, then require local finite presentation. By [def-sfb-locally-finitely-presented] and [def-sfb-finitely-presented-module], this says precisely that a pro-etale cover of each stratum carries a presentation as a cokernel of $R^m\\to R^n$ with $m,n$ finite. Under step 1 these are the same modules, restrictions, free modules and cokernels as in [def-weil-pbc-condensed-e-module-category]. By [sk-def-sfb-bounded-constructible], [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar], the cohomology interval and all ambient morphisms are also the same. Hence the finite-field full subcategories coincide, and the same unpacking of the specified predicate gives the closure-coefficient identification. No finite Tor amplitude or completeness condition is introduced.",
+   "text": "Apply [lem-sfb-constructible-exact-scalar-triangulation] for each finite $E$. Its hypotheses are the given Noetherian topology and finite intermediate-field condition. It gives inherited pretriangulation, additive integer shifts and triangulated $\\iota_E$, and identifies the triangulated ambient $T_{E,\\Omega}\\iota_E$ with exact scalar extension applied termwise.",
    "uses": [
-    "def-sfb-constructible-module",
-    "def-sfb-locally-finitely-presented",
-    "def-sfb-finitely-presented-module",
-    "def-weil-pbc-condensed-e-module-category",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-dcons-subfield",
-    "def-sfb-dcons-qlbar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Modules paragraph: stratified local finite presentations; Complexes paragraph: bounded constructible objects"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-condensed-constructible-serre] to $X$ and each finite $E$: its coefficients and predicate are exactly those identified in steps 1-2, and its only scheme hypothesis is the given Noetherian underlying space. It gives closure under kernels, cokernels and extensions. Zero is constructible using the one-stratum stratification and $\\operatorname{coker}(0\\to0)=0$; on the empty scheme use the empty stratification. Invariance under isomorphism follows by composing each local presentation isomorphism with the restricted module isomorphism. Thus all hypotheses of the conditional triangulatedness clause of [sk-def-sfb-bounded-constructible] hold. By [def-weil-triangulated-subcategory], $\\mathcal C_E$ inherits its pretriangulated structure and $\\iota_E$ is triangulated. The ambient derived category is additive with shifts given on complexes by degree translation and differential signs [def-weil-abstract-derived-category]; these shifts preserve addition on morphisms, and their restrictions therefore give additive integer shifts on $\\mathcal C_E$.",
-   "uses": [
-    "lem-weil-pbc-condensed-constructible-serre",
-    "sk-def-sfb-bounded-constructible",
-    "def-weil-triangulated-subcategory",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: inherited triangles in the finite coefficient categories"
-   }
-  },
-  {
-   "text": "Write $F_E=\\operatorname{Ext}_{E_X\\to\\Omega_X}$. By [lem-sfb-qlbar-flat], $F_E$ preserves finite limits. By [sk-def-sfb-change-of-scalars](2), it preserves finite colimits; [lem-sfb-preserving-colimits-additive] therefore makes it additive. It is an exact functor between the abelian module categories of [sk-def-sfb-change-of-scalars](4). The canonical comparison [def-sfb-left-derived-exact] identifies $LF_E$ with its termwise derived functor $D(F_E)$. By [def-sfb-derived-extend-to-qlbar], $LF_E$ is precisely $\\Omega_X\\otimes^{\\mathrm L}_{E_X}-$. Finally [lem-sf-exact-functor-derived-triangulated] makes $D(F_E)$ triangulated, with its natural shift comparison. This proves both the ambient triangulatedness and the claimed computation by exact ordinary extension applied termwise.",
-   "uses": [
-    "lem-sfb-qlbar-flat",
-    "sk-def-sfb-change-of-scalars",
-    "lem-sfb-preserving-colimits-additive",
-    "def-sfb-left-derived-exact",
-    "def-sfb-derived-extend-to-qlbar",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sfb-constructible-exact-scalar-triangulation"
    ],
    "elementary": false,
    "source": {
@@ -82,13 +43,13 @@
    }
   },
   {
-   "text": "By [lem-sfb-extend-to-qlbar-constructible], $LF_E$ carries $\\mathcal C_E$ to $\\mathcal C_\\Omega$. The specified vertex functor in [def-sfb-constructible-cocone] is the restriction of this very ambient functor [def-sfb-constructible-extend-to-qlbar], on both objects and morphisms. Consequently $\\Phi_E=\\iota_\\Omega V_E$ is naturally identified with $LF_E\\iota_E$. Its shift comparison is the restriction of the ambient one, and a distinguished triangle in $\\mathcal C_E$ becomes an ambient distinguished triangle by step 3 and remains distinguished after $LF_E$ by step 4. Thus $\\Phi_E:\\mathcal C_E\\to\\mathcal D$ is triangulated; this argument requires no triangulated structure on $\\mathcal C_\\Omega$.",
+   "text": "By [lem-sfb-extend-to-qlbar-constructible], $T_{E,\\Omega}$ sends $\\mathcal C_E$ into $\\mathcal C_\\Omega$. The specified $V_E$ in [def-sfb-constructible-cocone] is its restriction on objects and arrows [def-sfb-constructible-extend-to-qlbar]. Thus $\\iota_\\Omega V_E=T_{E,\\Omega}\\iota_E$ canonically. Give $\\Phi_E$ the shift comparison from step 2: a distinguished source triangle is ambient distinguished by $\\iota_E$, and its image remains distinguished by $T_{E,\\Omega}$. This proves triangulatedness and the termwise realization of $\\Phi_E$, without using a triangulated structure on $\\mathcal C_\\Omega$.",
    "uses": [
     "lem-sfb-extend-to-qlbar-constructible",
     "def-sfb-constructible-cocone",
     "def-sfb-constructible-extend-to-qlbar"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
     "place": "Complexes paragraph: ambient realization of the vertex functors"
@@ -110,25 +71,8 @@
   }
  ],
  "proof_deps": [
-  "def-sfb-padic-subfield-condensed-ring",
-  "sk-def-sfb-qlbar-condensed",
-  "sk-def-sfb-pullback-from-point",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-sfb-constructible-module",
-  "def-sfb-locally-finitely-presented",
-  "def-sfb-finitely-presented-module",
-  "sk-def-sfb-bounded-constructible",
-  "def-sfb-dcons-subfield",
-  "def-sfb-dcons-qlbar",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "def-weil-triangulated-subcategory",
-  "def-weil-abstract-derived-category",
-  "lem-sfb-qlbar-flat",
-  "sk-def-sfb-change-of-scalars",
-  "lem-sfb-preserving-colimits-additive",
-  "def-sfb-left-derived-exact",
-  "def-sfb-derived-extend-to-qlbar",
-  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-condensed-coefficient-presentation-identification",
+  "lem-sfb-constructible-exact-scalar-triangulation",
   "lem-sfb-extend-to-qlbar-constructible",
   "def-sfb-constructible-cocone",
   "def-sfb-constructible-extend-to-qlbar",
@@ -139,7 +83,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-  "place": "Explicit assembly of coefficient definitions, finite-field Serre closure, exact termwise scalar extension, and the specified restricted tensor comparisons"
+  "place": "Assembly of the separate coefficient/presentation identification and exact scalar triangulation arguments, followed by the specified restricted functors and comparison components."
  },
  "mathlib_searches": [
   {
@@ -201,22 +145,9 @@
   "date": "2026-10-21",
   "item": "lem-sfb-constructible-cocone-ambient-realization",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and supplied a six-step proof using existing nodes only. Identified the coefficient and stratified local finite-presentation conventions directly; invoked the coefficient-specific Serre theorem rather than unconditional arbitrary-ring triangulatedness; proved exactness before the termwise derived realization; and checked the actual forward and inverse comparison components. No new nodes or Mathlib leaves.",
-  "blueprint": "Realizes the Modules paragraph coefficient/presentation conventions and the Complexes paragraph exact scalar extension, finite-stage inherited triangles, and prescribed cocone comparisons in lem-sfb-constructible-cocone-obj.proof.md.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-condensed-constructible-serre",
-    "why": "Generic coefficient-specific kernel/cokernel/extension closure on every topologically Noetherian scheme; the unit needs it for inherited finite-stage triangles, and its standing-scheme coefficient-heart node does not supply this generality."
-   },
-   {
-    "node": "lem-sfb-preserving-colimits-additive",
-    "why": "Generic abelian-category criterion supplies additivity of scalar extension from finite-colimit preservation."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic exact-functor theorem supplies triangulatedness of termwise scalar extension on ordinary unbounded derived categories."
-   }
-  ]
+  "summary": "Repair of the human re-split return: added two comparable statement-only unsplit nodes. Former steps 1-2 are the coefficient/presentation identification obligation; former steps 3-4 are the inherited-triangulation and exact-termwise scalar obligation. The parent retains the restriction and comparison-component assembly. The full former arguments, source checks and extraction map are preserved in report.md. Statement and stmt_deps unchanged.",
+  "blueprint": "Modules paragraph coefficient/presentation conventions and Complexes paragraph inherited finite-stage triangles, exact scalar extension and prescribed cocone comparisons in lem-sfb-constructible-cocone-obj.proof.md.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-condensed-constructible-serre",
@@ -226,10 +157,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-O2-aa20f0219",
-  "group": "O2",
+  "reviewer": "NT-cc-Q45-ed550d36d",
+  "group": "Q45",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-aa20f0219 (reviewer sub-agent of L); spot-checked: I read the whole item: all six steps, every cited statement, and the main-20261015 source lem-sfb-constructible-cocone-obj.proof.md (Modules and Complexes paragraphs); this is a one-level split with no new nodes. The statement and stmt_deps are unchanged, there is no cycle, and proof_deps equals the union of the step uses. Step 1: both pullbacks are the sheafified Lan construction (sk-def-sfb-pullback-from-point/def-sfb-finite-upper-star vs def-weil-pbc-condensed-e-module-category/def-weil-proetale-inverse-image), and the restricted norm on E agrees. So E_X=E_X^c and Omega_X=Omega_X^c canonically. Step 2: the stratified local-cokernel predicates and the bounded intervals agree word for word, and neither side imposes completeness. Step 3: the Serre node (whose only scheme hypothesis is a Noetherian underlying space), together with zero and isomorphism invariance, satisfies the conditional triangulatedness clause of sk-def-sfb-bounded-constructible; the step does not use the false unconditional version. Step 4: lem-sfb-qlbar-flat plus change-of-scalars (2)/(4) plus additivity give an exact functor, then LF=D(F) via def-sfb-left-derived-exact, which is triangulated. Step 5: V_E is the literal restriction, Phi_E=LF_E iota_E, and no triangulated structure on C_Omega is needed. Step 6: the comparison is by definition the restriction of def-sfb-derived-extend-comp-iso. Of the three tool_uses, I accept the Serre node because the on-route det-lem-coefficient-heart-closure needs a Noetherian scheme, which is stronger than the item's hypothesis; the other two are generic Mathlib leaves, also accepted. The new route improves on the parent's old Lean-API citation. I checked the edge cases: empty X, rank-zero presentations, E=F. There is no SGA. Minor: Omega_X^c is defined in the Serre node rather than in def-weil-pbc-condensed-e-module-category, but this wording is inherited from the base statement and is not a fault."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ed550d36d (reviewer sub-agent of L); spot-checked: Re-split note of the human (2026-10-21, 5263 characters, at least 1 node) is fulfilled. Statement, stmt_deps, lean and the review records are byte-identical to the live O2 six-step node. Two new statement-only unsplit nodes. lem-sfb-condensed-coefficient-presentation-identification carries old steps 1-2: E_X=E_X^c and Omega_X=Omega_X^c through the same C(S,E) or finite-subfield-valued input and the same sheafified Lan along S->Spec LC(S,Z) followed by pi^*; the stratified pro-etale cokernel predicates and bounded intervals agree, with no completeness condition; Omega^c is defined explicitly because the pbc definition covers only finite E. lem-sfb-constructible-exact-scalar-triangulation carries old steps 3-4: Serre closure, zero and iso invariance and the conditional clause of sk-def-sfb-bounded-constructible give the inherited triangulation, additive shifts and triangulated inclusion; lem-sfb-qlbar-flat and change-of-scalars (2) make F_E exact, def-sfb-left-derived-exact gives LF=D(F), and that functor is triangulated. Old step 5 became parent step 3 with the same content, and old step 6 became parent step 4 verbatim. Parent proof is 2101 characters; each step checked against the cited statements (extend-to-qlbar-constructible, constructible-extend-to-qlbar, cocone, extend-comp-iso = restriction of derived-extend-comp-iso). New statements tested on X empty, the zero module, E=Q_l and arbitrary shifts; both are true and self-contained, with notion stmt_deps present. Same-snapshot closure: old deps 950 nodes, new 952, the only additions being the two new nodes; no cycle and no missing id. Source checked: main-20261015 lem-sfb-constructible-cocone-obj.proof.md, Modules and Complexes paragraphs. No duplicate found: checked lfp-local-triviality, coefficient-cocone-comparison-agreement, qbar-function-coefficients, adic-constructibility-predicate-comparison and dc-ell-adic-triangulated. Advisory: lem-weil-pbc-condensed-finite-model-proof-api already states that boundedConstructible(padicSubfieldRingObj) is triangulated, i.e. clause 1 of the triangulation node, which is strictly larger. Node 1 stmt_deps include the off-unit lem-weil-pbc-condensed-constructible-serre, already in the item's tool_uses; the maintainer may need to carry it over. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ConstructibleCoconeAmbientRealization",
