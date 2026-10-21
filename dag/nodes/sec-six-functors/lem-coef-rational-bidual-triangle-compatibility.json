@@ -23,110 +23,19 @@
  ],
  "proof": [
   {
-   "text": "Fix a K-injective resolution $\\mathcal O[0]\\to I$ and put $T(E)=\\mathcal Hom^\\bullet(E,I)$ for every complex $E$. The derived-Hom definition identifies $QT(E)$ with $(QE)^\\vee$ and $QT^2(E)$ with $(QE)^{\\vee\\vee}$: in both occurrences only the target $I$ must be K-injective. For a quasi-isomorphism $u:E\\to E'$, apply the well-definedness lemma with target map $1_I$ to see that $T(u)$ is a quasi-isomorphism, and apply it once more to $T(u)$ for $T^2(u)$. Thus $T^2$ descends to the actual functor $F=(-)^{\\vee\\vee}$. These are the canonical representative comparisons, rather than an additional choice of an abstract duality.",
+   "text": "Apply normalized exactness of contravariant Hom at the coefficient unit. Compose its opposite with the double-opposite equivalence to obtain exactness of dual.rightOp, then compose with dual. Expand the opposite-functor and composite shift comparisons. The source normalizations at 1 and -1 show the degree-one composite is exactly signedShift, including its leading minus. This categorical derivation is the proved private signed_bidual_exact.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined"
+    "lem-coef-signed-derived-internal-hom-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A5/079P (resolutions), 0A95 (lemma-RHom-well-defined), Section 08J7 (internal Hom)."
-   }
+   "elementary": false
   },
   {
-   "text": "We pin down transposition on these models. For derived objects $U,V$, choose K-flat flat-term representatives $P_U,P_V$. Then $T(P_V)$ is K-injective and represents $H(V,\\mathcal O)$. The tensor-descent theorem identifies $Q\\operatorname{Tot}(P_U\\otimes P_V)$ with $U\\otimes^L V$. The K-injective Hom theorem and the global-Hom/homotopy theorem identify morphisms $U\\to H(V,\\mathcal O)$ and $U\\otimes^L V\\to\\mathcal O$ with the respective homotopy classes of chain maps into $T(P_V)$ and $I$. The Hom-currying chain isomorphism identifies those classes. Its component is $c(g)(x\\otimes y)=g(x)(y)$: for $|g|=n$, $|x|=p$, both differentials evaluate to $d_Ig(x)(y)-(-1)^ng(d_Px)(y)-(-1)^{n+p}g(x)(d_Py)$. Hence this is the specified tensor–Hom transposition, with no undetermined sign. Naturality of currying and tensor descent extend it through inverses of quasi-isomorphisms.",
+   "text": "The separate degree-one evaluation lemma gives CommShiftCore for evaluation at 1. The proved generic commShiftCore_neg obtains compatibility at -n from n by applying shift n, zero and addition coherence, naturality and cancellation of isomorphisms. Integer induction with CommShiftCore.add then proves NatTrans.CommShift for every integer. Apply the already-proved triangleCompatibility_of: all three triangle squares, shift closure and every two-out-of-three implication follow. This is the complete Lean proof of ambient compatibility from two strictly smaller source results.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pur-hom-complex-global-homotopy",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
+    "lem-coef-bidual-evaluation-shift-one",
+    "lem-sf-triangle-two-out-of-three"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 0A90 (lemma-compose), 0A96 (Hom from K-flat into K-injective); explicit currying differential."
-   }
-  },
-  {
-   "text": "Define $b_E:E\\to T^2(E)$ by $b_E(x)(f)=(-1)^{pq}f(x)$ for $x\\in E^p$ and $f\\in T(E)^q$. This is a sheaf map since evaluation and the sign commute with restriction. Expanding the Hom differential gives\n$$(d b_E(x))(f)=(-1)^{pq}d_I(f(x))-(-1)^{pq}(d_I(f(x))-(-1)^qf(d_Ex))=(-1)^{(p+1)q}f(d_Ex)=b_E(d_Ex)(f).$$\nFor a chain map $v:E\\to E'$, evaluation of both $T^2(v)b_E(x)$ and $b_{E'}v(x)$ on $f$ gives $(-1)^{pq}f(v(x))$. Thus $b$ is a natural chain transformation, which descends by Step 1. Independently, the duality-map node gives the natural derived transformation $d$ defined as the transpose of coefficient evaluation with the Koszul symmetry. Steps 4–5 identify these two transformations on every object; the node's conditional ordinary-$\\mathcal O[0]$ representative formula is not being applied to arbitrary complexes.",
-   "uses": [
-    "def-pur-hom-complex",
-    "lem-sfb-ringed-site-duality-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes), explicit differential and naturality; Tag 08JD (lemma-dual), definition of the coefficient double-dual map."
-   }
-  },
-  {
-   "text": "Let $P\\to E$ be K-flat with flat terms, and resolve $T(P)$ by a K-flat flat-term complex $r:L\\to T(P)$. The identity of $QT(P)$ is represented, using source $L$ and K-injective target $T(P)$, by $r$. The transposition of Step 2 therefore represents coefficient evaluation by $L\\otimes P\\to I$, $\\ell\\otimes x\\mapsto r(\\ell)(x)$. Tensor symmetry on total complexes is $x\\otimes\\ell\\mapsto(-1)^{p q}\\ell\\otimes x$, where $|x|=p$, $|\\ell|=q$. Substituting in the total differential verifies its chain-map property: the coefficients of $d\\ell\\otimes x$ and $\\ell\\otimes dx$ on both sides are respectively $(-1)^{pq}$ and $(-1)^{pq+q}$. Its square is the identity. The natural-transformation descent clause of the tensor-descent theorem gives this same symmetry on derived tensor.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 and 0A97 (evaluation on K-flat/K-injective models), Section 06YL (derived tensor); explicit total-complex symmetry."
-   }
-  },
-  {
-   "text": "The evaluation after symmetry in Step 4 is $x\\otimes\\ell\\mapsto(-1)^{p q}r(\\ell)(x)$. Its curry under Step 2 is $T(r)b_P$, since $(T(r)b_P(x))(\\ell)=b_P(x)(r(\\ell))=(-1)^{p q}r(\\ell)(x)$. The comparison $T(r):T^2(P)\\to T(L)$ is a quasi-isomorphism by the well-definedness lemma. Consequently the transpose is exactly $Qb_P$ under the canonical representative comparison for $F(QP)$. For $P\\to E$, naturality of $b$ (Step 3), naturality of $d$, and invertibility of this quasi-isomorphism give $Qb_E=d_{QE}$. This identifies the representative for arbitrary $E$ without assuming ordinary Hom into $\\mathcal O[0]$ computes derived Hom.",
-   "uses": [
-    "lem-pur-rhom-well-defined",
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A95, 08J9, 08JD and 0A97; comparison of the explicit curry with the defining evaluation transpose."
-   }
-  },
-  {
-   "text": "Fix the signed comparisons by the explicit double-Hom cone lemma: $s_{E,m}:T(E[m])\\to T(E)[-m]$ multiplies a degree-$q$ map by $(-1)^{mq}$, and\n$$\\chi_E=-s_{T(E),-1}\\circ T(s_{E,1})^{-1}:T^2(E[1])\\longrightarrow T^2(E)[1].$$\nThe leading minus sign is part of the normalization. The cited statement gives naturality in $E$, the component formula $(\\chi_Eg)(y)=(-1)^{p+t}g(y)$ for $|g|=p$, $y\\in T(E)^t$ (read on the right in degree $t+1$), and a natural cone isomorphism $\\theta_u:T^2\\operatorname{Cone}(u)\\cong\\operatorname{Cone}(T^2u)$. Its arrow identities are $\\theta_u T^2(i)=i$ and $\\chi_A T^2(-\\pi)=-\\pi\\theta_u$. Together with the first arrow $T^2u$, they identify the $T^2$-image cone triangle with the cone triangle of $T^2u$. By Step 1 and the definition of distinguished triangles, $F$ is exact with the natural localized comparison $\\psi=Q\\chi$. Thus exactness is established for this precise comparison, independently of the unspecified existential comparison $e$ in the old shift lemma.",
-   "uses": [
-    "lem-sf-double-hom-cone-comparison",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E (definition-cone); sites-cohomology.tex Tag 08JC (lemma-RHom-triangulated), omitted signs supplied by the cited explicit cone lemma."
-   }
-  },
-  {
-   "text": "For $x\\in E[1]^p=E^{p+1}$ and $y\\in T(E)^t$, regard $y$ in $T(E[1])^{t+1}$ without a sign. Then\n$$(\\chi_E b_{E[1]}(x))(y)=(-1)^{p+t+p(t+1)}y(x)=(-1)^{(p+1)t}y(x)=(b_E[1](x))(y).$$\nIndeed the two exponents differ by $2p$. By Step 5 this gives $\\psi_V d_{V[1]}=d_V[1]$. Iterating this equality defines coherent comparisons for positive integer shifts; taking the inverse shifted equality handles $[-1]$ and then all negative shifts. The comparison for shift zero is the identity. The identity and inverse constructions ensure coherence under addition of integers.",
-   "uses": [
-    "lem-sf-double-hom-cone-comparison",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X and explicit signed comparison in lem-sf-double-hom-cone-comparison; the displayed exponent calculation is the shift check."
-   }
-  },
-  {
-   "text": "For a distinguished triangle $V\\xrightarrow{u}W\\xrightarrow{v}Z\\xrightarrow{w}V[1]$, Step 6 makes its $F$-image distinguished with last arrow $\\psi_V F(w)$. Apply the shift-compatible-natural-transformation triangle lemma to $\\mathrm{id},F,d$, using naturality and Step 7. Explicitly the last square is\n$$\\psi_V F(w)d_Z=\\psi_V d_{V[1]}w=d_V[1]w,$$\nwhere the first equality is naturality at $w$. The other two squares are naturality at $u,v$. This supplies the asserted morphism of distinguished triangles with its connecting square.",
-   "uses": [
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definitions 0144 and 014V (triangle morphism and image triangle), instantiated with the normalization established above."
-   }
+   "elementary": false
   },
   {
    "text": "Write $j^*$ for restriction to $\\mathcal C/U$. Ordinary Hom complexes restrict by the componentwise identification\n$$j^*\\mathcal Hom^\\bullet(E,I)=\\mathcal Hom^\\bullet(j^*E,j^*I).$$\nTo verify it, on an object $V\\to U$ both sides in degree $n$ consist of families of module maps $E^a|_V\\to I^{a+n}|_V$ on $\\mathcal C/V$; relocalization identifies the two sites, and both differentials are $d_If-(-1)^nfd_E$. Restriction preserves products sectionwise. Also $j^*I$ is K-injective: for an acyclic complex $N$ on the slice, exactness of $j_!$ makes $j_!N$ acyclic; the termwise adjunction, applied to chain maps and their homotopies, identifies $\\operatorname{Hom}_{K}(N,j^*I)$ with $\\operatorname{Hom}_{K}(j_!N,I)=0$. Exactness of $j^*$ makes $\\mathcal O_U\\to j^*I$ a resolution. Thus these componentwise Hom comparisons compute the canonical derived restriction comparison of the exactness/restriction node, using $j^*I$ on the slice. If the slice's fixed resolution is different, the canonical resolution comparisons in the derived-Hom definition identify the two models.",
@@ -184,7 +93,7 @@
    }
   },
   {
-   "text": "For any exact endofunctor F with a shift-compatible natural transformation d from the identity, use the canonical identity image-triangle isomorphism followed by NatTrans.mapTriangle to obtain the triangle map with components d. Mathlib triangle two-out-of-three for natural transformations gives all three invertibility implications. The formula for d on X[n] expresses it as the shifted d_X conjugated by the two shift comparisons, so invertibility of d_X implies invertibility of d_(X[n]). Conversely the shift equation gives invertibility of the shifted d_X, and the shift equivalence reflects isomorphisms. Apply this categorical argument both on the full subcategory and on its scalar localization in Step 12. The same categorical conclusion is available to the ambient signed construction in Steps 6–8; that construction and the slice construction remain separate unfinished declarations.",
+   "text": "For any exact endofunctor F with a shift-compatible natural transformation d from the identity, use the canonical identity image-triangle isomorphism followed by NatTrans.mapTriangle to obtain the triangle map with components d. Mathlib triangle two-out-of-three for natural transformations gives all three invertibility implications. The formula for d on X[n] expresses it as the shifted d_X conjugated by the two shift comparisons, so invertibility of d_X implies invertibility of d_(X[n]). Conversely the shift equation gives invertibility of the shifted d_X, and the shift equivalence reflects isomorphisms. Apply this categorical argument both on the full subcategory and on its scalar localization in Step 12. The same categorical conclusion is available to the ambient signed construction in Steps 6–8; the ambient construction is reduced to the two separate source results above; the slice construction remains unfinished.",
    "uses": [
     "lem-sf-triangle-two-out-of-three"
    ],
@@ -196,33 +105,26 @@
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
   "def-pur-derived-internal-hom",
   "def-pur-hom-complex",
   "def-pur-kinjective-complex",
   "def-pur-localized-ringed-site",
   "def-weil-abstract-derived-category",
   "def-weil-linear-scalar-localization",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-complex-global-homotopy",
-  "lem-pur-hom-kflat-into-kinjective",
+  "lem-coef-bidual-evaluation-shift-one",
+  "lem-coef-signed-derived-internal-hom-exact",
   "lem-pur-rhom-well-defined",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-derived-hom-tensor-total",
   "lem-sf-double-hom-cone-comparison",
   "lem-sf-triangle-two-out-of-three",
   "lem-sfb-ringed-site-duality-maps",
   "lem-weil-linear-scalar-localization-triangulated",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
-  "by": "W4",
+  "by": "Q7",
   "date": "2026-10-21",
-  "note": "Completed scalar_compatibility from the existing ambient compatibility declaration, with proved private categorical helpers for full-subcategory restriction, scalar localization and the triangle/isomorphism-locus consequences. Steps 12–13 describe this proof. No new holes or nodes; ambient compatibility and slice_compatibility remain unchanged."
+  "note": "Ambient compatibility reduced in Lean to normalized single-Hom exactness and the degree-one evaluation calculation. Opposite/composition signs, negative-shift propagation, integer induction and triangle assembly are completely proved. Existing scalar and slice routes retained; slice_compatibility remains sorry. This is a decomposition, not an unconditional proof."
  },
  "mathlib_searches": [
   {
@@ -408,12 +310,12 @@
   "note": "Clause-by-clause match. dual/bidual/evaluation are the recorded derived internal Hom into O[0] and ringedSiteBidual. signedShift = −H(sourceShift X 1).hom ≫ sourceShift(dual X)(−1).inv is χ with the leading minus; the sourceShift LeftFormula sign (s*k).negOnePow was checked. TriangleCompatibility gives IsTriangulated, NatTrans.CommShift, the triangle morphism with all three squares, shift closure for all n and all three 2-of-3 cases, with no invertibility claimed. Slice: mapDerivedCategory of the recorded localizedSystemRestriction; h/o/t mirror ringedSiteDualityMaps_restriction; the connecting square follows from beta's CommShift and evaluation square. Scalar: rho/hcentral pin Linear A D; subcategory_linearity proves step 11; scalar_compatibility's structural parameters are exactly the exists_triangulated_scalarLocalization output, and its assuming F linear rather than hcentral is a harmless generalization; the localized CommShift is pinned at every n. H4: RelativeBidualTriangles defines the same dual/bidual/bidualMap at K=O[0], but it, its citers and def-per-ringed-site-bidual-transpose are route-pivot dropped, so the local defs are not a fault. Direct imports hit no dropped-node module. Statement verbatim; node diff is the lean record only; 4 theorem sorries; docstrings with steps; lines ≤100. nt_compile at load ~200: the full file timed out at 60 s (about 10 s CPU, load contention); the three split parts compiled clean in 33–39 s; the delivery records 12.7/16.2 s; land at lower load. Advisory: the report's gate paragraph is stale; proof-plan imports are unused."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261020T233232-L-909620",
+  "landing": "20261021T011030-L-2030374",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

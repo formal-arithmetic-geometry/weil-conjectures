@@ -1,0 +1,159 @@
+{
+ "id": "lem-coef-bidual-evaluation-shift-one",
+ "kind": "statement",
+ "title": "Degree-one signed shift compatibility of coefficient evaluation",
+ "statement": "Let H be the recorded derived internal Hom [def-pur-derived-internal-hom], O the coefficient unit, and M any normalized ringed-site duality model [lem-sfb-ringed-site-duality-maps]. Put T(X)=H(X,O). For every derived object X, the evaluation-transpose bidual map b satisfies b_(X[1]) followed by -(H((sourceShift X 1).hom.op,id_O) followed by (sourceShift (T X) (-1)).inv) = b_X[1]. The source shifts have the complete representative normalization of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. This asserts only the degree-one morphism equality, without exactness, coherent integer shifts, triangle morphisms or slice restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 08JC and 0A97; the signed representative calculation in lem-coef-rational-bidual-triangle-compatibility"
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Resolve the coefficient O by a K-injective I. Define b_E(x)(f)=(-1)^(p*q)f(x) for homogeneous x and f of degrees p and q. Expanding the Hom differential cancels the d_I terms and gives b_E(dx), so b is a natural chain map. The delivered private generalHom_d_eval, generalBidualDegree_comm and generalOrdinaryBidual check this ordinary chain-map construction for arbitrary I, with both target-differential terms retained and canceled; no zero-differential hypothesis is used. The delivered ordinaryBidual_naturality proves functoriality by both Hom-functor projection formulas and the naturality of the input chain map on restricted sections; generalOrdinaryBidualTransformation packages the resulting natural transformation.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
+   }
+  },
+  {
+   "text": "Take a K-flat representative P and a K-flat replacement a:L to Hom(P,I). The normalized tensor-Hom adjunction represents evaluation after Koszul symmetry by (x,l) to (-1)^(p*q)a(l)(x). Currying gives Hom(a,I)b_P. Since Hom(a,I) is a quasi-isomorphism, this identifies Q(b_P) with the actual evaluation transpose. Naturality and K-flat replacement identify Q(b_E) with derived evaluation for arbitrary representatives. No assertion that ordinary Hom into O computes arbitrary derived Hom is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-pur-rhom-well-defined",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
+   }
+  },
+  {
+   "text": "The normalized signed double-Hom comparison has degree-p, inner-degree-t sign (-1)^(p+t). On b_(E[1]) the combined exponent is p+t+p*(t+1), differing from (p+1)*t by 2*p. Thus the composite is b_E[1]. The fixed source-shift representative normalization and localization give exactly the asserted derived equality. The delivered private ordinaryBidual_shift_one proves the ordinary equality for arbitrary E and I, using the actual chi and its product-projection formula supplied by the proved SignedDoubleHomCone.comparison; unsignedReindex_eval checks the reindexing explicitly. Only representative identification and descent remain in this step.",
+   "uses": [
+    "lem-sf-double-hom-cone-comparison",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sf-double-hom-cone-comparison",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "date": "2026-10-21",
+  "note": "Separate source result extracted from the ambient signed bidual argument; all dependent declarations were read before this split.",
+  "group": "Q7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant internal Hom sends a mapping cone triangle to a distinguished triangle with the signed source shift",
+   "results": "Eight mapping-cone and image-triangle API hits; none gives normalized contravariant sheaf Hom.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.commShiftIso",
+   "results": "No hits; service reports unknown identifier. Local Mathlib reads locate the general shift API.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual",
+   "results": "Sixteen hits in additive characters, normed spaces and Pontryagin duality; none concerns complexes or derived internal Hom.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation transpose from a cochain complex to its double internal Hom commutes with the signed degree one shift comparison",
+   "results": "CochainComplex.shiftEval and shiftEval_hom_app; CochainComplex.HomComplex.Cochain.delta_rightShift (displayed as δ_rightShift), leftShiftLinearEquiv_symm_apply, leftShift_comp, leftUnshift_v. Source inspection of Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:94-105 shows an operation on cochains. These are generic shift calculations, without the double internal-Hom evaluation transpose or its derived normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CoefficientBidualTriangleCompatibility",
+  "date": "2026-10-21",
+  "group": "Q7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-retract-evaluation",
+   "place": "Proof paragraph 3, via lem-coef-rational-bidual-triangle-compatibility: signed evaluation and triangle compatibility",
+   "via": [
+    "lem-coef-rational-bidual-triangle-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoefficientBidualEvaluationShiftOne",
+  "file": "lean/Sheaf/CategoryTheory/CoefficientBidualEvaluationShiftOne.lean",
+  "declaration": "CategoryTheory.coefficientBidualEvaluation_shift_one",
+  "statement": "theorem coefficientBidualEvaluation_shift_one\n    (M : RingedSiteDualityModel.{c, v, r, w} J R) (X : D.{c, v, r, w} J R) :\n    let O := ringedSiteDualityUnit.{c, v, r, w} J R\n    let H := derivedInternalHomOfUniverses.{c, v, r, w} J R\n    let T := Prod.sectL _ O ⋙ H\n    ringedSiteBidual M.closed M.symmetric O (X⟦(1 : ℤ)⟧) ≫\n        (-(H.map (Prod.mkHom ((sourceShift.{c, v, r, w} J R X 1).hom.app O).op\n          (𝟙 O)) ≫ (sourceShift.{c, v, r, w} J R (T.obj (op X)) (-1)).inv.app O)) =\n      (ringedSiteBidual M.closed M.symmetric O X)⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261021T011030-L-2030374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261021T011030-L-2030374",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

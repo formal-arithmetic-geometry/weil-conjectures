@@ -12,6 +12,9 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+import Sheaf.CategoryTheory.SignedDerivedInternalHomExact
+import Mathlib.CategoryTheory.Triangulated.Opposite.OpOp
+import Sheaf.CategoryTheory.CoefficientBidualEvaluationShiftOne
 import Mathlib.CategoryTheory.Monoidal.Linear
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
@@ -113,6 +116,48 @@ private theorem triangleCompatibility_of [F.IsTriangulated] [NatTrans.CommShift 
     exact ⟨fun h ↦ NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ d hT h.1 h.2,
       fun h ↦ NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ d hT h.1 h.2,
       fun h ↦ NatTrans.isIso_app_obj₁_of_isIso_app_obj₂₃ d hT h.1 h.2⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Compatibility at an invertible shift implies compatibility at its inverse. -/
+private theorem commShiftCore_neg
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {F G : C ⥤ D} [F.CommShift ℤ] [G.CommShift ℤ]
+    (τ : F ⟶ G) (n : ℤ) (h : NatTrans.CommShiftCore τ n) :
+    NatTrans.CommShiftCore τ (-n) := by
+  constructor
+  ext X
+  apply (shiftFunctor D n).map_injective
+  have hz : NatTrans.CommShiftCore τ (-n + n) := by
+    simpa only [neg_add_cancel] using NatTrans.CommShiftCore.zero (τ := τ) ℤ
+  have hs := hz.shift_app_comm τ X
+  simp only [Functor.commShiftIso_add, Functor.CommShift.isoAdd_hom_app,
+    Category.assoc] at hs
+  rw [← NatTrans.naturality_assoc] at hs
+  have hD := (shiftFunctorAdd D (-n) n).inv.naturality (τ.app X)
+  dsimp only [Functor.comp_map] at hD
+  rw [← hD] at hs
+  apply (cancel_epi (F.map ((shiftFunctorAdd C (-n) n).hom.app X) ≫
+    (F.commShiftIso n).hom.app (X⟦-n⟧))).mp
+  apply (cancel_mono ((shiftFunctorAdd D (-n) n).inv.app (G.obj X))).mp
+  simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Functor.comp_obj, Category.assoc, h.shift_app_comm_assoc τ] using hs
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Coherence extends the degree-one square to every integral shift. -/
+private theorem commShift_of_one
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {F G : C ⥤ D} [F.CommShift ℤ] [G.CommShift ℤ]
+    (τ : F ⟶ G) (h : NatTrans.CommShiftCore τ (1 : ℤ)) :
+    NatTrans.CommShift τ ℤ := by
+  apply NatTrans.CommShift.of_core
+  have hn := commShiftCore_neg τ 1 h
+  intro n
+  induction n using Int.induction_on with
+  | zero => exact NatTrans.CommShiftCore.zero (τ := τ) ℤ
+  | @succ n ih => exact ih.add h
+  | @pred n ih => simpa only [sub_eq_add_neg] using ih.add hn
 
 end General
 
@@ -421,24 +466,70 @@ def signedShift (X : D.{c, v, r, w} J R) :
     (sourceShift.{c, v, r, w} J R ((dual.{c, v, r, w} J R).obj (op X)) (-1)).inv.app
       (ringedSiteDualityUnit.{c, v, r, w} J R))
 
+open Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Exactness and the signed degree-one comparison follow by applying source duality twice. -/
+private theorem signed_bidual_exact :
+    ∃ S : (bidual.{c, v, r, w} J R).CommShift ℤ,
+      (fun [_shiftInst : (bidual.{c, v, r, w} J R).CommShift ℤ] ↦
+        (bidual.{c, v, r, w} J R).IsTriangulated ∧
+        ∀ X : D.{c, v, r, w} J R,
+          ((bidual.{c, v, r, w} J R).commShiftIso (1 : ℤ)).hom.app X =
+            signedShift.{c, v, r, w} J R X) (_shiftInst := S) := by
+  obtain ⟨S, hExact, hPlus, hMinus⟩ := signedDerivedInternalHom_exact.{c, v, r, w} J R
+      (ringedSiteDualityUnit.{c, v, r, w} J R)
+  let T := dual.{c, v, r, w} J R
+  let : T.CommShift ℤ := S
+  have : T.IsTriangulated := hExact
+  let : T.rightOp.CommShift ℤ :=
+    inferInstanceAs (((opOp (D.{c, v, r, w} J R)) ⋙ T.op).CommShift ℤ)
+  have : T.rightOp.IsTriangulated :=
+    inferInstanceAs (((opOp (D.{c, v, r, w} J R)) ⋙ T.op).IsTriangulated)
+  change ∃ S : (T.rightOp ⋙ T).CommShift ℤ,
+    (fun [_shiftInst : (T.rightOp ⋙ T).CommShift ℤ] ↦
+      (T.rightOp ⋙ T).IsTriangulated ∧ ∀ X : D.{c, v, r, w} J R,
+        ((T.rightOp ⋙ T).commShiftIso (1 : ℤ)).hom.app X =
+          signedShift.{c, v, r, w} J R X) (_shiftInst := S)
+  refine ⟨inferInstanceAs ((T.rightOp ⋙ T).CommShift ℤ),
+    inferInstanceAs ((T.rightOp ⋙ T).IsTriangulated), ?_⟩
+  intro X
+  change ((T.rightOp ⋙ T).commShiftIso (1 : ℤ)).hom.app X = _
+  rw [Functor.commShiftIso_comp_hom_app]
+  have hr : (T.rightOp.commShiftIso (1 : ℤ)).hom.app X =
+      ((T.commShiftIso (-1 : ℤ)).inv.app (op X)).op := by
+    change (((opOp (D.{c, v, r, w} J R)) ⋙ T.op).commShiftIso (1 : ℤ)).hom.app X = _
+    rw [Functor.commShiftIso_comp_hom_app,
+      commShiftIso_opOp_hom_app X 1 (-1)]
+    dsimp only [opOp_obj]
+    rw [Functor.op_commShiftIso_hom_app T (op (op X)) 1 (-1) (by decide)]
+    simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app, Functor.op_map]
+    erw [Category.comp_id, Quiver.Hom.unop_op, Functor.map_id,
+      op_id, Category.id_comp, Category.comp_id]
+    exact Category.id_comp _
+  rw [hr]
+  change T.map (((T.commShiftIso (-1 : ℤ)).inv.app (op X)).op) ≫
+    (T.commShiftIso (1 : ℤ)).hom.app (op (T.obj (op X))) = _
+  change ∀ X, (T.commShiftIso (-1 : ℤ)).inv.app (op X) = _ at hMinus
+  change ∀ X, (T.commShiftIso (1 : ℤ)).hom.app (op X) = _ at hPlus
+  rw [hMinus, hPlus]
+  simp only [Preadditive.comp_neg]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The bidual map is compatible with the precisely signed exact structure.
 Source: Stacks 08JC, 0A97; derived.tex 0144
 (blueprint: lem-coef-rational-bidual-triangle-compatibility).
-Proof: (1) Fix a K-injective coefficient resolution I. Hom(-,I) inverts quasi-isomorphisms,
-twice, so its double application represents bidual. (2) On K-flat representatives tensor-Hom
-currying sends g to (x tensor y ↦ g(x)(y)); the differential is d_I g(x)(y) - (-1)^n g(dx)(y) -
-(-1)^(n+p) g(x)(dy). (3) The chain map b(x)(f)=(-1)^(pq)f(x) is natural: expanding the Hom
-differential gives b(dx)(f)=(-1)^((p+1)q)f(dx). (4) Resolve Hom(P,I) by a K-flat L. Evaluation
-after symmetry is x tensor l ↦ (-1)^(pq)r(l)(x). (5) Its curry is Hom(r,I)b_P, identifying b
-with the evaluation-transpose map on every derived object, by quasi-isomorphism descent. (6) The
-signed double-Hom cone comparison gives chi=-s_{T(E),-1}T(s_{E,1})^{-1} and theta, intertwining
-both cone arrows including -pi. Thus this exact signed comparison, rather than an arbitrary
-shift comparison, preserves distinguished triangles. (7) Evaluating chi b_{E[1]} gives exponent
-p+t+p(t+1)=(p+1)t modulo 2; iterate and invert for all integer shifts with coherent zero and
-addition laws. (8) Naturality gives the first two squares. For the third, d_Z ≫ F(w) ≫ psi_V = w
-≫ d_{V[1]} ≫ psi_V = w ≫ d_V[1]. (13) Apply triangle two-out-of-three to id and bidual, then
-shift compatibility and its inverse to obtain the asserted invertibility locus. No general
-reflexivity assumption is used. Slice and scalar descent are stated separately below. -/
+Proof: Give the single dual its normalized contravariant exact structure. Its opposite is exact
+as well, and composing the two gives a coherent exact structure on bidual. Expanding the
+composition comparison in degree one gives exactly signedShift: the minus is the degree-one
+normalization of the outer dual. The separate evaluation-transpose calculation gives the shift-one
+square. Zero and addition coherence imply the inverse-shift square, and integer induction gives
+all shifts. Naturality then supplies the three triangle squares, including the connecting square.
+Triangle two-out-of-three and shift faithfulness give all asserted isomorphism-locus properties.
+No general reflexivity assumption is used. Slice and scalar descent are stated separately below. -/
 theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R) :
     ∃ S : (bidual.{c, v, r, w} J R).CommShift ℤ,
       (∀ X : D.{c, v, r, w} J R,
@@ -447,7 +538,23 @@ theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R) :
       (fun [_shiftInst : (bidual.{c, v, r, w} J R).CommShift ℤ] ↦
         TriangleCompatibility (bidual.{c, v, r, w} J R) (evaluation.{c, v, r, w} J R M))
         (_shiftInst := S) := by
-  sorry
+  obtain ⟨S, hExact, hNormalized⟩ := signed_bidual_exact.{c, v, r, w} J R
+  let : (bidual.{c, v, r, w} J R).CommShift ℤ := S
+  have : (bidual.{c, v, r, w} J R).IsTriangulated := hExact
+  have hN (X : D.{c, v, r, w} J R) :
+      ((bidual.{c, v, r, w} J R).commShiftIso (1 : ℤ)).hom.app X =
+        signedShift.{c, v, r, w} J R X := hNormalized X
+  have hd : NatTrans.CommShiftCore (evaluation.{c, v, r, w} J R M) (1 : ℤ) := by
+    constructor
+    ext X
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.commShiftIso_id_hom_app, hN]
+    change 𝟙 _ ≫ _ = _
+    rw [Category.id_comp]
+    exact (coefficientBidualEvaluation_shift_one.{c, v, r, w} J R M X).symm
+  have : NatTrans.CommShift (evaluation.{c, v, r, w} J R M) ℤ :=
+    commShift_of_one (evaluation.{c, v, r, w} J R M) hd
+  exact ⟨S, hN, triangleCompatibility_of _ _⟩
 
 section Slice
 set_option backward.isDefEq.respectTransparency false
