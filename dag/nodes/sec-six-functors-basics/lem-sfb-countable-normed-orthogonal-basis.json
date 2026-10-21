@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prepend the prescribed vector $v_0\\ne0$ to a finite or countable spanning sequence of $V$ and process the resulting sequence in order, starting with $b_0=v_0$; the one-element family $b_0$ satisfies the orthogonality formula $\\|a_0b_0\\|=|a_0|\\|b_0\\|$. Inductively, suppose the retained vectors $b_0,\\ldots,b_{n-1}$ are linearly independent and satisfy $\\|\\sum_{i<n}a_ib_i\\|=\\max_{i<n}|a_i|\\|b_i\\|$, and let $W$ be their span. If the next sequence vector $x$ lies in $W$, discard it. Otherwise [lem-sfb-finite-ultrametric-best-approximation], applied to the finite-dimensional subspace $W$ and $x$, gives $w\\in W$ with $\\|x-w\\|=\\inf_{u\\in W}\\|x-u\\|$, and [lem-sfb-ultrametric-orthogonal-extension] shows that $b_n=x-w\\ne0$ and that $b_0,\\ldots,b_n$ again satisfy the orthogonality formula; retain $b_n$, so that the new span is $W+Ex$. Every finite subfamily of the retained family lies in one stage, so the whole family is linearly independent and satisfies the orthogonality formula on every finite subfamily. Each sequence vector lies in the span of the vectors retained up to its stage, so the retained family spans $V$. It is therefore an algebraic basis; its index set is $\\{0,\\ldots,d-1\\}$ with $d\\geq1$ when finitely many vectors are retained and $\\mathbf N$ otherwise.",
+   "uses": [
+    "lem-sfb-finite-ultrametric-best-approximation",
+    "lem-sfb-ultrametric-orthogonal-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), geometric norm-coefficient projection: finite-dimensional best-approximation induction."
+   }
+  },
+  {
+   "text": "For any finitely supported coefficients, the orthogonality formula gives exactly\n$$\\left\\|\\sum_j a_jb_j\\right\\|=\\max_j |a_j|\\,\\|b_j\\|.$$ \nThis remains valid for the countable case because the support is finite and hence appears at one finite stage of the construction. The empty support gives the zero vector and maximum $0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), geometric norm-coefficient projection: orthogonal finite-support norm formula."
+   }
+  },
+  {
+   "text": "Put $q=|\\ell|_E^{-1}>1$. For every basis vector $b_j$ with $j\\ne0$, choose an integer $m_j$ with $q^{m_j}\\le\\|b_j\\|<q^{m_j+1}$ and replace $b_j$ by $\\ell^{m_j}b_j$. The replacement preserves the basis and orthogonality, while its norm lies in $[1,q)$. The vector $b_0=v_0$ is left fixed. With $c=\\min(\\|b_0\\|,1)$ and $C=\\max(\\|b_0\\|,q)$, both finite and with $c>0$, the exact formula in the preceding step yields\n$$c\\max_j|a_j|\\le\\left\\|\\sum_j a_jb_j\\right\\|\\le C\\max_j|a_j|.$$",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), geometric norm-coefficient projection: normalization by powers of the uniformizer and uniform constants."
+   }
+  },
+  {
+   "text": "The basis expansion is unique by linear independence. The exact norm formula implies each coefficient satisfies $|a_j|\\le c^{-1}\\|v\\|$. Therefore projection onto any subset of coordinates has norm at most $C/c$, and a map that sends each basis vector bijectively onto a subset of the basis has the same bound. If the subset is in bijection with the whole index set, the inverse has the analogous bound, so it is continuous as well. These estimates concern finite algebraic expansions only; no infinite series or completeness assertion is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), geometric norm-coefficient projection: continuity consequences of uniformly bounded finite-support coordinates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-finite-ultrametric-best-approximation",
+  "lem-sfb-ultrametric-orthogonal-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,7 +161,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-supported-lattice-norm-projection",
@@ -138,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-countable-normed-orthogonal-basis",
+  "worker": "stage1",
+  "summary": "Statement preserved. Added two statement-only auxiliary nodes: finite-dimensional nearest-point attainment over the discretely valued coefficient field, and the residual orthogonal-extension step. The item proof now constructs a finite or countable orthogonal algebraic basis from a spanning sequence, rescales all but the prescribed first vector into a fixed norm interval, and derives the uniform coordinate and continuity estimates. Mathlib searches found only real/complex projection and generic finite-dimensional results, so neither auxiliary is a Mathlib leaf. No completeness or infinite-series claim is introduced.",
+  "blueprint": "Main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), geometric norm-coefficient projection auxiliary. The blueprint gives no exact external source for the finite-dimensional induction (WANTED); the two new nodes make the hidden lemmas explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-566621558",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-566621558 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 4 steps, both new nodes, def-weil-l-adic-coefficient-extension, and the whole source file main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md. Its paragraph (3) does not contain this lemma: the item is an agent auxiliary already marked WANTED, so I checked the maths directly. The item statement is unchanged and true. Steps 2-4 are correct: q=|ℓ|_E^{-1}=ℓ; rescaling by ℓ^m puts norms in [1,q); c=min(‖b0‖,1) and C=max(‖b0‖,q); coefficient, projection, injective basis-map and inverse bounds are all C/c. Both new statements are true and not duplicates. Best approximation holds because norms on a finite-dimensional space over the complete, locally compact E are equivalent, so the infimum is attained and W is closed. Residual orthogonality follows from the ultrametric case split. Duplicate search with rg -L over dag/nodes found only Hahn-Banach, pivot and Cech nodes. No repair note, no SGA, not on a dropped list. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/. (1) B2/B3: lem-sfb-ultrametric-orthogonal-extension took its setting 'as in [lem-sfb-finite-ultrametric-best-approximation]' without that node in stmt_deps; its hypotheses are now written inline and cite only the definition. (2) The new best-approximation node was cited by no step, and nearest-point existence was hidden inside the extension node. The extension node now takes a nearest point w as a hypothesis and concludes b_n=x−w≠0 plus the orthogonality formula. Item step 1 now cites both nodes with the induction written out (base, inductive step, union, spanning, finite-vs-N index), and proof_deps gained the best-approximation node.; 2 file(s) fixed by the reviewer"
  }
 }
