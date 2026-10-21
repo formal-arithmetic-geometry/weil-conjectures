@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-integral-padic-local-perfect-criterion",
+ "kind": "statement",
+ "title": "Local perfect characterization for actual finite-extension valuation rings",
+ "statement": "Let l be prime, E a finite extension of Q_l whose actual valuation ring lies in Type (u+1), and T a noetherian finite-dimensional scheme in universe u on which l is invertible. For the actual datum pbcPadicCoefficientDatum l E of [def-weil-pbc-bounded-constructible-complete], an object K belongs to the three-clause bounded constructible complete category if and only if there is a finite locally closed stratification and on every stratum a pro-etale covering sieve on which the actual derived pullback of K is the completed constant realization of a bounded complex of finite-projective O_E-modules. The complexes, their two strict term bounds and their realization isomorphisms may depend on the covering member. The restriction uses the small pro-etale site of the covering scheme, canonically equivalent to its slice site, and the normalized actual completed coefficient map. This is Proposition 6.6.11 with the actual coefficient presentation.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1 and Proposition 6.6.11; actual valuation-ring and covering-scheme formulation."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-constructible-stratification",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-stratified-perfect-models"
+ ],
+ "proof": [
+  {
+   "text": "For membership implies local perfectness, take the bounded constructible residue complex, refine its finite cohomology stratifications, and choose local constant perfect residue models. The complete DVR and residue-perfect lifting give bounded finite-projective integral models. The canonical pro-etale slice equivalence and completed coefficient pullback comparison express these models on the covering schemes.",
+   "uses": [
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-stratum-completion-unit-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely the displayed finite-projective models are complete because they are finite free retracts in a bounded interval. Their finite reductions are locally finite constant. Quasi-compactness gives a finite subcover of each of the finitely many strata, yielding one interval for all reductions. Normalized local effectivity supplies the uniform constructible tower and finite-level site comparison supplies compatible etale origins. Exact local restriction detects each condition.",
+   "uses": [
+    "lem-weil-pbc-perfect-strata-uniform-reductions",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "lem-weil-pbc-perfect-strata-uniform-reductions",
+  "lem-weil-pbc-residue-lisse-perfect-lift",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; the two characterization steps in the parent proof, before scalar extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete integral pro-etale complex is bounded constructible if and only if locally on a finite stratification it is a bounded finite projective constant complex",
+   "results": "CochainComplex.isKProjective_of_projective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt; HomologicalComplex.IsStrictlySupported; HomologicalComplex.isZero_iff_isStrictlySupported_and_isStrictlySupportedOutside; CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt; HomologicalComplex.instIsSupportedOfIsStrictlySupported; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-21",
+   "verdict": "No local perfect characterization of constructible pro-etale complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*perfect|perfect.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No local perfect characterization of constructible pro-etale complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfectRingComplex",
+   "results": "loogle: unknown identifier 'DerivedCategory.IsPerfectRingComplex'",
+   "date": "2026-10-21",
+   "verdict": "No local perfect characterization of constructible pro-etale complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible derived complete pro-etale complex is locally a bounded finite projective complex over a complete discrete valuation ring",
+   "results": "8 hits, including DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, which gives a bounded representative but neither finite-projective terms nor the pro-etale characterization; remaining hits concern etale ring maps and finite residue fields.",
+   "date": "2026-10-21",
+   "verdict": "No local perfect criterion for complete constructible pro-etale complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeConstructibleScalarTransport",
+  "date": "2026-10-21",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-free-constructible-scalar-transport",
+   "place": "Steps 1 and 7: the one-coefficient local-perfect characterization, in the actual coefficient and covering-scheme universes.",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPadicLocalPerfectCriterion",
+  "file": "lean/Sheaf/Paper/IntegralPadicLocalPerfectCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralPadicLocalPerfectCriterion",
+  "statement": "theorem integralPadicLocalPerfectCriterion\n    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] [IsNoetherian T]\n    (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (hl : IsUnit (l : Γ(T, ⊤)))\n    (K : PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) :\n    PbcIsBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E) K ↔\n      ∃ s : FiniteLocallyClosedStratification T, ∀ k : Fin s.n,\n        ∃ V : Sieve (⊤_ (s.domain k).ProEt),\n          V ∈ ProEt.topology (s.domain k) (⊤_ (s.domain k).ProEt) ∧\n          ∀ (U : (s.domain k).ProEt) (f : U ⟶ ⊤_ (s.domain k).ProEt), V f →\n            ∃ (P : CochainComplex\n                (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)) ℤ)\n              (a b : ℤ),\n              P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n              (∀ q : ℤ, Module.Projective (Padic.coefficientExtensionIntegers l E) (P.X q) ∧\n                Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X q)) ∧\n              Nonempty ((pbcActualDerivedPull (U.hom ≫ s.immersion k)\n                (pbcPadicCoefficientDatum l E)).obj K ≅\n                (integralConstantDerived U.left (pbcPadicCoefficientDatum l E)).obj\n                  ((completedConstantQ _).obj P))",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261021T144030-L-38746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261021T144030-L-38746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
