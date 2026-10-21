@@ -20221,3 +20221,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:07:13Z L: superseded stage-1 delivery Q64/lem-sp-acyclic-flat-proper-coefficient-model at c6a9e716ac531fff85b5633e27fe7e77e0343fcf; current completion retained; packet archived at refs/superseded/Q64/lem-sp-acyclic-flat-proper-coefficient-model/c6a9e716ac531fff85b5633e27fe7e77e0343fcf; stale return retired.
 - 04:07 L: merged deliver/NM/lem-sbc-koszul-fibre-linear-descent (reviewer PASS; first push; new nodes: 0)
 - 04:07 L: merged deliver/Q03/det-def-sp-tate-twist-locally-free (reviewer FIX; after a return; new nodes: 3)
+- 04:07 L: merged deliver/Q22/lem-sbc-unbounded-exact-adjunction-square (reviewer PASS; first push; new nodes: 0)
