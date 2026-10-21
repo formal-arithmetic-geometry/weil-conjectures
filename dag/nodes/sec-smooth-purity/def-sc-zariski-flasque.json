@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sc-zariski-flasque",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Flasque sheaves on the Zariski site",
@@ -12,22 +12,91 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-sc-zariski-flasque.md",
   "place": "node def-sc-zariski-flasque, order 1554"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sc-zariski-site"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "TopCat.Sheaf.IsFlasque",
-   "results": [
-    "Mathlib.Topology.Sheaves.Flasque:70 (abbrev)"
-   ],
-   "date": "2026-10-08"
+   "tool": "leanfinder",
+   "query": "an abelian sheaf on a topological space is flasque when every restriction map is surjective",
+   "results": "8 hits; no direct IsFlasque declaration, related sheaf cohomology and epimorphism declarations (including CategoryTheory.Sheaf.H).",
+   "date": "2026-10-21",
+   "verdict": "supporting search; direct definition checked by source grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.IsFlasque, Presheaf.IsFlasque, Epi",
+   "results": "0 hits; loogle reports unknown identifier 'Presheaf.IsFlasque'.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFlasque|abbrev IsFlasque",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean:48 class IsFlasque; :70 abbrev IsFlasque.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flasque abelian sheaf restriction maps surjective",
+   "results": "8 hits; related restriction-surjectivity and sheaf epimorphism declarations, no direct IsFlasque hit.",
+   "date": "2026-10-21",
+   "verdict": "supporting search; direct definition checked by source grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.IsFlasque, TopCat.Sheaf.IsFlasque",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flasque",
+   "results": "No hits because the search service query was run with the wrong subdirectory prefix; corrected by the subsequent grep query.",
+   "date": "2026-10-21",
+   "verdict": "unavailable search path; corrected below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf is flasque if all restriction morphisms are epimorphisms",
+   "results": "8 related sheaf epimorphism declarations; no direct IsFlasque hit.",
+   "date": "2026-10-21",
+   "verdict": "supporting search; direct definition checked by source grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "TopCat Sheaf IsFlasque restriction morphisms epimorphisms",
+   "results": "8 related sheaf epimorphism declarations; no direct IsFlasque hit.",
+   "date": "2026-10-21",
+   "verdict": "supporting search; direct definition checked by source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFlasque|abbrev IsFlasque",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean:48 class IsFlasque; :70 abbrev IsFlasque.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "A sheaf is flasque",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean:20,47,69 documentation and declarations for flasque sheaves.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "TopCat.Sheaf.IsFlasque",
+  "file": "Mathlib/Topology/Sheaves/Flasque.lean",
+  "line": 70,
+  "how": "specializes in one line: `TopCat.Sheaf.IsFlasque F` is the presheaf predicate requiring every restriction morphism to be an epimorphism (`Mathlib/Topology/Sheaves/Flasque.lean:70`); for abelian-group-valued sheaves, epimorphisms in `AddCommGrpCat` are exactly surjective homomorphisms (`AddCommGrpCat.epi_iff_surjective`), giving the stated condition."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -55,5 +124,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sc-zariski-flasque",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Mathlib defines `TopCat.Sheaf.IsFlasque` as the presheaf condition that all restriction morphisms are epimorphisms (Flasque.lean:70, with the underlying class at :48); for abelian-group-valued sheaves this is exactly surjectivity by `AddCommGrpCat.epi_iff_surjective`. The existing def-sc-zariski-site supplies the opens/sheaf context used by the statement. No project declaration under WeilConjectures/ states the definition and no child nodes are needed.",
+  "blueprint": "Realizes blueprint node def-sc-zariski-flasque, order 1554, directly by Mathlib TopCat.Sheaf.IsFlasque."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-b109163cf",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-b109163cf (reviewer sub-agent of L); spot-checked: I read the item in full. The statement matches the master blueprint node def-sc-zariski-flasque (order 1554) verbatim, and main-20261015 (order 1907) has the same text, so no blueprint_update is needed. The delivery turns an unsplit definition into a Mathlib leaf with no new nodes. The match is TopCat.Sheaf.IsFlasque (Mathlib/Topology/Sheaves/Flasque.lean:70), an abbrev for Presheaf.IsFlasque at :47-49, which says every F.map i for i : U ⟶ V in (Opens X)ᵒᵖ is Epi. For C = AddCommGrpCat, AddCommGrpCat.epi_iff_surjective (to_additive of CommGrpCat.epi_iff_surjective, Grp/EpiMono.lean:371-372) makes this exactly the blueprint's surjectivity condition, so it is a one-line specialisation and not an agreement theorem. Edge cases U=V, U=∅ and X=∅ agree. The added stmt_dep def-sc-zariski-site is itself a Mathlib leaf (TopCat.Sheaf) and creates no cycle. The searches cover LeanSearch, LeanFinder, Loogle and grep, with one wrong-path grep honestly recorded and corrected. No DAG node duplicates the definition; def-pur-flasque-support is a different notion (Γ_Z-flasque Λ-modules on étale sites). The item is not in route-pivot-dropped, has no repair note, is still unsplit live and side-live, cites no SGA and has no tool_uses. No changes."
  }
 }
