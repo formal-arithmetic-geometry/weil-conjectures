@@ -20245,3 +20245,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/Q67/det-brown-hypotheses-small (reviewer FIX; after a return; new nodes: 4)
 - 04:08 L: returned deliver/Q79/sk-prop-sfb-cartesian-coefficients (reviewer RETURN: C5/D1 and B9. I read the whole delivery: the item, the new node, every cited statement, the repair note, the 5449-char N)
 - 04:08 L: returned deliver/Q19/lem-sfb-filtered-colimit-flat-module-sheaves (reviewer RETURN: L: independent stage-2 immutable head 8880013210d7: file-only compilation failed: overlay Sheaf.CategoryTheory.RingedSit)
+- 04:08 L: returned deliver/ND/lem-sfb-closed-support-bounded-continuity (reviewer RETURN: L: independent stage-2 immutable head b5d521be4a42: H2: the delivery adds theorem node det-lem-formal-closed-support-adj)
