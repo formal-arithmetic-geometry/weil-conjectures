@@ -212,5 +212,34 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-e77a4c266 (reviewer sub-agent of L); spot-checked: I read the item, its new node lem-sfb-poset-augmented-chain-prism and every cited statement in full. The cited statements are def-weil-pbc-module-chain-complex-homology and lem-weil-pbc-complex-ses-homology-long-exact, both Mathlib leaves. I also read Stacks 019S/019Y/0117 at their labels and blueprint main-20261015 direct-images paragraph (3). That paragraph is motivation only, so proof_origin agent and the WANTED note are correct. The item statement is unchanged and true. My own exact rational rank check of m=(1),(2),(3),(1,1),(2,1),(1,1,1),(2,2),(0,1,1),(1,1,1,1),(3,1),(2,1,1),(0,2) matches it: Boolean m gives Q only in degree s-2 (degree -1 when s=1), and every other m is acyclic. The new node is true and general, not a clause of the item and not a duplicate. It is the standard prism identity on augmented normalized strict poset chains: degree 0 gives dh0[x]=[g(x)]-[f(x)], degree -1 gives 0=0, and empty P is fine. The nearest nodes, simplicial-homotopy-free-chain-homotopy (unnormalized, no augmentation, needs a Delta[1] homotopy) and cbc-normalized-alternating (a different normalization), do not give it in one line. Its searches are recorded in all three kinds, and the bad Loogle query is honestly marked unavailable. Step 1: acyclicity of C({e}) and equality on homology for comparable maps. Step 2: u(v)_j=max(v_j,1) is a valid map T_m->T_m because m_j>=2. Step 4: the coatom deletion map S->S∪{a} is valid and {a} lies in D for s>=2. Step 5: the quotient V is identified with B_v shifted by one, without a sign; checked at n=0 and n=1. Step 6: the long exact sequence is re-indexed correctly (chain to cochain). Step 7: the induction degree is right. The result fits the parent's use with n=sum m_i. There are no SGA citations, no route departures, no tool_uses and no fixes. The inherited from.node=null is a base-era ancestry fact."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.ProductChainProperIntervalHomology",
+  "declaration": "ProductChainProperInterval.homology",
+  "declarations": [
+   "ProductChainProperInterval.ProperInterval",
+   "ProductChainProperInterval.ChainBasis",
+   "ProductChainProperInterval.Chains",
+   "ProductChainProperInterval.boundary",
+   "ProductChainProperInterval.boundary_squared",
+   "ProductChainProperInterval.complexNat",
+   "ProductChainProperInterval.augmentedDegreeEmbedding",
+   "ProductChainProperInterval.complex",
+   "ProductChainProperInterval.homology"
+  ],
+  "file": "lean/Sheaf/Combinatorics/ProductChainProperIntervalHomology.lean",
+  "statement": "theorem homology {r : ℕ} (m : Fin r → ℕ) (hr : 1 ≤ r) (hm : m ≠ 0) : ((∃ i : Fin r, 2 ≤ m i) → ∀ k : ℤ, IsZero ((complex m).homology k)) ∧ ((∀ i : Fin r, m i = 0 ∨ m i = 1) → (∀ k : ℤ, k ≠ ((Finset.univ.filter (fun i : Fin r ↦ m i = 1)).card : ℤ) - 2 → IsZero ((complex m).homology k)) ∧ Module.finrank ℚ ((complex m).homology (((Finset.univ.filter (fun i : Fin r ↦ m i = 1)).card : ℤ) - 2)) = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e65f3c367",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Clause-by-clause match: the vertex set {v ≤ m, v ≠ 0, v ≠ m} (coordinatewise order), strict chains as Fin n ↪o order embeddings with the n=0 empty chain giving Q in degree -1, alternating deletion via succAboveOrderEmb with (-1)^a (degree 0 = augmentation), extend along n ↦ n-1 giving zero below -1 and d_{-1}=0; the non-Boolean clause gives IsZero for all k∈ℤ; the Boolean clause gives IsZero for k ≠ s-2 (in ℤ) and finrank ℚ = 1. Edge cases m=(1),(0,1),(2),(1,1),(1,1,1) are consistent. The lean.statement matches the file verbatim, only lean changed versus the live node, all 9 declarations are listed, docstrings are complete with the 7-step proof, boundary_squared is a named sorry'd theorem (not hollow), no line is over 100 characters, nothing is auto-implicit, and three kinds of search are recorded. Advisory: the future Lean for the prism node lem-sfb-poset-augmented-chain-prism (claimed by NM) will overlap complex = C(T_m;Q); the non-public HomologySequence import is only for the proof. No compile, since no file was changed."
  }
 }

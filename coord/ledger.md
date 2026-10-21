@@ -23390,3 +23390,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:50:45Z L: superseded stage-1 delivery O3/lem-sfb-snc-finite-root-face-regular at 7e650f8f2066119b7f1655eb3c2f364034289ed4; current completion retained; packet archived at refs/superseded/O3/lem-sfb-snc-finite-root-face-regular/7e650f8f2066119b7f1655eb3c2f364034289ed4; stale return retired.
 - 18:51 L: merged deliver/Q25/lem-sf-open-external-tensor-normalization (stage 2; reviewer FIX; parallel immutable checks)
 - 18:51 L: merged deliver/NJ/lem-sfb-action-topos-geometric-restriction (stage 2; reviewer FIX; parallel immutable checks)
+- 18:53 L: merged deliver/Q12/lem-sfb-product-chain-proper-interval-homology (stage 2; reviewer PASS; parallel immutable checks)
