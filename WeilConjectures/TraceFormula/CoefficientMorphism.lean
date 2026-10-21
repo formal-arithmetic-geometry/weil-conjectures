@@ -21,8 +21,7 @@ tr(F_{c,m}(ψ) | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr(ψ_{m,x} | K_x)
 ```
 (`ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`, blueprint
 `thm-trf-coefficient-morphism-trace-formula`) is the coefficient-morphism variant of the
-Grothendieck–Lefschetz formula; for the structure isomorphism of a Weil object it is
-`ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`.
+Grothendieck–Lefschetz formula.
 
 -/
 

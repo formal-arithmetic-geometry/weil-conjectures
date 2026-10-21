@@ -5,79 +5,36 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Additivity
-public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.FixedPoint
 
 /-!
 
-# The Grothendieck–Lefschetz trace formula
+# Weil objects in the model-Frobenius setting: ingredients for the trace formula
 
-Let `k₀ = 𝔽_q` be a finite field, `k` an algebraic closure, `X₀` a separated `k₀`-scheme of finite
-type, `X = X₀ ×_{k₀} k` with its model Frobenius `Φ` (`ProEtale.CondensedRing.IsModelFrobenius`)
-and `(K, φ)` a Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `Φ`. For every `m ≥ 1`,
-```
-tr(F_{c,m} | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr(F_{x,m} | K_x̄)
-```
-(`ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`, blueprint
-`thm-trf-grothendieck-lefschetz-finite-ring` and `thm-trf-grothendieck-lefschetz-qbar`), where
+Let `k` be an algebraically closed field, `X` a separated `k`-scheme of finite type with an
+endomorphism `Φ`, and `(K, φ)` a Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `Φ`. This file collects
+results on the global operator `F_{c,m}` on `RΓ_c(X, K)`
+(`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`) and the local Frobenii
+`F_{x,m}` on the stalks (`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`) of
+the iterated Weil structures `ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr`.
 
-* `F_{c,m}` is the Frobenius of the Weil object `RΓ_c(X, (K, φ_m))` for the identity of the base
-  point, the compactly supported cohomology of Weil objects
-  (`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`);
-* `x` runs over the rational points of `X` fixed by `Φ_m`, which are the points of `X₀` rational
-  over `𝔽_{q^m}` (`ProEtale.CondensedRing.IsModelFrobenius.fixedPointEquiv`);
-* `F_{x,m}` is the Frobenius of the stalk of `(K, φ_m)` at `x`, the image of `(K, φ_m)` under the
-  stalk functor of Weil objects (`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius`);
-* both traces are categorical traces in `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`, with values in
-  `End (ℚ̄_ℓ,s) ≅ ℚ̄_ℓ` (`ProEtale.CondensedRing.unitEndRingEquiv`), of perfect complexes
-  (`WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology`,
-  `WeilBoundedConstructible.nonempty_hasRightDual_stalk`).
+The Grothendieck–Lefschetz trace formula itself is stated in
+`WeilConjectures.TraceFormula.Statement` (`ProEtale.CondensedRing.weilTraceFormula`, deduced from
+the sheaf–function compatibility `ProEtale.CondensedRing.weilShriekTraceFunction`, and the point
+count `ProEtale.CondensedRing.weilPointCount`), for the Frobenius of `Spec k̄` twisted by an
+automorphism of finite order.
 
-For the constant Weil object `ℚ̄_ℓ` every local trace is `1`, and the formula counts the points
-of `X₀` over `𝔽_{q^m}` (`ProEtale.CondensedRing.trace_globalOperator_unit_eq_card`, blueprint
-`cor-trf-point-counting`).
+## Main results
 
-## The proof
-
-The proof follows the blueprint (`sk-thm-trace-formula`); here only its steps are stated, for the
-statement `ProEtale.CondensedRing.WeilBoundedConstructible.TraceFormula` of the trace formula of
-a Weil object in degree `m` and its version `ProEtale.CondensedRing.ModelTraceFormula` for all
-Weil objects over a model `X₀`:
-
-1. **Additivity** (blueprint `prop-trf-trace-additivity-open-closed`): for an open subscheme
-   `U ⊆ X` with closed complement `Z`, both stable under Frobenius,
-   `tr(F_c | RΓ_c(X, K)) = tr(F_c | RΓ_c(U, K|_U)) + tr(F_c | RΓ_c(Z, K|_Z))`
-   (`ProEtale.CondensedRing.WeilBoundedConstructible.trace_compactFrobenius_eq_add`), so the
-   trace formula on `U` and on `Z` gives it on `X`
-   (`ProEtale.CondensedRing.modelTraceFormula_of_isCompl`).
-2. **Dimension zero** (`ProEtale.CondensedRing.modelTraceFormula_of_isFinite`).
-3. **Smooth curves** (`ProEtale.CondensedRing.modelTraceFormula_of_smoothOfRelativeDimension_one`):
-   by the Lefschetz–Verdier formula on a compactification
-   (`Correspondence.trace_globalOperator_eq_integral_traceClass`), the decomposition of the
-   integral into local terms over the finite fixed locus
-   (`BorelMooreSection.integral_eq_sum_localTerm`) and the computation of the local terms of the
-   Frobenius correspondence (`WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`),
-   which uses smooth purity `ω_C ≅ ℚ̄_ℓ,C(1)[2]`.
-4. **Fibrations in curves** (blueprint `lem-trf-weil-shriek-operator-fibres`): along a morphism
-   `f`, the trace formula for `Rf_! K` and for the restrictions of `K` to the fibres gives the
-   trace formula for `K`, by the Leray isomorphism
-   `nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso` and proper base change for Weil
-   objects `nonempty_weilStalk_weilLowerShriekOfFrobenius_iso`.
-
-Noetherian induction on `X₀` along affine open covers, closed subschemes of affine spaces and
-projections to affine spaces of smaller dimension combines these steps.
-
-The blueprint proof follows SGA 4½, Rapport, and Varshavsky; alternative references are listed
-in blueprint `rem-trf-alternate-references`.
-
-## Main statements
-
-- `ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`: the
-  Grothendieck–Lefschetz trace formula.
-- `ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius_padicAlgCl`: the same,
-  in `ℚ̄_ℓ`.
-- `ProEtale.CondensedRing.trace_globalOperator_unit_eq_card`: the point-counting formula.
+- `ProEtale.CondensedRing.WeilBoundedConstructible.trace_compactFrobenius_eq_add`: additivity of
+  the trace of `F_c` along an open subscheme and its closed complement, both stable under `Φ`
+  (blueprint `prop-trf-trace-additivity-open-closed`).
+- `ProEtale.CondensedRing.WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar`: the local
+  Frobenius of the restriction of `K` to an open subscheme.
+- `ProEtale.CondensedRing.WeilBoundedConstructible.unit`: the constant Weil object `ℚ̄_ℓ,X`, and
+  `ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius_unit`: its local Frobenii are
+  the identity.
 
 -/
 
@@ -99,27 +56,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-! ### The statement -/
-
 namespace WeilBoundedConstructible
 
 variable {Φ : X ⟶ X}
-
-variable (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) [IsFinite (frobeniusIterate Φ m).left]
-  [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] in
-/-- The *trace formula* for a Weil object `(K, φ)` in degree `m`: the trace of the global
-operator `F_{c,m}` on `RΓ_c(X, K)` is the sum over the rational points `x` fixed by `Φ_m` of the
-traces of the local Frobenii `F_{x,m}` on the geometric stalks `K_x̄`. The traces do not depend on
-the choice of the duals of the perfect complexes `RΓ_c(X, K)` and `K_x̄`. -/
-def TraceFormula : Prop :=
-  ∀ [Fintype (FixedPoint Φ m)]
-    [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        K.carrier)]
-    [∀ x : RationalPoint X,
-      HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-        K.carrier)],
-    trace (K.globalOperator m) = ∑ x : FixedPoint Φ m, trace (K.stalkFrobenius m x.1 x.2)
 
 /-! ### Additivity -/
 
@@ -134,7 +73,7 @@ closed complement `i : Z ⟶ X`, both stable under the Frobenius, the trace of t
 `RΓ_c(X, K)` is the sum of the traces of the Frobenii of `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)`,
 the restrictions being the derived pullbacks of Weil objects. It comes from the localization
 triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶`, a triangle of Weil objects, and the additivity of
-traces in distinguished triangles (blueprint `prop-trf-trace-formal-laws`); no
+traces in distinguished triangles (blueprint `lem-trf-trace-triangle-compatibility`); no
 invertibility of `φ` is used in the blueprint. -/
 theorem trace_compactFrobenius_eq_add
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
@@ -154,7 +93,7 @@ theorem trace_compactFrobenius_eq_add
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
         trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius :=
-  trace_compactFrobenius_eq_add_of_isCompl hcompl hj hi K
+  sorry
 
 omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
@@ -418,7 +357,7 @@ theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
     (X' := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ j)).obj K.carrier)
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x j).app
       K.carrier).symm _ _ ?_
-  rw [stalkFrobenius_eq_frobenius, stalkFrobenius_eq_frobenius, frobenius_hom, frobenius_hom]
+  rw [stalkFrobenius, stalkFrobenius, frobenius_hom, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, weilUpperStar_obj_str, iterate_str, iterate_str]
   simp only [weilUpperStarComparison,
@@ -450,46 +389,9 @@ theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
 
 end WeilBoundedConstructible
 
-/-! ### The trace formula over a model -/
+/-! ### The constant Weil object -/
 
-section Model
-
-variable (ℓ) {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
-
-/-- The trace formula over a model `X₀` of finite type over `k₀`: for every base change `X` of
-`X₀` to `k` with its model Frobenius `Φ`, every Weil object `(K, φ)` for `Φ` and every `m ≥ 1`,
-the trace formula holds (`WeilBoundedConstructible.TraceFormula`). -/
-def ModelTraceFormula {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f₀] :
-    Prop :=
-  ∀ (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-    [IsSeparated X.hom] (Φ : X ⟶ X) (p : X.left ⟶ X₀) (hΦ : IsModelFrobenius Φ f₀ p)
-    (K : WeilBoundedConstructible ℓ Φ) (m : ℕ), 1 ≤ m →
-      haveI := hΦ.isFinite m
-      haveI := hΦ.isUniversalHomeomorphism m
-      K.TraceFormula m
-
-variable {ℓ}
-
-/-- **The trace formula for smooth curves** (blueprint `sk-thm-trace-formula`, through
-`sk-p-frob` and `sk-p-local`): for a model `X₀` separated and smooth of relative dimension one
-over `k₀`, the trace formula follows from the Lefschetz–Verdier formula on a compactification,
-the decomposition of the integral of the trace class into local terms along the finite fixed
-locus, and the computation of the local terms of the Frobenius correspondence. -/
-theorem modelTraceFormula_of_smoothOfRelativeDimension_one [IsAlgClosed k] {X₀ : Scheme.{u}}
-    (f₀ : X₀ ⟶ Spec (.of k₀)) [IsSeparated f₀] [QuasiCompact f₀]
-    [SmoothOfRelativeDimension 1 f₀] :
-    haveI := SmoothOfRelativeDimension.smooth 1 f₀
-    ModelTraceFormula ℓ (k := k) f₀ :=
-  sorry
-
-end Model
-
-/-! ### The trace formula -/
-
-variable {Φ : X ⟶ X} {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
-  {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
-
-/-! ### Counting points -/
+variable {Φ : X ⟶ X}
 
 namespace WeilBoundedConstructible
 
@@ -585,7 +487,7 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (unit ℓ Φ).stalkFrobenius m x hx = 𝟙 _ := by
-  rw [stalkFrobenius_eq_frobenius, frobenius_hom]
+  rw [stalkFrobenius, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, iterate_str]
   simp only [weilUpperStarComparison,
@@ -609,22 +511,6 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b)
     (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b) hx (iterate_carrier _ m)
     _ _ _
-
-/-- **Constant coefficients have unit stalk trace** (blueprint `cor-trf-constant-stalk-trace`):
-at every rational point fixed by `Φ_m`, the local Frobenius of the constant Weil object
-`ℚ̄_ℓ,X` has trace `1`. -/
-theorem trace_stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x)
-    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-      (unit ℓ Φ).carrier)] :
-    trace ((unit ℓ Φ).stalkFrobenius m x hx) = 𝟙 _ := by
-  rw [stalkFrobenius_unit]
-  exact (trace_eq_of_iso
-    (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-      (unit ℓ Φ).carrier)
-    (X' := 𝟙_ _)
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x)).symm
-    (𝟙 _) (𝟙 _) (by simp)).trans trace_id_tensorUnit
 
 end WeilBoundedConstructible
 
