@@ -20462,3 +20462,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/Q29/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch (reviewer FIX; after a return; new nodes: 2)
 - 06:36 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
 - 06:37 L: returned deliver/Q22/lem-sfb-dc-hom-small-coefficients (reviewer RETURN: RETURN for C5/D1 and D (restated parent clause). This answers the reopened human re-split note of 2026-10-21 for the 120)
+- 06:37 L: returned deliver/Q44/det-ctf-finite-proper-localizing (reviewer RETURN: C5/D1 (unneeded new node) and a misstated citation in step 4. The statement and stmt_deps are byte-identical to the side)
