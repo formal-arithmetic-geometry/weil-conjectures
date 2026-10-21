@@ -23669,3 +23669,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:30 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 20:31 L: merged deliver/NH/lem-sfb-procyclic-scalar-cochain-evaluation (stage 2; reviewer PASS; parallel immutable checks)
 - 20:31 L: merged deliver/N9/lem-trf-point-system-roos-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 20:33 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 2b0055164) the delivery did not land: (d) user Sheaf.Paper.PerAdicNormalizedFibreComparisons (m)
