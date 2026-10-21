@@ -20008,3 +20008,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/NN/lem-sbc-completed-operations-linear-natural-exchange (reviewer FIX; after a return; new nodes: 6)
 - 03:50 L: merged deliver/NM/lem-sfb-modobj-restriction-finite-exact (reviewer PASS; first push; new nodes: 1)
 - 03:50 L: merged deliver/Q134/lem-sfb-adic-perfect-model-complete-reduction (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T03:50:58Z L: superseded stage-1 delivery NR/lem-sfb-scalar-model-immersion-extension at 3c90f427738ff90647381eaaa245188e974309b1; current completion retained; packet archived at refs/superseded/NR/lem-sfb-scalar-model-immersion-extension/3c90f427738ff90647381eaaa245188e974309b1; stale return retired.
