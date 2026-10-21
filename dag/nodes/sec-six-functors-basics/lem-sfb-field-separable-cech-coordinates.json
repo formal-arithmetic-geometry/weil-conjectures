@@ -15,11 +15,178 @@
   "def-pd-separable-closure",
   "def-sfb-lisse-coefficient-module",
   "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars",
+  "def-pc-fibre-product",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Omega=k^s$. By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega/k$ is Galois. By [lem-weil-pbc-finite-set-in-finite-galois-subextension], every finite subset lies in a finite Galois intermediate field $E$. Thus these fields form a nonempty directed set (include $k$, and apply the same assertion to finite generating sets of two fields), and their union is $\\Omega$. The finite separable stages are finite etale by [lem-kun-algebraic-separable-smooth]. Hence $k\\to\\Omega$ is ind-etale, so weakly etale by [lem-weil-pbc-ind-etale-stability]. It is faithfully flat by [def-pd-separable-closure]. Both spectra are affine and the unique point is covered, so the singleton $v$ is a covering by the affine-open criterion of [def-weil-pbc-proetale-site].",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-kun-algebraic-separable-smooth",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-pd-separable-closure",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.4 and Definition 4.1.1; Stacks fields.tex Tags 0BMG (lemma-normal-closure-inside-normal), 0BU2 (lemma-infinite-galois-limit)"
+   }
+  },
+  {
+   "text": "For a finite Galois $E/k$ inside $\\Omega$, put $Q_E=\\operatorname{Gal}(E/k)$. The algebra isomorphism in [lem-exc-finite-galois-tensor-decomposition](1), base changed along $E\\hookrightarrow\\Omega$ in its first factor, gives $\\Omega\\otimes_k E\\cong\\Omega^{Q_E}$, with $a\\otimes b\\mapsto(a\\sigma(b))_\\sigma$. Here base change and the finite product identification are direct consequences of the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]: apply a map to each coordinate and use the finitely many coordinate idempotents for its inverse. Iterating gives $\\Omega\\otimes_k E^{\\otimes_k q}\\cong\\Omega^{Q_E^q}$. Reindex by successive increments: its coordinate at $(g_1,\\ldots,g_q)$ is\n$$a_0\\otimes\\cdots\\otimes a_q\\longmapsto a_0\\,g_1(a_1)\\,(g_1g_2)(a_2)\\cdots(g_1\\cdots g_q)(a_q).$$\nFor $q=0$ this is the identity of $\\Omega$. Restriction from $E'$ to $E$ makes these maps compatible, as is seen by this formula on each pure tensor.",
+   "uses": [
+    "lem-exc-finite-galois-tensor-decomposition",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, section-finite-etale-under-galois; tensor formula of the cited node; explicit iterated base change and incremental reindexing"
+   }
+  },
+  {
+   "text": "Pass to the directed union of the fields $E$ simultaneously in all $q$ variable factors. Tensor commutes with these colimits by [lem-weil-pbc-tensor-commutes-with-colimits]; the diagonal system suffices since any finite list of stages has a common upper bound. Consequently the coordinate ring of the $(q+1)$-fold fibre product is $\\varinjlim_E\\Omega^{Q_E^q}$. The fibre product of affine spectra over $\\operatorname{Spec}k$ is the spectrum of the tensor product by [lem-weil-pbc-fibre-product-affine-spectra] (with the projections of [def-pc-fibre-product]), applied $q$ times, and the multiplication of the tensor ring is that of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Taking spectra converts this colimit into the inverse limit of the finite disjoint unions by [lem-weil-pbc-spec-colimit-limit]. Finally [lem-exc-galois-krull-finite-limit] identifies $G_k$ with $\\varprojlim_E Q_E$ as a topological group, so this is precisely $(\\operatorname{Spec}\\Omega)[G_k^q]$ in the sense of [def-sfb-profinite-test-objects]. One can use these quotients to compute that object: a continuous map from $G_k^q$ to a finite discrete set is constant on a finite cover by cylinder neighbourhoods; a common upper bound of their finitely many stages makes it factor through $Q_E^q$. Thus these finite quotients refine every finite continuous quotient, as required for the inverse-limit description.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-exc-galois-krull-finite-limit",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BU2, lemma-infinite-galois-limit; algebra.tex Tag 00DD, lemma-tensor-products-commute-with-limits; limits.tex Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit"
+   }
+  },
+  {
+   "text": "In the coordinates of steps 2–3 the vertices are $x,xg_1,xg_1g_2,\\ldots,xg_1\\cdots g_q$, where $xg$ means the map induced by $a\\mapsto g(a)$ at the first geometric vertex. Omitting vertex $0$ changes the base vertex to $xg_1$ and leaves increments $(g_2,\\ldots,g_q)$; omitting an interior vertex $i$ replaces $(g_i,g_{i+1})$ by $g_ig_{i+1}$; omitting the last drops $g_q$. Repeating a vertex inserts $1$. These formulas follow by substituting into the pure-tensor formula, so hold at every finite stage and at the limit. This fixes the convention: a descent identification from vertex 1 to vertex 0 has on a triple the equation $c(g)c(h)=c(gh)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent coordinate calculation expanding the field Cech nerve; compare Section 7.4 monodromy conventions"
+   }
+  },
+  {
+   "text": "Write $W_q$ for the $(q+1)$-fold fibre product, an object of $(\\operatorname{Spec}k)_{\\mathrm{proet}}$. By steps 2–3, $W_q=\\operatorname{Spec}\\varinjlim_E\\Omega^{Q_E^q}$, and this colimit is $LC(G_k^q,\\Omega)$: a locally constant function on $G_k^q$ factors through some $Q_E^q$ by the cylinder argument of step 3. The coefficient $A$ is totally disconnected, because distinct points are separated by complementary ultrametric balls (no completeness is used). Hence [lem-weil-pbc-condensed-field-continuous-realization], applied on $X=\\operatorname{Spec}k$, identifies the ring sheaf $R_{A,k}=p_k^*\\underline A$ [sk-def-sfb-pulled-back-coefficients] with $U\\mapsto C(|U|,A)$, naturally in $U$. By [lem-weil-pbc-locally-constant-prime-spectrum], with $\\operatorname{Spec}\\Omega$ a point, $|W_q|=G_k^q$, the component of a stage $Q_E^q$ being the image under the projection. Thus $\\Gamma(W_q,R_{A,k})=C(G_k^q,A)$ as rings, and for $q=0$ this is $C(*,A)=A$. Every face and degeneracy is a morphism of the site, so by naturality it acts by precomposition with its map of underlying spaces. By the pure-tensor formula of step 4 this is the increment map; the automorphism $\\operatorname{Spec}g_1$ of the geometric vertex in $d_0$ is the identity of the one-point space $|\\operatorname{Spec}\\Omega|$, so moving the vertex has trivial action on $A$. For the coefficient ring on $\\operatorname{Spec}\\Omega$ used in steps 6–10: [det-pe-condensed-point-coefficients], applied to the separably closed field $\\Omega$ and the condensed ring $\\underline A$, gives $\\Gamma(\\Omega[S],R_{A,\\Omega})=C(S,A)$ naturally in profinite $S$, in particular $\\Gamma(\\operatorname{Spec}\\Omega,R_{A,\\Omega})=A$; and [sk-def-sfb-pullback-from-point-comp] for $v$ is the monoidal identification $v^*R_{A,k}\\cong R_{A,\\Omega}$ of ring objects.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "det-pe-condensed-point-coefficients",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6; Bhatt–Scholze Lemma 4.2.12; blueprint geometric-point coefficient evaluation"
+   }
+  },
+  {
+   "text": "The one-point scheme $\\operatorname{Spec}\\Omega$ is w-contractible in [det-pe-wlocal-strict-contractible]: its sole point is closed, its component space is the one-point extremally disconnected profinite space, and its local ring is $\\Omega$. This field is strictly henselian under [def-weil-pbc-henselian-terminology]: its maximal ideal is zero, so the idempotent lifting condition for every finite algebra is the identity, and its residue field $\\Omega$ is separably closed. Apply [det-pe-wcb-clopen-partition] to a lisse trivializing covering from [def-sfb-lisse-coefficient-module]. A finite clopen partition of this nonempty one-point scheme has exactly one nonempty member, namely the whole scheme. The supplied arrow into one member of the covering is therefore a section $s$ of that covering arrow $u$.",
+   "uses": [
+    "det-pe-wlocal-strict-contractible",
+    "def-weil-pbc-henselian-terminology",
+    "det-pe-wcb-clopen-partition",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 2.4, w-contractibility criterion; Stacks proetale.tex Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected; blueprint det-pe-wcb-clopen-partition proof"
+   }
+  },
+  {
+   "text": "Let $u:U\\to\\operatorname{Spec}\\Omega$ be the covering member of step 6 with its section $s$. Lisseness gives an isomorphism of $R_A|_{U}$-modules $L|_U\\cong(R_A|_U)^{\\oplus n}$ on the localization at $U$ in the sense of [def-pur-localized-ringed-site]; module objects are compared with sectionwise module sheaves, with the same sections and restrictions, by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. The section $s$ is a morphism of $(\\operatorname{Spec}\\Omega)_{\\mathrm{proet}}$, since $u\\circ s=1$. By the relocalization clause of [def-pur-localized-ringed-site], restricting along $s$ carries $L|_U$ to $L|_{\\operatorname{Spec}\\Omega}$ and $R_A|_U$ to $R_A|_{\\operatorname{Spec}\\Omega}$, sectionwise the identity, and carries the isomorphism to an isomorphism. Since $\\operatorname{Spec}\\Omega$ is the final object of its own site, the localization at it is the whole site and these restrictions are $L$ and $R_A$. Finite direct sums of sheaves of modules are computed sectionwise, so restriction keeps them. Therefore $L\\cong R_{A,\\Omega}^{\\oplus n}$, including $n=0$, with no condition on $A$ beyond those in the statement.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent restriction-of-a-trivialization argument along a section of a w-contractible covering; same geometric argument as Example 7.3.5 over a field"
+   }
+  },
+  {
+   "text": "Compute maps using the sectionwise module category equivalent to internal modules by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]; the size and sheafification conventions are those of [def-weil-pbc-proetale-site]. A map $R_A^{\\oplus n}\\to R_A^{\\oplus m}$ is determined by the images of its $n$ global standard basis sections. Its image on any object sends $(a_j)_j$ to $\\sum_j a_j\\,s_j|_U$, by linearity and restriction compatibility. Conversely this formula defines a module morphism for every tuple of global sections $s_j\\in\\Gamma(\\Omega,R_A^{\\oplus m})$. Finite sums of module sheaves are also finite products, sectionwise, so step 5 at $q=0$ identifies this group with $(A^m)^n=M_{m\\times n}(A)$. Composition is matrix multiplication by the same formula. If $n=0$ there are no columns; if $m=0$ every column is zero. In either case both sides are singleton zero groups.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; elementary finite-free module calculation using the section-action equivalence"
+   }
+  },
+  {
+   "text": "For a continuous field map $\\varphi:A\\to B$, [def-sfb-continuous-map-condensed-ring-map] gives the coefficient morphism $\\varphi_*:f\\mapsto\\varphi\\circ f$ on every profinite $S$, hence the ring map $p_k^*\\varphi_*:R_{A,k}\\to R_{B,k}$ by the functoriality of [sk-def-sfb-pulled-back-coefficients]. Under the realization isomorphisms of step 5 for $A$ and for $B$, it is postcomposition $f\\mapsto\\varphi\\circ f$ on $C(|U|,-)$: both composites are ring-sheaf maps out of $p_k^*\\underline A$ whose adjoints at each profinite test object send $f\\in C(S,A)$ to $\\varphi\\circ f$ composed with the projection $|X[S]|\\to S$, and [lem-weil-pbc-condensed-field-continuous-realization] characterizes its isomorphism by these adjoint equations. So on each Cech ring $C(G_k^q,A)\\to C(G_k^q,B)$ it is $f\\mapsto\\varphi\\circ f$, and on $\\operatorname{Spec}\\Omega$ global sections it is $\\varphi:A\\to B$. It commutes with a face with increment map $d$ because $(\\varphi\\circ f)\\circ d=\\varphi\\circ(f\\circ d)$; the same applies to degeneracies.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, functoriality in topological rings; blueprint def-sfb-continuous-map-condensed-ring-map"
+   }
+  },
+  {
+   "text": "For the ordinary internal extension of scalars of [sk-def-sfb-change-of-scalars], the balanced map $R_B\\otimes_{R_A}R_A\\to R_B$ sends $b\\otimes a$ to $b\\varphi(a)$ and has inverse $b\\mapsto b\\otimes1$; the two compositions are identities by the balancing and unit relations. The same formulas on $n$ summands give $R_B\\otimes_{R_A}R_A^{\\oplus n}\\cong R_B^{\\oplus n}$ (the extension is a left adjoint and preserves finite sums). A matrix $T=(t_{ij})$ sends $1\\otimes e_j$ to $\\sum_i\\varphi(t_{ij})e_i$, hence extends to the entrywise matrix $\\varphi(T)$. On a Cech object the coefficient-unit morphism is exactly the ring map from step 9. These are sheaf tensor identities, established by the coequalizer universal property; they require no formula identifying tensor products of sections with sections of tensor products. For $n=0$ the extension preserves the zero object. No limit of Cauchy sequences, completion, or coefficient-algebraic-closure argument occurs in any step.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and the ordinary internal coequalizer definition of scalar extension; agent explicit balanced-map calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-kun-algebraic-separable-smooth",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-pd-separable-closure",
+  "def-weil-pbc-proetale-site",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-exc-galois-krull-finite-limit",
+  "def-sfb-profinite-test-objects",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "det-pe-condensed-point-coefficients",
+  "sk-def-sfb-pullback-from-point-comp",
+  "det-pe-wlocal-strict-contractible",
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wcb-clopen-partition",
+  "def-sfb-lisse-coefficient-module",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-continuous-map-condensed-ring-map",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit field Cech calculation using finite Galois tensor decomposition and the Krull limit; geometric-point evaluation follows Hemo–Richarz–Scholbach Example 3.1; local freeness uses split w-contractible covers. Lemmas 7.3.9 and 7.4.10 are context, not coefficient-general substitutes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +222,31 @@
    "results": "8 hits: InfiniteGalois.algEquivToLimit_continuous, Field.instTopologicalSpaceAbsoluteGaloisGroup, Profinite.NobelingProof.Nobeling_aux, LocallyConstant.freeOfProfinite, InfiniteGalois.profiniteGalGrp, galBasis, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, groupCohomology.Hilbert90.aux",
    "date": "2026-10-21",
    "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separable closure is a pro etale cover whose Cech nerve consists of profinite powers of the absolute Galois group and continuous coefficient sections",
+   "results": "8 hits: Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.iff_isSeparable, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.Etale.formallyEtale",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the field pro-etale Cech coordinates and continuous-coefficient module clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every locally finite free sheaf over continuous nonarchimedean field coefficients on a separably closed field is free and has Galois Cech coordinates",
+   "results": "8 hits: SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.freeFunctor_obj, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, CategoryTheory.Sheaf.freeYoneda",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the field pro-etale Cech coordinates and continuous-coefficient module clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free finite rank sheaves with continuous topological field coefficients are trivial on a separably closed geometric point",
+   "results": "8 hits: Algebra.FormallyEtale.of_isSeparable_aux, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_self, Module.isLocallyConstant_rankAtStalk, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyUnramified.of_isSeparable",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations do not state the field pro-etale Cech coordinates and continuous-coefficient module clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-normal-continuous-algcl-monodromy",
@@ -70,7 +258,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Separable-closure Cech coordinates for continuous coefficient modules",
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), open direct image for continuous coefficients: generic-field Cech coordinates used by lem-sfb-normal-continuous-algcl-monodromy before finite coefficient models",
    "via": [
     "lem-sfb-normal-continuous-algcl-monodromy",
     "lem-sfb-continuous-algcl-stratified-finite-models",
@@ -80,5 +268,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-field-separable-cech-coordinates",
+  "worker": "stage1",
+  "summary": "Q04 wrote ten proof steps with no new nodes. Reused finite Galois algebra, Krull limit, geometric-point coefficient evaluation and split-cover inputs; checked separably closed versus algebraically closed and arbitrary noncomplete coefficient fields; made face, matrix and ordinary scalar-unit formulas explicit. Statement unchanged. Maintainer reader Q04-cc FIX: step 3 cites the affine fibre-product node; step 5 computes Cech sections by continuous realization on Spec k (no unstated slice/pullback identification); step 7 restricts the slice trivialization along the section by relocalization; step 9 derives coefficient naturality from the realization adjoint equations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), open direct image for continuous coefficients: generic-field Cech coordinates used by lem-sfb-normal-continuous-algcl-monodromy before finite coefficient models",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic Existence of a separable closure; it is Galois over every intermediate field input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "why": "Generic A finite subset of a Galois extension lies in a finite Galois subextension input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-kun-algebraic-separable-smooth",
+    "why": "Generic Algebraic separable extensions are filtered colimits of finite etale algebras input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-exc-finite-galois-tensor-decomposition",
+    "why": "Generic Tensor decomposition for a finite Galois field extension input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic The tensor product of commutative algebras is their pushout input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "Generic Tensor products commute with colimits of modules input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-colimit-limit",
+    "why": "Generic Spec of a directed colimit of rings is the limit of the spectra input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-exc-galois-krull-finite-limit",
+    "why": "Generic The Krull Galois group as the limit of finite Galois groups input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "det-pe-condensed-point-coefficients",
+    "why": "Generic Coefficient sheaves on the geometric point input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic Canonical continuous-function realization for totally disconnected normed fields input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
+    "why": "Generic Prime spectrum of a locally constant function ring input for the field Cech calculation; does not replace the direct-image unit route."
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic Coverings of a w-contractible affine are refined by clopen partitions input for the field Cech calculation; does not replace the direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-kun-algebraic-separable-smooth",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-exc-galois-krull-finite-limit",
+  "det-pe-condensed-point-coefficients",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "det-pe-wcb-clopen-partition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-d77ff413b",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d77ff413b (reviewer sub-agent of L); spot-checked: I read the item, all 25 cited statements, Bhatt–Scholze Example 4.1.4 and Lemma 4.2.12, and Hemo–Richarz–Scholbach Example 3.1 (p. 6). The statement is correct. I tested it with k separably closed (G=1), q=0,1,2, m=0 or n=0, A with the trivial norm, and incomplete A such as Q̄_ℓ. I checked the cocycle c(gh)=c(g)c(h) on W_2: the edge (xg,xgh) carries a g-twist, and that twist is trivial on A. The pure-tensor increment formula and the d_0 base move also check out. There are no new nodes, I found no duplicate in the DAG, no SGA is cited, and the declared tool uses are accepted. Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-separable-cech-coordinates.json. (1) C1, step 3: identifying the affine fibre product with Spec of the tensor product had no node; I added lem-weil-pbc-fibre-product-affine-spectra (a Mathlib leaf). (2) C3/C4, step 5: it computed Γ(W_q,R_{A,k}) through point evaluation on Spec Ω plus v^*p_k^*≅p_Ω^*, which needs an uncited identification of slice restriction with pullback. I rewrote it to apply lem-weil-pbc-condensed-field-continuous-realization directly on Spec k (A is totally disconnected via clopen balls), with |W_q|=G^q from the LC prime-spectrum node; faces act by naturality. (3) C4, step 7: it trivialised the scheme pullback u^*L, but def-sfb-lisse-coefficient-module trivialises the slice restriction L|_U. I rewrote it to restrict along the section s using the relocalization clause of def-pur-localized-ringed-site and the internal/sectionwise module equivalence. Step 9 now derives coefficient naturality from the realization node's adjoint equations. proof_deps is recomputed; statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

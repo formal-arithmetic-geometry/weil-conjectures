@@ -22784,3 +22784,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/NO/lem-sfb-nested-open-regular-alteration (reviewer FIX; first push; new nodes: 1)
 - 14:16 L: merged deliver/Q05/lem-sfb-normal-generic-continuous-sections (reviewer PASS; first push; new nodes: 1)
 - 14:16 L: merged deliver/Q26/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 14:17 L: merged deliver/Q04/lem-sfb-field-separable-cech-coordinates (reviewer FIX; first push; new nodes: 0)
