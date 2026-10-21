@@ -277,7 +277,7 @@ def take(who, m, quiet=False, stage=None) -> bool:
         return False
     # node_finished is stage-aware: a stage-2 split is open until it has a Lean
     # record. Recheck even queued stage-2 items: queue.tsv can predate a landing.
-    if node_finished(m) and repair_note(m).get('state') != 'released':
+    if not listed and node_finished(m) and repair_note(m).get('state') != 'released':
         if not quiet:
             print(f"{m} is already completed for its queued stage; nothing to claim")
         return False
