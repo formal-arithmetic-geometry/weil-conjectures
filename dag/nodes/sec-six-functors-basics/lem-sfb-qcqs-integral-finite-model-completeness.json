@@ -10,16 +10,214 @@
  "stmt_deps": [
   "sk-def-sfb-constructible",
   "sk-def-sfb-module-derived-pushpull",
-  "sk-def-localizing-closure",
   "def-weil-size-convention",
   "def-weil-l-adic-coefficient-extension",
   "sk-def-pe-derived-completion",
   "def-weil-pbc-etale-origin-witness",
   "lem-sf-module-object-ordinary-coefficient-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B_T=A_T$ and $k_n=A/\\pi^n$. Use the exact section-action equivalence and its termwise derived equivalence of [lem-sfb-module-object-ringed-site-derived-comparison], with the tensor comparison [lem-pe-internal-section-tensor-comparison], to work with ordinary sheaves of $B_T$-modules. These equivalences leave underlying abelian sheaves and maps unchanged; hence they identify cohomology, scalar matrices and their finite constant local models. They preserve products by the product universal property and identify the strict quotient towers and their augmentations: tensor is identified by the cited comparison, and every quotient map is the same underlying map. Thus the completion assertion may be proved in these coordinates and transported back, including its specified unit. All sites and products are small in the universe of [def-weil-size-convention].",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models: interpret internal coefficients by the section-action equivalence"
+   }
+  },
+  {
+   "text": "We first record how to test the canonical completion map $c_K$. For an immersion $h:T\\to W$, [lem-weil-pbc-proetale-immersion-limit-preservation] says that inverse image with an identified coefficient ring is exact and preserves products; its coefficient identification is an isomorphism by [lem-sfb-alpha-iso]. For a covering object $U\\to W$, [lem-weil-proetale-weakly-etale-localization] and [lem-sfb-proetale-object-inverse-image-restriction] identify inverse image with slice restriction. Exactness follows from [det-pe-topos-functoriality-inverse-image] on abelian sheaves and [det-prop-sfb-module-pullback-exact-lifted] on modules with the identified coefficient ring. Slice restriction preserves products because module limits are sectionwise [lem-weil-pbc-module-sheaves-limits-sectionwise]. In either case apply inverse image to the strict model $D_n(M)=\\operatorname{Cone}(\\pi^n:M\\to M)$, with transition $(x,y)\\mapsto(x,\\pi y)$ and augmentation $m\\mapsto(m,0)$, of [lem-pe-principal-reduction-cone-calculus]. Exactness identifies these cones and scalar maps with those on the restricted complex. Product preservation then identifies $1-T$ and its cone in [lem-pe-roos-cone-calculus]. It also takes the augmentation $m\\mapsto(((m,0))_n,0)$ to the restricted augmentation. By [lem-pe-completion-triangle-comparison] this proves compatibility with $c_K$ itself, rather than just an abstract isomorphism of completion objects. Inverse image also commutes with finite reduction, by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; here $h^*B_W=B_T$ and $h^*(k_n)_W=(k_n)_T$.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-sfb-alpha-iso",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pe-principal-reduction-cone-calculus",
+    "lem-pe-roos-cone-calculus",
+    "lem-pe-completion-triangle-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), (1); slice restriction; strict cone/Roos calculation of the completion map"
+   }
+  },
+  {
+   "text": "For any scheme $T$, [det-pe-derived-nakayama-resolution] identifies the derived reduction of $B_T[0]$ with $(k_n)_T[0]$: the exact sequence $0\\to B_T\\xrightarrow{\\pi^n}B_T\\to(k_n)_T\\to0$ gives the levelwise quasi-isomorphism from the strict cone to this quotient. The cone projections commute with $(x,y)\\mapsto(x,\\pi y)$ and take the augmentation to the quotient projection. The transitions $(k_{n+1})_T\\to(k_n)_T$ are epimorphic: the scalar quotient is surjective and every local constant value has a scalar lift. Their ordinary inverse limit, with its actual quotient projections, is $B_T$ by [det-prop-sfb-qlbar-colimit-x-integral-limit]. Apply [det-pe-milnor-epimorphic] to this tower, reindexed by $n\\ge1$, to identify that cone with its derived inverse limit. The levelwise cone-to-quotient quasi-isomorphisms give a quasi-isomorphism of Roos complexes by [lem-pe-roos-cone-calculus], respecting the augmentations just described. Consequently $c_{B_T[0]}$ is an isomorphism. The same proof works for each finite power $B_T^r$, since finite products commute with the displayed limits, scalar quotients and $1-T$; it includes $r=0$.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "det-pe-milnor-epimorphic",
+    "lem-pe-roos-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 3.1 and 3.5 (repleteness, inverse limits and regular principal reductions); coefficient identification in blueprint integral-limit detail"
+   }
+  },
+  {
+   "text": "Let $M=B_T\\otimes_A P$ for a finitely presented scalar $A$-module $P$. By [lem-sfb-finite-constant-model-two-term-free-resolution] there is an exact sequence $0\\to B_T^a\\to B_T^b\\to M\\to0$, induced by an exact scalar sequence $0\\to A^a\\xrightarrow{u}A^b\\to P\\to0$. Thus $M[0]$ is the cone of $B_T^a[0]\\to B_T^b[0]$. By [lem-pe-completion-triangle-comparison], the three canonical completion maps form a morphism of distinguished triangles. The first two maps are isomorphisms by step 3; the long exact cohomology sequences [lem-sf-derived-homology-long-exact] show that the third is an isomorphism too (in each degree, use the five consecutive terms around $H^q(M)$). This proves completeness for each finite constant scalar model, including torsion models and the zero module. For a sheaf merely having such models on a pro-étale cover, step 2 identifies its restricted completion maps with these maps, and [lem-zl-condensed-cover-restriction-conservative] shows its completion map is an isomorphism.",
+   "uses": [
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "lem-pe-completion-triangle-comparison",
+    "lem-sf-derived-homology-long-exact",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models and locality; completion closure from Bhatt--Scholze Sections 3.5 and 6.5"
+   }
+  },
+  {
+   "text": "Let $M$ be any constructible $B_V$-module in the finite constant scalar-model sense [sk-def-sfb-constructible]. Apply [lem-fix-constructible-open-closed-refinement] to its finite constructible locally closed stratification. It gives a finite binary tree of qcqs subschemes, each internal vertex split into a quasi-compact open and its closed complement, and an actual morphism from every nonempty leaf to one original stratum. Write $t:T\\to S_\\alpha$ for this morphism. The leaf restriction $M|_T$, an iterated inverse image along the branch immersions, is isomorphic to $t^*(M|_{S_\\alpha})$ by the composition isomorphisms $(g\\circ f)^{-1}\\cong f^{-1}g^{-1}$ of [det-pe-topos-functoriality-inverse-image] (5), since the branch composite equals $s_\\alpha\\circ t$; and for a trivializing pro-étale cover $\\{U_i\\to S_\\alpha\\}$ the base change $\\{U_i\\times_{S_\\alpha}T\\to T\\}$ is a pro-étale cover by clause (1) of that node. A finite constant model pulls back to a finite constant model: base-change the trivializing cover and its finite scalar presentation, using the coefficient isomorphism [lem-sfb-alpha-iso] and the tensor pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The pulled-back presentation is a cokernel presentation with the same constant scalar matrix. Thus the leaf restrictions of $M$ have the local models to which step 4 applies. Empty leaves have the zero module category and zero completion map. No ordering of the original strata by an open-stratum argument is assumed.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-fix-constructible-open-closed-refinement",
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Strata: replace an open-stratum induction by the qcqs open/closed refinement tree"
+   }
+  },
+  {
+   "text": "For each vertex $T$ of the tree of step 5 consider the cone $C_T$ of $c_{M|_T[0]}$. Step 2 identifies its restrictions to the two children with their corresponding cones; inverse image is exact, so it also identifies their cohomology. At a leaf the cone is zero by steps 4--5. Suppose the cones at both children of a vertex vanish. Each sheaf $H^q(C_T)$ then has zero restrictions to the complementary open and closed children. Their open immersion is quasi-compact by the refinement theorem, so [lem-exc-open-closed-detection] gives $H^q(C_T)=0$ for every $q$. Hence $C_T=0$ in the ordinary derived category. Finite upward induction reaches $V$, proving that every such constructible sheaf $M[0]$ is complete. This uses no Noetherian hypothesis on the space or on its structure sheaf.",
+   "uses": [
+    "lem-exc-open-closed-detection",
+    "lem-fix-constructible-open-closed-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA, (1), with elementary finite induction using the open/closed detection lemma"
+   }
+  },
+  {
+   "text": "Choose $r\\le s$ with $H^q(J)=0$ outside $[r,s]$. Each nonzero cohomology sheaf is constructible by [sk-def-sfb-constructible], hence complete by step 6. Use the successive-truncation triangles [lem-weil-pbc-truncation-triangle]. The initial truncation $\\tau_{\\le r-1}J$ is zero. Inductively the triangle with vertices $\\tau_{\\le q-1}J$, $\\tau_{\\le q}J$, and $H^q(J)[-q]$ has complete first and third vertices: shifts preserve completeness and the completion maps form a morphism of triangles by [lem-pe-completion-triangle-comparison]. The same long-exact-sequence argument as step 4 gives completeness of the middle vertex. At $q=s$, $\\tau_{\\le s}J\\simeq J$. Thus precisely the strict-tower completion unit of the statement is an isomorphism; no auxiliary choice of an isomorphism to a limit has replaced it.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 3.5 and 6.5: completion triangles and bounded cohomological dévissage"
+   }
+  },
+  {
+   "text": "Fix $n\\ge1$. The ring $k_n$ is finite by [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients]. For a local model $M=B_T\\otimes_A P$, use the scalar resolution $0\\to A^a\\xrightarrow{u}A^b\\to P\\to0$ from step 4. By the K-flat calculation in [lem-pur-derived-change-of-rings], its derived reduction is $[(k_n)_T^a\\xrightarrow{\\bar u}(k_n)_T^b]$ in degrees $[-1,0]$. The finite-discrete equivalence [lem-sf-module-object-ordinary-coefficient-equivalence] identifies these terms and their maps with ordinary constant-$k_n$ module sheaves. The constant module functor is exact by [def-sfb-site-derived-constant-module-functor], so the two cohomology sheaves are the constant sheaves of $\\ker(\\bar u:k_n^a\\to k_n^b)$ and $\\operatorname{coker}\\bar u$. These scalar modules are finite, being a subset and a quotient of finite sets. They are finitely presented over $k_n$: choose finitely many generators from all their elements, and finitely many relations from the finite kernel of the resulting map from a finite free $k_n$-module. Thus this computation supplies both the ordinary finite-stalk local models and the finite constant scalar local models for the reductions, with cohomology only in $[-1,0]$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models: reduce the actual scalar matrix, then take its finite kernel and cokernel"
+   }
+  },
+  {
+   "text": "For any constructible integral sheaf $M$, restrict $M\\otimes^L_{B_V}(k_n)_V$ to its original finite stratification and then to the trivializing pro-étale covers. The reduction/restriction compatibility from step 2 gives exactly the two-term complexes of step 8. Exact inverse image commutes with cohomology. Therefore every restricted cohomology sheaf is locally constant with finite $k_n$-values, so is constructible by [def-weil-proetale-constructible-sheaf]; it also has the finite scalar-model meaning of [sk-def-sfb-constructible], since the scalar modules in step 8 are finitely presented. The cover conservativity of [lem-zl-condensed-cover-restriction-conservative] and the same finite-tree detection as step 6 give vanishing outside $[-1,0]$ globally. Consequently $M\\otimes^L(k_n)_V$ is bounded constructible in ordinary finite-coefficient coordinates, and the finite-discrete equivalence of [lem-sf-module-object-ordinary-coefficient-equivalence] gives the same assertion for the internal reduction.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "sk-def-sfb-constructible",
+    "lem-zl-condensed-cover-restriction-conservative",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Locality and strata, applied to finite quotient cohomology"
+   }
+  },
+  {
+   "text": "Apply the exact triangulated functor $-\\otimes^L_{B_V}(k_n)_V$ of [lem-pur-derived-change-of-rings] to the finite sequence of truncation triangles used in step 7. Its graded vertices are $(H^q(J)\\otimes^L(k_n)_V)[-q]$, bounded constructible by step 9. The finite-discrete equivalence [lem-sf-module-object-ordinary-coefficient-equivalence] preserves shifts and distinguished triangles. In ordinary finite-coefficient coordinates, [lem-weil-proetale-dbc-triangulated] therefore proves by induction that $J_n$ is bounded constructible. The bound can be taken to be $[r-1,s]$: each graded vertex has cohomology only in $[q-1,q]$, and exactness of the cohomology sequences [lem-sf-derived-homology-long-exact] preserves their common containing interval under extensions. In particular the bound is independent of $n$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.3; bounded cohomological dévissage after finite reduction; Stacks Tags 09B5 and 09AL"
+   }
+  },
+  {
+   "text": "The finite discrete ring $k_n$ is Noetherian: any ascending chain of its ideals stabilizes because it is a chain of subsets of a finite set. Apply [sk-thm-pe-constructible-comparison] on the qcqs scheme $V$ to the ordinary bounded constructible reduction from step 10. Its derived equivalence gives $L_n\\in D^b_c(V_{\\mathrm{ét}},k_n)$ and an isomorphism $\\alpha_n:\\nu_V^*L_n\\xrightarrow{\\sim}J_n$ in ordinary finite-coefficient coordinates. Retain this pair, which is exactly the étale-origin witness of [def-weil-pbc-etale-origin-witness]; boundedness implies membership in $D^+$. The coefficient equivalence used here is precisely [lem-sf-module-object-ordinary-coefficient-equivalence]. Steps 7 and 10--11 give every asserted clause for arbitrary $n\\ge1$. The hypotheses throughout were finite scalar models, a finite constructible stratification and qcqs for its refinement; no geometric condition involving $\\ell$ was used.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AI (constructible comparison) and 09AL (lemma-compare-constructible-derived)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-weil-size-convention",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sfb-alpha-iso",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-pe-roos-cone-calculus",
+  "lem-pe-completion-triangle-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-pe-derived-nakayama-resolution",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-pe-milnor-epimorphic",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "sk-def-sfb-constructible",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-exc-open-closed-detection",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-proetale-dbc-triangulated",
+  "sk-thm-pe-constructible-comparison",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 3.5, 6.3 and 6.5--6.6; qcqs finite-scalar-model argument assembled from the cited DAG statements, not an application of a Noetherian integral criterion. Compare Hemo--Richarz--Scholbach Proposition 7.6 and Theorem 7.7."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +253,31 @@
    "results": "[\"BDeRhamPlus\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"instCommRingBDeRhamPlus\", \"AdicCompletion\", \"IsAdicComplete\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"]",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary algebraic completion, generic triangulated categories, scheme morphisms or scalar restriction, not this pro-etale finite-model coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complexes of constructible proetale modules with finite constant integral adic models are derived complete and have classical finite reductions",
+   "results": "[\"BDeRhamPlus\", \"IsAdicComplete\", \"IsAdicComplete.toIsPrecomplete\", \"AdicCompletion.map_exact\", \"instCommRingBDeRhamPlus\", \"isAdicComplete_iff\", \"AdicCompletion\", \"IsPrecomplete\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completion, abstract derived-category support, and profinite limits do not state completeness and classical finite reductions for constructible pro-etale integral scalar models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible integral proetale complexes are reconstructed as the derived limit of their finite quotient reductions",
+   "results": "[\"ProfiniteGrp.isIso_toLimit\", \"ProfiniteGrp.toLimit_fun\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"Profinite.asLimitConeIso\", \"Profinite.lim\", \"Profinite.isoAsLimitConeLift\", \"Profinite.asLimit\", \"ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completion, abstract derived-category support, and profinite limits do not state completeness and classical finite reductions for constructible pro-etale integral scalar models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded complex whose cohomology is locally on a finite stratification a finite presentation by constant matrices over the ring of integers is derived pi complete",
+   "results": "[\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"CochainComplex.isKProjective_of_projective\", \"DerivedCategory.left_fac_of_isStrictlyGE\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completion, abstract derived-category support, and profinite limits do not state completeness and classical finite reductions for constructible pro-etale integral scalar models"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-constructible-closed-base-change",
@@ -78,5 +297,189 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-integral-finite-model-completeness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eleven-step proof in the ordinary ambient category: preserve the actual completion unit under slice/immersion restriction; complete finite free modules, finite scalar resolutions, constructible sheaves by qcqs open/closed refinement, and bounded complexes by truncations. Reduce scalar matrices to obtain finite constructible local models and apply bounded étale comparison. No Noetherian geometric criterion is used. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the integral-coefficient case of the closed-complement proper-base-change input in det-sf-comp-coherence-refinement (2), used by det-sf-comp-coherence-cocycle, Refinement isomorphisms. This is the completeness/finite-reduction subargument introduced by lem-sfb-qcqs-proper-constructible-closed-base-change, without changing the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic Module-object and ringed-site derived internal Hom agree: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic Relative tensor and K-flatness under the internal-to-sectionwise module equivalence: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic Size convention: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic The geometric morphism attached to a morphism of schemes: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic Lifts of exact functors to module objects are exact: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic Pro-étale inverse image along a site object is slice restriction: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic Limits of sheaves of modules exist and are computed sectionwise: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pe-principal-reduction-cone-calculus",
+    "why": "Generic Strict principal reduction cones and their compatible cone comparisons: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Generic Roos fibres preserve cones, shifts and levelwise quasi-isomorphisms: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Generic Exact completion functor and its canonical triangle comparison: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Generic The two-term resolution of the finite coefficient sheaves: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic $\\mathcal O_{E,X}$ is the limit of its finite levels: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "Generic Towers with epimorphic transitions have no derived limit terms: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "why": "Generic Finite scalar local models have two-term finite-free sheaf resolutions: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic Joint conservativity of pro-etale restriction for condensed coefficient complexes: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic Local models and constructible sheaves: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic Finite open–closed refinement through constructible strata: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic Detection by the open and the closed restriction: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic Finite quotients of a discrete valuation ring with finite residue field: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic Finite discrete condensed coefficients and ordinary module sheaves: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "def-sfb-site-derived-constant-module-functor",
+    "why": "Generic Exact constant realization on derived module categories: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "def-weil-proetale-constructible-sheaf",
+    "why": "Generic Constructible sheaf of modules on the pro-etale site: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Generic Bounded constructible pro-etale complexes form a triangulated subcategory: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic Constructible comparison: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-etale-origin-witness",
+    "why": "Generic Explicit etale-origin witness: used only for its stated coefficient, restriction, completion, finite-model or derived-category operation; the compactification-coherence unit has no such foundational lemma and its route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-weil-size-convention",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sfb-alpha-iso",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-pe-roos-cone-calculus",
+  "lem-pe-completion-triangle-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-pe-derived-nakayama-resolution",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-pe-milnor-epimorphic",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "sk-def-sfb-constructible",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-exc-open-closed-detection",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-proetale-dbc-triangulated",
+  "sk-thm-pe-constructible-comparison",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-694f45417",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-694f45417 (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps against the statements of all 33 cited nodes. The delivery has no new nodes, the statement is unchanged, and it drops the unused stmt_dep sk-def-localizing-closure. The item is still unsplit on live and side-live, is in no dropped list and has no repair note. There is no SGA and no cycle. Steps 1-2: an exact, product-preserving restriction along immersions (immersion-limit-preservation with alpha-iso) and along slices (sectionwise limits) carries the strict cone/Roos model and its augmentation (((m,0))_n,0) to the same model on the restriction. completion-triangle-comparison then makes this compatibility hold for c_K itself, so it is a real argument and not an E5 'transport'. Step 3: c_{B_T[0]} is an isomorphism by derived-nakayama-resolution, qlbar-colimit-x-integral-limit(3) (B = lim k_n), Milnor-epimorphic and Roos invariance under levelwise quasi-isomorphisms. I checked that the cone projection commutes with the transitions and the augmentation. Step 4: two-term free resolutions handle torsion P (tested A/pi^a); a triangle morphism, the five lemma and cover conservativity finish it. Steps 5-6: the qcqs refinement tree (quasi-compact open children, leaf-to-stratum morphisms) and a stated finite upward induction with open/closed detection on each H^q of the cone. Step 7: truncation triangles. Steps 8-10: the K-flat reduction gives [k_n^a -> k_n^b], with finite constant ker and coker in [-1,0], constructible in both senses; dbc-triangulated holds for any scheme and gives the bound [r-1,s]. Step 11: sk-thm-pe-constructible-comparison (qcqs, discrete Noetherian k_n) supplies the retained pair (L_n, alpha_n), and Stacks 09AL is checked. Nothing uses ell invertible or Noetherianity, so the full scope is kept, and the parent closed-base-change steps 2-3 get exactly completeness plus an etale-origin L_1. Duplicates: fix-constructible-tensor-completion assumes ell invertible; the integral criteria and adic-stratum-completion-unit are Noetherian; residue-class-triangle-closure is only the 2-out-of-3 closure. None of them is the item. All off-route uses are declared in tool_uses and I accept them as generic tools. FIX (C1/C3): step 5 pulled back the trivializing cover and identified the iterated leaf restriction with t^*(M|_{S_alpha}) without a citation. I added det-pe-topos-functoriality-inverse-image (1) and (5) to its text and uses; proof_deps is unchanged. Advisory: 09AI is a section label.; 1 file(s) fixed by the reviewer"
  }
 }
