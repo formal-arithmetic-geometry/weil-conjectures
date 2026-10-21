@@ -20148,3 +20148,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: merged deliver/Q109/lem-sfb-open-module-restriction-identities (reviewer PASS; first push; new nodes: 0)
 - 04:02 L: merged deliver/NN/lem-pur-adic-line-system-base-change (reviewer FIX; first push; new nodes: 0)
 - 04:02 L: merged deliver/NR/lem-sbc-reflected-compositor-unit-normalization (reviewer PASS; first push; new nodes: 0)
+- 04:02 L: merged deliver/Q137/lem-sfb-stratified-local-cohomological-bounds (reviewer FIX; first push; new nodes: 0)

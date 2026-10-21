@@ -17,9 +17,89 @@
   "def-weil-proetale-inverse-image",
   "def-weil-pbc-ringed-derived-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the given finite affine covering as $X=\\bigcup_{t=1}^N X_t$, with each coordinate ring Noetherian. Each $|X_t|$ is Noetherian by [lem-sc-affine-noetherian-underlying-space], so every subset of it is quasi-compact by [lem-sfb-noetherian-space-compact-subsets]. An immersion identifies its source homeomorphically with its image, by the closed/open factorization in [def-weil-closed-immersion]. Hence $|S_\\alpha|\\cap |X_t|$ is quasi-compact. Restrict an arbitrary open cover of $S_\\alpha$ to these finitely many intersections, choose a finite subcover on each, and take their union. This proves each $S_\\alpha$ quasi-compact. The same argument with $S_\\alpha$ replaced by $X$ proves $X$ quasi-compact in the sense of [def-weil-pbc-quasi-compact-scheme]. The given affine cover also makes $X$ locally Noetherian by [pqf-def-locnoeth]; thus $X$ satisfies the locally-Noetherian and quasi-compact hypotheses of the detection lemma used below.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-closed-immersion",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA (lemma-Noetherian-quasi-compact), combined with properties.tex Tag 01OZ (lemma-Noetherian-topology), and the given finite affine cover"
+   }
+  },
+  {
+   "text": "For each $\\alpha$, take an affine open cover of the scheme $S_\\alpha$ and choose a finite subcover $S_\\alpha=\\bigcup_{r=1}^{m_\\alpha}V_{\\alpha r}$ using step 1. Over each affine $V_{\\alpha r}$ the covering condition of [sk-def-pe-site] supplies finitely many indices $j$ and affine opens $W_{\\alpha rk}\\subset U_{\\alpha,j(\\alpha,r,k)}\\times_{S_\\alpha}V_{\\alpha r}$ mapping onto $V_{\\alpha r}$; its affine-target refinement clause says this is a pro-etale covering of $V_{\\alpha r}$. The displayed fibre product is the inverse-image open subscheme of the covering member, so each $W_{\\alpha rk}$ is also an affine, hence quasi-compact, open subscheme of that original member. Zariski covers are pro-etale covers by [sk-def-pe-site]. Covering transitivity, axiom (ii) of [def-weil-pbc-sites-and-cohomology], therefore makes all $W_{\\alpha rk}\\to S_\\alpha$ a covering. There are finitely many selected opens on each of finitely many strata. Empty strata require no selected opens.",
+   "uses": [
+    "sk-def-pe-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0989 (definition-fpqc-covering), finite affine refinement; ordinary Zariski covers and the site covering-transitivity axiom"
+   }
+  },
+  {
+   "text": "Every restriction here uses the actual inverse-image ring, with no extension to a different ring. The inverse-image functors of [def-weil-proetale-inverse-image] are inverse images of the associated geometric morphisms. By [lem-trf-geometric-inverse-image-exact] they are exact also on modules over the inverse-image ring. Applied termwise to a representative of $K$, [lem-weil-pbc-exact-functor-complex-cohomology] identifies their cohomology with inverse image of $H^q(K)$. This calculation is valid for an unbounded complex because kernels and images in a fixed degree use only its three adjacent terms. Iterated inverse image agrees with inverse image along the composite, by the composition clause (4) of [def-weil-pbc-sites-and-cohomology]: the direct images are successive precompositions by base change, and their left adjoints are uniquely isomorphic. Thus restriction of $K|_{U_{\\alpha j}}$ to a selected $W_{\\alpha rk}\\subset U_{\\alpha j}$ is $K|_{W_{\\alpha rk}}$, and it has zero cohomology outside the same original interval $[a_{\\alpha j},b_{\\alpha j}]$. This is also the exact termwise restriction convention of [def-weil-pbc-ringed-derived-restriction].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), transported inverse-image coefficients; homology.tex Tag 010N (lemma-exact-functor) and derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Let $T$ be the finite set of selected triples $(\\alpha,r,k)$, retaining the label $j(\\alpha,r,k)$ of the original covering member. If $T\\ne\\varnothing$, put $a=\\min_{T}a_{\\alpha,j(\\alpha,r,k)}$ and $b=\\max_{T}b_{\\alpha,j(\\alpha,r,k)}$. Since every selected lower bound is at most its upper bound, $a\\le b$. If $q<a$, then $q<a_{\\alpha,j(\\alpha,r,k)}$ for every selected triple; if $q>b$, then $q>b_{\\alpha,j(\\alpha,r,k)}$ for every triple. Step 3 therefore gives $H^q(K|_{W_{\\alpha rk}})=0$ whenever $q\\notin[a,b]$. If $T=\\varnothing$, put $a=b=0$; the same vanishing assertions on selected opens hold vacuously.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, reverse-implication finite-stratification locality argument; elementary finite minimum/maximum bookkeeping made explicit"
+   }
+  },
+  {
+   "text": "Fix $q\\notin[a,b]$ and let $F$ be the underlying abelian sheaf of $H^q(K)$. Step 3 identifies its inverse image to every selected $W_{\\alpha rk}$ with the underlying sheaf of $H^q(K|_{W_{\\alpha rk}})$, which is zero by step 4. Apply [lem-weil-pbc-noetherian-stratum-detection] to the original finite stratification and to the coverings of its strata constructed in step 2. Its Noetherian hypothesis is verified in step 1, and it imposes no constancy condition on the ring sheaf. It gives $F=0$, hence $H^q(K)=0$: a module sheaf whose underlying abelian sheaf is zero has only the zero module structure. This also treats the empty selected family: the lemma applies to the empty coverings of the necessarily empty strata, so it gives vanishing in every degree. Thus the stated interval works globally, and no flatness, completeness, constructibility or dimension bound was used.",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open) and 09AB (lemma-thickening), through the cited finite-stratum detection lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-proetale-inverse-image",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "pqf-def-locnoeth",
+  "sk-def-pe-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 reverse implication, expanded finite-cover argument using Stacks Tags 04ZA, 0989, 04JC, 010N, 09AH and the existing finite-stratum detection lemma. Lemma 6.5.3 is contextual only, not a theorem about arbitrary ring sheaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +135,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"CochainComplex.isZero_of_isGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (i < n) CochainComplex.isZero_of_isGE._auto_1 →\\n    ∀ [K.IsGE n] [inst_3 : HomologicalComplex.HasHomology K i],\\n      CategoryTheory.Li\", \"doc\": \"For a cochain complex $ K $ bounded below at an integer $ n $, the homology at every index $ i < n $ is zero. Specifically, if $ K $ satisfies the boundedness condition $ \\\\text{IsGE}(n) $, then for al\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfSize.{v₂, v} (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}",
    "date": "2026-10-21",
    "verdict": "no match: the printed hits give ordinary module completion, abstract triangulated categories, constant sheaves, or cohomological bounds; none states this ringed pro-étale comparison and locality assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*bound|bound.*stratif|proetale.*homology",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: read returned signatures; abstract cohomology bounds and bounded representatives do not assert finite-stratified pro-etale locality for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local boundedness of a derived sheaf complex on finite strata implies global bounded cohomology",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, LocallyBoundedMapClass.mk, HomologicalComplex.instHasFiniteLimits, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁",
+   "date": "2026-10-21",
+   "verdict": "no match: read returned signatures; abstract cohomology bounds and bounded representatives do not assert finite-stratified pro-etale locality for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsBounded\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: read returned signatures; abstract cohomology bounds and bounded representatives do not assert finite-stratified pro-etale locality for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves is cohomologically bounded if it has bounded restrictions to pro etale covers of finitely many strata of a Noetherian scheme",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.IsGE",
+   "date": "2026-10-21",
+   "verdict": "no match: read returned signatures; abstract cohomology bounds and bounded representatives do not assert finite-stratified pro-etale locality for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quasi compact covering refinements and conservative exact restriction functors give a uniform interval of vanishing homology",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.isLE_iff, CochainComplex.isGE_iff, CochainComplex.exactAt_of_isGE, CochainComplex.exactAt_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "no match: read returned signatures; abstract cohomology bounds and bounded representatives do not assert finite-stratified pro-etale locality for an arbitrary ring sheaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-stratified-perfect",
@@ -78,5 +193,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-stratified-local-cohomological-bounds",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied the finite affine refinement, uniform interval and exact-cohomology descent argument. Reused the existing affine Noetherian topology, compact-subset, pro-etale-site and finite-stratum detection nodes; created no new nodes. Distinguished the arbitrary-ring statement from the narrower completed-coefficient context of Bhatt-Scholze Lemma 6.5.3. Checked empty strata/covers, infinite original covers, and unbounded complexes.",
+  "blueprint": "det-lem-integral-models-stacks.proof.md: cohomological boundedness in the comparison with the Stacks integral category; through lem-sfb-integral-cohomological-adic-criterion and lem-sfb-adic-stratified-perfect, make explicit the finite stratified local-bounds globalization used in the integral criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exact inverse-image theorem for arbitrary ring sheaves; the integral-models unit needs this coefficient-independent tool for restricting local bounds."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic finite-stratum zero-detection theorem, applied to individual cohomology sheaves; this completes the unit local-to-global argument without replacing its integral-criterion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-noetherian-stratum-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-e94080c12",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e94080c12 (reviewer sub-agent of L); spot-checked: Read the item statement (unchanged) and all 5 new steps, plus every cited node's statement. The statement is true: finitely many affine W inside the members give the global interval [min a, max b], and empty X gives [0,0]. It is not a duplicate: lem-sfb-tor-interval-local-detection concerns Tor amplitude, and the detection lemma's own D-clause gives no uniform interval. There are no new nodes and no cycle. Bhatt–Scholze 6.5.3 and the reverse direction of 6.6.11 (p.49) and Stacks 04ZA were read; the proof is agent-written, as recorded. Step 1: affine Noetherian space, compact subsets and the immersion homeomorphism make the strata and X quasi-compact, and the affine cover makes X locally Noetherian. Step 2: sk-def-pe-site's affine refinement plus Zariski covers plus axiom (ii) give a finite covering {W→S_α}, with each W open in a member. Step 3: exactness of inverse image on modules with transported scalars, and an exact functor commutes with cohomology; restricting to W keeps the member's interval. Step 4: elementary min/max. Step 5: the detection lemma is applied to the underlying abelian sheaf of H^q(K), with its hypotheses verified. FIX adds two missing citations (B3): def-weil-pbc-quasi-compact-scheme in step 1, and clause (4) of def-weil-pbc-sites-and-cohomology for the composite inverse image in step 3. Batch-5 check: lem-trf-geometric-inverse-image-exact is the generic Stacks 04JC exactness, not part of the trace formula or Poincaré duality. With the assumed nodes from coord/assumed.tsv treated as leaves, it is already in the batch-5 closure without this edge (difference empty), so it is accepted. tool_uses (trf exactness and pbc stratum detection) are accepted as generic tools.; 1 file(s) fixed by the reviewer"
  }
 }
