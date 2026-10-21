@@ -14,69 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Write $R=A_{\\mathcal C}$, let $O$ be the constant presheaf of commutative rings with value $A$, so that $\\theta:O\\to O^\\#=R$ is its sheafification as a presheaf of rings [def-weil-pbc-constant-sheaf], and let $P$ be $O$ regarded as a presheaf of $O$-modules (its underlying presheaf of abelian groups is the constant presheaf with value the additive group of $A$). Multiplication $u:P\\to P$, $x\\mapsto ax$, has zero sectionwise kernel by the assumed injectivity on $A$. Abelian sheafification $\\eta:P\\to P^\\#$ preserves finite limits, hence kernels and the zero object, by [lem-weil-pbc-sheafification-exact]; therefore $u^\\#:P^\\#\\to P^\\#$ has zero kernel. By [lem-pc-sites-module-sheafification-interface] the abelian sheaf $P^\\#$ carries a unique $R$-module structure with $\\theta(o)\\eta(x)=\\eta(ox)$, and $O$-linear maps from $P$ to $R$-modules extend uniquely to $R$-linear maps from $P^\\#$. Identify $P^\\#$ with $R$: the $O$-linear map $\\theta:P\\to R$ extends to an $R$-linear $\\bar\\theta:P^\\#\\to R$, and $\\psi:R\\to P^\\#$, $r\\mapsto r\\,\\eta(1)$, is $R$-linear. Then $\\bar\\theta\\psi(r)=r\\,\\bar\\theta(\\eta(1))=r\\theta(1)=r$; and $\\psi\\bar\\theta$ is an $R$-linear endomorphism of $P^\\#$ with $\\psi\\bar\\theta\\eta(o)=\\theta(o)\\eta(1)=\\eta(o)$, so it is the identity by the uniqueness of extensions. Under $\\bar\\theta$, $u^\\#$ is multiplication by the constant section $\\theta(a)$: both $u^\\#$ and $x\\mapsto\\theta(a)x$ are additive endomorphisms of $P^\\#$ restricting along $\\eta$ to $\\eta(ox)\\mapsto\\eta(aox)=\\theta(a)\\eta(ox)$, and the extension along $\\eta$ is unique [lem-weil-pbc-sheafification-exact]. Commutativity of $A$ makes this endomorphism $R$-linear. Its kernel, computed on underlying abelian sheaves, is zero, so it is monic in $\\operatorname{Mod}(R)$: cancellation holds on underlying abelian sheaves, hence on module morphisms.",
+   "text": "Let B=A[1/a]. Regularity of a implies regularity of every power, so A→B is injective by [lem-pc-affine-localization-injective]. The associated map of constant presheaves of commutative rings is monic. The assumed HasSheafify J CommRingCat means precisely that its sheafification preserves finite limits, hence monomorphisms. Evaluation and forgetting rings preserve pullbacks, so the resulting map of ring sheaves is injective on each object. Naturality of the sheafification unit identifies the image of the constant section η(a) with the image in the constant B-sheaf of a/1, which is a unit. Cancellation after this injection proves that multiplication by η(a) is injective on the constant A-sheaf. This uses the given left exact ring sheafification directly, without identifying it with abelian sheafification.",
    "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "def-weil-pbc-constant-sheaf",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-pc-affine-localization-injective",
+    "def-weil-pbc-constant-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI, lemma-sheafification-exact, via its underlying abelian sheafification proof; Tag 03CY, lemma-sheafification-presheaf-modules, extended scalar action and universal property"
-   }
+   "elementary": true
   },
   {
-   "text": "Construct the tensor-unit isomorphism $\\lambda:R\\otimes_R M\\xrightarrow{\\sim}M$ using [def-pur-sheaf-tensor-product]. On each object $U$, the balanced map $R(U)\\otimes_{R(U)}M(U)\\to M(U)$ is $r\\otimes m\\mapsto rm$, with inverse $m\\mapsto1\\otimes m$. The first composite is $m\\mapsto m$; the second is $r\\otimes m\\mapsto1\\otimes rm=r\\otimes m$, by the balancing relation, and hence is the identity on all tensors. Both maps commute with restrictions because restrictions preserve $1$ and the module action. Thus the presheaf tensor is isomorphic to the underlying presheaf of the sheaf $M$; sheafifying gives the displayed isomorphism. In particular, this calculation does not assert that an arbitrary section of a sheaf tensor is globally a pure tensor.",
+   "text": "Write R for the constant ring sheaf. If η(a)s=η(a)t in M(U), apply [lem-weil-pbc-flat-local-relations-universes] to the single relation η(a)(s-t)=0. On a covering sieve S, it gives finitely many sections z_j and coefficients b_j with (s-t)|V=Σ_j b_j z_j and (η(a)|V)b_j=0. The naturality of the constant-sheaf unit identifies η(a)|V with η_V(a). Step 1 therefore makes every b_j zero, and (s-t)|V=0 for every arrow in S.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-flat-local-relations-universes",
+    "def-pc-flat-sheaf-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product, definition as sheafified sectionwise tensor; elementary tensor-unit calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $T(N)=N\\otimes_R M$. Flatness [def-pc-flat-sheaf-modules] says exactly that $T$ is an exact functor on the abelian category $\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Apply the monomorphism-preservation clause (a) of [lem-sp-exact-functor-preserves-homology] to the monomorphism $u^\\#:R\\to R$ from Step 1. It gives a monomorphism $v=u^\\#\\otimes1_M$ on $R\\otimes_R M$. Under $\\lambda$ from Step 2 this is multiplication by $a$: on the presheaf tensor $\\lambda(v(r\\otimes m))=\\lambda(ar\\otimes m)=(ar)m=a(rm)$. Equivalently, its conjugate sends $m$ to $\\lambda(a\\otimes m)=am$, by the explicit inverse $m\\mapsto1\\otimes m$. These equalities hold after sheafification as equalities of the induced morphisms. Thus multiplication by $a$ on $M$ is a monomorphism.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sp-exact-functor-preserves-homology",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ER, definition-flat (3), with Tag 03EK, section-tensor-product; exact-functor tool: homology.tex Tag 010N, lemma-exact-functor"
-   }
-  },
-  {
-   "text": "Kernels in $\\operatorname{Mod}(R)$ are computed sectionwise by [def-weil-sheaf-of-modules-category]. The two monomorphisms just proved therefore have zero kernels on every object $U$. If $as=at$ in either $R(U)$ or $M(U)$, then $s-t$ belongs to that zero kernel, so $s=t$. Conversely sectionwise injectivity implies cancellation of sheaf morphisms component by component. This proves the two explicit injectivity assertions and their stated monomorphism formulation. The argument used only injectivity of $x\\mapsto ax$ on $A$ and exactness of sheaf tensor with $M$; it applies on any small site.",
+   "text": "The underlying abelian presheaf of the module sheaf M is a sheaf [def-weil-sheaf-of-modules-category], hence separated. Vanishing of s-t on the covering sieve S implies s-t=0, so s=t. Together with Step 1 this proves the two sectionwise injectivity assertions, including empty covers and the zero ring. This is a below-unit shorter route; the integral-model unit and its parent scalar resolution are unchanged.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian, sectionwise kernels; elementary subtraction and cancellation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheafification-exact",
+  "lem-pc-affine-localization-injective",
   "def-weil-pbc-constant-sheaf",
-  "lem-pc-sites-module-sheafification-interface",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-flat-local-relations-universes",
   "def-pc-flat-sheaf-modules",
-  "lem-sp-exact-functor-preserves-homology"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EI, lemma-sheafification-exact, followed by Tag 03ER, definition-flat (3), and the elementary tensor-unit calculation of Section Tag 03EK"
+  "place": "Tags 03ER(3) and 08FC, lemma-flat-eq, (1)⇒(2) with one coefficient, followed by separatedness. X6 shorter ring argument: inject into the constant sheaf of A[1/a] using the assumed left exact ring sheafification, then cancel the unit a/1; localization injectivity is the existing Mathlib leaf lem-pc-affine-localization-injective."
  },
  "mathlib_searches": [
   {
@@ -217,5 +188,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Node vs Lean checked clause by clause; all three stmt_deps use their recorded declarations (constantSheaf, ringedSiteModules, IsFlatOnSite). The scalar is the sheafification unit applied to a. The probe compile shows the ring-section type is rfl-equal to A_C sections and • is the module-sheaf action, and the theorem instantiates at modules in the ring universe (m:=0), which is the citer's setting. The module universe max r m (at least the ring universe) is documented in the report and accepted; it does not restrict the site universes. Edge cases checked: empty site, M=0, A=0, zero divisors, ℤ/2 needs flatness. Only the lean record changed in the item; dependency nodes unchanged vs live. Docstrings carry source place, blueprint id and Steps 1-4; lines at most 100 characters; plain imports are proof_deps modules (allowed); record statement verbatim. nt_compile --json clean in 13.9 s. Advisory: HasSheafify instead of HasWeakSheafify instance parameters; no action."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261021T120935-L-4010004",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
