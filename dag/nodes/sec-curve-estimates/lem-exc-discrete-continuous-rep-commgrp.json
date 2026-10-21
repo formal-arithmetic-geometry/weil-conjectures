@@ -86,14 +86,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrp",
-  "file": "lean/Sheaf/CategoryTheory/DiscreteContinuousRepCommGrp.lean",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrp",
+  "file": "lean/WeilConjectures/CategoryTheory/DiscreteContinuousRepCommGrp.lean",
   "declaration": "Rep.discreteContinuousRep_commGrp",
   "statement": "theorem discreteContinuousRep_commGrp\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]\n    [BraidedCategory (DiscreteContAction (Type w) G)] :\n    let D := DiscreteContinuousRep.{0, u, w} ℤ G\n    let U : D ⥤ Rep.{w} ℤ G := ObjectProperty.ι _\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G)) ⋙\n      ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))\n    ∃ E : CommGrp (DiscreteContAction (Type w) G) ≌ D,\n      Nonempty (E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n        (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G ≅\n          CommGrp.forget _ ⋙ V)",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-12"
+  "by": "X2",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module listed in coord/retire-items.tsv. The theorem docstring, signature and complete proof are byte-identical to the upstream twin. Redirect the sole direct consumer, which already imports EtaleFieldGsets publicly and registers both forgetful instances globally. Preserve the mathematical node, dependencies and unit route."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -106,14 +107,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "C-b8816",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T112843-L-769043",
+  "landing": "20261021T001153-L-1379738",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf DiscreteContinuousRepCommGrp theorem vs WeilConjectures twin (byte-identical docstring/signature/proof); delivered node vs live node (only lean changed); consumer AbelianSheavesGModulesTransport import swap vs its use at line 84; compile --all + #print axioms"
  },
  "lean_audit": {
   "master": {
