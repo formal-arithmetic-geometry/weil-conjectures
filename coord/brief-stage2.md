@@ -130,6 +130,32 @@ etale cohomology-pullback cases.
 
 ## 4. Compiling
 
+**Use module mode for every compiler probe (maintenance, 2026-10-21).** The first
+Lean command of every delivered file and scratch import/type probe is `module`.
+Use `public import` for statement dependencies, plain `import` for proof
+dependencies, and `@[expose] public section` before public declarations. A probe
+containing only `import X` is a legacy non-module file: it can load private proof
+imports that the required module-mode file does not expose, and report duplicate
+declarations even when the delivered module compiles. Before diagnosing a library
+or tool blocker, repeat the check with the delivery's module header and import
+visibility, and check the declaration actually needed. For example:
+
+```lean
+module
+
+import Sheaf.Paper.IntegralHomReduction
+
+@[expose] public section
+
+#check WeilConjectures.integralHomReduction
+```
+
+The NW integral general-lfp Hom finiteness retry loop was resolved this way:
+all its recorded dependency imports and declarations compile together. See
+`coord/changes/NW-integral-hom-module-probes.md`. Remove diagnostic commands from
+the delivery; the normal compiler, dry-run and delivery checks still apply.
+
+
 Stage-2 parallel landing, human update 2026-10-15: use `python3 ~/weil-launcher-nt/scompile.py <G> <item> <file.lean> [...]`. It now runs `~/weil-launcher/lcompile.py` on the Codex machine with a local overlay exposing side-project modules; server `tools/nt_compile.py` confirms when needed. This supersedes the earlier server-only restriction. Local compilation through this wrapper is authorized and required where possible. Siblings compile separately in dependency order. Every file retains 60 seconds, two threads and nice 19. No combined source file, `lake build`, global build, or writes to live Lean/artifacts.
 
 Compile until clean; expected sorry warnings alone are permitted. A timeout is a fault of a definition, not a reason to raise the limit. Stage-2 modules land only under the side project's `lean/Sheaf/`, through the side `land.sh` called by `merge_delivery.py --stage 2`. These landings are verified per file and never submit a live global build request. Only the reviewed node field delta is promoted to the shared DAG by `nt_land2.py`.
