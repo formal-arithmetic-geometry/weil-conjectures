@@ -22721,3 +22721,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:58 L: merged deliver/NF/lem-sf-derived-completed-tensor-bilinearity (stage 2; reviewer PASS; parallel immutable checks)
 - 13:59 L: merged deliver/N0/lem-sfb-relative-single-tensor-cohomology (reviewer FIX; first push; new nodes: 0)
 - 13:59 L: merged deliver/NA/lem-sfb-bounded-bifunctor-devissage (reviewer FIX; after a return; new nodes: 1)
+- 13:59 L: merged deliver/NO/lem-per-adic-common-stage-truncations (stage 2; reviewer PASS; parallel immutable checks)
+- 13:59 L: merged deliver/NP/lem-pur-etale-sum-right-adjoint-tensor (stage 2; reviewer PASS; parallel immutable checks)
+- 13:59 L: merged deliver/N6/lem-dl-a1-integral-normal-residue-etale-splitting (stage 2; reviewer PASS; parallel immutable checks)
+- 13:59 L: merged deliver/Q95/lem-pur-quotient-expression-kflat-normalization (stage 2; reviewer PASS; parallel immutable checks)

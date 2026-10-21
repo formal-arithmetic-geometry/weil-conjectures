@@ -28,7 +28,10 @@
   "lem-amb-etale-adjoint-locality",
   "lem-sfb-quasifinite-compact-support-exact",
   "def-weil-pbc-adjunction-conjugate",
-  "lem-pur-etale-support-map-compatibility"
+  "lem-pur-etale-support-map-compatibility",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-kun-tensor-sym",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons"
  ],
  "proof": [
   {
@@ -336,5 +339,37 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-5554ffafd (reviewer sub-agent of L); spot-checked: I read all 9 steps and every cited statement in full. There are 0 new nodes, and the statement and stmt_deps are identical to the base. The item is unsplit live, has no re-split note, is not dropped and creates no cycle. Sources: blueprint main-20261015 lem-pur-co-smooth-etale-locality proof Step 1, whose 'immediate' étale normalization is written out here; Stacks 0GKF (more-etale.tex l.1808) for the pure-tensor projection rule. Steps 1 and 6: I re-derived (1) from the conjugate and mate definitions, and the final map equality follows by transposition. Steps 2 and 3: the generator formula of lem-pur-etale-sheaf-projection-map plus inverse-image-restriction (2) give bh on both sides. Unbounded descent uses the flat/K-flat preservation, totalization, termwise-adjunction and descent nodes. Steps 4 and 5: I solved support-map-compatibility (2) at M=W and got (4) exactly, then (5) by naturality of p^Σ and (3). The final symmetry identity needs no sign because W is in degree 0. Step 7: ρ^c=ρ^{c'}r by conjugate composition. Steps 8 and 9: open bases are Noetherian. χ is the conjugate of the nested-summand comparison via mate-pasting 3(a)/(b), and τ=ρ⁻¹r(1⊗η) restricts. Edge cases checked: e=id, empty U, U=X⊔X, extension by zero, shifts of K. The 14 declared tool_uses are generic and accepted. Batch-5 flag: the newly cited lem-pur-etale-sheaf-projection-map reaches lem-pod-etale-stalk-tensor-scalar, which is generic stalk-of-tensor sheaf algebra, not a Poincaré duality proof step, and the item uses only the generator formula. Accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumRightAdjointTensor",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumRightAdjointTensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleTensorRho",
+   "AlgebraicGeometry.Etale.etaleTensorEta",
+   "AlgebraicGeometry.Etale.etaleTensorProjection",
+   "AlgebraicGeometry.Etale.isIso_etaleTensorProjection",
+   "AlgebraicGeometry.Etale.etaleTensorInverseTranspose",
+   "AlgebraicGeometry.Etale.etaleTensorTau",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointTensor",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointTensor_refinement",
+   "AlgebraicGeometry.Etale.etaleTensorPullbackSquare",
+   "AlgebraicGeometry.Etale.etaleTensorRestrictionIso",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointTensor_openRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumRightAdjointTensor.lean",
+  "statement": "theorem etaleSumRightAdjointTensor (A : Type (u + 1)) [CommRing A] [Finite A] {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e] (c : Compactification e) (G : DerivedCategoryModule A X ⥤ DerivedCategoryModule A U) (adj : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ G) : (∀ r : G ⟶ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory, (∀ K : DerivedCategoryModule A X, (canonicalEtaleCompactSupportComparison A e c).hom.app (G.obj K) ≫ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map (r.app K) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app K = adj.counit.app K) ↔ r = (etaleTensorRho A e c G adj).hom) ∧ (∀ K : DerivedCategoryModule A X, etaleTensorTau A e c G adj K ≫ (etaleTensorRho A e c G adj).hom.app K = ((derivedTensor (ModuleCat.{u + 1} A) U).obj ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)).map (etaleTensorEta A e c G adj).hom ≫ (derivedTensorRightUnitor (ModuleCat.{u + 1} A) U ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)).hom) ∧ (∀ (K L : DerivedCategoryModule A X) (f : K ⟶ L), ((derivedTensor (ModuleCat.{u + 1} A) U).map ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map f)).app (G.obj (constantComplex A X)) ≫ etaleTensorTau A e c G adj L = etaleTensorTau A e c G adj K ≫ G.map f)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Fixed-compactification tensor normalization using the existing canonical graph comparison and exact sum/restriction adjunction. Additional declarations state projection invertibility, naturality, refinement independence and Cartesian open restriction, with explicit coefficient-unit and tensor-pullback transports. No new notion, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c640af7",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of f15896b1. Lean file byte-identical (sha256 fae2b548), so the prior clause-by-clause check of hypotheses, rho conjugate direction, counit iff, projection from support-map (2), tau composite, rho∘tau=unitor∘(1⊗eta), naturality, refinement and open restriction stands. Item record changed only in stmt_deps: dropped the coherence and unbounded-comparisons theorem nodes, added def-pur-etale-exact-pullback-unit-composition-comparisons. The new node's clauses (1)/(2) match the plain defs etaleSumPullbackUnitIso and unboundedEtaleUpperStarCompIso; existing:true on unchanged modules, the recorded module publicly imports the second, statement starts at def; its stmt_deps exist live and no other def node owns these decls. Mechanical finding: canonicalEtaleCompactSupportComparison is asIso via isIso_compactSupportGraphDerivedComparison (the theorem constructs the object) and derivedTensorSymmetry is lem-kun-tensor-sym's own recorded def, so PASS on that point; other dropped-module names appear only in attribute [local irreducible]. Q107's earlier PASS was refused at landing and never landed, no repair note, report sections present, sorry-only proofs, no hollow defs. Not compiled (unchanged file). Advisory: two nodes now record etaleSumPullbackUnitIso and its docstring still names the theorem node."
  }
 }

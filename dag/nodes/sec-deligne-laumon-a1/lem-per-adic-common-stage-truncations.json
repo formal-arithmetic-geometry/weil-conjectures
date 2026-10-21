@@ -18,7 +18,10 @@
   "def-weil-pbc-qbar-category",
   "prop-weil-pbc-scalar-extension",
   "def-weil-t-structure",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-per-common-stage-shift-structures",
+  "thm-weil-pbc-verdier-axioms"
  ],
  "proof": [
   {
@@ -363,5 +366,28 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-7847f50c6 (reviewer sub-agent of L); spot-checked: Q76 lem-per-adic-common-stage-truncations, branch 7847f50c. I read the full mathematics: the item's 9 steps, every cited statement, BS 6.8.11/6.8.14 (PDF pp. 60-61) and BBD 1.3.3/1.1.9 (PDF pp. 24, 30). There are 0 new nodes, the statement and stmt_deps are unchanged, there is no SGA citation, and proof_origin is agent. Step 1: lem-cbc-compactification-geometry-fibre-bound applied to X->Spec k gives Noetherian, finite-dimensional, ell a unit, which is the T-hypothesis of the integral, localized and scalar-extension props. Step 2: finite freeness of S over R gives H^i(C K)|_R = H^i(K)^d, so C preserves the ambient bounds; the transport lemma gives constructible membership; no Tor hypothesis is used. Step 3: t-exactness via the definition of the localized halves and T Q = Q C; lem-pod-texact applies and its hypotheses hold. Step 4: I derived the associator equation c_{M/E} a = tau(a) c_{M/L} T(c_{L/E}) from lem-pod-texact's composition and transformation clauses. Step 5: Hom(A[1],B')=0 by the degree bounds, so clause (2) of triangle-morphism-extension gives the boundary square. Step 6: the pair t-structure axioms hold by stage-M orthogonality and exactness of j_E. Step 7: I re-derived the refinement calculation; it equals c^-1 tau_N(u_N) c, so the arrow formula is well defined. Step 8: naturality of the canonical maps and uniqueness of the truncation triangles check out. Step 9: both heart witnesses and their inverses are realized at one stage N. Small cases checked: X empty, E=L, X=Spec of an algebraically closed field (D^b of finite-dimensional Qbar-spaces), and heart witnesses at different fields. Batch-5 flags: lem-pod-texact-truncation-comparison has closure only def-weil-triangulated-category and def-weil-t-structure (pure t-structure category theory, not Poincare duality), so accepted. finite-free-constructible-scalar-transport reaches only lem-trf-geometric-inverse-image-exact (exactness of inverse image along a geometric morphism, a generic topos fact, not part of the trace formula), so accepted. Duplicates: prop-constructible-truncations covers only finite-field Frobenius data. Advisory: lem-a1-texact-coefficient-stage-descent (unsplit, Q112) assumes the pair t-structure and overlaps steps 3-4 only for F=T; its splitter may cite this item. Nit, not a fault: steps 2, 5 and 7 each leave one id in uses without bracketing it in the text. split_report.tool_uses (generic pbc/sbc/pur/pod/cbc interfaces) are accurate for the maintainer to record."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerAdicCommonStageTruncations",
+  "declaration": "AlgebraicGeometry.Scheme.perAdicCommonStageTruncations",
+  "declarations": [
+   "CategoryTheory.StageSystem.AdicCommonStageTruncations",
+   "AlgebraicGeometry.Scheme.perAdicCommonStageTruncations"
+  ],
+  "file": "lean/Sheaf/Paper/PerAdicCommonStageTruncations.lean",
+  "statement": "theorem perAdicCommonStageTruncations (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [IsSeparated (X ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] (_hl : IsUnit (l : k)) : ∃ _hNoetherian : IsNoetherian X, ∃ hDim : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)), ∃ hInv : Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x)), ∃ d : (pbcScalarSystem l Ω X hDim.out hInv.out).AdicCommonStageTruncations, d.common = pbcQbarStandardT l Ω X ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) (K : pbcStageCategory l Ω X E), (d.finite E).le n K ↔ ∃ M : pbcIntegralStage l Ω X E, (pbcIntegralTStructure X l (pbcFiniteField.{u} l Ω E)).le n M ∧ Nonempty (K ≅ (pbcStageLocalization l Ω X E).obj M)) ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) (K : pbcStageCategory l Ω X E), (d.finite E).ge n K ↔ ∃ M : pbcIntegralStage l Ω X E, (pbcIntegralTStructure X l (pbcFiniteField.{u} l Ω E)).ge n M ∧ Nonempty (K ≅ (pbcStageLocalization l Ω X E).obj M))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper record packages the complete assertion: finite t-exactness, natural normalized comparisons and their unit/composition laws, actual quotient-representative formulas, canonical truncation and cutoff maps, full triangles and the one-enlargement heart witness. It introduces no replacement category or scalar functor. The theorem specializes to the published PBC scalar system and explicitly identifies its common t-structure with pbcQbarStandardT; its finite halves are exactly the localized integral images. Geometric finiteness is concluded existentially from the stated scheme hypotheses. The existing intrinsic Qbar dependency record is preserved: its module publicly reexports PbcQbarCategory. The shift, zero-object and pretriangulated data are owned by def-per-common-stage-shift-structures; the genuine Verdier-axioms theorem remains a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0687469fa",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after the d857 RETURN; both faults are repaired. The item module is sha256-identical to d857 (previously correct clause by clause). H13: def-weil-pbc-qbar-category is byte-identical to NM's live IntrinsicQbarCategory record. H2: the new definition node def-per-common-stage-shift-structures (existing:true, Sheaf.Paper.PbcVerdierAxioms) owns pbcRationalHasShift, pbcRationalizationCommShift, pbcScalarCommShift, pbcPairHasShift, pbcStageInclusionCommShift and pbcPairHasZeroObject (CommonStageCalculus 593/632/687/949/988/1046, publicly re-exported) and qbarPairPretriangulated (PbcVerdierAxioms:163, statement verbatim, .choose of an exists-unique that fixes distTriang as CommonStageDistinguished); it replaces prop-weil-pbc-common-stage-calculus in stmt_deps; its stmt_deps exist and its blueprint source exists. Mechanical finding: thm-weil-pbc-verdier-axioms is genuine, since the record needs IsTriangulated pair/stage instances = pbcVerdierAxioms.1 / qbarStageTriangulated; PASS on that point. Advisories: unowned sorry pbcQbarStandardT_existsUnique; common_cohomology is a bare Nonempty; second reading is a self-check; plain CommonStageCalculus import is redundant; the constructors are also listed in two theorem records. No file changed, nothing compiled."
  }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "def-per-common-stage-shift-structures",
+ "kind": "definition",
+ "title": "Normalized shifts and pretriangulated data at common coefficient stages",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, let $\\Omega$ be an algebraic closure of $\\mathbf Q_\\ell$, and let $T$ be a Noetherian scheme of finite dimension on which $\\ell$ is invertible. Use the completed integral coefficient categories and their raw rationalizations $\\mathcal C_E(T)$ of [def-weil-pbc-rational-category], indexed by finite coefficient fields $E\\subset\\Omega$, with the scalar system and pair category $\\mathcal P_T$ of [def-weil-pbc-finite-stage-pair-category]. Define the following normalized structures on these existing categories, without changing their objects or morphisms.\n\nThe integer shift on $\\mathcal C_E(T)$ is induced by signed reindexing on integral complexes, extended linearly on tensor Hom modules. Its shift-zero and shift-add comparisons are the localized integral comparisons. Equip integral rationalization with the shift comparison whose components are identities. Equip each scalar transition $T_{F/E}$ with the shift comparison $\\sigma_{F/E}$ obtained from the adjunction mate of the derived scalar-restriction comparison, restricted through the integral full inclusion and descended through rationalization.\n\nDefine $(E,K)[n]=(E,K[n])$ and, writing categorical composition from right to left,\n$$[M,u][n]=[M,\\sigma_{M/F,L}^{-1}\\circ u[n]\\circ\\sigma_{M/E,K}].$$\nUse the images of the finite-stage shift-zero and shift-add maps for the pair shift coherence. Equip each inclusion $j_E$ with the comparison having identity components on included objects. Give $\\mathcal P_T$ a zero object represented by any finite-stage zero object. Finally, give $\\mathcal P_T$ the pretriangulated structure [def-weil-triangulated-category] whose distinguished triangles are exactly the common-stage cone triangles of [def-weil-pbc-common-stage-cones], retaining the specified shift and the existing additive Hom groups. These are the existing normalized data structures; this definition makes no new assertion of the common-stage calculus or the Verdier axioms.",
+ "stmt_deps": [
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-common-stage-cones"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-common-stage-calculus.md",
+  "place": "Definition of the pair shift and stage-inclusion comparison; pretriangulated data fixed by def-weil-pbc-common-stage-cones and thm-weil-pbc-verdier-axioms."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pbcPairHasShift|pbcRationalHasShift|pbcPairHasZeroObject|qbarPairPretriangulated",
+   "results": "0 hits:  (CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "Generic Mathlib shift interfaces only; reuse the exact published project constructors listed in lean.declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized integer shifts on localized adic coefficient categories and their common-stage pair category",
+   "results": "8 hits: CategoryTheory.HasShift.localized, CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.HasShift, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.HasShift.localization', CategoryTheory.HasShift.localization, CategoryTheory.Functor.CommShift.localized, CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt",
+   "date": "2026-10-21",
+   "verdict": "Generic Mathlib shift interfaces only; reuse the exact published project constructors listed in lean.declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shift on filtered union of triangulated categories defined on representatives with scalar extension shift comparisons",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.shift_ge, CategoryTheory.Triangulated.TStructure.shift_le, CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.isGE_shift, CategoryTheory.Triangulated.TStructure.isLE_of_shift, CategoryTheory.Triangulated.TStructure.isLE_shift, CategoryTheory.Triangulated.TStructure.isGE_shift_iff, CategoryTheory.Triangulated.Subcategory.W.unshift",
+   "date": "2026-10-21",
+   "verdict": "Generic Mathlib shift interfaces only; reuse the exact published project constructors listed in lean.declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasShift, CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-21",
+   "verdict": "Generic Mathlib shift interfaces only; reuse the exact published project constructors listed in lean.declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l pbcPairHasShift|pbcRationalHasShift|pbcPairHasZeroObject|qbarPairPretriangulated dag/nodes; blueprint_refs.py search common-stage shift",
+   "results": "The calculus and Verdier theorem nodes list the constructors, but no definition node owns this data. Other hits are theorem users (scalar extension, pair-functor shift coherence, distinguished diagram lifting); blueprint search: 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "Create a definition-node attachment to existing declarations, as explicitly requested by the return; retain theorem nodes for their assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n pbcPairHasShift|pbcRationalHasShift|pbcPairHasZeroObject|qbarPairPretriangulated lean/WeilConjectures; rg -n same pattern lean/Sheaf",
+   "results": "No hit in WeilConjectures. Exact constructors in Sheaf/Paper/CommonStageCalculus.lean at 593, 632, 687, 949, 988, 1046; qbarPairPretriangulated in Sheaf/Paper/PbcVerdierAxioms.lean:163.",
+   "date": "2026-10-21",
+   "verdict": "Exact project implementations exist and are reused; write no second implementation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-common-stage-truncations",
+  "date": "2026-10-21",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Ordinary cohomology and truncation at common coefficient stages; the normalized shift and triangle structures in lem-per-adic-common-stage-truncations.",
+   "via": [
+    "lem-per-adic-common-stage-truncations",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.PbcVerdierAxioms",
+  "declaration": "CategoryTheory.StageSystem.qbarPairPretriangulated",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcRationalHasShift",
+   "AlgebraicGeometry.Scheme.pbcRationalizationCommShift",
+   "AlgebraicGeometry.Scheme.pbcScalarCommShift",
+   "CategoryTheory.StageSystem.pbcPairHasShift",
+   "CategoryTheory.StageSystem.pbcStageInclusionCommShift",
+   "CategoryTheory.StageSystem.pbcPairHasZeroObject",
+   "CategoryTheory.StageSystem.qbarPairPretriangulated"
+  ],
+  "statement": "instance qbarPairPretriangulated : Pretriangulated S.PairCategory",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition attachment requested by H2 of the independent return. The first six constructors are implemented in Sheaf.Paper.CommonStageCalculus and publicly reexported by PbcVerdierAxioms through PbcCommonStageCones; the final constructor is defined in PbcVerdierAxioms itself. This record owns the actual normalized data used in the item, including qbarPairPretriangulated, without replacing any theorem record or duplicating any declaration. The generic StageSystem constructors specialize literally to pbcScalarSystem. The rational and comparison choices come from locally proved uniquely normalized helpers; the pair shift and zero object have explicit data, and the pretriangulation retains the fixed common-stage distinguished predicate."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0687469fa",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0687469fa",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after the d857 RETURN; both faults are repaired. The item module is sha256-identical to d857 (previously correct clause by clause). H13: def-weil-pbc-qbar-category is byte-identical to NM's live IntrinsicQbarCategory record. H2: the new definition node def-per-common-stage-shift-structures (existing:true, Sheaf.Paper.PbcVerdierAxioms) owns pbcRationalHasShift, pbcRationalizationCommShift, pbcScalarCommShift, pbcPairHasShift, pbcStageInclusionCommShift and pbcPairHasZeroObject (CommonStageCalculus 593/632/687/949/988/1046, publicly re-exported) and qbarPairPretriangulated (PbcVerdierAxioms:163, statement verbatim, .choose of an exists-unique that fixes distTriang as CommonStageDistinguished); it replaces prop-weil-pbc-common-stage-calculus in stmt_deps; its stmt_deps exist and its blueprint source exists. Mechanical finding: thm-weil-pbc-verdier-axioms is genuine, since the record needs IsTriangulated pair/stage instances = pbcVerdierAxioms.1 / qbarStageTriangulated; PASS on that point. Advisories: unowned sorry pbcQbarStandardT_existsUnique; common_cohomology is a bare Nonempty; second reading is a self-check; plain CommonStageCalculus import is redundant; the constructors are also listed in two theorem records. No file changed, nothing compiled."
+ }
+}
