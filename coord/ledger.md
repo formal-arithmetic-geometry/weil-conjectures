@@ -23739,3 +23739,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:52 L: returned deliver/B2/Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity (reviewer RETURN: (reviewer C-0c967, head 0c967c08b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
 - 20:53 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 20:56 L: merged deliver/NE/lem-sfb-strict-local-prime-to-p-kummer-splitting (reviewer PASS; after a return; new nodes: 0)
+- 20:56 L: returned deliver/NH/lem-sfb-profinite-action-coherent-presentation (reviewer RETURN: L: independent stage-2 immutable head 9e1c74ace308: H2: delivery adds theorem stmt_dep lem-sfb-field-profinite-galois-si)
