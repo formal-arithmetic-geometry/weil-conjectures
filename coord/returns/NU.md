@@ -21,9 +21,3 @@ re-split (decision of the human, 2026-10-17): step 1 (4395 characters); step 2 (
 
 
 
-## lem-sf-integral-direct-image-constructible (dedicated repair handoff; head 100b8fa832869045abf34c00f31fca7b56574dfe)
-
-The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 9096 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (922 characters); step 2 (1034 characters); step 3 (1003 characters); step 4 (1176 characters); step 5 (1582 characters); step 6 (1537 characters); step 7 (1318 characters). Lean module: Sheaf.Paper.SfIntegralDirectImageConstructible.
-
-Compiler messages and attribution:
-re-split (decision of the human, 2026-10-21): the proof in words is 9096 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (922 characters); step 2 (1034 characters); step 3 (1003 characters); step 4 (1176 characters); step 5 (1582 characters); step 6 (1537 characters); step 7 (1318 characters). Lean module: Sheaf.Paper.SfIntegralDirectImageConstructible.

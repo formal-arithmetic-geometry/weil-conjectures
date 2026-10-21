@@ -20178,3 +20178,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:04:25Z L: superseded stage-1 delivery Q68/lem-sp-p1-counit-scalar at a6b9437535b23ed6877916ebc34d5d82b18dd89f; current completion retained; packet archived at refs/superseded/Q68/lem-sp-p1-counit-scalar/a6b9437535b23ed6877916ebc34d5d82b18dd89f; stale return retired.
 - 2026-10-21T04:04:30Z L: superseded stage-1 delivery Q122/lem-pd-section-ordinary-oplax-normalization at 7c89a0ec35aed421a4693797007c4cc3563ca361; current completion retained; packet archived at refs/superseded/Q122/lem-pd-section-ordinary-oplax-normalization/7c89a0ec35aed421a4693797007c4cc3563ca361; stale return retired.
 - 04:04 L: merged deliver/NS/lem-sp-chart-counit-scalar-transport (reviewer PASS; first push; new nodes: 0); claim not held by NS: not your claim
+- 04:04 L: merged deliver/NU/lem-sf-integral-direct-image-constructible (reviewer FIX; after a return; new nodes: 3)
