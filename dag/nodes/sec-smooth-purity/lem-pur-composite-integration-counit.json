@@ -23,18 +23,19 @@
  ],
  "proof": [
   {
-   "text": "Write composites right to left. By [def-weil-pbc-composite-adjunction] the actual composite counit before the compositor is\n$$c_K=\\varepsilon_{g,K}\\circ F_g(\\varepsilon_{f,G_gK}).$$\nPut $L=L_{gf}$ and $B=P_gK$. Use the canonical tensor symmetries to write $G_uK$ as $L_u\\otimes P_uK$, and put $q_{u;M,N}=\\operatorname{PF}_{u;M,N}^{-1}$. The supplied factorization of each counit then reads\n$$\\varepsilon_{u,K}=(t_u\\otimes1_K)q_{u;L_u,K}.$$\nHere and below this formula includes the source symmetry and the target unit constraint. The source of $c_K$ is thereby $F_gF_f(L_f\\otimes P_f(L_g\\otimes B))$. Pullback's tensor comparison and the associator identify its inner argument with $L\\otimes P_fB$. These are precisely the source identifications in the assertion; no adjunction different from the supplied one is chosen.",
+   "text": "Write $q_u=\\operatorname{PF}_u^{-1}$, $L=L_{gf}$ and $a=(t_f\\otimes1)q_{f;L_f,L_g}$, with unitors understood. By [def-weil-pbc-composite-adjunction], $c_K=\\varepsilon_{g,K}F_g(\\varepsilon_{f,G_gK})$. Put both twists first by symmetry. Apply [lem-pur-tensor-action-trace-contraction] to the supplied counit formulas and action law, using its $\\sigma_K$ to identify the source with $F_gF_f(L\\otimes P_fP_gK)$. It gives\n$$c_K=(t_gF_g(a)\\otimes1_K)q_{g;F_fL,K}F_g(q_{f;L,P_gK}).$$",
    "uses": [
-    "def-weil-pbc-composite-adjunction"
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-tensor-action-trace-contraction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0DV0, lemma-compose-counits, equation-compose-counits; substitution F=F_f, H=F_g, G=G_f, I=G_g"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Canonical reassociations; assembly from the separate tensor-action contraction lemma. Composite counit: Stacks Tag 0DV0, lemma-compose-counits, equation-compose-counits."
    }
   },
   {
-   "text": "Invert the assumed tensor-action identity for $f$ and substitute $M=L_f$, $N_1=L_g$, $N_2=B$. With the preceding pullback/tensor identifications it gives\n$$q_{f;L_f,L_g\\otimes B}=(q_{f;L_f,L_g}\\otimes1_B)q_{f;L,B}.$$\nDefine the particular morphism\n$$a=(t_f\\otimes1_{L_g})q_{f;L_f,L_g}:F_fL\\longrightarrow L_g.$$\nSubstituting the supplied formula for $\\varepsilon_{f,G_gK}$ and using bifunctoriality of tensor now gives\n$$\\varepsilon_{f,G_gK}=(a\\otimes1_B)q_{f;L,B}.$$\nThe first equality is just the inverse of the hypothesis, and the second composes $t_f$ with its first tensor factor. Both formulas have domain $F_f(L\\otimes P_fB)$ and codomain $L_g\\otimes B$ in the second case.",
+   "text": "Invert the projection/compositor identity assumed in the statement, and multiply by the compositor inverses. At $M=L$ this gives\n$$q_{g;F_fL,K}F_g(q_{f;L,P_gK})\\alpha_{L\\otimes P_fP_gK}^{-1}\n=(\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}.$$\nIndeed inverting the hypothesis first gives $\\alpha_L\\otimes1_K=\\operatorname{PF}_{gf;L,K}^{-1}\\alpha_{L\\otimes P_fP_gK}F_g(\\operatorname{PF}_{f;L,P_gK})\\operatorname{PF}_{g;F_fL,K}$, and cancellation of its three right-hand invertible factors gives the displayed equality. Precompose Step 1 by $\\alpha_{L\\otimes P_fP_gK}^{-1}$ and use it:\n$$c_K\\alpha^{-1}=(t_gF_g(a)\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}=(t_{gf}\\otimes1_K)q_{gf;L,K}.$$\nThe last equality expands the definition of $a$, giving exactly the four arrows defining $t_{gf}$ in the statement. Finally insert the source symmetry $P_{gf}K\\otimes L\\cong L\\otimes P_{gf}K$ and the target symmetry $F_{gf}L\\otimes K\\cong K\\otimes F_{gf}L$. Naturality of the latter symmetry changes $t_{gf}\\otimes1_K$ into $1_K\\otimes t_{gf}$, so this is the claimed formula with $\\Pi_{gf;L,K}$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -43,7 +44,7 @@
    }
   },
   {
-   "text": "Substitute the preceding equality and the supplied formula for $\\varepsilon_{g,K}$ into $c_K$. Functoriality of $F_g$ gives the equality\n$$c_K=(t_g\\otimes1_K)q_{g;L_g,K}\\,F_g(a\\otimes1_B)\\,F_g(q_{f;L,B}).$$\nIn particular $F_g(q_{f;L,B})$ ends at $F_g(F_fL\\otimes P_gK)$, $F_g(a\\otimes1_B)$ ends at $F_g(L_g\\otimes P_gK)$, and $q_{g;L_g,K}$ ends at $F_gL_g\\otimes K$. Thus every displayed factor is on the domains assumed closed under these composites.",
+   "text": "Take $K=A_S$. With pullback's unit comparison and the tensor unitors, $q_{gf;L,A_S}$ is the identity. One can check this from the assumed action law alone: specialize it to $N_1=N_2=A_S$ and identify $L\\otimes P_{gf}A_S$ with $L$; it says $q=q^2$. Since $q$ is invertible, cancellation gives $q=1$. Thus Step 2 at the unit is $\\varepsilon^{\\mathrm{comp}}_{A_S}=t_{gf}$ under the same compositor and unit identifications.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -52,36 +53,7 @@
    }
   },
   {
-   "text": "The projection maps of [def-exchange-projection] are natural transformations in their two inputs; their inverses on the stated domain are therefore natural too (multiply the naturality square on both sides by the inverses). Apply this naturality in the first input to $a:F_fL\\to L_g$:\n$$q_{g;L_g,K}F_g(a\\otimes1_{P_gK})=(F_g(a)\\otimes1_K)q_{g;F_fL,K}.$$\nConsequently Step 3 simplifies, by tensor bifunctoriality, to\n$$c_K=(t_gF_g(a)\\otimes1_K)q_{g;F_fL,K}F_g(q_{f;L,P_gK}).$$\nNaturality supplies exactly this square, not an identification inferred only from an equality at $K=A_S$.",
-   "uses": [
-    "def-exchange-projection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
-   }
-  },
-  {
-   "text": "Invert the projection/compositor identity assumed in the statement, and multiply by the compositor inverses. At $M=L$ this gives\n$$q_{g;F_fL,K}F_g(q_{f;L,P_gK})\\alpha_{L\\otimes P_fP_gK}^{-1}\n=(\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}.$$\nIndeed inverting the hypothesis first gives $\\alpha_L\\otimes1_K=\\operatorname{PF}_{gf;L,K}^{-1}\\alpha_{L\\otimes P_fP_gK}F_g(\\operatorname{PF}_{f;L,P_gK})\\operatorname{PF}_{g;F_fL,K}$, and cancellation of its three right-hand invertible factors gives the displayed equality. Precompose Step 4 by $\\alpha_{L\\otimes P_fP_gK}^{-1}$ and use it:\n$$c_K\\alpha^{-1}=(t_gF_g(a)\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}=(t_{gf}\\otimes1_K)q_{gf;L,K}.$$\nThe last equality expands the definition of $a$, giving exactly the four arrows defining $t_{gf}$ in the statement. Finally insert the source symmetry $P_{gf}K\\otimes L\\cong L\\otimes P_{gf}K$ and the target symmetry $F_{gf}L\\otimes K\\cong K\\otimes F_{gf}L$. Naturality of the latter symmetry changes $t_{gf}\\otimes1_K$ into $1_K\\otimes t_{gf}$, so this is the claimed formula with $\\Pi_{gf;L,K}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
-   }
-  },
-  {
-   "text": "Take $K=A_S$. With pullback's unit comparison and the tensor unitors, $q_{gf;L,A_S}$ is the identity. One can check this from the assumed action law alone: specialize it to $N_1=N_2=A_S$ and identify $L\\otimes P_{gf}A_S$ with $L$; it says $q=q^2$. Since $q$ is invertible, cancellation gives $q=1$. Thus Step 5 at the unit is $\\varepsilon^{\\mathrm{comp}}_{A_S}=t_{gf}$ under the same compositor and unit identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
-   }
-  },
-  {
-   "text": "Every expression used in Steps 1--5 is natural in $K$: the counits and compositor are natural, $P_f,P_g,F_f,F_g$ are functors, and $q$ is the inverse of the natural projection transformation [def-exchange-projection]. More explicitly, for $h:K\\to K'$ its naturality in the second input gives $(1_{F_{gf}L}\\otimes h)q_{gf;L,K}=q_{gf;L,K'}F_{gf}(1_L\\otimes P_{gf}h)$; composition with $t_{gf}$ and the two symmetries gives the claimed naturality square. The calculation has used only the stated adjunctions, tensor action, naturality and projection/compositor equation. For ordinary etale categories repeat Steps 1--6 with their own functors, adjunctions, compositor and projection maps. The assertion expressly imposes the same identities and closure assumptions on those actual maps, so each displayed substitution has the same type there. This proves the ordinary-site clause without identifying the two sites or transferring an unproved projection identity between them.",
+   "text": "The counits and compositor are natural. Inverse projection naturality [def-exchange-projection] says: for $h:K\\to K'$ its naturality in the second input gives $(1_{F_{gf}L}\\otimes h)q_{gf;L,K}=q_{gf;L,K'}F_{gf}(1_L\\otimes P_{gf}h)$; composition with $t_{gf}$ and the two symmetries gives the claimed naturality square. The calculation has used only the stated adjunctions, tensor action, naturality and projection/compositor equation. For ordinary etale categories repeat Steps 1--3 with their own functors, adjunctions, compositor and projection maps. The assertion expressly imposes the same identities and closure assumptions on those actual maps, so each displayed substitution has the same type there. Thus the same proof applies site by site.",
    "uses": [
     "def-exchange-projection"
    ],
@@ -93,8 +65,9 @@
   }
  ],
  "proof_deps": [
+  "def-exchange-projection",
   "def-weil-pbc-composite-adjunction",
-  "def-exchange-projection"
+  "lem-pur-tensor-action-trace-contraction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -200,19 +173,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-composite-integration-counit",
   "worker": "stage1",
-  "summary": "Kept the statement and all statement dependencies. Wrote the composite-counit factorization as seven elementary substitutions using the assumed projection action/compositor laws, naturality, and the existing composite-adjunction Mathlib leaf. Explicitly checked the unit, naturality and ordinary etale clause; no new nodes. Source proof is marked agent because the detailed coefficient factorization is an expansion of the blueprint model paragraph, not a formula printed in the snapshot.",
-  "blueprint": "lem-pur-projection-purity-agreement, last sentence on canonical reassociations, and its maintained expanded affine-tower counit step: Steps 1--5 supply the coefficient factorization, Step 6 the unit normalization, Step 7 naturality and the site-wise repetition."
+  "summary": "Repair of the human-requested re-split: preserved the statement verbatim and moved the substantive successive tensor-action trace contraction (old Steps 1--4) into one independent generic statement-only unsplit node. Retained the compositor inversion, symmetry conversion, unit cancellation, explicit naturality square and site-wise repetition in the parent. The report preserves all seven old arguments verbatim and maps their allocation. The parent is a short assembly; no Lean changes.",
+  "blueprint": "Final canonical-reassociations sentence of lem-pur-projection-purity-agreement: new tensor-action-trace-contraction carries the precompositor contraction formerly in Steps 1--4; parent Steps 2--4 retain old Steps 5--7, including the unit and both-site clauses."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q09-084010ba0",
-  "group": "Q09",
+  "reviewer": "NT-cc-Q78-ebd2d069c",
+  "group": "Q78",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-084010ba0 (reviewer sub-agent of L); spot-checked: Read the complete item, dependencies, report and cited sources. All seven counit calculations type-check mathematically under the explicit hypotheses; unit normalization, naturality and ordinary étale repetition are justified. No new nodes, circular split, duplicate or target weakening found. Historical source-locator discrepancy is disclosed in review.md; no fixes required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-ebd2d069c (reviewer sub-agent of L); spot-checked: Re-split note (coord/repair-notes, human 2026-10-21) asks for a proof of at most 3000 chars and at least 1 new node. Delivered: 1 new unsplit node lem-pur-tensor-action-trace-contraction, and an item proof of 2705 chars in 4 steps. The item statement and stmt_deps are byte-identical to the base. The item is not superseded live. Old-vs-new comparison by difflib: old Steps 5-6 are verbatim as new Steps 2-3 apart from renumbering. Old Step 7 is new Step 4 with only wording trimmed; the explicit h:K->K' square and the site-wise rerun are kept. Old Steps 1-4 moved into the new node: inverse action law, a, functoriality, first-variable naturality of q_g, and the source identification sigma_K. The parent keeps only the counit formula from def-weil-pbc-composite-adjunction (I checked that its counit is eps2 H(eps1 I)) and the twist-first symmetry. Moving the symmetry uses naturality of d_f in B, which is elementary. The new node is not a restatement: it has no adjunction or compositor, and arbitrary t_f, t_g. I type-checked every arrow against the associator orientation of def-sfb-monoidal-category and delta = mu^{-1} of def-sfb-strong-monoidal-functor. I proved the node myself: invert the action law, use the coherence lambda_{B⊗C}(t⊗1)alpha = (lambda(t⊗1))⊗1, then naturality of q_g at a. It is true. Small cases: identity functors on R-modules give x⊗y⊗z ↦ t_f(x)t_g(y)z on both sides; zero functionals and unit objects are consistent. Node form checks: statement-only, self-contained, B3 definition leaves read, searches logged in grep/leansearch/loogle/leanfinder, blueprint.from = lem-pur-projection-purity-agreement (proof.md read in full; agent expansion disclosed), created.item correct. Duplicate scan: all strong-monoidal and projection statements, including lem-pur-composite-tensor-transpose (transposes with tau_h) and lem-pur-projection-formula-coefficient-coherence; none is a duplicate. No cycle and no SGA. Step 2 (compositor cancellation and symmetries), Step 3 (q=q^2 at the unit) and Step 4 (naturality) are genuinely elementary from explicit hypotheses. No changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

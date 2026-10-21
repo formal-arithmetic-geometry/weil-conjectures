@@ -1,0 +1,89 @@
+{
+ "id": "lem-pur-tensor-action-trace-contraction",
+ "kind": "statement",
+ "title": "Contraction of two trace maps through tensor actions",
+ "statement": "Let $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_Z$ be monoidal categories [def-sfb-monoidal-category]. Let $F_f:\\mathcal C_X\\to\\mathcal C_Y$, $F_g:\\mathcal C_Y\\to\\mathcal C_Z$ be functors and $P_f:\\mathcal C_Y\\to\\mathcal C_X$, $P_g:\\mathcal C_Z\\to\\mathcal C_Y$ strong monoidal functors [def-sfb-strong-monoidal-functor]. Write $\\delta_{f;N,N'}:P_f(N\\otimes N')\\xrightarrow{\\sim}P_fN\\otimes P_fN'$ for the inverse tensor comparison, $\\alpha$ for tensor associators, and $\\lambda:\\mathbf1\\otimes B\\xrightarrow{\\sim}B$ for left unitors. For $u=f,g$ suppose given natural isomorphisms\n$$\\operatorname{PF}_{u;M,N}:F_uM\\otimes N\\xrightarrow{\\sim}F_u(M\\otimes P_uN),\\qquad q_{u;M,N}=\\operatorname{PF}_{u;M,N}^{-1}.$$\nThe maps need only be given on full domains closed under every object, arrow and structural comparison displayed here; each equality below is restricted to those domains. Assume the tensor-action equation for $f$:\n$$\\operatorname{PF}_{f;M,N\\otimes N'}=\nF_f\\bigl((1_M\\otimes\\delta_{f;N,N'}^{-1})\\alpha_{M,P_fN,P_fN'}\\bigr)\n\\operatorname{PF}_{f;M\\otimes P_fN,N'}(\\operatorname{PF}_{f;M,N}\\otimes1_{N'})\n\\alpha_{F_fM,N,N'}^{-1}.$$\nComposition is written right to left.\n\nChoose objects $L_f\\in\\mathcal C_X$, $L_g\\in\\mathcal C_Y$ and arbitrary morphisms $t_f:F_fL_f\\to\\mathbf1_Y$, $t_g:F_gL_g\\to\\mathbf1_Z$. Define, for every permitted $B$,\n$$d_{u,B}=\\lambda_B(t_u\\otimes1_B)q_{u;L_u,B}:F_u(L_u\\otimes P_uB)\\to B.$$\nPut $L=L_f\\otimes P_fL_g$, $a=d_{f,L_g}:F_fL\\to L_g$ and $b=t_gF_g(a):F_gF_fL\\to\\mathbf1_Z$. For $K\\in\\mathcal C_Z$ set\n$$\\sigma_K=\\alpha_{L_f,P_fL_g,P_fP_gK}^{-1}(1_{L_f}\\otimes\\delta_{f;L_g,P_gK}):\nL_f\\otimes P_f(L_g\\otimes P_gK)\\xrightarrow{\\sim}L\\otimes P_fP_gK.$$\nThen the following equality holds as morphisms from $F_gF_f(L_f\\otimes P_f(L_g\\otimes P_gK))$ to $K$:\n$$d_{g,K}F_g(d_{f,L_g\\otimes P_gK})=\n\\lambda_K(b\\otimes1_K)q_{g;F_fL,K}F_g(q_{f;L,P_gK})F_gF_f(\\sigma_K).$$\nNo adjunction or comparison between $F_gF_f$ and a third functor is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final sentence on canonical reassociations; agent expansion of the successive coefficient contractions, formerly Steps 1--4 of lem-pur-composite-integration-counit. This formula is not printed in the blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*(trace|contract)|trace.*projection|tensorAction",
+   "results": "{\"t\": \"2026-10-21T06:18:39Z\", \"tool\": \"grep\", \"query\": \"projection.*(trace|contract)|trace.*projection|tensorAction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor action associativity and naturality factor successive trace contractions through iterated inverse projection maps",
+   "results": "{\"t\": \"2026-10-21T06:18:39Z\", \"tool\": \"leansearch\", \"query\": \"Tensor action associativity and naturality factor successive trace contractions through iterated inverse projection maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionAssocIso_inv_naturality_assoc\", \"Algebra.TensorProduct.assoc\", \"TensorProduct.map_map_comp_assoc_symm_eq\", \"TensorProduct.map_map_comp_assoc_eq\", \"TensorProduct.map_map_assoc_symm\", \"Algebra.TensorProduct.assoc_symm_tmul\", \"TensorProduct.tensorTensorTensorAssoc_symm_tmul\", \"TensorProduct.map_map_assoc\"], \"digest\": \"2379d5b0b3fcad76\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"projection\"",
+   "results": "{\"t\": \"2026-10-21T06:18:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor, \\\"projection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal categories successive inverse projection tensor actions contract two traces to a single coefficient functional before any composition isomorphism",
+   "results": "{\"t\": \"2026-10-21T06:18:49Z\", \"tool\": \"leanfinder\", \"query\": \"In monoidal categories successive inverse projection tensor actions contract two traces to a single coefficient functional before any composition isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract_apply\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_tensorProduct\", \"LinearMap.trace_eq_contract'\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"contractLeft_assoc_coevaluation\", \"LinearMap.trace_eq_contract_of_basis\"], \"digest\": \"a40f67a3b9316f25\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "{\"t\": \"2026-10-21T06:19:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionFormula\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|projectionTensorMap",
+   "results": "{\"t\": \"2026-10-21T06:19:11Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projectionMap|projectionTensorMap\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural inverse projection formula satisfying the tensor associativity law transports a trace t from F L to the tensor unit into a coefficient linear map and contraction through two functors factors through the iterated projection formula",
+   "results": "{\"t\": \"2026-10-21T06:19:20Z\", \"tool\": \"leanfinder\", \"query\": \"A natural inverse projection formula satisfying the tensor associativity law transports a trace t from F L to the tensor unit into a coefficient linear map and contraction through two functors factors through the iterated projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contractLeft_assoc_coevaluation'\", \"contractLeft_assoc_coevaluation\", \"LinearMap.trace_eq_contract_apply\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_tensorProduct\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_tensor\"], \"digest\": \"b523cb275f3c33a6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-composite-integration-counit",
+  "date": "2026-10-21",
+  "group": "Q78"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final sentence, canonical reassociations of the package; expanded affine-tower counit calculation, contraction of the two traces before the compact-support compositor (old composite-integration-counit Steps 1--4).",
+   "via": [
+    "lem-pur-composite-integration-counit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
