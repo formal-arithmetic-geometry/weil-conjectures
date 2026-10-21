@@ -20,9 +20,175 @@
   "def-pur-kinjective-complex",
   "lem-sfb-dc-hom-scalar-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=E^{\\mathbf L}$, and write $\\mu_{X,Y}:F(X\\otimes_R^{\\mathbf L}Y)\\xrightarrow{\\sim}FX\\otimes_S^{\\mathbf L}FY$ for the specified normalized tensor comparison. Exactness of $E$ implies that $E$ carries every quasi-isomorphism to a quasi-isomorphism, by the cohomology comparison. The exact-functor factorization and its left-derived universal property, together with the statement that $F$ is the left derived functor of termwise scalar extension computed by K-flat resolutions, therefore identify $FQM$ naturally with $QEM$ for every complex $M$, not just for K-flat ones (uniqueness of left derived functors). This identification is the canonical one: on a K-flat resolution $t:V\\to M$, both comparison maps commute with $Qt$ and $QEt$, and those are invertible. Restriction $U$ leaves the underlying complexes of abelian sheaves unchanged; hence it also preserves quasi-isomorphisms. In particular $Et$ and $U\\!Et$ are quasi-isomorphisms whenever $t$ is.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "The one-K-flat-factor transpose lemma, with $A=D$ and target $J$, identifies $QD\\otimes_R^{\\mathbf L}QP$ with $Q(D\\otimes_R P)$ and gives $\\operatorname{ev}_R\\circ(\\beta\\otimes1_{QP})=Q\\widetilde b$. The same lemma with arbitrary first complex $A=S\\otimes_R D$ identifies $QA\\otimes_R^{\\mathbf L}QP$ with $Q(A\\otimes_R P)$. Neither application imposes K-flatness on its first complex. The chain identification $\\nu_D:S\\otimes_R D\\cong UED$ is fixed by $s\\otimes x\\mapsto s\\otimes x$. The scalar-chain Hom identification supplies $\\alpha_S(s\\otimes f)(p)=s\\otimes f(p)$. Composing it with $S\\otimes b$ and evaluating gives the actual chain map $h_b((s\\otimes x)\\otimes p)=s\\otimes b(x)(p)$. These are sheafification-unit generators in each total summand, not arbitrary choices of sections.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-sfb-hom-scalar-chain-identification",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "For the scalar-unit map $\\lambda_{X,K}:UX\\otimes_R^{\\mathbf L}K\\to U(X\\otimes_S^{\\mathbf L}FK)$, fix $X=QEV$ with $V$ K-flat and $K=QP$. Its scalar adjunct is $(\\varepsilon_X\\otimes1)\\circ\\mu_{UX,K}$; this is the five-bijection map in the scalar adjunction. Resolve $UEV$ by a flat-term K-flat complex $w:W\\to UEV$. By representative-normalized scalar adjunction the adjunct of $Qw$ is represented by $\\bar w:EW\\to EV$, $s\\otimes z\\mapsto s\\,w(z)$. The normalized tensor square for $W,P$ therefore says that $\\lambda_{X,QP}$, precomposed by $Q(w\\otimes1_P)$, is represented by $z\\otimes p\\mapsto w(z)\\otimes(1\\otimes p)$. Here both $EW,EP$ are K-flat by the given scalar comparison, as is $EV$. The one-factor tensor theorem makes $w\\otimes1_P$ a quasi-isomorphism and computes its target without requiring $UEV$ to be K-flat. Cancel it. Hence $\\lambda_{QEV,QP}$ itself is represented by $a_{V,P}:UEV\\otimes_R P\\to U(EV\\otimes_S EP)$, $y\\otimes p\\mapsto y\\otimes(1\\otimes p)$. This verifies the scalar-unit representative used next.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "First replace $D$ by a flat-term K-flat complex $V$ with a quasi-isomorphism $t:V\\to D$, and put $b_V=b\\circ t$. On the pair $V,P$ use the assumed K-flat representative square for $\\mu$. Denote its actual chain isomorphism by $m_{V,P}:E(V\\otimes_R P)\\cong EV\\otimes_S EP$. After restriction and insertion of the scalar unit on $P$, its inverse sends $(s\\otimes v)\\otimes p$ to $s\\otimes(v\\otimes p)$: the tensor comparison sends $1\\otimes(v\\otimes p)$ to $(1\\otimes v)\\otimes(1\\otimes p)$, and $S$-linearity gives the assertion for $s$. Applying $E(\\widetilde b_V)$ gives $s\\otimes b(t(v))(p)$. Thus the normalized derived composite on $QV,QP$ is represented by $h_{b_V}$. The representative square includes preservation of K-flatness by extension. No K-flatness claim about $\\mathcal Hom(P,J)$ has entered this calculation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sfb-scalar-hom-comparison-data",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "For any such $t$, the map $t\\otimes1_P$ is a quasi-isomorphism by the K-flat tensor invariance theorem. Consequently $Et$ and $E(t\\otimes1_P)$ are quasi-isomorphisms by step 1. Also $(U\\!Et)\\otimes1_P$ is a quasi-isomorphism by that same tensor invariance theorem. Naturality of $\\mu$, of its representative square and of the scalar unit identifies the step-4 composite precomposed with $Q((U\\!Et)\\otimes1_P)$ with the composite for $D$ so precomposed. On chains,\n$$h_b\\circ((U\\!Et)\\otimes1_P)=UE(\\widetilde b)\\circ UE(t\\otimes1_P)\\circ U(m_{V,P}^{-1})\\circ a_{V,P};$$\nboth sides send $(s\\otimes v)\\otimes p$ to $s\\otimes b(t(v))(p)$. After localization cancel the invertible precomposition. The result is precisely $Qh_b$ on $Q(A\\otimes_R P)$. This proves descent along the three asserted quasi-isomorphisms and independence of $t$: every resolution gives the same explicitly defined chain map. Existence of at least one such resolution was step 4.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-hom-kflat-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "For any derived object $X$ put $\\lambda_{X,K}:UX\\otimes_R^{\\mathbf L}K\\to U(X\\otimes_S^{\\mathbf L}FK)$ for the restriction/scalar-unit map occurring in the evaluation normalization of $\\Theta$. That normalization and naturality of this map in $X$ give\n$$\\operatorname{ev}_R\\circ((\\Theta\\,U(c^\\varphi_{K,L})\\,UF\\beta)\\otimes1_K)\n=U(\\operatorname{ev}_S\\circ(c^\\varphi_{K,L}\\otimes1_{FK}))\\circ\\lambda_{FH_R(K,L),K}\\circ(UF\\beta\\otimes1_K)\n=UF(\\operatorname{ev}_R)\\circ U(\\mu^{-1}_{H_R(K,L),K})\\circ\\lambda_{FH_R(K,L),K}\\circ(UF\\beta\\otimes1_K)\n=UF(\\operatorname{ev}_R\\circ(\\beta\\otimes1_K))\\circ U(\\mu^{-1}_{QD,K})\\circ\\lambda_{FQD,K}.$$\nThe middle equality is the defining transpose equation for $c^\\varphi$; the last is naturality of $\\mu$ and $\\lambda$. Here $\\beta:QD\\to H_R(K,L)$. For $K=QP,L=QJ$, step 2 identifies the last evaluation with $Q\\widetilde b$, and steps 3-5 identify this composite with $Qh_b$. This proves the asserted derived transpose equation by the specified normalization of $\\Theta$.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "def-coef-ringed-tensor-hom-model",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "Naturality can be checked wholly inside the derived categories. Let $f:K'\\to K$ and $g:L\\to L'$ be arbitrary derived morphisms. The desired equation is\n$$H_S(Ff,Fg)\\circ c^\\varphi_{K,L}=c^\\varphi_{K',L'}\\circ F(H_R(f,g)).$$\nTranspose both sides with respect to the right tensor factor $FK'$. The first transpose is\n$$Fg\\circ F(\\operatorname{ev}_{R;K,L})\\circ\\mu^{-1}_{H_R(K,L),K}\\circ(1\\otimes Ff).$$\nNaturality of $\\mu$ changes this to $F(g\\circ\\operatorname{ev}_{R;K,L}\\circ(1\\otimes f))\\circ\\mu^{-1}_{H_R(K,L),K'}$. The evaluation identity $g\\circ\\operatorname{ev}_{R;K,L}\\circ(1\\otimes f)=\\operatorname{ev}_{R;K',L'}\\circ(H_R(f,g)\\otimes1)$ and naturality of $\\mu$ give the transpose of the second side. Injectivity of the closed Hom-bijection proves the equation. These are exactly the naturality and evaluation equations in the specified closed structures, so no assertion about representing all derived maps by single chain maps is needed.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "In particular step 7 applies to $f=(Qq)^{-1}$ or $g=(Qq)^{-1}$ for any quasi-isomorphism $q$. Equivalently, take the naturality equation for $Qq$ and multiply on the appropriate side by its inverse; functoriality gives $F((Qq)^{-1})=F(Qq)^{-1}$ and the same identity for the Hom actions. Since localization makes each $Qq$ invertible, this is a valid equation for the actual derived morphisms. Composing the equations proves naturality for their composites as well. Thus the representative calculation is compatible with changing representatives and with inverse quasi-isomorphisms, not just with chain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "For $R\\xrightarrow{\\varphi}S\\xrightarrow{\\psi}T$, write $F=E_\\varphi^{\\mathbf L}$ and $G=E_\\psi^{\\mathbf L}$ and identify $E_{\\psi\\varphi}^{\\mathbf L}$ with $GF$ by the canonical unit-normalized scalar-composition isomorphism. The tensor coherence theorem identifies $\\mu^{\\psi\\varphi}$ with $\\mu^\\psi\\circ G\\mu^\\varphi$ with these same transports. Transpose $c^\\psi_{FK,FL}\\circ G(c^\\varphi_{K,L})$. Its evaluation, on $GFH_R(K,L)\\otimes_T^{\\mathbf L}GFK$, is\n$$G(\\operatorname{ev}_S)\\circ(\\mu^\\psi)^{-1}\\circ(Gc^\\varphi\\otimes1)\n=G(\\operatorname{ev}_S\\circ(c^\\varphi\\otimes1))\\circ(\\mu^\\psi)^{-1}\n=GF(\\operatorname{ev}_R)\\circ G((\\mu^\\varphi)^{-1})\\circ(\\mu^\\psi)^{-1}.$$\nThe first equality is naturality of $\\mu^\\psi$ and the second is the transpose equation for $c^\\varphi$. Tensor coherence makes the last expression $E_{\\psi\\varphi}^{\\mathbf L}(\\operatorname{ev}_R)\\circ(\\mu^{\\psi\\varphi})^{-1}$, including its source and two Hom-input transports. This is the defining transpose of $c^{\\psi\\varphi}$, so injectivity of transposition proves the coefficient composition equation. Exactness is only needed for the earlier chain representatives.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "The identity part of tensor coherence identifies $\\mu^{\\mathrm{id}}$ with the identity tensor comparison under scalar multiplication. Thus the defining transpose of $c^{\\mathrm{id}}$ is evaluation itself, which is the transpose of the identity on internal Hom. Hence $c^{\\mathrm{id}}=1$. The scalar adjunction isomorphisms have the same evaluation normalization and commute with coefficient changes, so applying $\\Theta$ to the equations of steps 7 and 9 retains those equations. For a compatible coefficient square, apply step 9 along each of its two paths: their composite ring maps agree, so both yield the comparison for that common map under the canonical composition identifications.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  },
+  {
+   "text": "At the level of actual representatives the composition identification is $t\\otimes(s\\otimes x)\\mapsto t\\psi(s)\\otimes x$, with inverse inserting $1$. Applying the formula for $h_b$ twice gives $t\\otimes(s\\otimes b(x)(p))$, hence $t\\psi(s)\\otimes b(x)(p)$ after this identification. This is the single-extension formula, and the identity case is $r\\otimes b(x)(p)\\mapsto r b(x)(p)$. More generally in a square $R\\xrightarrow{\\varphi}S$, $R'\\xrightarrow{\\varphi'}S'$ with $a:R\\to R'$, $d:S\\to S'$ and $d\\varphi=\\varphi'a$, the coefficient coherence for the actual chain Hom maps supplies the extension and restriction transports. Its formula $r'\\otimes(s\\otimes z)\\mapsto\\varphi'(r')d(s)\\otimes(1\\otimes z)$ sends the evaluated section to $\\varphi'(r')d(s)\\otimes(1\\otimes b(x)(p))$ on both paths. Thus the generator formula respects those specified maps, including their Hom-input transports. Localizing and using steps 5 and 9-10 gives the corresponding derived identifications whenever the exact-extension representatives of the statement are used. All arguments allow unbounded complexes, $D=\\mathcal Hom_R^\\bullet(P,J)$, and zero coefficients.",
+   "uses": [
+    "lem-sfb-scalar-hom-chain-coefficient-coherence",
+    "lem-sfb-hom-scalar-chain-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 06YP (lemma-K-flat-quasi-isomorphism); agent refinement of the normalized representative calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sfb-hom-scalar-chain-identification",
+  "lem-sfb-scalar-hom-chain-coefficient-coherence",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9, 06YP and 0D6D, with the explicit one-K-flat-factor descent and closed-transpose calculations written by Q29; not a verbatim theorem of these tags."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +231,45 @@
    "results": "8 hits: ModuleCat.ExtendScalars.map', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, HomologicalComplex.eval_map, LinearMap.lTensor_injective_of_exact_of_flat, TensorProduct.map_injective_of_flat_flat', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, TensorProduct.map_injective_of_flat_flat",
    "date": "2026-10-21",
    "verdict": "no match: ordinary change-of-rings and generic monoidal currying do not give this normalized unbounded sheaf-complex representative square with non-K-flat D, its resolution descent, and coefficient coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|ExtendScalars.map_tmul|monoidalClosed_uncurry|fromExtendScalars_hom_apply",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary module formulas, exact-functor factorization, or Cartesian exponential comparisons, not the specified unbounded ring-sheaf evaluation with arbitrary D and its normalized coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"evaluation\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary module formulas, exact-functor factorization, or Cartesian exponential comparisons, not the specified unbounded ring-sheaf evaluation with arbitrary D and its normalized coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension of unbounded sheaf complexes carries evaluation to s tensor f(p), without K flatness of the evaluation source; derived Hom base change is coherent",
+   "results": "8 hits: CategoryTheory.Functor.mapExactFunctor_smul, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalClosedLightCondMod, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary module formulas, exact-functor factorization, or Cartesian exponential comparisons, not the specified unbounded ring-sheaf evaluation with arbitrary D and its normalized coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom base change along flat morphisms of ring sheaves is natural and compatible with composition, via evaluation on an arbitrary complex and a K flat second factor",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, PresheafOfModules.Hom.naturality_assoc, RingHom.FaithfullyFlat.isStableUnderBaseChange, SheafOfModules.freeHomEquiv_comp_apply, RingHom.Flat.isStableUnderBaseChange, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary module formulas, exact-functor factorization, or Cartesian exponential comparisons, not the specified unbounded ring-sheaf evaluation with arbitrary D and its normalized coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal functor the internal Hom comparison is defined by transposing the image of evaluation and respects composition",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison, CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv, CategoryTheory.uncurry_expComparison, CategoryTheory.expComparison_whiskerLeft",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give ordinary module formulas, exact-functor factorization, or Cartesian exponential comparisons, not the specified unbounded ring-sheaf evaluation with arbitrary D and its normalized coherence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-hom-flat-evaluation-roof",
@@ -88,5 +289,45 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-hom-flat-scalar-evaluation-model",
+  "worker": "stage1",
+  "group": "Q29",
+  "summary": "Split using existing exact-functor, one-K-flat-factor transpose, scalar representative normalization, and tensor-coherence nodes. Explicitly cancel the resolution quasi-isomorphism for arbitrary D; derive the scalar-adjunction transpose, derived naturality, towers, identity and coefficient-square formulas. No new nodes or statement changes.",
+  "blueprint": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md, 'descending to a finite extension E': the coefficient-passage comparison, via lem-sfb-dc-hom-filtered-colimit and lem-sfb-hom-flat-evaluation-roof; realizes the arbitrary-first-complex evaluation and its derived coherence, without using the unrelated finiteness citation in the first paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic exact-functor, localization, resolution or one-factor tensor tool on the same small ringed site; used only for the coefficient-evaluation calculation, not to replace the constructibility unit route."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Generic exact-functor, localization, resolution or one-factor tensor tool on the same small ringed site; used only for the coefficient-evaluation calculation, not to replace the constructibility unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic exact-functor, localization, resolution or one-factor tensor tool on the same small ringed site; used only for the coefficient-evaluation calculation, not to replace the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor, localization, resolution or one-factor tensor tool on the same small ringed site; used only for the coefficient-evaluation calculation, not to replace the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-46c5f0e23",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-46c5f0e23 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps, every cited statement (chain-transpose, scalar-chain identification, coefficient adjunction, scalar Hom adjunction, scalar comparison data, ringed tensor-Hom model, the tensor and chain coherence nodes, tensor quasi-iso invariance, K-flat resolution, exact-functor nodes, derived change of rings), Stacks sites-cohomology 06YP l.3011, 07A4 l.3684, 08J9 l.8896, 0D6D l.3658, and the blueprint lem-sfb-dc-hom-preserves.proof.md final sentence. The statement is unchanged from base. There are no new nodes, no repair note, no SGA citation, and the DFS from the cited deps does not reach the item, so there is no cycle. Recomputed: adjunct of λ = (ε⊗1)μ; the step-3 cancellation along w⊗1_P without K-flat UEV; h_{b_V} = s⊗b(tv)(p) and descent along UEt⊗1_P; the step-6 Θ-transpose chain; the step-7 naturality transposes; the step-9 tower via tensor coherence; the step-11 τ/κ generator formulas. Edge cases tested: φ=id, Z→Q with D=Z/2, S=0. No duplicate found (rg -lL; the pod/coef hits are specialized point, finite-free or integral cases). Accepted the generic tool_uses kflat-resolution, kflat-tensor-quasiiso, sheaf-ring coefficient adjunction and exact-functor derived-functor. One fault, C4/C1: step 1 uses that E^L is the left derived functor of termwise extension but did not cite lem-pur-derived-change-of-rings (already a stmt_dep). Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hom-flat-scalar-evaluation-model.json by adding it to the step-1 uses and to proof_deps, with one clarifying sentence.; 1 file(s) fixed by the reviewer"
  }
 }
