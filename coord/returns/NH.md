@@ -35,3 +35,11 @@ L: independent stage-2 immutable head e6ce72aa48b7: Head e6ce72aa48b7 is a stage
 
 
 
+
+
+## sk-prop-sfb-qlbar-colimit-x (dedicated repair handoff; head fc993e546b3b25c1526c82b16c3903991c2dbe35)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 6902 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it. This node keeps its statement; its proof becomes the short assembly of the new nodes, at most 3000 characters, and the delivery adds at least 2 new node(s), of comparable size, not one node that restates the whole. Do NOT shorten, summarise or blur the existing argument: every argument the old proof carries must reappear as a new node. A shorter text without the new nodes is the worst answer and is returned. Longest steps: step 2 (997 characters); step 3 (1116 characters); step 5 (1114 characters). Lean module: Sheaf.Paper.CompletedCondensedCoefficients.
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-21): the proof in words is 6902 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it. This node keeps its statement; its proof becomes the short assembly of the new nodes, at most 3000 characters, and the delivery adds at least 2 new node(s), of comparable size, not one node that restates the whole. Do NOT shorten, summarise or blur the existing argument: every argument the old proof carries must reappear as a new node. A shorter text without the new nodes is the worst answer and is returned. Longest steps: step 2 (997 characters); step 3 (1116 characters); step 5 (1114 characters). Lean module: Sheaf.Paper.CompletedCondensedCoefficients.
