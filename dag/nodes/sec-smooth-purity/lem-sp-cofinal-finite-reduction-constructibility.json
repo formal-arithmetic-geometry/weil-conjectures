@@ -15,9 +15,73 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $eN\\geq j$, the identity $\\ell^N=u^N\\pi^{eN}$ implies $(\\ell^N)\\subseteq(\\pi^j)$: explicitly $\\ell^N=\\pi^j u^N\\pi^{eN-j}$. Hence reduction of representatives defines $O/(\\ell^N)\\to O/(\\pi^j)$ and thus $B_N\\to D_j$ on the coefficient sheaves of [sk-def-sp-coefficient-towers]. Its composite with $R\\to B_N$ is $R\\to D_j$. For $N\\geq N_0$ and $j\\geq j_0$ whenever the relevant quotient maps exist, all composites send the class of $x$ to the class of $x$; the quotient squares commute.",
+   "uses": [
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Paragraph (4), applied to the cofinal quotient maps in sk-lem-sp-tower, final integral-constructibility sentence"
+   }
+  },
+  {
+   "text": "Let $P$ be any K-flat $R$-complex, in particular the flat-term representative in the statement. For an acyclic $B_N$-complex $L$, exact restriction of scalars [lem-pur-sheaf-ring-derived-coefficient-adjunction] makes $\\operatorname{Res}L$ acyclic. The natural sheaf tensor cancellation of [lem-sfb-scalar-tensor-cancellation-independent], applied in each bidegree and summed with the total differential, identifies $\\operatorname{Res}\\operatorname{Tot}(L\\otimes_{B_N}(P\\otimes_R B_N))$ with $\\operatorname{Tot}(\\operatorname{Res}L\\otimes_R P)$. The latter is acyclic by [def-pc-kflat-complex]. Exact restriction detects zero cohomology, since it retains the underlying sheaf and all underlying maps. Thus $P\\otimes_R B_N$ is K-flat over $B_N$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-scalar-tensor-cancellation-independent",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, specialized to scalar extension; tensor cancellation in sites-modules.tex Tag 05V4, lemma-flat-change-of-rings"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-successive-derived-quotient-normalization] to $R\\to B_N\\to D_j$. Its comparison is an isomorphism in the target category $D(D_j)$, not merely after forgetting coefficients. Choose a flat-term K-flat representative using [lem-pc-kflat-resolution]; [lem-pur-derived-change-of-rings] and the preceding step compute both successive extensions on it. The comparison and inverse are the ordinary chain maps $(x\\otimes b)\\otimes d\\mapsto x\\otimes\\bar b d$ and $x\\otimes d\\mapsto(x\\otimes1)\\otimes d$. They are $D_j$-linear. The cited normalization gives independence of the representative, naturality in $K$ and in the composable ring maps, and agreement of iterated comparisons. Together with the quotient squares in step 1 this proves compatibility with further quotient maps in both indices.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, and Tag 0G7E, lemma-pullback-K-flat; explicit normalized scalar formula"
+   }
+  },
+  {
+   "text": "Put $H_N=K\\otimes_R^L B_N$. The assumed Tor interval and [def-weil-proetale-tor-amplitude], tested on the degree-zero unit module $B_N$, give $\\mathcal H^q(H_N)=0$ outside $[a,b]$, since $H_N\\otimes_{B_N}^LB_N\\cong H_N$. Thus the constructible cohomology assumption makes $H_N$ an object of the bounded finite-Tor constructible category appearing in [det-sp-scalar-extension-functor]. Fix $j\\geq1$ and take $N=j$; then $eN\\geq j$ because $e\\geq1$. Both $O/\\ell^N$ and $O/\\pi^j$ are finite commutative rings killed by $\\ell^N$. Clause (2) of that existing node applies to their quotient map on the arbitrary scheme $T$, giving constructible cohomology and Tor amplitude in exactly $[a,b]$ for $H_N\\otimes_{B_N}^LD_j$. Transfer these properties through the $D_j$-linear comparison of step 3 to $K\\otimes_R^LD_j$. Testing its Tor interval on $D_j$ itself also proves the asserted cohomology vanishing. The invoked clause has no flatness or finite-projective-dimension requirement on the coefficient map and no invertibility or completeness hypothesis.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Paragraphs (2) and (4), applied to sk-lem-sp-tower final integral-constructibility sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-coefficient-towers",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "def-pc-kflat-complex",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Final integral-constructibility sentence: cofinal uniformizer reductions, using Stacks Tags 0D6D and 0G7E and the existing finite scalar-extension theorem det-sp-scalar-extension-functor (2). Bhatt–Scholze 3.5.4–3.5.7 supplies the tower context, not the constructibility-preservation assertion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -105,10 +169,97 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|[Tt]or[Aa]mplitude|[Cc]hange[Oo]f[Rr]ings",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned hits give cohomological bounds, ordinary module/sheaf functors, light condensed closed structures or flat ordinary scalar extension; none states the finite-ring constructibility and uniform Tor-amplitude claim or its target-valued derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned hits give cohomological bounds, ordinary module/sheaf functors, light condensed closed structures or flat ordinary scalar extension; none states the finite-ring constructibility and uniform Tor-amplitude claim or its target-valued derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal quotient reductions of a complex of sheaves preserve constructible cohomology and uniform Tor amplitude by derived extension of scalars",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned hits give cohomological bounds, ordinary module/sheaf functors, light condensed closed structures or flat ordinary scalar extension; none states the finite-ring constructibility and uniform Tor-amplitude claim or its target-valued derived comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes of sheaves with Tor amplitude a b stay constructible after derived change of finite coefficient rings",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "SheafOfModules.hasLimit",
+     "KaehlerDifferential.cotangentComplexBaseChange.congr_simp",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits",
+     "SheafOfModules.sheafificationCompPullback",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul",
+     "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+     "SheafOfModules.Finite.forgetPreservesFiniteLimits"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned hits give cohomological bounds, ordinary module/sheaf functors, light condensed closed structures or flat ordinary scalar extension; none states the finite-ring constructibility and uniform Tor-amplitude claim or its target-valued derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor extension from a finite ring to a quotient preserves bounded constructible sheaf complexes of finite Tor dimension",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned hits give cohomological bounds, ordinary module/sheaf functors, light condensed closed structures or flat ordinary scalar extension; none states the finite-ring constructibility and uniform Tor-amplitude claim or its target-valued derived comparisons."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-sp-tower",
@@ -125,5 +276,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-cofinal-finite-reduction-constructibility",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the quotient arithmetic, K-flat preservation, target-linear normalized scalar associativity and the cofinal application of finite-ring constructibility/Tor preservation. Reused all non-elementary facts from existing nodes; no new nodes. Read Stacks 0D6D/0G7E and the current scalar-extension blueprint; no exact project Lean attachment found.",
+  "blueprint": "Realizes sk-lem-sp-tower proof final integral-constructibility sentence for every uniformizer quotient; the existing scalar-extension proof paragraphs (2),(4) supply the finite-ring step and scalar normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Exact restriction for arbitrary ring sheaves used to verify K-flatness; the tower unit contains no general scalar restriction lemma."
+   },
+   {
+    "node": "lem-sfb-scalar-tensor-cancellation-independent",
+    "why": "Ordinary sheaf tensor cancellation over arbitrary ring sheaves, needed for the K-flat calculation; the tower unit has no such tensor identity."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "General ring-sheaf scalar associator with its target-linear representative and naturality, applied to the cofinal quotient triangle."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat representatives over the completed coefficient sheaf."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The item explicitly uses this general target-valued scalar extension and its K-flat computation."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Finite-ring extension preserves intrinsic constructibility and the same Tor interval on any scheme; used as a generic coefficient tool without replacing the tower reconstruction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-scalar-tensor-cancellation-independent",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "det-sp-scalar-extension-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-b872e6797",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-b872e6797 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the base, the cited statements and the blueprint. The statement is byte-identical to the base (live/side-live unsplit), stmt_deps are unchanged, no new nodes, no repair note, first delivery, not dropped, no SGA, no cycle (the only citer is sk-lem-sp-tower and no proof_dep reaches it). Source: main-20261015 sk-lem-sp-tower.proof final integral-constructibility sentence, and sk-def-sp-scalar-extension-functor.proof (2),(4). sk-lem-sp-tower step 4 cites the item for exactly its conclusion. Step 1: ell^N = pi^j u^N pi^{eN-j} gives (ell^N) ⊆ (pi^j); the quotient squares commute on representatives. Elementary and correct. Step 2: exact restriction (lem-pur-sheaf-ring-derived-coefficient-adjunction), the cancellation U(M⊗_S(S⊗_R N)) ≅ UM⊗_R N natural in both variables (lem-sfb-scalar-tensor-cancellation-independent) and K-flatness of P over R give K-flatness of P⊗B_N. Restriction detects acyclicity, so this is a valid few-line argument. Step 3: lem-sfb-successive-derived-quotient-normalization holds for arbitrary ring sheaves. It gives the D(T)-isomorphism, the representative maps, and naturality in K and in the composable ring maps. Together with step 1 this gives compatibility in both indices. lem-pur-derived-change-of-rings (2) with the K-flat P⊗B_N computes the iterated extension. Step 4: testing Tor amplitude on B_N gives bounded cohomology, so H_N ∈ Dctf(O/ell^N). With N=j (e≥1), det-sp-scalar-extension-functor (2) holds for any scheme T and finite rings killed by ell^j, with no flatness or ell-invertibility needed. Its (−)_B is def-weil-pbc-constant-coefficient-scalar-extension, which is defined through lem-pur-derived-change-of-rings, so it is the same functor. Small cases checked: e=1; e=2 with N=j=1 (non-flat O/pi^2 → O/pi, fine because base change preserves Tor amplitude); e=2, N=1, j=2 (D_2=B_1); K=0. lem-coef-integral-residue-tor is not a duplicate. Accepted tool_uses: the six general coefficient-change nodes in split_report. No changes."
  }
 }
