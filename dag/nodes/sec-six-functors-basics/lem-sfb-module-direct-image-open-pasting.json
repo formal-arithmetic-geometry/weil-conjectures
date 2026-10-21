@@ -15,11 +15,166 @@
   "sk-def-sfb-module-lower-shriek",
   "def-sfb-finite-lower-star-comp",
   "lem-sfb-proetale-open-restriction-counit",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-module-objects",
+  "def-pc-fibre-product",
+  "def-sfb-module-upper-star-comp"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small representatives in the statement. Use the sheafified sectionwise tensor on abelian sheaves: [det-def-sfb-sheaf-tensor-structure] supplies strong monoidal sheafification. Thus the size and monoidal-sheafification hypotheses of [lem-sfb-section-ring-lax-pushforward-coherence] hold. Apply its internal/sectionwise comparison to each base-change functor, which defines direct image by [def-sfb-finite-lower-star]. In these coordinates\n$$(a_*M)(V)=M(S\\times_TV),\\qquad r\\cdot m=\\eta_{a,V}(r)m\\quad(a:S\\to T).$$\nThis uses the canonical lax structure specified in that comparison; it does not assume that evaluation preserves tensor products. The comparison preserves underlying sheaves and sections. Module morphisms are underlying sheaf morphisms satisfying one action equation by [sk-def-sfb-module-objects]; consequently equality can be checked on every section over every site object, and a fixed underlying sheaf map has at most one lift.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward; internal/sectionwise passage is the explicitly cited existing tensor refinement."
+   }
+  },
+  {
+   "text": "The isomorphism [def-sfb-module-lower-star-comp] has the underlying sheaf compositor specified in [def-sfb-finite-lower-star-comp]; take its inverse to obtain exactly $c_{g,f}$ in the question. Its evaluation is the reindexing from $M(X\\times_ZV)$ to $M(X\\times_Y(Y\\times_ZV))$. These schemes are canonically isomorphic over $X$, with the same projection to $V$. Naturality in $V$ follows because the reindexing isomorphism commutes with both projections after any arrow $V'\\to V$; naturality in $M$ is the naturality of a sheaf morphism for this arrow. Thus no new choice of composition map is made.",
+   "uses": [
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-finite-lower-star-comp",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; direct-image composition evaluated on base changes."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-proetale-ringed-open-comparison] to identify inverse image along an open $j$ with slice restriction over the actual inverse-image ring. The left Kan-extension adjunction of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] sends a section of $F(V)$ under its unit to the coprojection indexed by $(V,\\mathrm{id}_{U\\times_TV})$. For $V\\to U$, the canonical slice comparison evaluates this coprojection by restriction along $U\\times_TV\\to V$, an isomorphism whose inverse is the distinguished lift $V\\to U\\times_TV$. Thus this unit is identity on $F(V)$ after the canonical identification. The mate formula [def-sfb-eta] therefore identifies $\\eta_{j,V}$ with $\\alpha_{j,V}:\\Lambda_T(V)\\to\\Lambda_U(V)$; the same holds for every pulled-back open. By [def-weil-pbc-proetale-operations], scalar extension along $\\alpha_j$ identifies $j^*N$ with $j^{-1}N$, with action $r\\cdot n=\\alpha_j^{-1}(r)n$: the mutually inverse maps are $n\\otimes r\\mapsto\\alpha_j^{-1}(r)n$ and $n\\mapsto n\\otimes1$. They commute with restrictions by the balancing relation.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "def-sfb-eta",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D3, lemma-adjoint-push-pull-modules, and 03DH, section-localize; sites.tex Tag 00XZ, section-localize."
+   }
+  },
+  {
+   "text": "Fix $V\\to U$ and put $A=S\\times_TV\\cong S_U\\times_UV$. Write $a_V=\\alpha_{j,V}$ and $b_A=\\alpha_{j_S,A}$ in the slice coordinates of step 3. Apply [lem-sfb-eta-comp] to $j\\circ f_U=f\\circ j_S$, and evaluate at $V$, regarded as an object over $T$. Its compositors are the fibre-product reindexings of step 2. Step 3 identifies the two open coefficient maps with $a_V,b_A$, so equality of the coefficient maps for this same composite gives\n$$b_A\\circ\\eta_{f,V}=\\eta_{f_U,V}\\circ a_V.$$\nBoth $a_V$ and $b_A$ are invertible by hypothesis. Hence for $r\\in\\Lambda_U(V)$,\n$$\\eta_{f,V}(a_V^{-1}r)=b_A^{-1}(\\eta_{f_U,V}(r)).$$\nThe left side is the scalar acting on $(j^*f_*M)(V)$; the right side is the scalar acting on $((f_U)_*j_S^*M)(V)$, by steps 1 and 3. Thus the fibre-product reindexing preserves the specified module actions, rather than only the underlying additive groups.",
+   "uses": [
+    "lem-sfb-eta-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; coefficient-square calculation using the existing composition theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proetale-open-restriction-counit] with $R=\\Lambda_T$ and with $M$ first regarded as an $f^{-1}\\Lambda_T$-module through $\\alpha_f$. It supplies a natural isomorphism on actual inverse-image module sheaves whose evaluation is $M(S\\times_TV)\\cong M(S_U\\times_UV)$. Change the coefficient actions to $\\Lambda_U$ and $\\Lambda_{S_U}$ using their given isomorphisms. Step 4 proves that exactly this same additive comparison is linear for the resulting actions. Its inverse is linear as well: for a bijective linear map $u$, applying $u$ to $u^{-1}(rn)$ and $r u^{-1}(n)$ gives $rn$ in both cases. Thus it is a natural module isomorphism. It is the transported comparison specified in the statement, and step 1 gives uniqueness of the lift. This proves (a), including the normalization; the composition lift was fixed in step 2.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, together with sites.tex Tag 00XZ, section-localize; apply the existing module open-slice comparison, then the explicit action calculation."
+   }
+  },
+  {
+   "text": "For (b), evaluate both composites at $M$ and $V\\to T$. Their common source is $M(X\\times_TV)$ and their common target is\n$$M\\bigl(X\\times_Y(Y\\times_Z(Z\\times_TV))\\bigr).$$\nEach is the restriction of $M$ along the canonical map from the latter iterated fibre product to $X\\times_TV$. On schemes, both maps have projection to $X$ equal to the first projection and projection to $V$ equal to the iterated last projection. They are equal by the universal property in [def-pc-fibre-product]. Contravariant functoriality of $M$ therefore makes the two section maps equal. Since the maps are module morphisms by step 2, step 1 gives the claimed module equality, with the canonical functor associator inserted.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; elementary associativity of base-change reindexing."
+   }
+  },
+  {
+   "text": "For successive opens $W\\xrightarrow vU\\xrightarrow jT$, the canonical module pullback comparison in [def-sfb-module-upper-star-comp] becomes identity on section groups under the transported-action coordinates of step 3. Indeed, [lem-sfb-eta-comp] evaluated at $E\\to W$ gives $\\alpha_{jv,E}=\\alpha_{v,E}\\alpha_{j,E}$, since all three maps are open coefficient maps as computed in step 3. Thus the action transported in one step and the action transported twice coincide: $(\\alpha_v\\alpha_j)^{-1}=\\alpha_j^{-1}\\alpha_v^{-1}$. The scalar-extension comparison sends $1\\otimes(1\\otimes m)$ to $1\\otimes m$ and hence is identity in these coordinates. It is the specified comparison: both this map and the comparison defined by conjugation carry the composite scalar-extension unit $m\\mapsto1\\otimes(1\\otimes m)$ to $m\\mapsto1\\otimes m$, and the adjunction bijection determines the comparison uniquely. The same argument applies to the two pulled-back opens in $S$.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "lem-sfb-eta-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D3, lemma-adjoint-push-pull-modules, and 03DH, section-localize; elementary tensor-unit normalization of the specified comparison."
+   }
+  },
+  {
+   "text": "For (c), let $E\\to W$ be any site object. Step 7 identifies the sources for the single and successive restrictions with $M(S\\times_TE)$, and identifies their targets with $M(S_W\\times_WE)$. By step 5 the single restriction uses the canonical map $S_W\\times_WE\\to S\\times_TE$. The successive restrictions use the composite\n$$S_W\\times_WE\\longrightarrow S_U\\times_UE\\longrightarrow S\\times_TE.$$\nThe projections to $S$ and $E$ of this composite are the same as those of the single map, so [def-pc-fibre-product] makes them equal. Functoriality of the restrictions of $M$ proves equality on sections. Step 1 makes it an equality of module morphisms with the canonical comparisons of step 7.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ, section-localize; successive slice restrictions."
+   }
+  },
+  {
+   "text": "For (d), evaluate at $M$ and $V\\to U$. The common source is $M(X\\times_TV)$, and the common target is\n$$M\\bigl(X_U\\times_{Y_U}(Y_U\\times_UV)\\bigr).$$\nThe left-hand path first expands $gf$ through $Y$ and then restricts through $Y_U$ and $X_U$; the right-hand path first restricts $X$ to $X_U$ and then expands $g_Uf_U$. By steps 2 and 5 each path is reindexing along its composite map from $X_U\\times_{Y_U}(Y_U\\times_UV)$ to $X\\times_TV$. Both composites have projection to $X$ induced by $X_U\\to X$ and projection to $V$ the last projection. The uniqueness clause of [def-pc-fibre-product] identifies these maps. Contravariant functoriality gives equality on sections, and step 1 gives equality of module morphisms. This also specifies explicitly the fibre-product identifications implicit in (d).",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, with sites.tex Tag 00XZ, section-localize; mixed pasting calculation."
+   }
+  },
+  {
+   "text": "For identity scheme maps, [lem-sfb-eta-id] identifies the coefficient unit with the inverse of the canonical direct-image identity. Therefore the identity direct image has the original module action under $T\\times_TV\\cong V$. The corresponding composition maps of step 2 are identities in these coordinates. For the identity open, step 3 identifies its coefficient map with this same identity, and step 5 identifies its open comparison with identity. The same projection calculation proves the unit cases when one factor in a composite is an identity. Empty opens and the empty scheme are allowed: all the fibre products in the computations are empty, and the same identities of restriction maps apply.",
+   "uses": [
+    "lem-sfb-eta-id"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; identity and unit specializations."
+   }
+  },
+  {
+   "text": "Finally let $M^\\bullet$ be a cochain complex as in [def-weil-abstract-derived-category]. Apply each comparison to $M^n$ in every integer degree $n$. Naturality in the module morphism $d^n:M^n\\to M^{n+1}$, proved in steps 2 and 5, says precisely $B(d^n)\\tau_{M^n}=\\tau_{M^{n+1}}A(d^n)$ for the two functors $A,B$ compared by $\\tau$. Thus the comparisons and their inverses are cochain maps. Every equality already proved is an equality in each degree, hence an equality of these cochain maps. This is exactly the final degreewise assertion; no resolutions or localization are used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity: the degreewise underived realization of direct-image and open-restriction coherence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-objects",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-finite-lower-star-comp",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-sfb-eta",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-sfb-eta-comp",
+  "lem-sfb-proetale-open-restriction-counit",
+  "def-sfb-module-upper-star-comp",
+  "lem-sfb-eta-id",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "Composition isomorphism and Canonicity and associativity; underived module elaboration from proetale.tex Tag 09A5, sites.tex Tag 00XZ, and sites-modules.tex Tags 03D3, 03D6, 03DH."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +210,45 @@
    "results": "8 hits: SheafOfModules.pullbackComp, CondensedMod.ofSheafCompHaus, SheafOfModules.pullback_assoc, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, LightCondMod.ofSheafLightProfinite",
    "date": "2026-10-21",
    "verdict": "no match: SheafOfModules.pushforward_assoc proves direct-image associativity only; the scheme module restriction results are for Zariski structure modules. None states the open-slice module comparison with condensed coefficient transport and its mixed pasting equation."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward_assoc|pushforwardComp|restrictFunctorComp",
+   "results": "19 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: pushforwardComp, pushforward_assoc and pullbackComp cover generic composition; the restriction hits concern Zariski structure modules. None supplies the specified pro-etale open-slice comparison, transported condensed coefficient actions, and both open and mixed pasting equations in one exact or one-line specialization. Read PushforwardContinuous.lean:139-223 and PullbackContinuous.lean:168-200."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules direct image and restriction to open subscheme base change comparison composition coherence",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, ModuleCat.Tilde.toOpen_res, SheafOfModules.pushforwardComp, SheafOfModules.comp_val",
+   "date": "2026-10-21",
+   "verdict": "no match: pushforwardComp, pushforward_assoc and pullbackComp cover generic composition; the restriction hits concern Zariski structure modules. None supplies the specified pro-etale open-slice comparison, transported condensed coefficient actions, and both open and mixed pasting equations in one exact or one-line specialization. Read PushforwardContinuous.lean:139-223 and PullbackContinuous.lean:168-200."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward_assoc",
+   "results": "1 hits: SheafOfModules.pushforward_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: pushforwardComp, pushforward_assoc and pullbackComp cover generic composition; the restriction hits concern Zariski structure modules. None supplies the specified pro-etale open-slice comparison, transported condensed coefficient actions, and both open and mixed pasting equations in one exact or one-line specialization. Read PushforwardContinuous.lean:139-223 and PullbackContinuous.lean:168-200."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale sheaves of modules with pulled back condensed coefficients have direct image composition and open restriction isomorphisms satisfying successive open and mixed pasting coherence",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: pushforwardComp, pushforward_assoc and pullbackComp cover generic composition; the restriction hits concern Zariski structure modules. None supplies the specified pro-etale open-slice comparison, transported condensed coefficient actions, and both open and mixed pasting equations in one exact or one-line specialization. Read PushforwardContinuous.lean:139-223 and PullbackContinuous.lean:168-200."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for sheaves of modules along a localization of a site is given by restriction of sections and is compatible with compositions of site functors",
+   "results": "8 hits: SheafOfModules.pullback, SheafOfModules.restrictScalars, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardSections, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: pushforwardComp, pushforward_assoc and pullbackComp cover generic composition; the restriction hits concern Zariski structure modules. None supplies the specified pro-etale open-slice comparison, transported condensed coefficient actions, and both open and mixed pasting equations in one exact or one-line specialization. Read PushforwardContinuous.lean:139-223 and PullbackContinuous.lean:168-200."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-derived-direct-image-open-coherence",
@@ -78,5 +268,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-module-direct-image-open-pasting",
+  "worker": "stage1",
+  "summary": "Proved the existing statement in eleven steps without new nodes. Fixed the composition map to the specified module compositor, computed open scalar actions from the eta composition law, transported the actual-inverse-ring open comparison, and checked associativity, successive-open pasting, mixed pasting, identity cases and differentials on sections. No statement hypothesis or conclusion changed.",
+  "blueprint": "Nearest ancestor det-cor-affine-space-rational-induction: its composition-mate step uses localizing lower-shriek composition. This item realizes the underived direct-image/open-restriction calculations extracted through lem-sfb-localizing-lower-shriek-composition and lem-sfb-derived-direct-image-open-coherence; concretely sk-thm-sf-comp-composition.proof.md, Composition isomorphism and Canonicity and associativity. No change to the affine-space unit route.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-sheaf-tensor-structure",
+    "why": "Supplies the standard strong monoidal sheafification needed to interpret internal module actions on sections. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-sfb-section-ring-lax-pushforward-coherence",
+    "why": "Identifies internal direct-image module actions with sectionwise actions through eta, preserving the underlying sheaf. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-sfb-finite-lower-star",
+    "why": "Defines the direct-image section formula used in every reindexing calculation. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "Defines morphisms as underlying action-preserving sheaf maps, so their equality is detected on sections. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-sfb-module-lower-star-comp",
+    "why": "Fixes the module compositor and its underlying sheaf map, without replacing the unit route. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-sfb-finite-lower-star-comp",
+    "why": "Fixes the projection-preserving fibre-product reindexing that normalizes c. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Supplies the universal property used to equate the explicit projection-preserving maps. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Identifies actual open inverse image with slice restriction for arbitrary sheaves of rings. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-sfb-eta",
+    "why": "Defines eta as the adjunction mate of alpha, used for its value over an object factoring through an open. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Gives the explicit scalar-extension isomorphism for identified coefficient rings. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Gives the coefficient composition law needed for the open square and successive opens. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Supplies the actual-inverse-image-ring open comparison with its exact section formula, before the explicitly checked coefficient transport. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-sfb-module-upper-star-comp",
+    "why": "Fixes the canonical pullback compositor by adjunction; step 7 checks its normalization. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-sfb-eta-id",
+    "why": "Gives the coefficient identity law for the identity module direct image. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Defines cochain maps and complexes for the final degreewise assertion. The affine-space induction unit contains no statement providing this generic underived tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Supplies the concrete left Kan-extension adjunction whose unit is the distinguished object coprojection. The affine-space unit contains no such generic site-adjunction construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-objects",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-finite-lower-star-comp",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-sfb-eta",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-eta-comp",
+  "lem-sfb-proetale-open-restriction-counit",
+  "def-sfb-module-upper-star-comp",
+  "lem-sfb-eta-id",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-9da732bf2",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-9da732bf2 (reviewer sub-agent of L); spot-checked: First delivery, with the statement unchanged from base. The item is still unsplit in live and side-live, is not in a dropped list and has no repair note. The delivery is one item commit plus its report, with no new nodes. The three added stmt_deps (module objects, fibre product, module upper-star comp) are notions the statement uses, and proof_deps is the union of the step uses. I checked the typing of (b), (c) and (d) through the identifications X×_Y Y_U≅X_U and S_U×_U W≅S_W, and tested identity f or j, identity factors, empty U or W and the empty scheme. Step 1: section-ring-lax-pushforward-coherence with ψ=η_a gives exactly Res_η mapMod(f_*), with the identity as underlying map. Step 3: the unit of Lan+sheafify at an object over U is the identity, because (W, graph) is initial in I_W, so η_j=α_j; the scalar-extension isomorphism is verbatim from def-weil-pbc-proetale-operations. Step 4: eta-comp applied to jf_U=fj_S gives b_A η_f=η_{f_U} a_V, and I re-derived that the two scalar actions match. Step 5: open-restriction-counit holds for arbitrary f and R; with M restricted along α_f its f_* action is η_f; linearity comes from step 4. Steps 6, 8 and 9 equate fibre-product maps by their projections. Step 7: α_{jv}=α_vα_j, and the conjugate characterization of def-sfb-module-upper-star-comp fixes the comparison. Steps 10–11 cover identities via eta-id and naturality at the differentials. The parent derived-open-coherence uses exactly c, β, (b)–(d) and the identity cases. Source: blueprint sk-thm-sf-comp-composition, 'Canonicity and associativity'; Stacks 09A5, 00XZ, 03D3 and 03DH match their labels; no SGA. I accept the 16 declared tool uses as generic sheaf and coefficient tools. I found no duplicate in the DAG. Advisory only: step 3 cites the continuous-functor adjunction rather than def-sfb-finite-upper-lower-star-adjunction, which is the same construction; stage 2 should pin β sectionwise. No fixes."
  }
 }
