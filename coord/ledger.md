@@ -23183,3 +23183,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:24 L: merged deliver/W8/Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage (stage 3; reviewer PASS; first push; landing 20261021T172409-L-3367494 (interface); batch 20261021T172353; modules 3; new nodes 2; change records: coord/changes/W8-integral-open-elaboration.md)
 - 17:24 L: merged deliver/NP/lem-sfb-indfinite-contractible-base-wstrict (reviewer PASS; first push; new nodes: 1)
 - 17:24 L: merged deliver/N5/lem-sfb-integral-quotient-projection-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 17:25 L: returned deliver/NB/lem-sfb-integral-lisse-closed-base-change (reviewer RETURN: C5 (twice), with D-type consequences. I read the item, all three new nodes, every cited statement and Stacks 09BL in ful)
