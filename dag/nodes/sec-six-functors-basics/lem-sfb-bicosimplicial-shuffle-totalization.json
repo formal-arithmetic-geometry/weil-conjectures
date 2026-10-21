@@ -245,5 +245,38 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3e05719c0 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, the blueprint direct-images proof (whose paragraph (3) gives the application only, not this proof) and Stacks 0649/064A/08Q3 at their labels. Item statement, stmt_deps and blueprint fields are byte-identical to the unsplit NP-era version, so nothing was weakened; parent step 8 gets the direction D->T, first-direction-first ordering and strict S j_D=j_T it needs. Steps: (1) Fun(DeltaxDelta,Ab) is abelian, additive Yoneda gives Hom(R_i,R_j)=Z[Hom(j,i)], and enough projectives is shown, which def-sp-injective-resolutions requires for Step 5 in E^op. (2) P(p,q)=V(p,q) and Q(p,q)=Tot(U(p)⊗U(q)) with the Koszul boundary. (3) I redid the cone contraction and H=h⊗1+(-1)^a E⊗h: the cross terms cancel, E∂=0, and ∂H+H∂=1-E⊗E. (4) The generator value is Σε(α_μ,α_ν) with the item's coordinate assignment. (5) The injective lift in E^op with order (Q^op,P^op) gives τ:P->Q; new-t4's hypotheses hold, and its off-unit use is declared in tool_uses and accepted. The lift node is a Mathlib leaf. (6) Evaluation is contravariant and finite; the homotopy equations transfer. (7) The d_r signs cancel under the homotopy because n drops by one, so this is a genuine total-complex homotopy equivalence. (8) Derived-form isomorphism, natural. (9) The degree-0 coface computation and S_{0,0}=id give S j_D=j_T strictly; constant, zero and one-constant-direction cases are covered since the proof is unnormalized. New node: B1, B2, B3, B7 and B9 are fine and it is strictly smaller than the item (D1). My independent script verified the shuffle boundary identity on all 1,801 basis pairs with p,q<=2, a+b<=4, including repeated vertices; the test catches sign errors (wrong signs give 1,009 or 496 failures). My own Mathlib grep found no Eilenberg–Zilber declaration. The DAG sweep found no duplicate: the normalized AW diagonal and the bisimplicial weak-equivalence nodes are different statements. No SGA citations, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BicosimplicialShuffleTotalization",
+  "declaration": "AlgebraicTopology.BicosimplicialShuffle.exists_shuffle",
+  "declarations": [
+   "AlgebraicTopology.BicosimplicialShuffle.diagonalBicomplex",
+   "AlgebraicTopology.BicosimplicialShuffle.tripleComplex",
+   "AlgebraicTopology.BicosimplicialShuffle.cosimplicialTotal",
+   "AlgebraicTopology.BicosimplicialShuffle.diagonalTotal",
+   "AlgebraicTopology.BicosimplicialShuffle.successiveTotal",
+   "AlgebraicTopology.BicosimplicialShuffle.diagonalMap",
+   "AlgebraicTopology.BicosimplicialShuffle.successiveMap",
+   "AlgebraicTopology.BicosimplicialShuffle.diagonalInclusion",
+   "AlgebraicTopology.BicosimplicialShuffle.successiveInclusion",
+   "AlgebraicTopology.BicosimplicialShuffle.shuffleSurjection",
+   "AlgebraicTopology.BicosimplicialShuffle.shuffleSign",
+   "AlgebraicTopology.BicosimplicialShuffle.shuffleTerm",
+   "AlgebraicTopology.BicosimplicialShuffle.exists_shuffle"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BicosimplicialShuffleTotalization.lean",
+  "statement": "theorem exists_shuffle [HasDerivedCategory.{w} C] : ∃ S : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, diagonalTotal X ⟶ successiveTotal X, (∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (n r m : ℕ) (h : n + r = m), diagonalInclusion X n r m h ≫ (S X).f m = ∑ μ : Finset (Fin n), shuffleTerm X n r m h μ) ∧ (∀ (X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (f : X ⟶ Y), diagonalMap f ≫ S Y = S X ≫ successiveMap f) ∧ (∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, ∃ e : HomotopyEquiv (diagonalTotal X) (successiveTotal X), e.hom = S X) ∧ (∃ e : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, (DerivedCategory.Q.obj ((diagonalTotal X).extend ComplexShape.embeddingUpNat)) ≅ (DerivedCategory.Q.obj ((successiveTotal X).extend ComplexShape.embeddingUpNat)), (∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, (e X).hom = DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (S X))) ∧ (∀ (X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (f : X ⟶ Y), DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (diagonalMap f)) ≫ (e Y).hom = (e X).hom ≫ DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (successiveMap f)))) ∧ (∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (M : CochainComplex C ℕ) (i : M ⟶ X.obj (⦋0⦌, ⦋0⦌)), i ≫ (X.map ((SimplexCategory.δ (0 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) - X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌))) = 0 → i ≫ (X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (0 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) - X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (1 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌))) = 0 → ∃ (jD : M ⟶ diagonalTotal X) (jT : M ⟶ successiveTotal X), (∀ m : ℕ, jD.f m = i.f m ≫ diagonalInclusion X 0 m m (Nat.zero_add m)) ∧ (∀ m : ℕ, jT.f m = i.f m ≫ successiveInclusion X 0 0 m m (Nat.zero_add m)) ∧ jD ≫ S X = jT)",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be1e90f36",
+  "group": "N7",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: D(X) and T(X) are Mathlib totals of alternating coface complexes, and with TensorSigns (up ℕ) the differentials are exactly δ_diag+(-1)^n d_r and δ₁+(-1)^a δ₂+(-1)^{a+b} d_r. The shuffle surjections count {j∈μ: j<i}; the sign counts the inversions of the list (μ,μᶜ). S is pinned on every coproduct inclusion, so it is the canonical map. Naturality, HomotopyEquiv with e.hom = S, and a natural derived iso with hom = Q.map(extend S) are stated, so the isomorphism is in derived form. The strict augmentation clause jD ≫ S = jT has the correct d⁰ = δ₀−δ₁ hypotheses. My script found S∘d_D = d_T∘S universally for n ≤ 5 with 0 mismatches; a deliberately wrong sign gives 144 mismatches. The delivery changes only the lean record; the statement is verbatim and the declarations match the file. Imports: stmt-dep modules public, proof-dep modules (InjectiveResolution, AugmentedResolutionLiftHomotopy) plain. No hollow definitions, no extra assumptions, universes bound, only sorry is the theorem proof. Item and citer are not dropped; no duplicate in Mathlib or the project. Advisory only: the derived-naturality conjunct is redundant. No compile run, since no file changed."
  }
 }
