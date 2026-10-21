@@ -14,8 +14,12 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Span
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.SingleHomology
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.CategoryTheory.Abelian.Exact
+import Mathlib.LinearAlgebra.Basis.Basic
 
 /-! # The exact scalar periodic resolution
 
@@ -62,7 +66,14 @@ Proof: if both indices are negative the composite is f squared, hence zero.
 At the cutoff the second map is zero; above it the first map is zero. -/
 theorem scalarPeriodicD_comp {M : A} (f : M ⟶ M) (hf : f ≫ f = 0) (i : ℤ) :
     scalarPeriodicD f i ≫ scalarPeriodicD f (i + 1) = 0 := by
-  sorry
+  classical
+  by_cases hi : i < 0
+  · by_cases hj : i + 1 < 0
+    · simp only [scalarPeriodicD, dif_pos hi, dif_pos hj, Category.assoc,
+        eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+      rw [← Category.assoc f f, hf, zero_comp, comp_zero]
+    · simp [scalarPeriodicD, hj]
+  · simp [scalarPeriodicD, hi]
 
 /-- The actual cochain complex with the prescribed nonpositive terms and differentials.
 Source: blueprint, "The examples" (blueprint: lem-sfb-exact-scalar-periodic-resolution). -/
@@ -85,7 +96,11 @@ theorem scalarPeriodicAugmentation_condition {M : A} (f : M ⟶ M) (hf : f ≫ f
     (i : ℤ) (hi : (ComplexShape.up ℤ).Rel i 0) :
     (scalarPeriodic f hf).d i 0 ≫
       (scalarPeriodicXIso f hf 0 le_rfl).hom ≫ cokernel.π f = 0 := by
-  sorry
+  have hi' : i + 1 = 0 := hi
+  have hi0 : i = -1 := by omega
+  subst i
+  simp [scalarPeriodic, CochainComplex.of.d, scalarPeriodicD,
+    scalarPeriodicXIso]
 
 /-- The augmentation has the quotient map in degree zero and zero elsewhere.
 Source: blueprint, "The examples" (blueprint: lem-sfb-exact-scalar-periodic-resolution). -/
@@ -96,6 +111,68 @@ def scalarPeriodicAugmentation {M : A} (f : M ⟶ M) (hf : f ≫ f = 0) :
     (scalarPeriodicAugmentation_condition f hf)
 
 end Construction
+
+/-- Away from zero the periodic complex is exact: negative degrees are the given
+exact short complex and positive-degree terms vanish. Source: blueprint, "The examples". -/
+private theorem scalarPeriodic_exactAt
+    {B : Type*} [Category* B] [Abelian B] {M : B}
+    (f : M ⟶ M) (hf : f ≫ f = 0)
+    (he : (ShortComplex.mk f f hf).Exact) (i : ℤ) (hi : i ≠ 0) :
+    (scalarPeriodic f hf).ExactAt i := by
+  by_cases hn : i < 0
+  · rw [HomologicalComplex.exactAt_iff' _ (i - 1) i (i + 1) (by simp) (by simp)]
+    let e : (scalarPeriodic f hf).sc' (i - 1) i (i + 1) ≅
+        ShortComplex.mk f f hf :=
+      ShortComplex.isoMk
+        (scalarPeriodicXIso f hf (i - 1) (by omega))
+        (scalarPeriodicXIso f hf i (by omega))
+        (scalarPeriodicXIso f hf (i + 1) (by omega))
+        (by simp [scalarPeriodic, CochainComplex.of.d, scalarPeriodicD,
+          scalarPeriodicXIso, show i - 1 < 0 by omega])
+        (by simp [scalarPeriodic, CochainComplex.of.d, scalarPeriodicD,
+          scalarPeriodicXIso, hn])
+    exact (ShortComplex.exact_iff_of_iso e).2 he
+  · apply HomologicalComplex.ExactAt.of_isZero
+    simpa [scalarPeriodic, scalarPeriodicX, show ¬i ≤ 0 by omega] using isZero_zero B
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Cokernel exactness gives the augmentation quasi-isomorphism at zero; the other
+degrees are exact on both sides. Source: blueprint, "The examples". -/
+private theorem scalarPeriodic_quasiIso
+    {B : Type*} [Category* B] [Abelian B] {M : B}
+    (f : M ⟶ M) (hf : f ≫ f = 0)
+    (he : (ShortComplex.mk f f hf).Exact) :
+    QuasiIso (scalarPeriodicAugmentation f hf) := by
+  rw [quasiIso_iff]
+  intro i
+  by_cases hi : i = 0
+  · subst i
+    rw [quasiIsoAt_iff' _ (-1) 0 1 (by simp) (by simp)]
+    rw [ShortComplex.quasiIso_iff_of_zeros' _
+      (by simp [scalarPeriodic, CochainComplex.of.d, scalarPeriodicD])
+      (by simp) (by simp)]
+    constructor
+    · let e : ShortComplex.mk
+          ((scalarPeriodic f hf).d (-1) 0)
+          ((scalarPeriodicAugmentation f hf).f 0)
+          (by rw [← (scalarPeriodicAugmentation f hf).comm (-1) 0]; simp) ≅
+          ShortComplex.mk f (cokernel.π f) (cokernel.condition f) :=
+        ShortComplex.isoMk
+          (scalarPeriodicXIso f hf (-1) (by omega))
+          (scalarPeriodicXIso f hf 0 le_rfl)
+          (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (cokernel f))
+          (by simp [scalarPeriodic, CochainComplex.of.d, scalarPeriodicD,
+            scalarPeriodicXIso])
+          (by simp [scalarPeriodicAugmentation, HomologicalComplex.mkHomToSingle_f])
+      exact (ShortComplex.exact_iff_of_iso e).2
+        (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel f))
+    · change Epi ((scalarPeriodicAugmentation f hf).f 0)
+      dsimp [scalarPeriodicAugmentation]
+      rw [HomologicalComplex.mkHomToSingle_f]
+      infer_instance
+  · exact (quasiIsoAt_iff_exactAt' _ i
+      (HomologicalComplex.exactAt_single_obj (.up ℤ) 0 _ i hi)).2
+      (scalarPeriodic_exactAt f hf he i hi)
 
 end CochainComplex
 
@@ -120,7 +197,15 @@ theorem exactScalarMultiplication_sq
     (t : (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)).sections)
     (ht : ∀ U : Cᵒᵖ, (@id (R.obj.obj U) (t.val U)) * (@id (R.obj.obj U) (t.val U)) = 0) :
     exactScalarMultiplication R t ≫ exactScalarMultiplication R t = 0 := by
-  sorry
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro a
+  change (@id (R.obj.obj U) a * @id (R.obj.obj U) (t.val U)) *
+    @id (R.obj.obj U) (t.val U) = 0
+  rw [mul_assoc, ht U, mul_zero]
 
 /-- The nonpositive periodic complex of the square-zero global scalar.
 Source: blueprint, "The examples" (blueprint: lem-sfb-exact-scalar-periodic-resolution). -/
@@ -162,8 +247,9 @@ Proof:
    induces the cokernel identification at zero and is therefore a quasi-isomorphism.
 4. The unit and zero module sheaves are flat: tensoring with them is respectively
    the identity and zero functor, by the sectionwise tensor formulas and sheafification.
-5. The complex is bounded above by zero. Apply lem-pc-bounded-above-flat-kflat-site
-   to get K-flatness; with Step 3 this is a K-flat resolution (def-pc-kflat-complex).
+5. The complex is bounded above by zero. Apply
+   lem-weil-pbc-independent-bounded-flat-kflat to get K-flatness at the stated
+   universes; with Step 3 this is a K-flat resolution (def-pc-kflat-complex).
 6. On the one-point site the image is tR and the cokernel is R/tR. Every nonpositive
    term is R with singleton basis 1, as recorded in the accompanying ring theorem. -/
 theorem exact_scalar_periodic_resolution
@@ -183,7 +269,50 @@ theorem exact_scalar_periodic_resolution
       ((exactScalarPeriodicComplex R t ht).X i)) ∧
     CochainComplex.IsKFlatResolutionIndependentCoefficients
       (exactScalarPeriodicAugmentation R t ht) := by
-  sorry
+  let f := exactScalarMultiplication R t
+  let hf := exactScalarMultiplication_sq R t ht
+  have he : (ShortComplex.mk f f hf).Exact :=
+    (ShortComplex.exact_iff_image_eq_kernel _).2 hexact.symm
+  have hq : QuasiIso (exactScalarPeriodicAugmentation R t ht) :=
+    CochainComplex.scalarPeriodic_quasiIso f hf he
+  have hflat : ∀ i : ℤ, IsFlatOnSite (J := J) (R := R)
+      ((exactScalarPeriodicComplex R t ht).X i) := by
+    let := isMonoidal_W_independentCoefficients R
+    let := monoidalCategory R
+    let := tensorPreadditive R
+    intro i
+    apply (exactFunctor _ _).prop_of_iso
+      (siteSheafTensorRightIso R ((exactScalarPeriodicComplex R t ht).X i)).symm
+    dsimp [exactScalarPeriodicComplex, CochainComplex.scalarPeriodic,
+      CochainComplex.scalarPeriodicX]
+    split_ifs
+    · exact (ObjectProperty.prop_unit ObjectProperty.flat).2
+    · have hz : IsZero (MonoidalCategory.tensorRight
+          (0 : SheafOfModules.{r}
+            ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) := by
+        rw [Functor.isZero_iff]
+        intro M
+        exact (MonoidalCategory.tensorLeft M).map_isZero (isZero_zero _)
+      have := Functor.preservesLimitsOfSize_of_isZero _ hz
+      have := Functor.preservesColimitsOfSize_of_isZero _ hz
+      change PreservesFiniteLimits _ ∧ PreservesFiniteColimits _
+      exact ⟨inferInstance, inferInstance⟩
+  have hb : (exactScalarPeriodicComplex R t ht).IsStrictlyLE 0 := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    simpa [exactScalarPeriodicComplex, CochainComplex.scalarPeriodic,
+      CochainComplex.scalarPeriodicX, show ¬i ≤ 0 by omega] using
+      isZero_zero (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+  have : QuasiIso (exactScalarPeriodicAugmentation R t ht) := hq
+  refine ⟨he, ShortComplex.cokernelSequence_exact f, inferInstance, ?_, ?_, hflat, hq, ?_⟩
+  · exact ⟨asIso (HomologicalComplex.homologyMap
+      (exactScalarPeriodicAugmentation R t ht) 0) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (cokernel f)⟩
+  · intro i hi
+    exact (CochainComplex.scalarPeriodic_exactAt f hf he i hi).isZero_homology
+  · exact isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite R
+      (exactScalarPeriodicComplex R t ht) 0 hflat
 
 end SheafOfModules
 
@@ -194,7 +323,11 @@ Source: blueprint, "The examples" (blueprint: lem-sfb-exact-scalar-periodic-reso
 Proof: the composite applied to a is t squared times a, zero by the hypothesis. -/
 theorem scalarPeriodic_mul_sq (S : Type r) [CommRing S] (t : S) (ht : t * t = 0) :
     ModuleCat.ofHom (LinearMap.mul S S t) ≫ ModuleCat.ofHom (LinearMap.mul S S t) = 0 := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro a
+  change t * (t * a) = 0
+  rw [← mul_assoc, ht, zero_mul]
 
 /-- On the one-point site the same construction is an augmented free resolution
 of S/tS, with basis 1 in every nonpositive degree.
@@ -220,6 +353,32 @@ theorem scalar_periodic_free_resolution (S : Type r) [CommRing S]
           (scalarPeriodic_mul_sq S t ht)).X i),
         (CochainComplex.scalarPeriodicXIso (ModuleCat.ofHom (LinearMap.mul S S t))
           (scalarPeriodic_mul_sq S t ht) i hi).hom (b PUnit.unit) = 1) := by
-  sorry
+  let f := ModuleCat.ofHom (LinearMap.mul S S t)
+  let hf := scalarPeriodic_mul_sq S t ht
+  have he : (ShortComplex.mk f f hf).Exact := by
+    rw [ShortComplex.moduleCat_exact_iff]
+    intro a ha
+    have ha' : t * a = 0 := ha
+    obtain ⟨b, hb⟩ := Ideal.mem_span_singleton'.1 ((hexact a).1 ha')
+    exact ⟨b, (mul_comm t b).trans hb⟩
+  refine ⟨CochainComplex.scalarPeriodic_quasiIso f hf he, ?_, ?_⟩
+  · let I := Ideal.span ({t} : Set S)
+    let q : ModuleCat.of S S ⟶ ModuleCat.of S (S ⧸ I) := ModuleCat.ofHom I.mkQ
+    have hfun : Function.Exact f.hom q.hom := by
+      intro a
+      change Ideal.Quotient.mk I a = 0 ↔ ∃ b : S, t * b = a
+      rw [Ideal.Quotient.eq_zero_iff_mem, Ideal.mem_span_singleton]
+      exact ⟨fun ⟨b, hb⟩ ↦ ⟨b, hb.symm⟩, fun ⟨b, hb⟩ ↦ ⟨b, hb.symm⟩⟩
+    let hq := ModuleCat.isColimitCokernelCofork f q hfun (Submodule.mkQ_surjective I)
+    let e := (cokernelIsCokernel f).coconePointUniqueUpToIso hq
+    refine ⟨e, fun a ↦ ?_⟩
+    have h : cokernel.π f ≫ e.hom = q :=
+      (cokernelIsCokernel f).comp_coconePointUniqueUpToIso_hom hq WalkingParallelPair.one
+    exact congrArg (fun g : ModuleCat.of S S ⟶ ModuleCat.of S (S ⧸ I) ↦ g a) h
+  · intro i hi
+    let e := (CochainComplex.scalarPeriodicXIso f hf i hi).toLinearEquiv
+    refine ⟨(Module.Basis.singleton PUnit S).map e.symm, ?_⟩
+    change e (((Module.Basis.singleton PUnit S).map e.symm) PUnit.unit) = 1
+    simp
 
 end ModuleCat

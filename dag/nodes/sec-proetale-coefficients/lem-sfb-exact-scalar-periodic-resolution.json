@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "For every $i<0$, both maps entering and leaving degree $i$ are $\\mu_t$. The assumed equality $\\ker\\mu_t=\\operatorname{im}\\mu_t$ is exactly exactness at that term of the augmented sequence. Equivalently the cohomology formula of [def-weil-abstract-derived-category] gives $H^i(P)=\\ker\\mu_t/\\operatorname{im}\\mu_t=0$. These are equalities of subobjects in the abelian category of module sheaves [def-weil-sheaf-of-modules-category]; no sectionwise surjectivity or enough-points hypothesis is being assumed.",
+   "text": "For an endomorphism f with f squared zero, transport the short complex of the periodic construction in degrees i-1,i,i+1 (i<0) along scalarPeriodicXIso to the exact short complex f,f. Mathlib ShortComplex.exact_iff_image_eq_kernel turns the assumed kernel-image subobject equality into this exactness. Positive-degree terms are zero. HomologicalComplex.ExactAt.isZero_homology gives all nonzero-degree vanishings, in the abelian module-sheaf category [def-weil-sheaf-of-modules-category] and with the cohomology of [def-weil-abstract-derived-category].",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-sheaf-of-modules-category"
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "At the last copy of $\\mathcal O$, the cokernel quotient $\\pi$ is an epimorphism with kernel $\\operatorname{im}\\mu_t$, giving exactness of $\\mathcal O\\xrightarrow{\\mu_t}\\mathcal O\\xrightarrow{\\pi}E\\to0$ in the abelian category [def-weil-sheaf-of-modules-category]. Because $d_P^0=0$, the formula of [def-weil-abstract-derived-category] identifies $H^0(P)=\\mathcal O/\\operatorname{im}\\mu_t=E$; the induced map $H^0(\\varepsilon)$ is precisely this quotient identification. All terms in degrees $i>0$ vanish, so $H^i(P)=0$ there. Since $E[0]$ has $E$ in degree zero and zero cohomology elsewhere, these computations show that $H^i(\\varepsilon)$ is an isomorphism for every $i$, hence $\\varepsilon$ is a quasi-isomorphism.",
+   "text": "For the augmentation in degree zero, use Mathlib quasiIsoAt_iff' and ShortComplex.quasiIso_iff_of_zeros'. The resulting exactness and epimorphism obligations identify along the term isomorphisms with the cokernel sequence of f, which is exact and has epic quotient. Away from zero both source and single-complex target are exact by Step 2. Thus the augmentation is a quasi-isomorphism; its degree-zero homology isomorphism followed by singleObjHomologySelfIso gives H^0(P) isomorphic to coker(f). All constructions take place in [def-weil-sheaf-of-modules-category] with the cohomology of [def-weil-abstract-derived-category].",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-abstract-derived-category"
@@ -52,10 +52,11 @@
    }
   },
   {
-   "text": "For any module sheaf $\\mathcal F$, the sectionwise maps $\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal O(U)\\to\\mathcal F(U)$, $x\\otimes a\\mapsto ax$, have inverse $x\\mapsto x\\otimes1$. Their composites are identities by the tensor balancing relation, and both commute with restrictions. Sheafifying the presheaf tensor as in [def-pur-sheaf-tensor-product] therefore gives a natural isomorphism $\\mathcal F\\otimes_{\\mathcal O}\\mathcal O\\cong\\mathcal F$. Also $\\mathcal F\\otimes_{\\mathcal O}0=0$ since its sectionwise tensor is zero. Thus tensoring with $\\mathcal O$ or $0$ is, respectively, the identity or zero functor and preserves exact sequences. Both are flat by [def-pc-flat-sheaf-modules], so every term of $P$ is flat.",
+   "text": "Use the existing siteSheafTensorRightIso from [lem-weil-pbc-independent-sheaf-tensor-colimits] to identify the sheafified sectionwise tensor functor of [def-pur-sheaf-tensor-product] with monoidal tensorRight. Tensoring with the unit is naturally the identity and is exact. Tensoring with the zero sheaf is a zero functor: each value is zero since tensorLeft preserves zero objects. A zero functor preserves all limits and colimits. Transport exactness back through siteSheafTensorRightIso to obtain [def-pc-flat-sheaf-modules] for each periodic term, which is either the unit or zero.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules"
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
@@ -64,9 +65,9 @@
    }
   },
   {
-   "text": "The complex $P$ is bounded above with bound $0$ and its terms are flat by Step 4. Apply [lem-pc-bounded-above-flat-kflat-site], whose statement is for arbitrary ringed sites, to conclude that $P$ is K-flat. Together with the quasi-isomorphism $\\varepsilon$ from Step 3 this is exactly a K-flat resolution of $E[0]$ as defined in [def-pc-kflat-complex].",
+   "text": "The periodic complex has zero terms in all degrees greater than zero, giving IsStrictlyLE 0. Apply the already proved independent-universe criterion [lem-weil-pbc-independent-bounded-flat-kflat] to this bound and the site-flatness of Step 4. This is the independent-coefficient form of the bounded-above flat criterion, applicable to exactly the site and coefficient universes of the statement. Together with the augmentation quasi-isomorphism of Step 3, it gives a K-flat resolution as defined by [def-pc-kflat-complex].",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
     "def-pc-kflat-complex"
    ],
    "elementary": false,
@@ -76,7 +77,7 @@
    }
   },
   {
-   "text": "On the one-point site with ring $R$, module sheaves are ordinary $R$-modules. The image of multiplication by $t$ is the ideal $tR$, so $E=R/tR$. Each nonzero-position term $P^i=R$ for $i\\le0$ is free on the singleton basis $1$: the coefficient map $R\\to R$, $r\\mapsto r\\cdot1$, is the identity. The augmentation is the ordinary quotient map and exactness was proved in Steps 2--3. This gives the stated augmented free resolution, with every differential before the augmentation multiplication by $t$.",
+   "text": "In ordinary modules apply the same generic periodic exactness and augmentation argument. Mathlib ShortComplex.moduleCat_exact_iff and the annihilator hypothesis prove exactness of multiplication. The quotient map R to R/(t) has kernel the principal ideal, which is exactly the range of multiplication by t, and it is surjective. ModuleCat.isColimitCokernelCofork and uniqueness of cokernels yield the comparison isomorphism, whose cocone equation gives the asserted formula on every element. Transport Module.Basis.singleton PUnit R along scalarPeriodicXIso.toLinearEquiv.symm. Basis.map and the inverse equations show that its basis vector maps to 1. This includes zero rings.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -91,13 +92,14 @@
   "def-weil-abstract-derived-category",
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "def-pc-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "The examples; explicit ringed-site generalization, using Stacks Tags 03EK, 03ER, 06YN, 06YQ"
+  "place": "The examples; explicit categorical periodic exactness and cokernel augmentation, with Stacks Tags 03ER, 06YN, 06YQ and the existing independent-universe bounded-flat criterion"
  },
  "mathlib_searches": [
   {
@@ -170,9 +172,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -215,5 +215,15 @@
   "group": "O3",
   "result": "pass",
   "note": "Every node clause matches the Lean (μ_t = unitHomEquiv.symm t, kernelSubobject=imageSubobject, three exactness conjuncts, H^0≅coker, H^i=0 for i≠0, IsFlatOnSite on each term, IsKFlatResolutionIndependentCoefficients of the mkHomToSingle augmentation; ModuleCat clause with QuasiIso, quotient comparison and PUnit basis vector 1). Real-data defs with named sorry'd compatibility theorems; no extra hypotheses; independent universes with EssentiallySmall.{r}; t=0, zero ring and Z/8 edge cases checked. Node differs from live only in lean; statement verbatim; 14 declarations present; 6 sorry, all in theorems; docstrings and line width fine; plain imports are the proof_deps modules, as the brief requires; no duplicate live or in Mathlib. Advisory: proof tool isKFlat_of_boundedAbove_flat is single-universe (stage-3 generalization needed); dependency docstring cites 06YS instead of 06YQ."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T111019-L-3903740",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
