@@ -14,7 +14,10 @@
   "def-pur-kinjective-complex",
   "def-weil-inverse-system",
   "lem-weil-pbc-diagram-site-realization",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sbc-tower-derived-evaluation-interchange",
+  "lem-weil-pbc-small-module-diagrams-grothendieck"
  ],
  "proof": [
   {
@@ -366,5 +369,40 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-a9bf78639 (reviewer sub-agent of L); spot-checked: Read the item's 12 steps in full, every cited statement and Stacks 08BJ and 07A7 (I also checked the tag map for 070I/070K/0DVC/0FND/07A5/07A6/079P). The split is one commit touching only the item and the report. Statement and stmt_deps are unchanged against live. There are no new nodes, no cycle, no SGA citation, and the item is not in the dropped list. Live still has it unsplit, and the 2026-10-21 re-split note belongs to the parent, not to this item. Steps: (1) ev_1 ⊣ Δ holds because 1 is terminal in N_{≥1}^op, and exactness is levelwise. (2) Δ, ev_n, u_* and u_*^T preserve K-injectives: for Δ, u_* and u_*^T by the exact-left-adjoint criterion (its hypotheses hold), for ev_n by the evaluation theorem. (3) The diagram sites are small, so K-injective resolutions exist; exact-functor descent applies and Q∘K(u_*) is exact. (4)-(5) b^Δ and b^n are identities on K-injective representatives; the K-injective Hom bijection gives naturality and independence of the representative. (6) The resolving normalization applies with the whole of K(A) as resolving class because u^* is exact. (7)-(9) I checked the chain identities and the unit/counit formulas, including Δε_N = ε^T∘u^*_T(b^Δ_N). (10)-(12) I re-derived both mate equations from the counit-transpose form of def-weil-pbc-adjunction-mate (matching 07A7), using naturality of θ, the termwise-θ hypothesis and the step-9 counit equations. Edge cases: n=1, a two-level tower with zero or non-surjective transitions, identity morphisms, zero ring. No boundedness, mate invertibility or faithfulness is used. All 12 off-unit citations are generic homological-algebra or categorical tools, and their tool_uses are accepted, since unit sk-rem-rest has no steps. Advisory: lem-weil-pbc-constant-tower-pushforward-normalization and lem-weil-pbc-tower-derived-evaluation-normalization already state parts of clauses (2)-(3). The delivery re-proves those parts from generic nodes instead of citing them; this is valid, so it is a maintainer note, not a fault."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnboundedExactAdjunctionSquare",
+  "declaration": "CategoryTheory.UnboundedExactTower.unboundedExactAdjunctionSquare",
+  "declarations": [
+   "CategoryTheory.UnboundedExactTower.ExactMorphism",
+   "CategoryTheory.UnboundedExactTower.moduleResolutions",
+   "CategoryTheory.UnboundedExactTower.towerResolutions",
+   "CategoryTheory.UnboundedExactTower.constantInterchange",
+   "CategoryTheory.UnboundedExactTower.constantComparison",
+   "CategoryTheory.UnboundedExactTower.evaluationComparison",
+   "CategoryTheory.UnboundedExactTower.cochainUnit",
+   "CategoryTheory.UnboundedExactTower.ComparisonsCompatible",
+   "CategoryTheory.UnboundedExactTower.TowerProperties",
+   "CategoryTheory.UnboundedExactTower.localizedSquare",
+   "CategoryTheory.UnboundedExactTower.towerSquare",
+   "CategoryTheory.UnboundedExactTower.SquareCompatible",
+   "CategoryTheory.UnboundedExactTower.unboundedExactAdjunctionSquare",
+   "CategoryTheory.UnboundedExactTower.unboundedExactAdjunctionSquare_mates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UnboundedExactAdjunctionSquare.lean",
+  "statement": "theorem unboundedExactAdjunctionSquare {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (R : Sheaf J RingCat.{u}) (S : Sheaf K RingCat.{u}) [HasDerivedCategory.{wA} (ringedSiteModules.{u} R)] [HasDerivedCategory.{wB} (ringedSiteModules.{u} S)] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ ringedSiteModules.{u} S)] (f : ExactMorphism R S) : TowerProperties (ringedSiteModules.{u} R) ∧ TowerProperties (ringedSiteModules.{u} S) ∧ ComparisonsCompatible f.adjunction",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Clauses (1)-(3) are unboundedExactAdjunctionSquare; clause (4) is unboundedExactAdjunctionSquare_mates. The auxiliary Prop definitions expand the full assertions, and all comparison maps are actual canonical derived mates. ExactMorphism packages the given ordinary exact inverse image and its adjunction to the induced direct image of the recorded ringed-topos morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e674633b",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on ecb7b129. The item Lean module is byte-identical to the previously reviewed head (sha256 802512b7), which was found correct on clauses (1)-(4). It recompiles clean via nt_compile --json (32.1 s, exit 0, no warnings). H2 repaired: stmt_dep lem-weil-pbc-tower-derived-evaluation-normalization is replaced by new def-sbc-tower-derived-evaluation-interchange. The new node is existing:true on the unchanged live TowerDerivedEvaluationNormalization and owns towerDerivedEvaluationInterchange plus the two towerNormalization_preservesFinite* instances. Its statement is verbatim the live signature (l.83-92); its NL composite c^{-1} then c matches the Lean; H12 fields are OK; it cites only live def nodes; its id is not in live. Mechanical finding on lem-weil-pbc-small-module-diagrams-grothendieck: genuine. towerResolutions builds the Prop instance HasKInjectiveResolutions on towers from the theorem smallModuleDiagrams_isGrothendieckAbelian, so PASS on that point. Not in the dropped list; report sections present. Advisories: constant-tower-pushforward-normalization overlap should reuse constantComparison; live docstrings still name the old blueprint node."
+ }
 }

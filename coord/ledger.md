@@ -20812,3 +20812,18 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T07:52:53Z L: superseded stage-1 delivery NO/lem-fix-compactification-completed-realization at 96506d45469373cf0184e64ed8988e711300cd65; current completion retained; packet archived at refs/superseded/NO/lem-fix-compactification-completed-realization/96506d45469373cf0184e64ed8988e711300cd65; stale return retired.
 - 2026-10-21T07:53:00Z L: superseded stage-1 delivery NU/sk-def-sf-kv-maps at 2237d03414ea88bd5a4c82b1f7bc470a7cb124e1; current completion retained; packet archived at refs/superseded/NU/sk-def-sf-kv-maps/2237d03414ea88bd5a4c82b1f7bc470a7cb124e1; stale return retired.
 - 07:53 L: returned deliver/NZ/det-def-sfb-filtered-two-colimit-characterization (reviewer RETURN: A7/B10, superseded. The item already has a sorry-free Lean proof. The human re-split note (coord/repair-notes, identical)
+- 07:58 L: merged deliver/NU/lem-pur-ringed-derived-pullback-linear (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q47/lem-sfb-extension-iso-quotient-formula (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q83/lem-pe-finite-scalar-restriction-constructible (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q38/lem-sbc-unbounded-exact-adjunction-square (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q53/lem-weil-pbc-integral-constructible-hom-sums (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q10/lem-sfb-constant-field-tor-bounds (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q13/lem-sfb-finite-field-lisse-internal-hom (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q11/lem-sfb-constructible-local-tor-etale-origin (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q36/lem-sbc-koszul-fibre-linear-descent (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/Q74/lem-sfb-scalar-presentation-cokernel (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/NH/lem-sf-direct-image-scalar-restriction-cocycle (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/N7/lem-sfb-stratified-local-cohomological-bounds (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/NL/lem-pur-roos-intrinsic-completeness-equivalence (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/NP/lem-weil-pbc-flat-scalar-koszul-tower-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 07:58 L: merged deliver/NM/lem-sf-open-extension-scalar-restriction-coherence (stage 2; reviewer PASS; parallel immutable checks)

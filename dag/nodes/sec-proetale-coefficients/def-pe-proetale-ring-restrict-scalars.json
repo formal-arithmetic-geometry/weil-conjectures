@@ -1,0 +1,115 @@
+{
+ "id": "def-pe-proetale-ring-restrict-scalars",
+ "kind": "definition",
+ "title": "Exact restriction of commutative ring-sheaf scalars on the small pro-etale site",
+ "status": "split",
+ "statement": "Let $T$ be a scheme and use its small pro-etale site [def-weil-pbc-proetale-site], with site objects in universe $u+1$ and site morphisms in universe $u$. For commutative ring sheaves $R,S$ valued in $\\mathrm{CommRingCat}_{u+1}$ and a morphism $a:R\\to S$, define $\\operatorname{Res}_a:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category] to be restriction of scalars [def-pc-sheaf-restrict-scalars] after forgetting commutativity of the coefficient sheaves. Modules and their sections live in universe $u+1$. This is the existing additive functor with the same underlying abelian sheaves and maps and action $r\\cdot m=a(r)m$. Its named exactness interface supplies preservation of finite limits and finite colimits for every $a$; it requires no surjectivity, flatness, finiteness, or nonzero-ring assumption.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Restriction functor preceding lemma-adjointness-tensor-restrict; Tag 03DA, lemma-abelian, and preceding kernel/cokernel constructions. Specialized to the small pro-etale site, as used in the second paragraph of the current blueprint integral-criterion reductions proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars|preservesFiniteLimits|preservesFiniteColimits [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "Existing general Mathlib restriction is reused through the already landed commutative-ring-sheaf specialization; no declaration is redefined."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules over a commutative ring sheaf on a small pro-etale site is exact",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, RestrictScalars, PresheafOfModules.restrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, SheafOfModules.restrictScalars_obj_val, ModuleCat.preservesLimit_restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "Existing general Mathlib restriction is reused through the already landed commutative-ring-sheaf specialization; no declaration is redefined."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "Existing general Mathlib restriction is reused through the already landed commutative-ring-sheaf specialization; no declaration is redefined."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalar rings on sheaves of modules preserves finite limits and finite colimits",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, SheafOfModules.restrictScalars_obj_val, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.forgetPreservesLimitsOfSize, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-21",
+   "verdict": "Existing general Mathlib restriction is reused through the already landed commutative-ring-sheaf specialization; no declaration is redefined."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l proEtaleRingRestrictScalars lean/WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search restriction of scalars; blueprint_refs.py ancestor lem-pe-finite-scalar-restriction-constructible",
+   "results": "The exact specialization and finite-limit/finite-colimit helpers occur in Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction. No WeilConjectures hit for that name. DAG hits: lem-weil-pbc-ring-sheaf-change-adjunction and its existence/square consumers, plus finite-free scalar-model nodes; none is a definition node owning this specialized restriction and its exactness interface. General def-pc-sheaf-restrict-scalars carries the underlying Mathlib construction only. blueprint search: 58 matches for restriction of scalars, including module-object constructions, not this sheaf specialization. Ancestor: det-prop-integral-criterion-reductions. The pending def-weil-pbc-ring-restriction-pullback-comparison is absent in the read clone.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact landed specialization as existing:true, with its exactness helpers, as expressly requested in the H2(2) return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-finite-scalar-restriction-constructible",
+  "date": "2026-10-21",
+  "group": "Q83"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Second proof paragraph, last sentence: exact scalar restriction for the outer finite-coefficient terms, before passing to cohomology.",
+   "via": [
+    "lem-pe-finite-scalar-restriction-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingRestrictScalars",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleRingRestrictScalars",
+   "AlgebraicGeometry.Scheme.proEtaleRingRestrictScalars_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.proEtaleRingRestrictScalars_preservesFiniteColimits"
+  ],
+  "statement": "noncomputable abbrev proEtaleRingRestrictScalars {T : Scheme.{u}}\n    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :\n    proEtaleRingModules T S ⥤ proEtaleRingModules T R",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "H2(2) repair requested by the maintainer: this definition record owns the existing commutative-ring-sheaf specialization and the two existing exactness helpers needed to type mapDerivedCategory. These declarations are plain constructions/helper lemmas in the module, not consequences of proEtaleRingSheafChangeAdjunction. No module or declaration is added or duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1835a9b7d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1835a9b7d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Re-delivery of 04abde48 H2(2) RETURN. Lean sha256 identical to the returned head (72d490b9); prior clause-by-clause substance review stands (Noetherian X, any finite comm ring map, canonical constantSheaf.map a.ulift, exactness, constructible→constructible with same strata/covers, natural H^q∘D(a)≅Res∘H^q, IsZero iff per degree, t.bounded+constructible; edge cases ok). Item record: only stmt_deps change, theorem lem-weil-pbc-ring-sheaf-change-adjunction → new def-pe-proetale-ring-restrict-scalars (existing:true on unchanged ProEtaleRingSheafChangeAdjunction: proEtaleRingRestrictScalars abbrev = SheafOfModules.restrictScalars after forget₂, + _preservesFiniteLimits/Colimits projections of the proved _properties). New node statement matches binders, stmt_deps exist and own the body, Stacks source (restriction before lemma-adjointness-tensor-restrict; 03DA) ok; check_new_node clean; check_existing no failures (note only: noncomputable kept in lean.statement, advisory). All used owner-module decls listed. nt_compile --json 40.8 s exit 0 clean at load 252. Maintainer note: NA's pending (landing-refused) def-weil-pbc-ring-restriction-pullback-comparison also lists proEtaleRingRestrictScalars; the second to land should cite the other."
+ }
+}

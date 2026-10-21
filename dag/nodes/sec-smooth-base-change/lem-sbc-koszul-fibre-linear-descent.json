@@ -15,7 +15,10 @@
   "def-weil-linear-functor",
   "def-weil-inverse-system",
   "def-weil-category-product",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-scalar-localization-coefficient-actions",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof": [
   {
@@ -318,5 +321,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-2ae06d0d0 (reviewer sub-agent of L); spot-checked: I read the whole item, all 10 steps and every cited statement. The delivery adds no new nodes. The statement is byte-identical to the NN-created base, taken from the NN d0a85934 snapshot. stmt_deps adds category-product and derived-limit, both needed for the ∏ and R lim in the statement. proof_deps is exactly the union of the step uses, and no SGA is cited. Sources checked: Stacks 0A0E (algebraization l.1091, Koszul cochain complexes in degrees [-r,0], arbitrary ringed site), 07KC lemma-products (exact countable products give termwise derived products), 06YQ bounded-flat-K-flat, and Mathlib DerivedCategory/Linear.lean l.24-39. Re-derived: transition chain maps (b^m·b=b^{m+1}); d_F^2=0; the homotopy H=(h_B,-h_B) leaves the extra term (u h-h u)x=0 and the Koszul signs (-1)^{p-1},(-1)^p cancel; for the quasi-isomorphism step, derived-products-core under CountableAB4Star (the item's hypothesis) feeds the Roos-coordinates node, whose s is u here; additivity and A-linearity of C follow from additive-localization-descent and sfb-linear-localization-descent, using Q linear by lem-weil-linear-abelian-derived-category; the chain isomorphism (x,y)↦(-y,x) onto Cone(u)[-1], whose differential (-d,-u;0,d) I checked, plus TR2 rotation gives the 08TC Roos triangle; the coaugmentation (e,0) is a chain map with u e=0; the biproduct and zero identities hold and the κ-invertible subcategory is additive. Small cases: r=0 (F(M)≃M), M=0, b_j=0, b_j a unit (C=0). Duplicate search: def-weil-pbc-intrinsic-completion is pro-étale and Noetherian with no linearity clauses; ringed-koszul-completion-reflector and sfb-ringed-complete-triangulated state different claims; no duplicate. Accepted all 5 declared tool_uses as generic homological tools. No cycle. Maintainer notes: the existing node lem-pc-bounded-above-flat-kflat-site carries tag 06YS but should carry 06YQ (its statement is correct); the item's blueprint.from.place was reworded although it was not 'unspecified' (harmless)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KoszulFibreLinearDescent",
+  "declaration": "CategoryTheory.koszulFibreLinearDescent",
+  "declarations": [
+   "CategoryTheory.koszulFibreProduct",
+   "CategoryTheory.koszulFibreEndomorphism",
+   "CategoryTheory.koszulFibreProductMap",
+   "CategoryTheory.koszulFibreProductUnit",
+   "CategoryTheory.KoszulFibreLinearDescentData",
+   "CategoryTheory.koszulFibreLinearDescent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KoszulFibreLinearDescent.lean",
+  "statement": "theorem koszulFibreLinearDescent (A : Type v) [CommRing A] (α : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat)) (r : ℕ) (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) [CountableAB4Star (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] : KoszulFibreLinearDescentData O A α r b",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The data proposition spells out the strict product-fibre coordinates, maps, unit, homotopy and quasi-isomorphism preservation, scalar-linear derived descent, transition-natural derived-tensor comparison, Roos triangle with the actual first projection, canonical biproduct comparisons, and additive full subcategory. Reuses the published Koszul tower and canonical coefficient action; no new mathematical notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b107d3bc7",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 7f39e44a; Lean module byte-identical to the module fully reviewed there; statement verbatim. Item node differs only in stmt_deps: theorem lem-weil-pbc-scalar-localization-derived-hom replaced by def-weil-pbc-scalar-localization-coefficient-actions, and lem-weil-pbc-site-derived-tensor-descent added, as requested. Dep record is a §1(B) lean-only change: scalarLocalizationCoefficientLinear (plain def, Module.compHom of homLinear along a = the node's 'restricting along a') added to declarations with lean.note, existing:true; live record unchanged since base. Mechanical finding: derivedTensor = curry of siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object, PASS on that point. No cycle; report sections present; one sorry. nt_compile --json clean in 31.4 s. Advisory: live docstring of scalarLocalizationCoefficientLinear is stale."
+ }
 }

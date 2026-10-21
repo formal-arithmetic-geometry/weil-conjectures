@@ -242,5 +242,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-c5c407e63 (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited statements, and Stacks 0FNY/03DH/03DJ/093R/09AJ (tags verified in tags/tags); no SGA source. The item is not dropped, has no re-split note, the live node is still unsplit, no new nodes, no cycle. The statement only gains the cohomology-sheaf and sheaf-tensor definition citations; it is not weakened and matches its only citer, finite-field-internal-hom-finiteness step 4. Steps 2, 3 and 5 are correct. Step 2: slice restriction is exact, Hom(L,-) on U_i is (-)^{d_i}, and vanishing is detected by clause 1 of cbc-stalk-conservative with inverse image identified as restriction. Step 3: Hom^*(L[0],I) = T(I) with differential T(d_I); exact T commutes with H^r; then e^{-1}. Fixed three C1/E1 faults. (1) Step 1 used, without a citation, that restriction commutes with the tensor product; I added lem-sfb-proetale-object-inverse-image-restriction (3) and lem-weil-pbc-ringed-topoi-module-pullback-tensor. (2) Step 4 took the local model W of i^*H^r(N) to be finite, but the constructible definition only gives finite geometric stalks; I added lem-sf-proetale-lisse-finite-models. (3) Step 4 concluded constructibility from finite local models, but the definition requires finite geometric stalks; I added lem-weil-pbc-proetale-finite-model-stalks, and made the restriction to the common refinement explicit (lem-sfb (3) + lem-exc + pullback-tensor). proof_deps recomputed; tool_uses accepted (the 5 declared + the 2 added, all generic). Small cases checked: a point with L=A^d, varying rank, L=0, N=0, a=b.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFieldLisseInternalHom",
+  "declaration": "AlgebraicGeometry.Scheme.finiteField_lisse_internalHom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteFieldInternalHom_locallyBijective",
+   "AlgebraicGeometry.Scheme.finiteFieldInternalHomCohomology",
+   "AlgebraicGeometry.Scheme.finiteFieldDualTensorCohomology",
+   "AlgebraicGeometry.Scheme.finiteField_lisse_internalHom"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFieldLisseInternalHom.lean",
+  "statement": "theorem finiteField_lisse_internalHom (S : Scheme.{u}) [IsLocallyNoetherian S] [CompactSpace S] (A : Type u) [Field A] [Finite A] : (∀ (L : proEtaleRingModules S (proEtaleConstantRing S A)), IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses S A (fun M ↦ Module.Finite (ULift.{u + 1, u} A) M) L → ∀ (a b : ℤ), a ≤ b → ∀ (N : DerivedCategory.{u + 2} (proEtaleRingModules S (proEtaleConstantRing S A))), (∀ r : ℤ, IsConstructibleProEtaleModuleSheaf S A ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} _ r).obj N)) → (∀ r : ℤ, r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} (proEtaleRingModules S (proEtaleConstantRing S A)) r).obj N)) → ∀ r : ℤ, IsConstructibleProEtaleModuleSheaf S A ((finiteFieldInternalHomCohomology S A r).obj (op L, N)) ∧ (r < a ∨ b < r → IsZero ((finiteFieldInternalHomCohomology S A r).obj (op L, N)))) ∧ ∀ r : ℤ, Nonempty ( (ObjectProperty.ι (fun P : (proEtaleRingModules S (proEtaleConstantRing S A))ᵒᵖ × DerivedCategory.{u + 2} (proEtaleRingModules S (proEtaleConstantRing S A)) ↦ IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses S A (fun M ↦ Module.Finite (ULift.{u + 1, u} A) M) P.1.unop ∧ (∀ q : ℤ, IsConstructibleProEtaleModuleSheaf S A ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} _ q).obj P.2)) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} _ q).obj P.2))) ⋙ finiteFieldInternalHomCohomology S A r ≅ (ObjectProperty.ι (fun P : (proEtaleRingModules S (proEtaleConstantRing S A))ᵒᵖ × DerivedCategory.{u + 2} (proEtaleRingModules S (proEtaleConstantRing S A)) ↦ IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses S A (fun M ↦ Module.Finite (ULift.{u + 1, u} A) M) P.1.unop ∧ (∀ q : ℤ, IsConstructibleProEtaleModuleSheaf S A ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} _ q).obj P.2)) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor.{u + 2, u + 1, u + 2} _ q).obj P.2))) ⋙ finiteFieldDualTensorCohomology S A r)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "H^r is Mathlib DerivedCategory.homologyFunctor, the cohomology functor already included in the statement and mathlib_match of stmt_dep def-weil-abstract-derived-category. The landed N5 record of def-weil-derived-cohomology-sheaves and its SfCommonStageWeilCohomology module are retained unchanged; this item uses ordinary uncompleted derived cohomology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bcec5cb4",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L on 286e974576f7 (H13 rebind of def-weil-derived-cohomology-sheaves). Every correction is applied: all 13 stmt_dep records, including N5's SfCommonStageWeilCohomology record with its 12 declarations, are identical to live; the item module is byte-identical (sha256 7fa68471…c11c4) to the version the prior review judged correct; the item lean record gains only the requested note that H^r is Mathlib homologyFunctor from def-weil-abstract-derived-category, and all other item fields equal live; the report's dependency-module paragraph is removed. Substance re-confirmed: finite field, IsLocallyNoetherian+CompactSpace, ordinary DerivedCategory on proEtaleRingModules, finite-model locally constant L, bounded constructible N in [a,b], constructible same-interval H^r RHom(L[0],N), and a Nonempty natural iso of functors to Hom(L,A_S) tensor H^r N on the full subcategory of admissible pairs. Edge cases empty S, L=0, N=0, a=b covered. No hollow defs, docstrings with all 5 proof steps, sorry only, statement verbatim. nt_compile --json against the live side overlay: clean, 34.5 s."
+ }
 }

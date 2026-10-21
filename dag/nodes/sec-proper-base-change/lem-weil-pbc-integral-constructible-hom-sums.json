@@ -220,5 +220,24 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-e698543b2 (reviewer sub-agent of L); spot-checked: I read the item, the five nodes it cites and the source: Bhatt–Scholze 1309.1198, Lemma 6.8.12, together with its use in 6.8.13. The delivery has no new nodes, and the statement, stmt_deps and blueprint fields are byte-identical to the live unsplit node, so the target is not weakened. The item is not on the 2026-10-19 drop list, and its dependency closure (2654 nodes) contains no cycle. Step 1 applies the existing same-unit lem-weil-pbc-integral-constructible-bounded-below-compactness: it has the same E, O_E, ϖ, noetherian finite-dimensional base with ℓ invertible and bounded-constructible-complete K, and covers any small family with a common lower bound. Its legs are G(ι_i). Step 2 uses lem-pc-derived-module-homology-coproduct (Stacks 07D9), which allows unbounded complexes and the empty family. Step 3 uses the closed symmetric monoidal structure plus symmetry to make RHom(K,−) a right adjoint, as the sections model needs; the sections model then gives H^q RΓ = Hom_D(K,M[q]) in every degree, naturally in M. The A-linearity check is correct: both RΓ's are computed on K-injective complexes with the same global sections, and naturality for the map a·1 gives linearity. Step 4 is an elementary conjugation that yields u ↦ ι_i[q]∘u. I checked the empty family, a singleton, negative q and torsion K. Duplicate search: lem-integral-window-coproduct-comparison uses a different, condensed finite-window setting, so it is not a duplicate. I accept the three generic homological-algebra tool_uses (picard, sf-biduality and int-ext units). No SGA source is used, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleHomSums",
+  "declaration": "AlgebraicGeometry.Scheme.integralConstructible_hom_sums",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleHomSums.lean",
+  "statement": "theorem integralConstructible_hom_sums (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (hdim : ∃ N : ℕ, topologicalKrullDim X ≤ (N : WithBot ℕ∞)) (hℓ : ∀ x : X, IsUnit (ℓ : X.presheaf.stalk x)) (K : PbcIntegralCategory ℓ E X hdim hℓ) (I : Type (u + 1)) [Countable I] (M : I → PbcCompletedDerived X (pbcIntegralDatum ℓ E)) (_hM : ∃ n : ℤ, ∀ i : I, DerivedCategory.IsGE (M i) n) (q : ℤ) (s : Cofan M) (_hs : IsColimit s) : Function.Bijective (DirectSum.toModule (PbcIntegralRing ℓ E) I (K.obj ⟶ s.pt⟦q⟧) (fun i : I ↦ Linear.rightComp (PbcIntegralRing ℓ E) K.obj ((shiftFunctor (PbcCompletedDerived X (pbcIntegralDatum ℓ E)) q).map (s.inj i))))",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the published PbcIntegralCategory specialization and its canonical ULift of the valuation ring. The ambient coproduct is an arbitrary colimiting cofan. DirectSum.toModule and Linear.rightComp give the actual coefficient-linear comparison induced by the shifted coprojections; bijectivity is precisely that this linear map is an isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-499ffd7b1",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match of integralConstructible_hom_sums against the node: same scheme hypotheses and same category for K (PbcIntegralCategory, the published support of the def-weil-pbc-bounded-constructible-complete record) as the landed compactness theorem. Countable family in Type (u+1) with a common lower bound, any colimit cofan, every integer q. The map is DirectSum.toModule of postcomposition with the shifted coprojections, with the canonical scalar-section module structure, and is stated to be bijective. Empty family, negative q and universes checked. No definitions; proof is sorry only; source, blueprint and proof-step docstrings present, with every named declaration verified to exist. Node record differs from live only by the lean field; lean.statement is verbatim in the file. nt_compile --json clean in 17.5 s. No findings."
  }
 }

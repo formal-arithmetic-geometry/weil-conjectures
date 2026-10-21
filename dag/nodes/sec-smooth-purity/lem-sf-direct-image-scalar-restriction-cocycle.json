@@ -225,5 +225,28 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-0c3c29689 (reviewer sub-agent of L); spot-checked: PASS. The statement is unchanged and matches the value clause of lem-weil-proetale-direct-image-restriction-of-scalars and the normalization formula of lem-sf-normalized-derived-comparison-composition. The endpoints of the cocycle agree, and the coefficient category is the unbounded D(Mod(R_T)) on the small pro-étale site. Step 1: the V-small skeleton gives K-injective resolutions by prop-pur-kinjective-resolutions-exist; p_* is additive and p_*r = rp_* holds on sections over Z×_Y U. Step 2: uniqueness follows from K-injective representatives and naturality, and I checked the cancellation of V(q). Step 3: I re-derived it. With d = aρ^{-1}, map-computation gives Qg = 1, so c_d P_A(Qρ)c_a^{-1} = 1; naturality of ρ_Y and p_*ρ_Z = ρ_Y p_* then give the normalization [p_*a]^{-1} and the invertibility the generic theorem requires. The target-side step is terse but correct. Step 4: every hypothesis of the generic composition theorem is checked, including strict composites, the three squares, the normalizations and that no restriction is assumed to preserve K-injectives. Step 5 is elementary. Small cases checked: identity maps, p = id, the zero ring and the non-flat Z/4→Z/2. proof_deps equals the union of the uses, and there is no cycle (closure of 350 nodes). Source derived.tex 070Y (lemma-K-injective-defined, line 9747) was read; the remaining argument is correctly marked as agent-written. Tool uses accepted: the direct-image restriction node (sk-thm-sf-compatibility) supplies the comparison itself, and exact-functor factorization is a Mathlib leaf. Duplicate candidates read and found different: lem-pur-ringed-derived-composition-cocycle, lem-pur-completed-coefficient-pushforward-comparison, lem-pur-diagram-ring-restriction-pushforward, lem-coef-finite-direct-image, lem-finite-compact-support-scalar-transport and the j_! sibling lem-sf-open-extension-scalar-restriction-coherence. same_as [] is right. No SGA citation. No new nodes and no fixes. Remark: the report mentions a citations.json that is not in the commit, which is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DirectImageScalarRestrictionCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage_cocycle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage_unique",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage_cocycle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageScalarRestrictionCocycle.lean",
+  "statement": "theorem fixedScalarRestrictionDirectImage_cocycle {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] (φ : A →+* B) (ψ : B →+* C) {X Y : Scheme.{u}} (f : X ⟶ Y) (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))) : (R((f)_*[ModuleCat.{u + 1} A])).map ((Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology X) (f := φ) (g := ψ) rfl).hom.app L) ≫ (fixedScalarRestrictionDirectImage (ψ.comp φ) f).hom.app L = (fixedScalarRestrictionDirectImage φ f).hom.app ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ψ).obj L) ≫ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).map ((fixedScalarRestrictionDirectImage ψ f).hom.app L) ≫ (Sheaf.derivedRestrictScalarsCompIso (Scheme.ProEt.topology Y) (f := φ) (g := ψ) rfl).hom.app ((R((f)_*[ModuleCat.{u + 1} C])).obj L)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "States both clauses of the node: uniqueness among natural isomorphisms with the supplied K-injective normalization, and the coefficient cocycle for the specified fixedScalarRestrictionDirectImage comparison. Uses the dependency's published equivalent constant-module sheaf presentation and the existing termwise-localized derivedRestrictScalarsCompIso, without redefining restriction or any comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1d0451ae",
+  "group": "NH",
+  "result": "pass",
+  "note": "The snapshot node differs from live only in lean, the 5 stmt_dep files are identical to live, and lean.statement is verbatim. _unique: γ has the type of fixedScalarRestrictionDirectImage φ f, and hγ is the dependency's _kInjective normalization verbatim (every K-injective H, I and quasi-iso j), so it is not vacuous. _cocycle: P_A(ρ_X) ≫ β_χ = β_φ(r_ψ L) ≫ r_φ(β_ψ L) ≫ ρ_Y(P_C L), where ρ = derivedRestrictScalarsCompIso rfl (r_ψ⋙r_φ ≅ r_{ψ∘φ}, termwise restrictScalarsComp'); orientation and endpoints checked. Arbitrary f, unbounded L, no K-injective preservation, universes as in the dependency. Edge cases: identity maps, empty scheme, zero ring, ℤ/4→ℤ/2. No duplicate: the Rf_! cocycle (parent) and pullback chain differ. Both theorems sorry, no defs, docstrings carry 070Y and the blueprint id with steps, longest line 100 chars, plain imports are the proof-dep modules mandated by brief-stage2 l.104. nt_compile --json: 33.1 s clean. Advisory: the Second reading section is a self-check (no other worker allowed), as in earlier PASSes."
  }
 }

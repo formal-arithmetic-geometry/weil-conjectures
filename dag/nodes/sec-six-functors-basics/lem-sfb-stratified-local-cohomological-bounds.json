@@ -15,7 +15,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-proetale-inverse-image",
-  "def-weil-pbc-ringed-derived-restriction"
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-sfb-proetale-ring-derived-inverse-image"
  ],
  "proof": [
   {
@@ -223,5 +224,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e94080c12 (reviewer sub-agent of L); spot-checked: Read the item statement (unchanged) and all 5 new steps, plus every cited node's statement. The statement is true: finitely many affine W inside the members give the global interval [min a, max b], and empty X gives [0,0]. It is not a duplicate: lem-sfb-tor-interval-local-detection concerns Tor amplitude, and the detection lemma's own D-clause gives no uniform interval. There are no new nodes and no cycle. Bhatt–Scholze 6.5.3 and the reverse direction of 6.6.11 (p.49) and Stacks 04ZA were read; the proof is agent-written, as recorded. Step 1: affine Noetherian space, compact subsets and the immersion homeomorphism make the strata and X quasi-compact, and the affine cover makes X locally Noetherian. Step 2: sk-def-pe-site's affine refinement plus Zariski covers plus axiom (ii) give a finite covering {W→S_α}, with each W open in a member. Step 3: exactness of inverse image on modules with transported scalars, and an exact functor commutes with cohomology; restricting to W keeps the member's interval. Step 4: elementary min/max. Step 5: the detection lemma is applied to the underlying abelian sheaf of H^q(K), with its hypotheses verified. FIX adds two missing citations (B3): def-weil-pbc-quasi-compact-scheme in step 1, and clause (4) of def-weil-pbc-sites-and-cohomology for the composite inverse image in step 3. Batch-5 check: lem-trf-geometric-inverse-image-exact is the generic Stacks 04JC exactness, not part of the trace formula or Poincaré duality. With the assumed nodes from coord/assumed.tsv treated as leaves, it is already in the batch-5 closure without this edge (difference empty), so it is accepted. tool_uses (trf exactness and pbc stratum detection) are accepted as generic tools.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StratifiedLocalCohomologicalBounds",
+  "declaration": "AlgebraicGeometry.Scheme.exists_global_bounds_of_stratified_local_bounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/StratifiedLocalCohomologicalBounds.lean",
+  "statement": "theorem exists_global_bounds_of_stratified_local_bounds (X : Scheme.{u}) [IsNoetherian X] (S : FiniteLocallyClosedStratification X) (V : ∀ α : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain α)) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (K : DerivedCategory (ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))) (lower upper : ∀ α : Fin S.n, (V α).I₀ → ℤ) (hinterval : ∀ (α : Fin S.n) (j : (V α).I₀), lower α j ≤ upper α j) (hlocal : ∀ (α : Fin S.n) (j : (V α).I₀) (q : ℤ), q < lower α j ∨ upper α j < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((proEtaleAllRingDerivedInverseImage ((V α).f j ≫ S.immersion α) ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)).obj K))) : ∃ (m : Fin S.n → ℕ) (label : ∀ α : Fin S.n, Fin (m α) → (V α).I₀) (W : ∀ (α : Fin S.n) (k : Fin (m α)), ((V α).X (label α k)).Opens), (∀ (α : Fin S.n) (k : Fin (m α)), IsCompact (W α k : Set ((V α).X (label α k)))) ∧ (∀ α : Fin S.n, Presieve.ofArrows (fun k : Fin (m α) ↦ (W α k).toScheme) (fun k ↦ (W α k).ι ≫ (V α).f (label α k)) ∈ proetalePrecoverage (S.domain α)) ∧ ∃ a b : ℤ, a ≤ b ∧ (∀ (α : Fin S.n) (k : Fin (m α)), a ≤ lower α (label α k)) ∧ (∀ (α : Fin S.n) (k : Fin (m α)), upper α (label α k) ≤ b) ∧ ((∃ α : Fin S.n, Nonempty (Fin (m α))) → (∃ (α : Fin S.n) (k : Fin (m α)), a = lower α (label α k)) ∧ (∃ (α : Fin S.n) (k : Fin (m α)), b = upper α (label α k))) ∧ ((∀ α : Fin S.n, m α = 0) → a = 0 ∧ b = 0) ∧ ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj K)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The finite extrema are expressed by bounds plus attainment, with [0,0] for an empty selection. Uses the existing actual-ring exact derived inverse image owned by def-sfb-proetale-ring-derived-inverse-image; no scalar extension. The detection lemma remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3bef478e",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after the 46b27b34 H2 RETURN. The Lean module is byte-identical; the detection theorem moved from stmt_deps to proof_deps; new def node def-sfb-proetale-ring-derived-inverse-image (existing:true on the unchanged NoetherianStratumDetection) owns proEtaleRingModuleInverseImage, its proved exactness theorem and instances, the HasDerivedCategory.standard instance and the mapDerivedCategory abbreviation. Its statement matches the Lean and Stacks 04JC/015F/05RU; lean.statement verbatim; cites only definitions; no duplicate DAG node. The item's clauses and edge cases were re-checked against the node; item lean.statement verbatim; nt_compile --json clean in 18.5 s. Advisories: possibly unused RingedDerivedRestrictionGeneral import; owned decls' docstrings still name the detection node as blueprint; stage 3 needs detection for FiniteLocallyClosedStratification."
+ }
 }

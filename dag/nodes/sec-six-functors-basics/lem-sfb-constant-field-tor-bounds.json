@@ -286,5 +286,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5f9ea7c91 (reviewer sub-agent of L); spot-checked: I read the item, all 9 cited statements, the blueprint main-20261015 sk-lem-integral-models proof (paragraph 1), Stacks 06YQ and 06YP, and the remark before definition-derived-tor. The statement is true: sheaf tensor over κ_X is the sheafified tensor over the constant presheaf κ, which is exact, so every κ_X-module is flat; testing N=κ_X gives the converse. Edge cases checked: B=0, a=b, the empty scheme, unbounded B in the converse, infinite κ or κ of characteristic p. One C4/E5 fault, step 3: it computed B⊗^L N on the bounded representative P of step 2 'by def-weil-derived-tensor', but that definition uses a chosen K-flat resolution map P'→C of a complex representing B, and step 2 gives only B≅Q(P) in D. Independence from the representative was uncited; lem-weil-derived-tensor-resolution-independent covers only resolutions of the same complex. Fixed: step 2 now shows N[0] is K-flat by lem-weil-pbc-independent-bounded-flat-kflat with bound 0 (N is flat by step 1). Step 3 cites lem-pur-kflat-tensor-quasiiso-independent (Stacks 06YP), so Tot(−⊗N[0]) preserves quasi-isomorphisms and descends to D; this gives Q T_N(P')≅Q T_N(C)≅Q T_N(P), then the original degree count. proof_deps recomputed. Added tool_use lem-pur-kflat-tensor-quasiiso-independent, checked acyclic: its closure does not reach the item. Steps 1, 2 (bounded representative = Mathlib exists_iso_Q_obj_of_isGE_of_isLE), 4 (arbitrary K-flat resolution, unit isomorphism, N=R) and 5 checked correct. Accepted tool_uses: lem-exc-constant-field-module-flat, lem-weil-pbc-independent-bounded-flat-kflat, lem-pc-kflat-resolution and the added one, all generic. No duplicate: lem-sp-ringed-site-tor-flat-model is a general flat-model criterion the item is a corollary of, not a restatement; lem-weil-field-tor-amplitude and det-def-localizing-closure-ctf-equals-bc(1) differ. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantFieldTorBounds",
+  "declaration": "AlgebraicGeometry.Scheme.constant_field_tor_bounds",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constant_field_tor_bounds",
+   "AlgebraicGeometry.Scheme.constant_field_finite_tor_amplitude_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantFieldTorBounds.lean",
+  "statement": "theorem constant_field_tor_bounds (X : Scheme.{u}) (κ : Type (max v (u + 1))) [Field κ] (B : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) κ)) (a b : ℤ) (hab : a ≤ b) : (∀ i : ℤ, i < a ∨ b < i → IsZero ((coefficientModelCohomology (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) κ) i).obj B)) ↔ HasCoefficientProEtaleTorAmplitude X κ B a b",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d0e7a922",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery of a014f19ddb11 (returned for H13/H4 F1/F2). All 8 stmt_dep records identical to side-live; only the item lean record is new. Module changed only by dropping the unused IntrinsicDerivedTensorOfUniverses import. Every clause matches the node: Scheme.{u} X, Field κ : Type (max v (u+1)), coefficientProEtaleModelTopology = AsSmall ProEt with induced topology, constantSheaf of κ, ringedSiteModules, standard DerivedCategory, coefficientModelCohomology = homologyFunctor with both endpoints, HasCoefficientProEtaleTorAmplitude tests every M[0] on every K-flat representative (they exist). Finite variant uses one common interval. Statement is true (flatness forward, unit test backward). Edge cases B=0, a=b, empty scheme, any char, unbounded B, independent universes covered. Proofs exactly sorry; source/blueprint docstrings present; lean.statement verbatim; no new defs; no name clash. nt_compile --json 15.9 s clean, broken control errors. Advisories: cohomology record bound to SF-specific decls, item uses general homologyFunctor via the Tor dep module; derived-tensor record unused, Tor predicate uses ringedKoszulTensor; proof-only imports not needed for the statement."
+ }
 }

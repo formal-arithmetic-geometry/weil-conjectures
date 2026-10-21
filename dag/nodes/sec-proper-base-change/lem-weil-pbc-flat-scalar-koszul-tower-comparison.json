@@ -262,5 +262,48 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-09dc4a12a (reviewer sub-agent of L); spot-checked: Read the whole 8-step split and all 13 cited statements. Statement is byte-identical to base (sha1 d22c651f, same as 393 earlier snapshots); no new nodes; no repair note, so this is a first split. Sources checked: Stacks 0A07 lemma-Rf-commutes-with-Rlim (sites-cohomology.tex 5150ff), 0A0E lemma-derived-completion-koszul (algebraization.tex 1091ff), and the tags file confirms 06YQ = sites-cohomology-lemma-bounded-flat-K-flat. Step 1: I recomputed the Koszul and Tot sign (-1)^{p+#{i<j}}, and the a^m action is phi(a)^m on Res C. Step 2: the transition is the product of phi(a_j) over j in S on both sides, and the coaugmentation lands in the e_empty summand. Step 3: Q_m has flat terms and is bounded above, so it is K-flat; the fixed-tensor lemma needs no bound on C. The diagram-restriction specialization holds: id topos, a_U=a_V=phi, c=id, J a point or N^op. Step 4: the K-injective and limit-preservation clauses are taken from the statements as written. Step 5: f=(id,phi) gives f_*=Res, and a_X is represented by Res lim J = lim Res J, which matches the stated underived normalization. Step 6: I checked gamma∘Res(eta_B)=eta_R via the homotopy-unique g with g∘Res i = j∘h, so the equality holds for derived arrows, not just evaluations. Step 7 follows from the projection clause. Step 8: ev_1 ⊣ Δ, so ΔI is K-injective and gamma is the identity. Edge cases checked: r=0,1,2, zero, unit and repeated generators, zero ring; no regularity or boundedness is used. No cycle: the 391-node dependency closure does not contain the item. No duplicate found among the Koszul + restriction-of-scalars candidates. The off-unit generic tools are declared in split_report.tool_uses; accepted. Maintainer note: the existing node lem-pc-bounded-above-flat-kflat-site gives tag 06YS, but its statement is Stacks 06YQ."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatScalarKoszulTowerComparison",
+  "declaration": "CategoryTheory.FlatScalarKoszul.flatScalarKoszulTowerComparison",
+  "declarations": [
+   "CategoryTheory.FlatScalarKoszul.Modules",
+   "CategoryTheory.FlatScalarKoszul.Towers",
+   "CategoryTheory.FlatScalarKoszul.tensor",
+   "CategoryTheory.FlatScalarKoszul.one",
+   "CategoryTheory.FlatScalarKoszul.degree",
+   "CategoryTheory.FlatScalarKoszul.factorBasis",
+   "CategoryTheory.FlatScalarKoszul.positiveBasis",
+   "CategoryTheory.FlatScalarKoszul.dualCoordinate",
+   "CategoryTheory.FlatScalarKoszul.coordinate",
+   "CategoryTheory.FlatScalarKoszul.restriction",
+   "CategoryTheory.FlatScalarKoszul.restrictComplex",
+   "CategoryTheory.FlatScalarKoszul.restrictTower",
+   "CategoryTheory.FlatScalarKoszul.restrictTowerComplex",
+   "CategoryTheory.FlatScalarKoszul.imageSections",
+   "CategoryTheory.FlatScalarKoszul.limitComplex",
+   "CategoryTheory.FlatScalarKoszul.limitComparison",
+   "CategoryTheory.FlatScalarKoszul.restrictDerived",
+   "CategoryTheory.FlatScalarKoszul.restrictTowerDerived",
+   "CategoryTheory.FlatScalarKoszul.evaluateDerived",
+   "CategoryTheory.FlatScalarKoszul.evaluationComparison",
+   "CategoryTheory.FlatScalarKoszul.limitProjection",
+   "CategoryTheory.FlatScalarKoszul.flatScalarKoszulTowerComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarKoszulTowerComparison.lean",
+  "statement": "theorem flatScalarKoszulTowerComparison (φ : R ⟶ B) (_hflat : PreservesFiniteLimits (SheafOfModules.RingedTensor.tensorFunctor φ) ∧ PreservesFiniteColimits (SheafOfModules.RingedTensor.tensorFunctor φ)) (r : ℕ) (a : Fin r → (R.obj ⋙ forget CommRingCat).sections) : ∃ (h : ringedKoszulTensorTowerFunctor B r (imageSections φ a) ⋙ restrictTowerComplex φ ≅ restrictComplex φ ⋙ ringedKoszulTensorTowerFunctor R r a) (DB : RingedKoszulLimitPresentation B r (imageSections φ a)) (DR : RingedKoszulLimitPresentation R r a) (hD : DB.tensorTower ⋙ restrictTowerDerived φ ≅ restrictDerived φ ⋙ DR.tensorTower) (alpha : DB.inverseLimit ⋙ restrictDerived φ ≅ restrictTowerDerived φ ⋙ DR.inverseLimit) (gamma : DB.completion ⋙ restrictDerived φ ≅ restrictDerived φ ⋙ DR.completion) (pB : ∀ m : ℕᵒᵖ, DB.inverseLimit ⟶ evaluateDerived B m) (pR : ∀ m : ℕᵒᵖ, DR.inverseLimit ⟶ evaluateDerived R m), (∀ (N : ringedSiteComplex B) (m : ℕ) (e : Fin r → Bool) (n : ℤ), ((h.hom.app N).f n).app (op m) ≫ coordinate R r a ((restrictComplex φ).obj N) m e n = (restriction φ).map (coordinate B r (imageSections φ a) N m e n)) ∧ (∀ (N : ringedSiteComplex B) (m : ℕᵒᵖ) (n : ℤ), (restriction φ).map ((ringedKoszulTensorUnitComponent B r (imageSections φ a) N m).f n) ≫ ((h.hom.app N).f n).app m = (ringedKoszulTensorUnitComponent R r a ((restrictComplex φ).obj N) m).f n) ∧ (∀ N : ringedSiteComplex B, (restrictTowerDerived φ).map (DB.tensorFactors.hom.app N) ≫ (restrictTower φ).mapDerivedCategoryFactors.hom.app ((ringedKoszulTensorTowerFunctor B r (imageSections φ a)).obj N) ≫ DerivedCategory.Q.map (h.hom.app N) = hD.hom.app (DerivedCategory.Q.obj N) ≫ DR.tensorTower.map ((restriction φ).mapDerivedCategoryFactors.hom.app N) ≫ DR.tensorFactors.hom.app ((restrictComplex φ).obj N)) ∧ (∀ X : CochainComplex (Towers B) ℤ, (restrictDerived φ).map (DB.comparison.app X) ≫ alpha.hom.app (DerivedCategory.Q.obj X) = (restriction φ).mapDerivedCategoryFactors.hom.app ((limitComplex B).obj X) ≫ DerivedCategory.Q.map ((limitComparison φ).app X) ≫ DR.comparison.app ((restrictTowerComplex φ).obj X) ≫ DR.inverseLimit.map ((restrictTower φ).mapDerivedCategoryFactors.inv.app X)) ∧ (∀ E : DerivedCategory (Modules B), gamma.hom.app E = alpha.hom.app (DB.tensorTower.obj E) ≫ DR.inverseLimit.map (hD.hom.app E)) ∧ (∀ E : DerivedCategory (Modules B), (restrictDerived φ).map (DB.unit E) ≫ gamma.hom.app E = DR.unit ((restrictDerived φ).obj E)) ∧ (∀ (X : CochainComplex (Towers B) ℤ) (m : ℕᵒᵖ), DB.comparison.app X ≫ (pB m).app (DerivedCategory.Q.obj X) ≫ ((evaluation ℕᵒᵖ (Modules B)).obj m).mapDerivedCategoryFactors.hom.app X = DerivedCategory.Q.map ((limitProjection B m).app X)) ∧ (∀ (X : CochainComplex (Towers R) ℤ) (m : ℕᵒᵖ), DR.comparison.app X ≫ (pR m).app (DerivedCategory.Q.obj X) ≫ ((evaluation ℕᵒᵖ (Modules R)).obj m).mapDerivedCategoryFactors.hom.app X = DerivedCategory.Q.map ((limitProjection R m).app X)) ∧ (∀ (E : DerivedCategory (Modules B)) (m : ℕᵒᵖ), gamma.hom.app E ≫ (pR m).app (DR.tensorTower.obj ((restrictDerived φ).obj E)) = (restrictDerived φ).map ((pB m).app (DB.tensorTower.obj E)) ≫ (evaluationComparison φ m).inv.app (DB.tensorTower.obj E) ≫ (evaluateDerived R m).map (hD.hom.app E)) ∧ (r = 0 → ∃ (eB : DB.completion ≅ 𝟭 (DerivedCategory (Modules B))) (eR : DR.completion ≅ 𝟭 (DerivedCategory (Modules R))), (∀ E, DB.unit E ≫ eB.hom.app E = 𝟙 E) ∧ (∀ E, DR.unit E ≫ eR.hom.app E = 𝟙 E) ∧ ∀ E, gamma.hom.app E ≫ eR.hom.app ((restrictDerived φ).obj E) = (restrictDerived φ).map (eB.hom.app E))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded strict tensor tower and RingedKoszulLimitPresentation. Actual ordered-basis coordinate maps fix the strict natural isomorphism; localization factorization, the ordinary compatible-family limit comparison, the unit square, every derived evaluation, and the empty-list identity normalize its derived comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db0cfacc3",
+  "group": "NP",
+  "result": "pass",
+  "note": "Single new module FlatScalarKoszulTowerComparison + item lean record; node JSON otherwise unchanged; statement verbatim, 22 declarations match, one sorry. Clause check: small site, φ, r≥0 sections, flatness = exactness of RingedTensor.tensorFunctor φ (node's own wording). Strict h fixed by actual ordered-basis coordinate maps (identity per exterior coordinate) and coaugmentation compatibility. hD fixed by localization of h; alpha = canonical 0A07 comparison via universal property; gamma = alpha then derived limit of hD. Unit equation is on actual derived arrows; pB/pR fixed against ordinary limit projections, evaluation square for every index; r=0 clause present. Edge cases r=0/1/2, degenerate generators, zero ring and unbounded complexes OK. Compile: nt_compile 60 s timeout at load 256; lcompile timeout=560 clean in 191.1 s; worker 29.7 s. Advisories: ∃ DB DR follows project convention; last r=0 equation follows from the unit equation; landing may time out under load."
  }
 }

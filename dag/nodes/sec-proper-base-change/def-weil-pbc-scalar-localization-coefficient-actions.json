@@ -92,14 +92,15 @@
   "declaration": "CategoryTheory.scalarLocalizationDerivedLinear",
   "declarations": [
    "CategoryTheory.scalarLocalizationDerivedLinear",
-   "CategoryTheory.scalarLocalizationCoefficientMap"
+   "CategoryTheory.scalarLocalizationCoefficientMap",
+   "CategoryTheory.scalarLocalizationCoefficientLinear"
   ],
   "statement": "def scalarLocalizationDerivedLinear (A : Type v) [CommRing A]\n    (R : Sheaf J CommRingCat.{u})\n    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat))\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] :\n    Linear A (DerivedCategory\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))",
   "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-17",
+  "by": "Q36",
+  "date": "2026-10-21",
   "existing": true,
-  "note": "Exact existing coefficient-action definitions, physically housed in the module of the Hom comparison. This definition node records the coefficient notion independently of that theorem, avoiding the DAG cycle through its underlying-telescope proof dependency. No source declaration is copied or redefined."
+  "note": "§1(B) lean-only repair requested by the maintainer: the existing record exposes the derived action and localized coefficient map but omits scalarLocalizationCoefficientLinear, the plain definition restricting the global-section action to A on module-sheaf Homs. Add that existing definition to declarations so consumers can cite this definition node for the underlying coefficient action, independently of the Hom comparison theorem. All declarations remain the existing definitions in ScalarLocalizationDerivedHom; no source module is copied or redefined. The derived action, localized coefficient map, and zero/nilpotent coefficient cases retain the same canonical construction."
  },
  "reviewed": {
   "date": "2026-10-17",
@@ -110,12 +111,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a2a692079",
-  "group": "Q49",
+  "reviewer": "NT-stage2-cc-b107d3bc7",
+  "group": "Q36",
   "result": "pass",
-  "note": "Read node, all stmt_deps, new node def-weil-pbc-scalar-localization-coefficient-actions, report and module. Clause match: small site/ring/A-algebra via a; R_t = ringedLocalizationRing; E pinned to changeOfRings on objects and maps with exactness; U0 = restrictScalars; termwise unit fixed on all sections to toSheafify(1⊗x) and adj.unit = Q.map(unitComplex) on every Q K (canonical, satisfiable); bounded-below via IsGE; Cofan coproduct with ι n ≫ s = t•1 ≫ ι(n+1); distinguished 1-s triangle with iso whose legs are adj.unit ≫ U((invSelf t)^n • 1) using the canonical scalarLocalizationDerivedLinear/CoefficientMap actions; naturality and CommShift clauses present. Existential telescope form is equivalent (TR3/014A). Conclusion checked true (leg relation via the IsLocalization.Away.lift compatibility, shift-linear actions). Edge cases t=0/nilpotent/zero-divisor/unit, zero ring, empty site, n=0, k=0: no extra conditions; universes independent. No duplicate found (rg side lean/Sheaf, worker searches). Gates: no hollow defs, one sorry, docstrings with source/blueprint and 8 proof steps, statement verbatim, imports per rule 7. Prior return (c521a1865864) defects all repaired. nt_compile --json on snapshot: rc 0, no errors/warnings, 42.3 s/46.7 s (limit 60 s). Notes only: compile time ~47 s of 60 s; the parent's stage-3 proof cannot import this item until the coefficient helpers move lower (recorded in report/lean.note)."
+  "note": "Re-delivery after RETURN 7f39e44a; Lean module byte-identical to the module fully reviewed there; statement verbatim. Item node differs only in stmt_deps: theorem lem-weil-pbc-scalar-localization-derived-hom replaced by def-weil-pbc-scalar-localization-coefficient-actions, and lem-weil-pbc-site-derived-tensor-descent added, as requested. Dep record is a §1(B) lean-only change: scalarLocalizationCoefficientLinear (plain def, Module.compHom of homLinear along a = the node's 'restricting along a') added to declarations with lean.note, existing:true; live record unchanged since base. Mechanical finding: derivedTensor = curry of siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object, PASS on that point. No cycle; report sections present; one sorry. nt_compile --json clean in 31.4 s. Advisory: live docstring of scalarLocalizationCoefficientLinear is stale."
  },
  "reviewed_proof": {
   "date": "2026-10-19",

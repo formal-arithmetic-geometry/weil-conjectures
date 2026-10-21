@@ -1,0 +1,110 @@
+{
+ "id": "def-sbc-tower-derived-evaluation-interchange",
+ "kind": "definition",
+ "title": "Canonical exact derived tower evaluation interchange",
+ "statement": "For categories $\\mathcal A,\\mathcal B$, put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$ and $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(J,\\mathcal A)$, using strict towers [def-weil-inverse-system]. For a functor $F:\\mathcal B\\to\\mathcal A$, write $F^{\\mathrm{Tow}}$ for postcomposition by $F$ and $e_n^{\\mathcal A}$ for evaluation at positive level $n$ (encoded by $\\operatorname{op}(n-1)$). Package pointwise preservation of finite limits, respectively finite colimits [def-galois-exact-functor], as the canonical preservation structures on $F^{\\mathrm{Tow}}$ whenever $\\mathcal B$ has those finite limits, respectively finite colimits, and $F$ preserves them. Now let $\\mathcal A,\\mathcal B$ be abelian [def-sp-abelian], let $F$ be additive and exact, and choose unbounded derived categories [def-weil-abstract-derived-category] of $\\mathcal A,\\mathcal B,\\operatorname{Tow}(\\mathcal A),\\operatorname{Tow}(\\mathcal B)$, with independent morphism universe bounds. For an exact additive functor $H$, let $D(H)$ be its canonical localization from termwise action on complexes, and let $c(H,K):D(H\\circ K)\\xrightarrow{\\sim}D(H)\\circ D(K)$ denote the canonical composition comparison (here composition is written in Lean order: first $H$, then $K$). Define the exact derived evaluation interchange by the composite\n$$D(F^{\\mathrm{Tow}})\\circ D(e_n^{\\mathcal A})\\xrightarrow{c(F^{\\mathrm{Tow}},e_n^{\\mathcal A})^{-1}}D(F^{\\mathrm{Tow}}\\circ e_n^{\\mathcal A})=D(e_n^{\\mathcal B}\\circ F)\\xrightarrow{c(e_n^{\\mathcal B},F)}D(e_n^{\\mathcal B})\\circ D(F).$$\nThe middle equality is the strict ordinary evaluation identity, so this definition involves no choice of a derived right-adjoint comparison or normalization theorem.",
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "def-galois-exact-functor",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, diagram-topos proof; exact-localization evaluation identification expanded as in Derived Categories Tag 015F and clause (2) of lem-sbc-unbounded-exact-adjunction-square (agent-supplied tower application)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "towerDerivedEvaluationInterchange|towerNormalization_preservesFinite|mapDerivedCategoryCompIso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "The generic composition comparison and ordinary whiskering/evaluation identity are reused; the existing specialized declaration in Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization is attached without a new Lean definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on towers commutes with derived evaluation through the canonical derived composition isomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.evaluation, CategoryTheory.Limits.colimitIsoFlipCompColim, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.pi'CompEval, CategoryTheory.ExactFunctor.whiskeringRight, CategoryTheory.whiskeringRightCompEvaluation, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "The generic composition comparison and ordinary whiskering/evaluation identity are reused; the existing specialized declaration in Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization is attached without a new Lean definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "7 hits: CategoryTheory.Functor.mapDerivedCategoryCompIso, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_Q_obj",
+   "date": "2026-10-21",
+   "verdict": "The generic composition comparison and ordinary whiskering/evaluation identity are reused; the existing specialized declaration in Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization is attached without a new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "towerDerivedEvaluationInterchange|towerNormalization_preservesFinite in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search evaluation interchange",
+   "results": "Only the helper declarations and their use in Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization and the theorem node lem-weil-pbc-tower-derived-evaluation-normalization name these declarations. No definition node owns them. Blueprint search: 0 matching nodes.",
+   "date": "2026-10-21",
+   "verdict": "Attach the existing specialized definitions to a definition node, as requested by the independent H2 review; do not duplicate them."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sbc-unbounded-exact-adjunction-square",
+  "date": "2026-10-21",
+  "group": "Q38"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 8-10: ev_1 left adjoint to constants, K-injective preservation, and the derived unit/counit/mate comparisons for constants and evaluations on the diagram sites; exact-localization evaluation interchange in clause (2) of lem-sbc-unbounded-exact-adjunction-square",
+   "via": [
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization",
+  "declaration": "CategoryTheory.towerDerivedEvaluationInterchange",
+  "declarations": [
+   "CategoryTheory.towerDerivedEvaluationInterchange",
+   "CategoryTheory.towerNormalization_preservesFiniteLimits",
+   "CategoryTheory.towerNormalization_preservesFiniteColimits"
+  ],
+  "statement": "def towerDerivedEvaluationInterchange\n    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]\n    [Abelian A] [Abelian B]\n    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]\n    [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]\n    (F : B ⥤ A) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (n : ℕᵒᵖ) :\n    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ⋙\n        ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅\n      ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⋙ F.mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Independent stage-2 H2 return on ecb7b1291dae requests definition ownership of these unchanged plain definitions. The interchange is the explicit composite of mapDerivedCategoryCompIso; the two instances package pointwise preservation. None is chosen from exists_unique_towerDerivedEvaluation_normalized. Reuse the existing module byte-for-byte."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e674633b",
+  "group": "Q38",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e674633b",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on ecb7b129. The item Lean module is byte-identical to the previously reviewed head (sha256 802512b7), which was found correct on clauses (1)-(4). It recompiles clean via nt_compile --json (32.1 s, exit 0, no warnings). H2 repaired: stmt_dep lem-weil-pbc-tower-derived-evaluation-normalization is replaced by new def-sbc-tower-derived-evaluation-interchange. The new node is existing:true on the unchanged live TowerDerivedEvaluationNormalization and owns towerDerivedEvaluationInterchange plus the two towerNormalization_preservesFinite* instances. Its statement is verbatim the live signature (l.83-92); its NL composite c^{-1} then c matches the Lean; H12 fields are OK; it cites only live def nodes; its id is not in live. Mechanical finding on lem-weil-pbc-small-module-diagrams-grothendieck: genuine. towerResolutions builds the Prop instance HasKInjectiveResolutions on towers from the theorem smallModuleDiagrams_isGrothendieckAbelian, so PASS on that point. Not in the dropped list; report sections present. Advisories: constant-tower-pushforward-normalization overlap should reuse constantComparison; live docstrings still name the old blueprint node."
+ }
+}

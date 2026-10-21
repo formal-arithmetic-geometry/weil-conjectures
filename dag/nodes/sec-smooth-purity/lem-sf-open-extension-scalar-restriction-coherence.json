@@ -13,7 +13,8 @@
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-weil-open-immersion",
   "def-weil-extension-by-zero",
-  "lem-weil-extension-by-zero-exact"
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-adjunction"
  ],
  "proof": [
   {
@@ -219,5 +220,39 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6d548d949 (reviewer sub-agent of L); spot-checked: PASS with no changes; the full review is in review.md. This is a normal one-level split: the only re-split note is on the parent lem-sf-compact-support-restriction-of-scalars, which created this item, so the re-split size rules do not apply here. Statement, stmt_deps, source and blueprint are unchanged from side-live, where the item is still unsplit, so no other group has superseded it. Neither the item nor any node in its closure is on the route-pivot dropped list, there is no cycle and no SGA citation, and every dependency is in sk-def-sf-operations or is a Mathlib leaf (no tool_uses). Sources checked: Stacks 03DI lemma-extension-by-zero (l.2058; for an open immersion the direct sum has at most one term, giving the case formula) and 03CY lemma-sheafification-presheaf-modules (l.815; unique extended action and unique factorization), which matches def-weil-presheaf-modules-sheafification. Step checks: (1) P_{r_phi M} = r_phi P_M sectionwise, including the zero-to-zero restriction case; (2) the restricted B-action extends the A-action along eta, so by uniqueness the identity map on a(P_M) is A-linear, and e is determined by e∘eta = r_phi(eta); (3) naturality and the identity law, checked by computing both composites after eta; (4) the cocycle, checked after eta with both rho components kept, both sides equal r_chi(eta_{P_M}); (5) exactness from lem-pur-sheaf-ring-coefficient-ordinary-adjunction plus lem-weil-extension-by-zero-exact, then termwise descent; (6) localization clauses (2) and (3), with the whiskered components matched through the factorization isomorphisms. Edge cases tested: U empty, j = id, zero rings, non-flat Z/4 to Z/2, non-quasi-compact j, unbounded complexes. Duplicate search: lem-cbc-proetale-extension-zero contains only an unnormalized complex-level Res j_! ≅ j_! Res with no cocycle; lem-cbc-finite-open-exchange-scalars, lem-sf-semilinear-scalar-ordinary-comparison, lem-coef-etale-open-scalar-coherence and lem-cbc-ringed-open-strict-reduction state different things, so none is a duplicate. Advisory only: step 1 uses without saying so that phi is compatible with A_Z|_U ≅ A_U, a one-line naturality check."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.sfOpenRestriction_normalized_unique",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfOpenRestrictionCoefficientSquare",
+   "AlgebraicGeometry.Scheme.sfOpenFixedRestrictionId",
+   "AlgebraicGeometry.Scheme.sfOpenCoefficientRestrictionId",
+   "AlgebraicGeometry.Scheme.SfOpenRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_normalized_unique",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_coefficient_comp",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_coefficient_id",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_cochain_comp",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_cochain_id",
+   "AlgebraicGeometry.Scheme.sfOpenRestrictionDerived",
+   "AlgebraicGeometry.Scheme.sfOpenDerivedCoefficientRestrictionId",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_derived_comp",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction_derived_id"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenScalarRestrictionCoherence.lean",
+  "statement": "theorem sfOpenRestriction_normalized_unique {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (φ : A →+* B) : SfOpenRestrictionNormalized j φ (sfOpenRestriction j φ) ∧ ∀ e : proEtaleCoefficientRestrictScalars U φ ⋙ sfIntrinsicExtensionByZero j A ≅ sfIntrinsicExtensionByZero j B ⋙ proEtaleCoefficientRestrictScalars Z φ, SfOpenRestrictionNormalized j φ e → e = sfOpenRestriction j φ",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The remaining clauses are the coefficient, cochain and derived composition/identity theorems in lean.declarations. All use the published sfOpenRestriction and scalar associators. SfOpenRestrictionNormalized is the presheaf-identity condition expressed on the open-adjunction unit (the nonzero extension-presheaf generators); zero-source components are unique. The added landed adjunction dependency supplies exactly that existing unit. The existing comparison definitions are imported from the parent module, so adding a reverse proof import there would close an import cycle and must be omitted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7c0ccbd0",
+  "group": "NM",
+  "result": "pass",
+  "note": "All node clauses are rendered in the Lean: finite rings A,B,C; arbitrary open immersion with no extra assumptions; canonical rho at sheaf and derived level (sfCoefficientRestrictionComp / sfDerivedCoefficientRestrictionComp); e = published sfOpenRestriction with a genuine normalized-and-unique clause (the predicate fixes the adjoint transpose through the recorded j_! -| j^* unit and the canonical square q, equivalent to identity on the extension presheaves); derived e via mapDerivedCategorySquareIso; cocycle at sheaf, cochain (Z-indexed) and derived level, orientation checked; identity laws with real identifications. Mechanical finding: the statement uses the unit of the adjunction constructed by lem-weil-extension-by-zero-adjunction (its Lean record is a def of the adjunction), so it genuinely depends on the theorem's conclusion: PASS on that point. No hollow definitions, all theorems sorry, docstrings and blueprint tags present, lean.statement verbatim, no duplicate, item not yet stated live. Compile: nt_compile hit its 60 s limit at load ~255; lcompile with a 560 s limit gave rc 0, clean, 419 s. Advisory: Sheaf.Paper.SfCompactSupportRestrictionOfScalars, which defines sfOpenRestriction and the scalar-composition maps, is not named by any node's lean record."
  }
 }
