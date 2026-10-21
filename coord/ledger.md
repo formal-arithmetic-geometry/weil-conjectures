@@ -22390,3 +22390,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:05 L: merged deliver/T4/Sheaf.NumberTheory.Padics.FiniteSumLattice (stage 3; reviewer PASS; first push; landing 20261021T120548-L-3911766 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:05 L: merged deliver/T5/Sheaf.CategoryTheory.TensorActionTraceContraction (stage 3; reviewer PASS; first push; landing 20261021T120552-L-3912705 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:05 L: merged deliver/T5/Sheaf.Paper.FlatCommonQuotientReductionTower (stage 3; reviewer PASS; first push; landing 20261021T120555-L-3913330 (interface); batch 20261021T120309; modules 2; new nodes 1; change records: coord/changes/T5-flat-common-quotient-imports.md)
+- 12:06 L: merged deliver/T6/Sheaf.AlgebraicGeometry.CompactificationMiddleOverBase (stage 3; reviewer PASS; first push; landing 20261021T120558-L-3913930 (proof); batch 20261021T120309; modules 1; new nodes 0)

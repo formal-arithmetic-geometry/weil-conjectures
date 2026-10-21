@@ -72,6 +72,11 @@ theorem compactification_middle_over_base {S : Scheme.{u}} [CompactSpace S]
     IsOpenImmersion c.obj.obj.overI.left ∧
     QuasiCompact c.obj.obj.overI.left ∧
     IsProper c.obj.obj.overG.left := by
-  sorry
+  refine ⟨?_, inferInstance, inferInstance, inferInstance, ?_,
+    c.obj.obj.overI_overG, inferInstance, ?_, inferInstance⟩
+  · refine ⟨c.obj.obj.g ≫ Y.hom, ⟨?_, rfl⟩, fun aZ h ↦ h.2.symm⟩
+    rw [← Category.assoc, ← c.obj.obj.comm, Over.w]
+  · exact QuasiCompact.compactSpace_of_compactSpace c.obj.obj.overObj.hom
+  · exact c.obj.property
 
 end AlgebraicGeometry.Compactification
