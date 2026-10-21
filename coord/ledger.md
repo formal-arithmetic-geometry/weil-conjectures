@@ -22325,3 +22325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:51 L: returned deliver/Q90/lem-weil-point-automorphism-transport-scalar-extension (reviewer RETURN: L: independent stage-2 immutable head ea11339c2afe: H13: the delivery rebinds Q57's landed record of lem-weil-point-auto)
 - 11:53 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 11:54 L: merged deliver/NL/lem-pur-strict-quotient-diagonal-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 11:55 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
