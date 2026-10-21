@@ -1,0 +1,158 @@
+{
+ "id": "lem-sbc-adic-finite-exchange-encoding",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-adic-smooth-base-change",
+   "place": "Proof, step 2: identify finite smooth-base-change coordinates with the actual finite quotient ringed mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite quotient realization preserves the actual smooth-exchange mate",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and the integral adic datum d of [def-weil-pbc-bounded-constructible-complete]. For a chosen cartesian square h : Y to X, e : Y to T, f : X to S, g : T to S and any n >= 0, let M be any object of the derived category of modules over the actual nth quotient coefficient sheaf on T. The arrow sbcFiniteExchangeApp of [lem-sbc-completed-operations-linear-natural-exchange] at M is isomorphic, in the arrow category over the quotient-coefficient derived category on X, to pbcDerivedFunctionRealization_X applied to the fixed-scalar pro-etale derivedBaseChangeMap for the flipped square at the inverse realization of M. The realization is the canonical function-coefficient realization of [def-weil-pbc-bounded-constructible-complete], and the fixed-scalar operations are those of [def-weil-pbc-proetale-modules]. No smoothness, noetherianity, boundedness, completeness or etale-origin assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-coefficients/sbc-thm-finite-proetale-smooth-base-change.proof.md",
+  "place": "Finite pro-etale coefficient transport, expanded into a comparison of the tensor-normalized ringed mate with fixed-scalar coordinates; Stacks sites-cohomology.tex Tag 07A7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "The locally bijective constant-scalar presentation supplies the exact equivalence pbcFunctionRealization at every corner. The characterization of pbcLevelConstantComparison on constant sections identifies its scalar unit with pbcFunctionScalars. The adjunct of completedFiniteCoefficientMap is the constant direct-image map conjugated by these level comparisons. Thus direct image followed by restriction of the scalar action evaluates on exactly the same object and has exactly the fixed scalar action. Identity on sections yields the normalized direct-image comparison, as in the existing finite coefficient realization/direct-image theorem. The coefficient-ring presentation is transported by the canonical finiteRingComparison.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-finite-coefficient-realization-direct-image",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Module sheafification and definition of pushforward; constant-section coefficient identification"
+   }
+  },
+  {
+   "text": "Conjugate these right-adjoint comparisons across the exact realization equivalences, using the normalized tensor adjunctions, to obtain the left-adjoint comparisons and their unit and counit equations. Direct-image composition is given by restriction along the canonical fiber-product pasting arrow. Both composites of sectionwise comparisons therefore agree. Uniqueness of adjoints identifies the corresponding pullback compositors. Derive the exact equivalences and the pullbacks termwise; equivalences preserve K-injective resolutions, so the right-derived direct-image comparisons are isomorphisms. The normalized K-flat characterization of the ringed pullback compositor and the fixed-scalar derived comparators identify the two derived squares.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-finite-coefficient-realization-direct-image",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "lem-kun-derived-adjoint-square-comparison",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 07A6; composition of derived inverse images and derived adjunction"
+   }
+  },
+  {
+   "text": "Expand both exchange maps as unit followed by the pullback square followed by the counit. Substitute the three normalized comparison equations from step 2. Functoriality and naturality identify the composites. The source and target comparison isomorphisms give an isomorphism of arrows. The counit of the realization equivalence at M changes the chosen fixed-scalar representative to the inverse of pbcDerivedFunctionRealization at M. No geometric, boundedness or etale-origin assumptions are used, and the constant-section identities also apply to the zero ring and empty schemes.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "lem-pur-exact-derived-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change: the unit-square-counit definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-finite-coefficient-realization-direct-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-pur-exact-derived-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-coefficients/sbc-thm-finite-proetale-smooth-base-change.proof.md",
+  "place": "Finite pro-etale coefficient transport, expanded into a comparison of the tensor-normalized ringed mate with fixed-scalar coordinates; Stacks sites-cohomology.tex Tag 07A7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to constant scalar sections transports the derived ringed base change adjunction mate to the fixed coefficient module sheaf base change map",
+   "results": "Eight general restriction-of-scalars definitions and extend/restrict adjunctions; no ringed pro-etale exchange comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coefficient realization identifies the adjunction mate for derived smooth base change with the ringed module sheaf exchange",
+   "results": "Eight hits including SheafOfModules.PullbackConstruction.adjunction, pushforwardPushforwardAdj, Scheme.Modules.pseudofunctor_map_adj, and unit-object pullback transpose equations. None compares these derived exchange arrows.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Arrow",
+   "results": "Four Cech nerve and Leibniz adjunction hits; no coefficient encoding comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derivedBaseChange|coefficientRealization",
+   "results": "Twenty Mathlib hits, principally CategoryTheory.Adjunction.Mates and bicategory mates. Local source search found proEtaleConstantExchange_encoding, but it uses a small coefficient type lifted into the site universe and restriction from constant-ring modules, rather than the actual function-quotient presentation and pbcDerivedFunctionRealization. FiniteCoefficientRealizationDirectImage supplies the ordinary right-adjoint part; FiniteProetaleSmoothBaseChange proves invertibility only in fixed-scalar realization coordinates.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; retained separate coefficient-presentation comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicSmoothBaseChange",
+  "date": "2026-10-21",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteExchangeEncoding",
+  "file": "lean/Sheaf/Paper/AdicFiniteExchangeEncoding.lean",
+  "declaration": "WeilConjectures.sbcFiniteExchange_encoding",
+  "statement": "theorem sbcFiniteExchange_encoding\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T}\n    (sq : ChosenCartesianSquare h e f g) (n : ℕ)\n    (M : DerivedCategory\n      (pbcModules T ((pbcAdicRings T (pbcIntegralDatum l E)).obj (op n)))) :\n    Nonempty (Arrow.mk (sbcFiniteExchangeApp l E sq n M) ≅\n      Arrow.mk ((pbcDerivedFunctionRealization X (pbcIntegralDatum l E) n).map\n        ((ProEtale.derivedBaseChangeMap\n          (ModuleCat.{u + 1} (ProEtale.PbcQuotient (pbcIntegralDatum l E) n))\n          sq.toCommSq.flip).app\n            ((pbcDerivedFunctionRealization T (pbcIntegralDatum l E) n).asEquivalence.inverse.obj\n              M))))",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-af986",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261021T143925-L-21559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-af986",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261021T143925-L-21559",
+  "kind": "interface",
+  "note": "independent cc review: the delivered AdicSmoothBaseChange proof and the new sbcFiniteExchange_encoding statement against the item node, unit sk-rem-rest (realized empty), sk-prop-pe-comparison-morphism, SbcCompletedOperations (sbcFiniteExchangeApp/sbcFiniteTheta), the FiniteProetaleSmoothBaseChange conclusion and ProEtaleConstantExchangeEncoding; item, new module, axioms check and importer ECoefficientSmoothBaseChange compiled together"
+ }
+}
