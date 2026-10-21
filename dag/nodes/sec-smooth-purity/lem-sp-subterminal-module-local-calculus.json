@@ -18,118 +18,103 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-site-restriction-module-adjunction-exact] with coefficient sheaf $R$ and object $Z$, for $Z=U,V,W$. It gives exact restriction and its exact left adjoint, constructed as the module sheafification of [def-weil-extension-by-zero-presheaf]. Since $Z\\hookrightarrow1$ is monic, any two arrows $C\\to Z$ coincide. Thus the direct sum defining that presheaf has one summand $F(C\\to Z)$ or no summands, giving exactly $P_F$ in the statement, with its specified $R(C)$-action and restrictions. Restriction is additive sectionwise; extension is additive because both the summand maps and sheafification preserve addition of morphisms (the latter follows from its linear universal property [def-weil-presheaf-modules-sheafification]). Apply the same exact-adjunction lemma on $\\mathcal E/U$ at $W\\to U$ and on $\\mathcal E/V$ at $W\\to V$ to obtain $k_{U!}$ and $k_{V!}$. Their coefficient rings are the literal restrictions of $R$ by [def-pur-localized-ringed-site].",
+   "text": "Use localizedSystemExtension and localizedSystemRestriction with their proved exactness instances and the normalized localizedSystemAdjunction. For a subterminal Z, cancellation against Z → 1 makes Hom(X,Z) a subsingleton. The direct sum is zero when this type is empty; evaluation at any existing index is a linear equivalence with inverse the summand inclusion. This proves the stated presheaf formula with its specified generators.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact); specialization to subterminal objects"
-   }
-  },
-  {
-   "text": "For $q:\\mathcal E/Z\\to\\mathcal E$, every covering of $(C\\to Z)$ is an underlying covering of $C$, and every covering of $C$ lifts to one of $(C\\to Z)$ by composing its arrows with $C\\to Z$. Pullbacks of these covering arrows are the same in the slice and the base. Thus $q$ is continuous and cocontinuous. The identical verification applies to further slice restriction. Apply [lem-weil-pbc-module-sheafification-restriction] to these functors: restriction of $P^\\#$ is canonically the sheafification of the restricted module presheaf, and the comparison sends the unit image of each presheaf section to the same unit image. This also fixes the normalization of all comparisons below. The smallness hypothesis holds for the slices, and their ring sheaves are restrictions along the identity coefficient map.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-module-sheafification-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04B8 (lemma-almost-cocontinuous-sheafification), continuous cocontinuous slice case"
-   }
-  },
-  {
-   "text": "On an object $(C\\to U)$, the presheaf extending $F$ from $\\mathcal E/U$ evaluates to $F(C\\to U)$, since the arrow to $U$ is unique. Consequently its restriction to $\\mathcal E/U$ is exactly the already sheaf-valued presheaf $F$. Step 2 and the universal property of [def-weil-presheaf-modules-sheafification] identify $j_U^*j_{U!}F$ with $F$, with the unit $F\\to j_U^*j_{U!}F$ corresponding to the identity. Interchanging $U$ and $V$ gives the other self-restriction identification.",
-   "uses": [
-    "def-weil-extension-by-zero-presheaf",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0F6Z (lemma-restrict-back), module-linear proof using the singleton-summand formula"
+    "place": "Tags 03DI and 03DJ; specialization of the direct sum to a subsingleton index"
    }
   },
   {
-   "text": "Let $F$ be an $R|_V$-module sheaf. At $(C,a:C\\to U)$ the presheaf underlying $j_U^*j_{V!}F$ before sheafification is $F(C\\to V)$ if $C\\to V$ exists, and zero otherwise. An arrow $b:C\\to V$ is equivalent, by the product universal property, to an arrow $(a,b):C\\to W$ over $U$. The presheaf extending $k_V^*F$ from $\\mathcal E/W$ to $\\mathcal E/U$ therefore has precisely the same values. Its restrictions are those of $F$ when the source has an arrow to $V$, and zero out of a zero summand otherwise, on both sides. The scalar ring on each summand is $R(C)$ on both sides. Sheafifying this identity and using Step 2 gives $j_U^*j_{V!}\\cong k_{U!}k_V^*$. The identity commutes with maps $F\\to F'$, so is natural. Interchanging $U,V$ proves the remaining intersection identification.",
+   "text": "For a continuous and cocontinuous functor, restrict the module sheafification unit and transpose under source sheafification. Cocontinuity preserves its local bijectivity; localization identifies its sheafification as invertible, and the sheafification counit is invertible. Naturality follows by applying the adjunction hom equivalence. The same equivalence pins the comparison on unit images. Apply this independently universe-polymorphic argument to Over.forget and Over.map. This directly proves the required normalized comparisons.",
    "uses": [
-    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
     "def-pur-localized-ringed-site"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI and 0F6Z; agent intersection calculation from the explicit presheaf"
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04B8; normalized comparison by module-sheafification localization"
    }
   },
   {
-   "text": "The adjunction of Step 1 can be computed directly from the universal property in [def-weil-presheaf-modules-sheafification]. A map $a:F\\to j_Z^*G$ induces $j_{Z!}F\\to G$ by sending a summand section $s\\in F(C\\to Z)$ to $a_{(C\\to Z)}(s)\\in G(C)$; conversely precompose a restricted map with the summand inclusion $F(C\\to Z)\\to P_F(C)\\to P_F^\\#(C)$. These operations are inverse, since every map out of the sheafification is determined on those summand sections. Hence the unit is this summand inclusion and the counit sends each summand section of $G(C)$ to that same section of $G(C)$. Under Steps 3 and 4 all nonzero summands and their sections are identified by identity maps. Step 2 preserves their sheafification-unit images. Thus the unit and counit diagrams commute on every presheaf summand, hence after sheafification by its universal property.",
+   "text": "The singleton-summand inclusions define a presheaf isomorphism from F to restriction of its extension presheaf when Z is subterminal. Compose it with the restricted sheafification unit. The normalized adjunction identifies this composite with its unit. It is locally bijective and is a map between sheaves, hence invertible. Define the self-restriction comparison as the inverse of this unit.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
     "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
     "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, proof of lemma-extension-by-zero; explicit unit/counit formulas"
+    "place": "Tag 0F6Z; singleton summand and the normalized unit"
    }
   },
   {
-   "text": "For nested subterminals $A\\hookrightarrow B\\hookrightarrow1$, write $h^*$ for restriction from the $B$-slice to the $A$-slice and $h_!$ for its left adjoint. Composition of the natural Hom bijections of Step 1 identifies $j_{B!}h_!$ with $j_{A!}$: both represent $F\\mapsto\\operatorname{Hom}(F,j_A^*G)$, and the identification is uniquely fixed by the summand section maps. The nested-open map $j_{A!}h^*H\\to j_{B!}H$ is $j_{B!}$ of the counit $h_!h^*H\\to H$. By Step 5 it sends the summand indexed by $C\\to A$ to the summand indexed by its composite $C\\to B$, carrying $s$ to $s$. Restriction and the intersection identifications send the same section to $s$ whenever that summand exists; otherwise the source is zero. Therefore their diagrams with nested-open maps commute, again by the sheafification universal property. This covers the inclusions of $W$ in $U,V$ and their inclusions in $1$.",
+   "text": "For f:A→B with B subterminal, set k! = j_A! followed by j_B*. Restriction j_B* has the standard right adjoint along Over.star B. The functors Over.map f and Over.forget A followed by Over.star B are naturally isomorphic: on each object the inverse is the second projection, and subterminality gives the other inverse equation. Transporting the composite adjunction gives k! ⊣ f*. The extension is exact as a composite; f* is additive as its right adjoint, left exact as a right adjoint, and right exact by the standard adjunction f* ⊣ overPullback.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
     "def-pur-localized-ringed-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI and 04IY (lemma-relocalize); composition of the displayed adjunctions on generators"
+    "place": "Tags 03DI and 04IY; composition of adjunctions and subterminality"
    }
   },
   {
-   "text": "For any $C$, pullback stability of the covering sieve generated by $U,V\\to1$ says that $C\\times U\\to C$ and $C\\times V\\to C$ generate a covering sieve. If $j_U^*M=j_V^*M=0$, a section $s\\in M(C)$ restricts to zero on both objects, since they map to $U$ and $V$. Every arrow in the covering sieve factors through one of them, so all restrictions of $s$ on that sieve are zero. Uniqueness in the sheaf condition gives $s=0$. Thus all section modules vanish and $M=0$. The same argument applied to the section $t_C(s)$ proves that a morphism $t:M\\to N$ whose two restrictions are zero is zero. This uses only the site axioms and the sheaf condition in [def-weil-sheaf-of-modules-category], not existence of points.",
+   "text": "Let θ: j_V* followed by g* ≅ j_U* followed by f* be the canonical restriction comparison. Define the inverse exchange as its inverse mate under j_V! ⊣ j_V* and k_U! ⊣ f*. Mate θ again under the standard right adjoints of j_U* and g*. At Y→V its component is restriction of a module along the canonical slice isomorphism Y×_V W ≅ U×Y, for W=U×V. Its inverse is constructed by the product and pullback universal properties. Thus this second mate is invertible. The iterated-mate/conjugation theorem reflects its invertibility to the exchange map. The unit and counit mate identities give exactly the required normalized exchange equations. Repeat with U,V interchanged.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 0F6Z; agent categorical intersection calculation by iterated mates"
+   }
+  },
+  {
+   "text": "Define k_U! followed by j_U! ≅ j_W! by uniqueness of left adjoints after transporting the right adjoint through the canonical restriction isomorphism. The uniqueness unit equation is the required composition normalization. Transpose the nested map: it equals the inverse composition comparison followed by j_U! of k_U! applied to the inverse restriction comparison and then the k_U counit. Self-comparison naturality proves the self equation. The global triangle identities prove nested followed by counit equals the global W counit. The normalized composition units and the invertible global units imply each k-unit is invertible. For maps out of kX into kRY, postcomposition with its counit is injective: transpose and cancel R of the counit, which is invertible by the triangle identity. Apply this to the cross equation; after composing with the exchange counit, both sides reduce to restriction of the global W counit, using the self equation just proved. This proves both cross equations.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 04IY; adjunction uniqueness, triangles and mate identities"
+   }
+  },
+  {
+   "text": "A morphism whose U and V restrictions vanish is zero: on each object, use the cover by arrows whose domains map to U or V; naturality makes the restricted morphism zero and sheaf separatedness gives equality. Applying this to the identity detects zero objects. The product of the restriction functors is faithful by subtracting morphisms. It preserves finite limits and colimits; faithfulness therefore reflects monomorphisms and epimorphisms and hence isomorphisms in the abelian module category.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent cover/separatedness argument for the two covering subterminals"
+    "place": "Agent cover-separatedness argument, as in the original node"
    }
   },
   {
-   "text": "For module maps $A\\xrightarrow{f}B\\xrightarrow{g}C$ whose restrictions are exact, the restrictions of $gf$ vanish, so Step 7 gives $gf=0$. Form $H=\\ker(g)/\\operatorname{im}(f)$ in the abelian category of module sheaves [def-weil-sheaf-of-modules-category]. By exactness of the two restriction functors from Step 1 and [lem-sp-exact-functor-preserves-homology], $j_Z^*H\\cong\\ker(j_Z^*g)/\\operatorname{im}(j_Z^*f)=0$ for $Z=U,V$. Step 7 gives $H=0$, which is exactly exactness at $B$. Conversely, the two exact functors preserve exactness by the same cited lemma. Applying this to each successive triple proves joint detection for sequences, including endpoint mono/epi conditions by inserting zero objects.",
+   "text": "For a short complex, exactness is vanishing of its homology. The standard exact-functor homology comparison and joint zero detection give the exactness test. Use mapHomologicalComplexHomologyIso for all integer cohomology degrees; the same zero test gives cohomological vanishing, and joint isomorphism reflection gives the quasi-isomorphism test on homology maps. Exact functors act triangulated on ordinary unbounded derived categories with their Q-factorization. Use the proved source-library mapDerivedCategoryHomologyFunctorIso to obtain all derived comparisons, derived vanishing and isomorphism tests. No boundedness hypothesis is used.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
     "lem-sp-exact-functor-preserves-homology",
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N (lemma-exact-functor); agent application to the cover"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to exact restriction: $H^q(j_Z^*K)\\cong j_Z^*H^q(K)$ naturally, for every integer $q$. Step 7 now gives joint detection of vanishing of each $H^q(K)$. For a chain map $a$, exact restriction preserves its cohomology kernels and cokernels by [lem-sp-exact-functor-preserves-homology]. If both restrictions of $a$ are quasi-isomorphisms, these kernels and cokernels restrict to zero; Step 7 makes them zero, so each $H^q(a)$ is an isomorphism and $a$ is a quasi-isomorphism. The converse follows from the cohomology comparison. Finally apply [lem-sf-exact-functor-derived-triangulated] to all exact restriction and extension functors of Step 1: their termwise actions descend to the ordinary unbounded derived categories as triangulated functors. The natural cohomology comparison descends through localization [def-weil-abstract-derived-category], so the same cohomological vanishing tests hold there, with no boundedness assumption.",
-   "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-abstract-derived-category"
+    "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), and homology.tex Tag 010N; termwise exact-functor calculus"
+    "place": "Tag 015F and homology.tex Tag 010N; exact-functor calculus and cohomology"
    }
   }
  ],
@@ -138,17 +123,16 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
   "def-pur-localized-ringed-site",
-  "lem-weil-pbc-module-sheafification-restriction",
   "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
   "lem-sp-exact-functor-preserves-homology",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-abstract-derived-category"
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI, 03DJ and 0F6Z; explicit intersection and cover arguments, using sites.tex Tag 04B8 and exact-functor calculus"
+  "place": "U8: singleton direct sums, universe-independent sheafification comparison, iterated mates for the product slice square, adjunction uniqueness and cover-separatedness; Mathlib exact homology and the proved source-library derived homology comparison."
  },
  "mathlib_searches": [
   {
@@ -266,8 +250,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-module-sheafification-restriction"
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -312,5 +295,15 @@
   "group": "Q93",
   "result": "pass",
   "note": "Clause-by-clause check of Q93 5c1a9577 against the node. jstar, jbang and adj are the actual localizedSystem restriction, the sheafified extensionByZeroPresheaf extension, and the unit-normalized adjunction (.choose of an ∃!). Intersection presents kU and kV through adjunctions to overMap f and g. selfU/V (inv = unit), exchangeU/V (fixed by kU ⊣ f^* transposition), composeU/V (fixed by the composite unit) and the nested self/cross/counit equations are pinned and were checked consistent by hand, including exchange_counit through the triangle identity. PresheafFormula pins the DirectSum.of injection. Both sheafification-restriction comparisons are unit-normalized. JointDetection covers zero objects, zero maps, short exact sequences, H^q, QuasiIso and derived H^q/IsIso. DerivedExact gives triangulated mapDerivedCategory for jstar, jbang, kU, kV and overMap. Hypotheses: finite limits, subcanonical, Mono terminal.from, Bool ofArrows sieve in J(⊤), W = U⨯V; independent site universes, no extra assumptions. Edge cases U=V, U=1, disjoint, zero ring and all q are covered. The record changes only lean; the statement is verbatim; one sorry; docstrings carry source, blueprint and all 9 steps; the report has both sections. No recompile, as no file was changed. Advisories: (1) localizedSystemAdjunction comes from theorem lem-pur-site-restriction-module-adjunction-exact, which is only a proof_dep and cannot be added to stmt_deps in S2; (2) Q92's landed SubterminalCover.nested is term-identical to this item's nested (downstream duplicate); (3) the H^q comparisons are Nonempty isos, which suffice for the node's 'commutes' and both citers' uses; (4) the plain ModuleSheafificationRestriction import looks unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T171851-L-3168855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
