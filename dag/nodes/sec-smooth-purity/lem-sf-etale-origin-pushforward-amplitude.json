@@ -16,9 +16,100 @@
   "def-weil-pbc-proetale-operations",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either $T=X$ or $T=Y$, comparison inverse image on $B$-modules is exact and fully faithful by [det-pe-classical-sheaves-modules]. It is applied termwise on derived categories by [def-weil-pbc-proetale-modules]. Exactness preserves the kernels, images and quotients defining cohomology [def-weil-abstract-derived-category], so $\\mathcal H^r(\\nu_T^*K)\\cong\\nu_T^*\\mathcal H^r(K)$. It also reflects zero objects: if $\\nu_T^*M=0$, faithfulness applied to $1_M$ and $0$ gives $1_M=0$, hence $M=0$. Apply this with $T=X$ and $K=L$ to deduce $\\mathcal H^r(L)=0$ outside $[a,b]$.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful; exact module inverse image and the termwise cohomology calculation"
+   }
+  },
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(X_{\\mathrm{et}},B)$ and $\\mathcal B=\\operatorname{Mod}(Y_{\\mathrm{et}},B)$. These are Grothendieck abelian categories admitting K-injective resolutions by [prop-pur-kinjective-resolutions-exist], applied in the small-site universe of the given module categories. The functor $f_{\\mathrm{et},*}:\\mathcal A\\to\\mathcal B$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Its ordinary total right derived functor $T=Rf_{\\mathrm{et},*}$ is triangulated and commutes with all integer shifts by [lem-pc-right-derived-functor-triangulated]. Its restriction to bounded-below objects is the derived direct image of [def-weil-pbc-direct-image]: both are computed by applying $f_{\\mathrm{et},*}$ to a K-injective resolution. Thus the heart cohomology of $T(M[0])$ is exactly the $R^qf_{\\mathrm{et},*}M$ in the hypothesis.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SE, proposition-derived-functor (exactness); 05SU, lemma-derived-shift; ordinary K-injective computation"
+   }
+  },
+  {
+   "text": "Suppose $N\\geq0$. Apply [lem-weil-pbc-derived-functor-negative-vanishing] to $f_{\\mathrm{et},*}$ and $M[0]$: $\\mathcal H^q(T(M[0]))=0$ for $q<0$. For $q>N$, we have $q\\geq0$, so the assumed higher-direct-image bound gives the remaining vanishing. Hence every object of the heart is sent into $[0,N]$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing (1), applied to a sheaf in degree zero"
+   }
+  },
+  {
+   "text": "Still with $N\\geq0$, apply [lem-pur-bounded-heart-amplitude] to the triangulated functor $T$ of Step 2, the class $\\mathcal S$ of all objects of $\\mathcal A$, and $c=0$, $d=N$. The class contains zero and is closed under isomorphism; the heart hypothesis is Step 3, and $L$ has range $[a,b]$ by Step 1. The lemma gives $\\mathcal H^i(Rf_{\\mathrm{et},*}L)=0$ outside $[a+0,b+N]=[a,b+N]$. This uses only the finite cohomology tower of the bounded input, with no completeness or infinite-product assumption.",
+   "uses": [
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle: finite successive-cohomology devissage, as encapsulated by the cited amplitude lemma"
+   }
+  },
+  {
+   "text": "Suppose instead $N<0$. Taking $q=0>N$ in the hypothesis gives $R^0f_{\\mathrm{et},*}M=0$ for every $M\\in\\mathcal A$. The natural identification $R^0v\\cong v$ of [lem-weil-pbc-right-derived-universal-delta-functor], applied to the additive left exact functor of Step 2, therefore gives $f_{\\mathrm{et},*}M=0$ for every $M$. Choose a K-injective resolution of $L$. In the resolution formula for derived direct image [def-weil-pbc-direct-image], every term of its direct image is now zero. That complex is zero, so $Rf_{\\mathrm{et},*}L=0$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015B, lemma-higher-derived-functors (2), and 05TE, lemma-right-derived-delta-functor; K-injective formula for ordinary derived direct image"
+   }
+  },
+  {
+   "text": "Since $L$ is bounded it is bounded below. Apply [sk-thm-pe-direct-image-comparison] with the discrete commutative ring $B$ and the qcqs morphism $f$ to obtain $\\nu_Y^*Rf_{\\mathrm{et},*}L\\cong Rf_{\\mathrm{proet},*}\\nu_X^*L=Rf_{\\mathrm{proet},*}C$. In the case $N\\geq0$, Step 1 at $Y$ identifies the cohomology of the left side with $\\nu_Y^*\\mathcal H^i(Rf_{\\mathrm{et},*}L)$, which is zero outside $[a,b+N]$ by Step 4. In the case $N<0$, Step 5 makes the left side zero (an additive exact functor preserves zero), so $Rf_{\\mathrm{proet},*}C=0$ as well. A zero object has zero cohomology in every degree, which implies the stated interval assertion even if $b+N<a$. The comparison has been used only on the bounded-below etale complex $L$.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison, in its bounded-below module-complex form in sk-thm-pe-direct-image-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-sheaves-modules",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-abstract-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Composition of the exact module comparison and Tag 09A6 with the finite-truncation argument of Tag 08J5 via lem-pur-bounded-heart-amplitude, the negative vanishing of Tag 05TC, and the degree-zero identification in Tag 015B. No new analytic or geometric input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +145,45 @@
    "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
    "date": "2026-10-21",
    "verdict": "no match: etale site or algebra definitions and individual derived-category support equivalences do not give the etale-origin pushforward amplitude transfer"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-21T04:08:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern etale site definitions, localization/derived Kan extensions, or individual support equivalences; none states the etale-origin interval transfer with the negative N clause"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(bound|amplitude)|rightDerived.*(isLE|isGE)",
+   "results": "{\"t\": \"2026-10-21T04:08:40Z\", \"tool\": \"grep\", \"query\": \"proetale.*(bound|amplitude)|rightDerived.*(isLE|isGE)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"7fd20aa27067b684\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern etale site definitions, localization/derived Kan extensions, or individual support equivalences; none states the etale-origin interval transfer with the negative N clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomological dimension bounds the cohomology of derived pushforward of bounded etale origin complexes on the proetale site",
+   "results": "{\"t\": \"2026-10-21T04:08:41Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomological dimension bounds the cohomology of derived pushforward of bounded etale origin complexes on the proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"f353365d0467ef58\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern etale site definitions, localization/derived Kan extensions, or individual support equivalences; none states the etale-origin interval transfer with the negative N clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated scheme morphism has derived pushforward of bounded etale origin complexes in degrees a to b plus N when etale higher direct images vanish above N",
+   "results": "{\"t\": \"2026-10-21T04:08:41Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact quasi separated scheme morphism has derived pushforward of bounded etale origin complexes in degrees a to b plus N when etale higher direct images vanish above N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsGE\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"fc32f76996e5ffe6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern etale site definitions, localization/derived Kan extensions, or individual support equivalences; none states the etale-origin interval transfer with the negative N clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact etale to proetale comparison pullback reflects the cohomological range and commutes with bounded below direct image, transferring a heart bound N to bounded complexes including N negative",
+   "results": "{\"t\": \"2026-10-21T04:09:02Z\", \"tool\": \"leanfinder\", \"query\": \"An exact etale to proetale comparison pullback reflects the cohomological range and commutes with bounded below direct image, transferring a heart bound N to bounded complexes including N negative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isGE_iff\"], \"digest\": \"65d9e89cf368a77b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern etale site definitions, localization/derived Kan extensions, or individual support equivalences; none states the etale-origin interval transfer with the negative N clause"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-direct-image-constructible",
@@ -78,5 +204,64 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-etale-origin-pushforward-amplitude",
+  "worker": "stage1",
+  "summary": "Q20 splits by exact faithful cohomology-range reflection, the existing bounded-heart amplitude theorem on the ordinary etale derived functor, the q=0 argument for negative N, and qcqs direct-image comparison. Statement unchanged; no new nodes or attachment.",
+  "blueprint": "Realizes the integral constructible codomain requirement of Ra_{Y*} in def-weil-ordinary-compact-cohomology, through lem-weil-structure-direct-images-constructible and lem-sf-integral-direct-image-constructible: the old latter proof step 6 on cohomological range, now its explicit amplitude application.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic exact faithful module comparison needed to reflect and preserve cohomological support. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic module-sheaf Grothendieck and K-injective existence theorem. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic additive left exactness of ordinary module direct image. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulated structure and shift comparisons for ordinary total derived functors. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic negative-degree vanishing on heart objects. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-bounded-heart-amplitude",
+    "why": "Generic finite truncation amplitude theorem already explicitly required by the item source. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic degree-zero derived functor identification for the N<0 case. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic qcqs bounded-below ordinary etale/proetale module direct-image comparison. This is a tool for the integral direct-image cohomology-range subargument, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-sheaves-modules",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-ad9431a04",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-ad9431a04 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements and the Stacks sources: 099T (proetale l.3828), 09A6 (l.4696), and the tags 08J5, 05TC, 015B, 05SE, 05SU and 05TE checked against the tags table. The delivery has one commit, the item plus its report, and zero new nodes. In side-live the item is still unsplit, it is not in the dropped list and no repair note names it; NU's re-split of its parent created it to carry old step 6. The statement is unchanged. Step 1: the comparison pullback ν^* is exact, so it commutes with cohomology, and it is faithful, so it reflects zero; this gives L range [a,b]. Step 2: Grothendieck categories and K-injectives (prop-pur), f_* left exact, the unbounded RF triangulated, and on D^+ it agrees with def-weil-pbc-direct-image. Step 3: negative vanishing plus the hypothesis put heart objects in [0,N]. Step 4: lem-pur-bounded-heart-amplitude with S = all objects and c=0, d=N gives [a,b+N]. Step 5: when N<0, q=0 together with R^0v≅v gives f_*=0, so Rf_*L=0; consistent, since this forces X empty or B=0. Step 6: f qcqs and L bounded, hence D^+, so sk-thm-pe-direct-image-comparison applies; Step 1 at Y moves the cohomology across, and the empty-interval case holds. The coefficient category (Cont(π0,B) versus ν^*B for finite B) is the DAG's standing identification; the base-change morphism is the ordinary K-injective direct image. Edge cases checked: a=b, N=0, N<0, L=0, b+N<a. No duplicate: the hits for 'b+N]' are Tor-amplitude or condensed nodes, or the item's own citers and analogues. All 8 declared tool uses are generic black boxes, and the definition unit has no route of its own, so they are accepted. No SGA. No changes."
+ }
 }
