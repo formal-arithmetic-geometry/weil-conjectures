@@ -22,10 +22,12 @@
  ],
  "proof": [
   {
-   "text": "Put $B=\\mathcal Hom^\\bullet(D,O)$. Define $\\beta_E^a$ as a map of sheaves, not just of sections on one object. For $x\\in E^a(U)$ its component $D^q|_U\\to O^{q+a}|_U$ is zero unless $q=-a$. In the remaining component, for every $V\\to U$ and $\\phi\\in D^{-a}(V)$ set $\\phi\\mapsto(-1)^{-a^2}\\phi^a(x|_V)$, where $\\phi^a$ denotes the product projection $D^{-a}\\to\\mathcal Hom(E^a,O)$ (the source degree of this projection is $a$). Equivalently this is $(-1)^{a q}\\phi(x|_V)$. Evaluation is linear in both arguments and commutes with restriction, so this defines a sheaf morphism into each sheaf Hom and hence into the actual product defining $B^a$. The specified components also prove uniqueness. No sum over Hom-product components is taken.",
+   "text": "Construct the signed evaluation for any target complex O, before specializing to the coefficient unit. In degree a use the product limit defining Hom(Hom(E,O),O)^a. Its q projection is (-1)^(a*q) times the transpose of localized evaluation E^a -> Hom(Hom(E^a,O^(q+a)),O^(q+a)), precomposed in the inner Hom with the actual product projection. The already proved presheaf tensor curry and uncurry constructions supply this localized evaluation. Its formula on every slice object is (-1)^(a*q) phi(x restricted). After specializing O to the degree-zero coefficient unit, all components with q+a nonzero are zero. Product and localized sheaf-Hom extensionality imply uniqueness.",
    "uses": [
     "def-pur-hom-complex",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-tensor-degreewise-iso",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -34,9 +36,10 @@
    }
   },
   {
-   "text": "Check the differential on every product projection. For $x\\in E^a(U)$ only a section $\\phi\\in D^q$, $q=-a-1$, can contribute to the degree-$(a+1)$ map into $O$. Since $d_O=0$, the Hom differential gives $d_D\\phi=-(-1)^q\\phi d_E$ and\n$$ (d_B\\beta_E(x))(\\phi)=-(-1)^a\\beta_E(x)(d_D\\phi)=(-1)^{a+1+a(q+1)+q+1}\\phi(d_Ex)=(-1)^{(a+1)q}\\phi(d_Ex)=\\beta_E(d_Ex)(\\phi). $$\nFor every other $q$ both sides land in the zero sheaf $O^{a+1+q}$. Thus $\\beta_E$ is a chain map, including for negative degrees and unbounded complexes.",
+   "text": "Check the chain-map equation on every product projection and every localized section, still for arbitrary O. Expand the outer and inner Hom differentials. Naturality of the differential of E moves it through restriction. The two terms involving d_O cancel, while the remaining sign is (-1)^((a+1)*q), since (-1)^(a+a*(q+1)+q)=(-1)^((a+1)*q). This proves the equation in all degrees, including negative degrees; no boundedness or sum over product components is used.",
    "uses": [
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -47,7 +50,8 @@
   {
    "text": "For a chain map $f:E\\to E'$ write $D(f)=\\mathcal Hom^\\bullet(f,O):D'\\to D$. For $x\\in E^a$ and $\\phi\\in(D')^q$ the two composites have the same component\n$$ \\beta_{E'}(f(x))(\\phi)=(-1)^{a q}\\phi(f(x))=\\beta_E(x)(D(f)(\\phi)). $$\nAll other components are zero. Equality on each restriction and each Hom-product projection proves $\\beta_{E'}f=\\mathcal Hom^\\bullet(D(f),O)\\beta_E$, the asserted naturality.",
    "uses": [
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -56,10 +60,9 @@
    }
   },
   {
-   "text": "Now impose the two augmentation hypotheses. Put $J=I(O)$, $\\eta=\\eta_O$ and\n$$ c_E=\\mathcal Hom^\\bullet(E,\\eta):D\\to\\mathcal Hom^\\bullet(E,J),\\qquad c_D=\\mathcal Hom^\\bullet(D,\\eta):B\\to\\mathcal Hom^\\bullet(D,J). $$\nBy the fixed derived-Hom representative, the targets localize to $H(QE,O)$ and $H(QD,O)$ respectively. Both $c_E,c_D$ are quasi-isomorphisms by hypothesis, so localization makes them the isomorphisms $\\gamma_E,\\gamma_D$ in the statement. In the following calculations use these fixed identifications throughout. The well-definedness theorem for Hom into a K-injective complex gives their compatibility with replacing either first argument by a quasi-isomorphic representative.",
+   "text": "Define comparison(E,O) as Q(Hom(E,eta_O)) followed by the inverse fixed coefficientHomResolutionIso. Naturality in E is precisely naturality of the inverse Localization.fac isomorphism, together with naturality of Hom in the two variables. The subsequent derived comparison is proved as an equation of morphisms before any augmentation hypothesis. Under the two hypotheses in the statement, Q(Hom(E,eta_O)) and Q(Hom(D,eta_O)) are isomorphisms, and composing their asIso with the fixed factorization inverse supplies gamma_E and gamma_D with the specified homs.",
    "uses": [
     "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
@@ -69,12 +72,11 @@
    }
   },
   {
-   "text": "Choose quasi-isomorphisms $p:P\\to E$ and $t:T\\to D$ with $P,T$ K-flat and having flat terms. Their localizations $Qp,Qt$ are invertible. Form actual chain maps\n$$ g=\\mathcal Hom^\\bullet(p,J)c_Et:T\\to\\mathcal Hom^\\bullet(P,J),\\quad h=\\mathcal Hom^\\bullet(t,J)c_D\\beta_Ep:P\\to\\mathcal Hom^\\bullet(T,J). $$\nFunctoriality of the fixed Hom representatives, and their quasi-isomorphism invariance into $J$, identify their localized maps as\n$$ Qg=H(Qp,O)\\gamma_EQt,\\qquad Qh=H(Qt,O)\\gamma_DQ(\\beta_E)Qp. $$\nHere $J$ is K-injective because it is the fixed replacement of $O$. The resolution theorem applies to arbitrary complexes on this small ringed site; it does not assert or require that $E$ or $D$ be K-flat.",
+   "text": "Choose K-flat flat-term resolutions p:P -> E and t:T -> D. Put I=I(O), g=t followed by Hom(p,O) and Hom(P,eta_O), and h=p followed by beta_E, Hom(t,O), and Hom(T,eta_O). Naturality of the fixed localization factorization identifies Qg followed by its inverse factorization with Qt followed by comparison(E,O) and H(Qp,O). Likewise Qh followed by its inverse factorization is Qp followed by Qbeta_E, comparison(D,O), and H(Qt,O). Only Qp and Qt need to be invertible here; no separate Hom quasi-isomorphism-invariance theorem is used.",
    "uses": [
     "lem-pc-kflat-resolution",
     "def-pur-derived-internal-hom",
     "def-pur-hom-complex",
-    "lem-pur-rhom-well-defined",
     "def-coef-hom-representative-evaluation",
     "def-weil-abstract-derived-category"
    ],
@@ -127,19 +129,20 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
   "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined",
   "def-weil-abstract-derived-category",
   "lem-pc-kflat-resolution",
   "def-coef-hom-representative-evaluation",
   "def-coef-ringed-tensor-hom-model",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "def-pur-sheaf-tensor-product",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-hom-tensor-degreewise-iso",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0A8X, 0A92, 0A95, 08J7, 08J9, 0A97 and 06YS; explicit coefficient-unit specialization with a two-resolution comparison using the fixed normalization. The Stacks construction omits the required derived functoriality verification; the component and comparison calculations are supplied here."
+  "place": "Tags 0A8X, 0A92, 0A95, 08J7, 08J9, 0A97 and 06YS; explicit coefficient-unit specialization with a two-resolution comparison using the fixed normalization. The Stacks construction omits the required derived functoriality verification; the component and comparison calculations are supplied here. P9 Lean proof: arbitrary-target signed evaluation and componentwise differential cancellation; fixed localization-factorization naturality replaces the separate Hom invariance step. The two K-flat resolutions and normalized tensor/symmetry route are retained."
  },
  "mathlib_searches": [
   {
@@ -298,7 +301,6 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
   "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined",
   "lem-pc-kflat-resolution",
   "def-coef-hom-representative-evaluation",
   "def-coef-ringed-tensor-hom-model",
@@ -332,5 +334,15 @@
   "group": "Q23",
   "result": "fix",
   "note": "All clauses match the node: unique signed β with sheaf-level (-1)^{aq} formula and uniqueness, zero off-degree components, naturality without sign, conditional derived equation with γ_E/γ_D fixed by Q(Hom(-,η_O)) ≫ coefficientHomResolutionIso.inv, b_QE = transpose(braiding ≫ evaluation); η = resolutionUnit = same toKInjectiveResolution; universes independent; dep records identical to live; nothing dropped; no RingedSiteDualityMaps import. H2 FIX: zero-component clause used homComplexπ (owner lem-sc-hom-complex-projections, not a stmt_dep), replaced by the definitionally equal coefficientHomComponent (def-coef-hom-representative-evaluation); dropped the unused public import of HomComplexComponents; nt_compile --json clean, 13.7 s; fixes/RingedSignedBidualLocalization.lean + lean-record.json (statement verbatim). Advisory: RingedTensorModules/ringedTensorUnitComplex/RingedDerivedTensorCoherence come via the base-era theorem stmt_dep lem-sf-ringed-derived-closed-symmetric-monoidal (cited in node text, not added by this delivery); def-zl-ringed-derived-closed-symmetric-monoidal-data could be cited later."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261021T193759-L-1292472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
