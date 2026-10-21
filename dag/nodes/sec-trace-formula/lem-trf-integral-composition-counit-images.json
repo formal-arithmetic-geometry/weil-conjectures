@@ -25,9 +25,78 @@
   "lem-trf-integral-pullback-comparison-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=h^{-1}$, $G=k^{-1}$ and $J=(kh)^{-1}$, with the completed coefficient actions in the statement. The inverse-image module functors are exact by [def-weil-inverse-image-pullback-comparison], so $[Q]=[HG(q)]$ and $[J(q)]$ are invertible. The compositors $d_P,d_N$ are linear for the transported completed actions: [lem-trf-constant-coefficient-composition] gives $c_{kh}=c_h\\circ h^{-1}(c_k)\\circ\\alpha_{h,k}$ for every constant ring $A_{E,m}$, and projecting to every quotient in the structure-map formula $\\pi_m\\circ c_{\\mathcal O_E}=c^g_{A_{E,m}}\\circ g^{-1}(\\pi_m)$ of [def-weil-inverse-image-pullback-comparison] gives the same identity for the completed coefficient isomorphisms; hence their termwise maps are morphisms of complexes of $R_Z$-modules and descend to the derived category. Naturality of the specified inverse-image compositor, applied to the chain map $q:P\\to N$, gives $[J(q)]\\circ[d_P]=[d_N]\\circ[Q]$. Multiplying this equation by the indicated inverses yields $[J(q)]^{-1}\\circ[d_N]=[d_P]\\circ[Q]^{-1}$. This fixes the denominator needed for the first formula before taking any tower counit.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers, integral compatibility with composition; agent whole-tower counit calculation, split Step 1. Normalization background: Stacks Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; derived adjunction: Tag 0FND, derived.tex, lemma-pre-derived-adjoint-functors-general."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-integral-comparison-counit-characterization] to $g=kh$ and to $g=k$, each time with the same chosen resolution $q:P\\to N$ and its actual quotient tower. Its hypotheses hold since $k$ and $kh$ are scheme isomorphisms, $N\\in D^b_c(V,\\mathcal O_E)$, and the coefficient actions and Roos identifications are precisely the specified ones. This gives the whole-tower equations $\\epsilon_{C_{kh}}\\circ\\Delta(\\kappa^{kh}_N)=\\theta_{kh}^\\Delta\\circ\\Delta[J(q)]^{-1}$ and $\\epsilon_{C_k}\\circ\\Delta(\\kappa^k_N)=\\theta_k^\\Delta\\circ\\Delta[G(q)]^{-1}$. These are equations in the derived categories of strict completed-module towers.",
+   "uses": [
+    "lem-trf-integral-comparison-counit-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers, integral compatibility with composition; agent whole-tower counit calculation, split Step 2. Normalization background: Stacks Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; derived adjunction: Tag 0FND, derived.tex, lemma-pre-derived-adjoint-functors-general."
+   }
+  },
+  {
+   "text": "Naturality in the tower variable of the counit in [lem-trf-integral-comparison-counit-characterization], at the whole-tower morphism $c_\\bullet:C_{kh,\\bullet}\\to D_\\bullet$, says $\\epsilon_D\\circ\\Delta(R\\lim(c_\\bullet))=c_\\bullet\\circ\\epsilon_{C_{kh}}$. The normalization in [lem-trf-integral-pullback-comparison-realization] gives $\\eta\\circ c^E=R\\lim(c_\\bullet)$ with exactly this $c_\\bullet$. Therefore functoriality of $\\Delta$, the first equation of Step 2 and Step 1 give\n$$\\begin{aligned}\\epsilon_D\\circ\\Delta(a)&=c_\\bullet\\circ\\epsilon_{C_{kh}}\\circ\\Delta(\\kappa^{kh}_N)\\circ\\Delta(d_N)\\\\&=c_\\bullet\\circ\\theta_{kh}^\\Delta\\circ\\Delta[J(q)]^{-1}\\circ\\Delta(d_N)\\\\&=c_\\bullet\\circ\\theta_{kh}^\\Delta\\circ\\Delta(d_P)\\circ\\Delta[Q]^{-1}.\\end{aligned}$$\nThis proves the first asserted identity.",
+   "uses": [
+    "lem-trf-integral-comparison-counit-characterization",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers, integral compatibility with composition; agent whole-tower counit calculation, split Step 3. Normalization background: Stacks Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; derived adjunction: Tag 0FND, derived.tex, lemma-pre-derived-adjoint-functors-general."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-integral-pullback-resolution-matching] to these $h,k,N$ and their chosen quotient tower $C_{k,\\bullet}$. Its $M$, tower $h^*C_{k,\\bullet}$, termwise tensor unit and normalized $\\eta_{h,k,N}$ are respectively our $M,D_\\bullet,u_{h,C_k},\\eta$; no independently chosen comparison is substituted. It gives\n$$\\epsilon_D\\circ\\Delta(\\eta\\circ\\kappa^h_M)=u_{h,C_k}\\circ H(\\epsilon_{C_k}).$$\nThe lemma applies to scheme isomorphisms on the same small pro-etale sites and to the same bounded constructible complete input $N$; it places the equality in the entire derived tower category with source $\\Delta H M$.",
+   "uses": [
+    "lem-trf-integral-pullback-resolution-matching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers, integral compatibility with composition; agent whole-tower counit calculation, split Step 4. Normalization background: Stacks Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; derived adjunction: Tag 0FND, derived.tex, lemma-pre-derived-adjoint-functors-general."
+   }
+  },
+  {
+   "text": "Precompose the equation of Step 4 with $\\Delta H(\\kappa^k_N)$, whose source is $\\Delta HG N=\\Delta X$. Use the specified identification $\\Delta H=H_{\\mathrm{tow}}\\Delta$, identity on every component, from [def-trf-integral-tower-inverse-image-unit]. Apply the exact derived functor $H_{\\mathrm{tow}}$ to the second equation of Step 2. Since functors preserve compositions and inverse morphisms, $H_{\\mathrm{tow}}(\\Delta[G(q)]^{-1})=\\Delta[HG(q)]^{-1}=\\Delta[Q]^{-1}$. Consequently\n$$\\begin{aligned}\\epsilon_D\\circ\\Delta(b)&=u_{h,C_k}\\circ H_{\\mathrm{tow}}(\\epsilon_{C_k}\\circ\\Delta(\\kappa^k_N))\\\\&=u_{h,C_k}\\circ H_{\\mathrm{tow}}(\\theta_k^\\Delta)\\circ\\Delta[Q]^{-1}.\\end{aligned}$$\nThis is the second asserted identity. Every operation used here is on the whole strict tower; the proof neither compares separate evaluations nor cancels a map out of $R\\lim$.",
+   "uses": [
+    "def-trf-integral-tower-inverse-image-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers, integral compatibility with composition; agent whole-tower counit calculation, split Step 5. Normalization background: Stacks Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; derived adjunction: Tag 0FND, derived.tex, lemma-pre-derived-adjoint-functors-general."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-tower-inverse-image-unit",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-integral-comparison-counit-characterization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-integral-pullback-resolution-matching"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Global powers: compatible with composition; explicit counit-image calculation from existing whole-tower characterization and resolution matching."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +139,52 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\"], \"digest\": \"bdbd9d9a65e16b55\"}",
    "date": "2026-10-21",
    "verdict": "no match: SheafOfModules.pullbackComp (PullbackContinuous.lean:167) is ordinary uncompleted pullback composition. The other hits concern scheme pullbacks, generic functor comparisons or monadicity; none gives these completed integral composites and their common resolution denominator."
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|RLim|inverseImage.*[Cc]omparison|pullbackComp",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\"], \"digest\": \"0043332b4202986d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute the counit images of the two completed integral pullback composition comparisons as maps of entire strict towers.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc\", \"CategoryTheory.MorphismProperty.Over.mapPullbackAdj_counit_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit\", \"CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit\", \"CategoryTheory.Over.mapPullbackAdj_counit_app\", \"CategoryTheory.LiftLeftAdjoint.otherMap\"], \"digest\": \"9b0c32aab008585b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The whole-tower derived inverse limit counit of a completed integral pullback comparison is its strict quotient unit, and under pullback composition it retains the K-flat resolution denominator.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.eval_comp_of\", \"CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit\", \"AdicCompletion.ofTensorProduct_naturality\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"4f53c7364025aa86\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|mappingCocone.lift",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"a18c612d8ed23f4c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In derived categories of strict module towers the adjoint of an integral pullback composite equals the composed tensor unit maps after inverting one common resolution.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\"], \"digest\": \"7d78c4d0eb791e53\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary module/sheaf pullbacks, generic adjunctions or algebraic adic completion, not the specified completed pro-etale pullbacks, normalized whole-tower counits and resolution denominators."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-inverse-image-comparison-composition",
@@ -94,5 +205,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-integral-composition-counit-images",
+  "worker": "stage1",
+  "summary": "Q85 kept the statement and all imported metadata, checked project declarations and Mathlib searches, and proved the two counit images from existing entire-tower characterization and resolution matching. Naturality of the inverse-image compositor transports the first denominator, and exact inverse image transports the second. No new node, no statement weakening and no appeal to faithfulness of separate reductions.",
+  "blueprint": "Realizes Step 1, Global powers, of thm-trf-l-function-euler-product: compatibility with composition of the integral identifications before rationalization. This item computes counit images only, not equality of the original composites."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-31846a203",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-31846a203 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and every cited statement in full: counit-characterization (Q90), pullback-comparison-realization, pullback-resolution-matching, tower-inverse-image-unit, def-weil-inverse-image-pullback-comparison and strict-roos-comparison. I also read the blueprint place, thm-trf-l-function-euler-product Step 1 'Global powers' in main-20261015. The statement is verbatim. Q90 created the item as Step 2 of lem-trf-integral-inverse-image-comparison-composition, and that parent finishes with the Φ-injectivity step, so the item is not a restatement of the parent. No re-split or repair note applies. Cycle check: the transitive closure of every cited node misses the item. Types: source ΔX and target D_• match on both sides; D_•=h^*k^*P_m agrees with Q_{h,k,E}. Normalization: c_• is the same c_{h,k,•} as in c^E=η^{-1}Rlim(c). The cone↔Rlim identification is the choice-independent normalized Roos ρ. Steps 2 and 4 quote exactly the displayed equations of the characterization and resolution-matching nodes, and their hypotheses hold (isomorphisms, N∈D^b_c, same q and quotient towers). Step 3 uses naturality of Φ in T at f=id, together with ηc^E=Rlim(c_•) and Steps 1–2; I checked all three lines. Step 5 combines precomposition, ΔH=H_towΔ and exactness of H_tow on Step 2; I checked the algebra. Edge cases: Z empty, N=0 and h=id all behave correctly. One fault, repaired: Step 1 used d_P and d_N as R_Z-module morphisms without justifying their linearity for the transported completed actions. I added a sentence citing lem-trf-constant-coefficient-composition with the π_m c_{O_E} structure-map formula, as the parent's Step 1 does, and added that node to uses and proof_deps. No statement change, no new or dropped nodes, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

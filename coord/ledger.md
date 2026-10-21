@@ -21360,3 +21360,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/NS/lem-pc-tate-adelic-reciprocity (reviewer PASS; first push; new nodes: 2)
 - 08:51 L: merged deliver/NP/lem-weil-constant-scalar-strict-unit (reviewer PASS; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q07/lem-sfb-finite-flat-constructible-total-tensor (reviewer PASS; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q85/lem-trf-integral-composition-counit-images (reviewer FIX; first push; new nodes: 0)
