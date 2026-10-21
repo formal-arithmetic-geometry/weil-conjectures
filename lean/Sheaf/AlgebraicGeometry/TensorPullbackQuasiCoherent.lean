@@ -35,6 +35,7 @@ Transport its quasi-coherence across that natural isomorphism. -/
 @[instance]
 theorem isQuasicoherent_tensorPullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (F : Y.Modules) [F.IsQuasicoherent] : ((tensorPullback g).obj F).IsQuasicoherent := by
-  sorry
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+    ((tensorOrdinaryPullbackIso g).app F).symm (isQuasicoherent_pullback g F)
 
 end AlgebraicGeometry.Scheme.Modules
