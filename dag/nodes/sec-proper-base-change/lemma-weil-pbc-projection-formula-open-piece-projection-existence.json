@@ -37,36 +37,63 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Construct the adjunction-transposed map on each pair (E,F). Naturality follows from the adjunction hom-equivalence, functoriality of tensor models, and naturality of the restriction-tensor comparison. For strict-perfect F, the finite-free retract, signed finite totalization, K-flat resolution, and derived descent prove each component is invertible.",
+   "text": "For the open object U, monicity of the immersion makes Over.forget U fully faithful. The unit of Over.forgetAdjStar U is invertible; hence the module restriction-right-adjoint counit is invertible sectionwise. The adjoint triple extension-restriction-right-adjoint implies the ordinary extension-restriction unit is invertible. Applying the localization unit formula on complexes and using essential surjectivity of DerivedCategory.Q proves the derived unit invertible.",
    "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural ordinary extension-tensor isomorphism, conjugated by the sheaf tensor/sheafified presheaf tensor identifications. Its naturality supplies an isomorphism of tensor double complexes. Extension preserves the direct sums in totalization because it is a left adjoint; therefore extension of Tot(P tensor restriction Q) is isomorphic to Tot(extension P tensor Q), with both differentials and their signs respected.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-projection-restriction",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any tensor model, tensor of the image of an arbitrary complex P with the image of a resolving complex Q is represented by Tot(P tensor Q). Indeed resolve P by a flat K-flat A; the cone of A to P is acyclic, and K-flatness of Q makes its tensor acyclic. The tensor mapping-cone isomorphism therefore makes Tot(A tensor Q) to Tot(P tensor Q) a quasi-isomorphism. Compose this with the tensor model representative isomorphism on A,Q.",
+   "uses": [
     "lem-pc-kflat-resolution",
     "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent E by P and resolve the arbitrary coefficient F by a flat K-flat Q. The preceding two steps identify a(extension E,F) with extension of the derived image of Tot(P tensor restriction Q). Thus this tensor object is in the essential image of derived extension. Since the unit is invertible, the counit on that object is invertible.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form tau from tensor of the adjunction unit followed by the supplied inverse restriction-tensor comparison. Naturality of the unit and comparison gives naturality of tau, and the adjunction hom-equivalence transposes it to p. By the counit formula for transposition, each p component is extension(tau) followed by the counit on a(extension E,F). The unit and comparison are isomorphisms, and the preceding step makes that counit an isomorphism. The required component equation is definitional. Restrict to the stated strict-perfect coefficient subcategory.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-projection-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-perfect-coefficient-package",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-projection-restriction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pc-tensor-complex-sheaves",
   "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "lem-weil-pbc-ringed-projection-restriction"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-open-piece.md",
-  "place": "Finite-free retract, naturality, signed-totalization, K-flat resolution and derived descent; bundled as one strictly simpler intermediate result"
+  "group": "C6",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary extension-tensor formula (0E8I), exact extension and its adjunction (03DI, 03DJ), and K-flat resolution (06YS). Fully proved support argument: commute extension with tensor totalization, establish essential-image support, and use the invertible open unit and the counit formula for the normalized transpose."
  },
  "mathlib_searches": [
   {
@@ -122,9 +149,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "C6",
   "result": "pass",
-  "landing": "20261021T001132-L-1375871",
+  "landing": "20261021T004821-L-1790755",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
