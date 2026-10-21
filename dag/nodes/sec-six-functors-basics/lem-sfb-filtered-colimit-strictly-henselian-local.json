@@ -11,9 +11,107 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\alpha_i:R_i\\to R$ for the colimit maps and set $M=\\bigcup_i\\alpha_i(\\mathfrak m_i)$. This is an ideal: move any two representatives, and a representative of any multiplier, to one common stage, and use the ideal axioms there. By [lem-pc-filtered-colimit-commrings-elementwise], equality of two representatives is witnessed at a common later stage. Thus, if $\\alpha_i(x)=\\alpha_j(y)$ with $y\\in\\mathfrak m_j$, some $k\\ge i,j$ satisfies $\\varphi_{ik}(x)=\\varphi_{jk}(y)\\in\\mathfrak m_k$, and locality gives $x\\in\\mathfrak m_i$. Consequently $\\alpha_i^{-1}(M)=\\mathfrak m_i$. In particular $1\\notin M$: choose any $i$ (the index is nonempty), and apply this equality to $1\\in R_i$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, omitted locality argument: the maximal-ideal union and its contraction, expanded using representatives."
+   }
+  },
+  {
+   "text": "Every $r\\notin M$ has a representative $r=\\alpha_i(x)$ by [lem-pc-filtered-colimit-commrings-elementwise]; necessarily $x\\notin\\mathfrak m_i$. By [lem-weil-pbc-local-ring-unit-criterion], choose $y\\in R_i$ with $xy=1$, so $\\alpha_i(y)$ inverts $r$. Therefore every nonzero element of $R/M$ is invertible, and $M$ is maximal. Every proper ideal of $R$ is contained in $M$, since an element outside $M$ is a unit. Thus $R$ is local with unique maximal ideal $M$, and the contraction equality in step 1 says that every $\\alpha_i$ is local.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, omitted locality argument; unit criterion Tag 00E9, lemma-characterize-local-ring."
+   }
+  },
+  {
+   "text": "Put $\\kappa_i=R_i/\\mathfrak m_i$ and $\\kappa=R/M$. The local transition maps induce compatible field maps $\\kappa_i\\to\\kappa_j$, and $\\rho_i([x])=[\\alpha_i(x)]$ defines a compatible map $\\kappa_i\\to\\kappa$. Each $\\rho_i$ is injective: $\\rho_i([x])=0$ means $\\alpha_i(x)\\in M$, hence $x\\in\\mathfrak m_i$ by step 1. To verify the colimit universal property [def-weil-pbc-category-colimit], take any compatible ring maps $b_i:\\kappa_i\\to S$. Their composites with $R_i\\to\\kappa_i$ give a cocone on the $R_i$, hence a unique $b:R\\to S$. It kills $M$, because $b(\\alpha_i(x))=b_i([x])=0$ for $x\\in\\mathfrak m_i$, so it factors uniquely through $\\kappa$. Conversely any map from $\\kappa$ with the required composites must induce that same $b$ after the surjection $R\\to\\kappa$. This proves $\\kappa=\\varinjlim_i\\kappa_i$ in commutative rings, with the stated $\\rho_i$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, omitted residue-field colimit argument, written out by the quotient and colimit universal properties."
+   }
+  },
+  {
+   "text": "Let $p\\in\\kappa[T]$ be nonconstant and separable. By [def-pc-separable-polynomial], choose $U,V\\in\\kappa[T]$ with $Up+Vp'=1$. Apply [lemma-nagata-filtered-colimit-finite-data] to the directed colimit of step 3: descend the finitely many coefficients of $p,U,V$ and the finitely many coefficient equations of this identity to one $\\kappa_i$. Taking zero coefficients outside their chosen finite degree bounds gives polynomials $p_i,U_i,V_i$ with $U_ip_i+V_ip_i'=1$, since differentiation has coefficients $n c_n$ and hence commutes with the coefficient maps. A nonzero positive-degree coefficient of $p$ has a nonzero lift, so $p_i$ is nonconstant; the displayed identity makes it separable. The residue field $\\kappa_i$ is separably closed by strict henselianity [def-weil-pbc-henselian-terminology]. By [def-pc-separably-closed], choose $c_i\\in\\kappa_i$ with $p_i(c_i)=0$. Applying $\\rho_i$ gives $p(\\rho_i(c_i))=0$. Thus $\\kappa$ is separably closed by the same definition.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "def-weil-pbc-henselian-terminology",
+    "def-pc-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian: the separably closed residue-field sentence, expanded by descending a Bezout identity."
+   }
+  },
+  {
+   "text": "Now let $f\\in R[T]$ be monic of degree $n$, and let $a_0\\in\\kappa$ satisfy $\\overline f(a_0)=0$ and $\\overline{f'}(a_0)\\ne0$. Use [lemma-nagata-filtered-colimit-finite-data] for $R$ to lift the finitely many coefficients below degree $n$ to some stage; form the lift with leading term exactly $T^n$. By [lem-pc-filtered-colimit-commrings-elementwise] for the colimit of step 3, lift $a_0$ to some $a_{0,j}\\in\\kappa_j$. Move both choices to a common upper bound $i$. This gives a monic $f_i\\in R_i[T]$ mapping to $f$ and $a_{0,i}\\in\\kappa_i$ with $\\rho_i(a_{0,i})=a_0$.",
+   "uses": [
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian: choose a monic polynomial and its residue root at one sufficiently large index."
+   }
+  },
+  {
+   "text": "The coefficient formulas for evaluation and differentiation, and $\\rho_i([x])=[\\alpha_i(x)]$, give $\\rho_i(\\overline{f_i}(a_{0,i}))=\\overline f(a_0)=0$ and $\\rho_i(\\overline{f_i'}(a_{0,i}))=\\overline{f'}(a_0)\\ne0$. Injectivity of $\\rho_i$ from step 3 gives $\\overline{f_i}(a_{0,i})=0$; the second equality gives $\\overline{f_i'}(a_{0,i})\\ne0$. The ring $R_i$ is henselian by [def-weil-pbc-henselian-terminology], so implication (i)$\\Rightarrow$(ii) of [lem-weil-pbc-henselian-local-root-lifting] supplies $a_i\\in R_i$ with $f_i(a_i)=0$ and $[a_i]=a_{0,i}$. For $a=\\alpha_i(a_i)$, applying the ring map to the finite evaluation sum gives $f(a)=\\alpha_i(f_i(a_i))=0$, and reduction gives $[a]=\\rho_i([a_i])=a_0$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, final simple-root lifting argument; the criterion in the idempotent convention is Tags 04GF/04GG and 09XI."
+   }
+  },
+  {
+   "text": "We have proved the monic simple-root lifting condition for the local ring $R$. Implication (ii)$\\Rightarrow$(i) of [lem-weil-pbc-henselian-local-root-lifting] makes $R$ henselian in the idempotent-lifting convention. Its residue field is separably closed by step 4. Therefore $R$ is strictly henselian by [def-weil-pbc-henselian-terminology].",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, conclusion; Tag 04GF, definition-henselian, strict clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separable-polynomial",
+  "def-pc-separably-closed",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lemma-nagata-filtered-colimit-finite-data"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, strictly henselian case. Its omitted locality/residue argument and separable-polynomial sentence are expanded explicitly; the final monic simple-root argument is followed verbatim in mathematical content."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +154,87 @@
    "results": "0 hits: ",
    "date": "2026-10-22",
    "verdict": "no match: these hits do not state this result"
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|directLimit|DirectLimit).*(local|residue)|(local|residue).*(colimit|directLimit|DirectLimit)",
+   "results": "0 hits: ; source subdirectory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of local rings with local transition maps is local with residue field the colimit of the residue fields",
+   "results": "8 hits: CommRingCat.FilteredColimits.colimit, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, IsLocalRing.instCommRingResidueField, CommSemiRingCat.FilteredColimits.colimit, RingCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M, CommRingCat.FilteredColimits.colimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, Ring.DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct limit of local commutative rings along local ring homomorphisms is local and its residue field is the direct limit of the residue fields",
+   "results": "8 hits: IsLocalRing.instIsLocalHomResidueFieldRingHomResidue, IsLocalRing.instCommRingResidueField, IsLocalRing.ResidueField, IsLocalRing.ResidueField.lift, IsLocalRing.isLocalHom_residue, IsLocalRing.ResidueField.map, Field.DirectLimit.field, IsLocalRing.ResidueField.instAlgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A directed limit of henselian local rings with separably closed residue fields and local transition maps is strictly henselian",
+   "results": "8 hits: Ring.DirectLimit.commRing, Ring.DirectLimit, DirectLimit.instFieldOfRingHomClass, Ring.DirectLimit.ring, Ring.DirectLimit.lift, FirstOrder.Language.DirectLimit, HenselianLocalRing.TFAE, Ring.DirectLimit.instInhabited",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*(colimit|directLimit)|(colimit|directLimit).*henselian",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of strictly henselian local commutative rings along local homomorphisms is strictly henselian",
+   "results": "8 hits: HenselianLocalRing, IsAdicComplete.henselianRing, instHenselianRingMaximalIdeal, HenselianLocalRing.toIsLocalRing, Field.henselian, HenselianRing, HenselianLocalRing.TFAE, localCohomology.hasColimitDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of local rings with local maps has a local colimit and the canonical maps to the colimit are local",
+   "results": "8 hits: localCohomology.hasColimitDiagram, AlgebraicGeometry.LocallyRingedSpace.instHasColimits, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, Ring.DirectLimit, DirectLimit.Ring.of, Ring.DirectLimit.instInhabited",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|directLimit|DirectLimit",
+   "results": "0 hits: ; source subdirectory RingTheory/LocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing|strictlyHenselian",
+   "results": "5 hits: 34, 108, 114, 119, 121; source subdirectory RingTheory/Henselian.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct limit of henselian local rings with separably closed residue fields along local maps is strictly henselian",
+   "results": "8 hits: Field.henselian, HenselianLocalRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianLocalRing.TFAE, HenselianLocalRing.toIsLocalRing, HenselianRing, HenselianLocalRing.is_henselian",
+   "date": "2026-10-22",
+   "verdict": "no match: general ring colimits, residue-field maps, or HenselianLocalRing criteria do not state strictly henselian local colimit permanence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-indfinite-contractible-base-wstrict",
@@ -86,5 +261,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-filtered-colimit-strictly-henselian-local",
+  "worker": "stage1",
+  "summary": "Kept the statement, its two statement dependencies, and all inherited metadata. Expanded Stacks 04GI into seven steps: maximal-ideal union and contractions, locality, residue-colimit universal property, separably closed residue field by finite coefficient/Bezout descent, monic polynomial and residue-root descent, simple-root lifting, and the idempotent-form conclusion. Reused six existing tool/definition nodes in addition to the item statement dependencies; no new nodes. Searched the live Lean library, DAG, blueprint and Mathlib; no exact finished project declaration or Mathlib match was found.",
+  "blueprint": "The inherited source chain serves the open-direct-image paragraph of det-thm-sf-ctf-stability-direct-images through lem-sfb-indfinite-contractible-base-wstrict. This split realizes precisely that parent proof step 7: strict-henselian permanence at a compatible family of closed points, without changing the unit or chapter route. Inherited blueprint.from.node is null; blueprint_refs.py ancestor reports None, and its specific place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Finite coefficients and coefficient equations descend in a directed colimit of commutative rings; this is a generic algebraic tool used inside the existing 04GI permanence argument."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Converts the idempotent-lifting henselian definition into the monic simple-root criterion and back; this is a generic equivalence of definitions, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-fce55b687",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-fce55b687 (reviewer sub-agent of L); spot-checked: I read the item and its 7 steps in full; the delivery adds no new nodes. It is a faithful expansion of Stacks algebra.tex Tag 04GI (lemma-colimit-henselian, l.42926), the directed strictly henselian case, with every source hypothesis kept: local stages, strictly henselian stages, local transitions. I opened all 8 cited statements. Steps 1-3 write out the argument Stacks omits: M=∪α_i(m_i) is an ideal with α_i^{-1}(M)=m_i (common-stage equality plus local transitions, no injectivity used), R is local via the unit criterion at each stage, and κ=colim κ_i holds in CRing with ρ_i injective. Step 4 proves κ separably closed by descending the Bezout identity Up+Vp'=1 through lemma-nagata-filtered-colimit-finite-data; the leading coefficient stays nonzero so the lift is nonconstant. Steps 5-7 lift a monic f_i and the residue root, use (i)⇒(ii) of lem-weil-pbc-henselian-local-root-lifting at R_i, then (ii)⇒(i) for R. Edge cases checked: one-object system, K[ε]/ε²→K, constant field, degree-0 f vacuous; Z_(p)→Q shows the local-transition hypothesis is needed. No duplicate (04GI and strictly-henselian/colimit searches; the trf integral permanence and strict-henselization nodes differ), no cycle (178-node closure), no SGA. The declared tool_uses for the nagata finite-data and henselian root-lifting nodes are generic algebra and accepted. Advisory: the inherited statement uses 'local ring' without a definition cite."
  }
 }
