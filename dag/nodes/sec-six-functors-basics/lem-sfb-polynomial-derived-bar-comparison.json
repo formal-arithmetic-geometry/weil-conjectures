@@ -16,9 +16,93 @@
   "def-weil-pbc-mv-polynomial-ring",
   "lem-sfb-condensed-derived-invariant-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=A_F$. Construct an equivariant complex $K^n$ as the internal polynomial direct sum in $(n+1)r$ variables $y_0,\\ldots,y_n$, where each $y_a$ is an $r$-tuple. Let $g$ act by substituting $y_a-g$ for every $y_a$, and set $\\delta f=\\sum_{i=0}^{n+1}(-1)^i f(y_0,\\ldots,\\widehat y_i,\\ldots,y_{n+1})$. The augmentation $a:A[0]\\to K$ is inclusion of constants. Each substitution sends a monomial to a finite sum, hence defines an internal $A$-linear map, including for a parameter-dependent $g$. Pairing the two orders of deleting any two coordinates proves $\\delta^2=0$; substitution commutes with deletion, so these differentials are equivariant. Forgetting actions detects exactness by [lem-sfb-condensed-derived-restriction-calculus].",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: construction."
+   }
+  },
+  {
+   "text": "The augmented underlying complex is split exact. Define $h^n:K^n\\to K^{n-1}$ by $(h^nf)(y_0,\\ldots,y_{n-1})=f(0,y_0,\\ldots,y_{n-1})$ for $n>0$, and $h^0:K^0\\to A$ by evaluation at zero. In $\\delta h+h\\delta$, terms retaining the inserted zero occur twice with opposite signs; deleting that zero contributes exactly $f$. Thus $\\delta h+h\\delta=1$ on the augmented complex, and $h^0a=1$. These identities are finite polynomial identities, so hold on internal direct sums and after every restriction of parameters. The contracting maps need not be equivariant. Exactness after forgetting suffices by step 1, hence $a$ is an equivariant quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: inserted-zero contraction."
+   }
+  },
+  {
+   "text": "Change polynomial coordinates to $z=y_0$ and $x_a=y_a-y_{a-1}$ for $1\\leq a\\leq n$. The inverse is $y_a=z+x_1+\\cdots+x_a$. These inverse substitutions identify $K^n$ with the translation module $T_{r,nr}$ of [lem-sfb-polynomial-translation-acyclic], where $z$ is translated and all $x_a$ are fixed. Its hypotheses are exactly $F=E$ or the norm-topological $\\Omega$, $L=\\mathbf Z_\\ell^r$, and nonnegative $r,nr$. Consequently every $K^n$ is $\\Gamma_L$-acyclic as an internal module. The assertion used is for the polynomial direct sum itself; it does not infer acyclicity by commuting a derived functor with a filtered colimit.",
+   "uses": [
+    "lem-sfb-polynomial-translation-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: analytic acyclicity input."
+   }
+  },
+  {
+   "text": "The same coordinates identify $(K^n)^L$ with the polynomial direct sum in $x_1,\\ldots,x_n$. To check this internally, invariance implies invariance under each constant integer unit translation in a coordinate of $z$. If a polynomial has positive degree $d$ in that coordinate, the coefficient of degree $d-1$ in $f(z+1)-f(z)$ is $d$ times its leading coefficient. Since $d$ is invertible in every $A(S)$, that coefficient must be zero, a contradiction; induction removes that coordinate. Apply this to each coordinate of $z$. Sections of the direct sum are locally finite polynomials, so this calculation applies locally and glues; conversely a polynomial independent of $z$ is fixed under every parameter-dependent translation. Deleting $y_0$ drops $x_1$; deleting an interior $y_a$ replaces $(x_a,x_{a+1})$ by $x_a+x_{a+1}$; deleting $y_{n+1}$ drops $x_{n+1}$. Thus $K^L$ is exactly $P_{A,r}$, including its stated differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: invariants and faces."
+   }
+  },
+  {
+   "text": "The action category is Grothendieck abelian with left exact additive invariants by [lem-sfb-condensed-derived-restriction-calculus]. Apply the bounded-below complex clause of [sk-thm-acyclicity] to $K$, using step 3. It makes the canonical unit $u_K:Q(K^L)\\to R\\Gamma_L(QK)$ an isomorphism of derived objects. Step 2 makes $R\\Gamma_L(Qa)$ an isomorphism as well. Therefore $c=(R\\Gamma_L(Qa))^{-1}u_K:P_{A,r}\\to R\\Gamma_L(A[0])$ is an isomorphism. This uses the derived-object clause of acyclicity, rather than just its per-degree cohomology conclusion.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "sk-thm-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: normalized acyclic-resolution comparison; Stacks Tag 015E, derived.tex lemma-leray-acyclicity."
+   }
+  },
+  {
+   "text": "Evaluate a homogeneous polynomial $f\\in K^n$ on $(g_0,\\ldots,g_n)\\in L^{n+1}$ to define $e:K\\to R_A^\\bullet$ of [lem-sfb-equivariant-resolution-bar-normalization]. A coefficient $c\\in A(S)$ evaluates to $c(s)$; multiplication by the coordinates of $g_a$ is continuous in $(s,g_0,\\ldots,g_n)$, so this defines internal morphisms. Translation and deletion commute with evaluation, and constants evaluate to constants. Thus $e$ is equivariant, is a cochain map, and preserves the augmentation. The homogeneous-to-inhomogeneous substitution in that node is $(0,g_1,g_1+g_2,\\ldots,g_1+\\cdots+g_n)$ in additive notation. By step 4 its consecutive differences are exactly $g_1,\\ldots,g_n$. Hence its map $\\rho:K^L=P_{A,r}\\to U_A^\\bullet(L)$ is precisely the polynomial evaluation in the item. The normalization node now gives $\\eta_{F,r}=\\epsilon c$ as an equality of specified derived arrows. The bar node [lem-sfb-condensed-derived-invariant-bar] makes $\\epsilon$ an isomorphism, so $\\eta_{F,r}$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: evaluation and the actual derived comparison arrow."
+   }
+  },
+  {
+   "text": "When $r=0$ there is no translation variable and $L=1$. Invariants are the identity. The inserted-zero contraction of step 2 is the contraction of the augmented constant cosimplicial complex. Evaluation on the unique tuple is the identity on its term $A$ in every degree, so the comparison has the same degree-zero augmentation. Both permitted fields have been retained throughout. No step replaces all continuous $\\Omega$-valued functions by finite-subextension-valued functions or invokes convergence of a series in $\\Omega$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), polynomial homogeneous resolution: rank-zero and coefficient checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-polynomial-translation-acyclic",
+  "sk-thm-acyclicity",
+  "lem-sfb-equivariant-resolution-bar-normalization",
+  "lem-sfb-condensed-derived-invariant-bar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent homogeneous-polynomial resolution reduction. Analytic translation acyclicity and internal-bar normalization are separate statement-only obligations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +138,45 @@
    "results": "{\"t\": \"2026-10-21T17:18:58Z\", \"tool\": \"leanfinder\", \"query\": \"Rational polynomial additive group cochains compare to continuous condensed group cochains without completing the algebraic closure of a p adic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"ContinuousCohomology.homogeneousCochains\", \"BDeRham\", \"continuousCohomology\", \"ContinuousCohomology.MultiInd.complex\", \"LightCondAb\", \"PadicComplex\", \"mahler\"], \"digest\": \"ac061a2b92d56d53\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern abstract or continuous topological cochain constructions, Mahler expansions, condensed morphism extensionality or completed period rings; none gives the polynomial-to-DERIVED-internal-bar comparison for the noncomplete norm algebraic closure."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial",
+   "results": "{\"t\": \"2026-10-21T17:49:35Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Mahler expansions, abstract Rep resolutions, period rings and condensed morphism extensionality do not give the specified polynomial-to-derived-internal-bar comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial bar cochains compute ordinary derived internal invariants for a p adic lattice with continuous noncomplete field coefficients",
+   "results": "{\"t\": \"2026-10-21T17:49:35Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial bar cochains compute ordinary derived internal invariants for a p adic lattice with continuous noncomplete field coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Padic.adicCompletionEquiv\", \"mahler\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerSeries\", \"PadicInt.mahlerTerm\", \"PadicInt.fwdDiff_mahlerSeries\", \"Padic.field\", \"padic_polynomial_dist\"], \"digest\": \"b49aa3259daca7cc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Mahler expansions, abstract Rep resolutions, period rings and condensed morphism extensionality do not give the specified polynomial-to-derived-internal-bar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-21T17:49:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Condensed.hom_ext\", \"Condensed.hom_ext_iff\", \"CondensedMod.hom_naturality_apply\", \"LightCondensed.hom_ext\", \"LightCondensed.hom_ext_iff\", \"LightCondensed.lanPresheafIso_hom\", \"LightCondensed.lanPresheafNatIso_hom_app\", \"Condensed.locallyConstantIsoFinYoneda_hom_app\"], \"digest\": \"731ca2f67b94ff13\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Mahler expansions, abstract Rep resolutions, period rings and condensed morphism extensionality do not give the specified polynomial-to-derived-internal-bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial functions on a p adic integer lattice map quasi isomorphically into the derived condensed internal bar cochains with norm field coefficients",
+   "results": "{\"t\": \"2026-10-21T17:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial functions on a p adic integer lattice map quasi isomorphically into the derived condensed internal bar cochains with norm field coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PadicInt.mahlerEquiv_apply\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"PadicInt.mahlerEquiv\", \"Condensed.profiniteFree\", \"Condensed.profiniteSolid\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\"], \"digest\": \"f056210c0bd8d5ea\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Mahler expansions, abstract Rep resolutions, period rings and condensed morphism extensionality do not give the specified polynomial-to-derived-internal-bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed group cohomology of Z_p to the r is computed by evaluating the additive polynomial cochain complex over Q_p or its algebraic closure",
+   "results": "{\"t\": \"2026-10-21T17:49:38Z\", \"tool\": \"leanfinder\", \"query\": \"Condensed group cohomology of Z_p to the r is computed by evaluating the additive polynomial cochain complex over Q_p or its algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology\", \"continuousCohomology\", \"BDeRhamPlus\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"groupCohomology.inhomogeneousCochains\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"groupCohomology.H1\"], \"digest\": \"066ed341f232c2d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Mahler expansions, abstract Rep resolutions, period rings and condensed morphism extensionality do not give the specified polynomial-to-derived-internal-bar comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-trivial-ladic-derived-exterior",
@@ -82,5 +201,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-polynomial-derived-bar-comparison",
+  "worker": "stage1",
+  "summary": "Constructed and contracted the homogeneous polynomial resolution; identified its invariant complex and evaluation explicitly. Isolated polynomial translation acyclicity and the formal derived-bar arrow normalization as two genuinely distinct unsplit obligations. The imported statement is unchanged; incomplete all-continuous coefficients are retained.",
+  "blueprint": "main-20261015 direct-images proof paragraph (3), open direct image: analytic input inherited through the dense-lattice calculation. Ancestor lookup returns None, inherited from the created-node chain.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-acyclicity",
+    "why": "Generic bounded-below acyclic-resolution comparison in the derived category; it supplies homological algebra, not a replacement for the unit analytic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-eaecc5192",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-eaecc5192 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, plus the main-20261015 direct-images proof paragraph (3). That paragraph only delegates the open-coefficient case, so the agent-written origin and the WANTED lines are honest. There is no re-split note and no SGA citation. Steps 1-7 check out. I verified the inserted-zero homotopy (delta h + h delta = 1, and h^0 a = 1). The coordinate change x_a = y_a - y_{a-1} identifies K^n with T_{r,nr}, with matching hypotheses. The leading-coefficient invariants argument needs only that A(S) is a Q-algebra, and the faces match the item's differential with its signs. Step 5 uses the bounded-below derived-object clause of sk-thm-acyclicity (declared tool use, accepted as generic). In step 6, e is equivariant and augmentation-preserving, rho is exactly polynomial evaluation, and j Q(rho) is eta, so eta = epsilon c. Epsilon is pinned by the augmentation normalization in def-sfb-condensed-equivariant-bar-data. New nodes: the translation-acyclicity node is plausible and strictly smaller than the item. I tested r=0, spectator variables (a direct sum of copies of T_{r,0}), and r=1, where H^1 of each degree-bounded piece is the top-degree line, the transition maps are zero and cohomology commutes with filtered colimits, so H^1=0. The normalization node is true for every augmentation-preserving e: by naturality of u it reduces to the case K=R_N, e=id, which is the bar normalization. Neither new node duplicates normed-scalar-profinite-hom-acyclic, rational-polynomial-bar-contraction, internal-bar-ordered-cup, derived-injective-resolution-naturality or the dense-lattice node, and there is no cycle. Batch 5: for all three flagged citations, lem-sfb-condensed-derived-restriction-calculus is generic action-category homological algebra. It reaches sec-trace-formula only through lem-trf-bounded-below-derived-mate-model, a general derived-adjunction mate lemma that is no part of the trace formula or Poincare duality. The parent trivial-ladic-derived-exterior already cites the same node, so the batch-5 closure is unchanged. No fixes."
  }
 }
