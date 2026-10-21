@@ -17,9 +17,122 @@
   "def-sfb-derived-comap-upper-star-iso",
   "sk-def-sfb-module-lower-shriek"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J_A=j_{!,A}$, $J_B=j_{!,B}$, $R_A=j_A^*$, $R_B=j_B^*$, and $r_T=D(\\operatorname{Res}_{a_T})$. The scalar adjunctions $T_T\\dashv r_T$ are supplied by [sk-def-sfb-coefficient-change]; denote their units by $\\eta_T$. Denote the specified restriction square of [def-sfb-derived-comap-upper-star-iso] by\n$$c:r_UR_B\\xrightarrow{\\sim}R_Ar_X.$$\nBy [def-sfb-derived-open-immersion-shriek-iso] the specified $\\beta:T_XJ_A\\xrightarrow{\\sim}J_BT_U$ is its conjugate. In the convention of [def-sfb-conjugate-pull-iso], $\\beta$ corresponds to $c$, with the adjunctions $J_BT_U\\dashv r_UR_B$ and $T_XJ_A\\dashv R_Ar_X$. Their Hom bijections are the successive individual Hom bijections, by [def-weil-pbc-composite-adjunction]. Keep these adjunctions and the actual open units $u_A,u_B$ of the statement throughout.",
+   "uses": [
+    "sk-def-sfb-coefficient-change",
+    "def-sfb-derived-comap-upper-star-iso",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "def-sfb-conjugate-pull-iso",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+    "place": "Definition: conjugate along the two composite adjunctions"
+   }
+  },
+  {
+   "text": "We first check which action square $c$ represents. Put $F=j^{-1}$ on abelian sheaves, $\\alpha_A=\\alpha_j^\\Lambda$, and $\\alpha_B=\\alpha_j^{\\Lambda\\prime}$. In this paragraph let $N$ be an ordinary $B_X$-module and use $R,r$ also for the ordinary pullback and scalar-restriction functors. In the pullback formula of [sk-def-sfb-module-pushforward-pullback], identify $\\operatorname{Ext}_{\\alpha_A}FN$ with $FN$ having action restricted along $\\alpha_A^{-1}$, and likewise for $B$; these identifications are available because [lem-sfb-alpha-iso] makes both coefficient maps invertible. Using the coequalizer definition of extension in [sk-def-sfb-change-of-scalars], the identifications have balanced-tensor formulas $x\\otimes n\\mapsto\\alpha_A^{-1}(x)n$ and $n\\mapsto1\\otimes n$. The action makes the first map balanced; its composite with the second is the identity, and the other composite is $x\\otimes n\\mapsto1\\otimes\\alpha_A^{-1}(x)n=x\\otimes n$ by the balancing relation. By [sk-def-sfb-coefficient-change], $\\alpha_B F(a_X)=a_U\\alpha_A$, hence $\\alpha_B^{-1}a_U=F(a_X)\\alpha_A^{-1}$. Thus the actions on $r_U R_BN$ and $R_A r_XN$ coincide on the same object $FN$: both are restriction of the $F(B_X)$-action along this common composite. Here transporting an action and restricting it commute directly: for the monoidal structure $\\mu$ of $F$, naturality gives $F(\\gamma_N(a_X\\otimes1))\\mu=F\\gamma_N\\mu(F(a_X)\\otimes1)$, using [sk-def-sfb-transport] and the restriction formula in [sk-def-sfb-change-of-scalars]. Both routes send a morphism $h$ to $Fh$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Transport/restriction action calculation and coefficient-square calculation, written out"
+   }
+  },
+  {
+   "text": "The ordinary comparison [def-sfb-comap-upper-star-iso] is the composite of the transport/restriction comparison with the invertible coefficient-square comparison [def-sfb-extend-comap-iso-of-iso]. Unfold these specified comparisons using step 2: the transport comparison is the identity on $FN$, and the coefficient-square comparison, between the two tensor presentations, is the inverse collapse for $A$ after the collapse for $B$. On inverse-image modules its formula is consequently $n\\mapsto n$; its inverse has the same formula. In particular this is precisely the action identification, with no automorphism of $FN$ inserted. The square [def-sfb-derived-comap-upper-star-iso] is the levelwise version of this comparison. In every degree the above formulas and their inverses commute with the differential, since they commute with every module morphism. Applying the localization functor preserves these equalities and inverse identities. Therefore on the derived categories, after the coefficient identifications used in the statement, $c^{-1}:R_Ar_X\\to r_UR_B$ is exactly the action identification whose scalar-adjunction mate is $\\theta_j$ in [lem-sfb-kflat-scalar-comparison-normalization].",
+   "uses": [
+    "def-sfb-comap-upper-star-iso",
+    "def-sfb-extend-comap-iso-of-iso",
+    "def-sfb-derived-comap-upper-star-iso",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Final displayed composite; derived levelwise construction in def-sfb-derived-comap-upper-star-iso.md"
+   }
+  },
+  {
+   "text": "For $M\\in D(U,A_U)$ put $V=J_AM$ and $N=J_BT_UM$. Transpose $\\beta_M:T_XV\\to N$ under the composite $T_XJ_A\\dashv R_Ar_X$. The result is $R_Ar_X(\\beta_M)\\circ R_A(\\eta_{X,V})\\circ u_{A,M}$, by the composite-unit formula of [def-weil-pbc-composite-adjunction]. On the other hand, $1_N$ transposes under $J_BT_U\\dashv r_UR_B$ to $r_U(u_{B,T_UM})\\circ\\eta_{U,M}$. By the defining Hom correspondence of [def-sfb-conjugate-pull-iso], postcomposition of this second transpose by $c_N$ is the first transpose: precomposition of $1_N$ by the specified conjugate $\\beta_M$ is $\\beta_M$. Consequently\n$$R_Ar_X(\\beta_M)\\circ R_A(\\eta_{X,V})\\circ u_{A,M}\n=c_N\\circ r_U(u_{B,T_UM})\\circ\\eta_{U,M}.\\tag{1}$$\nThis uses the actual conjugate specified in [def-sfb-derived-open-immersion-shriek-iso], rather than choosing another isomorphism between the same left adjoints.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-sfb-conjugate-pull-iso",
+    "def-sfb-derived-open-immersion-shriek-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints: defining Hom correspondence; composite units expanded as in Tag 0DV0, lemma-compose-counits"
+   }
+  },
+  {
+   "text": "The K-flat lemma concerns sectionwise module sheaves; transport it along the underlying-sheaf-preserving equivalences $E_T$ with module objects. They identify $T_T$, $r_T$ and the specified derived scalar adjunctions (unit $m\\mapsto1\\otimes m$) by [lem-sfb-internal-section-scalar-adjunction], and $R_A,R_B$ with the sectionwise pullbacks along $j^{-1}\\Lambda_{X,\\mathrm{sec}}\\cong\\Lambda_{U,\\mathrm{sec}}$ induced by $\\alpha$ by [lem-sfb-internal-module-operations-transport]. These comparisons send generators to generators, so after the collapses of step 2 they are the identity on $FN$: $c^{-1}$ corresponds to the lemma's identification $h_A^*r_Y=r_Xh_B^*$ for $h=j^{-1}$, rings identified by [lem-sfb-alpha-iso], and the mate is taken under the adjunctions $T\\dashv r$ of steps 1 and 6. By [lem-sfb-kflat-scalar-comparison-normalization] and step 3, the specified $\\theta_V:T_UR_AV\\to R_BT_XV$ is the scalar-adjunction mate of $c^{-1}$. Its transpose under $T_U\\dashv r_U$ is therefore\n$$r_U(\\theta_V)\\circ\\eta_{U,R_AV}\n=c^{-1}_{T_XV}\\circ R_A(\\eta_{X,V}).\\tag{2}$$\nIndeed, the inverse-mates formula of [def-weil-pbc-adjunction-mate] inserts the scalar unit on the $X$ side, applies $c^{-1}$, and then contracts the $U$-scalar counit; transposing contracts that counit with its unit and leaves exactly the displayed right side. The K-flat normalization lemma identifies this mate with the balanced tensor comparison on the entire ordinary unbounded derived category and says it is invertible without flatness of $a$. Thus (2) is available at the possibly unbounded object $V=J_AM$, and $\\theta_V^{-1}$ is the specified inverse.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) balanced K-flat comparison, applied to j; scalar mate expanded by its unit/counit formula"
+   }
+  },
+  {
+   "text": "Set $d=R_B(\\beta_M)\\circ\\theta_V\\circ T_U(u_{A,M}):T_UM\\to R_BJ_BT_UM$. Under $T_U\\dashv r_U$ from [sk-def-sfb-coefficient-change], its transpose is $r_U(d)\\circ\\eta_{U,M}$. Naturality of $\\eta_U$ at $u_{A,M}$, then (2), gives\n$$\\begin{aligned}\nr_U(d)\\eta_{U,M}\n&=r_UR_B(\\beta_M)\\,r_U(\\theta_V)\\eta_{U,R_AV}\\,u_{A,M}\\\\\n&=r_UR_B(\\beta_M)\\,c^{-1}_{T_XV}\\,R_A(\\eta_{X,V})\\,u_{A,M}\\\\\n&=c_N^{-1}\\,R_Ar_X(\\beta_M)\\,R_A(\\eta_{X,V})\\,u_{A,M}\\\\\n&=r_U(u_{B,T_UM})\\eta_{U,M}.\n\\end{aligned}$$\nThe third line is naturality of $c^{-1}$ at $\\beta_M:T_XV\\to N$; the last line substitutes (1) and cancels $c_N^{-1}c_N$. The final expression is exactly the transpose of $u_{B,T_UM}$. Injectivity of the adjunction Hom bijection yields\n$$R_B(\\beta_M)\\circ\\theta_V\\circ T_U(u_{A,M})=u_{B,T_UM}.\\tag{3}$$",
+   "uses": [
+    "sk-def-sfb-coefficient-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), alternative common-right-adjoint argument: explicit equality of scalar transposes"
+   }
+  },
+  {
+   "text": "The units $u_A,u_B$ are the invertible open units specified in the statement, and $\\theta$ is invertible by step 5. Postcompose (3) by $u_{B,T_UM}^{-1}$, then precompose by $T_U(u_{A,M}^{-1})\\circ\\theta_V^{-1}$. Functoriality gives $T_U(u_{A,M})T_U(u_{A,M}^{-1})=1$, so\n$$u_{B,T_UM}^{-1}\\circ R_B(\\beta_M)=T_U(u_{A,M}^{-1})\\circ\\theta_V^{-1},\\qquad V=J_AM,$$\nwhich is the required formula. Every transformation used above is natural and all equations hold for arbitrary $M$, so this is a natural identity. Only the invertibility already specified for the open units and the unbounded K-flat normalization are used; no flatness or boundedness hypothesis has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), alternative open-adjunction argument: cancel the specified invertible units and normalized comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-comap-upper-star-iso",
+  "def-sfb-conjugate-pull-iso",
+  "def-sfb-derived-comap-upper-star-iso",
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "def-sfb-extend-comap-iso-of-iso",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), alternative open-adjunction argument, completed by explicit composite-unit and scalar-transpose calculations; coefficient comparison construction in sk-def-sfb-coefficient-comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +168,45 @@
    "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.freeFunctorCompPullbackIso",
    "date": "2026-10-21",
    "verdict": "no match: mates identities in Mathlib are tools, but do not identify the specified derived open scalar conjugate with the balanced inverse-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_mateEquiv_vcomp|mateEquiv_conjugateEquiv_vcomp|unit_mateEquiv",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; read search output and the candidate Mates.lean definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate/conjugate identities do not state normalization for these specified unbounded derived coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv",
+   "results": "4 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm; read search output and the candidate Mates.lean definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate/conjugate identities do not state normalization for these specified unbounded derived coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes, restricting the conjugate coefficient extension by zero isomorphism equals the inverse scalar pullback mate under the actual adjunction units",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; read search output and the candidate Mates.lean definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate/conjugate identities do not state normalization for these specified unbounded derived coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the derived extension by zero scalar comparison along an open immersion is normalized by the tensor pullback comparison and the adjunction units",
+   "results": "8 hits: Derivation.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.RingedSpace.res_zero; read search output and the candidate Mates.lean definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate/conjugate identities do not state normalization for these specified unbounded derived coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of two scalar adjunctions and two fully faithful open left adjoints: unit formula for the conjugate natural isomorphism in terms of the Beck Chevalley mate",
+   "results": "8 hits: CategoryTheory.unit_conjugateEquiv, CategoryTheory.unit_mateEquiv, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.unit_conjugateEquiv_symm, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_adjunction_id_symm, CategoryTheory.Adjunction.Triple.leftToRight_app_map_adj₁_unit_app; read search output and the candidate Mates.lean definitions.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic mate/conjugate identities do not state normalization for these specified unbounded derived coefficient comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -75,5 +223,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-open-scalar-conjugate-normalization",
+  "worker": "stage1",
+  "summary": "Q70 checks the specified coefficient restriction square on transported actions, expands the actual conjugate using composite Hom adjunctions, and compares scalar transposes to obtain its restriction normalization. Statement unchanged; no new nodes. Searches find formal mate tools in Mathlib but no theorem for the specified derived coefficient/open comparisons.",
+  "blueprint": "det-prop-scalar-six-pullback.proof.md (2), alternative common-right-adjoint/open-adjunction argument; (1) supplies the balanced K-flat normalization already stated in lem-sfb-kflat-scalar-comparison-normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Identifies the coefficient ring of the ordinary open inverse image with the pulled-back condensed coefficient ring; used as a generic coefficient-identification tool, not as a replacement for the scalar-six route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic identification of module-object pullback and open functors with the sectionwise ringed-topos ones, needed to apply the sectionwise K-flat normalization lemma in step 5; the parent det-prop-scalar-six-pullback already uses it as an accepted tool for the same transfer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-fcdae6419",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-fcdae6419 (reviewer sub-agent of L); spot-checked: I read the whole delivery against main-20261015 det-prop-scalar-six-pullback.proof.md (2) and def-sfb-derived-open-immersion-shriek-iso. It has zero new nodes and the statement is unchanged; the item is not dropped, is still unsplit live, and has no repair note. Steps 1-7 are correct. The conjugate direction matches def-sfb-conjugate-pull-iso with e=c: r_U R_B≅R_A r_X. In step 2, alpha_B F(a_X)=a_U alpha_A comes from the coefficient-change square, and the collapse maps are mutually inverse. Step 3 unfolds the construction of def-sfb-comap-upper-star-iso and def-sfb-extend-comap-iso-of-iso; c becomes the identity on FN under the same identifications. I checked the composite-unit transposes in (1), the inverse-mate transpose in (2), the four lines of (3) and the cancellation in step 7. The formula is exactly the d_a/q_a=theta^{-1} restriction condition of lem-sfb-normalized-immersion-comparison-coherence. Small cases checked: j=id, U empty, M=0, and non-flat Z->Z/2. No duplicate found; lem-sf-open-comparison-unit-normalization is the étale/pro-étale analogue with finite A. FIX for C3/C4, E6: step 5 applied lem-sfb-kflat-scalar-comparison-normalization, which is stated for sectionwise module sheaves with h^{-1} and the change-of-rings adjunction, directly to the module-object functors and the scalar adjunction of sk-def-sfb-coefficient-change that define beta, with no transfer. I added this transfer to step 5, citing lem-sfb-internal-section-scalar-adjunction and lem-sfb-internal-module-operations-transport (the parent's step 1 cites both for the same purpose) plus lem-sfb-alpha-iso. I updated proof_deps and declared lem-sfb-internal-module-operations-transport in tool_uses, as the parent already does. Step 5 is now 1633 characters and the change creates no cycle. Accepted tool uses: lem-sfb-alpha-iso and lem-sfb-internal-module-operations-transport. Advisory: the invertible open units are presupposed by the statement and are true (localized degreewise unit of an open immersion).; 1 file(s) fixed by the reviewer"
  }
 }

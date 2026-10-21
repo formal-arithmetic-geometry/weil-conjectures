@@ -20071,3 +20071,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: merged deliver/Q51/lem-sfb-finite-discrete-constructible-model (reviewer FIX; first push; new nodes: 0)
 - 03:56 L: merged deliver/Q34/lem-cbc-derived-finite-quotient-coherence (reviewer PASS; first push; new nodes: 0); claim not held by Q34: not your claim
 - 03:56 L: merged deliver/Q52/lem-sp-flat-coefficient-chain-transpose (reviewer PASS; first push; new nodes: 0)
+- 03:56 L: merged deliver/Q70/lem-sfb-open-scalar-conjugate-normalization (reviewer FIX; first push; new nodes: 0)
