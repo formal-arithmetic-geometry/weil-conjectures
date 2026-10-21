@@ -21,9 +21,119 @@
   "lem-weil-strict-roos-comparison",
   "prop-pur-kinjective-resolutions-exist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\widehat R_W$ and $\\mathcal C=W_{\\mathrm{proet}}$. The fixed small skeleton makes both $\\mathcal C$ and $\\mathbf N_{\\geq1}\\times\\mathcal C$ small in the module universe. The ringed sequence site realizes $\\mathscr S_W$, and restriction $U_W$ is exact. By the pro-etale product theorem, countable products in $\\operatorname{Mod}(A)$ are exact; thus the strict Roos comparison in the statement applies to all unbounded tower complexes here. Choose the resolutions $a:TQ\\to I$ and $j:U_WI\\to J$ with injective terms using K-injective existence on these two small ringed sites. There is no requirement that $U_WI$ itself be K-injective.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "det-pe-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, choice of resolutions; exact-product hypothesis supplied by det-pe-products-exact"
+   }
+  },
+  {
+   "text": "Let $p$ be the ringed sequence projection with coefficient maps $A\\to B_{W,n}$. Its ordinary inverse-image functor on modules is $T(M)=(M\\otimes_A B_{W,n})_n$, and $p_*M=\\lim U_WM$. Explicitly, the adjunction sends $h:M\\to\\lim U_WZ$ to the family $m\\otimes b\\mapsto b\\pi_nh(m)$; the inverse sends $f:TM\\to Z$ to $m\\mapsto(f_n(m\\otimes1))_n$. These formulas respect balancing, restrictions and transitions and are inverse, so they also give the termwise complex adjunction. In particular the transpose of $a:TQ\\to I$ is the chain map $b:Q\\to\\lim U_WI$ with $\\pi_nb=a_nr_n$. Indeed $t^I_na_{n+1}r_{n+1}=a_n\\tau_nr_{n+1}=a_nr_n$; and $d(a_nr_n)=a_nr_nd$ since both factors are chain maps.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; ordinary sequence-projection correspondence of lem-coef-sequence-projection-derived-adjunction"
+   }
+  },
+  {
+   "text": "Use the canonical derived adjunction $Lp^*\\dashv Rp_*$. The sequence-projection theorem identifies $Lp^*N$ with the strict quotient complex $TQ$, and states that its Hom correspondence extends the ordinary one on derived fractions. The resolving-adjunction normalization therefore computes the transpose of the identity of $Lp^*N$ as follows: represent that identity by the resolution map $a:TQ\\to I$ and apply the ordinary transpose of Step 2. Consequently the unit $N\\to Rp_*Lp^*N$, under the resolution identification $Rp_*[TQ]\\simeq[\\lim U_WI]$, is $[b][q]^{-1}$. Here the flat-term K-flat hypothesis on $Q$ supplies the left derived representative; K-injectivity of $I$ supplies the right derived representative. This argument computes the unit itself, rather than characterizing it by its level projections.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Tag 07A6, lemma-adjoint, with the recorded resolving-adjunction normalization"
+   }
+  },
+  {
+   "text": "Factor $p$ as the change of rings $c:(\\operatorname{Sh}(\\mathbf N\\times\\mathcal C),B)\\to(\\operatorname{Sh}(\\mathbf N\\times\\mathcal C),\\Delta A)$ followed by the constant-ring sequence projection $\\pi$. Applied to the constant sequence $A$, the sequence-site equivalence identifies $\\Delta A$-module sheaves on $\\mathbf N\\times\\mathcal C$ with $\\operatorname{Tow}(\\operatorname{Mod}(A))$ componentwise; hence K-injective complexes with injective terms on either side correspond, and the K-injective $J$ below is a K-injective tower with injective terms. Then $c_*=U_W$ and $\\pi_*=\\lim$, while exactness of $U_W$ identifies $Rc_*$ with $U_W$ on the derived category. Apply the normalized right-derived direct-image composition theorem to the K-injective $I$ and the resolution $j:c_*I\\to J$. It says that $\\lim j:\\lim U_WI\\to\\lim J$ is a quasi-isomorphism representing the canonical comparison $Rp_*\\simeq R\\lim U_W$. The sequence pushforward/limit theorem transports the adjunction along this comparison, giving exactly the simultaneous reduction/limit adjunction of the statement. Thus, in the model $\\mathcal L_W\\mathcal R_WN\\simeq[\\lim J]$, its actual unit is $[b'][q]^{-1}$, where $b'=(\\lim j)b$ has coordinates $j_na_nr_n$. This proves the two-resolution assertion with its specified composition normalization.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to ring restriction and sequence projection; Tag 07A6, lemma-adjoint"
+   }
+  },
+  {
+   "text": "Set $\\gamma(z)=(r_nz)_n$. The quotient maps give $\\tau_nr_{n+1}=r_n$, hence $(1-s_D)\\gamma=0$, and $d\\gamma=\\gamma d$. Therefore the displayed differential gives $d v_Q(z)=d(0,\\gamma z)=(0,\\gamma dz)=v_Q(dz)$, proving that $v_Q$ is a chain map. Put $f=jU_W(a):D\\to J$. It is a strict tower chain map, so $f_nt^D_n=t^J_nf_{n+1}$ implies $(\\prod f_n)(1-s_D)=(1-s_J)(\\prod f_n)$. Accordingly $H(f)$ acts by $\\prod f_n$ on each coordinate. If $\\iota_J:\\lim J\\to H(J)$ is the canonical inclusion, both chain maps $H(f)v_Q$ and $\\iota_Jb'$ send $z$ to $(0,(j_na_nr_nz)_n)$; they are equal, including the shifted-product coordinate.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; explicit calculation with the cone differential fixed in the item"
+   }
+  },
+  {
+   "text": "Since $U_W$ is exact, $f=jU_W(a)$ is a quasi-isomorphism and is, through the sequence-site equivalence for $\\Delta A$ of Step 4, a K-injective tower resolution of $D$ in $\\operatorname{Tow}(\\operatorname{Mod}(A))$ with injective degree terms. Apply the normalized strict Roos comparison to this resolution: $\\iota_J$ is a quasi-isomorphism and, under the canonical $R\\lim D\\simeq[\\lim J]$ identification, $\\rho_D=[\\iota_J]^{-1}[H(f)]$. Step 5 now gives $\\rho_D[v_Q]=[\\iota_J]^{-1}[H(f)v_Q]=[b']$. Substituting Step 4 yields $u_N=\\rho_D[v_Q][q]^{-1}$. The equality is obtained by cancellation of an isomorphism in the derived category, so it is an equality of whole morphisms.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, normalized strict Roos resolution comparison"
+   }
+  },
+  {
+   "text": "The resolutions $a,j$ above were arbitrary of the stated kind, so their formula always represents the same unit. The Roos comparison is resolution-independent and natural, and the simultaneous adjunction has a natural unit. Explicitly, for $h:N\\to N'$ its naturality gives $(\\mathcal L_W\\mathcal R_W h)u_N=u_{N'}h$; replacing each unit by the equality of Step 6 gives precisely the naturality of the asserted representative formula. Different choices of $q$, $a$ or $j$ therefore give the same morphism under the canonical derived identifications. All constructions used unbounded K-flat and K-injective representatives and exact countable products; none required completeness or a cohomological bound on $N$.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "(2)-(3), functorial reduction and integral realization; resolution-independent normalization supplied by the cited derived adjunction and Roos statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "det-pe-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "(2)-(3): chain-level normalization prerequisite for functorial integral realization; argument combines Stacks 07A6, 09T5, 0D6E, 0941 and the fixed cone convention of 08TC. Not a verbatim assertion of those sources."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +169,52 @@
    "results": "{\"t\": \"2026-10-21T06:14:04Z\", \"tool\": \"leanfinder\", \"query\": \"A derived tensor reduction adjunction unit is computed by a K flat resolution followed by a K injective resolution of its strict quotient tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\"], \"digest\": \"1a83909eedd9e47f\"}",
    "date": "2026-10-21",
    "verdict": "no match: generic adjunction, ordinary adic completion, tensor or mapping-cone ingredients do not state this specified semilinear quotient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completionAdjunction|strict.?Roos|quotient.*tower.*unit|derived_unit",
+   "results": "{\"t\": \"2026-10-21T08:15:03Z\", \"tool\": \"grep\", \"query\": \"completionAdjunction|strict.?Roos|quotient.*tower.*unit|derived_unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_unit",
+   "results": "{\"t\": \"2026-10-21T08:15:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derived_unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"edd533c153517ca0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived completion adjunction unit is computed from a K flat complex by the compatible quotient maps into the inverse limit cone",
+   "results": "{\"t\": \"2026-10-21T08:15:04Z\", \"tool\": \"leansearch\", \"query\": \"The derived completion adjunction unit is computed from a K flat complex by the compatible quotient maps into the inverse limit cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.functorialityUnit'\", \"CategoryTheory.Adjunction.functorialityUnit'_app_hom\", \"CategoryTheory.Limits.isLimitConeOfAdj\"], \"digest\": \"c6097c4bb66fc209\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of simultaneous derived tensor reduction adjoint to derived inverse limit is represented by the strict quotient tower augmentation with zero shifted mapping cone coordinate",
+   "results": "{\"t\": \"2026-10-21T08:15:14Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of simultaneous derived tensor reduction adjoint to derived inverse limit is represented by the strict quotient tower augmentation with zero shifted mapping cone coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.leftUnitor\", \"HomologicalComplex.leftUnitor'\", \"HomologicalComplex.rightUnitor\", \"HomologicalComplex.rightUnitor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.rightUnitor'_inv\"], \"digest\": \"18672845094b37eb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|derivedη_fac_app|derivedη",
+   "results": "{\"t\": \"2026-10-21T08:16:09Z\", \"tool\": \"grep\", \"query\": \"derived_unit|derivedη_fac_app|derivedη\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"abbfe2c5fb62a9c9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Computing the unit of a derived adjunction using flat and injective resolutions and the ordinary adjunction transpose",
+   "results": "{\"t\": \"2026-10-21T08:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"Computing the unit of a derived adjunction using flat and injective resolutions and the ordinary adjunction transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'_counit\"], \"digest\": \"aacf388fd52cf4f6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived adjunction or tensor-unit declarations do not assert the strict semilinear quotient-tower, two-resolution composition and zero-coordinate Roos formula; inspected Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 96-108 and 144-152"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
@@ -83,5 +235,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-completion-unit-strict-quotient-model",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited metadata. Reused existing sequence adjunction, resolving normalization, normalized derived composition, pro-etale exact products, and strict Roos comparison nodes. Seven steps compute the actual adjunction transpose and both resolutions, check the zero-coordinate chain formula, and prove resolution independence and derived naturality. No new nodes.",
+  "blueprint": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): the functorial reduction/limit realization requires the canonical completion unit. Steps 1-4 fix its adjunction/resolution normalization, steps 5-6 prove the full strict cone identity, and step 7 records its functoriality.",
+  "tool_uses": [
+   {
+    "node": "det-pe-products-exact",
+    "why": "Exact products of arbitrary pro-etale module sheaves supply the hypothesis of the strict Roos comparison; this is a generic site tool, not a replacement of trace transport."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The generic exact-product tower comparison identifies the explicit cone and its zero-coordinate augmentation with total derived inverse limit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded resolutions on small ringed sites supply the two simultaneous injective models."
+   },
+   {
+    "node": "lem-coef-sequence-projection-derived-adjunction",
+    "why": "Generic ringed sequence adjunction supplies the flat representative and the actual ordinary-transpose normalization."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic resolving-class adjunction tool identifies the transpose of the resolved identity with the actual derived unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic composition theorem supplies the normalized map lim(j) without assuming restriction preserves K-injectives."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Generic sequence projection comparison identifies the transported derived adjunction with reduction/limit."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Existing simultaneous derived coefficient adjunction identifies the named functors and supplies naturality of their unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-aa39abdd8",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-aa39abdd8 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement, plus the proofs of lem-coef-sequence-pushforward-limit-projections and lem-coef-derived-system-evaluation-calculus and the parent's steps 1, 3 and 4. The delivery has no new nodes and is not a re-split. The statement is correct. Cone convention: d(b,a)=(-db-(1-s)a,da) squares to zero and the inclusion (0,z) is a chain map. Small cases: Q=0; at a point, N=R; N=E gives Q_n=0, H(D)=0 and L R E=0, so invertibility of the unit is not asserted; unbounded flat complexes need no bound. Step 1: det-pe-products-exact supplies the exact countable products the Roos node needs, and the K-injective existence hypotheses hold on both small ringed sites. Step 2: ordinary transpose formulas and the transition identity checked. Step 3: the sequence-projection fraction extension plus the resolving normalization give unit=[b][q]^{-1}, with no K-injectivity preservation needed. Step 4: the composition theorem gives that lim j represents kappa. Step 5: dv_Q=(0,gamma dz) and H(f)v_Q=iota_J b' recomputed. Step 6: Roos normalization rho_D=[iota_J]^{-1}[H(f)] and cancellation by an isomorphism. Step 7: naturality. FIX (C1): pi_*=lim, and the fact that the Delta A-resolution J is a K-injective tower with injective terms in Tow(Mod A) (needed by Roos in Step 6), use the sequence-site equivalence for the constant sequence A, which no cited statement gave. I added lem-pur-system-ringed-sequence-site (on route, sk-def-sf-operations) to Steps 4 and 6 and to proof_deps, one sentence each. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-completion-unit-strict-quotient-model.json. MAINTAINER ADVISORY: Step 4 identifies the pushforward-limit 'specified comparison' with kappa via lim j, and the evaluation-calculus 'canonical adjunction' with the transport along it. Both are fixed only in those nodes' proofs (step 2 and step 1 respectively), not in their statements. The identification is mathematically right, cannot be repaired inside this delivery, and the reviewed node lem-pod-identity-compact-support-normalization (Q16 PASS) already relies on it. Please add that normalization sentence to the two statements. Duplicates: lem-a1-roos-intrinsic-unit-comparison concerns comp_K, not the adjunction unit; the pod point node is only a special case. Tool uses: all generic, accepted. No SGA source.; 1 file(s) fixed by the reviewer"
  }
 }
