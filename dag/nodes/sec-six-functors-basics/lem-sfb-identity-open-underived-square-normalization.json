@@ -22,9 +22,148 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small sites in the coefficient universe. By [lem-weil-proetale-weakly-etale-localization](1),(4), the sites over the opens $U\\subset Z$ and $U\\subset D$ are the corresponding slice sites. Replace internal modules by sectionwise modules using [def-weil-pbc-internal-abelian-sheaf-module-equivalence], which preserves the underlying sheaves and their section maps. The base-change functor $T\\mapsto D\\times_ZT$ defining $h_*$ is continuous by [def-sfb-finite-lower-star]; it preserves finite limits since both iterated fibre products represent the same tuples with the same equations. On slices over $U$, it becomes the identity: $D\\times_ZT\\cong T$ for $T\\to U$, naturally in $T$. Thus [lem-weil-pbc-localize-ringed-site-morphism] applies, with the given structural ring map, and identifies restricted direct image with the direct image of this identity localized morphism.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-finite-lower-star",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites) and 03CF (sites.tex, lemma-localize-morphism); application to the two open slices"
+   }
+  },
+  {
+   "text": "The coefficient identifications here are the canonical ones, not arbitrary ring isomorphisms. By [sk-prop-sfb-cartesian-coefficients](1), use $j^{-1}\\Lambda_Z\\cong\\Lambda_U$ and $i^{-1}\\Lambda_D\\cong\\Lambda_U$. Apply [lem-sfb-eta-comp] to $U\\xrightarrow{i}D\\xrightarrow{h}Z$: the coefficient map for $j=hi$ is the coefficient map for $h$ followed by that for $i$, with the specified pushforward composition. Therefore the localized structural map, expressed in these two copies of $\\Lambda_U$, is the identity. In particular, the direct-image comparison of [lem-weil-pbc-localize-ringed-site-morphism] is exactly $c_h$: on $T\\to U$ it is $N(D\\times_ZT)=N(T\\xrightarrow{i}D)$. The same equality holds for every restriction map and for multiplication by a section of the restricted ring. This proves that $c_h$ is a natural module isomorphism and fixes its action, including its direction.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-eta-comp",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, restricted structural ring map and sectionwise direct-image identity; coefficient composition for hi=j"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ringed-site-pullback-localization-universes] to the same base-change functor and its slice at $U$. The finite-limit and continuity hypotheses were checked in step 1; slice continuity is also supplied by the induced morphism in [lem-weil-pbc-localize-ringed-site-morphism]. The global left adjoint is the specified $h^*$, by [def-sfb-module-upper-lower-adjunction]. The localized adjunction is that for the identity ringed site. Its pullback is $R\\otimes_R-$, $R=\\Lambda_U$, with unit $m\\mapsto1\\otimes m$ and counit $r\\otimes n\\mapsto rn$: these are the two Hom correspondences in [def-sfb-module-upper-lower-adjunction] when the underlying site functor and ring map are identities. They are inverse under $R\\otimes_RM\\cong M$. The localization lemma consequently gives an isomorphism $d_M:j^*M\\to i^*h^*M$ with $d_M=c_{h,h^*M}\\,j^*\\eta_{h,M}$. In localized tensor coordinates $d_M(m)=1\\otimes m$.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, localized module pullback with its restricted-unit Hom correspondence"
+   }
+  },
+  {
+   "text": "Identify $d$ with the comparison required by the statement. Write $b:j^*\\to i^*h^*$ for the forward comparison of [def-sfb-module-upper-star-comp] for $hi=j$. Its conjugate is the specified $C:h_*i_*\\to j_*$ of [def-sfb-module-lower-star-comp]. The defining unit equation of [lem-weil-pbc-conjugate-iso-unit-equation], with $L_1=j^*$ and $L_2=i^*h^*$, is\n$$j_*(b_M)\\eta_{j,M}=C_{i^*h^*M}\\,h_*(\\eta_{i,h^*M})\\,\\eta_{h,M}.$$\nHere the second unit is the composite unit of [def-weil-pbc-composite-adjunction]. Evaluate this equation at an object $T\\to U$. For an open, restriction to its own slice makes its unit the identity under the tensor-unit identification, by the identity-site calculation in step 3 (applied also to $i$ and $j$). The map $C$ evaluates by the canonical fibre-product identification of [def-sfb-finite-lower-star-comp]; on this slice it is the identity. The displayed equation is therefore $b_M(T)=c_{h,h^*M}(T)\\,j^*\\eta_{h,M}(T)=d_M(T)$. This holds on every object and restriction map, so $b=d$. Since $a_h=b^{-1}$ by definition, $a_h$ is exactly $1\\otimes m\\mapsto m$, and $c_{h,h^*M}\\,j^*\\eta_{h,M}=a_{h,M}^{-1}$.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-finite-lower-star-comp",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; explicit comparison of the localized unit with the conjugate-normalized composition"
+   }
+  },
+  {
+   "text": "For $t:h^*M\\to N$, use the definition $t^\\sharp=h_*t\\,\\eta_{h,M}$. Naturality of the sectionwise comparison gives $c_{h,N}\\,j^*h_*t=i^*t\\,c_{h,h^*M}$. Compose this equation with $j^*\\eta_{h,M}$ and insert step 4. This is exactly $c_{h,N}\\,j^*(t^\\sharp)=i^*t\\,a_{h,M}^{-1}$. It proves the adjunct formula for the specified adjunction, not just for an isomorphic choice of adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; naturality of the comparison followed by the unit equality proved in step 4"
+   }
+  },
+  {
+   "text": "By the defining fibre-product identities [def-weil-pbc-cartesian-square], $(D\\times_ZZ')\\times_{Z'}U'\\cong D\\times_ZU'\\cong U'$, with the second isomorphism induced by the fixed identity locus. Thus $h'$ has the same identity-open configuration, with $h'i'=j'$. All primed schemes are standing schemes, all maps are the specified base changes, and the site sizes remain in the coefficient universe. Repeat steps 1--5 with $(h',i',j')$ to obtain $c_{h'},a_{h'}$ and both primed adjunct equations. This argument uses no properness or density; in particular it makes no assumption that density survives base change.",
+   "uses": [
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; base change of the identity localized morphism"
+   }
+  },
+  {
+   "text": "For clarity write $m_{f,g}:f^*g^*\\to(gf)^*$ for the inverse of the specified pullback composition. These comparisons satisfy\n$$m_{f,qg}\\,f^*m_{g,q}=m_{gf,q}\\,(m_{f,g}q^*).$$\nIndeed [def-sfb-module-upper-star-comp] makes each $m$ the conjugate of inverse direct-image composition. On a site object $T$, both ways to compare three direct images are induced, by [def-sfb-finite-lower-star-comp], by the same map from an iterated fibre product to the unparenthesized fibre product: they preserve $T$ and each of the three other projections. The universal property makes these maps equal, and [def-sfb-module-lower-star-comp] lifts them to the same module morphism. The specified coefficient actions agree since both act through the same composite ring map. Apply [lem-weil-pbc-mate-pasting](2),(3) and the injective conjugation bijection [def-weil-pbc-adjunction-conjugate]; the two conjugates of the displayed equation are precisely those equal direct-image maps. Thus the displayed associativity identity holds with the composite-adjunction normalization, including the functor associators.",
+   "uses": [
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-finite-lower-star-comp",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8; associativity obtained by conjugating the sectionwise direct-image associativity"
+   }
+  },
+  {
+   "text": "The common composite is $q=vh'i'=hwi'=jv_U:U'\\to Z$. Use the notation of step 7, and suppress only canonical equality transports. By definition\n$$\\theta=m_{w,h}^{-1}m_{h',v},\\quad s=m_{v_U,j}^{-1}m_{j',v},\\quad t_0=m_{v_U,i}^{-1}m_{i',w},\\quad a_h=m_{i,h},\\quad a_{h'}=m_{i',h'}.$$\nApply step 7 to the triple $(i',h',v)$: since $h'i'=j'$, it gives\n$$i'^*m_{h',v}\\,(m_{i',h'}v^*)^{-1}=m_{i',vh'}^{-1}m_{j',v}.$$\nFor $(i',w,h)$ it gives\n$$m_{i',w}h^*\\,i'^*m_{w,h}^{-1}=m_{wi',h}^{-1}m_{i',hw}.$$\nInsert these into $t_0\\,i'^*\\theta\\,a_{h'}^{-1}$ and cancel $m_{i',hw}m_{i',vh'}^{-1}$, since $hw=vh'$. The result is\n$$m_{v_U,i}^{-1}h^*\\,m_{iv_U,h}^{-1}m_{j',v}.$$\nFinally step 7 for $(v_U,i,h)$ and $hi=j$ rewrites this as\n$$v_U^*(m_{i,h}^{-1})\\,m_{v_U,j}^{-1}m_{j',v}=v_U^*(a_h^{-1})\\,s.$$\nThis is the claimed square equality, with all components evaluated at $A$. Each operation used natural transformations, so it is natural in $A$.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 and sites-cohomology.tex Tag 07A7 (remark-base-change); explicit reassociation around the two paths U′→Z"
+   }
+  },
+  {
+   "text": "All transformations in the square equation involve composites of pullbacks. They are additive exact functors by [det-prop-sfb-module-pullback-exact-main], so their termwise functors preserve quasi-isomorphisms and induce the ordinary unbounded derived pullbacks of [sk-def-sfb-module-derived-pushpull], by the exact-functor clause of [sk-def-sfb-derived-categories]. Naturality makes their degreewise components commute with every differential. The equality in step 8 is therefore an equality of chain maps, and applying localization at quasi-isomorphisms preserves it. This proves precisely the stated derived square equality with the same termwise comparisons. No descent of the generally nonexact underived $h_*$ is used.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "sites-cohomology.tex Tag 07A7, remark-base-change; exact termwise pullback comparisons on the ordinary unbounded derived categories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-finite-lower-star",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-eta-comp",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-upper-star-comp",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-finite-lower-star-comp",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
+  "det-prop-sfb-module-pullback-exact-main",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0 (lemma-localize-morphism-ringed-sites), 03D8 (lemma-push-pull-composition-modules); explicit adjunction-unit and reassociation calculations, with sites-cohomology.tex Tag 07A7 (remark-base-change) for the square convention."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,10 +241,52 @@
    "results": "Scope Algebra/Category/ModuleCat/Sheaf. 5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
    "date": "2026-10-21",
    "verdict": "no match: generic sectionwise pullback and associativity results do not identify the specified internal module adjunction and its open-square normalization in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction|pullback_assoc|conjugateEquiv_pullbackComp",
+   "results": "Scope Algebra/Category/ModuleCat/Sheaf. 2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp, SheafOfModules.pushforward",
+   "results": "Scope Mathlib. 5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open locus where a morphism is the identity identifies the module pullback adjunction unit with the identity and respects pullback composition",
+   "results": "Scope Mathlib. 8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pullback_comp_id, PresheafOfModules.pullback_id_comp, SheafOfModules.pullback_id_comp, PresheafOfModules.pullback_comp_id, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapPullback|localization_unit_app|leftAdjointCompIso_assoc",
+   "results": "Scope CategoryTheory. 13 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module sheaf pullback localization comparison restricted unit adjunction identity open square",
+   "results": "Scope Mathlib. 8 hits: CategoryTheory.Adjunction.localization_unit_app, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, TopCat.Presheaf.pullback_obj_obj_ext_iff, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback composition isomorphisms defined by conjugation of direct image satisfy associativity for sheaves of modules",
+   "results": "Scope Mathlib. 8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, PresheafOfModules.pullback_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic module pullback compositions and category localization units do not give the identity-open module restriction with both specified adjunct equations and its square normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-base-change-identity-open-restriction",
@@ -124,5 +305,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-identity-open-underived-square-normalization",
+  "worker": "stage1",
+  "summary": "Split using existing site-localization, normalized local-unit and conjugation nodes; checked restricted coefficient actions, identified the specified composition map via its unit equation, and wrote the pullback-square reassociation explicitly. No new nodes or statement changes.",
+  "blueprint": "Realizes the parenthesis in det-sf-comp-composition-base-change proof (3) about restriction to the open identity locus; this item supplies the underived normalization used by lem-sfb-base-change-identity-open-restriction, not the derived mate calculation of that parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic pro-etale localization, identifying open sites with slices; no node of the composition unit supplies this site equivalence."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic internal-to-sectionwise module equivalence preserving sections and actions, needed to apply ringed-site localization."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic ringed-site localization and its sectionwise direct-image comparison; this is a local tool for the identity-open normalization, not a replacement for compactification base change."
+   },
+   {
+    "node": "lem-pur-ringed-site-pullback-localization-universes",
+    "why": "Generic module localization comparison with restricted adjunction unit in the coefficient universe; the composition unit does not state this normalized local Hom correspondence."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Generic composition formula for the pulled-back coefficient structural maps, fixing the localized ring action."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic canonical identification of inverse-image coefficient rings needed to identify the localized structural map with the identity."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of the specified module pullbacks needed only to descend their termwise square equation."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Definition of the ordinary unbounded derived module pullback used in the last clause."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Generic exact-functor localization clause; no localizing-closure or constructibility theorem replaces this ordinary derived descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-sfb-eta-comp",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-prop-sfb-module-pullback-exact-main",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-963317f61",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-963317f61 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of the Q12-created unsplit node. Live and side-live still have it unsplit; it is not in route-pivot-dropped.txt and has no repair note of its own. The statement and stmt_deps are unchanged from base. 0 new nodes; no cycle (closure of 3423 nodes); proof_deps equals the union of uses; no SGA. Sources read: Stacks 04J0 (sites-modules line 2369, localized ring map and f'_*j_U^*=j_V^*f_*), 03D8 and 07A7, plus blueprint det-sf-comp-composition-base-change proof (3) parenthesis. Steps 1-3: the localization-lemma hypotheses (continuous, finite-limit-preserving base change; slice equals identity via h^{-1}(U)=U) hold. eta-comp and cartesian-coefficients make the localized ring map the identity, so c_h is the identity with the restricted action. lem-pur gives d=c∘j^*η invertible, with identity-site unit m↦1⊗m. Step 4: the conjugate-unit equation j_*(b)η_j=C∘h_*η_i∘η_h, evaluated at T→U, gives b=d, so a_h^{-1}=c∘j^*η; the conjugation directions are correct. Step 5 is naturality. Step 6: D'×_{Z'}U'=U'. Step 7: pullback associativity, obtained by conjugating the fibre-product associativity of direct images; lem-sc-left-adjoint-composition-iso-associativity is not directly citable because it needs strict R-equalities. Step 8: I recomputed the reassociation independently through triples (i',h',v), (i',w,h) and (v_U,i,h), with hw=vh' and wi'=iv_U, and it is correct. Step 9: exact pullbacks plus termwise chain-map equality, then localization. Edge cases checked: U empty, h=id, U=Z, v=id, nonproper h. The tool_uses are generic site, module and adjunction tools, and I accept them. No duplicate found (module-direct-image-open-pasting and the sibling derived-adjunction-normalization are different claims). No fixes."
  }
 }
