@@ -19,59 +19,22 @@
  ],
  "proof": [
   {
-   "text": "Put $B=(\\mathbf Z_\\ell)_S$, $A=\\widehat{\\mathbf Z}_{\\ell,S}$ and $C_H=(\\mathcal O_H)_S$. Clauses 2-3 of [lem-pur-twist-sheaf-locally-free] give $T$ locally free of rank one and $R_H=A\\otimes_B C_H$. Apply [lem-pur-common-line-positive-scalar-powers] to these data and $C_E\\to C_F$. The definition [def-coefficient-twists-detailed] identifies its $L_H=T\\otimes_B C_H$ with $\\mathcal O_H(1)$, hence its $P_H(n)$ with $\\mathcal O_H(n)$ for $n\\geq0$. The ring map is the completed coefficient inclusion: its composites with every finite quotient factor through $A_{E,k}\\to A_{F,n}$ whenever $\\varpi_E^k\\mathcal O_F\\subseteq\\varpi_F^n\\mathcal O_F$, as in [def-weil-completed-integral-coefficients]. This gives the required canonical comparisons for $m\\geq0$ and the common local generators.",
+   "text": "Use the uniqueness specification of twistScalarMaps for its canonical normalization, the uniqueness specification of twistLineScalarIso for its pure-tensor formula, and twistScalarMaps_composition for towers. Apply the geometric signed inverse-image compatibility lemma for the final conjunction.",
    "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-pur-common-line-positive-scalar-powers",
     "def-coefficient-twists-detailed",
-    "def-weil-completed-integral-coefficients"
+    "lem-weil-integral-twist-scheme-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "First scalar-extension/tensor-power sentence and final integral-coefficient sentence; old steps 1-3: common tensor presentation, first comparison, zero and positive powers. Stacks 03EL, sites-modules.tex, lemma-tensor-product-pullback, iterated after tensor reassociation."
-   }
-  },
-  {
-   "text": "For a tower $E\\subset F\\subset G$ use the first-line maps just constructed. Their composites agree on $(t\\otimes a)\\otimes b\\otimes c$: both give $t\\otimes\\iota_{EG}(a)\\iota_{FG}(b)c$. Thus they satisfy the exponent-one hypothesis of [lem-pur-signed-line-scalar-tensor-tower]. That lemma supplies the negative maps by its explicit dual pairing and proves they are isomorphisms, compatible with evaluation, all signed tensor products, identity extensions and towers. Its positive normalization is exactly step 1, and its negative domain is the sheaf dual prescribed by [def-coefficient-twists-detailed]. These are therefore the stated $\\mathcal O_E(m)\\otimes_{R_E}R_F\\cong\\mathcal O_F(m)$ for every integer $m$.",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Tensor-power/internal-Hom sentence and final common-finite-stage sentence; old steps 4-7: dual pairing and its local inverse, signed contractions, evaluation and coefficient towers. Stacks 0GMX, sites-modules.tex, remark-pullback-internal-hom, specialized to a locally free line and iterated with evaluation."
-   }
-  },
-  {
-   "text": "For $h:S'\\to S$, apply [lem-pur-integral-twist-line-inverse-image]. Its clauses 1-3 give the coefficient and first-line isomorphisms; clause 4 makes the coefficient square and the first-line scalar square commute: after linearization, both routes on $h^{-1}x\\otimes s$ give $\\rho_{h,F}(h^{-1}j_{EF}(x))s=j_{EF}(\\rho_{h,E}(h^{-1}x))s$. Use [lem-pur-signed-line-scalar-pullback-square] with $(R,S)=(R_{E,S},R_{F,S})$, $(R',S')=(R_{E,S'},R_{F,S'})$ and $a=\\alpha_{h,E}$, $b=\\alpha_{h,F}$. The base-change site functor preserves finite limits and coverings [def-weil-proetale-inverse-image]; rank one was checked in step 1. Since $a,b$ are isomorphisms, the module pullbacks in the lemma are inverse images with transported action. Its positive and evaluation normalizations identify its signed maps with those of steps 1-2. Its final equality is precisely the required scheme-naturality square for every $m$.",
-   "uses": [
-    "lem-pur-integral-twist-line-inverse-image",
-    "lem-pur-signed-line-scalar-pullback-square",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "First and final sentences; old step 8: the first-line naturality square propagated to all signed powers. Stacks 0GMX, sites-modules.tex, remark-pullback-internal-hom, its evaluation-defined map under a commutative square of ring maps."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-pur-common-line-positive-scalar-powers",
   "def-coefficient-twists-detailed",
-  "def-weil-completed-integral-coefficients",
-  "lem-pur-signed-line-scalar-tensor-tower",
-  "lem-pur-integral-twist-line-inverse-image",
-  "lem-pur-signed-line-scalar-pullback-square",
-  "def-weil-proetale-inverse-image"
+  "lem-weil-integral-twist-scheme-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-  "place": "Scalar, tensor-power/internal-Hom, integral and common-stage sentences; re-split of the reviewed explicit eight-step argument into three independent statement-only work units."
+  "place": "J4: canonical scalar specifications and tower theorem directly; geometric signed-family clause isolated."
  },
  "mathlib_searches": [
   {
@@ -220,10 +183,6 @@
   "module": "Sheaf.Paper.IntegralTwistBaseChange",
   "declaration": "WeilConjectures.integral_twist_base_change",
   "declarations": [
-   "WeilConjectures.integralTwistUnderlying",
-   "WeilConjectures.integralTwistScalarUnderlying",
-   "WeilConjectures.integralTwistInverseSection",
-   "WeilConjectures.IsIntegralTwistInverseComparison",
    "WeilConjectures.integral_twist_base_change"
   ],
   "file": "lean/Sheaf/Paper/IntegralTwistBaseChange.lean",
@@ -233,5 +192,15 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3fd9a",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261021T203629-L-3846235",
+  "kind": "interface",
+  "note": "independent cc review: redelivery byte-identical (Lean, nodes, change record) to e0c244931 whose FIX was lost at landing; integral_twist_base_change clauses 1-3 vs twistScalarMaps_existsUnique/twistLineScalarIso_existsUnique/twistScalarMaps_composition, clause 4 vs new verbatim lemma integral_twist_base_change_scheme; moved definitions identical to live; 3 direct importers compiled"
+ }
 }

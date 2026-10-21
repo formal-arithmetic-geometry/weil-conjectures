@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-integral-twist-inverse-comparison",
+ "kind": "definition",
+ "title": "Underlying signed twist maps and normalized inverse-image comparisons",
+ "statement": "The underlying additive sheaf of the canonical signed integral twist line, its coefficient-inclusion map, and the adjunct section map for a signed inverse-image family. A normalized inverse-image comparison preserves the coefficient unit, root tensors, coefficient action, positive tensor recursion and negative evaluation. These are the verbatim definitions formerly in IntegralTwistBaseChange. Uses [def-coefficient-twists-detailed], [lem-pur-integral-twist-line-inverse-image] and [def-weil-proetale-inverse-image].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final scheme-naturality sentence; definitions extracted verbatim from lem-weil-integral-twist-base-change."
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-pur-integral-twist-line-inverse-image",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of locally free line sheaves commutes with integer tensor powers and duals",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic signed-line square in the project is the closest dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic signed-line square in the project is the closest dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "signedLinePower|twistScalarMaps_composition",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic signed-line square in the project is the closest dependency."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image tensor powers dual locally free rank one sheaf scalar base change",
+   "results": "IsBaseChange.rank_eq; IsBaseChange.toDualBaseChange; IsBaseChange.dual; IsBaseChange.toDual_apply; Module.Dual.baseChange; IsBaseChange.toDual; Module.Dual.baseChange_apply_tmul; Module.Dual.baseChange_baseChange",
+   "date": "2026-10-21",
+   "verdict": "Algebraic module dual base change only; not the signed sheaf square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTwistBaseChange",
+  "date": "2026-10-21",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-integral-twist-base-change",
+   "place": "Verbatim comparison definitions extracted to break import cycle",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTwistBaseChangeDefinitions",
+  "file": "lean/Sheaf/Paper/IntegralTwistBaseChangeDefinitions.lean",
+  "declaration": "WeilConjectures.IsIntegralTwistInverseComparison",
+  "declarations": [
+   "WeilConjectures.integralTwistUnderlying",
+   "WeilConjectures.integralTwistScalarUnderlying",
+   "WeilConjectures.integralTwistInverseSection",
+   "WeilConjectures.IsIntegralTwistInverseComparison"
+  ],
+  "statement": "def IsIntegralTwistInverseComparison {X Y : Scheme.{u}} (h : X ⟶ Y) (α : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (completedIntegralCommRingSheafUnrestricted l E Y) ⟶ completedIntegralCommRingSheafUnrestricted l E X) (τ : (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj (purTwistZlOne Y l) ⟶ purTwistZlOne X l) (ρ : ∀ m : ℤ, (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj (integralTwistUnderlying l E Y m) ≅ integralTwistUnderlying l E X m) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3fd9a",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261021T203629-L-3846235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3fd9a",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261021T203629-L-3846235",
+  "kind": "interface",
+  "note": "independent cc review: redelivery byte-identical (Lean, nodes, change record) to e0c244931 whose FIX was lost at landing; integral_twist_base_change clauses 1-3 vs twistScalarMaps_existsUnique/twistLineScalarIso_existsUnique/twistScalarMaps_composition, clause 4 vs new verbatim lemma integral_twist_base_change_scheme; moved definitions identical to live; 3 direct importers compiled"
+ }
+}
