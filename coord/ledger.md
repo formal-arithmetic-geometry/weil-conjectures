@@ -21079,3 +21079,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:16 L: merged deliver/N8/lem-pur-site-algebraic-composition-unit (reviewer PASS; first push; new nodes: 0)
 - 08:16 L: merged deliver/NV/lem-coef-enriched-sequence-projection-formula (reviewer FIX; after a return; new nodes: 0)
 - 08:16 L: merged deliver/Q125/det-lem-stratified-lattice-rank (reviewer PASS; after a return; new nodes: 2)
+- 2026-10-21T08:16:21Z L: superseded stage-1 delivery NB/lem-coef-closed-identity-open-hom-normalization at 75cedc2fa93434f34d3c5ddfdce51f8368f299b9; current completion retained; packet archived at refs/superseded/NB/lem-coef-closed-identity-open-hom-normalization/75cedc2fa93434f34d3c5ddfdce51f8368f299b9; stale return retired.
