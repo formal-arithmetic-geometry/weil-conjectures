@@ -10,13 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.FlatCompositeFibreDimensionAtPoint
 import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
 # Etaleness descends through a surjective etale source cover
@@ -61,6 +56,20 @@ Proof:
    empty too. All inputs concern arbitrary schemes. -/
 theorem Etale.of_comp_of_surjective_etale {T X Y : Scheme.{u}}
     (h : X ⟶ T) (p : Y ⟶ X) [Surjective p] [Etale p] [Etale (p ≫ h)] : Etale h := by
-  sorry
+  have : Smooth h := Smooth.of_comp_of_flat_of_surjective p h
+  have hdim (x : X) : topologicalKrullDimAt (h.asFiber x) = 0 := by
+    obtain ⟨y, rfl⟩ := p.surjective x
+    have hp := (smooth_and_fibre_dimension_zero_of_etale p).2.1 y
+    have hcomp := (smooth_and_fibre_dimension_zero_of_etale (p ≫ h)).2.1 y
+    have hd := flat_composite_fibre_dimension_at_point p h y (Flat.stalkMap p y)
+    rw [hcomp, hp, zero_add] at hd
+    exact hd.symm
+  have hlocal (x : X) : ∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ h) := by
+    obtain ⟨U, -, hx, hU⟩ := exists_etale_open_of_smooth_of_fibre_dimension_zero
+      h x ⊤ (by trivial) (by infer_instance) (hdim x)
+    exact ⟨U, hx, hU⟩
+  choose U hx hU using hlocal
+  exact IsZariskiLocalAtSource.of_iSup_eq_top U
+    (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hx x⟩) hU
 
 end AlgebraicGeometry

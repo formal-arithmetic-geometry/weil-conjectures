@@ -28,10 +28,8 @@
    }
   },
   {
-   "text": "Both $p$ and $h$ are locally of finite type. Here is the elementary implication from the local finite presentation already obtained. For either morphism $f$ and any affine target open $V$, the affine-basis assertion [lem-weil-pbc-affine-opens-basis] covers $f^{-1}(V)$ by affine opens $U$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], each corresponding algebra has the form $R[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$, where $R=\\mathcal O(V)$. The images of the finitely many $t_i$ generate this algebra over $R$. This is exactly the affine-cover condition for local finite type in [def-weil-finite-type-morphism]. No finiteness of the open cover is needed.",
+   "text": "Both $p$ and $h$ are locally of finite type [def-weil-finite-type-morphism] by the Mathlib instance from local finite presentation (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation, Stacks 01TW). This is the elementary finite-presentation-to-finite-type implication for affine algebras: finitely many polynomial generators generate the quotient algebra. No separate affine-basis or affine-section finite-presentation assertion is needed.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
     "def-weil-finite-type-morphism"
    ],
    "elementary": true,
@@ -71,8 +69,6 @@
   "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
   "lem-sbc-smooth-flat-surjective-source-descent",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
   "def-weil-finite-type-morphism",
   "def-weil-surjective-morphism",
   "lem-sbc-flat-composite-fibre-dimension-at-point",
@@ -82,7 +78,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02K6 (lemma-etale-permanence-two), smoothness and additive fibre-dimension proof, as used through descent.tex Tag 02KM in Tag 036W. The otherwise missing local finite presentation is obtained together with smoothness from the smooth case of descent.tex Tag 05B5; Tag 01TW is expanded elementarily."
+  "place": "Tag 02K6 (lemma-etale-permanence-two), smoothness and additive fibre-dimension proof, used in descent.tex Tag 036W. Smoothness, without quasi-compactness, follows from descent.tex Tag 05B5 via Smooth.of_comp_of_flat_of_surjective. The implication from local finite presentation to local finite type is the existing Mathlib instance (Tag 01TW). The Lean proof is assembled by Q3 on 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -267,5 +263,15 @@
   "group": "Q134",
   "result": "pass",
   "note": "Etale.of_comp_of_surjective_etale {T X Y : Scheme.{u}} (h : X ⟶ T) (p : Y ⟶ X) [Surjective p] [Etale p] [Etale (p ≫ h)] : Etale h matches the node clause by clause, with no QC, finite-type, separation or Noetherian hypotheses; the single universe is the standard Mathlib one; lean.statement is verbatim. Source: Stacks 036W (descent.tex:6950) for the singleton cover; 02K6 cross-checked. Edge cases (empty X/Y/T, p = id, non-QC p) covered. No duplicate: Mathlib Etale.of_comp cancels the other arrow; DescendsAlong @Etale is target base change and needs QC; rg over side and slopmaster2 found no match. The dependency module FlatCompositeFibreDimensionAtPoint only becomes a module (header, imports, public section); its statement and docstrings are unchanged and it has no importers; its node changes only in lean, with a note. Sorry-only, docstrings with source, blueprint tag and all 4 proof steps, lines <= 100. nt_compile --json: both files clean (exit 0); a probe confirmed both signatures and that the tool reports errors. The Second reading section holds the standard direct-delivery text. Minor: lean.fixed_by dropped from the dependency node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T151145-L-1156339",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

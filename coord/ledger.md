@@ -22893,3 +22893,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: merged deliver/M8/Sheaf.TraceFormula.NagataInvertPrime (stage 3; reviewer PASS; first push; landing 20261021T151135-L-1142650 (proof); batch 20261021T151059; modules 1; new nodes 0)
 - 15:11 L: merged deliver/M9/Sheaf.AlgebraicGeometry.AffineNonZeroDivisorComplementDense (stage 3; reviewer PASS; first push; landing 20261021T151138-L-1147313 (proof); batch 20261021T151059; modules 1; new nodes 0)
 - 15:11 L: merged deliver/P9/Sheaf.Paper.ProEtaleCoefficientModulePullbackComposition (stage 3; reviewer PASS; first push; landing 20261021T151141-L-1151320 (proof); batch 20261021T151059; modules 1; new nodes 0)
+- 15:11 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover (stage 3; reviewer PASS; first push; landing 20261021T151145-L-1156339 (proof); batch 20261021T151059; modules 1; new nodes 0)
