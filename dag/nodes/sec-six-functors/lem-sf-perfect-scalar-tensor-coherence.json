@@ -14,9 +14,200 @@
   "def-weil-module-base-change",
   "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with bounded finite-projective complexes. A finite generating list for a projective module $M$ gives a surjection $R^n\\to M$; projective lifting supplies a section, so $M$ is a retract of $R^n$. Tensor the two splitting maps with $S$: their composite remains the identity, and $R^n\\otimes_RS\\cong S^n$ by the coordinate maps. Thus $M\\otimes_RS$ is finite projective. Likewise tensoring splittings for $M$ and $N$ exhibits $M\\otimes_RN$ as a retract of $R^{nm}$; a finite sum of these splittings is a splitting into a finite free module. Consequently scalar extension and signed total tensor preserve bounded finite-projective complexes; if the input bounds are $[a,b]$ and $[c,d]$, the tensor bounds are $[a+c,b+d]$. The same argument includes zero modules, empty generating lists and zero rings.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-finitely-generated-module",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CF (lemma-characterize-projective), 05G3 (definition-base-change), 00CV (section-tensor-product); elementary splitting argument"
+   }
+  },
+  {
+   "text": "Every term of such a complex is flat by [lem-weil-pbc-projective-module-flat]. Boundedness above therefore makes it K-flat by [lem-pc-module-bounded-flat-kflat]. Apply [lem-pc-derived-tensor-second-factor-functor] with $N=S[0]$: the canonical K-flat computation identifies $B_{S/R}(Q_RP)$ with $Q_S(P\\otimes_RS)$, including the maps induced by chain maps of $P$. With $A=R$ and $N=Q$, it also computes $Q_RP\\otimes_R^LQ_RQ$ by $Q_R\\operatorname{Tot}(P\\otimes_RQ)$. Step 1 applies over both $R$ and $S$, so every tensor and every iterated scalar extension occurring below has such a K-flat finite-projective model. In particular $B_{S/R}$ takes perfect objects to perfect objects, by the definition of perfect and functoriality on isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism), 06Y6 (lemma-derived-base-change); restriction to the models of step 1"
+   }
+  },
+  {
+   "text": "Let $\\mathcal H_R$ have bounded finite-projective complexes as objects and chain-homotopy classes as morphisms. Localization $E_R:\\mathcal H_R\\to\\operatorname{Perf}(R)$ is fully faithful: [lem-pc-ring-derived-map-representative] gives exactly the required bijection on each Hom set, since its source complex is bounded above and projective. It is essentially surjective by [def-pc-perfect-ring-complex]. In particular every derived map between these models is a chain map up to homotopy, and equality of their localized maps is equality of homotopy classes. If two models of the same perfect object are chosen, the specified derived identification between them and its inverse lift to homotopy classes; faithfulness shows their composites are identities. This also covers identifications that are not supplied by a specified quasi-isomorphism of models.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B (lemma-morphisms-from-projective-complex), applied to the full category of bounded finite-projective complexes"
+   }
+  },
+  {
+   "text": "Termwise scalar extension sends a chain map $f$ to $f\\otimes1$ and a degree $-1$ homotopy $h$ to $h\\otimes1$. Indeed $(f-g)\\otimes1=(dh+hd)\\otimes1=d(h\\otimes1)+(h\\otimes1)d$. Hence it gives a functor on $\\mathcal H_R$, and $((f+g)\\otimes1)=(f\\otimes1)+(g\\otimes1)$, $((rf)\\otimes1)=r(f\\otimes1)$ by [def-weil-module-base-change], where $R$ acts on the target via $R\\to S$. Under step 2 this is the restriction of $B_{S/R}$. The Hom bijection of step 3 preserves addition and scalars (the scalar $r$ is composition with the localized map $r\\,\\mathrm{id}$), so this restriction is additive and $R$-linear on every derived Hom set.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change); elementary termwise homotopy and linearity calculation"
+   }
+  },
+  {
+   "text": "Signed total tensor also respects homotopy classes. For a homotopy $h$ in the first variable use $H(x\\otimes y)=h(x)\\otimes y$. In $dH+Hd$ the terms involving $dy$ have coefficients $(-1)^{\\deg x-1}+(-1)^{\\deg x}=0$, leaving $(dh+hd)(x)\\otimes y$. For a homotopy $k$ in the second variable use $H(x\\otimes y)=(-1)^{\\deg x}x\\otimes k(y)$: the terms with $dx$ cancel, leaving $x\\otimes(dk+kd)(y)$. These identities and functoriality of the tensor construction give a bifunctor on $\\mathcal H_R$. By step 2 and clause (3) of [lem-pc-derived-tensor-second-factor-functor], it represents the derived tensor in both variables on perfect objects.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWN (section-symmetric-monoidal), lemma-derived-tor-homotopy; explicit homotopies in both variables"
+   }
+  },
+  {
+   "text": "For homogeneous $x\\in P^p$, $y\\in Q^q$, define $b((x\\otimes y)\\otimes s)=(x\\otimes s)\\otimes(y\\otimes1)$ and $v((x\\otimes a)\\otimes(y\\otimes b))=(x\\otimes y)\\otimes ab$. These formulas extend by the balanced tensor universal property [def-weil-pbc-module-tensor-product]. Moving $r\\in R$ across $x\\otimes y$ moves its image in $S$ across the target $S$-tensor, and balancing the outer $R$-tensor moves that same image into $s$. For $v$, moving $t\\in S$ across the middle tensor replaces $(at)b$ by $a(tb)$, and the inner $R$-balancing gives the image of $r$ in the product $ab$. Thus both maps are well-defined and $S$-linear. We have $vb=1$. Also $bv$ sends $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes ab)\\otimes(y\\otimes1)$, which equals the original tensor by $S$-balancing. Apply these maps on every $(p,q)$ summand of the finite total complexes.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product), balanced universal property; agent calculation of b and its inverse"
+   }
+  },
+  {
+   "text": "The map $b$ commutes with differentials: both $d\\,b$ and $b\\,d$ on $(x\\otimes y)\\otimes s$ equal $(dx\\otimes s)\\otimes(y\\otimes1)+(-1)^p(x\\otimes s)\\otimes(dy\\otimes1)$. The coefficients have degree zero. Thus $b$ is a chain isomorphism, with inverse $v$. The coefficient-unit chain isomorphism is $u:R[0]\\otimes_RS\\to S[0]$, $r\\otimes s\\mapsto f(r)s$, where $f:R\\to S$ is the given map; its inverse is $s\\mapsto1\\otimes s$, since $r\\otimes s=1\\otimes f(r)s$. Localization and the computation isomorphisms from step 2 give precisely the two isomorphisms asserted in the item.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0GWN (section-symmetric-monoidal) and 06Y6 (lemma-derived-base-change); elementary differential calculation"
+   }
+  },
+  {
+   "text": "For chain maps $h:P\\to P'$ and $k:Q\\to Q'$, the naturality square of $b$ sends $(x\\otimes y)\\otimes s$ along either path to $(h(x)\\otimes s)\\otimes(k(y)\\otimes1)$. The unit map is a single coefficient morphism, and its compatibility with the scalar action is $f(rr')s=f(r)f(r')s$. Since pure tensors generate each summand, these are equalities of chain maps. Step 5 ensures these squares also hold on homotopy classes. We will pass from those classes to arbitrary derived morphisms in the final step.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product); elementary naturality of the displayed balanced maps"
+   }
+  },
+  {
+   "text": "Check monoidal constraints on homogeneous generators. For the associator, the two paths from $((x\\otimes y)\\otimes z)\\otimes s$, after the target associator, both give $(x\\otimes s)\\otimes((y\\otimes1)\\otimes(z\\otimes1))$. For symmetry, both paths on $(x\\otimes y)\\otimes s$ give $(-1)^{pq}(y\\otimes1)\\otimes(x\\otimes s)$: the other apparent value $(-1)^{pq}(y\\otimes s)\\otimes(x\\otimes1)$ is equal by $S$-balancing. For the left unitor, both paths on $(r\\otimes x)\\otimes s$ give $x\\otimes f(r)s$; for the right unitor, both paths on $(x\\otimes r)\\otimes s$ give the same expression. Here the coefficient-unit comparison is $u$ from step 7. Tensor generation proves each diagram commutes, including negative degrees, where only the parity of $pq$ is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWN (section-symmetric-monoidal), associator, signed commutativity and unit constraints; explicit diagrams"
+   }
+  },
+  {
+   "text": "For $R\\xrightarrow f S\\xrightarrow g T$ define $c_P:(P\\otimes_RS)\\otimes_ST\\to P\\otimes_RT$ by $(x\\otimes s)\\otimes t\\mapsto x\\otimes g(s)t$. Its inverse is $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$. The relations hold because $g(f(r))t=(gf)(r)t$ and $g(ss')t=g(s)g(s')t$; the two composites are identities by balancing. Both maps commute with $d_P$ and with any chain map of $P$. For the identity ring map put $i_P:P\\otimes_RR\\to P$, $x\\otimes r\\mapsto rx$, with inverse $x\\mapsto x\\otimes1$; these are also natural chain maps and inverse by balancing. Step 2 computes the composite derived functor on this very iterated model, so these are comparison isomorphisms of the asserted derived functors once descended.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), functorial iterated base change, with explicit balanced multiplication maps"
+   }
+  },
+  {
+   "text": "The two ring-unit equations can be checked before localization. On $(x\\otimes r)\\otimes s$ for $R\\xrightarrow{1}R\\xrightarrow f S$, multiplication via $c$ and first using $i$ both give $x\\otimes f(r)s=rx\\otimes s$. On $(x\\otimes s)\\otimes s'$ for $R\\xrightarrow f S\\xrightarrow{1}S$, both give $x\\otimes ss'$. For a fourth ring $T\\xrightarrow h U$, the two composites from $((x\\otimes s)\\otimes t)\\otimes u$ to $P\\otimes_RU$ give respectively $x\\otimes h(g(s)t)u$ and $x\\otimes h(g(s))h(t)u$; these agree since $h$ preserves products. Thus the four-ring equation and both unit equations hold without excluding identity maps.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change); agent check of the four-ring and identity equations"
+   }
+  },
+  {
+   "text": "The tensor square for $c$ starts at $((P\\otimes_RQ)\\otimes_RS)\\otimes_ST$. Apply $c_{P\\otimes Q}$ then $b_{T/R}$ to $((x\\otimes y)\\otimes s)\\otimes t$: the result is $(x\\otimes g(s)t)\\otimes(y\\otimes1)$. The other path first applies $B_{T/S}(b_{S/R})$, then $b_{T/S}$, then $c_P\\otimes c_Q$, giving $((x\\otimes s)\\otimes t)\\otimes((y\\otimes1)\\otimes1)$ before the final map, hence the same result. The coefficient-unit square on $(r\\otimes s)\\otimes t$ gives $(gf)(r)g(s)t$ along both paths. For the identity comparison $i$, its tensor square on $(x\\otimes y)\\otimes r$ has values $(rx)\\otimes y$ and $x\\otimes(ry)$, equal by balancing; its coefficient-unit square is multiplication $r\\otimes r'\\mapsto rr'$. Thus all the required tensor and coefficient-unit squares commute on complexes.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 (lemma-derived-base-change) and 0GWN (section-symmetric-monoidal); agent check of tensor and coefficient-unit squares"
+   }
+  },
+  {
+   "text": "Finally use [lem-pc-ring-derived-map-representative] to pass to perfect objects, retaining the chosen K-flat computation comparisons of [lem-pc-derived-tensor-second-factor-functor]. Choose for each perfect object $K$ a model $P$ with an isomorphism $e:Q_RP\\to K$. Transport each comparison by its source and target functors applied to $e$ (and the corresponding $e$ for each other variable). For example the tensorator at $(K,L)$ is obtained by conjugating the tensorator at $(Q_RP,Q_RQ)$ by $B(e\\otimes^Le')$ and $B(e)\\otimes^LB(e')$. An arbitrary derived morphism, conjugated into these models, lifts to a chain-homotopy class by the cited bijection; the chain-map naturality squares of steps 8 and 10 therefore prove its naturality. A different choice of models is related by the unique homotopy classes lifting their derived identifications, as in step 3. Naturality for these classes makes the two transported comparisons equal; composing three such identifications gives the same result by the injectivity of the bijection. Thus the comparisons are independent of representatives. Every coherence equation from steps 9, 11 and 12 remains an equation after localization and conjugation. This proves all clauses for all derived morphisms and all ring maps.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B (lemma-morphisms-from-projective-complex), combined with more-algebra.tex Tag 06Y6 (lemma-derived-base-change); explicit transport via the Hom bijections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 0GWN, supplemented by derived.tex Tag 064B; explicit balanced coherence argument on finite-projective models",
+  "group": "Q123",
+  "date": "2026-10-21"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +250,52 @@
    "results": "{\"t\": \"2026-10-21T08:20:34Z\", \"tool\": \"grep\", \"query\": \"instMonoidalExtendScalars|extendScalars_δ|extendScalars_assoc|extendScalarsComp\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"78efc867d565b5bd\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat.extendScalars monoidality and composition are present; the natural perfect-derived restriction, representative normalization, signed symmetry and coherent derived tower are not an exact or one-line specialization of those declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension on perfect complexes is symmetric monoidal with balanced tensor maps and coherent ring tower comparisons",
+   "results": "{\"t\": \"2026-10-21T09:04:42Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension on perfect complexes is symmetric monoidal with balanced tensor maps and coherent ring tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"LightCondensed.instSymmetricCategoryLightCondMod\", \"HomologicalComplex.monoidalCategory\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"HomologicalComplex.monoidalCategoryStruct\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"DerivedCategory.instLinear\"], \"digest\": \"09766ce6960432c5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|instMonoidalExtendScalars|extendScalars_assoc",
+   "results": "{\"t\": \"2026-10-21T09:04:59Z\", \"tool\": \"grep\", \"query\": \"extendScalarsComp|instMonoidalExtendScalars|extendScalars_assoc\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"439f30073e683767\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars on bounded projective complexes commutes with total tensor and descends naturally to perfect derived categories",
+   "results": "{\"t\": \"2026-10-21T09:04:59Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars on bounded projective complexes commutes with total tensor and descends naturally to perfect derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalars\", \"ModuleCat.ExtendScalars.map'\", \"ModuleCat.ExtendScalars.obj'\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"AlgHom.extendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.extendScalars_id_comp\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\"], \"digest\": \"322b18a58a755f70\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-21T09:04:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"extendScalars\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.instMonoidalExtendScalars\"], \"digest\": \"657b84c2f6ff25be\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Mm]onoidal|[Mm]onoidal.*mapHomologicalComplex|extendScalars",
+   "results": "{\"t\": \"2026-10-21T09:05:22Z\", \"tool\": \"grep\", \"query\": \"mapHomologicalComplex.*[Mm]onoidal|[Mm]onoidal.*mapHomologicalComplex|extendScalars\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal extension of scalars on bounded cochain complexes of finite projective modules induces a functor on perfect derived categories natural on all morphisms",
+   "results": "{\"t\": \"2026-10-21T09:05:24Z\", \"tool\": \"leanfinder\", \"query\": \"Strong symmetric monoidal extension of scalars on bounded cochain complexes of finite projective modules induces a functor on perfect derived categories natural on all morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instLinearCochainComplexIntQ\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"DerivedCategory.instLinearSingleFunctor\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"DerivedCategory.instLinear\"], \"digest\": \"f5663e018262bfe6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ModuleCat monoidal scalar extension and tower comparisons, and derived-category linearity hits; none states the combined perfect-derived restriction and signed tensor/tower coherence, nor is it a one-line specialization. The second phrasing and homology grep also gave no such declaration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-tensor-comparison-localization-descent",
@@ -82,5 +315,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-perfect-scalar-tensor-coherence",
+  "worker": "stage1",
+  "group": "Q123",
+  "summary": "No statement change and no new nodes. Constructed the scalar and tensor comparisons on bounded finite-projective complexes, checked balance, differentials, naturality, signed monoidal constraints, tower units, four-ring associativity and tensor/unit squares explicitly; used the existing derived Hom bijection to establish naturality for all derived morphisms and representative independence. Retained imported searches and appended the searches actually run by Q123.",
+  "blueprint": "Realizes thm-sf-kunneth-relative, final compact-support specialization over Spec k: coefficient-module translation, specifically the balanced scalar tensorators and tower coherence in the rational and common finite-field descent through lem-sf-point-fibre-derived-tensor and lem-sf-tensor-comparison-localization-descent. No change to unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic K-flatness of bounded-above flat ordinary-module complexes, needed to compute the derived tensor on finite-projective models; the relative Kunneth unit has no such ring-complex result."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic K-flat computation and functoriality of ordinary derived tensor, used to identify the explicit models with the supplied derived functors; no lemma of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-a832e974e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-a832e974e (reviewer sub-agent of L); spot-checked: I read the whole item, all 13 steps, and every cited statement; there are no new nodes. The statement and stmt_deps are byte-identical to the landed Q51 FIX version (runs/1/Q51…/fixes), so this delivery adds only the proof, which was empty on the base. There is no repair note, no SGA citation and no cycle: the 72-node closure contains neither the item nor its parent. Sources checked: Stacks more-algebra 06Y6 lemma-derived-base-change and 0GWN section-symmetric-monoidal (sign (-1)^{pq}, d-compatibility), 064K, derived.tex 064B, algebra 00CV/05G3/05CF. I recomputed every step. Step 5: the first-variable homotopy cancels the dy terms ((-1)^{p-1}+(-1)^p=0) and the second-variable one cancels the dx terms. Step 6: b and v are balanced, vb=1 and bv=1 hold, and no flatness is needed. Step 7: db=bd. Step 9: associator, symmetry (equal by S-balance, no extra sign since s has degree 0) and both unitors (rx⊗s=x⊗f(r)s) hold. Steps 10–12: the tower inverse, both unit equations, the four-ring equation h(g(s)t)u=hg(s)h(t)u, and the tensor and unit squares (gf(r)g(s)t on both paths) hold. Steps 2–4 and 13 correctly use clause (2) of lem-pc-derived-tensor-second-factor-functor (K-flat computation over R and S, with finite-projective models from step 1) and the bounded-above projective Hom bijection (Mathlib leaf) for full faithfulness, naturality on all derived maps, and representative independence with the cocycle. Edge cases tested: zero ring, zero complexes, identity ring maps, non-flat Z→Z/2, odd degrees. Duplicate search: lem-weil-derived-field-scalar-extension-tower and def-weil-finite-dimensional-complex-scalar-extension are field-only and tower-only; the pur/sfb change-of-rings and point-sections coherence nodes do not state this ring-level coherence, so none is a duplicate. The parent's steps 1, 4, 5, 7, 8 and 11 use exactly the stated clauses. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-derived-tensor-second-factor-functor, both generic ring-complex tools from sk-thm-picard-semicon; the other off-unit statements are Mathlib leaves. No changes."
  }
 }
