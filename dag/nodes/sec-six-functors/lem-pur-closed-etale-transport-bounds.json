@@ -17,9 +17,82 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient ring $A=A_{E,n}$ is finite and commutative. Apply [lem-weil-pbc-finite-ring-constructible-derived-origin] to $T$ and $A$. For clause 1 it supplies $B_e\\in D_c^b(T_{\\mathrm{et}},A)$ and $\\alpha:\\nu_T^*B_e\\xrightarrow{\\sim}B$; its reflection of each cohomological interval puts $B_e$ in $[r,s]$. The same equivalence supplies a bounded constructible witness for the input of clause 2. No Tor hypothesis is used to obtain either witness.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, and Tag 09AK, lemma-compare-constructible; exact comparison preserves and reflects intervals."
+   }
+  },
+  {
+   "text": "For any bounded constructible witness $(B_e,\\alpha)$, $B_e$ is bounded below, so [thm-weil-pbc-site-comparison] gives the invertible unit $\\eta_{B_e}:B_e\\to R\\nu_{T,*}\\nu_T^*B_e$. Put $F=\\nu_Z^*i_e^!$. By the finite defining formula in [def-weil-exceptional-inverse-image], the composite\n$$F(B_e)\\xrightarrow{F(\\eta_{B_e})}F(R\\nu_{T,*}\\nu_T^*B_e)\\xrightarrow{F(R\\nu_{T,*}\\alpha)}Ri^!B$$\nis an isomorphism; its inverse is the claimed identification. Naturality of the unit and functoriality give naturality in morphisms of witnesses: for $\\beta:B_e\\to B'_e$ and $h:B\\to B'$ satisfying $h\\alpha=\\alpha'\\nu_T^*\\beta$, the displayed composites intertwine $F(\\beta)$ and $Ri^!(h)$.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, lemma-relative-comparison (2); apply the unit to the finite transported formula."
+   }
+  },
+  {
+   "text": "For clause 1, the two clauses of [def-exc-open-complement-bound] are precisely the vanishing and constructibility hypotheses of [lem-exc-closed-amplitude], with $a=r$, $b=s$ and the given $c\\geq0$. That lemma gives $C_e=i_e^!B_e\\in D_c^{[r,s+c+1]}(Z_{\\mathrm{et}},A)$. Apply [lem-weil-pbc-finite-ring-constructible-derived-origin] on $Z$: $\\nu_Z^*C_e$ is bounded constructible and lies in that same interval. The isomorphism of Step 2 gives the asserted membership for $Ri^!B$. This proves clause 1 without imposing finite Tor amplitude.",
+   "uses": [
+    "def-exc-open-complement-bound",
+    "lem-exc-closed-amplitude",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2: closed-support cohomological computation; expanded using the ordinary etale amplitude lemma and Tag 09AL."
+   }
+  },
+  {
+   "text": "For clause 2 choose any bounded constructible etale witness $B_e$ and invert its witness isomorphism to write $B\\cong\\nu_T^*B_e$. Apply [lem-sf-comparison-tor-amplitude](ii), with interval $[r,s]$. Its assumptions hold: $B$ is bounded constructible, its pro-etale Tor interval is given, $B_e$ is bounded below, and $\\ell$ is invertible on the $k$-scheme $T$ since $\\ell\\ne\\operatorname{char}k$. It follows that $B_e$ has etale Tor amplitude $[r,s]$, with the vanishing test for every degree-zero etale module sheaf $M_e$. The argument applies to every witness, not only the one chosen in Step 1.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.proof.md",
+    "place": "Clause (ii), reflection of the Tor interval."
+   }
+  },
+  {
+   "text": "Apply [prop-exc-closed-tor] to $B_e$, using Step 4 and the two ordinary etale hypotheses supplied by [def-exc-open-complement-bound]. Its coefficient ring is exactly $\\mathcal O_E/\\varpi_E^n$, $j$ is the given quasi-compact complementary open, and $c\\geq0$. Thus $C_e=i_e^!B_e$ is bounded constructible with etale Tor amplitude $[r,s+c+1]$. Apply [lem-sf-comparison-tor-amplitude](i) on $Z$ to $C_e$ and this interval (it is nonempty since $r\\leq s$ and $c\\geq0$). It gives bounded constructibility and the same pro-etale Tor interval for $\\nu_Z^*C_e$. This predicate tests every degree-zero pro-etale module sheaf, with no etale-origin restriction. Tensor the Step 2 isomorphism with each such sheaf and take cohomology; the resulting cohomology isomorphisms give the identical vanishing for $Ri^!B$.",
+   "uses": [
+    "prop-exc-closed-tor",
+    "def-exc-open-complement-bound",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2: ordinary etale closed-support Tor bound, followed by clause (i) of the site-comparison Tor theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "def-exc-open-complement-bound",
+  "lem-exc-closed-amplitude",
+  "lem-sf-comparison-tor-amplitude",
+  "prop-exc-closed-tor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 2, closed-support computations; explicit bounded-constructible witnesses, comparison-unit formula, and separate cohomological/Tor transfer."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +142,59 @@
    "results": "No hits.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|torAmplitude|TorAmplitude",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale comparison preserves closed support exceptional inverse image amplitude bounds",
+   "results": "Read returned hits: Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.of_equiv, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale, Algebra.Etale.of_equiv, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Scheme.Etale, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, DerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport etale closed immersion exceptional inverse image constructible cohomology and Tor amplitude bounds to proetale finite coefficients",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(torAmplitude|constructible)|proetale.*(closed|amplitude)",
+   "results": "Read returned hits: Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful exact change of sites transfers closed support constructible cohomological intervals and finite Tor intervals for a closed immersion",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.Functor.exact_tfae, SheafOfModules.bijective_pushforwardSections, AlgebraicGeometry.Scheme.IdealSheafData.support_map, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.compatiblePreservingOfDownwardsClosed",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state closed exceptional inverse-image bounds or their etale/pro-etale transport"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-general-admissibility",
@@ -89,5 +211,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-closed-etale-transport-bounds",
+  "worker": "stage1",
+  "summary": "Split both independent assertions in five steps using existing DAG nodes only. Wrote the natural comparison explicitly as the inverse of the image of the comparison unit followed by the witness isomorphism; used finite-ring constructible origin with interval reflection, the two ordinary etale closed-support bounds, and both directions of comparison Tor amplitude. Statement and statement dependencies unchanged; zero new nodes. Repeated the required item searches through msearch and retained imported search history. Checked every cited statement and the arbitrary-pro-etale-sheaf Tor quantifier.",
+  "blueprint": "Realizes thm-pur-general-admissibility, main-20261015 proof Step 2, specifically the closed-support computations invoking lem-exc-closed-amplitude and prop-exc-closed-tor. Steps 1-2 expose the witness/comparison-unit prerequisites; Step 3 supplies cohomological transfer; Steps 4-5 supply Tor reflection and transfer. This auxiliary item is not a unit key statement; no unit realization changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "General finite-ring constructible site comparison with cohomological-interval preservation/reflection, used for input witnesses and output interval transfer; it does not replace the closed-support computation."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "General invertibility of the bounded-below comparison unit, used to write the actual transported value on a witness."
+   },
+   {
+    "node": "lem-exc-closed-amplitude",
+    "why": "The ordinary etale closed-support cohomological bound explicitly invoked in the ancestor Step 2; its exact hypotheses are supplied by the complement condition."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "The ordinary etale closed-support Tor bound explicitly invoked in ancestor Step 2, with the same DVR quotient coefficient ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-527dea85a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-527dea85a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item has 0 new nodes and five steps, and I read all seven cited statements in full. The live item is still unsplit, it is not in the dropped list, and it has no repair note. Only the proof-related fields changed (proof, proof_deps, proof_origin, status, split_report, mathlib_searches); the statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, and there is no cycle (closure of the cited nodes on side-live contains neither the item nor thm-pur-general-admissibility). Step 1: the finite-ring origin lemma (Stacks 09AL, a finite ring is Noetherian) gives a witness and reflects the [r,s] interval. Step 2: the D^+ unit iso of thm-weil-pbc-site-comparison plus the finite formula of def-weil-exceptional-inverse-image give F(Rν_*α)∘F(η); I checked naturality in the witness. Step 3: the two clauses of def-exc-open-complement-bound are exactly the hypotheses of lem-exc-closed-amplitude, giving the interval [r,s+c+1], and the origin lemma on Z transfers it. Step 4: lem-sf-comparison-tor-amplitude (ii) applies (B_e bounded, ℓ≠char k), so every witness has étale Tor amplitude [r,s]. Step 5: prop-exc-closed-tor applies (A=O_E/ϖ^n, quasi-compact j, c≥0), then (i) on Z, then tensoring the Step 2 iso. The étale Tor notions of def-kun-tor-amplitude and lem-sf-flat-model agree, as do the constructibility definitions. The proof matches ancestor main-20261015 thm-pur-general-admissibility Step 2 (l.27-45), and its interval matches the citer's step 2. Small cases: A^1 ⊃ 0 with c=1 gives A(-1)[-2] in [0,2]; i=id; Z empty; r=s. I found no duplicate (searched side-live). No SGA citation. Accepted tool_uses: the origin lemma and site comparison (sk-thm-properbasechange), lem-exc-closed-amplitude and prop-exc-closed-tor (sk-prop-a1-kummer). They are needed because the statement is about the transported ordinary-étale functor. No changes were made."
  }
 }
