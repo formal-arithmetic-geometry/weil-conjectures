@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-mg-degree-component-functoriality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Degree components under subquotients and tensor constructions",
@@ -14,50 +14,181 @@
  },
  "stmt_deps": [
   "def-wf-monodromy-data",
-  "lem-wf-stabilizer-density"
+  "lem-wf-stabilizer-density",
+  "sk-d-linear",
+  "sk-d-geometry",
+  "def-wf-arithmetic-monodromy-extension",
+  "def-wf-degree-components"
  ],
  "proof": [
   {
-   "text": "Use the monodromy data of [def-wf-monodromy-data]. Every $U_i$\nand $U'_i$ is stable under $\\rho(\\Pi)$. Its stabilizer\nis closed by [lem-wf-stabilizer-density], so it is stable under\n$H_{\\mathrm{geom}}=\\overline{\\rho(\\Pi)}$ as well. Thus an element\n$h\\in H_{\\mathrm{geom}}$ induces an operator on every $Q_i$, hence on\nthe displayed tensor product or exterior power. Denote that operator by\n$R(h)$. In bases adapted to $U'_i\\subseteq U_i\\subseteq V$, its\nmatrix entries are polynomial expressions in the entries of $h$ and\n$\\det(h)^{-1}$; hence $R$ is a regular homomorphism.",
+   "text": "Write $k=\\overline{\\mathbf Q}_\\ell$, $H=\\overline{\\rho(\\Pi)}$, $F=\\rho(s)$, with one fixed degree-one $s$, using [def-wf-monodromy-data] and [def-wf-geometric-monodromy-group]. Interpret the finite constructions using [sk-d-linear]. Induct on the finite expression constructing a representation $M$ from $V$: the induction datum is a regular homomorphism $r_M:H\\to\\operatorname{GL}(M)$ satisfying $r_M(\\rho(\\gamma))=\\rho_M(\\gamma)$ for $\\gamma\\in\\Pi$. The base $M=V$ is the inclusion of $H$. The next two steps construct the induction datum for each permitted operation, including a subquotient of an already constructed $M$. Regularity means a map of coordinate algebras as in [sk-d-geometry], so polynomial formulas in entries and inverse determinants suffice.",
    "uses": [
     "def-wf-monodromy-data",
-    "lem-wf-stabilizer-density"
+    "def-wf-geometric-monodromy-group",
+    "sk-d-linear",
+    "sk-d-geometry"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 1 and final sentence: setup and induction on the construction"
+   }
   },
   {
-   "text": "Choose the same degree-one element $s$ for $\\rho$ and $\\rho_Q$.\nBecause all subspaces are Weil-stable, $\\rho(s)$ preserves them, and\n\n$$\nR\\bigl(\\rho(s)h\\rho(s)^{-1}\\bigr)\n=\\rho_Q(s)R(h)\\rho_Q(s)^{-1}.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Suppose $M$ has been constructed and $B\\subseteq A\\subseteq M$ are Weil-stable. The two stabilizers are closed by [lem-wf-stabilizer-density]. Their inverse images under $r_M$ are closed: substitute its regular matrix entries into the lower-left-block equations in bases adapted to $A$ and $B$. They contain $\\rho(\\Pi)$ by the induction equality, hence contain all of $H(k)$. Each such block entry is zero as a function on $H$ by [lem-wf-affine-nullstellensatz-vanishing](2), since $H$ is reduced affine of finite type over the algebraically closed $k$. Thus the flags are preserved even over every $k$-algebra. In a basis adapted to $B\\subseteq A\\subseteq M$, let $C(h)$ be the diagonal block of $r_M(h)$ on $A/B$. Block multiplication gives $C(hh')=C(h)C(h')$ and $C(h)C(h^{-1})=1$. Its entries are regular, and $\\det(C(h))^{-1}=\\det(C(h^{-1}))$ is regular because inversion on $H$ is regular by [sk-d-geometry]. Sending the generators of $k[x_{ij},\\det^{-1}]$ to these functions defines the required regular $r_{A/B}$. On $\\rho(\\gamma)$ its block is exactly the quotient action of $\\gamma$ by [sk-d-linear].",
+   "uses": [
+    "lem-wf-stabilizer-density",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "sk-d-geometry",
+    "sk-d-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 1: invariant flags and regularity on a subquotient; expanded to arbitrary construction depth"
+   }
   },
   {
-   "text": "Consequently the componentwise formula\n\n$$\n\\Phi_Q(h,m)=(R(h),m)\n$$\n\nrespects the semidirect-product multiplication of\n[lem-wf-arith-extension-group] and the degree components\nof [def-wf-degree-components]. To see that it lands in the target\ngeometric group, take any closed subset of $\\operatorname{GL}(Q)$\ncontaining $R(\\rho(\\Pi))=\\rho_Q(\\Pi)$. Its inverse image under $R$\nis closed and contains $\\rho(\\Pi)$, hence contains\n$H_{\\mathrm{geom}}$; therefore it contains $R(H_{\\mathrm{geom}})$.\nThis proves\n$R(H_{\\mathrm{geom}})\\subseteq H_{\\mathrm{geom}}(\\rho_Q)$, and the\nreverse inclusion after taking Zariski closures follows from\n$R(\\rho(\\Pi))=\\rho_Q(\\Pi)$. Thus the image is dense in degree zero,\nand translation by the degree-$m$ element gives density in every degree.",
+   "text": "For constructed $M_1,\\ldots,M_a$, define $r_{\\otimes M_i}(h)$ on pure tensors by $\\otimes_i v_i\\mapsto\\otimes_i r_{M_i}(h)v_i$. In tensor bases its $(\\mathbf p,\\mathbf q)$ entry is $\\prod_i(r_{M_i}(h))_{p_iq_i}$, a regular function. Multiplication and the inverse follow by applying these operators to pure tensors. For $\\bigwedge^b M$, define $v_1\\wedge\\cdots\\wedge v_b\\mapsto r_M(h)v_1\\wedge\\cdots\\wedge r_M(h)v_b$. Expanding each factor in a basis, terms with a repeated index vanish and collecting terms with the same increasing index set gives the signed permutation sum $\\det((r_M(h))_{I,J})$ for its $(I,J)$ entry. This is polynomial in the regular entries of $r_M$. On decomposable wedges, composition and inversion are the induced composition and inversion of $r_M$. In both constructions the inverse-determinant function is the determinant of the matrix obtained at $h^{-1}$, so is regular. These formulas define morphisms to the general linear group by [sk-d-geometry], and on $\\rho(\\gamma)$ give exactly the tensor and exterior actions of [sk-d-linear]. The empty tensor and the zeroth exterior power have matrix $(1)$; above the dimension the exterior space is zero and its general linear group is the trivial group.",
+   "uses": [
+    "sk-d-linear",
+    "sk-d-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 1: regularity of tensor and exterior actions; unit proof paragraph Rationality of the operations"
+   }
+  },
+  {
+   "text": "This completes the construction induction of step 1. Set $R=r_Q$ and $F_Q=\\rho_Q(s)$. At the base $V$ conjugation by $F$ is literal matrix conjugation. At a quotient stage, Weil stability ensures that both $\\rho_M(s)$ and its inverse preserve $A,B$, and taking the quotient block of $\\rho_M(s)r_M(h)\\rho_M(s)^{-1}$ gives $\\rho_{A/B}(s)r_{A/B}(h)\\rho_{A/B}(s)^{-1}$. On a tensor or exterior power the same identity follows by applying the three successive operators to a pure tensor or decomposable wedge. Induction therefore gives $R(FhF^{-1})=F_QR(h)F_Q^{-1}$, as an identity over every $k$-algebra. Conjugation by $F$ is an automorphism of $H$ in [def-wf-arithmetic-monodromy-extension]. Iterating the identity, also backwards using the inverse automorphisms, gives $R(F^mhF^{-m})=F_Q^mR(h)F_Q^{-m}$ for every integer $m$.",
+   "uses": [
+    "sk-d-linear",
+    "def-wf-arithmetic-monodromy-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 2: compatibility with the degree-one conjugation, including iterated constructions"
+   }
+  },
+  {
+   "text": "Let $H_Q=\\overline{\\rho_Q(\\Pi)}$ as in [def-wf-geometric-monodromy-group]. For each regular function $f$ vanishing on $H_Q(k)$, $f\\circ R$ vanishes on $\\rho(\\Pi)$, hence on $H(k)$ by its defining closure. Thus $R(H(k))\\subseteq H_Q(k)$. Apply [lem-wf-affine-nullstellensatz-vanishing](3) to factor $R$ as a regular map $H\\to H_Q$; its hypotheses hold because the two monodromy groups are reduced finite-type affine varieties over $k$. The homomorphism identity remains valid after factorization, since the inclusion into $\\operatorname{GL}(Q)$ is injective on points over every algebra. Conversely $R(H(k))$ contains $R(\\rho(\\Pi))=\\rho_Q(\\Pi)$, so its closure contains $H_Q(k)$. Together these inclusions prove that $R:H(k)\\to H_Q(k)$ has Zariski-dense image.",
+   "uses": [
+    "def-wf-geometric-monodromy-group",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 3: landing in the target geometric group and density in degree zero"
+   }
+  },
+  {
+   "text": "Define $\\Phi_Q(h,m)=(R(h),m)$. For $h,h'\\in H$ and $m,n\\in\\mathbf Z$, the multiplication of [lem-wf-arith-extension-group] and step 4 give\n$$\\Phi_Q((h,m)(h',n))=(R(h)F_Q^mR(h')F_Q^{-m},m+n)=\\Phi_Q(h,m)\\Phi_Q(h',n).$$\nThe identity goes to the identity because $R(1)=1$. These identities hold over every $k$-algebra by the constructions above; hence they define a homomorphism of the locally finite-type group schemes of [def-wf-arithmetic-monodromy-extension]. Its second coordinate is unchanged, so it preserves the degree.",
    "uses": [
     "lem-wf-arith-extension-group",
-    "def-wf-degree-components"
+    "def-wf-arithmetic-monodromy-extension"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 3: the componentwise formula and semidirect-product multiplication"
+   }
   },
   {
-   "text": "If $z$ is central in the source, $\\Phi_Q(z)$ commutes with the image\nof every source component. Commuting with a fixed matrix is a closed\ncondition on matrix entries, so density makes $\\Phi_Q(z)$ commute with\nevery target component. The commutator has degree zero, and on the\ndegree-zero component the matrix map $(h,0)\\mapsto h$ is injective;\ntherefore this matrix commutation is equality in the graded target group,\nso $\\Phi_Q(z)$ is central. For an iterated\nsubquotient, repeat the construction at each stage; the resulting\nmorphisms compose and retain all the properties just proved.",
-   "uses": [],
-   "elementary": null
+   "text": "Under the component identifications $G^{[m]}=H\\times\\{m\\}$ and $G_Q^{[m]}=H_Q\\times\\{m\\}$ of [def-wf-degree-components], the restriction of $\\Phi_Q$ is exactly $R:H\\to H_Q$. It is regular by step 5 and has dense image by the same step, for every integer $m$. No identification of distinct degrees through their matrix images is made. On matrices, [def-wf-arithmetic-monodromy-extension] gives $j_Q(a,n)=aF_Q^n$, which is a regular isomorphism of the degree-$n$ piece onto the translate $H_QF_Q^n$: its inverse on that translate is multiplication by $F_Q^{-n}$.",
+   "uses": [
+    "def-wf-degree-components",
+    "def-wf-arithmetic-monodromy-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 3: componentwise regularity and density in every degree"
+   }
+  },
+  {
+   "text": "Let $z$ be central in the source and write $c=\\Phi_Q(z)$ and $b=j_Q(c)$. Since $\\Phi_Q$ is a homomorphism, $c$ commutes with $\\Phi_Q(h,n)$ for every $h\\in H(k)$ and every integer $n$. For fixed $n$ the matrix commutation condition with $j_Q(a,n)=aF_Q^n$, $a\\in H_Q(k)$, is the finite list of regular equations\n$$\\sum_t b_{it}(aF_Q^n)_{tj}-\\sum_t(aF_Q^n)_{it}b_{tj}=0\\quad(i,j).$$\nThey vanish for $a\\in R(H(k))$, hence on its closure $H_Q(k)$ by step 5 and the zero-locus definition of closed sets in [sk-d-geometry]. Thus $j_Q(c)$ commutes with $j_Q(y)$ for every $y$ of degree $n$, and $n$ was arbitrary.",
+   "uses": [
+    "sk-d-geometry",
+    "def-wf-arithmetic-monodromy-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 4: the explicit closed matrix-commutation equations"
+   }
+  },
+  {
+   "text": "For such $y$, the products $cy$ and $yc$ have the same degree $d=\\deg(c)+\\deg(y)$ by [lem-wf-arith-extension-group]. Write them as $(u,d)$ and $(v,d)$. Their matrix images coincide by step 8, and the formula of [def-wf-arithmetic-monodromy-extension] reads $uF_Q^d=vF_Q^d$; right cancellation gives $u=v$. Hence $cy=yc$ in the degree-retaining extension, so $c$ is central. This uses injectivity only on a fixed degree, and also applies when $F_Q$ has finite order. All iterated subquotients and tensor/exterior expressions were handled by the induction in steps 1--4, so this proves the full assertion for every displayed $Q$.",
+   "uses": [
+    "lem-wf-arith-extension-group",
+    "def-wf-arithmetic-monodromy-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+    "place": "paragraph 4: centrality in the graded group and the iterated-construction clause"
+   }
   }
  ],
  "proof_deps": [
   "def-wf-monodromy-data",
+  "def-wf-geometric-monodromy-group",
+  "sk-d-linear",
+  "sk-d-geometry",
   "lem-wf-stabilizer-density",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "def-wf-arithmetic-monodromy-extension",
   "lem-wf-arith-extension-group",
   "def-wf-degree-components"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-mg-degree-component-functoriality.proof.md",
+  "place": "all four proof paragraphs, with coordinate and induction details filled in; unit sk-i-restriction, Rationality of the operations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic monodromy extension functoriality for subquotients tensor products exterior powers regular degree preserving dense image",
+   "results": "Profinite.NobelingProof.succ_exact; ModuleCat.exteriorPower.functor_map; Profinite.NobelingProof.succ_mono; Rep.Tor; HomologicalComplex.coinvariantsTensorObj; Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply; IsAdicComplete.StrictMono.factorPow_comp_extend; AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state arithmetic monodromy functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|[Rr]egular[Oo]n|degreeComponent",
+   "results": "Mathlib/Topology/Homotopy/Lifting.lean; Mathlib/Topology/Homotopy/Lifting.lean; Mathlib/Topology/Homotopy/Lifting.lean; Mathlib/Topology/Homotopy/Lifting.lean; Mathlib/Topology/Homotopy/Lifting.lean; Mathlib/Algebra/Torsor/Defs.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state arithmetic monodromy functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular homomorphism induced by a subquotient or tensor representation gives a degree preserving homomorphism of arithmetic monodromy extensions with dense image",
+   "results": "Representation.IndV; Rep.leftRegularHom; QuotientGroup.lift; Algebra.Generators.Hom.toExtensionHom; Representation.IndV.mk; Rep.leftRegularHom_hom; MonoidHom.submonoidMap; IsDenseInducing.extendRingHom",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state arithmetic monodromy functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "SemidirectProduct.map, MonoidHom",
+   "results": "SemidirectProduct.map; SemidirectProduct.map_comp_inl; SemidirectProduct.map_comp_inr; SemidirectProduct.rightHom_comp_map; SemidirectProduct.map_left; SemidirectProduct.map_right; SemidirectProduct.map_inl; SemidirectProduct.map_inr",
+   "date": "2026-10-21",
+   "verdict": "no match: semidirect-product mapping only; does not construct rational actions or prove algebraic density"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of the Zariski closure of a group representation under invariant quotient tensor and exterior power representations",
+   "results": "Rep.quotientToInvariantsFunctor_map_hom; Rep.quotientToInvariantsFunctor; Rep.invariantsFunctor_map_hom; Rep.coinvariantsTensorIndInv; Rep.coinvariantsTensorIndInv_mk_tmul_indMk; Rep.quotientToInvariantsFunctor_obj_V; Rep.coinvariantsTensorIndNatIso; Rep.indMap_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state arithmetic monodromy functoriality"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +202,21 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-restriction"
+ "unit": "sk-i-restriction",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-mg-degree-component-functoriality",
+  "worker": "stage1",
+  "summary": "Expanded the proof to nine steps with a finite construction induction, explicit block/tensor/exterior coordinate formulas including inverse determinants, scheme factorization through the reduced target using the existing vanishing principle, equivariance for all integer degrees, and explicit centrality equations followed by fixed-degree cancellation. Statement unchanged. No new nodes: all non-elementary inputs already have nodes. Existing Lean covers only the supplied-regular-homomorphism case and is not a full attachment.",
+  "blueprint": "Paragraph 1 is realized in steps 1--3; paragraph 2 in step 4; paragraph 3 in steps 5--7; paragraph 4 in steps 8--9. Iteration is an induction starting with the inclusion of H, not an unproved repetition. This follows unit sk-i-restriction density/stabilizers and rationality-of-operations steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-0a8d30d0a",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-0a8d30d0a (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all nine steps against the blueprint proof in master and main-20261015 (identical; the statement is unchanged and verbatim), the unit sk-i-restriction paragraphs 'Density and stabilizers' and 'Rationality of the operations', and the statement of every cited node. The steps carry all four blueprint paragraphs. The vague 'repeat at each stage' becomes an explicit induction on the construction, with base the inclusion of H and the datum r_M regular with r_M∘ρ=ρ_M on Π. The subquotient step is correct: stabilizer-density's closedness clause is general (no stmt_deps), the stabilizer pulls back along r_M, and nullstellensatz (2) on reduced H makes it hold over every algebra; the inverse determinant is det C(h^{-1}). Tensor entries are products and exterior entries are minors, which I checked. The equivariance induction holds for all m in Z. Nullstellensatz (3) factors R through H_Q, and the image is dense because R(H(k)) contains ρ_Q(Π). The homomorphism follows from the multiplication in lem-wf-arith-extension-group. For centrality, matrix commutation is closed in a, I checked that j_Q is multiplicative, and fixed-degree cancellation uF^d=vF^d is valid even when F has finite order. Route: the cited statements are in the unit or in cited units (sk-i-geometry, sk-d-monodromy); there is no cycle (script check), no new nodes, and no duplicate rationality or functoriality node (rg -L over the DAG). proof_deps equals the union of the step uses, and the step sources are present. Edge cases checked: Q=0, Q=V, the determinant line, b greater than dim, F of finite order, negative degree. Batch 5: def-wf-arithmetic-monodromy-extension and def-wf-geometric-monodromy-group are general definitions, already in the base closure through def-wf-monodromy-data; the path to def-pod-lisse is the definition of lisse sheaves, not a step of the proof of the trace formula or of Poincaré duality, so they are accepted. The item is still imported in live and side-live, and there is no repair note."
+ }
 }
