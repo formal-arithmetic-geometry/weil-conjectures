@@ -19,9 +19,110 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=u^*$ and $U=u_*$ on ordinary constant-$A$ module sheaves, and $U^J$ for levelwise direct image. The constant-ring identification and exactness of $F$ are supplied by [lem-pe-constant-left-module-inverse-image]; [lem-weil-pbc-ringed-topoi-module-adjunction] gives the canonical module adjunction $F\\dashv U$, with ordinary counit $\\varepsilon^0$. Taking mates levelwise gives $F^J\\dashv U^J$: naturality of $\\varepsilon^0$ and of the ordinary unit makes these mates commute with every transition. The constant functors $\\Delta_T$ and $F^J$ are exact because kernels and cokernels of towers are levelwise [lem-weil-tower-category-levelwise-abelian]. Thus these functors descend termwise to the unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization], with the literal representative identification $F^J\\Delta_{\\mathcal Y}=\\Delta_{\\mathcal X}F$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, fixed-ring modules; sites-modules.tex Tag 03D7, lemma-adjoint-pullback-pushforward-modules; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "A map $B\\to\\lim_T W$ is precisely a compatible family $B\\to W_n$, hence a map $\\Delta_TB\\to W$; this is the ordinary adjunction $\\Delta_T\\dashv\\lim_T$. Also $1$ is terminal in $J$: a tower map $W\\to\\Delta_TB$ is uniquely given by $W_1\\to B$, with component $W_n\\to W_1\\to B$. Therefore $\\operatorname{ev}_1\\dashv\\Delta_T$. Evaluation is exact by [lem-weil-tower-category-levelwise-abelian], so [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $\\Delta_TH$ is K-injective for every K-injective module complex $H$. The same lemma applied to the exact left adjoint $\\Delta_T$ shows that $\\lim_T$ preserves K-injective complexes. For $K=QH$, [lem-weil-pbc-ringed-strict-tower-homotopy-limit] now computes $\\mathcal L_T\\Delta_TK$ by $\\lim_T\\Delta_TH=H$: all projections are identities. Under this normalization the unit $K\\to\\mathcal L_T\\Delta_TK$ of the derived constant/limit adjunction is the identity, since the ordinary unit is the cone of identity maps. This is the normalization required in the statement.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, constant inverse-image/limit adjunction; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-diagram-site-realization] to realize the two tower categories as module sheaves on small ringed sites; the indexing category and the original sites are small in the specified module universe. By [prop-pur-kinjective-resolutions-exist], represent $V$ by a K-injective tower complex $H$. Since $F$ and $F^J$ are exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $U$ and $U^J$ preserve K-injectives. Together with step 2 this makes $\\lim_{\\mathcal X}H$, $U^JH$, $U\\lim_{\\mathcal X}H$ and $\\lim_{\\mathcal Y}U^JH$ K-injective. By [lem-weil-pbc-kinjective-total-derived] they compute all the derived functors appearing here. In particular the prescribed $a_V$ of [lem-weil-ringed-tower-pushforward-limit-comparison] is represented by the underived comparison\n$$a_H^0:U\\lim_{\\mathcal X}H\\xrightarrow{\\sim}\\lim_{\\mathcal Y}U^JH.$$\nIt is the common-composite identification, satisfying $\\pi_n^{UH}a_H^0=U(\\pi_n^H)$; neither composite needs another resolution. This identifies the specified comparison, rather than choosing a possibly different isomorphism of right adjoints.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof (common direct-image composite); derived.tex Tags 08BJ, 070K and 070Y"
+   }
+  },
+  {
+   "text": "Choose any complex $B$ representing $M$. By [lem-weil-pbc-kinjective-hom-derived], every Hom set in the displayed chain is computed in the homotopy category using the targets in step 3: respectively $\\lim_{\\mathcal Y}U^JH$, $U^JH$, $H$, and $\\lim_{\\mathcal X}H$. The ordinary termwise adjunctions induce the homotopy adjunctions, with their actual units and counits, by [lem-weil-pbc-termwise-adjunction-homotopy]. For example the inverse to\n$$\\operatorname{Hom}_K(FB,\\lim_{\\mathcal X}H)\\cong\\operatorname{Hom}_K(B,U\\lim_{\\mathcal X}H)$$\nsends $c$ to $\\varepsilon^0_{\\lim H}\\circ F(c)$. These homotopy bijections compute the canonical derived adjunctions: by [lem-sc-derived-adjunction-from-underived] the counit $\\varepsilon'$ of the derived adjunction satisfies $G'(\\beta_X)\\circ\\varepsilon'_{QX}=\\alpha_{UX}\\circ Q(\\varepsilon^0_X)$, where the exact left functors are termwise with $\\alpha$ the identity on representatives (step 1), and the right derived comparisons $\\beta$ at the K-injective targets are the isomorphisms of step 3. Hence at each K-injective target the derived counit is the class of the ordinary counit, and the derived Hom bijection $g\\mapsto\\varepsilon'\\circ G'(g)$ is the class of the formula above. The same construction applies to $\\Delta_T\\dashv\\lim_T$, and identifies its unit with that of step 2. Thus we can check the requested identity on chain maps, without replacing any counit by an unspecified adjunction isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 08BJ, lemma-adjoint-preserve-K-injectives, homotopy adjunction in its proof; Tag 09T5, lemma-derived-adjoint-functors; derived-categories lemma-derived-adjoint-functors (counit induced by the underived counit)"
+   }
+  },
+  {
+   "text": "Let $c:B\\to\\lim_{\\mathcal Y}U^JH$ be a chain map. Through the first two inverse Hom bijections its image is the tower chain map $t:\\Delta_{\\mathcal X}FB\\to H$ with\n$$t_n=\\varepsilon^0_{H_n}\\circ F(\\pi_n^{UH}\\circ c).$$\nThe last bijection sends it to the unique chain map $d:FB\\to\\lim_{\\mathcal X}H$ with $\\pi_n^Hd=t_n$. On the other path, postcompose $c$ with $(a_H^0)^{-1}$ and take the ordinary adjunct; this gives $d'=\\varepsilon^0_{\\lim H}\\circ F((a_H^0)^{-1}\\circ c)$. Naturality of the ordinary counit and the defining projection equation of $a_H^0$ in step 3 give\n$$\\pi_n^Hd'=\\varepsilon^0_{H_n}\\circ F(U(\\pi_n^H)\\circ(a_H^0)^{-1}\\circ c)=\\varepsilon^0_{H_n}\\circ F(\\pi_n^{UH}\\circ c)=t_n.$$\nUniqueness for the degreewise ordinary limit gives $d=d'$ as chain maps. The termwise adjunctions preserve homotopies, and every derived map into our targets is represented by a homotopy class by step 4. Localizing this equality therefore proves the asserted equality of Hom bijections for every $M,V$. The use of projections here is in the category of complexes; it does not assert that maps into a homotopy limit are detected by their projections in the derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof; explicit agent calculation using the ordinary adjunction and degreewise limits"
+   }
+  },
+  {
+   "text": "For the arrows in the statement put $k=b^\\sharp\\circ j:\\Delta_{\\mathcal Y}M\\to P^JV$. Naturality in the source of the tower adjunction says that its transpose is $h=b\\circ G(j):\\Delta_{\\mathcal X}FM\\to V$; explicitly the transpose of $k$ is $\\varepsilon^J_V\\circ G(b^\\sharp)\\circ G(j)=b\\circ G(j)$. Under $\\Delta_{\\mathcal Y}\\dashv\\mathcal L_{\\mathcal Y}$ the transpose of $k$ is $\\mathcal L_{\\mathcal Y}(k)\\circ\\eta_M=\\mathcal L_{\\mathcal Y}(b^\\sharp)\\circ\\mathcal L_{\\mathcal Y}(j)$ by the identity-unit normalization of step 2. Similarly the transpose of $h$ under $\\Delta_{\\mathcal X}\\dashv\\mathcal L_{\\mathcal X}$ is $\\mathcal L_{\\mathcal X}(h)$ after identifying $\\mathcal L_{\\mathcal X}\\Delta_{\\mathcal X}FM=FM$. Apply step 5 to this $k$. The ordinary adjunct of that last limit map is exactly\n$$a_V^{-1}\\circ\\mathcal L_{\\mathcal Y}(b^\\sharp)\\circ\\mathcal L_{\\mathcal Y}(j).$$\nThis proves the explicit clause with its specified source identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 0940, section-derived-limits; agent application of steps 2 and 5 to the displayed arrows"
+   }
+  },
+  {
+   "text": "All the Hom bijections used above are natural, and the comparison $a$ is the fixed natural comparison of step 3. Consequently their equality is natural in $M,V$; composing with $j$ and the adjunction bijection gives naturality in the arrows and in $Z$ as well. The computation uses ordinary counits, which step 4 identifies with the specified derived counits, so it includes those actual counits. Only exact constant-coefficient pullback and K-injective resolutions on the small diagram sites were used. Neither the quotients $A/I^n$ nor any perfectness, completeness, boundedness, or exactness of countable products enters the argument. In particular it applies to zero objects, to $u=\\mathrm{id}$, and to constant towers with the identity-unit normalization of step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim; naturality of the Hom calculations in steps 4–6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof, and Tag 07A6 (lemma-adjoint); explicit normalization calculation on K-injective tower representatives."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +158,52 @@
    "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Aa]djunction|[Aa]djunction.*rightDerived|[Tt]ower.*[Cc]ounit",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit constant diagram adjunction compatibility with derived direct image",
+   "results": "CategoryTheory.Limits.constLimAdj; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Localization.HasProductsOfShapeAux.adj; CategoryTheory.Adjunction.derivedη.congr_simp; CategoryTheory.Adjunction.derived'; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_unit_app_assoc; CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit direct image comparison identifies adjunction transposes of constant tower maps",
+   "results": "localCohomology.diagramComp; CategoryTheory.Sheaf.ΓNatIsoLim; Condensed.isoLocallyConstantOfIsColimit_inv; LightCondensed.isoLocallyConstantOfIsColimit_inv; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction; CategoryTheory.comp_comparison_forget_hasLimit; CategoryTheory.GrothendieckTopology.diagramCompIso; CategoryTheory.preservesLimitIso_inv_π",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
+  },
+  {
+   "tool": "grep",
+   "query": "def comp|comp_homEquiv|comp_counit|def derived|derived.*counit|constLimAdj",
+   "results": "Mathlib/CategoryTheory/PathCategory/Basic.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Quotient.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean; Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean; Mathlib/CategoryTheory/Localization/FiniteProducts.lean; Mathlib/CategoryTheory/Localization/FiniteProducts.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison between composite total right derived functors of inverse limits and pushforward is the mate of commuting exact left adjoints",
+   "results": "CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary/composite adjunction and general derived-counit APIs do not by a one-line specialization identify the specified sheaf-tower total-derived comparison with these Hom bijections; the common K-injective computation is still required."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-compact-support-completed-projection-coherence",
@@ -81,5 +224,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-tower-limit-transpose-normalization",
+  "worker": "stage1",
+  "summary": "Seven-step common K-injective representative proof, including the constant-limit unit, the exact specified comparison, an explicit chain-level counit calculation, and the augmented-arrow formula. Reused all required resolution and adjunction results; no new nodes and no statement change. Searched project Lean, the DAG, the whole imported blueprint, and Mathlib.",
+  "blueprint": "Realizes the existing blueprint.from place: rational/Qbar coefficient-transport coherence (thm-pur-rational-and-qbar-purity, imported proof step 2) through the completion-unit/tower-counit auxiliary in lem-pur-compact-support-completed-projection-coherence, old step 5; this is the units/counits and coefficient-comparison part of sk-thm-sf-compatibility clauses (1) and (7).",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact constant-coefficient module inverse image for an arbitrary geometric morphism; used to compute the given canonical operations, not to change the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The ordinary module Hom bijection and its actual counit, needed before deriving the given tower operations."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Exactness of constant and levelwise pullback functors, and of evaluation at the terminal index."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "The termwise representative for exact left functors on unbounded derived categories."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion, applied to evaluation, constant towers and module pullback to justify the common resolution calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The stipulated total right derived limit computed on K-injective tower complexes."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Small ringed sites realizing the strict tower module categories, permitting the resolution theorem to apply."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions for module sheaves on these small sites."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Canonical total-derived comparison at the common K-injective representatives."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "The exact comparison specified in the item, obtained from the common underived direct-image composite."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Compute derived morphisms as homotopy classes into K-injective targets."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Compute the adjunction Hom bijections and their actual units and counits on chain representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-f69ac1d46",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-f69ac1d46 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, the statements of all 12 cited nodes plus the 9 stmt_deps, and Stacks 0A07 (sites-cohomology.tex line 5150), 07A6 and 09T5. The statement and stmt_deps are identical to Q75's creation of the item. Live is unsplit, and there is no repair note or dropped entry for the item. No new nodes. The 12 off-unit citations are generic tools, declared in tool_uses and accepted. Step 2: 1 is terminal in N_{>=1}^op, so ev_1 ⊣ Delta; Delta and lim then preserve K-injectives, and Rlim Delta QH = QH with identity unit. Step 3: the diagram-site realization gives tower K-injective resolutions; U and U^J preserve K-injectives; a_V is represented by the canonical a_H^0 with pi_n a_H^0 = U(pi_n), as the comparison node specifies. Step 5: I checked the chain computation, pi_n d' = eps_{H_n} F(U(pi_n)(a^0)^{-1} c) = t_n, with uniqueness only for limits of complexes. Step 6: k = b^sharp j substitution checked. Small cases checked: A=0, u=id, constant towers (consistent with lem-weil-pbc-constant-tower-pushforward-normalization), b = counit. FIX (C1): step 4 asserted without a node that the homotopy bijections compute the canonical derived adjunction. It now cites the Mathlib leaf lem-sc-derived-adjunction-from-underived (derived counit G'(beta)∘eps' = alpha∘Q(eps^0)), writes out the deduction at K-injective targets, and adds the leaf to proof_deps. A Mathlib leaf adds no cycle. Maintainer note: lem-sfb-derived-composition-adjunction-normalization, applied twice, is a generic route to the same result, and lem-coef-derived-tower-counit-projections overlaps the Delta ⊣ Rlim part. Neither is a duplicate of the item.; 1 file(s) fixed by the reviewer"
  }
 }
