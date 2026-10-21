@@ -20303,3 +20303,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:07 L: merged deliver/Q21/lem-sp-exact-derived-transformation-pasting (stage 2; reviewer PASS; parallel immutable checks)
 - 06:07 L: merged deliver/N8/lem-sfb-exact-open-closed-unbounded-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 06:07 L: merged deliver/Q41/lem-sp-finite-compact-site-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 06:07 L: returned deliver/NF/lem-pe-comparison-etale-slice-abelian-pullback (reviewer RETURN: L: independent stage-2 immutable head aee04b74d8e3: H2/stmt_deps (theorem-node stmt_deps supplying plain definitions). L)
