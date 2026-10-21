@@ -84,10 +84,10 @@ L: independent stage-2 immutable head cfd6713a8ff9: H3/H13: the bound AlgebraicG
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-restricted-quotient-complete: lem-trf-restricted-quotient-complete: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 03:24 UTC, branch head 98f499d80d)
-
-L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-weil-pbc-projection-mate-square-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
-
 ## lem-cbc-finite-constant-map-naturality (2026-10-21 04:06 UTC, branch head 15d7dc1c19)
 
 L: independent stage-2 immutable head 15d7dc1c1918: H2/stmt_deps (mechanical finding upheld): the item cites theorem node lem-exc-proetale-finite-scalar-unit-comparison only for the plain defs finiteScalarPresheafMap/finiteScalarRingMap in Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison (not .choose, not the theorem's conclusion); no def node owns them, and def-weil-pbc-proetale-modules defines no coefficient map. Correction: add a definition node for phi_T = pointwise composition on Cont(pi0,-) followed by sheafification, owning those two declarations (existing:true on the unchanged module, or its own module), and cite it in stmt_deps instead of the theorem (the theorem may stay in proof_deps). Everything else checked and correct: clause-by-clause rendering (g arbitrary; finite CommRing B,C in the mandated Type (u+1) with discrete topology; phi ring hom; c and rho are the recorded canonical maps; both the inverse-image and the adjunct direct-image equalities with correct composition order), edge cases (zero ring, empty scheme, phi=id, non-injective phi), docstrings with source/blueprint/proof steps, sorry-only proof, verbatim statement, no duplicate (proEtaleConstantInverseImageMap_naturality is the CommRingCat ordinary-constant model), not dropped; nt_compile --json clean in 3.3 s. The Lean statement can be kept unchanged.
+
+## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 04:08 UTC, branch head 0d94f262ba)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-weil-pbc-projection-mate-square-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
