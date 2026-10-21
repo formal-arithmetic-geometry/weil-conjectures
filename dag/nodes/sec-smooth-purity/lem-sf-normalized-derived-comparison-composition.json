@@ -15,9 +15,82 @@
   "lem-sf-kinjective-derived-map-computation",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a K-injective complex $H$ in $\\mathcal A_2$. Choose K-injective resolutions $u:r_{12}H\\to J$ in $\\mathcal A_1$ and $v:r_{01}J\\to I$ in $\\mathcal A_0$, using the stated existence hypothesis. Set $w=v\\circ r_{01}(u):r_{02}H\\to I$. By [lem-weil-pbc-exact-functor-derived-factorization], $r_{01}(u)$ is a quasi-isomorphism, hence so is $w$; its target is K-injective. By [lem-sf-kinjective-derived-map-computation], all the resolution comparisons below are isomorphisms. Write $A=s_{01}(c^1_u)$, $B=c^0_w$, $T=s_{02}(\\eta^2_H)$, $X=P_0(F_0v)$, and $Y=P_0(F_0r_{01}(u))$. Here $T$ is invertible because [def-sfb-right-derived-functor] states that the derived unit is invertible on every K-injective complex, and functors preserve isomorphisms. We suppress only the canonical localization identifications stipulated in the item.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sf-kinjective-derived-map-computation",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-normalized-derived-comparison-common-resolution] with $(F,G,r,s)=(F_0,F_1,r_{01},s_{01})$, $N=r_{12}H$, and the resolutions $u:N\\to J$, $v:r_{01}J\\to I$. Its hypotheses hold: the two source categories have K-injective resolutions, $r_{01},s_{01}$ are exact, $F_0r_{01}=s_{01}F_1$, and $\\beta_{01}$ has exactly its supplied normalization. Its successive-resolution formula gives\n$$A\\circ\\beta_{01,Q_1(r_{12}H)}\\circ B^{-1}=X^{-1}.$$\nThe invertibility of $X$ is part of the normalization at the K-injective $J$ and its resolution $v$. In particular the application makes no assumption that $r_{12}H$ or $r_{01}J$ is K-injective.",
+   "uses": [
+    "lem-sf-normalized-derived-comparison-common-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  },
+  {
+   "text": "The normalization for $\\beta_{12}$ at the K-injective $H$ and resolution $u$, after applying $s_{01}$, gives\n$$T^{-1}\\circ s_{01}(\\beta_{12,Q_2H})\\circ A^{-1}=Y^{-1}.$$\nIndeed $s_{01}s_{12}=s_{02}$ identifies the unit factor with $T^{-1}$, and the stipulated localization identifications and $s_{01}F_1=F_0r_{01}$ identify $s_{01}(P_1(F_1u))$ with $Y$. Its invertibility follows from that same normalization and preservation of inverses by a functor. The normalization for $\\beta_{02}$ at $H$ and resolution $w$ gives\n$$T^{-1}\\circ\\beta_{02,Q_2H}\\circ B^{-1}=P_0(F_0w)^{-1}.$$\nThese equations apply the given normalization at $H$ with precisely the resolutions $u$ and $w$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  },
+  {
+   "text": "Let $C_H=s_{01}(\\beta_{12,Q_2H})\\circ\\beta_{01,Q_1(r_{12}H)}$. Insert $A^{-1}A=1$ between these factors and use steps 2 and 3:\n$$T^{-1}C_HB^{-1}=(T^{-1}s_{01}(\\beta_{12,Q_2H})A^{-1})(A\\beta_{01,Q_1(r_{12}H)}B^{-1})=Y^{-1}X^{-1}.$$\nOn the other hand $w=v\\circ r_{01}(u)$ implies $P_0(F_0w)=X\\circ Y$ by functoriality. Therefore step 3 reads $T^{-1}\\beta_{02,Q_2H}B^{-1}=(XY)^{-1}=Y^{-1}X^{-1}$. Cancel the isomorphisms $T^{-1}$ on the left and $B^{-1}$ on the right. We have proved $\\beta_{02,Q_2H}=C_H$ for every K-injective $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  },
+  {
+   "text": "For arbitrary $L\\in D(\\mathcal A_2)$, choose a complex $N$ representing $L$ in the localization [def-weil-abstract-derived-category], and a K-injective resolution $N\\to H$ by the hypothesis on $\\mathcal A_2$. Localization inverts that quasi-isomorphism, giving an isomorphism $q:L\\xrightarrow{\\sim}Q_2H$ (composed with the chosen representation). Write $D_0=RF_0r_{02}$, $D_2=s_{02}RF_2$ and $C_L=s_{01}(\\beta_{12,L})\\circ\\beta_{01,r_{12}L}$. Naturality of the two comparisons, expanded at $q$, yields\n$$\\begin{aligned}\nD_2(q)C_L\n&=s_{01}\\bigl(s_{12}(RF_2(q))\\circ\\beta_{12,L}\\bigr)\\circ\\beta_{01,r_{12}L}\\\\\n&=s_{01}(\\beta_{12,Q_2H})\\circ s_{01}(RF_1(r_{12}q))\\circ\\beta_{01,r_{12}L}\\\\\n&=C_H\\circ D_0(q).\n\\end{aligned}$$\nHere $r_{01}r_{12}=r_{02}$ and $s_{01}s_{12}=s_{02}$ give the endpoints. Naturality of $\\beta_{02}$ similarly gives $D_2(q)\\beta_{02,L}=\\beta_{02,Q_2H}D_0(q)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  },
+  {
+   "text": "Step 4 identifies $\\beta_{02,Q_2H}=C_H$. Substituting this into the last two equations gives $D_2(q)\\beta_{02,L}=D_2(q)C_L$. A functor sends the isomorphism $q$ to an isomorphism, so cancellation gives $\\beta_{02,L}=s_{01}(\\beta_{12,L})\\circ\\beta_{01,r_{12}L}$, as required. All K-injective complexes used were chosen in their own source categories; no functor $r_{ij}$ was assumed to preserve them.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation and common-resolution statements; explicit composition calculation by NG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-kinjective-derived-map-computation",
+  "def-sfb-right-derived-functor",
+  "lem-sf-normalized-derived-comparison-common-resolution",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070Y (lemma-K-injective-defined) supplies the resolution-computation background; the successive-resolution pasting and naturality argument is written explicitly here, using the existing common-resolution lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +140,52 @@
    "results": "['CategoryTheory.InjectiveResolution.rightDerived_app_eq', 'CategoryTheory.Functor.rightDerived_map_eq', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality', 'CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc', 'CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality']; ",
    "date": "2026-10-21",
    "verdict": "no match: inspected the returned declarations; vertical derived natural-transformation composition and a single localizer comparison do not state horizontal composition from K-injective normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective normalized natural isomorphisms of total derived functors commute with composition of exact restriction functors",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(comp|[Cc]omparison)|KInjective.*[Cc]omparison",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive K-injective resolutions give composition compatibility for normalized comparisons of total right derived functors",
+   "results": "CategoryTheory.Functor.rightDerived; CategoryTheory.injectiveResolutions; CategoryTheory.Functor.rightDerivedNatTrans_comp; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.Hom.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorComparison\"",
+   "results": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*comp|comp.*comparison|rightDerivedNatTrans_comp",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; Mathlib/CategoryTheory/Triangulated/Basic.lean; Mathlib/CategoryTheory/Triangulated/Basic.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of derived comparison isomorphisms through two exact functors, characterized by their values on K-injective replacements",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected PointwiseRightDerived.lean:64-84 (one canonical comparison with fixed target) and Functor/Derived/RightDerived.lean:125 (vertical composition); neither states horizontal pasting of three supplied K-injective-normalized comparisons through both exact functors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-compact-support-restriction-of-scalars",
@@ -89,5 +204,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-normalized-derived-comparison-composition",
+  "worker": "stage1",
+  "summary": "Proved the unchanged composition statement in six explicit steps using the existing common-resolution lemma. Choose successive resolutions, conjugate all three comparisons, compute the composite inverse as Y^{-1}X^{-1}, and extend from K-injective objects by expanded naturality. No new nodes, no preservation-of-K-injectives assumption, and no Lean changes. Retained all inherited searches and appended the actual NG search log.",
+  "blueprint": "Realizes coherence of the coefficient-restriction transitions in def-weil-integral-rational-qbar-compact-support, formula Rf_!K = R lim_n Res_n Rf_{!,n}K_n; its finite-level realization is lem-sf-compact-support-restriction-of-scalars. The current main-20261015 ancestor lies in sec-six-functors-basics/sk-prop-int-brown; historical assigned chapter/unit and ancestry are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-86f176f37",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-86f176f37 (reviewer sub-agent of L); spot-checked: I read the whole item, all 6 steps, and every cited statement: common-resolution (Q112 PASS; its proof_deps exclude this item, so there is no cycle), kinjective-derived-map-computation, def-sfb-right-derived-functor, the exact-functor leaf and def-weil-abstract-derived-category. I also read Stacks derived.tex lemma-K-injective-defined (070Y). The delivery has no new nodes, no fixes and no tool_uses. No repair note exists for this item, so the re-split rule does not apply. Statement, stmt_deps, blueprint ancestry and unit are unchanged from the NO-created record. The normalization types check: both sides run P_iF_iI -> P_iF_i r_ij H. Step 1: w=v∘r01(u) is a K-injective resolution because r01 is exact, and I checked the endpoints of A, B, T, X and Y. Step 2: the common-resolution lemma with (F,G,r,s,N)=(F0,F1,r01,s01,r12H) gives Aβ01B^-1=X^-1, and its hypothesis is exactly the item's β01 normalization. Step 3: the β12 normalization at (H,u) with s01 applied gives T^-1 s01β12 A^-1 = Y^-1, using s01P1F1 = P0F0r01; the β02 normalization at (H,w) is applied directly. Step 4: P0F0w = XY, so the product is Y^-1X^-1, and the composition order and the cancellations are correct. Steps 5-6: I re-derived the naturality pasting at q:L≅Q2H, followed by cancellation of D2(q). Edge cases checked: identity functors and resolutions, zero categories, an acyclic N, and r12H not K-injective. Preservation of K-injectives is never used. Duplicate candidates rg'd and read (ringed-derived-identity-comparison, ext-right-derived-cocycle-comparison): different statements. No SGA. The route is unchanged. No changes."
  }
 }
