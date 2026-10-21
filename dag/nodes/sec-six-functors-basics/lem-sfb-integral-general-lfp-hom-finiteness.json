@@ -17,7 +17,14 @@
   "sk-def-sfb-dc-setting",
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sf-integral-hom-reduction-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-constructible-constructible",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport"
  ],
  "proof": [
   {
@@ -334,5 +341,29 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-977eeb26a (reviewer sub-agent of L); spot-checked: Read the whole split. It has 7 steps, no new nodes, and the statement and stmt_deps are unchanged against side-live. I checked it against the parent's pre-re-split proof (Q40 snapshot, steps 2–5): no argument was dropped. The flatness argument now lives in the existing lem-sfb-constant-field-tor-bounds. Fixing blueprint.from.node to lem-sfb-dc-hom-preserves is correct; I read that node's blueprint proof, integral paragraph. No SGA is cited. Sources checked: Bhatt–Scholze Def 6.5.1, Lemma 3.4.11, Lemma 6.7.13, Def 6.8.10 and Prop 6.8.11(3). Hypotheses checked: step 1 gives X Noetherian/qcqs and char A=ℓ from |ℓ|<1. In step 2 the model comparison needs only Noetherian X, and criterion (1)⇒(2) is used on the inputs only. In step 4 the reduction is for arbitrary K and L, with c_{1,K,L} defined as the transpose of evaluation. In step 5 the finite-field Hom node fits: A is a finite field of characteristic ℓ, and X is separated of finite type over k with char k ≠ ℓ. Steps 6–7 apply the constructible comparison, the ctf comparison and the field Tor bounds; X is qcqs and A is Noetherian. There is no cycle, and the declared tool uses are generic and accepted. Fault (C1/C4, E6): steps 3 and 4 apply theorems stated for the ringed-site K-injective Hom (def-pur-derived-internal-hom) to the item's module-object RHom on D(Mod_B) (sk-def-sfb-derived-tensor-hom) without any bridge. FIX: both steps now cite the unit's own lem-sfb-module-object-ringed-site-derived-comparison, applied to R and to A; it carries evaluation and is compatible with slices. Step 3 now names O=B_sec. proof_deps were updated to match. Edge cases checked: X empty, zero inputs, and K=L=R/(t) at a geometric point (degree dimensions 1,2,1 on both sides).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralGeneralLfpHomFiniteness",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_general_lfp_hom_finiteness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralGeneralLfpPrimeDatum",
+   "AlgebraicGeometry.ProEtale.integralGeneralLfpAdicImage",
+   "AlgebraicGeometry.ProEtale.integral_general_lfp_hom_finiteness"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralGeneralLfpHomFiniteness.lean",
+  "statement": "theorem integral_general_lfp_hom_finiteness (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (K L : DerivedCategory (AdicCompletion.Modules l E X)) (hK : boundedConstructible (AdicCompletion.ring l E X) K) (hL : boundedConstructible (AdicCompletion.ring l E X) L) : Scheme.IsSfbAdicComplete X (Scheme.pbcIntegralDatum l E).ideal ((integralGeneralLfpAdicImage l E X).obj (((CondensedRing.derivedHom (DerivedNakayama.integerRing l E) X).obj (op K)).obj L)) ∧ IsIso (WeilConjectures.integralHomReductionComparison (integralGeneralLfpPrimeDatum (ringChar k)) l (Ne.symm (Fact.out : ringChar k ≠ l)) E X 0 ((integralSectionDerivedEquivalence l E X).functor.obj K) ((integralSectionDerivedEquivalence l E X).functor.obj L)) ∧ ∃ D : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E ⧸ (Scheme.pbcIntegralDatum l E).ideal ^ (0 + 1)))) ℤ, (∃ a b : ℤ, a ≤ b ∧ D.IsStrictlyGE a ∧ D.IsStrictlyLE b) ∧ (∀ q : ℤ, Scheme.IsConstructibleSheaf (D.homology q)) ∧ Nonempty (DerivedCategory.Q.obj (((comparisonUpperStar (ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E ⧸ (Scheme.pbcIntegralDatum l E).ideal ^ (0 + 1))) X).mapHomologicalComplex (.up ℤ)).obj D) ≅ DerivedCategory.Q.obj (Scheme.sfbResidueComplex X (Scheme.pbcIntegralDatum l E).ideal ((integralGeneralLfpAdicImage l E X).obj (((CondensedRing.derivedHom (DerivedNakayama.integerRing l E) X).obj (op K)).obj L)))) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E ⧸ (Scheme.pbcIntegralDatum l E).ideal ^ (0 + 1)))) (q : ℤ), q < a ∨ b < q → IsZero ((Scheme.sfbEtaleTensorDegreeZero X _ D N).homology q)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Ordinary unbounded internal-module inputs with general ring-object boundedConstructible. Canonical section-action and quotient-normalized ring isomorphisms transport the output to the recorded small-site local completeness and residue interfaces; no completion is applied to the inputs. The reduction uses the recorded evaluation-transpose map, at exponent 0+1. The auxiliary prime-field datum only fills the legacy reduction interface and imposes no finite-field hypothesis on the ground field. Returned H2 repaired: the two canonical presentation constructions are owned by new existing:true definition nodes, not by theorem statement dependencies. The output helper reuses integralDetailedTransport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec4cf61d9",
+  "group": "NW",
+  "result": "fix",
+  "note": "Re-delivery of the c1fa1440 H2 RETURN. The two theorem stmt_deps are replaced by existing:true definition nodes def-sfb-integral-section-action-transport (IntegralCriterionReductions, 10 decls) and def-sfb-integral-completed-coefficient-transport (IntegralStratifiedPerfectCharacterization, 7 decls). All decls exist in live. check_existing and check_new_node are clean. Composite directions and ∃!-normalized constructions match the source, with no hollow data and no extra hypotheses. The item's statement, proof and signature are unchanged against the returned head and side-live; the only Lean delta is the reuse of integralDetailedTransport, which is the same functor. Substance re-confirmed: hypotheses, the 3 clauses, derived-form iso, uniform Tor interval; edge cases empty X, zero inputs, torsion, char 2. Finding fixed in records only: the new nodes lacked body owners def-sf-scalar-reduction-categories-restriction (scalarReductionSource, needed by both) and def-weil-pbc-adic-lisse-module (adicLisseForget and adicLisseRingSystem, needed by the completed one). fixes/ holds both complete node JSONs with stmt_deps and statement citations added; check_new_node is clean and there is no cycle. No Lean changed, so nothing compiled."
  }
 }

@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-integral-section-action-transport",
+ "kind": "definition",
+ "title": "Canonical integral section-action coefficient transport",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite with its valuation ring and uniformizer [def-weil-l-adic-coefficient-extension], and $X$ any scheme on its small pro-etale site [def-weil-pbc-proetale-site]. Put $B=p_X^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients] and $\\widehat B=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\pi_E^n)_X$ [def-weil-completed-integral-coefficients]. Use the continuous and finite coefficient presentations [def-sfb-integral-comparison-coefficients] and their finite-projection normalization [def-sfb-integral-comparison-normalization]. Define $e$ to be the uniquely normalized abelian comparison $B\\simeq\\widehat B$. The section-ring isomorphism $\\alpha:B_{\\rm sec}\\simeq\\widehat B$ is the unique commutative-ring lift whose underlying abelian map is $e$, after the fixed identifications of the underlying abelian sheaves. Using the section-action equivalence $S$ of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and restriction of scalars [def-pc-sheaf-restrict-scalars], define $F=\\operatorname{Res}_{\\alpha^{-1}}\\circ S$ (first section action, then restriction along $\\alpha^{-1}$). Its additive equivalence structure is the sectionwise one. Define $D(F):D(\\operatorname{Mod}_{\\rm int}(B))\\simeq D(\\operatorname{Mod}(\\widehat B))$ by termwise localization of this actual functor [def-weil-abstract-derived-category]; its target is the derived category of the completed-coefficient module category [def-sf-scalar-reduction-categories-restriction]. These are the fixed comparison constructions, not a supplied arbitrary encoding or a constructibility/completeness assertion.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-completed-integral-coefficients",
+  "def-sfb-integral-comparison-coefficients",
+  "def-sfb-integral-comparison-normalization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, coefficient convention preceding Definition 6.5.1; Section 6.8, integral coefficients in Proposition 6.8.11(3). The exact constructions are the projection-normalized section-action comparison in IntegralCriterionReductions and completed comparison in IntegralStratifiedPerfectCharacterization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralSectionRingIso|integralSectionFunctor|integralSectionDerivedEquivalence|integralDetailedCoefficientComparison|integralDetailedTransport",
+   "results": "{\"t\": \"2026-10-21T17:16:15Z\", \"tool\": \"grep\", \"query\": \"integralSectionRingIso|integralSectionFunctor|integralSectionDerivedEquivalence|integralDetailedCoefficientComparison|integralDetailedTransport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No specialized Mathlib match. Reuse the existing project constructions through existing:true ownership records; no second definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical projection normalized integral coefficient section action derived equivalence and completed ring scalar restriction transport",
+   "results": "{\"t\": \"2026-10-21T17:16:16Z\", \"tool\": \"leansearch\", \"query\": \"Canonical projection normalized integral coefficient section action derived equivalence and completed ring scalar restriction transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instNonUnitalNormedRingRestrictScalars\", \"PadicInt.withValIntegersRingEquiv\", \"instRingRestrictScalars\", \"instNonUnitalNormedCommRingRestrictScalars\", \"instNormedRingRestrictScalars\", \"instNormedCommRingRestrictScalars\", \"AdicCompletion.ofAlgEquiv\", \"RingQuot.toQuot\"], \"digest\": \"5c44c7a98b2d53a2\"}",
+   "date": "2026-10-21",
+   "verdict": "No specialized Mathlib match. Reuse the existing project constructions through existing:true ownership records; no second definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-21T17:16:17Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\"], \"digest\": \"e9c522decffc41f9\"}",
+   "date": "2026-10-21",
+   "verdict": "No specialized Mathlib match. Reuse the existing project constructions through existing:true ownership records; no second definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralSectionRingIso|integralSectionFunctor|integralSectionDerivedEquivalence|integralDetailedCoefficientComparison|integralDetailedCoefficientRestriction_exact|integralDetailedTransport in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search section-action; blueprint_refs.py search coefficient presentation",
+   "results": "Mathlib wrapper found no hits. No upstream WeilConjectures definitions. Exact project constructors occur in Sheaf.Paper.IntegralCriterionReductions and Sheaf.Paper.IntegralStratifiedPerfectCharacterization. The DAG assigns them only as helpers of theorem nodes. def-pe-integral-presentation-encoding is supplied data, not the canonical choice; def-pur-completed-coefficient-presentation-transport reuses the comparison and constructs its inverse CommRing lift. Existing def-sfb-integral-comparison-coefficients/normalization own the underlying data and predicate only. Blueprint searches returned one rf-shriek unit and 68 general coefficient-presentation hits, no definition node owning these choices.",
+   "date": "2026-10-21",
+   "verdict": "Record existing exact declarations with definition-node ownership as required by the return; do not redefine them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-general-lfp-hom-finiteness",
+  "date": "2026-10-21",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral paragraph of lem-sfb-dc-hom-preserves.proof.md: the fixed identification of pulled-back integral coefficients with completed ordinary coefficients preceding completeness and reduction. The legacy created.item chain ends at a module identifier; the mathematical ancestor is recorded here explicitly.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-finiteness",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCriterionReductions",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionDerivedEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLimitAbComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.integralLimitAbComparison",
+   "AlgebraicGeometry.ProEtale.integralSectionAbIdentifications",
+   "AlgebraicGeometry.ProEtale.integralSectionRingIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.integralSectionRingIso",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_properties",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_additive",
+   "AlgebraicGeometry.ProEtale.integralSectionFunctor_isEquivalence",
+   "AlgebraicGeometry.ProEtale.integralSectionDerivedEquivalence"
+  ],
+  "statement": "def integralSectionDerivedEquivalence (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) :\n    DerivedCategory (AdicCompletion.Modules l E X) ≌\n      DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E X)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing canonical section-action construction and its named construction obligations, read in the recorded module. The ring iso is chosen from a unique normalized lift, and the derived equivalence localizes the prescribed section action followed by restriction along its inverse. This definition node owns those helpers independently of integral_reductions_constructible_iff; that node theorem is neither used nor cited as a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec4cf61d9",
+  "group": "NW",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec4cf61d9",
+  "group": "NW",
+  "result": "fix",
+  "note": "Re-delivery of the c1fa1440 H2 RETURN. The two theorem stmt_deps are replaced by existing:true definition nodes def-sfb-integral-section-action-transport (IntegralCriterionReductions, 10 decls) and def-sfb-integral-completed-coefficient-transport (IntegralStratifiedPerfectCharacterization, 7 decls). All decls exist in live. check_existing and check_new_node are clean. Composite directions and ∃!-normalized constructions match the source, with no hollow data and no extra hypotheses. The item's statement, proof and signature are unchanged against the returned head and side-live; the only Lean delta is the reuse of integralDetailedTransport, which is the same functor. Substance re-confirmed: hypotheses, the 3 clauses, derived-form iso, uniform Tor interval; edge cases empty X, zero inputs, torsion, char 2. Finding fixed in records only: the new nodes lacked body owners def-sf-scalar-reduction-categories-restriction (scalarReductionSource, needed by both) and def-weil-pbc-adic-lisse-module (adicLisseForget and adicLisseRingSystem, needed by the completed one). fixes/ holds both complete node JSONs with stmt_deps and statement citations added; check_new_node is clean and there is no cycle. No Lean changed, so nothing compiled."
+ }
+}
