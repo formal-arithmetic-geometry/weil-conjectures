@@ -29,173 +29,69 @@
  ],
  "proof": [
   {
-   "text": "Put $P_T=Lg_T^*$ for $T=X,Y$. By [def-weil-frobenius-detailed], $g_T$ is a scheme automorphism with inverse induced by arithmetic Frobenius. Since $f_0$ is over $k_0$, $fg_X=g_Yf$. The square is Cartesian: its horizontal arrows are isomorphisms and its inverse square gives an inverse base-change identification. These maps need not be $k$-linear. When regarding this as a square of $k$-schemes, give its source corners the structural maps $a_Tg_T$; this changes neither the underlying coefficient sites nor the functors. By [lem-weil-proetale-isomorphism-inverse-image], inverse image along $g_T$ is an exact equivalence, with inverse the transport along $g_T^{-1}$. By [lem-weil-isomorphism-derived-pullback] it agrees with the completed pullback on integral constructible objects. Apply the rational and common-stage prescriptions of [def-weil-derived-pullback-tensor-hom] to these inverse equivalences: the two inverse-composition identities remain identities after scalar localization and over any common finite coefficient field. Thus $P_X,P_Y$ are equivalences on precisely the field coefficient categories in the statement.",
+   "text": "Apply [lem-pod-semilinear-field-operation-lifts] to the geometric fibers and the stated preserved domains. Its semilinear transport equivalences and five explicit fixed-pair formulas give the lifts of $Lf^*,Rf_*,Rf_!$, tensor and internal Hom, functoriality on arrows, and the displayed $Rf_*$ formula. Their forgetful images are the given operations. Retain the finite-Tor/site-perfect restrictions of each underlying preservation theorem.",
    "uses": [
-    "def-weil-frobenius-detailed",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pod-semilinear-field-operation-lifts"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "First sentence: the geometric Frobenius square underlying the equivariant lifts"
+    "place": "Proof sentence 1: semilinear Frobenius square, exact rational transport, and explicit operation/evaluation lifts; returned proof Steps 1–2."
    }
   },
   {
-   "text": "Apply [lem-fix-weil-operations] to $f_0$ and $Lambda=E$ or $Qlb$, retaining its bounded-constructibility domains. For a covariant operation $F$ with comparison $a:P_{\\rm out}F\\simeq FP_{\\rm in}$ its lifted object is $(FK,F(\\theta_K)a_K)$. Naturality of $a$ and $u\\theta_K=\\theta_LP_{\\rm in}(u)$ give\n$$F(u)F(\\theta_K)a_K=F(\\theta_L)a_LP_{\\rm out}(F(u)),$$\nso its action on arrows is a Weil morphism by [def-weil-weil-sheaf-complex]. In particular $a=\\operatorname{Ex}_*$ gives exactly the displayed $Rf_*$ formula, and $a=\\operatorname{Ex}_!$ gives the compact-support formula. For tensor use $(\\theta_M\\otimes\\theta_N)\\mu_g$, and for internal Hom use $R\\mathcal Hom(\\theta_M^{-1},\\theta_N)h_g$, where $\\mu_g,h_g$ are the canonical transport comparisons supplied by that lemma. The inverse in the first Hom variable is necessary for its contravariance. These are isomorphisms and define the five required lifts; forgetting gives the original operation on objects and arrows. This is a lift on a domain already preserved by the underlying operation, including any site-perfect domain established for internal Hom, rather than an argument enlarging that domain. Exactness here refers to the given underlying derived functors; no triangulated structure on the category of fixed pairs is asserted.",
+   "text": "Apply [lem-pod-constructible-mate-coherence] with $S=P_X$, $T=P_Y$ and $a=\\operatorname{Ex}_!$. The equivalences needed there are supplied by Step 1; the canonical exchange is invertible by [lem-pod-weil-frobenius-compact-support-exchange]. The lemma's mate gives the constructible $Rf^!$ lift and equivariant unit and counit, and identifies the pasted exceptional comparisons. It also gives equivariance of composition, exchange and projection transformations, and of their inverses wherever already proved invertible. No ambient adjoint or separatedness of the base is used.",
    "uses": [
-    "lem-fix-weil-operations",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "First sentence: operations and evaluations; explicit direct-image example"
-   }
-  },
-  {
-   "text": "For the unconditional constructible exceptional functor, use the adjunction $F=Rf_!\\dashv G=Rf^!$ on $D^b_c$ specified by [def-weil-exceptional-inverse-image], not the ambient admissibility condition. Write $S=P_X$, $T=P_Y$, and let $a:TF\\simeq FS$ be the compact-support exchange, invertible by [lem-pod-weil-frobenius-compact-support-exchange] and equivariant by [lem-fix-weil-operations]. If $\\eta,\\varepsilon$ are this constructible adjunction's unit and counit, the mate of $a^{-1}$ is\n$$b:SG\\xrightarrow{\\eta SG}GFSG\\xrightarrow{G a^{-1}G}GTFG\\xrightarrow{GT\\varepsilon}GT.$$\nThis is exactly the mate of [def-weil-pbc-adjunction-mate]. The two horizontal functors $S,T$ are equivalences by Step 1, so [lem-weil-mate-iso-along-equivalences] makes $b$ an isomorphism. Therefore $(GL,G(\\theta_L)b_L)$ is a Weil pair, with functoriality given by the same naturality equation as in Step 2. Its underlying functor is the constructible $Rf^!$ for every separated finite-type $f$ in the item; no ambient exceptional adjoint is needed.",
-   "uses": [
-    "def-weil-exceptional-inverse-image",
-    "lem-fix-weil-operations",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-mate-iso-along-equivalences",
-    "def-weil-weil-sheaf-complex",
+    "lem-pod-constructible-mate-coherence",
     "lem-pod-weil-frobenius-compact-support-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "First sentence: exceptional adjoint and its exchange/adjunction construction"
+    "place": "Proof sentence 1: exceptional adjunction, its unit/counit, comparison maps and mate pasting; returned proof Steps 3–4 and 6."
    }
   },
   {
-   "text": "The exceptional unit and counit are equivariant for the structures of Step 3. Indeed the mate formula and the two triangle identities give\n$$(Ga)(bF)(S\\eta)=\\eta S,\\qquad (\\varepsilon T)(Fb)(aG)=T\\varepsilon.$$\nSubstitute $\\theta_{FK}=F(\\theta_K)a_K$ and $\\theta_{GL}=G(\\theta_L)b_L$ and use naturality of $\\eta,\\varepsilon$. The first equality becomes $\\theta_{GFK}S(\\eta_K)=\\eta_K\\theta_K$; the second becomes $\\varepsilon_L\\theta_{FGL}=\\theta_LT(\\varepsilon_L)$. These are the Weil-morphism equations of [def-weil-weil-sheaf-complex]. The adjunction and triangle identities used here are those specified on constructible objects by [def-weil-exceptional-inverse-image]; [def-weil-pbc-adjunction-mate] supplies precisely the unit--inverse-exchange--counit formula, not a claim that arbitrary mates of isomorphisms are invertible.",
+   "text": "Apply [lem-pod-fixed-pair-truncation-cohomology] for $W=X,Y$. It gives both lifted truncations, all canonical truncation-triangle arrows and induced cohomology-sheaf structures. For maps pushed to the coefficient point, use the lifted direct images and equivariant comparisons from Steps 1–2; the same lemma's point-transport equation gives Frobenius-equivariant maps on ordinary and compactly supported cohomology groups whenever defined.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
-    "def-weil-pbc-adjunction-mate",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "First sentence: adjunction maps; formal verification for the constructible adjoint"
-   }
-  },
-  {
-   "text": "By [prop-constructible-truncations], $P_W$ commutes naturally with both standard truncations and their cohomology functors at $E$ and $\\Qlb$. For either truncation $\\tau$, write $c_K:P_W\\tau K\\simeq\\tau P_WK$ and set $\\theta_{\\tau K}=\\tau(\\theta_K)c_K$. Naturality of $c$ gives the Weil-morphism equation for $\\tau u$ exactly as in Step 2. Thus both truncations lift and forgetting recovers the specified truncations. Their canonical maps and truncation triangles are equivariant: the comparisons are the unique ones compatible with the truncation maps, as stated in [lem-pod-texact-truncation-comparison]. Consequently the third arrows of the standard triangles also intertwine the Weil maps, and $\\mathcal H^i(K)=(\\tau^{\\ge i}\\tau^{\\le i}K)[i]$ has the induced Weil structure. This uses triangles in the underlying category; it does not assert that the category of Weil pairs is itself triangulated.",
-   "uses": [
-    "prop-constructible-truncations",
-    "lem-pod-texact-truncation-comparison",
-    "def-weil-weil-sheaf-complex"
+    "lem-pod-fixed-pair-truncation-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Second sentence: exact Frobenius transport and truncations"
+    "place": "Proof sentence 2: truncation maps and all truncation-triangle arrows; final assertion on cohomology; returned proof Steps 5 and 11."
    }
   },
   {
-   "text": "Composition comparisons, exchange transformations, tensor evaluation, ordinary adjunction maps, and the projection transformation are equivariant by the precise assertions of [lem-fix-weil-operations]. They are the specified transformations of [def-exchange-projection], so this identifies the maps rather than choosing new isomorphisms. Composing Weil-morphism equations proves closure under composition, whiskering by the lifted operations, and inverses of isomorphisms. Exceptional comparisons constructed as mates have the same property using Step 4: substitute the unit--map--counit formula of [def-weil-pbc-adjunction-mate], whose three factors are now equivariant. The pasting identities of [lem-weil-pbc-mate-pasting] identify those composites with the composition/exchange comparisons. Therefore each already-proved composition, base-change or projection isomorphism is an isomorphism of Weil pairs on its proved domain. Equivariance of a transformation is not a proof that it is an isomorphism; all restrictions of the underlying comparison theorem are retained. In the Frobenius square, invertibility of the compact-support exchange itself is [lem-pod-weil-frobenius-compact-support-exchange], including the non-separated-base and common-stage cases.",
+   "text": "On the smooth purity domains apply [lem-pod-rational-purity-pairing]. Its mate identification is exactly the exceptional lift of Step 2, so its rational naturality equation makes canonical purity and smooth trace equivariant. On the smooth site-perfect Poincare domain its evaluation–trace pairing has the inverse contravariant datum and scalar $q^{-d}$, giving the twisted pairing equation for arbitrary rational Weil isomorphisms.",
    "uses": [
-    "lem-fix-weil-operations",
-    "def-exchange-projection",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-weil-sheaf-complex",
-    "lem-pod-weil-frobenius-compact-support-exchange"
+    "lem-pod-rational-purity-pairing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "First sentence: composition, exchanges and projection maps"
+    "place": "Proof sentence 3 (orientation and trace) and sentence 4 final clause (smooth pairing), for arbitrary rational Weil isomorphisms; returned proof Steps 7 and 10."
    }
   },
   {
-   "text": "At the rational stages, do not pass through a strict integral lattice. The canonical purity maps are natural for every morphism in the rational constructible category, and the Frobenius exchange defined from them is the constructible adjunction mate, by [lem-pur-rational-weil-naturality-mate]. For an arbitrary Weil object $(K,\\theta_K)$, substitute $u=\\theta_K:P_YK\\to K$ in that naturality equation. The source Weil arrow is $H(\\theta_K)b_K$, with $H(K)=Lf^*K(d)[2d]$, and the target Weil arrow is $Rf^!(\\theta_K)e_K$, where $e_K=\\gamma_{f,P_YK}b_K(P_X\\gamma_{f,K})^{-1}$. Therefore\n$$Rf^!(\\theta_K)e_KP_X(\\gamma_{f,K})=\\gamma_{f,K}H(\\theta_K)b_K,$$\nwhich is exactly the fixed-pair morphism equation of [def-weil-weil-sheaf-complex]. The same lemma identifies this $e_K$ with the mate used in Step 3. This proves purity equivariance on the full rational domain. The calculation is an identity in $E$ and in the common-stage $\\Qlb$ category, so multiplication by $\\ell$ on a point object is allowed and no invariant lattice is invoked.",
+   "text": "On each stated duality domain apply [lem-pod-formal-verdier-exchange-equivariance], using the operation lifts and equivariant adjunction/composition maps of Steps 1–2. It supplies rational duality, evaluation and biduality, coefficient-extension compatibility and equivariance of the specified formal Verdier exchange; invertibility retains the underlying theorem's hypotheses. Together with Steps 1–4 this covers every comparison in the statement. Forgetting recovers the original maps, and Step 3 gives their equivariance on cohomology.",
    "uses": [
-    "lem-pur-rational-weil-naturality-mate",
-    "def-weil-weil-sheaf-complex"
+    "lem-pod-formal-verdier-exchange-equivariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Proof sentence 3: geometric orientation and trace are equivariant"
-   }
-  },
-  {
-   "text": "On the separated finite-type schemes where the dualizing objects $\\omega_T=Ra_T^!\\Lambda$ and Verdier duality are defined, [cor-coef-verdier-weil-equivariance] gives the Weil lift of $D_T$, equivariance of evaluation and biduality, and compatibility with finite coefficient-field extension and the common-stage $\\Qlb$ category. Its hypotheses are retained: this use does not impose separatedness of $X_0,Y_0$ on the other clauses of the item, and does not define a structure-morphism exceptional functor when that structure morphism is outside its stated geometric domain. Thus evaluation-defined duality comparisons and their scalar-extension maps have the required Weil structures. This field-level theorem applies to rational Weil isomorphisms themselves; no Frobenius-stable integral lattice for the Weil structure is being assumed.",
-   "uses": [
-    "cor-coef-verdier-weil-equivariance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Fourth sentence: duality operations and evaluation-defined comparisons"
-   }
-  },
-  {
-   "text": "For a supplied formal Verdier comparison $D_YRf_!M\\to Rf_*D_XM$, work on its domain: all displayed objects, adjunctions and the projection isomorphism below must be defined. The following equivariance calculation does not require that comparison to be invertible. In particular, it applies to the isomorphism of [fix-cor-verdier-exchange] under that theorem's own hypotheses. Put $A=R\\mathcal Hom_Y(Rf_!M,\\omega_Y)$. Form the comparison by the successive tensor, exceptional and ordinary transpose of\n$$Rf_!(M\\otimes^L Lf^*A)\\xrightarrow{\\mathrm{PF}^{-1}}Rf_!M\\otimes^L A\\xrightarrow{\\mathrm{ev}}\\omega_Y.$$\nThe projection isomorphism and evaluation are equivariant by Step 6. Each transpose is obtained by applying the relevant lifted right adjoint and precomposing with its unit; those units are equivariant by Steps 4 and 6. Thus the resulting map $A\\to Rf_*R\\mathcal Hom_X(M,Rf^!\\omega_Y)$ is equivariant. The identification $c:Rf^!\\omega_Y\\simeq\\omega_X$ is the adjunction mate of the compact-support composition for $a_X=a_Yf$, evaluated at the coefficient unit. It is equivariant by the same unit--map--counit calculation and the pasting identities of [lem-weil-pbc-mate-pasting]. Postcomposing by $Rf_*R\\mathcal Hom(M,c)$ gives the displayed Verdier exchange. Under the hypotheses of [fix-lem-tensor-adjunction] this is its inverse internal-adjunction map, followed by $Rf_*R\\mathcal Hom(M,c)$, and [fix-cor-verdier-exchange] proves it invertible. More generally the calculation proves equivariance wherever this same formal map is supplied; whenever it is an isomorphism, its inverse is equivariant too. No ambient-admissibility hypothesis is added to the lifting assertion.",
-   "uses": [
-    "fix-cor-verdier-exchange",
-    "fix-lem-tensor-adjunction",
-    "lem-fix-weil-operations",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Fourth sentence: the formal Verdier exchange built from evaluation and adjunction"
-   }
-  },
-  {
-   "text": "In the smooth site-perfect Poincare setting, write the pairing as the composite of the tensor product, evaluation $K\\otimes^L K^\\vee(d)\\to\\Lambda_X(d)$, and the smooth trace to the coefficient point. Step 8 gives equivariance of evaluation and biduality for arbitrary rational Weil isomorphisms, while Step 7 applied to the smooth structure morphism gives equivariance of the smooth trace. Naturality of the tensor product and evaluation therefore yields\n$$\\langle F_{c,K}x,F_{K^\\vee(d)}y\\rangle_i=\\langle x,y\\rangle_i.$$\nThe datum on the second factor is the contravariant inverse datum followed by the canonical twist, whose scalar is $q^{-d}$; this is exactly the stated twisted pairing. No theorem requiring an integral Weil lattice is used.",
-   "uses": [
-    "cor-coef-verdier-weil-equivariance",
-    "lem-pur-rational-weil-naturality-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Proof sentence 4, final clause: smooth pairing"
-   }
-  },
-  {
-   "text": "Finally, an equivariant arrow $u:(A,\\theta_A)\\to(B,\\theta_B)$ satisfies $u\\theta_A=\\theta_BP(u)$. Apply the cohomology functor of [prop-constructible-truncations] and use its comparison with $P$; this is exactly the Frobenius-equivariance equation on cohomology sheaves. For ordinary or compactly supported cohomology groups whenever defined, push to $s=\\operatorname{Spec}k$ using Step 6 and use the point transport $\\iota:\\operatorname{Fib}_s\\to\\operatorname{Fib}_sP_s$. Its naturality is [lem-weil-frobenius-point-transport-natural]. With $F_A=\\operatorname{Fib}_s(\\theta_A)\\iota_A$, that naturality and the Weil equation give\n$$\\operatorname{Fib}_s(u)F_A=\\operatorname{Fib}_s(\\theta_B)\\operatorname{Fib}_s(P_su)\\iota_A=F_B\\operatorname{Fib}_s(u).$$\nApplying $H^i$ proves the equation on groups. The preceding steps cover each comparison in the statement, and forgetting their Weil structures gives the original maps by construction.",
-   "uses": [
-    "prop-constructible-truncations",
-    "lem-weil-frobenius-point-transport-natural",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Final assertion: forgetful compatibility and equivariant cohomology maps"
+    "place": "Proof sentence 4: rational duality/evaluation and the explicit projection–evaluation–transpose construction of formal Verdier exchange; returned proof Steps 8–9."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-frobenius-detailed",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-fix-weil-operations",
-  "def-weil-weil-sheaf-complex",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-mate-iso-along-equivalences",
-  "prop-constructible-truncations",
-  "lem-pod-texact-truncation-comparison",
-  "def-exchange-projection",
-  "lem-weil-pbc-mate-pasting",
-  "lem-pur-rational-weil-naturality-mate",
-  "cor-coef-verdier-weil-equivariance",
-  "fix-cor-verdier-exchange",
-  "fix-lem-tensor-adjunction",
-  "lem-weil-frobenius-point-transport-natural",
-  "lem-pod-weil-frobenius-compact-support-exchange"
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pod-constructible-mate-coherence",
+  "lem-pod-weil-frobenius-compact-support-exchange",
+  "lem-pod-fixed-pair-truncation-cohomology",
+  "lem-pod-rational-purity-pairing",
+  "lem-pod-formal-verdier-exchange-equivariance"
  ],
  "proof_origin": {
   "by": "agent",
@@ -315,49 +211,11 @@
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.WeilSheaf.FourierInversion.OtherSections: the blueprint item prop-weil-operations's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "prop-weil-operations",
   "worker": "stage1",
-  "summary": "Repaired the returned split by adding the field-level lemma lem-pur-rational-weil-naturality-mate. Steps 7 and 10 now prove purity and pairing equivariance for arbitrary rational Weil isomorphisms directly from rational naturality, the adjunction-mate identification, and evaluation/trace composition; no integral lattice hypothesis is used. All other domains, hypotheses, and the statement remain unchanged. Repair adds the exact Frobenius compact-support exchange isomorphism needed by the mate construction. Repair of landing return at 7247224be4: retained the independent reader's compact-support exchange lemma and its citations in Steps 3 and 6; supplied its missing chapter sec-poincare-duality and unit sk-lem-finite. Compared all cited nodes against the reviewed snapshot; only a Lean attachment changed, not the statements used.",
-  "blueprint": "Steps 1–4 and 6 realize proof sentence 1; Step 5 sentence 2; repaired Step 7 sentence 3 using the new rational naturality/mate lemma; Steps 8–10 sentence 4, with Step 10 deriving the pairing from evaluation and trace; Step 11 the concluding assertion.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Exact inverse-image equivalence along a scheme isomorphism, including the semilinear Frobenius automorphism."
-   },
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "Identifies Frobenius completed pullback with inverse-image transport before field coefficient passage."
-   },
-   {
-    "node": "lem-fix-weil-operations",
-    "why": "The blueprint explicitly uses this algebraic equivariance interface for operations and their maps."
-   },
-   {
-    "node": "lem-weil-mate-iso-along-equivalences",
-    "why": "Generic categorical invertibility criterion for the mate along the two Frobenius equivalences; avoids assuming ambient admissibility."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic identities identifying exceptional and duality comparison maps as the pasted mates of the lifted compact-support comparisons."
-   },
-   {
-    "node": "cor-coef-verdier-weil-equivariance",
-    "why": "Existing constructible field-level duality/evaluation/biduality equivariance interface, not a replacement proof of the unit finiteness theorem."
-   },
-   {
-    "node": "fix-cor-verdier-exchange",
-    "why": "The existing Verdier exchange isomorphism; only equivariance of its formal construction is checked here and its hypotheses are retained."
-   },
-   {
-    "node": "fix-lem-tensor-adjunction",
-    "why": "The internal-adjunction isomorphism underlying the cited Verdier exchange; the step makes its transposes explicit."
-   },
-   {
-    "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Naturality of point transport converts the Weil-morphism equation into the equation for cohomology groups."
-   }
-  ]
+  "summary": "Q108 repairs the human-directed re-split: all eleven former proof steps are distributed among five independently stated unsplit nodes (old Steps 1–2; 3–4 and 6; 5 and 11; 7 and 10; 8–9). The item statement is unchanged. The assembly is below 3000 characters. The report retains the full old argument verbatim, maps every step to its new task, and audits sources, comparisons, domains and duplicates. New nodes contain no proof steps; their separate proofs remain for parallel stage-1 workers.",
+  "blueprint": "New assembly Steps 1–2 implement sentence 1; Step 3 implements sentence 2 and the final cohomology assertion; Step 4 implements sentences 3–4 on rational purity/trace/pairing; Step 5 implements sentence 4 on formal duality exchange. No source route is replaced."
  },
  "tool_uses": [
   "lem-weil-proetale-isomorphism-inverse-image",
@@ -371,11 +229,11 @@
   "lem-weil-frobenius-point-transport-natural"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-NP-8bfc1c374",
-  "group": "NP",
+  "reviewer": "NT-cc-Q108-046f4afe9",
+  "group": "Q108",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-8bfc1c374 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited statements and sources, unit/chapter route, and coordination documents. All 11 steps, coefficient/base-change hypotheses, edge cases, searches, route-pivot closure, and batch-5 restrictions check out; no SGA source, duplicate, cycle, or long hidden lemma found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-046f4afe9 (reviewer sub-agent of L); spot-checked: Read in full: the item, all five new nodes, every cited statement, the main-20261015 prop-weil-operations proof (5 sentences), unit sk-lem-finite, the 2026-10-21 repair note (re-split extended to batch 5) and the base item, which is the live 11-step proof PASSed at NP 96ed7f97. The snapshot's chapter symlinks point to a gc'd dagsnap, so all non-pod nodes were read from clones/side-live. Re-split: the statement is byte-identical; the proof is a 5-step, 2425-character assembly; all 11 old step texts appear verbatim in the report. Each old step reappears as a clause of a self-contained, statement-only new node of comparable size: Steps 1-2 in semilinear-field-operation-lifts (2.9k), 3/4/6 in constructible-mate-coherence (3.0k), 5/11 in fixed-pair-truncation-cohomology (2.7k), 7/10 in rational-purity-pairing (3.3k), 8-9 in formal-verdier-exchange-equivariance (3.4k). No argument was shortened or dropped. The corrected transpose order in old Step 9 (exceptional, then tensor-Hom, then ordinary) is right; I checked the types. Mathematics: the mate b of a^{-1} matches def-weil-pbc-adjunction-mate and is invertible by lem-weil-mate-iso-along-equivalences; I derived both mate identities from naturality and the triangle identities. The third truncation-triangle arrow is unique by BBD 1.3.3. The point-transport chain follows from naturality of iota. Purity and pairing for arbitrary rational theta work without a lattice (checked d=0 and theta=ell on a point). The formal Verdier map is invertible only under the fix-node hypotheses. Other edge cases checked: f=id, empty X, scalar Hom lift b/a, non-separated X_0 with f_0 separated. Batch-5, each flagged citation accepted: (1) semilinear-field-operation-lifts, (2) constructible-mate-coherence, (3) fixed-pair-truncation-cohomology, (4) rational-purity-pairing, (5) formal-verdier-exchange-equivariance. Each is Frobenius-equivariance calculus, which the nt-assume-poincare-duality scope explicitly excludes; the trace-formula leaf takes Weil operators as given. Delivered closure = base closure minus 18 old-proof tools plus exactly the 5 new nodes; neither assumption leaf, nor nt-target-poincare-isiso, sk-thm-sf-verdier-exchange, thm-sf-verdier-exchange, cor-sf-duality-pullback or sk-thm-trace-transport is in it. fix-cor-verdier-exchange was already cited in base Step 9. Duplicate candidates were searched across the DAG and distinguished: lem-fix-weil-operations, cor-coef-verdier-weil-equivariance, lem-coef-frobenius-exchange-equivalence, thm-pod-equivariance-of-the-twisted-pairing and thm-pur-weil-equivariance-of-purity-and-trace (both strict datum), lem-pod-texact-truncation-comparison. Form: B1-B9 fine, searches complete (the NatIso Loogle query error is honestly recorded), no SGA, no cycle. Advisory only, no fixes: node 5's first paragraph restates cor-coef-verdier-weil-equivariance and node 2 re-asserts lem-pod-weil-frobenius-compact-support-exchange, so provers should cite those nodes; the item's merge-owned tool_uses lists old-proof tools the item no longer cites; node 5 has a mild B1 proof hint in its statement."
  }
 }
