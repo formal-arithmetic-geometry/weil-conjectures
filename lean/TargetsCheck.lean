@@ -13,6 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.Statement
 public import Sheaf.Targets.EtaleSmooth
 public import Sheaf.Targets.EtaleSmoothRing
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+public import WeilConjectures.SmoothPurity.Defs
 
 /-!
 # Library target statements
