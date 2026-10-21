@@ -5,10 +5,6 @@ Authors: SHEAF group Q152
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Mod
-public import Mathlib.CategoryTheory.Preadditive.Basic
-public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
@@ -66,6 +62,40 @@ theorem exists_kernel_module_structure
         a ≫ ι = R ◁ ι ≫ ModObj.smul (M := R) (X := M.X) → a = k.smul) ∧
       ∃ i : ({ X := K, mod := k } : Mod C R) ⟶ M,
         i.hom = ι ∧ ∃ hi : i ≫ f = 0, Nonempty (IsLimit (KernelFork.ofι i hi)) := by
-  sorry
+  have : Mono ι := Fork.IsLimit.mono hK
+  obtain ⟨γ, hγ⟩ := KernelFork.IsLimit.lift' hK (R ◁ ι ≫ act M.X) (by
+    rw [Category.assoc, act_hom, ← whiskerLeft_comp_assoc, w,
+      MonoidalPreadditive.whiskerLeft_zero, zero_comp])
+  change γ ≫ ι = R ◁ ι ≫ act M.X at hγ
+  let k : ModObj R K := ModObj.mk' R γ (by
+    rw [← cancel_mono ι]
+    simp [Category.assoc, hγ, ← whisker_exchange_assoc]) (by
+    rw [← cancel_mono ι]
+    simp only [Category.assoc, hγ]
+    rw [← whisker_exchange_assoc, mul_act, associator_naturality_right_assoc,
+      ← whiskerLeft_comp_assoc R γ, hγ, whiskerLeft_comp_assoc])
+  let i : ({ X := K, mod := k } : Mod C R) ⟶ M := homMk ι hγ
+  have hi : i ≫ f = 0 := hom_ext _ _ w
+  refine ⟨k, hγ, ?_, i, rfl, hi, ⟨?_⟩⟩
+  · intro a ha
+    exact (cancel_mono ι).1 (ha.trans hγ.symm)
+  · refine KernelFork.IsLimit.ofι i hi (fun {L} g hg ↦ ?_) ?_ ?_
+    · obtain ⟨h, hh⟩ := KernelFork.IsLimit.lift' hK g.hom (by
+        rw [← comp_hom', hg, zero_hom])
+      change h ≫ ι = g.hom at hh
+      exact homMk h (by
+        change act L.X ≫ h = R ◁ h ≫ γ
+        rw [← cancel_mono ι, Category.assoc, hh, act_hom, Category.assoc, hγ,
+          ← whiskerLeft_comp_assoc, hh])
+    · intro L g hg
+      apply hom_ext
+      exact (KernelFork.IsLimit.lift' hK g.hom (by
+        rw [← comp_hom', hg, zero_hom])).2
+    · intro L g hg m hm
+      apply hom_ext
+      apply (cancel_mono ι).1
+      exact (congrArg Hom.hom hm).trans
+        (KernelFork.IsLimit.lift' hK g.hom (by
+          rw [← comp_hom', hg, zero_hom])).2.symm
 
 end CategoryTheory.Mod
