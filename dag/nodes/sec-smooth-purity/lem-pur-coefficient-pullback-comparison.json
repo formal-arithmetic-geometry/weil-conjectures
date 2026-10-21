@@ -13,37 +13,51 @@
  ],
  "proof": [
   {
-   "text": "Inverse image preserves the balanced coequalizer defining scalar extension, because it preserves colimits and finite products. The algebraic graph equations transport addition and scalar multiplication. The ring naturality equation identifies coefficient actions. Construct forward and inverse maps by the balanced pairing; tensor generation and sheafification uniqueness show they are inverse. Both paths on scalar insertion are the insertion for the inverse-image module.",
+   "text": "Construct the natural isomorphism from restriction of scalars followed by inverse image to inverse image followed by restriction. Its underlying component is the composite of the two moduleUnderlying isomorphisms. For addition and scalar multiplication lift arbitrary pairs of target sections through the invertible finite-product comparison. Apply the graph equations for the two inverse images; rings_naturality identifies the restricted scalar action. The resulting linear map has an invertible underlying set-sheaf map, hence is an isomorphism. The proved generic helpers linearLift and sectionPair in GeometricModuleTransport supply the linear lift and product sections.",
    "uses": [
     "def-weil-pbc-algebraic-inverse-image",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-geometric-module-transport"
    ],
    "elementary": true
   },
   {
-   "text": "Choose a flat-term K-flat resolution of a complex. Inverse image and scalar extension preserve the relevant K-flat flat-term class and acyclic comparisons. Hence both composites compute the derived pullback of the same composite ringed map on this resolution.",
+   "text": "Take the mate of this restriction isomorphism under the ordinary geometric module adjunctions. The underlying-adjunction compatibility follows from Geometry.unit_underlying and naturality of pushUnderlying. It identifies the underlying mate with the composite of the two pushUnderlying isomorphisms, so that mate is invertible. Mathlib iterated_mateEquiv_conjugateEquiv then shows that the scalar-adjunction mate is invertible. Its inverse is the ordinary coefficient comparison. unit_mateEquiv_symm, transported by moduleUnderlying, gives precisely ordinary_insertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply K-flat ringed-topos pullback to inverse image followed by extension along the identity ring map. The ordinary identity-extension unitor identifies this functor with the given inverse-image functor. Transport K-flatness and flatness through that isomorphism. The normalization computation counits are therefore invertible both on a flat-term K-flat source complex and on its inverse-image complex. The unitor used here is the proved ordinaryUnit helper of RingedCoefficientScalarUnits.",
    "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-scalar-units",
     "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the ordinary comparison and cancel the invertible computation counits. Naturality and independence of resolution are localization uniqueness. Transport through the exact inverse-image mapDerivedCategoryFactors isomorphisms to obtain exactly Comparisons.representative.",
-   "uses": [],
-   "elementary": true
+   "text": "The proved restriction_localization helper of SiteDerivedTensorDescentIndependentCoefficients, applied directly to the existing flat-term K-flat resolution theorem, presents the derived category as the localization of the flat-term K-flat homotopy subcategory. The quotient of flat-term K-flat complexes onto that subcategory is full and essentially surjective. On these complexes compose the left computation isomorphism, localization of the ordinary comparison, and the inverse right computation isomorphism. Import the existing proved private helper SheafOfModules.ProjectionCoherence.localization_iso_descent from RingedProjectionPullbackComparisons using import all. It descends first through the full essentially surjective quotient and then through the localization, using its existing iso_descent helper and Mathlib Localization.liftNatIso. Multiply the resulting component equation by the right computation isomorphism to obtain exactly Comparisons.representative. Choose these derived isomorphisms for each coefficient map and bundle them with the ordinary comparison. The source helper is generic in the categories and functors; its ringed projection comparisons are not used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-ringed-projection-pullback-comparisons"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-algebraic-inverse-image",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-pur-coefficient-scalar-units",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topos-kflat-pullback"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-ringed-projection-pullback-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6D, lemma-derived-pullback-composition, applied to the two coefficient-change factorizations; Tag 0G7E, lemma-pullback-K-flat; ordinary balanced scalar-extension universal property.; explicit normalization and transport details as in the proof steps."
+  "place": "Tags 0D6D and 0G7E; ordinary restriction comparison via algebraic graph transport and iterated adjunction mates (Mathlib CategoryTheory/Adjunction/Mates.lean); explicit K-flat computation normalization by K2. Generic quotient/localization descent reuses the existing proved private ProjectionCoherence.localization_iso_descent and its iso_descent helper through a proof-only import all of RingedProjectionPullbackComparisons. Resolving localization uses the proved restriction_localization helper directly with lem-pc-kflat-resolution; no new tensor-bifunctor descent proof is needed."
  },
  "mathlib_searches": [
   {
@@ -126,14 +140,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-eb4db",
-  "group": "R4",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261020T221333-L-4175763",
+  "landing": "20261021T111227-L-60755",
   "kind": "interface",
-  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
