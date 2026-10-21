@@ -23665,3 +23665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T20:30:01Z L: superseded stage-1 delivery NL/lem-sfb-profinite-metric-function-quotients at 130cf0f21737e6bb4e22d2287064238ccb7513ca; current completion retained; packet archived at refs/superseded/NL/lem-sfb-profinite-metric-function-quotients/130cf0f21737e6bb4e22d2287064238ccb7513ca; stale return retired.
 - 20:30 L: merged deliver/NZ/lem-sfb-profinite-action-coherent-presentation (reviewer PASS; first push; new nodes: 0)
 - 20:30 L: returned deliver/O3/lem-sfb-trivial-ladic-derived-exterior (reviewer RETURN: L: independent stage-2 immutable head 130eb8bf28ea: H2: delivery adds theorem stmt_dep lem-sfb-polynomial-derived-bar-co)
+- 20:30 L: returned deliver/NC/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: This is the 9th push of this item. NV 01fd, NF 02bf/7bcb/4bc0, NL 27f2/e7aa, NH e352 and NB bc06 were all returned for d)
