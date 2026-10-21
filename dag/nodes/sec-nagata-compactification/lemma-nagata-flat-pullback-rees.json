@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-flat-pullback-rees",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Flat pullback of the Rees algebra",
@@ -17,24 +17,117 @@
  ],
  "proof": [
   {
-   "text": "Apply [lemma-nagata-flat-pullback-ideal-pow] in every degree and check\ncompatibility with multiplication. The degreewise isomorphisms assemble\nto the claimed graded equivalence.",
+   "text": "Use the data of [def-nagata-flat-pullback-rees-map]: a quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_X$ and a flat morphism $g:Y\\to X$. For every $n\\geq0$, apply exactness in [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective] to the inclusion $\\mathcal I^n\\hookrightarrow\\mathcal O_X$. Thus $g^*\\mathcal I^n\\to g^*\\mathcal O_X$ is injective. The tensor formula in [def-pc-module-pullback] identifies $g^*\\mathcal O_X$ with $\\mathcal O_Y$: locally $b\\otimes a\\mapsto b g^\\sharp(a)$ has inverse $b\\mapsto b\\otimes1$, since $b\\otimes a=b g^\\sharp(a)\\otimes1$. By [lemma-nagata-flat-pullback-ideal-pow], the image in $\\mathcal O_Y$ is exactly $(\\mathcal I\\mathcal O_Y)^n$. Consequently its factorization onto that image is an isomorphism $e_n:g^*\\mathcal I^n\\xrightarrow{\\sim}(\\mathcal I\\mathcal O_Y)^n$. This is precisely the canonical degree-$n$ map defining $\\beta_g$, rather than an arbitrarily chosen isomorphism.",
    "uses": [
+    "def-nagata-flat-pullback-rees-map",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "def-pc-module-pullback",
     "lemma-nagata-flat-pullback-ideal-pow"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex; literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
+    "place": "Tag 02N4, lemma-pullback-flat; blueprint comparison in each degree"
+   }
+  },
+  {
+   "text": "The adjunction $g^*\\dashv g_*$ stated in [def-pc-module-pullback], together with [lem-weil-pbc-left-adjoint-preserves-colimits] applied to the small discrete category $\\mathbf N$, identifies $g^*(\\bigoplus_{n\\geq0}\\mathcal I^n)$ with $\\bigoplus_{n\\geq0}g^*\\mathcal I^n$. The source direct sum exists by [def-nagata-sheaf-rees-algebra]; the colimit lemma also supplies its pulled-back coproduct. The target is $\\bigoplus_{n\\geq0}(\\mathcal I\\mathcal O_Y)^n$ by the same Rees definition. Under this identification, [def-nagata-flat-pullback-rees-map] identifies $\\beta_g$ with the direct sum of the maps $e_n$ from step 1. The coproduct map whose restriction to the $n$th summand is $e_n^{-1}$ is an inverse: either composite restricts to the identity on every summand, hence is the identity by the coproduct universal property. This proves invertibility of the underlying module-sheaf map and preserves every degree.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-nagata-sheaf-rees-algebra",
+    "def-nagata-flat-pullback-rees-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex; literature/stacks-project/sheaves.tex; literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
+    "place": "Tag 0038, lemma-adjoint-exact (1); Tag 0096, lemma-adjoint-pullback-pushforward-modules; assembly of the degreewise maps"
+   }
+  },
+  {
+   "text": "Check the algebra operations on homogeneous tensor generators. In the tensor presentation of [def-pc-module-pullback] and [def-pur-sheaf-tensor-product], take local $a\\in\\mathcal I^m$, $c\\in\\mathcal I^n$ and local coefficients $b,d\\in\\mathcal O_Y$. By [def-nagata-flat-pullback-rees-map], $e_m(b\\otimes a)=b g^\\sharp(a)$ and $e_n(d\\otimes c)=d g^\\sharp(c)$. The multiplication of [def-nagata-sheaf-rees-algebra] sends their source product to $bd\\otimes ac$, so both routes give $bd g^\\sharp(ac)=b g^\\sharp(a)d g^\\sharp(c)$ in degree $m+n$. Bilinearity extends this equality to finite sums of pure tensors and then to their sheafifications. The degree-zero element $1\\otimes1$ maps to $1$, and degree-zero scalars $b\\otimes1$ map to $b$. Thus the map already shown invertible is a unital graded $\\mathcal O_Y$-algebra morphism.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-nagata-flat-pullback-rees-map",
+    "def-nagata-sheaf-rees-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
+    "place": "Tag 03EK, section-tensor-product (definition by sheafification); blueprint instruction to check compatibility with multiplication"
+   }
+  },
+  {
+   "text": "Let $E$ be the inverse module-sheaf map constructed in step 2. For local sections $u,v$ of the target algebra, multiplicativity in step 3 gives $\\beta_g(E(u)E(v))=uv=\\beta_g(E(uv))$. Apply the inverse $E$ to obtain $E(u)E(v)=E(uv)$; similarly $\\beta_g(E(1))=1=\\beta_g(1)$ gives $E(1)=1$. Its module linearity supplies preservation of addition and scalars, and its degree-$n$ restriction is $e_n^{-1}$. Therefore $E$ is a graded algebra inverse of $\\beta_g$, proving the claimed equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
+    "place": "Conclusion of the degreewise assembly and multiplication check"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-flat-pullback-ideal-pow"
+  "def-nagata-flat-pullback-rees-map",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "def-pc-module-pullback",
+  "lemma-nagata-flat-pullback-ideal-pow",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-nagata-sheaf-rees-algebra",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-flat-pullback-rees.md",
+  "place": "Statement and blueprint_update.proof; expanded using Stacks Tags 02N4 (lemma-pullback-flat), 0096 (lemma-adjoint-pullback-pushforward-modules), 0038 (lemma-adjoint-exact) and 03EK (section-tensor-product)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rees.*(baseChange|tensor|flat)|(baseChange|tensor|flat).*rees",
+   "results": "No hits in the pinned Mathlib source.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rees algebra commutes with flat base change",
+   "results": "reesAlgebra; Module.Flat.isBaseChange; IsSMulRegular.of_flat_of_isBaseChange; RingHom.Flat.isStableUnderBaseChange; faithful-flat and regular-sequence stability results. None is the Rees comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "reesAlgebra",
+   "results": "reesAlgebra and its finite generation, Noetherianity, membership, monomial and support formulas in Mathlib.RingTheory.ReesAlgebra. No flat base-change equivalence.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback of a quasi coherent ideal sheaf Rees algebra is a graded algebra isomorphism",
+   "results": "Proj.pullbackAwayιIso and related Proj chart identities; projIsoSpecTopComponent. None states flat base change of sheaf Rees algebras.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars of an ideal filtration Rees ring along a flat ring homomorphism",
+   "results": "Ideal.Filtration.submodule, submoduleInfHom, submodule_span_single, submodule_eq_span_le_iff_stable_ge, Stable, Filtration and stableFiltration; these construct filtrations and do not compare Rees algebras after flat base change.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|tensor|flat",
+   "results": "No hits in Mathlib/RingTheory/ReesAlgebra.lean for baseChange|tensor|flat (case-insensitive). Read its Rees definition and generation results; no comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -72,5 +165,29 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-flat-pullback-rees",
+  "worker": "stage1",
+  "summary": "Expanded the degreewise argument without creating nodes. The cited ideal-power lemma states image equality only: flat-pullback exactness now supplies injectivity separately. Used the existing adjunction and colimit leaf to assemble the isomorphisms, wrote the multiplication and unit calculation, and verified the inverse. All original metadata and the statement are retained. Six actual logged Mathlib queries gave no exact or one-line match.",
+  "blueprint": "Realizes blueprint_update.proof: apply the ideal-power image statement in each degree (step 1, with exactness supplying the missing injectivity), assemble degreewise isomorphisms (step 2), check multiplication (step 3), and conclude graded equivalence (step 4). Remains within the Rees-algebra part of unit sk-lem-nagata-sketch-blowups.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Uses only exactness of Zariski module pullback along a flat scheme morphism to preserve the inclusions of ideal powers. The ideal-power node in this unit states image equality but does not state injectivity; the generic exactness theorem supplies that separate fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-bc97c7990",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-bc97c7990 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. The statement is unchanged and matches main-20261015 and master: beta_g is a graded algebra equivalence, with stmt_dep def-nagata-flat-pullback-rees-map. Step 1: the ideal-pow statement gives only the image equality, so injectivity of g^*I^n -> g^*O_X = O_Y comes from flat-pullback exactness (lem-weil-pbc-flat-module-pullback-exact-pushforward-injective, true by Stacks 02N4 modules.tex:3191). This correctly avoids using ideal-pow's proof (C3), and e_n is the canonical degree-n map. Step 2: g^* is a left adjoint (def-pc-module-pullback), so the Mathlib leaf leftAdjoint_preservesColimits gives preservation of the sum over the discrete N; the inverse is the sum of the e_n^{-1} by the coproduct universal property. Step 3 (elementary): (b⊗a)(d⊗c)=bd⊗ac maps to b g#(a) d g#(c); this extends from pure tensors through sheafification, and the unit maps to 1. Step 4: the inverse of a bijective algebra map is an algebra map. Edge cases checked: n=0, I=0, I=O_X, nilpotent I, non-surjective flat g. Z->Z/2 with I=(2) shows flatness is needed. I accept the declared tool use (generic exactness that no node of this unit states). There is no cycle (146-node closure), no duplicate of the Rees comparison, no SGA source, and all three kinds of Mathlib search were run."
  }
 }
