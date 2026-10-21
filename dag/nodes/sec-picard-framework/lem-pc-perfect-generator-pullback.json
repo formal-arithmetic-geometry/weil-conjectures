@@ -53,6 +53,14 @@
     "lem-sc-affine-derived-pushforward-conservative"
    ],
    "elementary": false
+  },
+  {
+   "text": "The adopted source theorem also proves perfectness of the pullback, by derivedPullback_preserve_perfect. For its additional source-open localization family use nonempty_derivedOpenLocalization on X′. Apply that theorem, whose generator proof is Steps 1-3, and project its last two conjuncts. This gives the archived signature without adding a hypothesis. The compatibility declaration has a distinct name so it coexists with the adopted theorem.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-derived-open-localization-universe"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -60,13 +68,16 @@
   "lem-pc-ringed-spaces-derived-adjoint",
   "lem-sc-finite-affine-derived-equivalence",
   "def-pc-derived-pullback",
-  "lem-sc-affine-derived-pushforward-conservative"
+  "lem-sc-affine-derived-pushforward-conservative",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-derived-open-localization-universe"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0BQT, affine pullback of a perfect generator; formalized using derived adjunction and affine conservativity",
-  "group": "T4"
+  "place": "Tag 0BQT; reuse adopted source generator proof, with the derived-open-localization size theorem supplying the additional family and project away the perfectness conjunct",
+  "group": "Z5",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -121,13 +132,14 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PerfectGeneratorPullback",
-  "declaration": "AlgebraicGeometry.perfect_generator_pullback",
+  "declaration": "AlgebraicGeometry.perfect_generator_pullback_compat",
   "file": "lean/Sheaf/AlgebraicGeometry/PerfectGeneratorPullback.lean",
-  "statement": "theorem perfect_generator_pullback {X X' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace X'] [QuasiSeparatedSpace X'] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (g : X' ⟶ X) [IsAffineHom g] (M : schemeDerivedQCohCategory X) (hperfect : Scheme.IsPerfect X M.obj) (hgen : ∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (M.obj⟦n⟧ ⟶ E.obj)) : schemeDerivedQCohProperty X' ((derivedPullback g).obj M.obj) ∧ ∀ E : schemeDerivedQCohCategory X', IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj)",
+  "statement": "theorem perfect_generator_pullback_compat {X X' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace X'] [QuasiSeparatedSpace X'] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (g : X' ⟶ X) [IsAffineHom g] (M : schemeDerivedQCohCategory X) (hperfect : Scheme.IsPerfect X M.obj) (hgen : ∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (M.obj⟦n⟧ ⟶ E.obj)) : schemeDerivedQCohProperty X' ((derivedPullback g).obj M.obj) ∧ ∀ E : schemeDerivedQCohCategory X', IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj)",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "Z5",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Restored as a public re-export of the adopted stronger theorem plus an exact-signature compatibility theorem. The attachment names the compatibility theorem, retaining all original hypotheses and conclusions."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -139,13 +151,13 @@
  "lead_note": "L 2026-10-11 14:18 UTC (B-1418): source field corrected (stage-1 correction never applied; proof_origin already perfect.tex 0BQT; C1 R-pgp); was literature/stacks-project/derived-categories-of-schemes.tex / Tag 09IS (perfect-remark-pullback-generator), affine pullback of a perfect generator.",
  "lean_audit": {},
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "C-11455",
+  "group": "Z5",
   "result": "pass",
-  "landing": "20261013T024049-L-3339564",
+  "landing": "20261021T174258-L-3778996",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: byte-identical Lean module and node vs PASSed head 8879eb555 (landing-only return); compat proof = .2 of the live WeilConjectures perfect_generator_pullback with the X'-opens instance from nonempty_derivedOpenLocalization; axioms re-probed against the live build: propext, Classical.choice, Quot.sound"
  }
 }
