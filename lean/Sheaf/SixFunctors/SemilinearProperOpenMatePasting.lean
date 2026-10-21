@@ -158,6 +158,204 @@ private theorem constant_diagram_mate
   funext m
   simpa [constant_diagram_square] using h M
 
+private theorem mate_app_homEquiv
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
+    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) {G : A ⥤ D} {H : B ⥤ E}
+    (t : TwoSquare G L₁ L₂ H) (M : B) :
+    (mateEquiv a b t).app M = b.homEquiv (G.obj (R₁.obj M)) (H.obj M)
+      (t.app (R₁.obj M) ≫ H.map (a.counit.app M)) := by
+  apply (b.homEquiv (G.obj (R₁.obj M)) (H.obj M)).symm.injective
+  rw [Equiv.symm_apply_apply]
+  exact mateEquiv_counit a b t M
+
+private theorem homEquiv_conjugate_transport
+    {A B : Type*} [Category A] [Category B]
+    {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤ A}
+    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (e : L₁ ≅ L₂)
+    {X : A} {Y : B} (f : L₁.obj X ⟶ Y) :
+    a.homEquiv X Y f ≫ (conjugateIsoEquiv a b e.symm).hom.app Y =
+      b.homEquiv X Y (e.inv.app X ≫ f) := by
+  rw [a.homEquiv_unit, b.homEquiv_unit]
+  have hn := (conjugateIsoEquiv a b e.symm).hom.naturality f
+  rw [Category.assoc, hn, ← Category.assoc]
+  rw [conjugateIsoEquiv_apply_hom, unit_conjugateEquiv]
+  rw [Category.assoc, ← R₂.map_comp]
+  rfl
+
+private theorem homEquiv_open_factor
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    {L : A ⥤ B} {R : B ⥤ A} {J₀ : B ⥤ D} {P₀ : D ⥤ B}
+    (a : L ⊣ R) (b : J₀ ⊣ P₀) [IsIso b.unit]
+    (F : E ⥤ B) (G : E ⥤ D) (d : F ⋙ J₀ ≅ G)
+    {X : A} {M : E} (f : L.obj X ⟶ F.obj M) :
+    (a.comp b).homEquiv X (G.obj M) (J₀.map f ≫ d.hom.app M) ≫
+        R.map (P₀.map (d.inv.app M) ≫ inv (b.unit.app (F.obj M))) =
+      a.homEquiv X (F.obj M) f := by
+  rw [Adjunction.comp_homEquiv]
+  change a.homEquiv _ _ (b.homEquiv _ _ _) ≫ _ = _
+  rw [← a.homEquiv_naturality_right]
+  congr 1
+  rw [b.homEquiv_unit]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% b.unit_naturality f]
+  simp only [← P₀.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [P₀.map_id, Category.id_comp, IsIso.hom_inv_id, Category.comp_id]
+
+private theorem composite_conjugate_inv
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    {L : A ⥤ D} {R : D ⥤ A} {L₁ : A ⥤ B} {R₁ : B ⥤ A}
+    {L₂ : B ⥤ D} {R₂ : D ⥤ B}
+    (a : L ⊣ R) (b : L₁ ⊣ R₁) (c : L₂ ⊣ R₂)
+    (e : L ≅ L₁ ⋙ L₂) (M : D) :
+    b.homEquiv (R.obj M) (R₂.obj M) (c.unit.app (L₁.obj (R.obj M)) ≫
+      R₂.map (e.inv.app (R.obj M) ≫ a.counit.app M)) =
+        (conjugateIsoEquiv (b.comp c) a e).inv.app M := by
+  simp [Adjunction.homEquiv_unit, conjugateIsoEquiv_apply_inv,
+    conjugateEquiv, mateEquiv, Adjunction.comp_unit_app, Functor.map_comp,
+    Category.assoc]
+
+private theorem adjunct_transport
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Lr : D ⥤ A} {Rr : A ⥤ D} {Lp : E ⥤ B} {Rp : B ⥤ E}
+    {Ji : D ⥤ E} {Pi : E ⥤ D} {Jb : F ⥤ B} {Pb : B ⥤ F}
+    {Lq : D ⥤ F} {Rq : F ⥤ D} {Js : A ⥤ F} {Jk : A ⥤ B}
+    (ar : Lr ⊣ Rr) (ap : Lp ⊣ Rp) (ai : Ji ⊣ Pi)
+    (ab : Jb ⊣ Pb) (aq : Lq ⊣ Rq) [IsIso ab.unit]
+    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk)
+    (α : Ji ⋙ Lp ⟶ Lr ⋙ Jk) (M : A)
+    (f : Lq.obj (Rr.obj M) ⟶ Js.obj M)
+    (hα : β.inv.app (Rr.obj M) ≫ α.app (Rr.obj M) ≫
+      Jk.map (ar.counit.app M) = Jb.map f ≫ d.hom.app M) :
+    ai.homEquiv _ _ ((mateEquiv ar ap α).app M) ≫
+      (conjugateIsoEquiv (ai.comp ap) (aq.comp ab) β.symm).hom.app (Jk.obj M) ≫
+      Rq.map (Pb.map (d.inv.app M) ≫ inv (ab.unit.app (Js.obj M))) =
+        aq.homEquiv _ _ f := by
+  have hδ := homEquiv_conjugate_transport (ai.comp ap) (aq.comp ab) β
+    (α.app (Rr.obj M) ≫ Jk.map (ar.counit.app M))
+  rw [hα] at hδ
+  have hδ' : ai.homEquiv _ _ ((mateEquiv ar ap α).app M) ≫
+      (conjugateIsoEquiv (ai.comp ap) (aq.comp ab) β.symm).hom.app (Jk.obj M) =
+      (aq.comp ab).homEquiv _ _ (Jb.map f ≫ d.hom.app M) := by
+    rw [mate_app_homEquiv ar ap]
+    simpa only [Adjunction.comp_homEquiv, Equiv.trans_apply, Functor.id_obj,
+      Functor.comp_obj] using hδ
+  rw [← Category.assoc, hδ']
+  exact homEquiv_open_factor aq ab Js Jk d f
+
+private def adjunct_comparison
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Rr : A ⥤ D} {Lp : E ⥤ B} {Rp : B ⥤ E}
+    {Ji : D ⥤ E} {Pi : E ⥤ D} {Jb : F ⥤ B} {Pb : B ⥤ F}
+    {Lq : D ⥤ F} {Rq : F ⥤ D} {Rs : A ⥤ F}
+    {Js : A ⥤ F} {Jk : A ⥤ B}
+    (ap : Lp ⊣ Rp) (ai : Ji ⊣ Pi) (ab : Jb ⊣ Pb) (aq : Lq ⊣ Rq)
+    [IsIso ab.unit] (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk)
+    (t : Js ≅ Rs) (δ : Rs ⋙ Rq ≅ Rr) : (Jk ⋙ Rp) ⋙ Pi ≅ Rr :=
+  Functor.associator _ _ _ ≪≫
+  Functor.isoWhiskerLeft Jk (conjugateIsoEquiv (ai.comp ap) (aq.comp ab) β.symm) ≪≫
+  (Functor.associator _ _ _).symm ≪≫
+  Functor.isoWhiskerRight
+    (Functor.isoWhiskerRight d.symm Pb ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft Js (asIso ab.unit).symm ≪≫ Functor.rightUnitor _) Rq ≪≫
+  Functor.isoWhiskerRight t Rq ≪≫ δ
+
+private theorem adjunct_comparison_identity
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Lr : D ⥤ A} {Rr : A ⥤ D} {Lp : E ⥤ B} {Rp : B ⥤ E}
+    {Ji : D ⥤ E} {Pi : E ⥤ D} {Jb : F ⥤ B} {Pb : B ⥤ F}
+    {Lq : D ⥤ F} {Rq : F ⥤ D} {Ls : F ⥤ A} {Rs : A ⥤ F}
+    {Js : A ⥤ F} {Jk : A ⥤ B}
+    (ar : Lr ⊣ Rr) (ap : Lp ⊣ Rp) (ai : Ji ⊣ Pi)
+    (ab : Jb ⊣ Pb) (aq : Lq ⊣ Rq) (as_ : Ls ⊣ Rs) [IsIso ab.unit]
+    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk)
+    (e : Lr ≅ Lq ⋙ Ls) (t : Js ≅ Rs) (δ : Rs ⋙ Rq ≅ Rr)
+    (hδ : conjugateIsoEquiv (aq.comp as_) ar e = δ)
+    (α : Ji ⋙ Lp ⟶ Lr ⋙ Jk) (M : A)
+    (f : Lq.obj (Rr.obj M) ⟶ Js.obj M)
+    (hα : β.inv.app (Rr.obj M) ≫ α.app (Rr.obj M) ≫
+      Jk.map (ar.counit.app M) = Jb.map f ≫ d.hom.app M)
+    (hf : f ≫ t.hom.app M = as_.unit.app (Lq.obj (Rr.obj M)) ≫
+      Rs.map (e.inv.app (Rr.obj M) ≫ ar.counit.app M)) :
+    ai.homEquiv _ _ ((mateEquiv ar ap α).app M) ≫
+      (adjunct_comparison ap ai ab aq β d t δ).hom.app M = 𝟙 _ := by
+  have ht := adjunct_transport ar ap ai ab aq β d α M f hα
+  have hh := congrArg (fun z ↦ z ≫ Rq.map (t.hom.app M)) ht
+  simp only [← Category.assoc] at hh
+  rw [← aq.homEquiv_naturality_right, hf,
+    composite_conjugate_inv ar aq as_ e M, hδ] at hh
+  have hh' := congrArg (fun z ↦ z ≫ δ.hom.app M) hh
+  simp only [Iso.inv_hom_id_app] at hh'
+  simpa only [adjunct_comparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.rightUnitor_hom_app,
+    asIso_inv, NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj,
+    Category.id_comp, Category.comp_id,
+    Category.assoc] using hh'
+
+private theorem homEquiv_iso_inverse
+    {A B : Type*} [Category A] [Category B] {J : A ⥤ B} {P : B ⥤ A}
+    (a : J ⊣ P) {X : A} {Y : B} (f : J.obj X ⟶ Y) (e : P.obj Y ≅ X)
+    (h : a.homEquiv X Y f ≫ e.hom = 𝟙 X) :
+    a.homEquiv X Y f = e.inv ∧ a.unit.app X ≫ P.map f ≫ e.hom = 𝟙 X := by
+  constructor
+  · apply (cancel_mono e.hom).1
+    simpa only [Iso.inv_hom_id] using h
+  · simpa only [Adjunction.homEquiv_unit, Category.assoc] using h
+
+private def projection_square
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Lr : D ⥤ A} {Lp : E ⥤ B} {Ji : D ⥤ E}
+    {Jb : F ⥤ B} {Lq : D ⥤ F} {Ls : F ⥤ A}
+    {Js : A ⥤ F} {Jk : A ⥤ B}
+    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk) (e : Lr ≅ Lq ⋙ Ls)
+    (π : 𝟭 F ⟶ Ls ⋙ Js) : Ji ⋙ Lp ⟶ Lr ⋙ Jk :=
+  β.hom ≫ Functor.whiskerRight (Functor.whiskerLeft Lq π) Jb ≫
+    Functor.whiskerRight (Functor.associator Lq Ls Js).inv Jb ≫
+    (Functor.associator (Lq ⋙ Ls) Js Jb).hom ≫
+    Functor.whiskerLeft (Lq ⋙ Ls) d.hom ≫ Functor.whiskerRight e.inv Jk
+
+private theorem projection_square_formula
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Lr : D ⥤ A} {Lp : E ⥤ B} {Ji : D ⥤ E}
+    {Jb : F ⥤ B} {Lq : D ⥤ F} {Ls : F ⥤ A}
+    {Js : A ⥤ F} {Jk : A ⥤ B}
+    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk) (e : Lr ≅ Lq ⋙ Ls)
+    (π : 𝟭 F ⟶ Ls ⋙ Js) (N : D) (M : A) (m : Lr.obj N ⟶ M) :
+    β.inv.app N ≫
+      (projection_square β d e π).app N ≫
+      Jk.map m = Jb.map (π.app (Lq.obj N) ≫ Js.map (e.inv.app N ≫ m)) ≫
+        d.hom.app M := by
+  have hn := d.hom.naturality (e.inv.app N ≫ m)
+  simp only [Functor.comp_map] at hn
+  rw [Jb.map_comp, Category.assoc, hn]
+  simp only [projection_square, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    CategoryTheory.Functor.map_id, Functor.comp_obj, Category.id_comp,
+    Category.assoc, Functor.map_comp, β.inv_hom_id_app_assoc]
+
+private theorem projection_square_formula_of_eq
+    {A B D E F : Type*}
+    [Category A] [Category B] [Category D] [Category E] [Category F]
+    {Lr : D ⥤ A} {Lp : E ⥤ B} {Ji : D ⥤ E}
+    {Jb : F ⥤ B} {Lq : D ⥤ F} {Ls : F ⥤ A}
+    {Js : A ⥤ F} {Jk : A ⥤ B}
+    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk) (e : Lr ≅ Lq ⋙ Ls)
+    (π : 𝟭 F ⟶ Ls ⋙ Js) (α : Ji ⋙ Lp ⟶ Lr ⋙ Jk)
+    (hα : α = projection_square β d e π)
+    (N : D) (M : A) (m : Lr.obj N ⟶ M) :
+    β.inv.app N ≫ α.app N ≫ Jk.map m =
+      Jb.map (π.app (Lq.obj N) ≫ Js.map (e.inv.app N ≫ m)) ≫ d.hom.app M := by
+  subst α
+  exact projection_square_formula β d e π N M m
+
+
 private theorem pushforward_restrict_eq
     {A B : Type (u + 1)} [Category.{u} A] [Category.{u} B]
     (J : GrothendieckTopology A) (K : GrothendieckTopology B)
@@ -866,6 +1064,49 @@ def lambda {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   sComp C τ (StrictTower.squareLift k r p i h) (pullback.snd p i) ≪≫
   eqToIso (congrArg (R C τ) (pullback.lift_snd k r h))
 
+private theorem conjugate_transport
+    {A B I : Type*} [Category A] [Category B]
+    (L : I → A ⥤ B) (R₀ : I → B ⥤ A) (a : ∀ i, L i ⊣ R₀ i)
+    {L' : A ⥤ B} {R' : B ⥤ A} (a' : L' ⊣ R')
+    {i j : I} (e : i = j) (d : L i ≅ L') :
+    conjugateIsoEquiv a' (a j) (eqToIso (congrArg L e.symm) ≪≫ d) =
+      conjugateIsoEquiv a' (a i) d ≪≫ eqToIso (congrArg R₀ e) := by
+  cases e
+  simp
+
+private theorem conjugate_transport_inverse
+    {A B I : Type*} [Category A] [Category B]
+    (L : I → A ⥤ B) (R₀ : I → B ⥤ A) (a : ∀ i, L i ⊣ R₀ i)
+    {L' : A ⥤ B} {R' : B ⥤ A} (a' : L' ⊣ R')
+    {i j : I} (e : i = j) (d : L i ≅ L') :
+    conjugateIsoEquiv a' (a j) (d.symm ≪≫ eqToIso (congrArg L e)).symm =
+      conjugateIsoEquiv a' (a i) d ≪≫ eqToIso (congrArg R₀ e) := by
+  cases e
+  simp
+
+private theorem sComp_congr {V X S : Scheme.{u}} (s : V ⟶ X) (q : X ⟶ S)
+    (r : V ⟶ S) (h : s ≫ q = r) :
+    conjugateIsoEquiv ((adj C τ q).comp (adj C τ s)) (adj C τ r)
+        ((pComp C τ s q).symm ≪≫ eqToIso (congrArg (P C τ) h)).symm =
+      sComp C τ s q ≪≫ eqToIso (congrArg (R C τ) h) := by
+  simpa only [sComp] using
+    conjugate_transport_inverse (P C τ) (R C τ) (fun f ↦ adj C τ f)
+      ((adj C τ q).comp (adj C τ s)) h (pComp C τ s q)
+
+private theorem alpha_eq_projection_square {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
+    alpha C τ k r p i h = projection_square
+      (beta C τ (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm
+        (IsPullback.of_hasPullback p i).flip)
+      (jComp C τ (StrictTower.squareLift k r p i h) (pullback.fst p i) ≪≫
+        jCongr C τ (pullback.lift_fst k r h))
+      (((pComp C τ (StrictTower.squareLift k r p i h) (pullback.snd p i)).symm ≪≫
+        eqToIso (congrArg (P C τ) (pullback.lift_snd k r h))).symm)
+      (pi C τ (StrictTower.squareLift k r p i h)) := by
+  rfl
+
 /-- Gamma is the open adjunct of inverse lambda, and its restriction is inverse lambda
 under the open unit. Source: Stacks 0F7B; Mathlib unit_conjugateEquiv_symm
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
@@ -884,7 +1125,58 @@ theorem gamma_adjunct {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (jAdj C τ i).unit.app ((R C τ r).obj M) ≫
       (P C τ i).map ((gamma C τ k r p i h).app M) ≫
         (lambda C τ k r p i h).hom.app M = 𝟙 _ := by
-  sorry
+  let s := StrictTower.squareLift k r p i h
+  let b := pullback.fst p i
+  let q := pullback.snd p i
+  let d : J C τ s ⋙ J C τ b ≅ J C τ k :=
+    jComp C τ s b ≪≫ jCongr C τ (pullback.lift_fst k r h)
+  let e : P C τ r ≅ P C τ q ⋙ P C τ s :=
+    ((pComp C τ s q).symm ≪≫
+      eqToIso (congrArg (P C τ) (pullback.lift_snd k r h))).symm
+  let β := beta C τ q b i p pullback.condition.symm
+    (IsPullback.of_hasPullback p i).flip
+  let t : J C τ s ≅ R C τ s :=
+    @asIso _ _ _ _ (openToS C τ s) (openToS_isIso C τ s)
+  let f : (P C τ q).obj ((R C τ r).obj M) ⟶ (J C τ s).obj M :=
+    (pi C τ s).app _ ≫ (J C τ s).map
+      (e.inv.app ((R C τ r).obj M) ≫ (adj C τ r).counit.app M)
+  have := jAdj_unit_isIso C τ b
+  have hα : β.inv.app ((R C τ r).obj M) ≫
+      (alpha C τ k r p i h).app ((R C τ r).obj M) ≫
+      (J C τ k).map ((adj C τ r).counit.app M) =
+        (J C τ b).map f ≫ d.hom.app M := by
+    exact projection_square_formula_of_eq β d e (pi C τ s) (alpha C τ k r p i h)
+      (alpha_eq_projection_square C τ k r p i h) ((R C τ r).obj M) M
+      ((adj C τ r).counit.app M)
+  have hf : f ≫ t.hom.app M =
+      (adj C τ s).unit.app _ ≫ (R C τ s).map
+        (e.inv.app ((R C τ r).obj M) ≫ (adj C τ r).counit.app M) := by
+    have hn := t.hom.naturality
+      (e.inv.app ((R C τ r).obj M) ≫ (adj C τ r).counit.app M)
+    simp only [Functor.id_obj] at hn
+    dsimp only [f, pi, NatTrans.comp_app, Functor.whiskerLeft_app]
+    simp only [Category.assoc]
+    change (adj C τ s).unit.app _ ≫ t.inv.app _ ≫
+      (J C τ s).map _ ≫ t.hom.app M = _
+    simp only [Functor.comp_obj] at hn ⊢
+    rw [hn, ← Category.assoc (t.inv.app _), t.inv_hom_id_app, Category.id_comp]
+  have hcomp : conjugateIsoEquiv ((adj C τ q).comp (adj C τ s)) (adj C τ r) e =
+      sComp C τ s q ≪≫ eqToIso (congrArg (R C τ) (pullback.lift_snd k r h)) := by
+    exact sComp_congr C τ s q r (pullback.lift_snd k r h)
+  have hComparison : lambda C τ k r p i h = adjunct_comparison (adj C τ p) (jAdj C τ i)
+      (jAdj C τ b) (adj C τ q) β d t
+      (sComp C τ s q ≪≫ eqToIso (congrArg (R C τ) (pullback.lift_snd k r h))) := by
+    rfl
+  have hmain : (jAdj C τ i).homEquiv _ _ ((gamma C τ k r p i h).app M) ≫
+      (lambda C τ k r p i h).hom.app M = 𝟙 _ := by
+    rw [hComparison]
+    exact adjunct_comparison_identity (adj C τ r) (adj C τ p) (jAdj C τ i)
+      (jAdj C τ b) (adj C τ q) (adj C τ s) β d e t
+      (sComp C τ s q ≪≫ eqToIso (congrArg (R C τ) (pullback.lift_snd k r h)))
+      hcomp (alpha C τ k r p i h) M f hα hf
+  exact homEquiv_iso_inverse (jAdj C τ i) ((gamma C τ k r p i h).app M)
+    ((lambda C τ k r p i h).app M) hmain
+
 
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived semilinear-system categories, without assuming evaluation
@@ -2019,16 +2311,6 @@ private theorem p_coherence {X Y Z T : Scheme.{u}}
   simpa only [pComp, P, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc, Functor.map_comp] using congr_app hh M
-
-private theorem conjugate_transport
-    {A B I : Type*} [Category A] [Category B]
-    (L : I → A ⥤ B) (R₀ : I → B ⥤ A) (a : ∀ i, L i ⊣ R₀ i)
-    {L' : A ⥤ B} {R' : B ⥤ A} (a' : L' ⊣ R')
-    {i j : I} (e : i = j) (d : L i ≅ L') :
-    conjugateIsoEquiv a' (a j) (eqToIso (congrArg L e.symm) ≪≫ d) =
-      conjugateIsoEquiv a' (a i) d ≪≫ eqToIso (congrArg R₀ e) := by
-  cases e
-  simp
 
 private theorem jComp_transport {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
