@@ -23801,3 +23801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T21:37:00Z L: superseded stage-1 delivery NI/sk-def-sf-orientation at fa983d794c070da37ee4f4a8ee93af5e0e804ec8; current completion retained; packet archived at refs/superseded/NI/sk-def-sf-orientation/fa983d794c070da37ee4f4a8ee93af5e0e804ec8; stale return retired.
 - 21:37 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 21:37 L: merged deliver/NQ/lem-pur-vector-integration-site-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 21:39 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
