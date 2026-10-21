@@ -12,9 +12,106 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\alpha=\\operatorname{mate}^{-1}(u):\\bar J E_A\\to E_BJ$ using [def-weil-pbc-adjunction-mate]. Apply [lem-stage3-inverse-mate-equivalences] with $(L_1,R_1,L_2,R_2,G,H)=(J,U,\\bar J,\\bar U,E_A,E_B)$: its two vertical functors are equivalences and its right square is precisely the given isomorphism $u$. Thus $\\alpha$ is invertible. Set $j=\\alpha^{-1}$. Injectivity of the mate bijection gives uniqueness, including the specified normalization. Repeat with $(J',U',\\bar J',\\bar U',E_C,E_D,u')$ to obtain $\\alpha'=(j')^{-1}$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 1: normalized comparison of the two adjunctions; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "Write $\\Phi,\\bar\\Phi$ for the two specified adjunction Hom bijections. The exact transpose equation of [lem-pur-adjunction-mate-transpose], applied to $u$ and $f:Jx\\to y$, gives\n$$\\bar\\Phi(E_B(f)\\circ\\alpha_x)=u_y\\circ E_A(\\Phi(f)).$$\nEvery arrow here has the stated source and target; the equation identifies the full Hom bijections, since $E_A,E_B$ are fully faithful and $u,\\alpha$ are isomorphisms. Taking $f=1_{Jx}$ gives $\\bar U(\\alpha_x)\\circ\\bar\\eta_{E_Ax}=u_{Jx}\\circ E_A(\\eta_x)$. Taking $x=Uy$ and $f=\\varepsilon_y$, whose transpose is $1_{Uy}$ by the triangle identity, gives $E_B(\\varepsilon_y)\\circ\\alpha_{Uy}=\\bar\\varepsilon_{E_By}\\circ\\bar J(u_y)$. These are the unit and counit identifications. The identical substitutions give the primed identities.",
+   "uses": [
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 1: full Hom, unit and counit normalization; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "For (2), put $\\alpha_{ij}=c_{ij}^{-1}$ and\n$$A=(\\alpha_{12}L_{01})\\circ(\\bar L_{12}\\alpha_{01}),\\qquad R=(\\bar R_{10}r_{12})\\circ(r_{01}R_{21}).$$\nClause 2 of [lem-weil-pbc-mate-pasting], for the two pairs of adjacent adjunctions, says that $A$ has mate $R$ under their composite adjunctions [def-weil-pbc-composite-adjunction]. Use now the direct unbarred adjunction $L_{02}\\dashv R_{20}$ and the composite barred adjunction. The conjugate of $a$ is $\\delta^{-1}$ by hypothesis, so clause 3(b) of the same pasting lemma says that $E_2(a)\\circ A$ has mate $R\\circ E_0(\\delta^{-1})$. The conjugate of $\\bar a$ is $\\bar\\delta^{-1}$, so clause 3(a) says that $\\alpha_{02}\\circ(\\bar a E_0)$ has mate $(\\bar\\delta^{-1}E_2)\\circ r_{02}$. These uses have exactly the sources and targets stipulated in [def-weil-pbc-adjunction-conjugate]; no unnormalized uniqueness map is substituted.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 1: preservation of adjoint composition comparisons; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "The hypothesis in (2) is $(\\bar\\delta E_2)\\circ R=r_{02}\\circ E_0(\\delta)$. Cancel its isomorphisms to obtain\n$$R\\circ E_0(\\delta^{-1})=(\\bar\\delta^{-1}E_2)\\circ r_{02}.$$\nThe mate bijection [def-weil-pbc-adjunction-mate] is injective, so Step 3 gives $E_2(a)\\circ A=\\alpha_{02}\\circ(\\bar a E_0)$. Multiply on the left by $c_{02}$ and on the right by $A^{-1}=(\\bar L_{12}c_{01})\\circ(c_{12}L_{01})$. This is exactly the equality of (2).",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 1: cancellation and the specified compositor equation; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "For (3), denote the primed adjunction Hom bijections by $\\Phi',\\bar\\Phi'$. Use [lem-pur-adjunction-mate-transpose] for $b$ with $f=1_{Jx}$, and for $\\bar b$ with $f=1_{\\bar Jz}$. They give\n$$\\Phi'(\\beta_x)=b_{Jx}\\circ P(\\eta_x),\\qquad \\bar\\Phi'(\\bar\\beta_z)=\\bar b_{\\bar Jz}\\circ\\bar P(\\bar\\eta_z).$$\nThe normalizations $\\alpha=j^{-1}$ and $\\alpha'=(j')^{-1}$ turn the required equation into\n$$q_{Jx}\\circ E_D(\\beta_x)\\circ\\alpha'_{Px}=\\bar Q(\\alpha_x)\\circ\\bar\\beta_{E_Ax}\\circ\\bar J'(p_x).\\tag{*}$$\nIndeed this follows by precomposing the claimed equation with $\\alpha'_{Px}$ and postcomposing with $\\bar Q(\\alpha_x)$, and all factors cancelled are invertible.",
+   "uses": [
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 2: the actual inverse-mate comparison, without an invertibility hypothesis on b; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "Transpose the left side of (*) under $\\bar J'\\dashv\\bar U'$. Naturality in the target, the primed Hom equation of Step 2, and Step 5 give\n$$T=\\bar U'(q_{Jx})\\circ u'_{QJx}\\circ E_C(b_{Jx})\\circ E_C(P\\eta_x).$$\nThe hypothesis of (3), evaluated at $Jx$, rewrites this as\n$$T=\\bar b_{E_BJx}\\circ\\bar P(u_{Jx})\\circ p_{UJx}\\circ E_C(P\\eta_x).$$\nNaturality of $p$ at $\\eta_x$, followed by the unit equation of Step 2, gives\n$$T=\\bar b_{E_BJx}\\circ\\bar P\\bar U(\\alpha_x)\\circ\\bar P(\\bar\\eta_{E_Ax})\\circ p_x.$$\nEach rewrite is an equality of arrows $E_CPx\\to\\bar U'E_DQJx$; it uses the given square at the object $Jx$, not an assumed square for its mate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 2: transpose the first route and use the specified right square; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "Naturality of $\\bar b$ at $\\alpha_x:\\bar J E_Ax\\to E_BJx$ and Step 5 at $z=E_Ax$ now give\n$$T=\\bar U'\\bar Q(\\alpha_x)\\circ\\bar U'(\\bar\\beta_{E_Ax})\\circ\\bar\\eta'_{\\bar P E_Ax}\\circ p_x.$$\nMove $p_x$ past $\\bar\\eta'$ by naturality. The result is\n$$T=\\bar U'\\big(\\bar Q(\\alpha_x)\\circ\\bar\\beta_{E_Ax}\\circ\\bar J'(p_x)\\big)\\circ\\bar\\eta'_{E_CPx},$$\nwhich is the transpose of the right side of (*). Injectivity of the adjunction Hom bijection proves (*) for every $x$, hence the stated equality of natural transformations. This calculation uses only the unit/counit definition of transposition and naturality; it needs no adjoints for $P,Q,\\bar P,\\bar Q$ and no invertibility of $b,\\bar b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 2: transpose the second route and identify the actual transformations; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  },
+  {
+   "text": "In the equation of (3), $p,q,j,j'$ are isomorphisms, so $E_D(\\beta_x)$ is invertible exactly when $\\bar\\beta_{E_Ax}$ is. Full faithfulness of the equivalence $E_D$ reflects invertibility: lift an inverse through its Hom bijection and check both inverse equations by faithfulness. Every $z\\in\\overline{\\mathcal A}$ is isomorphic to some $E_Ax$; naturality of $\\bar\\beta$ transports component invertibility along this isomorphism. Thus $\\beta$ is invertible if and only if $\\bar\\beta$ is. All expressions above abbreviate the canonical whiskerings and functor associators; componentwise they are the displayed composites, so no equivalence, unit or counit was set equal to an identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Proof Step 2: reflect and transport invertibility under the specified equivalences; agent-written categorical calculation supplying the open-extension comparison normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+  "place": "Proof Steps 1–2, categorical normalization supplied explicitly using Stacks Tags 0B65 and 0DV0 and the existing mate-calculus nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +161,45 @@
    "results": "CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
    "date": "2026-10-21",
    "verdict": "no match: mateEquiv_square is a pasting identity, not existence and uniqueness of normalized comparisons across equivalences together with their compositor and inverse-mate comparison equations; the other hits give individual unit/counit identities"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|unit_mateEquiv_symm|mateEquiv_counit_symm",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; read Mathlib/CategoryTheory/Adjunction/Mates.lean:84–155,170–214,275–279,355–372,425–438,485–520 and CompositionIso.lean for the candidate scope",
+   "date": "2026-10-21",
+   "verdict": "no match: individual mate, conjugation and composition formulas do not state all three clauses across specified equivalences; retained as tools, with the exact categorical specializations written in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: individual mate, conjugation and composition formulas do not state all three clauses across specified equivalences; retained as tools, with the exact categorical specializations written in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction across equivalences of categories with unit and counit normalized mates",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv; CategoryTheory.unit_mateEquiv; CategoryTheory.Functor.adjunction; CategoryTheory.Equivalence.toAdjunction_unit; CategoryTheory.Bicategory.mateEquiv; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.Adjunction.adjunctionOfEquivRight_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: individual mate, conjugation and composition formulas do not state all three clauses across specified equivalences; retained as tools, with the exact categorical specializations written in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized adjunction comparisons across equivalences preserve adjoint composition and inverse mate squares",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.Equivalence.trans_toAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: individual mate, conjugation and composition formulas do not state all three clauses across specified equivalences; retained as tools, with the exact categorical specializations written in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint isomorphism across equivalences induces a unique isomorphism of left adjoints compatible with both units counits composition and base change mates",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv; CategoryTheory.conjugateEquiv; CategoryTheory.Adjunction.leftAdjointCompIso",
+   "date": "2026-10-21",
+   "verdict": "no match: individual mate, conjugation and composition formulas do not state all three clauses across specified equivalences; retained as tools, with the exact categorical specializations written in the proof"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-module-operations-transport",
@@ -86,5 +218,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "worker": "stage1",
+  "summary": "Constructs the normalized comparisons with the existing proved inverse-mate equivalence theorem, identifies all Hom transposes and units/counits, derives compositor compatibility by the existing mate-pasting clauses, and proves the four-corner inverse-mate identity by an explicit componentwise transpose calculation. No new nodes, no change to the statement or its hypotheses.",
+  "blueprint": "det-nagata-density-normalization-sheaves, Proof Steps 1–2 as pinpointed by the parent lem-sfb-internal-module-operations-transport: normalization of open/module adjunction comparisons, their composition maps and the actual base-change mate. The archived blueprint states the geometric conclusion without supplying this categorical calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic two-direction mate-pasting and change-of-adjunction formulas are categorical tools; the Nagata unit provides no separate categorical calculus and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pur-adjunction-mate-transpose",
+    "why": "Generic exact Hom-transpose formula for an inverse mate, needed to track the actual transformations and normalized units and counits; the Nagata unit does not state this formula."
+   },
+   {
+    "node": "lem-stage3-inverse-mate-equivalences",
+    "why": "Generic invertibility of inverse mates across equivalences; this project theorem is audited closed and only supplies invertibility, not the compositor or four-corner equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-7a213b449",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7a213b449 (reviewer sub-agent of L); spot-checked: Every step checks out against the cited statements, with the types and directions verified, so I made no changes. Shape: one commit that changes only the item and its report, with no new nodes. The statement and stmt_deps are unchanged against both clones/live and clones/side-live, where the item is still unsplit, and there is no repair note. Step 1: lem-stage3-inverse-mate-equivalences applies verbatim with (J,U,J̄,Ū,E_A,E_B); its beta (R1⋙G ≅ H⋙R2) has the same type as u, so α = mate⁻¹(u) is an isomorphism and j = α⁻¹, unique because the mate bijection is injective. Step 2: lem-pur-adjunction-mate-transpose with τ = u gives Φ̄(E_B f∘α_x) = u_y∘E_A Φf; f = 1 gives the unit identity and f = ε_y gives the counit identity. Steps 3–4: mate-pasting clause 2 gives A ↦ R; clause 3(b) with σ = a and σ^c = δ⁻¹ (R20→R10R21) and clause 3(a) with τ = ā and τ^c = δ̄⁻¹ have the correct directions. Cancelling in the hypothesis and using mate injectivity gives E2(a)A = α02(āE0), and multiplying by c02 and A⁻¹ gives clause (2) exactly. Steps 5–7: Φ′(β_x) = b_{Jx}P(η_x). The transpose of the left side of (*) is rewritten by the primed Hom equation, then the hypothesis at Jx, naturality of p, the unit equation, naturality of b̄ at α_x, the barred transpose and naturality of η̄′, which gives the transpose of the right side. Step 8: E_D reflects isomorphisms and E_A is essentially surjective, which gives the iff. Edge cases: identity equivalences, scalar units, b = 0 and empty categories. Steps 4 and 6–8 are correctly marked elementary. Route: this is a generic tool below det-nagata-density-normalization-sheaves Steps 1–2 and replaces neither the exactness step nor the base-change step. tool_uses accepted: mate-pasting (Mathlib leaf), pur-adjunction-mate-transpose (Lean landed) and stage3-inverse-mate-equivalences (Lean-closed). Stacks 0B65 (categories.tex:3542) is cited as related only; proof_origin is agent; there is no SGA. No duplicate node: lem-cbc-enhanced-equivalence-square-mates is ∞-categorical. The parent lem-sfb-internal-module-operations-transport's Steps 3–5 use clauses (1)–(3) exactly as stated."
  }
 }

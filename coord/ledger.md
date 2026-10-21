@@ -20237,3 +20237,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T04:08:07Z L: superseded stage-1 delivery Q87/lem-pe-finite-coefficient-model-comparison at f3d02d40612b3bd58f757c0708b4c6cc47b7fe17; current completion retained; packet archived at refs/superseded/Q87/lem-pe-finite-coefficient-model-comparison/f3d02d40612b3bd58f757c0708b4c6cc47b7fe17; stale return retired.
 - 04:08 L: merged deliver/Q29/lem-pd-ringed-direct-image-pairing-lax (reviewer PASS; first push; new nodes: 0)
 - 04:08 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
+- 04:08 L: merged deliver/N8/lem-sfb-equivalence-square-inverse-mate-coherence (reviewer PASS; first push; new nodes: 0)
