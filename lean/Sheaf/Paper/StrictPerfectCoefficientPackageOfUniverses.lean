@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.StrictPerfectPackageOnSite
 public import Sheaf.Paper.ScalarExtensionBinaryCoherence
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Strict-perfect models with independent site and coefficient universes
@@ -134,6 +135,7 @@ def scalarPerfectRingUnit (R : Type s) [CommRing R] :
   Functor.whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R)))
     (forget₂ CommRingCat RingCat)
 
+set_option linter.unusedSectionVars false in
 /-- Forgetting commutativity leaves local bijectivity of the ring unit unchanged.
 Source: Stacks 03CY (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: the sheafification unit is locally injective and locally surjective on sections;
@@ -141,7 +143,13 @@ forgetting commutativity preserves those functions and their witnessing covering
 theorem scalarPerfectRingUnit_locallyBijective (R : Type s) [CommRing R] :
     Presheaf.IsLocallyInjective J (scalarPerfectRingUnit J R) ∧
       Presheaf.IsLocallySurjective J (scalarPerfectRingUnit J R) := by
-  sorry
+  have : J.WEqualsLocallyBijective CommRingCat.{s} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{v, s, c,
+      s + 1, s, s, s} J
+  exact ⟨⟨fun x y h ↦ Presheaf.equalizerSieve_mem J
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))) x y h⟩,
+    ⟨fun x ↦ Presheaf.imageSieve_mem J
+      (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))) x⟩⟩
 
 /-- Sheafify the constant module presheaf over the sheafified constant ring.
 Source: Stacks 03CY (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
@@ -170,6 +178,53 @@ def scalarPerfectFunctor (R : Type s) [CommRing R]
     {B : Sheaf J CommRingCat.{s}} (φ : scalarPerfectRing J R ⟶ B) :=
   scalarPerfectConstantFunctor J R ⋙ scalarPerfectExtensionFunctor J φ
 
+/-- Additivity of the constant module functor at independent sizes.
+Source: Stacks 03CY (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Proof: sums are pointwise in the constant presheaf, and module sheafification is additive. -/
+@[instance] theorem scalarPerfectConstantFunctor_additive (R : Type s) [CommRing R] :
+    (scalarPerfectConstantFunctor J R).Additive := by
+  let := (scalarPerfectRingUnit_locallyBijective J R).1
+  let := (scalarPerfectRingUnit_locallyBijective J R).2
+  have : (scalarPerfectConstantPresheaf (C := C) R).Additive := by
+    constructor
+    intro M N f g
+    apply PresheafOfModules.hom_ext
+    intro U
+    rfl
+  have : (PresheafOfModules.sheafification (scalarPerfectRingUnit J R)).Additive :=
+    (PresheafOfModules.sheafificationAdjunction _).left_adjoint_additive
+  unfold scalarPerfectConstantFunctor
+  infer_instance
+
+set_option linter.unusedSectionVars false in
+/-- Ordinary scalar extension is additive even for a nonflat coefficient map.
+Source: Stacks 03EK (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Proof: sectionwise tensor maps preserve addition; additive sheafification preserves
+this equality. This does not assert preservation of kernels or exact sequences. -/
+@[instance] theorem scalarPerfectExtensionFunctor_additive
+    {A B : Sheaf J CommRingCat.{s}} (φ : A ⟶ B) :
+    (scalarPerfectExtensionFunctor J φ).Additive := by
+  have : (PresheafOfModules.sheafification
+      (R := scalarPerfectRingUnderlying J B) (𝟙 _)).Additive :=
+    (PresheafOfModules.sheafificationAdjunction _).left_adjoint_additive
+  constructor
+  intro M N f g
+  change (PresheafOfModules.sheafification
+      (R := scalarPerfectRingUnderlying J B) (𝟙 _)).map _ =
+    (PresheafOfModules.sheafification
+      (R := scalarPerfectRingUnderlying J B) (𝟙 _)).map _ +
+    (PresheafOfModules.sheafification
+      (R := scalarPerfectRingUnderlying J B) (𝟙 _)).map _
+  rw [← (PresheafOfModules.sheafification
+    (R := scalarPerfectRingUnderlying J B) (𝟙 _)).map_add]
+  congr 1
+  apply PresheafOfModules.hom_ext
+  intro U
+  have : (ModuleCat.extendScalars (φ.hom.app U).hom).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).left_adjoint_additive
+  exact (ModuleCat.extendScalars (φ.hom.app U).hom).map_add
+    (f := f.val.app U) (g := g.val.app U)
+
 /-- Constant scalar extension is additive; no flatness is involved.
 Source: Stacks 03CY, 03EK and 0GMW
 (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
@@ -179,7 +234,8 @@ and target module sheafification preserves this equality. Compose these functors
 @[instance] theorem scalarPerfectFunctor_additive (R : Type s) [CommRing R]
     {B : Sheaf J CommRingCat.{s}} (φ : scalarPerfectRing J R ⟶ B) :
     (scalarPerfectFunctor J R φ).Additive := by
-  sorry
+  unfold scalarPerfectFunctor
+  infer_instance
 
 /-- The actual bounded scalar-model complex, with its induced differentials.
 Source: Stacks 03EK (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
@@ -187,22 +243,6 @@ def scalarPerfectComplex (R : Type s) [CommRing R]
     {B : Sheaf J CommRingCat.{s}} (φ : scalarPerfectRing J R ⟶ B)
     (F : CochainComplex (ModuleCat.{s} R) ℤ) :=
   ((scalarPerfectFunctor J R φ).mapHomologicalComplex (.up ℤ)).obj F
-
-/-- Additivity of the constant module functor at independent sizes.
-Source: Stacks 03CY (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
-Proof: sums are pointwise in the constant presheaf, and module sheafification is additive. -/
-@[instance] theorem scalarPerfectConstantFunctor_additive (R : Type s) [CommRing R] :
-    (scalarPerfectConstantFunctor J R).Additive := by
-  sorry
-
-/-- Ordinary scalar extension is additive even for a nonflat coefficient map.
-Source: Stacks 03EK (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
-Proof: sectionwise tensor maps preserve addition; additive sheafification preserves
-this equality. This does not assert preservation of kernels or exact sequences. -/
-@[instance] theorem scalarPerfectExtensionFunctor_additive
-    {A B : Sheaf J CommRingCat.{s}} (φ : A ⟶ B) :
-    (scalarPerfectExtensionFunctor J φ).Additive := by
-  sorry
 
 variable [∀ U : C, EssentiallySmall.{s} (Over U)]
   [∀ U : C, HasSheafify (J.over U) CommRingCat.{s}]
@@ -262,4 +302,3 @@ def scalarPerfectChartSection (R : Type s) [CommRing R]
     (scalarPerfectConstantSection J R M (Opposite.op W.unop.left) m)
 
 end SheafOfModules
-
