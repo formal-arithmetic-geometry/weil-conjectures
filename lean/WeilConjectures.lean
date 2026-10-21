@@ -12116,11 +12116,3 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.PoincareDuality.Poincare
-public import WeilConjectures.PoincareDuality.ProjectionFormula
-public import WeilConjectures.PoincareDuality.Verdier
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
-public import WeilConjectures.SmoothPurity.Defs
-public import WeilConjectures.TraceFormula.Basic
-public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
