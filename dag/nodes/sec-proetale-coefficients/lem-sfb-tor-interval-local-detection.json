@@ -20,11 +20,9 @@
  ],
  "proof": [
   {
-   "text": "For a scheme morphism $f:Y\\to X$, put $A_Y=f^{-1}A$ and give the induced morphism of topoi the identity structural map $f^{-1}A\\to A_Y$. The transported module inverse image $F_f:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(A_Y)$ is exact by [lem-trf-geometric-inverse-image-exact]. Hence [lem-weil-pbc-exact-functor-derived-factorization] gives its unbounded derived functor by applying $F_f$ termwise, and [lem-weil-pbc-exact-functor-derived-functor] identifies this functor with $Lf^*$. We denote it by $f^{-1}$, consistently with the statement. By [lem-weil-pbc-exact-functor-complex-cohomology], for any complex representative of $E\\in D(\\operatorname{Mod}(A))$ and every integer $q$,\n$$H^q(f^{-1}E)\\cong f^{-1}H^q(E).$$\nThis holds for unbounded $E$, and $f^{-1}(M[0])=(f^{-1}M)[0]$ for any module sheaf $M$.",
+   "text": "For a scheme morphism f:Y→X use the specified proEtaleRingModulePullback with coefficient f⁻¹A and the identity coefficient isomorphism. The exactness instances in [def-weil-pbc-proetale-operations] make its derived pullback precisely Mathlib mapDerivedCategory. The proved source-library mapDerivedCategoryHomologyFunctorIso supplies the descent of [lem-weil-pbc-exact-functor-complex-cohomology], and mapDerivedCategorySingleFunctor identifies pullback of M[0] with pullback(M)[0]. No additional Kan-extension comparison is needed.",
    "uses": [
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
@@ -34,8 +32,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism of ringed topoi with source coefficient ring $f^{-1}A$. Its tensor comparison, together with step 1, gives, for every $A$-module sheaf $M$,\n$$f^{-1}(K\\otimes_A^{\\mathbf L}M[0])\\cong(f^{-1}K)\\otimes_{f^{-1}A}^{\\mathbf L}(f^{-1}M)[0].$$\nHere the theorem applies to arbitrary unbounded complexes and arbitrary sheaves of commutative rings on the chosen small sites. The structural ring map is the identity, so the pullback is precisely the transported inverse image of step 1; no flatness assertion about a change to a different coefficient ring is needed.",
+   "text": "Build the flat-complex tensor presentation from [lem-weil-pbc-site-derived-tensor-descent]: its chosen predicate on homotopy objects is exactly K-flatness with flat terms. Map the flat complex subcategory to this subcategory by the homotopy quotient. Whisker the total-tensor and derived-tensor comparisons and insert DerivedCategory.quotientCompQhIso on both the tensor output and its two inputs. This gives ProEtaleTensorModel for exactly siteDerivedTensorIndependentCoefficients. Apply proEtaleCanonicalTensorPullback, the existing pro-etale specialization of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], to the resulting two models. Its natural isomorphism and Step 1 identify pullback of H^q(K⊗ᴸM[0]) with H^q(pullback(K)⊗ᴸpullback(M)[0]).",
    "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
    "elementary": false,
@@ -45,8 +44,10 @@
    }
   },
   {
-   "text": "For (i), fix an arbitrary $A$-module sheaf $M$ and $q\\notin[c,d]$, and set $F=H^q(K\\otimes_A^{\\mathbf L}M[0])$. For $u_i:V_i\\to X$, steps 1 and 2 identify $u_i^{-1}F$ with $H^q((u_i^{-1}K)\\otimes_{u_i^{-1}A}^{\\mathbf L}(u_i^{-1}M)[0])$, which vanishes by the assumed Tor bound. The abelian-sheaf clause of [lem-sfb-proetale-object-inverse-image-restriction] identifies the underlying $u_i^{-1}F$ with slice restriction $F|_{V_i}$; that clause applies to every abelian sheaf (one may instantiate its unused constant ring parameter with $\\mathbf Z$), without restricting the coefficient sheaf $A$. For each site object $W$, the pullbacks $W\\times_XV_i\\to W$ form a covering by the pullback axiom for the site [def-weil-pbc-proetale-site], and their domains map to the $V_i$. Thus the family of slice restrictions satisfies the covering-sieve hypothesis of [lem-sfb-sheaf-cover-local-isomorphism]. Apply that lemma to the underlying abelian-sheaf map $F\\to0$: every restriction is an isomorphism since $F|_{V_i}=0$. It follows that $F=0$ as an abelian sheaf and therefore as an $A$-module sheaf (the zero abelian sheaf has a unique module action). Since $M$ and $q$ were arbitrary, this proves (i).",
+   "text": "For a cover fix M and q outside [c,d] and let F=H^q(K⊗ᴸM[0]). Step 2 and the local bound tested on pullback(M) give zero module pullbacks of F. Scalar extension along the identity coefficient isomorphism reflects zero: compare its tensor-extension adjunction with the inverse scalar-transport equivalence. The invertible abelian adjunct of the normalized module unit in [new-lem-weil-pbc-proetale-module-canonical-unit] then identifies underlying module inverse image with abelian inverse image. The abelian clause of [lem-sfb-proetale-object-inverse-image-restriction], with its unused constant parameter the lifted integer ring, identifies this with localization restriction. The quasi-compact cover hypothesis upgrades the weakly-etale precoverage cover to a proetalePrecoverage cover [def-weil-pbc-proetale-site]. Apply the already proved source-library ProEtale.isIso_of_isIso_localizationRestriction, the pro-etale specialization of [lem-sfb-sheaf-cover-local-isomorphism], to the underlying abelian map F→0. Every restricted map is an isomorphism between zero objects. Hence the underlying sheaf is zero, and faithfulness of SheafOfModules.toSheaf reflects the identity-equals-zero criterion back to F. Vary M and q.",
    "uses": [
+    "def-weil-pbc-proetale-operations",
+    "new-lem-weil-pbc-proetale-module-canonical-unit",
     "lem-sfb-proetale-object-inverse-image-restriction",
     "def-weil-pbc-proetale-site",
     "lem-sfb-sheaf-cover-local-isomorphism"
@@ -70,11 +71,11 @@
   }
  ],
  "proof_deps": [
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "new-lem-weil-pbc-proetale-module-canonical-unit",
   "lem-sfb-proetale-object-inverse-image-restriction",
   "def-weil-pbc-proetale-site",
   "lem-sfb-sheaf-cover-local-isomorphism",
@@ -83,7 +84,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Locality and Strata: cohomology-sheaf detection argument, expanded using Stacks Tags 04JC, 015F, 010N, 07A4, 03CE, 04TQ and 09AH"
+  "place": "Locality and Strata, using the existing exact pro-etale operations, source-library derived cohomology comparison, pro-etale canonical tensor specialization, normalized module-unit comparison, and cover-local/open-closed zero detection; P4 stage 3."
  },
  "mathlib_searches": [
   {
@@ -225,9 +226,6 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sfb-proetale-object-inverse-image-restriction",
@@ -261,5 +259,15 @@
   "group": "Q87",
   "result": "pass",
   "note": "Both clauses (pro-etale cover; closed immersion with complementary quasi-compact open) match the node: arbitrary ring-sheaf coefficients, unbounded K, every-module degree-zero test in one fixed interval, inverse-image coefficient ring with identity identification. QuasiCompactCover is the Mathlib pro-etale cover condition, not a finiteness hypothesis. No extra hypotheses or universe restriction. Mechanical theorem-stmt_dep finding: siteDerivedTensorIndependentCoefficients is the .choose of lem-weil-pbc-site-derived-tensor-descent's existential conclusion, a constructed object, so PASS on that point. Dependency records are identical to live; the two added stmt_deps own declarations used in the signature. No duplicate: existing Tor-amplitude predicates cover only constant coefficients or a small model. Statement verbatim, docstrings with source and blueprint tag, proof sorry only. nt_compile --json clean (47.7 s). Advisory: the def-weil-pbc-proetale-operations record's declarations list omits proEtaleRingDerivedPullback and proEtaleRingModules."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111408-L-104706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
