@@ -13,9 +13,93 @@
   "lem-weil-pbc-finite-intersection-limit-compatibility",
   "def-weil-pbc-cover-cech"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the systems of [lem-weil-pbc-finite-intersection-limit-compatibility]. Their index set $J=\\prod_{a=1}^m J_a$ is small, nonempty and directed: choose one coordinate in each $J_a$, and take coordinatewise upper bounds for two elements. For every ordered tuple $\\alpha=(a_0,\\ldots,a_p)$, that node supplies affine ind-étale $X$-objects $T_{\\alpha,j}$ and $T_\\alpha$, an identification $T_\\alpha=\\varprojlim_jT_{\\alpha,j}$ with affine transitions, and compatibility of its projections with deleting any factor. Thus these are filtered colimits in the opposite affine ind-étale category to which section continuity applies. In particular the first-limit stages need not be étale over $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-intersection-limit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Let $G$ be the underlying étale sheaf of sets of $F$. By [def-weil-pbc-site-comparison-morphism], the underlying set sheaf of $M$ is $\\nu_X^*G$, with its addition obtained from that of $F$. Apply [lem-weil-pbc-proetale-classical-continuity-sets] to each diagram from step 1, including its merely ind-étale stages. This gives a bijection $\\varinjlim_j |M(T_{\\alpha,j})|\\to |M(T_\\alpha)|$ with legs the actual restriction maps. These restrictions are homomorphisms. The element and equality criterion of [lem-weil-pbc-filtered-colimit-modules-elementwise], with $R=\\mathbf Z$, identifies the underlying set of the abelian-group colimit with this set colimit: both have stage representatives modulo eventual equality. Consequently the canonical homomorphism $c_\\alpha:\\varinjlim_j M(T_{\\alpha,j})\\xrightarrow{\\sim}M(T_\\alpha)$ is an isomorphism of abelian groups. Its value on a representative is $c_\\alpha([j,s])=M(\\pi_{\\alpha,j})(s)$, where $\\pi_{\\alpha,j}:T_\\alpha\\to T_{\\alpha,j}$.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-proetale-classical-continuity-sets",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Put $C_j^\\bullet=\\check C^\\bullet(\\mathcal V_j,M)$ and $C^\\bullet=\\check C^\\bullet(\\mathcal V,M)$. By [def-weil-pbc-cover-cech], their degree-$p$ terms are the products of the section groups indexed by $A_p=\\{1,\\ldots,m\\}^{p+1}$. This set is finite for every fixed $p$, including tuples with repetitions. Apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to its finite discrete indexing category. Composing its finite-product comparison with the $c_\\alpha$ of step 2 gives an isomorphism $\\phi^p:\\varinjlim_j C_j^p\\xrightarrow{\\sim}C^p$. Explicitly $\\phi^p([j,(s_\\alpha)_\\alpha])=(M(\\pi_{\\alpha,j})(s_\\alpha))_\\alpha$. This only interchanges a filtered colimit with one finite product at a time; it does not interchange a colimit with a product over all degrees.",
+   "uses": [
+    "def-weil-pbc-cover-cech",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Check the differentials on each colimit leg. For an ordered tuple $\\beta$ of length $p+2$, let $\\partial_r\\beta$ delete its $r$-th entry, and denote the corresponding projections by $d_r:T_\\beta\\to T_{\\partial_r\\beta}$ and $d_{r,j}:T_{\\beta,j}\\to T_{\\partial_r\\beta,j}$. By [lem-weil-pbc-finite-intersection-limit-compatibility], $\\pi_{\\partial_r\\beta,j}\\circ d_r=d_{r,j}\\circ\\pi_{\\beta,j}$. Contravariant functoriality therefore gives $M(d_r)M(\\pi_{\\partial_r\\beta,j})=M(\\pi_{\\beta,j})M(d_{r,j})$. For $s\\in C_j^p$, the $\\beta$ coordinate of restricting $\\delta_j^p(s)$ is consequently $\\sum_{r=0}^{p+1}(-1)^r M(d_r)M(\\pi_{\\partial_r\\beta,j})(s_{\\partial_r\\beta})$, which is the $\\beta$ coordinate of $\\delta^p$ applied to the restricted $s$, by [def-weil-pbc-cover-cech]. The same identity holds for every transition $j\\le k$ by the commuting product projections and functoriality. Hence the $C_j^\\bullet$ form a diagram of complexes and the restriction maps to $C^\\bullet$ form a cocone of complexes.",
+   "uses": [
+    "lem-weil-pbc-finite-intersection-limit-compatibility",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "Form $L^p=\\varinjlim_j C_j^p$ in every degree, with zero terms in negative degrees, and define its differential by $d_L^p\\iota_j^p=\\iota_j^{p+1}\\delta_j^p$. The transition compatibility in step 4 makes this well-defined. Its square is zero because its composite with every $\\iota_j^p$ is zero. This is the colimit complex: a cocone to any complex $K^\\bullet$ induces unique maps $L^p\\to K^p$, and these commute with differentials after precomposition with every colimit leg, hence commute outright. Step 4 also proves $\\delta^p\\phi^p=\\phi^{p+1}d_L^p$. Thus the isomorphisms of step 3 assemble to a cochain map $\\phi:L^\\bullet\\to C^\\bullet$. Its degreewise inverses commute with differentials by multiplying this equation on both sides by the inverses. They give its inverse as a map of complexes. This proves the asserted canonical isomorphism of complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-filtered-colimit-abelian-groups-exact], colimits over the small filtered category $J$ are exact in abelian groups. Apply [src-weil-homology-preserves-exact-colimits] with $\\mathcal C=\\mathrm{Ab}$ and the nonnegative cochain shape. For every $q\\ge0$ it identifies $\\varinjlim_j H^q(C_j^\\bullet)$ with $H^q(L^\\bullet)$, with legs obtained by applying homology to the complex colimit legs. Compose with $H^q(\\phi)$ from step 5. By [def-weil-pbc-cover-cech] this is exactly $\\varinjlim_j\\check H^q(\\mathcal V_j,M)\\xrightarrow{\\sim}\\check H^q(\\mathcal V,M)$. Its leg at $j$ is induced by the original restriction map $C_j^\\bullet\\to C^\\bullet$, so the comparison is the one in the statement. At $q=0$ the incoming differential is zero, as specified in that definition. No injectivity, acyclicity, or vanishing has entered the argument.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "src-weil-homology-preserves-exact-colimits",
+    "def-weil-pbc-cover-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB (lemma-directed-colimit-exact), homology comparison; applied to Tag 099U first Čech-colimit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cover-cech",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-intersection-limit-compatibility",
+  "lem-weil-pbc-proetale-classical-continuity-sets",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U (lemma-affine-vanishing), first limit calculation; Tag 099S (lemma-limit-pullback)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +135,45 @@
    "results": "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso; TopCat.Presheaf.whiskerIsoMapGenerateCocone; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIso; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_inverse; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_functor; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp; TopCat.Presheaf.isLimitOpensLeCoverEquivPairwise",
    "date": "2026-10-21",
    "verdict": "no match: the listed declarations do not assert this finite-cover comparison or descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite covering of affine ind etale schemes, Cech complexes of sections of a sheaf pulled back from the etale site commute with directed inverse limits of the covering schemes",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+   "date": "2026-10-21",
+   "verdict": "no match: related affine structure-sheaf limits, Cech constructions, or cocone APIs do not give this classical-sheaf covering comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplex|[Cc]ech.*[Cc]olimit|[Cc]olimit.*[Cc]ech",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; grep subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: related affine structure-sheaf limits, Cech constructions, or cocone APIs do not give this classical-sheaf covering comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology of a finite affine ind etale covering with classical sheaf coefficients commutes with directed inverse limits of covering objects",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc; CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi; AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected; AlgebraicGeometry.exists_isAffineOpen_preimage_eq; AlgebraicGeometry.AffineScheme.Γ_preservesLimits; AlgebraicGeometry.isBasis_preimage_isAffineOpen; ModuleCat.directLimitCocone",
+   "date": "2026-10-21",
+   "verdict": "no match: related affine structure-sheaf limits, Cech constructions, or cocone APIs do not give this classical-sheaf covering comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor, CategoryTheory.Limits.IsColimit",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: related affine structure-sheaf limits, Cech constructions, or cocone APIs do not give this classical-sheaf covering comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural degreewise continuity isomorphism for sections on ordered finite intersections induces a filtered colimit isomorphism of Cech cochain complexes and their homology",
+   "results": "CochainComplex.ConnectData.homologyIsoPos; Condensed.isColimitLocallyConstantPresheaf_desc_apply; TopCat.Presheaf.whiskerIsoMapGenerateCocone; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso; TopCat.Presheaf.SheafCondition.pairwiseCoconeIso; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply; localCohomology.isoOfFinal; TopCat.Presheaf.whiskerIsoMapGenerateCocone_inv_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: related affine structure-sheaf limits, Cech constructions, or cocone APIs do not give this classical-sheaf covering comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-comparison-injective-acyclicity",
@@ -71,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-finite-basis-cech-first-limit",
+  "worker": "stage1",
+  "summary": "Split the first finite-cover limit calculation using the existing continuity theorem for all affine ind-etale stages, finite-product/filtered-colimit interchange, and exact-colimit homology preservation. Wrote the face-restriction equations and the colimit-complex universal property explicitly. Retained all hypotheses, ordered repeated indices, and the canonical maps. No new nodes and no statement change.",
+  "blueprint": "Realizes the first-limit paragraph of lem-weil-pbc-comparison-injective-acyclicity: identify sections on each intersection, form the finite Cech products, check the alternating differential, and pass to cohomology. The unit/chapter route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-48f476cf5",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-48f476cf5 (reviewer sub-agent of L); spot-checked: Read the whole delivery and passed it with no changes: 0 new nodes, the item's statement, stmt_deps, source and unit are unchanged, and the item gains six proof steps. Source check: Stacks Tag 099U (proetale.tex l.3866ff, first Čech-colimit paragraph) and Tag 099S (lemma-limit-pullback); the tags 099S, 099U, 00DB, 002W, 00D6 and 00D7 all match their labels in tags/tags. The section-continuity input is lem-weil-pbc-proetale-classical-continuity-sets, which explicitly allows merely ind-étale stages. That is the right node, because the stages T_{α,j} are only étale over U, and U is only ind-étale over X. Step 1: the intersection-limit node supplies small directed J, ordered tuples with repetitions, affine ind-étale T_α and T_{α,j}, and face-compatible limits; the scheme limit inside B_X is a filtered colimit in the opposite category. Step 2: by the site-comparison definition, |ν^*F| is ν^*G; with the set continuity bijection and the elementwise module-colimit criterion (R=ℤ), the canonical map is an isomorphism of abelian groups. Step 3: the 002W node (abelian-group clause) commutes the colimit with one finite product per degree. Steps 4–5: the face equation π∘d_r = d_{r,j}∘π comes from the intersection node, and the colimit complex and its inverse are built correctly. Step 6: 00DB exactness plus the homology-preserves-exact-colimits node, with q=0 consistent (im δ^{-1}=0). Small cases checked: m=1, singleton J, empty intersections, F=0, noncommutative Λ. No duplicate: the second-limit stage-comparison node and the stage-3/cbc Čech-system nodes state different things. No SGA source, and no repair or re-split note exists for this item. One minor report inaccuracy, not a DAG fault: the report lists citations.json and searches.jsonl as written files, but the commit does not contain them."
  }
 }
