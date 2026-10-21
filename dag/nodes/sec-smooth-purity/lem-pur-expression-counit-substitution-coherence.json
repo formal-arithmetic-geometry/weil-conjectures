@@ -21,9 +21,180 @@
   "def-pur-completed-operation-expressions",
   "lem-pur-completed-primitive-counit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use right-to-left composition throughout and suppress scheme subscripts only when the output types determine them. The expression definition supplies structural induction on a finite typed tree; a repeated input is evaluated by the same input object and map at every occurrence. The assumed closure under $T,F,U$ makes every $S_P$ normalized. The displayed recursion defines $K_P,S_P$ on morphisms as well as objects: at an input use its map, at a unit use the identity, and at a vertex apply its functor to the child maps. Applying the identity and composition laws of that functor proves the evaluation laws by induction. There is no reordering of tensor factors or alteration of parentheses in this recursion.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: typed expression induction and evaluation on maps"
+   }
+  },
+  {
+   "text": "Abbreviate the specified primitive comparisons by $b_T,b_F$. The primitive lemma states, for maps of normalized systems $u:A\\to A'$, $v:N\\to N'$ and $w:C\\to C'$,\n$$b_T(A',N')\\widehat T(\\mathcal Lu,\\mathcal Lv)=\\mathcal L T(u,v)b_T(A,N),\\qquad b_F(C')\\widehat F_f(\\mathcal Lw)=\\mathcal L F_f(w)b_F(C).$$\nIt also gives the whole-system identity $e_{A'}\\mathcal R\\mathcal L(u)=u e_A$. These are naturality equations in the ordinary derived categories, not equations inferred by evaluation. Each primitive $b$ is invertible. Induction gives invertibility of every $\\beta_P$: inputs and units give identities, and at each vertex apply the vertex functor to the inverses of the child comparisons, then compose with the inverse primitive comparison. The composites are inverses by the functor laws.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: the primitive naturality equations and recursive invertibility"
+   }
+  },
+  {
+   "text": "Prove the asserted input naturality by induction on $P$, writing $s_P=S_P(v)$ and $k_P=K_P(\\mathcal Lv)$. At the input $i$, $\\beta_P$ is the identity and $k_P=\\mathcal L v_i=\\mathcal Ls_P$. At a unit, both evaluations are constant functors on input families, their maps are identities and $\\beta_P$ is the identity. Thus $\\beta_P(A')k_P=\\mathcal Ls_P\\beta_P(A)$ holds in both base cases, including when there are no input slots.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: input naturality, the input and coefficient-unit cases"
+   }
+  },
+  {
+   "text": "For the tensor case $P=T(X,Y)$ put $s_X=S_X(v)$ and $s_Y=S_Y(v)$. The induction hypotheses are $\\beta_X(A')k_X=\\mathcal Ls_X\\beta_X(A)$ and the corresponding equation for $Y$. Expanding the left side and using these gives\n$$\\begin{aligned}\n\\beta_P(A')k_P\n&=b_T(S_X(A'),S_Y(A'))\\widehat T(\\beta_X(A')k_X,\\beta_Y(A')k_Y)\\\\\n&=b_T(S_X(A'),S_Y(A'))\\widehat T(\\mathcal Ls_X,\\mathcal Ls_Y)\\widehat T(\\beta_X(A),\\beta_Y(A))\\\\\n&=\\mathcal L T(s_X,s_Y)b_T(S_X(A),S_Y(A))\\widehat T(\\beta_X(A),\\beta_Y(A))\\\\\n&=\\mathcal Ls_P\\beta_P(A).\n\\end{aligned}$$\nThe penultimate equality is precisely primitive naturality at the two child system maps. Both children are normalized by the hypothesis on the constructors.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: input naturality, tensor induction step"
+   }
+  },
+  {
+   "text": "For $P=F_f(X)$, the child hypothesis and primitive pullback naturality give\n$$\\begin{aligned}\n\\beta_P(A')k_P\n&=b_F(S_X(A'))\\widehat F_f(\\beta_X(A')k_X)\\\\\n&=b_F(S_X(A'))\\widehat F_f(\\mathcal Ls_X)\\widehat F_f(\\beta_X(A))\\\\\n&=\\mathcal L F_f(s_X)b_F(S_X(A))\\widehat F_f(\\beta_X(A))\n=\\mathcal Ls_P\\beta_P(A).\n\\end{aligned}$$\nHere the input and output categories of $\\widehat F_f$ are respectively those of the source child on the target scheme of $f$ and of $P$ on its source scheme. Together with the preceding cases this proves naturality simultaneously for all input slots.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: input naturality, pullback induction step"
+   }
+  },
+  {
+   "text": "Apply $\\mathcal R$ to the naturality equation just proved, then postcompose with $e_{S_P(A')}$. For $s=S_P(v)$ counit naturality gives\n$$\\begin{aligned}\n\\gamma_P(A')\\mathcal R(k_P)\n&=e_{S_P(A')}\\mathcal R(\\beta_P(A')k_P)\\\\\n&=e_{S_P(A')}\\mathcal R\\mathcal L(s)\\mathcal R(\\beta_P(A))\n=s e_{S_P(A)}\\mathcal R(\\beta_P(A))\n=s\\gamma_P(A).\n\\end{aligned}$$\nEvery equality is already an equality of whole-system maps. This proves the requested naturality of $\\gamma$, with no faithfulness claim about level evaluation.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: reduction naturality by the natural counit"
+   }
+  },
+  {
+   "text": "Fix simultaneously all substituted expressions $H_i$ and their normalized inputs. Write $h_P=K_P(\\beta_{H_i})c_P$, where $c_P:K_{P[H]}\\to K_P(K_H)$, and write $d_P:S_{P[H]}\\to S_P(S_H)$. Induct on the outer expression, with inductive assertion\n$$\\mathcal L(d_P)\\beta_{P[H]}=\\beta_P(S_H)h_P.$$\nThe parenthesis-preserving identifications are defined recursively: at a tensor $d_P=T(d_X,d_Y)$ and $c_P=\\widehat T(c_X,c_Y)$, while at a pullback $d_P=F_f(d_X)$ and $c_P=\\widehat F_f(c_X)$. Consequently $h_{T(X,Y)}=\\widehat T(h_X,h_Y)$ and $h_{F_f(X)}=\\widehat F_f(h_X)$ by functorial evaluation. At input $i$ the assertion is $\\beta_{H_i}=\\mathrm{id}\\,\\beta_{H_i}$; at a unit it is the identity. These are the two bases of this induction.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: simultaneous substitution, induction assertion and bases"
+   }
+  },
+  {
+   "text": "At the outer tensor $P=T(X,Y)$ write $\\beta_X^H=\\beta_X(S_H)$ and $\\beta_Y^H=\\beta_Y(S_H)$. Primitive naturality for the child system identifications $d_X,d_Y$, followed by the two induction hypotheses, gives\n$$\\begin{aligned}\n\\mathcal L(d_P)\\beta_{P[H]}\n&=b_T(S_X(S_H),S_Y(S_H))\\widehat T(\\mathcal L(d_X)\\beta_{X[H]},\\mathcal L(d_Y)\\beta_{Y[H]})\\\\\n&=b_T(S_X(S_H),S_Y(S_H))\\widehat T(\\beta_X^Hh_X,\\beta_Y^Hh_Y)\\\\\n&=\\beta_P(S_H)\\widehat T(h_X,h_Y)\n=\\beta_P(S_H)h_P.\n\\end{aligned}$$\nThe first line follows by expanding $\\beta_{P[H]}$ and the recursive $d_P$; the third is the recursion for $\\beta_P$ and the bifunctor composition law. In particular the maps moved through $b_T$ are actual whole-system maps $d_X,d_Y$, so primitive naturality applies before taking any individual level.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: simultaneous substitution, outer tensor induction step"
+   }
+  },
+  {
+   "text": "At the outer pullback $P=F_f(X)$ expand the recursion and use primitive naturality at $d_X$:\n$$\\begin{aligned}\n\\mathcal L(d_P)\\beta_{P[H]}\n&=b_F(S_X(S_H))\\widehat F_f(\\mathcal L(d_X)\\beta_{X[H]})\\\\\n&=b_F(S_X(S_H))\\widehat F_f(\\beta_X(S_H)h_X)\\\\\n&=\\beta_P(S_H)\\widehat F_f(h_X)\n=\\beta_P(S_H)h_P.\n\\end{aligned}$$\nThis proves the substitution equation for every outer expression. Naturality of the primitive comparisons used in both vertex cases is exactly naturality of the quotient realizations followed by $\\mathcal LT(e,e)$ or $\\mathcal LF_f(e)$. The primitive lemma states the identity moving a child system map past the counit as $e_{S'}\\mathcal R\\mathcal L(u)=u e_S$; thus this calculation uses that specified counit, rather than a newly chosen comparison of the same endpoints.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: simultaneous substitution, outer pullback induction step"
+   }
+  },
+  {
+   "text": "For the reduction substitution equation apply counit naturality to the single whole-system isomorphism $d_P$. The substitution equation gives\n$$\\begin{aligned}\nd_P\\gamma_{P[H]}\n&=d_Pe_{S_{P[H]}}\\mathcal R(\\beta_{P[H]})\\\\\n&=e_{S_P(S_H)}\\mathcal R\\mathcal L(d_P)\\mathcal R(\\beta_{P[H]})\\\\\n&=e_{S_P(S_H)}\\mathcal R(\\beta_P(S_H)h_P)\n=\\gamma_P(S_H)\\mathcal R(h_P).\n\\end{aligned}$$\nThe last expression is exactly $\\gamma_P(S_H)\\mathcal R(K_P(\\beta_{H_i})c_P)$, with its specified parentheses. Hence the flattened and iterated reduction comparisons are the same morphism in the system category.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: simultaneous substitution, reduction equation"
+   }
+  },
+  {
+   "text": "For the remaining structural assertions it is convenient to write the first compatibility as $\\beta_Q\\widehat a=\\mathcal L(a)\\beta_P$, equivalent to the stated conjugation formula because $\\beta_Q$ is invertible. This identity already implies the second compatibility: counit naturality at the whole-system map $a:S_P\\to S_Q$ gives\n$$\\gamma_Q\\mathcal R(\\widehat a)=e_{S_Q}\\mathcal R(\\beta_Q\\widehat a)=e_{S_Q}\\mathcal R\\mathcal L(a)\\mathcal R(\\beta_P)=a e_{S_P}\\mathcal R(\\beta_P)=a\\gamma_P.$$\nIt therefore suffices to check closure of the first identity; the second will follow for each resulting structural system map by this very calculation.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: structural maps, reduction compatibility from conjugation"
+   }
+  },
+  {
+   "text": "Identity maps satisfy $\\beta_P\\mathrm{id}=\\mathcal L(\\mathrm{id})\\beta_P$. If $a:P\\to Q$ and $b:Q\\to V$ satisfy the structural identity, then\n$$\\beta_V(\\widehat b\\widehat a)=\\mathcal L(b)\\beta_Q\\widehat a=\\mathcal L(b)\\mathcal L(a)\\beta_P=\\mathcal L(ba)\\beta_P.$$\nWhen $a$ is an isomorphism, its identity implies that $\\widehat a=\\beta_Q^{-1}\\mathcal L(a)\\beta_P$ is invertible, with inverse $\\beta_P^{-1}\\mathcal L(a^{-1})\\beta_Q$. Thus $\\beta_P\\widehat a^{-1}=\\mathcal L(a^{-1})\\beta_Q$. These computations prove closure under identities, composable structural maps and inverses whenever defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: structural maps, identities, composition and inverses"
+   }
+  },
+  {
+   "text": "Let $a:P\\to Q$ and $b:X\\to Y$ be compatible structural system maps, with completed maps $\\widehat a,\\widehat b$. Expanding the tensor recursion, their compatibilities and primitive naturality gives\n$$\\begin{aligned}\n\\beta_{T(Q,Y)}\\widehat T(\\widehat a,\\widehat b)\n&=b_T(S_Q,S_Y)\\widehat T(\\beta_Q\\widehat a,\\beta_Y\\widehat b)\\\\\n&=b_T(S_Q,S_Y)\\widehat T(\\mathcal L(a),\\mathcal L(b))\\widehat T(\\beta_P,\\beta_X)\\\\\n&=\\mathcal L T(a,b)b_T(S_P,S_X)\\widehat T(\\beta_P,\\beta_X)\n=\\mathcal L T(a,b)\\beta_{T(P,X)}.\n\\end{aligned}$$\nFor pullback the calculation is\n$$\\beta_{F_f(Q)}\\widehat F_f(\\widehat a)=b_F(S_Q)\\widehat F_f(\\mathcal L(a)\\beta_P)=\\mathcal L F_f(a)b_F(S_P)\\widehat F_f(\\beta_P)=\\mathcal L F_f(a)\\beta_{F_f(P)}.$$\nTaking either tensor map to be an identity proves tensoring with an unchanged expression. Iterating these single-vertex calculations proves the assertion in any finite tensor or pullback context.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: structural maps, tensor and pullback contexts"
+   }
+  },
+  {
+   "text": "For simultaneous substitution of a natural structural map $a:P\\to Q$, put $B=(\\beta_{H_i})_i$. Under the specified evaluation identifications the substituted maps are $a[H]=d_Q^{-1}a_{S_H}d_P$ and $\\widehat a[H]=c_Q^{-1}\\widehat a_{K_H}c_P$. Naturality of the completed structural map at the family $B:K_H\\to\\mathcal LS_H$ reads\n$$K_Q(B)\\widehat a_{K_H}=\\widehat a_{\\mathcal LS_H}K_P(B).$$\nUsing the already proved substitution equations on $Q$ and $P$, and the assumed structural compatibility at the normalized family $S_H$, compute\n$$\\begin{aligned}\n\\mathcal L(d_Q)\\beta_{Q[H]}\\widehat a[H]\n&=\\beta_Q(S_H)K_Q(B)\\widehat a_{K_H}c_P\\\\\n&=\\beta_Q(S_H)\\widehat a_{\\mathcal LS_H}K_P(B)c_P\\\\\n&=\\mathcal L(a_{S_H})\\beta_P(S_H)K_P(B)c_P\\\\\n&=\\mathcal L(a_{S_H}d_P)\\beta_{P[H]}\n=\\mathcal L(d_Qa[H])\\beta_{P[H]}.\n\\end{aligned}$$\nCancel the isomorphism $\\mathcal L(d_Q)$ to get the structural compatibility after substitution. The reduction compatibility follows from step 11. Naturality here is the naturality of the structural maps under discussion, including their completed versions; it is not a claim about arbitrary assigned arrows.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: structural maps, simultaneous substitution"
+   }
+  },
+  {
+   "text": "The inductions used no distinctness of input occurrences: for example at $T(i,i)$ both child equations use the same $v_i$ or $\\beta_{H_i}$, and the bifunctor calculation remains unchanged. An expression with only units has the same unit bases and tensor or pullback steps; a context with no schemes admits no output expression and has no case to check. All recursions terminate because the trees are finite, irrespective of the size of the sets of available schemes and inputs. The closure calculations apply to total-complex tensor constraints and finite adjunction-normalized pullback compositors precisely when their primitive structural equations have been supplied, as the statement assumes. All of the established equations occur in the ordinary derived system categories and their functor images; none was deduced by detecting equality levelwise.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Final paragraph, compatibility with coefficient passage; agent argument: edge cases and the conditional application to structural constraints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-operation-expressions",
+  "lem-pur-completed-primitive-counit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Order 2232, final coefficient-passage compatibility assertion; explicit formal induction on the typed expression grammar, expanding the primitive whole-system counit naturality equations."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +230,31 @@
    "results": "2 hits: Mathlib/Tactic/Linarith/Parsing.lean, Mathlib/Tactic/Linarith/Frontend.lean",
    "date": "2026-10-21",
    "verdict": "no match: general counit naturality and first-order term substitution are ingredients in different categories; none asserts these typed system/complete evaluation comparisons and structural substitution equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and simultaneous substitution of recursively defined comparison isomorphisms between functor evaluations of typed tensor and pullback expressions",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.CartesianMonoidalCategory.prodComparison_natural, CategoryTheory.CartesianMonoidalCategory.prodComparison_natural_assoc, CategoryTheory.Functor.Monoidal.tensorObjComp, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerRight, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerLeft",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide general naturality, Cartesian product comparisons or type-valued polynomial functor substitution, not this typed system/complete evaluation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison for tensor and pullback functors extends recursively to finite typed expressions and respects simultaneous substitution",
+   "results": "8 hits: CategoryTheory.NatTrans.tensor_naturality, CategoryTheory.CartesianMonoidalCategory.prodComparisonNatTrans, CategoryTheory.Functor.Monoidal.tensorObjComp, CategoryTheory.Functor.Monoidal.μNatIso, CategoryTheory.Dial.tensorHomImpl, CategoryTheory.Over.pullbackComp, CategoryTheory.MonoidalCategory.curriedTensorPreFunctor, MvFunctor.term_⊗_",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide general naturality, Cartesian product comparisons or type-valued polynomial functor substitution, not this typed system/complete evaluation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit naturality and bifunctor composition imply comparison isomorphisms commute with substitution of operation trees",
+   "results": "8 hits: MvPFunctor.comp.get_map, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, AlgebraicTopology.DoldKan.Compatibility.τ₁, MvPFunctor.w_map_wMk, MvQPF.Comp.map_mk, MvQPF.Comp.get_map, AlgebraicTopology.DoldKan.Compatibility.υ, CategoryTheory.Limits.coprodComparison_natural",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide general naturality, Cartesian product comparisons or type-valued polynomial functor substitution, not this typed system/complete evaluation theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-operation-tower-substitution",
@@ -82,5 +274,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-expression-counit-substitution-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the formal naturality, simultaneous-substitution and structural-context assertions into explicit typed-tree inductions and whole-system morphism equations. Reused the expression grammar and the primitive counit comparison lemma; no new nodes or Mathlib leaves. The statement and its hypotheses are unchanged. Reduction identities follow directly by counit naturality, without levelwise detection of morphism equality.",
+  "blueprint": "Order 2232 of def-weil-frobenius-coefficient-twists, final paragraph: the Weil actions commute with finite reduction and scalar extension. This item supplies the expression-naturality and simultaneous-substitution part of its integral coefficient-passage realization, through lem-pur-derived-pullback-tensor-iso and lem-pur-completed-operation-tower-substitution."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-147b18c2a",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-147b18c2a (reviewer sub-agent of L); spot-checked: Read all 15 steps and the full statements of the two proof deps. The primitive lemma's statement gives naturality of beta_T and beta_F on normalized systems and the whole-system counit identity e R L(u) = u e; def-pur-completed-operation-expressions gives the typed trees, repeated inputs and parenthesis-preserving substitution. I re-did every calculation: input naturality (steps 3-5), gamma naturality (6), simultaneous substitution with the types of c, d, h checked (7-9), the reduction equation (10), the second structural compatibility following from the first (11), closure under identities, composition and inverses (12), tensor and pullback contexts (13), and substitution of natural structural maps via naturality of the completed map at B (14). All are correct. Tested on i, 1_a, T(i,i) and F_f(1); the edge cases are fine. Primitive naturality is used only at maps between normalized systems, which the closure hypothesis guarantees. The statement is byte-identical to the base and the item is unsplit live. There is no repair note, it is not in the dropped list, and all three nodes are in sk-def-purity-conv: no off-route use, no cycle, no SGA. There are no new nodes and no duplicate: a DAG grep for 'simultaneous substitution' finds only the item and the expression definition. The parent's step 5 uses exactly the three conclusions. FIX (B4): two TeX slips corrected in fixes/dag/nodes/sec-smooth-purity/lem-pur-expression-counit-substitution-coherence.json: step 2 ',qquad' -> ',\\qquad', step 7 '\\mathrm{id},\\beta' -> '\\mathrm{id}\\,\\beta'. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
