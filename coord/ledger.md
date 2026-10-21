@@ -21608,3 +21608,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:02 L: returned deliver/NY/lem-sfb-constant-finite-free-presentation-extension (reviewer RETURN: L: independent stage-2 immutable head 4d1bb414611b: Theorem-stmt_dep fault (stage-2 rule: a statement rests on definitio)
 - 09:02 L: returned deliver/O1/lem-sfb-constant-periodic-resolution-nonzero (reviewer RETURN: L: independent stage-2 immutable head bff0fb0f19a0: H13: the delivery rewrites ND's landed lean record of stmt_dep def-s)
 - 09:02 L: returned deliver/Q134/lem-weil-pbc-finite-free-constructible-scalar-transport (reviewer RETURN: L: independent stage-2 immutable head d04022db8bbf: H2 / theorem-stmt_dep rule: the delivery adds theorem stmt_deps lem-)
+- 09:02 L: returned deliver/Q52/lem-coef-finite-compact-support-uniform-tor (reviewer RETURN: L: independent stage-2 immutable head d3438d3454a7: Statement substance matches the node: all clauses, dense refinement,)
