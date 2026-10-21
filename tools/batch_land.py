@@ -1661,6 +1661,12 @@ def return_record(r: dict, reason: str, log) -> None:
               + (f"; it changed the same file(s) after {', '.join(r['chained'])}" if r.get('chained') else ''), log)
 
 
+def _sync_running() -> bool:
+    """2026-10-21 (the human): a scheduled upstream sync (~/cc1/upsync-quick.py) no longer stops the lander; while its
+    marker exists the lander lands but leaves red builds to the sync's own quarantine rounds."""
+    return (ROOT / "local" / "UPSYNC_RUNNING").exists()
+
+
 def red_without_batch(log) -> bool:
     """Merge queue: a red build with no batch open (only other writers' landings in it) is handled here: the landings
     the build names are dropped from the candidate. Each red result is handled once (local/batch/mq-red.json)."""
@@ -1795,6 +1801,10 @@ def step(cache: dict, log) -> str:
     b = read_json(OPEN)
     if not b and NEXT.exists():
         os.replace(NEXT, OPEN); b = read_json(OPEN)     # a stop between closing a batch and promoting the next one
+    if _sync_running():
+        if (ld.read_json(ld.B / "last.json") or {}).get("result") == "red":
+            log("RED build during the upstream sync: left to the sync's quarantine (local/UPSYNC_RUNNING)")
+            return "waiting"
     if not b and ld.merge_queue() and red_without_batch(log):
         return "returned"
     if not b:
@@ -1863,6 +1873,9 @@ def step(cache: dict, log) -> str:
     # Source attribution can outlive a build or a manual take-out. Discard its
     # decision before writing records/ALERT or taking anything out.
     if read_json(OPEN) != b or ld.read_json(ld.B / "last.json") != last:
+        return "waiting"
+    if _sync_running():
+        log(f"batch {b['id']}: RED build during the upstream sync: left to the sync's quarantine (local/UPSYNC_RUNNING)")
         return "waiting"
     log(f"batch {b['id']}: RED build (round {b['round'] + 1}); failing {' '.join((last.get('failing') or [])[:8])}")
     b["handled"].append(last.get("time"))
