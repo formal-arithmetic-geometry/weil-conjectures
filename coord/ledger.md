@@ -23991,3 +23991,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:35 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 23:35 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 23:35 L: merged deliver/NM/thm-pur-vector-bundle-thom (stage 2; reviewer PASS; parallel immutable checks)
+- 23:36 L: merged deliver/C2/Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated (stage 3; reviewer FIX; after a return; landing 20261021T233622-L-837738 (interface); batch 20261021T233415; modules 1; new nodes 0; change records: coord/changes/C2-kflat-fixed-tensor-presentation.md)

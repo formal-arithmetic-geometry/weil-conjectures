@@ -18,48 +18,148 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-total-tensor-homotopy-cone-signs] to the given $A$. It supplies the two additive homotopy tensor functors, the cone isomorphisms with their $-p_u$ equations, and preservation of every quasi-isomorphism. Its last clause gives $A[n]$ K-flat with flat terms, so the resolving subcategory is stable under shifts. In particular no condition on the endpoints of a quasi-isomorphism or on cohomology flatness has entered.",
+   "text": "Use the canonical additive sheaf tensor and the existing direct-sum totalization. Mathlib's bifunctorMapHomotopyCategory constructs the additive tensor on the homotopy category and quotientCompBifunctorMapHomotopyCategoryIso gives its natural comparison to chain-level tensor. CochainTensorUniverses supplies the required totalization and additive instances, so no separate tensor-colimits proof is needed here.",
    "uses": [
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YM (lemma-derived-tor-exact), Tag 06YP (lemma-K-flat-quasi-isomorphism); derived.tex definition-cone, definition-distinguished-triangle and remark-double-complex-as-tensor-product-of. Shift and interchange signs: more-algebra.tex item-shift-tensor and item-flip-tensor-product (Tag 0FNH for item-shift-tensor)."
+    "place": "Tag 06YM (lemma-derived-tor-exact); derived.tex remark-double-complex-as-tensor-product-of, explicit tensor homotopies."
    }
   },
   {
-   "text": "Use these homotopy exactness and inversion conclusions as the hypotheses of [lem-weil-pbc-fixed-tensor-localization-comparison]. This yields additive exact $G_A,G^A$ with the localized coherent signed shifts and representative comparisons. The normalized isomorphisms $d_L,d_R$ identify them with the specified $T(QA,-),T(-,QA)$; their composite comparisons agree exactly with the published representative comparison on every resolving object. Their resolution formulas also specify those composites on arbitrary complexes.",
+   "text": "Use the existing generic mapBifunctorMappingCone₁Iso and mapBifunctorMappingCone₂Iso. The source library's BifunctorTriangulated proves that the induced homotopy tensor functors are triangulated for their canonical signed shifts, including the cone projection and connecting arrow; use those instances rather than reconstructing this calculation.",
    "uses": [
-    "lem-weil-pbc-fixed-tensor-localization-comparison"
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor and the construction immediately before it); the comparison is with the published resolving comparison of lem-weil-pbc-site-derived-tensor-descent. Localization of functors and transformations: categories.tex lemma-properties-left-localization and lemma-properties-right-localization; cone convention: derived.tex definition-distinguished-triangle."
+    "place": "Tag 06YM (lemma-derived-tor-exact), expanded using derived.tex definition-cone and definition-distinguished-triangle; more-algebra.tex Tag 0FNH (item-shift-tensor)."
    }
   },
   {
-   "text": "The shift-stability from Step 1 permits [lem-weil-pbc-derived-tensor-shift-descent] for this same published $T$. It gives one coherent shift structure on the entire bifunctor and the mixed $(-1)^{ab}$ identity. Its normalization clause applies to the composite comparisons of Step 2, so those comparisons commute with the shifts on every varying object. Thus the restrictions of this single bifunctor structure coincide with the exact one-variable structures, and the exactness of $G_A,G^A$ gives the asserted exactness of $T(QA,-),T(-,QA)$, including the third arrow of each localized cone triangle. Finally, the naturality assertion of the same node applies to every derived fixed-argument map, hence also to the indicated chain maps and inverses. All three lemmas allow unbounded complexes.",
+   "text": "For any quasi-isomorphism f, its cone E is acyclic. K-flatness of A makes Tot(E,A) acyclic. Apply the sheaf braiding degreewise to identify the double complex (E,A) with the transpose of (A,E), then totalize and use mapBifunctorFlipIso. This supplies the signed interchange on totals and proves Tot(A,E) acyclic. The two cone isomorphisms and the cone criterion now prove both fixed tensor functors preserve every quasi-isomorphism, without hypotheses on its endpoints.",
    "uses": [
-    "lem-weil-pbc-derived-tensor-shift-descent"
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-tensor-mapping-cone-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FNH (item-shift-tensor), with the coherent chain comparisons of Mathlib/Algebra/Homology/BifunctorShift.lean and the representative localization construction in sites-cohomology.tex definition-derived-tor. Two-variable extension and normalization use the published statement of lem-weil-pbc-site-derived-tensor-descent."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism); derived.tex Tag 05RT (lemma-acyclic); more-algebra.tex item-flip-tensor-product."
+   }
+  },
+  {
+   "text": "For any acyclic E, the signed second-variable shift comparison identifies Tot(E,A[n]) with Tot(E,A)[n]. Shift stability of the acyclic homotopy subcategory proves this acyclic. Flatness of terms is reindexed from i to i+n. The same argument makes the resolving property P selected by site tensor descent stable under every integer shift.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); more-algebra.tex Tag 0FNH (item-shift-tensor)."
+   }
+  },
+  {
+   "text": "Descend the coherent two-variable chain shifts to the homotopy tensor along the quotient, using the source library's commShift₂OfLocalization. Compare its fixed-argument structures with the canonical source-library structures by CommShift.eq_of_natTransCommShift and strict surjectivity on quotient objects. Replace the fixed-argument fields by these equal canonical structures; transport all naturality and mixed-sign laws along the equalities. This preserves both canonical triangulated structures and canonical shift compatibility of the chain-to-homotopy comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor, preceding construction); categories.tex Tags 04VG/04VK, localization and natural-transformation universal properties; more-algebra.tex Tag 0FNH."
+   }
+  },
+  {
+   "text": "Let Qh be derived localization. The chain-level quasi-isomorphism result, fullness of the homotopy quotient and its quasi-isomorphism criterion show that each fixed resolving homotopy tensor followed by Qh inverts quasi-isomorphisms. Site tensor descent supplies that L=P.ι⋙Qh is a localization: transfer localization from the equivalence with the localized resolving category along its published natural isomorphism. No new choice of a resolution is used.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); derived.tex definition-distinguished-triangle and Tag 05QL (definition-exact-functor)."
+   }
+  },
+  {
+   "text": "Package the existing resolving property, membership proof, localization proof, homotopy tensor, derived tensor and selected comparisons in ResolvingTensorPresentation and TensorPresentation. All fields reduce to the original choices. The ordinary and derived tensors have explicit, proved equality interfaces to their published definitions, preventing repeated unfolding of dependent category constructions. Construct the comparison from the generic homotopy tensor to the selected homotopy tensor by taking the inverse of the selected chain comparison at the underlying representatives; fullness of the homotopy quotient proves naturality. Restrict this comparison to P×P and compose with the selected resolving comparison. Append the inverse currying counit to compare to the uncurrying of our curried derived tensor; its components are identities. This gives a natural bifunctor comparison e whose values are exactly representativeIso. The selected tensor presentation has an explicit type and is locally protected from unfolding. The private tensorPresentationComparison definition packages the displayed composite once, and tensorPresentation_comparison_app proves its component formula; both are fully constructed from the same selected data.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); categories.tex Tag 04VK."
+   }
+  },
+  {
+   "text": "Restrict the homotopy tensor in both variables to P and postcompose with Qh. Transport its CommShift₂Int structure to the published derived bifunctor along the localization L in both variables, using e and commShift₂OfLocalization. For each a in P, separately lift its tensor functor through Qh. Extend its resolving comparison through L using liftNatIso, obtaining a comparison normalized to e on every resolving object. Prove this comparison commutes with shifts: the localization-induced fixed shift structure and the full bifunctor's fixed shift structure agree after restriction along L, hence agree by localization uniqueness. Triangulatedness descends along Qh by isTriangulated_of_precomp_iso.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), two-variable representative descent; more-algebra.tex Tag 0FNH (item-shift-tensor)."
+   }
+  },
+  {
+   "text": "Compose each normalized homotopy comparison with the canonical quotient-to-derived and chain-to-homotopy comparisons. Whiskering, associators and composition preserve CommShift. The chain comparisons and quotientCompQhIso have identity components. The directly constructed homotopy comparison has, definitionally, the inverse selected chain comparison on representatives. Consequently the resulting chain comparisons are exactly representativeIso on every flat-term K-flat B, in both orders. The full CommShift₂Int supplies naturality on all derived fixed-argument maps and the mixed sign. Finally map_distinguished applied to DerivedCategory.mappingCone_triangle_distinguished gives the two explicit cone-triangle conclusions, including their connecting arrows. This normalization is proved once generically for TensorPresentation before instantiation at the sheaf category, so the final assembly need not repeatedly unfold its dependent comparison types.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor); categories.tex Tags 04VG/04VK, localization morphisms and transformations; more-algebra.tex Tag 0FNH."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-  "lem-weil-pbc-fixed-tensor-localization-comparison",
-  "lem-weil-pbc-derived-tensor-shift-descent"
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-triangulated-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YM, 06YP, 06YU, expanded cone and localization argument; derived.tex remark-double-complex-as-tensor-product-of, definition-cone and definition-distinguished-triangle; signed integer shifts from more-algebra.tex Tag 0FNH and the existing Mathlib shift leaf."
+  "place": "Tags 06YM, 06YP and 06YU; derived.tex cone and distinguished triangles; more-algebra.tex Tag 0FNH. C2 realizes the nine-step argument using the existing generic BifunctorTriangulated and shift-localization APIs, with no change to the unit route."
  },
  "mathlib_searches": [
   {
@@ -165,8 +265,7 @@
  "tool_uses": [
   "lem-pc-tensor-mapping-cone-iso",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-pc-kflat-resolution"
+  "lem-pur-homotopy-category-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -185,7 +284,21 @@
    "SheafOfModules.KFlatFixedTensor.totalTensor",
    "SheafOfModules.KFlatFixedTensor.derivedTensor",
    "SheafOfModules.KFlatFixedTensor.representativeIso",
-   "SheafOfModules.KFlatFixedTensor.kFlat_fixed_tensor_triangulated"
+   "SheafOfModules.KFlatFixedTensor.kFlat_fixed_tensor_triangulated",
+   "SheafOfModules.KFlatFixedTensor.TensorPresentation",
+   "SheafOfModules.KFlatFixedTensor.TensorPresentation.ofExists",
+   "SheafOfModules.KFlatFixedTensor.tensorHasMapBifunctor",
+   "SheafOfModules.KFlatFixedTensor.tensorAdditive",
+   "SheafOfModules.KFlatFixedTensor.tensorObjAdditive",
+   "SheafOfModules.KFlatFixedTensor.resolvingProperty",
+   "SheafOfModules.KFlatFixedTensor.resolvingProperty_spec",
+   "SheafOfModules.KFlatFixedTensor.selectedTensorPresentation",
+   "SheafOfModules.KFlatFixedTensor.derivedTensor_eq_published",
+   "SheafOfModules.KFlatFixedTensor.ResolvingTensorPresentation",
+   "SheafOfModules.KFlatFixedTensor.ResolvingTensorPresentation.ofExists",
+   "SheafOfModules.KFlatFixedTensor.selectedResolvingTensorPresentation",
+   "SheafOfModules.KFlatFixedTensor.TensorPresentation.representativeIso",
+   "SheafOfModules.KFlatFixedTensor.ordinaryTensor_eq_published"
   ],
   "file": "lean/Sheaf/Algebra/Homology/KFlatFixedTensorTriangulated.lean",
   "statement": "theorem kFlat_fixed_tensor_triangulated : ∃ s : (derivedTensor R).CommShift₂Int, ∀ (A : CochainComplex (Modules R) ℤ) (hA : CochainComplex.IsKFlatIndependentCoefficients A) (hAf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X n)), (∀ (B B' : CochainComplex (Modules R) ℤ) (f : B ⟶ B'), QuasiIso f → QuasiIso (((totalTensor R).obj A).map f) ∧ QuasiIso (((totalTensor R).flip.obj A).map f)) ∧ (∀ n : ℤ, CochainComplex.IsKFlatIndependentCoefficients (A⟦n⟧) ∧ ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) ((A⟦n⟧).X i)) ∧ (((derivedTensor R).obj (DerivedCategory.Q.obj A)).IsTriangulated ∧ ((derivedTensor R).flip.obj (DerivedCategory.Q.obj A)).IsTriangulated) ∧ (∃ cL : (totalTensor R).obj A ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ (derivedTensor R).obj (DerivedCategory.Q.obj A), NatTrans.CommShift cL.hom ℤ ∧ ∀ (B : CochainComplex (Modules R) ℤ) (hB : CochainComplex.IsKFlatIndependentCoefficients B) (hBf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (B.X n)), cL.app B = representativeIso R A B hA hB hAf hBf) ∧ (∃ cR : (totalTensor R).flip.obj A ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ (derivedTensor R).flip.obj (DerivedCategory.Q.obj A), NatTrans.CommShift cR.hom ℤ ∧ ∀ (B : CochainComplex (Modules R) ℤ) (hB : CochainComplex.IsKFlatIndependentCoefficients B) (hBf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (B.X n)), cR.app B = representativeIso R B A hB hA hBf hAf) ∧ (∀ (B B' : CochainComplex (Modules R) ℤ) (f : B ⟶ B'), (((derivedTensor R).obj (DerivedCategory.Q.obj A)).mapTriangle.obj (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f))) ∈ distTriang (DerivedCategory (Modules R)) ∧ (((derivedTensor R).flip.obj (DerivedCategory.Q.obj A)).mapTriangle.obj (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f))) ∈ distTriang (DerivedCategory (Modules R)))",
@@ -193,7 +306,7 @@
   "by": "O2",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Uses the published siteDerivedTensorIndependentCoefficients and its actual resolving representative isomorphism. A single existential CommShift₂Int supplies coherent shifts on the whole derived bifunctor; the two natural comparisons are normalized on resolving complexes and commute with the signed total-complex shifts. Both tensor orders preserve every quasi-isomorphism, shifts preserve the resolving hypotheses, and the fixed derived functors preserve all distinguished triangles, with explicit localized cone-triangle clauses including their third arrows. No dependency or mathematical statement is changed."
+  "note": "Uses the published siteDerivedTensorIndependentCoefficients and its actual resolving representative isomorphism. A single existential CommShift₂Int supplies coherent shifts on the whole derived bifunctor; the two natural comparisons are normalized on resolving complexes and commute with the signed total-complex shifts. Both tensor orders preserve every quasi-isomorphism, shifts preserve the resolving hypotheses, and the fixed derived functors preserve all distinguished triangles, with explicit localized cone-triangle clauses including their third arrows. No dependency or mathematical statement is changed. C2 packages the identical selected descent data in TensorPresentation for dependent-type sharing; derivedTensor_eq_published is proved by unfolding the original nested choices. The main statement is unchanged. All helper theorems and all definition fields are proved. The ordinary and derived tensors are definitions with local irreducibility during this proof and proved equations to the published tensors, with reducibility restored for importing modules; additive and totalization instances are exposed by proved interface lemmas. The comparison between homotopy tensors is constructed directly on representatives, with naturality proved by quotient fullness. Repair refresh: selectedTensorPresentation now has an explicit TensorPresentation type and local irreducibility, with reducibility restored for importers. The private tensorPresentationComparison caches the original composed comparison and uses its proved component equation; all public objects, signatures and original choices are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -203,5 +316,15 @@
   "result": "pass",
   "note": "Snapshot differs from live only in the item's lean field; statement verbatim; one sorry; docstrings carry Stacks 06YM/06YP/06YU/0FNH, blueprint tag and the 9 proof steps. Every node clause is rendered against the recorded declarations: ringedSiteModules, map₂CochainComplex of curriedTensor (= descent theorem's tensor), siteDerivedTensorIndependentCoefficients (universes .{u,v,r,w,0,0} match its def), IsKFlatIndependentCoefficients, IsFlatOnSite, and Mathlib's map₂CochainComplex CommShift₂Int (the shift dependency's mathlib_match). Quasi-iso preservation holds for arbitrary B,B'; shifts preserve K-flat and flat terms; IsTriangulated for both fixed functors; cL/cR are pinned to representativeIso on flat-term K-flat B with NatTrans.CommShift; the existential CommShift₂Int s is determined through these and supplies naturality in derived fixed maps and the (-1)^{ab} sign. Site/coefficient universes are independent with no extra hypotheses; edge cases checked. Not a duplicate: DerivedCategory/Monoidal/Shift is for a different derived tensor. nt_compile --json rc=0 in 21.5 s, no warnings. Advisory: representativeIso uses Nonempty.some of the dependency's comparisons (the interface limit); some redundant proof imports; the cone clause is implied by IsTriangulated."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7084d",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261021T233622-L-837738",
+  "kind": "interface",
+  "note": "independent cc review: delivered item vs clones/live base and the PASSed 17c0 head; 15 direct importers from clones/live compiled against delivered and fixed item; change-record Users vs computed users"
+ }
 }
