@@ -22694,3 +22694,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: merged deliver/NJ/lem-pod-stratified-dualizable-bounded (stage 2; reviewer PASS; parallel immutable checks)
 - 13:48 L: merged deliver/Q13/lem-per-adic-normalized-fibre-exactness (stage 2; reviewer PASS; parallel immutable checks)
 - 13:48 L: merged deliver/Q14/lem-per-rational-stratum-integral-models (stage 2; reviewer PASS; parallel immutable checks)
+- 13:48 L: returned deliver/NV/lem-pur-quotient-diagram-projection-evaluation (reviewer RETURN: L: independent stage-2 immutable head a345d1d02a3b: H2: stmt_deps gains theorem node lem-coef-semilinear-derived-section)
