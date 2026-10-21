@@ -236,5 +236,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-344c0b51b (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and every cited statement. The source is main-20261015 lem-sfb-subfield-flat.proof.md, last sentence. The statement is true: Res_φ is identity-on-underlying, so it is conservative and creates finite limits, and Res∘T≅P_n preserves limits. Tested on n=0, n=1, J empty and non-injective φ; no weakening, and the coefficient category is internal Mod_R(Sh(C,Ab)). Not superseded (live and side-live both unsplit), not dropped, no repair note, no SGA, no new nodes. Step 1: the equivalence's hypotheses match the item exactly; tool use of def-weil-pbc-internal-abelian-sheaf-module-equivalence accepted. Step 3's display was checked. Steps 4 and 7: Mathlib Finite.lean:175-178 and 163-166 hypotheses match. Step 5 was checked, including the n=0 and empty-J edge cases. FIX, 2 faults. (1) C3/C4, step 2: the sectionwise reading r·x=φ(r)·x relied on the equivalence being compatible with Res, which only the equivalence node's proof says, not its statement. Rewritten as an internal argument: a sheaf iso θ between the restricted B-limit and the R-limit, shown R-linear via joint monicity of the projections and B-/R-linearity, with inverse linear by step 3's computation. (2) C5, step 6: it restated the same-unit Mathlib leaf lem-sfb-finite-exactness-nat-iso; it now cites it (applied to α^{-1}:P_n≅V∘T), with elementary=false and proof_deps updated. Corrected item in fixes/dag/nodes/sec-proetale-coefficients/.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarCoordinateLimitCriterion",
+  "declaration": "CategoryTheory.Mod.sheaf_scalarCoordinateLimitCriterion",
+  "declarations": [
+   "CategoryTheory.Mod.ScalarCoordinateLimitCriterion",
+   "CategoryTheory.Mod.sheaf_scalarCoordinateLimitCriterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScalarCoordinateLimitCriterion.lean",
+  "statement": "theorem sheaf_scalarCoordinateLimitCriterion {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) : @ScalarCoordinateLimitCriterion (Sheaf J Ab.{w}) _ (sfbSheafTensorStructure (A := Ab.{w}) J).monoidal (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric.toBraidedCategory (@sheafIsAbelian C _ Ab.{w} _ _ J (hasSheafifyEssentiallySmallSite J Ab.{w}))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper predicate packages this node at an explicitly supplied monoidal structure, as in the adjacent FiniteFreeScalarCoordinates interface. Its additivity conjunct is infrastructure already supplied by the sheaf-tensor dependency, not an extra site hypothesis. The theorem specializes to the canonical sheafified tensor; finite powers are exactly Functor.const (Discrete (Fin n)) followed by lim, as in the recorded coordinate theorem. PreservesFiniteLimits includes terminal objects and finite shapes in higher universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d2467ccd",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Clause-by-clause match of sheaf_scalarCoordinateLimitCriterion with the node: EssentiallySmall.{w} site, sfbSheafTensorStructure tensor and its braiding, MonObj/IsCommMonObj/IsMonHom ring objects, Mod H R and Mod H B, comap φ as Res, n-th power functor (Functor.const (Discrete (Fin n)) ⋙ lim) as in FiniteFreeScalarCoordinates, arbitrary T with α : T ⋙ comap φ ≅ P_n, conclusion PreservesFiniteLimits T (empty J and n=0 covered). The Nonempty(MonoidalPreadditive) conjunct is a Prop that holds for the canonical tensor (sfbSheafTensor_monoidalPreadditive), so it is not vacuous. Snapshot node differs from live only in lean; lean.statement is verbatim in the file; no duplicate in the project; docstrings carry source and the 7 proof steps; only the theorem is sorry; plain imports serve the proof plan. nt_compile --json clean in 1.9 s after the published build came back from a rebuild (12:06-12:19). Advisory: finite products come from ModuleObjects.Abelian, which is not a stmt_dep."
+ }
 }

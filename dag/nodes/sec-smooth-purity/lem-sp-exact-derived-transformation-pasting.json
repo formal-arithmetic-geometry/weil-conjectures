@@ -403,5 +403,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-3a028edba (reviewer sub-agent of L); spot-checked: I read the item, the report, all four cited statements and the sources in full. It is one commit with zero new nodes. The item is still unsplit with no proof on side-live, there is no repair note for it, it is not in a dropped list, and it cites no SGA. Against side-live, the statement, source and blueprint are unchanged. The added stmt_dep lem-sfb-exact-derived-composition is right, because the statement's 'exact-composition comparison' is the mu of that node. Its direction is mu: D(GF) -> D(G)D(F) with a_{G,C(F)K} D(G)(a_{F,K}) mu_{QK} = a_{GF,K}, matching every use. Sources: Stacks Tag 015F (derived.tex 5883-5903) and Tag 04VG (categories.tex 4406), both checked in the tags file. Mathlib Localization liftNatTrans and natTrans_ext are at Predicate.lean 278-361. Clause (2) of lem-weil-pbc-localization-universal-property lifts transformations that need not be invertible. I recomputed every step myself. Step 3 gives the normalization (*), and conjugating by mu_H and mu_F^{-1} gives the same lift by uniqueness. Step 4 covers vertical composition and identities. In Step 5, output whiskering uses the a_{VP} expansion by induction and naturality of a_V at C(t)_K. In Step 6, input whiskering uses naturality of t^D at the derived morphism a_{U,K}. In Step 7, the three-edge coherence holds: b*l and b*r both equal a_{HGF,K}, with naturality of mu_{G,H} at a_{F,K}. The word-length induction and the unit comparison D(1)->1 are set up with base and step. Step 8 is a properly stated induction on expressions, and Step 9 gives invertibility. No cell is ever cancelled. Zero cells, empty words and unbounded complexes behave correctly. Duplicate search: the existing derived square-pasting nodes cover only invertible cells or particular squares, and this Mathlib has no mapDerivedCategory natural-transformation API. I accept the tool_use of the generic compositor lem-sfb-exact-derived-composition. No changes made."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactDerivedTransformationPasting",
+  "declaration": "CategoryTheory.ExactDerivedPasting.exact_derived_transformation_pasting",
+  "declarations": [
+   "CategoryTheory.ExactDerivedPasting.Word",
+   "CategoryTheory.ExactDerivedPasting.Word.ordinary",
+   "CategoryTheory.ExactDerivedPasting.Word.ordinary_additive",
+   "CategoryTheory.ExactDerivedPasting.Word.derived",
+   "CategoryTheory.ExactDerivedPasting.Word.comparison",
+   "CategoryTheory.ExactDerivedPasting.Word.cell",
+   "CategoryTheory.ExactDerivedPasting.Expression",
+   "CategoryTheory.ExactDerivedPasting.Expression.ordinary",
+   "CategoryTheory.ExactDerivedPasting.Expression.derived",
+   "CategoryTheory.ExactDerivedPasting.exact_derived_transformation_pasting"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedTransformationPasting.lean",
+  "statement": "theorem exact_derived_transformation_pasting [Finite I] : (∀ {i j : I} {P R : Word C i j} (e : Expression C P R), e.derived = Word.cell C e.ordinary) ∧ (∀ {i j : I} {P R : Word C i j} (e f : Expression C P R), e.ordinary = f.ordinary → e.derived = f.derived) ∧ (∀ {i j : I} {P R : Word C i j} (α : P.ordinary.obj ⟶ R.ordinary.obj), IsIso α → IsIso (Word.cell C α))",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-965fff593",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean; lean.statement verbatim. Clause-by-clause match: finite I, abelian C i, HasDerivedCategory.{w}, exact edges (C i ⥤ₑ C j, additive via exactFunctor_le_additiveFunctor), noninvertible cells, Word.cell = comparison.inv ≫ liftNatTrans(whiskerRight (NatTrans.mapHomologicalComplex α) Q) ≫ comparison.hom. Comparison uses upstream mapDerivedCategoryCompIso (its _fac is exactly the stmt_dep existsUnique_mapDerivedCategoryCompIso equation, direction D(GF)->D(G)D(F)) and the canonical mapDerivedCategoryIdIso for empty words. Conj.1 (every expression incl. both whiskerings, associators, unitors equals the normalized lift) is true by Steps 4-7 and not tautological; conj.2 follows; conj.3 by Step 9. Edge cases ok (empty I, nil words, zero/identity cells, independent universes t u v w). No hollow data, only theorem sorry, docstrings with source/blueprint/9 proof steps, Worker report + Second reading present. nt_compile --json clean (2.1 s) after the published build reappeared. Advisories: unused public import of ExactDerivedComposition (stmt_dep module); [Finite I] unused but faithful."
+ }
 }

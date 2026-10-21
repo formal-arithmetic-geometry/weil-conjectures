@@ -21,7 +21,10 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-proper-open-comparison",
   "lem-sp-refinement-coefficient-mate",
-  "lem-sp-proper-open-coefficient-mate"
+  "lem-sp-proper-open-coefficient-mate",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-pur-chosen-compactification-compositors"
  ],
  "proof": [
   {
@@ -301,5 +304,45 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-837dedd41 (reviewer sub-agent of L); spot-checked: FIX for one C4 fault. I read the item, all 23 cited statements, Stacks more-etale 0F7B (l.2460) and 0F7J (l.3159), and the blueprint Locality paragraph. The statement and stmt_deps are unchanged from Q58's version and not weakened; there are no new nodes, no SGA citations and no cycle. All citations are on the route of sk-thm-sf-compatibility. I recomputed Steps 3, 5 and 6 and they are right. Step 3 is d_{r2u}Nκ = κ^pro P(d_u) d_{r2} plus the site clause of lem-sp-refinement-coefficient-mate, which needs no Cartesian square. Step 5 whiskers the Γ site square of lem-sp-proper-open-coefficient-mate at J_aE, with d_q and e_a attached by naturality. Step 6 uses the e-composition clause and Step 2. The hypotheses hold: all schemes are Noetherian, hence qcqs for the canonical-mate node; inputs are bounded below; opens are quasi-compact; R is any finite commutative ring. Edge cases R=0, u=id, an identity open and a non-Cartesian refinement all work. The fault (C4) is in Steps 4 and 7: they took the Γ-tower formula for α^et and its tower-independence from lem-amb-etale-compact-comparisons, whose statement gives no formula. That formula is the normalization clause of lem-amb-unbounded-compact-support-comparisons, which also says it restricts on D+ to lem-amb's composition. The fix cites that node in Steps 4 and 7 and adds it to proof_deps. I also named mate-pasting clause (3) in Step 2's text, since passing from the composite adjunction to that of ba needs it. The node generalizes lem-pur-compact-support-site-coherence (A_{E,n}), lem-trf-proper-composition-site-transport and lem-sf-proper-open-comparison-site-normalization; it is not a duplicate of any of them. The tool_uses for the sfb normalization and sieve-Grothendieck lemmas are accepted; both are on route anyway.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCompactSiteCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCompactSiteCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteChangePlus",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteChangeAtWitness",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteOpenCongr",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteTowerOpen",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteTowerPlus",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteCompositionPlus",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteCompositionAtWitness",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteIdentityProPlus",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteComparison_isIso",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_refinement",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_common_refinement",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_change_coherence",
+   "AlgebraicGeometry.ProEtale.finiteCompactSiteCoherence",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_tower_independence",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_naturality",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_identity",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_refinement_coherence",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_composition_units",
+   "AlgebraicGeometry.ProEtale.finiteCompactSite_associativity"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCompactSiteCoherence.lean",
+  "statement": "theorem finiteCompactSiteCoherence {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] {f : X ⟶ Y} {g : Y ⟶ Z} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) (T : Compactification.Triangle f g) (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) : (comparisonUpperStar (ModuleCat.{u + 1} R) Z).mapDerivedCategoryPlus.map ((coherenceEtaleCompositor R c d e).hom.app E) ≫ (compactSupportSiteComparisonPlus R e).hom.app E = (compactSupportSiteComparisonPlus R d).hom.app ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) c).obj E) ≫ (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d).map ((compactSupportSiteComparisonPlus R c).hom.app E) ≫ finiteCompactSiteCompositionPlus R c d e T E",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The full statement is recorded by the eleven theorem declarations: invertibility, refinement square, arbitrary common-refinement square and independence, change cocycles, computed composition square, tower independence, naturality, identity normalization, refinement identities/transitivity, composition units and associativity. Helpers construct the pro-etale composition from the specified open-adjunction properOpenSiteInterchange and proper/open compositors, followed by computed common-refinement changes. D+ equations embed faithfully in the ordinary unbounded module derived categories; no coefficient presentation or base-field parameter is imposed. Three landed statement dependencies are added solely to reuse their general finite-coefficient canonical comparison/refinement/compositor helpers."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4bbc0b3f",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery of 67a0b64 (H2/H12 RETURN). Lean byte-identical (sha256 d6db6770...). Only stmt_deps changed, exactly as requested: lem-sf-class-compact-support-comparison -> def-sf-compact-support-site-comparison-construction (declares compactSupportSiteComparisonPlus), lem-pur-compact-support-site-coherence -> def-pur-chosen-compactification-compositors (coherenceEtaleCompositor); both landed existing:true; dependency walk from both reaches no cycle back to the item; def-sf-refinement-comparison-isomorphism kept. Report has Worker report, Returned-delivery repair and Second reading by Q41 sections. All substance checks from the prior review stand. nt_compile unavailable (live .lake/build missing, mid-rebuild; retried twice); relying on prior clean nt_compile --json 8.2 s of the identical file and the worker's scompile 9.8 s."
+ }
 }
