@@ -20842,3 +20842,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:06 L: merged deliver/Q102/lem-weil-boundary-dualizing-composition (reviewer FIX; after a return; new nodes: 2)
 - 08:06 L: merged deliver/NC/lem-pur-affine-chart-exceptional-identification (reviewer PASS; first push; new nodes: 0); claim not held by NC: not your claim
 - 08:06 L: merged deliver/Q108/prop-weil-operations (reviewer PASS; after a return; new nodes: 5)
+- 08:06 L: merged deliver/Q53/lem-sf-complete-residue-cohomology-bounds (reviewer PASS; after a return; new nodes: 2)
