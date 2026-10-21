@@ -2,17 +2,83 @@
  "id": "lem-sp-ordinary-vertical-pasting-transport",
  "kind": "statement",
  "title": "Transport of a vertical square-pasting equation through coherent comparisons",
- "statement": "Let $A,B,C,D,E,F$ and $A',B',C',D',E',F'$ be categories, with functors $E_X:X\\to X'$ for the six corresponding pairs. Let $K:A\\to B$, $I:C\\to D$, $J:E\\to F$, $P_1:D\\to B$, $P_2:F\\to D$, $P_{12}:F\\to B$, $R_1:C\\to A$, $R_2:E\\to C$, $R_{12}:E\\to A$, and let primed functors have the corresponding primed endpoints. Use the natural-transformation square notation of [def-weil-pbc-adjunction-mate], without requiring adjunctions. For functors $E_X:X\\to X'$ and $F:X\\to Y$ equipped with an invertible natural comparison $e_F:E_YF\\simeq F'E_X$, put $e_{HF}=(H'e_F)\\circ(e_HF)$ for a composite $HF$. For a cell $t:F\\to H$ with the same endpoints, say it is respected if $e_H\\circ E_Y(t)=(t'E_X)\\circ e_F$. All compositions below are in the usual right-to-left order, with the canonical functor associators inserted. Choose comparisons $e_K,e_I,e_J,e_{P_1},e_{P_2},e_{P_{12}},e_{R_1},e_{R_2},e_{R_{12}}$. Let $c_P:P_{12}\\simeq P_1P_2$, $c_R:R_{12}\\simeq R_1R_2$ and primed counterparts satisfy $e_{P_1P_2}\\circ E_B(c_P)=(c'_PE_F)\\circ e_{P_{12}}$ and $e_{R_1R_2}\\circ E_A(c_R)=(c'_RE_E)\\circ e_{R_{12}}$. Let $a:P_1I\\to KR_1$, $b:P_2J\\to IR_2$, $c:P_{12}J\\to KR_{12}$ and primed counterparts be respected cells. If\n$$ (a'R'_2)\\circ(P'_1b')\\circ(c'_PJ')=(K'c'_R)\\circ c',$$\nthen for every $N\\in E$,\n$$ E_B\\big(((aR_2)\\circ(P_1b)\\circ(c_PJ))_N\\big)=E_B\\big(((Kc_R)\\circ c)_N\\big).$$\nNo faithfulness or equivalence of $E_X$ is assumed.",
+ "statement": "Let $A,B,C,D,E,F$ and $A',B',C',D',E',F'$ be categories, with functors $E_X:X\\to X'$ for the six corresponding pairs. Let $K:A\\to B$, $I:C\\to D$, $J:E\\to F$, $P_1:D\\to B$, $P_2:F\\to D$, $P_{12}:F\\to B$, $R_1:C\\to A$, $R_2:E\\to C$, $R_{12}:E\\to A$, and let primed functors have the corresponding primed endpoints. A cell is a natural transformation. For a cell $t:T\\to U$, the whiskerings $Ht$ and $tG$ have components $H(t_N)$ and $t_{G(N)}$, respectively. No adjunctions are required. For functors $E_X:X\\to X'$ and $F:X\\to Y$ equipped with an invertible natural comparison $e_F:E_YF\\simeq F'E_X$, put $e_{HF}=(H'e_F)\\circ(e_HF)$ for a composite $HF$. For a cell $t:F\\to H$ with the same endpoints, say it is respected if $e_H\\circ E_Y(t)=(t'E_X)\\circ e_F$. All compositions below are in the usual right-to-left order, with the canonical functor associators inserted. Choose comparisons $e_K,e_I,e_J,e_{P_1},e_{P_2},e_{P_{12}},e_{R_1},e_{R_2},e_{R_{12}}$. Let $c_P:P_{12}\\simeq P_1P_2$, $c_R:R_{12}\\simeq R_1R_2$ and primed counterparts satisfy $e_{P_1P_2}\\circ E_B(c_P)=(c'_PE_F)\\circ e_{P_{12}}$ and $e_{R_1R_2}\\circ E_A(c_R)=(c'_RE_E)\\circ e_{R_{12}}$. Let $a:P_1I\\to KR_1$, $b:P_2J\\to IR_2$, $c:P_{12}J\\to KR_{12}$ and primed counterparts be respected cells. If\n$$ (a'R'_2)\\circ(P'_1b')\\circ(c'_PJ')=(K'c'_R)\\circ c',$$\nthen for every $N\\in E$,\n$$ E_B\\big(((aR_2)\\circ(P_1b)\\circ(c_PJ))_N\\big)=E_B\\big(((Kc_R)\\circ c)_N\\big).$$\nNo faithfulness or equivalence of $E_X$ is assumed.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); agent categorical transport argument, isolating ordinary_vertical_transport in lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean; the tag motivates the pasting shape, not this abstract transport theorem"
  },
- "stmt_deps": [
-  "def-weil-pbc-adjunction-mate"
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Fix $N\\in E$ and put $x=E_E(N)$. Write $E_B(f)$ for the image of a morphism $f$ and suppress $\\circ$ between morphisms (rightmost first). For any composable pair $H,G$, the stipulated comparison has component\n$$e_{HG,N}=H'(e_{G,N})e_{H,G(N)}.$$\nUse this formula iteratively to define\n$$u=e_{P_{12}J,N},\\quad q=e_{P_1P_2J,N},\\quad z=e_{P_1IR_2,N},\\quad v=e_{KR_1R_2,N},\\quad w=e_{KR_{12},N}.$$\nFor example $v=K'R'_1(e_{R_2,N})K'(e_{R_1,R_2N})e_{K,R_1R_2N}$. The two parenthesizations give this same expression by preservation of composition. The canonical functor associators have identity components, so all subsequent component equations also hold with the statement's associators inserted. Each of $u,q,z,v,w$ is invertible: functors send an inverse to an inverse, and the inverse of a composite is the reverse composite of inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 1: comparison components"
+   }
+  },
+  {
+   "text": "Transport the initial compositor. Expand $q=P'_1P'_2(e_{J,N})e_{P_1P_2,JN}$ and $u=P'_{12}(e_{J,N})e_{P_{12},JN}$. The assumed $c_P$ comparison at $JN$, followed by naturality of $c'_P$ at $e_{J,N}:E_F(JN)\\to J'x$, gives the three-line calculation\n$$\\begin{aligned}\nqE_B(c_{P,JN})\n&=P'_1P'_2(e_{J,N})c'_{P,E_F(JN)}e_{P_{12},JN}\\\\\n&=c'_{P,J'x}P'_{12}(e_{J,N})e_{P_{12},JN}\n=c'_{P,J'x}u.\n\\end{aligned}$$\nThus the whiskered compositor has the required comparison, without assuming the realization functors faithful.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 2: left compositor"
+   }
+  },
+  {
+   "text": "Transport the middle factor. Naturality of $e_{P_1}$ at $b_N:P_2JN\\to IR_2N$ says\n$$e_{P_1,IR_2N}E_B(P_1(b_N))=P'_1(E_D(b_N))e_{P_1,P_2JN}.$$\nExpand $z=P'_1(e_{IR_2,N})e_{P_1,IR_2N}$ and $q=P'_1(e_{P_2J,N})e_{P_1,P_2JN}$. Substituting the displayed naturality equation and then the respected-cell hypothesis $e_{IR_2,N}E_D(b_N)=b'_xe_{P_2J,N}$ yields\n$$\\begin{aligned}\nzE_B(P_1(b_N))\n&=P'_1(e_{IR_2,N}E_D(b_N))e_{P_1,P_2JN}\\\\\n&=P'_1(b'_x)P'_1(e_{P_2J,N})e_{P_1,P_2JN}\n=P'_1(b'_x)q.\n\\end{aligned}$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 3: middle whiskering"
+   }
+  },
+  {
+   "text": "Transport the last factor. Expand $v=K'R'_1(e_{R_2,N})e_{KR_1,R_2N}$ and $z=P'_1I'(e_{R_2,N})e_{P_1I,R_2N}$. Respect for $a$ at $R_2N$ gives the first equality below; naturality of $a':P'_1I'\\to K'R'_1$ at $e_{R_2,N}:E_C(R_2N)\\to R'_2x$ gives the second:\n$$\\begin{aligned}\nvE_B(a_{R_2N})\n&=K'R'_1(e_{R_2,N})a'_{E_C(R_2N)}e_{P_1I,R_2N}\\\\\n&=a'_{R'_2x}P'_1I'(e_{R_2,N})e_{P_1I,R_2N}\n=a'_{R'_2x}z.\n\\end{aligned}$$\nOnly $a'$ is used as a natural transformation; neither $a$ nor $a'$ is required to be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 4: right whiskering"
+   }
+  },
+  {
+   "text": "For the other path, respect for $c$ is exactly\n$$wE_B(c_N)=c'_xu.$$\nSet $r=e_{R_1R_2,N}$. Naturality of $e_K$ at $c_{R,N}:R_{12}N\\to R_1R_2N$ and the assumed $c_R$ comparison $rE_A(c_{R,N})=c'_{R,x}e_{R_{12},N}$ give\n$$\\begin{aligned}\nvE_B(K(c_{R,N}))\n&=K'(r)e_{K,R_1R_2N}E_B(K(c_{R,N}))\\\\\n&=K'(rE_A(c_{R,N}))e_{K,R_{12}N}\\\\\n&=K'(c'_{R,x})K'(e_{R_{12},N})e_{K,R_{12}N}\n=K'(c'_{R,x})w.\n\\end{aligned}$$\nThe first equality uses the explicit formula for $v$ from Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 5: outer cell and right compositor"
+   }
+  },
+  {
+   "text": "Put $L_N=a_{R_2N}P_1(b_N)c_{P,JN}$ and $H_N=K(c_{R,N})c_N$. Preservation of composition by $E_B$, followed by the three equations in Steps 4, 3 and 2, gives\n$$\\begin{aligned}\nvE_B(L_N)\n&=a'_{R'_2x}zE_B(P_1(b_N))E_B(c_{P,JN})\\\\\n&=a'_{R'_2x}P'_1(b'_x)qE_B(c_{P,JN})\\\\\n&=a'_{R'_2x}P'_1(b'_x)c'_{P,J'x}u.\n\\end{aligned}$$\nSimilarly the two equations in Step 5 give\n$$vE_B(H_N)=K'(c'_{R,x})wE_B(c_N)=K'(c'_{R,x})c'_xu.$$\nAll compositions have common source $E_B(P_{12}JN)$ and target $K'R'_1R'_2x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 6: compose the component equations"
+   }
+  },
+  {
+   "text": "Evaluate the assumed primed pasting identity at $x$:\n$$a'_{R'_2x}P'_1(b'_x)c'_{P,J'x}=K'(c'_{R,x})c'_x.$$\nThe two calculations of Step 6 therefore imply $vE_B(L_N)=vE_B(H_N)$. Compose on the left with the inverse of $v$ from Step 1 and use associativity and the identity laws to obtain $E_B(L_N)=E_B(H_N)$. These are precisely the two components in the conclusion. The object $N$ was arbitrary; no property of any $E_X$ beyond functoriality was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), vertical-pasting shape only; agent component calculation: 7: primed equality and inverse cancellation"
+   }
+  }
  ],
- "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose) motivates the vertical shape only; explicit component proof of the abstract transport statement, compared with ordinary_vertical_transport in lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean:481–537."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -127,10 +193,133 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: CatCommSq.vComp treats invertible square cells; TwoSquare.vComp only defines pasting. Neither transports three possibly noninvertible cells across six unrelated realization functors and coherent edge comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "transport.*(v[Cc]omp|vertical)|vertical.*transport|TwoSquare.*congr",
+   "results": {
+    "t": "2026-10-21T03:45:39Z",
+    "tool": "grep",
+    "query": "transport.*(v[Cc]omp|vertical)|vertical.*transport|TwoSquare.*congr",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/GuitartExact/KanExtension.lean"
+    ],
+    "digest": "4ea16654124ff15b"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: CatCommSq requires invertible square cells; TwoSquare.vComp defines pasting; NatIso.hcomp and whiskering give individual comparison identities, not the six-realization transport theorem. The grep hit is Guitart-exact Kan-extension infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and invertible comparisons transport an equality between composites of possibly noninvertible natural transformations",
+   "results": {
+    "t": "2026-10-21T03:45:39Z",
+    "tool": "leansearch",
+    "query": "Naturality and invertible comparisons transport an equality between composites of possibly noninvertible natural transformations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib.Tactic.BicategoryLike.MkEqOfNaturality.mk",
+     "CategoryTheory.NatTrans.naturality",
+     "CategoryTheory.NatTrans.naturality_1_assoc",
+     "CategoryTheory.NatTrans.naturality_2_assoc",
+     "CategoryTheory.MorphismProperty.naturalityProperty",
+     "CategoryTheory.NatTrans.naturality'",
+     "CategoryTheory.NatTrans.naturality_2",
+     "CategoryTheory.NatTrans.naturality_1"
+    ],
+    "digest": "b56c0734fa966f8a"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: only NatTrans naturality or tactic support; these do not state the transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwoSquare.vComp",
+   "results": {
+    "t": "2026-10-21T03:45:39Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.TwoSquare.vComp",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "CategoryTheory.TwoSquare.vComp",
+     "CategoryTheory.TwoSquare.vComp_app",
+     "CategoryTheory.TwoSquare.hCompVCompHComp",
+     "CategoryTheory.mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_hcomp",
+     "CategoryTheory.mateEquiv_square",
+     "CategoryTheory.TwoSquare.GuitartExact.vComp",
+     "CategoryTheory.TwoSquare.GuitartExact.of_vComp"
+    ],
+    "digest": "4527c82c73a62953"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: CatCommSq requires invertible square cells; TwoSquare.vComp defines pasting; NatIso.hcomp and whiskering give individual comparison identities, not the six-realization transport theorem. The grep hit is Guitart-exact Kan-extension infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an equality of vertical composites of natural transformation squares along invertible coherent functor comparisons without faithful functors",
+   "results": {
+    "t": "2026-10-21T03:45:41Z",
+    "tool": "leanfinder",
+    "query": "Transport an equality of vertical composites of natural transformation squares along invertible coherent functor comparisons without faithful functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.CatCommSq.vComp_iso_hom_app",
+     "CategoryTheory.CatCommSq.vComp_iso_inv_app",
+     "CategoryTheory.CatCommSq.vInv",
+     "CategoryTheory.CatCommSq.vInvEquiv",
+     "CategoryTheory.CatCommSq.hComp_iso_hom_app",
+     "CategoryTheory.CatCommSq.hInv",
+     "CategoryTheory.CatCommSq.iso",
+     "CategoryTheory.CatCommSq.vInv_vInv"
+    ],
+    "digest": "9341f5dae0b7f6ed"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: CatCommSq requires invertible square cells; TwoSquare.vComp defines pasting; NatIso.hcomp and whiskering give individual comparison identities, not the six-realization transport theorem. The grep hit is Guitart-exact Kan-extension infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent natural isomorphisms conjugate vertical pasting equations of functors and natural transformations",
+   "results": {
+    "t": "2026-10-21T03:45:42Z",
+    "tool": "leanfinder",
+    "query": "Coherent natural isomorphisms conjugate vertical pasting equations of functors and natural transformations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatIso.hcomp",
+     "CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight_assoc",
+     "CategoryTheory.NatIso.hcomp_hom",
+     "CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+     "CategoryTheory.NatTrans.exchange",
+     "CategoryTheory.Iso.hom_inv_id_app_app_app_assoc",
+     "CategoryTheory.Functor.isoWhiskerLeft_right_assoc",
+     "CategoryTheory.NatIso.trans_app"
+    ],
+    "digest": "5574d63f2440a2cc"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: CatCommSq requires invertible square cells; TwoSquare.vComp defines pasting; NatIso.hcomp and whiskering give individual comparison identities, not the six-realization transport theorem. The grep hit is Guitart-exact Kan-extension infrastructure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-varying-ring-proper-open-pasting",
@@ -142,7 +331,7 @@
  "blueprint": {
   "from": {
    "node": "det-sp-tower-gluing",
-   "place": "Local pairs: transport the vertical proper/open identity through the normalized coefficient realizations before evaluation.",
+   "place": "Local pairs, final sentence: \"These local counits are the iterated integrations and fibre sums, as maps of towers.\" Componentwise transport of the vertical proper/open composition used to form these local pairs.",
    "via": [
     "lem-sp-varying-ring-proper-open-pasting",
     "lem-sp-coefficient-tower-shriek-calculus"
@@ -150,5 +339,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-ordinary-vertical-pasting-transport",
+  "worker": "stage1",
+  "summary": "Q24 gives seven elementary component calculations using only the hypotheses and category/functor/naturality/inverse axioms. No new nodes. Expanded whiskering inline and removed the unused adjunction-mate statement dependency; no adjunction is assumed or used. Corrected doubled TeX backslashes without changing mathematical content. Project attachment and whole-blueprint searches found no exact match. Five logged Mathlib searches, including two semantic phrasings, confirm only related infrastructure.",
+  "blueprint": "Realizes the vertical proper/open comparison needed by det-sp-tower-gluing, Local pairs (last sentence), through lem-sp-coefficient-tower-shriek-calculus and lem-sp-varying-ring-proper-open-pasting. Does not change the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-3b37f39d5",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-3b37f39d5 (reviewer sub-agent of L); spot-checked: I read the base item, which was unsplit with no proof (taken from the Q23 run snapshot). The delivered statement is byte-identical except that the notation reference to def-weil-pbc-adjunction-mate is replaced by an explicit definition of whiskering (components H(t_N), t_{G(N)}), so stmt_deps becomes []. This is notation only: hypotheses and conclusion are unchanged. I checked the types: a:P1I→KR1, b:P2J→IR2, c:P12J→KR12, and both paths run P12J→KR1R2. I re-derived all 7 elementary steps by hand. Step 1: e_{HG,N}=H'(e_{G,N})e_{H,GN}, and the two bracketings of v agree. Step 2: c_P hypothesis at JN, then naturality of c'_P along e_{J,N}, gives c'_{P,J'x}u. Step 3: naturality of e_{P1} at b_N, then respected b, gives P1'(b'_x)q. Step 4: respected a at R2N, then naturality of a' along e_{R2,N}, gives a'_{R2'x}z. Step 5: respected c, naturality of e_K at c_{R,N}, and the c_R hypothesis. Step 6 composes the step 2–5 equations. Step 7 evaluates the primed identity at x and cancels the invertible v; u is never inverted and nothing is cancelled across E_B. Lean cross-check: the private ordinary_vertical_transport (VaryingRingProperOpenPasting.lean:481-537) has matching hypotheses and proof and states the same theorem. Stacks 0F7C (more-etale.tex 2616-2673) gives the motivating shape only; proof_origin=agent is correct. The parent lem-sp-varying-ring-proper-open-pasting step 4 needs exactly an equality after E_B. Edge cases: empty E; identity realizations; a nonfaithful terminal-category example showing the conclusion must stay after E_B; noninvertible cells. No new nodes, no tool_uses, no SGA, no cycle. DAG search for respected/vertical pasting/vertically stacked found only geometric pasting lemmas, and the horizontal sibling has a different orientation, so no duplicate. Maintainer note (cosmetic): the horizontal sibling still lists def-weil-pbc-adjunction-mate only for notation."
  }
 }
