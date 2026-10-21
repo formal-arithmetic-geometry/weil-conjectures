@@ -13,9 +13,123 @@
   "def-weil-pbc-category-colimit",
   "lem-pe-spectral-components-profinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X_i=\\operatorname{Spec}B_i$ and $X=\\operatorname{Spec}B$. By [lem-ce-finite-finitely-presented-wcontractible], applied with $R=A$ and $S=B_i$, each $B_i$ is w-contractible, hence w-strictly local. Its hypotheses are exactly module finiteness and algebra finite presentation from the item. The equivalence of the two w-local conventions is clause 3 of [det-pe-wlocal-components]; consequently [sk-def-pe-wlocal] gives a unique maximal ideal above every prime of $B_i$, a closed subset $X_i^c$, and strictly henselian maximal localizations.",
+   "uses": [
+    "lem-ce-finite-finitely-presented-wcontractible",
+    "det-pe-wlocal-components",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0986, lemma-finite-finitely-presented-over-w-contractible; w-local convention compared by Bhatt–Scholze Lemma 2.1.4 and Remark 2.1.5."
+   }
+  },
+  {
+   "text": "For $i\\leq j$, a finite list generating $B_j$ over $A$ also generates it over $B_i$: replace each coefficient $a\\in A$ in its generating expression by its image in $B_i$. Thus $B_i\\to B_j$ is module-finite, and is integral by [lem-weil-pbc-finite-algebra-is-integral]. The induced map $X_j\\to X_i$ sends closed points to closed points by [lem-weil-pbc-integral-maximal-contracts-maximal]. The same argument shows that $A\\to B_i$ sends closed points of $X_i$ to closed points of $\\operatorname{Spec}A$. None of these arguments assumes an injective transition map.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK, lemma-finite-is-integral; Tag 00OI, lemma-going-up-maximal-on-top, with integral going-up Tag 00GU."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-filtered-spectrum-topological-limit] to the given nonempty small directed system. It identifies $X$ with the compatible prime families $(\\mathfrak p_i)_i$, with the topology induced by the coordinate projections $p_i:X\\to X_i$. Inclusion of primes corresponds to coordinatewise inclusion: specialization in this initial topology is coordinatewise specialization, and in an affine spectrum specialization is inclusion of prime ideals (the basic opens are $D(b)$). We use this identification also for families constructed in the next two steps.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0CUE and 0CUF, affine cases, as stated by the cited spectrum-limit node."
+   }
+  },
+  {
+   "text": "Given $\\mathfrak p\\in X$, let $\\mathfrak p_i$ be its coordinates and let $\\mathfrak m_i$ be the unique maximal ideal containing $\\mathfrak p_i$ (step 1). The contraction of $\\mathfrak m_j$ to $B_i$ is maximal by step 2 and contains $\\mathfrak p_i$, so it equals $\\mathfrak m_i$. Hence $(\\mathfrak m_i)_i$ is compatible. Step 3 supplies a prime $\\mathfrak m$ of $B$ with these coordinates and $\\mathfrak p\\subseteq\\mathfrak m$. This prime is maximal: if a prime $\\mathfrak q$ contains it then $\\mathfrak q_i\\supseteq\\mathfrak m_i$ forces equality at every coordinate and then $\\mathfrak q=\\mathfrak m$. There is no larger proper ideal, since any such ideal lies in a maximal ideal by [lem-weil-pbc-proper-ideal-contained-in-maximal].",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-a1-filtered-spectrum-topological-limit",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, compatible closed specializations; here expanded using the prime-family description. Maximal existence: Algebra Tag 00E0, lemma-Zariski-topology (2)."
+   }
+  },
+  {
+   "text": "Every maximal ideal $\\mathfrak n$ of $B$ has maximal coordinates: apply step 4 with $\\mathfrak p=\\mathfrak n$; maximality forces $\\mathfrak n=\\mathfrak m$. If $\\mathfrak n$ contains a given prime $\\mathfrak p$, its coordinates are therefore maximal ideals containing $\\mathfrak p_i$ and must equal the $\\mathfrak m_i$ from step 4. Thus every point of $X$ has exactly one closed specialization. Moreover,\n$$X^c=\\bigcap_i p_i^{-1}(X_i^c).$$\nThe right side is closed, since every $X_i^c$ is closed by step 1. This proves that $B$ is w-local [sk-def-pe-wlocal]. Restricting the prime-family homeomorphism of step 3 gives the asserted homeomorphism $X^c\\cong\\varprojlim_iX_i^c$: on both sides the topology is generated by the restrictions of the same coordinate inverse images of open subsets of $X_i$.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit argument and identification of the closed-point subspace; explicit prime-family specialization argument."
+   }
+  },
+  {
+   "text": "For $X$ and each $X_i$, clause 2 of [det-pe-wlocal-components] identifies the closed-point subspace homeomorphically with the quotient space of connected components. These homeomorphisms commute with the transition and projection maps: the component of a closed point maps to the component of its image, and those images are closed by steps 2 and 5. Applying these homeomorphisms coordinatewise to the homeomorphism in step 5 proves\n$$\\pi_0(X)\\cong\\varprojlim_i\\pi_0(X_i).$$\nThis is the canonical comparison in the statement, not just an abstract homeomorphism.",
+   "uses": [
+    "det-pe-wlocal-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.4 and Remark 2.1.5 applied to the limit of Lemma 2.1.9."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be any maximal ideal of $B$. By step 5 its contractions $\\mathfrak m_i$ are maximal. By [lem-weil-pbc-filtered-colimit-localization-at-prime],\n$$B_{\\mathfrak m}\\cong\\varinjlim_i(B_i)_{\\mathfrak m_i},$$\nwith fraction transition maps $b/s\\mapsto\\varphi_{ij}(b)/\\varphi_{ij}(s)$. These maps are local: a fraction lies in the target maximal ideal exactly when its numerator does, and $\\varphi_{ij}^{-1}(\\mathfrak m_j)=\\mathfrak m_i$. Every source localization is strictly henselian by step 1. Therefore [lem-sfb-filtered-colimit-strictly-henselian-local] applies and makes $B_{\\mathfrak m}$ strictly henselian. Together with step 5 this is precisely w-strict locality in [sk-def-pe-wlocal].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-sfb-filtered-colimit-strictly-henselian-local",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037D, lemma-colimit-normal-ring, localization identity in its proof; Tag 04GI, lemma-colimit-henselian; Bhatt–Scholze Example 2.2.2."
+   }
+  },
+  {
+   "text": "Choose $i\\in D$, possible because $D$ is nonempty. Any closed point of $X$ maps to a closed point of $X_i$ by step 5, and then to a closed point of $\\operatorname{Spec}A$ by step 2; this composite is the structural map. If a stage or the colimit is the zero ring, the empty prime-family space in step 3 and all empty closed-point and component spaces are treated by the same argument; maximal-localization assertions are vacuous for an empty spectrum. No step asserts extremal disconnectedness of the inverse limit.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9 and Example 2.2.2, allowing empty spectra; finite structural maps use Algebra Tag 00OI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "det-pe-wlocal-components",
+  "sk-def-pe-wlocal",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-sfb-filtered-colimit-strictly-henselian-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.1.9 and Example 2.2.2, expanded in prime ideals; finite-stage input Stacks Tag 0986 and local permanence Tag 04GI."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +172,45 @@
    "results": "8 hits: CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimit, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, RingCat.FilteredColimits.colimit, AlgebraicGeometry.LocallyRingedSpace.instHasColimits, AlgebraicGeometry.LocallyRingedSpace.coproductCofan, CommRingCat.FilteredColimits.colimitCocone",
    "date": "2026-10-21",
    "verdict": "no match: the results do not state the asserted geometric or condensed-coefficient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "wStrict|w_strict|WStrict|wContract|w_contract|WContract",
+   "results": "3 hits: Mathlib/NumberTheory/Transcendental/Liouville/LiouvilleNumber.lean, Mathlib/Algebra/Order/Field/Basic.lean, Mathlib/Algebra/Order/Field/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WStrict\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of finite finitely presented algebras over a w contractible ring is w strictly local with closed points and connected components the inverse limits of the finite stages",
+   "results": "8 hits: RingHom.finitePresentation_isLocal, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, RingHom.finiteType_isLocal, Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway, AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of weakly strictly local rings with integral transition maps have closed point space the inverse limit",
+   "results": "8 hits: CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, RingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCocone, CategoryTheory.Limits.colimitLimitIso, AlgebraicGeometry.LocallyRingedSpace.coproductCofan",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebras over a w contractible ring and inverse limits of their spectra are w strictly local",
+   "results": "8 hits: RingHom.finiteType_isLocal, RingHom.QuasiFinite.propertyIsLocal, RingHom.finitePresentation_isLocal, Module.Finite.of_isLocalized_maximal, PrimeSpectrum.finite_of_toPiLocalization_surjective, MaximalSpectrum.finite_of_toPiLocalization_surjective, Algebra.QuasiFiniteAt, RingHom.locally_of_exists",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state this result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-coordinate-face",
@@ -87,5 +236,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-indfinite-contractible-base-wstrict",
+  "worker": "stage1",
+  "summary": "Reused the existing finite-stage w-contractibility theorem, spectrum-limit and localization-colimit comparisons. Wrote compatible maximal-specialization and topology arguments explicitly, including noninjective maps and empty spectra. Added only the generic strict-henselian local colimit theorem, Stacks 04GI; did not replace the item by a new w-strict-local limit clause.",
+  "blueprint": "The existing ancestry has from.node=null (confirmed by blueprint_refs.py ancestor). This realizes its recorded paragraph (3), open direct image, unpunctured root-tower coordinate-face calculation. The finite-stage argument and prime-family passage to the root-tower limit are supplied here; the chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-ce-finite-finitely-presented-wcontractible",
+    "why": "Generic finite-algebra permanence, Stacks 0986; the exact finite-stage input of this item, with no coefficient or six-functor change."
+   },
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Generic topology: equivalence of the two w-local conventions and natural closed-point/component homeomorphisms."
+   },
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic algebraic topology of ring spectra under a directed colimit, independent of coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "why": "Generic localization/filtered-colimit comparison to which strict-henselian local permanence is applied."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "det-pe-wlocal-components",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-514cd2341",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-514cd2341 (reviewer sub-agent of L); spot-checked: This is a first one-level split of a Q02-created helper: no re-split note applies and the item is not dropped. I read all 8 steps and every cited statement. Step 1: lem-ce (Stacks 0986, proetale.tex l.2028) makes each B_i w-contractible. det-pe-wlocal-components clause 3 converts the component convention into unique closed specialization. Step 2: the A-generators also generate B_j over B_i, so B_i→B_j is module-finite, hence integral, hence maximal ideals contract to maximal ideals. No injectivity is needed. Steps 3-5: lem-a1 gives the prime-family homeomorphism, and specialization is coordinatewise inclusion. The compatible maximal family above p is built from uniqueness at each stage plus integral contraction, and maximality follows from coordinatewise equality and injectivity. X^c=∩p_i^{-1}(X_i^c) is closed, and the restriction to lim X_i^c is well defined because closed points map to closed points. Step 6: det clause 2 identifications are natural, so the comparison is the canonical π0 map. Step 7: the localization-colimit node applies to a directed poset. The fraction maps are local (numerator test), so the new 04GI node gives strictly henselian B_m. Step 8: D is nonempty and the structure map factors through a stage. Small cases checked: separably closed field with finite products, nonreduced finite stages, zero stages. New node lem-sfb-filtered-colimit-strictly-henselian-local is exactly Stacks 04GI (algebra.tex l.42926, strict case) and is self-contained. It is not a restated item clause. rg -L over dag/nodes found no duplicate: filtered-colimit-henselian-pair gives only the pair statement, without locality or a separably closed residue field. Generic tool_uses accepted; no SGA cited; no changes."
  }
 }
