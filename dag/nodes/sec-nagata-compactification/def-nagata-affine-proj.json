@@ -3,16 +3,19 @@
  "blueprint": {
   "is": "def-nagata-affine-proj",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-pc-proj"
+  ]
  },
  "kind": "definition",
  "title": "Affine Proj",
- "statement": "For an $\\mathbb N$-graded commutative ring $R$, use the Mathlib scheme\n$\\operatorname{Proj}(R)$, with its structural morphism to the degree-zero\nspectrum. On a homogeneous element $f$ of positive degree, its standard\nopen is identified with $\\operatorname{Spec}(R_{(f),0})$ by\n`Proj.basicOpenIsoSpec`; a homogeneous family generating the\nirrelevant ideal gives the cover through\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`.",
+ "statement": "For an $\\mathbb N$-graded commutative ring $R$, let $\\operatorname{Proj}(R)$\nbe the projective-spectrum scheme [def-pc-proj] whose points are the homogeneous prime ideals of $R$ not\ncontaining the irrelevant ideal $R_+$, with the Zariski topology and the\nstructure sheaf whose stalks are the degree-zero homogeneous localizations,\ntogether with its structural morphism to $\\operatorname{Spec}(R_0)$.\nHere the stalk localization at $\\mathfrak p$ consists of fractions\n$a/s$ with $a$ and $s$ homogeneous of the same degree and\n$s\\notin\\mathfrak p$, modulo equality in the ordinary localization\n$R_{\\mathfrak p}$; the structure sheaf is the usual sheaf of sections\nlocally represented by such fractions.\nFor a homogeneous element $f$ of positive degree, its standard open\n$D_+(f)$ is identified with $\\operatorname{Spec}(R_{(f),0})$\n[def-nagata-homogeneous-localization-degree-zero], and for a family of\nelements of $R$ whose span contains $R_+$ the standard opens $D_+(f_i)$\ncover $\\operatorname{Proj}(R)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/def-nagata-affine-proj.md",
   "place": "node def-nagata-affine-proj, order 10"
  },
  "stmt_deps": [
+  "def-pc-proj",
   "def-nagata-homogeneous-localization-degree-zero"
  ],
  "proof": [],
@@ -26,10 +29,56 @@
     "Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme:855 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "def Proj|def toSpecZero|stalkIso|structure ProjectiveSpectrum|irrelevant",
+   "results": "25 hits including ProjectiveSpectrum at Topology.lean:54; Proj.structureSheaf at StructureSheaf.lean:207; Proj.stalkIso' at :354; Proj.stalkIso in Basic; and irrelevant-ideal conditions. Read the local declarations; the exact scheme and global structural map are located by the subsequent narrower grep.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective spectrum of a graded commutative ring as a scheme with stalks homogeneous localizations and structure morphism to degree zero spectrum",
+   "results": "8 hits including ProjectiveSpectrum, ProjectiveSpectrum.mk, AlgebraicGeometry.Proj (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme), AlgebraicGeometry.Proj.stalkIso (Basic), and AlgebraicGeometry.Proj.stalkIso' (StructureSheaf). Read the local source: scheme and stalk clauses match.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.toSpecZero",
+   "results": "11 hits including AlgebraicGeometry.Proj.toSpecZero in Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic, the exact morphism Proj 𝒜 ⟶ Spec (𝒜 0); also awayι_toSpecZero and finite-type properness results. The first is the required unrestricted structural morphism.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proj scheme of a graded commutative ring with homogeneous prime ideals and structure sheaf stalks homogeneous localizations and morphism to spectrum of degree zero",
+   "results": "8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.toStalk_stalkMap_toSpec, toStalk_specStalkEquiv, specStalkEquiv, AlgebraicGeometry.homogeneousLocalizationToStalk, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, awayToΓ, awayToΓ_ΓToStalk, and AlgebraicGeometry.Proj.stalkIso. The last identifies the required stalk; the chart maps are not the global structural map.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def «Proj»|def toSpecZero|def stalkIso|def Proj.structureSheaf|structure ProjectiveSpectrum|def top ",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean:855 AlgebraicGeometry.Proj; Basic.lean:151 AlgebraicGeometry.Proj.toSpecZero and :355 AlgebraicGeometry.Proj.stalkIso; Topology.lean:54 ProjectiveSpectrum and :299 ProjectiveSpectrum.top; StructureSheaf.lean:207 AlgebraicGeometry.Proj.structureSheaf. All clauses checked in these source files.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev AtPrime|abbrev Away|structure NumDenSameDeg|def HomogeneousLocalization",
+   "results": "5 hits in Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean: NumDenSameDeg:96, HomogeneousLocalization:281, AtPrime:569, Away:601, Away.isLocalizationElem:881. Read lines 96-100, 270-312, 563-570 and 599-618: AtPrime uses the prime complement; Away uses powers of one element. The current stalk clause is precisely AtPrime, not Away.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Proj",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+  "how": "Exact, one existing Mathlib declaration per clause. AlgebraicGeometry.Proj, Scheme.lean:855-866, is the scheme constructed from Proj.toLocallyRingedSpace. Its points are ProjectiveSpectrum, Topology.lean:54-57 (homogeneous prime ideals not containing the irrelevant ideal); ProjectiveSpectrum.zariskiTopology, Topology.lean:283-296, and ProjectiveSpectrum.top, :299-300, give the Zariski topology. AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, StructureSheaf.lean:207-212, is the sheaf of locally represented equal-degree fractions; AlgebraicGeometry.Proj.stalkIso, Basic.lean:355-357, identifies its stalk with HomogeneousLocalization.AtPrime. AlgebraicGeometry.Proj.toSpecZero, Basic.lean:151-153, supplies the structural morphism to Spec (𝒜 0). The variables require only CommRing, an N-grading by additive subgroups, and GradedRing; there is no finite generation, degree-one generation, reducedness or nonzero-ring hypothesis. For the explicit stalk-localization meaning, HomogeneousLocalization.NumDenSameDeg, Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean:96-100, requires equal-degree numerator and denominator; HomogeneousLocalization at :281-282 is the quotient by equality in the ordinary localization (embedding at :270-271); HomogeneousLocalization.AtPrime at :569-570 uses the prime complement. The locally fractional sections are AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, StructureSheaf.lean:76-78, and isLocallyFraction, :92-93, used in structureSheafInType, :175-176. These directly interpret the clarified statement without an Away-to-AtPrime comparison. The chart and cover clauses, kept from the imported statement because existing citers use them, are AlgebraicGeometry.Proj.basicOpenIsoSpec, Basic.lean:161 ((basicOpen f).toScheme ≅ Spec (Away 𝒜 f) for f ∈ 𝒜 m, 0 < m; Away 𝒜 f is the current def-nagata-homogeneous-localization-degree-zero at a homogeneous f), and AlgebraicGeometry.Proj.iSup_basicOpen_eq_top, Basic.lean:86 (irrelevant ideal ≤ span (range f) ⇒ ⨆ D₊(f i) = ⊤)."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -70,5 +119,20 @@
   "statement": "For an $\\mathbb N$-graded commutative ring $R$, let $\\operatorname{Proj}(R)$\nbe the scheme whose points are the homogeneous prime ideals of $R$ not\ncontaining the irrelevant ideal $R_+$, with the Zariski topology and the\nstructure sheaf whose stalks are the degree-zero homogeneous localizations,\ntogether with its structural morphism to $\\operatorname{Spec}(R_0)$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-affine-proj",
+  "worker": "stage1",
+  "summary": "Q95 checked the current blueprint_update against the main-20261015 definition and read the matching Mathlib implementations. The complete definition is a Mathlib leaf; no new nodes or proof steps are needed. Replaced the superseded chart-and-cover wording by the current definition, documented the scheme, topology, stalk and structural-map declarations with source lines, retained the historical search and added five actual logged searches. Replaced the Away-only notation dependency with the existing projective-spectrum definition def-pc-proj: the current definition uses the common Proj scheme and takes its AtPrime stalks directly from Mathlib. Recorded the related imported definition def-pc-proj under blueprint.same_as. Repair of the 2026-10-21 landing refusal: re-read the now generalized Away definition and the current def-pc-proj statement. Made the prime-localization fraction meaning and the locally fractional sheaf explicit, so the historical Away import cannot be mistaken for a dependency supporting the stalk clause. Retained the active def-pc-proj dependency and all historical metadata and searches; added one actual logged grep verifying the distinction. Maintainer review (re-applied after the earlier FIX was lost in the refused landing): restored the standard-open chart clause (basicOpenIsoSpec) and the cover clause (iSup_basicOpen_eq_top) of the imported statement, with the current Away-localization notation node, because split citers (lem-sc-proj-standard-open-basis step 2, def-nagata-relative-projective-space step 7, sk-lem-geo-p1-cohomology step 1, lem-trf-birational-riemann-zariski-neighbourhoods step 6, lem-trf-qcqs-separable-riemann-zariski-refinement step 7, lem-trf-riemann-zariski-finite-refinement step 6) cite this node for them.",
+  "blueprint": "The entire definition of def-nagata-affine-proj in main-20261015, order 18; there is no blueprint proof to realize. The former chart/cover clauses belong to the older snapshot and are already Mathlib facts (basicOpenIsoSpec and iSup_basicOpen_eq_top)."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-e95de2687",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-e95de2687 (reviewer sub-agent of L); spot-checked: Read the item in full (a definition and Mathlib leaf: no proof steps, no new nodes) against main-20261015 def-nagata-affine-proj.md order 18. The delivered text is that definition verbatim, plus a [def-pc-proj] link and an explicit stalk/sheaf sentence. I checked that sentence against Mathlib NumDenSameDeg:96, HomogeneousLocalization:281, AtPrime:569, Proj.stalkIso Basic:355, Proj.toSpecZero Basic:151, Proj Scheme:855, ProjectiveSpectrum Topology:54 and Proj.structureSheaf StructureSheaf:207, and it matches them exactly. The item is not on the 10-19 dropped list and has no repair note. Edge cases (zero ring, grading concentrated in degree 0, degree-2 generators, nilpotent f) are consistent. Fault (one, repaired): the re-delivery again drops the imported chart clause (D+(f) ≅ Spec R_(f),0, basicOpenIsoSpec Basic:161) and the cover clause (iSup_basicOpen_eq_top Basic:86). Citers in the current snapshot still use them: lem-sc-proj-standard-open-basis step 2, def-nagata-relative-projective-space step 7, sk-lem-geo-p1-cohomology step 1, and lem-trf birational-RZ-neighbourhoods step 6, qcqs-separable-RZ-refinement step 7 and RZ-finite-refinement step 6. This is the fault the 8190e4d9 FIX repaired; that FIX was lost when landing was refused because the Away node had changed. Re-applied the FIX on this head in fixes/dag/nodes/sec-nagata-compactification/def-nagata-affine-proj.json. It keeps the new stalk text, appends the two clauses, puts def-nagata-homogeneous-localization-degree-zero back in stmt_deps after def-pc-proj, and extends mathlib_match.how and the summary. I re-read the changed Away node: it is now stated for arbitrary f, and its special case f in R_d is exactly the target Away 𝒜 f of basicOpenIsoSpec. Maintainer notes: two imported citers use a properness instance that is not in the statement (Proper.lean:372); the source field still names the master snapshot.; 1 file(s) fixed by the reviewer"
  }
 }

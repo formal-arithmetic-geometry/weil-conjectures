@@ -21055,3 +21055,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q08/lem-sfb-compactification-middle-over-base (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q46/lem-ag-uniform-complete-tensor (reviewer FIX; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q31/lem-sfb-locally-free-derived-scalars (reviewer PASS; after a return; new nodes: 1)
+- 08:15 L: merged deliver/Q95/def-nagata-affine-proj (reviewer FIX; after a return; new nodes: 0)
