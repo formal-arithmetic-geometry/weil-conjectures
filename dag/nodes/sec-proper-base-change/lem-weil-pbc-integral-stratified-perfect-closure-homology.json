@@ -22,20 +22,38 @@
  ],
  "proof": [
   {
-   "text": "The retained closure argument is proved by the parent theorem from the explicit uniform-complete triangulated interface; this strict sub-result records the truncation/cohomology clause separately for parallel proof.",
+   "text": "Map the global unit condition for l into every stalk and apply pbcIntegralUniformComplete_isTriangulated for the lifted integral coefficient datum. Register its isomorphism closure and triangulation, hence closure under every integer shift.",
    "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralStratifiedPerfectClosure_truncation first to K at q, obtaining L = tauLE(q) K in the category, and then to L at q, obtaining M = tauGE(q) L in the category. Standard truncation bounds put M in the shifted heart [q,q].",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-closure-truncation",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard derived-category shifted-heart equivalence supplies Y and e : M isomorphic to single_q(Y). The canonical maps tauLE(q) K to K and L to tauGE(q) L induce isomorphisms on H^q: use truncLEIsoTruncLT and the proved source-library isIso_homologyFunctor_map_truncLTι_app and isIso_homologyFunctor_map_truncGEπ_app. Compose these with H^q(e) and singleFunctorCompHomologyFunctorIso to identify Y with H^q(K). Shift e by q, use singleFunctors.shiftIso q 0 q, and apply singleFunctor_0 to this last identification. This gives M[q] isomorphic to single_0(H^q(K)). Shift closure and isomorphism closure now prove the conclusion. The source-library truncation isomorphisms are already proved from the long cohomology sequence, without using this item or its parent.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "lem-weil-pbc-uniform-complete-triangulated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-uniform-complete-triangulated"
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-pbc-integral-stratified-perfect-closure-truncation",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker N3",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.11(3)"
+  "place": "Proposition 6.8.11(3), printed pp. 60-61: cohomology closure derived from the already stated standard truncation closure; the categorical identification uses Mathlib and the proved source-library DerivedCategory.TStructure API."
  },
  "mathlib_searches": [
   {
@@ -97,10 +115,10 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261021T011009-L-2026612",
-  "kind": "interface",
+  "landing": "20261021T012417-L-2186784",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
