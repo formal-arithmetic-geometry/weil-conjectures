@@ -15,9 +15,125 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-tower-derived-evaluation-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A_T=\\operatorname{Mod}(R_T)$ and $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\mathcal A_T)$. Apply [lem-weil-pbc-small-module-diagrams-grothendieck] to the singleton category and to the inverse-sequence category: both $\\mathcal A_T$ and $\\mathcal T_T$ are Grothendieck abelian. By [lem-weil-pbc-kinjective-functorial-existence] their complexes have K-injective resolutions. Kernels and cokernels in $\\mathcal T_T$ are levelwise by [lem-weil-tower-category-levelwise-abelian]; thus the constant functor $\\Delta_T$, evaluation $e_n$, and the levelwise functor $F^{\\rm Tow}$ are exact (for the last use the exactness of $F$ in the setup). These exact functors descend termwise to derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. In particular $\\Delta_TQJ=Q\\Delta_TJ$ and $F^{\\rm Tow}\\Delta_Y=\\Delta_XF$ with the specified termwise identifications.",
+   "uses": [
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "The index category has terminal object $1$. A map of towers $u:M\\to\\Delta_T A$ is determined by $u_1:M_1\\to A$: naturality forces $u_n=u_1\\circ M(n\\to1)$, and these formulas conversely define a tower map. Hence $e_1\\dashv\\Delta_T$, with $e_1$ exact by [lem-weil-tower-category-levelwise-abelian]. Applying [lem-weil-pbc-right-adjoint-preserves-kinjective] to this adjunction shows that $\\Delta_TJ$ is K-injective whenever $J$ is. This is an application of the existing exact-left-adjoint theorem, not an assertion that arbitrary diagrams of K-injectives are K-injective.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; explicit adjunction for the terminal index 1"
+   }
+  },
+  {
+   "text": "Since $F\\dashv G$ and $F$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] gives that $H=GJ$ is K-injective for every K-injective $J$ on $X$. Step 2 then gives that both $\\Delta_XJ$ and $\\Delta_YH$ are K-injective. The underived equality $G^{\\rm Tow}\\Delta_XJ=\\Delta_YGJ$ is equality of complexes of strict towers: all transitions on both sides are identities, and the differentials are $G(d_J)$. Therefore $J$ computes $\\mathcal G$, $\\Delta_XJ$ computes $\\mathcal G^{\\rm Tow}$, and the resulting image complex is already K-injective, by [lem-weil-pbc-kinjective-total-derived].",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K, lemma-enough-K-injectives-implies; 070Y, lemma-K-injective-defined; 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "Write $\\eta_G:QG\\to\\mathcal GQ$ and $\\eta_{G^{\\rm Tow}}:QG^{\\rm Tow}\\to\\mathcal G^{\\rm Tow}Q$ for the universal derived comparisons of [lem-weil-pbc-kinjective-total-derived]. For $K=QJ$ define\n$$\\chi_{QJ}=\\eta_{G^{\\rm Tow},\\Delta_XJ}\\circ(\\Delta_Y\\eta_{G,J})^{-1},$$\nusing $QG^{\\rm Tow}\\Delta_XJ=\\Delta_YQGJ$. Both factors are invertible by step 3, so this gives the required representative-level isomorphism. Naturality of the two $\\eta$'s gives naturality for chain maps between K-injective representatives. By [lem-weil-pbc-kinjective-hom-derived], every derived map between such representatives is a unique homotopy class of chain maps and every quasi-isomorphism between them is a homotopy equivalence. Additive termwise functors preserve homotopies by [lem-weil-pbc-termwise-adjunction-homotopy]. Consequently this formula descends to a natural isomorphism on the derived category and is independent of representatives: a change of representative conjugates the formula by those same naturality squares. No choice of an evaluated family of maps is used to construct $\\chi$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K, lemma-enough-K-injectives-implies; 070Y, lemma-K-injective-defined; 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "Let $\\beta_n:e_n\\mathcal G^{\\rm Tow}\\xrightarrow{\\sim}\\mathcal Ge_n$ be [lem-weil-pbc-tower-derived-evaluation-normalization]. Its stated normalization, applied to the K-injective tower $\\Delta_XJ$, reads\n$$\\beta_{n,\\Delta_XQJ}\\circ e_n(\\eta_{G^{\\rm Tow},\\Delta_XJ})=\\eta_{G,J}.$$\nApply $e_n$ to the formula of step 4 and substitute this equation. Cancellation gives $\\beta_{n,\\Delta_XQJ}\\circ e_n(\\chi_{QJ})=1_{\\mathcal GQJ}$, including the prescribed localization identifications. Thus every evaluation is the identity in exactly the normalization specified in the item. This is a calculation of the constructed morphism, not an inference of equality of tower-derived morphisms from evaluations.",
+   "uses": [
+    "lem-weil-pbc-tower-derived-evaluation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof: common direct-image composite on diagram topoi, specialized to constant towers"
+   }
+  },
+  {
+   "text": "For an ordinary object $A$, a cone to $\\Delta_TA$ is a family of maps all equal to its component at $1$; hence $\\lim_T\\Delta_TA=A$, with every projection the identity. Apply this degreewise to a K-injective $J$. Since $\\Delta_TJ$ is K-injective by step 2, the K-injective model of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and its total-derived comparison from [lem-weil-pbc-kinjective-total-derived] give a natural isomorphism\n$$b_{T,QJ}:QJ=Q\\lim_T\\Delta_TJ\\xrightarrow{\\sim}R\\lim_T\\Delta_TQJ.$$\nIts inverse $c_{T,K}$ is the canonical constant-tower limit identification in the statement. Explicitly $b$ is induced by the cone of identity maps $J\\to J$ at every level. Its naturality and independence of representatives follow by the same K-injective Hom bijection [lem-weil-pbc-kinjective-hom-derived] used in step 4. This proves the constant-limit identification rather than assuming it is an extra clause of the cited strict-limit node.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K, lemma-enough-K-injectives-implies; 070Y, lemma-K-injective-defined; 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "The comparison $a$ in [lem-weil-ringed-tower-pushforward-limit-comparison] is specified by deriving the equality $G\\lim_X=\\lim_YG^{\\rm Tow}$. On $\\Delta_XJ$, both derived composites are computed without any replacement: $\\Delta_XJ$ is K-injective, $\\lim_X\\Delta_XJ=J$ is K-injective, and $G^{\\rm Tow}\\Delta_XJ=\\Delta_YH$ is K-injective, by steps 2 and 3. The common underived composite on this object is the single complex $H=GJ$; its comparison with itself is $1_H$. The normalized derived comparison therefore gives, after inserting the $b$ of step 6 and the $\\chi$ of step 4,\n$$R\\lim_Y(\\chi_K)^{-1}\\circ a_{\\Delta_XK}\\circ\\mathcal G(b_{X,K})=b_{Y,\\mathcal GK}.$$\nIndeed each of these identifications, and $a$, is represented here by the equality $G\\lim_X\\Delta_XJ=GJ=\\lim_Y\\Delta_YGJ$. Compose on the left with $c_{Y,\\mathcal GK}=b_{Y,\\mathcal GK}^{-1}$. This is precisely the claimed identity after identifying the source by $\\mathcal G(c_{X,K})$ and the target by $c_{Y,\\mathcal GK}$.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof: common direct-image composite on diagram topoi, specialized to constant towers"
+   }
+  },
+  {
+   "text": "Finally compute the counits themselves. For a complex $B$ on $Y$ and K-injective $J$ on $X$, the Hom bijections [lem-weil-pbc-kinjective-hom-derived] and termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy] give\n$$\\operatorname{Hom}_D(FQB,QJ)=\\operatorname{Hom}_K(FB,J)=\\operatorname{Hom}_K(B,GJ)=\\operatorname{Hom}_D(QB,QGJ).$$\nHere $FQB=QFB$ is justified by [lem-weil-pbc-exact-functor-derived-factorization], and $GJ$ is K-injective by step 3. The transpose of $1_{GJ}$ under the middle bijection is the ordinary counit $\\varepsilon^0_J:FGJ\\to J$, so the canonical derived counit at $QJ$ is represented by that chain map. The same calculation in the tower categories is valid at $\\Delta_XJ$, since $\\Delta_XJ$ and $G^{\\rm Tow}\\Delta_XJ=\\Delta_YGJ$ are K-injective. The ordinary tower adjunction is obtained by taking the ordinary mates at each level; naturality of the ordinary unit and counit ensures these mates commute with transitions. Its counit at $\\Delta_XJ$ is thus exactly $\\Delta_X(\\varepsilon^0_J)$ as a map of complexes of strict towers. Under $F^{\\rm Tow}\\Delta_Y=\\Delta_XF$, $\\chi_{QJ}$ is the identity identification of those representatives by step 4. Therefore\n$$\\varepsilon^{\\rm Tow}_{\\Delta_XK}\\circ F^{\\rm Tow}(\\chi_K)=\\Delta_X(\\varepsilon_K)$$\nin the derived category of strict towers, by localization of the equality of these chain maps. Naturality extends this to every $K$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, and Tag 070I, lemma-K-injective; explicit termwise Hom calculation of the counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, first proof, expanded on constant K-injective towers; derived.tex Tags 08BJ, 070K, 070I and 09T5 supply the cited general tools"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +162,52 @@
    "results": "{\"top\": [\"CochainComplex.cm5b.I\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Abelian.coimageImageComparison'\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.Abelian.coimageImageComparison\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits provide only ordinary pullback, abstract derivation or cone APIs; none states this normalized strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Rr]ightDerived|[Rr]ightDerived.*constant|const.*[Kk]Injective|[Kk]Injective.*const",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits in the first search; second search found general derived-functor construction APIs only (RightDerived.lean, LeftDerived.lean and localization/Guitart files)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.const",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits for this combination of the right-derived and constant-functor names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of a constant inverse sequence agrees with the constant derived direct image and respects the adjunction counit",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CategoryTheory.constantPresheafAdj_counit_app_app\", \"CompHausLike.LocallyConstant.adjunction\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.constantSheafAdj\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: derived counit and colimit/constant adjunction hits are general tools, not the normalized strict-tower theorem; read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean and Limits/HasLimits.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant inverse sequences commute with the unbounded right derived functor of a right adjoint with exact left adjoint, normalized by K-injective representatives",
+   "results": "{\"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern exact-functor descent, ordinary derived-functor computations, or bounded-below injective complexes; none states the constant strict-tower comparison with both limit and counit normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "const.*[Dd]erived|[Dd]erived.*const|[Kk]Injective.*[Aa]dj|[Aa]dj.*[Kk]Injective",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/GuitartExact/Basic.lean\"], \"n_hits\": 5, \"note\": \"\", \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits in the first search; second search found general derived-functor construction APIs only (RightDerived.lean, LeftDerived.lean and localization/Guitart files)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant diagram of a K-injective complex is K-injective for inverse sequences, and right derived inverse limit of a constant diagram is the original complex",
+   "results": "{\"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern exact-functor descent, ordinary derived-functor computations, or bounded-below injective complexes; none states the constant strict-tower comparison with both limit and counit normalizations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-direct-image-limits",
@@ -61,10 +219,49 @@
  "blueprint": {
   "from": {
    "node": "prop-weil-pbc-direct-image-limits",
-   "place": "Final sentence: constant-tower direct-image normalization in the strict projection and completion-unit argument; old steps 11-12",
+   "place": "Final completion-map normalization in prop-weil-pbc-direct-image-limits; the current blueprint proof identifies the completion map with the displayed inverse-limit/direct-image composite",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "worker": "stage1",
+  "summary": "Proved the constant comparison using e_1 left adjoint to the constant tower functor and one K-injective representative; explicitly computed normalized evaluations, the canonical constant-limit identifications and the strict tower counit. Reused all general lemmas; no new nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "Realizes the final completion-map normalization of prop-weil-pbc-direct-image-limits in main-20261015, sk-prop-pbc-complete: equality of the specified direct-image/limit composite with the completion map, before adjoining the quotient-tower augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic functorial K-injective existence is applied to those Grothendieck categories, including arbitrary ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint preservation is applied to e_1 left adjoint to the constant functor and to F left adjoint to G."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise adjunction and homotopy formula compute the counit without using equality after evaluation."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic strict-tower comparison tool used with its stated hypotheses, retaining the given completion-map route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-393cdb59e",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-393cdb59e (reviewer sub-agent of L); spot-checked: I read all 8 steps against the full statements of the 11 cited nodes. No new nodes; the statement is unchanged and the empty proof is now filled. Checks: (1) the diagram categories for J=pt and N>=1^op are Grothendieck for any ring sheaf, and levelwise exactness makes Delta, e_n and F^Tow exact; (2) e_1 -| Delta checked by hand (u_n = u_1 o M(n->1)), and right-adjoint-preserves-kinjective applies with u=Delta, v=e_1; (3) G preserves K-injectives because F is exact, and G^Tow Delta_X J = Delta_Y GJ holds strictly; (4) chi = eta_{G^Tow} o (Delta_Y eta_G)^{-1} has the right types, is invertible, and extends to D through the K-injective Hom bijection; (5) the beta normalization at Delta_X J gives e_n(chi)=1; (6) lim Delta J = J, and b is invertible by K-injectivity; (7) a, being the common-composite comparison, is represented by 1_{GJ} because all three inputs are K-injective, and the equation's types check; (8) both counits are represented by eps^0_J and Delta_X eps^0_J, and the tower equation is the localization of an equality of chain maps, not an inference from evaluations. Sources: Stacks 0A07 (sites-cohomology l.5150, first proof); tags 08BJ/070K/070Y/070I/09T5/079P/015F match tags/tags; the blueprint main-20261015 sk-prop-pbc-complete last sentence is the from.place; no SGA. Edge cases checked: R=0, f=id, unbounded K, terminal index 1. lem-sf-cbc-constant-tower-direct-image-normalization is a constant-coefficient special case, not a duplicate. tool_uses accepted: kinjective-functorial-existence and ringed-tower-pushforward-limit-comparison (generic, off-route); right-adjoint-preserves-kinjective and termwise-adjunction-homotopy are on route via sk-def-exchange. review_split PASS. Maintainer note: the strict-tower R lim node assumes commutative rings while the item says arbitrary ring sheaves; this is inherited from the stmt_deps, and step 6's K-injective model holds without commutativity."
  }
 }
