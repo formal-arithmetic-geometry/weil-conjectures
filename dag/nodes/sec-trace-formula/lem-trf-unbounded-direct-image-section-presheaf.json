@@ -19,83 +19,85 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex $C$ representing $E$. The open-subset sites of $X$ and $Y$ are small in the stipulated universe. Apply the functorial resolution theorem on these two sites: put $I=I_X(C)$, $B=f_*I$, and let $r:B\\to J=I_Y(B)$ be the resolution map on $Y$. The direct-image construction identifies $QB$ with $Rf_*E$, and $QJ$ with the same object through $Qr$. For every open $V\\subseteq Y$, the definitions therefore compute the two groups in the desired comparison as $H^q(\\Gamma(f^{-1}V,I))$ and $H^q(\\Gamma(V,J))$. Termwise, $\\Gamma(f^{-1}V,I)=\\Gamma(V,B)$, including its differential. Hence evaluation of the single map $r$ gives comparison maps $c_V:\\Gamma(f^{-1}V,I)\\to\\Gamma(V,J)$ for all $V$ simultaneously.",
+   "text": "Use the published functorial K-injective replacement on X and Y. For a K-injective I on X put B=f_*I, and let r:B→J be its K-injective replacement on Y. The canonical total right-derived units are invertible on K-injective inputs. Their naturality, together with direct-image acyclicity, implies that g_*r is a quasi-isomorphism for every ringed-space map g:Y→Z: in the naturality square for the unit of Rg_*, the components at B and J and Rg_*(Qr) are invertible, so Q(g_*r) is invertible.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "def-pc-ringed-spaces-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section cohomology-section-unbounded; Tag 0D5W (lemma-Leray-unbounded), K-injective model of its comparison"
-   }
-  },
-  {
-   "text": "Fix $V$, put $U=f^{-1}V$, and let $f_V:(U,\\mathcal O_X|_U)\\to(V,\\mathcal O_Y|_V)$ be the restricted morphism. Restriction to an open preserves K-injectivity, so both $I|_U$ and $J|_V$ are K-injective. The open-restriction adjunction theorem says that restriction is exact. It therefore preserves the kernels and images defining cohomology and takes the quasi-isomorphism $r$ to the quasi-isomorphism $r|_V:B|_V\\to J|_V$. Thus $J|_V$ is a K-injective resolution of $B|_V$. Directly from the section formula for direct image, $B|_V=(f_V)_*(I|_U)$: at an open $W\\subseteq V$ both sides are $I(f^{-1}W)$, with the same scalar action and restrictions.",
-   "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-sc-derived-open-restriction-adjunction-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BS (lemma-restrict-K-injective-to-open); Tag 08FE (lemma-restrict-direct-image-open), sectionwise identity in its proof"
-   }
-  },
-  {
-   "text": "Let $P_V$ be the one-point ringed space with ring $\\mathcal O_Y(V)$, and let $a_V:V\\to P_V$ have structure map $\\mathcal O_Y(V)\\to\\mathcal O_Y(W)$ on an open $W$ given by restriction. A module sheaf on $P_V$ is just its module of sections on the point (its value on the empty open is zero); under this identification $(a_V)_*$ is $\\Gamma(V,-)$. Apply direct-image K-injective acyclicity to the composable ringed-space maps $f_V$ and $a_V$, with K-injective input $I|_U$. It says that the right-derived unit at $(f_V)_*(I|_U)=B|_V$ is invertible. Write $\\eta$ for that unit. Naturality gives $\\eta_{J|_V}\\,Q\\Gamma(V,r|_V)=R\\Gamma(V,Q(r|_V))\\,\\eta_{B|_V}$. The factor $\\eta_{J|_V}$ is invertible by K-injectivity, and $R\\Gamma(V,Q(r|_V))$ is invertible because $r|_V$ is a quasi-isomorphism. Thus invertibility of $\\eta_{B|_V}$ implies invertibility of $Q\\Gamma(V,r|_V)$. Consequently $c_V$ induces an isomorphism on every cohomology group. Forgetting the $\\mathcal O_Y(V)$-module structure gives the same isomorphism of abelian groups, since module kernels and images have the usual underlying abelian groups. This is the local Leray comparison.",
-   "uses": [
     "lem-pc-ringed-space-direct-image-kinjective-acyclic",
     "def-sfb-right-derived-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5W (lemma-Leray-unbounded), reduction to a one-point ringed space; Tag 0D5X (lemma-unbounded-describe-higher-direct-images), first sentence of proof"
+    "place": "Tags 0D5W and 0D5X, with 0BKJ; direct-image composition acyclicity (0D5T)"
    }
   },
   {
-   "text": "For $W\\subseteq V$ the square with horizontal maps $c_V,c_W$ and vertical restriction maps commutes: both composites are $\\Gamma(V,B)\\to\\Gamma(W,J)$, first restricting and applying $r$, in the two orders. Functorial resolutions make the analogous square commute for every chain map $C\\to C^{\\prime}$. To descend this natural transformation to $D(\\mathcal O_X)$, let $s:C\\to C^{\\prime}$ be a quasi-isomorphism. Naturality of $C\\to I_X(C)$ and two-out-of-three imply that $I_X(s)$ is a quasi-isomorphism between K-injectives, hence a homotopy equivalence by the K-injective Hom lemma. Applying the additive functors $f_*$ and evaluation preserves its homotopy inverse and homotopies. Also $J(s)$ is a quasi-isomorphism by naturality of $r$, hence again a homotopy equivalence. Both presheaf cohomology functors thus invert $s$, and their commuting squares descend through localization. This proves naturality in $E$. The K-injective Hom bijection also shows independence of resolution choices: the unique homotopy classes representing the derived identity give comparison homotopy equivalences, and the corresponding squares commute up to homotopy; evaluation and cohomology remove that homotopy. Thus $H^q(c_V)$ gives the claimed canonical isomorphism of presheaves, natural in $E$ and compatible with all restrictions.",
+   "text": "For each open V of Y use the Sierpiński space S={False,True}, with open singleton {True}, and the continuous classifier g_V(y)=(y∈V). Give S the pushed-forward structure sheaf (g_V)_*O_Y, so g_V is a ringed-space map with identity structure morphism. Evaluation at {True} is the stalk at True: {True} is the least open neighborhood, hence a terminal object of the opposite neighborhood category and its colimit leg is an isomorphism. Forgetting modules to abelian sheaves and taking stalks are exact, so this evaluation preserves quasi-isomorphisms. Apply the previous step to g_V. Its evaluation is literally Γ(V,r) after forgetting scalars. Thus every evaluation of the single abelian-presheaf map of r is a quasi-isomorphism, hence the presheaf map is a quasi-isomorphism. This includes V empty, where all the relevant sections are zero.",
    "uses": [
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+    "lem-sc-abelian-sheaf-exact-iff-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D5W and 0D5X, with 0BKJ; direct-image composition acyclicity (0D5T)"
+   }
+  },
+  {
+   "text": "Naturality of the recorded right-derived unit for all local abelian sections, applied to r, now makes its component at f_*I invertible: sections of r become invertible after localization and the unit at J is invertible. The pasted unit localLerayCompositeUnit is therefore invertible on I. The defining universal factorization for localLerayComparison has this pasted unit as the composite of the invertible unit for the ordinary composite and the Leray comparison. Cancellation proves invertibility of the latter on QI. Every derived object is isomorphic to QI for some K-injective I, so naturality proves invertibility everywhere. Whiskering with homology gives exactly the prescribed localHypercohomologyComparison, including every restriction map.",
+   "uses": [
+    "def-sfb-right-derived-functor",
     "prop-pur-kinjective-resolutions-exist",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D5W and 0D5X, with 0BKJ; direct-image composition acyclicity (0D5T)"
+   }
+  },
+  {
+   "text": "For sheafification use the explicit exact-sheafification/homology natural isomorphism already displayed in localSectionComplexSheafificationIso: sheafification commutes with homology, the sheafification counit recovers a sheaf, and forgetting module structure is exact. The resolution comparison at the identity is natural for maps of K-injective complexes, by naturality of the total right-derived unit and of quotientCompQhIso. Compose this square with the homology factorization, the exact-sheafification square, and the inverse homology factorization. It is precisely naturality of localHypercohomologySheafificationModel.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D5W and 0D5X, with 0BKJ; direct-image composition acyclicity (0D5T)"
+   }
+  },
+  {
+   "text": "For arbitrary derived M,N choose exactly the complex representatives and functorial K-injective resolutions used in localHypercohomologySheafificationAt. Conjugate a morphism M→N by their displayed resolution isomorphisms. The K-injective Hom bijection lifts it to a homotopy class, and fullness of the homotopy quotient lifts that class to a chain map. Apply the preceding model naturality square and conjugate back. The resulting natural isomorphism has components definitionally equal to localHypercohomologySheafificationAt. Whisker it by sectionDerivedDirectImage f to obtain s. Let t be sheafification of e followed by s; this is the required final equality.",
+   "uses": [
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5W (lemma-Leray-unbounded), natural comparison; Tag 0D5X (lemma-unbounded-describe-higher-direct-images); comparison of K-injective models uses derived.tex Tag 070I (lemma-K-injective)"
-   }
-  },
-  {
-   "text": "Apply the existing ringed-space sheafification-cohomology theorem to $(Y,\\mathcal O_Y)$, $K=Rf_*E$ and the arbitrary integer $q$. Its cohomology presheaf is exactly $V\\mapsto H^q(V,Rf_*E)$ by its K-injective definition. Its natural sheafification is the underlying abelian cohomology sheaf $\\mathcal H^q(Rf_*E)$. Sheafifying the presheaf isomorphism just constructed identifies the sheafification of $V\\mapsto H^q(f^{-1}V,E)$ with that same sheaf. Naturality follows by composing the natural isomorphisms; restriction compatibility is already a property of the maps of presheaves. The argument used only small open-subset sites and unbounded K-injective resolutions; no scheme or finiteness hypothesis and no bound on $q$ was used.",
-   "uses": [
-    "lem-pc-ringed-space-sheafification-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0BKJ (lemma-sheafification-cohomology); Tag 0D5X (lemma-unbounded-describe-higher-direct-images), final sentence of proof"
+    "place": "Tags 0D5W and 0D5X, with 0BKJ; direct-image composition acyclicity (0D5T)"
    }
   }
  ],
  "proof_deps": [
   "prop-pur-kinjective-resolutions-exist",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-sc-derived-open-restriction-adjunction-exact",
   "lem-pc-ringed-space-direct-image-kinjective-acyclic",
   "def-sfb-right-derived-functor",
-  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
   "def-weil-abstract-derived-category",
-  "lem-pc-ringed-space-sheafification-cohomology"
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 0D5W and 0D5X, with Tag 0BKJ; the local Leray comparison is expanded on a single functorial K-injective comparison to prove the restriction and derived-morphism naturality explicitly."
+  "place": "Tags 0D5W/0D5X and 0BKJ. The G1 proof specializes direct-image acyclicity using the Sierpiński classifier of an open, whose singleton evaluation is a stalk, and proves naturality of the specified sheafification models directly. This is a shorter route below the unit level."
  },
  "mathlib_searches": [
   {
@@ -262,10 +264,7 @@
  },
  "tool_uses": [
   "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
-  "lem-pc-ringed-space-sheafification-cohomology",
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic"
  ],
  "reviewed": {
   "date": "2026-10-19",
@@ -310,5 +309,15 @@
   "result": "pass",
   "note": "Statement matches Stacks 0D5W/0D5X and the node: arbitrary RingedSpace f, unbounded D(O_X) of ringedSiteModules.{u}, q : ℤ. Rf_* = def-sfb rightDerivedFunctorOfQuasiIsoResolutions on the published moduleDirectImage with real K-injective resolutions. e.hom is pinned to the canonical Leray comparison (unique preimage under the universal bijection), s is pinned componentwise to the canonical K-injective sheafification model, t = sheafified e ≫ s. Everything is a natural iso of functors, so naturality in E and restriction compatibility hold; no bound, scheme or locality hypothesis. Item differs from live only in lean. The §1(B) existing:true record for def-weil-locally-ringed-space-morphism replaces live lean:null and is verbatim with Mathlib LocallyRingedSpace.lean:79-80. lean.statement is verbatim, declarations = the 14 defined names, one sorry, docstrings carry source and blueprint, lines ≤100. No duplicate notion (SupportLongExact sectionHypercohomologyFunctor is bounded-below on abelian sheaves). nt_compile --json clean, 34.2 s at load 97. Advisories: the ∃ t clause holds by definition; left presheaf is derived f_* then sections (bridge needed to the X-side form); Rf_* is def-sfb, not def-pc derivedModuleDirectImage; SiteCoveringAxioms import unused."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261021T130020-L-2492629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
