@@ -20192,3 +20192,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/Q21/det-prop-sfb-cartesian-coefficients-finite-free (reviewer FIX; after a return; new nodes: 1)
 - 2026-10-21T04:05:57Z L: superseded stage-1 delivery NO/lem-sfb-integral-quotient-direct-image-comparison at 3068412e9c09af68b39b52e8cb562114440ad653; current completion retained; packet archived at refs/superseded/NO/lem-sfb-integral-quotient-direct-image-comparison/3068412e9c09af68b39b52e8cb562114440ad653; stale return retired.
 - 2026-10-21T04:05:58Z L: superseded stage-1 delivery O3/lem-sp-chart-counit-scalar-transport at d705e3d3a6d66debda733298faeab50c3517543d; current completion retained; packet archived at refs/superseded/O3/lem-sp-chart-counit-scalar-transport/d705e3d3a6d66debda733298faeab50c3517543d; stale return retired.
+- 04:06 L: merged deliver/NZ/lem-sfb-rhom-continuity-triangle-closure (stage 2; reviewer PASS; parallel immutable checks)
+- 04:06 L: merged deliver/NI/lem-pe-left-module-comparison-vanishing-criterion (stage 2; reviewer PASS; parallel immutable checks)
+- 04:06 L: merged deliver/NN/lem-weil-pbc-formal-exact-projection-mate (stage 2; reviewer PASS; parallel immutable checks)
+- 04:06 L: merged deliver/Q04/lem-sfb-square-zero-periodic-tensor (stage 2; reviewer PASS; parallel immutable checks)

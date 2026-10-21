@@ -15,7 +15,8 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-category-colimit",
   "def-sbc-standard-tstructure-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-sfb-internal-hom-strict-models"
  ],
  "proof": [
   {
@@ -259,5 +260,28 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-7ee6f6951 (reviewer sub-agent of L); spot-checked: I read the 8-step split in full against every cited statement; it has no new nodes. 08JC (sites-cohomology.tex l.8948) and 03DB were read at the cited places, and lem-weil-pbc-ringed-internal-hom-exact-restriction states triangle exactness in the first variable plus signed shifts on an arbitrary small ringed site. Step 1: cohomology commutes with exact filtered colimits through the cycle and boundary sequences. Step 3: H(A[n],N)=H(A,N)[-n] with d_{A[n]}=d_A+n, checked on a point with A=k. Step 4: comparison of long exact sequences, with the connecting maps handled through naturality in N of H(w,N) and the signed shift isomorphism, taken at the level of H^q in D, so no E5 fault. Step 5: five lemma on H^{q-1}(A')→H^q(C')→H^q(B')→H^q(A')→H^{q+1}(C'), the right consecutive terms for the contravariant triangle. Step 6: d_B=min(d_A,d_C). Step 7: rotation bounds d_A=min(d_C-1,d_B) and d_C=min(d_B,d_A+1) are correct. Step 8: induction with base and each operation stated. The statement is byte-identical to live and correct in edge cases (zero, constant diagram, split triangle, infinite sums excluded). The item is unsplit in live and side-live. The human re-split note belongs to the parent lem-sfb-constructible-internal-hom-continuity; this item had no base proof. No SGA citation and no cycle (closure of 246 nodes). Duplicate search found nothing: dc-hom-filtered-colimit and per-constructible-ext-filtered-colimit differ. Accepted tool_uses: lem-pur-ringed-site-grothendieck-abelian and lem-weil-pbc-ringed-internal-hom-exact-restriction as generic infrastructure; lem-sf-derived-homology-long-exact is a Mathlib leaf. Mathlib searches cover all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RHomContinuityTriangleClosure",
+  "declaration": "CategoryTheory.RingedHomUniverses.boundedTargetHomContinuous_triangle_closure",
+  "declarations": [
+   "CategoryTheory.RingedHomUniverses.BoundedTargetHomContinuous",
+   "CategoryTheory.RingedHomUniverses.boundedTargetHomContinuous_triangle_closure"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RHomContinuityTriangleClosure.lean",
+  "statement": "theorem boundedTargetHomContinuous_triangle_closure : ObjectProperty.IsClosedUnderIsomorphisms (BoundedTargetHomContinuous.{c, v, r, w} J R) ∧ ObjectProperty.IsTriangulated (BoundedTargetHomContinuous.{c, v, r, w} J R) ∧ (∀ (A : D.{c, v, r, w} J R), BoundedTargetHomContinuous.{c, v, r, w} J R A → ∀ d : ℤ, (∀ (b : ℤ) (N : D.{c, v, r, w} J R), N.IsGE b → ((hom.{c, v, r, w} J R A).obj N).IsGE (b + d)) → ∀ (n b : ℤ) (N : D.{c, v, r, w} J R), N.IsGE b → ((hom.{c, v, r, w} J R (A⟦n⟧)).obj N).IsGE (b + (d + n))) ∧ (∀ S : ObjectProperty (D.{c, v, r, w} J R), S ≤ BoundedTargetHomContinuous.{c, v, r, w} J R → ∀ n : ℕ, (S.shiftClosure ℤ).extensionProductIter n ≤ BoundedTargetHomContinuous.{c, v, r, w} J R)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "P is the node’s own bounded-target continuity predicate, defined with the existing canonical homFixed model and Q(colimit.post), for every source representative and every uniformly cohomologically bounded-below filtered complex diagram. IsClosedUnderIsomorphisms and IsTriangulated jointly express zero, shifts and all three triangle positions. The offset formula and finite-extension construction are explicit. Added landed dependency def-sfb-internal-hom-strict-models supplies homFixed without duplicating it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-020fc035e",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement/proof byte-identical to side-live; only lean record + landed stmt_dep def-sfb-internal-hom-strict-models (no cycle; only citer lem-sfb-constructible-internal-hom-continuity). lean.statement verbatim. P = for every complex rep L, every small filtered I : Type (max c v r) and M with common cohomological bound IsGE b, IsIso(Q.map(colimit.post M (homFixed L))) (termwise colimit of fixed K-injective Hom models, target cocone) ∧ ∃ d uniform offset via hom = derivedInternalHomOfUniverses. Conclusion IsClosedUnderIsomorphisms ∧ IsTriangulated (ContainsZero, ℤ-shift, Closed₂; Closed₁/₃ via Mathlib rotation instances) ∧ d_{A[n]}=d+n (sign checked) ∧ shiftClosure.extensionProductIter n ≤ P. No extra hypotheses vs Stacks 08JC, universes independent; edge cases zero/n=0/negative n/empty site OK. No duplicate (SfbHomFilteredColimit.Continuous differs: fixed I, termwise bound, no offset). Docstrings with source/blueprint and 8 proof steps; real def, only sorry; report sections present. nt_compile --json clean 3.7 s (control error detected). Advisory: proof-only plain imports."
  }
 }
