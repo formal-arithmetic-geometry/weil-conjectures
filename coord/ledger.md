@@ -21531,3 +21531,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:00 L: merged deliver/Q143/lem-sf-package-verdier-coefficient-realization (reviewer PASS; first push; new nodes: 0); claim not held by Q143: not your claim
 - 09:00 L: merged deliver/Q87/lem-pur-composite-relative-tensor-action (reviewer PASS; first push; new nodes: 0)
 - 09:00 L: merged deliver/Q82/lem-pur-global-hom-evaluation-flat-lift (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T09:00:47Z L: superseded stage-1 delivery Q19/lem-pur-closed-finite-adjoint-counit-transport at 0f840a990a7cd7d4b2f2aafb0dc4e55fa7b354d4; current completion retained; packet archived at refs/superseded/Q19/lem-pur-closed-finite-adjoint-counit-transport/0f840a990a7cd7d4b2f2aafb0dc4e55fa7b354d4; stale return retired.
