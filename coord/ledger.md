@@ -22309,3 +22309,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:32 L: merged deliver/ND/lem-sfb-continuous-algcl-open-scalar-comparison (reviewer FIX; first push; new nodes: 3); claim not held by ND: not your claim
 - 2026-10-21T11:32:21Z L: superseded stage-1 delivery NL/lem-pod-stratified-dualizable-hom-continuity at 95369825f6e74e50954997bb0b302bad5775e393; current completion retained; packet archived at refs/superseded/NL/lem-pod-stratified-dualizable-hom-continuity/95369825f6e74e50954997bb0b302bad5775e393; stale return retired.
 - 11:36 L: merged deliver/NQ/sk-thm-picard-rr (stage 2; reviewer PASS; parallel immutable checks)
+- 11:36 L: returned deliver/NE/lem-pur-strict-coefficient-comparison-calculus (reviewer RETURN: L: independent stage-2 immutable head 3e097a34a3cb: H2: delivery adds theorem node lem-pur-system-scalar-coherence to st)
