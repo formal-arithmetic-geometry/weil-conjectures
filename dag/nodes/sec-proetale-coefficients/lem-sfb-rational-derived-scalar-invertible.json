@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Put $a=\\ell^n$ and $b=(\\ell^n)^{-1}\\in E$. Since $E$ contains $\\mathbf Q_\\ell$, $a\\ne0$ and $ab=ba=1$. In the condensed ring [sk-def-sfb-condensed-ring], the constant functions with values $a,b$ give sections $c_a,c_b:\\mathbf Z\\to\\underline E$ of its underlying abelian ring object, with $c_ac_b=c_bc_a=1$. Here $c_t$ sends a locally constant integer-valued section $m$ to $m t$; these maps commute with restriction and satisfy the stated products pointwise. Pull them back to $E_X$ using the strong monoidal functor of [sk-def-sfb-pulled-back-coefficients], obtaining sections $a_X,b_X$ with $a_Xb_X=b_Xa_X=1$. Also $a_X=\\ell^n\\cdot1$: the inverse image in [sk-def-sfb-pullback-from-point] is a left adjoint between abelian sheaf categories, The adjunction identifies maps from $p_X^*(M\\oplus N)$ to $G$ with pairs of maps from $p_X^*M,p_X^*N$ to $G$, and maps from $p_X^*0$ with the singleton; thus it preserves finite coproducts, zero objects and zero maps. In an abelian category these coproducts are biproducts, and addition is the composite of their diagonal, the two maps and the codiagonal; hence it preserves sums. Apply this to the finite sum $c_a=\\ell^n c_1$.",
+   "text": "Write m = ell^n. Define an endomorphism t of the actual condensed abelian sheaf underlying E by sending each continuous function f on a profinite S to the function (ell^n)^(-1) f. This is continuous, additive and natural under precomposition. The field E has characteristic zero because it is a Q_ell-algebra; hence ell^n is nonzero. Evaluating pointwise shows m times t = id. The point inverse image F = p_X^* is a left adjoint between abelian sheaf categories, so it preserves binary coproducts and zero morphisms, hence biproducts and addition. Consequently m times F(t) = id on E_X.",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "sk-def-sfb-pulled-back-coefficients",
@@ -24,11 +24,11 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; explicit inverse using additivity and the module unit axiom"
    }
   },
   {
-   "text": "For any internal $E_X$-module $M$ with action $\\gamma_M$, define $m_t(M)=\\gamma_M\\circ(t\\otimes1_M)\\circ\\lambda_M^{-1}$ for $t=a_X,b_X$. The action axioms of [sk-def-sfb-module-objects] give $m_s(M)m_t(M)=m_{st}(M)$ and $m_1(M)=1_M$. These are module morphisms: for a local ring section $r$ and module section $x$, $t(rx)=(tr)x=(rt)x=r(tx)$, since $E_X$ is commutative. Every module morphism $f:M\\to N$ satisfies $f m_t(M)=m_t(N)f$ by its action-compatibility axiom. Thus, on any cochain complex $C$, the degreewise maps $A^q=m_{a_X}(C^q)$ and $B^q=m_{b_X}(C^q)$ commute with the differentials. They are chain maps with $AB=BA=1_C$. Additivity and unitality of the action give $A^q=\\ell^n1_{C^q}$, hence $A=\\ell^n1_C$.",
+   "text": "For an internal A-module M and an endomorphism v of A satisfying m times v = id, form b = lambda_M^(-1); ((eta_A;v) tensor id_M); gamma_M on the underlying object. Additivity of tensoring and composition, followed by the unit action axiom, gives m times b = id_M. Thus b is a two-sided inverse of m times id on the underlying object: both composites equal m times b. The forgetful functor from internal modules reflects isomorphisms, since the inverse of an action-compatible isomorphism is action-compatible by cancellation. Therefore m times id_M is an isomorphism of modules, and uniqueness of its underlying inverse identifies that inverse with b. Apply this to A=E_X and v=F(t). This argument uses no centrality or additional coefficient comparison.",
    "uses": [
     "sk-def-sfb-module-objects",
     "sk-def-sfb-pulled-back-coefficients"
@@ -36,11 +36,11 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; explicit inverse using additivity and the module unit axiom"
    }
   },
   {
-   "text": "Use exactly the ordinary unbounded derived category $D(\\Mod_{E_X})$ of [sk-def-sfb-derived-categories]. By [lem-sfb-derived-localization-additive], choose a cochain complex $C$ and an isomorphism $u:Q(C)\\xrightarrow{\\sim}K$, and $Q$ is additive. Functoriality sends the two identities from step 2 to $Q(A)Q(B)=Q(B)Q(A)=1_{Q(C)}$. Additivity implies $Q(A)=Q(\\ell^n1_C)=\\ell^n1_{Q(C)}$, by induction on the finite sum of identities. Therefore $uQ(B)u^{-1}$ is a two-sided inverse of $uQ(A)u^{-1}=\\ell^n1_K$. This is the claimed inverse induced by the constant coefficient $\\ell^{-n}$. The formulas apply in every integer degree and require no boundedness condition.",
+   "text": "By the ordinary unbounded derived localization's essential surjectivity choose C and e:Q(C) isomorphic to K. Apply step 2 in every degree to see that m times id_C is a componentwise isomorphism and hence an isomorphism of complexes. Put B = inverse(m times id_C); functoriality of evaluation and step 2 give exactly the asserted formula for B in each degree. The additive localization satisfies Q(m times id_C)=m times id_Q(C). Functoriality preserves both inverse equations for B. Conjugating Q(B) by e gives the displayed two-sided inverse of m times id_K, and hence its IsIso instance. Every degree is allowed, with no boundedness hypothesis.",
    "uses": [
     "sk-def-sfb-derived-categories",
     "lem-sfb-derived-localization-additive"
@@ -48,7 +48,7 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; explicit inverse using additivity and the module unit axiom"
    }
   }
  ],
@@ -63,7 +63,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-  "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction; coefficient convention checked against Bhatt-Scholze Definition 6.8.1 and Lemma 6.8.2(2)"
+  "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; explicit inverse using additivity and the module unit axiom; formalized by J6 using conservativity of module forgetful functor in place of central-scalar multiplication identities"
  },
  "mathlib_searches": [
   {
@@ -182,5 +182,15 @@
   "group": "Q85",
   "result": "pass",
   "note": "Item lem-sfb-rational-derived-scalar-invertible at bcd2c4af87b5, one module. Read the node, the 4 stmt_dep records and their declarations: continuousCoefficientRingObj (ULift C(S,E) sections, reexported via ProfiniteCondensedRing), condensedRingObj = p_X^* with monObjObj unit ε≫F.map η, Mathlib Mod, DerivedCategory with HasDerivedCategory.ofIsGrothendieckAbelian at w=u+1 (same convention as landed pro-étale modules). Every clause matches: prime l, NormedField/NormedAlgebra Q_l/FiniteDimensional E (unique norm topology = restricted from Q̄_l), arbitrary X, unbounded D(Mod_{E_X}), n:ℕ, IsIso((l^n)•𝟙K). The inverse is fully pinned: t is multiplication by (l^n)^{-1} on every section; B.f q = λ⁻¹≫((η≫p^*t)▷C^q)≫smul = m_{b_X}; both two-sided-inverse equations stated; existential representative C,e matches the node. The statement is true (E commutative, Q additive). Edge cases n=0, K=0, empty X, unbounded, char l are fine. Statement field verbatim in the file; non-lean node identical to side-live; no repair note, no prior Q85 run, not dropped. Docstrings have source, blueprint tag and proof steps; proof is sorry only. nt_compile --json 12.3 s clean. Advisories: global attribute [instance] Mod.isGrothendieckAbelian (prefer local); unused proof-input import ProEtalePointPullback; direct ContinuousCoefficientUniverse import instead of the recorded reexport (same declaration); parent's Type-0 FiniteIntermediateField/continuousMapRingObj will need a u=0/ULift bridge at stage 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261021T101153-L-20727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
