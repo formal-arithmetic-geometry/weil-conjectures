@@ -27,79 +27,58 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-derived-complete-integral-detailed], $K$ and $L$ are derived complete, and $K_1,L_1$ are bounded constructible. Choose integers $\\alpha\\leq\\beta$ and $\\gamma\\leq\\epsilon$ containing their respective cohomological supports; the zero complex permits any such interval. Apply [lem-coef-integral-residue-tor] separately to $K$ and $L$. It gives Tor amplitude $[\\alpha,\\beta]$ for every $K_n$ and $[\\gamma,\\epsilon]$ for every $L_n$. The coefficient ring is the stipulated DVR $\\mathcal O_E$, and $\\ell$ is invertible on $X$ because $X$ is over a field of characteristic $p\\ne\\ell$. The reductions are therefore finite-Tor bounded constructible complexes on the pro-etale site.",
+   "text": "Put $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$. The integral-category definition makes $L$ derived complete. Apply [lem-coef-integral-hom-reduction]: $H$ is derived complete, and for each $n\\geq1$ the evaluation-defined comparison $H_n\\xrightarrow{\\sim}T_n=R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$ is an isomorphism in $D(X_{\\mathrm{proet}},A_n)$.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
-    "lem-coef-integral-residue-tor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-    "place": "## Proof, second sentence: input reductions are finite-Tor"
-   }
-  },
-  {
-   "text": "Set $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$. Apply [lem-coef-integral-hom-reduction] in the ambient category of modules over the completed coefficient sheaf. Since $L$ is derived complete, $H$ is derived complete. For each $n\\geq1$ the same lemma gives the canonical evaluation-defined, $A_n$-linear isomorphism $H_n\\cong R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$. This is exactly the reduction assertion of the item; no perfectness of $K$ on the entire site is required.",
-   "uses": [
     "lem-coef-integral-hom-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-    "place": "## Proof, first sentence: completeness and canonical reductions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Sentence 1: completeness and canonical reductions"
    }
   },
   {
-   "text": "The scheme $X$ is of finite type over the field $k$, so [lem-kun-dimension-finite-type] gives $\\dim X<\\infty$. With dimension as the supremum of finite lengths of chains of nonempty irreducible closed subsets [def-kun-topological-krull-dimension], choose an integer $d_0\\geq0$ with $\\dim X\\leq d_0$; for $X=\\emptyset$, whose dimension is $-\\infty$, take $d_0=0$. This bound depends only on $X$, not on the reduction level.",
+   "text": "By [lem-kun-dimension-finite-type], $\\dim X<\\infty$; its chain-supremum definition gives an integer $d_0\\geq0$ bounding it (take $d_0=0$ if $X=\\emptyset$). The integral-category definition makes $K_1,L_1$ bounded constructible. Choose support intervals $[\\alpha,\\beta]$, $[\\gamma,\\epsilon]$, choosing any nonempty interval for a zero input. Apply [lem-coef-residue-controlled-finite-homs] with $d_0$. Every $T_n$ is bounded constructible and has cohomology supported in the same interval $[\\gamma-\\beta-2d_0,\\epsilon-\\alpha+2d_0]$. Through step 1, all $H_n$ have these properties. Together with completeness from step 1 these are precisely the defining conditions for $H\\in D^b_c(X,R)$.",
    "uses": [
     "lem-kun-dimension-finite-type",
-    "def-kun-topological-krull-dimension"
+    "def-kun-topological-krull-dimension",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-residue-controlled-finite-homs"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-    "place": "## Proof, third sentence: a fixed dimension bound for the uniform finite-level estimate"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Sentences 2–4: the extracted finite-level estimate and integral membership"
    }
   },
   {
-   "text": "For every $n\\geq1$, apply the pro-etale assertion of [cor-weil-finite-constructible-hom] to $K_n,L_n$, with $A=A_{E,n}$ and the intervals from step 1. Its hypotheses hold: $X$ is separated finite type over $\\overline{\\mathbf F}_q$, the torsion prime is different from $p$, and both input reductions are bounded constructible of finite Tor amplitude. Thus $R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$ is bounded constructible, with Tor amplitude in $[\\gamma-\\beta-2d_0,\\epsilon-\\alpha+2d_0]$. By the isomorphism in step 2, this is also true of $H_n$. The same application with any supplied intervals $[a,b],[c,e]$ and any supplied dimension bound $d$ yields $[c-b-2d,e-a+2d]$, proving the quantitative clause. All these are Tor intervals over $A_n$, without changing to Tor amplitude after restriction to $R$.",
-   "uses": [
-    "cor-weil-finite-constructible-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-    "place": "## Proof, third sentence: constructibility and the stated uniform bound"
-   }
-  },
-  {
-   "text": "Write $u=\\gamma-\\beta-2d_0$ and $v=\\epsilon-\\alpha+2d_0$, so $u\\leq v$. In the definition of Tor amplitude [def-weil-proetale-tor-amplitude], take the degree-zero sheaf $M=(A_n)_X$. To see that this tests the cohomology of $H_n$ itself, use a K-flat representative $P\\to H_n$ as in [def-weil-derived-tensor]: the degreewise maps $P\\otimes_{(A_n)_X}(A_n)_X\\to P$, $x\\otimes r\\mapsto rx$, with inverse $x\\mapsto x\\otimes1$, commute with differentials. Hence $H_n\\otimes^L_{A_n}(A_n)_X\\cong H_n$, and $\\mathcal H^i(H_n)=0$ outside $[u,v]$ for every $n$. Step 2 gives derived completeness, and step 4 gives bounded constructibility of every reduction. Together with this single cohomological interval, these are precisely the three conditions defining $H\\in D^b_c(X,R)$ in [def-weil-derived-complete-integral-detailed].",
+   "text": "For the quantitative clause use the supplied $a,b,c,e,d$. For $n=1$ test the assumed Tor bounds of $K_1,L_1$ against $(A_1)_X$ in degree zero. The tensor-unit identification follows on a K-flat representative $P$ from the inverse chain maps $P\\otimes(A_1)_X\\to P$, $x\\otimes r\\mapsto rx$, and $x\\mapsto x\\otimes1$. Thus their residue cohomology is supported in $[a,b]$ and $[c,e]$. Apply [lem-coef-residue-controlled-finite-homs] with these intervals and $d$ to get Tor amplitude $[c-b-2d,e-a+2d]$ for every $T_n$. The isomorphism in step 1 gives the same bound for $H_n$: for any degree-zero $(A_n)_X$-module $M$, tensoring that isomorphism with $M$ identifies the tested cohomology. Bounded constructibility and support in step 2 likewise pass along an isomorphism by applying cohomology. All tests remain over $(A_n)_X$.",
    "uses": [
     "def-weil-proetale-tor-amplitude",
     "def-weil-derived-tensor",
-    "def-weil-derived-complete-integral-detailed"
+    "lem-coef-residue-controlled-finite-homs"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-    "place": "## Proof, final sentence: the remaining conditions on the integral output"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+    "place": "Sentence 3, quantitative interval, and final sentence, tensor-unit test"
    }
   }
  ],
  "proof_deps": [
   "def-weil-derived-complete-integral-detailed",
-  "lem-coef-integral-residue-tor",
   "lem-coef-integral-hom-reduction",
   "lem-kun-dimension-finite-type",
   "def-kun-topological-krull-dimension",
-  "cor-weil-finite-constructible-hom",
+  "lem-coef-residue-controlled-finite-homs",
   "def-weil-proetale-tor-amplitude",
   "def-weil-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-  "place": "## Proof, expanded on the original reduction / residue-Tor / finite internal-Hom route"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+  "place": "Same residue-Tor / finite-Hom / integral-reconstruction argument, with its uniform finite-level part extracted as a statement-only node"
  },
  "mathlib_searches": [
   {
@@ -171,11 +150,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "cor-coef-integral-internal-hom",
   "worker": "stage1",
-  "summary": "Made the implicit finite-field, scheme, completed pro-etale coefficient and reduction conventions explicit; expanded the original argument into uniform input Tor bounds, ambient completeness and canonical reduction, a finite dimension bound, finite-level internal-Hom estimates, and the defining uniform cohomological condition. Reused all three original proof lemmas and one existing dimension tool; no new nodes. The tagged slopmaster2 theorem contains sorry and concerns discrete etale coefficients, so is not an attachment.",
-  "blueprint": "Steps 1 and 2 realize the second and first sentences respectively of the single original proof paragraph; steps 3 and 4 expand its third sentence; step 5 proves its final sentence. The statement keeps the original integral category and the exact interval [c-b-2d,e-a+2d].",
+  "summary": "Human-requested re-split: extracted the residue-controlled uniform finite-level internal-Hom estimate, including the output cohomology bound, into one independent statement-only node. The item retains the original statement, ambient completeness and canonical comparison, dimension choice, integral-membership assembly, and the arbitrary supplied-interval clause. No argument of the old proof is discarded.",
+  "blueprint": "The new node carries sentences 2–3 of the blueprint proof and the tensor-unit cohomology deduction needed by its final sentence (old steps 1 and 4 plus the unit test in old step 5). Parent step 1 carries sentence 1; step 2 retains the dimension choice and final membership assembly; step 3 retains the supplied-interval clause with an explicit residue tensor-unit test.",
   "tool_uses": [
    {
     "node": "lem-kun-dimension-finite-type",
@@ -187,12 +166,12 @@
   "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q05-3d59cc2b3",
-  "group": "Q05",
+  "reviewer": "NT-cc-Q64-301cdfdf2",
+  "group": "Q64",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-3d59cc2b3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages, unit/chapter route, and archived master targets. All five steps preserve the completed pro-etale coefficient category and exact Tor bound. Small cases, dependency cycles, and duplicate candidates checked; dimension tool use accepted. No new nodes or repairs. Concrete checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-301cdfdf2 (reviewer sub-agent of L); spot-checked: Answers the 2026-10-21 human re-split note (old proof 3181 characters, at least 1 new node required). The item's statement, stmt_deps, source and tool_uses are byte-identical to live; only the proof fields changed. The new proof is 3 steps, about 1844 characters. Each old step has a carrier. Old step 2 (lem-coef-integral-hom-reduction: canonical evaluation-transpose iso and completeness) is parent step 1. Old step 3 (dimension bound d_0, including X empty) is parent step 2. Old steps 1, 4 and the unit test of 5 (residue-Tor gives a uniform input Tor interval; cor-weil-finite-constructible-hom at each n; the M=(A_n)_X test gives the cohomological interval) became the statement of the new unsplit node lem-coef-residue-controlled-finite-homs. The definitional assembly of old step 5 is in parent step 2, and the supplied-interval clause is parent step 3, which proves K_1's residue support by an explicit K-flat unit test at n=1. The new node is self-contained, and every notion cites a node that defines it. It has 7 recorded searches across grep, leansearch, loogle and leanfinder, and its source is the main-20261015 proof sentences 2-3 (the same text as master order 2147). Its hypotheses suffice: X over F̄_q with ℓ≠p for residue-tor; separated of finite type, pro-étale site and dim≤d for the finite Hom result. I tested it on a point with K=L=R (interval [0,0]), on K=R/ϖ, L=R (T_n has κ in degrees 0 and 1, matching [0,1]) and on zero inputs. It is not a restatement of the item (no ambient H, no completeness or comparison). A whole-DAG search found no duplicate: the finite-Hom nodes are single-level with finite-Tor inputs, and residue-tor covers one input with no Hom. There is no cycle and no new batch-5 node. The base tool_use lem-kun-dimension-finite-type is kept and accepted. No SGA."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
