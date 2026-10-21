@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
-public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackExtension
 
 /-! # Degree-zero source factors
 
