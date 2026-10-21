@@ -22,12 +22,11 @@
  ],
  "proof": [
   {
-   "text": "On module sheaves, moduleRComp is restriction along the canonical pullback pasting isomorphism. The two triple-composition maps agree because the pullback pasting isomorphisms have the same composites with all projections; section restriction is functorial. Conjugate this associativity equation using Adjunction.leftAdjointCompIso_assoc to obtain the corresponding equation for moduleGComp. Whisker termwise to towers and pass through the composition comparisons for exact derived functors; localization uniqueness preserves the equation. Expand the three squareG maps as inverse gComp, equality transport, and gComp. Apply this associativity equation to the two paths, cancel the adjacent inverse compositors and use proof irrelevance for the equal commutativity witnesses. This gives the displayed equality. Empty schemes, identity maps, and the zero ring require no separate assumptions or cancellation of sections.",
+   "text": "Expand each concrete squareG as the inverse equality-indexed compositor followed by the other compositor. The private squareG_eq proves this directly from normalizeIsoSquare, avoiding specialization of a generic category-family law. Replace gComp by gCompEq at reflexive equations using gCompEq_refl. Evaluate the already proved concrete gCompEq_coherence at N for the triples (b,a,j), (b,j₁,g), and (j₂,h,g). Rearrange the first two equations with rearrange_square, rewrite the first two successive factors, and cancel the adjacent inverse compositor. The last associativity equation gives the outer square followed by the bottom compositor. All calculations retain the original explicit component statement and its canonical derived-category instances. No openness or cartesianness is used.",
    "uses": [
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-proper-open-arrows",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": false,
    "source": {
@@ -39,13 +38,12 @@
  "proof_deps": [
   "def-cbc-strict-constant-tower-operations",
   "def-cbc-strict-tower-proper-open-arrows",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-cbc-strict-tower-direct-image-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A7 and the parent proof step 4; explicit compositor calculation for the canonical module/tower/derived realizations"
+  "place": "Tag 07A7, remark-base-change; reuse proved concrete gCompEq_coherence from StrictTowerDirectImageCoherence and calculate directly with the equality-indexed compositors (D5 repair, 2026-10-21)."
  },
  "mathlib_searches": [
   {
@@ -160,12 +158,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261020T233223-L-907908",
+  "landing": "20261021T020105-L-2584464",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
