@@ -20833,3 +20833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:58 L: returned deliver/T3/Sheaf.Paper.RingedProjectionRestriction (reviewer RETURN: (reviewer C-8c082, head 8c0827607) the reviewer passed it, but the landing failed: calizing (mentions AlgebraicGeometry.)
 - 08:00 L: returned deliver/N9/lem-wf-tate-twist-frobenius (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-wf-tate-twist-frobenius: cited node def-wf-tate-tw)
 - 08:00 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
+- 08:00 L: returned deliver/Q04/lemma-nagata-strict-transform-chart-localization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-localization: lemm)
