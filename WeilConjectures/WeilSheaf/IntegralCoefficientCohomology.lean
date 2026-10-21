@@ -147,7 +147,8 @@ lemma constantTwist_constantTwist (F : ProEtaleIntegralWeilSheaf k₀ Λ X) (b c
   rw [Category.assoc, FieldSheaf.smul_smul, hbc]
 section Integral
 
-variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀) in
 /-- The value `χ_ℓ(σ) ∈ 𝒪_Eˣ` of the `ℓ`-adic cyclotomic character at the geometric Frobenius
@@ -168,8 +169,6 @@ lemma algebraMap_cyclotomicUnit :
   simp only [cyclotomicUnit, WeilSheaf.cyclotomicUnit, Units.coe_map]
   rfl
 
-variable [Fact (ringChar k₀ ≠ l)]
-
 /-- For `ℓ ≠ p`, the geometric Frobenius acts on `𝒪_E(1)(k̄)` by `q⁻¹`, `q = #k₀`. -/
 theorem cyclotomicUnit_eq :
     algebraMap E (PadicAlgCl l) ((cyclotomicUnit k₀ E : PadicAlgCl.integers l E) : E) =
@@ -180,7 +179,8 @@ end Integral
 
 section TateTwist
 
-variable {l : ℕ} [Fact l.Prime] {E : IntermediateField ℚ_[l] (PadicAlgCl l)}
+variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {E : IntermediateField ℚ_[l] (PadicAlgCl l)}
 
 /-- The Tate twist `F(m) = F ⊗ 𝒪_E(m)` of a pro-étale `𝒪_E`-Weil sheaf `F`, `m ∈ ℤ`: the
 Tate sheaf `𝒪_E(m)` is constant on the geometric fiber, so this is the same sheaf, with its Weil

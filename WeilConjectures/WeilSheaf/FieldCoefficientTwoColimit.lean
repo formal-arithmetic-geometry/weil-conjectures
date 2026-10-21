@@ -221,7 +221,7 @@ morphisms `F ⊗_E K ⟶ F ⊗_{E'} K'` (`CategoryTheory.StageSystem.PairCategor
 `ℚ̄_ℓ`-stage `AlgebraicGeometry.WeilComplex` of `WeilConjectures.WeilSheaf.Category` by
 `AlgebraicGeometry.WeilComplexTwoColimit.toWeilComplex`. -/
 abbrev WeilComplexTwoColimit (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
-    (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
+    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (FieldWeilComplex.stageSystem (l := l) k₀ X).PairCategory
 
 /-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ)` is the filtered `2`-colimit of the

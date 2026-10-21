@@ -221,7 +221,8 @@ noncomputable def constantTwist (F : FieldWeilSheaf k₀ Λ X) (b : Λˣ) : Fiel
   obj := .mk F.obj.carrier (F.obj.str ≪≫ FieldSheaf.smulIso b F.obj.carrier)
   property := F.property
 
-variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀ X) in
 /-- Blueprint `def-weil-ordinary-compact-cohomology`, stage `Λ = E`: the Tate twisted constant

@@ -7,7 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 
@@ -33,11 +35,17 @@ No derived completeness condition is imposed.
 
 ## Sorried input
 
-The bounded constructible complexes on a topologically noetherian scheme form a triangulated
-subcategory (`ProEtale.isTriangulated_boundedConstructible`). This rests on the fact that
-constructible sheaves on such a scheme are closed under kernels, cokernels and extensions,
-which is not formalized; the instance is `sorry`ed. Noetherianity is assumed only there: the
-definition `ProEtale.boundedConstructible` makes sense on any scheme. The derived category
+For the coefficient rings `Λ_X = p_X^* Λ` of Deligne's finiteness theorems
+(`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` or a finite `ℓ`-power torsion ring,
+`AlgebraicGeometry.ProEtale.CondensedRing.IsFinitenessCoefficient`), the bounded constructible
+complexes on a topologically noetherian scheme form a triangulated subcategory
+(`ProEtale.isTriangulated_boundedConstructible`). This rests on the fact that constructible
+sheaves of `Λ_X`-modules on such a scheme are closed under kernels, cokernels and extensions
+(Bhatt–Scholze, Section 6.8), which is not formalized; the instance is `sorry`ed. It is false
+for a general commutative ring object `R`: for `X = Spec k̄` and `R` the constant sheaf of the
+non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the constant sheaf
+of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is assumed only there:
+the definition `ProEtale.boundedConstructible` makes sense on any scheme. The derived category
 itself uses the `sorry`ed instances of
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory`.
 
@@ -87,10 +95,18 @@ lemma mem_boundedConstructible_iff
 abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
 
-/-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
-subcategory. -/
-instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
-    (boundedConstructible R).IsTriangulated :=
+open CondensedRing in
+-- The prime `ℓ` occurs only in the hypothesis `IsFinitenessCoefficient ℓ Λ`; it is found from
+-- that instance, so the synthesis order is not the default one.
+set_option synthInstance.checkSynthOrder false in
+/-- For the coefficient rings `Λ_X` of Deligne's finiteness theorems (`Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` or a
+finite `ℓ`-power torsion ring), the bounded constructible complexes on a topologically noetherian
+scheme form a triangulated subcategory. -/
+instance isTriangulated_boundedConstructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {ℓ : ℕ} [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] (X : Scheme.{u})
+    [TopologicalSpace.NoetherianSpace X] :
+    (boundedConstructible (condensedRingObj Λ X)).IsTriangulated :=
   sorry
 
 end AlgebraicGeometry.ProEtale

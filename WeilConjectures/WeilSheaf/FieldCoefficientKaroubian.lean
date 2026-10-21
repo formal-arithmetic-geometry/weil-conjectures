@@ -81,7 +81,8 @@ end FieldWeilComplex
 
 namespace WeilComplexTwoColimit
 
-variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The idempotent completeness part of blueprint
