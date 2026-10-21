@@ -22858,3 +22858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:48 L: merged deliver/NP/lem-sfb-complete-group-forgetful-automorphisms (reviewer PASS; first push; new nodes: 1)
 - 14:52 L: merged deliver/NY/lem-sfb-totally-disconnected-coefficient-realization (reviewer FIX; first push; new nodes: 1)
 - 14:53 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 14:53 L: merged deliver/NL/lem-sfb-spectral-clopen-component-homeomorphism (stage 2; reviewer PASS; parallel immutable checks)

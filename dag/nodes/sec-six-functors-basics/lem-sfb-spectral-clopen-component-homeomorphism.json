@@ -239,5 +239,23 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6e2bf8832 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged and is true. I tested it on the empty cases, on connected spaces, on a point mapping into two points (the hypothesis fails, as it should) and on a product of two fields mapping to one field. The delivery has 0 new nodes. Step 1 builds pi0(f) from the image of a connected set being connected, with continuity from the quotient topology and the normalization. Step 2 cites lem-pe-spectral-components-profinite for T and S, which are spectral by hypothesis (f does not need to be spectral), so P and Q are compact Hausdorff totally disconnected. Step 3 is the clopen-saturation bijection Clop(Z)=Clop(pi0 Z), the same argument as in the proof of Stacks 0900 (topology.tex l.4232); with the normalization it makes h^{-1} bijective on clopens. Step 4 (injectivity) separates points with the pointwise clopen-basis leaf (isTopologicalBasis_isClopen, Profinite.lean:66). Step 5 (surjectivity) uses a finite subcover and injectivity on clopens, including the case P empty. Step 6 shows h is open, so its inverse is continuous, without the compact-to-T2 theorem. I checked 08ZZ, 0900, 0906 and 005F in topology.tex. The hypotheses match the parent lem-sfb-normal-generic-continuous-sections step 4. A DAG grep for clopen together with pi0 or homeomorph found no duplicate. I accept the tool use of lem-pe-spectral-components-profinite (generic topology, not a change of route). The item is not dropped, the live node is still unsplit, there is no re-split note and no SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralSpace.ClopenComponentHomeomorphism",
+  "declaration": "isHomeomorph_connectedComponentsMap_of_bijective_clopen_preimage",
+  "file": "lean/Sheaf/Topology/SpectralSpace/ClopenComponentHomeomorphism.lean",
+  "statement": "theorem isHomeomorph_connectedComponentsMap_of_bijective_clopen_preimage {T : Type u} {S : Type v} [TopologicalSpace T] [TopologicalSpace S] [SpectralSpace T] [SpectralSpace S] {f : T → S} (hf : Continuous f) (hclop : Function.Bijective (fun U : TopologicalSpace.Clopens S ↦ (⟨f ⁻¹' (U : Set S), U.isClopen.preimage hf⟩ : TopologicalSpace.Clopens T))) : IsHomeomorph hf.connectedComponentsMap ∧ hf.connectedComponentsMap ∘ (ConnectedComponents.mk : T → ConnectedComponents T) = (ConnectedComponents.mk : S → ConnectedComponents S) ∘ f",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6e1cadc7",
+  "group": "NL",
+  "result": "pass",
+  "note": "Only the item node's lean field changed, and lean.statement matches the file verbatim. Clause by clause: SpectralSpace T/S in independent universes u v, Continuous f, Function.Bijective of the actual Clopens inverse-image map S→T, the canonical hf.connectedComponentsMap, IsHomeomorph plus the explicit normalization π₀(f)∘q_T = q_S∘f, no Nonempty. The statement is true (0906 profinite π₀, clopen saturation, Stone duality). Edge cases checked: empty source and/or target, connected spaces, point→two points, two points→point. Docstrings carry the source, blueprint id and 6 proof steps; there are no definitions and the proof is sorry only. No duplicate in Mathlib or live lean/Sheaf. Not dropped, no repair note, no prior stage-2 landing. Advisory: two plain imports serve only the stage-3 proof. Not recompiled per instruction; the worker reports a clean scompile."
  }
 }
