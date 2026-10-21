@@ -13,7 +13,11 @@
   "lem-sp-ell-coefficient-fiber",
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-tower-counit-projections",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-sp-total-tensor-summand-interface"
  ],
  "proof": [
   {
@@ -374,5 +378,59 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-023d7abda (reviewer sub-agent of L); spot-checked: I read the item and all its cited statements in full. The statement and stmt_deps are unchanged from the side-live base. The delivery has 7 steps of at most 1161 characters each and creates no new nodes. The item is still unsplit in live and side-live, so it is not superseded. It has no re-split note of its own (the only note is for sk-lem-sp-tower), it is not on the dropped list, and no SGA source is cited. The route matches the sk-lem-sp-tower blueprint proof paragraph (coefficient-fiber triangle, normalization, left term killed along m-steps, vanishing Rlim, reduction formula) and Bhatt–Scholze Lemma 3.5.4 for the regular element ℓ. Stacks 08BJ, 0940 and 0941 exist with matching labels. Step checks: (1) the balanced semilinear transitions and the associativity identification are correct, and no differential sign is needed because B_n sits in degree 0. (2) The φ_L summand formulas (id and (-1)^p) commute with the varying-ring transitions, so the tensored triangle is the rotated cone triangle of a in Ch(Tow), which is distinguished. (3) I checked the shift sign (-1)^p against the -d_S differential. The chain-level identity red(ℓ^{n'-m}b)=ℓ^{n-m}ℓ^{n'-n}b gives a strict quasi-isomorphism E→A, and K-flatness of Q_n over B_n is used exactly here. (4) ρ is balanced and the cocycle law makes it a strict quasi-isomorphism to ΔQ_m. (5) ℓ^m kills S_n, so e_{n+m,n}=0 and the transition of A is conjugate to it, hence 0 in D(R). After reindexing, the pro-zero clause of the strict-tower node applies. Its small-site hypothesis comes from def-weil-size-convention, as for every other pro-étale user of that node. (6) ev_m ⊣ Δ shows ΔI is K-injective, the limit of ΔI is I, and the diagonal is represented by i. lem-sbc-unbounded-exact-adjunction-square(1) states the same off-unit, so inlining it as an elementary step is fine. (7) Hom-exactness gives ur=1 and ru=1, so the composite is exactly the one in the statement. Edge cases tested: m=1, n=m, n'=n, gap exactly m, and Q_n=B_n (giving Rlim[B_n→ℓ^m B_n]≃B_m), plus unbounded complexes. I accept the five declared tool uses: the tensor-cone, strict-tower Rlim and K-injective-existence nodes are generic, and the other two are Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedErrorTowerVanishing",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_normalized_error_tower_vanishing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spErrorRestrict",
+   "AlgebraicGeometry.ProEtale.spErrorSection",
+   "AlgebraicGeometry.ProEtale.spErrorPure",
+   "AlgebraicGeometry.ProEtale.spErrorGenerator",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientAugmentation",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientFiber",
+   "AlgebraicGeometry.ProEtale.spErrorReduction",
+   "AlgebraicGeometry.ProEtale.spErrorFiberTensor",
+   "AlgebraicGeometry.ProEtale.spErrorMiddle",
+   "AlgebraicGeometry.ProEtale.spErrorReductionGenerator",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientTensor",
+   "AlgebraicGeometry.ProEtale.spErrorConeLeft",
+   "AlgebraicGeometry.ProEtale.spErrorConeRight",
+   "AlgebraicGeometry.ProEtale.spErrorKoszulScalar",
+   "AlgebraicGeometry.ProEtale.SpErrorTransitions",
+   "AlgebraicGeometry.ProEtale.spErrorTransitionValue",
+   "AlgebraicGeometry.ProEtale.SpErrorReductionFormula",
+   "AlgebraicGeometry.ProEtale.spErrorTowerComplex",
+   "AlgebraicGeometry.ProEtale.spErrorDiagonal",
+   "AlgebraicGeometry.ProEtale.spErrorModules",
+   "AlgebraicGeometry.ProEtale.spErrorTailS",
+   "AlgebraicGeometry.ProEtale.spErrorTailM",
+   "AlgebraicGeometry.ProEtale.spErrorPoweredMap",
+   "AlgebraicGeometry.ProEtale.spErrorPoweredShift",
+   "AlgebraicGeometry.ProEtale.spErrorFiberLeftElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberMiddleElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberRightElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberTensorGenerator",
+   "AlgebraicGeometry.ProEtale.SpErrorFiberTransitionFormula",
+   "AlgebraicGeometry.ProEtale.SpErrorAssociativityFormula",
+   "AlgebraicGeometry.ProEtale.spErrorLimitComparison",
+   "AlgebraicGeometry.ProEtale.SpNormalizedErrorDiagram",
+   "AlgebraicGeometry.ProEtale.sp_normalized_error_tower_vanishing"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedErrorTowerVanishing.lean",
+  "statement": "theorem sp_normalized_error_tower_vanishing (Q : ∀ n : ℕ, CochainComplex (SheafOfModules.{max u (t + 1)} (spCoefficientRing l E T n)) ℤ) (q : SpErrorTransitions l E T Q) (hq_id : ∀ (n : ℕ) (p : ℤ) (U : T.ProEtᵒᵖ) (x : ((Q n).X p).val.obj U), spErrorTransitionValue l E T Q q n n le_rfl p U x = x) (hq_comp : ∀ (n k m : ℕ) (hkn : k ≤ n) (hmk : m ≤ k) (p : ℤ) (U : T.ProEtᵒᵖ) (x : ((Q n).X p).val.obj U), spErrorTransitionValue l E T Q q k m hmk p U (spErrorTransitionValue l E T Q q n k hkn p U x) = spErrorTransitionValue l E T Q q n m (hmk.trans hkn) p U x) (hflat : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients (R := (spCoefficientCommRings l E T).obj (op n)) (Q n)) (hnorm : ∀ (n m : ℕ) (h : m ≤ n), ∃ ρ : spErrorReduction l E T Q n m h ⟶ (spErrorRestrict l E T m).obj (Q m), SpErrorReductionFormula l E T Q q n m h ρ ∧ QuasiIso ρ) (m : ℕ) (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ spErrorModules l E T) ⥤ DerivedCategory.{w} (spErrorModules l E T)) (κ : spErrorLimitComparison l E T RF) (hRF : RF.IsRightDerivedFunctor κ (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ spErrorModules l E T) (.up ℤ))) : SpNormalizedErrorDiagram l E T Q q m RF κ",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Natural level n denotes positive exponent n+1. SpNormalizedErrorDiagram spells out the full existential strict-tower triangle, the coordinatewise canonical transitions, normalized augmentation and tensor associativity, powered-shift quasi-isomorphism, levelwise normalized reduction, vanishing total derived limit, and the exact composite with the identity-cone diagonal. All helper definitions belong to these displayed constructions; the only postponed theorem is the item. Returned H2 repair: the commutative coefficient tower and total-tensor helper definitions are cited through their existing:true definition nodes; their host theorem nodes are not statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19638042",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the 9b8687c4 H2 RETURN. Lean module byte-identical (sha256 a5e3a3c6), whose substance was already accepted; lean.statement verbatim. The theorem stmt_deps det-sp-coefficient-towers-abelian and lem-weil-pbc-total-tensor-homotopy-cone-signs are replaced by two new existing:true definition nodes: def-sp-commutative-coefficient-ring-tower (spCoefficientCommRings, real constant quotient sheaves and factorPowSucc data, cites sk-def-sp-coefficient-towers) and def-sp-total-tensor-summand-interface (TotalTensorSigns Modules/tensor/total/ι, aliases of ringedSiteModules/curriedTensor/map2CochainComplex/ιMapBifunctor, citing 3 definition nodes). Both are verbatim from source, have a source place and searches, and no duplicate owner exists in live or side-live. Mechanical finding: lem-coef-derived-tower-counit-projections supplies only the Prop instances strictTowerConstantAdditive/strictTowerLimitAdditive needed by mapHomologicalComplex in spErrorDiagonal and spErrorLimitComparison, so this is a genuine dependency (PASS on point). No compile run (no file changed); worker reports a clean compile (22.8 s / 20.3 s). Advisory: powered_transitions and assoc are redundant."
  }
 }

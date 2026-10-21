@@ -1,0 +1,141 @@
+{
+ "id": "def-sp-total-tensor-summand-interface",
+ "kind": "definition",
+ "title": "Existing total tensor interface and its canonical summand inclusions",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe and let $R$ be a sheaf of commutative rings. Write $\\operatorname{Mod}(R)$ for the category of module sheaves [def-weil-sheaf-of-modules-category], with its sheafified balanced tensor bifunctor [def-pur-sheaf-tensor-product]. For integer cochain complexes $A,B$ of $R$-module sheaves, let $\\operatorname{Tot}(A\\otimes_R B)$ be the direct-sum total tensor of [def-pc-tensor-complex-sheaves], whose degree $n$ object is $\\bigoplus_{p+q=n}A^p\\otimes_R B^q$ and differential is $d_A\\otimes1+(-1)^p1\\otimes d_B$ on the $(p,q)$ summand. Define $\\iota_{p,q,n}:A^p\\otimes_R B^q\\to\\operatorname{Tot}(A\\otimes_R B)^n$, for $p+q=n$, to be the canonical inclusion of this direct-sum summand. The named existing interface consists of this inclusion and transparent aliases for $\\operatorname{Mod}(R)$, its tensor bifunctor, and its total tensor bifunctor; complexes may be unbounded.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition 012Z (definition-associated-simple-complex), the canonical direct-sum inclusions; applied to sheaf tensor as in sites-cohomology.tex Tags 06YM and 0G6E and the sk-lem-sp-tower proof paragraph."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum total tensor product of unbounded cochain complexes of sheaves of modules and its canonical summand inclusion",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "TensorProduct.directSumLeft_tmul_lof",
+     "TensorProduct.directSumLeft_tmul",
+     "HomologicalComplex.ιTensorObj",
+     "TensorProduct.directSumRight_tmul_lof",
+     "TensorProduct.directSum_lof_tmul_lof",
+     "TensorProduct.directSumLeft",
+     "TensorProduct.directSum",
+     "TensorProduct.finsuppLeft"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "General tensor-summand inclusion found; the exact existing sheaf specialization is TotalTensorSigns.ι."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ιMapBifunctor",
+   "results": {
+    "subdirectory": "",
+    "count": 5,
+    "hits": [
+     "CochainComplex.ιMapBifunctor",
+     "CochainComplex.ι_mapBifunctorShift₁Iso_hom_f",
+     "CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc",
+     "CochainComplex.ι_mapBifunctorShift₂Iso_hom_f",
+     "CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Exact general summand inclusion; TotalTensorSigns.ι is its existing sheaf-tensor specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "map₂CochainComplex|ιMapBifunctor",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 25,
+    "hits": [
+     "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+     "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+     "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+     "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+     "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies the total bifunctor and canonical summand inclusion; project grep finds existing aliases Modules, tensor, total and definition ι in TotalTensorHomotopyConeSigns. No definition node owns this interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-normalized-error-tower-vanishing",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof paragraph: the coefficient quotient tower and explicit total-tensor summands in the normalized coefficient-fiber triangles.",
+   "via": [
+    "lem-sp-normalized-error-tower-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TotalTensorHomotopyConeSigns",
+  "declaration": "SheafOfModules.TotalTensorSigns.ι",
+  "statement": "def ι (A B : CochainComplex (Modules R) ℤ) (p q n : ℤ) (hpq : p + q = n) :\n    A.X p ⊗ B.X q ⟶ (((total R).obj A).obj B).X n",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing definitions at TotalTensorHomotopyConeSigns.lean:46–88: Modules is ringedSiteModules on the underlying ring sheaf; tensor is curriedTensor; total is tensor.map₂CochainComplex; ι is CochainComplex.ιMapBifunctor. No extraction from totalTensorHomotopyConeSigns and no new Lean construction. This node records the concrete interface in addition to the existing generic tensor-complex node.",
+  "declarations": [
+   "SheafOfModules.TotalTensorSigns.Modules",
+   "SheafOfModules.TotalTensorSigns.tensor",
+   "SheafOfModules.TotalTensorSigns.total",
+   "SheafOfModules.TotalTensorSigns.ι"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19638042",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19638042",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the 9b8687c4 H2 RETURN. Lean module byte-identical (sha256 a5e3a3c6), whose substance was already accepted; lean.statement verbatim. The theorem stmt_deps det-sp-coefficient-towers-abelian and lem-weil-pbc-total-tensor-homotopy-cone-signs are replaced by two new existing:true definition nodes: def-sp-commutative-coefficient-ring-tower (spCoefficientCommRings, real constant quotient sheaves and factorPowSucc data, cites sk-def-sp-coefficient-towers) and def-sp-total-tensor-summand-interface (TotalTensorSigns Modules/tensor/total/ι, aliases of ringedSiteModules/curriedTensor/map2CochainComplex/ιMapBifunctor, citing 3 definition nodes). Both are verbatim from source, have a source place and searches, and no duplicate owner exists in live or side-live. Mechanical finding: lem-coef-derived-tower-counit-projections supplies only the Prop instances strictTowerConstantAdditive/strictTowerLimitAdditive needed by mapHomologicalComplex in spErrorDiagonal and spErrorLimitComparison, so this is a genuine dependency (PASS on point). No compile run (no file changed); worker reports a clean compile (22.8 s / 20.3 s). Advisory: powered_transitions and assoc are redundant."
+ }
+}

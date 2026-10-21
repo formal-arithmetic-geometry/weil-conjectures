@@ -262,5 +262,42 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-8677df9cc (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement is byte-identical to the base version from the Q22 parent snapshots, and the delivery adds no new nodes. The item is unsplit on live and side-live, so it is not superseded; neither it nor any cited node is on the dropped list. There is no cycle (closure of 3582 nodes), proof_deps equals the union of the step uses, and no SGA source is cited. Sources read: blueprint main-20261015 lem-sfb-dc-hom-preserves.proof.md final paragraph ('follow by inverting ell'); Bhatt–Scholze Lemma 6.8.12 and Proposition 6.8.14, pp. 61–62 (global RHom and direct sums; the node correctly marks the internal telescope as agent-written); Stacks 01OZ and 0118, checked against the tags file. Step 1: the minimal-closed-subset leaf turns a descending chain into a Noetherian space. Step 2: the item's general-lfp hypothesis is exactly (i) of the integral lfp constant-model comparison, so (i)⇒(ii) applied to each of the finitely many H^q gives finite constant models. Step 3: the continuity node's hypotheses hold (Λ=O_E, Noetherian space, bounded finite models, I=ℕ, common lower bound); site smallness and exact filtered colimits come from the pro-étale site definition and Grothendieck-abelian. Step 4: the tau_{≥c} truncation and its ℓ-compatibility are correct, checked by hand. Step 5: qlbar-colimit-x gives E_X=O_{E,X}[1/ℓ] as the telescope, matching R[1/s] in the localization comparison; all its hypotheses are met, giving the D(S) isomorphism, naturality and the restriction identification. Step 6: the reflection, complex-colimit and K-injective telescope statements pin the telescope legs, including the fact that the transition from ℓ_P is not literally ℓ on chains. This parallels the localization node's proof, but cites only statements. Step 7: the evaluation-normalized scalar adjunction gives the pairing ℓ^{-n}(1⊗h(k)), and the cocone identity checks. Edge cases tested: X empty, K=0, L=0, K=B, torsion K=B/ℓ^a (both sides 0), and L bounded below but termwise unbounded. The six declared tool_uses are generic and accepted. Nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralGeneralLfpHomInversion",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralHomInversion.integralGeneralLfpHomInversion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.integral",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.ring",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.coefficientMap",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.forward",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.locallyBijective",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.derivedCategories",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.tower",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.leg",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.hom",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.extension",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.comparison",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.restrictedComparison",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.D",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.internal",
+   "AlgebraicGeometry.ProEtale.IntegralHomInversion.integralGeneralLfpHomInversion"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralGeneralLfpHomInversion.lean",
+  "statement": "theorem integralGeneralLfpHomInversion [CompactSpace X] [IsLocallyNoetherian X] (K L : D l E X) (_hK : boundedConstructible (integral l E X) ((internal l E X).obj K)) (_hL : ∃ c : ℤ, L.IsGE c) : IsIso (comparison l E X M μ K L) ∧ IsIso (restrictedComparison l E X M μ α K L) ∧ (∀ (K' L' : D l E X) (f : K' ⟶ K) (g : L ⟶ L'), (extension l E X M).map ((hom l E X).map (Prod.mkHom f.op g)) ≫ comparison l E X M μ K' L' = comparison l E X M μ K L ≫ (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1} (Scheme.ProEt.topology X) (ModuleObjectRingedComparison.ring (Profinite.continuousMapRingObj E.1) X)).map (Prod.mkHom ((extension l E X M).map f).op ((extension l E X M).map g))) ∧ ∃ h : ∀ (T : D l E X) (n : ℕ), IsIso ((l ^ n) • 𝟙 ((extension l E X M).obj T)), (∀ (A P : CochainComplex (scalarModules.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (ring l E X)) ℤ) (eA : DerivedCategory.Q.obj A ≅ (hom l E X).obj (op K, L)) (eP : DerivedCategory.Q.obj P ≅ L), ∃ (βA : DerivedCategory.Q.obj (colimit (tower l E X A)) ≅ (restriction l E X).obj ((extension l E X M).obj ((hom l E X).obj (op K, L)))) (βP : DerivedCategory.Q.obj (colimit (tower l E X P)) ≅ (restriction l E X).obj ((extension l E X M).obj L)), (∀ n : ℕ, DerivedCategory.Q.map (colimit.ι (tower l E X A) n) ≫ βA.hom = eA.hom ≫ leg l E X M ((hom l E X).obj (op K, L)) n (h _ n)) ∧ (∀ n : ℕ, DerivedCategory.Q.map (colimit.ι (tower l E X P) n) ≫ βP.hom = eP.hom ≫ leg l E X M L n (h _ n)) ∧ ∃ γ : DerivedCategory.Q.obj (colimit (tower l E X A)) ≅ (hom l E X).obj (op K, DerivedCategory.Q.obj (colimit (tower l E X P))), γ.hom ≫ (hom l E X).map (Prod.mkHom (𝟙 (op K)) βP.hom) = βA.hom ≫ restrictedComparison l E X M μ α K L ∧ ∀ n : ℕ, DerivedCategory.Q.map (colimit.ι (tower l E X A) n) ≫ γ.hom = eA.hom ≫ (hom l E X).map (Prod.mkHom (𝟙 (op K)) (eP.inv ≫ DerivedCategory.Q.map (colimit.ι (tower l E X P) n)))) ∧ ∀ n : ℕ, (M.closed (ring l E X)).tensor.map (Prod.mkHom (leg l E X M ((hom l E X).obj (op K, L)) n (h _ n) ≫ restrictedComparison l E X M μ α K L) (𝟙 K)) ≫ (M.closed (ring l E X)).evaluation K ((restriction l E X).obj ((extension l E X M).obj L)) = (M.closed (ring l E X)).evaluation K L ≫ leg l E X M L n (h _ n)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The same ordinary module-sheaf derived categories are written through the canonical exact section-module equivalence. General ring-object boundedConstructible is tested after its inverse. All scalar/closed presentations retain the existing normalized universal data. No completeness or input Tor/perfectness hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f75eb893",
+  "group": "NX",
+  "result": "pass",
+  "note": "Lean-only delivery; statement, stmt_deps and proof_deps unchanged from the reviewed S1 split; no new nodes. lean.statement verbatim, 16 declarations present, one sorry. ℓ prime, E finite intermediate field, CompactSpace+IsLocallyNoetherian, B/S = condensedRingObj of padicIntegers/continuousMap with the actual p_X^* inclusion via sectionScalarMap. K: general boundedConstructible (t.bounded ⊓ IsConstructibleModuleObject) after equivalence.inverse.mapDerivedCategory. L: ∃c IsGE. IsIso of localizationHomComparison (transpose of μ⁻¹≫F(ev)) and of the restricted comparison; naturality for arbitrary K',L' is true. Telescope clause pins β legs to unit≫ℓ^{-n} and γ legs to RHom(K,ι_n), with the square to the restricted comparison; the stage pairing equation is morphism-level. M/μ/α are normalized ScalarHomModels data, the same as in the dependency theorem. Instance wrappers equal the standard instances, so no diamond. No hollow defs; docstrings ok. Advisory: owners of ScalarHomModels (def-sfb-scalar-hom-comparison-data), localizationHomComparison, sectionScalarMap and ModuleObjectRingedComparison (theorem nodes) are not stmt_deps; base-era, maintainer note only. No file changed, so no compile."
  }
 }

@@ -22730,3 +22730,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:01 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 14:02 L: merged deliver/NO/lem-pur-perfect-quotient-exchange-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 14:02 L: merged deliver/NR/lem-pur-finite-type-coordinate-support-orientation (stage 2; reviewer PASS; parallel immutable checks)
+- 14:03 L: merged deliver/NX/lem-sfb-integral-general-lfp-hom-inversion (stage 2; reviewer PASS; parallel immutable checks)
+- 14:03 L: merged deliver/N5/lem-sfb-qcqs-proper-constructible-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
+- 14:03 L: merged deliver/NC/lem-sp-normalized-error-tower-vanishing (stage 2; reviewer PASS; parallel immutable checks)

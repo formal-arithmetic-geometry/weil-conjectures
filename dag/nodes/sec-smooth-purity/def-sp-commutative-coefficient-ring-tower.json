@@ -1,0 +1,127 @@
+{
+ "id": "def-sp-commutative-coefficient-ring-tower",
+ "kind": "definition",
+ "title": "Commutative-ring presentation of the smooth-purity coefficient tower",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$, and a scheme $T$. Use the quotient sheaves and reduction maps of [sk-def-sp-coefficient-towers]. Define the commutative-ring coefficient tower $B_\\bullet$ to be the functor from $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ to sheaves of commutative rings on $T_{\\mathrm{pro\\acute et}}$ with $B_n=(O/\\ell^n)_T$ and adjacent transition $a\\bmod\\ell^{n+1}\\mapsto a\\bmod\\ell^n$. All other transitions are composites and identities. Its underlying ring-sheaf tower is the coefficient ring tower of that definition. In the Lean indexing, natural index $n$ denotes exponent $n+1$.",
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof paragraph, quotient coefficient rings and their reductions; the commutative-ring presentation of sk-def-sp-coefficient-towers."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tower of constant commutative quotient ring sheaves O modulo powers of ell with reduction maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪",
+     "Ideal.Quotient.factorPowSucc",
+     "AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf'",
+     "Ideal.Quotient.factorPow",
+     "ModP.commRing",
+     "AlgebraicGeometry.Spec.structureSheaf",
+     "AlgebraicGeometry.Spec.sheafedSpaceObj",
+     "Submodule.factorPowSucc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "General quotient reductions only; the exact existing project presentation is spCoefficientCommRings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of constant sheaves of commutative quotient rings with the quotient reduction maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "localCohomology.ringModIdeals",
+     "localCohomology.diagram",
+     "AdicCompletion.transitionMapₐ",
+     "localCohomology.ofSelfLERadical",
+     "localCohomology",
+     "localCohomology.ofDiagram",
+     "CompHausLike.LocallyConstantModule.functor",
+     "AdicCompletion.transitionMap_ideal_mk"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "General adic/module constructions only; use the existing project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "spCoefficientCommRings|coefficient.*[Tt]ower",
+   "results": {
+    "subdirectory": "CategoryTheory",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match; project grep finds spCoefficientCommRings in SmoothPurityCoefficientTowersAbelian. No definition node owns this presentation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-normalized-error-tower-vanishing",
+  "date": "2026-10-21",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof paragraph: the coefficient quotient tower and explicit total-tensor summands in the normalized coefficient-fiber triangles.",
+   "via": [
+    "lem-sp-normalized-error-tower-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCoefficientTowersAbelian",
+  "declaration": "AlgebraicGeometry.ProEtale.spCoefficientCommRings",
+  "statement": "def spCoefficientCommRings :\n    ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)}",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing real definition at SmoothPurityCoefficientTowersAbelian.lean:862; it uses the constant CommRingCat quotient sheaves and Functor.ofOpSequence of the quotient reductions. Section parameters l, E and T are explicit in the source. This node owns the definition interface, not the abelianness theorem; no new Lean definition or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19638042",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19638042",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the 9b8687c4 H2 RETURN. Lean module byte-identical (sha256 a5e3a3c6), whose substance was already accepted; lean.statement verbatim. The theorem stmt_deps det-sp-coefficient-towers-abelian and lem-weil-pbc-total-tensor-homotopy-cone-signs are replaced by two new existing:true definition nodes: def-sp-commutative-coefficient-ring-tower (spCoefficientCommRings, real constant quotient sheaves and factorPowSucc data, cites sk-def-sp-coefficient-towers) and def-sp-total-tensor-summand-interface (TotalTensorSigns Modules/tensor/total/ι, aliases of ringedSiteModules/curriedTensor/map2CochainComplex/ιMapBifunctor, citing 3 definition nodes). Both are verbatim from source, have a source place and searches, and no duplicate owner exists in live or side-live. Mechanical finding: lem-coef-derived-tower-counit-projections supplies only the Prop instances strictTowerConstantAdditive/strictTowerLimitAdditive needed by mapHomologicalComplex in spErrorDiagonal and spErrorLimitComparison, so this is a genuine dependency (PASS on point). No compile run (no file changed); worker reports a clean compile (22.8 s / 20.3 s). Advisory: powered_transitions and assoc are redundant."
+ }
+}
