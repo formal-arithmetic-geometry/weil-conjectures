@@ -1,0 +1,80 @@
+{
+ "id": "lem-pur-ringed-triple-resolution-formulas",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Common-resolution formulas for two triple direct-image paths",
+ "statement": "Let $X_0\\xrightarrow fX_1\\xrightarrow gX_2\\xrightarrow hX_3$ be morphisms of ringed topoi presented by small sites with sheaves of commutative rings [def-weil-pbc-ringed-topos-morphism]. Use their module sheaf categories [def-weil-sheaf-of-modules-category], ordinary unbounded derived categories, and localizations $Q_i:K(\\operatorname{Mod}(X_i))\\to D(\\operatorname{Mod}(X_i))$ [def-weil-abstract-derived-category]. Put $R_f=Rf_*$, and analogously for composites. Use the normalized natural comparisons $\\kappa_{b,a}:R_{ba}\\xrightarrow{\\sim}R_bR_a$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], and the canonical resolution identifications of [lem-sf-kinjective-derived-map-computation]. All underived composition identifications are the canonical ones, and functor associators are suppressed.\nLet $I$ be K-injective on $X_0$ and choose K-injective resolutions $j:f_*I\\to J$ on $X_1$, $k:g_*J\\to K$ and $t:g_*f_*I\\to T$ on $X_2$ [def-pur-kinjective-complex]. Then $g_*j$ and $k\\circ g_*j$ are quasi-isomorphisms. There is a unique homotopy class of chain maps $u:T\\to K$ such that\n$$Q_2u=Q_2(k\\circ g_*j)\\circ(Q_2t)^{-1},\\qquad u\\circ t\\simeq k\\circ g_*j.$$\nSet $\\alpha=(R_h\\kappa_{g,f})\\circ\\kappa_{h,gf}$ and $\\beta=(\\kappa_{h,g}R_f)\\circ\\kappa_{hg,f}$. Identify their common source $R_{hgf}(Q_0I)$ with $Q_3(h_*g_*f_*I)$ using $I$, and their common target $R_hR_gR_f(Q_0I)$ with $Q_3(h_*K)$ using $j$ and $k$. In precisely these coordinates their components are\n$$\\alpha_{Q_0I}=Q_3(h_*u)\\circ Q_3(h_*t),\\qquad\n\\beta_{Q_0I}=Q_3(h_*k)\\circ Q_3(h_*g_*j).$$\nMore explicitly, $\\kappa_{h,gf}$ is represented by $h_*t$; the map $R_h(\\kappa_{g,f,Q_0I})$, using $t$ and $k$ to resolve its source and target, is represented by $h_*u$; $\\kappa_{hg,f}$ is represented by $h_*g_*j$; and $\\kappa_{h,g}$ at $R_f(Q_0I)$, after the identification induced by $j$, is represented by $h_*k$. The formulas hold for every choice of $j,k,t$ with the canonical resolution transitions. Neither $f_*I$ nor $g_*J$ is assumed K-injective, and no module direct image is assumed to preserve K-injectives.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent extraction of the two triple-path component formulas on a common K-injective resolution"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given three direct image functors of ringed topoi compute both iterated total derived composition comparisons on a K-injective complex using resolutions j k t and a homotopy class between resolutions",
+   "results": "[leanfinder] OK 8 hit(s)\nActual top result names/files: [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*([Cc]omp|[Aa]ssoc)|([Cc]omp|[Aa]ssoc).*rightDerived",
+   "results": "[grep] OK 5 hit(s)\nActual top result names/files: [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute the associativity comparison for three total right derived functors by comparing K-injective resolutions in the homotopy category",
+   "results": "[leansearch] OK 8 hit(s)\nActual top result names/files: [\"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc\", \"CategoryTheory.Functor.rightDerived_fac_app_assoc\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "[loogle] OK 12 hit(s)\nActual top result names/files: [\"CategoryTheory.Functor.IsRightDerivedFunctor\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.HasRightDerivedFunctor.mk'\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"CategoryTheory.Functor.IsRightDerivedFunctor.mk\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension\", \"CategoryTheory.Functor.rightDerivedDesc\", \"CategoryTheory.Functor.rightDerivedUnique\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common K-injective resolution computes the two parenthesizations of three composite right derived direct images without any direct image preserving K-injectives",
+   "results": "[leanfinder] OK 8 hit(s)\nActual top result names/files: [\"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\"]",
+   "date": "2026-10-21",
+   "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ringed-derived-composition-cocycle",
+  "date": "2026-10-21",
+  "group": "NO"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "fix-prop-adjunctions proof Step 1 ordinary derived adjunction, and Step 3 ordinary composition: resolution-level evaluation of the two triple direct-image paths; old cocycle proof Steps 1-4",
+   "via": [
+    "lem-pur-ringed-derived-composition-cocycle",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

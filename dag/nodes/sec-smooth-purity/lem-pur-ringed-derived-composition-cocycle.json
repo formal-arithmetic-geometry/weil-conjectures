@@ -17,55 +17,20 @@
  ],
  "proof": [
   {
-   "text": "Work first at $Q_0I$ with $I$ K-injective on $X_0$, writing $Q_i$ for localization on $X_i$. The ringed-topos definition supplies additive termwise direct images; use their canonical underived composition identifications throughout. Choose K-injective resolutions $j:f_*I\\to J$, $k:g_*J\\to K$, and $t:g_*f_*I\\to T$, available on the small ringed sites by [prop-pur-kinjective-resolutions-exist]. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] says $g_*j$ is a quasi-isomorphism. Thus $k\\circ g_*j$ is also a quasi-isomorphism. Neither $f_*I$ nor $g_*J$ is assumed K-injective.",
+   "text": "At $Q_0I$ for K-injective $I$, choose $j:f_*I\\to J$, $k:g_*J\\to K$, $t:g_*f_*I\\to T$ using [prop-pur-kinjective-resolutions-exist]. Apply [lem-pur-ringed-triple-resolution-formulas]: in its common source and target coordinates, the two cocycle paths are $Q_3(h_*u)Q_3(h_*t)$ and $Q_3(h_*k)Q_3(h_*g_*j)$, with $ut\\simeq kg_*j$. The additive module direct image of [def-weil-pbc-ringed-topos-morphism] preserves this homotopy: applying $h_*$ to $ut-kg_*j=ds+sd$ gives the same equation for $h_*s$. Functoriality of $Q_3$ therefore identifies the two paths.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-ringed-triple-resolution-formulas",
     "def-weil-pbc-ringed-topos-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
    }
   },
   {
-   "text": "Since $T$ and $K$ are K-injective, [lem-weil-pbc-kinjective-hom-derived] represents the derived morphism $Q_2(k\\circ g_*j)\\circ(Q_2t)^{-1}:Q_2T\\to Q_2K$ by a unique homotopy class $u:T\\to K$. Moreover $u\\circ t$ and $k\\circ g_*j$ are homotopic: their images under $Q_2$ agree, and the same cited Hom bijection applies with source $g_*f_*I$ and K-injective target $K$. This is a comparison between actual resolutions, with no claim that termwise direct image preserves K-injectives.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
-   }
-  },
-  {
-   "text": "Compute $(\\kappa_{h,g}R_f)\\circ\\kappa_{hg,f}$ at $Q_0I$. The comparison for $(hg,f)$, using $j$, is represented by $(hg)_*j=h_*g_*j$. The comparison for $(h,g)$ at $R_f(Q_0I)=Q_1J$, using $k$, is represented by $h_*k$. Both assertions are precisely the K-injective normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Hence this side, in the common source $Q_3(h_*g_*f_*I)$ and target $Q_3(h_*K)$, is $Q_3(h_*(k\\circ g_*j))$. The identifications here are the canonical resolution identifications, not additional choices of the composition isomorphisms.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
-   }
-  },
-  {
-   "text": "For the other side, $\\kappa_{h,gf}$ is represented by $h_*t$, by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The map $\\kappa_{g,f}$ is $Q_2(g_*j)$. Apply [lem-sf-kinjective-derived-map-computation] to $h_*$, to this morphism, and to the resolutions $t:g_*f_*I\\to T$ and $k:g_*J\\to K$. Its representing map between K-injective targets is exactly $u$ from Step 2. Therefore $(R_h\\kappa_{g,f})\\circ\\kappa_{h,gf}$ is $Q_3(h_*u)\\circ Q_3(h_*t)=Q_3(h_*(u\\circ t))$. Termwise application of the additive functor $h_*$ preserves the homotopy of Step 2: apply $h_*$ to the equation $ut-kg_*j=ds+sd$. Thus this equals $Q_3(h_*(k\\circ g_*j))$, the expression in Step 3.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sf-kinjective-derived-map-computation",
-    "def-weil-pbc-ringed-topos-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
-   }
-  },
-  {
-   "text": "For any complex $M$ on $X_0$, choose a K-injective resolution $a:M\\to I$. Naturality of the two composites in the cocycle square identifies their components at $Q_0M$ with their components at $Q_0I$ conjugated by the images of the isomorphism $Q_0a$. The equality just proved at $Q_0I$ therefore gives equality at $Q_0M$. Every derived object is represented by a complex (up to the canonical localization equivalence), so the natural transformations agree. Canonical changes of resolution are compatible by the identity and composition formulas of [lem-sf-kinjective-derived-map-computation].",
+   "text": "For an arbitrary complex $M$ choose $a:M\\to I$ as in [prop-pur-kinjective-resolutions-exist]. Write the two natural paths as $\\alpha,\\beta$ and their source and target functors as $S,T$. Naturality gives $T(Q_0a)\\alpha_{Q_0M}=\\alpha_{Q_0I}S(Q_0a)$ and the same equation for $\\beta$. Since $Q_0a$ is invertible and Step 1 gives $\\alpha_{Q_0I}=\\beta_{Q_0I}$, cancel $T(Q_0a)$ to obtain equality at $Q_0M$. Every derived object is represented by a complex. The canonical change-of-resolution formulas in [lem-sf-kinjective-derived-map-computation] ensure that the coordinates used in Step 1 are the specified ones.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-sf-kinjective-derived-map-computation"
@@ -73,50 +38,40 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
    }
   },
   {
-   "text": "Construct the identity comparison explicitly. For $a:N\\to I$ a K-injective resolution on $X$, let $c_a:R_{\\mathrm{id}_X}(QN)\\xrightarrow{\\sim}QI$ be the canonical resolution identification. Set $\\epsilon_{X,QN}=(Qa)^{-1}\\circ c_a$. For a derived morphism $v:QN\\to QN'$ and resolutions $a:N\\to I$, $b:N'\\to J$, [lem-sf-kinjective-derived-map-computation] gives a representing class $w:I\\to J$ with $Qw=Qb\\circ v\\circ(Qa)^{-1}$. Applying its formula for the identity functor gives $\\epsilon_{X,QN'}R_{\\mathrm{id}_X}(v)=v\\epsilon_{X,QN}$. Its change-of-resolution formula proves independence of $a$. Thus these are a natural isomorphism to the identity; they are exactly those induced by termwise identity direct image. In particular at K-injective $I$, choosing $a=1_I$ makes $\\epsilon_{X,QI}$ the identity under the canonical computation.",
+   "text": "For termwise identity, [lem-weil-pbc-exact-functor-derived-functor] says its derived unit $\\eta_N:QN\\to R_{\\mathrm{id}}(QN)$ is invertible for every complex. Thus $\\epsilon_{QN}=\\eta_N^{-1}$ is the induced natural identity comparison. For a resolution $a:N\\to I$, naturality of $\\eta$ gives $\\eta_I Qa=R_{\\mathrm{id}}(Qa)\\eta_N$, so $\\epsilon_{QN}=(Qa)^{-1}c_a$ with $c_a=\\eta_I^{-1}R_{\\mathrm{id}}(Qa)$. This also proves independence of $a$, naturality for every derived morphism, and $\\epsilon_{QI}=c_{1_I}$ in resolution coordinates. For K-injective $I$ choose $j:f_*I\\to J$. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] with $g=\\mathrm{id}$ represents $\\kappa_{\\mathrm{id},f}$ by $Q_1j$, while the new identity formula represents $\\epsilon_{X_1,Q_1(f_*I)}$ by $(Q_1j)^{-1}$; their composite is $1$. For $\\kappa_{f,\\mathrm{id}}$, use the identity resolution $I\\to I$ of the identity direct image. Its representative is $f_*1_I$, and $R_f(\\epsilon_{X_0,Q_0I})$ is the identity in these coordinates by the same identity formula. Their composite is again $1$. The naturality and cancellation equations of Step 2 give both unit laws at every derived object.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sf-kinjective-derived-map-computation"
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, (3)-(4); Tag 070Y, lemma-K-injective-defined; sites-cohomology.tex Tag 0D6E normalization for the two unit cancellations"
    }
   },
   {
-   "text": "For the left unit law evaluate at K-injective $I$ on $X_0$, choose $j:f_*I\\to J$ K-injective, and apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] with $g=\\mathrm{id}_{X_1}$. It gives $\\kappa_{\\mathrm{id},f}=Q_1j$ in the resolution coordinates. Step 6 gives $\\epsilon_{X_1,Q_1(f_*I)}=(Q_1j)^{-1}$ in the same coordinates, so their product is the identity. For the right unit law the first morphism is $\\mathrm{id}_{X_0}$; use the identity resolution $I\\to I$ of its direct image. The comparison $\\kappa_{f,\\mathrm{id}}$ is then the class of $f_*(1_I)$, while $R_f(\\epsilon_{X_0,Q_0I})$ is the identity by Step 6. The product is again the identity. Transport along resolutions exactly as in Step 5 gives both laws at every derived object.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
-   }
-  },
-  {
-   "text": "An identity-underlying-topos coefficient change is a ringed-topos morphism: its module direct image is restriction of scalars along the structural ring map, as in [def-weil-pbc-ringed-topos-morphism]. All resolutions above are taken in the module category for the ring on the relevant $X_i$; the composition normalization applies to these morphisms as well. No step used an isomorphism or flatness of the structural ring map. Consequently the same calculations give every asserted law when any of $f,g,h$ is such a coefficient change.",
+   "text": "A coefficient change on the identity underlying topos is a ringed-topos morphism whose module direct image is restriction of scalars along the structural ring map [def-weil-pbc-ringed-topos-morphism]. Every resolution above is in the module category for the ring at that vertex. The preceding arguments apply to these morphisms as well: none requires flatness of the structural map or preservation of K-injectives.",
    "uses": [
     "def-weil-pbc-ringed-topos-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; common-resolution assembly using derived.tex Tag 070Y"
    }
   }
  ],
  "proof_deps": [
   "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-triple-resolution-formulas",
   "def-weil-pbc-ringed-topos-morphism",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sf-kinjective-derived-map-computation"
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -218,8 +173,8 @@
   "date": "2026-10-21",
   "item": "lem-pur-ringed-derived-composition-cocycle",
   "worker": "stage1",
-  "summary": "Proved the associativity and both unit laws by an explicit common-resolution calculation, reusing existing K-injective existence, Hom detection, derived-map computation and normalized composition nodes. No new nodes; statement unchanged. No preservation of K-injectives by module direct image is assumed.",
-  "blueprint": "fix-prop-adjunctions, Proof Step 1 integral derived adjunction / successive coefficient restrictions before reconstruction (via lem-pur-completed-coefficient-pushforward-comparison): coherence of the ordinary unbounded ringed-topos comparison.",
+  "summary": "Deliberate human-requested re-split: old Steps 1-4 become a substantial statement-only unsplit common-resolution formula node. The parent keeps homotopy preservation, explicit naturality cancellation, construction of the identity comparison, both unit cancellations and coefficient changes. Existing exact-functor computation replaces an unnecessary proposed identity leaf. Statement unchanged; 1 new node; no Lean changed. Original arguments and their responsibility map are retained in the report.",
+  "blueprint": "fix-prop-adjunctions: ordinary derived adjunction (proof Step 1) and natural, unital, associative ordinary composition (proof Step 3), via lem-pur-completed-coefficient-pushforward-comparison.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -240,6 +195,10 @@
    {
     "node": "def-weil-pbc-ringed-topos-morphism",
     "why": "Definition of ringed-topos morphism and its additive module direct image, including coefficient restriction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor computation makes the derived identity unit invertible on every complex; supplies the identity normalization without inventing an elementary new node."
    }
   ]
  },
@@ -248,15 +207,16 @@
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-sf-kinjective-derived-map-computation",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-ringed-topos-morphism"
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-exact-functor-derived-functor"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NR-8888f6f3c",
-  "group": "NR",
+  "reviewer": "NT-cc-NO-4c14193c0",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-8888f6f3c (reviewer sub-agent of L); spot-checked: Read the item's 8 steps against every cited statement and Stacks 0D6E (sites-cohomology.tex 4011-4030). 0D6E states only Rg_*Rf_*=R(gf)_*, so proof_origin=agent is correct. No new nodes. Statement and stmt_deps are unchanged, proof_deps equals the union of uses, and nothing cites SGA. The item was created by NS on 2026-10-21 with an empty base proof, and no re-split note exists. Cocycle: κ_{h,gf}=h_*t (composition-node normalization), R_hκ_{g,f}=Q(h_*u) (070Y-based map-computation node with resolutions t,k), and ut~k·g_*j (070I Hom bijection, any source, K-injective target K), so LHS=Q(h_*(k·g_*j))=RHS. I checked the coordinates: c_j=c_{1_J}R_g(Qj), and κ_{h,g} at Q(f_*I) is transported along Qj by the node's naturality clause. Units: ε=(Qa)^{-1}c_a equals η^{-1}, κ_{id,f}=Qj cancels, and the identity resolution handles the right unit. Coefficient changes on the identity topos are instances of def-weil-pbc-ringed-topos-morphism; no flatness and no preservation of K-injectives is used (checked against Z→Z/2). Edge cases: all identities, an identity in each position, the zero complex. No duplicate: lem-sf-normalized-derived-comparison-composition (exact change functors), lem-sfb-ringed-derived-{composition,identity}-comparison (pullback lifts) and def-sfb-module-lower-star-comp (underived) state different things. Accepted tool_use: lem-weil-pbc-ringed-topoi-derived-pushforward-composition (off-unit, sk-thm-properbasechange), whose comparison is the item's own subject; the other cited nodes are on the sk-def-sf-operations route or are notions or leaves. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-4c14193c0 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged; compared with live, only proof, proof_deps and split_report differ. The Lean module still has sorry at lines 172 and 252, so the work is still open. The repair note (human, 2026-10-21) asks for at least 1 new node and a parent of at most 3000 characters. The delivery has 1 new node and a 4-step parent of 2771 characters. Every old step has a carrier. Old steps 1–4 (resolutions j,k,t; the unique class u with u t ≃ k g_*j by the Hom bijection; the two path formulas) are now the new node lem-pur-ringed-triple-resolution-formulas. Parent step 1 applies h_* to the homotopy. Step 2 is the naturality cancellation (old step 5). Step 3 carries the unit laws (old steps 6–7): ε = η^{-1}, using the final clause of lem-weil-pbc-exact-functor-derived-functor (Stacks 015F (4), derived.tex 5884–5906). By hand I checked ε = (Qa)^{-1}c_a, κ_{id,f} = Q_1j against ε = (Q_1j)^{-1}c_j, and κ_{f,id} = f_*1_I against ε = c_{1_I}. Step 4 is the coefficient change (old step 8). These are short applications of cited statements, so I accept them under the ≥1-node note, as for Q13. I checked the new node's statement by hand: g_*j is a quasi-isomorphism by the normalization; u exists and is unique by the bijection into K-injective K; R_hκ_{g,f} is represented by h_*u, since the map-computation node gives Q_2w = Q_2k·Q_2(g_*j)·(Q_2t)^{-1} = Q_2u; κ_{h,gf} by h_*t; κ_{hg,f} by h_*g_*j; κ_{h,g} by h_*k. The statement is true. I tested it with identities in every position, the zero complex, Z→Z/2 on the one-point site, and changes of resolution. Form checks: B1–B3 and B9 pass. B5: Stacks 0D6E, sites-cohomology.tex 4011–4030, checked. The node does not restate the cocycle or unit laws (D1). It is not a duplicate: lem-weil-derived-direct-image-composition, lem-cbc-complete-proetale-composition-pasting-coherence, the exact-change-functor lem-sf-normalized-* nodes and the one-map map-computation node all state other things. No cycle, no SGA. Accepted tool_use: lem-weil-pbc-exact-functor-derived-functor, a generic exact-functor unit. Maintainer notes: (1) lem-weil-pbc-kinjective-hom-derived is still declared in split_report.tool_uses, but the parent no longer cites it; only the new node's future proof uses it. (2) The snapshot's dagsnap symlinks were missing, so I read the cited nodes from clones/live; their statements are identical to the NR snapshot. No changes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.RingedDerivedCompositionCocycle",
