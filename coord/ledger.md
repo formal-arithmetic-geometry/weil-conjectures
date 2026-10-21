@@ -23093,3 +23093,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:55 L: batch 20261021T163749 dependency take-out
 - 16:56 L: merged deliver/Q11/lem-sfb-continuous-frame-sheaf-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 16:56 L: returned deliver/M2/Sheaf.Paper.IntegralDirectImageTower (reviewer RETURN: (reviewer C-a6c03, head a6c03114a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralDirect)
+- 16:57 L: merged deliver/NL/lem-sfb-internal-action-site-presentation (stage 2; reviewer PASS; parallel immutable checks)
