@@ -23857,3 +23857,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:56 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:58 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 21:58 L: merged deliver/Q17/lem-coef-compact-support-normalized-realization (stage 2; reviewer PASS; parallel immutable checks)
+- 21:59 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head cd552a575238: A7/A6: head cd552a575238 is byte-identical to the returned NC head d)
