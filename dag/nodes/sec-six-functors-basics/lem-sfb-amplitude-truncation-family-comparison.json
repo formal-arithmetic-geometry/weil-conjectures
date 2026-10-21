@@ -22,109 +22,51 @@
  ],
  "proof": [
   {
-   "text": "For either $\\mathcal C=\\mathcal A$ or $\\mathcal B$, small coproducts preserve finite limits. Indeed, the coproduct functor on $I$-indexed families is the filtered colimit, over the finite subsets $J\\subseteq I$, of the finite subcoproduct functors. Each finite subcoproduct is a finite product in the abelian category and therefore preserves finite limits. The filtered-colimit functor preserves finite limits by the cited Grothendieck lemma. The identification with the coproduct follows from its universal property: a compatible collection of maps from the finite subsums is exactly one map from each summand. This also covers $I=\\varnothing$, whose finite-subset poset has its single empty object. Thus coproducts are exact colimits in both categories.",
+   "text": "Use the Grothendieck AB4 instance (AB5 implies exact coproducts) and its K-injective resolutions. The proved source-library instance DerivedCategory.preservesColimitsOfShape_homologyFunctor identifies cohomology of any coproduct with the coproduct of the cohomologies by the canonical sigmaComparison. The source-library lemmas isLE_sigma and isGE_sigma retain common bounds. Isomorphism invariance of P and hPsum retain P-cohomology. These apply to empty coproducts as well.",
    "uses": [
-    "lem-sfb-grothendieck-filtered-finite-limits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079B, definition-grothendieck-conditions and following discussion; explicit finite-subset argument for AB5 implying AB4"
-   }
-  },
-  {
-   "text": "By the termwise-derived-coproduct theorem, representatives $L_s^\\bullet$ compute every ambient coproduct in $D(\\mathcal C)$, with the specified coprojections. Apply preservation of exact colimits by complex homology, using step 1 and the factorization of cohomology through localization. For every integer $j$ this gives the canonical natural isomorphism $\\theta_L^j:\\bigoplus_s H^j(L_s)\\xrightarrow{\\sim}H^j(\\bigoplus_sL_s)$. For every family $h_s:L_s\\to L_s^{\\prime}$ its defining coprojection identities give $H^j(\\bigoplus_sh_s)\\theta_L^j=\\theta_{L^{\\prime}}^j(\\bigoplus_sH^j(h_s))$. In particular, a coproduct retains any common cohomological upper or lower bound. In $\\mathcal A$, it also retains $\\mathcal P$-cohomology, since $\\mathcal P$ is closed under coproducts and isomorphisms.",
-   "uses": [
-    "lem-kun-grothendieck-derived-coproducts",
+    "lem-sfb-grothendieck-filtered-finite-limits",
     "src-weil-homology-preserves-exact-colimits",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, lemma-derived-products (1)-(2); homology calculation supplied by src-weil-homology-preserves-exact-colimits, DegreewiseLimits.lean:142-144"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $a=m-c$. Good truncations retain the original cohomology in their retained degrees and have zero cohomology elsewhere. Consequently $U_s$, $V_s$, and $T_s=\\tau_{\\le a-1}U_s$ have $\\mathcal P$-cohomology: this uses only isomorphism invariance and $0\\in\\mathcal P$. Moreover $U_s\\in D^{\\le m}$, $V_s\\in D^{\\ge a}\\cap D^{\\le m}$, and $T_s\\in D^{\\le a-1}$. This proves the asserted common interval for $V_s$; $c\\ge0$ gives $a\\le m$. By step 2 the sums of these families have the same respective bounds and $\\mathcal P$-cohomology.",
+   "text": "Put U_s=truncLE m K_s and V_s=truncGE (m-c) U_s. Use the existing homologyProperty_truncLE and homologyProperty_truncGE lemmas: cohomology is unchanged in the surviving degrees and zero outside. P contains zero, so both families retain P-cohomology. The standard truncation instances give V_s >= m-c and V_s <= m. No extension closure of P is required.",
    "uses": [
     "def-kun-truncations",
     "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: finite cohomological window; canonical truncations at m and m-c"
-   }
+   "elementary": true
   },
   {
-   "text": "The canonical truncation maps commute with ambient coproducts. To check the maps as well as the objects, choose complex representatives. Step 1 supplies the finite-limit hypothesis of the arrow-kernel/cokernel lemma, so $\\bigoplus_s\\ker d_s^m\\cong\\ker(\\bigoplus_sd_s^m)$ and $\\bigoplus_s\\operatorname{coker}d_s^{a-1}\\cong\\operatorname{coker}(\\bigoplus_sd_s^{a-1})$, with their canonical kernel inclusions and cokernel projections. The formulas for good truncation now give natural complex isomorphisms, hence derived isomorphisms $\\alpha:\\bigoplus_sU_s\\xrightarrow{\\sim}\\tau_{\\le m}(\\bigoplus_sK_s)$ and $\\beta:\\bigoplus_sV_s\\xrightarrow{\\sim}\\tau_{\\ge a}(\\bigoplus_sU_s)$. Degreewise the maps away from the boundary are identities or zero, and at the boundary they are precisely those inclusions or projections. Therefore $u_{\\oplus K}\\alpha=\\bigoplus_su_s$ and $\\beta(\\bigoplus_sv_s)=v_{\\oplus U}$, where $u_L:\\tau_{\\le m}L\\to L$ and $v_L:L\\to\\tau_{\\ge a}L$ are the canonical arrows.",
-   "uses": [
-    "lem-sfb-arrow-exact-colimits",
-    "def-kun-truncations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, lemma-derived-products (2), combined with the kernel/cokernel formulas in def-kun-truncations and the cited arrow-colimit lemma"
-   }
-  },
-  {
-   "text": "For any $L\\in D(\\mathcal A)$, the canonical triangle is $\\tau_{\\le m}L\\xrightarrow{u_L}L\\to W\\to(\\tau_{\\le m}L)[1]$, with $W=\\tau_{\\ge m+1}L\\in D^{\\ge m+1}$. Exactness of $G$ makes its image distinguished. The lower-bound hypothesis gives $G(W)\\in D^{\\ge m+1}$. Thus the long exact cohomology sequence has segment $0=H^{m-1}(G(W))\\to H^m(G(\\tau_{\\le m}L))\\xrightarrow{H^m(G(u_L))}H^m(G(L))\\to H^m(G(W))=0$. Its middle map is both monic and epic, hence invertible in the abelian category. Apply this with $L=K_s$ for each $s$, and also with $L=\\bigoplus_sK_s$.",
+   "text": "Apply G to the canonical triangle U_s -> K_s -> truncGT m K_s. Its last vertex maps into degrees >= m+1 by hGge. The long exact cohomology sequence, or source-library isIso_homologyMap_mor1, makes H^m(G(u_s)) invertible. Apply G to truncLE (m-c-1) U_s -> U_s -> V_s. Its first vertex retains P-cohomology; hGle puts its image in degrees <= m-1. The long exact sequence, or isIso_homologyMap_mor2, makes H^m(G(v_s)) invertible.",
    "uses": [
     "lem-sf-derived-truncation-triangle",
     "lem-sf-derived-homology-long-exact",
     "def-weil-triangulated-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle, at m; Tags 05RS and 0147, cohomology long exact sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "For any $L$ with $\\mathcal P$-cohomology, the other canonical triangle is $T\\to L\\xrightarrow{v_L}\\tau_{\\ge a}L\\to T[1]$, where $T=\\tau_{\\le a-1}L$. Its cohomology is either that of $L$ or zero, so it belongs to $\\mathcal P$, and $T\\in D^{\\le a-1}$. The upper-amplitude hypothesis therefore gives $G(T)\\in D^{\\le a-1+c}=D^{\\le m-1}$. Apply $G$ and use the long exact sequence: $0=H^m(G(T))\\to H^m(G(L))\\xrightarrow{H^m(G(v_L))}H^m(G(\\tau_{\\ge a}L))\\to H^{m+1}(G(T))=0$. Again the middle map is invertible. Apply this with $L=U_s$ and with $L=\\bigoplus_sU_s$, whose $\\mathcal P$-cohomology was checked in steps 2-3. No closure of $\\mathcal P$ under extensions or subquotients is used.",
+   "text": "Take coproducts of these actual distinguished triangles, using the proved coproductTriangle_distinguished theorem. Their outer vertices retain the necessary cohomological bounds by step 1. The lower triangle first vertex also retains P-cohomology by steps 1-2. Repeat the previous step after applying G to these coproduct triangles. Their first and second arrows are exactly Sigma.map u and Sigma.map v, respectively. Thus both comparisons with coproduct inside G are invertible, without any truncation-coproduct comparison or arrow-kernel calculation.",
    "uses": [
-    "lem-sf-derived-truncation-triangle",
+    "lem-sfb-coproduct-distinguished-triangles",
     "lem-sf-derived-homology-long-exact",
-    "def-weil-triangulated-category",
-    "def-kun-truncations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5, remark-truncation-distinguished-triangle, at a-1; Tags 05RS and 0147, cohomology long exact sequence"
-   }
-  },
-  {
-   "text": "The two pre-$G$ sum assertions now follow with the actual specified arrows. Step 4 gives $G(\\bigoplus_su_s)=G(u_{\\oplus K})G(\\alpha)$, so step 5 and invertibility of $\\alpha$ imply invertibility of $H^m(G(\\bigoplus_su_s))$. Likewise $G(\\beta)G(\\bigoplus_sv_s)=G(v_{\\oplus U})$; step 6 and invertibility of $\\beta$ imply invertibility of $H^m(G(\\bigoplus_sv_s))$. This uses only functoriality and composition/cancellation of isomorphisms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: finite cohomological window; Transfer: compatibility with sums; retaining both canonical truncation arrows"
-   }
-  },
-  {
-   "text": "For the two post-$G$ sum assertions, apply step 2 in $\\mathcal B$ to the families $G(u_s)$ and $G(v_s)$. Under the canonical isomorphisms $\\theta$, their degree-$m$ cohomology maps are respectively $\\bigoplus_sH^m(G(u_s))$ and $\\bigoplus_sH^m(G(v_s))$. Steps 5-6 make every summand invertible. The coproduct of the inverses is an inverse to each displayed coproduct map, as is checked on every coprojection. Conjugating by $\\theta$ proves invertibility of $H^m(\\bigoplus_sG(u_s))$ and $H^m(\\bigoplus_sG(v_s))$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: finite cohomological window; Transfer: compatibility with sums; the two maps with coproduct outside G"
-   }
-  },
-  {
-   "text": "All constructions used are natural in a morphism of $I$-indexed families: good truncation acts by the induced maps on kernels and cokernels, its canonical arrows are natural, and all coproduct maps and comparisons are determined by their coprojections. Applying $G$ and $H^m$ preserves these commuting squares, and inverses of the resulting natural isomorphisms are natural as well. For $I=\\varnothing$ the coproducts are zero; an additive exact functor takes a zero object to a zero object, since it takes its identity, which is zero, to an identity which is zero. Thus all four maps are isomorphisms also then. The argument used no bound on the original $K_s$ and only the fixed integers $m,c$.",
-   "uses": [
-    "def-kun-truncations",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: compatibility with sums; naturality and empty-family case of the finite-window argument"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The source-library isIso_homologyFunctor_map_sigmaMap, using preservation of coproducts by cohomology, transfers the individual isomorphisms of step 3 to the coproducts of G(u_s) and G(v_s). These are the two comparisons with coproduct after G.",
+   "uses": [
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any transformation f of discrete diagrams, the canonical Sigma.isoColimit isomorphisms satisfy e_X.hom >> colim.map f = Sigma.map (fun i => f.app i) >> e_Y.hom. Check this identity on every coprojection. Apply the relevant functor and cancel the mapped isomorphisms. The proved private helper isIso_map_colimMap_of_sigmaMap performs precisely this transport for all four maps. The whiskered components in the statement are definitionally the resulting colim.map expressions. All arrows remain natural in K; no boundedness of K or nonempty-index assumption has been used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -132,17 +74,16 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-sf-derived-homology-long-exact",
   "lem-sf-derived-truncation-triangle",
-  "lem-sfb-arrow-exact-colimits",
+  "lem-sfb-coproduct-distinguished-triangles",
   "lem-sfb-grothendieck-filtered-finite-limits",
   "src-weil-homology-preserves-exact-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Étale statements and Transfer: expanded abstract finite-window argument using Stacks 07D9 and 08J5; all four specified maps retained."
+  "place": "Finite cohomological window and Transfer, using already proved source-library homology, truncation, and coproduct-triangle lemmas; Stacks 08J5 and 0CRG. Y6 replaces commuting truncations with coproducts by applying G to coproducts of the actual truncation triangles."
  },
  "mathlib_searches": [
   {
@@ -245,9 +186,7 @@
   ]
  },
  "tool_uses": [
-  "lem-kun-grothendieck-derived-coproducts",
-  "src-weil-homology-preserves-exact-colimits",
-  "lem-sfb-arrow-exact-colimits"
+  "src-weil-homology-preserves-exact-colimits"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -275,5 +214,15 @@
   "group": "Q45",
   "result": "pass",
   "note": "Every node clause matches the Lean statement: Grothendieck A and B in a common universe w, P closed under isomorphisms with P 0 and w-small coproducts, G CommShift ℤ and IsTriangulated, hGge for all L, hGle only under P-cohomology, I : Type w with empty I allowed, the window [m-c,m] with P-cohomology, and four IsIso maps given as whiskered natural-transformation components. An rfl probe confirmed the maps are H^m(G(⊕v)) and H^m(⊕G(u)). colim uses the genuine coproduct instance hasColimitsOfShape_discrete. lean.statement is verbatim and only the lean field changed. No duplicate: CoproductsOfFiniteAmplitude has only auxiliary lemmas and a bounded comparison theorem. Proof is sorry only, docstrings complete, report sections present. nt_compile --json: 32.0 s, exit 0, clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261021T121009-L-4036791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
