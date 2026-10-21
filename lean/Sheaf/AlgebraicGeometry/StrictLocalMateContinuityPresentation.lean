@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalNeighbourhoodGeometryExistence
@@ -86,11 +87,11 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
   refine ⟨{
     I := SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)
     D := strictLocalNeighbourhoodDiagram f s
-    c := Cone.mk _ Q.legs
-    isLimit := Q.isLimit
+    c := Cone.mk _ Q.smallModelLegs
+    isLimit := Q.smallModelIsLimit
     t := strictLocalNeighbourhoodProjection f s
     p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
-    «over» := Q.over
+    «over» := Q.smallModelOver
     F := strictLocalCohomologyNeighbourhoodFunctor s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
     e := E.e

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceDerivedRestriction
 
 /-! # Computing source derived sections on an injective representative
@@ -40,8 +41,8 @@ canonical comparison evaluates that cocycle at the free generator. Applying the
 degree-zero homology germ map before this evaluation gives its homology class,
 with the shift isomorphism putting it in degree n. The defining germ-leg equation
 for the unique strict-henselization stalk restriction takes this class to its
-inverse-image restriction on the strict-local pullback. Q.first and Q.over fix
-both projections of that restriction and identify it with Q.legs.app i.
+inverse-image restriction on the strict-local pullback. Q.smallModelFirst and Q.smallModelOver fix
+both projections of that restriction and identify it with Q.smallModelLegs.app i.
 On the injective representative, the derived adjunction unit and counit are the
 classes of their termwise units and counits. Expand mateEquiv and the pullback
 comparison. The adjunction triangle identities cancel the intermediate unit and
@@ -77,10 +78,10 @@ theorem smallModel_strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K))) =
             (smallModel_strictLocalInjectiveSourceIso f s K n J q i).hom ≫
-              termwiseSectionsRestriction (Q.legs.app i)
+              termwiseSectionsRestriction (Q.smallModelLegs.app i)
                 ((strictLocalNeighbourhoodProjection f s).app i)
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
-                (Q.over i).symm
+                (Q.smallModelOver i).symm
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫

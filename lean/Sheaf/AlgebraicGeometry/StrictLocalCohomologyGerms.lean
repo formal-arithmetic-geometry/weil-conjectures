@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictLocalSectionCone
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.PointedEtaleSectionConeStalkIso
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk

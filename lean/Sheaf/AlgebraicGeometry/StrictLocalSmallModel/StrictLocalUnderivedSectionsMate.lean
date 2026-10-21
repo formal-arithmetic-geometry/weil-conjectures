@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalLocalizedHomGerm
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
@@ -425,8 +426,8 @@ maps across the neighbourhood section. The two adjunction triangle identities
 cancel the intermediate unit and counit. The result is evaluation of f_*F on
 the stage, identified by smallModel_sourceStageSectionsIso, followed by sectionsPullbackNat
 along the cone leg and the inverse composition comparison upperStarComp.
-Q.first identifies the map on the base with the pointed neighbourhood section;
-Q.over identifies the composite projection to X. These equations determine the
+Q.smallModelFirst identifies the map on the base with the pointed neighbourhood section;
+Q.smallModelOver identifies the composite projection to X. These equations determine the
 map into the scheme pullback, so both evaluations use the same map. All operations
 are functorial in F, giving the equality of natural transformations. No etaleness
 of the cone leg is needed. The zero sheaf and empty fibre use the same identities. -/
@@ -438,12 +439,13 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
       (smallModel_sourceStageSectionsIso f s i).hom ≫
         Functor.whiskerLeft
           (upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-          (sectionsPullbackNat (Q.legs.app i)) ≫
+          (sectionsPullbackNat (Q.smallModelLegs.app i)) ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight
-          (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)
+          (upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)
             ((strictLocalNeighbourhoodProjection f s).app i)
-            (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm).inv
+            (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
+            (Q.smallModelOver i).symm).inv
           (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
             AddCommGrpCat.{v + 1}) := by
   apply NatTrans.ext
@@ -516,7 +518,7 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
   simp only [← op_comp]
   change ((upperStarLowerStarAdjunction A p).unit.app F).hom.app (op U) ≫
     H.obj.map ψ.op ≫ tX.inv.app H = _
-  have hψ : ψ.left ≫ pullback.fst U.hom p = Q.legs.app i := by
+  have hψ : ψ.left ≫ pullback.fst U.hom p = Q.smallModelLegs.app i := by
     apply pullback.hom_ext
     · change e.inv.left ≫ (h.Etale.map σ).left ≫ (c₂.inv.app W).left ≫
         (c₁.hom.app W).left ≫ pullback.fst U.hom p ≫ pullback.fst W.hom f = _
@@ -535,7 +537,7 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
                 i).1.left.unop).inv := by
         exact pullback.lift_fst _ _ _
       simp only [Category.assoc]
-      rw [hσ, Q.first]
+      rw [hσ, Q.smallModelFirst]
       have hew := e.inv.w
       change e.inv.left ≫ pullback.snd (𝟙 _) h = 𝟙 _ at hew
       have hfst : pullback.fst (𝟙 _) h = pullback.snd (𝟙 _) h ≫ h := by
@@ -547,12 +549,13 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
       change ψ.left ≫ pullback.snd U.hom p = 𝟙 _ at hw
       change (ψ.left ≫ pullback.fst U.hom p) ≫ U.hom = _
       rw [Category.assoc, pullback.condition, ← Category.assoc, hw]
-      exact (Category.id_comp p).trans (Q.over i).symm
-  have hp := pointedSections_pullback p U (Q.legs.app i) (Q.over i).symm ψ hψ F
+      exact (Category.id_comp p).trans (Q.smallModelOver i).symm
+  have hp := pointedSections_pullback p U (Q.smallModelLegs.app i) (Q.smallModelOver i).symm ψ hψ F
   change _ = (etaleObjectSectionsIso U).hom.app F ≫
-    globalSectionsUpperStarMap A (Q.legs.app i) ((upperStar A U.hom).obj F) ≫
+    globalSectionsUpperStarMap A (Q.smallModelLegs.app i) ((upperStar A U.hom).obj F) ≫
       (Sheaf.Γ (pullback f g).smallEtaleTopology A).map
-        ((upperStarComp A (Q.legs.app i) U.hom p (Q.over i).symm).inv.app F) at hp
+        ((upperStarComp A (Q.smallModelLegs.app i) U.hom p
+          (Q.smallModelOver i).symm).inv.app F) at hp
   rw [hp]
   have hs : (etaleObjectSectionsIso U).hom.app F =
       (smallModel_sourceStageSectionsIso f s i).hom.app F := by

@@ -41,6 +41,13 @@
    "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "The geometry parameter is now the official canonical strictLocalization model. Use [lem-weil-pbc-strict-local-small-model-geometry-transport] to express its cone on the original small colimit model. Replace legs, limit and the two component equations by smallModelLegs, smallModelIsLimit, smallModelFirst and smallModelOver. All cohomology objects, structural morphisms, source and target maps remain those in the original statement; the rest of the existing proof is unchanged.",
+   "uses": [
+    "lem-weil-pbc-strict-local-small-model-geometry-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -49,10 +56,11 @@
   "def-weil-pbc-strict-local-mate-projection-data",
   "lem-weil-pbc-strict-local-cohomology-source-colimit",
   "def-weil-pbc-canonical-derived-cohomology-germs",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-local-small-model-geometry-transport"
  ],
  "proof_origin": {
-  "by": "agent M2, API adaptation of the existing proof",
+  "by": "T6 adapting the complete existing proof along the canonical colimit-model comparison",
   "document": "Stacks Project, etale-cohomology.tex",
   "place": "Tags 03Q9 (theorem-higher-direct-images), 03Q8 and 0GIT; presentation of neighbourhood restriction maps; restriction generalized to PointedEtaleSectionCone without changing its canonical maps."
  },
@@ -125,12 +133,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-651cf",
-  "group": "M2",
-  "result": "pass",
-  "landing": "20261021T022438-L-2847349",
+  "reviewer": "C-ba0a4",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261021T214902-L-1880019",
   "kind": "interface",
-  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
+  "note": "independent cc review: Retirement of the Sheaf StrictLocalNeighbourhoodGeometry twin (retire-items row 593, DIFFERENT) against the WeilConjectures twin, the new SmallModel.NeighbourhoodGeometry transport API, the 8 adapted unclaimed consumers, the change record and 11 node files. The 12 delivered modules plus the 18 downstream modules (all importers and the closure) compiled rc 0 in a sandbox; axioms clean."
  },
  "lean_audit": {}
 }

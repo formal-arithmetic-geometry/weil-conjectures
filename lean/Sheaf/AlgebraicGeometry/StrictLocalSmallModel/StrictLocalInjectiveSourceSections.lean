@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceTransition
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceRestriction
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionInjectives
@@ -103,10 +104,10 @@ theorem smallModel_exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                 |>.natTrans.app K))) =
             (e i).hom ≫
-              termwiseSectionsRestriction (Q.legs.app i)
+              termwiseSectionsRestriction (Q.smallModelLegs.app i)
                 ((strictLocalNeighbourhoodProjection f s).app i)
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
-                (Q.over i).symm
+                (Q.smallModelOver i).symm
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫

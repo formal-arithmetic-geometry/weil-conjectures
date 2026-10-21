@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalLocalizedHomGerm
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
+import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalDerivedMateSectionsFactorization
 
 /-! # The derived mate on the complex of neighbourhood sections
@@ -50,8 +52,8 @@ this composite. The strict-local exact-sections comparison and the derived Leray
 factorization identify its result with the sections unit on p^*M. At the underived
 level evaluate f_*M on the pointed neighbourhood, using smallModel_sourceStageSectionsIso.
 The unit, square comparison, and counit send a section to its restriction on the
-pullback. Q.first identifies the base component of this map with the specified
-strict-henselization leg; Q.over identifies the projection to X. These are the
+pullback. Q.smallModelFirst identifies the base component of this map with the specified
+strict-henselization leg; Q.smallModelOver identifies the projection to X. These are the
 components defining termwiseSectionsRestriction. Apply localization and H^n;
 naturality of the homology and exact-sections comparisons gives the displayed
 square. Finally transport by q. Only the right-derived unit on M is inverted;
@@ -86,9 +88,9 @@ theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
     (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
       ((NatIso.mapHomologicalComplex (smallModel_sourceStageSectionsIso f s i) (.up ℤ)).hom.app M) ≫
     (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫
-    termwiseSectionsRestriction (Q.legs.app i)
+    termwiseSectionsRestriction (Q.smallModelLegs.app i)
       ((strictLocalNeighbourhoodProjection f s).app i)
-      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm M n ≫
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.smallModelOver i).symm M n ≫
     representativeSectionsComparison
       (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by
   intro i
@@ -97,7 +99,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
   let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
   let a := (NatIso.mapHomologicalComplex (smallModel_sourceStageSectionsIso f s i)
     (.up ℤ)).hom.app M
-  let b := (NatTrans.mapHomologicalComplex (sectionsPullbackNat (Q.legs.app i))
+  let b := (NatTrans.mapHomologicalComplex (sectionsPullbackNat (Q.smallModelLegs.app i))
       (.up ℤ)).app
       (((upperStar AddCommGrpCat.{v + 1}
         ((strictLocalNeighbourhoodProjection f s).app i)).mapHomologicalComplex
@@ -105,9 +107,9 @@ theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
     ((Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
       AddCommGrpCat.{v + 1}).mapHomologicalComplex (.up ℤ)).map
         ((NatIso.mapHomologicalComplex
-          (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)
+          (upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)
             ((strictLocalNeighbourhoodProjection f s).app i)
-            (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm)
+            (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.smallModelOver i).symm)
           (.up ℤ)).inv.app M)
   have hb : (NatTrans.mapHomologicalComplex (smallModel_strictLocalUnderivedMateSections f s i)
       (.up ℤ)).app M = a ≫ b := by

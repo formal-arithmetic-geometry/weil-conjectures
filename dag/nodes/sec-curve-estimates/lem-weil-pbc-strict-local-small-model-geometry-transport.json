@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-strict-local-small-model-geometry-transport",
+ "kind": "statement",
+ "title": "Transport canonical neighbourhood geometry to the small colimit model",
+ "statement": "Let f:X→S be any scheme morphism and s:Spec Ω→S a geometric point, with Ω algebraically closed. The canonical comparison Spec(smallStrictHenselizationColimitIso(s).inv) induces an isomorphism from X×_S strictHenselizationScheme(s) to X×_S strictLocalization(s). For every canonical StrictLocalNeighbourhoodGeometry Q of [def-weil-pbc-strict-local-neighbourhood-geometry], precomposing its legs with this isomorphism produces a limiting cone on the identical small affine-neighbourhood pullback diagram. The transported legs have projection to X equal to pullback.fst and first component equal to pullback.snd followed by the original small-model strictHenselizationCone leg and Spec(ΓSpecIso.inv). No qcqs hypothesis is needed for this transport.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationExtension.lean",
+  "place": "Tag 03Q9, theorem-higher-direct-images, first proof paragraph (fibre products commute with the affine-neighbourhood limit); smallStrictHenselizationColimitIso and its inverse coprojection formula. Canonical-model compatibility proof by T6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the structural-map identity supplied by [lem-weil-pbc-strict-henselization-small-closed-fiber-comparison] to form pullback.map with identity on X and S and Spec of the inverse canonical colimit comparison on the strict-local scheme. All three component maps are isomorphisms, so Mathlib pullback.map_isIso gives the comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend the canonical geometry cone by the comparison hom. Cone.extendIso and IsLimit.ofIsoLimit give its limiting property. Compose the upstream over equation with the comparison; the pullback first projection equation proves the transported over equation.",
+   "uses": [
+    "def-weil-pbc-strict-local-neighbourhood-geometry"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Functor.Final.ι_colimitIso_inv to the representative functor followed by the affine pointed-neighbourhood inclusion. Applying Spec identifies Spec(c.inv) followed by each canonical cone leg with the original small-model cone leg. Compose the upstream first equation with the pullback comparison and use pullback.lift_snd_assoc and this leg identity. This proves the first-component equation exactly, including the specified Gamma-Spec inverse.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof_origin": {
+  "by": "T6 following document and canonical colimit comparison",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, affine-neighbourhood limit paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*mapIso|pullback.*congrHom",
+   "results": "Found Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-21",
+   "verdict": "Generic cone/pullback transport infrastructure; no project-specific comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a pullback limit cone along an isomorphism of the base change schemes",
+   "results": "Found AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Modules.pullbackCongr, CategoryTheory.Limits.pullback.map_isIso, CategoryTheory.Limits.pullbackConeOfRightIso, CategoryTheory.Limits.pullbackConeOfLeftIso, CategoryTheory.IsPullback.of_iso, CategoryTheory.Limits.pullbackConeOfRightIsoIsLimit, CategoryTheory.Limits.pullbackConeOfLeftIsoIsLimit",
+   "date": "2026-10-21",
+   "verdict": "Generic cone/pullback transport infrastructure; no project-specific comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a limit cone along an isomorphism of its vertex",
+   "results": "Found CategoryTheory.Limits.isLimitChangeEmptyCone, CategoryTheory.Limits.Cones.extendIso, CategoryTheory.Limits.BinaryFan.isLimitCompLeftIso, CategoryTheory.Limits.IsLimit.ofIsoLimit, CategoryTheory.Limits.IsLimit.ofIsoLimit_lift, CategoryTheory.Limits.IsLimit.extendIso, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso_hom, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso_hom_comp_assoc",
+   "date": "2026-10-21",
+   "verdict": "Generic cone/pullback transport infrastructure; no project-specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry",
+  "date": "2026-10-22",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "First proof paragraph: the strict henselization and its base change as limits of the affine pointed neighbourhoods; identify the two colimit models without altering the cohomology restriction maps.",
+   "via": [
+    "def-weil-pbc-strict-local-neighbourhood-geometry"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/NeighbourhoodGeometry.lean",
+  "declaration": "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry.smallModelFirst",
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictLocalSmallModelPullbackIso",
+   "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry.smallModelLegs",
+   "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry.smallModelIsLimit",
+   "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry.smallModelOver",
+   "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry.smallModelFirst"
+  ],
+  "statement": "theorem smallModelFirst {X S : Scheme.{v}} {f : X ⟶ S}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] {s : Spec (.of Ω) ⟶ S}\n    (Q : StrictLocalNeighbourhoodGeometry f s)\n    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :\n    Q.smallModelLegs.app i ≫ pullback.fst ((strictLocalNeighbourhoods s).obj i).hom f =\n      pullback.snd f (Scheme.strictHenselizationStructuralMap s) ≫\n        (Scheme.strictHenselizationCone s).π.app (op (op i)) ≫\n          Spec.map (Scheme.ΓSpecIso\n            ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj\n              i).1.left.unop).inv",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ba0a4",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261021T214902-L-1880019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ba0a4",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261021T214902-L-1880019",
+  "kind": "interface",
+  "note": "independent cc review: Retirement of the Sheaf StrictLocalNeighbourhoodGeometry twin (retire-items row 593, DIFFERENT) against the WeilConjectures twin, the new SmallModel.NeighbourhoodGeometry transport API, the 8 adapted unclaimed consumers, the change record and 11 node files. The 12 delivered modules plus the 18 downstream modules (all importers and the closure) compiled rc 0 in a sandbox; axioms clean."
+ }
+}

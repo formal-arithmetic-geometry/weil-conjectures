@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalInjectiveSourceComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalComplexSectionsMate
 
 /-! # The derived mate on a neighbourhood germ -/
@@ -41,11 +42,11 @@ the canonical map from these sections to derived sections is the stage factor
 representativeSectionsComparison in the formula. The canonical germ map first
 passes to homology and then takes the geometric germ of this same class.
 The germ-leg characterization of strictHenselizationStalkRestriction, together
-with Q.first, identifies this with restriction along the base cone leg.
+with Q.smallModelFirst, identifies this with restriction along the base cone leg.
 Expand the derived mate as its adjunction unit, square comparison, and counit.
 Naturality of the units and counits and the two triangle identities identify
 its composite with that germ restriction with the derived adjunction unit along
-Q.legs.app i. Q.over identifies the composite inverse image with the limit
+Q.smallModelLegs.app i. Q.smallModelOver identifies the composite inverse image with the limit
 projection. The resulting map to limit hypercohomology is therefore the derived
 unit, Leray, and inverse composition comparison displayed on the right.
 Exact inverse image commutes with homology; exact sections on the strict local
@@ -82,27 +83,27 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
                 ((strictLocalNeighbourhoodProjection f s).app i) q n ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map
         ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
-          (Q.legs.app i)).unit.app
+          (Q.smallModelLegs.app i)).unit.app
             ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app
         i)).mapDerivedCategory.obj
               K.obj)) ≫
       (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map
         ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-          AddCommGrpCat.{v + 1} (Q.legs.app i)).hom.app
-            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i)).mapDerivedCategory.obj
+          AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).hom.app
+            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).mapDerivedCategory.obj
               ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f
         s).app i)).mapDerivedCategory.obj
                 K.obj))) ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap
         s)) n).map
         ((Functor.mapDerivedCategoryNatIso
-          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)
+          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictHenselizationStructuralMap s))
-            (Q.over i).symm) ≪≫
+            (Q.smallModelOver i).symm) ≪≫
           Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) := by
+            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) := by
   intro i
   let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
     ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj

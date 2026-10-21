@@ -6,6 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.ExactGlobalSectionsLeray
+public import Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry
 public import Sheaf.AlgebraicGeometry.StrictHenselizationSchemeSectionsExact
 public import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
@@ -143,27 +144,27 @@ structure StrictLocalMateProjectionData
       (e i).hom ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map
         ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
-          (Q.legs.app i)).unit.app
+          (Q.smallModelLegs.app i)).unit.app
             ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app
         i)).mapDerivedCategory.obj
               K.obj)) ≫
       (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map
         ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
-          AddCommGrpCat.{v + 1} (Q.legs.app i)).hom.app
-            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i)).mapDerivedCategory.obj
+          AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).hom.app
+            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).mapDerivedCategory.obj
               ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f
         s).app i)).mapDerivedCategory.obj
                 K.obj))) ≫
       (Etale.cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap
         s)) n).map
         ((Functor.mapDerivedCategoryNatIso
-          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)
+          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictHenselizationStructuralMap s))
-            (Q.over i).symm) ≪≫
+            (Q.smallModelOver i).symm) ≪≫
           Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.legs.app i))).inv.app K.obj) ≫
+            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) ≫
       (strictLocalBaseChangeTargetIso f s K n).inv
 
 

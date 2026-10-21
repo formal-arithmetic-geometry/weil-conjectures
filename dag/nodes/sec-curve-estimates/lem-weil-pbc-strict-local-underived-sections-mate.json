@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-strict-local-underived-sections-mate",
  "kind": "statement",
  "title": "Underived exchange on pointed neighbourhood sections",
- "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, and Q the strict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry]. Write g:S_(s)→S, p:X×_S S_(s)→X, and f′:X×_S S_(s)→S_(s). For a pointed neighbourhood i, define b_i:f_* followed by sections on V_i → p^* followed by global sections to be restriction to S_(s) [lem-weil-pbc-strict-local-localized-hom-germ], followed by global sections of baseChangeMap [def-weil-pbc-underived-exchange], followed by lowerStarCompGlobalSectionsIso for f′. Then b_i equals sourceStageSectionsIso.hom [def-weil-pbc-strict-local-injective-source-comparison] followed by sectionsPullbackNat along Q.legs.app i and the inverse upperStarComp for p = Q.legs.app i ≫ t_i [lem-weil-pbc-injective-sections-pullback-comparison]. This is an equality of natural transformations on abelian etale sheaves on X, with the usual associators of functor composition.",
+ "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, and Q the strict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry]. Write g:S_(s)→S, p:X×_S S_(s)→X, and f′:X×_S S_(s)→S_(s). For a pointed neighbourhood i, define b_i:f_* followed by sections on V_i → p^* followed by global sections to be restriction to S_(s) [lem-weil-pbc-strict-local-localized-hom-germ], followed by global sections of baseChangeMap [def-weil-pbc-underived-exchange], followed by lowerStarCompGlobalSectionsIso for f′. Then b_i equals sourceStageSectionsIso.hom [def-weil-pbc-strict-local-injective-source-comparison] followed by sectionsPullbackNat along Q.smallModelLegs.app i and the inverse upperStarComp for p = Q.smallModelLegs.app i ≫ t_i [lem-weil-pbc-injective-sections-pullback-comparison]. This is an equality of natural transformations on abelian etale sheaves on X, with the usual associators of functor composition. Here smallModelLegs and its component equations are the canonical transports to the small coordinate-ring colimit model in [lem-weil-pbc-strict-local-small-model-geometry-transport].",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
@@ -12,7 +12,8 @@
   "def-weil-pbc-strict-local-neighbourhood-geometry",
   "def-weil-pbc-underived-exchange",
   "lem-weil-pbc-strict-local-localized-hom-germ",
-  "lem-weil-pbc-injective-sections-pullback-comparison"
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "lem-weil-pbc-strict-local-small-model-geometry-transport"
  ],
  "proof": [
   {
@@ -32,7 +33,7 @@
    "elementary": false
   },
   {
-   "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.first. The second projection is p by the site-arrow equation and Q.over. Pullback extensionality therefore identifies it with Q.legs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
+   "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.smallModelFirst. The second projection is p by the site-arrow equation and Q.smallModelOver. Pullback extensionality therefore identifies it with Q.smallModelLegs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
     "def-weil-pbc-strict-local-neighbourhood-geometry",
@@ -47,6 +48,13 @@
     "def-weil-pbc-small-strict-local-section-cone"
    ],
    "elementary": false
+  },
+  {
+   "text": "The geometry parameter is now the official canonical strictLocalization model. Use [lem-weil-pbc-strict-local-small-model-geometry-transport] to express its cone on the original small colimit model. Replace legs, limit and the two component equations by smallModelLegs, smallModelIsLimit, smallModelFirst and smallModelOver. All cohomology objects, structural morphisms, source and target maps remain those in the original statement; the rest of the existing proof is unchanged.",
+   "uses": [
+    "lem-weil-pbc-strict-local-small-model-geometry-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -58,10 +66,11 @@
   "def-weil-pbc-strict-local-neighbourhood-geometry",
   "lem-weil-pbc-injective-sections-pullback-comparison",
   "def-weil-pbc-pointed-etale-section-cone",
-  "def-weil-pbc-small-strict-local-section-cone"
+  "def-weil-pbc-small-strict-local-section-cone",
+  "lem-weil-pbc-strict-local-small-model-geometry-transport"
  ],
  "proof_origin": {
-  "by": "agent M2, API adaptation of the existing proof",
+  "by": "T6 adapting the complete existing proof along the canonical colimit-model comparison",
   "document": "Stacks Project",
   "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1; restriction generalized to PointedEtaleSectionCone without changing its canonical maps."
  },
@@ -119,7 +128,7 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.StrictLocalUnderivedSectionsMate",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/StrictLocalUnderivedSectionsMate.lean",
   "declaration": "AlgebraicGeometry.Etale.smallModel_strictLocalUnderivedMateSections_eq",
-  "statement": "theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (Q : StrictLocalNeighbourhoodGeometry f s) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) : smallModel_strictLocalUnderivedMateSections f s i = (smallModel_sourceStageSectionsIso f s i).hom ≫ Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i)) (sectionsPullbackNat (Q.legs.app i)) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm).inv (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology AddCommGrpCat.{v + 1})",
+  "statement": "theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (Q : StrictLocalNeighbourhoodGeometry f s) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) : smallModel_strictLocalUnderivedMateSections f s i = (smallModel_sourceStageSectionsIso f s i).hom ≫ Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i)) (sectionsPullbackNat (Q.smallModelLegs.app i)) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.smallModelOver i).symm).inv (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology AddCommGrpCat.{v + 1})",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
@@ -142,12 +151,92 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-651cf",
-  "group": "M2",
-  "result": "pass",
-  "landing": "20261021T022438-L-2847349",
+  "reviewer": "C-ba0a4",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261021T214902-L-1880019",
   "kind": "interface",
-  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
+  "note": "independent cc review: Retirement of the Sheaf StrictLocalNeighbourhoodGeometry twin (retire-items row 593, DIFFERENT) against the WeilConjectures twin, the new SmallModel.NeighbourhoodGeometry transport API, the 8 adapted unclaimed consumers, the change record and 11 node files. The 12 delivered modules plus the 18 downstream modules (all importers and the closure) compiled rc 0 in a sandbox; axioms clean."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "T6 stage 2",
+  "old_statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, and Q the strict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry]. Write g:S_(s)→S, p:X×_S S_(s)→X, and f′:X×_S S_(s)→S_(s). For a pointed neighbourhood i, define b_i:f_* followed by sections on V_i → p^* followed by global sections to be restriction to S_(s) [lem-weil-pbc-strict-local-localized-hom-germ], followed by global sections of baseChangeMap [def-weil-pbc-underived-exchange], followed by lowerStarCompGlobalSectionsIso for f′. Then b_i equals sourceStageSectionsIso.hom [def-weil-pbc-strict-local-injective-source-comparison] followed by sectionsPullbackNat along Q.legs.app i and the inverse upperStarComp for p = Q.legs.app i ≫ t_i [lem-weil-pbc-injective-sections-pullback-comparison]. This is an equality of natural transformations on abelian etale sheaves on X, with the usual associators of functor composition.",
+  "what": "Retirement replaces the duplicate geometry type by the official canonical-model type. Explicit references to its legs must name smallModelLegs, their canonical transport to the original small colimit model. This preserves the original scheme, map and equation rather than silently substituting the canonical-model cone vertex.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ",
+    "holds": true,
+    "note": "Canonical cone transport preserves the original small-model legs and their two defining projection equations; the consumer is adapted to the transported API in this delivery or refers only to the unchanged geometric statement."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+    "holds": true,
+    "note": "Canonical cone transport preserves the original small-model legs and their two defining projection equations; the consumer is adapted to the transported API in this delivery or refers only to the unchanged geometric statement."
+   },
+   {
+    "id": "lem-weil-pbc-strict-local-complex-sections-mate",
+    "holds": true,
+    "note": "Canonical cone transport preserves the original small-model legs and their two defining projection equations; the consumer is adapted to the transported API in this delivery or refers only to the unchanged geometric statement."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-strict-local-injective-source-comparison",
+   "def-weil-pbc-strict-local-neighbourhood-geometry",
+   "def-weil-pbc-underived-exchange",
+   "lem-weil-pbc-strict-local-localized-hom-germ",
+   "lem-weil-pbc-injective-sections-pullback-comparison"
+  ],
+  "old_proof": [
+   {
+    "text": "Reuse the complete proof in WeilConjectures.AlgebraicGeometry.StrictLocalUnderivedSectionsMate by public import, retaining the existing declarations under their original names. Its construction consistently uses Scheme.strictLocalization and Scheme.strictLocalizationToBase, matching the adopted restriction and neighbourhood geometry. Work componentwise on a sheaf F. Use unit_map_baseChangeMap_app, the pushforward-unit form of the mate, and naturality at the pointed neighbourhood section to replace the mate by the p-unit followed by the square pullback-pasting map. Terminal evaluation and lowerStarCompGlobalSectionsIso identify its terminal component with the pullback-site arrow psi into p^*V_i. These are proved by the private terminalEvaluation_map_eq_res_forAdjoint and lowerStarSections_eval helpers. The terminal-evaluation helper explicitly quantifies over any HasGlobalSectionsFunctor instance, so it applies to any chosen right adjoint, not only the terminal-object instance.",
+    "uses": [
+     "def-weil-pbc-underived-exchange",
+     "lem-weil-pbc-strict-local-localized-hom-germ"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The private restriction_unit and composition_unit helpers follow from adjunction uniqueness and upperStarComp_hom_app_unit_app. Combining them with terminal evaluation proves pointedSections_pullback: a section evaluated after the unit along an arbitrary map into an etale stage equals etaleObjectSectionsIso followed by globalSectionsUpperStarMap and the inverse upperStarComp. This is a complete proof, with no new postponed lemma.",
+    "uses": [
+     "lem-weil-pbc-etale-object-sections-base-change",
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.first. The second projection is p by the site-arrow equation and Q.over. Pullback extensionality therefore identifies it with Q.legs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
+    "uses": [
+     "def-weil-pbc-strict-local-injective-source-comparison",
+     "def-weil-pbc-strict-local-neighbourhood-geometry",
+     "lem-weil-pbc-injective-sections-pullback-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the general pointed-section-cone restriction on strictLocalSectionCone, the existing exact-sections instance for the small colimit model, and the general exact-global-sections Leray comparison wherever the former specialized restriction API was used. The cone restriction has the same section formulas, its germ predicate is definitionally identical, and uniqueness identifies the chosen stalk maps. All other argument steps and all scheme models stay as before.",
+    "uses": [
+     "def-weil-pbc-pointed-etale-section-cone",
+     "def-weil-pbc-small-strict-local-section-cone"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-underived-exchange",
+   "lem-weil-pbc-strict-local-localized-hom-germ",
+   "lem-weil-pbc-etale-object-sections-base-change",
+   "lem-weil-pbc-inverse-image-composition",
+   "def-weil-pbc-strict-local-injective-source-comparison",
+   "def-weil-pbc-strict-local-neighbourhood-geometry",
+   "lem-weil-pbc-injective-sections-pullback-comparison",
+   "def-weil-pbc-pointed-etale-section-cone",
+   "def-weil-pbc-small-strict-local-section-cone"
+  ]
+ }
 }
