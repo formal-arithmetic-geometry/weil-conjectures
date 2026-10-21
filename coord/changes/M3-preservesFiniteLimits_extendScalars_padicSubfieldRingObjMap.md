@@ -1,0 +1,646 @@
+# AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
+
+## Reason
+
+Restore a proof of the original proposition-valued instance against the current source.
+All signatures, attributes, priorities and public imports stay unchanged. The added helper
+constructions are private and proved. Proof irrelevance ensures that replacing this
+instance proof changes no consumer statement or computation and no target meaning.
+No consumer adaptation is required. The proof follows the existing DAG route and reuses
+its generic scalar-section and derived scalar-unit declarations.
+
+## Old
+
+```lean
+instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
+    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    PreservesFiniteLimits
+      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
+  sorry
+```
+
+## New
+
+```lean
+instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
+    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    PreservesFiniteLimits
+      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) := by
+  classical
+  let : HasColimitsOfSize.{u + 1, u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (Profinite.continuousMapRingObj.{u} E)) := IsGrothendieckAbelian.hasColimits _
+  let : HasCoproducts.{u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (Profinite.continuousMapRingObj.{u} E)) :=
+    fun J ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} _ (Discrete J)
+  obtain ⟨e⟩ := point_finiteFree.{u} ℓ h
+  let n := @Module.finrank E F inferInstance inferInstance
+    (Module.compHom F (IntermediateField.inclusion h).toRingHom)
+  let e' : (∐ fun _ : ULift.{u + 1} (Fin n) ↦
+      Mod.regular (Profinite.continuousMapRingObj.{u} E)) ≅
+      (Mod.comap (Profinite.padicSubfieldRingObjMap ℓ h)).obj
+        (Mod.regular (Profinite.continuousMapRingObj.{u} F)) :=
+    Sigma.reindex Equiv.ulift
+      (fun _ : Fin n ↦ Mod.regular (Profinite.continuousMapRingObj.{u} E)) ≪≫
+        (biproduct.isoCoproduct _).symm ≪≫ e.symm
+  obtain ⟨b, hb, hflat, hunit⟩ := scheme_basis_from_point _ _
+    (Profinite.padicSubfieldRingObjMap ℓ h) (ULift.{u + 1} (Fin n)) e'
+  exact hflat X
+```
+
+## Users
+
+The current downstream import audit conservatively includes all 582 transitive
+importers, including implicit instance consumers; no consumer is edited. A textual
+name-use audit is also checked. Holders below come from the current read-clone claims.
+
+| module | group holding it | effect |
+|---|---|---|
+| Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.AffineRHomQuasiCoherent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CoconeDerivedComparisonNormalForm | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CoefficientCoconeComparisonAgreement | S7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CoefficientMateDiagonalGraph | S7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexDerivedTransport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexDiagram | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexUnderivedCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoefficientPresentationIdentification | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedComponentInverseImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedComponentPullbackCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedConstructibleSerre | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedDualizableLocalPerfectModels | P2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedHenselianLisseRigidity | E3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedLisseEvaluationModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedLisseProEtaleLocality | R1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedLocalizationExactCohomology | Q1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHomMaps | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedProfiniteScalarCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedSupportDerivedLocalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedSupportProjectionFormula | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ConstructibleCoconeAmbientRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ConstructibleExactScalarTriangulation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ContractibleEvaluationAdjunction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ContractibleLisseEvaluation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EllAdicLocalizingBrownRepresentability | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EllAdicProperConstructibleCohomology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EllAdicProperHeartUniformBound | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.EtaleLocalShiftPartition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.FiniteClassicalLocalizing | B7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.FiniteConstantLocalModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.GenericComponentCoefficientComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.GenericFiberComponentsSection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.IntegralConstantCompletion | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.IntegralDerivedExtensionComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.IntegralModelsStacks | B9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport | N2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.KInjectiveDirectImageOpenWordModel | X5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.LfpTensorSingle | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent | M3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.LocallyFreeTensorSingle | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ModuleDirectImageOpenPasting | X6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.OpenModuleRestrictionIdentities | T2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ProEtale.CondensedRing.BoundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctionAlias | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficients | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ProperHeartBoundRational | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible | C5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.RetractedSupportLocalizationComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ScalarMatrixInverseImage | S8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.ScalarPresentationCokernel | T7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.SiteClosedCounitTransport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.SubfieldExtensionLocalPresentation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.AlgebraicGeometry.SupportedBottomGluing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.CategoryTheory.ThreeStepAdjunctionComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Compactification.NagataDensityNormalizationSheaves | N1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.FieldTheory.CondensedSubfieldBasis | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.NumberTheory.Padics.BaseCoefficientCondensedIdentification | J2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.NumberTheory.Padics.FiniteIntegralCondensedResolution | N2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.AdicHeartIntrinsicFibres | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.AdicLisseCohomologyCalculus | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.AdicPunctualWeights | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.AdmissibleScalarRealizationExact | Q2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.AffineLineInvariance | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryDualizingComposition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryOrdinaryImages | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryProEtaleProjectionComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryProEtaleQCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryQFoundation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryQMaps | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundaryQTransport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundedConstructibleBaseChange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundedConstructiblePushforwardRestriction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.BoundedExchangeAmbient | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CanonicalCoefficientPullbackReduction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CartesianCoefficientTwists | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CartesianCoefficients | N3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CartesianCoefficientsFiniteFree | E2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ClosedSupportBoundedContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ClosedSupportConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ClosedSupportedCupVanishing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefTowerCoaugmentation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientDerivedFunctorAPI | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientFiniteDescentHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientFiniteDescentLisse | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientFiniteDescentObjects | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientFiniteDescentSections | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeart | D6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartClosure | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartCommonStratification | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartFiltration | T8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartGeneration | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartLisseExtensionConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartLisseRestriction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartSheafConeWitness | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientHeartTriangulated | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientProjectionSquare | P4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CoefficientPushFilteredLegs | Q2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CohomologicalSmoothComposition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CohomologyTorInterval | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageCompactSupportExactness | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageConstituentNonexceptional | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageCurveWeilMiddleExtension | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageFourierTransform | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageWeilFourierTransform | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageWeilLinearDual | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CommonStageWeilShriek | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompactSupportCoefficientAction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompactSupportFiniteAction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompactSupportReductionTower | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompactSupportReductionTowerConstruction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompactSupportRepresentativeIndependence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompletedCondensedCoefficients | K1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompletedOperationTowerSubstitution | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompletedPullbackTensorComparison | S1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompletedTensorHomTranspose | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CompletionTriangleComparison | F7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedClosedCostalkDerivedContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedClosedCostalkInjectiveContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedCoefficientComparisons | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedCoefficientFamilyHomStage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedCoefficientHomStage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedCompactSupportProjection | Y5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedConstructibleExtensionTower | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedConstructibleOneStep | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedConstructibleOpenClosedImages | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedERealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFiniteCoefficientLocalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFiniteFamilyHomDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFiniteLocalSubmodules | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFiniteModelExtensions | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFiniteModelProofAPI | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFinitePresentationDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFinitePresentationMatrices | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFlatCoefficientCalculus | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedFpHomStage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLfpCoefficientModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLfpHomContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocalCoefficientAdjoints | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocalModelGluing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocalPieceCostalkModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocalPieceHomContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocallyClosedExtensionTower | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedLocallyClosedOneStep | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedOpenClosedRecollement | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedOpenExceptionalProjectionFormula | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedOverlapFactorTranspose | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedPointCoefficients | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedPointDiscreteConstantComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedPointSupertrace | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedQbarComparisons | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedQbarExchangeRightAdjunct | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedSheafExtContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelAssembly | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStep | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStepEmpty | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStepNonempty | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenPiece | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedTateRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.CondensedZlReduction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstantCoefficientScalarNormalization | X7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstantToContinuousScalarFlat | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstantWeilStructure | F2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleCokernelsExtensions | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleExceptionalCoefficientCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleExceptionalCoefficientConstruction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleHomComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleHomContinuityDevissage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleInternalHomContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleProjectionMates | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructiblePullbackTExact | X8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleRationalHomComparison | T2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ConstructibleTruncations | X9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousAlgClConstructibleTor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousAlgClLocalFree | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousCoefficientFreeRank | F3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousConstructibleIntegralDenominators | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousConstructibleIntegralGluing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousConstructibleIntegralImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousFiniteFreeKernelModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralComparisons | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralComplexTelescope | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralExchangeEquality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralExchangeSquare | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationColimitTransport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationCounit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationHomology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationLegs | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationMate | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralLocalizationModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralModuleTelescope | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralPullComposition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralPushComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralRegularTelescope | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousIntegralUnderivedPushComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLatticeIntersectionLocalModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLatticeIntersectionRationalModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLatticeIntersectionRationalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLatticeIntersectionSplitData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLatticeIntersectionSplitModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLisseCoefficientDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLissePullbackSystem | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousLisseStratumDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ContinuousRationalDerivedRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DegreeZeroDerivedMapGluing | F4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedAutomorphismHomEvaluation | W4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedDirectImageOpenCoherence | G6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedExchangeExactNormalization | R3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedGeometricStalk | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedNakayama | J7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedNakayamaFirstReduction | R4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedNakayamaResolution | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DerivedPullbackTensorIso | A2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DeterminantalWeightCoefficientField | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DiagonalTowerLimit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DiagonalTowerSystem | W5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DiagonalTowerTraceLimit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DirectImageChangeRingTranspose | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DirectImagesConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.DlLocallyConstructibleAdicHeart | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EffectiveComparisonRealizationModels | A3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleCompactSupportCoefficientChange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleFiniteCoefficientHomArrow | Y5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleHomFiniteTorAmplitude | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleProEtaleCoefficientTransport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleRhoMonoidalMate | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.EtaleSitePerfectConstructibleHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ExplicitExceptionalPreservation | G1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FieldShriekLowerBound | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FieldStageOrdinaryRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FieldTorAmplitude | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FieldTwistInverse | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FieldWeilShriekShiftData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FilteredCoefficientTensorBounds | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientDescentTwoColimit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientModelComparison | J5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientReductionFlatModel | Y6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientSiteChainTensor | A4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientSiteHomArrow | Y7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteCoefficientSiteScalarArrow | Y8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteConstantModelResolution | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteConstructibleHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientEncoding | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientPullbackIso | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientRestriction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientRestrictionCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteCoefficientSheafComposition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteConstructibleEncoding | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteConstructibleLocalPiece | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteConstructibleModel | J3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteEncodedPresentation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteEncodingCompactification | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteEncodingConstructibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteEncodingNaturality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteEncodingTensorTor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteOrdinaryEncoding | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteRealizationFunctor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteDiscreteRestrictionEncoding | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteEtaleAdicCohomology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteEtaleLocallyFreeModels | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteFieldInternalHomFiniteness | S2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteForwardProductSymmetry | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteModelStratumFiltration | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteProjectionActionLaws | G2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteProperBaseChange | S3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteProperProductTranspose | N4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteRingSectionDeformation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothAdjunctionData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothCoefficientArrows | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothGammaNormalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothIntrinsicLevelProperties | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothLevelOfOrientation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothPurityMaps | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothQuotientCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothSiteRealizations | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteSmoothTwoLevelReduction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FiniteStageVerdierBiduality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FormalClosedSupport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FormalClosedSupportDerived | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FormalClosedSupportII | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FormalClosedSupportIILimits | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FormalClosedSupportSheaves | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FourierTraceFormula | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FourierTraceFunctions | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FrobeniusCoefficientReductionMap | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FrobeniusCoefficientTwistsCanonical | B3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FrobeniusCompactSupportExchange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FrobeniusGeometricExchange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.FrobeniusSquareExchange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IdentityOpenDerivedAdjunctionNormalization | W6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IdentityOpenDerivedRestriction | S4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCoefficientExtComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCoherenceTower | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCohomologicalAdicCriterion | J4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCompactSupportCoefficientComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCompactSupportCoefficientData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCompactSupportPrescribedReductions | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralComparisonRealizationModels | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralComparisonSequenceSystems | K5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCompositionCounitImages | J3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstantModelHeart | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstantModelHeartClosure | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleExt | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleHeart | T9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleInternalHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleKernels | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleNakayama | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleReductionFibres | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleSequentialHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleSerre | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralConstructibleSheafHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralCriterionReductions | T3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralDerivedCoefficientData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralExtensionByZero | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralHeartDualizable | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralHeartLocalDualityDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralHeartLocalModel | W7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralHeartRealizationExact | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralHeartResidueDual | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralInverseImageComparisonComposition | G3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralLfpEventualFreeImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralLfpFiniteQuotientCharts | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralLfpHomContinuity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralLfpLocalTorsionCharts | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralLfpLocallyFreeResolution | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralMatrixKernelLocallyFree | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralModelSurjectiveClosedReflection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralModels | U1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralModelsOperations | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralOpenExtensionReduction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPointTransportTowerPowers | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPointTransportTowerRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralProperReductionBound | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralProperReductionModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPullbackComparisonRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPullbackComposition | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPullbackReductionCounit | B4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPullbackResolutionMatching | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralPullbackSystemComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralRationalQbarCompactSupport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralReductionConservative | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralReductionConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralResidueClassTriangleClosure | W9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralResidueExchange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralResidueExchangeAlgebra | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralStratumExtBound | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralStratumHomFormula | K6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralSystemPullbackLiftAssociativity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralSystemReductionFullyFaithful | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTensorProduct | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTensorPullback | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTensorShriek | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTowerInverseImageUnit | G4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTowerLimitComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTwistBaseChange | J4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTwistDerivedScalar | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTwistDerivedScalarCanonical | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralTwistScalarCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IntegralWindowCoproductComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.InternalHomDualConstructibleModels | P1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.InternalHomDualTorAmplitude | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IsomorphismComparisonScalarExtension | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.IsomorphismDerivedPullback | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.KummerAdditivity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LisseDenseOpenRecovery | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LisseEConstructibleIntegralLattice | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LisseExtensionInertia | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LisseFiniteCoefficientModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LisseFiniteHomLift | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalFrobeniusTrace | Z5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalFrobeniusWeilMorphismNaturality | H1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalModelTorBoundDescent | P3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalWeilModelTraceIndependence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalizedTensorBraidingNaturality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocalizingClosureCtfEqualsBc | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.LocallyConstantPerfectComplex | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.MixedReductionUnit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ModuleDerivedCompositorCoherence | U3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ModuleRingedToposDerivedComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.NoetherianEtaleSectionSpecialization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.NormalProEtaleMonodromy | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.NormalizedRationalEvaluationNaturality | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.OpenExtensionConstantModelConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.OpenFiltrationSuccessor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PadicIntegersInvertEll | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PointExactDerivedModel | H2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PointTransformationCoefficientDescent | C1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PrincipalReductionConeCalculus | M5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProEtaleInternalHomFiniteTorConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProEtalePerfectHomTorAmplitude | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProEtaleSectionModuleFunctors | V1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProEtaleTateTwists | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProEtaleTateTwistsOfUniverses | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProjectionFormulaCoefficientCoherence | H3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProjectionSectionNormalization | U6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProperHeartBoundLattice | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProperHeartBoundReduction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProperHeartBoundTorsion | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ProperUnboundedWindowBounded | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PullbackIdentitiesScalarExtension | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PunctualSpectrumExactFibre | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurIntegralTwistLineInverseImage | M2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus | P5 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityConventions | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityCoprojection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityDiagonalOrientationCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityExteriorProductFrame | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityFiniteOpenIntervalDescent | H4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityGeneralAdmissibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityGysinStructure | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PuritySourceTransports | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.PurityTwistCancellation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QbarCohomologyFiniteLevelComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QbarCurveOrdinaryImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QbarTwistCommonStage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QcqsCompactSupportRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QlbarTailModuleColimit | Q3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.QuotientSystemMixedCoherence | C2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RationalClosedSupportConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RationalModuleRealizationFunctor | C3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RationalOpenDirectImageConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RationalRealizationPullbackComparison | C4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RealizationCompletedPull | P6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RealizationScalarFunctor | P7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RelativeSupportBottomDescent | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.RelativeSupportCoordinateModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ResidueLisseProjectiveModels | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ScalarExtensionTensorUnit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.ScalarExtensionTowerCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionDerivedPushpullNormalization | V3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionDerivedRealization | W2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionDerivedTensorData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionDerivedTensorNormalization | W3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionModuleOperationsData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SectionOrdinaryOplaxNormalization | X2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SemilinearCompactSupportCoefficientTransport | P8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfCommonStageWeilCohomology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfIntegralCompactSupportConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfIntegralPullbackLinearAdjunction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfOpenReductionAdjunctionTransport | Q6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfRationalDirectImageAdjunction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SfRationalDirectImageCoefficientCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SiteComparisonEdgeSection | K1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SixFunctorDatum | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SixFunctorDualNotation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SixFunctorOperationDatum | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SixFunctorOperationDatumStages | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SmoothPurityNormalizedEquivalence | Z7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SmoothPurityReductionTowerNormalized | K2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SmoothPurityTowerReconstruction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SpecifiedPullbackComparisonAlpha | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.StratifiedLattice | U8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.StratifiedLatticeRank | D2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SupportedExteriorClasses | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.SystemOperationExchangeRealization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TAdmissibleCoefficientModels | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TAdmissibleDualizableTruncations | P4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TateTwistLisseLine | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TateTwistLocallyFree | V7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TopologicalStratifiedLisseLattices | Z6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TraceBaseChangeFirst | V9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TwistPreservesFiniteness | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.TwoTermReductionCohomology | Q7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.UniformConstructibleExtIntegral | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.UniformConstructibleExtTorsion | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.VectorBundlePurity | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilCompactSupportCohomology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilComplexTraceFunction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilFourierPlancherel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilIndSheafCategory | D3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilMixedUpperBounds | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Paper.WeilShriekShiftCompatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SecSmoothPurity.AdicScalarTraceCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction | Y2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SecSmoothPurity.ReductionDirectImageComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SecSmoothPurity.ScalarExtensionFunctor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.AdmissibleDirectImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.BoundaryDualityDischarge | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.BrownHypothesesAmbient | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.BrownHypothesesSmall | A6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ClosedImmersionTensorProjection | E4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ConstructibleTensorCompletion | Z7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FieldTensor | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FiniteCoverCTFLocality | J1 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FiniteDualitySiteComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FiniteOpenDirectImageCtf | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FrobeniusPointTransport | Z9 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.FrobeniusPointTransportNatural | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntTensorProjection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralExpressionOccurrences | K3 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralExtHomContinuity | A7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralModelsGenerators | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralOpenReductionComparison | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralOperationShiftData | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralSystemCanonicalBridge | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralSystemExpressionDomain | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralSystemOperations | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.IntegralTensorInverseImage | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenFactorCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenFactorPullModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenFactorTensorModel | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenImmersionTensorProjection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenScalarConjugateNormalization | Q8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.OpenSemilinearTensorModel | R6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.DerivedCompletion | A8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.IntegralCompletionPresentation | R7 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage | W8 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.IntegralPresentationEncoding | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.SixFunctors.ScalarSixPullback | B6 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Targets.PoincareTateBoundedConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Topology.ProfiniteCondensedRing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Topology.ProfiniteSectionsFiniteQuotient | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.Topology.TopologicalModuleCondensation | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.TraceFormula.CompactSupportSystemEvaluationDiagram | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.TraceFormula.IntegralComparisonCounitCharacterization | K4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.TraceFormula.PointTransportComposition | D4 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit | A2 | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| Sheaf.WeilSheaf.AdicFiniteCoefficientBound | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| TargetsCheck | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CompactSupport | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriekDefs | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | M3 | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.WeilObject.BoundedConstructible.Defs | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.WeilObject.BoundedConstructible.Homology | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.WeilObject.BoundedConstructible.TensorHom | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+| WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar | unclaimed | Identical signature and public imports; proof only, no adaptation. |
+
+## Status
+
+landed 20261021T163806-L-1090508 2026-10-21 (merge of deliver/M3/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility)
