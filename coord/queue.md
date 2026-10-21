@@ -1,6 +1,6 @@
 # Work queue
 
-477 items; claim with `tools/claim.py next <group> [--stage N]`.
+478 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (13 clusters, 1538 modules)
 
@@ -22,9 +22,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 157, stage 3 22 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 154, stage 3 25 items.
 
-## Stage 1: nodes to split (22)
+## Stage 1: nodes to split (23)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -34,10 +34,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-asd-affine-roots-representability` | 2005 | none |
 | `lem-sfb-qcqs-proper-constructible-closed-base-change` | 2005 | none |
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
-| `def-pur-support-triangle` | 2009 | none |
 | `lem-sfb-grothendieck-sheafification` | 3003 | none |
-| `lem-sfb-continuous-algcl-open-scalar-comparison` | 4008 | none |
+| `lem-sfb-continuous-algcl-proper-scalar-comparison` | 4009 | none |
+| `lem-sfb-continuous-algcl-tame-boundary-comparison` | 4009 | none |
 | `lem-sfb-normal-continuous-algcl-monodromy` | 4009 | none |
+| `lem-sfb-tame-pair-proper-generators` | 4009 | none |
 | `det-def-sfb-filtered-two-colimit-characterization` | - | none |
 | `det-def-sfb-filtered-two-colimit-model` | - | none |
 | `lem-sfb-bounded-bifunctor-devissage` | - | none |
@@ -51,7 +52,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-dl-a1-galois-prime-residue-lifting` | - | none |
 | `lem-dl-a1-integral-normal-residue-etale-splitting` | - | none |
 
-## Stage 2: nodes to state (60)
+## Stage 2: nodes to state (54)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -60,8 +61,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-common-stage-truncations` | 1 | state | 2 |
 | `lem-weil-point-finite-free-sections-tensor` | 1 | state | 2 |
 | `sk-thm-picard-duality` | 1 | state | 2 |
-| `lem-pur-strict-quotient-diagonal-normalization` | 1 | state | 1 |
-| `lem-weil-pbc-augmented-diagram-projection-mate` | 1 | state | 1 |
 | `lem-a1-completed-perfect-scalar-pullback` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-a1-roos-intrinsic-unit-comparison` | 1 | state | 0 |
@@ -71,17 +70,16 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-dl-a1-finite-group-inertia-invariants-etale` | 1 | state | 0 |
 | `lem-fix-proper-etale-origin-scalar-isomorphism` | 1 | state | 0 |
 | `lem-pc-curve-local-scalar-principal-parts` | 1 | state | 0 |
-| `lem-pc-finite-dimensional-trace-exact` | 1 | state | 0 |
 | `lem-pur-affine-coordinate-support-stalk-continuity` | 1 | state | 0 |
 | `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-pur-etale-kflat-support-comparison` | 1 | state | 0 |
 | `lem-pur-etale-sum-right-adjoint-tensor` | 1 | state | 0 |
 | `lem-pur-exact-pullback-signed-comparison` | 1 | state | 0 |
 | `lem-pur-finite-product-derived-tensor-calculus` | 1 | state | 0 |
-| `lem-pur-finite-product-field-coefficient-descent` | 1 | state | 0 |
 | `lem-pur-finite-type-coordinate-support-orientation` | 1 | state | 0 |
 | `lem-pur-normalized-operation-system-models` | 1 | state | 0 |
 | `lem-pur-origin-class-projective-comparison` | 1 | state | 0 |
+| `lem-pur-perfect-quotient-exchange-normalization` | 1 | state | 0 |
 | `lem-pur-quotient-diagram-projection-evaluation` | 1 | state | 0 |
 | `lem-pur-quotient-expression-kflat-normalization` | 1 | state | 0 |
 | `lem-pur-sequence-adjoint-resolution-shifts` | 1 | state | 0 |
@@ -95,14 +93,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-completed-pullback-mate-factorization` | 1 | state | 0 |
 | `lem-sf-derived-completed-tensor-bilinearity` | 1 | state | 0 |
 | `lem-sf-open-quotient-koszul-completeness` | 1 | state | 0 |
-| `lem-sf-perfect-tensor-roos-completion` | 1 | state | 0 |
 | `lem-sf-point-ringed-evaluation-model` | 1 | state | 0 |
 | `lem-sf-strict-dvr-reduction-triangles` | 1 | state | 0 |
 | `lem-sf-tensor-comparison-localization-descent` | 1 | state | 0 |
 | `lem-sfb-continuous-frame-sheaf-comparison` | 1 | state | 0 |
 | `lem-sfb-ordinary-proetale-direct-image-plus-comparison` | 1 | state | 0 |
 | `lem-sfb-reduction-single-cohomology-normalization` | 1 | state | 0 |
-| `lem-sfb-scalar-hom-chain-coefficient-coherence` | 1 | state | 0 |
 | `lem-sp-normalized-error-tower-vanishing` | 1 | state | 0 |
 | `lem-sp-power-torsion-sheaf-limit-complete` | 1 | state | 0 |
 | `lem-sp-semilinear-kflat-tower-model` | 1 | state | 0 |
@@ -114,11 +110,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-pbc-raw-restricted-class-normalization` | 1 | state | 0 |
 | `lem-weil-ramified-pullback-tower-identification` | 1 | state | 0 |
 | `lem-zl-dualizable-categorical-trace-conjugacy` | 1 | state | 0 |
-| `sk-thm-picard-rr` | 1 | state | 0 |
 
-Not open yet: 355 nodes that below a finished node, not needed, 6 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 355 nodes that below a finished node, not needed, 8 nodes that wait for stage 1 (statement downstream not grounded), 122 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (375)
+## Stage 3: modules to prove (381)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -158,8 +153,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AdicSmoothBaseChange` | - | 1 | proof | 2 |
 | `Sheaf.Paper.AmbTateRootProjectionReduction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.AmbientCompleteCoefficientCategories` | - | 11 | proof | 2 |
+| `Sheaf.Paper.AugmentedDiagramProjectionMate` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CompleteCompactSupportProetale` | - | 13 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.CompletedDirectImageLimits` | - | 2 | proof | 2 |
 | `Sheaf.Paper.CompletedOpenExchangeTransport` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | - | 14 | proof | 2 |
 | `Sheaf.Paper.DerivedInternalHomFilteredColimit` | - | 2 | proof | 2 |
@@ -299,6 +296,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SectionExceptionalFibreCoherence` | - | 5 | proof | 3 |
 | `Sheaf.Paper.SectionReesBaseChangeEtale` | - | 6 | proof | 3 |
 | `Sheaf.Paper.SequenceSiteCompletionProjection` | - | 1 | proof | 3 |
+| `Sheaf.Paper.SfCbcDirectImageReductionUnit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ShiftedTensorMorphismCalculus` | - | 4 | proof | 3 |
 | `Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses` | - | 4 | proof | 3 |
 | `Sheaf.Paper.StrictPerfectRingedPullbackModel` | - | 3 | proof | 3 |
@@ -314,6 +312,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints` | - | 4 | proof | 4 |
 | `Sheaf.Algebra.Homology.FiniteFreeMonoCokernelKFlat` | - | 1 | proof | 4 |
+| `Sheaf.Algebra.Homology.FlatScalarEvaluationModel` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.FlatScalarRestrictionKFlat` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingIsomorphismTensorTransport` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedHomCompositionModel` | - | 3 | proof | 4 |
@@ -322,6 +321,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.RingedSiteBoundedDualComponents` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedTensorComplexConstraints` | - | 1 | proof | 4 |
+| `Sheaf.Algebra.Homology.ScalarHomChainCoefficientCoherence` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.ScalarHomChainEvaluation` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.SiteOneSidedTensorNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.SliceScalarHomChainAdjunction` | - | 1 | proof | 4 |
@@ -400,6 +400,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 4 |
 | `Sheaf.Paper.StratumCompletionUnitRestriction` | - | 11 | proof | 4 |
 | `Sheaf.Paper.StrictHomNumeratorTranspose` | - | 1 | proof | 4 |
+| `Sheaf.Paper.StrictQuotientDiagonalNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SupportedHomCocycleNormalization` | - | 1 | proof | 4 |
 | `Sheaf.ProperBaseChange.SingletonSiteModuleComparison` | - | 1 | proof | 4 |
@@ -507,7 +508,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `lem-zl-constant-geometric-stalk-unit` |
-| `Sheaf.Algebra.Homology.FlatScalarEvaluationModel` | - | 1 | `lem-sfb-scalar-hom-chain-coefficient-coherence` |
+| `Sheaf.Algebra.Homology.PerfectTensorRoosCompletion` | - | 15 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | `lem-weil-pbc-raw-restricted-class-normalization` |
 | `Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison` | - | 2 | `lem-sf-locally-closed-relative-transpose-normalization` |
 | `Sheaf.AlgebraicGeometry.SupportComparisonBoundary` | - | 1 | `lem-pur-support-comparison-section-model` |
@@ -515,17 +516,17 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.ClopenRoosIntegralDescent` | - | 12 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | `lem-coef-enriched-sequence-projection-formula` |
 | `Sheaf.Paper.CompleteProetaleStrictTowerRealization` | - | 9 | `lem-cbc-completed-open-strict-mate-identification` |
-| `Sheaf.Paper.CompletedDirectImageLimits` | - | 2 | `lem-weil-pbc-augmented-diagram-projection-mate` |
-| `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | `lem-pur-strict-quotient-diagonal-normalization` |
+| `Sheaf.Paper.CompletedProjectionCoherence` | - | 1 | `lem-pur-perfect-quotient-exchange-normalization` |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | `lem-weil-pbc-pulled-reduction-normalization-comparison` |
+| `Sheaf.Paper.ContinuousAlgClStratifiedFiniteModels` | - | 1 | `lem-sfb-normal-continuous-algcl-monodromy` |
 | `Sheaf.Paper.FiniteClopenConstructibilityBounds` | - | 1 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.FiniteClopenDerivedDecomposition` | - | 16 | `lem-pur-finite-product-derived-tensor-calculus` |
 | `Sheaf.Paper.IntegralPullbackCompletedComparison` | - | 1 | `lem-a1-roos-intrinsic-unit-comparison` |
+| `Sheaf.Paper.NormalizedScalarComparisonRealization` | - | 1 | `lem-pur-completed-primitive-counit-comparison` |
 | `Sheaf.Paper.PbcScalarExtension` | - | 16 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.Paper.PointFibreDerivedTensor` | - | 1 | `lem-sf-point-ringed-evaluation-model` |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-finite-free-sections-tensor` |
 | `Sheaf.Paper.PurReductionLimitShiftAdjunction` | - | 1 | `lem-pur-sequence-adjoint-resolution-shifts` |
-| `Sheaf.Paper.SfCbcDirectImageReductionUnit` | - | 1 | `lem-weil-pbc-augmented-diagram-projection-mate` |
 | `Sheaf.Paper.SfCbcExtensionZeroCompletion` | - | 21 | `lem-sf-cbc-localized-strict-tensor-descent` |
 | `Sheaf.Paper.SfImmersionCompletedPullbackComparison` | - | 19 | `lem-sf-completed-pullback-mate-factorization` |
 | `Sheaf.SixFunctors.AdmissibleDirectImage` | - | 1 | `lem-sfb-continuous-algcl-open-finiteness` |
