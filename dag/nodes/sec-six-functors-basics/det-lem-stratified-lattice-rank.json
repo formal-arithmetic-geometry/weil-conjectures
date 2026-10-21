@@ -26,11 +26,12 @@
  ],
  "proof": [
   {
-   "text": "Choose a pro-etale trivializing cover $\\{U_i\\to X\\}$ with $L|_{U_i}\\simeq E_{U_i}^{\\oplus n_i}$, using [def-sfb-lisse-coefficient-module]. It is an fpqc cover by [sk-def-pe-site]. On $W=U_i\\times_XU_j$, [sk-prop-sfb-cartesian-coefficients](1) identifies the two restrictions with $E_W^{\\oplus n_i}$ and $E_W^{\\oplus n_j}$. Apply [lem-sfb-continuous-coefficient-free-rank]: if $W$ is nonempty, $n_i=n_j$. Thus unequal labels have empty overlaps. This includes rank zero and requires no finite index set.",
+   "text": "Choose the pro-etale finite-free trivializing cover from [def-sfb-lisse-coefficient-module], with ranks n_i. The cover is fpqc by [sk-def-pe-site]. The actual condensed pullback functor preserves finite biproducts and the regular module: its mapMod part preserves these, and its scalar extension is restriction along the inverse coefficient comparison isomorphism [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Its composition isomorphism therefore pulls any rank-n trivialization to a rank-n trivialization on every further scheme. On a nonempty overlap compose the two resulting trivializations and apply [lem-sfb-continuous-coefficient-free-rank], obtaining equal ranks, including rank zero.",
    "uses": [
     "def-sfb-lisse-coefficient-module",
     "sk-def-pe-site",
-    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
     "lem-sfb-continuous-coefficient-free-rank"
    ],
    "elementary": false,
@@ -40,11 +41,10 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-fpqc-labelled-clopen-descent] with $A=\\mathbf N$ and $\\rho_i\\equiv n_i$ to obtain a clopen partition $(O_r)$, with preimage in $U_i$ whole if $n_i=r$ and empty otherwise. For any further trivializing object $V\\to X$ of rank $s$, the same overlap comparison of step 1 gives $n_i=s$ on every nonempty $U_i\\times_XV$. The test-morphism clause of that descent lemma, with $\\sigma\\equiv s$, gives preimage of $O_r$ in $V$ whole if $s=r$ and empty otherwise. Apply this to every constant-rank neighborhood in any trivializing covering. The unique piece containing a point is therefore its rank at every preimage in every trivialization. Hence $X_r=O_r$ with exactly the characterization in the statement.",
+   "text": "Apply [lem-sfb-fpqc-labelled-clopen-descent] with labels N and constant functions n_i to obtain closed opens R_r forming a disjoint covering. For any additional trivializing object V of rank a, the overlap comparison in step 1 supplies the hypothesis of the test-morphism clause of that same descent lemma. Thus every preimage v satisfies V.hom(v) in R_r iff a=r. Conversely every x lifts to a member of the original cover, yielding the existential characterization of membership in R_r. This proves both rank characterizations without choosing points on empty overlaps.",
    "uses": [
     "lem-sfb-fpqc-labelled-clopen-descent",
-    "lem-sfb-continuous-coefficient-free-rank",
-    "sk-prop-sfb-cartesian-coefficients"
+    "lem-sfb-continuous-coefficient-free-rank"
    ],
    "elementary": false,
    "source": {
@@ -53,12 +53,10 @@
    }
   },
   {
-   "text": "Give $X_r$ its open subscheme structure. By [lem-galois-fpqc-covering-base-change] the restrictions $U_i\\times_XX_r\\to X_r$ form an fpqc cover, and [sk-lem-pe-weakly-etale-stability] and [sk-def-pe-site] make it a pro-etale cover. A nonempty member has $n_i=r$ by step 2. Pulling back its trivialization via [sk-prop-sfb-cartesian-coefficients](1) gives the rank-$r$ free module; an empty member has the unique zero module and the same assertion. Thus $L|_{X_r}$ has constant rank $r$. By [lem-weil-pbc-scheme-coproduct-family] the coproduct of these schemes exists. Its canonical map to $X$ is an isomorphism: on the disjoint open pieces it is the identity, so these inverse identities agree on empty intersections and glue.",
+   "text": "Base change the pro-etale cover to the open subscheme R_r using [lem-galois-fpqc-covering-base-change, sk-def-pe-site]. The rank characterization shows each member labelled n_i different from r is empty. Refine each member with n_i=r by its singleton identity cover, and every other member by the empty cover of its empty scheme. Composition of pro-etale covers gives a cover whose members all carry rank-r trivializations by step 1. This avoids any need to compare different free ranks on an empty scheme. By [lem-weil-pbc-scheme-coproduct-family] and Mathlib nonempty_isColimit_cofanMk_of, the pairwise disjoint open immersions R_r into X give a coproduct cocone, so its Sigma.desc is an isomorphism.",
    "uses": [
     "lem-galois-fpqc-covering-base-change",
-    "sk-lem-pe-weakly-etale-stability",
     "sk-def-pe-site",
-    "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
    "elementary": false,
@@ -68,7 +66,7 @@
    }
   },
   {
-   "text": "If $X$ is quasi-compact, its open cover $\\{X_r\\}$ has a finite subcover by [def-weil-pbc-quasi-compact-scheme]. Disjointness forces every piece outside that finite subcover to be empty. If $X$ is empty, all pieces are empty. No finiteness of the original trivializing cover was used.",
+   "text": "For a quasi-compact X [def-weil-pbc-quasi-compact-scheme], apply the finite-subcover property directly to the covering of X by the rank opens. Any nonempty R_r meets one of the finitely many selected pieces R_a; disjointness forces r=a. Hence the set of nonempty rank opens is contained in a finite set and is finite. The argument also applies to empty X and uses no finiteness of the original trivializing cover.",
    "uses": [
     "def-weil-pbc-quasi-compact-scheme"
    ],
@@ -82,18 +80,18 @@
  "proof_deps": [
   "def-sfb-lisse-coefficient-module",
   "sk-def-pe-site",
-  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
   "lem-sfb-continuous-coefficient-free-rank",
   "lem-sfb-fpqc-labelled-clopen-descent",
   "lem-galois-fpqc-covering-base-change",
-  "sk-lem-pe-weakly-etale-stability",
   "lem-weil-pbc-scheme-coproduct-family",
   "def-weil-pbc-quasi-compact-scheme"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-  "place": "First paragraph, using the separately stated coefficient-rank comparison and fpqc labelled-clopen descent; final quasi-compactness paragraph"
+  "place": "First paragraph and final quasi-compactness paragraph, assembled using the declared invariant-rank and labelled-clopen-descent lemmas; D2 formalizes pullback of free modules and removes empty components by cover refinement."
  },
  "mathlib_searches": [
   {
@@ -180,10 +178,6 @@
   ]
  },
  "tool_uses": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-condensed-field-continuous-realization",
-  "lem-weil-pbc-etale-open-fpqc-descent",
-  "sk-lem-pe-weakly-etale-stability",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
  "reviewed": {
@@ -198,12 +192,12 @@
   "module": "Sheaf.Paper.StratifiedLatticeRank",
   "declaration": "AlgebraicGeometry.ProEtale.exists_clopen_rank_decomposition_of_isLisse",
   "file": "lean/Sheaf/Paper/StratifiedLatticeRank.lean",
-  "statement": "theorem exists_clopen_rank_decomposition_of_isLisse (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) X)) (hL : IsLisseCoefficientModule (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) L) : ∃ R : ℕ → X.Opens, (∀ r : ℕ, IsClosed (R r : Set X)) ∧ (∀ (x : X) (r : ℕ), x ∈ R r ↔ ∃ (U : X.ProEt) (v : U.left), U.hom v = x ∧ Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) r)) ∧ (∀ (U : X.ProEt) (n : ℕ), Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) n) → ∀ (v : U.left) (r : ℕ), U.hom v ∈ R r ↔ n = r) ∧ (CompactSpace X → {r : ℕ | (R r : Set X).Nonempty}.Finite) ∧ IsIso (Sigma.desc (fun r : ℕ ↦ (R r).ι)) ∧ ∀ r : ℕ, ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (R r).toScheme, ∀ i : C.I₀, Nonempty ((CondensedRing.upperStar (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.f i ≫ (R r).ι)).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.X i)) r)",
+  "statement": "theorem exists_clopen_rank_decomposition_of_isLisse (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) X)) (hL : IsLisseCoefficientModule (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) L) : ∃ R : ℕ → X.Opens, (∀ r : ℕ, IsClosed (R r : Set X)) ∧ (∀ (x : X) (r : ℕ), x ∈ R r ↔ ∃ (U : X.ProEt) (v : U.left), U.hom v = x ∧ Nonempty ((CondensedRing.upperStar (X := U.left) (Y := X) (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) r)) ∧ (∀ (U : X.ProEt) (n : ℕ), Nonempty ((CondensedRing.upperStar (X := U.left) (Y := X) (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.hom).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) U.left) n) → ∀ (v : U.left) (r : ℕ), U.hom v ∈ R r ↔ n = r) ∧ (CompactSpace X → {r : ℕ | (R r : Set X).Nonempty}.Finite) ∧ IsIso (Sigma.desc (fun r : ℕ ↦ (R r).ι)) ∧ ∀ r : ℕ, ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (R r).toScheme, ∀ i : C.I₀, Nonempty ((CondensedRing.upperStar (X := C.X i) (Y := X) (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.f i ≫ (R r).ι)).obj L ≅ Mod.finiteFree (condensedRingObj (@Profinite.continuousCoefficientRingObj E (spectralNorm.normedField ℚ_[l] E).toUniformSpace.toTopologicalSpace _ (@NonUnitalSeminormedRing.toIsTopologicalRing E (@SeminormedRing.toNonUnitalSeminormedRing E (spectralNorm.seminormedRing ℚ_[l] E)))) (C.X i)) r)",
   "branch": "newtargets-dag",
   "by": "Q85",
   "date": "2026-10-18",
   "existing": false,
-  "note": "H3 repair of returned head 62e4e13a3aa2: the finite field extension is supplied by Field, Algebra and FiniteDimensional; every continuousCoefficientRingObj explicitly uses the topology of spectralNorm.normedField ℚ_[l] E and its canonical topological-ring instance. Reuses the published continuous coefficient ring and Q77 lisse predicate; no definition is copied."
+  "note": "H3 repair of returned head 62e4e13a3aa2: the finite field extension is supplied by Field, Algebra and FiniteDimensional; every continuousCoefficientRingObj explicitly uses the topology of spectralNorm.normedField ℚ_[l] E and its canonical topological-ring instance. Reuses the published continuous coefficient ring and Q77 lisse predicate; no definition is copied. D2 stage-3 proof uses explicit X/Y endpoint arguments in the three pullback occurrences; these are definitionally the original endpoints and change no mathematical clause."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -212,5 +206,15 @@
   "group": "Q85",
   "result": "pass",
   "note": "Repairs the H3 return of 62e4e13a3aa2: E is bound only as Field/Algebra ℚ_[l]/FiniteDimensional, and all eight continuous coefficient ring occurrences use the spectralNorm.normedField topology (the project's |·|_E convention, as in coefficientExtensionAbsoluteValue and LisseLatticeCoefficientsSized). Every clause matches the node: arbitrary scheme, landed Q77 IsLisseCoefficientModule, clopen R : ℕ → X.Opens, existential and universal rank characterizations, finiteness only under CompactSpace, IsIso Sigma.desc of the open subschemes, constant rank r cover on each piece. Edge cases covered (empty X, rank 0, empty U, unbounded ranks, E = ℚ_ℓ); no extra assumptions or universe equalities. Single sorry theorem, no definitions, source/blueprint docstrings with all 7 proof steps, lean.statement verbatim (script-checked), the two added definition stmt_deps are acyclic. nt_compile rc 0 in 3.6 s with no errors or warnings. Cosmetic only: header credits group Q21; report names Mathlib Mod where the record names pulledBackModuleObjects (the same Mod category)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8ed3e",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261021T233630-L-840632",
+  "kind": "interface",
+  "note": "independent cc review: delivered StratifiedLatticeRank.lean (sha256 identical to the twice-reviewed 4c88523/1ec7410 heads) and node against live module/node, unit sk-lem-stratified-lattice realized list, #print axioms, and the delivered module plus its three direct importers compiled as one sandbox (all exit 0)"
  }
 }
