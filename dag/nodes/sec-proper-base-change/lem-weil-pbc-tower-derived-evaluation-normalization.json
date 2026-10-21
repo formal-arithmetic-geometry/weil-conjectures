@@ -15,61 +15,102 @@
  ],
  "proof": [
   {
-   "text": "Write $Q$ for each localization, suppressing its exact-functor comparison isomorphisms. The ordinary tower adjunction $F^{\\rm Tow}\\dashv G^{\\rm Tow}$ is defined by applying the ordinary Hom bijection at each level: naturality of that bijection says exactly that compatible level maps correspond to compatible level maps. Its unit and counit are levelwise the original ones. Levelwise exactness makes $F^{\\rm Tow}$ exact, and evaluations and $F,F^{\\rm Tow}$ therefore induce termwise exact derived functors. The additive adjunctions also induce adjunctions on homotopy categories. These identifications retain the ordinary units and counits, not arbitrary adjunctions with the same functors.",
+   "text": "Form the ordinary tower adjunction with Adjunction.whiskerRight and the two adjunctions on complexes. For an exact additive left adjoint, mapDerivedCategoryFactors is an invertible left-derived comparison; it remains left derived after any postcomposition. The K-injective derivability structure, using the proved generic helper CategoryTheory.derives, makes the right-derived comparison remain right derived after postcomposition by the localized exact left functor. Apply Mathlib Adjunction.derived separately in the four supplied derived-category universes. Its unit factorization and naturality of the supplied right-derived unit give each of the two required Hom formulas on every chain map.",
    "uses": [
+    "def-weil-abstract-derived-category",
     "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "Let kappa be the inclusion of K-injective tower complexes. Enough K-injectives make L = kappa followed by Q a localization at the quasi-isomorphisms between K-injectives. For each level n, define a_n on this category by the inverse evaluation factorization followed by evaluation of the supplied tower unit. Define b_n by the supplied ambient unit on the evaluated complex followed by RG of the inverse evaluation factorization. These are natural transformations with exactly the same source. The K-injective derivability theorem makes the tower unit invertible; evaluation preserves K-injectivity, so the ambient unit is also invertible. Thus a_n and b_n are natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y, K-injective localization and computation"
+   }
+  },
+  {
+   "text": "Extend a_n inverse followed by b_n using Localization.liftNatIso along L. Its component formula gives a_n times beta_n = b_n on every K-injective tower. Postcompose by RG of the evaluation factorization to obtain precisely the displayed normalization. If gamma obeys the same normalization, postcompose by the inverse factorization and cancel a_n. Localization.natTrans_ext along L gives gamma = beta_n, proving uniqueness without choosing new representatives.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined"
+   }
+  },
+  {
+   "text": "The defining liftNatTrans formula for each derived evaluation transition gives its compatibility with the evaluation factorization, and hence also with its inverse. Naturality of the tower unit gives a_m followed by the derived transition equal to the ordinary evaluated transition followed by a_n. Naturality of the ambient unit gives the analogous identity for b_m and b_n. Cancel a_m and use their normalized comparisons. Both sides are natural transformations on the derived category, so Localization.natTrans_ext along L proves compatibility for every derived object and every transition, including identity transitions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, naturality of the universal derived units"
+   }
+  },
+  {
+   "text": "Apply each Hom formula to its ordinary complex counit. The ordinary transpose is the identity; injectivity of the derived Hom equivalence gives F_D(eta_I) followed by the derived counit equal to the left exact factorization followed by Q of the ordinary counit. This argument applies to all complexes, for both adjunctions.",
+   "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise adjunction of Tag 0DVC, lemma-pre-derived-adjoint-functors"
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, unit and counit factorization"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-kinjective-exact-square-comparison] with $\\mathcal A^{\\prime}=\\operatorname{Tow}(\\mathcal A)$, $\\mathcal B^{\\prime}=\\operatorname{Tow}(\\mathcal B)$, $H^{\\prime}=G^{\\rm Tow}$, $H=G$, and $r=s=e_n$. The assumed Grothendieck properties provide the required resolutions; evaluation preserves K-injectives. The strict equality $e_nG^{\\rm Tow}=Ge_n$ supplies the square. This gives $\\beta_n$, its normalization, and uniqueness from normalization alone. Denote its $A,B,a,b,\\delta$ for this square by $A_n,B_n,a_n,b_n,\\delta_n$.",
+   "text": "Use mapDerivedCategoryCompIso_fac to prove that the specified interchange respects the exact localization factorizations. On a K-injective tower J, the ordinary tower counit evaluates to the ambient ordinary counit; verify this degreewise. Precompose the proposed counit identity by evaluation of the invertible F_T(etaT_J). The tower counit formula computes the left side. Naturality of the interchange, the normalized beta formula, naturality of the ambient derived counit and its computation formula compute the right side. Interchange compatibility and naturality of the evaluation factorization identify the resulting expressions. Cancel the invertible precomposition.",
    "uses": [
-    "lem-weil-pbc-kinjective-exact-square-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, compare normalized counits; Tag 015F, exact localization factors"
+   }
+  },
+  {
+   "text": "Both sides of the counit equation are natural transformations of functors on the derived tower category. Their components agree after restriction to L by the preceding calculation. Localization.natTrans_ext gives their equality, and evaluation at any derived object proves the final clause.",
+   "uses": [
     "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-tower-evaluation-kinjective"
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); agent exact-square extraction of tower normalization old steps 2-4"
-   }
-  },
-  {
-   "text": "Fix a tower transition $t:e_m\\to e_n$ ($m\\geq n$). Denote the induced transitions $A_m\\to A_n$ and $B_m\\to B_n$ by $s_A,s_B$. At $QJ$, naturality of evaluation transitions with respect to the tower morphism $\\eta_{G^{\\rm Tow},J}$ and naturality of $\\eta_G$ with respect to $t_J:e_mJ\\to e_nJ$ give\n$$s_Aa_m=a_nQ(Gt_J),\\qquad s_Bb_m=b_nQ(Gt_J).$$\nConsequently $s_B\\delta_m a_m=b_nQ(Gt_J)=\\delta_n s_Aa_m$. Cancel the invertible $a_m$. This is transition compatibility at $QJ$; conjugating by the functorial images of $u:M\\xrightarrow{\\sim}QJ$ proves it at every $M$. The calculation applies to every transition, including identity transitions.",
-   "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-exact-square-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y, lemma-K-injective-defined: naturality of universal units, applied also to tower transition maps"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-exact-square-derived-counit] to the ordinary ambient and tower adjunctions of step 1, with $r=s=e_n$ and the comparison from step 2. The two strict functor identities hold levelwise; the ordinary counit is levelwise the ambient counit, as step 1 verified. Evaluation is exact and preserves K-injectives, and step 2 supplies the normalized comparison. The lemma gives the canonical derived adjunctions with their specified Hom normalization and yields $e_n(\\varepsilon^{\\rm Tow}_M)=\\varepsilon_{e_nM}\\circ F(\\beta_{n,M})$ for every $M$, as required.",
-   "uses": [
-    "lem-weil-pbc-exact-square-derived-counit",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-tower-evaluation-kinjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 (lemma-derived-adjoint-functors), with Tag 070Y (lemma-K-injective-defined); agent exact-square extraction of tower normalization old steps 6-8"
+    "place": "Tag 070I, K-injective localization; Tag 09T5, naturality"
    }
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, diagram-topos evaluation expanded using derived.tex Tags 070I, 070K, 070Y and 09T5; normalized units and counits proved explicitly"
+  "place": "Tag 0A07, diagram-topos evaluation, expanded using derived.tex Tags 015F, 070I, 070Y and 09T5; implemented by K1 using Mathlib localization of K-injective complexes and the exact-left-adjoint case of Mathlib Adjunction.derived. No resolving-class theorem or extra intermediate statement is needed."
  },
  "mathlib_match": null,
  "status": "split",
@@ -147,11 +188,10 @@
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-square-derived-counit",
-  "lem-weil-pbc-kinjective-exact-square-comparison",
   "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-tower-evaluation-kinjective"
@@ -215,5 +255,15 @@
   "result": "pass",
   "note": "Clause-by-clause match of node lem-weil-pbc-tower-derived-evaluation-normalization: Grothendieck A, B and the tower categories (ℕᵒᵖ ⥤ ·), exact additive F ⊣ G, independent HasDerivedCategory universes, universal derived pairs via IsRightDerivedFunctor, ∃ derived adjunctions d, dT pinned uniquely by the lem-sfb-resolving Hom formula (εh = mapDerivedCategoryFactors), unit normalization on K-injective J (types traced), uniqueness from normalization alone, ∀ t : m ⟶ n transition compatibility, counit clause for all M via the canonical mapDerivedCategoryCompIso interchange. Helpers canonical (liftNatTrans; CompIso); preservation instances wrap Mathlib and are not hollow. Statement verbatim; only the lean field changed vs live; docstrings carry source and 8 steps; imports = stated proof deps; max line 92; report sections present. nt_compile --json clean in 4.6 s. No findings beyond an advisory to share the instances."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261021T111225-L-60375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
