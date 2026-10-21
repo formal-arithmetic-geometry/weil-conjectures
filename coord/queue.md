@@ -118,6 +118,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 |---|---|---|---|---|
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 5 | 1 | repair | route |
+| `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
+| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | repair | route |
+| `Sheaf.CategoryTheory.ElementRestrictionHom` | 9 | 1 | repair | route |
 | `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory` | 3 | 1 | disputed | 2 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 10 | proof | route |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 1 |
@@ -128,7 +131,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.QbarCoefficientSmoothBaseChange` | - | 2 | proof | 1 |
 | `Sheaf.Paper.ScalarModelFiniteFlatResolution` | - | 2 | proof | 1 |
 | `Sheaf.Paper.CompletedDirectImageLimits` | 3 | 2 | proof | 2 |
-| `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | proof | 2 |
 | `Sheaf.Paper.IntegralStratifiedPerfectCharacterization` | 3 | 1 | proof | 2 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 6 | 14 | proof | 2 |
@@ -170,7 +172,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralCompletedLocalPerfectCriterion` | 4 | 1 | proof | 3 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
 | `Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction` | 5 | 1 | proof | 3 |
-| `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | proof | 3 |
 | `Sheaf.Paper.IntegralScalarExtensionWellDefined` | 6 | 2 | proof | 3 |
 | `Sheaf.Paper.EtaleProEtaleScalarMate` | 13 | 3 | proof | 3 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePairingLax` | - | 1 | proof | 3 |
@@ -353,7 +354,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeData` | - | 1 | proof | 4 |
 | `Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CompletedTowerDirectImage` | 5 | 1 | proof | 5 |
-| `Sheaf.CategoryTheory.ElementRestrictionHom` | 9 | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.BalancedTensorChain` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.LineUnboundedDerivedTensor` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.SliceTensorIntegerShiftCompatibility` | - | 3 | proof | 5 |
