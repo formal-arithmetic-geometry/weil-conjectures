@@ -22,71 +22,68 @@
  ],
  "proof": [
   {
-   "text": "First let $F$ be any constructible $B_X$-module sheaf in the finite constant local model sense. Apply [lem-sfb-finite-model-stratum-filtration], which assumes exactly a topologically Noetherian scheme and arbitrary commutative condensed coefficients. It supplies a finite filtration $0=F_0\\subset F_1\\subset\\cdots\\subset F_r=F$ and isomorphisms $Q_k:=F_k/F_{k-1}\\cong v_{k!}(t_k)_*L_k$. Here $v_k:V_k\\hookrightarrow X$ is open, $t_k:S_k\\hookrightarrow V_k$ is reduced closed, and $L_k$ has a finite constant local model. These are precisely generators allowed by the hypothesis, so $Q_k[0]\\in\\mathscr C$ by isomorphism closure. All the localization and refinement assertions used here are conclusions of the cited filtration statement; no local freeness or finite Tor amplitude is imposed.",
+   "text": "Define a finite construction certificate for an ordered finite family: each entry is zero, a stratum generator, isomorphic to an integer shift of a strictly earlier entry, or the middle vertex of a distinguished triangle whose outer vertices are strictly earlier entries. Define Built(K) by existence of such a certificate and an entry isomorphic to K. Order-preserving embeddings transport certificates; concatenation and appending a final entry therefore prove that Built is invariant under isomorphisms, contains every zero and generator, and is closed under shifts and middle-term extensions. For extensions transport the given triangle along the two endpoint isomorphisms. These are finite tuple constructions, not a choice of objects from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); finite-stratum refinement is Stacks topology Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification). Agent extraction of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-model-stratum-filtration] to each constant-model constructible module F. It supplies monic successive maps between the open-supported pieces, zero initial piece, a final counit isomorphism to F, and natural cokernel isomorphisms to the open extension of the reduced closed stratum restriction. Evaluation at F preserves cokernels, identifying the objectwise cokernel of each monic map with exactly an allowed stratum generator, whose finite local model is supplied by the same filtration theorem.",
    "uses": [
     "lem-sfb-finite-model-stratum-filtration"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification), in the sheaf formulation of lem-sfb-finite-model-stratum-filtration"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); finite-stratum refinement is Stacks topology Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification). Agent extraction of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14."
    }
   },
   {
-   "text": "For each $1\\le k\\le r$, put the short exact sequence $0\\to F_{k-1}\\to F_k\\to Q_k\\to0$ in degree zero. It is degreewise short exact: it is the displayed sheaf sequence in degree zero and the zero sequence in every other degree. By [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle $F_{k-1}[0]\\to F_k[0]\\to Q_k[0]\\to F_{k-1}[1]$. Induct on $k$: the initial object $F_0[0]=0$ lies in $\\mathscr C$; if $F_{k-1}[0]$ lies in it, then $Q_k[0]$ from step 1 and extension closure put the middle term $F_k[0]$ in it. Thus $F[0]\\in\\mathscr C$ after at most $r$ extensions. For $r=0$ this is just the zero-object hypothesis.",
+   "text": "Each monic map and its cokernel give a short exact sequence of modules. Apply the degree-zero single-object triangle (Mathlib ShortComplex.ShortExact.singleTriangle_distinguished, the degree-zero specialization of [lem-weil-pbc-complex-ses-triangle]). Induction on the finite filtration, using the zero initial piece, the generator quotient and the extension closure of Built, constructs F[0]. Transport through the final counit isomorphism. This also covers filtration length zero.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), applied to sheaves concentrated in degree zero"
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); finite-stratum refinement is Stacks topology Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification). Agent extraction of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14."
    }
   },
   {
-   "text": "Now take the given $K$, choose a cochain representative, and choose integers $a\\le b$ such that $H^q(K)=0$ outside $[a,b]$. Write $T_q=\\tau_{\\le q}K$. By [lem-weil-pbc-truncation-cohomology], $H^i(T_q)\\cong H^i(K)$ for $i\\le q$ and is zero for $i>q$. In particular $T_{a-1}$ is acyclic. The map $0\\to T_{a-1}$ is therefore a quasi-isomorphism, hence an isomorphism in the localization defining the derived category [def-weil-abstract-derived-category]. Thus $T_{a-1}\\in\\mathscr C$. Likewise $T_b\\to K$ induces isomorphisms on cohomology for $i\\le b$; for $i>b$ both sides have zero cohomology. It too is a quasi-isomorphism, so $T_b\\cong K$. These are direct uses of the cohomology formula and the definition of a quasi-isomorphism, not convergence of an infinite truncation tower.",
+   "text": "Constant-model constructibility is invariant under isomorphism: transport the same finite stratification and its pro-etale trivializing covers; compose the local model isomorphisms with the inverse image of the given isomorphism. For every q, the singleFunctors shift isomorphism identifies F in degree q with F[0] shifted by -q, so Step 3 and shift closure construct it. Apply the existing proved finite Postnikov devissage [lem-sfb-degreewise-bounded-devissage], via its bounded wrapper DerivedCategory.prop_of_bounded_of_degreewise, to the object property Built and the constructibility property in every degree. The boundedness and cohomology hypotheses are precisely the two components of constantModelBoundedConstructible. This yields Built(K), including acyclic K and empty support intervals. The derived category and its t-structure are those of [def-weil-abstract-derived-category].",
    "uses": [
-    "lem-weil-pbc-truncation-cohomology",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations), canonical upper truncations; localization at quasi-isomorphisms as in Tag 05RU (definition-derived-category)"
-   }
-  },
-  {
-   "text": "Induct on the finite list $q=a,a+1,\\ldots,b$, starting with $T_{a-1}\\in\\mathscr C$ from step 3. By [lem-weil-pbc-truncation-triangle], the successive cohomology triangle is $T_{q-1}\\to T_q\\to H^q(K)[-q]\\to T_{q-1}[1]$. Each $H^q(K)$ is constructible by the hypothesis on $K$, so steps 1 and 2 give $H^q(K)[0]\\in\\mathscr C$, and closure under the integer shift $[-q]$ gives $H^q(K)[-q]\\in\\mathscr C$. If $T_{q-1}\\in\\mathscr C$, extension closure in this triangle gives $T_q\\in\\mathscr C$. At $q=b$ obtain $T_b\\in\\mathscr C$; the isomorphism $T_b\\cong K$ from step 3 and isomorphism closure give $K\\in\\mathscr C$. Only existence of the stated distinguished triangle is used, not any uniqueness or functoriality clause.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle"
+    "def-weil-abstract-derived-category",
+    "lem-sfb-degreewise-bounded-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive cohomology triangles with a=q-1"
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); finite-stratum refinement is Stacks topology Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification). Agent extraction of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14."
    }
   },
   {
-   "text": "For each of the finitely many $q\\in[a,b]$, let $r_q$ be the finite length of the filtration chosen in step 1 for $H^q(K)$. The construction uses at most $\\sum_{q=a}^b r_q+(b-a+1)$ extensions and at most $b-a+1$ shifts of the resulting sheaves. The sum is finite. If $K$ is acyclic, one can instead use the quasi-isomorphism $0\\to K$ and no extensions. The empty scheme is included because the filtration theorem permits length zero. No step uses a coefficient-field argument, a resolution by finite free modules, or inversion of torsion; hence the same construction applies to every commutative condensed ring and to integral torsion local models.",
+   "text": "Strong induction on the finite certificate indices shows that each entry lies in the given class C: use its zero-object, generator, integer-shift, isomorphism and middle-extension closure in the four cases. Transport the designated endpoint isomorphism to obtain C(K). Append K as a zero shift of that endpoint, using the zero-shift isomorphism, to make the last entry isomorphic to K. Unpack the certificate to get exactly the displayed finite-list statement with strictly earlier indices. No retract, infinite coproduct, coefficient field, Tor-amplitude assumption, or inversion of torsion is used.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite induction and operation count"
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); finite-stratum refinement is Stacks topology Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification). Agent extraction of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14."
    }
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
+  "lem-sfb-degreewise-bounded-devissage",
   "lem-sfb-finite-model-stratum-filtration",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-truncation-cohomology",
-  "lem-weil-pbc-truncation-triangle"
+  "lem-weil-pbc-complex-ses-triangle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0152 and 08J5, assembled with the existing finite-model stratum filtration (topology Tag 09Y5). This coefficient-general assembly follows the devissage pattern of Bhatt–Scholze Proposition 6.8.11(3) and Lemma 6.3.14; it does not claim those sources state the arbitrary-condensed-coefficient result verbatim."
+  "place": "Tags 0152 and 08J5, finite-model stratum filtration (topology Tag 09Y5), and existing proved degreewise bounded devissage. Group M5: finite certificate bookkeeping followed by the source-library finite Postnikov induction; no new mathematical assumptions."
  },
  "mathlib_searches": [
   {
@@ -208,9 +205,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-truncation-triangle"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -237,5 +232,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Delivery adds only Sheaf/Paper/BoundedFiniteModelGeneration.lean (one theorem, sorry) and the item's lean field; no other node or dependency record changed. Mathlib's ObjectProperty.IsTriangulated (ContainsZero, IsStableUnderShift ℤ, IsTriangulatedClosed₂) plus IsClosedUnderIsomorphisms is exactly the node's class: contains zero, closed under shifts, extensions and isomorphism. hgen = singleFunctor 0 of openImmersionLowerShriek∘lowerStar over all open v, closed t with S reduced, and HasFiniteConstantLocalModel L; no quasi-compactness. hK = recorded constantModelBoundedConstructible (bounded t-structure plus IsConstantModelConstructible for every H^n), the same predicate as the filtration theorem's input. The finite Fin (N+1) witness (zero, generator, shift of an earlier entry, middle term of a triangle on earlier entries) is equivalent to the 'finitely many extensions and shifts' clause and not vacuous. NoetherianSpace hypothesis; universes u/u+1 consistent; lean.statement verbatim; docstrings carry source place, blueprint and the 5 proof steps; no defs or axioms; report sections present (second reading by the same worker, noted). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261021T155757-L-3446718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
