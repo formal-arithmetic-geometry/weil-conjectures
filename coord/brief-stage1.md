@@ -53,6 +53,8 @@ lean_audit {"master": {"state": "none"}, "slopmaster2": {"state": "none"}}  (or 
 
 Before creating it, search the whole blueprint as well (§7): if a blueprint node states it, cite that node and create nothing.
 
+A node identifying two complexes or two derived objects states the isomorphism in the derived category (the derived form), not degree by degree (decision of Christian Merten, Zulip "per-degree statement for derived isomorphisms", 2026-10-21). A per-degree consequence `H^q(K) ≅ H^q(L)` that a proof needs is its own node, whose only proof dependency is the derived-form node.
+
 A Mathlib leaf (`status` `mathlib`) has a `mathlib_match` and no proof. Any other new node is `unsplit` and joins the queue; do not split it.
 
 ## 4. The literature

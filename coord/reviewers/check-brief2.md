@@ -65,3 +65,7 @@ Launcher-tool authorization (human parallel-landing update, 2026-10-15): the rea
 ## The shared repository (launcher, 2026-10-16)
 
 The repository you read is shared by all groups and is read-only for you. The delivery tools (deliver.py, deliver2.py, deliver3.py, also with --no-push) build the delivery in their own temporary git worktree; running them is the required step, not a forbidden git command. If one reports that a delivery branch is checked out in another worktree, run it again once; report BLOCKED only if it persists.
+
+## Derived form of complex isomorphisms (upstream decision, 2026-10-21)
+
+Christian Merten (Zulip "per-degree statement for derived isomorphisms", 2026-10-21, relayed by Jiedong Jiang): a result identifying two complexes or derived objects is stated as an isomorphism in the derived category; a per-degree form `∀ q, H^q(…) ≅ H^q(…)` may accompany it as a second declaration deduced from the derived one, never replace it. A delivery whose only statement of such a result is per-degree is returned with this note (brief-stage2.md §3).
