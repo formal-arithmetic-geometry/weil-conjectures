@@ -20,88 +20,90 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-scalar-localization-sheaf-exact] with $s$ the image of $t$. For $U=\\operatorname{Res}_{R\\to R_t}$, [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] gives exact restriction and the ordinary adjunction with unit $x\\mapsto1\\otimes x$. The construction [def-weil-exact-derived-adjunction] localizes this exact adjunction termwise, yielding $F\\dashv U$ with the same unit $\\eta$ in the derived category. Its unit commutes with shifts because the termwise maps do.",
+   "text": "Sectionwise localization is flat. Evaluation detects finite limits for presheaf tensors, and module sheafification preserves flatness. The regular-module comparison identifies the restricted regular localized ring with this flat sheaf. The natural change-of-rings/tensor comparison identifies E followed by restriction with tensoring by that flat module. Restriction is faithful and detects finite limits. Tensor is additive and the ordinary change-of-rings adjunction makes E a left adjoint, so E preserves finite colimits. This proves scalarLocalization_exact.",
    "uses": [
-    "lem-weil-pbc-scalar-localization-sheaf-exact",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "def-weil-exact-derived-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), exact adjunction localized termwise; ordinary adjunction as in sites-modules.tex"
-   }
-  },
-  {
-   "text": "For bounded-below $L$, [lem-weil-pbc-scalar-localization-underlying-telescope] makes $UFL[q]$ the telescope of $L[q]\\xrightarrow{t}L[q]\\to\\cdots$, with stage-$n$ leg $U(t^{-n})\\eta_{L[q]}$.",
-   "uses": [
-    "lem-weil-pbc-scalar-localization-underlying-telescope"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-sites-modules-sheafification-flat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Proposition 6.8.14(2), localization telescope"
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-sequence-relative-hom-telescope] to this triangle. Its two coproduct hypotheses are precisely the assumption on $K$ for the constant families $L[q]$ and $L[q+1]$, each with a common lower bound. Thus $\\varinjlim_n\\operatorname{Hom}(K,L[q])\\cong\\operatorname{Hom}(K,UFL[q])$, with transition $u\\mapsto tu$ and stage map $u\\mapsto U(t^{-n})\\eta_{L[q]}u$.",
+   "text": "Use the normalized ordinary extension/restriction adjunction. Both functors are exact; applying them termwise preserves quasi-isomorphisms. Descend their adjunction along the two localization functors Q using Mathlib Adjunction.localization. Its formula for the unit, followed by cancellation of mapDerivedCategoryFactors and their inverses, gives exactly scalarLocalizationTelescopeDerivedUnit. The ordinary unit section formula is x mapped to the sheafification of 1 tensor x. Coefficient compatibility follows by applying the adjunction to scalar identity maps and by the coefficient localization lift formula. The corresponding compatibility on derived Homs follows first on Q of complexes using its linearity and the factorization natural isomorphism, then on arbitrary objects by essential surjectivity.",
    "uses": [
-    "lem-weil-pbc-sequence-relative-hom-telescope"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 093W, 0CRK and 094A; sequence-relative Hom telescope calculation"
-   }
-  },
-  {
-   "text": "Compose with the adjunction from Step 1. Naturality of its unit gives $\\eta_{L[q]}u=UF(u)\\eta_K$; the triangle identity says the adjunct of $U(g)\\eta_K$ is $g$. Taking $g=t^{-n}F(u)$ shows that the stage-$n$ map is exactly $u\\mapsto t^{-n}F(u)$.",
-   "uses": [
-    "def-weil-exact-derived-adjunction"
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-scalar-localization-coefficient-actions",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F; naturality of the localized unit and the adjunction triangle identity"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
    }
   },
   {
-   "text": "Write $H=\\operatorname{Hom}(K,L[q])$. By [def-weil-pbc-module-localization-away], $H[1/t]$ is the preceding colimit: $u/t^n=v/t^m$ iff $t^k(t^mu-t^nv)=0$ for some $k$, precisely equality at a common later stage. Hence the bijection is $u/t^n\\mapsto t^{-n}F(u)$. For the canonical actions [def-weil-pbc-scalar-localization-coefficient-actions], scalar extension sends $au$ to $aF(u)$ already termwise; localization preserves this equation. On fractions, $(a/t^r)(u/t^n)=au/t^{r+n}$, proving $A[1/t]$-linearity.",
+   "text": "For bounded-below L apply the normalized underlying scalar-localization telescope. Apply sequence_relative_hom_telescope to the constant sequence L with transition t times identity. The shifted comparison is the continuity hypothesis at q=1. The unshifted comparison follows from its q=0 case by the shift-zero isomorphism and the pointwise direct-sum additive equivalence. Postcompose with the telescope vertex isomorphism and then take the inverse additive adjunction equivalence. Naturality of the unit and the triangle identity show that the class of f at stage n is sent to t^(-n) F(f).",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-underlying-telescope",
+    "lem-weil-pbc-sequence-relative-hom-telescope",
+    "def-weil-pbc-countable-bounded-below-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
+   }
+  },
+  {
+   "text": "Identify the module colimit of multiplication by t with localized fractions by localization_away_colimit. The forgetful functor from modules to abelian groups preserves colimits, and the identity natural isomorphism identifies that forgotten sequence with the Hom sequence from the preceding step. Thus the additive equivalence sends f/t^n to t^(-n) F(f). This equivalence is A-linear by coefficient compatibility and fraction induction. Extend scalars to A[1/t] using Mathlib LinearEquiv.extendScalarsOfIsLocalization.",
    "uses": [
     "def-weil-pbc-module-localization-away",
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
+   }
+  },
+  {
+   "text": "Apply the preceding calculation to L[q], bounded below at b-q. Postcomposition with the canonical F.commShiftIso q gives the required shifted equivalence, with its normalized formula on every fraction. Naturality follows from map_comp and commShiftIso naturality; the identity follows from commShiftIso_zero; composition follows from commShiftIso_add, the shift functor linearity, and t^(-(n+m))=t^(-n)t^(-m); simultaneous shifts follow from map_shiftFunctorComm_hom_app and commShiftIso naturality. These elementary equations prove all clauses of scalarLocalizationHomComparison.",
+   "uses": [
     "def-weil-pbc-scalar-localization-coefficient-actions"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 07JZ and 07K0, module fraction relation and universal property"
-   }
-  },
-  {
-   "text": "Precomposition by $h$ and postcomposition by $v$ give respectively $t^{-n}F(u)F(h)$ and $F(v)t^{-n}F(u)$, proving naturality. Shifting the formula gives $t^{-n}F(u)[r]$ under the termwise shift comparisons. The identity fraction maps to $F(1)=1$, and the composite of $u/t^n$ and $v/t^m$ maps to $t^{-(m+n)}F(vu)=(t^{-m}F(v))(t^{-n}F(u))$. Every element is a fraction, so these equations give all asserted compatibilities whenever the comparisons exist.",
-   "uses": [
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), full faithfulness; explicit fraction identities"
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-exact-derived-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-countable-bounded-below-hom-continuity",
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-scalar-localization-coefficient-actions",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pur-change-of-rings-tensor-comparison",
   "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-weil-pbc-localization-flat",
   "lem-weil-pbc-scalar-localization-underlying-telescope",
   "lem-weil-pbc-sequence-relative-hom-telescope"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "F2",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.12 and Proposition 6.8.14(2); existing exact-adjunction localization and telescope tools, followed by explicit fraction calculation"
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2); Stacks algebra.tex 00HT, 00CM, 07JZ; derived.tex 015F, 093W, 094A, 0949"
  },
  "mathlib_searches": [
   {
@@ -169,9 +171,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
  ],
@@ -201,12 +200,6 @@
   "date": "2026-10-17",
   "existing": false,
   "declarations": [
-   "CategoryTheory.scalarLocalizationSectionsMap_mem",
-   "CategoryTheory.scalarLocalizationSectionsMap",
-   "CategoryTheory.scalarLocalizationCoefficientLinear",
-   "CategoryTheory.scalarLocalizationDerivedLinear",
-   "CategoryTheory.scalarLocalizationSections_isUnit",
-   "CategoryTheory.scalarLocalizationCoefficientMap",
    "CategoryTheory.scalarLocalizationHomEquiv",
    "CategoryTheory.scalarLocalization_exact",
    "CategoryTheory.scalarLocalizationHomComparison",
@@ -214,24 +207,14 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261019T005313-L-2750689",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.scalarLocalizationSectionsMap_mem",
-   "CategoryTheory.scalarLocalizationSections_isUnit",
-   "CategoryTheory.scalarLocalization_derivedHom",
-   "CategoryTheory.scalarLocalization_exact"
-  ],
-  "sorry_after": [
-   "CategoryTheory.scalarLocalization_derivedHom",
-   "CategoryTheory.scalarLocalization_exact"
-  ]
+  "reviewer": "C-dd7c6",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261021T154022-L-2760972",
+  "kind": "interface",
+  "note": "independent cc review: dd7c611b Lean+nodes vs 38284f10 snapshot (byte-identical) and its fixes/ (only the scalarLocalization_exact docstring differs); live nodes vs delivered (only intended fields); delivered set + 5 direct importers compiled in sandbox; axioms vs published upstream sorries"
  },
  "lean_audit": {}
 }

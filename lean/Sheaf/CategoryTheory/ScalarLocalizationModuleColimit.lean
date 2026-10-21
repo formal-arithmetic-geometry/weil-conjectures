@@ -5,7 +5,7 @@ Authors: SHEAF group M6
 -/
 module
 
-public import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
+public import Sheaf.CategoryTheory.ScalarLocalizationCoefficientActions
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed

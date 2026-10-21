@@ -88,19 +88,23 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "module": "Sheaf.CategoryTheory.ScalarLocalizationDerivedHom",
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationCoefficientActions",
   "declaration": "CategoryTheory.scalarLocalizationDerivedLinear",
   "declarations": [
+   "CategoryTheory.scalarLocalizationSectionsMap_mem",
+   "CategoryTheory.scalarLocalizationSectionsMap",
+   "CategoryTheory.scalarLocalizationCoefficientLinear",
    "CategoryTheory.scalarLocalizationDerivedLinear",
-   "CategoryTheory.scalarLocalizationCoefficientMap",
-   "CategoryTheory.scalarLocalizationCoefficientLinear"
+   "CategoryTheory.scalarLocalizationSections_isUnit",
+   "CategoryTheory.scalarLocalizationCoefficientMap"
   ],
   "statement": "def scalarLocalizationDerivedLinear (A : Type v) [CommRing A]\n    (R : Sheaf J CommRingCat.{u})\n    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat))\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] :\n    Linear A (DerivedCategory\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))",
   "branch": "newtargets-dag",
   "by": "Q36",
   "date": "2026-10-21",
   "existing": true,
-  "note": "§1(B) lean-only repair requested by the maintainer: the existing record exposes the derived action and localized coefficient map but omits scalarLocalizationCoefficientLinear, the plain definition restricting the global-section action to A on module-sheaf Homs. Add that existing definition to declarations so consumers can cite this definition node for the underlying coefficient action, independently of the Hom comparison theorem. All declarations remain the existing definitions in ScalarLocalizationDerivedHom; no source module is copied or redefined. The derived action, localized coefficient map, and zero/nilpotent coefficient cases retain the same canonical construction."
+  "note": "F2, 2026-10-21: relocated the existing coefficient helpers verbatim to this lower module. ScalarLocalizationDerivedHom publicly imports it, preserving all public names and their definitions. Telescope consumers import this lower module, removing their previous import cycle with the Hom comparison.",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationCoefficientActions.lean"
  },
  "reviewed": {
   "date": "2026-10-17",
@@ -119,23 +123,13 @@
   "note": "Re-delivery after RETURN 7f39e44a; Lean module byte-identical to the module fully reviewed there; statement verbatim. Item node differs only in stmt_deps: theorem lem-weil-pbc-scalar-localization-derived-hom replaced by def-weil-pbc-scalar-localization-coefficient-actions, and lem-weil-pbc-site-derived-tensor-descent added, as requested. Dep record is a §1(B) lean-only change: scalarLocalizationCoefficientLinear (plain def, Module.compHom of homLinear along a = the node's 'restricting along a') added to declarations with lean.note, existing:true; live record unchanged since base. Mechanical finding: derivedTensor = curry of siteDerivedTensorIndependentCoefficients = .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object, PASS on that point. No cycle; report sections present; one sorry. nt_compile --json clean in 31.4 s. Advisory: live docstring of scalarLocalizationCoefficientLinear is stale."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261019T005313-L-2750689",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.scalarLocalizationSectionsMap_mem",
-   "CategoryTheory.scalarLocalizationSections_isUnit",
-   "CategoryTheory.scalarLocalization_derivedHom",
-   "CategoryTheory.scalarLocalization_exact"
-  ],
-  "sorry_after": [
-   "CategoryTheory.scalarLocalization_derivedHom",
-   "CategoryTheory.scalarLocalization_exact"
-  ]
+  "reviewer": "C-dd7c6",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261021T154022-L-2760972",
+  "kind": "interface",
+  "note": "independent cc review: dd7c611b Lean+nodes vs 38284f10 snapshot (byte-identical) and its fixes/ (only the scalarLocalization_exact docstring differs); live nodes vs delivered (only intended fields); delivered set + 5 direct importers compiled in sandbox; axioms vs published upstream sorries"
  }
 }
