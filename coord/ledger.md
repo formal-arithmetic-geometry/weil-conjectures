@@ -21122,3 +21122,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:19 L: returned deliver/NI/sk-thm-purity-transport (reviewer RETURN: First split of the imported item: 11 steps, 0 new nodes. The statement is kept verbatim behind a k=F̄_q, separated finit)
 - 08:19 L: returned deliver/Q18/lem-pur-torsion-line-system-base-change (reviewer RETURN: L: independent stage-2 immutable head 33a04e77f0b2: H13: the delivered lean record of dependency def-weil-pbc-internal-a)
 - 08:19 L: returned deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer RETURN: Superseded again (A6/A7/B10; brief-stage1 l.103 'live finished nodes win; never split one'). This is a re-push of c27a08)
+- 08:19 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: I read the delivered item, its five stmt_deps and the main-20261015 blueprint def-per-support-condition.md in full. No n)
