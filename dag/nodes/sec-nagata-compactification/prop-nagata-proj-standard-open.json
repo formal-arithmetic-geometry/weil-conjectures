@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-nagata-proj-standard-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Standard affine opens of Proj",
- "statement": "Each positive-degree homogeneous $f$ determines an open subscheme\n$D_+(f)\\subseteq\\operatorname{Proj}(R)$ and a canonical isomorphism\n\n$$\nD_+(f)\\cong\\operatorname{Spec}(R_{(f),0}).\n$$\n\nIf homogeneous elements $(f_i)$ generate $R_+$, the $D_+(f_i)$ cover\n$\\operatorname{Proj}(R)$.",
+ "statement": "Let $R=\\bigoplus_{n\\geq0}R_n$ be an $\\mathbb N$-graded commutative ring, and let $R_+=\\bigoplus_{n>0}R_n$ be its irrelevant ideal. For $a\\in R$, write $D_+(a)=\\{\\mathfrak p\\in\\operatorname{Proj}(R):a\\notin\\mathfrak p\\}$, regarded as an open subscheme of $\\operatorname{Proj}(R)$ [def-nagata-affine-proj]. Each homogeneous $f\\in R_d$ with $d>0$ determines a canonical isomorphism\n$$\nD_+(f)\\cong\\operatorname{Spec}(R_{(f),0}),\n$$\nwhere $R_{(f),0}$ is the degree-zero homogeneous localization [def-nagata-homogeneous-localization-degree-zero]. If a family $(f_i)_{i\\in I}$ of elements of $R$ generates an ideal containing $R_+$, then the $D_+(f_i)$ cover $\\operatorname{Proj}(R)$. No homogeneity or degree condition is required on this covering family.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-proj-standard-open.md",
   "place": "node prop-nagata-proj-standard-open, order 11"
@@ -16,20 +16,12 @@
   "def-nagata-affine-proj",
   "def-nagata-homogeneous-localization-degree-zero"
  ],
- "proof": [
-  {
-   "text": "The standard-open isomorphism is `Proj.basicOpenIsoSpec`.\nThe cover assertion is\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`; its hypothesis\nthat the chosen homogeneous family generates the irrelevant ideal is the\nassumption in the statement.\nThus no independently glued affine scheme is being used.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "lemma-nagata-proj-chart-ring-cocycle"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-proj-standard-open.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-proj-standard-open.md",
+  "place": "Statement, both clauses; Mathlib leaf verified against ProjectiveSpectrum/Basic.lean:54,58,86,161 (no new proof)."
  },
  "mathlib_searches": [
   {
@@ -47,10 +39,71 @@
     "Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic:86 (lemma)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.iSup_basicOpen_eq_top",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the combined name query returned no hits; the subsequent single-name query succeeds"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpenIsoSpec|iSup_basicOpen_eq_top|def basicOpen",
+   "results": "OK, 11 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "match: Basic.lean:54,58,86,161 give the open, its membership condition, arbitrary-family cover, and canonical chart isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Standard opens of Proj are affine spectra of degree zero homogeneous localizations and cover when the defining elements span the irrelevant ideal",
+   "results": "OK, 8 hits: AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.isAffineOpen_basicOpen",
+   "date": "2026-10-21",
+   "verdict": "match: basicOpenIsoSpec gives the chart clause; affineOpenCoverOfIrrelevantLESpan requires homogeneous generators, so the arbitrary-family cover clause is instead verified by iSup_basicOpen_eq_top"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural number graded commutative ring the standard open D plus f for homogeneous f of positive degree is canonically isomorphic to the spectrum of the degree zero homogeneous localization, and basic opens cover Proj if their elements span an ideal containing the irrelevant ideal",
+   "results": "OK, 8 hits: AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.Proj.basicOpenIsoSpec_hom, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec",
+   "date": "2026-10-21",
+   "verdict": "match: canonical chart isomorphism is AlgebraicGeometry.Proj.basicOpenIsoSpec; related hits concern sections or the underlying homeomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "def basicOpenIsoSpec|lemma iSup_basicOpen_eq_top|def basicOpen|theorem mem_basicOpen|lemma isAffineOpen_basicOpen",
+   "results": "OK, 5 hits; file-field parsing artifact: 54, 58, 86, 97, 140",
+   "date": "2026-10-21",
+   "verdict": "no match from this output alone: a single-file rg invocation makes msearch parse line numbers as file names; declarations verified with the subsequent directory grep and direct source reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.iSup_basicOpen_eq_top",
+   "results": "OK, 1 hit: AlgebraicGeometry.Proj.iSup_basicOpen_eq_top, Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic; (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range f) implies the supremum of basic opens is top.",
+   "date": "2026-10-21",
+   "verdict": "match: iSup_basicOpen_eq_top has exactly the ideal-containment hypothesis and no homogeneity assumption"
+  },
+  {
+   "tool": "grep",
+   "query": "^def basicOpenIsoSpec|^lemma iSup_basicOpen_eq_top|^def basicOpen :|^theorem mem_basicOpen",
+   "results": "OK, 7 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "match: Basic.lean:54,58,86,161 give the open, its membership condition, arbitrary-family cover, and canonical chart isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "^abbrev Away|^def Away|^structure NumDenSameDeg|^def away|^def NumDenSameDeg",
+   "results": "OK, 5 hits; file-field parsing artifact: 96, 601, 825, 859, 881",
+   "date": "2026-10-21",
+   "verdict": "no match from this output alone: a single-file rg invocation makes msearch parse line numbers as file names; declarations verified with the subsequent directory grep and direct source reading"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+  "file": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+  "line": 161,
+  "how": "Exact clause-by-clause match, all in Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean: AlgebraicGeometry.Proj.basicOpen at line 54 defines the open subscheme, and AlgebraicGeometry.Proj.mem_basicOpen at line 58 identifies its points with primes not containing the element. AlgebraicGeometry.Proj.basicOpenIsoSpec at line 161, with f_deg : f ∈ 𝒜 m and hm : 0 < m (line 155), is precisely the canonical scheme isomorphism to Spec (HomogeneousLocalization.Away 𝒜 f). Away is the degree-zero homogeneous localization, RingTheory/GradedAlgebra/HomogeneousLocalization.lean:601. AlgebraicGeometry.Proj.iSup_basicOpen_eq_top at line 86 proves the cover from (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range f); it imposes no homogeneity or positivity on this family. No comparison theorem or additional hypothesis is needed. The optional explicit affineness assertion is AlgebraicGeometry.Proj.isAffineOpen_basicOpen at line 201."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -106,5 +159,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "prop-nagata-proj-standard-open",
+  "worker": "stage1",
+  "summary": "Adopted the main-20261015 blueprint_update: arbitrary covering elements, ideal containment rather than equality, and an explicitly introduced graded ring. Verified both clauses directly in Mathlib and recorded the item as a Mathlib leaf with no proof steps or new nodes. Removed the unused chart-ring-cocycle proof edge; retained both definition dependencies and every imported/audit field. Recorded all searches actually run. No project declaration found states the full item.",
+  "blueprint": "Realizes both clauses of the current blueprint statement directly by Proj.basicOpenIsoSpec and Proj.iSup_basicOpen_eq_top, exactly the two declarations named by the imported proof. The unit has no proof steps and this is not its key statement node; no unit record change is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-02673d40d",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-02673d40d (reviewer sub-agent of L); spot-checked: The item is now a Mathlib leaf with no new nodes. The delivered statement follows the main-20261015 blueprint_update word for word: an arbitrary family whose ideal contains R_+, instead of master's homogeneous generators of R_+. This only strengthens the cover clause; the chart clause is unchanged. I read every cited line of the pinned Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean and each matches. basicOpen (l.54) and mem_basicOpen (l.58) give D_+(a) for any a. iSup_basicOpen_eq_top (l.86-94) has exactly the hypothesis irrelevant ≤ span(range f), with no homogeneity condition. basicOpenIsoSpec (l.155/161-169) is asIso of the canonical basicOpenToSpec (l.140) onto Spec(Away 𝒜 f), given f∈𝒜 m with 0<m. Away (HomogeneousLocalization.lean:601) is the degree-zero localization named by def-nagata-homogeneous-localization-degree-zero. This is one Mathlib lemma per clause (B8). The item's existing lean record already names these declarations, so the leaf agrees with it (B10). Removing the proof_dep on the unused cocycle lemma is correct. Small cases check out: f=0 or nilpotent gives two empty sides; R concentrated in degree 0 gives Proj=∅ with the empty family; {1} covers; {1+x,x²} in k[x] covers. Every citer (rees-generators cover, relative-proj functoriality, trf/sc/per/pur Proj users) uses a homogeneous family or a chart, so each is an instance of the stronger statement. The DAG search found no duplicate; def-pc-proj is a definition, not a theorem duplicate. The source is Stacks 01MB lemma-proj-scheme, read; no SGA is used. There is no repair note, the item is not dropped, the unit needs no change, and there are no tool_uses."
  }
 }
