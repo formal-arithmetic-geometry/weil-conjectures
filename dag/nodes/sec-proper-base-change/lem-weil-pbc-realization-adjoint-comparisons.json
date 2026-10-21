@@ -20,9 +20,118 @@
   "prop-weil-pbc-rational-transport",
   "lem-weil-pbc-continuous-coefficients-immersion-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work with ordinary ambient $P=Lh_A^*$ and $Q=Rh_{*,A}$, and write $P^E=Lh_c^*$, $Q^E=Rh_{c,*}$. The completed-pull comparison gives the actual natural isomorphism $\\gamma:P\\xrightarrow{\\sim}P_h$ on integral objects, and identifies the integral adjunction with $P\\dashv Q$ by precisely $\\gamma^{-1}$. Under this identification the specified $\\alpha$ becomes the ordinary scalar-pull comparison. Thus an equation proved using ordinary $P$, its unit and its counit is the required completed equation after inserting $\\gamma$ and $\\gamma^{-1}$; adjacent inverse factors cancel. Both $P$ and $Q$ preserve the integral constructible categories by the pull and push statements, so their ambient units and counits restrict to these full subcategories.",
+   "uses": [
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-realization-localized-push",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "Write $r_W$ for ambient restriction of scalars and $j_W:\\mathrm{id}\\to r_WF_W$ for the scalar-extension unit, for $W=T,U$. The coefficient description gives $E_W=A_W[1/\\varpi]$. The current completed-pull statement specifies $c_h:h^{-1}A_U\\xrightarrow{\\sim}A_T$ as the adjunct of precomposition with $V\\times_UT\\to V$, and specifies the $E$-coefficient isomorphism as its localization at $\\varpi$. These are the actual coefficient maps used by $P$ and $P^E$. The square with $A\\to E$ commutes: under the inverse-image/direct-image adjunction its two composites are precomposition of continuous $A$-valued functions followed by the inclusion into $E$, or that inclusion followed by precomposition, which agree. The localization comparison sends $a/\\varpi^n$ to the pulled numerator with the same denominator. The coefficient-change theorem therefore applies and supplies\n$$b:r_TP^E\\xrightarrow{\\sim}Pr_U,\\qquad d:r_UQ^E\\xrightarrow{\\sim}Qr_T,$$\nwith its stated compatibility of adjuncts. All functors here are ambient; in particular $r_WF_WM$ need not be integral constructible.",
+   "uses": [
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "In this notation the normalizations of the two specified comparisons say\n$$r_T(\\alpha_N)\\,j_{T,PN}=b_{F_UN}^{-1}P(j_{U,N}),\\qquad\nr_U(\\beta_M)\\,j_{U,QM}=d_{F_TM}^{-1}Q(j_{T,M}).$$\nThe first equation is exactly preservation of the localization unit by the scalar-pull comparison, after removing $\\gamma$ as in step 1. The second is exactly the extension/restriction transpose used to define the scalar-push comparison: the map out of $QM$ is $Q(j_{T,M})$, followed by $d^{-1}$. These are equations of derived morphisms, supplied by the cited normalizations; no computation with representatives of derived sections is being assumed.",
+   "uses": [
+    "lem-weil-pbc-realization-completed-pull",
+    "lem-weil-pbc-realization-localized-push",
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "For any ambient $E_T$-complex $Z$, apply the coefficient-change adjunct equation to the counit $t=\\epsilon^E_Z:P^EQ^EZ\\to Z$, whose adjunct is $1_{Q^EZ}$. Its restricted adjunct is $d_Z$. Inverting the ordinary $P\\dashv Q$ hom bijection therefore gives\n$$r_T(\\epsilon^E_Z)b_{Q^EZ}^{-1}=\\epsilon_{r_TZ}P(d_Z).$$\nThis uses the counit of the ambient integral adjunction at $r_TZ$, not a counit whose domain is restricted to constructible integral objects.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "Fix integral $M$ and transpose both sides of the desired counit equation along $F_T\\dashv r_T$. The transpose of $F_T(\\epsilon_M)$ is $j_{T,M}\\epsilon_M$ by naturality of $j_T$. Using step 3, naturality of $b$, step 3 again, and step 4 with $Z=F_TM$, the transpose of the other side is\n$$\\begin{aligned}\nr_T(\\epsilon^E_{F_TM})\\,r_TP^E(\\beta_M)\\,r_T(\\alpha_{QM})\\,j_{T,PQM}\n&=r_T(\\epsilon^E_{F_TM})\\,b_{Q^EF_TM}^{-1}P\\bigl(r_U(\\beta_M)j_{U,QM}\\bigr)\\\\\n&=r_T(\\epsilon^E_{F_TM})\\,b_{Q^EF_TM}^{-1}P(d_{F_TM}^{-1})PQ(j_{T,M})\\\\\n&=\\epsilon_{r_TF_TM}PQ(j_{T,M})=j_{T,M}\\epsilon_M.\n\\end{aligned}$$\nThe final equality is naturality of the ambient counit. Injectivity of the scalar adjunction's hom bijection proves $F_T(\\epsilon_M)=\\epsilon^E_{F_TM}P^E(\\beta_M)\\alpha_{QM}$. By the definition of a square mate this identifies $\\beta$ as the mate of $\\alpha^{-1}$ (the inverse is required by the direction convention in that definition), equivalently the claimed compatibility with the displayed pull isomorphism.",
+   "uses": [
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "For integral $N$ put $D_N=Q^E(\\alpha_N)\\beta_{PN}F_U(\\eta_N)$. Transpose it along $P^E\\dashv Q^E$. Naturality of $\\epsilon^E$, the counit equation of step 5 at $PN$, and naturality of $\\alpha$ at $\\eta_N$ give\n$$\\begin{aligned}\n\\epsilon^E_{P^EF_UN}P^E(D_N)\n&=\\alpha_N\\epsilon^E_{F_TPN}P^E(\\beta_{PN})P^EF_U(\\eta_N)\\\\\n&=\\alpha_NF_T(\\epsilon_{PN})\\alpha_{QPN}^{-1}P^EF_U(\\eta_N)\\\\\n&=\\alpha_NF_T\\bigl(\\epsilon_{PN}P(\\eta_N)\\bigr)\\alpha_N^{-1}=1.\n\\end{aligned}$$\nThe last equality is the triangle identity of $P\\dashv Q$. The transpose of $\\eta^E_{F_UN}$ is also the identity by its triangle identity. Injectivity of the same hom bijection yields $D_N=\\eta^E_{F_UN}$. Step 1 now restores the specified completed adjunction in both equations.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-realization-completed-pull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  },
+  {
+   "text": "Finally raw rationalization has the same objects and morphisms $u/\\varpi^n$. Extend the integral functors, unit and counit by rational transport. Naturality on a fraction is the integral naturality equation multiplied by $\\varpi^{-n}$, and the two triangle identities hold because their components are the images of the integral components. Hence these are the localized adjunctions. The realization functors send $u/\\varpi^n$ to $\\varpi^{-n}F_W(u)$; the same scalar calculation extends naturality of $\\alpha$ and $\\beta$. Every object of the raw localization is already an integral object, and the components of the two equations are exactly those proved in steps 5 and 6. Consequently both equations hold for the localized adjunctions as well. No choice of rational lattice or passage to an idempotent completion enters this argument.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-realization-scalar-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent calculation with the specified scalar units and the coefficient-change adjunct equation (Stacks Tags 07A6, 0D6D, 0D6E via lem-weil-pbc-ring-sheaf-change-adjunction)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-realization-completed-pull",
+  "lem-weil-pbc-realization-localized-push",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-realization-scalar-functor",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 gives the ambient setting, not the comparison equations; explicit adjunct and triangle calculation using the existing normalized coefficient-change statements"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +174,45 @@
    "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean; Mathlib/Topology/Convenient/Localization.lean; Mathlib/CategoryTheory/Sites/Localization.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
    "date": "2026-10-21",
    "verdict": "no match: general algebraic localization, sheaf or adjunction infrastructure; not the stated continuous-coefficient constructible comparison with its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension localization pullback pushforward specified comparisons preserve adjunction units counits",
+   "results": "PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+   "date": "2026-10-21",
+   "verdict": "no match: general mates/localization and underived module-sheaf adjunctions do not identify these specified continuous-coefficient derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|unit_mateEquiv|localization_unit_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: general mates/localization and underived module-sheaf adjunctions do not identify these specified continuous-coefficient derived comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars and pullback pushforward comparisons commute with adjunction counit",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Adjunction.CommShift.CompatibilityCounit",
+   "date": "2026-10-21",
+   "verdict": "no match: general mates/localization and underived module-sheaf adjunctions do not identify these specified continuous-coefficient derived comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: general mates/localization and underived module-sheaf adjunctions do not identify these specified continuous-coefficient derived comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed topos change of rings adjoint mate scalar localization inverse image direct image units",
+   "results": "SheafOfModules.unitToPushforwardObjUnit; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction; SheafOfModules.pushforwardSections_unitHomEquiv; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'",
+   "date": "2026-10-21",
+   "verdict": "no match: general mates/localization and underived module-sheaf adjunctions do not identify these specified continuous-coefficient derived comparison maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-condensed-e-realization",
@@ -86,5 +230,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-realization-adjoint-comparisons",
+  "worker": "stage1",
+  "summary": "Proved the specified adjunction equations from existing scalar-unit normalizations and the coefficient-restriction adjunct equation, using an explicit scalar-adjunction transpose and triangle calculation. Distinguished ambient restriction objects from the integral constructible subcategories and then extended to raw scalar localization. No new nodes or statement changes. Repair of the returned delivery: re-read the updated completed-pull statement, use its explicit adjunct/precomposition coefficient map and localized E map in step 2, and revalidate all citations against the current DAG.",
+  "blueprint": "thm-weil-pbc-finite-extension: rational transport of the integral exchange, through the realization comparison created for lem-weil-pbc-condensed-e-realization; supplies the adjunction compatibility needed for that transport, without changing the proper-base-change unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-6fa92cd95",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6fa92cd95 (reviewer sub-agent of L); spot-checked: This repairs the landing return of 767ee934, which I PASSed earlier: lem-weil-pbc-realization-completed-pull changed after that review. I diffed the item JSON against the 767ee934 snapshot. Statement, stmt_deps, proof_deps, source, every step's uses and steps 1 and 3–7 are byte-identical; only the step-2 text and the split_report summary changed. Of the 12 cited nodes, only completed-pull has a new statement. It keeps every assertion used in steps 1, 3 and 6: P_hK in I_T, γ is an iso, α=(comparison)∘F_T(γ⁻¹), localization units are preserved, and pulled fractions go to pulled numerators. It adds that c_h is the adjunct of precomposition with V×_UT→V and that the E-coefficient iso is the localization of c_h at ϖ. Step 2 checked against lem-weil-pbc-ring-sheaf-change-adjunction with u=h, R=A, S=E, c_R=c_h, c_S=localized c_h: the square a_T c_R=c_S h⁻¹a_U holds because both adjuncts are precomposition followed by A⊂E. The b/d directions match. This removes my earlier advisory, since the E map is now stated rather than identified by uniqueness. I recomputed steps 4–6 again. With t=ε^E_Z and t♯=1, r_T(ε^E_Z)b⁻¹=εP(d_Z). The step-5 transpose comes to j_{T,M}ε_M. The step-6 transpose is 1 by the triangle identity. β=(α⁻¹)^♭ under def-weil-pbc-adjunction-mate with G=F_U, H=F_T, as the report says. Edge cases hold: h=id, the empty scheme, ϖ-torsion objects, and non-constructible r_TF_TM. There are no new nodes and no duplicates, no SGA citation, and the item is not on a dropped list. Batch-5 flag on localization-inverse-image-coherence→lem-trf-geometric-inverse-image-exact: this is generic exactness of inverse image in a topos, not a step of the trace formula or Poincaré duality. The coherence node is also already a stmt_dep of completed-pull, which the item cited at base. Accepted. Cosmetic: Bhatt–Scholze Remark 6.8.15 starts on printed p.61, not p.62. No changes, no tool_uses."
  }
 }
