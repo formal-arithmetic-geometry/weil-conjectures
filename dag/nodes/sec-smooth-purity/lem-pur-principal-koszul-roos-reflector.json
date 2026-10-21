@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-principal-koszul-roos-reflector",
+ "kind": "statement",
+ "title": "Reflection property of the principal Koszul Roos complex",
+ "statement": "Let C be a small site and R a sheaf of commutative rings with exact countable products of module sheaves. Choose the module derived category and all slice derived categories in the same universe. Let a be a global section whose multiplication on the unit module is mono, and let P be any cochain complex. The strict principal Koszul Roos complex is locally derived (a)-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. For every locally derived (a)-complete derived object L, composition with the localized principalKoszulRoosUnit [lem-pur-principal-koszul-roos-presentation-comparison] gives a bijection Hom(Q(H(V)),L) ≃ Hom(Q(P),L).",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, completion as reflection and its finite Koszul model; sites-cohomology.tex, Tag 0941."
+ },
+ "stmt_deps": [
+  "lem-pur-principal-koszul-roos-presentation-comparison",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof": [
+  {
+   "text": "The faithful degree-zero embedding in the given derived category makes module sheaves locally small in the required morphism universe. Natural transformations between inverse towers inject into the countable product of their component Hom types. K-injective resolutions then show that the tower derived category exists in that same universe: morphisms into a K-injective representative are quotients of small chain-map types. Module sheaves and their inverse-tower category are Grothendieck abelian, the latter by evaluation left adjoints applied to a separator.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On each slice, the unit sheaf has a generating singleton section: its free evaluation is split epic by the identity section. The multiplication map carries that section to a, so this is an ideal-generating list. Apply the existing ringed Koszul reflector with this list, obtaining a normalized presentation D, completeness of D.completion(Q(P)) and its universal Hom bijection.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the principal presentation comparison to identify the strict Roos complex with D.completion(Q(P)), compatibly with the unit. Restriction and internal Hom preserve isomorphisms, so the local vanishing conditions transport. Composition with the comparison isomorphism is a bijection on Hom, transporting the reflector bijection to exactly the specified principal Roos unit.",
+   "uses": [
+    "lem-pur-principal-koszul-roos-presentation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-principal-koszul-roos-presentation-comparison",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-21",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, completion as reflection and its finite Koszul model; sites-cohomology.tex, Tag 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dual Koszul tensor tower and the negative cone tower give the same derived completion with the degree zero unit",
+   "results": "8 hits: AdicCompletion.instNeg; PiTensorProduct.dualDistribEquiv; HomologicalComplex.rightUnitor'; ProperCone.dual_flip_dual; AdicCompletion.ofTensorProductEquivOfPiFintype; HomologicalComplex.unit_tensor_d₁; ProperCone.dual.congr_simp; ProperCone.dual_empty.",
+   "date": "2026-10-21",
+   "verdict": "No match: ordinary adic completion and tensor infrastructure do not identify the two sheaf-complex towers or their units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual singleton Koszul tensor tower identifies with the negative cone tower, compatibly with the canonical degree zero completion unit",
+   "results": "8 hits, including HomologicalComplex.tensorUnitIso and the tensor-unit support instances; remaining hits concern graded tensor products and tensor algebras.",
+   "date": "2026-10-21",
+   "verdict": "No match for a Koszul tower or its normalized derived-limit unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"mappingCone\"",
+   "results": "12 hits: mappingCone, fst, snd, inl, descCochain, liftCochain, liftCochain_snd, inl_descCochain, inl_descCochain_v, ext_from, isZero_X_iff and related cone infrastructure.",
+   "date": "2026-10-21",
+   "verdict": "No singleton Koszul model comparison or completion reflector."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*dual|dual.*Koszul|derived.*complet",
+   "results": "0 Mathlib hits. Local library search found RingedKoszulSystem, StrictRoosComparison and RingedKoszulCompletionReflector, used below. Blueprint-wide Koszul search found no node identifying the principal cone with a singleton dual presentation.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the displayed normalized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RegularQuotientCompletionUnit",
+  "date": "2026-10-21",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Proof, integral-representative paragraph: completion used for completed scalar extension; Reflection property of the principal Koszul Roos complex",
+   "via": [
+    "lem-pur-regular-quotient-completion-unit",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalKoszulRoosReflector",
+  "file": "lean/Sheaf/Paper/PrincipalKoszulRoosReflector.lean",
+  "declaration": "CategoryTheory.principalKoszulRoos_reflector",
+  "statement": "theorem principalKoszulRoos_reflector\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [∀ V : C, HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose (J.over V) (forget₂ CommRingCat RingCat)).obj (R.over V)))]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    (a : (SheafOfModules.unit\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections)\n    (_ha : Mono (globalSectionMultiplication R a))\n    (P : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) :\n    IsLocallyDerivedRingedIdealComplete R\n      (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n      (globalSectionMultiplication R a)\n      (DerivedCategory.Q.{w}.obj\n        (roosF.obj (koszulTowerComplex R (koszulTensorTower R P a)))) ∧\n    ∀ L, IsLocallyDerivedRingedIdealComplete R\n        (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n        (globalSectionMultiplication R a) L →\n      Function.Bijective (fun f : DerivedCategory.Q.{w}.obj\n          (roosF.obj (koszulTowerComplex R (koszulTensorTower R P a))) ⟶ L ↦\n        DerivedCategory.Q.{w}.map (principalKoszulRoosUnit R P a) ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261021T182247-L-1170264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261021T182247-L-1170264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

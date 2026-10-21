@@ -20,77 +20,52 @@
  ],
  "proof": [
   {
-   "text": "Use the one-generator Koszul tower $Q_n=[\\mathcal O\\xrightarrow{a^n}\\mathcal O]$ in degrees $-1,0$, with transitions $(a,1)$, and put $V_n=P\\otimes Q_n$. The degree-zero inclusions define its strict augmentation from $P$. The quotient maps $\\epsilon_n:Q_n\\to(\\mathcal O/a^n\\mathcal O)[0]$ commute with transitions: in degree zero both composites are the same quotient map, and in degree minus one both vanish. Their composite with the inclusion of $\\mathcal O[0]$ is the quotient projection. Regularity holds for all powers, since $a^n$ is a composite of injective multiplication maps. The regular Koszul reconstruction theorem therefore applies with $t=a$ and the given K-flat $P$: its first assertion gives an augmentation-compatible isomorphism $e:R\\lim V_n\\xrightarrow{\\sim}R\\lim U_n$. This uses no flatness of the individual terms of $P$.",
+   "text": "Every power of multiplication by a is mono. The cone-to-cokernel augmentation of its degree-zero two-term sequence is a quasi-isomorphism by the exact short-complex cone theorem. Tensoring in the K-flat coefficient variable preserves this quasi-isomorphism. The canonical tower comparison is therefore levelwise a quasi-isomorphism. Exact countable products preserve quasi-isomorphisms, and the mapping-cone triangle shows that its strict Roos map is a quasi-isomorphism. This proves the quotient/Koszul Roos isomorphism directly.",
    "uses": [
-    "lem-pur-derived-complete-koszul-reconstruction"
+    "lem-pur-kflat-tensor-quasiiso-independent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul, one generator, together with the regular-element quotient comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\Lambda(P)=R\\lim V_n$ and $\\kappa_P:P\\to\\Lambda(P)$ for the degree-zero Koszul unit of the ringed-site reflector. Apply the strict Roos comparison to $U_\\bullet$. The site is small and its module category has exact countable products, exactly as that comparison requires. It gives $\\rho_U:C_a(P)\\xrightarrow{\\sim}R\\lim U_n$. Its strict-augmentation normalization says that $\\rho_U\\eta_{a,P}$ is the derived map induced by the quotient augmentation. Augmentation compatibility of $e$ in Step 1 identifies that same map with $e\\kappa_P$. Consequently $\\theta=e^{-1}\\rho_U:C_a(P)\\xrightarrow{\\sim}\\Lambda(P)$ satisfies the actual equality $\\theta\\eta_{a,P}=\\kappa_P$. The zero shifted-product coordinate is essential here: it is exactly the lift to which the cited normalization applies.",
-   "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-derived-complete-koszul-reconstruction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos resolution comparison and augmentation normalization"
-   }
+   "text": "In the two strict Roos coordinates, functoriality sends the augmentation (0,gamma) to (0,gamma followed by the tower comparison). The canonical quotient augmentation is exactly this composite. Thus the Koszul/quotient Roos isomorphism carries the actual principal Koszul unit to the actual quotient unit, not merely to a map with the same derived product projections.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply the ringed-site Koszul completion reflector with the singleton list $(a)$ and $N=P$. Its conclusion is expressed using derived internal Hom on every slice and every local section of the generated ideal, so it is precisely the local condition in the item, with no replacement by completeness merely at global sections. It says that $\\Lambda(P)$ is locally derived $(a)$-complete and that $\\kappa_P$ is an isomorphism if and only if $P$ is locally derived $(a)$-complete. The isomorphism $\\theta$ of Step 2 transfers completeness to $C_a(P)$: restriction and derived internal Hom carry an isomorphism to an isomorphism, so their vanishing conditions agree. The equation $\\theta\\eta_{a,P}=\\kappa_P$ proves that the specified $\\eta_{a,P}$ is invertible exactly when $P$ is locally derived complete.",
+   "text": "The principal Koszul Roos reflector gives completeness of the Koszul Roos complex and bijections on Hom into every locally complete object. Transport completeness to the quotient completion. A reflection unit into a reflective subcategory is invertible exactly when its source belongs to the subcategory: use the Hom bijection to obtain an inverse and its injectivity for the other inverse identity. The unit-compatible Roos isomorphism gives precisely the displayed quotient-unit criterion.",
    "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "lem-pur-principal-koszul-roos-reflector"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B, lemma-derived-completion, and 0A0E, lemma-derived-completion-koszul; Tag 0999, definition-derived-complete"
-   }
+   "elementary": false
   },
   {
-   "text": "If $\\eta_{a,P}$ is an isomorphism, then $h=\\rho_U\\eta_{a,P}:P\\xrightarrow{\\sim}R\\lim U_n$ is an isomorphism. Take the natural distinguished Roos triangle for $R\\lim U_n$ supplied by the ringed strict-tower homotopy-limit theorem, with first map $p$ and connecting map $\\delta$. Replace its first vertex by $P$ along $h$, keeping the two product vertices and $1-s$ fixed and replacing the connecting map by $h[1]^{-1}\\delta$. The resulting triangle is distinguished by invariance under isomorphism. Its first map is $ph$, whose $n$-th component is $q_n$, since the strict Roos comparison preserves the projections and sends the zero-coordinate quotient lift to the canonical augmentation. Thus this triangle has exactly the prescribed first arrow, not merely some compatible map into the product.",
+   "text": "Exact products imply that Q of the termwise complex product is a derived product (DerivedCategory.isLimitFanQ). Conjugating Q(1-s) by the unique product isomorphism gives the derived 1-s, by each product projection. Transport the distinguished mapping-cocone triangle along this product isomorphism. Its first map is Q(roosProj) followed by the product comparison, and its components are Q(roosEval). If the actual quotient unit is invertible, transport the first vertex along it; the strict augmentation identities yield exactly the prescribed quotient components.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-strict-roos-comparison",
+    "def-weil-triangulated-category",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely any displayed distinguished quotient Roos triangle has the same two product vertices and second map as the canonical strict Roos triangle. The triangle-morphism completion axiom gives a morphism between first vertices extending identities on both product vertices. The two-out-of-three theorem makes this morphism invertible. Hence P is isomorphic to the locally complete quotient Roos complex, so P is locally complete. The reflection criterion already established makes the specified quotient unit invertible. No arbitrary triangle filler is identified with the canonical unit.",
+   "uses": [
     "def-weil-triangulated-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos triangle and its augmentation projections"
-   }
-  },
-  {
-   "text": "Conversely, assume the stated distinguished triangle with first components $q_n$ exists. Apply the second assertion of regular Koszul reconstruction to $K=P$ and this very triangle. All its hypotheses are available: multiplication by $a$ is injective, $P$ is K-flat, the tower is the quotient tower, and the triangle has the required quotient components. It supplies an isomorphism $\\phi:P\\xrightarrow{\\sim}\\Lambda(P)$. The reflector makes $\\Lambda(P)$ locally derived complete; therefore $P$ is locally derived complete as well, because slice restriction and derived internal Hom preserve isomorphisms. Step 3 now implies that the specified $\\eta_{a,P}$ is an isomorphism. There is no assertion that $\\phi$ itself equals the canonical unit: completeness of its source gives invertibility of the canonical unit separately. Together with Steps 3 and 4 this proves all three equivalences.",
-   "uses": [
-    "lem-pur-derived-complete-koszul-reconstruction",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 0A0E and 099B; Bhatt--Scholze Lemma 3.4.12, canonical-map formulation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-derived-complete-koszul-reconstruction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-triangulated-category"
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-principal-koszul-roos-reflector",
+  "def-weil-triangulated-category",
+  "lem-sfb-grothendieck-k-injective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099B and 0A0E, one-generator completion, with sites-cohomology.tex Tag 0941 for the normalized strict Roos model; Bhatt--Scholze Lemma 3.4.12 for the canonical-map formulation."
+  "place": "Tags 099B and 0A0E; direct cone-to-quotient and exact-product Roos proof, preserving the specified zero-coordinate unit; sites-cohomology.tex Tag 0941."
  },
  "mathlib_searches": [
   {
@@ -222,9 +197,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-derived-complete-koszul-reconstruction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -257,5 +230,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Every node clause matches the Lean: small site and comm ring sheaf; exact countable products; Mono (multiplication by a); IsKFlatIndependentCoefficients P; reductionTensorTower (index n -> a^(n+1)); C_a(P) = roosF of koszulTowerComplex, i.e. Cone(1-s)[-1]; eta = roosAugment with coordinates (0, Pi.lift q_n) by roosAugment_chi and koszulRepresentativeAugmentation_quotient; local completeness via IsLocallyDerivedRingedIdealComplete with I = unit and iota = multiplication by a, a mono, so a·O(U) = (a)O(U); clauses: C_a(P) complete, P complete iff eta iso, eta iso iff exists HasProduct and an IsDerivedLimitTriangle with p ≫ pi_n = Q.map q_n. stmt_deps add only three landed def nodes (allowed), no cycle; dep records identical to live; statement verbatim; no duplicate definition; defs have real data; docstrings carry the 5 proof steps; imports are stmt_dep modules public plus proof-dep modules plain (generic reflector module, advisory). Compile: nt_compile timed out at 60 s at load 286/240; lcompile with a 560 s limit is clean (rc 0, about 25 s CPU); delivery records 31.5/37.4 s. Advisory: proof deps need HasDerivedCategory.{w} on the tower category for stage 3; retry landing at lower load if it times out."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261021T182247-L-1170264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
