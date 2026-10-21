@@ -216,81 +216,6 @@ theorem coherentSheafUniverseEquiv_naturality
   simp only [Sheaf.H.map_apply]
   exact coherentExtUniverseEquiv_comp q x f
 
-/-- Universe comparison with the native bundled cohomology group instances fixed.
-Source: Mathlib's canonical Ext universe equivalence.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentSheafUniverseEquiv
-    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}]
-    [hs : HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    [hl : HasExt.{u + 1} (Sheaf J AddCommGrpCat.{u})]
-    (q : ℕ) (F : Sheaf J AddCommGrpCat.{u}) :
-    (@Sheaf.functorH.{u, u, u, u} C _ J _ hs q).obj F ≃+
-      (@Sheaf.functorH.{u + 1, u, u, u} C _ J _ hl q).obj F :=
-  @coherentExtUniverseEquiv _ _ _ hs hl _ F q
-
-/-- Evaluate the bundled universe comparison as the original Ext map.
-Source: the defining comparison.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-theorem coherentSheafUniverseEquiv_apply
-    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}]
-    [hs : HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    [hl : HasExt.{u + 1} (Sheaf J AddCommGrpCat.{u})]
-    (q : ℕ) (F : Sheaf J AddCommGrpCat.{u}) (x : @Sheaf.H.{u} C _ J F _ hs q) :
-    coherentSheafUniverseEquiv J q F x =
-      @coherentExtUniverseEquiv _ _ _ hs hl _ F q x := rfl
-
-private theorem coherentSheafUniverseEquiv_native_naturality
-    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}]
-    [hs : HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    [hl : HasExt.{u + 1} (Sheaf J AddCommGrpCat.{u})]
-    (q : ℕ) {F G : Sheaf J AddCommGrpCat.{u}} (φ : F ⟶ G)
-    (x : (@Sheaf.functorH.{u, u, u, u} C _ J _ hs q).obj F) :
-    coherentSheafUniverseEquiv J q G
-        ((@Sheaf.functorH.{u, u, u, u} C _ J _ hs q).map φ x) =
-      (@Sheaf.functorH.{u + 1, u, u, u} C _ J _ hl q).map φ
-        (coherentSheafUniverseEquiv J q F x) := by
-  exact coherentSheafUniverseEquiv_naturality J q φ x
-
-/-- Compose the resolution and universe comparisons before specializing their objects.
-Source: Stacks Project, Tag 03FD; composition of the recorded comparisons.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentModuleUniverseComparison
-    {C : Type*} [Category C] {R : Type u} [Ring R]
-    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (M : C)
-    {B : Type v} [AddCommGroup B] (U : L.obj M ≃+ B) :
-    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).obj (K.obj M) ≃+ B :=
-  (η.app M).addCommGroupIsoToAddEquiv.trans U
-
-/-- Evaluate the composite using the recorded resolution component.
-Source: the defining composite.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-theorem coherentModuleUniverseComparison_apply
-    {C : Type*} [Category C] {R : Type u} [Ring R]
-    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (M : C)
-    {B : Type v} [AddCommGroup B] (U : L.obj M ≃+ B) (x : K.obj M) :
-    coherentModuleUniverseComparison η M U x = U ((η.app M).hom x) := rfl
-
-private theorem coherentModuleUniverseComparison_naturality
-    {C : Type*} [Category C] {R : Type u} [Ring R]
-    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
-    {P : C ⥤ AddCommGrpCat.{v}}
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L)
-    (U : ∀ M, L.obj M ≃+ P.obj M)
-    (hu : ∀ {F G : C} (φ : F ⟶ G) (x : L.obj F),
-      U G (L.map φ x) = P.map φ (U F x))
-    {F G : C} (φ : F ⟶ G) (x : K.obj F) :
-    coherentModuleUniverseComparison η G (U G) ((K.map φ).hom x) =
-      P.map φ (coherentModuleUniverseComparison η F (U F) x) := by
-  exact (coherentModuleUniverseComparison_apply η G (U G) _).trans
-    ((congrArg (U G) (ConcreteCategory.congr_hom (η.hom.naturality φ) x)).trans
-      ((hu φ _).trans (congrArg (fun z ↦ P.map φ z)
-        (coherentModuleUniverseComparison_apply η F (U F) x).symm)))
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The fixed resolution comparison, with only the universe of its Ext presentation changed.
@@ -301,10 +226,15 @@ Source: Stacks Project, Tag 03FD; the explicit common-resolution comparison.
 def moduleAbelianCohomologyLarge (X : Scheme.{u})
     (F : X.Modules) (q : ℕ) : coherentModuleGroup X F q ≃+
       CoherentEtale.Source X F q :=
-  coherentModuleUniverseComparison (moduleCohomologyExtResolutionNatIso X q) F
-    (@coherentSheafUniverseEquiv X.Opens inferInstance (Opens.grothendieckTopology X)
-      (comparisonHasSheafify X) (comparisonHasExt X) (HasExt.standard _) q
-      ((SheafOfModules.toSheaf X.ringCatSheaf).obj F))
+  ((moduleCohomologyExtResolutionNatIso X q).app F).addCommGroupIsoToAddEquiv.trans
+    (@coherentExtUniverseEquiv
+      (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+      _ _ (comparisonHasExt X) (HasExt.standard _) _ _ q)
+
+private theorem iso_composite_apply
+    {A B : AddCommGrpCat.{u}} {C : Type*} [AddCommGroup C]
+    (e : A ≅ B) (t : B ≃+ C) (x : A) :
+    e.addCommGroupIsoToAddEquiv.trans t x = t (e.hom x) := rfl
 
 /-- Evaluate the fixed comparison using its recorded resolution-isomorphism component.
 Source: Stacks Project, Tag 03FD; this is the defining composite.
@@ -317,14 +247,20 @@ theorem moduleAbelianCohomologyLarge_component (X : Scheme.{u}) (F : X.Modules) 
         _ _ (comparisonHasExt X) (HasExt.standard _) _ _ q
         (((moduleCohomologyExtResolutionNatIso X q).app F).hom x) := by
   unfold moduleAbelianCohomologyLarge
-  exact (@coherentModuleUniverseComparison_apply _ _ _ _ _ _
-    (moduleCohomologyExtResolutionNatIso X q) F
-    (CoherentEtale.Source X F q) inferInstance _ x).trans
-      (@coherentSheafUniverseEquiv_apply X.Opens inferInstance
-        (Opens.grothendieckTopology X) (comparisonHasSheafify X)
-        (comparisonHasExt X) (HasExt.standard _) q _ _)
+  exact iso_composite_apply (moduleCohomologyExtResolutionNatIso X q |>.app F)
+    (@coherentExtUniverseEquiv
+      (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+      _ _ (comparisonHasExt X) (HasExt.standard _) _ _ q) x
 
 attribute [local irreducible] moduleAbelianCohomologyLarge
+
+private theorem iso_component_natural
+    {C : Type*} [Category C] {R : Type u} [Ring R]
+    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L)
+    {F G : C} (f : F ⟶ G) (x : K.obj F) :
+    (η.app G).hom ((K.map f).hom x) = (L.map f) ((η.app F).hom x) :=
+  ConcreteCategory.congr_hom (η.hom.naturality f) x
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -338,18 +274,22 @@ theorem moduleAbelianCohomologyLarge_naturality (X : Scheme.{u}) (q : ℕ)
     moduleAbelianCohomologyLarge X G q
       (((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom x) =
       CoherentEtale.sourceMap X φ q (moduleAbelianCohomologyLarge X F q x) := by
-  unfold moduleAbelianCohomologyLarge
-  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
-  exact coherentModuleUniverseComparison_naturality
-    (P := T ⋙ @Sheaf.functorH.{u + 1, u, u, u} X.Opens inferInstance
-      (Opens.grothendieckTopology X) (comparisonHasSheafify X) (HasExt.standard _) q)
-    (moduleCohomologyExtResolutionNatIso X q)
-    (fun M ↦ @coherentSheafUniverseEquiv X.Opens inferInstance
-      (Opens.grothendieckTopology X) (comparisonHasSheafify X)
-      (comparisonHasExt X) (HasExt.standard _) q (T.obj M))
-    (fun φ x ↦ @coherentSheafUniverseEquiv_native_naturality X.Opens inferInstance
-      (Opens.grothendieckTopology X) (comparisonHasSheafify X)
-      (comparisonHasExt X) (HasExt.standard _) q _ _ (T.map φ) x) φ x
+  let U := @coherentExtUniverseEquiv
+    (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    inferInstance inferInstance (comparisonHasExt X) (HasExt.standard _)
+  have h := iso_component_natural (moduleCohomologyExtResolutionNatIso X q) φ x
+  dsimp only [Functor.comp_map, Sheaf.functorH] at h
+  have hu := @coherentSheafUniverseEquiv_naturality
+    X.Opens inferInstance (Opens.grothendieckTopology X) inferInstance
+    (comparisonHasExt X) (HasExt.standard _)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj F)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj G) q
+    ((SheafOfModules.toSheaf X.ringCatSheaf).map φ)
+    (((moduleCohomologyExtResolutionNatIso X q).app F).hom x)
+  exact (moduleAbelianCohomologyLarge_component X G q _).trans
+    ((congrArg (U _ _ q) h).trans
+      (hu.trans (congrArg (CoherentEtale.sourceMap X φ q)
+        (moduleAbelianCohomologyLarge_component X F q x).symm)))
 
 /-- The canonical etale-to-module comparison. Its inverse is the fixed resolution comparison
 followed by the uniquely normalized change-of-site comparison.
@@ -362,63 +302,18 @@ def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}
   ((moduleAbelianCohomologyLarge X F q).trans
     (normalizedCoherentEtaleComparison f F q)).symm
 
-/-- Transport an additive endomorphism along an additive equivalence.
-The full additive-group structures are fixed before taking inherited projections.
-Source: transport of structure; Stacks Project, Tag 0A3P.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentConjugateEndomorphism {A B : Type*} [AddCommGroup A] [AddCommGroup B]
-    (e : A ≃+ B) (f : B →+ B) : A →+ A :=
-  e.symm.toAddMonoidHom.comp (f.comp e.toAddMonoidHom)
-
-/-- Conjugate on module objects before specializing the functors.
-Source: the fixed natural-isomorphism component; Stacks Project, Tag 03FD.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentModuleConjugateEndomorphism
-    {C : Type*} [Category C] {R : Type u} [Ring R]
-    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (M : C)
-    (a : L.obj M →+ L.obj M) : K.obj M →+ K.obj M :=
-  coherentConjugateEndomorphism (ExtEdgeResolution.moduleComparisonEquiv η M) a
-
-/-- Evaluate module conjugation by its forward and inverse components.
-Source: the defining composite.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-theorem coherentModuleConjugateEndomorphism_apply
-    {C : Type*} [Category C] {R : Type u} [Ring R]
-    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (M : C)
-    (a : L.obj M →+ L.obj M) (x : K.obj M) :
-    coherentModuleConjugateEndomorphism η M a x = (η.app M).inv (a ((η.app M).hom x)) := rfl
-
-/-- The additive coefficient action transported through the fixed resolution comparison.
-Source: Stacks Project, Tags 03FD and 0A3P.
+/-- An additive coefficient endomorphism acts on module cohomology through the fixed
+module/abelian resolution comparison. In particular this defines coherent Frobenius when
+`φ` is sectionwise pth power; no module-linearity of `φ` is required.
+Source: Stacks Project, Tags 03FD and 0A3P
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
 def coherentAdditiveEndomorphism (X : Scheme.{u}) (F : X.Modules) (q : ℕ)
-    (φ : (SheafOfModules.toSheaf X.ringCatSheaf).obj F ⟶
-      (SheafOfModules.toSheaf X.ringCatSheaf).obj F) :
-    (RingedSpace.moduleCohomology X.toRingedSpace q).obj F →+
-      (RingedSpace.moduleCohomology X.toRingedSpace q).obj F :=
-  coherentModuleConjugateEndomorphism (moduleCohomologyExtResolutionNatIso X q) F
-    ((@Sheaf.functorH.{u, u, u, u} X.Opens inferInstance
-      (Opens.grothendieckTopology X) (comparisonHasSheafify X) (comparisonHasExt X) q).map
-      φ).hom
-
-/-- Evaluate the action using the recorded resolution-isomorphism component.
-Source: Stacks Project, Tags 03FD and 0A3P.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-theorem coherentAdditiveEndomorphism_apply (X : Scheme.{u}) (F : X.Modules) (q : ℕ)
-    (φ : (SheafOfModules.toSheaf X.ringCatSheaf).obj F ⟶
-      (SheafOfModules.toSheaf X.ringCatSheaf).obj F)
-    (v : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :
-    coherentAdditiveEndomorphism X F q φ v =
-      ((moduleCohomologyExtResolutionNatIso X q).app F).inv
-        (@Sheaf.H.map _ _ _ inferInstance (comparisonHasExt X) _ _ φ q
-          (((moduleCohomologyExtResolutionNatIso X q).app F).hom v)) :=
-  coherentModuleConjugateEndomorphism_apply (moduleCohomologyExtResolutionNatIso X q) F
-    ((@Sheaf.functorH.{u, u, u, u} X.Opens inferInstance
-      (Opens.grothendieckTopology X) (comparisonHasSheafify X) (comparisonHasExt X) q).map
-      φ).hom v
-
+    (φ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F ⟶
+      (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F) :
+    coherentModuleGroup X F q →+ coherentModuleGroup X F q :=
+  (moduleAbelianCohomologyLarge X F q).symm.toAddMonoidHom.comp
+    ((@Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _ φ q).comp
+      (moduleAbelianCohomologyLarge X F q).toAddMonoidHom)
 
 /-- The associated structure-module sheaf, expressed through the recorded tensor-sections
 construction and coefficient lift. Source: Stacks Project, Tag 03P2
@@ -428,24 +323,14 @@ abbrev structureTensorEtaleSheaf (X : Scheme.{u}) :
   @liftedCoherentEtaleSheaf X (unit X)
     (SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf))
 
-/-- Restrict scalars on the target without changing an additive equivalence.
-Source: restriction of scalars retains the underlying additive group.
-(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentScalarEquiv {R k : Type u} [Ring R] [Field k] (M : ModuleCat.{u} R)
-    (σ : k →+* R) {A : Type*} [AddCommGroup A]
-    (e : A ≃+ (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).obj M) :
-    letI : Module k M := Module.compHom M σ
-    A ≃+ ModuleCat.of k M := e
-
 /-- Specialize the canonical comparison to the structure module.
 Source: Stacks Project, Tags 03P2, 03FD and 0A3P
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
 def structureCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsProper f] (q : ℕ) :
     Sheaf.H (structureTensorEtaleSheaf X) q ≃+ scalarCohomology f (unit X) q :=
-  coherentScalarEquiv ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (unit X))
-    (scalarMap f ⊤) (@canonicalCoherentEtaleComparison k _ X f _ (unit X)
-      (SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)) q)
+  @canonicalCoherentEtaleComparison k _ X f _ (unit X)
+    (SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)) q
 
 /-- The same canonical comparison on a base-changed proper scheme. Properness of the
 base change is supplied by stability under base change, not a new hypothesis.
