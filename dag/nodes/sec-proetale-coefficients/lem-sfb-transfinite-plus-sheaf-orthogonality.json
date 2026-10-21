@@ -1,0 +1,77 @@
+{
+ "id": "lem-sfb-transfinite-plus-sheaf-orthogonality",
+ "kind": "statement",
+ "title": "The transfinite plus unit is orthogonal to every sheaf",
+ "statement": "Fix a universe $\\mathcal V$, a $\\mathcal V$-small site $(\\mathcal C,J)$ [def-weil-pbc-sites-and-cohomology], and a Grothendieck abelian category $\\mathcal A$ relative to $\\mathcal V$, with $\\mathcal V$-small Hom sets [def-sp-grothendieck-abelian]. For an $\\mathcal A$-valued presheaf $P$, put $P^+(U)=\\operatorname{colim}_{S\\in J(U)^{\\mathrm{op}}}M_S(P)$, where $J(U)$ is the poset of covering sieves of $U$ for the Grothendieck topology $J$ [def-weil-pbc-topos], ordered by inclusion, and $M_S(P)$ is the limit of $P(V)$ over arrows $V\\to U$ in $S$, with compatibility along arrows over $U$; its maps for sieve refinements are restriction maps. The canonical $P\\to P^+$ is induced by the restriction maps from $P(U)$ to matching objects. For an infinite regular cardinal $\\kappa\\in\\mathcal V$, form the functorial transfinite iteration $P_0=P$, $P_{\\alpha+1}=P_\\alpha^+$, $P_\\lambda=\\operatorname{colim}_{\\alpha<\\lambda}P_\\alpha$ at nonzero limit ordinals, and $Q_\\kappa(P)=\\operatorname{colim}_{\\alpha<\\kappa}P_\\alpha$, with canonical map $\\eta_P:P\\to Q_\\kappa(P)$ [def-weil-pbc-category-colimit]. For every sheaf $F$ (meaning $U\\mapsto\\operatorname{Hom}_{\\mathcal A}(T,F(U))$ is a sheaf of sets for every $T\\in\\mathcal A$), precomposition with $\\eta_P$ is a bijection $\\operatorname{Hom}_{\\operatorname{PSh}}(Q_\\kappa(P),F)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\operatorname{PSh}}(P,F)$. This bijection is natural in $P$ and $F$. No claim that $Q_\\kappa(P)$ is a sheaf is made.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/TransfinitePlus.lean",
+  "place": "W_toTransfinitePlus_app, lines 173-178; W is orthogonality to sheaves, defined in Mathlib/CategoryTheory/Sites/Localization.lean. Construction at lines 56-83."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the unit from a presheaf to its transfinite plus iteration induces bijections of maps into every sheaf",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.plus_hom_ext, CategoryTheory.GrothendieckTopology.toPlus_plusLift, CategoryTheory.GrothendieckTopology.isoToPlus, CategoryTheory.Presheaf.isLocallyInjective_toPlus, CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf, CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus, CategoryTheory.plusPlusIsoSheafify, CategoryTheory.toSheafify_plusPlusIsoSheafify_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: plusLift and plusLift_unique treat a single plus step, and W_toSheafify presupposes a sheafification. None states orthogonality of this specified transfinite unit; project TransfinitePlus.lean:173-178 does."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPlus\", \"homEquiv\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: plusLift and plusLift_unique treat a single plus step, and W_toSheafify presupposes a sheafification. None states orthogonality of this specified transfinite unit; project TransfinitePlus.lean:173-178 does."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinitePlus|W_toPlus|plus.*[Hh]om[Ee]quiv",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: plusLift and plusLift_unique treat a single plus step, and W_toSheafify presupposes a sheafification. None states orthogonality of this specified transfinite unit; project TransfinitePlus.lean:173-178 does."
+  },
+  {
+   "tool": "leansearch",
+   "query": "maps from a transfinite plus construction into a sheaf factor uniquely through its unit",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.plusLift_unique, CategoryTheory.GrothendieckTopology.plus_hom_ext, CategoryTheory.sheafify_hom_ext, CategoryTheory.plusPlusAdjunction_unit_app, CategoryTheory.toSheafification, CategoryTheory.toSheafification_app, CategoryTheory.toSheafify, CategoryTheory.sheafifyLift",
+   "date": "2026-10-21",
+   "verdict": "no match: plusLift and plusLift_unique treat a single plus step, and W_toSheafify presupposes a sheafification. None states orthogonality of this specified transfinite unit; project TransfinitePlus.lean:173-178 does."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps inverted by all local sheaves are closed under transfinite composition so the iterated plus unit is orthogonal to every sheaf",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus, CategoryTheory.Presheaf.isLocallyInjective_toPlus, CategoryTheory.GrothendieckTopology.W_toSheafify, CategoryTheory.HasWeakSheafify, CategoryTheory.GrothendieckTopology.W, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.IsLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_toSheafify",
+   "date": "2026-10-21",
+   "verdict": "no match: plusLift and plusLift_unique treat a single plus step, and W_toSheafify presupposes a sheafification. None states orthogonality of this specified transfinite unit; project TransfinitePlus.lean:173-178 does."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-grothendieck-sheafification",
+  "date": "2026-10-21",
+  "group": "Q01"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-finite-upper-star-exact",
+   "place": "First proof paragraph: sheafification is left exact for Grothendieck abelian coefficients; universal mapping property of the transfinite unit.",
+   "via": [
+    "lem-sfb-grothendieck-sheafification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

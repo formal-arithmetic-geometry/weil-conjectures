@@ -32,9 +32,84 @@
   "def-weil-pbc-sheafification",
   "def-galois-finite-limits-colimits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a generator $G$ of $\\mathcal A$ using [def-sp-grothendieck-abelian]. By [lem-coef-grothendieck-locally-presentable], $\\mathcal A$ is locally presentable; applying [lem-coef-object-presentability-rank] to $G$ gives an infinite regular $\\kappa_0\\in\\mathcal V$ for which $\\operatorname{Hom}(G,-)$ preserves $\\kappa_0$-filtered colimits. Apply [lem-coef-small-family-regular-bound] to the two $\\mathcal V$-small sets $\\operatorname{Mor}(\\mathcal C)$ and the initial ordinal of $\\kappa_0$. Obtain an infinite regular $\\kappa$ strictly larger than both cardinalities. A $\\kappa$-filtered category is $\\kappa_0$-filtered directly from the definition, so $G$ is also $\\kappa$-presentable. Thus the generator, presentability and site-size hypotheses of the transfinite construction all hold in the original universe.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-coef-grothendieck-locally-presentable",
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+   }
+  },
+  {
+   "text": "For each presheaf $P$, take the functorial plus iteration $Q_\\kappa(P)$ specified in [lem-sfb-transfinite-plus-sheaf-convergence]: start at $P$, apply the matching-family plus construction at successors and take colimits at limits and at $\\kappa$. This is a real construction, not an object chosen from an existence assertion. By that node, with the $G$ and $\\kappa$ of step 1, its value satisfies exactly the Hom-tested sheaf condition in this item. Corestrict its functor on presheaves to the full subcategory of sheaves and call the resulting functor $a$. On natural transformations it is the same plus iteration; identities and compositions hold because corestriction to a full subcategory does not alter morphisms.",
+   "uses": [
+    "lem-sfb-transfinite-plus-sheaf-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+   }
+  },
+  {
+   "text": "The canonical $\\eta_P:P\\to Q_\\kappa(P)=\\iota a(P)$ of this construction induces, by [lem-sfb-transfinite-plus-sheaf-orthogonality], natural bijections $\\operatorname{Hom}_{\\operatorname{PSh}}(\\iota a(P),\\iota F)\\cong\\operatorname{Hom}_{\\operatorname{PSh}}(P,\\iota F)$ for all sheaves $F$. Since sheaves form a full subcategory, the left side is $\\operatorname{Hom}_{\\operatorname{Sh}}(a(P),F)$. These natural bijections are the adjunction $a\\dashv\\iota$, and assert precisely the universal property of sheafification in [def-weil-pbc-sheafification]. The orthogonality lemma imposes no unproved sheafification-existence assumption.",
+   "uses": [
+    "lem-sfb-transfinite-plus-sheaf-orthogonality",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-transfinite-plus-finite-limits] to the same site, coefficient category, generator and regular cardinal chosen in step 1. Its corestricted functor is the functor $a$ just constructed in step 2, so it preserves finite limits. This is preservation for the actual sheaf-valued functor, not merely for an endofunctor on presheaves; no separate identification of two independently chosen reflectors is required.",
+   "uses": [
+    "lem-sfb-transfinite-plus-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+   }
+  },
+  {
+   "text": "The coefficient category $\\mathcal A$ is abelian by [def-sp-grothendieck-abelian]. Steps 3 and 4 give a left adjoint to the sheaf inclusion and its finite-limit preservation. Therefore [lem-sfb-abelian-sheaves-left-exact-reflector], applied with $\\mathcal B=\\mathcal A$ and $L=a$, gives that $\\operatorname{Sh}(\\mathcal C,J;\\mathcal A)$ is abelian. Its sheaf condition is the same Hom-tested condition used in step 2, so this concludes every clause of the item.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-sfb-abelian-sheaves-left-exact-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+    "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-coef-grothendieck-locally-presentable",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-sfb-transfinite-plus-sheaf-convergence",
+  "lem-sfb-transfinite-plus-sheaf-orthogonality",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-transfinite-plus-finite-limits",
+  "lem-sfb-abelian-sheaves-left-exact-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean",
+  "place": "hasSheafify_of_isGrothendieckAbelian, lines 61-65, expanded through TransfinitePlusSheaf.lean:171-188. The blueprint place is the first paragraph of lem-sfb-finite-upper-star-exact.proof.md; Stacks 00WJ is only the set-valued prototype."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +173,38 @@
    "results": "12 hits; first recorded hits: CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.H', CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.functorH",
    "date": "2026-10-16",
    "verdict": "exact match for the abelianness clause after supplying HasSheafify with the attached project theorem; this is not an unconditional Mathlib existence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasSheafify, CategoryTheory.IsGrothendieckAbelian",
+   "results": "3 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, TopCat.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-21",
+   "verdict": "no unconditional Mathlib match: HasSheafify is an assumption in the returned sheaf abelianness and Grothendieck-category results; project hasSheafify theorem supplies only the first two clauses of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "hasSheafify.*Grothendieck|sheafIsAbelian|HasSheafify.isLeftExact",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "no unconditional Mathlib match: HasSheafify is an assumption in the returned sheaf abelianness and Grothendieck-category results; project hasSheafify theorem supplies only the first two clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact sheafification exists for any small site with arbitrary Grothendieck abelian coefficients and the sheaf category is abelian",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.HasSheafify.isLeftExact, SheafOfModules.instAbelian, CategoryTheory.HasSheafify.mk', CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.ab5ofSize",
+   "date": "2026-10-21",
+   "verdict": "no unconditional Mathlib match: HasSheafify is an assumption in the returned sheaf abelianness and Grothendieck-category results; project hasSheafify theorem supplies only the first two clauses of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "existence of left exact sheafification for arbitrary Grothendieck abelian category coefficients on any small site",
+   "results": "8 hits: CategoryTheory.hasSheafifyEssentiallySmallSite, CategoryTheory.HasWeakSheafify, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.HasSheafify, CategoryTheory.HasSheafify.mk', CategoryTheory.presheafToSheaf, CategoryTheory.sheafification, CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover",
+   "date": "2026-10-21",
+   "verdict": "no unconditional Mathlib match: HasSheafify is an assumption in the returned sheaf abelianness and Grothendieck-category results; project hasSheafify theorem supplies only the first two clauses of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-upper-star-exact",
@@ -134,5 +237,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-grothendieck-sheafification",
+  "worker": "stage1",
+  "summary": "Expanded the project transfinite-plus proof into rank choice, convergence, orthogonality/adjunction, left exactness and abelianness. Kept the exact statement and universe. Four searched statement-only helpers, including one conditional Mathlib leaf; reused existing locally-presentable and cardinal-bound nodes. The existing project theorem does not by itself include the final abelianness clause, so no partial attachment is claimed.",
+  "blueprint": "lem-sfb-finite-upper-star-exact, first proof paragraph: the sheafification factor is left exact for arbitrary Grothendieck abelian coefficients. All five steps realize that assertion and its abelian-category setting."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-5825bdb99",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5825bdb99 (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and every cited statement (def-sp-grothendieck-abelian, lem-coef-grothendieck-locally-presentable, lem-coef-object-presentability-rank, lem-coef-small-family-regular-bound, def-weil-pbc-sheafification, def-galois-finite-limits-colimits, def-weil-pbc-category-colimit, def-weil-pbc-sites-and-cohomology). Also read the blueprint main-20261015 proof of lem-sfb-finite-upper-star-exact (first paragraph), the project Lean (HasSheafify.lean:54-65; TransfinitePlusSheaf.lean:72-188; TransfinitePlus.lean:55-181) and Mathlib Sites/Abelian.lean:30-42 and Sheafification.lean:40-63. The item statement is verbatim. The five steps are correct and complete. Step 1: the rank κ is larger than κ0 and #Mor C, and κ-filtered implies κ0-filtered. Steps 2-4: convergence, then orthogonality giving the adjunction by fullness, then finite-limit preservation of the same functor. Step 5: the sheafIsAbelian leaf, through HasSheafify.mk'. The new statements are true: convergence by κ-presentability and κ-small matching diagrams, with a generator being a detector in an abelian category; orthogonality for every κ (W_toTransfinitePlus_app); left exactness by AB5 and filtered colimits over covering sieves. None restates an item clause and none is a duplicate (DAG grep for plus construction, transfinite, covering sieve, 03A3, HasSheafify, sheafIsAbelian). Small cases checked: empty C, zero A, coarsest topology, covering empty sieve. FIX (B3): the three transfinite nodes use 'covering sieves J(U)' but cite only def-weil-pbc-sites-and-cohomology, which defines covering families and no sieves. Added [def-weil-pbc-topos] (same unit, no cycle) to their text and stmt_deps; the corrected whole files are in fixes/dag/nodes/sec-proetale-coefficients/. Advisory for the maintainer: (1) the item is covered clause by clause by the sorry-free hasSheafify_of_isGrothendieckAbelian (HasSheafify.lean:61-65) plus Mathlib sheafIsAbelian, so a per-clause attachment is possible; the split is still legitimate because no single declaration states the whole item. (2) The helpers have exact project-Lean candidates: isSheaf_transfinitePlus_obj_of_isSeparator, W_toTransfinitePlus_app, preservesFiniteLimits_transfinitePlusSheaf. (3) The helpers take the existence of V-small limits in Grothendieck abelian A for granted; whoever splits a helper needs a completeness node. No SGA is used and no tool_uses are needed.; 3 file(s) fixed by the reviewer"
  }
 }
