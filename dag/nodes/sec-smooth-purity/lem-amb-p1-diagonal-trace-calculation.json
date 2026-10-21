@@ -1,0 +1,111 @@
+{
+ "id": "lem-amb-p1-diagonal-trace-calculation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-p1-diagonal-integrals",
+   "place": "Worker decomposition of the diagonal integral proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Trace of the two diagonal Chern components",
+ "status": "split",
+ "statement": "In the situation of [def-amb-p1-diagonal-data], let $c:\\Delta_*A_P\\to A_W(1)[2]$ be any morphism with $\\alpha_a\\circ R(p_a)_*(c)\\circ J_a=h_{c_P}+c_S\\circ u_P$ (notation of [def-amb-p1-trace], [def-asd-ordinary-finite-p1-arrows]). Then $\\alpha_a\\circ R(p_a)_*(c)\\circ t_{p_a}=\\operatorname{id}_{A_P}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+  "place": "Worker decomposition of the diagonal integral proof"
+ },
+ "stmt_deps": [
+  "def-sp-p1-diagonal-charts",
+  "def-amb-p1-diagonal-data",
+  "def-amb-p1-trace",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "By [def-amb-p1-diagonal-data] $t_{p_a}=t_r\\circ J_a$, so the left side is $(h_{c_P}+c_S u_P)\\circ t_r$. The trace $t_r=\\operatorname{pr}_2\\circ b^{-1}$ of [def-amb-p1-trace] sends $h_{c_P}$ to $1$. Since $b=(u_P,h_{c_P})$, $u_P\\circ b^{-1}=\\iota_1$ and $\\iota_1\\operatorname{pr}_2=0$; hence $c_Su_Pt_r=0$ and the sum is the identity.",
+   "uses": [
+    "def-amb-p1-diagonal-data",
+    "def-amb-p1-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+    "place": "Proof: the trace integrates the degree-one class to 1 (pr2 b^{-1} b in2 = 1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-p1-diagonal-data",
+  "def-amb-p1-trace"
+ ],
+ "proof_origin": {
+  "by": "reviewer of G4 delivery 16cdfbf0",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+  "place": "Proof step 6: pr2 b^{-1} b in2 = 1"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "projective line diagonal trace Cartier calculation",
+   "results": "No exact theorem; use existing regular immersion and trace interfaces.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "projectiveLineTrace_chern and regular immersion generators",
+   "results": "Existing declarations inspected.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLineTrace_chern|exists_isWeaklyRegular_generators",
+   "results": "Existing library declarations inspected.",
+   "date": "2026-10-21"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals",
+  "date": "2026-10-21",
+  "group": "G4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalTraceCalculation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalTraceCalculation.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_diagonal_trace_calculation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLine_diagonal_trace_calculation"
+  ],
+  "statement": "theorem projectiveLine_diagonal_trace_calculation (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (a : Bool) :\n    letI : IsLocallyNoetherian (ProjectiveLine S) :=\n      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)\n    letI : CompactSpace (ProjectiveLine S) :=\n      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)\n    letI : IsNoetherian (ProjectiveLine S) := ⟨⟩\n    ∀ (c : (ordinaryFinitePushforward A\n        (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n      (ordinaryFiniteUnit A (ProjectiveLine S)) ⟶\n      (ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧),\n    (projectiveLineDiagonalAlpha A S a ≫\n        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map c ≫\n        projectiveLineDiagonalChartPushforward N hN A hA S hS a =\n      ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S)\n          (projectiveLineTraceDatum N hN A hA (ProjectiveLine S)\n            (ordinaryFiniteP1_isUnit N S hS)).chern +\n        (projectiveLineTraceDatum N hN A hA S hS).chern ≫\n          ordinaryFiniteP1Unit A N hA\n            (projectiveLineTraceTransport N hN A hA) (ProjectiveLine S)\n            (ordinaryFiniteP1_isUnit N S hS)) →\n      projectiveLineDiagonalAlpha A S a ≫\n        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map c ≫\n        projectiveLineDiagonalTrace N hN A hA S hS a =\n      𝟙 (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (5 modules) and 6 node files vs the live clone, node statements, OrdinaryFiniteP1Datum/projectiveLineTrace interface and live sibling nodes (lem-sp-finite-p1-diagonal-*); compiled the delivered and corrected sets and the 4 direct importers; #print axioms"
+ }
+}

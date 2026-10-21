@@ -1,0 +1,112 @@
+{
+ "id": "lem-amb-p1-diagonal-chern-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-p1-diagonal-integrals",
+   "place": "Worker decomposition of the diagonal integral proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The diagonal Kummer class has two Chern components",
+ "status": "split",
+ "statement": "Let $N>0$, $A$ a finite commutative ring with $NA=0$, $S$ a Noetherian scheme on which $N$ is invertible, $P=\\mathbf P^1_S$, $W=P\\times_SP$ and $\\Delta$ the diagonal. Let $\\kappa\\in\\operatorname{Ext}^2(\\Delta_*A_P,A_W(1))$ satisfy SupportedKummerBoundary for the invertible diagonal ideal [def-asd-ordinary-supported-kummer-boundary, lem-asd-ordinary-supported-kummer], with exact derived realization $\\delta_\\kappa$ [def-asd-ordinary-supported-kummer-system]. For either projection $p_a$ [def-sp-p1-diagonal-charts], with $\\alpha_a$ and the chart pushforward $J_a$ of [def-amb-p1-diagonal-data], $$\\alpha_a\\circ R(p_a)_*(\\delta_\\kappa)\\circ J_a=h_{c_P}+c_S\\circ u_P,$$ where $c_P$ and $c_S$ are the Chern arrows of the projective-line trace data of [def-amb-p1-trace] over $P$ and over $S$, $h_{c_P}$ is the Chern pushforward and $u_P$ the shifted twisted unit over $P$ [def-asd-ordinary-finite-p1-arrows].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+  "place": "Worker decomposition of the diagonal integral proof"
+ },
+ "stmt_deps": [
+  "def-sp-p1-diagonal-charts",
+  "def-amb-p1-diagonal-data",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-asd-ordinary-supported-kummer",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-amb-p1-trace",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Apply the supported-Kummer Chern equation to the Cartier diagonal, identify its divisor line with O(1) on each projective-line chart, and use additivity of the Kummer boundary and the canonical adjunction comparisons.",
+   "uses": [
+    "lem-amb-p1-diagonal-cartier",
+    "lem-asd-ordinary-supported-kummer",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+    "place": "Proof decomposition recorded by worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-p1-diagonal-cartier",
+  "lem-asd-ordinary-supported-kummer",
+  "def-amb-p1-trace"
+ ],
+ "proof_origin": "worker decomposition of the parent proof",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "projective line diagonal trace Cartier calculation",
+   "results": "No exact theorem; use existing regular immersion and trace interfaces.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "projectiveLineTrace_chern and regular immersion generators",
+   "results": "Existing declarations inspected.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLineTrace_chern|exists_isWeaklyRegular_generators",
+   "results": "Existing library declarations inspected.",
+   "date": "2026-10-21"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals",
+  "date": "2026-10-21",
+  "group": "G4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalChernComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalChernComponents.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_diagonal_chern_components",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLine_diagonal_chern_components"
+  ],
+  "statement": "theorem projectiveLine_diagonal_chern_components (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible)\n    (κ : Ext\n      ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n        (ordinaryFiniteConstant A (ProjectiveLine S)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2)\n    (hT : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S)\n      (ProjectiveLine S ↘ S), ⊤)))\n    (hκ : SupportedKummerBoundary A N hA\n      (pullback.diagonal (ProjectiveLine S ↘ S)) hI hT κ) (a : Bool) :\n    letI : IsLocallyNoetherian (ProjectiveLine S) :=\n      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)\n    letI : CompactSpace (ProjectiveLine S) :=\n      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)\n    letI : IsNoetherian (ProjectiveLine S) := ⟨⟩\n    let hP := ordinaryFiniteP1_isUnit N S hS\n    projectiveLineDiagonalAlpha A S a ≫\n      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n        (supportedExactDerivedMap\n          (lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S)))\n          (ordinaryFiniteConstant A (ProjectiveLine S))\n          (Scheme.finiteEtaleTateLine\n            (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) κ) ≫\n      projectiveLineDiagonalChartPushforward N hN A hA S hS a =\n    ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S)\n        (projectiveLineTraceDatum N hN A hA (ProjectiveLine S) hP).chern +\n      (projectiveLineTraceDatum N hN A hA S hS).chern ≫\n        ordinaryFiniteP1Unit A N hA (projectiveLineTraceTransport N hN A hA)\n          (ProjectiveLine S) hP",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (5 modules) and 6 node files vs the live clone, node statements, OrdinaryFiniteP1Datum/projectiveLineTrace interface and live sibling nodes (lem-sp-finite-p1-diagonal-*); compiled the delivered and corrected sets and the 4 direct importers; #print axioms"
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "id": "def-amb-p1-diagonal-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-p1-diagonal-integrals",
+   "place": "Worker decomposition of the diagonal integral proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Projective-line diagonal trace, chart pushforward and alpha",
+ "status": "split",
+ "statement": "Keep $S$, $q:P=\\mathbf P^1_S\\to S$, $W=P\\times_SP$, the projections $p_a$ and charts $e_a:\\mathbf P^1_P\\cong W$ with $p_ae_a=r:\\mathbf P^1_P\\to P$ of [def-sp-p1-diagonal-charts], and the ordinary finite-coefficient categories, direct images and normalized twist transports of [def-asd-ordinary-finite-p1-arrows]. (1) The chart pushforward $J_a:R(p_a)_*A_W(1)[2]\\to Rr_*A_{\\mathbf P^1_P}(1)[2]$ is the composite of $R(p_a)_*$ of the unit of $e_a^{-1}\\dashv R(e_a)_*$, the derived-composition comparison $R(p_a)_*R(e_a)_*\\cong R(p_ae_a)_*$, the identification $p_ae_a=r$, and $Rr_*$ of the normalized shifted-twist comparison $e_a^{-1}A_W(1)[2]\\cong A_{\\mathbf P^1_P}(1)[2]$ for the canonical transport of [def-amb-p1-trace]. (2) For $S$ Noetherian with $N$ invertible, the diagonal trace is $t_{p_a}=t_r\\circ J_a$, with $t_r$ the projective-line trace of [def-amb-p1-trace] over the Noetherian base $P$; this factorization is recorded as a lemma. (3) $\\alpha_a:A_P\\to R(p_a)_*R\\Delta_*A_P$ is the composite of the two constant-object units of [def-asd-ordinary-supported-kummer-system] for $p_a$ and $\\Delta$. The trace and alpha definitions keep the signatures they had in the item module.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
+  "place": "Worker decomposition of the diagonal integral proof"
+ },
+ "stmt_deps": [
+  "def-sp-p1-diagonal-charts",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-p1-trace",
+  "def-asd-ordinary-supported-kummer-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "projective line diagonal trace data",
+   "results": "Existing definitions inspected.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "projectiveLineDiagonalTrace",
+   "results": "No competing declaration.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLineDiagonalTrace",
+   "results": "Existing target definitions moved unchanged.",
+   "date": "2026-10-21"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals",
+  "date": "2026-10-21",
+  "group": "G4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalData.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalChartPushforward",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace_eq",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha"
+  ],
+  "statement": "def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj\n      ((ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧) ⟶\n      ordinaryFiniteUnit A (ProjectiveLine S)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "projectiveLineDiagonalTrace and projectiveLineDiagonalAlpha moved unchanged from the item module; projectiveLineDiagonalChartPushforward (moved here by the reviewer from the Chern-components module) is the trace's prefix, and projectiveLineDiagonalTrace_eq records the factorization through projectiveLineTrace."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-16cdf",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261021T014706-L-2445300",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (5 modules) and 6 node files vs the live clone, node statements, OrdinaryFiniteP1Datum/projectiveLineTrace interface and live sibling nodes (lem-sp-finite-p1-diagonal-*); compiled the delivered and corrected sets and the 4 direct importers; #print axioms"
+ }
+}
