@@ -20653,3 +20653,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/NU/lem-sbc-ringed-site-perfect-projection-formula (reviewer PASS; first push; new nodes: 1)
 - 07:23 L: merged deliver/Q123/def-sc-zariski-flasque (reviewer PASS; first push; new nodes: 0)
 - 07:23 L: merged deliver/Q35/sk-def-kernel (reviewer FIX; first push; new nodes: 0)
+- 07:23 L: merged deliver/Q125/def-nagata-affine-neighbourhood-generic-points (reviewer PASS; first push; new nodes: 0)
