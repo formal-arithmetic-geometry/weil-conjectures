@@ -3,16 +3,18 @@
  "blueprint": {
   "is": "def-nagata-homogeneous-localization-degree-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Degree-zero homogeneous localization",
- "statement": "Let $R=\\bigoplus_{n\\geq0}R_n$ be an $\\mathbb N$-graded commutative ring and\nlet $f\\in R_d$ be homogeneous with $d>0$. Write $R_{(f),0}$ for the\ndegree-zero part of the homogeneous localization supplied by Mathlib's\n`HomogeneousLocalization.Away`. Its elements are represented by\n\n$$\n\\frac{x}{f^m},\\qquad x\\in R_{md},\\quad m\\geq0,\n$$\n\nmodulo the ordinary localization relation. This block fixes the notation\nused by the chart statements; it does not introduce a second localization\nimplementation.",
+ "statement": "Let $R=\\bigoplus_{n\\geq0}R_n$ be an $\\mathbb N$-graded commutative ring and\nlet $f\\in R$. Write $R_{(f),0}$ for the degree-zero part of the homogeneous\nlocalization of $R$ away from $f$. Its elements are represented by\n\n$$\n\\frac{x}{f^m},\\qquad m\\geq0,\\quad x\\in R_e,\\quad f^m\\in R_e\n\\text{ for some } e,\n$$\n\nmodulo the ordinary localization relation in $R_f$ [def-weil-ring-localization-away]. When $f\\in R_d$ these are the\nfractions $x/f^m$ with $x\\in R_{md}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/def-nagata-homogeneous-localization-degree-zero.md",
   "place": "node def-nagata-homogeneous-localization-degree-zero, order 8"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-ring-localization-away"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -24,10 +26,57 @@
     "Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization:601 (abbrev)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero part of homogeneous localization away from a homogeneous element",
+   "results": "8 hits; HomogeneousLocalization.fromZeroRingHom, HomogeneousLocalization.Away, HomogeneousLocalization.awayMap_fromZeroRingHom, HomogeneousLocalization.algebraMap_eq, HomogeneousLocalization.NumDenSameDeg.deg_zero, HomogeneousLocalization.val_zero, HomogeneousLocalization.instAlgebraSubtypeMemOfNat, HomogeneousLocalization.NumDenSameDeg.mk; digest 6ed02311f66b8277",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero part of homogeneous localization represented by homogeneous numerator x over f^m",
+   "results": "8 hits; HomogeneousLocalization.Away.mk, HomogeneousLocalization.NumDenSameDeg.num, HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.num, HomogeneousLocalization.NumDenSameDeg.den, HomogeneousLocalization.num_mem_deg, HomogeneousLocalization.val_mk, HomogeneousLocalization.mk; digest 8a0fe4ecf0681e60",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, HomogeneousLocalization.mk, graded degree zero",
+   "results": "0 hits; ; loogle: Unknown identifier `graded`; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "invalid query: unknown identifier graded; corrected to HomogeneousLocalization.Away in the later Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "HomogeneousLocalization|degreeZero|degree zero",
+   "results": "0 hits; ; subdirectory Mathlib/RingTheory/GradedAlgebra; digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no hits because subdirectory was incorrectly prefixed Mathlib/; corrected in the later grep search"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Away|def Away.mk|lemma Away.mk_surjective|structure NumDenSameDeg|def HomogeneousLocalization|def setoid|theorem mk_eq_mk",
+   "results": "5 hits; Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean, Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean, Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean, Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean, Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean; subdirectory RingTheory/GradedAlgebra; digest 20b9143cd475e7e8; lines read: NumDenSameDeg 96, HomogeneousLocalization 281, Away 601, Away.mk 609, Away.mk_surjective 618",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away",
+   "results": "12 hits; HomogeneousLocalization.Away, HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.Away.mk, HomogeneousLocalization.Away.mk_surjective, HomogeneousLocalization.awayMap, HomogeneousLocalization.Away.isLocalization_mul, HomogeneousLocalization.awayMapₐ, HomogeneousLocalization.Away.finiteType; digest d88337a2879cca49",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "HomogeneousLocalization.Away",
+  "file": "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+  "line": 601,
+  "how": "exact: specialize the grading index to ℕ. Away (line 601) is HomogeneousLocalization at Submonoid.powers f, with no homogeneity hypothesis on f. NumDenSameDeg (line 96) requires numerator and denominator in one common component; HomogeneousLocalization (line 281) is its quotient by the kernel of embedding (line 270) into the ordinary localization. Thus its representatives are exactly x/f^m with x and f^m in R_e. The constructor HomogeneousLocalization.mk (line 292) and mk_surjective (line 295) supply all such representatives; val_mk (line 305) and val_injective (line 312) identify equality with equality in R_f. For homogeneous f ∈ R_d, Away.mk (line 609), Away.val_mk (line 613) and Away.mk_surjective (line 618) give exactly x ∈ R_(m*d), with n • d = n*d for ℕ. No positivity or regularity hypothesis is needed, including nilpotent f."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -62,5 +111,20 @@
   "statement": "Let $R=\\bigoplus_{n\\geq0}R_n$ be an $\\mathbb N$-graded commutative ring and\nlet $f\\in R$. Write $R_{(f),0}$ for the degree-zero part of the homogeneous\nlocalization of $R$ away from $f$. Its elements are represented by\n\n$$\n\\frac{x}{f^m},\\qquad m\\geq0,\\quad x\\in R_e,\\quad f^m\\in R_e\n\\text{ for some } e,\n$$\n\nmodulo the ordinary localization relation. When $f\\in R_d$ these are the\nfractions $x/f^m$ with $x\\in R_{md}$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-homogeneous-localization-degree-zero",
+  "worker": "stage1",
+  "summary": "Q96 checked the current main-20261015 blueprint update against Mathlib and the project source. This definition is exactly HomogeneousLocalization.Away, including arbitrary f, the ordinary localization equality relation, and the homogeneous-degree representative form. Recorded the verified Mathlib leaf and the existing ordinary ring-localization definition dependency; no new nodes or proof steps are needed. Searches and their unsuccessful initial query forms are retained.",
+  "blueprint": "Realizes the entire definition in main-20261015, order 16: equal-degree numerator/denominator representatives away from arbitrary f and the homogeneous specialization. This node has no proof; its imported blueprint identity and update metadata are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-7e6c5e4c6",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-7e6c5e4c6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, zero new nodes, one commit with the report and its Review section. The live item is still unsplit, so nothing supersedes this delivery, and there is no repair note for it. The new statement is the main-20261015 blueprint_update text (order 16) word for word, plus the citation [def-weil-ring-localization-away]. The old master text (f in R_d, d>0) survives as the 'When f in R_d' clause, so the change is a generalization the blueprint asks for, not a weakening. Stacks algebra.tex section-proj (00JM, lines 13400-13405) agrees with that clause. The Mathlib leaf is exact; I checked every line it cites in HomogeneousLocalization.lean: NumDenSameDeg 96, embedding 270, the quotient by Setoid.ker 281, mk/mk_surjective 292/295, val_mk/val_injective 305/312, subsingleton 316, Away = powers f with no homogeneity hypothesis 601, and Away.mk/val_mk/mk_surjective 609/613/618 with n•d=nd. Searches cover all three tool kinds, and the two failed queries are recorded honestly. The stmt_dep def-weil-ring-localization-away states exactly the x/f^n=y/f^m relation the item uses. Edge cases agree with Mathlib: m=0, f=1, degree-0 f, inhomogeneous 1+t in k[t] (gives k), and zero or nilpotent f (gives the zero ring). All 59 citers state d>0 themselves and use only the homogeneous fraction clause, so none loses anything. No duplicate exists: the only HomogeneousLocalization.Away record is this item, and the module-fraction nodes are distinct notions. source stays on the master document, as all 565 split nodes with a blueprint_update in live do. There are no proof steps or new nodes, so the B, C and D checks are vacuous. No SGA, no tool_uses, no fixes."
  }
 }
