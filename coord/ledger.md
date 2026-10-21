@@ -22132,3 +22132,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:13 L: merged deliver/NJ/lem-pc-tate-residue-exact-sequence (stage 2; reviewer PASS; parallel immutable checks)
 - 10:13 L: merged deliver/Q93/lem-sp-subterminal-module-local-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 10:13 L: returned deliver/Q89/lem-per-adic-common-stage-truncations (reviewer RETURN: L: independent stage-2 immutable head 00d7f7e89eb2: H13: the delivery rebinds NM's landed def-weil-pbc-qbar-category rec)
+- 10:13 L: returned deliver/NQ/sk-thm-picard-rr (reviewer RETURN: L: independent stage-2 immutable head 872d46cafd32: H4/H2: picardRRPullbackIso uses Classical.choose of exists_tensorPul)
