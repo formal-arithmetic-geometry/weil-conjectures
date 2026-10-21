@@ -20085,3 +20085,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:57:06Z L: superseded stage-1 delivery Q36/lem-sfb-adic-proper-localizing-adjunction-comparison at 6c810d48a14cb36e68682367e23308b3533c4e9e; current completion retained; packet archived at refs/superseded/Q36/lem-sfb-adic-proper-localizing-adjunction-comparison/6c810d48a14cb36e68682367e23308b3533c4e9e; stale return retired.
 - 03:57 L: merged deliver/Q36/lem-sp-varying-ring-pullback-unit-coherence (reviewer PASS; first push; new nodes: 0)
 - 03:57 L: merged deliver/Q22/lem-sp-exact-derived-transformation-pasting (reviewer PASS; first push; new nodes: 0)
+- 03:57 L: merged deliver/Q31/lem-sp-varying-ring-open-unit-coherence (reviewer PASS; first push; new nodes: 0)

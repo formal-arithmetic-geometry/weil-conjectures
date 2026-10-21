@@ -10,9 +10,85 @@
  "stmt_deps": [
   "def-sp-varying-ring-operations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathscr S=\\mathscr S_X$, $\\eta:\\mathrm{id}\\to LB$ for the ordinary open unit, and $\\eta^D:\\mathrm{id}\\to GJ$ for the specified derived open unit, where $G=D(L)$ and $J=D(B)$. The operations of [def-sp-varying-ring-operations] are additive and exact here. Their specified exact derived adjunction is the localization of the ordinary one, as in [def-weil-exact-derived-adjunction]; thus $\\eta^D$ is the localization of $\\eta$ with the exact-composition and identity comparisons inserted. The inverse-image identity $g=g_X$ is likewise the localization of $e=e_X$ followed by the exact-derived identity comparison (the defining inverse-image normalization). Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $(L_1,R_1)=(B,L)$, $(L_2,R_2)=(\\mathrm{id},\\mathrm{id})$, and $\\delta=e^{-1}$. The specified $b=b_X$ is characterized by $L(b_M)\\circ\\eta_M=e_M^{-1}$ for every $M\\in\\mathscr S$.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+   }
+  },
+  {
+   "text": "Let $h:J\\to\\mathrm{id}$ be $D(b)$ followed by the exact-derived identity comparison. Apply [lem-sp-exact-derived-transformation-pasting] to the last unit equation. With the normalizations of step 1 it gives $G(h_K)\\circ\\eta^D_K=g_K^{-1}$ for every derived object $K$. The same equation characterizes the specified $j_X$ by [lem-weil-pbc-conjugate-iso-unit-equation], now with $(L_1,R_1)=(J,G)$, $(L_2,R_2)=(\\mathrm{id},\\mathrm{id})$ and $\\delta=g^{-1}$. Uniqueness therefore gives $j_X=h$, proving the first assertion as an equality of natural transformations.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+   }
+  },
+  {
+   "text": "After transport along $1_X1_X=1_X$, write $c:L\\to LL$ for the ordinary inverse-image compositor and $k:BB\\to B$ for the specified ordinary open compositor. These are the adjoint comparisons of [def-sp-varying-ring-operations]. By [lem-sp-varying-ring-pullback-unit-coherence] at $f=1_X$, $e_{LM}\\circ c_M=\\mathrm{id}_{LM}$, so $c_M=e_{LM}^{-1}$. The composite adjunction $BB\\dashv LL$ has unit $L(\\eta_{BM})\\circ\\eta_M$ by [def-weil-pbc-composite-adjunction]. Applying [lem-weil-pbc-conjugate-iso-unit-equation] to this adjunction and $B\\dashv L$, with $\\delta=c$, characterizes $k$ uniquely by\n$$LL(k_M)\\circ L(\\eta_{BM})\\circ\\eta_M=c_{BM}\\circ\\eta_M.$$",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sp-varying-ring-pullback-unit-coherence",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+   }
+  },
+  {
+   "text": "The natural transformation $B(b):BB\\to B$ satisfies this equation. Indeed naturality of $\\eta$ at $b_M$, the equation of step 1, and naturality of $e$ at $\\eta_M$, respectively, give\n$$\\begin{aligned}\nLL(B(b_M))\\circ L(\\eta_{BM})\\circ\\eta_M\n&=L(\\eta_M)\\circ L(b_M)\\circ\\eta_M\\\\\n&=L(\\eta_M)\\circ e_M^{-1}\\\\\n&=e_{LBM}^{-1}\\circ\\eta_M\n=c_{BM}\\circ\\eta_M.\n\\end{aligned}$$\nHere the first equality is $L$ applied to $LB(b_M)\\circ\\eta_{BM}=\\eta_M\\circ b_M$, followed by $\\eta_M$; the third rearranges $e_{LBM}\\circ L(\\eta_M)=\\eta_M\\circ e_M$. The uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] now yields $k_M=B(b_M)$ for every $M$, hence $k=B(b)$ as natural transformations.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+   }
+  },
+  {
+   "text": "First localize the characterizing equation for $k$ from step 3 using [lem-sp-exact-derived-transformation-pasting]. The localized units are precisely the chosen derived units by [def-weil-exact-derived-adjunction], and the inverse-image compositor is its specified exact localization. By [def-sp-varying-ring-operations] the specified open compositor is the unit-preserving adjoint comparison. Therefore [lem-weil-pbc-conjugate-iso-unit-equation], applied to the composite derived open adjunction and the derived open adjunction for $1_X1_X$, identifies the localization of the ordinary open compositor, with exact-composition comparisons inserted, with $j_{1_X,1_X}$. Now localize $k=B(b)$ by the same pasting statement. Localization preserves whiskering with the precise exact-composition and identity comparisons, so this gives\n$$\\operatorname{transport}_{1_X1_X=1_X}\\circ j_{1_X,1_X}=J(h).$$\nSubstitute $h=j_X$ from step 2. All cited localizations and unit equations are on the entire unbounded derived category; no boundedness, flatness or coefficient-evaluation assumption has entered.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting",
+    "def-weil-exact-derived-adjunction",
+    "def-sp-varying-ring-operations",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-sp-varying-ring-pullback-unit-coherence",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero), ordinary open adjunction; the identity-coherence calculations are written by the worker, with the exact localization convention of def-weil-exact-derived-adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -115,10 +191,134 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: leftAdjointIdIso constructs an identity comparison and derived unit factorization gives one equation; neither equates the two selected open identity comparisons or proves the localized open compositor law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an exact adjunction preserves its unit-normalized identity comparison and the left adjoint compositor unit law",
+   "results": {
+    "t": "2026-10-21T03:46:26Z",
+    "tool": "leanfinder",
+    "query": "Localization of an exact adjunction preserves its unit-normalized identity comparison and the left adjoint compositor unit law",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.localization_unit_app",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.Localization.η_app",
+     "CategoryTheory.Adjunction.Localization.ε_app",
+     "CategoryTheory.Adjunction.Localization.η",
+     "CategoryTheory.Adjunction.Localization.ε",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.Adjunction.derivedε_fac_app"
+    ],
+    "digest": "bef5fa3576ca26dd"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization unit/counit formulas and leftAdjointCompIso_comp_id supply ingredients, but no single declaration also identifies the specified derived identity with localization of the ordinary identity; the unit-normalization argument is required."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_comp_id|derivedη_fac|mapDerivedCategoryNatIso_fach",
+   "results": {
+    "t": "2026-10-21T03:46:35Z",
+    "tool": "grep",
+    "query": "leftAdjointCompIso_comp_id|derivedη_fac|mapDerivedCategoryNatIso_fach",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "digest": "3bfe9886b00e3d0b"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization unit/counit formulas and leftAdjointCompIso_comp_id supply ingredients, but no single declaration also identifies the specified derived identity with localization of the ordinary identity; the unit-normalization argument is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+   "results": {
+    "t": "2026-10-21T03:46:35Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_inv_app",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_comp_id",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+     "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom"
+    ],
+    "digest": "369344a301e6bafe"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization unit/counit formulas and leftAdjointCompIso_comp_id supply ingredients, but no single declaration also identifies the specified derived identity with localization of the ordinary identity; the unit-normalization argument is required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction identity isomorphism is the localization of the ordinary adjunction identity",
+   "results": {
+    "t": "2026-10-21T03:46:35Z",
+    "tool": "leansearch",
+    "query": "Exact functor derived adjunction identity isomorphism is the localization of the ordinary adjunction identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.isLocalization_leftAdjoint"
+    ],
+    "digest": "5e31ea7b15562631"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization unit/counit formulas and leftAdjointCompIso_comp_id supply ingredients, but no single declaration also identifies the specified derived identity with localization of the ordinary identity; the unit-normalization argument is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical identity isomorphism of a left adjoint to an identity right adjoint commutes with deriving exact functors",
+   "results": {
+    "t": "2026-10-21T03:46:50Z",
+    "tool": "leanfinder",
+    "query": "The canonical identity isomorphism of a left adjoint to an identity right adjoint commutes with deriving exact functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso_comp_id",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app"
+    ],
+    "digest": "e2622d89448aea7c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization unit/counit formulas and leftAdjointCompIso_comp_id supply ingredients, but no single declaration also identifies the specified derived identity with localization of the ordinary identity; the unit-normalization argument is required."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-varying-ring-proper-open-pasting",
@@ -138,5 +338,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-varying-ring-open-unit-coherence",
+  "worker": "stage1",
+  "group": "Q31",
+  "summary": "Kept the statement and gave a five-step proof using existing exact-localization, unit-normalized conjugate uniqueness and inverse-image unit nodes. Wrote out the ordinary compositor calculation and localized it; no new nodes are needed. Checked the actual gId, jAdj, moduleJComp, jComp and jId definitions, and both search phrasings.",
+  "blueprint": "det-sp-tower-gluing, Local pairs: open-immersion adjunction and normalized open comparisons; fills the identity-normalization obligation created in the proper/open pasting split."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-56be517e6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-56be517e6 (reviewer sub-agent of L); spot-checked: I read all five steps of the proof and checked each one; no fixes were needed. The item's statement and stmt_deps (def-sp-varying-ring-operations) are unchanged from the base. This is the item's first split, it adds no new nodes, there is no re-split note for it, and it is not in the dropped lists. Source: Stacks 03DI (sites-modules.tex line 2058, lemma-extension-by-zero) gives the ordinary open adjunction only, so proof_origin.by=agent is correct; no SGA is cited. Step 1: the conjugate-unit lemma with (B,L), (id,id) and delta=e^{-1} gives L(b_M)eta_M=e_M^{-1}; types and orientation are correct. Step 2: exact pasting plus the localized units of def-weil-exact-derived-adjunction give G(h)eta^D=g^{-1}, and uniqueness gives j_X=h. This matches the Lean jId=leftAdjointIdIso(jAdj,gId), with gId the localized ordinary identity. Step 3: pullback-unit coherence at f=1 gives c=e_L^{-1}; the composite unit is L(eta_B)eta (def-weil-pbc-composite-adjunction); this characterizes k, which matches Lean moduleJComp. Step 4: I recomputed the three naturality equalities (eta at b_M, the step-1 equation, e at eta_M) and get k=B(b), the outer whiskering, consistent with J_{1_X}(j_X); the elementary flag is justified. Step 5: localizing the k-equation and k=B(b) via the pasting lemma gives transport∘j_{1,1}=J(j_X), consistent with the Lean jComp being the localized moduleJComp. Edge cases: empty X, zero rings, and an abstract case with a nonidentity unit; the argument is purely categorical and needs no boundedness or flatness. The other-unit node def-weil-exact-derived-adjunction is used only as a definition."
  }
 }
