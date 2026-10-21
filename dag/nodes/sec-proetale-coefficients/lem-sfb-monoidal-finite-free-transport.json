@@ -2,19 +2,106 @@
  "id": "lem-sfb-monoidal-finite-free-transport",
  "kind": "statement",
  "title": "Additive monoidal transport of a finite free module",
- "statement": "Let $\\mathcal C,\\mathcal D$ be preadditive monoidal categories with finite biproducts, and with tensor additive in each variable [def-weil-preadditive-category]. Let $P:\\mathcal C\\to\\mathcal D$ be additive [def-weil-pbc-additive-functor] and strong monoidal. Let $R$ be a commutative ring object, let $M$ be an internal $R$-module, and let $n\\geq0$. Use the transported ring $P(R)$ and transported module $P(M)$ of [def-sfb-modobj-transport]. If $\\theta:R^{\\oplus n}\\xrightarrow{\\sim}M$ is an $R$-module isomorphism, there is a $P(R)$-module isomorphism\n$$P(R)^{\\oplus n}\\xrightarrow{\\sim}P(M).$$\nIts $i$th inclusion is $P(\\theta\\iota_i)$ and its $i$th inverse coordinate is $P(\\pi_i\\theta^{-1})$, where the finite powers have the componentwise regular-module action. Thus the transported coordinate and basis maps satisfy the same Kronecker and sum-of-projections identities as the original maps.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be preadditive monoidal categories [def-weil-preadditive-category], [def-sfb-monoidal-category], with finite biproducts and tensor additive in each variable. Let $P:\\mathcal C\\to\\mathcal D$ be additive [def-weil-pbc-additive-functor] and strong monoidal [def-sfb-strong-monoidal-functor]. Let $R$ be a ring object (a monoid object, [sk-def-sfb-ring-object]), let $M$ be a left internal $R$-module [sk-def-sfb-module-objects], and let $n\\geq0$. Use the transported ring $P(R)$ and transported module $P(M)$ of [def-sfb-modobj-transport]. For a ring object $Q$ write $Q^{\\oplus n}$ for the biproduct of $n$ copies of its regular module, with the componentwise action; its underlying injections and projections obey $\\pi_i\\iota_j=\\delta_{ij}\\mathrm{id}_Q$ and $\\sum_i\\iota_i\\pi_i=\\mathrm{id}_{Q^{\\oplus n}}$, with empty biproduct $0$.\nIf $\\theta:R^{\\oplus n}\\xrightarrow{\\sim}M$ is an $R$-module isomorphism, there is a $P(R)$-module isomorphism\n$$\\alpha:P(R)^{\\oplus n}\\xrightarrow{\\sim}P(M).$$\nWriting $\\iota'_i,\\pi'_i$ for the biproduct maps in $\\mathcal D$, it satisfies\n$$\\alpha\\iota'_i=P(\\theta\\iota_i),\\qquad \\pi'_i\\alpha^{-1}=P(\\pi_i\\theta^{-1}).$$\nThus the transported coordinate and basis maps satisfy the same Kronecker and sum-of-projections identities as the original maps. No braiding, commutativity of $R$, or preservation of a commutative structure by $P$ is required.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
   "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X"
  },
  "stmt_deps": [
   "def-weil-preadditive-category",
+  "def-sfb-monoidal-category",
   "def-weil-pbc-additive-functor",
+  "def-sfb-strong-monoidal-functor",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
   "def-sfb-modobj-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $m_Q:Q\\otimes Q\\to Q$ for multiplication, for $Q=R$ in $\\mathcal C$ or $Q=P(R)$ in $\\mathcal D$. On the underlying biproduct $B_Q=Q^{\\oplus n}$ the componentwise action is\n$$a_Q=\\sum_i\\iota_i m_Q(\\mathrm{id}_Q\\otimes\\pi_i),\\qquad \\pi_i a_Q=m_Q(\\mathrm{id}_Q\\otimes\\pi_i).$$\nIts unit and associativity equations become those of the regular module after composing with each $\\pi_i$; these projections detect equality since $\\sum_i\\iota_i\\pi_i=1$. This defines the claimed module, including $n=0$, when its underlying object is zero. The second displayed equation says precisely that $\\pi_i$ is linear. For inclusions, tensor additivity and the Kronecker identities give\n$$\\pi_j a_Q(\\mathrm{id}_Q\\otimes\\iota_i)=\\delta_{ji}m_Q=\\pi_j\\iota_i m_Q.$$\nProjection detection therefore gives $a_Q(\\mathrm{id}_Q\\otimes\\iota_i)=\\iota_i m_Q$, so $\\iota_i$ is linear as well. This is just the defining linearity equation, not an assertion that arbitrary functors preserve biproducts.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "Put $u_i=\\theta\\iota_i:R\\to M$ and $v_i=\\pi_i\\theta^{-1}:M\\to R$. They are $R$-linear: substitute the linearity equations of the two factors into $(gf)a=g(fa)$. The biproduct identities and $\\theta^{-1}\\theta=1$, $\\theta\\theta^{-1}=1$ give\n$$v_i u_j=\\pi_i\\theta^{-1}\\theta\\iota_j=\\delta_{ij}\\mathrm{id}_R,$$\n$$\\sum_i u_i v_i=\\theta\\Bigl(\\sum_i\\iota_i\\pi_i\\Bigr)\\theta^{-1}=\\mathrm{id}_M.$$\nOnly bilinearity of composition is used in the second calculation.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "Apply the module-transport functor of [def-sfb-modobj-transport]. The action on the transported regular module is $P(m_R)\\mu^P_{R,R}$, which is also the multiplication of the transported ring. Hence this module is exactly the regular $P(R)$-module. The same cited statement sends the linear maps $u_i,v_i$ to linear maps\n$$b_i=P(u_i):P(R)\\to P(M),\\qquad c_i=P(v_i):P(M)\\to P(R).$$\nThe strong monoidal structure supplies the lax structure required by that transport; no symmetry comparison is involved.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-module-objects",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "An additive functor preserves zero and finite sums because its map on each Hom group is a group homomorphism. Apply $P$ to the identities of step 2 and use functoriality:\n$$c_i b_j=P(v_i u_j)=\\delta_{ij}\\mathrm{id}_{P(R)},$$\n$$\\sum_i b_i c_i=P\\Bigl(\\sum_i u_i v_i\\Bigr)=\\mathrm{id}_{P(M)}.$$\nFor $i\\ne j$ the first equality uses $P(0)=0$, and for $i=j$ it uses preservation of identity. These statements also cover an empty sum.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "Let $B=P(R)^{\\oplus n}$ and use its injections $\\iota'_i$ and projections $\\pi'_i$. Define actual morphisms\n$$\\alpha=\\sum_i b_i\\pi'_i:B\\to P(M),\\qquad \\beta=\\sum_i\\iota'_i c_i:P(M)\\to B.$$\nEach summand is linear by steps 1 and 3. Finite sums of linear maps are linear directly: if $f_k a_N=a_T(\\mathrm{id}_{P(R)}\\otimes f_k)$, then\n$$\\Bigl(\\sum_k f_k\\Bigr)a_N=\\sum_k f_k a_N=\\sum_k a_T(\\mathrm{id}\\otimes f_k)=a_T\\Bigl(\\mathrm{id}\\otimes\\sum_k f_k\\Bigr).$$\nThe empty sum is covered by tensor additivity and bilinearity of composition. Thus both $\\alpha$ and $\\beta$ are $P(R)$-module morphisms.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  },
+  {
+   "text": "Distribute the finite sums and use the Kronecker identities in $B$ and step 4:\n$$\\alpha\\beta=\\sum_{i,j}b_i\\pi'_i\\iota'_j c_j=\\sum_i b_i c_i=\\mathrm{id}_{P(M)},$$\n$$\\beta\\alpha=\\sum_{i,j}\\iota'_i c_i b_j\\pi'_j=\\sum_i\\iota'_i\\pi'_i=\\mathrm{id}_B.$$\nHence $\\beta=\\alpha^{-1}$ as a module morphism. The same one-sum computations give $\\alpha\\iota'_j=b_j$ and $\\pi'_j\\beta=c_j$, proving the two prescribed formulas. When $n=0$, step 4 says $\\mathrm{id}_{P(M)}=P(0)=0$, and $\\mathrm{id}_B=0$ for the empty biproduct; the empty-sum maps above are therefore still mutual inverses. No positive-rank assumption or nonzero-ring assumption was used.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; explicit finite-coordinate argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "def-weil-preadditive-category",
+  "def-sfb-modobj-transport",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Third sentence: the additive monoidal inverse image carries the finite free basis isomorphism to X; expanded using the stated module-transport formula and finite biproduct identities"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +137,45 @@
    "results": "8 hits: ModuleCat.instMonoidalFree, ModuleCat.free, CategoryTheory.additiveFunctor, CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, AddCommMonCat.free, CategoryTheory.Functor.Additive, CategoryTheory.tensorLeft_additive",
    "date": "2026-10-21",
    "verdict": "no match: additive biproduct preservation is present, but the transport and regular-module linearity comparison for arbitrary internal ring objects is not; Mathlib Mon.lean:856 still marks mapMod as TODO"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|preservesFiniteBiproductsOfAdditive|mapBiproduct",
+   "results": "{\"t\": \"2026-10-21T03:17:18Z\", \"tool\": \"grep\", \"query\": \"mapMod|preservesFiniteBiproductsOfAdditive|mapBiproduct\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Preadditive/Mat.lean\", \"Mathlib/CategoryTheory/Preadditive/Mat.lean\", \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Preadditive.lean\", \"Mathlib/CategoryTheory/Monoidal/Preadditive.lean\", \"Mathlib/CategoryTheory/Monoidal/Preadditive.lean\"], \"digest\": \"bb0b25a41f7829dd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole internal-module transport statement; ordinary additive biproduct preservation is only the underlying-category part"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive monoidal functor preserves finite free module objects and their basis maps",
+   "results": "{\"t\": \"2026-10-21T03:17:18Z\", \"tool\": \"leansearch\", \"query\": \"An additive monoidal functor preserves finite free module objects and their basis maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.free\", \"CategoryTheory.Functor.preservesFiniteProductsOfAdditive\", \"CategoryTheory.additiveFunctor_iff\", \"CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive\", \"CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive\", \"CategoryTheory.additiveFunctor\", \"CategoryTheory.tensorLeft_additive\", \"AddCommMonCat.instIsLeftAdjointFree\"], \"digest\": \"2dafb55f7a528ece\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole internal-module transport statement; ordinary additive biproduct preservation is only the underlying-category part"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Limits.biproduct",
+   "results": "{\"t\": \"2026-10-21T03:17:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Additive, CategoryTheory.Limits.biproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Mat_.lift_obj\", \"CategoryTheory.Mat_.additiveObjIsoBiproduct\", \"CategoryTheory.Mat_.lift_map\", \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality\", \"CategoryTheory.Mat_.additiveObjIsoBiproduct_hom_π\", \"CategoryTheory.Mat_.ι_additiveObjIsoBiproduct_inv\", \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality_assoc\", \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality'\"], \"digest\": \"cfbdcc26230ddf46\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole internal-module transport statement; ordinary additive biproduct preservation is only the underlying-category part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive strong monoidal functor transports a specified finite free internal module basis and its coordinate maps over a ring object",
+   "results": "{\"t\": \"2026-10-21T03:17:19Z\", \"tool\": \"leanfinder\", \"query\": \"An additive strong monoidal functor transports a specified finite free internal module basis and its coordinate maps over a ring object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instMonoidalFree\", \"ModuleCat.free_η_freeMk\", \"ModuleCat.FreeMonoidal.εIso_hom_one\", \"ModuleCat.FreeMonoidal.εIso\", \"ModuleCat.free_ε_one\", \"ModuleCat.free_δ_freeMk\", \"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.MonoidalLinear.ofFaithful\"], \"digest\": \"bd51de2cf951eda3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole internal-module transport statement; ordinary additive biproduct preservation is only the underlying-category part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor on internal modules induced by an additive lax monoidal functor carries a decomposition into finitely many regular modules to the same decomposition",
+   "results": "{\"t\": \"2026-10-21T03:17:50Z\", \"tool\": \"leanfinder\", \"query\": \"The functor on internal modules induced by an additive lax monoidal functor carries a decomposition into finitely many regular modules to the same decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.MonoidalLinear.ofFaithful\", \"HomologicalComplex.Monoidal.inducingFunctorData\", \"TannakaDuality.FiniteGroup.forget\", \"CategoryTheory.Mod_.comap\", \"Rep.linearization_μ_hom\", \"FGModuleCat.tensorUnit_obj\", \"CategoryTheory.Mod_.comap_obj_X\"], \"digest\": \"013fcaa650dcb3d1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole internal-module transport statement; ordinary additive biproduct preservation is only the underlying-category part"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-subfield-flat",
@@ -70,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-monoidal-finite-free-transport",
+  "worker": "stage1",
+  "summary": "Expanded finite-free transport into six explicit coordinate steps, using existing module transport and no new nodes. Corrected the ill-typed unbraided commutativity hypothesis by stating the valid monoid-object generality. Checked transported regular actions, both inverse identities, linearity, coordinates and rank zero.",
+  "blueprint": "Realizes the third sentence of lem-sfb-subfield-flat.proof.md: the additive monoidal inverse image carries the pointwise finite free basis to X. This is the finite-free step (2), third proof paragraph, of sk-prop-sfb-cartesian-coefficients.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-80e14f5ee",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-80e14f5ee (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes. I checked it against lem-sfb-subfield-flat.proof.md sentence 3 (main-20261015) and unit sk-prop-sfb-cartesian-coefficients clause 2. The statement change is justified: 'commutative ring object' in an unbraided monoidal category is ill-typed (sk-def-sfb-ring-object defines commutativity only when the category is braided), and dropping it strengthens the item without weakening any conclusion. The sole citer, lem-sfb-subfield-flat step 2, supplies exactly the stated hypotheses: strong monoidal, additive, finite biproducts and tensor additive. It uses only the isomorphism F_X≅E_X^n and the coordinate maps, so it stays valid. Step 3 takes from def-sfb-modobj-transport only what its statement says: the transported multiplication and action, and that P of a linear map is linear. Strong monoidal gives the needed lax structure. I checked steps 1, 2 and 4–6 by hand: the componentwise action's unit and associativity laws, linearity of ι_i (which uses id⊗0=0 from tensor additivity), the Kronecker and sum identities after applying P, linearity of finite sums, αβ=id and βα=id, and both coordinate formulas. Rank 0 (P(M) is zero) and rank 1 with P=id also check out. All proof_deps are definitions, so there is no route issue, no tool_uses and no cycle. Grep of dag/nodes and the blueprint for mapMod, finite free and biproduct found no duplicate; lem-sfb-modobj-abelian needs an abelian ambient category. No SGA is cited. No fixes."
  }
 }
