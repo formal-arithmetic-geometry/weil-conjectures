@@ -11,9 +11,101 @@
   "def-sfb-monoidal-category",
   "def-sfb-strong-monoidal-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack the specified composite comparisons, using tensor bifunctoriality [def-sfb-monoidal-category] and the functor and inverse-structure-map conventions [def-sfb-strong-monoidal-functor]. Direct substitution gives\n$$h^S_M=h^Q_M\\circ(Q(e_F)\\otimes1_M),\\qquad a^S_{B,B',M}=a^Q_{FB,FB',M}\\circ(Q(\\delta^F_{B,B'})\\otimes1_M).$$\nIndeed the first is $\\lambda_M(e_Q\\otimes1)(Q(e_F)\\otimes1)=\\lambda_M((e_Q Q(e_F))\\otimes1)$; the second is $\\alpha_{QFB,QFB',M}(\\delta^Q_{FB,FB'}\\otimes1)(Q(\\delta^F_{B,B'})\\otimes1)$. These use only the two comparison formulas in the hypotheses; no coherence theorem for composing monoidal functors is invoked.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "For morphisms $b:B\\to\\widetilde B$ in $\\mathcal C_0$ and $m:M\\to\\widetilde M$ in $\\mathcal C_2$, naturality of the assumed $v$ and then of the assumed $t$ gives\n$$\\begin{aligned}\nP(Sb\\otimes m)\\circ T_{B,M}\n&=R\\bigl(J(QF b\\otimes m)\\circ v_{FB,M}\\bigr)\\circ t_{B,JM}\\\\\n&=R(v_{F\\widetilde B,\\widetilde M})\\circ R(Fb\\otimes Jm)\\circ t_{B,JM}\\\\\n&=R(v_{F\\widetilde B,\\widetilde M})\\circ t_{\\widetilde B,J\\widetilde M}\\circ(b\\otimes RJm)\n=T_{\\widetilde B,\\widetilde M}\\circ(b\\otimes Pm).\n\\end{aligned}$$\nFunctoriality and the tensor bifunctor laws justify combining the two variables [def-sfb-strong-monoidal-functor, def-sfb-monoidal-category]. This proves naturality in both variables.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "Naturality of $v$ in its coefficient at $e_F:F\\mathbf1\\to\\mathbf1$ says\n$$J(Q(e_F)\\otimes1_M)\\circ v_{F\\mathbf1,M}=v_{\\mathbf1,M}\\circ(e_F\\otimes1_{JM}).$$\nUsing Step 1 and the assumed unit equations, first for $v$ and then for $t$, gives\n$$\\begin{aligned}\nP(h^S_M)\\circ T_{\\mathbf1,M}\n&=R\\bigl(J(h^Q_M)\\circ v_{\\mathbf1,M}\\circ(e_F\\otimes1_{JM})\\bigr)\\circ t_{\\mathbf1,JM}\\\\\n&=R\\bigl(\\lambda_{JM}\\circ(e_F\\otimes1_{JM})\\bigr)\\circ t_{\\mathbf1,JM}\\\\\n&=R(h^F_{JM})\\circ t_{\\mathbf1,JM}=\\lambda_{RJM}.\n\\end{aligned}$$\nThe regrouping is just preservation of composition by $R,J$ and tensor bifunctoriality [def-sfb-strong-monoidal-functor, def-sfb-monoidal-category]. In particular $F\\mathbf1$ is not identified definitionally with $\\mathbf1$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "Fix $B,B',M$, put $A=FB$, $D=FB'$, $d=\\delta^F_{B,B'}:F(B\\otimes B')\\to A\\otimes D$, and denote the left side of the required associativity equality by $E=P(a^S_{B,B',M})\\circ T_{B\\otimes B',M}$. Naturality of the assumed $v$ at the coefficient morphism $d$ is\n$$J(Qd\\otimes1_M)\\circ v_{F(B\\otimes B'),M}=v_{A\\otimes D,M}\\circ(d\\otimes1_{JM}).$$\nSubstitute this and Step 1 into $E$ to obtain\n$$E=R\\bigl(J(a^Q_{A,D,M})\\circ v_{A\\otimes D,M}\\bigr)\\circ R(d\\otimes1_{JM})\\circ t_{B\\otimes B',JM}.$$\nThis is one naturality square, followed by functorial reassociation [def-sfb-strong-monoidal-functor, def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "Apply the assumed associativity equation for $v$ at $(A,D,M)$ in the expression of Step 4:\n$$J(a^Q_{A,D,M})\\circ v_{A\\otimes D,M}=v_{A,QD\\otimes M}\\circ(1_A\\otimes v_{D,M})\\circ\\alpha_{A,D,JM}.$$\nBy the definition in the item, $\\alpha_{A,D,JM}\\circ(d\\otimes1_{JM})=a^F_{B,B',JM}$. Combining these adjacent factors inside $R$ gives\n$$E=R(v_{A,QD\\otimes M})\\circ R(1_A\\otimes v_{D,M})\\circ R(a^F_{B,B',JM})\\circ t_{B\\otimes B',JM}.$$\nOnly functoriality and the displayed associator convention are used [def-sfb-strong-monoidal-functor, def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "Use the assumed associativity equation for $t$ at $(B,B',JM)$:\n$$R(a^F_{B,B',JM})\\circ t_{B\\otimes B',JM}=t_{B,D\\otimes JM}\\circ(1_B\\otimes t_{B',JM})\\circ\\alpha_{B,B',RJM}.$$\nIts substitution into Step 5 yields\n$$E=R(v_{A,QD\\otimes M})\\circ R(1_A\\otimes v_{D,M})\\circ t_{B,D\\otimes JM}\\circ(1_B\\otimes t_{B',JM})\\circ\\alpha_{B,B',RJM}.$$\nEvery object is in $\\mathcal C_0$ after applying $R$ where indicated; this is substitution into a composite, with tensor and functor conventions from [def-sfb-monoidal-category, def-sfb-strong-monoidal-functor].",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  },
+  {
+   "text": "Naturality of $t$ in its second variable at the $\\mathcal C_1$-morphism $v_{D,M}:D\\otimes JM\\to J(QD\\otimes M)$ says\n$$R(1_A\\otimes v_{D,M})\\circ t_{B,D\\otimes JM}=t_{B,J(QD\\otimes M)}\\circ(1_B\\otimes R(v_{D,M})).$$\nInsert it into Step 6. The first two factors are now $R(v_{A,QD\\otimes M})\\circ t_{B,J(QD\\otimes M)}=T_{B,QD\\otimes M}$, and tensor bifunctoriality combines the next two factors into $1_B\\otimes(R(v_{D,M})\\circ t_{B',JM})=1_B\\otimes T_{B',M}$. Thus\n$$E=T_{B,SB'\\otimes M}\\circ(1_B\\otimes T_{B',M})\\circ\\alpha_{B,B',PM},$$\nsince $QD=SB'$ and $RJ=P$. This proves the asserted associativity by the given naturality square, preservation of composition, and tensor bifunctoriality [def-sfb-strong-monoidal-functor, def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent-written formal pasting calculation for the maps of Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow. The abstract identity is proved here, not asserted by either Stacks tag."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +148,59 @@
    "results": "8 hits: ContinuousCohomology.I, Rep.instMonoidalActionTypeLinearization, CategoryTheory.Mod_.scalarRestriction, Bimod.TensorBimod.actLeft, Action.instMonoidalLinear, ModuleCat.CoextendScalars.mulAction, CategoryTheory.ModObj.smul, CategoryTheory.ModObj.mul_smul",
    "date": "2026-10-21",
    "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleFunctor|ModuleFunctors|compProjectionMap|[Pp]rojection.*[Aa]ssociativ|[Aa]ction.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-21T08:21:13Z\", \"tool\": \"grep\", \"query\": \"ModuleFunctor|ModuleFunctors|compProjectionMap|[Pp]rojection.*[Aa]ssociativ|[Aa]ction.*[Cc]omp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ComposableArrows/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Galois/Examples.lean\", \"Mathlib/CategoryTheory/Galois/Examples.lean\", \"Mathlib/CategoryTheory/Galois/Examples.lean\", \"Mathlib/CategoryTheory/Galois/Examples.lean\"], \"digest\": \"d77fbc08595eaf6f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composite of two natural tensor actions with coherent unit and associativity again has coherent unit and associativity",
+   "results": "{\"t\": \"2026-10-21T08:21:13Z\", \"tool\": \"leansearch\", \"query\": \"The composite of two natural tensor actions with coherent unit and associativity again has coherent unit and associativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.IsMonoidal.comp\", \"CategoryTheory.NatTrans.tensor_naturality_assoc\", \"CategoryTheory.Functor.LaxMonoidal.comp\", \"CategoryTheory.Functor.Monoidal.μ_comp_assoc\", \"CategoryTheory.NatTrans.IsMonoidal.tensor\", \"CategoryTheory.MonoidalCoherence.left\", \"CategoryTheory.MonObj.tensorObj.instTensorObj\", \"CategoryTheory.NatTrans.IsMonoidal.tensor_assoc\"], \"digest\": \"46a261a8741ff9b4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp\", \"action\"",
+   "results": "{\"t\": \"2026-10-21T08:21:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"comp\\\", \\\"action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.JoinPointCommonArgs.ReduceActionM\", \"Lean.Compiler.LCNF.LambdaLifting.Context.allowEtaContraction\", \"MulActionWithZero.compHom\", \"AddAction.compHom\", \"MulAction.compHom\", \"AddAction.IsPretransitive.of_compHom\", \"MulAction.IsPretransitive.of_compHom\", \"AddAction.isPretransitive_compHom\"], \"digest\": \"74635571987d99b0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of natural left tensor action maps relative to strong monoidal functors preserves their unit and associativity laws",
+   "results": "{\"t\": \"2026-10-21T08:21:15Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of natural left tensor action maps relative to strong monoidal functors preserves their unit and associativity laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instMonoidalActionMapAction\", \"CategoryTheory.Functor.LeftLinear.δₗ_comp_μₗ\", \"CategoryTheory.Functor.LeftLinear.δₗ_comp_μₗ_assoc\", \"CategoryTheory.Functor.LeftLinear.μₗ_comp_δₗ\", \"CategoryTheory.Functor.LeftLinear.μₗ_comp_δₗ_assoc\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_associativity\", \"CategoryTheory.Functor.LeftLinear.μₗIso\"], \"digest\": \"1c9855a6b6a1d4d0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "grep",
+   "query": "class LaxLeftLinear|def comp|instance.*[Cc]omp|μₗ_associativity|μₗ_comp|restrict|[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T08:22:09Z\", \"tool\": \"grep\", \"query\": \"class LaxLeftLinear|def comp|instance.*[Cc]omp|μₗ_associativity|μₗ_comp|restrict|[Mm]onoidal\", \"sub\": \"CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"12\", \"38\", \"42\", \"48\"], \"digest\": \"be1091f548f31ccf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxLeftLinear",
+   "results": "{\"t\": \"2026-10-21T08:22:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.LaxLeftLinear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LaxLeftLinear\", \"CategoryTheory.Functor.LeftLinear.toLaxLeftLinear\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_unitality\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_unitality_inv\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_naturality_left\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_naturality_right\", \"CategoryTheory.Functor.LaxLeftLinear.μₗ_unitality_assoc\"], \"digest\": \"51081633dd244099\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given t B N from B tensor R N to R(F B tensor N) and v C M from C tensor J M to J(Q C tensor M), their pasted transformation R(v) t obeys the coefficient unit and associativity identities",
+   "results": "{\"t\": \"2026-10-21T08:22:11Z\", \"tool\": \"leanfinder\", \"query\": \"Given t B N from B tensor R N to R(F B tensor N) and v C M from C tensor J M to J(Q C tensor M), their pasted transformation R(v) t obeys the coefficient unit and associativity identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.map_comp\", \"TensorProduct.AlgebraTensorModule.rTensor_comp\", \"TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange\", \"TensorProduct.tensorTensorTensorComm_comp_map\", \"TensorProduct.AlgebraTensorModule.lTensor_comp\", \"TensorProduct.map_map\", \"IsTensorProduct.map_comp\", \"TensorProduct.map_comp\"], \"digest\": \"45e00f65dafc6f50\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned algebraic tensor-product composition, monoidal natural transformations, or fixed-coefficient linearity axioms; none states pasting of the two supplied relative actions for arbitrary R,J"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-projection-formula-coefficient-coherence",
@@ -78,5 +219,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-composite-left-projection-action",
+  "worker": "stage1",
+  "group": "N6",
+  "summary": "Kept the self-contained statement unchanged. Expanded the composite into seven elementary steps: comparison substitutions, joint naturality, the unit calculation, and four successive substitutions for associativity. Each step explicitly uses the given naturality and action axioms, and cites the existing definitions for tensor and functor laws. No new nodes or additional hypotheses. Searched the current project and Mathlib; no exact completed declaration or one-line Mathlib specialization was found.",
+  "blueprint": "Current main-20261015 sk-prop-cohsm.proof.md (G13), first arrow, through parent lem-pur-projection-formula-coefficient-coherence Step 2: pasting the proper and open forward coefficient actions. This item supplies only the formal fixed-composite calculation; it changes no chart, purity, or base-change route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-b2a804c02",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-b2a804c02 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full and redid each calculation by hand. Step 1: the composite comparisons h^S = h^Q(Q e_F⊗1) and a^S = a^Q(Qδ^F⊗1) follow from bifunctoriality. Step 2: joint naturality of T comes from the naturality of v and then of t. Step 3: the unit law uses naturality of v at e_F, then the v-unit law, then the t-unit law, and keeps F1 distinct from 1. Steps 4–7: v-naturality at δ^F, then v-associativity together with α(d⊗1) = a^F, then t-associativity at (B,B',JM), then t-naturality at v_{D,M}; this gives T_{B,SB'⊗M}(1⊗T_{B',M})α. All are correct. The statement is byte-identical to the base and is a true formal lemma that does not need invertibility, braiding or an adjunction. Edge cases checked: unit objects, identity functors, and the Set example with constant R, J and non-invertible t, v. stmt_deps and proof_deps are the two mathlib-status definition nodes, and each step is a single naturality square or substitution, so elementary=true is justified. There are no new nodes and no tool_uses. lem-pur-composite-relative-tensor-action is the right-coefficient version without a unit clause, so it is not a duplicate. Mathlib LaxLeftLinear has a single coefficient category, so it is not a match; all four search tools are recorded. There is no repair note, so this is not a re-split. No SGA is cited. Stacks tags 0B56 and 0GL1 and the blueprint's (G13) at main-20261015 sk-prop-cohsm.proof.md:21 were checked. The parent lem-pur-projection-formula-coefficient-coherence Step 2 uses the statement exactly as stated. No fixes."
  }
 }
