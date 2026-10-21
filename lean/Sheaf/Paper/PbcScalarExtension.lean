@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q30
+Authors: SHEAF groups Q30 and A2
 -/
 module
 
@@ -23,43 +23,9 @@ public import Sheaf.Paper.PbcActualScalarPullback
 public import Sheaf.Paper.PbcActualRingedExchange
 public import Sheaf.Paper.PbcRationalTransport
 
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.ScalarLocalization
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Paper.CompletedTowerDirectImage
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.Paper.ExtendedCechCompletionModel
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.RingedPushforwardCompletion
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.WeilCompletedTensorReflector
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
+import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 
@@ -85,6 +51,76 @@ attribute [-instance] WeilConjectures.integralOperationsAbSheafify
 attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
+namespace CategoryTheory.ScalarLocalization
+open scoped TensorProduct
+private noncomputable def pbcRationalComparison
+    (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
+  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
+  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
+    (Localization.Away p) X.obj Y.obj f
+  map_id X := by
+    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
+    simp
+  map_comp {X Y Z} f g := by
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
+      | tmul b g =>
+        change Rationalization.tensorHomEquiv _ _ _ _
+          (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
+        rw [composition_tmul]
+        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
+          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
+      | add g h hg hh =>
+        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
+        simp only [_root_.map_add]
+        rw [hg, hh]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm
+    | add f h hf hh =>
+      rw [Preadditive.add_comp X Y Z f h g]
+      simp only [_root_.map_add]
+      rw [hf, hh]
+      exact (Preadditive.add_comp _ _ _ _ _ _).symm
+
+private theorem pbcScalarLocalization_isLocalization
+    (R : Type*) [CommRing R] (C : Type*) [Category C]
+    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    (localization R C p).IsLocalization (Rationalization.W (Submonoid.powers p) C) := by
+  classical
+  let M := Submonoid.powers p
+  let E := pbcRationalComparison R C p
+  have : E.Full := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).surjective⟩
+  have : E.Faithful := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).injective⟩
+  have : E.EssSurj := ⟨fun X ↦ by
+    obtain ⟨Y, ⟨e⟩⟩ := Rationalization.exists_iso_obj X
+    exact ⟨⟨Y⟩, ⟨e⟩⟩⟩
+  have : E.IsEquivalence := {}
+  let Q := localization R C p
+  have fac : Q ⋙ E ≅ Rationalization.Q M C :=
+    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      dsimp [Q, E, localization, pbcRationalComparison]
+      simp only [Category.comp_id, Category.id_comp,
+        Rationalization.tensorHomEquiv_tmul, one_smul]
+      rfl)
+  exact Functor.IsLocalization.of_equivalence_target (Rationalization.Q M C)
+    (Rationalization.W M C) Q E.asEquivalence.symm
+    (Functor.isoWhiskerRight fac.symm E.inv ≪≫ (Functor.associator _ _ _) ≪≫
+      Functor.isoWhiskerLeft Q E.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
+
+
+end CategoryTheory.ScalarLocalization
+
 namespace AlgebraicGeometry.Scheme
 section Triangulation
 variable (l : ℕ) [Fact l.Prime]
@@ -107,7 +143,7 @@ category is unchanged, so this is exactly the required HasZeroObject proposition
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] :
     HasZeroObject (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) := by
-  sorry
+  exact (pbcRationalTriangulationData l E T Fact.out Fact.out).choose
 
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
@@ -134,7 +170,7 @@ are propositions, so proof irrelevance identifies their proofs. -/
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] :
     ∀ n : ℤ, (shiftFunctor (PbcRationalCategory T (pbcIntegralDatum l E)
       (pbcUniformizer l E)) n).Additive := by
-  sorry
+  exact (pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2.choose
 
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
@@ -173,7 +209,8 @@ proof irrelevance identifies all propositional class arguments. -/
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] :
     IsTriangulated (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) := by
-  sorry
+  exact ((pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2
+    ).choose_spec.choose_spec.2.choose_spec.1
 
 /-- Expose the existing isomorphism closure of the published integral predicate.
 Source: blueprint order 1305 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -214,7 +251,21 @@ theorem pbcEmbeddingIntegerMap_quotient_kernel (n : ℕ) (a : PbcIntegralRing l 
     (ha : a ∈ (pbcIntegralDatum l E).ideal ^ (n + 1)) :
     Ideal.Quotient.mk ((pbcIntegralDatum l F).ideal ^ (n + 1))
       (pbcEmbeddingIntegerMap l E F i a) = 0 := by
-  sorry
+  change a ∈ (Ideal.span {pbcUniformizer l E}) ^ (n + 1) at ha
+  rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton] at ha
+  have hx : a.down ∈ Padic.coefficientExtensionIdeal l E (n + 1) := by
+    rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+      Ideal.mem_span_singleton]
+    exact map_dvd (ULift.ringEquiv.toRingHom) ha
+  have ht := Ideal.Quotient.eq_zero_iff_mem.mp
+    (WeilConjectures.integralScalar_quotient_kernel l E F i n a.down hx)
+  rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+    Ideal.mem_span_singleton] at ht
+  apply Ideal.Quotient.eq_zero_iff_mem.mpr
+  change pbcEmbeddingIntegerMap l E F i a ∈
+    (Ideal.span {pbcUniformizer l F}) ^ (n + 1)
+  rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton]
+  exact map_dvd (ULift.ringEquiv.symm.toRingHom) ht
 
 /-- The finite coefficient map induced by the specified field embedding.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -227,6 +278,31 @@ def pbcScalarQuotientMap (n : ℕ) :
 
 variable (T : Scheme.{u})
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcFiniteCoefficientMap_comp
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C] (a : A →+* B) (b : B →+* C) :
+    AdicCoefficients.coefficientMap T a ≫ AdicCoefficients.coefficientMap T b =
+      AdicCoefficients.coefficientMap T (b.comp a) := by
+  unfold AdicCoefficients.coefficientMap
+  rw [← CategoryTheory.Functor.map_comp]
+  congr 1
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcFiniteCoefficientMap_id
+    {A : Type (u + 1)} [CommRing A] [Finite A] :
+    AdicCoefficients.coefficientMap T (RingHom.id A) = 𝟙 _ := by
+  unfold AdicCoefficients.coefficientMap
+  have h : AdicCoefficients.functionPresheafMap T (RingHom.id A) = 𝟙 _ := by
+    ext U f
+    rfl
+  rw [h]
+  exact (presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_id _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The residue-normalized completed coefficient map exists uniquely.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: postcomposition by the quotient inclusion commutes with each quotient
@@ -242,7 +318,23 @@ theorem pbcScalarCoefficientMap_exists :
             (PbcQuotient (pbcIntegralDatum l E) n)
             (PbcQuotient (pbcIntegralDatum l F) n) _ _ _ _
             (pbcScalarQuotientMap l E F i n) := by
-  sorry
+  let t : pbcAdicRings T (pbcIntegralDatum l E) ⟶
+      pbcAdicRings T (pbcIntegralDatum l F) :=
+    NatTrans.ofOpSequence (fun n ↦
+      AdicCoefficients.coefficientMap T (pbcScalarQuotientMap l E F i n)) (fun n ↦ by
+      simp only [pbcAdicRings, AdicCoefficients.ringSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      rw [pbcFiniteCoefficientMap_comp, pbcFiniteCoefficientMap_comp]
+      congr 1
+      ext x
+      rfl)
+  refine ⟨limMap t, ?_, ?_⟩
+  · intro n
+    exact limMap_π t (op n)
+  · intro c hc
+    apply limit.hom_ext
+    intro n
+    exact (hc n.unop).trans (limMap_π t n).symm
 
 /-- The actual completed coefficient inclusion, fixed by all residue projections.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -315,6 +407,28 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
 def pbcRationalScalarHom (K L : PbcIntegralCategory l E T hDim hInv) :=
   (pbcRationalScalarHom_exists l E F i T hDim hInv K L).exists.choose
 
+section
+attribute [-instance] ULift.module
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcRationalScalarHom_tmul (K L : PbcIntegralCategory l E T hDim hInv)
+    (a : Localization.Away (pbcUniformizer l E)) (f : K ⟶ L) :
+    pbcRationalScalarHom l E F i T hDim hInv K L (a ⊗ₜ[PbcIntegralRing l E] f) =
+      (pbcRationalCoefficientEquiv l F).symm (i (pbcRationalCoefficientEquiv l E a))
+        ⊗ₜ[PbcIntegralRing l F]
+          (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f := by
+  have h := (pbcRationalScalarHom_exists l E F i T hDim hInv K L).exists.choose_spec a f
+  change pbcRationalScalarHom l E F i T hDim hInv K L
+      ((a * 1) ⊗ₜ[PbcIntegralRing l E] f) =
+    ((pbcRationalCoefficientEquiv l F).symm (i (pbcRationalCoefficientEquiv l E a)) * 1)
+      ⊗ₜ[PbcIntegralRing l F] (pbcEmbeddingIntegralTensor l E F i T hDim hInv).map f at h
+  simpa only [mul_one] using h
+
+attribute [local irreducible] pbcRationalScalarHom
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified rational Hom maps preserve identities and composition.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: on pure tensors use multiplication of scalar images, bilinear composition
@@ -329,7 +443,33 @@ theorem pbcRationalScalarHom_laws :
       pbcRationalScalarHom l E F i T hDim hInv K.obj M.obj (f ≫ g) =
         pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f ≫
           pbcRationalScalarHom l E F i T hDim hInv L.obj M.obj g) := by
-  sorry
+  constructor
+  · intro K
+    change pbcRationalScalarHom l E F i T hDim hInv K.obj K.obj
+      (1 ⊗ₜ[PbcIntegralRing l E] 𝟙 K.obj) =
+        (1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F] 𝟙 _
+    rw [pbcRationalScalarHom_tmul]
+    simp only [map_one, CategoryTheory.Functor.map_id]
+  · intro K L M f g
+    change pbcRationalScalarHom l E F i T hDim hInv K.obj M.obj
+      (ScalarLocalization.composition _ _ _ _ _ _ g f) =
+        ScalarLocalization.composition _ _ _ _ _ _
+          (pbcRationalScalarHom l E F i T hDim hInv L.obj M.obj g)
+          (pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f)
+    induction g using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b g =>
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f =>
+        rw [ScalarLocalization.composition_tmul]
+        rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul,
+          pbcRationalScalarHom_tmul, ScalarLocalization.composition_tmul]
+        simp only [map_mul, CategoryTheory.Functor.map_comp]
+      | add f f' hf hf' => simp only [_root_.map_add, hf, hf']
+    | add g g' hg hg' => simp only [_root_.map_add, LinearMap.add_apply, hg, hg']
+
+end
 
 /-- Derived scalar extension followed by raw scalar localization, on the actual Dbc.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -353,6 +493,8 @@ variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
 variable [FiniteDimensional (Padic l) G]
 variable (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G) (T : Scheme.{u})
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed coefficient maps compose as the actual field embeddings do.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: compose with every target finite projection. Both maps send the residue of
@@ -361,7 +503,22 @@ joint monicity of limit projections give equality. -/
 theorem pbcScalarCoefficientMap_comp :
     pbcScalarCoefficientMap l E F i T ≫ pbcScalarCoefficientMap l F G j T =
       pbcScalarCoefficientMap l E G (j.comp i) T := by
-  sorry
+  have hEF := (pbcScalarCoefficientMap_exists l E F i T).exists.choose_spec
+  have hFG := (pbcScalarCoefficientMap_exists l F G j T).exists.choose_spec
+  have hEG := (pbcScalarCoefficientMap_exists l E G (j.comp i) T).exists.choose_spec
+  apply limit.hom_ext
+  intro n
+  change (pbcScalarCoefficientMap l E F i T ≫ pbcScalarCoefficientMap l F G j T) ≫
+      pbcAdicProjection T (pbcIntegralDatum l G) n.unop =
+    pbcScalarCoefficientMap l E G (j.comp i) T ≫
+      pbcAdicProjection T (pbcIntegralDatum l G) n.unop
+  dsimp only [pbcScalarCoefficientMap]
+  rw [Category.assoc, hFG, ← Category.assoc, hEF, Category.assoc, hEG,
+    pbcFiniteCoefficientMap_comp]
+  congr 2
+  ext x
+  induction x using Quotient.inductionOn' with
+  | h x => rfl
 
 /-- The canonical balancing components are natural on derived objects.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -380,7 +537,21 @@ theorem pbcAmbientScalarComp_naturality
         (pbcScalarCoefficientMap l F G j T) (pbcScalarCoefficientMap l E G (j.comp i) T)
         (pbcScalarCoefficientMap_comp l E F G i j T) K).hom ≫
       (pbcEmbeddingAmbientTensor l E G (j.comp i) T).map f := by
-  sorry
+  let φ := pbcScalarCoefficientMap l E F i T
+  let ψ := pbcScalarCoefficientMap l F G j T
+  let χ := pbcScalarCoefficientMap l E G (j.comp i) T
+  let h := pbcScalarCoefficientMap_comp l E F G i j T
+  let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction φ)
+    (pbcDerivedScalarAdjunction ψ) (pbcDerivedScalarAdjunction χ)
+    (pbcDerivedRestrictComp φ ψ χ h)
+  have he (M : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+      (pbcReductionNormalization φ ψ χ h M).hom = e.hom.app M := by
+    dsimp [pbcReductionNormalization, pbcReductionNormalizationHom,
+      pbcReductionTransition, e]
+    simp only [asIso_hom, Adjunction.leftAdjointCompIso_hom_app,
+      Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [he, he]
+  exact e.hom.naturality f
 
 /-- The ambient associator is the adjunction-normalized balanced tensor comparison.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -407,6 +578,11 @@ def pbcRationalScalarCompComponent (K : PbcRationalDerivedCategory l E T hDim hI
     (ObjectProperty.isoMk (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l G))
       ((pbcAmbientScalarComp l E F G i j T).app K.obj.obj))
 
+section
+attribute [-instance] ULift.module
+attribute [local irreducible] pbcRationalScalarHom
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual localized balancing components are natural on all rational morphisms.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: ambient balancing is natural on integral maps. The scalar Hom formula
@@ -419,7 +595,38 @@ theorem pbcRationalScalarComp_naturality
       (pbcRationalScalarCompComponent l E F G i j T hDim hInv L).hom =
     (pbcRationalScalarCompComponent l E F G i j T hDim hInv K).hom ≫
       (pbcRationalScalarExtension l E G (j.comp i) T hDim hInv).map f := by
-  sorry
+  let I := pbcEmbeddingIntegralTensor l E F i T hDim hInv
+  let J := pbcEmbeddingIntegralTensor l F G j T hDim hInv
+  let D := pbcEmbeddingIntegralTensor l E G (j.comp i) T hDim hInv
+  let Q := pbcRationalization T (pbcIntegralDatum l G) (pbcUniformizer l G)
+  let η (M : PbcIntegralCategory l E T hDim hInv) : J.obj (I.obj M) ⟶ D.obj M :=
+    ObjectProperty.homMk ((pbcAmbientScalarComp l E F G i j T).hom.app M.obj)
+  have hn (f : K.obj ⟶ L.obj) : J.map (I.map f) ≫ η L.obj = η K.obj ≫ D.map f := by
+    apply ObjectProperty.hom_ext
+    exact (pbcAmbientScalarComp l E F G i j T).hom.naturality f.hom
+  unfold pbcRationalScalarCompComponent
+  dsimp only [pbcRationalScalarExtension]
+  change pbcRationalScalarHom l F G j T hDim hInv (I.obj K.obj) (I.obj L.obj)
+      (pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f) ≫ Q.map (η L.obj) =
+    Q.map (η K.obj) ≫ pbcRationalScalarHom l E G (j.comp i) T hDim hInv K.obj L.obj f
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a f =>
+    rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul]
+    change ScalarLocalization.composition _ _ _ _ _ _
+        ((1 : Localization.Away (pbcUniformizer l G)) ⊗ₜ[PbcIntegralRing l G] η L.obj)
+        (_ ⊗ₜ[PbcIntegralRing l G] J.map (I.map f)) =
+      ScalarLocalization.composition _ _ _ _ _ _
+        (_ ⊗ₜ[PbcIntegralRing l G] D.map f)
+        ((1 : Localization.Away (pbcUniformizer l G)) ⊗ₜ[PbcIntegralRing l G] η K.obj)
+    rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+    simp only [RingEquiv.apply_symm_apply, AlgHom.comp_apply, one_mul, mul_one]
+    exact congrArg (fun z ↦
+      (pbcRationalCoefficientEquiv l G).symm (j (i (pbcRationalCoefficientEquiv l E a)))
+        ⊗ₜ[PbcIntegralRing l G] z) (hn f)
+  | add f g hf hg =>
+    simp only [_root_.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
+end
 
 /-- The specified natural rational associator before literal-unit normalization.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -445,12 +652,28 @@ theorem pbcScalarRestrictId_exists :
     ∃! e : pbcRestrict (𝟙 (pbcAdicCompletion T (pbcIntegralDatum l E))) ≅ 𝟭 _,
       ∀ (M : pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
         (U : T.ProEtᵒᵖ) (x : M.val.obj U), (e.hom.app M).val.app U x = x := by
-  sorry
+  let R := pbcAdicCompletion T (pbcIntegralDatum l E)
+  let eM (M : pbcModules T R) : (pbcRestrict (𝟙 R)).obj M ≅ M :=
+    (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦
+        ModuleCat.restrictScalarsId'App _ rfl (M.val.obj U))
+        (fun {U V} f ↦ by ext x; rfl))
+  let e : pbcRestrict (𝟙 R) ≅ 𝟭 _ :=
+    NatIso.ofComponents eM (fun f ↦ by ext U x; rfl)
+  refine ⟨e, ?_, ?_⟩
+  · intro M U x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    ext M U x
+    exact he' M U x
 
 /-- The ordinary identity-on-sections restriction comparison.
 Source: Stacks 03DA (blueprint: prop-weil-pbc-scalar-extension). -/
 @[irreducible] def pbcScalarRestrictId := (pbcScalarRestrictId_exists l E T).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The identity completed coefficient map fixes all finite projections.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: the identity field embedding induces the identity on each quotient, hence
@@ -458,7 +681,21 @@ on each quotient coefficient sheaf. Limit projections are jointly monic. -/
 theorem pbcScalarCoefficientMap_id :
     pbcScalarCoefficientMap l E E (AlgHom.id (Padic l) E) T =
       𝟙 (pbcAdicCompletion T (pbcIntegralDatum l E)) := by
-  sorry
+  have h := (pbcScalarCoefficientMap_exists l E E (AlgHom.id (Padic l) E) T
+    ).exists.choose_spec
+  apply limit.hom_ext
+  intro n
+  change pbcScalarCoefficientMap l E E (AlgHom.id (Padic l) E) T ≫
+    pbcAdicProjection T (pbcIntegralDatum l E) n.unop = _
+  dsimp only [pbcScalarCoefficientMap]
+  rw [h, Category.id_comp]
+  have he : pbcScalarQuotientMap l E E (AlgHom.id (Padic l) E) n.unop =
+      RingHom.id _ := by
+    ext x
+    induction x using Quotient.inductionOn' with
+    | h x => rfl
+  rw [he, pbcFiniteCoefficientMap_id]
+  exact Category.comp_id _
 
 /-- The canonical tensor unit is conjugate to identity restriction under the
 ordinary-unit-normalized derived adjunction.
@@ -485,6 +722,12 @@ def pbcRationalScalarUnitComponent (K : PbcRationalDerivedCategory l E T hDim hI
     (ObjectProperty.isoMk (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
       ((pbcEmbeddingAmbientUnit l E T).app K.obj.obj))
 
+section
+attribute [-instance] ULift.module
+attribute [local irreducible] pbcRationalScalarHom
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified unit components are natural on every localized Hom module.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: on a pure tensor this is naturality of the ambient unit and the rational
@@ -494,7 +737,34 @@ theorem pbcRationalScalarUnit_naturality
     (pbcRationalScalarExtension l E E (AlgHom.id (Padic l) E) T hDim hInv).map f ≫
         (pbcRationalScalarUnitComponent l E T hDim hInv L).hom =
       (pbcRationalScalarUnitComponent l E T hDim hInv K).hom ≫ f := by
-  sorry
+  let I := pbcEmbeddingIntegralTensor l E E (AlgHom.id (Padic l) E) T hDim hInv
+  let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let η (M : PbcIntegralCategory l E T hDim hInv) : I.obj M ⟶ M :=
+    ObjectProperty.homMk ((pbcEmbeddingAmbientUnit l E T).hom.app M.obj)
+  have hn (f : K.obj ⟶ L.obj) : I.map f ≫ η L.obj = η K.obj ≫ f := by
+    apply ObjectProperty.hom_ext
+    exact (pbcEmbeddingAmbientUnit l E T).hom.naturality f.hom
+  unfold pbcRationalScalarUnitComponent
+  dsimp only [pbcRationalScalarExtension]
+  change pbcRationalScalarHom l E E (AlgHom.id (Padic l) E) T hDim hInv
+      K.obj L.obj f ≫ Q.map (η L.obj) = Q.map (η K.obj) ≫ f
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a f =>
+    rw [pbcRationalScalarHom_tmul]
+    change ScalarLocalization.composition _ _ _ _ _ _
+        ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[PbcIntegralRing l E] η L.obj)
+        (_ ⊗ₜ[PbcIntegralRing l E] I.map f) =
+      ScalarLocalization.composition _ _ _ _ _ _ (a ⊗ₜ[PbcIntegralRing l E] f)
+        ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[PbcIntegralRing l E] η K.obj)
+    rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+    simp only [AlgHom.id_apply, RingEquiv.symm_apply_apply, one_mul, mul_one]
+    exact congrArg (fun z ↦ a ⊗ₜ[PbcIntegralRing l E] z) (hn f)
+  | add f g hf hg =>
+    simp only [_root_.map_add, Preadditive.add_comp, hf, hg]
+    exact (Preadditive.comp_add _ _ _ _ _ _).symm
+
+end
 
 /-- The natural rational tensor unit, before choosing literal identity transitions.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -513,6 +783,69 @@ variable [Algebra (Padic l) E] [Algebra (Padic l) F]
 variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
 variable (i : E →ₐ[Padic l] F) (T : Scheme.{u})
 
+private theorem pbcKanCommShift_ext
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ] {F : C ⥤ D}
+    (s t : F.CommShift ℤ)
+    (h : ∀ n : ℤ, Functor.commShiftIso F (self := s) n =
+      Functor.commShiftIso F (self := t) n) : s = t := by
+  cases s
+  cases t
+  congr
+  funext n
+  exact h n
+
+-- The comparison determines the shift structure by Kan uniqueness, degree by degree.
+private theorem pbcRightKanShift_unique
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ]
+    {E : Type*} [Category* E] [HasShift E ℤ]
+    (F : C ⥤ E) [F.CommShift ℤ] (Q : C ⥤ D) [Q.CommShift ℤ]
+    (LF : D ⥤ E) (α : Q ⋙ LF ⟶ F) [LF.IsRightKanExtension α]
+    (s t : LF.CommShift ℤ)
+    (hs : letI := s; NatTrans.CommShift α ℤ)
+    (ht : letI := t; NatTrans.CommShift α ℤ) : s = t := by
+  have square (q : LF.CommShift ℤ) (hq : letI := q; NatTrans.CommShift α ℤ)
+      (n : ℤ) (X : C) :
+      LF.map ((Q.commShiftIso n).hom.app X) ≫
+          (Functor.commShiftIso LF (self := q) n).hom.app (Q.obj X) ≫
+            (shiftFunctor E n).map (α.app X) =
+        α.app ((shiftFunctor C n).obj X) ≫ (F.commShiftIso n).hom.app X := by
+    let := q
+    have := hq
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm α n X
+  have he (n : ℤ) : Functor.commShiftIso LF (self := s) n =
+      Functor.commShiftIso LF (self := t) n := by
+    let H := shiftFunctor E n
+    let P := Functor.RightExtension.postcompose₂ Q F H
+    let : IsIso (𝟙 (F ⋙ H)) := inferInstance
+    let : P.IsEquivalence := by
+      dsimp [P, Functor.RightExtension.postcompose₂]
+      let a : ((Functor.whiskeringRight D E E).obj H) ⋙
+          (Functor.whiskeringLeft C D E).obj Q ⟶
+          (Functor.whiskeringLeft C D E).obj Q ⋙
+            ((Functor.whiskeringRight C E E).obj H) :=
+        { app G := (Functor.associator Q G H).inv }
+      let : IsIso a := by apply NatIso.isIso_of_isIso_app
+      exact CostructuredArrow.isEquivalenceMap₂ a (𝟙 _)
+    let γ := (Functor.associator Q LF H).inv ≫ whiskerRight α H
+    have : (LF ⋙ H).IsRightKanExtension γ := by
+      constructor
+      refine ⟨IsTerminal.ofIso
+        (IsTerminal.isTerminalObj P _ (LF.isUniversalOfIsRightKanExtension α)) ?_⟩
+      exact Functor.RightExtension.postcompose₂ObjMkIso H α
+    apply Iso.ext
+    apply (LF ⋙ H).hom_ext_of_isRightKanExtension γ
+    ext X
+    simp only [γ, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
+    apply (cancel_epi (LF.map ((Q.commShiftIso n).hom.app X))).1
+    simpa only [Category.assoc] using (square s hs n X).trans (square t ht n X).symm
+  exact pbcKanCommShift_ext s t he
+
+
+set_option linter.unusedVariables false in
 /-- Universal tensor counits uniquely fix the termwise derived shift comparison.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: ordinary tensor commutes with cochain shifts, with the identity map on
@@ -524,7 +857,16 @@ theorem pbcAmbientScalarShift_exists :
       (fun [qInst : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ] ↦
         NatTrans.CommShift (pbcExtensionCounit (pbcScalarCoefficientMap l E F i T)) ℤ)
           (qInst := q) := by
-  sorry
+  let φ := pbcScalarCoefficientMap l E F i T
+  have := pbcDerivedExtension_universal φ
+  have hkan := CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension
+    (pbcDerivedExtend φ) (pbcExtensionCounit φ)
+    (HomotopyCategory.quasiIso
+      (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) (.up ℤ))
+  have := hkan
+  obtain ⟨q, hq⟩ := CategoryTheory.Functor.rightKanExtension_coherentShift _
+    DerivedCategory.Qh (pbcDerivedExtend φ) (pbcExtensionCounit φ) hkan
+  exact ⟨q, hq, fun q' hq' ↦ pbcRightKanShift_unique _ _ _ _ q' q hq' hq⟩
 
 /-- The tensor shift comparison normalized by its actual derived counit.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -543,6 +885,42 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
       ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ⋙
         pbcEmbeddingAmbientTensor l E F i T := Iso.refl _
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcCommShift_unique
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift B ℤ]
+    {J : C ⥤ D} {I : D ⥤ B} {H : C ⥤ B} [I.Full] [I.Faithful]
+    [I.CommShift ℤ] [H.CommShift ℤ] (e : J ⋙ I ≅ H)
+    (q q' : J.CommShift ℤ)
+    (hq : (fun [_s : J.CommShift ℤ] ↦ NatTrans.CommShift e.hom ℤ) (_s := q))
+    (hq' : (fun [_s : J.CommShift ℤ] ↦ NatTrans.CommShift e.hom ℤ) (_s := q')) :
+    q = q' := by
+  have square (s : J.CommShift ℤ)
+      (hs : letI := s; NatTrans.CommShift e.hom ℤ) (n : ℤ) (K : C) :
+      I.map ((CategoryTheory.Functor.commShiftIso J (self := s) n).hom.app K) ≫
+          (I.commShiftIso n).hom.app (J.obj K) ≫
+            (shiftFunctor B n).map (e.hom.app K) =
+        e.hom.app (K⟦n⟧) ≫ (H.commShiftIso n).hom.app K := by
+    let := s
+    have := hs
+    simpa only [CategoryTheory.Functor.commShiftIso_comp_hom_app, Category.assoc]
+      using NatTrans.shift_app_comm e.hom n K
+  have he (n : ℤ) : CategoryTheory.Functor.commShiftIso J (self := q) n =
+      CategoryTheory.Functor.commShiftIso J (self := q') n := by
+    apply Iso.ext
+    ext K
+    apply I.map_injective
+    apply (cancel_mono ((I.commShiftIso n).hom.app (J.obj K))).mp
+    apply (cancel_mono ((shiftFunctor B n).map (e.hom.app K))).mp
+    simpa only [Category.assoc] using (square q hq n K).trans (square q' hq' n K).symm
+  cases q
+  cases q'
+  congr
+  funext n
+  exact he n
+
+set_option linter.unusedVariables false in
 /-- Faithful full inclusions uniquely transport the ambient tensor shift.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: conjugate the ambient comparison by the inherited inclusion's shift
@@ -553,7 +931,12 @@ theorem pbcIntegralScalarShift_exists :
     ∃! q : (pbcEmbeddingIntegralTensor l E F i T dim.out inv.out).CommShift ℤ,
       (fun [qInst : (pbcEmbeddingIntegralTensor l E F i T dim.out inv.out).CommShift ℤ] ↦
         NatTrans.CommShift (pbcIntegralScalarInclusionIso l E F i T).hom ℤ) (qInst := q) := by
-  sorry
+  let e := pbcIntegralScalarInclusionIso l E F i T
+  let q := CategoryTheory.Functor.CommShift.ofComp e ℤ
+  have hq : (fun [s : (pbcEmbeddingIntegralTensor l E F i T dim.out inv.out
+      ).CommShift ℤ] ↦ NatTrans.CommShift e.hom ℤ) (s := q) :=
+    CategoryTheory.Functor.CommShift.ofComp_compatibility e ℤ
+  exact ⟨q, hq, fun q' hq' ↦ pbcCommShift_unique e q' q hq' hq⟩
 
 /-- The inherited integral shift, fixed by the ambient inclusion equation.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -572,7 +955,12 @@ theorem pbcScalarLocalization_naturality
         ((pbcEmbeddingIntegralTensor l E F i T dim.out inv.out).map f) ≫ 𝟙 _ =
       𝟙 _ ≫ (pbcRationalScalarExtension l E F i T dim.out inv.out).map
         ((pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) := by
-  sorry
+  have h := (pbcRationalScalarHom_exists l E F i T dim.out inv.out K L).exists.choose_spec
+    (1 : Localization.Away (pbcUniformizer l E)) f
+  simp only [Category.comp_id, Category.id_comp]
+  change _ = pbcRationalScalarHom l E F i T dim.out inv.out K L _
+  dsimp only [pbcRationalScalarHom]
+  simpa only [one_smul, map_one] using h.symm
 
 /-- The integral-to-rational tensor square has identity components on objects.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -584,6 +972,39 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
   NatIso.ofComponents (fun _ ↦ Iso.refl _)
     (fun f ↦ pbcScalarLocalization_naturality l E F i T f)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcPrecompCommShift_unique
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift B ℤ]
+    (Q : C ⥤ D) (hQ : Function.Surjective Q.obj) [Q.CommShift ℤ]
+    (J : D ⥤ B) (H : C ⥤ B) [H.CommShift ℤ] (e : Q ⋙ J ≅ H)
+    (q q' : J.CommShift ℤ)
+    (hq : letI := q; NatTrans.CommShift e.hom ℤ)
+    (hq' : letI := q'; NatTrans.CommShift e.hom ℤ) : q = q' := by
+  have square (s : J.CommShift ℤ) (hs : letI := s; NatTrans.CommShift e.hom ℤ)
+      (n : ℤ) (K : C) :
+      J.map ((Q.commShiftIso n).hom.app K) ≫
+          (CategoryTheory.Functor.commShiftIso J (self := s) n).hom.app (Q.obj K) ≫
+          (shiftFunctor B n).map (e.hom.app K) =
+        e.hom.app (K⟦n⟧) ≫ (H.commShiftIso n).hom.app K := by
+    let := s
+    have := hs
+    simpa only [CategoryTheory.Functor.commShiftIso_comp_hom_app, Category.assoc]
+      using NatTrans.shift_app_comm e.hom n K
+  apply pbcKanCommShift_ext
+  intro n
+  apply Iso.ext
+  ext K
+  obtain ⟨M, rfl⟩ := hQ K
+  apply (cancel_epi (J.map ((Q.commShiftIso n).hom.app M))).mp
+  apply (cancel_mono ((shiftFunctor B n).map (e.hom.app M))).mp
+  simpa only [Category.assoc] using
+    (square q hq n M).trans (square q' hq' n M).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
 /-- The rational shift comparison is precisely the localized ambient tensor comparison.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: the inherited integral shift changes no underlying completed complex. On
@@ -594,7 +1015,33 @@ theorem pbcRationalScalarShift_exists :
     ∃! q : (pbcRationalScalarExtension l E F i T dim.out inv.out).CommShift ℤ,
       (fun [qInst : (pbcRationalScalarExtension l E F i T dim.out inv.out).CommShift ℤ] ↦
         NatTrans.CommShift (pbcScalarLocalizationIso l E F i T).hom ℤ) (qInst := q) := by
-  sorry
+  let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let P := pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let I := pbcEmbeddingIntegralTensor l E F i T dim.out inv.out
+  let J := pbcRationalScalarExtension l E F i T dim.out inv.out
+  let e := pbcScalarLocalizationIso l E F i T
+  let W := Rationalization.W (Submonoid.powers (pbcUniformizer l E))
+    (PbcIntegralCategory l E T dim.out inv.out)
+  have : Q.IsLocalization W :=
+    ScalarLocalization.pbcScalarLocalization_isLocalization _ _ _
+  let : Localization.Lifting Q W (I ⋙ P) J := ⟨e.symm⟩
+  let q : J.CommShift ℤ :=
+    CategoryTheory.Functor.commShiftOfLocalization Q W ℤ (I ⋙ P) J
+  have hq : letI := q; NatTrans.CommShift e.hom ℤ := by
+    let := q
+    have : NatTrans.CommShift e.symm.hom ℤ := by
+      change NatTrans.CommShift e.inv ℤ
+      exact NatTrans.commShift_iso_hom_of_localization Q W ℤ (I ⋙ P) J
+    exact NatTrans.CommShift.of_iso_inv e.symm ℤ
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  have hinv (s : J.CommShift ℤ) (hs : letI := s; NatTrans.CommShift e.hom ℤ) :
+      letI := s; NatTrans.CommShift e.inv ℤ := by
+    let := s
+    have := hs
+    exact NatTrans.CommShift.of_iso_inv e ℤ
+  exact pbcPrecompCommShift_unique Q (fun K ↦ ⟨K.obj, rfl⟩) J (I ⋙ P) e.symm
+    q' q (hinv q' hq') (hinv q hq)
 
 /-- The canonical rational tensor shift with its integral normalization retained.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -602,6 +1049,33 @@ instance pbcRationalScalarShift :
     (pbcRationalScalarExtension l E F i T dim.out inv.out).CommShift ℤ :=
   (pbcRationalScalarShift_exists l E F i T).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] dim inv in
+private theorem pbcAmbientScalarExact :
+    (pbcEmbeddingAmbientTensor l E F i T).Additive ∧
+      (pbcEmbeddingAmbientTensor l E F i T).IsTriangulated := by
+  let φ := pbcScalarCoefficientMap l E F i T
+  have := pbcDerivedExtension_universal φ
+  obtain ⟨σ, hσ, huniq, hadd, htri⟩ :=
+    SheafOfModules.derivedScalarExtension_counitShift.{u + 1, u, u + 1, u + 2, u + 2}
+      φ (pbcExtend φ)
+      (pbcExtensionExistence φ).choose_spec.choose
+      (pbcExtensionExistence φ).choose_spec.choose_spec.choose
+      (pbcDerivedExtend φ) (pbcExtensionCounit φ)
+  have : NatTrans.CommShift (pbcExtensionCounit φ) ℤ :=
+    (pbcAmbientScalarShift_exists l E F i T).exists.choose_spec
+  have he : (CategoryTheory.Functor.commShiftIso
+      (pbcEmbeddingAmbientTensor l E F i T) (1 : ℤ)) = σ := by
+    apply huniq
+    intro P
+    simpa only [CategoryTheory.Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm (pbcExtensionCounit φ) (1 : ℤ) P
+  refine ⟨hadd, ⟨fun Δ hΔ ↦ ?_⟩⟩
+  simpa only [CategoryTheory.Functor.mapTriangle_obj, he] using htri Δ hΔ
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual raw rational tensor functor is additive and triangulated.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: ambient derived tensor preserves the termwise cone differential and its
@@ -613,7 +1087,36 @@ with the normalized last arrow; additivity follows on the tensor Hom generators.
 theorem pbcRationalScalarExact :
     (pbcRationalScalarExtension l E F i T dim.out inv.out).Additive ∧
       (pbcRationalScalarExtension l E F i T dim.out inv.out).IsTriangulated := by
-  sorry
+  have ha := pbcAmbientScalarExact l E F i T
+  have := ha.1
+  have := ha.2
+  let I := pbcEmbeddingIntegralTensor l E F i T dim.out inv.out
+  let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let P := pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let J := pbcRationalScalarExtension l E F i T dim.out inv.out
+  have hinc : NatTrans.CommShift (pbcIntegralScalarInclusionIso l E F i T).hom ℤ :=
+    (pbcIntegralScalarShift_exists l E F i T).exists.choose_spec
+  have : I.IsTriangulated :=
+    (CategoryTheory.Functor.isTriangulated_iff_comp_right
+      (pbcIntegralScalarInclusionIso l E F i T)).2 inferInstance
+  have hQ : Q.IsTriangulated :=
+    ((pbcRationalTriangulationData l E T dim.out inv.out).choose_spec.choose_spec.2
+      ).choose_spec.choose_spec.2.choose_spec.2.1
+  have hP : P.IsTriangulated :=
+    ((pbcRationalTriangulationData l F T dim.out inv.out).choose_spec.choose_spec.2
+      ).choose_spec.choose_spec.2.choose_spec.2.1
+  let W := Rationalization.W (Submonoid.powers (pbcUniformizer l E))
+    (PbcIntegralCategory l E T dim.out inv.out)
+  have : Q.IsLocalization W := ScalarLocalization.pbcScalarLocalization_isLocalization _ _ _
+  have := Localization.essSurj_mapArrow Q W
+  have : NatTrans.CommShift (pbcScalarLocalizationIso l E F i T).hom ℤ :=
+    (pbcRationalScalarShift_exists l E F i T).exists.choose_spec
+  refine ⟨?_, ?_⟩
+  · constructor
+    intros K L f g
+    exact (pbcRationalScalarHom l E F i T dim.out inv.out K.obj L.obj).map_add f g
+  · exact CategoryTheory.Functor.isTriangulated_of_precomp_iso
+      (pbcScalarLocalizationIso l E F i T).symm
 
 /-- Additivity from the actual rational Hom formula.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -652,7 +1155,7 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: both maps fix every element of the subfield. -/
 theorem pbcSubfieldInclusion_id (E : Padic.FiniteCoefficientFields l Ω) :
     pbcSubfieldInclusion l Ω (le_refl E) = AlgHom.id (Padic l) E.val := by
-  sorry
+  rfl
 
 /-- Actual inclusions compose as direct inclusions.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -661,7 +1164,7 @@ theorem pbcSubfieldInclusion_comp {E F G : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ F) (h' : F ≤ G) :
     (pbcSubfieldInclusion l Ω h').comp (pbcSubfieldInclusion l Ω h) =
       pbcSubfieldInclusion l Ω (h.trans h') := by
-  sorry
+  rfl
 
 /-- The actual rational tensor before literal identity normalization.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -744,7 +1247,11 @@ just defined, so the triangle's last arrow is retained. -/
 theorem pbcStageExact {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     (pbcStageTransition l Ω T h).Additive ∧
       (pbcStageTransition l Ω T h).IsTriangulated := by
-  sorry
+  have hcompat := Functor.CommShift.ofIso_compatibility
+    (pbcStageNormalization l Ω T h) ℤ
+  have : NatTrans.CommShift (pbcStageNormalization l Ω T h).hom ℤ := hcompat
+  exact ⟨Functor.additive_of_iso (pbcStageNormalization l Ω T h),
+    Functor.isTriangulated_of_iso (pbcStageNormalization l Ω T h)⟩
 
 /-- The specified associators commute with every integer shift.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -765,20 +1272,6 @@ variable (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
-
-/-- Finite-free coefficient extension preserves ambient intrinsic completeness.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
-Proof: finite-free-completed-scalar-comparison realizes tensor as a finite sum.
-Finite sums commute with the Koszul completion tower and its derived limit. In
-the target ring the two uniformizers define cofinal filtrations, since the source
-uniformizer is a unit times a positive power of the target uniformizer. The two
-completion reflectors and their units therefore agree. Tensoring an invertible
-source completion unit gives an invertible target completion unit. -/
-theorem pbcScalarPreservesComplete (W : Scheme.{u})
-    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E))) :
-    PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)
-      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj) := by
-  sorry
 
 /-- The actual completed coefficient inclusion commutes with the ringed structure map.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -865,6 +1358,60 @@ Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
         pbcEmbeddingAmbientTensor l E F i W :=
   (pbcScalarCompletionIso_exists l E F i W).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcComplete_iso (W : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    ObjectProperty.IsClosedUnderIsomorphisms (PbcIsIntrinsicallyComplete W d) := by
+  constructor
+  intro K L e hK
+  obtain ⟨r, f, hf, C, eC, hC⟩ := hK
+  refine ⟨r, f, hf, C,
+    eC ≪≫ (pbcDerivedExtend (pbcCompletedComparison W d).inv).mapIso e, ?_⟩
+  change IsIso (eC.inv ≫ _) at hC
+  have hu := (isIso_comp_left_iff eC.inv _).mp hC
+  change IsIso ((_ ≫ eC.inv) ≫ _)
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Finite-free coefficient extension preserves ambient intrinsic completeness.
+Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
+Proof: use the unit-normalized scalar/completion comparison. The completion unit
+of the complete input is invertible, and tensor carries it to an invertible map.
+The comparison's unit equation therefore makes the target completion unit
+invertible. Its target is a reflected, intrinsically complete object; invariance
+of intrinsic completeness under isomorphism gives the claim. -/
+theorem pbcScalarPreservesComplete (W : Scheme.{u})
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E))) :
+    PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)
+      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj) := by
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let I := ObjectProperty.ι (PbcIsIntrinsicallyComplete W dE)
+  let adj := Adjunction.ofIsRightAdjoint I
+  have hη : IsIso ((pbcActualCompletionUnit dE W).app K.obj) := by
+    change IsIso (adj.unit.app (I.obj K))
+    infer_instance
+  obtain ⟨e, he, _⟩ := pbcScalarCompletionIso_exists l E F i W
+  have hmap : IsIso ((pbcEmbeddingAmbientTensor l E F i W).map
+      ((pbcActualCompletionUnit dE W).app K.obj)) := inferInstance
+  have hcomp : IsIso ((pbcActualCompletionUnit dF W).app
+      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj) ≫ e.hom.app K.obj) := by
+    rw [he K.obj]
+    exact hmap
+  have hunit : IsIso ((pbcActualCompletionUnit dF W).app
+      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj)) :=
+    (isIso_comp_right_iff _ (e.hom.app K.obj)).mp hcomp
+  have := pbcComplete_iso W dF
+  exact ObjectProperty.prop_of_iso (PbcIsIntrinsicallyComplete W dF)
+    (asIso ((pbcActualCompletionUnit dF W).app
+      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj))).symm
+    ((ObjectProperty.ι (PbcIsIntrinsicallyComplete W dF)).leftAdjoint.obj
+      ((pbcEmbeddingAmbientTensor l E F i W).obj K.obj)).property
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed scalar/pullback is the ordinary comparison followed by the canonical
 completion comparisons. Source: blueprint order 1307
 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -873,13 +1420,36 @@ completion comparisons. Source: blueprint order 1307
         pbcActualCompletedPull g (pbcIntegralDatum l F) ≅
       pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙
         pbcEmbeddingAmbientTensor l E F i X :=
-  isoWhiskerLeft _ (Iso.refl (pbcActualCompletedPull g (pbcIntegralDatum l F))) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    isoWhiskerRight (pbcScalarOrdinaryPullIso l E F i g) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    isoWhiskerLeft _ (pbcScalarCompletionIso l E F i X) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    isoWhiskerRight (Iso.refl (pbcActualCompletedPull g (pbcIntegralDatum l E))).symm _
+  NatIso.ofComponents
+    (F := pbcEmbeddingAmbientTensor l E F i Y ⋙
+      pbcActualCompletedPull g (pbcIntegralDatum l F))
+    (G := pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙
+      pbcEmbeddingAmbientTensor l E F i X) (fun K ↦
+    (pbcActualCompletion (pbcIntegralDatum l F) X).mapIso
+        ((pbcScalarOrdinaryPullIso l E F i g).app K) ≪≫
+      (pbcScalarCompletionIso l E F i X).app
+        ((pbcActualDerivedPull g (pbcIntegralDatum l E)).obj K)) (fun {K L} f ↦ by
+    have he := (pbcScalarOrdinaryPullIso l E F i g).hom.naturality f
+    have hc := (pbcScalarCompletionIso l E F i X).hom.naturality
+      ((pbcActualDerivedPull g (pbcIntegralDatum l E)).map f)
+    dsimp only [CategoryTheory.Functor.comp_map] at he hc
+    dsimp only [pbcActualCompletedPull, CategoryTheory.Functor.comp_map, Iso.trans_hom,
+      CategoryTheory.Functor.mapIso_hom, Iso.app_hom]
+    rw [← Category.assoc, ← CategoryTheory.Functor.map_comp, he,
+      CategoryTheory.Functor.map_comp, Category.assoc, hc, Category.assoc])
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarCompletedPullIso_hom
+    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :
+    (pbcScalarCompletedPullIso l E F i g).hom.app K =
+      (pbcActualCompletion (pbcIntegralDatum l F) X).map
+          ((pbcScalarOrdinaryPullIso l E F i g).hom.app K) ≫
+        (pbcScalarCompletionIso l E F i X).hom.app
+          ((pbcActualDerivedPull g (pbcIntegralDatum l E)).obj K) := by
+  unfold pbcScalarCompletedPullIso
+  rfl
 
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {a : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f a)
@@ -962,7 +1532,7 @@ theorem pbcScalarCompletedExchange_rational
     (pbcRationalization Y' (pbcIntegralDatum l F) (pbcUniformizer l F)).map
       (ObjectProperty.homMk (X := ⟨_, hL⟩) (Y := ⟨_, hR⟩)
         ((pbcScalarExchangeRight l E F i sq).app K)) := by
-  sorry
+  rw [pbcScalarCompletedExchange l E F i sq]
 
 /-- Both ambient scalar comparisons preserve the canonical derived shift structures.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -996,6 +1566,36 @@ theorem pbcScalarOperations_identity (W : Scheme.{u})
         ((pbcEmbeddingAmbientTensor l E F i W).obj K)) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcCompletion_hom_ext (W : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K L : PbcCompletedDerived W d) (hL : PbcIsIntrinsicallyComplete W d L)
+    (f g : (pbcActualCompletion d W).obj K ⟶ L)
+    (h : (pbcActualCompletionUnit d W).app K ≫ f =
+      (pbcActualCompletionUnit d W).app K ≫ g) : f = g := by
+  let I := ObjectProperty.ι (PbcIsIntrinsicallyComplete W d)
+  let adj := Adjunction.ofIsRightAdjoint I
+  let N : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W d) := ⟨L, hL⟩
+  let a : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk f
+  let b : I.leftAdjoint.obj K ⟶ N := ObjectProperty.homMk g
+  have hab : adj.homEquiv K N a = adj.homEquiv K N b := by
+    change adj.unit.app K ≫ I.map a = adj.unit.app K ≫ I.map b at h
+    simpa only [Adjunction.homEquiv_unit] using h
+  exact congrArg (fun z ↦ z.hom) ((adj.homEquiv K N).injective hab)
+
+private theorem pbcCompletedPullId_unit (W : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W d)) :
+    (pbcActualCompletedPullUnit (𝟙 W) d).app K.obj ≫
+        (pbcActualCompletedPullIdIso d W).hom.app K =
+      (pbcActualDerivedPullIdIso d W).hom.app K.obj :=
+  (pbcActualCompletedPullIdIso_exists d W).exists.choose_spec K
+
+attribute [local irreducible] pbcActualCompletedPullIdIso pbcActualDerivedPullIdIso
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed identity coherence uses the canonical comparison on complete objects.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: precompose both routes with the ordinary-to-completed pullback unit. The
@@ -1011,7 +1611,68 @@ theorem pbcScalarCompletedPull_identity (W : Scheme.{u})
       (pbcActualCompletedPullIdIso (pbcIntegralDatum l F) W).hom.app
         ⟨(pbcEmbeddingAmbientTensor l E F i W).obj K.obj,
           pbcScalarPreservesComplete l E F i W K⟩ := by
-  sorry
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let C := pbcEmbeddingAmbientTensor l E F i W
+  let LE := pbcActualDerivedPull (𝟙 W) dE
+  let LF := pbcActualDerivedPull (𝟙 W) dF
+  let ηE := pbcActualCompletionUnit dE W
+  let ηF := pbcActualCompletionUnit dF W
+  let e := pbcScalarOrdinaryPullIso l E F i (𝟙 W)
+  let c := pbcScalarCompletionIso l E F i W
+  let idE : (pbcActualCompletion dE W).obj (LE.obj K.obj) ⟶ K.obj :=
+    (pbcActualCompletedPullIdIso dE W).hom.app K
+  let idF : (pbcActualCompletion dF W).obj (LF.obj (C.obj K.obj)) ⟶ C.obj K.obj :=
+    (pbcActualCompletedPullIdIso dF W).hom.app
+      ⟨C.obj K.obj, pbcScalarPreservesComplete l E F i W K⟩
+  have hc : ηF.app (C.obj (LE.obj K.obj)) ≫ c.hom.app (LE.obj K.obj) =
+      C.map (ηE.app (LE.obj K.obj)) := by
+    dsimp only [c]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l E F i W).exists.choose_spec (LE.obj K.obj)
+  have hE : ηE.app (LE.obj K.obj) ≫
+      idE =
+      (pbcActualDerivedPullIdIso dE W).hom.app K.obj :=
+    pbcCompletedPullId_unit W dE K
+  have hF : ηF.app (LF.obj (C.obj K.obj)) ≫
+      idF =
+      (pbcActualDerivedPullIdIso dF W).hom.app (C.obj K.obj) :=
+    pbcCompletedPullId_unit W dF
+      ⟨C.obj K.obj, pbcScalarPreservesComplete l E F i W K⟩
+  have ho : e.hom.app K.obj ≫ C.map
+      ((pbcActualDerivedPullIdIso dE W).hom.app K.obj) =
+      (pbcActualDerivedPullIdIso dF W).hom.app (C.obj K.obj) :=
+    (pbcScalarOperations_identity l E F i W K.obj).2
+  apply pbcCompletion_hom_ext W dF _ _ (pbcScalarPreservesComplete l E F i W K)
+  rw [pbcScalarCompletedPullIso_hom]
+  change ηF.app (LF.obj (C.obj K.obj)) ≫
+      (((pbcActualCompletion dF W).map (e.hom.app K.obj) ≫
+        c.hom.app (LE.obj K.obj)) ≫ C.map (idE)) =
+    ηF.app (LF.obj (C.obj K.obj)) ≫
+      idF
+  have hn : ηF.app (LF.obj (C.obj K.obj)) ≫
+      (pbcActualCompletion dF W).map (e.hom.app K.obj) =
+      e.hom.app K.obj ≫ ηF.app (C.obj (LE.obj K.obj)) :=
+    (ηF.naturality (e.hom.app K.obj)).symm
+  calc
+    _ = (ηF.app (LF.obj (C.obj K.obj)) ≫
+        (pbcActualCompletion dF W).map (e.hom.app K.obj)) ≫
+        c.hom.app (LE.obj K.obj) ≫
+        C.map (idE) := by
+      simp only [Category.assoc]
+    _ = e.hom.app K.obj ≫
+        (ηF.app (C.obj (LE.obj K.obj)) ≫ c.hom.app (LE.obj K.obj)) ≫
+        C.map (idE) := by
+      rw [hn]
+      simp only [Category.assoc]
+    _ = e.hom.app K.obj ≫ C.map (ηE.app (LE.obj K.obj)) ≫
+        C.map (idE) := by rw [hc]
+    _ = e.hom.app K.obj ≫ C.map (ηE.app (LE.obj K.obj) ≫
+        idE) := by
+      rw [CategoryTheory.Functor.map_comp]
+    _ = (pbcActualDerivedPullIdIso dF W).hom.app (C.obj K.obj) := by rw [hE, ho]
+    _ = _ := hF.symm
+
 
 variable {Z : Scheme.{u}} (h : Z ⟶ X)
 
@@ -1115,6 +1776,75 @@ theorem pbcScalarOrdinaryPull_coefficients
       (pbcScalarOrdinaryPullIso l E G (j.comp i) g).hom.app K := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Completion comparison respects successive coefficients with its actual unit.
+Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
+Proof: both composites preserve the completion unit, since each comparison and
+the balancing associator does. The completion reflector's uniqueness therefore
+identifies them. This is also the strict quotient-tower calculation followed by
+derived inverse limit, so includes every transition and the augmentation. -/
+theorem pbcScalarCompletion_coefficients (W : Scheme.{u})
+    (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
+    (pbcScalarCompletionIso l F G j W).hom.app
+        ((pbcEmbeddingAmbientTensor l E F i W).obj K) ≫
+      (pbcEmbeddingAmbientTensor l F G j W).map
+        ((pbcScalarCompletionIso l E F i W).hom.app K) ≫
+      (pbcAmbientScalarComp l E F G i j W).hom.app
+        ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K) =
+    (pbcActualCompletion (pbcIntegralDatum l G) W).map
+        ((pbcAmbientScalarComp l E F G i j W).hom.app K) ≫
+      (pbcScalarCompletionIso l E G (j.comp i) W).hom.app K := by
+  let A := pbcEmbeddingAmbientTensor l E F i W
+  let B := pbcEmbeddingAmbientTensor l F G j W
+  let C := pbcEmbeddingAmbientTensor l E G (j.comp i) W
+  let ηE := pbcActualCompletionUnit (pbcIntegralDatum l E) W
+  let ηF := pbcActualCompletionUnit (pbcIntegralDatum l F) W
+  let ηG := pbcActualCompletionUnit (pbcIntegralDatum l G) W
+  let α := pbcAmbientScalarComp l E F G i j W
+  let eEF := pbcScalarCompletionIso l E F i W
+  let eFG := pbcScalarCompletionIso l F G j W
+  let eEG := pbcScalarCompletionIso l E G (j.comp i) W
+  have hEF : ηF.app (A.obj K) ≫ eEF.hom.app K = A.map (ηE.app K) := by
+    dsimp only [eEF]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l E F i W).exists.choose_spec K
+  have hFG : ηG.app (B.obj (A.obj K)) ≫ eFG.hom.app (A.obj K) =
+      B.map (ηF.app (A.obj K)) := by
+    dsimp only [eFG]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l F G j W).exists.choose_spec (A.obj K)
+  have hEG : ηG.app (C.obj K) ≫ eEG.hom.app K = C.map (ηE.app K) := by
+    dsimp only [eEG]
+    unfold pbcScalarCompletionIso
+    exact (pbcScalarCompletionIso_exists l E G (j.comp i) W).exists.choose_spec K
+  have hc : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)
+      ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K) :=
+    ((ObjectProperty.ι (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)
+      )).leftAdjoint.obj K).property
+  apply pbcCompletion_hom_ext W (pbcIntegralDatum l G) _ _
+    (pbcScalarPreservesComplete l E G (j.comp i) W ⟨_, hc⟩)
+  change ηG.app (B.obj (A.obj K)) ≫
+      (eFG.hom.app (A.obj K) ≫ B.map (eEF.hom.app K) ≫
+        α.hom.app ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K)) =
+    ηG.app (B.obj (A.obj K)) ≫
+      ((pbcActualCompletion (pbcIntegralDatum l G) W).map (α.hom.app K) ≫ eEG.hom.app K)
+  calc
+    _ = B.map (A.map (ηE.app K)) ≫
+        α.hom.app ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K) := by
+      rw [← Category.assoc, ← Category.assoc, hFG,
+        ← CategoryTheory.Functor.map_comp, hEF]
+    _ = α.hom.app K ≫ C.map (ηE.app K) := α.hom.naturality (ηE.app K)
+    _ = _ := by
+      have hn : ηG.app (B.obj (A.obj K)) ≫
+          (pbcActualCompletion (pbcIntegralDatum l G) W).map (α.hom.app K) =
+          α.hom.app K ≫ ηG.app (C.obj K) := by
+        exact (ηG.naturality (α.hom.app K)).symm
+      rw [← Category.assoc, hn, Category.assoc, hEG]
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Pullback comparison respects successive finite coefficient extensions.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
 Proof: the ordinary comparison is balanced on K-flat models. The three coefficient
@@ -1133,26 +1863,52 @@ theorem pbcScalarCompletedPull_coefficients
     (pbcActualCompletedPull g (pbcIntegralDatum l G)).map
         ((pbcAmbientScalarComp l E F G i j Y).hom.app K) ≫
       (pbcScalarCompletedPullIso l E G (j.comp i) g).hom.app K := by
-  sorry
+  let A := pbcEmbeddingAmbientTensor l E F i X
+  let B := pbcEmbeddingAmbientTensor l F G j X
+  let L := pbcActualDerivedPull g (pbcIntegralDatum l E)
+  let M := pbcActualDerivedPull g (pbcIntegralDatum l F)
+  let Λ := pbcActualCompletion (pbcIntegralDatum l G) X
+  let e := pbcScalarOrdinaryPullIso l E F i g
+  let f := pbcScalarOrdinaryPullIso l F G j g
+  let d := pbcScalarOrdinaryPullIso l E G (j.comp i) g
+  let c := pbcScalarCompletionIso l F G j X
+  let b := pbcScalarCompletionIso l E F i X
+  let a := pbcScalarCompletionIso l E G (j.comp i) X
+  let α := pbcAmbientScalarComp l E F G i j X
+  let β := pbcAmbientScalarComp l E F G i j Y
+  have hn : c.hom.app ((M.obj
+      ((pbcEmbeddingAmbientTensor l E F i Y).obj K))) ≫
+      B.map ((pbcActualCompletion (pbcIntegralDatum l F) X).map (e.hom.app K)) =
+      Λ.map (B.map (e.hom.app K)) ≫ c.hom.app (A.obj (L.obj K)) :=
+    (c.hom.naturality (e.hom.app K)).symm
+  have hc : c.hom.app (A.obj (L.obj K)) ≫ B.map (b.hom.app (L.obj K)) ≫
+      α.hom.app ((pbcActualCompletion (pbcIntegralDatum l E) X).obj (L.obj K)) =
+      Λ.map (α.hom.app (L.obj K)) ≫ a.hom.app (L.obj K) :=
+    pbcScalarCompletion_coefficients l E F i G j X (L.obj K)
+  have ho : f.hom.app ((pbcEmbeddingAmbientTensor l E F i Y).obj K) ≫
+      B.map (e.hom.app K) ≫ α.hom.app (L.obj K) =
+      (pbcActualDerivedPull g (pbcIntegralDatum l G)).map (β.hom.app K) ≫
+        d.hom.app K := pbcScalarOrdinaryPull_coefficients l E F i g G j K
+  rw [pbcScalarCompletedPullIso_hom, pbcScalarCompletedPullIso_hom,
+    pbcScalarCompletedPullIso_hom, CategoryTheory.Functor.map_comp]
+  change (Λ.map (f.hom.app _) ≫ c.hom.app _) ≫
+      (B.map ((pbcActualCompletion (pbcIntegralDatum l F) X).map (e.hom.app K)) ≫
+        B.map (b.hom.app (L.obj K))) ≫ α.hom.app _ =
+    Λ.map ((pbcActualDerivedPull g (pbcIntegralDatum l G)).map (β.hom.app K)) ≫
+      (Λ.map (d.hom.app K) ≫ a.hom.app (L.obj K))
+  calc
+    _ = Λ.map (f.hom.app _) ≫ Λ.map (B.map (e.hom.app K)) ≫
+        (c.hom.app (A.obj (L.obj K)) ≫ B.map (b.hom.app (L.obj K)) ≫
+          α.hom.app _) := by
+      simp only [Category.assoc]
+      rw [← Category.assoc (c.hom.app _) (B.map _) _, hn]
+      simp only [Category.assoc]
+    _ = _ := by
+      rw [hc, ← CategoryTheory.Functor.map_comp_assoc,
+        ← CategoryTheory.Functor.map_comp_assoc, Category.assoc, ho,
+        CategoryTheory.Functor.map_comp]
+      simp only [Category.assoc]
 
-/-- Completion comparison respects successive coefficients with its actual unit.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
-Proof: both composites preserve the completion unit, since each comparison and
-the balancing associator does. The completion reflector's uniqueness therefore
-identifies them. This is also the strict quotient-tower calculation followed by
-derived inverse limit, so includes every transition and the augmentation. -/
-theorem pbcScalarCompletion_coefficients (W : Scheme.{u})
-    (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
-    (pbcScalarCompletionIso l F G j W).hom.app
-        ((pbcEmbeddingAmbientTensor l E F i W).obj K) ≫
-      (pbcEmbeddingAmbientTensor l F G j W).map
-        ((pbcScalarCompletionIso l E F i W).hom.app K) ≫
-      (pbcAmbientScalarComp l E F G i j W).hom.app
-        ((pbcActualCompletion (pbcIntegralDatum l E) W).obj K) =
-    (pbcActualCompletion (pbcIntegralDatum l G) W).map
-        ((pbcAmbientScalarComp l E F G i j W).hom.app K) ≫
-      (pbcScalarCompletionIso l E G (j.comp i) W).hom.app K := by
-  sorry
 
 end AmbientOperations
 
@@ -1179,7 +1935,13 @@ Proof: the full-subcategory inclusion changes no morphism or scalar action, so
 both equations are precisely the ambient additive and linear equations. -/
 theorem pbcConditionalIntegral_linear [H.Additive] [H.Linear A] :
     (pbcConditionalIntegral d H h).Additive ∧ (pbcConditionalIntegral d H h).Linear A := by
-  sorry
+  constructor
+  · dsimp only [pbcConditionalIntegral]
+    infer_instance
+  · constructor
+    intros K L f r
+    apply ObjectProperty.hom_ext
+    exact H.map_smul r f.hom
 
 /-- Addition on the actual conditional restriction.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension). -/
@@ -1246,6 +2008,11 @@ variable (dY : ∃ n : ℕ, topologicalKrullDim Y ≤ n)
 variable (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
 variable (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))
 
+attribute [-instance] ULift.module
+attribute [local irreducible] pbcRationalScalarHom
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- If the actual direct images preserve constructibility, their rational comparisons
 are precisely the localized ambient mate components. No preservation is assumed
 without being supplied. Source: blueprint order 1307
@@ -1281,8 +2048,65 @@ theorem pbcScalarDirectImage_rational
                 (pbcActualDerivedPush g (pbcIntegralDatum l F)) hF).obj
                   ((pbcEmbeddingIntegralTensor l E F i X dX hX).obj K.obj))
               ((pbcScalarDirectImageIso l E F i g).hom.app K.obj.obj))) := by
-  sorry
+  let HE := pbcConditionalIntegral (pbcIntegralDatum l E)
+    (pbcActualDerivedPush g (pbcIntegralDatum l E)) hE
+  let HF := pbcConditionalIntegral (pbcIntegralDatum l F)
+    (pbcActualDerivedPush g (pbcIntegralDatum l F)) hF
+  let IX := pbcEmbeddingIntegralTensor l E F i X dX hX
+  let IY := pbcEmbeddingIntegralTensor l E F i Y dY hY
+  let Q := pbcRationalization Y (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let α : HE ⋙ IY ≅ IX ⋙ HF :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk
+      (PbcIsBoundedConstructibleComplete Y (pbcIntegralDatum l F))
+        ((pbcScalarDirectImageIso l E F i g).app K.obj)) (fun f ↦ by
+      apply ObjectProperty.hom_ext
+      exact (pbcScalarDirectImageIso l E F i g).hom.naturality f.hom)
+  let e := NatIso.ofComponents
+    (fun K : PbcRationalDerivedCategory l E X dX hX ↦ Q.mapIso (α.app K.obj))
+    (F := pbcConditionalRational (pbcIntegralDatum l E)
+      (pbcActualDerivedPush g (pbcIntegralDatum l E)) hE (pbcUniformizer l E) ⋙
+        pbcRationalScalarExtension l E F i Y dY hY)
+    (G := pbcRationalScalarExtension l E F i X dX hX ⋙
+      pbcConditionalRational (pbcIntegralDatum l F)
+        (pbcActualDerivedPush g (pbcIntegralDatum l F)) hF (pbcUniformizer l F))
+    (fun {K L} f ↦ by
+      change pbcRationalScalarHom l E F i Y dY hY (HE.obj K.obj) (HE.obj L.obj)
+          (ScalarLocalization.transportHom _ _ HE K.obj L.obj f) ≫
+          Q.map (α.hom.app L.obj) =
+        Q.map (α.hom.app K.obj) ≫
+          ScalarLocalization.transportHom _ _ HF (IX.obj K.obj) (IX.obj L.obj)
+            (pbcRationalScalarHom l E F i X dX hX K.obj L.obj f)
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f =>
+        simp only [ScalarLocalization.transportHom, LinearMap.baseChange_tmul,
+          CategoryTheory.Functor.mapLinearMap_apply]
+        rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul]
+        simp only [LinearMap.baseChange_tmul,
+          CategoryTheory.Functor.mapLinearMap_apply]
+        change ScalarLocalization.composition _ _ _ _ _ _
+            ((1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F]
+              α.hom.app L.obj) (_ ⊗ₜ[PbcIntegralRing l F] IY.map (HE.map f)) =
+          ScalarLocalization.composition _ _ _ _ _ _
+            (_ ⊗ₜ[PbcIntegralRing l F] HF.map (IX.map f))
+            ((1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F]
+              α.hom.app K.obj)
+        rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+        simp only [one_mul, mul_one]
+        exact congrArg (fun z ↦
+          (pbcRationalCoefficientEquiv l F).symm (i (pbcRationalCoefficientEquiv l E a))
+            ⊗ₜ[PbcIntegralRing l F] z) (α.hom.naturality f)
+      | add f g hf hg =>
+        simp only [_root_.map_add, Preadditive.add_comp, hf, hg]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm)
+  refine ⟨e, fun K ↦ HEq.rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext K
+  exact eq_of_heq (he' K)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Under the two actual preservation hypotheses, the completed-pullback comparison
 also descends with its specified localized components.
 Source: blueprint order 1307 (blueprint: prop-weil-pbc-scalar-extension).
@@ -1315,7 +2139,62 @@ theorem pbcScalarCompletedPull_rational
                 ((pbcConditionalIntegral (pbcIntegralDatum l E)
                   (pbcActualCompletedPull g (pbcIntegralDatum l E)) hE).obj K.obj))
               ((pbcScalarCompletedPullIso l E F i g).hom.app K.obj.obj))) := by
-  sorry
+  let HE := pbcConditionalIntegral (pbcIntegralDatum l E)
+    (pbcActualCompletedPull g (pbcIntegralDatum l E)) hE
+  let HF := pbcConditionalIntegral (pbcIntegralDatum l F)
+    (pbcActualCompletedPull g (pbcIntegralDatum l F)) hF
+  let IX := pbcEmbeddingIntegralTensor l E F i Y dY hY
+  let IY := pbcEmbeddingIntegralTensor l E F i X dX hX
+  let Q := pbcRationalization X (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let α : HE ⋙ IY ≅ IX ⋙ HF :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk
+      (PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l F))
+        ((pbcScalarCompletedPullIso l E F i g).symm.app K.obj)) (fun f ↦ by
+      apply ObjectProperty.hom_ext
+      exact (pbcScalarCompletedPullIso l E F i g).inv.naturality f.hom)
+  let e := NatIso.ofComponents
+    (fun K : PbcRationalDerivedCategory l E Y dY hY ↦ Q.mapIso (α.app K.obj))
+    (F := pbcConditionalRational (pbcIntegralDatum l E)
+      (pbcActualCompletedPull g (pbcIntegralDatum l E)) hE (pbcUniformizer l E) ⋙
+        pbcRationalScalarExtension l E F i X dX hX)
+    (G := pbcRationalScalarExtension l E F i Y dY hY ⋙
+      pbcConditionalRational (pbcIntegralDatum l F)
+        (pbcActualCompletedPull g (pbcIntegralDatum l F)) hF (pbcUniformizer l F))
+    (fun {K L} f ↦ by
+      change pbcRationalScalarHom l E F i X dX hX (HE.obj K.obj) (HE.obj L.obj)
+          (ScalarLocalization.transportHom _ _ HE K.obj L.obj f) ≫
+          Q.map (α.hom.app L.obj) =
+        Q.map (α.hom.app K.obj) ≫
+          ScalarLocalization.transportHom _ _ HF (IX.obj K.obj) (IX.obj L.obj)
+            (pbcRationalScalarHom l E F i Y dY hY K.obj L.obj f)
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f =>
+        simp only [ScalarLocalization.transportHom, LinearMap.baseChange_tmul,
+          CategoryTheory.Functor.mapLinearMap_apply]
+        rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul]
+        simp only [LinearMap.baseChange_tmul,
+          CategoryTheory.Functor.mapLinearMap_apply]
+        change ScalarLocalization.composition _ _ _ _ _ _
+            ((1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F]
+              α.hom.app L.obj) (_ ⊗ₜ[PbcIntegralRing l F] IY.map (HE.map f)) =
+          ScalarLocalization.composition _ _ _ _ _ _
+            (_ ⊗ₜ[PbcIntegralRing l F] HF.map (IX.map f))
+            ((1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F]
+              α.hom.app K.obj)
+        rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+        simp only [one_mul, mul_one]
+        exact congrArg (fun z ↦
+          (pbcRationalCoefficientEquiv l F).symm (i (pbcRationalCoefficientEquiv l E a))
+            ⊗ₜ[PbcIntegralRing l F] z) (α.hom.naturality f)
+      | add f g hf hg =>
+        simp only [_root_.map_add, Preadditive.add_comp, hf, hg]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm)
+  refine ⟨e.symm, fun K ↦ HEq.rfl, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext K
+  exact eq_of_heq (he' K)
 end ConditionalOperations
 end AlgebraicGeometry.Scheme
 
@@ -1324,6 +2203,8 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
 variable (T : Scheme.{u}) [IsNoetherian T]
 variable [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+
+attribute [local irreducible] pbcStageTransition
 
 /-- Finite coefficient extension on the actual raw rational categories has the
 specified exact coherent tensor structure. The ambient, completion, conditional
@@ -1491,6 +2372,9 @@ theorem pbcCoherentScalarExtension
         (pbcStageAssociator l Ω T h' h'').hom.app ((pbcStageTransition l Ω T h).obj K) ≫
           (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K) ∧
     NatTrans.CommShift (pbcStageAssociator l Ω T h h').hom ℤ := by
-  sorry
+  obtain ⟨hPentagon, hId, hUnits⟩ := pbcStageAssociator_laws l Ω T
+  exact ⟨(pbcStageExact l Ω T h).1, (pbcStageExact l Ω T h).2,
+    hId E, (hUnits h).1, (hUnits h).2, hPentagon h h' h'',
+    pbcStageAssociatorShift l Ω T h h'⟩
 
 end AlgebraicGeometry.Scheme
