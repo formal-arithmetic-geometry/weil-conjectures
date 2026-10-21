@@ -19,9 +19,146 @@
   "def-weil-inverse-system",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reindex $n\\geq1$ by $n-1\\in\\mathbf N$. The product category and its fixed-index covering topology are those of [lem-pur-system-ringed-sequence-site]. That statement supplies the ring sheaf $C_\\bullet$, smallness relative to the module universe, and the explicit module equivalence, with vertical evaluation equal to level evaluation. In its functors a module sheaf restricts to its vertical slices; conversely a system restricts along $(V,k)\\to(U,n)$ by its transition from $n$ to $k$ followed by restriction to $V$. These formulas preserve addition on morphisms. The category of strict systems has the componentwise abelian structure of [def-pur-system-level-left-extension-basic]; it is the system model of [def-coef-semilinear-system-models], with the same actual transitions. Both sides are abelian, and [lem-weil-pbc-equivalence-injective-resolutions], clause (2), makes the additive equivalence exact. No condition that a transition be an epimorphism is imposed.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "def-pur-system-level-left-extension-basic",
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, first paragraph; varying-ring realization as in Zheng Construction 4.1, printed p.21"
+   }
+  },
+  {
+   "text": "A set-valued presheaf $F$ on $\\mathcal V$ is equivalently a sequence of presheaves $F_n$ on $\\mathcal C$: factor every arrow into a vertical arrow and an index arrow. Its sheaf equalizer for a generating covering at index $n$ is exactly that of $F_n$ [def-weil-pbc-sites-and-cohomology]. Thus it is a sheaf precisely when every $F_n$ is, and its morphisms are exactly compatible level maps [def-weil-inverse-system]. The inverse construction sends $(U,n)$ to $F_n(U)$; the two constructions are inverse on sections and maps.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, first paragraph, the immediate sheaf/tower identification written out"
+   }
+  },
+  {
+   "text": "For a sheaf $H$ on $\\mathcal C$, define $\\Delta H$ to have value $H$ and identity index transitions. For a sheaf system $F$, let $LF(U)=\\{(x_n):t_{m,n}(x_m)=x_n\\}$, with componentwise restrictions. The small-limit assertion of [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] makes this a sheaf and its coordinate maps a limit cone. A map $H\\to LF$ gives $\\Delta H\\to F$ by its coordinates; conversely a compatible family $h_n$ gives $x\\mapsto(h_n(x))_n$. The two formulas are inverse and natural. Hence $\\Delta\\dashv L$. Finite limits on both sites are sectionwise by the same cited lemma; since $(\\Delta H)(U,n)=H(U)$, $\\Delta$ preserves them, including the terminal object. This is the geometric morphism $\\pi$ of [def-weil-pbc-ringed-topos-morphism], with $\\pi^{-1}=\\Delta$ and $\\pi_*=L$ on sets.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, constant/limit paragraph; sites.tex Tag 00W2, lemma-limit-sheaf"
+   }
+  },
+  {
+   "text": "The projections $\\rho_n$ commute with vertical restrictions and satisfy $q_{m,n}\\rho_m=\\rho_n$, so they define the ring map $\\Delta B\\to C_\\bullet$. By [def-weil-pbc-ringed-topos-morphism], module direct image has the underlying limit sheaf and the induced action $b\\cdot(x_n)_n=(\\rho_n(b)x_n)_n$. Consequently $\\pi_*N=\\lim_n\\operatorname{Res}_{\\rho_n}N_n$ as $B$-modules: [def-pc-sheaf-restrict-scalars] identifies the actions and [lem-weil-pbc-module-sheaves-limits-sectionwise] identifies the module limit and projections. For the constant ring $\\Delta B$, a $\\Delta B$-linear map $\\Delta M\\to N$ is a compatible family of $B$-linear maps, so the formulas in step 3 give the module adjunction $\\Delta\\dashv\\lim$. All scalar actions here use the actual $\\rho_n$, not any abstract identification of the coefficient sheaves.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward; Tag 03DB, lemma-limits-colimits, first paragraph"
+   }
+  },
+  {
+   "text": "For a $B$-module sheaf $M$ form $T(M)_n=M\\otimes_B B_n$, with $t_{m,n}(x\\otimes a)=x\\otimes q_{m,n}(a)$. The tensor relations and the strict identities for $q$ give semilinearity, composition and identity. Apply [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] at each $\\rho_n$. A system map $T(M)\\to N$ is thereby the same as maps $h_n:M\\to\\operatorname{Res}_{\\rho_n}N_n$ with $t_{m,n}h_m=h_n$: the inverse formula is $x\\otimes a\\mapsto a h_n(x)$, and both compatibility conditions are equivalent by checking $x\\otimes1$. By [lem-weil-pbc-module-sheaves-limits-sectionwise] these are exactly $B$-linear maps $M\\to\\pi_*N$. On the sequence site, the same ordinary scalar adjunction for $\\Delta B\\to C_\\bullet$, combined with the module constant/limit adjunction of step 4, says that $C_\\bullet\\otimes_{\\Delta B}\\Delta M=\\pi^*M$ has this same Hom correspondence. The two inverse correspondences therefore give the canonical identification $\\pi^*M\\cong T(M)$, natural in $M,N$. Its level formula and transitions are the displayed formulas, on sheafified pure tensors; it does not assert that sections of a sheaf tensor are a sectionwise tensor product.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules, applied also to identity-topos scalar extension; Zheng Construction 4.1, printed p.21, formula for pi-star"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to the ringed morphism just constructed. Its size hypothesis holds since $\\mathbf N_{\\ge1}$ and $\\mathcal C$ are small in the module universe (step 1). It gives the exact triangulated functor $L\\pi^*$ on the ordinary unbounded derived categories and a natural comparison $L\\pi^*Q\\to Q\\pi^*$ invertible on K-flat complexes with flat terms. Such a resolution $p:P\\to K$ exists by [lem-pc-kflat-resolution]. The comparison $L\\pi^*(K)\\xrightarrow{L\\pi^*(p)^{-1}}L\\pi^*(P)\\xrightarrow{\\epsilon_P}\\pi^*P$, followed by step 5 degreewise, represents it by the single strict complex $(P\\otimes_B B_n)_n$. In particular the resolutions are chosen once over $B$, before any evaluation. The cited derived-pullback theorem sends quasi-isomorphisms between these representatives to quasi-isomorphisms of the entire sequence-site complex and supplies composition-compatible comparisons.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, statement and proof; Tag 06YS, lemma-K-flat-resolution"
+   }
+  },
+  {
+   "text": "Evaluation is exact and is localized termwise by [def-pur-system-level-left-extension-basic] (and agrees with vertical restriction by [lem-pur-system-ringed-sequence-site]). Evaluating the representative of step 6 at $n$ gives $P\\otimes_B B_n$, which computes $K\\otimes_B^L B_n$ by [lem-pur-derived-change-of-rings]. On maps of K-flat representatives both comparisons send a chain map $a$ to $a\\otimes1$. They commute with homotopies by applying tensor to the homotopy, and with inverses of quasi-isomorphisms by [lem-weil-pbc-ringed-topoi-derived-pullback] and [lem-pur-derived-change-of-rings]. Thus they agree on the localization, where arrows are composites of images of homotopy-category maps and such inverses. This proves naturality on derived morphisms, as well as independence of the chosen resolution; it is not merely an identification of object values.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, localization construction and K-flat comparison; exact evaluation in Zheng Construction 4.1, printed p.21"
+   }
+  },
+  {
+   "text": "For $l\\ge m\\ge n$, both composites from $P\\otimes_B B_l$ to $P\\otimes_B B_n$ send a sheafified pure tensor $x\\otimes a$ to $x\\otimes q_{m,n}(q_{l,m}(a))=x\\otimes q_{l,n}(a)$; equality on these generators is equality of sheaf tensor maps [def-pur-sheaf-tensor-product]. Equality indices give the identity map. The differentials and the tensor maps from any chain map commute with these transitions by their displayed formulas. Hence the maps already form a strict system of complexes before localization.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, actual inverse systems, with the tensor transition formula of Zheng Construction 4.1"
+   }
+  },
+  {
+   "text": "For a system $N$ leave its additive transition maps unchanged and restrict each component along $\\rho_n$ [def-pc-sheaf-restrict-scalars]. They are $B$-linear: $t_{m,n}(\\rho_m(b)x)=q_{m,n}(\\rho_m(b))t_{m,n}(x)=\\rho_n(b)t_{m,n}(x)$. The same coordinate maps define the action on system morphisms and respect identities and composition. Restriction at each level preserves finite limits and finite colimits by [lem-pur-sheaf-ring-coefficient-ordinary-adjunction]. Exactness of the source is componentwise by [def-pur-system-level-left-extension-basic], and exactness of the target tower category is componentwise by [lem-weil-tower-category-levelwise-abelian]. Therefore this is the required exact functor $U$ retaining the actual underlying additive transitions.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pur-system-level-left-extension-basic",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA and 03DB, abelian module sheaves and limits/colimits; exact identity-topos scalar restriction, Tag 03D7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "def-pur-system-level-left-extension-basic",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940 (section-derived-limits), Tag 06YY (lemma-derived-base-change); explicit varying-ring adaptation and maps following Zheng Construction 4.1, printed p.21, and sites-modules.tex Tags 03D6, 03D7, 03DB."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +202,39 @@
    "results": "8 hits; SheafOfModules.pullback, PresheafOfModules.pullback, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.restrictScalarsObj, SheafOfModules.pullbackComp, SheafOfModules.sheafificationCompPullback",
    "date": "2026-10-21",
    "verdict": "no match: results do not identify the ringed sequence-site comparison asserted here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback for modules on a ringed sequence site is computed by tensoring one K-flat complex with every coefficient ring",
+   "results": "8 hits: SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: standard limit/ordinary pullback or condensed-module facts do not state the combined varying-ring sequence-site and unbounded derived-pullback assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules on a ringed inverse sequence site identify with strict semilinear systems and pullback from the inverse limit ring is simultaneous derived scalar extension",
+   "results": "8 hits: CondensedMod, ModuleCat.tilde, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, instHasLimitsCondensedMod, LightCondMod, PresheafOfModules.limitPresheafOfModules, CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "no match: standard limit/ordinary pullback or condensed-module facts do not state the combined varying-ring sequence-site and unbounded derived-pullback assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constLimAdj|strictSystemSequenceEquivalence|derived.*pullback|pullback.*derived",
+   "results": "10 hits: Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: standard limit/ordinary pullback or condensed-module facts do not state the combined varying-ring sequence-site and unbounded derived-pullback assertion",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse systems of sheaves of modules over varying rings as modules on the product site, with constant tower inverse image and inverse limit direct image",
+   "results": "8 hits: SheafOfModules.createsLimit, SheafOfModules.hasLimitsOfShape, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, SheafOfModules.hasLimit, CondensedMod.ofSheafCompHaus, SheafOfModules.hasLimitsOfSize, SheafOfModules.evaluationPreservesLimit",
+   "date": "2026-10-21",
+   "verdict": "no match: standard limit/ordinary pullback or condensed-module facts do not state the combined varying-ring sequence-site and unbounded derived-pullback assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-reduction-tower-functor",
@@ -88,5 +254,35 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-sequence-site-completion-projection",
+  "worker": "stage1",
+  "group": "Q80",
+  "summary": "Kept the statement unchanged. Reused the live generic sequence-site equivalence, levelwise system structure, scalar adjunction, sectionwise-limit nodes and unbounded K-flat pullback theorem. Wrote the set and module constant/limit adjunctions, simultaneous representative, localization naturality, actual transition equations and exact scalar restriction. No new nodes.",
+  "blueprint": "Realizes the constant/limit sequence-site prerequisite of the first proof sentence of lem-weil-compact-support-representative-independence, through lem-weil-compact-support-reduction-tower-functor; the current blueprint proof constructs the integral functor from finite-level operations and the derived limit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "The general unbounded K-flat pullback construction supplies the derived functor after constructing the sequence morphism; no change to the six-operations route is made."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "The general flat-term K-flat resolution theorem supplies one representative on the base ringed site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-20a6c3146",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-20a6c3146 (reviewer sub-agent of L); spot-checked: PASS. I read the item's 9-step split (7.3k chars, no new nodes) in full, checked every cited statement, and read the source, Stacks sites-cohomology Tag 0940 (section-derived-limits, line 5016: site C×N, fixed-index covers, g^{-1}=constant system, g_*=lim) and Tag 06YY (lemma-derived-base-change). The statement and stmt_deps are byte-identical to the Q05 and Q81 snapshots, and the base proof was empty. The item is not in route-pivot-dropped and has no repair note of its own (the re-split note is on the parent tower-functor). It is still unsplit in live and side-live, so no other group has superseded it. Steps: (1) lem-pur-system-ringed-sequence-site gives the site, the ring sheaf and the module equivalence; equivalence-injective-resolutions (2) makes it exact. (2) Sheaves on the site = towers; this is elementary. (3) Δ⊣L via the sectionwise-limit lemma; Δ is left exact, so this is the ringed-topos morphism in the sense of that node. (4) The ring map ρ_n and π_*N = lim Res N_n. (5) π^*M ≅ (M⊗B_n)_n via the ordinary scalar adjunction at each ρ_n and on the sequence site; I checked the compatibility equivalence on x⊗a by hand. (6) Lπ^* from the generic ringed derived-pullback theorem, with one flat-term K-flat P over B. (7) Evaluation gives K⊗^L B_n by derived-change-of-rings, natural on homotopies and on inverted quasi-isomorphisms. (8) Strict composition q_{m,n}q_{l,m}=q_{l,n} on pure tensors. (9) U is B-linear (ρ_n(b) semilinearity) and exact via Res finite-exactness and levelwise exactness in the tower category. Edge cases: one-object site, identity tower, zero level, non-surjective transitions, non-flat B_n, empty site. I accept both tool_uses (ringed-topoi-derived-pullback, pc-kflat-resolution). Maintainer note: the later NZ node lem-coef-sequence-projection-derived-adjunction (unsplit, created 2026-10-21, absent from the 55a1 snapshot where this item was created) generalizes steps 3–7 (arbitrary A→B_n, plus Rp_* and the adjunction). When it is split it should cite or extend this item rather than repeat steps 3–7. There is no cycle and no change here."
+ }
 }
