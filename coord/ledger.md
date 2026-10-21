@@ -21770,3 +21770,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:15 L: merged deliver/Q98/lem-zl-bertini-finite-cover-irreducible-system (reviewer PASS; after a return; new nodes: 0)
 - 09:15 L: merged deliver/Q146/lem-sf-fully-faithful-exceptional-hom-transport (reviewer PASS; first push; new nodes: 0)
 - 09:15 L: merged deliver/Q18/lem-pod-pullback-identities-scalar-extension (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 09:15 L: merged deliver/Q23/lem-pur-line-zero-class-exchange (reviewer FIX; first push; new nodes: 0); claim not held by Q23: not your claim
