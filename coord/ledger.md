@@ -23480,3 +23480,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:26 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 19:26 L: returned deliver/Q9/Sheaf.Paper.ClosedSupportConstructible (reviewer RETURN: (the landing tools, head 18886166d) the delivery did not land: lean/Sheaf/Paper/ClosedSupportConstructible.lean was crea)
 - 19:26 L: returned deliver/R2/Sheaf.Paper.IntegralOperationsWellDefined (reviewer RETURN: (the landing tools, head b23e06004) the delivery did not land: (d) user Sheaf.Paper.CompletedTensorScalarLinearity (ment)
+- 19:27 L: returned deliver/T9/Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology (reviewer RETURN: (the landing tools, head 988cd807c) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictLocalBaseChangeModelGl)
