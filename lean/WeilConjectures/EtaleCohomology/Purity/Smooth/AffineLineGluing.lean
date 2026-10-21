@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
-public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescentShift
+public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescent
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

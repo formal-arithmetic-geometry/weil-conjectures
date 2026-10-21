@@ -188,14 +188,6 @@ variable [(g)^*[A].PreservesFlat]
 attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
   isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
 
-/-- Replace the natural transformation `τ` in `(τ.app X).app Y ≫ f = k` by `σ = τ`, at the level
-of natural transformations. -/
-lemma app_app_comp_of_eq {C D E : Type*} [Category* C] [Category* D] [Category* E]
-    {F G : C ⥤ D ⥤ E} {τ : F ⟶ G} {X : C} {Y : D} {Z : E} {f : (G.obj X).obj Y ⟶ Z}
-    {k : (F.obj X).obj Y ⟶ Z} (h : (τ.app X).app Y ≫ f = k) (σ : F ⟶ G) (hσ : σ = τ) :
-    (σ.app X).app Y ≫ f = k :=
-  hσ ▸ h
-
 /-- The tensor comparison `Lg^*(Qh K ⊗ᴸ Qh M) ⟶ Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M)` is induced by the
 comonoidal structure of `g^*` on homotopy categories, through the counits of `Lg^*`. -/
 lemma leftDerivedUpperStarTensorComparison_app_app_comp
@@ -226,7 +218,7 @@ lemma leftDerivedUpperStarTensorComparison_app_app_comp
       Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M) := rfl
   rw [e₁, e₂, e₃] at h
   simp only [Category.assoc] at h
-  exact app_app_comp_of_eq h (leftDerivedUpperStarTensorComparison A g) rfl
+  exact h
 
 /-- Every complex in `D(Y_ét)` is isomorphic to `Qh P` for a complex `P` whose pullback by `g`
 is K-flat. -/
@@ -239,44 +231,6 @@ lemma exists_kFlatUpperStar_iso (X : DerivedCategory (Sheaf Y.smallEtaleTopology
   have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
   exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
 
-/-- The hypothesis `hδ` of `CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`, as a regular
-definition: the kernel compares two instances of it argument by argument instead of unfolding
-the commutative square. -/
-def LaxSquareHδ {K₁ K₂ D₁ D₂ : Type*} [Category* K₁] [Category* K₂] [Category* D₁]
-    [Category* D₂] [MonoidalCategory K₁] [MonoidalCategory K₂] [MonoidalCategory D₁]
-    [MonoidalCategory D₂] {G : D₁ ⥤ D₂}
-    (δG : (Functor.postcompose₂.obj G).obj (curriedTensor D₁) ⟶
-      (((Functor.whiskeringLeft₂ D₂).obj G).obj G).obj (curriedTensor D₂))
-    {Q₁ : K₁ ⥤ D₁} {Q₂ : K₂ ⥤ D₂} [Q₁.LaxMonoidal] [Q₂.LaxMonoidal]
-    {F : K₁ ⥤ K₂} [F.OplaxMonoidal] (e : ∀ a, G.obj (Q₁.obj a) ⟶ Q₂.obj (F.obj a)) : Prop :=
-  ∀ a b, (δG.app (Q₁.obj a)).app (Q₁.obj b) ≫ (e a ⊗ₘ e b) ≫
-    μ Q₂ (F.obj a) (F.obj b) = G.map (μ Q₁ a b) ≫ e (a ⊗ b) ≫ Q₂.map (δ F a b)
-
-/-- `CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`, with the hypothesis `hδ` stated as
-`LaxSquareHδ δG e`. -/
-@[instance_reducible]
-noncomputable def ofLaxSquareHδ {K₁ K₂ D₁ D₂ : Type*} [Category* K₁] [Category* K₂]
-    [Category* D₁] [Category* D₂] [MonoidalCategory K₁] [MonoidalCategory K₂]
-    [MonoidalCategory D₁] [MonoidalCategory D₂] {G : D₁ ⥤ D₂}
-    (δG : (Functor.postcompose₂.obj G).obj (curriedTensor D₁) ⟶
-      (((Functor.whiskeringLeft₂ D₂).obj G).obj G).obj (curriedTensor D₂))
-    {Q₁ : K₁ ⥤ D₁} {Q₂ : K₂ ⥤ D₂} [Q₁.LaxMonoidal] [Q₂.LaxMonoidal]
-    {F : K₁ ⥤ K₂} [F.OplaxMonoidal] (e : ∀ a, G.obj (Q₁.obj a) ⟶ Q₂.obj (F.obj a))
-    (he : ∀ ⦃a b : K₁⦄ (f : a ⟶ b), G.map (Q₁.map f) ≫ e b = e a ≫ Q₂.map (F.map f))
-    (hδ : LaxSquareHδ δG e) [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)
-    (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))
-    (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :
-    G.OplaxMonoidal :=
-  Functor.OplaxMonoidal.ofLaxSquare δG e he hδ S hS hμ
-
-/-- `leftDerivedUpperStarTensorComparison_app_app_comp` in the form of the hypothesis `hδ` of
-`Functor.OplaxMonoidal.ofLaxSquare`. -/
-lemma leftDerivedUpperStarTensorComparison_laxSquareHδ :
-    LaxSquareHδ (Q₁ := Qh) (Q₂ := Qh) (F := (g)^*[A].mapHomotopyCategory (.up ℤ))
-      (leftDerivedUpperStarTensorComparison A g)
-      (fun a ↦ (g)^*[A].leftDerivedFunctorCounit.app a) :=
-  leftDerivedUpperStarTensorComparison_app_app_comp A g
-
 /-- The oplax monoidal structure on the derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)`, whose
 comonoidal structure is the tensor comparison `leftDerivedUpperStarTensorComparison`. It is
 induced by the oplax monoidal structure of `g^*` on homotopy categories
@@ -284,11 +238,11 @@ induced by the oplax monoidal structure of `g^*` on homotopy categories
 @[instance_reducible]
 noncomputable def leftDerivedUpperStarOplaxMonoidal : L((g)^*[A]).OplaxMonoidal :=
   haveI := DerivedCategory.isIso_ε_Qh (Sheaf Z.smallEtaleTopology A)
-  ofLaxSquareHδ (Q₁ := Qh) (Q₂ := Qh)
+  Functor.OplaxMonoidal.ofLaxSquare (Q₁ := Qh) (Q₂ := Qh)
     (F := (g)^*[A].mapHomotopyCategory (.up ℤ)) (leftDerivedUpperStarTensorComparison A g)
     (fun a ↦ (g)^*[A].leftDerivedFunctorCounit.app a)
     (fun _ _ f ↦ (g)^*[A].leftDerivedFunctorCounit.naturality f)
-    (leftDerivedUpperStarTensorComparison_laxSquareHδ A g) (kFlatUpperStar A g)
+    (leftDerivedUpperStarTensorComparison_app_app_comp A g) (kFlatUpperStar A g)
     (exists_kFlatUpperStar_iso A g) (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb)
 
 lemma isIso_leftDerivedUpperStarOplaxMonoidal_δ
