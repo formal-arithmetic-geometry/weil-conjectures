@@ -23,9 +23,129 @@
   "def-sfb-lisse-coefficient-module",
   "def-sfb-module-open-lower-shriek"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $F=E,\\Omega$, write $C_{F,T}$ for the coefficients and $L_F=C_{F,W}\\otimes_{A_{E,W}}L$. Locally $L$ is finite free, so tensor with $L$ is a finite sum of the identity and is exact. Thus $T_W(L[0])=L_\\Omega[0]$, with its actual scalar unit $x\\mapsto1\\otimes x$. The conjugate open-scalar isomorphism gives $T_V(b_!L[0])\\cong b_!L_\\Omega[0]$. It is available on the entire unbounded module category without flatness of the coefficient map. The scalar adjunction is normalized by $x\\otimes z\\mapsto z\\,g(x)$, so these identifications retain the coefficient units rather than choosing arbitrary endpoint isomorphisms.",
+   "uses": [
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 1"
+   }
+  },
+  {
+   "text": "Put $A_i=A\\setminus A_{\\rm out}$, $Y^\\circ=Y\\setminus\\bigcup_{a\\in A_i}D_a$, $c:Y^\\circ\\hookrightarrow Y$, and $a:W\\hookrightarrow Y^\\circ$. On $Y^\\circ$ the remaining boundary consists exactly of the outer components. It is still strict normal crossings and regular, and the same strict-local root-cover condition holds for $L$. The transverse tame exchange gives $e_F:c_!Ra_{*,C_F}L_F\\xrightarrow{\\sim}Rj'_{*,C_F}b_!L_F$ for both coefficients. This also supplies vanishing on all inner components; no claim that arbitrary pro-etale sheaves can be tested at ordinary geometric points is used.",
+   "uses": [
+    "lem-sfb-transverse-tame-open-shriek-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 2"
+   }
+  },
+  {
+   "text": "We first prove the scalar comparison for $a$, which has no inner extension. Apply the stratum Kummer-descent statement to the pair $(Y^\\circ,D\\cap Y^\\circ)$ and $L$. For each nonempty stratum $S_I$, it gives a single pro-etale covering $S_\\alpha\\to S_I$, an $E$-representation $M_\\alpha$ of $G_I$ with finite prime-to-$\\ell$ $H_I$-image, and models $p_{S_\\alpha}^*R\\Gamma_{G_I}(M_{\\alpha,F})$ of the restrictions of $Ra_*L_F$. The covers and representations work for both $F$. The empty-boundary stratum is included by the trivial-group convention. These are models of restrictions of derived sheaves on entire strata, not an inference from a list of numerical cohomology groups.",
+   "uses": [
+    "lem-sfb-tame-stratum-kummer-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 3"
+   }
+  },
+  {
+   "text": "Fix one representation $M=M_\\alpha$ and order its $r=|I|$ inertia factors. The condensed inertia calculation identifies $R\\Gamma_G(M_F)$ with the finite Koszul complex $K_F(M)$ of $\\rho(\\gamma_i)-1$ on $N_F$, where $N=M^H$ is the image of the finite averaging idempotent $e$. The finite group $Q=\\rho(H)$ and its order prime to $\\ell$ are supplied by step 3. Under these identifications the map on derived invariants induced by $M_E\\to\\operatorname{Res}M_\\Omega$ is the termwise coefficient inclusion. This uses the analytic all-continuous condensed statement, not the discrete finite-coefficient group-cohomology theorem.",
+   "uses": [
+    "lem-sfb-tame-inertia-continuous-koszul"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 4"
+   }
+  },
+  {
+   "text": "Choose an $E$-basis of the finite-dimensional space $N$. Then every term of $K_E(M)$ is a finite free $C_E$-module, and every differential is a matrix over $E$. Its derived scalar extension is the ordinary tensor complex through the canonical K-flat representative identification $c_{K_E}$ of the derived change of rings [lem-pur-sheaf-ring-derived-coefficient-adjunction], once $K_E$ is K-flat with flat terms: finite free modules in degree zero are K-flat by the cited finite-free lemma (take $0\\to C_E^n$), and the finite stupid filtration of $K_E$ has shifted finite free quotients; tensoring an acyclic complex with this degreewise split filtration remains acyclic by finite induction. Thus the balanced-tensor maps $z\\otimes(x_I)_I\\mapsto(zx_I)_I$ identify $C_\\Omega\\otimes^L_{C_E}K_E(M)$ with $K_\\Omega(M)$. The matrices and the displayed alternating signs coincide term by term. For $r=0$ this is just the unit comparison; for $N=0$ both complexes are zero.",
+   "uses": [
+    "lem-sfb-finite-free-mono-cokernel-kflat",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 5"
+   }
+  },
+  {
+   "text": "The map in step 5 is the canonical group scalar comparison: its scalar-restriction adjunct is the termwise map $x\\mapsto1\\otimes x$ of step 4. Pullback from the condensed point commutes with derived scalar extension by the K-flat scalar/pullback comparison, preserving this unit. Kummer descent in step 3 identifies the resulting maps with the restriction of $Ra_*(L_E\\to\\operatorname{Res}L_\\Omega)$. By the scalar-restriction/direct-image adjunction comparison this last map is the scalar-restriction adjunct of the specified $\\beta_{a,L}$. Indeed transpose along $a^*\\dashv Ra_*$: it is $a^*Ra_*L\\xrightarrow{\\varepsilon}L\\xrightarrow{1\\otimes-}\\operatorname{Res}L_\\Omega$, and the normalized scalar adjunct is precisely $T\\varepsilon$ after pullback/tensor comparison. Uniqueness in both adjunctions therefore identifies $\\beta_a$, on each covered stratum, with step 5. It is invertible there.",
+   "uses": [
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 6"
+   }
+  },
+  {
+   "text": "The pro-etale covers of each stratum jointly detect derived isomorphisms by the covering-restriction lemma. Restrictions to the finite normal-crossing stratification also jointly detect them: filter $Y^\\circ$ by the closed unions of loci lying on at least $m$ components. On each successive difference the pieces with exactly $m$ components are disjoint open-and-closed strata. Apply the open/closed derived detector at each stage. Its hypotheses (exact open extension and closed direct image, invertible open unit and closed counit, and the short exact localization sequence) are exactly the ringed pro-etale open/closed statement; inverse images are exact. Finite induction, ending with the empty closed union, shows that the cone of $\\beta_a$ vanishes. Hence $\\beta_a$ is invertible on $Y^\\circ$.",
+   "uses": [
+    "lem-zl-condensed-cover-restriction-conservative",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-exact-open-closed-unbounded-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 7"
+   }
+  },
+  {
+   "text": "Finally the $e_F$ from step 2 and open-scalar compatibility identify $\\beta_{j',b_!L}$ with $c_!\\beta_{a,L}$. To check this for the prescribed map, take scalar-restriction adjuncts. Naturality of $e_F$ for $L\\to\\operatorname{Res}L_\\Omega$ says that the square with rows $e_E,e_\\Omega$ and columns induced by this unit commutes. Scalar restriction commutes with derived direct image, and with open extension since it fixes underlying sheaves. Taking the scalar adjunct of that square gives precisely the two coefficient-change maps: by step 6 each is adjoint to its direct-image counit followed by the same scalar unit. The open-scalar conjugate isomorphism uses those same units. Thus the square identifies the actual $\\beta$ maps. Since $e_E,e_\\Omega$, open-scalar compatibility, and $\\beta_a$ are invertible, so is $\\beta_{j',K}$. This also covers $A_i=\\varnothing$ or $A_{\\rm out}=\\varnothing$; then the corresponding exchange reduces to the open unit or identity.",
+   "uses": [
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent tame-pair local calculation, step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-transverse-tame-open-shriek-exchange",
+  "lem-sfb-tame-stratum-kummer-descent",
+  "lem-sfb-tame-inertia-continuous-koszul",
+  "lem-sfb-finite-free-mono-cokernel-kflat",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame local comparison obligation: Kummer stratum descent, condensed inertia calculation, finite matrix tensor calculation, and transverse inner-boundary exchange. Exact all-continuous inputs are separately stated and WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +181,31 @@
    "results": "8 hits: ModuleCat.Tilde.toOpen_res; ModuleCat.homEquiv_extendScalarsComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; ModuleCat.Tilde.res_apply; ModuleCat.Tilde.res_const; TopCat.Sheaf.extend_hom_app; AlgebraicGeometry.Scheme.Modules.map_smul; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
    "date": "2026-10-21",
    "verdict": "no match: continuous scalar maps, cotangent complexes and underived open restrictions are not a tame-boundary derived scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned constructions do not state this coefficient-specific condensed tame cohomology or geometric exchange assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(tame|Koszul|normalCrossing).*(rightDerived|Condensed)|(rightDerived|Condensed).*(tame|Koszul|normalCrossing)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned constructions do not state this coefficient-specific condensed tame cohomology or geometric exchange assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame normal crossing open boundary direct image commutes with extension to all continuous algebraic closure l adic coefficients",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage; AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc; AlgebraicGeometry.Scheme.Hom.liftCoborder; AlgebraicGeometry.Scheme.Hom.liftCoborder_ι",
+   "date": "2026-10-21",
+   "verdict": "no match: normalization and immersion section formulas do not state a derived all-continuous scalar comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sfb-continuous-algcl-open-scalar-comparison",
   "by": "worker",
@@ -75,7 +216,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), agent tame-pair local calculation needed for the all-continuous coefficient obligation. Exact all-continuous Kummer/Koszul comparison proof/reference WANTED; not a finite-coefficient theorem.",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3): the tame-boundary scalar comparison required by the all-continuous open-image obligation; inner extension at the remaining SNC components",
    "via": [
     "lem-sfb-continuous-algcl-open-scalar-comparison",
     "lem-sfb-continuous-algcl-open-finiteness",
@@ -84,5 +225,60 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Statement retained exactly. Split the missing tame calculation into geometric Kummer descent on whole strata, analytic condensed tame-inertia Koszul cohomology, and transverse star/shriek exchange. Proved the scalar comparison from their unit-normalized maps by an explicit finite matrix calculation and finite open/closed detection. All-continuous inputs remain honest unsplit source requests; finite or colimit-topological results were not substituted.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images below the existing tame-pair reduction; no change to chapter or unit route. The existing nearest-ancestor command returns None, retained in from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-sfb-finite-free-mono-cokernel-kflat",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic module/derived scalar, finite-free K-flat, open/closed detection, or covering descent tool used only for its stated categorical property; it does not replace the tame geometric or analytic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-finite-free-mono-cokernel-kflat",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-26a608e08",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-26a608e08 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps, all 3 new nodes, every cited statement and paragraph (3) of det-thm-sf-ctf-stability-direct-images in blueprint main-20261015. No SGA source is cited. The statement is unchanged. The citer, open-scalar-comparison step 5, uses it exactly on the tame-pair generator data. The base item had an empty proof, so this is a first split and no re-split note applies. Steps: (1) the open-scalar conjugate (def-sfb-derived-open-immersion-shriek-iso), with lisse L flat and K-flat in degree 0. (2) The transverse exchange for Y°=Y minus the inner components, whose objects j,b,c,a match the node exactly. (3) Stratum descent on (Y°, D∩Y°), which is still SNC because each outer D_a meets Y° in a dense open. (4) The Koszul node, whose finite prime-to-ℓ Q comes from step 3. (5) Finite free terms, K-flat by the finite-free lemma (0→C^n) and the split stupid filtration. (6) Unit normalization through kflat θ=χ^{-1}, the adjunct formula of the ring-sheaf change adjunction and mate uniqueness; I checked it by hand. (7) Detection: the strata of the filtration by closed loci Z_m are open-and-closed in Z_m∖Z_{m+1}, the open/closed calculus applies with the pro-étale open/closed lemma as input, and covers are handled by cover conservativity. (8) The assembly square through scalar adjuncts, using the transverse naturality clause; A_i=∅ and A_out=∅ are trivial. New nodes: each is statement-only, self-contained and searched five times. Koszul: d²=0 (for i<i' the two orders cancel), r=0 gives the identity, and γ↦u in 1+𝔪 with u≠1 gives an acyclic complex, as it should. Descent: I=∅ is a trivialization, and the finite H_I image is automatic because GL_n(O_E) has an open pro-ℓ subgroup. Exchange: e_F is well defined since V∩Y°=W, and inner vanishing holds by the local Künneth picture. None restates the item. They are not duplicates of lem-per-strict-local-snc-kummer-cohomology, the per procyclic/classifying nodes or the sbc root-chart nodes. FIX (C1): step 5 used the c_P identification (derived scalar extension of a K-flat flat-term complex is the ordinary tensor) without citing lem-pur-sheaf-ring-derived-coefficient-adjunction. The corrected item is under fixes/dag/nodes/sec-six-functors-basics/. Batch-5 flags: (a) the item's new cite of lem-sfb-kflat-scalar-comparison-normalization reaches only def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation and lem-trf-geometric-inverse-image-exact, i.e. exactness of topos inverse image. That is generic, outside both assumptions and not a step of their proofs, so I accept it. (b) def-trf-strict-normal-crossings-boundary, cited by the descent and exchange nodes, is a general definition that the item already cites, so I accept it. I accept the 7 generic tool uses. Maintainer note: \\underline{Ω} (all continuous maps, norm topology) is not solid, and Haar averaging over pro-prime-to-ℓ H can leave Ω. So the Koszul node's Ω case (RΓ_H(\\underline Ω)=Ω[0]) is an open analytic question. The item's own statement already carries the same question; the node makes it explicit as WANTED, and its future split must settle it.; 1 file(s) fixed by the reviewer"
  }
 }

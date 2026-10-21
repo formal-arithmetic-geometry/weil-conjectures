@@ -22537,3 +22537,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:29 L: merged deliver/NB/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
 - 13:30 L: merged deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer PASS; after a return; new nodes: 2)
 - 2026-10-21T13:30:31Z L: superseded stage-1 delivery NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison at 9b4367fdc06b87c8bbe8964276cb43355bd482bd; current completion retained; packet archived at refs/superseded/NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison/9b4367fdc06b87c8bbe8964276cb43355bd482bd; stale return retired.
+- 13:31 L: merged deliver/NF/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer FIX; first push; new nodes: 3); claim not held by NF: not your claim
